@@ -26,15 +26,18 @@
 13h 圖形模式、計時器、滑鼠、overlay 與資料讀取，且尚未遇到未實作服務；這是 DOS 能力基線，
 不是主選單或可遊玩宣稱。
 
-下一步是 [Issue #21](https://github.com/wicanr2/colonization_cht/issues/21)：取得第一個可重播的可見
-畫面、可觀測文字輸出或經原版執行證實的主程式轉交。在此之前，本專案沒有可下載中文化程式或
-任何完成度宣稱。先前 Windows 3.x NE 輸入只保留為歷史研究證據，不是目前實作目標。
+目標 006 已把正式啟動卡住的位置收斂至 `PSOUND.COL` overlay 的相容 OPL 埠行為；它不是首畫面、
+也不是遊戲主程式轉交。下一步是 [Issue #22](https://github.com/wicanr2/colonization_cht/issues/22)：先以
+真實埠序列建立 DRAFT／READY 規格，再由 [Issue #23](https://github.com/wicanr2/colonization_cht/issues/23)
+進行最小實作與正式冷啟動驗證。在此之前，本專案沒有可下載中文化程式或任何完成度宣稱。先前
+Windows 3.x NE 輸入只保留為歷史研究證據，不是目前實作目標。
 
 第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
 確認的執行策略見 [目標 002](docs/goals/002-win16-execution-strategy.md)；實際工作順序與 Issue
 連結見 [工作計畫](WORKLIST.md)。最新已知事實與限制見 [目前脈絡](CONTEXT.md)。
 
 DOS 輸入的固定雜湊、probe 與限制見 [目標 005](docs/goals/005-dos-input-and-cold-boot.md)。
+首個可見檢查點的 blocker 收據與後續閘門見 [目標 006](docs/goals/006-dos-first-visible-checkpoint.md)。
 Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/003-ne-load-surface-inventory.md)
 及 [目標 004](docs/goals/004-execution-strategy-blocker-audit.md)，不混入目前 DOS 路徑。
 
@@ -56,4 +59,5 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第三輪目標](docs/goals/003-ne-load-surface-inventory.md)
 - [第四輪目標](docs/goals/004-execution-strategy-blocker-audit.md)
 - [第五輪目標](docs/goals/005-dos-input-and-cold-boot.md)
+- [第六輪目標](docs/goals/006-dos-first-visible-checkpoint.md)
 - [工作歷程](WORKLOG.md)

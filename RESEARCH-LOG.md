@@ -140,3 +140,75 @@ go run ./cmd/probe -exe /game/OPENING.EXE -root /game -steps <100000|1000000|100
 
 下一個問題是從正式 `OPENING.EXE` 路徑取得第一個可見畫面、文字輸出或可證實的轉交；由
 [Issue #21](https://github.com/wicanr2/colonization_cht/issues/21) 處理。
+
+## 2026-09-20：DOS OPENING.EXE 首個可見檢查點 blocker
+
+### 固定方法與輸出邊界
+
+輸入仍是唯讀 `COLONIZE/OPENING.EXE`（SHA-256
+`3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`）與其同目錄資料。執行器為
+`workplace/dosgolem` commit `d9c0c27ca9af8239c7e96272a7165e03d7da04bf`；容器為固定 digest 的
+`golang:1.24-bookworm`（Go 1.24.13）。所有命令均為 `--network none`、`--rm`、UID/GID 1000:1000、
+1 CPU、1 GiB、PID 128，且只把 gitignore 的 `workplace/` 設為可寫。
+
+由於使用 UID 後登入 shell 會重設 PATH，正式命令以非登入 `sh -c` 並明示
+`PATH=/usr/local/go/bin:…` 執行；先前兩份僅含 `go: not found` 的暫存報告不屬遊戲收據。此為容器
+啟動環境修正，不是產品或原版行為差異。
+
+正式 probe 先在第 1,000,000 指令存下狀態：
+
+```text
+go run ./cmd/probe -exe /game/OPENING.EXE -root /game -steps 10000000 \
+  -watch-video -watch-screen 500000 -screen-delta 1 -vram-sites -seg-log \
+  -save-state 1000000:/workplace/reports/opening-1000000-visible-20260920.state
+```
+
+再以同一個 state（所有步數仍是絕對值）跑至 100,000,000：
+
+```text
+go run ./cmd/probe -load-state /workplace/reports/opening-1000000-visible-20260920.state \
+  -root /game -steps 100000000 -watch-video -watch-screen 5000000 -screen-delta 1 \
+  -vram-sites -dump-vram /workplace/reports/opening-100000000-visible-20260920.vram
+```
+
+狀態檔 SHA-256 為 `21a8fc960cb71e806391d6637e16f735a18767dd588e87f221bdeda71aabc2ab`。10,000,000 與
+100,000,000 指令的 320×200 索引 VRAM 都是 64,000 bytes、全零，且 SHA-256 同為
+`4f7988030a00d082fe445e00a2ac5dab502300ff1b80e8592dd569867b60ef74`。這些原版衍生輸出均留在
+gitignore 的 `workplace/reports/`，不加入 Git。
+
+### 正式路徑觀察
+
+| 觀察 | 結果 | 等級 |
+|---|---|---|
+| 實際 EXEC | 唯一 `EXEC` 為 `PSOUND.COL`，PSP `1C43`、exit 255；沒有 `VICEROY.EXE` EXEC。 | confirmed |
+| 1 億指令終點 | 程式仍活著，`CS:IP=1C43:0087`、mode 13h、timer 5,215 次、A0000 0／64,000、視訊記憶體寫入 0、主控台 0 bytes、字型服務 0 次。 | confirmed |
+| COLDIG 資料 | `COLDIG.BIN` 讀入 EMS page frame `D000:0000`；報告的 `@0xA0000` 是**檔案位移**，不是 VRAM 目的位址。 | confirmed |
+| 視訊斷言 | 因 COLDIG 的檔案位移先前容易被誤讀為 VRAM，已從第 1,000,000 state 跑至 #1,003,543，另存線性 A0000 raw 與索引 VRAM；兩者均全零。 | confirmed |
+
+上述明確排除 `VICEROY.EXE` direct-entry、靜態檔案資料或未對齊截圖作為正常啟動完成證據；也不宣稱
+已到主選單。
+
+### 音效埠候選與限制
+
+從同一 state 量測第 1,000,000–2,000,000 指令區間：
+
+```text
+go run ./cmd/probe -load-state /workplace/reports/opening-1000000-visible-20260920.state \
+  -root /game -steps 2000000 \
+  -dump-ports 220,221,222,223,226=/workplace/reports/opening-1000000-2000000-audio-ports-20260920.tsv
+```
+
+TSV（SHA-256 `cfe22ede3c12e99839dc095adebda040af5bf87cbebc0fb5fdc9b449c813620e`）有 38,852 筆寫入：
+`0x220` 9,802、`0x221` 9,802、`0x222` 9,621、`0x223` 9,621、`0x226` 6。前四組以成對
+address/data 寫入 OPL 樣式暫存器。這只證實遊戲選用的 port 與序列，沒有從序列重建 PCM、DMA、PIT
+或真實 wall-clock。
+
+同一 dosgolem commit 的 `cmd/probe` 用 `machine.New()`；其預設 OPL 處理只在 `0x388`–`0x38B`。
+另一個 LE/DOS4GW 專用 `LEOPLPorts` 有 `0x220`–`0x223` 的 OPL alias 與受限 DSP，但 probe 沒有接上
+該裝置。故「缺少 Sound Blaster 相容 OPL 行為導致 `PSOUND.COL` 未能完成」為 **strong inference**，
+不是 confirmed 因果；預設 `Machine.In8` 對未特別處理的埠回 `0xFF` 是已證實的執行器行為。
+
+依平台規格優先停止線，公開 OPL／Sound Blaster／DMA／PIT 語意不重新由遊戲反組譯。後續只追遊戲實際
+port 序列與最小玩家可見結果：先由 [Issue #22](https://github.com/wicanr2/colonization_cht/issues/22)
+建立 DRAFT → READY 規格，才可由 [Issue #23](https://github.com/wicanr2/colonization_cht/issues/23) 實作與
+重跑正式冷啟動。
