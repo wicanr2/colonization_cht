@@ -1,0 +1,16 @@
+# 使用者本機持有的原版輸入與其解包內容：不得提交或推送。
+/Sid Meiers Colonization (1994).zip
+/第三波-殖民帝國.rar
+/workplace/
+
+# 本機建置、測試、快照與交付產物。
+/dist-all/
+/build/
+/tmp/
+*.sav
+*.state
+*.png
+
+# 編輯器與作業系統暫存檔。
+*.swp
+.DS_Store
