@@ -50,3 +50,49 @@ Windows API、實際遊戲畫面或文字輸出已受支援。
 
 後續：執行策略由 [Issue #18](https://github.com/wicanr2/colonization_cht/issues/18) 等待使用者決定；
 在此之前不得開啟正式的動態輸出攔截實作。
+
+## 2026-09-20：固定 Windows NE 載入面清冊
+
+### 問題與方法
+
+為量化固定目標的靜態載入面、而不將它誤稱為可執行 Windows 3.x 路徑，使用受版控的
+`tools/ne_inventory.py` 唯讀解析同一個 `COLONIZE.EXE` 雜湊。工具輸出只含 header、表格、
+模組、ordinal 與資源中繼資料，完整 JSON 留在 gitignore 的
+`workplace/reports/ne-inventory-colwin-ne-20260920.json`。
+
+執行環境為 `colonization-research:20260920-r2`（原始輸入唯讀）與
+`retro-runtime-study-tools:1`（Python 3）。容器均使用 `--network none`、`--rm`、目前
+UID/GID 及資源上限。命令語意如下：
+
+```text
+python3 /project/tools/ne_inventory.py \
+  --exe /original/SMCol3x/MPS/COLWIN/COLONIZE.EXE \
+  --output /reports/ne-inventory-colwin-ne-20260920.json
+```
+
+地址空間：此節所有 `0x...` 都是**絕對檔案偏移**；NE header 裡的 table offset 先依 NE
+header 相對位址解讀，再轉成絕對檔案偏移輸出。
+
+### 格式交叉核對
+
+| 證據 | 結果 | 等級 |
+|---|---|---|
+| 自有 parser | MZ `e_lfanew` 讀為 `0x250`，NE signature 位於該偏移。 | confirmed |
+| 原始位元組 | 檔案偏移 `0x3C` 為 `50 02 00 00`，偏移 `0x250` 為 ASCII `NE`（`4E 45`）。 | confirmed |
+| 獨立 `file` 分類 | `MS-DOS executable, NE for MS Windows 3.x (3.10) (EXE)`。 | confirmed |
+
+### 靜態結果
+
+| 欄位 | 值 | 等級 |
+|---|---|---|
+| 輸入 | `COLONIZE.EXE`，1,175,040 bytes，SHA-256 `ae7d9149f056766a534fe8f0006c9512aac1e1004e9776ab3cca818e4833b650` | confirmed |
+| NE linker | 6.1 | confirmed |
+| 初始位置 | CS:IP = `0001:0000`（NE header 欄位；尚未解釋 loader 執行語意） | confirmed |
+| 區段 | 33 個，其中 18 個宣告 relocation table | confirmed |
+| 模組 | `WING`、`COMMDLG`、`GDI`、`KERNEL`、`MMSYSTEM`、`USER`、`WIN87EM` | confirmed |
+| 匯入 relocation | 25,825 筆 relocation 中有 176 個 imported ordinal target；沒有 import-by-name target | confirmed（僅限解析到的 relocation record） |
+| 資源 | 42 個項目；type ordinal 1、2、3、4、5、12、14 | confirmed |
+
+這些資料只證實固定檔案**宣告**的靜態載入面。各 import 是否會在遊戲實際路徑呼叫、其參數、
+GDI 文字輸出位置、畫面或玩家流程仍是 `unknown`；它們不能用來宣稱 dosgolem 已支援 Windows
+3.x，也不能替代 Issue #18 的架構決定。

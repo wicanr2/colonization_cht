@@ -14,6 +14,8 @@
   專案使用的 `/home/anr2/cht/dosgolem`。
 - 固定雜湊的 `COLONIZE.EXE` 是 Windows 3.10 NE 程式。dosgolem probe 只走到 DOS stub，
   無法進入 Windows 應用程式本體；這是可重現 blocker，不是已支援的冷啟動。
+- 固定 NE 的靜態載入面已完成清冊：33 個區段、7 個模組、176 個 ordinal import target、
+  42 個資源項目；這只描述檔案結構，不能證實任何 Win16 API 的實際呼叫或文字輸出。
 
 ## 尚未確認
 
@@ -22,5 +24,5 @@
 
 ## 下一閘門
 
-等待 Issue #18 的使用者決定；在此之前，Issue #5 的動態文字路徑暫停。Issue #10 與 #15
-仍需在真實證據與原型具備後由使用者決定。
+等待 Issue #18 的使用者決定；在此之前，Issue #5 的動態文字路徑暫停。靜態 NE 清冊（#19）
+已完成，不會取代 Windows 3.x 執行收據。Issue #10 與 #15 仍需在真實證據與原型具備後由使用者決定。

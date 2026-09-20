@@ -34,6 +34,9 @@ dosgolem 的 Windows 3.x 能力、改用使用者提供的 DOS 版，或明確�
 確認的執行策略見 [目標 002](docs/goals/002-win16-execution-strategy.md)；實際工作順序與 Issue
 連結見 [工作計畫](WORKLIST.md)。最新已知事實與限制見 [目前脈絡](CONTEXT.md)。
 
+固定 Windows 3.x 版本的 NE 靜態載入面已完成盤點，但這只說明檔案結構與匯入宣告，**不代表**
+dosgolem 能執行遊戲或已定位文字輸出。證據與限制見 [目標 003](docs/goals/003-ne-load-surface-inventory.md)。
+
 ## 原版與權利邊界
 
 玩家必須自行持有合法的原版。本儲存庫不會包含或散布原版 EXE、資料檔、圖像、字型、音樂、
@@ -49,4 +52,5 @@ dosgolem 的 Windows 3.x 能力、改用使用者提供的 DOS 版，或明確�
 - [工作計畫](WORKLIST.md)（由 `docs/worklist.json` 產生）
 - [第一輪目標](docs/goals/001-foundation-and-evidence.md)
 - [第二輪目標](docs/goals/002-win16-execution-strategy.md)
+- [第三輪目標](docs/goals/003-ne-load-surface-inventory.md)
 - [工作歷程](WORKLOG.md)

@@ -25,6 +25,7 @@
 | #16 | completed | [建立機器可讀工作清單與驗證入口](https://github.com/wicanr2/colonization_cht/issues/16) | — | JSON、render 與 verify 可在 Docker 內重跑，且每筆都連到 Issue。 |
 | #17 | completed | [建立專案 README 與第一輪目標文件](https://github.com/wicanr2/colonization_cht/issues/17) | — | README 與目標 001 說明範圍、邊界、Issue 與可驗證退出條件。 |
 | #18 | blocked | [決定 Windows 3.x 目標版本的執行策略](https://github.com/wicanr2/colonization_cht/issues/18) | `boot-baseline` | 使用者確認 Windows 3.x 執行策略，並回填 CONTEXT、目標與受影響工作依賴。 |
+| #19 | completed | [盤點固定 Windows 3.x NE 版本的載入、匯入與資源證據](https://github.com/wicanr2/colonization_cht/issues/19) | `input-inventory`, `research-toolchain` | 固定雜湊的 NE header、區段、匯入與資源有 Docker 可重跑清冊、交叉格式核對與未知界線。 |
 
 ## 驗證
 
