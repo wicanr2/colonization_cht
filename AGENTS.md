@@ -97,6 +97,10 @@ RE 證據 → DRAFT 規格 → 證據審查 → READY 規格
   禁止全域 prune、遞迴 `chown` 或刪除其他專案資源。
 - 先讀 `/home/anr2/cht/dosgolem/README.md` 的能力矩陣與適用規格，再決定要用何種 probe、
   快照或畫面收據；「必須使用 dosgolem」不表示它已支援本遊戲的所有服務。
+- 本專案使用的 dosgolem 一律是 `workplace/dosgolem` 的獨立 Git 副本；不得修改
+  `/home/anr2/cht/dosgolem`。該副本的 `upstream` 推送位址必須維持 `DISABLED`。
+- 封存檔盤點、解包與 probe 使用 `colonization-research:20260920-r2`；其可重建來源依序為
+  `tools/Dockerfile.research`（r1）與 `tools/Dockerfile.research-r2`（僅修正 Go PATH）。
 - 若需要修改 dosgolem，先在本專案留下最小可重現證據與 DRAFT／READY 規格；通用改動在
   dosgolem 的隔離工作樹進行，遊戲專屬資料不移入 dosgolem。
 

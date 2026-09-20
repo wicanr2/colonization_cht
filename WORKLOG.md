@@ -15,3 +15,14 @@
 - 建立 `docs/goals/001-foundation-and-evidence.md`，把第一輪限制為輸入清冊、隔離工具鏈、
   dosgolem 探測與冷啟動基線。
 - 對應工作登記為 GitHub Issue #17；尚未處理任何原版遊戲資料。
+
+## 2026-09-20：完成目標 001 的證據與 blocker 收據
+
+- 建立 `workplace/dosgolem` 的獨立 clone（`d9c0c27`），並停用其 upstream push，未改動其他
+  專案的 dosgolem 工作樹。
+- 建立 `colonization-research:20260920-r1`／`r2` 可重建研究映像；r2 只修正 Go PATH。
+- 以唯讀封存檔盤點並解包 ZIP 至 gitignore 的 `workplace/original/colwin/`；完整輸入、格式、
+  雜湊、工具和 probe 收據記錄於 `RESEARCH-LOG.md`。
+- dosgolem probe 確認目標是 Windows 3.10 NE 程式的 DOS stub，未進入遊戲本體；建立 Issue #18
+  等待使用者決定後續執行策略。
+- Docker：本輪一次性容器均採 `--rm`；輸出以 UID/GID 1000:1000 建立，未清理其他專案資源。

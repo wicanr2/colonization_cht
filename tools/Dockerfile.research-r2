@@ -1,0 +1,6 @@
+# 20260920-r2 僅修正 20260920-r1 的 Go PATH；r1 的套件來源仍見 Dockerfile.research。
+FROM colonization-research:20260920-r1
+
+ENV PATH="/usr/local/go/bin:${PATH}"
+
+WORKDIR /src

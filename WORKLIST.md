@@ -7,11 +7,11 @@
 
 | Issue | 狀態 | 工作項目 | 依賴 | 驗收摘要 |
 |---:|---|---|---|---|
-| #1 | planned | [建立原始輸入指紋與權利邊界清冊](https://github.com/wicanr2/colonization_cht/issues/1) | — | 可重跑的雜湊與權利清冊，且 Git 未追蹤原版素材。 |
-| #2 | planned | [建立可重現的隔離研究工具鏈](https://github.com/wicanr2/colonization_cht/issues/2) | — | Docker 入口可重跑、輸入唯讀、沒有 root-owned 產物或殘留容器。 |
-| #3 | planned | [探測 dosgolem 對目標版本的冷啟動能力](https://github.com/wicanr2/colonization_cht/issues/3) | `input-inventory`, `research-toolchain` | 特定雜湊有可重跑的服務缺口報告。 |
-| #4 | planned | [建立原版冷啟動至主選單的基線收據](https://github.com/wicanr2/colonization_cht/issues/4) | `dosgolem-probe` | dosgolem 可重生含輸入、快照與索引畫面的基線。 |
-| #5 | planned | [追溯動態文字輸出常式與文字來源](https://github.com/wicanr2/colonization_cht/issues/5) | `boot-baseline` | 每條輸出路徑有原始定位、證據等級與重播 trace。 |
+| #1 | completed | [建立原始輸入指紋與權利邊界清冊](https://github.com/wicanr2/colonization_cht/issues/1) | — | 可重跑的雜湊與權利清冊，且 Git 未追蹤原版素材。 |
+| #2 | completed | [建立可重現的隔離研究工具鏈](https://github.com/wicanr2/colonization_cht/issues/2) | — | Docker 入口可重跑、輸入唯讀、沒有 root-owned 產物或殘留容器。 |
+| #3 | completed | [探測 dosgolem 對目標版本的冷啟動能力](https://github.com/wicanr2/colonization_cht/issues/3) | `input-inventory`, `research-toolchain` | 特定雜湊有可重跑的服務缺口報告。 |
+| #4 | completed | [建立原版冷啟動至主選單的基線收據](https://github.com/wicanr2/colonization_cht/issues/4) | `dosgolem-probe` | dosgolem 可重生含輸入、快照與索引畫面的基線，或有可重現 blocker。 |
+| #5 | blocked | [追溯動態文字輸出常式與文字來源](https://github.com/wicanr2/colonization_cht/issues/5) | `boot-baseline`, `win16-execution-decision` | 每條輸出路徑有原始定位、證據等級與重播 trace。 |
 | #6 | planned | [制定動態文字抽取與訊息鍵 DRAFT 規格](https://github.com/wicanr2/colonization_cht/issues/6) | `dynamic-print-re` | DRAFT 規格定義來源鍵、回退和幾何資料模型。 |
 | #7 | planned | [建立動態文本清冊與覆蓋率量測](https://github.com/wicanr2/colonization_cht/issues/7) | `dynamic-text-draft` | 可重跑報表列出抽取、翻譯與未知鍵數。 |
 | #8 | planned | [普查靜態內嵌文字與覆蓋候選](https://github.com/wicanr2/colonization_cht/issues/8) | `boot-baseline` | 靜態文字清冊可重現候選定位與證據等級。 |
@@ -24,6 +24,7 @@
 | #15 | blocked | [定義封裝、授權與發布界線](https://github.com/wicanr2/colonization_cht/issues/15) | `verification-matrix` | 使用者確認授權與發布方式，且可散布包不含原版素材。 |
 | #16 | completed | [建立機器可讀工作清單與驗證入口](https://github.com/wicanr2/colonization_cht/issues/16) | — | JSON、render 與 verify 可在 Docker 內重跑，且每筆都連到 Issue。 |
 | #17 | completed | [建立專案 README 與第一輪目標文件](https://github.com/wicanr2/colonization_cht/issues/17) | — | README 與目標 001 說明範圍、邊界、Issue 與可驗證退出條件。 |
+| #18 | blocked | [決定 Windows 3.x 目標版本的執行策略](https://github.com/wicanr2/colonization_cht/issues/18) | `boot-baseline` | 使用者確認 Windows 3.x 執行策略，並回填 CONTEXT、目標與受影響工作依賴。 |
 
 ## 驗證
 

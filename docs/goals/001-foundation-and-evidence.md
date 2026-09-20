@@ -1,6 +1,6 @@
 # 目標 001：證據與基線
 
-狀態：planned  
+狀態：completed（以可重現的 Windows 3.x blocker 結束）
 日期：2026-09-20  
 對應 Issue：[ #1 ](https://github.com/wicanr2/colonization_cht/issues/1)、[ #2 ](https://github.com/wicanr2/colonization_cht/issues/2)、[ #3 ](https://github.com/wicanr2/colonization_cht/issues/3)、[ #4 ](https://github.com/wicanr2/colonization_cht/issues/4)
 
@@ -36,10 +36,19 @@ dosgolem 重現至少一條冷啟動基線。這輪的產物是可回查的證�
 
 本輪只有在下列條件全部滿足時才完成：
 
-- [ ] #1 的輸入與權利清冊可在 Docker 重跑，且 Git 追蹤清單不含原版素材。
-- [ ] #2 的研究工具入口可重現，沒有 root-owned 專案輸出或本專案殘留容器。
-- [ ] #3 對固定雜湊版本有 dosgolem 能力報告；每個缺口都有最小重現或明確的已支援證據。
-- [ ] #4 有 dosgolem 自行重生的冷啟動基線，或有足以阻止該基線的可重現 blocker。
+- [x] #1 的輸入與權利清冊可在 Docker 重跑，且 Git 追蹤清單不含原版素材。
+- [x] #2 的研究工具入口可重現，沒有 root-owned 專案輸出或本專案殘留容器。
+- [x] #3 對固定雜湊版本有 dosgolem 能力報告；每個缺口都有最小重現或明確的已支援證據。
+- [x] #4 有 dosgolem 自行重生的冷啟動基線，或有足以阻止該基線的可重現 blocker。
 
-退出本輪不代表遊戲已中文化或可遊玩；它只允許後續同時開啟動態文字路徑（#5）與靜態圖像文字
-路徑（#8）的窄範圍證據工作。
+## 結果與下一閘門
+
+`COLONIZE.EXE`（SHA-256 `ae7d9149f056766a534fe8f0006c9512aac1e1004e9776ab3cca818e4833b650`）
+是 Windows 3.10 NE 執行檔。dosgolem probe 只執行其 DOS stub 7 道指令，輸出
+`This program must be run under Microsoft Windows.` 後以離開碼 1 結束；未實作服務為 0，
+只代表 stub 沒碰到缺口，**不代表 Windows 遊戲可執行**。完整可重現證據見
+[`RESEARCH-LOG.md`](../../RESEARCH-LOG.md)。
+
+本輪退出不代表遊戲已中文化或可遊玩。由於原定輸出階段執行器無法進入目標程式本體，
+動態文字路徑（#5）必須等待 [Issue #18](https://github.com/wicanr2/colonization_cht/issues/18)
+的使用者決定；靜態圖像文字路徑（#8）不得被誤報為完整中文化。

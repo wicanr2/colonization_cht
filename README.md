@@ -22,8 +22,13 @@
 
 ## 目前狀態
 
-專案正處於第一輪「證據與基線」目標：尚未盤點原始輸入、尚未證實 dosgolem 能否冷啟動該版本、
-也尚未抽取或翻譯任何遊戲文字。因此目前**沒有可下載的中文化程式，也沒有任何完成度宣稱**。
+第一輪「證據與基線」目標已完成其探勘出口：輸入清冊已建立，但固定雜湊的 `COLONIZE.EXE` 是
+Windows 3.10 NE 程式。dosgolem 目前只能執行其 DOS stub，無法進入 Windows 應用程式本體，
+因此沒有冷啟動基線、可下載的中文化程式或任何完成度宣稱。
+
+下一步需由使用者在 [Issue #18](https://github.com/wicanr2/colonization_cht/issues/18) 決定：擴充
+dosgolem 的 Windows 3.x 能力、改用使用者提供的 DOS 版，或明確更換執行器。這項決定以前，
+動態文字攔截與正常玩家路徑工作都會暫停。
 
 第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)；實際工作順序與
 Issue 連結見 [工作計畫](WORKLIST.md)。最新已知事實與限制見 [目前脈絡](CONTEXT.md)。
@@ -43,4 +48,3 @@ Issue 連結見 [工作計畫](WORKLIST.md)。最新已知事實與限制見 [�
 - [工作計畫](WORKLIST.md)（由 `docs/worklist.json` 產生）
 - [第一輪目標](docs/goals/001-foundation-and-evidence.md)
 - [工作歷程](WORKLOG.md)
-

@@ -1,0 +1,13 @@
+# dosgolem 使用的 Go 1.24 Bookworm 基底，固定為本機已驗證的 digest。
+FROM golang@sha256:1a6d4452c65dea36aac2e2d606b01b4a029ec90cc1ae53890540ce6173ea77ac
+
+# 僅安裝本專案的唯讀封存檔清冊、解包與格式辨識工具。
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y \
+        file \
+        p7zip-full \
+        unrar-free \
+        unzip \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /src
