@@ -26,3 +26,13 @@
 - dosgolem probe 確認目標是 Windows 3.10 NE 程式的 DOS stub，未進入遊戲本體；建立 Issue #18
   等待使用者決定後續執行策略。
 - Docker：本輪一次性容器均採 `--rm`；輸出以 UID/GID 1000:1000 建立，未清理其他專案資源。
+
+## 2026-09-20：建立目標 002 的 Windows 3.x 決策前沿
+
+- 重核 `COLONIZE.EXE` 的 NE 格式、DOS stub 收據與 dosgolem 官方能力矩陣；獨立副本仍固定在
+  `d9c0c27`，且未含 Windows 3.x／Win16／NE loader 的實作或宣告。
+- 建立 `docs/goals/002-win16-execution-strategy.md`，將符合既定 dosgolem 架構的兩個選項、證據
+  等級、排除項與使用者決策退出條件明文化，並從 README 建立入口。
+- 尚未實作或選定任一策略；等待 Issue #18 的使用者決定後才更新目前脈絡、工作清單與後續 Issue。
+- Docker：本輪唯讀查證容器均採 `--rm`、`--network none` 及目前 UID/GID；未建立持續容器或修改
+  原始 dosgolem 工作樹。

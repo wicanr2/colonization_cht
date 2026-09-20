@@ -30,8 +30,9 @@ Windows 3.10 NE 程式。dosgolem 目前只能執行其 DOS stub，無法進入 
 dosgolem 的 Windows 3.x 能力、改用使用者提供的 DOS 版，或明確更換執行器。這項決定以前，
 動態文字攔截與正常玩家路徑工作都會暫停。
 
-第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)；實際工作順序與
-Issue 連結見 [工作計畫](WORKLIST.md)。最新已知事實與限制見 [目前脈絡](CONTEXT.md)。
+第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
+確認的執行策略見 [目標 002](docs/goals/002-win16-execution-strategy.md)；實際工作順序與 Issue
+連結見 [工作計畫](WORKLIST.md)。最新已知事實與限制見 [目前脈絡](CONTEXT.md)。
 
 ## 原版與權利邊界
 
@@ -47,4 +48,5 @@ Issue 連結見 [工作計畫](WORKLIST.md)。最新已知事實與限制見 [�
 - [目前脈絡](CONTEXT.md)
 - [工作計畫](WORKLIST.md)（由 `docs/worklist.json` 產生）
 - [第一輪目標](docs/goals/001-foundation-and-evidence.md)
+- [第二輪目標](docs/goals/002-win16-execution-strategy.md)
 - [工作歷程](WORKLOG.md)
