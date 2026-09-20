@@ -452,3 +452,44 @@ dosgolem 隔離副本（commit `1b0efdf98ac3ab85c90cb80c3e489e935fb45665`）冷�
 `ce98a83277a96cf49281e5eae0bf1000fdaa3249fd430d44cc1bde1f29aea43e`、`0110` SHA-256
 `f57f9b6dd3d0c396577178c8e5b77dad88c79764d33f742f204ba23d4cbfe403`、`03B1` SHA-256
 `cd31ae429df6d51dee429d1266ed93d63b9360f5185fc3abaaf1463d131bd6f9`。
+
+## 2026-09-21：目標 012 的 PSOUND overlay 與客體 MCB 鏈生命週期
+
+固定輸入為 `OPENING.EXE`（SHA-256
+`3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`）及 `PSOUND.COL`
+（48,599 bytes，SHA-256 `8d5069fab621abfa5a4df4071612aa0d9f159c0907e51f0b1a193b73fa8b5c87`）。所有動態
+收據由 `workplace/dosgolem` commit `1b0efdf98ac3ab85c90cb80c3e489e935fb45665` 的 `probe -sbpro`
+從 `OPENING.EXE` 零冷啟動產生；原版目錄唯讀、報告只寫入 gitignore 的 `workplace/reports/`。
+IDA 使用 `ida-pro-9.4-idapython:locked-v1`、16 位元 raw-binary 匯出；原始位址與 runtime 段:位移
+並列，未以推測名稱取代定位。
+
+| 推論等級 | 原始定位／步數 | 觀測 |
+| --- | --- | --- |
+| confirmed | `02B2:00AF → 086C:0004 → 02B2:00B4`；834,304 | 正常冷啟動的 caller／return 邊。`02B2:00A9` 將 `SS:BP-0A0` 以 far 參數傳入，動態進入時 `DS=0C41`、`DX=849C`。 |
+| confirmed | `086C:0011`–`005D`；834,313–834,342 | 先 `AH=48h BX=FFFFh` 取得 `AX=8,BX=83BC`，再 `AH=48h BX=83BAh` 得資料段 `1C43`；parameter block `0C41:3945` 的 load／relocation 皆 `1C43`，接著 `AH=4Bh AL=03h` 載入 `PSOUND.COL → 1C43:0000`。 |
+| confirmed | `086C:0092`–`0094`；834,362–834,363 | `AH=4Ah ES=1C43,BX=0C05` 成功；`086C:00DA`–`00DB` 隨後寫 `0C41:621A=0BF9:1C43`。 |
+| confirmed | `03D9:005A`–`007D`；816,657–816,661 | raw bytes 直接把 `0x4D`、size、owner 寫入 `1C42` 的 MCB 欄位；此路徑前後使用 `AH=52h` 取得 DOS 結構，並將 `1C43:0000` 回傳至 `03A7` 的 `00C8×0140=FA00` 描述元。 |
+| confirmed | `03D9:0340`–`0347`；833,824 | `AH=49h ES=2C9A` 在現行 dosgolem 回 `AX=9`。隨後 `syncMCB()` 將客體 MCB 的 owner `01→00`、size `0FA1→83BC` 並清空名稱；下一個 `AH=48h` 遂重發出 `1C43`。 |
+| unknown | 真 DOS 對同一客體直接 MCB 變更與 `AH=49h ES=2C9A` 的精確服務結果 | 現有收據只證實 dosgolem 的結果；沒有以 DOSBox／DOSBox-X 或猜測性服務特例取代此未知。 |
+
+主要收據 SHA-256：overlay lifecycle report
+`4642d04be9a5df78cda90d2e2b43b4c902651712de1a2045b4ec9ad12f4c6d38`、trace
+`57b8d0549b013e7f4124fd52ad2c18b080d30794c42f43243c186b7c24c2105b`、目標寫入 TSV
+`a251a52033db890d94ec6d0176a9313ad878333951f32fc25e3eaf45a5ed3d7c`、caller report
+`9d850d7aa9c3fd88a52c90cf5b61a991c330e39a7872e7a5ac86cf2f3c6a7cd6`、MCB report
+`3c2e7ea9d42bf0a02a6167d35ac3622ab4eba66a17b815e09cc4c78e232a38c8`、MCB 寫入 TSV
+`ae57b7037cd7d9089f97897e28811bb0b544158808f604991f9f53e6dc5a2bd7`。IDA JSON 分別為 `086C`
+`ec997284cd45afc58a39d87b8fada14cb2cad856790d012a3894164f7db1d324`、`02B2`
+`11e4826f75fe5d6afd866564b52690cc0f53673c42587641770979aa8e0af7b7` 與 `03D9`
+`80116e6722036591dea4586383b83ec6fe28517b4ab332faa2bab220a8b2cae5`。
+
+一次早期 `03D9` raw dump 將線性基底誤寫為 `0x3D900`；在產出結論前已捨棄，並以正確
+`03D9×16 = 0x3D90` 重取 1,280-byte runtime 視窗（SHA-256
+`bb6c042374688f10bbb1a2a7d1929edf12a3f967c2c40542d2ce5063da8d4f65`）。該錯誤樣本未用於表中任何
+結論或規格。
+
+結論：`086C` 的 overlay 載入已由 callsite、parameter block、DOS service 與寫入收據交叉確認；
+客體直接改 MCB 但 dosgolem 仍以私有 arena 回應並覆寫鏈，也是 confirmed。據此建立
+[DRAFT 規格 003](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)，只提出通用的鏈驗證與
+重新協調契約。它不授權實作，也不宣稱真 DOS 的 `AH=49h` parity、首畫面、主程式轉交、音效、
+中文化輸出或可玩性。
