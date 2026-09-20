@@ -26,9 +26,11 @@
 - 正式路徑唯一已記錄的 `EXEC` 是 `PSOUND.COL`（不是 `VICEROY.EXE`）。從第 1,000,000 指令快照
   到第 100,000,000 指令，A0000 維持全零、沒有視訊寫入、沒有字型服務呼叫，且程式停留在
   `PSOUND.COL` 的 `1C43:0087`；這是 confirmed blocker 收據，不是可見畫面。
-- `PSOUND.COL` 在 1,000,000–2,000,000 指令向 `0x220/0x221`、`0x222/0x223` 寫入 38,846 次；預設
-  `cmd/probe` 的 `machine.New()` 未將這些 Sound Blaster 相容 OPL 埠接到 OPL 模型。因此音效埠相容
-  缺口是 strong inference，不能誤稱為已證實的卡住原因或硬體逐週期需求。
+- `PSOUND.COL` 在 1,000,000–2,000,000 指令向 `0x220/0x221`、`0x222/0x223` 寫入 38,846 次，並在
+  動態位置 `1C43:0082` 對 `0x220`、`0x222` 各讀取十次；預設 `cmd/probe` 的 `machine.New()` 對這些
+  Sound Blaster 相容 OPL 埠回 `0xFF`。公開硬體 port 契約、IDA 位址對照與 DRAFT 規格見
+  `docs/spec/001-colonization-sbpro-opl-profile.md`。缺少相容層仍是 strong inference，不能誤稱為
+  已證實的卡住原因或硬體逐週期需求。
 
 ## 尚未確認
 
@@ -38,7 +40,7 @@
 
 ## 下一閘門
 
-Issue #21 已以正式冷啟動的最小 blocker 收據完成。新的執行前沿是 #22：先把 `0x220`–`0x223`
-Sound Blaster 相容 OPL 行為的最小範圍寫成 DRAFT／READY；只有 #23 依 READY 實作並重新取得可見／轉交
-收據後，#5 與 #8 才能開始。Windows NE 清冊（#19）只保留為歷史輸入證據。Issue #10 與 #15 仍需在
-真實證據與原型具備後由使用者決定。
+Issue #21 已以正式冷啟動的最小 blocker 收據完成。Issue #22 的 DRAFT 已完成，但第二組／advanced
+OPL status 與 reset 後必要 DSP port 尚未足以升 READY；必須先補足該窄證據，才可由 #23 實作並重新取得
+可見／轉交收據。#5 與 #8 在那之前維持阻塞。Windows NE 清冊（#19）只保留為歷史輸入證據。Issue #10
+與 #15 仍需在真實證據與原型具備後由使用者決定。
