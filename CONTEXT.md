@@ -24,5 +24,7 @@
 
 ## 下一閘門
 
-等待 Issue #18 的使用者決定；在此之前，Issue #5 的動態文字路徑暫停。靜態 NE 清冊（#19）
-已完成，不會取代 Windows 3.x 執行收據。Issue #10 與 #15 仍需在真實證據與原型具備後由使用者決定。
+Issue #18 是目前唯一的架構阻塞：使用者必須選擇擴充 Windows 3.x 路徑或提供合法 DOS 版輸入。
+在此之前，Issue #5 的動態文字路徑暫停；靜態 NE 清冊（#19）已完成，不能取代 Windows 3.x 執行收據。
+完整阻塞稽核見 `docs/goals/004-execution-strategy-blocker-audit.md`。Issue #10 與 #15 仍需在真實證據與
+原型具備後由使用者決定。

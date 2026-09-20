@@ -48,3 +48,12 @@
   寫入 `__pycache__`；改將 `PYTHONPYCACHEPREFIX` 指向容器 `/tmp` 後通過，列為環境修正而非產品缺陷。
 - Docker：本輪所有容器均採 `--rm`、`--network none` 與目前 UID/GID；未修改原始輸入或其他專案的
   dosgolem 工作樹。
+
+## 2026-09-20：目標 004 執行策略阻塞稽核
+
+- 已連續重核目標輸入、DOS stub 收據、dosgolem 能力矩陣與固定 NE 靜態清冊；沒有未經架構決定即可
+  進入遊戲本體、取得文字輸出或建立正常玩家路徑收據的工作。
+- 建立 `docs/goals/004-execution-strategy-blocker-audit.md`，把唯一解鎖條件固定為 Issue #18 的使用者
+  選擇：擴充獨立 dosgolem 的最小 Windows 3.x 路徑，或提供合法 DOS 版輸入。
+- 不重複靜態分析、不替換執行器，也不將 import／資源資料誤報為中文化進度；等待使用者決定。
+- Docker：本輪未啟動新的分析容器；既有研究容器均已於前輪以 `--rm` 清理。

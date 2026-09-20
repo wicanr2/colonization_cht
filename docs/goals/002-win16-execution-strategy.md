@@ -1,6 +1,6 @@
 # 目標 002：Windows 3.x 執行策略
 
-狀態：等待使用者決定
+狀態：blocked（等待使用者決定）
 日期：2026-09-20
 對應 Issue：[ #18 ](https://github.com/wicanr2/colonization_cht/issues/18)
 

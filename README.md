@@ -36,6 +36,8 @@ dosgolem 的 Windows 3.x 能力、改用使用者提供的 DOS 版，或明確�
 
 固定 Windows 3.x 版本的 NE 靜態載入面已完成盤點，但這只說明檔案結構與匯入宣告，**不代表**
 dosgolem 能執行遊戲或已定位文字輸出。證據與限制見 [目標 003](docs/goals/003-ne-load-surface-inventory.md)。
+在選擇 Windows 3.x 擴充或提供 DOS 版前，專案處於明確受阻狀態；稽核理由見
+[目標 004](docs/goals/004-execution-strategy-blocker-audit.md)。
 
 ## 原版與權利邊界
 
@@ -53,4 +55,5 @@ dosgolem 能執行遊戲或已定位文字輸出。證據與限制見 [目標 00
 - [第一輪目標](docs/goals/001-foundation-and-evidence.md)
 - [第二輪目標](docs/goals/002-win16-execution-strategy.md)
 - [第三輪目標](docs/goals/003-ne-load-surface-inventory.md)
+- [第四輪目標](docs/goals/004-execution-strategy-blocker-audit.md)
 - [工作歷程](WORKLOG.md)
