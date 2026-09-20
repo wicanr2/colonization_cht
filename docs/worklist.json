@@ -1,0 +1,22 @@
+{
+  "schema": "colonization-cht-worklist/1",
+  "repository": "https://github.com/wicanr2/colonization_cht",
+  "items": [
+    {"id":"input-inventory","issue":1,"state":"planned","title":"建立原始輸入指紋與權利邊界清冊","depends_on":[],"acceptance":"可重跑的雜湊與權利清冊，且 Git 未追蹤原版素材。","verify":{"kind":"manual","note":"尚無研究工具；完成後綁定輸入清冊與 git ls-files。"}},
+    {"id":"research-toolchain","issue":2,"state":"planned","title":"建立可重現的隔離研究工具鏈","depends_on":[],"acceptance":"Docker 入口可重跑、輸入唯讀、沒有 root-owned 產物或殘留容器。","verify":{"kind":"manual","note":"尚無專案工具鏈入口。"}},
+    {"id":"dosgolem-probe","issue":3,"state":"planned","title":"探測 dosgolem 對目標版本的冷啟動能力","depends_on":["input-inventory","research-toolchain"],"acceptance":"特定雜湊有可重跑的服務缺口報告。","verify":{"kind":"manual","note":"等待特定版本與探針收據。"}},
+    {"id":"boot-baseline","issue":4,"state":"planned","title":"建立原版冷啟動至主選單的基線收據","depends_on":["dosgolem-probe"],"acceptance":"dosgolem 可重生含輸入、快照與索引畫面的基線。","verify":{"kind":"manual","note":"等待 dosgolem 冷啟動結果。"}},
+    {"id":"dynamic-print-re","issue":5,"state":"planned","title":"追溯動態文字輸出常式與文字來源","depends_on":["boot-baseline"],"acceptance":"每條輸出路徑有原始定位、證據等級與重播 trace。","verify":{"kind":"manual","note":"等待原版輸出 trace。"}},
+    {"id":"dynamic-text-draft","issue":6,"state":"planned","title":"制定動態文字抽取與訊息鍵 DRAFT 規格","depends_on":["dynamic-print-re"],"acceptance":"DRAFT 規格定義來源鍵、回退和幾何資料模型。","verify":{"kind":"manual","note":"等待輸出路徑證據。"}},
+    {"id":"dynamic-coverage","issue":7,"state":"planned","title":"建立動態文本清冊與覆蓋率量測","depends_on":["dynamic-text-draft"],"acceptance":"可重跑報表列出抽取、翻譯與未知鍵數。","verify":{"kind":"manual","note":"等待 DRAFT 規格與真實文本。"}},
+    {"id":"static-text-survey","issue":8,"state":"planned","title":"普查靜態內嵌文字與覆蓋候選","depends_on":["boot-baseline"],"acceptance":"靜態文字清冊可重現候選定位與證據等級。","verify":{"kind":"manual","note":"等待原版畫面與資產清冊。"}},
+    {"id":"static-overlay-draft","issue":9,"state":"planned","title":"制定靜態文字覆蓋 DRAFT 規格與最小原型","depends_on":["static-text-survey"],"acceptance":"一個可丟棄原型具命中與反向條件對照。","verify":{"kind":"manual","note":"等待已確認的靜態文字候選。"}},
+    {"id":"l10n-decision","issue":10,"state":"blocked","title":"確認中文字型、術語政策與中文化完成範圍","depends_on":["dynamic-coverage","static-overlay-draft"],"acceptance":"使用者確認字型、術語與完成門檻並回填 CONTEXT／READY 規格。","verify":{"kind":"manual","note":"此項必須由使用者根據真實原型作決定。"}},
+    {"id":"dynamic-overlay-ready","issue":11,"state":"planned","title":"將動態文字覆蓋設計升為 READY 規格","depends_on":["dynamic-text-draft","dynamic-coverage","l10n-decision"],"acceptance":"所有正式輸出類別有可回查 evidence 與 READY 規格。","verify":{"kind":"manual","note":"等待 DRAFT 證據審查與使用者決定。"}},
+    {"id":"dynamic-overlay-implementation","issue":12,"state":"planned","title":"實作並驗證動態文字中文疊加","depends_on":["dynamic-overlay-ready"],"acceptance":"中文、英文、缺譯和最長譯文都有固定快照與玩家路徑驗證。","verify":{"kind":"manual","note":"等待 READY 規格。"}},
+    {"id":"static-overlay-implementation","issue":13,"state":"planned","title":"實作並驗證靜態文字圖像中文覆蓋","depends_on":["static-overlay-draft","l10n-decision"],"acceptance":"每個項目有圖像指紋、反向條件與玩家路徑收據。","verify":{"kind":"manual","note":"等待 DRAFT／字型／範圍決定。"}},
+    {"id":"verification-matrix","issue":14,"state":"planned","title":"建立中文化驗證矩陣與正常玩家路徑收據","depends_on":["dynamic-overlay-implementation","static-overlay-implementation"],"acceptance":"動態與靜態路徑都有原版、中文、英文與反向條件收據。","verify":{"kind":"manual","note":"等待兩條正式覆蓋路徑。"}},
+    {"id":"release-boundary","issue":15,"state":"blocked","title":"定義封裝、授權與發布界線","depends_on":["verification-matrix"],"acceptance":"使用者確認授權與發布方式，且可散布包不含原版素材。","verify":{"kind":"manual","note":"此項必須由使用者決定對外發布方式。"}},
+    {"id":"worklist-tooling","issue":16,"state":"completed","title":"建立機器可讀工作清單與驗證入口","depends_on":[],"acceptance":"JSON、render 與 verify 可在 Docker 內重跑，且每筆都連到 Issue。","verify":{"kind":"absent","paths":["tools/worklist.py"],"pattern":"def load\\(","note":"若工作清單載入器消失，已完成標記必須重新檢查。"}}
+  ]
+}

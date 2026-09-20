@@ -74,7 +74,8 @@ RE 證據 → DRAFT 規格 → 證據審查 → READY 規格
 |---|---|
 | `README.md` | 專案用途、穩定使用入口與現況摘要；不寫逐輪流水帳。 |
 | `CONTEXT.md` | 有日期的目前真相、已確認決定、限制與交接。 |
-| `WORKLIST.md` | 可執行工作、狀態、完成條件與下一個閘門。 |
+| `docs/worklist.json` | 未完成項的唯一機器可讀來源；每筆必連到一個 GitHub Issue，含狀態、依賴、完成條件與驗證。 |
+| `WORKLIST.md` | 由 `tools/worklist.py render` 從 JSON 產生的可讀計畫；不得手動修改。 |
 | `WORKLOG.md` | 依日期追加的工作歷程、驗證摘要與 Docker 清理狀態。 |
 | `RESEARCH-LOG.md` | 原始輸入雜湊、工具版本、地址空間、證據與推論等級。 |
 | `docs/spec/` | DRAFT／READY／CONFORMED 規格。 |
@@ -115,4 +116,3 @@ RE 證據 → DRAFT 規格 → 證據審查 → READY 規格
 4. 找出動態印字呼叫點與文字來源，建立 DRAFT 文本抽取規格及覆蓋鍵方案。
 5. 建立靜態文字圖像清冊，先做一個可丟棄的中文覆蓋原型，供使用者確認字型與版面。
 6. 在使用者確認公開性、授權與完成範圍後，才規劃翻譯、打包與 GitHub 發行。
-
