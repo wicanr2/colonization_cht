@@ -92,3 +92,16 @@
   同狀態 A/B 尚無足夠證據。Issue #22 保持進行中，Issue #23 不得提前實作。
 - Docker：研究與 IDA 容器皆採 `--rm`、`--network none`、目前 UID/GID 與資源上限；未修改原版輸入、
   共用 dosgolem 或其他專案。
+
+## 2026-09-20：完成目標 008 的 PSOUND READY 證據收斂
+
+- 對固定 state 的 140 個 IDA 已解碼 I/O 候選做有界暫存器觀察，分離出真正執行的 OPL status、
+  address/data、DSP write-buffer、reset、read-buffer 與 reply port；沒有將未命中的 raw overlay
+  解碼誤列為需求。
+- 以 IDA 16 位元 bytes、正常路徑 hit 與 Creative 公開 DSP 契約確認：`0x220` 是會比較
+  `0x00 → 0xC0` 的偵測、`0x222` 在本版只作 delay、`0x226 → 0x22E → 0x22A=0xAA` 是具體
+  reset 成功／失敗分支。
+- 將規格草案 001 保留為 SUPERSEDED 歷史證據，建立 `docs/spec/002-colonization-sbpro-opl-profile-ready.md`，
+  只授權 Issue #23 加入預設關閉的 `-sbpro` 最小 profile 與同狀態冷啟動收據。
+- Docker：所有研究、測試與 IDA 容器均採 `--rm`、`--network none`、目前 UID/GID 與資源上限；未修改
+  原版輸入、共用 dosgolem 或其他專案。

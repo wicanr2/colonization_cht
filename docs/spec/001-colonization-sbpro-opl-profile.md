@@ -1,6 +1,7 @@
 # 規格草案 001：Colonization 的 Sound Blaster Pro OPL 埠設定檔
 
-狀態：DRAFT  
+狀態：SUPERSEDED（固定 `OPENING.EXE → PSOUND.COL` 路徑已由
+[READY 規格 002](002-colonization-sbpro-opl-profile-ready.md) 取代；本 DRAFT 證據保留）
 日期：2026-09-20  
 對應 Issue：[ #22 ](https://github.com/wicanr2/colonization_cht/issues/22)  
 前置收據：[目標 006](../goals/006-dos-first-visible-checkpoint.md)  
@@ -112,3 +113,13 @@ hardware-spec approximation，而不是重啟逐週期硬體考古。
 因此本輪的審查結論是：`0x220`–`0x223` 與 `0x226` 的使用及預設回退已獲確認；缺少
 Sound Blaster 相容 OPL 面仍是 **strong inference** 的 blocker 候選，不能宣稱為原因、不能宣稱
 OPL3 status 已正確建模，也不能宣稱遊戲已能顯示畫面。
+
+## 2026-09-20 回填：READY 收斂理由
+
+目標 008 將本節的兩個未知項回填到同一固定輸入與正常冷啟動路徑。`0x222` 的四次讀取在
+`0x1052B`–`0x1052E` 後立即覆寫 `AL` 為 data byte，沒有 consumer；READY 因而把它降為明示的
+決定性 delay 回退，而不是虛構 hardware status。相反地，`0x220` 的 `0x00 → 0xC0` 檢查和
+`0x226 → 0x22E → 0x22A=0xAA` reset handshake 都有原始 bytes、動態 hit 與公開契約。
+
+因此 [READY 規格 002](002-colonization-sbpro-opl-profile-ready.md) 只授權這個有界 profile；它沒有
+解除 PCM／DMA、advanced status parity 或首畫面驗收的限制。

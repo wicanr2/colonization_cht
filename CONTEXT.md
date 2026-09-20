@@ -26,11 +26,10 @@
 - 正式路徑唯一已記錄的 `EXEC` 是 `PSOUND.COL`（不是 `VICEROY.EXE`）。從第 1,000,000 指令快照
   到第 100,000,000 指令，A0000 維持全零、沒有視訊寫入、沒有字型服務呼叫，且程式停留在
   `PSOUND.COL` 的 `1C43:0087`；這是 confirmed blocker 收據，不是可見畫面。
-- `PSOUND.COL` 在 1,000,000–2,000,000 指令向 `0x220/0x221`、`0x222/0x223` 寫入 38,846 次，並在
-  動態位置 `1C43:0082` 對 `0x220`、`0x222` 各讀取十次；預設 `cmd/probe` 的 `machine.New()` 對這些
-  Sound Blaster 相容 OPL 埠回 `0xFF`。公開硬體 port 契約、IDA 位址對照與 DRAFT 規格見
-  `docs/spec/001-colonization-sbpro-opl-profile.md`。缺少相容層仍是 strong inference，不能誤稱為
-  已證實的卡住原因或硬體逐週期需求。
+- `PSOUND.COL` 的 `0x220` status 讀取是已證實的 `0x00 → 0xC0` AdLib 偵測條件，`0x222` 在此版本
+  僅作未消費的 delay；此外它以三組 `0x226=1 → 0` reset、`0x22E` status 和 `0x22A=0xAA` 判定 DSP
+  成功。預設 probe 對這些 port 回 `0xFF`，使這些常式失敗；「它是無畫面的唯一原因」仍只屬
+  strong inference。可實作的最小 profile 見 `docs/spec/002-colonization-sbpro-opl-profile-ready.md`。
 
 ## 尚未確認
 
@@ -40,7 +39,6 @@
 
 ## 下一閘門
 
-Issue #21 已以正式冷啟動的最小 blocker 收據完成。Issue #22 的 DRAFT 已完成，但第二組／advanced
-OPL status 與 reset 後必要 DSP port 尚未足以升 READY；必須先補足該窄證據，才可由 #23 實作並重新取得
-可見／轉交收據。#5 與 #8 在那之前維持阻塞。Windows NE 清冊（#19）只保留為歷史輸入證據。Issue #10
-與 #15 仍需在真實證據與原型具備後由使用者決定。
+Issue #22 已以 READY 規格完成。新的執行前沿是 #23：只依規格 002 實作可選的 `-sbpro` profile，並以
+相同 state 的正式 `OPENING.EXE` 路徑重新取得 reset、可見或轉交收據。#5 與 #8 在 #23 之前維持阻塞。
+Windows NE 清冊（#19）只保留為歷史輸入證據。Issue #10 與 #15 仍需在真實證據與原型具備後由使用者決定。

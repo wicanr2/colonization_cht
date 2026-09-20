@@ -27,12 +27,11 @@
 不是主選單或可遊玩宣稱。
 
 目標 006 已把正式啟動卡住的位置收斂至 `PSOUND.COL` overlay 的相容 OPL 埠行為；它不是首畫面、
-也不是遊戲主程式轉交。目標 007 已完成 [最小規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)：
-原版實際讀寫 `0x220`–`0x223` 與 reset `0x226` 均有收據，但第二組 status 語意與 reset 後必要 DSP
-port 尚未能升為 READY。因此 [Issue #22](https://github.com/wicanr2/colonization_cht/issues/22) 仍開啟；只有
-補足該窄證據後，才由 [Issue #23](https://github.com/wicanr2/colonization_cht/issues/23) 最小實作並重跑正式
-冷啟動。此前沒有可下載中文化程式或任何完成度宣稱。先前 Windows 3.x NE 輸入只保留為歷史研究證據，
-不是目前實作目標。
+也不是遊戲主程式轉交。目標 008 已完成可實作的 [最小 READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)：
+它只處理已證實的 `0x220` primary OPL 偵測、`0x222` delay 與 `0x226 → 0x22E → 0x22A=0xAA` DSP reset
+handshake，不宣稱完整音效或 OPL3 parity。下一步是 [Issue #23](https://github.com/wicanr2/colonization_cht/issues/23)
+依規格加入可選 profile 並重跑正式冷啟動。此前沒有可下載中文化程式或任何完成度宣稱。先前 Windows 3.x
+NE 輸入只保留為歷史研究證據，不是目前實作目標。
 
 第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
 確認的執行策略見 [目標 002](docs/goals/002-win16-execution-strategy.md)；實際工作順序與 Issue
@@ -64,5 +63,7 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第五輪目標](docs/goals/005-dos-input-and-cold-boot.md)
 - [第六輪目標](docs/goals/006-dos-first-visible-checkpoint.md)
 - [第七輪目標](docs/goals/007-colonization-opl-compatibility-spec.md)
+- [第八輪目標](docs/goals/008-psound-ready-evidence.md)
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
+- [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [工作歷程](WORKLOG.md)

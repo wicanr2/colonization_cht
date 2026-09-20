@@ -28,7 +28,7 @@
 | #19 | completed | [盤點固定 Windows 3.x NE 版本的載入、匯入與資源證據](https://github.com/wicanr2/colonization_cht/issues/19) | `input-inventory`, `research-toolchain` | 固定雜湊的 NE header、區段、匯入與資源有 Docker 可重跑清冊、交叉格式核對與未知界線。 |
 | #20 | completed | [盤點使用者提供的 DOS 版並建立 dosgolem 冷啟動收據](https://github.com/wicanr2/colonization_cht/issues/20) | `input-inventory`, `research-toolchain`, `win16-execution-decision` | DOS 輸入 manifest、固定啟動入口、Docker probe 收據與下一個可見檢查點都可回查。 |
 | #21 | completed | [建立 DOS OPENING.EXE 的第一個可見畫面或轉交收據](https://github.com/wicanr2/colonization_cht/issues/21) | `dos-input-cold-boot-probe` | 正式 OPENING.EXE 冷啟動有可重播的非零畫面、可觀測文字輸出、經確認的 VICEROY.EXE 轉交，或最小具體 blocker。 |
-| #22 | in_progress | [為 Colonization 的 0x220 OPL 相容層建立 DRAFT／READY 規格](https://github.com/wicanr2/colonization_cht/issues/22) | `dos-first-visible-checkpoint` | 以固定埠序列與公開硬體契約完成最小 DRAFT、證據審查與 READY 規格；不實作、不做逐週期音訊考古。 |
+| #22 | completed | [為 Colonization 的 0x220 OPL 相容層建立 DRAFT／READY 規格](https://github.com/wicanr2/colonization_cht/issues/22) | `dos-first-visible-checkpoint` | 以固定埠序列與公開硬體契約完成最小 DRAFT、證據審查與 READY 規格；不實作、不做逐週期音訊考古。 |
 | #23 | planned | [依 READY 規格驗證 Colonization 的 OPL 相容層與首畫面](https://github.com/wicanr2/colonization_cht/issues/23) | `colonization-opl-compatibility-spec` | 依 READY 規格最小實作後，正式 OPENING.EXE 冷啟動取得可見／轉交收據，或以新證據縮小 blocker。 |
 
 ## 驗證
