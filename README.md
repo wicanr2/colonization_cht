@@ -31,13 +31,13 @@
 它只處理已證實的 `0x220` primary OPL 偵測、`0x222` delay 與 `0x226 → 0x22E → 0x22A=0xAA` DSP reset
 handshake，不宣稱完整音效或 OPL3 parity。目前依 [目標 009](docs/goals/009-sbpro-profile-and-cold-boot.md)
 在隔離的 dosgolem 副本完成可選 profile；正式路徑已跨過 DSP reset，並載入 `MPSLOGO.SS`、
-`MPSNAME.SS`，但尚未有可見畫面或主程式轉交。目標 012 已證實 `086C` 經 `AH=4Bh AL=03h` 將
-`PSOUND.COL` 載入 `1C43:0000`，但原程式先以 `AH=52h` 取得並直接建立客體 MCB 鏈；目前 dosgolem
-的內部記憶體 arena 沒有吸收該修改，隨後 `AH=49h` 回 `AX=9` 並重發佈過期鏈，使 overlay 重用
-`1C43`。這已收斂為僅供審查的 [MCB 重新協調 DRAFT 規格](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)，
-尚不授權實作；[Issue #24](https://github.com/wicanr2/colonization_cht/issues/24) 會先完成證據審查與 READY
+`MPSNAME.SS`，但尚未有可見畫面或主程式轉交。目標 013 已確認原程式以 `AH=52h` 取得的活躍（active）MCB
+鏈直接建立 `1C42` 記錄；目前 dosgolem 的內部記憶體 arena 沒有吸收該修改，失敗的 `AH=49h` 服務又
+重發佈過期鏈，使 overlay 重用 `1C43`。兩個呼叫端都覆寫服務回傳值，不能把它誤稱為遊戲要求成功釋放。
+這已收斂為僅供審查的 [MCB 重新協調 DRAFT 規格](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)，
+尚不授權實作；[Issue #24](https://github.com/wicanr2/colonization_cht/issues/24) 仍需完成通用驗證與 READY
 閘門，不會實作猜測性的 DOS、滑鼠或音訊服務。範圍、固定輸入與證據界線見
-[目標 012](docs/goals/012-psound-overlay-writer-lifecycle.md)。此前沒有可下載中文化程式或任何完成度宣稱。先前 Windows 3.x NE
+[目標 013](docs/goals/013-mcb-arena-draft-evidence-review.md)。此前沒有可下載中文化程式或任何完成度宣稱。先前 Windows 3.x NE
 輸入只保留為歷史研究證據，不是目前實作目標。
 
 第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
@@ -75,6 +75,7 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第十輪目標](docs/goals/010-psound-out-of-range-control-flow.md)
 - [第十一輪目標](docs/goals/011-psound-clear-argument-provenance.md)
 - [第十二輪目標](docs/goals/012-psound-overlay-writer-lifecycle.md)
+- [第十三輪目標](docs/goals/013-mcb-arena-draft-evidence-review.md)
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [MCB 記憶體 arena 重新協調規格草案](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)

@@ -41,11 +41,13 @@
 - 目標 012 已確認 `02B2:00AF → 086C:0004 → 02B2:00B4` 的正常冷啟動 caller／return 鏈：`086C`
   先以 `AH=48h` 配得 `1C43`，再以 `AH=4Bh AL=03h` 將 `PSOUND.COL` 載入 `1C43:0000`，縮放後寫入
   `0C41:621A = 0BF9:1C43`。這是 confirmed 的 overlay 載入，不再只是強推論。
-- 同一輪確認原程式經 `AH=52h` 取得 MCB 位置並由 `03D9:005A`–`007D` 直接寫 MCB 欄位；第 833,824
-  指令的 `AH=49h ES=2C9A` 在現行 dosgolem 回 `AX=9`，隨後 `syncMCB()` 將客體鏈改回舊 arena 的全空閒
-  形狀，第 834,319 指令遂再把 `1C43` 配給 overlay。這是 confirmed 的客體 MCB 鏈與內部 arena 不同步，
-  以及第 1,114,003 指令清零／第 1,230,847 指令舊遠指標跳轉的必要前因；真 DOS 對該請求的精確規則與
-  完整後續控制流仍是未知。
+- 目標 013 已確認 `AH=52h` 回傳的 list-of-lists 經 `0419:0009` 讀取 `ES:[BX-2]`，逐格走訪至
+  `1C42`；`03D9:006D`、`0071`、`0079` 直接寫入其 type、size、owner，並以 `ES+1` 回傳 `1C43`。
+  因而這是 confirmed 的活躍（active）客體 MCB 鏈，不是私有暫存。兩個 `03D9:0312` 的 `AH=49h`
+  wrapper 呼叫（`ES=2C9A`、`2C5D`）都在現行 dosgolem 得 `AX=9` 後轉為 `FFFF`，但 caller 隨即覆寫
+  回傳暫存器；不可宣稱遊戲要求該服務成功。確認的通用缺口仍是失敗服務後 `syncMCB()` 以過期 arena
+  抹除已驗證鏈，令第 834,319 指令的 `AH=48h` 重用 `1C43`。真 DOS 對兩個請求的精確規則與完整後續
+  控制流仍是未知。
 - [DRAFT 規格 003](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md) 僅提出通用的有效 MCB
   鏈驗證、服務邊界協調、失敗即關閉與 snapshot 一致性契約，未修改 dosgolem 或原版資料。
 
@@ -58,6 +60,7 @@
 ## 下一閘門
 
 Issue #23 已完成 READY profile 的實作與同狀態收據。#24 已完成首次控制轉移、清零引數、overlay 載入者、
-客體 MCB 寫入與過期 arena 重發佈的收據；下一個最小前沿是審查 [DRAFT 規格 003](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)
-的有效鏈匯入、所有權、失敗語意與 snapshot 契約，證據足夠才建立 READY，絕不直接修正。#5 與 #8 在 #24
-之前維持阻塞。Windows NE 清冊（#19）只保留為歷史輸入證據。Issue #10 與 #15 仍需在真實證據與原型具備後由使用者決定。
+客體活躍 MCB 鏈、過期 arena 重發佈，以及 DRAFT 003 的 caller／consumer 審查；DRAFT 仍未 READY。
+下一個最小前沿是在不針對本遊戲特判的前提下，完成有效鏈匯入、所有權、多行程、失敗語意與 state
+snapshot 契約的證據審查；證據足夠才建立 READY，絕不直接修正。#5 與 #8 在 #24 之前維持阻塞。Windows
+NE 清冊（#19）只保留為歷史輸入證據。Issue #10 與 #15 仍需在真實證據與原型具備後由使用者決定。

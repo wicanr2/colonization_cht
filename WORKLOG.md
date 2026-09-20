@@ -156,3 +156,16 @@
   記入 `RESEARCH-LOG.md`，未把錯誤樣本納入證據。
 - Docker：研究與 IDA 均以無網路、UID/GID 1000:1000、資源上限的 `docker run --rm` 執行；已完成文件驗證、
   Issue #24 回填與 Git 推送。收尾檢查確認無本專案持續容器、root 擁有檔案或誤建 `.md` 目錄。
+
+## 2026-09-21：完成目標 013 的 MCB DRAFT caller／鏈審查
+
+- 以 `probe -sbpro` 的正式 `OPENING.EXE` 冷啟動確認 `03D9:0312` 的兩個 `AH=49h` wrapper 呼叫分別
+  使用 `ES=2C9A`、`2C5D`。現行 dosgolem 的 `AX=9` 被 wrapper 轉為 `FFFF`，但兩個 caller 都立即
+  覆寫該返回值；因此沒有把未證實的真 DOS 成功語意寫入 DRAFT。
+- 以 IDA Pro 9.4 runtime raw-binary 與動態 trace 確認 `AH=52h → ES:[BX-2]` 的活躍 MCB 走訪；
+  `03D9:006D`／`0071`／`0079` 對 `1C42` 寫入 type／size／owner，並回傳 `1C43`。DRAFT 003 改為
+  明確要求：即使無關的服務失敗，也不能讓過期 arena 覆寫已接受的有效鏈。
+- DRAFT 003 維持 DRAFT、未建立 dosgolem 程式碼或遊戲位址特例。尚缺通用鏈驗證、所有權／多行程、
+  失敗回傳、state round-trip 與同狀態冷啟動驗收。
+- Docker：所有 dosgolem／IDA 作業都用 `--rm --network none`、UID/GID 1000:1000 與資源上限；收尾另檢查
+  容器與檔案擁有權，沒有保留本專案容器或 root-owned 產物。

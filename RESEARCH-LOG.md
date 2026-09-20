@@ -493,3 +493,37 @@ IDA 使用 `ida-pro-9.4-idapython:locked-v1`、16 位元 raw-binary 匯出；原
 [DRAFT 規格 003](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)，只提出通用的鏈驗證與
 重新協調契約。它不授權實作，也不宣稱真 DOS 的 `AH=49h` parity、首畫面、主程式轉交、音效、
 中文化輸出或可玩性。
+
+## 2026-09-21：目標 013 的 MCB DRAFT caller 與活躍鏈審查
+
+固定輸入、dosgolem commit、冷啟動方式與權利邊界同目標 012。新的動態收據
+`probe-opening-03d9-release-lifecycle-20260921.txt`（SHA-256
+`e6277db64a272db0a944755a2695bf166d742ce3c880a52e3245480f5ae57e50`）在第 810,000 至
+835,000 指令觀測所有 `03D9:0312` 進入；其中兩個 callsite 與返回邊如下。
+
+| 推論等級 | 步數／原始定位 | 觀測 |
+| --- | --- | --- |
+| confirmed | 833,812；`0B35:0348 → 03D9:0312` | stack far pointer 令 `les ax,[bp+6]` 取得 `ES=2C9A`；現行 `AH=49h` 回 `AX=0009`，wrapper 轉為 `FFFF`。返回後先無條件跳到 `0B35:034E`，再以 `mov ax,[bx]` 覆寫返回值。 |
+| confirmed | 833,861；`08D2:0207 → 03D9:0312` | stack far pointer 令 `ES=2C5D`；同樣 `AX=0009 → FFFF`。返回後 `08D2:0207` 以 `mov ax,[bp-0Eh]`、`mov dx,[bp-0Ch]` 覆寫，才比較自己的 pair。 |
+| confirmed | `03D9:0340`–`035F` | IDA raw bytes 顯示 `AH=49h` 後依序為 `rcr al,1`、`cbw`、`mov al,ah`、儲存 local、最後回傳 local；這解釋本路徑的 `FFFF`，但不推論真 DOS 對任一請求的結果。 |
+| unknown | 真 DOS 的 `AH=49h ES=2C9A`／`2C5D` | 本輪只有 dosgolem 正式冷啟動收據；兩個 caller 忽略 wrapper 的 register return，不能據此宣稱原版要求成功釋放。 |
+
+`AH=52h` 與直接寫入的交叉收據是 `probe-opening-ah52-mcb-20260921.txt`（SHA-256
+`562d798ad3919c8cca53173efed28671106a948cb738c5e595e0c7e0d00ac6ea`）及 trace（SHA-256
+`356a759a3f2e5ec16efa51b5efc614f8c44d45e06819d090a5f048cea41f04de`）。第 816,494 指令的
+`AH=52h` 回 `ES:BX=0070:0010`；List-of-Lists `0070:000E` 在直接寫入前後一致。IDA Pro 9.4
+runtime raw 匯出 `ida-opening-0419-ah52-runtime-20260921.json`（SHA-256
+`1073e393b37ad9b23c5fd31a1d189d6d1446d6b6d9c33a6fb0ee0f64a3a8dd2d`）顯示
+`0419:0005`–`0009` 呼叫 `AH=52h` 後讀 `ES:[BX-2]`，再以 owner、type、size 和下一段公式走訪。
+
+| 推論等級 | 原始定位／步數 | 觀測 |
+| --- | --- | --- |
+| confirmed | `03D9:006D`、`0071`、`0079`；816,657–816,661 | runtime raw 依序以 `mov byte ptr es:[di],4Dh`、`mov es:[di+3],dx`、`mov es:[di+1],ax` 改寫 `1C42` 的 type、size、owner；動態值為 `ES=1C42`、`DI=0`、`DX=0FA1`、`AX=0001`。 |
+| confirmed | `03D9:007D`–`0083` | 將 `ES+1` 回傳為資料段 `1C43`。 |
+| confirmed | 816,674；`0419:005A` | 直接寫入後立刻呼叫前述鏈走訪 helper，與 `AH=52h` 的 active chain 相連。 |
+| confirmed | `1C42` 監看 | type、size、owner 後續填入 `$sys$` 名稱。監看 IP 為寫入後的下一取樣點，故以 IDA raw bytes 決定實際 store 指令，不能倒置兩者。 |
+
+結論：`1C42` 是活躍（active）MCB 鏈的 confirmed 成員，並非私有暫存；現行 dosgolem 在無關的
+`AH=49h` 失敗後以過期 arena 重發佈該鏈，才讓下一次 `AH=48h` 重用 `1C43`。DRAFT 規格 003 因而
+保留並修訂為「先接受已驗證鏈，且服務失敗不可覆寫已接受鏈」；它仍未具備完整驗證、owner／多行程、
+失敗回傳、state round-trip 與同狀態冷啟動驗收，狀態保持 DRAFT，未實作任何 dosgolem 或遊戲特例。
