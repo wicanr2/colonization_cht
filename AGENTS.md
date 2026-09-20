@@ -78,6 +78,7 @@ RE 證據 → DRAFT 規格 → 證據審查 → READY 規格
 | `WORKLIST.md` | 由 `tools/worklist.py render` 從 JSON 產生的可讀計畫；不得手動修改。 |
 | `WORKLOG.md` | 依日期追加的工作歷程、驗證摘要與 Docker 清理狀態。 |
 | `RESEARCH-LOG.md` | 原始輸入雜湊、工具版本、地址空間、證據與推論等級。 |
+| `docs/goals/` | 有範圍、依賴、證據與退出條件的輪次目標；不取代 Issue 工作項目或規格。 |
 | `docs/spec/` | DRAFT／READY／CONFORMED 規格。 |
 | `text/` | 以可追溯來源鍵保存的原文、譯文、狀態與術語參照。 |
 | `font/` | 字型來源記錄、授權資料、子集與可重現烘製腳本。 |

@@ -9,6 +9,7 @@
 - GitHub 儲存庫 `wicanr2/colonization_cht` 是私有儲存庫。
 - 本機兩份原始封存檔僅能唯讀使用，已由 `.gitignore` 排除，尚未盤點或解包。
 - 未完成項的唯一機器可讀來源是 `docs/worklist.json`；每筆都有 GitHub Issue。
+- `README.md` 是專案首頁；第一輪目標見 `docs/goals/001-foundation-and-evidence.md`。
 
 ## 尚未確認
 

@@ -17,6 +17,7 @@
     {"id":"static-overlay-implementation","issue":13,"state":"planned","title":"實作並驗證靜態文字圖像中文覆蓋","depends_on":["static-overlay-draft","l10n-decision"],"acceptance":"每個項目有圖像指紋、反向條件與玩家路徑收據。","verify":{"kind":"manual","note":"等待 DRAFT／字型／範圍決定。"}},
     {"id":"verification-matrix","issue":14,"state":"planned","title":"建立中文化驗證矩陣與正常玩家路徑收據","depends_on":["dynamic-overlay-implementation","static-overlay-implementation"],"acceptance":"動態與靜態路徑都有原版、中文、英文與反向條件收據。","verify":{"kind":"manual","note":"等待兩條正式覆蓋路徑。"}},
     {"id":"release-boundary","issue":15,"state":"blocked","title":"定義封裝、授權與發布界線","depends_on":["verification-matrix"],"acceptance":"使用者確認授權與發布方式，且可散布包不含原版素材。","verify":{"kind":"manual","note":"此項必須由使用者決定對外發布方式。"}},
-    {"id":"worklist-tooling","issue":16,"state":"completed","title":"建立機器可讀工作清單與驗證入口","depends_on":[],"acceptance":"JSON、render 與 verify 可在 Docker 內重跑，且每筆都連到 Issue。","verify":{"kind":"absent","paths":["tools/worklist.py"],"pattern":"def load\\(","note":"若工作清單載入器消失，已完成標記必須重新檢查。"}}
+    {"id":"worklist-tooling","issue":16,"state":"completed","title":"建立機器可讀工作清單與驗證入口","depends_on":[],"acceptance":"JSON、render 與 verify 可在 Docker 內重跑，且每筆都連到 Issue。","verify":{"kind":"absent","paths":["tools/worklist.py"],"pattern":"def load\\(","note":"若工作清單載入器消失，已完成標記必須重新檢查。"}},
+    {"id":"project-readme-and-goal","issue":17,"state":"completed","title":"建立專案 README 與第一輪目標文件","depends_on":[],"acceptance":"README 與目標 001 說明範圍、邊界、Issue 與可驗證退出條件。","verify":{"kind":"all_present","checks":[{"path":"README.md","pattern":"docs/goals/001-foundation-and-evidence\\.md"},{"path":"docs/goals/001-foundation-and-evidence.md","pattern":"# 目標 001：證據與基線"}],"note":"README 或目標 001 缺失時，已完成標記必須重新檢查。"}}
   ]
 }
