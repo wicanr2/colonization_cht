@@ -50,7 +50,7 @@
 - [x] 固定 `OPENING.EXE` 的直接 MCB 寫入後鏈，已以 headers 與 `AH=52h` 起點交叉驗證。
 - [x] 現有 arena、EXEC／PSP 與 state 模型的可表示範圍與缺口已列出，未以推測補洞。
 - [x] DRAFT 003 已修訂為較精確的 DRAFT，保留一個清楚的使用者決策前沿；未實作。
-- [ ] `CONTEXT.md`、`docs/worklist.json`、`WORKLIST.md`、`README.md`、`WORKLOG.md`、`RESEARCH-LOG.md`、
+- [x] `CONTEXT.md`、`docs/worklist.json`、`WORKLIST.md`、`README.md`、`WORKLOG.md`、`RESEARCH-LOG.md`、
   Issue #24 與 Docker 清理狀態已同步，並完成 Git 提交與推送。
 
 ## 審核結論

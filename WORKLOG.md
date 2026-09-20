@@ -179,5 +179,5 @@
   會以全域根 PSP／空白 name 重發佈；既有 child EXEC 與測試不等於通用 owner 匯入已安全。
 - DRAFT 規格 003 維持 DRAFT，加入完整收據、公開 DOS 服務前置條件與兩個待選範圍。使用者須選擇狹窄
   的單一 PSP canonical 匯入或先擴張為通用多行程匯入；未選定前沒有程式碼修改。
-- Docker：快照與測試均在無網路、UID/GID 1000:1000、資源受限的 `docker run --rm` 完成；收尾會同步
-  檢查容器與檔案擁有權。
+- Docker：快照與測試均在無網路、UID/GID 1000:1000、資源受限的 `docker run --rm` 完成；收尾已確認
+  沒有專案相關容器、root-owned 檔案或誤建 `.md` 目錄。
