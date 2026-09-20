@@ -55,5 +55,5 @@
 - [x] 實際 entrypoint 與寫入 site 有 IDA Pro 9.4 raw-binary 匯出，地址空間與輸入雜湊明確。
 - [x] 寫入資料來源與清零前後描述元／指標表時序已分類：`AH=4Bh AL=03h` overlay 載入、客體 MCB 直接寫入、現行 `AH=49h` 回 `AX=9` 與過期 arena 重發佈均為 confirmed；真 DOS 的精確 `AH=49h` 規則與完整後續控制流仍為未知。
 - [x] 已建立 [DRAFT 規格 003](../spec/003-colonization-mcb-arena-reconciliation-draft.md)，未實作。
-- [ ] `CONTEXT.md`、`docs/worklist.json`、`WORKLIST.md`、`README.md`、`WORKLOG.md`、Issue #24 與 Docker
+- [x] `CONTEXT.md`、`docs/worklist.json`、`WORKLIST.md`、`README.md`、`WORKLOG.md`、Issue #24 與 Docker
   清理狀態已同步，並完成 Git 提交與推送。
