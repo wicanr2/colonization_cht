@@ -31,10 +31,12 @@
 它只處理已證實的 `0x220` primary OPL 偵測、`0x222` delay 與 `0x226 → 0x22E → 0x22A=0xAA` DSP reset
 handshake，不宣稱完整音效或 OPL3 parity。目前依 [目標 009](docs/goals/009-sbpro-profile-and-cold-boot.md)
 在隔離的 dosgolem 副本完成可選 profile；正式路徑已跨過 DSP reset，並載入 `MPSLOGO.SS`、
-`MPSNAME.SS`，但尚未有可見畫面或主程式轉交。目標 010 已確認 `1C43:FA57` 是先跳入
-`1C43:0BF9` 的零化記憶體後的順向落入（fall-through）；[Issue #24](https://github.com/wicanr2/colonization_cht/issues/24)
-正追查清零參數與舊遠指標（far pointer）的來源，而不擴張音效模型。範圍、固定輸入與證據界線見
-[目標 010](docs/goals/010-psound-out-of-range-control-flow.md)。此前沒有可下載中文化程式或任何完成度宣稱。先前 Windows 3.x NE
+`MPSNAME.SS`，但尚未有可見畫面或主程式轉交。目標 011 已證實原程式建立
+`00C8 × 0140 = FA00` 位元組描述元並清零 `1C43:0000`；`086C` 稍後寫入的程式碼與遠指標表
+仍指向同一段。兩者目前只證實共用生命週期，尚未證實缺少的機器契約；
+[Issue #24](https://github.com/wicanr2/colonization_cht/issues/24) 會繼續追查覆蓋層／載入生命週期，
+未取得可泛化證據前，不會實作猜測性的 DOS、滑鼠或音訊服務。範圍、固定輸入與證據界線見
+[目標 011](docs/goals/011-psound-clear-argument-provenance.md)。此前沒有可下載中文化程式或任何完成度宣稱。先前 Windows 3.x NE
 輸入只保留為歷史研究證據，不是目前實作目標。
 
 第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
@@ -70,6 +72,7 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第八輪目標](docs/goals/008-psound-ready-evidence.md)
 - [第九輪目標](docs/goals/009-sbpro-profile-and-cold-boot.md)
 - [第十輪目標](docs/goals/010-psound-out-of-range-control-flow.md)
+- [第十一輪目標](docs/goals/011-psound-clear-argument-provenance.md)
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [工作歷程](WORKLOG.md)
