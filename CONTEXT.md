@@ -24,9 +24,9 @@
   1 億指令、進入 mode 13h／PIT／滑鼠／overlay 與資料讀取；最新冷啟動另記錄一個未實作的
   `int 33h AX=0014`，尚未能與 blocker 建立因果。仍還沒有第一個
   非零畫面或 `VICEROY.EXE` 轉交收據。
-- 正式路徑唯一已記錄的 `EXEC` 是 `PSOUND.COL`（不是 `VICEROY.EXE`）。從第 1,000,000 指令快照
-  到第 100,000,000 指令，A0000 維持全零、沒有視訊寫入、沒有字型服務呼叫，且程式停留在
-  `PSOUND.COL` 的 `1C43:0087`；這是 confirmed blocker 收據，不是可見畫面。
+- 正式路徑唯一已記錄的 `EXEC` 是 `PSOUND.COL`（不是 `VICEROY.EXE`）。未啟用 `-sbpro` 的第
+  1,000,000 指令快照延續至第 100,000,000 指令時，A0000 維持全零、沒有視訊寫入、沒有字型服務呼叫，
+  且程式停留在 `PSOUND.COL` 的 `1C43:0087`；這是預設 profile 的 confirmed 受阻點收據，不是可見畫面。
 - `PSOUND.COL` 的 `0x220` status 讀取是已證實的 `0x00 → 0xC0` AdLib 偵測條件，`0x222` 在此版本
   僅作未消費的 delay；此外它以 `0x226=1 → 0` reset、`0x22E` status 和 `0x22A=0xAA` 判定 DSP 成功。
   最小 READY profile 已以 `-sbpro` 實作於隔離副本：固定 state 的第一組 reset 在第 1,004,428 指令
