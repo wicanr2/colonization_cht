@@ -527,3 +527,40 @@ runtime raw 匯出 `ida-opening-0419-ah52-runtime-20260921.json`（SHA-256
 `AH=49h` 失敗後以過期 arena 重發佈該鏈，才讓下一次 `AH=48h` 重用 `1C43`。DRAFT 規格 003 因而
 保留並修訂為「先接受已驗證鏈，且服務失敗不可覆寫已接受鏈」；它仍未具備完整驗證、owner／多行程、
 失敗回傳、state round-trip 與同狀態冷啟動驗收，狀態保持 DRAFT，未實作任何 dosgolem 或遊戲特例。
+
+## 2026-09-21：目標 014 的 MCB 完整快照與可表示性審核
+
+固定輸入仍是 `OPENING.EXE` SHA-256
+`3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`、`PSOUND.COL` SHA-256
+`8d5069fab621abfa5a4df4071612aa0d9f159c0907e51f0b1a193b73fa8b5c87`，執行器是隔離副本
+`workplace/dosgolem` commit `1b0efdf98ac3ab85c90cb80c3e489e935fb45665`。一次性、無網路、UID/GID
+1000:1000 的 Docker `probe -sbpro` 在第 816,800 指令（客體直接寫 MCB 後）與第 833,760 指令
+（下一次 `AH=49h` 前）各擷取 `00000h`–`9FFFFh` 的完整記憶體。過程報告
+`probe-opening-mcb-full-snapshots-20260921.txt` SHA-256 為
+`c86ab527bd9bad511fd0df18e87a8b2c3d256a63758e039efebd39da70972531`；兩個 655,360-byte 快照分別為
+`dca049b8d138b930d4e68f45b9c411efdc4d2a22a5092dfb530a9ab1d604ff2a` 與
+`f284882deffd50af9a1294b75b12287100bb7a9f771efed7a0c4101ec7b8fa37`。離線 MCB 解析收據
+`opening-mcb-chain-audit-20260921.json` SHA-256 為
+`03d192246084c4564e1d247fb5b025596bc5cfc4f2fd406f746d4944ccd37c3f`。收據皆留在 gitignore 的
+`workplace/reports/`，不含原版檔案。
+
+| 推論等級 | 時點 | 從 `0070:000E` 讀出的鏈 | 觀測 |
+|---|---|---|---|
+| confirmed | 816,800 | `00FF` M/owner `0100`/size `1B42`/8 空白 → `1C42` M/`0100`/`0FA1`/`$sys$` → `2BE4` Z/`0000`/`741A`/全零 | 每步依 `next=segment+1+size` 前進，最後抵達 `9FFF`。 |
+| confirmed | 833,760 | 前兩格相同，接 `2BE4` M/`0100`/`0077`/`FONTINTR` → `2C5C` M/`0100`/`003C`/`$sys$` → `2C99` M/`0100`/`0001`/`$pack$` → `2C9B` Z/`0000`/`7363`/全零 | 同樣連續並終止於 `9FFF`；客體寫入的 name 不是可丟棄欄位。 |
+
+這只確認固定冷啟動可被「根 PSP `0100` 的單一 owner、free owner `0000`、連續 M/Z 鏈」嚴格表示，
+不確認非根 owner、child EXEC、TSR 或多行程鏈。固定 dosgolem commit 的 `memBlock`／state block 只含
+`seg`、`size`、`free`，`syncMCB()` 又把已配置 owner 重寫成全域根 PSP，故目前狀態會遺失 owner/name。
+雖然 `AH=4Bh AL=00h` 已有 child PSP／程序堆疊路徑，既有 allocator、MCB walk、state 與 EXEC 測試也
+通過，但它們不驗證客體鏈反向匯入，更不是此遊戲的 parity 收據。
+
+以 Microsoft 的 [MS-DOS 3.10 Programmer's Reference](https://ftpmirror.your.org/pub/misc/bitsavers/pdf/microsoft/msdos_3.10/8411-310-02_MSDOS_3.10_Programmers_Reference_Manual_1984.pdf)
+交叉查核，`AH=49h` 以 `ES` 指向要釋放的區塊，失敗回傳 carry 與 `AX=7`（損壞 MCB）或 `AX=9`
+（不正確區段／未配置）；[Undocumented DOS](https://www.bitsavers.org/pdf/microsoft/msdos_4.0/Schulman_-_Undocumented_DOS_1990.pdf)
+亦支持 `AH=52h` 後由 `ES:[BX-2]` 取得首 MCB。這些公開服務契約不能決定手動建立後的
+`ES=2C9A`／`2C5D` 在原始目標 DOS 版本會成功或失敗，該題仍標記 unknown。
+
+結論：DRAFT 規格 003 現可清楚提出兩個互斥範圍：僅接受固定樣本所符合、保存 owner/name 的單一 PSP
+canonical 匯入，或先研究通用多行程 owner 匯入。這是會改變資料模型、state migration、回歸範圍與
+READY 時程的架構決策；本輪不自行選擇，未改任何 dosgolem 或原版資料。

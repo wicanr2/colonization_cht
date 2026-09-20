@@ -108,8 +108,8 @@ owner 由 `01` 變 `00`、size `0FA1h` 回 `83BCh`、名稱清空。接著第 83
 2. 鏈定位：實作不得硬編 Colonization 的段位址。必須由 dosgolem 已公開給客體的 list-of-lists／
    `AH=52h` 路徑取得鏈起點，並使用鏈上的下一段公式逐格前進。
 3. 可接受鏈：只有在簽章、尺寸、單調前進、無迴圈、可配置範圍、終止記錄與 MCB 連續性均通過
-   驗證時，才可把客體鏈轉成新的內部配置狀態。轉入時必須保留每格的原始段、owner、size 與
-   free/allocated 判定，不能只把 `1C43` 特判成已配置。
+   驗證時，才可把客體鏈轉成新的內部配置狀態。轉入時必須保留每格的原始段、owner、size、八位元組
+   program name 與 free/allocated 判定，不能只把 `1C43` 特判成已配置。
 4. 協調原子性：接受有效客體鏈後，該次 `AH=48h`／`49h`／`4Ah` 必須以協調後狀態運作，並只在
    服務完成後發布與新狀態相符的 MCB 鏈。失敗服務不得把**已接受**的客體鏈悄悄重置為另一張
    地圖；未驗證鏈則依失敗即關閉規則保留 bytes 與診斷資訊。
@@ -138,3 +138,64 @@ owner 由 `01` 變 `00`、size `0FA1h` 回 `83BCh`、名稱清空。接著第 83
    的客體鏈，也不得據此推論原版要求該失敗請求成功。
 
 READY 審查前，Issue #24 維持進行中；動態文字與靜態圖像工作仍分別由 #5、#8 阻塞。
+
+## 目標 014：可表示性與 READY 範圍審核
+
+本節只記錄審核結果，**不**選定實作架構、**不**把本草案升為 READY，也不授權修改 dosgolem。
+所有下列原始執行收據仍以固定 `OPENING.EXE`、`probe -sbpro`、隔離副本 commit
+`1b0efdf98ac3ab85c90cb80c3e489e935fb45665` 為輸入；快照由一次性、無網路、UID/GID 1000:1000
+的 Docker 容器寫入 gitignore 的 `workplace/reports/`。
+
+### 固定路徑的完整 MCB 快照
+
+`probe-opening-mcb-full-snapshots-20260921.txt`（SHA-256
+`c86ab527bd9bad511fd0df18e87a8b2c3d256a63758e039efebd39da70972531`）在客體直接建立 MCB 後的
+第 816,800 指令，以及下一個 `AH=49h` 前的第 833,760 指令，各擷取線性 `00000h`–`9FFFFh`。
+兩個 655,360-byte 快照 SHA-256 分別為 `dca049b8d138b930d4e68f45b9c411efdc4d2a22a5092dfb530a9ab1d604ff2a`
+與 `f284882deffd50af9a1294b75b12287100bb7a9f771efed7a0c4101ec7b8fa37`。離線解析收據
+`opening-mcb-chain-audit-20260921.json` 的 SHA-256 為
+`03d192246084c4564e1d247fb5b025596bc5cfc4f2fd406f746d4944ccd37c3f`。
+
+兩個時點皆從 list-of-lists `0070:000E` 讀到首格 `00FF`，每格均符合
+`next = segment + 1 + size`，且終止於 `9FFF`；此段的 `M`／`Z`、owner、size 與 name 如下。這是
+此固定冷啟動的 **confirmed** 觀測，不是任意 DOS 程式都會符合的前提。
+
+| 時點 | MCB（type，owner，size，name） | 結論 |
+|---|---|---|
+| 第 816,800 指令 | `00FF`（M，`0100`，`1B42`，8 個空白）→ `1C42`（M，`0100`，`0FA1`，`$sys$`）→ `2BE4`（Z，`0000`，`741A`，全零） | 連續且以 `9FFF` 結束。 |
+| 第 833,760 指令 | `00FF`（M，`0100`，`1B42`，8 個空白）→ `1C42`（M，`0100`，`0FA1`，`$sys$`）→ `2BE4`（M，`0100`，`0077`，`FONTINTR`）→ `2C5C`（M，`0100`，`003C`，`$sys$`）→ `2C99`（M，`0100`，`0001`，`$pack$`）→ `2C9B`（Z，`0000`，`7363`，全零） | 同樣連續且以 `9FFF` 結束；客體 name 是可見鏈的一部分，不能由重發佈清空。 |
+
+此固定樣本的配置 owner 都是目前根 PSP `0100`，自由區 owner 是 `0000`；它**只**證實一個可嚴格
+表示的單一 PSP 例子。它不證實任意 owner、常駐程式（TSR）或多行程鏈可由目前模型表示。
+
+### 目前模型與既有契約的界限
+
+固定 commit 的 `memBlock` 與 SaveState `blockState` 目前只保存 `seg`、`size`、`free`，
+`syncMCB()` 會把已配置區的 owner 一律寫成全域 `machine.PSPSeg`，並未保存客體的 program name。
+因此即使鏈的區段與大小能讀回，現行狀態格式仍會遺失 owner/name；任何可接受的匯入設計都必須把
+這些欄位與 state round-trip 一併納入，而不能只修當次 `AH=48h`／`49h`／`4Ah`。
+
+同一份程式已有 `AH=4Bh AL=00h` 的 child PSP／程序堆疊（process stack）路徑，但 arena 發布仍以
+全域根 PSP 為 owner。既有單元測試已通過 allocator、MCB walk、free/coalesce、state root、EXEC
+回收與 overlay load 的內部契約；它們不含客體反向匯入，也不是這個 `OPENING.EXE` 的原版同狀態
+parity 收據。故不能用既有 EXEC 測試推論「任意 owner 的 MCB 匯入」已安全。
+
+公開 DOS API 文件可作服務前置條件的交叉參考：Microsoft 的 MS-DOS 3.10 Programmer's Reference
+記錄 `AH=49h` 以 `ES` 傳入待釋放區塊，失敗時設定 carry，並列出 `AX=7`（損壞 MCB）與
+`AX=9`（不正確區段／未配置）。[原始手冊 PDF](https://ftpmirror.your.org/pub/misc/bitsavers/pdf/microsoft/msdos_3.10/8411-310-02_MSDOS_3.10_Programmers_Reference_Manual_1984.pdf)
+與 [Undocumented DOS](https://www.bitsavers.org/pdf/microsoft/msdos_4.0/Schulman_-_Undocumented_DOS_1990.pdf)
+對 `AH=52h` 的 `ES:[BX-2]` 首 MCB 定位相互支持。這些公開契約**不能**決定本遊戲手動建立鏈後
+兩個 `AH=49h` 請求在目標 DOS 版本的實際結果；該項仍為 unknown。
+
+### 待選定的 READY 邊界
+
+本草案在下列架構範圍中尚未作選擇，故尚不能寫出唯一的資料模型、拒絕條件與服務回傳契約。
+
+| 選項 | READY 候選邊界 | 保障與代價 |
+|---|---|---|
+| A：單一 PSP 的 canonical 匯入 | 僅在目前 PSP 為根 `0100`、無 child process、首 MCB 為 `00FF`、owner 僅為 `0000`／`0100`、鏈連續並於 `9FFF` 終止時接受；保存 owner/name，其他鏈失敗即關閉且不覆寫客體 bytes。 | 已涵蓋本節固定樣本；必須完成資料模型、state migration、`48h`／`49h`／`4Ah` 失敗語意與同狀態驗收，但不宣稱通用多行程支援。 |
+| B：通用多行程匯入 | 允許非根 PSP owner 與 child／EXEC 狀態下的鏈匯入，並維護 parent/child 所有權與持久化。 | 功能範圍較廣，但需先補齊程序生命週期、非目前 owner、TSR 與回收語意的獨立證據與測試；本輪證據不足以直接進 READY。 |
+
+不論選 A 或 B，任何不符合所選邊界的鏈都必須在 `syncMCB()` 前被偵測、保留原始 bytes 與可診斷快照，
+並以有明確依據的服務失敗結束；不得重寫為舊 arena。選 A 後才能形成狹窄且可驗證的 READY 規格；
+選 B 則先開啟其程序／owner 證據工作，維持本草案 DRAFT。此決策是產品與架構範圍選擇，等待使用者確認。

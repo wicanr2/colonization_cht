@@ -50,6 +50,11 @@
   控制流仍是未知。
 - [DRAFT 規格 003](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md) 僅提出通用的有效 MCB
   鏈驗證、服務邊界協調、失敗即關閉與 snapshot 一致性契約，未修改 dosgolem 或原版資料。
+- 目標 014 的完整記憶體快照已確認固定 `OPENING.EXE` 路徑的 MCB 鏈在直接建立後與下一個
+  `AH=49h` 前都連續終止於 `9FFF`；配置 owner 均是根 PSP `0100`，而 `$sys$`、`FONTINTR`、`$pack$`
+  等八位元組 name 必須保留。現行 dosgolem 的 arena／state 只保存區段、大小與 free，重發佈會遺失
+  owner/name；它雖已有 child EXEC 路徑，卻不能據此推論通用 owner 匯入安全。使用者尚未選擇狹窄的
+  單一 PSP canonical 匯入或通用多行程匯入，故規格 003 保持 DRAFT、沒有任何實作。
 
 ## 尚未確認
 
@@ -60,7 +65,8 @@
 ## 下一閘門
 
 Issue #23 已完成 READY profile 的實作與同狀態收據。#24 已完成首次控制轉移、清零引數、overlay 載入者、
-客體活躍 MCB 鏈、過期 arena 重發佈，以及 DRAFT 003 的 caller／consumer 審查；DRAFT 仍未 READY。
-下一個最小前沿是在不針對本遊戲特判的前提下，完成有效鏈匯入、所有權、多行程、失敗語意與 state
-snapshot 契約的證據審查；證據足夠才建立 READY，絕不直接修正。#5 與 #8 在 #24 之前維持阻塞。Windows
-NE 清冊（#19）只保留為歷史輸入證據。Issue #10 與 #15 仍需在真實證據與原型具備後由使用者決定。
+客體活躍 MCB 鏈、過期 arena 重發佈，以及 DRAFT 003 的 caller／consumer／可表示性審查；DRAFT 仍未 READY。
+下一個最小前沿是使用者選定「單一 PSP canonical 匯入」或「通用多行程匯入」的架構邊界。前者才可據固定
+樣本補完狹窄的驗證、失敗語意、state snapshot 與同狀態驗收；後者需先另做程序／owner 證據。兩者都絕不
+直接修正。#5 與 #8 在 #24 之前維持阻塞。Windows NE 清冊（#19）只保留為歷史輸入證據。Issue #10 與 #15
+仍需在真實證據與原型具備後由使用者決定。
