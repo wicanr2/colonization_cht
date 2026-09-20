@@ -30,7 +30,7 @@
 | #21 | completed | [建立 DOS OPENING.EXE 的第一個可見畫面或轉交收據](https://github.com/wicanr2/colonization_cht/issues/21) | `dos-input-cold-boot-probe` | 正式 OPENING.EXE 冷啟動有可重播的非零畫面、可觀測文字輸出、經確認的 VICEROY.EXE 轉交，或最小具體 blocker。 |
 | #22 | completed | [為 Colonization 的 0x220 OPL 相容層建立 DRAFT／READY 規格](https://github.com/wicanr2/colonization_cht/issues/22) | `dos-first-visible-checkpoint` | 以固定埠序列與公開硬體契約完成最小 DRAFT、證據審查與 READY 規格；不實作、不做逐週期音訊考古。 |
 | #23 | completed | [依 READY 規格驗證 Colonization 的 OPL 相容層與首畫面](https://github.com/wicanr2/colonization_cht/issues/23) | `colonization-opl-compatibility-spec` | 依 READY 規格最小實作後，正式 OPENING.EXE 冷啟動取得可見／轉交收據，或以新證據縮小 blocker。 |
-| #24 | planned | [釐清 PSOUND 後續控制流進入映像外位址的 blocker](https://github.com/wicanr2/colonization_cht/issues/24) | `colonization-opl-compatibility-checkpoint` | 正式冷啟動定位第一個進入映像外 offset 的控制轉移／堆疊邊，並以證據判定最小缺口；若足夠只建立 DRAFT。 |
+| #24 | in_progress | [釐清 PSOUND 後續控制流進入映像外位址的受阻點（blocker）](https://github.com/wicanr2/colonization_cht/issues/24) | `colonization-opl-compatibility-checkpoint` | 正式冷啟動定位第一個進入映像外 offset 的控制轉移／堆疊邊，並以證據判定最小缺口；若足夠只建立 DRAFT。 |
 
 ## 驗證
 

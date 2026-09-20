@@ -391,3 +391,32 @@ SHA-256 `3f21c0edf9f365951ec1b28ca700402e8a0b40b6be9058a13fc8ea8a868814e1` 額�
 以及根因仍為 **unknown**。因此建立 [Issue #24](https://github.com/wicanr2/colonization_cht/issues/24)
 只定位該 transfer／堆疊邊，證據足夠時才建立新的 DRAFT；不以此收據宣稱首畫面、主程式轉交、音效、
 中文化輸出或可玩性。
+
+## 2026-09-20：目標 010 的 PSOUND 清零後遠跳轉（far jump）證據
+
+本節固定輸入仍為 `OPENING.EXE` SHA-256
+`3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39` 與 `PSOUND.COL` SHA-256
+`8d5069fab621abfa5a4df4071612aa0d9f159c0907e51f0b1a193b73fa8b5c87`，執行器為隔離副本
+`workplace/dosgolem` commit `1b0efdf98ac3ab85c90cb80c3e489e935fb45665`，只以 `probe -sbpro` 從
+`OPENING.EXE` 冷啟動。所有收據都由 UID/GID 1000:1000 的一次性、無網路 Docker 容器產生，原版目錄
+唯讀掛載；收據留在 gitignore 的 `workplace/reports/`，不含原版資料。
+
+| 原始定位／執行期 | 觀測 | 等級與證據 |
+|---|---|---|
+| `086C:005D`、第 `834,342` 指令 | 寫入線性 `1D000`–`1D200` 的非零 bytes，涵蓋 `1C43:0BF9`（線性 `1D029`）。 | confirmed；dosgolem 寫入監看。 |
+| `03B1:00A6`、第 `1,114,003` 指令 | IDA 16 位元解碼 `F3 AB` 為 `rep stosw`。當下 `AX=0000`、`DX=00A0`、`SI=00C8`、`ES:DI=1C43:0000`；依反覆迴圈清零 `0xFA00` bytes。監看寫入報告在指令後以 `03B1:00A8` 標示。 | confirmed；暫存器、動態寫入與 IDA runtime raw-binary 三者交叉。 |
+| `087E:005D`、第 `1,230,846` 指令 | raw bytes `FF 2E 1A 62`，IDA 解碼 `jmp dword ptr ds:621Ah`；下一步第 `1,230,847` 進入 `1C43:0BF9`。 | confirmed；IP log、暫存器及 IDA bytes。 |
+| `0C41:621A` | bytes `F9 0B 43 1C`，遠指標（far pointer）是 `0BF9:1C43`。固定 state 的監看沒有後續改寫該表。 | confirmed；執行期 bytes 與寫入監看。 |
+| `1C43:FA57` | 已清零的 `1C43:0BF9` 順序執行後才落入此處；它不是直接控制轉移目的地。 | confirmed；上述入口與連續 IP 收據。 |
+
+控制流報告 SHA-256 為
+`e7ff23bc6241782f9ff0d27e0783bef74b96f01fc4d2f938428cf0091e24f861`，其 IP log 是
+`f084305312a1e35e448e863f9e764ff58f44314c51990a2abdc86baa3c0949f8`。`03B1` 呼叫端傾印 SHA-256 為
+`80387f118eaf01bb4b570581986abc76d85c4cbb7aded8e2ef970676423d19f9`，IDA Pro 9.4 JSON 是
+`c2a1cb372c449dc9aa656f7801c9ba36a1a45446888769aa7c2075ecf96ab130`。IDA 的 EA 是原始二進位（raw-binary）位址，
+JSON 每列附帶 runtime 段:位移；它們不可與 `PSOUND.COL` file offset 混用。
+
+結論是 **confirmed** 的「清零後舊遠指標遠跳轉」現象，分類為執行期初始化／覆蓋區記憶體
+生命週期與控制流 blocker。`int 33h AX=0014` 是本冷啟動中唯一未實作服務，但其與此現象的因果為
+**unknown**。`03CC → 03B1` 清零呼叫的參數來源及 `0C41:621A` 的選擇條件亦為 **unknown**；不得據此
+修改 dosgolem、建立 DRAFT、擴張音效／硬體範圍，或宣稱已達首畫面、主程式轉交或中文化輸出。
