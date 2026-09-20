@@ -16,15 +16,22 @@
   無法進入 Windows 應用程式本體；這是可重現 blocker，不是已支援的冷啟動。
 - 固定 NE 的靜態載入面已完成清冊：33 個區段、7 個模組、176 個 ordinal import target、
   42 個資源項目；這只描述檔案結構，不能證實任何 Win16 API 的實際呼叫或文字輸出。
+- 使用者已選定本機 `Sid Meier's Colonization (1994)/SMColoni/` 的合法 DOS 輸入作為正式研究目標；
+  該目錄由 `.gitignore` 排除，291 個檔案／390,317,887 bytes 的 manifest SHA-256 是
+  `fbded5601e09889e285294e605df2c306c12a90603e556113b95d2afcf4d5bd3`。
+- 正常 DOS 冷啟動入口是 `OPENING.EXE`（SHA-256
+  `3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`）。dosgolem 已在此路徑跑過
+  1,000 萬指令、進入 mode 13h／PIT／滑鼠／overlay 與資料讀取，沒有未實作服務；但還沒有第一個
+  非零畫面或 `VICEROY.EXE` 轉交收據。
 
 ## 尚未確認
 
 - 印字常式、文字來源、靜態文字資產、字型來源、術語政策與中文化完成門檻。
-- Windows 3.x 目標版本的執行策略（Issue #18），以及授權、公開發布與封裝範圍。
+- `OPENING.EXE` 的第一個可見畫面或可證實 `VICEROY.EXE` 轉交（Issue #21），以及字型來源、術語政策、
+  中文化完成門檻、授權、公開發布與封裝範圍。
 
 ## 下一閘門
 
-Issue #18 是目前唯一的架構阻塞：使用者必須選擇擴充 Windows 3.x 路徑或提供合法 DOS 版輸入。
-在此之前，Issue #5 的動態文字路徑暫停；靜態 NE 清冊（#19）已完成，不能取代 Windows 3.x 執行收據。
-完整阻塞稽核見 `docs/goals/004-execution-strategy-blocker-audit.md`。Issue #10 與 #15 仍需在真實證據與
-原型具備後由使用者決定。
+Issue #18 已由 DOS 輸入策略解除並完成。Issue #21 現為唯一執行前沿：它必須從正式 `OPENING.EXE`
+冷啟動路徑取得第一個可見畫面、可觀測文字輸出或可證實轉交事件；在此之前 #5 與 #8 不得開始。
+Windows NE 清冊（#19）只保留為歷史輸入證據。Issue #10 與 #15 仍需在真實證據與原型具備後由使用者決定。

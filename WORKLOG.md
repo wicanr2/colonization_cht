@@ -57,3 +57,15 @@
   選擇：擴充獨立 dosgolem 的最小 Windows 3.x 路徑，或提供合法 DOS 版輸入。
 - 不重複靜態分析、不替換執行器，也不將 import／資源資料誤報為中文化進度；等待使用者決定。
 - Docker：本輪未啟動新的分析容器；既有研究容器均已於前輪以 `--rm` 清理。
+
+## 2026-09-20：完成目標 005 的 DOS 輸入與冷啟動能力收據
+
+- 使用者提供並指定 `Sid Meier's Colonization (1994)/SMColoni/` 的 DOS 輸入；立即加入 `.gitignore`，
+  以唯讀掛載建立 291 檔 manifest，完整清冊只保存在 `workplace/reports/`。
+- 批次啟動鏈證實正式冷啟動入口是 `OPENING.EXE`，不是跳過流程的 `VICEROY.EXE`。固定雜湊、格式、
+  DOS probe 命令與結果已寫入 `RESEARCH-LOG.md` 與目標 005。
+- dosgolem 在正式入口走到 mode 13h、PIT、滑鼠、overlay 與資料讀取，1,000 萬指令內沒有未實作
+  服務；尚未取得非零 A0000 或主程式轉交，建立 Issue #21 追查第一個可見檢查點。
+- `VICEROY.EXE` direct-entry 僅作診斷，確認其 EMS 初始化後的固定停點，未當作玩家路徑或完成證據。
+- Docker：本輪容器均採 `--rm`、`--network none`、目前 UID/GID 與資源上限；原始輸入及其他
+  dosgolem 工作樹未被修改。

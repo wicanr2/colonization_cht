@@ -1,6 +1,6 @@
 # 目標 002：Windows 3.x 執行策略
 
-狀態：blocked（等待使用者決定）
+狀態：completed（使用者已選定 DOS 輸入策略）
 日期：2026-09-20
 對應 Issue：[ #18 ](https://github.com/wicanr2/colonization_cht/issues/18)
 
@@ -49,11 +49,17 @@ dosgolem 在原版輸出階段覆蓋繁體中文；在能進入遊戲程式本�
 建議選項 2：它最直接保留專案的核心技術目標，同時避免在尚未有最小可行 Windows 3.x 規格時，
 把大型執行器擴張誤當作中文化進度。
 
+## 結果
+
+使用者已提供並指定本機 DOS 版 `Sid Meier's Colonization (1994)/SMColoni/`，採用選項 2。
+因此目前中文化研究只以該 DOS 輸入與 dosgolem 為正式路徑；Windows 3.x NE 版本與擴充 Win16
+執行器選項均不在目前實作分支。DOS 輸入的固定雜湊與 probe 證據見目標 005。
+
 ## 退出條件
 
 本輪在下列條件滿足前保持等待狀態：
 
 - [x] 固定輸入、DOS stub 結果與 dosgolem 能力邊界有可回查證據。
 - [x] 決策選項只包含仍符合目前專案目標的路徑，排除未授權的執行器替換。
-- [ ] 使用者明確選擇選項 1 或選項 2（或明確修改專案目標）。
-- [ ] 已將採用與排除項、受影響工作分支回填 `CONTEXT.md`、`docs/worklist.json` 與 Issue #18。
+- [x] 使用者明確選擇選項 2，並提供合法的本機 DOS 輸入。
+- [x] 已將採用與排除項、受影響工作分支回填 `CONTEXT.md`、`docs/worklist.json` 與 Issue #18。

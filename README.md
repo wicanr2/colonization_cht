@@ -22,22 +22,21 @@
 
 ## 目前狀態
 
-第一輪「證據與基線」目標已完成其探勘出口：輸入清冊已建立，但固定雜湊的 `COLONIZE.EXE` 是
-Windows 3.10 NE 程式。dosgolem 目前只能執行其 DOS stub，無法進入 Windows 應用程式本體，
-因此沒有冷啟動基線、可下載的中文化程式或任何完成度宣稱。
+使用者已指定合法 DOS 輸入作為正式研究目標。dosgolem 能沿 `OPENING.EXE` 的原始冷啟動路徑進入
+13h 圖形模式、計時器、滑鼠、overlay 與資料讀取，且尚未遇到未實作服務；這是 DOS 能力基線，
+不是主選單或可遊玩宣稱。
 
-下一步需由使用者在 [Issue #18](https://github.com/wicanr2/colonization_cht/issues/18) 決定：擴充
-dosgolem 的 Windows 3.x 能力、改用使用者提供的 DOS 版，或明確更換執行器。這項決定以前，
-動態文字攔截與正常玩家路徑工作都會暫停。
+下一步是 [Issue #21](https://github.com/wicanr2/colonization_cht/issues/21)：取得第一個可重播的可見
+畫面、可觀測文字輸出或經原版執行證實的主程式轉交。在此之前，本專案沒有可下載中文化程式或
+任何完成度宣稱。先前 Windows 3.x NE 輸入只保留為歷史研究證據，不是目前實作目標。
 
 第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
 確認的執行策略見 [目標 002](docs/goals/002-win16-execution-strategy.md)；實際工作順序與 Issue
 連結見 [工作計畫](WORKLIST.md)。最新已知事實與限制見 [目前脈絡](CONTEXT.md)。
 
-固定 Windows 3.x 版本的 NE 靜態載入面已完成盤點，但這只說明檔案結構與匯入宣告，**不代表**
-dosgolem 能執行遊戲或已定位文字輸出。證據與限制見 [目標 003](docs/goals/003-ne-load-surface-inventory.md)。
-在選擇 Windows 3.x 擴充或提供 DOS 版前，專案處於明確受阻狀態；稽核理由見
-[目標 004](docs/goals/004-execution-strategy-blocker-audit.md)。
+DOS 輸入的固定雜湊、probe 與限制見 [目標 005](docs/goals/005-dos-input-and-cold-boot.md)。
+Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/003-ne-load-surface-inventory.md)
+及 [目標 004](docs/goals/004-execution-strategy-blocker-audit.md)，不混入目前 DOS 路徑。
 
 ## 原版與權利邊界
 
@@ -56,4 +55,5 @@ dosgolem 能執行遊戲或已定位文字輸出。證據與限制見 [目標 00
 - [第二輪目標](docs/goals/002-win16-execution-strategy.md)
 - [第三輪目標](docs/goals/003-ne-load-surface-inventory.md)
 - [第四輪目標](docs/goals/004-execution-strategy-blocker-audit.md)
+- [第五輪目標](docs/goals/005-dos-input-and-cold-boot.md)
 - [工作歷程](WORKLOG.md)
