@@ -675,3 +675,35 @@ List-of-Lists importer 對 M/Z、段落嚴格前進、唯一 Z、MemTop、free o
 規格狀態升為 [CONFORMED 規格 005](docs/spec/005-colonization-registered-process-mcb-importer-conformed.md)。
 未登錄 owner、cross-process release/resize、未知手改 lifecycle 與 v2 state 維持 fail-closed；這並未解開
 映像外控制流、產生畫面或建立文字輸出證據，Issue #24 仍開放。
+
+## 2026-09-21：目標 022 的 MCB 修正後首個 mode 13h 畫面
+
+固定原版仍為 `OPENING.EXE`（SHA-256
+`3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`），執行器為隔離
+`workplace/dosgolem` commit `1435f175e785ea096a9268cd1021a4222300bd43`，研究映像為
+`colonization-research:20260920-r2`。所有命令以無網路、UID/GID 1000:1000、CPU／記憶體／PID 上限的
+一次性 Docker 容器執行；原版目錄只讀掛載為 `/game`，收據留在 gitignore 的 `workplace/reports/`。
+
+`cmd/probe` 的 state／shot callback 在迴圈執行下一道指令**之前**比對絕對步數，故以 `-steps 2000001`
+搭配 `-save-state 2000000:...` 保存精確第 2,000,000 指令的狀態，而非將第 2,000,001 指令後的狀態誤稱為
+檢查點。state v3 `dosgolem-goal022-opening-2m-state-v3-20260921.state` SHA-256 為
+`1f9b3822fc5ad2c041714a95527a230096cee97c69181fc82f0d9feec165de6b`；冷啟動收據 SHA-256 為
+`8dc607ae8d6f0abbb6b53aed38cfab76e180606d295487fa52b3065cdfa40c37`。由同一 `/game` 路徑重載 state 後，
+5M、10M、20M 收據的 SHA-256 依序為
+`736b9923397af4babf1b2ba685cd51523b9e8a0f917e1975c4a77d135b381f7d`、
+`2c663263aa70c0ccee54d85da55d090fa48a0de09d2852ddf87674f57ab10578`、
+`fe7461e1a44c0bd15e4aca4cccd8273c06759a11652731e86d9650d80d0fbf98`。
+
+| 推論等級 | 固定 state 的觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | 2.70M 的 VRAM-watch 收據 SHA-256 `da7b369f264d08aa1e1b1d67ae6306a16c71541154c97b8aa8c55346bb0f5f55`：A0000 0／64,000、0 筆寫入 | 首畫面尚未開始，不能把已進入 mode 13h 當成已顯示畫面。 |
+| confirmed | 2.75M 的 VRAM-watch 收據 SHA-256 `cc99ad7bd806998672c02b2903d583429bcd759481d0bdf7454a4b67d5e2f152`：18,445／64,000 非零像素、18,445 筆未丟棄寫入 | 首個可見 mode 13h 畫面落在 2.70M–2.75M 指令的有界窗口；收據末段的寫入來源是 `0557:0090`。這不證實畫面語意或靜態文字內容。 |
+| confirmed | 同 state 的 5M／10M／20M 皆為 18,445／64,000 非零像素，無 B8000 文字、全形／半形字型 hook 或主控台字元 | 首畫面至 20M 穩定，且尚未取得可用於動態文字鍵的輸出事件。 |
+| unknown | `VICEROY.EXE` EXEC、畫面的具體語意、圖內是否含可中文化靜態文字 | 本輪沒有這些證據；不能由 `MPSLOGO.SS` 檔名或像素數推論。 |
+
+第 2.75M 指令另由 `-shots` 匯出 320×200 色號與同時色盤；`.idx`、`.pal`、僅本地 PNG 的 SHA-256 分別為
+`d78fbfe1711c5115e73d5a29b456bd5cafef42c99405408c23b711a87c8f46fc`、
+`ef115a0e0c15cdc41958ca46b5b14b456115f4baec5e3ca68599d2a8f435e3b8`、
+`8ef6bda61c7ae6ba2e411405edd87056782337a996a73a93099365cff25ceeb0`。它們含原版衍生像素，沒有加入 Git、
+GitHub 或發行包。結論是 #24 的映像外控制流 blocker 已解除；下一步是動態輸出與靜態文字的獨立 RE，不是直接
+實作中文覆蓋。

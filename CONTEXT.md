@@ -10,7 +10,7 @@
 - 本機兩份原始封存檔僅能唯讀使用，已由 `.gitignore` 排除；雜湊與清冊見 `RESEARCH-LOG.md`。
 - 未完成項的唯一機器可讀來源是 `docs/worklist.json`；每筆都有 GitHub Issue。
 - `README.md` 是專案首頁；第一輪目標見 `docs/goals/001-foundation-and-evidence.md`。
-- `workplace/dosgolem` 是提交 `1b0efdf` 的獨立副本，push URL 為 `DISABLED`；不得修改其他
+- `workplace/dosgolem` 是提交 `1435f175e785ea096a9268cd1021a4222300bd43` 的獨立副本，push URL 為 `DISABLED`；不得修改其他
   專案使用的 `/home/anr2/cht/dosgolem`。
 - 固定雜湊的 `COLONIZE.EXE` 是 Windows 3.10 NE 程式。dosgolem probe 只走到 DOS stub，
   無法進入 Windows 應用程式本體；這是可重現 blocker，不是已支援的冷啟動。
@@ -20,10 +20,12 @@
   該目錄由 `.gitignore` 排除，291 個檔案／390,317,887 bytes 的 manifest SHA-256 是
   `fbded5601e09889e285294e605df2c306c12a90603e556113b95d2afcf4d5bd3`。
 - 正常 DOS 冷啟動入口是 `OPENING.EXE`（SHA-256
-  `3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`）。dosgolem 已在此路徑跑過
-  1 億指令、進入 mode 13h／PIT／滑鼠／overlay 與資料讀取；最新冷啟動另記錄一個未實作的
-  `int 33h AX=0014`，尚未能與 blocker 建立因果。仍還沒有第一個
-  非零畫面或 `VICEROY.EXE` 轉交收據。
+  `3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`）。目標 022 以 `-sbpro` 的正常
+  冷啟動在第 2,000,000 指令保存 state v3（SHA-256
+  `1f9b3822fc5ad2c041714a95527a230096cee97c69181fc82f0d9feec165de6b`），並由同一路徑／同一唯讀素材
+  目錄重載。2.70M 收據仍是 A0000 全零，2.75M 收據已是 18,445／64,000 個非零 mode 13h 像素；完整 VRAM
+  watch 有 18,445 筆、未丟棄的寫入，末段的 confirmed 寫入端是 `0557:0090`。10M、20M 均維持同一個
+  非零像素數並持續輪詢滑鼠。這是首個可見畫面收據；尚未觀測文字常式、主控台文字或 `VICEROY.EXE` 轉交。
 - 正式路徑唯一已記錄的 `EXEC` 是 `PSOUND.COL`（不是 `VICEROY.EXE`）。未啟用 `-sbpro` 的第
   1,000,000 指令快照延續至第 100,000,000 指令時，A0000 維持全零、沒有視訊寫入、沒有字型服務呼叫，
   且程式停留在 `PSOUND.COL` 的 `1C43:0087`；這是預設 profile 的 confirmed 受阻點收據，不是可見畫面。
@@ -75,21 +77,19 @@
   lifecycle 與 v2 state 一律 fail-closed。實作位於隔離副本的本地提交 `1435f17`，其 `upstream` 仍為
   `DISABLED`。先前目標 015–016 的 root-owner 重發佈、TSR overlap、固定 root
   PSP 回傳均是實作前基線，不再是現行行為。
-- 固定 `OPENING.EXE` 以 `-sbpro` 至 2,000,000 指令的新收據（SHA-256
-  `2fa18b931afac4bf15f7d89a1712cb7e98de2a7e29a054097202589cb4a58e00`）仍載入 `PSOUND.COL`、
-  `MPSLOGO.SS`、`MPSNAME.SS`，且 ArenaDump 保留 `$sys$`、`FONTINTR`、`$sound$` 等 raw name；沒有 MCB
-  importer 拒絕或舊 arena 重發布跡象。這不是可見畫面、文字輸出或完整遊戲完成收據。
+- 固定 `OPENING.EXE` 以 `-sbpro` 至 2,000,000 指令的前一輪收據（SHA-256
+  `2fa18b931afac4bf15f7d89a1712cb7e98de2a7e29a054097202589cb4a58e00`）已確認 overlay、後續資料讀取與
+  `$sys$`、`FONTINTR`、`$sound$` 等 raw MCB name；目標 022 的 state v3 續跑進一步證實這些狀態能到達首個
+  mode 13h 可見畫面，沒有 importer 拒絕或舊 arena 重發布跡象。
 
 ## 尚未確認
 
-- 印字常式、文字來源、靜態文字資產、字型來源、術語政策與中文化完成門檻。
-- `OPENING.EXE` 的第一個可見畫面或可證實 `VICEROY.EXE` 轉交（目前需先釐清 #24 的映像外控制流），
-  以及字型來源、術語政策、中文化完成門檻、授權、公開發布與封裝範圍。
+- 可見畫面的語意、印字常式、文字來源、靜態文字資產、字型來源、術語政策與中文化完成門檻。
+- `VICEROY.EXE` 轉交，以及字型來源、術語政策、中文化完成門檻、授權、公開發布與封裝範圍。
 
 ## 下一閘門
 
-Issue #23 已完成 READY profile 的實作與同狀態收據。#24 的已註冊 MCB importer 子項已 CONFORMED；但固定
-原版路徑仍未出現可見畫面、可觀測文字輸出或 `VICEROY.EXE` 轉交，故 #24 維持進行中。下一個最小前沿是
-只對 2,000,000 指令後的真實控制流／畫面輸出蒐集證據；不得將 external owner、cross-process 或未知 TSR
-行為擴張成實作。#5 與 #8 在取得 DOS 原始畫面或可證實轉交前維持阻塞。Windows NE 清冊（#19）只保留為
-歷史輸入證據；Issue #10 與 #15 仍需在真實證據與原型具備後由使用者決定。
+Issue #23 已完成 READY profile 的實作與同狀態收據，#24 的 MCB importer 與首個 mode 13h 畫面證據亦已完成。
+下一個最小前沿是以這個正常冷啟動畫面追溯動態印字路徑（#5）與盤點靜態文字候選（#8）；兩者已解除 blocker，
+但仍沒有任何中文覆蓋實作授權。不得將 external owner、cross-process 或未知 TSR 行為擴張成新實作。Windows NE
+清冊（#19）只保留為歷史輸入證據；Issue #10 與 #15 仍需在真實證據與原型具備後由使用者決定。
