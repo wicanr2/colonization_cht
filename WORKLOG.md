@@ -218,5 +218,6 @@
 - 手冊頁 1-183–188、1-189–190、1-196、1-236 分別限制 `48h/49h/4Ah`、EXEC／PSP、`4Ch` 與 active
   PSP；已確認現行 root owner 重發佈、無 owner release、寬鬆 resize、TSR overlap 與固定 root PSP 不可
   當成通用 DOS 契約。跨程序與手改 MCB 的細節保持 unknown。
-- DRAFT 003 維持 DRAFT、未修改 dosgolem／原版／中文覆蓋；收尾將回填 Issue／Git，並檢查 Docker、
-  擁有權及原版素材邊界。
+- DRAFT 003 維持 DRAFT、未修改 dosgolem／原版／中文覆蓋；已回填
+  [Issue #24](https://github.com/wicanr2/colonization_cht/issues/24#issuecomment-5755254133)，並推送證據提交
+  `89c37b6`。收尾提交會記錄 completed 狀態；Docker、擁有權及原版素材邊界將再次檢查。

@@ -1,6 +1,6 @@
 # 目標 017：多行程 MCB 的 DOS 平台契約證據
 
-狀態：in_progress<br>
+狀態：completed<br>
 日期：2026-09-21<br>
 對應 Issue：[ #24 ](https://github.com/wicanr2/colonization_cht/issues/24)<br>
 前置收據：[目標 016](016-mcb-process-service-draft-audit.md)；待修訂規格：[DRAFT 規格 003](../spec/003-colonization-mcb-arena-reconciliation-draft.md)
@@ -27,7 +27,10 @@ PSP 對 MCB owner／child／TSR 的公開契約邊界。這些證據只用於限
 
 ## 退出條件
 
-- [ ] 公開原始手冊的版本、雜湊、頁面／片段及萃取工具可回查。
-- [ ] `48h/49h/4Ah/4Bh/4Ch/31h` 與 PSP owner 的已明示／未明示條件已逐項比對現行 executor。
-- [ ] DRAFT 003 與目前脈絡保留 unknown、未 READY、未實作。
-- [ ] 文件、Issue #24、Git 推送與 Docker 清理狀態一致。
+- [x] 公開原始手冊的版本、雜湊、頁面／片段及萃取工具可回查。
+- [x] `48h/49h/4Ah/4Bh/4Ch/31h` 與 PSP owner 的已明示／未明示條件已逐項比對現行 executor。
+- [x] DRAFT 003 與目前脈絡保留 unknown、未 READY、未實作。
+- [x] 文件、Issue #24、Git 推送與 Docker 清理狀態一致。
+
+完成收據：Issue #24 的[目標 017 回填](https://github.com/wicanr2/colonization_cht/issues/24#issuecomment-5755254133)
+與提交 `89c37b6`；收尾提交另記錄本檔 completed 狀態。
