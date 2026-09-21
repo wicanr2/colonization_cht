@@ -215,6 +215,9 @@
 
 ## 下一閘門
 
+目標 050 正在將目標 049 的固定根層 metadata 停止線，窄幅擴至至少一層子目錄的 `.BAT`／`.COM`／`.EXE`；
+它只盤點精確 token，不能產生 EXEC、父程序情境或玩家路徑結論。
+
 Issue #23 已完成 READY profile 的實作與同狀態收據，#24 的 MCB importer 與首個 mode 13h 畫面證據亦已完成。
 正式 batch 啟動鏈已排除為可觀測的 `0x6C` 消費者，且目前 dosgolem 沒有 batch／`COMMAND.COM` 重播層；完整
 開場 state 的單一 Enter 與既有中央左鍵皆已確認為退出路徑。已知左鍵的第一個 boolean consumer 是
