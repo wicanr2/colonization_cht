@@ -164,6 +164,10 @@
   dump 都確認 `0924:0588 = ENTER 0000h,00h`，`058C = XOR BX,BX`；本體後段確認 CX→caller `[BP-6]`、
   DX→caller `[BP-8]`，並以 `AX = BX OR [DS:5AB4]` 回傳。資料位址和互動語意仍 unknown，但不存在 dosgolem
   觀測 blocker。
+- 目標 041 對同一固定 state 的 caller call 前／return 後取樣：`[DS:5AB4]=0000h`、`[DS:5E6C]=FFFFh`、
+  `[DS:61B0/61B2]=00A0h/0064h` 在控制／既有左鍵兩組皆未變；caller locals 則都寫成 `0064h,00A0h`。因此本 state
+  的 AX zero／nonzero 完全隨 service 後 BX zero／one 改變，`[DS:5AB4]` 沒有貢獻。這不是 DS word、hit-test、按鈕或文字
+  語意證據。
 
 ## 尚未確認
 
@@ -177,7 +181,8 @@ Issue #23 已完成 READY profile 的實作與同狀態收據，#24 的 MCB impo
 開場 state 的單一 Enter 與既有中央左鍵皆已確認為退出路徑。已知左鍵的第一個 boolean consumer 是
 `0110:0952–0954`，其直接 producer 的 far-call target 是 `0924:0588`，trace/raw 對齊已由目標 040 確認。
 下一個動態前沿可在不注入新座標下，對 `[DS:5AB4]`、`[DS:5E6C]`、`BX` 與兩個 caller locals 的讀寫條件建立
-最小資料流證據；不得盲注、掃描或猜測 shell／按鈕語意。
+最小資料流證據；不得盲注、掃描或猜測 shell／按鈕語意。此 state 的最小資料流已在目標 041 完成；下一個
+動態切片若仍沿此出口支路，應只追 `0110:0956` 寫入 `001Bh` 後的控制流，不將它假稱為文字路徑。
 `OPENBORD.PIK` 的
 已確認 320×24 範圍已排除為文字候選；下一個
 靜態前沿已取得 `opening-map-ocean-label` 的部分原始像素→暫存→畫布→有限窗口 A000 存續鏈；下一個切片要為它

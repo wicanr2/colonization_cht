@@ -1154,3 +1154,19 @@ raw far pointer 目標與 trace label。這是一筆追加勘誤，不重寫前�
 | confirmed | raw `05BA/05BD`、`05BF/05C2`、`05C4/05C5` 分別讀取 caller pointer、寫回 CX／DX、再以 `BX OR [DS:5AB4]` 形成 AX。 | 目標 039 的 pointer body 與 AX 公式可恢復為已證實的指令資料流；資料位址語意仍 unknown。 |
 
 因此本輪不建立 DRAFT／READY、不修改 dosgolem，也不把此工具勘誤外推為遊戲、按鈕、座標或動態文字語意。
+
+## 2026-09-21：目標 041 的滑鼠 producer 狀態閘門與 caller locals
+
+固定輸入、`OPENING.EXE` SHA-256、DOS manifest、dosgolem commit 與第 #5,465,772 state 均沿用目標 040。
+兩組均在 #5,465,825（`0110:094A` far call 執行前）及 #5,465,864（`0110:094F` return 後、consumer 前）
+以同一次重播的 `-dump-mem-at` 取樣 `0C41:5AB4`、`5E6C`、`61B0`、`853A`；左鍵組唯一輸入仍是
+#5,465,773 的 `(160,100)`，並在首個滑鼠輪詢後放開。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed（固定 state） | 兩組前／後的 `5AB4` dump 都是 bytes `00 00`（SHA-256 `96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7`）；`5E6C` 都是 `FF FF`（`ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb`）；`61B0/61B2` 都是 `A0 00 64 00`（`26c36e6f0efe64b53be41719cdf25339f4a77cfcd98de963a52bf27e3a06e695`）。 | 此 state 的 `AX = BX OR [DS:5AB4]` 中記憶體項為零，且 nonzero `5E6C` 選擇快取座標資料流。資料位址語意未知。 |
+| confirmed（固定 state） | `SS:853A–853D` 兩組均由 pre bytes `66 03 10 01`（`e77f5b72f343c3827538106fc258c1849a2098b5c31f079da4a7c114f08e023e`）變為 post `64 00 A0 00`（`437893f4a9a4d6c391aedbbb0cbf2ac93c3c937cf3d155ab82fe83e1b514ef1b`）。 | raw body 所示的 CX／DX caller-local 寫回實際發生；兩個 final locals 是 `0064h,00A0h`。 |
+| confirmed（固定 state） | 控制 trace 在 service 後、`05B0`、`05C5`、`0110:094F` 依序保持 BX/AX 0；左鍵組相應為 service 後 `BX=1,CX=0140h,DX=0064h`，並於 `05C5`／caller return 得 `AX=1`。trace SHA-256 依序為 `743614e10222443ffc0d4ee56a58969164b1bb1603b9ea55d04aacd87f411b8f`、`bf811495bffd0198fdf662d692c7413d3e46328dcdfec9703d1f4bfd59ef9a90`。 | 本 state 的 AX zero／one 由 service 後 BX zero／one 的差異貢獻；不外推其他 state。 |
+| unknown | DS word 的遊戲語意、其他值、hit-test、按鈕、動態印字、原文來源、訊息鍵與中文覆蓋資格。 | 不建立 DRAFT／READY、譯文、字型或覆蓋程式。 |
+
+所有 lifecycle、trace 與 dumps 僅在 gitignore 的 `workplace/reports/`，沒有提交、附加或公開原版素材。
