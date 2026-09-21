@@ -1,6 +1,6 @@
 # 目標 052：已知退出輸入座標標記
 
-狀態：in_progress<br>
+狀態：completed<br>
 日期：2026-09-22<br>
 對應 Issue：[Issue #5](https://github.com/wicanr2/colonization_cht/issues/5)<br>
 前置證據：[目標 046](046-opening-click-nonzero-downstream-dataflow.md)、[目標 051](051-opening-frame-coordinate-grid.md)
@@ -27,7 +27,24 @@
 
 ## 退出條件
 
-- [ ] 已知退出座標、來源／輸出 metadata、雜湊與本機 marker PNG 可重現，且像素不受 Git 追蹤。
-- [ ] marker、已知退出結果、控制項語意、正常玩家路徑與動態文字證據明確分離。
-- [ ] 沒有新輸入、OCR、DRAFT／READY、翻譯、字型、覆蓋實作或 dosgolem 修改。
-- [ ] 文件、Issue #5、Git、Docker 清理與權利邊界一致。
+- [x] 已知退出座標、來源／輸出 metadata、雜湊與本機 marker PNG 可重現，且像素不受 Git 追蹤。
+- [x] marker、已知退出結果、控制項語意、正常玩家路徑與動態文字證據明確分離。
+- [x] 沒有新輸入、OCR、DRAFT／READY、翻譯、字型、覆蓋實作或 dosgolem 修改。
+- [x] 文件、Issue #5、Git、Docker 清理與權利邊界一致。
+
+## 結果
+
+本機 marker PNG 是 `workplace/reports/goal052-known-exit-marker-x2.png`，SHA-256
+`862875cb3d253f11fc83689f11bcbf450ff190ce77ad57df9dd5c85b9ca73693`；metadata 是
+`workplace/reports/goal052-known-exit-marker.json`，SHA-256
+`76cdbca266cb2ab8c16acf9322a3c90b072f52066edaefb2be882afdfabea071`。兩者只留在 gitignore 的
+`workplace/reports/`，不提交原版或衍生像素。
+
+| 推論等級 | 範圍與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | metadata 綁定目標 051 grid PNG／metadata SHA-256 `24abdb08a2d7c72c22f80e19999fd1638cb345e447ee84f928e822571a412f7c`／`aa81ec34a37cfda4c16f5f12e8f4cc83bbc85f90014c164e54a71e4997097a56`，以及相同 manifest、dosgolem commit、#5,465,772 state、indexed frame、palette、state 雜湊。 | marker 的輸入版本與 base grid 可回查，版本不符時不套用。 |
+| confirmed | mapping 是 `x=32 + logical_x×2`、`y=logical_y×2`；logical `(160,100)` 得輸出 pixel `(352,200)`。產出紅色 3-pixel thick cross（half-length 14），`view_image` 檢視與 metadata 均確認其幾何。 | 畫面上唯一的紅 marker 是既有 `(160,100)` 左鍵位置，不是新輸入。 |
+| confirmed（限制） | 目標 046 已獨立確認此固定 state 的單次左鍵是非文字退出；本輪只重建 grid 並標示此座標，沒有向 dosgolem 發送輸入。 | marker 只表示既有退出結果，不能命名按鈕、控制項、文字或正常玩家路徑。 |
+| unknown | 其他座標的操作意圖、控制語意、輸入結果、`VICEROY.EXE` 轉交與動態文字輸出。 | 使用者需先依本機畫面選擇下一個正常操作；不得盲掃或 agent 自行挑選座標。 |
+
+本輪產圖器是一次性本機工具，未加入儲存庫；所有容器無網路、原版／reports input 唯讀、以 UID/GID 1000:1000 執行。

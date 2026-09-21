@@ -111,6 +111,8 @@ AX 的差異直接隨既有左鍵的 BX 變化；這仍是退出路徑資料流�
 不排除其他 launcher 方式，也不改變動態文字路徑仍未知的結論。
 [目標 051](docs/goals/051-opening-frame-coordinate-grid.md) 已將既有完整開場畫面製成僅限本機的座標格檢視，供使用者
 選擇下一個正常操作；它不是按鈕辨識、文字抽取或輸入驗證，故動態文字路徑仍待後續同狀態證據。
+[目標 052](docs/goals/052-known-exit-input-marker.md) 已在這張僅限本機的格線上標示既有 `(160,100)` 非文字退出
+左鍵，協助使用者避開已排除路徑；marker 不是任何控制項或遊戲語意判定。
 
 第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
 確認的執行策略見 [目標 002](docs/goals/002-win16-execution-strategy.md)；實際工作順序與 Issue

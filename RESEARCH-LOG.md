@@ -1361,3 +1361,26 @@ Python 3.11.2 標準函式庫 encoder 產生本機、gitignore 的
 
 所有容器無網路、原版與既有 reports input 唯讀、以 UID/GID 1000:1000 執行；產圖器為一次性 `/tmp` 工具，未加入
 儲存庫。這是一個可丟棄 prototype，不是 production path 或 READY 規格。
+
+## 2026-09-22：目標 052 的已知退出輸入座標標記
+
+固定 DOS manifest 是 `fbded5601e09889e285294e605df2c306c12a90603e556113b95d2afcf4d5bd3`。基底是目標 051
+local grid PNG／metadata，SHA-256 為 `24abdb08a2d7c72c22f80e19999fd1638cb345e447ee84f928e822571a412f7c`／
+`aa81ec34a37cfda4c16f5f12e8f4cc83bbc85f90014c164e54a71e4997097a56`，並回查相同 indexed frame、palette、state、
+#5,465,772 state 與隔離 dosgolem commit `1435f175e785ea096a9268cd1021a4222300bd43`。
+
+Python 3.11.2 標準函式庫 encoder 先從 indexed inputs 重建目標 051 grid，要求所得 SHA-256 完全等於基底 PNG，
+再建立 gitignore 的 `workplace/reports/goal052-known-exit-marker-x2.png`（SHA-256
+`862875cb3d253f11fc83689f11bcbf450ff190ce77ad57df9dd5c85b9ca73693`）與 metadata
+`workplace/reports/goal052-known-exit-marker.json`（SHA-256
+`76cdbca266cb2ab8c16acf9322a3c90b072f52066edaefb2be882afdfabea071`）。PNG signature 是
+`89504e470d0a1a0a`，尺寸 672×432。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | metadata mapping `x=left_margin+logical_x×scale`、`y=logical_y×scale`，其中 `left_margin=32`、`scale=2`。logical `(160,100)` 得 output pixel `(352,200)`；紅色 3-pixel thick cross 的 half-length 是 14，白色角點在 ±15。`view_image` 檢視顯示 cross 落於該格線位置。 | 這是既有左鍵座標的幾何標記，未執行新輸入。 |
+| confirmed（限制） | 目標 046 已獨立觀測固定 state 的 `(160,100)` 左鍵走非文字退出；本輪沒有鍵盤／滑鼠注入、OCR、控制項命名、direct-entry、batch interpreter 或狀態轉移。 | marker 只表示那一筆已知退出結果，不是按鈕、正常玩家路徑、文字、文本鍵或翻譯／覆蓋證據。 |
+| unknown | 其他座標的操作意圖、控制語意、輸入結果、正常轉交與動態文字輸出。 | 需由使用者先依本機畫面選定下一個正常操作；不得盲掃或 agent 猜選座標。 |
+
+所有容器無網路、原版與 reports input 唯讀、以 UID/GID 1000:1000 執行；產圖器是一次性 `/tmp` 工具，未加入
+儲存庫。這是可丟棄 prototype，不是 production path 或 READY 規格。
