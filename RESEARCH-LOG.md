@@ -1186,3 +1186,19 @@ A000 `A000:3840:6400` 分別是邏輯 y=`45..64` 的 320×20 色號 rows，兩�
 | unknown | pre-text 每像素背景、可逆清除策略、中文安全矩形、完整資產歸屬與排版。 | 必須另有可重播背景證據或另一候選，才能做可丟棄原型；目前不建立 DRAFT／READY。 |
 
 原版 frame、色盤、pixels、PNG 或遮罩均未進 Git、Issue 或外部輸出。
+
+## 2026-09-21：目標 043 的中央卷軸候選 canvas writer
+
+固定輸入仍為 `OPENING.EXE`（SHA-256
+`3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`）。所有重播在 UID/GID 1000:1000、無網路、
+一次性 Docker 容器完成；原版 `/game` 唯讀，收據只輸出至 gitignore 的 `workplace/reports/`。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | #4,156,900 state 至 #5,465,773 的 `A9A54h–A9A90h` VRAM watch 在 #5,465,240 留下 61 筆內容變更，皆是 `0557:00A1`。raw `0557:009F=F3 A5`、`00A1=A4`；該時收據為 `DS=2443, ES=A000, SI=1B00, DI=9B00`。VRAM watch SHA-256 `a197807033c4097a6f603ce9a5c49d08dd4017c62929444003440c02f44557d1`。 | 這是 `DS:SI → ES:DI` 的靜態 canvas→VRAM copy 末端。 |
+| confirmed | #2,000,000 state 以 `lin:25E84` 至 #4,156,900 追蹤，候選像素在 #2,000,001→#3,000,000 變更 1,080 bytes、#3,000,000→#4,000,000 變更 316 bytes、#4,000,000→#4,156,900 為零。#2M→#4.1569M 的 CPU watch 有 200 筆，位於 #3,756,652–#3,759,074，均為 `04A2:017A`；sample `DS=3960,SI=10A8,ES=2343,BX=3E84`，raw `04A2:0150` 含 `AC … 26 88 07`。watch SHA-256 `02592072b8f376734e7720ef09ccd79b9aa1669c839c197605880af170c61172`。 | `04A2:017A` 是已見的解碼串流 canvas writer；watch 僅計 CPU content-changing writes，不是完整 decode 計數。 |
+| confirmed | #5,465,772 的 `lin:25E84:7420` 與 `lin:A9A54:7420` dumps 逐位元組相同，SHA-256 都是 `e7bf4a7e6bbed1a5a086773573558061311967bcab747bb10fa739076b04b946`。 | 固定完整 composite state 的候選外包範圍可由 canvas 同狀態重生至 A000。 |
+| unknown | 此輪起始 #2M state 不含候選建立前的可觀測檔案讀取；解碼串流無法與特定原版檔、原文或字元邊界閉合。 | 禁止將其命名為文字解碼器、歸屬 `OPENING.PIK`／`.SS`，或建立安全矩形、中文、DRAFT／READY 或覆蓋程式。 |
+
+勘誤：早期 `-dump-mem-at` 的裸 `25E84` 按 IDA 基準轉成 `16F84h`，不是執行期 canvas 位址；所有採用的
+快照改用 `lin:25E84`。這是量測格式更正，不是遊戲行為差異。

@@ -157,6 +157,7 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第四十輪目標](docs/goals/040-dosgolem-far-call-observation-alignment.md)
 - [第四十一輪目標](docs/goals/041-mouse-producer-state-gate-dataflow.md)
 - [第四十二輪目標](docs/goals/042-ocean-label-background-safety-geometry.md)
+- [第四十三輪目標](docs/goals/043-scroll-text-canvas-writer-provenance.md)
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [MCB 記憶體 arena 重新協調規格草案](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)
