@@ -1,6 +1,6 @@
 # 目標 020：已註冊多行程 MCB importer READY 規格
 
-狀態：in_progress<br>
+狀態：completed<br>
 日期：2026-09-21<br>
 對應 Issue：[ #24 ](https://github.com/wicanr2/colonization_cht/issues/24)<br>
 前置收據：[目標 019](019-mcb-generic-importer-ready-review.md)；來源草案：[DRAFT 規格 003](../spec/003-colonization-mcb-arena-reconciliation-draft.md)
@@ -25,6 +25,9 @@ state。這是通用已註冊多行程模型，不是 root-only 特例；未知�
 
 ## 退出條件
 
-- [ ] 已註冊 root／child owner 的所有輸入、狀態、服務、拒絕與 migration 都有 READY 契約或明確 DRAFT 缺口。
-- [ ] READY（若成立）含 raw header、registry、state、固定遊戲 overlay 同狀態與 synthetic child 驗收。
-- [ ] 文件、Issue #24、Git 推送與 Docker 清理一致。
+- [x] 已註冊 root／child owner 的所有輸入、狀態、服務、拒絕與 migration 都有 READY 契約或明確 DRAFT 缺口。
+- [x] READY（若成立）含 raw header、registry、state、固定遊戲 overlay 同狀態與 synthetic child 驗收。
+- [x] 文件、Issue #24、Git 推送與 Docker 清理一致。
+
+完成收據：Issue #24 的[目標 020 回填](https://github.com/wicanr2/colonization_cht/issues/24#issuecomment-5755401767)
+與提交 `58fc3fc`；收尾提交另記錄本檔 completed 狀態。

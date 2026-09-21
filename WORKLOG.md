@@ -250,5 +250,6 @@
   service、服務轉移、rejection 與驗收均已契約化。
 - external／未註冊 owner、手改後 unknown lifecycle、cross-process `49h/4Ah`、TSR 特例與 v2 state
   明確 fail-closed；不以 root-only 遊戲樣本縮小 B，亦不假稱 child/TSR 遊戲 parity。
-- 本規格是唯一授權下一輪 dosgolem 通用實作的依據；本輪沒有程式碼修改。收尾將同步 Issue／Git 並檢查
-  Docker、擁有權及原版素材邊界。
+- 本規格是唯一授權下一輪 dosgolem 通用實作的依據；本輪沒有程式碼修改。已回填
+  [Issue #24](https://github.com/wicanr2/colonization_cht/issues/24#issuecomment-5755401767)，並推送證據提交
+  `58fc3fc`；收尾提交會記錄 completed 狀態，並檢查 Docker、擁有權及原版素材邊界。
