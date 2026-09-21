@@ -183,6 +183,10 @@
   #3,757,195 再由 `04A2:01EB` 消費。該 runtime buffer 也有同 decoder 的實際讀取。故這一段
   `MPSLOGO.SS → runtime buffer → 3A6A8h → 04A2 → canvas` 是 confirmed；整張候選圖屬於 `MPSLOGO.SS`
   仍僅為強推論。原文、完整資料格式／幾何、背景、安全矩形與覆蓋資格仍 unknown，未 OCR、未建立中文或修改 dosgolem。
+- 目標 045 對同一候選取得真正第一筆 writer 前（#3,756,003）與最後一筆後（#3,759,075）的同次 snapshot：
+  254 bytes 全由 `04A2:017A` 自 zero-fill 改寫成單一連通區 `x=[86,241)、y=[139,141)`，其中 134 bytes
+  跨出既有約略候選矩形。這是 confirmed 的安全否定：零值不是已證實的可見背景，連同約略外框均不得當作
+  清除遮罩或中文安全矩形。原文、精確幾何、背景與覆蓋資格仍 unknown。
 
 ## 尚未確認
 

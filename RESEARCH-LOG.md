@@ -1222,3 +1222,23 @@ A000 `A000:3840:6400` 分別是邏輯 y=`45..64` 的 320×20 色號 rows，兩�
 冷啟動 broad input-write report 的 SHA-256 是
 `40049b9d08a6e54f15809f4bb15e134259099ca1795afaa40e34fec1737669a6`；上述 reports 僅記錄位址、值、步數與
 指令定位，沒有保存或公開原版資產內容。
+
+## 2026-09-21：目標 045 的中央卷軸候選 pre-text 背景安全否定
+
+固定輸入仍為 `OPENING.EXE`（SHA-256
+`3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`）與 DOS manifest
+`fbded5601e09889e285294e605df2c306c12a90603e556113b95d2afcf4d5bd3`。由 writer 前 #3,756,000 state 重播，
+第一筆 `04A2:017A` content-changing write 為 #3,756,004；在 #3,756,003 對 `lin:25E84:7420` 取 pre snapshot，
+最後一筆在 #3,759,074，於 #3,759,075 取 post snapshot。前／後 snapshot SHA-256 分別為
+`0b7e7cd03768152053903bc605a7eb6a4ab1cf25beb3815bac33a71c292cde67` 與
+`6191b68d2acfd063256874dd21874928163d8a2b4a8318c121579d8383ffa41e`。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | 前後差分有 254 bytes，所有 pre 值都是 `00`；bbox 是 `x=[86,241)、y=[139,141)`。row 139 的 99 bytes 為 `x=[142,241)`，row 140 的 155 bytes 為 `x=[86,241)`，兩列重疊。delta report SHA-256 `4f0cc26a6009f31246d2623da90734043c6017b6e626fb352294b0887b2f31b3`。 | 這是單一連通的 zero-fill writer 區，不是獨立、已知可見背景。 |
+| confirmed（安全否定） | 約略候選 `x=[148,208)、y=[123,146)` 內僅有 120 個變更、外有 134 個；writer register 從第一筆 `DS=3960,SI=10A8,ES=2343,BX=3E4E` 至最後一筆 `DS=3960,SI=10AC,ES=2343,BX=3FF0`。 | 零值前狀態與約略候選外框都不能成為清除遮罩或中文安全矩形。 |
+| confirmed（工具限制） | lifecycle（SHA-256 `867325570bb195bf1446c513f1cd960a8cf9b393b2de9f70cc12d5cf3e588bae`）保留完整 254 筆、無前段遺失；`-watch-file` 只保存最後 200 筆（SHA-256 `02592072b8f376734e7720ef09ccd79b9aa1669c839c197605880af170c61172`）。 | 總數與首／尾定位以 lifecycle 為準；200-line file 不可被當作完整清冊。 |
+| unknown | zero-fill 是否代表任何可見背景、原文、精確文字幾何、完整候選圖邊界、可逆背景、安全矩形與覆蓋資格。 | 不 OCR、不輸出原版圖、不建立譯文、字型、遮罩、DRAFT／READY、覆蓋程式，也不修改 dosgolem。 |
+
+所有 state、snapshot 與 reports 只存在 gitignore 的 `workplace/reports/`；本輪沒有提交原版衍生內容。這是安全否定，
+不表示整體靜態文字候選已窮盡。
