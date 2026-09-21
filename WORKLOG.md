@@ -417,4 +417,7 @@
 - dosgolem 的最小 probe 將 `.BAT` 從 `0100:0100` 作為 COM 式程式碼執行，沒有 batch／`COMMAND.COM`
   直譯能力；這是能精確重現的工具缺口，未被誤寫成 DOS shell 或遊戲的離開碼語意。
 - report 留在 gitignore 的 `workplace/reports/`，原版素材未受版控；未建立 DRAFT／READY、譯文、字型或覆蓋程式。
-  文件、worklist、Issue #5、Git 推送與 Docker／擁有權邊界將在收尾一併核對。
+  worklist render／verify 與 `git diff --check` 通過；commit `b1999e0` 已推送到私有 `main`，
+  [Issue #5](https://github.com/wicanr2/colonization_cht/issues/5#issuecomment-5759528876) 已回填且保持進行中。
+  收尾確認沒有 `colonization` 容器、沒有 root 擁有檔或誤建 `.md` 目錄，原版素材未受版控，隔離 dosgolem 副本
+  乾淨且 push URL 維持 `DISABLED`。
