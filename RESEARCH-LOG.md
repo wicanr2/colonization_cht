@@ -1119,3 +1119,21 @@ dosgolem 是 `workplace/dosgolem` 的 commit `1435f175e785ea096a9268cd1021a42223
 | unknown | call 內的 BX/CX/DX、兩個 pointer、座標矩形、互動與文字語意。 | 不建立互動區清冊、DRAFT／READY、譯文、字型或覆蓋程式。 |
 
 raw dump、trace 與 lifecycle 只存在 gitignore 的 `workplace/reports/`。
+
+## 2026-09-21：目標 039 的滑鼠 producer 資料流與觀測對齊限制
+
+固定輸入、`OPENING.EXE` SHA-256、DOS manifest、dosgolem commit 與第 #5,465,772 state 均沿用目標 038。
+零指令前的 `0924:0560:128` dump 與重播 428 道指令至 #5,466,200 後的 dump 均為 SHA-256
+`538c4844e4c927b347a8f7fd5df991d1344356c7c2428c9732dbae91687acca7`；前者 lifecycle SHA-256 是
+`245668c2218fdf4b075f3d885e7a8f67ccabd16dddcb046e0cc1c5a29a30a67b`，後者為
+`a7384664ca22dd71fffc579b8620465d04dfb440771b430cdd34403a0ae4ee6d`。所有輸入唯讀掛載，產物只在
+gitignore 的 `workplace/reports/`。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | caller raw `0110:094A = 9A 88 05 24 09`；控制與左鍵 trace 都在該 call 後由 `0110:094F` 返回。控制組的 `int 33h AX=0003` 回傳 `BX=0000,CX=0000,DX=0000`，caller return 是 `AX=0000,CX=00A0h,DX=0064h`；左鍵組相應為 `BX=0001,CX=0140h,DX=0064h` 與 `AX=0001,CX=00A0h,DX=0064h`。既有延長 trace SHA-256 分別是 `f7ec4b0c7453569c9068572c7cce161cd5cb61df89f1392d12222a524bf264c9` 與 `a51b0ac380e1826039b11a3b58bc0bfdc8465dc48d4a6eeebb721fb3270146cd`。 | 此 call 的觀測行為將控制／左鍵狀態分別帶回 AX zero／nonzero consumer；不含座標或控制項語意。 |
+| confirmed（限制） | `0924:0560:128` raw dump 的 SHA 在零指令前後相同，且 raw `0924:0584` 是 `C8 00 00 00`；trace 卻以 `0924:0588` 標籤記錄隨後 BP/SP 的 frame-transition，並將 `CD 33` 的 trace 標籤置於相對 raw 位置 +4 bytes。 | 此窗口沒有該 raw 範圍的自修改；raw dump 與 trace 的此處對齊差異可重現，但成因未知。不能用 raw bytes 直接宣稱 trace IP 的 opcode 或資料寫入。 |
+| unknown | 此 call body 的 pointer 寫入、BX→AX 的確切步驟、CX/DX 座標處理、hit-test、按鈕、動態印字與文字來源。 | 在最小重現／工具規格釐清前，這些不得成為 DRAFT／READY 或覆蓋設計依據。 |
+
+前輪目標 038 的 far-call／return 邊仍保留，但「`0924:0588` 是 raw body 的精確起點」不得視為已證實；它目前只可指
+raw far pointer 目標與 trace label。這是一筆追加勘誤，不重寫前輪原始 dump 或 trace。
