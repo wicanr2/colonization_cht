@@ -1091,3 +1091,20 @@ dosgolem 是 `workplace/dosgolem` 的 commit `1435f175e785ea096a9268cd1021a42223
 | unknown | 中央點的畫面／按鈕語意、其他可點區、其 hit-test 資料／常式及任何動態印字、文字來源與安全矩形。 | 此結果不建立 DRAFT／READY、譯文、字型或覆蓋程式。 |
 
 所有 lifecycle、trace、frame 與 palette 僅保存在 gitignore 的 `workplace/reports/`，沒有提交、附加或公開任何原版素材。
+
+## 2026-09-21：目標 037 的滑鼠輪詢第一個控制流分歧
+
+固定輸入、`OPENING.EXE` SHA-256、DOS manifest、dosgolem commit 與第 #5,465,772 state均沿用目標 036。
+兩組各以無網路、一次性 Docker 容器從唯讀 `/game` 重播 427 道指令至 #5,466,200；唯一實驗輸入仍是
+`(160,100)` 左鍵，沒有注入其他座標、按鍵或記憶體修改。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | 兩組都在 #5,465,840 呼叫一次 `int 33h AX=0003`。控制組回傳後為 `BX=0000,CX=0000,DX=0000`；左鍵組為 `BX=0001,CX=0140h,DX=0064h`。短窗 trace SHA-256 分別為 `5d3a16c509fd4eaf02c520ec7f199f3c8638f2d7aa542a88c85106fbee904d46` 與 `c75aa5a0401da3ac6eda860bf2ec852ecc4740e674dd0720a5c5308bce316de6`。 | `CX=0140h` 是 mode 13h 的滑鼠回報倍率後值；它不是遊戲邏輯 X 或區域幾何。 |
+| confirmed | 延長至 #5,466,200 的 control／left-click trace SHA-256 分別為 `f7ec4b0c7453569c9068572c7cce161cd5cb61df89f1392d12222a524bf264c9` 與 `a51b0ac380e1826039b11a3b58bc0bfdc8465dc48d4a6eeebb721fb3270146cd`。trace record #95 是第一個 `CS:IP` 分歧：control `0110:0960, AX=0000`，left-click `0110:0956, AX=0001`。 | 第一個已觀測的控制流條件只依 AX 是否為零分支。 |
+| confirmed | dosgolem real-mode `0110:094F` 的 96-byte dump SHA-256 為 `0880c0b81d4745f3ec7c3f077e5a8248fe23669e6fed0210b77c31a1ebb6acf1`。raw `0110:0952 = 0B C0`、`0110:0954 = 74 0A`；左鍵路徑 `0110:0956` 的 `C7 46 F6 1B 00` 寫入 `001Bh` 至 `[BP-0Ah]`。 | AX boolean 被消費，左鍵非零路徑寫入一個常數；常數與框架欄位的語意未知。 |
+| unknown | AX 如何從 `int 33h` 的 BX/CX/DX 形成、座標比較／矩形、按鈕語意、其他互動路徑與任何動態文字。 | 不建立互動區清冊、DRAFT／READY、譯文、字型或覆蓋程式。 |
+
+技能 `use-ida-pro-9-4` 指定的工具專案 README 與 `ida-94-tools.md` 在預期位置不可讀，故現有 IDA 映像沒有被
+當作已驗證環境；本節沒有使用 IDA 產物。所有 trace、raw dump 與 lifecycle 只留在 gitignore 的
+`workplace/reports/`。

@@ -433,3 +433,13 @@
   `main`，[Issue #5](https://github.com/wicanr2/colonization_cht/issues/5#issuecomment-5759665906) 已回填且保持進行中。
   收尾確認沒有 `colonization` 容器、沒有 root 擁有檔或誤建 `.md` 目錄，原版素材未受版控，隔離 dosgolem 副本
   乾淨且 push URL 維持 `DISABLED`。
+
+## 2026-09-21：完成目標 037 的滑鼠輪詢第一個控制流分歧
+
+- 同一固定 state 的 427 指令短窗比較確認 `int 33h AX=0003` 回傳後，在 `0110:0952–0954` 以 AX 是否非零
+  分岔；這是按下 boolean consumer，不是座標 hit-test 或按鈕語意。左鍵支路對 `[BP-0Ah]` 寫入 `001Bh`，
+  欄位／常數語意仍未知。
+- IDA 9.4 映像的技能指定工具契約文件不可定位，故沒有把未驗證 IDA 輸出當成證據；本輪只使用 dosgolem 的
+  raw trace／dump，所有產物在 gitignore 的 `workplace/reports/`。
+- 原版素材未受版控，未建立互動區清冊、DRAFT／READY、譯文、字型或覆蓋程式。文件、worklist、Issue #5、
+  Git 推送與 Docker／擁有權邊界將在收尾一併核對。
