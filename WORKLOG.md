@@ -485,3 +485,10 @@
   並已回填 [Issue #5](https://github.com/wicanr2/colonization_cht/issues/5#issuecomment-5760793897)，維持 OPEN／進行中。
   收尾確認無 `colonization` 容器、無 root 擁有檔或誤建 `.md` 目錄，原版素材未受版控，隔離 dosgolem 副本乾淨且
   push URL 為 `DISABLED`。
+
+## 2026-09-21：目標 042 的海洋標籤背景安全幾何
+
+- 固定完整 frame 的 canvas／A000 rows 逐位元組相同，但標籤與有限外框共享大量色號，且主色的非背景連通區跨越
+  候選邊界；這排除了目前證據下的均一／主色平面清除策略。
+- 沒有製作中文、字型、遮罩、DRAFT／READY 或覆蓋程式。後續必須取得獨立的 pre-text 背景證據或轉查別的靜態候選，
+  不能把可見文字外框當安全矩形；所有原版衍生 report 維持 gitignore。

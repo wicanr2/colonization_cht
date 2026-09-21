@@ -89,6 +89,8 @@ batch／`COMMAND.COM` 重播層。因此未取得父程序收據，不宣稱已�
 會把 CX、DX 寫回 caller locals，並以 `BX OR [DS:5AB4]` 形成 AX。各位址的遊戲語意、座標判斷與文字輸出仍未定位。
 [目標 041](docs/goals/041-mouse-producer-state-gate-dataflow.md) 進一步確認此固定開場 state 中 `[DS:5AB4]` 是零、
 AX 的差異直接隨既有左鍵的 BX 變化；這仍是退出路徑資料流，沒有觀測到動態文字輸出。
+[目標 042](docs/goals/042-ocean-label-background-safety-geometry.md) 已確認海洋標籤與其有限外框不是可安全單色清除的
+背景：它們共享大量地圖色號與跨界連通區。因此尚未建立靜態中文覆蓋原型或安全矩形。
 
 第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
 確認的執行策略見 [目標 002](docs/goals/002-win16-execution-strategy.md)；實際工作順序與 Issue
@@ -154,6 +156,7 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第三十九輪目標](docs/goals/039-mouse-producer-body-dataflow.md)
 - [第四十輪目標](docs/goals/040-dosgolem-far-call-observation-alignment.md)
 - [第四十一輪目標](docs/goals/041-mouse-producer-state-gate-dataflow.md)
+- [第四十二輪目標](docs/goals/042-ocean-label-background-safety-geometry.md)
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [MCB 記憶體 arena 重新協調規格草案](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)

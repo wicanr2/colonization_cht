@@ -1170,3 +1170,19 @@ raw far pointer 目標與 trace label。這是一筆追加勘誤，不重寫前�
 | unknown | DS word 的遊戲語意、其他值、hit-test、按鈕、動態印字、原文來源、訊息鍵與中文覆蓋資格。 | 不建立 DRAFT／READY、譯文、字型或覆蓋程式。 |
 
 所有 lifecycle、trace 與 dumps 僅在 gitignore 的 `workplace/reports/`，沒有提交、附加或公開原版素材。
+
+## 2026-09-21：目標 042 的海洋標籤背景安全幾何
+
+固定 state、輸入雜湊與 dosgolem commit 沿用目標 033。零指令 state dump 的 canvas `1C43:3840:6400` 與
+A000 `A000:3840:6400` 分別是邏輯 y=`45..64` 的 320×20 色號 rows，兩份逐位元組相同，SHA-256 均為
+`c13081ba2d6fbe514e6eae7b6b75eb27d1a0eddbca644ee759961f6d20746c51`；lifecycle SHA-256 為
+`83b049a48e94967359e3b4d552db90fcb7cb53ccd4f44d5a8fda0bb45504a41e`。色號／連通性 report SHA-256 為
+`c0a9a0e0ca8ad1e60626543bdcd981013d14438bcec7adf8ad80fd9fc5c151c6`，僅存在 gitignore 的 `workplace/reports/`。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | 唯一候選幾何是 `(x=53,y=49,w=121,h=12)`；有限外框為 `x=[45,182)、y=[45,65)`。候選有 61 色、外框有 67 色、共享 48 色；候選主色 `136`／`173` 為 736／359 pixels。 | 可見外框不是均一背景，也不能作中文安全矩形。 |
+| confirmed（安全否定） | 把 `{136}`、`{173}`、`{136,173}` 分別當背景時，4-連通的非背景 component 跨越候選與外框的數量為 10、1、19；兩色集合最大跨界 component 為 183 pixels。 | 這些最常見色號的遮罩不能安全隔離字形與相鄰地圖圖像；不允許平面填色、擴大不透明矩形或根據色號自行生成清除遮罩。 |
+| unknown | pre-text 每像素背景、可逆清除策略、中文安全矩形、完整資產歸屬與排版。 | 必須另有可重播背景證據或另一候選，才能做可丟棄原型；目前不建立 DRAFT／READY。 |
+
+原版 frame、色盤、pixels、PNG 或遮罩均未進 Git、Issue 或外部輸出。
