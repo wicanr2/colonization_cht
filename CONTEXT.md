@@ -61,6 +61,11 @@
   block `seg/size/free`，無法保留 owner/name／生命週期。這是 confirmed 的現行 executor 缺口，不是
   Colonization 原版 child／TSR 需求。固定冷啟動至第 2,000,000 指令只觀測到一次 `AH=4Bh AL=03h`
   overlay，未觀測 `AH=4Ch`／`31h`；該未觀測只限此窗口。
+- 目標 016 的 service 探針進一步確認：child 的 `48h` 與 `4Ah` 後 MCB owner 均為 root `0100`；child
+  先 `49h` 再 normal exit 時，arena 雖仍有兩格但父可重取 `2014`。更嚴重的是 child `AH=31h DX=40h`
+  後 `freeSeg=2041`，父 `AH=48h` 卻配得 `2035`，落入宣告保留範圍。state v2 可 round-trip child
+  PSP／stack／arena／freeSeg，卻根本沒有 owner/name；`AH=51h`／`62h` 又固定回根 PSP。這些均是
+  confirmed executor 缺口，絕非 Colonization child／TSR parity。
 
 ## 尚未確認
 
@@ -73,6 +78,8 @@
 Issue #23 已完成 READY profile 的實作與同狀態收據。#24 已完成首次控制轉移、清零引數、overlay 載入者、
 客體活躍 MCB 鏈、過期 arena 重發佈，以及 DRAFT 003 的 caller／consumer／可表示性與多行程 owner
 缺口審查；DRAFT 仍未 READY。使用者已選 B，下一個最小前沿是先為通用 process/owner/name/state 模型
-定義可驗證的服務轉移、TSR／外部 owner 拒絕條件、state migration 與一般性驗收，再以固定原版同狀態
-驗證它實際觸及的部分；絕不直接修正。#5 與 #8 在 #24 之前維持阻塞。Windows NE 清冊（#19）只保留為
-歷史輸入證據。Issue #10 與 #15 仍需在真實證據與原型具備後由使用者決定。
+定義可驗證的服務轉移、TSR／外部 owner 拒絕條件、state migration 與一般性驗收；目標 016 已確認
+現有 root owner 重發佈、TSR retained-range overlap 與 current-PSP API 不一致。下一個最小前沿是取得
+外部 owner／跨程序服務的公開契約或受控 oracle、把 migration 與 rejection 寫成可審查 DRAFT，再以固定
+原版同狀態驗證它實際觸及的 overlay 路徑；絕不直接修正。#5 與 #8 在 #24 之前維持阻塞。Windows NE
+清冊（#19）只保留為歷史輸入證據。Issue #10 與 #15 仍需在真實證據與原型具備後由使用者決定。

@@ -595,3 +595,34 @@ raw-binary loader 用 `ida-pro-9.4-idapython:locked-v1`（image ID
 結論：B 的 DRAFT 至少必須保存每個 MCB 的 owner/name、process 存活與 parent 關係、客體 header snapshot
 及其 versioned state；`AH=48h`／`49h`／`4Ah` 的跨 process 轉移不能再由 root PSP 或 `freeSeg` 猜補。
 TSR、外部 owner、跨程序失敗回傳與 state migration 仍是 unknown，故沒有實作，規格 003 保持 DRAFT。
+
+## 2026-09-21：目標 016 的多行程 service transition DRAFT 證據
+
+本輪沿用原版輸入／dosgolem commit／隔離與權利邊界；沒有新增原版執行宣稱。目標是量現行 executor
+對使用者已選 B 的 process／owner 模型缺口，並把它與固定 `OPENING.EXE` 已見的 `AL=03h` overlay 分開。
+
+一次性、無網路的 Docker 探針 `dosgolem-goal016-process-service-audit-20260921.txt` SHA-256
+`1f7a7abc73d588a124debcc926d2a65efb0917d1289439a7b2f3196f21bc7202`，以 child PSP `2001` 量得：
+
+| 推論等級 | 受控 executor 觀測 |
+|---|---|
+| confirmed | child `AH=48h` 配得 `2014`，其 MCB owner 是 root `0100`；child `AH=4Ah` 後 owner 仍為 `0100`，child `AH=49h` 後才為 `0000`。這吻合 `syncMCB()` 對 arena 固定使用 `machine.PSPSeg`。 |
+| confirmed | SaveState encode、gob decode 及 LoadState 都保留 child `curPSP=2001`、stack=1、arena=2、`freeSeg=2013`；`blockState` 的原始欄位只有 `Seg/Size/Free`，故 wire format 無 owner/name。 |
+| confirmed | 上述 child 先 release 再 normal exit 後，`freeSeg=2000`、arena=2，父可重新配置 `2014`。這與目標 015「未 release 就 exit」後父得到 `2016` 不矛盾，兩者都顯示 `freeSeg` 與 arena 不是 owner-aware lifecycle。 |
+| confirmed | TSR child `AH=48h` 配得 `2014`、owner 是 `0100`；`AH=31h DX=40h` 後 `freeSeg=2041`、arena=3，父隨後 `AH=48h` 得 `2035`。該資料段位於 PSP `2001` 起保留 0x40 段的範圍內，是現行 executor 的 retained-range overlap。 |
+
+原始 source 定位：`int21.go:205`–`213` 在 `48h/49h/4Ah` 後均 `syncMCB()`；`786`–`800` 以 root
+PSP 發布 owner；`468`–`530` 的 `4Ah` 使用 `curPSP` 移動游標但不驗證既有 arena；`exec.go:112`–`171`
+建立 child 的初始 owner，`277`–`322` normal exit 只還原 `freeSeg`，`304`–`311` TSR 只上推游標；
+`state.go:18`–`48` 的 v2 blockState 沒有 owner/name，`int21.go:221`–`225` 的 `AH=51h/62h` 固定回
+`machine.PSPSeg`。這些均為 source／executor confirmed，不是原版 address 空間結論。
+
+選定既有契約重跑收據 `dosgolem-goal016-existing-contracts-20260921.txt` SHA-256
+`76df8429c28e3a8590863cd01eccf76805a435f467b0ff28551edf4c06cdeffe`，通過 allocator、free/coalesce、
+resize、MCB walk、normal EXEC return、TSR、child PSP resize、連續 EXEC 回收及 root-state。其範圍不包含
+owner/name round-trip、TSR retained range 後 parent allocation、或外部 owner／跨程序服務，不能當作這些
+行為的 parity 證明。
+
+結論：B 的下一份 READY 候選必須以 owner/name/process registry 同時驅動 MCB 發布、`AH=51h/62h`、
+`48h/49h/4Ah`、`4Bh/4Ch/31h` 與 state migration；在 external owner、跨程序錯誤、客體手改 MCB、TSR
+及原版同狀態收據前，規格 003 保持 DRAFT，沒有修改 dosgolem。

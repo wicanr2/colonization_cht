@@ -193,3 +193,16 @@
 - DRAFT 維持 DRAFT、未修改 dosgolem 或原版；已將結論回填
   [Issue #24](https://github.com/wicanr2/colonization_cht/issues/24#issuecomment-5755046145)，並推送證據提交
   `90c5cdc`。已刪除一次性探針與 IDA 暫存資料庫；Docker 清理、擁有權與原版素材版控檢查均通過。
+
+## 2026-09-21：目標 016 的多行程 service transition 審核
+
+- 以一次性 child 探針實測 `AH=48h`、`4Ah`、`49h`、normal exit、`AH=31h` 與 SaveState／LoadState。
+  收據 SHA-256 `1f7a7abc73d588a124debcc926d2a65efb0917d1289439a7b2f3196f21bc7202` 確認 child owner 被
+  root 重發佈，且 TSR retained range 可被父配置重疊；這只描述現行 executor，不是原版 parity。
+- 選定 allocator、MCB、resize、normal EXEC、TSR、child PSP resize、連續 EXEC 回收與 state 契約測試均
+  通過，收據 SHA-256 `76df8429c28e3a8590863cd01eccf76805a435f467b0ff28551edf4c06cdeffe`；測試範圍不含
+  owner/name 或 TSR retain overlap 的現有保證。
+- DRAFT 003 已新增 service transition ledger 與 B 進 READY 前的 owner/name/process registry、拒絕、
+  state migration 與同狀態驗收條件；保持 DRAFT，未修改 dosgolem 或原版。
+- 一次性測試檔已從隔離 dosgolem 副本刪除；收尾將回填 Issue／Git，並再次檢查 Docker、擁有權與原版
+  素材邊界。

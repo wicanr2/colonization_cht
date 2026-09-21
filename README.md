@@ -35,11 +35,11 @@ handshake，不宣稱完整音效或 OPL3 parity。目前依 [目標 009](docs/g
 鏈直接建立 `1C42` 記錄；目前 dosgolem 的內部記憶體 arena 沒有吸收該修改，失敗的 `AH=49h` 服務又
 重發佈過期鏈，使 overlay 重用 `1C43`。兩個呼叫端都覆寫服務回傳值，不能把它誤稱為遊戲要求成功釋放。
 這已收斂為僅供審查的 [MCB 重新協調 DRAFT 規格](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)，
-尚不授權實作；使用者已選定通用多行程 MCB 匯入範圍。目標 015 確認現行 arena 遺失 child owner/name
-與回收生命週期，固定遊戲路徑目前仍只觀測到 `AH=4Bh AL=03h` overlay；這不會被誤稱成 child EXEC
-或 TSR 的原版需求。[Issue #24](https://github.com/wicanr2/colonization_cht/issues/24) 仍在 DRAFT 閘門，不會實作猜測性的
+尚不授權實作；使用者已選定通用多行程 MCB 匯入範圍。目標 016 確認現行 arena 會遺失 child owner/name，
+且 TSR 宣告保留後仍可能讓父配置落入保留範圍；固定遊戲路徑目前仍只觀測到 `AH=4Bh AL=03h` overlay，
+這不會被誤稱成 child EXEC 或 TSR 的原版需求。[Issue #24](https://github.com/wicanr2/colonization_cht/issues/24) 仍在 DRAFT 閘門，不會實作猜測性的
 DOS、滑鼠或音訊服務。範圍、固定輸入與證據界線見
-[目標 015](docs/goals/015-mcb-multiprocess-ownership-evidence.md)。此前沒有可下載中文化程式或任何完成度宣稱。先前 Windows 3.x NE
+[目標 016](docs/goals/016-mcb-process-service-draft-audit.md)。此前沒有可下載中文化程式或任何完成度宣稱。先前 Windows 3.x NE
 輸入只保留為歷史研究證據，不是目前實作目標。
 
 第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
@@ -80,6 +80,7 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第十三輪目標](docs/goals/013-mcb-arena-draft-evidence-review.md)
 - [第十四輪目標](docs/goals/014-mcb-arena-ready-scope-audit.md)
 - [第十五輪目標](docs/goals/015-mcb-multiprocess-ownership-evidence.md)
+- [第十六輪目標](docs/goals/016-mcb-process-service-draft-audit.md)
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [MCB 記憶體 arena 重新協調規格草案](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)

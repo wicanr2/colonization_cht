@@ -258,3 +258,50 @@ child／TSR 的原版 parity 聲明。IDA 輸入是 320-byte runtime 傾印
 READY 前仍是 unknown：外部／非 child PSP owner 的接受集合、TSR 在直接修改 MCB 後的完整回收規則、
 跨程序 `AH=49h`／`4Ah` 的精確 DOS 回傳、state migration 格式，以及能把這些內部契約接回固定
 `OPENING.EXE` 的同狀態驗收。故本規格維持 DRAFT，禁止依本節修改 dosgolem。
+
+## 目標 016：B 的 service transition 審核，仍為 DRAFT
+
+本節將使用者已選定的通用多行程範圍，收斂為現行 executor 的可重現差異與 READY 前必須驗收的
+transition ledger。它**不是**真 DOS 規格，也不把固定 `OPENING.EXE` 尚未觀測到的 child EXEC、終止、
+TSR 或外部 owner 變成遊戲需求。所有 source 結論固定於隔離副本 commit
+`1b0efdf98ac3ab85c90cb80c3e489e935fb45665`；一次性 Docker 探針收據
+`dosgolem-goal016-process-service-audit-20260921.txt` 的 SHA-256 是
+`1f7a7abc73d588a124debcc926d2a65efb0917d1289439a7b2f3196f21bc7202`。
+
+### 現行 service transition ledger
+
+| 服務／狀態 | 現行實作與受控觀測 | 等級與 B 的影響 |
+|---|---|---|
+| `AH=48h` | `alloc()`（`int21.go:618`–`629`）只管理 `seg/size/free`；INT 21h 派送隨即呼叫 `syncMCB()`（`205`–`207`），其對所有已配置 arena block 固定寫 `machine.PSPSeg`、free 才寫 owner `0`（`786`–`800`）。探針 child PSP `2001` 配得 `2014`，MCB owner 為 `0100`。 | confirmed executor；不能從 `curPSP` 推導 owner。 |
+| `AH=49h` | `release()` 只以 `ES` 對到 arena block，沒有 caller PSP／owner 驗證；找不到才 CF=1、`AX=9`（`694`–`713`），派送後仍重發 MCB（`208`–`210`）。探針 child 釋放後該 MCB owner 變 `0000`。 | confirmed executor；外部／跨程序 release 的接受條件與真 DOS 回傳仍 unknown。 |
+| `AH=4Ah` | `setBlock()` 先以 `MemTop` 計可用量，對 `blk == d.curPSP` 改 `freeSeg`，但明記沒有驗證既有 arena 配置（`468`–`530`）；arena block 才走 `resize()`（`728`–`771`），派送後一樣根 PSP 重發 MCB（`211`–`213`）。探針 child 縮小後 MCB owner 仍是 `0100`。 | confirmed executor；child PSP 與已配置 block 的邊界尚不能形成通用安全規則。 |
+| `AH=4Bh AL=00h` | `spawn()` 以 `freeSeg+1` 建 child PSP、保存 parent frame，並先直接寫一格 owner 為 child PSP 的 MCB（`exec.go:112`–`171`）；`enterProgram()` 才設 `curPSP` 與 `freeSeg`（`240`–`253`）。 | confirmed executor；第一次 memory service 後會被上述 `syncMCB()` 覆寫。固定遊戲只見 `AL=03h` overlay。 |
+| `AH=4Ch` normal exit | `terminate()` 還原 parent frame／`curPSP`，non-TSR 只將 `freeSeg` 退回 parent frame（`277`–`322`），不依 owner 釋放或重建 arena。探針中 child 先 `48h`→`4Ah`→`49h` 後 normal exit，arena 留 2 格，父 `48h` 得回自由的 `2014`。 | confirmed executor；既有測試只保證游標與連續 EXEC 回復，非 owner-lifecycle parity。若 child 未先 `49h`，目標 015 已觀測到 arena 遺留與父落在 `2016`。 |
+| `AH=31h` TSR | `tsr()` 交給 `terminate(..., true, DX)`（`409`–`412`）；它只在 `curPSP+keep > freeSeg` 時上推 `freeSeg`（`304`–`311`），不依 arena 所有權保留區塊。探針中 child PSP `2001`、`DX=40h` 後 `freeSeg=2041`，arena 有 3 格，父 `48h` 卻拿到 `2035`，落在宣告保留的範圍內。 | confirmed executor defect；不可將這個結果稱為原版 TSR parity。 |
+| SaveState／LoadState | v2 `blockState` 僅有 `Seg/Size/Free`（`state.go:18`–`48`）；`procState` 保存 parent frame／PSP／`freeSeg`（`50`–`59`）。探針 encode、decode、LoadState 後都保留 child `curPSP=2001`、stack=1、arena=2、`freeSeg=2013`，但 wire format 沒有 owner/name 欄位。 | confirmed executor；v2 不可表示 B 所需所有權，遷移不能默認 root owner。 |
+| `AH=51h`／`62h` | 現行派送直接回傳常數 `machine.PSPSeg`（`int21.go:221`–`225`），不讀 `d.curPSP`。 | confirmed source；child 的「目前 PSP」可觀測介面與內部 `curPSP` 不一致，必須列入 B 的 READY 收據。 |
+
+既有獨立契約重跑收據 `dosgolem-goal016-existing-contracts-20260921.txt`（SHA-256
+`76df8429c28e3a8590863cd01eccf76805a435f467b0ff28551edf4c06cdeffe`）通過 allocator、free／coalesce、
+resize、MCB walk、normal child return、TSR、child PSP resize、連續 EXEC 回收與 root state。它們證明
+各測試的現行內部預期，不能反駁表中的 multi-owner／TSR retain 缺口。
+
+### B 進入 READY 前的最小驗收契約
+
+任何未來實作必須先將下列條件以 RE 證據審查成 READY；本節不指定演算法：
+
+1. 每個 typed arena record 和每個客體 MCB header 必須在 service 邊界同時保存並驗證
+   type、segment、size、free、owner PSP 與 opaque 8-byte name；不一致、斷鏈、未知 owner 或 name
+   不可表示時必須保留原始 bytes／診斷並失敗即關閉，不能 `syncMCB()` 覆寫。
+2. process registry 必須能連結 current PSP、parent/suspended frame、child 存活／終止／TSR 狀態與
+   每一個 owner block；`AH=51h`／`62h`、`48h`／`49h`／`4Ah`、`4Bh`／`4Ch`／`31h` 都要從同一
+   registry 取 owner，不能各自退回 root PSP 或 `freeSeg`。
+3. 每個服務要有 parent／child／TSR／unknown external owner 的成功、失敗、carry、AX/BX 與發布後
+   MCB 結果收據。未經原版或平台規格證實的跨程序 `49h`／`4Ah` 不得以「比較方便」的結果填補。
+4. state 必須升版後可 round-trip owner/name/process 關係與受驗證的 MCB snapshot；v2 state 或無法
+   表示的 live chain 必須失敗即關閉，而非靜默遷移為 owner `0100`。驗收至少包含 normal exit、TSR、
+   child resize、child release、state load 後 service，以及固定遊戲實際觸及的 overlay 同狀態路徑。
+
+目前仍 unknown：真 DOS 對外部／非 child owner 的集合、手動改寫客體 MCB 後的 complete TSR 行為、
+跨程序 `49h`／`4Ah` 的精確 error 語意、v2 migration 格式與任何 child／TSR 路徑的 Colonization
+原版收據。因此 DRAFT 003 仍未 READY，禁止實作。
