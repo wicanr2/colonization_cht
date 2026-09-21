@@ -1,6 +1,6 @@
 # 目標 039：滑鼠 boolean producer 本體資料流
 
-狀態：in_progress<br>
+狀態：completed<br>
 日期：2026-09-21<br>
 對應 Issue：[Issue #5](https://github.com/wicanr2/colonization_cht/issues/5)<br>
 前置證據：[目標 037](037-opening-mouse-poll-first-divergence.md)、[目標 038](038-opening-mouse-boolean-producer.md)
@@ -45,4 +45,4 @@ pointer 的寫入與 AX 回傳。它仍不是座標 hit-test、按鈕名稱或�
 - [x] `0924:0588` 的可確認 BX/CX/DX 與 AX 回傳邊已保留原始定位與推論等級；pointer body 寫入因 trace/raw
   對齊限制維持未知。
 - [x] 未將本體資料流升格為座標 hit-test、按鈕、動態文字或中文覆蓋資格。
-- [ ] 文件、Issue #5、Git、Docker 清理與權利邊界一致。
+- [x] 文件、Issue #5、Git、Docker 清理與權利邊界一致。
