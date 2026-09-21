@@ -1263,3 +1263,21 @@ A000 `A000:3840:6400` 分別是邏輯 y=`45..64` 的 320×20 色號 rows，兩�
 
 所有 raw、timeline、trace 與 lifecycle 僅在 gitignore 的 `workplace/reports/`；沒有提交原版衍生內容。本輪不建立
 譯文、字型、DRAFT／READY 或覆蓋程式，也不修改 dosgolem。
+
+## 2026-09-21：目標 047 的海洋標籤 pre-text canvas 安全否定
+
+固定輸入仍為 `OPENING.EXE`（SHA-256
+`3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`）與 DOS manifest
+`fbded5601e09889e285294e605df2c306c12a90603e556113b95d2afcf4d5bd3`。以隔離 dosgolem commit
+`1435f175e785ea096a9268cd1021a4222300bd43` 從 #5,432,800 state
+`goal047-ocean-label-prewriter-5432800.state`（SHA-256
+`eb68cfc2630f1a17e6a75f6ebd14725d33ff375d5bcde1aff2297e1fcfbbb468`）重播至 #5,447,041。原版 `/game` 唯讀；
+所有容器無網路、以 UID/GID 1000:1000 執行，收據僅在 gitignore 的 `workplace/reports/`。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | 對 canvas 外包 `[201A5h,2111Eh)` 在 #5,432,822／#5,447,039 同次取 3,961-byte snapshot；SHA-256 是 `920b7d966cbebb51532944ac935683a783a13e2b689ccd40840a40ea7518da68`／`b7a87818cacd2da711dab6ef7db84ad01af450fade015140164075f0d0e8a59b`。差分 3,961 bytes，以 320-byte stride 篩回 `x=[53,174)、y=[49,61)` 後恰有 1,452 pixels，每列 121，bbox 完全相符；標籤外有 2,509 bytes。 | 這是實際幾何與外包區分開的同次寫入收據；不能把外包視為文字矩形。 |
+| confirmed | 精確標籤矩形的 writer 前 1,452 bytes 均為零值，writer 後有 61 種非零色號。完整 lifecycle 的 6,724 筆 write 首於 #5,432,823 `201A5h`、末於 #5,447,038 `2106Fh`，全為 `03BD:00CA`；前一指令 `03BD:00C8` raw 是 `F3 A5`／`REP MOVSW`。 | zero-fill 是這個合成窗口的 pre-writer canvas 狀態，不是已證實的可見背景；writer 跨越標籤外未知圖像。 |
+| confirmed（工具限制） | lifecycle、outer write TSV、分析 report SHA-256 分別為 `7f8a371b3b133988114cf866890c8f8f0977fa630a5b864339c3145dd0049cf3`、`555ce41d9ba1ffec5887e31ddfa962cd283f04900f5a2eb08e67f473c013ee49`、`d182761faece2a88f42bdac0bbf27a94f3072497ce3f7be8920477e868401602`。`-watch-file` 僅保留最後 200 筆，完整 6,724 筆計數與第一／末筆以 lifecycle 為準。register report 的 #5,432,823 post record 為 `DS:SI=388B:5F00`、`ES:DI=1E23:2080`、`CX=0000`；raw／register 皆只留本機。 | 不以 200-line TSV 推斷完整時序，且不公開原版衍生 raw／pixel。 |
+| confirmed（安全否定） | 本輪沒有獨立、可回復且不跨未知圖像的 pre-text 背景；現有值是 zero-fill，且完整 writer 改寫標籤外 2,509 bytes。 | 拒絕用零值、單色、主色、外包或可見外框建立清除／遮罩／中文安全矩形。 |
+| unknown | 英文字形前的可見背景、完整資產歸屬、可逆清除策略、中文安全矩形與靜態覆蓋資格。 | 不 OCR、不轉存原版圖、不建立譯文、字型、遮罩、DRAFT／READY、覆蓋程式，亦不修改 dosgolem。 |
