@@ -1038,3 +1038,22 @@ probe 都執行 34,228 道指令至 #5,500,000，保持 mode 13h、無未實作�
 第一次從 #4,156,900 state 起跑的長窗 canvas watch 因 probe 的 200 筆容量而截斷，故沒有被用於 copy 後零變更
 結論；本輪改用完整 copy 後 state 的短窗口，兩個零位元組 watch TSV 才是上述結論的唯一監看依據。
 所有位址均為 dosgolem 執行期線性位址；frame、palette、state、TSV 與 PNG 均未加入 Git 或 Issue。
+
+## 2026-09-21：目標 034 的完整開場畫面後單次 Enter 探測
+
+固定輸入、`OPENING.EXE` SHA-256、輸入 manifest、dosgolem commit 與目標 033 的第 #5,465,772 state
+`goal033-post-full-copy-5465772.state`（SHA-256
+`c5cbfb0e184aac21455bdc7a976d83fa84e55af7cde0de36e40861d9bd7a77ba`）沿用不變。兩組均以無網路、一次性
+Docker 容器、唯讀 `/game` 掛載從同一 state 展開；預定上限同為 #7,000,000，只有實驗組以 BIOS 緩衝區在
+#5,465,773 排入一個 Enter。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | 控制組執行至 #7,000,000（1,534,228 道指令）仍在 mode 13h、`0557:00B4`；沒有鍵取走、檔案開啟、主控台、B8000、全形／半形字型 hook 或未實作服務。report SHA-256 為 `65b32d5ffbdfbd642657b42f9f2864c542e7f075880faf0c2cf83618ddb12a94`，終點 indexed frame SHA-256 為 `ff3b73f1e327e09549e6f347d59f1f227e139b63db20c317d8f5138423f20279`。 | 無輸入時，這個開場程序在觀測窗口持續圖形路徑。 |
+| confirmed | 實驗組的 Enter 在 #5,465,827 由 `int16-AH00-bda` 取走；#5,511,173 切到 mode 03h，#5,511,796 終止，離開碼為 `0x6C`。report SHA-256 為 `381da331bb379770fe9e037c6fcfff52b4f11d81cd14b03f0b737105c7309d0b`。 | 這個固定畫面上的單一 Enter 觸發 `OPENING.EXE` 的退出，而非到達共同的 #7,000,000 終點。 |
+| confirmed | 有界 trace 在 `0562:0396` 前記錄 `AX=4C6C`；raw `0562:0394–0397` 是 `B4 4C CD 21`。trace SHA-256 為 `bc022c9f814f3c9af993194c3ebf4366823f0fade95f4a3e1beda2cdf399f498`，raw-byte 收據 SHA-256 為 `f703e999cfc07e2841dc42d38441cf6229218c5979303b074c46660d76762708`。 | `0562:0396` 是 confirmed 的 DOS `int 21h AH=4Ch` 終止指令，回傳 `AL=6Ch`。 |
+| confirmed | Enter 組沒有新檔案開啟、主控台輸出、B8000 或全形／半形字型 hook；唯一未實作服務是終止前 #5,511,000 的 `int 21h AH=2Dh` 一次。其 `-dump-vram` 在 mode 03h 後仍含 A000 色號陣列。 | 這個 A000 傾印是終止後殘留，不能當成 Enter 後的新可見畫面或文字輸出證據；`AH=2Dh` 的語意與其是否影響路徑維持 unknown。 |
+| unknown | 哪個 DOS 父程序／啟動器消費 `0x6C`、其後續正式執行檔、其他正常遊戲入口，以及任何動態印字呼叫點、文字來源與幾何。 | 不建立動態文字 DRAFT／READY、譯文、字型或覆蓋程式。 |
+
+本輪只比較同一快照的正常無輸入與單一 BIOS Enter，沒有盲注、掃描點擊、記憶體改寫或原版修改。固定 state、
+report、trace 與畫面傾印均只保留在 gitignore 的 `workplace/reports/`。
