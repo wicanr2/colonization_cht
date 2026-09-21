@@ -196,6 +196,11 @@
   精確矩形在 writer 前全為 zero-fill、writer 後為 61 種非零色號；完整外包 3,961 bytes 都變更，且有 2,509 bytes
   在標籤外。6,724 筆完整 lifecycle write 全是 `03BD:00CA`（前指令 `03BD:00C8 = F3 A5`／`REP MOVSW`）。因此零值
   不是已知可見背景，writer 又跨未知圖像，已確認拒絕清除／遮罩；安全矩形與覆蓋資格仍為 unknown。
+- 目標 048 對固定 `VICEROY.EXE` direct-entry 證實：#2,216 的 `0020:00D3=FF D4` 在
+  `SS:SP=26F5:4028` 下走至 #2,217 `0020:4028` 並將 SP 壓為 `4026`，接著誤解碼至
+  `0020:402A=7E FE` 的自迴圈。#1M–#5M 無輸入窗口沒有未實作服務、檔案、畫面或 I/O，VRAM 仍全零。
+  這是 direct-entry 堆疊控制流的 confirmed 診斷，正常 launcher／stack context 與動態文字仍為 unknown；
+  沒有具體通用 dosgolem 缺口，不能建 DRAFT 或實作。
 
 ## 尚未確認
 
@@ -213,6 +218,8 @@ Issue #23 已完成 READY profile 的實作與同狀態收據，#24 的 MCB impo
 動態切片若仍沿此出口支路，應只追 `0110:0956` 寫入 `001Bh` 後的控制流，不將它假稱為文字路徑。目標 046
 已完成這一條出口鏈且排除文字事件；下一個動態切片必須是另一條已觀測的正常玩家路徑，不可用 batch 假設、
 `VICEROY.EXE` direct-entry 或新座標注入替代。
+目標 048 已確認 direct-entry 的 stack-based 自迴圈，不能再把它當作 emulator bug 或正常入口重複研究；
+必須先取得原始 launcher／parent context 的實際可觀測證據。
 `OPENBORD.PIK` 的
 已確認 320×24 範圍已排除為文字候選；下一個
 靜態前沿已取得 `opening-map-ocean-label` 的部分原始像素→暫存→畫布→有限窗口 A000 存續鏈；目標 042 已排除均一／主色

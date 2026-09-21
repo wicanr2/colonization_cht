@@ -1281,3 +1281,21 @@ A000 `A000:3840:6400` 分別是邏輯 y=`45..64` 的 320×20 色號 rows，兩�
 | confirmed（工具限制） | lifecycle、outer write TSV、分析 report SHA-256 分別為 `7f8a371b3b133988114cf866890c8f8f0977fa630a5b864339c3145dd0049cf3`、`555ce41d9ba1ffec5887e31ddfa962cd283f04900f5a2eb08e67f473c013ee49`、`d182761faece2a88f42bdac0bbf27a94f3072497ce3f7be8920477e868401602`。`-watch-file` 僅保留最後 200 筆，完整 6,724 筆計數與第一／末筆以 lifecycle 為準。register report 的 #5,432,823 post record 為 `DS:SI=388B:5F00`、`ES:DI=1E23:2080`、`CX=0000`；raw／register 皆只留本機。 | 不以 200-line TSV 推斷完整時序，且不公開原版衍生 raw／pixel。 |
 | confirmed（安全否定） | 本輪沒有獨立、可回復且不跨未知圖像的 pre-text 背景；現有值是 zero-fill，且完整 writer 改寫標籤外 2,509 bytes。 | 拒絕用零值、單色、主色、外包或可見外框建立清除／遮罩／中文安全矩形。 |
 | unknown | 英文字形前的可見背景、完整資產歸屬、可逆清除策略、中文安全矩形與靜態覆蓋資格。 | 不 OCR、不轉存原版圖、不建立譯文、字型、遮罩、DRAFT／READY、覆蓋程式，亦不修改 dosgolem。 |
+
+## 2026-09-22：目標 048 的 `VICEROY.EXE` direct-entry 停滯診斷
+
+固定輸入是 `VICEROY.EXE`（SHA-256
+`a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3`）與 DOS manifest
+`fbded5601e09889e285294e605df2c306c12a90603e556113b95d2afcf4d5bd3`。工具是隔離 dosgolem commit
+`1435f175e785ea096a9268cd1021a4222300bd43`；所有實驗無網路、UID/GID 1000:1000、原版 `/game` 唯讀。這是
+direct-entry 診斷，不是 `OPENING.EXE` 的已證實後續、正常玩家路徑或動態文字收據。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | #1,000,000 cold state SHA-256 `ab91f84efba8e9264d3643701526ce64da486e7cd9c8ecd2a37f5dfb59c98258`；#1,000,001 lifecycle SHA-256 `4eefdaba9a206e68be53c25a02b2a8bb469a36b2b1c4b9c488bd796cd8c5538f`。終點 `0020:402A`、IF=false、mode 03h，無未實作服務、檔案、A000／B8000、主控台、字型 hook 或 I/O。 | 可重生的是無輸入 direct-entry 停滯，不是可見遊戲／文字畫面。 |
+| confirmed | #1,700–#3,001 IP timeline（SHA-256 `cf3f6d68297619a11a47bd4178a04f84343320c0b1810b5587a76bfda4f7f12f`）在 #2,216 為 `0020:00D3`，#2,217 為 `0020:4028`，#2,218 起停在 `0020:402A`。runtime raw `0020:00D3=FF D4`；該次 `SS:SP=26F5:4028`，下一筆 SP 為 `4026`。caller raw `4026h–4028h=83 C4 04`，隨後 `402Ah=7E FE`。`CALL SP` lifecycle／trace SHA-256 為 `3c4273beb6f4616ab1a25745127eebe262ae7cb681e8f936b4a75d75608eed04`／`89ee903750964f8341a0d591ea145b637c71439a995c2bb6cde80b778b13778e`。 | direct-entry 實際以 stack pointer 作 call target，落到 caller immediate byte，再進入自迴圈；這是直接觀測的控制流，不是推測性的 emulator fault。 |
+| confirmed（診斷停止線） | 從 #1M state 重播至 #5,000,001，4,000,001 道指令後同為 `0020:402A`，沒有服務、檔案、畫面或 I/O 事件；VRAM SHA-256 `4f7988030a00d082fe445e00a2ac5dab502300ff1b80e8592dd569867b60ef74` 與 #1M 終點相同。lifecycle／trace SHA-256 `9ab0b3ed3e7b363f621022df24877114fc63917ed188261492d8aec25576db61`／`188cea8698593edfe5593ab2b7ce834210ba0c0328ffc681bb9a1d76d9c5bb30`。 | 不存在可由此 direct-entry 指定的未實作 CPU、DOS、BIOS 或 EMS 服務。 |
+| unknown | 原始 launcher／parent 建立的正確 stack、call target、程序關係與文字路徑。 | 不建立 dosgolem DRAFT／READY 或實作；必須先取得正常 path 的 parent context 證據。 |
+
+所有 state、raw、trace、timeline 與 indexed dump 僅在 gitignore 的 `workplace/reports/`，沒有附上 Git 或 Issue。本輪不 OCR、
+不建立文本鍵、譯文、字型、覆蓋、原型或規格，也不修改 dosgolem。
