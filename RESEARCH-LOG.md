@@ -989,3 +989,31 @@ composite canvas→A000 copy，而不是把 172,140 筆全部誤當成同一 cop
 
 所有 frame、palette、crop 與 PNG 僅存在 gitignore 的 `workplace/reports/`；沒有公開、提交或附到 Issue。文字候選
 僅供私有研究清冊使用，不是資產解碼或原文文本輸出。
+
+## 2026-09-21：目標 032 的 `OCEANVS OCCIDENTALIS` 畫布（canvas）寫入與部分來源鏈
+
+固定輸入是 `OPENING.EXE`（SHA-256
+`3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`），輸入 manifest SHA-256 為
+`fbded5601e09889e285294e605df2c306c12a90603e556113b95d2afcf4d5bd3`，dosgolem 隔離副本 commit 是
+`1435f175e785ea096a9268cd1021a4222300bd43`。所有 probe 在 `colonization-research:20260920-r2` 的無網路一次性
+容器中執行，原版目錄唯讀掛載為 `/game`；產物只留在 gitignore 的 `workplace/reports/`。
+
+從第 4,156,900 指令 state（SHA-256
+`472bc110c556131b90989cad18280fd633be6f5e8d311eb17518d6d94f864089`）重播，先以外包範圍
+`[201A5h,2111Eh)` 監看，再按每列 320-byte stride 篩回可見標籤 `x∈[53,174)`、`y∈[49,61)`。完整 stdout 收據
+`goal032-ocean-label-writer-lifecycle-4156900-5465773.txt` 的 SHA-256 是
+`37af08325a7d554b14efadf799ac1b7d4fb6529d0e15b137548726123d318bfd`；writer 前置暫存器與 raw bytes 收據
+`goal032-ocean-label-writer-pre-regs-5432000-5448000.txt` 的 SHA-256 是
+`f7eba746b946a9f0dff68e9e2698e74e8e569272391051ad00959745b8f92a5f`。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | 真正標籤矩形有 2,345 筆內容變更，位於 #5,432,823–#5,447,038，post-IP 全為 `03BD:00CA`；raw `03BD:00C8` 是 `F3 A5`／`REP MOVSW`。第一個完整標籤列的前置暫存器是 `DS:SI=388B:5DF5`、`ES:DI=1E23:1F40`、`CX=00A0`。 | 此 `REP MOVSW` 是標籤進入畫布的真實 writer，而非可見文字或檔名推測。該列的來源標籤切片是 `[3E6A5h,3E71Eh)`，目的畫布切片是 `[201A5h,2021Eh)`。 |
+| confirmed | 從第 3,000,000 指令 pre-input state（SHA-256 `0239ae38feff005105ab769a322e5a6c87622d531f9283b84575031c63e3b7e3`）以 BIOS Enter 重播，`[3E6A5h,3E71Eh)` 在 #3,225,029–#3,225,927 有 120 筆內容變更：`0AC2:04F5` 15 筆、`0AC2:0551` 105 筆。其完整 watch TSV SHA-256 是 `8ce01ce4864f68cf46779724b4fb1eb4d769c287941f07959dfa4c654cbc3da9`，lifecycle 收據 SHA-256 是 `c174af03f6ce66171e896b4948c2d1f783d67cc198af7f83971d1ce552ab34f5`。 | 這是標籤畫布來源暫存切片的已觀測內容生成窗口；到第一次標籤畫布寫入前未再觀測內容變更。監看不能排除值相同寫入。 |
+| confirmed | `OPENING.PIK` 的主要 payload 在 #3,004,029／#3,004,090 讀至 `[57550h,70028h)`。在來源生成窗口，15 筆 `0AC2:04F5` 暫存寫入可與同一步數的原始緩衝讀取精確配對：第一筆 #3,225,029 `5C457h → 3E6A5h`，最後一筆 #3,225,927 `5C497h → 3E71Dh`。raw read TSV SHA-256 是 `fb100fb0acf91644fcb8ca66be567c86eb0e7133b7aa4ed7a2d98a457032eb55`，lifecycle SHA-256 是 `5b7a916dd91b0f7dce2d51f4596cf8c8c31bef5ab3c8ec151aed5e6be80c9331`。 | `OPENING.PIK` 是這 15 個標籤暫存 bytes 的 confirmed 直接來源。 |
+| 強推論 | 同一 `DS=5755` 解碼迴圈以 `0AC2:04F5` 的 `MOVSB` 與 `0AC2:0551` 的 `STOSB` 共同生成上述 120 筆變更；後者 105 筆尚未建立每像素的原始讀取配對。 | 整個標籤為 `OPENING.PIK` 解碼產物是強推論，不升格為完整逐像素資料流或唯一資產歸屬。 |
+| 未知 | 第一次完整 composite copy 之後的穩定畫面、中文文字的實際安全矩形、完整資產歸屬與其反向辨識條件。 | 不建立 DRAFT／READY、覆蓋原型、譯文或中文字型。 |
+
+這條較早的 `OPENING.PIK`→暫存→畫布路徑不推翻目標 027 的勘誤：被 `OPENBORD.PIK` 覆寫的是較晚的
+共享 `5755` 緩衝區取樣；本輪確認的暫存切片已在覆寫前生成且未觀測內容改變至 label writer 使用。
+所有記憶體位址均為 dosgolem 執行期線性位址，`CS:IP`、`DS:SI`、`ES:DI` 則為 16-bit real-mode segment:offset。

@@ -68,6 +68,9 @@ dosgolem 現可保存 raw header／owner／name、current PSP、state v3，並�
 [目標 031](docs/goals/031-opening-full-frame-static-text-survey.md) 已在第一個完整 composite frame 登錄兩筆可見靜態
 文字候選：`OCEANVS OCCIDENTALIS` 地圖標籤與中央卷軸兩行小字。兩者的資產來源、copy 後存續與中文安全矩形
 都仍待個別證明，不能直接覆蓋。
+[目標 032](docs/goals/032-ocean-label-canvas-writer-provenance.md) 已確認可讀地圖標籤的 canvas writer，並確認
+`OPENING.PIK` 有 15 個直接像素來源進入其暫存切片；整則標籤的完整資產歸屬、copy 後穩定畫面存續與中文安全矩形
+仍未確認，因此尚未建立覆蓋原型或規格。
 
 第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
 確認的執行策略見 [目標 002](docs/goals/002-win16-execution-strategy.md)；實際工作順序與 Issue
@@ -123,6 +126,7 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第二十九輪目標](docs/goals/029-openingbord-canvas-survival-to-frame-copy.md)
 - [第三十輪目標](docs/goals/030-openingbord-visible-rectangle-and-text-check.md)
 - [第三十一輪目標](docs/goals/031-opening-full-frame-static-text-survey.md)
+- [第三十二輪目標](docs/goals/032-ocean-label-canvas-writer-provenance.md)
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [MCB 記憶體 arena 重新協調規格草案](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)
