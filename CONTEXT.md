@@ -178,6 +178,11 @@
   `e7bf4a7e6bbed1a5a086773573558061311967bcab747bb10fa739076b04b946`。正確快照必須使用 `lin:25E84`；
   裸 `25E84` 是 IDA 基準位址而非執行期線性地址。這只證實靜態 canvas 解碼→畫面 copy，不證實原文、文字邊界、
   特定原版資產、背景、安全矩形或覆蓋資格；均保持 unknown。
+- 目標 044 將上述候選的一段 input chain 向上游閉合：正常冷啟動在 #1,062,435 將 `MPSLOGO.SS` 的
+  55,286 bytes 載入 `4DC3:0000`；其後 decoder 在 #1,135,873 以 `0AC2:0550`／`STOSB` 寫入 `3A6A8h`，
+  #3,757,195 再由 `04A2:01EB` 消費。該 runtime buffer 也有同 decoder 的實際讀取。故這一段
+  `MPSLOGO.SS → runtime buffer → 3A6A8h → 04A2 → canvas` 是 confirmed；整張候選圖屬於 `MPSLOGO.SS`
+  仍僅為強推論。原文、完整資料格式／幾何、背景、安全矩形與覆蓋資格仍 unknown，未 OCR、未建立中文或修改 dosgolem。
 
 ## 尚未確認
 

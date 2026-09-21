@@ -1202,3 +1202,23 @@ A000 `A000:3840:6400` 分別是邏輯 y=`45..64` 的 320×20 色號 rows，兩�
 
 勘誤：早期 `-dump-mem-at` 的裸 `25E84` 按 IDA 基準轉成 `16F84h`，不是執行期 canvas 位址；所有採用的
 快照改用 `lin:25E84`。這是量測格式更正，不是遊戲行為差異。
+
+## 2026-09-21：目標 044 的中央卷軸候選輸入與 `MPSLOGO.SS` 來源鏈
+
+固定輸入仍為 `OPENING.EXE`（SHA-256
+`3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`）與 DOS manifest
+`fbded5601e09889e285294e605df2c306c12a90603e556113b95d2afcf4d5bd3`。所有重播在 UID/GID 1000:1000、
+無網路、一次性 Docker 容器完成，原版 `/game` 唯讀；原版衍生 reports 均留在 gitignore 的
+`workplace/reports/`。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | 固定 #2,000,000 state 的 `3A000h–3B000h` read watch 在 #3,757,195 記錄 `3A6A8h` 由 `04A2:01EB` 讀取（SHA-256 `38c9157a36c314186adfb39c3715a3ee8e4401e4168f3262c0c838396092788f`）。 | 這是目標 043 已見 `04A2` candidate canvas writer 實際消費的一段 input。 |
+| confirmed | 冷啟動在 #1,062,435 從 `MPSLOGO.SS` file offset `863` 讀取 55,286 bytes 到 `4DC3:0000`（線性 `[4DC30h,5B426h)`）；#1,135,873 的 raw `0AC2:0550=AA`／`STOSB` 從 `DS=4DC3` 寫到 `ES:DI=3873:1F78`，即 `3A6A8h`。target watch SHA-256 `b13ab97c15fc55d77f5c5de7674a8cc67b523791d31d1e8ef16169a16b9f832f`。 | 一段 candidate input 由該檔案的 runtime buffer 解碼寫入。 |
+| confirmed | 同一 decoder 讀取 `4F091h`（#1,135,789，`0AC2:0556`）及 `4F092h`（#1,135,892，`0AC2:04F5`），兩者都在 `MPSLOGO.SS` 載入範圍；read report SHA-256 `509155e13ef50ca543a5d4f6f336029c7b79e3a4f2b58449fcf5fc8abbb2f278`。 | 此處的資料來源是已實測的 raw buffer read，不是僅從暫存器或檔名猜測。 |
+| 強推論 | `3A6A8h` 隨後由 `04A2` 消費並走入目標 043 的 canvas→A000 candidate chain；尚未為候選圖所有 input bytes 做一對一 raw-byte→pixel 映射。 | `MPSLOGO.SS` 是整個 `opening-scroll-two-line-text` 候選的來源資產，暫列強推論。 |
+| unknown | 原始文字、字元邊界、完整解碼格式、完整候選圖邊界、背景、安全矩形與覆蓋資格。 | 不 OCR、不讀出原版內容、不建立譯文／字型／遮罩／DRAFT／READY／覆蓋程式，也不修改 dosgolem。 |
+
+冷啟動 broad input-write report 的 SHA-256 是
+`40049b9d08a6e54f15809f4bb15e134259099ca1795afaa40e34fec1737669a6`；上述 reports 僅記錄位址、值、步數與
+指令定位，沒有保存或公開原版資產內容。
