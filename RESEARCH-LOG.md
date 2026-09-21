@@ -765,3 +765,50 @@ go run ./cmd/probe -load-state /workplace/reports/dosgolem-goal022-opening-2m-st
 | unknown | 首畫面的語意、Enter／左鍵是否代表相同的遊戲操作語意、`OPEN*.SS` 是否含文字、其圖像內容與後續玩家輸入序列 | 不由檔名、座標或兩條路徑輸出相同而猜測；不建立 DRAFT／READY 規格。 |
 
 本輪只取得正常輸入與靜態資產候選序列的 RE 證據；沒有修改 dosgolem、原版檔案、遊戲行為或中文覆蓋。
+
+## 2026-09-21：目標 025 的開場靜態圖像候選清冊
+
+固定輸入、state v3、`OPENING.EXE` SHA-256、隔離 dosgolem commit 與 Docker 條件沿用目標 024。本輪從同一
+state 以 BIOS 緩衝區 Enter（第 3,000,000 指令排入）重播至第 5,500,000 指令，使用 `-reads-of OPEN`
+保留實際 DOS 檔案服務，並以 `-watch-video -vram-sites` 記錄整體畫面路徑：
+
+```text
+go run ./cmd/probe -load-state /workplace/reports/dosgolem-goal022-opening-2m-state-v3-20260921.state \
+  -root /game -steps 5500000 -bios-keys '\\n' -bios-key-from 3000000 -bios-key-every 2000000 \
+  -reads-of OPEN -watch-video -watch-screen 100000 -screen-delta 1 -vram-sites \
+  -dump-vram /workplace/reports/goal025-opening-assets-5500000.vram
+```
+
+本地 report `goal025-opening-assets-5500000.txt` 的 SHA-256 是
+`c68b153a3d68fb3e6fc481433e165012a5b6842975186339e69dd83c6760f83c`；其原版衍生 VRAM 的 SHA-256 是
+`304ffd302045969ddad4a6c5e3c139a1af5f9f1bdbc1a060600b981ef26faeaf`。兩者只留在 gitignore 的
+`workplace/reports/`。
+
+| 實際載入資產 | bytes | SHA-256 | 首次開啟與主要 payload 讀取（絕對指令） |
+| --- | ---: | --- | --- |
+| `OPENING.PIK` | 102080 | `80ea1dd4a00a4029052112882305e573bd7e20066eb095ceabe273a217689185` | #3,001,287；#3,004,029 @193+61,440、#3,004,090 @61,633+39,640、#4,096,844 @101,273+768 |
+| `OPENBORD.PIK` | 11245 | `53f73ae336b5eaca30fa190ec9059426712de6c9c0c181d085814d45c96dab03` | #4,100,718；#4,103,486 @193+10,245 |
+| `OPENSHIP.SS` | 2067 | `eee07bfee9a7abf512d6bd9688409427149df3226edd024342871f41e143af10` | #4,399,346；#4,406,969 @1,037+1,030 |
+| `OPENCRD1.SS` | 6320 | `6807ae8a1fd12588fd2f90699f771bdb5bd88ca9317ea49f376253e9a447a062` | #4,431,694；#4,439,735 @1,063+5,257 |
+| `OPENCRD2.SS` | 14549 | `0ba68fa51daf8a801161ebaebd26015da8a4f069199c2f1bf01ba1b5d1065f96` | #4,554,793；#4,563,049 @1,074+13,475 |
+| `OPENCRD3.SS` | 9426 | `179257b925ddaa4141dd89dd3ae10bbf6763219d57545643310efd9e712ada18` | #4,756,727；#4,764,757 @1,051+8,375 |
+| `OPENWND1.SS` | 2467 | `774dc50231443957d2e051a39765ea1652daae7317c517ba77094b67e07d1afb` | #4,896,194；#4,904,946 @1,064+1,403 |
+| `OPENSUN.SS` | 1119 | `639e0ff1eaf4fb4a9b649557c63658b0ba611caeb3ebf46da75affd342ed30bd` | #4,928,382；#4,936,926 @1,040+79 |
+| `OPENMON1.SS` | 3983 | `5da6ea59ab914fe4f73947c6925bbebb85815a5213e63bbcc6cdf6d44b61e1cd` | #4,939,849；#4,950,341 @1,143+2,840 |
+| `OPENWND2.SS` | 4015 | `af84ca1b7fa3deb5c93401562277c858dd4b6ef66b158ff2b2480c4e1b5578f3` | #5,003,474；#5,013,201 @1,088+2,927 |
+| `OPENMON2.SS` | 3918 | `4a56a5a3646e98a51de1f0b4c3376ab9db12c00d42972b58857ff485b634a490` | #5,054,800；#5,067,822 @1,205+2,713 |
+| `OPENMON3.SS` | 4975 | `4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a` | #5,111,944；#5,124,417 @1,209+3,766 |
+| `OPENFISH.SS` | 1782 | `ee656204f4800cdd14c79a40894bd5285b6e20e0b41c574fea26c1535ce35f20` | #5,181,631；#5,192,795 @1,151+631 |
+| `OPENGUY.SS` | 5292 | `5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666` | #5,205,737；#5,224,861 @1,498+3,794 |
+| `OPENLOGO.SS` | 5162 | `8168d9d749b8a399b8ab545cf341ad79036a09b81bae68a1758285c6bc540e1f` | #5,298,406；#5,306,518 @999+4,163 |
+| `OPENBONK.SS` | 3453 | `65facf06dad88e9d5d17989a6488c74e76ffbab1b15d7c5ca0abe9c81ab74910` | #5,369,498；#5,381,831 @1,163+2,290 |
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | 上表 16 項均由同一次正常輸入分支的 DOS `open`／`read` 服務讀取；不是從目錄掃描列出。每個 `file` 格式辨識均只回報 `data`。 | 它們是固定版本的實際開場資源候選；尚無通用檔案型別名稱或 decoder 結論。 |
+| confirmed | 兩個 `.PIK` 均先讀 16+30 bytes、seek 至 offset 176 後讀 17 bytes；14 個 `.SS` 均先讀 16+40 bytes、seek 至 offset 176 後讀 39 或 40 bytes，再讀取不同的 metadata 與 payload 範圍。 | 這是可重播的存取表面；不能由共同讀取型態推論完整格式語意。 |
+| confirmed | 第 5.5M 終點為 mode 13h 64,000／64,000 非零像素，101,639 筆 VRAM 寫入於 A0000h–AFEFDh；活躍 MCB 名稱含 `S$OPENSH`、三個 `S$OPENCR`、兩個 `S$OPENWN`、`S$OPENSU`、三個 `S$OPENMO`、`S$OPENFI`、`S$OPENGU`、`S$OPENLO`、`S$OPENBO`。 | 正常開場資源序列伴隨可見畫面繪製；八字元 MCB name 會截斷，不能單靠它建立每檔至矩形的直接對應。 |
+| confirmed | 此分支全形／半形字型 hook 均為 0、B8000 非零 bytes 為 0、主控台輸出為 0。 | 本輪沒有觀測到可替換的動態文字輸出。 |
+| unknown | 每一個上表資產的點陣內容、是否含文字、畫面矩形、與 VRAM 寫入端的一對一資料流，以及其中文安全覆蓋區。 | 不以檔名、大小、MCB 截斷名稱或一般畫面活動假設靜態文字；Issue #8 保持進行中，未建立 DRAFT／READY 或原型。 |
+
+本輪沒有匯出原版內容、像素、標頭位元組或 decoder 產物到版控，亦未修改 dosgolem、原版或中文覆蓋。

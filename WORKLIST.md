@@ -14,7 +14,7 @@
 | #5 | in_progress | [追溯動態文字輸出常式與文字來源](https://github.com/wicanr2/colonization_cht/issues/5) | `psound-post-profile-control-flow` | 每條輸出路徑有原始定位、證據等級與重播 trace。 |
 | #6 | planned | [制定動態文字抽取與訊息鍵 DRAFT 規格](https://github.com/wicanr2/colonization_cht/issues/6) | `dynamic-print-re` | DRAFT 規格定義來源鍵、回退和幾何資料模型。 |
 | #7 | planned | [建立動態文本清冊與覆蓋率量測](https://github.com/wicanr2/colonization_cht/issues/7) | `dynamic-text-draft` | 可重跑報表列出抽取、翻譯與未知鍵數。 |
-| #8 | planned | [普查靜態內嵌文字與覆蓋候選](https://github.com/wicanr2/colonization_cht/issues/8) | `psound-post-profile-control-flow` | 靜態文字清冊可重現候選定位與證據等級。 |
+| #8 | in_progress | [普查靜態內嵌文字與覆蓋候選](https://github.com/wicanr2/colonization_cht/issues/8) | `psound-post-profile-control-flow` | 靜態文字清冊可重現候選定位與證據等級。 |
 | #9 | planned | [制定靜態文字覆蓋 DRAFT 規格與最小原型](https://github.com/wicanr2/colonization_cht/issues/9) | `static-text-survey` | 一個可丟棄原型具命中與反向條件對照。 |
 | #10 | blocked | [確認中文字型、術語政策與中文化完成範圍](https://github.com/wicanr2/colonization_cht/issues/10) | `dynamic-coverage`, `static-overlay-draft` | 使用者確認字型、術語與完成門檻並回填 CONTEXT／READY 規格。 |
 | #11 | planned | [將動態文字覆蓋設計升為 READY 規格](https://github.com/wicanr2/colonization_cht/issues/11) | `dynamic-text-draft`, `dynamic-coverage`, `l10n-decision` | 所有正式輸出類別有可回查 evidence 與 READY 規格。 |
