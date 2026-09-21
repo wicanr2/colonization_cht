@@ -66,6 +66,9 @@
   後 `freeSeg=2041`，父 `AH=48h` 卻配得 `2035`，落入宣告保留範圍。state v2 可 round-trip child
   PSP／stack／arena／freeSeg，卻根本沒有 owner/name；`AH=51h`／`62h` 又固定回根 PSP。這些均是
   confirmed executor 缺口，絕非 Colonization child／TSR parity。
+- 目標 017 的 MS-DOS 3.10 原始手冊交叉確認：`48h` 屬 current process、`49h` 僅釋放先前 `48h`
+  block、`4Ah` 有 CF/AX/BX 失敗契約、`4Ch` 結束 current process 並回父、`62h` 回 active PSP。它們
+  支持 B 必須有 owner-aware registry，但未定義跨程序或手改 MCB 細節，故 DRAFT 仍未 READY。
 
 ## 尚未確認
 

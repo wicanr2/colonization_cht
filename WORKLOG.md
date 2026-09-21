@@ -207,3 +207,16 @@
 - 一次性測試檔已從隔離 dosgolem 副本刪除；已將結論回填
   [Issue #24](https://github.com/wicanr2/colonization_cht/issues/24#issuecomment-5755179775)，並推送證據提交
   `ecd058a`。收尾提交會記錄 completed 狀態；Docker、擁有權與原版素材邊界將再次檢查。
+
+## 2026-09-21：目標 017 的 MS-DOS 平台契約審核
+
+- 以 Docker 從 DRAFT 已列的 Microsoft MS-DOS 3.10 Programmer's Reference Manual URL 取得唯讀研究副本；
+  PDF SHA-256 `0955283261ffdae38bc70e152be660774c68276febc325e3b11c222e77b993e1`，並以既有
+  `minidocks/poppler:latest` 的 `pdftotext -layout` 擷取文字（SHA-256
+  `5915e90c80d670c18796d96833d6be2a19cf571fb76077da623160682390db83`）。兩者留在 gitignore 的
+  `workplace/reports/`，沒有加入 Git。
+- 手冊頁 1-183–188、1-189–190、1-196、1-236 分別限制 `48h/49h/4Ah`、EXEC／PSP、`4Ch` 與 active
+  PSP；已確認現行 root owner 重發佈、無 owner release、寬鬆 resize、TSR overlap 與固定 root PSP 不可
+  當成通用 DOS 契約。跨程序與手改 MCB 的細節保持 unknown。
+- DRAFT 003 維持 DRAFT、未修改 dosgolem／原版／中文覆蓋；收尾將回填 Issue／Git，並檢查 Docker、
+  擁有權及原版素材邊界。

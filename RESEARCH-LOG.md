@@ -626,3 +626,13 @@ owner/name round-trip、TSR retained range 後 parent allocation、或外部 own
 結論：B 的下一份 READY 候選必須以 owner/name/process registry 同時驅動 MCB 發布、`AH=51h/62h`、
 `48h/49h/4Ah`、`4Bh/4Ch/31h` 與 state migration；在 external owner、跨程序錯誤、客體手改 MCB、TSR
 及原版同狀態收據前，規格 003 保持 DRAFT，沒有修改 dosgolem。
+
+## 2026-09-21：目標 017 的 MS-DOS 3.10 平台契約
+
+Microsoft 1984 *MS-DOS 3.10 Programmer's Reference Manual* PDF SHA-256
+`0955283261ffdae38bc70e152be660774c68276febc325e3b11c222e77b993e1`，由 Poppler `pdftotext -layout`
+擷取的文字 SHA-256 `5915e90c80d670c18796d96833d6be2a19cf571fb76077da623160682390db83`。手冊 1-183–188
+明示 `48h` 配給 current process、`49h` 只釋放先前 `48h` 配得的 block、`4Ah` 的 CF/AX/BX 失敗契約；
+1-196 明示 `4Ch` 關 handles、結束 current process 並回 invoking process；1-236 明示 `62h` 回 active PSP。
+這些是 confirmed platform contract，與目標 016 已證實的 root owner 發布、無 owner release、寬鬆 resize、
+TSR overlap、固定 root PSP 不一致。手冊未定義的跨程序／手改 MCB 行為仍 unknown，未實作。

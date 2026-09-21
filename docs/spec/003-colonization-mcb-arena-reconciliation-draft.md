@@ -305,3 +305,22 @@ resize、MCB walk、normal child return、TSR、child PSP resize、連續 EXEC �
 目前仍 unknown：真 DOS 對外部／非 child owner 的集合、手動改寫客體 MCB 後的 complete TSR 行為、
 跨程序 `49h`／`4Ah` 的精確 error 語意、v2 migration 格式與任何 child／TSR 路徑的 Colonization
 原版收據。因此 DRAFT 003 仍未 READY，禁止實作。
+
+## 目標 017：MS-DOS 3.10 平台契約交叉審查
+
+原始 Microsoft *MS-DOS 3.10 Programmer's Reference Manual*（1984）從既有 DRAFT 所列 URL 下載至
+gitignore 工作區；PDF SHA-256 `0955283261ffdae38bc70e152be660774c68276febc325e3b11c222e77b993e1`，
+以既有 `minidocks/poppler:latest` 的 `pdftotext -layout` 擷取文字（SHA-256
+`5915e90c80d670c18796d96833d6be2a19cf571fb76077da623160682390db83`）。這是平台契約，不是
+`OPENING.EXE` original oracle。
+
+| 手冊頁面／明示契約 | 現行 executor 對照 | 結論 |
+|---|---|---|
+| 1-183–184：`48h` 配給 current process，失敗為 CF、AX=7/8、BX 最大可用 block。 | `alloc()` 的容量回傳可測，但 `syncMCB()` 將 child 配置 owner 寫為 root。 | owner 必須由 current process registry 得出；現況不符合平台契約。 |
+| 1-185–186：`49h` 僅釋放先前 `48h` 配得的 block，CF、AX=7/9。 | `release()` 只依 ES 找 arena，不驗 owner。 | 外部／跨程序 release 不可假定成功；需拒絕或以更強 oracle 定義。 |
+| 1-187：`4Ah` 對 ES block 變更大小，失敗 CF、AX=7/8/9，增大失敗時 BX 回最大值。 | `setBlock()` 對非 arena block 可無條件成功，且後續重發 root owner。 | 現況不構成 B 的 READY 服務語意。 |
+| 1-189–190、4-2：`4B00` 建 PSP；`4Ch` 關閉 handles、結束 current process、回 invoking process；`31h` 亦為 child return code 來源。 | child frame／handles已有測試，但 owner-aware MCB release 與 TSR retained range 不成立。 | normal/TSR 都需 owner-aware transition 驗收。 |
+| 1-236：`62h` 回 currently active process 的 PSP。 | `51h/62h` 固定回 root PSP。 | 必須改由 registry 回 current PSP；但本 DRAFT 不授權實作。 |
+
+手冊未明示跨程序 `49h/4Ah`、外部 owner 接受集合或手動改 MCB 後 TSR 完整規則；這些維持 unknown。
+因此規格仍為 DRAFT，READY 前的拒絕與 state migration 條件不變。
