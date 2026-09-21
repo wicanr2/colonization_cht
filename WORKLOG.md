@@ -181,3 +181,14 @@
   的單一 PSP canonical 匯入或先擴張為通用多行程匯入；未選定前沒有程式碼修改。
 - Docker：快照與測試均在無網路、UID/GID 1000:1000、資源受限的 `docker run --rm` 完成；收尾已確認
   沒有專案相關容器、root-owned 檔案或誤建 `.md` 目錄。
+
+## 2026-09-21：完成目標 015 的通用多行程 MCB 證據
+
+- 使用者選定通用多行程 MCB 匯入（B），排除單一 PSP 限縮範圍；DRAFT 003 與目前脈絡已明確分離
+  這項架構需求和 Colonization 固定路徑的原版觀測。
+- 受控 child EXEC 探針確認現有 arena 沒有 owner/name：child `AH=48h` 的發布改用 root PSP owner，
+  child 結束後 arena 未按 owner 回收。既有 allocator／EXEC／TSR／state 測試通過，但不覆蓋這條生命週期。
+- 固定 `OPENING.EXE` 兩百萬指令只觀測一次 `AH=4Bh AL=03h` overlay；IDA Pro 9.4 raw-binary 匯出交叉
+  確認 `086C:0057`–`005B` 的 `B0 03 B4 4B CD 21`。未觀測 `AH=4Ch`／`31h` 僅限此窗口。
+- DRAFT 維持 DRAFT、未修改 dosgolem 或原版；收尾會更新 Issue／Git，刪除一次性探針與 IDA 暫存資料庫，
+  並檢查 Docker／擁有權。

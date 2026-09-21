@@ -199,3 +199,62 @@ parity 收據。故不能用既有 EXEC 測試推論「任意 owner 的 MCB 匯�
 不論選 A 或 B，任何不符合所選邊界的鏈都必須在 `syncMCB()` 前被偵測、保留原始 bytes 與可診斷快照，
 並以有明確依據的服務失敗結束；不得重寫為舊 arena。選 A 後才能形成狹窄且可驗證的 READY 規格；
 選 B 則先開啟其程序／owner 證據工作，維持本草案 DRAFT。此決策是產品與架構範圍選擇，等待使用者確認。
+
+## 目標 015：已採用通用多行程匯入，仍為 DRAFT
+
+使用者已在 2026-09-21 明確選擇上節 **B：通用多行程匯入**。A 的單一 root PSP 限制不再是
+實作範圍，但上節表格保留為決策歷史；這項選擇不會把 fixed `OPENING.EXE` 尚未跑到的 child `EXEC`、
+`AH=4Ch`、`AH=31h` 或 TSR 升格為原版已證實行為。
+
+### 已確認的執行器內部缺口
+
+以下分析固定於隔離副本 `workplace/dosgolem` commit
+`1b0efdf98ac3ab85c90cb80c3e489e935fb45665`。一次性測試探針
+`dosgolem-goal015-multiprocess-audit-20260921.txt`（SHA-256
+`a5685e095456439500562907d5f51f96af5bccf146b9109e418149964a709f85`）由 Docker 執行，
+不進版控的探針程式已刪除；它只量現有 executor，不是原版 oracle。
+
+| 事項 | 觀測 | 等級／影響 |
+|---|---|---|
+| child 初始 MCB | 父 `0100` 從 `freeSeg=2000` 執行 child 後，child PSP 是 `2001`，其 MCB owner 是 `2001`。 | confirmed；`spawn()` 直接 `WriteMCB(freeSeg, false, psp, ...)`。 |
+| child `AH=48h` 後發布 | child 配得 `2014`，其前一格 MCB owner 是 `0100`；重新發布後鏈首 owner 也是 `0100`，size `1F13` 將 child 區納入 root 區。 | confirmed；`memBlock` 沒有 owner，`syncMCB()` 對所有已配置 arena block 固定寫 `machine.PSPSeg`。 |
+| child 結束後 | `terminate()` 將 `freeSeg` 回 `2000`，但 arena 仍有 3 格；下一次父 `AH=48h` 配得 `2016`，不是乾淨回收後的 `2001`。 | confirmed；現行 LIFO 游標回退沒有按 owner 移除／重建 arena。 |
+| SaveState | `procStack`、`CurPSP` 與 frame 的 PSP／`freeSeg` 會儲存；`blockState` 只有 `Seg`、`Size`、`Free`。 | confirmed；state 無法保存每一 MCB 的 owner、name 或擁有程序關係。 |
+
+既有 allocator、MCB、child EXEC、TSR、handle、overlay 與 root-state 契約測試另以
+`dosgolem-goal015-existing-contracts-20260921.txt`（SHA-256
+`20c0a7c726f780ffd11dcbf755a4404a6966f76672829b245bc3eab40a79abd6`）通過。這只證明它們目前
+分別覆蓋的內部行為；其中沒有「child 先 `AH=48h`、結束、父再配置」的 owner-lifecycle 契約，
+故不能抵銷上表缺口。
+
+### 固定原版路徑的邊界
+
+`probe-opening-exec-mode-audit-20260921.txt`（SHA-256
+`876d66ae6a8776f74deb2183de6da06e196a26b6120f5d7e72c3d54e9bb352bc`）以固定 `OPENING.EXE`、
+`probe -sbpro` 跑至第 2,000,000 指令。服務統計只有一次 `AH=4Bh`，動態紀錄與 IDA Pro 9.4 runtime
+raw-binary 匯出 `ida-opening-086c-exec-mode-20260921.json`（SHA-256
+`75a9da2e08543e53382ac4650f96e017314d67228b52bff30fca1549a9f39c30`）共同確認它是
+`086C:0057` `mov al,3`、`086C:0059` `mov ah,4Bh`、`086C:005B` `int 21h`，即 `AL=03h` overlay。
+該觀測窗口沒有 `AH=4Ch` 或 `AH=31h`。此為**有界的未觀測**，不證明它們永不會出現，更不能變成
+child／TSR 的原版 parity 聲明。IDA 輸入是 320-byte runtime 傾印
+`opening-086c-runtime-20260920.bin`（SHA-256
+`67c854c8b188aa74ba617636dc749557518d3d6ef8d77d3ba1a12eafdff5efc9`），地址空間是 raw-binary EA，
+每列另附 runtime `086C:offset`；工具為 `ida-pro-9.4-idapython:locked-v1`（image ID
+`sha256:6f6d59af49d0008c4109a5295b5f374bdc007e2d1ab28cb9de08779584de2780`）。
+
+### B 的最低資料模型與 READY 前缺口
+
+這不是 READY 實作設計，而是 B 不可再省略的資料表示條件：
+
+1. 每個 arena record 必須能保留 MCB 段、資料段數、free、owner PSP 與不解讀的 8-byte name；
+   客體原始 header bytes 與此 typed state 的一致性必須能在服務邊界驗證。
+2. process state 必須能把 current PSP、parent／suspended frame、每個 owner 的存活狀態與可回收
+   blocks 連起來；不能由全域 `machine.PSPSeg` 推導 owner。
+3. `AH=48h`、`49h`、`4Ah` 在 child／parent／TSR 情境的輸入 owner、合法轉移、失敗回傳與發布後鏈
+   都須逐項定義；現有 `freeSeg` LIFO 只能作為舊行為證據，不可當通用回收演算法。
+4. SaveState 必須版本化地保存上述 owner/name/process 關係與任何驗證過的客體 MCB snapshot；舊 v2
+   state 的遷移與無法表示狀態必須失敗即關閉，不能靜默補 root owner。
+
+READY 前仍是 unknown：外部／非 child PSP owner 的接受集合、TSR 在直接修改 MCB 後的完整回收規則、
+跨程序 `AH=49h`／`4Ah` 的精確 DOS 回傳、state migration 格式，以及能把這些內部契約接回固定
+`OPENING.EXE` 的同狀態驗收。故本規格維持 DRAFT，禁止依本節修改 dosgolem。

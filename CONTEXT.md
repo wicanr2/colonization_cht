@@ -53,8 +53,14 @@
 - 目標 014 的完整記憶體快照已確認固定 `OPENING.EXE` 路徑的 MCB 鏈在直接建立後與下一個
   `AH=49h` 前都連續終止於 `9FFF`；配置 owner 均是根 PSP `0100`，而 `$sys$`、`FONTINTR`、`$pack$`
   等八位元組 name 必須保留。現行 dosgolem 的 arena／state 只保存區段、大小與 free，重發佈會遺失
-  owner/name；它雖已有 child EXEC 路徑，卻不能據此推論通用 owner 匯入安全。使用者尚未選擇狹窄的
-  單一 PSP canonical 匯入或通用多行程匯入，故規格 003 保持 DRAFT、沒有任何實作。
+  owner/name；它雖已有 child EXEC 路徑，卻不能據此推論通用 owner 匯入安全。使用者已選擇**通用多行程
+  匯入（B）**、排除單一 PSP canonical 限縮範圍；規格 003 仍是 DRAFT、沒有任何實作。
+- 目標 015 的受控 executor 探針已確認 child 初始 MCB owner 是 child PSP，但 child `AH=48h` 後
+  `syncMCB()` 把新 arena MCB 發布為 root `0100`，child 結束後 arena 又未隨 `freeSeg` 回收；下一次父
+  配置落在 `2016` 而不是 `2001`。SaveState 可保存 process stack／current PSP，卻只保存
+  block `seg/size/free`，無法保留 owner/name／生命週期。這是 confirmed 的現行 executor 缺口，不是
+  Colonization 原版 child／TSR 需求。固定冷啟動至第 2,000,000 指令只觀測到一次 `AH=4Bh AL=03h`
+  overlay，未觀測 `AH=4Ch`／`31h`；該未觀測只限此窗口。
 
 ## 尚未確認
 
@@ -65,8 +71,8 @@
 ## 下一閘門
 
 Issue #23 已完成 READY profile 的實作與同狀態收據。#24 已完成首次控制轉移、清零引數、overlay 載入者、
-客體活躍 MCB 鏈、過期 arena 重發佈，以及 DRAFT 003 的 caller／consumer／可表示性審查；DRAFT 仍未 READY。
-下一個最小前沿是使用者選定「單一 PSP canonical 匯入」或「通用多行程匯入」的架構邊界。前者才可據固定
-樣本補完狹窄的驗證、失敗語意、state snapshot 與同狀態驗收；後者需先另做程序／owner 證據。兩者都絕不
-直接修正。#5 與 #8 在 #24 之前維持阻塞。Windows NE 清冊（#19）只保留為歷史輸入證據。Issue #10 與 #15
-仍需在真實證據與原型具備後由使用者決定。
+客體活躍 MCB 鏈、過期 arena 重發佈，以及 DRAFT 003 的 caller／consumer／可表示性與多行程 owner
+缺口審查；DRAFT 仍未 READY。使用者已選 B，下一個最小前沿是先為通用 process/owner/name/state 模型
+定義可驗證的服務轉移、TSR／外部 owner 拒絕條件、state migration 與一般性驗收，再以固定原版同狀態
+驗證它實際觸及的部分；絕不直接修正。#5 與 #8 在 #24 之前維持阻塞。Windows NE 清冊（#19）只保留為
+歷史輸入證據。Issue #10 與 #15 仍需在真實證據與原型具備後由使用者決定。

@@ -564,3 +564,34 @@ runtime raw 匯出 `ida-opening-0419-ah52-runtime-20260921.json`（SHA-256
 結論：DRAFT 規格 003 現可清楚提出兩個互斥範圍：僅接受固定樣本所符合、保存 owner/name 的單一 PSP
 canonical 匯入，或先研究通用多行程 owner 匯入。這是會改變資料模型、state migration、回歸範圍與
 READY 時程的架構決策；本輪不自行選擇，未改任何 dosgolem 或原版資料。
+
+## 2026-09-21：目標 015 的通用多行程 owner／生命週期證據
+
+使用者已明確選擇通用多行程 MCB 匯入（B），排除只處理 root PSP `0100` 的 canonical 路線。這是
+executor 架構範圍決定，不會把固定遊戲尚未觀測到的 child `EXEC`、終止或 TSR 模式冒稱為原版需求。
+輸入與原版雜湊沿用目標 014；executor 固定於隔離副本 `workplace/dosgolem` commit
+`1b0efdf98ac3ab85c90cb80c3e489e935fb45665`，upstream push URL 是 `DISABLED`。
+
+| 推論等級 | 證據 | 觀測 |
+|---|---|---|
+| confirmed（executor） | 一次性 Docker test `dosgolem-goal015-multiprocess-audit-20260921.txt`，SHA-256 `a5685e095456439500562907d5f51f96af5bccf146b9109e418149964a709f85` | 父 PSP `0100`、`freeSeg=2000` 執行 child 後得到 child PSP／MCB owner `2001`；child `AH=48h` 配得 `2014`，但其 MCB owner 與可走鏈首 owner 都是 `0100`。 |
+| confirmed（executor） | 同一探針 | child 結束後 `freeSeg` 回 `2000`，arena 仍有 3 格；父下一次配置得 `2016`，不是新鮮回收位置 `2001`。這是沒有 owner 欄位的 arena 與 LIFO 游標不同步。 |
+| confirmed（source） | `internal/dos/dos.go:875`、`int21.go:786`、`state.go:45`、`state.go:84` | `memBlock`／`blockState` 只有 seg/size/free；`syncMCB()` 對非 free arena block 固定寫 `machine.PSPSeg`，`WriteMCB()` 固定清空 name。process stack/current PSP 可存，block owner/name／owner-to-process 關係不可存。 |
+| confirmed（內部測試） | `dosgolem-goal015-existing-contracts-20260921.txt`，SHA-256 `20c0a7c726f780ffd11dcbf755a4404a6966f76672829b245bc3eab40a79abd6` | allocator、MCB、child EXEC、TSR、handle、overlay 與 root-state 的既有選定測試皆通過；這些綠燈沒有覆蓋 child 配置後結束再由父配置的 owner-lifecycle。 |
+
+固定 `OPENING.EXE` 的 DOS 原版收據以 `probe -sbpro` 從冷啟動跑到第 2,000,000 指令：
+`probe-opening-exec-mode-audit-20260921.txt` SHA-256
+`876d66ae6a8776f74deb2183de6da06e196a26b6120f5d7e72c3d54e9bb352bc`。其服務統計有一次
+`AH=4Bh`，沒有 `AH=4Ch` 或 `AH=31h`；唯一 EXEC 紀錄是 overlay。再以 IDA Pro 9.4 的
+raw-binary loader 用 `ida-pro-9.4-idapython:locked-v1`（image ID
+`sha256:6f6d59af49d0008c4109a5295b5f374bdc007e2d1ab28cb9de08779584de2780`）輸出
+`ida-opening-086c-exec-mode-20260921.json` SHA-256
+`75a9da2e08543e53382ac4650f96e017314d67228b52bff30fca1549a9f39c30`。其輸入是
+`opening-086c-runtime-20260920.bin` SHA-256
+`67c854c8b188aa74ba617636dc749557518d3d6ef8d77d3ba1a12eafdff5efc9`，320 bytes；IDA raw-binary EA
+逐列映射 runtime `086C:0057`／`0059`／`005B`，bytes `B0 03`、`B4 4B`、`CD 21`，確認為
+`AL=03` overlay callsite。未觀測只限於該固定窗口，不能外推為原版永不 child EXEC／終止／TSR。
+
+結論：B 的 DRAFT 至少必須保存每個 MCB 的 owner/name、process 存活與 parent 關係、客體 header snapshot
+及其 versioned state；`AH=48h`／`49h`／`4Ah` 的跨 process 轉移不能再由 root PSP 或 `freeSeg` 猜補。
+TSR、外部 owner、跨程序失敗回傳與 state migration 仍是 unknown，故沒有實作，規格 003 保持 DRAFT。
