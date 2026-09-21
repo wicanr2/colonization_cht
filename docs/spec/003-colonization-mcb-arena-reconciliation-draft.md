@@ -355,3 +355,10 @@ service/state 邊界反向驗證的實作；`62h` 與 MCB 發布仍不讀 curren
 必要資料。即使拒絕 external owner，這三項仍阻斷「已註冊 child owner」的正式行為。唯一下一前沿是
 以本 DRAFT 的 raw/header/registry contract 寫出可審查的 READY spec，補足每項輸入、失敗與驗收後才實作；
 不以遊戲 root-only 收據繞過。
+
+### 勘誤：已註冊 owner 子集的 READY
+
+目標 020 已把以上缺口寫成有界的資料模型、拒絕語意與驗收契約，見
+[READY 規格 004](004-colonization-registered-process-mcb-importer-ready.md)。本段「未達 READY」仍適用於
+external／未註冊 owner、未知 cross-process／TSR lifecycle 與 v2 state；不再適用於規格 004 明確限定的
+registered root／child 範圍。保留本段以說明 READY 前缺口，不回寫歷史結論。

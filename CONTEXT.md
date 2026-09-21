@@ -69,6 +69,9 @@
 - 目標 017 的 MS-DOS 3.10 原始手冊交叉確認：`48h` 屬 current process、`49h` 僅釋放先前 `48h`
   block、`4Ah` 有 CF/AX/BX 失敗契約、`4Ch` 結束 current process 並回父、`62h` 回 active PSP。它們
   支持 B 必須有 owner-aware registry，但未定義跨程序或手改 MCB 細節，故 DRAFT 仍未 READY。
+- 目標 020 已建立 READY 規格 004，範圍為已註冊 root／child owner：raw 16-byte header、owner/name、
+  registry、state v3、current PSP service 與 fail-closed rejection 都有契約及驗收。external owner、未知
+  cross-process／TSR lifecycle 與 v2 state 仍留在 DRAFT／拒絕範圍；尚未開始實作。
 
 ## 尚未確認
 

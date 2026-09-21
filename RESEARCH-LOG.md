@@ -652,3 +652,7 @@ Docker child 診斷收據 SHA-256 `353c81a5b8ceb1c341a681df9cbd47b1efb885702bc2f
 `curPSP=2001` 但 `AH=62h=0100`，child `48h` block `2014` 的 owner=0100/name=八個空白，state v2
 只有 arena/stack/curPSP。這是 confirmed executor 現況；證實 B 尚無 raw-header parser、owner-aware
 registry、current-PSP service 或可表示的 state，DRAFT 003 不可升 READY、沒有實作。
+
+目標 020 將這些 confirmed 缺口與平台契約轉成[READY 規格 004](docs/spec/004-colonization-registered-process-mcb-importer-ready.md)：
+只對 registry 中 root／child owner 授權實作，external／unknown lifecycle 一律 fail-closed。這是有界的
+executor spec，不是固定遊戲 child／TSR parity；實作仍尚未開始。

@@ -242,3 +242,13 @@
 - DRAFT 003 維持 DRAFT，未修改 dosgolem 或原版；已回填
   [Issue #24](https://github.com/wicanr2/colonization_cht/issues/24#issuecomment-5755331181)，並推送證據提交
   `185bb87`。收尾提交會記錄 completed 狀態，並重查 Docker、擁有權及原版素材。
+
+## 2026-09-21：目標 020 的已註冊多行程 MCB READY 規格
+
+- 綜合目標 015–019 的 platform、固定 `OPENING.EXE` direct-header 與 child/state 收據，建立 READY
+  規格 004：registered root／child owner 的 raw 16-byte header、typed registry、state v3、current PSP
+  service、服務轉移、rejection 與驗收均已契約化。
+- external／未註冊 owner、手改後 unknown lifecycle、cross-process `49h/4Ah`、TSR 特例與 v2 state
+  明確 fail-closed；不以 root-only 遊戲樣本縮小 B，亦不假稱 child/TSR 遊戲 parity。
+- 本規格是唯一授權下一輪 dosgolem 通用實作的依據；本輪沒有程式碼修改。收尾將同步 Issue／Git 並檢查
+  Docker、擁有權及原版素材邊界。
