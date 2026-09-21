@@ -1,6 +1,6 @@
 # 目標 015：通用多行程 MCB 所有權與生命週期證據
 
-狀態：in_progress<br>
+狀態：completed<br>
 日期：2026-09-21<br>
 對應 Issue：[ #24 ](https://github.com/wicanr2/colonization_cht/issues/24)<br>
 前置收據：[目標 014](014-mcb-arena-ready-scope-audit.md)；待修訂規格：[DRAFT 規格 003](../spec/003-colonization-mcb-arena-reconciliation-draft.md)
@@ -55,8 +55,11 @@ SaveState／LoadState 如何交互作用；再以受控的一般性 DOS 程序�
 
 ## 退出條件
 
-- [ ] 使用者選定 B 的採用／排除範圍已回填適當規格與目前脈絡，且固定遊戲證據與通用執行器需求未混稱。
-- [ ] 現行 child `EXEC`、結束／常駐、owner、arena、MCB name 與 state 的資料流都有可回查程式／測試證據。
-- [ ] 固定 `OPENING.EXE` 的 `AH=4Bh`／終止模式已以 IDA 與 dosgolem 收據列出已見／未見，不外推。
-- [ ] DRAFT 規格 003 已列出 B 的最小資料模型、未知邊界與 READY 前驗收；未實作。
-- [ ] 文件、Issue #24、Git 推送與 Docker 清理狀態一致，且沒有追蹤原版或 root-owned 產物。
+- [x] 使用者選定 B 的採用／排除範圍已回填適當規格與目前脈絡，且固定遊戲證據與通用執行器需求未混稱。
+- [x] 現行 child `EXEC`、結束／常駐、owner、arena、MCB name 與 state 的資料流都有可回查程式／測試證據。
+- [x] 固定 `OPENING.EXE` 的 `AH=4Bh`／終止模式已以 IDA 與 dosgolem 收據列出已見／未見，不外推。
+- [x] DRAFT 規格 003 已列出 B 的最小資料模型、未知邊界與 READY 前驗收；未實作。
+- [x] 文件、Issue #24、Git 推送與 Docker 清理狀態一致，且沒有追蹤原版或 root-owned 產物。
+
+完成收據：Issue #24 的[目標 015 回填](https://github.com/wicanr2/colonization_cht/issues/24#issuecomment-5755046145)
+與提交 `90c5cdc`；收尾提交另記錄本檔 completed 狀態。

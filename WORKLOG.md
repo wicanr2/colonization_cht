@@ -190,5 +190,6 @@
   child 結束後 arena 未按 owner 回收。既有 allocator／EXEC／TSR／state 測試通過，但不覆蓋這條生命週期。
 - 固定 `OPENING.EXE` 兩百萬指令只觀測一次 `AH=4Bh AL=03h` overlay；IDA Pro 9.4 raw-binary 匯出交叉
   確認 `086C:0057`–`005B` 的 `B0 03 B4 4B CD 21`。未觀測 `AH=4Ch`／`31h` 僅限此窗口。
-- DRAFT 維持 DRAFT、未修改 dosgolem 或原版；收尾會更新 Issue／Git，刪除一次性探針與 IDA 暫存資料庫，
-  並檢查 Docker／擁有權。
+- DRAFT 維持 DRAFT、未修改 dosgolem 或原版；已將結論回填
+  [Issue #24](https://github.com/wicanr2/colonization_cht/issues/24#issuecomment-5755046145)，並推送證據提交
+  `90c5cdc`。已刪除一次性探針與 IDA 暫存資料庫；Docker 清理、擁有權與原版素材版控檢查均通過。
