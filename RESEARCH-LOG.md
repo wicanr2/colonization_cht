@@ -905,3 +905,29 @@ canvas 寫入 `00abbe84e9ba705a7915e6ba289bae8d6c1905dfca8595068c1d4d699d97ba26`
 | unknown | 完整 320×24 畫布窗口的資產歸屬、較後 canvas→VRAM copy 前的存續、最終像素矩形、圖像語意、文字存在與中文安全矩形。 | 取樣資料流不授權 DRAFT／READY 規格、覆蓋原型或中文化實作。 |
 
 本輪只使用 dosgolem 的記憶體讀寫觀測；沒有匯出／提交原版內容、修改 dosgolem、修改原版或改變遊戲流程。
+
+## 2026-09-21：目標 029 的 `OPENBORD.PIK` 取樣畫布至一次 VRAM copy 存續
+
+固定輸入、dosgolem commit `1435f175e785ea096a9268cd1021a4222300bd43` 與 post-window state
+`goal027-post-opening-pik-writes-4156900.state`（SHA-256
+`472bc110c556131b90989cad18280fd633be6f5e8d311eb17518d6d94f864089`）沿用先前目標。由第 4,156,900 指令
+重播至第 5,500,000 指令，原版目錄維持 `/game:ro`。生命周期 report SHA-256 為
+`afac0060be50bd828419e1811bd9d6a13f2a6feecdb60dd7cf5f613a2a27cf78`；畫布內容變更 TSV 為零 bytes
+（SHA-256 `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`）；粒度 1 讀取 TSV SHA-256 為
+`73e1dfdc83560d4e758098232b7e60bd5aaea9394c754f9d46455fe22dac31c6`，共 7,680 筆，低於 probe 的 200,000 筆
+保留上限。所有 report 都只在 gitignore 的 `workplace/reports/`。
+
+`-watch` 與 `-read-watch` 的範圍均為執行期線性 `1C430h–1E22Fh`。讀取事件完全在
+#5,464,375–#5,464,536，分成 24 組、每組 320 bytes，從第一組 `1C430h–1C56Fh` 到最後一組
+`1E0F0h–1E22Fh`，均報告執行後 IP `0557:00A1`。執行期 `0557:0090` 的 raw bytes 顯示
+`0557:009F = F3 A5`／`REP MOVSW`；其前置樣本為 `DS=1C43`、`ES=A000`、`CX=00A0`，`SI`／`DI` 每列
+遞增 `0140h`。`-watch` 僅回報內容改變，零筆不表示沒有值相同寫入。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | 第 4,156,900–5,500,000 指令對 `1C430h–1E22Fh` 的內容變更監看保留零筆，沒有截斷。 | 在此窗口未觀測到該 320×24 canvas 範圍的內容改變；值相同寫入未被排除。 |
+| confirmed | 7,680 筆讀取完整覆蓋該範圍，均在 #5,464,375–#5,464,536 的 `0557:00A1`；前一 `0557:009F` 是 `F3 A5`，且 24 個 pre-instruction 樣本是 `DS=1C43`、`ES=A000`、`CX=00A0`。 | 這個完整 canvas 範圍在一次逐列 `REP MOVSW` 中搬往 mode 13h A000 VRAM。 |
+| confirmed | 目標 028 的 672 次 `OPENBORD.PIK` 原始緩衝區→canvas 內容變更都在此 7,680-byte 範圍內；本輪未觀測內容改變且讀取完整覆蓋。 | 已確認的 672 次資料流延續至這一次 A000 VRAM copy。 |
+| unknown | copy 後 VRAM 的存續、`OPENBORD.PIK` 的完整資產歸屬、圖像或文字語意、中文安全矩形。 | 不建立 DRAFT／READY 規格、覆蓋原型或中文化實作。 |
+
+本輪沒有匯出原版畫面／像素、修改 dosgolem 或原版，亦未用 asset 名稱或畫布範圍推測文字存在。
