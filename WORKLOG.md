@@ -421,3 +421,12 @@
   [Issue #5](https://github.com/wicanr2/colonization_cht/issues/5#issuecomment-5759528876) 已回填且保持進行中。
   收尾確認沒有 `colonization` 容器、沒有 root 擁有檔或誤建 `.md` 目錄，原版素材未受版控，隔離 dosgolem 副本
   乾淨且 push URL 維持 `DISABLED`。
+
+## 2026-09-21：完成目標 036 的完整開場畫面中央左鍵
+
+- 從目標 033 的固定完整畫面 state 對照無輸入與唯一 `(160,100)` 左鍵。控制組保持 mode 13h 至 #7,000,000；
+  左鍵在 #5,465,840 被 `int 33h AX=0003` 讀取後，於 #5,509,826 以 `AH=4Ch, AL=6Ch` 終止。
+- 左鍵路徑沒有動態文字輸出、檔案、主控台、B8000 或字型 hook；mode 03h 的 A000 殘留不作畫面證據。
+  不把此點命名為按鈕或場景，亦不掃描其他座標。
+- 所有 report／trace／frame 仍在 gitignore 的 `workplace/reports/`；原版素材未受版控，未建立 DRAFT／READY、
+  譯文、字型或覆蓋程式。文件、worklist、Issue #5、Git 推送與 Docker／擁有權邊界將在收尾一併核對。

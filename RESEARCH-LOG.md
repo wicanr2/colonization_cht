@@ -1074,3 +1074,20 @@ dosgolem 是 `workplace/dosgolem` 的 commit `1435f175e785ea096a9268cd1021a42223
 
 批次檔原文、遊戲 EXE／資料及 probe report 均未加入 Git、GitHub Issue 或公開輸出；report 僅在 gitignore 的
 `workplace/reports/`。本輪不建立 DRAFT／READY、譯文、字型或覆蓋程式。
+
+## 2026-09-21：目標 036 的完整開場畫面中央左鍵
+
+固定輸入、`OPENING.EXE` SHA-256、DOS manifest、dosgolem commit 與第 #5,465,772 state
+`goal033-post-full-copy-5465772.state`（SHA-256
+`c5cbfb0e184aac21455bdc7a976d83fa84e55af7cde0de36e40861d9bd7a77ba`）均沿用目標 034。兩組都以無網路、
+一次性 Docker 容器從唯讀 `/game` 與同一 state 展開；實驗組唯一輸入是在 #5,465,773 排入的左鍵 `(160,100)`，
+並以首個滑鼠輪詢後放開。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | 無輸入控制組從 #5,465,772 續跑 1,534,227 道指令至 #7,000,000，仍為 `0557:00B3` mode 13h；有 1,255 次滑鼠輪詢，沒有新檔案、主控台、B8000、字型 hook 或未實作服務。lifecycle SHA-256 `d0a8cd67143ac3be9aed7cf305657a77250d88333a9d1fb78a27b1fb008d1934`，trace SHA-256 `43f6de26513635fcca14edf8f69b037cae03b39699171cf44d501a44749b3e25`。 | 控制組在固定終點持續開場圖形路徑；它不單獨證明左鍵路徑。 |
+| confirmed | 實驗組的 `int 33h AX=0003` 在 #5,465,840 回報 `CX=160, DX=100, 鍵=01`；按下只在這一次輪詢出現。#5,509,215 切為 mode 03h，#5,509,826 由 `0562:0396` 的 `AH=4Ch, AL=6Ch` 終止。lifecycle SHA-256 `67fe069da80f493a64297e6d088268db676ec4a666d668fcd2455c8190ba5e18`，trace SHA-256 `10f817804f348258c03ac239776841424e5c1ff3093c788f8e866b3514743dd6`。 | 這一個既有中央左鍵被程式讀取後走向 `OPENING.EXE` 退出；與目標 034 的 Enter 退出結果分開記錄。 |
+| confirmed | 實驗組沒有開新檔、主控台、B8000 或全形／半形字型 hook；終止前 #5,508,989–#5,509,826 的關閉序列有一次未實作 `int 21h AH=2Dh`，並釋放 EMS handle。mode 03h 後的 A000 indexed frame SHA-256 為 `304ffd302045969ddad4a6c5e3c139a1af5f9f1bdbc1a060600b981ef26faeaf`。 | 終止後 A000 是殘留，不能當作左鍵後新畫面，亦不能和較晚的控制組 mode 13h endpoint 比較。 |
+| unknown | 中央點的畫面／按鈕語意、其他可點區、其 hit-test 資料／常式及任何動態印字、文字來源與安全矩形。 | 此結果不建立 DRAFT／READY、譯文、字型或覆蓋程式。 |
+
+所有 lifecycle、trace、frame 與 palette 僅保存在 gitignore 的 `workplace/reports/`，沒有提交、附加或公開任何原版素材。

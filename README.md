@@ -79,6 +79,8 @@ dosgolem 現可保存 raw header／owner／name、current PSP、state v3，並�
 離開碼仍待追溯，不能將目前畫面當成完整遊戲入口。[目標 035](docs/goals/035-opening-exit-code-launcher-chain.md)
 已確認兩個 DOS 批次候選都在最後一行直接啟動 `opening`，未含後續的批次離開碼分派；dosgolem 目前也沒有
 batch／`COMMAND.COM` 重播層。因此未取得父程序收據，不宣稱已進入遊戲或定位動態文字。
+[目標 036](docs/goals/036-opening-composite-known-click-probe.md) 進一步確認完整開場畫面上的既有中央左鍵
+`(160,100)` 也只會走向同一 `0x6C` 退出；這是輸入消費證據，不是按鈕語意或文字輸出。
 
 第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
 確認的執行策略見 [目標 002](docs/goals/002-win16-execution-strategy.md)；實際工作順序與 Issue
@@ -138,6 +140,7 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第三十三輪目標](docs/goals/033-ocean-label-post-copy-persistence.md)
 - [第三十四輪目標](docs/goals/034-opening-post-composite-enter-probe.md)
 - [第三十五輪目標](docs/goals/035-opening-exit-code-launcher-chain.md)
+- [第三十六輪目標](docs/goals/036-opening-composite-known-click-probe.md)
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [MCB 記憶體 arena 重新協調規格草案](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)
