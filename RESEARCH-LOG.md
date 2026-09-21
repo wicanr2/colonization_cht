@@ -1335,3 +1335,29 @@ MZ／非 MZ 與精確大寫 ASCII `OPENING`／`VICEROY` metadata 盤點。輸出
 
 所有容器無網路、以 UID/GID 1000:1000 執行，原版 `/game` 唯讀。這是窄範圍 metadata 停止線，不是動態文字或
 中文覆蓋的實作證據。
+
+## 2026-09-22：目標 051 的開場畫面座標格視覺清冊
+
+固定 DOS manifest 是 `fbded5601e09889e285294e605df2c306c12a90603e556113b95d2afcf4d5bd3`。輸入使用既有完整
+composite frame 的 indexed frame、palette 與 state；SHA-256 分別是
+`304ffd302045969ddad4a6c5e3c139a1af5f9f1bdbc1a060600b981ef26faeaf`、
+`000ee1dfbfba6afc159d4e39dca09e5202e68bebc931cd4d50bfb3f998e1f1e3`、
+`c5cbfb0e184aac21455bdc7a976d83fa84e55af7cde0de36e40861d9bd7a77ba`。它綁定隔離 dosgolem commit
+`1435f175e785ea096a9268cd1021a4222300bd43` 與 #5,465,772 state。
+
+Python 3.11.2 標準函式庫 encoder 產生本機、gitignore 的
+`workplace/reports/goal051-opening-frame-coordinate-grid-x2.png`（SHA-256
+`24abdb08a2d7c72c22f80e19999fd1638cb345e447ee84f928e822571a412f7c`）與 metadata
+`workplace/reports/goal051-opening-frame-coordinate-grid.json`（SHA-256
+`aa81ec34a37cfda4c16f5f12e8f4cc83bbc85f90014c164e54a71e4997097a56`）。PNG signature 是
+`89504e470d0a1a0a`，尺寸 672×432；輸入為 320×200 logical image 的 2 倍放大，格線每 16 logical pixels、
+標示每 32 logical pixels。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | metadata schema `colonization-goal051-opening-frame-coordinate-grid/1` 記錄固定 manifest、dosgolem commit、state step、4 份輸入／輸出 SHA-256、尺寸、格線、tool 與限制；獨立檢查確認 PNG signature 和尺寸。 | 此本機圖片是可重現的既有畫面檢視材料。 |
+| confirmed（視覺限制） | 只以 `view_image` 檢視本機 PNG；沒有 OCR、文字轉錄、語意命名、鍵盤／滑鼠輸入、`VICEROY.EXE` direct-entry、batch interpreter 或狀態轉移。 | 格線或畫面位置不是按鈕、玩家路徑、文字、文本鍵或翻譯／覆蓋資格。 |
+| unknown | 所有未試操作位置的控制語意、輸入結果、正常轉交與動態文字輸出。 | 下一個輸入需要使用者先基於實際畫面選定正常操作意圖；不得用盲掃或 agent 猜測替代。 |
+
+所有容器無網路、原版與既有 reports input 唯讀、以 UID/GID 1000:1000 執行；產圖器為一次性 `/tmp` 工具，未加入
+儲存庫。這是一個可丟棄 prototype，不是 production path 或 READY 規格。
