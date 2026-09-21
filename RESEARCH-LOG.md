@@ -1317,3 +1317,21 @@ MZ／非 MZ 與精確大寫 ASCII `OPENING`／`VICEROY` metadata 盤點。輸出
 
 所有容器無網路、以 UID/GID 1000:1000 執行；原版 `/game` 唯讀。這是 metadata 停止線，不能用「沒有不同根層命中」
 宣稱不存在 launcher 或遊戲路徑。
+
+## 2026-09-22：目標 050 的子目錄啟動引用候選清冊
+
+固定 DOS manifest 是 `fbded5601e09889e285294e605df2c306c12a90603e556113b95d2afcf4d5bd3`。正式唯讀輸入根目錄是
+`SMColoni/COLONIZE`。隔離 `colonization-research:20260920-r2` 對其中至少一層子目錄的 `.BAT`、`.COM`、`.EXE`
+做相對路徑、大小、SHA-256、MZ／非 MZ 與精確大寫 ASCII `OPENING`／`VICEROY` metadata 盤點。報告只留在 gitignore
+的 `workplace/reports/goal050-subdirectory-launch-reference-inventory.json`，SHA-256 是
+`30f15c4490e6728f77783e38c5ff1c4c8d131df413ea899625ef274fc72d4836`；不含原版 bytes 或畫面。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | schema `colonization-goal050-subdirectory-launch-reference-inventory/1` 固定範圍為「排除根層」的 `.BAT`／`.COM`／`.EXE`；entries 為 0，兩個 token 的命中數均為 0。 | 此固定版本中沒有符合本輪副檔名與子目錄條件的靜態候選。 |
+| confirmed（範圍修正） | 第一次探針將父目錄 `SMColoni` 掛為 `/game`，使 `COLONIZE/` 的 9 個根層檔重現目標 049 結果。它未作為證據寫入文件、Git 或 Issue，正確根目錄重跑後同名 report 已覆蓋該暫時輸出。 | 只採用正確 `SMColoni/COLONIZE` report；目標 049 根層與目標 050 子目錄範圍不重疊。 |
+| confirmed | 正常 `OPENING.EXE` 路徑唯一已觀測 DOS EXEC 仍是 `PSOUND.COL`。 | zero-entry 與靜態清冊都不是 EXEC、父程序情境（parent context）、stack setup 或玩家路徑證據。 |
+| unknown | 非 `.BAT`／`.COM`／`.EXE` 的資料、動態組字、環境／磁碟 launcher、實際 parent、`VICEROY.EXE` 正常轉交與文字路徑。 | 不以本輪 zero-entry 排除其他 launcher；不執行候選、不建立 batch interpreter、DRAFT／READY 或 dosgolem 修改。 |
+
+所有容器無網路、以 UID/GID 1000:1000 執行，原版 `/game` 唯讀。這是窄範圍 metadata 停止線，不是動態文字或
+中文覆蓋的實作證據。

@@ -106,6 +106,9 @@ AX 的差異直接隨既有左鍵的 BX 變化；這仍是退出路徑資料流�
 [目標 049](docs/goals/049-dos-launch-parent-reference-inventory.md) 盤點固定 DOS 根層 9 個 `.BAT`／`.COM`／`.EXE`
 候選後，只在同名的 `OPENING.EXE` 與 `VICEROY.EXE` 內看到相應 ASCII token，沒有不同根層候選的靜態引用。
 這不是 DOS EXEC、父程序情境（parent context）或正常玩家路徑證據，仍不能據此啟動 `VICEROY.EXE` 或宣稱定位動態文字。
+[目標 050](docs/goals/050-dos-subdirectory-launch-reference-inventory.md) 以正確的固定 `SMColoni/COLONIZE` 根目錄
+盤點至少一層子目錄；其中沒有 `.BAT`、`.COM`、`.EXE` 候選，故無新增 token 命中。這個零結果只限該副檔名集合，
+不排除其他 launcher 方式，也不改變動態文字路徑仍未知的結論。
 
 第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
 確認的執行策略見 [目標 002](docs/goals/002-win16-execution-strategy.md)；實際工作順序與 Issue

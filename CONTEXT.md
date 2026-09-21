@@ -207,6 +207,10 @@
   命中都在 `OPENING.EXE`，`VICEROY` 的 4 筆都在 `VICEROY.EXE`；沒有不同根層檔案含任一 token。這只描述
   靜態 bytes，絕非 EXEC、父程序情境（parent context）、stack setup 或玩家路徑。子目錄、動態組字、環境／磁碟
   launcher 與實際 parent 均維持 unknown；不建立 DRAFT／READY 或執行候選。
+- 目標 050 以正確固定 `SMColoni/COLONIZE` 根目錄重跑子目錄 `.BAT`／`.COM`／`.EXE` metadata 清冊，entries 與
+  `OPENING`／`VICEROY` 命中均為 0（report SHA-256
+  `30f15c4490e6728f77783e38c5ff1c4c8d131df413ea899625ef274fc72d4836`）。初次父目錄掛載僅重複既有根層資料，
+  未採用、未提交，已由正確 report 覆蓋。zero-entry 只限此副檔名集合，仍不排除其他 launcher 或動態文字路徑。
 
 ## 尚未確認
 
@@ -215,8 +219,9 @@
 
 ## 下一閘門
 
-目標 050 正在將目標 049 的固定根層 metadata 停止線，窄幅擴至至少一層子目錄的 `.BAT`／`.COM`／`.EXE`；
-它只盤點精確 token，不能產生 EXEC、父程序情境或玩家路徑結論。
+目標 050 已完成且沒有子目錄 `.BAT`／`.COM`／`.EXE` 候選；此靜態清冊分支達到停止線。後續動態切片只能回到
+另一條已觀測的正常玩家路徑，或在新的 Goal 先明定其他有限範圍與其必要性；不得把 zero-entry 或靜態命中升格為
+EXEC、父程序情境或玩家路徑結論。
 
 Issue #23 已完成 READY profile 的實作與同狀態收據，#24 的 MCB importer 與首個 mode 13h 畫面證據亦已完成。
 正式 batch 啟動鏈已排除為可觀測的 `0x6C` 消費者，且目前 dosgolem 沒有 batch／`COMMAND.COM` 重播層；完整
