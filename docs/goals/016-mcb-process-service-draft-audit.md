@@ -1,6 +1,6 @@
 # 目標 016：通用多行程 MCB 服務轉移 DRAFT 審核
 
-狀態：in_progress<br>
+狀態：completed<br>
 日期：2026-09-21<br>
 對應 Issue：[ #24 ](https://github.com/wicanr2/colonization_cht/issues/24)<br>
 前置收據：[目標 015](015-mcb-multiprocess-ownership-evidence.md)；待修訂規格：[DRAFT 規格 003](../spec/003-colonization-mcb-arena-reconciliation-draft.md)
@@ -45,9 +45,12 @@ blocker 往可驗證 READY 前沿移動，不是中文覆蓋或遊戲規則的�
 
 ## 退出條件
 
-- [ ] 現行 service／process／arena／state 資料流有可回查 source 與受控 executor 收據，且 owner/name
+- [x] 現行 service／process／arena／state 資料流有可回查 source 與受控 executor 收據，且 owner/name
   遺失或保留行為可重現。
-- [ ] normal exit 與 TSR 的 child 後續行為已各自量測，未量測或不適用的狀態明列為 unknown。
-- [ ] 固定 `OPENING.EXE` evidence 與 executor-only 行為未混稱，且沒有新增未證實的原版語意。
-- [ ] DRAFT 規格 003 已包含 B 的 transition／拒絕／state 驗收前沿，仍未 READY、未實作。
-- [ ] 文件、Issue #24、Git 推送與 Docker 清理狀態一致，且沒有追蹤原版或 root-owned 產物。
+- [x] normal exit 與 TSR 的 child 後續行為已各自量測，未量測或不適用的狀態明列為 unknown。
+- [x] 固定 `OPENING.EXE` evidence 與 executor-only 行為未混稱，且沒有新增未證實的原版語意。
+- [x] DRAFT 規格 003 已包含 B 的 transition／拒絕／state 驗收前沿，仍未 READY、未實作。
+- [x] 文件、Issue #24、Git 推送與 Docker 清理狀態一致，且沒有追蹤原版或 root-owned 產物。
+
+完成收據：Issue #24 的[目標 016 回填](https://github.com/wicanr2/colonization_cht/issues/24#issuecomment-5755179775)
+與提交 `ecd058a`；收尾提交另記錄本檔 completed 狀態。

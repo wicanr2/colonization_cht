@@ -204,5 +204,6 @@
   owner/name 或 TSR retain overlap 的現有保證。
 - DRAFT 003 已新增 service transition ledger 與 B 進 READY 前的 owner/name/process registry、拒絕、
   state migration 與同狀態驗收條件；保持 DRAFT，未修改 dosgolem 或原版。
-- 一次性測試檔已從隔離 dosgolem 副本刪除；收尾將回填 Issue／Git，並再次檢查 Docker、擁有權與原版
-  素材邊界。
+- 一次性測試檔已從隔離 dosgolem 副本刪除；已將結論回填
+  [Issue #24](https://github.com/wicanr2/colonization_cht/issues/24#issuecomment-5755179775)，並推送證據提交
+  `ecd058a`。收尾提交會記錄 completed 狀態；Docker、擁有權與原版素材邊界將再次檢查。
