@@ -1,6 +1,6 @@
 # 目標 040：dosgolem 遠呼叫觀測對齊最小重現
 
-狀態：in_progress<br>
+狀態：completed<br>
 日期：2026-09-21<br>
 對應 Issue：[Issue #5](https://github.com/wicanr2/colonization_cht/issues/5)<br>
 前置證據：[目標 039](039-mouse-producer-body-dataflow.md)
@@ -41,4 +41,4 @@
 - [x] 固定 state、原版唯讀、零輸入 trace、相鄰 raw dumps 與雜湊可重現。
 - [x] trace label／far pointer／dump 位址／frame-transition 的關係逐項記錄，且沒有過度解釋。
 - [x] 已判定觀測限制被證據排除；本輪沒有改動 dosgolem，不需要通用 DRAFT。
-- [ ] 文件、Issue #5、Git、Docker 清理與權利邊界一致。
+- [x] 文件、Issue #5、Git、Docker 清理與權利邊界一致。
