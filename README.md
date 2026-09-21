@@ -186,6 +186,7 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第四十九輪目標](docs/goals/049-dos-launch-parent-reference-inventory.md)
 - [第五十輪目標](docs/goals/050-dos-subdirectory-launch-reference-inventory.md)
 - [第五十一輪目標](docs/goals/051-opening-frame-coordinate-grid.md)
+- [第五十二輪目標](docs/goals/052-known-exit-input-marker.md)
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [MCB 記憶體 arena 重新協調規格草案](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)
