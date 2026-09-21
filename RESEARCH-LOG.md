@@ -1299,3 +1299,21 @@ direct-entry 診斷，不是 `OPENING.EXE` 的已證實後續、正常玩家路�
 
 所有 state、raw、trace、timeline 與 indexed dump 僅在 gitignore 的 `workplace/reports/`，沒有附上 Git 或 Issue。本輪不 OCR、
 不建立文本鍵、譯文、字型、覆蓋、原型或規格，也不修改 dosgolem。
+
+## 2026-09-22：目標 049 的根層啟動引用候選清冊
+
+固定 DOS manifest 是 `fbded5601e09889e285294e605df2c306c12a90603e556113b95d2afcf4d5bd3`。以隔離
+`colonization-research:20260920-r2` 對唯讀 `/game` 的根層 `.BAT`、`.COM`、`.EXE` 做檔名、大小、SHA-256、
+MZ／非 MZ 與精確大寫 ASCII `OPENING`／`VICEROY` metadata 盤點。輸出報告僅保留在 gitignore 的
+`workplace/reports/goal049-root-launch-reference-inventory.json`，SHA-256 是
+`c9a6327b505fffb2046a662365ec886658b72dd9b3245d983a6d8aebeebc36c0`；不含原版 bytes 或畫面。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | 範圍有 9 檔：`CLOSING.EXE`（MZ，`2d0f0fa9cb8256fda6c967f2821379d37ca5552b6d621f74115b532aa147fedc`）、`COLDEMO.BAT`（非 MZ，`ccc44d5c31aef794eea0b27f240970e31839923c10e487c4b1923f80ce7da97d`）、`COLONIZE.BAT`（非 MZ，`4ea071484153da2716f77446fc6c7545645493fd369daf62fba8f395fa0bd9db`）、`INSTALL.EXE`（MZ，`bef03fdc07971402aa66e5bba9b42569d262cf6329be8905afcebc460c235a99`）、`MAPEDIT.EXE`（MZ，`b5b71b88b344be28c71d60325b35fc93221785b49099a9ce5f93195f6fefbab5`）、`MPSCOPY.EXE`（MZ，`ed359697da5bb6fc6983cab203eee5b1980df787aee30cf9c1224b901976b043`）、`OPENING.EXE`（MZ，`3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`）、`PKUNZJR.COM`（非 MZ，`44acfeeb1c68df328c2a4a39b0af453b06b0a1a8b7e8b2b1e19f81e9d253a11e`）、`VICEROY.EXE`（MZ，`a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3`）。 | 這是雜湊綁定的窄範圍候選集合，不是完整啟動鏈清冊。 |
+| confirmed | `OPENING.EXE` 有 5 筆 `OPENING` ASCII metadata（offset `49145,49153,49161,49178,49222`），全部無副檔名、無緊鄰路徑分隔；`VICEROY.EXE` 有 4 筆 `VICEROY` metadata（offset `104785,130260,130916,130931`），僅 `104785` 緊接 `.EXE`，全部無緊鄰路徑分隔。其他 7 檔均為零筆。 | 只有同名檔案內的靜態命中，沒有不同根層候選含 token；命中不說明語意。 |
+| confirmed | 正常 `OPENING.EXE` 路徑已觀測到的唯一 DOS EXEC 仍是 `PSOUND.COL`；目標 035 的批次靜態結構與本輪 token metadata 都沒有 DOS shell 或 parent replay。 | 不將靜態字串、批次命令詞或 direct-entry 升格為 EXEC、exit-code 消費、stack setup、父程序情境或動態文字證據。 |
+| unknown | 根層以外的候選、動態組字、環境／磁碟 launcher、實際 parent、`VICEROY.EXE` 正常轉交與文字路徑。 | 不執行候選、不建立 batch interpreter、不建立 DRAFT／READY，亦不修改 dosgolem。 |
+
+所有容器無網路、以 UID/GID 1000:1000 執行；原版 `/game` 唯讀。這是 metadata 停止線，不能用「沒有不同根層命中」
+宣稱不存在 launcher 或遊戲路徑。

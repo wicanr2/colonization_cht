@@ -103,6 +103,9 @@ AX 的差異直接隨既有左鍵的 BX 變化；這仍是退出路徑資料流�
 且同一個 writer 跨越標籤外的未知圖像；它不是可逆的可見背景。因此仍沒有中文安全矩形、遮罩或靜態覆蓋原型資格。
 [目標 048](docs/goals/048-viceroy-direct-entry-stall-diagnostic.md) 確認 `VICEROY.EXE` 的 direct-entry 以目前堆疊
 值走入 `CALL SP` 後的自迴圈，且沒有未實作服務；這是診斷性停止線，不是正常啟動或動態文字輸出證據。
+[目標 049](docs/goals/049-dos-launch-parent-reference-inventory.md) 盤點固定 DOS 根層 9 個 `.BAT`／`.COM`／`.EXE`
+候選後，只在同名的 `OPENING.EXE` 與 `VICEROY.EXE` 內看到相應 ASCII token，沒有不同根層候選的靜態引用。
+這不是 DOS EXEC、父程序情境（parent context）或正常玩家路徑證據，仍不能據此啟動 `VICEROY.EXE` 或宣稱定位動態文字。
 
 第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
 確認的執行策略見 [目標 002](docs/goals/002-win16-execution-strategy.md)；實際工作順序與 Issue
@@ -175,6 +178,7 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第四十六輪目標](docs/goals/046-opening-click-nonzero-downstream-dataflow.md)
 - [第四十七輪目標](docs/goals/047-ocean-label-pretext-canvas-background.md)
 - [第四十八輪目標](docs/goals/048-viceroy-direct-entry-stall-diagnostic.md)
+- [第四十九輪目標](docs/goals/049-dos-launch-parent-reference-inventory.md)
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [MCB 記憶體 arena 重新協調規格草案](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)

@@ -1,6 +1,6 @@
 # 目前脈絡
 
-日期：2026-09-21
+日期：2026-09-22
 
 ## 已確認
 
@@ -201,6 +201,12 @@
   `0020:402A=7E FE` 的自迴圈。#1M–#5M 無輸入窗口沒有未實作服務、檔案、畫面或 I/O，VRAM 仍全零。
   這是 direct-entry 堆疊控制流的 confirmed 診斷，正常 launcher／stack context 與動態文字仍為 unknown；
   沒有具體通用 dosgolem 缺口，不能建 DRAFT 或實作。
+
+- 目標 049 對固定 DOS manifest 的根層 `.BAT`／`.COM`／`.EXE` 建立 9 檔 metadata 清冊（report SHA-256
+  `c9a6327b505fffb2046a662365ec886658b72dd9b3245d983a6d8aebeebc36c0`）。精確大寫 ASCII `OPENING` 的 5 筆
+  命中都在 `OPENING.EXE`，`VICEROY` 的 4 筆都在 `VICEROY.EXE`；沒有不同根層檔案含任一 token。這只描述
+  靜態 bytes，絕非 EXEC、父程序情境（parent context）、stack setup 或玩家路徑。子目錄、動態組字、環境／磁碟
+  launcher 與實際 parent 均維持 unknown；不建立 DRAFT／READY 或執行候選。
 
 ## 尚未確認
 
