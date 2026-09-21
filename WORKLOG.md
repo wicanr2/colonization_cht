@@ -229,4 +229,5 @@
 - DRAFT 003 現要求 importer 保存／驗證 raw 16-byte header、typed owner/name、連續 M/Z chain 與
   process registry；矛盾一律保留 snapshot 並 fail-closed。跨程序、TSR、external owner 仍 unknown，
   DRAFT 未 READY、未改 dosgolem 或原版。
-- 收尾將更新 Issue／Git 並再次驗證 Docker、擁有權與原版素材邊界。
+- 已回填 [Issue #24](https://github.com/wicanr2/colonization_cht/issues/24#issuecomment-5755285987) 並推送證據
+  提交 `35a86f0`；收尾提交會記錄 completed 狀態，並再次驗證 Docker、擁有權與原版素材邊界。

@@ -1,6 +1,6 @@
 # 目標 018：MCB wire format 與直接改寫界線證據
 
-狀態：in_progress<br>
+狀態：completed<br>
 日期：2026-09-21<br>
 對應 Issue：[ #24 ](https://github.com/wicanr2/colonization_cht/issues/24)<br>
 前置收據：[目標 017](017-mcb-platform-contract-evidence.md)；待修訂規格：[DRAFT 規格 003](../spec/003-colonization-mcb-arena-reconciliation-draft.md)
@@ -27,7 +27,10 @@ B 的匯入驗證與 fail-closed 邊界，不將手冊未明示的跨程序結�
 
 ## 退出條件
 
-- [ ] MCB wire format／owner／direct-write 的原始手冊證據與 hash 可回查。
-- [ ] 平台、固定遊戲與 executor 的 header 行為已分層比較，矛盾不被靜默吸收。
-- [ ] DRAFT 003 有 importer raw-byte／拒絕前沿，仍未 READY、未實作。
-- [ ] 文件、Issue #24、Git 推送與 Docker 清理一致。
+- [x] MCB wire format／owner／direct-write 的原始手冊證據與 hash 可回查。
+- [x] 平台、固定遊戲與 executor 的 header 行為已分層比較，矛盾不被靜默吸收。
+- [x] DRAFT 003 有 importer raw-byte／拒絕前沿，仍未 READY、未實作。
+- [x] 文件、Issue #24、Git 推送與 Docker 清理一致。
+
+完成收據：Issue #24 的[目標 018 回填](https://github.com/wicanr2/colonization_cht/issues/24#issuecomment-5755285987)
+與提交 `35a86f0`；收尾提交另記錄本檔 completed 狀態。
