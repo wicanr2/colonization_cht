@@ -656,3 +656,22 @@ registry、current-PSP service 或可表示的 state，DRAFT 003 不可升 READY
 目標 020 將這些 confirmed 缺口與平台契約轉成[READY 規格 004](docs/spec/004-colonization-registered-process-mcb-importer-ready.md)：
 只對 registry 中 root／child owner 授權實作，external／unknown lifecycle 一律 fail-closed。這是有界的
 executor spec，不是固定遊戲 child／TSR parity；實作仍尚未開始。
+
+## 2026-09-21：目標 021 的 registered-process MCB importer 驗收
+
+隔離 `workplace/dosgolem` 以 READY 規格 004 實作，基底提交為
+`1b0efdf98ac3ab85c90cb80c3e489e935fb45665`、本地實作提交為 `1435f17`，`upstream` push URL 維持
+`DISABLED`。實作把每個 MCB 的
+raw 16-byte header、owner、opaque name、程序 parent/lifecycle/blocks 寫入 typed model 與 state v3；
+List-of-Lists importer 對 M/Z、段落嚴格前進、唯一 Z、MemTop、free owner 與已登錄 owner 驗證，拒絕只記錄
+診斷 snapshot，不改客體 bytes。這是 executor 實作結論，不是遊戲地址空間的新增結論。
+
+| 推論等級 | 證據 | 結論 |
+| --- | --- | --- |
+| confirmed（內部契約） | 無網路 Docker `go test ./...` | 新增 direct `$sys$` 匯入、失敗 `49h` 不重發、unregistered owner bytes 不變、child current PSP/owner、TSR rejection、v3 round-trip/v2 rejection 測試；所有 dosgolem package 通過。 |
+| confirmed（固定原版） | `dosgolem-goal021-opening-overlay-20260921.txt`，SHA-256 `2fa18b931afac4bf15f7d89a1712cb7e98de2a7e29a054097202589cb4a58e00` | `OPENING.EXE` SHA-256 `3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39` 以 `-sbpro` 至 2,000,000 指令仍存活，`PSOUND.COL` 在 834,342 載入並後續讀取 MPS assets；ArenaDump 保留 `$sys$`、`FONTINTR`、`$sound$`、`S$MPSLOG`、`S$MPSNAM`、`$sp-load` raw names。 |
+| unknown | child EXEC／TSR 的固定遊戲路徑 | 固定原版窗口仍只見 `AH=4Bh AL=03h`；synthetic child/TSR 僅驗證 executor 的有界合約，不能外推原版需求。 |
+
+規格狀態升為 [CONFORMED 規格 005](docs/spec/005-colonization-registered-process-mcb-importer-conformed.md)。
+未登錄 owner、cross-process release/resize、未知手改 lifecycle 與 v2 state 維持 fail-closed；這並未解開
+映像外控制流、產生畫面或建立文字輸出證據，Issue #24 仍開放。

@@ -31,16 +31,15 @@
 它只處理已證實的 `0x220` primary OPL 偵測、`0x222` delay 與 `0x226 → 0x22E → 0x22A=0xAA` DSP reset
 handshake，不宣稱完整音效或 OPL3 parity。目前依 [目標 009](docs/goals/009-sbpro-profile-and-cold-boot.md)
 在隔離的 dosgolem 副本完成可選 profile；正式路徑已跨過 DSP reset，並載入 `MPSLOGO.SS`、
-`MPSNAME.SS`，但尚未有可見畫面或主程式轉交。目標 013 已確認原程式以 `AH=52h` 取得的活躍（active）MCB
-鏈直接建立 `1C42` 記錄；目前 dosgolem 的內部記憶體 arena 沒有吸收該修改，失敗的 `AH=49h` 服務又
-重發佈過期鏈，使 overlay 重用 `1C43`。兩個呼叫端都覆寫服務回傳值，不能把它誤稱為遊戲要求成功釋放。
-這已收斂為 [MCB 重新協調 DRAFT 規格](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md) 與
-[已註冊多行程 READY 規格](docs/spec/004-colonization-registered-process-mcb-importer-ready.md)：後者只授權
-registry 中 root／child owner 的 raw header、state v3 與 fail-closed 行為；external owner、未知
-cross-process／TSR lifecycle 與 v2 state 仍拒絕。固定遊戲路徑目前仍只觀測到 `AH=4Bh AL=03h` overlay，
-這不會被誤稱成 child EXEC 或 TSR 的原版需求。[Issue #24](https://github.com/wicanr2/colonization_cht/issues/24) 現可依 READY 規格實作，不會實作猜測性的
-DOS、滑鼠或音訊服務。範圍、固定輸入與證據界線見
-[目標 020](docs/goals/020-mcb-registered-process-ready-spec.md)。此前沒有可下載中文化程式或任何完成度宣稱。先前 Windows 3.x NE
+`MPSNAME.SS`，但尚未有可見畫面或主程式轉交。原程式直接建立的活躍（active）MCB 鏈已由
+[MCB 重新協調 DRAFT 規格](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)、
+[已註冊多行程 READY 規格](docs/spec/004-colonization-registered-process-mcb-importer-ready.md) 與
+[CONFORMED 規格 005](docs/spec/005-colonization-registered-process-mcb-importer-conformed.md) 收斂：隔離
+dosgolem 現可保存 raw header／owner／name、current PSP、state v3，並拒絕未登錄 owner、未知 lifecycle
+與 v2 state。固定路徑重跑至 2,000,000 指令，保留 `$sys$` 等原始 MCB name，持續載入 `MPSLOGO.SS`、
+`MPSNAME.SS`，但仍僅觀測 `AH=4Bh AL=03h` overlay，不能誤稱 child EXEC、TSR、首畫面或完整遊戲。
+[Issue #24](https://github.com/wicanr2/colonization_cht/issues/24) 因尚未取得可見畫面或 `VICEROY.EXE` 轉交而維持進行中。
+範圍、固定輸入與證據界線見 [目標 021](docs/goals/021-mcb-registered-process-implementation.md)。此前沒有可下載中文化程式或任何完成度宣稱。先前 Windows 3.x NE
 輸入只保留為歷史研究證據，不是目前實作目標。
 
 第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
@@ -86,7 +85,10 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第十八輪目標](docs/goals/018-mcb-wire-format-and-direct-write-evidence.md)
 - [第十九輪目標](docs/goals/019-mcb-generic-importer-ready-review.md)
 - [第二十輪目標](docs/goals/020-mcb-registered-process-ready-spec.md)
+- [第二十一輪目標](docs/goals/021-mcb-registered-process-implementation.md)
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [MCB 記憶體 arena 重新協調規格草案](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)
+- [已註冊多行程 MCB importer READY 規格](docs/spec/004-colonization-registered-process-mcb-importer-ready.md)
+- [已註冊多行程 MCB importer CONFORMED 規格](docs/spec/005-colonization-registered-process-mcb-importer-conformed.md)
 - [工作歷程](WORKLOG.md)

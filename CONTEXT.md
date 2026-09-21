@@ -69,9 +69,16 @@
 - 目標 017 的 MS-DOS 3.10 原始手冊交叉確認：`48h` 屬 current process、`49h` 僅釋放先前 `48h`
   block、`4Ah` 有 CF/AX/BX 失敗契約、`4Ch` 結束 current process 並回父、`62h` 回 active PSP。它們
   支持 B 必須有 owner-aware registry，但未定義跨程序或手改 MCB 細節，故 DRAFT 仍未 READY。
-- 目標 020 已建立 READY 規格 004，範圍為已註冊 root／child owner：raw 16-byte header、owner/name、
-  registry、state v3、current PSP service 與 fail-closed rejection 都有契約及驗收。external owner、未知
-  cross-process／TSR lifecycle 與 v2 state 仍留在 DRAFT／拒絕範圍；尚未開始實作。
+- 目標 020 的 READY 規格 004 已在目標 021 實作並由 [CONFORMED 規格 005](docs/spec/005-colonization-registered-process-mcb-importer-conformed.md)
+  驗收：已註冊 root／child owner 的 raw 16-byte header、owner/name、registry、state v3、current PSP
+  services、normal child 回收與有限 TSR retain 均由 typed model 驅動；未登錄 owner、cross-process、未知
+  lifecycle 與 v2 state 一律 fail-closed。實作位於隔離副本的本地提交 `1435f17`，其 `upstream` 仍為
+  `DISABLED`。先前目標 015–016 的 root-owner 重發佈、TSR overlap、固定 root
+  PSP 回傳均是實作前基線，不再是現行行為。
+- 固定 `OPENING.EXE` 以 `-sbpro` 至 2,000,000 指令的新收據（SHA-256
+  `2fa18b931afac4bf15f7d89a1712cb7e98de2a7e29a054097202589cb4a58e00`）仍載入 `PSOUND.COL`、
+  `MPSLOGO.SS`、`MPSNAME.SS`，且 ArenaDump 保留 `$sys$`、`FONTINTR`、`$sound$` 等 raw name；沒有 MCB
+  importer 拒絕或舊 arena 重發布跡象。這不是可見畫面、文字輸出或完整遊戲完成收據。
 
 ## 尚未確認
 
@@ -81,11 +88,8 @@
 
 ## 下一閘門
 
-Issue #23 已完成 READY profile 的實作與同狀態收據。#24 已完成首次控制轉移、清零引數、overlay 載入者、
-客體活躍 MCB 鏈、過期 arena 重發佈，以及 DRAFT 003 的 caller／consumer／可表示性與多行程 owner
-缺口審查；DRAFT 仍未 READY。使用者已選 B，下一個最小前沿是先為通用 process/owner/name/state 模型
-定義可驗證的服務轉移、TSR／外部 owner 拒絕條件、state migration 與一般性驗收；目標 016 已確認
-現有 root owner 重發佈、TSR retained-range overlap 與 current-PSP API 不一致。下一個最小前沿是取得
-外部 owner／跨程序服務的公開契約或受控 oracle、把 migration 與 rejection 寫成可審查 DRAFT，再以固定
-原版同狀態驗證它實際觸及的 overlay 路徑；絕不直接修正。#5 與 #8 在 #24 之前維持阻塞。Windows NE
-清冊（#19）只保留為歷史輸入證據。Issue #10 與 #15 仍需在真實證據與原型具備後由使用者決定。
+Issue #23 已完成 READY profile 的實作與同狀態收據。#24 的已註冊 MCB importer 子項已 CONFORMED；但固定
+原版路徑仍未出現可見畫面、可觀測文字輸出或 `VICEROY.EXE` 轉交，故 #24 維持進行中。下一個最小前沿是
+只對 2,000,000 指令後的真實控制流／畫面輸出蒐集證據；不得將 external owner、cross-process 或未知 TSR
+行為擴張成實作。#5 與 #8 在取得 DOS 原始畫面或可證實轉交前維持阻塞。Windows NE 清冊（#19）只保留為
+歷史輸入證據；Issue #10 與 #15 仍需在真實證據與原型具備後由使用者決定。

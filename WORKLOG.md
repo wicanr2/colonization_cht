@@ -253,3 +253,17 @@
 - 本規格是唯一授權下一輪 dosgolem 通用實作的依據；本輪沒有程式碼修改。已回填
   [Issue #24](https://github.com/wicanr2/colonization_cht/issues/24#issuecomment-5755401767)，並推送證據提交
   `58fc3fc`；收尾提交會記錄 completed 狀態，並檢查 Docker、擁有權及原版素材邊界。
+
+## 2026-09-21：完成目標 021 的已註冊多行程 MCB importer
+
+- 在隔離 `workplace/dosgolem` 實作 raw 16-byte MCB header、owner/name、程序 registry、state v3、
+  current PSP services 與 fail-closed importer；沒有把 Colonization 位址、文本或原版素材放進 dosgolem。
+- 新增 synthetic child／direct header／TSR rejection／state v3 契約測試，並在無網路 Docker 中以
+  `go test ./...` 通過所有 package。
+- 固定 `OPENING.EXE -sbpro` 重跑至 2,000,000 指令，收據
+  `workplace/reports/dosgolem-goal021-opening-overlay-20260921.txt` 的 SHA-256 是
+  `2fa18b931afac4bf15f7d89a1712cb7e98de2a7e29a054097202589cb4a58e00`；`PSOUND.COL` overlay、後續資料
+  讀取與 `$sys$` 等 raw MCB names 均存在，但未宣稱可見畫面或完整遊戲。
+- [CONFORMED 規格 005](docs/spec/005-colonization-registered-process-mcb-importer-conformed.md) 記錄本輪
+  有效範圍與停止線。隔離 dosgolem 已提交為本地 `1435f17`，其 upstream 仍為 `DISABLED`；Issue、外層 Git
+  提交與最後 Docker／權利邊界檢查將在本輪收尾回填。
