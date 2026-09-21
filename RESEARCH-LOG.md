@@ -724,3 +724,44 @@ gitignore 的 `workplace/reports/`。
 
 「無文字輸出」的 confirmed 範圍只限目標 022 固定 state 的無輸入 2M–20M 路徑；不能外推到其餘畫面或整個遊戲。
 沒有建立 DRAFT／READY 規格，也沒有修改 dosgolem、原版或中文覆蓋。
+
+## 2026-09-21：目標 024 的首畫面正常輸入與開場資產分支
+
+固定輸入為 `OPENING.EXE`（SHA-256
+`3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`），起點 state v3 為
+`dosgolem-goal022-opening-2m-state-v3-20260921.state`（SHA-256
+`1f9b3822fc5ad2c041714a95527a230096cee97c69181fc82f0d9feec165de6b`），執行器為隔離
+`workplace/dosgolem` commit `1435f175e785ea096a9268cd1021a4222300bd43`。所有重播在
+`colonization-research:20260920-r2`、無網路、UID/GID 1000:1000、唯讀 `/game` 與可寫
+`workplace/reports/` 中執行；原版衍生 report 與 VRAM 都未加入 Git。
+
+先以無輸入及 `-press enter -press-at 3000000` 對照。兩者的最後 mode 13h VRAM SHA-256 均為
+`5e65e98edfa907abec6c33df05957cdb8716b2471e6093dbf6fa5ecd5f64822f`；後者的 probe 報告顯示 `int 09h`
+未安裝，兩個掃描碼事件留在佇列，故 IRQ1 注入不構成原版消費輸入的證據。接著從同一 state 分別執行：
+
+```text
+go run ./cmd/probe -load-state /workplace/reports/dosgolem-goal022-opening-2m-state-v3-20260921.state \
+  -root /game -steps 12000000 -bios-keys '\\n' -bios-key-from 3000000 -bios-key-every 2000000 \
+  -watch-video -watch-screen 250000 -screen-delta 1 -log-calls -seg-log -vram-sites \
+  -dump-vram /workplace/reports/goal024-bios-enter-12000000.vram
+
+go run ./cmd/probe -load-state /workplace/reports/dosgolem-goal022-opening-2m-state-v3-20260921.state \
+  -root /game -steps 12000000 -click-x 160 -click-y 100 -click-at 3000000 -click-polls 1 \
+  -watch-video -watch-screen 250000 -screen-delta 1 -log-calls -seg-log -vram-sites \
+  -dump-vram /workplace/reports/goal024-center-left-12000000.vram
+```
+
+完整本地 report 的 SHA-256 依序為 BIOS Enter
+`83e694300a71d842fa7f0acaeb0ef7721e29c29f9aa7de17e5ec76b55605d528`、中央左鍵
+`e01431d7243374723960a6924e379a081eeacec30662a5fbb9f006bae0891941`；兩個輸出 VRAM 的 SHA-256 同為
+`d2add3f193e10c0b9d4d65b7fc59b10e6bd967a81bbfe1eb93a5ad4bf41166b0`。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | BIOS Enter 在第 3,000,121 指令由 `int16-AH00-bda` 取走（鍵值 `0D`），第 3,000,226 指令首見 `0110:1064 → 03A7:000A`，第 3,001,287 指令首次開啟 `OPENING.PIK` | BIOS 鍵盤緩衝區的單一 Enter 使首畫面流程進入開場資產載入。 |
+| confirmed | 中央左鍵在第 3,000,022 指令由 `int 33h AX=0003` 觀測為按下；第 3,000,166 指令首見同一條 `0110:1064 → 03A7:000A`，第 3,001,227 指令首次開啟 `OPENING.PIK` | 這一筆固定位置的單次左鍵也使流程進入同一開場資產載入。 |
+| confirmed | 兩條分支均開啟 `OPENING.PIK`、`OPENBORD.PIK`、`OPENSHIP.SS`、`OPENCRD1.SS` 至 `OPENCRD3.SS`、`OPENWND1.SS` 至 `OPENWND2.SS`、`OPENSUN.SS`、`OPENMON1.SS` 至 `OPENMON3.SS`、`OPENFISH.SS`、`OPENGUY.SS`、`OPENLOGO.SS`、`OPENBONK.SS`；終點為 64,000／64,000 非零 mode 13h 像素 | 這兩筆輸入在本觀測窗口產生同一個開場圖像載入分支。 |
+| confirmed | 兩條 2M–12M 輸入分支均為全形／半形字型 hook 0、B8000 非零 byte 0、主控台 0 bytes | 在此輸入及指令窗口仍未觀測可用的動態文字輸出事件。 |
+| unknown | 首畫面的語意、Enter／左鍵是否代表相同的遊戲操作語意、`OPEN*.SS` 是否含文字、其圖像內容與後續玩家輸入序列 | 不由檔名、座標或兩條路徑輸出相同而猜測；不建立 DRAFT／READY 規格。 |
+
+本輪只取得正常輸入與靜態資產候選序列的 RE 證據；沒有修改 dosgolem、原版檔案、遊戲行為或中文覆蓋。
