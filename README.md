@@ -97,6 +97,8 @@ AX 的差異直接隨既有左鍵的 BX 變化；這仍是退出路徑資料流�
 原文、完整邊界與安全矩形仍未知，因此尚未建立中文覆蓋原型。
 [目標 045](docs/goals/045-scroll-candidate-pretext-background-evidence.md) 進一步排除把這個 writer 前的零值 canvas
 當作背景：其 254-byte 連通繪製區跨越既有約略候選邊界。因此中文安全矩形仍未知，不能以這條資料流產生遮罩或覆蓋。
+[目標 046](docs/goals/046-opening-click-nonzero-downstream-dataflow.md) 已確認既有中央左鍵只導向
+`OPENING.EXE` 的非文字退出鏈，沒有產生動態文字輸出、文本鍵或覆蓋資格。
 
 第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
 確認的執行策略見 [目標 002](docs/goals/002-win16-execution-strategy.md)；實際工作順序與 Issue
@@ -166,6 +168,7 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第四十三輪目標](docs/goals/043-scroll-text-canvas-writer-provenance.md)
 - [第四十四輪目標](docs/goals/044-scroll-candidate-input-asset-provenance.md)
 - [第四十五輪目標](docs/goals/045-scroll-candidate-pretext-background-evidence.md)
+- [第四十六輪目標](docs/goals/046-opening-click-nonzero-downstream-dataflow.md)
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [MCB 記憶體 arena 重新協調規格草案](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)

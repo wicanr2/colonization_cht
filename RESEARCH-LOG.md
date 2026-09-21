@@ -1242,3 +1242,24 @@ A000 `A000:3840:6400` 分別是邏輯 y=`45..64` 的 320×20 色號 rows，兩�
 
 所有 state、snapshot 與 reports 只存在 gitignore 的 `workplace/reports/`；本輪沒有提交原版衍生內容。這是安全否定，
 不表示整體靜態文字候選已窮盡。
+
+## 2026-09-21：目標 046 的開場既有左鍵後續退出鏈
+
+固定輸入是 `OPENING.EXE`（SHA-256
+`3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`）、DOS manifest
+`fbded5601e09889e285294e605df2c306c12a90603e556113b95d2afcf4d5bd3`、state
+`goal033-post-full-copy-5465772.state`（SHA-256
+`c5cbfb0e184aac21455bdc7a976d83fa84e55af7cde0de36e40861d9bd7a77ba`）與隔離 dosgolem commit
+`1435f175e785ea096a9268cd1021a4222300bd43`。唯一實驗輸入是 #5,465,773 的 `(160,100)` 左鍵，首個輪詢後放開；
+所有容器無網路、以 UID/GID 1000:1000 執行，原版 `/game` 唯讀。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | control／click IP timeline 的第一個差異為 record 96／#5,465,867：`0110:0960` 對 `0110:0956`。click raw `0110:094F:96` 的 SHA-256 是 `0880c0b81d4745f3ec7c3f077e5a8248fe23669e6fed0210b77c31a1ebb6acf1`，其中 `0956=C7 46 F6 1B 00`、`095B=C7 46 FC 01 00`、`0960=83 7E F6 00`、`0964=75 03`。 | local `001Bh` 寫入後確實進入 nonzero 分派；資料／控制項語意未知。 |
+| confirmed | click timeline 在 #5,465,909 首次進入 `2C5D:0B18`，最後 lifecycle 在 #5,511,211 切 mode 03h，#5,511,836 以 `int 21h AH=4Ch, AL=6Ch` 終止。baseline lifecycle SHA-256 `33332e0f2cf41bc956d6a763a95d8f9370f15338849f1c308bf5bf0b7267baf0`；timeline lifecycle／trace SHA-256 是 `801711afe97d3d00b8c14091e0c49dd054408edf2ec25259031ba16e9407c437`／`3dcf2a4f9c63dc9f82308efc03bb1bc22fabdffa038c73934b0806b537728019`。 | 此固定 state 的單次左鍵最終離開 `OPENING.EXE`；不以段名或 exit code 推論遊戲語意。 |
+| confirmed（無文字） | lifecycle 的主控台為 0 bytes、B8000 非零 bytes 為 0、全形／半形字型 hook 均為 0、沒有開檔事件。 | 此退出鏈不是動態文字輸出，沒有文本鍵或中文覆蓋資格。 |
+| confirmed（勘誤） | 目標 036 的舊 lifecycle 以同名 state 記錄 #5,509,826 終止；現行無 observer baseline 於 #5,511,836 終止。舊收據未保存 state SHA-256 和 dosgolem commit。 | 舊精確步數不再是現行可重現收據；最終退出／無文字結論保留。 |
+| unknown | `001Bh`、後續條件、`2C5D` 段、exit code、控制項、`VICEROY.EXE` 轉交與動態文字來源。 | 不以 batch、direct-entry、檔名或畫面外觀補猜。 |
+
+所有 raw、timeline、trace 與 lifecycle 僅在 gitignore 的 `workplace/reports/`；沒有提交原版衍生內容。本輪不建立
+譯文、字型、DRAFT／READY 或覆蓋程式，也不修改 dosgolem。
