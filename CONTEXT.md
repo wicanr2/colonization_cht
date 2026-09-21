@@ -143,6 +143,12 @@
   `0562:0396` 的 `CD 21`／`AH=4Ch, AL=6Ch` 終止。兩組都沒有主控台、B8000、字型 hook 或新檔案開啟，故
   這是 confirmed 的 `OPENING.EXE` 離開分支，不是動態文字證據。離開碼的正式消費者、其他正常入口與動態文字
   輸出路徑均為 unknown。
+- 目標 035 盤點 DOS 安裝根層的兩個批次候選：`COLONIZE.BAT`（SHA-256
+  `4ea071484153da2716f77446fc6c7545645493fd369daf62fba8f395fa0bd9db`）與 `COLDEMO.BAT`
+  （SHA-256 `ccc44d5c31aef794eea0b27f240970e31839923c10e487c4b1923f80ce7da97d`）。兩者僅以最終命令詞
+  `opening` 直接啟動開場，沒有後續批次分派行。dosgolem 的 `cmd/probe` 對 `.BAT` 會從 `0100:0100` 將其
+  當作 COM 式程式碼執行，不支援 batch／`COMMAND.COM` 重播；因此沒有已證實的 `0x6C` 消費者，且不能把
+  這個工具缺口或腳本靜態結構外推為 DOS shell／遊戲語意。
 
 ## 尚未確認
 
@@ -152,8 +158,9 @@
 ## 下一閘門
 
 Issue #23 已完成 READY profile 的實作與同狀態收據，#24 的 MCB importer 與首個 mode 13h 畫面證據亦已完成。
-首畫面後的一步正常輸入現已可重播，但單一 Enter 已確認只會結束 `OPENING.EXE`；下一個動態前沿是追溯正式
-啟動器／父程序如何消費離開碼 `0x6C`，或找到另一條正常入口，而不是再對同一畫面盲注按鍵。`OPENBORD.PIK` 的
+正式 batch 啟動鏈已排除為可觀測的 `0x6C` 消費者，且目前 dosgolem 沒有 batch／`COMMAND.COM` 重播層；下一個
+動態前沿應從 `OPENING.EXE` 內的另一條經證據界定的正常互動路徑追溯，而不是再對同一畫面盲注按鍵或猜測 shell
+語意。`OPENBORD.PIK` 的
 已確認 320×24 範圍已排除為文字候選；下一個
 靜態前沿已取得 `opening-map-ocean-label` 的部分原始像素→暫存→畫布→有限窗口 A000 存續鏈；下一個切片要為它
 建立可逆的清除／覆蓋幾何證據，再與其他實際載入的 `.PIK`／`.SS` 候選各自確認完整檔案歸屬與安全矩形，才能

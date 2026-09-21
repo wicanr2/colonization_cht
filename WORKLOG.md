@@ -409,3 +409,12 @@
   [Issue #5](https://github.com/wicanr2/colonization_cht/issues/5#issuecomment-5759322874) 已回填且保持進行中。收尾確認
   無 `colonization` 容器、沒有 root 擁有檔或誤建 `.md` 目錄，原版素材未受版控，隔離的 dosgolem 副本乾淨且 push
   URL 仍是 `DISABLED`。
+
+## 2026-09-21：完成目標 035 的批次啟動鏈與 `0x6C` 消費者邊界
+
+- 根層的兩個 batch 候選均以最後一行 `opening` 啟動開場，沒有其後的 source-level 離開碼分派；
+  `COLONIZE.BAT` 是一般入口候選而非已證實的啟動器。沒有保存批次原文。
+- dosgolem 的最小 probe 將 `.BAT` 從 `0100:0100` 作為 COM 式程式碼執行，沒有 batch／`COMMAND.COM`
+  直譯能力；這是能精確重現的工具缺口，未被誤寫成 DOS shell 或遊戲的離開碼語意。
+- report 留在 gitignore 的 `workplace/reports/`，原版素材未受版控；未建立 DRAFT／READY、譯文、字型或覆蓋程式。
+  文件、worklist、Issue #5、Git 推送與 Docker／擁有權邊界將在收尾一併核對。

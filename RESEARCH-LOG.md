@@ -1057,3 +1057,20 @@ Docker 容器、唯讀 `/game` 掛載從同一 state 展開；預定上限同為
 
 本輪只比較同一快照的正常無輸入與單一 BIOS Enter，沒有盲注、掃描點擊、記憶體改寫或原版修改。固定 state、
 report、trace 與畫面傾印均只保留在 gitignore 的 `workplace/reports/`。
+
+## 2026-09-21：目標 035 的批次啟動鏈與 `0x6C` 消費者邊界
+
+固定 DOS 輸入 manifest SHA-256 是
+`fbded5601e09889e285294e605df2c306c12a90603e556113b95d2afcf4d5bd3`；所有檔案盤點與 probe 在
+`colonization-research:20260920-r2` 的無網路一次性 Docker 容器中進行，原版目錄唯讀掛載為 `/game`。
+dosgolem 是 `workplace/dosgolem` 的 commit `1435f175e785ea096a9268cd1021a4222300bd43`，未修改。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | 根層的 DOS batch 檔只有 `COLONIZE.BAT`（50 bytes，SHA-256 `4ea071484153da2716f77446fc6c7545645493fd369daf62fba8f395fa0bd9db`）與 `COLDEMO.BAT`（52 bytes，SHA-256 `ccc44d5c31aef794eea0b27f240970e31839923c10e487c4b1923f80ce7da97d`）。兩者都是 CRLF ASCII batch 檔；未保存原文的行數／命令詞盤點各得兩個非空行，第一行為回音控制，最後一行命令詞是 `opening`。 | 兩個候選皆以最後一行直接啟動開場；它們沒有其後的 batch source-level 離開碼消費／分派行。 |
+| 強推論 | `COLONIZE.BAT` 的檔名與其直接啟動開場的內容形狀。 | 它是一般 DOS 啟動入口候選；沒有從原版說明文字或 shell 執行收據證實「一般」身分。 |
+| confirmed | dosgolem `cmd/probe -h` 的 `-exe` 說明只接受 MZ 或 COM。以 `/game/COLONIZE.BAT`、`-root /game`、`-steps 1` 重現時，報告從 `CS:IP=0100:0100` 執行到 `0100:0101`，`AX=0001`，沒有 EXEC、檔案、主控台或未實作服務；report SHA-256 `373d74d8458f002241b69b62d47133210368efb722638b3f51520d9bd26921b6`。 | `cmd/probe` 未執行 batch 直譯，而是以 COM 式入口執行批次位元組。batch／`COMMAND.COM` 正式重播是本輪精確的工具缺口。 |
+| unknown | 既有目標 034 的 `OPENING.EXE` `AH=4Ch, AL=6Ch` 收據，及本輪兩個批次檔的靜態結構。 | 沒有已證實的父程序消費者、DOS shell 回傳碼語意、其他 `OPENING.EXE` 互動分支或動態文字輸出。 |
+
+批次檔原文、遊戲 EXE／資料及 probe report 均未加入 Git、GitHub Issue 或公開輸出；report 僅在 gitignore 的
+`workplace/reports/`。本輪不建立 DRAFT／READY、譯文、字型或覆蓋程式。
