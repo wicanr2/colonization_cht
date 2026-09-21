@@ -158,10 +158,12 @@
   這是 confirmed 的按下 boolean consumer；`001Bh`、`AX` 的上游、座標 hit-test、矩形與按鈕語意均為 unknown。
   IDA 9.4 映像的技能指定工具契約文件目前不可定位，故本輪沒有使用未驗證 IDA 輸出。
 - 目標 038 以 raw `0110:094A = 9A 88 05 24 09` 及 trace 確認 `0110:094A → 0924:0588 → 0110:094F` 是 AX boolean 的直接 producer call／return 邊；兩個 stack-local pointer 為引數，但型別、座標邏輯與文字語意仍 unknown。
-- 目標 039 確認同一固定 state 的 `0924:0560` 128-byte raw dump 在零指令前和短窗後相同，排除本輪窗口的
-  自修改；控制／左鍵兩組 `int 33h AX=0003` 分別流至 `0110:094F` 的 `AX=0000`／`0001`。但 raw dump 在
-  `0924:0584` 的 `C8 00 00 00` 與 trace 報告的 `0924:0588` frame-transition 呈現固定 4-byte 對齊差異，
-  成因未知。在最小重現釐清前，不可把此段 raw opcode、pointer 寫入或座標正規化綁定到 trace IP。
+- 目標 039 確認同一固定 state 的 `0924:0560` 128-byte raw dump 在零指令前和短窗後相同，且控制／左鍵兩組
+  `int 33h AX=0003` 分別流至 `0110:094F` 的 `AX=0000`／`0001`。目標 040 以同次重疊 dump 勘誤：先前的
+  4-byte 對齊疑慮是把 byte `0x28` 誤讀成 `0x24`；`0560h + 28h = 0588h`。因此 raw far pointer、trace 與
+  dump 都確認 `0924:0588 = ENTER 0000h,00h`，`058C = XOR BX,BX`；本體後段確認 CX→caller `[BP-6]`、
+  DX→caller `[BP-8]`，並以 `AX = BX OR [DS:5AB4]` 回傳。資料位址和互動語意仍 unknown，但不存在 dosgolem
+  觀測 blocker。
 
 ## 尚未確認
 
@@ -173,9 +175,9 @@
 Issue #23 已完成 READY profile 的實作與同狀態收據，#24 的 MCB importer 與首個 mode 13h 畫面證據亦已完成。
 正式 batch 啟動鏈已排除為可觀測的 `0x6C` 消費者，且目前 dosgolem 沒有 batch／`COMMAND.COM` 重播層；完整
 開場 state 的單一 Enter 與既有中央左鍵皆已確認為退出路徑。已知左鍵的第一個 boolean consumer 是
-`0110:0952–0954`，其直接 producer 的 far-call target／trace 標籤是 `0924:0588`。在續追 `BX/CX/DX`、
-pointer 或單一路徑前，下一個動態前沿應以最小可重現方式釐清此 target 與 raw dump 的 4-byte 對齊差異；
-不得盲注、掃描或猜測 shell／按鈕語意。
+`0110:0952–0954`，其直接 producer 的 far-call target 是 `0924:0588`，trace/raw 對齊已由目標 040 確認。
+下一個動態前沿可在不注入新座標下，對 `[DS:5AB4]`、`[DS:5E6C]`、`BX` 與兩個 caller locals 的讀寫條件建立
+最小資料流證據；不得盲注、掃描或猜測 shell／按鈕語意。
 `OPENBORD.PIK` 的
 已確認 320×24 範圍已排除為文字候選；下一個
 靜態前沿已取得 `opening-map-ocean-label` 的部分原始像素→暫存→畫布→有限窗口 A000 存續鏈；下一個切片要為它

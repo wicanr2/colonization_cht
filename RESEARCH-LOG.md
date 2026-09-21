@@ -1137,3 +1137,20 @@ gitignore 的 `workplace/reports/`。
 
 前輪目標 038 的 far-call／return 邊仍保留，但「`0924:0588` 是 raw body 的精確起點」不得視為已證實；它目前只可指
 raw far pointer 目標與 trace label。這是一筆追加勘誤，不重寫前輪原始 dump 或 trace。
+
+## 2026-09-21：目標 040 的 dosgolem 遠呼叫觀測對齊勘誤
+
+目標 039 的 4-byte 對齊限制已被最小重現**推翻**。在相同固定 state、唯讀原版、零輸入與零指令的同一次
+`cmd/probe` 中，`0924:0560:128` dump SHA-256 是
+`538c4844e4c927b347a8f7fd5df991d1344356c7c2428c9732dbae91687acca7`；從其 byte `0x28` 取 32 bytes 的 SHA-256 是
+`b2627ddfa5c50da777bea0a052f4afcec23cc5a632f8cef076b1cf2f52c8d7f1`，與獨立 `0924:0588:32` dump 完全相同。
+`0560h + 28h = 0588h`，先前的問題是將 hexdump 行內位置誤讀為 `0x24`。零輸入至 #5,465,900 的 trace SHA-256 是
+`743614e10222443ffc0d4ee56a58969164b1bb1603b9ea55d04aacd87f411b8f`；五組相鄰 pre／post dumps 均同雜湊，沒有自修改。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | caller `0110:094A` raw `9A 88 05 24 09` 指向 `0924:0588`；該 raw 是 `C8 00 00 00`，trace 的 `0588 → 058C` BP/SP transition 相符；`058C` raw／trace 均為 `33 DB`。 | far pointer、raw dump 和 trace 完全對齊；不存在這裡的 dosgolem 位址觀測缺口。 |
+| confirmed | `doDumpMem` 以 `cpu.Addr(seg,off)` 讀取，`CPU.fetch8` 在無 A20／read watch 時從同一 `m.Mem` fast path 取指；`CALL far ptr16:16` 直接載入 immediate `seg:off`。 | 原始碼與重疊收據都不支持 state 載入、dump 或 fetch 的額外位移。 |
+| confirmed | raw `05BA/05BD`、`05BF/05C2`、`05C4/05C5` 分別讀取 caller pointer、寫回 CX／DX、再以 `BX OR [DS:5AB4]` 形成 AX。 | 目標 039 的 pointer body 與 AX 公式可恢復為已證實的指令資料流；資料位址語意仍 unknown。 |
+
+因此本輪不建立 DRAFT／READY、不修改 dosgolem，也不把此工具勘誤外推為遊戲、按鈕、座標或動態文字語意。
