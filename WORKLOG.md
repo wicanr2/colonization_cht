@@ -239,4 +239,6 @@
   state v2 只有 arena/stack/curPSP。探針已刪除。
 - 因 raw-header parser、owner-aware registry、current-PSP service 與可表示 owner/name 的 state migration
   都不存在，B 尚未 READY；這是 executor READY gate 結論，不是 Colonization child／TSR parity。
-- DRAFT 003 維持 DRAFT，未修改 dosgolem 或原版；收尾將同步 Issue／Git 並重查 Docker、擁有權及原版素材。
+- DRAFT 003 維持 DRAFT，未修改 dosgolem 或原版；已回填
+  [Issue #24](https://github.com/wicanr2/colonization_cht/issues/24#issuecomment-5755331181)，並推送證據提交
+  `185bb87`。收尾提交會記錄 completed 狀態，並重查 Docker、擁有權及原版素材。

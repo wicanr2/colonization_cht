@@ -1,6 +1,6 @@
 # 目標 019：通用多行程 MCB importer READY 審查
 
-狀態：in_progress<br>
+狀態：completed<br>
 日期：2026-09-21<br>
 對應 Issue：[ #24 ](https://github.com/wicanr2/colonization_cht/issues/24)<br>
 前置收據：[目標 018](018-mcb-wire-format-and-direct-write-evidence.md)；審查對象：[DRAFT 規格 003](../spec/003-colonization-mcb-arena-reconciliation-draft.md)
@@ -29,7 +29,10 @@ raw/type 矛盾與未知 lifecycle 必須 fail-closed。此審查不可用「目
 
 ## 退出條件
 
-- [ ] B 的 READY 候選逐項有已證實依據或明確唯一缺口，不把 root-only 樣本當成通用證明。
-- [ ] raw header／child registry／state 的現行觀測有可重現 Docker 收據。
-- [ ] 規格正確維持 DRAFT 或在全部契約足夠時升 READY；未實作。
-- [ ] 文件、Issue #24、Git 推送與 Docker 清理一致。
+- [x] B 的 READY 候選逐項有已證實依據或明確唯一缺口，不把 root-only 樣本當成通用證明。
+- [x] raw header／child registry／state 的現行觀測有可重現 Docker 收據。
+- [x] 規格正確維持 DRAFT 或在全部契約足夠時升 READY；未實作。
+- [x] 文件、Issue #24、Git 推送與 Docker 清理一致。
+
+完成收據：Issue #24 的[目標 019 回填](https://github.com/wicanr2/colonization_cht/issues/24#issuecomment-5755331181)
+與提交 `185bb87`；收尾提交另記錄本檔 completed 狀態。
