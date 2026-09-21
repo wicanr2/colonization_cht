@@ -1108,3 +1108,14 @@ dosgolem 是 `workplace/dosgolem` 的 commit `1435f175e785ea096a9268cd1021a42223
 技能 `use-ida-pro-9-4` 指定的工具專案 README 與 `ida-94-tools.md` 在預期位置不可讀，故現有 IDA 映像沒有被
 當作已驗證環境；本節沒有使用 IDA 產物。所有 trace、raw dump 與 lifecycle 只留在 gitignore 的
 `workplace/reports/`。
+
+## 2026-09-21：目標 038 的 AX boolean producer call
+
+固定 state 無輸入重播 427 道指令至 #5,466,200；`0110:0920` 的 48-byte raw dump SHA-256 為 `671e7ed3e7e30d221e5b36c20bbfa402ebed656d2a075288b12c54bf4baa1430`，lifecycle SHA-256 為 `baa22131f936042482f80cb4756f55c49d1a3466b63d1e3548fb9fe302e01c39`。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | raw `0110:0942 = 8D 46 F8`、`0945 = 50`、`0946 = 8D 46 FA`、`0949 = 50`、`094A = 9A 88 05 24 09`；trace 進入 `0924:0588` 並在 `0110:094F` 返回。 | `[BP-8]`／`[BP-6]` 位址作為引數傳給 `0924:0588`，而該 call 是 boolean consumer 的直接 AX producer。 |
+| unknown | call 內的 BX/CX/DX、兩個 pointer、座標矩形、互動與文字語意。 | 不建立互動區清冊、DRAFT／READY、譯文、字型或覆蓋程式。 |
+
+raw dump、trace 與 lifecycle 只存在 gitignore 的 `workplace/reports/`。

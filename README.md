@@ -83,6 +83,7 @@ batch／`COMMAND.COM` 重播層。因此未取得父程序收據，不宣稱已�
 `(160,100)` 也只會走向同一 `0x6C` 退出；這是輸入消費證據，不是按鈕語意或文字輸出。
 [目標 037](docs/goals/037-opening-mouse-poll-first-divergence.md) 已將這個單點的第一個分歧縮小為
 `0110:0952` 的非零 `AX` 判斷；它仍不是座標 hit-test 或動態文字常式。
+[目標 038](docs/goals/038-opening-mouse-boolean-producer.md) 進一步確認 AX 直接來自 `0110:094A → 0924:0588` 的遠呼叫；座標判斷與文字輸出仍未定位。
 
 第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
 確認的執行策略見 [目標 002](docs/goals/002-win16-execution-strategy.md)；實際工作順序與 Issue
@@ -144,6 +145,7 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第三十五輪目標](docs/goals/035-opening-exit-code-launcher-chain.md)
 - [第三十六輪目標](docs/goals/036-opening-composite-known-click-probe.md)
 - [第三十七輪目標](docs/goals/037-opening-mouse-poll-first-divergence.md)
+- [第三十八輪目標](docs/goals/038-opening-mouse-boolean-producer.md)
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [MCB 記憶體 arena 重新協調規格草案](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)
