@@ -324,3 +324,21 @@ gitignore 工作區；PDF SHA-256 `0955283261ffdae38bc70e152be660774c68276febc32
 
 手冊未明示跨程序 `49h/4Ah`、外部 owner 接受集合或手動改 MCB 後 TSR 完整規則；這些維持 unknown。
 因此規格仍為 DRAFT，READY 前的拒絕與 state migration 條件不變。
+
+## 目標 018：MCB wire format 與客體直接改寫
+
+MS-DOS 3.10 手冊 1-4–1-5 明示每個 memory control block 包含區塊 size、owner process name／未擁有狀態
+與指向下一區塊的鏈關係；`48h` 會改 owner、拆分並新增 free MCB，`49h` 會標為無 owner，`4Ah` 縮小會建
+新的 MCB。手冊亦警告直接改未配置記憶體會破壞 MCB chain。此為目標 017 固定 PDF／文字收據的
+confirmed platform evidence。
+
+固定 `OPENING.EXE` 收據則 confirmed `03D9:006D/0071/0079` 在 `1C42:0000/+3/+1` 直接寫
+`M`、size `0FA1`、owner `0001`，接著填 `$sys$` name 並立即由 `AH=52h` 鏈走訪 consumer 使用。
+現行 `machine.WriteMCB()` 的 bytes 為 `+0` M/Z、`+1` owner、`+3` size、`+5..+7` 零、`+8..+15` name，
+但 `syncMCB()` 會以 root owner 及八個空白重發佈。三者分別是 platform、original、executor 證據；
+不得將其中任兩者的未觀測行為互相補足。
+
+B 的 importer 在 READY 前至少必須：逐 header 保留 raw 16 bytes 及 typed type/owner/size/name；驗證
+`next=seg+1+size`、M/Z 終止、typed/raw 一致與 owner process 可表示；遇到斷鏈、未知 owner、raw/type
+矛盾或 state 無法保存 name 時記錄 snapshot 並 fail-closed，不得呼叫 `syncMCB()` 覆寫。直接改寫後
+的跨程序 release、TSR、外部 owner 仍 unknown，故本節不授權任何實作或 READY。

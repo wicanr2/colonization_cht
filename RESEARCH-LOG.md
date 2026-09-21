@@ -636,3 +636,12 @@ Microsoft 1984 *MS-DOS 3.10 Programmer's Reference Manual* PDF SHA-256
 1-196 明示 `4Ch` 關 handles、結束 current process 並回 invoking process；1-236 明示 `62h` 回 active PSP。
 這些是 confirmed platform contract，與目標 016 已證實的 root owner 發布、無 owner release、寬鬆 resize、
 TSR overlap、固定 root PSP 不一致。手冊未定義的跨程序／手改 MCB 行為仍 unknown，未實作。
+
+## 2026-09-21：目標 018 的 MCB wire format 與直接改寫證據
+
+同一份 MS-DOS 3.10 手冊 1-4–1-5 明示 MCB 的 size、owner process name、鏈及配置／釋放／縮小的
+header 更新，並警告未配置記憶體的直接改寫會毀損 MCB chain。固定 `OPENING.EXE` 已證實
+`03D9:006D/0071/0079` 直接寫 `1C42` 的 M/Z、size、owner，後續填 `$sys$` name 並由 active chain
+consumer 使用；現行 `WriteMCB()` 卻將 `+5..+7` 清零、`+8..+15` 清空並由 `syncMCB()` 重發 root owner。
+因此 importer 必須將 raw 16-byte header、typed owner/name、連續鏈與 process registry 一起驗證；矛盾
+必須 fail-closed。跨程序／TSR／external owner 後果仍 unknown，未實作。

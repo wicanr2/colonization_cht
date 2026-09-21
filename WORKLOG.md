@@ -221,3 +221,12 @@
 - DRAFT 003 維持 DRAFT、未修改 dosgolem／原版／中文覆蓋；已回填
   [Issue #24](https://github.com/wicanr2/colonization_cht/issues/24#issuecomment-5755254133)，並推送證據提交
   `89c37b6`。收尾提交會記錄 completed 狀態；Docker、擁有權及原版素材邊界將再次檢查。
+
+## 2026-09-21：目標 018 的 MCB wire format 與直接改寫界線
+
+- MS-DOS 3.10 手冊 1-4–1-5 的 MCB size、owner/name、chain 與直接改寫警告，已與 `OPENING.EXE`
+  `03D9:006D/0071/0079` 對 `1C42` 的 direct writes、`$sys$` name，以及現行 `WriteMCB()` bytes 分層比對。
+- DRAFT 003 現要求 importer 保存／驗證 raw 16-byte header、typed owner/name、連續 M/Z chain 與
+  process registry；矛盾一律保留 snapshot 並 fail-closed。跨程序、TSR、external owner 仍 unknown，
+  DRAFT 未 READY、未改 dosgolem 或原版。
+- 收尾將更新 Issue／Git 並再次驗證 Docker、擁有權與原版素材邊界。
