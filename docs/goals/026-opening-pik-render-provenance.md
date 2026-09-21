@@ -1,6 +1,6 @@
 # 目標 026：`OPENING.PIK` 的靜態繪製資料流
 
-狀態：completed（Issue #8 保持進行中，等待文字與幾何證據）<br>
+狀態：completed（由目標 027 勘誤：`OPENING.PIK`→畫布關聯已撤回）<br>
 日期：2026-09-21<br>
 對應 Issue：[ #8 ](https://github.com/wicanr2/colonization_cht/issues/8)<br>
 前置證據：[目標 025](025-opening-static-asset-inventory.md)
@@ -24,15 +24,16 @@ VRAM 寫入端與原始暫存器，確認或明確否定這項特定候選的資
 
 ## 結果
 
-在固定的 BIOS Enter 路徑中，`OPENING.PIK` 的兩段主要 payload 由 DOS 服務讀入 `5755:0000` 與
-`5755:F000`。第 4,104,159 指令的 `0AC2:04F5` 是 `0AC2:04F4` 的 `MOVSB` 執行後位置；其
-`DS=5755`、`ES=1C43`，因此已確認該原始緩衝區的取樣 byte 寫入 `1C43` 畫布。這不是由檔名或載入順序
-推論。
+本輪原先把 `OPENING.PIK` 的早期讀取目的段 `5755` 與第 4,104,159 指令 `0AC2:04F5` 的
+`DS=5755`、`ES=1C43` 相連。目標 027 補上了當時缺少的中間寫入驗證：`OPENBORD.PIK` 已在
+第 4,103,486 指令把 10,245 bytes 寫入 `5755:0000`，覆寫線性範圍 `[57550h,59D55h)`；而後
+`0AC2:04F4` 的 `MOVSB` 才開始寫畫布。其取樣 `SI=0007h–0BD9h` 全在覆寫範圍內，故不能再把這些
+寫入歸屬於 `OPENING.PIK`。
 
 第 5,464,375 指令的 `0557:00A1` 是 `0557:009F` 的 `REP MOVSW` 執行後位置；其
-`DS=1C43`、`ES=A000`，`SI`／`DI` 均按每列 `0x140` 遞進。這確認較晚的完整畫布寫入 mode 13h VRAM。
-其間 `OPENBORD.PIK` 與多個 `.SS` 資產也會讀入並可能改寫畫布，故本輪**不**聲稱 `OPENING.PIK`
-的任何特定 byte 保留至最終像素，更不聲稱任何螢幕矩形、圖像語意或內嵌文字。
+`DS=1C43`、`ES=A000`，`SI`／`DI` 均按每列 `0x140` 遞進。這仍確認較晚的完整畫布寫入 mode 13h VRAM，
+但不再證明任何 `OPENING.PIK` byte 到達畫布或 VRAM。勘誤的完整原始定位、收據雜湊與限制見
+[目標 027](027-opening-pik-canvas-geometry.md) 及 `RESEARCH-LOG.md`。
 
 ## 停止線
 
@@ -43,8 +44,9 @@ VRAM 寫入端與原始暫存器，確認或明確否定這項特定候選的資
 
 ## 退出條件
 
-- [x] `OPENING.PIK` 的 DOS 讀取目的範圍、取樣的 raw-buffer→canvas 搬運，以及較後的 canvas→VRAM
-  整屏搬運都有可重播原始收據；未宣稱單一檔案直達任何最終像素。
-- [x] 資料流結論具 confirmed／強推論／unknown 分級，並明示不能外推到文字存在、畫面矩形或其他資產。
+- [x] 已記錄 `OPENING.PIK` 的 DOS 讀取目的範圍與較後畫面寫入端，並以目標 027 證實共享緩衝區遭
+  `OPENBORD.PIK` 覆寫，故兩者不能建立資料流關聯。
+- [x] 勘誤後的結論具 confirmed／強推論／unknown 分級，並明示不得外推到 `OPENING.PIK` 的文字、畫面矩形、
+  最終像素或其他資產。
 - [x] 未建立 DRAFT／READY 規格、覆蓋原型或原版衍生版控內容。
 - [x] 文件、Issue #8、Git、Docker 清理與原版素材權利邊界一致。

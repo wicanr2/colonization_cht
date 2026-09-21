@@ -52,9 +52,11 @@ dosgolem 現可保存 raw header／owner／name、current PSP、state v3，並�
 [目標 025](docs/goals/025-opening-static-asset-inventory.md) 已將同一開場分支收斂為兩個 `.PIK` 與 14 個
 `.SS` 的固定雜湊、大小與 DOS 讀取清冊。它們是可重播的靜態圖像**調查候選**，不是已證實含文字的資產；每一項的
 文字存在、畫面矩形與中文安全覆蓋區仍未知，尚未建立覆蓋原型或規格。
-[目標 026](docs/goals/026-opening-pik-render-provenance.md) 已確認 `OPENING.PIK` 的取樣資料會由 `5755`
-原始緩衝區寫入 `1C43` 畫布，且較後整張畫布會複製到 mode 13h 的 `A000` VRAM。其間有其他資產載入，
-因此這不是任何特定最終像素、文字或覆蓋矩形的證據；靜態文字仍待各候選另行確認。
+[目標 026](docs/goals/026-opening-pik-render-provenance.md) 的 `OPENING.PIK`→畫布初步關聯已由
+[目標 027](docs/goals/027-opening-pik-canvas-geometry.md) 撤回：在相關 `MOVSB` 之前，`OPENBORD.PIK` 已覆寫
+同一個 `5755` 共享緩衝區。因此較後的畫布→mode 13h `A000` VRAM 搬運不能歸屬於 `OPENING.PIK`。
+目標 027 只確認這個覆寫後窗口改變了畫布頂端的 320×24 範圍；它不是 `OPENING.PIK` 的幾何，也不是任何文字、
+圖像語意或中文覆蓋資格。靜態文字仍待每個候選以未覆寫的來源證據另行確認。
 
 第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
 確認的執行策略見 [目標 002](docs/goals/002-win16-execution-strategy.md)；實際工作順序與 Issue
@@ -105,6 +107,7 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第二十四輪目標](docs/goals/024-first-screen-normal-input-observation.md)
 - [第二十五輪目標](docs/goals/025-opening-static-asset-inventory.md)
 - [第二十六輪目標](docs/goals/026-opening-pik-render-provenance.md)
+- [第二十七輪目標](docs/goals/027-opening-pik-canvas-geometry.md)
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [MCB 記憶體 arena 重新協調規格草案](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)
