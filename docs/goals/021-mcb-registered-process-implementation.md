@@ -30,4 +30,6 @@ dosgolem，原版檔保持唯讀。
   [CONFORMED 規格 005](../spec/005-colonization-registered-process-mcb-importer-conformed.md)。
 - [x] 客體 raw header、typed registry 與保存狀態無 owner/name 遺失。
 - [x] 不在範圍的 owner/lifecycle 可診斷地 fail-closed。
-- [ ] 文件、Issue、Git、Docker 與權利邊界一致（收尾提交與 Issue 回填待完成）。
+- [x] 文件、Issue、Git、Docker 與權利邊界一致：文件提交 `550e664` 已推送，
+  [Issue #24 回填](https://github.com/wicanr2/colonization_cht/issues/24#issuecomment-5755765894)已確認，
+  Docker 無殘留容器、未發現 root-owned 產物或誤建 `.md` 目錄。
