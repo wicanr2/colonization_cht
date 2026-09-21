@@ -429,4 +429,7 @@
 - 左鍵路徑沒有動態文字輸出、檔案、主控台、B8000 或字型 hook；mode 03h 的 A000 殘留不作畫面證據。
   不把此點命名為按鈕或場景，亦不掃描其他座標。
 - 所有 report／trace／frame 仍在 gitignore 的 `workplace/reports/`；原版素材未受版控，未建立 DRAFT／READY、
-  譯文、字型或覆蓋程式。文件、worklist、Issue #5、Git 推送與 Docker／擁有權邊界將在收尾一併核對。
+  譯文、字型或覆蓋程式。worklist render／verify 與 `git diff --check` 通過；commit `69df4b6` 已推送至私有
+  `main`，[Issue #5](https://github.com/wicanr2/colonization_cht/issues/5#issuecomment-5759665906) 已回填且保持進行中。
+  收尾確認沒有 `colonization` 容器、沒有 root 擁有檔或誤建 `.md` 目錄，原版素材未受版控，隔離 dosgolem 副本
+  乾淨且 push URL 維持 `DISABLED`。
