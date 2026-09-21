@@ -57,6 +57,9 @@ dosgolem 現可保存 raw header／owner／name、current PSP、state v3，並�
 同一個 `5755` 共享緩衝區。因此較後的畫布→mode 13h `A000` VRAM 搬運不能歸屬於 `OPENING.PIK`。
 目標 027 只確認這個覆寫後窗口改變了畫布頂端的 320×24 範圍；它不是 `OPENING.PIK` 的幾何，也不是任何文字、
 圖像語意或中文覆蓋資格。靜態文字仍待每個候選以未覆寫的來源證據另行確認。
+[目標 028](docs/goals/028-openingbord-buffer-survival.md) 已確認 `OPENBORD.PIK` payload 在共享 `5755` 緩衝區
+沒有被觀測為改變，且有 673 次 `MOVSB` 從該範圍讀取，672 次對應到畫布內容變更。這只確認取樣
+原始緩衝區→畫布資料流，不能宣稱任何靜態文字、圖像內容、最終像素或覆蓋矩形。
 
 第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
 確認的執行策略見 [目標 002](docs/goals/002-win16-execution-strategy.md)；實際工作順序與 Issue
@@ -108,6 +111,7 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第二十五輪目標](docs/goals/025-opening-static-asset-inventory.md)
 - [第二十六輪目標](docs/goals/026-opening-pik-render-provenance.md)
 - [第二十七輪目標](docs/goals/027-opening-pik-canvas-geometry.md)
+- [第二十八輪目標](docs/goals/028-openingbord-buffer-survival.md)
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [MCB 記憶體 arena 重新協調規格草案](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)
