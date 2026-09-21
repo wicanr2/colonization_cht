@@ -1,6 +1,6 @@
 # 目標 041：滑鼠 producer 狀態閘門與 caller locals 資料流
 
-狀態：in_progress<br>
+狀態：completed<br>
 日期：2026-09-21<br>
 對應 Issue：[Issue #5](https://github.com/wicanr2/colonization_cht/issues/5)<br>
 前置證據：[目標 039](039-mouse-producer-body-dataflow.md)、[目標 040](040-dosgolem-far-call-observation-alignment.md)
@@ -44,4 +44,4 @@
 - [x] 固定 state、原版唯讀、兩組既有輸入、前／後 dumps、trace 與雜湊可重現。
 - [x] `BX`、`[DS:5AB4]`、`[DS:5E6C]`、快取座標與 caller locals 的本輪資料流有推論等級與原始定位。
 - [x] 未將資料位址升格為遊戲語意、按鈕、動態文字或中文覆蓋資格，亦未改動 dosgolem。
-- [ ] 文件、Issue #5、Git、Docker 清理與權利邊界一致。
+- [x] 文件、Issue #5、Git、Docker 清理與權利邊界一致。
