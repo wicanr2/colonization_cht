@@ -1,6 +1,6 @@
 # 目標 042：海洋標籤背景安全幾何
 
-狀態：in_progress<br>
+狀態：completed<br>
 日期：2026-09-21<br>
 對應 Issue：[Issue #8](https://github.com/wicanr2/colonization_cht/issues/8)<br>
 前置證據：[目標 031](031-opening-full-frame-static-text-survey.md)、[目標 032](032-ocean-label-canvas-writer-provenance.md)、[目標 033](033-ocean-label-post-copy-persistence.md)
@@ -42,4 +42,4 @@
 - [x] 固定 state、原版唯讀、canvas／A000 rows、幾何表與雜湊可重現。
 - [x] 精確標籤與有限外框的背景判定有色號／位置證據及推論等級。
 - [x] 結論未將可見外框升格為中文安全矩形；沒有原型、覆蓋或 dosgolem 修改。
-- [ ] 文件、Issue #8、Git、Docker 清理與權利邊界一致。
+- [x] 文件、Issue #8、Git、Docker 清理與權利邊界一致。
