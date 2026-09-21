@@ -645,3 +645,10 @@ header 更新，並警告未配置記憶體的直接改寫會毀損 MCB chain。
 consumer 使用；現行 `WriteMCB()` 卻將 `+5..+7` 清零、`+8..+15` 清空並由 `syncMCB()` 重發 root owner。
 因此 importer 必須將 raw 16-byte header、typed owner/name、連續鏈與 process registry 一起驗證；矛盾
 必須 fail-closed。跨程序／TSR／external owner 後果仍 unknown，未實作。
+
+## 2026-09-21：目標 019 的 generic importer READY 審查
+
+Docker child 診斷收據 SHA-256 `353c81a5b8ceb1c341a681df9cbd47b1efb885702bc2fa7d62798d595ac42813`：
+`curPSP=2001` 但 `AH=62h=0100`，child `48h` block `2014` 的 owner=0100/name=八個空白，state v2
+只有 arena/stack/curPSP。這是 confirmed executor 現況；證實 B 尚無 raw-header parser、owner-aware
+registry、current-PSP service 或可表示的 state，DRAFT 003 不可升 READY、沒有實作。

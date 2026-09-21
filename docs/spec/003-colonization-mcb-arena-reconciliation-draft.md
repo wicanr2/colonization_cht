@@ -342,3 +342,16 @@ B 的 importer 在 READY 前至少必須：逐 header 保留 raw 16 bytes 及 ty
 `next=seg+1+size`、M/Z 終止、typed/raw 一致與 owner process 可表示；遇到斷鏈、未知 owner、raw/type
 矛盾或 state 無法保存 name 時記錄 snapshot 並 fail-closed，不得呼叫 `syncMCB()` 覆寫。直接改寫後
 的跨程序 release、TSR、外部 owner 仍 unknown，故本節不授權任何實作或 READY。
+
+## 目標 019：READY 審查結果——維持 DRAFT
+
+一次性 child 診斷 `dosgolem-goal019-ready-audit-20260921.txt`（SHA-256
+`353c81a5b8ceb1c341a681df9cbd47b1efb885702bc2fa7d62798d595ac42813`）在 child `curPSP=2001` 時讀
+`AH=62h` 得 `0100`；child `48h` 的 `2014` MCB owner 是 `0100`、name 是八個空白；state v2 有
+arena=2、stack=1、curPSP=2001，卻無 owner/name。這與 platform 手冊、既有 source 和目標 016 一致。
+
+因此 B **未達 READY**：目前不存在能將 raw 16-byte header 解析為 registry-aware typed state 並於
+service/state 邊界反向驗證的實作；`62h` 與 MCB 發布仍不讀 current process；v2 state 無法保存
+必要資料。即使拒絕 external owner，這三項仍阻斷「已註冊 child owner」的正式行為。唯一下一前沿是
+以本 DRAFT 的 raw/header/registry contract 寫出可審查的 READY spec，補足每項輸入、失敗與驗收後才實作；
+不以遊戲 root-only 收據繞過。

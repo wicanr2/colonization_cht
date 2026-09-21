@@ -231,3 +231,12 @@
   DRAFT 未 READY、未改 dosgolem 或原版。
 - 已回填 [Issue #24](https://github.com/wicanr2/colonization_cht/issues/24#issuecomment-5755285987) 並推送證據
   提交 `35a86f0`；收尾提交會記錄 completed 狀態，並再次驗證 Docker、擁有權與原版素材邊界。
+
+## 2026-09-21：目標 019 的 generic importer READY 審查
+
+- 一次性 Docker child 診斷收據 SHA-256 `353c81a5b8ceb1c341a681df9cbd47b1efb885702bc2fa7d62798d595ac42813`
+  確認 child `curPSP=2001` 時 `AH=62h` 回 root `0100`，child allocation MCB owner=0100、name 空白，
+  state v2 只有 arena/stack/curPSP。探針已刪除。
+- 因 raw-header parser、owner-aware registry、current-PSP service 與可表示 owner/name 的 state migration
+  都不存在，B 尚未 READY；這是 executor READY gate 結論，不是 Colonization child／TSR parity。
+- DRAFT 003 維持 DRAFT，未修改 dosgolem 或原版；收尾將同步 Issue／Git 並重查 Docker、擁有權及原版素材。
