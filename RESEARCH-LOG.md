@@ -707,3 +707,20 @@ List-of-Lists importer 對 M/Z、段落嚴格前進、唯一 Z、MemTop、free o
 `8ef6bda61c7ae6ba2e411405edd87056782337a996a73a93099365cff25ceeb0`。它們含原版衍生像素，沒有加入 Git、
 GitHub 或發行包。結論是 #24 的映像外控制流 blocker 已解除；下一步是動態輸出與靜態文字的獨立 RE，不是直接
 實作中文覆蓋。
+
+## 2026-09-21：目標 023 的首畫面繪製來源與動態文字邊界
+
+固定輸入、state v3、執行器 commit 與 Docker 隔離條件完全沿用目標 022。從第 2,000,000 指令 state v3
+重載至 2,750,000 指令，以 `-regs-at 0557:0090 -regs-from 2700000 -watch A0000-AFFFF` 重播；收據
+`dosgolem-goal023-first-frame-regs-20260921.txt` SHA-256 為
+`847ab8cadafa9b25203a74e46ccc5902a066bf6491da3f43ad79ef35b7cfc2d8`，所有原版衍生輸出仍只在
+gitignore 的 `workplace/reports/`。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | 第 2,747,686 指令 `0557:0090`：`DS:SI=1DFB:00F8`、`ES:DI=A000:1C78`、`SS:SP=0C41:84D4`；後七次 `SI` 與 `DI` 均增加 `0x140`，ES 固定 A000 | 這是從記憶體來源跨列搬運至 mode 13h VRAM 的首畫面 raster 寫入端。 |
+| strong inference | 上述 raster 遞進、18,445 筆 VRAM 寫入，及目標 022 的無字型 hook／B8000／主控台字元 | 首畫面 payload 較可能是靜態點陣資料，而不是本輪可辨識的動態文字輸出。 |
+| unknown | `1DFB:00F8` 與 `MPSLOGO.SS`／任何其他檔案的精確對應、畫面語意、圖內文字，以及後續玩家輸入路徑的印字常式 | 不由檔名、像素數或人眼觀感猜測；Issue #5 仍在進行中。 |
+
+「無文字輸出」的 confirmed 範圍只限目標 022 固定 state 的無輸入 2M–20M 路徑；不能外推到其餘畫面或整個遊戲。
+沒有建立 DRAFT／READY 規格，也沒有修改 dosgolem、原版或中文覆蓋。

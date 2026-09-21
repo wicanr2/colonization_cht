@@ -81,6 +81,9 @@
   `2fa18b931afac4bf15f7d89a1712cb7e98de2a7e29a054097202589cb4a58e00`）已確認 overlay、後續資料讀取與
   `$sys$`、`FONTINTR`、`$sound$` 等 raw MCB name；目標 022 的 state v3 續跑進一步證實這些狀態能到達首個
   mode 13h 可見畫面，沒有 importer 拒絕或舊 arena 重發布跡象。
+- 目標 023 在第 2,747,686 指令確認 `0557:0090` 以 `DS:SI=1DFB:00F8` 向 `ES:DI=A000:1C78` 寫入首畫面；
+  後續來源與目的各以 `0x140` 跨列遞進。這是 confirmed 的 raster 搬運定位；由無字型 hook／B8000／主控台輸出
+  與該搬運型態，只能作「首畫面較可能是靜態點陣資料」的強推論，不能確認圖像語意、資產檔對應或動態文字路徑。
 
 ## 尚未確認
 
@@ -90,6 +93,6 @@
 ## 下一閘門
 
 Issue #23 已完成 READY profile 的實作與同狀態收據，#24 的 MCB importer 與首個 mode 13h 畫面證據亦已完成。
-下一個最小前沿是以這個正常冷啟動畫面追溯動態印字路徑（#5）與盤點靜態文字候選（#8）；兩者已解除 blocker，
-但仍沒有任何中文覆蓋實作授權。不得將 external owner、cross-process 或未知 TSR 行為擴張成新實作。Windows NE
+下一個最小前沿是擴充動態印字路徑（#5）與盤點靜態文字候選（#8）；兩者已解除 blocker，但目前只確認首畫面
+的 raster 搬運，仍沒有任何中文覆蓋實作授權。不得將 external owner、cross-process 或未知 TSR 行為擴張成新實作。Windows NE
 清冊（#19）只保留為歷史輸入證據；Issue #10 與 #15 仍需在真實證據與原型具備後由使用者決定。

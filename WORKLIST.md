@@ -11,7 +11,7 @@
 | #2 | completed | [建立可重現的隔離研究工具鏈](https://github.com/wicanr2/colonization_cht/issues/2) | — | Docker 入口可重跑、輸入唯讀、沒有 root-owned 產物或殘留容器。 |
 | #3 | completed | [探測 dosgolem 對目標版本的冷啟動能力](https://github.com/wicanr2/colonization_cht/issues/3) | `input-inventory`, `research-toolchain` | 特定雜湊有可重跑的服務缺口報告。 |
 | #4 | completed | [建立原版冷啟動至主選單的基線收據](https://github.com/wicanr2/colonization_cht/issues/4) | `dosgolem-probe` | dosgolem 可重生含輸入、快照與索引畫面的基線，或有可重現 blocker。 |
-| #5 | planned | [追溯動態文字輸出常式與文字來源](https://github.com/wicanr2/colonization_cht/issues/5) | `psound-post-profile-control-flow` | 每條輸出路徑有原始定位、證據等級與重播 trace。 |
+| #5 | in_progress | [追溯動態文字輸出常式與文字來源](https://github.com/wicanr2/colonization_cht/issues/5) | `psound-post-profile-control-flow` | 每條輸出路徑有原始定位、證據等級與重播 trace。 |
 | #6 | planned | [制定動態文字抽取與訊息鍵 DRAFT 規格](https://github.com/wicanr2/colonization_cht/issues/6) | `dynamic-print-re` | DRAFT 規格定義來源鍵、回退和幾何資料模型。 |
 | #7 | planned | [建立動態文本清冊與覆蓋率量測](https://github.com/wicanr2/colonization_cht/issues/7) | `dynamic-text-draft` | 可重跑報表列出抽取、翻譯與未知鍵數。 |
 | #8 | planned | [普查靜態內嵌文字與覆蓋候選](https://github.com/wicanr2/colonization_cht/issues/8) | `psound-post-profile-control-flow` | 靜態文字清冊可重現候選定位與證據等級。 |

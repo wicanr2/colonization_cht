@@ -88,6 +88,7 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第二十輪目標](docs/goals/020-mcb-registered-process-ready-spec.md)
 - [第二十一輪目標](docs/goals/021-mcb-registered-process-implementation.md)
 - [第二十二輪目標](docs/goals/022-psound-post-mcb-visible-checkpoint.md)
+- [第二十三輪目標](docs/goals/023-first-frame-draw-provenance.md)
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [MCB 記憶體 arena 重新協調規格草案](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)
