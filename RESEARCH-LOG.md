@@ -1017,3 +1017,24 @@ composite canvas→A000 copy，而不是把 172,140 筆全部誤當成同一 cop
 這條較早的 `OPENING.PIK`→暫存→畫布路徑不推翻目標 027 的勘誤：被 `OPENBORD.PIK` 覆寫的是較晚的
 共享 `5755` 緩衝區取樣；本輪確認的暫存切片已在覆寫前生成且未觀測內容改變至 label writer 使用。
 所有記憶體位址均為 dosgolem 執行期線性位址，`CS:IP`、`DS:SI`、`ES:DI` 則為 16-bit real-mode segment:offset。
+
+## 2026-09-21：目標 033 的海洋標籤 copy 後存續
+
+固定輸入、`OPENING.EXE` SHA-256、輸入 manifest、dosgolem commit 與第 4,156,900 指令的正常 BIOS Enter state
+均沿用目標 032。以 `-steps 5465774 -save-state 5465773:...` 校正 probe callback 邊界，取得第 #5,465,772
+指令後的完整 copy state；state SHA-256 是
+`c5cbfb0e184aac21455bdc7a976d83fa84e55af7cde0de36e40861d9bd7a77ba`，建立收據 SHA-256 是
+`6b82eb73ce8b4ac34386fe394b2d0ceabc14de08ed904777ed0fd7b04a92c47b`。兩個從此 state 重載的無網路 Docker
+probe 都執行 34,228 道指令至 #5,500,000，保持 mode 13h、無未實作服務與無新檔案開啟。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | 從 #5,465,772 至 #5,500,000 的畫布外包監看，以每列 320-byte stride 篩回 `x∈[53,174)`、`y∈[49,61)`，其精確列範圍是 `201A5h–20FDDh`。watch TSV 為零位元組（SHA-256 `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`）；lifecycle 收據 SHA-256 是 `59161947ac65beb2afebe0c73653206c6faf9c11e56525a044d7f8ded3019865`。 | 該標籤畫布範圍在此窗口沒有內容變更。watch 不能排除值相同寫入。 |
+| confirmed | 相同窗口獨立監看 A000 對應精確列範圍 `A3D75h–A4BADh`，watch TSV 同為零位元組（SHA-256 `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`）；lifecycle 收據 SHA-256 是 `f97253d746a15571fb97238a3288fa97daf4a6d72b889d91713b88a0507611ef`。 | 該標籤 A000 顯示範圍在此窗口沒有內容變更；畫布與 VRAM 的結論獨立取得。 |
+| confirmed | 起點的 `goal033-ocean-label-canvas-5465772.idx/.pal` 與終點的 `goal033-ocean-label-postcopy-5500000.idx/.pal` 以 `cmp` 逐位元組相同；色號陣列 SHA-256 為 `304ffd302045969ddad4a6c5e3c139a1af5f9f1bdbc1a060600b981ef26faeaf`，調色盤 SHA-256 為 `000ee1dfbfba6afc159d4e39dca09e5202e68bebc931cd4d50bfb3f998e1f1e3`。 | 不只標籤範圍，這兩個固定時點的完整 320×200 色號畫面與 palette 亦相同。 |
+| confirmed | 既有通用 `tools/render_indexed.go` 從上述兩份 indexed frame 各重生 `x=53,y=49,121×12` 的 8 倍最近鄰裁切；兩個 PNG SHA-256 同為 `816fb640eef2583dfc3471cf92db4ed15fb80c0ee795f67917d3de6c04bf4875`。 | 標籤精確裁切在兩個固定時點的視覺色號／palette 結果相同；PNG 只保留在 gitignore 的 `workplace/reports/`。 |
+| unknown | #5,500,000 之外的後續畫面、每一次值相同寫入、完整 `OPENING.PIK` 像素依賴、可清除的背景遮罩、中文安全矩形與反向辨識條件。 | 此收據不授權 DRAFT／READY、覆蓋原型、譯文或中文字型。 |
+
+第一次從 #4,156,900 state 起跑的長窗 canvas watch 因 probe 的 200 筆容量而截斷，故沒有被用於 copy 後零變更
+結論；本輪改用完整 copy 後 state 的短窗口，兩個零位元組 watch TSV 才是上述結論的唯一監看依據。
+所有位址均為 dosgolem 執行期線性位址；frame、palette、state、TSV 與 PNG 均未加入 Git 或 Issue。
