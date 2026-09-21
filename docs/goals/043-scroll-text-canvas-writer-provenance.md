@@ -1,6 +1,6 @@
 # 目標 043：中央卷軸兩行字的 canvas writer 追溯
 
-狀態：in_progress（證據已收集，待文件／Issue／Git 收尾）<br>
+狀態：completed<br>
 日期：2026-09-21<br>
 對應 Issue：[Issue #8](https://github.com/wicanr2/colonization_cht/issues/8)<br>
 前置證據：[目標 031](031-opening-full-frame-static-text-survey.md)、[目標 042](042-ocean-label-background-safety-geometry.md)
@@ -47,4 +47,4 @@
 - [x] 固定 state、原版唯讀、VRAM／canvas watch、明確線性位址與 stride 檢驗、writer raw／register 收據與雜湊可重現。
 - [x] 候選內真正 writer 與 canvas→VRAM 來源定位已確認；資產歸屬明確標為 unknown，外包鄰近像素未混作文字證據。
 - [x] 精確文字幾何、安全矩形、原文、覆蓋及 dosgolem 修改均保持未推定。
-- [ ] 文件、Issue #8、Git、Docker 清理與權利邊界一致（待收尾）。
+- [x] 文件、Issue #8、Git、Docker 清理與權利邊界一致。
