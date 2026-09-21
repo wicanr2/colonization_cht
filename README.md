@@ -63,6 +63,8 @@ dosgolem 現可保存 raw header／owner／name、current PSP、state v3，並�
 [目標 029](docs/goals/029-openingbord-canvas-survival-to-frame-copy.md) 已確認該 320×24 取樣畫布範圍未被觀測為
 內容改變，並在 #5,464,375–#5,464,536 由 `REP MOVSW` 完整搬到 A000 VRAM。這使目標 028 的 672 次資料流
 延續至一次 VRAM copy；仍不代表完整圖像、穩定最終畫面、文字存在或中文安全矩形。
+[目標 030](docs/goals/030-openingbord-visible-rectangle-and-text-check.md) 已確認這個範圍是非文字的重複裝飾邊框，
+不會成為中文覆蓋目標；其他 `.PIK`／`.SS` 候選的文字存在與安全矩形仍待個別證明。
 
 第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
 確認的執行策略見 [目標 002](docs/goals/002-win16-execution-strategy.md)；實際工作順序與 Issue
@@ -116,6 +118,7 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第二十七輪目標](docs/goals/027-opening-pik-canvas-geometry.md)
 - [第二十八輪目標](docs/goals/028-openingbord-buffer-survival.md)
 - [第二十九輪目標](docs/goals/029-openingbord-canvas-survival-to-frame-copy.md)
+- [第三十輪目標](docs/goals/030-openingbord-visible-rectangle-and-text-check.md)
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [MCB 記憶體 arena 重新協調規格草案](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)

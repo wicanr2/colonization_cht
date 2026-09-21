@@ -931,3 +931,28 @@ canvas 寫入 `00abbe84e9ba705a7915e6ba289bae8d6c1905dfca8595068c1d4d699d97ba26`
 | unknown | copy 後 VRAM 的存續、`OPENBORD.PIK` 的完整資產歸屬、圖像或文字語意、中文安全矩形。 | 不建立 DRAFT／READY 規格、覆蓋原型或中文化實作。 |
 
 本輪沒有匯出原版畫面／像素、修改 dosgolem 或原版，亦未用 asset 名稱或畫布範圍推測文字存在。
+
+## 2026-09-21：目標 030 的 `OPENBORD.PIK` 可視矩形與文字存在檢查
+
+固定輸入、dosgolem commit 與目標 029 的第 4,156,900 指令 state 沿用。probe 的 `-shots` callback 只會在
+下一次 loop 取得執行機會，故以 `-steps 5464537` 觸發 `#5,464,536` 的 snapshot；那是第 24 次
+`REP MOVSW`／`0557:00A1` 完成後、下一道指令前的畫面。report SHA-256 為
+`ce9a23c492dc9b75d98b2e795bd1f8240280ff9d23a960a2fa3484414d1652a7`；320×200 indexed frame（64,000 bytes）為
+`a3b946092e5bf8322128d904302d8e3910f724e07fd298cb25a4d3872fd5b609`；768-byte palette 為
+`000ee1dfbfba6afc159d4e39dca09e5202e68bebc931cd4d50bfb3f998e1f1e3`；全畫面 PNG 為
+`7ea9d10aac638e89c23a4a344cf550e31b68cc39b830fc3b3303dbc62831e749`。
+
+以 `tools/render_indexed.go`（純 Go 標準函式庫）將 dosgolem 的 indexed frame 及 palette 轉為 PNG；該工具已以
+上述輸入成功建置與執行，不含遊戲專屬位址或原版資料。從 indexed frame 的 offset 0 取 7,680 bytes，也就是
+目標 029 已確認的 A000 首 320×24 bytes，得到 crop indexed SHA-256
+`fc4bce77b6d8fab5c43f89eba754b904e623f180932a623da994a472f87871a3` 與 crop PNG SHA-256
+`97afec1b7b951423ba59b3db679708469cb122de9294e550111b2880c150c7e4`。所有原版衍生檔案僅留在
+`workplace/reports/`，沒有加入 Git 或對外端點。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | 目標 029 的 `1C430h–1E22Fh` 逐列 copy 對應到 A000 的 offset `0000h–1DFFh`；該 7,680 bytes crop 與同時 palette 由固定 step frame 重生。 | 可視檢查的矩形是 mode 13h 螢幕 `(0,0)–(319,23)`，其定位來自資料流而非視覺猜測。 |
+| confirmed | 放大 crop 是單一連續、重複的金色幾何邊框，沒有字元輪廓、字距、文字群組、可辨識字形或可讀文字。 | 此 `OPENBORD.PIK` 資料流範圍是非文字靜態裝飾，不是中文覆蓋候選。 |
+| unknown | `OPENBORD.PIK` 的其餘內容、copy 後 VRAM 存續、其他 `.PIK`／`.SS` 資產的圖像或文字語意、中文安全矩形。 | 不建立 DRAFT／READY、覆蓋原型、譯文或中文字型。 |
+
+本輪直接檢視的是可重播的本機收據，沒有 OCR、人工轉錄、資產解碼或原版修改；「非文字」只適用上述精確矩形。
