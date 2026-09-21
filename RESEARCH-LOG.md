@@ -956,3 +956,36 @@ canvas 寫入 `00abbe84e9ba705a7915e6ba289bae8d6c1905dfca8595068c1d4d699d97ba26`
 | unknown | `OPENBORD.PIK` 的其餘內容、copy 後 VRAM 存續、其他 `.PIK`／`.SS` 資產的圖像或文字語意、中文安全矩形。 | 不建立 DRAFT／READY、覆蓋原型、譯文或中文字型。 |
 
 本輪直接檢視的是可重播的本機收據，沒有 OCR、人工轉錄、資產解碼或原版修改；「非文字」只適用上述精確矩形。
+
+## 2026-09-21：目標 031 的完整 composite frame 與可見靜態文字候選
+
+固定輸入、dosgolem commit 與第 4,156,900 指令 state 沿用目標 029。對執行期線性
+`1C430h–2BE2Fh`（`DS=1C43` 的 `0000h–F9FFh`）啟用粒度 1 `-read-watch` 至 #5,467,000；完整 TSV 有
+172,140 筆（SHA-256 `086248d62c61dfc8b1e94db9a41a840e1a62581af7c388b11262c46c8383ea38`），其中含 copy 前處理
+與 copy 後局部重畫。只篩選 `#5,464,375–#5,465,772`、post-IP `0557:00A1`，得到 200 組、每組 320 bytes、
+共 64,000 bytes，連續 `1C430h–2BE2Fh`；第一與最後事件分別是
+`5464375 1c430 0 0557:00a1`、`5465772 2be2f 63999 0557:00a1`。`0557:0090` raw bytes 中的
+`0557:009F` 是 `F3 A5`／`REP MOVSW`；200 個 pre-instruction 暫存器樣本的目的 `DI` 為
+`0000h–F8C0h`、每列 `0140h`，目的段均為 `A000`。因此這個篩選區間是 confirmed 的第一個完整 320×200
+composite canvas→A000 copy，而不是把 172,140 筆全部誤當成同一 copy。
+
+以 callback 時序校正的 `-steps 5465773` 保存 #5,465,772 state，report SHA-256 為
+`c8ecaeb7d71794a02cdc53db603f18158dcb94a2b71281c8cb4bc327e9a7fcca`；indexed frame SHA-256 為
+`304ffd302045969ddad4a6c5e3c139a1af5f9f1bdbc1a060600b981ef26faeaf`；palette 為
+`000ee1dfbfba6afc159d4e39dca09e5202e68bebc931cd4d50bfb3f998e1f1e3`；全畫面 PNG 為
+`eefb4d5c46e06657106202ff83727da5079e27e8897587ed399dd2aff1d62247`。兩個本機列帶／放大 PNG 的雜湊為
+`2461cc41dc35b1f7fcb0185278b2f7082aba5c2b257c62ba7c41239c740dc022`（地圖標籤列帶）、
+`ee8e3be3c75753c4aac2346b218a96eee9d3201de53249d18727a89a16d7e245`（卷軸列帶）與
+`7ae06c737f6dceddf7ff0e582be8f766c1edd48adef3734252fa8128fa578621`（卷軸精確裁切放大）。
+`tools/render_indexed.go` 已擴充為可重現的最近鄰 `-scale` 與來源畫布裁切
+`-source-width`／`-source-height`／`-x`／`-y`；工具本身不含遊戲資料或位址。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | 上述 200×320 `REP MOVSW` 讀取、`A000` 目的段與 fixed-step indexed frame。 | `(0,0)–(319,199)` 是此次完整 composite copy 的可視檢查範圍。其後 132 列局部 copy 存在，故本輪不稱此為穩定最終畫面。 |
+| confirmed | 本機 frame 的約 `(53,49)–(174,61)` 有清楚、連續的字形，直接可讀為 `OCEANVS OCCIDENTALIS`。 | `opening-map-ocean-label` 是可見靜態文字候選。來源資產、資料流、copy 後存續與中文安全矩形未知。 |
+| confirmed | 本機 frame 的約 `(148,123)–(208,146)` 有兩行字形；精確 crop 放大仍不能可靠辨識全部原文。 | `opening-scroll-two-line-text` 是可見靜態文字候選；原文、來源資產、資料流、copy 後存續與中文安全矩形未知。 |
+| unknown | 視覺候選與每個 `.PIK`／`.SS` 的載入／繪製資料流尚未閉合。 | 畫面文字不能據此歸屬於特定檔案，也不能建立 DRAFT／READY、覆蓋原型或譯文。 |
+
+所有 frame、palette、crop 與 PNG 僅存在 gitignore 的 `workplace/reports/`；沒有公開、提交或附到 Issue。文字候選
+僅供私有研究清冊使用，不是資產解碼或原文文本輸出。

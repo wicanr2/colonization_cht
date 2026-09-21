@@ -19,6 +19,11 @@ func main() {
 	outPath := flag.String("out", "", "輸出 PNG 路徑")
 	width := flag.Int("width", 320, "畫面寬度")
 	height := flag.Int("height", 200, "畫面高度")
+	sourceWidth := flag.Int("source-width", 0, "輸入畫面的寬度（0 代表 -width）")
+	sourceHeight := flag.Int("source-height", 0, "輸入畫面的高度（0 代表 -height）")
+	cropX := flag.Int("x", 0, "輸入畫面裁切起點 X")
+	cropY := flag.Int("y", 0, "輸入畫面裁切起點 Y")
+	scale := flag.Int("scale", 1, "最近鄰輸出倍率")
 	flag.Parse()
 
 	if *indexedPath == "" || *palettePath == "" || *outPath == "" {
@@ -27,14 +32,29 @@ func main() {
 	if *width <= 0 || *height <= 0 {
 		fail(errors.New("-width 與 -height 必須為正整數"))
 	}
+	if *scale <= 0 {
+		fail(errors.New("-scale 必須為正整數"))
+	}
+	if *sourceWidth == 0 {
+		*sourceWidth = *width
+	}
+	if *sourceHeight == 0 {
+		*sourceHeight = *height
+	}
+	if *sourceWidth <= 0 || *sourceHeight <= 0 {
+		fail(errors.New("-source-width 與 -source-height 必須為正整數"))
+	}
+	if *cropX < 0 || *cropY < 0 || *cropX+*width > *sourceWidth || *cropY+*height > *sourceHeight {
+		fail(errors.New("裁切矩形超出輸入畫面"))
+	}
 
 	indexed, err := os.ReadFile(*indexedPath)
 	if err != nil {
 		fail(fmt.Errorf("讀取 indexed frame：%w", err))
 	}
-	expected := *width * *height
+	expected := *sourceWidth * *sourceHeight
 	if len(indexed) != expected {
-		fail(fmt.Errorf("indexed frame 長度 %d，不等於 %dx%d = %d", len(indexed), *width, *height, expected))
+		fail(fmt.Errorf("indexed frame 長度 %d，不等於來源 %dx%d = %d", len(indexed), *sourceWidth, *sourceHeight, expected))
 	}
 	paletteBytes, err := os.ReadFile(*palettePath)
 	if err != nil {
@@ -49,8 +69,17 @@ func main() {
 		j := i * 3
 		palette[i] = color.RGBA{R: paletteBytes[j], G: paletteBytes[j+1], B: paletteBytes[j+2], A: 0xff}
 	}
-	image := image.NewPaletted(image.Rect(0, 0, *width, *height), palette)
-	copy(image.Pix, indexed)
+	frame := image.NewPaletted(image.Rect(0, 0, *width**scale, *height**scale), palette)
+	for y := 0; y < *height; y++ {
+		for x := 0; x < *width; x++ {
+			index := indexed[(*cropY+y)**sourceWidth+*cropX+x]
+			for dy := 0; dy < *scale; dy++ {
+				for dx := 0; dx < *scale; dx++ {
+					frame.SetColorIndex(x**scale+dx, y**scale+dy, index)
+				}
+			}
+		}
+	}
 
 	if err := os.MkdirAll(filepath.Dir(*outPath), 0o755); err != nil {
 		fail(fmt.Errorf("建立輸出目錄：%w", err))
@@ -59,7 +88,7 @@ func main() {
 	if err != nil {
 		fail(fmt.Errorf("建立 PNG：%w", err))
 	}
-	if err := png.Encode(f, image); err != nil {
+	if err := png.Encode(f, frame); err != nil {
 		f.Close()
 		fail(fmt.Errorf("編碼 PNG：%w", err))
 	}
