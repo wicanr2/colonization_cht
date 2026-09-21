@@ -812,3 +812,50 @@ go run ./cmd/probe -load-state /workplace/reports/dosgolem-goal022-opening-2m-st
 | unknown | 每一個上表資產的點陣內容、是否含文字、畫面矩形、與 VRAM 寫入端的一對一資料流，以及其中文安全覆蓋區。 | 不以檔名、大小、MCB 截斷名稱或一般畫面活動假設靜態文字；Issue #8 保持進行中，未建立 DRAFT／READY 或原型。 |
 
 本輪沒有匯出原版內容、像素、標頭位元組或 decoder 產物到版控，亦未修改 dosgolem、原版或中文覆蓋。
+
+## 2026-09-21：目標 026 的 `OPENING.PIK` 繪製資料流
+
+固定輸入、`OPENING.EXE` SHA-256、2M state v3、隔離 dosgolem commit 與 Docker 條件沿用目標 024。
+本輪另由無輸入重播建立第 3,000,000 指令 state
+`goal026-pre-input-3000000.state`（SHA-256
+`0239ae38feff005105ab769a322e5a6c87622d531f9283b84575031c63e3b7e3`），只以 BIOS 緩衝區 Enter 在
+第 3,000,000 指令起排入。所有 receipt、state 與 VRAM 只留在 gitignore 的 `workplace/reports/`。
+
+主要重播由此 state 分別限定至 4.2M 與 5.5M 指令；前者保留 `OPENING.PIK` 讀取與 `1C430h–2C42Fh`
+畫布寫入，後者保留 A0000h–AFFFFh 寫入及 `0557:00A1` 暫存器。`-watch` 與 `-watch-video` 不能同時
+用於此證據：probe 的 `WatchWrites` 只有一個回呼（callback），後註冊者會覆蓋前者。因此最後的精確範圍監看只用
+`-watch`；這是已確認的 probe 命令組態限制，不是遊戲的繪圖缺口。
+
+```text
+go run ./cmd/probe -load-state /workplace/reports/goal026-pre-input-3000000.state \
+  -root /game -steps 4200000 -bios-keys '\\n' -bios-key-from 3000000 -reads-of OPENING.PIK \
+  -watch 1C430-2C42F -regs-at 0AC2:04F5 -regs-from 4090000
+
+go run ./cmd/probe -load-state /workplace/reports/goal026-opening-post-pik-4200000.state \
+  -root /game -steps 5500000 -regs-at 0557:00A1 -regs-from 4200000 \
+  -dump-vram /workplace/reports/goal026-post-pik-5500000.vram
+```
+
+本地 receipt 的 SHA-256 為：A000 寫入 `0c8c6e42e7e5dab218b7d995971bfbeeeab6f9f7a2195754a09d2aa5b2a71d6e`、
+canvas 寫入 `00abbe84e9ba705a7915e6ba289bae8d6c1905dfca8595068c1d4d699d97ba26`、canvas writer 暫存器
+`c3ab6416446627b8c2596931a3f45a67528c132cab7fbbefcdc2754025993da0`、canvas writer bytes
+`a08ebf4e6cac99798259dc4344073d9c1a9fa1083a45eb106ad13c470151d130`、VRAM writer bytes
+`491fab91274734fe570b931ad297fc208f4a99c49ed059bf0a7c8441116e3c5b`、較後 VRAM writer 暫存器
+`b13ce7ee95cbd632bf31cfd19b90e22d868da79e01612684df4470d24a49e32f`。4.2M post-PIK state 的 SHA-256 是
+`f022f99f7a184ff0a1491e89e9ec12f8b76ff70d49d4924981ada10890671f50`；5.5M VRAM SHA-256 是
+`304ffd302045969ddad4a6c5e3c139a1af5f9f1bdbc1a060600b981ef26faeaf`。
+
+地址均為 dosgolem 的執行期 segment:offset；讀取／canvas／VRAM 範圍分別為線性 `57550h–70027h`、
+`1C430h–2C42Fh`、`A0000h–AFFFFh`。程式 bytes 是同一執行期位址空間：`0AC2:04E8`（線性 `0B108h`）
+之後的 `0AC2:04F4` 是 `A4`／`MOVSB`，`0557:008E`（線性 `055FEh`）之後的 `0557:009F` 是
+`F3 A5`／`REP MOVSW`。監看列出的 IP 是實際寫入後的下一個 IP，分別為 `0AC2:04F5`、`0557:00A1`。
+
+| 推論等級 | 原始定位與觀測 | 結論 |
+| --- | --- | --- |
+| confirmed | `OPENING.PIK` 在 #3,004,029 讀入 61,440 bytes 至 `5755:0000`（線性 `57550h`），並在 #3,004,090 讀入 39,640 bytes 至 `5755:F000`（線性 `66550h`）。 | 主要 payload 的 DOS 讀取目的範圍已固定。 |
+| confirmed | #4,104,159 的寫入後 IP `0AC2:04F5`，`DS=5755`、`ES=1C43`、`SI=0007`、`DI=0001`；直接前一位元組 `0AC2:04F4` 是 `MOVSB`。畫布監看也保留此窗口的實際 `1C430h–2C42Fh` 寫入。 | 至少取樣的 `OPENING.PIK` 原始緩衝資料以 `MOVSB` 寫進畫布。 |
+| confirmed | #5,464,375 的寫入後 IP `0557:00A1`，`DS=1C43`、`ES=A000`、`SI=0140`、`DI=0140`；後續樣本各按 `0x140` 遞進，直接前一指令 `0557:009F` 是 `REP MOVSW`。5.5M 終點的 mode 13h VRAM 為 64,000／64,000 非零像素。 | 較後有從畫布到 A000 VRAM 的完整跨列搬運。 |
+| strong inference | 上述兩個已證實搬運事件分別發生在 #4.104M 與 #5.464M，且中間有 `OPENBORD.PIK` 及 `.SS` 資產載入。 | `OPENING.PIK` 的原始資料參與開場畫布建構；不能把此事升格為任何最終像素歸屬。 |
+| unknown | `OPENING.PIK` 格式與圖像語意、哪一些位元組未被後續資產改寫、對應的最終矩形、是否含文字、中文安全覆蓋區，以及其他候選的同類資料流。 | 本輪沒有文字候選、DRAFT／READY 規格、覆蓋原型或可發布資產。 |
+
+這個切片只收斂 raw-buffer→canvas→VRAM 的時間順序與原始定位；不修改 dosgolem、原版或中文覆蓋，亦不將原版衍生內容納入版控。
