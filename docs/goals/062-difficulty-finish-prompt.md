@@ -1,6 +1,6 @@
 # 目標062：難度頁完成提示中文顯示
 
-狀態：in_progress；日期：2026-09-22。對應 Issue [#7](https://github.com/wicanr2/colonization_cht/issues/7)、[#26](https://github.com/wicanr2/colonization_cht/issues/26)、[#27](https://github.com/wicanr2/colonization_cht/issues/27)。
+狀態：completed；日期：2026-09-22。對應 Issue [#7](https://github.com/wicanr2/colonization_cht/issues/7)、[#26](https://github.com/wicanr2/colonization_cht/issues/26)、[#27](https://github.com/wicanr2/colonization_cht/issues/27)。
 
 ## 起點
 
@@ -14,3 +14,11 @@
 4. 若驗收通過，更新截圖、目前狀態、工作清單與既有 Issue；README 只保留穩定成果，不加入逐輪目標連結。
 
 若來源事件或安全矩形不能證實，保留英文與可重播缺口，不把譯稿升格為畫面完成。卡片標籤、help 訊息及全遊戲完成率不屬此切片。
+
+## 完成收據
+
+規格 [015](../spec/015-difficulty-finish-prompt.md) 經兩次唯讀原版重播升 READY；
+限定實作後，無頭中文／英文／缺字模三組原版狀態一致，缺字模回退英文。
+Ebitengine 真視窗的中文原跑、中文重播與英文控制於九筆實際滑鼠輸入後同狀態；
+新增圖像差異只在三個已審查安全區，提示本身佔其中 2,856 個輸出像素。
+私有成果圖見 [難度頁](../screenshots/difficulty-zh.png)。本切片不關閉全遊戲翻譯與正式玩家前端工作。

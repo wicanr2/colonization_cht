@@ -1669,3 +1669,18 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   英文控制的原版完整狀態一致；中文字圖與英文控制比較，安全矩形外零差異。
   本機完整收據 `workplace/reports/goal061-ebiten-clear-receipt.json`，私有 README
   只選兩張可見成果圖，不公開原版輸入或原始快照。
+
+## 2026-09-22：難度頁完成提示的獨立輸出事件
+
+- 固定原版 `LABELS.TXT` SHA-256 為 `e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204`；
+  檔案位元組位移 `0x86E` 的 24-byte 原文為 `Click Here When Finished`，其後為 CR。
+  執行期 DOS 20-bit 線性記憶體 `0x4DF59` 的同文其後為 NUL；檔案至記憶體完整載入邊仍未證實。
+- 工具為隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`、
+  `colonization-research:20260920-r2` 與 `tools/probe_difficulty_writes.go`。兩次正常滑鼠路徑
+  重播於 DOS 實模式 `0E2D:11CF` 讀取原文，後續 `0D21:012C` 寫出 167 個變更像素；
+  320×200 原始畫布 bbox 為 (13,81)–(101,85)，變更色號全為 254，安定後不再變動。
+  兩次事件、畫布檢查點與最終原版 RAM 一致。原始輸入其餘雜湊與地址空間見
+  [規格015](docs/spec/015-difficulty-finish-prompt.md)；本結論僅對固定版本及該畫面 confirmed。
+- Ebitengine／Xvfb 真視窗九筆滑鼠輸入的中文原跑、重播與英文控制原版狀態一致；
+  輸出圖差異只在三個獨立安全矩形，完成提示區佔 2,856 個 4 倍畫布像素。
+  原版截圖只留私有儲存庫；完整本機收據 `workplace/reports/goal062-ebiten-receipt.json`。

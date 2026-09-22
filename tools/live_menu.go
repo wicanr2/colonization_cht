@@ -87,14 +87,16 @@ type menuLine struct {
 	pendingEvent                *pending
 }
 
-// 規格014：難度頁兩段獨立的真實原版印字事件；不是全畫面 OCR 鍵。
+// 規格014／015：難度頁獨立的真實原版印字事件；不是全畫面 OCR 鍵。
 type difficultyLine struct {
 	id                      string
 	offset, length          int
 	linear                  uint32
+	readCS, readIP          uint16
 	safe                    image.Rectangle
 	bbox                    image.Rectangle
 	pixels                  int
+	only254                 bool
 	position                image.Point
 	source                  []byte
 	translation, fontReason string
@@ -147,8 +149,9 @@ func main() {
 	difficulty := []*difficultyLine{}
 	if *allMenu {
 		difficulty = []*difficultyLine{
-			{id: "LABELS.TXT:0x00000888", offset: 0x888, length: 6, linear: 0x4df72, safe: image.Rect(39, 14, 76, 26), bbox: image.Rect(42, 16, 73, 24), pixels: 126, position: image.Pt(168, 64)},
-			{id: "LABELS.TXT:0x00000890", offset: 0x890, length: 16, linear: 0x4df79, safe: image.Rect(20, 27, 96, 40), bbox: image.Rect(23, 29, 92, 38), pixels: 284, position: image.Pt(92, 116)},
+			{id: "LABELS.TXT:0x00000888", offset: 0x888, length: 6, linear: 0x4df72, readCS: 0x0d3a, readIP: 0x0015, safe: image.Rect(39, 14, 76, 26), bbox: image.Rect(42, 16, 73, 24), pixels: 126, position: image.Pt(168, 64)},
+			{id: "LABELS.TXT:0x00000890", offset: 0x890, length: 16, linear: 0x4df79, readCS: 0x0d3a, readIP: 0x0015, safe: image.Rect(20, 27, 96, 40), bbox: image.Rect(23, 29, 92, 38), pixels: 284, position: image.Pt(92, 116)},
+			{id: "LABELS.TXT:0x0000086E", offset: 0x86e, length: 24, linear: 0x4df59, readCS: 0x0e2d, readIP: 0x11cf, safe: image.Rect(10, 79, 105, 88), bbox: image.Rect(13, 81, 102, 86), pixels: 167, only254: true, position: image.Pt(52, 324)},
 		}
 		for _, l := range difficulty {
 			l.source = bytes.Clone(labelsSource[l.offset : l.offset+l.length])
@@ -284,13 +287,13 @@ func main() {
 	drops := []map[string]any{}
 	lastOpened := 0
 	if !*control && len(difficulty) > 0 {
-		m.WatchReads(0x4df72, 0x4df89, func(a uint32, _ uint8) {
+		m.WatchReads(0x4df59, 0x4df89, func(a uint32, _ uint8) {
 			cs, ip := m.CPU.OpAddr()
-			if cs != 0x0d3a || ip != 0x0015 || m.VideoMode() != 0x13 {
+			if m.VideoMode() != 0x13 {
 				return
 			}
 			for _, l := range difficulty {
-				if a != l.linear || l.patch != nil || l.before != nil {
+				if a != l.linear || cs != l.readCS || ip != l.readIP || l.patch != nil || l.before != nil {
 					continue
 				}
 				p := int(l.linear)
@@ -476,7 +479,7 @@ func main() {
 						if y > maxY {
 							maxY = y
 						}
-						if after[i] != 0 && after[i] != 253 && after[i] != 254 {
+						if (l.only254 && after[i] != 254) || (!l.only254 && after[i] != 0 && after[i] != 253 && after[i] != 254) {
 							valid = false
 						}
 					}
@@ -492,7 +495,7 @@ func main() {
 				l.patch, e = overlay.NewPatch(l.before, after, 320, 200, l.safe)
 				must(e)
 				l.accepted++
-				events = append(events, map[string]any{"candidate_id": l.id, "entry_ip": "0D3A:0015", "writer_ip": "0D21:012C", "entry_step": l.startStep, "accepted": true, "changed_pixels": count, "bbox_inclusive": []int{minX, minY, maxX, maxY}, "source_linear": l.linear})
+				events = append(events, map[string]any{"candidate_id": l.id, "entry_ip": fmt.Sprintf("%04X:%04X", l.readCS, l.readIP), "writer_ip": "0D21:012C", "entry_step": l.startStep, "accepted": true, "changed_pixels": count, "bbox_inclusive": []int{minX, minY, maxX, maxY}, "source_linear": l.linear})
 				l.before = nil
 			}
 		}

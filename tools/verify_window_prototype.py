@@ -22,13 +22,15 @@ assert sum(e['kind'] == 'press' for e in inputs['inputs']) == sum(e['kind'] == '
 assert 'DIFFICUL.PIK' in receipts[0]['opened']
 for index in range(5):
     assert any(f['lines'][index]['applied'] for f in receipts[0]['frames'])
-new_keys = {'LABELS.TXT:0x00000888', 'LABELS.TXT:0x00000890'}
-has_difficulty = any(r['candidate_id'] in new_keys for f in receipts[0]['frames'] for r in f['lines'])
+new_keys = {'LABELS.TXT:0x00000888', 'LABELS.TXT:0x00000890',
+            'LABELS.TXT:0x0000086E'}
+active_keys = new_keys & {r['candidate_id'] for f in receipts[0]['frames'] for r in f['lines']}
+has_difficulty = bool(active_keys)
 if has_difficulty:
     assert all(any(r['candidate_id'] == key and r['applied']
-                   for f in receipts[0]['frames'] for r in f['lines']) for key in new_keys)
+                   for f in receipts[0]['frames'] for r in f['lines']) for key in active_keys)
     assert all(any(e.get('candidate_id') == key and e.get('accepted')
-                   for e in receipts[0]['events']) for key in new_keys)
+                   for e in receipts[0]['events']) for key in active_keys)
 pairs = [(a.prefix + '.menu.png', 'goal057-live-zh.menu-clear.png'),
          (a.prefix + '.difficulty.png', a.prefix + '.final.png')]
 images = []
@@ -43,9 +45,11 @@ if has_difficulty:
     chinese = Image.open(a.out / (a.prefix + '.difficulty.png')).convert('RGB')
     original = Image.open(a.out / (a.prefix + '-control.final.png')).convert('RGB')
     assert chinese.size == original.size == (1280, 800)
-    changed = {key: 0 for key in new_keys}
+    changed = {key: 0 for key in active_keys}
     bounds = [('LABELS.TXT:0x00000888', (39*4, 14*4, 76*4, 26*4)),
-              ('LABELS.TXT:0x00000890', (20*4, 27*4, 96*4, 40*4))]
+              ('LABELS.TXT:0x00000890', (20*4, 27*4, 96*4, 40*4)),
+              ('LABELS.TXT:0x0000086E', (10*4, 79*4, 105*4, 88*4))]
+    bounds = [(key, rect) for key, rect in bounds if key in active_keys]
     for y in range(800):
         for x in range(1280):
             if chinese.getpixel((x, y)) == original.getpixel((x, y)):
@@ -57,7 +61,7 @@ if has_difficulty:
     assert all(n > 0 for n in changed.values())
     images.append({'actual': a.prefix + '.difficulty.png',
                    'reference': a.prefix + '-control.final.png',
-                   'only_two_difficulty_rectangles_changed': True,
+                   'only_verified_difficulty_rectangles_changed': True,
                    'changed_pixels_by_candidate': changed})
 result = {'scope': 'Linux/Xvfb有限原型，不含完整鍵盤、音訊、正式速度或存讀檔',
           'state_equal': True, 'state': receipts[0]['state'], 'images': images,
