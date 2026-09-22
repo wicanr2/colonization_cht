@@ -60,7 +60,8 @@ EXE及靜態圖像尚未建立完整玩家可見訊息分母，不宣稱全文�
 [目標065](docs/goals/065-pedia-founding-fathers-corpus.md)與[目標066](docs/goals/066-pedia-cargo-corpus.md)
 已分別完成25篇「建國元勳」及16篇「貨物」的整段草稿；合計41篇已通過固定來源、
 格式及字型驗證，但它與單行主譯稿分開，尚未有畫面事件、版面或正式覆蓋資格。
-其餘122篇百科文章仍未譯，並與畫面中文化、術語定稿分開計算。
+[目標067](docs/goals/067-pedia-unit-corpus.md)接著處理24篇「單位」文章；完成後百科
+草稿預計增至65篇，仍與畫面中文化、術語定稿及其餘98篇分開計算。
 最近完成入口：[目標060](docs/goals/060-help-bilingual-corpus.md)：
 24則遊戲內說明建立原文／繁中TSV，仍是待畫面驗收的草稿。
 [目標061](docs/goals/061-next-visible-text-slice.md)已驗收難度頁兩行中文標題，
