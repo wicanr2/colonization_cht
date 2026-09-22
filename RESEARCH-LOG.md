@@ -1827,3 +1827,16 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   `workplace/reports/goal071-draft-review.json`，字型本體不入版控。
 - unknown（執行期與語意）：44筆都沒有 dosgolem 輸出事件、中文安全矩形、Ebitengine畫面、
   正常玩家路徑、變數展開或術語定稿證據；它們全為`draft`，不能計入已顯示中文或完整翻譯。
+
+## 2026-09-22：目標072 README 玩家說明範圍證據
+
+- 輸入：使用者提供、唯讀的 `Sid Meier's Colonization (1994).zip`；成員為
+  `SMColoni/COLONIZE/README.TXT`。以 `colonization-research:20260920-r2` 的 Python 3.11
+  `zipfile` 讀取，成員 SHA-256 為
+  `d78a219bfd041e3d4f3327d6b012dc433fd3734472c68cbace0490b9e46ac19e`、長度7,477 bytes、195行。
+- 原始 CP437 位元組段落已確認：版本前言／修正 `0x0000`–`0x0712`；技術排錯
+  `0x0712`–`0x0b76`；地圖編輯器 `0x0b76`–`0x0e7e`；作弊說明 `0x0e7e`–`0x1a79`；音效排錯
+  `0x1a79`–`0x1d35`。此為 `confirmed` 的檔案邊界與內容分類，不是執行期輸出或畫面命中證據。
+- 作弊說明中的按鍵和符號是原文操作契約：`Alt-W`、`Alt-I`、`Alt-N`、`Shift-F1` 至
+  `Shift-F7`、`T`、`S`、`$`、`%`、`^`、`!`、`[`、`]`、`Space`。建立器須逐序驗證，不能由
+  譯者自由改寫。

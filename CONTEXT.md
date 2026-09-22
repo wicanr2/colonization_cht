@@ -76,6 +76,9 @@ EXE及靜態圖像尚未建立完整玩家可見訊息分母，不宣稱全文�
 不可套用既有整行候選模型，待有 DRAFT 欄位識別方案才重開。
 最近完成入口：[目標060](docs/goals/060-help-bilingual-corpus.md)：
 24則遊戲內說明建立原文／繁中TSV，仍是待畫面驗收的草稿。
+[目標072](docs/goals/072-readme-player-guide-corpus.md)已規劃將 DOS 版 `README.TXT` 中的版本修正、
+地圖編輯器與作弊模式說明分成七則可追溯的玩家補充說明草稿；過時的 DOS／音效排錯與客服
+資料明確排除。此計畫不增加任何已顯示文字或 runtime 覆蓋聲明。
 [目標061](docs/goals/061-next-visible-text-slice.md)已驗收難度頁兩行中文標題，
 真視窗圖存於私有 `docs/screenshots/`；圖內有原版像素，不得當公開發行素材。
 [目標062](docs/goals/062-difficulty-finish-prompt.md)已驗收難度頁「完成後點此」提示；
