@@ -1560,3 +1560,29 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
 不沿用 psychic-war 倚天字型的個別授權決定。完整本機查核為 `workplace/goal054-font-audit.md`。
 離線中文圖片、14 項測試及雜湊見 [目標 055](docs/goals/055-first-text-prototype.md)；
 任何圖片、字型、原文盤點與執行期傾印均未納入 Git。
+
+## 2026-09-22：目標 056 的執行中顯示證據
+
+完整入口、固定輸入、命令與收據見 [目標 056](docs/goals/056-live-menu-overlay.md)，
+有限正式契約見 [規格 009](docs/spec/009-first-text-overlay-draft.md)。本輪未新增 IDA 語意命名。
+
+- 輸入沿用目標 054：OPENING.EXE SHA-256
+  `3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`；VICEROY.EXE
+  `a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3`；GAME.TXT
+  `67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a`。
+- confirmed：dosgolem `22664265ea7d55ea8706448149908c79d3f0897b` 兩次正常啟動各
+  16 個印字事件、13 個檢查點；71 份二進位輸出一致。只證實展開變數的標題與一般選項
+  兩種情境，不能將多個同類選項充作第三種。
+- confirmed：執行期實模式 `937C:0538` 至 `937C:1D50`，首列三次繪製各改變 180 個
+  索引值 254 的像素。畫布為實模式 `2CAE:0000`（線性 0x2CAE0），來源為
+  `6F16:00DF`（線性 0x6F23F）；GAME.TXT 0x1B0 是檔案位移，不是 CPU 位址。
+  新指令觀測器在實際 CPU.Step 前觸發，計數比舊迴圈觀測記錄多 1，不能混用步號。
+- confirmed：移入游標不產生新印字事件，且遮到原文字像素；移開可恢復。
+  本輪保守回退原文，不推測游標背景。開啟 DIFFICUL.PIK 時撤銷補片。
+- confirmed：新 dosgolem `315d17f6697bcd4040b12749a1038fdf677338f8` 的中文與六個
+  控制組於 45,000,001 步原版狀態一致。完整 RAM SHA-256
+  `6e94f669e9854c3ea306e70c3135ebf4997ff3ed86ec7892be5901701543a45d`；原始畫面
+  `6072d7cf64633f93d2ad86a363ad73cd586f24bdacff51b406a84c52354924ae`。
+  七組共 105 張檢查點圖逐像素驗證；此結果不是完整遊戲或互動視窗驗收。
+- 字型沿用上述固定 Cubic 11，本輪使用者確認大小。50 筆來源與占位符驗證通過，
+  缺字 0；首列字模 208×22 在 584×28 安全框內。其他 49 筆幾何仍未知，正式散布權未定。

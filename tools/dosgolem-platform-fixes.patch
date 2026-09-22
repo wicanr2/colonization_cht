@@ -1577,6 +1577,142 @@ index c71d9c7..35d7126 100644
 +	d.syncMCB()
  	return nil
  }
+diff --git a/internal/machine/before_instruction_test.go b/internal/machine/before_instruction_test.go
+new file mode 100644
+index 0000000..81fd46d
+--- /dev/null
++++ b/internal/machine/before_instruction_test.go
+@@ -0,0 +1,130 @@
++package machine
++
++import (
++	"bytes"
++	"reflect"
++	"testing"
++
++	"github.com/wicanr2/dosgolem/internal/cpu"
++)
++
++// 本測試只驗證通用合成指令，不代表任何原版遊戲路徑驗收。
++func observerMachine() *Machine {
++	m := New()
++	m.IRQ0Every, m.VGAFrameEvery = 0, 0
++	m.CycleClock = false
++	m.CPU.Seg[cpu.CS], m.CPU.Seg[cpu.SS] = 0x2000, 0x2000
++	m.CPU.R[cpu.SP], m.CPU.IP = 0xFF00, 0x100
++	m.WriteBytes(cpu.Addr(0x2000, 0x100), []byte{0x40, 0x90, 0x90}) // inc ax; nop; nop
++	return m
++}
++
++func observerStep(t *testing.T, m *Machine) {
++	t.Helper()
++	if err := m.Step(); err != nil {
++		t.Fatal(err)
++	}
++}
++
++func TestBeforeInstructionPathsAndRestore(t *testing.T) {
++	for _, path := range []string{"fast", "trace", "watch-ds"} {
++		t.Run(path, func(t *testing.T) {
++			m := observerMachine()
++			m.TraceSegs, m.WatchDSOn = path == "trace", path == "watch-ds"
++			saved := m.Snapshot()
++			var seen []uint16
++			m.SetBeforeInstruction(func() {
++				if m.Steps != uint64(m.CPU.IP-0x100+1) {
++					t.Fatalf("指令編號不符：%d，IP=%04x", m.Steps, m.CPU.IP)
++				}
++				seen = append(seen, m.CPU.R[cpu.AX])
++			})
++			observerStep(t, m)
++			observerStep(t, m)
++			if !reflect.DeepEqual(seen, []uint16{0, 1}) {
++				t.Fatalf("未恰好觀測執行前狀態：%v", seen)
++			}
++			m.Restore(saved)
++			observerStep(t, m)
++			if !reflect.DeepEqual(seen, []uint16{0, 1, 0}) {
++				t.Fatalf("Restore 未保留觀測者：%v", seen)
++			}
++			m.SetBeforeInstruction(nil)
++			observerStep(t, m)
++			if len(seen) != 3 {
++				t.Fatal("nil 未解除觀測")
++			}
++		})
++	}
++}
++
++func TestBeforeInstructionInterruptDispatch(t *testing.T) {
++	for _, kind := range []string{"irq0", "irq1", "mouse-callback"} {
++		t.Run(kind, func(t *testing.T) {
++			m := observerMachine()
++			m.CPU.SetFlags(cpu.IF)
++			m.WriteBytes(cpu.Addr(0x2000, 0x300), []byte{0x90, 0xCF}) // nop; iret
++			switch kind {
++			case "irq0":
++				m.Write16(8*4, 0x300)
++				m.Write16(8*4+2, 0x2000)
++				m.irq0Pending = true
++			case "irq1":
++				m.Write16(9*4, 0x300)
++				m.Write16(9*4+2, 0x2000)
++				m.QueueScan(0x1E)
++				m.SetNextKey(0)
++			case "mouse-callback":
++				m.Write8(cpu.Addr(0x2000, 0x301), 0xCB) // retf
++				m.CPU.IntHook = func(_ *cpu.CPU, n uint8) bool {
++					return n == IntCallbackReturn && m.FinishCallback()
++				}
++				m.QueueCallback(QueuedCall{Seg: 0x2000, Off: 0x300})
++			}
++			var seen []uint32
++			m.SetBeforeInstruction(func() { seen = append(seen, cpu.Addr(m.CPU.Seg[cpu.CS], m.CPU.IP)) })
++			for i := 0; i < 8 && m.CPU.R[cpu.AX] == 0; i++ {
++				observerStep(t, m)
++			}
++			want := []uint32{0x20300, 0x20301}
++			if kind == "mouse-callback" {
++				want = append(want, cpu.Addr(StubSeg, CallbackRetOff))
++			}
++			want = append(want, 0x20100)
++			if !reflect.DeepEqual(seen, want) || m.CPU.R[cpu.AX] != 1 {
++				t.Fatalf("派送觀測=%x，預期%x，AX=%x", seen, want, m.CPU.R[cpu.AX])
++			}
++		})
++	}
++}
++
++func TestBeforeInstructionReadOnlyParity(t *testing.T) {
++	plain, observed := observerMachine(), observerMachine()
++	for _, m := range []*Machine{plain, observed} {
++		m.VGAFrameEvery, m.nextFrame = 1, 1
++		m.irq0Pending = true
++		m.CPU.SetFlags(cpu.IF)
++		m.Write16(8*4, 0x300)
++		m.Write16(8*4+2, 0x2000)
++		m.WriteBytes(0x20300, []byte{0x90, 0xCF})
++	}
++	count := 0
++	observed.SetBeforeInstruction(func() {
++		count++
++		_ = observed.Indexed()
++		_ = observed.Palette()
++		_ = observed.CPU.R
++		_ = observed.Mem[0x20100]
++	})
++	for i := 0; i < 5; i++ {
++		observerStep(t, plain)
++		observerStep(t, observed)
++	}
++	if count != 5 || plain.CPU.R != observed.CPU.R || plain.CPU.Seg != observed.CPU.Seg ||
++		plain.CPU.IP != observed.CPU.IP || plain.CPU.Flags != observed.CPU.Flags ||
++		plain.CPU.Cycles != observed.CPU.Cycles || !bytes.Equal(plain.Mem, observed.Mem) ||
++		!bytes.Equal(plain.Indexed(), observed.Indexed()) || plain.Palette() != observed.Palette() ||
++		plain.Steps != observed.Steps || plain.Ticks != observed.Ticks || plain.Frames != observed.Frames {
++		t.Fatal("開啟只讀觀測改變合成程式狀態")
++	}
++}
 diff --git a/internal/machine/bios_motor_test.go b/internal/machine/bios_motor_test.go
 new file mode 100644
 index 0000000..b055472
@@ -1688,7 +1824,7 @@ index 0000000..8166465
 +	}
 +}
 diff --git a/internal/machine/machine.go b/internal/machine/machine.go
-index db2b12b..b4f33d7 100644
+index db2b12b..efc0122 100644
 --- a/internal/machine/machine.go
 +++ b/internal/machine/machine.go
 @@ -90,7 +90,7 @@ const (
@@ -1712,7 +1848,18 @@ index db2b12b..b4f33d7 100644
  	// 計時器：兩個各自有「啟動」與「遮罩」，狀態埠的 bit7 是兩者的 OR。
  	oplT1Started, oplT2Started bool
  	oplT1Masked, oplT2Masked   bool
-@@ -745,6 +750,16 @@ func (m *Machine) WatchReads(lo, hi uint32, fn func(addr uint32, v uint8)) {
+@@ -336,6 +341,10 @@ type Machine struct {
+ 	// **掛在送中斷那一點，不是每道指令輪詢**——幀時鐘自己不該變成熱點。
+ 	onTick func()
+ 
++	// beforeInstruction 是派送中斷後、真正執行指令前的只讀觀測設定。
++	// 不屬於可序列化機器狀態，Restore 保留目前的觀測者。
++	beforeInstruction func()
++
+ 	// periodic 是「每 n 道指令遠呼叫一次」。真機上這種東西是別人的 TSR
+ 	// 掛在 PIT 上：《臥龍傳》的遊戲時鐘就是 `YNSOUND.COM` 用 291.3 Hz
+ 	// 的回呼推的（`docs/spec/008` §6）。**沒有它遊戲時鐘不會走**，
+@@ -745,6 +754,16 @@ func (m *Machine) WatchReads(lo, hi uint32, fn func(addr uint32, v uint8)) {
  // 但音樂路徑才會真的執行、`OPL` 才會有東西。
  func (m *Machine) SetAdLib(present bool) { m.oplPresent = present }
  
@@ -1729,7 +1876,7 @@ index db2b12b..b4f33d7 100644
  // OPL 暫存器 04h（計時器控制）的位元（YM3812 資料表）。
  const (
  	oplT1Start  = 0x01 // 啟動計時器 1
-@@ -823,6 +838,22 @@ func (m *Machine) In8(port uint16) uint8 {
+@@ -823,6 +842,22 @@ func (m *Machine) In8(port uint16) uint8 {
  	if v, ok := m.VGA.In(port); ok {
  		return v
  	}
@@ -1752,7 +1899,7 @@ index db2b12b..b4f33d7 100644
  	switch {
  	case port == 0x60:
  		// 鍵盤資料埠。**沒有硬體鍵盤時這裡回 0xFF**，而 0xFF 的 bit7 是
-@@ -922,17 +953,40 @@ func (m *Machine) Out8(p uint16, v uint8) {
+@@ -922,17 +957,40 @@ func (m *Machine) Out8(p uint16, v uint8) {
  		m.pitWrite(p, v)
  	}
  
@@ -1793,7 +1940,30 @@ index db2b12b..b4f33d7 100644
  	}
  
  	// VGA DAC。**沒有它就只有色號沒有顏色**，而色號陣列自己看起來完全正常
-@@ -1388,13 +1442,21 @@ func (m *Machine) initVectors() {
+@@ -1113,6 +1171,12 @@ func (m *Machine) Indexed() []uint8 {
+ // MaxSegLog 是 SegLog（ring）保留的筆數。
+ const MaxSegLog = 100_000
+ 
++// SetBeforeInstruction 設定單一同步指令前觀測者；nil 解除。
++// 回呼時 Steps 已遞增，CPU 指向派送中斷／回呼後真正要執行的指令。
++// 觀測者只准讀取，不可修改機器／DOS、排入輸入或重入 Step。
++// 此為使用契約，並非型別系統提供的唯讀保證。Restore 不取消此設定。
++func (m *Machine) SetBeforeInstruction(f func()) { m.beforeInstruction = f }
++
+ // Step 執行一道指令，必要時先送 IRQ1或IRQ0。
+ func (m *Machine) Step() error {
+ 	// **兩個檢查都內聯在這裡**：`tick` 與 `keyTick` 絕大多數指令上
+@@ -1140,6 +1204,9 @@ func (m *Machine) Step() error {
+ 		}
+ 	}
+ 	m.insnCS, m.insnIP = m.CPU.Seg[cpu.CS], m.CPU.IP
++	if m.beforeInstruction != nil {
++		m.beforeInstruction()
++	}
+ 	if !m.TraceSegs && !m.WatchDSOn {
+ 		err := m.CPU.Step()
+ 		if len(m.wordWatches) > 0 {
+@@ -1388,13 +1455,21 @@ func (m *Machine) initVectors() {
  	//
  	//	push ds / push ax / push dx / mov ax,40h / mov ds,ax /
  	//	inc word [6Ch] / jnz +4 / inc word [6Eh] /
@@ -1985,3 +2155,382 @@ index 2df8d61..6bd99bb 100644
  	f, err := os.Create(path)
  	if err != nil {
  		return err
+diff --git a/overlay/compositor.go b/overlay/compositor.go
+new file mode 100644
+index 0000000..a53302e
+--- /dev/null
++++ b/overlay/compositor.go
+@@ -0,0 +1,142 @@
++// Package overlay 提供不修改輸入、與遊戲無關的輸出畫面合成。
++package overlay
++
++import (
++	"fmt"
++	"image"
++	"image/color"
++	"image/draw"
++)
++
++const maxSourcePixels = 1 << 20
++const maxOutputPixels = 1 << 24
++
++// Patch 保存觀測所得前後畫面矩形的獨立副本，不持有遊戲狀態。
++type Patch struct {
++	width, height int
++	safe          image.Rectangle
++	before, after []byte
++}
++
++func dimensions(width, height int) (int, error) {
++	if width <= 0 || height <= 0 || height > maxSourcePixels || width > maxSourcePixels/height {
++		return 0, fmt.Errorf("invalid source dimensions: %dx%d", width, height)
++	}
++	return width * height, nil
++}
++
++// NewPatch 複製安全矩形，僅保存實際觀測的來源像素。
++func NewPatch(before, after []byte, width, height int, safe image.Rectangle) (*Patch, error) {
++	n, err := dimensions(width, height)
++	if err != nil {
++		return nil, err
++	}
++	if len(before) != n || len(after) != n {
++		return nil, fmt.Errorf("source lengths must equal %d", n)
++	}
++	if safe.Empty() || !safe.In(image.Rect(0, 0, width, height)) {
++		return nil, fmt.Errorf("safe rectangle outside source")
++	}
++	p := &Patch{width: width, height: height, safe: safe,
++		before: make([]byte, safe.Dx()*safe.Dy()), after: make([]byte, safe.Dx()*safe.Dy())}
++	changed := false
++	i := 0
++	for y := safe.Min.Y; y < safe.Max.Y; y++ {
++		for x := safe.Min.X; x < safe.Max.X; x++ {
++			p.before[i], p.after[i] = before[y*width+x], after[y*width+x]
++			changed = changed || p.before[i] != p.after[i]
++			i++
++		}
++	}
++	if !changed {
++		return nil, fmt.Errorf("safe rectangle has no observed differences")
++	}
++	return p, nil
++}
++
++func paintPixel(dst *image.RGBA, x, y, scale int, c color.RGBA) {
++	for yy := y * scale; yy < (y+1)*scale; yy++ {
++		for xx := x * scale; xx < (x+1)*scale; xx++ {
++			dst.SetRGBA(xx, yy, c)
++		}
++	}
++}
++
++// Compose 回傳新的最近鄰縮放畫面，可選擇恢復背景並繪製補片。
++// 比對失敗時回傳未覆蓋的解碼畫面；任何輸入都不會被修改。
++// position 指定 ink.Bounds().Min 對應的輸出位置。
++func Compose(indexed, palette []byte, width, height, scale int, patch *Patch,
++	ink *image.Alpha, position image.Point, colorIndex byte, enabled bool,
++) (*image.RGBA, bool, string, error) {
++	n, err := dimensions(width, height)
++	if err != nil {
++		return nil, false, "invalid-input", err
++	}
++	if len(indexed) != n || len(palette) != 768 || scale < 1 || scale > 8 || n > maxOutputPixels/scale/scale {
++		return nil, false, "invalid-input", fmt.Errorf("invalid frame length, palette length, scale or output size")
++	}
++	var colors [256]color.RGBA
++	for i := range colors {
++		for c := 0; c < 3; c++ {
++			if palette[3*i+c] > 63 {
++				return nil, false, "invalid-input", fmt.Errorf("palette channel outside VGA DAC range")
++			}
++		}
++		p := palette[3*i : 3*i+3]
++		colors[i] = color.RGBA{R: p[0]<<2 | p[0]>>4, G: p[1]<<2 | p[1]>>4, B: p[2]<<2 | p[2]>>4, A: 255}
++	}
++	output := image.NewRGBA(image.Rect(0, 0, width*scale, height*scale))
++	for i, index := range indexed {
++		paintPixel(output, i%width, i/width, scale, colors[index])
++	}
++	fallback := func(reason string) (*image.RGBA, bool, string, error) { return output, false, reason, nil }
++	if !enabled {
++		return fallback("disabled")
++	}
++	if patch == nil {
++		return fallback("missing-patch")
++	}
++	if ink == nil {
++		return fallback("missing-ink")
++	}
++	if patch.width != width || patch.height != height || patch.safe.Empty() ||
++		!patch.safe.In(image.Rect(0, 0, width, height)) ||
++		len(patch.before) != patch.safe.Dx()*patch.safe.Dy() || len(patch.after) != len(patch.before) {
++		return fallback("wrong-patch-size")
++	}
++	i := 0
++	for y := patch.safe.Min.Y; y < patch.safe.Max.Y; y++ {
++		for x := patch.safe.Min.X; x < patch.safe.Max.X; x++ {
++			if indexed[y*width+x] != patch.after[i] {
++				return fallback("frame-mismatch")
++			}
++			i++
++		}
++	}
++	safe := image.Rect(patch.safe.Min.X*scale, patch.safe.Min.Y*scale, patch.safe.Max.X*scale, patch.safe.Max.Y*scale)
++	// 比較時不相加未驗證的座標，避免整數溢位。
++	if ink.Bounds().Empty() || position.X < safe.Min.X || position.Y < safe.Min.Y ||
++		position.X > safe.Max.X || position.Y > safe.Max.Y ||
++		ink.Bounds().Dx() <= 0 || ink.Bounds().Dy() <= 0 ||
++		ink.Bounds().Dx() > safe.Max.X-position.X || ink.Bounds().Dy() > safe.Max.Y-position.Y {
++		return fallback("ink-out-of-bounds")
++	}
++	// 先通過幾何檢查，再驗證每列跨度及最末像素；使用除法避免乘法溢位。
++	inkWidth, inkHeight := ink.Bounds().Dx(), ink.Bounds().Dy()
++	if ink.Stride < inkWidth || len(ink.Pix) < inkWidth ||
++		inkHeight-1 > (len(ink.Pix)-inkWidth)/ink.Stride {
++		return fallback("invalid-ink")
++	}
++	i = 0
++	for y := patch.safe.Min.Y; y < patch.safe.Max.Y; y++ {
++		for x := patch.safe.Min.X; x < patch.safe.Max.X; x++ {
++			if patch.before[i] != patch.after[i] {
++				paintPixel(output, x, y, scale, colors[patch.before[i]])
++			}
++			i++
++		}
++	}
++	inkRect := image.Rectangle{Min: position, Max: position.Add(ink.Bounds().Size())}
++	draw.DrawMask(output, inkRect, image.NewUniform(colors[colorIndex]), image.Point{}, ink, ink.Bounds().Min, draw.Over)
++	return output, true, "applied", nil
++}
+diff --git a/overlay/compositor_test.go b/overlay/compositor_test.go
+new file mode 100644
+index 0000000..b758f20
+--- /dev/null
++++ b/overlay/compositor_test.go
+@@ -0,0 +1,225 @@
++package overlay
++
++import (
++	"bytes"
++	"image"
++	"image/color"
++	"testing"
++)
++
++func fixture(t *testing.T) ([]byte, []byte, []byte, *Patch, *image.Alpha) {
++	t.Helper()
++	before := []byte{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
++	after := bytes.Clone(before)
++	after[5], after[6] = 20, 20
++	palette := make([]byte, 768)
++	for i := 0; i < 256; i++ {
++		palette[3*i], palette[3*i+1], palette[3*i+2] = byte(i%64), byte((i*2)%64), byte((i*3)%64)
++	}
++	p, err := NewPatch(before, after, 4, 3, image.Rect(1, 0, 3, 3))
++	if err != nil {
++		t.Fatal(err)
++	}
++	ink := image.NewAlpha(image.Rect(10, 20, 11, 21))
++	ink.SetAlpha(10, 20, color.Alpha{A: 255})
++	return before, after, palette, p, ink
++}
++
++func TestRestoreNonuniformBackgroundAndImmutableInputs(t *testing.T) {
++	before, after, pal, p, ink := fixture(t)
++	beforeCopy, afterCopy, palCopy, inkCopy := bytes.Clone(before), bytes.Clone(after), bytes.Clone(pal), bytes.Clone(ink.Pix)
++	pBefore, pAfter := bytes.Clone(p.before), bytes.Clone(p.after)
++	out, applied, reason, err := Compose(after, pal, 4, 3, 2, p, ink, image.Pt(2, 0), 30, true)
++	if err != nil || !applied || reason != "applied" {
++		t.Fatalf("%v %s %v", applied, reason, err)
++	}
++	want, _, _, err := Compose(before, pal, 4, 3, 2, nil, nil, image.Point{}, 0, false)
++	if err != nil {
++		t.Fatal(err)
++	}
++	for y := 0; y < 6; y++ {
++		for x := 0; x < 8; x++ {
++			if x == 2 && y == 0 {
++				continue
++			}
++			if out.RGBAAt(x, y) != want.RGBAAt(x, y) {
++				t.Fatalf("background at %d,%d", x, y)
++			}
++		}
++	}
++	expectInk := color.RGBA{R: 121, G: 243, B: 105, A: 255}
++	if out.RGBAAt(2, 0) != expectInk {
++		t.Fatalf("ink: %v", out.RGBAAt(2, 0))
++	}
++	if !bytes.Equal(before, beforeCopy) || !bytes.Equal(after, afterCopy) || !bytes.Equal(pal, palCopy) || !bytes.Equal(ink.Pix, inkCopy) || !bytes.Equal(p.before, pBefore) || !bytes.Equal(p.after, pAfter) {
++		t.Fatal("mutated inputs")
++	}
++	out.Pix[0] ^= 255
++	again, applied, _, err := Compose(after, pal, 4, 3, 2, p, ink, image.Pt(2, 0), 30, true)
++	if err != nil || !applied || again.Pix[0] == out.Pix[0] {
++		t.Fatal("output aliases retained state")
++	}
++}
++
++func TestNewPatchDeepCopies(t *testing.T) {
++	before, after, pal, p, ink := fixture(t)
++	frame := bytes.Clone(after)
++	before[5], after[5] = 99, 99
++	if p.before[2] != 6 || p.after[2] != 20 {
++		t.Fatal("patch aliases source")
++	}
++	_, applied, _, err := Compose(frame, pal, 4, 3, 1, p, ink, image.Pt(1, 0), 30, true)
++	if err != nil || !applied {
++		t.Fatal("copied patch changed")
++	}
++}
++
++func TestFallbacksPreserveOriginal(t *testing.T) {
++	for _, kind := range []string{"disabled", "missing-patch", "missing-ink", "wrong-patch-size", "frame-mismatch", "ink-x", "ink-y", "ink-negative", "ink-empty", "ink-overflow"} {
++		t.Run(kind, func(t *testing.T) {
++			_, frame, pal, p, ink := fixture(t)
++			enabled, position, reason := true, image.Pt(2, 0), kind
++			switch kind {
++			case "disabled":
++				enabled = false
++			case "missing-patch":
++				p = nil
++			case "missing-ink":
++				ink = nil
++			case "wrong-patch-size":
++				p = &Patch{}
++			case "frame-mismatch":
++				frame[1]++ // unchanged background, not the old glyph
++			case "ink-x":
++				position.X = 6
++				reason = "ink-out-of-bounds"
++			case "ink-y":
++				position.Y = 6
++				reason = "ink-out-of-bounds"
++			case "ink-negative":
++				position.X = -1
++				reason = "ink-out-of-bounds"
++			case "ink-empty":
++				ink = image.NewAlpha(image.Rectangle{})
++				reason = "ink-out-of-bounds"
++			case "ink-overflow":
++				position.X = int(^uint(0) >> 1)
++				reason = "ink-out-of-bounds"
++			}
++			want, _, _, _ := Compose(frame, pal, 4, 3, 2, nil, nil, image.Point{}, 0, false)
++			got, applied, why, err := Compose(frame, pal, 4, 3, 2, p, ink, position, 30, enabled)
++			if err != nil || applied || why != reason || !bytes.Equal(got.Pix, want.Pix) {
++				t.Fatalf("%v %s %v", applied, why, err)
++			}
++		})
++	}
++}
++
++func TestDifferentCanvasShape(t *testing.T) {
++	_, frame, pal, p, ink := fixture(t)
++	_, applied, reason, err := Compose(frame, pal, 3, 4, 1, p, ink, image.Point{}, 30, true)
++	if err != nil || applied || reason != "wrong-patch-size" {
++		t.Fatalf("%v %s %v", applied, reason, err)
++	}
++}
++
++func TestMalformedAlphaPreservesOriginal(t *testing.T) {
++	for _, tc := range []struct {
++		name   string
++		stride int
++		pixels []byte
++	}{
++		{"short-pixels", 3, []byte{255, 255, 0, 255}},
++		{"narrow-stride", 1, []byte{255, 255, 255, 255}},
++		{"negative-stride", -2, []byte{255, 255, 255, 255}},
++	} {
++		t.Run(tc.name, func(t *testing.T) {
++			_, frame, pal, patch, _ := fixture(t)
++			ink := &image.Alpha{Pix: tc.pixels, Stride: tc.stride, Rect: image.Rect(10, 20, 12, 22)}
++			originalPixels := bytes.Clone(ink.Pix)
++			want, _, _, _ := Compose(frame, pal, 4, 3, 2, nil, nil, image.Point{}, 0, false)
++			got, applied, reason, err := Compose(frame, pal, 4, 3, 2, patch, ink, image.Pt(2, 0), 30, true)
++			if err != nil || applied || reason != "invalid-ink" || !bytes.Equal(got.Pix, want.Pix) {
++				t.Fatalf("%v %s %v", applied, reason, err)
++			}
++			if !bytes.Equal(ink.Pix, originalPixels) {
++				t.Fatal("mutated malformed ink")
++			}
++		})
++	}
++}
++
++func TestOutsideSafeDoesNotTriggerRestore(t *testing.T) {
++	_, frame, pal, p, ink := fixture(t)
++	frame[0] = 31
++	out, applied, _, err := Compose(frame, pal, 4, 3, 1, p, ink, image.Pt(1, 0), 30, true)
++	want, _, _, _ := Compose(frame, pal, 4, 3, 1, nil, nil, image.Point{}, 0, false)
++	if err != nil || !applied || out.RGBAAt(0, 0) != want.RGBAAt(0, 0) {
++		t.Fatal("outside region altered")
++	}
++}
++
++func TestInvalidPatches(t *testing.T) {
++	for _, tc := range []struct {
++		name          string
++		before, after []byte
++		w, h          int
++		safe          image.Rectangle
++	}{
++		{"zero", nil, nil, 0, 1, image.Rect(0, 0, 1, 1)},
++		{"oversize", nil, nil, maxSourcePixels, 2, image.Rect(0, 0, 1, 1)},
++		{"overflow", nil, nil, int(^uint(0) >> 1), 2, image.Rect(0, 0, 1, 1)},
++		{"length", []byte{1}, []byte{2}, 2, 1, image.Rect(0, 0, 1, 1)},
++		{"unchanged", []byte{1}, []byte{1}, 1, 1, image.Rect(0, 0, 1, 1)},
++		{"empty-safe", []byte{1}, []byte{2}, 1, 1, image.Rectangle{}},
++		{"outside-safe", []byte{1}, []byte{2}, 1, 1, image.Rect(-1, 0, 1, 1)},
++		{"outside-only-diff", []byte{1, 2}, []byte{3, 2}, 2, 1, image.Rect(1, 0, 2, 1)},
++	} {
++		t.Run(tc.name, func(t *testing.T) {
++			if p, err := NewPatch(tc.before, tc.after, tc.w, tc.h, tc.safe); err == nil || p != nil {
++				t.Fatal("accepted invalid patch")
++			}
++		})
++	}
++}
++
++func TestInvalidDecode(t *testing.T) {
++	for _, kind := range []string{"bad-length", "bad-palette-length", "bad-palette-channel", "scale-zero", "scale-nine", "output-cap", "dimensions"} {
++		t.Run(kind, func(t *testing.T) {
++			_, frame, pal, _, _ := fixture(t)
++			w, h, scale := 4, 3, 2
++			switch kind {
++			case "bad-length":
++				frame = frame[:1]
++			case "bad-palette-length":
++				pal = pal[:1]
++			case "bad-palette-channel":
++				pal[767] = 64
++			case "scale-zero":
++				scale = 0
++			case "scale-nine":
++				scale = 9
++			case "output-cap":
++				w, h, scale = 1024, 1024, 8
++				frame = make([]byte, w*h)
++			case "dimensions":
++				w = -1
++			}
++			got, applied, _, err := Compose(frame, pal, w, h, scale, nil, nil, image.Point{}, 0, false)
++			if err == nil || applied || got != nil {
++				t.Fatal("accepted invalid frame")
++			}
++		})
++	}
++}
++
++func TestPartialAlpha(t *testing.T) {
++	before, frame, pal, p, ink := fixture(t)
++	ink.SetAlpha(10, 20, color.Alpha{A: 128})
++	out, applied, _, err := Compose(frame, pal, 4, 3, 1, p, ink, image.Pt(1, 0), 30, true)
++	base, _, _, _ := Compose(before, pal, 4, 3, 1, nil, nil, image.Point{}, 0, false)
++	c := out.RGBAAt(1, 0)
++	if err != nil || !applied || c.A != 255 || c.R <= base.RGBAAt(1, 0).R || c.R >= 121 {
++		t.Fatalf("alpha blend %v", c)
++	}
++}

@@ -26,10 +26,10 @@
 → `VICEROY.EXE` 主選單 → 滑鼠點選「新世界」→ 難度選擇。
 連續冷啟動與安全快照重播的索引畫面、色盤一致；無輸入控制組保留在主選單。
 
-已追到第一列主選單的實際印字事件，並完成[離線中文原型](docs/goals/055-first-text-prototype.md)
-及 50 筆可驗證來源的翻譯草稿。目前只驗證一列，不是即時中文化，也未驗證完整遊戲。
-下一步是確認原型字型／字級，補足輸出情境與重繪生命週期，再完成
-[第一則可互動中文訊息](https://github.com/wicanr2/colonization_cht/issues/26)。
+第一列主選單已由原版執行事件接到[逐幀中文合成](docs/goals/056-live-menu-overlay.md)，
+字型與大小已獲使用者確認；中文開／關的原版狀態對照通過，另有 50 筆來源可驗證的譯稿。
+目前只有一列、以無頭工具驗收；游標遮擋時保留原文，尚無可手動遊玩的中文視窗或完整遊戲驗證。
+下一步接通前端並擴展已驗證文字，完成[可互動中文切片](https://github.com/wicanr2/colonization_cht/issues/26)。
 靜態圖像中文化另依來源與背景證據推進，不再阻擋動態文字路徑。
 
 ## 研究與驗證入口
@@ -43,7 +43,7 @@
 - [通用執行器修正補丁](tools/dosgolem-platform-fixes.patch)
 - [研究證據](RESEARCH-LOG.md)、[工作歷程](WORKLOG.md)
 
-目前沒有可下載的中文化正式版；字型、術語、完成範圍與公開發布仍待原型及使用者確認。
+目前沒有可下載的中文化正式版；術語、完成範圍、字型散布權利與公開發布仍待確認。
 
 ## 原版與權利邊界
 
@@ -113,7 +113,10 @@
 - [第五十三輪目標：滑鼠事件與中文化路徑重排](docs/goals/053-mouse-and-gameplay-route-replan.md)
 - [第五十四輪目標：主選單文字來源](docs/goals/054-main-menu-text-provenance.md)
 - [第五十五輪目標：第一則中文顯示原型](docs/goals/055-first-text-prototype.md)
-- [第一則文字覆蓋規格草案](docs/spec/009-first-text-overlay-draft.md)
+- [第五十六輪目標：主選單即時覆蓋](docs/goals/056-live-menu-overlay.md)
+- [第一列文字覆蓋規格與未完成範圍](docs/spec/009-first-text-overlay-draft.md)
+- [精確指令觀測規格](docs/spec/010-instruction-observer.md)
+- [通用畫面補片合成規格](docs/spec/011-output-patch-compositor.md)
 - [繁中翻譯草稿](text/draft.zh-Hant.tsv)（候選來源，不是正式執行期識別）
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)

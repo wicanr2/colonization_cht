@@ -1,6 +1,6 @@
 # 目標 055：第一則中文顯示原型
 
-狀態：工程完成，視覺決策待確認<br>
+狀態：completed；2026-09-22 使用者確認字型與大小<br>
 日期：2026-09-22<br>
 Issue：[#26](https://github.com/wicanr2/colonization_cht/issues/26)，字型／術語決策 [#10](https://github.com/wicanr2/colonization_cht/issues/10)
 
@@ -44,7 +44,7 @@ Issue：[#26](https://github.com/wicanr2/colonization_cht/issues/26)，字型／
 中文 PNG SHA-256：`ff47ad685134dae6c28951bc7a796e0bc1ded81781309cf909b31dfe36d325e7`。
 英文 PNG SHA-256：`873cb55655bafadfa2dea1baf2afee63d2d1668d2c5dc7fd4fcb48e6f0e29125`。
 
-視覺候選待使用者確認，不把目前字型、字級、術語與超長省略策略寫成正式規格。
+使用者於 2026-09-22 確認目前字型與大小。術語與超長省略策略未因此一併定案。
 Issue #26 仍開放；尚缺即時事件生命週期、玩家操作中的中文／原文切換及正常路徑驗收。
 
 ## Docker 重跑
