@@ -125,6 +125,7 @@
 - [第五十九輪目標：Ebitengine畫面接線](docs/goals/059-ebitengine-display-wiring.md)
 - [第六十輪目標：說明訊息雙語語料](docs/goals/060-help-bilingual-corpus.md)
 - [第六十一輪目標：下一個正常路徑中文顯示切片](docs/goals/061-next-visible-text-slice.md)
+- [難度畫面文字輸出追查草案](docs/spec/014-difficulty-text-output-draft.md)
 - [可撤回 Linux 視窗原型規格](docs/spec/013-window-prototype.md)
 - [五列主選單覆蓋規格](docs/spec/012-five-menu-lines.md)
 - [第一列文字覆蓋規格與未完成範圍](docs/spec/009-first-text-overlay-draft.md)

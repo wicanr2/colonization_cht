@@ -1636,3 +1636,15 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   原文、CRLF、區塊位移、片段SHA可從固定輸入重生。繁中為**譯文草稿**，只核對
   占位符與`{}`／`^`等控制碼，尚無dosgolem呼叫點、畫面安全矩形或玩家路徑命中。
   詳細每筆原始定位與指紋在[雙語TSV](text/help-bilingual.tsv)；原文只推私有repo。
+
+## 2026-09-22：目標061難度頁執行期原文定位
+
+- 輸入為合法DOS版`LABELS.TXT`（SHA-256
+  `e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204`）
+  及本機正常視窗收據`goal059-ebiten.memory`；研究工具為
+  `colonization-research:20260920-r2`內Python 3.11.2，dosgolem隔離副本提交
+  `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`。
+- confirmed：檔案位元組空間`0x888`／`0x890`的標題原文，分別在DOS線性記憶體空間
+  `0x4DF72`／`0x4DF79`出現；完成提示在DOS線性空間`0x2A7B5`及`0x4DF59`出現。
+  單次結束快照不能證實印字呼叫點、文字來源指標、圖像分類或安全矩形；詳見
+  [規格014](docs/spec/014-difficulty-text-output-draft.md)。
