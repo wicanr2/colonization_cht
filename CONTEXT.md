@@ -49,6 +49,9 @@ DOSBox-X 僅提供啟動鏈及畫面類別的輔助基準，正式收據由 dosg
 
 ## 下一閘門
 
+目前執行入口：[目標 057](docs/goals/057-menu-coverage-and-interaction.md)，
+先推送目標，再擴展有證據的主選單覆蓋及查核互動入口；目標 056 未完成界線仍保留。
+
 已完成 [目標 054](docs/goals/054-main-menu-text-provenance.md) 的最小證據鏈；
 [目標 055](docs/goals/055-first-text-prototype.md) 保存中文原型、測試與重跑入口。
 目前原型為 4 倍畫布、使用者已確認 Cubic 11 的 24px 顯示，中文為「在新世界開始遊戲」。
