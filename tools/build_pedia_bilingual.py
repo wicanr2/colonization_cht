@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""由合法 DOS 原版建立／驗證百科建國元勳雙語草稿；不修改原版。"""
+"""由合法 DOS 原版建立／驗證選定百科文章的雙語草稿；不修改原版。"""
 
 import argparse
 import re
@@ -16,11 +16,13 @@ from build_help_bilingual import (
 )
 
 
-KEYS = [f"FATHER{i}" for i in range(25)]
+FATHER_KEYS = [f"FATHER{i}" for i in range(25)]
+CARGO_KEYS = [f"CARGO{i}" for i in range(16)]
+KEYS = FATHER_KEYS + CARGO_KEYS
 PLACEHOLDER = re.compile(r"%(?:[A-Z][a-z]|[A-Z]+[0-9]*(?:\$)?)")
 CONTROLS = re.compile(r"[{}^~_]")
 PERCENT_ESCAPES = re.compile(r"%%")
-NOTES = "百科建國元勳整段草稿；檔案來源已確認，執行事件與中文安全矩形尚未驗證"
+NOTES = "百科整段草稿；檔案來源已確認，執行事件與中文安全矩形尚未驗證"
 
 
 def source_rows(game):
@@ -69,11 +71,20 @@ def source_rows(game):
     return rows
 
 
-def translations(rows, path, build):
+def translations(rows, path, build, existing_catalog=None):
     pairs = read_tsv(path, ["message_id", "zh_hant"] if build else FIELDS)
     values = {row["message_id"]: row["zh_hant"] for row in pairs}
     if len(values) != len(pairs):
         raise ValueError("百科翻譯鍵重複")
+    if existing_catalog is not None:
+        existing_pairs = read_tsv(existing_catalog, FIELDS)
+        existing = {row["message_id"]: row["zh_hant"] for row in existing_pairs}
+        if len(existing) != len(existing_pairs):
+            raise ValueError("既有百科目錄鍵重複")
+        overlap = set(existing) & set(values)
+        if overlap:
+            raise ValueError("既有目錄與新譯文鍵重複")
+        values = existing | values
     expected = {row["message_id"] for row in rows}
     if set(values) != expected:
         raise ValueError("百科翻譯鍵有缺漏或孤兒")
@@ -102,7 +113,12 @@ def main():
     rows = source_rows(args.game)
     if rows is None:
         return 77
-    rows = translations(rows, args.translations or args.catalog, bool(args.translations))
+    rows = translations(
+        rows,
+        args.translations or args.catalog,
+        bool(args.translations),
+        args.catalog if args.translations else None,
+    )
     content = render(rows)
     if args.translations:
         if not args.catalog.parent.is_dir():
@@ -110,7 +126,7 @@ def main():
         args.catalog.write_text(content, encoding="utf-8")
     elif args.catalog.read_text(encoding="utf-8") != content:
         raise ValueError("TSV與固定原版來源或欄位不符")
-    print(f"驗證通過：{len(rows)} 篇百科建國元勳原文／譯文；只確認檔案來源，未驗畫面。")
+    print(f"驗證通過：{len(rows)} 篇百科原文／譯文；只確認檔案來源，未驗畫面。")
     return 0
 
 
