@@ -1,6 +1,6 @@
 # 規格 013：可撤回 Linux 視窗原型
 
-狀態：READY（限定可撤回原型，尚待真實視窗驗收）<br>
+狀態：READY（真視窗與滑鼠已驗；失焦、關窗及正式玩家版尚未驗）<br>
 日期：2026-09-22<br>
 入口：[目標058](../goals/058-translation-corpus-and-player-window.md)；Issue #26。承接[規格012](012-five-menu-lines.md)。
 
@@ -23,8 +23,9 @@ IsWindowBeingClosed、SetWindowClosingHandled。沿用既有 psychicwar-go-ebite
 - Machine.Step沿用本案預設虛擬時鐘；每次視窗更新只分批執行固定數量指令，
   不設定其他專案的cycles/ms、RunCycles或忙等修補。此節奏不是正式效能／實機速度承諾。
 - 視窗輸入與繪圖在同一更新執行緒，指令觀測保持唯讀；Draw只顯示獨立RGBA副本。
-- 可撤回產生器以固定SHA驗證tools/live_menu.go，再只替换其測試排程迴圈與輸出交接，
-  不複製第二份手維護的位址／譯文適配器；產物在ignored workplace。
+- Ebitengine前端透過`frontendRunner`與`frontendFrameSink`兩個明確的Go註冊點接入；
+  單獨建置原有無頭驗證器仍不依賴視窗。組裝器以固定SHA驗證`tools/live_menu.go`，
+  只複製檔案到ignored workplace，不再改寫Go原始碼或複製第二份位址／譯文適配器。
 - 每筆輸入記錄當下Step、類別、座標／按鍵；支援冷啟動逐指令重播同一收據。
   英文無hook控制組與中文組須在相同輸入／終點達到相同CPU、RAM、原圖、虛擬時間。
 - 原型有明示指令上限，或視窗關閉退出；關閉不代表原版遊戲退出／存檔。
@@ -39,14 +40,15 @@ Docker／Xvfb／xdotool 的真實視窗輸入須冷啟動點新世界至難度�
 ## READY 審查
 
 已核對公開API、本機固定v2.9.9來源及規格009–012的既有事件適配。
-本輪先保存DRAFT再提升READY，只授權上述有限原型；產生器綁定來源SHA，
-任一來源變動即拒絕，不默默套字串取代。正式前端抽離及更多鍵盤需後續獨立工作。
+本輪先保存DRAFT再提升READY，只授權上述有限原型；組裝器綁定來源SHA，
+任一來源變動即拒絕。目標059將原先的字串替換接線改成明確Go註冊，
+同輸入畫面與狀態對拍通過；正式前端生命週期及更多鍵盤仍需後續工作。
 
 ## 原型與重跑入口
 
-- [產生器](../../tools/build_window_prototype.py)：固定`live_menu.go` SHA-256
-  `a0ace7112811b99c92eb8956f7ca9a28a9f70b669325e9b61350c74cf858ea36`，
-  產物放`workplace/reports/window-prototype`，不可當成正式共用適配器。
+- [組裝器](../../tools/build_window_prototype.py)：固定`live_menu.go` SHA-256
+  `c7d208aafb0fba6522799ddeaffc1b0df633419e959db85be27fb488b8aef5e4`，
+  原樣複製至`workplace/reports/window-prototype`，不可當成正式共用適配器。
 - [視窗程式](../../tools/window_prototype.go)與[座標／釋放測試](../../tools/window_prototype_test.go)。
 - [Xvfb流程](../../tools/probe_window_prototype.sh)：外部X輸入，無遊戲記憶體注入。
 - [獨立驗收](../../tools/verify_window_prototype.py)：三組完整狀態相同，兩張真視窗截圖逐像素對照。
@@ -70,7 +72,8 @@ sh -c 'xvfb-run -a -s "-screen 0 1280x800x24 -nolisten tcp" bash /repo/tools/pro
 python3 /repo/tools/verify_window_prototype.py
 ```
 
-`window`預設是固定指令上限的原型；直接啟動參數見Xvfb流程，只有Enter、滑鼠及關窗，
+`window --window`是固定指令上限的Ebitengine原型；未加`--window`保留原有無頭排程。
+直接啟動參數見Xvfb流程，只有Enter、滑鼠及關窗，
 沒有加入F鍵語言切換等可能占用原版按鍵的新產品設計。整局遊玩、存檔、音訊及正式節奏皆未交付。
 
 ## 有限收據與未驗項目
@@ -103,3 +106,20 @@ confirmed：Xvfb真實視窗從冷啟動收到9筆輸入，Enter在3,800,000步�
 環境勘誤：第一次讓xvfb-run成為Docker PID1導致啟動信號等待；改用外層sh持有並回收。
 第二次status檔尚未生成時腳本set-e提前退出；修正為缺檔等待。兩者都是環境／測試腳本，
 不是遊戲缺陷；修正後同容器／命令乾淨重跑通過，未改原版或放寬中文守門。
+
+## 目標059：Ebitengine明確接線
+
+confirmed：在`tools/live_menu.go`明確註冊視窗runner與每幀RGBA接收點後，
+`tools/build_window_prototype.py`不再搜尋／替換Go測試排程文字，只核驗固定來源SHA並複製。
+無頭單檔仍可獨立編譯；若要求`--window`卻未連結Ebitengine，明確以退出碼2拒絕。
+此改動不新增原版文字鍵、覆蓋區或遊戲行為；文字仍只在已驗證五列疊加。
+
+以獨立`goal059-ebiten`收據在真Xvfb視窗重跑：九筆輸入進難度畫面，中文重播與英文
+無hook控制於100,000,000步終點的CPU、完整RAM、原始索引畫面、色盤及虛擬時間相同；
+606幀、5213 ticks、1,395,189,090 cycles，RAM SHA-256
+`c6588ff4781df0f05dc255f42c37422b11cd5e2fdd89d43a854dd691b366ce65`。
+兩張真視窗截圖與基準逐像素相同。參見[目標059](../goals/059-ebitengine-display-wiring.md)。
+重跑時設定`COLONIZATION_WINDOW_OUT=/out/goal059-ebiten`，驗收器加
+`--prefix goal059-ebiten`；不得再覆寫目標058原始本機收據。前一次未改前綴的
+初次重跑曾覆寫本機目標058檔，故舊收據的數值仍以本規格上節歷史記錄為準。
+真實失焦／關窗及完整玩家版未驗，規格狀態維持READY。

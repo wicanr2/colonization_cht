@@ -31,6 +31,10 @@ var versions = map[string]string{
 	"GAME.TXT":    "67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a",
 }
 
+// 視窗前端由另外連結的檔案註冊；單獨建置此驗證器時不引入圖形依賴。
+var frontendFrameSink func(*image.RGBA, map[string]any)
+var frontendRunner func(*golem.Machine, *golem.DOS, func(string), string)
+
 func must(err error) {
 	if err != nil {
 		panic(err)
@@ -100,7 +104,12 @@ func main() {
 	out := flag.String("out", "/out/goal056-live", "輸出前綴")
 	control := flag.Bool("control", false, "無指令觀測、無合成對照")
 	missing := flag.Bool("missing", false, "缺字模回退對照")
+	window := flag.Bool("window", false, "使用已連結的 Ebitengine 視窗前端")
 	flag.Parse()
+	if *window && frontendRunner == nil {
+		fmt.Fprintln(os.Stderr, "未連結 Ebitengine 視窗前端")
+		os.Exit(2)
+	}
 	validVersion := true
 	inputs := map[string]string{}
 	for name, want := range versions {
@@ -343,7 +352,7 @@ func main() {
 		}
 		if *control {
 			// 對照組不用overlay.Compose，也不裝指令hook；只在截圖時直接解碼原圖。
-			if label != "" {
+			if label != "" || frontendFrameSink != nil {
 				output = image.NewRGBA(image.Rect(0, 0, 1280, 800))
 				for i, v := range indexed {
 					p := int(v) * 3
@@ -388,6 +397,9 @@ func main() {
 		}
 		rec := map[string]any{"step": m.Steps, "applied": applied, "reason": reason, "pending": anyPending, "dropped": len(drops), "events": len(events), "lines": lineRecords}
 		if label == "" {
+			if frontendFrameSink != nil {
+				frontendFrameSink(output, rec)
+			}
 			frames = append(frames, rec)
 			return
 		}
@@ -402,55 +414,60 @@ func main() {
 		checkpoints = append(checkpoints, rec)
 	}
 	m.SetOnFrame(func() { render("") })
-	phase, polls := 0, 0
-	for m.Steps < 45000001 && !d.Exited && !m.CPU.Halted {
-		switch m.Steps {
-		case 3000000:
-			d.PushKey(golem.Key{Scan: 0x1c, ASCII: 13})
-		case 12000001, 31000001:
-			x, y := 160, 100
-			if m.Steps == 31000001 {
-				x, y = 128, 110
+	if *window {
+		frontendRunner(m, d, render, *out)
+		render("final")
+	} else {
+		phase, polls := 0, 0
+		for m.Steps < 45000001 && !d.Exited && !m.CPU.Halted {
+			switch m.Steps {
+			case 3000000:
+				d.PushKey(golem.Key{Scan: 0x1c, ASCII: 13})
+			case 12000001, 31000001:
+				x, y := 160, 100
+				if m.Steps == 31000001 {
+					x, y = 128, 110
+				}
+				d.MoveMouse(x, y)
+				polls = len(d.Mouse.Polls)
+				phase = 1
+			case 25000000, 29000000, 43000000:
+				d.MoveMouse(16, 16)
+			case 27000000:
+				d.MoveMouse(128, 110)
+			case 24000000:
+				render("menu-initial")
+			case 26000000:
+				render("menu-clear")
+			case 28000000:
+				render("menu-hover")
+			case 29500000:
+				enabled = false
+				render("switch-off")
+			case 29750000:
+				enabled = true
+				render("switch-on")
+			case 30000000:
+				render("menu-away")
+			case 40000000:
+				render("difficulty")
+			case 45000000:
+				render("difficulty-clear")
 			}
-			d.MoveMouse(x, y)
-			polls = len(d.Mouse.Polls)
-			phase = 1
-		case 25000000, 29000000, 43000000:
-			d.MoveMouse(16, 16)
-		case 27000000:
-			d.MoveMouse(128, 110)
-		case 24000000:
-			render("menu-initial")
-		case 26000000:
-			render("menu-clear")
-		case 28000000:
-			render("menu-hover")
-		case 29500000:
-			enabled = false
-			render("switch-off")
-		case 29750000:
-			enabled = true
-			render("switch-on")
-		case 30000000:
-			render("menu-away")
-		case 40000000:
-			render("difficulty")
-		case 45000000:
-			render("difficulty-clear")
+			if m.Steps >= 31050000 && m.Steps <= 31350000 && m.Steps%50000 == 0 {
+				render(fmt.Sprintf("click-%d", m.Steps))
+			}
+			if phase == 1 && len(d.Mouse.Polls)-polls >= 2 {
+				d.PressMouse(0)
+				polls = len(d.Mouse.Polls)
+				phase = 2
+			}
+			if phase == 2 && len(d.Mouse.Polls)-polls >= 1 {
+				d.ReleaseMouse(0)
+				phase = 3
+			}
+			must(m.Step())
 		}
-		if m.Steps >= 31050000 && m.Steps <= 31350000 && m.Steps%50000 == 0 {
-			render(fmt.Sprintf("click-%d", m.Steps))
-		}
-		if phase == 1 && len(d.Mouse.Polls)-polls >= 2 {
-			d.PressMouse(0)
-			polls = len(d.Mouse.Polls)
-			phase = 2
-		}
-		if phase == 2 && len(d.Mouse.Polls)-polls >= 1 {
-			d.ReleaseMouse(0)
-			phase = 3
-		}
-		must(m.Step())
 	}
 	must(os.WriteFile(*out+".memory", m.Mem, 0644))
 	c := m.CPU

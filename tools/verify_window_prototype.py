@@ -8,11 +8,13 @@ from PIL import Image, ImageChops
 
 p = argparse.ArgumentParser()
 p.add_argument('--out', type=Path, default=Path('/out'))
+p.add_argument('--prefix', default='goal058-window', help='本機收據前綴；各輪不可覆寫舊收據')
 a = p.parse_args()
-names = ['goal058-window', 'goal058-window-replay', 'goal058-window-control']
+assert '/' not in a.prefix and a.prefix not in ('.', '..')
+names = [a.prefix, a.prefix + '-replay', a.prefix + '-control']
 receipts = [json.loads((a.out / (n + '.json')).read_text()) for n in names]
 assert all(r['state'] == receipts[0]['state'] for r in receipts)
-inputs = json.loads((a.out / 'goal058-window.inputs.json').read_text())
+inputs = json.loads((a.out / (a.prefix + '.inputs.json')).read_text())
 assert inputs['end'] == receipts[0]['state']['steps']
 assert any(e['kind'] == 'move' and (e['x'], e['y']) == (128, 110) for e in inputs['inputs'])
 assert sum(e['kind'] == 'press' for e in inputs['inputs']) >= 2
@@ -20,8 +22,8 @@ assert sum(e['kind'] == 'press' for e in inputs['inputs']) == sum(e['kind'] == '
 assert 'DIFFICUL.PIK' in receipts[0]['opened']
 for index in range(5):
     assert any(f['lines'][index]['applied'] for f in receipts[0]['frames'])
-pairs = [('goal058-window.menu.png', 'goal057-live-zh.menu-clear.png'),
-         ('goal058-window.difficulty.png', 'goal058-window.final.png')]
+pairs = [(a.prefix + '.menu.png', 'goal057-live-zh.menu-clear.png'),
+         (a.prefix + '.difficulty.png', a.prefix + '.final.png')]
 images = []
 for actual, reference in pairs:
     x = Image.open(a.out / actual).convert('RGB')
@@ -33,5 +35,5 @@ for actual, reference in pairs:
 result = {'scope': 'Linux/Xvfb有限原型，不含完整鍵盤、音訊、正式速度或存讀檔',
           'state_equal': True, 'state': receipts[0]['state'], 'images': images,
           'input_count': len(inputs['inputs']), 'frame_count': len(receipts[0]['frames'])}
-(a.out / 'goal058-window-receipt.json').write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
+(a.out / (a.prefix + '-receipt.json')).write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
 print(json.dumps(result, ensure_ascii=False))

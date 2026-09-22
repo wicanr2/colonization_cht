@@ -17,6 +17,11 @@ var windowSteps = flag.Uint64("window-steps", 100000000, "原型執行上限，�
 var replayPath = flag.String("replay-inputs", "", "僅驗收：重播先前真實視窗輸入")
 var activeWindow *windowGame
 
+func init() {
+	frontendFrameSink = frontendFrame
+	frontendRunner = runWindow
+}
+
 type windowInput struct {
 	Step   uint64 `json:"step"`
 	Kind   string `json:"kind"`

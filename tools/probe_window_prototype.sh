@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # 僅容器內使用；Xvfb生命週期由外層xvfb-run管理。
 set -euo pipefail
-OUT=/out/goal058-window
-/app/window --all-menu --root /game --catalog /repo/text/draft.zh-Hant.tsv --font-dir /out/goal057-fonts --out "$OUT" --window-steps 100000000 > "$OUT.log" 2>&1 &
+OUT=${COLONIZATION_WINDOW_OUT:-/out/goal058-window}
+/app/window --window --all-menu --root /game --catalog /repo/text/draft.zh-Hant.tsv --font-dir /out/goal057-fonts --out "$OUT" --window-steps 100000000 > "$OUT.log" 2>&1 &
 game_pid=$!
 trap 'kill "$game_pid" 2>/dev/null || true; wait "$game_pid" 2>/dev/null || true' EXIT
 window=""
@@ -59,5 +59,5 @@ trap - EXIT
 for mode in replay control; do
   args=()
   [[ "$mode" == control ]] && args+=(--control)
-  /app/window --all-menu --root /game --catalog /repo/text/draft.zh-Hant.tsv --font-dir /out/goal057-fonts --out "$OUT-$mode" --replay-inputs "$OUT.inputs.json" "${args[@]}" > "$OUT-$mode.log" 2>&1
+  /app/window --window --all-menu --root /game --catalog /repo/text/draft.zh-Hant.tsv --font-dir /out/goal057-fonts --out "$OUT-$mode" --replay-inputs "$OUT.inputs.json" "${args[@]}" > "$OUT-$mode.log" 2>&1
 done
