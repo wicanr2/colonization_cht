@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from build_help_bilingual import read_tsv, translations, unescape_text
+from build_help_bilingual import escape_text, read_tsv, translations, unescape_text
 
 
 class HelpCatalogTests(unittest.TestCase):
@@ -51,6 +51,18 @@ class HelpCatalogTests(unittest.TestCase):
     def test_invalid_escape_rejected(self):
         with self.assertRaisesRegex(ValueError, "跳脫"):
             unescape_text("bad\\x")
+
+    def test_tab_round_trips_as_tsv_escape(self):
+        source = "^\t\n{Row}"
+        encoded = escape_text(source)
+        self.assertEqual(encoded, "^\\t\\n{Row}")
+        self.assertEqual(unescape_text(encoded), source)
+
+    def test_tab_control_removed_rejected(self):
+        row = {"message_id": "TEST.TXT:@HELP1", "source_en": "^\\t\\n{B}"}
+        self.write("^\\n{B}")
+        with self.assertRaisesRegex(ValueError, "控制碼"):
+            translations([row], self.path, True)
 
 
 if __name__ == "__main__":

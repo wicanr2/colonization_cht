@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 
 from build_help_bilingual import FIELDS
-from build_pedia_bilingual import translations
+from build_pedia_bilingual import source_marker, translations
 
 
 class PediaCatalogTests(unittest.TestCase):
@@ -36,6 +36,10 @@ class PediaCatalogTests(unittest.TestCase):
         self.write("^{名稱}\\n{效果：%Ft 增加50%%。}")
         with self.assertRaisesRegex(ValueError, "占位符"):
             translations([self.row.copy()], self.path, True)
+
+    def test_job12_source_marker_retains_original_space(self):
+        self.assertEqual(source_marker("JOB12"), "JOB12 ")
+        self.assertEqual(source_marker("JOB13"), "JOB13")
 
     def test_existing_catalog_supplies_prior_scope(self):
         rows = [

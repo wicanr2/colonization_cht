@@ -17,7 +17,7 @@ FIELDS = [
     "zh_hant", "status", "notes",
 ]
 PLACEHOLDER = re.compile(r"%[A-Z]+[0-9]*(?:\$)?")
-CONTROLS = re.compile(r"[{}^~_]")
+CONTROLS = re.compile(r"[{}^~_\t]")
 NOTES = "說明語料草稿；檔案來源已確認，執行事件與中文安全矩形尚未驗證"
 
 
@@ -40,17 +40,17 @@ def encoded_lines(data):
 
 
 def escape_text(text):
-    if "\\" in text or "\t" in text or "\r" in text:
+    if "\\" in text or "\r" in text:
         raise ValueError("來源含未支援的跳脫或欄位字元")
-    return text.replace("\n", "\\n")
+    return text.replace("\t", "\\t").replace("\n", "\\n")
 
 
 def unescape_text(text):
     if "\n" in text or "\r" in text or "\t" in text:
         raise ValueError("TSV欄位含實際換行或Tab")
-    if re.search(r"\\(?!n)", text):
-        raise ValueError("TSV含非\\n跳脫")
-    return text.replace("\\n", "\n")
+    if re.search(r"\\(?![nt])", text):
+        raise ValueError("TSV含非\\n或\\t跳脫")
+    return text.replace("\\t", "\t").replace("\\n", "\n")
 
 
 def source_rows(game):

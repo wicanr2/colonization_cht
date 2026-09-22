@@ -20,11 +20,20 @@ FATHER_KEYS = [f"FATHER{i}" for i in range(25)]
 CARGO_KEYS = [f"CARGO{i}" for i in range(16)]
 UNIT_KEYS = [f"UNIT{i}" for i in range(24)]
 TERRAIN_KEYS = [f"TERRAIN{i}" for i in range(29)]
-KEYS = FATHER_KEYS + CARGO_KEYS + UNIT_KEYS + TERRAIN_KEYS
+JOB_KEYS = [f"JOB{i}" for i in range(27)]
+KEYS = FATHER_KEYS + CARGO_KEYS + UNIT_KEYS + TERRAIN_KEYS + JOB_KEYS
+# 原版第12篇職業 marker 的尾端確實帶一個 ASCII 空白。保留可見且穩定的
+# message_id `PEDIA.TXT:@JOB12`，但定位時只能比對固定原始 marker，不能修改輸入或
+# 無聲 strip 掉來源異常。
+SOURCE_MARKERS = {"JOB12": "JOB12 "}
 PLACEHOLDER = re.compile(r"%(?:[A-Z][a-z]|[A-Z]+[0-9]*(?:\$)?)")
-CONTROLS = re.compile(r"[{}^~_]")
+CONTROLS = re.compile(r"[{}^~_\t]")
 PERCENT_ESCAPES = re.compile(r"%%")
 NOTES = "百科整段草稿；檔案來源已確認，執行事件與中文安全矩形尚未驗證"
+
+
+def source_marker(key):
+    return SOURCE_MARKERS.get(key, key)
 
 
 def source_rows(game):
@@ -42,9 +51,10 @@ def source_rows(game):
 
     rows = []
     for key in KEYS:
-        positions = anchors.get(key, [])
+        marker = source_marker(key)
+        positions = anchors.get(marker, [])
         if len(positions) != 1:
-            raise ValueError(f"PEDIA.TXT:@{key} 不唯一或不存在")
+            raise ValueError(f"PEDIA.TXT:@{marker} 不唯一或不存在")
         anchor = positions[0]
         start = anchor + 1
         while start < len(lines) and lines[start].startswith((b"@width=", b"@x=", b"@y=", b"@smallfont")):

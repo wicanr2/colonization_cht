@@ -1,6 +1,6 @@
 # 目標069：百科「職業」整段譯稿
 
-狀態：in_progress；日期：2026-09-22。對應 Issue [#7](https://github.com/wicanr2/colonization_cht/issues/7)、[#10](https://github.com/wicanr2/colonization_cht/issues/10)、[#27](https://github.com/wicanr2/colonization_cht/issues/27)。
+狀態：completed（限定27篇職業草稿）；日期：2026-09-22。對應 Issue [#7](https://github.com/wicanr2/colonization_cht/issues/7)、[#10](https://github.com/wicanr2/colonization_cht/issues/10)、[#27](https://github.com/wicanr2/colonization_cht/issues/27)。
 
 ## 範圍
 
@@ -25,3 +25,16 @@
 完成時，`text/pedia-bilingual.tsv` 與既有建立器、回歸測試、字型覆蓋檢查應可在 Docker
 重生並驗證121篇資料。結果寫入 `RESEARCH-LOG.md`、`WORKLOG.md`、`CONTEXT.md` 和
 `docs/worklist.json`；README 只在穩定語料現況改變時更新，不列本輪目標。
+
+## 完成收據
+
+固定原版重生後，`text/pedia-bilingual.tsv` 含121篇：25篇 `@FATHER`、16篇 `@CARGO`、
+24篇 `@UNIT`、29篇 `@TERRAIN` 與27篇 `@JOB`。建立器確認每列的原始檔與片段 SHA、
+欄位、唯一鍵、字面 `\\n`／`\\t`、`^`、`{}`、`%%`及占位符；13項 TSV、控制碼與來源
+marker 回歸測試也通過。`review_pedia_bilingual.py` 以已確認的 Cubic 11 24px 字型測得
+121／121篇無缺字。
+
+原版 `@JOB8` 的 `^\\t` 由使用者選定以 TSV `\\t` 逃脫保存，中文譯文也保留同一控制序列；
+`@JOB12 ` 的尾端 ASCII 空白由固定 marker 對照定位，卻不藏入不可見的正式 message key。
+這是語料品質收據，不是畫面收據。職業文章全數維持 `draft`，仍沒有 dosgolem 輸出事件、
+中文安全矩形、Ebitengine 截圖或正常玩家路徑命中；PEDIA另有42篇文章未譯。
