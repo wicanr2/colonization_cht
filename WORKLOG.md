@@ -960,3 +960,14 @@
   主地圖、殖民地、歐洲三類作弊功能。DOS 設定、音效排錯與客服資料不進翻譯語料。
 - 下一步是建立 ZIP 成員範圍的受限雙語 TSV 建置器與譯稿；它們一律維持 `draft`，不聲稱已有
   dosgolem 命中、Ebitengine 畫面或正常玩家路徑驗收。
+
+## 2026-09-22：完成 README 玩家補充說明譯稿
+
+- 新增 `text/readme-bilingual.tsv` 的7則原文／繁中草稿，以及受限 ZIP 成員建立器、六項回歸
+  測試與字型審核器。它們固定封存檔／成員 SHA、範圍、片段 SHA，並拒絕重疊範圍、遺漏譯文、
+  Tab、按鍵或符號序列不符。
+- Docker 由唯讀 ZIP 暫時解包後，34項單元回歸、368筆主譯稿、24則help、163篇百科及7則
+  README來源驗證均通過。Cubic 11 24px 審核為7則通過、缺字0；本機報告在
+  `workplace/reports/goal072-readme-review.json`。
+- 所有README譯稿維持`draft`；沒有新增 dosgolem 事件、Ebitengine畫面、安全矩形、正常玩家路徑
+  或已顯示中文計數。已刪除唯一的臨時雙欄譯文提案檔。

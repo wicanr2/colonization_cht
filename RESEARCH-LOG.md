@@ -1840,3 +1840,19 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
 - 作弊說明中的按鍵和符號是原文操作契約：`Alt-W`、`Alt-I`、`Alt-N`、`Shift-F1` 至
   `Shift-F7`、`T`、`S`、`$`、`%`、`^`、`!`、`[`、`]`、`Space`。建立器須逐序驗證，不能由
   譯者自由改寫。
+
+## 2026-09-22：目標072 README 譯稿完成收據
+
+- confirmed（來源）：`text/readme-bilingual.tsv` 的7列由 `build_readme_bilingual.py` 從固定 ZIP
+  與唯一成員重建。建立器核對封存檔 SHA-256
+  `8aa93f219a6166712933bc60e402fe78024df1de821605c3036e1ae14e619867`、成員 SHA-256、CRLF、
+  七個已排序且不重疊範圍、範圍長度與每段原始位元組 SHA；任何不符皆失敗即關閉。
+- confirmed（格式）：六項無原版單元測試覆蓋重疊範圍、合成 ZIP 指紋、按鍵重排、符號遺漏與
+  Tab 遺漏。Docker 以唯讀 ZIP 暫時解包驗證34項語料測試，以及368筆主譯稿、24則help、
+  163篇百科和7則README的固定來源。
+- confirmed（字型）：`rich2-py:latest`、Cubic 11、24px 的
+  `workplace/reports/goal072-readme-review.json` 顯示 `source_and_control_passed: 7`、
+  `rows_with_missing_glyphs: 0`。
+- unknown（執行期與版面）：報告的 `runtime_display_verified` 為 false。七則 README 仍未取得
+  dosgolem 輸出事件、覆蓋鍵、中文安全矩形、Ebitengine 視窗或正常玩家路徑；不計入八段已顯示
+  中文、完整說明文字或全文中文化完成度。

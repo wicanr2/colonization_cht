@@ -1,6 +1,6 @@
 # 目標072：版本 3 玩家補充說明譯稿
 
-狀態：planned；日期：2026-09-22。對應 Issue [#7](https://github.com/wicanr2/colonization_cht/issues/7) 與 [#27](https://github.com/wicanr2/colonization_cht/issues/27)。
+狀態：completed；日期：2026-09-22。對應 Issue [#7](https://github.com/wicanr2/colonization_cht/issues/7) 與 [#27](https://github.com/wicanr2/colonization_cht/issues/27)。
 
 ## 範圍
 
@@ -37,5 +37,16 @@
 3. 在 Docker 以唯讀 ZIP 重跑建立器與既有 help／百科回歸，並以 Cubic 11 24px 報告所有七列的
    字型覆蓋。缺字、控制字面值或來源不符即失敗。
 
-本目標的完成只代表七則 README 說明已成為可追溯 `draft`；它們仍沒有 dosgolem 輸出事件、
-中文安全矩形、Ebitengine 視窗截圖或正常玩家路徑收據。
+## 完成收據
+
+- `text/readme-bilingual.tsv` 已由唯讀 ZIP 重建七則 `draft`。建立器鎖定封存檔 SHA-256
+  `8aa93f219a6166712933bc60e402fe78024df1de821605c3036e1ae14e619867`、README 成員 SHA-256、
+  七個不重疊的位元組範圍與每段片段 SHA；不符即拒絕。
+- 建立器的六項無原版單元測試，以及主譯稿、help、百科與 README 合計34項回歸均通過。
+  所有368筆主譯稿、24則help、163篇百科與本輪7則 README 固定來源也已由 Docker 重新驗證。
+- `rich2-py:latest` 使用 Cubic 11、24px 審核的本機忽略收據
+  `workplace/reports/goal072-readme-review.json` 顯示7則來源／控制通過、缺字0；
+  `runtime_display_verified` 為 false。
+
+本目標只代表七則 README 說明已成為可追溯 `draft`；它們仍沒有 dosgolem 輸出事件、中文安全矩形、
+Ebitengine 視窗截圖或正常玩家路徑收據。
