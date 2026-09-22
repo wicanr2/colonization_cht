@@ -22,109 +22,27 @@
 
 ## 目前狀態
 
-使用者已指定合法 DOS 輸入作為正式研究目標。dosgolem 能沿 `OPENING.EXE` 的原始冷啟動路徑進入
-13h 圖形模式、計時器、滑鼠、overlay 與資料讀取；目前另觀測到一個尚未實作的滑鼠
-`int 33h AX=0014`，但尚未證實它造成目前受阻點（blocker）。這是 DOS 能力基線，不是主選單或可遊玩宣稱。
+已由 dosgolem 驗證正常 DOS 啟動鏈：`COLONIZE.BAT` 所指定的 `OPENING.EXE -g`
+→ `VICEROY.EXE` 主選單 → 滑鼠點選「新世界」→ 難度選擇。
+連續冷啟動與安全快照重播的索引畫面、色盤一致；無輸入控制組保留在主選單。
 
-目標 006 已把正式啟動卡住的位置收斂至 `PSOUND.COL` overlay 的相容 OPL 埠行為；它不是首畫面、
-也不是遊戲主程式轉交。目標 008 已完成可實作的 [最小 READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)：
-它只處理已證實的 `0x220` primary OPL 偵測、`0x222` delay 與 `0x226 → 0x22E → 0x22A=0xAA` DSP reset
-handshake，不宣稱完整音效或 OPL3 parity。目前依 [目標 009](docs/goals/009-sbpro-profile-and-cold-boot.md)
-在隔離的 dosgolem 副本完成可選 profile；正式路徑已跨過 DSP reset，並載入 `MPSLOGO.SS`、
-`MPSNAME.SS`。原程式直接建立的活躍（active）MCB 鏈已由
-[MCB 重新協調 DRAFT 規格](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)、
-[已註冊多行程 READY 規格](docs/spec/004-colonization-registered-process-mcb-importer-ready.md) 與
-[CONFORMED 規格 005](docs/spec/005-colonization-registered-process-mcb-importer-conformed.md) 收斂：隔離
-dosgolem 現可保存 raw header／owner／name、current PSP、state v3，並拒絕未登錄 owner、未知 lifecycle
-與 v2 state。固定冷啟動的第 2,000,000 指令 state v3 可重載；從同一 state 續跑確認 mode 13h 在
-2.70M–2.75M 指令間首次寫入 18,445 個非零 A0000 像素，至 20M 仍保留。這是首個可見畫面收據，已解除
-[Issue #24](https://github.com/wicanr2/colonization_cht/issues/24) 的映像外控制流 blocker；但尚未定位動態文字、
-靜態文字語意或 `VICEROY.EXE` 轉交，不能宣稱可遊玩或中文化完成。
-範圍、固定輸入與證據界線見 [目標 022](docs/goals/022-psound-post-mcb-visible-checkpoint.md)。此前沒有可下載中文化程式或任何完成度宣稱。先前 Windows 3.x NE
-輸入只保留為歷史研究證據，不是目前實作目標。
+目前完成的是啟動與操作基礎，尚未產生中文覆蓋，也未驗證完整遊戲。
+下一步是[主選單文字輸出追蹤](docs/goals/054-main-menu-text-provenance.md)，接著完成
+[第一則中文訊息](https://github.com/wicanr2/colonization_cht/issues/26)。
+靜態圖像中文化另依來源與背景證據推進，不再阻擋動態文字路徑。
 
-[目標 023](docs/goals/023-first-frame-draw-provenance.md) 已把首個 VRAM 寫入精確定位到第 2,747,686
-指令的 `0557:0090`，其 `DS:SI=1DFB:00F8` 至 `ES:DI=A000:1C78` 為跨列點陣資料搬運；這是靜態首幀的
-強推論，不是動態文本鍵。[目標 024](docs/goals/024-first-screen-normal-input-observation.md) 進一步確認首幀後的
-單一 BIOS 緩衝區 Enter 或中央左鍵，皆進入同一段 `OPENING.PIK` 與 15 個 `OPEN*.SS` 資產的載入序列；截至
-第 12M 指令仍未命中字型、B8000 或主控台文字。因此正常輸入前沿已取得，但尚不能宣稱已定位任何動態文本。
+## 研究與驗證入口
 
-[目標 025](docs/goals/025-opening-static-asset-inventory.md) 已將同一開場分支收斂為兩個 `.PIK` 與 14 個
-`.SS` 的固定雜湊、大小與 DOS 讀取清冊。它們是可重播的靜態圖像**調查候選**，不是已證實含文字的資產；每一項的
-文字存在、畫面矩形與中文安全覆蓋區仍未知，尚未建立覆蓋原型或規格。
-[目標 026](docs/goals/026-opening-pik-render-provenance.md) 的 `OPENING.PIK`→畫布初步關聯已由
-[目標 027](docs/goals/027-opening-pik-canvas-geometry.md) 撤回：在相關 `MOVSB` 之前，`OPENBORD.PIK` 已覆寫
-同一個 `5755` 共享緩衝區。因此較後的畫布→mode 13h `A000` VRAM 搬運不能歸屬於 `OPENING.PIK`。
-目標 027 只確認這個覆寫後窗口改變了畫布頂端的 320×24 範圍；它不是 `OPENING.PIK` 的幾何，也不是任何文字、
-圖像語意或中文覆蓋資格。靜態文字仍待每個候選以未覆寫的來源證據另行確認。
-[目標 028](docs/goals/028-openingbord-buffer-survival.md) 已確認 `OPENBORD.PIK` payload 在共享 `5755` 緩衝區
-沒有被觀測為改變，且有 673 次 `MOVSB` 從該範圍讀取，672 次對應到畫布內容變更。這只確認取樣
-原始緩衝區→畫布資料流，不能宣稱任何靜態文字、圖像內容、最終像素或覆蓋矩形。
-[目標 029](docs/goals/029-openingbord-canvas-survival-to-frame-copy.md) 已確認該 320×24 取樣畫布範圍未被觀測為
-內容改變，並在 #5,464,375–#5,464,536 由 `REP MOVSW` 完整搬到 A000 VRAM。這使目標 028 的 672 次資料流
-延續至一次 VRAM copy；仍不代表完整圖像、穩定最終畫面、文字存在或中文安全矩形。
-[目標 030](docs/goals/030-openingbord-visible-rectangle-and-text-check.md) 已確認這個範圍是非文字的重複裝飾邊框，
-不會成為中文覆蓋目標；其他 `.PIK`／`.SS` 候選的文字存在與安全矩形仍待個別證明。
-[目標 031](docs/goals/031-opening-full-frame-static-text-survey.md) 已在第一個完整 composite frame 登錄兩筆可見靜態
-文字候選：`OCEANVS OCCIDENTALIS` 地圖標籤與中央卷軸兩行小字。兩者的資產來源、copy 後存續與中文安全矩形
-都仍待個別證明，不能直接覆蓋。
-[目標 032](docs/goals/032-ocean-label-canvas-writer-provenance.md) 已確認可讀地圖標籤的 canvas writer，並確認
-`OPENING.PIK` 有 15 個直接像素來源進入其暫存切片；整則標籤的完整資產歸屬、copy 後穩定畫面存續與中文安全矩形
-仍未確認，因此尚未建立覆蓋原型或規格。
-[目標 033](docs/goals/033-ocean-label-post-copy-persistence.md) 已確認該標籤在第一個完整 composite copy 後至
-#5,500,000 的正常路徑窗口，畫布與 A000 對應範圍均無內容變更，終點畫面亦逐位元組相同；這只證明有限窗口的
-顯示存續，中文安全矩形與覆蓋資格仍未確認。
-[目標 034](docs/goals/034-opening-post-composite-enter-probe.md) 確認此完整開場畫面上的單次 Enter 會令
-`OPENING.EXE` 以離開碼 `0x6C` 結束，而非顯示新的動態文字；控制組持續在圖形模式。正式啟動器如何承接這個
-離開碼仍待追溯，不能將目前畫面當成完整遊戲入口。[目標 035](docs/goals/035-opening-exit-code-launcher-chain.md)
-已確認兩個 DOS 批次候選都在最後一行直接啟動 `opening`，未含後續的批次離開碼分派；dosgolem 目前也沒有
-batch／`COMMAND.COM` 重播層。因此未取得父程序收據，不宣稱已進入遊戲或定位動態文字。
-[目標 036](docs/goals/036-opening-composite-known-click-probe.md) 進一步確認完整開場畫面上的既有中央左鍵
-`(160,100)` 也只會走向同一 `0x6C` 退出；這是輸入消費證據，不是按鈕語意或文字輸出。
-[目標 037](docs/goals/037-opening-mouse-poll-first-divergence.md) 已將這個單點的第一個分歧縮小為
-`0110:0952` 的非零 `AX` 判斷；它仍不是座標 hit-test 或動態文字常式。
-[目標 038](docs/goals/038-opening-mouse-boolean-producer.md) 進一步確認 AX 直接來自 `0110:094A → 0924:0588` 的遠呼叫；座標判斷與文字輸出仍未定位。
-[目標 039](docs/goals/039-mouse-producer-body-dataflow.md) 已確認控制／左鍵狀態流回同一 caller，並由
-[目標 040](docs/goals/040-dosgolem-far-call-observation-alignment.md) 勘誤 raw／trace 位址其實完全對齊：producer
-會把 CX、DX 寫回 caller locals，並以 `BX OR [DS:5AB4]` 形成 AX。各位址的遊戲語意、座標判斷與文字輸出仍未定位。
-[目標 041](docs/goals/041-mouse-producer-state-gate-dataflow.md) 進一步確認此固定開場 state 中 `[DS:5AB4]` 是零、
-AX 的差異直接隨既有左鍵的 BX 變化；這仍是退出路徑資料流，沒有觀測到動態文字輸出。
-[目標 042](docs/goals/042-ocean-label-background-safety-geometry.md) 已確認海洋標籤與其有限外框不是可安全單色清除的
-背景：它們共享大量地圖色號與跨界連通區。因此尚未建立靜態中文覆蓋原型或安全矩形。
-[目標 043](docs/goals/043-scroll-text-canvas-writer-provenance.md) 與
-[目標 044](docs/goals/044-scroll-candidate-input-asset-provenance.md) 已把中央卷軸候選的一段資料流追到
-`MPSLOGO.SS` runtime buffer、解碼輸入、canvas writer 與 A000 copy；完整候選圖的資產歸屬僅為強推論，
-原文、完整邊界與安全矩形仍未知，因此尚未建立中文覆蓋原型。
-[目標 045](docs/goals/045-scroll-candidate-pretext-background-evidence.md) 進一步排除把這個 writer 前的零值 canvas
-當作背景：其 254-byte 連通繪製區跨越既有約略候選邊界。因此中文安全矩形仍未知，不能以這條資料流產生遮罩或覆蓋。
-[目標 046](docs/goals/046-opening-click-nonzero-downstream-dataflow.md) 已確認既有中央左鍵只導向
-`OPENING.EXE` 的非文字退出鏈，沒有產生動態文字輸出、文本鍵或覆蓋資格。
-[目標 047](docs/goals/047-ocean-label-pretext-canvas-background.md) 已確認海洋標籤 writer 前的 canvas 是 zero-fill，
-且同一個 writer 跨越標籤外的未知圖像；它不是可逆的可見背景。因此仍沒有中文安全矩形、遮罩或靜態覆蓋原型資格。
-[目標 048](docs/goals/048-viceroy-direct-entry-stall-diagnostic.md) 確認 `VICEROY.EXE` 的 direct-entry 以目前堆疊
-值走入 `CALL SP` 後的自迴圈，且沒有未實作服務；這是診斷性停止線，不是正常啟動或動態文字輸出證據。
-[目標 049](docs/goals/049-dos-launch-parent-reference-inventory.md) 盤點固定 DOS 根層 9 個 `.BAT`／`.COM`／`.EXE`
-候選後，只在同名的 `OPENING.EXE` 與 `VICEROY.EXE` 內看到相應 ASCII token，沒有不同根層候選的靜態引用。
-這不是 DOS EXEC、父程序情境（parent context）或正常玩家路徑證據，仍不能據此啟動 `VICEROY.EXE` 或宣稱定位動態文字。
-[目標 050](docs/goals/050-dos-subdirectory-launch-reference-inventory.md) 以正確的固定 `SMColoni/COLONIZE` 根目錄
-盤點至少一層子目錄；其中沒有 `.BAT`、`.COM`、`.EXE` 候選，故無新增 token 命中。這個零結果只限該副檔名集合，
-不排除其他 launcher 方式，也不改變動態文字路徑仍未知的結論。
-[目標 051](docs/goals/051-opening-frame-coordinate-grid.md) 已將既有完整開場畫面製成僅限本機的座標格檢視，供使用者
-選擇下一個正常操作；它不是按鈕辨識、文字抽取或輸入驗證，故動態文字路徑仍待後續同狀態證據。
-[目標 052](docs/goals/052-known-exit-input-marker.md) 已在這張僅限本機的格線上標示既有 `(160,100)` 非文字退出
-左鍵；標記不是任何控制項或遊戲語意判定。其「請使用者另選座標」的舊結論已由
-[目標 053](docs/goals/053-mouse-and-gameplay-route-replan.md) 訂正：先以同狀態對照查明滑鼠是否只是開場略過輸入，
-再查證正常遊戲啟動鏈。這兩項是研究工作，不要求玩家猜座標。
+需自備合法 DOS 原版，所有執行均在 Docker 中進行。
+專案只使用 `workplace/dosgolem` 獨立副本，不修改共用 dosgolem；上游推送維持停用。
 
-第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。已決定的 DOS 執行策略
-及歷史分支見 [目標 002](docs/goals/002-win16-execution-strategy.md)；實際工作順序與 Issue
-連結見 [工作計畫](WORKLIST.md)。最新已知事實與限制見 [目前脈絡](CONTEXT.md)。
+- [目前真相與工具版本](CONTEXT.md)
+- [正常啟動與滑鼠驗證命令](docs/goals/053-mouse-and-gameplay-route-replan.md)
+- [可重跑路徑驗證器](tools/probe_gameplay_route.py)
+- [通用執行器修正補丁](tools/dosgolem-platform-fixes.patch)
+- [研究證據](RESEARCH-LOG.md)、[工作歷程](WORKLOG.md)
 
-DOS 輸入的固定雜湊、probe 與限制見 [目標 005](docs/goals/005-dos-input-and-cold-boot.md)。
-首個可見檢查點的 blocker 收據與後續閘門見 [目標 006](docs/goals/006-dos-first-visible-checkpoint.md)。
-相容 OPL 埠的規格閘門見 [目標 007](docs/goals/007-colonization-opl-compatibility-spec.md)。
-Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/003-ne-load-surface-inventory.md)
-及 [目標 004](docs/goals/004-execution-strategy-blocker-audit.md)，不混入目前 DOS 路徑。
+目前沒有可下載的中文化正式版；字型、術語、完成範圍與公開發布仍待原型及使用者確認。
 
 ## 原版與權利邊界
 
@@ -192,9 +110,13 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第五十一輪目標](docs/goals/051-opening-frame-coordinate-grid.md)
 - [第五十二輪目標](docs/goals/052-known-exit-input-marker.md)
 - [第五十三輪目標：滑鼠事件與中文化路徑重排](docs/goals/053-mouse-and-gameplay-route-replan.md)
+- [第五十四輪目標：主選單文字來源](docs/goals/054-main-menu-text-provenance.md)
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [MCB 記憶體 arena 重新協調規格草案](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)
+- [BIOS 馬達倒數修正規格](docs/spec/006-bios-motor-timeout.md)
+- [滑鼠事件回呼交換規格](docs/spec/007-mouse-handler-exchange.md)
+- [可重播的滑鼠快照規格](docs/spec/008-mouse-snapshot.md)
 - [已註冊多行程 MCB importer READY 規格](docs/spec/004-colonization-registered-process-mcb-importer-ready.md)
 - [已註冊多行程 MCB importer CONFORMED 規格](docs/spec/005-colonization-registered-process-mcb-importer-conformed.md)
 - [工作歷程](WORKLOG.md)

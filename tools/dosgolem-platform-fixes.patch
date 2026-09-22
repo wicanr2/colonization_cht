@@ -1,0 +1,1987 @@
+diff --git a/cmd/probe/main.go b/cmd/probe/main.go
+index 8251a8d..89b7de7 100644
+--- a/cmd/probe/main.go
++++ b/cmd/probe/main.go
+@@ -134,6 +134,8 @@ func main() {
+ 			"逗號分隔多段。一次跑要挖好幾塊緩衝區時用這個，不要為了第二塊重跑")
+ 	adlib := flag.Bool("adlib", false, "讓 AdLib（OPL2，埠 388h）偵測存在"+
+ 		"（預設不存在，開機快；音樂路徑要它才會跑）")
++	sbpro := flag.Bool("sbpro", false, "啟用 base 220h 的受限 Sound Blaster Pro／OPL profile"+
++		"（只供已驗證的診斷路徑；預設關閉）")
+ 	poke := flag.String("poke", "",
+ 		"在指定步數直接改記憶體：`<位址>@<步數>=<hex bytes>`，分號分隔。"+
+ 			"位址寫法同 -peek。**對拍要固定的是狀態，不是運氣**——"+
+@@ -394,6 +396,11 @@ func main() {
+ 		fmt.Printf("從 %s 接著跑（第 %d 道指令，素材目錄 %s）\n",
+ 			*loadState, m.Steps, d.Root)
+ 	}
++	// State 載入會還原既有的機器基線；profile 是本次 probe 明確選用的
++	// 診斷裝置，所以在此之後啟用，避免舊 state 悄悄決定是否公開 0x220。
++	if *sbpro {
++		m.SetSoundBlasterPro(true)
++	}
+ 	saves, err := parseSaveState(*saveState)
+ 	if err != nil {
+ 		die(err)
+diff --git a/docs/spec/000-index.md b/docs/spec/000-index.md
+index 98ef398..f1c0084 100644
+--- a/docs/spec/000-index.md
++++ b/docs/spec/000-index.md
+@@ -49,7 +49,11 @@
+ 
+ ## 依案例分組
+ 
+-### 共同基礎（master）（13 份）
++### 共同基礎（master）（16 份）
++
++- [194：BIOS 磁碟機馬達倒數](194-bios-disk-motor-timeout.md)：READY。
++- [195：滑鼠事件回呼交換](195-mouse-handler-exchange.md)：READY。
++- [196：滑鼠檔案快照完整性](196-mouse-snapshot.md)：READY。
+ 
+ - `001-scope-and-mvp.md`
+ - `002-cpu-8086.md`
+diff --git a/docs/spec/194-bios-disk-motor-timeout.md b/docs/spec/194-bios-disk-motor-timeout.md
+new file mode 100644
+index 0000000..6784404
+--- /dev/null
++++ b/docs/spec/194-bios-disk-motor-timeout.md
+@@ -0,0 +1,18 @@
++# 194：BIOS 磁碟機馬達倒數
++
++狀態：READY
++
++BIOS 的 `int 08h` 預設處理在更新系統 tick 後、呼叫 `int 1Ch` 前，
++遞減非零 byte `0040:0040`；零保持零，1→0 時清除 `0040:003F` 低四位，保留高四位。
++採 EGA/VGA 時代 BIOS 的停止於零契約，不涵蓋早期 PC 的零回捲模式。
++
++來源為 DOSBox-X 的 `include/bios.h`（`BIOS_DISK_MOTOR_TIMEOUT`、`BIOS_DRIVE_RUNNING`）
++及 `src/ints/bios.cpp:INT8_Handler`：
++<https://github.com/joncampbell123/dosbox-x/blob/master/src/ints/bios.cpp>。
++本行為屬平台規格近似，不含 FDC 實機、DMA 或逐週期模擬。
++
++實作僅擴充既有 `internal/machine/machine.go:initVectors` BIOS stub，保存原有暫存器與
++中斷鏈。自訂 `int 08h` 未鏈回時不得自行更新。舊 state 內含舊 stub，驗收使用新冷啟動。
++
++測試：0、1、2、255 倒數；狀態高位保留；`int 1Ch` 看見更新後資料；暫存器與旗標還原；
++不鏈回的 IRQ0 handler 不更新倒數。遊戲特定位址與重播收據留在呼叫端專案。
+diff --git a/docs/spec/195-mouse-handler-exchange.md b/docs/spec/195-mouse-handler-exchange.md
+new file mode 100644
+index 0000000..80a917b
+--- /dev/null
++++ b/docs/spec/195-mouse-handler-exchange.md
+@@ -0,0 +1,13 @@
++# 195：滑鼠事件回呼交換
++
++狀態：READY
++
++`int 33h AX=0014` 將 `CX`、`ES:DX` 的新遮罩／指標安裝到與 `AX=000C` 相同的 handler，
++並以這三欄返回舊值。其他暫存器不變，遮罩零不投遞事件。未設 handler（含 reset 後）返回零值。
++沿用既有事件回呼佇列及保存機制。
++
++平台來源：DOSBox-X `src/ints/mouse.cpp` 的 `case 0x14`：
++<https://github.com/joncampbell123/dosbox-x/blob/master/src/ints/mouse.cpp>。
++
++測試涵蓋空→A、A→B→A、與 `000C` 互通、事件投遞與零遮罩、reset 後交換。
++遊戲位址與滑鼠座標留在呼叫端專案。
+diff --git a/docs/spec/196-mouse-snapshot.md b/docs/spec/196-mouse-snapshot.md
+new file mode 100644
+index 0000000..0f067ff
+--- /dev/null
++++ b/docs/spec/196-mouse-snapshot.md
+@@ -0,0 +1,14 @@
++# 196：滑鼠檔案快照完整性
++
++狀態：READY
++
++DOS 狀態版本升為 v4，保存 Mouse 的全部行為欄位：位置、按鍵、按下／釋放次數與位置、
++相對位移、水平倍率、限制範圍、事件回呼。Calls、Polls、Sets、PressQ、PressReads、Events
++屬診斷紀錄，保存與載入均清空。v3 缺少行為欄位，拒絕讀取。
++
++machine 檔案格式未保存回呼佇列或執行中的暫存器備份，因此保存時拒絕任何 pending／active
++回呼；整合 state.Save 在開啟輸出前檢查，避免失敗仍截短檔案。載入成功清除目的機器的回呼狀態。
++不更改記憶體內 Snapshot，也不承諾任意指令點都能保存。
++
++單元測試覆蓋行為欄位往返、診斷清空、舊版拒絕、pending／active 拒絕與輸出檔保留。
++呼叫端專案另外驗證連續執行與安全快照重播的等價畫面；遊戲位址不進平台程式。
+diff --git a/internal/dos/bios.go b/internal/dos/bios.go
+index 51c27d1..dea2a8a 100644
+--- a/internal/dos/bios.go
++++ b/internal/dos/bios.go
+@@ -279,6 +279,16 @@ func (d *DOS) int33(c *cpu.CPU) {
+ 		m.Handler.Seg, m.Handler.Off = c.Seg[cpu.ES], c.R[cpu.DX]
+ 		m.Handler.Mask, m.Handler.Set = c.R[cpu.CX], true
+ 
++	case 0x0014: // 交換事件處理常式：回傳舊 CX／ES:DX。
++		// docs/spec/195-mouse-handler-exchange.md；先保存舊值再寫入新值。
++		oldSeg, oldOff, oldMask := m.Handler.Seg, m.Handler.Off, m.Handler.Mask
++		if !m.Handler.Set {
++			oldSeg, oldOff, oldMask = 0, 0, 0
++		}
++		m.Handler.Seg, m.Handler.Off = c.Seg[cpu.ES], c.R[cpu.DX]
++		m.Handler.Mask, m.Handler.Set = c.R[cpu.CX], true
++		c.Seg[cpu.ES], c.R[cpu.DX], c.R[cpu.CX] = oldSeg, oldOff, oldMask
++
+ 	case 0x000F: // 設 mickey/pixel 比例：收下就好
+ 
+ 	default:
+diff --git a/internal/dos/dos.go b/internal/dos/dos.go
+index 10e2480..d8c53dd 100644
+--- a/internal/dos/dos.go
++++ b/internal/dos/dos.go
+@@ -362,6 +362,21 @@ type DOS struct {
+ 	MaxHandles uint16
+ 	freeSeg    uint16
+ 
++	// programBlock 是疊底程式（PSPSeg）的 MCB。arena 只保存它後面的
++	// 區塊；把這一格另存，才能在程式直接改寫 MCB 鏈後保留它的 raw name。
++	programBlock memBlock
++
++	// processes 是 DOS 所知的程序，不以「目前 PSP」或配置游標推測 owner。
++	// 只有這裡登錄的 active／suspended／TSR PSP 可出現在已配置 MCB。
++	processes map[uint16]*processRecord
++
++	// mcbSnapshot 是最後一次接受或發布的客體 MCB raw header。下一次服務
++	// 前若客體自己改過鏈，必須先 importer；不能用舊的 Go arena 覆蓋它。
++	mcbSnapshot []mcbHeaderSnapshot
++
++	// MCBImportFailures 是 fail-closed 的診斷收據；拒絕時客體 bytes 不變。
++	MCBImportFailures []MCBImportFailure
++
+ 	// 行程模型（`docs/spec/008` §2、`docs/spec/009` §2）：
+ 	// procStack 是被 EXEC 暫停的父行程，curPSP 是目前行程的 PSP，
+ 	// lastExit 給 AH=4Dh，queue 是監督佇列。
+@@ -621,6 +636,7 @@ func New(m *machine.Machine, root string) *DOS {
+ 		ems:           newEMS(),
+ 		dtaSeg:        machine.PSPSeg,
+ 		dtaOff:        0x80,
++		processes:     map[uint16]*processRecord{},
+ 	}
+ }
+ 
+@@ -640,6 +656,16 @@ func (d *DOS) Install() {
+ 	d.freeSeg = d.M.FreeSeg
+ 	d.arena = nil // 第一次配置時用當時的 freeSeg 建起來
+ 	d.curPSP = machine.PSPSeg
++	d.processes = map[uint16]*processRecord{
++		machine.PSPSeg: {
++			psp:       machine.PSPSeg,
++			lifecycle: processActive,
++			name:      blankMCBName(),
++		},
++	}
++	d.programBlock = newMCBBlock(machine.PSPSeg-1, d.freeSeg-machine.PSPSeg,
++		machine.PSPSeg, blankMCBName())
++	d.captureMCBSnapshot()
+ 	d.installFont()
+ 	d.M.CPU.IntHook = d.handle
+ }
+@@ -866,16 +892,20 @@ func (d *DOS) ArenaDump() []string {
+ 		if b.free {
+ 			st = "自由"
+ 		}
+-		out = append(out, fmt.Sprintf("  seg=%04X size=%04X %s", b.seg, b.size, st))
++		out = append(out, fmt.Sprintf("  seg=%04X size=%04X %s owner=%04X name=%q",
++			b.seg, b.size, st, b.owner, string(b.name[:])))
+ 	}
+ 	return out
+ }
+ 
+ // memBlock 是配置器的一個區塊。seg 是假 MCB 的位置，資料從 seg+1 開始。
+ type memBlock struct {
+-	seg  uint16
+-	size uint16 // 資料段數，不含 MCB
+-	free bool
++	seg   uint16
++	size  uint16 // 資料段數，不含 MCB
++	free  bool
++	owner uint16
++	name  [8]byte
++	raw   [16]byte // 保留 +5..+15 等不由 DOS 服務定義的位元組。
+ }
+ 
+ // OverlayLoad 是一次 `AH=4Bh AL=03` 的載入紀錄。
+diff --git a/internal/dos/exec.go b/internal/dos/exec.go
+index fbe8cc8..83e83ea 100644
+--- a/internal/dos/exec.go
++++ b/internal/dos/exec.go
+@@ -111,20 +111,28 @@ func imageParags(data []byte) uint16 {
+ 
+ // spawn 載入並跳到一支子程式。失敗時設 CF 與 AX，行程疊不變。
+ func (d *DOS) spawn(c *cpu.CPU, name string, p execParams) {
++	parent, ok := d.currentProcess()
++	if !ok {
++		c.R[cpu.AX] = 9
++		setCarry(c)
++		return
++	}
+ 	data, path, ok := d.readProgram(c, name)
+ 	if !ok {
+ 		return
+ 	}
+ 
+-	// 子行程 PSP ＝ freeSeg+1（freeSeg 那格是假 MCB，與 AH=48h 一致）。
+-	psp := d.freeSeg + 1
++	// child 必須從 typed free MCB 取區塊；不能再把全域 freeSeg 當 owner。
+ 	need := imageParags(data)
+-	if avail := uint16(machine.MemTop) - d.freeSeg; need > avail {
++	d.initArena()
++	i := d.pickBlock(need)
++	if i < 0 {
+ 		c.R[cpu.AX] = 8 // 記憶體不足
+-		c.R[cpu.BX] = avail
++		c.R[cpu.BX] = d.largestFree()
+ 		setCarry(c)
+ 		return
+ 	}
++	psp := d.arena[i].seg + 1
+ 
+ 	// 壓父行程框。此時 IP 已指到 int 21h 的下一道，存起來的就是
+ 	// 正確的接續點。
+@@ -145,7 +153,17 @@ func (d *DOS) spawn(c *cpu.CPU, name string, p execParams) {
+ 		return
+ 	}
+ 	d.procStack = append(d.procStack, f)
+-	d.M.WriteMCB(d.freeSeg, false, psp, prog.EndSeg-d.freeSeg)
++	parent.lifecycle = processSuspended
++	d.processes[psp] = &processRecord{psp: psp, parent: parent.psp,
++		lifecycle: processActive, name: blankMCBName()}
++	if got, reserved := d.reserveProcessBlock(need, psp, blankMCBName()); !reserved || got != psp {
++		delete(d.processes, psp)
++		parent.lifecycle = processActive
++		d.procStack = d.procStack[:len(d.procStack)-1]
++		c.R[cpu.AX] = 8
++		setCarry(c)
++		return
++	}
+ 
+ 	// PSP 欄位（`docs/spec/009` §2.4）。
+ 	base := uint32(psp) * 16
+@@ -249,7 +267,6 @@ func (d *DOS) enterProgram(c *cpu.CPU, prog *machine.Program) {
+ 	c.Seg[cpu.SS], c.R[cpu.SP] = prog.SS, prog.SP
+ 	c.Seg[cpu.DS], c.Seg[cpu.ES] = prog.PSPSeg, prog.PSPSeg
+ 	d.curPSP = prog.PSPSeg
+-	d.freeSeg = prog.EndSeg
+ }
+ 
+ // copyCmdTail 把 EXEC 參數區塊指的命令列尾拷進子 PSP+80h。
+@@ -275,6 +292,17 @@ func (d *DOS) copyCmdTail(psp uint32, tailSeg, tailOff uint16) {
+ // tsr 為真表示走 `AH=31h` 的常駐語意，keep 是它的 DX
+ // （從 PSP 起保留的段數）；非 TSR 兩者都給 false／0。
+ func (d *DOS) terminate(c *cpu.CPU, code uint8, tsr bool, keep uint16) {
++	current, ok := d.currentProcess()
++	if !ok {
++		c.R[cpu.AX] = 9
++		setCarry(c)
++		return
++	}
++	if tsr && !d.retainTSR(keep) {
++		c.R[cpu.AX] = 9
++		setCarry(c)
++		return
++	}
+ 	d.lastExit = uint16(code)
+ 	// 記到**目前行程**那一筆——不是最後一筆。殼結束時最後一筆是它的
+ 	// 子行程（早就 TSR 了），寫過去會把殼的離開碼記到 FMDRV 頭上。
+@@ -295,6 +323,8 @@ func (d *DOS) terminate(c *cpu.CPU, code uint8, tsr bool, keep uint16) {
+ 		// 子行程開的檔要關掉，DOS 保管的三個向量要還原。
+ 		if !tsr {
+ 			d.closeHandlesOf(d.curPSP)
++			d.releaseProcessBlocks(d.curPSP)
++			current.lifecycle = processTerminated
+ 		}
+ 		for i, n := range savedVectors {
+ 			d.M.Write16(uint32(n)*4, f.ivt[i][0])
+@@ -302,35 +332,24 @@ func (d *DOS) terminate(c *cpu.CPU, code uint8, tsr bool, keep uint16) {
+ 		}
+ 
+ 		c.R, c.Seg, c.IP, c.Flags = f.r, f.seg, f.ip, f.fl
+-		if tsr {
+-			// TSR：常駐區保留。bump 配置器沒有洞的觀念，所以
+-			// **只能往前推不能往回收**（`docs/spec/008` §2.1）——
+-			// TSR 之前 AH=48h 拿走並留在常駐程式名下的區塊跟著保留。
+-			if k := d.curPSP + keep; k > d.freeSeg {
+-				d.freeSeg = k
+-			}
+-		} else {
+-			// 非 TSR：整個子行程（含它 AH=48h 拿走的）LIFO 回收。
+-			// 真 DOS 的 AH=4Ch 會釋放該 PSP 擁有的所有 MCB；bump 配置器
+-			// 只升不降的話，下一支 EXEC 進來的程式會被載到不該有的高段
+-			// ——而且它自己完全察覺不到，只有在向 DOS 要不到記憶體時
+-			// 才顯現（`docs/spec/010` §1）。
+-			d.freeSeg = f.freeSeg
+-		}
+ 		d.curPSP = f.psp
++		if parent := d.processes[f.psp]; parent != nil {
++			parent.lifecycle = processActive
++		}
++		d.syncMCB()
+ 		clearCarry(c)
+ 		return
+ 	}
+ 
+ 	// 疊底行程結束。非 TSR 把記憶體回收到它的 PSP 前一格，
+ 	// 讓監督佇列的下一支從這裡開始。
+-	if tsr {
+-		if k := d.curPSP + keep; k > d.freeSeg {
+-			d.freeSeg = k
++	if !tsr {
++		if d.curPSP != machine.PSPSeg {
++			d.releaseProcessBlocks(d.curPSP)
+ 		}
+-	} else if d.curPSP > 0 {
+-		d.freeSeg = d.curPSP - 1
++		current.lifecycle = processTerminated
+ 	}
++	d.syncMCB()
+ 
+ 	// 監督佇列（`docs/spec/009` §4）：有排就跑下一支，沒有才算程式結束。
+ 	if len(d.queue) > 0 {
+@@ -375,17 +394,26 @@ func (d *DOS) spawnQueued(c *cpu.CPU, q Queued) {
+ 		d.Missing = append(d.Missing, q.Name)
+ 		return
+ 	}
+-	psp := d.freeSeg + 1
+-	if need := imageParags(data); psp+need > machine.MemTop {
++	need := imageParags(data)
++	d.initArena()
++	i := d.pickBlock(need)
++	if i < 0 {
+ 		d.Missing = append(d.Missing, q.Name+"（記憶體不足）")
+ 		return
+ 	}
++	psp := d.arena[i].seg + 1
+ 	prog, err := d.M.LoadProgramAt(psp, data)
+ 	if err != nil {
+ 		d.Missing = append(d.Missing, fmt.Sprintf("%s（%v）", q.Name, err))
+ 		return
+ 	}
+-	d.M.WriteMCB(d.freeSeg, false, psp, prog.EndSeg-d.freeSeg)
++	d.processes[psp] = &processRecord{psp: psp, parent: machine.PSPSeg,
++		lifecycle: processActive, name: blankMCBName()}
++	if got, reserved := d.reserveProcessBlock(need, psp, blankMCBName()); !reserved || got != psp {
++		delete(d.processes, psp)
++		d.Missing = append(d.Missing, q.Name+"（記憶體不足）")
++		return
++	}
+ 	base := uint32(psp) * 16
+ 	d.M.Write16(base+0x16, psp) // 疊底的父行程是自己
+ 
+diff --git a/internal/dos/exec_test.go b/internal/dos/exec_test.go
+index 57a3bc2..62a11f3 100644
+--- a/internal/dos/exec_test.go
++++ b/internal/dos/exec_test.go
+@@ -124,8 +124,14 @@ func TestTSRKeepsMemory(t *testing.T) {
+ 			t.Fatal(err)
+ 		}
+ 	}
+-	if d.freeSeg != childPSP+0x40 {
+-		t.Errorf("TSR 之後 freeSeg=%04X，預期 %04X（PSP+40h）", d.freeSeg, childPSP+0x40)
++	if d.freeSeg != 0x2000 {
++		t.Errorf("TSR 不可改寫 root block 邊界：freeSeg=%04X，預期 2000", d.freeSeg)
++	}
++	if owner, size := m.Read16(uint32(childPSP-1)*16+1), m.Read16(uint32(childPSP-1)*16+3); owner != childPSP || size != 0x40 {
++		t.Errorf("TSR MCB owner/size=%04X/%04X，預期 %04X/0040", owner, size, childPSP)
++	}
++	if p := d.processes[childPSP]; p == nil || p.lifecycle != processTSR {
++		t.Errorf("TSR child 沒有以 retained registry 記錄：%+v", p)
+ 	}
+ 	call(m, d, 0x21, 0x4D00)
+ 	if ax := m.CPU.R[cpu.AX]; ax != 0x0007 {
+@@ -408,8 +414,9 @@ func TestChildExitReclaimsMemory(t *testing.T) {
+ 	c.Seg[cpu.ES] = 0x5000
+ 	c.R[cpu.BX] = 0x0100
+ 	call(m, d, 0x21, 0x4B00)
+-	if d.freeSeg <= before {
+-		t.Fatalf("EXEC 之後配置游標要往上走：%04X → %04X", before, d.freeSeg)
++	childPSP := d.curPSP
++	if owner := m.Read16(uint32(childPSP-1)*16 + 1); owner != childPSP {
++		t.Fatalf("EXEC child MCB owner=%04X，預期 child PSP %04X", owner, childPSP)
+ 	}
+ 	for i := 0; i < 100 && !d.Exited && len(d.procStack) > 0; i++ {
+ 		if err := m.Step(); err != nil {
+@@ -420,7 +427,7 @@ func TestChildExitReclaimsMemory(t *testing.T) {
+ 		t.Fatal("子程式沒有結束")
+ 	}
+ 	if d.freeSeg != before {
+-		t.Errorf("子程式結束後配置游標 ＝ %04X，預期退回 %04X", d.freeSeg, before)
++		t.Errorf("子程式結束不該改 root block 邊界：%04X，預期 %04X", d.freeSeg, before)
+ 	}
+ 	// 回收之後，下一支子程式要能載回同一個位置。
+ 	call(m, d, 0x21, 0x4B00)
+diff --git a/internal/dos/int21.go b/internal/dos/int21.go
+index 45ea8f1..2ebe89e 100644
+--- a/internal/dos/int21.go
++++ b/internal/dos/int21.go
+@@ -37,7 +37,9 @@ func (d *DOS) int21(c *cpu.CPU) {
+ 	}
+ 	switch fn {
+ 	case 0x00, 0x4C:
+-		d.exit(c, al(c))
++		if d.prepareMCBCall(c) {
++			d.exit(c, al(c))
++		}
+ 
+ 	case 0x01, 0x07, 0x08:
+ 		d.conIn(c, fn)
+@@ -203,26 +205,47 @@ func (d *DOS) int21(c *cpu.CPU) {
+ 		clearCarry(c)
+ 
+ 	case 0x48:
+-		d.alloc(c)
+-		d.syncMCB()
++		if d.prepareMCBCall(c) {
++			d.alloc(c)
++			if c.Flags&cpu.CF == 0 {
++				d.syncMCB()
++			}
++		}
+ 	case 0x49:
+-		d.release(c)
+-		d.syncMCB()
++		if d.prepareMCBCall(c) {
++			d.release(c)
++			if c.Flags&cpu.CF == 0 {
++				d.syncMCB()
++			}
++		}
+ 	case 0x4A:
+-		d.setBlock(c)
+-		d.syncMCB()
++		if d.prepareMCBCall(c) {
++			d.setBlock(c)
++			if c.Flags&cpu.CF == 0 {
++				d.syncMCB()
++			}
++		}
+ 	case 0x31: // TSR 並結束（`docs/spec/008`）
+-		d.tsr(c)
++		if d.prepareMCBCall(c) {
++			d.tsr(c)
++		}
+ 	case 0x4B: // EXEC（`docs/spec/007` §2／`docs/spec/009`：AL=00h 與 AL=03h）
+-		d.exec(c)
++		if d.prepareMCBCall(c) {
++			d.exec(c)
++			if c.Flags&cpu.CF == 0 {
++				d.syncMCB()
++			}
++		}
+ 	case 0x4D: // 取子行程回傳碼（`docs/spec/009` §3）
+ 		d.getExitCode(c)
+ 
+ 	case 0x51, 0x62: // 取目前行程的 PSP → BX
+ 		// **這是 `KI.EXE` 的第一道指令。** 不實作的話 BX 是呼叫端留下的值，
+ 		// 接著 `mov ds,bx / mov al,ds:80h` 就把垃圾當成命令列長度。
+-		c.R[cpu.BX] = machine.PSPSeg
+-		clearCarry(c)
++		if d.prepareMCBCall(c) {
++			c.R[cpu.BX] = d.curPSP
++			clearCarry(c)
++		}
+ 	case 0x4E:
+ 		d.findFirst(c)
+ 	case 0x4F: // Find Next（`docs/knowledge-base/010`）
+@@ -277,9 +300,11 @@ func (d *DOS) int21(c *cpu.CPU) {
+ 		d.extendedOpen(c)
+ 
+ 	case 0x52: // 取 DOS 內部結構表（list of lists）→ ES:BX
+-		c.Seg[cpu.ES] = machine.LOLSeg
+-		c.R[cpu.BX] = 0x10
+-		clearCarry(c)
++		if d.prepareMCBCall(c) {
++			c.Seg[cpu.ES] = machine.LOLSeg
++			c.R[cpu.BX] = 0x10
++			clearCarry(c)
++		}
+ 
+ 	case 0x38: // 取國別資訊（`docs/spec/010`）
+ 		d.country(c)
+@@ -468,66 +493,106 @@ func availFrom(seg uint16) uint16 {
+ func (d *DOS) setBlock(c *cpu.CPU) {
+ 	want := c.R[cpu.BX]
+ 	blk := c.Seg[cpu.ES]
+-	avail := availFrom(blk)
+-	if want > avail {
+-		d.MemOps = append(d.MemOps, MemOp{Fn: 0x4A, BX: want, ES: blk,
+-			AX: avail, Step: d.M.Steps})
+-		c.R[cpu.BX] = avail
+-		c.R[cpu.AX] = 8 // 記憶體不足
++	if _, ok := d.currentProcess(); !ok {
++		c.R[cpu.AX] = 9
+ 		setCarry(c)
+ 		return
+ 	}
+-	d.MemOps = append(d.MemOps, MemOp{Fn: 0x4A, BX: want, ES: blk,
+-		AX: 0, Step: d.M.Steps, OK: true})
+-	d.Allocs = append(d.Allocs, AllocOp{Step: d.M.Steps, Fn: 0x4A, Want: want, Seg: blk, OK: true})
+-	rec := ResizeCall{Seg: blk, Want: want, FreeSeg: d.freeSeg, CS: c.Seg[cpu.CS], IP: c.IP}
+-	rec.Before, rec.InArena = d.blockSize(blk)
+-	// 程式調整自己的 PSP 區塊之後，後面那塊才是可配置的空間。
+-	//
+-	// ⚠ **要跟著降，不能只升。** 第一版寫成 `if blk+want+1 > d.freeSeg`，
+-	// 只在變大時更新。那讓「記憶體探測」變成單向的災難：程式先要
+-	// `want=9EFFh`（能拿多少拿多少）探出上限，freeSeg 被推到 A000h
+-	// ＝ 可配置區歸零；接著程式縮回它真正要的大小，freeSeg 卻留在 A000h。
+-	// 之後每一次配置都失敗，而**失敗的地方離這裡很遠**——
+-	// 智冠《三國演義》是在載 overlay 時拿到一個荒謬的載入段
+-	// （0110h，正好蓋在自己的映像上），然後死在 overlay 自己的 C runtime。
+-	//
+-	// DOS 的語意是「區塊邊界移到這裡」，升降都算。
+-	// ⚠ **判準是「目前這個行程的 PSP」，不是主程式的 PSP。** 只認
+-	// machine.PSPSeg 的話，EXEC 起來的子行程把自己的區塊撐大之後
+-	// freeSeg 停在它的映像結尾，接下來的 AH=48h 就**把子行程自己的
+-	// 記憶體再配一次出去**——配到的緩衝區蓋在它的堆疊上，讀個檔就把
+-	// 返回位址換成檔案內容，然後 retf 到一個看起來很像程式碼的地方。
+-	// （源平合戰的 OPEN.EXE：AH=4Ah 撐到 8340 段、擁有到 28A3h，
+-	// 而 AH=48h 從 1A50h 配下去，讀 LOGO.GP 蓋掉堆疊。）
+-	if blk == d.curPSP {
+-		// ⚠ **這裡沒有檢查 arena 裡別人已配走的區塊。**
+-		//
+-		// 試過加上檢查（放大時上限取「第一個已配置區塊的起點」，
+-		// 那是比較接近 DOS 語意的做法），結果讓智冠《三國演義》**更早死**：
+-		// 探測回報上限 5150h 之後，程式當場判定記憶體不足、
+-		// 連 `AH=4Bh` 都沒發出就印 `R6005 - not enough memory on exec`。
+-		// 修正前它至少走到讀取資料容器。
+-		//
+-		// 兩種行為哪一個才是真 DOS，**目前沒有證據**——要拿 DOSBox-X
+-		// 當交叉 oracle 量一次。在那之前保留原本的寬鬆做法：
+-		// 它讓目標程式走得更遠，而走得更遠才有更多可觀測的東西。
+-		// 這是刻意的取捨，不是疏漏。
++
++	// 疊底 root 的 MCB 不在 arena；它只能吃掉緊鄰的自由區塊。
++	if blk == machine.PSPSeg && d.curPSP == machine.PSPSeg {
++		// AH=4Ah 對 PSP root 的 BX 不含前面的 MCB 段；客體 MCB 的
++		// size 因而是 want+1。OPENING.EXE 的 BX=1B41h 必須發布
++		// 00FF size=1B42h、下一格 1C42h，少這一段就會改變 raw chain。
++		current := d.programBlock.size - 1
++		max := current
++		if d.arena == nil {
++			max = availFrom(blk)
++		} else if len(d.arena) > 0 && d.arena[0].free {
++			max += 1 + d.arena[0].size
++		}
++		if want > max {
++			c.R[cpu.BX], c.R[cpu.AX] = max, 8
++			setCarry(c)
++			return
++		}
+ 		d.setPSPBlock(blk + want + 1)
++		d.programBlock.size = want + 1
++		clearCarry(c)
++		return
+ 	}
+-	// arena 內的區塊走真正的 resize（規格 009）。不在 arena 內的
+-	// （PSP、映像本體）維持原本的行為：那條路是記憶體探測協定，
+-	// 上面的註解記著為什麼不能一律報成功。
+-	if d.arena != nil && d.resize(c, blk, want) {
+-		rec.After, _ = d.blockSize(blk)
+-		rec.OK = c.Flags&cpu.CF == 0
+-		d.Resizes = append(d.Resizes, rec)
++
++	// child／一般配置區塊只能由它的 owner 調整；resize 會給 AX=8/BX=max。
++	if d.resize(c, blk, want) {
+ 		return
+ 	}
+-	clearCarry(c)
+-	rec.After, _ = d.blockSize(blk)
+-	rec.OK = true
+-	d.Resizes = append(d.Resizes, rec)
++	// 不認識的 ES 不是「成功但沒效果」：它可能是別的程序的 MCB。
++	c.R[cpu.AX] = 9
++	setCarry(c)
++	return
++
++	/*
++		avail := availFrom(blk)
++		if want > avail {
++			d.MemOps = append(d.MemOps, MemOp{Fn: 0x4A, BX: want, ES: blk,
++				AX: avail, Step: d.M.Steps})
++			c.R[cpu.BX] = avail
++			c.R[cpu.AX] = 8 // 記憶體不足
++			setCarry(c)
++			return
++		}
++		d.MemOps = append(d.MemOps, MemOp{Fn: 0x4A, BX: want, ES: blk,
++			AX: 0, Step: d.M.Steps, OK: true})
++		d.Allocs = append(d.Allocs, AllocOp{Step: d.M.Steps, Fn: 0x4A, Want: want, Seg: blk, OK: true})
++		rec := ResizeCall{Seg: blk, Want: want, FreeSeg: d.freeSeg, CS: c.Seg[cpu.CS], IP: c.IP}
++		rec.Before, rec.InArena = d.blockSize(blk)
++		// 程式調整自己的 PSP 區塊之後，後面那塊才是可配置的空間。
++		//
++		// ⚠ **要跟著降，不能只升。** 第一版寫成 `if blk+want+1 > d.freeSeg`，
++		// 只在變大時更新。那讓「記憶體探測」變成單向的災難：程式先要
++		// `want=9EFFh`（能拿多少拿多少）探出上限，freeSeg 被推到 A000h
++		// ＝ 可配置區歸零；接著程式縮回它真正要的大小，freeSeg 卻留在 A000h。
++		// 之後每一次配置都失敗，而**失敗的地方離這裡很遠**——
++		// 智冠《三國演義》是在載 overlay 時拿到一個荒謬的載入段
++		// （0110h，正好蓋在自己的映像上），然後死在 overlay 自己的 C runtime。
++		//
++		// DOS 的語意是「區塊邊界移到這裡」，升降都算。
++		// ⚠ **判準是「目前這個行程的 PSP」，不是主程式的 PSP。** 只認
++		// machine.PSPSeg 的話，EXEC 起來的子行程把自己的區塊撐大之後
++		// freeSeg 停在它的映像結尾，接下來的 AH=48h 就**把子行程自己的
++		// 記憶體再配一次出去**——配到的緩衝區蓋在它的堆疊上，讀個檔就把
++		// 返回位址換成檔案內容，然後 retf 到一個看起來很像程式碼的地方。
++		// （源平合戰的 OPEN.EXE：AH=4Ah 撐到 8340 段、擁有到 28A3h，
++		// 而 AH=48h 從 1A50h 配下去，讀 LOGO.GP 蓋掉堆疊。）
++		if blk == d.curPSP {
++			// ⚠ **這裡沒有檢查 arena 裡別人已配走的區塊。**
++			//
++			// 試過加上檢查（放大時上限取「第一個已配置區塊的起點」，
++			// 那是比較接近 DOS 語意的做法），結果讓智冠《三國演義》**更早死**：
++			// 探測回報上限 5150h 之後，程式當場判定記憶體不足、
++			// 連 `AH=4Bh` 都沒發出就印 `R6005 - not enough memory on exec`。
++			// 修正前它至少走到讀取資料容器。
++			//
++			// 兩種行為哪一個才是真 DOS，**目前沒有證據**——要拿 DOSBox-X
++			// 當交叉 oracle 量一次。在那之前保留原本的寬鬆做法：
++			// 它讓目標程式走得更遠，而走得更遠才有更多可觀測的東西。
++			// 這是刻意的取捨，不是疏漏。
++			d.setPSPBlock(blk + want + 1)
++		}
++		// arena 內的區塊走真正的 resize（規格 009）。不在 arena 內的
++		// （PSP、映像本體）維持原本的行為：那條路是記憶體探測協定，
++		// 上面的註解記著為什麼不能一律報成功。
++		if d.arena != nil && d.resize(c, blk, want) {
++			rec.After, _ = d.blockSize(blk)
++			rec.OK = c.Flags&cpu.CF == 0
++			d.Resizes = append(d.Resizes, rec)
++			return
++		}
++		clearCarry(c)
++		rec.After, _ = d.blockSize(blk)
++		rec.OK = true
++		d.Resizes = append(d.Resizes, rec)
++	*/
+ }
+ 
+ // blockSize 查 arena 裡以 seg 為資料起點的區塊有多少段。
+@@ -554,7 +619,7 @@ func (d *DOS) initArena() {
+ 		d.arena = []memBlock{}
+ 		return
+ 	}
+-	d.arena = []memBlock{{seg: base, size: uint16(machine.MemTop) - base - 1, free: true}}
++	d.arena = []memBlock{newMCBBlock(base, uint16(machine.MemTop)-base-1, 0, blankMCBName())}
+ }
+ 
+ // largestFree 是目前最大的一塊自由空間（資料段數）。
+@@ -588,7 +653,7 @@ func (d *DOS) setPSPBlock(newFree uint16) {
+ 	case newFree < base && base-newFree >= 2:
+ 		// 縮小：[newFree, base) 回到可配置區。至少要 2 段才放得下
+ 		// 一個 MCB ＋ 一段資料。
+-		d.arena = append([]memBlock{{seg: newFree, size: base - newFree - 1, free: true}},
++		d.arena = append([]memBlock{newMCBBlock(newFree, base-newFree-1, 0, blankMCBName())},
+ 			d.arena...)
+ 		d.coalesce()
+ 	case newFree > base:
+@@ -617,6 +682,12 @@ func (d *DOS) setPSPBlock(newFree uint16) {
+ // **而且沒有任何錯誤訊息**（`docs/spec/009` §1）。
+ func (d *DOS) alloc(c *cpu.CPU) {
+ 	d.initArena()
++	if _, ok := d.currentProcess(); !ok {
++		c.R[cpu.AX] = 9
++		setCarry(c)
++		d.noteMem(c, 0x48, c.R[cpu.BX], 0, 0, false)
++		return
++	}
+ 	want := c.R[cpu.BX]
+ 	if i := d.pickBlock(want); i >= 0 {
+ 		d.splitBlock(c, i, want)
+@@ -656,19 +727,22 @@ func (d *DOS) pickBlock(want uint16) int {
+ 
+ // splitBlock 把第 i 塊切出 want 段給呼叫端。
+ func (d *DOS) splitBlock(c *cpu.CPU, i int, want uint16) {
++	p, _ := d.currentProcess()
+ 	{
+ 		b := &d.arena[i]
+ 		// 切得出一塊有意義的剩餘（至少 1 段 MCB ＋ 1 段資料）才切，
+ 		// 否則整塊給出去——切出 0 段的區塊只會讓表變長。
+ 		if b.size >= want+2 {
+-			rest := memBlock{seg: b.seg + want + 1, size: b.size - want - 1, free: true}
++			rest := newMCBBlock(b.seg+want+1, b.size-want-1, 0, blankMCBName())
+ 			b.size = want
+ 			b.free = false
++			b.owner, b.name = p.psp, p.name
+ 			d.arena = append(d.arena, memBlock{})
+ 			copy(d.arena[i+2:], d.arena[i+1:])
+ 			d.arena[i+1] = rest
+ 		} else {
+ 			b.free = false
++			b.owner, b.name = p.psp, p.name
+ 		}
+ 	}
+ 	c.R[cpu.AX] = d.arena[i].seg + 1
+@@ -698,8 +772,15 @@ func (d *DOS) release(c *cpu.CPU) {
+ 		if d.arena[i].seg+1 != seg {
+ 			continue
+ 		}
++		if d.arena[i].free || d.arena[i].owner != d.curPSP {
++			c.R[cpu.AX] = 9
++			setCarry(c)
++			d.noteMem(c, 0x49, 0, seg, 0, false)
++			return
++		}
+ 		size := d.arena[i].size
+ 		d.arena[i].free = true
++		d.arena[i].owner = 0
+ 		d.coalesce()
+ 		clearCarry(c)
+ 		d.noteMem(c, 0x49, 0, seg, size, true)
+@@ -731,11 +812,16 @@ func (d *DOS) resize(c *cpu.CPU, seg, want uint16) bool {
+ 		if b.seg+1 != seg {
+ 			continue
+ 		}
++		if b.free || b.owner != d.curPSP {
++			c.R[cpu.AX] = 9
++			setCarry(c)
++			return true
++		}
+ 		switch {
+ 		case want <= b.size:
+ 			// 縮小：後半段切出來標為自由，再與後面合併。
+ 			if b.size >= want+2 {
+-				rest := memBlock{seg: b.seg + want + 1, size: b.size - want - 1, free: true}
++				rest := newMCBBlock(b.seg+want+1, b.size-want-1, 0, blankMCBName())
+ 				b.size = want
+ 				d.arena = append(d.arena, memBlock{})
+ 				copy(d.arena[i+2:], d.arena[i+1:])
+@@ -749,7 +835,7 @@ func (d *DOS) resize(c *cpu.CPU, seg, want uint16) bool {
+ 			d.arena = append(d.arena[:i+1], d.arena[i+2:]...)
+ 			// 吃太多就把多的再吐回去。
+ 			if b.size >= want+2 {
+-				rest := memBlock{seg: b.seg + want + 1, size: b.size - want - 1, free: true}
++				rest := newMCBBlock(b.seg+want+1, b.size-want-1, 0, blankMCBName())
+ 				b.size = want
+ 				d.arena = append(d.arena, memBlock{})
+ 				copy(d.arena[i+2:], d.arena[i+1:])
+@@ -770,32 +856,3 @@ func (d *DOS) resize(c *cpu.CPU, seg, want uint16) bool {
+ 	}
+ 	return false
+ }
+-
+-// syncMCB 把配置器的區塊表發布成客體記憶體裡的 MCB 鏈。
+-//
+-// **配置器的狀態只活在 Go 這一側是不夠的。** DOS 程式看得到 MCB，
+-// 而且會走它：智冠《三國演義》在載入下一個模組之前，從自己的 PSP
+-// 沿著鏈往上加，算出「我總共構得到多少段」再拿去要記憶體
+-// （`docs/spec/009` 附錄五，反組譯在 `0583:3068`）。鏈沒同步的話
+-// 那個數字與事實無關，而**程式不會因此報錯**——它只是拿錯的數字
+-// 去做決定，然後在很遠的地方失敗。
+-//
+-// 鏈的形狀：`PSPSeg−1` 是程式自己的區塊（涵蓋 PSP ＋ 映像），
+-// 接著是 arena 的每一塊，最後一塊掛 `Z`。arena 相鄰無空隙
+-// （每塊佔 1 段 MCB ＋ size 段資料），所以直接照順序寫就是一條合法的鏈。
+-func (d *DOS) syncMCB() {
+-	d.M.WriteMCB(machine.PSPSeg-1, len(d.arena) == 0, machine.PSPSeg,
+-		d.freeSeg-machine.PSPSeg)
+-	for i, b := range d.arena {
+-		owner := uint16(machine.PSPSeg)
+-		if b.free {
+-			owner = 0
+-		}
+-		d.M.WriteMCB(b.seg, i == len(d.arena)-1, owner, b.size)
+-	}
+-	if len(d.arena) == 0 {
+-		// 還沒配置過：可配置區整塊掛成自由的鏈尾。
+-		d.M.WriteMCB(d.freeSeg, true, 0, uint16(machine.MemTop)-d.freeSeg-1)
+-		d.M.WriteMCB(machine.PSPSeg-1, false, machine.PSPSeg, d.freeSeg-machine.PSPSeg)
+-	}
+-}
+diff --git a/internal/dos/mcb.go b/internal/dos/mcb.go
+new file mode 100644
+index 0000000..e72579a
+--- /dev/null
++++ b/internal/dos/mcb.go
+@@ -0,0 +1,352 @@
++package dos
++
++import (
++	"fmt"
++
++	"github.com/wicanr2/dosgolem/internal/cpu"
++	"github.com/wicanr2/dosgolem/internal/machine"
++)
++
++// processLifecycle 是 registry 裡程序可用於 MCB owner 檢查的生命週期。
++// terminated 不接受為 raw MCB owner；TSR 僅在完整一致的 retained chain 中保留。
++type processLifecycle uint8
++
++const (
++	processActive processLifecycle = iota + 1
++	processSuspended
++	processTSR
++	processTerminated
++)
++
++type processRecord struct {
++	psp       uint16
++	parent    uint16
++	lifecycle processLifecycle
++	name      [8]byte
++	blocks    []uint16
++}
++
++// MCBHeaderSnapshot 是一格 raw MCB header 的可診斷副本。
++type MCBHeaderSnapshot struct {
++	Seg uint16
++	Raw [16]byte
++}
++
++// MCBImportFailure 保存被拒絕的鏈前綴。它不會觸碰客體記憶體。
++type MCBImportFailure struct {
++	Reason  string
++	Records []MCBHeaderSnapshot
++}
++
++type mcbHeaderSnapshot = MCBHeaderSnapshot
++
++func blankMCBName() [8]byte {
++	return [8]byte{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
++}
++
++func newMCBBlock(seg, size, owner uint16, name [8]byte) memBlock {
++	b := memBlock{seg: seg, size: size, free: owner == 0, owner: owner, name: name}
++	b.raw[0] = 'M'
++	b.raw[8] = name[0]
++	copy(b.raw[8:16], name[:])
++	b.applyRaw(false)
++	return b
++}
++
++func readMCBBlock(m *machine.Machine, seg uint16) memBlock {
++	var b memBlock
++	b.seg = seg
++	lin := uint32(seg) * 16
++	for i := range b.raw {
++		b.raw[i] = m.Read8(lin + uint32(i))
++	}
++	b.owner = uint16(b.raw[1]) | uint16(b.raw[2])<<8
++	b.size = uint16(b.raw[3]) | uint16(b.raw[4])<<8
++	b.free = b.owner == 0
++	copy(b.name[:], b.raw[8:16])
++	return b
++}
++
++func (b *memBlock) applyRaw(last bool) {
++	if last {
++		b.raw[0] = 'Z'
++	} else {
++		b.raw[0] = 'M'
++	}
++	b.raw[1], b.raw[2] = byte(b.owner), byte(b.owner>>8)
++	b.raw[3], b.raw[4] = byte(b.size), byte(b.size>>8)
++	copy(b.raw[8:16], b.name[:])
++}
++
++func (d *DOS) writeMCBBlock(b *memBlock, last bool) {
++	b.applyRaw(last)
++	d.M.WriteBytes(uint32(b.seg)*16, b.raw[:])
++}
++
++func (d *DOS) captureMCBSnapshot() {
++	d.mcbSnapshot = nil
++	seg := d.M.Read16(uint32(machine.LOLSeg)*16 + 0x0E)
++	for i := 0; i < 512 && seg < uint16(machine.MemTop); i++ {
++		b := readMCBBlock(d.M, seg)
++		d.mcbSnapshot = append(d.mcbSnapshot, mcbHeaderSnapshot{Seg: seg, Raw: b.raw})
++		if b.raw[0] == 'Z' {
++			return
++		}
++		if b.raw[0] != 'M' || b.size == 0 {
++			return
++		}
++		next := int(seg) + 1 + int(b.size)
++		if next <= int(seg) || next >= machine.MemTop {
++			return
++		}
++		seg = uint16(next)
++	}
++}
++
++func (d *DOS) mcbMatchesSnapshot() bool {
++	if len(d.mcbSnapshot) == 0 {
++		return false
++	}
++	for _, s := range d.mcbSnapshot {
++		lin := uint32(s.Seg) * 16
++		for i, want := range s.Raw {
++			if d.M.Read8(lin+uint32(i)) != want {
++				return false
++			}
++		}
++	}
++	return true
++}
++
++func (d *DOS) noteMCBImportFailure(reason string, records []mcbHeaderSnapshot) {
++	d.MCBImportFailures = append(d.MCBImportFailures, MCBImportFailure{
++		Reason:  reason,
++		Records: append([]mcbHeaderSnapshot(nil), records...),
++	})
++}
++
++func (d *DOS) processCanOwn(psp uint16) bool {
++	p := d.processes[psp]
++	return p != nil && (p.lifecycle == processActive || p.lifecycle == processSuspended || p.lifecycle == processTSR)
++}
++
++func (d *DOS) currentProcess() (*processRecord, bool) {
++	p := d.processes[d.curPSP]
++	return p, p != nil && p.lifecycle == processActive
++}
++
++func (d *DOS) rebuildProcessBlocks() {
++	for _, p := range d.processes {
++		p.blocks = nil
++	}
++	if p := d.processes[d.programBlock.owner]; p != nil && !d.programBlock.free {
++		p.blocks = append(p.blocks, d.programBlock.seg)
++	}
++	for _, b := range d.arena {
++		if b.free {
++			continue
++		}
++		if p := d.processes[b.owner]; p != nil {
++			p.blocks = append(p.blocks, b.seg)
++		}
++	}
++}
++
++// reserveProcessBlock 從 arena 取一格給已登錄程序。它不碰 CPU 暫存器，供
++// EXEC 在 LoadProgramAt 成功後以同一份 typed model 登錄 child MCB。
++func (d *DOS) reserveProcessBlock(want, owner uint16, name [8]byte) (uint16, bool) {
++	d.initArena()
++	i := d.pickBlock(want)
++	if i < 0 {
++		return 0, false
++	}
++	b := &d.arena[i]
++	if b.size >= want+2 {
++		rest := newMCBBlock(b.seg+want+1, b.size-want-1, 0, blankMCBName())
++		b.size = want
++		d.arena = append(d.arena, memBlock{})
++		copy(d.arena[i+2:], d.arena[i+1:])
++		d.arena[i+1] = rest
++		// append 可能搬移底層陣列，不能再用舊 pointer 寫 owner。
++		b = &d.arena[i]
++	}
++	b.free, b.owner, b.name = false, owner, name
++	d.rebuildProcessBlocks()
++	return b.seg + 1, true
++}
++
++func (d *DOS) releaseProcessBlocks(psp uint16) {
++	for i := range d.arena {
++		if !d.arena[i].free && d.arena[i].owner == psp {
++			d.arena[i].free, d.arena[i].owner = true, 0
++		}
++	}
++	d.coalesce()
++	d.rebuildProcessBlocks()
++}
++
++// retainTSR 對已登錄 child 只接受「初始程序 block、無額外配置、與 raw chain
++// 一致」的局部模型。其他 TSR 生命週期仍在 READY 規格的停止線外。
++func (d *DOS) retainTSR(keep uint16) bool {
++	p, ok := d.currentProcess()
++	if !ok || p.psp == machine.PSPSeg || len(p.blocks) != 1 || p.blocks[0]+1 != p.psp {
++		return false
++	}
++	i := -1
++	for n := range d.arena {
++		if d.arena[n].seg == p.blocks[0] && !d.arena[n].free && d.arena[n].owner == p.psp {
++			i = n
++			break
++		}
++	}
++	if i < 0 || keep == 0 {
++		return false
++	}
++	b := &d.arena[i]
++	switch {
++	case keep == b.size:
++	case keep < b.size:
++		if b.size < keep+2 {
++			return false
++		}
++		rest := newMCBBlock(b.seg+keep+1, b.size-keep-1, 0, blankMCBName())
++		b.size = keep
++		d.arena = append(d.arena, memBlock{})
++		copy(d.arena[i+2:], d.arena[i+1:])
++		d.arena[i+1] = rest
++		d.coalesce()
++	case i+1 < len(d.arena) && d.arena[i+1].free && b.size+1+d.arena[i+1].size >= keep:
++		available := b.size + 1 + d.arena[i+1].size
++		d.arena = append(d.arena[:i+1], d.arena[i+2:]...)
++		b = &d.arena[i]
++		b.size = available
++		if b.size >= keep+2 {
++			rest := newMCBBlock(b.seg+keep+1, b.size-keep-1, 0, blankMCBName())
++			b.size = keep
++			d.arena = append(d.arena, memBlock{})
++			copy(d.arena[i+2:], d.arena[i+1:])
++			d.arena[i+1] = rest
++		}
++	default:
++		return false
++	}
++	p.lifecycle = processTSR
++	d.rebuildProcessBlocks()
++	return true
++}
++
++// ensureMCB 只在客體未改動 header 時沿用 typed model；直接改寫時必須完整匯入。
++func (d *DOS) ensureMCB() bool {
++	// 既有測試會在 Install 後設定 freeSeg；那是尚未發布的本地模型變更，
++	// 不是客體 direct write，必須先依新邊界建鏈。
++	if d.arena == nil && d.programBlock.seg+1+d.programBlock.size != d.freeSeg {
++		d.programBlock.size = d.freeSeg - machine.PSPSeg
++		d.programBlock.owner = machine.PSPSeg
++		d.programBlock.free = false
++		d.initArena()
++		d.syncMCB()
++		return true
++	}
++	if d.mcbMatchesSnapshot() {
++		return true
++	}
++	return d.importMCB()
++}
++
++func (d *DOS) prepareMCBCall(c *cpu.CPU) bool {
++	if d.ensureMCB() {
++		return true
++	}
++	c.R[cpu.AX] = 9 // invalid memory block address / unaccepted MCB chain
++	setCarry(c)
++	return false
++}
++
++// importMCB 將客體 list-of-lists 指向的完整 raw chain 轉為 typed model。
++// 失敗時僅留下診斷，不覆寫 raw headers。
++func (d *DOS) importMCB() bool {
++	head := d.M.Read16(uint32(machine.LOLSeg)*16 + 0x0E)
++	var seen = map[uint16]bool{}
++	var records []mcbHeaderSnapshot
++	var blocks []memBlock
++	seg := head
++	for i := 0; i < 512; i++ {
++		if seg >= uint16(machine.MemTop) || seen[seg] {
++			d.noteMCBImportFailure("MCB segment 越界或成環", records)
++			return false
++		}
++		seen[seg] = true
++		b := readMCBBlock(d.M, seg)
++		records = append(records, mcbHeaderSnapshot{Seg: seg, Raw: b.raw})
++		if b.raw[0] != 'M' && b.raw[0] != 'Z' {
++			d.noteMCBImportFailure(fmt.Sprintf("MCB %04X 的 signature 不是 M/Z", seg), records)
++			return false
++		}
++		if b.free {
++			if b.owner != 0 {
++				d.noteMCBImportFailure(fmt.Sprintf("自由 MCB %04X 的 owner 非零", seg), records)
++				return false
++			}
++		} else if !d.processCanOwn(b.owner) {
++			d.noteMCBImportFailure(fmt.Sprintf("MCB %04X 的 owner %04X 未登錄或已終止", seg, b.owner), records)
++			return false
++		}
++		next := int(seg) + 1 + int(b.size)
++		if next <= int(seg) || next > machine.MemTop {
++			d.noteMCBImportFailure(fmt.Sprintf("MCB %04X 的 size %04X 不會嚴格前進", seg, b.size), records)
++			return false
++		}
++		blocks = append(blocks, b)
++		if b.raw[0] == 'Z' {
++			if next != machine.MemTop {
++				d.noteMCBImportFailure(fmt.Sprintf("鏈尾 %04X 未落在 MemTop", seg), records)
++				return false
++			}
++			break
++		}
++		seg = uint16(next)
++	}
++	if len(blocks) == 0 || blocks[len(blocks)-1].raw[0] != 'Z' {
++		d.noteMCBImportFailure("MCB chain 沒有唯一 Z 鏈尾", records)
++		return false
++	}
++	root := blocks[0]
++	if head != machine.PSPSeg-1 || root.free || root.owner != machine.PSPSeg {
++		d.noteMCBImportFailure("MCB chain 首格不是已登錄 root PSP block", records)
++		return false
++	}
++	d.programBlock = root
++	d.freeSeg = root.seg + 1 + root.size
++	d.arena = append([]memBlock(nil), blocks[1:]...)
++	d.rebuildProcessBlocks()
++	d.mcbSnapshot = append([]mcbHeaderSnapshot(nil), records...)
++	return true
++}
++
++// syncMCB 只從已接受的 typed model 發布，並保留 raw header 的 opaque bytes/name。
++func (d *DOS) syncMCB() {
++	// 測試與 supervisor 可能尚未走 machine.Load*；仍要把 list-of-lists
++	// 指向同一條可匯入的 root MCB，不能留在中斷向量的零頁資料。
++	d.M.Write16(uint32(machine.LOLSeg)*16+0x0E, machine.PSPSeg-1)
++	d.programBlock.seg = machine.PSPSeg - 1
++	d.programBlock.size = d.freeSeg - machine.PSPSeg
++	d.programBlock.owner = machine.PSPSeg
++	d.programBlock.free = false
++	if len(d.arena) == 0 {
++		if d.freeSeg >= uint16(machine.MemTop) {
++			d.writeMCBBlock(&d.programBlock, true)
++		} else {
++			d.writeMCBBlock(&d.programBlock, false)
++			free := newMCBBlock(d.freeSeg, uint16(machine.MemTop)-d.freeSeg-1, 0, blankMCBName())
++			d.writeMCBBlock(&free, true)
++		}
++		d.captureMCBSnapshot()
++		return
++	}
++	d.writeMCBBlock(&d.programBlock, false)
++	for i := range d.arena {
++		d.writeMCBBlock(&d.arena[i], i == len(d.arena)-1)
++	}
++	d.rebuildProcessBlocks()
++	d.captureMCBSnapshot()
++}
+diff --git a/internal/dos/mcb_import_contract_test.go b/internal/dos/mcb_import_contract_test.go
+new file mode 100644
+index 0000000..bbac915
+--- /dev/null
++++ b/internal/dos/mcb_import_contract_test.go
+@@ -0,0 +1,160 @@
++package dos
++
++import (
++	"bytes"
++	"encoding/gob"
++	"testing"
++
++	"github.com/wicanr2/dosgolem/internal/cpu"
++	"github.com/wicanr2/dosgolem/internal/machine"
++)
++
++func writeRawMCB(m *machine.Machine, seg uint16, last bool, owner, size uint16, name [8]byte) {
++	m.WriteMCB(seg, last, owner, size)
++	m.WriteBytes(uint32(seg)*16+8, name[:])
++}
++
++func mcbName(s string) [8]byte {
++	n := blankMCBName()
++	copy(n[:], []byte(s))
++	return n
++}
++
++func opaqueMCBName(s string) [8]byte {
++	var n [8]byte
++	copy(n[:], []byte(s))
++	return n
++}
++
++// 這是固定 OPENING.EXE 直接改 MCB 的縮小模型：raw `$sys$` 不是由 AH=48h
++// 建立，下一個 AH=62h 必須匯入且不能被 publisher 洗回空白。
++func TestDirectMCBImportPreservesOpaqueNameAndFailureDoesNotRepublish(t *testing.T) {
++	m, d := newTest(t)
++	d.syncMCB()
++	const first = 0x2000
++	const size = 0x0010
++	next := uint16(first + 1 + size)
++	name := opaqueMCBName("$sys$")
++	writeRawMCB(m, first, false, machine.PSPSeg, size, name)
++	writeRawMCB(m, next, true, 0, uint16(machine.MemTop)-next-1, blankMCBName())
++	if d.mcbMatchesSnapshot() {
++		t.Fatal("direct MCB write 沒有讓 raw snapshot 失配")
++	}
++
++	call(m, d, 0x21, 0x6200)
++	if m.CPU.Flags&cpu.CF != 0 || m.CPU.R[cpu.BX] != machine.PSPSeg {
++		t.Fatalf("AH=62h 匯入後回 CF=%t BX=%04X", m.CPU.Flags&cpu.CF != 0, m.CPU.R[cpu.BX])
++	}
++	if len(d.arena) != 2 || d.arena[0].owner != machine.PSPSeg || d.arena[0].name != name {
++		t.Fatalf("raw MCB 沒有保留為 typed arena：%+v", d.arena)
++	}
++	before := [8]byte{}
++	copy(before[:], m.Mem[uint32(first)*16+8:uint32(first)*16+16])
++	m.CPU.Seg[cpu.ES] = 0x8FFF
++	call(m, d, 0x21, 0x4900)
++	if m.CPU.Flags&cpu.CF == 0 || m.CPU.R[cpu.AX] != 9 {
++		t.Fatalf("未知 AH=49h 回 CF=%t AX=%04X，預期 CF=1 AX=9", m.CPU.Flags&cpu.CF != 0, m.CPU.R[cpu.AX])
++	}
++	after := [8]byte{}
++	copy(after[:], m.Mem[uint32(first)*16+8:uint32(first)*16+16])
++	if after != before || after != name {
++		t.Fatalf("失敗 AH=49h 重發了舊 arena 或遺失 name：%q → %q", before, after)
++	}
++}
++
++func TestMCBImportRejectsUnregisteredOwnerWithoutWritingGuestMemory(t *testing.T) {
++	m, d := newTest(t)
++	d.syncMCB()
++	const first = 0x2000
++	writeRawMCB(m, first, true, 0x3333, uint16(machine.MemTop)-first-1, mcbName("FOREIGN"))
++	if d.mcbMatchesSnapshot() {
++		t.Fatal("foreign owner write 沒有讓 raw snapshot 失配")
++	}
++	before := [16]byte{}
++	copy(before[:], m.Mem[uint32(first)*16:uint32(first)*16+16])
++
++	call(m, d, 0x21, 0x6200)
++	if m.CPU.Flags&cpu.CF == 0 || m.CPU.R[cpu.AX] != 9 {
++		t.Fatalf("未登錄 owner 回 CF=%t AX=%04X，預期 CF=1 AX=9", m.CPU.Flags&cpu.CF != 0, m.CPU.R[cpu.AX])
++	}
++	after := [16]byte{}
++	copy(after[:], m.Mem[uint32(first)*16:uint32(first)*16+16])
++	if after != before || len(d.MCBImportFailures) == 0 {
++		t.Fatal("被拒絕的 MCB chain 沒保留 guest bytes 或診斷 snapshot")
++	}
++}
++
++func TestRegisteredChildUsesCurrentPSPForMCBServices(t *testing.T) {
++	m, d := newTest(t)
++	writeChild(t, d, "WAIT.COM", []byte{0xF4})
++	execChild(m, d, "WAIT.COM")
++	child := d.curPSP
++	call(m, d, 0x21, 0x5100)
++	if m.CPU.Flags&cpu.CF != 0 || m.CPU.R[cpu.BX] != child {
++		t.Fatalf("AH=51h 回 BX=%04X，預期 child %04X", m.CPU.R[cpu.BX], child)
++	}
++	seg := allocPara(m, d, 0x20)
++	if seg == 0 {
++		t.Fatal("child AH=48h 配置失敗")
++	}
++	if owner := m.Read16(uint32(seg-1)*16 + 1); owner != child {
++		t.Fatalf("child AH=48h MCB owner=%04X，預期 %04X", owner, child)
++	}
++	if !freePara(m, d, seg) {
++		t.Fatal("child 自己的 AH=49h 釋放失敗")
++	}
++}
++
++func TestTSRWithExtraChildBlockFailsClosed(t *testing.T) {
++	m, d := newTest(t)
++	writeChild(t, d, "WAIT.COM", []byte{0xF4})
++	execChild(m, d, "WAIT.COM")
++	if allocPara(m, d, 0x20) == 0 {
++		t.Fatal("安排 TSR rejection 的 child 配置失敗")
++	}
++	before := append([]mcbHeaderSnapshot(nil), d.mcbSnapshot...)
++	m.CPU.R[cpu.DX] = 0x40
++	call(m, d, 0x21, 0x3100)
++	if m.CPU.Flags&cpu.CF == 0 || m.CPU.R[cpu.AX] != 9 || d.curPSP == machine.PSPSeg {
++		t.Fatalf("額外 child block 的 TSR 應拒絕：CF=%t AX=%04X cur=%04X", m.CPU.Flags&cpu.CF != 0, m.CPU.R[cpu.AX], d.curPSP)
++	}
++	if len(before) != len(d.mcbSnapshot) {
++		t.Fatal("被拒絕的 TSR 改寫了 MCB snapshot")
++	}
++}
++
++func TestStateV3PreservesMCBAndRejectsV2(t *testing.T) {
++	m, d := newTest(t)
++	d.syncMCB()
++	const first = 0x2000
++	const size = 0x0010
++	next := uint16(first + 1 + size)
++	name := opaqueMCBName("$pack$")
++	writeRawMCB(m, first, false, machine.PSPSeg, size, name)
++	writeRawMCB(m, next, true, 0, uint16(machine.MemTop)-next-1, blankMCBName())
++	call(m, d, 0x21, 0x6200)
++	if m.CPU.Flags&cpu.CF != 0 {
++		t.Fatal("state fixture 匯入失敗")
++	}
++
++	var saved bytes.Buffer
++	if err := d.SaveState(&saved); err != nil {
++		t.Fatal(err)
++	}
++	restored := New(m, t.TempDir())
++	restored.Install()
++	if err := restored.LoadState(bytes.NewReader(saved.Bytes())); err != nil {
++		t.Fatal(err)
++	}
++	if len(restored.arena) != 2 || restored.arena[0].name != name || restored.arena[0].raw != d.arena[0].raw {
++		t.Fatalf("v3 沒保存 raw name/header：%+v", restored.arena)
++	}
++
++	var v2 bytes.Buffer
++	if err := gob.NewEncoder(&v2).Encode(&dosState{Magic: dosStateMagic, Version: 2}); err != nil {
++		t.Fatal(err)
++	}
++	if err := restored.LoadState(bytes.NewReader(v2.Bytes())); err == nil {
++		t.Fatal("v2 state 竟被接受；不得補猜 owner/name")
++	}
++}
+diff --git a/internal/dos/mouse_contract_test.go b/internal/dos/mouse_contract_test.go
+index d329672..8e1f51d 100644
+--- a/internal/dos/mouse_contract_test.go
++++ b/internal/dos/mouse_contract_test.go
+@@ -6,6 +6,43 @@ import (
+ 	"github.com/wicanr2/dosgolem/internal/cpu"
+ )
+ 
++func TestMouseExchangeHandler(t *testing.T) {
++	m, d := newTest(t)
++	install := func(fn, seg, off, mask uint16) {
++		m.CPU.Seg[cpu.ES], m.CPU.R[cpu.DX], m.CPU.R[cpu.CX] = seg, off, mask
++		call(m, d, 0x33, fn)
++	}
++	checkOld := func(seg, off, mask uint16) {
++		t.Helper()
++		if m.CPU.Seg[cpu.ES] != seg || m.CPU.R[cpu.DX] != off || m.CPU.R[cpu.CX] != mask {
++			t.Fatalf("舊回呼 = %04X:%04X/%04X，預期 %04X:%04X/%04X",
++				m.CPU.Seg[cpu.ES], m.CPU.R[cpu.DX], m.CPU.R[cpu.CX], seg, off, mask)
++		}
++	}
++	// 未註冊→A，然後以 000C 設 B，再交換回 A。
++	install(0x14, 0x3000, 0x100, EventMove)
++	checkOld(0, 0, 0)
++	install(0x0C, 0x3100, 0x200, EventLeftDown)
++	install(0x14, 0x3000, 0x100, EventMove)
++	checkOld(0x3100, 0x200, EventLeftDown)
++	if !d.MouseEvent(EventMove) || d.MouseEvent(EventLeftDown) || m.CallbackPending() != 1 {
++		t.Fatal("交换後事件未依新遮罩排隊")
++	}
++	// 零遮罩停用，且交換時仍完整返回 A。
++	install(0x14, 0, 0, 0)
++	checkOld(0x3000, 0x100, EventMove)
++	if d.MouseEvent(EventMove) || m.CallbackPending() != 1 {
++		t.Fatal("零遮罩仍投遞新事件")
++	}
++	install(0x0C, 0x3100, 0x200, EventMove)
++	call(m, d, 0x33, 0)
++	install(0x14, 0x3000, 0x100, EventMove)
++	checkOld(0, 0, 0)
++	if len(d.Unimplemented) != 0 {
++		t.Fatal("交換標準服務仍被記為未實作")
++	}
++}
++
+ // `int 33h` 與事件回呼的獨立契約測試。
+ //
+ // 期望值照 Microsoft Mouse 的介面自己列，不引用分支的既有測試。
+diff --git a/internal/dos/mouse_state.go b/internal/dos/mouse_state.go
+new file mode 100644
+index 0000000..b31d713
+--- /dev/null
++++ b/internal/dos/mouse_state.go
+@@ -0,0 +1,10 @@
++package dos
++
++// mouseBehaviorState 保留全部行為欄位，移除本趟診斷紀錄。
++// 契約：docs/spec/196-mouse-snapshot.md。
++func mouseBehaviorState(m Mouse) Mouse {
++	m.Polls, m.Sets, m.PressReads, m.Events = nil, nil, nil, nil
++	m.Calls = nil
++	m.PressQ = [3]uint64{}
++	return m
++}
+diff --git a/internal/dos/mouse_state_test.go b/internal/dos/mouse_state_test.go
+new file mode 100644
+index 0000000..4c3e219
+--- /dev/null
++++ b/internal/dos/mouse_state_test.go
+@@ -0,0 +1,55 @@
++package dos
++
++import (
++	"bytes"
++	"encoding/gob"
++	"reflect"
++	"testing"
++)
++
++func TestMouseStateAllBehaviorAndNoDiagnostics(t *testing.T) {
++	d := newAt(t, t.TempDir())
++	want := Mouse{X: 19, Y: 27, Buttons: 3, XScale: 2,
++		Press: [3]uint16{1, 2, 3}, Release: [3]uint16{4, 5, 6},
++		PressAt:   [3][2]uint16{{11, 12}, {13, 14}, {15, 16}},
++		ReleaseAt: [3][2]uint16{{21, 22}, {23, 24}, {25, 26}},
++		MickeyX:   -17, MickeyY: 31, MinX: 2, MaxX: 639, MinY: 4, MaxY: 199}
++	want.Handler.Seg, want.Handler.Off, want.Handler.Mask, want.Handler.Set = 0x1234, 0x5678, 1, true
++	d.Mouse = want
++	d.Mouse.Calls = map[uint16]int{3: 17}
++	d.Mouse.Polls, d.Mouse.Sets, d.Mouse.Events = []Poll{{X: 1}}, []Poll{{X: 2}}, []Poll{{X: 3}}
++	d.Mouse.PressQ, d.Mouse.PressReads = [3]uint64{3, 4, 5}, []PressRead{{Count: 7}}
++	var buf bytes.Buffer
++	if err := d.SaveState(&buf); err != nil {
++		t.Fatal(err)
++	}
++	var disk dosState
++	if err := gob.NewDecoder(bytes.NewReader(buf.Bytes())).Decode(&disk); err != nil {
++		t.Fatal(err)
++	}
++	if !reflect.DeepEqual(disk.Mouse, want) {
++		t.Fatalf("磁碟滑鼠狀態不符：%+v", disk.Mouse)
++	}
++	e := newAt(t, t.TempDir())
++	e.Mouse = d.Mouse // 載入必須清除目的端的舊診斷。
++	if err := e.LoadState(bytes.NewReader(buf.Bytes())); err != nil {
++		t.Fatal(err)
++	}
++	if !reflect.DeepEqual(e.Mouse, want) {
++		t.Fatalf("還原滑鼠狀態不符：%+v", e.Mouse)
++	}
++	if !e.MouseEvent(1) {
++		t.Fatal("還原後沒有投遞移動事件")
++	}
++	if e.M.CallbackPending() != 1 {
++		t.Fatal("還原的回呼未排入佇列")
++	}
++	disk.Version = 3
++	buf.Reset()
++	if err := gob.NewEncoder(&buf).Encode(&disk); err != nil {
++		t.Fatal(err)
++	}
++	if err := e.LoadState(&buf); err == nil {
++		t.Fatal("不得接受缺少滑鼠狀態的 v3")
++	}
++}
+diff --git a/internal/dos/state.go b/internal/dos/state.go
+index c71d9c7..35d7126 100644
+--- a/internal/dos/state.go
++++ b/internal/dos/state.go
+@@ -5,6 +5,9 @@ import (
+ 	"fmt"
+ 	"io"
+ 	"os"
++	"sort"
++
++	"github.com/wicanr2/dosgolem/internal/machine"
+ )
+ 
+ // 存檔／讀檔：DOS 這一層的狀態。與 `machine.SaveState` 合起來才是一台
+@@ -17,7 +20,7 @@ import (
+ 
+ const (
+ 	dosStateMagic   = "DOSGOLEM-D"
+-	dosStateVersion = 2
++	dosStateVersion = 4
+ )
+ 
+ type handleState struct {
+@@ -43,8 +46,17 @@ type emsMapState struct {
+ 
+ // blockState 是 memBlock 的線上版本（memBlock 的欄位不匯出，gob 看不到）。
+ type blockState struct {
+-	Seg, Size uint16
+-	Free      bool
++	Seg, Size, Owner uint16
++	Free             bool
++	Name             [8]byte
++	Raw              [16]byte
++}
++
++type processRegistryState struct {
++	PSP, Parent uint16
++	Lifecycle   processLifecycle
++	Name        [8]byte
++	Blocks      []uint16
+ }
+ 
+ type procState struct {
+@@ -81,6 +93,11 @@ type dosState struct {
+ 	// 重新切，把已經發出去的緩衝區再發一次。
+ 	Arena []blockState
+ 
++	// ProgramBlock 與 Processes 是 v3 新增的 raw MCB／owner registry。
++	// v2 沒有它們，絕不能猜 root owner 或空 name 補上。
++	ProgramBlock blockState
++	Processes    []processRegistryState
++
+ 	Stack    []procState
+ 	CurPSP   uint16
+ 	LastExit uint16
+@@ -113,12 +130,24 @@ func (d *DOS) SaveState(w io.Writer) error {
+ 		Exited:   d.Exited,
+ 		ExitCode: d.ExitCode,
+ 	}
+-	// 滑鼠的座標與按鍵要留，觀測紀錄不留。
+-	s.Mouse = Mouse{X: d.Mouse.X, Y: d.Mouse.Y, Buttons: d.Mouse.Buttons,
+-		Press: d.Mouse.Press, Release: d.Mouse.Release, XScale: d.Mouse.XScale}
++	s.Mouse = mouseBehaviorState(d.Mouse)
+ 
++	toBlockState := func(b memBlock) blockState {
++		return blockState{Seg: b.seg, Size: b.size, Owner: b.owner, Free: b.free, Name: b.name, Raw: b.raw}
++	}
++	s.ProgramBlock = toBlockState(d.programBlock)
+ 	for _, b := range d.arena {
+-		s.Arena = append(s.Arena, blockState{Seg: b.seg, Size: b.size, Free: b.free})
++		s.Arena = append(s.Arena, toBlockState(b))
++	}
++	psps := make([]int, 0, len(d.processes))
++	for psp := range d.processes {
++		psps = append(psps, int(psp))
++	}
++	sort.Ints(psps)
++	for _, psp := range psps {
++		p := d.processes[uint16(psp)]
++		s.Processes = append(s.Processes, processRegistryState{PSP: p.psp, Parent: p.parent,
++			Lifecycle: p.lifecycle, Name: p.name, Blocks: append([]uint16(nil), p.blocks...)})
+ 	}
+ 	for h, fh := range d.handles {
+ 		off, err := fh.f.Seek(0, io.SeekCurrent)
+@@ -165,6 +194,21 @@ func (d *DOS) LoadState(r io.Reader) error {
+ 	if s.Magic != dosStateMagic || s.Version != dosStateVersion {
+ 		return fmt.Errorf("dos: 狀態檔不認得（%q v%d）", s.Magic, s.Version)
+ 	}
++	if s.ProgramBlock.Seg != machine.PSPSeg-1 || s.ProgramBlock.Free ||
++		s.ProgramBlock.Owner != machine.PSPSeg || len(s.Processes) == 0 {
++		return fmt.Errorf("dos: v3 狀態缺少可驗證的 root MCB／程序 registry")
++	}
++	processes := make(map[uint16]*processRecord, len(s.Processes))
++	for _, ps := range s.Processes {
++		if ps.PSP == 0 || processes[ps.PSP] != nil {
++			return fmt.Errorf("dos: v3 程序 registry 無法驗證 PSP %04X", ps.PSP)
++		}
++		processes[ps.PSP] = &processRecord{psp: ps.PSP, parent: ps.Parent,
++			lifecycle: ps.Lifecycle, name: ps.Name, blocks: append([]uint16(nil), ps.Blocks...)}
++	}
++	if processes[machine.PSPSeg] == nil || processes[s.CurPSP] == nil {
++		return fmt.Errorf("dos: v3 程序 registry 缺 root 或 current PSP")
++	}
+ 	for _, h := range d.handles {
+ 		h.f.Close()
+ 	}
+@@ -174,14 +218,23 @@ func (d *DOS) LoadState(r io.Reader) error {
+ 	if s.Root != "" {
+ 		d.Root = s.Root
+ 	}
+-	d.Mouse.X, d.Mouse.Y, d.Mouse.Buttons = s.Mouse.X, s.Mouse.Y, s.Mouse.Buttons
+-	d.Mouse.Press, d.Mouse.Release, d.Mouse.XScale = s.Mouse.Press, s.Mouse.Release, s.Mouse.XScale
++	d.Mouse = mouseBehaviorState(s.Mouse)
+ 	d.freeSeg = s.FreeSeg
+ 	d.curPSP, d.lastExit = s.CurPSP, s.LastExit
+ 	d.queue = append([]Queued(nil), s.Queue...)
++	d.programBlock = memBlock{seg: s.ProgramBlock.Seg, size: s.ProgramBlock.Size,
++		owner: s.ProgramBlock.Owner, free: s.ProgramBlock.Free, name: s.ProgramBlock.Name, raw: s.ProgramBlock.Raw}
++	d.processes = processes
+ 	d.arena = nil
+ 	for _, b := range s.Arena {
+-		d.arena = append(d.arena, memBlock{seg: b.Seg, size: b.Size, free: b.Free})
++		if b.Free && b.Owner != 0 {
++			return fmt.Errorf("dos: v3 自由 MCB %04X 有 owner", b.Seg)
++		}
++		if !b.Free && !d.processCanOwn(b.Owner) {
++			return fmt.Errorf("dos: v3 MCB %04X owner %04X 未登錄", b.Seg, b.Owner)
++		}
++		d.arena = append(d.arena, memBlock{seg: b.Seg, size: b.Size, owner: b.Owner,
++			free: b.Free, name: b.Name, raw: b.Raw})
+ 	}
+ 	d.Exited, d.ExitCode = s.Exited, s.ExitCode
+ 
+@@ -223,5 +276,7 @@ func (d *DOS) LoadState(r io.Reader) error {
+ 			d.ems.saved[i] = &emsMapping{h: s.EMSSaved[i].H, page: s.EMSSaved[i].Page}
+ 		}
+ 	}
++	d.rebuildProcessBlocks()
++	d.syncMCB()
+ 	return nil
+ }
+diff --git a/internal/machine/bios_motor_test.go b/internal/machine/bios_motor_test.go
+new file mode 100644
+index 0000000..b055472
+--- /dev/null
++++ b/internal/machine/bios_motor_test.go
+@@ -0,0 +1,69 @@
++package machine
++
++import (
++	"fmt"
++	"testing"
++
++	"github.com/wicanr2/dosgolem/internal/cpu"
++)
++
++// 平台契約見 docs/spec/194-bios-disk-motor-timeout.md。
++// 以真正執行 stub 的結果驗證倒數、中斷鏈及保存契約。
++func TestBIOSDiskMotorTimeout(t *testing.T) {
++	for _, initial := range []uint8{0, 1, 2, 255} {
++		for _, chain := range []bool{true, false} {
++			t.Run(fmt.Sprintf("count=%d/chain=%v", initial, chain), func(t *testing.T) {
++				m := New()
++				const scratch = 0x2000
++				m.Write8(0x440, initial)
++				m.Write8(0x43F, 0xAF)
++				m.Write8(0x490, 0xCC)
++				// int 1Ch 在 DS=40h 下觀測倒數，再弄髒 BIOS 應保存的暫存器。
++				m.WriteBytes(cpu.Addr(scratch, 0x300), []byte{
++					0xA0, 0x40, 0x00, 0xA2, 0x90, 0x00,
++					0xB8, 0xEF, 0xBE, 0x8E, 0xD8,
++					0xBA, 0x34, 0x12, 0xCF,
++				})
++				m.Write16(0x1C*4, 0x300)
++				m.Write16(0x1C*4+2, scratch)
++				if !chain {
++					m.WriteBytes(cpu.Addr(scratch, 0x380), []byte{0xCF})
++					m.Write16(0x08*4, 0x380)
++					m.Write16(0x08*4+2, scratch)
++				}
++				m.WriteBytes(cpu.Addr(scratch, 0x400), []byte{0xF4})
++				m.CPU.Seg[cpu.CS], m.CPU.IP = scratch, 0x400
++				m.CPU.Seg[cpu.DS], m.CPU.Seg[cpu.SS] = 0x5678, scratch
++				m.CPU.R[cpu.SP], m.CPU.R[cpu.AX], m.CPU.R[cpu.DX] = 0x200, 0x1357, 0x2468
++				m.CPU.SetFlags(cpu.IF | cpu.CF | cpu.ZF)
++				beforeR, beforeSeg, beforeFlags := m.CPU.R, m.CPU.Seg, m.CPU.Flags
++				m.CPU.Interrupt(0x08)
++				for i := 0; i < 100 && !m.CPU.Halted; i++ {
++					if err := m.Step(); err != nil {
++						t.Fatal(err)
++					}
++				}
++				if !m.CPU.Halted {
++					t.Fatal("BIOS 中斷未返回")
++				}
++				wantCount, wantStatus, wantSeen := initial, uint8(0xAF), uint8(0xCC)
++				if chain {
++					if wantCount > 0 {
++						wantCount--
++					}
++					if initial == 1 {
++						wantStatus = 0xA0
++					}
++					wantSeen = wantCount
++				}
++				if m.Read8(0x440) != wantCount || m.Read8(0x43F) != wantStatus || m.Read8(0x490) != wantSeen {
++					t.Fatalf("倒數／狀態／1Ch觀測 = %02X/%02X/%02X，預期 %02X/%02X/%02X",
++						m.Read8(0x440), m.Read8(0x43F), m.Read8(0x490), wantCount, wantStatus, wantSeen)
++				}
++				if m.CPU.R != beforeR || m.CPU.Seg != beforeSeg || m.CPU.Flags != beforeFlags {
++					t.Fatal("BIOS 中斷未保存暫存器或旗標")
++				}
++			})
++		}
++	}
++}
+diff --git a/internal/machine/callback_state_test.go b/internal/machine/callback_state_test.go
+new file mode 100644
+index 0000000..8166465
+--- /dev/null
++++ b/internal/machine/callback_state_test.go
+@@ -0,0 +1,29 @@
++package machine
++
++import (
++	"bytes"
++	"testing"
++)
++
++func TestFileStateRejectsUnsafeCallbackAndClearsDestination(t *testing.T) {
++	m := New()
++	var safe bytes.Buffer
++	if err := m.SaveState(&safe); err != nil {
++		t.Fatal(err)
++	}
++	m.QueueCallback(QueuedCall{Seg: 0x100, Off: 0})
++	var rejected bytes.Buffer
++	if err := m.SaveState(&rejected); err == nil || rejected.Len() != 0 {
++		t.Fatal("待執行回呼應拒絕保存")
++	}
++	m.startCallback()
++	if err := m.SaveState(&rejected); err == nil || rejected.Len() != 0 {
++		t.Fatal("執行中回呼應拒絕保存")
++	}
++	if err := m.LoadState(&safe); err != nil {
++		t.Fatal(err)
++	}
++	if m.CallbackActive() || m.CallbackPending() != 0 || m.CallbacksMade() != 0 {
++		t.Fatal("載入後殘留舊回呼")
++	}
++}
+diff --git a/internal/machine/machine.go b/internal/machine/machine.go
+index db2b12b..b4f33d7 100644
+--- a/internal/machine/machine.go
++++ b/internal/machine/machine.go
+@@ -90,7 +90,7 @@ const (
+ 	// biosTimerOff 是 `int 08h` 的 BIOS 預設處理：推進 `0040:006C`
+ 	// 再轉呼 `int 1Ch`（見 initVectors）。
+ 	//
+-	// ⚠ **它有 24 個 byte，不是 4 個。** 排在 trampoline 之後並留一整段，
++	// ⚠ **它有 42 個 byte，不是 4 個。** 排在 trampoline 之後並留一整段，
+ 	// 否則它會把後面的 trampoline 蓋掉——而症狀是「int 10h 的向量指到
+ 	// `pop dx / pop ax / pop ds`」，看起來像向量算錯，不像佈局重疊。
+ 	biosTimerOff = specialStubBase + 0x20
+@@ -239,6 +239,11 @@ type Machine struct {
+ 	oplReg     [2]uint8
+ 	oplRegs    [2][256]uint8
+ 	oplPresent bool
++	// sbproEnabled 是明確選用的 base 0x220 Sound Blaster Pro／OPL
++	// 設定檔。預設關閉，避免改變共用 Machine 的既有 port 回退；它不是
++	// 通用 Sound Blaster 硬體宣稱，僅接 READY 規格核准的受限 DSP 埠。
++	sbproEnabled bool
++	sbproDSP     SoundBlasterDSP
+ 	// 計時器：兩個各自有「啟動」與「遮罩」，狀態埠的 bit7 是兩者的 OR。
+ 	oplT1Started, oplT2Started bool
+ 	oplT1Masked, oplT2Masked   bool
+@@ -745,6 +750,16 @@ func (m *Machine) WatchReads(lo, hi uint32, fn func(addr uint32, v uint8)) {
+ // 但音樂路徑才會真的執行、`OPL` 才會有東西。
+ func (m *Machine) SetAdLib(present bool) { m.oplPresent = present }
+ 
++// SetSoundBlasterPro 明確開關 base 0x220 的受限 Sound Blaster Pro／OPL
++// 設定檔。啟用時也開啟既有 AdLib status 模型；關閉不碰既有的 -adlib
++// 設定，讓呼叫端能安全取消 profile 而不改變其他 OPL 行為。
++func (m *Machine) SetSoundBlasterPro(enabled bool) {
++	m.sbproEnabled = enabled
++	if enabled {
++		m.SetAdLib(true)
++	}
++}
++
+ // OPL 暫存器 04h（計時器控制）的位元（YM3812 資料表）。
+ const (
+ 	oplT1Start  = 0x01 // 啟動計時器 1
+@@ -823,6 +838,22 @@ func (m *Machine) In8(port uint16) uint8 {
+ 	if v, ok := m.VGA.In(port); ok {
+ 		return v
+ 	}
++	if m.sbproEnabled {
++		switch port {
++		case 0x220:
++			// 已核准的 primary OPL status；和 0x388 共用同一模型，
++			// 但保留原始實體 port 的讀取計數與單一 tick。
++			return m.oplStatus()
++		case 0x222:
++			// Colonization 只將這個 advanced status 讀取當 delay。
++			// 這是決定性回退，不是 OPL3 hardware status parity。
++			return 0xff
++		case 0x22a, 0x22c, 0x22e:
++			if v, ok := m.sbproDSP.In8(port); ok {
++				return v
++			}
++		}
++	}
+ 	switch {
+ 	case port == 0x60:
+ 		// 鍵盤資料埠。**沒有硬體鍵盤時這裡回 0xFF**，而 0xFF 的 bit7 是
+@@ -922,17 +953,40 @@ func (m *Machine) Out8(p uint16, v uint8) {
+ 		m.pitWrite(p, v)
+ 	}
+ 
++	// READY profile 只公開 reset 與 command/status 的必要埠；不要把既有
++	// DSP 的 mixer、DMA 或其他 Sound Blaster 行為順手擴進來。PortLog 已在
++	// 函式開頭寫入，直接呼叫狀態機而不是遞迴轉發可保證每筆實體 I/O 一次。
++	if m.sbproEnabled && (p == 0x226 || p == 0x22c) && m.sbproDSP.Out8(p, v) {
++		return
++	}
++
+ 	// OPL2：0x388 選暫存器、0x389 寫值。**兩個埠是一組**，
+ 	// 單看其中一個看不出寫了什麼。
+ 	switch p {
+ 	case 0x388:
+ 		m.oplReg[0] = v
++	case 0x220:
++		if m.sbproEnabled {
++			m.oplReg[0] = v
++		}
+ 	case 0x38A:
+ 		m.oplReg[1] = v
++	case 0x222:
++		if m.sbproEnabled {
++			m.oplReg[1] = v
++		}
+ 	case 0x389:
+ 		m.oplWrite(0, v)
++	case 0x221:
++		if m.sbproEnabled {
++			m.oplWrite(0, v)
++		}
+ 	case 0x38B:
+ 		m.oplWrite(1, v)
++	case 0x223:
++		if m.sbproEnabled {
++			m.oplWrite(1, v)
++		}
+ 	}
+ 
+ 	// VGA DAC。**沒有它就只有色號沒有顏色**，而色號陣列自己看起來完全正常
+@@ -1388,13 +1442,21 @@ func (m *Machine) initVectors() {
+ 	//
+ 	//	push ds / push ax / push dx / mov ax,40h / mov ds,ax /
+ 	//	inc word [6Ch] / jnz +4 / inc word [6Eh] /
++	//	非零的 byte [40h] 減一；1→0 時清除 [3Fh] 低四位 /
+ 	//	int 1Ch / pop dx / pop ax / pop ds / iret
++	// 馬達倒數的契約見 docs/spec/194-bios-disk-motor-timeout.md。
++	// 更新必須留在 BIOS stub，讓不鏈回 BIOS 的自訂 IRQ0 保持原有所有權。
+ 	m.WriteBytes(StubSeg*16+biosTimerOff, []byte{
+ 		0x1E, 0x50, 0x52,
+ 		0xB8, 0x40, 0x00, 0x8E, 0xD8,
+ 		0xFF, 0x06, 0x6C, 0x00,
+ 		0x75, 0x04,
+ 		0xFF, 0x06, 0x6E, 0x00,
++		0x80, 0x3E, 0x40, 0x00, 0x00, // cmp byte [40h],0
++		0x74, 0x0B, // jz 到 int 1Ch
++		0xFE, 0x0E, 0x40, 0x00, // dec byte [40h]
++		0x75, 0x05, // jnz 到 int 1Ch
++		0x80, 0x26, 0x3F, 0x00, 0xF0, // and byte [3Fh],F0h
+ 		0xCD, 0x1C,
+ 		0x5A, 0x58, 0x1F,
+ 		0xCF,
+diff --git a/internal/machine/sbpro_profile_test.go b/internal/machine/sbpro_profile_test.go
+new file mode 100644
+index 0000000..1a34ec7
+--- /dev/null
++++ b/internal/machine/sbpro_profile_test.go
+@@ -0,0 +1,98 @@
++package machine
++
++import "testing"
++
++func sbproOPLOut(m *Machine, port uint16, reg, val uint8) {
++	m.Out8(port, reg)
++	m.Out8(port+1, val)
++}
++
++// TestSBProProfileDisabledByDefault 確認一般 Machine 的既有回退完全不變。
++func TestSBProProfileDisabledByDefault(t *testing.T) {
++	m := New()
++	for _, port := range []uint16{0x220, 0x222, 0x22a, 0x22c, 0x22e} {
++		if got := m.In8(port); got != 0xff {
++			t.Fatalf("profile 關閉時 port %03X=%02X，要維持 FF 回退", port, got)
++		}
++	}
++	m.Out8(0x220, 0x20)
++	m.Out8(0x221, 0x31)
++	if got := m.OPLRegs(0)[0x20]; got != 0 {
++		t.Fatalf("profile 關閉卻寫入 primary OPL：%02X", got)
++	}
++	if m.sbproEnabled || m.sbproDSP.reset || len(m.sbproDSP.reply) != 0 {
++		t.Fatal("profile 關閉卻改變 DSP 狀態")
++	}
++}
++
++// TestSBProProfileOPLPorts 僅驗證 READY 的 base 0x220 映射，不宣稱 OPL3 parity。
++func TestSBProProfileOPLPorts(t *testing.T) {
++	m := New()
++	m.SetSoundBlasterPro(true)
++
++	sbproOPLOut(m, 0x220, 0x04, 0x60)
++	sbproOPLOut(m, 0x220, 0x04, 0x80)
++	if got := m.In8(0x220); got != 0x00 {
++		t.Fatalf("第一次 primary status=%02X，要 00", got)
++	}
++	sbproOPLOut(m, 0x220, 0x02, 0xff)
++	sbproOPLOut(m, 0x220, 0x04, 0x21)
++	if got := m.In8(0x220); got != 0xc0 {
++		t.Fatalf("timer 啟動後 primary status=%02X，要 C0", got)
++	}
++
++	sbproOPLOut(m, 0x220, 0x20, 0x11)
++	sbproOPLOut(m, 0x222, 0x20, 0x22)
++	if got := m.OPLRegs(0)[0x20]; got != 0x11 {
++		t.Fatalf("primary bank=%02X，要 11", got)
++	}
++	if got := m.OPLRegs(1)[0x20]; got != 0x22 {
++		t.Fatalf("secondary bank=%02X，要 22", got)
++	}
++
++	beforeTicks := m.portTicks
++	beforeReads := m.PortsIn[0x222]
++	if got := m.In8(0x222); got != 0xff {
++		t.Fatalf("advanced delay read=%02X，要受限回退 FF", got)
++	}
++	if m.portTicks != beforeTicks+1 || m.PortsIn[0x222] != beforeReads+1 {
++		t.Fatalf("0x222 讀取沒有恰好一次記錄：ticks=%d reads=%d", m.portTicks-beforeTicks, m.PortsIn[0x222]-beforeReads)
++	}
++}
++
++func TestSBProProfileDSPResetAndPhysicalPortLog(t *testing.T) {
++	m := New()
++	m.SetSoundBlasterPro(true)
++
++	beforeTicks := m.portTicks
++	m.Out8(0x226, 1)
++	if got := m.In8(0x22c); got != 0x80 {
++		t.Fatalf("reset 中 0x22C=%02X，要 80", got)
++	}
++	m.Out8(0x226, 0)
++	if got := m.In8(0x22e); got != 0x80 {
++		t.Fatalf("reset reply status=%02X，要 80", got)
++	}
++	if got := m.In8(0x22a); got != 0xaa {
++		t.Fatalf("reset reply=%02X，要 AA", got)
++	}
++	if got := m.In8(0x22e); got != 0 {
++		t.Fatalf("消費 reply 後 status=%02X，要 00", got)
++	}
++	if got := m.In8(0x22c); got != 0 {
++		t.Fatalf("reset 完成後 0x22C=%02X，要 00", got)
++	}
++	if m.portTicks != beforeTicks+5 {
++		t.Fatalf("五次實體讀取 tick=%d，要 5", m.portTicks-beforeTicks)
++	}
++	if len(m.PortLog) != 2 || m.PortLog[0].Port != 0x226 || m.PortLog[1].Port != 0x226 {
++		t.Fatalf("reset 寫入不是實體 port 的單筆記錄：%+v", m.PortLog)
++	}
++
++	m.PortLog = nil
++	m.Out8(0x220, 0x20)
++	m.Out8(0x221, 0x31)
++	if len(m.PortLog) != 2 || m.PortLog[0].Port != 0x220 || m.PortLog[1].Port != 0x221 {
++		t.Fatalf("OPL alias 沒有保留每筆實體 port：%+v", m.PortLog)
++	}
++}
+diff --git a/internal/machine/state.go b/internal/machine/state.go
+index a312d43..d1bedd2 100644
+--- a/internal/machine/state.go
++++ b/internal/machine/state.go
+@@ -84,6 +84,9 @@ type machineState struct {
+ 
+ // SaveState 把整台機器寫出去。
+ func (m *Machine) SaveState(w io.Writer) error {
++	if m.CallbackActive() || m.CallbackPending() != 0 {
++		return fmt.Errorf("machine: 回呼執行中或待執行，不能保存檔案快照")
++	}
+ 	s := machineState{
+ 		Magic: stateMagic, Version: stateVersion,
+ 		Mem:         append([]uint8(nil), m.Mem...),
+@@ -198,5 +201,6 @@ func (m *Machine) LoadState(r io.Reader) error {
+ 	m.ProgramPath = s.ProgramPath
+ 
+ 	m.FreeSeg, m.ImageBase, m.ImageLen = s.FreeSeg, s.ImageBase, s.ImageLen
++	m.cbQueue, m.cbActive, m.cbSaved, m.cbMade = nil, false, callbackFrame{}, 0
+ 	return nil
+ }
+diff --git a/internal/state/callback_state_test.go b/internal/state/callback_state_test.go
+new file mode 100644
+index 0000000..4ba6e2b
+--- /dev/null
++++ b/internal/state/callback_state_test.go
+@@ -0,0 +1,25 @@
++package state
++
++import (
++	"os"
++	"path/filepath"
++	"testing"
++
++	"github.com/wicanr2/dosgolem/internal/machine"
++)
++
++func TestUnsafeCallbackDoesNotTruncateState(t *testing.T) {
++	m, d := boot(t)
++	path := filepath.Join(t.TempDir(), "existing.state")
++	if err := os.WriteFile(path, []byte("keep"), 0600); err != nil {
++		t.Fatal(err)
++	}
++	m.QueueCallback(machine.QueuedCall{Seg: 0x100})
++	if err := Save(path, m, d); err == nil {
++		t.Fatal("待執行回呼應拒絕保存")
++	}
++	data, err := os.ReadFile(path)
++	if err != nil || string(data) != "keep" {
++		t.Fatal("失敗不應破壞既有檔案")
++	}
++}
+diff --git a/internal/state/state.go b/internal/state/state.go
+index 2df8d61..6bd99bb 100644
+--- a/internal/state/state.go
++++ b/internal/state/state.go
+@@ -52,6 +52,9 @@ func readSection(r io.Reader) (io.Reader, error) {
+ 
+ // Save 把機器與 DOS 一起寫到 path。
+ func Save(path string, m *machine.Machine, d *dos.DOS) error {
++	if m.CallbackActive() || m.CallbackPending() != 0 {
++		return fmt.Errorf("state: 回呼執行中或待執行，不能保存檔案快照")
++	}
+ 	f, err := os.Create(path)
+ 	if err != nil {
+ 		return err

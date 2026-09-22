@@ -31,7 +31,7 @@
 | #22 | completed | [為 Colonization 的 0x220 OPL 相容層建立 DRAFT／READY 規格](https://github.com/wicanr2/colonization_cht/issues/22) | `dos-first-visible-checkpoint` | 以固定埠序列與公開硬體契約完成最小 DRAFT、證據審查與 READY 規格；不實作、不做逐週期音訊考古。 |
 | #23 | completed | [依 READY 規格驗證 Colonization 的 OPL 相容層與首畫面](https://github.com/wicanr2/colonization_cht/issues/23) | `colonization-opl-compatibility-spec` | 依 READY 規格最小實作後，正式 OPENING.EXE 冷啟動取得可見／轉交收據，或以新證據縮小 blocker。 |
 | #24 | completed | [釐清 PSOUND 後續控制流進入映像外位址的受阻點（blocker）](https://github.com/wicanr2/colonization_cht/issues/24) | `colonization-opl-compatibility-checkpoint` | 正式冷啟動定位第一個進入映像外 offset 的控制轉移／堆疊邊，並以證據判定最小缺口；若足夠只建立 DRAFT。 |
-| #25 | in_progress | [釐清開場滑鼠事件與正常遊戲啟動鏈](https://github.com/wicanr2/colonization_cht/issues/25) | `psound-post-profile-control-flow` | 以同狀態座標對照釐清開場滑鼠的作用，並由 dosgolem 重生至少一條進入實際遊戲畫面的正常玩家路徑，或留下具體服務缺口。 |
+| #25 | completed | [釐清開場滑鼠事件與正常遊戲啟動鏈](https://github.com/wicanr2/colonization_cht/issues/25) | `psound-post-profile-control-flow` | 以同狀態座標對照釐清開場滑鼠的作用，並由 dosgolem 重生至少一條進入實際遊戲畫面的正常玩家路徑，或留下具體服務缺口。 |
 | #26 | planned | [建立第一條真實訊息的繁體中文顯示垂直切片](https://github.com/wicanr2/colonization_cht/issues/26) | `dynamic-overlay-ready` | 一則真實動態訊息完成中文顯示、英文／缺譯回退、幾何與正常玩家路徑驗證；靜態候選另依證據資格處理。 |
 
 ## 驗證

@@ -1384,3 +1384,90 @@ Python 3.11.2 標準函式庫 encoder 先從 indexed inputs 重建目標 051 gri
 
 所有容器無網路、原版與 reports input 唯讀、以 UID/GID 1000:1000 執行；產圖器是一次性 `/tmp` 工具，未加入
 儲存庫。這是可丟棄 prototype，不是 production path 或 READY 規格。
+
+## 2026-09-22：目標 053，正常啟動鏈與滑鼠操作解除阻塞
+
+入口：[目標 053](docs/goals/053-mouse-and-gameplay-route-replan.md)、Issue #25。
+本段訂正上輪的推論，不抹除其原始觀測。先前要求使用者猜座標的結論撤回；
+同狀態測試及原版批次檔提供足夠證據由工具查清，不屬產品價值決策。
+
+### 輸入、工具、位址空間
+
+| 輸入 | SHA-256 |
+|---|---|
+| `OPENING.EXE` | `3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39` |
+| `VICEROY.EXE` | `a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3` |
+| `COLONIZE.BAT` | `4ea071484153da2716f77446fc6c7545645493fd369daf62fba8f395fa0bd9db` |
+| 舊 `goal033-post-full-copy-5465772.state` | `c5cbfb0e184aac21455bdc7a976d83fa84e55af7cde0de36e40861d9bd7a77ba` |
+| BIOS 等待點 160-byte runtime dump | `b11e4e6a599ce3b38dc2c44bfeb30785d1d45ec07c2baad1a085b17988111cde` |
+
+歷史滑鼠對照使用 dosgolem `1435f175e785ea096a9268cd1021a4222300bd43`；最終驗證使用
+`22664265ea7d55ea8706448149908c79d3f0897b`。研究映像 `colonization-research:20260920-r2`，
+Go 1.24；反組譯使用既有 `ida-pro-9.4-idapython:locked-v1`，IDA Pro 9.4。
+IDA 匯入 raw dump 的資料庫零點對應執行期 `0562:0000`，並附加執行期位址；本文段:位移
+皆為 dosgolem runtime 位址，不是檔案 offset，也未對原始函式做推測性改名。
+
+### 舊無參數開場的同狀態因果對照
+
+`tools/probe_opening_mouse.py` 已重跑。快照實際還原步數是 #5,465,773，雖然檔名寫
+5465772；與控制組的首個 IP 分歧是記錄第 95 格、絕對步數 #5,465,868。
+先前文件的 #5,465,867 是步數基底誤差，不是新的控制流分歧。
+
+| 實驗 | confirmed 結果 |
+|---|---|
+| 無輸入、僅移至 `(16,16)` | #7M 仍在 mode 13h；IP 軌跡 SHA `fbaf2e21163bace06fbb2a0ae26563ca25c912b6e026ad76d382cb40464f2052`。 |
+| `(160,100)`、`(16,16)`、`(300,180)` 單次左鍵 | 全部 #5,511,836 以 `0x6C` 結束；IP 軌跡 SHA 同為 `41ced31cc9fa3b8d750e4ef9f9525a25444816bbebb4c321ffb377c4392fd81b`。 |
+| `0924:05AD`，剛從 int33 返回 | 三組 CX:DX 分別 `0140:0064`、`0020:0010`、`0258:00B4`，BX 均為 1。注入座標確實不同，不是輸入沒送到。 |
+
+有限結論：固定舊開場狀態中，三個受測位置的按下結果沒有座標差異。
+不能外推到遊戲主選單；後者已以實際位置點選第一列。
+文字報告含執行耗時，整份 `.txt` 雜湊不是決定性驗收訊號；比較使用 IP、索引畫面與色盤。
+
+### 啟動鏈與通用缺口
+
+confirmed：原版 `COLONIZE.BAT` 為 `opening -g %1 ... %9`，既有研究直接啟動 OPENING 卻省略
+`-g`。舊輪次關於 batch 不消費 `0x6C` 的有限觀測，不足以排除「batch 傳入參數」的作用。
+補正參數後才是本輪正常入口，不需要先實作 shell 或直接啟動 VICEROY。
+
+1. **BIOS 倒數**：在 runtime `0562:002E` 寫 `0000:0440=1`，`0032–0037` 等待其改變。
+   舊執行器會鏈回 BIOS timer，但不遞減此值。依平台規格新增非零倒數與歸零清除 motor bits；
+   #12,368,859 的 0→1 在 #12,836,218 由 BIOS 變成 0，隨後正常載入 VICEROY。
+   原始收據 `goal053-fixed-g-30m.txt`，規格 [006](docs/spec/006-bios-motor-timeout.md)。
+2. **滑鼠服務**：主選單呼叫的 `int33 AX=0014` 原先未實作，現依標準交換舊／新事件回呼。
+   連續冷啟動後 `(128,110)` 點擊進入難度畫面，服務不再列入未實作；規格
+   [007](docs/spec/007-mouse-handler-exchange.md)。
+3. **快照**：DOS v3 漏存回呼、座標限制、按鍵位置及相對位移，令續跑失去操作。
+   v4 保存行為狀態並拒絕 v3；機器層不完整保存 callback queue，因此明確拒絕有待執行／執行中
+   回呼時的檔案快照，不悄悄遺失。規格 [008](docs/spec/008-mouse-snapshot.md)。
+
+規格先經 DRAFT→READY 審查再實作；全套 `go test ./...` 已通過，原版重播後升為 CONFORMED。
+累積源碼補丁由上游 `d9c0c27` 重建後，Git tree 完全等於
+`2189d114214649c6f60074f70d853ff5bd04af0d`；不依賴只有本機才存在的未提交修正。
+
+### 正式 dosgolem 收據與輔助對照
+
+`tools/probe_gameplay_route.py`：冷啟動 #3M Enter、#12,000,001 開場左鍵，#30,000,001
+主選單 `(128,110)` 左鍵，#40,000,001 擷取。連續與安全選單快照重播皆開啟 `DIFFICUL.PIK`，
+實際檢視兩側畫面為難度選擇。兩者索引 SHA 同為
+`e491233e037fa69b0498fc9415688b4491124d0ae687f45b17b46e8bf57b6446`，色盤 SHA 同為
+`7c025d5be0f0851b285fe8d7fce2f4cfa44a28d0da3ca0d74eecfb3276c373c7`。
+不點擊的控制組不開啟該資產，實際畫面留在主選單，索引 SHA
+`915991ed8898747e7c635fee6596e64e9f6aee7928b021b4a35b945453e7241f`。
+本次選單快照 SHA `20c1a81b368dad9b0b8dae7d7283927244883a899cc78d47eb476d40018cc353`；
+完整命令與各次實際雜湊在本機 `goal053-route.json`。
+
+輔助 DOSBox-X 使用既有 `wolong-dosboxx:latest`，image ID
+`sha256:b75822ea1a4a9151abdee0992b854f5cd86524ccdbf9a71df624e7c91fcc3198`，
+啟動入口 `tools/dosbox_probe.sh`／`.conf`。原版複製到容器 `/tmp` 後由 `colonize` 啟動，
+Enter 到主選單，再以畫面上的第一列點擊到難度畫面。Xvfb 根座標 `(447,420)`，
+遊戲 client 原點 `(192,200)`、2 倍縮放，約對應邏輯 `(127.5,110)`。
+圖片 `goal053-dosbox-after-enter.png`／`goal053-dosbox-new-world.png` 僅作畫面類別輔助，
+不是相同虛擬時間、相同內部狀態或逐像素對拍。容器已停止並由 `--rm` 清除。
+
+### 停止線與下一步
+
+目標 053 已達成；不再把開場退出當作正常啟動受阻。尚未定位本遊戲動態印字，
+其他遊戲預置字型 hook 的零次命中不能證明「沒有動態文字」。
+`int21 AH=2D` 及 `AH=58 AL=81/83` 仍出現在診斷，沒有證據顯示其阻擋本輪路徑；不順手深挖。
+下一步為 [目標 054](docs/goals/054-main-menu-text-provenance.md)，只追一則真正可見選單文字，
+接到來源鍵 DRAFT 和第一則中文覆蓋，不宣稱整局可玩、中文化完成或任意快照全面正確。

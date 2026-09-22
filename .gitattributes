@@ -1,0 +1,2 @@
+# 統一差異補丁的上下文前綴必須保留空白；源碼另經 git apply 與 tree 雜湊驗證。
+tools/dosgolem-platform-fixes.patch -whitespace
