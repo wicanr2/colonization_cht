@@ -1471,3 +1471,92 @@ Enter 到主選單，再以畫面上的第一列點擊到難度畫面。Xvfb 根
 `int21 AH=2D` 及 `AH=58 AL=81/83` 仍出現在診斷，沒有證據顯示其阻擋本輪路徑；不順手深挖。
 下一步為 [目標 054](docs/goals/054-main-menu-text-provenance.md)，只追一則真正可見選單文字，
 接到來源鍵 DRAFT 和第一則中文覆蓋，不宣稱整局可玩、中文化完成或任意快照全面正確。
+
+## 2026-09-22：目標 054 的第一列主選單文字證據
+
+### 輸入與工具
+
+正常入口仍為 `OPENING.EXE -g`，不使用 VICEROY direct-entry。檔案 SHA-256：
+
+| 輸入 | SHA-256 |
+|---|---|
+| OPENING.EXE | `3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39` |
+| VICEROY.EXE | `a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3` |
+| GAME.TXT | `67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a` |
+
+dosgolem 隔離提交 `22664265ea7d55ea8706448149908c79d3f0897b`，研究映像
+`colonization-research:20260920-r2`、Go 1.24；重跑入口見
+[目標 054](docs/goals/054-main-menu-text-provenance.md)。探針源碼 `tools/trace_text.go`
+SHA-256 `368c673e82746152a1f195e3ea4d6f41619266b84978b206a862454b9978c4bf`。
+3M 指令送 Enter，12,000,001 開始正常左鍵按放，25M 將滑鼠移至 `(16,16)`，
+30,000,001 結束；輸入時序完整保存在探針，不改遊戲記憶體或亂數。
+本輪只驗選單，不宣稱新地圖生成的亂數對拍。
+
+### confirmed：來源、事件、背景與最終畫面
+
+檔案位移 `GAME.TXT:0x1B0` 的 25 bytes，片段 SHA-256
+`6d3dbc785cd2b8fe343ae1345d6371b637867083e45f7f50f76eb3ee67fec427`，
+執行期 far pointer `6F16:00DF`（dosgolem 線性位址 `0x6F23F`）。
+印字入口 `937C:0538`／步數 21,384,086；返回 `937C:1D50`／步數 21,402,955。
+入口 AX=86、DX=107、BX=0，原始堆疊：
+`501ddf00166f7400166f2ce9020000006b00c700166f82726a0056008600c600`。
+原始 caller `937C:1D4D` bytes `e8e8e7`，near call 至 `0538`；入口 bytes `c8080000`。
+這些均為執行期段:位移，不能當成 EXE 檔案位移。
+
+畫布在 `2CAE:0000`（線性 `0x2CAE0`），320×200。描述區原始定位
+`DS=1C6A:2DA8`，bytes `c80040010000ae2c1700180019001a00`。
+呼叫前後整體記憶體改變 277 bytes，其中畫布 180 bytes，A000 顯存沒有改變。
+180 個文字像素全為色號 254，包圍盒含端點 `x=86..176,y=107..112`。
+其餘記憶體差異不能併作文字遮罩；`tools/analyze_text_capture.py` 可重生差異報告。
+
+滑鼠原停 `(160,100)` 時，23 個文字像素被游標色號覆蓋；正常移開至 `(16,16)` 後，
+180 個文字像素全都存續到最終畫面。原型僅接受移開後的精確畫面，不直接抹除游標。
+兩次獨立冷啟動的事件、所有讀取紀錄、整體記憶體及下列輸出一致：
+
+| 本機產物（workplace/reports/） | SHA-256 |
+|---|---|
+| goal054-clear-events.json.idx | `559df11e83c1fb01e2d844a4379af6369e279bf4ea7b4b30c95cbf2d4062c4a1` |
+| goal054-clear-events.json.pal | `243ca37172f22fbfb4182d6d495ad129b9a524f093d67f0d1c5e6d215434ee5f` |
+| goal054-clear-events.json.event0.before | `da6844a1f1d9c64254f23051e27bc33e5b1f5316c861e8d1beff69dbb90235c2` |
+| goal054-clear-events.json.event0.after | `cf70e897c2e9ae93b4e2babb1e6ce7daa34d53525cc02d8b9e59308a2d3b115b` |
+| goal054-clear-events.json.memory | `abe37ffcf541ab771e297795989742339c611ddfb0a873405765713ca8656df1` |
+
+### IDA 9.4 非破壞性定位
+
+從最終記憶體取 `[0x937C0,0x967C0)` 得 `goal054-runtime-937c.bin`，12,288 bytes，
+SHA-256 `a199bf5285da8b0ecb0a4bed80f14c772068a3b2212d8077577bda1cf4b2bf21`。
+IDA raw-binary EA 0 對應 dosgolem runtime `937C:0000`；不是原始 EXE file offset。
+沿用 `ida-pro-9.4-idapython:locked-v1`，`tools/ida_text_export.py` 匯出 bytes、原始地址、
+推論等級與證據，並保存本機 `goal054-text.i64` 及 `goal054-ida-text.json`。
+`sub_538` 是 IDA 自動導覽名稱；函式邊界與其他候選入口保持未知，不自行改名成語意。
+資料庫有來自 `1D4D` 與 `1DAA` 的 xref；只有前者已由本輪動態鏈驗證。
+`1D24` 是選定的分析視窗，不宣稱已證實函式入口。
+
+目標 054 的 `tools/probe_text.py` 會將上述範圍寫至 `/out/goal054-runtime-937c.bin` 並驗證雜湊；
+掛載前先確認 tools／reports 是目錄，輸出擁有者為目前使用者，再執行：
+
+```sh
+test -d tools && test -d workplace/reports &&
+timeout 60 docker run --rm --network none --memory 1g --cpus 1 --pids-limit 128 \
+  --user "$(id -u):$(id -g)" \
+  -v "$PWD/tools:/tools:ro" -v "$PWD/workplace/reports:/inputs:ro" \
+  -v "$PWD/workplace/reports:/out" \
+  -e IDA_EXPORT=/out/goal054-ida-text.json -e IDA_DATABASE=/out/goal054-text.i64 \
+  -e IDA_RUNTIME_SEGMENT=937c -e IDA_RUNTIME_OFFSET=0000 \
+  -e IDA_ENTRY_OFFSETS=0538,1d24 -e IDA_WINDOW_BYTES=320 \
+  ida-pro-9.4-idapython:locked-v1 \
+  idat -A -pmetapc -T"Binary file" -o/tmp/text.i64 \
+    -S/tools/ida_text_export.py /inputs/goal054-runtime-937c.bin
+```
+
+目標 054 停止於最小充分證據。後續規格 009／目標 055 只做本機離線原型；
+Issue #6 的三種輸出情境、正式來源鍵及重繪生命週期仍未完成。
+
+### 中文原型與字型限制
+
+版本化 UTF-8 TSV 含 50 筆來源候選；只第一列已動態驗證，其餘不是已命中或正式術語。
+Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`，
+內嵌版本 1.430；許可為自訂條款，不是 OFL。此處只確認本機內容，正式散布仍需權利審查。
+不沿用 psychic-war 倚天字型的個別授權決定。完整本機查核為 `workplace/goal054-font-audit.md`。
+離線中文圖片、14 項測試及雜湊見 [目標 055](docs/goals/055-first-text-prototype.md)；
+任何圖片、字型、原文盤點與執行期傾印均未納入 Git。

@@ -26,9 +26,10 @@
 → `VICEROY.EXE` 主選單 → 滑鼠點選「新世界」→ 難度選擇。
 連續冷啟動與安全快照重播的索引畫面、色盤一致；無輸入控制組保留在主選單。
 
-目前完成的是啟動與操作基礎，尚未產生中文覆蓋，也未驗證完整遊戲。
-下一步是[主選單文字輸出追蹤](docs/goals/054-main-menu-text-provenance.md)，接著完成
-[第一則中文訊息](https://github.com/wicanr2/colonization_cht/issues/26)。
+已追到第一列主選單的實際印字事件，並完成[離線中文原型](docs/goals/055-first-text-prototype.md)
+及 50 筆可驗證來源的翻譯草稿。目前只驗證一列，不是即時中文化，也未驗證完整遊戲。
+下一步是確認原型字型／字級，補足輸出情境與重繪生命週期，再完成
+[第一則可互動中文訊息](https://github.com/wicanr2/colonization_cht/issues/26)。
 靜態圖像中文化另依來源與背景證據推進，不再阻擋動態文字路徑。
 
 ## 研究與驗證入口
@@ -111,6 +112,9 @@
 - [第五十二輪目標](docs/goals/052-known-exit-input-marker.md)
 - [第五十三輪目標：滑鼠事件與中文化路徑重排](docs/goals/053-mouse-and-gameplay-route-replan.md)
 - [第五十四輪目標：主選單文字來源](docs/goals/054-main-menu-text-provenance.md)
+- [第五十五輪目標：第一則中文顯示原型](docs/goals/055-first-text-prototype.md)
+- [第一則文字覆蓋規格草案](docs/spec/009-first-text-overlay-draft.md)
+- [繁中翻譯草稿](text/draft.zh-Hant.tsv)（候選來源，不是正式執行期識別）
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [MCB 記憶體 arena 重新協調規格草案](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)
