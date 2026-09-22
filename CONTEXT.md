@@ -60,7 +60,9 @@ DOSBox-X 僅提供啟動鏈及畫面類別的輔助基準，正式收據由 dosg
 [目標062](docs/goals/062-difficulty-finish-prompt.md)已驗收難度頁「完成後點此」提示；
 限定證據、覆蓋契約與中英文同狀態結果見[規格015](docs/spec/015-difficulty-finish-prompt.md)。
 [目標063](docs/goals/063-difficulty-card-text.md)接續難度卡片文字；目前僅在既有
-RAM 快照找到原文候選，尚無讀取／繪製事件及安全矩形，不計入八段完成數。
+RAM 快照找到原文候選。兩次正常路徑重播確認卡片區畫布差分，但現有讀寫監看
+沒有命中候選來源與卡片逐 byte 寫入；[規格016](docs/spec/016-difficulty-card-text-draft.md)
+保持 DRAFT，不計入八段完成數。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
 保留189筆草稿及五筆畫面命中的分母。全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。

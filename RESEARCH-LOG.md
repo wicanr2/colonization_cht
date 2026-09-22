@@ -1684,3 +1684,17 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
 - Ebitengine／Xvfb 真視窗九筆滑鼠輸入的中文原跑、重播與英文控制原版狀態一致；
   輸出圖差異只在三個獨立安全矩形，完成提示區佔 2,856 個 4 倍畫布像素。
   原版截圖只留私有儲存庫；完整本機收據 `workplace/reports/goal062-ebiten-receipt.json`。
+
+## 2026-09-22：第一張難度卡片文字的未閉合輸出路徑
+
+- 固定輸入雜湊、工具版本與地址空間見[規格016](docs/spec/016-difficulty-card-text-draft.md)。
+  使用 `tools/probe_difficulty_writes.go` 從 `OPENING.EXE -g` 及九筆既有真視窗
+  滑鼠輸入兩次重播到 3,200 萬步；輸入、最終 RAM、索引畫面、色盤、原始畫布
+  雜湊相同。檢查點路徑不同，故 JSON 整體不能逐 byte 比較。
+- confirmed：第一張卡片文字區在 2,980 萬步附近的前後原始畫布差分為 224 點，
+  bbox `(141,45)–(182,58)`；最終畫面可見 `Discoverer`／`Easiest`。
+  DOS 線性 RAM 候選分別為 `0x4CC6A`／`0x4DF90`，但完整來源路徑未知。
+- confirmed（觀測限制）：從冷啟動監看兩處線性 RAM 讀取均零命中；卡片區
+  `WatchWrites` 亦零命中。不可將此解讀為原版沒讀寫或卡片一定是靜態圖，
+  更不可用字串存在 RAM 當作輸出掛鉤的證據。下輪須追批次畫布複製、
+  其他字串副本或圖像來源；未達 READY 前保持英文。
