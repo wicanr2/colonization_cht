@@ -57,6 +57,8 @@ DOSBox-X 僅提供啟動鏈及畫面類別的輔助基準，正式收據由 dosg
 24則遊戲內說明建立原文／繁中TSV，仍是待畫面驗收的草稿。
 [目標061](docs/goals/061-next-visible-text-slice.md)已驗收難度頁兩行中文標題，
 真視窗圖存於私有 `docs/screenshots/`；圖內有原版像素，不得當公開發行素材。
+[目標062](docs/goals/062-difficulty-finish-prompt.md)續追難度頁完成提示；在其
+輸出事件與安全矩形通過審查前，該提示仍顯示英文。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
 保留189筆草稿及五筆畫面命中的分母。全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。
