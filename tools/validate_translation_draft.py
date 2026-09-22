@@ -24,6 +24,7 @@ HASH = re.compile(r"[0-9a-f]{64}\Z")
 OFFSET = re.compile(r"0x[0-9A-F]{8}\Z")
 PLACEHOLDER = re.compile(r"%[A-Z]+[0-9]*(?:\$)?")
 CONTROLS = re.compile(r"[{}^~_]")
+HOTKEY = re.compile(r"~([\x21-\x7e])")
 
 
 class Invalid(ValueError):
@@ -81,8 +82,10 @@ def validate_sources(rows, game):
         require(hashlib.sha256(source).hexdigest() == row["source_bytes_sha256"], prefix + "來源片段 SHA-256 不符")
         original = source.decode("ascii", errors="strict")
         translated = row["zh_hant"]
+        require(re.match(r" *", original).group() == re.match(r" *", translated).group(), prefix + "前置縮排不符")
         require(PLACEHOLDER.findall(original) == PLACEHOLDER.findall(translated), prefix + "變數占位符不符")
         require(CONTROLS.findall(original) == CONTROLS.findall(translated), prefix + "大括號或控制符號不符")
+        require(HOTKEY.findall(original) == HOTKEY.findall(translated), prefix + "熱鍵 ASCII 標記不符")
     return len(rows)
 
 

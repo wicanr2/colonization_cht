@@ -11,10 +11,18 @@ import fontTools
 from fontTools.ttLib import TTFont
 from PIL import ImageFont, features
 
-from validate_translation_draft import read_catalog, validate_sources, PLACEHOLDER
+from validate_translation_draft import read_catalog, validate_sources, PLACEHOLDER, CONTROLS, HOTKEY
 
 
 FONT_SHA = "8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c"
+# 規格012的已驗證五列；此表只提供量測安全框，不授權新的執行期辨識。
+MENU_TOPS = {
+    "GAME.TXT:0x000001B0": 107,
+    "GAME.TXT:0x000001CB": 115,
+    "GAME.TXT:0x000001E4": 123,
+    "GAME.TXT:0x000001F9": 131,
+    "GAME.TXT:0x00000204": 139,
+}
 
 
 def digest(path):
@@ -27,14 +35,15 @@ def main():
     parser.add_argument("--font", type=Path, required=True)
     parser.add_argument("--catalog", type=Path, default=Path(__file__).resolve().parents[1] / "text/draft.zh-Hant.tsv")
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--expected-count", type=int, help="本輪預期筆數；不符時拒絕，避免批次範圍漂移")
     args = parser.parse_args()
     rows = read_catalog(args.catalog)
     if any(not (args.game / row["source_file"]).is_file() for row in rows):
         print("SKIP：缺少原版來源")
         return 77
     validate_sources(rows, args.game)
-    if len(rows) != 50:
-        raise ValueError("本輪範圍固定50筆，請重新審查新增內容")
+    if args.expected_count is not None and len(rows) != args.expected_count:
+        raise ValueError("草稿筆數不符本輪預期範圍")
     if digest(args.font) != FONT_SHA:
         raise ValueError("字型版本指紋不符")
     font = ImageFont.truetype(str(args.font), 24)
@@ -56,25 +65,27 @@ def main():
             "source_validation": "passed",
             "draft_text": text,
             "placeholder_sequence": PLACEHOLDER.findall(text),
+            "ascii_hotkey_sequence": HOTKEY.findall(text),
             "missing_codepoints": missing,
             "font_bbox": bbox,
             "width_px": width,
             "height_px": height,
             "advance_px": font.getlength(text),
             "raster_mask_bbox": mask.getbbox(),
-            "measurement_scope": "未展開變數的原樣模板" if PLACEHOLDER.search(text) else "目前譯文單行墨跡與前進寬度",
+            "measurement_scope": "未展開變數或未解析控制碼的原樣模板" if PLACEHOLDER.search(text) or CONTROLS.search(text) else "目前譯文單行墨跡與前進寬度",
             "safe_rectangle_status": "unknown",
             "geometry_accepted": None,
         }
-        if row["candidate_id"] == "GAME.TXT:0x000001B0":
-            entry.update(safe_rectangle_status="規格009已知單一原型安全矩形",
-                         safe_rectangle_px=[344, 428, 928, 456],
+        if row["candidate_id"] in MENU_TOPS:
+            top = MENU_TOPS[row["candidate_id"]] * 4
+            entry.update(safe_rectangle_status="規格012已驗證主選單列的安全矩形",
+                         safe_rectangle_px=[344, top, 928, top + 28],
                          geometry_accepted=width <= 584 and height <= 28,
                          placement_rule="對齊墨跡左上角；繪字座標需扣除bbox前兩值",
                          fits_without_truncation=width <= 584 and height <= 28)
         reviewed.append(entry)
     report = {
-        "scope": "Goal056既有50筆草稿第二輪校對；不是正式詞彙、覆蓋鍵或完整介面驗收",
+        "scope": f"本次{len(rows)}筆草稿查核；不是正式詞彙、覆蓋鍵或完整介面驗收",
         "catalog_sha256": digest(args.catalog),
         "font_sha256": FONT_SHA,
         "font_size_px": 24,
@@ -86,7 +97,7 @@ def main():
                     "rows_with_known_geometry": sum(r["geometry_accepted"] is not None for r in reviewed),
                     "runtime_variable_expansion_verified": False,
                     "terminology_approved": False},
-        "limitations": ["49筆尚無各自安全矩形，不把字型量測當成場景版面通過。",
+        "limitations": [f"{sum(r['geometry_accepted'] is None for r in reviewed)}筆尚無各自安全矩形，不把字型量測當成場景版面通過。",
                         "變數實值、反白、重繪及連續播放不在此工具驗證範圍。",
                         "cmap由fontTools獨立解析，不依賴原型的自製cmap解析器。",
                         "工具不自動判定語意；語言校對意見由同輪人工檢閱另行追加。"],

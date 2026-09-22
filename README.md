@@ -27,9 +27,11 @@
 連續冷啟動與安全快照重播的索引畫面、色盤一致；無輸入控制組保留在主選單。
 
 五個主選單選項已由原版執行事件接到[逐幀中文合成](docs/goals/057-menu-coverage-and-interaction.md)，
-字型與大小已獲使用者確認；中文開／關的原版狀態對照通過，另有 50 筆來源可驗證的譯稿。
-目前只涵蓋這五列、以無頭工具驗收；游標遮擋時逐列保留原文，尚無可手動遊玩的中文視窗或完整遊戲驗證。
-下一步接通前端並擴展已驗證文字，完成[可互動中文切片](https://github.com/wicanr2/colonization_cht/issues/26)。
+字型與大小已獲使用者確認；中文開／關的原版狀態對照通過。另有持續增加的來源可驗證
+譯稿，但譯稿不等於遊戲畫面已中文化；本輪數量與限制見[目標 058](docs/goals/058-translation-corpus-and-player-window.md)。
+已有 Linux／Xvfb 可撤回視窗原型，能以實際滑鼠由中文主選單進入難度畫面，並以同輸入
+對照原版狀態；尚非正式玩家版本。游標遮擋時逐列保留原文，其他畫面與完整遊戲未驗證。
+下一步擴展已驗證文字及操作範圍，完成[可互動中文切片](https://github.com/wicanr2/colonization_cht/issues/26)。
 靜態圖像中文化另依來源與背景證據推進，不再阻擋動態文字路徑。
 
 ## 研究與驗證入口
@@ -115,6 +117,8 @@
 - [第五十五輪目標：第一則中文顯示原型](docs/goals/055-first-text-prototype.md)
 - [第五十六輪目標：主選單即時覆蓋](docs/goals/056-live-menu-overlay.md)
 - [第五十七輪目標：五列覆蓋與互動入口查核](docs/goals/057-menu-coverage-and-interaction.md)
+- [第五十八輪目標：譯文語料覆蓋與玩家視窗](docs/goals/058-translation-corpus-and-player-window.md)
+- [可撤回 Linux 視窗原型規格](docs/spec/013-window-prototype.md)
 - [五列主選單覆蓋規格](docs/spec/012-five-menu-lines.md)
 - [第一列文字覆蓋規格與未完成範圍](docs/spec/009-first-text-overlay-draft.md)
 - [精確指令觀測規格](docs/spec/010-instruction-observer.md)

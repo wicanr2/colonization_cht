@@ -33,6 +33,7 @@
 | #24 | completed | [釐清 PSOUND 後續控制流進入映像外位址的受阻點（blocker）](https://github.com/wicanr2/colonization_cht/issues/24) | `colonization-opl-compatibility-checkpoint` | 正式冷啟動定位第一個進入映像外 offset 的控制轉移／堆疊邊，並以證據判定最小缺口；若足夠只建立 DRAFT。 |
 | #25 | completed | [釐清開場滑鼠事件與正常遊戲啟動鏈](https://github.com/wicanr2/colonization_cht/issues/25) | `psound-post-profile-control-flow` | 以同狀態座標對照釐清開場滑鼠的作用，並由 dosgolem 重生至少一條進入實際遊戲畫面的正常玩家路徑，或留下具體服務缺口。 |
 | #26 | in_progress | [建立第一條真實訊息的繁體中文顯示垂直切片](https://github.com/wicanr2/colonization_cht/issues/26) | `dynamic-overlay-ready` | 一則真實動態訊息完成中文顯示、英文／缺譯回退、幾何與正常玩家路徑驗證；靜態候選另依證據資格處理。 |
+| #27 | in_progress | [建立可追溯的全遊戲繁體中文譯文語料](https://github.com/wicanr2/colonization_cht/issues/27) | `dynamic-coverage` | 已辨識玩家可見文字有可追溯譯文、占位符與控制碼驗證、字型覆蓋及分別列出的草稿／正常路徑／顯示驗收量測。 |
 
 ## 驗證
 

@@ -1607,3 +1607,18 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   最終狀態一致，RAM SHA `6e94f669e9854c3ea306e70c3135ebf4997ff3ed86ec7892be5901701543a45d`。
   15事件／272幀／15檢查點，105張圖的獨立原底及字模合成完全相同。
   幾何已驗證的草稿由1筆增至5筆，其餘45筆仍未知；兩種文字情境不等於三種。
+## 2026-09-22：目標058文字表面盤點與顯示分母
+
+- 輸入為合法DOS版`Sid Meier's Colonization (1994)/SMColoni/COLONIZE/`，
+  `tools/inventory_text_surface.py`以位元組讀取18個`*.TXT`，保存各檔SHA-256、大小與
+  粗略資料行於本機`workplace/reports/goal058-text-surface.json`。總計4,119個粗略
+  資料行；排除空行、`;`註解與`@`指令，但不解析跨行訊息，不含EXE或靜態圖文，
+  因此不可稱為玩家可見訊息分母。GAME.TXT為3,421物理行、約1,664粗略資料行。
+- `text/draft.zh-Hant.tsv`的定位是檔案位元組位移與原始片段SHA，不是DOS實模式位址；
+  本輪189筆全部按其各自檔案SHA驗證。`tools/catalog_progress.py`僅比對目標056／057
+  固定收據，得到五個已接受並顯示的主選單鍵、184筆未在該路徑命中及一個未建檔
+  來源片段。後者可能為變數展開內容，不可推論成全遊戲缺譯數。
+- 難度頁可見兩行標題的原始ASCII字串在LABELS.TXT檔案位移`0x888`與`0x890`；
+  既有譯稿為「選擇／難度」。這只證實檔案候選與畫面文字相符，尚未追得該畫面
+  的印字事件、輸出安全矩形或中文覆蓋條件。輸入SHA及研究工具版本以本輪本機
+  語料收據、`docs/goals/058-translation-corpus-and-player-window.md`與各譯稿欄位為準。
