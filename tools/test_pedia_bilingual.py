@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 
 from build_help_bilingual import FIELDS
-from build_pedia_bilingual import source_marker, translations
+from build_pedia_bilingual import decode_source, source_marker, translations
 
 
 class PediaCatalogTests(unittest.TestCase):
@@ -40,6 +40,17 @@ class PediaCatalogTests(unittest.TestCase):
     def test_job12_source_marker_retains_original_space(self):
         self.assertEqual(source_marker("JOB12"), "JOB12 ")
         self.assertEqual(source_marker("JOB13"), "JOB13")
+
+    def test_cp437_bullet_is_normalized_and_unknown_byte_rejected(self):
+        self.assertEqual(decode_source(b"^\xF9 Item"), "^• Item")
+        with self.assertRaisesRegex(ValueError, "非ASCII"):
+            decode_source(b"\xE9")
+
+    def test_cp437_bullet_control_removed_rejected(self):
+        row = {"message_id": "PEDIA.TXT:@BUILDING12", "source_en": "^• Item"}
+        self.path.write_text("message_id\tzh_hant\nPEDIA.TXT:@BUILDING12\t^ 項目\n", encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "控制碼"):
+            translations([row], self.path, True)
 
     def test_existing_catalog_supplies_prior_scope(self):
         rows = [

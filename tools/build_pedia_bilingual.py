@@ -21,19 +21,31 @@ CARGO_KEYS = [f"CARGO{i}" for i in range(16)]
 UNIT_KEYS = [f"UNIT{i}" for i in range(24)]
 TERRAIN_KEYS = [f"TERRAIN{i}" for i in range(29)]
 JOB_KEYS = [f"JOB{i}" for i in range(27)]
-KEYS = FATHER_KEYS + CARGO_KEYS + UNIT_KEYS + TERRAIN_KEYS + JOB_KEYS
+BUILDING_KEYS = [f"BUILDING{i}" for i in range(42)]
+KEYS = FATHER_KEYS + CARGO_KEYS + UNIT_KEYS + TERRAIN_KEYS + JOB_KEYS + BUILDING_KEYS
 # 原版第12篇職業 marker 的尾端確實帶一個 ASCII 空白。保留可見且穩定的
 # message_id `PEDIA.TXT:@JOB12`，但定位時只能比對固定原始 marker，不能修改輸入或
 # 無聲 strip 掉來源異常。
 SOURCE_MARKERS = {"JOB12": "JOB12 "}
 PLACEHOLDER = re.compile(r"%(?:[A-Z][a-z]|[A-Z]+[0-9]*(?:\$)?)")
-CONTROLS = re.compile(r"[{}^~_\t]")
+CONTROLS = re.compile(r"[{}^~_\t•]")
 PERCENT_ESCAPES = re.compile(r"%%")
 NOTES = "百科整段草稿；檔案來源已確認，執行事件與中文安全矩形尚未驗證"
+NON_ASCII_CONTROL_BYTES = {0xF9}
 
 
 def source_marker(key):
     return SOURCE_MARKERS.get(key, key)
+
+
+def decode_source(raw):
+    unexpected = sorted({byte for byte in raw if byte >= 0x80} - NON_ASCII_CONTROL_BYTES)
+    if unexpected:
+        rendered = ", ".join(f"0x{byte:02X}" for byte in unexpected)
+        raise ValueError("PEDIA.TXT含未確認的非ASCII位元組：" + rendered)
+    # 使用者選定將原版 CP437 0xF9 正規化為目標字型有字形的 Unicode `•`（U+2022），
+    # 保留原始位元組、位址與 SHA 作來源證據；它仍是原文與譯文必須一致的結構控制符號。
+    return raw.decode("cp437").replace("∙", "•")
 
 
 def source_rows(game):
@@ -67,7 +79,7 @@ def source_rows(game):
         if end == start:
             raise ValueError(f"PEDIA.TXT:@{key} 沒有文字")
         raw = b"".join(lines[start:end]).removesuffix(b"\r\n")
-        original = raw.decode("ascii", errors="strict").replace("\r\n", "\n")
+        original = decode_source(raw).replace("\r\n", "\n")
         rows.append({
             "message_id": f"PEDIA.TXT:@{key}",
             "source_file": "PEDIA.TXT",

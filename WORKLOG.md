@@ -914,3 +914,18 @@
 - Docker均以`--rm`執行，收據僅留在已忽略的
   `workplace/reports/goal069-pedia-job-review.json`；正式TSV由目前使用者擁有，
   原版檔案、字型與暫存提案均未納入Git。
+
+## 2026-09-22：完成百科建築整段草稿與項目符號正規化
+
+- 目標070把42篇 `@BUILDING0`–`@BUILDING41` 接到既有121篇語料；固定原版重生的
+  `text/pedia-bilingual.tsv` 現有163篇 PEDIA 編號文章。原文、譯文及片段指紋均維持
+  私有儲存庫範圍，沒有提交原版檔、字型或工作區提案。
+- 使用者確認將原始 CP437 `0xF9` 正規化為 Cubic 11 可繪製的 U+2022 `•`；建立器和回歸
+  測試拒絕未知高位元組，並逐序驗證原文／譯文控制符號。此正規化保留原始位元組、位址和
+  SHA 作證據，不是畫面覆蓋或字型 fallback 實作。
+- `colonization-research:20260920-r2` 的15項 help／百科回歸測試及163篇來源驗證通過；
+  `rich2-py:latest` 以 Cubic 11 24px 產生的忽略收據
+  `workplace/reports/goal070-pedia-building-review.json` 顯示163篇來源／控制碼通過、缺字0、
+  執行期畫面未驗證。八段已顯示中文數不變。
+- 已更新目標070、目前狀態、README穩定摘要與機器可讀工作清單；本批完成後提交並推送到
+  私有 `main`。Docker 容器皆使用`--rm`；收尾另核對容器、檔案擁有權與原版素材追蹤狀態。

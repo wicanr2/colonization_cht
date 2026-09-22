@@ -1,6 +1,6 @@
 # 目標070：百科「建築」整段譯稿
 
-狀態：in_progress；日期：2026-09-22。對應 Issue [#7](https://github.com/wicanr2/colonization_cht/issues/7)、[#10](https://github.com/wicanr2/colonization_cht/issues/10)、[#27](https://github.com/wicanr2/colonization_cht/issues/27)。
+狀態：completed；日期：2026-09-22。對應 Issue [#7](https://github.com/wicanr2/colonization_cht/issues/7)、[#10](https://github.com/wicanr2/colonization_cht/issues/10)、[#27](https://github.com/wicanr2/colonization_cht/issues/27)。
 
 ## 範圍
 
@@ -26,3 +26,15 @@
 完成時，`text/pedia-bilingual.tsv` 與既有建立器、回歸測試、字型覆蓋檢查應可在 Docker
 重生並驗證163篇資料。結果寫入 `RESEARCH-LOG.md`、`WORKLOG.md`、`CONTEXT.md` 和
 `docs/worklist.json`；README 只在穩定語料現況改變時更新，不列本輪目標。
+
+## 完成收據
+
+- 固定 `PEDIA.TXT` SHA-256 為
+  `cd0bf6880d62df13b5f9fb4212a7ac20e60032db9de7aa3ad00862c422bb34d1`。建立器以已提交的
+  121篇基底加42篇建築譯稿重生正式TSV，得到163篇；逐列來源、片段SHA、鍵、欄位、占位符與
+  控制碼均通過。
+- 原始 CP437 `0xF9` 僅出現在建築文章的清單行；經使用者確認正規化成 U+2022 `•`，而非
+  U+2219。原始位元組與片段雜湊未變，原文與譯文的控制序列仍逐序相同。
+- `colonization-research:20260920-r2` 中15項 help／百科回歸測試通過；`rich2-py:latest`
+  的 Cubic 11 24px 審核為 `source_and_control_passed: 163`、`rows_with_missing_glyphs: 0`。
+  報告明示 `runtime_display_verified: false`，因此不增加畫面中文完成數。

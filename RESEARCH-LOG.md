@@ -1776,3 +1776,24 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
 - unknown（畫面與術語）：這只驗證私有TSV的來源與格式，不能證實百科輸出事件、變數實值、
   中文安全矩形或玩家路徑。職業、殖民、原住民與宗教相關譯語全是`draft`，不能外推成
   術語定稿、完整中文化或改變原版機制。
+
+## 2026-09-22：百科建築文章與 CP437 `0xF9` 正規化
+
+- 輸入仍為合法 DOS 版 `PEDIA.TXT`，SHA-256
+  `cd0bf6880d62df13b5f9fb4212a7ac20e60032db9de7aa3ad00862c422bb34d1`。`@BUILDING0`至
+  `@BUILDING41`是42個唯一文章鍵；其章節與文字位移、長度及片段 SHA-256 均由
+  `colonization-research:20260920-r2` 的[建立器](tools/build_pedia_bilingual.py)寫入
+  [百科雙語TSV](text/pedia-bilingual.tsv)，位址基準一律是**檔案位元組位移**。
+- confirmed（原始位元組）：固定檔中的高位元組僅有22個 CP437 `0xF9`，皆在
+  `@BUILDING12`、`@BUILDING13`、`@BUILDING14` 的清單行，且緊隨 `^`。原始輸入未修改；
+  原文區塊與其 SHA 仍可由固定檔重生。
+- 使用者決定（非原版推論）：將這個顯示控制符號正規化為 U+2022 `•`，而非 CP437 直接
+  解碼的 U+2219；排除新增 U+2219 字型或 fallback。建立器先拒絕其他未確認高位元組，再把
+  `0xF9` 正規化，並要求譯文在相同順序保留 `•`。這使 Cubic 11 24px 審核可繪製而不改變
+  原始 byte 證據。
+- confirmed（來源與格式）：25篇建國元勳、16篇貨物、24篇單位、29篇地形、27篇職業與42篇
+  建築，共163篇可由唯讀輸入重生。15項 help／百科回歸通過；`rich2-py:latest` 審核收據為
+  `source_and_control_passed: 163`、`rows_with_missing_glyphs: 0`。
+- unknown（執行期與版面）：收據的 `runtime_display_verified` 為 false。尚無 PEDIA 的
+  dosgolem 輸出事件、中文安全矩形、Ebitengine畫面或正常玩家路徑，所有163篇維持`draft`，
+  不計入八段已顯示中文或全遊戲完成度。
