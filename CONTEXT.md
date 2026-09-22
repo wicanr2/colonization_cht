@@ -219,6 +219,15 @@
 
 ## 下一閘門
 
+2026-09-22 訂正：目標 053 已重排中文化主路徑，見 [目標 053](docs/goals/053-mouse-and-gameplay-route-replan.md)／
+[Issue #25](https://github.com/wicanr2/colonization_cht/issues/25)。目標 041 的滑鼠 producer 在固定開場 state
+形成按鍵布林值；既有 `(160,100)` 點擊導向 `0x6C` 退出，但未證實該座標是按鈕，也未證實退出依賴座標。
+舊「下一個座標須由使用者選擇」不是事實或必要決策，現已撤回；目標 051／052 的格線與標記只保留歷史
+實驗定位。下一步是同狀態不同座標對照，接著釐清正常遊戲啟動鏈並由 dosgolem 重生正式收據。
+Issue #5 的動態文字研究以此為前置；Issue #8 靜態普查可獨立推進；
+[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26) 將第一則真實訊息的中文顯示列為實作里程碑。
+下面保留前輪說法作歷史脈絡，若與本段牴觸，以本段訂正為準。
+
 目標 050 已完成且沒有子目錄 `.BAT`／`.COM`／`.EXE` 候選；此靜態清冊分支達到停止線。目標 051 以既有完整
 composite frame 建立本機座標格觀測材料（PNG SHA-256
 `24abdb08a2d7c72c22f80e19999fd1638cb345e447ee84f928e822571a412f7c`），沒有注入新座標；它不產生控制項或文字語意。

@@ -112,10 +112,12 @@ AX 的差異直接隨既有左鍵的 BX 變化；這仍是退出路徑資料流�
 [目標 051](docs/goals/051-opening-frame-coordinate-grid.md) 已將既有完整開場畫面製成僅限本機的座標格檢視，供使用者
 選擇下一個正常操作；它不是按鈕辨識、文字抽取或輸入驗證，故動態文字路徑仍待後續同狀態證據。
 [目標 052](docs/goals/052-known-exit-input-marker.md) 已在這張僅限本機的格線上標示既有 `(160,100)` 非文字退出
-左鍵，協助使用者避開已排除路徑；marker 不是任何控制項或遊戲語意判定。
+左鍵；標記不是任何控制項或遊戲語意判定。其「請使用者另選座標」的舊結論已由
+[目標 053](docs/goals/053-mouse-and-gameplay-route-replan.md) 訂正：先以同狀態對照查明滑鼠是否只是開場略過輸入，
+再查證正常遊戲啟動鏈。這兩項是研究工作，不要求玩家猜座標。
 
-第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。目前等待使用者
-確認的執行策略見 [目標 002](docs/goals/002-win16-execution-strategy.md)；實際工作順序與 Issue
+第一輪的範圍與退出條件見 [目標 001](docs/goals/001-foundation-and-evidence.md)。已決定的 DOS 執行策略
+及歷史分支見 [目標 002](docs/goals/002-win16-execution-strategy.md)；實際工作順序與 Issue
 連結見 [工作計畫](WORKLIST.md)。最新已知事實與限制見 [目前脈絡](CONTEXT.md)。
 
 DOS 輸入的固定雜湊、probe 與限制見 [目標 005](docs/goals/005-dos-input-and-cold-boot.md)。
@@ -189,6 +191,7 @@ Windows 3.x NE 的靜態清冊與舊 blocker 保留在 [目標 003](docs/goals/0
 - [第五十輪目標](docs/goals/050-dos-subdirectory-launch-reference-inventory.md)
 - [第五十一輪目標](docs/goals/051-opening-frame-coordinate-grid.md)
 - [第五十二輪目標](docs/goals/052-known-exit-input-marker.md)
+- [第五十三輪目標：滑鼠事件與中文化路徑重排](docs/goals/053-mouse-and-gameplay-route-replan.md)
 - [Sound Blaster Pro OPL 規格草案](docs/spec/001-colonization-sbpro-opl-profile.md)
 - [Sound Blaster Pro OPL READY 規格](docs/spec/002-colonization-sbpro-opl-profile-ready.md)
 - [MCB 記憶體 arena 重新協調規格草案](docs/spec/003-colonization-mcb-arena-reconciliation-draft.md)
