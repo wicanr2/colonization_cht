@@ -1,6 +1,6 @@
 # 目標065：百科「建國元勳」整段譯稿
 
-狀態：in_progress；日期：2026-09-22。對應 Issue [#7](https://github.com/wicanr2/colonization_cht/issues/7)、[#10](https://github.com/wicanr2/colonization_cht/issues/10)、[#27](https://github.com/wicanr2/colonization_cht/issues/27)。
+狀態：completed（限定25篇建國元勳草稿）；日期：2026-09-22。對應 Issue [#7](https://github.com/wicanr2/colonization_cht/issues/7)、[#10](https://github.com/wicanr2/colonization_cht/issues/10)、[#27](https://github.com/wicanr2/colonization_cht/issues/27)。
 
 ## 範圍
 
@@ -20,3 +20,14 @@
    只通過這些資料驗證不代表文章已在遊戲畫面中文化。
 
 本切片不處理其他138篇百科文章、EXE或靜態圖文，不改原版檔案、規則、存檔或畫面覆蓋。
+
+## 完成收據
+
+`text/pedia-bilingual.tsv` 由固定 `PEDIA.TXT` 重生25篇完整資料列，包含章節與文字
+位移、原始檔與片段SHA-256、英文原文、繁中草稿與狀態。`tools/build_pedia_bilingual.py`
+驗證每一篇的來源、鍵、UTF-8、`^`、大括號、百分比跳脫與占位符；
+`tools/review_pedia_bilingual.py` 以已確認的 Cubic 11 24px 量測字型覆蓋。
+三項回歸測試及資料驗證均通過，25／25篇沒有缺少字形。
+
+這是來源與譯文品質收據，不是畫面收據。文章文字尚未取得 dosgolem 輸出事件、
+安全矩形、變數實值或 Ebitengine 截圖；歷史與術語敘述也維持 `draft`。
