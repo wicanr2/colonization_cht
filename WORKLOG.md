@@ -877,3 +877,14 @@
 - Docker均以`--rm`執行，收據僅留在已忽略的
   `workplace/reports/goal066-pedia-cargo-review.json`；正式TSV由目前使用者擁有，
   原版檔案、字型與暫存提案均未納入Git。
+
+## 2026-09-22：完成百科單位整段草稿切片
+
+- 目標067將 `@UNIT0`–`@UNIT23` 的24篇單位文章接到既有41篇百科語料，建立器由
+  固定原版重生共65篇TSV。原版只有標題的`@UNIT23`仍只保存標題，沒有為湊篇數增寫正文。
+- 65／65篇的原始檔與片段SHA、UTF-8、鍵、字面`\\n`、`^`、`{}`、`%%`及占位符通過；
+  Cubic 11 24px覆蓋為零缺字。兵種、船型與殖民歷史用語一律維持`draft`，未取得
+  dosgolem輸出事件、安全矩形、Ebitengine畫面或正常玩家路徑命中，故不增加八段畫面完成數。
+- Docker均以`--rm`執行，收據僅留在已忽略的
+  `workplace/reports/goal067-pedia-unit-review.json`；正式TSV由目前使用者擁有，
+  原版檔案、字型與暫存提案均未納入Git。

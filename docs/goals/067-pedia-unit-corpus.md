@@ -1,6 +1,6 @@
 # 目標067：百科「單位」整段譯稿
 
-狀態：in_progress；日期：2026-09-22。對應 Issue [#7](https://github.com/wicanr2/colonization_cht/issues/7)、[#10](https://github.com/wicanr2/colonization_cht/issues/10)、[#27](https://github.com/wicanr2/colonization_cht/issues/27)。
+狀態：completed（限定24篇單位草稿）；日期：2026-09-22。對應 Issue [#7](https://github.com/wicanr2/colonization_cht/issues/7)、[#10](https://github.com/wicanr2/colonization_cht/issues/10)、[#27](https://github.com/wicanr2/colonization_cht/issues/27)。
 
 ## 範圍
 
@@ -26,3 +26,13 @@ dosgolem輸出事件、安全矩形、Ebitengine畫面或正常玩家路徑驗�
 完成時，`text/pedia-bilingual.tsv` 與既有建立器、回歸測試、字型覆蓋檢查應可在 Docker
 重生並驗證65篇資料。結果寫入 `RESEARCH-LOG.md`、`WORKLOG.md`、`CONTEXT.md` 和
 `docs/worklist.json`；README 只在穩定語料現況改變時更新，不列本輪目標。
+
+## 完成收據
+
+固定原版重生後，`text/pedia-bilingual.tsv` 含65篇：25篇 `@FATHER`、16篇 `@CARGO` 與
+24篇 `@UNIT`。建立器確認每列的原始檔與片段 SHA、欄位、唯一鍵、字面 `\\n`、`^`、
+`{}`、`%%`及占位符；4項合成回歸測試也通過。`review_pedia_bilingual.py` 以已確認
+的 Cubic 11 24px 字型測得65／65篇無缺字。
+
+這是語料品質收據，不是畫面收據。單位文章仍沒有 dosgolem 輸出事件、中文安全矩形、
+Ebitengine 截圖或正常玩家路徑命中；全數維持 `draft`，PEDIA另有98篇文章未譯。
