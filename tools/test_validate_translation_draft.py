@@ -47,6 +47,22 @@ class HotkeyTests(unittest.TestCase):
         with self.assertRaisesRegex(Invalid, "控制符號"):
             validate_sources([self.row], self.root)
 
+    def test_hash_format_marker_preserved(self):
+        source = b"Zoom# ~Z"
+        raw = source + b"\r\n"
+        (self.root / "TEST.TXT").write_bytes(raw)
+        self.row.update(
+            candidate_id="TEST.TXT:0x00000000",
+            source_sha256=hashlib.sha256(raw).hexdigest(),
+            source_bytes_sha256=hashlib.sha256(source).hexdigest(),
+            source_byte_length=str(len(source)),
+            zh_hant="縮放# ~Z",
+        )
+        self.assertEqual(validate_sources([self.row], self.root), 1)
+        self.row["zh_hant"] = "縮放 ~Z"
+        with self.assertRaisesRegex(Invalid, "控制符號"):
+            validate_sources([self.row], self.root)
+
     def test_compound_placeholder_preserved(self):
         source = b"Denounce %Fs Mission"
         raw = source + b"\r\n"

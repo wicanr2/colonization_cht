@@ -25,7 +25,7 @@ OFFSET = re.compile(r"0x[0-9A-F]{8}\Z")
 # `%STRING0` 等為一般執行期變數；`%Fs` 是原版用於名稱組合的
 # 特殊拼接占位符。兩者都屬顯示模板，譯文不得把其中任一部分吞掉。
 PLACEHOLDER = re.compile(r"%(?:[A-Z][a-z]|[A-Z]+[0-9]*(?:\$)?)")
-CONTROLS = re.compile(r"[{}^~_]")
+CONTROLS = re.compile(r"[{}^~_#]")
 HOTKEY = re.compile(r"~([\x21-\x7e])")
 
 

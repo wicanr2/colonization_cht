@@ -1812,3 +1812,18 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   在新的欄位識別 DRAFT 規格與使用者確認前，不翻譯這232行，也不修改原版資料。
 - unknown（執行期）：目前沒有 dosgolem 證據指出上述任一欄在何畫面或以何種輸出呼叫顯示；
   此分類既不證實規則資料完全不會顯示，也不授權把顯示譯文套進語意／查找路徑。
+
+## 2026-09-22：目標071單行文字的來源與控制碼收據
+
+- 輸入為合法 DOS 版 `MAPMENU.TXT`、`WOODCUT.TXT`、`OPENING.TXT` 與`CLOSING.TXT`；其固定
+  檔案 SHA-256 見[目標071](docs/goals/071-mapmenu-woodcut-corpus.md)。建立器在各自檔案位元組
+  空間定位44個獨立資料行，並將檔案 SHA、行首位移、行長與行片段 SHA 寫入
+  [主譯稿](text/draft.zh-Hant.tsv)；這些位移不是 DOS 實模式、線性記憶體或畫布座標。
+- confirmed（來源與格式）：28個地圖編輯器選單／說明入口、14個具語意過場標題及兩個載入訊息
+  皆可從唯讀輸入重生。建立器拒絕逗號複合資料、註解、`@` 指令、行中位移與重複候選；全目錄
+  368筆經 CRLF、原始與片段 SHA、變數、`{}`、`^`、`~`、`_`、`#` 逐序驗證。
+- confirmed（字型）：`rich2-py:latest` 以 Cubic 11、24px 審核368筆，
+  `source_and_placeholder_passed` 為368、`rows_with_missing_glyphs` 為0。完整報告只在已忽略的
+  `workplace/reports/goal071-draft-review.json`，字型本體不入版控。
+- unknown（執行期與語意）：44筆都沒有 dosgolem 輸出事件、中文安全矩形、Ebitengine畫面、
+  正常玩家路徑、變數展開或術語定稿證據；它們全為`draft`，不能計入已顯示中文或完整翻譯。

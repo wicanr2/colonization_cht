@@ -1,6 +1,6 @@
 # 目標071：地圖編輯器選單、過場標題與載入訊息譯稿
 
-狀態：in_progress；日期：2026-09-22。對應 Issue [#7](https://github.com/wicanr2/colonization_cht/issues/7)、[#10](https://github.com/wicanr2/colonization_cht/issues/10)、[#27](https://github.com/wicanr2/colonization_cht/issues/27)。
+狀態：completed；日期：2026-09-22。對應 Issue [#7](https://github.com/wicanr2/colonization_cht/issues/7)、[#10](https://github.com/wicanr2/colonization_cht/issues/10)、[#27](https://github.com/wicanr2/colonization_cht/issues/27)。
 
 ## 範圍
 
@@ -38,3 +38,16 @@
 
 本切片不建立 dosgolem 輸出事件、中文安全矩形、Ebitengine畫面或正常玩家路徑收據；
 368筆主譯稿也不是全文翻譯或畫面中文化完成數。
+
+## 完成收據
+
+- 受限建立器只接受獨立、無逗號、非註解／非指令的原始行；44筆提案與既有324筆合成為
+  368筆正式主譯稿。來源檔、行首檔案位元組位移、行片段雜湊、CRLF 與候選唯一性可由
+  唯讀原版重生。
+- `#` 已被納入控制符號序列；新合成測試會拒絕複合資料、指令與遺失的 `#`。`~` 熱鍵與
+  ASCII 大小寫仍逐序核對，沒有把中文譯文用於識別或查找。
+- `colonization-research:20260920-r2` 的28項單行、百科與說明回歸通過；368筆固定來源驗證
+  通過。`rich2-py:latest` 的 Cubic 11、24px 審核為
+  `source_and_placeholder_passed: 368`、`rows_with_missing_glyphs: 0`，但沒有新增已知安全矩形。
+- 報告明示執行期變數展開、術語與畫面皆未驗證；所有44筆維持`draft`，不增加八段已顯示
+  中文，也不處理目標所排除的 NAMES 複合資料。
