@@ -66,7 +66,8 @@ EXE及靜態圖像尚未建立完整玩家可見訊息分母，不宣稱全文�
 [目標067](docs/goals/067-pedia-unit-corpus.md)已完成24篇「單位」文章草稿；
 [目標068](docs/goals/068-pedia-terrain-corpus.md)已完成29篇「地形」文章草稿；
 [目標069](docs/goals/069-pedia-job-corpus.md)已完成27篇「職業」文章草稿；
-百科語料現為121篇，仍與畫面中文化、術語定稿及其餘42篇分開計算。
+百科語料現為121篇。[目標070](docs/goals/070-pedia-building-corpus.md)接著處理42篇「建築」文章；
+完成後才是 PEDIA 的163篇編號文章皆有草稿，仍與全遊戲翻譯、畫面中文化及術語定稿分開計算。
 最近完成入口：[目標060](docs/goals/060-help-bilingual-corpus.md)：
 24則遊戲內說明建立原文／繁中TSV，仍是待畫面驗收的草稿。
 [目標061](docs/goals/061-next-visible-text-slice.md)已驗收難度頁兩行中文標題，
