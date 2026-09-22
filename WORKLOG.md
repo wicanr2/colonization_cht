@@ -888,3 +888,14 @@
 - Docker均以`--rm`執行，收據僅留在已忽略的
   `workplace/reports/goal067-pedia-unit-review.json`；正式TSV由目前使用者擁有，
   原版檔案、字型與暫存提案均未納入Git。
+
+## 2026-09-22：完成百科地形整段草稿切片
+
+- 目標068將 `@TERRAIN0`–`@TERRAIN28` 的29篇地形文章接到既有65篇百科語料，建立器由
+  固定原版重生共94篇TSV。重複而有細微效果差異的森林文章仍各自保留鍵與譯文，不合併。
+- 94／94篇的原始檔與片段SHA、UTF-8、鍵、字面`\\n`、`^`、`{}`、`%%`及占位符通過；
+  Cubic 11 24px覆蓋為零缺字。地形、資源、方格與效果用語一律維持`draft`，未取得
+  dosgolem輸出事件、安全矩形、Ebitengine畫面或正常玩家路徑命中，故不增加八段畫面完成數。
+- Docker均以`--rm`執行，收據僅留在已忽略的
+  `workplace/reports/goal068-pedia-terrain-review.json`；正式TSV由目前使用者擁有，
+  原版檔案、字型與暫存提案均未納入Git。

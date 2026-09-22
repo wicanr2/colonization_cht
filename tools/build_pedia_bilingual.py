@@ -19,7 +19,8 @@ from build_help_bilingual import (
 FATHER_KEYS = [f"FATHER{i}" for i in range(25)]
 CARGO_KEYS = [f"CARGO{i}" for i in range(16)]
 UNIT_KEYS = [f"UNIT{i}" for i in range(24)]
-KEYS = FATHER_KEYS + CARGO_KEYS + UNIT_KEYS
+TERRAIN_KEYS = [f"TERRAIN{i}" for i in range(29)]
+KEYS = FATHER_KEYS + CARGO_KEYS + UNIT_KEYS + TERRAIN_KEYS
 PLACEHOLDER = re.compile(r"%(?:[A-Z][a-z]|[A-Z]+[0-9]*(?:\$)?)")
 CONTROLS = re.compile(r"[{}^~_]")
 PERCENT_ESCAPES = re.compile(r"%%")
