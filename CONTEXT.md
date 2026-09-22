@@ -71,6 +71,9 @@ EXE及靜態圖像尚未建立完整玩家可見訊息分母，不宣稱全文�
 [目標069](docs/goals/069-pedia-job-corpus.md)已完成27篇「職業」文章草稿；
 [目標070](docs/goals/070-pedia-building-corpus.md)已完成42篇「建築」文章草稿。百科163篇編號文章
 皆有來源可追溯的草稿及字型覆蓋收據；這仍與全遊戲翻譯、畫面中文化及術語定稿分開計算。
+[目標071](docs/goals/071-mapmenu-woodcut-corpus.md)接續處理44筆獨立的地圖編輯器選單、過場標題及
+載入訊息。`NAMES.TXT`的70條無逗號文字已全數收錄；餘下232列是名稱混合規則／別名資料，
+不可套用既有整行候選模型，待有 DRAFT 欄位識別方案才重開。
 最近完成入口：[目標060](docs/goals/060-help-bilingual-corpus.md)：
 24則遊戲內說明建立原文／繁中TSV，仍是待畫面驗收的草稿。
 [目標061](docs/goals/061-next-visible-text-slice.md)已驗收難度頁兩行中文標題，
