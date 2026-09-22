@@ -17,13 +17,17 @@ def main():
     p.add_argument('--game', type=Path, required=True)
     p.add_argument('--font', type=Path, required=True)
     p.add_argument('--output', type=Path, required=True)
+    p.add_argument('--candidate', default='GAME.TXT:0x000001B0',
+                   choices=['GAME.TXT:0x000001B0', 'GAME.TXT:0x000001CB',
+                            'GAME.TXT:0x000001E4', 'GAME.TXT:0x000001F9', 'GAME.TXT:0x00000204'],
+                   help='規格 009／012 已審查的主選單列；字模各自獨立綁定')
     args = p.parse_args()
     rows = read_catalog(args.catalog)
     if any(not (args.game / row['source_file']).is_file() for row in rows):
         print('SKIP：缺少合法原版，未產生字模')
         return 77
     validate_sources(rows, args.game)
-    key = 'GAME.TXT:0x000001B0'
+    key = args.candidate
     text = next(r['zh_hant'] for r in rows if r['candidate_id'] == key)
     data = args.font.read_bytes()
     if hashlib.sha256(data).hexdigest() != FONT_SHA:

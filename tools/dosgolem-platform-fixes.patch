@@ -2534,3 +2534,184 @@ index 0000000..b758f20
 +		t.Fatalf("alpha blend %v", c)
 +	}
 +}
+diff --git a/overlay/layers.go b/overlay/layers.go
+new file mode 100644
+index 0000000..343736b
+--- /dev/null
++++ b/overlay/layers.go
+@@ -0,0 +1,59 @@
++package overlay
++
++import (
++	"fmt"
++	"image"
++	"image/draw"
++)
++
++// Layer 是獨立比對原始畫面的覆蓋層，不持有遊戲狀態。
++type Layer struct {
++	Patch      *Patch
++	Ink        *image.Alpha
++	Position   image.Point
++	ColorIndex byte
++	Enabled    bool
++}
++
++// LayerResult 保留每層的套用結果與回退原因。
++type LayerResult struct {
++	Applied bool
++	Reason  string
++}
++
++// ComposeLayers 只合併互不重疊的安全區；每層皆以相同原始輸入判斷。
++// 超過 32 層或任何非 nil 補片安全區重疊時，整次呼叫拒絕。
++func ComposeLayers(indexed, palette []byte, width, height, scale int, layers []Layer) (*image.RGBA, []LayerResult, error) {
++	if len(layers) > 32 {
++		return nil, nil, fmt.Errorf("too many layers: %d", len(layers))
++	}
++	for i, layer := range layers {
++		if layer.Patch == nil {
++			continue
++		}
++		for j := 0; j < i; j++ {
++			if layers[j].Patch != nil && layer.Patch.safe.Overlaps(layers[j].Patch.safe) {
++				return nil, nil, fmt.Errorf("overlapping safe rectangles: layers %d and %d", j, i)
++			}
++		}
++	}
++	base, _, _, err := Compose(indexed, palette, width, height, scale, nil, nil, image.Point{}, 0, false)
++	if err != nil {
++		return nil, nil, err
++	}
++	results := make([]LayerResult, len(layers))
++	for i, layer := range layers {
++		frame, applied, reason, err := Compose(indexed, palette, width, height, scale,
++			layer.Patch, layer.Ink, layer.Position, layer.ColorIndex, layer.Enabled)
++		if err != nil {
++			return nil, nil, err
++		}
++		results[i] = LayerResult{Applied: applied, Reason: reason}
++		if applied {
++			safe := layer.Patch.safe
++			scaled := image.Rect(safe.Min.X*scale, safe.Min.Y*scale, safe.Max.X*scale, safe.Max.Y*scale)
++			draw.Draw(base, scaled, frame, scaled.Min, draw.Src)
++		}
++	}
++	return base, results, nil
++}
+diff --git a/overlay/layers_test.go b/overlay/layers_test.go
+new file mode 100644
+index 0000000..6aae032
+--- /dev/null
++++ b/overlay/layers_test.go
+@@ -0,0 +1,110 @@
++package overlay
++
++import (
++	"bytes"
++	"image"
++	"reflect"
++	"testing"
++)
++
++func layerFixture(t *testing.T) ([]byte, []byte, []Layer) {
++	t.Helper()
++	before := make([]byte, 8)
++	after := []byte{1, 0, 0, 0, 0, 0, 1, 0}
++	palette := make([]byte, 768)
++	palette[3], palette[7] = 63, 63
++	layers := make([]Layer, 2)
++	for i, safe := range []image.Rectangle{image.Rect(0, 0, 2, 1), image.Rect(2, 1, 4, 2)} {
++		p, err := NewPatch(before, after, 4, 2, safe)
++		if err != nil {
++			t.Fatal(err)
++		}
++		ink := image.NewAlpha(image.Rect(0, 0, 1, 1))
++		ink.Pix[0] = 255
++		layers[i] = Layer{Patch: p, Ink: ink, Position: safe.Min.Mul(2), ColorIndex: 2, Enabled: true}
++	}
++	return after, palette, layers
++}
++
++func TestComposeLayersIndependent(t *testing.T) {
++	for _, scenario := range []string{"both", "missing-ink", "frame-mismatch", "disabled", "missing-patch"} {
++		t.Run(scenario, func(t *testing.T) {
++			indexed, palette, layers := layerFixture(t)
++			switch scenario {
++			case "missing-ink":
++				layers[0].Ink = nil
++			case "frame-mismatch":
++				indexed[0] = 0
++			case "disabled":
++				layers[0].Enabled = false
++			case "missing-patch":
++				layers[0].Patch = nil
++			}
++			original := append([]byte(nil), indexed...)
++			originalPalette := append([]byte(nil), palette...)
++			out, results, err := ComposeLayers(indexed, palette, 4, 2, 2, layers)
++			if err != nil || len(results) != 2 || !results[1].Applied {
++				t.Fatalf("results=%v err=%v", results, err)
++			}
++			for i, layer := range layers {
++				one, applied, reason, err := Compose(indexed, palette, 4, 2, 2, layer.Patch, layer.Ink, layer.Position, layer.ColorIndex, layer.Enabled)
++				if err != nil || results[i] != (LayerResult{applied, reason}) {
++					t.Fatalf("layer %d result=%v reason=%s err=%v", i, results[i], reason, err)
++				}
++				// 每個半畫面的未覆蓋部分也須與單層結果一致。
++				for y := i * 2; y < i*2+2; y++ {
++					for x := 0; x < 8; x++ {
++						if out.RGBAAt(x, y) != one.RGBAAt(x, y) {
++							t.Fatalf("layer %d pixel %d,%d", i, x, y)
++						}
++					}
++				}
++			}
++			if !bytes.Equal(indexed, original) || !bytes.Equal(palette, originalPalette) {
++				t.Fatal("input modified")
++			}
++		})
++	}
++}
++
++func TestComposeLayersEmptyAndLimits(t *testing.T) {
++	indexed, palette, layers := layerFixture(t)
++	base, _, _, _ := Compose(indexed, palette, 4, 2, 2, nil, nil, image.Point{}, 0, false)
++	for _, count := range []int{0, 32} {
++		out, results, err := ComposeLayers(indexed, palette, 4, 2, 2, make([]Layer, count))
++		if err != nil || len(results) != count || !reflect.DeepEqual(base, out) {
++			t.Fatalf("count=%d results=%v err=%v", count, results, err)
++		}
++	}
++	for _, bad := range [][]Layer{make([]Layer, 33), {layers[0], layers[0]}} {
++		out, results, err := ComposeLayers(indexed, palette, 4, 2, 2, bad)
++		if err == nil || out != nil || results != nil {
++			t.Fatal("invalid layers accepted")
++		}
++	}
++	layers[1] = layers[0]
++	layers[1].Enabled = false
++	if _, _, err := ComposeLayers(indexed, palette, 4, 2, 2, layers); err == nil {
++		t.Fatal("disabled overlap accepted")
++	}
++	if _, _, err := ComposeLayers(indexed, nil, 4, 2, 2, nil); err == nil {
++		t.Fatal("invalid input accepted")
++	}
++}
++
++func TestComposeLayersDoesNotModifyPatchOrInk(t *testing.T) {
++	indexed, palette, layers := layerFixture(t)
++	for _, layer := range layers {
++		before := append([]byte(nil), layer.Patch.before...)
++		after := append([]byte(nil), layer.Patch.after...)
++		ink := append([]byte(nil), layer.Ink.Pix...)
++		out, _, err := ComposeLayers(indexed, palette, 4, 2, 2, layers)
++		if err != nil {
++			t.Fatal(err)
++		}
++		out.Pix[0] ^= 255
++		if !bytes.Equal(before, layer.Patch.before) || !bytes.Equal(after, layer.Patch.after) || !bytes.Equal(ink, layer.Ink.Pix) {
++			t.Fatal("patch or ink modified")
++		}
++	}
++}

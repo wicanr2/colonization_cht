@@ -2,6 +2,9 @@
 
 狀態：in_progress（第一列無頭即時切片通過；第三種情境與互動前端未完成）<br>
 日期：2026-09-22<br>
+
+後續：[目標057](057-menu-coverage-and-interaction.md)已將有限覆蓋擴至五列；
+本頁保留首列階段收據，不因此宣稱第三種情境或互動前端完成。
 Issue：[#6](https://github.com/wicanr2/colonization_cht/issues/6)、[#7](https://github.com/wicanr2/colonization_cht/issues/7)、[#11](https://github.com/wicanr2/colonization_cht/issues/11)、[#26](https://github.com/wicanr2/colonization_cht/issues/26)
 
 ## 已確認與未確認

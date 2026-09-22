@@ -26,9 +26,9 @@
 → `VICEROY.EXE` 主選單 → 滑鼠點選「新世界」→ 難度選擇。
 連續冷啟動與安全快照重播的索引畫面、色盤一致；無輸入控制組保留在主選單。
 
-第一列主選單已由原版執行事件接到[逐幀中文合成](docs/goals/056-live-menu-overlay.md)，
+五個主選單選項已由原版執行事件接到[逐幀中文合成](docs/goals/057-menu-coverage-and-interaction.md)，
 字型與大小已獲使用者確認；中文開／關的原版狀態對照通過，另有 50 筆來源可驗證的譯稿。
-目前只有一列、以無頭工具驗收；游標遮擋時保留原文，尚無可手動遊玩的中文視窗或完整遊戲驗證。
+目前只涵蓋這五列、以無頭工具驗收；游標遮擋時逐列保留原文，尚無可手動遊玩的中文視窗或完整遊戲驗證。
 下一步接通前端並擴展已驗證文字，完成[可互動中文切片](https://github.com/wicanr2/colonization_cht/issues/26)。
 靜態圖像中文化另依來源與背景證據推進，不再阻擋動態文字路徑。
 
@@ -114,6 +114,8 @@
 - [第五十四輪目標：主選單文字來源](docs/goals/054-main-menu-text-provenance.md)
 - [第五十五輪目標：第一則中文顯示原型](docs/goals/055-first-text-prototype.md)
 - [第五十六輪目標：主選單即時覆蓋](docs/goals/056-live-menu-overlay.md)
+- [第五十七輪目標：五列覆蓋與互動入口查核](docs/goals/057-menu-coverage-and-interaction.md)
+- [五列主選單覆蓋規格](docs/spec/012-five-menu-lines.md)
 - [第一列文字覆蓋規格與未完成範圍](docs/spec/009-first-text-overlay-draft.md)
 - [精確指令觀測規格](docs/spec/010-instruction-observer.md)
 - [通用畫面補片合成規格](docs/spec/011-output-patch-compositor.md)

@@ -144,6 +144,8 @@ func main() {
 			addr := uint32(m.CPU.Seg[cpu.SS])*16 + uint32(sp)
 			word := func(a uint32) uint16 { return uint16(m.Mem[a]) | uint16(m.Mem[a+1])<<8 }
 			off, seg := word(addr+2), word(addr+4)
+			paramOff, paramSeg := word(addr+6), word(addr+8)
+			paramLinear := uint32(paramSeg)*16 + uint32(paramOff)
 			p := uint32(seg)*16 + uint32(off)
 			source := []byte{}
 			terminated := false
@@ -157,6 +159,12 @@ func main() {
 			retIP, retSP = word(addr), sp
 			before = append([]byte(nil), canvas()...)
 			active = map[string]any{"entry_step": m.Steps, "entry_ip": "937C:0538", "near_return_candidate": fmt.Sprintf("937C:%04X", retIP), "source": fmt.Sprintf("%04X:%04X", seg, off), "source_hex": fmt.Sprintf("%x", source), "source_sha256": hash(source), "nul_terminated": terminated, "registers": m.CPU.R, "segments": m.CPU.Seg, "stack": fmt.Sprintf("%x", m.Mem[addr:addr+32])}
+			// 僅保存原始定位與位元組；不替尚未驗證的欄位命名。
+			active["stack_plus_6_8_pointer"] = fmt.Sprintf("%04X:%04X", paramSeg, paramOff)
+			active["stack_plus_6_8_linear"] = paramLinear
+			active["stack_plus_6_8_raw14_hex"] = fmt.Sprintf("%x", m.Mem[paramLinear:paramLinear+14])
+			active["canvas_descriptor_linear"] = 0x1f448
+			active["canvas_descriptor_raw14_hex"] = fmt.Sprintf("%x", m.Mem[0x1f448:0x1f448+14])
 		}
 		must(m.Step())
 	}
