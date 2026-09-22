@@ -29,6 +29,8 @@
 五個主選單選項已由原版執行事件接到[逐幀中文合成](docs/goals/057-menu-coverage-and-interaction.md)，
 字型與大小已獲使用者確認；中文開／關的原版狀態對照通過。另有持續增加的來源可驗證
 譯稿，但譯稿不等於遊戲畫面已中文化；本輪數量與限制見[目標 058](docs/goals/058-translation-corpus-and-player-window.md)。
+另有[24則教學與地圖編輯說明的原文／繁中對照](text/help-bilingual.tsv)，只存於本私有儲存庫，
+目前仍是檔案來源可核對的草稿，尚未接到遊戲畫面。
 已有以Ebitengine顯示的Linux／Xvfb可撤回視窗原型，能以實際滑鼠由中文主選單進入難度
 畫面，並以同輸入對照原版狀態；[畫面接線](docs/goals/059-ebitengine-display-wiring.md)
 已由字串改寫改為明確Go介面，尚非正式玩家版本。游標遮擋時逐列保留原文，
@@ -121,6 +123,7 @@
 - [第五十七輪目標：五列覆蓋與互動入口查核](docs/goals/057-menu-coverage-and-interaction.md)
 - [第五十八輪目標：譯文語料覆蓋與玩家視窗](docs/goals/058-translation-corpus-and-player-window.md)
 - [第五十九輪目標：Ebitengine畫面接線](docs/goals/059-ebitengine-display-wiring.md)
+- [第六十輪目標：說明訊息雙語語料](docs/goals/060-help-bilingual-corpus.md)
 - [可撤回 Linux 視窗原型規格](docs/spec/013-window-prototype.md)
 - [五列主選單覆蓋規格](docs/spec/012-five-menu-lines.md)
 - [第一列文字覆蓋規格與未完成範圍](docs/spec/009-first-text-overlay-draft.md)

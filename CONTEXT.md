@@ -22,6 +22,7 @@
 | 動態文字 | confirmed：GAME.TXT 檔案位移 0x1B0 → 執行期 6F16:00DF → 937C:0538 印字 → 180 個畫布像素；兩次冷啟動收據一致。目標 054 完成。 |
 | 靜態文字 | 開場海洋標籤等候選仍缺完整來源／可逆背景證據；Issue #8 開放，不阻擋動態路徑。 |
 | 翻譯草稿 | `text/draft.zh-Hant.tsv` 共189筆；原始來源／控制碼及Cubic 11缺字檢查通過。新增139筆皆未取得畫面驗收；五列主選單為唯一已命中並驗證中文的候選。18個TXT／4,119粗略資料行不是全遊戲訊息分母。 |
+| 說明雙語語料 | `text/help-bilingual.tsv`另含24則教學／地圖編輯說明的原文及繁中草稿，兩個固定原版檔案與每則位元組指紋可回查；僅限私有repo，未整合正式執行期語料，也未取得畫面命中。不可與前列189筆直接相加當顯示完成度。 |
 | 中文顯示 | 五列已接原版執行事件及逐幀合成；七組狀態一致、105張圖獨立像素核對通過。規格012為CONFORMED；Ebitengine／Xvfb真視窗經明確Go介面接線，滑鼠可進難度，同輸入中英文原版狀態一致；仍非正式互動版，Issue #26保持開放。 |
 | 完整可玩／正式發行 | 未驗證、未發布；本輪僅驗證至難度選擇。 |
 
@@ -49,9 +50,10 @@ DOSBox-X 僅提供啟動鏈及畫面類別的輔助基準，正式收據由 dosg
 
 ## 下一閘門
 
-最近完成入口：[目標059](docs/goals/059-ebitengine-display-wiring.md)：
-Ebitengine視窗改以明確Go介面接到原版五列顯示，不再字串改寫驗證器；
-九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
+最近完成入口：[目標060](docs/goals/060-help-bilingual-corpus.md)：
+24則遊戲內說明建立原文／繁中TSV，仍是待畫面驗收的草稿。
+[目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
+接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
 保留189筆草稿及五筆畫面命中的分母。全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。
 
 已完成 [目標 054](docs/goals/054-main-menu-text-provenance.md) 的最小證據鏈；

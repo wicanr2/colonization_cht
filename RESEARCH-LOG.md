@@ -1622,3 +1622,17 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   既有譯稿為「選擇／難度」。這只證實檔案候選與畫面文字相符，尚未追得該畫面
   的印字事件、輸出安全矩形或中文覆蓋條件。輸入SHA及研究工具版本以本輪本機
   語料收據、`docs/goals/058-translation-corpus-and-player-window.md`與各譯稿欄位為準。
+## 2026-09-22：目標060說明訊息原文位元組清冊
+
+- 輸入是合法DOS版`SMColoni/COLONIZE/GAME.TXT` SHA-256
+  `67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a`，以及
+  `MAPEDIT.TXT` SHA-256
+  `764a67a9ff8f45b9ac9d82809ad616e2c350ff0172d9147ad34478828af57516`。
+  工具為`colonization-research:20260920-r2`內Python 3.11.2與
+  [雙語語料建置器](tools/build_help_bilingual.py)；位址欄均為**檔案位元組位移**，不是DOS
+  實模式、IDA線性或畫布位址。首個`@TUTORIAL1`章節位移`0x1316A`，文字起點
+  `0x13190`；最後的`@HELP5`章節位移`0x1231`，文字起點`0x1251`。
+- confirmed（檔案來源）：19段`GAME.TXT @TUTORIAL`與5段`MAPEDIT.TXT @HELP`皆唯一，
+  原文、CRLF、區塊位移、片段SHA可從固定輸入重生。繁中為**譯文草稿**，只核對
+  占位符與`{}`／`^`等控制碼，尚無dosgolem呼叫點、畫面安全矩形或玩家路徑命中。
+  詳細每筆原始定位與指紋在[雙語TSV](text/help-bilingual.tsv)；原文只推私有repo。
