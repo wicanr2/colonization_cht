@@ -19,8 +19,9 @@ def main():
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--candidate', default='GAME.TXT:0x000001B0',
                    choices=['GAME.TXT:0x000001B0', 'GAME.TXT:0x000001CB',
-                            'GAME.TXT:0x000001E4', 'GAME.TXT:0x000001F9', 'GAME.TXT:0x00000204'],
-                   help='規格 009／012 已審查的主選單列；字模各自獨立綁定')
+                            'GAME.TXT:0x000001E4', 'GAME.TXT:0x000001F9', 'GAME.TXT:0x00000204',
+                            'LABELS.TXT:0x00000888', 'LABELS.TXT:0x00000890'],
+                   help='規格 009／012／014 已審查的畫面文字；字模各自獨立綁定')
     args = p.parse_args()
     rows = read_catalog(args.catalog)
     if any(not (args.game / row['source_file']).is_file() for row in rows):
@@ -38,7 +39,10 @@ def main():
     font = ImageFont.truetype(str(args.font), 24)
     left, top, right, bottom = font.getbbox(text)
     width, height = right - left, bottom - top
-    if not (0 < width <= 584 and 0 < height <= 28):
+    bounds = {'LABELS.TXT:0x00000888': (148, 48),
+              'LABELS.TXT:0x00000890': (304, 52)}
+    max_width, max_height = bounds.get(key, (584, 28))
+    if not (0 < width <= max_width and 0 < height <= max_height):
         raise ValueError('譯文超出已確認安全矩形，不裁切')
     mask = Image.new('L', (width, height))
     ImageDraw.Draw(mask).text((-left, -top), text, fill=255, font=font)

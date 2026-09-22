@@ -50,7 +50,7 @@ xdotool mousedown 1
 sleep .3
 xdotool mouseup 1
 wait_stage difficulty
-xdotool mousemove --window "$window" 64 64
+xdotool mousemove --window "$window" 1200 780
 sleep 3
 import -window "$window" "$OUT.difficulty.png"
 wait "$game_pid"

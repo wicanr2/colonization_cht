@@ -1648,3 +1648,24 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   `0x4DF72`／`0x4DF79`出現；完成提示在DOS線性空間`0x2A7B5`及`0x4DF59`出現。
   單次結束快照不能證實印字呼叫點、文字來源指標、圖像分類或安全矩形；詳見
   [規格014](docs/spec/014-difficulty-text-output-draft.md)。
+
+## 2026-09-22：難度頁兩段標題的印字與畫布證據
+
+- 原版輸入版本：`OPENING.EXE` SHA-256 `3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`；
+  `VICEROY.EXE` SHA-256 `a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3`；
+  `GAME.TXT` SHA-256 `67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a`；
+  `LABELS.TXT` SHA-256 `e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204`。
+  工具：隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`、
+  `colonization-research:20260920-r2`、[唯讀探針](tools/probe_difficulty_writes.go)。
+- 位址空間：`LABELS.TXT` `0x888`／`0x890` 是**檔案位元組位移候選**；
+  `0x4DF72`／`0x4DF79` 是 DOS **20-bit 線性記憶體**；`0D3A:0015` 是 DOS
+  **實模式 CS:IP** 首字讀取，`0E2D:1194` 再讀同來源，`0D21:012C` 是
+  畫布寫入位址；(x,y) 是 **320×200 原始畫布座標**，不能與其他基準混用。
+- confirmed：真視窗同輸入首次原文讀取後，兩段墨跡分別改變 126／284 點，
+  bbox (42,16)–(72,23) 與 (23,29)–(91,37)。兩次獨立重播的讀寫事件、
+  七份畫布／索引檢查點及最終 RAM 雜湊完全相同；完整差分都在各自安全矩形。
+  檔案至執行期的載入器資料流尚未完整追畢，來源檔位移仍為候選而非證實載入邊。
+- 規格014限定兩行升至 CONFORMED。Ebitengine 真視窗九筆實際輸入中文、中文重播、
+  英文控制的原版完整狀態一致；中文字圖與英文控制比較，安全矩形外零差異。
+  本機完整收據 `workplace/reports/goal061-ebiten-clear-receipt.json`，私有 README
+  只選兩張可見成果圖，不公開原版輸入或原始快照。

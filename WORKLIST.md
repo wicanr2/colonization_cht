@@ -23,7 +23,7 @@
 | #14 | planned | [建立中文化驗證矩陣與正常玩家路徑收據](https://github.com/wicanr2/colonization_cht/issues/14) | `dynamic-overlay-implementation`, `static-overlay-implementation` | 動態與靜態路徑都有原版、中文、英文與反向條件收據。 |
 | #15 | blocked | [定義封裝、授權與發布界線](https://github.com/wicanr2/colonization_cht/issues/15) | `verification-matrix` | 使用者確認授權與發布方式，且可散布包不含原版素材。 |
 | #16 | completed | [建立機器可讀工作清單與驗證入口](https://github.com/wicanr2/colonization_cht/issues/16) | — | JSON、render 與 verify 可在 Docker 內重跑，且每筆都連到 Issue。 |
-| #17 | completed | [建立專案 README 與第一輪目標文件](https://github.com/wicanr2/colonization_cht/issues/17) | — | README 與目標 001 說明範圍、邊界、Issue 與可驗證退出條件。 |
+| #17 | completed | [建立專案 README 與第一輪目標文件](https://github.com/wicanr2/colonization_cht/issues/17) | — | README 說明用途、現況與權利邊界；目標 001 保留可驗證的初始範圍與退出條件。README 不列逐輪目標。 |
 | #18 | completed | [確認目標版本執行策略](https://github.com/wicanr2/colonization_cht/issues/18) | `boot-baseline` | 使用者確認 DOS 輸入策略，並回填 CONTEXT、目標與受影響工作依賴。 |
 | #19 | completed | [盤點固定 Windows 3.x NE 版本的載入、匯入與資源證據](https://github.com/wicanr2/colonization_cht/issues/19) | `input-inventory`, `research-toolchain` | 固定雜湊的 NE header、區段、匯入與資源有 Docker 可重跑清冊、交叉格式核對與未知界線。 |
 | #20 | completed | [盤點使用者提供的 DOS 版並建立 dosgolem 冷啟動收據](https://github.com/wicanr2/colonization_cht/issues/20) | `input-inventory`, `research-toolchain`, `win16-execution-decision` | DOS 輸入 manifest、固定啟動入口、Docker probe 收據與下一個可見檢查點都可回查。 |

@@ -1,6 +1,6 @@
 # 目標061：下一個正常路徑中文顯示切片
 
-狀態：in_progress（先推送目標，再依證據開工）<br>
+狀態：completed（限定難度頁兩行標題）<br>
 日期：2026-09-22<br>
 Issue：[#6](https://github.com/wicanr2/colonization_cht/issues/6)、
 [#7](https://github.com/wicanr2/colonization_cht/issues/7)、
@@ -38,3 +38,12 @@ Issue：[#6](https://github.com/wicanr2/colonization_cht/issues/6)、
 執行結束記憶體確認難度標題與完成提示的原文位元組；
 [規格014](../spec/014-difficulty-text-output-draft.md)記錄線性位置及待追輸出入口。
 尚無該頁的印字事件／安全矩形，因此維持DRAFT、英文回退，不把本輪算成新增中文畫面。
+
+## 結果與範圍訂正
+
+後續新增唯讀讀寫探針並雙次重播，查得 `0D3A:0015` 字串讀取及
+`0D21:012C` 畫布寫入；126／284 點差分與兩個安全矩形可重生。
+規格014已從上述 DRAFT 經審查升至限定兩行的 CONFORMED，
+Ebitengine 真視窗的中文、中文重播、英文控制狀態一致；已驗收的畫面文字
+由五段增至七段。其餘難度頁文字與 help 未完成，原先 DRAFT 狀態敘述保留
+作為當時的時間序列，不再代表目前結果。

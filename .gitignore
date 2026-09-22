@@ -12,6 +12,8 @@
 *.sav
 *.state
 *.png
+!docs/screenshots/menu-zh.png
+!docs/screenshots/difficulty-zh.png
 
 # 編輯器與作業系統暫存檔。
 *.swp

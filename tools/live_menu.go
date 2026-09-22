@@ -29,6 +29,7 @@ var versions = map[string]string{
 	"OPENING.EXE": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
 	"VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
 	"GAME.TXT":    "67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a",
+	"LABELS.TXT":  "e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204",
 }
 
 // 視窗前端由另外連結的檔案註冊；單獨建置此驗證器時不引入圖形依賴。
@@ -86,6 +87,27 @@ type menuLine struct {
 	pendingEvent                *pending
 }
 
+// 規格014：難度頁兩段獨立的真實原版印字事件；不是全畫面 OCR 鍵。
+type difficultyLine struct {
+	id                      string
+	offset, length          int
+	linear                  uint32
+	safe                    image.Rectangle
+	bbox                    image.Rectangle
+	pixels                  int
+	position                image.Point
+	source                  []byte
+	translation, fontReason string
+	matches                 int
+	valid                   bool
+	ink                     *image.Alpha
+	before                  []byte
+	startStep               uint64
+	openedCount             int
+	patch                   *overlay.Patch
+	accepted                int
+}
+
 func (l *menuLine) safe() image.Rectangle { return image.Rect(86, l.y, 232, l.y+7) }
 func (l *menuLine) safeBytes(buf []byte) []byte {
 	b := make([]byte, 0, 146*7)
@@ -121,6 +143,17 @@ func main() {
 		os.Exit(2)
 	}
 	rawSource := read(filepath.Join(*root, "GAME.TXT"))
+	labelsSource := read(filepath.Join(*root, "LABELS.TXT"))
+	difficulty := []*difficultyLine{}
+	if *allMenu {
+		difficulty = []*difficultyLine{
+			{id: "LABELS.TXT:0x00000888", offset: 0x888, length: 6, linear: 0x4df72, safe: image.Rect(39, 14, 76, 26), bbox: image.Rect(42, 16, 73, 24), pixels: 126, position: image.Pt(168, 64)},
+			{id: "LABELS.TXT:0x00000890", offset: 0x890, length: 16, linear: 0x4df79, safe: image.Rect(20, 27, 96, 40), bbox: image.Rect(23, 29, 92, 38), pixels: 284, position: image.Pt(92, 116)},
+		}
+		for _, l := range difficulty {
+			l.source = bytes.Clone(labelsSource[l.offset : l.offset+l.length])
+		}
+	}
 	lines := []*menuLine{
 		{offset: 0x1b0, length: 25, runtimeOffset: 0xdf, y: 107, maxX: 176, maxY: 112, pixels: 180},
 		{offset: 0x1cb, length: 23, runtimeOffset: 0x111, y: 115, maxX: 168, maxY: 120, pixels: 163},
@@ -165,6 +198,15 @@ func main() {
 			l.catalogValid = e == nil && int(offset) == l.offset && get(row, "source_file") == "GAME.TXT" && get(row, "source_sha256") == versions["GAME.TXT"] && get(row, "source_bytes_sha256") == hash(l.source) && get(row, "source_byte_length") == strconv.Itoa(l.length)
 			l.translation = get(row, "zh_hant")
 		}
+		for _, l := range difficulty {
+			if get(row, "candidate_id") != l.id {
+				continue
+			}
+			l.matches++
+			offset, e := strconv.ParseUint(get(row, "byte_offset"), 0, 32)
+			l.valid = e == nil && int(offset) == l.offset && get(row, "source_file") == "LABELS.TXT" && get(row, "source_sha256") == versions["LABELS.TXT"] && get(row, "source_bytes_sha256") == hash(l.source) && get(row, "source_byte_length") == strconv.Itoa(l.length)
+			l.translation = get(row, "zh_hant")
+		}
 	}
 	for _, l := range lines {
 		if l.matches != 1 || !l.catalogValid || l.translation == "" {
@@ -193,6 +235,33 @@ func main() {
 			l.fontReason = "missing-ink"
 		}
 	}
+	for _, l := range difficulty {
+		if l.matches != 1 || !l.valid || l.translation == "" {
+			l.fontReason = "missing-or-invalid-translation"
+			continue
+		}
+		path := filepath.Join(*fontDir, strings.ReplaceAll(l.id, ":", "-")+".json")
+		var mask fontMask
+		b, e := os.ReadFile(path)
+		if e != nil || json.Unmarshal(b, &mask) != nil {
+			l.fontReason = "font-mask-unavailable"
+			continue
+		}
+		if mask.CandidateID != l.id || mask.FontHash != fontHash || mask.TranslationHash != hash([]byte(l.translation)) {
+			l.fontReason = "font-binding-mismatch"
+			continue
+		}
+		if mask.Width <= 0 || mask.Height <= 0 || mask.Width > l.safe.Dx()*4 || mask.Height > l.safe.Dy()*4 || len(mask.Alpha) != mask.Width*mask.Height || l.position.X < l.safe.Min.X*4 || l.position.Y < l.safe.Min.Y*4 || l.position.X+mask.Width > l.safe.Max.X*4 || l.position.Y+mask.Height > l.safe.Max.Y*4 {
+			l.fontReason = "font-mask-out-of-bounds"
+			continue
+		}
+		l.ink = image.NewAlpha(image.Rect(0, 0, mask.Width, mask.Height))
+		copy(l.ink.Pix, mask.Alpha)
+		if *missing {
+			l.ink = nil
+			l.fontReason = "missing-ink"
+		}
+	}
 	m := golem.New()
 	must(m.LoadEXE(read(filepath.Join(*root, "OPENING.EXE"))))
 	m.Write8(uint32(golem.PSPSeg)*16+0x80, 2)
@@ -214,6 +283,35 @@ func main() {
 	checkpoints := []map[string]any{}
 	drops := []map[string]any{}
 	lastOpened := 0
+	if !*control && len(difficulty) > 0 {
+		m.WatchReads(0x4df72, 0x4df89, func(a uint32, _ uint8) {
+			cs, ip := m.CPU.OpAddr()
+			if cs != 0x0d3a || ip != 0x0015 || m.VideoMode() != 0x13 {
+				return
+			}
+			for _, l := range difficulty {
+				if a != l.linear || l.patch != nil || l.before != nil {
+					continue
+				}
+				p := int(l.linear)
+				if !bytes.Equal(m.Mem[p:p+l.length], l.source) || m.Mem[p+l.length] != 0 {
+					continue
+				}
+				seenArt := false
+				for _, name := range d.Opened {
+					if strings.EqualFold(name, "DIFFICUL.PIK") {
+						seenArt = true
+					}
+				}
+				if !seenArt {
+					continue
+				}
+				l.before = bytes.Clone(canvas())
+				l.startStep = m.Steps
+				l.openedCount = len(d.Opened)
+			}
+		})
+	}
 	enabled := true
 	drop := func(l *menuLine, reason string) {
 		if l.patch != nil || l.pendingEvent != nil {
@@ -233,6 +331,13 @@ func main() {
 		for _, l := range lines {
 			if l.patch != nil && (!sourceOK(l) || !descriptorOK() || m.VideoMode() != 0x13 || !bytes.Equal(m.Mem[l.patchDescriptionPtr:l.patchDescriptionPtr+14], l.patchDescription) || !bytes.Equal(l.safeBytes(canvas()), l.afterSafe)) {
 				drop(l, "source-descriptor-canvas-or-mode-changed")
+			}
+		}
+		for _, l := range difficulty {
+			p := int(l.linear)
+			if (l.patch != nil || l.before != nil) && (len(d.Opened) != l.openedCount || m.VideoMode() != 0x13 || !bytes.Equal(m.Mem[p:p+l.length], l.source) || m.Mem[p+l.length] != 0) {
+				l.patch = nil
+				l.before = nil
 			}
 		}
 	}
@@ -340,6 +445,56 @@ func main() {
 	render := func(label string) {
 		if !*control {
 			checkContext()
+			for _, l := range difficulty {
+				if l.before == nil || l.patch != nil {
+					continue
+				}
+				if m.Steps-l.startStep > 500000 {
+					l.before = nil
+					continue
+				}
+				after := canvas()
+				count := 0
+				minX, minY, maxX, maxY := 320, 200, -1, -1
+				valid := true
+				for y := l.safe.Min.Y; y < l.safe.Max.Y; y++ {
+					for x := l.safe.Min.X; x < l.safe.Max.X; x++ {
+						i := y*320 + x
+						if l.before[i] == after[i] {
+							continue
+						}
+						count++
+						if x < minX {
+							minX = x
+						}
+						if y < minY {
+							minY = y
+						}
+						if x > maxX {
+							maxX = x
+						}
+						if y > maxY {
+							maxY = y
+						}
+						if after[i] != 0 && after[i] != 253 && after[i] != 254 {
+							valid = false
+						}
+					}
+				}
+				if count != l.pixels {
+					continue
+				}
+				if !valid || minX != l.bbox.Min.X || minY != l.bbox.Min.Y || maxX != l.bbox.Max.X-1 || maxY != l.bbox.Max.Y-1 {
+					l.before = nil
+					continue
+				}
+				var e error
+				l.patch, e = overlay.NewPatch(l.before, after, 320, 200, l.safe)
+				must(e)
+				l.accepted++
+				events = append(events, map[string]any{"candidate_id": l.id, "entry_ip": "0D3A:0015", "writer_ip": "0D21:012C", "entry_step": l.startStep, "accepted": true, "changed_pixels": count, "bbox_inclusive": []int{minX, minY, maxX, maxY}, "source_linear": l.linear})
+				l.before = nil
+			}
 		}
 		indexed := m.Mem[0xa0000:0xafa00]
 		var output *image.RGBA
@@ -368,15 +523,18 @@ func main() {
 				lineRecords = append(lineRecords, map[string]any{"candidate_id": l.id, "applied": false, "reason": reason})
 			}
 		} else {
-			layers := make([]overlay.Layer, len(lines))
+			layers := make([]overlay.Layer, len(lines)+len(difficulty))
 			for i, l := range lines {
 				layers[i] = overlay.Layer{Patch: l.patch, Ink: l.ink, Position: image.Pt(344, l.y*4), ColorIndex: 254, Enabled: enabled && validVersion}
+			}
+			for i, l := range difficulty {
+				layers[len(lines)+i] = overlay.Layer{Patch: l.patch, Ink: l.ink, Position: l.position, ColorIndex: 254, Enabled: enabled && validVersion}
 			}
 			var e error
 			var results []overlay.LayerResult
 			output, results, e = overlay.ComposeLayers(indexed, m.DAC[:], 320, 200, 4, layers)
 			must(e)
-			for i, result := range results {
+			for i, result := range results[:len(lines)] {
 				l := lines[i]
 				lineReason := result.Reason
 				if !validVersion {
@@ -390,6 +548,15 @@ func main() {
 				}
 				applied = applied || result.Applied
 				lineRecords = append(lineRecords, map[string]any{"candidate_id": l.id, "applied": result.Applied, "reason": lineReason})
+			}
+			for i, l := range difficulty {
+				result := results[len(lines)+i]
+				lineReason := result.Reason
+				if l.fontReason != "" {
+					lineReason = l.fontReason
+				}
+				applied = applied || result.Applied
+				lineRecords = append(lineRecords, map[string]any{"candidate_id": l.id, "applied": result.Applied, "reason": lineReason, "accepted_events": l.accepted})
 			}
 			if *allMenu && applied {
 				reason = "applied"

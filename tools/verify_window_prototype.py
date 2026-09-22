@@ -22,6 +22,13 @@ assert sum(e['kind'] == 'press' for e in inputs['inputs']) == sum(e['kind'] == '
 assert 'DIFFICUL.PIK' in receipts[0]['opened']
 for index in range(5):
     assert any(f['lines'][index]['applied'] for f in receipts[0]['frames'])
+new_keys = {'LABELS.TXT:0x00000888', 'LABELS.TXT:0x00000890'}
+has_difficulty = any(r['candidate_id'] in new_keys for f in receipts[0]['frames'] for r in f['lines'])
+if has_difficulty:
+    assert all(any(r['candidate_id'] == key and r['applied']
+                   for f in receipts[0]['frames'] for r in f['lines']) for key in new_keys)
+    assert all(any(e.get('candidate_id') == key and e.get('accepted')
+                   for e in receipts[0]['events']) for key in new_keys)
 pairs = [(a.prefix + '.menu.png', 'goal057-live-zh.menu-clear.png'),
          (a.prefix + '.difficulty.png', a.prefix + '.final.png')]
 images = []
@@ -32,6 +39,26 @@ for actual, reference in pairs:
     assert ImageChops.difference(x, y).getbbox() is None
     images.append({'actual': actual, 'reference': reference, 'pixels_equal': True,
                    'sha256': hashlib.sha256((a.out / actual).read_bytes()).hexdigest()})
+if has_difficulty:
+    chinese = Image.open(a.out / (a.prefix + '.difficulty.png')).convert('RGB')
+    original = Image.open(a.out / (a.prefix + '-control.final.png')).convert('RGB')
+    assert chinese.size == original.size == (1280, 800)
+    changed = {key: 0 for key in new_keys}
+    bounds = [('LABELS.TXT:0x00000888', (39*4, 14*4, 76*4, 26*4)),
+              ('LABELS.TXT:0x00000890', (20*4, 27*4, 96*4, 40*4))]
+    for y in range(800):
+        for x in range(1280):
+            if chinese.getpixel((x, y)) == original.getpixel((x, y)):
+                continue
+            hit = next((key for key, (left, top, right, bottom) in bounds
+                        if left <= x < right and top <= y < bottom), None)
+            assert hit is not None, f'安全矩形外畫面變更：{x},{y}'
+            changed[hit] += 1
+    assert all(n > 0 for n in changed.values())
+    images.append({'actual': a.prefix + '.difficulty.png',
+                   'reference': a.prefix + '-control.final.png',
+                   'only_two_difficulty_rectangles_changed': True,
+                   'changed_pixels_by_candidate': changed})
 result = {'scope': 'Linux/Xvfb有限原型，不含完整鍵盤、音訊、正式速度或存讀檔',
           'state_equal': True, 'state': receipts[0]['state'], 'images': images,
           'input_count': len(inputs['inputs']), 'frame_count': len(receipts[0]['frames'])}
