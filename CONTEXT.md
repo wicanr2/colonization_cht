@@ -53,6 +53,9 @@ DOSBox-X 僅提供啟動鏈及畫面類別的輔助基準，正式收據由 dosg
 
 ## 下一閘門
 
+[目標064](docs/goals/064-translation-first-corpus.md)按使用者新優先順序先擴大
+可追溯譯文語料；目前189筆主譯稿與24則help稿都有繁中欄，但原版18份TXT、
+EXE及靜態圖像尚未建立完整玩家可見訊息分母，不宣稱全文翻譯完成。
 最近完成入口：[目標060](docs/goals/060-help-bilingual-corpus.md)：
 24則遊戲內說明建立原文／繁中TSV，仍是待畫面驗收的草稿。
 [目標061](docs/goals/061-next-visible-text-slice.md)已驗收難度頁兩行中文標題，
