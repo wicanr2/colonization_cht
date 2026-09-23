@@ -121,6 +121,8 @@ Ebitengine 畫面。穩定顯示鍵、執行期背景／游標回退及其餘卡
 游標確實改變原版索引畫面並與兩欄安全區相交，但不改底層畫布。
 正式格式化鍵、真實缺譯處理、其餘卡片及 Ebitengine 正常玩家前端仍缺，
 規格016 DRAFT、八段已顯示中文計數不變。
+[目標079](docs/goals/079-first-card-formal-overlay.md)承接第一張卡片的限定 READY 審查、
+真實 TSV 回退與 Ebitengine 前端接線；開始時不預設審查通過，也不外推其他卡片。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
 保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至368筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。
