@@ -1659,3 +1659,9 @@
   工作根沒有 root-owned 項目或誤建 `.md` 目錄，產物為
   UID/GID `1000:1000`。本專案無執行中或已停止容器，
   其他專案容器維持原狀。
+- 成果提交 `13ec24d` 已推送私有 `origin/main`；遠端
+  [Issue #29](https://github.com/wicanr2/colonization_cht/issues/29)、
+  [#7](https://github.com/wicanr2/colonization_cht/issues/7)、
+  [#26](https://github.com/wicanr2/colonization_cht/issues/26)及
+  [#27](https://github.com/wicanr2/colonization_cht/issues/27)
+  已回填限定成果與仍缺的正式驗收，回讀均為 OPEN。
