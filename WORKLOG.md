@@ -1785,3 +1785,9 @@
   姓名欄是否採 B、真正譯名與正式輸入切換仍待使用者決定；
   [Issue #29](https://github.com/wicanr2/colonization_cht/issues/29)
   保持 OPEN，不宣稱整張姓名畫面或全遊戲完成。
+- 階段成果提交 `a2becd5` 已推送私有 `origin/main`；真正主機
+  `gh` 已留言回填並回讀 Issue #29 為 OPEN。Git 未追蹤原版
+  封存檔或 `workplace/`；隔離 dosgolem 的 `upstream` push
+  仍為 `DISABLED`。目標097原型與收據均由 UID/GID `1000:1000`
+  持有；工作根未見 root-owned／誤建 `.md` 目錄，專案沒有
+  執行中或停止的 Docker 容器。
