@@ -2,6 +2,10 @@
 
 更新：2026-09-23；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前執行入口：[目標088](docs/goals/088-first-nation-card-reversible-preview.md)
+僅處理第一張國家旗卡兩欄的繁中草稿與本機 Ebitengine 可逆視覺原型；
+規格021仍為 DRAFT，尚未授權正式覆蓋。
+
 ## 已確認決定
 
 - 使用者已選定本機 `Sid Meier's Colonization (1994)/SMColoni/` 的合法 DOS 輸入作為正式研究目標。
