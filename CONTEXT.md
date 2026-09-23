@@ -149,6 +149,10 @@ READY 守門接入國家頁左側兩行；真視窗中文／英文控制、真 T
 正式已顯示中文數為十四段。下一步仍須追其他國家選擇文字、help
 與更深玩家路徑；[Issue #28](https://github.com/wicanr2/colonization_cht/issues/28)
 的難度標題原版風格排版獨立保留下一階段，不因本輪完成而關閉。
+[目標085](docs/goals/085-nation-card-text-provenance.md)已啟動國家旗卡
+兩處紅色英文的來源分類；在取得原版輸出或圖像定位證據前，仍屬未知，
+不計入十四段正式顯示。難度標題 A／B 對照已請使用者選擇，未回覆前
+不修改正式版式。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
 保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至368筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。
