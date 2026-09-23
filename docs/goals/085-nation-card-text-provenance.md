@@ -1,6 +1,6 @@
 # 目標085：國家旗卡紅字的來源與畫面路徑
 
-狀態：進行中；日期：2026-09-23。承接[目標084](084-nation-heading-runtime-guard.md)
+狀態：完成（僅兩處來源調查及 DRAFT，未正式覆蓋）；日期：2026-09-23。承接[目標084](084-nation-heading-runtime-guard.md)
 及[規格020](../spec/020-nation-heading-overlay.md)；對應動態清冊
 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)、靜態清冊
 [Issue #8](https://github.com/wicanr2/colonization_cht/issues/8)與正式覆蓋
@@ -58,3 +58,14 @@ RAM 的邊尚未閉合，不能升為正式覆蓋鍵或 READY 規格。
 相鄰狀態負例、完整原文檔案載入鏈、背景可逆補片與逐欄守門，
 因此本目標仍是進行中。[Issue #28](https://github.com/wicanr2/colonization_cht/issues/28)
 的 A 版決定已另由[目標086](086-difficulty-heading-centered-layout.md)處理。
+
+## 後續勘誤與退出
+
+[目標087](087-nation-card-source-load-edge.md)補齊 `NAMES.TXT:0x8EA`／
+`LABELS.TXT:0x8F2` 各自從 DOS 讀取、就地整理、解析、常駐 RAM 到當次
+格式化與畫布的讀寫鏈；`0x21ACA` 的同文國名副本在印字窗口未被讀取，
+作為限定負例。雙次冷啟動與無觀測控制同狀態，獨立驗證 PASS。
+先前「載入邊未閉合」是當時證據限制，保留於上節作歷史紀錄；
+現已由[規格021](../spec/021-nation-card-red-text-draft.md)訂正為
+`confirmed` 的限定來源鏈。本目標只以 DRAFT 退出：背景、逐欄字級、
+游標與其他旗卡仍未驗，正式中文顯示仍為十四段。

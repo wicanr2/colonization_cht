@@ -2496,3 +2496,60 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   `86b2c08465ed67fc57202e7490a7ac274185c78bf464e2a0e773b120bb196e07`。
   原版 baseline 精確字型仍未知；本 CONFORMED 僅是使用者核定的
   中文版式與限定正常路徑，不是全遊戲或公開素材驗收。
+
+## 2026-09-23：目標087第一張國家旗卡的原始檔載入鏈
+
+- 輸入為合法 DOS `OPENING.EXE` SHA-256
+  `3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`、
+  `VICEROY.EXE` SHA-256
+  `a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3`、
+  `NAMES.TXT` SHA-256
+  `4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061`、
+  `LABELS.TXT` SHA-256
+  `e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204`。
+  隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`、
+  Go 1.24.13、研究映像 `colonization-research:20260920-r2`；
+  16筆真視窗輸入 SHA-256
+  `a48ae77b9f6a0c2bdb9b3512625d0c1c4786b1cb64b8deff4bdb603fe422d93e`。
+  `tools/probe_goal087_nation_buffers.go`／`probe_goal087_nation_flow.go`
+  原始碼 SHA-256 分別為
+  `d077e3e3abe67700142243cc00e6d13159450ecdad69e192d227ad8fee9aacd2`／
+  `e80f0a18b9932dbdce9887cf64baebe1fd77c79adc2dbedf2877926f9d9d5764`；
+  獨立驗證器 `tools/check_goal087_nation_flow.py` SHA-256
+  `d27178f789a56cf62dacf5b7b14159ec6047ee37b0fd7698d149f60e81509b6e`。
+- confirmed（DOS 檔案位移→RAM）：原版 `AH=3Fh` 在步15,504,395
+  以 handle 6 自 `NAMES.TXT` 檔案位移0x800讀512 bytes，
+  `England` 的檔案位移0x8EA對應線性 RAM `0x2B0EC`；同檔再次讀取
+  於步17,026,281。步18,077,763 自 `LABELS.TXT` 位移0x800讀512 bytes，
+  `Immigration` 的檔案位移0x8F2對應線性 `0x2B0F4`。三筆候選的原始
+  位元組 SHA-256 均吻合。此處是原始 TXT 檔案位移、DOS `DS:DX` 與
+  20-bit 線性 RAM 三種不同地址空間。
+- confirmed（就地整理→常駐）：原版 `0E2D:1F76`／`1F86` 在
+  `NAMES.TXT` 讀入後把 `England` 自 `0x2B0EC` 整理至 `0x2B0DF`，
+  `LABELS.TXT` 則自 `0x2B0F4` 整理至 `0x2B0DC`；`0E2D:09F4`／`09F5`
+  隨後各自讀入共用解析緩衝 `0x249DC`。國名經 `9320:0171`／`0173`
+  到 `0x26C58`，再由 `0E2D:11A5` 複製至常駐 `0x4CBBE`；
+  副標由 `0E2D:11A1`／`11A5` 寫至 `0x4DFD1`。這些 `CS:IP` 是
+  原版實模式指令地址，不是上述 RAM 位址或檔案位移。
+- confirmed（當次常駐→畫布）：第一張旗卡顯示時，`0E2D:11CF`／
+  `11EB` 分別讀兩個常駐字串並依序重用 `0x2A74A`；上行轉為
+  `ENGLAND:`、下行為 `Immigration`，`0E2D:11A5` 寫至格式化
+  `0x2A6AE`，`0D21:00C6` 讀字。目標085原版 `0D21:012C` 畫布
+  收據在320×200索引畫布觀測上行144點、下行172點；
+  候選替代同文 RAM `0x21ACA` 在該印字窗口沒有讀取事件。
+- 兩次各自冷啟動至43M步的 DOS 載入收據逐位元組相同，SHA-256
+  `e8f29df41a57b0ddfd0b593386c273c2824a8c59eb263f36a62dfb1df57115c2`；
+  RAM 事件收據逐位元組相同、16,942筆且未截斷，SHA-256
+  `8bdada52b1eb0369dc7590c3b1dae447be71433cd1984a7913cb4e74e168ff12`。
+  無觀測控制組 SHA-256
+  `1f6fdad4bcba3181dc01cfea3e207cf51511c5b0eaaeb243681b1205274cea2b`，
+  與兩種探針的 CPU、完整 RAM、索引畫面、色盤、ticks／cycles及開檔
+  序列相同。先前較寬監看曾達事件上限而截斷，已丟棄；上述為縮窄
+  範圍後重跑且未截斷的正式收據。獨立驗證器 PASS。所有原始收據
+  與畫布仍只在 `workplace/reports/goal087-nation-card-load/` 及目標085
+  本機目錄，不入 Git。
+- 勘誤：目標085當時把兩個 TXT 位移標為「內容相符候選」是當時證據
+  限制；新收據已閉合檔案載入、原版中間整理和當次印字，限定兩欄
+  來源升為 confirmed，但不代表譯文、版面與其他旗卡可上線。
+  [規格021](docs/spec/021-nation-card-red-text-draft.md)只為 DRAFT；
+  相鄰旗卡、可逆背景、逐欄中文字級與游標回退仍未知。

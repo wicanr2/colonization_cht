@@ -1,6 +1,6 @@
 # 目標087：第一張國家旗卡紅字的檔案載入邊
 
-狀態：進行中；日期：2026-09-23。承接[目標085](085-nation-card-text-provenance.md)
+狀態：完成（限定來源鏈與 DRAFT）；日期：2026-09-23。承接[目標085](085-nation-card-text-provenance.md)
 的當次動態印字證據；對應[Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)
 與[Issue #12](https://github.com/wicanr2/colonization_cht/issues/12)。
 
@@ -41,3 +41,14 @@
 本輪的完成不增加已驗十四段中文顯示；即使來源鏈閉合，也不能
 跳過 DRAFT → READY → 正式覆蓋 → 同狀態 CONFORMED。畫面既有
 英文及原版行為保持不變，其他旗卡、help 和完整遊玩另列工作。
+
+## 驗收結果
+
+兩次原版 DOS 清冊收據與兩次 RAM 逐字讀寫收據分別位元組相同；
+同輸入無觀測控制的 CPU、完整 RAM、原版索引畫面、色盤、ticks、
+cycles 及開檔序列均相同。兩個 TXT 候選位移至畫布印字的指令
+讀寫鏈已由 `tools/check_goal087_nation_flow.py` 獨立驗證 PASS，
+同文替代地址 `0x21ACA` 在印字窗口無讀取。詳細原始位址、
+原版 SHA-256、工具版本、收據指紋與仍待驗項目見
+[研究紀錄](../../RESEARCH-LOG.md)及[規格021](../spec/021-nation-card-red-text-draft.md)。
+此處只關閉來源調查；未製作旗卡中文覆蓋，未更新截圖或十四段計數。
