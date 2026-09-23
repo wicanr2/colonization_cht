@@ -2087,3 +2087,78 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   `tools/check_card_load.py --inputs ... --first ... --second ... --flow-first ... --flow-second ...`。
   預覽入口 `tools/prepare_card_preview.py` 另外必須提供 `--load-first`、
   `--load-second`；完整 JSON、PNG 與原版像素只留本機忽略目錄。
+
+## 2026-09-23：目標078執行期底圖擷取、游標像素與安全回退
+
+- 問題與固定輸入：目標077已閉合第一張卡片的 `NAMES.TXT`／`LABELS.TXT`
+  原始位元組至執行期 RAM；目標076卻只用固定終點快照恢復有紋理底圖。
+  本輪沿用合法 DOS `OPENING.EXE`、`VICEROY.EXE`、`GAME.TXT`、`NAMES.TXT`、
+  `LABELS.TXT` 的 SHA-256（完整值見[規格016](docs/spec/016-difficulty-card-text-draft.md)），
+  九筆真視窗輸入 SHA-256
+  `51837a0ed11cfcc316b4e2c9dce7064403cafdd0c1af2efecf59f30319eb5efc`，
+  目標077本機字模預覽 JSON SHA-256
+  `c2700c24bec4bccd5d1481660f4bcca3259337c888b0fff772328c892b70d57a`。
+  隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`，
+  研究映像 `colonization-research:20260920-r2` ID
+  `sha256:5d99f8754e9f9099b7f263268c485c73043aee1a9d9d29231417ccb5b5da02e1`。
+  工具 `tools/probe_card_runtime.go` SHA-256
+  `369a31cf5eb07dc84406b6c90fe6bdbacebe0b638ffb1d4cba9b5747dc690f7c`；
+  `tools/check_card_runtime.py` SHA-256
+  `23c4b7f29c1e98905a72d1f2d31de0f6652b448a6920706ea5de34deb4a3abd3`。
+- 位址空間：`0E2D:11CF` 是原版 DOS 真實模式 `CS:IP`；`0x4CC6A`／
+  `0x4DF90` 是20-bit 線性 RAM；安全矩形 `(138,44)–(186,51)` 與
+  `(146,52)–(180,60)` 為 320×200 原始畫布半開座標；輸出為4倍的
+  1280×800 RGBA。原始畫布線性 RAM 起點 `0x2CAE0`，與 VGA 索引輸出
+  `0xA0000` 不同；不能以任一者的雜湊代替另一者的游標遮擋驗證。
+- confirmed（當次繪製前背景）：dosgolem 的 `WatchReads` 僅於
+  `0E2D:11CF` 分別讀 `Discoverer\0`／`Easiest\0` 的線性來源起點時擷取
+  完整原版畫布；事件步數29,797,568／29,813,172。稱號／副標候選安全矩形
+  背景 SHA-256 各為
+  `c5508aad20916fc12bb68638723f6d84799a0ff1744017d71577ec14264cd99b`／
+  `d68c4ccc2a32f9b6f4fb2114c033e597b621b8f5981f63c5738f3852529e129b`，
+  獨立檢查器從目標075的 `before-first`／`before-second` 原版快照重算一致。
+  步數29,865,000的第一個完整輸出幀，原文畫布差分精確符合164／83點及
+  bbox `(141,45)–(182,49)`／`(150,53)–(174,58)`，才建立兩欄補片。
+- confirmed（輸出守門）：本輪兩次完整正常重播報告位元組相同，SHA-256
+  `f8c8ebe95e09c4f8793f6dff2c72fedff9bd251e209ea887aedfb437e86c8fc6`。
+  完成前一幀兩欄均 `missing-patch`；自29,865,000起13幀兩欄的完整原文與 NUL、
+  視訊模式及開檔脈絡均符合當次擷取條件，且原始索引像素與補片繪製後資料相同，
+  才能合成。相同輸入的無觀測控制組，CPU 暫存器、
+  flags、完整 RAM、畫布、索引畫面、色盤、ticks、frames 與 cycles 逐項相同；
+  正常終點完整 RAM／索引畫面仍為目標077的
+  `09e9fbf961b8b50115fa0c8b707d4a220cf7f12b3e2a359311073f85786ad109`／
+  `6072d7cf64633f93d2ad86a363ad73cd586f24bdacff51b406a84c52354924ae`。
+- confirmed（游標進出）：第一張卡片完成後，原版滑鼠從 `(16,16)` 移到
+  `(160,48)`；索引畫面改變160點，bbox `(16,16)–(169,61)`，其中稱號／副標
+  安全矩形分別有7／60點交疊，當時索引畫面 SHA-256
+  `0230058d7acbdf6cd6db53f40907459cc4096082ee421b6da28714a43e235901`；
+  底層畫布仍為
+  `08edaac74a54263b8e093010d8cbc97d3f9820c3c151f28d80beded5c5a8a650`。
+  不加保守游標矩形時，通用 `overlay.ComposeLayers` 已對兩欄回報
+  `frame-mismatch`；加上候選外包 `(112,24)–(212,80)` 後，游標停留25幀
+  全數回退原文。移回 `(16,16)` 後，索引畫面與初次可套用幀逐像素相同，
+  24幀兩欄重新合成。游標變體與其**同輸入**的無觀測控制組 CPU／RAM／原版
+  畫面相同；不同輸入的 RAM 不拿來要求同雜湊。此收據證實本例游標進入
+  VGA 索引畫面，不證明任意游標形狀或位置的精確外包。
+- 反向條件與限制：在同一輸出幀模擬兩欄缺譯／缺字模，通用合成器返回
+  `disabled`／`missing-ink` 且整張圖逐像素等於原文；刻意翻轉一點補片所預期
+  的舊畫面，該欄回報 `frame-mismatch`。以一次性唯讀連結把 `NAMES.TXT`
+  指向錯誤指紋的 `GAME.TXT`，探針啟動前拒絕未知版本。
+  「缺譯」是停用圖層的原型反向對照，**未**驗證正式執行期 TSV 缺鍵讀取。
+  輸出的原文／中文 PNG SHA-256 依序為
+  `df65ae068485d5c785ce3130fb136bb781f4116e262238788fe10d8f2f0953e5`／
+  `0fb76ee5ef2e526cb84543f7ad9917e616e7fdd850c91f4d48d120c991fb4966`；
+  `tools/verify_card_preview.py` 逐像素確認兩個安全區外不變、透明字模下回復
+  原背景，兩欄各變更2,752／1,860點。這是軟體合成的本機原型輸出，
+  不是正式 Ebitengine 玩家視窗截圖；規格016維持 DRAFT，正式八段計數不變。
+- 可重播入口：Docker 以目前 UID/GID、無網路、CPU／記憶體／PID 限額，
+  唯讀掛載本專案 `/repo`、隔離 dosgolem（在 `/repo/workplace/dosgolem`）、
+  合法 DOS 原版 `/game`，只讓已忽略的 `workplace/reports/` 掛至 `/out` 可寫。
+  於隔離 dosgolem 模組根執行
+  `go build -o /out/goal078-card-runtime-probe /repo/tools/probe_card_runtime.go`；
+  以相同 `-root /game -inputs /out/goal059-ebiten.inputs.json -preview /out/goal077-card-preview.json -catalog /repo/text/draft.zh-Hant.tsv`
+  分別指定 `-out /out/goal078-card-runtime-a`、`-b`、`-control -out ...-control`、
+  `-hover -out ...-hover`、`-hover -control -out ...-hover-control`。
+  `tools/check_card_runtime.py` 以五組報告、目前 TSV（`--catalog`）、目標075／077收據及
+  `tools/verify_card_preview.py` 的 PNG 驗證報告交叉核對。
+  這些 JSON、PNG、字型與研究執行檔均只留本機，不能推送至 GitHub。

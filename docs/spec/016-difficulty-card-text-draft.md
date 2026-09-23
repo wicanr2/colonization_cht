@@ -4,7 +4,8 @@
 [目標074](../goals/074-difficulty-card-observation-repair.md)、
 [目標075](../goals/075-difficulty-card-source-to-pixels.md)、
 [目標076](../goals/076-difficulty-card-reversible-prototype.md)、
-[目標077](../goals/077-difficulty-card-load-provenance.md)。
+[目標077](../goals/077-difficulty-card-load-provenance.md)、
+[目標078](../goals/078-difficulty-card-runtime-guard.md)。
 
 ## 固定輸入與地址空間
 
@@ -78,11 +79,11 @@
 
 ## READY 前缺口
 
-須為固定版本建立格式化後的穩定顯示鍵與缺譯回退守門，
-兩行有紋理背景的執行期可逆擷取、游標遮擋與欄位安全矩形；再依各自5／6像素原版
-墨跡高度測試中文字級、頂列／基線對齊及最長譯文。其餘難度卡片仍要逐張確認，
-不能外推第一張。只有這些守門可獨立核對時
-才能升 READY。此 DRAFT 不授權新增正式覆蓋、修改原版資料或聲稱卡片中文化。
+第一張卡片固定玩家路徑的原文來源、畫布底圖及游標進出回退，已由目標075至078
+在可丟棄探針中分別核對；這**不是**正式顯示規格。READY 仍須建立格式化後
+穩定顯示鍵、真實譯稿缺漏回退、原版版本與事件的正式守門、每欄最長譯文及
+頂列／基線量測，以及正常玩家前端同狀態驗收契約。其餘難度卡片須逐張確認，
+不能由第一張外推。此 DRAFT 不授權新增正式覆蓋、修改原版資料或聲稱卡片中文化。
 
 本機完整收據：`workplace/reports/goal063-card-writes.json` 與
 `workplace/reports/goal063-card-reads.json`；對應 `.canvas`／`.idx` 中間物
@@ -122,7 +123,7 @@
   `workplace/reports/goal076-card-{preview.json,control.png,zh.png,verify.json}`，
   不含於 Git。
 
-READY 仍缺：穩定顯示鍵、執行期逐欄可逆擷取及游標／後續繪圖
+目標076當時 READY 仍缺：穩定顯示鍵、執行期逐欄可逆擷取及游標／後續繪圖
 回退、其他難度卡片與正常玩家路徑中文對照。沒有取得這些證據前，預覽程式不得
 接入正式 `live_menu.go` 或計入八段已顯示中文。
 
@@ -152,3 +153,37 @@ READY 仍缺：穩定顯示鍵、執行期逐欄可逆擷取及游標／後續�
 `DOS.Reads`／`FileOps` 給出檔案位移與目的位址；隔離版 dosgolem 的
 `Machine.WriteBytes` 實際逐位元組呼叫 `Write8`，本輪 `WatchWrites`
 也捕捉到讀入寫入，不採用舊註解所稱「繞過監看」作結論。
+
+## 目標078：第一張卡片的執行期底圖與游標回退
+
+- confirmed（固定版本與九筆真視窗輸入）：`0E2D:11CF` 對稱號
+  `0x4CC6A`／副標 `0x4DF90` 的真實原文讀取，分別在步數
+  29,797,568／29,813,172 觸發當次原始畫布擷取。安全矩形底圖指紋
+  與目標075繪製前快照相同。原文完成後第一個輸出幀29,865,000，
+  各欄原版差分164／83點及 bbox 精確命中，方建立通用可逆補片。
+  該幀及後續共13個正常幀，完整原文與 NUL、視訊模式、開檔脈絡及
+  索引畫面均逐欄符合觀測條件，因此可在**輸出層**
+  合成兩欄候選中文字模；原版 RAM／畫布從未改寫。
+- confirmed（DOS 20-bit 線性 RAM、320×200邏輯畫布及索引輸出分開）：
+  原版滑鼠從 `(16,16)` 移入卡片 `(160,48)`，索引畫面改變160點，
+  其中稱號／副標安全矩形各交疊7／60點，底層畫布雜湊仍相同。
+  即使不用保守座標守門，`overlay.ComposeLayers` 的原文像素檢查也對兩欄
+  回報 `frame-mismatch`。本探針保守地於25個游標停留幀回退兩欄原文；
+  移開後24幀重新套用。這證實本例游標像素進入索引輸出，不能只看底層畫布；
+  不外推任意游標形狀或其他卡片。
+- confirmed（限定驗收）：兩次獨立原版觀測收據位元組相同；正常路徑與游標
+  變體各自與**同輸入的無觀測控制組**在 CPU 暫存器、完整 RAM、原版索引畫面、
+  色盤、ticks／cycles 完全一致。模擬缺譯／缺字模的輸出逐像素等於原文；
+  一點舊畫面觸發 `frame-mismatch`。錯誤 `NAMES.TXT` 指紋在啟動前被拒絕。
+  本機執行期合成 PNG 的兩欄安全區外逐像素不變，字級仍為依5／6像素
+  原版墨跡選出的21／25px候選，並非全域固定值。
+- unknown／停止線：這仍是遊戲專屬可丟棄探針，讀取已驗證的本機字模收據；
+  「缺譯」是停用兩欄的反向對照，尚非正式 TSV 執行期缺鍵處理。
+  其他卡片與更廣玩家互動沒有驗收；即使本例可逆，也不授權直接修改
+  正式 `live_menu.go` 或宣稱卡片中文化。規格保持 DRAFT。
+
+本輪工具 `tools/probe_card_runtime.go`、`tools/check_card_runtime.py` 與
+`tools/verify_card_preview.py`。本機雙次正常報告 SHA-256
+`f8c8ebe95e09c4f8793f6dff2c72fedff9bd251e209ea887aedfb437e86c8fc6`；
+五組報告和 PNG 只留已忽略的 `workplace/reports/goal078-card-runtime-*`，
+不能加入 Git。其餘工具版本、原始檔指紋、對照及重跑入口見研究紀錄。

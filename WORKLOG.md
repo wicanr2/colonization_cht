@@ -1076,3 +1076,28 @@
   `RESEARCH-LOG.md`。
 - 程式、譯稿註記與證據文件提交 `5d7abfd`，已推送私有 `origin/main`；
   GitHub Issue #6／#7／#26 已追加目標077結果與保持開放的原因。
+
+## 2026-09-23：目標078第一張難度卡片執行期守門實驗
+
+- 先以提交 `94fb631` 將[目標078](docs/goals/078-difficulty-card-runtime-guard.md)
+  推送至私有 `origin/main`。依現有規格016的 DRAFT 邊界，只新增可丟棄
+  `tools/probe_card_runtime.go`／`tools/check_card_runtime.py`，沒有修改
+  原版檔案、隔離 dosgolem、正式 `live_menu.go` 或 Ebitengine 前端。
+- 九筆既有真視窗輸入下，兩次獨立原版重播的執行期報告位元組一致；
+  `0E2D:11CF` 真實來源讀取時取當次有紋理底圖，第一個完整輸出幀建立
+  兩欄可逆補片，該幀及後續共13幀通過原版索引畫面守門。
+  同輸入無觀測控制組與觀測／合成組的 CPU、完整 RAM、原始畫布、
+  索引畫面、色盤及虛擬時間一致。
+- 滑鼠移入第一張卡片後，索引畫面改變160點，其中7／60點觸及兩欄安全矩形，
+  底層畫布不變；通用補片未加座標守門也會拒絕兩欄，保守守門回退原文25幀，
+  移出後24幀恢復。游標變體另有同輸入無觀測控制組逐項對拍通過。
+- 模擬缺譯／缺字模時合成圖逐像素等於原文，舊幀一點差分觸發
+  `frame-mismatch`；使用一次性錯誤 `NAMES.TXT` 指紋連結測例，探針在啟動前
+  拒絕未知版本。執行期原文／中文 PNG 經 `tools/verify_card_preview.py`
+  逐像素通過，差異只在兩欄安全矩形。`go vet`、dosgolem `overlay`／
+  `internal/machine`／`oracle` 測試、獨立收據檢查器及工作清單驗證均通過。
+- 研究報告、原版像素 PNG、字型與本機探針執行檔都在已忽略的
+  `workplace/reports/`，未追蹤進 Git；抽查為目前 UID/GID `1000:1000`。
+  Docker 自檢未發現本專案 root-owned 檔案、錯誤掛載 `.md` 目錄或本輪
+  殘留容器；未清理其他專案容器。正式鍵、真正 TSV 缺鍵回退、其餘卡片與
+  Ebitengine 正常玩家前端仍未完成，規格016維持 DRAFT，已顯示中文仍八段。
