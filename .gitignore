@@ -16,5 +16,6 @@
 !docs/screenshots/difficulty-zh.png
 
 # 編輯器與作業系統暫存檔。
+__pycache__/
 *.swp
 .DS_Store

@@ -1,6 +1,6 @@
 # 目標096：姓名固定提示的完整來源與正式覆蓋守門
 
-狀態：進行中；日期：2026-09-24。承接[目標095](095-player-name-input-and-overlay-gate.md)、
+狀態：completed；日期：2026-09-24。承接[目標095](095-player-name-input-and-overlay-gate.md)、
 [規格023](../spec/023-player-name-screen-draft.md)，對應
 [Issue #29](https://github.com/wicanr2/colonization_cht/issues/29)及
 [Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)。
@@ -50,3 +50,17 @@
 三情境原型當成正式玩家版。若完整來源與當次畫布事件
 不能可靠配對，規格023保持 DRAFT，顯示原文，正式
 中文數仍十四段；下一輪改追最窄的未證讀寫／轉場邊。
+
+## 完成結果
+
+目標已先以提交 `a34aa03` 推送私有儲存庫，才執行本輪研究。
+dosgolem 雙次冷啟動與無觀測控制閉合完整來源、逐字輸出、
+415點多色畫布及 Enter 離頁失效；`0E2D:09F4` 讀取使用
+`DS:SI`，`0D21:00C6` 讀取使用 `SS:BX`，已在
+[規格023](../spec/023-player-name-screen-draft.md)明確區分。
+規格先升限定 READY，再接正式 Ebitengine 輸出層；
+真視窗姓名 `x`／退格／Enter、中英文同輸入原版同狀態、
+安全區及六類反例均由獨立驗證器通過，規格升限定 CONFORMED。
+正式中文畫面文字由十四增至十五段；可編輯姓名與下一頁長文
+保持原樣。本輪不新增含原版畫素的公開截圖，不宣稱完整中文化。
+驗證收據、雜湊與未解邊界見規格023及[研究紀錄](../../RESEARCH-LOG.md)。

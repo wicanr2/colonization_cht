@@ -1712,3 +1712,38 @@
   真正主機 `gh` 已更新並回讀[Issue #29](https://github.com/wicanr2/colonization_cht/issues/29)
   與[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)，
   兩者均保持 OPEN。收尾文件回填另以後續提交推送。
+
+## 2026-09-24：目標096姓名固定提示正式覆蓋與驗收
+
+- 目標文件先以 `a34aa03` 推送 PRIVATE `origin/main`。本輪以
+  隔離 dosgolem 及合法 DOS 原版唯讀輸入完成雙次冷啟動、
+  無觀測控制、完整訊息讀取與415點畫布守門；修正來源
+  `0E2D:09F4` 為 `DS:SI`、逐字讀取 `0D21:00C6` 為
+  `SS:BX` 的位址契約。同文再次出現但開檔世代不同的負例
+  已納入守門，沒有改原版 EXE 或資料。
+- [規格023](docs/spec/023-player-name-screen-draft.md)先依證據
+  升限定 READY，才接 `tools/live_menu.go` 的正式十五欄輸出。
+  固定姓名提示用38px、328×35px字模與多色可逆補片；其餘
+  十四欄的 alpha／尺寸／字級／譯文不變。真 Ebitengine 視窗
+  從冷啟動走正常滑鼠路徑，實際 `x`、退格、Enter 及同輸入
+  英文控制的 CPU、完整 RAM、索引、色盤、虛擬時間、開檔一致；
+  中文新增畫素僅落在姓名提示安全矩形，姓名資料與下一頁不變。
+  三份獨立驗證收據及雜湊詳見[研究紀錄](RESEARCH-LOG.md)。
+- 真 TSV 缺鍵／重複鍵、缺字模／錯字級、游標遮住及移開、
+  原版單位元組錯版均通過失敗即關閉反例；錯版退出碼2。
+  Ebitengine 工具映像內 `xvfb-run` 缺 `xauth`，分類為環境問題，
+  改用同容器內有界 Xvfb 並以 trap 收尾；首次使用另一
+  Pillow 版本量得329px而非既定328px，故回到既有
+  `rich2-py:latest` Pillow 12.3.0 重烘，未新建重複映像。
+  規格023通過限定 CONFORMED，正式中文顯示由十四增至十五段。
+- 使用者再確認難度標題 A 版（「選擇」34px、「難度」38px、
+  共同置中，卡片與完成提示不變）。核對現行
+  [規格018](docs/spec/018-difficulty-heading-layout-draft.md)、
+  程式及私有截圖 SHA-256
+  `86b2c08465ed67fc57202e7490a7ac274185c78bf464e2a0e773b120bb196e07`；
+  此版先前已完成同狀態驗收及截圖更新，因此不重抓、不覆寫。
+  姓名頁真視窗 PNG／原版畫素仍僅留已忽略的 `workplace/`。
+- 本輪更新目標、規格、README 目前狀態、CONTEXT、研究紀錄
+  與唯一工作清單；Issue #29 的固定姓名提示範圍完成，
+  Issue #26／#27 及長文／help／旗卡後續範圍保持開放。
+  Git、Docker 衛生、遠端 Issue 與推送結果於交付前核對。

@@ -3034,3 +3034,57 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   當次背景、安全矩形、開檔相位與離頁失效。未閉合前
   [規格023](docs/spec/023-player-name-screen-draft.md)維持 DRAFT，
   提示仍是原文，十四段正式中文顯示數不變。
+
+## 2026-09-24：目標096姓名固定提示來源守門與正式同狀態驗收
+
+- 固定原版輸入與雜湊見[規格023](docs/spec/023-player-name-screen-draft.md)；
+  隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`，
+  研究映像 `colonization-research:20260920-r2`／Go 1.24.13，
+  真視窗採 Ebitengine v2.9.9。檔案位移、20-bit線性 RAM、DOS 實模式
+  `CS:IP` 及320×200索引畫布分別記錄，不互相代換。原版及字型均唯讀，
+  原版 PNG／RAM／索引只留已忽略的 `workplace/`。
+- **confirmed（固定版本與正常玩家路徑）**：真視窗前置26筆輸入 SHA-256
+  `d5a0902056911fa13a93f7f5466c27c795d3c12600214ff8be71e2be95ea3fec`。
+  `GAME.TXT:0xA7A` 原始25 bytes 含 `^^`；20-bit RAM `0x2B072` 為23個
+  可見字元加 `0A`，並非原先推測的 NUL；`0E2D:09F4` opcode `AC`
+  以 `DS:SI` 讀取。顯示緩衝 `0x6F200` 後有23字元加 `00`。
+  `0D21:00C6` opcode `36 8A 17` 以 **`SS:BX`** 讀取
+  `0x2A864`，不是 `DS:SI`；`0D21:012C` 改原版畫布415點，
+  bbox `(104,88)–(215,97)`，色號68／47／128各199／135／81點。
+  印前畫布 SHA-256
+  `f31602f9a239a4f83fd6e27e644384009d628517185aeb80bb248479e67d0e71`；
+  安全區 `(100,85)–(219,98)` 不含姓名框 y=98 上緣。
+- **confirmed（同文負例與觀測無副作用）**：首個來源事件在
+  48,862,601步、原版開檔世代53；Enter 後63,371,349步再次
+  命中相同來源與印前畫布，但開檔世代已54。66M／70M步來源與
+  顯示緩衝均不再匹配，故正式守門同時綁定開檔世代及事件鏈。
+  `tools/probe_goal096_prompt_guard.go` SHA-256
+  `c9c012684c8f1fed65701c01639666aab643245d8ce781f076e50d0b471bb26c`；
+  兩次冷啟動報告逐位元組相同，SHA-256
+  `761c077b6b94cd5e75ccc857bfc85130197201ae5acff82236d5beb1111b0c25`。
+  55M／58M／61M／66M／70M步與無觀測控制的 CPU、完整 RAM、
+  索引、底層畫布、色盤、時間、開檔全同；獨立
+  `tools/check_goal096_prompt_guard.py` PASS 收據 SHA-256
+  `13ff374f239bbb9f3e721d9490cabbc03d2ea814cb5e54dc2890eed3a225908b`。
+- **confirmed（限定正式輸出）**：規格023先升 READY 後，從唯一真 TSV
+  與 Cubic 11 SHA-256
+  `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`
+  重烘15欄字模。固定提示38px、328×35px；既有14欄的 alpha、
+  尺寸、譯文與字級不變，僅部分字模中繼資料因 TSV 註記雜湊更新。
+  真 Ebitengine 視窗經正常滑鼠路徑進姓名頁，`x`／退格／Enter
+  與同輸入英文控制的 CPU、完整 RAM、索引、色盤、時間、開檔相同；
+  中文畫素只在提示安全區，姓名欄及下一頁不變。真視窗輸入
+  SHA-256
+  `67513fe6b0d332924b5bc6df32e07a9da616b36c191d6b4843b7c6a212bb0ee6`，
+  `tools/verify_goal096_window.py` PASS 收據 SHA-256
+  `c92c62d3b7cace421801ef2c9f6bc6b2786a07fcd3e3386d2d4a513ac8c95002`。
+- **confirmed（反例）**：真 TSV 缺鍵／重複鍵、缺字模、錯字級均
+  只使提示回退英文；游標遮住安全區時逐幀回退、移開恢復；
+  單位元組錯版 `GAME.TXT` 在啟動前以退出碼2拒絕。
+  `tools/verify_goal096_fallbacks.py` PASS 收據 SHA-256
+  `5c9b1b5e5e8b5aef7f784a0b2ee78ddd9b894aa09a6493c4fb8aae8e31f730e1`。
+  原版檔案、姓名資料、記憶體、規則與存檔未因中文覆蓋改寫。
+- **未知／不外推**：原版精確字型 baseline、可編輯姓名譯名、
+  首次國家介紹長文來源、help 與全遊戲畫面覆蓋。規格023
+  CONFORMED 只限此固定版本的固定提示；本輪不新增含原版像素的
+  Git 截圖，亦不宣稱完整中文化。
