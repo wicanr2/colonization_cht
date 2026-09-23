@@ -103,6 +103,8 @@ EXE及靜態圖像尚未建立完整玩家可見訊息分母，不宣稱全文�
 稱號實際格式為 `DISCOVERER:`；兩行原版墨跡分別5／6像素高，背景各有75／78種色盤索引，
 不可純色抹除。來源檔載入邊、背景可逆擷取、中文字級／安全矩形與游標守門仍缺，
 [規格016](docs/spec/016-difficulty-card-text-draft.md)保持 DRAFT，不計入八段完成數。
+[目標076](docs/goals/076-difficulty-card-reversible-prototype.md)接續驗證第一張卡片的可逆背景、
+逐欄中文字級及本機 Ebitengine 可丟棄對照圖；正式覆蓋仍須等規格守門。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
 保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至368筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。
