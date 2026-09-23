@@ -1,6 +1,6 @@
 # 目標080：難度畫面標題的原版階層與逐欄字級預覽
 
-狀態：進行中；日期：2026-09-23。承接[目標079](079-first-card-formal-overlay.md)、
+狀態：量測與可丟棄原型完成，等待使用者選版；日期：2026-09-23。承接[目標079](079-first-card-formal-overlay.md)、
 [規格014](../spec/014-difficulty-text-output-draft.md)及
 [Issue #28](https://github.com/wicanr2/colonization_cht/issues/28)。
 
@@ -35,3 +35,13 @@
 不自動等同字型 baseline；無證據不得聲稱精確字型或全畫面字級等價。
 Issue #28 的正式完成條件是使用者確認版式後再經 READY、實作與正常玩家
 路徑驗收，本輪原型本身不關閉它，也不把十段中文顯示計數增加。
+
+## 本輪結果
+
+原版兩行墨跡中心同為四倍畫布 x=230、高度分別32／36px；目前中文
+24／24px沿英文各自左起點放置，因此兩行相互錯開。[規格018草案](../spec/018-difficulty-heading-layout-draft.md)
+保存原始 bbox、安全矩形、逐欄候選字級、Ebitengine 本機對照及停止線。
+候選 A 將34／38px兩行置於同一中心線；候選 B 保留左起點但分別放大。
+四格 PNG 只在本機 `workplace/reports/goal080-heading-preview/comparison.png`，
+不加入版控。逐像素驗證只改兩個標題安全區；正式畫面、原版素材及已驗收
+十段中文數均未改動。下一步待使用者看圖選擇，再啟動 READY 與正式接線。

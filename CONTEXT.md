@@ -129,7 +129,10 @@ Ebitengine 畫面。穩定顯示鍵、執行期背景／游標回退及其餘卡
 經中英文同狀態、真視窗逐像素與游標變體驗收標為 CONFORMED，現有十段正式顯示中文。
 其餘卡片仍依規格016 DRAFT 逐張取證，不能外推。
 [目標080](docs/goals/080-difficulty-heading-layout-prototype.md)處理 Issue #28 的原版標題
-階層量測與可丟棄版式對照；使用者確認前不更動正式前端或把視覺候選當定案。
+階層量測與可丟棄版式對照，已量得原版兩行共用四倍畫布 x=230 中心、
+高度32／36px；[規格018草案](docs/spec/018-difficulty-heading-layout-draft.md)比較
+34／38px共同置中（A）與保留原文左起點（B）。本機四格對照只改兩個已證實
+安全矩形；使用者選版前不更動正式前端或把視覺候選當定案。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
 保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至368筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。

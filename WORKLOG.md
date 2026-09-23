@@ -1139,3 +1139,25 @@
   `workplace/` 中間物。正式程式、截圖與文件提交 `6a857e9` 已推送私有
   `origin/main`；Issue #6／#7／#12／#26 已追加限定完成與未完成範圍，
   下一階段的標題版式及逐欄字級見新 Issue #28（保持 OPEN）。
+
+## 2026-09-23：目標080難度標題排版原型
+
+- 先將[目標080](docs/goals/080-difficulty-heading-layout-prototype.md)以提交
+  `925439a` 推送私有 `origin/main`，再開始本輪取證。命中復古 GUI、
+  真視窗試玩、規格閘門與工作清單知識路由；依 grill-me 的視覺決策規則，
+  先做可丟棄並列預覽，不把代理偏好直接接進正式前端。
+- 以原版同狀態印字前後快照量出兩行共用中心 x=230，四倍墨跡高32／36px。
+  新增 `tools/prepare_heading_preview.py`，固定原版來源、字型與索引畫面指紋，
+  以可逆背景補片產生目前版、共同置中 A 與保留左起點 B；現有 Ebitengine
+  預覽器在有界 Xvfb 畫布繪製原文控制及三個中文候選。英文圖與既有控制圖
+  完全相同、目前版標題區與既有中文真視窗圖完全相同，三候選差異均限於
+  已驗標題安全矩形。詳見[規格018草案](docs/spec/018-difficulty-heading-layout-draft.md)
+  與[研究紀錄](RESEARCH-LOG.md)。
+- 所有含原版像素 PNG／JSON 留在 gitignore 的本機 `workplace/reports/`；
+  既有私有截圖、正式前端及原版檔案均未改。Issue #28 與工作清單轉為
+  `in_progress`，等待使用者選 A、B 或另提方向；選定前不升 READY、
+  不聲稱新畫面驗收，也不把十段已顯示中文數增加。
+- 新預覽工具語法、`tools/worklist.py verify`、四組 PNG／量測收據一致性及
+  `git diff --check` 通過。本輪產物皆為目前 UID/GID `1000:1000`；
+  專案內未見 root-owned 項目或誤掛形成的 `.md` 目錄。三個相關映像的
+  容器檢查無執行中或已停止殘留；沒有清理其他專案資源。

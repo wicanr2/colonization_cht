@@ -2219,3 +2219,43 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   它含原版像素，不能公開散布。`go test ./...` 首次因沒有 DISPLAY 失敗，
   同一前端在有界 Xvfb 容器重跑通過；Xvfb wrapper 的探測命令在映像內缺失，
   已改用 `xdotool` 並由 trap 清理，屬環境／驗證工具問題，不是原版遊戲缺陷。
+
+## 2026-09-23：目標080難度標題版式量測與可丟棄預覽
+
+- 證據與地址空間：原始 `LABELS.TXT` SHA-256
+  `e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204`，
+  `Choose`／`Difficulty Level` 位於檔案位移 `0x888`／`0x890`；規格014記載的
+  來源讀取 `0D3A:0015`、畫布寫入 `0D21:012C` 為 DOS 實模式 `CS:IP`。
+  `goal061-difficulty-writes-replay` 的 `choose-before`／`choose-after` 與
+  `level-before`／`level-after` 是 320×200 原版畫布快照；
+  `goal079-headless-control.difficulty.idx` 是同狀態原版索引畫面，SHA-256
+  `e491233e037fa69b0498fc9415688b4491124d0ae687f45b17b46e8bf57b6446`；
+  色盤 SHA-256 為
+  `762b10807954069aa97266465cff2d72be0d1da568b668a19d15c3a5d0524e82`。
+  這些地址、檔案位移與畫布座標不可混用。
+- confirmed：兩行原版前後畫布全區差分分別126／284點、半開 bbox
+  `(42,16)-(73,24)`／`(23,29)-(92,38)`；安全矩形
+  `(39,14)-(76,26)`／`(20,27)-(96,40)` 在穩定索引畫面與 `level-after`
+  快照相同。兩行共用四倍畫布 x=230 的墨跡中心，字高32／36px，頂列
+  y=64／116；兩行間20px空白。這些是畫布墨跡，不是精確字型基線。
+- 工具與原型：隔離 dosgolem 既有收據由提交
+  `9dd36726eeaf9c1f3a745aabdcbb84413791d90f` 產生；本輪以
+  `colonization-research:20260920-r2` 核對來源，以 `rich2-py:latest`
+  及 Pillow 量測 Cubic 11 字型 SHA-256
+  `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`；
+  既有 `tools/card_preview.go` 編譯本機執行檔在 Ebitengine 2.9.9／
+  `psychicwar-go-ebiten:latest` 映像中以有界 Xvfb 合成四組預覽。
+  `tools/prepare_heading_preview.py` 固定來源雜湊、原版差分與安全矩形，
+  並使用真實印字前的有紋理補片；所有預覽及報告留於已忽略的
+  `workplace/reports/goal080-heading-preview/`。
+- 候選與驗證：目前正式版24／24px兩個52×22字模沿英文左起點
+  `(168,64)`／`(92,116)` 放置；候選 A 用34／38px字級、74×32／82×35
+  墨跡置中於 x=230；候選 B 用相同逐欄字級但仍保留原文左起點。
+  英文原型與既有英文控制 PNG 逐像素相同；目前版原型在標題安全區與
+  既有中文真視窗圖逐像素相同。相對英文控制，A／B／目前版分別變更
+  7,402／7,539／6,732個像素，全部在兩個已證實標題安全矩形內。
+  本原型不執行原版 CPU，不可當作新的同狀態正常玩家路徑收據。
+- 強推論：共同置中比保留左起點更貼近原版兩行共用中心線；視覺偏好仍須
+  使用者看四格圖判斷。規格018維持 DRAFT、Issue #28 保持開放，正式
+  `tools/live_menu.go` 與現行私有截圖沒有修改。這輪只檢查同頁既有
+  完成提示24px、第一張卡片稱號／副標21／25px；沒有推論全畫面固定字級。
