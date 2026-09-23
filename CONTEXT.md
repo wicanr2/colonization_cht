@@ -108,6 +108,9 @@ EXE及靜態圖像尚未建立完整玩家可見訊息分母，不宣稱全文�
 21／25px，逐像素檢查確認安全區外不變、透明字模下恢復原背景。它不是正式
 runtime 覆蓋或真視窗正常路徑收據；來源檔載入邊、任意時刻的背景／游標守門與
 其餘卡片仍缺，規格016保持 DRAFT，八段已顯示中文數不增加。
+[目標077](docs/goals/077-difficulty-card-load-provenance.md)正以 dosgolem 的 DOS 讀檔
+收據追查 `Discoverer`／`Easiest` 從原始 TXT 到執行期 RAM 的載入邊；確認前不選
+`GAME.TXT` 或 `NAMES.TXT` 作第一張卡片正式顯示鍵。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
 保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至368筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。
