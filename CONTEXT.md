@@ -115,6 +115,9 @@ runtime 覆蓋或真視窗正常路徑收據；當時來源檔載入邊、任意
 首次讀取晚於稱號 RAM 寫入。可丟棄預覽已改用 `NAMES.TXT` 候選鍵並重驗
 Ebitengine 畫面。穩定顯示鍵、執行期背景／游標回退及其餘卡片仍未過 READY，
 不能把這兩筆 `draft` 譯文接進正式覆蓋。
+[目標078](docs/goals/078-difficulty-card-runtime-guard.md)正在追查第一張卡片的執行期
+背景擷取、滑鼠遮擋與後續繪圖回退；目標文件已先建立，結果未驗收前
+規格016仍為 DRAFT、八段已顯示中文計數不變。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
 保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至368筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。
