@@ -4,6 +4,8 @@
 [研究紀錄](../../RESEARCH-LOG.md)與本機
 `workplace/reports/goal092-neighbor-runtime/`。本規格只確認一個
 正常玩家可達的原版畫面；不授權正式中文輸出或修改姓名輸入。
+後續來源、輸入及覆蓋工作見
+[Issue #29](https://github.com/wicanr2/colonization_cht/issues/29)。
 
 ## 固定原版與重播
 

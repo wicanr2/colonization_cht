@@ -1563,3 +1563,7 @@
   `workplace/`，不入 Git。Python AST、Go 格式與工作清單
   驗證通過；輸出 UID/GID `1000:1000`，工作根沒有
   root-owned 項目、誤建 `.md` 目錄或殘留 Docker 容器。
+- 新姓名畫面的來源、輸入與正式中文覆蓋尚缺，依使用者要求
+  建立[Issue #29](https://github.com/wicanr2/colonization_cht/issues/29)，
+  並將 `player-name-screen` 登入 `docs/worklist.json`，
+  由工具重生 `WORKLIST.md`；新項維持 `planned`／人工驗證。

@@ -5,7 +5,9 @@
 及[規格022](../spec/022-neighbor-nation-card-red-text-draft.md)；對應
 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)、
 [Issue #12](https://github.com/wicanr2/colonization_cht/issues/12)與
-[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)。
+[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)；
+新畫面後續工作另登記
+[Issue #29](https://github.com/wicanr2/colonization_cht/issues/29)。
 
 ## 玩家問題與範圍
 
