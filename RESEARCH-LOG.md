@@ -1856,3 +1856,15 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
 - unknown（執行期與版面）：報告的 `runtime_display_verified` 為 false。七則 README 仍未取得
   dosgolem 輸出事件、覆蓋鍵、中文安全矩形、Ebitengine 視窗或正常玩家路徑；不計入八段已顯示
   中文、完整說明文字或全文中文化完成度。
+
+## 2026-09-23：目標073殖民地名稱來源與呈現決定
+
+- confirmed（來源）：唯讀 DOS ZIP 的 `SMColoni/COLONIZE/COLONY.TXT` SHA-256 為
+  `2996f8a9d53a7f7a93e4a238bfd2ba727c4cf5cdabc334c4059c6860c9e4ae36`，長2,540 bytes。
+  四個 `@` 章節的資料筆數為 ENGLISH 36、FRENCH 66、SPANISH 39、DUTCH 32，共173筆；僅
+  ENGLISH 有18筆 `名稱,四位年份` 的資料行。
+- confirmed（使用者決定）：玩家顯示譯稿採「中文名稱（原名，年份）」；無年份者採
+  「中文名稱（原名）」。這是顯示文案政策，不是原版資料格式或執行期命中證據。
+- unknown（執行期與版面）：尚未驗證 `COLONY.TXT` 每筆名稱的畫面輸出、最大同時可見數、中文安全
+  矩形、字級或基線。原始名稱檔頭的23字元儲存限制不證實中文覆蓋的可用版面；未來須依欄位量測，
+  不得套用固定字級。

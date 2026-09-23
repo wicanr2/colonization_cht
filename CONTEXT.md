@@ -81,6 +81,9 @@ EXE及靜態圖像尚未建立完整玩家可見訊息分母，不宣稱全文�
 [目標071](docs/goals/071-mapmenu-woodcut-corpus.md)已完成44筆獨立的地圖編輯器選單、過場標題及
 載入訊息草稿。`NAMES.TXT`的70條無逗號文字已全數收錄；餘下232列是名稱混合規則／別名資料，
 不可套用既有整行候選模型，待有 DRAFT 欄位識別方案才重開。
+[目標073](docs/goals/073-colony-name-bilingual-corpus.md)已規劃以使用者確認的「中文名稱（原名，年份）」
+格式處理 `COLONY.TXT` 173個預設殖民地名稱；解析器會將原始名稱與年份分離為穩定來源欄位，
+不將其誤作整行覆蓋鍵或原版資料改寫。
 最近完成入口：[目標072](docs/goals/072-readme-player-guide-corpus.md)已完成 DOS 版 `README.TXT` 的七則版本修正、
 地圖編輯器與作弊模式玩家補充說明草稿；過時的 DOS／音效排錯與客服資料明確排除。固定 ZIP
 來源、操作字面值及Cubic 11覆蓋通過，但不增加任何已顯示文字或 runtime 覆蓋聲明。
@@ -96,7 +99,7 @@ RAM 快照找到原文候選。兩次正常路徑重播確認卡片區畫布差�
 保持 DRAFT，不計入八段完成數。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
-保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至324筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。
+保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至368筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。
 
 已完成 [目標 054](docs/goals/054-main-menu-text-provenance.md) 的最小證據鏈；
 [目標 055](docs/goals/055-first-text-prototype.md) 保存中文原型、測試與重跑入口。
