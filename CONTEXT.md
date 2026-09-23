@@ -2,6 +2,9 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前執行入口：[目標095](docs/goals/095-player-name-input-and-overlay-gate.md)：
+補真 Ebitengine 玩家鍵盤路徑，審查姓名提示執行期守門與
+READY／CONFORMED 閘門；未驗收前維持原文與十四段正式數量。
 最近完成入口：[目標094](docs/goals/094-player-name-prompt-layout.md)：
 姓名固定提示的原版印前多色底圖、415點墨跡、y=98輸入框
 負例及38px單欄 Ebitengine 可丟棄原型，三種姓名編輯畫面
