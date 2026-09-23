@@ -1,6 +1,7 @@
 # 目標095：姓名畫面的真視窗鍵盤與提示正式覆蓋閘門
 
-狀態：進行中；日期：2026-09-24。承接[目標094](094-player-name-prompt-layout.md)、
+狀態：completed（鍵盤支線限定 CONFORMED；提示支線依停止線維持 DRAFT）；
+日期：2026-09-24。承接[目標094](094-player-name-prompt-layout.md)、
 [規格023](../spec/023-player-name-screen-draft.md)，對應
 [Issue #29](https://github.com/wicanr2/colonization_cht/issues/29)及
 [Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)。
@@ -45,3 +46,25 @@
 算成正式顯示。若鍵盤映射、游標或提示生命週期不能通過
 READY／同狀態驗收，保持規格023 DRAFT、原文與十四段
 正式數量，並明列下一個最小可重現缺口。
+
+## 執行結果
+
+隔離 dosgolem 已有字元與具名鍵映射，故沒有修改其程式或
+複製掃描碼表。先將視窗鍵盤契約審成
+[規格024](../spec/024-window-keyboard-input.md)限定 READY，
+才把 Ebitengine 真實可列印字元、Backspace 與 Enter 轉送
+DOS；不支援字元明確拒絕、記錄，失焦不補送。單元測試、
+真視窗冷啟動正常玩家路徑、負例及同輸入英文控制均通過，
+規格024已限定 CONFORMED。本機獨立 PASS 收據 SHA-256
+`54ffa9db8a3145f9e93391aa3d557b42c58d968cbd86177a631001f5699c0cae`，
+詳細收據與限制見規格024。
+
+提示覆蓋尚未升 READY：原版 `0D21:00C6` 從線性 RAM
+`0x2A864` 逐字讀取時，該位置只保留當前字與 NUL，不能
+把它當作完整訊息來源鍵。現有正式難度欄守門亦假設其他
+筆畫色號，不能直接搬到此處；本提示原版寫入色號含
+68、47、128。下一個最小可重播工作是用較早的
+`0E2D:09F4`／`0x2B072` 完整來源讀取建立同一訊息實例，
+再追其印字前底圖、415點寫入、游標及離頁撤除。未取得
+此執行期閉合證據前，[規格023](../spec/023-player-name-screen-draft.md)
+保持 DRAFT、畫面顯示原文、正式中文段數仍十四段。

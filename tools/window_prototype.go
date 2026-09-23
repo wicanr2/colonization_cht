@@ -4,6 +4,7 @@ package main
 import (
 	"encoding/json"
 	"flag"
+	"fmt"
 	"image"
 	"os"
 	"strings"
@@ -28,10 +29,12 @@ type windowInput struct {
 	X      int    `json:"x"`
 	Y      int    `json:"y"`
 	Button int    `json:"button"`
+	Text   string `json:"text,omitempty"`
 }
 type windowReceipt struct {
-	Inputs []windowInput `json:"inputs"`
-	End    uint64        `json:"end"`
+	Inputs   []windowInput `json:"inputs"`
+	End      uint64        `json:"end"`
+	Rejected []string      `json:"rejected,omitempty"`
 }
 type windowGame struct {
 	m            *golem.Machine
@@ -44,6 +47,7 @@ type windowGame struct {
 	held         [3]bool
 	lastX, lastY int
 	inputs       []windowInput
+	rejected     []string
 }
 
 func logicalMouse(x, y int) (int, int, bool) {
@@ -57,7 +61,32 @@ func frontendFrame(im *image.RGBA, rec map[string]any) {
 		activeWindow.latest, activeWindow.record, activeWindow.dirty = im, rec, true
 	}
 }
+func supportedDOSChar(s string) bool {
+	if len(s) != 1 {
+		return false
+	}
+	c := s[0]
+	return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' ||
+		c >= '0' && c <= '9' || c == ' '
+}
+func validWindowInput(e windowInput) bool {
+	switch e.Kind {
+	case "move":
+		return e.Text == "" && e.Button == 0 && e.X >= 0 && e.X < 320 && e.Y >= 0 && e.Y < 200
+	case "press", "release":
+		return e.Text == "" && e.X == 0 && e.Y == 0 && e.Button >= 0 && e.Button <= 2
+	case "text":
+		return supportedDOSChar(e.Text) && e.X == 0 && e.Y == 0 && e.Button == 0
+	case "backspace", "enter":
+		return e.Text == "" && e.X == 0 && e.Y == 0 && e.Button == 0
+	default:
+		return false
+	}
+}
 func applyWindowInput(d *golem.DOS, e windowInput) {
+	if !validWindowInput(e) {
+		panic("無效視窗輸入")
+	}
 	switch e.Kind {
 	case "move":
 		d.MoveMouse(e.X, e.Y)
@@ -66,15 +95,23 @@ func applyWindowInput(d *golem.DOS, e windowInput) {
 	case "release":
 		d.ReleaseMouse(e.Button)
 	case "enter":
-		d.PushKey(golem.Key{Scan: 0x1c, ASCII: 13})
-	default:
-		panic("未知視窗輸入")
+		if !d.PushKeyNamed("Return") {
+			panic("dosgolem 缺少 Return 鍵")
+		}
+	case "backspace":
+		if !d.PushKeyNamed("Backspace") {
+			panic("dosgolem 缺少 Backspace 鍵")
+		}
+	case "text":
+		if !d.PushText(e.Text) {
+			panic("dosgolem 拒絕已審核字元")
+		}
 	}
 }
 func (g *windowGame) emit(e windowInput) {
 	e.Step = g.m.Steps
-	g.inputs = append(g.inputs, e)
 	applyWindowInput(g.d, e)
+	g.inputs = append(g.inputs, e)
 }
 func (g *windowGame) release() {
 	for i, v := range g.held {
@@ -91,6 +128,7 @@ func (g *windowGame) Update() error {
 	}
 	x, y, inside := logicalMouse(ebiten.CursorPosition())
 	focused := ebiten.IsFocused()
+	chars := ebiten.AppendInputChars(nil)
 	if !focused || !inside {
 		g.release()
 	} else {
@@ -110,8 +148,22 @@ func (g *windowGame) Update() error {
 			}
 		}
 	}
-	if focused && inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
-		g.emit(windowInput{Kind: "enter"})
+	if focused {
+		for _, r := range chars {
+			s := string(r)
+			if !supportedDOSChar(s) {
+				g.rejected = append(g.rejected, s)
+				fmt.Fprintf(os.Stderr, "不支援的 DOS 輸入字元 %q，未送入原版；請用英文字母、數字或空格\n", s)
+				continue
+			}
+			g.emit(windowInput{Kind: "text", Text: s})
+		}
+		if inpututil.IsKeyJustPressed(ebiten.KeyBackspace) {
+			g.emit(windowInput{Kind: "backspace"})
+		}
+		if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
+			g.emit(windowInput{Kind: "enter"})
+		}
 	}
 	end := g.m.Steps + 200000
 	if end > *windowSteps {
@@ -131,7 +183,8 @@ func (g *windowGame) Update() error {
 			stage = "difficulty"
 		}
 	}
-	dumpJSON(g.out+".status.tmp", map[string]any{"step": g.m.Steps, "stage": stage, "frame": g.record})
+	dumpJSON(g.out+".status.tmp", map[string]any{"step": g.m.Steps, "stage": stage, "frame": g.record,
+		"rejected_input_count": len(g.rejected)})
 	must(os.Rename(g.out+".status.tmp", g.out+".status.json"))
 	return nil
 }
@@ -160,14 +213,16 @@ func runWindow(m *golem.Machine, d *golem.DOS, render func(string), out string) 
 		}
 		previous := uint64(0)
 		for _, e := range receipt.Inputs {
-			if e.Step < previous || e.Step > receipt.End || e.Button < 0 || e.Button > 2 || (e.Kind == "move" && (e.X < 0 || e.X >= 320 || e.Y < 0 || e.Y >= 200)) {
+			if e.Step < previous || e.Step > receipt.End || !validWindowInput(e) {
 				panic("無效輸入收據")
 			}
+			previous = e.Step
+		}
+		for _, e := range receipt.Inputs {
 			for m.Steps < e.Step {
 				must(m.Step())
 			}
 			applyWindowInput(d, e)
-			previous = e.Step
 		}
 		for m.Steps < receipt.End {
 			must(m.Step())
@@ -181,5 +236,5 @@ func runWindow(m *golem.Machine, d *golem.DOS, render func(string), out string) 
 	ebiten.SetRunnableOnUnfocused(true)
 	ebiten.SetCursorMode(ebiten.CursorModeHidden)
 	must(ebiten.RunGame(g))
-	dumpJSON(out+".inputs.json", windowReceipt{Inputs: g.inputs, End: m.Steps})
+	dumpJSON(out+".inputs.json", windowReceipt{Inputs: g.inputs, End: m.Steps, Rejected: g.rejected})
 }

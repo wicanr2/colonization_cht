@@ -1665,3 +1665,47 @@
   [#26](https://github.com/wicanr2/colonization_cht/issues/26)及
   [#27](https://github.com/wicanr2/colonization_cht/issues/27)
   已回填限定成果與仍缺的正式驗收，回讀均為 OPEN。
+
+## 2026-09-24：目標095真視窗姓名鍵盤與提示守門審查
+
+- [目標095](docs/goals/095-player-name-input-and-overlay-gate.md)
+  先以 `327f2b2` 推送至核對為 PRIVATE 的儲存庫；本輪沿用
+  固定合法 DOS 輸入及隔離 `workplace/dosgolem`，其
+  `upstream` 推送仍為 `DISABLED`。讀取 dosgolem 既有
+  `PushText`／`PushKeyNamed` 與固定 Ebitengine 字元事件後，
+  先審[規格024](docs/spec/024-window-keyboard-input.md)至限定
+  READY，才改正式視窗鍵盤接線。支援英文字母、數字、空格、
+  Backspace、Enter；不支援字元明確拒絕及記錄，不改原版
+  EXE、資料、規則或姓名記憶體。
+- 初次 `go test` 因容器未設 `DISPLAY` 停在 GLFW 初始化；
+  同一 Ebitengine 映像的 `xvfb-run` 因缺 `xauth` 停止，
+  改以同容器有界、trap 管理的 Xvfb 重跑。測試首次揭露
+  讀錯鍵盤佇列：dosgolem 先放 BIOS 環形緩衝，並非
+  `DOS.Keys` 後備佇列；修正測試後 `go test ./...` 與
+  `go build` 通過。沒有新建重複映像或修改上游專案。
+- 真 Ebitengine 視窗從冷啟動實際點擊主選單、難度完成、
+  選國右卡與完成區，於姓名頁鍵入 `x`、退格、Enter。
+  原版畫面相應顯示 `x_`、游標及 `FRANCE` 長文。
+  第二次真視窗路徑驗 `!` 拒絕與失焦 `x` 不補送；
+  兩次均以相同輸入重播英文無覆蓋控制。CPU、完整 RAM、
+  原版索引、色盤、時間與開檔同狀態；圖像與目標093
+  dosgolem 控制圖只差滑鼠游標位置。獨立驗證器 PASS
+  收據 SHA-256
+  `54ffa9db8a3145f9e93391aa3d557b42c58d968cbd86177a631001f5699c0cae`，
+  鍵盤規格024升限定 CONFORMED。
+  最終版另對輸入收據未使用欄位嚴格拒絕；同一容器重跑
+  單元測試與建置，再重播正反兩份真視窗收據，原版狀態
+  與先前英文控制逐項相同。
+- 固定中文提示仍缺完整來源訊息執行期守門及離頁回退。
+  既有 `0x2A864` 只在 `0D21:00C6` 逐字更新；原版
+  筆畫含色號68／47／128，不可照搬難度欄的顏色假設。
+  [規格023](docs/spec/023-player-name-screen-draft.md)維持
+  DRAFT、提示仍顯示原文、正式中文顯示十四段不變。
+  詳細位址與推論等級見[研究紀錄](RESEARCH-LOG.md)。
+- 原版索引、RAM、真視窗 PNG、字型及測試建置只在
+  已忽略的 `workplace/`；文件、唯一工作清單、Issue
+  #29／#26 依限定成果更新。交付前已確認合法原版 EXE
+  SHA-256 不變、Git 未追蹤原版素材、工作根無 root-owned
+  檔案或誤建 `.md` 目錄、隔離 dosgolem 上游推送位址為
+  `DISABLED`，本輪三種既有映像無執行中或停止容器。
+  成果提交、私有推送與遠端 Issue 回讀於本輪收尾核對。

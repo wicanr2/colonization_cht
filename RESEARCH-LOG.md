@@ -2970,3 +2970,67 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   `tools/window_prototype.go` 僅轉送 Enter；本輪
   dosgolem 直接鍵盤事件及可丟棄原型不是正式玩家版
   編輯能力。規格023保持 DRAFT，十四段正式顯示不變。
+
+## 2026-09-24：目標095真視窗姓名鍵盤與提示守門限制
+
+- 固定合法 DOS 輸入指紋沿用[規格023](docs/spec/023-player-name-screen-draft.md)：
+  `OPENING.EXE` SHA-256
+  `3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`，
+  `VICEROY.EXE` SHA-256
+  `a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3a`；
+  `GAME.TXT:0xA7A`／`0xA7C` 是檔案位移，`0x2B072`／`0x2A864`
+  是20-bit線性 RAM，`0E2D:09F4`／`0D21:00C6`／`0D21:012C`
+  是 DOS 實模式 `CS:IP`，畫面座標是320×200原版索引畫布。
+  隔離 dosgolem 提交
+  `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`，
+  `upstream` push 維持 `DISABLED`。工具為
+  `eob-remake-go:1.26.7-ebiten2.9.9`、Ebitengine v2.9.9 與
+  `rich2-py:latest`（Pillow 影像驗證），全程有界 Docker／Xvfb。
+- **confirmed（工具契約）**：dosgolem 的 `internal/dos/scancode.go`
+  與 `internal/dos/bios.go` 已提供 ASCII 字母／數字／空格的
+  set-1 掃描碼及 `PushText`、`PushKeyNamed`；先入 BIOS 鍵盤
+  環形緩衝，滿時才用 DOS 後備佇列。Ebitengine v2.9.9
+  `AppendInputChars` 取依鍵盤配置解出的字元，Backspace／Enter
+  則是獨立控制鍵。這是平台輸入映射，不證明原版所有欄位
+  都接受全部字元。[規格024](docs/spec/024-window-keyboard-input.md)
+  經限定 READY 後才接正式視窗。
+- **confirmed（真視窗正常玩家路徑）**：
+  [tools/probe_goal095_window.sh](tools/probe_goal095_window.sh)
+  SHA-256
+  `73ebdb85ac43d9f1508613fefd5937795291fa9e7e19ec85e16c4b42b6e5a40f`
+  從冷啟動經主選單、第二張難度卡、右上國家卡及完成區進姓名頁。
+  真實視窗輸入收據 SHA-256
+  `d5a0902056911fa13a93f7f5466c27c795d3c12600214ff8be71e2be95ea3fec`
+  含姓名 `x`／退格／Enter，分別於55.2M、59.4M、63.2M步。
+  1280×800真視窗顯示預設 `Jacques Cartier_`、`x_`、
+  只剩游標，再到 `FRANCE` 長文；兩次姓名編輯差分只在
+  四倍矩形 `(316,392)–(984,448)`，原文提示安全區不變。
+  姓名及介紹畫面與目標093 dosgolem 原版控制圖，除上方及
+  左下兩個不同游標位置外逐像素一致。
+- **confirmed（雙路同狀態與負例）**：同一真視窗收據重播
+  英文無覆蓋控制，CPU 暫存器、完整 RAM、原版索引、色盤、
+  虛擬步數／ticks、開檔逐項相同；最終索引 SHA-256
+  `21ec0bf1fa5ce700950c537bd915ec1fe3afbd211400879f9d8d3147d688def4`。
+  第二次真視窗收據 SHA-256
+  `3044538138c09f8f98cd0be1032cf4b31b481c52b9b4a5b58e3841a749feb25e`
+  中 `!` 被 stderr 及收據明確拒絕；視窗失焦送 `x` 後重新聚焦，
+  姓名／提示畫面逐像素未變、輸入收據沒有多出鍵；其後正常
+  `x`／退格／Enter 與同輸入英文控制仍是完整原版同狀態。
+  [獨立驗證器](tools/verify_goal095_keyboard.py) SHA-256
+  `0df0581f3cc7b082da7eed46c4d7c81a0b40a9445e1bc9cb826f1cc74fd68794`
+  的本機 PASS 收據 SHA-256
+  `54ffa9db8a3145f9e93391aa3d557b42c58d968cbd86177a631001f5699c0cae`。
+  最終版收據欄位再加嚴後，兩份正反真視窗輸入重播與先前
+  英文控制的完整 RAM、CPU、索引、色盤及開檔仍逐項相同。
+  原版 PNG、索引、RAM 與字型僅在已忽略 `workplace/`。
+- **confirmed（提示守門缺口）**：目標094固定原版的
+  `0D21:00C6` 對 `0x2A864` 逐字讀取才重建可見原文；
+  該兩位元組逐字更新，並非能在首字時比對的完整字串。
+  `0D21:012C` 的415個改色點含色號68（199點）、
+  47（135點）、128（81點），不同於既有難度欄位的
+  固定顏色守門。**強推論（尚未實測正式掛鉤）**：可先在
+  更早的 `0E2D:09F4`／`0x2B072` 完整來源讀取建立
+  單次訊息實例，再於第一字讀取及415點印字後核對
+  當次背景、安全矩形、開檔相位與離頁失效。未閉合前
+  [規格023](docs/spec/023-player-name-screen-draft.md)維持 DRAFT，
+  提示仍是原文，十四段正式中文顯示數不變。
