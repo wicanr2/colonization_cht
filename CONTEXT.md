@@ -2,7 +2,10 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-最近完成入口：[目標098](docs/goals/098-first-nation-introduction-source.md)：
+目前執行入口：[目標099](docs/goals/099-first-nation-card-a-overlay.md)：
+依使用者選定的第一張國家旗卡 A 版，審查規格021的正式逐欄
+守門與中文字模來源，驗證後才接 Ebitengine；Issue #12／#26
+保持開放。最近完成入口：[目標098](docs/goals/098-first-nation-introduction-source.md)：
 法國首次介紹的 `GAME.TXT:@NATION1A`／`@NATION1B` 已由正常玩家
 路徑、雙次 dosgolem 與無觀測控制追至兩頁實際印字和原版畫布；
 [規格025](docs/spec/025-first-nation-introduction-draft.md)與

@@ -1819,3 +1819,10 @@
 - 唯一工作清單由 `docs/worklist.json` 在 Docker 重新生成並
   `tools/worklist.py verify` 通過；README 只新增穩定雙語語料入口，
   不記逐輪命令。原版畫素與字型未新增 Git 截圖或資產。
+- 目標098成果以 `8304afa` 推送 PRIVATE `origin/main`；主機真正
+  `gh` 已留言並回讀 Issue #30／#12／#27 均為 OPEN。重新編譯
+  Go 探針後再從冷啟動跑一份第一頁，JSON 與原先雙重播
+  `intro-a.json` 逐位元組相同。新增檔與本機畫面均為
+  UID/GID `1000:1000`；工作根未見 root-owned 或誤建
+  `.md` 目錄，專案 Docker 容器無殘留。下一輪依使用者 A
+  決定另建[目標099](docs/goals/099-first-nation-card-a-overlay.md)。
