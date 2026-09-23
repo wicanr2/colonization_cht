@@ -1523,3 +1523,9 @@
   現況並重生 `WORKLIST.md`；`tools/worklist.py verify`、
   Python AST、Go 格式與逐像素驗證已通過。下一步仍是旗卡
   執行期守門、正式回退與 READY 審查；原型不授權直接接前端。
+- 成果提交 `9683743` 已推送私有 `origin/main`；
+  [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)、
+  [#12](https://github.com/wicanr2/colonization_cht/issues/12)、
+  [#26](https://github.com/wicanr2/colonization_cht/issues/26)與
+  [#27](https://github.com/wicanr2/colonization_cht/issues/27)
+  已回填限定成果與仍未完成的驗收，均維持 OPEN。
