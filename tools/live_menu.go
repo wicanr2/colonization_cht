@@ -30,6 +30,7 @@ var versions = map[string]string{
 	"VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
 	"GAME.TXT":    "67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a",
 	"LABELS.TXT":  "e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204",
+	"NAMES.TXT":   "4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061",
 }
 
 // 視窗前端由另外連結的檔案註冊；單獨建置此驗證器時不引入圖形依賴。
@@ -59,6 +60,7 @@ type fontMask struct {
 	CandidateID     string `json:"candidate_id"`
 	TranslationHash string `json:"translation_sha256"`
 	FontHash        string `json:"font_sha256"`
+	FontSize        int    `json:"font_size"`
 	Width           int    `json:"width"`
 	Height          int    `json:"height"`
 	Alpha           []byte `json:"alpha"`
@@ -90,7 +92,12 @@ type menuLine struct {
 // 規格014／015：難度頁獨立的真實原版印字事件；不是全畫面 OCR 鍵。
 type difficultyLine struct {
 	id                      string
+	file                    string
 	offset, length          int
+	fontSize                int
+	card                    bool
+	display                 []byte
+	formattedSeen           bool
 	linear                  uint32
 	readCS, readIP          uint16
 	safe                    image.Rectangle
@@ -146,6 +153,7 @@ func main() {
 	}
 	rawSource := read(filepath.Join(*root, "GAME.TXT"))
 	labelsSource := read(filepath.Join(*root, "LABELS.TXT"))
+	namesSource := read(filepath.Join(*root, "NAMES.TXT"))
 	difficulty := []*difficultyLine{}
 	if *allMenu {
 		difficulty = []*difficultyLine{
@@ -154,8 +162,26 @@ func main() {
 			{id: "LABELS.TXT:0x0000086E", offset: 0x86e, length: 24, linear: 0x4df59, readCS: 0x0e2d, readIP: 0x11cf, safe: image.Rect(10, 79, 105, 88), bbox: image.Rect(13, 81, 102, 86), pixels: 167, only254: true, position: image.Pt(52, 324)},
 		}
 		for _, l := range difficulty {
+			l.file = "LABELS.TXT"
+			l.fontSize = 24
 			l.source = bytes.Clone(labelsSource[l.offset : l.offset+l.length])
 		}
+		// 規格017只授權第一張卡片；另一張即使有同文也不共用此鍵。
+		card := []*difficultyLine{
+			{id: "NAMES.TXT:0x00000C0C", file: "NAMES.TXT", offset: 0xc0c, length: 10,
+				linear: 0x4cc6a, readCS: 0x0e2d, readIP: 0x11cf,
+				safe: image.Rect(138, 44, 186, 51), bbox: image.Rect(141, 45, 183, 50),
+				pixels: 164, position: image.Pt(614, 180), fontSize: 21,
+				card: true, display: []byte("DISCOVERER:")},
+			{id: "LABELS.TXT:0x000008A9", file: "LABELS.TXT", offset: 0x8a9, length: 7,
+				linear: 0x4df90, readCS: 0x0e2d, readIP: 0x11cf,
+				safe: image.Rect(146, 52, 180, 60), bbox: image.Rect(150, 53, 175, 59),
+				pixels: 83, position: image.Pt(612, 212), fontSize: 25,
+				card: true, display: []byte("Easiest")},
+		}
+		card[0].source = bytes.Clone(namesSource[card[0].offset : card[0].offset+card[0].length])
+		card[1].source = bytes.Clone(labelsSource[card[1].offset : card[1].offset+card[1].length])
+		difficulty = append(difficulty, card...)
 	}
 	lines := []*menuLine{
 		{offset: 0x1b0, length: 25, runtimeOffset: 0xdf, y: 107, maxX: 176, maxY: 112, pixels: 180},
@@ -207,7 +233,7 @@ func main() {
 			}
 			l.matches++
 			offset, e := strconv.ParseUint(get(row, "byte_offset"), 0, 32)
-			l.valid = e == nil && int(offset) == l.offset && get(row, "source_file") == "LABELS.TXT" && get(row, "source_sha256") == versions["LABELS.TXT"] && get(row, "source_bytes_sha256") == hash(l.source) && get(row, "source_byte_length") == strconv.Itoa(l.length)
+			l.valid = e == nil && int(offset) == l.offset && get(row, "source_file") == l.file && get(row, "source_sha256") == versions[l.file] && get(row, "source_bytes_sha256") == hash(l.source) && get(row, "source_byte_length") == strconv.Itoa(l.length) && (!l.card || get(row, "status") == "draft")
 			l.translation = get(row, "zh_hant")
 		}
 	}
@@ -250,7 +276,7 @@ func main() {
 			l.fontReason = "font-mask-unavailable"
 			continue
 		}
-		if mask.CandidateID != l.id || mask.FontHash != fontHash || mask.TranslationHash != hash([]byte(l.translation)) {
+		if mask.CandidateID != l.id || mask.FontHash != fontHash || mask.TranslationHash != hash([]byte(l.translation)) || (l.card && mask.FontSize != l.fontSize) {
 			l.fontReason = "font-binding-mismatch"
 			continue
 		}
@@ -287,7 +313,7 @@ func main() {
 	drops := []map[string]any{}
 	lastOpened := 0
 	if !*control && len(difficulty) > 0 {
-		m.WatchReads(0x4df59, 0x4df89, func(a uint32, _ uint8) {
+		m.WatchReads(0x4cc6a, 0x4df97, func(a uint32, _ uint8) {
 			cs, ip := m.CPU.OpAddr()
 			if m.VideoMode() != 0x13 {
 				return
@@ -310,6 +336,7 @@ func main() {
 					continue
 				}
 				l.before = bytes.Clone(canvas())
+				l.formattedSeen = false
 				l.startStep = m.Steps
 				l.openedCount = len(d.Opened)
 			}
@@ -341,6 +368,7 @@ func main() {
 			if (l.patch != nil || l.before != nil) && (len(d.Opened) != l.openedCount || m.VideoMode() != 0x13 || !bytes.Equal(m.Mem[p:p+l.length], l.source) || m.Mem[p+l.length] != 0) {
 				l.patch = nil
 				l.before = nil
+				l.formattedSeen = false
 			}
 		}
 	}
@@ -354,6 +382,17 @@ func main() {
 			}
 			c := m.CPU
 			cs, ip := c.Seg[golem.CS], c.IP
+			if cs == 0x0d21 && ip == 0x00c6 {
+				for _, l := range difficulty {
+					if !l.card || l.before == nil || m.Steps-l.startStep > 500000 {
+						continue
+					}
+					p := 0x2a6b0
+					if bytes.Equal(m.Mem[p:p+len(l.display)], l.display) && m.Mem[p+len(l.display)] == 0 {
+						l.formattedSeen = true
+					}
+				}
+			}
 			for _, l := range lines {
 				if l.pendingEvent != nil {
 					p := l.pendingEvent
@@ -479,7 +518,7 @@ func main() {
 						if y > maxY {
 							maxY = y
 						}
-						if (l.only254 && after[i] != 254) || (!l.only254 && after[i] != 0 && after[i] != 253 && after[i] != 254) {
+						if (l.only254 && after[i] != 254) || (!l.card && !l.only254 && after[i] != 0 && after[i] != 253 && after[i] != 254) {
 							valid = false
 						}
 					}
@@ -487,7 +526,7 @@ func main() {
 				if count != l.pixels {
 					continue
 				}
-				if !valid || minX != l.bbox.Min.X || minY != l.bbox.Min.Y || maxX != l.bbox.Max.X-1 || maxY != l.bbox.Max.Y-1 {
+				if !valid || (l.card && !l.formattedSeen) || minX != l.bbox.Min.X || minY != l.bbox.Min.Y || maxX != l.bbox.Max.X-1 || maxY != l.bbox.Max.Y-1 {
 					l.before = nil
 					continue
 				}
@@ -531,7 +570,8 @@ func main() {
 				layers[i] = overlay.Layer{Patch: l.patch, Ink: l.ink, Position: image.Pt(344, l.y*4), ColorIndex: 254, Enabled: enabled && validVersion}
 			}
 			for i, l := range difficulty {
-				layers[len(lines)+i] = overlay.Layer{Patch: l.patch, Ink: l.ink, Position: l.position, ColorIndex: 254, Enabled: enabled && validVersion}
+				cursorGuard := l.card && (112 <= int(d.Mouse.X) && int(d.Mouse.X) < 212 && 24 <= int(d.Mouse.Y) && int(d.Mouse.Y) < 80 || d.Mouse.Buttons != 0)
+				layers[len(lines)+i] = overlay.Layer{Patch: l.patch, Ink: l.ink, Position: l.position, ColorIndex: 254, Enabled: enabled && validVersion && !cursorGuard}
 			}
 			var e error
 			var results []overlay.LayerResult
@@ -557,6 +597,9 @@ func main() {
 				lineReason := result.Reason
 				if l.fontReason != "" {
 					lineReason = l.fontReason
+				}
+				if l.card && (112 <= int(d.Mouse.X) && int(d.Mouse.X) < 212 && 24 <= int(d.Mouse.Y) && int(d.Mouse.Y) < 80 || d.Mouse.Buttons != 0) && l.patch != nil {
+					lineReason = "cursor-conservative-guard"
 				}
 				applied = applied || result.Applied
 				lineRecords = append(lineRecords, map[string]any{"candidate_id": l.id, "applied": result.Applied, "reason": lineReason, "accepted_events": l.accepted})

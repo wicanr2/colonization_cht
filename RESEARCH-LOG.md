@@ -2162,3 +2162,60 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   `tools/check_card_runtime.py` 以五組報告、目前 TSV（`--catalog`）、目標075／077收據及
   `tools/verify_card_preview.py` 的 PNG 驗證報告交叉核對。
   這些 JSON、PNG、字型與研究執行檔均只留本機，不能推送至 GitHub。
+
+## 2026-09-23：目標079第一張難度卡片正式輸出驗收
+
+- 固定輸入：合法 DOS `OPENING.EXE`、`VICEROY.EXE`、`GAME.TXT`、
+  `NAMES.TXT`、`LABELS.TXT` 的完整 SHA-256 見[規格017](docs/spec/017-first-difficulty-card-overlay.md)
+  與[規格016](docs/spec/016-difficulty-card-text-draft.md)；九筆真視窗輸入 SHA-256
+  `51837a0ed11cfcc316b4e2c9dce7064403cafdd0c1af2efecf59f30319eb5efc`。
+  隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`，
+  研究映像 `colonization-research:20260920-r2`，Ebitengine 2.9.9 映像
+  `psychicwar-go-ebiten:latest` ID
+  `sha256:083e45e6bc0f01ca46ba0774581572c80a607120431b530de72cdd6ffb36f2f7`；
+  Cubic 11 字型 SHA-256
+  `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`。
+  正式適配器 `tools/live_menu.go` SHA-256
+  `fefc92abbd3ceb66b425577551bb1a077f49b8ecca51aaabf658526525597171`。
+- 位址空間：`0E2D:11CF`、`0D21:00C6` 是 DOS 實模式 `CS:IP`；
+  `0x4CC6A`／`0x4DF90` 是 DOS 20-bit 線性 RAM；`0xC0C`／`0x8A9`
+  是原始 TXT 檔案位移；安全矩形是 320×200 邏輯畫布半開座標，輸出畫面
+  1280×800。這些基準不可互換。目標075至078已證實來源載入、格式化字串、
+  寫像素、當次底圖與游標改變索引畫面，故本輪只將第一張卡片升 READY；
+  其餘卡片沒有等量證據，仍屬規格016 DRAFT。
+- confirmed（正式接線）：單一 `WatchReads` 分流既有難度文字與新增兩行；
+  原始來源及 NUL、開檔 `DIFFICUL.PIK`、模式13h、格式化後的
+  `DISCOVERER:`／`Easiest`、164／83點原版畫布差分及各自 bbox 必須吻合，
+  才建立有紋理背景補片。`tools/bake_card_fonts.py` SHA-256
+  `e3e221d5a0eb499c9311c7ffcab1a088cc0a3d2f448d818887829a4df495feee`
+  從唯一真實 TSV 與本機字型產生稱號21px／69×19、副標25px／81×23字模；
+  字模只在已忽略的本機目錄。缺鍵時不把其他同文來源當替代鍵。
+- confirmed（無頭正常路徑）：兩行各接受一次原始事件，79幀套用；
+  中文與無觀測英文控制在4,500萬步的完整 RAM SHA-256 同為
+  `6e94f669e9854c3ea306e70c3135ebf4997ff3ed86ec7892be5901701543a45d`，
+  CPU、原版索引畫面、色盤、ticks／cycles亦一致。真 Ebitengine／Xvfb
+  視窗以九筆實際滑鼠輸入到1億步，中文原跑、重播與英文控制的原版
+  CPU／完整 RAM／索引畫面／色盤／虛擬時間相同；畫面新增差異只在兩欄
+  安全區，分別2,752／1,860點。`tools/verify_window_prototype.py` 收據
+  `workplace/reports/goal079-ebiten-receipt.json` SHA-256
+  `cc34a9bf751e20ff2419ec7d407709818978fc4fa5891b5408891b56b707f988`。
+- confirmed（反向條件）：`tools/probe_goal079_replays.py` SHA-256
+  `678b226c09fc666d2497d8285e063df6879d33b48cac57876ed832f4498a9b84`
+  從九筆已驗輸入建立40M步正常與游標變體，以測試用 TSV **真正移除**
+  `NAMES.TXT:0x00000C0C` 或複製成同鍵重複列。兩種情況稱號逐幀記錄
+  `missing-or-invalid-translation`，
+  安全區逐像素等於英文控制，副標仍等於中文組。游標入卡片兩欄各回退25幀，
+  移出後恢復；正常三組與游標兩組分別和各自同輸入英文控制原版狀態一致。
+  `tools/verify_goal079_replays.py` SHA-256
+  `8c8b8d3d7100669d7c5be5cb01d4b4da1c3cd260de2fabf4f1858eb0e710b6c6`
+  本機收據 `goal079-replay-receipt.json` SHA-256
+  `3486c2a2f60a85ffcf878846cf8c397280368710d852b39789aa0461335fbe70`。
+  將固定版本的 `NAMES.TXT` 暫指向錯誤指紋的 `GAME.TXT` 時，正式適配器
+  在啟動前拒絕且不生成畫面收據。
+  此為已記錄輸入的受控重播，不證明所有滑鼠／鍵盤操作或其餘卡片。
+- 真視窗截圖已在**私有**儲存庫原有 `docs/screenshots/difficulty-zh.png`
+  位置更新，SHA-256
+  `7173203276c778f8a71578e2256497069c0192edf18008ca9c978bcd59ecf054`；
+  它含原版像素，不能公開散布。`go test ./...` 首次因沒有 DISPLAY 失敗，
+  同一前端在有界 Xvfb 容器重跑通過；Xvfb wrapper 的探測命令在映像內缺失，
+  已改用 `xdotool` 並由 trap 清理，屬環境／驗證工具問題，不是原版遊戲缺陷。

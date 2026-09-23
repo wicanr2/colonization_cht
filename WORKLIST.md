@@ -34,6 +34,7 @@
 | #25 | completed | [釐清開場滑鼠事件與正常遊戲啟動鏈](https://github.com/wicanr2/colonization_cht/issues/25) | `psound-post-profile-control-flow` | 以同狀態座標對照釐清開場滑鼠的作用，並由 dosgolem 重生至少一條進入實際遊戲畫面的正常玩家路徑，或留下具體服務缺口。 |
 | #26 | in_progress | [建立第一條真實訊息的繁體中文顯示垂直切片](https://github.com/wicanr2/colonization_cht/issues/26) | `dynamic-overlay-ready` | 一則真實動態訊息完成中文顯示、英文／缺譯回退、幾何與正常玩家路徑驗證；靜態候選另依證據資格處理。 |
 | #27 | in_progress | [建立可追溯的全遊戲繁體中文譯文語料](https://github.com/wicanr2/colonization_cht/issues/27) | `dynamic-coverage` | 已辨識玩家可見文字有可追溯譯文、占位符與控制碼驗證、字型覆蓋及分別列出的草稿／正常路徑／顯示驗收量測。 |
+| #28 | planned | [重排難度畫面標題並逐欄調整中文字級](https://github.com/wicanr2/colonization_cht/issues/28) | — | 以原版同狀態畫面量測標題及各欄原文字級、對齊與安全矩形；可丟棄版式對照供使用者確認，正式畫面更符合原版風格且每欄中文字級獨立驗證。 |
 
 ## 驗證
 

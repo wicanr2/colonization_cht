@@ -1103,3 +1103,37 @@
   Ebitengine 正常玩家前端仍未完成，規格016維持 DRAFT，已顯示中文仍八段。
 - 探針、檢查器與證據訂正提交 `4264c9d`，已推送私有 `origin/main`；
   GitHub Issue #6／#7／#12／#26 均已追加本輪證據與保持開放的原因。
+
+## 2026-09-23：目標079第一張卡片正式覆蓋與下一階段版式 Issue
+
+- 先以提交 `3dc245d` 將[目標079](docs/goals/079-first-card-formal-overlay.md)
+  推送私有 `origin/main`，才開始接線。複核目標075至078的來源、格式化文字、
+  有紋理底圖、游標及同狀態收據，建立只限第一張卡片兩行的
+  [規格017](docs/spec/017-first-difficulty-card-overlay.md)。規格016對其餘卡片維持 DRAFT。
+- `tools/live_menu.go` 加入 `NAMES.TXT` 指紋、兩個真實 TSV 來源鍵、
+  `0D21:00C6` 格式化顯示守門、當次畫布補片及逐幀游標回退；
+  `tools/bake_card_fonts.py` 從本機合法原版和 Cubic 11 生成21px／25px分欄字模。
+  沒有修改原版檔案、隔離 dosgolem 或共用 dosgolem。
+- 無頭正常路徑兩行各一次事件、79幀套用且與無觀測英文控制同狀態。
+  Ebitengine／Xvfb 真視窗九筆輸入的中文、重播與英文控制同狀態，
+  最新難度圖只在五個已核准安全矩形變更，第一張卡片兩欄各2,752／1,860點。
+  真實 TSV 缺稱號鍵或重複鍵只令稱號回英文；錯誤來源指紋在啟動前遭拒絕；
+  游標入卡片25幀回退，離開後恢復，各自同輸入原版控制均一致。
+  受控六組重播和逐像素驗證詳見
+  [研究紀錄](RESEARCH-LOG.md)。正式顯示數由八段增為十段，並更新私有既有截圖。
+- 使用者指出現有難度頁「選擇難度」標題應更貼近原版排版，中文字級須逐畫面調整。
+  已建立私有[Issue #28](https://github.com/wicanr2/colonization_cht/issues/28)
+  並登記於工作清單，安排在本目標後製作對照原型，不在本輪擅定最後版式。
+- Ebitengine 建置初次因離線容器沒有 Go module cache，按已鎖 `go.sum`
+  僅於建置與單元測試容器開放網路；執行／抓圖仍無網路。真視窗第一次
+  `xvfb-run` wrapper 停在清理；改成有 trap 的 Xvfb 程序後重跑通過。
+  單元測試第一次缺 DISPLAY，於同一容器加 Xvfb 後通過；均為環境問題，
+  未把失敗收據當成產品缺陷。`tools/worklist.py verify`、新增 Python 工具語法
+  與真視窗／反向條件檢查器均通過。
+- 仍未完成其他難度卡片、help 畫面、靜態圖、完整鍵盤／音訊／存讀檔與
+  正式發行；Issue #6／#7／#12／#26 保持開放。原始報告、字型、執行檔
+  只在已忽略的 `workplace/reports/`；私有截圖沿用既有兩張截圖例外。
+  收尾核對研究／字型／Ebitengine 映像下無執行中或停止殘留容器，專案內無
+  root-owned 項目或錯誤掛載形成的 `.md` 目錄；本輪收據、截圖與重生的
+  `WORKLIST.md` 均為目前 UID/GID `1000:1000`。Git 未追蹤原版輸入或
+  `workplace/` 中間物；正式推送與 Issue 留言於本輪收尾另行核對。

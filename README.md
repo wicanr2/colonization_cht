@@ -12,13 +12,13 @@
 
 ![真實 Ebitengine 視窗中的繁體中文難度頁](docs/screenshots/difficulty-zh.png)
 
-難度頁：「選擇／難度」兩行標題及「完成後點此」提示，已由各自的原版字串讀取及畫布寫入事件觸發中文覆蓋。卡片上的難度名稱與其他英文仍待驗證及翻譯。兩張圖只證明目前這條玩家路徑的顯示，不代表完整遊戲已中文化。
+難度頁：「選擇／難度」兩行標題、「完成後點此」提示，以及第一張卡片的「發現者／最簡單」，已由各自的原版文字事件觸發中文覆蓋。其他卡片與英文字仍待驗證；標題版式的原版風格調整另列於 [Issue #28](https://github.com/wicanr2/colonization_cht/issues/28)。兩張圖只證明目前這條玩家路徑的顯示，不代表完整遊戲已中文化。
 
 這兩張截圖含原版遊戲畫面像素，僅放在目前的**私有研究儲存庫**；尚未取得公開散布判定，不得轉入公開發行包。
 
 ## 目前狀態
 
-已驗證從原版 `OPENING.EXE -g` 啟動、進入 `VICEROY.EXE` 主選單，再以真實 DOS 滑鼠點選「新世界」到難度頁。現有八段中文畫面文字：主選單五列、難度頁標題兩段與完成提示一段。Ebitengine／Xvfb 真視窗使用同一份輸入重播中英文兩組，原版 CPU、完整 RAM、索引畫面、色盤及虛擬時間一致；截圖差異只在已驗證的中文安全區。
+已驗證從原版 `OPENING.EXE -g` 啟動、進入 `VICEROY.EXE` 主選單，再以真實 DOS 滑鼠點選「新世界」到難度頁。現有十段中文畫面文字：主選單五列、難度頁標題兩段、完成提示一段及第一張卡片兩行。Ebitengine／Xvfb 真視窗使用同一份輸入重播中英文兩組，原版 CPU、完整 RAM、索引畫面、色盤及虛擬時間一致；截圖差異只在已驗證的中文安全區。
 
 [繁中翻譯草稿](text/draft.zh-Hant.tsv)現有368筆可追溯候選（新納入28項地圖編輯器選單、14個過場標題與2則載入訊息）；另有[163 篇百科原文／繁中對照（25篇建國元勳、16篇貨物、24篇單位、29篇地形、27篇職業、42篇建築）](text/pedia-bilingual.tsv)、[24 則教學與地圖編輯說明的原文／繁中對照](text/help-bilingual.tsv)、[7 則版本3玩家補充說明的原文／繁中對照](text/readme-bilingual.tsv)，以及[173 筆預設殖民地名稱的原文／繁中對照](text/colony-bilingual.tsv)。它們都只是可追溯的譯稿，尚未接入實際說明畫面。靜態圖中文字、其他選單、完整操作及整局遊玩都未完成；請以[目前狀態](CONTEXT.md)為準，不以譯稿筆數推算畫面完成率。
 
@@ -26,7 +26,7 @@
 
 ## 研究與執行入口
 
-需要自行持有合法 DOS 原版。所有建置、遊戲執行、分析與抓圖都在 Docker 容器內進行；本案只使用 `workplace/dosgolem` 的獨立副本，不修改共用專案。視窗原型由 [組裝器](tools/build_window_prototype.py)及[真視窗驗證腳本](tools/probe_window_prototype.sh)產生；固定工具鏈、掛載與驗證契約見[視窗原型規格](docs/spec/013-window-prototype.md)，難度標題的輸出守門見[規格014](docs/spec/014-difficulty-text-output-draft.md)。
+需要自行持有合法 DOS 原版。所有建置、遊戲執行、分析與抓圖都在 Docker 容器內進行；本案只使用 `workplace/dosgolem` 的獨立副本，不修改共用專案。視窗原型由 [組裝器](tools/build_window_prototype.py)及[真視窗驗證腳本](tools/probe_window_prototype.sh)產生；固定工具鏈、掛載與驗證契約見[視窗原型規格](docs/spec/013-window-prototype.md)，難度標題的輸出守門見[規格014](docs/spec/014-difficulty-text-output-draft.md)，第一張卡片兩行見[規格017](docs/spec/017-first-difficulty-card-overlay.md)。
 
 - [目前脈絡與未完成界線](CONTEXT.md)
 - [工作計畫](WORKLIST.md)（由 `docs/worklist.json` 產生）

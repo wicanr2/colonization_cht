@@ -23,7 +23,8 @@ assert 'DIFFICUL.PIK' in receipts[0]['opened']
 for index in range(5):
     assert any(f['lines'][index]['applied'] for f in receipts[0]['frames'])
 new_keys = {'LABELS.TXT:0x00000888', 'LABELS.TXT:0x00000890',
-            'LABELS.TXT:0x0000086E'}
+            'LABELS.TXT:0x0000086E', 'NAMES.TXT:0x00000C0C',
+            'LABELS.TXT:0x000008A9'}
 active_keys = new_keys & {r['candidate_id'] for f in receipts[0]['frames'] for r in f['lines']}
 has_difficulty = bool(active_keys)
 if has_difficulty:
@@ -48,7 +49,9 @@ if has_difficulty:
     changed = {key: 0 for key in active_keys}
     bounds = [('LABELS.TXT:0x00000888', (39*4, 14*4, 76*4, 26*4)),
               ('LABELS.TXT:0x00000890', (20*4, 27*4, 96*4, 40*4)),
-              ('LABELS.TXT:0x0000086E', (10*4, 79*4, 105*4, 88*4))]
+              ('LABELS.TXT:0x0000086E', (10*4, 79*4, 105*4, 88*4)),
+              ('NAMES.TXT:0x00000C0C', (138*4, 44*4, 186*4, 51*4)),
+              ('LABELS.TXT:0x000008A9', (146*4, 52*4, 180*4, 60*4))]
     bounds = [(key, rect) for key, rect in bounds if key in active_keys]
     for y in range(800):
         for x in range(1280):
