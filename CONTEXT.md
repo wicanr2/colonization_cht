@@ -99,7 +99,8 @@ EXE及靜態圖像尚未建立完整玩家可見訊息分母，不宣稱全文�
 兩次正常路徑重播均讀到第一張卡片的 `Discoverer`／`Easiest` 原文字節，且卡片區
 `0D21:012C` 有292次畫布寫入。舊「零命中」已訂正；來源讀取與各行畫布寫入的直接
 資料流、原版字級／基線和中文安全矩形仍待證實，[規格016](docs/spec/016-difficulty-card-text-draft.md)
-保持 DRAFT，不計入八段完成數。
+保持 DRAFT，不計入八段完成數。[目標075](docs/goals/075-difficulty-card-source-to-pixels.md)
+追查這段直接資料流與逐行版面；在 READY 證據出現前卡片仍顯示原文。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
 保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至368筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。
