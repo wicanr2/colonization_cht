@@ -1,4 +1,4 @@
-// 固定版本主選單即時顯示切片。規格009/010/011/012；只使用公開API，不寫回原版。
+// 固定版本選單即時顯示切片。規格009–020的限定範圍；只使用公開API，不寫回原版。
 // SetBeforeInstruction 的 Steps 為本次指令編號，比舊 pre-Step 探針多1。
 package main
 
@@ -96,6 +96,7 @@ type difficultyLine struct {
 	offset, length          int
 	fontSize                int
 	card                    bool
+	nation                  bool
 	display                 []byte
 	displayLinear           uint32
 	formattedSeen           bool
@@ -204,6 +205,25 @@ func main() {
 			l.source = bytes.Clone(source[l.offset : l.offset+l.length])
 		}
 		difficulty = append(difficulty, card...)
+		// 規格020：國家頁左側兩行，各自依原版36px墨跡選38px中文字模。
+		nation := []*difficultyLine{
+			{id: "LABELS.TXT:0x000008D3", file: "LABELS.TXT", offset: 0x8d3, length: 6,
+				linear: 0x4dfb5, readCS: 0x0d3a, readIP: 0x0015,
+				safe: image.Rect(39, 35, 73, 46), bbox: image.Rect(42, 36, 70, 45),
+				pixels: 120, position: image.Pt(183, 144), fontSize: 38,
+				nation: true, display: []byte("Select"), displayLinear: 0x2a710,
+				inkSize: image.Pt(82, 35)},
+			{id: "LABELS.TXT:0x000008DB", file: "LABELS.TXT", offset: 0x8db, length: 14,
+				linear: 0x4dfbc, readCS: 0x0d3a, readIP: 0x0015,
+				safe: image.Rect(17, 48, 95, 59), bbox: image.Rect(20, 49, 92, 58),
+				pixels: 270, position: image.Pt(142, 196), fontSize: 38,
+				nation: true, display: []byte("European Power"), displayLinear: 0x2a710,
+				inkSize: image.Pt(164, 35)},
+		}
+		for _, l := range nation {
+			l.source = bytes.Clone(labelsSource[l.offset : l.offset+l.length])
+		}
+		difficulty = append(difficulty, nation...)
 	}
 	lines := []*menuLine{
 		{offset: 0x1b0, length: 25, runtimeOffset: 0xdf, y: 107, maxX: 176, maxY: 112, pixels: 180},
@@ -255,7 +275,7 @@ func main() {
 			}
 			l.matches++
 			offset, e := strconv.ParseUint(get(row, "byte_offset"), 0, 32)
-			l.valid = e == nil && int(offset) == l.offset && get(row, "source_file") == l.file && get(row, "source_sha256") == versions[l.file] && get(row, "source_bytes_sha256") == hash(l.source) && get(row, "source_byte_length") == strconv.Itoa(l.length) && (!l.card || get(row, "status") == "draft")
+			l.valid = e == nil && int(offset) == l.offset && get(row, "source_file") == l.file && get(row, "source_sha256") == versions[l.file] && get(row, "source_bytes_sha256") == hash(l.source) && get(row, "source_byte_length") == strconv.Itoa(l.length) && (!(l.card || l.nation) || get(row, "status") == "draft")
 			l.translation = get(row, "zh_hant")
 		}
 	}
@@ -298,15 +318,15 @@ func main() {
 			l.fontReason = "font-mask-unavailable"
 			continue
 		}
-		if mask.CandidateID != l.id || mask.FontHash != fontHash || mask.TranslationHash != hash([]byte(l.translation)) || (l.card && mask.FontSize != l.fontSize) {
+		if mask.CandidateID != l.id || mask.FontHash != fontHash || mask.TranslationHash != hash([]byte(l.translation)) || ((l.card || l.nation) && mask.FontSize != l.fontSize) {
 			l.fontReason = "font-binding-mismatch"
 			continue
 		}
 		inset := 0
-		if l.card {
+		if l.card || l.nation {
 			inset = 4
 		}
-		if mask.Width <= 0 || mask.Height <= 0 || mask.Width > l.safe.Dx()*4 || mask.Height > l.safe.Dy()*4 || len(mask.Alpha) != mask.Width*mask.Height || (l.card && (mask.Width != l.inkSize.X || mask.Height != l.inkSize.Y)) || l.position.X < l.safe.Min.X*4+inset || l.position.Y < l.safe.Min.Y*4+inset || l.position.X+mask.Width > l.safe.Max.X*4-inset || l.position.Y+mask.Height > l.safe.Max.Y*4-inset {
+		if mask.Width <= 0 || mask.Height <= 0 || mask.Width > l.safe.Dx()*4 || mask.Height > l.safe.Dy()*4 || len(mask.Alpha) != mask.Width*mask.Height || ((l.card || l.nation) && (mask.Width != l.inkSize.X || mask.Height != l.inkSize.Y)) || l.position.X < l.safe.Min.X*4+inset || l.position.Y < l.safe.Min.Y*4+inset || l.position.X+mask.Width > l.safe.Max.X*4-inset || l.position.Y+mask.Height > l.safe.Max.Y*4-inset {
 			l.fontReason = "font-mask-out-of-bounds"
 			continue
 		}
@@ -339,7 +359,7 @@ func main() {
 	drops := []map[string]any{}
 	lastOpened := 0
 	if !*control && len(difficulty) > 0 {
-		m.WatchReads(0x4cc6a, 0x4df9d, func(a uint32, _ uint8) {
+		m.WatchReads(0x4cc6a, 0x4dfca, func(a uint32, _ uint8) {
 			cs, ip := m.CPU.OpAddr()
 			if m.VideoMode() != 0x13 {
 				return
@@ -353,9 +373,13 @@ func main() {
 					continue
 				}
 				seenArt := false
-				for _, name := range d.Opened {
-					if strings.EqualFold(name, "DIFFICUL.PIK") {
-						seenArt = true
+				if l.nation {
+					seenArt = len(d.Opened) > 0 && strings.EqualFold(d.Opened[len(d.Opened)-1], "NATIONS.PIK")
+				} else {
+					for _, name := range d.Opened {
+						if strings.EqualFold(name, "DIFFICUL.PIK") {
+							seenArt = true
+						}
 					}
 				}
 				if !seenArt {
@@ -391,7 +415,7 @@ func main() {
 		}
 		for _, l := range difficulty {
 			p := int(l.linear)
-			if (l.patch != nil || l.before != nil) && (len(d.Opened) != l.openedCount || m.VideoMode() != 0x13 || !bytes.Equal(m.Mem[p:p+l.length], l.source) || m.Mem[p+l.length] != 0) {
+			if (l.patch != nil || l.before != nil) && (len(d.Opened) != l.openedCount || m.VideoMode() != 0x13 || !bytes.Equal(m.Mem[p:p+l.length], l.source) || m.Mem[p+l.length] != 0 || (l.nation && (len(d.Opened) == 0 || !strings.EqualFold(d.Opened[len(d.Opened)-1], "NATIONS.PIK")))) {
 				l.patch = nil
 				l.before = nil
 				l.formattedSeen = false
@@ -410,7 +434,7 @@ func main() {
 			cs, ip := c.Seg[golem.CS], c.IP
 			if cs == 0x0d21 && ip == 0x00c6 {
 				for _, l := range difficulty {
-					if !l.card || l.before == nil || m.Steps-l.startStep > 500000 {
+					if !(l.card || l.nation) || l.before == nil || m.Steps-l.startStep > 500000 {
 						continue
 					}
 					p := int(l.displayLinear)
@@ -513,6 +537,9 @@ func main() {
 	cardCursorBlocked := func(l *difficultyLine) bool {
 		return l.card && (image.Pt(int(d.Mouse.X), int(d.Mouse.Y)).In(l.cursorGuard) || d.Mouse.Buttons != 0)
 	}
+	nationButtonBlocked := func(l *difficultyLine) bool {
+		return l.nation && d.Mouse.Buttons != 0
+	}
 	render := func(label string) {
 		if !*control {
 			checkContext()
@@ -555,7 +582,7 @@ func main() {
 				if count != l.pixels {
 					continue
 				}
-				if !valid || (l.card && !l.formattedSeen) || minX != l.bbox.Min.X || minY != l.bbox.Min.Y || maxX != l.bbox.Max.X-1 || maxY != l.bbox.Max.Y-1 {
+				if !valid || ((l.card || l.nation) && !l.formattedSeen) || minX != l.bbox.Min.X || minY != l.bbox.Min.Y || maxX != l.bbox.Max.X-1 || maxY != l.bbox.Max.Y-1 {
 					l.before = nil
 					continue
 				}
@@ -599,7 +626,7 @@ func main() {
 				layers[i] = overlay.Layer{Patch: l.patch, Ink: l.ink, Position: image.Pt(344, l.y*4), ColorIndex: 254, Enabled: enabled && validVersion}
 			}
 			for i, l := range difficulty {
-				layers[len(lines)+i] = overlay.Layer{Patch: l.patch, Ink: l.ink, Position: l.position, ColorIndex: 254, Enabled: enabled && validVersion && !cardCursorBlocked(l)}
+				layers[len(lines)+i] = overlay.Layer{Patch: l.patch, Ink: l.ink, Position: l.position, ColorIndex: 254, Enabled: enabled && validVersion && !cardCursorBlocked(l) && !nationButtonBlocked(l)}
 			}
 			var e error
 			var results []overlay.LayerResult
@@ -628,6 +655,9 @@ func main() {
 				}
 				if cardCursorBlocked(l) && l.patch != nil {
 					lineReason = "cursor-conservative-guard"
+				}
+				if nationButtonBlocked(l) && l.patch != nil {
+					lineReason = "mouse-button-held"
 				}
 				applied = applied || result.Applied
 				lineRecords = append(lineRecords, map[string]any{"candidate_id": l.id, "applied": result.Applied, "reason": lineReason, "accepted_events": l.accepted})

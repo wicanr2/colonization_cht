@@ -1,7 +1,7 @@
 # 目標084：國家選擇頁兩行標題的執行期守門與限定顯示
 
-狀態：進行中；日期：2026-09-23。承接[目標083](083-post-difficulty-player-path.md)
-與[規格020](../spec/020-nation-heading-overlay.md) DRAFT；對應 Issue
+狀態：completed（僅國家頁左側兩行）；日期：2026-09-23。承接[目標083](083-post-difficulty-player-path.md)
+與[規格020](../spec/020-nation-heading-overlay.md)；對應 Issue
 [#7](https://github.com/wicanr2/colonization_cht/issues/7)、
 [#12](https://github.com/wicanr2/colonization_cht/issues/12)、
 [#14](https://github.com/wicanr2/colonization_cht/issues/14)及
@@ -43,3 +43,17 @@
 推翻既有標題幾何，回到 DRAFT 而非猜補。Issue #28 的難度頁標題
 重排仍是獨立的下一階段，這輪不替使用者選 A／B 版式，也不更新
 既有含原版像素的私有截圖。
+
+## 本輪結果
+
+雙次 dosgolem 執行期守門與獨立反例通過後，規格020先升限定 READY，
+才接入正式 Ebitengine 前端。16筆實際輸入的中文與英文控制原版同狀態；
+兩欄真 TSV 缺鍵／重複鍵、游標進出、滑鼠按鍵與切場清除、錯版本拒絕
+均通過。正式中文只改各自安全矩形2,611／5,502個輸出像素。
+舊版第一／二張難度卡片同輸入逐位元組相同，主選單與難度頁15個
+檢查點亦不變。獨立正式驗證收據 SHA-256
+`84da4515020fbccddb2c927deeb99d68261ff1da17d74be62dd20e677d30e678`；
+證據與限制見[規格020](../spec/020-nation-heading-overlay.md)。
+正式顯示段數由十二增至十四；其他國家頁文字、help、完整鍵盤與遊玩
+仍未驗收。[Issue #28](https://github.com/wicanr2/colonization_cht/issues/28)
+的難度標題排版仍留待下一階段，不在本輪選定 A／B 或更新截圖。

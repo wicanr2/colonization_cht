@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""依規格017／019產生前兩張難度卡片逐欄本機字模；不得加入 Git。"""
+"""依規格017／019／020產生難度卡片及國家標題逐欄本機字模；不得加入 Git。"""
 
 import argparse
 import base64
@@ -18,6 +18,8 @@ FIELDS = (
     ("LABELS.TXT:0x000008A9", 25, (81, 23), (146, 52, 180, 60), (612, 212)),
     ("NAMES.TXT:0x00000C18", 21, (69, 19), (247, 44, 287, 51), (1034, 180)),
     ("LABELS.TXT:0x000008B2", 25, (54, 23), (256, 52, 279, 60), (1043, 212)),
+    ("LABELS.TXT:0x000008D3", 38, (82, 35), (39, 35, 73, 46), (183, 144)),
+    ("LABELS.TXT:0x000008DB", 38, (164, 35), (17, 48, 95, 59), (142, 196)),
 )
 
 
@@ -37,10 +39,10 @@ def bake(args):
     for key, size, expected_ink, safe, position in FIELDS:
         matches = [row for row in rows if row["candidate_id"] == key]
         if len(matches) != 1 or not matches[0]["zh_hant"]:
-            raise ValueError("卡片 TSV 缺鍵或重複：" + key)
+            raise ValueError("欄位 TSV 缺鍵或重複：" + key)
         text = matches[0]["zh_hant"]
         if any(ord(char) not in coverage for char in text):
-            raise ValueError("卡片譯文有缺字：" + key)
+            raise ValueError("欄位譯文有缺字：" + key)
         font = ImageFont.truetype(str(args.font), size)
         left, top, right, bottom = font.getbbox(text)
         width, height = right - left, bottom - top
@@ -49,14 +51,14 @@ def bake(args):
         x, y = position
         if not (safe[0] * 4 + 4 <= x and x + width <= safe[2] * 4 - 4 and
                 safe[1] * 4 <= y and y + height <= safe[3] * 4 - 4):
-            raise ValueError("卡片字模超出內距：" + key)
+            raise ValueError("欄位字模超出內距：" + key)
         mask = Image.new("L", (width, height))
         ImageDraw.Draw(mask).text((-left, -top), text, font=font, fill=255)
         payload = {"candidate_id": key, "translation_sha256": sha(text.encode()),
                    "font_sha256": FONT_SHA, "font_size": size,
                    "width": width, "height": height,
                    "alpha": base64.b64encode(mask.tobytes()).decode(),
-                   "scope": "規格017／019本機字模；不得散布原版素材或字型"}
+                   "scope": "規格017／019／020本機字模；不得散布原版素材或字型"}
         path = args.output / (key.replace(":", "-") + ".json")
         path.write_text(json.dumps(payload, ensure_ascii=False) + "\n", encoding="utf-8")
         print(f"{key}：{width}×{height}，{size}px；{path}")

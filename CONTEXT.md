@@ -39,15 +39,15 @@
 | 平台修正 | BIOS 馬達倒數、`int33 AX=0014` 回呼交換、DOS v4 滑鼠狀態與不安全回呼保存拒絕；規格 006–008。 |
 | 動態文字 | confirmed：GAME.TXT 檔案位移 0x1B0 → 執行期 6F16:00DF → 937C:0538 印字 → 180 個畫布像素；兩次冷啟動收據一致。目標 054 完成。 |
 | 靜態文字 | 開場海洋標籤等候選仍缺完整來源／可逆背景證據；Issue #8 開放，不阻擋動態路徑。 |
-| 翻譯草稿 | `text/draft.zh-Hant.tsv` 共368筆：GAME 96、LABELS 40、MENU 68、NAMES 70、PEDIA 19、MAPEDIT 31、MAPMENU 28、WOODCUT 14、OPENING 1、CLOSING 1；原始來源／控制碼（含 `#` 格式記號）及Cubic 11缺字檢查通過。十二筆已在正常玩家路徑顯示驗收；其餘仍是候選；18個TXT／4,119粗略資料行不是全遊戲訊息分母。 |
+| 翻譯草稿 | `text/draft.zh-Hant.tsv` 共368筆：GAME 96、LABELS 40、MENU 68、NAMES 70、PEDIA 19、MAPEDIT 31、MAPMENU 28、WOODCUT 14、OPENING 1、CLOSING 1；原始來源／控制碼（含 `#` 格式記號）及Cubic 11缺字檢查通過。十四筆已在正常玩家路徑顯示驗收；其餘仍是候選；18個TXT／4,119粗略資料行不是全遊戲訊息分母。 |
 | 百科雙語語料 | `text/pedia-bilingual.tsv` 含 `PEDIA.TXT` 的25篇建國元勳、16篇貨物、24篇單位、29篇地形、27篇職業及42篇建築，合計163篇編號文章的整段原文／繁中草稿；固定來源、控制碼（含一個保留的Tab及由原始`0xF9`正規化的`•`）與Cubic 11覆蓋通過，缺字0。未取得畫面命中或安全矩形。 |
 | 說明雙語語料 | `text/help-bilingual.tsv`另含24則教學／地圖編輯說明的原文及繁中草稿，兩個固定原版檔案與每則位元組指紋可回查；僅限私有repo，未整合正式執行期語料，也未取得畫面命中。不可與前列368筆直接相加當顯示完成度。 |
 | README 玩家補充語料 | `text/readme-bilingual.tsv`含 DOS ZIP 內 `README.TXT` 的7段版本修正、地圖編輯器與作弊模式原文／繁中草稿。封存檔、成員檔、位元組範圍與片段 SHA 均固定，按鍵／符號／Tab及Cubic 11覆蓋通過，缺字0；它不是執行期鍵，未命中畫面。 |
 | 殖民地名稱語料 | `text/colony-bilingual.tsv`含 `COLONY.TXT` 的173筆預設名稱（英36、法66、西39、荷32）；18個年份依使用者決定呈現為「中文名稱（原名，年份）」。ZIP／成員／章節／行與片段 SHA、年份與格式驗證通過，字型字元缺字0；沒有畫面命中、安全矩形或欄位專屬中文字級。 |
-| 中文顯示 | 主選單五列、難度頁兩行標題、完成提示及第一、二張卡片各兩行，共十二段有原版事件與逐幀覆蓋；規格012／014／015／017／019為各自限定範圍CONFORMED。Ebitengine／Xvfb真視窗以實際滑鼠輸入至第二張卡片，中文與同輸入英文控制原版狀態一致；新增中文差異只在第二張卡片兩個安全矩形。仍非正式完整玩家版，Issue #26保持開放。 |
+| 中文顯示 | 主選單五列、難度頁兩行標題、完成提示、第一及第二張卡片各兩行、國家頁左側兩行，共十四段有原版事件與逐幀覆蓋；規格012／014／015／017／019／020為各自限定範圍CONFORMED。Ebitengine／Xvfb真視窗以實際滑鼠輸入至國家頁，中文與同輸入英文控制原版狀態一致；新增中文差異只在國家標題兩個安全矩形。仍非正式完整玩家版，Issue #26保持開放。 |
 | 第一張難度卡片 | confirmed：稱號從 `NAMES.TXT:0x00000C0C`、副標從 `LABELS.TXT:0x000008A9` 載入，經原版緩衝與格式化印字路徑繪至畫布；`GAME.TXT` 同文不是此路徑稱號來源。規格017限定第一張卡片兩行為 CONFORMED：21／25px 逐欄字模、當次有紋理底圖、原文差分、游標及真實 TSV 缺鍵回退已接正式前端並與同輸入英文控制同狀態；其餘卡片仍屬規格016 DRAFT。 |
 | 第二張難度卡片 | confirmed：真 Ebitengine 視窗點擊 `(265,55)` 顯示 `EXPLORER:`／`Easy`，雙次 dosgolem 收據閉合 `NAMES.TXT:0xC18`／`LABELS.TXT:0x8B2` 至 RAM、格式化印字與原始畫布；墨跡高5／6像素、有紋理底圖。規格019限定兩行為 CONFORMED：「探險家／簡單」採21／25px逐欄字模，真視窗中文與英文控制原版同狀態；各欄缺譯／重複鍵及游標回退、錯版本拒絕與第一張卡片回歸均通過。規格016對其餘卡片仍為 DRAFT。 |
-| 國家選擇頁 | confirmed：正常滑鼠按下／放開難度頁完成區會開啟 `NATIONS.PIK`；真 Ebitengine 視窗17筆實際輸入抵達同一畫面，與同輸入英文控制原版同狀態。左側兩行 `Select`／`European Power` 已追溯至 `LABELS.TXT:0x8D3`／`0x8DB`、RAM、實模式輸出及安全矩形；[規格020](docs/spec/020-nation-heading-overlay.md)仍 DRAFT，中文僅本機可丟棄預覽，正式畫面仍英文。 |
+| 國家選擇頁 | confirmed：正常滑鼠按下／放開難度頁完成區會開啟 `NATIONS.PIK`；16筆真 Ebitengine 視窗輸入抵達此頁，與同輸入英文控制原版同狀態。左側兩行 `Select`／`European Power` 已追溯至 `LABELS.TXT:0x8D3`／`0x8DB`、RAM、實模式輸出及安全矩形；[規格020](docs/spec/020-nation-heading-overlay.md)限定 CONFORMED：「選擇／歐洲國家」各38px，兩欄缺鍵／重複鍵、游標、按鍵及場景切換均逐欄安全回退，錯版在輸出前拒絕。其他國家頁文字仍未驗收。 |
 | 完整可玩／正式發行 | 未驗證、未發布；正常玩家路徑目前僅驗證至國家選擇畫面，尚未完成選國、help 或遊玩。 |
 
 ## 工具與重播入口
@@ -143,12 +143,12 @@ Issue #28 視覺選擇的範圍，已完成第二張難度卡片真視窗點擊�
 [規格019](docs/spec/019-second-difficulty-card-overlay.md)限定 CONFORMED。
 Issue #28 的難度標題 A／B 版式仍待使用者依本機對照圖選定；
 第三至第五張卡片、help 與完整玩家路徑另待取證。
-[目標083](docs/goals/083-post-difficulty-player-path.md)已以正常滑鼠路徑
-離開難度頁，抵達 `NATIONS.PIK` 並閉合左側兩行原文來源到畫素；
-38px 繁中是依本欄原文墨跡量測的本機預覽，規格020仍 DRAFT，未增加
-十二段正式已顯示中文數。下一步需執行期守門與真 TSV／Ebitengine
-反例後才能升 READY；本輪入口為[目標084](docs/goals/084-nation-heading-runtime-guard.md)。
-其餘國家選擇文字、help 與更深玩家路徑仍待探查。
+[目標084](docs/goals/084-nation-heading-runtime-guard.md)已依規格020的
+READY 守門接入國家頁左側兩行；真視窗中文／英文控制、真 TSV
+逐欄缺鍵／重複鍵、游標與按鍵回退、錯版拒絕、舊十二段回歸均通過。
+正式已顯示中文數為十四段。下一步仍須追其他國家選擇文字、help
+與更深玩家路徑；[Issue #28](https://github.com/wicanr2/colonization_cht/issues/28)
+的難度標題原版風格排版獨立保留下一階段，不因本輪完成而關閉。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
 保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至368筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。

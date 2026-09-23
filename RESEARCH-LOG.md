@@ -2389,3 +2389,42 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   help 全局不可達的證據，且現有前端未提供 F1 鍵轉送。規格020
   保持 DRAFT，候選中文、預覽圖與兩張原版畫面不計入十二段正式命中；
   原始快照、收據與含原版像素的圖片都只留本機 `workplace/`。
+
+## 2026-09-23：目標084國家頁標題執行期守門與正式顯示
+
+- 輸入固定為合法 DOS `OPENING.EXE`、`VICEROY.EXE`、`GAME.TXT`、
+  `LABELS.TXT`、`NAMES.TXT`；各 SHA-256 見[規格020](docs/spec/020-nation-heading-overlay.md)。
+  隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`，
+  Go 1.24.13、Ebitengine 2.9.9、Pillow 12.3.0；Cubic 11 字型
+  SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`。
+  `0x8D3`／`0x8DB` 是 `LABELS.TXT` 檔案位移，`0x4DFB5`／
+  `0x4DFBC`／`0x2A710` 是 DOS 20-bit 線性 RAM，`0D3A:0015`／
+  `0D21:00C6`／`0D21:012C` 是原版實模式 CS:IP；安全矩形以
+  320×200原始邏輯畫布定義，再換算1280×800輸出畫布。
+- confirmed（當次原版背景）：`tools/probe_goal084_nation_runtime.go` 於
+  原版 `0D3A:0015` 來源讀取時逐欄保存印字前畫布；安全區原版索引
+  SHA-256 分別為
+  `7092302ca905ced59a9839c528df5f28a0dc2823618f4f0d99cdd729c6bd5251`／
+  `ec7ea1fd43546a53a09172591abbd89269e9b146db2bd591fd98b12f860543a0`。
+  原版格式化輸出後變更120／270個畫布點。雙次60M步收據逐位元組
+  相同，SHA-256
+  `b3ae3b234fe473dc5f9501d903f69b67455d9db3734198a6dfa983871bc75da9`；
+  `tools/check_goal084_nation_runtime.py` 獨立驗證 PASS，收據 SHA-256
+  `74d6f26df4b66318e732ee606a1c5d0408d91f2019269dc811884c8bd4708022`。
+- confirmed（正式真視窗）：16筆原生鍵鼠輸入 SHA-256
+  `a48ae77b9f6a0c2bdb9b3512625d0c1c4786b1cb64b8deff4bdb603fe422d93e`；
+  中文圖 SHA-256
+  `2337a9bd9d1a6449103b57f38d5cfb0ebe5e12f8e99102cc9a8fcb0283accb1d`。
+  中文與同輸入英文控制組 CPU、完整 RAM、原版索引畫面、色盤、虛擬
+  時間一致；中文只在兩個安全矩形改變2,611／5,502個 RGBA 像素。
+  真 TSV 兩欄各自缺鍵／重複鍵、游標24幀與滑鼠按住24幀的逐欄
+  回退、切場清除、錯版本拒絕，以及舊15個選單／難度檢查點回歸
+  均由 `tools/verify_goal084_replays.py` 核對 PASS，收據 SHA-256
+  `84da4515020fbccddb2c927deeb99d68261ff1da17d74be62dd20e677d30e678`。
+  現行 TSV SHA-256
+  `14b2cc51df1d42ccd938d8fab334c0b90b1cf63314746df19d80449c3865f3f1`
+  僅與原受測 TSV 的 `notes` 不同；現行 TSV 重烘14欄字模後的同輸入
+  PNG、索引、色盤與原正式真視窗逐位元組相同。
+- 限制：`confirmed` 僅涵蓋國家頁左側兩行及列出的輸入、狀態、反例。
+  原版真正字型 baseline、其他國家卡片、help、後續玩家路徑及完整
+  操作仍未知；不得把14段正式顯示當作全遊戲覆蓋率。

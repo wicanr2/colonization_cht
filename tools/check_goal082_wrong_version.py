@@ -16,6 +16,8 @@ def main() -> int:
     parser.add_argument("--game", type=Path, required=True)
     parser.add_argument("--binary", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--target", choices=REQUIRED, default="NAMES.TXT",
+                        help="只改動暫存副本中的單一原版檔案；預設維持目標082")
     args = parser.parse_args()
     if not all((args.game / name).is_file() for name in REQUIRED):
         print("SKIP：原版輸入不完整")
@@ -25,9 +27,9 @@ def main() -> int:
         for name in REQUIRED:
             (temp_dir / name).symlink_to((args.game / name).resolve())
         # 僅覆蓋暫存目錄的符號連結；絕不寫入原版檔案。
-        (temp_dir / "NAMES.TXT").unlink()
-        original = (args.game / "NAMES.TXT").read_bytes()
-        (temp_dir / "NAMES.TXT").write_bytes(bytes((original[0] ^ 1,)) + original[1:])
+        (temp_dir / args.target).unlink()
+        original = (args.game / args.target).read_bytes()
+        (temp_dir / args.target).write_bytes(bytes((original[0] ^ 1,)) + original[1:])
         prefix = temp_dir / "rejected"
         result = subprocess.run(
             [str(args.binary), "--root", str(temp_dir), "--out", str(prefix)],
@@ -43,7 +45,7 @@ def main() -> int:
         )
         receipt = {
             "result": "PASS" if passed else "FAIL",
-            "scope": "僅暫存 NAMES.TXT 單位元組異動；原版輸入唯讀",
+            "scope": f"僅暫存 {args.target} 單位元組異動；原版輸入唯讀",
             "exit_code": result.returncode,
             "version_rejected": "原版版本不符" in result.stderr,
             "stderr": result.stderr.strip()[:500],

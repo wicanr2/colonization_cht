@@ -18,7 +18,7 @@
 
 ## 目前狀態
 
-已驗證從原版 `OPENING.EXE -g` 啟動、進入 `VICEROY.EXE` 主選單，再以真實 DOS 滑鼠點選「新世界」到難度頁。現有十二段中文畫面文字：主選單五列、難度頁標題兩段、完成提示一段及第一、二張卡片各兩行。Ebitengine／Xvfb 真視窗使用同一份輸入重播中英文兩組，原版 CPU、完整 RAM、索引畫面、色盤及虛擬時間一致；畫面差異只在已驗證的中文安全區。
+已驗證從原版 `OPENING.EXE -g` 啟動、進入 `VICEROY.EXE` 主選單，再以真實 DOS 滑鼠點選「新世界」、難度頁完成區，抵達國家選擇頁。現有十四段中文畫面文字：主選單五列、難度頁標題兩段、完成提示一段、第一及第二張卡片各兩行，以及國家頁左側標題兩行。Ebitengine／Xvfb 真視窗使用同一份輸入重播中英文兩組，原版 CPU、完整 RAM、索引畫面、色盤及虛擬時間一致；新增畫面差異只在已驗證的中文安全區。
 
 [繁中翻譯草稿](text/draft.zh-Hant.tsv)現有368筆可追溯候選（新納入28項地圖編輯器選單、14個過場標題與2則載入訊息）；另有[163 篇百科原文／繁中對照（25篇建國元勳、16篇貨物、24篇單位、29篇地形、27篇職業、42篇建築）](text/pedia-bilingual.tsv)、[24 則教學與地圖編輯說明的原文／繁中對照](text/help-bilingual.tsv)、[7 則版本3玩家補充說明的原文／繁中對照](text/readme-bilingual.tsv)，以及[173 筆預設殖民地名稱的原文／繁中對照](text/colony-bilingual.tsv)。它們都只是可追溯的譯稿，尚未接入實際說明畫面。靜態圖中文字、其他選單、完整操作及整局遊玩都未完成；請以[目前狀態](CONTEXT.md)為準，不以譯稿筆數推算畫面完成率。
 
@@ -26,7 +26,7 @@
 
 ## 研究與執行入口
 
-需要自行持有合法 DOS 原版。所有建置、遊戲執行、分析與抓圖都在 Docker 容器內進行；本案只使用 `workplace/dosgolem` 的獨立副本，不修改共用專案。視窗原型由 [組裝器](tools/build_window_prototype.py)及[真視窗驗證腳本](tools/probe_window_prototype.sh)產生；固定工具鏈、掛載與驗證契約見[視窗原型規格](docs/spec/013-window-prototype.md)，難度標題的輸出守門見[規格014](docs/spec/014-difficulty-text-output-draft.md)，第一、二張卡片兩行分別見[規格017](docs/spec/017-first-difficulty-card-overlay.md)與[規格019](docs/spec/019-second-difficulty-card-overlay.md)。
+需要自行持有合法 DOS 原版。所有建置、遊戲執行、分析與抓圖都在 Docker 容器內進行；本案只使用 `workplace/dosgolem` 的獨立副本，不修改共用專案。視窗原型由 [組裝器](tools/build_window_prototype.py)及[真視窗驗證腳本](tools/probe_window_prototype.sh)產生；固定工具鏈、掛載與驗證契約見[視窗原型規格](docs/spec/013-window-prototype.md)，難度標題的輸出守門見[規格014](docs/spec/014-difficulty-text-output-draft.md)，第一、二張卡片兩行分別見[規格017](docs/spec/017-first-difficulty-card-overlay.md)與[規格019](docs/spec/019-second-difficulty-card-overlay.md)，國家選擇頁左側兩行見[規格020](docs/spec/020-nation-heading-overlay.md)。
 
 - [目前脈絡與未完成界線](CONTEXT.md)
 - [工作計畫](WORKLIST.md)（由 `docs/worklist.json` 產生）
