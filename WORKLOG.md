@@ -1708,4 +1708,7 @@
   SHA-256 不變、Git 未追蹤原版素材、工作根無 root-owned
   檔案或誤建 `.md` 目錄、隔離 dosgolem 上游推送位址為
   `DISABLED`，本輪三種既有映像無執行中或停止容器。
-  成果提交、私有推送與遠端 Issue 回讀於本輪收尾核對。
+  成果提交 `3632696` 已推送 PRIVATE `origin/main`；
+  真正主機 `gh` 已更新並回讀[Issue #29](https://github.com/wicanr2/colonization_cht/issues/29)
+  與[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)，
+  兩者均保持 OPEN。收尾文件回填另以後續提交推送。
