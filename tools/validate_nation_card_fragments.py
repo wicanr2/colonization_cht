@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""只驗證第一張旗卡的顯示片段草稿；不建立正式執行期鍵。"""
+"""驗證已取證國家旗卡的顯示片段草稿；不建立正式執行期鍵。"""
 
 import argparse
 import csv
@@ -15,7 +15,9 @@ FIELDS = ["candidate_id", "source_file", "source_sha256", "byte_offset",
           "zh_hant", "status", "notes"]
 EXPECTED = {
     "NAMES.TXT:0x000008EA": ("NAMES.TXT", 0x8EA, b"England", "英格蘭"),
+    "NAMES.TXT:0x00000906": ("NAMES.TXT", 0x906, b"France", "法國"),
     "LABELS.TXT:0x000008F2": ("LABELS.TXT", 0x8F2, b"Immigration", "移民"),
+    "LABELS.TXT:0x000008FF": ("LABELS.TXT", 0x8FF, b"Cooperation", "合作"),
 }
 FONT_SHA = "8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c"
 
@@ -54,8 +56,9 @@ def validate(catalog, game, font):
                 "原始檔案／片段指紋不符：" + key)
         require(source[offset - 2:offset] == b"\r\n", "不是原始行首：" + key)
         if name == "NAMES.TXT":
+            section = source.rfind(b"@COUNTRY\r\n", 0, offset)
             require(source[offset + len(original):offset + len(original) + 1] == b","
-                    and b"@COUNTRY\r\n" in source[offset - 16:offset],
+                    and section >= 0 and source.rfind(b"@", 0, offset) == section,
                     "複合國名紀錄語境不符")
         else:
             require(source[offset + len(original):offset + len(original) + 2] == b"\r\n",
@@ -63,7 +66,7 @@ def validate(catalog, game, font):
     font_data = font.read_bytes()
     require(sha(font_data) == FONT_SHA, "Cubic 11 字型指紋不符")
     coverage = cmap_coverage(font_data)
-    require(all(ord(char) in coverage for char in "英格蘭：移民"), "Cubic 11 缺少預覽字形")
+    require(all(ord(char) in coverage for char in "英格蘭：移民法國合作"), "Cubic 11 缺少預覽字形")
     return rows
 
 
@@ -77,7 +80,7 @@ def main():
         print("SKIP：合法原版或本機字型缺失")
         return 77
     validate(args.catalog, args.game, args.font)
-    print("PASS：旗卡兩筆顯示片段草稿、原始檔案指紋、複合行語境及字形覆蓋一致")
+    print("PASS：旗卡四筆顯示片段草稿、原始檔案指紋、複合行語境及字形覆蓋一致")
     return 0
 
 

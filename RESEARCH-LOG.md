@@ -2680,3 +2680,63 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
 - 限制：這些是**原版觀測事實**，不是正式中文輸出層的逐欄回退測試；
   使用者尚未選定 A／B 中文字級。其他旗卡、離開國家頁、
   新旗卡文字來源與完整玩家流程均未驗。規格021保持 DRAFT。
+
+## 2026-09-24：目標090相鄰右上旗卡來源至原版畫布
+
+- 訂正脈絡：目標089的「新旗卡文字來源未知」只描述當時證據，
+  本輪用新原版事件解出來源；左側舊安全區188／221點的差分
+  是步44,115,408起 `0C9F:00CA` 清除舊字，**不是**新字落點。
+  新印字在右側 x235–275，且舊字清除早於來源讀取。
+- 固定輸入與工具：合法 DOS `OPENING.EXE` SHA-256
+  `3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`、
+  `VICEROY.EXE` `a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3`、
+  `GAME.TXT` `67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a`、
+  `NAMES.TXT` `4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061`、
+  `LABELS.TXT` `e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204`、
+  `NATIONS.PIK` `bd31e62d7b7652e6903aaea76b1641f11d5333ff6a6da13fd26411c9f080bf54`。
+  16筆正常玩家輸入 SHA-256
+  `a48ae77b9f6a0c2bdb9b3512625d0c1c4786b1cb64b8deff4bdb603fe422d93e`，
+  隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`，
+  Go 1.24.13／`colonization-research:20260920-r2`。
+  探針 `tools/probe_goal090_neighbor_text.go` SHA-256
+  `fa1bc5a9f40d6755d7004bb3acd8f494ee99784e419d8ee3be1d001eaba9f648`；
+  驗證器 `tools/check_goal090_neighbor_source.py` SHA-256
+  `287c19373f9385176387d712c3f1cc478b3b6f6cb3c3ca696b082804a260da41`。
+  位址空間分別為 TXT 檔案偏移、DOS `AH=3Fh` 讀取、原版
+  實模式 `CS:IP`、20-bit 線性 RAM、320×200索引畫布。
+- confirmed（上行）：`NAMES.TXT:0x906` 六字節 `France` 片段
+  SHA-256 `7a1ca4ef7515f7276bae7230545829c27810c9d9e98ab2c06066bee6270d5153`；
+  步15,504,395、handle6從檔案0x800起讀512 byte 到
+  RAM `0x2B108`，原版 `0E2D:1F76`／`1F86` 整理到
+  `0x2B0FA`，`0E2D:09F4`／`09F5` 解析到 `0x249DC`，
+  `9320:0171`／`0173` 寫 `0x26C58`，`0E2D:11A5`
+  常駐 `0x4CBC6`。步44,122,629 `0E2D:11CF` 從
+  `0x4CBC6` 讀字，不取同文 `0x21AFE`；格式成
+  `FRANCE:` 經 `0x2A7B2`／`0x2A716`，`0D21:00C6`
+  逐字讀兩次，`0D21:012C` 寫118次，bbox
+  `(242,15)–(267,19)`，色號0與9。
+- confirmed（下行）：`LABELS.TXT:0x8FF` 十一字節
+  `Cooperation` 片段 SHA-256
+  `83c7711f9e6fe2a213e4c6bc7af78edb8b6abbc106a1e12ecef7950fc21c0214`；
+  步18,077,763同為檔案0x800起512 byte傳輸至
+  `0x2B101`，整理至 `0x2B0E8`、解析至 `0x249DC`，
+  `0E2D:11A1`／`11A5` 常駐 `0x4DFDD`。
+  步44,132,488起 `0E2D:11CF` 讀此常駐字，重用
+  共用緩衝，`0D21:00C6` 逐字讀兩次，`0D21:012C`
+  寫150次，bbox `(235,87)–(275,92)`，色號0與9。
+- 觀測勘誤：dosgolem 的 `WatchWrites` 只通知**異值**寫入，
+  `Cooperation` 有解析字元剛好覆寫同值，第一次驗證器如預期
+  因缺事件失敗；用通用 `WatchWrite` 在 `0x249D0–0x249EF`
+  補每一次寫入後逐字通過。並未修改原版或靠同文搜尋跳過資料流。
+  雙次完整 RAM 流收據位元組相同，SHA-256
+  `48fb6f90ccf88a0e0f21607c0f96e432358ce9ccac00db19f45c63c6cee6f69f`；
+  雙次畫布收據相同，SHA-256
+  `b4b4019c0b5b86a8e0bf6caabdc2e64649e420279fe29315e354021124bb922e`。
+  無監看控制的 CPU、完整 RAM、索引、色盤、時間、開檔與九個
+  畫布取樣皆相同；獨立 PASS 收據 SHA-256
+  `c851d1eaa79b3cd3b726d4f5b80cf34f617e543d549f1f1e89a219f50cf3a83b`。
+  四筆[旗卡片段草稿](text/nation-card-fragments.zh-Hant.tsv)
+  SHA-256 `4f0f4c67f9986664abdaabd16b0efc8dfabdc64777a88efd2063f29437265b56`
+  已驗原始行界、片段、Cubic 11 指紋與字形；原始 RAM／畫布只留
+  `workplace/`。右側背景、安全矩形、字級及正式回退仍未證實，
+  [規格022](docs/spec/022-neighbor-nation-card-red-text-draft.md) 保持 DRAFT。

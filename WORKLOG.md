@@ -1439,3 +1439,44 @@
   工作清單驗證與 `git diff --check` 通過。輸出由目前 UID/GID
   `1000:1000` 擁有，無 root-owned 項目、誤建 `.md` 目錄或
   殘留 Docker 容器；未清理其他專案資源。
+
+## 2026-09-24：難度標題決定複核與目標090相鄰旗卡來源
+
+- 使用者再次確認難度標題 A：「選擇」34px、「難度」38px，
+  x=230共同置中，只改兩欄。核對目前正式程式仍由
+  `tools/live_menu.go` 逐欄採此字級、位置；
+  [目標086](docs/goals/086-difficulty-heading-centered-layout.md)與
+  [規格018](docs/spec/018-difficulty-heading-layout-draft.md)早已完成
+  同輸入英文控制、十五檢查點、卡片／提示不變及正式驗收。
+  現行私有 `docs/screenshots/difficulty-zh.png` SHA-256
+  `86b2c08465ed67fc57202e7490a7ac274185c78bf464e2a0e773b120bb196e07`
+  等於驗後更新版本；原 PASS 收據 SHA-256
+  `83c6668d942034193bec084fcf53fa52ec0a2775ae9c5296a6f663bd7ffb9a2f`。
+  遠端 Issue #28 已於2026-09-23關閉，本輪不重複修改、重抓圖或
+  重開此項。
+- 接續先以 `287d89c` 推送的[目標090](docs/goals/090-neighbor-nation-card-source.md)，
+  以合法 DOS 原版、隔離 dosgolem、原16筆真視窗輸入，在43M步
+  移到相鄰右上旗卡 `(255,50)`、44M步左鍵按下，分別觀測原版
+  TXT 載入／RAM 與畫布。新畫布字在右側；左側差分是舊字清除，
+  因此沒有沿用第一張旗卡的安全矩形猜鍵或猜座標。
+- `NAMES.TXT:0x906` 的 `France` 及 `LABELS.TXT:0x8FF` 的
+  `Cooperation` 逐字經 DOS 讀取、RAM 整理／解析／常駐、
+  格式化及原版畫布寫入；雙次完整來源流與雙次畫布重播各自
+  位元組相同，無監看控制的 CPU／RAM／索引／色盤／時間、
+  開檔與畫布取樣相同。獨立驗證器 PASS；詳細地址與本機
+  收據 SHA 見[規格022](docs/spec/022-neighbor-nation-card-red-text-draft.md)
+  與研究紀錄。
+- 初次 Docker 啟動探針將原版目錄掛到 `SMColoni/` 而非其下
+  `COLONIZE/`，原版檔案檢查如預期失敗；改正掛載層級後同版
+  重跑成功。第一次用登入 shell 讓映像的 Go PATH 被覆蓋，
+  改用既有映像原始環境重新建置，沒有新建重複映像。
+  第一次獨立來源驗證又因 `WatchWrites` 不回報同值寫入而失敗；
+  查通用 dosgolem 契約後，於解析緩衝狹窄位址使用
+  `WatchWrite` 記錄每一次寫入，雙次重跑後 PASS。這些均為
+  掛載／觀測判準修正，沒有改原版或正式畫面。
+- [旗卡片段 TSV](text/nation-card-fragments.zh-Hant.tsv) 新增
+  「法國／合作」兩筆來源固定 `draft`，四筆原始片段、行界、
+  Cubic 11 字型與字形覆蓋驗證 PASS。規格022仍 DRAFT；
+  右側印字前背景、安全矩形、字級與正式逐欄回退未做；第一張
+  旗卡 A／B 尚待使用者確認。十四段正式中文數及已驗截圖不變，
+  原始 RAM／畫布、探針二進位與字型只留本機 `workplace/`。

@@ -1,6 +1,6 @@
 # 目標090：相鄰旗卡紅字的原版來源與畫布輸出鏈
 
-狀態：進行中；日期：2026-09-24。承接
+狀態：完成（限定來源鏈與 DRAFT）；日期：2026-09-24。承接
 [目標089](089-first-nation-card-runtime-guard-evidence.md)及
 [規格021](../spec/021-nation-card-red-text-draft.md)；對應
 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)、
@@ -40,3 +40,21 @@
 本輪不代替使用者在第一張旗卡 A／B 版式間定案，不接正式前端、
 不更新成果截圖或十四段已驗中文數。右上旗卡以外的旗卡、help、
 選國規則與完整遊玩不因這條來源鏈而宣稱完成。
+
+## 完成結果
+
+正常玩家輸入在43M步移至右上旗卡 `(255,50)`，44M步左鍵按下。
+原版先清除左側舊字，才從常駐 RAM 印出右側 `FRANCE:`／
+`Cooperation`；印字落點在 x235–275，不能把舊安全區的重繪當成
+新字 bbox。兩筆各自從固定 `NAMES.TXT:0x906`／
+`LABELS.TXT:0x8FF`，經 DOS 讀取、RAM 整理／解析／常駐、
+格式化與 `0D21:012C` 畫布寫入；位址、步數、來源 SHA 及
+獨立 PASS 收據見[規格022](../spec/022-neighbor-nation-card-red-text-draft.md)。
+來源鏈與畫布各有兩次位元組相同的冷啟動收據，無監看控制的
+CPU／完整 RAM／索引／色盤／時間／開檔與畫布取樣一致。
+
+[片段草稿](../../text/nation-card-fragments.zh-Hant.tsv) 新增
+「法國／合作」，四筆來源、原始行界及 Cubic 11 字形驗證 PASS。
+規格022仍是 DRAFT；右側旗卡的可逆背景、欄位安全矩形、
+逐欄字級與正式回退未完成。第一張旗卡 A／B 視覺選擇仍待
+使用者確認，兩張旗卡都沒有新增正式中文顯示或更新截圖。

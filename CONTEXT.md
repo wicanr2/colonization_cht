@@ -2,12 +2,14 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-目前進行入口：[目標090](docs/goals/090-neighbor-nation-card-source.md)；
-最近完成入口：[目標089](docs/goals/089-first-nation-card-runtime-guard-evidence.md)：
+最近完成入口：[目標090](docs/goals/090-neighbor-nation-card-source.md)；
+前一完成入口：[目標089](docs/goals/089-first-nation-card-runtime-guard-evidence.md)：
 第一張國家旗卡的兩欄游標遮擋、下欄左鍵與相鄰旗卡重繪已有雙次
 dosgolem 重播及無觀測控制。承接[目標088](docs/goals/088-first-nation-card-reversible-preview.md)
 兩欄本機 Ebitengine A／B 可逆原型；等待使用者確認暫定版式。
-規格021仍為 DRAFT，尚未授權正式覆蓋。
+規格021仍為 DRAFT，尚未授權正式覆蓋。相鄰右上旗卡
+`France`／`Cooperation` 的原始 TXT 至畫布來源鏈已閉合，
+[規格022](docs/spec/022-neighbor-nation-card-red-text-draft.md) 仍為 DRAFT。
 
 ## 已確認決定
 
@@ -58,6 +60,7 @@ dosgolem 重播及無觀測控制。承接[目標088](docs/goals/088-first-natio
 | 第二張難度卡片 | confirmed：真 Ebitengine 視窗點擊 `(265,55)` 顯示 `EXPLORER:`／`Easy`，雙次 dosgolem 收據閉合 `NAMES.TXT:0xC18`／`LABELS.TXT:0x8B2` 至 RAM、格式化印字與原始畫布；墨跡高5／6像素、有紋理底圖。規格019限定兩行為 CONFORMED：「探險家／簡單」採21／25px逐欄字模，真視窗中文與英文控制原版同狀態；各欄缺譯／重複鍵及游標回退、錯版本拒絕與第一張卡片回歸均通過。規格016對其餘卡片仍為 DRAFT。 |
 | 國家選擇頁 | confirmed：正常滑鼠按下／放開難度頁完成區會開啟 `NATIONS.PIK`；16筆真 Ebitengine 視窗輸入抵達此頁，與同輸入英文控制原版同狀態。左側兩行 `Select`／`European Power` 已追溯至 `LABELS.TXT:0x8D3`／`0x8DB`、RAM、實模式輸出及安全矩形；[規格020](docs/spec/020-nation-heading-overlay.md)限定 CONFORMED：「選擇／歐洲國家」各38px，兩欄缺鍵／重複鍵、游標、按鍵及場景切換均逐欄安全回退，錯版在輸出前拒絕。其他國家頁文字仍未驗收。 |
 | 第一張國家旗卡紅字 | 目標085／087已證實 `NAMES.TXT:0x8EA`／`LABELS.TXT:0x8F2` 各自從 DOS 讀入到原版畫布的動態來源鏈。目標088以雙次冷啟動及無監看控制擷取當次印字前多色底圖，建立[text/nation-card-fragments.zh-Hant.tsv](text/nation-card-fragments.zh-Hant.tsv)兩筆來源固定草稿；Ebitengine 可丟棄原型 A 採21／25px較接近原版、B 採25／29px較易讀，均為「英格蘭：／移民」、原版紅字／黑影且安全區外零差異。目標089另已驗原版上、下欄游標各自遮擋、下欄左鍵不重繪及相鄰旗卡左鍵後兩欄重繪的負例；正式輸出層尚未回退驗收。A／B 待使用者選擇，[規格021](docs/spec/021-nation-card-red-text-draft.md)仍 DRAFT；其他旗卡與離頁場景未驗，不計入十四段正式顯示。 |
+| 相鄰右上國家旗卡紅字 | [目標090](docs/goals/090-neighbor-nation-card-source.md)雙次冷啟動及無監看控制已證實 `NAMES.TXT:0x906` 的 `France` 與 `LABELS.TXT:0x8FF` 的 `Cooperation` 從原始 TXT、DOS 讀取、RAM 整理／解析／常駐、格式化至右側旗卡畫布；兩筆原版字分別佔右上／右下，舊左欄先被清除，不能拿舊欄差分當新字定位。[規格022](docs/spec/022-neighbor-nation-card-red-text-draft.md)仍 DRAFT；「法國／合作」只是片段草稿，未驗可逆背景、安全矩形、字級、游標或正式回退，不計入十四段正式顯示。 |
 | 完整可玩／正式發行 | 未驗證、未發布；正常玩家路徑目前僅驗證至國家選擇畫面，尚未完成選國、help 或遊玩。 |
 
 ## 工具與重播入口
@@ -84,12 +87,15 @@ DOSBox-X 僅提供啟動鏈及畫面類別的輔助基準，正式收據由 dosg
 
 ## 下一閘門與歷程索引
 
-目前主譯稿已有368筆，另有24則help稿及旗卡兩筆顯示片段草稿，
+目前主譯稿已有368筆，另有24則help稿及旗卡四筆顯示片段草稿，
 但原版TXT、EXE及靜態圖像仍未建立完整玩家可見訊息分母。
 第一張旗卡的下一閘門是使用者從[目標088](docs/goals/088-first-nation-card-reversible-preview.md)
 的 A／B 可丟棄畫面選定版式，將[目標089](docs/goals/089-first-nation-card-runtime-guard-evidence.md)
 的原版游標／換旗負例轉成正式逐欄回退契約，再補其他旗卡與離頁
 場景，才可審查[規格021](docs/spec/021-nation-card-red-text-draft.md)是否 READY。
+相鄰右上旗卡另依[規格022](docs/spec/022-neighbor-nation-card-red-text-draft.md)
+先驗印字前背景、安全矩形及欄位專屬字級；不得把第一張的 A／B
+決定或左側清除區座標外推到右側。
 以下舊目標僅供查找當時證據與過程；完成度以本檔上方「目前狀態表」為準。
 [目標065](docs/goals/065-pedia-founding-fathers-corpus.md)與[目標066](docs/goals/066-pedia-cargo-corpus.md)
 已分別完成25篇「建國元勳」及16篇「貨物」的整段草稿；合計41篇已通過固定來源、
