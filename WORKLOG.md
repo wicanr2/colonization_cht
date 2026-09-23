@@ -1237,3 +1237,32 @@
   本輪產物和工作目錄均為目前 UID/GID `1000:1000`；專案內未見
   root-owned 項目或誤掛形成的 `.md` 目錄。相關一次性 Docker 容器
   無執行中或已停止殘留，未清理其他專案資源。
+
+## 2026-09-23：目標083離開難度頁與國家標題草案
+
+- 已先提交並推送[目標083](docs/goals/083-post-difficulty-player-path.md)。
+  使用目標082已驗輸入建立控制、只移入、點擊三組重播；只有完整滑鼠
+  按下／放開會離開難度頁。另用 Xvfb 的真 Ebitengine 視窗由冷啟動
+  輸入17筆實際鍵鼠事件，抵達 `NATIONS.PIK`；同輸入英文控制的
+  原版 CPU／RAM／索引畫面／色盤／時間一致。
+- 新探針 `tools/probe_goal083_label_load.go` 與
+  `tools/probe_goal083_nation_text.go` 在隔離 dosgolem 中只讀觀測，
+  關閉 `LABELS.TXT:0x8D3`／`0x8DB` 到 DOS RAM、格式化輸出和畫素的
+  資料鏈；雙次收據與獨立驗證均通過。工具版本、檔案雜湊、地址基準
+  與有限結論集中於[研究紀錄](RESEARCH-LOG.md)。
+- 以固定 Cubic 11 字型量得國家頁原文兩行各36px、中文候選各35px
+  墨跡，建立38px逐欄 Ebitengine 可丟棄預覽；游標移入／移開與 F1
+  限定反例已記錄。[規格020](docs/spec/020-nation-heading-overlay.md)
+  維持 DRAFT：執行期守門、正式前端與 help 仍缺，十二段正式中文數
+  不變。未更新含原版像素的私有截圖。
+- 遠端 [Issue #28](https://github.com/wicanr2/colonization_cht/issues/28)
+  已核對為開放，全文包含使用者指定截圖、原版風格重排和依欄位
+  調字級的下一階段驗收，未建立重複 Issue；其 A／B 版式仍待使用者
+  依本機對照圖決定，本輪未猜選。
+- 固定原版與本機收據在唯讀容器重跑 `tools/check_goal083_nation_evidence.py`
+  為 PASS；新 Python 語法、Bash 語法、Go 格式及兩支 Go 探針建置通過。
+  起初誤用 POSIX `sh -n` 檢查 Bash 專用腳本，出現假語法錯誤；改用
+  `bash -n` 並在同一研究映像重跑通過，不是產品缺陷。
+  `tools/worklist.py render` 與現存 `WORKLIST.md` 一致；工作樹無
+  root-owned 檔案或誤掛的 `.md` 目錄。本輪 `docker run --rm` 容器
+  均已退出，沒有殘留的專案容器；未觸碰其他專案的容器。

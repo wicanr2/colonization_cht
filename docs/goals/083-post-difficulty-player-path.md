@@ -1,6 +1,6 @@
 # 目標083：從難度頁走向第一個遊戲內文字畫面
 
-狀態：進行中；日期：2026-09-23。承接[目標082](082-second-difficulty-card-overlay.md)、
+狀態：探索與草案完成；正式覆蓋待後續目標；日期：2026-09-23。承接[目標082](082-second-difficulty-card-overlay.md)、
 [規格016](../spec/016-difficulty-card-text-draft.md)與[說明雙語語料](../../text/help-bilingual.tsv)；
 對應 Issue [#26](https://github.com/wicanr2/colonization_cht/issues/26)、
 [#7](https://github.com/wicanr2/colonization_cht/issues/7)、
@@ -42,3 +42,23 @@
 玩家流程。Issue #28 的難度標題 A／B 版式仍待使用者視覺決定；
 本輪不自行選版或更新含原版像素的私有截圖。新畫面或 help 若未具備
 原版輸出與逐欄字級證據，不宣稱中文化完成。
+
+## 本輪結果與後續閘門
+
+- confirmed：同一已驗難度頁輸入下，只有按下／放開「完成後點此」會開啟
+  `NATIONS.PIK`；無點擊與只移入控制組均未前進。真 Ebitengine 視窗亦
+  從冷啟動經17筆實際輸入抵達同一國家選擇畫面，與無中文觀測的同輸入
+  控制組在原版 CPU、完整 RAM、索引畫面、色盤及虛擬時間一致。
+- confirmed：第一批新動態原文是左側 `Select`／`European Power`，來源為
+  `LABELS.TXT:0x8D3`／`0x8DB`，不是同文的 `GAME.TXT` 候選。兩行已
+  閉合 TXT 載入、DOS 線性 RAM、原版實模式讀取與畫布寫入；固定版本、
+  原始位址、雙次收據及320×200安全矩形見[規格020](../spec/020-nation-heading-overlay.md)。
+- 候選繁中「選擇／歐洲國家」各採本欄位原版36px墨跡高度量出的
+  Cubic 11 38px 字模，共用原版中心線；可丟棄 Ebitengine 預覽的安全區外
+  零差異，且保留紋理背景。這不是沿用主選單字級，也不是正式顯示命中。
+- 游標移入標題時原版索引畫面與安全區相交，移開後恢復；受控 F1 在此
+  畫面至80M步沒有新開檔或可見 help。這只是固定場景反例，不代表其他
+  場景的 help 不可達；24則 help 譯稿仍未計入已顯示數。
+- 規格020保持 DRAFT：尚缺執行期當次背景、兩行獨立補片、游標進出與
+  缺譯反例，故未修改正式前端或既有私有截圖。國家卡片、完成提示與
+  後續正常玩家路徑仍是未完成項；Issue #28 的難度標題排版另案處理。

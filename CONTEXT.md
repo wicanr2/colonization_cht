@@ -47,7 +47,8 @@
 | 中文顯示 | 主選單五列、難度頁兩行標題、完成提示及第一、二張卡片各兩行，共十二段有原版事件與逐幀覆蓋；規格012／014／015／017／019為各自限定範圍CONFORMED。Ebitengine／Xvfb真視窗以實際滑鼠輸入至第二張卡片，中文與同輸入英文控制原版狀態一致；新增中文差異只在第二張卡片兩個安全矩形。仍非正式完整玩家版，Issue #26保持開放。 |
 | 第一張難度卡片 | confirmed：稱號從 `NAMES.TXT:0x00000C0C`、副標從 `LABELS.TXT:0x000008A9` 載入，經原版緩衝與格式化印字路徑繪至畫布；`GAME.TXT` 同文不是此路徑稱號來源。規格017限定第一張卡片兩行為 CONFORMED：21／25px 逐欄字模、當次有紋理底圖、原文差分、游標及真實 TSV 缺鍵回退已接正式前端並與同輸入英文控制同狀態；其餘卡片仍屬規格016 DRAFT。 |
 | 第二張難度卡片 | confirmed：真 Ebitengine 視窗點擊 `(265,55)` 顯示 `EXPLORER:`／`Easy`，雙次 dosgolem 收據閉合 `NAMES.TXT:0xC18`／`LABELS.TXT:0x8B2` 至 RAM、格式化印字與原始畫布；墨跡高5／6像素、有紋理底圖。規格019限定兩行為 CONFORMED：「探險家／簡單」採21／25px逐欄字模，真視窗中文與英文控制原版同狀態；各欄缺譯／重複鍵及游標回退、錯版本拒絕與第一張卡片回歸均通過。規格016對其餘卡片仍為 DRAFT。 |
-| 完整可玩／正式發行 | 未驗證、未發布；本輪僅驗證至難度選擇。 |
+| 國家選擇頁 | confirmed：正常滑鼠按下／放開難度頁完成區會開啟 `NATIONS.PIK`；真 Ebitengine 視窗17筆實際輸入抵達同一畫面，與同輸入英文控制原版同狀態。左側兩行 `Select`／`European Power` 已追溯至 `LABELS.TXT:0x8D3`／`0x8DB`、RAM、實模式輸出及安全矩形；[規格020](docs/spec/020-nation-heading-overlay.md)仍 DRAFT，中文僅本機可丟棄預覽，正式畫面仍英文。 |
+| 完整可玩／正式發行 | 未驗證、未發布；正常玩家路徑目前僅驗證至國家選擇畫面，尚未完成選國、help 或遊玩。 |
 
 ## 工具與重播入口
 
@@ -142,9 +143,11 @@ Issue #28 視覺選擇的範圍，已完成第二張難度卡片真視窗點擊�
 [規格019](docs/spec/019-second-difficulty-card-overlay.md)限定 CONFORMED。
 Issue #28 的難度標題 A／B 版式仍待使用者依本機對照圖選定；
 第三至第五張卡片、help 與完整玩家路徑另待取證。
-[目標083](docs/goals/083-post-difficulty-player-path.md)將以正常滑鼠路徑
-嘗試離開難度頁，觀測下一畫面及第一批未覆蓋訊息；完成提示的
-可見原文與譯稿不等於該滑鼠動作已通過驗收。
+[目標083](docs/goals/083-post-difficulty-player-path.md)已以正常滑鼠路徑
+離開難度頁，抵達 `NATIONS.PIK` 並閉合左側兩行原文來源到畫素；
+38px 繁中是依本欄原文墨跡量測的本機預覽，規格020仍 DRAFT，未增加
+十二段正式已顯示中文數。下一步需執行期守門與真 TSV／Ebitengine
+反例後才能升 READY；其餘國家選擇文字、help 與更深玩家路徑仍待探查。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
 保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至368筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。
