@@ -2,6 +2,7 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前進行入口：[目標090](docs/goals/090-neighbor-nation-card-source.md)；
 最近完成入口：[目標089](docs/goals/089-first-nation-card-runtime-guard-evidence.md)：
 第一張國家旗卡的兩欄游標遮擋、下欄左鍵與相鄰旗卡重繪已有雙次
 dosgolem 重播及無觀測控制。承接[目標088](docs/goals/088-first-nation-card-reversible-preview.md)
