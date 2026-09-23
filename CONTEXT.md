@@ -2,6 +2,8 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前工作入口：[目標091](docs/goals/091-neighbor-nation-card-reversible-preview.md)，
+僅處理相鄰右上旗卡的可逆背景與逐欄版面原型，不改正式輸出；
 最近完成入口：[目標090](docs/goals/090-neighbor-nation-card-source.md)；
 前一完成入口：[目標089](docs/goals/089-first-nation-card-runtime-guard-evidence.md)：
 第一張國家旗卡的兩欄游標遮擋、下欄左鍵與相鄰旗卡重繪已有雙次
