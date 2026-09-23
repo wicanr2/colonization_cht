@@ -137,6 +137,8 @@ Ebitengine 畫面。穩定顯示鍵、執行期背景／游標回退及其餘卡
 [目標081](docs/goals/081-second-difficulty-card-output-evidence.md)在不依賴
 Issue #28 視覺選擇的範圍，已完成第二張難度卡片真視窗點擊與
 來源至畫素證據；其正式中文覆蓋仍未核准。
+[目標082](docs/goals/082-second-difficulty-card-overlay.md)接續第二張卡片的
+逐欄字級、可逆背景與游標反例；只有形成限定 READY 規格後才可接正式覆蓋。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
 保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至368筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。
