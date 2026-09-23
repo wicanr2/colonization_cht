@@ -2,11 +2,13 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前工作入口：[目標092](docs/goals/092-neighbor-card-runtime-and-nation-route.md)，
+只追右卡執行期游標／按鍵負例與選國後正常玩家路徑；
 最近完成入口：[目標091](docs/goals/091-neighbor-nation-card-reversible-preview.md)：
 相鄰右上旗卡兩欄的原版精確印前底圖與本機 Ebitengine 可逆候選已驗，
 尚未定案字級或接正式輸出；前一完成入口：
 [目標090](docs/goals/090-neighbor-nation-card-source.md)；
-前一完成入口：[目標089](docs/goals/089-first-nation-card-runtime-guard-evidence.md)：
+另見[目標089](docs/goals/089-first-nation-card-runtime-guard-evidence.md)：
 第一張國家旗卡的兩欄游標遮擋、下欄左鍵與相鄰旗卡重繪已有雙次
 dosgolem 重播及無觀測控制。承接[目標088](docs/goals/088-first-nation-card-reversible-preview.md)
 兩欄本機 Ebitengine A／B 可逆原型；等待使用者確認暫定版式。
@@ -96,9 +98,12 @@ DOSBox-X 僅提供啟動鏈及畫面類別的輔助基準，正式收據由 dosg
 的 A／B 可丟棄畫面選定版式，將[目標089](docs/goals/089-first-nation-card-runtime-guard-evidence.md)
 的原版游標／換旗負例轉成正式逐欄回退契約，再補其他旗卡與離頁
 場景，才可審查[規格021](docs/spec/021-nation-card-red-text-draft.md)是否 READY。
-相鄰右上旗卡另依[規格022](docs/spec/022-neighbor-nation-card-red-text-draft.md)
-先驗印字前背景、安全矩形及欄位專屬字級；不得把第一張的 A／B
-決定或左側清除區座標外推到右側。
+相鄰右上旗卡已依[目標091](docs/goals/091-neighbor-nation-card-reversible-preview.md)
+驗得印字前底圖、安全矩形及欄位專屬的兩組候選字級；下一步依
+[目標092](docs/goals/092-neighbor-card-runtime-and-nation-route.md)量執行期
+游標、按鍵、換卡與選國後可達性。不得把第一張的 A／B 決定或
+左側清除區座標外推到右側，[規格022](docs/spec/022-neighbor-nation-card-red-text-draft.md)
+繼續保持 DRAFT。
 以下舊目標僅供查找當時證據與過程；完成度以本檔上方「目前狀態表」為準。
 [目標065](docs/goals/065-pedia-founding-fathers-corpus.md)與[目標066](docs/goals/066-pedia-cargo-corpus.md)
 已分別完成25篇「建國元勳」及16篇「貨物」的整段草稿；合計41篇已通過固定來源、
