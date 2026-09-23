@@ -133,6 +133,9 @@ Ebitengine 畫面。穩定顯示鍵、執行期背景／游標回退及其餘卡
 高度32／36px；[規格018草案](docs/spec/018-difficulty-heading-layout-draft.md)比較
 34／38px共同置中（A）與保留原文左起點（B）。本機四格對照只改兩個已證實
 安全矩形；使用者選版前不更動正式前端或把視覺候選當定案。
+[目標081](docs/goals/081-second-difficulty-card-output-evidence.md)在不依賴
+Issue #28 視覺選擇的範圍，接續第二張難度卡片的滑鼠切換、原文輸出與
+來源至畫素證據；其正式中文覆蓋仍未核准。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
 保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至368筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。
