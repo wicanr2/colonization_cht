@@ -42,6 +42,7 @@
 | README 玩家補充語料 | `text/readme-bilingual.tsv`含 DOS ZIP 內 `README.TXT` 的7段版本修正、地圖編輯器與作弊模式原文／繁中草稿。封存檔、成員檔、位元組範圍與片段 SHA 均固定，按鍵／符號／Tab及Cubic 11覆蓋通過，缺字0；它不是執行期鍵，未命中畫面。 |
 | 殖民地名稱語料 | `text/colony-bilingual.tsv`含 `COLONY.TXT` 的173筆預設名稱（英36、法66、西39、荷32）；18個年份依使用者決定呈現為「中文名稱（原名，年份）」。ZIP／成員／章節／行與片段 SHA、年份與格式驗證通過，字型字元缺字0；沒有畫面命中、安全矩形或欄位專屬中文字級。 |
 | 中文顯示 | 主選單五列、難度頁兩行標題及完成提示，共八段有原版事件與逐幀覆蓋；規格012／014／015為限定範圍CONFORMED。Ebitengine／Xvfb真視窗以九筆實際輸入到難度頁，中文、重播與英文控制原版狀態一致；兩張真視窗圖只在已核准安全區變更。仍非正式完整玩家版，Issue #26保持開放。 |
+| 第一張難度卡片 | confirmed：固定正常玩家路徑的稱號原文從 `NAMES.TXT:0x00000C0C`、副標從 `LABELS.TXT:0x000008A9` 載入，經 DOS 緩衝與原版搬運到卡片 RAM，再由目標075接至字形／像素。`GAME.TXT` 同文不是此路徑稱號來源。Ebitengine 可丟棄預覽已改鍵且逐像素通過；正式顯示守門仍缺，規格016 DRAFT，八段計數不變。 |
 | 完整可玩／正式發行 | 未驗證、未發布；本輪僅驗證至難度選擇。 |
 
 ## 工具與重播入口
@@ -101,16 +102,19 @@ EXE及靜態圖像尚未建立完整玩家可見訊息分母，不宣稱全文�
 資料流已由[目標075](docs/goals/075-difficulty-card-source-to-pixels.md)閉合：原文經
 `0x2A74C` 共用緩衝與 `0x2A6B0` 局部副本，`0D21` 逐字讀取後畫在卡片上。
 稱號實際格式為 `DISCOVERER:`；兩行原版墨跡分別5／6像素高，背景各有75／78種色盤索引，
-不可純色抹除。來源檔載入邊、背景可逆擷取、中文字級／安全矩形與游標守門仍缺，
+不可純色抹除。當時來源檔載入邊、背景可逆擷取、中文字級／安全矩形與游標守門仍缺，
 [規格016](docs/spec/016-difficulty-card-text-draft.md)保持 DRAFT，不計入八段完成數。
 [目標076](docs/goals/076-difficulty-card-reversible-prototype.md)已以固定雙次原版收據完成
 第一張卡片的本機可逆背景與 Ebitengine 可丟棄對照圖；稱號／副標候選字級分別為
 21／25px，逐像素檢查確認安全區外不變、透明字模下恢復原背景。它不是正式
-runtime 覆蓋或真視窗正常路徑收據；來源檔載入邊、任意時刻的背景／游標守門與
+runtime 覆蓋或真視窗正常路徑收據；當時來源檔載入邊、任意時刻的背景／游標守門與
 其餘卡片仍缺，規格016保持 DRAFT，八段已顯示中文數不增加。
-[目標077](docs/goals/077-difficulty-card-load-provenance.md)正以 dosgolem 的 DOS 讀檔
-收據追查 `Discoverer`／`Easiest` 從原始 TXT 到執行期 RAM 的載入邊；確認前不選
-`GAME.TXT` 或 `NAMES.TXT` 作第一張卡片正式顯示鍵。
+[目標077](docs/goals/077-difficulty-card-load-provenance.md)已以兩次獨立 dosgolem 冷啟動
+閉合原始 TXT → DOS 緩衝 → 中間緩衝 → 第一張卡片 RAM 的載入邊：
+`Discoverer` 來自 `NAMES.TXT`，`Easiest` 來自 `LABELS.TXT`；`GAME.TXT`
+首次讀取晚於稱號 RAM 寫入。可丟棄預覽已改用 `NAMES.TXT` 候選鍵並重驗
+Ebitengine 畫面。穩定顯示鍵、執行期背景／游標回退及其餘卡片仍未過 READY，
+不能把這兩筆 `draft` 譯文接進正式覆蓋。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
 保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至368筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。

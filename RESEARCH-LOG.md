@@ -2030,3 +2030,60 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   與字型）→ `tools/card_preview.go`（Ebitengine／Xvfb 的 `-control`／中文圖）→
   `tools/verify_card_preview.py`（逐像素核對）；完整資料及 PNG 只在
   `workplace/reports/goal076-card-*`，不入 GitHub。
+
+## 2026-09-23：目標077原始 TXT 載入至第一張難度卡片 RAM
+
+- 輸入與工具：正常玩家九筆輸入 `goal059-ebiten.inputs.json` SHA-256
+  `51837a0ed11cfcc316b4e2c9dce7064403cafdd0c1af2efecf59f30319eb5efc`；
+  原版 `OPENING.EXE`／`VICEROY.EXE`／`GAME.TXT`／`LABELS.TXT` 指紋見
+  [規格016](docs/spec/016-difficulty-card-text-draft.md)，新增核對 `NAMES.TXT`
+  SHA-256 `4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061`。
+  隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`；
+  `colonization-research:20260920-r2` 映像 ID
+  `sha256:5d99f8754e9f9099b7f263268c485c73043aee1a9d9d29231417ccb5b5da02e1`。
+  `tools/probe_card_load.go` 使用 dosgolem `DOS.Reads`／`FileOps` 與單一讀、寫監看器；
+  `tools/check_card_load.py` 獨立驗證，並串接目標075原文至像素檢查器。
+- 位址空間：`0xC0C`／`0x8A9`／`0xA26` 是對應原始 TXT 的**檔案位移**；
+  `0E2D:1F76`、`1F86`、`09F4`、`09F5`、`11A5` 是 dosgolem 中原版
+  DOS 真實模式 `CS:IP`；`0x2B00E` 等是 20-bit 線性 RAM，不是 IDA 位址。
+  `AH=3Fh` 的 `DS:DX`、成功讀取長度及檔案偏移由同一步 DOS 收據核對；
+  寫入來源的 `DS:SI` 與目的的 `ES:DI` 由監看事件的原始暫存器驗證。
+- confirmed（稱號）：`NAMES.TXT:0xC0C` 的十個原文字節 `Discoverer`
+  於步數16,208,974 從檔案偏移 `0xC00` 起的讀取塊進入 `0x2B00E`；
+  原版 `0E2D:1F76` 讀取，`0E2D:1F86` 就地整理到 `0x2B00D`；
+  `0E2D:09F4` 再讀、`0E2D:09F5` 寫入中間緩衝 `0x249DC`；
+  `0E2D:11A5` 於步數16,215,523 寫入目標 `0x4CC6A`。
+  原版 `GAME.TXT` 首次成功讀取在步數21,820,870，晚於稱號寫入；
+  同文的 `GAME.TXT:0xA26` 不能當此固定玩家路徑第一張卡片稱號來源。
+- confirmed（副標）：`LABELS.TXT:0x8A9` 的七個原文字節 `Easiest`
+  於步數18,648,994 從檔案偏移 `0x800` 起的讀取塊進入 `0x2B0AB`；
+  同組原版指令先整理至 `0x2B09B`，再經 `0x249DC` 中間緩衝，
+  由 `0E2D:11A5` 於步數18,682,724 寫入 `0x4DF90`。
+  目標075的 `0E2D:11CF`／`0D21:00C6`／`0D21:012C` 已將兩個目標 RAM
+  位址接到格式化文字、逐字字形和畫布像素；來源至像素的固定路徑因此閉合。
+- 兩次冷啟動收據 `goal077-card-load-v4-{a,b}.json` 位元組完全一致，
+  各 SHA-256 `580f2f92475a12db9c065a3476e20f4fd315f27521030ac794dedf7aa3b71790`；
+  3,200萬步、423筆窄範圍寫入、57筆相關 DOS 讀取，無觀測截斷。
+  最終完整 RAM／畫布／索引畫面／色盤 SHA-256 依序為
+  `09e9fbf961b8b50115fa0c8b707d4a220cf7f12b3e2a359311073f85786ad109`、
+  `08edaac74a54263b8e093010d8cbc97d3f9820c3c151f28d80beded5c5a8a650`、
+  `6072d7cf64633f93d2ad86a363ad73cd586f24bdacff51b406a84c52354924ae`、
+  `762b10807954069aa97266465cff2d72be0d1da568b668a19d15c3a5d0524e82`，
+  與既有正常玩家終點相同。
+- 訂正工具判讀：舊 DOS 實作註解宣稱 `WriteBytes` 繞過寫入監看，但目前隔離版
+  `Machine.WriteBytes` 逐位元組呼叫 `Write8`；本次 `WatchWrites` 確實記下
+  DOS 緩衝區寫入。檔名與位移仍以 `ReadOp`／`FileOp` 為權威，監看事件與
+  讀後 RAM 是獨立交叉核對；不以一項工具註解代替實測。
+- 改用 `NAMES.TXT:0x00000C0C` 的既有 `draft` 譯文重建可丟棄 Ebitengine 預覽。
+  原文控制 PNG／中文 PNG SHA-256 依序仍為
+  `df65ae068485d5c785ce3130fb136bb781f4116e262238788fe10d8f2f0953e5`、
+  `65d808bcfdd6c5c2afc3be1c46166429cb113903aaa222c2e14b01b038df8463`；
+  安全區外零變更，兩欄變更2,752／1,860點。原型像素相同不代表來源鍵可忽略；
+  格式化顯示鍵、執行期背景與游標守門及其他卡片仍未知，規格016維持 DRAFT。
+- 重跑：於 Docker 唯讀掛載隔離 dosgolem、合法 DOS 目錄、此專案，僅本機
+  `workplace/reports/` 可寫，以目前 UID/GID 及無網路、資源上限執行
+  `go run /repo/tools/probe_card_load.go -root /game -inputs /out/goal059-ebiten.inputs.json -out /out/goal077-card-load-v4-a.json`
+  （第二次改為 `-b.json`），接著執行
+  `tools/check_card_load.py --inputs ... --first ... --second ... --flow-first ... --flow-second ...`。
+  預覽入口 `tools/prepare_card_preview.py` 另外必須提供 `--load-first`、
+  `--load-second`；完整 JSON、PNG 與原版像素只留本機忽略目錄。

@@ -3,7 +3,8 @@
 狀態：DRAFT；日期：2026-09-23。入口：[目標063](../goals/063-difficulty-card-text.md)、
 [目標074](../goals/074-difficulty-card-observation-repair.md)、
 [目標075](../goals/075-difficulty-card-source-to-pixels.md)、
-[目標076](../goals/076-difficulty-card-reversible-prototype.md)。
+[目標076](../goals/076-difficulty-card-reversible-prototype.md)、
+[目標077](../goals/077-difficulty-card-load-provenance.md)。
 
 ## 固定輸入與地址空間
 
@@ -14,7 +15,9 @@
 `GAME.TXT` SHA-256
 `67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a`；
 `LABELS.TXT` SHA-256
-`e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204`。
+`e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204`；
+`NAMES.TXT` SHA-256
+`4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061`。
 工具：隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`、
 `colonization-research:20260920-r2` 與 `tools/probe_difficulty_writes.go`。
 以下 `0x4...` 是 DOS 20-bit 線性記憶體位址；畫布座標為 320×200 邏輯像素，
@@ -25,7 +28,8 @@
 - confirmed：正常玩家滑鼠路徑的既有最終 RAM 中，`Discoverer` 位於線性
   `0x4CC6A`，`Easiest` 位於 `0x4DF90`。`Discoverer` 同時出現在 `GAME.TXT` 與
   `NAMES.TXT`；`Easiest` 出現在 `LABELS.TXT`。實際畫面 consumer 已由目標075追到，
-  但從哪個原版 TXT 載入 `Discoverer` 的檔案邊仍**未知**。
+  當時從哪個原版 TXT 載入 `Discoverer` 的檔案邊仍未知；
+  此項已由下方目標077的直接載入證據訂正。
 - confirmed：兩次獨立 dosgolem 重播於 2,980 萬步附近，在第一張卡片的
   原始畫布區出現 224 點差分，bbox `(141,45)–(182,58)`；最終完整 RAM、
   索引畫面、色盤與畫布雜湊一致。畫面可見 `Discoverer`／`Easiest`，
@@ -37,14 +41,15 @@
   於原始位址 `0E2D:11CF` 依序讀取 DOS 線性 `0x4CC6A..0x4CC74` 的
   `Discoverer` 與尾端 NUL；在步數 `29,813,172` 於同一原始位址讀取
   `0x4DF90..0x4DF97` 的 `Easiest` 與尾端 NUL。這是執行期來源讀取，
-  仍未證明文字究竟從 `GAME.TXT` 或 `NAMES.TXT` 載入。
+  當時尚未證明文字究竟從 `GAME.TXT` 或 `NAMES.TXT` 載入；
+  目標077現已確認此固定路徑來自 `NAMES.TXT`。
 - confirmed（修正後畫布寫入）：原始位址 `0D21:012C` 在第一張卡片區有292次
   值變更寫入，步數 `29,798,340..29,819,570`，bbox `(141,45)–(182,58)`；
   第一串讀取後、第二串讀取前有192次，第二串讀取後有100次。
   標題／提示讀寫位置也同時命中，證明單一監看分流沒有再丟掉原有觀測。
 - 目標075的雙次原版追蹤已把上述來源讀取連到第一張卡片的文字畫布寫入；
   原始位址與中間緩衝詳見下節。舊「可能只有靜態圖像」假說不再適用於這兩行。
-  `GAME.TXT` 與 `NAMES.TXT` 的同文譯稿仍不可任選為正式鍵。
+  同文譯稿不能僅憑文字相同任選為正式鍵；後續來源訂正見目標077。
 
 ## 目標075：第一張卡片的直接資料流與版面
 
@@ -73,7 +78,7 @@
 
 ## READY 前缺口
 
-須為固定版本建立格式化後的穩定顯示鍵與缺譯回退守門，驗證原版來源檔的載入邊、
+須為固定版本建立格式化後的穩定顯示鍵與缺譯回退守門，
 兩行有紋理背景的執行期可逆擷取、游標遮擋與欄位安全矩形；再依各自5／6像素原版
 墨跡高度測試中文字級、頂列／基線對齊及最長譯文。其餘難度卡片仍要逐張確認，
 不能外推第一張。只有這些守門可獨立核對時
@@ -112,10 +117,38 @@
   **不是**正式遊戲前端截圖，也沒有新增正常玩家路徑的中文顯示段數。
 - 此原型暫取 `GAME.TXT:0x00000A26` 與 `LABELS.TXT:0x000008A9` 的
   `draft` 譯文做視覺量測；第一個執行期來源也可能是 `NAMES.TXT`，因此
-  這兩個 TSV 候選不能直接升成正式顯示鍵。完整本機資料與兩張圖留在
+  當時不能直接升成正式顯示鍵。目標077已訂正稱號來源；本段保留
+  目標076原型的歷史輸入。完整本機資料與兩張圖留在
   `workplace/reports/goal076-card-{preview.json,control.png,zh.png,verify.json}`，
   不含於 Git。
 
-READY 仍缺：來源檔載入邊／穩定顯示鍵、執行期逐欄可逆擷取及游標／後續繪圖
+READY 仍缺：穩定顯示鍵、執行期逐欄可逆擷取及游標／後續繪圖
 回退、其他難度卡片與正常玩家路徑中文對照。沒有取得這些證據前，預覽程式不得
 接入正式 `live_menu.go` 或計入八段已顯示中文。
+
+## 目標077：原始 TXT 至第一張卡片執行期字串
+
+- confirmed：`NAMES.TXT` 位移 `0xC0C` 的 `Discoverer` 由 DOS `AH=3Fh`
+  在步數16,208,974 讀入線性 RAM `0x2B00E` 起；`LABELS.TXT` 位移 `0x8A9`
+  的 `Easiest` 在步數18,648,994 讀入 `0x2B0AB` 起。原版 `0E2D:1F76`
+  逐字讀取，`0E2D:1F86` 分別整理至 `0x2B00D`／`0x2B09B`；
+  `0E2D:09F4`／`09F5` 搬入 `0x249DC` 中間緩衝；`0E2D:11A5`
+  分別寫至第一張卡片執行期線性 RAM `0x4CC6A`／`0x4DF90`。
+  兩次獨立正常玩家冷啟動收據位元組相同。目標075已證明後續字形與像素鏈。
+- confirmed：此固定路徑 `GAME.TXT` 首次成功讀取在步數21,820,870，晚於
+  `Discoverer` 寫入 `0x4CC6A` 的步數16,215,523；所以同文的
+  `GAME.TXT:0x00000A26` 不是第一張卡片稱號來源。預覽資料已改取
+  `NAMES.TXT:0x00000C0C` 與 `LABELS.TXT:0x000008A9` 的 `draft` 譯文；
+  正式格式化顯示鍵與原文回退守門仍未定案。
+- confirmed（僅固定終點原型）：改鍵後 Ebitengine 對照圖仍逐像素通過，
+  原文控制圖與原版最近鄰放大相同，中文圖只在兩欄候選安全矩形變更；
+  候選中文字級仍按原版5／6像素墨跡分別取21／25px，沒有固定全域字級。
+  此項不證明任意時刻的背景擷取、游標遮擋、其他卡片或正式玩家路徑。
+
+本輪重播探針 `tools/probe_card_load.go`、獨立檢查器
+`tools/check_card_load.py`；完整收據僅在已忽略的
+`workplace/reports/goal077-card-load-v4-{a,b}.json`，SHA-256
+`580f2f92475a12db9c065a3476e20f4fd315f27521030ac794dedf7aa3b71790`。
+`DOS.Reads`／`FileOps` 給出檔案位移與目的位址；隔離版 dosgolem 的
+`Machine.WriteBytes` 實際逐位元組呼叫 `Write8`，本輪 `WatchWrites`
+也捕捉到讀入寫入，不採用舊註解所稱「繞過監看」作結論。

@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
-from check_card_flow import verify as verify_card_flow
+from check_card_load import verify as verify_card_load
 from prototype_overlay import cmap_coverage
 
 
@@ -17,11 +17,11 @@ FONT_SHA = "8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c"
 PALETTE_SHA = "762b10807954069aa97266465cff2d72be0d1da568b668a19d15c3a5d0524e82"
 FINAL_SHA = "6072d7cf64633f93d2ad86a363ad73cd586f24bdacff51b406a84c52354924ae"
 SOURCES = {
-    "GAME.TXT": "67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a",
+    "NAMES.TXT": "4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061",
     "LABELS.TXT": "e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204",
 }
 LINES = (
-    ("title", "GAME.TXT:0x00000A26", (138, 44, 186, 51), (141, 45, 182, 49), 21, 20, "before-first"),
+    ("title", "NAMES.TXT:0x00000C0C", (138, 44, 186, 51), (141, 45, 182, 49), 21, 20, "before-first"),
     ("subtitle", "LABELS.TXT:0x000008A9", (146, 52, 180, 60), (150, 53, 174, 58), 25, 24, "before-second"),
 )
 
@@ -41,7 +41,7 @@ def rect_bytes(canvas, rect):
 
 
 def prepare(args):
-    verify_card_flow(args.inputs, args.first, args.second)
+    verify_card_load(args.inputs, args.load_first, args.load_second, args.first, args.second)
     replay = json.loads(args.inputs.read_text(encoding="utf-8"))
     cursor = None
     held = set()
@@ -119,6 +119,7 @@ def prepare(args):
                        "background": base64.b64encode(rect_bytes(before, safe)).decode(),
                        "mask": base64.b64encode(mask.tobytes()).decode()})
     payload = {"prototype": True, "source_receipt_sha256": sha(first),
+               "source_load_receipt_sha256": sha(args.load_first.read_bytes()),
                "catalog_sha256": sha(args.catalog.read_bytes()), "font_sha256": FONT_SHA,
                "indexed": base64.b64encode(final).decode(), "palette": base64.b64encode(palette).decode(),
                "layers": layers}
@@ -133,6 +134,8 @@ if __name__ == "__main__":
     parser.add_argument("--first", type=Path, required=True)
     parser.add_argument("--second", type=Path, required=True)
     parser.add_argument("--inputs", type=Path, required=True)
+    parser.add_argument("--load-first", type=Path, required=True)
+    parser.add_argument("--load-second", type=Path, required=True)
     parser.add_argument("--indexed", type=Path, required=True)
     parser.add_argument("--palette", type=Path, required=True)
     parser.add_argument("--catalog", type=Path, required=True)

@@ -1049,3 +1049,28 @@
   Git 追蹤，沒有本輪研究／Ebitengine／字型容器殘留，也未發現 root-owned
   產物或錯誤掛載產生的 `.md` 目錄。原型與證據提交 `5a9ed9e` 已推送私有
   `origin/main`；Issue #6／#7／#26 已追加本輪證據與保持開啟的原因。
+
+## 2026-09-23：目標077閉合第一張難度卡片的原始 TXT 載入邊
+
+- 先以提交 `baa8eb5` 推送[目標077](docs/goals/077-difficulty-card-load-provenance.md)
+  至私有 `origin/main`。本輪沒有修改原版資料、dosgolem 上游或正式 `live_menu.go`。
+- 在隔離 dosgolem 上以相同九筆正常玩家輸入完成兩次3,200萬步冷啟動，
+  `tools/probe_card_load.go` 同時記錄 DOS `AH=3Fh` 讀檔、原版位元組讀寫與終點狀態；
+  `tools/check_card_load.py` 證明第一張卡片稱號經 `NAMES.TXT` 載入，副標經
+  `LABELS.TXT` 載入，並接上目標075的字形／像素鏈。同文的 `GAME.TXT`
+  在稱號寫入後才首次讀取，不能作此固定路徑的稱號來源。
+- 兩次新收據位元組一致、無截斷、最終 RAM／畫布／索引畫面／色盤與既有正常路徑
+  相同。訂正舊 dosgolem 註解對 `WriteBytes` 監看的錯誤推測：隔離版實作
+  確實逐位元組經 `Write8`，本輪實測 `WatchWrites` 有捕捉到 DOS 讀入。
+- 草稿 TSV 只調整三筆來源註記，譯文數量仍368筆；可丟棄預覽改以
+  `NAMES.TXT:0x00000C0C` 取 `發現者`，重新產出 Ebitengine 原文／中文對照圖。
+  逐像素檢查通過，兩欄外沒有變更，21／25px 分欄字級與譯文都未改。
+  `go vet`、dosgolem `internal/machine`／`oracle` 測試、368筆草稿來源驗證與
+  `tools/worklist.py verify` 通過。正式執行期背景、游標及其餘卡片仍缺，
+  規格016維持 DRAFT；八段已顯示中文計數不變，Issue #6／#7／#26 保持開放。
+- 反向對照從本機收據移除原版來源讀取事件，即使 `Discoverer` 同文仍在，
+  檢查器也拒絕其來源聲明；沒有把字串相同當作載入證據。
+- 原版收據及 PNG 只保留在已忽略的 `workplace/reports/`，新收據／圖均為目前
+  UID/GID `1000:1000`。Docker 檢查未發現本專案 root-owned 產物、錯誤掛載形成的
+  `.md` 目錄或本輪殘留容器；未觸碰其他專案容器。本輪文件、程式與驗證細節見
+  `RESEARCH-LOG.md`。
