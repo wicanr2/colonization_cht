@@ -2,6 +2,9 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前執行入口：[目標094](docs/goals/094-player-name-prompt-layout.md)：
+量測姓名固定提示的原版印前底圖、逐欄字級與顯示／輸入隔離；
+未達 READY 前不接正式中文覆蓋。
 最近完成入口：[目標093](docs/goals/093-player-name-source-and-input.md)：
 姓名提示與預設名的固定來源及動態印字、字元／退格／Enter 輸入均有
 雙次原版及 Ebitengine 控制收據；正式中文安全矩形與回退仍缺，
