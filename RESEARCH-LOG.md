@@ -3148,3 +3148,56 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   最長譯文與各種游標／缺鍵／錯版回退尚未建立 READY 規格。
   使用者 A／B 未選前不接正式前端、不改原版 RAM／規則／存檔，
   規格023的限定 CONFORMED 與十五段正式中文顯示數不變。
+
+## 2026-09-24：目標098法國首次介紹的兩節來源、印字與畫素
+
+- **問題與工具。** 原版姓名 Enter 後可見 `FRANCE`，但 `GAME.TXT`
+  內有相同標題兩節，單看檔案搜尋會把預讀的第二節誤當第一頁。
+  使用合法 DOS 原版 `GAME.TXT` SHA-256
+  `67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a`、
+  固定16筆輸入 SHA-256
+  `a48ae77b9f6a0c2bdb9b3512625d0c1c4786b1cb64b8deff4bdb603fe422d93e`、
+  隔離 dosgolem `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`、
+  `colonization-research:20260920-r2`／Go 1.24.13。原版僅唯讀；
+  工具 `tools/probe_goal098_intro.go` SHA-256
+  `e4783fcb6e7c2a4bd6c754e7da26493d92109aed645df9609beb2522d5ede1e3`。
+  檔案位移、DOS 20-bit 線性 RAM、實模式 `CS:IP`、320×200原版
+  索引畫布與1280×800 Ebitengine畫布分開記錄。
+- **已證實：兩節 bytes 與讀取。** 第一節 `GAME.TXT:0xB2DB–0xB641`
+  870 bytes，SHA-256 `8b9eec55083e64f4c45989631dbcd512b3019a978af5a84c7ad4e59ba0a2534b`；
+  第二節 `0xB641–0xB73E` 253 bytes，SHA-256
+  `78da983dc6a4bfc965e8ab616ec1bdd6dd2c18c8901fc2015c2e371c518d78ae`。
+  原版第一個 Enter 後，`GAME.TXT` 從檔案位移 `0xB200` 的512-byte讀取
+  將 A 節標記／標題／首字送至線性 `0x2B0DD`／`0x2B0F4`／`0x2B105`；
+  從 `0xB600` 的另一筆512-byte讀取預讀 B 節標記／標題至
+  `0x2B043`／`0x2B05A`。第二個 Enter 後重複讀取。預讀只證明 bytes
+  進入 RAM，不等於第二節已印在第一頁。
+- **已證實：實際印字與畫面。** `0D21:00C6` 逐字讀線性
+  `0x2A862`／`0x2A863`；第一頁794個字元 SHA-256
+  `7285983b0263b270b7e952a78aecc40e0fa682e45302ae088371b493da0a258b`，
+  第二次 Enter 後第二頁207個字元 SHA-256
+  `9018be96a5ab5eb08fcb830beaa493a6090b6aec2eecdd682594065d6a6971d9`。
+  原始控制標記及大括號去除後，兩節各與對應印字的非空格字元序列
+  相同；實際空格會因執行期折行而重排。`0D21:012C` 第一頁
+  13,412次改色、半開 bbox `(10,25)–(304,174)`，標題 y25–32、
+  正文13列 y45–173；第二頁3,438次、bbox `(10,70)–(308,129)`，
+  標題 y70–77、正文四列 y90–128。第二次 Enter 前65M與後70M／75M
+  畫面各自穩定；第一頁原版索引／色盤經最近鄰重建後，與目標093
+  真 Ebitengine 原文控制圖逐像素一致。B 的真視窗尚未核對。
+- **獨立與限制。** 雙次冷啟動第一頁 `intro-a.json`／`intro-b.json`
+  逐位元組相同；兩次輸入的觀測／無觀測控制在各檢查點的 CPU、
+  完整 RAM、索引、色盤、時間、開檔與二進位畫布相同。獨立驗證器
+  `tools/check_goal098_intro.py` SHA-256
+  `6867733ad415b2cf26c9392ca3bfdd09fca6c5ab67fbb28d6a2d5770a67090d1`，
+  附帶核對[雙語 TSV](text/nation-introduction.zh-Hant.tsv)兩筆來源、
+  明文及 `{}` 數量；TSV SHA-256
+  `288ace66ed177ab27750c40e11c1ab27e43259cf43a1d9ab0aac2b353af14d62`。
+  本機 `verified.json` PASS SHA-256
+  `509b61e6c91cdeb24823a22ffea909342ddad9bf6d9f38e55cea52b9bc4bcdef`。
+  固定檔案節至印字緩衝的每條搬運指令尚未逐步追蹤，故兩節作為
+  實際字串來源的關聯仍標**強推論**，不是單靠重複標題斷言。
+  原版內容屬動態印字，不是已烘入木紋圖像。現有畫素只支持
+  [規格025](docs/spec/025-first-nation-introduction-draft.md)的候選安全區；
+  字級、中文換行、第二頁真視窗及離頁仍未知。檢查的專案、
+  `/home/anr2/cht`、`/home/anr2`、`/tmp` 與既有工具映像未找到
+  固定字型 `Cubic_11.ttf`，不能以其他字型代替量測。

@@ -2,23 +2,28 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-目前執行入口：[目標098](docs/goals/098-first-nation-introduction-source.md)：
-先追首次國家介紹的長文來源、輸出事件及版面，不依賴姓名欄
-顯示取捨；Issue #30 保持開放。並行待決的
+最近完成入口：[目標098](docs/goals/098-first-nation-introduction-source.md)：
+法國首次介紹的 `GAME.TXT:@NATION1A`／`@NATION1B` 已由正常玩家
+路徑、雙次 dosgolem 與無觀測控制追至兩頁實際印字和原版畫布；
+[規格025](docs/spec/025-first-nation-introduction-draft.md)與
+[雙語草稿](text/nation-introduction.zh-Hant.tsv)已建。第一頁與既有真
+Ebitengine 原文圖逐像素一致，但第二頁真視窗、中文逐欄字級／換行、
+第三次 Enter／離頁仍未驗；規格保持 DRAFT、正式顯示仍十五段，
+Issue #30 保持開放。並行待決的
 [目標097](docs/goals/097-name-field-display-choice.md)已量得可編輯
 預設姓名欄的原版框線、墨跡、安全區及 `x`／退格／Enter 分支，
 本機 A 原名／B 中文佔位示意兩圖的 Ebitengine 差分已驗。
 B 的文字**不是已確認譯名**，使用者尚未選定是否只在未編輯
 預設值顯示中文；正式覆蓋、真實譯名及回退仍待定，Issue #29
 保持開放。
-最近完成入口：[目標096](docs/goals/096-player-name-prompt-runtime-guard.md)：
+前一完成入口：[目標096](docs/goals/096-player-name-prompt-runtime-guard.md)：
 姓名固定提示已由完整來源事件、當次多色畫布補片、游標與 Enter
 離頁守門接入正式輸出層；[規格023](docs/spec/023-player-name-screen-draft.md)
 先升 READY 後經 dosgolem 及真 Ebitengine 視窗同狀態驗收，
 限定 CONFORMED。正式中文顯示為十五段；可編輯姓名與首次國家介紹
 仍保持原文。下一工作入口是[Issue #29](https://github.com/wicanr2/colonization_cht/issues/29)
 未決的可編輯姓名欄中文顯示界線；[Issue #30](https://github.com/wicanr2/colonization_cht/issues/30)
-的首次國家介紹來源及長文排版仍待後續目標。開工前另寫並推送目標。
+的長文正式排版與翻頁回退仍待後續目標。開工前另寫並推送目標。
 最近完成入口：[目標095](docs/goals/095-player-name-input-and-overlay-gate.md)：
 真 Ebitengine 視窗從冷啟動抵達姓名畫面，實際 `x`／退格／Enter、
 標點拒絕與失焦不補送已同狀態驗收；鍵盤接線依
@@ -45,7 +50,8 @@ B 的文字**不是已確認譯名**，使用者尚未選定是否只在未編�
 另見[目標089](docs/goals/089-first-nation-card-runtime-guard-evidence.md)：
 第一張國家旗卡的兩欄游標遮擋、下欄左鍵與相鄰旗卡重繪已有雙次
 dosgolem 重播及無觀測控制。承接[目標088](docs/goals/088-first-nation-card-reversible-preview.md)
-兩欄本機 Ebitengine A／B 可逆原型；等待使用者確認暫定版式。
+兩欄本機 Ebitengine A／B 可逆原型；使用者後續已選第一張旗卡 A，
+但正式版仍待規格021 READY 與同狀態驗收。
 規格021仍為 DRAFT，尚未授權正式覆蓋。相鄰右上旗卡
 `France`／`Cooperation` 的原始 TXT 至畫布來源鏈已閉合，
 [規格022](docs/spec/022-neighbor-nation-card-red-text-draft.md) 仍為 DRAFT。
@@ -69,6 +75,10 @@ dosgolem 重播及無觀測控制。承接[目標088](docs/goals/088-first-natio
   於目標079後獨立處理。使用者看過原版／目前版／A／B 四格對照後，已明確
   選定 A：兩行分別34／38px、共同置中；排除 B 的左起點。正式實作限於兩欄，
   卡片與完成提示不變；通過同狀態驗證後才更新私有截圖。
+- 2026-09-24 使用者已從本機兩版對照選定**第一張國家旗卡** A：
+  「英格蘭：」21px、「移民」25px，貼近原版字高；排除 B 的25／29px。
+  此決定只解除規格021的視覺字級取捨，不自動擴張到相鄰旗卡、
+  其他畫面或正式顯示；後者仍須 READY 與同狀態驗收。
 - 2026-09-23 使用者選定 `COLONY.TXT` 殖民地名稱的顯示譯法為「中文名稱（原名，年份）」，
   無年份者為「中文名稱（原名）」。原始名稱、逗號與年份仍是穩定來源資料，不得用譯文參與
   查找、規則或存檔；尚未取得執行期命中或安全矩形。
@@ -98,10 +108,10 @@ dosgolem 重播及無觀測控制。承接[目標088](docs/goals/088-first-natio
 | 第一張難度卡片 | confirmed：稱號從 `NAMES.TXT:0x00000C0C`、副標從 `LABELS.TXT:0x000008A9` 載入，經原版緩衝與格式化印字路徑繪至畫布；`GAME.TXT` 同文不是此路徑稱號來源。規格017限定第一張卡片兩行為 CONFORMED：21／25px 逐欄字模、當次有紋理底圖、原文差分、游標及真實 TSV 缺鍵回退已接正式前端並與同輸入英文控制同狀態；其餘卡片仍屬規格016 DRAFT。 |
 | 第二張難度卡片 | confirmed：真 Ebitengine 視窗點擊 `(265,55)` 顯示 `EXPLORER:`／`Easy`，雙次 dosgolem 收據閉合 `NAMES.TXT:0xC18`／`LABELS.TXT:0x8B2` 至 RAM、格式化印字與原始畫布；墨跡高5／6像素、有紋理底圖。規格019限定兩行為 CONFORMED：「探險家／簡單」採21／25px逐欄字模，真視窗中文與英文控制原版同狀態；各欄缺譯／重複鍵及游標回退、錯版本拒絕與第一張卡片回歸均通過。規格016對其餘卡片仍為 DRAFT。 |
 | 國家選擇頁 | confirmed：正常滑鼠按下／放開難度頁完成區會開啟 `NATIONS.PIK`；16筆真 Ebitengine 視窗輸入抵達此頁，與同輸入英文控制原版同狀態。左側兩行 `Select`／`European Power` 已追溯至 `LABELS.TXT:0x8D3`／`0x8DB`、RAM、實模式輸出及安全矩形；[規格020](docs/spec/020-nation-heading-overlay.md)限定 CONFORMED：「選擇／歐洲國家」各38px，兩欄缺鍵／重複鍵、游標、按鍵及場景切換均逐欄安全回退，錯版在輸出前拒絕。其他國家頁文字仍未驗收。 |
-| 第一張國家旗卡紅字 | 目標085／087已證實 `NAMES.TXT:0x8EA`／`LABELS.TXT:0x8F2` 各自從 DOS 讀入到原版畫布的動態來源鏈。目標088以雙次冷啟動及無監看控制擷取當次印字前多色底圖，建立[text/nation-card-fragments.zh-Hant.tsv](text/nation-card-fragments.zh-Hant.tsv)兩筆來源固定草稿；Ebitengine 可丟棄原型 A 採21／25px較接近原版、B 採25／29px較易讀，均為「英格蘭：／移民」、原版紅字／黑影且安全區外零差異。目標089另已驗原版上、下欄游標各自遮擋、下欄左鍵不重繪及相鄰旗卡左鍵後兩欄重繪的負例；正式輸出層尚未回退驗收。A／B 待使用者選擇，[規格021](docs/spec/021-nation-card-red-text-draft.md)仍 DRAFT；其他旗卡與離頁場景未驗，不計入十五段正式顯示。 |
+| 第一張國家旗卡紅字 | 目標085／087已證實 `NAMES.TXT:0x8EA`／`LABELS.TXT:0x8F2` 各自從 DOS 讀入到原版畫布的動態來源鏈。目標088以雙次冷啟動及無監看控制擷取當次印字前多色底圖，建立[text/nation-card-fragments.zh-Hant.tsv](text/nation-card-fragments.zh-Hant.tsv)兩筆來源固定草稿；使用者已選 Ebitengine 可丟棄原型 A 的21／25px「英格蘭：／移民」紅字／黑影，排除 B 的25／29px。目標089另已驗原版上、下欄游標各自遮擋、下欄左鍵不重繪及相鄰旗卡左鍵後兩欄重繪的負例；正式輸出層尚未回退驗收。[規格021](docs/spec/021-nation-card-red-text-draft.md)仍 DRAFT；其他旗卡與離頁場景未驗，不計入十五段正式顯示。 |
 | 相鄰右上國家旗卡文字 | [目標090](docs/goals/090-neighbor-nation-card-source.md)證實 `NAMES.TXT:0x906` 的 `France` 與 `LABELS.TXT:0x8FF` 的 `Cooperation` 從原始 TXT、DOS／RAM 至右側畫布；[目標091](docs/goals/091-neighbor-nation-card-reversible-preview.md)取得右欄多色底圖、安全區及兩個本機 Ebitengine 候選逐像素 PASS。原版右欄為藍色索引9，不是左卡紅色12。[目標092](docs/goals/092-neighbor-card-runtime-and-nation-route.md)又驗上／下欄游標各自遮擋24／25點、再點右卡的短暫重繪、切回左卡及離頁負例；雙次冷啟動與無觀測控制同狀態。[規格022](docs/spec/022-neighbor-nation-card-red-text-draft.md)仍 DRAFT；字級未定案，正式前端逐欄回退未驗，不計入十五段正式顯示。 |
 | 選國後姓名畫面 | confirmed：右卡完成提示 `(65,184)` 由正常滑鼠路徑進入；`GAME.TXT:0xA7A` 完整提示行（可見字串 `0xA7C`）及 `NAMES.TXT:0xB4B` 預設姓名片段各有 DOS／RAM／`0D21:012C` 畫布來源鏈。目標094證實提示415點、多色印前底圖、安全矩形與38px字模；目標095真視窗驗 `x`、退格、Enter、標點拒絕與失焦不補送，[規格024](docs/spec/024-window-keyboard-input.md)限定 CONFORMED。目標096補足完整來源、開檔世代、游標與離頁守門，正式38px中文提示通過真視窗同狀態、缺鍵／缺字／錯版回退；[規格023](docs/spec/023-player-name-screen-draft.md)僅固定提示限定 CONFORMED，計入第十五段。目標097另量到姓名框 `(79,98)–(246,112)`、墨跡 `(82,101)–(164,110)` 及內部安全區 `(80,100)–(245,111)`（原版320×200半開座標）；A原名／B中文佔位示意的本機圖差分只在該區，未接正式前端。可編輯姓名資料、原版記憶體、規則與存檔不改；是否僅顯示譯名、真正譯法及逐欄正式回退尚未定案，[Issue #29](https://github.com/wicanr2/colonization_cht/issues/29)保持開放。 |
-| 首次國家介紹長文 | confirmed（限定可達性）：姓名畫面 Enter 後65M步可見 `FRANCE` 及國家介紹長文；輸入 `x` 再 Enter 與直接 Enter 的最終畫面相同但 RAM 不同，存檔語意未驗。原文 Ebitengine 控制圖逐像素 PASS；長文來源、翻譯與安全排版尚未知，列[Issue #30](https://github.com/wicanr2/colonization_cht/issues/30)。 |
+| 首次國家介紹長文 | confirmed：姓名畫面 Enter 後顯示 `GAME.TXT:@NATION1A` 第一頁，再按 Enter 顯示 `@NATION1B` 第二頁；兩節來源 bytes、DOS 讀入、原版印字與畫布均有雙次／無觀測控制收據，第一頁與既有 Ebitengine 原文圖逐像素一致。兩筆繁中 TSV 為 draft；規格025仍 DRAFT，安全區僅候選，字級／換行、第二頁真視窗及離頁未驗。原有 `x` 再 Enter 與直接 Enter 畫面相同但 RAM 不同，存檔語意未驗。[Issue #30](https://github.com/wicanr2/colonization_cht/issues/30) OPEN。 |
 | 完整可玩／正式發行 | 未驗證、未發布；正常玩家路徑目前驗至首段國家介紹，尚未確認介紹後操作、help 或實際遊玩。 |
 
 ## 工具與重播入口

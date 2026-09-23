@@ -1791,3 +1791,31 @@
   仍為 `DISABLED`。目標097原型與收據均由 UID/GID `1000:1000`
   持有；工作根未見 root-owned／誤建 `.md` 目錄，專案沒有
   執行中或停止的 Docker 容器。
+
+## 2026-09-24：目標098首次法國介紹兩頁來源與譯文草稿
+
+- 目標098先以 `2770aaa` 推送 PRIVATE 儲存庫。沿用 UID/GID
+  `1000:1000`、無網路且有限資源的既有研究／Python 容器，合法
+  DOS 原版只讀，隔離 dosgolem 提交
+  `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`；其 `upstream`
+  推送位址仍是 `DISABLED`。
+- `tools/probe_goal098_intro.go` 雙次重播首次 Enter 顯示的 A 頁，
+  另以第一次之後的正常 Enter 取得 B 頁；兩頁各有無觀測控制。
+  `tools/check_goal098_intro.py` 重跑 PASS，核對來源、預讀反例、
+  794／207字印字、CPU／完整 RAM／索引／色盤／時間、畫布與第一頁
+  既有 Ebitengine 原文圖。兩節譯稿新增於
+  [雙語 TSV](text/nation-introduction.zh-Hant.tsv)，原始段落 SHA、
+  正文非空格字元及 `{}` 強調數量通過獨立檢查；本機收據 SHA-256
+  `509b61e6c91cdeb24823a22ffea909342ddad9bf6d9f38e55cea52b9bc4bcdef`。
+  原版 PNG／JSON 只留已忽略 `workplace/reports/goal098-intro/`。
+- [規格025](docs/spec/025-first-nation-introduction-draft.md)維持
+  DRAFT：來源節至印字緩衝的完整搬運鏈仍是強推論；安全矩形只
+  候選，第二頁真視窗、第三次 Enter／離頁、中文逐欄字級／換行與
+  回退未驗。固定 Cubic 11 字型在本次檢查的既有本機位置與映像
+  未找到，未用替代字型偽裝量測；十五段正式中文顯示不變。
+- 同期使用者選定第一張國家旗卡 A 的「英格蘭：」21px／「移民」
+  25px，排除 B 的25／29px；已回填 `CONTEXT.md` 與規格021，
+  僅解除該卡視覺方向，不推及相鄰旗卡或直接升 READY。
+- 唯一工作清單由 `docs/worklist.json` 在 Docker 重新生成並
+  `tools/worklist.py verify` 通過；README 只新增穩定雙語語料入口，
+  不記逐輪命令。原版畫素與字型未新增 Git 截圖或資產。

@@ -1,6 +1,6 @@
 # 目標098：首次國家介紹長文的來源與畫面證據
 
-狀態：進行中；日期：2026-09-24。承接[目標093](093-player-name-source-and-input.md)、
+狀態：completed（來源與兩頁原版版面證據；正式中文顯示未完成）；日期：2026-09-24。承接[目標093](093-player-name-source-and-input.md)、
 [目標096](096-player-name-prompt-runtime-guard.md)與
 [目標097](097-name-field-display-choice.md)的正常玩家路徑，對應
 [Issue #30](https://github.com/wicanr2/colonization_cht/issues/30)。
@@ -51,3 +51,25 @@ RAM、原版輸出事件及320×200畫布的最小充分證據；來源不明則
 譯稿數量推論執行期覆蓋率。DRAFT 探針與可丟棄預覽不能進正式
 玩家路徑，DOSBox 只能作補充。目標097的姓名欄顯示選擇獨立保持
 待決；本輪不替使用者選 A 或 B。
+
+## 本輪結果與下一閘門
+
+- 目標文件先以 `2770aaa` 推送 PRIVATE `origin/main`。兩次獨立 dosgolem
+  冷啟動、無觀測控制及第二次 Enter 翻頁，閉合 `GAME.TXT` 的
+  `@NATION1A`／`@NATION1B` 兩節、DOS 讀檔、逐字印字與原版畫布。
+  第二節曾在第一頁預讀，但實際只在第二次 Enter 後印出；不能
+  將預讀誤判成第一頁內容。
+- [規格025](../spec/025-first-nation-introduction-draft.md)保留原版位移、
+  RAM／實模式位址、輸出相位、兩頁墨跡、安全區候選及未閉合事項。
+  [雙語 TSV](../../text/nation-introduction.zh-Hant.tsv)兩筆是可追溯
+  `draft`，不是正式覆蓋鍵。`tools/check_goal098_intro.py` 獨立核對
+  來源、譯稿、794／207字實際印字、兩頁畫素與原版同狀態控制，
+  本機 PASS 收據 SHA-256
+  `509b61e6c91cdeb24823a22ffea909342ddad9bf6d9f38e55cea52b9bc4bcdef`。
+- 第一頁原文畫素與既有真 Ebitengine 控制逐像素相同；第二頁仍缺
+  真視窗控制。已量得標題與正文原版墨跡，但候選安全矩形、
+  Cubic 11 實際字級、中文換行與第三次 Enter／離頁仍未驗。
+  在檢查的既有本機路徑及工具映像未找到先前固定 SHA-256 的
+  `Cubic_11.ttf`，本輪未改用其他字型冒充，亦未把 DRAFT 接正式前端。
+  Issue #30 與十五段正式顯示數保持不變；後續需先找回固定字型，
+  做逐欄可丟棄版面與真視窗翻頁／回退，才審查 READY。
