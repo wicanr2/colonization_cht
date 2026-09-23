@@ -1868,3 +1868,19 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
 - unknown（執行期與版面）：尚未驗證 `COLONY.TXT` 每筆名稱的畫面輸出、最大同時可見數、中文安全
   矩形、字級或基線。原始名稱檔頭的23字元儲存限制不證實中文覆蓋的可用版面；未來須依欄位量測，
   不得套用固定字級。
+
+## 2026-09-23：目標073殖民地名稱譯稿完成收據
+
+- confirmed（來源與格式）：`build_colony_bilingual.py` 從固定 ZIP 唯讀重建173列，核對封存檔與
+  `COLONY.TXT` SHA、CRLF、ENGLISH／FRENCH／SPANISH／DUTCH 四個章節、各自36／66／39／32筆、
+  `名稱`或`名稱,四位年份`、章節與行首位置、原始資料行 SHA。它拒絕未知章節、複合資料、重複鍵、
+  缺譯或不符「中文名稱（原名，年份）」格式的譯文。
+- confirmed（回歸）：六項無原版單元測試覆蓋指紋、複合資料、年份、原名與中文前綴；Docker 以唯讀
+  ZIP 暫時解包重跑40項測試，並通過368筆主譯稿、24則help、163篇百科、7則README與173筆名稱
+  的固定來源驗證。
+- confirmed（字型字元）：`rich2-py:latest` 以 Cubic 11 cmap 審核的
+  `workplace/reports/goal073-colony-review.json` 顯示 `source_and_format_passed: 173`、
+  `rows_with_missing_glyphs: 0`。此檢查不載入字級；它不是排版或覆蓋驗收。
+- unknown（執行期與版面）：`runtime_display_verified` 與 `per_field_font_selection_verified` 都為 false。
+  沒有名稱輸出事件、欄位安全矩形、原版字級／基線、Ebitengine畫面或正常玩家路徑；173筆不計入
+  已顯示中文或全文中文化完成度。

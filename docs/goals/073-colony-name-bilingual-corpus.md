@@ -1,6 +1,6 @@
 # 目標073：殖民地預設名稱雙語譯稿
 
-狀態：planned；日期：2026-09-23。對應 Issue [#7](https://github.com/wicanr2/colonization_cht/issues/7) 與 [#27](https://github.com/wicanr2/colonization_cht/issues/27)。
+狀態：completed；日期：2026-09-23。對應 Issue [#7](https://github.com/wicanr2/colonization_cht/issues/7) 與 [#27](https://github.com/wicanr2/colonization_cht/issues/27)。
 
 ## 範圍
 
@@ -33,4 +33,15 @@
    此字型檢查不設定全域顯示字級：日後每個真正覆蓋欄位仍須依原版文字量測、安全矩形與最長譯文
    選定個別中文字級。
 
-本目標完成時只可宣稱173筆可追溯 `draft`，不能宣稱名稱已在畫面替換或已有可用中文字級。
+## 完成收據
+
+- `text/colony-bilingual.tsv` 已由唯讀 ZIP 重建173筆 `draft`。建立器鎖定封存檔、成員檔、
+  CRLF、四個章節、173筆計數、行首／片段 SHA、原名、年份與使用者指定的全形括號格式；
+  不符即拒絕。
+- 六項無原版單元測試及主譯稿、help、百科、README、殖民地名稱合計40項回歸通過。Docker 另以
+  唯讀 ZIP 暫時解包，重驗368筆主譯稿、24則help、163篇百科、7則README與173筆名稱來源。
+- `rich2-py:latest` 的本機忽略收據 `workplace/reports/goal073-colony-review.json` 顯示
+  `source_and_format_passed: 173`、`rows_with_missing_glyphs: 0`。報告沒有設定字級，並明示
+  `per_field_font_selection_verified: false` 與 `runtime_display_verified: false`。
+
+本目標只可宣稱173筆可追溯 `draft`，不能宣稱名稱已在畫面替換或已有可用中文字級。
