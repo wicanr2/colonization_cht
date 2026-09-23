@@ -2259,3 +2259,60 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   使用者看四格圖判斷。規格018維持 DRAFT、Issue #28 保持開放，正式
   `tools/live_menu.go` 與現行私有截圖沒有修改。這輪只檢查同頁既有
   完成提示24px、第一張卡片稱號／副標21／25px；沒有推論全畫面固定字級。
+
+## 2026-09-23：目標081第二張難度卡片來源至畫素
+
+- 問題與固定輸入：第一張卡片已正式中文化，但第二張的來源鍵及畫面事件
+  尚無證據。合法 DOS `OPENING.EXE`、`VICEROY.EXE`、`GAME.TXT`、
+  `NAMES.TXT`、`LABELS.TXT` SHA-256 見規格016首節；隔離 dosgolem 提交
+  `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`，Go 1.24.13、
+  `colonization-research:20260920-r2` image ID
+  `sha256:5d99f8754e9f9099b7f263268c485c73043aee1a9d9d29231417ccb5b5da02e1`。
+  Ebitengine 2.9.9／Xvfb 使用既有
+  `psychicwar-go-ebiten:latest` image ID
+  `sha256:083e45e6bc0f01ca46ba0774581572c80a607120431b530de72cdd6ffb36f2f7`；
+  獨立驗證用 Pillow 12.3.0。
+- confirmed（玩家輸入）：固定九筆真視窗輸入抵達難度頁後，受控
+  `move(265,55)` 本身不切卡，`press`／`release` 後藍框移到第二張卡片，
+  原版顯示 `EXPLORER:`／`Easy`。另以真 Ebitengine 視窗及 xdotool
+  從冷啟動送鍵／滑鼠取得12筆實際輸入；此輸入 SHA-256
+  `490584a346fdcbb560fc4c9fb933efa0ac720c0a427fdd90fb31cb3b54ce5922`。
+  真視窗中文與同輸入無觀測英文控制在1億步的 CPU 暫存器、完整 RAM、
+  原始索引畫面、色盤、ticks／cycles 完全相同；終點索引畫面也與
+  4,000萬步受控原文點擊相同。既有中文差異只在舊標題／完成提示安全區
+  5,048個輸出像素，第二張卡片本身仍是原文。本機真視窗截圖 SHA-256
+  `e878be186529690ae7cbcfd3d2351c8db35adee7bc94885a82afe51428895fec`，
+  含原版像素，不入 Git。
+- confirmed（檔案位移 → DOS 20-bit 線性 RAM → 原始實模式 `CS:IP`）：
+  `NAMES.TXT:0xC18` 的 `Explorer` 隨 DOS `AH=3Fh` 於步16,208,974
+  從檔案位移3072起的512-byte區塊讀入 `0x2B01A`；原版 `0E2D:1F76`
+  逐字讀 `Explorer\r`，`0E2D:11A1/11A5` 於步16,217,289／292 寫到
+  來源 RAM `0x4CC75`。`LABELS.TXT:0x8B2` 的 `Easy` 於步18,648,994
+  讀入 `0x2B0B4`；`0E2D:1F76` 逐字讀 `Easy\r`，`0E2D:11A5`
+  於步18,684,475 寫到 `0x4DF98`。`tools/probe_card_load.go -second`
+  雙次32M步收據位元組相同，SHA-256
+  `63cdd7305a8901bca903cbff090e3a9033df29c44d06c17d1a96f8320c813e20`；
+  回退預設模式時仍逐位元組重生目標077第一張卡片舊收據，未破壞原探針。
+- confirmed（原始 `CS:IP` → 畫布）：第二張卡片點擊後，`0E2D:11CF`
+  各三次讀取 `0x4CC75` 的 `Explorer\0` 與 `0x4DF98` 的 `Easy\0`；
+  `0D21:00C6` 從局部副本 `0x2A718` 各兩次讀到實際顯示
+  `EXPLORER:\0`／`Easy\0`，一共三輪重畫。`0D21:012C`
+  每輪對稱號／副標各有156／68次原始畫布值變更寫入，色號0／9。
+  精確印字前後快照全畫布差分為134／55點，bbox（含終點）
+  `(250,45)–(283,49)`／`(260,53)–(275,58)`；安全候選半開
+  `(247,44)–(287,51)`／`(256,52)–(279,60)` 無框外差分，
+  各有65種原版底圖色號。終點索引畫面在兩欄安全區與印字後畫布相同。
+  這些座標是320×200邏輯像素，字高為5／6原始像素，不是字型基線。
+  `tools/probe_second_card_output.go` 雙次40M步收據位元組相同，SHA-256
+  `ba7c3e43d047d94797eed53854223071628dd74387cff81ff3e23c51f89423f4`；
+  與同輸入無觀測控制的 CPU、完整 RAM、原始索引畫面、色盤、ticks／cycles
+  完全相同。第一版探針沿用第一張卡片的緩衝位址而零命中；擴大觀測後
+  證實第二張走 `0x2A718`，舊零命中已訂正，不能當成「沒有緩衝」的證據。
+- 獨立核對與限制：`tools/check_second_card_output.py` 對固定原版檔案、
+  雙次載入／輸出、來源讀取／目標寫入、格式化位元組、文字像素、背景、
+  游標僅移入反例、真視窗點擊及英文控制逐項檢查；本機
+  `workplace/reports/goal081-second-card/verification.json` SHA-256
+  `a1a6c7e19dcb062e4131332802030764bb810ebf26ecece607b67e2fafde6b45`。
+  第二張卡片譯稿「探險家／簡單」仍 DRAFT：尚無欄位專屬字模、執行期
+  可逆背景與游標回退、真實缺譯／重複鍵反例或正式中文 Ebitengine 驗收。
+  本輪不是新 CONFORMED 覆蓋，已顯示中文仍十段。

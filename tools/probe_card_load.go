@@ -83,6 +83,7 @@ func main() {
 	root := flag.String("root", "/game", "唯讀原版根目錄")
 	inputs := flag.String("inputs", "/out/goal059-ebiten.inputs.json", "正常玩家輸入收據")
 	out := flag.String("out", "/out/goal077-card-load.json", "本機研究收據")
+	second := flag.Bool("second", false, "目標081：只追第二張卡片的 Explorer／Easy 載入邊")
 	flag.Parse()
 	versions := map[string]string{
 		"OPENING.EXE": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
@@ -100,6 +101,12 @@ func main() {
 		{Name: "GAME.TXT", FileOffset: 0xA26, SourceSHA: versions["GAME.TXT"], Target: 0x4CC6A, Text: []byte("Discoverer")},
 		{Name: "NAMES.TXT", FileOffset: 0xC0C, SourceSHA: versions["NAMES.TXT"], Target: 0x4CC6A, Text: []byte("Discoverer")},
 		{Name: "LABELS.TXT", FileOffset: 0x8A9, SourceSHA: versions["LABELS.TXT"], Target: 0x4DF90, Text: []byte("Easiest")},
+	}
+	if *second {
+		candidates = []candidate{
+			{Name: "NAMES.TXT", FileOffset: 0xC18, SourceSHA: versions["NAMES.TXT"], Target: 0x4CC75, Text: []byte("Explorer")},
+			{Name: "LABELS.TXT", FileOffset: 0x8B2, SourceSHA: versions["LABELS.TXT"], Target: 0x4DF98, Text: []byte("Easy")},
+		}
 	}
 	for i := range candidates {
 		c := &candidates[i]
@@ -143,12 +150,19 @@ func main() {
 		sourceReads = append(sourceReads, loadSourceRead{Step: m.Steps,
 			Site: fmt.Sprintf("%04X:%04X", cs, ip), Linear: a, Value: value})
 	})
-	m.WatchWrites(149980, 0x4DF97, func(a uint32, old, value uint8) {
+	watchEnd := uint32(0x4DF97)
+	if *second {
+		watchEnd = 0x4DF9C
+	}
+	m.WatchWrites(149980, watchEnd, func(a uint32, old, value uint8) {
 		intermediate := 149980 <= a && a <= 149990 &&
 			(titleWindow(m.Steps) || subtitleWindow(m.Steps))
 		buffer := titleWindow(m.Steps) && 176130 <= a && a <= 176170 ||
 			subtitleWindow(m.Steps) && 176265 <= a && a <= 176320
 		target := 0x4CC6A <= a && a <= 0x4CC74 || 0x4DF90 <= a && a <= 0x4DF97
+		if *second {
+			target = 0x4CC75 <= a && a <= 0x4CC7D || 0x4DF98 <= a && a <= 0x4DF9C
+		}
 		if !(intermediate || buffer || target) {
 			return
 		}
@@ -237,8 +251,16 @@ func main() {
 	for m.Steps < end && !d.Exited && !m.CPU.Halted {
 		step()
 	}
+	version := "goal077-card-load-v4"
+	titleStart, titleEnd := uint32(0x4CC6A), uint32(0x4CC74)
+	subtitleStart, subtitleEnd := uint32(0x4DF90), uint32(0x4DF97)
+	if *second {
+		version = "goal081-second-card-load-v1"
+		titleStart, titleEnd = 0x4CC75, 0x4CC7D
+		subtitleStart, subtitleEnd = 0x4DF98, 0x4DF9D
+	}
 	result := map[string]any{
-		"version": "goal077-card-load-v4", "end": m.Steps, "exited": d.Exited,
+		"version": version, "end": m.Steps, "exited": d.Exited,
 		"input_hashes": versions, "input_sha256": digest(data(*inputs)),
 		"dos_address_space":  "real-mode CS:IP and 20-bit linear RAM",
 		"file_address_space": "DOS AH=3Fh file offset, DS:DX destination",
@@ -246,8 +268,8 @@ func main() {
 		"target_writes": writes, "writes_truncated": watchTruncated,
 		"source_reads": sourceReads, "reads_truncated": readTruncated,
 		"opened":              d.Opened,
-		"target_title_hex":    fmt.Sprintf("%x", m.Mem[0x4CC6A:0x4CC74]),
-		"target_subtitle_hex": fmt.Sprintf("%x", m.Mem[0x4DF90:0x4DF97]),
+		"target_title_hex":    fmt.Sprintf("%x", m.Mem[titleStart:titleEnd]),
+		"target_subtitle_hex": fmt.Sprintf("%x", m.Mem[subtitleStart:subtitleEnd]),
 		"memory_sha256":       digest(m.Mem),
 		"canvas_sha256":       digest(m.Mem[canvas : canvas+64000]),
 		"indexed_sha256":      digest(m.Indexed()), "palette_sha256": digest(m.DAC[:]),

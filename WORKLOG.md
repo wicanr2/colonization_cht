@@ -1161,3 +1161,38 @@
   `git diff --check` 通過。本輪產物皆為目前 UID/GID `1000:1000`；
   專案內未見 root-owned 項目或誤掛形成的 `.md` 目錄。三個相關映像的
   容器檢查無執行中或已停止殘留；沒有清理其他專案資源。
+
+## 2026-09-23：目標081第二張難度卡片原文輸出鏈
+
+- 前輪目標080有實質進展；Issue #28 的標題 A／B 視覺選擇仍待使用者，
+  本輪不碰該正式版式。先以提交 `d3a2b85` 將[目標081](docs/goals/081-second-difficulty-card-output-evidence.md)
+  推送私有 `origin/main`，再執行取證。採用復古逆向技能的證據分級與
+  規格停止線，並按知識路由重查 dosgolem、文件與工作清單入口。
+- `tools/prepare_second_card_inputs.py` 從已驗九筆真視窗輸入生成控制、
+  只移入及點擊第二張卡片三組本機受控重播；僅點擊使原版顯示
+  `EXPLORER:`／`Easy`。`tools/probe_second_card_output.go` 雙次重播、
+  `tools/probe_card_load.go -second` 雙次重播閉合來源檔到畫素；
+  第一張卡片的舊載入探針預設結果逐位元組不變。
+- `tools/probe_second_card_window.sh` 另以 Xvfb 真 Ebitengine 視窗
+  實際滑鼠點擊第二張卡片，記錄12筆輸入及本機截圖；同輸入英文控制
+  原版 CPU／RAM／索引畫面／色盤／時間一致，終點與受控原版索引畫面
+  相同。`tools/check_second_card_output.py` 驗證兩欄印字前後差分、
+  格式化文字、可逆紋理背景和真視窗顯示；完整指紋與地址空間見
+  [研究紀錄](RESEARCH-LOG.md)。正式 `tools/live_menu.go`、既有私有
+  截圖與原版檔案都沒有修改，中文顯示仍十段。
+- 第一個 Go 建置命令在既有研究映像使用登入 shell，PATH 被 shell
+  重設而找不到 `go`；改用同一映像的非登入 `sh -c` 後乾淨重跑成功，
+  不是專案程式缺陷。第一版輸出探針誤沿用第一張卡片緩衝位址，
+  擴大只讀觀測後找到第二張的 `0x2A718`，保留舊收據但不採用
+  「零緩衝讀取」結論。
+- 第二張卡片兩筆 TSV 註記已訂正為「原文輸出已證實、中文仍待驗」。
+  規格016保持 DRAFT，尚缺逐欄中文字模、游標與缺譯回退、正式中文
+  真視窗驗收；其餘卡片、help 與完整遊玩仍未完成。所有原始收據、
+  真視窗 PNG、執行檔與原版位元組留在 gitignore 的
+  `workplace/reports/goal081-second-card/`，未加入 Git。
+- 提交前在既有容器映像重生並驗證 `WORKLIST.md`、Python／Shell／Go
+  語法與格式；368筆 TSV 來源指紋及控制符號驗證通過。完整畫面檢查
+  首次因將原版掛載根誤當 `COLONIZE` 子目錄而正確 SKIP（77），
+  以實際唯讀 `/game/SMColoni/COLONIZE` 重跑通過，未更換工具或資料。
+  私有 Issue #28 已核對含使用者指定的原版風格重排與逐欄字級要求，
+  保持下一階段開放，不另開重複項。
