@@ -1,4 +1,4 @@
-// 目標078可丟棄探針：只在輸出合成層觀測第一張難度卡片的執行期背景與回退。
+// 目標078／082可丟棄探針：只在輸出合成層觀測指定難度卡片的執行期背景與回退。
 // 不修改原版 RAM、畫布、輸入資料或正式 live_menu.go。
 package main
 
@@ -27,6 +27,7 @@ type runtimeInput struct {
 }
 type runtimeReplay struct {
 	Inputs []runtimeInput `json:"inputs"`
+	End    uint64         `json:"end"`
 }
 type runtimePreview struct {
 	Prototype               bool   `json:"prototype"`
@@ -111,6 +112,7 @@ func main() {
 	out := flag.String("out", "/out/goal078-card-runtime", "本機報告與 PNG 前綴")
 	hover := flag.Bool("hover", false, "在卡片完成後移入再移出游標")
 	control := flag.Bool("control", false, "不註冊觀測與合成的原版狀態對照")
+	second := flag.Bool("second", false, "目標082：以固定點擊輸入觀測第二張卡片")
 	flag.Parse()
 	versions := map[string]string{
 		"OPENING.EXE": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
@@ -125,14 +127,20 @@ func main() {
 		}
 	}
 	inputData := read(*inputs)
-	if digest(inputData) != "51837a0ed11cfcc316b4e2c9dce7064403cafdd0c1af2efecf59f30319eb5efc" {
+	inputSHA := "51837a0ed11cfcc316b4e2c9dce7064403cafdd0c1af2efecf59f30319eb5efc"
+	loadReceiptSHA := "580f2f92475a12db9c065a3476e20f4fd315f27521030ac794dedf7aa3b71790"
+	if *second {
+		inputSHA = "7e89bf0edabb8b26df5168342bfd42226b7a467b8e7c8abdab87e83275a32e7e"
+		loadReceiptSHA = "63cdd7305a8901bca903cbff090e3a9033df29c44d06c17d1a96f8320c813e20"
+	}
+	if digest(inputData) != inputSHA {
 		panic("正常玩家輸入版本不符")
 	}
 	var replay runtimeReplay
 	need(json.Unmarshal(inputData, &replay))
 	var preview runtimePreview
 	need(json.Unmarshal(read(*previewPath), &preview))
-	if !preview.Prototype || preview.SourceLoadReceiptSHA256 != "580f2f92475a12db9c065a3476e20f4fd315f27521030ac794dedf7aa3b71790" ||
+	if !preview.Prototype || preview.SourceLoadReceiptSHA256 != loadReceiptSHA ||
 		preview.CatalogSHA256 != digest(read(*catalogPath)) ||
 		preview.FontSHA256 != "8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c" ||
 		len(preview.Layers) != 2 {
@@ -143,6 +151,14 @@ func main() {
 			safe: image.Rect(138, 44, 186, 51), bbox: [4]int{141, 45, 182, 49}, diffCount: 164},
 		{name: "subtitle", key: "LABELS.TXT:0x000008A9", source: "Easiest", linear: 0x4df90,
 			safe: image.Rect(146, 52, 180, 60), bbox: [4]int{150, 53, 174, 58}, diffCount: 83},
+	}
+	if *second {
+		fields = []*cardField{
+			{name: "title", key: "NAMES.TXT:0x00000C18", source: "Explorer", linear: 0x4cc75,
+				safe: image.Rect(247, 44, 287, 51), bbox: [4]int{250, 45, 283, 49}, diffCount: 134},
+			{name: "subtitle", key: "LABELS.TXT:0x000008B2", source: "Easy", linear: 0x4df98,
+				safe: image.Rect(256, 52, 279, 60), bbox: [4]int{260, 53, 275, 58}, diffCount: 55},
+		}
 	}
 	for i, layer := range preview.Layers {
 		field := fields[i]
@@ -173,7 +189,11 @@ func main() {
 	m.SetSoundBlasterPro(true)
 	canvas := func() []byte { return m.Mem[0x2cae0 : 0x2cae0+64000] }
 	if !*control {
-		m.WatchReads(0x4cc6a, 0x4df97, func(address uint32, _ uint8) {
+		watchEnd := uint32(0x4df97)
+		if *second {
+			watchEnd = 0x4df9d
+		}
+		m.WatchReads(0x4cc6a, watchEnd, func(address uint32, _ uint8) {
 			cs, ip := m.CPU.OpAddr()
 			if cs != 0x0e2d || ip != 0x11cf || m.VideoMode() != 0x13 {
 				return
@@ -203,7 +223,11 @@ func main() {
 	negativePixels := map[string]bool{}
 	if !*control {
 		m.SetOnFrame(func() {
-			if m.Steps < 29700000 {
+			frameStart := uint64(29700000)
+			if *second {
+				frameStart = 32000000
+			}
+			if m.Steps < frameStart {
 				return
 			}
 			for _, field := range fields {
@@ -224,7 +248,11 @@ func main() {
 			}
 			layers := make([]overlay.Layer, len(fields))
 			sourceValid := make(map[string]bool, len(fields))
-			cursorGuard := 112 <= int(d.Mouse.X) && int(d.Mouse.X) < 212 &&
+			cursorMinX, cursorMaxX := 112, 212
+			if *second {
+				cursorMinX, cursorMaxX = 225, 304
+			}
+			cursorGuard := cursorMinX <= int(d.Mouse.X) && int(d.Mouse.X) < cursorMaxX &&
 				24 <= int(d.Mouse.Y) && int(d.Mouse.Y) < 80
 			for i, field := range fields {
 				p := int(field.linear)
@@ -295,7 +323,7 @@ func main() {
 				negative["source-or-context-changed"] = missingTranslationResults[0].Reason
 				negativePixels["source-or-context-changed"] = bytes.Equal(missingTranslationFrame.Pix, base.Pix)
 			}
-			if m.Steps >= 29700000 {
+			if m.Steps >= frameStart {
 				record := map[string]any{"step": m.Steps, "mouse": [3]uint16{d.Mouse.X, d.Mouse.Y, d.Mouse.Buttons},
 					"canvas_sha256": digest(canvas()), "indexed_sha256": digest(indexed), "palette_sha256": digest(m.DAC[:]),
 					"reasons": reasons, "unguarded_reasons": unguardedReasons,
@@ -328,13 +356,17 @@ func main() {
 		}
 	}
 	step := func() { need(m.Step()) }
-	end := uint64(32000000)
+	baseEnd := uint64(32000000)
+	if *second {
+		baseEnd = 40000000
+	}
+	end := baseEnd
 	if *hover {
-		end = 40000000
+		end = baseEnd + 8000000
 	}
 	var prior uint64
 	for _, event := range replay.Inputs {
-		if event.Step < prior || event.Step > 32000000 || event.Button < 0 || event.Button > 2 ||
+		if event.Step < prior || event.Step > baseEnd || event.Button < 0 || event.Button > 2 ||
 			(event.Kind == "move" && (event.X < 0 || event.X >= 320 || event.Y < 0 || event.Y >= 200)) {
 			panic("玩家輸入收據不符")
 		}
@@ -345,11 +377,15 @@ func main() {
 		prior = event.Step
 	}
 	if *hover {
-		for m.Steps < 32000000 {
+		for m.Steps < baseEnd {
 			step()
 		}
-		d.MoveMouse(160, 48)
-		for m.Steps < 36000000 {
+		hoverX, hoverY := 160, 48
+		if *second {
+			hoverX, hoverY = 265, 55
+		}
+		d.MoveMouse(hoverX, hoverY)
+		for m.Steps < baseEnd+4000000 {
 			step()
 		}
 		d.MoveMouse(16, 16)
@@ -381,6 +417,10 @@ func main() {
 		"memory_sha256":                      digest(m.Mem), "canvas_sha256": digest(canvas()),
 		"indexed_sha256": digest(m.Indexed()), "palette_sha256": digest(m.DAC[:]),
 		"limitations": "可丟棄執行期探針；此路徑游標確實變更索引畫面，但座標外包不是任意游標形狀的精確界線；不授權正式覆蓋"}
+	if *second {
+		report["version"] = "goal082-second-card-runtime-v1"
+		report["variant_second"] = true
+	}
 	encoded, err := json.MarshalIndent(report, "", "  ")
 	need(err)
 	need(os.WriteFile(*out+".json", append(encoded, '\n'), 0644))

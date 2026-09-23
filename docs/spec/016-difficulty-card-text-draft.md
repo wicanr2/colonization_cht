@@ -7,8 +7,10 @@
 [目標077](../goals/077-difficulty-card-load-provenance.md)、
 [目標078](../goals/078-difficulty-card-runtime-guard.md)。
 第一張卡片兩行已由[規格017](017-first-difficulty-card-overlay.md)限定標為
-CONFORMED；本規格對其餘卡片仍為 DRAFT。下文按目標當時證據保留研究歷史，
-「未接正式前端」只描述當時狀態，不可覆蓋規格017的現況。
+CONFORMED；第二張卡片兩行亦已由[規格019](019-second-difficulty-card-overlay.md)
+限定標為 CONFORMED。本規格對第三至第五張卡片仍為
+DRAFT。下文按目標當時證據保留研究歷史，
+「未接正式前端」只描述當時狀態，不可覆蓋規格017／019的現況。
 
 ## 固定輸入與地址空間
 

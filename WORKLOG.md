@@ -1202,3 +1202,38 @@
   原版檔案、畫面或本機收據。驗證收據為目前 UID/GID `1000:1000`；
   專案內無 root-owned 項目或誤掛成 `.md` 目錄，三個相關映像均無
   執行中或已停止的殘留容器。
+
+## 2026-09-23：目標082第二張難度卡片限定正式覆蓋
+
+- 先提交並推送[目標082](docs/goals/082-second-difficulty-card-overlay.md)；
+  依復古遊戲逆向技能及知識路由先建立可丟棄預覽、原版與執行期反例，
+  再將[規格019](docs/spec/019-second-difficulty-card-overlay.md)升至限定 READY。
+  Issue #28 已明列使用者要求的原版風格重排與逐欄字級，保持下一階段開放；
+  本輪不改難度標題正式版式，也不更新既有含原版像素的私有截圖。
+- `tools/prepare_second_card_preview.py` 從固定目標081原版快照與
+  真實 TSV 量測稱號21px／副標25px，Ebitengine 原文／中文對照在兩個
+  安全區外零差異。`tools/probe_card_runtime.go -second` 雙次重播位元組相同，
+  已證實當次背景、格式化顯示鍵、游標與滑鼠按鍵回退；
+  `tools/check_second_card_runtime.py` 獨立檢查 PASS。
+- `tools/live_menu.go` 已將第二張卡片的來源、格式化緩衝、欄位安全區及
+  游標守門接入正式輸出層；`tools/bake_card_fonts.py` 逐欄烘製本機字模。
+  真 Ebitengine 視窗由冷啟動實際點選第二張卡片，與同輸入英文控制的
+  CPU／RAM／原版畫面／色盤／時間一致；新中文只在兩個核准區。
+  真 TSV 各欄缺鍵／重複鍵及游標進出八組反例由
+  `tools/verify_goal082_replays.py` 判為 PASS。第一張卡片的 PNG、索引、
+  色盤及完整 RAM 與前輪逐位元組相同；錯版本暫存反例在啟動前拒絕。
+- 初次建置因使用了不存在的 `Rectangle.Contains` 未通過編譯，改用
+  `Point.In` 後通過；Ebitengine 建置初次未掛固定 Go 模組快取而嘗試
+  網路，按既有視窗規格掛載唯讀版本快取後於相同映像重跑成功。
+  錯版本測試初次在研究映像缺圖形函式庫、第二次未設 DISPLAY；
+  改在既有 Ebitengine 映像的受控 Xvfb 中執行才取得有效 PASS。
+  這些是建置／驗證環境與測試碼修正，不是原版遊戲缺陷。
+- 已顯示中文限於十二段；第三至第五張卡片、help、標題新版式及完整
+  玩家版仍未驗。固定雜湊、工具版本、位址空間與證據界線見
+  [研究紀錄](RESEARCH-LOG.md)。原版畫面與字型都留在 gitignore 的
+  `workplace/`，不納入 Git 或公開發行。
+- 收尾以固定研究映像重生並核對 `WORKLIST.md`、368筆主譯稿原文指紋與
+  控制碼、Python語法、Shell語法及 Go 格式；`git diff --check` 通過。
+  本輪產物和工作目錄均為目前 UID/GID `1000:1000`；專案內未見
+  root-owned 項目或誤掛形成的 `.md` 目錄。相關一次性 Docker 容器
+  無執行中或已停止殘留，未清理其他專案資源。

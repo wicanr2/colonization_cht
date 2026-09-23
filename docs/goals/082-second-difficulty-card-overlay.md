@@ -1,6 +1,6 @@
 # 目標082：第二張難度卡片的逐欄中文覆蓋
 
-狀態：進行中；日期：2026-09-23。承接[目標081](081-second-difficulty-card-output-evidence.md)與
+狀態：completed（第二張卡片兩行限定範圍）；日期：2026-09-23。承接[目標081](081-second-difficulty-card-output-evidence.md)與
 [規格016](../spec/016-difficulty-card-text-draft.md)；對應 Issue
 [#6](https://github.com/wicanr2/colonization_cht/issues/6)、
 [#7](https://github.com/wicanr2/colonization_cht/issues/7)、
@@ -42,3 +42,14 @@ Ebitengine 視窗閉合來源、原版格式化輸出與畫布像素。譯文「
 help、靜態圖像或完整遊玩。第一張卡片規格017與其安全矩形保持不變。
 原版截圖、畫布快照、字型與可丟棄收據只留在 gitignore 的 `workplace/`；
 沒有使用者另行授權，不更新已上傳的私有成果截圖。
+
+## 本輪結果
+
+逐欄 21／25px 字模、可逆背景及執行期守門已依
+[規格019](../spec/019-second-difficulty-card-overlay.md)通過 READY 審查並
+接入正式 Ebitengine 輸出層。從冷啟動真視窗點選第二張卡片，中文與
+無觀測英文控制組原版 CPU、完整 RAM、索引畫面、色盤及時間相同；
+新增中文差異只在兩個核准矩形。真實 TSV 兩欄各自的缺鍵／重複鍵、
+游標進出、錯版本拒絕，以及第一張卡片逐位元組回歸均通過，規格019
+僅就這兩行標為 CONFORMED。已驗收正常玩家路徑中文由十段增為十二段。
+本機原版畫面不推送；Issue #28 的標題版式與其餘卡片仍待後續處理。

@@ -97,10 +97,13 @@ type difficultyLine struct {
 	fontSize                int
 	card                    bool
 	display                 []byte
+	displayLinear           uint32
 	formattedSeen           bool
 	linear                  uint32
 	readCS, readIP          uint16
 	safe                    image.Rectangle
+	cursorGuard             image.Rectangle
+	inkSize                 image.Point
 	bbox                    image.Rectangle
 	pixels                  int
 	only254                 bool
@@ -166,21 +169,40 @@ func main() {
 			l.fontSize = 24
 			l.source = bytes.Clone(labelsSource[l.offset : l.offset+l.length])
 		}
-		// 規格017只授權第一張卡片；另一張即使有同文也不共用此鍵。
+		// 規格017／019各自授權卡片、來源、顯示緩衝與安全區；不得跨卡片共用鍵。
 		card := []*difficultyLine{
 			{id: "NAMES.TXT:0x00000C0C", file: "NAMES.TXT", offset: 0xc0c, length: 10,
 				linear: 0x4cc6a, readCS: 0x0e2d, readIP: 0x11cf,
 				safe: image.Rect(138, 44, 186, 51), bbox: image.Rect(141, 45, 183, 50),
 				pixels: 164, position: image.Pt(614, 180), fontSize: 21,
-				card: true, display: []byte("DISCOVERER:")},
+				card: true, display: []byte("DISCOVERER:"), displayLinear: 0x2a6b0,
+				cursorGuard: image.Rect(112, 24, 212, 80), inkSize: image.Pt(69, 19)},
 			{id: "LABELS.TXT:0x000008A9", file: "LABELS.TXT", offset: 0x8a9, length: 7,
 				linear: 0x4df90, readCS: 0x0e2d, readIP: 0x11cf,
 				safe: image.Rect(146, 52, 180, 60), bbox: image.Rect(150, 53, 175, 59),
 				pixels: 83, position: image.Pt(612, 212), fontSize: 25,
-				card: true, display: []byte("Easiest")},
+				card: true, display: []byte("Easiest"), displayLinear: 0x2a6b0,
+				cursorGuard: image.Rect(112, 24, 212, 80), inkSize: image.Pt(81, 23)},
+			{id: "NAMES.TXT:0x00000C18", file: "NAMES.TXT", offset: 0xc18, length: 8,
+				linear: 0x4cc75, readCS: 0x0e2d, readIP: 0x11cf,
+				safe: image.Rect(247, 44, 287, 51), bbox: image.Rect(250, 45, 284, 50),
+				pixels: 134, position: image.Pt(1034, 180), fontSize: 21,
+				card: true, display: []byte("EXPLORER:"), displayLinear: 0x2a718,
+				cursorGuard: image.Rect(225, 24, 304, 80), inkSize: image.Pt(69, 19)},
+			{id: "LABELS.TXT:0x000008B2", file: "LABELS.TXT", offset: 0x8b2, length: 4,
+				linear: 0x4df98, readCS: 0x0e2d, readIP: 0x11cf,
+				safe: image.Rect(256, 52, 279, 60), bbox: image.Rect(260, 53, 276, 59),
+				pixels: 55, position: image.Pt(1043, 212), fontSize: 25,
+				card: true, display: []byte("Easy"), displayLinear: 0x2a718,
+				cursorGuard: image.Rect(225, 24, 304, 80), inkSize: image.Pt(54, 23)},
 		}
-		card[0].source = bytes.Clone(namesSource[card[0].offset : card[0].offset+card[0].length])
-		card[1].source = bytes.Clone(labelsSource[card[1].offset : card[1].offset+card[1].length])
+		for _, l := range card {
+			source := namesSource
+			if l.file == "LABELS.TXT" {
+				source = labelsSource
+			}
+			l.source = bytes.Clone(source[l.offset : l.offset+l.length])
+		}
 		difficulty = append(difficulty, card...)
 	}
 	lines := []*menuLine{
@@ -280,7 +302,11 @@ func main() {
 			l.fontReason = "font-binding-mismatch"
 			continue
 		}
-		if mask.Width <= 0 || mask.Height <= 0 || mask.Width > l.safe.Dx()*4 || mask.Height > l.safe.Dy()*4 || len(mask.Alpha) != mask.Width*mask.Height || l.position.X < l.safe.Min.X*4 || l.position.Y < l.safe.Min.Y*4 || l.position.X+mask.Width > l.safe.Max.X*4 || l.position.Y+mask.Height > l.safe.Max.Y*4 {
+		inset := 0
+		if l.card {
+			inset = 4
+		}
+		if mask.Width <= 0 || mask.Height <= 0 || mask.Width > l.safe.Dx()*4 || mask.Height > l.safe.Dy()*4 || len(mask.Alpha) != mask.Width*mask.Height || (l.card && (mask.Width != l.inkSize.X || mask.Height != l.inkSize.Y)) || l.position.X < l.safe.Min.X*4+inset || l.position.Y < l.safe.Min.Y*4+inset || l.position.X+mask.Width > l.safe.Max.X*4-inset || l.position.Y+mask.Height > l.safe.Max.Y*4-inset {
 			l.fontReason = "font-mask-out-of-bounds"
 			continue
 		}
@@ -313,7 +339,7 @@ func main() {
 	drops := []map[string]any{}
 	lastOpened := 0
 	if !*control && len(difficulty) > 0 {
-		m.WatchReads(0x4cc6a, 0x4df97, func(a uint32, _ uint8) {
+		m.WatchReads(0x4cc6a, 0x4df9d, func(a uint32, _ uint8) {
 			cs, ip := m.CPU.OpAddr()
 			if m.VideoMode() != 0x13 {
 				return
@@ -387,7 +413,7 @@ func main() {
 					if !l.card || l.before == nil || m.Steps-l.startStep > 500000 {
 						continue
 					}
-					p := 0x2a6b0
+					p := int(l.displayLinear)
 					if bytes.Equal(m.Mem[p:p+len(l.display)], l.display) && m.Mem[p+len(l.display)] == 0 {
 						l.formattedSeen = true
 					}
@@ -484,6 +510,9 @@ func main() {
 			}
 		})
 	}
+	cardCursorBlocked := func(l *difficultyLine) bool {
+		return l.card && (image.Pt(int(d.Mouse.X), int(d.Mouse.Y)).In(l.cursorGuard) || d.Mouse.Buttons != 0)
+	}
 	render := func(label string) {
 		if !*control {
 			checkContext()
@@ -570,8 +599,7 @@ func main() {
 				layers[i] = overlay.Layer{Patch: l.patch, Ink: l.ink, Position: image.Pt(344, l.y*4), ColorIndex: 254, Enabled: enabled && validVersion}
 			}
 			for i, l := range difficulty {
-				cursorGuard := l.card && (112 <= int(d.Mouse.X) && int(d.Mouse.X) < 212 && 24 <= int(d.Mouse.Y) && int(d.Mouse.Y) < 80 || d.Mouse.Buttons != 0)
-				layers[len(lines)+i] = overlay.Layer{Patch: l.patch, Ink: l.ink, Position: l.position, ColorIndex: 254, Enabled: enabled && validVersion && !cursorGuard}
+				layers[len(lines)+i] = overlay.Layer{Patch: l.patch, Ink: l.ink, Position: l.position, ColorIndex: 254, Enabled: enabled && validVersion && !cardCursorBlocked(l)}
 			}
 			var e error
 			var results []overlay.LayerResult
@@ -598,7 +626,7 @@ func main() {
 				if l.fontReason != "" {
 					lineReason = l.fontReason
 				}
-				if l.card && (112 <= int(d.Mouse.X) && int(d.Mouse.X) < 212 && 24 <= int(d.Mouse.Y) && int(d.Mouse.Y) < 80 || d.Mouse.Buttons != 0) && l.patch != nil {
+				if cardCursorBlocked(l) && l.patch != nil {
 					lineReason = "cursor-conservative-guard"
 				}
 				applied = applied || result.Applied

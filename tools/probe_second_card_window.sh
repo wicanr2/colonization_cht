@@ -5,11 +5,13 @@ set -euo pipefail
 
 out=${COLONIZATION_SECOND_CARD_OUT:-/out/window-second-card}
 bin=${COLONIZATION_WINDOW_BIN:-/repo/workplace/reports/goal079-window-bin}
+font_dir=${COLONIZATION_FONT_DIR:-/repo/workplace/reports/goal057-fonts}
 [[ -x "$bin" && ! -e "$out.json" && ! -e "$out.inputs.json" ]]
+[[ -d "$font_dir" ]]
 
 "$bin" --window --all-menu --root /game \
   --catalog /repo/text/draft.zh-Hant.tsv \
-  --font-dir /repo/workplace/reports/goal057-fonts \
+  --font-dir "$font_dir" \
   --out "$out" --window-steps 100000000 > "$out.log" 2>&1 &
 game_pid=$!
 trap 'kill "$game_pid" 2>/dev/null || true; wait "$game_pid" 2>/dev/null || true' EXIT
@@ -76,6 +78,6 @@ trap - EXIT
 
 "$bin" --window --all-menu --control --root /game \
   --catalog /repo/text/draft.zh-Hant.tsv \
-  --font-dir /repo/workplace/reports/goal057-fonts \
+  --font-dir "$font_dir" \
   --out "$out-control" --replay-inputs "$out.inputs.json" \
   --window-steps 100000000 > "$out-control.log" 2>&1

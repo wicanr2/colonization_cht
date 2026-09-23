@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""依規格017產生第一張卡片逐欄本機字模；不得加入 Git。"""
+"""依規格017／019產生前兩張難度卡片逐欄本機字模；不得加入 Git。"""
 
 import argparse
 import base64
@@ -16,6 +16,8 @@ from validate_translation_draft import read_catalog, validate_sources
 FIELDS = (
     ("NAMES.TXT:0x00000C0C", 21, (69, 19), (138, 44, 186, 51), (614, 180)),
     ("LABELS.TXT:0x000008A9", 25, (81, 23), (146, 52, 180, 60), (612, 212)),
+    ("NAMES.TXT:0x00000C18", 21, (69, 19), (247, 44, 287, 51), (1034, 180)),
+    ("LABELS.TXT:0x000008B2", 25, (54, 23), (256, 52, 279, 60), (1043, 212)),
 )
 
 
@@ -43,7 +45,7 @@ def bake(args):
         left, top, right, bottom = font.getbbox(text)
         width, height = right - left, bottom - top
         if (width, height) != expected_ink:
-            raise ValueError("譯文或字級墨跡已變，需重新審查規格017：" + key)
+            raise ValueError("譯文或字級墨跡已變，需重新審查規格017／019：" + key)
         x, y = position
         if not (safe[0] * 4 + 4 <= x and x + width <= safe[2] * 4 - 4 and
                 safe[1] * 4 <= y and y + height <= safe[3] * 4 - 4):
@@ -54,7 +56,7 @@ def bake(args):
                    "font_sha256": FONT_SHA, "font_size": size,
                    "width": width, "height": height,
                    "alpha": base64.b64encode(mask.tobytes()).decode(),
-                   "scope": "規格017本機字模；不得散布原版素材或字型"}
+                   "scope": "規格017／019本機字模；不得散布原版素材或字型"}
         path = args.output / (key.replace(":", "-") + ".json")
         path.write_text(json.dumps(payload, ensure_ascii=False) + "\n", encoding="utf-8")
         print(f"{key}：{width}×{height}，{size}px；{path}")
