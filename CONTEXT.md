@@ -142,6 +142,9 @@ Issue #28 視覺選擇的範圍，已完成第二張難度卡片真視窗點擊�
 [規格019](docs/spec/019-second-difficulty-card-overlay.md)限定 CONFORMED。
 Issue #28 的難度標題 A／B 版式仍待使用者依本機對照圖選定；
 第三至第五張卡片、help 與完整玩家路徑另待取證。
+[目標083](docs/goals/083-post-difficulty-player-path.md)將以正常滑鼠路徑
+嘗試離開難度頁，觀測下一畫面及第一批未覆蓋訊息；完成提示的
+可見原文與譯稿不等於該滑鼠動作已通過驗收。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
 保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至368筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。
