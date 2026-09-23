@@ -2428,3 +2428,71 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
 - 限制：`confirmed` 僅涵蓋國家頁左側兩行及列出的輸入、狀態、反例。
   原版真正字型 baseline、其他國家卡片、help、後續玩家路徑及完整
   操作仍未知；不得把14段正式顯示當作全遊戲覆蓋率。
+
+## 2026-09-23：目標085第一張國家旗卡紅字的限定來源調查
+
+- 輸入為合法 DOS 版 `OPENING.EXE`、`VICEROY.EXE`、`GAME.TXT`、
+  `LABELS.TXT`、`NAMES.TXT`（SHA-256 逐檔見[規格020](docs/spec/020-nation-heading-overlay.md)）；
+  `NATIONS.PIK` SHA-256 為
+  `bd31e62d7b7652e6903aaea76b1641f11d5333ff6a6da13fd26411c9f080bf54`。
+  工具為 Go 1.24.13、隔離 dosgolem 提交
+  `9dd36726eeaf9c1f3a745aabdcbb84413791d90f` 的
+  `tools/probe_goal085_nation_card.go`（原始碼 SHA-256
+  `525273e2aac495c13d5b261ec245b112ad848df7f53ccae3f1d2aa05384ac40c`）；
+  位址空間分別是原始 TXT
+  檔案位移、DOS 實模式 `CS:IP`、20-bit 線性 RAM 與320×200
+  索引畫布，數值不可互換。16筆正常玩家輸入 SHA-256
+  `a48ae77b9f6a0c2bdb9b3512625d0c1c4786b1cb64b8deff4bdb603fe422d93e`。
+- confirmed（畫布事件與同狀態）：兩次各自從冷啟動至50M步的觀測
+  JSON 逐位元組相同，SHA-256
+  `21010532ff6211a1dfe693f5a3436b4454a3ba98147f9118e4343dff379f9b5e`；
+  無觀測控制組的 CPU、完整 RAM、原版索引畫面、色盤、虛擬時間及
+  開檔序列相同。原版於步42,222,735開啟 `NATIONS.PIK`；
+  上方紅字區在 `0D21:012C`（原版實模式 CS:IP）有144個變更點，
+  原始畫布 bbox 為 x141–170、y15–19；下方有172點，bbox
+  x135–177、y87–92。兩處另觀測到 `0D3A:0015` 來源讀取與
+  `0D21:00C6` 格式化文字讀取。因此兩處當次可見紅字由動態印字
+  形成；較早的 `NATIONS.PIK` 圖像繪製仍可能構成其底圖。
+- 強推論（尚未閉合載入邊）：兩處格式化緩衝位於線性 RAM
+  `0x2A6AE`，來源候選 `0x2A74A`；文字內容與原始檔案位移
+  `NAMES.TXT:0x8EA`、`LABELS.TXT:0x8F2` 對應。但此探針只截取
+  來源讀取與畫布寫入，尚未追到檔案讀取後寫入上述 RAM 的邊，
+  不能把檔案候選升格為 `confirmed` 的正式覆蓋鍵。兩次收據、
+  畫布快照與原版像素只在本機 `workplace/reports/goal085-nation-card/`。
+  下次須補 DOS 載入邊、相鄰旗卡反例與安全區背景證據，才可
+  提出 DRAFT 規格；本輪未更改正式覆蓋或十四段顯示計數。
+
+## 2026-09-23：目標086難度標題 A 版同狀態驗收
+
+- 輸入為[規格018](docs/spec/018-difficulty-heading-layout-draft.md)固定的
+  合法 DOS 五檔、隔離 dosgolem 提交、真 TSV 與 Cubic 11 字型；
+  Go 1.24.13、Ebitengine 2.9.9、Pillow 12.3.0。原文鍵
+  `LABELS.TXT:0x888`／`0x890` 是檔案位移，`0D3A:0015`／
+  `0D21:012C` 是原版實模式 CS:IP；安全區在1280×800輸出畫布，
+  不能與320×200原始索引畫布座標混用。
+- confirmed（版式與未改範圍）：完整十四欄字模與前版逐檔比對，
+  只有兩個標題欄變動；「選擇」34px、實際墨跡74×32，左上
+  `(193,64)`；「難度」38px、82×35，左上 `(189,116)`，兩行
+  均以 x=230 置中。真 Ebitengine 視窗從冷啟動至第一張難度卡，
+  游標移離標題後擷取的 PNG 與視窗最終輸出逐像素一致；與舊版
+  相同輸入重播，只有兩個安全矩形改變1,450／2,059個輸出像素，
+  卡片、完成提示與其他區域保持舊版畫素。
+- confirmed（原版同狀態與反例）：真視窗輸入 SHA-256
+  `c92890083d2b97bfd7ae4b983a3eaf595a5a0761a69c582272089c5403a5c112`；
+  新版、舊版及無覆蓋英文控制組原版 CPU、完整 RAM、索引、色盤、
+  ticks／cycles 和開檔序列相同。舊主選單／難度頁十五檢查點的
+  原版索引、色盤與終點狀態相同；真視窗第二張卡片與完成區路徑
+  仍抵達 `NATIONS.PIK`，游標遮住第二行時僅該欄回退英文，移開
+  恢復。同輸入第二張卡片新舊版只在「選擇」安全區改變1,450像素，
+  卡片與提示畫素不變；國家頁新舊版最終 PNG、原版索引、色盤及
+  完整 RAM 均逐位元組相同。兩欄各自的缺鍵／重複鍵／缺字模／錯字級
+  反例均逐欄回退，
+  `LABELS.TXT` 暫存單位元組錯版在啟動前拒絕。
+- `tools/verify_goal086_heading.py` 本機獨立 PASS 收據 SHA-256
+  `83c6668d942034193bec084fcf53fa52ec0a2775ae9c5296a6f663bd7ffb9a2f`；
+  收據、原版畫布與全部反例只在已忽略的
+  `workplace/reports/goal086-heading/`。驗後才替換私有截圖
+  `docs/screenshots/difficulty-zh.png`，SHA-256
+  `86b2c08465ed67fc57202e7490a7ac274185c78bf464e2a0e773b120bb196e07`。
+  原版 baseline 精確字型仍未知；本 CONFORMED 僅是使用者核定的
+  中文版式與限定正常路徑，不是全遊戲或公開素材驗收。

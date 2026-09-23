@@ -161,13 +161,15 @@ func main() {
 	difficulty := []*difficultyLine{}
 	if *allMenu {
 		difficulty = []*difficultyLine{
-			{id: "LABELS.TXT:0x00000888", offset: 0x888, length: 6, linear: 0x4df72, readCS: 0x0d3a, readIP: 0x0015, safe: image.Rect(39, 14, 76, 26), bbox: image.Rect(42, 16, 73, 24), pixels: 126, position: image.Pt(168, 64)},
-			{id: "LABELS.TXT:0x00000890", offset: 0x890, length: 16, linear: 0x4df79, readCS: 0x0d3a, readIP: 0x0015, safe: image.Rect(20, 27, 96, 40), bbox: image.Rect(23, 29, 92, 38), pixels: 284, position: image.Pt(92, 116)},
+			{id: "LABELS.TXT:0x00000888", offset: 0x888, length: 6, linear: 0x4df72, readCS: 0x0d3a, readIP: 0x0015, safe: image.Rect(39, 14, 76, 26), bbox: image.Rect(42, 16, 73, 24), pixels: 126, position: image.Pt(193, 64), fontSize: 34, inkSize: image.Pt(74, 32)},
+			{id: "LABELS.TXT:0x00000890", offset: 0x890, length: 16, linear: 0x4df79, readCS: 0x0d3a, readIP: 0x0015, safe: image.Rect(20, 27, 96, 40), bbox: image.Rect(23, 29, 92, 38), pixels: 284, position: image.Pt(189, 116), fontSize: 38, inkSize: image.Pt(82, 35)},
 			{id: "LABELS.TXT:0x0000086E", offset: 0x86e, length: 24, linear: 0x4df59, readCS: 0x0e2d, readIP: 0x11cf, safe: image.Rect(10, 79, 105, 88), bbox: image.Rect(13, 81, 102, 86), pixels: 167, only254: true, position: image.Pt(52, 324)},
 		}
 		for _, l := range difficulty {
 			l.file = "LABELS.TXT"
-			l.fontSize = 24
+			if l.fontSize == 0 {
+				l.fontSize = 24
+			}
 			l.source = bytes.Clone(labelsSource[l.offset : l.offset+l.length])
 		}
 		// 規格017／019各自授權卡片、來源、顯示緩衝與安全區；不得跨卡片共用鍵。
@@ -318,15 +320,15 @@ func main() {
 			l.fontReason = "font-mask-unavailable"
 			continue
 		}
-		if mask.CandidateID != l.id || mask.FontHash != fontHash || mask.TranslationHash != hash([]byte(l.translation)) || ((l.card || l.nation) && mask.FontSize != l.fontSize) {
+		if mask.CandidateID != l.id || mask.FontHash != fontHash || mask.TranslationHash != hash([]byte(l.translation)) || mask.FontSize != l.fontSize {
 			l.fontReason = "font-binding-mismatch"
 			continue
 		}
 		inset := 0
-		if l.card || l.nation {
+		if l.inkSize.X > 0 {
 			inset = 4
 		}
-		if mask.Width <= 0 || mask.Height <= 0 || mask.Width > l.safe.Dx()*4 || mask.Height > l.safe.Dy()*4 || len(mask.Alpha) != mask.Width*mask.Height || ((l.card || l.nation) && (mask.Width != l.inkSize.X || mask.Height != l.inkSize.Y)) || l.position.X < l.safe.Min.X*4+inset || l.position.Y < l.safe.Min.Y*4+inset || l.position.X+mask.Width > l.safe.Max.X*4-inset || l.position.Y+mask.Height > l.safe.Max.Y*4-inset {
+		if mask.Width <= 0 || mask.Height <= 0 || mask.Width > l.safe.Dx()*4 || mask.Height > l.safe.Dy()*4 || len(mask.Alpha) != mask.Width*mask.Height || (l.inkSize.X > 0 && (mask.Width != l.inkSize.X || mask.Height != l.inkSize.Y)) || l.position.X < l.safe.Min.X*4+inset || l.position.Y < l.safe.Min.Y*4+inset || l.position.X+mask.Width > l.safe.Max.X*4-inset || l.position.Y+mask.Height > l.safe.Max.Y*4-inset {
 			l.fontReason = "font-mask-out-of-bounds"
 			continue
 		}

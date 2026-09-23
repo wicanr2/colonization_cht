@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 規格009–020：從真 TSV 與固定 Cubic 11 重建目前正式畫面的14個本機字模。
+# 規格009–020／018 A版：從真 TSV 與固定 Cubic 11 重建14個本機字模。
 set -euo pipefail
 
 out=${COLONIZATION_GOAL084_FONT_OUT:-/repo/workplace/reports/goal084-fonts-full}

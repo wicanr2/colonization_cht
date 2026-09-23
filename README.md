@@ -12,7 +12,7 @@
 
 ![真實 Ebitengine 視窗中的繁體中文難度頁](docs/screenshots/difficulty-zh.png)
 
-難度頁：圖中展示「選擇／難度」兩行標題、「完成後點此」提示，以及第一張卡片的「發現者／最簡單」。第二張卡片的「探險家／簡單」亦已完成真視窗驗收，但尚未更新這張截圖。其他卡片與英文字仍待驗證；標題版式的原版風格調整另列於 [Issue #28](https://github.com/wicanr2/colonization_cht/issues/28)。兩張圖只證明有限玩家路徑的顯示，不代表完整遊戲已中文化。
+難度頁：圖中展示依原版兩行共同中心線排版的「選擇／難度」、原樣保留的「完成後點此」提示，以及第一張卡片的「發現者／最簡單」。兩行標題分別採34／38px；第二張卡片的「探險家／簡單」亦已完成真視窗驗收，但不在這張截圖中。其他卡片與英文字仍待驗證。兩張圖只證明有限玩家路徑的顯示，不代表完整遊戲已中文化。
 
 這兩張截圖含原版遊戲畫面像素，僅放在目前的**私有研究儲存庫**；尚未取得公開散布判定，不得轉入公開發行包。
 
@@ -26,7 +26,7 @@
 
 ## 研究與執行入口
 
-需要自行持有合法 DOS 原版。所有建置、遊戲執行、分析與抓圖都在 Docker 容器內進行；本案只使用 `workplace/dosgolem` 的獨立副本，不修改共用專案。視窗原型由 [組裝器](tools/build_window_prototype.py)及[真視窗驗證腳本](tools/probe_window_prototype.sh)產生；固定工具鏈、掛載與驗證契約見[視窗原型規格](docs/spec/013-window-prototype.md)，難度標題的輸出守門見[規格014](docs/spec/014-difficulty-text-output-draft.md)，第一、二張卡片兩行分別見[規格017](docs/spec/017-first-difficulty-card-overlay.md)與[規格019](docs/spec/019-second-difficulty-card-overlay.md)，國家選擇頁左側兩行見[規格020](docs/spec/020-nation-heading-overlay.md)。
+需要自行持有合法 DOS 原版。所有建置、遊戲執行、分析與抓圖都在 Docker 容器內進行；本案只使用 `workplace/dosgolem` 的獨立副本，不修改共用專案。視窗原型由 [組裝器](tools/build_window_prototype.py)及[真視窗驗證腳本](tools/probe_window_prototype.sh)產生；固定工具鏈、掛載與驗證契約見[視窗原型規格](docs/spec/013-window-prototype.md)，難度標題的輸出守門與版式分別見[規格014](docs/spec/014-difficulty-text-output-draft.md)及[規格018](docs/spec/018-difficulty-heading-layout-draft.md)，第一、二張卡片兩行分別見[規格017](docs/spec/017-first-difficulty-card-overlay.md)與[規格019](docs/spec/019-second-difficulty-card-overlay.md)，國家選擇頁左側兩行見[規格020](docs/spec/020-nation-heading-overlay.md)。
 
 - [目前脈絡與未完成界線](CONTEXT.md)
 - [工作計畫](WORKLIST.md)（由 `docs/worklist.json` 產生）

@@ -37,9 +37,16 @@ def main():
     coverage = cmap_coverage(data)
     if any(ord(c) not in coverage for c in text):
         raise ValueError('譯文含缺字，不產生部分字模')
-    font = ImageFont.truetype(str(args.font), 24)
+    sizes = {'LABELS.TXT:0x00000888': 34,
+             'LABELS.TXT:0x00000890': 38}
+    font_size = sizes.get(key, 24)
+    font = ImageFont.truetype(str(args.font), font_size)
     left, top, right, bottom = font.getbbox(text)
     width, height = right - left, bottom - top
+    expected_ink = {'LABELS.TXT:0x00000888': (74, 32),
+                    'LABELS.TXT:0x00000890': (82, 35)}
+    if key in expected_ink and (width, height) != expected_ink[key]:
+        raise ValueError('難度標題 A 版字模尺寸不符規格018')
     bounds = {'LABELS.TXT:0x00000888': (148, 48),
               'LABELS.TXT:0x00000890': (304, 52),
               'LABELS.TXT:0x0000086E': (380, 36)}
@@ -50,7 +57,7 @@ def main():
     ImageDraw.Draw(mask).text((-left, -top), text, fill=255, font=font)
     receipt = {'candidate_id': key, 'translation_sha256': hashlib.sha256(text.encode()).hexdigest(),
                'catalog_sha256': hashlib.sha256(args.catalog.read_bytes()).hexdigest(),
-               'font_sha256': FONT_SHA, 'font_size': 24, 'width': width, 'height': height,
+               'font_sha256': FONT_SHA, 'font_size': font_size, 'width': width, 'height': height,
                'alpha': base64.b64encode(mask.tobytes()).decode(),
                'scope': 'local-only；衍生字模不加入 Git 或散布包'}
     args.output.write_text(json.dumps(receipt, ensure_ascii=False) + '\n')

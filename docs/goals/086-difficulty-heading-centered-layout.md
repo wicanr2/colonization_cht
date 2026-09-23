@@ -1,6 +1,6 @@
 # 目標086：依使用者選定 A 版完成難度標題排版
 
-狀態：進行中；日期：2026-09-23。承接[目標080](080-difficulty-heading-layout-prototype.md)、
+狀態：completed；日期：2026-09-23。承接[目標080](080-difficulty-heading-layout-prototype.md)、
 [規格018](../spec/018-difficulty-heading-layout-draft.md)及已確認的
 [Issue #28](https://github.com/wicanr2/colonization_cht/issues/28)。
 
@@ -40,3 +40,14 @@
 baseline 精確相同。若正式重播發現與可丟棄預覽不符，回到規格
 證據審查，不以截圖或測試特例掩蓋差異。[目標085](085-nation-card-text-provenance.md)
 的國家旗卡紅字來源調查獨立進行，未驗來源不得接入正式覆蓋。
+
+## 完成結果
+
+使用者確認的 A 版已依限定 READY 規格接入真 Ebitengine 視窗，
+「選擇」34px／「難度」38px 都以四倍畫布 x=230 置中；其他
+十二欄字模、卡片、完成提示及原版滑鼠命中區未改。
+同輸入新舊版與英文控制的原版狀態相同，十五檢查點、逐欄回退與
+錯版拒絕均通過；詳細數值及本機 PASS 收據指紋見
+[規格018](../spec/018-difficulty-heading-layout-draft.md)。
+通過後已替換既有私有[難度畫面截圖](../screenshots/difficulty-zh.png)，
+沒有新增可公開原版素材。國家旗卡與 help 等工作繼續開放。
