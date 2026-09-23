@@ -2,6 +2,10 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前執行入口：[目標096](docs/goals/096-player-name-prompt-runtime-guard.md)：
+追姓名固定提示的完整來源事件、當次畫布補片與離頁失效，
+證據足夠才把[規格023](docs/spec/023-player-name-screen-draft.md)
+升 READY 並嘗試正式中文覆蓋；未驗收前顯示原文。
 最近完成入口：[目標095](docs/goals/095-player-name-input-and-overlay-gate.md)：
 真 Ebitengine 視窗從冷啟動抵達姓名畫面，實際 `x`／退格／Enter、
 標點拒絕與失焦不補送已同狀態驗收；鍵盤接線依
