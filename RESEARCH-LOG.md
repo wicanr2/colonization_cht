@@ -2842,3 +2842,65 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   SHA-256 `f403556f7dcaf1961a735301d79bbf5376fe614b6a289738afc8109f21e202e9`，
   只保存在 `workplace/`。預設名來源、文字是否動態、輸入
   語意及翻譯鍵仍是**未知**，下一步依 DRAFT 規格023取證。
+
+## 2026-09-24：目標093姓名畫面 TXT 至畫布與鍵盤輸入
+
+- 固定原版、隔離 dosgolem、版本與輸入 SHA-256 沿用
+  [規格023](docs/spec/023-player-name-screen-draft.md)；研究映像
+  `colonization-research:20260920-r2`，Go 1.24.13；原始檔案位移、
+  DOS 實模式 `CS:IP`、20-bit線性 RAM 與320×200索引畫布各自標明，
+  不合併稱同一地址。探針
+  [tools/probe_goal093_name.go](tools/probe_goal093_name.go) SHA-256
+  `0ac8031ca1ca21c23587bbb8449a5c12742fd9d178a2db0cea382470fdda9292`，
+  獨立驗證器[tools/check_goal093_name.py](tools/check_goal093_name.py)
+  SHA-256 `86bd21b617ba4a7e95df908b764ae81ed68857a8cad4ed3201c1626c8d800239`，
+  Ebitengine 資料準備器[tools/prepare_goal093_control.py](tools/prepare_goal093_control.py)
+  SHA-256 `1ccc02994bae2075475708dd1e154a4542ae02323ab9bb4be18f16db68378d09`。
+- **confirmed（固定原版玩家路徑）**：提示完整原始行是
+  `GAME.TXT:0xA7A` 的 `^^` 控制碼加可見字串，後者從
+  檔案 `0xA7C` 開始。DOS 於48,655,905步從檔案 `0xA00`
+  讀512 bytes，候選於暫存 RAM `0x2B07E` 當刻相符；
+  解析後 `0x2B072` 的可見字串於48,672,364步由
+  `0E2D:09F4` 讀取，再進入 `0x6F200`。印字緩衝
+  `0x2A864` 的 `0D21:00C6` 逐字讀取重建完整可見字串；
+  `0D21:012C` 在原版畫布寫 x104–214、y88–96。
+  主譯稿既有 `GAME.TXT:0x00000A7A` 的 `^^請輸入您的姓名。`
+  草稿，故沒有把 `0xA7C` 另建重複鍵。`^^` 不可直接繪製。
+- **confirmed（固定原版玩家路徑）**：`NAMES.TXT:0xB4B`
+  的 `Jacques Cartier` 是帶數值紀錄中的15-byte片段。
+  15,584,990及17,057,573步的 DOS 512-byte 讀入都在暫存
+  RAM `0x2B14D` 精確相符；15,587,654步讀首字，
+  15,612,172步 `0E2D:11A5` 將15 bytes寫入常駐
+  `0x21AE2`。48,670,403步從常駐區讀首字，之後
+  `0x6F25C`／`0x2AA06` 當次副本及48,746,347步
+  `937C:0567` 讀首字均可回查；`0D21:00C6` 從
+  `0x2A972` 逐字讀出前導空白與 `Jacques Cartier_`，
+  `0D21:012C` 寫畫布 x82–163、y101–109。這證明當次
+  動態印字而非 `WOODPANL.PIK` 烘入字；不推定其他國家預設名
+  必走相同位移。姓名是可編輯資料，不應把譯名寫回原版。
+- **confirmed（限定正常鍵盤輸入）**：55M步送 `x`（掃描碼
+  `0x2D`、ASCII 120），57M步顯示 `x_`，取代而非附加
+  預設姓名；再送退格（`0x0E`、ASCII 8），65M步欄位
+  剩游標。無輸入至65M步畫面不變。直接送 Enter 或先 `x`
+  再 Enter 均於65M步顯示 `FRANCE` 國家介紹長文，另開一次
+  `GAME.TXT`；兩條 Enter 最終索引／色盤相同、完整 RAM
+  不同。這**不證明**姓名已寫入存檔。單字元相對無輸入
+  733點、退格相對單字元35點差異都在姓名欄
+  `[79,98,246,112)`；Enter 改14,167點，屬離頁。
+- 來源追蹤 `source3-a.json` 與 `source3-b.json` 逐位元組
+  相同，前者 SHA-256
+  `3261bd0bc827b7569eaab9440dc9d3063638cfa6a6d0d76aab22ca73428f7e4e`。
+  五個鍵盤分支也各雙次冷啟動且有無讀寫／逐幀監看的控制組；
+  控制與觀測在 CPU、完整 RAM、索引、色盤、時間與開檔
+  同狀態。原版輸出常式的兩行變色畫布事件共701點，
+  Go 1.26.7／Ebitengine v2.9.9 在無網路 Xvfb 生成的五張
+  本機控制圖均與各自原版索引／色盤四倍最近鄰逐像素相同。
+  獨立 PASS 收據 `workplace/reports/goal093-name/verified.json`
+  SHA-256
+  `ace71383918c6e92efae9bf15d69d6755dbb54b69dc496d11d8127233d32c646`。
+  原版 PNG、畫布、RAM 資料及 Ebitengine 中間物均留
+  `workplace/`，未推送；下一長文頁見
+  [Issue #30](https://github.com/wicanr2/colonization_cht/issues/30)。
+- **未知／未驗**：提示印前多色底圖、可繪中文安全矩形與逐欄
+  字級、游標／編輯負例、正式中文與英文控制同狀態，以及
+  姓名存檔持久化。規格023保持 DRAFT，正式顯示仍十四段。

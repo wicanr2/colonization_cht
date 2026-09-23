@@ -35,7 +35,8 @@
 | #26 | in_progress | [建立第一條真實訊息的繁體中文顯示垂直切片](https://github.com/wicanr2/colonization_cht/issues/26) | `dynamic-overlay-ready` | 一則真實動態訊息完成中文顯示、英文／缺譯回退、幾何與正常玩家路徑驗證；靜態候選另依證據資格處理。 |
 | #27 | in_progress | [建立可追溯的全遊戲繁體中文譯文語料](https://github.com/wicanr2/colonization_cht/issues/27) | `dynamic-coverage` | 已辨識玩家可見文字有可追溯譯文、占位符與控制碼驗證、字型覆蓋及分別列出的草稿／正常路徑／顯示驗收量測。 |
 | #28 | completed | [重排難度畫面標題並逐欄調整中文字級](https://github.com/wicanr2/colonization_cht/issues/28) | — | 以原版同狀態畫面量測標題及各欄原文字級、對齊與安全矩形；可丟棄版式對照供使用者確認，正式畫面更符合原版風格且每欄中文字級獨立驗證。 |
-| #29 | planned | [追查選國後姓名畫面文字來源與安全中文覆蓋](https://github.com/wicanr2/colonization_cht/issues/29) | `normal-gameplay-route`, `dynamic-text-draft` | 正常玩家輸入可重播提示與預設名來源、輸入語意、逐欄安全矩形、原文回退及正式中英文同狀態驗收。 |
+| #29 | in_progress | [追查選國後姓名畫面文字來源與安全中文覆蓋](https://github.com/wicanr2/colonization_cht/issues/29) | `normal-gameplay-route`, `dynamic-text-draft` | 正常玩家輸入可重播提示與預設名來源、輸入語意、逐欄安全矩形、原文回退及正式中英文同狀態驗收。 |
+| #30 | planned | [追查並中文化首次國家介紹畫面與長文排版](https://github.com/wicanr2/colonization_cht/issues/30) | `player-name-screen`, `dynamic-text-draft` | 正常玩家從姓名畫面進入首次國家介紹；標題與長文有原版來源、可追溯繁中譯稿、逐段安全矩形、溢出／分頁回退及中英文同狀態驗收。 |
 
 ## 驗證
 

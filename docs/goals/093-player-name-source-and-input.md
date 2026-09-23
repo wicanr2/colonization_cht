@@ -1,6 +1,6 @@
 # 目標093：姓名畫面來源與正常玩家輸入
 
-狀態：進行中；日期：2026-09-24。承接[目標092](092-neighbor-card-runtime-and-nation-route.md)、
+狀態：完成（限定來源與輸入，正式覆蓋仍 DRAFT）；日期：2026-09-24。承接[目標092](092-neighbor-card-runtime-and-nation-route.md)、
 [規格023](../spec/023-player-name-screen-draft.md)，對應
 [Issue #29](https://github.com/wicanr2/colonization_cht/issues/29)。
 
@@ -35,3 +35,24 @@
 使用者姓名屬原版輸入狀態；不因畫面翻譯而變更姓名位元組、查找或存檔。
 不能把視覺文字猜作穩定鍵，也不能把一個可見畫面當成完整玩家流程驗收。
 若輸入測試進入新畫面，只建立可回查的下一步 DRAFT，不未經證據直接覆蓋。
+
+## 本輪結果
+
+雙次原版冷啟動及無觀測控制證實：`GAME.TXT:0xA7A` 的完整提示行
+（可見字串起於 `0xA7C`）與 `NAMES.TXT:0xB4B` 的預設姓名片段，
+各自經 DOS 讀取、RAM、原版印字常式至畫布；精確時間、位址空間與
+推論等級見[規格023](../spec/023-player-name-screen-draft.md)。
+55M步的姓名欄收到 `x` 會取代預設名，退格成空欄；Enter 進入
+可見 `FRANCE` 的國家介紹。輸入 `x` 後 Enter 與直接 Enter 的
+下一畫面像素相同，但完整 RAM 不同，不能據此宣稱存檔語意。
+五個鍵盤分支各兩次冷啟動及無觀測控制、Ebitengine 四倍原文
+控制圖逐像素驗證均 PASS；本機獨立收據 SHA-256
+`ace71383918c6e92efae9bf15d69d6755dbb54b69dc496d11d8127233d32c646`。
+
+主譯稿早已有提示的 `^^請輸入您的姓名。` 草稿，故沒有重複建鍵；
+`Jacques Cartier` 是玩家可編輯資料而非固定 UI 標籤，維持原文。
+提示印前底圖、安全矩形、逐欄字級與編輯／游標回退尚未驗，
+規格023及 Issue #29 保持 DRAFT／OPEN，正式顯示仍為十四段。
+新國家介紹長文另列
+[Issue #30](https://github.com/wicanr2/colonization_cht/issues/30)；
+原版 PNG、RAM 與字型未加入 Git，成果只提交探針、驗證器及文件。

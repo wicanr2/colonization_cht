@@ -1574,3 +1574,41 @@
   [#27](https://github.com/wicanr2/colonization_cht/issues/27)與
   [#29](https://github.com/wicanr2/colonization_cht/issues/29)
   已回填本輪結果及未完成範圍，均維持 OPEN。
+
+## 2026-09-24：目標093姓名畫面來源與鍵盤輸入
+
+- 先以 `4556be8` 推送[目標093](docs/goals/093-player-name-source-and-input.md)
+  至 PRIVATE 儲存庫，再於隔離 dosgolem 對固定原版執行雙次冷啟動
+  及無觀測控制。原始 `GAME.TXT:0xA7A`（可見提示起於 `0xA7C`）
+  與 `NAMES.TXT:0xB4B`（預設姓名片段）分別追至 DOS 讀取、
+  RAM 與原版動態畫布寫入；位址空間、時間與雜湊記於
+  [規格023](docs/spec/023-player-name-screen-draft.md)及研究紀錄。
+- 正常玩家姓名欄的無輸入、輸入 `x`、退格、Enter、輸入後 Enter
+  各做兩次獨立冷啟動及無觀測控制。`x` 會取代預設姓名，退格
+  只留游標；Enter 進入可見 `FRANCE` 的國家介紹長文。兩種
+  Enter 的畫面相同但完整 RAM 不同，未推定存檔語意。五張
+  Ebitengine 四倍原文控制圖與 dosgolem 原版索引／色盤逐像素
+  PASS；獨立驗證收據 SHA-256
+  `ace71383918c6e92efae9bf15d69d6755dbb54b69dc496d11d8127233d32c646`。
+- 初版探針在 DOS 讀取後太晚比較已重用的暫存 RAM；改為讀取
+  當下記錄來源區，雙次及控制全數重跑。首次產生預覽時檔名
+  與控制報告衝突；修正命名並重新產生五條控制報告後才驗收。
+  這些是探針／驗證流程修正，不視為原版程式缺陷。
+- 主譯稿已有 `^^請輸入您的姓名。`，不另增重複鍵；可編輯的
+  預設姓名保留原版資料。提示底圖、安全矩形、中文字級與
+  正式回退尚缺，規格023仍 DRAFT、正式中文顯示仍十四段。
+  首次國家介紹長文另登[Issue #30](https://github.com/wicanr2/colonization_cht/issues/30)。
+  原版 RAM、索引、色盤、PNG 均留在已忽略 `workplace/`。
+- 本次也核對先前使用者選定的難度標題 A 版：程式設定為
+  「選擇」34px／「難度」38px共同置中；既有
+  [規格018](docs/spec/018-difficulty-heading-layout-draft.md)
+  記錄同狀態驗收僅改兩個標題安全矩形，卡片與完成提示不變，
+  私有截圖於驗收後才更新。這次沒有再次修改該版面或截圖。
+- 交付前重核截圖 SHA-256
+  `86b2c08465ed67fc57202e7490a7ac274185c78bf464e2a0e773b120bb196e07`
+  與規格018一致；姓名畫面獨立驗證器重跑 PASS，工作清單、
+  368筆譯稿、Go格式及 Python 語法檢查通過。研究映像沒有
+  Pillow，影像驗證改用既有 `rich2-py:latest` 映像完成；
+  未變更映像或放寬網路。專案沒有 root-owned 殘留或誤建
+  `.md` 目錄，輸出為 UID/GID `1000:1000`；本專案沒有
+  執行中／停止的遺留容器，其他專案容器保持原狀。
