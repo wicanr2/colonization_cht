@@ -1,6 +1,6 @@
 # 目標075：追上難度卡片原文到畫布的直接路徑
 
-狀態：in_progress；日期：2026-09-23。對應 Issue [#6](https://github.com/wicanr2/colonization_cht/issues/6)、[#7](https://github.com/wicanr2/colonization_cht/issues/7) 與 [#26](https://github.com/wicanr2/colonization_cht/issues/26)。
+狀態：completed（證據切片；中文覆蓋仍未就緒）；日期：2026-09-23。對應 Issue [#6](https://github.com/wicanr2/colonization_cht/issues/6)、[#7](https://github.com/wicanr2/colonization_cht/issues/7) 與 [#26](https://github.com/wicanr2/colonization_cht/issues/26)。
 
 ## 起點與範圍
 
@@ -30,3 +30,21 @@
 
 不把卡片輸出推論升格為正式文字鍵；不靠修改難度規則、輸入或存檔來造出卡片畫面。
 遇到缺少的 dosgolem 通用觀測能力，先留最小重現與 DRAFT，不在本遊戲程式碼中模擬原版流程。
+
+## 完成收據與未完成閘門
+
+- 新 `tools/probe_card_flow.go` 在固定原版雜湊及九筆正常玩家輸入下，窄窗收集來源讀取、
+  記憶體寫入、CPU 指令位置／暫存器與兩行畫布前後快照；未改任何遊戲狀態。
+  兩次完整收據 `workplace/reports/goal075-card-flow-v5-a.json`／`-b.json` 位元組完全相同，
+  與目標074的最終 RAM／畫布／索引畫面／色盤 SHA 也完全相同。
+- `tools/check_card_flow.py` 通過：`Discoverer`／`Easiest` 原文經 `0x2A74C` 共用緩衝、
+  `0x2A6B0` 局部副本及 `0D21:00C6` 逐字讀取，最後由 `0D21:012C` 分別寫入
+  192／100次像素。第一行實際顯示 `DISCOVERER:`，不是未格式化的來源字串。
+  `go vet` 與 dosgolem `internal/machine`／`oracle` 測試也通過。
+- 兩行原始畫布差分 bbox 分別為 `(141,45)–(182,49)`、`(150,53)–(174,58)`；
+  原版墨跡高度是5／6像素。繪製入口的頂列錨點 `DX=45`／`53` 有原版事件可回查，
+  但沒有證實獨立字型 baseline，不能把底列冒稱為 baseline。
+  兩行下方候選區域各有75／78種原版色盤索引，排除純色抹底。
+- 尚未驗證第二張卡片的玩家輸入、任一行的正式安全矩形、可逆背景擷取、游標遮擋、
+  欄位專屬中文字級及中文字形。這些會影響正式顯示的條件使規格016維持 DRAFT；
+  本目標只完成第一張卡片的直接來源到像素證據，不新增已顯示中文計數。

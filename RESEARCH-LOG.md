@@ -1926,3 +1926,60 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   上述輸入檔、`-end 32000000`，分別輸出本機
   `workplace/reports/goal074-card-observer-a.json` 與 `-b.json`；再執行
   `tools/check_difficulty_observer.py` 比對。原始 `.canvas`／`.idx` 及完整 JSON 只留本機。
+
+## 2026-09-23：目標075第一張難度卡片原文到像素的直接鏈
+
+- 問題：目標074已同時觀測原文讀取與後續畫布寫入，但其先後順序不能單獨證明
+  是同一條資料流。目標075只追第一張卡片兩行的正常玩家輸出；不改原版檔、記憶體、
+  遊戲規則、輸入或正式中文疊圖。
+- 固定輸入與工具：原版四檔與 SHA 見[規格016](docs/spec/016-difficulty-card-text-draft.md)；
+  九筆正常玩家輸入 `goal059-ebiten.inputs.json` SHA-256
+  `51837a0ed11cfcc316b4e2c9dce7064403cafdd0c1af2efecf59f30319eb5efc`。
+  隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`，其
+  `upstream` 推送位址為 `DISABLED`；Go `1.24.13 linux/amd64`；映像
+  `colonization-research:20260920-r2` ID
+  `sha256:5d99f8754e9f9099b7f263268c485c73043aee1a9d9d29231417ccb5b5da02e1`。
+  探針 `tools/probe_card_flow.go` SHA-256
+  `7a43c7787c2913d8bb01ab804304ba78b011644836a7651cadd72bdcc828826e`，
+  檢查器 `tools/check_card_flow.py` SHA-256
+  `8a35948a88679e7fac8f55586c6c7fc68343d1b68057cff89965a77dc24aaea0`。
+  以下 `CS:IP` 是 dosgolem 執行期真實模式指令位址，`0x2...`／`0x4...` 是
+  DOS 20-bit 線性 RAM，畫布座標是320×200邏輯像素；都不是 TXT 檔案位移。
+- confirmed（來源與複製）：`0E2D:11CF` 於步數 `29,797,568` 讀取線性
+  `0x4CC6A..0x4CC74` 的 `Discoverer\0`；`0E2D:11EB` 在 `29,797,579`
+  將10個可見字元按序寫至 `0x2A74C` 起。另一行於 `29,813,172` 讀取
+  `0x4DF90..0x4DF97` 的 `Easiest\0`，在 `29,813,183` 複製到相同共用緩衝。
+  這是同一步原文讀取／寫入的位元組與指令位置配對，不是文字相同的猜測。
+- confirmed（格式化後的真正輸出字節）：第一行共用緩衝後續被整理為
+  `DISCOVERER:`；`0E2D:11A5` 在步數 `29,798,246` 從 `0x2A74C` 讀取該
+  字串並同一步複製 `DISCOVERER:\0` 至 `0x2A6B0` 局部副本。第二行在
+  `29,813,648` 同路徑複製 `Easiest\0`。`0D21:00C6` 逐字讀取局部副本，
+  第一行 `DISCOVERER:\0`、第二行 `Easiest\0` 各完整遍歷兩次；同一
+  `0D21` 印字常式的 `0D21:012C` 在其後分別寫入192／100次卡片畫布像素。
+- confirmed（位置與字高）：`0D21:000C` 進入繪製時 `(AX,DX)` 在兩次遍歷為
+  第一行 `(142,45)`／`(141,45)`，第二行 `(151,53)`／`(150,53)`。
+  繪製前後畫布差分皆只落在第一張卡片觀測區，第一行164個最終不同像素、
+  bbox `(141,45)–(182,49)`、墨跡高5個原始像素；第二行83個、bbox
+  `(150,53)–(174,58)`、墨跡高6個原始像素。第一行結束與第二行開始前的
+  原始畫布完全相同。入口 `DX` 與墨跡頂列相符，但尚無獨立字型 baseline 證據。
+- confirmed（權利與背景限制）：原版卡片內候選矩形
+  `(138,44)–(185,50)`、`(146,52)–(179,59)` 在文字寫入前分別有75、78種
+  色盤索引。純色抹底會破壞原版紋理；正式翻譯須保存同狀態可逆背景，不能用
+  主選單純色清底或全域24px字級外推。
+- confirmed（決定性）：兩次 `goal075-card-flow-v5-a.json`／`-b.json` 的
+  JSON 位元組及 SHA-256 完全相同，均為
+  `67f416ce61db7bec2cf3fbd71bb3336e68354b88c97b9a24a9f357ef6986ed9e`。
+  結束於3,200萬步，最終完整 RAM、原始畫布、索引畫面與色盤 SHA 與目標074
+  四項完全相同。`tools/check_card_flow.py`、`go vet` 與 dosgolem
+  `internal/machine`／`oracle` 測試均通過。
+- unknown／下一閘門：`Discoverer` 在 `GAME.TXT`／`NAMES.TXT` 都有同文；
+  尚未追到哪個檔案載入該執行期地址。`Easiest` 在 `LABELS.TXT` 有唯一文字候選，
+  仍未證實載入邊。第一張卡片的背景擷取／游標遮擋、穩定顯示鍵、中文安全矩形、
+  分欄中文字級和第二張以後的玩家輸入與輸出均未驗證；規格016維持 DRAFT，
+  八段已顯示中文計數不變。
+- 重現：Docker 將合法 DOS 輸入及隔離 dosgolem 以唯讀掛至 `/work`，僅
+  `workplace/reports/` 可寫，使用目前 UID/GID、`--network none` 和資源上限；
+  從 `/work/workplace/dosgolem` 執行
+  `go run /work/tools/probe_card_flow.go -root <原版COLONIZE目錄> -inputs /work/workplace/reports/goal059-ebiten.inputs.json -out <a或b報告>`，
+  再以 `tools/check_card_flow.py` 的 `--inputs`／`--first`／`--second` 核對。
+  完整 JSON 含原版局部指令與快照，只留已忽略的本機目錄，不入 Git。
