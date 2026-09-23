@@ -2634,3 +2634,49 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   本機目視兩版均可辨兩處中文；使用者尚未在 A／B 間定版，
   也未驗執行期回退。三張 PNG／含原版像素的 JSON 都只留在
   `workplace/reports/goal088-nation-card-preview/`。
+
+## 2026-09-24：目標089第一張旗卡游標與相鄰旗卡原版負例
+
+- 輸入仍為目標088固定的合法 DOS `OPENING.EXE`／`VICEROY.EXE`／
+  `GAME.TXT`／`NAMES.TXT`／`LABELS.TXT`／`NATIONS.PIK` 指紋與16筆
+  正常玩家輸入 SHA-256
+  `a48ae77b9f6a0c2bdb9b3512625d0c1c4786b1cb64b8deff4bdb603fe422d93e`。
+  隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`，
+  `colonization-research:20260920-r2`／Go 1.24.13。探針
+  `tools/probe_goal089_nation_runtime.go` SHA-256
+  `4c2e93c19c30a5332c0ce218faa33035c6ccc4a3b37dd8f9f8ed24abdae818cb`；
+  獨立驗證器 `tools/check_goal089_nation_runtime.py` SHA-256
+  `b27bc923d09216c11ae3eb043b5b8758f623aa2a05193a8972b1a41487cc6317`。
+  位址空間是原版20-bit線性 RAM畫布 `0x2CAE0` 起64,000 bytes、
+  320×200索引畫面與邏輯滑鼠座標；不把四倍輸出座標混入。
+- confirmed（上／下逐欄遮擋）：43M步基準原版畫布 SHA-256
+  `2e005b93f811c7e0eb557eb68d1f5c1721caf027e5f32220c3c62195e7c9100b`，
+  索引畫面 SHA-256
+  `48b52cb99391ab05aafd6809a838cc5714c193d3fca5dc0c1202bb2835a1c835`。
+  游標在 `(156,18)` 時相對基準僅上欄安全區改24像素；
+  `(156,90)` 時僅下欄改24；`(16,16)` 移開後兩欄皆0。
+  各幀底層畫布都保留原版紅字，不是原版重印。
+- confirmed（限定左鍵與換旗）：dosgolem `PressMouse(0)` 才是
+  玩家輸入所用左鍵，原版按鈕狀態變成1；`PressMouse(1)` 為右鍵、
+  狀態2。先前錯以1作「按鍵」的本機探索報告留作更正脈絡，
+  **不列入**正式左鍵驗證。正確左鍵在第一張下欄 `(156,90)`
+  按下／放開至46M步不改底層畫布；相鄰右上旗卡中央 `(255,50)`
+  按下後首幀44,055,000仍舊畫布，44,220,000才重繪，原第一張
+  旗卡上下安全區相異188／221索引像素。兩條路徑均未離開
+  `NATIONS.PIK`、開檔數51不變。新旗卡文字來源**未知**，不能把
+  畫布重繪或座標本身當成原版來源鏈。
+- confirmed（決定性與無觀測擾動）：游標、第一張下欄左鍵、相鄰
+  旗卡左鍵三條路徑各兩次 JSON 位元組相同，SHA-256 分別
+  `ef48b20b968f2f829e985ab50d6f7378f73ce535c9a5a72a82a6ee87b917fac8`、
+  `e655d2dc44ea81212c2cb6e0f22f5bbcf987604efec71d73e7b53d3f9438cdee`、
+  `559c054d297bc0d3da9770515756023bd86f1b66f40ac8883838797adecd2b05`。
+  各路徑無逐幀觀測控制組 CPU、完整 RAM、索引畫面、色盤、
+  ticks／cycles、開檔與四個原始快照都與觀測組相同。
+  獨立驗證 PASS 收據 SHA-256
+  `be0c2968bec2cdab7b2b5c1f19aa1b620f47038fbe4ea316c084bb99d3567d51`，
+  本機路徑 `workplace/reports/goal089-nation-runtime/`。
+  第一次驗證器錯誤假定相鄰旗卡於左鍵第一輸出幀就重繪；
+  改以固定兩個原版幀的實測相位檢查後 PASS，並未改動原版程式。
+- 限制：這些是**原版觀測事實**，不是正式中文輸出層的逐欄回退測試；
+  使用者尚未選定 A／B 中文字級。其他旗卡、離開國家頁、
+  新旗卡文字來源與完整玩家流程均未驗。規格021保持 DRAFT。
