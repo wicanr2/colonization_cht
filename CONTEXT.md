@@ -2,6 +2,9 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前執行入口：[目標097](docs/goals/097-name-field-display-choice.md)：
+先查可編輯預設姓名欄的原版重繪與安全區，製作原名／僅畫面譯名
+兩種可丟棄對照；使用者未選定前不接正式覆蓋，Issue #29 保持開放。
 最近完成入口：[目標096](docs/goals/096-player-name-prompt-runtime-guard.md)：
 姓名固定提示已由完整來源事件、當次多色畫布補片、游標與 Enter
 離頁守門接入正式輸出層；[規格023](docs/spec/023-player-name-screen-draft.md)
