@@ -2,16 +2,19 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-目前執行入口：[目標094](docs/goals/094-player-name-prompt-layout.md)：
-量測姓名固定提示的原版印前底圖、逐欄字級與顯示／輸入隔離；
-未達 READY 前不接正式中文覆蓋。
+最近完成入口：[目標094](docs/goals/094-player-name-prompt-layout.md)：
+姓名固定提示的原版印前多色底圖、415點墨跡、y=98輸入框
+負例及38px單欄 Ebitengine 可丟棄原型，三種姓名編輯畫面
+逐像素驗收；正式視窗字元／退格與提示回退仍缺，規格023
+維持 DRAFT，正式中文顯示十四段不變。
 最近完成入口：[目標093](docs/goals/093-player-name-source-and-input.md)：
 姓名提示與預設名的固定來源及動態印字、字元／退格／Enter 輸入均有
 雙次原版及 Ebitengine 控制收據；正式中文安全矩形與回退仍缺，
 [規格023](docs/spec/023-player-name-screen-draft.md)保持 DRAFT。
 前一完成入口：[目標092](docs/goals/092-neighbor-card-runtime-and-nation-route.md)：
 右卡游標／重繪／換卡／離頁負例已有雙次原版及無觀測控制收據；
-正常玩家路徑已到姓名畫面，但其文字來源與輸入行為仍未知。
+正常玩家路徑當時已到姓名畫面；其文字來源與輸入行為已由
+後續目標093解出，勿再沿用目標092當時的未知結論。
 前一完成入口：[目標091](docs/goals/091-neighbor-nation-card-reversible-preview.md)：
 相鄰右上旗卡兩欄的原版精確印前底圖與本機 Ebitengine 可逆候選已驗，
 尚未定案字級或接正式輸出；前一完成入口：

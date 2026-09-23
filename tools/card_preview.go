@@ -1,4 +1,4 @@
-// 可丟棄的 Ebitengine 難度卡片畫面對照；只讀已核對的本機收據，不接正式遊戲路徑。
+// 可丟棄的 Ebitengine 一／兩欄畫面對照；只讀已核對的本機收據，不接正式遊戲路徑。
 package main
 
 import (
@@ -73,9 +73,8 @@ func scaled(indexed, palette []byte, width, height int) *ebiten.Image {
 	return ebiten.NewImageFromImage(imageData)
 }
 func newPreview(data previewData, out string, control bool) *previewGame {
-	if !data.Prototype || (control && len(data.Layers) != 0 && len(data.Layers) != 2) ||
-		(!control && len(data.Layers) != 2) {
-		fail(fmt.Errorf("只接受無覆蓋原文控制或固定兩欄可丟棄收據"))
+	if !data.Prototype || len(data.Layers) > 2 || (!control && len(data.Layers) == 0) {
+		fail(fmt.Errorf("只接受無覆蓋原文控制或一／兩欄可丟棄收據"))
 	}
 	indexed := decode(data.Indexed, 320*200)
 	palette := decode(data.Palette, 256*3)

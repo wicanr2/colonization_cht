@@ -2904,3 +2904,69 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
 - **未知／未驗**：提示印前多色底圖、可繪中文安全矩形與逐欄
   字級、游標／編輯負例、正式中文與英文控制同狀態，以及
   姓名存檔持久化。規格023保持 DRAFT，正式顯示仍十四段。
+
+## 2026-09-24：目標094姓名固定提示的印前底圖與輸入框界線
+
+- 問題：目標093已證實 `GAME.TXT:0xA7A` 的動態提示，
+  但無法由終點圖反推木紋底圖，也不知中文能否不碰到玩家
+  輸入框。沿用[規格023](docs/spec/023-player-name-screen-draft.md)
+  的固定原版各檔 SHA-256、16筆玩家輸入 SHA-256
+  `a48ae77b9f6a0c2bdb9b3512625d0c1c4786b1cb64b8deff4bdb603fe422d93e`、
+  隔離 dosgolem 提交
+  `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`。
+  工具為 Go 1.24.13／`colonization-research:20260920-r2`、
+  Go 1.26.7／Ebitengine v2.9.9；印前底圖與 PIL 字模
+  用既有 `rich2-py:latest` 在 Docker 驗證。位址空間：
+  `0xA7A` 是 `GAME.TXT` 檔案位移，`0x2A864` 是20-bit線性 RAM，
+  `0D21:00C6`／`0D21:012C` 是原版 DOS 實模式 `CS:IP`，
+  x／y 是320×200原版畫布，不可混算。
+- 探針[tools/probe_goal094_prompt.go](tools/probe_goal094_prompt.go)
+  SHA-256
+  `38a4ff5e5479c925ddabb8ea79f03213aed0c01fee55d0ae7072268e676cd388`。
+  `a.json` 與 `b.json` 為兩次獨立冷啟動，逐位元組相同；
+  `a.json` SHA-256
+  `40f41c82e26347725d3cf46482212193db1db5ca07c255b91c07553bee5825b9`。
+  無觀測控制不安裝畫布寫入或逐字讀取 hook；兩組在
+  48,696,982／48,721,827／49M／55M步的 CPU、完整 RAM、
+  原版索引、畫布、色盤、時間、開檔與輸出檔逐項一致。
+- **confirmed（限定固定版本和正常玩家路徑）**：在
+  48,696,982步先取原版提示字的印前畫布，48,721,827步
+  取印後畫布。`0D21:00C6` 對 `0x2A864` 的45次讀取，
+  過濾 NUL 後正是23-byte `Please Enter Your Name.`；
+  `0D21:012C` 的415個變色寫入逐點對上印前舊色及印後
+  新色，且整張畫布只有此415點改變，墨跡右下不含框
+  `(104,88)–(215,97)`。印前安全區背景有10種色號，
+  故必須用當次可逆原底圖，不能單色遮罩。
+- **confirmed（晚期事件負例）**：提示印後安全區
+  `(100,85)–(219,98)` 到55M步的底層畫布及原版索引
+  逐點相同；相鄰 y=98 在印後另變119點，屬姓名框
+  上緣的後續重繪，故安全區右下 y=98必須排除。
+  候選中文使用 TSV 原有完整鍵 `GAME.TXT:0x00000A7A`
+  的 `^^請輸入您的姓名。`，保留控制碼只畫可見段；
+  Cubic 11 固定字型 SHA-256
+  `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`
+  的38px候選墨跡328×35px，與原版放大後9×4=36px高
+  相稱；放大畫布左上 `(474,352)` 並共同置中。
+- 原型生成器[tools/prepare_goal094_prompt_preview.py](tools/prepare_goal094_prompt_preview.py)
+  SHA-256
+  `4ad7f7f612190481e4837fda7fe48ef44ab0245718a8dbd4f43d2af3e2d6fbf5`；
+  Ebitengine 可丟棄一欄預覽沿用
+  [tools/card_preview.go](tools/card_preview.go)（新 SHA-256
+  `018cc2a4916a11b7b537a28b11c0b8e473ea01d9568c1ebf8aa7c64d6ea92ee6`）。
+  無輸入、`x`與退格三份中文圖均以原版色盤68綠字、47黑影
+  在1280×800繪製；各自英文控制逐點等於 dosgolem
+  原版索引／色盤，中文相對控制只在提示安全區變9,520點，
+  姓名欄不變。獨立驗證器
+  [tools/check_goal094_prompt.py](tools/check_goal094_prompt.py)
+  SHA-256
+  `d08d5117314dba886d315c6642f7f3b5336cb496f2aab7fb647c9eb8fa2fa987`；
+  PASS 收據 SHA-256
+  `b682921086f1c92f016ae4095a3d6684af095b40020ce43999c01507e9b31ed1`。
+  本機圖、底圖、色盤與字型都在已忽略的 `workplace/`
+  或唯讀外部來源，未加入 Git。
+- **未知／未驗**：原版實際 baseline、提示在正式前端每次
+  重繪與轉場的守門、視窗前端一般字元與退格、真 TSV
+  缺鍵／缺字／錯版回退及正式中英文同狀態。現行
+  `tools/window_prototype.go` 僅轉送 Enter；本輪
+  dosgolem 直接鍵盤事件及可丟棄原型不是正式玩家版
+  編輯能力。規格023保持 DRAFT，十四段正式顯示不變。
