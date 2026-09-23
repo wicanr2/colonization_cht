@@ -2,6 +2,8 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前進行入口：[目標093](docs/goals/093-player-name-source-and-input.md)：
+追查選國後姓名畫面的文字來源及正常鍵盤輸入，仍以規格023 DRAFT 為閘門。
 最近完成入口：[目標092](docs/goals/092-neighbor-card-runtime-and-nation-route.md)：
 右卡游標／重繪／換卡／離頁負例已有雙次原版及無觀測控制收據；
 正常玩家路徑已到姓名畫面，但其文字來源與輸入行為仍未知。
