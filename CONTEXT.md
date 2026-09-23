@@ -2,9 +2,9 @@
 
 更新：2026-09-23；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-目前執行入口：[目標088](docs/goals/088-first-nation-card-reversible-preview.md)
-僅處理第一張國家旗卡兩欄的繁中草稿與本機 Ebitengine 可逆視覺原型；
-規格021仍為 DRAFT，尚未授權正式覆蓋。
+最近完成入口：[目標088](docs/goals/088-first-nation-card-reversible-preview.md)
+已建立第一張國家旗卡兩欄的繁中片段草稿與本機 Ebitengine 可逆視覺原型；
+等待使用者確認兩欄暫定版式。規格021仍為 DRAFT，尚未授權正式覆蓋。
 
 ## 已確認決定
 
@@ -54,7 +54,7 @@
 | 第一張難度卡片 | confirmed：稱號從 `NAMES.TXT:0x00000C0C`、副標從 `LABELS.TXT:0x000008A9` 載入，經原版緩衝與格式化印字路徑繪至畫布；`GAME.TXT` 同文不是此路徑稱號來源。規格017限定第一張卡片兩行為 CONFORMED：21／25px 逐欄字模、當次有紋理底圖、原文差分、游標及真實 TSV 缺鍵回退已接正式前端並與同輸入英文控制同狀態；其餘卡片仍屬規格016 DRAFT。 |
 | 第二張難度卡片 | confirmed：真 Ebitengine 視窗點擊 `(265,55)` 顯示 `EXPLORER:`／`Easy`，雙次 dosgolem 收據閉合 `NAMES.TXT:0xC18`／`LABELS.TXT:0x8B2` 至 RAM、格式化印字與原始畫布；墨跡高5／6像素、有紋理底圖。規格019限定兩行為 CONFORMED：「探險家／簡單」採21／25px逐欄字模，真視窗中文與英文控制原版同狀態；各欄缺譯／重複鍵及游標回退、錯版本拒絕與第一張卡片回歸均通過。規格016對其餘卡片仍為 DRAFT。 |
 | 國家選擇頁 | confirmed：正常滑鼠按下／放開難度頁完成區會開啟 `NATIONS.PIK`；16筆真 Ebitengine 視窗輸入抵達此頁，與同輸入英文控制原版同狀態。左側兩行 `Select`／`European Power` 已追溯至 `LABELS.TXT:0x8D3`／`0x8DB`、RAM、實模式輸出及安全矩形；[規格020](docs/spec/020-nation-heading-overlay.md)限定 CONFORMED：「選擇／歐洲國家」各38px，兩欄缺鍵／重複鍵、游標、按鍵及場景切換均逐欄安全回退，錯版在輸出前拒絕。其他國家頁文字仍未驗收。 |
-| 第一張國家旗卡紅字 | 目標085／087的雙次冷啟動與無觀測控制同狀態；`NAMES.TXT:0x8EA`／`LABELS.TXT:0x8F2` 各自經 DOS 讀取、就地整理、解析、常駐 RAM、共用格式化緩衝及原版畫布形成兩塊動態紅字，同文替代 RAM 位址在印字窗口未讀。來源鏈 confirmed；[規格021](docs/spec/021-nation-card-red-text-draft.md)仍僅 DRAFT，缺逐欄字級／背景／游標與其他旗卡驗證，不計入十四段正式顯示。 |
+| 第一張國家旗卡紅字 | 目標085／087已證實 `NAMES.TXT:0x8EA`／`LABELS.TXT:0x8F2` 各自從 DOS 讀入到原版畫布的動態來源鏈。目標088另以雙次冷啟動及無監看控制擷取當次印字前多色底圖，建立[text/nation-card-fragments.zh-Hant.tsv](text/nation-card-fragments.zh-Hant.tsv)兩筆來源固定草稿；Ebitengine 可丟棄原型 A 採21／25px較接近原版、B 採25／29px較易讀，均為「英格蘭：／移民」、原版紅字／黑影且安全區外零差異。此為待使用者選擇的視覺候選，[規格021](docs/spec/021-nation-card-red-text-draft.md)仍僅 DRAFT；執行期游標／切場守門及其他旗卡未驗，不計入十四段正式顯示。 |
 | 完整可玩／正式發行 | 未驗證、未發布；正常玩家路徑目前僅驗證至國家選擇畫面，尚未完成選國、help 或遊玩。 |
 
 ## 工具與重播入口

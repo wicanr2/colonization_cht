@@ -15,13 +15,16 @@ import (
 )
 
 type previewLayer struct {
-	Name       string `json:"name"`
-	Safe       [4]int `json:"safe"`
-	InkWidth   int    `json:"ink_width"`
-	InkHeight  int    `json:"ink_height"`
-	Position   [2]int `json:"position"`
-	Background string `json:"background"`
-	Mask       string `json:"mask"`
+	Name        string `json:"name"`
+	Safe        [4]int `json:"safe"`
+	InkWidth    int    `json:"ink_width"`
+	InkHeight   int    `json:"ink_height"`
+	Position    [2]int `json:"position"`
+	Background  string `json:"background"`
+	Mask        string `json:"mask"`
+	ColorIndex  *int   `json:"color_index,omitempty"`
+	ShadowIndex *int   `json:"shadow_index,omitempty"`
+	ShadowDX    int    `json:"shadow_dx,omitempty"`
 }
 type previewData struct {
 	Prototype bool           `json:"prototype"`
@@ -92,7 +95,31 @@ func newPreview(data previewData, out string, control bool) *previewGame {
 			patchOp.GeoM.Translate(float64(x0*4), float64(y0*4))
 			canvas.DrawImage(patch, patchOp)
 			ink := image.NewNRGBA(image.Rect(0, 0, layer.InkWidth, layer.InkHeight))
-			foreground := rgb(palette, 254)
+			foregroundIndex := 254
+			if layer.ColorIndex != nil {
+				foregroundIndex = *layer.ColorIndex
+			}
+			if foregroundIndex < 0 || foregroundIndex > 255 {
+				fail(fmt.Errorf("前景色索引不合法：%s", layer.Name))
+			}
+			if layer.ShadowIndex != nil {
+				if *layer.ShadowIndex < 0 || *layer.ShadowIndex > 255 || layer.ShadowDX < 0 ||
+					layer.Position[0]+layer.InkWidth+layer.ShadowDX > x1*4 {
+					fail(fmt.Errorf("陰影超出安全矩形：%s", layer.Name))
+				}
+				shadowColor := rgb(palette, byte(*layer.ShadowIndex))
+				shadow := image.NewNRGBA(image.Rect(0, 0, layer.InkWidth, layer.InkHeight))
+				for y := 0; y < layer.InkHeight; y++ {
+					for x := 0; x < layer.InkWidth; x++ {
+						shadow.SetNRGBA(x, y, color.NRGBA{R: shadowColor.R, G: shadowColor.G,
+							B: shadowColor.B, A: mask[y*layer.InkWidth+x]})
+					}
+				}
+				shadowOp := &ebiten.DrawImageOptions{}
+				shadowOp.GeoM.Translate(float64(layer.Position[0]+layer.ShadowDX), float64(layer.Position[1]))
+				canvas.DrawImage(ebiten.NewImageFromImage(shadow), shadowOp)
+			}
+			foreground := rgb(palette, byte(foregroundIndex))
 			for y := 0; y < layer.InkHeight; y++ {
 				for x := 0; x < layer.InkWidth; x++ {
 					ink.SetNRGBA(x, y, color.NRGBA{R: foreground.R, G: foreground.G,

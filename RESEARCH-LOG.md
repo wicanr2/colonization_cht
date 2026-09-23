@@ -2553,3 +2553,84 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   來源升為 confirmed，但不代表譯文、版面與其他旗卡可上線。
   [規格021](docs/spec/021-nation-card-red-text-draft.md)只為 DRAFT；
   相鄰旗卡、可逆背景、逐欄中文字級與游標回退仍未知。
+
+## 2026-09-23：目標088第一張國家旗卡當次底圖與繁中原型
+
+- 輸入為合法 DOS `OPENING.EXE` SHA-256
+  `3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`、
+  `VICEROY.EXE` SHA-256
+  `a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3`、
+  `NAMES.TXT` SHA-256
+  `4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061`、
+  `LABELS.TXT` SHA-256
+  `e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204`、
+  `NATIONS.PIK` SHA-256
+  `bd31e62d7b7652e6903aaea76b1641f11d5333ff6a6da13fd26411c9f080bf54`。
+  16筆真 Ebitengine 視窗輸入 SHA-256
+  `a48ae77b9f6a0c2bdb9b3512625d0c1c4786b1cb64b8deff4bdb603fe422d93e`；
+  工具為隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`、
+  Go 1.24.13（原版探針）／Go 1.26.7 與 Ebitengine 2.9.9（原型）、
+  Pillow 12.3.0、fontTools 4.63.0。原始來源使用 `NAMES.TXT:0x8EA`／
+  `LABELS.TXT:0x8F2` 檔案位移、原版 `0D21:012C` 實模式 CS:IP、
+  線性 RAM 畫布 `0x2CAE0` 起64,000 bytes 與320×200索引像素；
+  四倍輸出座標另屬1280×800像素，絕不可互換。
+- confirmed（較早快照不適合作底圖）：目標085於42.4M／42.6M／42.8M
+  擷取的原版畫布雜湊均為
+  `4f7988030a00d082fe445e00a2ac5dab502300ff1b80e8592dd569867b60ef74`，
+  上下安全區各只有一種色盤索引；當時旗卡底圖尚未完成。若以它抹字
+  會把紋理一起破壞，故改用精確原版指令時間點重新擷取。
+- confirmed（當次印字前後）：`tools/probe_goal088_nation_background.go`
+  原始碼 SHA-256
+  `ab2649432e9b3748b22d9aa215fc15dc12b3bee076c067002805603abddb7236`。
+  上行在步42,860,474前、42,867,603後擷取，原版寫入144次、最終
+  差分123像素，bbox x141–170／y15–19；下行在步42,871,144前、
+  42,880,764後擷取，原版寫入172次、最終差分156像素，bbox
+  x135–177／y87–92。較多的寫入數包含原版先黑影再紅字覆寫的
+  重疊像素：原版索引0黑影向右一個原始像素，索引12紅字色盤
+  DAC 值 `(61,0,0)`。上方安全區 `(125,12)–(190,24)` 的原版
+  底圖56色，下方 `(125,83)–(190,96)` 底圖62色；兩欄當次完成
+  畫布與43M步最終索引畫面在各自安全區逐位元組相同。
+- confirmed（決定性與無干擾）：雙次獨立冷啟動至43M步的 JSON
+  位元組相同，SHA-256
+  `cc4221d50718fe981a8836672f7ee8eda07cb6b2fbc95894b5cacc3d0f63ec86`；
+  無寫入監看控制組 SHA-256
+  `79aa91d8370f40d6d341928a897ec244c68888080e56ccc86121b995ec052064`。
+  三者 CPU、完整 RAM、原版索引畫面、色盤、ticks、cycles 與開檔
+  序列相同；原始畫布和索引收據只留本機 workplace。
+- confirmed（草稿來源，非正式譯法）：`NAMES.TXT:0x8EA` 的原始
+  `England` SHA-256
+  `c0ea960b065c6aa6dd567a1a741fa21aee3972692096e158cebb4309a3b2a716`
+  是 `@COUNTRY` 複合行片段，原版畫面另轉大寫加冒號；
+  `LABELS.TXT:0x8F2` 的原始 `Immigration` SHA-256
+  `d4a50fd4d73140e499642441bd90e7758785d1f9315eaab7c50841d864d5cc5d`
+  是完整行。新[片段 TSV](text/nation-card-fragments.zh-Hant.tsv)
+  SHA-256 `dbca48dc62c04c2b1197b495c786411f18abd8996fd561a150ddc43d5ee5cfd4`
+  以「英格蘭／移民」作 DRAFT；`tools/validate_nation_card_fragments.py`
+  SHA-256 `9e5a9b65ae58c19430e9752817435bc8331cb74767c2c94371669a3235268d52`
+  驗原版版本、片段、複合行語境與 Cubic 11 字形。字型
+  SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`
+  僅本機讀取，不入 Git。
+- prototype（不是正式畫面）：`tools/prepare_goal088_nation_preview.py`
+  原始碼 SHA-256
+  `f263fae4e648bb28f32d23ad89dd67e25a1a4969b30a724c8057553fd4f2811a`
+  以印字前多色底圖生成兩欄各自可逆補片；暫試21px
+  「英格蘭：」墨跡92×19、左上 `(578,60)`，25px「移民」
+  墨跡54×23、左上 `(597,348)`，各比原版四倍墨跡高少1px；
+  這是較忠於原版字高的 A 版。另做同中心線的 B 版上行25px／
+  108×23、下行29px／62×27，各比原版四倍墨跡高3px，較易讀。
+  `tools/card_preview.go` 可選前景索引12與向右4輸出像素的索引0
+  黑影；舊無陰影國家頁預覽重繪雜湊與舊圖逐位元組相同。
+  Ebitengine 原文／中文 PNG SHA-256 分別為
+  `3180316daea083de59cddc624439a99ca0f97e94b88c2ca832509cd32a0716b3`／
+  `2734fd14b8716fff66227757f45749713cd19ce072745580d46c0cc53a0a0fa7`。
+  `tools/verify_card_preview.py` PASS 收據 SHA-256
+  `27b15fa6e225a157f4167d4509639d7d9cbb3f54af756274d6b0f4b76b7c3a44`：
+  原文圖等於原版四倍最近鄰；中文圖僅兩個安全區改變1,915／
+  2,737個輸出像素，不透明紅字與黑影色號正確，透明處保留底圖。
+  B 版 Ebitengine 中文 PNG SHA-256
+  `ed8104c35c767dd0bf14ccf907bf48ac63bbf19da8dce4476a51def8b7ecf35e`，
+  同樣僅在兩安全區變更2,018／2,906像素，PASS 收據 SHA-256
+  `2f18abfce0b1654b319cc314d68dff52e0b1b4e71d9ed4d8815cbbdb1c16e071`。
+  本機目視兩版均可辨兩處中文；使用者尚未在 A／B 間定版，
+  也未驗執行期回退。三張 PNG／含原版像素的 JSON 都只留在
+  `workplace/reports/goal088-nation-card-preview/`。

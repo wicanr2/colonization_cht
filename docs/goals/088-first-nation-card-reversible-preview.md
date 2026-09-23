@@ -1,10 +1,11 @@
 # 目標088：第一張國家旗卡兩欄中文可逆視覺原型
 
-狀態：進行中；日期：2026-09-23。承接[目標087](087-nation-card-source-load-edge.md)
+狀態：完成（僅本機可丟棄原型，視覺待確認）；日期：2026-09-23～24。承接[目標087](087-nation-card-source-load-edge.md)
 與[規格021](../spec/021-nation-card-red-text-draft.md)；對應
 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)、
 [Issue #12](https://github.com/wicanr2/colonization_cht/issues/12)及
-[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)。
+[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)與
+[Issue #27](https://github.com/wicanr2/colonization_cht/issues/27)。
 
 ## 玩家問題與範圍
 
@@ -44,3 +45,26 @@
 字級或可逆性證據，保持 DRAFT 並明記缺口。即使原型通過，仍需
 執行期逐欄背景／游標／按鍵／切場守門、READY 審查、真視窗
 中英文同狀態及回退驗證，才可增加目前十四段正式中文顯示數。
+
+## 本輪結果與待確認事項
+
+兩次 dosgolem 冷啟動的精確畫布收據逐位元組相同，無監看控制組
+CPU、完整 RAM、原版索引畫面、色盤及虛擬時間同狀態。原文上、
+下行的實際可見差分為123／156像素；安全區底圖分別有56／62種
+色盤索引，不能純色抹除。兩筆來源固定的繁中片段草稿與 Cubic 11
+缺字檢查通過。[規格021](../spec/021-nation-card-red-text-draft.md)
+保存原始位址、SHA-256 與逐欄量測。
+
+本機 Ebitengine 原文控制圖 `workplace/reports/goal088-nation-card-preview/control.png`
+與 A／B 中文候選圖 `workplace/reports/goal088-nation-card-preview/chinese.png`／
+`workplace/reports/goal088-nation-card-preview/chinese-readable.png`
+只在第一張旗卡兩個安全區相異；逐像素驗證通過，舊國家頁預覽
+重繪雜湊未變。A 版為「英格蘭：」21px／「移民」25px，接近原版
+四倍墨跡高度；B 版25px／29px，較易讀但各比原版高3px。
+兩版都保留原版紅字與向右一原始像素的黑影。三圖含原版像素，只留本機
+`workplace/`，沒有加入 Git；左側仍顯示原文，因此不是正式全頁圖。
+
+此輪只完成可丟棄原型。使用者尚未在 A／B 間確認兩欄的暫定字級、置中與
+紅字／黑影風格；正式前端未改、截圖未更新，中文正式顯示仍十四段。
+後續需使用者先對視覺候選作取捨，再蒐集原版執行期守門與其他
+旗卡負例，依 DRAFT → READY → 實作 → 同狀態驗證推進。

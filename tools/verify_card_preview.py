@@ -55,12 +55,34 @@ def main():
                 "預覽資料長度不符")
         ink_x, ink_y = layer["position"]
         restored = 0
+        opaque_foreground = 0
+        opaque_shadow = 0
         for y in range(y0 * 4, y1 * 4):
             for x in range(x0 * 4, x1 * 4):
                 mx, my = x - ink_x, y - ink_y
-                if 0 <= mx < layer["ink_width"] and 0 <= my < layer["ink_height"]:
-                    if mask[my * layer["ink_width"] + mx] != 0:
-                        continue
+                foreground_alpha = 0
+                shadow_alpha = 0
+                if 0 <= my < layer["ink_height"]:
+                    if 0 <= mx < layer["ink_width"]:
+                        foreground_alpha = mask[my * layer["ink_width"] + mx]
+                    if "shadow_index" in layer:
+                        sx = mx - layer["shadow_dx"]
+                        if 0 <= sx < layer["ink_width"]:
+                            shadow_alpha = mask[my * layer["ink_width"] + sx]
+                if foreground_alpha == 255 and "color_index" in layer:
+                    index = layer["color_index"] * 3
+                    expected = tuple((v << 2) | (v >> 4) for v in palette[index:index + 3])
+                    require(final[x, y] == expected, "不透明文字色號不符：%s %d,%d" %
+                            (layer["name"], x, y))
+                    opaque_foreground += 1
+                elif shadow_alpha == 255 and foreground_alpha == 0 and "shadow_index" in layer:
+                    index = layer["shadow_index"] * 3
+                    expected = tuple((v << 2) | (v >> 4) for v in palette[index:index + 3])
+                    require(final[x, y] == expected, "不透明陰影色號不符：%s %d,%d" %
+                            (layer["name"], x, y))
+                    opaque_shadow += 1
+                if foreground_alpha or shadow_alpha:
+                    continue
                 index = background[(y // 4 - y0) * width + x // 4 - x0] * 3
                 expected = tuple((v << 2) | (v >> 4) for v in palette[index:index + 3])
                 require(final[x, y] == expected, "透明中文字模下未恢復原始背景：%s %d,%d" %
@@ -68,6 +90,9 @@ def main():
                 if final[x, y] != base[x, y]:
                     restored += 1
         require(changed[layer["name"]] > 0 and restored > 0, "欄位沒有實際中文與背景恢復：" + layer["name"])
+        if "shadow_index" in layer:
+            require(opaque_foreground > 0 and opaque_shadow > 0,
+                    "欄位缺少原版紅字或黑影：" + layer["name"])
     receipt = {"prototype": True, "result": "PASS", "changed_pixels_by_field": changed,
                "control_png_sha256": hashlib.sha256(args.control.read_bytes()).hexdigest(),
                "chinese_png_sha256": hashlib.sha256(args.chinese.read_bytes()).hexdigest(),
