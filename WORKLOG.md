@@ -998,3 +998,15 @@
   `workplace/reports/goal073-colony-review.json`，但不設定或驗證固定中文字級。
 - 所有名稱維持`draft`，沒有新增 dosgolem 事件、安全矩形、Ebitengine畫面、正常玩家路徑或
   已顯示中文計數；已刪除唯一的臨時雙欄譯文提案檔。
+
+## 2026-09-23：目標074難度卡片監看修正
+
+- 先以提交 `5fc1ef6` 將[目標074](docs/goals/074-difficulty-card-observation-repair.md)推送到私有
+  `origin/main`。發現舊探針重複註冊單槽讀寫監看器後，修正為各一次註冊、回呼內分流，
+  並加入雙次收據檢查器；未修改 dosgolem 或原版資料。
+- Docker 中 `go test ./internal/machine ./oracle` 通過。修正後從相同九筆正常玩家輸入兩次冷啟動
+  至3,200萬步，`tools/check_difficulty_observer.py` 通過；兩段卡片原文來源與292次文字畫布寫入
+  均命中，最終 RAM／畫布／索引畫面／色盤一致。詳見 `RESEARCH-LOG.md` 與規格016。
+- 本輪未接入新的中文覆蓋，也未重開使用者尚未回答的 `NAMES.TXT` 分欄翻譯決策。
+  殘餘工作是直接資料流、其餘卡片及欄位專屬字級／安全矩形；規格016維持 DRAFT。
+  本機收據留在已忽略的 `workplace/reports/`；原始畫面快照及原版檔案未加入版控。

@@ -94,12 +94,12 @@ EXE及靜態圖像尚未建立完整玩家可見訊息分母，不宣稱全文�
 真視窗圖存於私有 `docs/screenshots/`；圖內有原版像素，不得當公開發行素材。
 [目標062](docs/goals/062-difficulty-finish-prompt.md)已驗收難度頁「完成後點此」提示；
 限定證據、覆蓋契約與中英文同狀態結果見[規格015](docs/spec/015-difficulty-finish-prompt.md)。
-[目標063](docs/goals/063-difficulty-card-text.md)接續難度卡片文字；目前僅在既有
-RAM 快照找到原文候選。兩次正常路徑重播確認卡片區畫布差分，但現有讀寫監看
-沒有命中候選來源與卡片逐 byte 寫入；[規格016](docs/spec/016-difficulty-card-text-draft.md)
-保持 DRAFT，不計入八段完成數。[目標074](docs/goals/074-difficulty-card-observation-repair.md)
-已確認舊探針重複註冊單一監看器，前一次卡片監看被覆蓋；零命中不能作為原版的反向證據，
-本輪將修探針並重跑，尚未取得新的卡片輸出證據。
+[目標063](docs/goals/063-difficulty-card-text.md)接續難度卡片文字；
+[目標074](docs/goals/074-difficulty-card-observation-repair.md)已修正舊探針重複註冊監看器的缺陷，
+兩次正常路徑重播均讀到第一張卡片的 `Discoverer`／`Easiest` 原文字節，且卡片區
+`0D21:012C` 有292次畫布寫入。舊「零命中」已訂正；來源讀取與各行畫布寫入的直接
+資料流、原版字級／基線和中文安全矩形仍待證實，[規格016](docs/spec/016-difficulty-card-text-draft.md)
+保持 DRAFT，不計入八段完成數。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
 保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至368筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。

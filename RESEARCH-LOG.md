@@ -1884,3 +1884,45 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
 - unknown（執行期與版面）：`runtime_display_verified` 與 `per_field_font_selection_verified` 都為 false。
   沒有名稱輸出事件、欄位安全矩形、原版字級／基線、Ebitengine畫面或正常玩家路徑；173筆不計入
   已顯示中文或全文中文化完成度。
+
+## 2026-09-23：目標074難度卡片監看勘誤與重播
+
+- 問題與舊結論：目標063報告第一張難度卡片的兩段候選原文讀取與卡片畫布寫入均為零。
+  檢查隔離 dosgolem `internal/machine/machine.go` 的 `WatchWrites`／`WatchReads`（程式來源位址
+  `machine.go:707`／`:722`）確認兩者各只有一組註冊槽；舊 `tools/probe_difficulty_writes.go`
+  對每種各註冊兩次，後一次覆蓋前一次。舊零命中是探針缺陷，不能當原版沒有讀寫的反向證據。
+- 固定輸入與工具：合法 DOS 版 `OPENING.EXE` SHA-256
+  `3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`、
+  `VICEROY.EXE` `a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3`、
+  `GAME.TXT` `67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a`、
+  `LABELS.TXT` `e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204`。
+  九筆正常玩家輸入 `goal059-ebiten.inputs.json` SHA-256 為
+  `51837a0ed11cfcc316b4e2c9dce7064403cafdd0c1af2efecf59f30319eb5efc`。
+  隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`；Docker 映像
+  `colonization-research:20260920-r2` ID `sha256:5d99f8754e9f9099b7f263268c485c73043aee1a9d9d29231417ccb5b5da02e1`；
+  修正探針 SHA-256 `dfeb232a6effb70f6609b5fa5f300a08b4174f369c08761d49f35eea10671fb1`，
+  收據內標示 `goal074-unified-watch-v1`。
+- confirmed（DOS 真實模式 `CS:IP` 與20-bit 線性記憶體）：兩次獨立冷啟動皆於步數
+  `29,797,568` 的 `0E2D:11CF` 讀取線性 `0x4CC6A..0x4CC74`，位元組為
+  `Discoverer\0`；步數 `29,813,172` 同址讀取 `0x4DF90..0x4DF97`，位元組為
+  `Easiest\0`。原文後段 NUL 是資料，不是譯文文字。上述線性位址不是 TXT 檔案位移。
+- confirmed（320×200 原始畫布）：`0D21:012C` 在第一張卡片區於步數
+  `29,798,340..29,819,570` 有292次變更值寫入，bbox `(141,45)–(182,58)`；
+  第一段讀取後且第二段讀取前有192次，第二段讀取後有100次。
+  標題／提示另有4個畫布寫入位置與11個來源讀取位置，證明兩路觀測同時有效。
+  `DIFFICUL.PIK` 在正常路徑確有開啟；兩次最終完整 RAM、畫布、索引畫面、色盤與事件一致。
+  最終 SHA-256 依序為 `09e9fbf961b8b50115fa0c8b707d4a220cf7f12b3e2a359311073f85786ad109`、
+  `08edaac74a54263b8e093010d8cbc97d3f9820c3c151f28d80beded5c5a8a650`、
+  `6072d7cf64633f93d2ad86a363ad73cd586f24bdacff51b406a84c52354924ae`、
+  `762b10807954069aa97266465cff2d72be0d1da568b668a19d15c3a5d0524e82`。
+  這四項最終雜湊也與舊 `goal063-card-reads.json` 相同，排除本次監看修正造成
+  玩家狀態或影像軌跡偏移的疑慮；舊收據中的讀寫零命中仍須撤回。
+- 強推論／未知：時間順序與同區畫布寫入支持兩段原文驅動卡片文字，但尚無來源讀取到
+  `0D21:012C` 的直接呼叫／資料流鏈，亦未證明 `GAME.TXT` 或 `NAMES.TXT` 哪個提供執行期字串。
+  原版字級、基線、可逆背景、中文安全矩形、其餘卡片與游標遮擋仍未知；
+  [規格016](docs/spec/016-difficulty-card-text-draft.md)保持 DRAFT，八段已顯示中文計數不變。
+- 重現：在 `colonization-research:20260920-r2` 以目前 UID/GID、唯讀原版與隔離 dosgolem，
+  由 `workplace/dosgolem` 執行 `go run /work/tools/probe_difficulty_writes.go`，指定原版根目錄、
+  上述輸入檔、`-end 32000000`，分別輸出本機
+  `workplace/reports/goal074-card-observer-a.json` 與 `-b.json`；再執行
+  `tools/check_difficulty_observer.py` 比對。原始 `.canvas`／`.idx` 及完整 JSON 只留本機。

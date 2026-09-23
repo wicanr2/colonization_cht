@@ -44,6 +44,7 @@ type hit struct {
 	Y       int    `json:"y,omitempty"`
 	Old     uint8  `json:"old,omitempty"`
 	New     uint8  `json:"new,omitempty"`
+	Value   uint8  `json:"value"`
 }
 
 func must(err error) {
@@ -87,6 +88,7 @@ func main() {
 	firstReads := []hit{}
 	textWrites := []hit{}
 	cardWrites := []hit{}
+	cardTextWrites := []hit{}
 	cardReads := []hit{}
 	cardWriteSites := map[string]*site{}
 	cardReadSites := map[string]int{}
@@ -94,62 +96,47 @@ func main() {
 	checkpoints := map[string]map[string]any{}
 	snapSteps := map[uint64]string{29757000: "choose-before", 29763000: "choose-after", 29765000: "level-before", 29777000: "level-after", 29779550: "finish-before", 29791000: "finish-after", 29795000: "card-29500", 29800000: "card-30000", 29850000: "card-35000", 29900000: "card-40000", 29950000: "card-45000", 30000000: "settled"}
 	address := func() string { cs, ip := m.CPU.OpAddr(); return fmt.Sprintf("%04X:%04X", cs, ip) }
-	m.WatchWrites(canvas, canvas+64000-1, func(a uint32, old, new uint8) {
-		if m.Steps < 29000000 || old == new {
-			return
-		}
-		i := int(a - canvas)
-		x, y := i%320, i/320
-		if x < 128 || x >= 196 || y < 40 || y >= 64 {
-			return
-		}
-		key := address()
-		s := cardWriteSites[key]
-		if s == nil {
-			s = &site{Address: key, FirstStep: m.Steps, MinX: x, MinY: y, MaxX: x, MaxY: y}
-			cardWriteSites[key] = s
-		}
-		s.Count++
-		s.LastStep = m.Steps
-		if x < s.MinX {
-			s.MinX = x
-		}
-		if y < s.MinY {
-			s.MinY = y
-		}
-		if x > s.MaxX {
-			s.MaxX = x
-		}
-		if y > s.MaxY {
-			s.MaxY = y
-		}
-		if len(cardWrites) < 2000 {
-			cardWrites = append(cardWrites, hit{Step: m.Steps, Address: key, Linear: a, X: x, Y: y, Old: old, New: new})
-		}
-	})
-	watchCard := func(start, end uint32) {
-		m.WatchReads(start, end, func(a uint32, _ uint8) {
-			key := address()
-			cardReadSites[key]++
-			if len(cardReads) < 1000 {
-				cardReads = append(cardReads, hit{Step: m.Steps, Address: key, Linear: a})
-			}
-		})
-	}
-	watchCard(0x4cc6a, 0x4cc74)
-	watchCard(0x4df90, 0x4df97)
+	// Machine.WatchWrites/WatchReads 各只有一組註冊槽。所有區域必須在
+	// 同一個回呼內分流；再次註冊會使先前的卡片監看完全失效。
 	m.WatchWrites(canvas, canvas+64000-1, func(a uint32, old, new uint8) {
 		if m.Steps < 28000000 {
 			return
 		}
 		i := int(a - canvas)
 		x, y := i%320, i/320
+		key := address()
+		if m.Steps >= 29000000 && old != new && x >= 128 && x < 196 && y >= 40 && y < 64 {
+			s := cardWriteSites[key]
+			if s == nil {
+				s = &site{Address: key, FirstStep: m.Steps, MinX: x, MinY: y, MaxX: x, MaxY: y}
+				cardWriteSites[key] = s
+			}
+			s.Count++
+			s.LastStep = m.Steps
+			if x < s.MinX {
+				s.MinX = x
+			}
+			if y < s.MinY {
+				s.MinY = y
+			}
+			if x > s.MaxX {
+				s.MaxX = x
+			}
+			if y > s.MaxY {
+				s.MaxY = y
+			}
+			if len(cardWrites) < 2000 {
+				cardWrites = append(cardWrites, hit{Step: m.Steps, Address: key, Linear: a, X: x, Y: y, Old: old, New: new})
+			}
+			if key == "0D21:012C" && len(cardTextWrites) < 1000 {
+				cardTextWrites = append(cardTextWrites, hit{Step: m.Steps, Address: key, Linear: a, X: x, Y: y, Old: old, New: new})
+			}
+		}
 		// 難度頁標題、完成提示；由真視窗截圖的 4 倍座標換算，
 		// 僅作研究觀測區，不是最後的文字安全矩形。
 		if !((x >= 18 && x < 105 && y >= 12 && y < 41) || (x >= 10 && x < 112 && y >= 76 && y < 89)) {
 			return
 		}
-		key := address()
 		s := writeSites[key]
 		if s == nil {
 			s = &site{Address: key, FirstStep: m.Steps, MinX: x, MinY: y, MaxX: x, MaxY: y}
@@ -177,14 +164,20 @@ func main() {
 		}
 	})
 	// 目標014結束快照的線性字串候選；讀取命中不單獨證明印字。
-	m.WatchReads(0x4df59, 0x4df8f, func(a uint32, _ uint8) {
-		if m.Steps < 28000000 {
+	m.WatchReads(0x4cc6a, 0x4df97, func(a uint32, v uint8) {
+		key := address()
+		if (a >= 0x4cc6a && a <= 0x4cc74) || (a >= 0x4df90 && a <= 0x4df97) {
+			cardReadSites[key]++
+			if len(cardReads) < 1000 {
+				cardReads = append(cardReads, hit{Step: m.Steps, Address: key, Linear: a, Value: v})
+			}
+		}
+		if m.Steps < 28000000 || a < 0x4df59 || a > 0x4df8f {
 			return
 		}
-		key := address()
 		readSites[key]++
 		if len(firstReads) < 1000 {
-			firstReads = append(firstReads, hit{Step: m.Steps, Address: key, Linear: a})
+			firstReads = append(firstReads, hit{Step: m.Steps, Address: key, Linear: a, Value: v})
 		}
 		if (a == 0x4df59 || a == 0x4df72 || a == 0x4df79) && len(readContext) < 40 {
 			sp, ss := m.CPU.R[golem.SP], m.CPU.Seg[golem.SS]
@@ -244,10 +237,12 @@ func main() {
 		"first_writes": firstWrites, "first_reads": firstReads, "text_writes": textWrites,
 		"read_context":     readContext,
 		"card_write_sites": cardWriteSites, "card_read_sites": cardReadSites,
-		"card_writes": cardWrites, "card_reads": cardReads,
-		"checkpoints":   checkpoints,
-		"address_space": "DOS real-mode CS:IP for sites; DOS 20-bit linear for observed memory; 320x200 logical canvas for x/y",
-		"limitations":   "觀測區不是安全矩形；讀字串與畫布寫入仍需連結同一輸出事件；不代表已可正式覆蓋"}
+		"card_writes": cardWrites, "card_text_writes": cardTextWrites, "card_reads": cardReads,
+		"checkpoints":       checkpoints,
+		"observer_version":  "goal074-unified-watch-v1",
+		"observer_contract": "單一 WatchWrites 分流卡片與標題／提示；單一 WatchReads 分流兩處卡片候選與標題／提示候選",
+		"address_space":     "DOS real-mode CS:IP for sites; DOS 20-bit linear for observed memory; 320x200 logical canvas for x/y",
+		"limitations":       "觀測區不是安全矩形；讀字串與畫布寫入仍需連結同一輸出事件；不代表已可正式覆蓋"}
 	b, e := json.MarshalIndent(result, "", "  ")
 	must(e)
 	must(os.WriteFile(*out, append(b, '\n'), 0644))

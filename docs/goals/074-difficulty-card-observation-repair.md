@@ -1,6 +1,6 @@
 # 目標074：修正難度卡片觀測並重驗輸出來源
 
-狀態：in_progress；日期：2026-09-23。對應 Issue [#7](https://github.com/wicanr2/colonization_cht/issues/7)、[#26](https://github.com/wicanr2/colonization_cht/issues/26) 與 [#27](https://github.com/wicanr2/colonization_cht/issues/27)。
+狀態：completed；日期：2026-09-23。對應 Issue [#7](https://github.com/wicanr2/colonization_cht/issues/7)、[#26](https://github.com/wicanr2/colonization_cht/issues/26) 與 [#27](https://github.com/wicanr2/colonization_cht/issues/27)。
 
 ## 起點與範圍
 
@@ -28,3 +28,17 @@
 
 若修正後仍無卡片監看命中，先檢查 dosgolem 是否有繞過 `Read8`／`Write8` 的批次複製路徑，
 將缺口與可重現例子記錄為下一個窄任務；不得猜測文字是靜態圖，也不得把候選譯文直接接入畫面。
+
+## 完成收據
+
+- 修正後的 `tools/probe_difficulty_writes.go` 對讀取與寫入各只註冊一次，按位址與卡片／標題區域
+  分流。`tools/check_difficulty_observer.py` 檢查註冊數、固定九筆輸入雜湊、兩次重播狀態、
+  `Discoverer`／`Easiest` 原始位元組與卡片文字寫入；Docker 執行通過。
+- 兩次獨立 dosgolem 正常玩家路徑均走到3,200萬步，`DIFFICUL.PIK` 確有開啟，完整 RAM、
+  原始畫布、索引畫面、色盤及讀寫事件相同；四項最終雜湊亦與舊探針收據相同，
+  修正只改觀測結果。執行期原文在步數 `29,797,568` 與
+  `29,813,172` 被 `0E2D:11CF` 讀取；`0D21:012C` 在卡片區寫入292個變更像素，
+  時間及 bbox 見[規格016](../spec/016-difficulty-card-text-draft.md)。
+- 本機完整收據為 `workplace/reports/goal074-card-observer-a.json` 與 `-b.json`；兩份檔案各自
+  記錄觀測版本與固定輸入，並由檢查器忽略各自不同的輸出路徑後比較。舊「零命中」已在
+  `RESEARCH-LOG.md` 追加勘誤；未因此把規格升 READY，八段中文顯示計數不變。
