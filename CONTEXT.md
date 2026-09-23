@@ -2,12 +2,15 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-目前執行入口：[目標097](docs/goals/097-name-field-display-choice.md)：
-可編輯預設姓名欄的原版框線、墨跡、安全區及 `x`／退格／Enter 分支
-已由雙次 dosgolem 冷啟動和無觀測控制核對；本機 A 原名／B 中文
-佔位示意兩圖的 Ebitengine 差分已驗。B 的文字**不是已確認譯名**，
-使用者尚未選定是否只在未編輯預設值顯示中文；正式覆蓋、真實
-譯名及回退仍待定，Issue #29 保持開放。
+目前執行入口：[目標098](docs/goals/098-first-nation-introduction-source.md)：
+先追首次國家介紹的長文來源、輸出事件及版面，不依賴姓名欄
+顯示取捨；Issue #30 保持開放。並行待決的
+[目標097](docs/goals/097-name-field-display-choice.md)已量得可編輯
+預設姓名欄的原版框線、墨跡、安全區及 `x`／退格／Enter 分支，
+本機 A 原名／B 中文佔位示意兩圖的 Ebitengine 差分已驗。
+B 的文字**不是已確認譯名**，使用者尚未選定是否只在未編輯
+預設值顯示中文；正式覆蓋、真實譯名及回退仍待定，Issue #29
+保持開放。
 最近完成入口：[目標096](docs/goals/096-player-name-prompt-runtime-guard.md)：
 姓名固定提示已由完整來源事件、當次多色畫布補片、游標與 Enter
 離頁守門接入正式輸出層；[規格023](docs/spec/023-player-name-screen-draft.md)
