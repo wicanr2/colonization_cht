@@ -80,6 +80,7 @@ func main() {
 	out := flag.String("out", "", "workplace 內輸出前綴")
 	control := flag.Bool("control", false, "無讀寫監看的同輸入控制")
 	flow := flag.Bool("flow", false, "監看 TXT 載入至 RAM 與新卡印字來源；單一寫入槽不能同時監看畫布")
+	precise := flag.Bool("precise", false, "目標091：另存右側兩欄精確印字前後畫布")
 	flag.Parse()
 	if *inputs == "" || *out == "" {
 		panic("必須指定 inputs 與 out")
@@ -256,7 +257,15 @@ func main() {
 	advance(44000000)
 	d.PressMouse(0)
 	steps := []uint64{44000000, 44050000, 44100000, 44150000, 44200000, 44220000, 44240000, 44300000, 45000000}
+	preciseNames := map[uint64]string{}
+	if *precise {
+		steps = []uint64{44000000, 44050000, 44100000, 44123301, 44129564,
+			44133138, 44142300, 44150000, 44200000, 44220000, 44240000, 44300000, 45000000}
+		preciseNames = map[uint64]string{44123301: "before-upper", 44129564: "after-upper",
+			44133138: "before-lower", 44142300: "after-lower"}
+	}
 	samples := map[string]any{}
+	preciseSnapshots := map[string]any{}
 	for _, target := range steps {
 		advance(target)
 		label := fmt.Sprintf("%d", target)
@@ -264,6 +273,17 @@ func main() {
 		must090(os.WriteFile(*out+"."+label+".canvas", b, 0644))
 		samples[label] = map[string]any{"canvas_sha256": sha090(b), "indexed_sha256": sha090(m.Indexed()),
 			"memory_sha256": sha090(m.Mem), "cycles": m.CPU.Cycles, "ticks": m.Ticks}
+		if name, ok := preciseNames[target]; ok {
+			must090(os.WriteFile(*out+"."+name+".canvas", b, 0644))
+			indexed := m.Indexed()
+			must090(os.WriteFile(*out+"."+name+".idx", indexed, 0644))
+			preciseSnapshots[name] = map[string]any{"step": target, "canvas_sha256": sha090(b),
+				"indexed_sha256": sha090(indexed)}
+		}
+	}
+	if *precise {
+		must090(os.WriteFile(*out+".final.idx", m.Indexed(), 0644))
+		must090(os.WriteFile(*out+".final.pal", m.DAC[:], 0644))
 	}
 	state := map[string]any{"steps": m.Steps, "cycles": m.CPU.Cycles, "ticks": m.Ticks,
 		"registers": m.CPU.R, "segments": m.CPU.Seg, "ip": m.CPU.IP, "flags": m.CPU.Flags,
@@ -274,7 +294,7 @@ func main() {
 		"input_sha256":  sha090(inputBytes), "input_hashes": wants, "reads": reads, "read_count": readCount,
 		"read_truncated": readTruncated, "writes": writes, "write_count": writeCount,
 		"write_truncated": writeTruncated, "ram_events": ramEvents, "ram_truncated": ramTruncated,
-		"samples": samples, "opened": d.Opened, "state": state,
+		"samples": samples, "precise_snapshots": preciseSnapshots, "opened": d.Opened, "state": state,
 		"resident_before": residentBefore,
 		"resident_after": map[string][]int{"France": locations090(m.Mem, "France"),
 			"Cooperation": locations090(m.Mem, "Cooperation"), "FRANCE:": locations090(m.Mem, "FRANCE:")}}
