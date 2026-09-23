@@ -1410,4 +1410,7 @@
 - `gofmt -d` 無差異；程式、字模、A／B 預覽資料與 PNG 的 SHA-256
   與[規格021](docs/spec/021-nation-card-red-text-draft.md)記載一致。
   repo 已再核對為 PRIVATE，Issue #7／#12／#26／#27 保持 OPEN；
-  尚待提交、推送與回填 Issue 後補記收尾結果。
+  可丟棄原型與 DRAFT 證據以 `eed527c` 推送 `origin/main`，四個
+  Issue 均已附限定成果及未完成範圍的留言，未關閉。提交清單沒有
+  原版 EXE、素材、字型或工作區圖像。工作樹無 root-owned 項目或
+  誤建 `.md` 目錄，`docker run --rm` 均已退出，沒有其他專案資源清理。
