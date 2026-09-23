@@ -1480,3 +1480,14 @@
   右側印字前背景、安全矩形、字級與正式逐欄回退未做；第一張
   旗卡 A／B 尚待使用者確認。十四段正式中文數及已驗截圖不變，
   原始 RAM／畫布、探針二進位與字型只留本機 `workplace/`。
+- `tools/worklist.py verify`、產生內容與 `WORKLIST.md` 一致、
+  Python AST、Go 格式及 `git diff --check` 通過；私有 repo
+  仍為 PRIVATE，提交清單只含程式、譯文與文件。成果提交
+  `b21fca9` 已推送 `origin/main`；遠端
+  [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)、
+  [#12](https://github.com/wicanr2/colonization_cht/issues/12)、
+  [#27](https://github.com/wicanr2/colonization_cht/issues/27)
+  各已回填限定成果與未完成範圍並保持 OPEN。
+  本輪輸出與程式為 UID/GID `1000:1000`，工作樹沒有
+  root-owned 項目或誤建 `.md` 目錄；全部本輪
+  `docker run --rm` 容器已退出，未清理其他專案資源。
