@@ -147,7 +147,8 @@ Issue #28 的難度標題 A／B 版式仍待使用者依本機對照圖選定；
 離開難度頁，抵達 `NATIONS.PIK` 並閉合左側兩行原文來源到畫素；
 38px 繁中是依本欄原文墨跡量測的本機預覽，規格020仍 DRAFT，未增加
 十二段正式已顯示中文數。下一步需執行期守門與真 TSV／Ebitengine
-反例後才能升 READY；其餘國家選擇文字、help 與更深玩家路徑仍待探查。
+反例後才能升 READY；本輪入口為[目標084](docs/goals/084-nation-heading-runtime-guard.md)。
+其餘國家選擇文字、help 與更深玩家路徑仍待探查。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
 保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至368筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。
