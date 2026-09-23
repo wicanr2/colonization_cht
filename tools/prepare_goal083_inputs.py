@@ -21,16 +21,17 @@ def main() -> int:
     parser.add_argument("--output-dir", type=Path, required=True)
     variants_group = parser.add_mutually_exclusive_group()
     variants_group.add_argument("--hover", action="store_true", help="從已驗點擊收據產生國家標題游標進出反例")
+    variants_group.add_argument("--button", action="store_true", help="從已驗點擊收據產生國家頁滑鼠按住反例")
     variants_group.add_argument("--f1", action="store_true", help="從已驗點擊收據產生原版 F1 說明鍵反例")
     args = parser.parse_args()
-    expected = CLICK_SHA if args.hover or args.f1 else SOURCE_SHA
+    expected = CLICK_SHA if args.hover or args.button or args.f1 else SOURCE_SHA
     if hashlib.sha256(args.source.read_bytes()).hexdigest() != expected:
         raise ValueError("輸入來源版本不符")
     if not args.output_dir.is_dir() or args.output_dir.stat().st_uid != os.getuid():
         raise ValueError("輸出目錄不存在或擁有者不符")
     original = json.loads(args.source.read_text())
     inputs = original["inputs"]
-    if args.hover or args.f1:
+    if args.hover or args.button or args.f1:
         if len(inputs) != 16 or inputs[-1] != {
             "step": 43_000_000, "kind": "move", "x": 16, "y": 16, "button": 0
         }:
@@ -47,6 +48,12 @@ def main() -> int:
                     {"step": 64_000_000, "kind": "move", "x": 16, "y": 16, "button": 0},
                 ],
             }
+        elif args.button:
+            end = 68_000_000
+            variants = {"button": [
+                {"step": 60_000_000, "kind": "press", "x": 0, "y": 0, "button": 0},
+                {"step": 64_000_000, "kind": "release", "x": 0, "y": 0, "button": 0},
+            ]}
         else:
             end = 80_000_000
             variants = {"f1-control": [],
