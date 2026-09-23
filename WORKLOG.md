@@ -1567,3 +1567,10 @@
   建立[Issue #29](https://github.com/wicanr2/colonization_cht/issues/29)，
   並將 `player-name-screen` 登入 `docs/worklist.json`，
   由工具重生 `WORKLIST.md`；新項維持 `planned`／人工驗證。
+- 成果提交 `e60fc98` 及 Issue 索引提交 `337db15` 均已推送
+  私有 `origin/main`；遠端 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)、
+  [#12](https://github.com/wicanr2/colonization_cht/issues/12)、
+  [#26](https://github.com/wicanr2/colonization_cht/issues/26)、
+  [#27](https://github.com/wicanr2/colonization_cht/issues/27)與
+  [#29](https://github.com/wicanr2/colonization_cht/issues/29)
+  已回填本輪結果及未完成範圍，均維持 OPEN。
