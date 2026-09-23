@@ -72,13 +72,19 @@ func scaled(indexed, palette []byte, width, height int) *ebiten.Image {
 	}
 	return ebiten.NewImageFromImage(imageData)
 }
-func newPreview(data previewData, out string, control bool) *previewGame {
+func newPreview(data previewData, out string, control bool, base image.Image) *previewGame {
 	if !data.Prototype || len(data.Layers) > 2 || (!control && len(data.Layers) == 0) {
 		fail(fmt.Errorf("只接受無覆蓋原文控制或一／兩欄可丟棄收據"))
 	}
 	indexed := decode(data.Indexed, 320*200)
 	palette := decode(data.Palette, 256*3)
 	canvas := scaled(indexed, palette, 320, 200)
+	if base != nil {
+		if base.Bounds() != image.Rect(0, 0, 1280, 800) {
+			fail(fmt.Errorf("已驗視窗底圖尺寸不符"))
+		}
+		canvas = ebiten.NewImageFromImage(base)
+	}
 	if !control {
 		for _, layer := range data.Layers {
 			x0, y0, x1, y1 := layer.Safe[0], layer.Safe[1], layer.Safe[2], layer.Safe[3]
@@ -158,6 +164,7 @@ func main() {
 	in := flag.String("in", "", "本機已核對預覽資料")
 	out := flag.String("out", "", "本機輸出 PNG")
 	control := flag.Bool("control", false, "只顯示原版畫布")
+	basePath := flag.String("base", "", "本機已驗 Ebitengine 視窗底圖；僅供可丟棄對照")
 	flag.Parse()
 	if *in == "" || *out == "" {
 		fail(fmt.Errorf("必須指定 -in 與 -out"))
@@ -166,7 +173,15 @@ func main() {
 	fail(err)
 	var data previewData
 	fail(json.Unmarshal(bytes, &data))
+	var base image.Image
+	if *basePath != "" {
+		input, err := os.Open(*basePath)
+		fail(err)
+		base, err = png.Decode(input)
+		fail(err)
+		fail(input.Close())
+	}
 	ebiten.SetWindowSize(1280, 800)
 	ebiten.SetWindowTitle("Colonization card prototype")
-	fail(ebiten.RunGame(newPreview(data, *out, *control)))
+	fail(ebiten.RunGame(newPreview(data, *out, *control, base)))
 }

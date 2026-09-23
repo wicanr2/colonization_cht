@@ -3088,3 +3088,63 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   首次國家介紹長文來源、help 與全遊戲畫面覆蓋。規格023
   CONFORMED 只限此固定版本的固定提示；本輪不新增含原版像素的
   Git 截圖，亦不宣稱完整中文化。
+
+## 2026-09-24：目標097可編輯姓名欄畫素、輸入邊界與可丟棄對照
+
+- **問題與輸入。** 固定提示已限定 CONFORMED，但姓名欄是玩家可編輯資料，
+  不可因畫面顯示 `Jacques Cartier_` 就直接覆蓋或改寫原版值。合法 DOS
+  `NAMES.TXT` SHA-256 為
+  `4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061`；
+  固定16筆正常玩家輸入 SHA-256
+  `a48ae77b9f6a0c2bdb9b3512625d0c1c4786b1cb64b8deff4bdb603fe422d93e`。
+  隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`，
+  `colonization-research:20260920-r2`／Go 1.24.13；視覺原型用
+  Ebitengine v2.9.9、`rich2-py:latest`／Pillow 12.3.0 及 Cubic 11
+  SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`。
+  檔案位移、DOS實模式 `CS:IP`、20-bit線性 RAM、320×200索引畫布與
+  1280×800輸出畫布是不同位址／座標空間。
+- **confirmed（來源與墨跡）。** 原始 `NAMES.TXT:0xB4B` 15 bytes 是
+  `Jacques Cartier`；`0D21:00C6` 讀 20-bit 線性 RAM `0x2A972` 的
+  23個前導空格加 `Jacques Cartier_`。`0D21:012C` 對原版畫布有
+  286筆改色寫入，半開 bbox `(82,101)–(164,110)`；色號68／47／128
+  分別132／89／65筆。印前框線淨變1077點，bbox
+  `(79,98)–(246,112)`，上下邊 y=98／111 各167點；姓名筆畫
+  印前至印後淨變285點，色號68／47／128分別131／89／65點。
+  因有一點遭覆寫，不能把286筆事件誤當成286個最後可見畫素。
+  候選內容安全區是原版半開 `(80,100)–(245,111)`，不含框線。
+- **confirmed（重播與編輯）。** `tools/probe_goal097_name_field.go` SHA-256
+  `2667e748404c5e663907eec2423b71d6bd435c2fa0d05b6ba0b548c4877deb35`。
+  無輸入雙次冷啟動的報告逐位元組相同，SHA-256
+  `221fd670434b603c7a27357f562053c301edc0f938cdd61399cdfdcf55e2586e`；
+  無觀測控制 SHA-256
+  `2a13035a27997b70d420105d6caf87df51e74668a48dfebde1fef3684c66b667`。
+  無輸入、`x`、退格、Enter 各分支在印前、印後、49M、55M、57M、65M
+  步的 CPU、完整 RAM 雜湊、原版索引、底層畫布、色盤、時間與開檔
+  均與同輸入控制一致。55M 至57M 的 `x` 與無輸入差733畫素，
+  65M 的 `x`／退格差35畫素，均只在姓名框；Enter 與無輸入差
+  14,167畫素且開檔數增加，已抵達下一畫面。這些是原版輸入行為，
+  不等於中文覆蓋正式編輯切換已驗收。
+- **confirmed（限定可丟棄原型）。** 原型準備器
+  `tools/prepare_goal097_name_preview.py` SHA-256
+  `54995f4c92a09fe4f5bfd43dc517791d6b161618defbdbd053cf2a58f5b78c34`；
+  `tools/card_preview.go` SHA-256
+  `d45d12e5e6fc905ea7baaadebaf25fc44cae63513d45a62e0397a16c0a4d0357`。
+  A 圖與目標096已驗真 Ebitengine 視窗底圖逐像素相同；B 圖只顯示
+  **明示的佔位字**「中文譯名示意_」，不是已查證譯名。B 採
+  Cubic 11 候選38px、實測268×35px，四倍畫布左上 `(328,404)`；
+  A／B 差分 bbox `(328,404)–(656,440)`，6,818點且全在姓名安全區
+  `(320,400)–(980,444)`。A／B PNG SHA-256 分別
+  `ad5008d5fd2b18c73e84c87d2afa10047c0b7008ad3654454d81389b9a813948`／
+  `d3770b5561d7e25eca5a9c1e6c17e5d07a7feddd02a5a65471a4e2d65a0023b1`。
+  獨立驗證器 `tools/check_goal097_name_preview.py` SHA-256
+  `ba2a03f8aa579dc440df69e648f311970e3392ac2cb60520a7635b3a691f3abf`
+  重跑 PASS，收據 SHA-256
+  `0e6ece12a6452d56b4e473ebf1f5bcba5e5aa3006a3efc06634ee015332f185f`。
+  原版畫素與字型只留在已忽略的 `workplace/reports/goal097-name-field/`，
+  不推送 GitHub。
+- **強推論／未知與停止線。** 若採 B，僅未編輯的預設值用顯示層譯名，
+  玩家一輸入就回到原版 ASCII 姓名，較能保護原版資料；但這是
+  *方案*，不是已驗正式行為。真正姓名譯法、輸入時即時切換、
+  最長譯文與各種游標／缺鍵／錯版回退尚未建立 READY 規格。
+  使用者 A／B 未選前不接正式前端、不改原版 RAM／規則／存檔，
+  規格023的限定 CONFORMED 與十五段正式中文顯示數不變。
