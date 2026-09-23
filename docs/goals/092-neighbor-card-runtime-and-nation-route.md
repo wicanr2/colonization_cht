@@ -1,6 +1,7 @@
 # 目標092：右側旗卡執行期守門與選國後玩家路徑
 
-狀態：進行中；日期：2026-09-24。承接[目標091](091-neighbor-nation-card-reversible-preview.md)
+狀態：完成（限定原版守門與下一可見畫面）；日期：2026-09-24。
+承接[目標091](091-neighbor-nation-card-reversible-preview.md)
 及[規格022](../spec/022-neighbor-nation-card-red-text-draft.md)；對應
 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)、
 [Issue #12](https://github.com/wicanr2/colonization_cht/issues/12)與
@@ -44,3 +45,40 @@
 不更新成果截圖，也不增加十四段正式顯示數。若右卡正式
 回退契約或選國行為仍有未知，規格022保持 DRAFT；後續
 READY 審查與真視窗中英文同狀態驗收另立明確目標。
+
+## 本輪結果
+
+原版正常輸入在43M步由第一張旗卡移到右上卡 `(255,50)`，44M步
+左鍵按下、45M步放開；46M步的右卡基準與目標089／091的畫布、
+索引及 RAM 雜湊相同。四條後續路徑 `hover`、`press`、`back`、
+`finish` 各做兩次獨立冷啟動及無逐幀觀測控制；雙次 JSON
+逐位元組一致，控制組的 CPU、完整 RAM、索引、色盤、時間、
+開檔與每個快照相同。獨立驗證器檢查原版18／55個逐幀事件及
+Ebitengine 的1280×800原文控制畫面，結果 PASS；原始收據、
+PNG 與字型均只留已忽略的 `workplace/`。本機 PASS 收據
+`workplace/reports/goal092-neighbor-runtime/verified.json` SHA-256
+`08014a9e6355dc3569ffc6cf3469c69852158164c1e2fe2e255c2277e09a8149`。
+
+- 游標到右上文字 `(255,18)` 時只交集上欄24點；到右下
+  `(255,90)` 時只交集下欄25點。兩次的底層畫布始終保持右卡
+  原文字；移開到 `(16,16)` 後右卡兩欄均不受游標遮擋。
+- 再次點右卡中央 `(255,50)`，按下後有一幀底層畫布短暫
+  重繪，但原版索引畫面、最終底層畫布與右卡基準相同。
+  因而不能把「檢查點畫布相同」外推成執行期間絕無重繪。
+- 點左卡 `(156,50)` 後，右卡兩欄安全區與基準各相異
+  165／201點；中間幀先換索引畫面、再完成底層畫布重繪，
+  最終畫布雜湊等於第一張英格蘭旗卡原版收據。右卡覆蓋必須
+  在換卡時失效，不能沿用上一欄補片。
+- 依畫面左下可見的「Click here when finished」提示，
+  在右卡選定後點 `(65,184)`；48M步按下仍是選國頁，放開
+  後載入 `WOODPANL.PIK` 與 `GAME.TXT`，49M～55M步穩定
+  顯示新畫面。Ebitengine 原版控制圖可見「Please Enter Your
+  Name.」及預設顯示「Jacques Cartier_」。此處只證實畫面
+  與玩家可達性，不推定兩則文字的原始來源、穩定輸出鍵或可編輯
+  輸入規則；見[規格023](../spec/023-player-name-screen-draft.md)。
+
+右卡[規格022](../spec/022-neighbor-nation-card-red-text-draft.md)仍為
+DRAFT，因正式逐欄回退與使用者視覺方案尚未完成；十四段正式
+中文顯示和既有成果截圖不變。新姓名畫面也是 DRAFT 候選，
+後續須追 TXT／EXE→RAM→畫布來源、文字安全區、輸入行為，
+才能規劃中文覆蓋。

@@ -2787,3 +2787,58 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   `0caf4c76344b61f3cc79814bfffc9631e106c2e20cad49eea09acdce92337e52`。
   這只證實可逆預覽，不是使用者選定版式、READY 或正式中文
   逐欄回退；所有原版畫布、字型與 PNG 只留 `workplace/`。
+
+## 2026-09-24：目標092右卡守門與選國後姓名畫面
+
+- 固定合法 DOS 原版檔名與 SHA-256 見[規格023](docs/spec/023-player-name-screen-draft.md)；
+  新增當次載入的 `WOODPANL.PIK` 19,257 bytes、SHA-256
+  `0858856ad5b5dd0b6ab8e7a8f815fa602a9cf0237d8d323cd2b5ca141b32bc69`
+  到探針的失敗即關閉檔案清單。16筆真視窗輸入 SHA-256
+  `a48ae77b9f6a0c2bdb9b3512625d0c1c4786b1cb64b8deff4bdb603fe422d93e`。
+  隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`，
+  Go 1.24.13、`colonization-research:20260920-r2`；探針
+  `tools/probe_goal092_neighbor_runtime.go` SHA-256
+  `ce89d8d12645348bef21ee4a0bb701118775121a8e45b7c9d43cc814d094f4cc`，
+  獨立驗證器 SHA-256
+  `d3598ff41bea1c9376ab6c4dc3aca6ba6c98e6691f296e8d2a89738b7f88777b`。
+  位址空間：DOS 實模式 `CS:IP`、20-bit 線性 RAM（底層畫布
+  `0x2CAE0` 起64,000 bytes）、320×200索引像素及 VGA DAC；
+  本輪未用同文 RAM 搜尋主張任何新文字來源位址。
+- confirmed：由原16筆輸入43M步的左卡狀態，正常滑鼠在43M步移
+  `(255,50)`、44M步按下、45M步放開；46M步的右卡索引 SHA
+  `c867bee2f4c5b7a0af07415d68bccb8d028c905fba53d830b01bfb300672af74`、
+  底層畫布 SHA
+  `9e2be3fc35e842afbb03b128a7fedce353f3874d60f0c2101de79b75a366a87b`、
+  完整 RAM SHA
+  `935404090ebaa9326051ce5c9fc29a289f5c09f4ce55b21608116523262d5349`，
+  與目標089／091的右卡收據相同。
+- confirmed：右卡游標在 `(255,18)` 時只與上欄安全矩形交集
+  24索引像素，在 `(255,90)` 時只與下欄交集25點；移到
+  `(16,16)` 後兩欄交集零。三種條件的底層畫布都維持右卡
+  原文。再次於 `(255,50)` 按左鍵的一個原版輸出幀，底層
+  畫布曾短暫不同，但索引顯示與終態均維持右卡；故「最終
+  畫布相同」不等於中間沒有重繪。
+- confirmed：右卡選定後點左卡 `(156,50)`，右卡上／下
+  安全區與原基準各相異165／201點。先換索引畫面，再有
+  一幀中間畫布，最後底層畫布 SHA 回到第一張旗卡的
+  `2e005b93f811c7e0eb557eb68d1f5c1721caf027e5f32220c3c62195e7c9100b`。
+  這是右卡補片必須失效的原版負例，不是正式前端已回退。
+- confirmed：右卡後移到選國頁左下可見的完成提示 `(65,184)`，
+  47M步按下仍保留原選國頁；48M步放開後連續畫面載入，
+  開檔序列增加 `WOODPANL.PIK`、`GAME.TXT`。49M～55M步
+  索引 SHA
+  `128280c6bc9b0c3622b4d27642fdf7d2ecbf3866f068ddd87f20a2b6f096c58e`，
+  畫布 SHA
+  `4182cf7454d507e9dda76e4d81bde65ded7508314c5c518892508f8cddfb1b37`；
+  色盤也已換。雙次獨立冷啟動的 `hover`／`press`／`back`／
+  `finish` 收據各自逐位元組相同，與無逐幀監看控制組的
+  CPU、完整 RAM、索引、色盤、時間、開檔與取樣畫布相同。
+  獨立 PASS 收據 SHA-256
+  `08014a9e6355dc3569ffc6cf3469c69852158164c1e2fe2e255c2277e09a8149`。
+- confirmed（畫面目視，**非文字來源**）：Go 1.26.7／Ebitengine
+  v2.9.9 在 Xvfb 以原版索引與色盤畫出1280×800控制圖；
+  獨立像素重建器證實整張圖是原版四倍最近鄰。新畫面可見
+  `Please Enter Your Name.`／`Jacques Cartier_`；新畫面 PNG
+  SHA-256 `f403556f7dcaf1961a735301d79bbf5376fe614b6a289738afc8109f21e202e9`，
+  只保存在 `workplace/`。預設名來源、文字是否動態、輸入
+  語意及翻譯鍵仍是**未知**，下一步依 DRAFT 規格023取證。

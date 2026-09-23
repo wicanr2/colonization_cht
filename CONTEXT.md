@@ -2,9 +2,10 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-目前工作入口：[目標092](docs/goals/092-neighbor-card-runtime-and-nation-route.md)，
-只追右卡執行期游標／按鍵負例與選國後正常玩家路徑；
-最近完成入口：[目標091](docs/goals/091-neighbor-nation-card-reversible-preview.md)：
+最近完成入口：[目標092](docs/goals/092-neighbor-card-runtime-and-nation-route.md)：
+右卡游標／重繪／換卡／離頁負例已有雙次原版及無觀測控制收據；
+正常玩家路徑已到姓名畫面，但其文字來源與輸入行為仍未知。
+前一完成入口：[目標091](docs/goals/091-neighbor-nation-card-reversible-preview.md)：
 相鄰右上旗卡兩欄的原版精確印前底圖與本機 Ebitengine 可逆候選已驗，
 尚未定案字級或接正式輸出；前一完成入口：
 [目標090](docs/goals/090-neighbor-nation-card-source.md)；
@@ -65,8 +66,9 @@ dosgolem 重播及無觀測控制。承接[目標088](docs/goals/088-first-natio
 | 第二張難度卡片 | confirmed：真 Ebitengine 視窗點擊 `(265,55)` 顯示 `EXPLORER:`／`Easy`，雙次 dosgolem 收據閉合 `NAMES.TXT:0xC18`／`LABELS.TXT:0x8B2` 至 RAM、格式化印字與原始畫布；墨跡高5／6像素、有紋理底圖。規格019限定兩行為 CONFORMED：「探險家／簡單」採21／25px逐欄字模，真視窗中文與英文控制原版同狀態；各欄缺譯／重複鍵及游標回退、錯版本拒絕與第一張卡片回歸均通過。規格016對其餘卡片仍為 DRAFT。 |
 | 國家選擇頁 | confirmed：正常滑鼠按下／放開難度頁完成區會開啟 `NATIONS.PIK`；16筆真 Ebitengine 視窗輸入抵達此頁，與同輸入英文控制原版同狀態。左側兩行 `Select`／`European Power` 已追溯至 `LABELS.TXT:0x8D3`／`0x8DB`、RAM、實模式輸出及安全矩形；[規格020](docs/spec/020-nation-heading-overlay.md)限定 CONFORMED：「選擇／歐洲國家」各38px，兩欄缺鍵／重複鍵、游標、按鍵及場景切換均逐欄安全回退，錯版在輸出前拒絕。其他國家頁文字仍未驗收。 |
 | 第一張國家旗卡紅字 | 目標085／087已證實 `NAMES.TXT:0x8EA`／`LABELS.TXT:0x8F2` 各自從 DOS 讀入到原版畫布的動態來源鏈。目標088以雙次冷啟動及無監看控制擷取當次印字前多色底圖，建立[text/nation-card-fragments.zh-Hant.tsv](text/nation-card-fragments.zh-Hant.tsv)兩筆來源固定草稿；Ebitengine 可丟棄原型 A 採21／25px較接近原版、B 採25／29px較易讀，均為「英格蘭：／移民」、原版紅字／黑影且安全區外零差異。目標089另已驗原版上、下欄游標各自遮擋、下欄左鍵不重繪及相鄰旗卡左鍵後兩欄重繪的負例；正式輸出層尚未回退驗收。A／B 待使用者選擇，[規格021](docs/spec/021-nation-card-red-text-draft.md)仍 DRAFT；其他旗卡與離頁場景未驗，不計入十四段正式顯示。 |
-| 相鄰右上國家旗卡文字 | [目標090](docs/goals/090-neighbor-nation-card-source.md)證實 `NAMES.TXT:0x906` 的 `France` 與 `LABELS.TXT:0x8FF` 的 `Cooperation` 從原始 TXT、DOS／RAM 至右側畫布；舊左欄先清除。[目標091](docs/goals/091-neighbor-nation-card-reversible-preview.md)另以雙次冷啟動及無監看控制取得右欄精確印前多色底圖與各自可逆安全區，Ebitengine 21／25px及25／29px兩個本機候選逐像素 PASS。原版右欄實為藍色索引9（規格檔名的 `red-text` 是舊暫稱），非左卡紅色12。[規格022](docs/spec/022-neighbor-nation-card-red-text-draft.md)仍 DRAFT；字級未定案，游標／切卡／離頁及正式逐欄回退未驗，不計入十四段正式顯示。 |
-| 完整可玩／正式發行 | 未驗證、未發布；正常玩家路徑目前僅驗證至國家選擇畫面，尚未完成選國、help 或遊玩。 |
+| 相鄰右上國家旗卡文字 | [目標090](docs/goals/090-neighbor-nation-card-source.md)證實 `NAMES.TXT:0x906` 的 `France` 與 `LABELS.TXT:0x8FF` 的 `Cooperation` 從原始 TXT、DOS／RAM 至右側畫布；[目標091](docs/goals/091-neighbor-nation-card-reversible-preview.md)取得右欄多色底圖、安全區及兩個本機 Ebitengine 候選逐像素 PASS。原版右欄為藍色索引9，不是左卡紅色12。[目標092](docs/goals/092-neighbor-card-runtime-and-nation-route.md)又驗上／下欄游標各自遮擋24／25點、再點右卡的短暫重繪、切回左卡及離頁負例；雙次冷啟動與無觀測控制同狀態。[規格022](docs/spec/022-neighbor-nation-card-red-text-draft.md)仍 DRAFT；字級未定案，正式前端逐欄回退未驗，不計入十四段正式顯示。 |
+| 選國後姓名畫面 | confirmed：正常玩家在右卡選定後點左下可見完成提示 `(65,184)`，原版開 `WOODPANL.PIK`／`GAME.TXT`，49M～55M步穩定顯示「Please Enter Your Name.」與「Jacques Cartier_」；Ebitengine 原文控制圖和原版索引／色盤逐像素相同。詳細收據見[目標092](docs/goals/092-neighbor-card-runtime-and-nation-route.md)及[規格023](docs/spec/023-player-name-screen-draft.md)。文字原始來源、輸入語意、中文安全矩形仍未知，不計正式中文。 |
+| 完整可玩／正式發行 | 未驗證、未發布；正常玩家路徑目前驗至選國後姓名畫面，尚未確認姓名輸入、help 或實際遊玩。 |
 
 ## 工具與重播入口
 
@@ -99,11 +101,12 @@ DOSBox-X 僅提供啟動鏈及畫面類別的輔助基準，正式收據由 dosg
 的原版游標／換旗負例轉成正式逐欄回退契約，再補其他旗卡與離頁
 場景，才可審查[規格021](docs/spec/021-nation-card-red-text-draft.md)是否 READY。
 相鄰右上旗卡已依[目標091](docs/goals/091-neighbor-nation-card-reversible-preview.md)
-驗得印字前底圖、安全矩形及欄位專屬的兩組候選字級；下一步依
-[目標092](docs/goals/092-neighbor-card-runtime-and-nation-route.md)量執行期
-游標、按鍵、換卡與選國後可達性。不得把第一張的 A／B 決定或
-左側清除區座標外推到右側，[規格022](docs/spec/022-neighbor-nation-card-red-text-draft.md)
-繼續保持 DRAFT。
+驗得可逆底圖與兩組字級候選，[目標092](docs/goals/092-neighbor-card-runtime-and-nation-route.md)
+又量得游標、再次點卡、切回左卡及離頁相位；下一步是右卡
+正式逐欄回退與版式確認，不能把第一張的 A／B 決定外推。
+[規格022](docs/spec/022-neighbor-nation-card-red-text-draft.md)仍 DRAFT。
+姓名畫面依[規格023](docs/spec/023-player-name-screen-draft.md)先追
+輸入語意及提示／預設名的原始來源，再選逐欄中文覆蓋方案。
 以下舊目標僅供查找當時證據與過程；完成度以本檔上方「目前狀態表」為準。
 [目標065](docs/goals/065-pedia-founding-fathers-corpus.md)與[目標066](docs/goals/066-pedia-cargo-corpus.md)
 已分別完成25篇「建國元勳」及16篇「貨物」的整段草稿；合計41篇已通過固定來源、

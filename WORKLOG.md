@@ -1529,3 +1529,37 @@
   [#26](https://github.com/wicanr2/colonization_cht/issues/26)與
   [#27](https://github.com/wicanr2/colonization_cht/issues/27)
   已回填限定成果與仍未完成的驗收，均維持 OPEN。
+
+## 2026-09-24：目標092右卡執行期守門與姓名畫面
+
+- 先以 `ff9eee7` 推送[目標092](docs/goals/092-neighbor-card-runtime-and-nation-route.md)
+  到確認為 PRIVATE 的 repo，才開始探針。沿用固定合法 DOS
+  原版、隔離 dosgolem 與16筆真視窗玩家輸入；`upstream`
+  推送位址仍為 `DISABLED`。
+- 探針從46M步右卡基準分四條正常滑鼠路徑：游標上下欄／移開、
+  再點右卡、點回左卡、點選國頁左下可見完成提示。四條各做
+  兩次獨立冷啟動及一份無逐幀觀測控制；逐份原版 CPU、完整
+  RAM、索引、底層畫布、色盤、時間、開檔與18／55個輸出幀
+  由獨立驗證器 PASS。右卡游標各只遮一欄24／25點；
+  再點右卡有短暫底層重繪，終態仍是右卡；點左卡使右卡
+  上／下欄失效且畫布回到英格蘭旗卡。
+- 右卡選定後點 `(65,184)` 的可見「Click here when finished」
+  提示，原版開 `WOODPANL.PIK`／`GAME.TXT`，49M～55M步
+  穩定到新姓名畫面。以 Ebitengine 重生原版選國頁與新畫面
+  控制圖，獨立像素重建器逐點 PASS；畫面可見「Please Enter
+  Your Name.」及「Jacques Cartier_」。這是新正常玩家路徑
+  證據，不是新文字來源或姓名輸入規則證據。
+- 首次獨立驗證器把進入姓名畫面時的中間載入幀誤判為最終畫布；
+  依逐幀收據訂正相位後通過。探針起初未把新開的
+  `WOODPANL.PIK` 列入版本指紋；補上19,257-byte原版檔案
+  SHA-256 後**全部十二份**原版報告與兩張 Ebitengine 控制圖
+  重新產生並再驗 PASS，未沿用舊收據冒稱通過。
+- 更新[規格022](docs/spec/022-neighbor-nation-card-red-text-draft.md)
+  的原版守門與[規格023](docs/spec/023-player-name-screen-draft.md)
+  的新文字 DRAFT 邊界，並修正 `CONTEXT.md`、README 穩定
+  現況與 `docs/worklist.json`；`WORKLIST.md` 由工具重生。
+  十四段正式顯示、旗卡未決字級及已驗成果截圖均未改。
+  原版畫布、RAM 指紋、輸入快照、字型與 PNG 僅留已忽略的
+  `workplace/`，不入 Git。Python AST、Go 格式與工作清單
+  驗證通過；輸出 UID/GID `1000:1000`，工作根沒有
+  root-owned 項目、誤建 `.md` 目錄或殘留 Docker 容器。
