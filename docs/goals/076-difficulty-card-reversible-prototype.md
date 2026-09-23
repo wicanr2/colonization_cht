@@ -1,6 +1,6 @@
 # 目標076：難度卡片可逆背景與逐欄中文字級原型
 
-狀態：in progress；日期：2026-09-23。承接[目標075](075-difficulty-card-source-to-pixels.md)、
+狀態：completed（僅本機可丟棄原型）；日期：2026-09-23。承接[目標075](075-difficulty-card-source-to-pixels.md)、
 [規格016](../spec/016-difficulty-card-text-draft.md)；追蹤 Issue
 [#6](https://github.com/wicanr2/colonization_cht/issues/6)、
 [#7](https://github.com/wicanr2/colonization_cht/issues/7) 與
@@ -30,3 +30,23 @@
 原型只驗第一張卡片兩欄，不代替其餘難度卡片、正式 runtime 鍵、正常玩家路徑
 驗收或完整中文化。不能以純色抹除、改寫原版來源、固定全域字級或在 DRAFT 規格下
 接入正式前端來「完成」畫面。
+
+## 完成收據與下一閘門
+
+- `tools/prepare_card_preview.py` 先重新驗證目標075的雙次正常路徑資料流，
+  再核對固定原版／輸入／色盤／真視窗原始畫面、卡片兩行的前後快照、最終卡片區未被
+  後續繪圖遮住，以及游標遠離卡片且無按鍵保持；不符則拒絕輸出中文預覽。
+- 逐欄採原版 5／6 像素墨跡高度作基準。Cubic 11 的候選稱號字級 21px、墨跡
+  `69×19px`；副標字級 25px、墨跡 `81×23px`。原始文字區先各自恢復紋理背景，
+  再用 `tools/card_preview.go` 在 Ebitengine 4 倍畫布繪製，不沿用主選單 24px 常數。
+- `tools/verify_card_preview.py` 驗證原文控制圖與原始畫布最近鄰放大完全相同；
+  中文圖安全區以外逐像素不變，透明中文字模下逐像素還原原背景，兩欄均有實際變更。
+  本機收據 `goal076-card-verify.json` 為 PASS；PNG SHA-256 分別為
+  `df65ae068485d5c785ce3130fb136bb781f4116e262238788fe10d8f2f0953e5`／
+  `65d808bcfdd6c5c2afc3be1c46166429cb113903aaa222c2e14b01b038df8463`。
+  圖像與字型皆只留已忽略的 `workplace/reports/`。
+- 初次逐像素檢查發現透明字模亮色滲出，改為 NRGBA 後同輸入重跑通過；
+  Ebitengine 靜態檢查與既有視窗測試通過。詳細地址空間、原始定位與量測見
+  [規格016](../spec/016-difficulty-card-text-draft.md)及 `RESEARCH-LOG.md`。
+- 此輪沒有證實執行期來源是 `GAME.TXT` 或 `NAMES.TXT`、第二張後的卡片及
+  任意時刻的背景守門；規格016維持 DRAFT，八段既有正常玩家路徑中文顯示數不增加。

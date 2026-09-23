@@ -2,7 +2,8 @@
 
 狀態：DRAFT；日期：2026-09-23。入口：[目標063](../goals/063-difficulty-card-text.md)、
 [目標074](../goals/074-difficulty-card-observation-repair.md)、
-[目標075](../goals/075-difficulty-card-source-to-pixels.md)。
+[目標075](../goals/075-difficulty-card-source-to-pixels.md)、
+[目標076](../goals/076-difficulty-card-reversible-prototype.md)。
 
 ## 固定輸入與地址空間
 
@@ -86,3 +87,35 @@
 目標075另有 `workplace/reports/goal075-card-flow-v5-a.json`／`-b.json`；
 `tools/check_card_flow.py` 驗證雙次原文、兩層緩衝、逐字字形讀取、兩行像素與畫布差分。
 完整 JSON 含原版局部指令與快照，故只保留在已忽略的本機研究目錄。
+
+## 目標076：可丟棄 Ebitengine 預覽（仍為 DRAFT）
+
+- confirmed（本機固定收據）：目標075兩份收據逐位元組相同；既有真視窗原版最終
+  indexed 畫面及色盤 SHA-256 分別為
+  `6072d7cf64633f93d2ad86a363ad73cd586f24bdacff51b406a84c52354924ae`、
+  `762b10807954069aa97266465cff2d72be0d1da568b668a19d15c3a5d0524e82`，
+  第一張卡片兩欄安全候選區與原版 `after-second` 畫布逐像素相同；最後游標位於
+  卡片以外且無按鍵保持。這只證明該固定輸入終點未再遮住卡片，不是任意時刻的守門。
+- 可逆候選矩形採半開 320×200 邏輯座標：稱號 `(138,44)–(186,51)`，副標
+  `(146,52)–(180,60)`；稱號由 `before-first`、副標由 `before-second`
+  的相同座標逐像素回填，再由 Ebitengine 在 4 倍畫布疊上本機中文字模。沒有純色抹底。
+  原文控制圖逐像素等於原版最近鄰放大；中文圖只在兩個候選矩形內改變。
+- 原版墨跡高 5／6 原始像素，即放大後 20／24px。以固定 Cubic 11 字型量測，
+  稱號候選採 21px 字級，`發現者` 墨跡 `69×19px`、左上 `(614,180)`；副標
+  候選採 25px 字級，`最簡單` 墨跡 `81×23px`、左上 `(612,212)`。
+  各欄比原版放大墨跡高少 1px，且四邊保留內距。這是依各欄原版墨跡的
+  **可丟棄視覺候選**，不是已證實的原版 baseline 或最終字級決定。
+- Ebitengine／Xvfb 本機 PNG 經逐像素驗證：稱號候選區 2,752 點、副標 1,860 點
+  與原文控制圖不同；兩區以外不變，透明中文字模下的每一點均還原原背景。
+  第一次因透明像素使用不正確的 RGBA 儲存而有亮色滲出，修正為 NRGBA 後
+  用相同輸入重跑通過；失敗收據不採用。兩圖為 Ebitengine 畫布讀回，
+  **不是**正式遊戲前端截圖，也沒有新增正常玩家路徑的中文顯示段數。
+- 此原型暫取 `GAME.TXT:0x00000A26` 與 `LABELS.TXT:0x000008A9` 的
+  `draft` 譯文做視覺量測；第一個執行期來源也可能是 `NAMES.TXT`，因此
+  這兩個 TSV 候選不能直接升成正式顯示鍵。完整本機資料與兩張圖留在
+  `workplace/reports/goal076-card-{preview.json,control.png,zh.png,verify.json}`，
+  不含於 Git。
+
+READY 仍缺：來源檔載入邊／穩定顯示鍵、執行期逐欄可逆擷取及游標／後續繪圖
+回退、其他難度卡片與正常玩家路徑中文對照。沒有取得這些證據前，預覽程式不得
+接入正式 `live_menu.go` 或計入八段已顯示中文。

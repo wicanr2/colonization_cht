@@ -1983,3 +1983,50 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   `go run /work/tools/probe_card_flow.go -root <原版COLONIZE目錄> -inputs /work/workplace/reports/goal059-ebiten.inputs.json -out <a或b報告>`，
   再以 `tools/check_card_flow.py` 的 `--inputs`／`--first`／`--second` 核對。
   完整 JSON 含原版局部指令與快照，只留已忽略的本機目錄，不入 Git。
+
+## 2026-09-23：目標076第一張難度卡片的可逆背景及逐欄字級預覽
+
+- 固定輸入與工具：合法 DOS 原版 `OPENING.EXE`／`VICEROY.EXE`／`GAME.TXT`／
+  `LABELS.TXT` 的 SHA-256 見[規格016](docs/spec/016-difficulty-card-text-draft.md)；
+  正常玩家九筆輸入 `goal059-ebiten.inputs.json` SHA-256
+  `51837a0ed11cfcc316b4e2c9dce7064403cafdd0c1af2efecf59f30319eb5efc`，
+  目標075雙次收據各為
+  `67f416ce61db7bec2cf3fbd71bb3336e68354b88c97b9a24a9f357ef6986ed9e`。
+  dosgolem 隔離副本提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`；
+  研究映像 `colonization-research:20260920-r2`，字型量測映像 `rich2-py:latest`
+  ID `sha256:e5c73862da40d1e0c26d9d5f6a62491c75ddfe8ada5c77677e1e445f13d85a71`，
+  Ebitengine 2.9.9 映像 `psychicwar-go-ebiten:latest` ID
+  `sha256:083e45e6bc0f01ca46ba0774581572c80a607120431b530de72cdd6ffb36f2f7`。
+  Cubic 11 本機字型 SHA-256
+  `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`；
+  字型與完整原版快照均不入 Git。
+- 地址空間與 confirmed 證據：目標075的 `0E2D:11CF`、`0D21:012C` 為原版 DOS
+  真實模式 `CS:IP`；`0x4CC6A`／`0x4DF90` 為20-bit 線性 RAM；本輪所有矩形是
+  320×200 邏輯畫布的**半開像素座標**，不是原始 TXT 檔案偏移。
+  原版稱號畫布差分 `(141,45)–(182,49)` 高5像素，副標 `(150,53)–(174,58)`
+  高6像素。稱號恢復候選區 `(138,44)–(186,51)` 由 `before-first` 取得，
+  副標 `(146,52)–(180,60)` 由 `before-second` 取得。原版最終真視窗畫面
+  SHA-256 `6072d7cf64633f93d2ad86a363ad73cd586f24bdacff51b406a84c52354924ae`
+  的這兩區與 `after-second` 快照相同；色盤 SHA-256
+  `762b10807954069aa97266465cff2d72be0d1da568b668a19d15c3a5d0524e82`。
+  最後游標不在擴大卡片區，無按鍵保持。這證明固定終點可逆，不證明其他輸入或時刻。
+- 字型量測與強推論：原版 5／6 像素墨跡經4倍輸出為20／24px；Cubic 11
+  的 21px 候選「發現者」墨跡 `69×19px`、位置 `(614,180)`，25px 候選
+  「最簡單」墨跡 `81×23px`、位置 `(612,212)`。兩者各比相應原版放大墨跡
+  低1px，且在安全區內保留邊界；這是視覺設計候選，不是原版獨立 baseline
+  或最終玩家偏好。文字來自唯一 `text/draft.zh-Hant.tsv`，前者暫用
+  `GAME.TXT:0x00000A26`，但來源檔載入邊未知，不能以這個候選當正式鍵。
+- confirmed（原型像素）：Ebitengine 在 Xvfb 產生 `goal076-card-control.png` 和
+  `goal076-card-zh.png`，再由獨立檢查器逐像素比對。原文控制圖完全等於固定
+  原版畫布的最近鄰放大；中文圖只有上述兩個矩形與控制圖不同，稱號區2,752點、
+  副標區1,860點；透明中文字模下的每個像素都恢復原版背景。PNG SHA-256 依序
+  `df65ae068485d5c785ce3130fb136bb781f4116e262238788fe10d8f2f0953e5`、
+  `65d808bcfdd6c5c2afc3be1c46166429cb113903aaa222c2e14b01b038df8463`。
+  首次失敗因原型透明像素錯用 RGBA，出現亮色滲出；修正為 NRGBA 後同資料重跑 PASS。
+  這是畫布讀回，不是 `import -window` 真實視窗截圖或正式 runtime 覆蓋收據。
+- unknown／停止線：任意時刻的執行期背景擷取與游標／後續繪圖回退、原始 TXT
+  載入邊、穩定顯示鍵、第二張以後的卡片仍缺。規格016維持 DRAFT；現有八段
+  已顯示中文不增加。重跑入口為 `tools/prepare_card_preview.py`（固定原版收據
+  與字型）→ `tools/card_preview.go`（Ebitengine／Xvfb 的 `-control`／中文圖）→
+  `tools/verify_card_preview.py`（逐像素核對）；完整資料及 PNG 只在
+  `workplace/reports/goal076-card-*`，不入 GitHub。
