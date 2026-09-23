@@ -1612,3 +1612,12 @@
   未變更映像或放寬網路。專案沒有 root-owned 殘留或誤建
   `.md` 目錄，輸出為 UID/GID `1000:1000`；本專案沒有
   執行中／停止的遺留容器，其他專案容器保持原狀。
+- 成果提交 `2391d4b` 已推送私有 `origin/main`；遠端
+  [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)、
+  [#26](https://github.com/wicanr2/colonization_cht/issues/26)、
+  [#27](https://github.com/wicanr2/colonization_cht/issues/27)、
+  [#29](https://github.com/wicanr2/colonization_cht/issues/29)及
+  [#30](https://github.com/wicanr2/colonization_cht/issues/30)
+  已回填限定成果與未完成項，仍為 OPEN；既有難度標題
+  [Issue #28](https://github.com/wicanr2/colonization_cht/issues/28)
+  維持 CLOSED，不重開已驗收工作。
