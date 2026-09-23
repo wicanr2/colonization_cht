@@ -2,6 +2,7 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前進行入口：[目標089](docs/goals/089-first-nation-card-runtime-guard-evidence.md)；
 最近完成入口：[目標088](docs/goals/088-first-nation-card-reversible-preview.md)
 已建立第一張國家旗卡兩欄的繁中片段草稿與本機 Ebitengine 可逆視覺原型；
 等待使用者確認兩欄暫定版式。規格021仍為 DRAFT，尚未授權正式覆蓋。
