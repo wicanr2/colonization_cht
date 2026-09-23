@@ -158,6 +158,9 @@ RAM 的載入鏈、相鄰狀態與正式守門仍缺，因此繼續進行中，�
 [目標086](docs/goals/086-difficulty-heading-centered-layout.md)依使用者確認的
 A 版完成難度標題限定驗收，真視窗、十五檢查點、兩欄回退與
 錯版拒絕通過；已在驗證後更新既有私有截圖，不把它當公開素材。
+[目標087](docs/goals/087-nation-card-source-load-edge.md)接續目標085，
+只追第一張國家旗卡紅字的原始檔案載入至 RAM 來源邊與相鄰反例；
+在完整資料鏈證實前，不增加正式中文段數或寫入覆蓋鍵。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
 保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至368筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。
