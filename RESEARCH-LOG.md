@@ -3201,3 +3201,57 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   字級、中文換行、第二頁真視窗及離頁仍未知。檢查的專案、
   `/home/anr2/cht`、`/home/anr2`、`/tmp` 與既有工具映像未找到
   固定字型 `Cubic_11.ttf`，不能以其他字型代替量測。
+
+## 2026-09-24：目標099第一張國家旗卡 A 版正式覆蓋
+
+- **輸入與位址基準。** 合法 DOS `OPENING.EXE` SHA-256
+  `3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`、
+  `VICEROY.EXE` SHA-256
+  `a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3`，
+  `NAMES.TXT` SHA-256
+  `4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061`、
+  `LABELS.TXT` SHA-256
+  `e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204`；
+  隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`、
+  Go 1.24.13、Ebitengine 2.9.9、`colonization-research:20260920-r2`。
+  `0x8EA`／`0x8F2` 是 TXT 檔案位移，`0x4CBBE`／`0x4DFD1` 是 DOS
+  20-bit 線性 RAM，`0E2D:11CF`／`0D21:012C` 是原版實模式位址，
+  安全區採320×200索引畫布半開座標；四倍 PNG 是1280×800輸出，
+  不得把兩種座標或位址空間混用。
+- **已證實：離頁反例與字模來源。** `tools/probe_goal099_card_leave.go`
+  雙次冷啟動加無觀測控制，正常滑鼠在第一張卡按完成後，開檔
+  51→53、末兩筆 `WOODPANL.PIK`／`GAME.TXT`，舊上／下安全區
+  各變761／829點；CPU、完整 RAM、索引、色盤、時間、開檔及
+  畫布同狀態。`tools/check_goal099_card_leave.py` PASS 收據
+  SHA-256 `8880d7dc7f421d2e4d591e4e40de2b08fa80b581c964a0e7d22383d2d77e0c11`。
+  原 Cubic 11 TTF SHA-256
+  `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`
+  本輪未找到；`tools/prepare_goal099_card_masks.py` 只從先前已驗
+  A 版原型擷取兩個本機字模，再核對當前 TSV、合法原版 bytes、
+  譯文、21／25px、位置、尺寸與字模 SHA。當前旗卡 TSV SHA-256
+  `d4cf454a4851778546b90a778f2966f9cfa6cc9e2a2b01fae9e261844d0f64b6`。
+- **已證實：真視窗與同輸入控制。** 真 Ebitengine 視窗16筆正常
+  玩家輸入收據 SHA-256
+  `389e0b6032d318a3dbae9e40a5ec4b4b5b88385b17c61e9dd34444dbd410c9ba`；
+  60M步中文、英文控制及舊十五欄重播的 CPU、完整 RAM、索引、
+  色盤、時間與開檔完全相同，原版完整 RAM SHA-256
+  `65ec665a310660b0a3fa025a8de0958987f2ca946e1201c72c8b81ea654748c5`。
+  上／下欄新增差分1,915／2,738個輸出像素，全部在各自四倍
+  安全區；舊十五欄逐幀套用狀態不變。真視窗擷取與最終合成
+  逐像素一致，私有截圖 SHA-256
+  `d347fdbd260e79d59f4f9795f6037b0e1f836c744382eebd24504100585a915b`。
+  `tools/verify_goal099_card_a.py --live` PASS 收據 SHA-256
+  `25ce1f932375d48c13f58806f4fb3cb5aa21e6aeda3fa553c4b3402e5b26eead`。
+- **已證實：失敗即關閉與範圍。** 固定43M步同輸入的缺上欄
+  譯文／字模、下欄重複鍵／錯字級四例各只回退失效欄，另一欄
+  與正常版逐像素相同；中文／英文／舊版原版狀態一致，PASS
+  收據 SHA-256
+  `ffee5ecd4ab4130fb71318158d2c61008a3065b41bafd5075aba50d8a7facfba`。
+  上／下游標、移開、下欄按住、切右卡及直接離頁六例
+  `tools/verify_goal099_runtime.py` PASS 收據 SHA-256
+  `f4b169864298d4902bc8eb6f07dca49d448f07bb894d70ac981092756f9f08de`；
+  換卡、離頁整張 PNG／索引／色盤各與未啟用新覆蓋的同輸入
+  舊版逐位元組相同。錯版原版在啟動前以 exit 2 拒絕。
+  [規格021](docs/spec/021-nation-card-red-text-draft.md)只對第一張
+  旗卡兩欄限定 CONFORMED；相鄰卡、其他國家與公開字型資產
+  仍未知／未授權，不能由本收據外推。

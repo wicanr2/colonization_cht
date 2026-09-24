@@ -18,7 +18,7 @@
 | #9 | planned | [制定靜態文字覆蓋 DRAFT 規格與最小原型](https://github.com/wicanr2/colonization_cht/issues/9) | `static-text-survey` | 一個可丟棄原型具命中與反向條件對照。 |
 | #10 | blocked | [確認中文字型、術語政策與中文化完成範圍](https://github.com/wicanr2/colonization_cht/issues/10) | `dynamic-coverage`, `static-overlay-draft` | 使用者確認字型、術語與完成門檻並回填 CONTEXT／READY 規格。 |
 | #11 | in_progress | [將動態文字覆蓋設計升為 READY 規格](https://github.com/wicanr2/colonization_cht/issues/11) | `dynamic-text-draft`, `dynamic-coverage`, `l10n-decision` | 所有正式輸出類別有可回查 evidence 與 READY 規格。 |
-| #12 | planned | [擴展並驗證動態文字中文疊加](https://github.com/wicanr2/colonization_cht/issues/12) | `first-localized-slice` | 中文、英文、缺譯和最長譯文都有固定快照與玩家路徑驗證。 |
+| #12 | in_progress | [擴展並驗證動態文字中文疊加](https://github.com/wicanr2/colonization_cht/issues/12) | `first-localized-slice` | 中文、英文、缺譯和最長譯文都有固定快照與玩家路徑驗證。 |
 | #13 | planned | [實作並驗證靜態文字圖像中文覆蓋](https://github.com/wicanr2/colonization_cht/issues/13) | `static-overlay-draft`, `l10n-decision` | 每個項目有圖像指紋、反向條件與玩家路徑收據。 |
 | #14 | planned | [建立中文化驗證矩陣與正常玩家路徑收據](https://github.com/wicanr2/colonization_cht/issues/14) | `dynamic-overlay-implementation`, `static-overlay-implementation` | 動態與靜態路徑都有原版、中文、英文與反向條件收據。 |
 | #15 | blocked | [定義封裝、授權與發布界線](https://github.com/wicanr2/colonization_cht/issues/15) | `verification-matrix` | 使用者確認授權與發布方式，且可散布包不含原版素材。 |
