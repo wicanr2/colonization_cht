@@ -2314,3 +2314,8 @@
   `workplace/` 沒有 root-owned 或誤建 `.md` 目錄，
   研究／畫面檢視映像沒有執行中或已停止容器殘留；
   隔離 dosgolem `upstream` 推送位址仍為 `DISABLED`。
+- 實質成果以 `7958a3d` 推送 PRIVATE `origin/main`；
+  主機 `gh` 已留言且回讀
+  [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7#issuecomment-5809975529)
+  與[Issue #27](https://github.com/wicanr2/colonization_cht/issues/27#issuecomment-5809979608)，
+  兩者維持 OPEN；此條收尾紀錄於後續文件提交補入。
