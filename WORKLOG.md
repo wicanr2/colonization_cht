@@ -1996,3 +1996,5 @@
   隔離 dosgolem 的 `upstream` 推送位址仍為 `DISABLED`。
 - 原版缺失的命令列負例另外確認烘製器與驗證器都回 `SKIP 77`，
   不留下成功收據；這與錯字型、錯 TSV 的失敗即關閉分開計算。
+- 工具、驗證與文件以 `68ec5ad` 推送 PRIVATE `origin/main`；
+  主機真正 `gh` 已留言並回讀 Issue #12／#26，兩者仍 OPEN。
