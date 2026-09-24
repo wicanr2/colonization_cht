@@ -1,6 +1,6 @@
 # 目標117：遊戲選項同焦點核取圖示對照
 
-狀態：in_progress；日期：2026-09-24。承接[目標116](116-game-options-selection-and-exit-phases.md)、[目標111](111-tutorial-hints-state-and-first-help.md)與[規格027](../spec/027-game-options-window-draft.md)，對應既有 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)及 [Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)。
+狀態：completed（限第4／7列的同焦點穩定畫面；正式中文尚未接入）；日期：2026-09-24。承接[目標116](116-game-options-selection-and-exit-phases.md)、[目標111](111-tutorial-hints-state-and-first-help.md)與[規格027](../spec/027-game-options-window-draft.md)，對應既有 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)及 [Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)。
 
 ## 玩家問題與範圍
 
@@ -16,3 +16,13 @@
 ## 停止線
 
 固定三列的穩定相位不能外推其餘五列、按下／放開瞬間或所有動畫幀；核取圖示的開／關語意須由玩家可見效果另驗。規格027在正式中文字級、快捷鍵、逐欄背景／游標／離頁守門與同狀態驗收完成前維持 DRAFT，正式中文段數不因本輪原版研究增加。選項 A／B 視覺候選尚未由使用者選定，本輪不代選、不更新正式截圖。
+
+## 結果與下一閘門
+
+三支玩家事件依序為既有只點第1列 SHA-256 `86896d9d5444cd00fe9fd82ac35a9b33e944620d0dcb4e8f638c885c04d89a1c`、先點第4列再回第1列 `dbc4e0d7af8678e449c67808f10d367b91a58100e7d34ed8d42b2a5789fa5b83`、先點第7列再回第1列 `64b75c2c506e731c005e52f7745e2868c5834ce90b38492aafac01c6cae507ba`。原始輸入、dosgolem 版本和正常路徑沿用規格027；新收據只存 `workplace/reports/goal117-options/`。
+
+三支各兩次冷啟動 JSON 逐 byte 相同，A 收據 SHA-256 分別為 `2a9fc9def5f756f863dd9e889aecb97b2fab6a2919421ed986c7e31671ac49c2`、`8a2290de6d2b07cd3034f35347dc2cd0ce6f0d496b7bec60c25be42f41920769`、`416c2a0191f0d5f315c20aa259355a17d54680fb8a414b91e45f045752b68487`；各自無監看控制的原版 `route/sources/transfers/samples/opened/key_events/game_inputs` 相同。1,300M三支原版索引與底層畫布完全相同。1,325M與1,350M點第4列比未點多3,467個底層差分，僅第1列 y59–70 的1,646點及第4列 y95–106 的1,821點；點第7列多3,293點，僅第1列1,646點及第7列 y131–142 的1,647點。這個暫態差分仍混合焦點與圖示，不能全部命名為核取。
+
+三支在1,352M／1,353M後皆點回第1列；1,375M及1,400M的各支**索引及底層畫布**保持相同。相對只點第1列基線，第4列**僅**圖示中心 `(73–74,100–101)` 四點由色號47→149；第7列**僅** `(73–74,136–137)` 四點由149→47。兩支的底層畫布與合成索引差分相同，且各自與基線在**同一時點**的色盤相同；1,375M至1,400M色盤自身仍會改變，不可稱完整 RGB 畫面跨時點不變。其餘所有索引像素，含第1列焦點與兩列原文，皆沒有差異。既有第8列同焦點 `(73–74,148–149)` 四點收據也經新檢查器回讀。這**已證實**固定列點擊能留下與焦點分離的原版圖示狀態；色號方向不證明選項語意上的啟用／停用。
+
+`tools/check_goal117_same_focus.py` PASS；`tools/test_goal117_same_focus.py` 正例與雙重播、控制 RAM、原畫布、重算雜湊後偏離固定畫面、既有末列、事件檔、錯原版、缺原版 `SKIP 77` 八類負例通過。證據回填[規格027](../spec/027-game-options-window-draft.md)，但未取得其餘列、按下／放開瞬間、逐欄中文圖層守門、正式視覺字級與快捷鍵表示。九欄仍英文、規格 DRAFT、正式中文仍十七段；下一輪應優先補其餘列與正式逐欄回退契約，視覺 A／B 須另由使用者選擇。

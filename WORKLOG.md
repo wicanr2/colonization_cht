@@ -2352,3 +2352,10 @@
 - `tools/check_goal116_options_phases.py` PASS，`tools/test_goal116_options_phases.py` 正例與九項拒絕／缺原版 `SKIP 77` PASS；既有 `tools/check_goal111_tutorial_state.py` PASS，Python AST 與 `tools/worklist.py write/verify` PASS。[規格027](docs/spec/027-game-options-window-draft.md)維持 DRAFT；其他六列、按下／放開和首個重繪瞬間、正式中文字級與逐欄回退未驗，九欄仍英文、正式中文維持十七段。工作清單 Issue #7／#26 註記已回填；README 不記輪次，也不以本機原版 PNG 更新正式截圖。
 - `git diff --check` 通過；原版 EXE／TXT、TTF、完整畫布／PNG 皆未由本輪加入 Git。新收據、檢視 PNG 與 `WORKLIST.md` 抽查 UID/GID 1000:1000；`workplace/` 無 root-owned 或誤建 `.md` 目錄，研究／圖像映像的專案相關執行中或已停止容器無殘留。隔離 dosgolem `upstream` 推送位址仍是 `DISABLED`。
 - 實質成果 `b007a1a` 已推送 PRIVATE `origin/main`；主機 `gh` 留言並回讀 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7#issuecomment-5812354533) 與 [Issue #26](https://github.com/wicanr2/colonization_cht/issues/26#issuecomment-5812354538)，兩者均保持 OPEN。本條收尾紀錄另以文件提交推送。
+
+## 2026-09-24：目標117選項視窗同焦點核取圖示
+
+- 前一個 goal 續回合只重核第一張旗卡 A 版，沒有新進度。本輪核對乾淨工作樹、Git 作者、PRIVATE 遠端、原版、隔離 dosgolem `9dd36726`／禁推、路由與規格閘門後，先以 `7bfbad5` 推送[目標117](docs/goals/117-game-options-same-focus-checkmarks.md)和現況入口，再新增兩份玩家輸入與重播腳本。
+- 既有研究映像 `colonization-research:20260920-r2` 內，由原版唯讀 DOS 和隔離 dosgolem 重播只點第1列、先第4列再第1列、先第7列再第1列，每支兩次冷啟動及無監看控制。1,325M暫態差分只在第1列及被點列；全部點回第1列後，1,375M／1,400M第4與第7列各只留下自身圖示中心四點差異，分別47→149與149→47，原文與共同焦點畫素不變。圖示方向不等於已證實的開／關語意。
+- `tools/check_goal117_same_focus.py` PASS，`tools/test_goal117_same_focus.py` 正例與八類負例／缺原版 `SKIP 77` PASS；修訂[規格027](docs/spec/027-game-options-window-draft.md)、研究紀錄與唯一 Issue 工作清單。規格仍 DRAFT、選項九欄仍英文、正式中文十七段不變；其餘第2／3／5／6列、按下／放開瞬間、中文字級／快捷鍵與逐欄正式回退仍需完成。本輪沒有更新 README 或正式截圖，也沒有把原版畫素推入 Git。
+- 唯讀掛載下第一次用 `py_compile` 做語法檢查，因需寫入 `__pycache__` 而被拒；改用不寫檔的 `ast.parse` 和 `sh -n` 後通過，屬驗證環境設定而非產品缺陷。`tools/worklist.py write/verify` PASS、`git diff --check` PASS；原版素材未追蹤，收據與 `WORKLIST.md` 均為 UID/GID 1000:1000，`workplace/` 無 root-owned／誤建 `.md` 目錄，研究容器無執行中或已停止殘留；其他專案容器未碰。隔離 dosgolem `upstream` 推送位址仍為 `DISABLED`。

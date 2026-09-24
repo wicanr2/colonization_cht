@@ -1,6 +1,6 @@
 # 規格027：原版遊戲選項視窗九處文字
 
-狀態：DRAFT；日期：2026-09-24。入口：[目標112](../goals/112-game-options-chinese-display.md)、[目標113](../goals/113-game-options-background-and-preview.md)、[目標114](../goals/114-game-options-print-buffer-dataflow.md)、[目標116](../goals/116-game-options-selection-and-exit-phases.md)、[目標110](../goals/110-tutorial-hints-player-trigger.md)、[目標111](../goals/111-tutorial-hints-state-and-first-help.md)。本規格尚**不授權正式 Ebitengine 覆蓋**。
+狀態：DRAFT；日期：2026-09-24。入口：[目標112](../goals/112-game-options-chinese-display.md)、[目標113](../goals/113-game-options-background-and-preview.md)、[目標114](../goals/114-game-options-print-buffer-dataflow.md)、[目標116](../goals/116-game-options-selection-and-exit-phases.md)、[目標117](../goals/117-game-options-same-focus-checkmarks.md)、[目標110](../goals/110-tutorial-hints-player-trigger.md)、[目標111](../goals/111-tutorial-hints-state-and-first-help.md)。本規格尚**不授權正式 Ebitengine 覆蓋**。
 
 ## 玩家範圍與原始版本
 
@@ -61,6 +61,14 @@
 **ESC 離頁：**在1,351M送原版 ESC，待取數於步數1,351,000,064附近為1、1,351,002,112附近為0；1,350M仍是原選項視窗，1,375M與1,400M已回海上畫面。離頁前後底層畫布相差22,885點，半開 bbox `(62,41)–(258,159)`；同時點色盤與未離頁分支相同。玩家可見的選項視窗圖層在離頁後必須全部失效，不可把1,300M的九個文字補片留在海上畫面。索引色盤在不同指令時點會變，即使底層畫布完全相同也不能沿用1,300M色盤。
 
 以上只驗固定第一列、末列、框外游標及1,351M ESC 的**穩定抽樣**；25M步檢查點之間的第一個重繪時刻、八列完整選取／按下／放開矩陣、核取圖示各狀態、其他游標形狀及正式逐欄回退仍未知。原版 PNG 與完整索引只在已忽略的 `workplace/reports/goal116-options/`，不能作公開截圖。這些證據改善 DRAFT 的失效條件，尚不足以升 READY 或接正式中文九欄。
+
+### 目標117追加：第4／7列同焦點後的圖示差分
+
+沿相同英格蘭正常玩家路徑，固定原版雜湊、隔離 dosgolem 提交及1,300M視窗起點不變；第4列 `(140,101)`／第7列 `(140,137)` 於1,302M按下、1,303M放開，再於1,352M／1,353M點回第1列 `(140,65)`，與只點第1列的原版基線同時點比較。座標與下述差分皆為原版320×200**畫素空間**，不是四倍中文畫布；指令數不是牆鐘。三份事件、雙冷啟動與無監看控制的 SHA-256 見[目標117](../goals/117-game-options-same-focus-checkmarks.md)。`tools/check_goal117_same_focus.py` 及八類負例 PASS，原始收據只在 `workplace/reports/goal117-options/`。
+
+**已證實的固定抽樣：**1,325M／1,350M時，第4列分支相對未點基線的底層差分3,467點，只在第1列 y59–70（1,646）與第4列 y95–106（1,821）；第7列分支差3,293點，只在第1列相同1,646點與第7列 y131–142（1,647）。此時仍混合焦點與圖示。三支最終皆點回第1列後，1,375M／1,400M的索引與底層畫布各自跨時點不變，共同焦點背景及所有原文一致；第4列只剩圖示中心 `(73–74,100–101)` 四點47→149，第7列只剩 `(73–74,136–137)` 四點149→47。底層畫布和合成索引的差分完全同一組四點，同時點色盤相同；但色盤從1,375M至1,400M仍會改變，不能宣稱完整 RGB 畫面跨時點不變。第8列先前目標111的同焦點四點亦經回查。因此這三列的**圖示畫素狀態可與焦點分離**，但色號方向仍不能直接命名啟用／停用。其餘第2／3／5／6列及按下／放開瞬間、首個重繪時刻未驗，不能外推整個八列矩陣。
+
+本段補上正式中文字層必須保護左側核取圖示、逐欄比較當幀底圖的具體反例；並未證明所有反白相位可逆，也沒有決定 A／B 中文字級、快捷鍵呈現或正式 Ebitengine 回退。故規格維持 DRAFT，九欄仍顯示原文。
 
 ## 從 DRAFT 到正式覆蓋的閘門
 
