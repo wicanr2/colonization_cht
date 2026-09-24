@@ -10,6 +10,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"syscall"
 
@@ -64,6 +65,9 @@ func main() {
 	nextEnter := flag.Bool("next-enter", false, "65M步再按 Enter 觀察下一頁")
 	nation := flag.String("nation", "france", "目標101：england/france/spain/netherlands，實際點選四張旗卡")
 	afterB := flag.String("after-b", "none", "目標101：B頁後 none/wait/enter/esc")
+	afterFollow := flag.String("after-follow", "none", "目標105：85M後續頁後 none/wait/enter/esc")
+	followUntil := flag.Uint64("follow-until", 100000000, "目標105：後續觀測終點，100M–150M且以5M為單位")
+	followEnterAt := flag.String("follow-enter-at", "", "目標105：額外 Enter 的百萬步數，以逗號分隔，例如100,115")
 	preprint := flag.Bool("preprint", false, "目標102：在 A/B 首筆 0D21:012C 寫入前擷取原始畫布")
 	flag.Parse()
 	if *inputs == "" || *out == "" {
@@ -74,6 +78,32 @@ func main() {
 	}
 	if *afterB != "none" && !*nextEnter {
 		panic("必須先實際進入 B 頁")
+	}
+	if *afterFollow != "none" && *afterFollow != "wait" && *afterFollow != "enter" && *afterFollow != "esc" {
+		panic("未知後續頁輸入")
+	}
+	if *afterFollow != "none" && *afterB != "enter" && *afterB != "esc" {
+		panic("必須先實際離開 B 頁")
+	}
+	if *afterFollow == "none" && (*followUntil != 100000000 || *followEnterAt != "") {
+		panic("延伸觀測必須先啟用後續頁輸入")
+	}
+	if *afterFollow != "none" && (*followUntil < 100000000 || *followUntil > 150000000 || *followUntil%5000000 != 0) {
+		panic("後續觀測終點超出限定範圍")
+	}
+	extraEnters := map[uint64]bool{}
+	if *followEnterAt != "" {
+		previous := uint64(0)
+		for _, token := range strings.Split(*followEnterAt, ",") {
+			million, err := strconv.ParseUint(token, 10, 64)
+			mustIntro(err)
+			step := million * 1000000
+			if step < 100000000 || step >= *followUntil || step%5000000 != 0 || step <= previous {
+				panic("額外 Enter 步數不是遞增的有效檢查點")
+			}
+			extraEnters[step] = true
+			previous = step
+		}
 	}
 	parent, err := os.Stat(filepath.Dir(*out))
 	mustIntro(err)
@@ -126,6 +156,17 @@ func main() {
 		{"GAME.TXT", route.first + int64(firstBody), string(first[firstBody : firstBody+10])},
 		{"GAME.TXT", route.second, secondMarker},
 		{"GAME.TXT", route.second + int64(secondTitle), title}}
+	if *afterFollow != "none" {
+		// 字幕跨 512-byte DOS 讀取邊界；分兩段保留兩次讀檔目的位址。
+		caption := "In the Year of Our Lord One Thousand Four Hundred Ninety-Two,"
+		boundary := 0x15400 - 0x153ce
+		sources = append(sources,
+			introSource{"GAME.TXT", 0x1316a, "@TUTORIAL1"},
+			introSource{"GAME.TXT", 0x13190, "Our {%STRING0}"},
+			introSource{"GAME.TXT", 0x153b0, "@BUILD1"},
+			introSource{"GAME.TXT", 0x153ce, caption[:boundary]},
+			introSource{"GAME.TXT", 0x15400, caption[boundary:]})
+	}
 	for _, source := range sources {
 		end := source.Offset + int64(len(source.Bytes))
 		if end > int64(len(game)) || !bytes.Equal(game[source.Offset:end], []byte(source.Bytes)) {
@@ -158,6 +199,9 @@ func main() {
 	if *afterB != "none" {
 		observeEnd = 85000000
 	}
+	if *afterFollow != "none" {
+		observeEnd = *followUntil
+	}
 	if !*control {
 		m.WatchReads(0x20000, 0x80000, func(a uint32, value uint8) {
 			if m.Steps < 55000000 || m.Steps >= observeEnd || len(printReads) >= 30000 {
@@ -175,12 +219,14 @@ func main() {
 			}
 			cs, ip := m.CPU.OpAddr()
 			phase := "first"
-			if m.Steps >= 75000000 {
+			if m.Steps >= 85000000 {
+				phase = "after-follow"
+			} else if m.Steps >= 75000000 {
 				phase = "after-b"
 			} else if m.Steps >= 65000000 {
 				phase = "second"
 			}
-			if *preprint && phase != "after-b" && cs == 0x0d21 && ip == 0x012c && preprintCanvas[phase] == nil {
+			if *preprint && (phase == "first" || phase == "second") && cs == 0x0d21 && ip == 0x012c && preprintCanvas[phase] == nil {
 				// WatchWrites 先於 Mem 寫入回呼；此時仍是真正的首字印前多色底圖。
 				preprintCanvas[phase] = bytes.Clone(m.Mem[canvas : canvas+64000])
 				preprintSteps[phase] = m.Steps
@@ -366,6 +412,20 @@ func main() {
 			sample("80m")
 			advance(85000000)
 			sample("85m")
+			if *afterFollow != "none" {
+				if *afterFollow == "enter" {
+					d.PushKey(golem.Key{Scan: 0x1c, ASCII: 13})
+				} else if *afterFollow == "esc" {
+					d.PushKey(golem.Key{Scan: 0x01, ASCII: 27})
+				}
+				for step := uint64(90000000); step <= *followUntil; step += 5000000 {
+					advance(step)
+					sample(fmt.Sprintf("%dm", step/1000000))
+					if extraEnters[step] {
+						d.PushKey(golem.Key{Scan: 0x1c, ASCII: 13})
+					}
+				}
+			}
 		}
 	}
 	collectTransfers()
@@ -374,6 +434,9 @@ func main() {
 		version = "goal098-intro-v3"
 	} else if *afterB != "none" {
 		version = "goal104-intro-exit-v1"
+	}
+	if *afterFollow != "none" {
+		version = "goal105-tutorial-route-v4"
 	}
 	report := map[string]any{"version": version, "control": *control,
 		"next_enter": *nextEnter,
@@ -384,6 +447,13 @@ func main() {
 		"sources": sources, "transfers": transfers, "samples": samples,
 		"print_reads": printReads, "writers": writers, "opened": d.Opened,
 		"address_space": "original file offset; DOS real-mode CS:IP; 20-bit linear RAM; 320x200 indexed canvas"}
+	if *afterFollow != "none" {
+		report["after_follow"] = *afterFollow
+		if *followUntil != 100000000 || *followEnterAt != "" {
+			report["follow_until"] = *followUntil
+			report["follow_enter_at"] = *followEnterAt
+		}
+	}
 	if *preprint {
 		if *control || !*nextEnter || len(preprintCanvas) != 2 {
 			panic("印前底圖需要 A/B 實際印字及觀測收據")

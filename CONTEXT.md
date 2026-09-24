@@ -2,10 +2,19 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-目前進行入口：[目標105](docs/goals/105-first-tutorial-player-path.md)：
-從已驗國家介紹後續頁沿正常玩家按鍵追首則遊戲內教學訊息；
-`text/help-bilingual.tsv` 的24則仍只是來源固定的雙語草稿，
-未有正式中文 help 畫面。長文版式另待使用者選擇。
+下一工作入口：沿[目標105](docs/goals/105-first-tutorial-player-path.md)
+已驗 `@BUILD1` 字幕，查明開場畫面後續按鍵消費與相位，
+再尋找首則真正顯示的教學訊息；`@TUTORIAL1` 目前只證實
+DOS 預讀。四國介紹長文版式另待使用者選擇，不能由旗卡字級推定。
+
+最近完成入口：[目標105](docs/goals/105-first-tutorial-player-path.md)：
+英格蘭介紹 B 後由正常 Enter 到下一頁，85M再按 Enter／ESC
+會顯示 `GAME.TXT:@BUILD1` 原版英文字幕；三分支各有雙次
+dosgolem 冷啟動、無觀測控制及原始畫布核對。`@TUTORIAL1`
+標記與開頭文字確實先被 DOS 讀入 RAM，但沒有當次印字；
+[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)
+仍 DRAFT。主譯稿新增該字幕一筆草稿，總數369；正式中文
+顯示維持十七段，24則 help 沒有畫面命中。
 
 最近完成入口：[目標104](docs/goals/104-nation-introduction-exit-phase.md)：
 英格蘭、西班牙與荷蘭介紹 B 頁後無鍵／Enter／ESC 各有雙次
@@ -147,9 +156,9 @@ dosgolem 重播及無觀測控制。承接[目標088](docs/goals/088-first-natio
 | 平台修正 | BIOS 馬達倒數、`int33 AX=0014` 回呼交換、DOS v4 滑鼠狀態與不安全回呼保存拒絕；規格 006–008。 |
 | 動態文字 | confirmed：GAME.TXT 檔案位移 0x1B0 → 執行期 6F16:00DF → 937C:0538 印字 → 180 個畫布像素；兩次冷啟動收據一致。目標 054 完成。 |
 | 靜態文字 | 開場海洋標籤等候選仍缺完整來源／可逆背景證據；Issue #8 開放，不阻擋動態路徑。 |
-| 翻譯草稿 | `text/draft.zh-Hant.tsv` 共368筆：GAME 96、LABELS 40、MENU 68、NAMES 70、PEDIA 19、MAPEDIT 31、MAPMENU 28、WOODCUT 14、OPENING 1、CLOSING 1；原始來源／控制碼（含 `#` 格式記號）及Cubic 11缺字檢查通過。十五筆已在正常玩家路徑顯示驗收；其餘仍是候選；18個TXT／4,119粗略資料行不是全遊戲訊息分母。 |
+| 翻譯草稿 | `text/draft.zh-Hant.tsv` 共369筆：GAME 97、LABELS 40、MENU 68、NAMES 70、PEDIA 19、MAPEDIT 31、MAPMENU 28、WOODCUT 14、OPENING 1、CLOSING 1；原始來源／控制碼（含 `#` 格式記號）檢查通過。新增 `@BUILD1` 一筆有原版印字證據，但中文字模、安全矩形及正式畫面未驗；正式顯示十七段仍只屬既有欄位。18個TXT／4,119粗略資料行不是全遊戲訊息分母。 |
 | 百科雙語語料 | `text/pedia-bilingual.tsv` 含 `PEDIA.TXT` 的25篇建國元勳、16篇貨物、24篇單位、29篇地形、27篇職業及42篇建築，合計163篇編號文章的整段原文／繁中草稿；固定來源、控制碼（含一個保留的Tab及由原始`0xF9`正規化的`•`）與Cubic 11覆蓋通過，缺字0。未取得畫面命中或安全矩形。 |
-| 說明雙語語料 | `text/help-bilingual.tsv`另含24則教學／地圖編輯說明的原文及繁中草稿，兩個固定原版檔案與每則位元組指紋可回查；僅限私有repo，未整合正式執行期語料，也未取得畫面命中。不可與前列368筆直接相加當顯示完成度。 |
+| 說明雙語語料 | `text/help-bilingual.tsv`另含24則教學／地圖編輯說明的原文及繁中草稿，兩個固定原版檔案與每則位元組指紋可回查；僅限私有repo，未整合正式執行期語料。`@TUTORIAL1` 已有正常路徑 DOS 預讀，仍未取得畫面印字；不可與前列369筆直接相加當顯示完成度。 |
 | README 玩家補充語料 | `text/readme-bilingual.tsv`含 DOS ZIP 內 `README.TXT` 的7段版本修正、地圖編輯器與作弊模式原文／繁中草稿。封存檔、成員檔、位元組範圍與片段 SHA 均固定，按鍵／符號／Tab及Cubic 11覆蓋通過，缺字0；它不是執行期鍵，未命中畫面。 |
 | 殖民地名稱語料 | `text/colony-bilingual.tsv`含 `COLONY.TXT` 的173筆預設名稱（英36、法66、西39、荷32）；18個年份依使用者決定呈現為「中文名稱（原名，年份）」。ZIP／成員／章節／行與片段 SHA、年份與格式驗證通過，字型字元缺字0；沒有畫面命中、安全矩形或欄位專屬中文字級。 |
 | 中文顯示 | 主選單五列、難度頁兩行標題、完成提示、第一及第二張卡片各兩行、國家頁左側兩行、第一張國家旗卡兩行、姓名固定提示一行，共十七段有原版事件與逐幀覆蓋；規格012／014／015／017／018／019／020／021／023為各自限定範圍 CONFORMED。難度標題依使用者 A 版採34／38px共同置中；第一張旗卡依另一個使用者 A 決定採21／25px紅字／黑影。真視窗新舊版及英文控制原版同狀態，旗卡新增差異僅在兩個安全矩形；私有截圖已驗後更新。姓名提示採38px且真視窗原版同狀態；正常玩家路徑已抵達首次國家介紹，仍非正式完整玩家版，Issue #26保持開放。 |
@@ -186,7 +195,7 @@ DOSBox-X 僅提供啟動鏈及畫面類別的輔助基準，正式收據由 dosg
 
 ## 下一閘門與歷程索引
 
-目前主譯稿已有368筆，另有24則help稿及旗卡四筆顯示片段草稿，
+目前主譯稿已有369筆，另有24則help稿及旗卡四筆顯示片段草稿，
 但原版TXT、EXE及靜態圖像仍未建立完整玩家可見訊息分母。
 第一張旗卡已依[目標099](docs/goals/099-first-nation-card-a-overlay.md)
 完成 A 版兩欄限定 CONFORMED；目標102恢復相同 SHA 的原始
@@ -286,7 +295,7 @@ A 版完成難度標題限定驗收，真視窗、十五檢查點、兩欄回退
 在完整資料鏈證實前，不增加正式中文段數或寫入覆蓋鍵。
 [目標059](docs/goals/059-ebitengine-display-wiring.md)讓Ebitengine視窗以明確Go介面
 接到原版五列顯示，九筆真視窗輸入與中英文同狀態對拍通過。[目標058](docs/goals/058-translation-corpus-and-player-window.md)
-保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至368筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。
+保留當時189筆草稿及五筆畫面命中的分母。現有主譯稿已擴至369筆；全遊戲中文化、第三種輸出情境與正式玩家前端仍未完成。
 
 已完成 [目標 054](docs/goals/054-main-menu-text-provenance.md) 的最小證據鏈；
 [目標 055](docs/goals/055-first-text-prototype.md) 保存中文原型、測試與重跑入口。

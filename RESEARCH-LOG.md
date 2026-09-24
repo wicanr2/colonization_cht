@@ -3459,3 +3459,53 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
   錯版本、原始畫布破損反例均 PASS。本機 `receipt.json`
   SHA-256 `92bdc7335ced5740da04c6a2d7707520f85f832d7aa8174a9c71aaa2f6646ccf`。
   原版離頁證據不等於中文長文覆蓋；規格025保持 DRAFT。
+
+## 2026-09-24：目標105開場字幕與教學預讀分流
+
+- **輸入／工具：**固定原版 `GAME.TXT` SHA-256
+  `67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a`，
+  其餘 `OPENING.EXE`、`VICEROY.EXE`、`NAMES.TXT`、
+  `LABELS.TXT`、`NATIONS.PIK` 雜湊由
+  `tools/check_goal105_tutorial_route.py` 固定；正常玩家輸入
+  SHA-256 `a48ae77b9f6a0c2bdb9b3512625d0c1c4786b1cb64b8deff4bdb603fe422d93e`。
+  隔離 `workplace/dosgolem` 提交
+  `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`；
+  `colonization-research:20260920-r2`／Go 1.24.13。
+  原版唯讀，完整收據與由原版像素重建的畫面只在已忽略的
+  `workplace/reports/goal105-tutorial/`。
+- **已證實／正常玩家路徑：**英格蘭國家介紹 B 後進入85M
+  已驗頁面，分別無鍵、Enter、ESC 各兩次獨立冷啟動及
+  一次無讀寫監看控制。85M與目標104完整 CPU／RAM／
+  索引／色盤／時間／開檔樣本及原始 bytes 一致；九份
+  新報告三種原始畫布在雙重播／控制之間位元組一致。
+  無鍵100M仍留原頁；Enter／ESC在90M皆見開場字幕，
+  100M可見畫面相同但完整 RAM 不同，不推論內部等價。
+- **已證實／原始位址空間：**`GAME.TXT:0x1316A`
+  `@TUTORIAL1` 與 `0x13190` 的開頭，在88,380,281步
+  從 DOS 讀位置 `0x13000` 送至20-bit線性 RAM
+  `0x2B16C`／`0x2B192`；這是**預讀**。同輪又從
+  `GAME.TXT:0x153B0` 讀 `@BUILD1`，字幕文字自
+  `0x153CE`，跨 `0x15400` 的512-byte邊界，兩段
+  送至 RAM `0x2B1D0`／`0x2B002`。原版實模式
+  `CS:IP 0D21:00C6` 於88,689,021–88,754,524步
+  交替讀 RAM `0x2A560`／`0x2A561`，還原為字幕完整
+  61-byte 原文，SHA-256
+  `c1feca9ed16dd6cf8cfd36a118536afd25b86f6677f3ec81d056fad6e78a6db6`；
+  **沒有** `@TUTORIAL1` 內文的當次印字。實模式
+  `CS:IP 0D21:012C` 在320×200索引畫布改色1,040次，
+  半開 bbox `[16,30,303,39)`；90M／95M／100M索引
+  SHA-256 `b8c0d43983c95415071e83513628fc90e8de3236f3e75eb699ed4d87dfc8c772`。
+  檔案位移、RAM、CS:IP、原版畫布及四倍中文畫布不得混用。
+- **強推論與未知：**檔案兩段原文、DOS讀入及印字 bytes
+  一致，支持 `@BUILD1` 來源，但未逐指令追蹤兩個讀入目的
+  到印字緩衝的中間搬運；不可冒稱完整指令鏈已閉合。
+  一次探索性 150M 路徑於100M／115M加 Enter 後仍顯示
+  同字幕、130M另開三個 `.SS`，不是雙重播控制證據；
+  不宣稱教學不可到達，也不深挖硬體音訊時序。
+- **驗證與譯稿：**獨立驗證及錯版、改動畫布 bytes、改動
+  實際印字、缺原版 SKIP 都 PASS；舊探針預設英格蘭 JSON
+  與目標101逐位元組相同。本機 `receipt.json` SHA-256
+  `97e92bd05ce8ff6fd97778e3a70ad4d76de6daf6fc44b08dd6e7fc802d697da7`。
+  主譯稿增 `GAME.TXT:0x000153CC` 草稿一筆，來源／控制碼
+  驗證369筆 PASS；[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)
+  保持 DRAFT，正式中文欄位仍十七段。

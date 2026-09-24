@@ -2025,3 +2025,42 @@
   UID/GID 1000:1000，工作根無 root-owned 項目或誤建
   `.md` 目錄，專案研究映像的執行中／已停止容器均無殘留；
   隔離 dosgolem 的 `upstream` 推送位址仍為 `DISABLED`。
+
+## 2026-09-24：目標105首則教學入口與開場字幕
+
+- 先核對乾淨工作樹、`wicanr2@gmail.com`、PRIVATE 遠端、
+  Issue #7／#27 OPEN 與隔離 dosgolem 禁推，以 `c0caf66`
+  **先推送**[目標105](docs/goals/105-first-tutorial-player-path.md)
+  才修改探針。知識路由命中復古遊戲／中文化、spec 閘門、
+  README 現況聲明與資料化工作清單；沒有替使用者選長文版式。
+- 研究映像初次用登入 shell 啟動，把映像設定的 Go PATH
+  重設；改為明確 `/usr/local/go/bin/` 後又發現非 root
+  預設 `GOCACHE=/.cache/go-build` 不可寫。分類為容器命令
+  環境問題；同一既有映像改用容器內 `/tmp/goal105-go-build`
+  重新建置通過，未建立重複映像、未用主機 Go。
+- 原版正常玩家路徑從英格蘭介紹 B 後 85M 頁面分無鍵／
+  Enter／ESC，各雙次冷啟動與無觀測控制；舊探針預設
+  JSON 與目標101逐位元組相同。`@TUTORIAL1` 在88.38M
+  確實被 DOS 讀入，卻沒有顯示；實際印出的是 `@BUILD1`
+  英文開場字幕。第一次來源收據漏掉跨512-byte邊界的
+  字幕後段；把觀測分兩次讀取並重跑，兩段均對回 RAM、
+  當次61-byte印字及1,040次原版畫布改色。
+- [規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)
+  保持 DRAFT；主譯稿新增一筆字幕繁中候選，原版來源／
+  控制碼驗證共369筆 PASS。獨立驗證器及缺原版 SKIP、
+  錯版本、原始畫布破損、改動實際印字反例均 PASS。
+  探索性延伸至150M且在100M／115M再按 Enter，畫面
+  仍是同一字幕，但未把單次觀測當作教學不可到達的結論。
+- 修正 README／CONTEXT 已過期的「其他國家 B 後未驗」
+  與368筆斷言。沒有修改正式 Ebitengine；中文顯示維持
+  十七段，24則 help 尚無顯示命中。原版與本機 PNG、
+  完整收據保持在 Git 之外，未新增公開素材。
+- 收尾以相同 Docker 研究映像重跑目標101／104／105
+  獨立檢查器、目標105錯版／畫布／印字負例、369筆
+  主譯稿來源驗證及 `tools/worklist.py verify`，全數 PASS；
+  原版缺失命令列回 `SKIP 77` 且不留成功收據。本機
+  `receipt.json` SHA-256
+  `97e92bd05ce8ff6fd97778e3a70ad4d76de6daf6fc44b08dd6e7fc802d697da7`。
+  目標105輸出 UID/GID 1000:1000；工作根無 root-owned
+  項目或誤建 `.md` 目錄，兩個本輪映像均無容器殘留，
+  隔離 dosgolem `upstream` 推送位址仍為 `DISABLED`。

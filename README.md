@@ -24,15 +24,15 @@
 
 ## 目前狀態
 
-已驗證從原版 `OPENING.EXE -g` 啟動、進入 `VICEROY.EXE` 主選單，再以真實 DOS 滑鼠點選「新世界」、難度頁完成區與選國頁完成提示，抵達姓名畫面；四張旗卡各可經正常滑鼠選國、姓名 Enter 進入兩頁原版介紹；法國 B 頁按鍵後可抵達下一可見畫面（其他國家的離頁仍待驗）。現有十七段中文畫面文字：主選單五列、難度頁標題兩段、完成提示一段、第一及第二張卡片各兩行、國家頁左側標題與第一張旗卡各兩行，以及姓名頁的固定提示一段。可編輯姓名與介紹長文仍保持原文。這些有限欄位的 Ebitengine／Xvfb 真視窗以同一份輸入重播中英文兩組，原版 CPU、完整 RAM、索引畫面、色盤及虛擬時間一致；新增畫面差異只在已驗證的中文安全區。第一張旗卡需明確開啟 `--nation-card-a`；現行十七欄字模已由本機固定原始字型與真實 TSV 重烘，與歷史已驗字模逐欄相同，但原版及字型仍須另行合法取得，尚不可公開發行。
+已驗證從原版 `OPENING.EXE -g` 啟動、進入 `VICEROY.EXE` 主選單，再以真實 DOS 滑鼠點選「新世界」、難度頁完成區與選國頁完成提示，抵達姓名畫面；四張旗卡各可經正常滑鼠選國、姓名 Enter 進入兩頁原版介紹，並由 B 頁按鍵抵達各國下一可見畫面。英格蘭路徑又觀測到下一張英文開場字幕；首則教學訊息目前只證實預讀，尚未在畫面顯示。現有十七段中文畫面文字：主選單五列、難度頁標題兩段、完成提示一段、第一及第二張卡片各兩行、國家頁左側標題與第一張旗卡各兩行，以及姓名頁的固定提示一段。可編輯姓名、介紹長文、開場字幕及 help 仍保持原文。這些有限欄位的 Ebitengine／Xvfb 真視窗以同一份輸入重播中英文兩組，原版 CPU、完整 RAM、索引畫面、色盤及虛擬時間一致；新增畫面差異只在已驗證的中文安全區。第一張旗卡需明確開啟 `--nation-card-a`；現行十七欄字模已由本機固定原始字型與真實 TSV 重烘，與歷史已驗字模逐欄相同，但原版及字型仍須另行合法取得，尚不可公開發行。
 
-[繁中翻譯草稿](text/draft.zh-Hant.tsv)現有368筆可追溯候選（新納入28項地圖編輯器選單、14個過場標題與2則載入訊息）；另有[163 篇百科原文／繁中對照（25篇建國元勳、16篇貨物、24篇單位、29篇地形、27篇職業、42篇建築）](text/pedia-bilingual.tsv)、[24 則教學與地圖編輯說明的原文／繁中對照](text/help-bilingual.tsv)、[7 則版本3玩家補充說明的原文／繁中對照](text/readme-bilingual.tsv)、[173 筆預設殖民地名稱的原文／繁中對照](text/colony-bilingual.tsv)，以及[英格蘭、法國、西班牙、荷蘭各兩節共八節介紹雙語草稿](text/nation-introduction.zh-Hant.tsv)。它們都只是可追溯的譯稿；八節均有 dosgolem 正常路徑原版印字證據，介紹長文及說明文字尚未接入中文實際畫面。靜態圖中文字、其他選單、完整操作及整局遊玩都未完成；請以[目前狀態](CONTEXT.md)為準，不以譯稿筆數推算畫面完成率。
+[繁中翻譯草稿](text/draft.zh-Hant.tsv)現有369筆可追溯候選，包含一筆已見英文開場字幕的譯稿；另有[163 篇百科原文／繁中對照（25篇建國元勳、16篇貨物、24篇單位、29篇地形、27篇職業、42篇建築）](text/pedia-bilingual.tsv)、[24 則教學與地圖編輯說明的原文／繁中對照](text/help-bilingual.tsv)、[7 則版本3玩家補充說明的原文／繁中對照](text/readme-bilingual.tsv)、[173 筆預設殖民地名稱的原文／繁中對照](text/colony-bilingual.tsv)，以及[英格蘭、法國、西班牙、荷蘭各兩節共八節介紹雙語草稿](text/nation-introduction.zh-Hant.tsv)。它們都只是可追溯的譯稿；八節介紹及一則開場字幕有 dosgolem 正常路徑原版印字證據，介紹長文、字幕及說明文字尚未接入中文實際畫面。靜態圖中文字、其他選單、完整操作及整局遊玩都未完成；請以[目前狀態](CONTEXT.md)為準，不以譯稿筆數推算畫面完成率。
 
 目前沒有可下載的正式中文化版本。現有 Linux／Xvfb 程式是可撤回的驗證原型，不具備完整鍵盤、音訊、存讀檔與正式玩家節奏。
 
 ## 研究與執行入口
 
-需要自行持有合法 DOS 原版。所有建置、遊戲執行、分析與抓圖都在 Docker 容器內進行；本案只使用 `workplace/dosgolem` 的獨立副本，不修改共用專案。視窗原型由 [組裝器](tools/build_window_prototype.py)及[真視窗驗證腳本](tools/probe_window_prototype.sh)產生；固定工具鏈、掛載與驗證契約見[視窗原型規格](docs/spec/013-window-prototype.md)，難度標題的輸出守門與版式分別見[規格014](docs/spec/014-difficulty-text-output-draft.md)及[規格018](docs/spec/018-difficulty-heading-layout-draft.md)，第一、二張卡片兩行分別見[規格017](docs/spec/017-first-difficulty-card-overlay.md)與[規格019](docs/spec/019-second-difficulty-card-overlay.md)，國家選擇頁左側兩行見[規格020](docs/spec/020-nation-heading-overlay.md)，第一張旗卡兩行見[規格021](docs/spec/021-nation-card-red-text-draft.md)，姓名固定提示見[規格023](docs/spec/023-player-name-screen-draft.md)。
+需要自行持有合法 DOS 原版。所有建置、遊戲執行、分析與抓圖都在 Docker 容器內進行；本案只使用 `workplace/dosgolem` 的獨立副本，不修改共用專案。視窗原型由 [組裝器](tools/build_window_prototype.py)及[真視窗驗證腳本](tools/probe_window_prototype.sh)產生；固定工具鏈、掛載與驗證契約見[視窗原型規格](docs/spec/013-window-prototype.md)，難度標題的輸出守門與版式分別見[規格014](docs/spec/014-difficulty-text-output-draft.md)及[規格018](docs/spec/018-difficulty-heading-layout-draft.md)，第一、二張卡片兩行分別見[規格017](docs/spec/017-first-difficulty-card-overlay.md)與[規格019](docs/spec/019-second-difficulty-card-overlay.md)，國家選擇頁左側兩行見[規格020](docs/spec/020-nation-heading-overlay.md)，第一張旗卡兩行見[規格021](docs/spec/021-nation-card-red-text-draft.md)，姓名固定提示見[規格023](docs/spec/023-player-name-screen-draft.md)。開場字幕與首則教學預讀的界線見[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)。
 
 - [目前脈絡與未完成界線](CONTEXT.md)
 - [工作計畫](WORKLIST.md)（由 `docs/worklist.json` 產生）

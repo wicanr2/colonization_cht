@@ -1,6 +1,6 @@
 # 目標105：從國家介紹走向首則遊戲內教學訊息
 
-狀態：進行中；日期：2026-09-24。承接[目標104](104-nation-introduction-exit-phase.md)
+狀態：completed（入口觀測；教學未顯示）；日期：2026-09-24。承接[目標104](104-nation-introduction-exit-phase.md)
 已驗的四國介紹 B 頁後離頁，以及[目標060](060-help-bilingual-corpus.md)
 已建但尚未驗畫面的 help 雙語草稿；對應
 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)與
@@ -49,3 +49,25 @@ help 仍維持英文。原版、完整原文、索引畫布與中間收據只在
 這次只在原版正常玩家路徑補 help 畫面入口；即使看見第一則，
 也不能把24則譯稿一併宣稱為可見或已中文化。介紹長文版式
 是獨立的使用者視覺決定，本輪不選擇候選字級。
+
+## 結果與下一閘門
+
+- 英格蘭後續頁在85M無鍵留原頁；Enter／ESC 各於90M
+  抵達同一張以 `In the Year of Our Lord` 開頭的原版英文字幕。
+  三分支各兩次冷啟動及一次無讀寫監看控制，原始索引／
+  畫布／色盤與 CPU、RAM、時間、開檔逐項相同；兩鍵彼此
+  完整 RAM 不同，不推論遊戲語意等價。
+- `GAME.TXT:@TUTORIAL1` 標記與開頭文字在88.38M步被
+  DOS 讀入 RAM，但直到100M沒有教學文字的印字或畫布事件。
+  同一路徑實際顯示的是 `GAME.TXT:@BUILD1`；該字幕跨
+  512-byte讀取邊界，兩段 DOS→RAM 與完整逐字印字、
+  1,040次畫布改色已核對，見[規格026](../spec/026-build-intro-and-tutorial-prefetch-draft.md)。
+- 主譯稿新增一筆 `@BUILD1` 草稿，共369筆；不接正式圖層。
+  本機 `receipt.json` SHA-256
+  `97e92bd05ce8ff6fd97778e3a70ad4d76de6daf6fc44b08dd6e7fc802d697da7`。
+  正例、錯版、原始畫布破損、實際印字改字及原版缺失
+  SKIP 都通過，舊預設探針 JSON 逐位元組未改。
+- 一次探索性延伸到150M且於100M／115M加 Enter，
+  可見索引與色盤仍是同一字幕。這不能證明整段開場
+  都無法繼續；下一步須獨立確認按鍵消費與畫面相位，
+  再尋找真正顯示 `@TUTORIAL1` 的正常玩家事件。
