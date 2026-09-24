@@ -2237,3 +2237,12 @@
   詳細原始定位與推論等級見 RESEARCH-LOG；本機
   `receipt.json` SHA-256
   `fda3cd28d14c2ae09c94b51c5e74a638e0e15daa16202940c9d23845b3554b0c`。
+- 成果以 `dbade4b` 推送 PRIVATE `origin/main`；主機
+  `gh` 已留言並讀回 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7#issuecomment-5808523496)
+  與 [Issue #27](https://github.com/wicanr2/colonization_cht/issues/27#issuecomment-5808522160)，
+  兩者仍 OPEN。原版／字型／畫布未入 Git；本輪收據、
+  probe 與譯稿均由 UID/GID 1000:1000 持有，
+  `workplace/` 無 root-owned 或誤建 `.md` 目錄，
+  `colonization-research:20260920-r2` 沒有執行中或
+  已停止容器殘留；隔離 dosgolem `upstream` 推送
+  位址仍為 `DISABLED`。
