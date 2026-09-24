@@ -2,6 +2,10 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前續作入口：[目標115](docs/goals/115-game-options-source-chain-correction.md)：
+核對並交接目標114的遊戲選項來源鏈探針，訂正舊零筆寫入監看
+假陰性；獨立驗證、規格與 Issue 尚待本輪完成。正式顯示仍十七段。
+
 目前進行入口：[目標114](docs/goals/114-game-options-print-buffer-dataflow.md)：
 沿目標112／113的原版九欄收據，追解析緩衝到印字字元緩衝的
 最後搬運與讀寫位址；未取得直接證據前維持強推論，
