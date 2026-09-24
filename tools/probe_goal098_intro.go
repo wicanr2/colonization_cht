@@ -71,6 +71,7 @@ func main() {
 	preprint := flag.Bool("preprint", false, "在 A/B 與啟用後續頁時的首筆 0D21:012C 寫入前擷取原始畫布")
 	postCaptionAudit := flag.Bool("post-caption-audit", false, "目標107：選用鍵盤待取數診斷與有界字幕後觀測")
 	captionFrameAudit := flag.Bool("caption-frame-audit", false, "目標129：首張字幕的當次印字、畫布與逐幀失效觀測；預設關閉")
+	captionScreenAudit := flag.Bool("caption-screen-audit", false, "目標130：在已驗字幕畫格逐幀比較實際 VGA 索引與原版底層畫布；預設關閉")
 	gameInputsPath := flag.String("game-inputs", "", "目標110：字幕後正常玩家滑鼠／鍵盤事件 JSON；預設不改舊重播")
 	optionsAudit := flag.Bool("options-audit", false, "目標112：固定 GAME.TXT 遊戲選項九欄的 DOS 讀入來源")
 	optionsPreprint := flag.Bool("options-preprint", false, "目標113：九欄各自首筆原版印字前底圖與印字緩衝寫入")
@@ -109,6 +110,9 @@ func main() {
 		*afterB != "enter" || *afterFollow != "enter" || *followUntil < 210000000 ||
 		*gameInputsPath != "" || *followEnterAt != "") {
 		panic("字幕逐幀觀測只接受固定英格蘭 Enter 路徑至至少210M，無額外輸入")
+	}
+	if *captionScreenAudit && !*captionFrameAudit {
+		panic("字幕顯示畫面逐幀觀測須啟用字幕生命週期觀測")
 	}
 	maxFollow := uint64(150000000)
 	if *postCaptionAudit {
@@ -383,14 +387,21 @@ func main() {
 	captionReadStage := 0
 	captionReadStart := uint64(0)
 	captionReadEnd := uint64(0)
+	captionFirstReadCanvasSHA := ""
+	captionReadOperands := []map[string]any{}
 	captionReadMismatch := 0
 	captionWriteCount := 0
 	captionWriteFirst := uint64(0)
 	captionWriteLast := uint64(0)
+	captionFirstWriteCanvasSHA := ""
 	captionWriteBBox := [4]int{320, 200, 0, 0}
 	captionFrames := 0
 	captionSignatureFrames := 0
 	captionEligibleFrames := 0
+	captionIndexedMismatchFrames := 0
+	captionSafeMismatchFrames := 0
+	captionFirstSafeMismatchStep := uint64(0)
+	captionLastSafeMismatchStep := uint64(0)
 	captionPhase := "unseen"
 	captionTransitions := []map[string]any{}
 	captionSignatureFirst := uint64(0)
@@ -423,6 +434,19 @@ func main() {
 					if a == wantedAddr && value == wantedValue {
 						if captionReadStage == 0 {
 							captionReadStart = m.Steps
+							if *captionScreenAudit {
+								captionFirstReadCanvasSHA = hashIntro(m.Mem[canvas : canvas+64000])
+							}
+						}
+						if *captionScreenAudit && len(captionReadOperands) < len(captionExpected)*2 {
+							c := m.CPU
+							captionReadOperands = append(captionReadOperands, map[string]any{
+								"step": m.Steps, "linear": a, "value": value,
+								"ss": c.Seg[golem.SS], "bx": c.R[golem.BX],
+								"ds": c.Seg[golem.DS], "si": c.R[golem.SI],
+								"di":           c.R[golem.DI],
+								"ss_bx_linear": uint32(c.Seg[golem.SS])*16 + uint32(c.R[golem.BX]),
+							})
 						}
 						captionReadStage++
 						if captionReadStage == len(captionExpected)*2 {
@@ -542,6 +566,9 @@ func main() {
 				cs == 0x0d21 && ip == 0x012c {
 				if captionWriteCount == 0 {
 					captionWriteFirst = m.Steps
+					if *captionScreenAudit {
+						captionFirstWriteCanvasSHA = hashIntro(m.Mem[canvas : canvas+64000])
+					}
 				}
 				captionWriteCount++
 				captionWriteLast = m.Steps
@@ -657,6 +684,27 @@ func main() {
 			canvasSHA := hashIntro(m.Mem[canvas : canvas+64000])
 			paletteSHA := hashIntro(m.DAC[:])
 			signature := m.VideoMode() == 0x13 && canvasSHA == captionCanvasSHA && paletteSHA == captionPaletteSHA
+			safeMismatch := false
+			if *captionScreenAudit && signature {
+				indexed := m.Indexed()
+				if !bytes.Equal(indexed, m.Mem[canvas:canvas+64000]) {
+					captionIndexedMismatchFrames++
+				}
+				for y := 27; y < 42; y++ {
+					if !bytes.Equal(indexed[y*320+12:y*320+307],
+						m.Mem[canvas+uint32(y*320+12):canvas+uint32(y*320+307)]) {
+						safeMismatch = true
+						break
+					}
+				}
+				if safeMismatch {
+					captionSafeMismatchFrames++
+					if captionFirstSafeMismatchStep == 0 {
+						captionFirstSafeMismatchStep = m.Steps
+					}
+					captionLastSafeMismatchStep = m.Steps
+				}
+			}
 			if signature {
 				captionSignatureFrames++
 				if captionSignatureFirst == 0 {
@@ -668,7 +716,7 @@ func main() {
 				return
 			}
 			eligible := captionReadEnd != 0 && captionWriteCount == 1040 &&
-				captionWriteBBox == [4]int{16, 30, 303, 39} && signature
+				captionWriteBBox == [4]int{16, 30, 303, 39} && signature && !safeMismatch
 			if captionPhase == "unseen" && eligible {
 				captionPhase = "ready"
 				captionTransitions = append(captionTransitions, map[string]any{
@@ -977,6 +1025,9 @@ func main() {
 	}
 	if *captionFrameAudit {
 		version = "goal129-caption-frame-audit-v1"
+		if *captionScreenAudit {
+			version = "goal130-caption-screen-audit-v2"
+		}
 	}
 	report := map[string]any{"version": version, "control": *control,
 		"next_enter": *nextEnter,
@@ -1011,6 +1062,18 @@ func main() {
 			"signature_last_step":  captionSignatureLast,
 			"eligible_frames":      captionEligibleFrames, "phase_at_end": captionPhase,
 			"transitions": captionTransitions,
+		}
+		if *captionScreenAudit {
+			report["caption_screen_audit"] = map[string]any{
+				"indexed_mismatch_frames":   captionIndexedMismatchFrames,
+				"safe_mismatch_frames":      captionSafeMismatchFrames,
+				"first_safe_mismatch_step":  captionFirstSafeMismatchStep,
+				"last_safe_mismatch_step":   captionLastSafeMismatchStep,
+				"first_read_canvas_sha256":  captionFirstReadCanvasSHA,
+				"first_write_canvas_sha256": captionFirstWriteCanvasSHA,
+				"read_operands":             captionReadOperands,
+				"safe_logical":              [4]int{12, 27, 307, 42},
+			}
 		}
 	}
 	if *gameInputsPath != "" {

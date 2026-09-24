@@ -1,6 +1,6 @@
 # 目標130：首張開場字幕的限定 READY 規格與正式視窗中文
 
-狀態：進行中；開始：2026-09-25。承接[目標129](129-build1-runtime-frame-lifecycle.md)、[規格026（DRAFT）](../spec/026-build-intro-and-tutorial-prefetch-draft.md)及[目標128字級決定](128-a-layout-decisions-and-build1-runtime-gate.md)。對應既有 [Issue #11](https://github.com/wicanr2/colonization_cht/issues/11)、[Issue #12](https://github.com/wicanr2/colonization_cht/issues/12)、[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)，不新增同義工作。
+狀態：完成（只限英格蘭首張開場字幕）；開始與完成：2026-09-25。承接[目標129](129-build1-runtime-frame-lifecycle.md)、[規格026（DRAFT）](../spec/026-build-intro-and-tutorial-prefetch-draft.md)、[本輪限定 CONFORMED 規格029](../spec/029-build1-caption-window-ready.md)及[目標128字級決定](128-a-layout-decisions-and-build1-runtime-gate.md)。對應既有 [Issue #11](https://github.com/wicanr2/colonization_cht/issues/11)、[Issue #12](https://github.com/wicanr2/colonization_cht/issues/12)、[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)，不新增同義工作。
 
 ## 本輪交付範圍
 
@@ -17,3 +17,10 @@
 ## 權利與停止線
 
 原版 EXE／TXT、字型原檔、原版像素及含原版像素的對照 PNG／完整收據均只留忽略版控的 `workplace/`。本輪不處理 `@BUILD2–10`、help、其他國家字幕或遊戲選項九欄；它們的草稿與待辦仍有效，不因首張字幕完成而關閉整體中文化 Issue。
+
+## 本輪結果與下一閘門
+
+- 獨立 dosgolem 英格蘭路徑的122筆實際讀字運算元、1,040點畫布寫入及底圖、色盤、真 VGA逐幀核對後，發現底層畫布比真 VGA 早六幀完成，故將本限定字幕升為[規格029](../spec/029-build1-caption-window-ready.md) READY 才實作。雙冷啟動報告逐 byte相同，SHA-256 `f0bc1a1747c5086bd1598ec39a6eca4490b44bb6d4b6dcc17e6d6a6bacd647dc`；無讀寫監看控制、18項篡改拒絕及缺原版 `SKIP 77`均通過。最初把落差誤稱游標影響，已核對 `Machine.Indexed()` 實作並訂正為真 VGA 與底層畫布尚未同步，保留原有研究線索與勘誤。
+- 正式前端新增預設關閉的 `-build1-a`：僅固定版本、原版 `0D21:00C6` 的完整122 byte讀字、`0D21:012C` 的1,040點畫布變更與真 VGA同步後，才在Ebitengine四倍畫布繪 A／38px字幕；當次權杖離頁失效。真 TSV 與固定 TTF 本機烘字模，實際墨跡430×35px，前景14、暗影47；不同於字型預留邊界451px，不能改成裁切譯文。譯文／字模只留本機，原版 RAM與輸入不改。
+- 真 Ebitengine錄製路徑的82M字幕中、86M離頁後與120M後續三組中／英文控制冷啟動原版 CPU、完整 RAM、畫面索引、色盤、時間、開檔完全相同；82M安全區外零改色，前七個真 VGA等待畫格仍英文。缺字模、缺譯文、重複TSV鍵，以及明示插入一筆滑鼠遮擋的同輸入控制都完整回退英文；最終游標守門版的正常82M PNG與先前已驗A版逐 byte相同。先前十七欄的727幀圖層紀錄和29個事件與原真視窗收據一致。獨立重建只在858個抗鋸齒邊緣像素有跨繪圖庫最多2色階捨入差，其餘精確相同；七項真視窗篡改拒絕、缺合法原版 `SKIP 77`通過。本機驗證摘要 SHA-256 `550035971f149229cbfdf28f66433572fdb1ae625bfa4a40c3e8dfaea2869f7a`，故規格029僅此字幕標限定 CONFORMED。
+- 真視窗錄製路徑在78,889,224步印首張字幕、85,800,001步離頁；dosgolem獨立探針路徑在88,689,021步印同一段，兩者是**不同輸入路徑**，不得併為同一次頁面重印。全部原版 PNG／字型／RAM與完整報告只在已忽略的 `workplace/reports/goal130-build1/`。其他九張字幕、help、九欄遊戲選項、其他國家及公開發行權仍未完成；正式中文字幕增加的是這一個**需明示旗標**的限定欄位，不宣稱全文完成。
