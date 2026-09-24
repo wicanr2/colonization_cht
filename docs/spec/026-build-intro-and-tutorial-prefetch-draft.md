@@ -270,3 +270,11 @@ Ebitengine 中文覆蓋；24則 help 草稿仍不計入
 上述目標111「尚未驗證回到新局入口」是當時的觀測邊界；[目標123](../goals/123-retire-confirmation-and-help-route.md)沿同一正常玩家 `GAME → Retire` 確認框補驗兩個按鈕。在原版320×200座標，點 Yes `(133,105)` 到 `COLONIZATION SCORE`（`Total Score: 4`），再按 Enter 到 `COLONIZATION HALL OF FAME`，第二次 Enter 於第1,451,193,903步使原版正常離開 DOS；點 No `(130,117)` 則返回原海上畫面。`WOODPANL.PIK` 檔案 SHA-256 `0858856ad5b5dd0b6ab8e7a8f815fa602a9cf0237d8d323cd2b5ca141b32bc69`；原版輸入及完整收據常數見 `tools/check_goal123_retire_route.py`。隔離 dosgolem `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`、Go 1.24.13；所有檔案 SHA 是 DOS 檔案雜湊，數字1,451,193,903是模擬執行步數，不是實模式位址。
 
 四分支各雙次冷啟動與無監看控制同狀態，獨立檢查器的原版檔案／輸入／畫面／終止旗標正反例通過。**已證實：**此固定 Retire→Yes 路徑不會在同一次執行中返回新局。**未知：**其他新局入口、跨次啟動選項保留及首則 help 的正式輸出事件；不得由本收據推論全部玩家流程沒有 help。`@TUTORIAL1` 仍僅有原版預讀與譯稿，沒有 READY 覆蓋條件，正式顯示仍十七段、help 零則。
+
+## 2026-09-25：`Retire` 後跨次冷啟動的限定訂正（仍為 DRAFT）
+
+[目標125](../goals/125-tutorial-hints-persistence-and-help-entry.md)已把上一節「跨次啟動選項保留未知」縮小為一條**已檢驗且未保留效果**的固定玩家路徑。三支從英格蘭新局到海上 `Game Options`，對 `Tutorial Hints` 分別不點、點一次、點兩次，再循 `Retire → Yes → 分數 → 名人堂 → DOS 正常結束`。教學圖示同焦點中心四點依次為原版色號47／149／47，屬當局畫面效果的已證實觀測，不單獨推論核取選項的內部旗標。原版程式與資料始終以唯讀 `Root` 載入；各分支另用獨立 `DOS.Scratch` 保留原版寫入。三支退出時的暫存層逐 byte 相同，僅 `COLONY09.SAV`（23,847 bytes，SHA-256 `52bfd407b7c3b0a0cfce9362a0b352d1e7296b3ee85f715e4b904703064e3696`）與 `HALLFAME.DAT`（210 bytes，SHA-256 `886a85752b852d15ffdd1b689eb0c8c72b653c2e1f7a6af3f4b0844371a00838`）。這不證第二次啟動有讀取任一檔案。
+
+每支以退出後暫存層的精確副本再次冷啟動、開始新局並重開 `Game Options`；三支在1,400,000,000模擬指令步的完整原版狀態與 JSON 報告合流，報告 SHA-256 均為 `ec3a785c9e0faf0247a4928ac5cf3479ffa45177d1ed909afde97239e7d94049`，圖示中心四點均為47。首則 help 未出現在這些固定取樣或監看印字讀取中。首輪與重啟各分支均雙次冷啟動並與無讀寫監看控制同狀態；獨立檢查器及錯版、改事件、改存檔、改畫面、假終止／合流等負例通過。完整本機收據只留已忽略的 `workplace/reports/goal125-help/`；驗證摘要 SHA-256 `8ca851ecc6ce8816bcaddf2d2638e211ef53cfd8449a66aec7a40d1e4a2ef97e`。
+
+**已證實的界線：**這條 `Retire` 後另開新局的路徑沒有把一次點擊的可見效果帶到第二次選項畫面，也未給出首則 help 正式印字／中文畫面。其他玩家入口、載入存檔、未取樣瞬間、真正的教學啟用條件及首則 help 正式輸出事件仍**未知**。`GAME.TXT:@TUTORIAL1` 仍只有檔案預讀與譯稿；不升 READY、不建立正式覆蓋鍵，正式中文十七段、help 零則。下一個 RE 切片須從其他正常玩家入口或當局可見觸發取得原版印字事件；不得把核取像素或 DOS 預讀冒充 help 顯示。

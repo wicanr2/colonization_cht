@@ -77,6 +77,7 @@ func main() {
 	optionsResidentAudit := flag.Bool("options-resident-audit", false, "目標114：互斥觀測九欄高位址 RAM 來源的寫入者")
 	optionsPhaseSamples := flag.String("options-phase-samples", "", "目標119：選項點擊附近額外取樣的遞增絕對指令步數，逗號分隔；預設關閉")
 	allowEarlyExit := flag.Bool("allow-early-exit", false, "目標123：只在後續正常玩家路徑觀測 DOS 提前結束，保留真實終止步數；預設關閉")
+	scratch := flag.String("scratch", "", "目標125：原版唯讀 Root 外的跨次 DOS 暫存層；預設關閉")
 	flag.Parse()
 	if *inputs == "" || *out == "" {
 		panic("缺必要參數")
@@ -103,6 +104,9 @@ func main() {
 	maxFollow := uint64(150000000)
 	if *postCaptionAudit {
 		maxFollow = 1500000000
+		if *scratch != "" && *allowEarlyExit {
+			maxFollow = 1700000000
+		}
 	}
 	if *afterFollow != "none" && (*followUntil < 100000000 || *followUntil > maxFollow || *followUntil%5000000 != 0) {
 		panic("後續觀測終點超出限定範圍")
@@ -115,6 +119,24 @@ func main() {
 	}
 	if *allowEarlyExit && (*gameInputsPath == "" || *followUntil < 1300000000 || *optionsAudit) {
 		panic("提前終止收據只接受既有海上玩家事件且不可混用選項來源稽核")
+	}
+	if *scratch != "" {
+		if !*postCaptionAudit || *gameInputsPath == "" {
+			panic("可寫暫存層僅供字幕後正常玩家輸入實驗")
+		}
+		st, err := os.Stat(*scratch)
+		mustIntro(err)
+		owner, ok := st.Sys().(*syscall.Stat_t)
+		if !st.IsDir() || !ok || int(owner.Uid) != os.Getuid() {
+			panic("可寫暫存層不存在或擁有者不符")
+		}
+		rootAbs, err := filepath.EvalSymlinks(*root)
+		mustIntro(err)
+		scratchAbs, err := filepath.EvalSymlinks(*scratch)
+		mustIntro(err)
+		if rootAbs == scratchAbs {
+			panic("可寫暫存層不得等於原版 Root")
+		}
 	}
 	if *optionsAudit && (*gameInputsPath == "" || *followUntil < 1300000000) {
 		panic("遊戲選項來源稽核需要正常玩家開窗輸入與1300M終點")
@@ -168,7 +190,11 @@ func main() {
 		inputBytes := readIntro(*gameInputsPath)
 		lateInputHash = hashIntro(inputBytes)
 		mustIntro(json.Unmarshal(inputBytes, &lateInputs))
-		if len(lateInputs) == 0 || len(lateInputs) > 12 {
+		maxInputs := 12
+		if *scratch != "" {
+			maxInputs = 30
+		}
+		if len(lateInputs) == 0 || len(lateInputs) > maxInputs {
 			panic("字幕後玩家事件數量不符")
 		}
 		previous := uint64(1225000000)
@@ -308,6 +334,9 @@ func main() {
 	m.Write8(uint32(golem.PSPSeg)*16+0x80, 2)
 	m.WriteBytes(uint32(golem.PSPSeg)*16+0x81, []byte{'-', 'g', 13})
 	d := golem.NewDOS(m, *root)
+	if *scratch != "" {
+		d.Scratch = *scratch
+	}
 	d.Install()
 	defer d.Close()
 	m.SetSoundBlasterPro(true)
@@ -779,6 +808,10 @@ func main() {
 		report["game_terminal"] = map[string]any{"observed": terminated,
 			"step": m.Steps, "dos_exited": d.Exited, "cpu_halted": m.CPU.Halted,
 			"events_delivered": lateIndex, "events_total": len(lateInputs)}
+	}
+	if *scratch != "" {
+		report["scratch"] = true
+		report["write_intents"] = d.Wrote
 	}
 	if *optionsAudit {
 		report["option_source_reads"] = optionSourceReads
