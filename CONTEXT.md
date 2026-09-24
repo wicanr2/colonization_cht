@@ -2,6 +2,13 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+進行中入口：[目標110](docs/goals/110-tutorial-hints-player-trigger.md)：
+從已驗海上玩家畫面，以原版滑鼠查頂端 `GAME` →
+`Game Options` 的 `Tutorial Hints` 核取狀態和首則
+help 的實際顯示。選項文字已在固定 `MENU.TXT`／
+`GAME.TXT` 定位，但預設值、觸發效果仍是假說；
+不能把先前 `@TUTORIAL1` 預讀當成顯示。
+
 最近完成入口：[目標109](docs/goals/109-opening-caption-variable-values.md)：
 四國正常玩家路徑的 `@BUILD1–7` 原版字幕已各有
 雙冷啟動與無監看對照；[24筆變數值草稿](text/build-caption-values.zh-Hant.tsv)
@@ -20,8 +27,8 @@ dosgolem 十段印字與雙重播、各行檔案位移／SHA、占位符、
 仍 DRAFT：變數值雖有24筆草稿，正式畫面仍是英文；`@BUILD1` 的38／42px
 視覺選擇、其餘字幕的個別字級／正式顯示，以及 help
 的實際觸發和中文畫面都尚未完成；正式顯示維持十七段。
-下一工作仍可從已驗海上玩家畫面查 help 觸發，或先查
-四國字幕變數值的顯示層翻譯來源，兩者不必代選字級。
+下一工作從已驗海上玩家畫面查 help 觸發，或分別
+處理字幕逐欄版式；兩者不必代選字級。
 
 最近完成入口：[目標107](docs/goals/107-post-caption-input-and-help-entry.md)：
 英格蘭正常玩家路徑已驗85M與100M的 Enter 被原版消費；
@@ -32,7 +39,8 @@ dosgolem 十段印字與雙重播、各行檔案位移／SHA、占位符、
 
 下一工作入口：從已驗1,200M海上畫面的正常玩家輸入與
 原版設定查證首則 help 的觸發和當次印字。另需把
-`@BUILD2–10` 已有的逐行草稿接到變數值來源與逐欄版式；
+`@BUILD2–10` 已有的逐行草稿與四國變數值草稿接到
+各字幕的獨立版式；
 `@BUILD1` 的38／42px正式字級仍待使用者選擇。
 
 最近工作入口：[目標106](docs/goals/106-build-opening-caption-overlay-gate.md)
