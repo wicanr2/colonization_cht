@@ -3255,3 +3255,34 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
   [規格021](docs/spec/021-nation-card-red-text-draft.md)只對第一張
   旗卡兩欄限定 CONFORMED；相鄰卡、其他國家與公開字型資產
   仍未知／未授權，不能由本收據外推。
+
+## 2026-09-24：四國介紹八節的固定檔案來源
+
+- **輸入與位址空間。** 合法 DOS `GAME.TXT`，SHA-256
+  `67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a`；
+  下列 `0x...` 全是**檔案位移**，不是 RAM、`CS:IP` 或畫布座標。
+  `colonization-research:20260920-r2` 內 Python 3.11.2 唯讀
+  `GAME.TXT`，以頂層 `@` 節標記定界；
+  `tools/validate_nation_introduction_corpus.py` 固定完整檔案與逐節
+  SHA、標題、`@width=300`、`^^_`、正文和 `{}` 強調標記。
+
+| 節 | 半開檔案位移／bytes | 原始節 SHA-256 | 證據等級 |
+|---|---|---|---|
+| `@NATION0A` 英格蘭 | `0xAE7C–0xB204`／904 | `7315f80026bfce88671deb0ed082dc09d4894fa6c7dd90d1a05cac83cd42be6c` | 已證實：檔案 bytes |
+| `@NATION0B` 英格蘭 | `0xB204–0xB2DB`／215 | `18c13609d357fb8b151c186abf54924d60a9d2312422557c8e9318b3ae74a9c1` | 已證實：檔案 bytes |
+| `@NATION1A` 法國 | `0xB2DB–0xB641`／870 | `8b9eec55083e64f4c45989631dbcd512b3019a978af5a84c7ad4e59ba0a2534b` | 已證實：檔案 bytes／執行另見目標098 |
+| `@NATION1B` 法國 | `0xB641–0xB73E`／253 | `78da983dc6a4bfc965e8ab616ec1bdd6dd2c18c8901fc2015c2e371c518d78ae` | 已證實：檔案 bytes／執行另見目標098 |
+| `@NATION2A` 西班牙 | `0xB73E–0xBB46`／1032 | `86990d9fdcfa4e77199d011d4d3fd6b7c140c1e92c6b1619c6a6b32feba0b2e6` | 已證實：檔案 bytes |
+| `@NATION2B` 西班牙 | `0xBB46–0xBC28`／226 | `fda7944fa37e2959d5a8d0ebba7b6b37ac58948dc961eda2abfa664e1b4d96e5` | 已證實：檔案 bytes |
+| `@NATION3A` 荷蘭 | `0xBC28–0xC032`／1034 | `de92a74437b235520e7b7eec2552ff3193daece1774c761138b7dee0f98898b4` | 已證實：檔案 bytes |
+| `@NATION3B` 荷蘭 | `0xC032–0xC191`／351 | `6f69bbd647044d79afa0d76248e69a961e555f4ce8bc4a4e41a226a9fad87bf6` | 已證實：檔案 bytes；下一節是 `@PICKACARGO` |
+
+八節譯稿見 `text/nation-introduction.zh-Hant.tsv`，檔案 SHA-256
+`bce0527cc13217b8b97b467ee7852a9b3c96af11eb79463bc4420309ae493817`；
+兩個獨立唯讀容器讀取並驗證相同。原有法國兩節檢查器改為只篩出
+法國鍵，在含八節的 TSV 上回歸通過。原版西班牙 B 節的 `50%%`
+原樣保存在英文欄，中文顯示草稿採 `50%`；百分號實際格式化
+路徑仍**未知**。除法國 A／B 外，其餘六節的正常玩家路徑
+印字、頁相位、畫布與中文排版皆**未知**；本輪只確認檔案與
+譯稿，不得升級[規格025](docs/spec/025-first-nation-introduction-draft.md)
+或把八節計入十七段正式顯示。

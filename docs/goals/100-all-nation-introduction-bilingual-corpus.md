@@ -1,6 +1,6 @@
 # 目標100：四國介紹八節的可追溯繁中語料
 
-狀態：進行中；日期：2026-09-24。承接[目標098](098-first-nation-introduction-source.md)
+狀態：完成（限語料與來源驗證）；日期：2026-09-24。承接[目標098](098-first-nation-introduction-source.md)
 已驗的法國 A／B 兩頁來源與[規格025](../spec/025-first-nation-introduction-draft.md)，
 對應 [Issue #30](https://github.com/wicanr2/colonization_cht/issues/30) 與
 [Issue #27](https://github.com/wicanr2/colonization_cht/issues/27)。
@@ -69,3 +69,20 @@
 翻頁語意。固定 Cubic 11 原始字型未恢復，不以其他字型的測量
 冒充正式中文字級。第一張旗卡 A 版、右卡待決字級及姓名欄待決
 選項均不受本輪翻譯變更影響。
+
+## 驗收與後續入口
+
+八節固定段落及六筆新譯稿由
+`tools/validate_nation_introduction_corpus.py` 核對通過；兩個獨立
+容器的 JSON 回執 SHA-256 均為
+`2e802f08ba5983665784c5bf9c8215f02bdb29110256b598e4227aefce67388d`，
+TSV SHA-256 為
+`bce0527cc13217b8b97b467ee7852a9b3c96af11eb79463bc4420309ae493817`。
+錯版原版及錯誤語料均被拒絕。目標098的原有法國兩節檢查器
+在八節 TSV 上回歸通過；其兩筆原文與譯文未改。
+
+本目標的「完成」只指可追溯雙語語料；新六節顯示仍屬未知，
+[規格025](../spec/025-first-nation-introduction-draft.md)維持 DRAFT，
+正式顯示仍為十七段。下一輪須先建立其他國家的正常玩家路徑
+及頁相位收據，再逐頁決定長文安全矩形、字級、換行與回退；
+Issue #27／#30 保持 OPEN。

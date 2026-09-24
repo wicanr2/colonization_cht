@@ -58,8 +58,10 @@ def check_catalog(path, game):
         rows = list(reader)
     sections = (("GAME.TXT:@NATION1A", 0xB2DB, 0xB641, A_BLOCK_SHA),
                 ("GAME.TXT:@NATION1B", 0xB641, 0xB73E, B_BLOCK_SHA))
-    need(len(rows) == len(sections), "介紹譯稿不是精確兩段")
-    for row, (key, start, end, digest) in zip(rows, sections):
+    france_rows = [row for row in rows if row["message_id"] in
+                   {key for key, _, _, _ in sections}]
+    need(len(france_rows) == len(sections), "法國介紹譯稿不是精確兩段")
+    for row, (key, start, end, digest) in zip(france_rows, sections):
         need(None not in row and row["message_id"] == key and
              row["source_file"] == "GAME.TXT" and
              row["source_file_sha256"] == GAME_SHA and

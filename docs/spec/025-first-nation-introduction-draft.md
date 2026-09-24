@@ -19,8 +19,14 @@
 `colonization-research:20260920-r2`／Go 1.24.13；畫面重建用
 `rich2-py:latest`／Pillow 12.3.0。原版輸入唯讀，原版畫素、完整原文和
 二進位收據只留在已忽略的 `workplace/reports/goal098-intro/`；
-[兩筆繁中草稿](../../text/nation-introduction.zh-Hant.tsv)只推送已核對為
+[四國八節繁中草稿](../../text/nation-introduction.zh-Hant.tsv)只推送已核對為
 PRIVATE 的儲存庫，公開散布權仍未知。
+
+目標100另以 `tools/validate_nation_introduction_corpus.py` 核對英格蘭、
+法國、西班牙、荷蘭各 A／B 節的固定檔案位移、下一頂層節邊界、
+逐節 SHA-256、原文與強調標記。除法國 A／B 外，其餘六節**只有檔案來源
+已證實**，未取得正常玩家路徑的印字、頁相位、畫布與中文安全區；
+八節譯稿不使本規格升級，也不增加正式顯示數。
 
 ## 證據與推論等級
 
@@ -65,7 +71,7 @@ RAM、原版印字實模式 `CS:IP`、320×200 原版畫布及 1280×800 四倍�
 層來源鍵。`{}` 是原版強調標記，不交給原版作查找或規則輸入。
 缺鍵、重複鍵、原版版本不符、印字序列／頁相位不符、中文字模缺字、
 安全區或游標衝突時逐頁回退原文並記錄原因；絕不改原版 RAM、
-檔案、姓名、亂數、規則與存檔。B 是否最後一頁、其他國家各段、
+檔案、姓名、亂數、規則與存檔。B 是否最後一頁、其他國家的執行期畫面、
 第三次 Enter／ESC、正式字級與中文換行仍屬未知。這些缺口關閉並
 經證據審查升 READY 後，才可修改正式 Ebitengine 顯示；中文／英文
 與缺譯回退要走同一正常玩家路徑，再以 dosgolem 與真視窗做同狀態驗證。
@@ -77,4 +83,4 @@ RAM、原版印字實模式 `CS:IP`、320×200 原版畫布及 1280×800 四倍�
 `next-a`／`next-control`；`tools/check_goal098_intro.py` 同時核對原始
 兩節、[TSV](../../text/nation-introduction.zh-Hant.tsv)、逐字印字、兩頁
 畫布、雙次及無觀測控制。`workplace/reports/goal098-intro/verified.json`
-為本機驗證收據，不含正式中文畫面，也不計入十五段已驗顯示。
+為本機驗證收據，不含正式中文畫面，也不計入十七段已驗顯示。
