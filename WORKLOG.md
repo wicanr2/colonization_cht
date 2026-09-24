@@ -1898,3 +1898,10 @@
   README 僅更新穩定雙語入口，CONTEXT／RESEARCH-LOG／
   唯一 `docs/worklist.json` 同步；由工具重生 `WORKLIST.md`
   並 verify PASS。正式顯示仍十七段，Issue #27／#30 不可關閉。
+- 成果以 `154888e` 推送至再次核對為 PRIVATE 的 `origin/main`；
+  主機真正 `gh` 已分別留言並回讀 Issue #27／#30，兩者仍
+  OPEN。Git 工作樹乾淨，最近提交作者 `wicanr2@gmail.com`；
+  追蹤檔沒有原版封存檔、解包物、字型或 `workplace/`。
+  隔離 dosgolem 的 `upstream` 推送位址仍是 `DISABLED`；
+  本輪檔案 UID/GID `1000:1000`，工作根沒有 root-owned 檔案
+  或誤建 `.md` 目錄，專案 Docker 執行中／停止容器均無殘留。
