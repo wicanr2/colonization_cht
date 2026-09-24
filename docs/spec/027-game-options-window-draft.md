@@ -1,6 +1,6 @@
 # 規格027：原版遊戲選項視窗九處文字
 
-狀態：DRAFT；日期：2026-09-24。入口：[目標112](../goals/112-game-options-chinese-display.md)、[目標113](../goals/113-game-options-background-and-preview.md)、[目標114](../goals/114-game-options-print-buffer-dataflow.md)、[目標116](../goals/116-game-options-selection-and-exit-phases.md)、[目標117](../goals/117-game-options-same-focus-checkmarks.md)、[目標118](../goals/118-game-options-remaining-rows.md)、[目標110](../goals/110-tutorial-hints-player-trigger.md)、[目標111](../goals/111-tutorial-hints-state-and-first-help.md)。本規格尚**不授權正式 Ebitengine 覆蓋**。
+狀態：DRAFT；日期：2026-09-24。入口：[目標112](../goals/112-game-options-chinese-display.md)、[目標113](../goals/113-game-options-background-and-preview.md)、[目標114](../goals/114-game-options-print-buffer-dataflow.md)、[目標116](../goals/116-game-options-selection-and-exit-phases.md)、[目標117](../goals/117-game-options-same-focus-checkmarks.md)、[目標118](../goals/118-game-options-remaining-rows.md)、[目標119](../goals/119-game-options-click-phase.md)、[目標110](../goals/110-tutorial-hints-player-trigger.md)、[目標111](../goals/111-tutorial-hints-state-and-first-help.md)。本規格尚**不授權正式 Ebitengine 覆蓋**。
 
 ## 玩家範圍與原始版本
 
@@ -84,6 +84,16 @@
 暫態的底層差分只落在第1列和被點列，仍混合焦點與核取，不得把整列差分歸給圖示。回到第1列後，各支原版索引和底層畫布在1,375M與1,400M各自跨時點不變；對照基線只在表中四點不同，文字區與共同焦點相同，且各支與基線**同時點**色盤相同。不同時點色盤仍變，不能稱完整 RGB 畫面跨時點相同。`tools/check_goal118_remaining_rows.py` 及八類負例通過，原始畫素僅在 `workplace/reports/goal118-options/`。
 
 結合目標117第4／7列、目標111第8列與只點第1列基線，八列現在都有**固定同焦點穩定抽樣**；這不是八列每幀互動矩陣。**已證實**上述座標及時點的圖示中心像素可與焦點分離；**未知**各選項啟用／停用語意、按下／放開瞬間、游標覆蓋各欄、其他點擊熱區與完整場景切換相位。A／B 中文逐欄字級已展示候選但未經使用者選定；快捷鍵如何可見呈現與正式逐欄可逆背景、失效及同狀態驗收仍缺。因此本規格維持 DRAFT，不能把九欄譯稿接正式圖層或宣稱中文數增加。
+
+### 目標119追加：第一與第八列按下／放開的有界畫面相位
+
+固定第一列 `(140,65)` 與第八列 `(140,149)` 均在原版320×200玩家畫布按1,302,000,000步、放1,303,000,000步；這是 dosgolem 指令數，不是牆鐘。第一列新玩家事件 SHA-256 `c7c5d91e67c3c49b3e3727f6b9275738bee4b8b1794a0e8ac40a325132ff0971`；第八列沿用目標110事件 SHA-256 `5ffad69f2e31e8c46cec86b543455331a4da432ce289d150846e4b1b682ff1a8`。原版 EXE／TXT 指紋、隔離 dosgolem 提交及正常開局輸入沿本規格前述固定版本；無監看控制與觀測逐取樣同狀態。探針 `-options-phase-samples` 預設關閉，關閉後目標117舊 JSON 逐 byte 不變。
+
+**已證實的取樣窗口：**兩分支在1,300M起點底層與索引畫面相同；按下後1,302,000,001／1,302,001,000步底層仍相同。1,302,100,000步第一列分支相對起點改1,136點，半開 bbox `(71,111)–(171,154)`；第八列改2,782點，bbox `(66,60)–(254,154)`。到1,302,500,000步，第一列上述暫態已回原底圖，第八列相對上一取樣再改2,893點，bbox `(66,111)–(254,155)`；兩支畫布差3,403點。故「首個已觀測變化」只夾在1,302,001,000至1,302,100,000步，不是重繪指令的精確定位，也不可把大面積變化單獨命名為選取或啟用。
+
+放開後1,303,000,001／1,303,001,000／1,303,100,000步沒有新增底層變化；到1,303,500,000步，第一列圖示中心 `(73–74,64–65)` 四點149→47，第八列 `(73–74,148–149)` 四點47→149，底層與合成索引差分一致。其餘畫素在此窗口不變。1,303,500,000至1,350M底層畫布各自穩定，但色盤會變；不得把索引穩定寫成完整 RGB 穩定。兩支各雙冷啟動 JSON 逐 byte 一致，無監看控制的 CPU／完整 RAM／索引／畫布／色盤、時間與開檔在每一取樣點一致；獨立正反例見[目標119](../goals/119-game-options-click-phase.md)。
+
+**仍未知：**各窗口內的精確首條重繪指令、其餘六列按下／放開、游標遮住文字的所有相位、色號與開關語意、可逆逐欄執行期底圖，以及 A／B 字級與快捷鍵可見呈現。故本規格仍 DRAFT；九欄沒有正式中文覆蓋。
 
 ## 從 DRAFT 到正式覆蓋的閘門
 

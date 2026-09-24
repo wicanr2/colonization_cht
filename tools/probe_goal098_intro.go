@@ -75,6 +75,7 @@ func main() {
 	optionsPreprint := flag.Bool("options-preprint", false, "目標113：九欄各自首筆原版印字前底圖與印字緩衝寫入")
 	optionsWriterAudit := flag.Bool("options-writer-audit", false, "目標114：原版印字緩衝寫入者附近的讀取與暫存器")
 	optionsResidentAudit := flag.Bool("options-resident-audit", false, "目標114：互斥觀測九欄高位址 RAM 來源的寫入者")
+	optionsPhaseSamples := flag.String("options-phase-samples", "", "目標119：選項點擊附近額外取樣的遞增絕對指令步數，逗號分隔；預設關閉")
 	flag.Parse()
 	if *inputs == "" || *out == "" {
 		panic("缺必要參數")
@@ -123,6 +124,21 @@ func main() {
 	if *optionsResidentAudit && (!*optionsAudit || *optionsPreprint || *optionsWriterAudit) {
 		panic("高位址 RAM 來源稽核需單獨啟用，不能與畫布寫入監看並用")
 	}
+	phaseSteps := []uint64{}
+	if *optionsPhaseSamples != "" {
+		if !*optionsAudit || *followUntil < 1350000000 {
+			panic("選項相位取樣需要正常玩家選項稽核與至少1350M終點")
+		}
+		for _, token := range strings.Split(*optionsPhaseSamples, ",") {
+			step, err := strconv.ParseUint(token, 10, 64)
+			mustIntro(err)
+			if step <= 1300000000 || step >= 1325000000 || step%25000000 == 0 ||
+				(len(phaseSteps) > 0 && step <= phaseSteps[len(phaseSteps)-1]) || len(phaseSteps) >= 24 {
+				panic("選項額外取樣須在1300M–1325M內遞增，最多24個且不可覆蓋標準檢查點")
+			}
+			phaseSteps = append(phaseSteps, step)
+		}
+	}
 	extraEnters := map[uint64]bool{}
 	if *followEnterAt != "" {
 		previous := uint64(0)
@@ -168,6 +184,13 @@ func main() {
 				panic("字幕後滑鼠座標或按鍵不符")
 			}
 			previous = e.Step
+		}
+		for _, step := range phaseSteps {
+			for _, e := range lateInputs {
+				if step == e.Step {
+					panic("選項額外取樣不得與玩家事件同一步")
+				}
+			}
 		}
 	}
 	parent, err := os.Stat(filepath.Dir(*out))
@@ -627,8 +650,20 @@ func main() {
 					}
 				}
 				lateIndex := 0
+				phaseIndex := 0
 				for step := uint64(90000000); step <= *followUntil; {
-					for lateIndex < len(lateInputs) && lateInputs[lateIndex].Step < step {
+					for {
+						hasInput := lateIndex < len(lateInputs) && lateInputs[lateIndex].Step < step
+						hasPhase := phaseIndex < len(phaseSteps) && phaseSteps[phaseIndex] < step
+						if !hasInput && !hasPhase {
+							break
+						}
+						if hasPhase && (!hasInput || phaseSteps[phaseIndex] < lateInputs[lateIndex].Step) {
+							advance(phaseSteps[phaseIndex])
+							sample(fmt.Sprintf("phase-%02d", phaseIndex))
+							phaseIndex++
+							continue
+						}
 						advance(lateInputs[lateIndex].Step)
 						sample(fmt.Sprintf("before-game-input-%02d", lateIndex))
 						apply(lateInputs[lateIndex])
@@ -649,8 +684,8 @@ func main() {
 						step += 5000000
 					}
 				}
-				if lateIndex != len(lateInputs) {
-					panic("字幕後玩家事件未全部送出")
+				if lateIndex != len(lateInputs) || phaseIndex != len(phaseSteps) {
+					panic("字幕後玩家事件或選項相位取樣未全部送出")
 				}
 			}
 		}
@@ -676,6 +711,9 @@ func main() {
 				}
 				if *optionsAudit {
 					version = "goal112-game-options-source-v2"
+					if len(phaseSteps) > 0 {
+						version = "goal119-options-phase-v1"
+					}
 					if *optionsResidentAudit {
 						version = "goal114-options-resident-v1"
 					}
@@ -714,6 +752,9 @@ func main() {
 	}
 	if *optionsAudit {
 		report["option_source_reads"] = optionSourceReads
+		if len(phaseSteps) > 0 {
+			report["option_phase_steps"] = phaseSteps
+		}
 		if *optionsResidentAudit {
 			report["option_resident_writes"] = optionResidentWrites
 		}

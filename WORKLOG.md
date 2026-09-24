@@ -2368,3 +2368,10 @@
 - `tools/check_goal118_remaining_rows.py` PASS，`tools/test_goal118_remaining_rows.py` 正例與八類拒絕／缺原版 `SKIP 77` PASS；目標111、117檢查器回歸 PASS，`tools/worklist.py write/verify`、AST 與 shell 語法、`git diff --check` 通過。已回填[規格027](docs/spec/027-game-options-window-draft.md)、研究紀錄與唯一 Issue 工作清單；九欄仍英文，正式中文十七段，規格維持 DRAFT。另依 `grill-me` 的視覺共同決策方式向使用者展示本機原文／A／B 同狀態對照並只問一題；答覆前不替選項視窗定字級，不把第一張旗卡 A 外推。
 - 原版 EXE／TXT、TTF、原版畫素與完整收據沒有加入 Git；新輸出與 `WORKLIST.md` 抽查 UID/GID 1000:1000，`workplace/` 無 root-owned 或誤建 `.md` 目錄，本專案研究映像無執行中／已停止容器殘留，其他專案容器未碰。下一閘門是正式逐欄可逆底圖、游標／離頁失效與快捷鍵呈現；按鍵瞬間仍需有限原版取證，A／B 字級待使用者選擇。
 - 實質成果提交 `714a5a9` 已推送 PRIVATE `origin/main`；主機 `gh` 更新並回讀 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7#issuecomment-5813129943) 與 [Issue #26](https://github.com/wicanr2/colonization_cht/issues/26#issuecomment-5813129488)，兩者均保持 OPEN。本條 Issue 交接另以文件提交推送。
+
+## 2026-09-24：目標119遊戲選項點擊細相位
+
+- 前一 goal 續回合只核對已完成的第一張旗卡 A 版，未產生新中文化證據。本輪核對乾淨工作樹、Git 作者、PRIVATE 遠端及 OPEN 的 Issue #7／#26；知識路由命中復古遊戲規格閘門與 dosgolem 原版對拍。先以 `3a6ad42` 推送[目標119](docs/goals/119-game-options-click-phase.md)和現況入口，再開發可丟棄探針。
+- 在既有 `tools/probe_goal098_intro.go` 加入預設關閉的 `-options-phase-samples`，把有界取樣插在原版正常玩家滑鼠事件之間，不改輸入或正式前端。第一列及 `Tutorial Hints` 各兩次冷啟動、另有無監看控制，共六條隔離 dosgolem 重播。1,302M按下後，1,302,001,000步底層仍未變、1,302,100,000步已變；1,303M放開後，1,303,100,000步仍未新增變化、1,303,500,000步各列只新增本列圖示中心四點。這是有界相位，非精確首條重繪指令，也不證色號對啟用語意。
+- `tools/check_goal119_options_click.py` PASS；`tools/test_goal119_options_click.py` 正例、六類拒絕及缺原版 `SKIP 77` 通過。修正檢查器對 Go JSON 欄位大小寫的初始假設後，按原收據乾淨重跑 PASS；此為驗證器問題，不是原版缺陷。新增旗標關閉時重跑目標117同輸入，412份舊 JSON／索引／畫布／色盤與歷史收據逐 byte 一致。Go `gofmt`／`go build -p 1`、Python AST、shell 語法、`tools/worklist.py write/verify` 及 `git diff --check` 均已核對；首次 AST 命令的 shell 引號錯誤已改用直接 Python 入口重跑通過。
+- 已回填[規格027](docs/spec/027-game-options-window-draft.md)、`RESEARCH-LOG.md`、`CONTEXT.md` 與唯一 `docs/worklist.json`。規格仍 DRAFT；正式遊戲選項九欄仍英文、中文總數十七段。使用者的第一張旗卡 A 決定已在目標099實作，未外推至此視窗 A／B 字級；README 及正式截圖未變。原版畫素和完整收據僅在忽略的 `workplace/reports/goal119-options/`，沒有提交原版素材。
