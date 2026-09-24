@@ -2,6 +2,10 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前執行入口：[目標101](docs/goals/101-nation-introduction-player-path.md)：
+由 dosgolem 正常玩家流程追四國介紹的選國、A／B 翻頁與離頁，
+取得原版印字和畫布相位；中文長文規格025仍 DRAFT，正式顯示
+維持十七段，Issue #30 開放。
 最近完成入口：[目標100](docs/goals/100-all-nation-introduction-bilingual-corpus.md)：
 四國介紹共八節的原版來源固定雙語草稿已建，逐節檔案位移、SHA、
 標題、控制標記與強調標記由獨立檢查器通過；只法國兩節有原版
