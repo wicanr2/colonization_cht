@@ -2,10 +2,16 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-目前進行入口：[目標102](docs/goals/102-nation-introduction-layout-prototypes.md)：
+最近完成入口：[目標102](docs/goals/102-nation-introduction-layout-prototypes.md)：
 以已驗四國八節正常玩家路徑，核對重新找到的固定 SHA-256
-`Cubic_11.ttf`，取得原版印字前底圖並量測繁中長文的逐頁字級與
-安全矩形。這是 DRAFT 排版原型；正式介紹畫面仍顯示原文。
+`Cubic_11.ttf`，取得八頁相同的原版印字前底圖；兩套繁中長文離線
+排版逐頁通過字形、安全矩形與零裁切檢查。私有
+[A 頁](docs/screenshots/nation-intro-layout-draft-a.png)／
+[B 頁](docs/screenshots/nation-intro-layout-draft-b.png)對照每列為原版、
+貼近原版字高、較緊湊。字型來源與重取指紋見
+[字型入口](font/README.md)。長文版面仍待使用者選擇；
+[規格025](docs/spec/025-first-nation-introduction-draft.md)維持 DRAFT，
+正式介紹畫面仍顯示原文，Issue #30 OPEN。
 
 最近完成入口：[目標101](docs/goals/101-nation-introduction-player-path.md)：
 四張旗卡各由正常滑鼠選取，八節 A／B 原版印字、畫布及頁相位
@@ -17,7 +23,8 @@ Enter／ESC 分支已量，按鍵後可見畫面相同但內部狀態不同。
 四國介紹共八節的原版來源固定雙語草稿已建，逐節檔案位移、SHA、
 標題、控制標記與強調標記由獨立檢查器通過；目標100當時只有
 法國兩節有正常路徑證據，其餘六節已由後續目標101補齊原版
-印字與畫布。中文排版仍未驗，Issue #27／#30 繼續開放。
+印字與畫布；目標102又補齊兩套離線中文排版驗證，非正式畫面。
+Issue #27／#30 繼續開放。
 最近完成入口：[目標099](docs/goals/099-first-nation-card-a-overlay.md)：
 使用者選定第一張國家旗卡 A 版，「英格蘭：」21px／「移民」25px
 已依[規格021](docs/spec/021-nation-card-red-text-draft.md)限定 CONFORMED
@@ -133,7 +140,7 @@ dosgolem 重播及無觀測控制。承接[目標088](docs/goals/088-first-natio
 | 第一張國家旗卡紅字 | 目標085／087證實 `NAMES.TXT:0x8EA`／`LABELS.TXT:0x8F2` 各自從 DOS 讀入至原版畫布的動態來源鏈；目標088擷取兩欄印前多色底圖並以[text/nation-card-fragments.zh-Hant.tsv](text/nation-card-fragments.zh-Hant.tsv)固定譯文來源。使用者選 A 的21／25px「英格蘭：／移民」紅字／黑影，排除 B 的25／29px。目標089／099補齊游標、按住、相鄰右卡重繪及直接離頁的原版負例；[規格021](docs/spec/021-nation-card-red-text-draft.md)已限定 CONFORMED：真 Ebitengine 視窗與同輸入英文控制、舊十五欄原版同狀態，只在兩欄安全區新增1,915／2,738輸出像素；缺譯、重複鍵、缺字模、錯字級、游標、換卡、離頁與錯版都逐欄安全回退。只計入第一張兩欄，右卡與其他國家仍未定案；固定原始 TTF 本輪缺失，本機字模不可當公開可重烘資產。 |
 | 相鄰右上國家旗卡文字 | [目標090](docs/goals/090-neighbor-nation-card-source.md)證實 `NAMES.TXT:0x906` 的 `France` 與 `LABELS.TXT:0x8FF` 的 `Cooperation` 從原始 TXT、DOS／RAM 至右側畫布；[目標091](docs/goals/091-neighbor-nation-card-reversible-preview.md)取得右欄多色底圖、安全區及兩個本機 Ebitengine 候選逐像素 PASS。原版右欄為藍色索引9，不是左卡紅色12。[目標092](docs/goals/092-neighbor-card-runtime-and-nation-route.md)又驗上／下欄游標各自遮擋24／25點、再點右卡的短暫重繪、切回左卡及離頁負例；雙次冷啟動與無觀測控制同狀態。[規格022](docs/spec/022-neighbor-nation-card-red-text-draft.md)仍 DRAFT；字級未定案，正式前端逐欄回退未驗，不計入十七段正式顯示。 |
 | 選國後姓名畫面 | confirmed：右卡完成提示 `(65,184)` 由正常滑鼠路徑進入；`GAME.TXT:0xA7A` 完整提示行（可見字串 `0xA7C`）及 `NAMES.TXT:0xB4B` 預設姓名片段各有 DOS／RAM／`0D21:012C` 畫布來源鏈。目標094證實提示415點、多色印前底圖、安全矩形與38px字模；目標095真視窗驗 `x`、退格、Enter、標點拒絕與失焦不補送，[規格024](docs/spec/024-window-keyboard-input.md)限定 CONFORMED。目標096補足完整來源、開檔世代、游標與離頁守門，正式38px中文提示通過真視窗同狀態、缺鍵／缺字／錯版回退；[規格023](docs/spec/023-player-name-screen-draft.md)僅固定提示限定 CONFORMED，計入第十五段。目標097另量到姓名框 `(79,98)–(246,112)`、墨跡 `(82,101)–(164,110)` 及內部安全區 `(80,100)–(245,111)`（原版320×200半開座標）；A原名／B中文佔位示意的本機圖差分只在該區，未接正式前端。可編輯姓名資料、原版記憶體、規則與存檔不改；是否僅顯示譯名、真正譯法及逐欄正式回退尚未定案，[Issue #29](https://github.com/wicanr2/colonization_cht/issues/29)保持開放。 |
-| 首次國家介紹長文 | confirmed：目標101從選國頁四張旗卡的正常滑鼠點選，經姓名 Enter 到英、法、西、荷各 A／B 原版介紹；八節均有固定 `GAME.TXT` bytes、DOS 讀取、逐字印字、畫布墨跡、雙次冷啟動及無觀測控制收據。西班牙 B 的來源 `50%%` 實際印為 `50%`。法國 B 頁無鍵留原頁，Enter／ESC 都抵達下一可見 King 畫面，但 CPU／RAM 不同，不主張後續等價；其他三國 B 後未驗。八筆繁中 TSV 仍為 draft、沒有中文長文覆蓋；[規格025](docs/spec/025-first-nation-introduction-draft.md)仍 DRAFT，字型、中文安全矩形、換行、真視窗第二頁與回退待驗。[Issue #30](https://github.com/wicanr2/colonization_cht/issues/30) OPEN。 |
+| 首次國家介紹長文 | confirmed：目標101從選國頁四張旗卡的正常滑鼠點選，經姓名 Enter 到英、法、西、荷各 A／B 原版介紹；八節均有固定 `GAME.TXT` bytes、DOS 讀取、逐字印字、畫布墨跡、雙次冷啟動及無觀測控制收據。西班牙 B 的來源 `50%%` 實際印為 `50%`。法國 B 頁無鍵留原頁，Enter／ESC 都抵達下一可見 King 畫面，但 CPU／RAM 不同，不主張後續等價；其他三國 B 後未驗。目標102以相同 SHA 字型取得八頁印字前底圖，兩套離線中文排版均無缺字、裁切或安全區外改色；這不是執行期覆蓋。八筆繁中 TSV 仍為 draft、沒有中文長文覆蓋；[規格025](docs/spec/025-first-nation-introduction-draft.md)仍 DRAFT，正式版面、事件與頁相位守門、真視窗第二頁與回退待驗。[Issue #30](https://github.com/wicanr2/colonization_cht/issues/30) OPEN。 |
 | 完整可玩／正式發行 | 未驗證、未發布；正常玩家路徑目前驗至首段國家介紹，尚未確認介紹後操作、help 或實際遊玩。 |
 
 ## 工具與重播入口
@@ -163,8 +170,9 @@ DOSBox-X 僅提供啟動鏈及畫面類別的輔助基準，正式收據由 dosg
 目前主譯稿已有368筆，另有24則help稿及旗卡四筆顯示片段草稿，
 但原版TXT、EXE及靜態圖像仍未建立完整玩家可見訊息分母。
 第一張旗卡已依[目標099](docs/goals/099-first-nation-card-a-overlay.md)
-完成 A 版兩欄限定 CONFORMED；後續要恢復固定來源字型與可重烘
-流程，並另行探勘其他國家，不得將第一張的 A 字級複製到右卡。
+完成 A 版兩欄限定 CONFORMED；目標102已恢復相同 SHA 的原始
+字型來源，後續仍須建立從 Git 可獨立重烘的流程與發行權利檢查，
+並另行探勘其他國家；不得將第一張的 A 字級複製到右卡。
 相鄰右上旗卡已依[目標091](docs/goals/091-neighbor-nation-card-reversible-preview.md)
 驗得可逆底圖與兩組字級候選，[目標092](docs/goals/092-neighbor-card-runtime-and-nation-route.md)
 又量得游標、再次點卡、切回左卡及離頁相位；下一步是右卡

@@ -64,6 +64,7 @@ func main() {
 	nextEnter := flag.Bool("next-enter", false, "65M步再按 Enter 觀察下一頁")
 	nation := flag.String("nation", "france", "目標101：england/france/spain/netherlands，實際點選四張旗卡")
 	afterB := flag.String("after-b", "none", "目標101：B頁後 none/wait/enter/esc")
+	preprint := flag.Bool("preprint", false, "目標102：在 A/B 首筆 0D21:012C 寫入前擷取原始畫布")
 	flag.Parse()
 	if *inputs == "" || *out == "" {
 		panic("缺必要參數")
@@ -151,6 +152,8 @@ func main() {
 	const canvas uint32 = 0x2cae0
 	printReads := []map[string]any{}
 	writers := map[string]*introWriter{}
+	preprintCanvas := map[string][]byte{}
+	preprintSteps := map[string]uint64{}
 	if !*control {
 		m.WatchReads(0x20000, 0x80000, func(a uint32, value uint8) {
 			if m.Steps < 55000000 || m.Steps >= 75000000 || len(printReads) >= 30000 {
@@ -170,6 +173,11 @@ func main() {
 			phase := "first"
 			if m.Steps >= 65000000 {
 				phase = "second"
+			}
+			if *preprint && cs == 0x0d21 && ip == 0x012c && preprintCanvas[phase] == nil {
+				// WatchWrites 先於 Mem 寫入回呼；此時仍是真正的首字印前多色底圖。
+				preprintCanvas[phase] = bytes.Clone(m.Mem[canvas : canvas+64000])
+				preprintSteps[phase] = m.Steps
 			}
 			key := fmt.Sprintf("%s/%04X:%04X", phase, cs, ip)
 			writer := writers[key]
@@ -368,6 +376,22 @@ func main() {
 		"sources": sources, "transfers": transfers, "samples": samples,
 		"print_reads": printReads, "writers": writers, "opened": d.Opened,
 		"address_space": "original file offset; DOS real-mode CS:IP; 20-bit linear RAM; 320x200 indexed canvas"}
+	if *preprint {
+		if *control || !*nextEnter || len(preprintCanvas) != 2 {
+			panic("印前底圖需要 A/B 實際印字及觀測收據")
+		}
+		preprintReceipt := map[string]any{}
+		for _, phase := range []string{"first", "second"} {
+			b := preprintCanvas[phase]
+			if len(b) != 64000 {
+				panic("印前畫布大小不符：" + phase)
+			}
+			mustIntro(os.WriteFile(*out+"."+phase+".pre.canvas", b, 0644))
+			preprintReceipt[phase] = map[string]any{"step": preprintSteps[phase],
+				"canvas_sha256": hashIntro(b), "writer_ip": "0D21:012C"}
+		}
+		report["preprint"] = preprintReceipt
+	}
 	b, err := json.MarshalIndent(report, "", "  ")
 	mustIntro(err)
 	mustIntro(os.WriteFile(*out+".json", append(b, '\n'), 0644))

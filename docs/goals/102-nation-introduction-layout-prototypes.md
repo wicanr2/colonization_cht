@@ -1,6 +1,6 @@
 # 目標102：四國介紹的原始底圖與繁中排版原型
 
-狀態：進行中；日期：2026-09-24。承接[目標101](101-nation-introduction-player-path.md)
+狀態：completed（僅完成 DRAFT 證據與排版原型）；日期：2026-09-24。承接[目標101](101-nation-introduction-player-path.md)
 已驗的四國八節正常玩家路徑、[規格025](../spec/025-first-nation-introduction-draft.md)
 與 [Issue #30](https://github.com/wicanr2/colonization_cht/issues/30)。
 
@@ -54,7 +54,40 @@
    dosgolem `upstream` 推送仍為 `DISABLED`、輸出擁有權、
    root-owned／誤建目錄及 Docker 容器清理狀態。
 
+## 實作與驗收結果
+
+- 已核對兩份本機 `Cubic_11.ttf` 的 SHA-256 均為
+  `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`；
+  來源及 OFL 條件見[字型入口](../../font/README.md)。本輪沒有提交字型。
+- `tools/probe_goal098_intro.go -preprint` 在 `0D21:012C` 首次改色寫入前
+  複製畫布；八頁底圖 SHA-256 均為
+  `f31602f9a239a4f83fd6e27e644384009d628517185aeb80bb248479e67d0e71`。
+  `tools/check_goal102_preprint.py` 將新探針的既有欄位逐項與目標101
+  收據比對，並驗證實際改色寫入數及 bbox；PASS 收據 SHA-256 為
+  `6bb468a0ba798ad2a175f542ad77666db780dbd0da8151bada366e3a400374af`。
+- 原版標題墨跡高8、正文高9原版像素。八頁排版均以各角色獨立字級
+  做兩套候選：貼近原版字高為標題34px／正文38px，較緊湊為
+  30px／34px；不是全專案的固定字級。八頁兩版均無缺字、無裁切、
+  無安全區外變動。A 頁行數（英／法／西／荷）為貼近版
+  8／8／10／9、緊湊版8／7／9／8；B 頁為2／2／3／3，兩版相同。
+- `tools/preview_goal102_nation_intro.py` 產生逐頁原文、兩版中文和
+  `layout.json`；`tools/check_goal102_layout.py` 逐像素核對原文與
+  dosgolem 畫布、中文與印字前底圖，且標題／正文各限本欄安全矩形。
+  兩項檢查 PASS；版面資料 SHA-256
+  `542b5540fb32712cbc43f216b4d2184ac241d73fbf53a13c6ef380e3468d4f87`，
+  排版驗證收據 SHA-256
+  `2e467bffb704a33d4a0034310de697dd4ed5904eeb7ec3ad9902ab895e9e0d2d`。
+- 私有研究對照：[四國 A 頁](../screenshots/nation-intro-layout-draft-a.png)、
+  [四國 B 頁](../screenshots/nation-intro-layout-draft-b.png)。每列依序是
+  原版、貼近原版字高、較緊湊；這些圖含原版像素，只可留在私有儲存庫，
+  不是 Ebitengine 正式畫面。逐頁原始收據與圖片留在忽略的
+  `workplace/reports/goal102-intro/`。
+
 ## 停止線與下一閘門
+
+仍待使用者選擇介紹長文的版面；事件鍵、頁相位、游標、離頁、
+缺鍵／錯版回退及真視窗同狀態都未達 READY。此目標完成不增加
+十七段正式中文顯示數，Issue #30 保持 OPEN。
 
 排版原型、字型相符與原版底圖可逆，仍不等於正式輸出。
 若視覺取捨需要使用者選擇，提供同狀態對照，不自行把偏好寫成

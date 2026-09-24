@@ -3344,3 +3344,40 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 更新後雙語 TSV SHA-256
 `42357576868f840a6b87113ec83bc311589aa3248ed41a670b712d53743d4375`。
 這些是原版畫面證據，不是十七段正式中文顯示的一部分。
+
+## 2026-09-24：目標102八頁首字印前底圖與中文字形量測
+
+- 輸入：DOS `GAME.TXT` SHA-256
+  `67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a`；
+  八節 TSV SHA-256 `42357576868f840a6b87113ec83bc311589aa3248ed41a670b712d53743d4375`；
+  四國玩家輸入及目標101收據同上。隔離 dosgolem 提交
+  `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`、Go 1.24.13；
+  探針 `tools/probe_goal098_intro.go -preprint`。位址 `0D21:012C`
+  是實模式 CS:IP，320×200 索引座標與 1280×800 輸出座標不可混用。
+- **已證實／原版：**四國各 A／B 在首個畫布改色寫入前擷取的
+  索引底圖八份皆 SHA-256
+  `f31602f9a239a4f83fd6e27e644384009d628517185aeb80bb248479e67d0e71`；
+  新探針其餘收據與目標101一致，最後改色像素數及 bbox 對得上
+  `0D21:012C` 寫入。獨立 PASS 收據
+  `workplace/reports/goal102-intro/preprint-verified.json` SHA-256
+  `6bb468a0ba798ad2a175f542ad77666db780dbd0da8151bada366e3a400374af`。
+- **已證實／本機字型：**Go 模組快取
+  `github.com/hajimehoshi/bitmapfont/v4@v4.1.0/internal/cubic11/Cubic_11.ttf`
+  與另一專案的同名字型 SHA-256 均為
+  `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`；
+  TTF 名稱版本 1.430、Unicode 對照表 10,250 個碼點。字型專案
+  `https://github.com/ACh-K/Cubic-11` 與 `OFL.txt` 指出 OFL-1.1；
+  Go 模組本身的 Apache-2.0 不取代字型許可。字型檔只唯讀掛載，未提交。
+- **已證實／原版幾何：**八頁原始標題墨跡高8像素，正文高9像素。
+  **DRAFT／中文候選：**Pillow 12.3.0／FreeType 2.14.3／
+  fontTools 4.63.0／Python 3.12.13 的離線原型以 34／38px
+  （貼近原版）或30／34px（緊湊）分別繪製標題／正文；八頁兩版
+  均無缺字、裁切、壞斷行、安全矩形外改色。`layout.json` SHA-256
+  `542b5540fb32712cbc43f216b4d2184ac241d73fbf53a13c6ef380e3468d4f87`；
+  `layout-verified.json` SHA-256
+  `2e467bffb704a33d4a0034310de697dd4ed5904eeb7ec3ad9902ab895e9e0d2d`。
+  原版重建圖與 dosgolem 最終畫布逐像素一致；中文只疊於首字前底圖。
+  私有研究對照見 `docs/screenshots/nation-intro-layout-draft-{a,b}.png`。
+- **限制：**兩版是可丟棄的視覺原型，非 Ebitengine 正式覆蓋；
+  標題／正文的正式選擇、輸出事件守門、游標／離頁、缺鍵回退、
+  真視窗兩頁與原版同狀態仍未知，規格025不升 READY。
