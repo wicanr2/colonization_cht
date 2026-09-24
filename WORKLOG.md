@@ -2216,3 +2216,24 @@
   的 `upstream` 推送位址為 `DISABLED`；工作根沒有
   root-owned 或誤建 `.md` 目錄，本輪 Docker 映像
   沒有執行中或已停止容器殘留。
+
+## 2026-09-24：目標109四國開場字幕變數值
+
+- `da956bf` 已先把目標109及 CONTEXT 入口推送 PRIVATE
+  `origin/main`，之後才以隔離 dosgolem 開始新探針。
+  使用者再次選定第一張旗卡 A：核對目標099、規格021
+  與既有 Ebitengine 收據，21／25px兩欄早已正式限定
+  CONFORMED，沒有重做，也沒有擴張到其他旗卡。
+- 法國、西班牙、荷蘭各用固定16筆正常玩家輸入至800M步，
+  雙冷啟動與無監看控制共九份新報告；英格蘭沿用
+  目標107三份。四國前七張字幕及24處占位值與
+  `GAME.TXT` 模板逐字核對。荷蘭的原始候選
+  `Netherlands` 與實際 `the Netherlands` 不同，
+  因此 TSV 分成檔案與展開兩欄，冠詞來源列未知。
+- 新增24筆來源候選可追溯繁中草稿；獨立核對器 PASS、
+  八個正反例 PASS，缺原版 SKIP、錯國／錯版／錯欄
+  均失敗即關閉。正式 Ebitengine 已驗十七段不變，
+  規格026仍 DRAFT，help 觸發和字幕逐欄版式仍待後續。
+  詳細原始定位與推論等級見 RESEARCH-LOG；本機
+  `receipt.json` SHA-256
+  `fda3cd28d14c2ae09c94b51c5e74a638e0e15daa16202940c9d23845b3554b0c`。

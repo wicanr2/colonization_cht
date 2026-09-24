@@ -2,11 +2,14 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-進行中入口：[目標109](docs/goals/109-opening-caption-variable-values.md)：
-承接十張開場字幕的十一行草稿，從四國正常玩家路徑
-追 `%STRING` 實際印字與來源候選。目標文件先推送；
-變數值譯稿與正式覆蓋都須待證據，不把英格蘭值
-套到其他國家。
+最近完成入口：[目標109](docs/goals/109-opening-caption-variable-values.md)：
+四國正常玩家路徑的 `@BUILD1–7` 原版字幕已各有
+雙冷啟動與無監看對照；[24筆變數值草稿](text/build-caption-values.zh-Hant.tsv)
+分國保存六處占位符、原始檔案候選與可見值。
+荷蘭的 `the Netherlands` 與檔案候選 `Netherlands`
+分欄記錄，冠詞來源未知；來源至印字的中間搬運仍
+為強推論。[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)
+保持 DRAFT，沒有新增正式 Ebitengine 中文畫面。
 
 最近完成入口：[目標108](docs/goals/108-build-opening-caption-translation.md)：
 固定原版十張開場字幕的十一個 `^^` 原文行現均有可追溯
@@ -14,7 +17,7 @@
 dosgolem 十段印字與雙重播、各行檔案位移／SHA、占位符、
 控制碼和固定 Cubic 11 字形，正反例均通過。
 [規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)
-仍 DRAFT：變數展開值可能仍是英文，`@BUILD1` 的38／42px
+仍 DRAFT：變數值雖有24筆草稿，正式畫面仍是英文；`@BUILD1` 的38／42px
 視覺選擇、其餘字幕的個別字級／正式顯示，以及 help
 的實際觸發和中文畫面都尚未完成；正式顯示維持十七段。
 下一工作仍可從已驗海上玩家畫面查 help 觸發，或先查

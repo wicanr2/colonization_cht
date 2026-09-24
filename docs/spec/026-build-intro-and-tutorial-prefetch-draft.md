@@ -6,6 +6,30 @@
 [字幕譯文草稿](../../text/draft.zh-Hant.tsv)。本規格不授權
 正式中文覆蓋，不把預讀當作顯示。
 
+## 四國字幕變數值（目標109；仍為 DRAFT）
+
+[24筆逐國草稿](../../text/build-caption-values.zh-Hant.tsv)將
+`@BUILD2`兩處、`@BUILD3`一處、`@BUILD4`兩處及
+`@BUILD7`一處占位符分別記錄：原版檔案片段與實際
+可見值是**不同欄位**。法國、西班牙、荷蘭正常玩家路徑
+各兩次冷啟動至800M步，加一次無監看控制；英格蘭沿用
+目標107的1,350M雙重播與控制。每國前七段原版印字
+均與固定 `GAME.TXT` 模板及當國六處展開值相符；
+`tools/check_goal109_caption_values.py` 和八個負例／正例
+驗證入口見[目標109](../goals/109-opening-caption-variable-values.md)。
+
+原始候選來自 `NAMES.TXT` 的 `@DIFFICULTY`、
+`@LEADERNAME`、`@HOMEPORT`、`@COUNTRY` 與
+`GAME.TXT` 的 `@MYLEADER`；固定檔案位移與 SHA 在
+TSV 中。當次畫面印字已證實；候選檔案至最終 RAM
+印字緩衝的中間搬運未閉合，只屬強推論。荷蘭國名
+候選片段 `Netherlands` 在 `@BUILD4/7` 的可見展開值
+為 `the Netherlands`；冠詞來源未知。翻譯候選只供
+畫面層使用，國別、占位符或實際原值不符時沒有候選，
+不得注入原版 RAM、推論其他難度同值或以草稿冒稱
+正式中文覆蓋。字幕版面、每欄字級、安全矩形及
+Ebitengine 真視窗同狀態仍未驗，故本規格維持 DRAFT。
+
 ## 範圍與固定輸入
 
 使用者自備 DOS `COLONIZE` 中 `GAME.TXT` SHA-256

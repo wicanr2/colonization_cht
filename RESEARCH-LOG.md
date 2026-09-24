@@ -3662,3 +3662,47 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
   `95a1172326ea151c9df56332fc9d75e50d72c8af109d682e54c7fcba616d453a`。
   此結果不證明變數值已有繁中、字幕逐欄字級已定，
   也不增加正式 Ebitengine 中文畫面數。
+
+## 2026-09-24：目標109四國開場字幕變數展開值
+
+- **輸入與位址空間：**合法 DOS `GAME.TXT` SHA-256
+  `67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a`、
+  `NAMES.TXT` SHA-256
+  `4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061`；
+  原始來源定位是**檔案位移**，`0D21:00C6` 是原版實模式
+  `CS:IP`，印字讀取來自20-bit線性 RAM。16筆正常玩家輸入
+  SHA-256 `a48ae77b9f6a0c2bdb9b3512625d0c1c4786b1cb64b8deff4bdb603fe422d93e`；
+  隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`，
+  Go 1.24.13，`colonization-research:20260920-r2`。原版唯讀。
+- **已證實／正常玩家輸出：**四張旗卡各經原版滑鼠點選、
+  姓名 Enter 與介紹翻頁；法、西、荷每國兩次冷啟動到
+  800M步及無監看控制，英格蘭沿用目標107的1,350M收據。
+  每國前七段 `0D21:00C6` 逐字印字對應固定
+  `GAME.TXT:@BUILD1–7` 模板。六處占位符在四國共24次；
+  法國領袖／港口為 `Jacques Cartier`／`La Rochelle`，
+  西班牙為 `Christopher Columbus`／`Seville`，荷蘭為
+  `Michiel De Ruyter`／`Amsterdam`。荷蘭稱謂為
+  `Stadtholder`，不是前三國的 `King`；其兩處國名
+  實際印 `the Netherlands`。雙重播逐位元組相同，
+  無監看控制的 CPU、完整 RAM、索引畫面、色盤、虛擬
+  時間、開檔及鍵盤檢查點一致。
+- **強推論／來源候選與未知：**可見領袖與港口分別
+  對到 `NAMES.TXT:@LEADERNAME` 的檔案位移
+  `0xB27/0xB4B/0xB6F/0xB93` 與 `@HOMEPORT` 的
+  `0x9C1/0x9C9/0x9D6/0x9DF`；稱號對到
+  `NAMES.TXT:0xC18`，國名候選對到
+  `0x8EA/0x906/0x921/0x93D`。君主稱謂候選對到
+  `GAME.TXT:@MYLEADER` 的 `0xCB9C/0xCBA2/0xCBA8/0xCBAE`。
+  片段與最終印字相符不等於中間搬運已閉合；所有來源
+  歸屬只標強推論。荷蘭 `NAMES.TXT` 候選僅有
+  `Netherlands`；畫面多出的 `the` 如何組合仍**未知**。
+- **草稿與獨立驗證：**[24筆 TSV](text/build-caption-values.zh-Hant.tsv)
+  分開 `source_text` 與 `observed_text`，不把畫面冠詞
+  偽裝成檔案 bytes。`tools/check_goal109_caption_values.py`
+  核對原版雜湊、候選位移、來源 SHA、四國模板展開、
+  雙重播及控制；八個正反例通過，含錯國／錯欄／
+  缺值／錯版與荷蘭冠詞。原始 JSON 與索引樣本只在
+  忽略版控的 `workplace/reports/goal109-caption-values/`，
+  `receipt.json` SHA-256
+  `fda3cd28d14c2ae09c94b51c5e74a638e0e15daa16202940c9d23845b3554b0c`。
+  這不是正式 Ebitengine 中文顯示；規格026維持 DRAFT。

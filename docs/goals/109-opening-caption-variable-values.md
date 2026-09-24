@@ -1,6 +1,6 @@
 # 目標109：四國開場字幕變數的實際值與來源候選
 
-狀態：進行中；日期：2026-09-24。承接
+狀態：completed（僅四國固定難度的變數值草稿與來源候選）；日期：2026-09-24。承接
 [目標107](107-post-caption-input-and-help-entry.md)的英格蘭十張原版字幕、
 [目標108](108-build-opening-caption-translation.md)的十一行繁中草稿及
 [規格026](../spec/026-build-intro-and-tutorial-prefetch-draft.md)；
@@ -66,3 +66,34 @@
 - 如正常路徑至限定步數仍未顯示某字幕或某國
   變數來源未確定，保存具體原版收據與負例，
   不改 probe 的玩家輸入、不擅自延長成無界研究。
+
+## 驗收結果與剩餘界線
+
+四國各由正常旗卡滑鼠選取、姓名與介紹翻頁進入字幕。法國、
+西班牙、荷蘭各在800M步內印出 `@BUILD1–7`；每國兩次冷啟動
+JSON 逐位元組相同，第三次無 RAM 讀寫監看的 CPU、完整 RAM、
+索引畫面、色盤、時間、開檔、鍵盤與來源觀測檢查點一致。
+英格蘭沿用目標107已驗的1,350M收據。`0D21:00C6` 每國
+七段實際英文印字，對上固定 `GAME.TXT` 模板和六處占位符；
+不同國家的領袖、港口、國名及荷蘭稱謂均未借用英格蘭值。
+
+[四國字幕變數草稿](../../text/build-caption-values.zh-Hant.tsv)共24筆，
+逐筆保存國別、字幕、占位符、檔案候選與 SHA-256、原文
+檔案片段、**當次可見展開值**及繁中草稿。`NAMES.TXT`
+的 `@DIFFICULTY`、`@LEADERNAME`、`@HOMEPORT`、`@COUNTRY`
+和 `GAME.TXT` 的 `@MYLEADER` 提供可回查位移；但它們到
+最終印字的中間 RAM 搬運尚未逐指令閉合，故來源連結只屬
+強推論。荷蘭兩次國名占位原始候選是 `Netherlands`，
+實際畫面為 `the Netherlands`；`the` 的組合來源**未知**，
+草稿將兩值分欄，不把它錯認成 `NAMES.TXT` 原始 bytes。
+
+`tools/check_goal109_caption_values.py` 以檔案雜湊、固定來源
+位移、雙重播、無監看對照與印字模板獨立核對，四國均 PASS；
+`tools/test_goal109_caption_values.py` 八個正反例 PASS，包含
+缺原版 SKIP、錯版、錯國、錯占位符、缺筆、荷蘭冠詞與
+缺值時不提供譯文。僅本機 `workplace/reports/goal109-caption-values/`
+保存完整 JSON，最終 `receipt.json` SHA-256
+`fda3cd28d14c2ae09c94b51c5e74a638e0e15daa16202940c9d23845b3554b0c`。
+本輪**沒有**正式 Ebitengine 字幕覆蓋、逐欄字級或安全矩形
+驗收，正式中文畫面仍十七段；`@BUILD1` 的38／42px選擇
+和 help 實際觸發仍待後續工作。
