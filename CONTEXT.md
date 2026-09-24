@@ -2,12 +2,15 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-進行中入口：[目標110](docs/goals/110-tutorial-hints-player-trigger.md)：
-從已驗海上玩家畫面，以原版滑鼠查頂端 `GAME` →
-`Game Options` 的 `Tutorial Hints` 核取狀態和首則
-help 的實際顯示。選項文字已在固定 `MENU.TXT`／
-`GAME.TXT` 定位，但預設值、觸發效果仍是假說；
-不能把先前 `@TUTORIAL1` 預讀當成顯示。
+最近完成入口：[目標110](docs/goals/110-tutorial-hints-player-trigger.md)：
+從已驗海上玩家畫面，以原版滑鼠實際打開頂端 `GAME` →
+`Game Options` 並點最後一列 `Tutorial Hints`；核取圖示與
+該列背景在原版索引畫面改變。未進選單的左方向鍵分支
+證實按鍵被原版取走，海上船舶畫面隨之改變。兩分支各有
+雙次冷啟動與無監看控制，獨立檢查和負例通過；目前
+只限1,225M–1,350M的取樣，**未見首則 help 正文視窗**。
+核取預設語意和真正觸發仍未知，不把 `@TUTORIAL1` 預讀
+或選項點擊當成顯示。規格026維持 DRAFT，正式中文仍十七段。
 
 最近完成入口：[目標109](docs/goals/109-opening-caption-variable-values.md)：
 四國正常玩家路徑的 `@BUILD1–7` 原版字幕已各有
@@ -37,8 +40,10 @@ dosgolem 十段印字與雙重播、各行檔案位移／SHA、占位符、
 控制與獨立負例通過；抽樣畫面未見 `@TUTORIAL1` 視窗，
 其實際觸發仍未知，規格026保持 DRAFT、正式中文維持十七段。
 
-下一工作入口：從已驗1,200M海上畫面的正常玩家輸入與
-原版設定查證首則 help 的觸發和當次印字。另需把
+下一工作入口：從已驗 `Game Options` 畫面查核教學
+核取圖示的啟用語意，正常離開設定後以有界玩家操作
+（優先結束回合）尋找首則 help 的當次印字與畫布。
+另需把
 `@BUILD2–10` 已有的逐行草稿與四國變數值草稿接到
 各字幕的獨立版式；
 `@BUILD1` 的38／42px正式字級仍待使用者選擇。

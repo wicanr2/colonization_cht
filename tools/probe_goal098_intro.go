@@ -70,6 +70,7 @@ func main() {
 	followEnterAt := flag.String("follow-enter-at", "", "目標105：額外 Enter 的百萬步數，以逗號分隔，例如100,115")
 	preprint := flag.Bool("preprint", false, "在 A/B 與啟用後續頁時的首筆 0D21:012C 寫入前擷取原始畫布")
 	postCaptionAudit := flag.Bool("post-caption-audit", false, "目標107：選用鍵盤待取數診斷與有界字幕後觀測")
+	gameInputsPath := flag.String("game-inputs", "", "目標110：字幕後正常玩家滑鼠／鍵盤事件 JSON；預設不改舊重播")
 	flag.Parse()
 	if *inputs == "" || *out == "" {
 		panic("缺必要參數")
@@ -103,6 +104,9 @@ func main() {
 	if *postCaptionAudit && *followUntil > 500000000 && *followUntil%25000000 != 0 {
 		panic("500M 後只在25M檢查點停止")
 	}
+	if *gameInputsPath != "" && (!*postCaptionAudit || *followUntil <= 1225000000) {
+		panic("字幕後玩家事件須沿已驗海上畫面並保留鍵盤稽核")
+	}
 	extraEnters := map[uint64]bool{}
 	if *followEnterAt != "" {
 		previous := uint64(0)
@@ -121,6 +125,31 @@ func main() {
 			previous = step
 		}
 	}
+	lateInputs := []introInput{}
+	lateInputHash := ""
+	if *gameInputsPath != "" {
+		inputBytes := readIntro(*gameInputsPath)
+		lateInputHash = hashIntro(inputBytes)
+		mustIntro(json.Unmarshal(inputBytes, &lateInputs))
+		if len(lateInputs) == 0 || len(lateInputs) > 12 {
+			panic("字幕後玩家事件數量不符")
+		}
+		previous := uint64(1225000000)
+		for _, e := range lateInputs {
+			if e.Step <= previous || e.Step >= *followUntil || e.Step%1000000 != 0 ||
+				e.Step%25000000 == 0 {
+				panic("字幕後玩家事件必須位於遞增的百萬步檢查點之間")
+			}
+			if e.Kind != "move" && e.Kind != "press" && e.Kind != "release" &&
+				e.Kind != "enter" && e.Kind != "esc" && e.Kind != "left" && e.Kind != "right" {
+				panic("未知字幕後玩家事件")
+			}
+			if e.X < 0 || e.X >= 320 || e.Y < 0 || e.Y >= 200 || e.Button != 0 {
+				panic("字幕後滑鼠座標或按鍵不符")
+			}
+			previous = e.Step
+		}
+	}
 	parent, err := os.Stat(filepath.Dir(*out))
 	mustIntro(err)
 	owner, ok := parent.Sys().(*syscall.Stat_t)
@@ -134,6 +163,9 @@ func main() {
 		"NAMES.TXT":   "4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061",
 		"LABELS.TXT":  "e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204",
 		"NATIONS.PIK": "bd31e62d7b7652e6903aaea76b1641f11d5333ff6a6da13fd26411c9f080bf54",
+	}
+	if *gameInputsPath != "" {
+		wants["MENU.TXT"] = "5a7d2f4bf9f657b68177fb9b38e74ac92a1f191732bbc122c28563a41d7a3702"
 	}
 	for name, want := range wants {
 		if hashIntro(readIntro(filepath.Join(*root, name))) != want {
@@ -364,6 +396,12 @@ func main() {
 			d.ReleaseMouse(e.Button)
 		case "enter":
 			d.PushKey(golem.Key{Scan: 0x1c, ASCII: 13})
+		case "esc":
+			d.PushKey(golem.Key{Scan: 0x01, ASCII: 27})
+		case "left":
+			d.PushKey(golem.Key{Scan: 0x4b, ASCII: 0})
+		case "right":
+			d.PushKey(golem.Key{Scan: 0x4d, ASCII: 0})
 		default:
 			panic("未知玩家輸入")
 		}
@@ -471,7 +509,14 @@ func main() {
 						lastKeyPending = d.KeysPending()
 					}
 				}
+				lateIndex := 0
 				for step := uint64(90000000); step <= *followUntil; {
+					for lateIndex < len(lateInputs) && lateInputs[lateIndex].Step < step {
+						advance(lateInputs[lateIndex].Step)
+						sample(fmt.Sprintf("before-game-input-%02d", lateIndex))
+						apply(lateInputs[lateIndex])
+						lateIndex++
+					}
 					advance(step)
 					sample(fmt.Sprintf("%dm", step/1000000))
 					if extraEnters[step] {
@@ -486,6 +531,9 @@ func main() {
 					} else {
 						step += 5000000
 					}
+				}
+				if lateIndex != len(lateInputs) {
+					panic("字幕後玩家事件未全部送出")
 				}
 			}
 		}
@@ -504,6 +552,9 @@ func main() {
 		}
 		if *postCaptionAudit {
 			version = "goal107-post-caption-audit-v1"
+			if *gameInputsPath != "" {
+				version = "goal110-game-input-audit-v1"
+			}
 		}
 	}
 	report := map[string]any{"version": version, "control": *control,
@@ -524,6 +575,10 @@ func main() {
 			report["follow_until"] = *followUntil
 			report["follow_enter_at"] = *followEnterAt
 		}
+	}
+	if *gameInputsPath != "" {
+		report["game_inputs"] = lateInputs
+		report["game_inputs_sha256"] = lateInputHash
 	}
 	if *preprint {
 		phases := []string{"first", "second"}

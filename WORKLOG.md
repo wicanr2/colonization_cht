@@ -2246,3 +2246,33 @@
   `colonization-research:20260920-r2` 沒有執行中或
   已停止容器殘留；隔離 dosgolem `upstream` 推送
   位址仍為 `DISABLED`。
+
+## 2026-09-24：目標110教學選項的正常玩家輸入
+
+- 先以私有 `origin/main` 推送目標110入口，再從目標107
+  已驗的1,225M海上畫面延伸選用滑鼠／鍵盤事件。
+  使用者再次確認第一張旗卡 A 的21／25px：核對
+  目標099、規格021與 `CONTEXT.md`，先前已正式
+  限定 CONFORMED，本輪沒有重做或外推到其他旗卡。
+- 原版滑鼠實際打開 `GAME` 下拉選單、`Game Options`
+  視窗並點 `Tutorial Hints` 最後一列；原版核取圖示
+  與背景畫素變化。另一分支不進選單，左方向鍵先
+  入列再被原版消費，海上船舶畫面改變。兩分支各
+  兩次冷啟動及一次無監看控制，報告逐位元組一致，
+  主要狀態檢查點同狀態；未見首則教學正文視窗。
+  不宣稱核取預設語意，也不把抽樣未見推成全程未顯示。
+- `tools/check_goal110_tutorial_hints.py` 正例 PASS，
+  `tools/test_goal110_tutorial_hints.py` 四例 PASS，
+  包括原版缺失 SKIP、改事件檔與壞原始索引畫面。
+  不帶新旗標的100M探針 JSON 與目標105歷史收據
+  逐位元組相同。選項／向西原始報告 SHA-256 分別為
+  `56b6bbc19ecbfe46a6b0837fa07d869a69d048ff047d542ec9566efb8a474ca4`／
+  `11a99ec088b3c322bb9f2c035b7cbae2e3ea48d50ee8a80221b76899832e55fb`。
+- 規格026仍 DRAFT；主譯稿379筆、help 24則草稿與
+  正式已驗十七段均不因選項點擊而改變。已更新
+  `CONTEXT.md`、`RESEARCH-LOG.md`、`docs/worklist.json`
+  及目標110，`WORKLIST.md` 由 JSON 重生並 `verify`。
+  原版資料／完整畫素只留已忽略的 `workplace/`，
+  抽查收據與工作清單皆為 UID/GID 1000:1000；
+  `workplace/` 無 root-owned 或誤建 `.md` 目錄，
+  研究映像無執行中／已停止容器殘留。

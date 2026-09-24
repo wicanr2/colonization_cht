@@ -3706,3 +3706,59 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
   `receipt.json` SHA-256
   `fda3cd28d14c2ae09c94b51c5e74a638e0e15daa16202940c9d23845b3554b0c`。
   這不是正式 Ebitengine 中文顯示；規格026維持 DRAFT。
+
+## 2026-09-24：目標110原版教學選項與海上輸入
+
+- **固定輸入與工具：**合法 DOS `MENU.TXT` SHA-256
+  `5a7d2f4bf9f657b68177fb9b38e74ac92a1f191732bbc122c28563a41d7a3702`、
+  `GAME.TXT` SHA-256
+  `67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a`；
+  其餘 EXE／TXT／PIK 由獨立檢查器按固定 SHA 核對。十六筆
+  正常玩家輸入 SHA-256
+  `a48ae77b9f6a0c2bdb9b3512625d0c1c4786b1cb64b8deff4bdb603fe422d93e`；
+  隔離 dosgolem 提交
+  `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`，
+  `colonization-research:20260920-r2`／Go 1.24.13。
+  原版唯讀，完整輸出只在忽略版控的
+  `workplace/reports/goal110-help/`。
+- **位址與已證實文字來源：**`MENU.TXT:0xC6` 的
+  `Game Options`、`GAME.TXT:0x4A8` 的 `@GAMEOPTIONS`、
+  `GAME.TXT:0x566` 的 `~Tutorial Hints` 與
+  `GAME.TXT:0x1316A` 的 `@TUTORIAL1` 都是**檔案位移**，
+  不是 DOS 線性 RAM、實模式 `CS:IP` 或畫布座標。
+  前三者以原始 bytes 及正常玩家選單畫面互證；
+  第四者仍只具有目標105的預讀證據。
+- **選項分支已證實：**固定輸入後原版滑鼠於1,226M–
+  1,228M點頂端 `GAME`；1,250M索引畫面 SHA-256
+  `9e4573afe00f88158ed538e0cf5cc23d5d6183cb163ae7490ab9dd27168c2fbc`，
+  可見下拉選單。再於1,251M–1,253M點首列；1,275M
+  索引 SHA-256
+  `7093e83e87169f8eb15e733c3d69ec68afd5b78a5d304fa384819c987192a546`，
+  可見 `Game Options` 視窗，當次已另開 `GAME.TXT`。
+  於1,301M–1,303M點最後一列後，1,325M索引
+  SHA-256
+  `d276bc8469d4e4fef9b9d44f2f454dd42424bc4bcc6f5bb74d6cfde820881b24`；
+  原版核取圖示及該列背景像素改變。這只能證實點擊
+  反應，**核取語意／預設值未知**，不宣稱教學已出現。
+- **方向鍵分支已證實：**不進選單於1,226M送左方向鍵，
+  待取數在1,226,000,384步為1，1,226,095,616步為0；
+  1,250M索引 SHA-256
+  `ae0628b2f68d936f7d94188ae9ac6fb45157d3aafbb7518049e6f6616f3582d4`，
+  1,300M為
+  `a850da7cc62518f3f756ff2d35820864be78639c590cf744433f2c62a013c0c2`。
+  原版320×200畫面可見船舶移動；這些抽樣未見 help
+  視窗，**不**排除檢查點之間的瞬間或其他操作。
+- **重播與反證：**上述兩分支各兩次完整冷啟動 JSON
+  逐位元組相同，第三次無記憶體監看控制在全部檢查點
+  的 CPU、完整 RAM、畫布／索引、色盤、時間、開檔與
+  鍵盤狀態相同。選項收據 SHA-256
+  `56b6bbc19ecbfe46a6b0837fa07d869a69d048ff047d542ec9566efb8a474ca4`；
+  向西收據
+  `11a99ec088b3c322bb9f2c035b7cbae2e3ea48d50ee8a80221b76899832e55fb`。
+  `tools/check_goal110_tutorial_hints.py` PASS；
+  四項正反例 PASS，缺原版回 `SKIP 77`。不帶新旗標
+  的100M舊路徑 JSON 與目標105歷史收據逐位元組
+  相同，SHA-256
+  `27c6ec1884477f5f1518fd7d20b18ee6881713f385c51de76cb875a06c6532ee`。
+  仍沒有 `@TUTORIAL1` 的**當次逐字印字與畫布**；
+  規格026 DRAFT，正式 help 中文顯示零則。
