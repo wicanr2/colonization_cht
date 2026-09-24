@@ -76,6 +76,7 @@ func main() {
 	optionsWriterAudit := flag.Bool("options-writer-audit", false, "目標114：原版印字緩衝寫入者附近的讀取與暫存器")
 	optionsResidentAudit := flag.Bool("options-resident-audit", false, "目標114：互斥觀測九欄高位址 RAM 來源的寫入者")
 	optionsPhaseSamples := flag.String("options-phase-samples", "", "目標119：選項點擊附近額外取樣的遞增絕對指令步數，逗號分隔；預設關閉")
+	allowEarlyExit := flag.Bool("allow-early-exit", false, "目標123：只在後續正常玩家路徑觀測 DOS 提前結束，保留真實終止步數；預設關閉")
 	flag.Parse()
 	if *inputs == "" || *out == "" {
 		panic("缺必要參數")
@@ -111,6 +112,9 @@ func main() {
 	}
 	if *gameInputsPath != "" && (!*postCaptionAudit || *followUntil <= 1225000000) {
 		panic("字幕後玩家事件須沿已驗海上畫面並保留鍵盤稽核")
+	}
+	if *allowEarlyExit && (*gameInputsPath == "" || *followUntil < 1300000000 || *optionsAudit) {
+		panic("提前終止收據只接受既有海上玩家事件且不可混用選項來源稽核")
 	}
 	if *optionsAudit && (*gameInputsPath == "" || *followUntil < 1300000000) {
 		panic("遊戲選項來源稽核需要正常玩家開窗輸入與1300M終點")
@@ -505,6 +509,8 @@ func main() {
 	}
 	keyEvents := []map[string]any{}
 	lastKeyPending := -1
+	terminated := false
+	lateIndex := 0
 	advance := func(end uint64) {
 		for m.Steps < end && !d.Exited && !m.CPU.Halted {
 			mustIntro(m.Step())
@@ -521,6 +527,10 @@ func main() {
 			}
 		}
 		if m.Steps != end {
+			if *allowEarlyExit && m.Steps >= 1275000000 && (d.Exited || m.CPU.Halted) {
+				terminated = true
+				return
+			}
 			panic("原版提前停止")
 		}
 	}
@@ -649,8 +659,9 @@ func main() {
 						lastKeyPending = d.KeysPending()
 					}
 				}
-				lateIndex := 0
+				lateIndex = 0
 				phaseIndex := 0
+			lateLoop:
 				for step := uint64(90000000); step <= *followUntil; {
 					for {
 						hasInput := lateIndex < len(lateInputs) && lateInputs[lateIndex].Step < step
@@ -660,16 +671,25 @@ func main() {
 						}
 						if hasPhase && (!hasInput || phaseSteps[phaseIndex] < lateInputs[lateIndex].Step) {
 							advance(phaseSteps[phaseIndex])
+							if terminated {
+								break lateLoop
+							}
 							sample(fmt.Sprintf("phase-%02d", phaseIndex))
 							phaseIndex++
 							continue
 						}
 						advance(lateInputs[lateIndex].Step)
+						if terminated {
+							break lateLoop
+						}
 						sample(fmt.Sprintf("before-game-input-%02d", lateIndex))
 						apply(lateInputs[lateIndex])
 						lateIndex++
 					}
 					advance(step)
+					if terminated {
+						break lateLoop
+					}
 					sample(fmt.Sprintf("%dm", step/1000000))
 					if extraEnters[step] {
 						d.PushKey(golem.Key{Scan: 0x1c, ASCII: 13})
@@ -684,7 +704,9 @@ func main() {
 						step += 5000000
 					}
 				}
-				if lateIndex != len(lateInputs) || phaseIndex != len(phaseSteps) {
+				if terminated {
+					sample("terminal")
+				} else if lateIndex != len(lateInputs) || phaseIndex != len(phaseSteps) {
 					panic("字幕後玩家事件或選項相位取樣未全部送出")
 				}
 			}
@@ -727,6 +749,9 @@ func main() {
 			}
 		}
 	}
+	if *allowEarlyExit {
+		version = "goal123-retire-terminal-v1"
+	}
 	report := map[string]any{"version": version, "control": *control,
 		"next_enter": *nextEnter,
 		"nation":     *nation, "after_b": *afterB,
@@ -749,6 +774,11 @@ func main() {
 	if *gameInputsPath != "" {
 		report["game_inputs"] = lateInputs
 		report["game_inputs_sha256"] = lateInputHash
+	}
+	if *allowEarlyExit {
+		report["game_terminal"] = map[string]any{"observed": terminated,
+			"step": m.Steps, "dos_exited": d.Exited, "cpu_halted": m.CPU.Halted,
+			"events_delivered": lateIndex, "events_total": len(lateInputs)}
 	}
 	if *optionsAudit {
 		report["option_source_reads"] = optionSourceReads

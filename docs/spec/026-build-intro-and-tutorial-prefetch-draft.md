@@ -264,3 +264,9 @@ Retire` 在1,275M只顯示離開確認，尚未驗證
 DOS 預讀證據，**沒有**正式 READY 顯示鍵或
 Ebitengine 中文覆蓋；24則 help 草稿仍不計入
 正式十七段中文顯示。
+
+## 2026-09-24：Retire 確認框的後續路徑（仍為 DRAFT）
+
+上述目標111「尚未驗證回到新局入口」是當時的觀測邊界；[目標123](../goals/123-retire-confirmation-and-help-route.md)沿同一正常玩家 `GAME → Retire` 確認框補驗兩個按鈕。在原版320×200座標，點 Yes `(133,105)` 到 `COLONIZATION SCORE`（`Total Score: 4`），再按 Enter 到 `COLONIZATION HALL OF FAME`，第二次 Enter 於第1,451,193,903步使原版正常離開 DOS；點 No `(130,117)` 則返回原海上畫面。`WOODPANL.PIK` 檔案 SHA-256 `0858856ad5b5dd0b6ab8e7a8f815fa602a9cf0237d8d323cd2b5ca141b32bc69`；原版輸入及完整收據常數見 `tools/check_goal123_retire_route.py`。隔離 dosgolem `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`、Go 1.24.13；所有檔案 SHA 是 DOS 檔案雜湊，數字1,451,193,903是模擬執行步數，不是實模式位址。
+
+四分支各雙次冷啟動與無監看控制同狀態，獨立檢查器的原版檔案／輸入／畫面／終止旗標正反例通過。**已證實：**此固定 Retire→Yes 路徑不會在同一次執行中返回新局。**未知：**其他新局入口、跨次啟動選項保留及首則 help 的正式輸出事件；不得由本收據推論全部玩家流程沒有 help。`@TUTORIAL1` 仍僅有原版預讀與譯稿，沒有 READY 覆蓋條件，正式顯示仍十七段、help 零則。

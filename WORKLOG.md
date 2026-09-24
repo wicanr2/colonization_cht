@@ -2401,3 +2401,10 @@
 
 - 已回填[規格027](docs/spec/027-game-options-window-draft.md)、`RESEARCH-LOG.md`、`CONTEXT.md`、唯一 `docs/worklist.json` 並重生 `WORKLIST.md`；規格仍 DRAFT、九欄原文、正式中文十七段。原版素材、字型、畫素與 PNG 只在合法唯讀來源／已忽略 `workplace/`。本輪輸出和 `WORKLIST.md` 為 UID/GID 1000:1000，`workplace/` 無 root-owned 或誤建 `.md` 目錄，三種本輪映像無執行中／已停止容器殘留。下一閘門是使用者另行選定此視窗 A／B 字級、再設計執行期每幀失效契約及 READY 同狀態驗收；本目標完成不等於全遊戲中文化完成。
 - 實質成果提交 `5155cba` 已推送 PRIVATE `origin/main`；主機已登入 `gh` 留言並回讀 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7#issuecomment-5815378447)與[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26#issuecomment-5815378288)，兩者保持 OPEN。本條遠端交接紀錄另以文件提交推送。
+
+## 2026-09-24：目標123退休確認框後續路徑
+
+- 使用者再次選第一張國家旗卡 A（「英格蘭：」21px／「移民」25px）；目標099及規格021早已正式同狀態驗收，未重改旗卡，也未把 A 外推到第三難度卡或遊戲選項。復古遊戲路由命中規格閘門、dosgolem 原版對拍與文件職責；[目標123](docs/goals/123-retire-confirmation-and-help-route.md)先以 `199b4a2` 推送 PRIVATE `origin/main`，才新增原版玩家探針。
+- 正常滑鼠 Yes／No 原版分支各雙次冷啟動及無監看控制：No 回海上畫面；Yes 到分數頁，Enter 到名人堂，再按 Enter 正常結束 DOS。初版探針因預設期待1,500M仍執行，把正常結束報為「提前停止」；增設預設關閉的 `-allow-early-exit` 記錄實際終止步數和畫面。關旗標重播目標111歷史 JSON 逐 byte 不變。此為探針分類修正，不是遊戲或中文前端缺陷。
+- `tools/check_goal123_retire_route.py` 核對四分支原版檔案／輸入／雙重播／無監看控制與所有實際索引、畫布、色盤檔；`tools/test_goal123_retire_route.py` 正例、缺原版 SKIP 及錯版／錯事件／壞畫面／假終止等九類負例通過。Go 格式與編譯、Python AST、唯一工作清單重生與驗證、Git diff 檢查亦於本輪收尾核對。正式中文仍十七段，help 零則，規格026 DRAFT；新局／教學觸發要另尋正常玩家路徑，不以 Retire 假定返回新局。
+- 原版與完整畫面收據只在合法唯讀來源及已忽略 `workplace/`；權限、Docker 清理、Git 推送與 Issue 回讀結果見本輪最終交接。
