@@ -1,6 +1,6 @@
 # 目標118：補齊遊戲選項剩餘四列的同焦點畫面證據
 
-狀態：in_progress；日期：2026-09-24。承接[目標117](117-game-options-same-focus-checkmarks.md)與[規格027](../spec/027-game-options-window-draft.md)，對應既有 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)和 [Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)。不另開同義 Issue。
+狀態：completed（限剩餘四列的同焦點穩定畫面；正式中文尚未接入）；日期：2026-09-24。承接[目標117](117-game-options-same-focus-checkmarks.md)與[規格027](../spec/027-game-options-window-draft.md)，對應既有 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)和 [Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)。不另開同義 Issue。
 
 ## 玩家問題與範圍
 
@@ -16,3 +16,11 @@
 ## 停止線
 
 八列同焦點穩定畫面只支援已量測的座標與時間；不能外推按下／放開瞬間、點擊熱區所有邊界、每幀反白、核取語意或完整遊戲設定效果。規格027若仍缺正式逐欄可逆底圖、游標／離頁失效、中文字級及快捷鍵呈現，維持 DRAFT；本輪不代使用者選擇 A／B，不把九處譯稿計入正式中文段數，也不更新正式截圖。
+
+## 結果與下一閘門
+
+四份固定玩家事件 SHA-256：第2列 `c5cd75914394f83bbec7f97ec242850e613630537d1e37fe0b6ddef84e798b9c`、第3列 `f17aaa5398abded23152ee8a9c9e4cd4bd0dff8156a962b20f46d60bb82c0562`、第5列 `296bf4af579a183b083952e1b035bb169f1ebcd61ee42b109f8a95802dd790de`、第6列 `9977be8d84ee9e3f35836920ae7f3bb30bd15f6fff536d9222b60bf49296b2f2`。每支各兩次冷啟動 JSON 逐 byte 相同；A 收據 SHA-256 同序為 `f2f4d4059f3f08af2e3844c478c8e52b2835f3c08101f2ac73111cad6a3803ac`、`1527b67ac8d91e371c55e465b65f05e79a0b803bd915312ab9bde8f23bad5f48`、`593f4c8ae93148217f7908742764a2beca5160d2b8d0191357caf8f405da5c2e`、`6790fc9d236213ec95bd14994ae4b1608adfcce93e9ff1988a40287ca6af0eb6`。各支無監看控制的原版路徑、CPU／完整 RAM、索引／畫布／色盤、時間、開檔與輸入快照一致；1,300M與目標117固定基線的 CPU／RAM／畫面相同。
+
+在1,325M及1,350M，點擊各列後相對未點基線的底層畫布差分依第2／3／5／6列為3,305／3,350／3,459／3,338點；每支都只在第1列 y59–70 的1,646點及被點列，後者依序1,659／1,704／1,813／1,692點。這個暫態仍混合焦點與圖示，不可把全部差分命名為核取。1,352M／1,353M各支點回第1列後，在1,375M及1,400M的**索引及底層畫布**各自跨時點不變，對照同焦點基線只在本列圖示中心 x73–74 的2×2像素保留差異：第2列 y76–77，149→47；第3列 y88–89，47→149；第5列 y112–113，149→47；第6列 y124–125，149→47。索引／底層差分相同，同時點色盤相同；色盤在1,375M至1,400M仍改變，不宣稱完整 RGB 畫面跨時點不變。
+
+`tools/check_goal118_remaining_rows.py` PASS，`tools/test_goal118_remaining_rows.py` 正例與雙重播、控制 RAM、原始畫布、重算雜湊仍越界、既有基線、事件檔、錯原版、缺原版 `SKIP 77` 八類負例通過；再跑目標117檢查器，可與其第4／7列及目標111第8列收據合成八列的**固定同焦點穩定相位**矩陣。新原版畫素／完整收據只留已忽略的 `workplace/reports/goal118-options/`。色號方向不能直接解讀選項「啟用／停用」，按鍵瞬間與正式中文逐欄回退仍未驗。[規格027](../spec/027-game-options-window-draft.md)保持 DRAFT；九欄仍英文、正式中文十七段，A／B 正式字級待使用者確認。

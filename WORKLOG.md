@@ -2360,3 +2360,10 @@
 - `tools/check_goal117_same_focus.py` PASS，`tools/test_goal117_same_focus.py` 正例與八類負例／缺原版 `SKIP 77` PASS；修訂[規格027](docs/spec/027-game-options-window-draft.md)、研究紀錄與唯一 Issue 工作清單。規格仍 DRAFT、選項九欄仍英文、正式中文十七段不變；其餘第2／3／5／6列、按下／放開瞬間、中文字級／快捷鍵與逐欄正式回退仍需完成。本輪沒有更新 README 或正式截圖，也沒有把原版畫素推入 Git。
 - 唯讀掛載下第一次用 `py_compile` 做語法檢查，因需寫入 `__pycache__` 而被拒；改用不寫檔的 `ast.parse` 和 `sh -n` 後通過，屬驗證環境設定而非產品缺陷。`tools/worklist.py write/verify` PASS、`git diff --check` PASS；原版素材未追蹤，收據與 `WORKLIST.md` 均為 UID/GID 1000:1000，`workplace/` 無 root-owned／誤建 `.md` 目錄，研究容器無執行中或已停止殘留；其他專案容器未碰。隔離 dosgolem `upstream` 推送位址仍為 `DISABLED`。
 - 實質成果提交 `007a3e2` 已推送 PRIVATE `origin/main`；主機 `gh` 更新並回讀 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7#issuecomment-5812771927) 與 [Issue #26](https://github.com/wicanr2/colonization_cht/issues/26#issuecomment-5812771979)，兩者均保持 OPEN。本條 Issue 交接另以文件提交推送。
+
+## 2026-09-24：目標118補齊遊戲選項同焦點穩定相位
+
+- 前一輪目標117已完成原版第4／7列同焦點收據、私有推送及 Issue 更新，屬實質進展。本輪核對乾淨工作樹、Git 作者、PRIVATE 遠端與既有 Issue、固定原版及隔離 dosgolem `9dd36726`／禁推；復古遊戲路由命中證據／規格閘門。先以 `cc49cdb` 將[目標118](docs/goals/118-game-options-remaining-rows.md)與現況入口推送，再新增四份玩家事件、重播腳本與獨立檢查器。
+- 在既有 `colonization-research:20260920-r2` 中以唯讀原版、正常英格蘭玩家路徑各重播第2／3／5／6列兩次冷啟動及無監看控制，共十二條有界分支。各列點回第1列後，在1,375M／1,400M與目標117同焦點基線相比，只有本列圖示中心四點保留差異；第2／5／6列149→47，第3列47→149。1,325M／1,350M暫態差分僅在第1列與被點列。未以色號猜選項啟用語意，也未將索引相同誤稱跨時點 RGB 相同。
+- `tools/check_goal118_remaining_rows.py` PASS，`tools/test_goal118_remaining_rows.py` 正例與八類拒絕／缺原版 `SKIP 77` PASS；目標111、117檢查器回歸 PASS，`tools/worklist.py write/verify`、AST 與 shell 語法、`git diff --check` 通過。已回填[規格027](docs/spec/027-game-options-window-draft.md)、研究紀錄與唯一 Issue 工作清單；九欄仍英文，正式中文十七段，規格維持 DRAFT。另依 `grill-me` 的視覺共同決策方式向使用者展示本機原文／A／B 同狀態對照並只問一題；答覆前不替選項視窗定字級，不把第一張旗卡 A 外推。
+- 原版 EXE／TXT、TTF、原版畫素與完整收據沒有加入 Git；新輸出與 `WORKLIST.md` 抽查 UID/GID 1000:1000，`workplace/` 無 root-owned 或誤建 `.md` 目錄，本專案研究映像無執行中／已停止容器殘留，其他專案容器未碰。下一閘門是正式逐欄可逆底圖、游標／離頁失效與快捷鍵呈現；按鍵瞬間仍需有限原版取證，A／B 字級待使用者選擇。
