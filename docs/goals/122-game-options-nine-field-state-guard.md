@@ -1,6 +1,6 @@
 # 目標122：遊戲選項九欄的原版狀態矩陣與逐欄回退候選
 
-狀態：in_progress；日期：2026-09-24。承接[目標113](113-game-options-background-and-preview.md)的九欄印前底圖與 Ebitengine A／B 預覽、[目標116](116-game-options-selection-and-exit-phases.md)至[目標119](119-game-options-click-phase.md)的實際滑鼠／鍵盤原版收據，以及[規格027](../spec/027-game-options-window-draft.md)。對應既有 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7) 與 [Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)，不另建同義 Issue。
+狀態：completed；日期：2026-09-24。承接[目標113](113-game-options-background-and-preview.md)的九欄印前底圖與 Ebitengine A／B 預覽、[目標116](116-game-options-selection-and-exit-phases.md)至[目標119](119-game-options-click-phase.md)的實際滑鼠／鍵盤原版收據，以及[規格027](../spec/027-game-options-window-draft.md)。對應既有 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7) 與 [Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)，不另建同義 Issue。
 
 ## 玩家問題與範圍
 
@@ -17,3 +17,10 @@
 ## 停止線
 
 使用者尚未替 `Game Options` 九欄選定 A／B 字級，也尚未決定第三張難度卡的 A／B；本輪不代答、不把可丟棄原型接正式前端。九欄 `~` 快捷鍵資訊仍須保留；同相位原版畫面相同不等於選項啟用語意已證。規格027未經 READY 審查前保持 DRAFT，正式中文仍十七段、help 正式顯示零則。既有1,300M以外的底圖若無可逆證據，該欄保留原文，不創造新規則。
+
+## 本輪收據與結果
+
+- [逐欄檢查器](../../tools/check_goal122_options_field_guard.py)先回跑目標111／116／117／118／119的原版版本、雙冷啟動、無監看控制及實檔 SHA，再以目標113兩次相同的九欄印前底圖和固定 A／B 預覽為基準；`tools/test_goal122_options_field_guard.py` 的正例、錯版／錯事件／壞畫面／雙重播／控制／安全矩形負例及缺原版 `SKIP 77` 均通過。85個原版取樣狀態逐欄成為九欄矩陣，含目標119兩支各12個細相位；細相位一律標 `unknown-transition`，不能由25M步取樣外推逐幀安全。
+- 第2列被點後的1,325M穩定畫面，`option-01/02` 底圖不同、`option-03` 被游標遮擋，故只有標題與第4至8列共六欄可作可丟棄中文對照；第8列被點後，`option-01/08` 底圖不同，其餘七欄可對照。純移鼠第一列遮 `option-01/02`，末列遮 `option-08`；ESC離頁後九欄全失效。上述分類只對固定已驗畫面成立。
+- 兩個狀態各有原文控制、A／B 真 Ebitengine 1280×800本機 PNG；四張中文圖均經 `tools/verify_card_preview.py` 逐像素 PASS，安全區外及未啟用欄位零差異、透明字模恢復多色印前底圖。原文控制及四張中文圖的 SHA-256、工具版本與限制見[研究紀錄](../../RESEARCH-LOG.md)的目標122段。原版畫素、字模與完整 JSON／PNG 只在已忽略的 `workplace/reports/goal122-options/`，不提交。
+- [規格027](../spec/027-game-options-window-draft.md)維持 DRAFT，九欄仍是英文，正式中文仍十七段。這個目標的矩陣及原型已完成，不代表 Game Options 正式中文已完成；使用者尚未選 A／B 字級，完整執行期每幀守門與同狀態驗收仍待下階段。

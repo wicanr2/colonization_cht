@@ -1,6 +1,6 @@
 # 規格027：原版遊戲選項視窗九處文字
 
-狀態：DRAFT；日期：2026-09-24。入口：[目標112](../goals/112-game-options-chinese-display.md)、[目標113](../goals/113-game-options-background-and-preview.md)、[目標114](../goals/114-game-options-print-buffer-dataflow.md)、[目標116](../goals/116-game-options-selection-and-exit-phases.md)、[目標117](../goals/117-game-options-same-focus-checkmarks.md)、[目標118](../goals/118-game-options-remaining-rows.md)、[目標119](../goals/119-game-options-click-phase.md)、[目標110](../goals/110-tutorial-hints-player-trigger.md)、[目標111](../goals/111-tutorial-hints-state-and-first-help.md)。本規格尚**不授權正式 Ebitengine 覆蓋**。
+狀態：DRAFT；日期：2026-09-24。入口：[目標112](../goals/112-game-options-chinese-display.md)、[目標113](../goals/113-game-options-background-and-preview.md)、[目標114](../goals/114-game-options-print-buffer-dataflow.md)、[目標116](../goals/116-game-options-selection-and-exit-phases.md)、[目標117](../goals/117-game-options-same-focus-checkmarks.md)、[目標118](../goals/118-game-options-remaining-rows.md)、[目標119](../goals/119-game-options-click-phase.md)、[目標122](../goals/122-game-options-nine-field-state-guard.md)、[目標110](../goals/110-tutorial-hints-player-trigger.md)、[目標111](../goals/111-tutorial-hints-state-and-first-help.md)。本規格尚**不授權正式 Ebitengine 覆蓋**。
 
 ## 玩家範圍與原始版本
 
@@ -94,6 +94,12 @@
 放開後1,303,000,001／1,303,001,000／1,303,100,000步沒有新增底層變化；到1,303,500,000步，第一列圖示中心 `(73–74,64–65)` 四點149→47，第八列 `(73–74,148–149)` 四點47→149，底層與合成索引差分一致。其餘畫素在此窗口不變。1,303,500,000至1,350M底層畫布各自穩定，但色盤會變；不得把索引穩定寫成完整 RGB 穩定。兩支各雙冷啟動 JSON 逐 byte 一致，無監看控制的 CPU／完整 RAM／索引／畫布／色盤、時間與開檔在每一取樣點一致；獨立正反例見[目標119](../goals/119-game-options-click-phase.md)。
 
 **仍未知：**各窗口內的精確首條重繪指令、其餘六列按下／放開、游標遮住文字的所有相位、色號與開關語意、可逆逐欄執行期底圖，以及 A／B 字級與快捷鍵可見呈現。故本規格仍 DRAFT；九欄沒有正式中文覆蓋。
+
+### 目標122追加：固定原版相位的逐欄回退矩陣
+
+以目標113兩次冷啟動的九個印前底圖及1,300M原版畫布為固定版本，先回跑目標111／116／117／118／119獨立檢查器；各分支無監看控制、實檔 SHA、同時點色盤都須一致。`tools/check_goal122_options_field_guard.py` 將13個分支的85個取樣狀態逐欄記錄：當幀 `canvas` 安全區與原1,300M印後畫布不同則原補片失效；若底圖相同而合成 `indexed` 與 `canvas` 不同，視作游標遮擋並保留原文；兩者均同才標 `safe-at-sample`。ESC後全部標 `window-exited`；目標119兩支各12個按下／放開細取樣全部標 `unknown-transition`，即使局部畫素碰巧相同，也不能宣稱安全。矩陣與原版像素只留已忽略的 `workplace/reports/goal122-options/field-guard.json`，SHA-256 `59867698f7df6989edc9edbc4ebe91b6ff1c9721fa3959cb4e311fa33ce36c45`。
+
+1,325M第2列點擊相位，`option-01/02` 底圖變、`option-03` 有游標，僅 `option-00/04/05/06/07/08` 作可丟棄中文候選；第8列點擊相位，`option-01/08` 底圖變，僅 `option-00/02/03/04/05/06/07` 作候選。純移鼠第一列遮 `option-01/02`，末列遮 `option-08`；1,375M ESC 離頁九欄全失效。移回第一列後各列安全區底圖可再匹配，但游標仍可能遮第一／第二列；核取中心在安全區外，不以補片改寫。四張真 Ebitengine A／B 部分欄預覽和兩張原文控制通過逐像素檢查：控制為當幀索引與色盤四倍最近鄰；未選欄與安全區外零變動；選欄恢復目標113逐欄多色印前底圖。只驗固定原版步數，不驗任意執行期幀的實際守門；原版精確選項啟用語意仍未知，A／B 字級仍待使用者決定。**因此規格仍 DRAFT，正式九欄英文、中文十七段不變。**
 
 ## 從 DRAFT 到正式覆蓋的閘門
 
