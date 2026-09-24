@@ -57,7 +57,7 @@ def checked_receipt(reports):
          and a["input_sha256"] == control["input_sha256"] == INPUT_SHA
          and a["game_inputs_sha256"] == control["game_inputs_sha256"] == FIXTURE_SHA
          and len(a["option_preprint"]) == len(FIELDS)
-         and not a["option_print_writes"] and not control["option_preprint"]
+         and isinstance(a["option_print_writes"], list) and not control["option_preprint"]
          and not control["option_print_writes"] and not control["writers"],
          "原版觀測版本、輸入或無監看控制不符")
     for key in ("route", "sources", "transfers", "samples", "opened", "key_events", "game_inputs"):

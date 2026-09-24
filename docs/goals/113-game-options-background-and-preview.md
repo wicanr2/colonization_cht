@@ -26,3 +26,7 @@
 - `-options-preprint` 在原版實模式 `0D21:012C` 九欄各自第一個變更畫素**之前**保存320×200完整畫布。兩次英格蘭正常玩家冷啟動的 JSON、九張印前畫布逐 byte 相同；無監看控制的原版 `route/sources/transfers/samples/opened/key_events/game_inputs` 與1,300M索引／色盤相同。九欄各自印前→最終畫面的安全區差分依序319／338／349／283／186／172／316／343／246點，等於各欄記錄寫入數；木紋、第一列反白及左側核取圖示均不以塗平畫素代替。收據與原版畫素僅在已忽略的 `workplace/reports/goal113-options/`。
 - 使用固定真 `Cubic_11.ttf` 及九筆真 TSV（僅畫面預覽去掉不可見 `~`，保留可見 `（I）` 等 ASCII 熱鍵）產生九欄獨立字級。貼近原版 A 為標題34px、各列25／28／28／25／28／28／27／28px；較大 B 為38px、28／32／32／28／32／32／31／32px。Ebitengine 原文控制與 A／B 的本機 PNG 分別為 `options-original.png`、`options-faithful.png`、`options-readable.png`，沒有提交原版像素。`tools/verify_card_preview.py` 逐像素驗兩組均 PASS：原文控制符合原始最近鄰畫布，九個安全區外零變更，透明字模下恢復逐欄多色原底圖，各欄均有中文前景與陰影；[預覽產生器](../../tools/prepare_goal113_options_preview.py)及[正反例](../../tools/test_goal113_options_preview.py)可重跑。
 - 窄寫入監看在九欄印字期間未觀測到解析緩衝→印字字元緩衝的寫入；**未找到最後搬運邊**，來源鏈仍只是強推論，不因相同原文及成功預覽而提升為已證實。反白切換、游標、ESC離頁與實際執行期逐欄回退未驗；[規格027](../spec/027-game-options-window-draft.md)維持 DRAFT，正式已驗中文仍十七段。A／B 對照尚未由使用者為這個視窗選版；本輪不更新正式截圖或 README 的完成聲明。
+
+## 後續勘誤（目標114／115）
+
+上段「零筆寫入」**不是有效負證據**：隔離 dosgolem 的 `Machine.WatchWrites` 只有一組 active range，當時先登錄印字緩衝、再登錄畫布，後者覆蓋前者；探針沒有真的同時監看兩區。後續改用單一涵蓋兩區的監看範圍，在相同正常玩家路徑找到印字緩衝157筆變更寫入；150個可見字元各有先前同址、同值的寫入。原始目標113印前畫布與預覽收據仍有效；只撤回「未觀測到寫入」作為原版行為結論。[目標114](114-game-options-print-buffer-dataflow.md)及[規格027](../spec/027-game-options-window-draft.md)保存新證據與尚未閉合的上游資料邊。

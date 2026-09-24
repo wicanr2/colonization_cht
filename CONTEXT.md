@@ -2,20 +2,20 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-目前續作入口：[目標115](docs/goals/115-game-options-source-chain-correction.md)：
-核對並交接目標114的遊戲選項來源鏈探針，訂正舊零筆寫入監看
-假陰性；獨立驗證、規格與 Issue 尚待本輪完成。正式顯示仍十七段。
-
-目前進行入口：[目標114](docs/goals/114-game-options-print-buffer-dataflow.md)：
-沿目標112／113的原版九欄收據，追解析緩衝到印字字元緩衝的
-最後搬運與讀寫位址；未取得直接證據前維持強推論，
-不把本機 A／B 預覽接進正式顯示。
+最近完成入口：[目標115](docs/goals/115-game-options-source-chain-correction.md)／
+[目標114](docs/goals/114-game-options-print-buffer-dataflow.md)：
+目標113的「零筆寫入」是監看器單一 active range 被後設畫布範圍覆蓋，
+非原版負證據。修正後九欄150個可見字元均有先前同址、同值的印字
+緩衝寫入；九段高位址 RAM 的142個原始正文 byte 各有變更寫入。
+雙冷啟動／無監看控制及獨立正反例通過。DOS 解析緩衝至高位址 RAM
+的中間邊、1筆格式化來源讀取仍未閉合；[規格027](docs/spec/027-game-options-window-draft.md)
+保持 DRAFT，正式中文仍十七段，遊戲選項九欄仍原文。
 
 最近完成入口：[目標113](docs/goals/113-game-options-background-and-preview.md)：
 沿目標112的正常玩家九欄來源收據，已由 dosgolem 雙冷啟動擷取各欄
 印前底圖，並以固定 Cubic 11 與真 TSV 製作本機可丟棄的 Ebitengine
 原文／A／B 對照；逐像素驗證安全區外零變更。解析緩衝至印字緩衝
-的最後搬運、其他反白／游標相位仍未閉合；[規格027](docs/spec/027-game-options-window-draft.md)
+的中間來源邊、其他反白／游標相位仍未閉合；[規格027](docs/spec/027-game-options-window-draft.md)
 維持 DRAFT，正式中文仍十七段，遊戲選項九欄仍為英文。
 
 使用者本輪再次確認第一張國家旗卡選 A（「英格蘭：」21px、
@@ -32,8 +32,9 @@
 讀取168 bytes；`0D21:00C6` 的九段印字及1,300M
 索引畫面另經獨立正反例核對。九欄草稿註記已訂正，原版
 7／8像素墨跡與候選安全矩形見[規格027](docs/spec/027-game-options-window-draft.md)。
-解析後搬到印字緩衝的最後一段、逐欄印前底圖、反白／游標
-回退及中文字級尚待驗，因此規格仍 DRAFT、九欄仍原文。
+解析緩衝到高位址 RAM 的中間逐 byte 搬運、反白／游標
+回退及中文字級尚待驗；印字緩衝最後直接寫入和逐欄印前底圖
+已由目標113–115補證。因此規格仍 DRAFT、九欄仍原文。
 
 最近完成入口：[目標111](docs/goals/111-tutorial-hints-state-and-first-help.md)：
 `Game Options` 中未點／先點 `Tutorial Hints` 後皆把焦點
@@ -86,7 +87,7 @@ dosgolem 十段印字與雙重播、各行檔案位移／SHA、占位符、
 其實際觸發仍未知，規格026保持 DRAFT、正式中文維持十七段。
 
 下一工作入口：優先接續[規格027](docs/spec/027-game-options-window-draft.md)
-九欄的原版解析→印字緩衝最後搬運、選取／游標／離頁相位與
+九欄的原版解析→高位址 RAM 中間搬運、選取／游標／離頁相位與
 真 Ebitengine 玩家視窗回退；九欄印前多色底圖及可丟棄 A／B
 預覽已由目標113完成，正式字級尚待此視窗專屬視覺決定，
 證據足夠才審查 READY。

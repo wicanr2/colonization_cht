@@ -1,6 +1,6 @@
 # 目標114：遊戲選項解析至印字緩衝的最後資料流
 
-狀態：in_progress；日期：2026-09-24。承接[目標112](112-game-options-chinese-display.md)已驗的 `GAME.TXT` 九欄 DOS 讀入、168-byte 原版解析讀取與逐欄印字，以及[目標113](113-game-options-background-and-preview.md)九欄印前底圖／可丟棄 Ebitengine 對照。此輪對應既有 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7) 與 [Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)，不新增同義 Issue。
+狀態：completed（限定來源鏈蒐證與勘誤；正式覆蓋未完成）；日期：2026-09-24。承接[目標112](112-game-options-chinese-display.md)已驗的 `GAME.TXT` 九欄 DOS 讀入、168-byte 原版解析讀取與逐欄印字，以及[目標113](113-game-options-background-and-preview.md)九欄印前底圖／可丟棄 Ebitengine 對照。此輪對應既有 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7) 與 [Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)，不新增同義 Issue。
 
 ## 玩家問題與範圍
 
@@ -19,3 +19,9 @@
 ## 停止線
 
 本輪的最小可驗成果是最後搬運者的直接位址／指令／byte 證據，或對先前零筆監看原因的可重現訂正。相同英文字串、同一張穩定截圖、通過的中文預覽都不能取代原版資料流；即使來源邊找到，選取／游標／關窗相位與遊戲選項中文字級尚未正式定案，規格027仍不能直接標 CONFORMED，正式已驗中文仍十七段。原版完整收據只放已忽略的 `workplace/`，不推送原版畫素或轉存原文。
+
+## 結果與尚存缺口
+
+後續[目標115](115-game-options-source-chain-correction.md)完成獨立驗證與勘誤。舊零筆監看是 `Machine.WatchWrites` 單一 active range 被畫布監看覆蓋的探針假陰性；改成同一範圍後找到157筆印字緩衝變更寫入，150個可見字元均有同址、同值、57步前的直接寫入；另有7步前中繼讀取。互斥的高位址 RAM 重播證明九段原始正文142個 byte 各有至少一次變更寫入。雙次冷啟動各自逐 byte 相同，無監看控制同路徑、同狀態與同原版畫面。精確位址、位址空間及負例見[規格027](../spec/027-game-options-window-draft.md)與[研究勘誤](../../RESEARCH-LOG.md)。
+
+仍未閉合的是 DOS 解析緩衝至高位址 RAM 的中間逐 byte 搬運、一筆格式化來源讀取，以及反白／游標／離頁與中文字級。這一研究切片已達最小可驗成果，但九欄正式中文顯示仍未完成，規格027維持 DRAFT。

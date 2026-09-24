@@ -73,6 +73,8 @@ func main() {
 	gameInputsPath := flag.String("game-inputs", "", "目標110：字幕後正常玩家滑鼠／鍵盤事件 JSON；預設不改舊重播")
 	optionsAudit := flag.Bool("options-audit", false, "目標112：固定 GAME.TXT 遊戲選項九欄的 DOS 讀入來源")
 	optionsPreprint := flag.Bool("options-preprint", false, "目標113：九欄各自首筆原版印字前底圖與印字緩衝寫入")
+	optionsWriterAudit := flag.Bool("options-writer-audit", false, "目標114：原版印字緩衝寫入者附近的讀取與暫存器")
+	optionsResidentAudit := flag.Bool("options-resident-audit", false, "目標114：互斥觀測九欄高位址 RAM 來源的寫入者")
 	flag.Parse()
 	if *inputs == "" || *out == "" {
 		panic("缺必要參數")
@@ -114,6 +116,12 @@ func main() {
 	}
 	if *optionsPreprint && !*optionsAudit {
 		panic("遊戲選項印前底圖需同時啟用來源稽核")
+	}
+	if *optionsWriterAudit && !*optionsPreprint {
+		panic("印字緩衝來源稽核需同時啟用逐欄印前底圖")
+	}
+	if *optionsResidentAudit && (!*optionsAudit || *optionsPreprint || *optionsWriterAudit) {
+		panic("高位址 RAM 來源稽核需單獨啟用，不能與畫布寫入監看並用")
 	}
 	extraEnters := map[uint64]bool{}
 	if *followEnterAt != "" {
@@ -280,6 +288,9 @@ func main() {
 	printReads := []map[string]any{}
 	optionSourceReads := []map[string]any{}
 	optionPrintWrites := []map[string]any{}
+	optionWriterReads := []map[string]any{}
+	optionIntermediateWrites := []map[string]any{}
+	optionResidentWrites := []map[string]any{}
 	optionBefore := map[int][]byte{}
 	optionFirstSteps := map[int]uint64{}
 	optionWriteCounts := map[int]int{}
@@ -298,20 +309,16 @@ func main() {
 		observeEnd = *followUntil
 	}
 	if !*control {
-		if *optionsPreprint {
-			for _, start := range []uint32{0x2ac78, 0x2adde} {
-				m.WatchWrites(start, start+2, func(a uint32, old, value uint8) {
-					if m.Steps < 1253300000 || m.Steps >= 1253600000 || len(optionPrintWrites) >= 2000 {
-						return
-					}
-					cs, ip := m.CPU.OpAddr()
-					optionPrintWrites = append(optionPrintWrites, map[string]any{
-						"step": m.Steps, "cs_ip": fmt.Sprintf("%04X:%04X", cs, ip),
-						"linear": a, "old": old, "value": value})
-				})
-			}
-		}
 		m.WatchReads(0x20000, 0x80000, func(a uint32, value uint8) {
+			if *optionsWriterAudit && m.Steps >= 1253400000 && m.Steps < 1253600000 &&
+				len(optionWriterReads) < 30000 {
+				cs, ip := m.CPU.OpAddr()
+				if cs == 0x0e2d || (cs == 0x8bdf && ip >= 0x0500 && ip <= 0x0600) {
+					optionWriterReads = append(optionWriterReads, map[string]any{
+						"step": m.Steps, "cs_ip": fmt.Sprintf("%04X:%04X", cs, ip),
+						"linear": a, "value": value})
+				}
+			}
 			if *optionsAudit && m.Steps >= 1253314011 && m.Steps < 1253600000 &&
 				a >= 0x2b0cf && a < 0x2b177 && len(optionSourceReads) < 10000 {
 				cs, ip := m.CPU.OpAddr()
@@ -328,7 +335,37 @@ func main() {
 					"cs_ip": fmt.Sprintf("%04X:%04X", cs, ip), "linear": a, "value": value})
 			}
 		})
-		m.WatchWrites(canvas, canvas+64000, func(a uint32, old, value uint8) {
+		// Machine.WatchWrites 只有一組 active range；分次註冊會覆蓋前一組。
+		// 同一個監看範圍先分流兩處字元緩衝，再沿用原有畫布事件。
+		writeLo := canvas
+		if *optionsPreprint {
+			writeLo = 0x2ac78
+		}
+		m.WatchWrites(writeLo, canvas+64000, func(a uint32, old, value uint8) {
+			if a < canvas {
+				if *optionsWriterAudit && m.Steps >= 1253400000 && m.Steps < 1253600000 &&
+					((a >= 0x2acea && a < 0x2acec) || (a >= 0x2ad70 && a < 0x2ad81) ||
+						(a >= 0x2ae50 && a < 0x2ae52)) && len(optionIntermediateWrites) < 3000 {
+					cs, ip := m.CPU.OpAddr()
+					optionIntermediateWrites = append(optionIntermediateWrites, map[string]any{
+						"step": m.Steps, "cs_ip": fmt.Sprintf("%04X:%04X", cs, ip),
+						"linear": a, "old": old, "value": value})
+				}
+				if *optionsPreprint && m.Steps >= 1250000000 && m.Steps < 1253600000 &&
+					((a >= 0x2ac78 && a < 0x2ac7a) || (a >= 0x2adde && a < 0x2ade0)) &&
+					len(optionPrintWrites) < 5000 {
+					cs, ip := m.CPU.OpAddr()
+					entry := map[string]any{
+						"step": m.Steps, "cs_ip": fmt.Sprintf("%04X:%04X", cs, ip),
+						"linear": a, "old": old, "value": value}
+					if *optionsWriterAudit {
+						entry["registers"] = m.CPU.R
+						entry["segments"] = m.CPU.Seg
+					}
+					optionPrintWrites = append(optionPrintWrites, entry)
+				}
+				return
+			}
 			if m.Steps < 55000000 || m.Steps >= observeEnd || old == value {
 				return
 			}
@@ -395,6 +432,18 @@ func main() {
 				writer.BBox[3] = y + 1
 			}
 		})
+		if *optionsResidentAudit {
+			// 此旗標與逐欄畫布觀測互斥；Machine 只有一組 WatchWrites。
+			m.WatchWrites(0x74380, 0x74560, func(a uint32, old, value uint8) {
+				if m.Steps < 1250000000 || m.Steps >= 1253600000 || len(optionResidentWrites) >= 5000 {
+					return
+				}
+				cs, ip := m.CPU.OpAddr()
+				optionResidentWrites = append(optionResidentWrites, map[string]any{
+					"step": m.Steps, "cs_ip": fmt.Sprintf("%04X:%04X", cs, ip),
+					"linear": a, "old": old, "value": value})
+			})
+		}
 	}
 	transferIndex := 0
 	transfers := []map[string]any{}
@@ -627,8 +676,14 @@ func main() {
 				}
 				if *optionsAudit {
 					version = "goal112-game-options-source-v2"
+					if *optionsResidentAudit {
+						version = "goal114-options-resident-v1"
+					}
 					if *optionsPreprint {
 						version = "goal113-game-options-preprint-v1"
+						if *optionsWriterAudit {
+							version = "goal114-options-writer-v4"
+						}
 					}
 				}
 			}
@@ -659,9 +714,16 @@ func main() {
 	}
 	if *optionsAudit {
 		report["option_source_reads"] = optionSourceReads
+		if *optionsResidentAudit {
+			report["option_resident_writes"] = optionResidentWrites
+		}
 	}
 	if *optionsPreprint {
 		report["option_print_writes"] = optionPrintWrites
+		if *optionsWriterAudit {
+			report["option_writer_reads"] = optionWriterReads
+			report["option_intermediate_writes"] = optionIntermediateWrites
+		}
 		preprints := map[string]any{}
 		if !*control && len(optionBefore) != len(optionSafe) {
 			panic("遊戲選項九欄印前底圖不完整")
