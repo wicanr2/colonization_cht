@@ -1,6 +1,8 @@
 # 目前脈絡
 
-更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
+更新：2026-09-25；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
+
+目前工作：[目標125](docs/goals/125-tutorial-hints-persistence-and-help-entry.md)只檢驗正常玩家切換 `Tutorial Hints`、經 `Retire` 真正退出、下一次冷啟動後的選項保留與首則 help 可見性；用已忽略的獨立實驗副本，原版輸入仍唯讀。未取得新收據前，[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)仍 DRAFT，正式中文十七段、help 正式顯示零則。
 
 目前真相：[目標124](docs/goals/124-gameplay-keyboard-window-route.md)已把真 Ebitengine 視窗的 Esc／四方向鍵接到 dosgolem 具名 BIOS 鍵佇列。英格蘭海上左移與 `Game Options` Esc 離頁經玩家真鍵盤、英文同輸入控制、完整原版狀態、少一鍵反向對照及失焦負例驗收；[規格024](docs/spec/024-window-keyboard-input.md)僅此輸入通道限定 CONFORMED。右／上／下在遊戲中的效果、首則 help 與新中文覆蓋未驗；正式中文仍十七段，help 正式顯示仍零則。
 
