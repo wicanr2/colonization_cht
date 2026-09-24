@@ -1,6 +1,6 @@
 # 目標120：第三張難度卡片的正常玩家輸出證據
 
-狀態：in_progress；日期：2026-09-24。承接[規格016](../spec/016-difficulty-card-text-draft.md)、
+狀態：completed（僅第三張卡片原文來源與畫布）；日期：2026-09-24。承接[規格016](../spec/016-difficulty-card-text-draft.md)、
 [目標081](081-second-difficulty-card-output-evidence.md)及[目標119](119-game-options-click-phase.md)；
 對應既有 [Issue #6](https://github.com/wicanr2/colonization_cht/issues/6)、
 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)與
@@ -43,3 +43,23 @@
 只保留 DRAFT 與英文畫面；不修改正式 `tools/live_menu.go`、不宣稱
 第三張卡片已中文化、不更新正式截圖或十七段計數。不得修改原版
 EXE／TXT、遊戲規則、存檔或滑鼠命中區。
+
+## 結果與下一閘門
+
+原版畫面確認第三張卡片位在難度頁左下；正常玩家九筆已驗前綴後，
+點擊 `(55,145)` 才印出 `CONQUISTADOR:`／`Moderate`，未點選及僅
+移鼠對照沒有第三張卡片印字。`NAMES.TXT:0xC22`／
+`LABELS.TXT:0x8B8` 的原始 bytes 經 DOS 載入、執行期來源讀取、
+格式化印字緩衝及原版畫布事件核對；同文 `GAME.TXT:0xA3C`
+不可借作此卡來源。原版兩行墨跡分別是205點、bbox
+`(32,141)–(81,145)` 與116點、bbox `(41,149)–(73,154)`；
+印前安全矩形候選各有100／80種底圖色盤索引，不能純色抹除。
+詳細位址空間、步數與推論等級見[規格016](../spec/016-difficulty-card-text-draft.md)。
+
+雙次 dosgolem 冷啟動報告逐 byte 一致，無監看控制在原版 CPU、
+完整 RAM、索引／底層畫布、色盤、時間、開檔與逐時點底圖一致；
+`tools/check_goal120_third.py --self-test` 對真原版收據及六種
+破壞性負例均 PASS。已更新兩筆真譯稿來源註記，但「征服者／普通」
+仍只是 `draft`。本輪沒有正式中文覆蓋、字級定案或新截圖，正式
+顯示仍十七段；下一閘門是第三張卡片逐欄 Ebitengine 預覽與
+游標／按鍵／回退證據，再決定是否足以升限定 READY。
