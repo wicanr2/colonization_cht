@@ -2,6 +2,8 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前工作：[目標123](docs/goals/123-retire-confirmation-and-help-route.md)沿已驗 `GAME → Retire` 確認框，分別以原版滑鼠點 Yes／No，查證是否能透過正常玩家路徑回到新局入口、進而驗證教學選項的保留與首則 help 顯示。兩項文字的既有原版墨跡座標只是點擊候選，未證熱區；[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)仍 DRAFT、help 正式畫面零則。
+
 最近完成：[目標122](docs/goals/122-game-options-nine-field-state-guard.md)把 `Game Options` 13支原版分支、85個取樣狀態整理為九欄矩陣。第2列點擊時六欄、第8列點擊時七欄在固定1,325M步可做本機部分中文原型；兩狀態各有原文控制與 A／B 真 Ebitengine 圖，四張中文圖逐像素驗證通過。游標遮擋、底圖變動逐欄保留原文，ESC 離頁全失效，按下／放開細相位一律未知。這只完成 DRAFT 證據與可丟棄原型；[規格027](docs/spec/027-game-options-window-draft.md)未升 READY，遊戲選項九欄仍英文、正式中文仍十七段。此視窗 A／B 字級及第三張難度卡 A／B 都待使用者各自決定；第一張旗卡 A 早已正式驗收，不重做。
 
 最近完成：[目標121](docs/goals/121-third-difficulty-card-layout-and-guards.md)以目標120固定原版來源、真譯稿和字型，製作第三張難度卡片「征服者／普通」的本機 Ebitengine A（21／25px）與 B（25／29px）逐欄可逆預覽；原文控制及兩版中文逐像素檢查均通過，錯版／錯鍵／缺字／溢出／底圖變造等負例拒絕。另以 dosgolem 正常滑鼠重播證實只遮上欄、只遮下欄、跨欄及移開三種相位，各雙次冷啟動與無監看控制一致。這是可丟棄版面與 DRAFT 守門候選，**不是**第三卡正式中文：A／B 尚待使用者選定，規格016仍 DRAFT、正式十七段不變。第一張國家旗卡 A（「英格蘭：」21px／「移民」25px）早已由目標099正式驗收，本輪再次回答不重做，也不替 Game Options 定字級。
