@@ -2,6 +2,11 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+進行中入口：[目標107](docs/goals/107-post-caption-input-and-help-entry.md)：
+追查 `@BUILD1` 字幕後正常玩家按鍵是否被消費，以及首則 help
+何時真正顯示；尚無新顯示證據，不改十七段正式中文數或
+規格026的 DRAFT 狀態。
+
 最近工作入口：[目標106](docs/goals/106-build-opening-caption-overlay-gate.md)
 已用英格蘭正常玩家路徑補 `GAME.TXT:@BUILD1` 的原版印前
 底圖、9px原文墨跡、四倍安全矩形及兩個可丟棄繁中樣本；
