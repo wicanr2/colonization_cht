@@ -2125,3 +2125,46 @@
   的 `gh` 分別更新並回讀 Issue #7、#26、#27，三者仍 OPEN。
   遠端留言只記目標106的 DRAFT 證據與待選版式，未聲稱
   正式字幕或 help 已完成。
+
+## 2026-09-24：目標107字幕後按鍵與海上畫面
+
+- 上一個回合僅核對已完成的第一張旗卡 A 版，沒有
+  新中文化進展；本輪依工作樹與遠端現況，先以
+  `7858358` 推送[目標107](docs/goals/107-post-caption-input-and-help-entry.md)。
+  讀取 `reverse-engineer-retro-game-remake` 的證據、
+  規格與驗證方法，以及 dosgolem 能力、README、
+  文件職責和唯一工作清單路由；本案仍是原版輸出
+  階段中文覆蓋，不改寫遊戲規則。
+- `tools/probe_goal098_intro.go` 新增選用
+  `-post-caption-audit`：追鍵盤待取數，允許有界延伸，
+  500M後每25M取原版畫面檢查點。不帶旗標的
+  英格蘭100M JSON與目標105逐位元組相同。
+  85M及100M送 Enter都被原版取走；無額外鍵自動
+  走完十張 `@BUILD` 字幕，約1,185M進入海上
+  遊戲介面。`@BUILD2`含原版變數，不能直接重用
+  `@BUILD1`字幕來源鍵或38／42px候選。
+- 1,350M原版雙冷啟動、無讀寫監看控制與100M
+  額外鍵250M雙重播／控制一致；
+  `tools/check_goal107_post_caption.py`核對全部
+  raw indexed／canvas／palette、印字、標記、開檔、
+  CPU／RAM與鍵盤收據 PASS。驗證器最初把
+  空的 `follow_enter_at` 當成缺欄、另把
+  `@BUILD1`讀入步數誤記為下一標記；查原始
+  報告修正後以同容器同命令重跑 PASS，沒有
+  修改原版或取巧放寬比較。負例含缺原版 SKIP、
+  錯版、500M／1,200M索引破損、前後字幕
+  印字破損、控制 RAM及鍵盤待取變異，均 PASS。
+- 以 `rich2-py:latest` 在 Docker 內把四個原版
+  索引檢查點轉成只留 `workplace/` 的本機 PNG；
+  1,200M船／海面與1,225M上方選單已目視，
+  沒有首則教學框。這是原版診斷，不是 Ebitengine
+  正式中文截圖。規格026維持 DRAFT，十七段
+  已驗中文畫面數不增加；下一窄任務是從正常
+  海上畫面查證教學觸發或設定。
+- 本機完整收據 SHA-256
+  `e120301bb08f05b5a3461cd6fba5334ed25588a5896fa442f50bfd16d647ec58`。
+  原版資料、畫素及字型未加入 Git。新輸出與文件
+  UID/GID皆1000:1000；工作根沒有 root-owned
+  殘留或誤建 `.md` 目錄，兩個本輪映像沒有
+  執行中／已停止容器殘留；隔離 dosgolem
+  `upstream`推送位址仍為`DISABLED`。

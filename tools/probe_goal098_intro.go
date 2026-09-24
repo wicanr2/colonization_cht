@@ -66,9 +66,10 @@ func main() {
 	nation := flag.String("nation", "france", "目標101：england/france/spain/netherlands，實際點選四張旗卡")
 	afterB := flag.String("after-b", "none", "目標101：B頁後 none/wait/enter/esc")
 	afterFollow := flag.String("after-follow", "none", "目標105：85M後續頁後 none/wait/enter/esc")
-	followUntil := flag.Uint64("follow-until", 100000000, "目標105：後續觀測終點，100M–150M且以5M為單位")
+	followUntil := flag.Uint64("follow-until", 100000000, "後續觀測終點；一般上限150M，字幕後稽核上限1500M")
 	followEnterAt := flag.String("follow-enter-at", "", "目標105：額外 Enter 的百萬步數，以逗號分隔，例如100,115")
 	preprint := flag.Bool("preprint", false, "在 A/B 與啟用後續頁時的首筆 0D21:012C 寫入前擷取原始畫布")
+	postCaptionAudit := flag.Bool("post-caption-audit", false, "目標107：選用鍵盤待取數診斷與有界字幕後觀測")
 	flag.Parse()
 	if *inputs == "" || *out == "" {
 		panic("缺必要參數")
@@ -88,8 +89,19 @@ func main() {
 	if *afterFollow == "none" && (*followUntil != 100000000 || *followEnterAt != "") {
 		panic("延伸觀測必須先啟用後續頁輸入")
 	}
-	if *afterFollow != "none" && (*followUntil < 100000000 || *followUntil > 150000000 || *followUntil%5000000 != 0) {
+	if *postCaptionAudit && (*afterFollow != "enter" && *afterFollow != "esc" ||
+		!*nextEnter || *preprint) {
+		panic("字幕後稽核需正常 B 頁後路徑，且不與印前擷取混用")
+	}
+	maxFollow := uint64(150000000)
+	if *postCaptionAudit {
+		maxFollow = 1500000000
+	}
+	if *afterFollow != "none" && (*followUntil < 100000000 || *followUntil > maxFollow || *followUntil%5000000 != 0) {
 		panic("後續觀測終點超出限定範圍")
+	}
+	if *postCaptionAudit && *followUntil > 500000000 && *followUntil%25000000 != 0 {
+		panic("500M 後只在25M檢查點停止")
 	}
 	extraEnters := map[uint64]bool{}
 	if *followEnterAt != "" {
@@ -97,8 +109,12 @@ func main() {
 		for _, token := range strings.Split(*followEnterAt, ",") {
 			million, err := strconv.ParseUint(token, 10, 64)
 			mustIntro(err)
+			if million > maxFollow/1000000 {
+				panic("額外 Enter 步數超出限定範圍")
+			}
 			step := million * 1000000
-			if step < 100000000 || step >= *followUntil || step%5000000 != 0 || step <= previous {
+			if step < 100000000 || step >= *followUntil || step%5000000 != 0 ||
+				(*postCaptionAudit && step > 500000000 && step%25000000 != 0) || step <= previous {
 				panic("額外 Enter 步數不是遞增的有效檢查點")
 			}
 			extraEnters[step] = true
@@ -166,6 +182,19 @@ func main() {
 			introSource{"GAME.TXT", 0x153b0, "@BUILD1"},
 			introSource{"GAME.TXT", 0x153ce, caption[:boundary]},
 			introSource{"GAME.TXT", 0x15400, caption[boundary:]})
+		if *postCaptionAudit {
+			// 目標107只記固定原版標記的 DOS 預讀；是否印字仍由讀字事件判定。
+			for _, marker := range []struct {
+				offset int64
+				text   string
+			}{{0x1540f, "@BUILD2"}, {0x15466, "@BUILD3"},
+				{0x154af, "@BUILD4"}, {0x15506, "@BUILD5"},
+				{0x15541, "@BUILD6"}, {0x1557b, "@BUILD7"},
+				{0x155d9, "@BUILD8"}, {0x15623, "@BUILD9"},
+				{0x15678, "@BUILD10"}} {
+				sources = append(sources, introSource{"GAME.TXT", marker.offset, marker.text})
+			}
+		}
 	}
 	for _, source := range sources {
 		end := source.Offset + int64(len(source.Bytes))
@@ -304,11 +333,21 @@ func main() {
 			}
 		}
 	}
+	keyEvents := []map[string]any{}
+	lastKeyPending := -1
 	advance := func(end uint64) {
 		for m.Steps < end && !d.Exited && !m.CPU.Halted {
 			mustIntro(m.Step())
 			if transferIndex < len(d.Reads) {
 				collectTransfers()
+			}
+			if *postCaptionAudit && m.Steps >= 85000000 && m.Steps%1024 == 0 {
+				pending := d.KeysPending()
+				if pending != lastKeyPending {
+					keyEvents = append(keyEvents, map[string]any{"event": "observed", "step": m.Steps,
+						"pending": pending, "segments": m.CPU.Seg, "ip": m.CPU.IP})
+					lastKeyPending = pending
+				}
 			}
 		}
 		if m.Steps != end {
@@ -381,12 +420,16 @@ func main() {
 				cursor++
 			}
 		}
-		samples[label] = map[string]any{"step": m.Steps, "cycles": m.CPU.Cycles,
+		entry := map[string]any{"step": m.Steps, "cycles": m.CPU.Cycles,
 			"ticks": m.Ticks, "registers": m.CPU.R, "segments": m.CPU.Seg,
 			"ip": m.CPU.IP, "flags": m.CPU.Flags, "memory_sha256": hashIntro(m.Mem),
 			"indexed_sha256": hashIntro(indexed), "canvas_sha256": hashIntro(picture),
 			"palette_sha256": hashIntro(palette), "opened_count": len(d.Opened),
 			"resident_hits": hits}
+		if *postCaptionAudit {
+			entry["key_pending"] = d.KeysPending()
+		}
+		samples[label] = entry
 	}
 	advance(55000000)
 	sample("55m")
@@ -417,14 +460,31 @@ func main() {
 			if *afterFollow != "none" {
 				if *afterFollow == "enter" {
 					d.PushKey(golem.Key{Scan: 0x1c, ASCII: 13})
+					if *postCaptionAudit {
+						keyEvents = append(keyEvents, map[string]any{"event": "enqueue-enter", "step": m.Steps, "pending": d.KeysPending()})
+						lastKeyPending = d.KeysPending()
+					}
 				} else if *afterFollow == "esc" {
 					d.PushKey(golem.Key{Scan: 0x01, ASCII: 27})
+					if *postCaptionAudit {
+						keyEvents = append(keyEvents, map[string]any{"event": "enqueue-esc", "step": m.Steps, "pending": d.KeysPending()})
+						lastKeyPending = d.KeysPending()
+					}
 				}
-				for step := uint64(90000000); step <= *followUntil; step += 5000000 {
+				for step := uint64(90000000); step <= *followUntil; {
 					advance(step)
 					sample(fmt.Sprintf("%dm", step/1000000))
 					if extraEnters[step] {
 						d.PushKey(golem.Key{Scan: 0x1c, ASCII: 13})
+						if *postCaptionAudit {
+							keyEvents = append(keyEvents, map[string]any{"event": "enqueue-enter", "step": m.Steps, "pending": d.KeysPending()})
+							lastKeyPending = d.KeysPending()
+						}
+					}
+					if *postCaptionAudit && step >= 500000000 {
+						step += 25000000
+					} else {
+						step += 5000000
 					}
 				}
 			}
@@ -442,6 +502,9 @@ func main() {
 		if *preprint {
 			version = "goal106-build-preprint-v1"
 		}
+		if *postCaptionAudit {
+			version = "goal107-post-caption-audit-v1"
+		}
 	}
 	report := map[string]any{"version": version, "control": *control,
 		"next_enter": *nextEnter,
@@ -454,6 +517,9 @@ func main() {
 		"address_space": "original file offset; DOS real-mode CS:IP; 20-bit linear RAM; 320x200 indexed canvas"}
 	if *afterFollow != "none" {
 		report["after_follow"] = *afterFollow
+		if *postCaptionAudit {
+			report["key_events"] = keyEvents
+		}
 		if *followUntil != 100000000 || *followEnterAt != "" {
 			report["follow_until"] = *followUntil
 			report["follow_enter_at"] = *followEnterAt
