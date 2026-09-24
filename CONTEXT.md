@@ -2,6 +2,12 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+進行中入口：[目標111](docs/goals/111-tutorial-hints-state-and-first-help.md)：
+以目標110已驗的原版 `Game Options`／`Tutorial Hints`
+畫面，查核核取圖示語意，正常離開選項後追首則
+`@TUTORIAL1` 的玩家可見觸發。這是證據探勘，
+不是 help 已正式顯示或新增中文覆蓋；規格026仍 DRAFT。
+
 最近完成入口：[目標110](docs/goals/110-tutorial-hints-player-trigger.md)：
 從已驗海上玩家畫面，以原版滑鼠實際打開頂端 `GAME` →
 `Game Options` 並點最後一列 `Tutorial Hints`；核取圖示與
