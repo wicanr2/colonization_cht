@@ -1826,3 +1826,52 @@
   UID/GID `1000:1000`；工作根未見 root-owned 或誤建
   `.md` 目錄，專案 Docker 容器無殘留。下一輪依使用者 A
   決定另建[目標099](docs/goals/099-first-nation-card-a-overlay.md)。
+
+## 2026-09-24：目標099第一張旗卡 A 版正式顯示
+
+- 依使用者明確決定採 A：「英格蘭：」21px、「移民」25px；排除
+  B 的25／29px，不外推到相鄰右卡。目標099已先以 `e10dbf0`
+  推送 PRIVATE `origin/main`，再作實作。知識路由命中復古中文化
+  逆向／規格閘門與 README 標準，保留 RE→READY→CONFORMED
+  及 README／CONTEXT／WORKLOG 分工。
+- `tools/probe_goal099_card_leave.go` 從正常玩家路徑確認第一張卡
+  直接完成區離頁，雙重播與無觀測控制同狀態；先前規格021
+  已據此與目標089升限定 READY。固定 Cubic 11 原始 TTF
+  在已檢查位置未找到；`tools/prepare_goal099_card_masks.py`
+  從原先已驗 A 原型抽出兩個本機同源字模，核對真 TSV／原版
+  bytes／字級／尺寸／墨跡 SHA，沒有換用其他字型或提交字模。
+- `tools/live_menu.go` 增加預設關閉的 `--nation-card-a` 旗標，
+  只對第一張旗卡兩欄從唯一片段 TSV 建鍵；來源讀取、格式化
+  原文、原版123／156點印字、安全矩形、色盤、當幀補片及
+  游標逐欄守門。正式紅字索引12、黑影索引0；任何失效逐欄
+  回原文。組裝器固定來源 SHA 同步更新。
+- 真 Ebitengine 視窗從冷啟動經滑鼠抵達第一張旗卡，16筆
+  輸入重播中文、英文控制與舊十五欄，原版 CPU、完整 RAM、
+  索引、色盤、時間與開檔一致；新差異只在兩欄安全矩形，
+  各1,915／2,738個輸出像素，舊十五欄逐幀套用狀態不變。
+  真視窗截圖與最後合成逐像素相同。固定43M步的缺上欄
+  譯文／字模、下欄重複鍵／錯字級四例逐欄回退且另一欄
+  逐像素不變；上／下游標、移開、下欄按住、切右卡與直接
+  離頁六例 PASS。切右卡與離頁後整張 PNG／索引／色盤
+  均與未開啟新覆蓋的同輸入舊版相同；錯版原版啟動前
+  exit 2。當前原始碼與更新 TSV 重建後再跑43M步，原版
+  狀態與整張 PNG 和驗收版完全相同。
+- Ebitengine `go build` 成功；`go test .` 第一次因容器沒有
+  DISPLAY 而失敗，分類為測試環境，補上有界 Xvfb 後同一
+  容器／同一命令乾淨重跑 PASS。`tools/worklist.py write`／
+  `verify` 通過。[規格021](docs/spec/021-nation-card-red-text-draft.md)
+  僅第一張旗卡限定 CONFORMED；本機正式顯示十五增十七段。
+  私有[第三張截圖](docs/screenshots/nation-card-first-zh.png)
+  已在真視窗同狀態與逐像素驗證後更新 README；不代表公開
+  發行許可或整頁／全遊戲已中文化。
+- 程式、規格、唯一工作清單、CONTEXT、RESEARCH-LOG 與
+  截圖以 `04e9c91` 推送至再次核對為 PRIVATE 的
+  `origin/main`。主機真正 `gh` 驗證登入後更新並回讀
+  Issue #7／#12／#26／#27，四者均 OPEN。Git 身分與最近
+  commit 作者均為 `wicanr2@gmail.com`；原版 EXE／TXT、
+  原始 TTF、字模及 `workplace/` 未追蹤。隔離 dosgolem 的
+  `upstream` 推送位址仍是 `DISABLED`。所有本輪輸出是
+  UID/GID `1000:1000`，工作根未發現 root-owned 或
+  誤建 `.md` 目錄，專案相關執行中／停止 Docker 容器無殘留。
+  相鄰右卡字級仍待使用者決定；介紹長文、help、靜態字圖
+  與發行仍未完成。
