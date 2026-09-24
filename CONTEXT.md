@@ -2,6 +2,8 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+進行中：[目標117](docs/goals/117-game-options-same-focus-checkmarks.md)將以正常玩家路徑補第4／7列點擊後回第1列的同焦點對照，核取圖示與焦點分開量測。使用者再次確認第一張國家旗卡 A（21／25px）只重述已完成的目標099，不重複改動。規格027仍 DRAFT，選項九欄仍英文，正式中文仍十七段。
+
 最近完成入口：[目標116](docs/goals/116-game-options-selection-and-exit-phases.md)：
 沿已驗正常滑鼠開啟 `Game Options` 路徑，第一／末列純移鼠
 只改游標合成畫面160點，底層畫布不變；兩者移到同一框外
