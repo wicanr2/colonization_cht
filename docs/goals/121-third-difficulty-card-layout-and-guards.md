@@ -1,6 +1,6 @@
 # 目標121：第三張難度卡片的可逆 Ebitengine 排版與滑鼠守門
 
-狀態：in_progress；日期：2026-09-24。承接[目標120](120-third-difficulty-card-output-evidence.md)與
+狀態：completed（僅可丟棄版面及固定滑鼠守門證據）；日期：2026-09-24。承接[目標120](120-third-difficulty-card-output-evidence.md)與
 [規格016](../spec/016-difficulty-card-text-draft.md)，對應既有
 [Issue #6](https://github.com/wicanr2/colonization_cht/issues/6)、
 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)及
@@ -51,3 +51,32 @@
 只有欄位版式經確認、事件與逐欄回退規格審查成 READY 後，才可
 另輪接入正式 Ebitengine 輸出並依同狀態驗收升 CONFORMED。
 Game Options 的 A／B 字級是另一個待決問題，本輪不代答。
+
+## 驗收結果與下一閘門
+
+- 固定 `NAMES.TXT:0xC22`／`LABELS.TXT:0x8B8` 真譯稿、目標120雙次原版收據、
+  原版色盤及 SHA-256 `8de9c249…` 的 Cubic 11 字型。兩欄分別採半開安全矩形
+  `(29,139)–(84,148)`／`(38,148)–(76,157)`，各自行印前背景為115／82種
+  色盤索引；這是為中文字模內距擴展的可逆候選，訂正目標120較窄的初探矩形，
+  不改目標120原版墨跡結論。
+- 在四倍 Ebitengine 畫布，A 的「征服者／普通」分別為21px、69×19px、
+  `(192,564)`與25px、54×23px、`(201,596)`；B 分別為25px、81×23px、
+  `(186,564)`與29px、62×27px、`(197,596)`。兩版均逐欄居中、單行，
+  不裁切或自動換行，溢出即保留原文；完整四邊內距見[規格016](../spec/016-difficulty-card-text-draft.md)。
+  21／25px 與前兩張卡片數字相同只是本欄原版5／6像素及固定字型量測的結果，
+  **不是**全域字級規則。
+- 原文控制 PNG 精確等於 dosgolem 索引畫面四倍最近鄰；A／B 的中文變動
+  只在各自安全矩形，透明字模處恢復不同的原版紋理。`tools/verify_card_preview.py`
+  兩版均 PASS；`tools/test_goal121_card_preview.py` 正例與錯原版、來源鍵、
+  字型、色盤、缺字、溢出、變造底圖及缺原版負例通過。原版畫素與字型、
+  PNG／完整 JSON 均只留 `workplace/reports/goal121-third-card/`。
+- 另以原版正常滑鼠前綴實際點第三張卡：`(55,132)` 在按下前／按住／放開後
+  只遮上行48／48／42點，下行0；`(55,151)` 只遮下行26／26／23點，
+  上行0；`(55,135)` 可跨兩行。三支各雙次冷啟動與無監看控制相同，
+  滑鼠移到 `(16,16)` 後兩行遮擋皆0且底層第三卡不變。
+  `tools/check_goal121_card_guards.py --self-test` 通過。
+- 這只支援「穩定幀逐欄比較原版索引／底層畫布，若有游標遮擋則該欄回退」的
+  **DRAFT 候選**。印字過程存在畫面更新相位，不能把中途快照視為安全幀；
+  尚缺正式來源事件／背景守門、真 TSV 執行期失敗回退、第三卡版式使用者選擇，
+  及真視窗同狀態驗收。故不改 `tools/live_menu.go`、正式截圖或十七段計數。
+  下一輪可先請使用者從本機 A／B 同狀態對照選定第三卡字級，再以限定 READY 規格接正式顯示。
