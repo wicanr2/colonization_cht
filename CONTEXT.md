@@ -2,6 +2,9 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前執行入口：[目標100](docs/goals/100-all-nation-introduction-bilingual-corpus.md)：
+在不改正式顯示與玩家流程下，盤點並補齊四國介紹八節的來源固定
+繁中草稿；畫面驗收仍依規格025另行進行，Issue #27／#30 開放。
 最近完成入口：[目標099](docs/goals/099-first-nation-card-a-overlay.md)：
 使用者選定第一張國家旗卡 A 版，「英格蘭：」21px／「移民」25px
 已依[規格021](docs/spec/021-nation-card-red-text-draft.md)限定 CONFORMED
