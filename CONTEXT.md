@@ -2,7 +2,7 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-目前工作：[目標124](docs/goals/124-gameplay-keyboard-window-route.md)延伸真 Ebitengine 視窗的 Esc／四方向鍵輸入，先審查規格024擴充，再以原版正常玩家路徑與同輸入中英文控制驗證。這只是前端按鍵轉送，不替遊戲定義按鍵效果，也不增加正式中文段數；尚未通過前維持現況。
+目前真相：[目標124](docs/goals/124-gameplay-keyboard-window-route.md)已把真 Ebitengine 視窗的 Esc／四方向鍵接到 dosgolem 具名 BIOS 鍵佇列。英格蘭海上左移與 `Game Options` Esc 離頁經玩家真鍵盤、英文同輸入控制、完整原版狀態、少一鍵反向對照及失焦負例驗收；[規格024](docs/spec/024-window-keyboard-input.md)僅此輸入通道限定 CONFORMED。右／上／下在遊戲中的效果、首則 help 與新中文覆蓋未驗；正式中文仍十七段，help 正式顯示仍零則。
 
 最近完成：[目標123](docs/goals/123-retire-confirmation-and-help-route.md)已用原版滑鼠分別點 `GAME → Retire` 的 Yes／No：No 返回海上畫面；Yes 進入分數頁，再按 Enter 到名人堂、再按 Enter 使原版正常離開 DOS，不在同一次執行內回到新局。四分支雙次冷啟動、無監看控制及獨立正反例通過。這不證其他路徑沒有 help；[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)仍 DRAFT、help 正式畫面零則。第一張國家旗卡 A（21／25px）已在目標099正式驗收，本次再次選 A 不重做。
 

@@ -97,3 +97,19 @@ stderr 與本機收據記錄拒絕，後者重新聚焦後沒有補送；事前�
 CPU、完整 RAM、原版索引、色盤及開檔與先前英文控制逐項相同。
 收據中的原版圖、RAM 與字型不入 Git。這只證明已列輸入及拒絕
 邊界；其他字元是否被各遊戲欄位接受、輸入法及姓名存檔仍未知。
+
+## 2026-09-24：海上與選項頁具名控制鍵擴充（限定 CONFORMED）
+
+此段只擴充前端鍵盤**轉送**，不改上節已限定 CONFORMED 的姓名輸入，不宣稱遊戲對所有方向鍵均會移動。合法 DOS `OPENING.EXE`／`VICEROY.EXE` 及正常玩家前綴 SHA-256 同上；`GAME.TXT` `67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a`、`MENU.TXT` `5a7d2f4bf9f657b68177fb9b38e74ac92a1f191732bbc122c28563a41d7a3702`。隔離 dosgolem 固定 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`，其 `internal/dos/scancode.go` 已有 `Escape`、`Left`、`Right`、`Up`、`Down` 的具名 BIOS 字組；Ebitengine v2.9.9 的 `KeyEscape`／`KeyArrowLeft`／`KeyArrowRight`／`KeyArrowUp`／`KeyArrowDown` 與 `inpututil.IsKeyJustPressed` 已由鎖版模組原始碼核對。這些是平台／適配器鍵名，非本遊戲地址。
+
+**已證實的玩家路徑：**[目標110](../goals/110-tutorial-hints-player-trigger.md)原版海上左鍵被取走並改變畫面；[目標111](../goals/111-tutorial-hints-state-and-first-help.md)在 `Game Options` 按 Esc 後回海上，左鍵與 Space 待取數各由1降至0；[目標123](../goals/123-retire-confirmation-and-help-route.md)證實 Retire 是結束路徑，不能替代正常遊戲操作。**未知：**右／上／下在各畫面有何玩家效果、Esc 在其他畫面是否關閉、Space 是否真正結束回合，以及 help 觸發。四倍視窗座標、原版320×200畫素、DOS 線性 RAM／實模式位址與按鍵掃描碼不得混用。
+
+型別契約：新收據 `windowInput.kind` 僅增加 `escape`、`left`、`right`、`up`、`down`；每筆 `Text` 空、`X=Y=Button=0`，沿用單調步數檢查。Ebitengine 在視窗有焦點時僅對**按下邊緣**送一筆，由 `DOS.PushKeyNamed` 排入原版鍵盤；無焦點時不排入、不補送。方向鍵及 Esc 不經 `AppendInputChars`。空格仍只走既有一字元 `text`，不可另增具名 Space 造成雙送。現有 `text`／`backspace`／`enter`、滑鼠收據及英文控制保持相容；無效事件、未知鍵及 dosgolem 拒絕一律失敗即關閉，絕不猜掃描碼或改原版 RAM。
+
+驗收契約：先做單元測試，逐筆核對五鍵的 BIOS 字組、非法欄位／未知事件拒絕、既有文字與空格只一筆、舊 Enter 收據可重播；再用真 Ebitengine／Xvfb 冷啟動由玩家滑鼠及 Enter 到英格蘭海上介面，實際按左鍵並看原版畫面／鍵盤消費，另到 `Game Options` 真按 Esc。保存真視窗輸入後以同一收據重播中文與英文控制，原版 CPU、完整 RAM、索引／畫布／色盤、虛擬時間、開檔及終點必一致；舊姓名真視窗驗收不能退步。若僅單元或無頭重播通過，此段維持 READY，不升 CONFORMED；新鍵轉送不增加任何正式中文顯示數。
+
+### 限定 CONFORMED 收據
+
+`tools/window_prototype.go` 新增五種具名鍵事件與焦點內的按下邊緣轉送，並維持 Space 原有單字元路徑。真 Ebitengine／Xvfb 視窗由玩家滑鼠與 Enter 冷啟動抵達英格蘭海上；在1,225,400,000步實按 Left，船隻於真視窗移到左方；打開 `GAME → Game Options` 後於1,290,400,000步實按 Escape，真視窗回到海上。原版輸入收據 SHA-256 `dfc4d5cb870efd45c173f7b2eb8fede711bb2951d2204053af92701a8dde5c98`，來源檔 SHA-256 `2e6d4238d4ed0a49797e6750c2ca5135345c2120a17bbd93aafce01f992ee1eb`，終點原版索引 SHA-256 `95e4fb3efcd7cf0391f46767711274096221d305da97885ed7a1d2f1e06d61c0`。同收據英文控制的原版 CPU、完整 RAM、索引、色盤、開檔及虛擬時間均相同。
+
+只刪除 Left／Escape 的兩個本機反向重播，其終點原版索引各與真視窗不同；失焦真視窗 Left 不入收據、不在重聚焦時補送，英文控制的完整原版狀態相同。先前已驗姓名真視窗收據由新前端重播，與舊英文控制的原版狀態、完整 RAM、索引、色盤及開檔一致。`tools/check_goal124_keyboard.py` 正例、`tools/test_goal124_keyboard.py` 缺原版 `SKIP 77` 與八類篡改負例，以及 Go／Ebitengine 單元測試均通過。本節只把**具名鍵轉送與已驗 Left／Escape 正常玩家路徑**升為限定 CONFORMED；右／上／下在本遊戲的效果、其他畫面的 Escape、help 觸發及新增中文顯示仍未知。所有原版收據與畫面僅存已忽略 `workplace/reports/goal124-keyboard/`。

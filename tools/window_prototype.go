@@ -77,7 +77,7 @@ func validWindowInput(e windowInput) bool {
 		return e.Text == "" && e.X == 0 && e.Y == 0 && e.Button >= 0 && e.Button <= 2
 	case "text":
 		return supportedDOSChar(e.Text) && e.X == 0 && e.Y == 0 && e.Button == 0
-	case "backspace", "enter":
+	case "backspace", "enter", "escape", "left", "right", "up", "down":
 		return e.Text == "" && e.X == 0 && e.Y == 0 && e.Button == 0
 	default:
 		return false
@@ -102,11 +102,40 @@ func applyWindowInput(d *golem.DOS, e windowInput) {
 		if !d.PushKeyNamed("Backspace") {
 			panic("dosgolem 缺少 Backspace 鍵")
 		}
+	case "escape", "left", "right", "up", "down":
+		name := map[string]string{
+			"escape": "Escape", "left": "Left", "right": "Right",
+			"up": "Up", "down": "Down",
+		}[e.Kind]
+		if !d.PushKeyNamed(name) {
+			panic("dosgolem 缺少 " + name + " 鍵")
+		}
 	case "text":
 		if !d.PushText(e.Text) {
 			panic("dosgolem 拒絕已審核字元")
 		}
 	}
+}
+
+var specialWindowKeys = [...]struct {
+	key  ebiten.Key
+	kind string
+}{
+	{ebiten.KeyBackspace, "backspace"}, {ebiten.KeyEnter, "enter"},
+	{ebiten.KeyEscape, "escape"},
+	{ebiten.KeyArrowLeft, "left"}, {ebiten.KeyArrowRight, "right"},
+	{ebiten.KeyArrowUp, "up"}, {ebiten.KeyArrowDown, "down"},
+}
+
+// 每次 Update 只取按下邊緣；空格仍由 AppendInputChars 轉送一次。
+func specialWindowInputs(justPressed func(ebiten.Key) bool) []windowInput {
+	var events []windowInput
+	for _, key := range specialWindowKeys {
+		if justPressed(key.key) {
+			events = append(events, windowInput{Kind: key.kind})
+		}
+	}
+	return events
 }
 func (g *windowGame) emit(e windowInput) {
 	e.Step = g.m.Steps
@@ -129,6 +158,7 @@ func (g *windowGame) Update() error {
 	x, y, inside := logicalMouse(ebiten.CursorPosition())
 	focused := ebiten.IsFocused()
 	chars := ebiten.AppendInputChars(nil)
+	specials := specialWindowInputs(inpututil.IsKeyJustPressed)
 	if !focused || !inside {
 		g.release()
 	} else {
@@ -158,11 +188,8 @@ func (g *windowGame) Update() error {
 			}
 			g.emit(windowInput{Kind: "text", Text: s})
 		}
-		if inpututil.IsKeyJustPressed(ebiten.KeyBackspace) {
-			g.emit(windowInput{Kind: "backspace"})
-		}
-		if inpututil.IsKeyJustPressed(ebiten.KeyEnter) {
-			g.emit(windowInput{Kind: "enter"})
+		for _, event := range specials {
+			g.emit(event)
 		}
 	}
 	end := g.m.Steps + 200000

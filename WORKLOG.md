@@ -2408,3 +2408,10 @@
 - 正常滑鼠 Yes／No 原版分支各雙次冷啟動及無監看控制：No 回海上畫面；Yes 到分數頁，Enter 到名人堂，再按 Enter 正常結束 DOS。初版探針因預設期待1,500M仍執行，把正常結束報為「提前停止」；增設預設關閉的 `-allow-early-exit` 記錄實際終止步數和畫面。關旗標重播目標111歷史 JSON 逐 byte 不變。此為探針分類修正，不是遊戲或中文前端缺陷。
 - `tools/check_goal123_retire_route.py` 核對四分支原版檔案／輸入／雙重播／無監看控制與所有實際索引、畫布、色盤檔；`tools/test_goal123_retire_route.py` 正例、缺原版 SKIP 及錯版／錯事件／壞畫面／假終止等九類負例通過。Go 格式與編譯、Python AST、唯一工作清單重生與驗證、Git diff 檢查亦於本輪收尾核對。正式中文仍十七段，help 零則，規格026 DRAFT；新局／教學觸發要另尋正常玩家路徑，不以 Retire 假定返回新局。
 - 原版與完整畫面收據只在合法唯讀來源及已忽略 `workplace/`；收據與 `WORKLIST.md` 擁有者均 UID/GID 1000:1000，`workplace/` 無 root-owned 或誤建 `.md` 目錄，研究映像無本專案殘留容器，隔離 dosgolem `upstream` 推送位址 `DISABLED`。實質成果 `fd3db4b` 已推送 PRIVATE `origin/main`；主機已登入 `gh` 留言並回讀 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7#issuecomment-5816432759) 與 [Issue #27](https://github.com/wicanr2/colonization_cht/issues/27#issuecomment-5816433499)，兩者仍 OPEN。本條遠端交接紀錄另以文件提交推送。
+
+## 2026-09-24：目標124真視窗 Left／Esc 輸入路徑
+
+- 使用者選定第一張國家旗卡 A（「英格蘭：」21px、「移民」25px）；目標099早已實作驗收，故未重改。復古遊戲路由命中規格閘門、dosgolem 原版對拍及文件職責，先把[目標124](docs/goals/124-gameplay-keyboard-window-route.md)以 `3018096` 推送 PRIVATE `origin/main`，再實作前端五種具名鍵轉送。未修改原版或共用 dosgolem。
+- 固定 Ebitengine v2.9.9／隔離 dosgolem，在規格024獨立 READY 擴充後接線：Esc、Left、Right、Up、Down 僅在聚焦按下邊緣送入 BIOS 佇列，Space 保留單字元路徑。Go 單元測試核對 BIOS 字組、非法事件及焦點／重複鍵，`go test -p 1 ./...` 與 `go build -p 1` 在有界 Xvfb／Docker 通過。首次沒設 `DISPLAY` 的 GLFW 初始化失敗是環境問題，修正後同一工具鏈乾淨重跑；最早真視窗探針等待預算不足在約887M步停下，增大有界等待後重新冷啟動完成，不把它算遊戲失敗。
+- 真 Ebitengine 視窗與英格蘭 DOS 原版，冷啟動穿過滑鼠選單／介紹及字幕，實按海上 Left、實開 `GAME → Game Options` 再按 Esc。中文／英文控制之 CPU、完整 RAM、原版索引／色盤、時間和開檔相同；兩個只少一鍵的本機反向重播各改變終點原版畫面。失焦 Left 真視窗沒有延遲補送；目標095真姓名輸入舊收據以新前端重播，原版實檔逐 byte 與舊英文控制一致。`tools/check_goal124_keyboard.py` PASS，`tools/test_goal124_keyboard.py` 缺原版 `SKIP 77` 與八類負例 PASS。規格024只把已驗輸入通道升為限定 CONFORMED，正式中文十七段、help 零則；第三難度卡和 Game Options 字級待各自決定。
+- 原版截圖、RAM、輸入及字模僅保留已忽略 `workplace/`。本輪的專案檔案、工作清單、Docker 清理及 Issue 遠端狀態於收尾核對；本段不以 GUI 輸入完成冒稱全文中文化或完整可玩。

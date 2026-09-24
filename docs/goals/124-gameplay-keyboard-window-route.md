@@ -1,6 +1,6 @@
 # 目標124：真視窗方向鍵與離頁鍵的正常玩家路徑
 
-狀態：in_progress；日期：2026-09-24。承接[規格024](../spec/024-window-keyboard-input.md)已限定驗收的姓名輸入、[目標110](110-tutorial-hints-player-trigger.md)／[目標111](111-tutorial-hints-state-and-first-help.md)的原版海上左方向鍵、Esc 與 Space 消費證據，以及[目標123](123-retire-confirmation-and-help-route.md)對 help 尚未正式顯示的停止線。對應既有 [Issue #14](https://github.com/wicanr2/colonization_cht/issues/14) 與 [Issue #29](https://github.com/wicanr2/colonization_cht/issues/29)；不建立同義 Issue。
+狀態：完成（限此輪輸入通道驗收）；日期：2026-09-24。承接[規格024](../spec/024-window-keyboard-input.md)已限定驗收的姓名輸入、[目標110](110-tutorial-hints-player-trigger.md)／[目標111](111-tutorial-hints-state-and-first-help.md)的原版海上左方向鍵、Esc 與 Space 消費證據，以及[目標123](123-retire-confirmation-and-help-route.md)對 help 尚未正式顯示的停止線。對應既有 [Issue #14](https://github.com/wicanr2/colonization_cht/issues/14) 與 [Issue #29](https://github.com/wicanr2/colonization_cht/issues/29)；不建立同義 Issue。
 
 ## 玩家問題與證據邊界
 
@@ -17,3 +17,10 @@
 ## 停止線
 
 這輪只擴展**玩家輸入通道**，不宣稱四方向在殖民地或所有選單都有相同效果，不增加正式中文段數，不把 `@TUTORIAL1` 預讀提升為顯示。若真視窗只能抵達已驗早期頁面，仍須保留具體缺口；正常玩家 GUI 路徑不能由直接注入事件或無頭收據取代。第三難度卡、遊戲選項和字幕的 A／B 字級仍各自待使用者決定，與本目標無關。
+
+## 執行收據與結果
+
+- 目標文件先以 `3018096` 推送私有 `origin/main`，才修改前端。隔離 dosgolem `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`；視窗來源 SHA-256 `2e6d4238d4ed0a49797e6750c2ca5135345c2120a17bbd93aafce01f992ee1eb`。固定原版檔案 SHA 見規格024及驗證器；不符即拒絕。
+- 真 Ebitengine／Xvfb 視窗的玩家輸入 SHA-256 `dfc4d5cb870efd45c173f7b2eb8fede711bb2951d2204053af92701a8dde5c98`；五次 Enter 到英格蘭海上，於1,225,400,000步實按左鍵、於1,290,400,000步在 `Game Options` 實按 Esc。前後真視窗圖呈現船隻左移、選項視窗開啟及關閉。相同收據重播英文控制，原版 CPU、完整 RAM、原版索引與色盤、開檔與終點相同；終點索引 SHA-256 `95e4fb3efcd7cf0391f46767711274096221d305da97885ed7a1d2f1e06d61c0`。
+- 各自只拿掉左鍵／Esc 的本機反向收據，終點原版索引分別為 `52b9f726c7406a05ce924cda118ff64bb2d909e947a710e4ec972b2ab6a6d1df`／`8351344cd5e04e6600b115b2ddb8b8cae8c80350cad5973d922d65e12d4cf427`，均與真路徑不同。失焦真視窗左鍵沒有進收據或於聚焦後補送，與英文控制完整原版狀態相同。舊姓名真視窗收據由新前端重播，原版狀態、開檔、完整 RAM、索引及色盤均與舊控制完全相同。
+- `tools/check_goal124_keyboard.py` 正例 PASS；`tools/test_goal124_keyboard.py` 缺原版 `SKIP 77` 及八類錯版、篡改與失焦負例 PASS。Go 測試與建置於有界 Xvfb／Docker 通過；第一次沒有 `DISPLAY` 的 GLFW 初始化失敗只屬測試環境。原版截圖、記憶體與輸入收據留在已忽略的 `workplace/reports/goal124-keyboard/`，不加入 Git。新鍵僅此固定路徑限定 CONFORMED；右／上／下的遊戲效果、首則 help 及正式中文新增均未驗。

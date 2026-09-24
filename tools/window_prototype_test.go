@@ -2,8 +2,10 @@ package main
 
 import (
 	"encoding/json"
-	golem "github.com/wicanr2/dosgolem"
 	"testing"
+
+	"github.com/hajimehoshi/ebiten/v2"
+	golem "github.com/wicanr2/dosgolem"
 )
 
 func TestWindowCoordinates(t *testing.T) {
@@ -36,10 +38,12 @@ func TestWindowKeyboardQueue(t *testing.T) {
 	d := golem.NewDOS(m, t.TempDir())
 	defer d.Close()
 	for _, e := range []windowInput{{Kind: "text", Text: "x"}, {Kind: "text", Text: "A"},
-		{Kind: "text", Text: "7"}, {Kind: "text", Text: " "}, {Kind: "backspace"}, {Kind: "enter"}} {
+		{Kind: "text", Text: "7"}, {Kind: "text", Text: " "}, {Kind: "backspace"}, {Kind: "enter"},
+		{Kind: "escape"}, {Kind: "left"}, {Kind: "right"}, {Kind: "up"}, {Kind: "down"}} {
 		applyWindowInput(d, e)
 	}
-	want := []uint16{0x2d78, 0x1e41, 0x0837, 0x3920, 0x0e08, 0x1c0d}
+	want := []uint16{0x2d78, 0x1e41, 0x0837, 0x3920, 0x0e08, 0x1c0d,
+		0x011b, 0x4b00, 0x4d00, 0x4800, 0x5000}
 	if d.KeysPending() != len(want) {
 		t.Fatalf("佇列有 %d 鍵，要 %d", d.KeysPending(), len(want))
 	}
@@ -58,7 +62,8 @@ func TestWindowInputValidation(t *testing.T) {
 		{Kind: "text", Text: ""}, {Kind: "text", Text: "xy"}, {Kind: "unknown"},
 		{Kind: "move", X: 320}, {Kind: "move", Button: 1},
 		{Kind: "press", Button: 3}, {Kind: "release", X: 1},
-		{Kind: "backspace", Text: "x"}} {
+		{Kind: "backspace", Text: "x"}, {Kind: "escape", Button: 1},
+		{Kind: "left", X: 1}, {Kind: "up", Text: "x"}} {
 		if validWindowInput(e) {
 			t.Fatalf("非法事件被接受：%+v", e)
 		}
@@ -67,5 +72,17 @@ func TestWindowInputValidation(t *testing.T) {
 	if err := json.Unmarshal([]byte(`{"inputs":[{"step":12,"kind":"enter","x":0,"y":0,"button":0}],"end":20}`), &old); err != nil ||
 		len(old.Inputs) != 1 || !validWindowInput(old.Inputs[0]) {
 		t.Fatalf("舊 Enter 收據不再相容：%v，%+v", err, old)
+	}
+}
+
+func TestSpecialWindowInputs(t *testing.T) {
+	pressed := map[ebiten.Key]bool{ebiten.KeyEscape: true, ebiten.KeyArrowLeft: true,
+		ebiten.KeySpace: true}
+	events := specialWindowInputs(func(key ebiten.Key) bool { return pressed[key] })
+	if len(events) != 2 || events[0].Kind != "escape" || events[1].Kind != "left" {
+		t.Fatalf("特殊鍵次序或空格雙送：%+v", events)
+	}
+	if got := specialWindowInputs(func(ebiten.Key) bool { return false }); len(got) != 0 {
+		t.Fatalf("沒有新按下邊緣卻送鍵：%+v", got)
 	}
 }
