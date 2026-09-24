@@ -3762,3 +3762,63 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
   `27c6ec1884477f5f1518fd7d20b18ee6881713f385c51de76cb875a06c6532ee`。
   仍沒有 `@TUTORIAL1` 的**當次逐字印字與畫布**；
   規格026 DRAFT，正式 help 中文顯示零則。
+
+## 2026-09-24：目標111教學選項圖示狀態與有界後續操作
+
+- **固定輸入／工具：**合法 DOS `MENU.TXT` SHA-256
+  `5a7d2f4bf9f657b68177fb9b38e74ac92a1f191732bbc122c28563a41d7a3702`、
+  `GAME.TXT` SHA-256
+  `67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a`；
+  其他 EXE／TXT／PIK 由 `tools/check_goal111_tutorial_state.py`
+  固定。十六筆英格蘭正常玩家輸入 SHA-256
+  `a48ae77b9f6a0c2bdb9b3512625d0c1c4786b1cb64b8deff4bdb603fe422d93e`。
+  隔離 dosgolem 提交
+  `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`，
+  `colonization-research:20260920-r2`／Go 1.24.13；
+  原版唯讀。原始 RAM、完整英文與320×200原版
+  索引畫面只留被 Git 忽略的
+  `workplace/reports/goal111-help/`。
+- **位址空間：**`MENU.TXT:0x386` 的 `No Orders`
+  是**檔案位移**；原版選單顯示 Space 快捷鍵，
+  隔離 dosgolem `internal/dos/scancode.go` 的
+  `Space` 為 scan `0x39`／ASCII `0x20`。
+  `GAME.TXT:0x1316A` 的 `@TUTORIAL1` 也只為
+  **檔案位移**；`0D21:00C6` 是**原版實模式
+  CS:IP**，讀取 DOS 20-bit 線性 RAM。四點差異
+  `(73–74,148–149)` 才是原版索引畫布座標，
+  不可混用這些位址基準。
+- **已證實選項狀態：**目標110的整列差分混有焦點。
+  本輪未點與先點 `Tutorial Hints` 後皆點第一列，
+  1,300M畫面／CPU／RAM同狀態；1,375M及1,400M
+  索引畫面只差最後一列圖示中心四點，依序
+  `(73,148)`、`(74,148)`、`(73,149)`、`(74,149)`，
+  每點色號47→149。兩分支各雙冷啟動 JSON
+  逐位元組一致；無監看控制的 CPU、完整 RAM、
+  原版畫布／索引、色盤、時間、開檔、鍵盤檢查點
+  一致。未點／點擊報告 SHA-256 分別
+  `6358700bc50ff2b348ba35ac4971932ef371c63cee88eba3ad81dbee1972444e`／
+  `4e2735445a2f67aa7f001a6a4614474d06813875ebd291f21eb28c5512888778`。
+  點文字與點圖示的畫面相同，故點擊熱區不只
+  左側圖示。**已證實：**圖示狀態切換且保留；
+  **強推論／未知：**空心／填色對實際「啟用」
+  的語意尚未由教學顯示確認。
+- **有界探索：**ESC 於1,351M被取走並關閉
+  設定視窗；左方向鍵或 Space 於1,401M入列、
+  1,401,116,672步前取走。未點／點選後同滑鼠
+  座標的 Space 分支，1,375M、1,425M、1,500M
+  原版索引畫面各自兩側相同；至1,500M右側仍
+  顯示1492年春，沒有首則 help 視窗。監看的
+  `0D21:00C6` 後續值未見 `@TUTORIAL1` 正文
+  `carrying a pioneer` 片段。這些 Space／左移
+  分支僅單次探索，不能宣稱整回合已結束、
+  所有中間瞬間無 help 或 RAM 等價。`GAME →
+  Retire` 在1,275M僅見離開確認 `Yes／No`；
+  本輪未按 Yes，回新局能力未知。
+- **驗證與結論：**`tools/check_goal111_tutorial_state.py`
+  正例 PASS，`tools/test_goal111_tutorial_state.py`
+  五項正反例 PASS；含缺原版 `SKIP 77`、錯
+  事件檔、壞索引畫面與控制狀態變異。
+  `GAME.TXT:@TUTORIAL1` 仍只有目標105的預讀，
+  沒有當次逐字印字與玩家可見畫布證據，
+  規格026維持 DRAFT；下一個可驗問題是開關
+  能否在新局起點前由正常介面啟用並保留。

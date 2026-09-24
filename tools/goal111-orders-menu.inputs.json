@@ -1,0 +1,5 @@
+[
+  {"step": 1226000000, "kind": "move", "x": 88, "y": 3, "button": 0},
+  {"step": 1227000000, "kind": "press", "x": 88, "y": 3, "button": 0},
+  {"step": 1228000000, "kind": "release", "x": 88, "y": 3, "button": 0}
+]

@@ -127,6 +127,7 @@ func main() {
 	}
 	lateInputs := []introInput{}
 	lateInputHash := ""
+	lateInputUsesSpace := false
 	if *gameInputsPath != "" {
 		inputBytes := readIntro(*gameInputsPath)
 		lateInputHash = hashIntro(inputBytes)
@@ -141,8 +142,11 @@ func main() {
 				panic("字幕後玩家事件必須位於遞增的百萬步檢查點之間")
 			}
 			if e.Kind != "move" && e.Kind != "press" && e.Kind != "release" &&
-				e.Kind != "enter" && e.Kind != "esc" && e.Kind != "left" && e.Kind != "right" {
+				e.Kind != "enter" && e.Kind != "esc" && e.Kind != "left" && e.Kind != "right" && e.Kind != "space" {
 				panic("未知字幕後玩家事件")
+			}
+			if e.Kind == "space" {
+				lateInputUsesSpace = true
 			}
 			if e.X < 0 || e.X >= 320 || e.Y < 0 || e.Y >= 200 || e.Button != 0 {
 				panic("字幕後滑鼠座標或按鍵不符")
@@ -402,6 +406,8 @@ func main() {
 			d.PushKey(golem.Key{Scan: 0x4b, ASCII: 0})
 		case "right":
 			d.PushKey(golem.Key{Scan: 0x4d, ASCII: 0})
+		case "space":
+			d.PushKey(golem.Key{Scan: 0x39, ASCII: 0x20})
 		default:
 			panic("未知玩家輸入")
 		}
@@ -554,6 +560,9 @@ func main() {
 			version = "goal107-post-caption-audit-v1"
 			if *gameInputsPath != "" {
 				version = "goal110-game-input-audit-v1"
+				if lateInputUsesSpace {
+					version = "goal111-game-input-audit-v2"
+				}
 			}
 		}
 	}

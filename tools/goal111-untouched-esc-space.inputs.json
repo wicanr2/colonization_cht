@@ -1,0 +1,11 @@
+[
+  {"step": 1226000000, "kind": "move", "x": 23, "y": 3, "button": 0},
+  {"step": 1227000000, "kind": "press", "x": 23, "y": 3, "button": 0},
+  {"step": 1228000000, "kind": "release", "x": 23, "y": 3, "button": 0},
+  {"step": 1251000000, "kind": "move", "x": 45, "y": 16, "button": 0},
+  {"step": 1252000000, "kind": "press", "x": 45, "y": 16, "button": 0},
+  {"step": 1253000000, "kind": "release", "x": 45, "y": 16, "button": 0},
+  {"step": 1326000000, "kind": "move", "x": 20, "y": 100, "button": 0},
+  {"step": 1351000000, "kind": "esc", "x": 0, "y": 0, "button": 0},
+  {"step": 1401000000, "kind": "space", "x": 0, "y": 0, "button": 0}
+]

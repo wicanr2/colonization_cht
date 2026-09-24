@@ -2276,3 +2276,41 @@
   抽查收據與工作清單皆為 UID/GID 1000:1000；
   `workplace/` 無 root-owned 或誤建 `.md` 目錄，
   研究映像無執行中／已停止容器殘留。
+
+## 2026-09-24：目標111教學選項狀態與正常玩家後續
+
+- 先核對乾淨工作樹、Git 作者、PRIVATE 遠端、
+  Issue #7／#27、合法原版、隔離 dosgolem 禁推；
+  以 `e19e380` 先推送[目標111](docs/goals/111-tutorial-hints-state-and-first-help.md)
+  與 `CONTEXT.md` 入口，之後才執行新重播。
+- 初探「只移入／點文字／點圖示」發現整列3,407
+  像素差分含選取焦點，不能直接當開關證據。
+  改成兩條分支最終都點第一列；原版圖示中心
+  僅四點色號47→149，且點前同狀態。各分支
+  雙冷啟動逐位元組相同、無監看控制所有檢查點
+  同狀態；確認點擊會持續切換選項圖示。
+- ESC、海上左鍵與 `ORDERS` 選單明示的 Space
+  均被原版消費；兩種選項狀態在1,375M、1,425M、
+  1,500M的 Space 取樣畫面相同，未見首則 help。
+  `GAME → Retire` 僅見「真的要離開嗎？」確認框，
+  未按 Yes；不能宣稱已找到重開新局入口。
+  因此 help 正式顯示仍零則，十七段中文畫面不變。
+- 探針只新增選用 Space 鍵，使用 dosgolem 現有
+  `0x39/0x20` 對應；不帶 Space 的既有路徑 JSON
+  與舊版探針逐位元組相同。`tools/check_goal111_tutorial_state.py`
+  PASS，`tools/test_goal111_tutorial_state.py` 五例
+  PASS；缺原版、改事件檔、壞畫面及無監看控制
+  狀態差異都有反例。原版與完整畫面／RAM只在
+  已忽略的 `workplace/reports/goal111-help/`。
+- 規格026仍 DRAFT；已回填 `CONTEXT.md`、
+  `RESEARCH-LOG.md`、唯一工作清單與目標111。
+  下一步應查新局起點前能否由正常介面啟用提示，
+  或把已驗 `Game Options` 八列逐欄建立中文顯示
+  的來源與版面證據；不使用全域固定中文字級。
+- `tools/worklist.py write` 後 `verify` PASS；目標110
+  既有獨立收據重新 PASS。`git diff --check`通過，
+  本輪沒有原版／字型／完整畫素進 Git；收據、探針
+  和工作清單抽查 UID/GID 均為1000:1000，
+  `workplace/` 沒有 root-owned 或誤建 `.md` 目錄，
+  研究／畫面檢視映像沒有執行中或已停止容器殘留；
+  隔離 dosgolem `upstream` 推送位址仍為 `DISABLED`。

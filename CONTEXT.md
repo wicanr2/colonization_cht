@@ -2,11 +2,17 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-進行中入口：[目標111](docs/goals/111-tutorial-hints-state-and-first-help.md)：
-以目標110已驗的原版 `Game Options`／`Tutorial Hints`
-畫面，查核核取圖示語意，正常離開選項後追首則
-`@TUTORIAL1` 的玩家可見觸發。這是證據探勘，
-不是 help 已正式顯示或新增中文覆蓋；規格026仍 DRAFT。
+最近完成入口：[目標111](docs/goals/111-tutorial-hints-state-and-first-help.md)：
+`Game Options` 中未點／先點 `Tutorial Hints` 後皆把焦點
+移回第一列；1,375M的原版畫面只差最後一列圖示中心
+四點，色號47→149。兩條分支各雙冷啟動、無監看
+控制與獨立正反例通過，證實選項狀態真正切換，
+但空心／填色對「啟用」的語意仍待玩家結果確認。
+ESC 後的左方向鍵、`ORDERS` 明示的 Space 都被取走；
+取樣至1,500M未見首則 help，Space 尚未證實結束
+整回合。`GAME → Retire` 只顯示離開確認，未按 Yes，
+不能當新局入口。規格026仍 DRAFT，正式中文十七段，
+help 正式顯示零則。
 
 最近完成入口：[目標110](docs/goals/110-tutorial-hints-player-trigger.md)：
 從已驗海上玩家畫面，以原版滑鼠實際打開頂端 `GAME` →
@@ -46,10 +52,11 @@ dosgolem 十段印字與雙重播、各行檔案位移／SHA、占位符、
 控制與獨立負例通過；抽樣畫面未見 `@TUTORIAL1` 視窗，
 其實際觸發仍未知，規格026保持 DRAFT、正式中文維持十七段。
 
-下一工作入口：從已驗 `Game Options` 畫面查核教學
-核取圖示的啟用語意，正常離開設定後以有界玩家操作
-（優先結束回合）尋找首則 help 的當次印字與畫布。
-另需把
+下一工作入口：查證教學選項能否在新局開始前以
+正常玩家介面啟用並保留；`Retire` 目前只有確認框，
+不能假定能返回新局。另可從已驗 `Game Options`
+畫面為標題及八列建立來源固定的繁中候選，續推
+實際畫面中文化。另需把
 `@BUILD2–10` 已有的逐行草稿與四國變數值草稿接到
 各字幕的獨立版式；
 `@BUILD1` 的38／42px正式字級仍待使用者選擇。
