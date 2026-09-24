@@ -2208,3 +2208,11 @@
   字級、安全區、正式 Ebitengine 中文顯示與 help
   觸發未完成。更新 README 現況、唯一工作清單、
   研究紀錄與本目標結果；正式已驗畫面保持十七段。
+- 成果以 `76ca7f4` 推送 PRIVATE `origin/main`；主機
+  `gh` 已更新並回讀 [Issue #27](https://github.com/wicanr2/colonization_cht/issues/27#issuecomment-5808215642)
+  與 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7#issuecomment-5808215633)，
+  兩者仍為 OPEN。原版／字型／索引畫面未加入 Git；
+  本輪收據及新檔 UID/GID 1000:1000，隔離 dosgolem
+  的 `upstream` 推送位址為 `DISABLED`；工作根沒有
+  root-owned 或誤建 `.md` 目錄，本輪 Docker 映像
+  沒有執行中或已停止容器殘留。
