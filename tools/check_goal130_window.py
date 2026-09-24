@@ -90,6 +90,8 @@ def main():
     p.add_argument('--mask', type=Path, required=True)
     p.add_argument('--legacy', type=Path, required=True,
                    help='既有真視窗完整玩家路徑收據；核對原十七欄逐幀結果')
+    p.add_argument('--gui-prefix', type=Path, required=True,
+                   help='正常玩家鍵鼠驅動的實際 Ebitengine 視窗截圖前綴')
     p.add_argument('--output', type=Path, required=True)
     args = p.parse_args()
     if not args.preprint.is_file() or not args.mask.is_file() or not args.legacy.is_file():
@@ -146,6 +148,18 @@ def main():
          (args.reports / 'cursor-82000000.final.png').read_bytes() ==
          (args.reports / 'cursor-control-82000000.final.png').read_bytes(),
          '游標遮擋時未完整回退原文')
+    gui = json.loads(Path(str(args.gui_prefix) + '.json').read_text())
+    gui_inputs = json.loads(Path(str(args.gui_prefix) + '.inputs.json').read_text())
+    gui_shot = Path(str(args.gui_prefix) + '.caption.png').read_bytes()
+    need(gui['state']['steps'] == 84000000 and gui_inputs['end'] == 84000000 and
+         len(gui_inputs['inputs']) == 25 and not gui_inputs.get('rejected') and
+         gui['checkpoints'][-1]['lines'][-1]['candidate_id'] == KEY and
+         gui['checkpoints'][-1]['lines'][-1]['applied'] is True and
+         sum(any(line.get('candidate_id') == KEY and line['applied']
+                 for line in frame['lines']) for frame in gui['frames']) > 0 and
+         ImageChops.difference(Image.open(Path(str(args.gui_prefix) + '.caption.png')).convert('RGB'),
+                               Image.open(args.reports / 'final-82000000.final.png').convert('RGB')).getbbox() is None,
+         '實際 Ebitengine 視窗截圖與已驗中文顯示不符')
     shown = out[0]
     indexed, palette = shown['indexed'], shown['palette']
     expected = shown['control'].copy()
@@ -180,6 +194,8 @@ def main():
                'waiting_english_frames': 7, 'missing_font_original_fallback': True,
                'blank_and_duplicate_catalog_fallback': True,
                'cursor_original_fallback': True, 'final_build_same_as_reviewed': True,
+               'real_gui_screenshot_sha256': sha(gui_shot),
+               'real_gui_inputs_sha256': sha(Path(str(args.gui_prefix) + '.inputs.json').read_bytes()),
                'pairs': [{k: v for k, v in row.items() if k not in
                           ('live', 'control', 'indexed', 'palette')} for row in out]}
     args.output.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + '\n')

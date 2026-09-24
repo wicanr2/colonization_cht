@@ -2,6 +2,8 @@
 
 目前真相：[目標130](docs/goals/130-build1-ready-and-ebitengine-overlay.md)已將固定英格蘭首張 `@BUILD1` A／38px 接到明示 `-build1-a` 的 Ebitengine 視窗；[規格029](docs/spec/029-build1-caption-window-ready.md)只在此版／此欄／此正常玩家路徑限定 CONFORMED。真視窗82M字幕中、86M離頁後、120M後續的中／英文原版狀態一致，缺字模、缺譯、重複鍵、游標遮擋均回退英文；原有十七欄727幀不退步。此為第十八個**需啟用旗標**的正式中文顯示欄位，非整組字幕完成。`Game Options` 九欄 A（標題34px、八列25／28／28／25／28／28／27／28px）已定案但[規格027](docs/spec/027-game-options-window-draft.md)仍 DRAFT、九欄仍英文；其餘字幕及 help 所在[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)也仍 DRAFT，help 正式零則。原版像素／字型／完整收據只在忽略的 `workplace/`，不更新正式截圖或對外包。
 
+補驗：以實際開啟的 Ebitengine 玩家視窗、真鍵鼠走到84M時擷取的本機截圖，與已驗82M字幕中文重播圖逐像素相同；[規格029](docs/spec/029-build1-caption-window-ready.md)已納入現場畫面收據。本機圖含原版像素，仍不入Git。
+
 歷史訂正：[目標129](docs/goals/129-build1-runtime-frame-lifecycle.md)證實 `@BUILD1` 61字元與1,040點底層畫布寫入，但其第538幀只證底圖完成；目標130補看真 VGA，首個安全幀是該獨立路徑第544幀。原本「字幕仍英文、正式十七段」是目標129當時狀態，已由本檔首段的新限定 CONFORMED 收據更新，不可反向覆蓋現況。兩條輸入路徑印字步數不同，須各自引用。
 
 更新：2026-09-25；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
