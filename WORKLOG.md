@@ -2469,3 +2469,8 @@
 ## 2026-09-25：目標130實際 Ebitengine 視窗截圖補驗
 
 - 主提交與三筆 Issue 留言回讀後，依正式真視窗畫面閘門再用有界 Xvfb、真 `xdotool` 鍵鼠從冷啟動實際開啟 Ebitengine 視窗，84M現場擷取 `workplace/reports/goal130-build1/gui-real.caption.png`。25筆現場輸入無拒絕，末畫格中文字幕有啟用；1280×800現場 PNG與82M已驗重播中文字幕PNG逐像素一致。兩支不是相同輸入時點，僅核對可見畫面，不冒稱跨組CPU同狀態。真GUI檢查已納入獨立驗證器並重跑正例、七項篡改測試 PASS，本機新摘要 SHA-256 `1344a244196abf1fd304a3a57111c628876dfb71bc33f6563a21e154e6e061ce`。圖片含原版像素，留本機不推送；補驗工具與文件另以後續私有提交交接。
+
+## 2026-09-25：目標131選項標題逐幀審計（進行中）
+
+- 使用者已再次確認遊戲選項九欄 A（標題34px、八列25／28／28／25／28／28／27／28px），排除 B；目標128已記錄此決定，不重做字級原型。知識路由本輪命中復古遊戲規格閘門、dosgolem對拍與文件職責；已讀入口、必要參考及逆向技能。主機 `gh auth status`成功，既有 Issue #11／#12／#26仍 OPEN，目標131與 `CONTEXT.md`入口先以 `4f26284` 推送 PRIVATE `origin/main`。
+- 新增預設關閉的 `-options-title-screen-audit`與可重播腳本、獨立檢查器。在隔離 dosgolem、唯讀原版、有界非 root Docker內完成雙冷啟動及無監看控制；真 VGA比底層畫布晚一幀，ESC後失效。收據 SHA-256 `1889868e1abe56533c0f97f1219353d8683bb378b244a6a7bf3a96d6d995c83e`，正例、四項篡改拒絕、缺原版 `SKIP 77`通過。原版詳證見 `RESEARCH-LOG.md`與[規格027](docs/spec/027-game-options-window-draft.md)。本輪沒有 READY、Ebitengine正式中文、截圖或新翻譯筆數；九欄仍英文，目標131保持進行中。

@@ -81,6 +81,7 @@ func main() {
 	retireResidentAudit := flag.Bool("retire-resident-audit", false, "目標127：與近端監看互斥，追退休框高位址常駐字串寫入；預設關閉")
 	optionsResidentAudit := flag.Bool("options-resident-audit", false, "目標114：互斥觀測九欄高位址 RAM 來源的寫入者")
 	optionsPhaseSamples := flag.String("options-phase-samples", "", "目標119：選項點擊附近額外取樣的遞增絕對指令步數，逗號分隔；預設關閉")
+	optionsTitleScreenAudit := flag.String("options-title-screen-audit", "", "目標131：固定1,300M原版畫布檔路徑；逐幀核對選項標題的底層與真 VGA")
 	allowEarlyExit := flag.Bool("allow-early-exit", false, "目標123：只在後續正常玩家路徑觀測 DOS 提前結束，保留真實終止步數；預設關閉")
 	scratch := flag.String("scratch", "", "目標125：原版唯讀 Root 外的跨次 DOS 暫存層；預設關閉")
 	flag.Parse()
@@ -165,6 +166,9 @@ func main() {
 	}
 	if *optionsPreprint && !*optionsAudit {
 		panic("遊戲選項印前底圖需同時啟用來源稽核")
+	}
+	if *optionsTitleScreenAudit != "" && (!*optionsPreprint || *captionFrameAudit || *followUntil < 1375000000) {
+		panic("選項標題逐幀審計需九欄印前證據、至少1375M終點，且不可與字幕逐幀審計混用")
 	}
 	if *optionsWriterAudit && !*optionsPreprint {
 		panic("印字緩衝來源稽核需同時啟用逐欄印前底圖")
@@ -410,6 +414,17 @@ func main() {
 		{80, 71, 252, 83}, {80, 83, 252, 95}, {80, 95, 252, 107},
 		{80, 107, 252, 119}, {80, 119, 252, 131}, {80, 131, 252, 143},
 		{80, 143, 252, 155}}
+	var titleReference []byte
+	if *optionsTitleScreenAudit != "" {
+		titleReference = readIntro(*optionsTitleScreenAudit)
+		if len(titleReference) != 64000 || hashIntro(titleReference) != "c1a32b289c17f6db4a65983fa4dd9ed04fa7024cfbc82a709c7ee87732c0a23b" {
+			panic("選項標題原版1,300M底層畫布不符")
+		}
+	}
+	titleFrames, titleCanvasMatch, titleVGAMatch := 0, 0, 0
+	titleFirstCanvas, titleFirstVGA, titleLastVGA := uint64(0), uint64(0), uint64(0)
+	titlePhase := "unseen"
+	titleTransitions := []map[string]any{}
 	writers := map[string]*introWriter{}
 	preprintCanvas := map[string][]byte{}
 	preprintSteps := map[string]uint64{}
@@ -734,6 +749,63 @@ func main() {
 			}
 		})
 	}
+	if *optionsTitleScreenAudit != "" {
+		m.SetOnFrame(func() {
+			if m.Steps < 1253000000 || m.Steps > *followUntil {
+				return
+			}
+			titleFrames++
+			canvasMatch := true
+			for y := 44; y < 59; y++ {
+				start, end := y*320+65, y*320+253
+				if !bytes.Equal(m.Mem[canvas+uint32(start):canvas+uint32(end)], titleReference[start:end]) {
+					canvasMatch = false
+					break
+				}
+			}
+			vgaMatch := false
+			if canvasMatch && m.VideoMode() == 0x13 {
+				titleCanvasMatch++
+				if titleFirstCanvas == 0 {
+					titleFirstCanvas = m.Steps
+				}
+				indexed := m.Indexed()
+				vgaMatch = true
+				for y := 44; y < 59; y++ {
+					start, end := y*320+65, y*320+253
+					if !bytes.Equal(indexed[start:end], titleReference[start:end]) {
+						vgaMatch = false
+						break
+					}
+				}
+			}
+			if vgaMatch {
+				titleVGAMatch++
+				if titleFirstVGA == 0 {
+					titleFirstVGA = m.Steps
+				}
+				titleLastVGA = m.Steps
+			}
+			phase := "absent"
+			if canvasMatch {
+				phase = "canvas-only"
+			}
+			if vgaMatch {
+				phase = "visible"
+			}
+			if phase != titlePhase {
+				if len(titleTransitions) >= 64 {
+					panic("選項標題畫格相位超出審計上限")
+				}
+				titleTransitions = append(titleTransitions, map[string]any{
+					"step": m.Steps, "frame": m.Frames, "phase": phase,
+					"canvas_sha256":  hashIntro(m.Mem[canvas : canvas+64000]),
+					"palette_sha256": hashIntro(m.DAC[:]), "mode": m.VideoMode(),
+				})
+				titlePhase = phase
+			}
+		})
+	}
 	transferIndex := 0
 	transfers := []map[string]any{}
 	collectTransfers := func() {
@@ -1029,6 +1101,9 @@ func main() {
 			version = "goal130-caption-screen-audit-v2"
 		}
 	}
+	if *optionsTitleScreenAudit != "" {
+		version = "goal131-options-title-screen-v1"
+	}
 	report := map[string]any{"version": version, "control": *control,
 		"next_enter": *nextEnter,
 		"nation":     *nation, "after_b": *afterB,
@@ -1118,6 +1193,16 @@ func main() {
 	}
 	if *optionsAudit {
 		report["option_source_reads"] = optionSourceReads
+		if *optionsTitleScreenAudit != "" {
+			report["option_title_screen_audit"] = map[string]any{
+				"reference_sha256": hashIntro(titleReference),
+				"safe":             optionSafe[0], "frames": titleFrames,
+				"canvas_match_frames": titleCanvasMatch, "vga_match_frames": titleVGAMatch,
+				"first_canvas_step": titleFirstCanvas, "first_vga_step": titleFirstVGA,
+				"last_vga_step": titleLastVGA, "phase_at_end": titlePhase,
+				"transitions": titleTransitions,
+			}
+		}
 		if len(phaseSteps) > 0 {
 			report["option_phase_steps"] = phaseSteps
 		}
