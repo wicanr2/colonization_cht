@@ -90,6 +90,31 @@ class HotkeyTests(unittest.TestCase):
         with self.assertRaisesRegex(Invalid, "變數占位符"):
             validate_sources([self.row], self.root)
 
+    def test_named_placeholders_may_follow_chinese_word_order(self):
+        source = b"%STRING1 of %STRING0"
+        raw = source + b"\r\n"
+        (self.root / "TEST.TXT").write_bytes(raw)
+        self.row.update(
+            source_sha256=hashlib.sha256(raw).hexdigest(),
+            source_bytes_sha256=hashlib.sha256(source).hexdigest(),
+            source_byte_length=str(len(source)),
+            zh_hant="%STRING0的%STRING1",
+        )
+        self.assertEqual(validate_sources([self.row], self.root), 1)
+
+    def test_named_placeholder_multiplicity_still_required(self):
+        source = b"%STRING1 %STRING0 %STRING0"
+        raw = source + b"\r\n"
+        (self.root / "TEST.TXT").write_bytes(raw)
+        self.row.update(
+            source_sha256=hashlib.sha256(raw).hexdigest(),
+            source_bytes_sha256=hashlib.sha256(source).hexdigest(),
+            source_byte_length=str(len(source)),
+            zh_hant="%STRING0的%STRING1",
+        )
+        with self.assertRaisesRegex(Invalid, "變數占位符"):
+            validate_sources([self.row], self.root)
+
     def test_changed_indentation_rejected(self):
         self.row["zh_hant"] = "  " + self.row["zh_hant"]
         with self.assertRaisesRegex(Invalid, "前置縮排"):

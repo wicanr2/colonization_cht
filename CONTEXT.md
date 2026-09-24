@@ -2,10 +2,17 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-進行中入口：[目標108](docs/goals/108-build-opening-caption-translation.md)：
-依目標107已驗的十張開場字幕，補 `@BUILD2–10` 的逐行繁中
-草稿與來源驗證；正式字級、Ebitengine 覆蓋及 help 顯示
-仍各依其證據閘門辦理。目標本文先推送，再執行譯稿工作。
+最近完成入口：[目標108](docs/goals/108-build-opening-caption-translation.md)：
+固定原版十張開場字幕的十一個 `^^` 原文行現均有可追溯
+繁中草稿；主譯稿由369增至379筆。獨立驗證重新核對
+dosgolem 十段印字與雙重播、各行檔案位移／SHA、占位符、
+控制碼和固定 Cubic 11 字形，正反例均通過。
+[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)
+仍 DRAFT：變數展開值可能仍是英文，`@BUILD1` 的38／42px
+視覺選擇、其餘字幕的個別字級／正式顯示，以及 help
+的實際觸發和中文畫面都尚未完成；正式顯示維持十七段。
+下一工作仍可從已驗海上玩家畫面查 help 觸發，或先查
+四國字幕變數值的顯示層翻譯來源，兩者不必代選字級。
 
 最近完成入口：[目標107](docs/goals/107-post-caption-input-and-help-entry.md)：
 英格蘭正常玩家路徑已驗85M與100M的 Enter 被原版消費；

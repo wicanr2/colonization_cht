@@ -1,6 +1,6 @@
 # 目標108：十張開場字幕的可追溯繁中草稿
 
-狀態：進行中；日期：2026-09-24。承接[目標107](107-post-caption-input-and-help-entry.md)
+狀態：完成（僅十張字幕的十一行繁中草稿）；日期：2026-09-24。承接[目標107](107-post-caption-input-and-help-entry.md)
 已驗的英格蘭正常玩家路徑與[規格026](../spec/026-build-intro-and-tutorial-prefetch-draft.md)；
 對應 [Issue #27](https://github.com/wicanr2/colonization_cht/issues/27) 與
 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)。
@@ -49,3 +49,37 @@
   正式中文顯示數或宣稱 help 已顯示。
 - 若變數語意或某行原版位元組不明，該行保持待查；不得用
   自製原文、任意取代字型或單一全域字級湊足數量。
+
+## 本輪結果
+
+固定 `GAME.TXT` 的 `@BUILD1–10` 共十一個 `^^` 原始行已有
+十一筆來源固定草稿；本輪新增 `@BUILD2–10` 的十筆，使
+[主譯稿](../../text/draft.zh-Hant.tsv)由369增至379筆。
+`@BUILD2` 分成兩筆，不能把它誤算成一行；每筆的檔案 SHA、
+位移、行長及行 SHA 均由現有全稿驗證器與
+[`tools/check_goal108_caption_corpus.py`](../../tools/check_goal108_caption_corpus.py)
+交叉核對。後者也重新讀目標107的雙冷啟動／無監看控制報告，
+確認十段實際印字的長度、時間與位元組 SHA；原版英文全文、
+畫素及字型都只留在本機，不加入 Git。
+
+英格蘭路徑的原版印字有 `Explorer`、`Walter Raleigh`、`London`、
+`King of England` 與 `England`；將其對應到各 `%STRING`
+是模板與當次印字相符的**強推論**，中間 RAM 搬運未閉合。
+譯稿保留所有具名占位符與 `^^`；`@BUILD4` 依中文語序把
+`%STRING0` 放在 `%STRING1` 前，驗證器因此改為比對變數
+**種類與出現次數**，並有錯名、缺重複次數及熱鍵／控制符
+反例；這只調整草稿驗證，不改原版或正式顯示層。
+
+全379筆主譯稿來源驗證 PASS；本輪獨立檢查的真原版正例、
+缺原版 SKIP 77、錯版、缺行、錯占位符、錯字型與同時篡改
+兩份印字報告的反例均 PASS。目標107完整收據也重新 PASS。
+固定 SHA 的 Cubic 11 字型覆蓋十一行中81個不同字元，
+缺字為零。本機 `receipt.json` SHA-256
+`95a1172326ea151c9df56332fc9d75e50d72c8af109d682e54c7fcba616d453a`；
+`workplace/reports/goal108-caption-corpus/` 保留收據與目標107
+重驗結果，忽略版控。
+
+未完成：展開後的變數值仍可能是英文；各國變數值本地化、
+逐字幕字級／安全矩形、正式 Ebitengine 覆蓋、同狀態中文
+畫面及首則 help 觸發需後續規格與驗收。規格026保持 DRAFT，
+正式中文顯示仍為十七段，不以十一筆草稿冒稱字幕已中文化。

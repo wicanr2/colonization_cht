@@ -8,6 +8,7 @@
 """
 
 import argparse
+from collections import Counter
 import csv
 import hashlib
 import io
@@ -85,7 +86,9 @@ def validate_sources(rows, game):
         original = source.decode("ascii", errors="strict")
         translated = row["zh_hant"]
         require(re.match(r" *", original).group() == re.match(r" *", translated).group(), prefix + "前置縮排不符")
-        require(PLACEHOLDER.findall(original) == PLACEHOLDER.findall(translated), prefix + "變數占位符不符")
+        # 具名變數可因中文語序調換位置，但種類與出現次數必須完全相同。
+        require(Counter(PLACEHOLDER.findall(original)) == Counter(PLACEHOLDER.findall(translated)),
+                prefix + "變數占位符不符")
         require(CONTROLS.findall(original) == CONTROLS.findall(translated), prefix + "大括號或控制符號不符")
         require(HOTKEY.findall(original) == HOTKEY.findall(translated), prefix + "熱鍵 ASCII 標記不符")
     return len(rows)

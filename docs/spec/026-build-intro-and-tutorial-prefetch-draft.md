@@ -162,3 +162,25 @@ SHA-256及時間窗口由 `tools/check_goal107_post_caption.py`
 `e120301bb08f05b5a3461cd6fba5334ed25588a5896fa442f50bfd16d647ec58`；
 其中原始畫面、完整英文和 PNG 均只在忽略版控的
 `workplace/reports/goal107-post-caption/`，不可公開散布。
+
+## 2026-09-24：十張字幕逐行繁中草稿（仍為 DRAFT）
+
+[目標108](../goals/108-build-opening-caption-translation.md)核對固定
+`GAME.TXT` 的十個 `@BUILD` 標記與十一個 `^^` 原文行；
+`@BUILD2` 有兩行，其餘各一行。十筆新草稿與既有
+`@BUILD1` 都在[主譯稿](../../text/draft.zh-Hant.tsv)以
+檔案 SHA、位移、長度與行 SHA 逐筆定位；全稿現為379筆。
+`tools/check_goal108_caption_corpus.py` 以獨立常數查十一行
+原始 bytes 與 dosgolem 十段實際印字 SHA，含雙重播／
+無監看控制，並以固定 SHA 的 Cubic 11 cmap 查缺字。
+正例、缺原版 SKIP、錯版、缺行、錯占位符、錯字型及
+印字報告變異反例通過；本機收據 SHA-256
+`95a1172326ea151c9df56332fc9d75e50d72c8af109d682e54c7fcba616d453a`。
+
+已證實的是固定原始行與英格蘭路徑上各段原版印字；
+`%STRING` 名稱到實際字串的對應仍為**強推論**，其他國家
+變數值也未在本目標驗。為配合繁中語序，草稿驗證器容許
+具名變數重新排序，但種類與次數必須完全一致。這沒有
+授權在原版 RAM 中替換文字；變數值翻譯、每張字幕
+欄位專屬字級／背景／失敗回退及正式 Ebitengine 畫面
+仍缺，故規格不升 READY，十七段正式顯示數不變。
