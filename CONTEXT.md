@@ -2,6 +2,11 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前進行入口：[目標102](docs/goals/102-nation-introduction-layout-prototypes.md)：
+以已驗四國八節正常玩家路徑，核對重新找到的固定 SHA-256
+`Cubic_11.ttf`，取得原版印字前底圖並量測繁中長文的逐頁字級與
+安全矩形。這是 DRAFT 排版原型；正式介紹畫面仍顯示原文。
+
 最近完成入口：[目標101](docs/goals/101-nation-introduction-player-path.md)：
 四張旗卡各由正常滑鼠選取，八節 A／B 原版印字、畫布及頁相位
 已有雙次 dosgolem 冷啟動與無觀測控制收據。法國 B 頁的無鍵／
