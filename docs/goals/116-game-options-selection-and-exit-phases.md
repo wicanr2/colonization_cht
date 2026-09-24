@@ -1,6 +1,6 @@
 # 目標116：遊戲選項選取、游標與離頁畫面相位
 
-狀態：in_progress；日期：2026-09-24。承接[目標115](115-game-options-source-chain-correction.md)與[規格027](../spec/027-game-options-window-draft.md)，對應既有 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7) 和 [Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)，不另建同義 Issue。
+狀態：completed（限定三種穩定畫面相位；正式覆蓋未完成）；日期：2026-09-24。承接[目標115](115-game-options-source-chain-correction.md)與[規格027](../spec/027-game-options-window-draft.md)，對應既有 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7) 和 [Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)，不另建同義 Issue。
 
 ## 玩家問題與邊界
 
@@ -10,9 +10,17 @@
 
 1. 核對 PRIVATE 遠端、Git 作者、原版與隔離 dosgolem；**先推送本目標 Markdown 與 `CONTEXT.md` 入口**，再新增測試輸入或探針。所有執行、搜尋大量資料、測試與抓圖都在無網路、限資源、非 root 的一次性 Docker，原版唯讀。
 2. 從 `tools/goal110-game-options.inputs.json` 的六筆正常滑鼠開窗事件出發，只新增有界的移鼠／ESC 玩家事件；比較同一步數的第一列、末列、框外游標及離頁分支。固定原版索引畫面、色盤、CPU／RAM／時間、原版開檔與輸入消費；不得以事件檔內容本身證明互動生效。
-3. 如既有樣本只在25M間隔，先用最小可丟棄探針補事件前後相位；針對選取底色、核取圖示、文字墨跡、游標與整張畫布分別量差，區分無關的時鐘／動畫。至少兩次獨立冷啟動及一組無監看控制，建立獨立正反例，缺原版明確 `SKIP 77`。
+3. 先以既有探針的事件前檢查點及25M間隔樣本驗固定穩定相位；若不足以定位首個重繪時刻，明列為未知，不猜補每幀。針對選取底色、核取圖示、文字墨跡、游標與整張畫布分別量差，區分無關的時鐘／動畫。至少兩次獨立冷啟動及一組無監看控制，建立獨立正反例，缺原版明確 `SKIP 77`。
 4. 把已證實的相位與仍未知的回退條件記入規格027、`RESEARCH-LOG.md`、`CONTEXT.md`、`WORKLOG.md` 和唯一 `docs/worklist.json`，由工具重生 `WORKLIST.md`；只推自製輸入、探針與檢查器，原版畫素／原文轉存只留忽略的 `workplace/`。推送私有儲存庫並更新、回讀既有 Issue；檢查輸出擁有權、Git 素材邊界及 Docker 清理。
 
 ## 停止線
 
 若只能證明部分互動相位，就明列未驗步數與座標，不用抽樣推論所有列或所有動畫幀。原版解析至高位址 RAM 的中間資料邊、中文字級／快捷鍵呈現和正式逐欄回退仍是獨立閘門；規格未 READY 前保持原文，不把可丟棄預覽計入十七段正式中文顯示。
+
+## 結果與下一閘門
+
+三份新增玩家輸入 SHA-256：第一列純移鼠 `bfa4245372016e2a3a64e6e75e9bb553b27c6531085c12bff70e10670c36c9be`、末列純移鼠 `a63a789b575dca90bfd1de86395d4cbc40e89be7a4ca73e8f257ea40a8364bff`、ESC 離頁 `7ea15e5d4b7d86f3ffae32e62a6dda49975d56caf9a8749728bb66a0c70ea774`。它們皆以已驗十六筆原版輸入起步，原始檔案仍唯讀。`tools/probe_goal116_options_phases.sh` 在隔離 dosgolem 模組編譯既有探針後，對每一分支重播雙冷啟動及無監看控制；第一次批次外層逾時與最後一筆控制組完成訊息同時發生，逐檔完整性檢查九份收據皆存在，重跑相同入口正常結束；獨立檢查器讀原始 bytes，而不依賴該最後訊息。
+
+`tools/check_goal116_options_phases.py` PASS：兩種純移鼠在1,325M的底層畫布相同、合成游標的索引畫面相差160點；1,326M移到同一框外位置後，1,350M／1,375M／1,400M畫面逐 byte 合流。既有目標111實際點擊末列的雙重播／無監看控制作交叉對照，同一1,325M游標位置的底層畫布比純移鼠多3,407點差異，只落在第1／末列各1,646／1,761點；末列候選核取區有91點差分，但不能單獨推論核取語意。ESC 分支的原版鍵盤待取數由1降0；1,350M仍是選項窗，1,375M回海上畫面，底層畫布差22,885點，bbox `(62,41)–(258,159)`。本機檢視 PNG 只在已忽略的 `workplace/reports/goal116-options/`，並已人工核對游標與離頁畫面。三份 A 收據 SHA-256 分別為第一列 `e721eb66bd5e87ac419165c2d59f52b4b75e40748f7f63b7db78bd88e827a65c`、末列 `81114864e2f7645bf1c40647ee7f306c41234042380a1da01c75d8107adb39ca`、ESC `651a3046e1a2a03941e53b94c30de4200176f659177da9641b4e9bdb7b9b53b8`；各自 B 收據逐 byte 相同，無監看控制的原版狀態與畫面一致。`tools/test_goal116_options_phases.py` 正例與九項拒絕／缺原版 `SKIP 77` 通過。
+
+本輪只證明固定座標與25M步穩定抽樣；游標點到其餘六列、按下／放開各狀態、最初重繪瞬間、逐欄失效及字級決定仍未驗。[規格027](../spec/027-game-options-window-draft.md)保持 DRAFT；下一步可用同相位畫布研究核取／反白分離及游標逐欄回退，再審查 READY，正式中文顯示仍十七段。

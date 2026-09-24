@@ -2343,3 +2343,11 @@
 - `tools/check_goal114_options_dataflow.py` PASS（150個讀寫配對、133／134格式來源配對、142個高位址來源 byte）；`tools/test_goal114_options_dataflow.py` 正例與九項拒絕／缺原版 `SKIP 77` PASS。修正舊預覽器不再要求假陰性的零寫入後，`tools/test_goal113_options_preview.py` 的 A／B 原文與逐像素負例仍 PASS。Go 探針 `gofmt` 與 `go build -p 1` 在隔離 dosgolem 模組內 PASS；第一次在 `/repo` 編譯因非 Go 模組失敗，調整工作目錄後乾淨重跑，屬工具設定而非遊戲缺陷。`tools/worklist.py write/verify`、Python AST 及 `git diff --check` 均通過。
 - 原版、TTF、原版畫素與完整 JSON 只在唯讀來源及已忽略 `workplace/`。抽查收據和 `WORKLIST.md` 為 UID/GID 1000:1000；`workplace/` 無 root-owned 或誤建 `.md` 目錄，研究／字型映像無執行中或已停止容器殘留；隔離 dosgolem 固定 `9dd36726`、`upstream` 推送位址 `DISABLED`。下一步需在原版正常玩家路徑補選取／反白、游標與 ESC 離頁相位，再逐欄視覺定案；九欄尚不可接正式中文圖層。
 - 實質成果 `9731d3a` 已推送 PRIVATE `origin/main`；主機 `gh` 留言並回讀 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7#issuecomment-5811848479) 與 [Issue #26](https://github.com/wicanr2/colonization_cht/issues/26#issuecomment-5811848070)，兩者均保持 OPEN。本條收尾紀錄另以文件提交推送。
+
+## 2026-09-24：目標116遊戲選項互動畫面相位
+
+- 上輪完成目標114／115來源鏈訂正、私有推送及 Issue 更新，屬實質進展。本輪先核對乾淨工作樹、Git 作者、PRIVATE 遠端、隔離 dosgolem `9dd36726`／禁推與目標原版；讀取復古遊戲路由、逆向技能及 dosgolem 能力入口後，以 `7b4d422` 先推送[目標116](docs/goals/116-game-options-selection-and-exit-phases.md)與現況入口。
+- 新增第一列／末列純移鼠、ESC 離頁三份固定玩家事件檔及 `tools/probe_goal116_options_phases.sh`，沿既有正常開局、海上 `GAME` → `Game Options` 路徑，使用隔離 dosgolem 每支各兩次冷啟動與無監看控制。第一次批次在最後控制組輸出完成訊息時剛好碰外層600秒逾時；九份 JSON、原始索引／畫布／色盤均已存在並核對 SHA，放寬外層時間重跑同一入口正常結束；這是批次外層逾時，不是原版或產品失敗。
+- 第一列與末列純移鼠同時點底層畫布完全相同，游標合成索引畫面相差160點；移到框外後兩支畫面完全合流。與目標111已驗的實際點擊末列收據在同時點、同游標位置比較，底層畫布多3,407點差異；但焦點與核取圖示混合，未把全部差異命名為單一效果。ESC 於1,351M由原版取走，1,375M回海上畫面，底層差22,885點，bbox `(62,41)–(258,159)`。本機原版 PNG 僅存已忽略 `workplace/`，人工檢視確認游標遮住末列文字及 ESC 後視窗消失。
+- `tools/check_goal116_options_phases.py` PASS，`tools/test_goal116_options_phases.py` 正例與九項拒絕／缺原版 `SKIP 77` PASS；既有 `tools/check_goal111_tutorial_state.py` PASS，Python AST 與 `tools/worklist.py write/verify` PASS。[規格027](docs/spec/027-game-options-window-draft.md)維持 DRAFT；其他六列、按下／放開和首個重繪瞬間、正式中文字級與逐欄回退未驗，九欄仍英文、正式中文維持十七段。工作清單 Issue #7／#26 註記已回填；README 不記輪次，也不以本機原版 PNG 更新正式截圖。
+- `git diff --check` 通過；原版 EXE／TXT、TTF、完整畫布／PNG 皆未由本輪加入 Git。新收據、檢視 PNG 與 `WORKLIST.md` 抽查 UID/GID 1000:1000；`workplace/` 無 root-owned 或誤建 `.md` 目錄，研究／圖像映像的專案相關執行中或已停止容器無殘留。隔離 dosgolem `upstream` 推送位址仍是 `DISABLED`。

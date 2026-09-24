@@ -2,9 +2,14 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-目前進行入口：[目標116](docs/goals/116-game-options-selection-and-exit-phases.md)：
-沿已驗正常滑鼠開啟 `Game Options` 路徑，觀測第一／末列選取、
-游標與 ESC 離頁畫面相位；九欄正式文字仍是英文，規格027 DRAFT。
+最近完成入口：[目標116](docs/goals/116-game-options-selection-and-exit-phases.md)：
+沿已驗正常滑鼠開啟 `Game Options` 路徑，第一／末列純移鼠
+只改游標合成畫面160點，底層畫布不變；兩者移到同一框外
+位置後畫面合流。既有原版實際點擊末列比純移鼠多3,407點
+底層畫布差異，含焦點與核取狀態，不能混稱單一選取效果。
+ESC 在1,351M由原版取走，1,375M視窗消失、回海上畫面。
+三分支各雙冷啟動／無監看控制，獨立正反例通過；九欄仍是
+英文，規格027 DRAFT，正式中文仍十七段。
 
 最近完成入口：[目標115](docs/goals/115-game-options-source-chain-correction.md)／
 [目標114](docs/goals/114-game-options-print-buffer-dataflow.md)：
@@ -91,8 +96,9 @@ dosgolem 十段印字與雙重播、各行檔案位移／SHA、占位符、
 其實際觸發仍未知，規格026保持 DRAFT、正式中文維持十七段。
 
 下一工作入口：優先接續[規格027](docs/spec/027-game-options-window-draft.md)
-九欄的原版解析→高位址 RAM 中間搬運、選取／游標／離頁相位與
-真 Ebitengine 玩家視窗回退；九欄印前多色底圖及可丟棄 A／B
+九欄的原版解析→高位址 RAM 中間搬運、其餘六列及按下／放開
+畫面相位、真 Ebitengine 玩家視窗逐欄回退；固定第一／末列
+純移鼠與 ESC 離頁已由目標116有界驗證，九欄印前多色底圖及可丟棄 A／B
 預覽已由目標113完成，正式字級尚待此視窗專屬視覺決定，
 證據足夠才審查 READY。
 教學選項能否在新局開始前以正常玩家介面啟用並保留
