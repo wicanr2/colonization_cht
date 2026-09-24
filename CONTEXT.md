@@ -2,6 +2,8 @@
 
 更新：2026-09-25；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前工作入口：[目標128](docs/goals/128-a-layout-decisions-and-build1-runtime-gate.md)。使用者已獨立決定 `@BUILD1` 開場字幕選 A（38px、實際墨跡高35px、共同置中，淡黃字與暗影），排除42px的 B；`Game Options` 九欄選 A（標題34px，八列25／28／28／25／28／28／27／28px），排除較大的 B。兩項只是版面決定，不共用字級；規格026／027在執行期守門與同狀態正式驗收之前仍為 DRAFT，字幕與九欄目前仍英文，正式中文維持十七段、help 零則。本輪先推進 `@BUILD1` 狹窄守門與 READY 審查，遊戲選項 A 版同步回填規格但不越級接正式圖層。
+
 目前真相：[目標127](docs/goals/127-retire-source-to-print-dataflow.md)以兩種互斥原版監看追退休確認框來源：`GAME.TXT` 三筆32 byte實際被解析器讀取，解析區31／32筆變更寫入、高位址常駐字串35筆寫入、實際印字31個可見字元中30筆近端變更寫入與31筆讀取有可重播配對；雙次冷啟動、無監看控制與獨立正反例通過。同值寫入回呼的兩個 byte 案例及跨重用緩衝完整唯一歸屬不冒稱閉合，[規格028](docs/spec/028-retire-confirmation-overlay-draft.md)仍 DRAFT；退休框 A/B 版式另待使用者選擇，正式中文十七段及 help 零則不變。使用者再次確認的第一張國家旗卡 A（21／25px）已由目標099正式驗收，本輪不重做、不外推。
 
 目前真相：[目標126](docs/goals/126-retire-confirmation-three-field-overlay.md)已把正常玩家 `Retire` 確認框問句／Yes／No 的原版 DOS 讀取、實際印字、逐欄首字前底圖與安全區量成可重播收據；A（34px共同置中）與 B（問句38px、按鈕34px，保留原版左起點）兩套本機 Ebitengine 原型均通過獨立逐像素驗證。這兩版**尚待使用者擇一**；中間搬運的有界新證據見目標127，完整唯一歸屬及真視窗動態守門仍未閉合，[規格028](docs/spec/028-retire-confirmation-overlay-draft.md)保持 DRAFT，三欄仍是英文，正式中文十七段、help 零則。目標125已排除固定 `Retire` 後另開新局作為 help 入口，不把本框原型算成 help 進展。
