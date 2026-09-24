@@ -1,6 +1,6 @@
 # 目標127：退休確認框來源至印字緩衝追證
 
-狀態：進行中；開始：2026-09-25。承接[目標126](126-retire-confirmation-three-field-overlay.md)與[規格028（DRAFT）](../spec/028-retire-confirmation-overlay-draft.md)，對應既有 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)、[Issue #11](https://github.com/wicanr2/colonization_cht/issues/11)及[Issue #12](https://github.com/wicanr2/colonization_cht/issues/12)，不重複開單。
+狀態：完成（限定資料流證據，不含正式中文覆蓋）；開始與完成：2026-09-25。承接[目標126](126-retire-confirmation-three-field-overlay.md)與[規格028（DRAFT）](../spec/028-retire-confirmation-overlay-draft.md)，對應既有 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)、[Issue #11](https://github.com/wicanr2/colonization_cht/issues/11)及[Issue #12](https://github.com/wicanr2/colonization_cht/issues/12)，不重複開單。
 
 ## 界線
 
@@ -17,3 +17,9 @@
 ## 停止線
 
 本輪不修改原版 EXE、TXT、存檔、規則或點擊熱區，不公開原版像素／字型／畫面。若資料流只證到部分邊，交付有界證據，不把規格028升 READY；正式中文數仍十七段，help 正式顯示仍零則。
+
+## 本輪結果
+
+預設關閉的兩種互斥原版監看，於同一正常玩家 `GAME → Retire` 路徑各雙次冷啟動、一次無監看控制；報告逐 byte 與原版完整狀態對照均通過。`GAME.TXT` 三筆共32 byte於 DOS 讀入後被原版解析器讀取；解析區31／32筆變更寫入、常駐字串35筆寫入、真印字31個可見字元中30筆近端變更寫入與31筆讀取，均有原始步數、`CS:IP`、線性 RAM 與字節值。[規格028](../spec/028-retire-confirmation-overlay-draft.md)及 `RESEARCH-LOG.md` 保存分級和精確地址；`tools/check_goal127_retire_flow.py` 正例與篡改負例／缺原版 `SKIP 77` 通過。監看器只通知值改變，解析與印字各一個同值位元組沒有寫回呼，完整來源歸屬仍保持強推論。新旗標全部關閉時，舊路徑 JSON 逐 byte 等於歷史 SHA-256 `182e815897b6f6f1ff2dd4f6bcad3ee7dcf0394dc3a59bdb99b5b400ef7f952a`。
+
+退休框 A/B 版式仍待使用者另行選擇，正式真視窗逐欄回退也未驗；規格028維持 DRAFT，三欄仍英文。第一張國家旗卡 A 已在目標099驗收，本輪沒有重做或改截圖。

@@ -2,9 +2,9 @@
 
 更新：2026-09-25；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-目前進行：[目標127](docs/goals/127-retire-source-to-print-dataflow.md)只追退休確認框三段原文從已驗 DOS 讀入到印字緩衝的中間資料流；規格028仍 DRAFT，A/B 版式另待使用者選擇，正式中文十七段及 help 零則不變。使用者再次確認的第一張國家旗卡 A（21／25px）已由目標099正式驗收，本輪不重做、不外推。
+目前真相：[目標127](docs/goals/127-retire-source-to-print-dataflow.md)以兩種互斥原版監看追退休確認框來源：`GAME.TXT` 三筆32 byte實際被解析器讀取，解析區31／32筆變更寫入、高位址常駐字串35筆寫入、實際印字31個可見字元中30筆近端變更寫入與31筆讀取有可重播配對；雙次冷啟動、無監看控制與獨立正反例通過。同值寫入回呼的兩個 byte 案例及跨重用緩衝完整唯一歸屬不冒稱閉合，[規格028](docs/spec/028-retire-confirmation-overlay-draft.md)仍 DRAFT；退休框 A/B 版式另待使用者選擇，正式中文十七段及 help 零則不變。使用者再次確認的第一張國家旗卡 A（21／25px）已由目標099正式驗收，本輪不重做、不外推。
 
-目前真相：[目標126](docs/goals/126-retire-confirmation-three-field-overlay.md)已把正常玩家 `Retire` 確認框問句／Yes／No 的原版 DOS 讀取、實際印字、逐欄首字前底圖與安全區量成可重播收據；A（34px共同置中）與 B（問句38px、按鈕34px，保留原版左起點）兩套本機 Ebitengine 原型均通過獨立逐像素驗證。這兩版**尚待使用者擇一**；原版中間搬運與真視窗動態守門也未閉合，[規格028](docs/spec/028-retire-confirmation-overlay-draft.md)保持 DRAFT，三欄仍是英文，正式中文十七段、help 零則。目標125已排除固定 `Retire` 後另開新局作為 help 入口，不把本框原型算成 help 進展。
+目前真相：[目標126](docs/goals/126-retire-confirmation-three-field-overlay.md)已把正常玩家 `Retire` 確認框問句／Yes／No 的原版 DOS 讀取、實際印字、逐欄首字前底圖與安全區量成可重播收據；A（34px共同置中）與 B（問句38px、按鈕34px，保留原版左起點）兩套本機 Ebitengine 原型均通過獨立逐像素驗證。這兩版**尚待使用者擇一**；中間搬運的有界新證據見目標127，完整唯一歸屬及真視窗動態守門仍未閉合，[規格028](docs/spec/028-retire-confirmation-overlay-draft.md)保持 DRAFT，三欄仍是英文，正式中文十七段、help 零則。目標125已排除固定 `Retire` 後另開新局作為 help 入口，不把本框原型算成 help 進展。
 
 目前真相：[目標125](docs/goals/125-tutorial-hints-persistence-and-help-entry.md)已檢驗正常玩家切換 `Tutorial Hints`，經 `Retire` 正常退出並另開新局：當局未點／點一次／點兩次的圖示為47／149／47，但三支暫存層檔案逐 byte 相同，第二次冷啟動重開選項時原版完整狀態合流、圖示均為47；固定取樣與監看仍未見首則 help。這只排除該固定跨次路徑的選項可見效果，未證其他入口或存檔讀取語意。[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)仍 DRAFT，正式中文十七段、help 正式顯示零則。下一個安全切片是從其他正常玩家介面或當局可見觸發找首則原版印字，不再假定 `Retire` 是同局重開。
 

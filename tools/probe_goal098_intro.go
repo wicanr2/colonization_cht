@@ -75,6 +75,8 @@ func main() {
 	optionsPreprint := flag.Bool("options-preprint", false, "目標113：九欄各自首筆原版印字前底圖與印字緩衝寫入")
 	optionsWriterAudit := flag.Bool("options-writer-audit", false, "目標114：原版印字緩衝寫入者附近的讀取與暫存器")
 	retireAudit := flag.Bool("retire-audit", false, "目標126：只追退休確認框三段固定來源；預設關閉")
+	retireFlowAudit := flag.Bool("retire-flow-audit", false, "目標127：只追退休框 DOS 讀入至印字緩衝的近端讀寫；預設關閉")
+	retireResidentAudit := flag.Bool("retire-resident-audit", false, "目標127：與近端監看互斥，追退休框高位址常駐字串寫入；預設關閉")
 	optionsResidentAudit := flag.Bool("options-resident-audit", false, "目標114：互斥觀測九欄高位址 RAM 來源的寫入者")
 	optionsPhaseSamples := flag.String("options-phase-samples", "", "目標119：選項點擊附近額外取樣的遞增絕對指令步數，逗號分隔；預設關閉")
 	allowEarlyExit := flag.Bool("allow-early-exit", false, "目標123：只在後續正常玩家路徑觀測 DOS 提前結束，保留真實終止步數；預設關閉")
@@ -144,6 +146,12 @@ func main() {
 	}
 	if *retireAudit && (*gameInputsPath == "" || !*postCaptionAudit || *followUntil < 1275000000) {
 		panic("退休來源稽核需要已驗玩家輸入及確認框終點")
+	}
+	if *retireFlowAudit && !*retireAudit {
+		panic("退休資料流稽核須同時啟用退休來源稽核")
+	}
+	if *retireResidentAudit && (!*retireAudit || *retireFlowAudit || *optionsResidentAudit) {
+		panic("退休高位址稽核需單獨啟用，且須同時啟用退休來源稽核")
 	}
 	if *optionsPreprint && !*optionsAudit {
 		panic("遊戲選項印前底圖需同時啟用來源稽核")
@@ -354,6 +362,9 @@ func main() {
 	printReads := []map[string]any{}
 	retireBefore := map[string][]byte{}
 	retireFirstSteps := map[string]uint64{}
+	retireFlowReads := []map[string]any{}
+	retireFlowWrites := []map[string]any{}
+	retireResidentWrites := []map[string]any{}
 	optionSourceReads := []map[string]any{}
 	optionPrintWrites := []map[string]any{}
 	optionWriterReads := []map[string]any{}
@@ -378,6 +389,17 @@ func main() {
 	}
 	if !*control {
 		m.WatchReads(0x20000, 0x80000, func(a uint32, value uint8) {
+			if *retireFlowAudit && m.Steps >= 1253240000 && m.Steps < 1253355000 &&
+				((a >= 0x2ac00 && a < 0x2b180) || (a >= 0x74000 && a < 0x74600)) &&
+				len(retireFlowReads) < 50000 {
+				cs, ip := m.CPU.OpAddr()
+				if cs == 0x0e2d || (cs == 0x8bdf && ip >= 0x0500 && ip < 0x0600) ||
+					(cs == 0x0d21 && ip == 0x00c6) {
+					retireFlowReads = append(retireFlowReads, map[string]any{
+						"step": m.Steps, "cs_ip": fmt.Sprintf("%04X:%04X", cs, ip),
+						"linear": a, "value": value})
+				}
+			}
 			if *retireAudit && m.Steps >= 1253300000 && m.Steps < 1254000000 {
 				cs, ip := m.CPU.OpAddr()
 				if cs == 0x0d21 && ip == 0x00c6 {
@@ -427,8 +449,20 @@ func main() {
 		if *optionsPreprint {
 			writeLo = 0x2ac78
 		}
+		if *retireFlowAudit {
+			writeLo = 0x2ac00
+		}
 		m.WatchWrites(writeLo, canvas+64000, func(a uint32, old, value uint8) {
 			if a < canvas {
+				if *retireFlowAudit && m.Steps >= 1253240000 && m.Steps < 1253355000 &&
+					a < 0x2b180 && len(retireFlowWrites) < 50000 {
+					cs, ip := m.CPU.OpAddr()
+					if cs == 0x0e2d || (cs == 0x8bdf && ip >= 0x0500 && ip < 0x0600) {
+						retireFlowWrites = append(retireFlowWrites, map[string]any{
+							"step": m.Steps, "cs_ip": fmt.Sprintf("%04X:%04X", cs, ip),
+							"linear": a, "old": old, "value": value})
+					}
+				}
 				if *optionsWriterAudit && m.Steps >= 1253400000 && m.Steps < 1253600000 &&
 					((a >= 0x2acea && a < 0x2acec) || (a >= 0x2ad70 && a < 0x2ad81) ||
 						(a >= 0x2ae50 && a < 0x2ae52)) && len(optionIntermediateWrites) < 3000 {
@@ -526,6 +560,18 @@ func main() {
 				}
 				cs, ip := m.CPU.OpAddr()
 				optionResidentWrites = append(optionResidentWrites, map[string]any{
+					"step": m.Steps, "cs_ip": fmt.Sprintf("%04X:%04X", cs, ip),
+					"linear": a, "old": old, "value": value})
+			})
+		}
+		if *retireResidentAudit {
+			// Machine 只有一組 active write range；此模式不取得逐欄印前底圖。
+			m.WatchWrites(0x74300, 0x74600, func(a uint32, old, value uint8) {
+				if m.Steps < 1253240000 || m.Steps >= 1253355000 || len(retireResidentWrites) >= 20000 {
+					return
+				}
+				cs, ip := m.CPU.OpAddr()
+				retireResidentWrites = append(retireResidentWrites, map[string]any{
 					"step": m.Steps, "cs_ip": fmt.Sprintf("%04X:%04X", cs, ip),
 					"linear": a, "old": old, "value": value})
 			})
@@ -813,6 +859,12 @@ func main() {
 	}
 	if *retireAudit {
 		version = "goal126-retire-preprint-v1"
+		if *retireFlowAudit {
+			version = "goal127-retire-flow-v1"
+		}
+		if *retireResidentAudit {
+			version = "goal127-retire-resident-v1"
+		}
 	}
 	report := map[string]any{"version": version, "control": *control,
 		"next_enter": *nextEnter,
@@ -846,7 +898,7 @@ func main() {
 		report["scratch"] = true
 		report["write_intents"] = d.Wrote
 	}
-	if *retireAudit && !*control {
+	if *retireAudit && !*control && !*retireResidentAudit {
 		preprints := map[string]any{}
 		for _, name := range []string{"question", "yes", "no"} {
 			before := retireBefore[name]
@@ -857,6 +909,21 @@ func main() {
 			preprints[name] = map[string]any{"step": retireFirstSteps[name], "canvas_sha256": hashIntro(before)}
 		}
 		report["retire_preprint"] = preprints
+	}
+	if *retireFlowAudit {
+		if len(retireFlowReads) == 50000 || len(retireFlowWrites) == 50000 {
+			panic("退休資料流監看事件超出上限")
+		}
+		report["retire_flow_reads"] = retireFlowReads
+		report["retire_flow_writes"] = retireFlowWrites
+		report["retire_flow_window"] = [2]uint64{1253240000, 1253355000}
+	}
+	if *retireResidentAudit {
+		if len(retireResidentWrites) == 20000 {
+			panic("退休高位址監看事件超出上限")
+		}
+		report["retire_resident_writes"] = retireResidentWrites
+		report["retire_resident_window"] = [2]uint64{1253240000, 1253355000}
 	}
 	if *optionsAudit {
 		report["option_source_reads"] = optionSourceReads
