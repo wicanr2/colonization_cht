@@ -2,6 +2,11 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+進行中入口：[目標108](docs/goals/108-build-opening-caption-translation.md)：
+依目標107已驗的十張開場字幕，補 `@BUILD2–10` 的逐行繁中
+草稿與來源驗證；正式字級、Ebitengine 覆蓋及 help 顯示
+仍各依其證據閘門辦理。目標本文先推送，再執行譯稿工作。
+
 最近完成入口：[目標107](docs/goals/107-post-caption-input-and-help-entry.md)：
 英格蘭正常玩家路徑已驗85M與100M的 Enter 被原版消費；
 不加第二鍵亦會依序顯示 `GAME.TXT:@BUILD1–10` 十張開場字幕，
