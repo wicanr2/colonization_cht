@@ -1,5 +1,12 @@
 # 規格027：原版遊戲選項視窗九處文字
 
+2026-09-25 版面決定：使用者已為此視窗選定 A，標題34px、八列依序
+25／28／28／25／28／28／27／28px；排除 B 的38／28／32／32／28／32／32／31／32px。
+這是逐欄、貼近各欄原版字高的正式**字級選擇**，不會自動把規格升為
+READY：上游來源鏈、`~` 快捷鍵可見資訊、執行期逐幀守門、游標與反白
+回退及真視窗同狀態驗收仍須個別閉合。九欄目前仍顯示英文。下文各段
+「尚待選 A／B」只敘述當時的證據狀態，皆由本段決定更新。
+
 狀態：DRAFT；日期：2026-09-24。入口：[目標112](../goals/112-game-options-chinese-display.md)、[目標113](../goals/113-game-options-background-and-preview.md)、[目標114](../goals/114-game-options-print-buffer-dataflow.md)、[目標116](../goals/116-game-options-selection-and-exit-phases.md)、[目標117](../goals/117-game-options-same-focus-checkmarks.md)、[目標118](../goals/118-game-options-remaining-rows.md)、[目標119](../goals/119-game-options-click-phase.md)、[目標122](../goals/122-game-options-nine-field-state-guard.md)、[目標110](../goals/110-tutorial-hints-player-trigger.md)、[目標111](../goals/111-tutorial-hints-state-and-first-help.md)。本規格尚**不授權正式 Ebitengine 覆蓋**。
 
 ## 玩家範圍與原始版本
@@ -100,6 +107,26 @@
 以目標113兩次冷啟動的九個印前底圖及1,300M原版畫布為固定版本，先回跑目標111／116／117／118／119獨立檢查器；各分支無監看控制、實檔 SHA、同時點色盤都須一致。`tools/check_goal122_options_field_guard.py` 將13個分支的85個取樣狀態逐欄記錄：當幀 `canvas` 安全區與原1,300M印後畫布不同則原補片失效；若底圖相同而合成 `indexed` 與 `canvas` 不同，視作游標遮擋並保留原文；兩者均同才標 `safe-at-sample`。ESC後全部標 `window-exited`；目標119兩支各12個按下／放開細取樣全部標 `unknown-transition`，即使局部畫素碰巧相同，也不能宣稱安全。矩陣與原版像素只留已忽略的 `workplace/reports/goal122-options/field-guard.json`，SHA-256 `59867698f7df6989edc9edbc4ebe91b6ff1c9721fa3959cb4e311fa33ce36c45`。
 
 1,325M第2列點擊相位，`option-01/02` 底圖變、`option-03` 有游標，僅 `option-00/04/05/06/07/08` 作可丟棄中文候選；第8列點擊相位，`option-01/08` 底圖變，僅 `option-00/02/03/04/05/06/07` 作候選。純移鼠第一列遮 `option-01/02`，末列遮 `option-08`；1,375M ESC 離頁九欄全失效。移回第一列後各列安全區底圖可再匹配，但游標仍可能遮第一／第二列；核取中心在安全區外，不以補片改寫。四張真 Ebitengine A／B 部分欄預覽和兩張原文控制通過逐像素檢查：控制為當幀索引與色盤四倍最近鄰；未選欄與安全區外零變動；選欄恢復目標113逐欄多色印前底圖。只驗固定原版步數，不驗任意執行期幀的實際守門；原版精確選項啟用語意仍未知，A／B 字級仍待使用者決定。**因此規格仍 DRAFT，正式九欄英文、中文十七段不變。**
+
+## 2026-09-25：目標128的 A 字級驗證（仍為 DRAFT）
+
+使用者已選 A：標題34px；八列依序25／28／28／25／28／28／27／28px，
+排除較大的 B。固定 `Cubic_11.ttf` SHA-256
+`8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`。
+舊目標113預覽綁定當時整份 TSV 雜湊；目標128以現行 TSV 和
+原版雙冷啟動印前底圖重新產生 A 原型，九欄 `layers`、原版索引、
+色盤與舊 A 逐 byte 相同，只有整份語料雜湊更新；原有 Ebitengine
+中／英文圖與新資料的獨立逐像素檢查再次 PASS，九安全區外零變更。
+`tools/check_goal128_a_layout.py` 另核對九欄各自來源鍵、字級、
+真譯文、ASCII 快捷鍵標記、字模／暗影是否在安全區及畫素收據；
+錯 B 字級、越界、熱鍵消失、錯版與缺原版 `SKIP 77` 負例通過。
+本機收據及原版畫素僅留已忽略的 `workplace/reports/goal128-a-layout/`，
+總結收據 SHA-256
+`cf336f597a189f6fbbf68d2cdf46c5b4157aba3a8bc1affb7fbd7f280d580f21`。
+
+本輪**只關閉逐欄字級選擇**，沒有新增原版中間搬運、快捷鍵正式
+呈現決定或逐幀實際守門。九欄仍是英文，不能把本機 A 原型計入
+正式中文十七段。下方 READY 閘門仍逐條有效。
 
 ## 從 DRAFT 到正式覆蓋的閘門
 

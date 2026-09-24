@@ -1,6 +1,6 @@
 # 目標128：定版兩處 A 字級，推進首張開場字幕的執行期守門
 
-狀態：進行中；開始：2026-09-25。承接[目標106](106-build-opening-caption-overlay-gate.md)、[目標122](122-game-options-nine-field-state-guard.md)與[規格026](../spec/026-build-intro-and-tutorial-prefetch-draft.md)／[規格027](../spec/027-game-options-window-draft.md)。對應既有 [Issue #11](https://github.com/wicanr2/colonization_cht/issues/11)、[Issue #12](https://github.com/wicanr2/colonization_cht/issues/12)、[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)、[Issue #27](https://github.com/wicanr2/colonization_cht/issues/27)，不另開同義項目。
+狀態：完成（兩處 A 版面與固定取樣守門；正式覆蓋未完成）；開始與完成：2026-09-25。承接[目標106](106-build-opening-caption-overlay-gate.md)、[目標122](122-game-options-nine-field-state-guard.md)與[規格026](../spec/026-build-intro-and-tutorial-prefetch-draft.md)／[規格027](../spec/027-game-options-window-draft.md)。對應既有 [Issue #11](https://github.com/wicanr2/colonization_cht/issues/11)、[Issue #12](https://github.com/wicanr2/colonization_cht/issues/12)、[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)、[Issue #27](https://github.com/wicanr2/colonization_cht/issues/27)，不另開同義項目。
 
 ## 已確認的獨立視覺決定
 
@@ -19,3 +19,11 @@
 ## 停止線
 
 本輪不修改原版 EXE／TXT、規則、存檔或玩家輸入，不公開原版像素／字型。字級選定不會自動補足來源鏈或逐幀守門；任一閘門不成立時交付可重播缺口與安全回退，不把兩處 DRAFT 冒稱正式中文。首則 help 仍只有預讀證據，不計顯示完成。
+
+## 本輪結果與下一閘門
+
+兩處 A 已按各自原版字高鎖定，排除 B；主譯稿新增其他條目造成目標106／113舊樣本的**整份 TSV**雜湊過期，故用現行 TSV 重烘，未改原版、字幕本行或選項九欄譯文。`@BUILD1` 38px前景／暗影在安全矩形內，目標106與107既有原版獨立檢查重跑 PASS；遊戲選項九欄新舊 A `layers`、原版索引與色盤逐 byte 相同，用新資料重驗 Ebitengine 圖逐像素 PASS。
+
+新增[獨立 A 版與相位檢查器](../../tools/check_goal128_a_layout.py)及[負例](../../tools/test_goal128_a_layout.py)。固定英格蘭原版兩次冷啟動與無監看控制：85M還不是字幕；90M／175M／195M是同一張字幕及色盤；200M畫面已換頁。這是可重播的**取樣守門候選**，不是已接真視窗的逐幀守門。正例、B 字級／越界／熱鍵消失／錯版／錯畫面／錯色盤及缺原版 `SKIP 77` 通過。本機總結收據 SHA-256 `cf336f597a189f6fbbf68d2cdf46c5b4157aba3a8bc1affb7fbd7f280d580f21`，原版像素和所有 PNG 只在忽略版控的 `workplace/reports/goal128-a-layout/`。
+
+規格026／027仍 DRAFT；`@BUILD1` 與遊戲選項九欄仍顯示英文，正式中文十七段、help 零則。下一步須為 `@BUILD1` 建當次輸出事件生命週期、逐幀可逆底圖及游標／缺譯／離頁失效條件，證據審查 READY 後才能接真 Ebitengine 中文並同輸入驗收；九欄另需逐欄執行期反白與快捷鍵條件，不共用字幕38px。

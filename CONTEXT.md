@@ -2,7 +2,7 @@
 
 更新：2026-09-25；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-目前工作入口：[目標128](docs/goals/128-a-layout-decisions-and-build1-runtime-gate.md)。使用者已獨立決定 `@BUILD1` 開場字幕選 A（38px、實際墨跡高35px、共同置中，淡黃字與暗影），排除42px的 B；`Game Options` 九欄選 A（標題34px，八列25／28／28／25／28／28／27／28px），排除較大的 B。兩項只是版面決定，不共用字級；規格026／027在執行期守門與同狀態正式驗收之前仍為 DRAFT，字幕與九欄目前仍英文，正式中文維持十七段、help 零則。本輪先推進 `@BUILD1` 狹窄守門與 READY 審查，遊戲選項 A 版同步回填規格但不越級接正式圖層。
+最近完成：[目標128](docs/goals/128-a-layout-decisions-and-build1-runtime-gate.md)已獨立鎖定 `@BUILD1` 開場字幕 A（38px、實際墨跡高35px、共同置中，淡黃字與暗影），排除42px B；`Game Options` 九欄 A（標題34px，八列25／28／28／25／28／28／27／28px），排除較大的 B。現行 TSV 重烘與原版／Ebitengine 本機對照通過；`@BUILD1` 固定雙重播／無監看控制在85M拒絕、90M至195M已驗取樣候選、200M換頁拒絕。此為 DRAFT 守門候選，尚無真視窗逐幀中文、當次事件權杖或缺譯回退；規格026／027均未升 READY，字幕與九欄仍英文，正式中文十七段、help 零則。下一步由字幕事件生命週期與逐幀可逆補片接續，不把本輪 A 套到其他字幕或選項以外畫面。
 
 目前真相：[目標127](docs/goals/127-retire-source-to-print-dataflow.md)以兩種互斥原版監看追退休確認框來源：`GAME.TXT` 三筆32 byte實際被解析器讀取，解析區31／32筆變更寫入、高位址常駐字串35筆寫入、實際印字31個可見字元中30筆近端變更寫入與31筆讀取有可重播配對；雙次冷啟動、無監看控制與獨立正反例通過。同值寫入回呼的兩個 byte 案例及跨重用緩衝完整唯一歸屬不冒稱閉合，[規格028](docs/spec/028-retire-confirmation-overlay-draft.md)仍 DRAFT；退休框 A/B 版式另待使用者選擇，正式中文十七段及 help 零則不變。使用者再次確認的第一張國家旗卡 A（21／25px）已由目標099正式驗收，本輪不重做、不外推。
 
