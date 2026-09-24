@@ -2,6 +2,8 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+進行中：[目標118](docs/goals/118-game-options-remaining-rows.md)將沿同一 dosgolem 正常玩家路徑，補第2／3／5／6列點回第1列的同焦點畫面對照；目標117已有第4／7列限定收據。規格027仍 DRAFT，`Game Options` 九欄仍英文，正式中文仍十七段。
+
 最近完成：[目標117](docs/goals/117-game-options-same-focus-checkmarks.md)以正常玩家路徑完成第4／7列點擊後回第1列的雙冷啟動及無監看控制；同焦點終點各只差原版圖示中心四點，第4列47→149、第7列149→47，其他畫素與原文不變。這只證明固定抽樣的焦點／圖示分離，不能推啟用語意或全部列；[規格027](docs/spec/027-game-options-window-draft.md)仍 DRAFT、九欄仍英文、正式中文仍十七段。使用者再次確認的第一張國家旗卡 A（21／25px）先前已由目標099完成，未重複改動。
 
 最近完成入口：[目標116](docs/goals/116-game-options-selection-and-exit-phases.md)：
