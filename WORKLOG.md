@@ -2168,3 +2168,11 @@
   殘留或誤建 `.md` 目錄，兩個本輪映像沒有
   執行中／已停止容器殘留；隔離 dosgolem
   `upstream`推送位址仍為`DISABLED`。
+- 本輪成果以 `a606fe5` 推送 PRIVATE `origin/main`；主機
+  `gh` 已登入並回讀 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7#issuecomment-5807959390)、
+  [Issue #26](https://github.com/wicanr2/colonization_cht/issues/26#issuecomment-5807959520) 與
+  [Issue #27](https://github.com/wicanr2/colonization_cht/issues/27#issuecomment-5807959662) 的留言，
+  三者仍為 OPEN。使用者再次選定第一張國家旗卡 A
+  （「英格蘭：」21px、「移民」25px）；核對規格021、
+  目標099及正式 Ebitengine 同狀態收據，確認該決定
+  已有限定 CONFORMED 實作，未重做或外推到其他旗卡。
