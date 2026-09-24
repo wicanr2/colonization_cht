@@ -2,6 +2,12 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前進行中：[目標106](docs/goals/106-build-opening-caption-overlay-gate.md)
+以英格蘭正常玩家路徑上的 `GAME.TXT:@BUILD1` 字幕補印前底圖、
+單欄中文字級與安全矩形，再審查是否可升 READY；未經審查
+不接正式輸出層。這不改變下述目標105、四國長文待決版式或
+目前十七段正式中文顯示的狀態。
+
 下一工作入口：沿[目標105](docs/goals/105-first-tutorial-player-path.md)
 已驗 `@BUILD1` 字幕，查明開場畫面後續按鍵消費與相位，
 再尋找首則真正顯示的教學訊息；`@TUTORIAL1` 目前只證實
