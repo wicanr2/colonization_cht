@@ -2,6 +2,11 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前進行入口：[目標103](docs/goals/103-font-rebuild-and-mask-parity.md)：
+以找回的固定 Cubic 11 原始 TTF、合法原版與真實 TSV 重烘
+現行十七欄本機字模，逐欄和歷史已驗字模比對。此工作不改
+正式顯示、不替使用者決定四國介紹長文版面。
+
 最近完成入口：[目標102](docs/goals/102-nation-introduction-layout-prototypes.md)：
 以已驗四國八節正常玩家路徑，核對重新找到的固定 SHA-256
 `Cubic_11.ttf`，取得八頁相同的原版印字前底圖；兩套繁中長文離線
