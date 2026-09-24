@@ -2,10 +2,17 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-目前進行入口：[目標104](docs/goals/104-nation-introduction-exit-phase.md)：
-以 dosgolem 正常玩家路徑量英格蘭、西班牙與荷蘭介紹 B 頁後
-無輸入／Enter／ESC 的畫面、原版狀態與印字相位，補規格025的
-離頁守門證據；長文版式仍待使用者選擇，不接正式中文畫面。
+目前進行入口：[目標105](docs/goals/105-first-tutorial-player-path.md)：
+從已驗國家介紹後續頁沿正常玩家按鍵追首則遊戲內教學訊息；
+`text/help-bilingual.tsv` 的24則仍只是來源固定的雙語草稿，
+未有正式中文 help 畫面。長文版式另待使用者選擇。
+
+最近完成入口：[目標104](docs/goals/104-nation-introduction-exit-phase.md)：
+英格蘭、西班牙與荷蘭介紹 B 頁後無鍵／Enter／ESC 各有雙次
+dosgolem 冷啟動及無觀測控制。無鍵留 B 頁，兩鍵到各國
+下一可見頁，原版清屏／新頁印字與原始畫布均經獨立核對；
+Enter／ESC 完整 RAM 不同，不宣稱後續等價。規格025仍
+DRAFT，正式中文顯示仍十七段。
 
 最近完成入口：[目標103](docs/goals/103-font-rebuild-and-mask-parity.md)：
 固定 Cubic 11 原始 TTF、合法原版與真實 TSV 已重烘現行十七欄
