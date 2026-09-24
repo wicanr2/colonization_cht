@@ -154,9 +154,13 @@ func main() {
 	writers := map[string]*introWriter{}
 	preprintCanvas := map[string][]byte{}
 	preprintSteps := map[string]uint64{}
+	observeEnd := uint64(75000000)
+	if *afterB != "none" {
+		observeEnd = 85000000
+	}
 	if !*control {
 		m.WatchReads(0x20000, 0x80000, func(a uint32, value uint8) {
-			if m.Steps < 55000000 || m.Steps >= 75000000 || len(printReads) >= 30000 {
+			if m.Steps < 55000000 || m.Steps >= observeEnd || len(printReads) >= 30000 {
 				return
 			}
 			cs, ip := m.CPU.OpAddr()
@@ -166,15 +170,17 @@ func main() {
 			}
 		})
 		m.WatchWrites(canvas, canvas+64000, func(a uint32, old, value uint8) {
-			if m.Steps < 55000000 || m.Steps >= 75000000 || old == value {
+			if m.Steps < 55000000 || m.Steps >= observeEnd || old == value {
 				return
 			}
 			cs, ip := m.CPU.OpAddr()
 			phase := "first"
-			if m.Steps >= 65000000 {
+			if m.Steps >= 75000000 {
+				phase = "after-b"
+			} else if m.Steps >= 65000000 {
 				phase = "second"
 			}
-			if *preprint && cs == 0x0d21 && ip == 0x012c && preprintCanvas[phase] == nil {
+			if *preprint && phase != "after-b" && cs == 0x0d21 && ip == 0x012c && preprintCanvas[phase] == nil {
 				// WatchWrites 先於 Mem 寫入回呼；此時仍是真正的首字印前多色底圖。
 				preprintCanvas[phase] = bytes.Clone(m.Mem[canvas : canvas+64000])
 				preprintSteps[phase] = m.Steps
@@ -366,6 +372,8 @@ func main() {
 	version := "goal101-intro-v1"
 	if *nation == "france" && *afterB == "none" {
 		version = "goal098-intro-v3"
+	} else if *afterB != "none" {
+		version = "goal104-intro-exit-v1"
 	}
 	report := map[string]any{"version": version, "control": *control,
 		"next_enter": *nextEnter,

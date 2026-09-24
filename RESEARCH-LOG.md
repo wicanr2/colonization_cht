@@ -3420,3 +3420,42 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
   dosgolem 事件或正式中文欄位，不驗新畫面；`rich2-py`
   目前沒有本專案內的可重建來源，其他機器、公開散布及
   字型授權告知仍需分別審查。原版與 TTF 均未提交 Git。
+
+## 2026-09-24：目標104三國介紹 B 頁離頁相位
+
+- **輸入與工具：**原版 DOS `GAME.TXT` SHA-256
+  `67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a`；
+  `OPENING.EXE`、`VICEROY.EXE`、`NAMES.TXT`、`LABELS.TXT`、
+  `NATIONS.PIK` 亦依 `tools/check_goal104_nation_intro_exit.py`
+  固定檔名與雜湊。十六筆正常玩家輸入 SHA-256
+  `a48ae77b9f6a0c2bdb9b3512625d0c1c4786b1cb64b8deff4bdb603fe422d93e`。
+  隔離 `workplace/dosgolem` 提交
+  `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`；容器
+  `colonization-research:20260920-r2`、Go 1.24.13。輸入檔案
+  唯讀；本機原始 JSON、320×200 `.idx`／`.canvas`、768-byte
+  `.pal` 在已忽略的 `workplace/reports/goal104-intro/`。
+- **已證實／原版固定玩家路徑：**英、西、荷各自由選國滑鼠、
+  姓名 Enter、A→B 到 75M，再做無輸入、Enter、ESC 各兩次
+  冷啟動與一次無讀寫監看控制，共27份新報告。75M 的完整
+  CPU／RAM／虛擬時間／開檔／索引樣本及三種原始畫布都與
+  目標101同國 B 頁一致。各分支的雙重播 JSON 位元組一致，
+  同分支監看與無監看 CPU、完整 RAM、時間、畫布及開檔一致。
+  無鍵的 80M／85M 仍是 B 頁；Enter／ESC 都在 80M 前整張
+  清屏，進入該國後續可見頁，80M／85M 可見畫面穩定。
+- **已證實／位址空間：**原版實模式 `CS:IP 0C9F:00CA` 在
+  Enter／ESC 離頁時各有64,000次清屏寫入，半開原版畫布
+  bbox `[0,0,320,200)`；`CS:IP 0D21:012C` 的後續印字
+  英／西／荷改色寫入分別1,674／1,630／1,716次。
+  `CS:IP`、20-bit RAM、320×200索引座標、`GAME.TXT` 檔案
+  位移與四倍輸出畫布是五種不同基準。後續索引 SHA-256
+  英 `80c7f1040ca20903dd67a3bc49a86f13eea967609e640fe65e8523c829aaceec`、
+  西 `9040a4fc27b893381015a3dc27c19f4dded6deeea236fb1dd5032a323316911c`、
+  荷 `f53b683f5bd50dbb1ec42d515819321b81e8b3fe2653a8a930cca8fe9a69fc52`。
+  各國 Enter／ESC 可見畫面相同，但85M完整 RAM 雜湊不同；
+  **不推論** CPU／規則／存檔等價。
+- **重播與限制：**`tools/probe_goal098_intro.go -after-b` 將
+  75M–85M 讀寫獨立標成 `after-b`；不帶 `-after-b` 的英格蘭
+  新舊 JSON 逐位元組相同。獨立驗證器與原版缺失 SKIP、
+  錯版本、原始畫布破損反例均 PASS。本機 `receipt.json`
+  SHA-256 `92bdc7335ced5740da04c6a2d7707520f85f832d7aa8174a9c71aaa2f6646ccf`。
+  原版離頁證據不等於中文長文覆蓋；規格025保持 DRAFT。

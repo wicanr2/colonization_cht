@@ -1,6 +1,6 @@
 # 目標104：其餘三國介紹 B 頁離頁與輸出相位
 
-狀態：進行中；日期：2026-09-24。承接[目標101](101-nation-introduction-player-path.md)
+狀態：completed（僅三國 B 頁離頁原版證據）；日期：2026-09-24。承接[目標101](101-nation-introduction-player-path.md)
 的四國八節正常玩家路徑、[目標102](102-nation-introduction-layout-prototypes.md)
 的印字前底圖及[規格025](../spec/025-first-nation-introduction-draft.md)，
 對應 [Issue #30](https://github.com/wicanr2/colonization_cht/issues/30)。
@@ -49,3 +49,23 @@ B 頁離頁證據只支援正式覆蓋將來的反向守門，不會自動授權
 中文字級、事件鍵或正式圖層。使用者尚未選定長文版式；
 規格025維持 DRAFT，直到版面、頁相位、游標、缺譯回退與
 真視窗同狀態各自取得適用證據。
+
+## 結果與限制
+
+- 目標101的 `-after-b none` 英格蘭新舊 JSON 逐位元組一致。
+  本輪英、西、荷三國的無輸入、Enter、ESC 各有兩次獨立
+  冷啟動及一次無讀寫監看控制，共27份新報告；75M 的
+  完整樣本與三種原始畫布對回目標101，80M／85M 各分支穩定。
+- 無輸入仍留原 B 頁；Enter／ESC 各經原版 `0C9F:00CA`
+  清屏、`0D21:012C` 新頁印字，開檔從55增至60。
+  三國的兩鍵可見索引、畫布、色盤相同，但完整 RAM 不同，
+  不推論內部或後續玩法等價。
+- `tools/check_goal104_nation_intro_exit.py` 核對固定原版版本、
+  玩家輸入、雙重播、無監看控制、各樣本的原始 bytes、
+  開檔及事件；`tools/test_goal104_nation_intro_exit.py` 的
+  缺原版 SKIP、錯版本及改動單一畫素的反例通過。
+  本機 `workplace/reports/goal104-intro/receipt.json` SHA-256
+  `92bdc7335ced5740da04c6a2d7707520f85f832d7aa8174a9c71aaa2f6646ccf`。
+- [規格025](../spec/025-first-nation-introduction-draft.md)仍為
+  DRAFT，正式長文中文覆蓋與真 Ebitengine 驗證尚未完成；
+  第一張旗卡 A 版21／25px不自動決定這組長文的字級。

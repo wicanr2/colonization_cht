@@ -1998,3 +1998,30 @@
   不留下成功收據；這與錯字型、錯 TSV 的失敗即關閉分開計算。
 - 工具、驗證與文件以 `68ec5ad` 推送 PRIVATE `origin/main`；
   主機真正 `gh` 已留言並回讀 Issue #12／#26，兩者仍 OPEN。
+
+## 2026-09-24：目標104三國介紹 B 頁離頁守門
+
+- 本輪先核對第一張旗卡的 A 版21／25px早於目標099已限定
+  CONFORMED，不重做或擴張到長文。於乾淨工作樹、正確 Git
+  身分、PRIVATE 遠端與 Issue #30 OPEN 下，先以 `a0e6a8e`
+  推送[目標104](docs/goals/104-nation-introduction-exit-phase.md)，
+  再修改探針。知識路由命中復古遊戲／中文化、規格閘門與
+  資料化工作清單；長文版面仍待使用者另行選擇。
+- 在無網路、限資源、非 root 的研究容器，以隔離 dosgolem
+  為英、西、荷三國各跑無鍵／Enter／ESC、雙重播與無觀測
+  控制共27份報告。`-after-b none` 的英格蘭舊新 JSON
+  逐位元組一致；九分支在75M與目標101同國 B 頁一致。
+- 獨立驗證器逐分支比對原始索引／畫布／色盤、完整 CPU／RAM
+  與虛擬時間、開檔、清屏和新頁印字；正例通過。缺原版
+  SKIP、錯版本與單一原始畫素改動均被拒絕。三國無鍵仍留
+  B 頁；Enter／ESC 抵達各國下一可見頁但 RAM 不同。
+  [規格025](docs/spec/025-first-nation-introduction-draft.md)仍
+  DRAFT；沒有改正式 Ebitengine，正式中文維持十七段。
+- 收據只在已忽略的 `workplace/reports/goal104-intro/`；
+  `docs/worklist.json` 更新後由工具重生 `WORKLIST.md`。
+  原版檔案、字型、原始畫面與完整報告均不入 Git。
+- 收尾回歸重跑目標101及104檢查器、目標104負例、
+  `tools/worklist.py verify` 均 PASS。目標104輸出檔擁有者為
+  UID/GID 1000:1000，工作根無 root-owned 項目或誤建
+  `.md` 目錄，專案研究映像的執行中／已停止容器均無殘留；
+  隔離 dosgolem 的 `upstream` 推送位址仍為 `DISABLED`。
