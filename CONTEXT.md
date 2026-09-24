@@ -1,6 +1,6 @@
 # 目前脈絡
 
-進行中：[目標129](docs/goals/129-build1-runtime-frame-lifecycle.md)追英格蘭正常玩家 `@BUILD1` 當次原版印字、逐幀畫面生命週期與失效回退；只有證據審查 READY 後才會接真 Ebitengine 中文。使用者再次確認 `Game Options` 九欄 A 字級；已由目標128記錄與驗證，本輪不重做，九欄仍英文。
+最近完成：[目標129](docs/goals/129-build1-runtime-frame-lifecycle.md)沿英格蘭正常玩家路徑證實 `@BUILD1` 當次61字元印字及1,040點畫布寫入；dosgolem 第538幀／88,770,000步首次符合畫面條件，連續647幀，第1185幀／195,525,000步換頁失效。雙冷啟動、無監看控制、13項回退負例及探針預設關閉舊收據逐 byte 回歸通過。這仍是 DRAFT 原版逐幀證據，非真 Ebitengine 事件權杖／可逆補片／游標／同輸入驗收；規格026不升 READY，字幕仍英文，正式十七段、help 零則。使用者再次確認 `Game Options` 九欄 A 字級；目標128已記錄與驗證，九欄仍英文。
 
 更新：2026-09-25；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 

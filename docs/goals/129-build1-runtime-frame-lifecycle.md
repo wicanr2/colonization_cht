@@ -1,6 +1,6 @@
 # 目標129：首張開場字幕的執行期畫面生命週期
 
-狀態：進行中；開始：2026-09-25。承接[目標128](128-a-layout-decisions-and-build1-runtime-gate.md)及[規格026](../spec/026-build-intro-and-tutorial-prefetch-draft.md)；對應既有 [Issue #11](https://github.com/wicanr2/colonization_cht/issues/11)、[Issue #12](https://github.com/wicanr2/colonization_cht/issues/12)、[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)，不另開同義議題。
+狀態：完成（限定逐幀原版證據；正式覆蓋仍未完成）；開始與完成：2026-09-25。承接[目標128](128-a-layout-decisions-and-build1-runtime-gate.md)及[規格026](../spec/026-build-intro-and-tutorial-prefetch-draft.md)；對應既有 [Issue #11](https://github.com/wicanr2/colonization_cht/issues/11)、[Issue #12](https://github.com/wicanr2/colonization_cht/issues/12)、[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)，不另開同義議題。
 
 ## 已確認決定與界線
 
@@ -19,3 +19,11 @@
 ## 權利與停止線
 
 原版像素、逐字原文及 Cubic 11 字型只留本機。正式公開截圖仍須權利判斷與同狀態驗收；不以 DOSBox 擷取冒充 dosgolem 收據。若顯示守門只能固定取樣而非執行期每幀，規格026保持 DRAFT，不以預覽圖代替玩家真視窗。
+
+## 本輪結果與下一閘門
+
+`tools/probe_goal098_intro.go` 新增預設關閉的 `-caption-frame-audit`，沿已驗英格蘭正常玩家 Enter 路徑至210M步。原版 `GAME.TXT:0x153CE` 的61 byte於 `0D21:00C6` 自線性 RAM `0x2A560/1` 交錯讀取與零位全部匹配，88,689,021–88,754,524步；`0D21:012C` 在88,689,058–88,754,477步改色1,040點，原版320×200半開框`[16,30,303,39)`。這些是固定原版當次事件的**已證實**觀測，不把檔案到最後印字緩衝的未追完搬運冒稱完整閉合。
+
+dosgolem 垂直回掃回呼在85M–210M觀測757個畫格：第538幀／88,770,000步首次同時滿足當次事件、原版畫布與色盤指紋；連續647個畫格可顯示，最後一幀在195,360,000步；第1185幀／195,525,000步畫布換頁而失效，至210M未重新啟用。雙次冷啟動報告逐 byte 相同，SHA-256 `d799044b825bc6726d53b4003b78ea2a7495b1e4b47a721138bae6c1b8c50fc8`；無讀寫監看控制 SHA-256 `e0a23f50f6a8d0f8c1c2f6b7c8c860c3004c7002c68768bd73c04b6474b12d0b`，34個取樣的 CPU、完整 RAM、原版索引／畫布／色盤、時間與開檔逐項相同。新增獨立[檢查器](../../tools/check_goal129_caption_frames.py)及[負例](../../tools/test_goal129_caption_frames.py)：13項錯來源／缺譯／錯畫面／色盤／離頁等篡改與回退拒絕，缺合法原版 `SKIP 77`；原探針預設關閉結果與目標105歷史 JSON 逐 byte 相同。
+
+上述是**原版逐幀 DRAFT 證據**，還不是可供正式前端使用的事件權杖：目前沒有在 Ebitengine 真視窗逐幀重新建立當次權杖、可逆多色底圖補片與游標遮擋負例，亦沒有中文／英文同輸入截圖或玩家真視窗收據。因此[規格026](../spec/026-build-intro-and-tutorial-prefetch-draft.md)不升 READY，`@BUILD1` 仍顯示英文；正式中文仍十七段，help 零則。下一步先把本輪已驗的事件與頁生命週期轉為遊戲專屬的窄版 READY 契約，再接 Ebitengine，不能讓字幕原型直接進 production path。

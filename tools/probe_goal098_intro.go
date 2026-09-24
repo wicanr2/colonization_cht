@@ -70,6 +70,7 @@ func main() {
 	followEnterAt := flag.String("follow-enter-at", "", "目標105：額外 Enter 的百萬步數，以逗號分隔，例如100,115")
 	preprint := flag.Bool("preprint", false, "在 A/B 與啟用後續頁時的首筆 0D21:012C 寫入前擷取原始畫布")
 	postCaptionAudit := flag.Bool("post-caption-audit", false, "目標107：選用鍵盤待取數診斷與有界字幕後觀測")
+	captionFrameAudit := flag.Bool("caption-frame-audit", false, "目標129：首張字幕的當次印字、畫布與逐幀失效觀測；預設關閉")
 	gameInputsPath := flag.String("game-inputs", "", "目標110：字幕後正常玩家滑鼠／鍵盤事件 JSON；預設不改舊重播")
 	optionsAudit := flag.Bool("options-audit", false, "目標112：固定 GAME.TXT 遊戲選項九欄的 DOS 讀入來源")
 	optionsPreprint := flag.Bool("options-preprint", false, "目標113：九欄各自首筆原版印字前底圖與印字緩衝寫入")
@@ -103,6 +104,11 @@ func main() {
 	if *postCaptionAudit && (*afterFollow != "enter" && *afterFollow != "esc" ||
 		!*nextEnter || *preprint) {
 		panic("字幕後稽核需正常 B 頁後路徑，且不與印前擷取混用")
+	}
+	if *captionFrameAudit && (!*postCaptionAudit || *nation != "england" ||
+		*afterB != "enter" || *afterFollow != "enter" || *followUntil < 210000000 ||
+		*gameInputsPath != "" || *followEnterAt != "") {
+		panic("字幕逐幀觀測只接受固定英格蘭 Enter 路徑至至少210M，無額外輸入")
 	}
 	maxFollow := uint64(150000000)
 	if *postCaptionAudit {
@@ -258,6 +264,7 @@ func main() {
 		}
 	}
 	game := readIntro(filepath.Join(*root, "GAME.TXT"))
+	captionExpected := game[0x153ce:0x1540b]
 	type nationRoute struct {
 		first, second, end int64
 		marker, title      string
@@ -373,6 +380,21 @@ func main() {
 	optionBefore := map[int][]byte{}
 	optionFirstSteps := map[int]uint64{}
 	optionWriteCounts := map[int]int{}
+	captionReadStage := 0
+	captionReadStart := uint64(0)
+	captionReadEnd := uint64(0)
+	captionReadMismatch := 0
+	captionWriteCount := 0
+	captionWriteFirst := uint64(0)
+	captionWriteLast := uint64(0)
+	captionWriteBBox := [4]int{320, 200, 0, 0}
+	captionFrames := 0
+	captionSignatureFrames := 0
+	captionEligibleFrames := 0
+	captionPhase := "unseen"
+	captionTransitions := []map[string]any{}
+	captionSignatureFirst := uint64(0)
+	captionSignatureLast := uint64(0)
 	optionSafe := [9][4]int{{65, 44, 253, 59}, {80, 59, 252, 71},
 		{80, 71, 252, 83}, {80, 83, 252, 95}, {80, 95, 252, 107},
 		{80, 107, 252, 119}, {80, 119, 252, 131}, {80, 131, 252, 143},
@@ -389,6 +411,32 @@ func main() {
 	}
 	if !*control {
 		m.WatchReads(0x20000, 0x80000, func(a uint32, value uint8) {
+			if *captionFrameAudit && m.Steps >= 88600000 && m.Steps < 88900000 &&
+				captionReadEnd == 0 {
+				cs, ip := m.CPU.OpAddr()
+				if cs == 0x0d21 && ip == 0x00c6 && (a == 0x2a560 || a == 0x2a561) {
+					wantedAddr := uint32(0x2a560)
+					wantedValue := captionExpected[captionReadStage/2]
+					if captionReadStage%2 == 1 {
+						wantedAddr, wantedValue = 0x2a561, 0
+					}
+					if a == wantedAddr && value == wantedValue {
+						if captionReadStage == 0 {
+							captionReadStart = m.Steps
+						}
+						captionReadStage++
+						if captionReadStage == len(captionExpected)*2 {
+							captionReadEnd = m.Steps
+						}
+					} else {
+						captionReadMismatch++
+						captionReadStage = 0
+						if a == 0x2a560 && value == captionExpected[0] {
+							captionReadStart, captionReadStage = m.Steps, 1
+						}
+					}
+				}
+			}
 			if *retireFlowAudit && m.Steps >= 1253240000 && m.Steps < 1253355000 &&
 				((a >= 0x2ac00 && a < 0x2b180) || (a >= 0x74000 && a < 0x74600)) &&
 				len(retireFlowReads) < 50000 {
@@ -490,6 +538,27 @@ func main() {
 				return
 			}
 			cs, ip := m.CPU.OpAddr()
+			if *captionFrameAudit && m.Steps >= 88600000 && m.Steps < 88900000 &&
+				cs == 0x0d21 && ip == 0x012c {
+				if captionWriteCount == 0 {
+					captionWriteFirst = m.Steps
+				}
+				captionWriteCount++
+				captionWriteLast = m.Steps
+				x, y := int(a-canvas)%320, int(a-canvas)/320
+				if x < captionWriteBBox[0] {
+					captionWriteBBox[0] = x
+				}
+				if y < captionWriteBBox[1] {
+					captionWriteBBox[1] = y
+				}
+				if x+1 > captionWriteBBox[2] {
+					captionWriteBBox[2] = x + 1
+				}
+				if y+1 > captionWriteBBox[3] {
+					captionWriteBBox[3] = y + 1
+				}
+			}
 			phase := "first"
 			if m.Steps >= 85000000 {
 				phase = "after-follow"
@@ -576,6 +645,46 @@ func main() {
 					"linear": a, "old": old, "value": value})
 			})
 		}
+	}
+	if *captionFrameAudit {
+		const captionCanvasSHA = "b8c0d43983c95415071e83513628fc90e8de3236f3e75eb699ed4d87dfc8c772"
+		const captionPaletteSHA = "92593125369b8224c1f00b30ad0367d6f1766da49afb614dcf753ad8d70b665b"
+		m.SetOnFrame(func() {
+			if m.Steps < 85000000 || m.Steps > *followUntil {
+				return
+			}
+			captionFrames++
+			canvasSHA := hashIntro(m.Mem[canvas : canvas+64000])
+			paletteSHA := hashIntro(m.DAC[:])
+			signature := m.VideoMode() == 0x13 && canvasSHA == captionCanvasSHA && paletteSHA == captionPaletteSHA
+			if signature {
+				captionSignatureFrames++
+				if captionSignatureFirst == 0 {
+					captionSignatureFirst = m.Steps
+				}
+				captionSignatureLast = m.Steps
+			}
+			if *control {
+				return
+			}
+			eligible := captionReadEnd != 0 && captionWriteCount == 1040 &&
+				captionWriteBBox == [4]int{16, 30, 303, 39} && signature
+			if captionPhase == "unseen" && eligible {
+				captionPhase = "ready"
+				captionTransitions = append(captionTransitions, map[string]any{
+					"event": "ready", "step": m.Steps, "frames": m.Frames,
+					"canvas_sha256": canvasSHA, "palette_sha256": paletteSHA})
+			} else if captionPhase == "ready" && !eligible {
+				captionPhase = "expired"
+				captionTransitions = append(captionTransitions, map[string]any{
+					"event": "expired", "step": m.Steps, "frames": m.Frames,
+					"canvas_sha256": canvasSHA, "palette_sha256": paletteSHA,
+					"mode": m.VideoMode()})
+			}
+			if captionPhase == "ready" {
+				captionEligibleFrames++
+			}
+		})
 	}
 	transferIndex := 0
 	transfers := []map[string]any{}
@@ -866,6 +975,9 @@ func main() {
 			version = "goal127-retire-resident-v1"
 		}
 	}
+	if *captionFrameAudit {
+		version = "goal129-caption-frame-audit-v1"
+	}
 	report := map[string]any{"version": version, "control": *control,
 		"next_enter": *nextEnter,
 		"nation":     *nation, "after_b": *afterB,
@@ -883,6 +995,22 @@ func main() {
 		if *followUntil != 100000000 || *followEnterAt != "" {
 			report["follow_until"] = *followUntil
 			report["follow_enter_at"] = *followEnterAt
+		}
+	}
+	if *captionFrameAudit {
+		report["caption_frame_audit"] = map[string]any{
+			"event_source":    "GAME.TXT:0x153CE, 0D21:00C6, linear 0x2A560/1",
+			"source_sha256":   hashIntro(captionExpected),
+			"read_start_step": captionReadStart, "read_end_step": captionReadEnd,
+			"read_match_bytes": captionReadStage / 2, "read_mismatches": captionReadMismatch,
+			"writer_ip": "0D21:012C", "write_first_step": captionWriteFirst,
+			"write_last_step": captionWriteLast, "write_count": captionWriteCount,
+			"write_bbox": captionWriteBBox, "frames": captionFrames,
+			"signature_frames":     captionSignatureFrames,
+			"signature_first_step": captionSignatureFirst,
+			"signature_last_step":  captionSignatureLast,
+			"eligible_frames":      captionEligibleFrames, "phase_at_end": captionPhase,
+			"transitions": captionTransitions,
 		}
 	}
 	if *gameInputsPath != "" {
