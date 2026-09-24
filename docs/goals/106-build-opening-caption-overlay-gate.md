@@ -1,6 +1,6 @@
 # 目標106：開場字幕 `@BUILD1` 的中文覆蓋閘門
 
-狀態：active；日期：2026-09-24。承接[目標105](105-first-tutorial-player-path.md)
+狀態：completed（印前證據與可丟棄樣本；正式字幕待使用者選擇）；日期：2026-09-24。承接[目標105](105-first-tutorial-player-path.md)
 已證實英格蘭正常玩家路徑上的英文開場字幕，對應
 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)、
 [Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)及
@@ -51,3 +51,51 @@
   dosgolem 僅用 `workplace/dosgolem` 的隔離副本。
 - 本目標只處理一條字幕的輸出層。它不能使24則 help、其餘字幕、
   國家介紹長文或整款遊戲取得「中文化完成」聲明。
+
+## 本輪結果與下一閘門
+
+已完成本目標的證據與可丟棄樣本階段；正式輸出分支仍待
+使用者確認 A／B，規格026保持 DRAFT。探針在英格蘭正常
+玩家路徑的88,689,058步取得原版印前底圖 SHA-256
+`d8d0d8e5de5655411fd4935d2b96e6e84845ee924658668f9486196ede9882ab`；
+雙重播與無監看控制同狀態。印前至90M印後只差原字幕的
+1,040點，墨跡高9原版像素，三種新色號為14／47／54。
+本機安全矩形候選為原版 `[12,27,307,42)`；固定字型
+38px的 A 實際墨跡430×35px，42px的 B 為482×39px，
+兩者都不越界。並列對照留在忽略版控的
+`workplace/reports/goal106-caption/comparison.png`，
+不冒稱 Ebitengine 正式畫面。
+
+`tools/check_goal106_caption.py` 獨立核對原版、雙重播、控制、
+TSV、字型與候選 A 的畫素；`tools/test_goal106_caption.py`
+的缺原版 SKIP、錯字級、破損畫布、雙重播變異負例 PASS。
+本機收據 SHA-256
+`54b1e99255e49848eaa8810fc0063c5dcae38d990dbb84cd3ec147ec7ba4cf6b`。
+下一步取得使用者單一視覺選擇，再審查 READY 的執行期
+事件與失敗即關閉條件；這輪不增加十七段正式中文顯示數。
+
+## 本機重播入口
+
+先依專案 `AGENTS.md` 驗證每個掛載來源，使用限資源、
+無網路、非 root 的一次性 Docker；將本儲存庫掛 `/repo`
+可寫、隔離 `workplace/dosgolem` 掛 `/dosgolem` 唯讀、
+合法 `COLONIZE` 目錄掛 `/game` 唯讀。容器內：
+
+```sh
+cd /dosgolem
+GOCACHE=/tmp/goal106-go-cache /usr/local/go/bin/go build \
+  -o /tmp/goal106-probe /repo/tools/probe_goal098_intro.go
+/tmp/goal106-probe -root /game \
+  -inputs /repo/workplace/reports/goal083-post-difficulty/goal084-window-full.inputs.json \
+  -nation england -next-enter -after-b enter -after-follow enter -preprint \
+  -out /repo/workplace/reports/goal106-caption/england-enter-a
+```
+
+以新的輸出前綴重播第二次；控制組移除 `-preprint`、
+改加 `-control`。不可覆寫本輪已驗收據。字型樣本另在
+`rich2-py:latest` 容器中，把[固定字型來源](../../font/README.md)
+所在目錄唯讀掛 `/font`，呼叫
+`tools/preview_goal106_build_caption.py --help`；
+再以 `tools/check_goal106_caption.py --help` 核對三份報告
+及樣本。原版、字型或固定輸入缺失時，明確 SKIP，
+不以公開 Git 內容冒充原版對拍。

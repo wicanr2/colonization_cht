@@ -2,11 +2,14 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-目前進行中：[目標106](docs/goals/106-build-opening-caption-overlay-gate.md)
-以英格蘭正常玩家路徑上的 `GAME.TXT:@BUILD1` 字幕補印前底圖、
-單欄中文字級與安全矩形，再審查是否可升 READY；未經審查
-不接正式輸出層。這不改變下述目標105、四國長文待決版式或
-目前十七段正式中文顯示的狀態。
+最近工作入口：[目標106](docs/goals/106-build-opening-caption-overlay-gate.md)
+已用英格蘭正常玩家路徑補 `GAME.TXT:@BUILD1` 的原版印前
+底圖、9px原文墨跡、四倍安全矩形及兩個可丟棄繁中樣本；
+雙重播與無監看控制同狀態，獨立負例通過。A 是38px／
+35px實際墨跡，B 是42px／39px實際墨跡；使用者尚未選擇，
+[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)
+仍 DRAFT，未接正式 Ebitengine。這不改變四國長文待決版式、
+首則教學只預讀或目前十七段正式中文顯示的狀態。
 
 下一工作入口：沿[目標105](docs/goals/105-first-tutorial-player-path.md)
 已驗 `@BUILD1` 字幕，查明開場畫面後續按鍵消費與相位，

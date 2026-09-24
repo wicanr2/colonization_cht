@@ -2064,3 +2064,60 @@
   目標105輸出 UID/GID 1000:1000；工作根無 root-owned
   項目或誤建 `.md` 目錄，兩個本輪映像均無容器殘留，
   隔離 dosgolem `upstream` 推送位址仍為 `DISABLED`。
+
+## 2026-09-24：目標106開場字幕印前背景與繁中字級對照
+
+- 上一個使用者確認第一張旗卡 A 版的回合只核對既有
+  CONFORMED 狀態，未新增中文化進度；本輪改接目標105
+  真正顯示的 `GAME.TXT:@BUILD1` 字幕。核對
+  `wicanr2@gmail.com`、乾淨工作樹、PRIVATE 遠端、
+  Issue #7／#26／#27 OPEN 與隔離 dosgolem `upstream`
+  禁推後，以 `d787aa4` **先推送**
+  [目標106](docs/goals/106-build-opening-caption-overlay-gate.md)。
+  知識路由命中規格閘門、顯示／語意隔離、dosgolem、
+  文件職責與資料化工作清單；使用了
+  `reverse-engineer-retro-game-remake` 的證據／驗證方法，
+  未把本案改為 remake。
+- 擴充 `tools/probe_goal098_intro.go -preprint`，只在啟用
+  `-after-follow` 時另存字幕首筆 `0D21:012C` 寫入前
+  畫布；未帶新旗標的英格蘭75M JSON 與目標101舊收據
+  逐位元組相同。兩次獨立英格蘭冷啟動與一次無讀寫
+  監看控制到100M；雙重播 JSON 完全相同，控制組
+  CPU／完整 RAM／原始畫布／色盤／時間／開檔一致。
+  原版印前畫布 SHA-256
+  `d8d0d8e5de5655411fd4935d2b96e6e84845ee924658668f9486196ede9882ab`；
+  印後差1,040點，bbox `[16,30,303,39)`，新色號
+  14／47／54。
+- 以固定 SHA 的 Cubic 11 TTF、真實 TSV 草稿和原版
+  多色印前底圖做38px／42px兩個本機可丟棄樣本，
+  實際墨跡分別430×35／482×39px，兩者前景與暗影
+  均位於四倍安全矩形 `[48,108,1228,168)`。
+  首次樣本檢查把 Pillow `getbbox` 的留白當成實際
+  Alpha 墨跡，正確地拒絕；改為裁出真實非零墨跡後
+  用同一固定輸入重跑通過，屬量測腳本修正而非
+  原版行為差異。並列圖、原版畫素及字模留在忽略
+  版控的 `workplace/reports/goal106-caption/`。
+- 視覺取捨依 `grill-me`／`grilling` 先展示原版／
+  A 38px／B 42px並列原型，只問這一欄的正式字級；
+  使用者尚未回答，因此規格026仍 DRAFT、正式
+  Ebitengine 保持原文，既有十七段顯示數不變。
+  此技能使「是否放大這行字幕」未被樣本悄悄寫成
+  正式版式，四國長文的另一待決版式也未被外推。
+- `tools/check_goal106_caption.py` 獨立正例 PASS；
+  `tools/test_goal106_caption.py` 的缺原版 SKIP、
+  錯版、錯字級、印前畫布單點破損及雙重播變異
+  負例 PASS，命令列缺原版回 `SKIP 77` 且未留
+  假成功收據。本機 `receipt.json` SHA-256
+  `54b1e99255e49848eaa8810fc0063c5dcae38d990dbb84cd3ec147ec7ba4cf6b`。
+  舊目標105收據、369筆主譯稿來源及
+  `tools/worklist.py verify` 回歸 PASS；
+  `WORKLIST.md` 已由 JSON 重生，內容未因只改
+  JSON 驗證註記而變。另更正規格022中第一張
+  旗卡 A 仍待決及十四段的過期現況，不改其
+  相鄰右卡 DRAFT 事實。
+- 原版 EXE／TXT／封存檔、字型、原版索引與
+  畫布均未入 Git；本輪輸出 UID/GID 1000:1000，
+  工作根無 root-owned 或誤建 `.md` 目錄；
+  `colonization-research:20260920-r2` 與
+  `rich2-py:latest` 無執行中或已停止容器殘留，
+  隔離 dosgolem `upstream` 推送位址保持 `DISABLED`。

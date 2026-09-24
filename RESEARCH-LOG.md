@@ -3509,3 +3509,46 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
   主譯稿增 `GAME.TXT:0x000153CC` 草稿一筆，來源／控制碼
   驗證369筆 PASS；[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)
   保持 DRAFT，正式中文欄位仍十七段。
+
+## 2026-09-24：目標106 `@BUILD1` 字幕印前底圖與字高
+
+- **輸入／工具／位址空間：**合法 DOS `GAME.TXT` SHA-256
+  `67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a`；
+  十六筆玩家輸入 SHA-256
+  `a48ae77b9f6a0c2bdb9b3512625d0c1c4786b1cb64b8deff4bdb603fe422d93e`。
+  隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`，
+  `colonization-research:20260920-r2`／Go 1.24.13；字型量測在
+  `rich2-py:latest`（Pillow 12.3.0、FreeType 2.14.3），
+  原始 Cubic 11 TTF SHA-256
+  `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`。
+  `GAME.TXT:0x153CC` 是檔案位移；`0D21:00C6`／`0D21:012C`
+  為原版實模式 CS:IP；`0x2CAE0` 為20-bit線性 RAM 畫布起點；
+  下述 bbox 為320×200原版索引座標，中文 bbox 是四倍輸出座標。
+- **已證實／真實輸出：**英格蘭介紹 B 後正常 Enter 的
+  88,689,058步，在原版 `0D21:012C` 字幕首筆改色前取得
+  64,000-byte印前畫布 SHA-256
+  `d8d0d8e5de5655411fd4935d2b96e6e84845ee924658668f9486196ede9882ab`。
+  兩次完整冷啟動報告逐位元組相同；無讀寫監看控制的
+  CPU、完整 RAM、虛擬時間、開檔、85M／90M／95M／100M
+  原始 indexed／canvas／palette bytes 皆相同。對90M印後
+  畫布，只有1,040點變更，半開 bbox `[16,30,303,39)`；
+  新色號為14／47／54（淡黃／暗影／藍灰）。當次
+  `0D21:00C6` 讀得完整61-byte字幕及交錯零位。
+- **已證實／字型與可逆樣本：**原版墨跡高9像素；
+  固定 TTF 的 A 38px 字模實際430×35px，四倍前景 bbox
+  `[423,120,853,155)`，暗影 `[427,124,857,159)`；
+  B 42px為482×39px，前景 `[397,120,879,159)`，暗影
+  `[401,124,883,163)`。兩者皆位於候選四倍安全矩形
+  `[48,108,1228,168)`，只改顯示樣本，不寫原版記憶體。
+  可丟棄並列圖只在
+  `workplace/reports/goal106-caption/comparison.png`，SHA-256
+  `d9a9785a948f0713bfcefb4c5119ab1b1d7338e56d96e4c7f2f88a75ac7e0799`。
+- **強推論／未知與下一檢查：**原版兩段 DOS→RAM bytes 與
+  實際印字相同，但檔案讀入目的位址至印字暫存的中間搬運
+  未逐指令閉合，仍是強推論。兩候選是 DRAFT 視覺樣本，
+  使用者尚未選正式字級；真 Ebitengine 逐幀事件鍵、
+  游標及失敗回退仍未知，不以本機 PNG 宣稱正式畫面。
+  `tools/check_goal106_caption.py` 對固定原版、雙重播、
+  無監看控制、真實 bytes 與樣本做獨立核對，正反例
+  PASS；本機 `receipt.json` SHA-256
+  `54b1e99255e49848eaa8810fc0063c5dcae38d990dbb84cd3ec147ec7ba4cf6b`。

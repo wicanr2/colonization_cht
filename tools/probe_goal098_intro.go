@@ -68,7 +68,7 @@ func main() {
 	afterFollow := flag.String("after-follow", "none", "目標105：85M後續頁後 none/wait/enter/esc")
 	followUntil := flag.Uint64("follow-until", 100000000, "目標105：後續觀測終點，100M–150M且以5M為單位")
 	followEnterAt := flag.String("follow-enter-at", "", "目標105：額外 Enter 的百萬步數，以逗號分隔，例如100,115")
-	preprint := flag.Bool("preprint", false, "目標102：在 A/B 首筆 0D21:012C 寫入前擷取原始畫布")
+	preprint := flag.Bool("preprint", false, "在 A/B 與啟用後續頁時的首筆 0D21:012C 寫入前擷取原始畫布")
 	flag.Parse()
 	if *inputs == "" || *out == "" {
 		panic("缺必要參數")
@@ -226,7 +226,9 @@ func main() {
 			} else if m.Steps >= 65000000 {
 				phase = "second"
 			}
-			if *preprint && (phase == "first" || phase == "second") && cs == 0x0d21 && ip == 0x012c && preprintCanvas[phase] == nil {
+			if *preprint && (phase == "first" || phase == "second" ||
+				(phase == "after-follow" && *afterFollow != "none")) &&
+				cs == 0x0d21 && ip == 0x012c && preprintCanvas[phase] == nil {
 				// WatchWrites 先於 Mem 寫入回呼；此時仍是真正的首字印前多色底圖。
 				preprintCanvas[phase] = bytes.Clone(m.Mem[canvas : canvas+64000])
 				preprintSteps[phase] = m.Steps
@@ -437,6 +439,9 @@ func main() {
 	}
 	if *afterFollow != "none" {
 		version = "goal105-tutorial-route-v4"
+		if *preprint {
+			version = "goal106-build-preprint-v1"
+		}
 	}
 	report := map[string]any{"version": version, "control": *control,
 		"next_enter": *nextEnter,
@@ -455,11 +460,15 @@ func main() {
 		}
 	}
 	if *preprint {
-		if *control || !*nextEnter || len(preprintCanvas) != 2 {
-			panic("印前底圖需要 A/B 實際印字及觀測收據")
+		phases := []string{"first", "second"}
+		if *afterFollow != "none" && *afterFollow != "wait" {
+			phases = append(phases, "after-follow")
+		}
+		if *control || !*nextEnter || len(preprintCanvas) != len(phases) {
+			panic("印前底圖需要當次實際印字及觀測收據")
 		}
 		preprintReceipt := map[string]any{}
-		for _, phase := range []string{"first", "second"} {
+		for _, phase := range phases {
 			b := preprintCanvas[phase]
 			if len(b) != 64000 {
 				panic("印前畫布大小不符：" + phase)
