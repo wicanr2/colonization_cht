@@ -2,6 +2,11 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前工作入口：[目標112](docs/goals/112-game-options-chinese-display.md)：
+沿目標111已驗的正常滑鼠路徑，追 `Game Options` 視窗標題與八列
+原版來源、逐欄繁中版面及正式 Ebitengine 顯示閘門。目前尚未
+新增正式中文欄位；原有十七段及 help 零則不變。
+
 最近完成入口：[目標111](docs/goals/111-tutorial-hints-state-and-first-help.md)：
 `Game Options` 中未點／先點 `Tutorial Hints` 後皆把焦點
 移回第一列；1,375M的原版畫面只差最後一列圖示中心
