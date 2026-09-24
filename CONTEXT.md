@@ -2,6 +2,8 @@
 
 更新：2026-09-25；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前工作：[目標126](docs/goals/126-retire-confirmation-three-field-overlay.md)從正常玩家 `Retire` 確認框已驗的三段原版印字與既有三筆譯稿，閉合逐欄來源、字級、安全區、守門及同狀態驗收；只有規格達限定 READY 才接正式 Ebitengine 中文。目標125已排除固定 `Retire` 後另開新局作為 help 入口，因此這輪改推進可見中文字欄位。未取得新驗收前正式仍十七段、help 零則。
+
 目前真相：[目標125](docs/goals/125-tutorial-hints-persistence-and-help-entry.md)已檢驗正常玩家切換 `Tutorial Hints`，經 `Retire` 正常退出並另開新局：當局未點／點一次／點兩次的圖示為47／149／47，但三支暫存層檔案逐 byte 相同，第二次冷啟動重開選項時原版完整狀態合流、圖示均為47；固定取樣與監看仍未見首則 help。這只排除該固定跨次路徑的選項可見效果，未證其他入口或存檔讀取語意。[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)仍 DRAFT，正式中文十七段、help 正式顯示零則。下一個安全切片是從其他正常玩家介面或當局可見觸發找首則原版印字，不再假定 `Retire` 是同局重開。
 
 目前真相：[目標124](docs/goals/124-gameplay-keyboard-window-route.md)已把真 Ebitengine 視窗的 Esc／四方向鍵接到 dosgolem 具名 BIOS 鍵佇列。英格蘭海上左移與 `Game Options` Esc 離頁經玩家真鍵盤、英文同輸入控制、完整原版狀態、少一鍵反向對照及失焦負例驗收；[規格024](docs/spec/024-window-keyboard-input.md)僅此輸入通道限定 CONFORMED。右／上／下在遊戲中的效果、首則 help 與新中文覆蓋未驗；正式中文仍十七段，help 正式顯示仍零則。
