@@ -2,6 +2,8 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前工作：[目標122](docs/goals/122-game-options-nine-field-state-guard.md)將已驗 `Game Options` 九欄印前底圖、八列點擊、游標與離頁收據整理成逐欄原文回退矩陣；不預選待決的此視窗 A／B 字級、不接正式中文，規格027仍 DRAFT。
+
 最近完成：[目標121](docs/goals/121-third-difficulty-card-layout-and-guards.md)以目標120固定原版來源、真譯稿和字型，製作第三張難度卡片「征服者／普通」的本機 Ebitengine A（21／25px）與 B（25／29px）逐欄可逆預覽；原文控制及兩版中文逐像素檢查均通過，錯版／錯鍵／缺字／溢出／底圖變造等負例拒絕。另以 dosgolem 正常滑鼠重播證實只遮上欄、只遮下欄、跨欄及移開三種相位，各雙次冷啟動與無監看控制一致。這是可丟棄版面與 DRAFT 守門候選，**不是**第三卡正式中文：A／B 尚待使用者選定，規格016仍 DRAFT、正式十七段不變。第一張國家旗卡 A（「英格蘭：」21px／「移民」25px）早已由目標099正式驗收，本輪再次回答不重做，也不替 Game Options 定字級。
 
 最近完成：[目標120](docs/goals/120-third-difficulty-card-output-evidence.md)沿已驗真視窗難度頁前綴，以隔離 dosgolem 正常滑鼠點擊左下第三張卡片 `(55,145)`，雙次冷啟動與無監看控制證實原版 `NAMES.TXT:0xC22`／`LABELS.TXT:0x8B8` 的 `Conquistador`／`Moderate` 經載入、執行期讀取與印字畫布呈現；兩行墨跡分別205／116點、原版高5／6像素。僅移鼠／不點選均未印第三張卡。兩筆「征服者／普通」譯稿仍為草稿，逐欄字級、游標／按鍵回退及 Ebitengine 正式中文未驗；規格016仍 DRAFT、正式中文仍十七段。第一張國家旗卡 A 版先前已完成；本次回答不替 Game Options 的 A／B 字級定案。
