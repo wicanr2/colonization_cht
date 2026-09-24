@@ -2,6 +2,11 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前進行入口：[目標113](docs/goals/113-game-options-background-and-preview.md)：
+沿目標112的九欄來源收據，擷取當次印前底圖並以固定 Cubic 11
+製作可丟棄 Ebitengine 中文對照；在規格027 READY／真視窗驗收
+之前，正式中文仍十七段，遊戲選項九欄仍為英文。
+
 目前工作入口：[目標112](docs/goals/112-game-options-chinese-display.md)：
 沿目標111已驗的正常滑鼠路徑，追 `Game Options` 視窗標題與八列
 原版來源、逐欄繁中版面及正式 Ebitengine 顯示閘門。目前尚未
