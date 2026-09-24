@@ -2,6 +2,11 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前進行入口：[目標114](docs/goals/114-game-options-print-buffer-dataflow.md)：
+沿目標112／113的原版九欄收據，追解析緩衝到印字字元緩衝的
+最後搬運與讀寫位址；未取得直接證據前維持強推論，
+不把本機 A／B 預覽接進正式顯示。
+
 最近完成入口：[目標113](docs/goals/113-game-options-background-and-preview.md)：
 沿目標112的正常玩家九欄來源收據，已由 dosgolem 雙冷啟動擷取各欄
 印前底圖，並以固定 Cubic 11 與真 TSV 製作本機可丟棄的 Ebitengine
