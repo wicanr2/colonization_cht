@@ -74,6 +74,7 @@ func main() {
 	optionsAudit := flag.Bool("options-audit", false, "目標112：固定 GAME.TXT 遊戲選項九欄的 DOS 讀入來源")
 	optionsPreprint := flag.Bool("options-preprint", false, "目標113：九欄各自首筆原版印字前底圖與印字緩衝寫入")
 	optionsWriterAudit := flag.Bool("options-writer-audit", false, "目標114：原版印字緩衝寫入者附近的讀取與暫存器")
+	retireAudit := flag.Bool("retire-audit", false, "目標126：只追退休確認框三段固定來源；預設關閉")
 	optionsResidentAudit := flag.Bool("options-resident-audit", false, "目標114：互斥觀測九欄高位址 RAM 來源的寫入者")
 	optionsPhaseSamples := flag.String("options-phase-samples", "", "目標119：選項點擊附近額外取樣的遞增絕對指令步數，逗號分隔；預設關閉")
 	allowEarlyExit := flag.Bool("allow-early-exit", false, "目標123：只在後續正常玩家路徑觀測 DOS 提前結束，保留真實終止步數；預設關閉")
@@ -140,6 +141,9 @@ func main() {
 	}
 	if *optionsAudit && (*gameInputsPath == "" || *followUntil < 1300000000) {
 		panic("遊戲選項來源稽核需要正常玩家開窗輸入與1300M終點")
+	}
+	if *retireAudit && (*gameInputsPath == "" || !*postCaptionAudit || *followUntil < 1275000000) {
+		panic("退休來源稽核需要已驗玩家輸入及確認框終點")
 	}
 	if *optionsPreprint && !*optionsAudit {
 		panic("遊戲選項印前底圖需同時啟用來源稽核")
@@ -314,6 +318,12 @@ func main() {
 			introSource{"GAME.TXT", 0x550, "Water Color C~ycling"},
 			introSource{"GAME.TXT", 0x566, "~Tutorial Hints"})
 	}
+	if *retireAudit {
+		sources = append(sources,
+			introSource{"GAME.TXT", 0x122, "Do you really want to quit?"},
+			introSource{"GAME.TXT", 0x141, "Yes"},
+			introSource{"GAME.TXT", 0x146, "No"})
+	}
 	for _, source := range sources {
 		end := source.Offset + int64(len(source.Bytes))
 		if end > int64(len(game)) || !bytes.Equal(game[source.Offset:end], []byte(source.Bytes)) {
@@ -342,6 +352,8 @@ func main() {
 	m.SetSoundBlasterPro(true)
 	const canvas uint32 = 0x2cae0
 	printReads := []map[string]any{}
+	retireBefore := map[string][]byte{}
+	retireFirstSteps := map[string]uint64{}
 	optionSourceReads := []map[string]any{}
 	optionPrintWrites := []map[string]any{}
 	optionWriterReads := []map[string]any{}
@@ -366,6 +378,24 @@ func main() {
 	}
 	if !*control {
 		m.WatchReads(0x20000, 0x80000, func(a uint32, value uint8) {
+			if *retireAudit && m.Steps >= 1253300000 && m.Steps < 1254000000 {
+				cs, ip := m.CPU.OpAddr()
+				if cs == 0x0d21 && ip == 0x00c6 {
+					name := ""
+					switch {
+					case a == 175232 && value == 'D':
+						name = "question"
+					case a == 175590 && value == 'Y':
+						name = "yes"
+					case a == 175590 && value == 'N':
+						name = "no"
+					}
+					if name != "" && retireBefore[name] == nil {
+						retireBefore[name] = bytes.Clone(m.Mem[canvas : canvas+64000])
+						retireFirstSteps[name] = m.Steps
+					}
+				}
+			}
 			if *optionsWriterAudit && m.Steps >= 1253400000 && m.Steps < 1253600000 &&
 				len(optionWriterReads) < 30000 {
 				cs, ip := m.CPU.OpAddr()
@@ -518,7 +548,7 @@ func main() {
 					break
 				}
 			}
-			if pos < 0 || r.Step < 55000000 {
+			if pos < 0 || (r.Step < 55000000 && !*retireAudit) {
 				continue
 			}
 			for _, source := range sources {
@@ -781,6 +811,9 @@ func main() {
 	if *allowEarlyExit {
 		version = "goal123-retire-terminal-v1"
 	}
+	if *retireAudit {
+		version = "goal126-retire-preprint-v1"
+	}
 	report := map[string]any{"version": version, "control": *control,
 		"next_enter": *nextEnter,
 		"nation":     *nation, "after_b": *afterB,
@@ -812,6 +845,18 @@ func main() {
 	if *scratch != "" {
 		report["scratch"] = true
 		report["write_intents"] = d.Wrote
+	}
+	if *retireAudit && !*control {
+		preprints := map[string]any{}
+		for _, name := range []string{"question", "yes", "no"} {
+			before := retireBefore[name]
+			if len(before) != 64000 {
+				panic("退休確認框印前底圖缺失：" + name)
+			}
+			mustIntro(os.WriteFile(*out+".before-"+name+".canvas", before, 0644))
+			preprints[name] = map[string]any{"step": retireFirstSteps[name], "canvas_sha256": hashIntro(before)}
+		}
+		report["retire_preprint"] = preprints
 	}
 	if *optionsAudit {
 		report["option_source_reads"] = optionSourceReads
