@@ -71,6 +71,7 @@ func main() {
 	preprint := flag.Bool("preprint", false, "在 A/B 與啟用後續頁時的首筆 0D21:012C 寫入前擷取原始畫布")
 	postCaptionAudit := flag.Bool("post-caption-audit", false, "目標107：選用鍵盤待取數診斷與有界字幕後觀測")
 	gameInputsPath := flag.String("game-inputs", "", "目標110：字幕後正常玩家滑鼠／鍵盤事件 JSON；預設不改舊重播")
+	optionsAudit := flag.Bool("options-audit", false, "目標112：固定 GAME.TXT 遊戲選項九欄的 DOS 讀入來源")
 	flag.Parse()
 	if *inputs == "" || *out == "" {
 		panic("缺必要參數")
@@ -106,6 +107,9 @@ func main() {
 	}
 	if *gameInputsPath != "" && (!*postCaptionAudit || *followUntil <= 1225000000) {
 		panic("字幕後玩家事件須沿已驗海上畫面並保留鍵盤稽核")
+	}
+	if *optionsAudit && (*gameInputsPath == "" || *followUntil < 1300000000) {
+		panic("遊戲選項來源稽核需要正常玩家開窗輸入與1300M終點")
 	}
 	extraEnters := map[uint64]bool{}
 	if *followEnterAt != "" {
@@ -232,6 +236,19 @@ func main() {
 			}
 		}
 	}
+	if *optionsAudit {
+		// 只追原版視窗中實際可見的九段；位移與原始 bytes 雙重守門。
+		sources = append(sources,
+			introSource{"GAME.TXT", 0x4cd, "Set Game Options"},
+			introSource{"GAME.TXT", 0x4e9, "Show ~Indian Moves"},
+			introSource{"GAME.TXT", 0x4fd, "Show ~Foreign Moves"},
+			introSource{"GAME.TXT", 0x512, "Fast Piece ~Slide"},
+			introSource{"GAME.TXT", 0x525, "~End of Turn"},
+			introSource{"GAME.TXT", 0x533, "~Autosave"},
+			introSource{"GAME.TXT", 0x53e, "~Combat Analysis"},
+			introSource{"GAME.TXT", 0x550, "Water Color C~ycling"},
+			introSource{"GAME.TXT", 0x566, "~Tutorial Hints"})
+	}
 	for _, source := range sources {
 		end := source.Offset + int64(len(source.Bytes))
 		if end > int64(len(game)) || !bytes.Equal(game[source.Offset:end], []byte(source.Bytes)) {
@@ -257,6 +274,7 @@ func main() {
 	m.SetSoundBlasterPro(true)
 	const canvas uint32 = 0x2cae0
 	printReads := []map[string]any{}
+	optionSourceReads := []map[string]any{}
 	writers := map[string]*introWriter{}
 	preprintCanvas := map[string][]byte{}
 	preprintSteps := map[string]uint64{}
@@ -269,6 +287,13 @@ func main() {
 	}
 	if !*control {
 		m.WatchReads(0x20000, 0x80000, func(a uint32, value uint8) {
+			if *optionsAudit && m.Steps >= 1253314011 && m.Steps < 1253600000 &&
+				a >= 0x2b0cf && a < 0x2b177 && len(optionSourceReads) < 10000 {
+				cs, ip := m.CPU.OpAddr()
+				optionSourceReads = append(optionSourceReads, map[string]any{
+					"step": m.Steps, "cs_ip": fmt.Sprintf("%04X:%04X", cs, ip),
+					"linear": a, "value": value})
+			}
 			if m.Steps < 55000000 || m.Steps >= observeEnd || len(printReads) >= 30000 {
 				return
 			}
@@ -563,6 +588,9 @@ func main() {
 				if lateInputUsesSpace {
 					version = "goal111-game-input-audit-v2"
 				}
+				if *optionsAudit {
+					version = "goal112-game-options-source-v2"
+				}
 			}
 		}
 	}
@@ -588,6 +616,9 @@ func main() {
 	if *gameInputsPath != "" {
 		report["game_inputs"] = lateInputs
 		report["game_inputs_sha256"] = lateInputHash
+	}
+	if *optionsAudit {
+		report["option_source_reads"] = optionSourceReads
 	}
 	if *preprint {
 		phases := []string{"first", "second"}

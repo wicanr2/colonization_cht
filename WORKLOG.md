@@ -2319,3 +2319,10 @@
   [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7#issuecomment-5809975529)
   與[Issue #27](https://github.com/wicanr2/colonization_cht/issues/27#issuecomment-5809979608)，
   兩者維持 OPEN；此條收尾紀錄於後續文件提交補入。
+
+## 2026-09-24：目標112遊戲選項來源階段
+
+- 上一輪僅重核已完成的第一張旗卡 A 版，沒有新增中文化進展。本輪選正常玩家已打開的 `Game Options` 九處英文為新切片；核對 Git 作者、乾淨工作樹、PRIVATE 儲存庫與 Issue #7／#26／#27 後，先以 `171eb7b` 推送[目標112](docs/goals/112-game-options-chinese-display.md)及 `CONTEXT.md` 入口，再執行新探針。
+- 在既有 `colonization-research:20260920-r2` 內擴充預設關閉的 `-options-audit`，沿固定英格蘭開局及正常滑鼠開窗輸入，用隔離 dosgolem 取九處 `GAME.TXT` 當次 DOS 來源、168-byte原版解析讀取、九段印字及1,300M索引畫面。雙冷啟動及無監看控制通過；獨立[來源檢查器](tools/check_goal112_options_source.py) PASS、七項正反例 PASS。Go 首次在非 root 容器因預設 `/.cache/go-build` 不可寫而失敗；改將 `GOCACHE` 指向容器 `/tmp/colonization-go-build-cache` 後重跑成功。收尾重新建置時碰到容器 PID 配額，改為 `go build -p 1` 即通過；兩者都是容器環境設定，不是遊戲缺陷。
+- 新建[規格027](docs/spec/027-game-options-window-draft.md)保存各原版位移、來源與逐欄墨跡／候選安全矩形；把既有九筆譯稿「正常路徑輸出事件未驗證」註記訂正，沒有新增譯稿筆數或改掉 `~` ASCII 熱鍵標記。`validate_translation_draft.py` 驗379筆 PASS；目標110舊原版收據回歸 PASS。解析到印字緩衝最後搬運、印前底圖、反白／游標回退與中文字級未閉合，規格維持 DRAFT，正式顯示仍十七段，沒有更新正式截圖。
+- 原始 DOS、完整 RAM 與原版畫素只留唯讀原版及已忽略 `workplace/reports/goal112-options/`；本機檢視用 PNG 亦不入 Git。輸出與研究工具 UID/GID 均為1000:1000；`workplace/` 無 root-owned 檔案或誤建 `.md` 目錄，研究及圖像映像無執行中／已停止容器殘留。隔離 dosgolem 提交仍為 `9dd36726`，`upstream` 推送位址 `DISABLED`。下一步是補來源最後搬運與逐欄印前底圖、用固定 Cubic 11 做可丟棄 Ebitengine 對照，再審查 READY。私有成果推送及 Issue 回讀於本輪收尾核對。

@@ -3822,3 +3822,11 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
   沒有當次逐字印字與玩家可見畫布證據，
   規格026維持 DRAFT；下一個可驗問題是開關
   能否在新局起點前由正常介面啟用並保留。
+
+## 2026-09-24：遊戲選項九欄的原版檔案、解析與印字
+
+- **問題與版本：**正常玩家已能打開 `Game Options`，但既有九筆 `@GAMEOPTIONS` 譯稿原先僅有原始行位移。固定 DOS `GAME.TXT` SHA-256 `67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a`、`MENU.TXT` SHA-256 `5a7d2f4bf9f657b68177fb9b38e74ac92a1f191732bbc122c28563a41d7a3702`；正常開局十六筆輸入 SHA-256 `a48ae77b9f6a0c2bdb9b3512625d0c1c4786b1cb64b8deff4bdb603fe422d93e`、後續開窗輸入 SHA-256 `c4e462678323df8e1915ffcd363f7e7eb83cee4e85e09f618c9206418977e539`。隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`；研究映像 `colonization-research:20260920-r2`，Go `1.24.13 linux/amd64`。原版與完整畫素只在本機唯讀／已忽略工作區。
+- **位址空間：**`GAME.TXT:0x4CD` 為視窗標題，`0x4E9/0x4FD/0x512/0x525/0x533/0x53E/0x550/0x566` 為八列，皆為**檔案 byte 位移**。`MENU.TXT:0xC6` 是頂端選單同名入口，不是視窗標題來源。1,253,314,011步原版 DOS 讀取512 bytes、檔案位置 `0x400`，九段目的地依序是20-bit **線性 RAM** `0x2B0CF/0x2B0EB/0x2B0FF/0x2B114/0x2B127/0x2B135/0x2B140/0x2B152/0x2B168`。`0E2D:1F76`、`0D21:00C6` 為**原版實模式 CS:IP**，不能與上述數值當作同一種地址。
+- **已證實的直接來源：**`tools/probe_goal098_intro.go -options-audit` 預設關閉，選用後記錄 `0E2D:1F76` 在1,253,315,667～1,253,370,400步從線性 `0x2B0CF–0x2B176` 逐 byte 讀168 bytes，與 `GAME.TXT:0x4CD–0x574`（含控制行與 CRLF）逐位元組相同。接著 `0D21:00C6` 在1,253,411,339～1,253,588,150步依序讀出不帶 `~` 標記的視窗標題和八列。1,300M原版320×200索引畫面 SHA-256 `7093e83e87169f8eb15e733c3d69ec68afd5b78a5d304fa384819c987192a546`；原版文字色號68／陰影47，標題墨跡高8像素，八列依次高7／8／8／7／8／8／8／8像素，半開界線逐欄見[規格027](docs/spec/027-game-options-window-draft.md)。
+- **重播與負例：**`source-v2-a.json`、`source-v2-b.json` 各 SHA-256 `12ee3876ad4d70a946592dcad667c3fff92ddb31854e584fcf03dd3fadfb08c4`，無監看 `source-v2-control.json` SHA-256 `6e646f5e7b523c0819472473f31bb67bf8b72ddd9d46a0eeb2564526733c1269`；全部原版 `route/sources/transfers/samples/opened/key_events/game_inputs` 相同，1,300M畫面逐 byte 相同。[檢查器](tools/check_goal112_options_source.py) PASS，[七項正反例](tools/test_goal112_options_source.py) PASS，涵蓋缺原版 SKIP、改 DOS 來源、改原版解析讀取、漏印字、壞畫面、改無監看 RAM 收據。探針原始碼 SHA-256 `309fca9bcf96c53b3a3e79732586faaa6438914c51f7d3ed8442df733946d3d1`；完整 JSON／索引／色盤只在 `workplace/reports/goal112-options/`。
+- **推論限制：**DOS 緩衝的直接解析讀取與九段印字是兩組已證實事件；解析後寫入印字字元緩衝的最後搬運仍未觀測，故兩者為同一來源的**強推論**，不是完整資料流已閉合。反白／核取／游標／關窗時的印前底圖及安全回退、Cubic 11 逐欄字級亦未知；規格027維持 DRAFT，九筆草稿不可進正式輸出。
