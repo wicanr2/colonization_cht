@@ -1,6 +1,6 @@
 # 目標101：四國介紹的正常玩家路徑與翻頁收據
 
-狀態：進行中；日期：2026-09-24。承接[目標100](100-all-nation-introduction-bilingual-corpus.md)
+狀態：完成（限四國原版玩家路徑）；日期：2026-09-24。承接[目標100](100-all-nation-introduction-bilingual-corpus.md)
 的四國八節雙語草稿與[規格025](../spec/025-first-nation-introduction-draft.md)，
 對應 [Issue #30](https://github.com/wicanr2/colonization_cht/issues/30)。
 
@@ -59,3 +59,26 @@
 不因取得四國八節來源或畫面就把長文稱為中文顯示完成。
 正式顯示計數仍維持十七段，直到長文覆蓋另經 READY →
 實作 → 同狀態驗證 → CONFORMED。
+
+## 本輪驗收與下一步
+
+四張旗卡的正常滑鼠選取、姓名頁與各國 A／B 原版介紹已重播；
+八節逐字印字與 `GAME.TXT` 固定節對應，畫布墨跡、穩定索引
+雜湊及開檔相位逐頁記錄。四國各兩次獨立冷啟動 JSON
+逐位元組一致，無讀寫監看的同輸入控制在 CPU、完整 RAM、
+索引、色盤、時間及開檔一致。法國舊目標098收據的原版
+來源、轉存、印字與畫布欄位逐項未變。西班牙 B 原版檔案
+`50%%` 實際顯示為 `50%`，已訂正譯稿註記。
+
+法國 B 頁無輸入留原頁；Enter 與 ESC 都到同一下一可見頁，
+但內部 CPU／RAM 不同。其他三國 B 後離頁仍未驗，不把
+此結果外推。獨立 `tools/check_goal101_nation_intro.py` PASS，
+本機 `workplace/reports/goal101-intro/verified.json` SHA-256
+`dd2154447657e15c0964481d50392c9f5e3b531cce07d799376df3fbf6737937`；
+錯版玩家輸入與錯誤 TSV 均拒絕。原版畫素、binary 及原始
+收據均不進 Git。
+
+下一輪應以[規格025](../spec/025-first-nation-introduction-draft.md)
+的四國原版墨跡逐頁量中文安全矩形、實際字模與最長譯文換行，
+並驗其他三國 B 後離頁、Ebitengine 原文控制與正式回退；
+未達 READY 前不得把譯稿接進正式輸出。

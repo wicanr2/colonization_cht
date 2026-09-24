@@ -3286,3 +3286,61 @@ Cubic 11 本機字型 SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d
 印字、頁相位、畫布與中文排版皆**未知**；本輪只確認檔案與
 譯稿，不得升級[規格025](docs/spec/025-first-nation-introduction-draft.md)
 或把八節計入十七段正式顯示。
+
+## 2026-09-24：目標101四國介紹的執行期勘誤與頁相位
+
+**問題及訂正。** 上節在目標100當時將英格蘭、西班牙、荷蘭
+六節標為「只有檔案來源、畫面未知」是正確的當時狀態；本節
+新增正常玩家路徑證據，解除這六節的**原版印字／畫布未知**，
+不解除中文排版與正式覆蓋未知。原始輸入是合法 DOS
+`OPENING.EXE`、`VICEROY.EXE`、`GAME.TXT`、`NAMES.TXT`、
+`LABELS.TXT`、`NATIONS.PIK`（完整固定 SHA 見
+[規格025](docs/spec/025-first-nation-introduction-draft.md)與
+`tools/check_goal101_nation_intro.py`）；`GAME.TXT` SHA-256
+`67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a`。
+十六筆正常玩家輸入 SHA-256
+`a48ae77b9f6a0c2bdb9b3512625d0c1c4786b1cb64b8deff4bdb603fe422d93e`。
+工具為 `colonization-research:20260920-r2`／Go 1.24.13、
+隔離 dosgolem 提交 `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`、
+`tools/probe_goal098_intro.go` 最終本機 binary SHA-256
+`7ee97288665d73844116c5c981f18659febd69d8789fe34bb5bbb8ae9f076314`；
+獨立檢查器使用 Python 3.11.2。原版唯讀，完整 JSON、索引、
+色盤與 RAM／畫布收據只在已忽略的
+`workplace/reports/goal101-intro/`。
+
+地址空間分別是 `GAME.TXT` 檔案位移（前節表）、DOS 讀入目的
+20-bit 線性 RAM、原版印字 `0D21:00C6`、畫布寫入
+`0D21:012C` 的實模式 `CS:IP`、320×200原版索引及四倍
+輸出畫布；下表 bbox 為原版索引畫布半開座標，不能當成中文
+安全矩形。
+
+| 節 | 逐字印字長／SHA-256 | 畫布改色寫入／bbox | 穩定索引 SHA-256 |
+|---|---|---|---|
+| `@NATION0A` | 833／`25f3dd22b2d753adc9f66c76c4e8c4dabe0474600d996b6128881552f1122d23` | 14,193／`(10,20)–(305,179)` | `2908e03488fa8c0c4ec531bc75d444a0d0cc4ce49df0a3f2421790a67342f75a` |
+| `@NATION0B` | 170／`33cadaf8f05359be9c7f3ade81ab3d41ed3583e0c9b3361f9fda9d335e9d84a9` | 2,932／`(10,75)–(292,124)` | `010a42d99723c76a55f63f4a0f2b5aabfb5e197b29b2efceef2af49488fc17ee` |
+| `@NATION1A` | 794／`7285983b0263b270b7e952a78aecc40e0fa682e45302ae088371b493da0a258b` | 13,412／`(10,25)–(304,174)` | `aa987cee149ab9503b919dccd6747f57c87c94cbdb026fcdd1edb070ad7aafe5` |
+| `@NATION1B` | 207／`9018be96a5ab5eb08fcb830beaa493a6090b6aec2eecdd682594065d6a6971d9` | 3,438／`(10,70)–(308,129)` | `19c0622b683673f929daedda9dc6b61bfc06d2e048165f376c15af28bb2dbb0a` |
+| `@NATION2A` | 953／`37df0dda5ca2f142501142b572ff8b7e3e51ec20d2baa7131aaaa236449b4fbe` | 16,103／`(10,10)–(305,189)` | `ef33921c006988d0424eb6663e5ac9e651917cffd2a870143b0b0e902f9c71ee` |
+| `@NATION2B` | 180／`3dfc072784c1f2728e8a1f514623c54b8320b3185407b4a1ed74c29809ce850e` | 3,168／`(10,75)–(292,124)` | `d64964077fb020aeeb5a623417e01479e62d0abf934a4bdb01496e3d836d8d48` |
+| `@NATION3A` | 957／`a13e855de4b202af656d76d6319fd0ecd5a87a81115e27df66b4dae67f938bbd` | 16,401／`(10,10)–(305,189)` | `dd14bdfac94b86213c121ad40f344f9f56c69f5324fdcee96758a1979b351e0c` |
+| `@NATION3B` | 299／`6fa75f110995ae368395a39d8b6ee4c8c44ab25ed72ce63342a913cb3e8b8d01` | 5,262／`(10,65)–(307,134)` | `3bb0d4025c53716b320231c1631b2dd1e3b98c9fd32dd2c4b29e4d937e34c021` |
+
+**已證實的範圍。** 四張旗卡用正常滑鼠按／放，經姓名 Enter
+進 A、再 Enter 進 B；八節的原版可見字序列與固定來源節去除
+控制標記和版面空格後相符，唯一執行期格式化差異是西班牙 B
+的原始 `50%%` 輸出為單一 `50%`。兩次冷啟動 JSON 逐位元組
+相同，無讀寫監看控制的 CPU、完整 RAM、索引、色盤、時間及
+開檔相同。法國舊目標098的來源、轉存、印字、畫布與開檔欄位
+和新探針逐項完全一致，未推翻舊證據。檔案節經 DOS 讀取到
+印字緩衝的完整指令鏈仍是**強推論**，不能由字串相同冒稱
+每一個搬運步驟已證實。
+
+**B 頁後。** 法國在 75M 步不輸入，80M／85M 留在 B 頁；
+Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
+`KINGLSS1.PIK`、`FRANCE1.SS`、`KING1.SS`、`FONTKING.FF`、
+`GAME.TXT`。兩者 85M 的 CPU／完整 RAM 不同，不宣稱按鍵
+語意等價；其他三國 B 後未驗。獨立 PASS 收據 SHA-256
+`dd2154447657e15c0964481d50392c9f5e3b531cce07d799376df3fbf6737937`，
+更新後雙語 TSV SHA-256
+`42357576868f840a6b87113ec83bc311589aa3248ed41a670b712d53743d4375`。
+這些是原版畫面證據，不是十七段正式中文顯示的一部分。

@@ -1905,3 +1905,39 @@
   隔離 dosgolem 的 `upstream` 推送位址仍是 `DISABLED`；
   本輪檔案 UID/GID `1000:1000`，工作根沒有 root-owned 檔案
   或誤建 `.md` 目錄，專案 Docker 執行中／停止容器均無殘留。
+
+## 2026-09-24：目標101四國介紹原版玩家路徑
+
+- 上一輪目標100確實新增八節可追溯語料，屬有效進度；但
+  其他六節當時只有檔案來源。本輪先以 `be755bc` 把
+  [目標101](docs/goals/101-nation-introduction-player-path.md)
+  推送至再次核對 PRIVATE 的 `origin/main`，Issue #30 遠端
+  OPEN。知識路由命中復古遊戲逆向、規格閘門、dosgolem 與
+  README 證據標準；中文覆蓋仍待 READY。
+- 已驗私有選國畫面為四張旗卡；擴充既有目標098探針，以正常
+  滑鼠分選英 `(155,50)`、法 `(255,50)`、西 `(155,150)`、
+  荷 `(255,150)`，各經完成區、姓名 Enter、A→B Enter。
+  原版素材只讀、收據只在已忽略 `workplace/reports/goal101-intro/`。
+  第一次建置因 `sh -lc` 覆寫研究映像的 Go PATH 而失敗，
+  判為 shell 環境問題；改同一映像的 `sh -c`，`gofmt`、
+  離線 Go build 通過，未另建映像或掛主機 Go。
+- 四國各兩次冷啟動 JSON 逐位元組一致，各國無觀測控制的
+  CPU、完整 RAM、索引、色盤、時間與開檔相同；八節實際
+  印字與固定來源文本比對通過。西班牙 B 的 `50%%` 在原版
+  實際印為 `50%`，已更新雙語 TSV 註記。法國舊收據的
+  來源、轉存、印字、畫布及開檔欄位與擴充探針逐項相同。
+  法國 B 後無鍵留原頁；Enter／ESC 到相同下一可見頁但
+  CPU／RAM 不同，不聲稱兩鍵語意等價。
+- `tools/check_goal101_nation_intro.py` 獨立驗證 PASS：本機
+  `verified.json` SHA-256
+  `dd2154447657e15c0964481d50392c9f5e3b531cce07d799376df3fbf6737937`；
+  錯版輸入與錯誤 TSV 均拒絕。舊法國譯稿檢查器在更新
+  八節註記後回歸 PASS。`tools/worklist.py write`／`verify`
+  PASS；CONTEXT、規格025、研究紀錄與 README 現況已
+  訂正，正式中文顯示仍十七段、Issue #30 不關閉。
+- 原始 Cubic 11 TTF 仍未恢復；四國中文長文的安全矩形、
+  最長譯文換行、真 Ebitengine 第二頁及回退未驗，規格025
+  保持 DRAFT。工作根 root-owned／誤建 `.md` 目錄數為0；
+  本輪檔案與收據 UID/GID `1000:1000`，隔離 dosgolem
+  `upstream` 推送位址仍 `DISABLED`。本輪一次性 Docker
+  容器無殘留；`docker ps -a` 僅有其他專案容器，未觸碰。

@@ -62,9 +62,17 @@ func main() {
 	out := flag.String("out", "", "已忽略 workplace 輸出前綴")
 	control := flag.Bool("control", false, "不安裝記憶體讀寫觀測器")
 	nextEnter := flag.Bool("next-enter", false, "65M步再按 Enter 觀察下一頁")
+	nation := flag.String("nation", "france", "目標101：england/france/spain/netherlands，實際點選四張旗卡")
+	afterB := flag.String("after-b", "none", "目標101：B頁後 none/wait/enter/esc")
 	flag.Parse()
 	if *inputs == "" || *out == "" {
 		panic("缺必要參數")
+	}
+	if *afterB != "none" && *afterB != "wait" && *afterB != "enter" && *afterB != "esc" {
+		panic("未知 B 頁後輸入")
+	}
+	if *afterB != "none" && !*nextEnter {
+		panic("必須先實際進入 B 頁")
 	}
 	parent, err := os.Stat(filepath.Dir(*out))
 	mustIntro(err)
@@ -86,11 +94,37 @@ func main() {
 		}
 	}
 	game := readIntro(filepath.Join(*root, "GAME.TXT"))
-	sources := []introSource{{"GAME.TXT", 0xB2DB, "@NATION1A"},
-		{"GAME.TXT", 0xB2F2, "^^FRANCE"},
-		{"GAME.TXT", 0xB303, "Latecomers"},
-		{"GAME.TXT", 0xB641, "@NATION1B"},
-		{"GAME.TXT", 0xB658, "^^FRANCE"}}
+	type nationRoute struct {
+		first, second, end int64
+		marker, title      string
+		x, y               int
+	}
+	routes := map[string]nationRoute{
+		"england":     {0xAE7C, 0xB204, 0xB2DB, "NATION0", "ENGLAND", 155, 50},
+		"france":      {0xB2DB, 0xB641, 0xB73E, "NATION1", "FRANCE", 255, 50},
+		"spain":       {0xB73E, 0xBB46, 0xBC28, "NATION2", "SPAIN", 155, 150},
+		"netherlands": {0xBC28, 0xC032, 0xC191, "NATION3", "NETHERLANDS", 255, 150},
+	}
+	route, ok := routes[*nation]
+	if !ok {
+		panic("未知國家選項")
+	}
+	first := game[route.first:route.second]
+	second := game[route.second:route.end]
+	firstMarker, secondMarker := "@"+route.marker+"A", "@"+route.marker+"B"
+	title := "^^" + route.title
+	firstTitle := bytes.Index(first, []byte(title))
+	secondTitle := bytes.Index(second, []byte(title))
+	firstBody := bytes.Index(first, []byte("__"))
+	if firstTitle < 0 || secondTitle < 0 || firstBody < 0 {
+		panic("國家節控制標記不符")
+	}
+	firstBody += 2
+	sources := []introSource{{"GAME.TXT", route.first, firstMarker},
+		{"GAME.TXT", route.first + int64(firstTitle), title},
+		{"GAME.TXT", route.first + int64(firstBody), string(first[firstBody : firstBody+10])},
+		{"GAME.TXT", route.second, secondMarker},
+		{"GAME.TXT", route.second + int64(secondTitle), title}}
 	for _, source := range sources {
 		end := source.Offset + int64(len(source.Bytes))
 		if end > int64(len(game)) || !bytes.Equal(game[source.Offset:end], []byte(source.Bytes)) {
@@ -244,19 +278,21 @@ func main() {
 	if hashIntro(m.Indexed()) != "48b52cb99391ab05aafd6809a838cc5714c193d3fca5dc0c1202bb2835a1c835" {
 		panic("左卡基準不符")
 	}
-	d.MoveMouse(255, 50)
+	d.MoveMouse(route.x, route.y)
 	advance(44000000)
 	d.PressMouse(0)
 	advance(45000000)
 	d.ReleaseMouse(0)
 	advance(46000000)
+	nationIndexedSHA := hashIntro(m.Indexed())
 	d.MoveMouse(65, 184)
 	advance(47000000)
 	d.PressMouse(0)
 	advance(48000000)
 	d.ReleaseMouse(0)
 	advance(49000000)
-	if hashIntro(m.Indexed()) != "128280c6bc9b0c3622b4d27642fdf7d2ecbf3866f068ddd87f20a2b6f096c58e" {
+	nameIndexedSHA := hashIntro(m.Indexed())
+	if *nation == "france" && nameIndexedSHA != "128280c6bc9b0c3622b4d27642fdf7d2ecbf3866f068ddd87f20a2b6f096c58e" {
 		panic("姓名頁基準不符")
 	}
 	samples := map[string]map[string]any{}
@@ -306,10 +342,28 @@ func main() {
 		sample("70m")
 		advance(75000000)
 		sample("75m")
+		if *afterB != "none" {
+			if *afterB == "enter" {
+				d.PushKey(golem.Key{Scan: 0x1c, ASCII: 13})
+			} else if *afterB == "esc" {
+				d.PushKey(golem.Key{Scan: 0x01, ASCII: 27})
+			}
+			advance(80000000)
+			sample("80m")
+			advance(85000000)
+			sample("85m")
+		}
 	}
 	collectTransfers()
-	report := map[string]any{"version": "goal098-intro-v3", "control": *control,
-		"next_enter":   *nextEnter,
+	version := "goal101-intro-v1"
+	if *nation == "france" && *afterB == "none" {
+		version = "goal098-intro-v3"
+	}
+	report := map[string]any{"version": version, "control": *control,
+		"next_enter": *nextEnter,
+		"nation":     *nation, "after_b": *afterB,
+		"route": map[string]any{"selected_x": route.x, "selected_y": route.y,
+			"nation_indexed_sha256": nationIndexedSHA, "name_indexed_sha256": nameIndexedSHA},
 		"input_sha256": hashIntro(inputData), "input_hashes": wants,
 		"sources": sources, "transfers": transfers, "samples": samples,
 		"print_reads": printReads, "writers": writers, "opened": d.Opened,
