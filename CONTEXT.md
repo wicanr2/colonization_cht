@@ -2,6 +2,8 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前工作：[目標124](docs/goals/124-gameplay-keyboard-window-route.md)延伸真 Ebitengine 視窗的 Esc／四方向鍵輸入，先審查規格024擴充，再以原版正常玩家路徑與同輸入中英文控制驗證。這只是前端按鍵轉送，不替遊戲定義按鍵效果，也不增加正式中文段數；尚未通過前維持現況。
+
 最近完成：[目標123](docs/goals/123-retire-confirmation-and-help-route.md)已用原版滑鼠分別點 `GAME → Retire` 的 Yes／No：No 返回海上畫面；Yes 進入分數頁，再按 Enter 到名人堂、再按 Enter 使原版正常離開 DOS，不在同一次執行內回到新局。四分支雙次冷啟動、無監看控制及獨立正反例通過。這不證其他路徑沒有 help；[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)仍 DRAFT、help 正式畫面零則。第一張國家旗卡 A（21／25px）已在目標099正式驗收，本次再次選 A 不重做。
 
 最近完成：[目標122](docs/goals/122-game-options-nine-field-state-guard.md)把 `Game Options` 13支原版分支、85個取樣狀態整理為九欄矩陣。第2列點擊時六欄、第8列點擊時七欄在固定1,325M步可做本機部分中文原型；兩狀態各有原文控制與 A／B 真 Ebitengine 圖，四張中文圖逐像素驗證通過。游標遮擋、底圖變動逐欄保留原文，ESC 離頁全失效，按下／放開細相位一律未知。這只完成 DRAFT 證據與可丟棄原型；[規格027](docs/spec/027-game-options-window-draft.md)未升 READY，遊戲選項九欄仍英文、正式中文仍十七段。此視窗 A／B 字級及第三張難度卡 A／B 都待使用者各自決定；第一張旗卡 A 早已正式驗收，不重做。
