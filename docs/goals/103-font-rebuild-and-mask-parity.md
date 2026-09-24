@@ -1,6 +1,6 @@
 # 目標103：以固定原始字型重烘十七欄本機字模
 
-狀態：進行中；日期：2026-09-24。承接[目標102](102-nation-introduction-layout-prototypes.md)
+狀態：completed（僅固定十七欄本機字模重烘）；日期：2026-09-24。承接[目標102](102-nation-introduction-layout-prototypes.md)
 找回的 Cubic 11 固定來源與[字型入口](../../font/README.md)，對應
 [Issue #12](https://github.com/wicanr2/colonization_cht/issues/12)及
 [Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)。
@@ -40,6 +40,35 @@
    `docs/worklist.json`；由工具重生工作清單。核對原版及衍生
    資產未入 Git、輸出 UID/GID、root-owned／誤建目錄與
    Docker 容器清理；推送私有成果並回讀相關 GitHub Issue。
+
+## 實作與驗收結果
+
+- 先以 `829d9db` 推送本目標，才新增工具。原始字型
+  SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`，
+  `GAME.TXT`、`LABELS.TXT`、`NAMES.TXT`、兩份 TSV 的指紋均已固定在
+  `tools/verify_goal103_font_rebuild.py` 與本機收據。
+- 既有 `tools/bake_goal084_fonts.sh` 重烘的十五欄與目標096已驗
+  字模**整份 JSON 逐位元組相同**。新增的
+  `tools/bake_nation_card_a_from_font.py` 直接由固定 TTF 與真旗卡片段
+  TSV 重烘「英格蘭：」21px／「移民」25px；兩欄 Alpha 與目標099
+  正式驗收字模逐位元組相同，SHA-256 分別為
+  `29ef858ea29168dba4d493f82429e8df3e7c4ba9be65eec511f7894987249d42`、
+  `9bd96a25dcd72d9d10709279c3509e9ee93ead8fe0c900564a2c8c02aa5bf471`。
+- `tools/verify_goal103_font_rebuild.py` 驗證十七欄完整性、原版與
+  TSV 指紋、新舊字模及每欄 Alpha；本機 PASS 收據
+  `workplace/reports/goal103-font-parity.json` SHA-256
+  `7da742b02e5345f78d3d84833fb8895139aaa5e2b586d752e268183c92d9a1b6`。
+  `tools/test_goal103_font_rebuild.py` 的錯 TTF、錯 TSV、缺原版、
+  缺旗卡欄與改動 Alpha 反例全數拒絕；錯字型／錯譯稿不留下部分字模。
+- 烘製環境為本機 `rich2-py:latest` 映像 ID
+  `sha256:e5c73862da40d1e0c26d9d5f6a62491c75ddfe8ada5c77677e1e445f13d85a71`，
+  Python 3.12.13／Pillow 12.3.0／FreeType 2.14.3。原版與 TTF
+  唯讀掛載；本機輸出 UID/GID 為1000:1000，不加入 Git。
+
+本輪證明的是**目前機器與固定工具映像的可重跑性**；其他機器仍需
+取得指紋完全相同的合法 DOS 版與 Cubic 11，且字型工具映像尚未
+建立獨立可重建來源。這個限制不影響十七欄現有同狀態驗收，
+但不可寫成公開散布或零依賴重建完成。
 
 ## 停止線
 

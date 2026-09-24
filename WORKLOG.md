@@ -1968,3 +1968,31 @@
   均 PASS，安全區外0像素。`tools/worklist.py write` 重生後
   `verify` 通過；附帶誤呼叫不存在的 `check` 子命令只顯示用法，
   不當成清單或產品驗證失敗。
+
+## 2026-09-24：目標103十七欄字模獨立重烘
+
+- 前一目標102已推送八頁 DRAFT 對照與 Issue #30 更新，屬有效
+  進度；本輪在乾淨 `ca42ff0`、正確 Git 身分、PRIVATE 遠端及
+  Issue #12 OPEN 下，以 `829d9db` 先推送[目標103](docs/goals/103-font-rebuild-and-mask-parity.md)。
+  知識路由命中復古遊戲技能、規格閘門、README／文件職責與
+  資料化工作清單；未自行選擇四國長文版式。
+- 在限資源、無網路、非 root 的 `rich2-py:latest` 容器中，
+  唯讀掛載固定原版與 Cubic 11，從真 TSV 重烘前十五欄，
+  全部與目標096本機已驗 JSON 逐位元組相同；新增直接由
+  原始 TTF 重烘第一張旗卡 A 版兩欄的工具，與目標099字模
+  Alpha bytes 逐位元組相同。未修改 `tools/live_menu.go` 或
+  `workplace/dosgolem`，現行正式中文顯示仍十七段。
+- 獨立驗證器的十七欄正例及錯字型、錯譯稿、缺原版、缺欄、
+  改動 Alpha 反例均通過，錯輸入不留部分字模；收據見
+  `workplace/reports/goal103-font-parity.json`。本機工具映像
+  只有固定 ID，尚無專案內可重建來源，因此不宣稱跨機獨立
+  打包或字型可公開散布。後續仍要處理四國介紹正式版式選擇、
+  事件／頁相位守門及真視窗同狀態，Issue #12／#26 保持 OPEN。
+- `tools/worklist.py write`／`verify` 與三支新工具的語法檢查
+  通過；`workplace/reports/goal103-font-rebuild/`、收據及兩欄
+  字模均為 UID/GID 1000:1000。工作根 root-owned 檔案及
+  誤建 `.md` 目錄為0，專案相關 Docker 執行中／已停止容器
+  均無殘留；原版 EXE／TXT／封存檔、字型和本機字模未入 Git，
+  隔離 dosgolem 的 `upstream` 推送位址仍為 `DISABLED`。
+- 原版缺失的命令列負例另外確認烘製器與驗證器都回 `SKIP 77`，
+  不留下成功收據；這與錯字型、錯 TSV 的失敗即關閉分開計算。

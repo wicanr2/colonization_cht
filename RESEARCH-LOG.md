@@ -3381,3 +3381,42 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **限制：**兩版是可丟棄的視覺原型，非 Ebitengine 正式覆蓋；
   標題／正文的正式選擇、輸出事件守門、游標／離頁、缺鍵回退、
   真視窗兩頁與原版同狀態仍未知，規格025不升 READY。
+
+## 2026-09-24：目標103固定 Cubic 11 的十七欄本機重烘
+
+- **已證實／輸入：**本機合法 DOS `COLONIZE` 中 `GAME.TXT` SHA-256
+  `67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a`、
+  `LABELS.TXT` `e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204`、
+  `NAMES.TXT` `4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061`；
+  主譯稿 `text/draft.zh-Hant.tsv`
+  `9c9efe393ca59356f2453ebe0f2b4ad8c5b34bd948af2c59117131163b5de008`、
+  旗卡片段 TSV
+  `d4cf454a4851778546b90a778f2966f9cfa6cc9e2a2b01fae9e261844d0f64b6`；
+  `Cubic_11.ttf`
+  `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`。
+  原版定位是 `candidate_id` 指向的**檔案位元組位移**；字模
+  21／25px 是四倍輸出畫布的像素，不是實模式位址或原版索引座標。
+- **已證實／本機重烘：**`rich2-py:latest` 本機映像 ID
+  `sha256:e5c73862da40d1e0c26d9d5f6a62491c75ddfe8ada5c77677e1e445f13d85a71`；
+  Python 3.12.13、Pillow 12.3.0、FreeType 2.14.3。
+  `tools/bake_goal084_fonts.sh` 依真譯稿與原始 TTF 重烘的十五欄
+  與 `workplace/reports/goal096-fonts-verified/` 的同名 JSON
+  **逐位元組完全相同**。`tools/bake_nation_card_a_from_font.py`
+  從真旗卡 TSV 直接重烘21px「英格蘭：」及25px「移民」，
+  Alpha 與目標099已驗字模逐位元組相同；其 SHA-256 各為
+  `29ef858ea29168dba4d493f82429e8df3e7c4ba9be65eec511f7894987249d42`、
+  `9bd96a25dcd72d9d10709279c3509e9ee93ead8fe0c900564a2c8c02aa5bf471`。
+  前者保留原版國名的冒號顯示語意，沒有把譯文回寫原始資料。
+- **獨立驗證：**`tools/verify_goal103_font_rebuild.py` 對十七欄
+  原版／TSV／TTF 指紋、完整鍵、字級、尺寸、譯文及 Alpha 比對
+  PASS；本機 `workplace/reports/goal103-font-parity.json` SHA-256
+  `7da742b02e5345f78d3d84833fb8895139aaa5e2b586d752e268183c92d9a1b6`。
+  `tools/test_goal103_font_rebuild.py` 正例及錯 TTF、錯 TSV、
+  缺原版、缺欄、改動 Alpha 五類反例均 PASS。所有原始輸入唯讀；
+  十七份字模與收據只在已忽略 `workplace/`，UID/GID 1000:1000。
+  額外以 `/missing` 模擬原版不存在：兩個命令列入口均明確退出
+  `SKIP`／狀態碼77，沒有產生成功收據或假字模。
+- **限制：**此為本機固定繪製環境的可重跑資產，不新增任何
+  dosgolem 事件或正式中文欄位，不驗新畫面；`rich2-py`
+  目前沒有本專案內的可重建來源，其他機器、公開散布及
+  字型授權告知仍需分別審查。原版與 TTF 均未提交 Git。

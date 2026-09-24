@@ -2,10 +2,12 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-目前進行入口：[目標103](docs/goals/103-font-rebuild-and-mask-parity.md)：
-以找回的固定 Cubic 11 原始 TTF、合法原版與真實 TSV 重烘
-現行十七欄本機字模，逐欄和歷史已驗字模比對。此工作不改
-正式顯示、不替使用者決定四國介紹長文版面。
+最近完成入口：[目標103](docs/goals/103-font-rebuild-and-mask-parity.md)：
+固定 Cubic 11 原始 TTF、合法原版與真實 TSV 已重烘現行十七欄
+本機字模；前十五欄整份 JSON 與歷史已驗檔逐位元組相同，
+第一張旗卡兩欄 Alpha bytes 完全相同。錯字型、錯 TSV、
+缺原版、缺欄及改動 Alpha 都拒絕。此結果不增加正式顯示數，
+也不替使用者決定四國介紹長文版面；字型仍不加入 Git。
 
 最近完成入口：[目標102](docs/goals/102-nation-introduction-layout-prototypes.md)：
 以已驗四國八節正常玩家路徑，核對重新找到的固定 SHA-256
@@ -94,10 +96,10 @@ dosgolem 重播及無觀測控制。承接[目標088](docs/goals/088-first-natio
 
 - 使用者已選定本機 `Sid Meier's Colonization (1994)/SMColoni/` 的合法 DOS 輸入作為正式研究目標。
 - 中文化是 dosgolem 輸出階段的繁體中文覆蓋，不是 remake；不修改原版程式、資料、規則或存檔。
-- 儲存庫 `wicanr2/colonization_cht` 維持 PRIVATE；原版素材與原始研究快照只保留本機，
-  僅下列使用者要求的三張可見成果截圖為私有儲存庫例外。
-- 使用者要求在 README 展示合適截圖；三張經驗收的 Ebitengine 視窗圖僅在已核對為
-  PRIVATE 的儲存庫內保存，公開散布仍未授權。原版輸入、字型與原始快照仍不入 Git。
+- 儲存庫 `wicanr2/colonization_cht` 維持 PRIVATE；原版素材與原始研究快照只保留本機。
+  README 中三張經驗收的 Ebitengine 視窗圖與兩張含原版畫素的四國介紹
+  DRAFT 對照圖僅在已核對為 PRIVATE 的儲存庫內保存，公開散布仍未授權。
+  原版輸入、字型與原始快照仍不入 Git；兩張 DRAFT 圖不得冒稱正式遊戲畫面。
 - dosgolem 只修改 `workplace/dosgolem` 獨立副本；`upstream` 推送位址保持 `DISABLED`。
 - 2026-09-22 使用者已確認主選單原型採 Cubic 11、24px 字級（4 倍輸出畫布）。這是該已驗證
   欄位的樣式證據，不是其他畫面的固定字級；不代表術語、完成範圍或字型散布授權已定案。
@@ -142,7 +144,7 @@ dosgolem 重播及無觀測控制。承接[目標088](docs/goals/088-first-natio
 | 第一張難度卡片 | confirmed：稱號從 `NAMES.TXT:0x00000C0C`、副標從 `LABELS.TXT:0x000008A9` 載入，經原版緩衝與格式化印字路徑繪至畫布；`GAME.TXT` 同文不是此路徑稱號來源。規格017限定第一張卡片兩行為 CONFORMED：21／25px 逐欄字模、當次有紋理底圖、原文差分、游標及真實 TSV 缺鍵回退已接正式前端並與同輸入英文控制同狀態；其餘卡片仍屬規格016 DRAFT。 |
 | 第二張難度卡片 | confirmed：真 Ebitengine 視窗點擊 `(265,55)` 顯示 `EXPLORER:`／`Easy`，雙次 dosgolem 收據閉合 `NAMES.TXT:0xC18`／`LABELS.TXT:0x8B2` 至 RAM、格式化印字與原始畫布；墨跡高5／6像素、有紋理底圖。規格019限定兩行為 CONFORMED：「探險家／簡單」採21／25px逐欄字模，真視窗中文與英文控制原版同狀態；各欄缺譯／重複鍵及游標回退、錯版本拒絕與第一張卡片回歸均通過。規格016對其餘卡片仍為 DRAFT。 |
 | 國家選擇頁 | confirmed：正常滑鼠按下／放開難度頁完成區會開啟 `NATIONS.PIK`；16筆真 Ebitengine 視窗輸入抵達此頁，與同輸入英文控制原版同狀態。左側兩行 `Select`／`European Power` 已追溯至 `LABELS.TXT:0x8D3`／`0x8DB`、RAM、實模式輸出及安全矩形；[規格020](docs/spec/020-nation-heading-overlay.md)限定 CONFORMED：「選擇／歐洲國家」各38px，兩欄缺鍵／重複鍵、游標、按鍵及場景切換均逐欄安全回退，錯版在輸出前拒絕。其他國家頁文字仍未驗收。 |
-| 第一張國家旗卡紅字 | 目標085／087證實 `NAMES.TXT:0x8EA`／`LABELS.TXT:0x8F2` 各自從 DOS 讀入至原版畫布的動態來源鏈；目標088擷取兩欄印前多色底圖並以[text/nation-card-fragments.zh-Hant.tsv](text/nation-card-fragments.zh-Hant.tsv)固定譯文來源。使用者選 A 的21／25px「英格蘭：／移民」紅字／黑影，排除 B 的25／29px。目標089／099補齊游標、按住、相鄰右卡重繪及直接離頁的原版負例；[規格021](docs/spec/021-nation-card-red-text-draft.md)已限定 CONFORMED：真 Ebitengine 視窗與同輸入英文控制、舊十五欄原版同狀態，只在兩欄安全區新增1,915／2,738輸出像素；缺譯、重複鍵、缺字模、錯字級、游標、換卡、離頁與錯版都逐欄安全回退。只計入第一張兩欄，右卡與其他國家仍未定案；固定原始 TTF 本輪缺失，本機字模不可當公開可重烘資產。 |
+| 第一張國家旗卡紅字 | 目標085／087證實 `NAMES.TXT:0x8EA`／`LABELS.TXT:0x8F2` 各自從 DOS 讀入至原版畫布的動態來源鏈；目標088擷取兩欄印前多色底圖並以[text/nation-card-fragments.zh-Hant.tsv](text/nation-card-fragments.zh-Hant.tsv)固定譯文來源。使用者選 A 的21／25px「英格蘭：／移民」紅字／黑影，排除 B 的25／29px。目標089／099補齊游標、按住、相鄰右卡重繪及直接離頁的原版負例；[規格021](docs/spec/021-nation-card-red-text-draft.md)已限定 CONFORMED：真 Ebitengine 視窗與同輸入英文控制、舊十五欄原版同狀態，只在兩欄安全區新增1,915／2,738輸出像素；缺譯、重複鍵、缺字模、錯字級、游標、換卡、離頁與錯版都逐欄安全回退。目標103找回固定原始 TTF 並直接重烘兩欄，與歷史已驗 Alpha bytes 精確相同；只計入第一張兩欄，右卡與其他國家仍未定案。字型及字模不入 Git，正式散布尚未授權。 |
 | 相鄰右上國家旗卡文字 | [目標090](docs/goals/090-neighbor-nation-card-source.md)證實 `NAMES.TXT:0x906` 的 `France` 與 `LABELS.TXT:0x8FF` 的 `Cooperation` 從原始 TXT、DOS／RAM 至右側畫布；[目標091](docs/goals/091-neighbor-nation-card-reversible-preview.md)取得右欄多色底圖、安全區及兩個本機 Ebitengine 候選逐像素 PASS。原版右欄為藍色索引9，不是左卡紅色12。[目標092](docs/goals/092-neighbor-card-runtime-and-nation-route.md)又驗上／下欄游標各自遮擋24／25點、再點右卡的短暫重繪、切回左卡及離頁負例；雙次冷啟動與無觀測控制同狀態。[規格022](docs/spec/022-neighbor-nation-card-red-text-draft.md)仍 DRAFT；字級未定案，正式前端逐欄回退未驗，不計入十七段正式顯示。 |
 | 選國後姓名畫面 | confirmed：右卡完成提示 `(65,184)` 由正常滑鼠路徑進入；`GAME.TXT:0xA7A` 完整提示行（可見字串 `0xA7C`）及 `NAMES.TXT:0xB4B` 預設姓名片段各有 DOS／RAM／`0D21:012C` 畫布來源鏈。目標094證實提示415點、多色印前底圖、安全矩形與38px字模；目標095真視窗驗 `x`、退格、Enter、標點拒絕與失焦不補送，[規格024](docs/spec/024-window-keyboard-input.md)限定 CONFORMED。目標096補足完整來源、開檔世代、游標與離頁守門，正式38px中文提示通過真視窗同狀態、缺鍵／缺字／錯版回退；[規格023](docs/spec/023-player-name-screen-draft.md)僅固定提示限定 CONFORMED，計入第十五段。目標097另量到姓名框 `(79,98)–(246,112)`、墨跡 `(82,101)–(164,110)` 及內部安全區 `(80,100)–(245,111)`（原版320×200半開座標）；A原名／B中文佔位示意的本機圖差分只在該區，未接正式前端。可編輯姓名資料、原版記憶體、規則與存檔不改；是否僅顯示譯名、真正譯法及逐欄正式回退尚未定案，[Issue #29](https://github.com/wicanr2/colonization_cht/issues/29)保持開放。 |
 | 首次國家介紹長文 | confirmed：目標101從選國頁四張旗卡的正常滑鼠點選，經姓名 Enter 到英、法、西、荷各 A／B 原版介紹；八節均有固定 `GAME.TXT` bytes、DOS 讀取、逐字印字、畫布墨跡、雙次冷啟動及無觀測控制收據。西班牙 B 的來源 `50%%` 實際印為 `50%`。法國 B 頁無鍵留原頁，Enter／ESC 都抵達下一可見 King 畫面，但 CPU／RAM 不同，不主張後續等價；其他三國 B 後未驗。目標102以相同 SHA 字型取得八頁印字前底圖，兩套離線中文排版均無缺字、裁切或安全區外改色；這不是執行期覆蓋。八筆繁中 TSV 仍為 draft、沒有中文長文覆蓋；[規格025](docs/spec/025-first-nation-introduction-draft.md)仍 DRAFT，正式版面、事件與頁相位守門、真視窗第二頁與回退待驗。[Issue #30](https://github.com/wicanr2/colonization_cht/issues/30) OPEN。 |
@@ -175,8 +177,9 @@ DOSBox-X 僅提供啟動鏈及畫面類別的輔助基準，正式收據由 dosg
 目前主譯稿已有368筆，另有24則help稿及旗卡四筆顯示片段草稿，
 但原版TXT、EXE及靜態圖像仍未建立完整玩家可見訊息分母。
 第一張旗卡已依[目標099](docs/goals/099-first-nation-card-a-overlay.md)
-完成 A 版兩欄限定 CONFORMED；目標102已恢復相同 SHA 的原始
-字型來源，後續仍須建立從 Git 可獨立重烘的流程與發行權利檢查，
+完成 A 版兩欄限定 CONFORMED；目標102恢復相同 SHA 的原始
+字型來源，目標103完成十七欄本機字模重烘與舊版對拍；後續仍須
+建立工具映像的跨機可重建來源與發行權利檢查，
 並另行探勘其他國家；不得將第一張的 A 字級複製到右卡。
 相鄰右上旗卡已依[目標091](docs/goals/091-neighbor-nation-card-reversible-preview.md)
 驗得可逆底圖與兩組字級候選，[目標092](docs/goals/092-neighbor-card-runtime-and-nation-route.md)
@@ -184,9 +187,9 @@ DOSBox-X 僅提供啟動鏈及畫面類別的輔助基準，正式收據由 dosg
 正式逐欄回退與版式確認，不能把第一張的 A／B 決定外推。
 [規格022](docs/spec/022-neighbor-nation-card-red-text-draft.md)仍 DRAFT。
 姓名畫面依[規格023](docs/spec/023-player-name-screen-draft.md)已有
-來源及鍵盤語意；下一閘門是提示印前底圖、安全矩形、逐欄
-中文字級與姓名資料隔離。首次國家介紹長文另見 Issue #30，
-未形成翻譯與排版驗收。
+固定提示正式驗收；可編輯姓名欄仍待使用者決定資料隔離顯示界線。
+首次國家介紹長文另見 Issue #30，已有八節草稿與離線排版驗證，
+但未選正式版式、未接 Ebitengine，不能算中文畫面驗收。
 以下舊目標僅供查找當時證據與過程；完成度以本檔上方「目前狀態表」為準。
 [目標065](docs/goals/065-pedia-founding-fathers-corpus.md)與[目標066](docs/goals/066-pedia-cargo-corpus.md)
 已分別完成25篇「建國元勳」及16篇「貨物」的整段草稿；合計41篇已通過固定來源、
@@ -276,7 +279,9 @@ A 版完成難度標題限定驗收，真視窗、十五檢查點、兩欄回退
 已完成 [目標 054](docs/goals/054-main-menu-text-provenance.md) 的最小證據鏈；
 [目標 055](docs/goals/055-first-text-prototype.md) 保存中文原型、測試與重跑入口。
 目前原型為 4 倍畫布、使用者已確認 Cubic 11 的 24px 顯示，中文為「在新世界開始遊戲」。
-字型僅本機使用，內嵌許可不是 OFL，尚未完成正式散布權利審查。
+字型仍僅本機使用。目標055當時依字型內嵌欄位無法判定 OFL；
+目標102後來找到固定原始檔與原作者 OFL-1.1 授權文件，訂正
+「不是 OFL」的過度結論；正式套件的授權告知與散布仍待審查。
 
 目標056首列已由[規格012](docs/spec/012-five-menu-lines.md)擴至五列，每列三次事件一致。
 滑鼠在(128,110)時前三列的完整安全區受遮擋而回退，後兩列仍中文；移開恢復。
