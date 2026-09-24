@@ -2,6 +2,11 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前進行入口：[目標104](docs/goals/104-nation-introduction-exit-phase.md)：
+以 dosgolem 正常玩家路徑量英格蘭、西班牙與荷蘭介紹 B 頁後
+無輸入／Enter／ESC 的畫面、原版狀態與印字相位，補規格025的
+離頁守門證據；長文版式仍待使用者選擇，不接正式中文畫面。
+
 最近完成入口：[目標103](docs/goals/103-font-rebuild-and-mask-parity.md)：
 固定 Cubic 11 原始 TTF、合法原版與真實 TSV 已重烘現行十七欄
 本機字模；前十五欄整份 JSON 與歷史已驗檔逐位元組相同，
