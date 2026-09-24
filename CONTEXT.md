@@ -2,6 +2,12 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+進行中入口：[目標109](docs/goals/109-opening-caption-variable-values.md)：
+承接十張開場字幕的十一行草稿，從四國正常玩家路徑
+追 `%STRING` 實際印字與來源候選。目標文件先推送；
+變數值譯稿與正式覆蓋都須待證據，不把英格蘭值
+套到其他國家。
+
 最近完成入口：[目標108](docs/goals/108-build-opening-caption-translation.md)：
 固定原版十張開場字幕的十一個 `^^` 原文行現均有可追溯
 繁中草稿；主譯稿由369增至379筆。獨立驗證重新核對
@@ -23,7 +29,7 @@ dosgolem 十段印字與雙重播、各行檔案位移／SHA、占位符、
 
 下一工作入口：從已驗1,200M海上畫面的正常玩家輸入與
 原版設定查證首則 help 的觸發和當次印字。另需把
-`@BUILD2–10` 的變數訊息建立可追溯譯稿與逐欄版式；
+`@BUILD2–10` 已有的逐行草稿接到變數值來源與逐欄版式；
 `@BUILD1` 的38／42px正式字級仍待使用者選擇。
 
 最近工作入口：[目標106](docs/goals/106-build-opening-caption-overlay-gate.md)
