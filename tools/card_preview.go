@@ -1,4 +1,4 @@
-// 可丟棄的 Ebitengine 一／兩欄畫面對照；只讀已核對的本機收據，不接正式遊戲路徑。
+// 可丟棄的 Ebitengine 分欄畫面對照；只讀已核對的本機收據，不接正式遊戲路徑。
 package main
 
 import (
@@ -72,9 +72,10 @@ func scaled(indexed, palette []byte, width, height int) *ebiten.Image {
 	}
 	return ebiten.NewImageFromImage(imageData)
 }
-func newPreview(data previewData, out string, control bool, base image.Image) *previewGame {
-	if !data.Prototype || len(data.Layers) > 2 || (!control && len(data.Layers) == 0) {
-		fail(fmt.Errorf("只接受無覆蓋原文控制或一／兩欄可丟棄收據"))
+func newPreview(data previewData, out string, control bool, base image.Image, maxLayers int) *previewGame {
+	if maxLayers < 1 || maxLayers > 9 || !data.Prototype ||
+		len(data.Layers) > maxLayers || (!control && len(data.Layers) == 0) {
+		fail(fmt.Errorf("只接受無覆蓋原文控制或限定欄數的可丟棄收據"))
 	}
 	indexed := decode(data.Indexed, 320*200)
 	palette := decode(data.Palette, 256*3)
@@ -164,6 +165,7 @@ func main() {
 	in := flag.String("in", "", "本機已核對預覽資料")
 	out := flag.String("out", "", "本機輸出 PNG")
 	control := flag.Bool("control", false, "只顯示原版畫布")
+	maxLayers := flag.Int("max-layers", 2, "可丟棄預覽的最大欄數；卡片預設二欄")
 	basePath := flag.String("base", "", "本機已驗 Ebitengine 視窗底圖；僅供可丟棄對照")
 	flag.Parse()
 	if *in == "" || *out == "" {
@@ -182,6 +184,6 @@ func main() {
 		fail(input.Close())
 	}
 	ebiten.SetWindowSize(1280, 800)
-	ebiten.SetWindowTitle("Colonization card prototype")
-	fail(ebiten.RunGame(newPreview(data, *out, *control, base)))
+	ebiten.SetWindowTitle("Colonization localization prototype")
+	fail(ebiten.RunGame(newPreview(data, *out, *control, base, *maxLayers)))
 }

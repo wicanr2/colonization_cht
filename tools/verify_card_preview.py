@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""核對 Ebitengine 卡片預覽：原文基準、可逆底圖、安全矩形與兩欄變更。"""
+"""核對 Ebitengine 分欄預覽：原文基準、可逆底圖與安全矩形。"""
 
 import argparse
 import base64
@@ -41,7 +41,7 @@ def main():
             owners = [layer["name"] for layer in source["layers"]
                       if layer["safe"][0] * 4 <= x < layer["safe"][2] * 4
                       and layer["safe"][1] * 4 <= y < layer["safe"][3] * 4]
-            require(len(owners) <= 1, "兩欄安全區重疊")
+            require(len(owners) <= 1, "欄位安全區重疊")
             if not owners:
                 require(final[x, y] == original, "中文變更超出安全矩形：%d,%d" % (x, y))
             elif final[x, y] != original:
@@ -92,7 +92,7 @@ def main():
         require(changed[layer["name"]] > 0 and restored > 0, "欄位沒有實際中文與背景恢復：" + layer["name"])
         if "shadow_index" in layer:
             require(opaque_foreground > 0 and opaque_shadow > 0,
-                    "欄位缺少原版紅字或黑影：" + layer["name"])
+                    "欄位缺少指定前景色或陰影：" + layer["name"])
     receipt = {"prototype": True, "result": "PASS", "changed_pixels_by_field": changed,
                "control_png_sha256": hashlib.sha256(args.control.read_bytes()).hexdigest(),
                "chinese_png_sha256": hashlib.sha256(args.chinese.read_bytes()).hexdigest(),

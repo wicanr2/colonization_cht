@@ -72,6 +72,7 @@ func main() {
 	postCaptionAudit := flag.Bool("post-caption-audit", false, "目標107：選用鍵盤待取數診斷與有界字幕後觀測")
 	gameInputsPath := flag.String("game-inputs", "", "目標110：字幕後正常玩家滑鼠／鍵盤事件 JSON；預設不改舊重播")
 	optionsAudit := flag.Bool("options-audit", false, "目標112：固定 GAME.TXT 遊戲選項九欄的 DOS 讀入來源")
+	optionsPreprint := flag.Bool("options-preprint", false, "目標113：九欄各自首筆原版印字前底圖與印字緩衝寫入")
 	flag.Parse()
 	if *inputs == "" || *out == "" {
 		panic("缺必要參數")
@@ -110,6 +111,9 @@ func main() {
 	}
 	if *optionsAudit && (*gameInputsPath == "" || *followUntil < 1300000000) {
 		panic("遊戲選項來源稽核需要正常玩家開窗輸入與1300M終點")
+	}
+	if *optionsPreprint && !*optionsAudit {
+		panic("遊戲選項印前底圖需同時啟用來源稽核")
 	}
 	extraEnters := map[uint64]bool{}
 	if *followEnterAt != "" {
@@ -275,6 +279,14 @@ func main() {
 	const canvas uint32 = 0x2cae0
 	printReads := []map[string]any{}
 	optionSourceReads := []map[string]any{}
+	optionPrintWrites := []map[string]any{}
+	optionBefore := map[int][]byte{}
+	optionFirstSteps := map[int]uint64{}
+	optionWriteCounts := map[int]int{}
+	optionSafe := [9][4]int{{65, 44, 253, 59}, {80, 59, 252, 71},
+		{80, 71, 252, 83}, {80, 83, 252, 95}, {80, 95, 252, 107},
+		{80, 107, 252, 119}, {80, 119, 252, 131}, {80, 131, 252, 143},
+		{80, 143, 252, 155}}
 	writers := map[string]*introWriter{}
 	preprintCanvas := map[string][]byte{}
 	preprintSteps := map[string]uint64{}
@@ -286,6 +298,19 @@ func main() {
 		observeEnd = *followUntil
 	}
 	if !*control {
+		if *optionsPreprint {
+			for _, start := range []uint32{0x2ac78, 0x2adde} {
+				m.WatchWrites(start, start+2, func(a uint32, old, value uint8) {
+					if m.Steps < 1253300000 || m.Steps >= 1253600000 || len(optionPrintWrites) >= 2000 {
+						return
+					}
+					cs, ip := m.CPU.OpAddr()
+					optionPrintWrites = append(optionPrintWrites, map[string]any{
+						"step": m.Steps, "cs_ip": fmt.Sprintf("%04X:%04X", cs, ip),
+						"linear": a, "old": old, "value": value})
+				})
+			}
+		}
 		m.WatchReads(0x20000, 0x80000, func(a uint32, value uint8) {
 			if *optionsAudit && m.Steps >= 1253314011 && m.Steps < 1253600000 &&
 				a >= 0x2b0cf && a < 0x2b177 && len(optionSourceReads) < 10000 {
@@ -326,6 +351,18 @@ func main() {
 			key := fmt.Sprintf("%s/%04X:%04X", phase, cs, ip)
 			writer := writers[key]
 			x, y := int(a-canvas)%320, int(a-canvas)/320
+			if *optionsPreprint && m.Steps >= 1253300000 && m.Steps < 1253600000 &&
+				cs == 0x0d21 && ip == 0x012c {
+				for index, safe := range optionSafe {
+					if safe[0] <= x && x < safe[2] && safe[1] <= y && y < safe[3] {
+						if optionBefore[index] == nil {
+							optionBefore[index] = bytes.Clone(m.Mem[canvas : canvas+64000])
+							optionFirstSteps[index] = m.Steps
+						}
+						optionWriteCounts[index]++
+					}
+				}
+			}
 			if writer == nil {
 				writer = &introWriter{BBox: [4]int{x, y, x + 1, y + 1},
 					FirstStep: m.Steps, Rows: map[int]*introRow{}}
@@ -590,6 +627,9 @@ func main() {
 				}
 				if *optionsAudit {
 					version = "goal112-game-options-source-v2"
+					if *optionsPreprint {
+						version = "goal113-game-options-preprint-v1"
+					}
 				}
 			}
 		}
@@ -619,6 +659,24 @@ func main() {
 	}
 	if *optionsAudit {
 		report["option_source_reads"] = optionSourceReads
+	}
+	if *optionsPreprint {
+		report["option_print_writes"] = optionPrintWrites
+		preprints := map[string]any{}
+		if !*control && len(optionBefore) != len(optionSafe) {
+			panic("遊戲選項九欄印前底圖不完整")
+		}
+		for index, before := range optionBefore {
+			name := fmt.Sprintf("option-before-%02d", index)
+			if len(before) != 64000 {
+				panic("遊戲選項印前底圖尺寸不符")
+			}
+			mustIntro(os.WriteFile(*out+"."+name+".canvas", before, 0644))
+			preprints[name] = map[string]any{"step": optionFirstSteps[index],
+				"canvas_sha256": hashIntro(before), "writes": optionWriteCounts[index],
+				"safe": optionSafe[index], "writer_ip": "0D21:012C"}
+		}
+		report["option_preprint"] = preprints
 	}
 	if *preprint {
 		phases := []string{"first", "second"}

@@ -1,6 +1,6 @@
 # 目標113：遊戲選項印前底圖與 Ebitengine 中文對照
 
-狀態：in_progress；日期：2026-09-24。承接[目標112](112-game-options-chinese-display.md)與[規格027](../spec/027-game-options-window-draft.md)已驗的九處原版 `GAME.TXT` 位移、DOS 讀入、168-byte解析讀取、印字及1,300M畫面；對應 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)、[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)、[Issue #27](https://github.com/wicanr2/colonization_cht/issues/27)。
+狀態：completed（僅印前底圖與可丟棄預覽；正式覆蓋未完成）；日期：2026-09-24。承接[目標112](112-game-options-chinese-display.md)與[規格027](../spec/027-game-options-window-draft.md)已驗的九處原版 `GAME.TXT` 位移、DOS 讀入、168-byte解析讀取、印字及1,300M畫面；對應 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7)、[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)、[Issue #27](https://github.com/wicanr2/colonization_cht/issues/27)。
 
 ## 玩家問題與本輪邊界
 
@@ -20,3 +20,9 @@
 ## 停止線
 
 圖看起來可讀不等於來源鏈、底圖或反白／游標相位已驗；可丟棄預覽不能計入正式十七段。已驗第一張旗卡的21／25px與難度標題34／38px不得外推至本視窗。若選項譯文熱鍵標示在單列放不下，先量測與提出可丟棄候選，不默默刪除快捷鍵資訊或覆蓋核取圖示。使用者未授權公開原版衍生畫素；對照 PNG 只留已忽略的本機工作區。
+
+## 本輪結果與未閉合項
+
+- `-options-preprint` 在原版實模式 `0D21:012C` 九欄各自第一個變更畫素**之前**保存320×200完整畫布。兩次英格蘭正常玩家冷啟動的 JSON、九張印前畫布逐 byte 相同；無監看控制的原版 `route/sources/transfers/samples/opened/key_events/game_inputs` 與1,300M索引／色盤相同。九欄各自印前→最終畫面的安全區差分依序319／338／349／283／186／172／316／343／246點，等於各欄記錄寫入數；木紋、第一列反白及左側核取圖示均不以塗平畫素代替。收據與原版畫素僅在已忽略的 `workplace/reports/goal113-options/`。
+- 使用固定真 `Cubic_11.ttf` 及九筆真 TSV（僅畫面預覽去掉不可見 `~`，保留可見 `（I）` 等 ASCII 熱鍵）產生九欄獨立字級。貼近原版 A 為標題34px、各列25／28／28／25／28／28／27／28px；較大 B 為38px、28／32／32／28／32／32／31／32px。Ebitengine 原文控制與 A／B 的本機 PNG 分別為 `options-original.png`、`options-faithful.png`、`options-readable.png`，沒有提交原版像素。`tools/verify_card_preview.py` 逐像素驗兩組均 PASS：原文控制符合原始最近鄰畫布，九個安全區外零變更，透明字模下恢復逐欄多色原底圖，各欄均有中文前景與陰影；[預覽產生器](../../tools/prepare_goal113_options_preview.py)及[正反例](../../tools/test_goal113_options_preview.py)可重跑。
+- 窄寫入監看在九欄印字期間未觀測到解析緩衝→印字字元緩衝的寫入；**未找到最後搬運邊**，來源鏈仍只是強推論，不因相同原文及成功預覽而提升為已證實。反白切換、游標、ESC離頁與實際執行期逐欄回退未驗；[規格027](../spec/027-game-options-window-draft.md)維持 DRAFT，正式已驗中文仍十七段。A／B 對照尚未由使用者為這個視窗選版；本輪不更新正式截圖或 README 的完成聲明。

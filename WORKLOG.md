@@ -2327,3 +2327,10 @@
 - 新建[規格027](docs/spec/027-game-options-window-draft.md)保存各原版位移、來源與逐欄墨跡／候選安全矩形；把既有九筆譯稿「正常路徑輸出事件未驗證」註記訂正，沒有新增譯稿筆數或改掉 `~` ASCII 熱鍵標記。`validate_translation_draft.py` 驗379筆 PASS；目標110舊原版收據回歸 PASS。解析到印字緩衝最後搬運、印前底圖、反白／游標回退與中文字級未閉合，規格維持 DRAFT，正式顯示仍十七段，沒有更新正式截圖。
 - 原始 DOS、完整 RAM 與原版畫素只留唯讀原版及已忽略 `workplace/reports/goal112-options/`；本機檢視用 PNG 亦不入 Git。輸出與研究工具 UID/GID 均為1000:1000；`workplace/` 無 root-owned 檔案或誤建 `.md` 目錄，研究及圖像映像無執行中／已停止容器殘留。隔離 dosgolem 提交仍為 `9dd36726`，`upstream` 推送位址 `DISABLED`。下一步是補來源最後搬運與逐欄印前底圖、用固定 Cubic 11 做可丟棄 Ebitengine 對照，再審查 READY。私有成果推送及 Issue 回讀於本輪收尾核對。
 - 實質成果以 `db9cb8d` 推送 PRIVATE `origin/main`；主機 `gh` 已留言且回讀 [Issue #7](https://github.com/wicanr2/colonization_cht/issues/7#issuecomment-5810493052)、[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26#issuecomment-5810493811) 及 [Issue #27](https://github.com/wicanr2/colonization_cht/issues/27#issuecomment-5810492932)，三者皆維持 OPEN。此收尾紀錄另推送一筆文件提交；規格027與目標112仍 in_progress／DRAFT，不把來源階段冒稱中文覆蓋完成。
+
+## 2026-09-24：目標113遊戲選項逐欄底圖與可丟棄對照
+
+- 使用者再次確認第一張國家旗卡 A（「英格蘭：」21px、「移民」25px，排除B）。先查目前程式、規格021與目標099，該選擇先前已限定 CONFORMED；本輪未重做、未修改旗卡截圖。接續前一輪尚在進行的遊戲選項，已先以 `6080a59` 推送[目標113](docs/goals/113-game-options-background-and-preview.md)及現況入口至 PRIVATE `origin/main`。
+- 沿固定正常滑鼠開窗輸入，用隔離 dosgolem 探針加預設關閉的 `-options-preprint`；原版兩次冷啟動 JSON、九欄各自印前畫布逐 byte 相同，無監看控制的路徑及1,300M索引／色盤相同。九欄完整差分及對應步數見[規格027](docs/spec/027-game-options-window-draft.md)。窄監看沒有抓到解析→印字字元緩衝的最後寫入，不能因此推成已閉合，規格維持 DRAFT。
+- 固定合法原版、真 TSV 與既有 Cubic 11 SHA，在 `workplace/reports/goal113-options/` 產出 A（貼近原版）／B（較大）兩套逐欄 Ebitengine 本機預覽及英文控制；沒有把原版像素、字型或字模放進 Git。`tools/verify_card_preview.py` 對兩組逐像素 PASS：原文控制符合原始索引、九欄外零差異、各欄透明區恢復印前多色底圖。`tools/test_goal113_options_preview.py` 的雙重播正例、錯原版／字型、過長譯文、壞底圖、控制分歧及缺原版 SKIP 77 都通過。第一次建置選用的既有 Ebitengine 映像缺離線模組；改沿用已含 v2.9.9 的既有 `eob-remake-go:1.26.7-ebiten2.9.9`，沒有開網路或新增重複映像。
+- 對照只屬 DRAFT 的可丟棄畫面，使用者尚未為**遊戲選項九欄**選 A／B；真視窗動態守門、反白／游標／離頁回退未驗，正式中文維持十七段。更新規格、研究紀錄、目前脈絡與 Issue 工作項目，不更新 README 正式截圖。

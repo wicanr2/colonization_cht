@@ -2,10 +2,16 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
-目前進行入口：[目標113](docs/goals/113-game-options-background-and-preview.md)：
-沿目標112的九欄來源收據，擷取當次印前底圖並以固定 Cubic 11
-製作可丟棄 Ebitengine 中文對照；在規格027 READY／真視窗驗收
-之前，正式中文仍十七段，遊戲選項九欄仍為英文。
+最近完成入口：[目標113](docs/goals/113-game-options-background-and-preview.md)：
+沿目標112的正常玩家九欄來源收據，已由 dosgolem 雙冷啟動擷取各欄
+印前底圖，並以固定 Cubic 11 與真 TSV 製作本機可丟棄的 Ebitengine
+原文／A／B 對照；逐像素驗證安全區外零變更。解析緩衝至印字緩衝
+的最後搬運、其他反白／游標相位仍未閉合；[規格027](docs/spec/027-game-options-window-draft.md)
+維持 DRAFT，正式中文仍十七段，遊戲選項九欄仍為英文。
+
+使用者本輪再次確認第一張國家旗卡選 A（「英格蘭：」21px、
+「移民」25px），排除 B 的25／29px；此決定先前已在目標099及
+規格021限定實作並驗收，本輪沒有重複改動旗卡或正式截圖。
 
 目前工作入口：[目標112](docs/goals/112-game-options-chinese-display.md)：
 沿目標111已驗的正常滑鼠路徑，追 `Game Options` 視窗標題與八列
@@ -71,8 +77,10 @@ dosgolem 十段印字與雙重播、各行檔案位移／SHA、占位符、
 其實際觸發仍未知，規格026保持 DRAFT、正式中文維持十七段。
 
 下一工作入口：優先接續[規格027](docs/spec/027-game-options-window-draft.md)
-九欄的原版解析→印字緩衝搬運、各欄印前多色底圖、
-逐欄字級與真 Ebitengine 預覽；證據足夠才審查 READY。
+九欄的原版解析→印字緩衝最後搬運、選取／游標／離頁相位與
+真 Ebitengine 玩家視窗回退；九欄印前多色底圖及可丟棄 A／B
+預覽已由目標113完成，正式字級尚待此視窗專屬視覺決定，
+證據足夠才審查 READY。
 教學選項能否在新局開始前以正常玩家介面啟用並保留
 亦待查；`Retire` 目前只有確認框，不能假定能返回新局。
 另需把
