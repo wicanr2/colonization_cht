@@ -2,6 +2,10 @@
 
 更新：2026-09-24；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
 
+目前進行入口：[目標116](docs/goals/116-game-options-selection-and-exit-phases.md)：
+沿已驗正常滑鼠開啟 `Game Options` 路徑，觀測第一／末列選取、
+游標與 ESC 離頁畫面相位；九欄正式文字仍是英文，規格027 DRAFT。
+
 最近完成入口：[目標115](docs/goals/115-game-options-source-chain-correction.md)／
 [目標114](docs/goals/114-game-options-print-buffer-dataflow.md)：
 目標113的「零筆寫入」是監看器單一 active range 被後設畫布範圍覆蓋，
