@@ -1,6 +1,6 @@
 # 目前脈絡
 
-目前真相：[目標140](docs/goals/140-other-nation-cards-overlay.md)完成 #34：法國、西班牙、荷蘭三張旗卡 A 版在明示 `-nation-cards-rest-a` 時顯示中文（規格022 限定 CONFORMED）。正式中文欄位為四十六段。下一個 Issue 為 #35（其餘九張開場字幕）。
+目前真相：[目標140](docs/goals/140-other-nation-cards-overlay.md)完成 #34：法國、西班牙、荷蘭三張旗卡 A 版在明示 `-nation-cards-rest-a` 時顯示中文（規格022 限定 CONFORMED）。正式中文欄位為四十六段。下一個 Issue 為 #35（其餘九張開場字幕），進行中：[目標141](docs/goals/141-remaining-build-captions.md)。
 
 目前真相：[目標139](docs/goals/139-third-difficulty-card-overlay.md)完成 #33：第三張難度卡「征服者／普通」A 版在明示 `-third-card-a` 時顯示中文（規格016 第三卡限定 CONFORMED）。正式中文欄位為四十段。
 
