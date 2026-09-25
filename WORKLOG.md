@@ -2499,3 +2499,7 @@
 - 驗證：最終前端 `gofmt`／`go vet` 無輸出，檢查器 PASS，舊欄位回歸另見下條。本輪容器皆 `--rm`，無殘留；隔離 dosgolem 禁推設定不變。原版像素、截圖與收據只在 `workplace/`。
 - 最終前端舊欄位回歸：標題 1280M 與字幕 82M 的 PNG、完整 RAM、索引、狀態、套用畫格數（54／151）與目標132 收據相同；`go test`（有界 Xvfb）、`gofmt`、Python 與 shell 語法檢查通過。
 - 收尾：`bfc31c6` 已推送 PRIVATE `origin/main`；[Issue #11](https://github.com/wicanr2/colonization_cht/issues/11#issuecomment-5826938744)、[Issue #12](https://github.com/wicanr2/colonization_cht/issues/12#issuecomment-5826938906)、[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26#issuecomment-5826939123) 已留言（含目標133 事件計數更正）並回讀，三者維持 OPEN。
+
+## 2026-09-25：未完成工作登記為 Issue
+
+- 對照 GitHub Issue 與 CONTEXT 待辦，新建 [#31](https://github.com/wicanr2/colonization_cht/issues/31)～[#37](https://github.com/wicanr2/colonization_cht/issues/37)：遊戲選項後續驗證、退休確認框（待選版式）、第三張難度卡（待選 A／B）、其餘三張旗卡、其餘九張開場字幕、首則 help、海上主畫面介面；並加入 `docs/worklist.json`，`tools/worklist.py write/verify` 通過。

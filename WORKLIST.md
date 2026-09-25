@@ -37,6 +37,13 @@
 | #28 | completed | [重排難度畫面標題並逐欄調整中文字級](https://github.com/wicanr2/colonization_cht/issues/28) | — | 以原版同狀態畫面量測標題及各欄原文字級、對齊與安全矩形；可丟棄版式對照供使用者確認，正式畫面更符合原版風格且每欄中文字級獨立驗證。 |
 | #29 | in_progress | [追查選國後姓名畫面文字來源與安全中文覆蓋](https://github.com/wicanr2/colonization_cht/issues/29) | `normal-gameplay-route`, `dynamic-text-draft` | 正常玩家輸入可重播提示與預設名來源、輸入語意、逐欄安全矩形、原文回退及正式中英文同狀態驗收。 |
 | #30 | in_progress | [追查並中文化首次國家介紹畫面與長文排版](https://github.com/wicanr2/colonization_cht/issues/30) | `player-name-screen`, `dynamic-text-draft` | 正常玩家從姓名畫面進入首次國家介紹；標題與長文有原版來源、可追溯繁中譯稿、逐段安全矩形、溢出／分頁回退及中英文同狀態驗收。 |
+| #31 | planned | [遊戲選項視窗：鍵盤快捷鍵、其他國家與存檔後開窗驗證](https://github.com/wicanr2/colonization_cht/issues/31) | `dynamic-overlay-implementation` | 鍵盤快捷鍵切換、其他三國與存檔後開窗各有原版事件證據與中英同輸入收據；不通過的路徑保留英文並記錄原因。 |
+| #32 | blocked | [退休確認框三欄中文化（待選 A／B 版式）](https://github.com/wicanr2/colonization_cht/issues/32) | `dynamic-overlay-implementation` | 使用者選定版式後規格028升 READY，正式前端中英同輸入（Yes／No 兩分支、游標遮擋）與真 GUI 驗收後 CONFORMED。 |
+| #33 | blocked | [第三張難度卡「征服者／普通」中文化（待選 A／B）](https://github.com/wicanr2/colonization_cht/issues/33) | `dynamic-overlay-implementation` | 使用者選定 A／B 後規格016第三卡升 READY，正式前端中英同輸入與游標／離頁負例、真 GUI 驗收後 CONFORMED，第一二卡不退步。 |
+| #34 | planned | [其餘三張國家旗卡紅字中文化](https://github.com/wicanr2/colonization_cht/issues/34) | `dynamic-overlay-implementation` | 其餘三張旗卡逐張有原版事件、底圖、字級候選與使用者確認，升 READY 後正式前端與真 GUI 驗收 CONFORMED。 |
+| #35 | planned | [其餘九張開場字幕 @BUILD2～10 中文化](https://github.com/wicanr2/colonization_cht/issues/35) | `dynamic-overlay-implementation` | 九張字幕逐張有當次事件、底圖、真 VGA 同步與換頁撤銷證據，正式前端與真 GUI 驗收後逐張 CONFORMED。 |
+| #36 | planned | [觸發並中文化首則教學提示（help）](https://github.com/wicanr2/colonization_cht/issues/36) | `normal-gameplay-route` | 正常玩家可重現觸發首則 help 並有原版印字事件；help 視窗 DRAFT 規格與使用者確認的版面，後續依 READY／CONFORMED 流程接正式前端。 |
+| #37 | planned | [海上主畫面選單列與右側狀態欄中文化](https://github.com/wicanr2/colonization_cht/issues/37) | `dynamic-text-draft` | 選單列與狀態欄分類靜態／動態字，逐欄有原版事件、底圖、重印閘門與使用者確認的版面，正式前端與真 GUI 驗收後 CONFORMED。 |
 
 ## 驗證
 
