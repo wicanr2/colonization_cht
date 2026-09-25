@@ -1,6 +1,6 @@
 # 目標141：其餘九張開場字幕 @BUILD2～10 接正式 Ebitengine
 
-狀態：進行中；開始：2026-09-25。對應 [Issue #35](https://github.com/wicanr2/colonization_cht/issues/35)，承接[規格026（DRAFT）](../spec/026-build-intro-and-tutorial-prefetch-draft.md)、[規格029](../spec/029-build1-caption-window-ready.md)的 `@BUILD1` A 版閘門，以及目標107／108的字幕路徑與譯稿。
+狀態：完成；開始與完成：2026-09-25。對應 [Issue #35](https://github.com/wicanr2/colonization_cht/issues/35)，承接[規格026（DRAFT）](../spec/026-build-intro-and-tutorial-prefetch-draft.md)、[規格029](../spec/029-build1-caption-window-ready.md)的 `@BUILD1` A 版閘門，以及目標107／108的字幕路徑與譯稿。
 
 ## 工作與退出條件
 
@@ -8,6 +8,13 @@
 2. 逐行量原版字高與安全區，沿 `@BUILD1` A 原則（原版字高 9 邏輯像素對 38px）選中文字級；含 `%STRING` 變數的行以當次顯示字串核對英格蘭預設值，不相符時回原文並記錄。
 3. 前端把 `@BUILD1` 的單張閘門推廣為逐行資料驅動，加預設關閉的旗標；中英同輸入、換頁撤銷、缺譯與缺字模負例、真 GUI 驗收；`@BUILD1` 與其他欄位回歸不退步。
 4. 規格026 字幕部分逐張升 READY／CONFORMED；更新文件、worklist 與 #35，私有推送並回讀。
+
+## 本輪結果
+
+- 規格026 的 `@BUILD2`～`@BUILD10` 限定 CONFORMED；正式中文欄位由四十六段增為五十六段（`@BUILD2` 兩行計兩段）。
+- 先前 GUI 腳本在 85.2M 多按的 Enter 會讓原版在第四張後跳過其餘字幕；十張完整驗收改用介紹頁後不按鍵的路徑。
+- `@BUILD1` 過去在 85.8M 被撤銷，原因是原版背景預載資源造成開檔數改變，並非換頁；字幕撤銷條件已拿掉開檔數，規格029 同步更正。
+- 前端把單張字幕推廣為逐張資料表，另加預設關閉、只供驗收的 `-checkpoint-steps`。
 
 ## 停止線
 

@@ -18,6 +18,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strconv"
 	"strings"
 
@@ -64,6 +65,7 @@ type fontMask struct {
 	CatalogHash     string `json:"catalog_sha256"`
 	FontHash        string `json:"font_sha256"`
 	FontSize        int    `json:"font_size"`
+	ValuesHash      string `json:"values_sha256"`
 	Width           int    `json:"width"`
 	Height          int    `json:"height"`
 	Alpha           []byte `json:"alpha"`
@@ -148,6 +150,23 @@ type buildCaption struct {
 	colors                      map[byte]int
 	openedCount                 int
 	accepted, appliedFrames     int
+	// 規格029／026目標141：逐張字幕的已驗原版事件參數；@BUILD1 沿用規格029原值。
+	keys                 []string
+	keyMatches           []int
+	keyValid             []bool
+	keyTranslations      []string
+	base                 uint32
+	beforeSHA, afterSHA  string
+	writeCount           int
+	inkBBox, safe        image.Rectangle
+	fgPos, inkSize       image.Point
+	need54               bool
+	maskPath, valuesHash string
+	displayOK            bool
+	displaySHA           string
+	keyOffsets           []int
+	keySources           [][]byte
+	captionName          string
 }
 
 // 規格030僅授權遊戲選項標題；八列快捷鍵及文字仍維持原版。
@@ -326,6 +345,10 @@ func main() {
 	nationCardFonts := flag.String("nation-card-font-dir", "/out/goal099-card-fonts", "旗卡兩欄本機已驗 A 版字模")
 	build1A := flag.Bool("build1-a", false, "啟用規格029英格蘭首張開場字幕 A／38px")
 	build1Font := flag.String("build1-font", "/out/goal130-build1-font.json", "本機依固定字型與真 TSV 烘製的首張字幕字模")
+	buildCaptionsA := flag.Bool("build-captions-a", false, "啟用規格026目標141英格蘭 @BUILD2～10 開場字幕 A／38px")
+	buildCaptionFonts := flag.String("build-caption-font-dir", "/out/goal141-caption-fonts", "@BUILD2～10 本機字模目錄")
+	checkpointSteps := flag.String("checkpoint-steps", "", "僅驗收：以逗號分隔的遞增原版步數，於其後第一幀另存畫面、索引與完整 RAM 雜湊")
+	buildValues := flag.String("build-values", "/repo/text/build-caption-values.zh-Hant.tsv", "開場字幕變數值唯一 TSV")
 	optionsTitleA := flag.Bool("game-options-title-a", false, "啟用規格030遊戲選項標題 A／34px")
 	optionsTitleFont := flag.String("game-options-title-font", "/out/goal132-options-title-font.json", "本機依固定字型與真 TSV 烘製的遊戲選項標題字模")
 	introA := flag.Bool("england-intro-a", false, "啟用規格025英格蘭首次介紹兩頁（標題34px／正文38px）")
@@ -361,17 +384,79 @@ func main() {
 		os.Exit(2)
 	}
 	rawSource := read(filepath.Join(*root, "GAME.TXT"))
-	var caption *buildCaption
+	var captions []*buildCaption
 	if *build1A {
-		caption = &buildCaption{
+		caption := &buildCaption{
 			id: "GAME.TXT:0x000153CC", phase: "idle",
 			source:  bytes.Clone(rawSource[0x153cc:0x1540b]),
 			display: bytes.Clone(rawSource[0x153ce:0x1540b]),
+			base:    0x2a560, writeCount: 1040, need54: true, displayOK: true,
+			beforeSHA: "d8d0d8e5de5655411fd4935d2b96e6e84845ee924658668f9486196ede9882ab",
+			afterSHA:  "b8c0d43983c95415071e83513628fc90e8de3236f3e75eb699ed4d87dfc8c772",
+			inkBBox:   image.Rect(16, 30, 303, 39), safe: image.Rect(12, 27, 307, 42),
+			fgPos: image.Pt(423, 120), inkSize: image.Pt(430, 35), maskPath: *build1Font,
 		}
+		caption.keys, caption.keyOffsets, caption.keySources = []string{caption.id}, []int{0x153cc}, [][]byte{caption.source}
 		if !bytes.Equal(caption.source[:2], []byte("^^")) ||
 			hash(caption.display) != "c1feca9ed16dd6cf8cfd36a118536afd25b86f6677f3ec81d056fad6e78a6db6" {
 			panic("固定原版首張字幕來源不符")
 		}
+		captions = append(captions, caption)
+	}
+	if *buildCaptionsA {
+		// 規格026目標141：英格蘭正常玩家路徑（85M 後不按鍵）十張字幕的 @BUILD2～10；
+		// 顯示字串由 GAME.TXT 原行去 ^^ 並以英格蘭變數原文展開，雙冷啟動實測 SHA 釘住。
+		type captionSpec struct {
+			name          string
+			keys          []string
+			offsets       [][2]int // GAME.TXT 原行位移與長度（含 ^^）
+			displaySHA    string
+			base          uint32
+			before, after string
+			writes        int
+			bbox, safe    image.Rectangle
+			need54        bool
+		}
+		for _, sp := range []captionSpec{
+			{"@BUILD2", []string{"GAME.TXT:0x0001542B", "GAME.TXT:0x00015457"}, [][2]int{{0x1542b, 42}, {0x15457, 11}}, "0cfc5ab07ea787de0d84826366302ef1810044e8e34094a67b557daeda9fc937", 0x2a534,
+				"ea862cdccd15062dbbee15c3e48b187f6f3eeec5b2d0b34916709ab849e456fc", "69859c61c490112c333982957339c23f09df22f2e2918ca881c44d8911dc54c3", 964, image.Rect(69, 30, 251, 49), image.Rect(12, 27, 307, 52), true},
+			{"@BUILD3", []string{"GAME.TXT:0x00015482"}, [][2]int{{0x15482, 41}}, "bbbbdd6e1a3539314ea015d7764af6ed6451f5a4534c169bba1f882ce560d767", 0x2a534,
+				"09d3f445bc0b5f44306c04cc59e7c9daae7285ae22e42328386c65a21ad7e346", "7570358e60c4302624ae02dd5aa9683481fc94ce03e45a00b2f0cd566ff87d94", 501, image.Rect(74, 30, 245, 38), image.Rect(12, 27, 307, 42), false},
+			{"@BUILD4", []string{"GAME.TXT:0x000154CB"}, [][2]int{{0x154cb, 55}}, "c6e372958c2d98a8b53e59d58dac57d7de1eeaab01e145b71c40b9fcf6e373d5", 0x2a534,
+				"f2f8f3fe8284bfd2c5e891fe1da1418840eea7d1ff62323cbd304dd282e4fb3e", "b83918fce65d04268703fcfa49c8d5ee4474d9b21e5295dffcc716b01597ed14", 891, image.Rect(45, 30, 274, 39), image.Rect(12, 27, 307, 42), true},
+			{"@BUILD5", []string{"GAME.TXT:0x00015522"}, [][2]int{{0x15522, 27}}, "ee8b6569c2bba4b57ce2133fd1f0ac9fe52f62db4f5621ce73fa40898f1a78d5", 0x2a560,
+				"8ad92f5763d792fdd5e556a82d759a697b70142b9be6c4486b2fb167da2cd752", "d681e6bf78f2ca7c9cbd91769eaac3bc2cea7951744ecd6bbf7051275c486c43", 429, image.Rect(101, 30, 219, 39), image.Rect(12, 27, 307, 42), true},
+			{"@BUILD6", []string{"GAME.TXT:0x0001555D"}, [][2]int{{0x1555d, 26}}, "b8cb47fdb1c13aa34a0fce30e333a1232d7991ded6a9daedd8b210cf24cc27c2", 0x2a560,
+				"8ed6acf0459ab453eb9ee5f730e8db96af81d13edd3fc5267cb290ef7379052f", "9479b3399a2324a2615ed3a362ced7fe156eefaea90facefcfd309028c6a62a5", 421, image.Rect(104, 30, 215, 39), image.Rect(12, 27, 307, 42), true},
+			{"@BUILD7", []string{"GAME.TXT:0x00015597"}, [][2]int{{0x15597, 62}}, "53f1e7991791074f9e5a1f54f9a40abc9b4b1957ff168e01d502f2f52b21eda6", 0x2a560,
+				"f5d1b29aaa2dfa94a00ecc4c7d0526e1b45217b53a562b97a0e1eedee300954b", "977f89f504dc72c577e3bdba7fabc62fc4317cc8c1593e690abf50dfaf9ba35a", 1003, image.Rect(24, 30, 296, 39), image.Rect(12, 27, 307, 42), true},
+			{"@BUILD8", []string{"GAME.TXT:0x000155F5"}, [][2]int{{0x155f5, 42}}, "0d3ec9226fae1b8b33356f299e2726dc109db51904c5409d1c71b7a3360abf13", 0x2a560,
+				"1d649ded519c803fdb672e49f9910e14cfe76c2c92ddc734fceeaa40ef7f59f2", "607e5ed7cee5b0e1d7b3f635e52af4b32ccc6d438f559db8b76848293482ef62", 714, image.Rect(67, 30, 253, 39), image.Rect(12, 27, 307, 42), true},
+			{"@BUILD9", []string{"GAME.TXT:0x0001563F"}, [][2]int{{0x1563f, 53}}, "65e7fb3ace0f3a3b37f53d6410ee6de05bacab86a2ead7e37e81608fd4bbca5a", 0x2a560,
+				"e884c2c1d5cd994f2b03dc99a3eac9b661db69bd7681adffdd6b10232e1b1acf", "3ed89dc0c35960d1d94181716448bd39bf94cae6b6fe371c53123c7ff52097b3", 766, image.Rect(49, 30, 271, 39), image.Rect(12, 27, 307, 42), true},
+			{"@BUILD10", []string{"GAME.TXT:0x00015695"}, [][2]int{{0x15695, 14}}, "cff475dbcfaf09ea9edf40efa8a40350da7eba8e0f0f0983175eef16e479480e", 0x2a560,
+				"f079f5624f414b7dfa731887f3739718196932d6083ccfa94ce0b45b199fb898", "755b912dd898a7c73cc75938e648ac8d7e0e7a9ab6774f06c4d088915d65deec", 237, image.Rect(131, 30, 188, 38), image.Rect(12, 27, 307, 42), true},
+		} {
+			c := &buildCaption{id: sp.keys[0], keys: sp.keys, captionName: sp.name, phase: "idle", base: sp.base,
+				beforeSHA: sp.before, afterSHA: sp.after, writeCount: sp.writes, inkBBox: sp.bbox, safe: sp.safe,
+				need54: sp.need54, maskPath: filepath.Join(*buildCaptionFonts, strings.ReplaceAll(sp.keys[0], ":", "-")+".json")}
+			for _, o := range sp.offsets {
+				line := rawSource[o[0] : o[0]+o[1]]
+				if !bytes.HasPrefix(line, []byte("^^")) {
+					panic("固定原版字幕來源不符：" + sp.keys[0])
+				}
+				c.source = append(c.source, line...)
+				c.keyOffsets = append(c.keyOffsets, o[0])
+				c.keySources = append(c.keySources, line)
+				c.display = append(c.display, line[2:]...)
+			}
+			c.displaySHA = sp.displaySHA // 變數展開後比對，見字幕變數載入
+			captions = append(captions, c)
+		}
+	}
+	for _, c := range captions {
+		n := len(c.keys)
+		c.keyMatches, c.keyValid, c.keyTranslations = make([]int, n), make([]bool, n), make([]string, n)
 	}
 	var title *optionsTitle
 	if *optionsTitleA {
@@ -725,16 +810,21 @@ func main() {
 			break
 		}
 		must(e)
-		if caption != nil && get(row, "candidate_id") == caption.id {
-			caption.matches++
-			offset, parseErr := strconv.ParseUint(get(row, "byte_offset"), 0, 32)
-			caption.valid = parseErr == nil && offset == 0x153cc &&
-				get(row, "source_file") == "GAME.TXT" &&
-				get(row, "source_sha256") == versions["GAME.TXT"] &&
-				get(row, "source_bytes_sha256") == hash(caption.source) &&
-				get(row, "source_byte_length") == strconv.Itoa(len(caption.source)) &&
-				get(row, "status") == "draft"
-			caption.translation = get(row, "zh_hant")
+		for _, c := range captions {
+			for i, key := range c.keys {
+				if get(row, "candidate_id") != key {
+					continue
+				}
+				c.keyMatches[i]++
+				offset, parseErr := strconv.ParseUint(get(row, "byte_offset"), 0, 32)
+				c.keyValid[i] = parseErr == nil && int(offset) == c.keyOffsets[i] &&
+					get(row, "source_file") == "GAME.TXT" &&
+					get(row, "source_sha256") == versions["GAME.TXT"] &&
+					get(row, "source_bytes_sha256") == hash(c.keySources[i]) &&
+					get(row, "source_byte_length") == strconv.Itoa(len(c.keySources[i])) &&
+					get(row, "status") == "draft"
+				c.keyTranslations[i] = get(row, "zh_hant")
+			}
 		}
 		if title != nil && get(row, "candidate_id") == title.id {
 			title.matches++
@@ -932,30 +1022,140 @@ func main() {
 			l.fontReason = "missing-ink"
 		}
 	}
-	if caption != nil {
-		if caption.matches != 1 || !caption.valid || !strings.HasPrefix(caption.translation, "^^") ||
-			strings.Contains(caption.translation[2:], "^") || len(caption.translation) <= 2 {
-			caption.fontReason = "missing-or-invalid-translation"
+	// 規格026目標141：字幕變數只取英格蘭列；來源片段、檔案指紋與原文逐列核對。
+	type captionValue struct{ en, zh string }
+	captionValues := map[string]map[string]captionValue{}
+	valuesHash := ""
+	if *buildCaptionsA {
+		valuesBytes, readErr := os.ReadFile(*buildValues)
+		valuesOK := readErr == nil
+		if valuesOK {
+			valuesHash = hash(valuesBytes)
+			vr := csv.NewReader(bytes.NewReader(valuesBytes))
+			vr.Comma = '\t'
+			header, e := vr.Read()
+			col := map[string]int{}
+			for i, h := range header {
+				col[h] = i
+			}
+			for e == nil {
+				var row []string
+				if row, e = vr.Read(); e != nil {
+					break
+				}
+				vget := func(k string) string {
+					if i, ok := col[k]; ok && i < len(row) {
+						return row[i]
+					}
+					return ""
+				}
+				if vget("nation") != "england" {
+					continue
+				}
+				file := vget("source_file")
+				offset, perr := strconv.ParseUint(vget("byte_offset"), 0, 32)
+				length, lerr := strconv.Atoi(vget("source_byte_length"))
+				var src []byte
+				if file == "NAMES.TXT" {
+					src = namesSource
+				} else if file == "GAME.TXT" {
+					src = rawSource
+				}
+				ok := perr == nil && lerr == nil && src != nil && versions[file] == vget("source_file_sha256") &&
+					int(offset)+length <= len(src) && string(src[offset:int(offset)+length]) == vget("source_text") &&
+					vget("observed_text") == vget("source_text") && vget("zh_hant") != "" && vget("status") == "draft"
+				vm := captionValues[vget("caption")]
+				if vm == nil {
+					vm = map[string]captionValue{}
+					captionValues[vget("caption")] = vm
+				}
+				if _, dup := vm[vget("placeholder")]; dup || !ok {
+					vm[vget("placeholder")] = captionValue{} // 重複或來源不符：該變數視為缺值
+				} else {
+					vm[vget("placeholder")] = captionValue{vget("source_text"), vget("zh_hant")}
+				}
+			}
+			valuesOK = e == io.EOF
+		}
+		if !valuesOK {
+			captionValues = nil
+		}
+	}
+	placeholder := regexp.MustCompile(`%STRING[0-9]`)
+	expand := func(text string, vals map[string]captionValue, english bool) (string, bool) {
+		ok := true
+		out := placeholder.ReplaceAllStringFunc(text, func(name string) string {
+			v, found := vals[name]
+			if !found || v.en == "" {
+				ok = false
+				return name
+			}
+			if english {
+				return v.en
+			}
+			return v.zh
+		})
+		return out, ok
+	}
+	for _, c := range captions {
+		lines := []string{}
+		valid := true
+		for i := range c.keys {
+			t := c.keyTranslations[i]
+			if c.keyMatches[i] != 1 || !c.keyValid[i] || !strings.HasPrefix(t, "^^") || strings.Contains(t[2:], "^") || len(t) <= 2 {
+				valid = false
+				break
+			}
+			lines = append(lines, t[2:])
+		}
+		if c.id != "GAME.TXT:0x000153CC" && valid {
+			// 以英格蘭變數原文展開原版行，須與雙冷啟動實測的當次顯示字串相同。
+			vals := captionValues[c.captionName]
+			display, ok := expand(string(c.display), vals, true)
+			c.displayOK = ok && hash([]byte(display)) == c.displaySHA
+			if c.displayOK {
+				c.display = []byte(display)
+			}
+			for i := range lines {
+				if lines[i], ok = expand(lines[i], vals, false); !ok {
+					valid = false
+				}
+			}
+		}
+		if !valid {
+			c.fontReason = "missing-or-invalid-translation"
+		} else if !c.displayOK {
+			c.fontReason = "display-values-mismatch"
 		} else {
-			caption.translation = caption.translation[2:]
+			c.translation = strings.Join(lines, "\n")
 			var mask fontMask
-			maskBytes, readErr := os.ReadFile(*build1Font)
+			maskBytes, readErr := os.ReadFile(c.maskPath)
 			if readErr != nil || json.Unmarshal(maskBytes, &mask) != nil {
-				caption.fontReason = "font-mask-unavailable"
-			} else if mask.CandidateID != caption.id || mask.CatalogHash != hash(catalogBytes) ||
-				mask.FontHash != fontHash || mask.TranslationHash != hash([]byte(caption.translation)) ||
-				mask.FontSize != 38 {
-				caption.fontReason = "font-binding-mismatch"
-			} else if mask.Width != 430 || mask.Height != 35 || len(mask.Alpha) != 430*35 {
-				caption.fontReason = "font-mask-out-of-bounds"
+				c.fontReason = "font-mask-unavailable"
+			} else if mask.CandidateID != c.id || mask.CatalogHash != hash(catalogBytes) ||
+				mask.FontHash != fontHash || mask.TranslationHash != hash([]byte(c.translation)) ||
+				mask.FontSize != 38 || (c.id != "GAME.TXT:0x000153CC" && mask.ValuesHash != valuesHash) {
+				c.fontReason = "font-binding-mismatch"
 			} else {
-				caption.ink = image.NewAlpha(image.Rect(0, 0, 430, 35))
-				copy(caption.ink.Pix, mask.Alpha)
+				if c.id != "GAME.TXT:0x000153CC" {
+					// 共同中線 x=638（同 @BUILD1），頂端 y=120；前景與向右下4像素的陰影都須在安全區內。
+					c.inkSize = image.Pt(mask.Width, mask.Height)
+					c.fgPos = image.Pt(638-mask.Width/2, 120)
+				}
+				r := image.Rectangle{Min: c.fgPos, Max: c.fgPos.Add(c.inkSize).Add(image.Pt(4, 4))}
+				if mask.Width != c.inkSize.X || mask.Height != c.inkSize.Y || len(mask.Alpha) != mask.Width*mask.Height ||
+					mask.Width <= 0 || mask.Height <= 0 ||
+					!r.In(image.Rectangle{Min: c.safe.Min.Mul(4), Max: c.safe.Max.Mul(4)}) {
+					c.fontReason = "font-mask-out-of-bounds"
+				} else {
+					c.ink = image.NewAlpha(image.Rect(0, 0, mask.Width, mask.Height))
+					copy(c.ink.Pix, mask.Alpha)
+				}
 			}
 		}
 		if *missing {
-			caption.ink = nil
-			caption.fontReason = "missing-ink"
+			c.ink = nil
+			c.fontReason = "missing-ink"
 		}
 	}
 	if title != nil {
@@ -1073,12 +1273,16 @@ func main() {
 	checkpoints := []map[string]any{}
 	drops := []map[string]any{}
 	lastOpened := 0
-	captionExpire := func(reason string) {
-		if caption == nil || caption.phase == "idle" || caption.phase == "expired" {
+	captionExpire := func(caption *buildCaption, reason string) {
+		if caption.phase == "idle" || caption.phase == "expired" {
 			return
 		}
 		events = append(events, map[string]any{"candidate_id": caption.id, "stage": "expired", "step": m.Steps, "reason": reason})
 		caption.phase, caption.patch, caption.before = "expired", nil, nil
+	}
+	captionAnyInk := false
+	for _, c := range captions {
+		captionAnyInk = captionAnyInk || c.ink != nil
 	}
 	titleExpire := func(reason string) {
 		if title == nil || title.phase == "idle" || title.phase == "expired" {
@@ -1147,7 +1351,7 @@ func main() {
 			f.phase, f.patch, f.before, f.afterSafe = "expired", nil, nil, nil
 		}
 	}
-	if !*control && ((caption != nil && caption.ink != nil) || (title != nil && title.ink != nil) || rowsAnyInk || introAnyInk || retireAnyInk) {
+	if !*control && (captionAnyInk || (title != nil && title.ink != nil) || rowsAnyInk || introAnyInk || retireAnyInk) {
 		m.WatchWrites(0x2cae0, 0x2cae0+64000, func(a uint32, old, value uint8) {
 			if old == value {
 				return
@@ -1252,11 +1456,14 @@ func main() {
 					}
 				}
 			}
-			if caption != nil && caption.phase == "reading" {
+			for _, caption := range captions {
+				if caption.phase != "reading" {
+					continue
+				}
 				if cs != 0x0d21 || ip != 0x012c {
-					captionExpire("unexpected-canvas-writer")
-				} else if x < 12 || x >= 307 || y < 27 || y >= 42 || (value != 14 && value != 47 && value != 54) {
-					captionExpire("write-outside-reviewed-pixels")
+					captionExpire(caption, "unexpected-canvas-writer")
+				} else if !image.Pt(x, y).In(caption.safe) || (value != 14 && value != 47 && value != 54) {
+					captionExpire(caption, "write-outside-reviewed-pixels")
 				} else {
 					if caption.writes == 0 {
 						caption.bbox = image.Rect(x, y, x+1, y+1)
@@ -1265,8 +1472,8 @@ func main() {
 					}
 					caption.writes++
 					caption.colors[value]++
-					if caption.writes > 1040 {
-						captionExpire("write-count-exceeded")
+					if caption.writes > caption.writeCount {
+						captionExpire(caption, "write-count-exceeded")
 					}
 				}
 			}
@@ -1386,12 +1593,14 @@ func main() {
 			}
 			c := m.CPU
 			cs, ip := c.Seg[golem.CS], c.IP
-			if caption != nil && caption.ink != nil && cs == 0x0d21 && ip == 0x00c6 {
+			for _, caption := range captions {
+				if caption.ink == nil || cs != 0x0d21 || ip != 0x00c6 {
+					continue
+				}
 				a := uint32(c.Seg[golem.SS])*16 + uint32(c.R[golem.BX])
-				if (caption.phase == "idle" || caption.phase == "expired") && a == 0x2a560 &&
-					m.VideoMode() == 0x13 &&
-					hash(canvas()) == "d8d0d8e5de5655411fd4935d2b96e6e84845ee924658668f9486196ede9882ab" &&
-					m.Mem[a] == caption.display[0] {
+				if (caption.phase == "idle" || caption.phase == "expired") && a == caption.base &&
+					m.VideoMode() == 0x13 && m.Mem[a] == caption.display[0] &&
+					hash(canvas()) == caption.beforeSHA {
 					caption.before = bytes.Clone(canvas())
 					caption.phase, caption.startStep, caption.openedCount = "reading", m.Steps, len(d.Opened)
 					caption.patch, caption.readPos, caption.writes = nil, 0, 0
@@ -1401,13 +1610,13 @@ func main() {
 				}
 				if caption.phase == "reading" {
 					p := caption.readPos
-					wantAddr := uint32(0x2a560 + p%2)
+					wantAddr := caption.base + uint32(p%2)
 					want := byte(0)
 					if p%2 == 0 && p/2 < len(caption.display) {
 						want = caption.display[p/2]
 					}
 					if p >= 2*len(caption.display) || a != wantAddr || m.Mem[a] != want {
-						captionExpire("source-read-mismatch")
+						captionExpire(caption, "source-read-mismatch")
 					} else {
 						caption.readPos++
 						if caption.readPos == 2*len(caption.display) {
@@ -1690,14 +1899,12 @@ func main() {
 		x, y := int(d.Mouse.X), int(d.Mouse.Y)
 		return image.Rect(x, y, x+16, y+16).Overlaps(l.safe)
 	}
-	captionCursorBlocked := func() bool {
-		if caption == nil {
-			return false
-		}
+	captionCursorBlocked := func(caption *buildCaption) bool {
 		x, y := int(d.Mouse.X), int(d.Mouse.Y)
-		// 只守住中譯實際墨跡與陰影；英語原文周圍的寬安全區仍可正常移鼠。
-		return d.Mouse.Buttons != 0 ||
-			image.Rect(x, y, x+16, y+16).Overlaps(image.Rect(105, 30, 215, 40))
+		// 只守住中譯實際墨跡與陰影（四倍座標換回邏輯像素外擴）；英語原文周圍的寬安全區仍可正常移鼠。
+		ink := image.Rect(caption.fgPos.X/4, caption.fgPos.Y/4,
+			(caption.fgPos.X+caption.inkSize.X+4+3)/4, (caption.fgPos.Y+caption.inkSize.Y+4+3)/4)
+		return d.Mouse.Buttons != 0 || image.Rect(x, y, x+16, y+16).Overlaps(ink)
 	}
 	render := func(label string) {
 		if title != nil && title.ink != nil && !*control {
@@ -1880,32 +2087,38 @@ func main() {
 				}
 			}
 		}
-		if caption != nil && caption.ink != nil && !*control {
+		for _, caption := range captions {
+			if caption.ink == nil || *control {
+				continue
+			}
 			if caption.phase == "reading" && m.Steps-caption.startStep > 2000000 {
-				captionExpire("source-read-timeout")
+				captionExpire(caption, "source-read-timeout")
 			}
 			if caption.phase == "waiting-screen" || caption.phase == "active" {
-				if m.VideoMode() != 0x13 || hash(canvas()) != "b8c0d43983c95415071e83513628fc90e8de3236f3e75eb699ed4d87dfc8c772" ||
-					hash(m.DAC[:]) != "92593125369b8224c1f00b30ad0367d6f1766da49afb614dcf753ad8d70b665b" ||
-					len(d.Opened) != caption.openedCount {
-					captionExpire("canvas-palette-mode-or-file-changed")
+				reads := 2 * len(caption.display)
+				// 字幕顯示期間原版會在背景預載下一段資源（@BUILD1 讀 PHYS0／ICONS／BUILDING.SS，@BUILD4 讀 NAMES.TXT），
+				// 畫面不變；故不以開檔數撤銷，改由完整底層畫布、色盤、模式與每幀真 VGA 守門（目標141）。
+				if m.VideoMode() != 0x13 || hash(canvas()) != caption.afterSHA ||
+					hash(m.DAC[:]) != "92593125369b8224c1f00b30ad0367d6f1766da49afb614dcf753ad8d70b665b" {
+					captionExpire(caption, "canvas-palette-or-mode-changed")
 				} else if caption.phase == "waiting-screen" && m.Steps-caption.completeStep > 2000000 {
-					captionExpire("screen-sync-timeout")
-				} else if caption.phase == "waiting-screen" && caption.readPos == 122 && caption.writes == 1040 &&
-					caption.bbox.Eq(image.Rect(16, 30, 303, 39)) &&
-					caption.colors[14] > 0 && caption.colors[47] > 0 && caption.colors[54] > 0 &&
-					hash(m.Mem[0xa0000:0xafa00]) == "b8c0d43983c95415071e83513628fc90e8de3236f3e75eb699ed4d87dfc8c772" {
+					captionExpire(caption, "screen-sync-timeout")
+				} else if caption.phase == "waiting-screen" && caption.readPos == reads && caption.writes == caption.writeCount &&
+					caption.bbox.Eq(caption.inkBBox) &&
+					caption.colors[14] > 0 && caption.colors[47] > 0 && (caption.colors[54] > 0) == caption.need54 &&
+					hash(m.Mem[0xa0000:0xafa00]) == caption.afterSHA {
 					var err error
-					caption.patch, err = overlay.NewPatch(caption.before, canvas(), 320, 200, image.Rect(12, 27, 307, 42))
+					caption.patch, err = overlay.NewPatch(caption.before, canvas(), 320, 200, caption.safe)
 					if err != nil {
-						captionExpire("invalid-observed-patch")
+						captionExpire(caption, "invalid-observed-patch")
 					} else {
 						caption.phase = "active"
 						caption.accepted++
-						events = append(events, map[string]any{"candidate_id": caption.id, "stage": "active", "step": m.Steps, "read_count": caption.readPos, "changed_pixels": caption.writes, "bbox": []int{16, 30, 303, 39}})
+						b := caption.inkBBox
+						events = append(events, map[string]any{"candidate_id": caption.id, "stage": "active", "step": m.Steps, "read_count": caption.readPos, "changed_pixels": caption.writes, "bbox": []int{b.Min.X, b.Min.Y, b.Max.X, b.Max.Y}})
 					}
-				} else if caption.phase == "waiting-screen" && caption.readPos != 122 {
-					captionExpire("incomplete-source-read")
+				} else if caption.phase == "waiting-screen" && caption.readPos != reads {
+					captionExpire(caption, "incomplete-source-read")
 				}
 			}
 		}
@@ -2073,26 +2286,26 @@ func main() {
 			if *allMenu && applied {
 				reason = "applied"
 			}
-			if caption != nil {
+			for _, caption := range captions {
 				captionReason := caption.phase
 				captionApplied := false
 				if caption.ink == nil {
 					captionReason = caption.fontReason
 				} else if caption.phase == "active" && caption.patch != nil &&
-					hash(indexed) == "b8c0d43983c95415071e83513628fc90e8de3236f3e75eb699ed4d87dfc8c772" && !applied {
-					if captionCursorBlocked() {
+					hash(indexed) == caption.afterSHA && !applied {
+					if captionCursorBlocked(caption) {
 						captionReason = "cursor-or-button-over-caption"
 					} else {
 						frame, ok, why, err := overlay.Compose(indexed, m.DAC[:], 320, 200, 4,
-							caption.patch, caption.ink, image.Pt(427, 124), 47, enabled)
+							caption.patch, caption.ink, caption.fgPos.Add(image.Pt(4, 4)), 47, enabled)
 						must(err)
 						captionReason = why
 						if ok {
-							safe := image.Rect(48, 108, 1228, 168)
+							safe := image.Rectangle{Min: caption.safe.Min.Mul(4), Max: caption.safe.Max.Mul(4)}
 							draw.Draw(output, safe, frame, safe.Min, draw.Src)
 							p := 14 * 3
 							fg := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
-							r := image.Rect(423, 120, 853, 155)
+							r := image.Rectangle{Min: caption.fgPos, Max: caption.fgPos.Add(caption.inkSize)}
 							draw.DrawMask(output, r, image.NewUniform(fg), image.Point{}, caption.ink, caption.ink.Bounds().Min, draw.Over)
 							captionApplied, applied = true, true
 							caption.appliedFrames++
@@ -2300,12 +2513,32 @@ func main() {
 		must(os.WriteFile(prefix+".idx", indexed, 0644))
 		must(os.WriteFile(prefix+".pal", m.DAC[:], 0644))
 		rec["label"] = label
+		if strings.HasPrefix(label, "cp-") {
+			rec["memory_sha256"] = hash(m.Mem)
+		}
 		rec["raw_sha256"] = hash(indexed)
 		rec["palette_sha256"] = hash(m.DAC[:])
 		rec["png"] = prefix + ".png"
 		checkpoints = append(checkpoints, rec)
 	}
-	m.SetOnFrame(func() { render("") })
+	var pendingCheckpoints []uint64
+	for _, f := range strings.Split(*checkpointSteps, ",") {
+		if f == "" {
+			continue
+		}
+		v, e := strconv.ParseUint(f, 10, 64)
+		if e != nil || (len(pendingCheckpoints) > 0 && v <= pendingCheckpoints[len(pendingCheckpoints)-1]) {
+			panic("檢查點步數須為遞增整數")
+		}
+		pendingCheckpoints = append(pendingCheckpoints, v)
+	}
+	m.SetOnFrame(func() {
+		render("")
+		if len(pendingCheckpoints) > 0 && m.Steps >= pendingCheckpoints[0] {
+			render(fmt.Sprintf("cp-%d", pendingCheckpoints[0]))
+			pendingCheckpoints = pendingCheckpoints[1:]
+		}
+	})
 	if *window {
 		frontendRunner(m, d, render, *out)
 		render("final")

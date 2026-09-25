@@ -1,6 +1,6 @@
 # 規格026：開場字幕與首則教學預讀（DRAFT）
 
-狀態：DRAFT；日期：2026-09-24。證據入口為
+狀態：DRAFT（`@BUILD1`～`@BUILD10` 十張開場字幕另依規格029與文末目標141一節限定 CONFORMED；help 仍 DRAFT）；日期：2026-09-24。證據入口為
 [目標105](../goals/105-first-tutorial-player-path.md)、
 [原始 help 雙語草稿](../../text/help-bilingual.tsv)與
 [字幕譯文草稿](../../text/draft.zh-Hant.tsv)。本規格不授權
@@ -338,3 +338,28 @@ dosgolem 的垂直回掃畫格回呼只讀原版320×200底層畫布、VGA DAC�
 ## 2026-09-25：首張字幕限定 CONFORMED，其他字幕與 help 仍 DRAFT
 
 前節是 READY 當時狀態，現由[規格029](029-build1-caption-window-ready.md)與[目標130](../goals/130-build1-ready-and-ebitengine-overlay.md)補上正式驗收：明示 `-build1-a` 時，固定英格蘭首張 `@BUILD1` A／38px 經真 Ebitengine 玩家錄製輸入在82M中文字幕、86M離頁、120M後續與英文控制同原版狀態；真 VGA同步前七幀保留英文，缺譯、重複鍵、缺字模、游標遮擋及離頁回退通過，原有十七欄727幀未退步。此單一欄位限定 CONFORMED。真視窗路徑印字步數78,889,224，獨立 dosgolem 探針路徑88,689,021，兩條輸入路徑不可拼成同一次頁面重印。`@BUILD2–10`、其他國家與 help 仍只有各自 DRAFT 證據，不能隨首張字幕升級；整體規格026繼續 DRAFT。
+
+## 2026-09-25：`@BUILD2`～`@BUILD10` 限定 CONFORMED（目標141）
+
+- **範圍：**固定原版、英格蘭正常玩家路徑、介紹 B 頁 Enter 之後**不再按鍵**、明示 `-build-captions-a`（與 `-build1-a` 並用）。其他國家的變數值不在本節。
+- **按鍵跳過（已證實）：**`tools/probe_goal141_captions.go` 以目標132錄製輸入（85.2M 多一次 Enter，SHA-256 `5c143497…`）與去掉該鍵的 `tools/goal141-captions.inputs.json`（`17627777…`）各做雙冷啟動與無監看控制。前者只印 `@BUILD1～4`，548M 起進入海上畫面；後者十張全印，1,207M 起進入海上畫面。玩家在字幕期間按鍵會讓原版在第四張後跳過其餘字幕。
+- **逐張原版事件（已證實，後者路徑）：**每張字幕是一次連續的 `0D21:00C6` 讀字（`SS:BX` 在基址與基址+1 交錯，字元與 0 相間），期間只有 `0D21:012C` 改寫底層畫布，新色只有 14／47／54（`@BUILD3` 無 54）。`@BUILD2` 兩行是同一次讀字。
+
+| 字幕 | 讀字基址 | 顯示字串（英格蘭展開） | 改色點數／半開 bbox | 首次真 VGA 同步 | 換頁 |
+|---|---|---|---|---|---|
+| `@BUILD2` | `0x2A534` | `an Expedition led by the Great Explorer,` + `Walter Raleigh,` | 964／`(69,30)–(251,49)` | 207,900,001 | 313,665,001 |
+| `@BUILD3` | `0x2A534` | `left London on a Voyage of Discovery.` | 501／`(74,30)–(245,38)` | 318,120,001 | 446,985,001 |
+| `@BUILD4` | `0x2A534` | `Commissioned and Blessed by the King of England,` | 891／`(45,30)–(274,39)` | 453,915,001 | 555,390,001 |
+| `@BUILD5` | `0x2A560` | `to Explore the Ocean Sea,` | 429／`(101,30)–(219,39)` | 560,175,001 | 663,795,001 |
+| `@BUILD6` | `0x2A560` | `to find Uncharted Lands,` | 421／`(104,30)–(215,39)` | 668,580,001 | 772,365,001 |
+| `@BUILD7` | `0x2A560` | `and to Establish Colonies for the Greater Glory of England.` | 1003／`(24,30)–(296,39)` | 776,985,001 | 880,770,001 |
+| `@BUILD8` | `0x2A560` | `A Ship loaded with Pioneers and Soldiers` | 714／`(67,30)–(253,39)` | 885,390,001 | 989,175,001 |
+| `@BUILD9` | `0x2A560` | `Set Sail to find a New Life, a New Beginning, . . .` | 766／`(49,30)–(271,39)` | 993,795,001 | 1,097,580,001 |
+| `@BUILD10` | `0x2A560` | `A New World!` | 237／`(131,30)–(188,38)` | 1,102,365,001 | 1,206,810,001 |
+
+  每張的印前／印後全畫布 SHA-256 與顯示字串 SHA-256 釘在前端程式（`tools/live_menu.go` 的 `captionSpec`）與本機摘要 `workplace/reports/goal141-captions/captions-summary.json`；十張色盤都是 `92593125…`。步數屬探針的指令計數慣例。
+- **版面：**原版字高與 `@BUILD1` 相同（9 邏輯像素），沿 A 原則全部 38px、實際墨跡裁切、共同中線 x=638、頂端 y=120；`@BUILD2` 第二行頂端 y=160（原版行距 10 邏輯像素）。安全區單行 `[12,27,307,42)`，`@BUILD2` 為 `[12,27,307,52)`；最寬 `@BUILD7` 墨跡 638px。前景色號 14、陰影色號 47 向右下 4 輸出像素。字模由 `tools/bake_build_captions.py` 以唯一譯稿、字幕變數 TSV 與固定 Cubic 11 烘製，綁定譯稿、變數 TSV 與字型雜湊。
+- **字幕變數：**`%STRINGn` 以[字幕變數 TSV](../../text/build-caption-values.zh-Hant.tsv)英格蘭列展開；執行期顯示字串須與以該列原文展開的結果完全相同，否則回原文。玩家姓名依 #29 決定維持原版英文（`Walter Raleigh`），玩家改名時顯示字串不符而回原文。
+- **執行期閘門：**沿規格029狀態機，逐張以讀字基址、首字與印前全畫布 SHA 建立權杖；逐次核對讀字位址與字元；改色點數、bbox、色號完全相符且真 VGA 等於印後 SHA 才啟用；底層畫布、色盤或模式改變即撤銷。開檔不列為撤銷條件（字幕期間原版會背景預載資源，見規格029文末）。
+- **驗收：**真 GUI（`tools/probe_goal141_gui.sh`）以真鍵鼠走英格蘭路徑，介紹頁後不按鍵，十張字幕各在同步後 30M 步擷取；十張現場截圖與同輸入重播的檢查點逐像素相同。重播（`tools/probe_goal141_replays.sh`，前端 `-checkpoint-steps`）十個檢查點與英文無監看控制的完整 RAM、索引畫面、色盤相同，每個檢查點只有當張字幕啟用、差異只在其安全區；每張字幕各有一次來源、啟用、撤銷事件，套用畫格都在啟用與撤銷之間；1,225M 終點原版狀態與畫面和英文控制相同。缺字模、空字模目錄、`@BUILD3` 重複鍵、變數 TSV 被改均回原文。`tools/check_goal141_window.py` PASS，摘要 SHA-256 `75f8837b6c8582dcd5f8f26305d6bbbf676d6a8394286aa3c6349d46f4c62e8d`；缺原版回 SKIP 77。既有欄位全面回歸（含 `@BUILD1` 82M）與目標138收據逐項相同。
+- **仍為強推論：**`GAME.TXT` 讀入到印字緩衝之間的逐 byte 搬運（同規格029）。
