@@ -4014,3 +4014,10 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **其他國家，已證實：**三國真 GUI 走完開場，1270.7M～1270.8M 步開窗，標題於 1,270,995,000／1,270,995,001 步啟用，八列同步啟用。
 - **讀存檔，已證實：**英格蘭路徑存檔到可寫暫存層（`COLONY00.SAV` SHA-256 `6250234c…`，只留 `workplace/`），另一次冷啟動由主選單「載入遊戲」讀入，關閉「Loaded … successfully.」訊息框後開窗，標題於 76,725,000 步啟用。
 - **驗收：**五條現場輸入中英重播 `tools/check_goal137_window.py` PASS（摘要 `c8a292ae…`）。停止線：只驗英格蘭存檔一例；其他存檔內容、多次讀檔未驗。
+
+## 2026-09-25：目標138退休確認框三欄正式覆蓋（A 版）
+
+- **輸入與工具：**前端 `tools/live_menu.go` SHA-256 `4e187cb9cf8a04f1ad408c2377963682869d2c81d847cd5a020dd924e6e03c17`（新增 `-retire-a`）；烘字模 `tools/bake_local_font.py` SHA-256 `f984418b…` 加入三鍵並沿用目標126 `mask_for`；事件探針輸入 `tools/goal138-retire-events.inputs.json` SHA-256 `fbc0d964…`。
+- **已證實：**開框兩次印字事件（問句、Yes／No）、`0CAE:00A8` 的 No 按鈕底圖、滑過不重印、按下／放開各重印一次後關框；三欄開框印前底圖 SHA 見[規格028](docs/spec/028-retire-confirmation-overlay-draft.md)文末。雙冷啟動 `row-events` `af5e3cd4…` 相同、無監看控制一致。
+- **真 GUI：**第一次在開框時 Yes／No 被 `0B68:051C` 游標常式在 (39,104) 的暫寫撤銷；加入游標例外後三欄於 1,261,260,001 步啟用。點 No 時同一例外不適用（寫到 No 欄），兩欄依設計回英文後關框。`tools/check_goal138_window.py` PASS（摘要 `8b0f2265…`）。
+- **停止線：**Yes 分支後續畫面未涵蓋；中間搬運仍為強推論。收據只在忽略的 `workplace/reports/goal138-retire/`。

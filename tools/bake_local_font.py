@@ -19,6 +19,10 @@ OPTION_ROWS = {'GAME.TXT:0x000004E9': (25, (229, 25)), 'GAME.TXT:0x000004FD': (2
                'GAME.TXT:0x00000550': (27, (223, 29)), 'GAME.TXT:0x00000566': (28, (175, 27))}
 
 
+# 規格028：退休確認框三欄，使用者 2026-09-25 選 A（34px、共同置中）；字模沿用目標126 預覽的 mask_for。
+RETIRE = {'GAME.TXT:0x00000122': 'question', 'GAME.TXT:0x00000141': 'yes', 'GAME.TXT:0x00000146': 'no'}
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--catalog', type=Path, default=Path(__file__).resolve().parents[1] / 'text/draft.zh-Hant.tsv')
@@ -30,7 +34,7 @@ def main():
                             'GAME.TXT:0x000001E4', 'GAME.TXT:0x000001F9', 'GAME.TXT:0x00000204',
                             'LABELS.TXT:0x00000888', 'LABELS.TXT:0x00000890',
                             'LABELS.TXT:0x0000086E', 'GAME.TXT:0x00000A7A',
-                            'GAME.TXT:0x000153CC', 'GAME.TXT:0x000004CD', *OPTION_ROWS],
+                            'GAME.TXT:0x000153CC', 'GAME.TXT:0x000004CD', *OPTION_ROWS, *RETIRE],
                    help='規格 009／012／014／015／029／030／031 已審查的畫面文字；字模各自獨立綁定')
     args = p.parse_args()
     rows = read_catalog(args.catalog)
@@ -60,6 +64,17 @@ def main():
              'GAME.TXT:0x000153CC': 38,
              'GAME.TXT:0x000004CD': 34}
     sizes.update({row: size for row, (size, _) in OPTION_ROWS.items()})
+    if key in RETIRE:
+        from prepare_goal126_retire_preview import mask_for
+        mask = mask_for(RETIRE[key], text, ImageFont.truetype(str(args.font), 34), 'center-34')
+        receipt = {'candidate_id': key, 'translation_sha256': hashlib.sha256(text.encode()).hexdigest(),
+                   'catalog_sha256': hashlib.sha256(args.catalog.read_bytes()).hexdigest(),
+                   'font_sha256': FONT_SHA, 'font_size': 34, 'width': mask.width, 'height': mask.height,
+                   'alpha': base64.b64encode(mask.tobytes()).decode(),
+                   'scope': 'local-only；衍生字模不加入 Git 或散布包'}
+        args.output.write_text(json.dumps(receipt, ensure_ascii=False) + '\n')
+        print(f'本機字模已產生：{key}，{mask.width}×{mask.height}；字型及譯文指紋已綁定')
+        return 0
     font_size = sizes.get(key, 24)
     font = ImageFont.truetype(str(args.font), font_size)
     left, top, right, bottom = font.getbbox(text)

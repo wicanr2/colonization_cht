@@ -242,6 +242,50 @@ func introPanelBytes(buf []byte) []byte {
 // 游標只疊在真 VGA 上（底層畫布沒有游標）；以滑鼠左上角起 16×16 保守涵蓋。
 func cursorBox(x, y int) image.Rectangle { return image.Rect(x, y, x+16, y+16) }
 
+// 規格028：退休確認框。問句與 Yes／No 各為一次整段印字事件；逐欄在第一次被改色時擷取當次底圖。
+type retireField struct {
+	id, translation, fontReason string
+	offset, length              int
+	rect, bbox                  image.Rectangle
+	writes                      int
+	background                  string
+	position                    image.Point
+	size                        image.Point
+	ink                         *image.Alpha
+	matches                     int
+	valid                       bool
+	before, afterSafe           []byte
+	got                         int
+	gotBBox                     image.Rectangle
+	patch                       *overlay.Patch
+	phase                       string
+	accepted, appliedFrames     int
+}
+
+type retireEvent struct {
+	bases               []uint32
+	first               byte
+	chars               int
+	printSHA            string
+	fields              []*retireField
+	phase               string
+	base                uint32
+	sum                 gohash.Hash
+	readPos, charCount  int
+	startStep, lastRead uint64
+	openedCount         int
+	completeStep        uint64
+	helper              image.Rectangle // 0CAE:00A8 可在尚未印字欄位畫底圖的範圍
+}
+
+func rectBytes(buf []byte, r image.Rectangle) []byte {
+	b := make([]byte, 0, r.Dx()*r.Dy())
+	for y := r.Min.Y; y < r.Max.Y; y++ {
+		b = append(b, buf[y*320+r.Min.X:y*320+r.Max.X]...)
+	}
+	return b
+}
+
 func optionRowSafe(i int) image.Rectangle { return image.Rect(80, 59+12*i, 252, 71+12*i) }
 func optionRowSafeBytes(buf []byte, i int) []byte {
 	r := optionRowSafe(i)
@@ -285,6 +329,8 @@ func main() {
 	introAll := flag.Bool("nation-intro-a", false, "啟用規格025四國首次介紹八頁（標題34px／正文38px）")
 	introCatalog := flag.String("intro-catalog", "/repo/text/nation-introduction.zh-Hant.tsv", "國家介紹長文唯一 TSV")
 	introMasks := flag.String("intro-mask-dir", "/out/goal135-intro-masks", "本機依固定字型與真 TSV 烘製的介紹頁三層字模目錄")
+	retireA := flag.Bool("retire-a", false, "啟用規格028退休確認框三欄 A 版（34px、共同置中）")
+	retireFonts := flag.String("retire-font-dir", "/out/goal138-retire-fonts", "本機依固定字型與真 TSV 烘製的退休框字模目錄")
 	optionRowsA := flag.Bool("game-options-rows-a", false, "啟用規格031遊戲選項八列 A 字級")
 	optionRowsFonts := flag.String("game-options-rows-font-dir", "/out/goal134-row-fonts", "本機依固定字型與真 TSV 烘製的八列字模目錄")
 	scratch := flag.String("scratch", "", "目標137：原版唯讀 Root 外的可寫暫存層（存讀檔用）；預設關閉")
@@ -353,6 +399,29 @@ func main() {
 		}
 		if len(rows.expect) != 268 {
 			panic("固定原版遊戲選項八列讀字長度不符")
+		}
+	}
+	var retire []*retireEvent
+	if *retireA {
+		q := &retireField{id: "GAME.TXT:0x00000122", offset: 0x122, length: 27, rect: image.Rect(118, 75, 184, 99),
+			bbox: image.Rect(122, 78, 181, 97), writes: 441, position: image.Pt(512, 312), size: image.Pt(185, 72),
+			background: "0ab9b89e1548b9876fd8851a4d1ee93a5f96d541422655d9adbeaa09a2000903"}
+		yes := &retireField{id: "GAME.TXT:0x00000141", offset: 0x141, length: 3, rect: image.Rect(122, 99, 144, 112),
+			bbox: image.Rect(126, 102, 141, 110), writes: 64, position: image.Pt(514, 408), size: image.Pt(37, 32),
+			background: "d23d0f4236dfedece662f3c4a5a8bca247986e8119f7992a7a60367d9bc37cfa"}
+		no := &retireField{id: "GAME.TXT:0x00000146", offset: 0x146, length: 2, rect: image.Rect(122, 112, 142, 125),
+			bbox: image.Rect(126, 114, 136, 122), writes: 54, position: image.Pt(506, 456), size: image.Pt(37, 32),
+			background: "498f71ea0dc7b57418100f5aec4b6cc70d71833e26da9dcc350f31a7e7054fda"}
+		retire = []*retireEvent{
+			{bases: []uint32{0x2ac80}, first: 'D', chars: 26, fields: []*retireField{q}, phase: "idle",
+				printSHA: "8882639f39e799c1e3a9565ee8c952560558f247a71270d2ce8e252d789f1cca"},
+			{bases: []uint32{0x2ade6, 0x2ae4e}, first: 'Y', chars: 5, fields: []*retireField{yes, no}, phase: "idle",
+				printSHA: "88da672874b376794ba3e094ca6c15e58778b1f97313f3cb8b8d39c47e52f2e2", helper: image.Rect(121, 113, 199, 124)},
+		}
+		for _, ev := range retire {
+			for _, f := range ev.fields {
+				f.phase = "idle"
+			}
 		}
 	}
 	var intro *introState
@@ -621,6 +690,20 @@ func main() {
 				get(row, "status") == "draft"
 			title.translation = get(row, "zh_hant")
 		}
+		for _, ev := range retire {
+			for _, f := range ev.fields {
+				if get(row, "candidate_id") != f.id {
+					continue
+				}
+				f.matches++
+				offset, parseErr := strconv.ParseUint(get(row, "byte_offset"), 0, 32)
+				f.valid = parseErr == nil && int(offset) == f.offset && get(row, "source_file") == "GAME.TXT" &&
+					get(row, "source_sha256") == versions["GAME.TXT"] &&
+					get(row, "source_bytes_sha256") == hash(rawSource[f.offset:f.offset+f.length]) &&
+					get(row, "source_byte_length") == strconv.Itoa(f.length) && get(row, "status") == "draft"
+				f.translation = get(row, "zh_hant")
+			}
+		}
 		if rows != nil {
 			for _, r := range rows.rows {
 				if get(row, "candidate_id") != r.id {
@@ -836,6 +919,30 @@ func main() {
 			title.fontReason = "missing-ink"
 		}
 	}
+	for _, ev := range retire {
+		for _, f := range ev.fields {
+			if f.matches != 1 || !f.valid || f.translation == "" || strings.ContainsAny(f.translation, "~^\n\r") {
+				f.fontReason = "missing-or-invalid-translation"
+				continue
+			}
+			var mask fontMask
+			b, e := os.ReadFile(filepath.Join(*retireFonts, strings.ReplaceAll(f.id, ":", "-")+".json"))
+			if e != nil || json.Unmarshal(b, &mask) != nil {
+				f.fontReason = "font-mask-unavailable"
+			} else if mask.CandidateID != f.id || mask.CatalogHash != hash(catalogBytes) || mask.FontHash != fontHash ||
+				mask.TranslationHash != hash([]byte(f.translation)) || mask.FontSize != 34 {
+				f.fontReason = "font-binding-mismatch"
+			} else if mask.Width != f.size.X || mask.Height != f.size.Y || len(mask.Alpha) != mask.Width*mask.Height {
+				f.fontReason = "font-mask-out-of-bounds"
+			} else {
+				f.ink = image.NewAlpha(image.Rect(0, 0, mask.Width, mask.Height))
+				copy(f.ink.Pix, mask.Alpha)
+			}
+			if *missing {
+				f.ink, f.fontReason = nil, "missing-ink"
+			}
+		}
+	}
 	if rows != nil {
 		for i, r := range rows.rows {
 			// 使用者定案：「(~X) 中文」，X 必須是原版該列快捷鍵；畫面只去掉 ~。
@@ -959,13 +1066,68 @@ func main() {
 		events = append(events, map[string]any{"candidate_id": id, "stage": "expired", "step": m.Steps, "reason": reason})
 		intro.phase, intro.page, intro.patch, intro.before, intro.afterSafe = "expired", nil, nil, nil, nil
 	}
-	if !*control && ((caption != nil && caption.ink != nil) || (title != nil && title.ink != nil) || rowsAnyInk || introAnyInk) {
+	retireAnyInk := false
+	for _, ev := range retire {
+		for _, f := range ev.fields {
+			retireAnyInk = retireAnyInk || f.ink != nil
+		}
+	}
+	var retireCurrent *retireEvent // 最近開始讀字的退休框事件；改色只歸屬於它
+	retireExpire := func(ev *retireEvent, reason string) {
+		if ev.phase == "reading" || ev.phase == "waiting" {
+			ev.phase = "expired"
+		}
+		for _, f := range ev.fields {
+			if f.phase != "idle" && f.phase != "expired" {
+				events = append(events, map[string]any{"candidate_id": f.id, "stage": "expired", "step": m.Steps, "reason": reason})
+			}
+			f.phase, f.patch, f.before, f.afterSafe = "expired", nil, nil, nil
+		}
+	}
+	if !*control && ((caption != nil && caption.ink != nil) || (title != nil && title.ink != nil) || rowsAnyInk || introAnyInk || retireAnyInk) {
 		m.WatchWrites(0x2cae0, 0x2cae0+64000, func(a uint32, old, value uint8) {
 			if old == value {
 				return
 			}
 			cs, ip := m.CPU.OpAddr()
 			x, y := int(a-0x2cae0)%320, int(a-0x2cae0)/320
+			for _, ev := range retire {
+				if ev.phase != "reading" || ev != retireCurrent {
+					continue
+				}
+				var target *retireField
+				for _, f := range ev.fields {
+					if image.Pt(x, y).In(f.rect) {
+						target = f
+					}
+				}
+				if cs == 0x0d21 && ip == 0x012c {
+					if target == nil || (value != 47 && value != 68 && value != 128) {
+						retireExpire(ev, "write-outside-reviewed-pixels")
+						continue
+					}
+					if target.got == 0 {
+						target.before = bytes.Clone(canvas())
+						target.before[a-0x2cae0] = old
+						if hash(rectBytes(target.before, target.rect)) != target.background {
+							retireExpire(ev, "field-background-not-reviewed")
+							continue
+						}
+						target.gotBBox = image.Rect(x, y, x+1, y+1)
+					}
+					target.got++
+					target.gotBBox = target.gotBBox.Union(image.Rect(x, y, x+1, y+1))
+					if target.got > target.writes {
+						retireExpire(ev, "write-count-exceeded")
+					}
+				} else if cs == 0x0b68 && ip == 0x051c && target == nil &&
+					image.Pt(x, y).In(cursorBox(int(d.Mouse.X), int(d.Mouse.Y)).Inset(-2)) {
+					// 原版游標常式在當下游標範圍暫寫底層並還原；不碰三欄即不影響本事件。
+				} else if !(cs == 0x0cae && ip == 0x00a8 && image.Pt(x, y).In(ev.helper) && (target == nil || target.got == 0)) {
+					// 原版在 Yes 印完、No 印字前以 0CAE:00A8 畫 No 按鈕底圖；其他情形一律撤銷。
+					retireExpire(ev, fmt.Sprintf("unexpected-canvas-writer %04X:%04X (%d,%d)", cs, ip, x, y))
+				}
+			}
 			if intro != nil && intro.phase == "reading" {
 				mx, my := int(d.Mouse.X), int(d.Mouse.Y)
 				if cs == 0x0d21 && ip == 0x012c {
@@ -1229,6 +1391,40 @@ func main() {
 					}
 				}
 			}
+			if retireAnyInk && cs == 0x0d21 && ip == 0x00c6 {
+				a := uint32(c.Seg[golem.SS])*16 + uint32(c.R[golem.BX])
+				for _, ev := range retire {
+					for _, base := range ev.bases {
+						if ev.phase != "reading" && a == base && m.Mem[a] == ev.first && m.VideoMode() == 0x13 {
+							retireExpire(ev, "superseded-by-new-print")
+							ev.phase, ev.base, ev.sum, ev.readPos, ev.charCount = "reading", base, sha256.New(), 0, 0
+							ev.startStep, ev.openedCount = m.Steps, len(d.Opened)
+							retireCurrent = ev
+							for _, f := range ev.fields {
+								f.phase, f.got, f.before, f.patch, f.afterSafe = "reading", 0, nil, nil, nil
+							}
+							events = append(events, map[string]any{"candidate_id": ev.fields[0].id, "stage": "source", "step": m.Steps, "entry_ip": "0D21:00C6", "source_linear": a})
+						}
+					}
+					if ev.phase != "reading" || (a != ev.base && a != ev.base+1) {
+						continue
+					}
+					if a != ev.base+uint32(ev.readPos%2) || (ev.readPos%2 == 1 && m.Mem[a] != 0) {
+						retireExpire(ev, "source-read-mismatch")
+						continue
+					}
+					if ev.readPos%2 == 0 {
+						ev.sum.Write([]byte{m.Mem[a]})
+						ev.charCount++
+						if ev.charCount > ev.chars {
+							retireExpire(ev, "source-read-count-exceeded")
+							continue
+						}
+					}
+					ev.readPos++
+					ev.lastRead = m.Steps
+				}
+			}
 			if intro != nil && introAnyInk && cs == 0x0d21 && ip == 0x00c6 {
 				a := uint32(c.Seg[golem.SS])*16 + uint32(c.R[golem.BX])
 				if a == introReadLinear || a == introReadLinear+1 {
@@ -1470,6 +1666,52 @@ func main() {
 					}
 				} else if !bytes.Equal(optionsTitleSafeBytes(canvas()), title.afterSafe) {
 					titleExpire("canvas-title-changed")
+				}
+			}
+		}
+		for _, ev := range retire {
+			if !retireAnyInk || *control {
+				break
+			}
+			if (ev.phase == "reading" || ev.phase == "waiting") && (m.VideoMode() != 0x13 || len(d.Opened) != ev.openedCount) {
+				retireExpire(ev, "mode-or-file-changed")
+			}
+			if ev.phase == "reading" {
+				complete := ev.charCount == ev.chars && ev.readPos == 2*ev.chars &&
+					fmt.Sprintf("%x", ev.sum.Sum(nil)) == ev.printSHA && m.Steps-ev.lastRead > 20000
+				for _, f := range ev.fields {
+					complete = complete && f.got == f.writes && f.gotBBox.Eq(f.bbox) && f.before != nil
+				}
+				if complete {
+					ev.phase, ev.completeStep = "waiting", m.Steps
+					for _, f := range ev.fields {
+						f.phase = "waiting-screen"
+					}
+				} else if m.Steps-ev.startStep > 2000000 {
+					retireExpire(ev, "incomplete-reviewed-output")
+				}
+			}
+			for _, f := range ev.fields {
+				switch f.phase {
+				case "waiting-screen":
+					if m.Steps-ev.completeStep > 2000000 {
+						retireExpire(ev, "screen-sync-timeout")
+					} else if bytes.Equal(rectBytes(canvas(), f.rect), rectBytes(m.Mem[0xa0000:0xafa00], f.rect)) {
+						var err error
+						f.patch, err = overlay.NewPatch(f.before, canvas(), 320, 200, f.rect)
+						if err != nil {
+							retireExpire(ev, "invalid-observed-patch")
+						} else {
+							f.afterSafe, f.phase = rectBytes(canvas(), f.rect), "active"
+							f.accepted++
+							events = append(events, map[string]any{"candidate_id": f.id, "stage": "active", "step": m.Steps, "changed_pixels": f.got})
+						}
+					}
+				case "active":
+					if !bytes.Equal(rectBytes(canvas(), f.rect), f.afterSafe) {
+						events = append(events, map[string]any{"candidate_id": f.id, "stage": "expired", "step": m.Steps, "reason": "canvas-field-changed"})
+						f.phase, f.patch, f.before, f.afterSafe = "expired", nil, nil, nil
+					}
 				}
 			}
 		}
@@ -1797,6 +2039,45 @@ func main() {
 					captionReason = "vga-frame-mismatch"
 				}
 				lineRecords = append(lineRecords, map[string]any{"candidate_id": caption.id, "applied": captionApplied, "reason": captionReason, "accepted_events": caption.accepted})
+			}
+			retireOther, retireShown := applied, false
+			for _, ev := range retire {
+				for _, f := range ev.fields {
+					reason, ok := f.phase, false
+					if f.ink == nil {
+						reason = f.fontReason
+					} else if f.phase == "active" && f.patch != nil && retireOther {
+						// 退休框三欄彼此不重疊可同幀並存；其他覆蓋啟用時保留原文。
+						reason = "other-overlay-active"
+					} else if f.phase == "active" && f.patch != nil {
+						x, y := int(d.Mouse.X), int(d.Mouse.Y)
+						inkArea := image.Rect(f.position.X/4, f.position.Y/4, (f.position.X+f.size.X+4+3)/4, (f.position.Y+f.size.Y+4+3)/4)
+						if d.Mouse.Buttons != 0 || image.Rect(x, y, x+16, y+16).Overlaps(inkArea) {
+							reason = "cursor-or-button-over-field"
+						} else if !bytes.Equal(rectBytes(indexed, f.rect), f.afterSafe) {
+							reason = "vga-safe-mismatch"
+						} else {
+							frame, composed, why, err := overlay.Compose(indexed, m.DAC[:], 320, 200, 4,
+								f.patch, f.ink, f.position.Add(image.Pt(4, 4)), 47, enabled)
+							must(err)
+							reason = why
+							if composed {
+								safe := image.Rect(f.rect.Min.X*4, f.rect.Min.Y*4, f.rect.Max.X*4, f.rect.Max.Y*4)
+								draw.Draw(output, safe, frame, safe.Min, draw.Src)
+								p := 68 * 3
+								fg := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
+								draw.DrawMask(output, image.Rectangle{Min: f.position, Max: f.position.Add(f.ink.Bounds().Size())},
+									image.NewUniform(fg), image.Point{}, f.ink, f.ink.Bounds().Min, draw.Over)
+								ok, retireShown = true, true
+								f.appliedFrames++
+							}
+						}
+					}
+					lineRecords = append(lineRecords, map[string]any{"candidate_id": f.id, "applied": ok, "reason": reason, "accepted_events": f.accepted})
+				}
+			}
+			if retireShown {
+				applied, reason = true, "applied"
 			}
 			if intro != nil {
 				for _, pg := range intro.pages {

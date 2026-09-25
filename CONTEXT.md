@@ -1,6 +1,6 @@
 # 目前脈絡
 
-進行中：[目標138](docs/goals/138-retire-confirmation-overlay.md)（#32）把退休確認框三欄以 A 版接到正式 Ebitengine。
+目前真相：[目標138](docs/goals/138-retire-confirmation-overlay.md)完成 #32：退休確認框三欄 A 版在明示 `-retire-a` 時顯示中文（規格028 限定 CONFORMED）。正式中文欄位為三十八段。下一個 Issue 為 #33（第三張難度卡 A）。
 
 目前真相：[目標137](docs/goals/137-options-window-followups.md)完成 #31：遊戲選項九欄在鍵盤快捷鍵、法國／西班牙／荷蘭、讀存檔後開窗三種路徑都正確顯示中文；前端新增預設關閉的 `-scratch` 可寫暫存層供存讀檔。
 
