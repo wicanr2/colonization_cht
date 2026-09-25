@@ -4021,3 +4021,10 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **已證實：**開框兩次印字事件（問句、Yes／No）、`0CAE:00A8` 的 No 按鈕底圖、滑過不重印、按下／放開各重印一次後關框；三欄開框印前底圖 SHA 見[規格028](docs/spec/028-retire-confirmation-overlay-draft.md)文末。雙冷啟動 `row-events` `af5e3cd4…` 相同、無監看控制一致。
 - **真 GUI：**第一次在開框時 Yes／No 被 `0B68:051C` 游標常式在 (39,104) 的暫寫撤銷；加入游標例外後三欄於 1,261,260,001 步啟用。點 No 時同一例外不適用（寫到 No 欄），兩欄依設計回英文後關框。`tools/check_goal138_window.py` PASS（摘要 `8b0f2265…`）。
 - **停止線：**Yes 分支後續畫面未涵蓋；中間搬運仍為強推論。收據只在忽略的 `workplace/reports/goal138-retire/`。
+
+## 2026-09-25：目標139第三張難度卡正式覆蓋（A 版）
+
+- **輸入與工具：**前端 `tools/live_menu.go` SHA-256 `68bd4e0332feaaeb24d4705eff441b456cd0294e6ee2d87fe8ba5624d4ba9119`（新增 `-third-card-a`／`-third-card-font-dir`）；烘字模 `tools/bake_card_fonts.py --third-card`；隔離 dosgolem `workplace/dosgolem`、`colonization-research:20260920-r2`、`psychicwar-go-ebiten:latest`、`eob-remake-go:1.26.7-ebiten2.9.9`。
+- **已證實：**目標120收據中兩行印字的新色只有色號 14 與 0，與規格016目標121的色號記載一致；前端依此加入色號白名單並以色號 14 前景、色號 0 陰影 +4 繪製。
+- **真 GUI 與重播：**兩欄於 33,660,000 步啟用；四點（37M／38.5M／40M／離頁終點）中英原版狀態相同，與不開旗標的中文前端相比只在本卡兩欄有畫面差異。三項負例回原文。`tools/check_goal139_window.py` PASS（摘要 `9019d5f0…`）。
+- **停止線：**第四、五張卡未涵蓋；DOS 載入到執行期來源緩衝的搬運仍為強推論。收據只在忽略的 `workplace/reports/goal139-third-card/`。

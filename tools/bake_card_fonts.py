@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""依規格017／019／020產生難度卡片及國家標題逐欄本機字模；不得加入 Git。"""
+"""依規格017／019／020（及規格016第三張卡 A 版）產生難度卡片及國家標題逐欄本機字模；不得加入 Git。"""
 
 import argparse
 import base64
@@ -22,6 +22,12 @@ FIELDS = (
     ("LABELS.TXT:0x000008DB", 38, (164, 35), (17, 48, 95, 59), (142, 196)),
 )
 
+# 規格016目標121／139：第三張卡 A 版，另烘到獨立目錄，不改前兩張卡的既有字模集。
+THIRD_CARD_FIELDS = (
+    ("NAMES.TXT:0x00000C22", 21, (69, 19), (29, 139, 84, 148), (192, 564)),
+    ("LABELS.TXT:0x000008B8", 25, (54, 23), (38, 148, 76, 157), (201, 596)),
+)
+
 
 def sha(data):
     return hashlib.sha256(data).hexdigest()
@@ -36,7 +42,7 @@ def bake(args):
     if sha(font_bytes) != FONT_SHA:
         raise ValueError("Cubic 11 指紋不符")
     coverage = cmap_coverage(font_bytes)
-    for key, size, expected_ink, safe, position in FIELDS:
+    for key, size, expected_ink, safe, position in (THIRD_CARD_FIELDS if args.third_card else FIELDS):
         matches = [row for row in rows if row["candidate_id"] == key]
         if len(matches) != 1 or not matches[0]["zh_hant"]:
             raise ValueError("欄位 TSV 缺鍵或重複：" + key)
@@ -70,4 +76,5 @@ if __name__ == "__main__":
     parser.add_argument("--game", type=Path, required=True)
     parser.add_argument("--font", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--third-card", action="store_true", help="只烘第三張難度卡 A 版兩欄")
     bake(parser.parse_args())

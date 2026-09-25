@@ -2,7 +2,7 @@
 
 2026-09-25 使用者決定：第三張難度卡「征服者／普通」採 A 字級（上欄 21px／下欄 25px），排除 B。
 
-狀態：DRAFT；日期：2026-09-23。入口：[目標063](../goals/063-difficulty-card-text.md)、
+狀態：DRAFT（第三張卡 A 版另於文末限定 CONFORMED，第四、五張仍 DRAFT）；日期：2026-09-23。入口：[目標063](../goals/063-difficulty-card-text.md)、
 [目標074](../goals/074-difficulty-card-observation-repair.md)、
 [目標075](../goals/075-difficulty-card-source-to-pixels.md)、
 [目標076](../goals/076-difficulty-card-reversible-prototype.md)、
@@ -328,3 +328,11 @@ canvas 完全一致時，才允許嘗試該欄中文；不一致則該欄原文�
 事件閘門、真 TSV 缺鍵／重複鍵、字模／色盤錯誤、卡片切換／離頁回退
 及真 Ebitengine 視窗同輸入英文控制尚未驗。故本規格對第三至第五張
 保持 DRAFT，第三張仍原文，正式中文總數仍十七段。
+
+## 第三張卡 A 版限定 CONFORMED（目標139，2026-09-25）
+
+- **範圍：**固定原版指紋、英格蘭正常玩家路徑的難度頁、明示 `-third-card-a`。第四、第五張卡不在本節。
+- **執行期閘門（設計契約）：**沿用前兩張卡的逐欄 `difficultyLine`。`0E2D:11CF` 從 `0x4CC7E`／`0x4DF9D` 讀到與 `NAMES.TXT:0xC22`／`LABELS.TXT:0x8B8` 相同的當次來源且已開 `DIFFICUL.PIK` 時擷取該欄印前底圖；50 萬步內 `0D21:00C6` 讀到 `0x2A718` 的 `CONQUISTADOR:`／`Moderate`；印字變更點數必須恰為 205／116，墨跡半開 bbox `(32,141)–(82,146)`／`(41,149)–(74,155)`，新色只允許原版色號 14 與 0。來源、開檔數或 mode 改變即撤銷。游標在外擴守門 `(3,119)–(110,177)` 內或按住滑鼠時兩欄暫回原文。
+- **版面：**字模由 `tools/bake_card_fonts.py --third-card` 以固定 Cubic 11 與唯一 TSV 烘製：「征服者」21px 墨跡 69×19 於四倍 `(192,564)`、「普通」25px 墨跡 54×23 於 `(201,596)`；前景色號 14，陰影色號 0 向右 4 輸出像素，仍在目標121安全區與內距內。原版字型基線未知，沿用墨跡頂列對齊。
+- **驗收：**真 GUI（`tools/probe_goal139_gui.sh`）以真鍵鼠點選第三張卡，兩欄於 33,660,000 步啟用；游標壓卡時兩欄回原文、移開後恢復；點第二張卡離頁後撤銷。翻卡 37M、游標壓卡 38.5M、移開 40M、離頁終點四點與英文無監看控制原版狀態相同；與不開旗標的中文前端相比，原版狀態與其他欄位狀態相同，畫面差異只在本卡兩欄。四張現場截圖與同輸入重播逐像素相同。缺字模（`missing-ink`）、空字模目錄（`font-mask-unavailable`）、上欄重複鍵（`missing-or-invalid-translation`）均回原文。`tools/check_goal139_window.py` PASS，摘要 SHA-256 `9019d5f0ca97bfac4c3918c9a928148e4e145548b7141def4d12c2ffbc4d8c67`；缺原版回 SKIP 77。既有欄位全面回歸（標題 1280M、字幕 82M、八列 1280M、英格蘭介紹 53／62／72M）與目標138收據逐項相同。
+- **仍為強推論：**DOS 載入到執行期來源緩衝之間的逐 byte 搬運（見目標120）。

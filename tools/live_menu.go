@@ -101,6 +101,7 @@ type difficultyLine struct {
 	card                    bool
 	nation                  bool
 	nationCard              bool
+	thirdCard               bool // 規格016第三張卡 A 版：色號14前景、色號0陰影向右4像素
 	prompt                  bool
 	display                 []byte
 	displayLinear           uint32
@@ -329,6 +330,8 @@ func main() {
 	introAll := flag.Bool("nation-intro-a", false, "啟用規格025四國首次介紹八頁（標題34px／正文38px）")
 	introCatalog := flag.String("intro-catalog", "/repo/text/nation-introduction.zh-Hant.tsv", "國家介紹長文唯一 TSV")
 	introMasks := flag.String("intro-mask-dir", "/out/goal135-intro-masks", "本機依固定字型與真 TSV 烘製的介紹頁三層字模目錄")
+	thirdCardA := flag.Bool("third-card-a", false, "啟用規格016第三張難度卡 A 版（21／25px）")
+	thirdCardFonts := flag.String("third-card-font-dir", "/out/goal139-third-card-fonts", "第三張難度卡本機字模目錄")
 	retireA := flag.Bool("retire-a", false, "啟用規格028退休確認框三欄 A 版（34px、共同置中）")
 	retireFonts := flag.String("retire-font-dir", "/out/goal138-retire-fonts", "本機依固定字型與真 TSV 烘製的退休框字模目錄")
 	optionRowsA := flag.Bool("game-options-rows-a", false, "啟用規格031遊戲選項八列 A 字級")
@@ -565,6 +568,22 @@ func main() {
 				pixels: 55, position: image.Pt(1043, 212), fontSize: 25,
 				card: true, display: []byte("Easy"), displayLinear: 0x2a718,
 				cursorGuard: image.Rect(225, 24, 304, 80), inkSize: image.Pt(54, 23)},
+		}
+		if *thirdCardA {
+			// 規格016目標120／121：第三張卡只在玩家點選後印出兩行；安全區為目標121修訂值。
+			card = append(card,
+				&difficultyLine{id: "NAMES.TXT:0x00000C22", file: "NAMES.TXT", offset: 0xc22, length: 12,
+					linear: 0x4cc7e, readCS: 0x0e2d, readIP: 0x11cf,
+					safe: image.Rect(29, 139, 84, 148), bbox: image.Rect(32, 141, 82, 146),
+					pixels: 205, position: image.Pt(192, 564), fontSize: 21,
+					card: true, thirdCard: true, display: []byte("CONQUISTADOR:"), displayLinear: 0x2a718,
+					cursorGuard: image.Rect(3, 119, 110, 177), inkSize: image.Pt(69, 19)},
+				&difficultyLine{id: "LABELS.TXT:0x000008B8", file: "LABELS.TXT", offset: 0x8b8, length: 8,
+					linear: 0x4df9d, readCS: 0x0e2d, readIP: 0x11cf,
+					safe: image.Rect(38, 148, 76, 157), bbox: image.Rect(41, 149, 74, 155),
+					pixels: 116, position: image.Pt(201, 596), fontSize: 25,
+					card: true, thirdCard: true, display: []byte("Moderate"), displayLinear: 0x2a718,
+					cursorGuard: image.Rect(3, 119, 110, 177), inkSize: image.Pt(54, 23)})
 		}
 		for _, l := range card {
 			source := namesSource
@@ -839,6 +858,9 @@ func main() {
 		if l.nationCard {
 			maskDir = *nationCardFonts
 		}
+		if l.thirdCard {
+			maskDir = *thirdCardFonts
+		}
 		path := filepath.Join(maskDir, strings.ReplaceAll(l.id, ":", "-")+".json")
 		var mask fontMask
 		b, e := os.ReadFile(path)
@@ -855,7 +877,7 @@ func main() {
 			inset = 4
 		}
 		shadow := 0
-		if l.prompt || l.nationCard {
+		if l.prompt || l.nationCard || l.thirdCard {
 			shadow = 4
 		}
 		if mask.Width <= 0 || mask.Height <= 0 || mask.Width > l.safe.Dx()*4 || mask.Height > l.safe.Dy()*4 || len(mask.Alpha) != mask.Width*mask.Height || (l.inkSize.X > 0 && (mask.Width != l.inkSize.X || mask.Height != l.inkSize.Y)) || l.position.X < l.safe.Min.X*4+inset || l.position.Y < l.safe.Min.Y*4+inset || l.position.X+mask.Width+shadow > l.safe.Max.X*4-inset || l.position.Y+mask.Height > l.safe.Max.Y*4-inset {
@@ -1886,6 +1908,7 @@ func main() {
 						if (l.only254 && after[i] != 254) ||
 							(l.prompt && after[i] != 68 && after[i] != 47 && after[i] != 128) ||
 							(l.nationCard && after[i] != 0 && after[i] != 12) ||
+							(l.thirdCard && after[i] != 0 && after[i] != 14) ||
 							(!l.card && !l.prompt && !l.nationCard && !l.only254 && after[i] != 0 && after[i] != 253 && after[i] != 254) {
 							valid = false
 						}
@@ -1951,7 +1974,7 @@ func main() {
 				if l.prompt {
 					position = position.Add(image.Pt(4, 0))
 					colorIndex = 47
-				} else if l.nationCard {
+				} else if l.nationCard || l.thirdCard {
 					position = position.Add(image.Pt(4, 0))
 					colorIndex = 0
 				}
@@ -1978,10 +2001,12 @@ func main() {
 			}
 			for i, l := range difficulty {
 				result := results[len(lines)+i]
-				if result.Applied && (l.prompt || l.nationCard) {
+				if result.Applied && (l.prompt || l.nationCard || l.thirdCard) {
 					index := 68
 					if l.nationCard {
 						index = 12
+					} else if l.thirdCard {
+						index = 14
 					}
 					p := index * 3
 					foreground := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
