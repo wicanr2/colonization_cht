@@ -1,6 +1,6 @@
 # 目標135：英格蘭首次國家介紹兩頁接正式 Ebitengine
 
-狀態：進行中；開始：2026-09-25。對應 [Issue #30](https://github.com/wicanr2/colonization_cht/issues/30)，承接[規格025（DRAFT）](../spec/025-first-nation-introduction-draft.md)與使用者 2026-09-25 選定的貼近原版字級（標題 34px／正文 38px）。
+狀態：完成（英格蘭兩頁）；開始與完成：2026-09-25。對應 [Issue #30](https://github.com/wicanr2/colonization_cht/issues/30)，承接[規格025（DRAFT）](../spec/025-first-nation-introduction-draft.md)與使用者 2026-09-25 選定的貼近原版字級（標題 34px／正文 38px）。
 
 ## 範圍
 
@@ -13,6 +13,12 @@
 3. 以固定 TSV 與 Cubic 11 本機烘製兩頁的陰影／一般／強調三層字模，綁定來源鍵、TSV、譯文、字型與字級；版面沿用目標102貼近原版版式。
 4. 規格025 的英格蘭兩頁升限定 READY：以 `0D21:00C6` 讀 `0x2A862/63` 的整頁印字事件為權杖，核對可見字數與序列 SHA、`0D21:012C` 改色點數與 bbox、印前木紋底圖，真 VGA 同步後才啟用；Enter／ESC 清頁即撤銷。
 5. 正式前端中英同輸入對拍 A、B 兩頁與離頁，負例回英文，真 GUI 真鍵鼠截圖與重播一致後標 CONFORMED。更新文件、worklist 與 Issue，私有推送並回讀。
+
+## 本輪結果
+
+- 英格蘭 A、B 兩頁依[規格025](../spec/025-first-nation-introduction-draft.md)文末限定 CONFORMED，需明示 `-england-intro-a`；正式中文欄位由二十七段增為二十九段。
+- 真 GUI 首次截圖發現 A 頁年份「1649」被拆行，換行規則補上英數字不斷開後重烘、重跑 A 頁重播與真 GUI；首次收據封存在 `workplace/reports/goal135-nation-intro/attempts-wrap/`。
+- 下一步仍屬 #30：法國、西班牙、荷蘭沒有真玩家錄製輸入，需以探針路徑建立事件常數，並以真 GUI 驗收。
 
 ## 停止線
 

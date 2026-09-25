@@ -2504,3 +2504,11 @@
 
 - 對照 GitHub Issue 與 CONTEXT 待辦，新建 [#31](https://github.com/wicanr2/colonization_cht/issues/31)～[#37](https://github.com/wicanr2/colonization_cht/issues/37)：遊戲選項後續驗證、退休確認框（待選版式）、第三張難度卡（待選 A／B）、其餘三張旗卡、其餘九張開場字幕、首則 help、海上主畫面介面；並加入 `docs/worklist.json`，`tools/worklist.py write/verify` 通過。
 - 使用者決定（2026-09-25）：#29 姓名欄維持原名、#30 長文貼近原版、#32 退休框 A、#33／#34 卡片 A；已寫入規格016／022／023／025／028、CONTEXT 與 worklist（worklist 統一為緊湊格式）。#29 依規格023 完成關閉。
+
+## 2026-09-25：目標135英格蘭介紹兩頁 CONFORMED（#30）
+
+- 目標102 預覽工具拆出 `layout()`，以舊 `layout.json` 逐 byte 相同作回歸；新增三層字模烘製工具與前端 `-england-intro-a`。
+- 以探針畫布與真 VGA 比對確認游標只在 VGA，改用「游標畫在中文之上」合成，避免游標停在面板內時整頁退回英文。
+- 首次真 GUI 截圖發現年份被拆行，補換行規則後重烘並重跑 A 頁重播與 GUI；首次收據封存於 `attempts-wrap/`。
+- 負例批次第一次在容器 `wait` 後未執行，單獨重跑兩個負例後完成。
+- 新前端回歸：標題 1280M、字幕 82M、遊戲選項八列 1280M 的 PNG、完整 RAM、狀態與套用畫格數（54／151／54）和既有收據相同；`go vet`／`go test`（有界 Xvfb）、Python 與 shell 語法檢查通過；容器皆 `--rm`。

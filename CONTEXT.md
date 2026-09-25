@@ -1,6 +1,6 @@
 # 目前脈絡
 
-進行中：[目標135](docs/goals/135-england-intro-pages-overlay.md)（#30）把英格蘭首次國家介紹 A、B 兩頁接到正式 Ebitengine，字級為使用者選定的標題34px／正文38px；其他三國後續補齊。
+目前真相：[目標135](docs/goals/135-england-intro-pages-overlay.md)（#30）已將英格蘭首次國家介紹 A、B 兩頁接到正式 Ebitengine，[規格025](docs/spec/025-first-nation-introduction-draft.md)文末限定 CONFORMED（標題34px／正文38px，強調字黃色）。閘門以整頁 `0D21:00C6` 讀字序列 SHA、改色點數與 bbox 為權杖；原版游標只在真 VGA，合成時游標畫在中文之上。換行規則已補「英數字不斷開」。正式中文欄位為二十九段。法國、西班牙、荷蘭仍待補（#30）。
 
 使用者決定（2026-09-25）：姓名欄維持原版英文（#29 完成）；首次國家介紹長文採貼近原版標題34px／正文38px（#30）；退休確認框採 A 三欄34px共同置中（#32）；第三張難度卡與其餘三張旗卡採 A 21／25px（#33、#34）。未完成工作一律以 GitHub Issue 為入口，依編號順序處理。
 

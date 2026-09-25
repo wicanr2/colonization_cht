@@ -78,6 +78,10 @@ def wrap(chars, font, limit):
             carried = [current.pop(), item]
         else:
             carried = [item]
+        # 連續 ASCII 英數字（年份、分數）整段換行，不在數字中間斷開。
+        while len(current) > 1 and current[-1][0].isascii() and current[-1][0].isalnum() and \
+                carried[0][0].isascii() and carried[0][0].isalnum():
+            carried.insert(0, current.pop())
         while len(current) > 1 and current[-1][0] in PROHIBITED_LINE_END:
             carried.insert(0, current.pop())
         lines.append(current)
@@ -128,7 +132,8 @@ def in_rect(box, safe):
            safe[1] <= box[1] < box[3] <= safe[3]
 
 
-def render(background, title, body, font_path, original, palette, delta):
+def layout(title, body, font_path, original, delta):
+    """只計算版面：字級、換行、標題與各正文行的基線位置；預覽與正式字模共用。"""
     title_font, title_size, title_exact_size, title_exact_height, title_height = \
         choose_size((font_path, title), original["title_height"] * 4, delta)
     body_font, body_size, body_exact_size, body_exact_height, body_height = \
@@ -141,6 +146,26 @@ def render(background, title, body, font_path, original, palette, delta):
     total_height = title_height + gap + (len(lines) - 1) * line_advance + body_height + 4
     title_top = (PANEL[1] + PANEL[3] - total_height) // 2
     body_top = title_top + title_height + gap
+    probe = ImageDraw.Draw(Image.new("L", (1, 1)))
+    title_bbox = probe.textbbox((0, 0), title, font=title_font, anchor="ls")
+    ref_bbox = probe.textbbox((0, 0), "國", font=body_font, anchor="ls")
+    title_x = (PANEL[0] + PANEL[2] - round(title_font.getlength(title))) // 2
+    placed = [([(c, False) for c in title], title_font, title_x, title_top - title_bbox[1])]
+    placed += [(line, body_font, INNER[0], body_top + i * line_advance - ref_bbox[1])
+               for i, line in enumerate(lines)]
+    return {"title_font": title_font, "body_font": body_font, "placed": placed,
+            "title_size": title_size, "body_size": body_size,
+            "title_exact_size": title_exact_size, "body_exact_size": body_exact_size,
+            "title_exact_height": title_exact_height, "body_exact_height": body_exact_height,
+            "text_width": text_width, "lines": lines, "widths": widths, "bad_breaks": bad_breaks,
+            "line_advance": line_advance, "gap": gap, "total_height": total_height,
+            "title_top": title_top, "body_top": body_top}
+
+
+def render(background, title, body, font_path, original, palette, delta):
+    plan = layout(title, body, font_path, original, delta)
+    lines, widths, bad_breaks = plan["lines"], plan["widths"], plan["bad_breaks"]
+    title_top, body_top = plan["title_top"], plan["body_top"]
     title_layer = Image.new("RGBA", background.size)
     body_layer = Image.new("RGBA", background.size)
     rgb = palette_rgb(palette)
@@ -149,22 +174,15 @@ def render(background, title, body, font_path, original, palette, delta):
     shadow = tuple(rgb[47 * 3:47 * 3 + 3]) + (255,)
     title_draw = ImageDraw.Draw(title_layer)
     body_draw = ImageDraw.Draw(body_layer)
-    title_bbox = title_draw.textbbox((0, 0), title, font=title_font, anchor="ls")
-    title_x = (PANEL[0] + PANEL[2] - round(title_font.getlength(title))) // 2
-    title_baseline = title_top - title_bbox[1]
-    draw_line(title_draw, [(c, False) for c in title], title_font,
-              title_x, title_baseline, normal, highlight, shadow)
-    ref_bbox = body_draw.textbbox((0, 0), "國", font=body_font, anchor="ls")
-    for i, line in enumerate(lines):
-        draw_line(body_draw, line, body_font, INNER[0],
-                  body_top + i * line_advance - ref_bbox[1],
+    for index, (line, font, x, baseline) in enumerate(plan["placed"]):
+        draw_line(title_draw if index == 0 else body_draw, line, font, x, baseline,
                   normal, highlight, shadow)
     title_ink = title_layer.getbbox()
     body_ink = body_layer.getbbox()
     title_safe = (INNER[0], title_top - 4, INNER[1], body_top - 8)
     body_safe = (INNER[0], body_top - 4, INNER[1], PANEL[3] - 8)
-    fits = (total_height <= PANEL[3] - PANEL[1] - 16 and
-            max(widths) <= text_width and not bad_breaks and
+    fits = (plan["total_height"] <= PANEL[3] - PANEL[1] - 16 and
+            max(widths) <= plan["text_width"] and not bad_breaks and
             in_rect(title_ink, title_safe) and in_rect(body_ink, body_safe) and
             in_rect(title_ink, PANEL) and in_rect(body_ink, PANEL) and
             title_ink[3] < body_ink[1])
@@ -172,17 +190,17 @@ def render(background, title, body, font_path, original, palette, delta):
     image.alpha_composite(title_layer)
     image.alpha_composite(body_layer)
     return image.convert("RGB"), {
-        "title_font_px": title_size, "body_font_px": body_size,
-        "title_size_matching_original": title_exact_size,
-        "body_size_matching_original": body_exact_size,
+        "title_font_px": plan["title_size"], "body_font_px": plan["body_size"],
+        "title_size_matching_original": plan["title_exact_size"],
+        "body_size_matching_original": plan["body_exact_size"],
         "original_title_height_scaled": original["title_height"] * 4,
         "original_body_height_scaled": original["body_height"] * 4,
-        "title_reference_height": title_exact_height,
-        "body_reference_height": body_exact_height,
+        "title_reference_height": plan["title_exact_height"],
+        "body_reference_height": plan["body_exact_height"],
         "title_ink_bbox_px": title_ink, "body_ink_bbox_px": body_ink,
         "title_safe_rect_px": title_safe, "body_safe_rect_px": body_safe,
-        "panel_safe_rect_px": PANEL, "line_advance_px": line_advance,
-        "title_body_gap_px": gap, "line_count": len(lines),
+        "panel_safe_rect_px": PANEL, "line_advance_px": plan["line_advance"],
+        "title_body_gap_px": plan["gap"], "line_count": len(lines),
         "max_line_advance_px": round(max(widths, default=0), 2),
         "line_texts": ["".join(c for c, _ in line) for line in lines],
         "bad_breaks": bad_breaks, "fits_without_clipping": fits,

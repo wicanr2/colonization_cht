@@ -10,6 +10,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	gohash "hash"
 	"image"
 	"image/color"
 	"image/draw"
@@ -192,6 +193,54 @@ var (
 	}
 )
 
+// 規格025：首次國家介紹頁。整頁印字事件為權杖；中文為目標102貼近原版版式的三層字模。
+type introPage struct {
+	id                     string
+	sectionOffset, length  int
+	chars, writes          int
+	printSHA               string
+	bbox                   image.Rectangle
+	valid                  bool
+	matches                int
+	translation            string
+	fontReason             string
+	shadow, normal, accent *image.Alpha
+	accepted, appliedFrame int
+}
+
+type introState struct {
+	pages               []*introPage
+	phase               string
+	page                *introPage
+	before, afterSafe   []byte
+	patch               *overlay.Patch
+	chars, readPos      int
+	sum                 gohash.Hash
+	writes              int
+	bbox                image.Rectangle
+	startStep, lastRead uint64
+	openedCount         int
+	completeStep        uint64
+}
+
+var (
+	introPanel      = image.Rect(8, 8, 312, 192)   // 原版木紋頁內；四倍即 (32,32)–(1248,768)
+	introTextArea   = image.Rect(10, 20, 305, 179) // 英格蘭兩頁 0D21:012C 改色的聯集 bbox
+	introPreprint   = "f31602f9a239a4f83fd6e27e644384009d628517185aeb80bb248479e67d0e71"
+	introReadLinear = uint32(0x2a862)
+)
+
+func introPanelBytes(buf []byte) []byte {
+	b := make([]byte, 0, introPanel.Dx()*introPanel.Dy())
+	for y := introPanel.Min.Y; y < introPanel.Max.Y; y++ {
+		b = append(b, buf[y*320+introPanel.Min.X:y*320+introPanel.Max.X]...)
+	}
+	return b
+}
+
+// 游標只疊在真 VGA 上（底層畫布沒有游標）；以滑鼠左上角起 16×16 保守涵蓋。
+func cursorBox(x, y int) image.Rectangle { return image.Rect(x, y, x+16, y+16) }
+
 func optionRowSafe(i int) image.Rectangle { return image.Rect(80, 59+12*i, 252, 71+12*i) }
 func optionRowSafeBytes(buf []byte, i int) []byte {
 	r := optionRowSafe(i)
@@ -231,6 +280,9 @@ func main() {
 	build1Font := flag.String("build1-font", "/out/goal130-build1-font.json", "本機依固定字型與真 TSV 烘製的首張字幕字模")
 	optionsTitleA := flag.Bool("game-options-title-a", false, "啟用規格030遊戲選項標題 A／34px")
 	optionsTitleFont := flag.String("game-options-title-font", "/out/goal132-options-title-font.json", "本機依固定字型與真 TSV 烘製的遊戲選項標題字模")
+	introA := flag.Bool("england-intro-a", false, "啟用規格025英格蘭首次介紹兩頁（標題34px／正文38px）")
+	introCatalog := flag.String("intro-catalog", "/repo/text/nation-introduction.zh-Hant.tsv", "國家介紹長文唯一 TSV")
+	introMasks := flag.String("intro-mask-dir", "/out/goal135-intro-masks", "本機依固定字型與真 TSV 烘製的介紹頁三層字模目錄")
 	optionRowsA := flag.Bool("game-options-rows-a", false, "啟用規格031遊戲選項八列 A 字級")
 	optionRowsFonts := flag.String("game-options-rows-font-dir", "/out/goal134-row-fonts", "本機依固定字型與真 TSV 烘製的八列字模目錄")
 	out := flag.String("out", "/out/goal056-live", "輸出前綴")
@@ -298,6 +350,80 @@ func main() {
 		}
 		if len(rows.expect) != 268 {
 			panic("固定原版遊戲選項八列讀字長度不符")
+		}
+	}
+	var intro *introState
+	if *introA {
+		intro = &introState{phase: "idle", pages: []*introPage{
+			{id: "GAME.TXT:@NATION0A", sectionOffset: 0xae7c, length: 904, chars: 833, writes: 14193,
+				printSHA: "25f3dd22b2d753adc9f66c76c4e8c4dabe0474600d996b6128881552f1122d23", bbox: image.Rect(10, 20, 305, 179)},
+			{id: "GAME.TXT:@NATION0B", sectionOffset: 0xb204, length: 215, chars: 170, writes: 2932,
+				printSHA: "33cadaf8f05359be9c7f3ade81ab3d41ed3583e0c9b3361f9fda9d335e9d84a9", bbox: image.Rect(10, 75, 292, 124)},
+		}}
+		introBytes := read(*introCatalog)
+		lines := strings.Split(strings.TrimRight(string(introBytes), "\n"), "\n")
+		header := strings.Split(lines[0], "\t")
+		col := map[string]int{}
+		for i, name := range header {
+			col[name] = i
+		}
+		for _, line := range lines[1:] {
+			f := strings.Split(line, "\t")
+			if len(f) != len(header) {
+				continue
+			}
+			for _, pg := range intro.pages {
+				if f[col["message_id"]] != pg.id {
+					continue
+				}
+				pg.matches++
+				offset, e1 := strconv.ParseUint(f[col["section_offset"]], 0, 32)
+				length, e2 := strconv.Atoi(f[col["section_byte_length"]])
+				pg.valid = e1 == nil && e2 == nil && int(offset) == pg.sectionOffset && length == pg.length &&
+					f[col["source_file"]] == "GAME.TXT" && f[col["source_file_sha256"]] == versions["GAME.TXT"] &&
+					f[col["section_sha256"]] == hash(rawSource[pg.sectionOffset:pg.sectionOffset+pg.length])
+				pg.translation = f[col["zh_hant_draft"]]
+			}
+		}
+		for _, pg := range intro.pages {
+			if pg.matches != 1 || !pg.valid || !strings.Contains(pg.translation, "\\n") {
+				pg.fontReason = "missing-or-invalid-translation"
+				continue
+			}
+			var mask struct {
+				ID          string `json:"message_id"`
+				Catalog     string `json:"catalog_sha256"`
+				Translation string `json:"translation_sha256"`
+				Font        string `json:"font_sha256"`
+				Title       int    `json:"title_font_px"`
+				Body        int    `json:"body_font_px"`
+				Width       int    `json:"width"`
+				Height      int    `json:"height"`
+				Shadow      []byte `json:"shadow"`
+				Normal      []byte `json:"normal"`
+				Accent      []byte `json:"highlight"`
+			}
+			b, e := os.ReadFile(filepath.Join(*introMasks, strings.ReplaceAll(pg.id, ":", "-")+".json"))
+			size := (introPanel.Dx() * 4) * (introPanel.Dy() * 4)
+			if e != nil || json.Unmarshal(b, &mask) != nil {
+				pg.fontReason = "font-mask-unavailable"
+			} else if mask.ID != pg.id || mask.Catalog != hash(introBytes) || mask.Translation != hash([]byte(pg.translation)) ||
+				mask.Font != fontHash || mask.Title != 34 || mask.Body != 38 {
+				pg.fontReason = "font-binding-mismatch"
+			} else if mask.Width != introPanel.Dx()*4 || mask.Height != introPanel.Dy()*4 ||
+				len(mask.Shadow) != size || len(mask.Normal) != size || len(mask.Accent) != size {
+				pg.fontReason = "font-mask-out-of-bounds"
+			} else {
+				r := image.Rect(0, 0, mask.Width, mask.Height)
+				pg.shadow, pg.normal, pg.accent = image.NewAlpha(r), image.NewAlpha(r), image.NewAlpha(r)
+				copy(pg.shadow.Pix, mask.Shadow)
+				copy(pg.normal.Pix, mask.Normal)
+				copy(pg.accent.Pix, mask.Accent)
+			}
+			if *missing {
+				pg.shadow, pg.normal, pg.accent = nil, nil, nil
+				pg.fontReason = "missing-ink"
+			}
 		}
 	}
 	labelsSource := read(filepath.Join(*root, "LABELS.TXT"))
@@ -776,13 +902,51 @@ func main() {
 			rowExpire(r, reason)
 		}
 	}
-	if !*control && ((caption != nil && caption.ink != nil) || (title != nil && title.ink != nil) || rowsAnyInk) {
+	introAnyInk := false
+	if intro != nil {
+		for _, pg := range intro.pages {
+			introAnyInk = introAnyInk || pg.normal != nil
+		}
+	}
+	introExpire := func(reason string) {
+		if intro == nil || intro.phase == "idle" || intro.phase == "expired" {
+			return
+		}
+		id := "GAME.TXT:@NATION0"
+		if intro.page != nil {
+			id = intro.page.id
+		}
+		events = append(events, map[string]any{"candidate_id": id, "stage": "expired", "step": m.Steps, "reason": reason})
+		intro.phase, intro.page, intro.patch, intro.before, intro.afterSafe = "expired", nil, nil, nil, nil
+	}
+	if !*control && ((caption != nil && caption.ink != nil) || (title != nil && title.ink != nil) || rowsAnyInk || introAnyInk) {
 		m.WatchWrites(0x2cae0, 0x2cae0+64000, func(a uint32, old, value uint8) {
 			if old == value {
 				return
 			}
 			cs, ip := m.CPU.OpAddr()
 			x, y := int(a-0x2cae0)%320, int(a-0x2cae0)/320
+			if intro != nil && intro.phase == "reading" {
+				mx, my := int(d.Mouse.X), int(d.Mouse.Y)
+				if cs == 0x0d21 && ip == 0x012c {
+					if !image.Pt(x, y).In(introTextArea) {
+						introExpire("write-outside-reviewed-pixels")
+					} else {
+						if intro.writes == 0 {
+							intro.bbox = image.Rect(x, y, x+1, y+1)
+						} else {
+							intro.bbox = intro.bbox.Union(image.Rect(x, y, x+1, y+1))
+						}
+						intro.writes++
+						if intro.writes > 14193 {
+							introExpire("write-count-exceeded")
+						}
+					}
+				} else if !(cs == 0x0b68 && ip == 0x051c && image.Pt(x, y).In(cursorBox(mx, my).Inset(-2))) {
+					// 原版游標常式會暫時寫入底層並還原；其他寫入者一律撤銷。
+					introExpire("unexpected-canvas-writer")
+				}
+			}
 			if rows != nil && rows.phase == "reading" {
 				row := -1
 				for i := range rows.rows {
@@ -1025,6 +1189,34 @@ func main() {
 					}
 				}
 			}
+			if intro != nil && introAnyInk && cs == 0x0d21 && ip == 0x00c6 {
+				a := uint32(c.Seg[golem.SS])*16 + uint32(c.R[golem.BX])
+				if a == introReadLinear || a == introReadLinear+1 {
+					if intro.phase != "reading" && a == introReadLinear && m.VideoMode() == 0x13 &&
+						hash(canvas()) == introPreprint {
+						introExpire("superseded-by-new-print")
+						intro.phase, intro.page, intro.chars, intro.readPos, intro.writes = "reading", nil, 0, 0, 0
+						intro.sum, intro.before = sha256.New(), bytes.Clone(canvas())
+						intro.startStep, intro.openedCount = m.Steps, len(d.Opened)
+						events = append(events, map[string]any{"candidate_id": "GAME.TXT:@NATION0", "stage": "source", "step": m.Steps, "entry_ip": "0D21:00C6", "source_linear": a})
+					}
+					if intro.phase == "reading" {
+						if a != introReadLinear+uint32(intro.readPos%2) || (intro.readPos%2 == 1 && m.Mem[a] != 0) {
+							introExpire("source-read-mismatch")
+						} else {
+							if intro.readPos%2 == 0 {
+								intro.sum.Write([]byte{m.Mem[a]})
+								intro.chars++
+								if intro.chars > 833 {
+									introExpire("source-read-count-exceeded")
+								}
+							}
+							intro.readPos++
+							intro.lastRead = m.Steps
+						}
+					}
+				}
+			}
 			if rows != nil && rowsAnyInk && cs == 0x0d21 && ip == 0x00c6 {
 				a := uint32(c.Seg[golem.SS])*16 + uint32(c.R[golem.BX])
 				base := a &^ 1
@@ -1239,6 +1431,51 @@ func main() {
 				} else if !bytes.Equal(optionsTitleSafeBytes(canvas()), title.afterSafe) {
 					titleExpire("canvas-title-changed")
 				}
+			}
+		}
+		if intro != nil && introAnyInk && !*control {
+			mx, my := int(d.Mouse.X), int(d.Mouse.Y)
+			if intro.phase != "idle" && intro.phase != "expired" && (m.VideoMode() != 0x13 || len(d.Opened) != intro.openedCount) {
+				introExpire("mode-or-file-changed")
+			}
+			if intro.phase == "reading" {
+				sum := fmt.Sprintf("%x", intro.sum.Sum(nil))
+				for _, pg := range intro.pages {
+					if intro.chars == pg.chars && intro.readPos == 2*pg.chars && sum == pg.printSHA &&
+						intro.writes == pg.writes && intro.bbox.Eq(pg.bbox) && m.Steps-intro.lastRead > 20000 {
+						intro.page, intro.phase, intro.completeStep = pg, "waiting-screen", m.Steps
+					}
+				}
+				if intro.phase == "reading" && m.Steps-intro.lastRead > 2000000 {
+					introExpire("incomplete-reviewed-output")
+				}
+			}
+			if intro.phase == "waiting-screen" {
+				vga := m.Mem[0xa0000:0xafa00]
+				clean := bytes.Clone(vga)
+				box := cursorBox(mx, my).Intersect(introPanel)
+				for y := box.Min.Y; y < box.Max.Y; y++ {
+					for x := box.Min.X; x < box.Max.X; x++ {
+						clean[y*320+x] = canvas()[y*320+x]
+					}
+				}
+				if m.Steps-intro.completeStep > 2000000 {
+					introExpire("screen-sync-timeout")
+				} else if bytes.Equal(introPanelBytes(clean), introPanelBytes(canvas())) {
+					var err error
+					intro.patch, err = overlay.NewPatch(intro.before, canvas(), 320, 200, introPanel)
+					if err != nil {
+						introExpire("invalid-observed-patch")
+					} else {
+						intro.afterSafe = introPanelBytes(canvas())
+						intro.phase = "active"
+						intro.page.accepted++
+						events = append(events, map[string]any{"candidate_id": intro.page.id, "stage": "active", "step": m.Steps,
+							"visible_chars": intro.chars, "changed_pixels": intro.writes})
+					}
+				}
+			} else if intro.phase == "active" && !bytes.Equal(introPanelBytes(canvas()), intro.afterSafe) {
+				introExpire("canvas-page-changed")
 			}
 		}
 		if rows != nil && rowsAnyInk && !*control {
@@ -1520,6 +1757,69 @@ func main() {
 					captionReason = "vga-frame-mismatch"
 				}
 				lineRecords = append(lineRecords, map[string]any{"candidate_id": caption.id, "applied": captionApplied, "reason": captionReason, "accepted_events": caption.accepted})
+			}
+			if intro != nil {
+				for _, pg := range intro.pages {
+					reason, ok := "idle", false
+					if pg.normal == nil {
+						reason = pg.fontReason
+					} else if intro.page != pg {
+						reason = intro.phase
+						if intro.phase == "active" || intro.phase == "waiting-screen" {
+							reason = "other-page"
+						}
+					} else if intro.phase != "active" || intro.patch == nil {
+						reason = intro.phase
+					} else if applied {
+						reason = "other-overlay-active"
+					} else if d.Mouse.Buttons != 0 {
+						reason = "mouse-button-held"
+					} else {
+						// 把游標範圍換回印後底層再合成中文，最後把真 VGA 的游標像素畫回最上層。
+						mx, my := int(d.Mouse.X), int(d.Mouse.Y)
+						clean := bytes.Clone(indexed)
+						box := cursorBox(mx, my).Intersect(introPanel)
+						for y := box.Min.Y; y < box.Max.Y; y++ {
+							for x := box.Min.X; x < box.Max.X; x++ {
+								i := (y-introPanel.Min.Y)*introPanel.Dx() + x - introPanel.Min.X
+								clean[y*320+x] = intro.afterSafe[i]
+							}
+						}
+						if !bytes.Equal(introPanelBytes(clean), intro.afterSafe) {
+							reason = "vga-safe-mismatch"
+						} else {
+							frame, composed, why, err := overlay.Compose(clean, m.DAC[:], 320, 200, 4,
+								intro.patch, pg.shadow, image.Pt(32, 32), 47, enabled)
+							must(err)
+							reason = why
+							if composed {
+								panel := image.Rect(32, 32, 1248, 768)
+								draw.Draw(output, panel, frame, panel.Min, draw.Src)
+								for _, layer := range []struct {
+									mask  *image.Alpha
+									index int
+								}{{pg.normal, 68}, {pg.accent, 149}} {
+									p := layer.index * 3
+									fg := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
+									draw.DrawMask(output, panel, image.NewUniform(fg), image.Point{}, layer.mask, image.Point{}, draw.Over)
+								}
+								for y := box.Min.Y; y < box.Max.Y; y++ {
+									for x := box.Min.X; x < box.Max.X; x++ {
+										if v := indexed[y*320+x]; v != clean[y*320+x] {
+											p := int(v) * 3
+											c := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
+											draw.Draw(output, image.Rect(x*4, y*4, x*4+4, y*4+4), image.NewUniform(c), image.Point{}, draw.Src)
+										}
+									}
+								}
+								ok, applied = true, true
+								reason = "applied"
+								pg.appliedFrame++
+							}
+						}
+					}
+					lineRecords = append(lineRecords, map[string]any{"candidate_id": pg.id, "applied": ok, "reason": reason, "accepted_events": pg.accepted})
+				}
 			}
 			optionsTitleShown := false
 			if title != nil {
