@@ -4,11 +4,19 @@ import argparse
 import base64
 import hashlib
 import json
+import re
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 from prototype_overlay import FONT_SHA, cmap_coverage
 from validate_translation_draft import read_catalog, validate_sources
+
+
+# 規格031：遊戲選項八列 A 字級與已量實際墨跡（寬×高 px）；快捷鍵為「(~X) 中文」。
+OPTION_ROWS = {'GAME.TXT:0x000004E9': (25, (229, 25)), 'GAME.TXT:0x000004FD': (28, (233, 27)),
+               'GAME.TXT:0x00000512': (28, (233, 27)), 'GAME.TXT:0x00000525': (25, (155, 25)),
+               'GAME.TXT:0x00000533': (28, (176, 27)), 'GAME.TXT:0x0000053E': (28, (173, 27)),
+               'GAME.TXT:0x00000550': (27, (223, 29)), 'GAME.TXT:0x00000566': (28, (175, 27))}
 
 
 def main():
@@ -22,8 +30,8 @@ def main():
                             'GAME.TXT:0x000001E4', 'GAME.TXT:0x000001F9', 'GAME.TXT:0x00000204',
                             'LABELS.TXT:0x00000888', 'LABELS.TXT:0x00000890',
                             'LABELS.TXT:0x0000086E', 'GAME.TXT:0x00000A7A',
-                            'GAME.TXT:0x000153CC', 'GAME.TXT:0x000004CD'],
-                   help='規格 009／012／014／015／029／030 已審查的畫面文字；字模各自獨立綁定')
+                            'GAME.TXT:0x000153CC', 'GAME.TXT:0x000004CD', *OPTION_ROWS],
+                   help='規格 009／012／014／015／029／030／031 已審查的畫面文字；字模各自獨立綁定')
     args = p.parse_args()
     rows = read_catalog(args.catalog)
     if any(not (args.game / row['source_file']).is_file() for row in rows):
@@ -36,6 +44,10 @@ def main():
         if not text.startswith('^^') or '^' in text[2:]:
             raise ValueError('姓名提示控制碼不符')
         text = text[2:]
+    if key in OPTION_ROWS:
+        if not re.fullmatch(r'\(~[\x21-\x7e]\) \S.*', text) or text.count('~') != 1:
+            raise ValueError('遊戲選項列快捷鍵格式不符規格031')
+        text = text.replace('~', '')
     data = args.font.read_bytes()
     if hashlib.sha256(data).hexdigest() != FONT_SHA:
         raise ValueError('字型指紋不符已確認版本')
@@ -47,6 +59,7 @@ def main():
              'GAME.TXT:0x00000A7A': 38,
              'GAME.TXT:0x000153CC': 38,
              'GAME.TXT:0x000004CD': 34}
+    sizes.update({row: size for row, (size, _) in OPTION_ROWS.items()})
     font_size = sizes.get(key, 24)
     font = ImageFont.truetype(str(args.font), font_size)
     left, top, right, bottom = font.getbbox(text)
@@ -64,7 +77,8 @@ def main():
                     'LABELS.TXT:0x00000890': (82, 35),
                     'GAME.TXT:0x00000A7A': (328, 35),
                     'GAME.TXT:0x000153CC': (430, 35),
-                    'GAME.TXT:0x000004CD': (222, 32)}
+                    'GAME.TXT:0x000004CD': (222, 32),
+                    **{row: ink for row, (_, ink) in OPTION_ROWS.items()}}
     if key in expected_ink and (width, height) != expected_ink[key]:
         raise ValueError('此欄字模尺寸不符已驗證規格')
     bounds = {'LABELS.TXT:0x00000888': (148, 48),
@@ -72,7 +86,8 @@ def main():
               'LABELS.TXT:0x0000086E': (380, 36),
               'GAME.TXT:0x00000A7A': (476, 52),
               'GAME.TXT:0x000153CC': (1180, 60),
-              'GAME.TXT:0x000004CD': (752, 60)}
+              'GAME.TXT:0x000004CD': (752, 60),
+              **{row: (672, 36) for row in OPTION_ROWS}}
     max_width, max_height = bounds.get(key, (584, 28))
     if not (0 < width <= max_width and 0 < height <= max_height):
         raise ValueError('譯文超出已確認安全矩形，不裁切')

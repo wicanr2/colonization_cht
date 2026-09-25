@@ -152,6 +152,56 @@ type optionsTitle struct {
 	afterSafe []byte
 }
 
+// 規格031：遊戲選項八列。整組讀字事件為權杖，逐列在第一次被原版改色時擷取當次印前底圖。
+type optionRow struct {
+	id, translation, fontReason string
+	offset                      int
+	hotkey                      byte
+	source, display             []byte
+	matches                     int
+	valid                       bool
+	ink                         *image.Alpha
+	before, afterSafe           []byte
+	writes                      int
+	waitSince                   uint64
+	patch                       *overlay.Patch
+	phase                       string
+	accepted, appliedFrames     int
+}
+
+type optionRows struct {
+	rows                    [8]*optionRow
+	expect                  []byte // 268 次讀取的期望值；核取前綴位置以 0xff 表示「[ 或 ]」
+	phase                   string
+	base                    uint32
+	readPos, outside        int
+	startStep, completeStep uint64
+	openedCount             int
+	accepted                int
+}
+
+var (
+	optionRowOffsets = [8]int{0x4e9, 0x4fd, 0x512, 0x525, 0x533, 0x53e, 0x550, 0x566}
+	optionRowWrites  = [8]int{338, 349, 283, 186, 172, 316, 343, 246}
+	optionRowSizes   = [8]int{25, 28, 28, 25, 28, 28, 27, 28}
+	optionRowInk     = [8]image.Point{{229, 25}, {233, 27}, {233, 27}, {155, 25}, {176, 27}, {173, 27}, {223, 29}, {175, 27}}
+	// 奇數列（索引0、2、4、6）與偶數列各兩種已驗印前底圖：一般、反白。
+	optionRowBackgrounds = [2][2]string{
+		{"3c24c328cb52d0ddfe5da07f462e685f9d41c89fabad06722a38095ff0078947", "903ff7549ac31fbb35f8a978ed3072aa4d6c7ab035dcea9ede983aea48490159"},
+		{"a37541c55677774da71ee04095a82752663fd9e0a24bbaf671d79134a8627bff", "96f7592f13131bb6eaf8128df7a612867459f9abe14ebedf18d3810405180807"},
+	}
+)
+
+func optionRowSafe(i int) image.Rectangle { return image.Rect(80, 59+12*i, 252, 71+12*i) }
+func optionRowSafeBytes(buf []byte, i int) []byte {
+	r := optionRowSafe(i)
+	b := make([]byte, 0, r.Dx()*r.Dy())
+	for y := r.Min.Y; y < r.Max.Y; y++ {
+		b = append(b, buf[y*320+r.Min.X:y*320+r.Max.X]...)
+	}
+	return b
+}
+
 func (l *menuLine) safe() image.Rectangle { return image.Rect(86, l.y, 232, l.y+7) }
 func optionsTitleSafeBytes(buf []byte) []byte {
 	b := make([]byte, 0, 188*15)
@@ -181,6 +231,8 @@ func main() {
 	build1Font := flag.String("build1-font", "/out/goal130-build1-font.json", "本機依固定字型與真 TSV 烘製的首張字幕字模")
 	optionsTitleA := flag.Bool("game-options-title-a", false, "啟用規格030遊戲選項標題 A／34px")
 	optionsTitleFont := flag.String("game-options-title-font", "/out/goal132-options-title-font.json", "本機依固定字型與真 TSV 烘製的遊戲選項標題字模")
+	optionRowsA := flag.Bool("game-options-rows-a", false, "啟用規格031遊戲選項八列 A 字級")
+	optionRowsFonts := flag.String("game-options-rows-font-dir", "/out/goal134-row-fonts", "本機依固定字型與真 TSV 烘製的八列字模目錄")
 	out := flag.String("out", "/out/goal056-live", "輸出前綴")
 	control := flag.Bool("control", false, "無指令觀測、無合成對照")
 	missing := flag.Bool("missing", false, "缺字模回退對照")
@@ -222,6 +274,30 @@ func main() {
 		}}
 		if hash(title.source) != "547a9bc5a42a065a7c0994ef27d0fd8c30ea52ce2c0fd2224693ce937f032c04" {
 			panic("固定原版遊戲選項標題來源不符")
+		}
+	}
+	var rows *optionRows
+	if *optionRowsA {
+		rows = &optionRows{phase: "idle"}
+		for i, offset := range optionRowOffsets {
+			end := bytes.Index(rawSource[offset:], []byte("\r\n"))
+			if end <= 0 {
+				panic("固定原版遊戲選項列來源不符")
+			}
+			src := bytes.Clone(rawSource[offset : offset+end])
+			tilde := bytes.IndexByte(src, '~')
+			if tilde < 0 || tilde+1 >= len(src) || bytes.Count(src, []byte("~")) != 1 {
+				panic("固定原版遊戲選項列快捷鍵不符")
+			}
+			rows.rows[i] = &optionRow{id: fmt.Sprintf("GAME.TXT:0x%08X", offset), offset: offset,
+				source: src, display: bytes.ReplaceAll(src, []byte("~"), nil), hotkey: src[tilde+1], phase: "idle"}
+			rows.expect = append(rows.expect, 0xff, 0, ' ', 0)
+			for _, ch := range rows.rows[i].display {
+				rows.expect = append(rows.expect, ch, 0)
+			}
+		}
+		if len(rows.expect) != 268 {
+			panic("固定原版遊戲選項八列讀字長度不符")
 		}
 	}
 	labelsSource := read(filepath.Join(*root, "LABELS.TXT"))
@@ -391,6 +467,22 @@ func main() {
 				get(row, "source_byte_length") == "16" &&
 				get(row, "status") == "draft"
 			title.translation = get(row, "zh_hant")
+		}
+		if rows != nil {
+			for _, r := range rows.rows {
+				if get(row, "candidate_id") != r.id {
+					continue
+				}
+				r.matches++
+				offset, parseErr := strconv.ParseUint(get(row, "byte_offset"), 0, 32)
+				r.valid = parseErr == nil && int(offset) == r.offset &&
+					get(row, "source_file") == "GAME.TXT" &&
+					get(row, "source_sha256") == versions["GAME.TXT"] &&
+					get(row, "source_bytes_sha256") == hash(r.source) &&
+					get(row, "source_byte_length") == strconv.Itoa(len(r.source)) &&
+					get(row, "status") == "draft"
+				r.translation = get(row, "zh_hant")
+			}
 		}
 		for _, l := range lines {
 			if get(row, "candidate_id") != l.id {
@@ -591,6 +683,38 @@ func main() {
 			title.fontReason = "missing-ink"
 		}
 	}
+	if rows != nil {
+		for i, r := range rows.rows {
+			// 使用者定案：「(~X) 中文」，X 必須是原版該列快捷鍵；畫面只去掉 ~。
+			prefix := "(~" + string(r.hotkey) + ") "
+			if r.matches != 1 || !r.valid || !strings.HasPrefix(r.translation, prefix) ||
+				len(r.translation) <= len(prefix) || strings.Count(r.translation, "~") != 1 ||
+				strings.ContainsAny(r.translation, "^\n\r") {
+				r.fontReason = "missing-or-invalid-translation"
+				continue
+			}
+			r.translation = strings.Replace(r.translation, "~", "", 1)
+			var mask fontMask
+			maskBytes, readErr := os.ReadFile(filepath.Join(*optionRowsFonts, strings.ReplaceAll(r.id, ":", "-")+".json"))
+			if readErr != nil || json.Unmarshal(maskBytes, &mask) != nil {
+				r.fontReason = "font-mask-unavailable"
+			} else if mask.CandidateID != r.id || mask.CatalogHash != hash(catalogBytes) ||
+				mask.FontHash != fontHash || mask.TranslationHash != hash([]byte(r.translation)) ||
+				mask.FontSize != optionRowSizes[i] {
+				r.fontReason = "font-binding-mismatch"
+			} else if mask.Width != optionRowInk[i].X || mask.Height != optionRowInk[i].Y ||
+				len(mask.Alpha) != mask.Width*mask.Height {
+				r.fontReason = "font-mask-out-of-bounds"
+			} else {
+				r.ink = image.NewAlpha(image.Rect(0, 0, mask.Width, mask.Height))
+				copy(r.ink.Pix, mask.Alpha)
+			}
+			if *missing {
+				r.ink = nil
+				r.fontReason = "missing-ink"
+			}
+		}
+	}
 	m := golem.New()
 	must(m.LoadEXE(read(filepath.Join(*root, "OPENING.EXE"))))
 	m.Write8(uint32(golem.PSPSeg)*16+0x80, 2)
@@ -627,13 +751,78 @@ func main() {
 		events = append(events, map[string]any{"candidate_id": title.id, "stage": "expired", "step": m.Steps, "reason": reason})
 		title.phase, title.patch, title.before, title.afterSafe = "expired", nil, nil, nil
 	}
-	if !*control && ((caption != nil && caption.ink != nil) || (title != nil && title.ink != nil)) {
+	rowsAnyInk := false
+	if rows != nil {
+		for _, r := range rows.rows {
+			rowsAnyInk = rowsAnyInk || r.ink != nil
+		}
+	}
+	rowExpire := func(r *optionRow, reason string) {
+		if r.phase == "idle" || r.phase == "expired" {
+			return
+		}
+		events = append(events, map[string]any{"candidate_id": r.id, "stage": "expired", "step": m.Steps, "reason": reason})
+		r.phase, r.patch, r.before, r.afterSafe = "expired", nil, nil, nil
+	}
+	rowsExpire := func(reason string) {
+		if rows == nil {
+			return
+		}
+		if rows.phase == "reading" || rows.phase == "waiting-screen" {
+			events = append(events, map[string]any{"candidate_id": "GAME.TXT:options-rows", "stage": "expired", "step": m.Steps, "reason": reason})
+			rows.phase = "expired"
+		}
+		for _, r := range rows.rows {
+			rowExpire(r, reason)
+		}
+	}
+	if !*control && ((caption != nil && caption.ink != nil) || (title != nil && title.ink != nil) || rowsAnyInk) {
 		m.WatchWrites(0x2cae0, 0x2cae0+64000, func(a uint32, old, value uint8) {
 			if old == value {
 				return
 			}
 			cs, ip := m.CPU.OpAddr()
 			x, y := int(a-0x2cae0)%320, int(a-0x2cae0)/320
+			if rows != nil && rows.phase == "reading" {
+				row := -1
+				for i := range rows.rows {
+					if image.Pt(x, y).In(optionRowSafe(i)) {
+						row = i
+					}
+				}
+				if cs != 0x0d21 || ip != 0x012c {
+					// 點擊重印時原版以 0CAE:00A8 在事件中途畫被點列的反白底圖；只接受尚未印字的列、
+					// 左側圖示欄與反白條右端，已印字列被改即撤銷。
+					if cs != 0x0cae || ip != 0x00a8 || y < 59 || y >= 155 || x < 60 || x >= 260 ||
+						(row >= 0 && rows.rows[row].writes != 0) {
+						rowsExpire("unexpected-canvas-writer")
+					}
+				} else if value != 47 && value != 68 && value != 128 && value != 149 {
+					rowsExpire("write-outside-reviewed-colors")
+				} else if row < 0 {
+					// 核取圖示在八列安全矩形左側；其他位置一律拒絕。
+					if x < 70 || x >= 80 || y < 59 || y >= 155 {
+						rowsExpire("write-outside-reviewed-pixels")
+					} else if rows.outside++; rows.outside > 344 {
+						rowsExpire("write-count-exceeded")
+					}
+				} else {
+					r := rows.rows[row]
+					if r.writes == 0 {
+						r.before = bytes.Clone(canvas())
+						r.before[a-0x2cae0] = old
+						bg := hash(optionRowSafeBytes(r.before, row))
+						if bg != optionRowBackgrounds[row%2][0] && bg != optionRowBackgrounds[row%2][1] {
+							rowsExpire("row-background-not-reviewed")
+							return
+						}
+					}
+					r.writes++
+					if r.writes > optionRowWrites[row] {
+						rowsExpire("write-count-exceeded")
+					}
+				}
+			}
 			if caption != nil && caption.phase == "reading" {
 				if cs != 0x0d21 || ip != 0x012c {
 					captionExpire("unexpected-canvas-writer")
@@ -836,6 +1025,37 @@ func main() {
 					}
 				}
 			}
+			if rows != nil && rowsAnyInk && cs == 0x0d21 && ip == 0x00c6 {
+				a := uint32(c.Seg[golem.SS])*16 + uint32(c.R[golem.BX])
+				base := a &^ 1
+				if rows.phase != "reading" && (base == 0x2adde || base == 0x2ae46) && a == base &&
+					m.VideoMode() == 0x13 && (m.Mem[a] == '[' || m.Mem[a] == ']') {
+					// 新的整組事件：舊權杖一律作廢，改以本次原版輸出為準。
+					rowsExpire("superseded-by-new-print")
+					rows.phase, rows.base, rows.readPos, rows.outside = "reading", base, 0, 0
+					rows.startStep, rows.openedCount = m.Steps, len(d.Opened)
+					for _, r := range rows.rows {
+						r.phase, r.writes, r.before, r.patch, r.afterSafe = "reading", 0, nil, nil, nil
+					}
+					events = append(events, map[string]any{"candidate_id": "GAME.TXT:options-rows", "stage": "source", "step": m.Steps, "entry_ip": "0D21:00C6", "source_linear": a})
+				}
+				if rows.phase == "reading" {
+					p := rows.readPos
+					want := byte(0)
+					if p < len(rows.expect) {
+						want = rows.expect[p]
+					}
+					got := m.Mem[a]
+					ok := p < len(rows.expect) && a == rows.base+uint32(p%2) &&
+						(got == want || (want == 0xff && (got == '[' || got == ']')))
+					if !ok {
+						rowsExpire("source-read-mismatch")
+					} else if rows.readPos++; rows.readPos == len(rows.expect) {
+						rows.completeStep = m.Steps
+						rows.phase = "waiting-screen"
+					}
+				}
+			}
 			if prompt != nil && cs == 0x0e2d && ip == 0x09f4 &&
 				uint32(c.Seg[golem.DS])*16+uint32(c.R[golem.SI]) == prompt.linear &&
 				prompt.patch == nil && prompt.before == nil && m.VideoMode() == 0x13 &&
@@ -1018,6 +1238,63 @@ func main() {
 					}
 				} else if !bytes.Equal(optionsTitleSafeBytes(canvas()), title.afterSafe) {
 					titleExpire("canvas-title-changed")
+				}
+			}
+		}
+		if rows != nil && rowsAnyInk && !*control {
+			if rows.phase == "reading" && m.Steps-rows.startStep > 2000000 {
+				rowsExpire("source-read-timeout")
+			}
+			if m.VideoMode() != 0x13 || (rows.phase != "idle" && rows.phase != "expired" && len(d.Opened) != rows.openedCount) {
+				rowsExpire("mode-or-file-changed")
+			}
+			if rows.phase == "waiting-screen" {
+				complete := rows.outside == 344
+				for i, r := range rows.rows {
+					complete = complete && r.writes == optionRowWrites[i] && r.before != nil
+				}
+				if !complete {
+					if m.Steps-rows.completeStep > 2000000 {
+						rowsExpire("incomplete-reviewed-output")
+					}
+				} else {
+					rows.phase = "complete"
+					rows.accepted++
+					for _, r := range rows.rows {
+						r.phase, r.waitSince = "waiting-screen", m.Steps
+					}
+				}
+			}
+			if rows.phase == "complete" {
+				for i, r := range rows.rows {
+					switch r.phase {
+					case "waiting-screen":
+						after := optionRowSafeBytes(canvas(), i)
+						// 游標疊在真 VGA 上會讓該列暫時不同；壓在該列時不計入同步逾時，啟用仍須逐點相同。
+						x, y := int(d.Mouse.X), int(d.Mouse.Y)
+						if image.Rect(x, y, x+16, y+16).Overlaps(optionRowSafe(i)) {
+							r.waitSince = m.Steps
+						}
+						if m.Steps-r.waitSince > 2000000 {
+							rowExpire(r, "screen-sync-timeout")
+						} else if bytes.Equal(after, optionRowSafeBytes(m.Mem[0xa0000:0xafa00], i)) {
+							var err error
+							r.patch, err = overlay.NewPatch(r.before, canvas(), 320, 200, optionRowSafe(i))
+							if err != nil {
+								rowExpire(r, "invalid-observed-patch")
+							} else {
+								r.afterSafe = after
+								r.phase = "active"
+								r.accepted++
+								events = append(events, map[string]any{"candidate_id": r.id, "stage": "active", "step": m.Steps,
+									"background_sha256": hash(optionRowSafeBytes(r.before, i)), "changed_pixels": r.writes})
+							}
+						}
+					case "active":
+						if !bytes.Equal(optionRowSafeBytes(canvas(), i), r.afterSafe) {
+							rowExpire(r, "canvas-row-changed")
+						}
+					}
 				}
 			}
 		}
@@ -1244,6 +1521,7 @@ func main() {
 				}
 				lineRecords = append(lineRecords, map[string]any{"candidate_id": caption.id, "applied": captionApplied, "reason": captionReason, "accepted_events": caption.accepted})
 			}
+			optionsTitleShown := false
 			if title != nil {
 				titleReason := title.phase
 				titleApplied := false
@@ -1268,6 +1546,7 @@ func main() {
 							r := image.Rect(268, 188, 490, 220)
 							draw.DrawMask(output, r, image.NewUniform(fg), image.Point{}, title.ink, title.ink.Bounds().Min, draw.Over)
 							titleApplied, applied = true, true
+							optionsTitleShown = true
 							title.appliedFrames++
 							reason = "applied"
 						}
@@ -1276,6 +1555,49 @@ func main() {
 					titleReason = "other-overlay-active"
 				}
 				lineRecords = append(lineRecords, map[string]any{"candidate_id": title.id, "applied": titleApplied, "reason": titleReason, "accepted_events": title.accepted})
+			}
+			if rows != nil {
+				// 標題與八列安全矩形互不重疊，可同幀並存；其他覆蓋啟用時八列保留原文。
+				otherActive := applied && !optionsTitleShown
+				rowApplied := false
+				for i, r := range rows.rows {
+					reason, ok := r.phase, false
+					if r.ink == nil {
+						reason = r.fontReason
+					} else if r.phase == "active" && r.patch != nil && otherActive {
+						reason = "other-overlay-active"
+					} else if r.phase == "active" && r.patch != nil {
+						x, y := int(d.Mouse.X), int(d.Mouse.Y)
+						// 守住中譯前景與陰影在原版座標的覆蓋範圍（四倍座標向外取整）。
+						inkArea := image.Rect(82, 61+12*i, (328+optionRowInk[i].X+4+3)/4, (244+48*i+optionRowInk[i].Y+4+3)/4)
+						if d.Mouse.Buttons != 0 || image.Rect(x, y, x+16, y+16).Overlaps(inkArea) {
+							reason = "cursor-or-button-over-row"
+						} else if !bytes.Equal(optionRowSafeBytes(indexed, i), r.afterSafe) {
+							reason = "vga-safe-mismatch"
+						} else {
+							frame, composed, why, err := overlay.Compose(indexed, m.DAC[:], 320, 200, 4,
+								r.patch, r.ink, image.Pt(332, 248+48*i), 47, enabled)
+							must(err)
+							reason = why
+							if composed {
+								safe := image.Rect(320, 236+48*i, 1008, 284+48*i)
+								draw.Draw(output, safe, frame, safe.Min, draw.Src)
+								p := 68 * 3
+								fg := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
+								at := image.Pt(328, 244+48*i)
+								draw.DrawMask(output, image.Rectangle{Min: at, Max: at.Add(r.ink.Bounds().Size())},
+									image.NewUniform(fg), image.Point{}, r.ink, r.ink.Bounds().Min, draw.Over)
+								ok, rowApplied = true, true
+								r.appliedFrames++
+							}
+						}
+					}
+					lineRecords = append(lineRecords, map[string]any{"candidate_id": r.id, "applied": ok, "reason": reason, "accepted_events": r.accepted})
+				}
+				if rowApplied {
+					applied = true
+					reason = "applied"
+				}
 			}
 		}
 		rec := map[string]any{"step": m.Steps, "applied": applied, "reason": reason, "pending": anyPending, "dropped": len(drops), "events": len(events), "lines": lineRecords}

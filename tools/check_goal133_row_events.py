@@ -52,18 +52,21 @@ def row_of(point, safe):
 
 def group(events, safe):
     """原版逐字讀一字、畫一字；同一組讀取位址且讀字間隔不超過 GAP 步者歸同一次印字，其間改色屬之。"""
-    gap = 5000
+    gap = 50000
     prints, current = [], None
     for event in events:
         if event["k"] == "r":
             base = event["a"] & ~1
-            if current is None or base != current["base"] or event["s"] - current["last_read"] > gap:
+            if (current is None or base != current["base"] or event["s"] - current["last_read"] > gap or
+                    (base in ROW_BUFFERS and len(current["reads"]) == 268)):
                 current = {"base": base, "reads": [], "writes": [], "last_read": event["s"]}
                 prints.append(current)
             current["reads"].append(event)
             current["last_read"] = event["s"]
-        elif current is not None:
+        elif event["k"] == "w" and current is not None:
             current["writes"].append(event)
+        elif event["k"] == "x" and current is not None:
+            current.setdefault("others", []).append(event)
     result = []
     for item in prints:
         reads = item["reads"]
@@ -85,8 +88,33 @@ def group(events, safe):
             "write_bbox": [min(xs), min(ys), max(xs) + 1, max(ys) + 1] if xs else None,
             "write_rows": {str(key): value for key, value in sorted(rows.items(), key=lambda kv: str(kv[0]))},
             "new_colors": sorted({write["n"] for write in item["writes"]}),
+            "other_writers": other_writers(item, safe),
         })
     return result
+
+
+def other_writers(item, safe):
+    """事件期間（首讀至末筆 0D21:012C）其他寫入者：依寫入者與「該列是否已開始印字」分類計數。"""
+    if not item["writes"]:
+        return {}
+    start, end = item["reads"][0]["s"], item["writes"][-1]["s"]
+    started, first_text = set(), {}
+    for write in item["writes"]:
+        index = row_of((write["x"], write["y"]), safe)
+        if index not in (None, 0):
+            first_text.setdefault(index, write["s"])
+    counts = {}
+    for other in item.get("others", []):
+        if not start <= other["s"] <= end:
+            continue
+        index = row_of((other["x"], other["y"]), safe)
+        if index in (None, 0):
+            where = "icon" if other["x"] < 80 else "right-edge" if other["x"] >= 252 else "outside"
+        else:
+            where = "row-started" if other["s"] > first_text.get(index, end + 1) else "row-unstarted"
+        key = other["ip"] + "|" + where
+        counts[key] = counts.get(key, 0) + 1
+    return counts
 
 
 def frames_by_row(frames, count):
@@ -172,6 +200,8 @@ def verify(result):
              len({address & ~1 for address in item["read_linear"]}) == 1 and
              item["operand_matches_address"], "整組印字讀取位址或運算元不符")
         need(item["write_rows"] == ROW_WRITES, "逐列改色點數不符")
+        need(all(key.startswith("0CAE:00A8|") and key.split("|")[1] in ("row-unstarted", "icon", "right-edge")
+                 for key in item["other_writers"]), "事件期間有其他寫入者改動已印字列或未審查位置")
         item["check_prefix"] = "".join(prefix)
     stable = [entry for entry in result["reprint_backgrounds"] if not entry.get("skipped")]
     for entry in stable:

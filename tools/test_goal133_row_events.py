@@ -58,6 +58,10 @@ def main():
         entry["rows"][1]["pre_sha256"] = entry["rows"][0]["pre_sha256"]
     must_reject("奇偶列底圖", tampered(background))
 
+    def other_writer(r):
+        groups(r)[0]["other_writers"] = {"0CAE:00A8|row-started": 1}
+    must_reject("已印字列被其他寫入者改動", tampered(other_writer))
+
     with tempfile.TemporaryDirectory(prefix="goal133-rows-") as temp:
         temp = Path(temp)
         for path in args.reports.glob(f"{args.name}-*"):
@@ -65,11 +69,11 @@ def main():
                 (temp / path.name).symlink_to(path.resolve())
         target = temp / f"{args.name}-b.row-events.json"
         data = json.loads(target.read_text())
-        data["events"][0]["v"] ^= 1
+        next(e for e in data["events"] if e["k"] == "r")["v"] ^= 1
         target.unlink()
         target.write_text(json.dumps(data))
         must_reject("雙冷啟動不一致", lambda: analyze(temp, args.game, args.name))
-    print("goal133-rows：六項篡改負例 PASS")
+    print("goal133-rows：七項篡改負例 PASS")
 
 
 if __name__ == "__main__":

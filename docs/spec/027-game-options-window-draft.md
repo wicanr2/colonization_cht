@@ -4,10 +4,10 @@
 25／28／28／25／28／28／27／28px；排除 B 的38／28／32／32／28／32／32／31／32px。
 這是逐欄、貼近各欄原版字高的正式**字級選擇**，不會自動把規格升為
 READY：上游來源鏈、`~` 快捷鍵可見資訊、執行期逐幀守門、游標與反白
-回退及真視窗同狀態驗收仍須個別閉合。標題以外八列目前仍顯示英文；快捷鍵呈現已定為「(I) 顯示原住民行動」。下文各段
+回退及真視窗同狀態驗收仍須個別閉合。九欄在明示旗標時已顯示中文（規格030、031）；快捷鍵呈現為「(I) 顯示原住民行動」。下文各段
 「尚待選 A／B」只敘述當時的證據狀態，皆由本段決定更新。
 
-2026-09-25 標題一欄：無快捷鍵標記的標題已由[規格030](030-game-options-title-a-ready.md)限定 CONFORMED；八列的輸出契約已由[規格031](031-game-options-rows-a-ready.md)升限定 READY，正式中文仍待 CONFORMED；本規格保留為九欄證據彙整，維持 DRAFT。
+2026-09-25 標題一欄：無快捷鍵標記的標題已由[規格030](030-game-options-title-a-ready.md)限定 CONFORMED；八列已由[規格031](031-game-options-rows-a-ready.md)限定 CONFORMED；本規格保留為九欄證據彙整，維持 DRAFT。
 
 狀態：DRAFT；日期：2026-09-24。入口：[目標112](../goals/112-game-options-chinese-display.md)、[目標113](../goals/113-game-options-background-and-preview.md)、[目標114](../goals/114-game-options-print-buffer-dataflow.md)、[目標116](../goals/116-game-options-selection-and-exit-phases.md)、[目標117](../goals/117-game-options-same-focus-checkmarks.md)、[目標118](../goals/118-game-options-remaining-rows.md)、[目標119](../goals/119-game-options-click-phase.md)、[目標122](../goals/122-game-options-nine-field-state-guard.md)、[目標110](../goals/110-tutorial-hints-player-trigger.md)、[目標111](../goals/111-tutorial-hints-state-and-first-help.md)。本規格尚**不授權正式 Ebitengine 覆蓋**。
 

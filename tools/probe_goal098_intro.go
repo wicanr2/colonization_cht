@@ -234,8 +234,12 @@ func main() {
 			panic("字幕後玩家事件數量不符")
 		}
 		previous := uint64(1225000000)
+		granularity := uint64(1000000)
+		if *rowEventFrom != 0 {
+			granularity = 100000 // 目標134：重現真視窗 0.2M 內按下／放開的快速點擊
+		}
 		for _, e := range lateInputs {
-			if e.Step <= previous || e.Step >= *followUntil || e.Step%1000000 != 0 ||
+			if e.Step <= previous || e.Step >= *followUntil || e.Step%granularity != 0 ||
 				e.Step%25000000 == 0 {
 				panic("字幕後玩家事件必須位於遞增的百萬步檢查點之間")
 			}
@@ -623,11 +627,16 @@ func main() {
 		}
 		m.WatchWrites(writeLo, canvas+64000, func(a uint32, old, value uint8) {
 			if *rowEventFrom != 0 && a >= canvas && m.Steps >= *rowEventFrom && m.Steps < *followUntil {
-				if cs, ip := m.CPU.OpAddr(); cs == 0x0d21 && ip == 0x012c {
-					x, y := int(a-canvas)%320, int(a-canvas)/320
+				cs, ip := m.CPU.OpAddr()
+				x, y := int(a-canvas)%320, int(a-canvas)/320
+				if cs == 0x0d21 && ip == 0x012c {
 					if x >= 60 && x < 260 && y >= 40 && y < 160 {
 						rowRecord(map[string]any{"k": "w", "s": m.Steps, "x": x, "y": y, "o": old, "n": value})
 					}
+				} else if x >= 60 && x < 260 && y >= 59 && y < 155 {
+					// 其他寫入者（底圖、反白、游標等）只記位置與 CS:IP，供辨識閘門外的改色。
+					rowRecord(map[string]any{"k": "x", "s": m.Steps, "x": x, "y": y, "o": old, "n": value,
+						"ip": fmt.Sprintf("%04X:%04X", cs, ip)})
 				}
 			}
 			if a < canvas {

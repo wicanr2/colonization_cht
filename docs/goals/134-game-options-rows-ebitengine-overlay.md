@@ -1,6 +1,6 @@
 # 目標134：遊戲選項八列接正式 Ebitengine
 
-狀態：進行中；開始：2026-09-25。承接[目標133](133-game-options-rows-hotkey-and-print-events.md)與[規格031（限定 READY）](../spec/031-game-options-rows-a-ready.md)。對應既有 [Issue #11](https://github.com/wicanr2/colonization_cht/issues/11)、[Issue #12](https://github.com/wicanr2/colonization_cht/issues/12)、[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)。
+狀態：完成（遊戲選項九欄）；開始與完成：2026-09-25。承接[目標133](133-game-options-rows-hotkey-and-print-events.md)與[規格031（限定 READY）](../spec/031-game-options-rows-a-ready.md)。對應既有 [Issue #11](https://github.com/wicanr2/colonization_cht/issues/11)、[Issue #12](https://github.com/wicanr2/colonization_cht/issues/12)、[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)。
 
 ## 工作與退出條件
 
@@ -9,6 +9,12 @@
 3. 用真玩家輸入重播做中英同輸入對拍：開窗、懸停、點擊一列、ESC。原版完整狀態相同、差分只在八列安全區；標題與既有十九欄不退步；缺譯／重複鍵／缺字模／錯字級等負例回英文。
 4. 真 GUI 以真鍵鼠走到選項視窗並點擊一列，現場截圖與重播逐像素一致，才將規格031標為 CONFORMED。
 5. 更新 `CONTEXT.md`、`RESEARCH-LOG.md`、`WORKLOG.md`、`docs/worklist.json` 與 Issue，私有推送並回讀。
+
+## 本輪結果
+
+- 規格031 升限定 CONFORMED，遊戲選項視窗九欄在明示 `-game-options-title-a -game-options-rows-a` 時全部顯示中文；正式中文欄位由十九段增為二十七段。驗收細節見[規格031](../spec/031-game-options-rows-a-ready.md)。
+- 真 GUI 前兩次未達標，都修正後重跑：一次是腳本點擊後立即移開游標，模擬慢於牆鐘，使移動與按下同批送達而點到視窗外、關閉選項（八列正確撤銷）；另一次是點擊重印中途 `0CAE:00A8` 畫反白底圖被閘門誤判，以及游標壓列時同步逾時。後兩者以快速點擊探針補證據後修正閘門，並寫入規格031。
+- 其餘未驗：鍵盤快捷鍵切換、其他國家、存檔後開窗。
 
 ## 停止線
 
