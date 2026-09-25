@@ -2483,3 +2483,10 @@
 - 規格030升限定 CONFORMED；目標131、132標完成；規格027補標題指標、其餘八列仍 DRAFT；README 現況由十七段更正為十九段（含目標130字幕與本欄，均需明示旗標）；worklist Issue #11／#12／#14／#26 備註回填。
 - 稽核：本輪容器皆 `--rm`，`docker ps -a` 無本專案殘留，其他專案容器未動；原版 zip／rar／解包目錄仍為忽略狀態；隔離 dosgolem 仍為 `9dd36726`、`upstream` 推送 `DISABLED`。repo 根目錄有一個 2026-09-24 22:44 由 root 建立的空目錄 `original/`，推測是先前 docker 掛載來源不存在時由 dockerd 代建；本輪未刪，待使用者處理。原版像素、截圖、RAM 與完整收據只在忽略的 `workplace/`。
 - 收尾：成果 `5326216` 已推送 PRIVATE `origin/main`；主機 `gh auth status` 成功、遠端仍 PRIVATE。[Issue #11](https://github.com/wicanr2/colonization_cht/issues/11#issuecomment-5825680739)、[Issue #12](https://github.com/wicanr2/colonization_cht/issues/12#issuecomment-5825680912)、[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26#issuecomment-5825681077) 已留言並回讀，三者維持 OPEN。
+
+## 2026-09-25：目標133遊戲選項八列證據與規格031限定 READY
+
+- 使用者決定八列快捷鍵：先問位置再問顏色，定為字母前置、半形括號、同色（例：「(I) 顯示原住民行動」）。已記入 CONTEXT、規格027、目標133 與 TSV 備註；`prepare_goal113_options_preview.py` 的格式檢查同步改為新格式。
+- 改 TSV 後確認只有字幕與標題兩個字模綁整份 TSV，重烘後 Alpha 不變；兩個既有回歸點重播與目標132收據逐項相同。
+- 探針首跑兩次失敗：缺 `-post-caption-audit`、逐列點擊輸入超過原有 12 筆上限（只在新模式放寬到 40）。分析器首版按單字分組、又誤把被快速重印取代的中間事件當錯，均已修正並寫成規則：只對事件後穩定畫布重建底圖。
+- 新增規格031（限定 READY）與目標134；README 未改（正式中文數不變）。本輪容器皆 `--rm`，無殘留；隔離 dosgolem 仍 `9dd36726`、`upstream` 推送 `DISABLED`。原版像素、畫布、RAM 與截圖只在 `workplace/`。

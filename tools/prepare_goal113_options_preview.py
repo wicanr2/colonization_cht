@@ -6,6 +6,7 @@ import base64
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
@@ -114,8 +115,10 @@ def prepare(args):
               max(x for x, _ in points) + 1, max(y for _, y in points) + 1) == changed_box,
              "原文印字差分或底圖相位不符：" + name)
         translated = rows[keys[index]]["zh_hant"].replace("~", "")
-        need("~" not in translated and (index == 0 or "（" in translated),
-             "預覽未保留可見 ASCII 快捷鍵：" + name)
+        # 使用者2026-09-25定案：快捷鍵字母前置、半形括號加空格、與中文同色。
+        need("~" not in translated and
+             (index == 0 or re.fullmatch(r"\([\x21-\x7e]\) \S.*", translated)),
+             "預覽未依定案格式保留可見 ASCII 快捷鍵：" + name)
         size = faithful if args.variant == "faithful" else readable
         font = ImageFont.truetype(str(args.font), size)
         left, top, right, bottom = font.getbbox(translated)

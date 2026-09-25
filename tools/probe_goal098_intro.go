@@ -81,6 +81,9 @@ func main() {
 	retireResidentAudit := flag.Bool("retire-resident-audit", false, "目標127：與近端監看互斥，追退休框高位址常駐字串寫入；預設關閉")
 	optionsResidentAudit := flag.Bool("options-resident-audit", false, "目標114：互斥觀測九欄高位址 RAM 來源的寫入者")
 	optionsPhaseSamples := flag.String("options-phase-samples", "", "目標119：選項點擊附近額外取樣的遞增絕對指令步數，逗號分隔；預設關閉")
+	rowEventFrom := flag.Uint64("row-event-from", 0, "目標133：自此原版步數起記錄 0D21:00C6 讀字、0D21:012C 改色與九欄逐幀雜湊；0 為關閉")
+	rowCanvasDump := flag.Bool("row-canvas-dump", false, "目標133：九欄雜湊變化的畫格另存整張原版畫布")
+	rowEventCanvasUntil := flag.Uint64("row-canvas-until", 1450000000, "目標133：畫布另存的最後步數，避免離窗後地圖動畫灌檔")
 	optionsTitleScreenAudit := flag.String("options-title-screen-audit", "", "目標131：固定1,300M原版畫布檔路徑；逐幀核對選項標題的底層與真 VGA")
 	allowEarlyExit := flag.Bool("allow-early-exit", false, "目標123：只在後續正常玩家路徑觀測 DOS 提前結束，保留真實終止步數；預設關閉")
 	scratch := flag.String("scratch", "", "目標125：原版唯讀 Root 外的跨次 DOS 暫存層；預設關閉")
@@ -170,6 +173,10 @@ func main() {
 	if *optionsTitleScreenAudit != "" && (!*optionsPreprint || *captionFrameAudit || *followUntil < 1375000000) {
 		panic("選項標題逐幀審計需九欄印前證據、至少1375M終點，且不可與字幕逐幀審計混用")
 	}
+	if *rowEventFrom != 0 && (*optionsTitleScreenAudit != "" || *captionFrameAudit || *gameInputsPath == "" ||
+		*followUntil <= *rowEventFrom) {
+		panic("九欄事件記錄需玩家輸入、終點晚於起點，且不可與標題或字幕逐幀審計混用（onFrame 只有一組）")
+	}
 	if *optionsWriterAudit && !*optionsPreprint {
 		panic("印字緩衝來源稽核需同時啟用逐欄印前底圖")
 	}
@@ -219,6 +226,9 @@ func main() {
 		maxInputs := 12
 		if *scratch != "" {
 			maxInputs = 30
+		}
+		if *rowEventFrom != 0 {
+			maxInputs = 40 // 目標133逐列點擊八列需32筆
 		}
 		if len(lateInputs) == 0 || len(lateInputs) > maxInputs {
 			panic("字幕後玩家事件數量不符")
@@ -445,8 +455,37 @@ func main() {
 	if *afterFollow != "none" {
 		observeEnd = *followUntil
 	}
+	// 目標133：九欄半開安全矩形（320×200 原版畫布座標），依序為標題與八列。
+	rowSafe := [9][4]int{{65, 44, 253, 59}}
+	for i := 1; i < 9; i++ {
+		rowSafe[i] = [4]int{80, 59 + 12*(i-1), 252, 71 + 12*(i-1)}
+	}
+	rowSafeHash := func(buf []byte, i int) string {
+		r := rowSafe[i]
+		var part []byte
+		for y := r[1]; y < r[3]; y++ {
+			part = append(part, buf[y*320+r[0]:y*320+r[2]]...)
+		}
+		return hashIntro(part)[:16]
+	}
+	rowEvents := []map[string]any{}
+	rowFrames := []map[string]any{}
+	rowLast := ""
+	rowRecord := func(entry map[string]any) {
+		if len(rowEvents) >= 400000 {
+			panic("九欄事件超出記錄上限")
+		}
+		rowEvents = append(rowEvents, entry)
+	}
 	if !*control {
 		m.WatchReads(0x20000, 0x80000, func(a uint32, value uint8) {
+			if *rowEventFrom != 0 && m.Steps >= *rowEventFrom && m.Steps < *followUntil {
+				if cs, ip := m.CPU.OpAddr(); cs == 0x0d21 && ip == 0x00c6 {
+					c := m.CPU
+					rowRecord(map[string]any{"k": "r", "s": m.Steps, "a": a, "v": value,
+						"op": uint32(c.Seg[golem.SS])*16 + uint32(c.R[golem.BX])})
+				}
+			}
 			if *optionsTitleScreenAudit != "" && m.Steps >= 1253400000 && m.Steps < 1253500000 &&
 				titleReadEnd == 0 && (a == 0x2ac78 || a == 0x2ac79) {
 				cs, ip := m.CPU.OpAddr()
@@ -583,6 +622,14 @@ func main() {
 			writeLo = 0x2ac00
 		}
 		m.WatchWrites(writeLo, canvas+64000, func(a uint32, old, value uint8) {
+			if *rowEventFrom != 0 && a >= canvas && m.Steps >= *rowEventFrom && m.Steps < *followUntil {
+				if cs, ip := m.CPU.OpAddr(); cs == 0x0d21 && ip == 0x012c {
+					x, y := int(a-canvas)%320, int(a-canvas)/320
+					if x >= 60 && x < 260 && y >= 40 && y < 160 {
+						rowRecord(map[string]any{"k": "w", "s": m.Steps, "x": x, "y": y, "o": old, "n": value})
+					}
+				}
+			}
 			if a < canvas {
 				if *retireFlowAudit && m.Steps >= 1253240000 && m.Steps < 1253355000 &&
 					a < 0x2b180 && len(retireFlowWrites) < 50000 {
@@ -814,6 +861,32 @@ func main() {
 			}
 			if captionPhase == "ready" {
 				captionEligibleFrames++
+			}
+		})
+	}
+	if *rowEventFrom != 0 && !*control {
+		m.SetOnFrame(func() {
+			if m.Steps < *rowEventFrom || m.Steps > *followUntil {
+				return
+			}
+			base := m.Mem[canvas : canvas+64000]
+			indexed := m.Indexed()
+			rows, vga := make([]string, 9), make([]string, 9)
+			for i := range rowSafe {
+				rows[i], vga[i] = rowSafeHash(base, i), rowSafeHash(indexed, i)
+			}
+			key := fmt.Sprint(m.VideoMode(), rows, vga)
+			if key == rowLast {
+				return
+			}
+			rowLast = key
+			if len(rowFrames) >= 20000 {
+				panic("九欄畫格變化超出記錄上限")
+			}
+			rowFrames = append(rowFrames, map[string]any{"s": m.Steps, "frame": m.Frames,
+				"mode": m.VideoMode(), "canvas": rows, "vga": vga})
+			if *rowCanvasDump && m.Steps < *rowEventCanvasUntil {
+				mustIntro(os.WriteFile(fmt.Sprintf("%s.rowframe-%d.canvas", *out, m.Steps), base, 0644))
 			}
 		})
 	}
@@ -1331,6 +1404,15 @@ func main() {
 				"canvas_sha256": hashIntro(b), "writer_ip": "0D21:012C"}
 		}
 		report["preprint"] = preprintReceipt
+	}
+	if *rowEventFrom != 0 && !*control {
+		rb, rerr := json.Marshal(map[string]any{"version": "goal133-row-events-v1",
+			"from": *rowEventFrom, "until": *followUntil, "safe": rowSafe,
+			"events": rowEvents, "frames": rowFrames})
+		mustIntro(rerr)
+		mustIntro(os.WriteFile(*out+".row-events.json", append(rb, '\n'), 0644))
+		report["row_event_count"] = len(rowEvents)
+		report["row_frame_changes"] = len(rowFrames)
 	}
 	b, err := json.MarshalIndent(report, "", "  ")
 	mustIntro(err)

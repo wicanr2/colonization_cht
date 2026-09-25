@@ -1,6 +1,6 @@
 # 目前脈絡
 
-進行中：[目標133](docs/goals/133-game-options-rows-hotkey-and-print-events.md)處理遊戲選項八列。使用者已定快捷鍵呈現：英文字母放中文前、半形括號、與中文同色，例如「(I) 顯示原住民行動」。本輪先改譯稿、重烘並量八列版面，再追八列當次印字與反白重印事件；八列仍英文、規格027仍 DRAFT。
+進行中：[目標134](docs/goals/134-game-options-rows-ebitengine-overlay.md)依[規格031](docs/spec/031-game-options-rows-a-ready.md)（限定 READY）把遊戲選項八列接到正式 Ebitengine。[目標133](docs/goals/133-game-options-rows-hotkey-and-print-events.md)已完成：快捷鍵呈現定為字母前置、半形括號、同色，例如「(I) 顯示原住民行動」；八列由同一次 `0D21:00C6` 268 次讀字事件印出，逐列改色點數固定，印前底圖在事件中逐列畫上且只有奇偶列各兩種；懸停不重印，點擊重印三次，ESC 回原底圖。既有十九欄回歸不退步。八列目前仍英文。
 
 目前真相：[目標132](docs/goals/132-game-options-title-event-and-overlay.md)已將無快捷鍵標記的遊戲選項標題 A／34px「遊戲選項設定」接到明示 `-game-options-title-a` 的 Ebitengine 視窗；[規格030](docs/spec/030-game-options-title-a-ready.md)只在此版、此欄、英格蘭正常玩家路徑限定 CONFORMED。閘門是當次 `0D21:00C6` 32次讀字、`0D21:012C` 319點改色、標題局部印前／印後底圖與真 VGA 同步，不用整張畫布 SHA。1280M 中／英同原版狀態，ESC 離窗撤銷，游標遮擋暫回英文，缺譯／重複鍵／過長／錯字模／缺字模載入回退；真 GUI 真鍵鼠從冷啟動走到標題，1280M 現場 PNG 與重播逐像素一致。此為第十九個**需啟用旗標**的正式中文欄位。[規格027](docs/spec/027-game-options-window-draft.md)其餘八列仍 DRAFT、仍英文；八列 `~` 快捷鍵呈現已由使用者決定（見目標133）。[目標131](docs/goals/131-game-options-title-a-runtime-gate.md)的真 VGA 晚一幀與 ESC 失效證據已由目標132吸收。
 
