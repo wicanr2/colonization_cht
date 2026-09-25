@@ -10,7 +10,7 @@ from PIL import Image, ImageChops
 
 
 PAGE_A, PAGE_B = "GAME.TXT:@NATION0A", "GAME.TXT:@NATION0B"
-SOURCE = "GAME.TXT:@NATION0"
+SOURCE = ("GAME.TXT:@NATION0", "GAME.TXT:@NATION")  # 目標136起來源事件鍵不分國家
 PANEL = (32, 32, 1248, 768)  # 四倍輸出的木紋頁內；中文只能改動這個範圍
 
 
@@ -41,7 +41,7 @@ def same_state(live, control, why):
 
 
 def page_events(report):
-    return [e for e in report["events"] if e.get("candidate_id", "").startswith("GAME.TXT:@NATION0")]
+    return [e for e in report["events"] if e.get("candidate_id", "").startswith("GAME.TXT:@NATION")]
 
 
 def check_page(live_prefix, control_prefix, page, steps):
@@ -58,7 +58,7 @@ def check_page(live_prefix, control_prefix, page, steps):
                          e["changed_pixels"] == (14193 if page == PAGE_A else 2932) for e in actives),
          f"{page}：啟用事件的可見字數或改色點數不符")
     first = min(e["step"] for e in actives)
-    sources = [e for e in events if e["candidate_id"] == SOURCE and e["stage"] == "source" and e["step"] < first]
+    sources = [e for e in events if e["candidate_id"] in SOURCE and e["stage"] == "source" and e["step"] < first]
     need(sources and sources[-1]["source_linear"] == 0x2A862 and sources[-1]["entry_ip"] == "0D21:00C6",
          f"{page}：缺當次整頁印字來源事件")
     for frame in report["frames"]:

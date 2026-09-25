@@ -1,6 +1,6 @@
 # 目標136：法國、西班牙、荷蘭首次國家介紹接正式 Ebitengine
 
-狀態：進行中；開始：2026-09-25。對應 [Issue #30](https://github.com/wicanr2/colonization_cht/issues/30)，承接[目標135](135-england-intro-pages-overlay.md)與[規格025](../spec/025-first-nation-introduction-draft.md)。
+狀態：完成；開始與完成：2026-09-25。對應 [Issue #30](https://github.com/wicanr2/colonization_cht/issues/30)，承接[目標135](135-england-intro-pages-overlay.md)與[規格025](../spec/025-first-nation-introduction-draft.md)。
 
 ## 範圍與做法
 
@@ -11,6 +11,12 @@
 1. 以相同版式烘製三國六頁字模；新換行規則下三國版面與目標102 相同。
 2. 每國：真 GUI 兩頁現場截圖；該現場輸入的 A、B、離頁三點中英同輸入原版狀態相同、差分只在頁內；現場截圖與重播逐像素相同。
 3. 英格蘭兩頁與既有欄位回歸不退步。更新規格025、文件、worklist 與 #30；完成後關閉 #30。
+
+## 本輪結果
+
+- 三國六頁依[規格025](../spec/025-first-nation-introduction-draft.md)文末限定 CONFORMED；四國八頁全部完成，#30 可關閉。正式中文欄位由二十九段增為三十五段。
+- 真 GUI 前兩次沒有走到三國介紹頁：第一次移動與按下同畫格未改選國家（三國都走成英格蘭）；第二次選對國家但停在姓名畫面。兩次都修正腳本時序後重跑，嘗試收據封存在 `gui-attempts/`。
+- 離頁驗收使用一筆明示補充的 Enter，撤銷機制與英格蘭真玩家路徑相同。
 
 ## 停止線
 

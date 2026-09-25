@@ -210,6 +210,8 @@ type introPage struct {
 
 type introState struct {
 	pages               []*introPage
+	textArea            image.Rectangle // 啟用頁面 0D21:012C 改色 bbox 的聯集
+	maxChars, maxWrites int
 	phase               string
 	page                *introPage
 	before, afterSafe   []byte
@@ -224,8 +226,7 @@ type introState struct {
 }
 
 var (
-	introPanel      = image.Rect(8, 8, 312, 192)   // 原版木紋頁內；四倍即 (32,32)–(1248,768)
-	introTextArea   = image.Rect(10, 20, 305, 179) // 英格蘭兩頁 0D21:012C 改色的聯集 bbox
+	introPanel      = image.Rect(8, 8, 312, 192) // 原版木紋頁內；四倍即 (32,32)–(1248,768)
 	introPreprint   = "f31602f9a239a4f83fd6e27e644384009d628517185aeb80bb248479e67d0e71"
 	introReadLinear = uint32(0x2a862)
 )
@@ -281,6 +282,7 @@ func main() {
 	optionsTitleA := flag.Bool("game-options-title-a", false, "啟用規格030遊戲選項標題 A／34px")
 	optionsTitleFont := flag.String("game-options-title-font", "/out/goal132-options-title-font.json", "本機依固定字型與真 TSV 烘製的遊戲選項標題字模")
 	introA := flag.Bool("england-intro-a", false, "啟用規格025英格蘭首次介紹兩頁（標題34px／正文38px）")
+	introAll := flag.Bool("nation-intro-a", false, "啟用規格025四國首次介紹八頁（標題34px／正文38px）")
 	introCatalog := flag.String("intro-catalog", "/repo/text/nation-introduction.zh-Hant.tsv", "國家介紹長文唯一 TSV")
 	introMasks := flag.String("intro-mask-dir", "/out/goal135-intro-masks", "本機依固定字型與真 TSV 烘製的介紹頁三層字模目錄")
 	optionRowsA := flag.Bool("game-options-rows-a", false, "啟用規格031遊戲選項八列 A 字級")
@@ -353,13 +355,37 @@ func main() {
 		}
 	}
 	var intro *introState
-	if *introA {
-		intro = &introState{phase: "idle", pages: []*introPage{
+	if *introA || *introAll {
+		// 固定路徑已證實的整頁印字：可見字數、序列 SHA、0D21:012C 改色點數與 bbox（目標101／102）。
+		all := []*introPage{
 			{id: "GAME.TXT:@NATION0A", sectionOffset: 0xae7c, length: 904, chars: 833, writes: 14193,
 				printSHA: "25f3dd22b2d753adc9f66c76c4e8c4dabe0474600d996b6128881552f1122d23", bbox: image.Rect(10, 20, 305, 179)},
 			{id: "GAME.TXT:@NATION0B", sectionOffset: 0xb204, length: 215, chars: 170, writes: 2932,
 				printSHA: "33cadaf8f05359be9c7f3ade81ab3d41ed3583e0c9b3361f9fda9d335e9d84a9", bbox: image.Rect(10, 75, 292, 124)},
-		}}
+			{id: "GAME.TXT:@NATION1A", sectionOffset: 0xb2db, length: 870, chars: 794, writes: 13412,
+				printSHA: "7285983b0263b270b7e952a78aecc40e0fa682e45302ae088371b493da0a258b", bbox: image.Rect(10, 25, 304, 174)},
+			{id: "GAME.TXT:@NATION1B", sectionOffset: 0xb641, length: 253, chars: 207, writes: 3438,
+				printSHA: "9018be96a5ab5eb08fcb830beaa493a6090b6aec2eecdd682594065d6a6971d9", bbox: image.Rect(10, 70, 308, 129)},
+			{id: "GAME.TXT:@NATION2A", sectionOffset: 0xb73e, length: 1032, chars: 953, writes: 16103,
+				printSHA: "37df0dda5ca2f142501142b572ff8b7e3e51ec20d2baa7131aaaa236449b4fbe", bbox: image.Rect(10, 10, 305, 189)},
+			{id: "GAME.TXT:@NATION2B", sectionOffset: 0xbb46, length: 226, chars: 180, writes: 3168,
+				printSHA: "3dfc072784c1f2728e8a1f514623c54b8320b3185407b4a1ed74c29809ce850e", bbox: image.Rect(10, 75, 292, 124)},
+			{id: "GAME.TXT:@NATION3A", sectionOffset: 0xbc28, length: 1034, chars: 957, writes: 16401,
+				printSHA: "a13e855de4b202af656d76d6319fd0ecd5a87a81115e27df66b4dae67f938bbd", bbox: image.Rect(10, 10, 305, 189)},
+			{id: "GAME.TXT:@NATION3B", sectionOffset: 0xc032, length: 351, chars: 299, writes: 5262,
+				printSHA: "6fa75f110995ae368395a39d8b6ee4c8c44ab25ed72ce63342a913cb3e8b8d01", bbox: image.Rect(10, 65, 307, 134)},
+		}
+		intro = &introState{phase: "idle", pages: all[:2]}
+		if *introAll {
+			intro.pages = all
+		}
+		for i, pg := range intro.pages {
+			if i == 0 {
+				intro.textArea = pg.bbox
+			}
+			intro.textArea = intro.textArea.Union(pg.bbox)
+			intro.maxChars, intro.maxWrites = max(intro.maxChars, pg.chars), max(intro.maxWrites, pg.writes)
+		}
 		introBytes := read(*introCatalog)
 		lines := strings.Split(strings.TrimRight(string(introBytes), "\n"), "\n")
 		header := strings.Split(lines[0], "\t")
@@ -912,7 +938,7 @@ func main() {
 		if intro == nil || intro.phase == "idle" || intro.phase == "expired" {
 			return
 		}
-		id := "GAME.TXT:@NATION0"
+		id := "GAME.TXT:@NATION"
 		if intro.page != nil {
 			id = intro.page.id
 		}
@@ -929,7 +955,7 @@ func main() {
 			if intro != nil && intro.phase == "reading" {
 				mx, my := int(d.Mouse.X), int(d.Mouse.Y)
 				if cs == 0x0d21 && ip == 0x012c {
-					if !image.Pt(x, y).In(introTextArea) {
+					if !image.Pt(x, y).In(intro.textArea) {
 						introExpire("write-outside-reviewed-pixels")
 					} else {
 						if intro.writes == 0 {
@@ -938,7 +964,7 @@ func main() {
 							intro.bbox = intro.bbox.Union(image.Rect(x, y, x+1, y+1))
 						}
 						intro.writes++
-						if intro.writes > 14193 {
+						if intro.writes > intro.maxWrites {
 							introExpire("write-count-exceeded")
 						}
 					}
@@ -1198,7 +1224,7 @@ func main() {
 						intro.phase, intro.page, intro.chars, intro.readPos, intro.writes = "reading", nil, 0, 0, 0
 						intro.sum, intro.before = sha256.New(), bytes.Clone(canvas())
 						intro.startStep, intro.openedCount = m.Steps, len(d.Opened)
-						events = append(events, map[string]any{"candidate_id": "GAME.TXT:@NATION0", "stage": "source", "step": m.Steps, "entry_ip": "0D21:00C6", "source_linear": a})
+						events = append(events, map[string]any{"candidate_id": "GAME.TXT:@NATION", "stage": "source", "step": m.Steps, "entry_ip": "0D21:00C6", "source_linear": a})
 					}
 					if intro.phase == "reading" {
 						if a != introReadLinear+uint32(intro.readPos%2) || (intro.readPos%2 == 1 && m.Mem[a] != 0) {
@@ -1207,7 +1233,7 @@ func main() {
 							if intro.readPos%2 == 0 {
 								intro.sum.Write([]byte{m.Mem[a]})
 								intro.chars++
-								if intro.chars > 833 {
+								if intro.chars > intro.maxChars {
 									introExpire("source-read-count-exceeded")
 								}
 							}
