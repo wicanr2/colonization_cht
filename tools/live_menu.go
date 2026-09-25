@@ -287,6 +287,7 @@ func main() {
 	introMasks := flag.String("intro-mask-dir", "/out/goal135-intro-masks", "本機依固定字型與真 TSV 烘製的介紹頁三層字模目錄")
 	optionRowsA := flag.Bool("game-options-rows-a", false, "啟用規格031遊戲選項八列 A 字級")
 	optionRowsFonts := flag.String("game-options-rows-font-dir", "/out/goal134-row-fonts", "本機依固定字型與真 TSV 烘製的八列字模目錄")
+	scratch := flag.String("scratch", "", "目標137：原版唯讀 Root 外的可寫暫存層（存讀檔用）；預設關閉")
 	out := flag.String("out", "/out/goal056-live", "輸出前綴")
 	control := flag.Bool("control", false, "無指令觀測、無合成對照")
 	missing := flag.Bool("missing", false, "缺字模回退對照")
@@ -872,6 +873,19 @@ func main() {
 	m.Write8(uint32(golem.PSPSeg)*16+0x80, 2)
 	m.WriteBytes(uint32(golem.PSPSeg)*16+0x81, []byte{'-', 'g', 13})
 	d := golem.NewDOS(m, *root)
+	if *scratch != "" {
+		// 寫入只落在暫存層；原版 Root 仍唯讀，暫存層不得等於 Root。
+		st, err := os.Stat(*scratch)
+		must(err)
+		rootAbs, err := filepath.EvalSymlinks(*root)
+		must(err)
+		scratchAbs, err := filepath.EvalSymlinks(*scratch)
+		must(err)
+		if !st.IsDir() || rootAbs == scratchAbs {
+			panic("可寫暫存層不存在或等於原版 Root")
+		}
+		d.Scratch = *scratch
+	}
 	d.Install()
 	defer d.Close()
 	m.SetSoundBlasterPro(true)

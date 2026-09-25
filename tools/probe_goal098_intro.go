@@ -22,6 +22,7 @@ type introInput struct {
 	Kind   string `json:"kind"`
 	X, Y   int
 	Button int
+	Text   string `json:"text,omitempty"` // 目標137：字母快捷鍵，僅限九欄事件記錄模式
 }
 type introReplay struct {
 	Inputs []introInput `json:"inputs"`
@@ -243,7 +244,9 @@ func main() {
 				e.Step%25000000 == 0 {
 				panic("字幕後玩家事件必須位於遞增的百萬步檢查點之間")
 			}
-			if e.Kind != "move" && e.Kind != "press" && e.Kind != "release" &&
+			textKey := e.Kind == "text" && *rowEventFrom != 0 && len(e.Text) == 1 &&
+				(e.Text[0] >= 'a' && e.Text[0] <= 'z' || e.Text[0] >= 'A' && e.Text[0] <= 'Z')
+			if e.Kind != "move" && e.Kind != "press" && e.Kind != "release" && !textKey &&
 				e.Kind != "enter" && e.Kind != "esc" && e.Kind != "left" && e.Kind != "right" && e.Kind != "space" {
 				panic("未知字幕後玩家事件")
 			}
@@ -1036,6 +1039,10 @@ func main() {
 			d.PushKey(golem.Key{Scan: 0x4d, ASCII: 0})
 		case "space":
 			d.PushKey(golem.Key{Scan: 0x39, ASCII: 0x20})
+		case "text":
+			if !d.PushText(e.Text) {
+				panic("dosgolem 拒絕快捷鍵字元")
+			}
 		default:
 			panic("未知玩家輸入")
 		}

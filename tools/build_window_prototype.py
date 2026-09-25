@@ -13,7 +13,7 @@ a = p.parse_args()
 if not a.output.parent.is_dir() or a.output.parent.stat().st_uid != os.getuid():
     raise ValueError('輸出父目錄不存在或擁有者不符')
 s = (a.repo / 'tools/live_menu.go').read_bytes()
-if hashlib.sha256(s).hexdigest() != 'b0c148cac59b556431fe80d37617aea5bb542b996a7f1e1096c586d207432aac':
+if hashlib.sha256(s).hexdigest() != '3651aeca6fa4dab2a5450b28e38a1f8ec54ada6808bbd6cd642b46e401644067':
     raise ValueError('適配器來源不同，需重新審查')
 if b'frontendRunner(m, d, render, *out)' not in s or b'frontendFrameSink(output, rec)' not in s:
     raise ValueError('視窗接線不符')

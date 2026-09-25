@@ -1,6 +1,6 @@
 # 目前脈絡
 
-進行中：[目標137](docs/goals/137-options-window-followups.md)（#31）驗證遊戲選項視窗的鍵盤快捷鍵、其他國家與讀存檔路徑。
+目前真相：[目標137](docs/goals/137-options-window-followups.md)完成 #31：遊戲選項九欄在鍵盤快捷鍵、法國／西班牙／荷蘭、讀存檔後開窗三種路徑都正確顯示中文；前端新增預設關閉的 `-scratch` 可寫暫存層供存讀檔。下一個 Issue 為 #32（退休確認框，A 版）。
 
 目前真相：[目標136](docs/goals/136-other-nations-intro-pages-overlay.md)完成 #30：四國首次國家介紹八頁在明示 `-nation-intro-a` 時全部顯示中文（規格025 限定 CONFORMED）。非英格蘭在選國後會停在姓名畫面，需 Enter；真視窗點旗卡要先讓游標停在旗卡上。正式中文欄位為三十五段。
 

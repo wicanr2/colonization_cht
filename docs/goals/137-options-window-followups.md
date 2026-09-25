@@ -1,6 +1,6 @@
 # 目標137：遊戲選項視窗後續驗證（鍵盤快捷鍵、其他國家、讀存檔）
 
-狀態：進行中；開始：2026-09-25。對應 [Issue #31](https://github.com/wicanr2/colonization_cht/issues/31)，承接[規格030](../spec/030-game-options-title-a-ready.md)、[規格031](../spec/031-game-options-rows-a-ready.md)。
+狀態：完成；開始與完成：2026-09-25。對應 [Issue #31](https://github.com/wicanr2/colonization_cht/issues/31)，承接[規格030](../spec/030-game-options-title-a-ready.md)、[規格031](../spec/031-game-options-rows-a-ready.md)。
 
 ## 工作與退出條件
 
@@ -8,6 +8,11 @@
 2. 其他國家：法國、西班牙、荷蘭開局後開選項視窗，核對事件、底圖與閘門；以真 GUI 與中英對拍驗收。
 3. 讀存檔：先評估正式前端能否在不改原版的前提下存讀檔（原版目錄唯讀）；可行才驗，不可行則記錄缺口並另開 Issue。
 4. 更新規格、文件、worklist 與 #31，私有推送並回讀。
+
+## 本輪結果
+
+- 三項都通過，細節見[規格031](../spec/031-game-options-rows-a-ready.md)與[規格030](../spec/030-game-options-title-a-ready.md)的「後續驗證」節。讀存檔可行，未另開 Issue。
+- 真 GUI 多次重跑，原因都在操作時序：並行時等待逾時、主選單須停留後按住、主選單出現步數不固定需改相對等待、讀檔後的訊息框需關閉。另有一次腳本產生時切片為空、把內容插進每個字元之間，當即停止該容器並重建腳本。各次嘗試收據封存在 `workplace/reports/goal137-options-followups/attempts/`。
 
 ## 停止線
 
