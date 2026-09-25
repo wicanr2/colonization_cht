@@ -1,10 +1,8 @@
 # 目前脈絡
 
-接續中：[目標132](docs/goals/132-game-options-title-event-and-overlay.md)以目標131已證的真 VGA晚一幀及 ESC失效為起點，補無快捷鍵標記的「遊戲選項設定」標題當次事件、多色底圖與34px A字模；只有限定 READY 審查通過才接正式 Ebitengine。八列已選 A 字級，但快捷鍵可見形式、逐列執行期守門仍待證據與決定；[規格027](docs/spec/027-game-options-window-draft.md)維持 DRAFT，九欄目前仍英文。
+目前真相：[目標132](docs/goals/132-game-options-title-event-and-overlay.md)已將無快捷鍵標記的遊戲選項標題 A／34px「遊戲選項設定」接到明示 `-game-options-title-a` 的 Ebitengine 視窗；[規格030](docs/spec/030-game-options-title-a-ready.md)只在此版、此欄、英格蘭正常玩家路徑限定 CONFORMED。閘門是當次 `0D21:00C6` 32次讀字、`0D21:012C` 319點改色、標題局部印前／印後底圖與真 VGA 同步，不用整張畫布 SHA。1280M 中／英同原版狀態，ESC 離窗撤銷，游標遮擋暫回英文，缺譯／重複鍵／過長／錯字模／缺字模載入回退；真 GUI 真鍵鼠從冷啟動走到標題，1280M 現場 PNG 與重播逐像素一致。此為第十九個**需啟用旗標**的正式中文欄位。[規格027](docs/spec/027-game-options-window-draft.md)其餘八列仍 DRAFT、仍英文；八列 `~` 快捷鍵可見形式待使用者決定。[目標131](docs/goals/131-game-options-title-a-runtime-gate.md)的真 VGA 晚一幀與 ESC 失效證據已由目標132吸收。
 
-進行中：[目標131](docs/goals/131-game-options-title-a-runtime-gate.md)從已確認的遊戲選項 A 字級，先審查無快捷鍵標記的標題 34px 正式執行期閘門。新 dosgolem 雙冷啟動及無監看控制證實標題底層1,253,505,000步完成、真 VGA在1,253,670,000步才同步，ESC後1,351,020,000步失效；不能只看底層畫布就蓋中文。當次正式來源權杖、多色補片及真 Ebitengine 中英對拍仍缺，[規格027](docs/spec/027-game-options-window-draft.md) DRAFT、九欄仍英文；八列已選定 25／28／28／25／28／28／27／28px，不把原型算正式完成。
-
-目前真相：[目標130](docs/goals/130-build1-ready-and-ebitengine-overlay.md)已將固定英格蘭首張 `@BUILD1` A／38px 接到明示 `-build1-a` 的 Ebitengine 視窗；[規格029](docs/spec/029-build1-caption-window-ready.md)只在此版／此欄／此正常玩家路徑限定 CONFORMED。真視窗82M字幕中、86M離頁後、120M後續的中／英文原版狀態一致，缺字模、缺譯、重複鍵、游標遮擋均回退英文；原有十七欄727幀不退步。此為第十八個**需啟用旗標**的正式中文顯示欄位，非整組字幕完成。`Game Options` 九欄 A（標題34px、八列25／28／28／25／28／28／27／28px）已定案但[規格027](docs/spec/027-game-options-window-draft.md)仍 DRAFT、九欄仍英文；其餘字幕及 help 所在[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)也仍 DRAFT，help 正式零則。原版像素／字型／完整收據只在忽略的 `workplace/`，不更新正式截圖或對外包。
+目前真相：[目標130](docs/goals/130-build1-ready-and-ebitengine-overlay.md)已將固定英格蘭首張 `@BUILD1` A／38px 接到明示 `-build1-a` 的 Ebitengine 視窗；[規格029](docs/spec/029-build1-caption-window-ready.md)只在此版／此欄／此正常玩家路徑限定 CONFORMED。真視窗82M字幕中、86M離頁後、120M後續的中／英文原版狀態一致，缺字模、缺譯、重複鍵、游標遮擋均回退英文；原有十七欄727幀不退步。此為第十八個**需啟用旗標**的正式中文顯示欄位，非整組字幕完成。`Game Options` 九欄 A（標題34px、八列25／28／28／25／28／28／27／28px）已定案，標題已由目標132限定完成，[規格027](docs/spec/027-game-options-window-draft.md)其餘八列仍 DRAFT、仍英文；其餘字幕及 help 所在[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)也仍 DRAFT，help 正式零則。原版像素／字型／完整收據只在忽略的 `workplace/`，不更新正式截圖或對外包。
 
 補驗：以實際開啟的 Ebitengine 玩家視窗、真鍵鼠走到84M時擷取的本機截圖，與已驗82M字幕中文重播圖逐像素相同；[規格029](docs/spec/029-build1-caption-window-ready.md)已納入現場畫面收據。本機圖含原版像素，仍不入Git。
 

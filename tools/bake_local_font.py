@@ -22,8 +22,8 @@ def main():
                             'GAME.TXT:0x000001E4', 'GAME.TXT:0x000001F9', 'GAME.TXT:0x00000204',
                             'LABELS.TXT:0x00000888', 'LABELS.TXT:0x00000890',
                             'LABELS.TXT:0x0000086E', 'GAME.TXT:0x00000A7A',
-                            'GAME.TXT:0x000153CC'],
-                   help='規格 009／012／014／015／029 已審查的畫面文字；字模各自獨立綁定')
+                            'GAME.TXT:0x000153CC', 'GAME.TXT:0x000004CD'],
+                   help='規格 009／012／014／015／029／030 已審查的畫面文字；字模各自獨立綁定')
     args = p.parse_args()
     rows = read_catalog(args.catalog)
     if any(not (args.game / row['source_file']).is_file() for row in rows):
@@ -45,7 +45,8 @@ def main():
     sizes = {'LABELS.TXT:0x00000888': 34,
              'LABELS.TXT:0x00000890': 38,
              'GAME.TXT:0x00000A7A': 38,
-             'GAME.TXT:0x000153CC': 38}
+             'GAME.TXT:0x000153CC': 38,
+             'GAME.TXT:0x000004CD': 34}
     font_size = sizes.get(key, 24)
     font = ImageFont.truetype(str(args.font), font_size)
     left, top, right, bottom = font.getbbox(text)
@@ -62,14 +63,16 @@ def main():
     expected_ink = {'LABELS.TXT:0x00000888': (74, 32),
                     'LABELS.TXT:0x00000890': (82, 35),
                     'GAME.TXT:0x00000A7A': (328, 35),
-                    'GAME.TXT:0x000153CC': (430, 35)}
+                    'GAME.TXT:0x000153CC': (430, 35),
+                    'GAME.TXT:0x000004CD': (222, 32)}
     if key in expected_ink and (width, height) != expected_ink[key]:
         raise ValueError('此欄字模尺寸不符已驗證規格')
     bounds = {'LABELS.TXT:0x00000888': (148, 48),
               'LABELS.TXT:0x00000890': (304, 52),
               'LABELS.TXT:0x0000086E': (380, 36),
               'GAME.TXT:0x00000A7A': (476, 52),
-              'GAME.TXT:0x000153CC': (1180, 60)}
+              'GAME.TXT:0x000153CC': (1180, 60),
+              'GAME.TXT:0x000004CD': (752, 60)}
     max_width, max_height = bounds.get(key, (584, 28))
     if not (0 < width <= max_width and 0 < height <= max_height):
         raise ValueError('譯文超出已確認安全矩形，不裁切')

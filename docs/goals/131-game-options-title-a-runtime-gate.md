@@ -1,6 +1,6 @@
 # 目標131：遊戲選項標題 A 字級的執行期閘門
 
-狀態：進行中；開始：2026-09-25。承接[規格027](../spec/027-game-options-window-draft.md)、[目標128](128-a-layout-decisions-and-build1-runtime-gate.md)與[目標122](122-game-options-nine-field-state-guard.md)；對應既有 [Issue #11](https://github.com/wicanr2/colonization_cht/issues/11)、[Issue #12](https://github.com/wicanr2/colonization_cht/issues/12)及[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)，不另立同義 Issue。
+狀態：完成（證據輪）；開始與完成：2026-09-25。正式顯示由[目標132](132-game-options-title-event-and-overlay.md)接續完成。承接[規格027](../spec/027-game-options-window-draft.md)、[目標128](128-a-layout-decisions-and-build1-runtime-gate.md)與[目標122](122-game-options-nine-field-state-guard.md)；對應既有 [Issue #11](https://github.com/wicanr2/colonization_cht/issues/11)、[Issue #12](https://github.com/wicanr2/colonization_cht/issues/12)及[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)，不另立同義 Issue。
 
 ## 範圍
 

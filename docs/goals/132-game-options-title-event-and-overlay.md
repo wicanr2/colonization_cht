@@ -1,6 +1,6 @@
 # 目標132：遊戲選項標題的當次事件與正式中文覆蓋
 
-狀態：進行中；開始：2026-09-25。承接[目標131](131-game-options-title-a-runtime-gate.md)已驗的真 VGA 晚一幀同步與 ESC 失效、[規格027](../spec/027-game-options-window-draft.md)九欄 DRAFT，以及使用者確認的 A 字級。對應既有 [Issue #11](https://github.com/wicanr2/colonization_cht/issues/11)、[Issue #12](https://github.com/wicanr2/colonization_cht/issues/12)、[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)，不新增同義 Issue。
+狀態：完成（只限遊戲選項標題一欄）；開始與完成：2026-09-25。承接[目標131](131-game-options-title-a-runtime-gate.md)已驗的真 VGA 晚一幀同步與 ESC 失效、[規格027](../spec/027-game-options-window-draft.md)九欄 DRAFT，以及使用者確認的 A 字級。對應既有 [Issue #11](https://github.com/wicanr2/colonization_cht/issues/11)、[Issue #12](https://github.com/wicanr2/colonization_cht/issues/12)、[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26)，不新增同義 Issue。
 
 ## 本輪玩家結果
 
@@ -13,6 +13,14 @@
 3. 用現行 TSV 與固定 Cubic 11 字型重烘標題 A／34px；量實際墨跡、色號、陰影、基線與四倍安全矩形，建立缺鍵、重複鍵、缺字模、錯字級及溢出回退。只有標題的證據與 typed 契約達 READY，才另立限定規格授權正式 Ebitengine 覆蓋。
 4. READY 後將標題接到正式視窗的預設關閉開關；逐幀檢查當次事件權杖、原版底層／VGA、色盤、模式、開檔與游標，不重用舊背景。以正常玩家鍵鼠中英同輸入，在出現、焦點／按鍵、ESC 離頁和反例各相位檢查原版完整狀態不變、新畫素只在標題安全區；既有正式欄位回歸不退步。完成才將限定標題規格標 CONFORMED，更新已授權的正式截圖；否則保留 DRAFT、原文與具體缺口。
 5. 更新 `CONTEXT.md`、`RESEARCH-LOG.md`、`WORKLOG.md`、`docs/worklist.json`／生成的 `WORKLIST.md` 與相關 Issue；私有推送並回讀。收尾查權利邊界、原版素材未追蹤、輸出擁有權、Docker 容器與隔離副本禁推。
+
+## 本輪結果與下一閘門
+
+- 原版探針以雙冷啟動、無監看控制與六項篡改負例，證實標題當次 `0D21:00C6` 經 `SS:BX` 自線性 `0x2AC78/79` 讀32次、`0D21:012C` 改色319點、真 VGA 晚一幀、ESC 失效。
+- 跨玩家路徑發現探針與真視窗錄製路徑的印前**整張**畫布不同，但標題**安全區**印前／印後逐像素相同；第一次正式重播因誤用整張 SHA 當閘門而全程留英文。[規格030](../spec/030-game-options-title-a-ready.md)改以當次事件＋標題局部底圖＋真 VGA 為閘門後才改正式程式，失敗收據保留。
+- 正式視窗 `-game-options-title-a` 在錄製輸入重播與真 GUI 真鍵鼠兩條路徑均通過；規格030限定 CONFORMED。這是第十九個需明示旗標的正式中文欄位。
+- 第一、二次真 GUI 嘗試未達標題：腳本少了錄製路徑1225M的 Left 鍵、選單點擊提早約20M步，且外層時限不足；修正相位後重跑通過，兩次失敗日誌封存在 `workplace/.../gui-attempts/`。
+- 下一閘門：八列選項各自的輸出事件、`~` 快捷鍵可見形式（待使用者決定）與逐列回退；[規格027](../spec/027-game-options-window-draft.md)維持 DRAFT。
 
 ## 停止線
 

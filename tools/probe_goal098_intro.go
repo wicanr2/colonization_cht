@@ -388,6 +388,16 @@ func main() {
 	optionBefore := map[int][]byte{}
 	optionFirstSteps := map[int]uint64{}
 	optionWriteCounts := map[int]int{}
+	titleExpected := []byte("Set Game Options")
+	titleReadOperands := []map[string]any{}
+	titleReadStage, titleReadMismatch := 0, 0
+	titleReadStart, titleReadEnd := uint64(0), uint64(0)
+	titleFirstReadCanvasSHA := ""
+	titleWriteCount := 0
+	titleWriteFirst, titleWriteLast := uint64(0), uint64(0)
+	titleFirstWriteCanvasSHA := ""
+	titleWriteBBox := [4]int{320, 200, 0, 0}
+	titleWriteColors := map[uint8]int{}
 	captionReadStage := 0
 	captionReadStart := uint64(0)
 	captionReadEnd := uint64(0)
@@ -437,6 +447,39 @@ func main() {
 	}
 	if !*control {
 		m.WatchReads(0x20000, 0x80000, func(a uint32, value uint8) {
+			if *optionsTitleScreenAudit != "" && m.Steps >= 1253400000 && m.Steps < 1253500000 &&
+				titleReadEnd == 0 && (a == 0x2ac78 || a == 0x2ac79) {
+				cs, ip := m.CPU.OpAddr()
+				if cs == 0x0d21 && ip == 0x00c6 {
+					c := m.CPU
+					operand := uint32(c.Seg[golem.SS])*16 + uint32(c.R[golem.BX])
+					wantedAddr := uint32(0x2ac78 + titleReadStage%2)
+					wantedValue := byte(0)
+					if titleReadStage%2 == 0 && titleReadStage/2 < len(titleExpected) {
+						wantedValue = titleExpected[titleReadStage/2]
+					}
+					if titleReadStage < 2*len(titleExpected) && a == wantedAddr &&
+						value == wantedValue && operand == a {
+						if titleReadStage == 0 {
+							titleReadStart = m.Steps
+							titleFirstReadCanvasSHA = hashIntro(m.Mem[canvas : canvas+64000])
+						}
+						titleReadOperands = append(titleReadOperands, map[string]any{
+							"step": m.Steps, "linear": a, "value": value,
+							"ss": c.Seg[golem.SS], "bx": c.R[golem.BX],
+							"ss_bx_linear": operand,
+						})
+						titleReadStage++
+						if titleReadStage == 2*len(titleExpected) {
+							titleReadEnd = m.Steps
+						}
+					} else {
+						titleReadMismatch++
+						titleReadStage = 0
+						titleReadOperands = nil
+					}
+				}
+			}
 			if *captionFrameAudit && m.Steps >= 88600000 && m.Steps < 88900000 &&
 				captionReadEnd == 0 {
 				cs, ip := m.CPU.OpAddr()
@@ -577,6 +620,31 @@ func main() {
 				return
 			}
 			cs, ip := m.CPU.OpAddr()
+			if *optionsTitleScreenAudit != "" && m.Steps >= 1253400000 &&
+				m.Steps < 1253500000 && cs == 0x0d21 && ip == 0x012c {
+				x, y := int(a-canvas)%320, int(a-canvas)/320
+				if x >= 65 && x < 253 && y >= 44 && y < 59 {
+					if titleWriteCount == 0 {
+						titleWriteFirst = m.Steps
+						titleFirstWriteCanvasSHA = hashIntro(m.Mem[canvas : canvas+64000])
+					}
+					titleWriteCount++
+					titleWriteLast = m.Steps
+					titleWriteColors[value]++
+					if x < titleWriteBBox[0] {
+						titleWriteBBox[0] = x
+					}
+					if y < titleWriteBBox[1] {
+						titleWriteBBox[1] = y
+					}
+					if x+1 > titleWriteBBox[2] {
+						titleWriteBBox[2] = x + 1
+					}
+					if y+1 > titleWriteBBox[3] {
+						titleWriteBBox[3] = y + 1
+					}
+				}
+			}
 			if *captionFrameAudit && m.Steps >= 88600000 && m.Steps < 88900000 &&
 				cs == 0x0d21 && ip == 0x012c {
 				if captionWriteCount == 0 {
@@ -1201,6 +1269,18 @@ func main() {
 				"first_canvas_step": titleFirstCanvas, "first_vga_step": titleFirstVGA,
 				"last_vga_step": titleLastVGA, "phase_at_end": titlePhase,
 				"transitions": titleTransitions,
+				"event": map[string]any{
+					"source_file_offset": 0x4cd, "source_sha256": hashIntro(titleExpected),
+					"read_ip": "0D21:00C6", "source_linear": [2]uint32{0x2ac78, 0x2ac79},
+					"read_start_step": titleReadStart, "read_end_step": titleReadEnd,
+					"read_count": titleReadStage, "read_mismatches": titleReadMismatch,
+					"first_read_canvas_sha256": titleFirstReadCanvasSHA,
+					"read_operands":            titleReadOperands,
+					"writer_ip":                "0D21:012C", "write_first_step": titleWriteFirst,
+					"write_last_step": titleWriteLast, "write_count": titleWriteCount,
+					"first_write_canvas_sha256": titleFirstWriteCanvasSHA,
+					"write_bbox":                titleWriteBBox, "write_colors": titleWriteColors,
+				},
 			}
 		}
 		if len(phaseSteps) > 0 {

@@ -146,7 +146,20 @@ type buildCaption struct {
 	accepted, appliedFrames     int
 }
 
+// 規格030僅授權遊戲選項標題；八列快捷鍵及文字仍維持原版。
+type optionsTitle struct {
+	buildCaption
+	afterSafe []byte
+}
+
 func (l *menuLine) safe() image.Rectangle { return image.Rect(86, l.y, 232, l.y+7) }
+func optionsTitleSafeBytes(buf []byte) []byte {
+	b := make([]byte, 0, 188*15)
+	for y := 44; y < 59; y++ {
+		b = append(b, buf[y*320+65:y*320+253]...)
+	}
+	return b
+}
 func (l *menuLine) safeBytes(buf []byte) []byte {
 	b := make([]byte, 0, 146*7)
 	for y := l.y; y < l.y+7; y++ {
@@ -166,6 +179,8 @@ func main() {
 	nationCardFonts := flag.String("nation-card-font-dir", "/out/goal099-card-fonts", "旗卡兩欄本機已驗 A 版字模")
 	build1A := flag.Bool("build1-a", false, "啟用規格029英格蘭首張開場字幕 A／38px")
 	build1Font := flag.String("build1-font", "/out/goal130-build1-font.json", "本機依固定字型與真 TSV 烘製的首張字幕字模")
+	optionsTitleA := flag.Bool("game-options-title-a", false, "啟用規格030遊戲選項標題 A／34px")
+	optionsTitleFont := flag.String("game-options-title-font", "/out/goal132-options-title-font.json", "本機依固定字型與真 TSV 烘製的遊戲選項標題字模")
 	out := flag.String("out", "/out/goal056-live", "輸出前綴")
 	control := flag.Bool("control", false, "無指令觀測、無合成對照")
 	missing := flag.Bool("missing", false, "缺字模回退對照")
@@ -196,6 +211,17 @@ func main() {
 		if !bytes.Equal(caption.source[:2], []byte("^^")) ||
 			hash(caption.display) != "c1feca9ed16dd6cf8cfd36a118536afd25b86f6677f3ec81d056fad6e78a6db6" {
 			panic("固定原版首張字幕來源不符")
+		}
+	}
+	var title *optionsTitle
+	if *optionsTitleA {
+		title = &optionsTitle{buildCaption: buildCaption{
+			id: "GAME.TXT:0x000004CD", phase: "idle",
+			source:  bytes.Clone(rawSource[0x4cd:0x4dd]),
+			display: bytes.Clone(rawSource[0x4cd:0x4dd]),
+		}}
+		if hash(title.source) != "547a9bc5a42a065a7c0994ef27d0fd8c30ea52ce2c0fd2224693ce937f032c04" {
+			panic("固定原版遊戲選項標題來源不符")
 		}
 	}
 	labelsSource := read(filepath.Join(*root, "LABELS.TXT"))
@@ -354,6 +380,17 @@ func main() {
 				get(row, "source_byte_length") == strconv.Itoa(len(caption.source)) &&
 				get(row, "status") == "draft"
 			caption.translation = get(row, "zh_hant")
+		}
+		if title != nil && get(row, "candidate_id") == title.id {
+			title.matches++
+			offset, parseErr := strconv.ParseUint(get(row, "byte_offset"), 0, 32)
+			title.valid = parseErr == nil && offset == 0x4cd &&
+				get(row, "source_file") == "GAME.TXT" &&
+				get(row, "source_sha256") == versions["GAME.TXT"] &&
+				get(row, "source_bytes_sha256") == hash(title.source) &&
+				get(row, "source_byte_length") == "16" &&
+				get(row, "status") == "draft"
+			title.translation = get(row, "zh_hant")
 		}
 		for _, l := range lines {
 			if get(row, "candidate_id") != l.id {
@@ -530,6 +567,30 @@ func main() {
 			caption.fontReason = "missing-ink"
 		}
 	}
+	if title != nil {
+		if title.matches != 1 || !title.valid || title.translation == "" || strings.ContainsAny(title.translation, "~^\n\r") {
+			title.fontReason = "missing-or-invalid-translation"
+		} else {
+			var mask fontMask
+			maskBytes, readErr := os.ReadFile(*optionsTitleFont)
+			if readErr != nil || json.Unmarshal(maskBytes, &mask) != nil {
+				title.fontReason = "font-mask-unavailable"
+			} else if mask.CandidateID != title.id || mask.CatalogHash != hash(catalogBytes) ||
+				mask.FontHash != fontHash || mask.TranslationHash != hash([]byte(title.translation)) ||
+				mask.FontSize != 34 {
+				title.fontReason = "font-binding-mismatch"
+			} else if mask.Width != 222 || mask.Height != 32 || len(mask.Alpha) != 222*32 {
+				title.fontReason = "font-mask-out-of-bounds"
+			} else {
+				title.ink = image.NewAlpha(image.Rect(0, 0, 222, 32))
+				copy(title.ink.Pix, mask.Alpha)
+			}
+		}
+		if *missing {
+			title.ink = nil
+			title.fontReason = "missing-ink"
+		}
+	}
 	m := golem.New()
 	must(m.LoadEXE(read(filepath.Join(*root, "OPENING.EXE"))))
 	m.Write8(uint32(golem.PSPSeg)*16+0x80, 2)
@@ -547,6 +608,7 @@ func main() {
 	paramBytes, _ := hex.DecodeString("0000fe000800fc00fd0000000000")
 	descriptorOK := func() bool { return bytes.Equal(m.Mem[0x1f448:0x1f448+len(descriptor)], descriptor) }
 	events := []map[string]any{}
+	titleDiagnostics := 0
 	frames := []map[string]any{}
 	checkpoints := []map[string]any{}
 	drops := []map[string]any{}
@@ -558,30 +620,55 @@ func main() {
 		events = append(events, map[string]any{"candidate_id": caption.id, "stage": "expired", "step": m.Steps, "reason": reason})
 		caption.phase, caption.patch, caption.before = "expired", nil, nil
 	}
-	if caption != nil && !*control && caption.ink != nil {
+	titleExpire := func(reason string) {
+		if title == nil || title.phase == "idle" || title.phase == "expired" {
+			return
+		}
+		events = append(events, map[string]any{"candidate_id": title.id, "stage": "expired", "step": m.Steps, "reason": reason})
+		title.phase, title.patch, title.before, title.afterSafe = "expired", nil, nil, nil
+	}
+	if !*control && ((caption != nil && caption.ink != nil) || (title != nil && title.ink != nil)) {
 		m.WatchWrites(0x2cae0, 0x2cae0+64000, func(a uint32, old, value uint8) {
-			if caption.phase != "reading" || old == value {
+			if old == value {
 				return
 			}
 			cs, ip := m.CPU.OpAddr()
-			if cs != 0x0d21 || ip != 0x012c {
-				captionExpire("unexpected-canvas-writer")
-				return
-			}
 			x, y := int(a-0x2cae0)%320, int(a-0x2cae0)/320
-			if x < 12 || x >= 307 || y < 27 || y >= 42 || (value != 14 && value != 47 && value != 54) {
-				captionExpire("write-outside-reviewed-pixels")
-				return
+			if caption != nil && caption.phase == "reading" {
+				if cs != 0x0d21 || ip != 0x012c {
+					captionExpire("unexpected-canvas-writer")
+				} else if x < 12 || x >= 307 || y < 27 || y >= 42 || (value != 14 && value != 47 && value != 54) {
+					captionExpire("write-outside-reviewed-pixels")
+				} else {
+					if caption.writes == 0 {
+						caption.bbox = image.Rect(x, y, x+1, y+1)
+					} else {
+						caption.bbox = caption.bbox.Union(image.Rect(x, y, x+1, y+1))
+					}
+					caption.writes++
+					caption.colors[value]++
+					if caption.writes > 1040 {
+						captionExpire("write-count-exceeded")
+					}
+				}
 			}
-			if caption.writes == 0 {
-				caption.bbox = image.Rect(x, y, x+1, y+1)
-			} else {
-				caption.bbox = caption.bbox.Union(image.Rect(x, y, x+1, y+1))
-			}
-			caption.writes++
-			caption.colors[value]++
-			if caption.writes > 1040 {
-				captionExpire("write-count-exceeded")
+			if title != nil && title.phase == "reading" {
+				if cs != 0x0d21 || ip != 0x012c {
+					titleExpire("unexpected-canvas-writer")
+				} else if x < 65 || x >= 253 || y < 44 || y >= 59 || (value != 68 && value != 47 && value != 128) {
+					titleExpire("write-outside-reviewed-pixels")
+				} else {
+					if title.writes == 0 {
+						title.bbox = image.Rect(x, y, x+1, y+1)
+					} else {
+						title.bbox = title.bbox.Union(image.Rect(x, y, x+1, y+1))
+					}
+					title.writes++
+					title.colors[value]++
+					if title.writes > 319 {
+						titleExpire("write-count-exceeded")
+					}
+				}
 			}
 		})
 	}
@@ -708,6 +795,43 @@ func main() {
 						if caption.readPos == 2*len(caption.display) {
 							caption.completeStep = m.Steps
 							caption.phase = "waiting-screen"
+						}
+					}
+				}
+			}
+			if title != nil && title.ink != nil && cs == 0x0d21 && ip == 0x00c6 {
+				a := uint32(c.Seg[golem.SS])*16 + uint32(c.R[golem.BX])
+				if titleDiagnostics < 3 && a == 0x2ac78 && m.Mem[a] == title.display[0] {
+					titleDiagnostics++
+					events = append(events, map[string]any{"candidate_id": title.id, "stage": "source-candidate", "step": m.Steps,
+						"canvas_sha256": hash(canvas()), "safe_sha256": hash(optionsTitleSafeBytes(canvas())),
+						"video_mode": m.VideoMode(), "source_linear": a, "opened_count": len(d.Opened)})
+				}
+				if (title.phase == "idle" || title.phase == "expired") && a == 0x2ac78 &&
+					m.VideoMode() == 0x13 &&
+					hash(optionsTitleSafeBytes(canvas())) == "358729d7a05203a18f1ea4882d5db540e90ed7edf83af3e11dc20f676e978e04" &&
+					m.Mem[a] == title.display[0] {
+					title.before = bytes.Clone(canvas())
+					title.phase, title.startStep, title.openedCount = "reading", m.Steps, len(d.Opened)
+					title.patch, title.readPos, title.writes = nil, 0, 0
+					title.bbox = image.Rectangle{}
+					title.colors = make(map[byte]int)
+					events = append(events, map[string]any{"candidate_id": title.id, "stage": "source", "step": m.Steps, "entry_ip": "0D21:00C6", "source_linear": a})
+				}
+				if title.phase == "reading" {
+					p := title.readPos
+					wantAddr := uint32(0x2ac78 + p%2)
+					want := byte(0)
+					if p%2 == 0 && p/2 < len(title.display) {
+						want = title.display[p/2]
+					}
+					if p >= 2*len(title.display) || a != wantAddr || m.Mem[a] != want {
+						titleExpire("source-read-mismatch")
+					} else {
+						title.readPos++
+						if title.readPos == 2*len(title.display) {
+							title.completeStep = m.Steps
+							title.phase = "waiting-screen"
 						}
 					}
 				}
@@ -865,6 +989,38 @@ func main() {
 			image.Rect(x, y, x+16, y+16).Overlaps(image.Rect(105, 30, 215, 40))
 	}
 	render := func(label string) {
+		if title != nil && title.ink != nil && !*control {
+			if title.phase == "reading" && m.Steps-title.startStep > 2000000 {
+				titleExpire("source-read-timeout")
+			}
+			if title.phase == "waiting-screen" || title.phase == "active" {
+				if m.VideoMode() != 0x13 || len(d.Opened) != title.openedCount {
+					titleExpire("mode-or-file-changed")
+				} else if title.phase == "waiting-screen" {
+					if m.Steps-title.completeStep > 2000000 {
+						titleExpire("screen-sync-timeout")
+					} else if title.readPos != 32 || title.writes != 319 ||
+						!title.bbox.Eq(image.Rect(67, 47, 147, 56)) ||
+						title.colors[68] != 146 || title.colors[47] != 103 || title.colors[128] != 70 {
+						titleExpire("incomplete-reviewed-output")
+					} else if hash(optionsTitleSafeBytes(canvas())) == "4cc2db436024b492e5eb7440dad60bb768e6c16e9cb2dcb16eddee0b2da83ca3" &&
+						bytes.Equal(optionsTitleSafeBytes(canvas()), optionsTitleSafeBytes(m.Mem[0xa0000:0xafa00])) {
+						var err error
+						title.patch, err = overlay.NewPatch(title.before, canvas(), 320, 200, image.Rect(65, 44, 253, 59))
+						if err != nil {
+							titleExpire("invalid-observed-patch")
+						} else {
+							title.afterSafe = optionsTitleSafeBytes(canvas())
+							title.phase = "active"
+							title.accepted++
+							events = append(events, map[string]any{"candidate_id": title.id, "stage": "active", "step": m.Steps, "read_count": title.readPos, "changed_pixels": title.writes})
+						}
+					}
+				} else if !bytes.Equal(optionsTitleSafeBytes(canvas()), title.afterSafe) {
+					titleExpire("canvas-title-changed")
+				}
+			}
+		}
 		if caption != nil && caption.ink != nil && !*control {
 			if caption.phase == "reading" && m.Steps-caption.startStep > 2000000 {
 				captionExpire("source-read-timeout")
@@ -1087,6 +1243,39 @@ func main() {
 					captionReason = "vga-frame-mismatch"
 				}
 				lineRecords = append(lineRecords, map[string]any{"candidate_id": caption.id, "applied": captionApplied, "reason": captionReason, "accepted_events": caption.accepted})
+			}
+			if title != nil {
+				titleReason := title.phase
+				titleApplied := false
+				if title.ink == nil {
+					titleReason = title.fontReason
+				} else if title.phase == "active" && title.patch != nil && !applied {
+					x, y := int(d.Mouse.X), int(d.Mouse.Y)
+					if d.Mouse.Buttons != 0 || image.Rect(x, y, x+16, y+16).Overlaps(image.Rect(67, 47, 124, 56)) {
+						titleReason = "cursor-or-button-over-title"
+					} else if !bytes.Equal(optionsTitleSafeBytes(indexed), title.afterSafe) {
+						titleReason = "vga-safe-mismatch"
+					} else {
+						frame, ok, why, err := overlay.Compose(indexed, m.DAC[:], 320, 200, 4,
+							title.patch, title.ink, image.Pt(272, 192), 47, enabled)
+						must(err)
+						titleReason = why
+						if ok {
+							safe := image.Rect(260, 176, 1012, 236)
+							draw.Draw(output, safe, frame, safe.Min, draw.Src)
+							p := 68 * 3
+							fg := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
+							r := image.Rect(268, 188, 490, 220)
+							draw.DrawMask(output, r, image.NewUniform(fg), image.Point{}, title.ink, title.ink.Bounds().Min, draw.Over)
+							titleApplied, applied = true, true
+							title.appliedFrames++
+							reason = "applied"
+						}
+					}
+				} else if title.phase == "active" && applied {
+					titleReason = "other-overlay-active"
+				}
+				lineRecords = append(lineRecords, map[string]any{"candidate_id": title.id, "applied": titleApplied, "reason": titleReason, "accepted_events": title.accepted})
 			}
 		}
 		rec := map[string]any{"step": m.Steps, "applied": applied, "reason": reason, "pending": anyPending, "dropped": len(drops), "events": len(events), "lines": lineRecords}
