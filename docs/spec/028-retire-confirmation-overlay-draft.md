@@ -1,5 +1,7 @@
 # 規格028：退休確認框三欄輸出覆蓋（DRAFT）
 
+2026-09-25 使用者決定：採 A 版（問句與 Yes／No 三欄皆 34px、各自共同置中），排除 B。
+
 狀態：DRAFT；日期：2026-09-25。入口為[目標126](../goals/126-retire-confirmation-three-field-overlay.md)、[目標127](../goals/127-retire-source-to-print-dataflow.md)、[主譯稿](../../text/draft.zh-Hant.tsv)與[目標123](../goals/123-retire-confirmation-and-help-route.md)。本節先記原版輸出與可丟棄版面；未達 READY 前不授權正式前端顯示，也不增加十七段正式中文。
 
 ## 版本與地址空間

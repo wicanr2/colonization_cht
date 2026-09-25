@@ -1,5 +1,7 @@
 # 規格016：難度卡片文字輸出定位
 
+2026-09-25 使用者決定：第三張難度卡「征服者／普通」採 A 字級（上欄 21px／下欄 25px），排除 B。
+
 狀態：DRAFT；日期：2026-09-23。入口：[目標063](../goals/063-difficulty-card-text.md)、
 [目標074](../goals/074-difficulty-card-observation-repair.md)、
 [目標075](../goals/075-difficulty-card-source-to-pixels.md)、

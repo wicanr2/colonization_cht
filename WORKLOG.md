@@ -2503,3 +2503,4 @@
 ## 2026-09-25：未完成工作登記為 Issue
 
 - 對照 GitHub Issue 與 CONTEXT 待辦，新建 [#31](https://github.com/wicanr2/colonization_cht/issues/31)～[#37](https://github.com/wicanr2/colonization_cht/issues/37)：遊戲選項後續驗證、退休確認框（待選版式）、第三張難度卡（待選 A／B）、其餘三張旗卡、其餘九張開場字幕、首則 help、海上主畫面介面；並加入 `docs/worklist.json`，`tools/worklist.py write/verify` 通過。
+- 使用者決定（2026-09-25）：#29 姓名欄維持原名、#30 長文貼近原版、#32 退休框 A、#33／#34 卡片 A；已寫入規格016／022／023／025／028、CONTEXT 與 worklist（worklist 統一為緊湊格式）。#29 依規格023 完成關閉。

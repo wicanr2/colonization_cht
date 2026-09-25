@@ -1,5 +1,7 @@
 # 目前脈絡
 
+使用者決定（2026-09-25）：姓名欄維持原版英文（#29 完成）；首次國家介紹長文採貼近原版標題34px／正文38px（#30）；退休確認框採 A 三欄34px共同置中（#32）；第三張難度卡與其餘三張旗卡採 A 21／25px（#33、#34）。未完成工作一律以 GitHub Issue 為入口，依編號順序處理。
+
 目前真相：[目標134](docs/goals/134-game-options-rows-ebitengine-overlay.md)已將遊戲選項八列接到正式 Ebitengine，[規格031](docs/spec/031-game-options-rows-a-ready.md)限定 CONFORMED。明示 `-game-options-title-a -game-options-rows-a` 時，英格蘭正常玩家路徑的遊戲選項視窗九欄全部顯示中文；快捷鍵為「(I) 顯示原住民行動」形式。閘門以整組 `0D21:00C6` 268 次讀字事件為權杖，逐列在第一次被改色時擷取當次底圖（奇偶列各兩種），允許 `0CAE:00A8` 在事件中途為尚未印字的列畫反白底圖；游標壓列時暫回英文、不計入同步逾時。中英同輸入原版狀態相同，ESC 撤銷，六項載入負例回英文，真 GUI 真鍵鼠開窗與點擊後的現場截圖和重播逐像素一致。正式中文欄位為二十七段。鍵盤快捷鍵切換、其他國家、存檔後開窗與 help 未驗。
 
 目前真相：[目標132](docs/goals/132-game-options-title-event-and-overlay.md)已將無快捷鍵標記的遊戲選項標題 A／34px「遊戲選項設定」接到明示 `-game-options-title-a` 的 Ebitengine 視窗；[規格030](docs/spec/030-game-options-title-a-ready.md)只在此版、此欄、英格蘭正常玩家路徑限定 CONFORMED。閘門是當次 `0D21:00C6` 32次讀字、`0D21:012C` 319點改色、標題局部印前／印後底圖與真 VGA 同步，不用整張畫布 SHA。1280M 中／英同原版狀態，ESC 離窗撤銷，游標遮擋暫回英文，缺譯／重複鍵／過長／錯字模／缺字模載入回退；真 GUI 真鍵鼠從冷啟動走到標題，1280M 現場 PNG 與重播逐像素一致。此為第十九個**需啟用旗標**的正式中文欄位。[規格027](docs/spec/027-game-options-window-draft.md)其餘八列仍 DRAFT、仍英文；八列 `~` 快捷鍵呈現已由使用者決定（見目標133）。[目標131](docs/goals/131-game-options-title-a-runtime-gate.md)的真 VGA 晚一幀與 ESC 失效證據已由目標132吸收。

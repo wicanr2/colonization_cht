@@ -1,5 +1,7 @@
 # 規格022：相鄰右上國家旗卡兩處動態文字
 
+2026-09-25 使用者決定：其餘三張國家旗卡採 A 字級（上欄 21px／下欄 25px），排除 B。
+
 狀態：DRAFT；日期：2026-09-24。來源：[目標090](../goals/090-neighbor-nation-card-source.md)、
 [研究紀錄](../../RESEARCH-LOG.md)與本機 `workplace/reports/goal090-neighbor-source/`。
 本規格只記正常玩家路徑在國家頁左鍵點 `(255,50)` 後，右側旗卡
