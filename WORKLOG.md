@@ -2498,3 +2498,4 @@
 - 勘誤：目標133 曾記「逐列點擊 24 次整組事件、第5列按下未重印原因未知」。實為分析器以讀字間隔分組，把一次中途停頓的重印切散；改以讀滿 268 次分組後為 25 次，第5列按下有重印。規格031、研究紀錄已改為現況；Issue 留言另行更正。
 - 驗證：最終前端 `gofmt`／`go vet` 無輸出，檢查器 PASS，舊欄位回歸另見下條。本輪容器皆 `--rm`，無殘留；隔離 dosgolem 禁推設定不變。原版像素、截圖與收據只在 `workplace/`。
 - 最終前端舊欄位回歸：標題 1280M 與字幕 82M 的 PNG、完整 RAM、索引、狀態、套用畫格數（54／151）與目標132 收據相同；`go test`（有界 Xvfb）、`gofmt`、Python 與 shell 語法檢查通過。
+- 收尾：`bfc31c6` 已推送 PRIVATE `origin/main`；[Issue #11](https://github.com/wicanr2/colonization_cht/issues/11#issuecomment-5826938744)、[Issue #12](https://github.com/wicanr2/colonization_cht/issues/12#issuecomment-5826938906)、[Issue #26](https://github.com/wicanr2/colonization_cht/issues/26#issuecomment-5826939123) 已留言（含目標133 事件計數更正）並回讀，三者維持 OPEN。
