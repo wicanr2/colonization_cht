@@ -1,6 +1,6 @@
 # 目前脈絡
 
-目前真相：[目標139](docs/goals/139-third-difficulty-card-overlay.md)完成 #33：第三張難度卡「征服者／普通」A 版在明示 `-third-card-a` 時顯示中文（規格016 第三卡限定 CONFORMED）。正式中文欄位為四十段。下一個 Issue 為 #34（其餘三張國家旗卡 A）。
+目前真相：[目標139](docs/goals/139-third-difficulty-card-overlay.md)完成 #33：第三張難度卡「征服者／普通」A 版在明示 `-third-card-a` 時顯示中文（規格016 第三卡限定 CONFORMED）。正式中文欄位為四十段。下一個 Issue 為 #34（其餘三張國家旗卡 A），進行中：[目標140](docs/goals/140-other-nation-cards-overlay.md)。
 
 目前真相：[目標138](docs/goals/138-retire-confirmation-overlay.md)完成 #32：退休確認框三欄 A 版在明示 `-retire-a` 時顯示中文（規格028 限定 CONFORMED）。正式中文欄位為三十八段。
 
