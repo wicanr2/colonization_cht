@@ -4028,3 +4028,10 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **已證實：**目標120收據中兩行印字的新色只有色號 14 與 0，與規格016目標121的色號記載一致；前端依此加入色號白名單並以色號 14 前景、色號 0 陰影 +4 繪製。
 - **真 GUI 與重播：**兩欄於 33,660,000 步啟用；四點（37M／38.5M／40M／離頁終點）中英原版狀態相同，與不開旗標的中文前端相比只在本卡兩欄有畫面差異。三項負例回原文。`tools/check_goal139_window.py` PASS（摘要 `9019d5f0…`）。
 - **停止線：**第四、五張卡未涵蓋；DOS 載入到執行期來源緩衝的搬運仍為強推論。收據只在忽略的 `workplace/reports/goal139-third-card/`。
+
+## 2026-09-25：目標140其餘三張國家旗卡正式覆蓋（A 版）
+
+- **輸入與工具：**前端 `tools/live_menu.go` SHA-256 `3c111495b95ea1dd98b58c328d86c4d4e72c1aedf0be35d4a4a3ea55745f2926`（新增 `-nation-cards-rest-a`）；探針 `tools/probe_goal140_nation_cards.go` SHA-256 `e9f12de89777a08bb73e6112f4b39e50d49af4816f0f8ba6110d1ee9c94656e9`；片段 TSV 新增西班牙、荷蘭、征服、貿易四筆 draft；烘字 `tools/bake_nation_card_a_from_font.py --rest`。
+- **已證實：**三國旗卡兩欄的常駐來源、顯示字串 `0x2A716`、點數、bbox、色號（旗卡色號加陰影 0）與穩定印前底圖，見[規格022](docs/spec/022-neighbor-nation-card-red-text-draft.md)文末。三國雙冷啟動 JSON 相同（`ce3cf597…`／`e1999248…`／`6239ae03…` 前綴），無監看控制一致。`NAMES.TXT @COUNTRY` 行尾數值與實測前景色號一一相符。
+- **強推論：**西班牙、荷蘭的檔案到常駐 RAM 搬運沿用法國已證實的同一條常式鏈，本輪未逐 byte 追蹤。
+- **驗收：**`tools/check_goal140_window.py` PASS（摘要 `4494778c…`）。收據只在忽略的 `workplace/reports/goal140-nation-cards/`。

@@ -18,6 +18,10 @@ EXPECTED = {
     "NAMES.TXT:0x00000906": ("NAMES.TXT", 0x906, b"France", "法國"),
     "LABELS.TXT:0x000008F2": ("LABELS.TXT", 0x8F2, b"Immigration", "移民"),
     "LABELS.TXT:0x000008FF": ("LABELS.TXT", 0x8FF, b"Cooperation", "合作"),
+    "NAMES.TXT:0x00000921": ("NAMES.TXT", 0x921, b"Spain", "西班牙"),
+    "NAMES.TXT:0x0000093D": ("NAMES.TXT", 0x93D, b"Netherlands", "荷蘭"),
+    "LABELS.TXT:0x0000090C": ("LABELS.TXT", 0x90C, b"Conquest", "征服"),
+    "LABELS.TXT:0x00000916": ("LABELS.TXT", 0x916, b"Trade", "貿易"),
 }
 FONT_SHA = "8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c"
 
@@ -66,7 +70,7 @@ def validate(catalog, game, font):
     font_data = font.read_bytes()
     require(sha(font_data) == FONT_SHA, "Cubic 11 字型指紋不符")
     coverage = cmap_coverage(font_data)
-    require(all(ord(char) in coverage for char in "英格蘭：移民法國合作"), "Cubic 11 缺少預覽字形")
+    require(all(ord(char) in coverage for char in "英格蘭：移民法國合作西班牙荷蘭征服貿易"), "Cubic 11 缺少預覽字形")
     return rows
 
 
@@ -80,7 +84,7 @@ def main():
         print("SKIP：合法原版或本機字型缺失")
         return 77
     validate(args.catalog, args.game, args.font)
-    print("PASS：旗卡四筆顯示片段草稿、原始檔案指紋、複合行語境及字形覆蓋一致")
+    print("PASS：旗卡八筆顯示片段草稿、原始檔案指紋、複合行語境及字形覆蓋一致")
     return 0
 
 

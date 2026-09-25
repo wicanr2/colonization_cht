@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""由固定原始 Cubic 11 與真實旗卡片段直接烘製第一張 A 版兩欄字模。"""
+"""由固定原始 Cubic 11 與真實旗卡片段直接烘製旗卡 A 版字模（預設第一張兩欄；--rest 為其餘三張六欄）。"""
 
 import argparse
 import base64
@@ -18,6 +18,16 @@ FIELDS = (
     ("LABELS.TXT:0x000008F2", 25, (54, 23), (597, 348), (125, 83, 190, 96), False),
 )
 
+# 規格022目標140：其餘三張旗卡，與第一張同為上欄21px、下欄25px，各欄以旗卡中線置中。
+REST_FIELDS = (
+    ("NAMES.TXT:0x00000906", 21, (69, 19), (986, 60), (225, 12, 290, 24), True),
+    ("LABELS.TXT:0x000008FF", 25, (54, 23), (993, 348), (225, 83, 290, 96), False),
+    ("NAMES.TXT:0x00000921", 21, (92, 19), (578, 424), (125, 103, 190, 115), True),
+    ("LABELS.TXT:0x0000090C", 25, (54, 23), (597, 712), (125, 174, 190, 187), False),
+    ("NAMES.TXT:0x0000093D", 21, (69, 19), (986, 424), (225, 103, 290, 115), True),
+    ("LABELS.TXT:0x00000916", 25, (54, 23), (993, 712), (225, 174, 290, 187), False),
+)
+
 
 def sha(data):
     return hashlib.sha256(data).hexdigest()
@@ -34,7 +44,7 @@ def bake(args):
     require(args.font.is_file(), "固定 Cubic 11 原始字型不存在")
     rows = {row["candidate_id"]: row for row in validate(args.catalog, args.game, args.font)}
     outputs = []
-    for key, size, expected_ink, position, safe, suffix_colon in FIELDS:
+    for key, size, expected_ink, position, safe, suffix_colon in (REST_FIELDS if getattr(args, "rest", False) else FIELDS):
         path = args.output / (key.replace(":", "-") + ".json")
         require(not path.exists(), "拒絕覆寫既有本機字模：" + key)
         text = rows[key]["zh_hant"] + ("：" if suffix_colon else "")
@@ -68,6 +78,7 @@ def main():
     parser.add_argument("--game", type=Path, required=True)
     parser.add_argument("--font", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--rest", action="store_true", help="烘其餘三張旗卡六欄")
     args = parser.parse_args()
     if not args.game.is_dir() or any(not (args.game / name).is_file()
                                      for name in ("NAMES.TXT", "LABELS.TXT")):

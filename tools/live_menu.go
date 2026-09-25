@@ -102,6 +102,8 @@ type difficultyLine struct {
 	nation                  bool
 	nationCard              bool
 	thirdCard               bool // 規格016第三張卡 A 版：色號14前景、色號0陰影向右4像素
+	cardColor               byte // 旗卡前景色號＝NAMES.TXT @COUNTRY 行尾值（英格蘭12、法國9、西班牙14、荷蘭13）
+	restCard                bool // 規格022其餘三張旗卡，字模另放獨立目錄
 	prompt                  bool
 	display                 []byte
 	displayLinear           uint32
@@ -330,6 +332,8 @@ func main() {
 	introAll := flag.Bool("nation-intro-a", false, "啟用規格025四國首次介紹八頁（標題34px／正文38px）")
 	introCatalog := flag.String("intro-catalog", "/repo/text/nation-introduction.zh-Hant.tsv", "國家介紹長文唯一 TSV")
 	introMasks := flag.String("intro-mask-dir", "/out/goal135-intro-masks", "本機依固定字型與真 TSV 烘製的介紹頁三層字模目錄")
+	restCardsA := flag.Bool("nation-cards-rest-a", false, "啟用規格022其餘三張旗卡 A 版（21／25px）")
+	restCardFonts := flag.String("nation-cards-rest-font-dir", "/out/goal140-nation-card-fonts", "其餘三張旗卡本機字模目錄")
 	thirdCardA := flag.Bool("third-card-a", false, "啟用規格016第三張難度卡 A 版（21／25px）")
 	thirdCardFonts := flag.String("third-card-font-dir", "/out/goal139-third-card-fonts", "第三張難度卡本機字模目錄")
 	retireA := flag.Bool("retire-a", false, "啟用規格028退休確認框三欄 A 版（34px、共同置中）")
@@ -620,13 +624,13 @@ func main() {
 					safe: image.Rect(125, 12, 190, 24), bbox: image.Rect(141, 15, 171, 20),
 					pixels: 123, position: image.Pt(578, 60), fontSize: 21,
 					nationCard: true, display: []byte("ENGLAND:"), displayLinear: 0x2a6ae,
-					inkSize: image.Pt(92, 19)},
+					inkSize: image.Pt(92, 19), cardColor: 12},
 				{id: "LABELS.TXT:0x000008F2", file: "LABELS.TXT", offset: 0x8f2, length: 11,
 					linear: 0x4dfd1, readCS: 0x0e2d, readIP: 0x11cf,
 					safe: image.Rect(125, 83, 190, 96), bbox: image.Rect(135, 87, 178, 93),
 					pixels: 156, position: image.Pt(597, 348), fontSize: 25,
 					nationCard: true, display: []byte("Immigration"), displayLinear: 0x2a6ae,
-					inkSize: image.Pt(54, 23)},
+					inkSize: image.Pt(54, 23), cardColor: 12},
 			}
 			for _, l := range flagCard {
 				if l.file == "NAMES.TXT" {
@@ -636,6 +640,40 @@ func main() {
 				}
 			}
 			difficulty = append(difficulty, flagCard...)
+		}
+		if *restCardsA {
+			// 規格022目標140：滑過、按下或放開其餘旗卡時原版重印兩欄；顯示字串都在0x2A716。
+			type restField struct {
+				id, file       string
+				offset, length int
+				linear         uint32
+				safe, bbox     image.Rectangle
+				pixels         int
+				position       image.Point
+				size           int
+				display        string
+				ink            image.Point
+				color          byte
+			}
+			for _, f := range []restField{
+				{"NAMES.TXT:0x00000906", "NAMES.TXT", 0x906, 6, 0x4cbc6, image.Rect(225, 12, 290, 24), image.Rect(242, 15, 268, 20), 100, image.Pt(986, 60), 21, "FRANCE:", image.Pt(69, 19), 9},
+				{"LABELS.TXT:0x000008FF", "LABELS.TXT", 0x8ff, 11, 0x4dfdd, image.Rect(225, 83, 290, 96), image.Rect(235, 87, 276, 93), 136, image.Pt(993, 348), 25, "Cooperation", image.Pt(54, 23), 9},
+				{"NAMES.TXT:0x00000921", "NAMES.TXT", 0x921, 5, 0x4cbcd, image.Rect(125, 103, 190, 115), image.Rect(145, 106, 167, 111), 82, image.Pt(578, 424), 21, "SPAIN:", image.Pt(92, 19), 14},
+				{"LABELS.TXT:0x0000090C", "LABELS.TXT", 0x90c, 8, 0x4dfe9, image.Rect(125, 174, 190, 187), image.Rect(141, 178, 172, 184), 106, image.Pt(597, 712), 25, "Conquest", image.Pt(54, 23), 14},
+				{"NAMES.TXT:0x0000093D", "NAMES.TXT", 0x93d, 11, 0x4cbd3, image.Rect(225, 103, 290, 115), image.Rect(232, 106, 278, 111), 184, image.Pt(986, 424), 21, "NETHERLANDS:", image.Pt(69, 19), 13},
+				{"LABELS.TXT:0x00000916", "LABELS.TXT", 0x916, 5, 0x4dff2, image.Rect(225, 174, 290, 187), image.Rect(246, 178, 266, 183), 66, image.Pt(993, 712), 25, "Trade", image.Pt(54, 23), 13},
+			} {
+				l := &difficultyLine{id: f.id, file: f.file, offset: f.offset, length: f.length,
+					linear: f.linear, readCS: 0x0e2d, readIP: 0x11cf, safe: f.safe, bbox: f.bbox,
+					pixels: f.pixels, position: f.position, fontSize: f.size, nationCard: true, restCard: true,
+					display: []byte(f.display), displayLinear: 0x2a716, inkSize: f.ink, cardColor: f.color}
+				if f.file == "NAMES.TXT" {
+					l.source = bytes.Clone(namesSource[f.offset : f.offset+f.length])
+				} else {
+					l.source = bytes.Clone(labelsSource[f.offset : f.offset+f.length])
+				}
+				difficulty = append(difficulty, l)
+			}
 		}
 		// 規格023限定 READY：譯稿鍵含^^，執行期來源另為可見字串加換行。
 		prompt = &difficultyLine{
@@ -758,7 +796,7 @@ func main() {
 			l.translation = get(row, "zh_hant")
 		}
 	}
-	if *nationCardA {
+	if *nationCardA || *restCardsA {
 		// 旗卡複合來源不同於整行主譯稿，僅採專用片段 TSV 的兩筆真鍵。
 		cardBytes, readErr := os.ReadFile(*nationCardCatalog)
 		if readErr == nil {
@@ -860,6 +898,9 @@ func main() {
 		}
 		if l.thirdCard {
 			maskDir = *thirdCardFonts
+		}
+		if l.restCard {
+			maskDir = *restCardFonts
 		}
 		path := filepath.Join(maskDir, strings.ReplaceAll(l.id, ":", "-")+".json")
 		var mask fontMask
@@ -1907,7 +1948,7 @@ func main() {
 						}
 						if (l.only254 && after[i] != 254) ||
 							(l.prompt && after[i] != 68 && after[i] != 47 && after[i] != 128) ||
-							(l.nationCard && after[i] != 0 && after[i] != 12) ||
+							(l.nationCard && after[i] != 0 && after[i] != l.cardColor) ||
 							(l.thirdCard && after[i] != 0 && after[i] != 14) ||
 							(!l.card && !l.prompt && !l.nationCard && !l.only254 && after[i] != 0 && after[i] != 253 && after[i] != 254) {
 							valid = false
@@ -2004,7 +2045,7 @@ func main() {
 				if result.Applied && (l.prompt || l.nationCard || l.thirdCard) {
 					index := 68
 					if l.nationCard {
-						index = 12
+						index = int(l.cardColor)
 					} else if l.thirdCard {
 						index = 14
 					}

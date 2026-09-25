@@ -1,6 +1,6 @@
 # 目標140：其餘三張國家旗卡接正式 Ebitengine（A 版）
 
-狀態：進行中；開始：2026-09-25。對應 [Issue #34](https://github.com/wicanr2/colonization_cht/issues/34)，承接[規格022（DRAFT）](../spec/022-neighbor-nation-card-red-text-draft.md)目標090～092、[規格021](../spec/021-nation-card-red-text-draft.md)第一張旗卡的正式閘門，與使用者 2026-09-25 選定的 A 版（上欄 21px、下欄 25px）。
+狀態：完成；開始與完成：2026-09-25。對應 [Issue #34](https://github.com/wicanr2/colonization_cht/issues/34)，承接[規格022（DRAFT）](../spec/022-neighbor-nation-card-red-text-draft.md)目標090～092、[規格021](../spec/021-nation-card-red-text-draft.md)第一張旗卡的正式閘門，與使用者 2026-09-25 選定的 A 版（上欄 21px、下欄 25px）。
 
 ## 工作與退出條件
 
@@ -8,6 +8,12 @@
 2. 依證據把規格022擴為三張旗卡並升限定 READY：逐欄來源鍵、點數、bbox、色號（前景為 `NAMES.TXT` 行尾的旗卡色號，陰影色號 0）、安全區與版面。
 3. 正式前端加預設關閉的旗標；真 GUI 滑過、按下、放開、移開、切換旗卡與離頁的中英同輸入重播，缺字模、缺譯與重複鍵負例；既有欄位回歸不退步。
 4. 更新文件、worklist 與 #34，私有推送並回讀。
+
+## 本輪結果
+
+- 規格022三張旗卡 A 版限定 CONFORMED；正式中文欄位由四十段增為四十六段。
+- 前景色不再寫死，改為各旗卡的原版色號（`NAMES.TXT @COUNTRY` 行尾值）。
+- 第一次重播時，探針收據與重播共用檔名前綴（如 `france-control`），三組英文控制被既有檔擋下未跑；探針收據移到 `probe/` 子目錄後補跑，重播腳本加入只跑指定組的選項。
 
 ## 停止線
 
