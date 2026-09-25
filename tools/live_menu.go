@@ -264,6 +264,43 @@ func introPanelBytes(buf []byte) []byte {
 // 游標只疊在真 VGA 上（底層畫布沒有游標）；以滑鼠左上角起 16×16 保守涵蓋。
 func cursorBox(x, y int) image.Rectangle { return image.Rect(x, y, x+16, y+16) }
 
+// 目標142：首則教學提示 @TUTORIAL1（Discoverer 難度英格蘭開局）。整段印字為權杖；讀字期間原版同時畫顧問肖像，
+// 故逐點記錄最後寫入者，只還原最後由 0D21:012C 寫下的文字像素。
+type helpState struct {
+	id, translation, fontReason string
+	valid                       bool
+	matches                     int
+	shadow, normal, accent      *image.Alpha
+	phase                       string
+	chars, readPos, writes      int
+	sum                         gohash.Hash
+	bbox                        image.Rectangle
+	firstOld                    map[int]byte // 文字像素第一次被 0D21:012C 改寫前的值
+	lastText                    map[int]bool // 該像素最後一次寫入者是否為 0D21:012C
+	patch                       *overlay.Patch
+	afterSafe                   []byte
+	startStep, lastRead         uint64
+	completeStep                uint64
+	accepted, appliedFrames     int
+}
+
+var (
+	helpText      = image.Rect(68, 104, 256, 169) // 文字安全區；原版墨跡 (69,106)–(250,165)
+	helpPortrait  = image.Rect(60, 29, 135, 120)  // 讀字期間 0D46:* 畫顧問肖像的範圍
+	helpReadBase  = uint32(0x2ac72)
+	helpBeforeSHA = "a18ee5bc02b824945f57b1c454a0756ae09434a3b20683b22afd7168cf3c8b52"
+	helpAfterSHA  = "111a048748df4ed963443821839c41703939017197ddf7b3d6ce583f4086c5b3"
+	helpPrintSHA  = "4181fdd58a74d0031037027762468fbf8cbe28565ff097f4726a0fa73a37936b"
+)
+
+func helpTextBytes(buf []byte) []byte {
+	b := make([]byte, 0, helpText.Dx()*helpText.Dy())
+	for y := helpText.Min.Y; y < helpText.Max.Y; y++ {
+		b = append(b, buf[y*320+helpText.Min.X:y*320+helpText.Max.X]...)
+	}
+	return b
+}
+
 // 規格028：退休確認框。問句與 Yes／No 各為一次整段印字事件；逐欄在第一次被改色時擷取當次底圖。
 type retireField struct {
 	id, translation, fontReason string
@@ -351,6 +388,9 @@ func main() {
 	buildValues := flag.String("build-values", "/repo/text/build-caption-values.zh-Hant.tsv", "開場字幕變數值唯一 TSV")
 	optionsTitleA := flag.Bool("game-options-title-a", false, "啟用規格030遊戲選項標題 A／34px")
 	optionsTitleFont := flag.String("game-options-title-font", "/out/goal132-options-title-font.json", "本機依固定字型與真 TSV 烘製的遊戲選項標題字模")
+	helpA := flag.Bool("tutorial-help-a", false, "啟用目標142首則教學提示 @TUTORIAL1 A 版（正文30px）")
+	helpCatalog := flag.String("help-catalog", "/repo/text/help-bilingual.tsv", "help 雙語唯一 TSV")
+	helpMasks := flag.String("help-mask-dir", "/out/goal142-help-masks", "本機依固定字型與真 TSV 烘製的 help 三層字模目錄")
 	introA := flag.Bool("england-intro-a", false, "啟用規格025英格蘭首次介紹兩頁（標題34px／正文38px）")
 	introAll := flag.Bool("nation-intro-a", false, "啟用規格025四國首次介紹八頁（標題34px／正文38px）")
 	introCatalog := flag.String("intro-catalog", "/repo/text/nation-introduction.zh-Hant.tsv", "國家介紹長文唯一 TSV")
@@ -612,6 +652,80 @@ func main() {
 				pg.shadow, pg.normal, pg.accent = nil, nil, nil
 				pg.fontReason = "missing-ink"
 			}
+		}
+	}
+	var help *helpState
+	if *helpA {
+		help = &helpState{id: "GAME.TXT:@TUTORIAL1", phase: "idle"}
+		helpBytes := read(*helpCatalog)
+		// 同介紹頁 TSV：譯文換行寫成字面 \n、欄內可能含雙引號，故逐行以 tab 切欄，不用 csv 引號規則。
+		helpLines := strings.Split(strings.TrimRight(string(helpBytes), "\n"), "\n")
+		header := strings.Split(helpLines[0], "\t")
+		col := map[string]int{}
+		for i, h := range header {
+			col[h] = i
+		}
+		helpFormatOK := true
+		for _, line := range helpLines[1:] {
+			row := strings.Split(line, "\t")
+			if len(row) != len(header) {
+				helpFormatOK = false
+				continue
+			}
+			hget := func(k string) string {
+				if i, ok := col[k]; ok {
+					return row[i]
+				}
+				return ""
+			}
+			if hget("message_id") != help.id {
+				continue
+			}
+			help.matches++
+			offset, e1 := strconv.ParseUint(hget("text_offset"), 0, 32)
+			length, e2 := strconv.Atoi(hget("text_byte_length"))
+			help.valid = e1 == nil && e2 == nil && offset == 0x13190 && length == 222 &&
+				hget("source_file") == "GAME.TXT" && hget("source_file_sha256") == versions["GAME.TXT"] &&
+				hget("source_bytes_sha256") == hash(rawSource[offset:int(offset)+length]) && hget("status") == "draft"
+			// 本路徑 %STRING0 的當次顯示值為 Caravel（由整段印字 SHA 釘住），譯名沿 PEDIA.TXT:@UNIT13。
+			help.translation = strings.ReplaceAll(hget("zh_hant"), "%STRING0", "卡拉維爾帆船")
+		}
+		if !helpFormatOK || help.matches != 1 || !help.valid || strings.Contains(help.translation, "%") {
+			help.fontReason = "missing-or-invalid-translation"
+		} else {
+			var mask struct {
+				ID          string `json:"message_id"`
+				Catalog     string `json:"catalog_sha256"`
+				Translation string `json:"translation_sha256"`
+				Font        string `json:"font_sha256"`
+				Body        int    `json:"body_font_px"`
+				Width       int    `json:"width"`
+				Height      int    `json:"height"`
+				Shadow      []byte `json:"shadow"`
+				Normal      []byte `json:"normal"`
+				Accent      []byte `json:"highlight"`
+			}
+			b, err := os.ReadFile(filepath.Join(*helpMasks, "GAME.TXT-@TUTORIAL1.json"))
+			size := helpText.Dx() * 4 * helpText.Dy() * 4
+			if err != nil || json.Unmarshal(b, &mask) != nil {
+				help.fontReason = "font-mask-unavailable"
+			} else if mask.ID != help.id || mask.Catalog != hash(helpBytes) || mask.Translation != hash([]byte(help.translation)) ||
+				mask.Font != fontHash || mask.Body != 30 {
+				help.fontReason = "font-binding-mismatch"
+			} else if mask.Width != helpText.Dx()*4 || mask.Height != helpText.Dy()*4 ||
+				len(mask.Shadow) != size || len(mask.Normal) != size || len(mask.Accent) != size {
+				help.fontReason = "font-mask-out-of-bounds"
+			} else {
+				rect := image.Rect(0, 0, mask.Width, mask.Height)
+				help.shadow, help.normal, help.accent = image.NewAlpha(rect), image.NewAlpha(rect), image.NewAlpha(rect)
+				copy(help.shadow.Pix, mask.Shadow)
+				copy(help.normal.Pix, mask.Normal)
+				copy(help.accent.Pix, mask.Accent)
+			}
+		}
+		if *missing {
+			help.shadow, help.normal, help.accent = nil, nil, nil
+			help.fontReason = "missing-ink"
 		}
 	}
 	labelsSource := read(filepath.Join(*root, "LABELS.TXT"))
@@ -1316,6 +1430,14 @@ func main() {
 			rowExpire(r, reason)
 		}
 	}
+	helpAnyInk := help != nil && help.normal != nil
+	helpExpire := func(reason string) {
+		if help == nil || help.phase == "idle" || help.phase == "expired" {
+			return
+		}
+		events = append(events, map[string]any{"candidate_id": help.id, "stage": "expired", "step": m.Steps, "reason": reason})
+		help.phase, help.patch, help.afterSafe, help.firstOld, help.lastText = "expired", nil, nil, nil, nil
+	}
 	introAnyInk := false
 	if intro != nil {
 		for _, pg := range intro.pages {
@@ -1351,7 +1473,7 @@ func main() {
 			f.phase, f.patch, f.before, f.afterSafe = "expired", nil, nil, nil
 		}
 	}
-	if !*control && (captionAnyInk || (title != nil && title.ink != nil) || rowsAnyInk || introAnyInk || retireAnyInk) {
+	if !*control && (captionAnyInk || (title != nil && title.ink != nil) || rowsAnyInk || introAnyInk || retireAnyInk || helpAnyInk) {
 		m.WatchWrites(0x2cae0, 0x2cae0+64000, func(a uint32, old, value uint8) {
 			if old == value {
 				return
@@ -1393,6 +1515,32 @@ func main() {
 				} else if !(cs == 0x0cae && ip == 0x00a8 && image.Pt(x, y).In(ev.helper) && (target == nil || target.got == 0)) {
 					// 原版在 Yes 印完、No 印字前以 0CAE:00A8 畫 No 按鈕底圖；其他情形一律撤銷。
 					retireExpire(ev, fmt.Sprintf("unexpected-canvas-writer %04X:%04X (%d,%d)", cs, ip, x, y))
+				}
+			}
+			if help != nil && help.phase == "reading" {
+				i := y*320 + x
+				if cs == 0x0d21 && ip == 0x012c {
+					if !image.Pt(x, y).In(helpText) {
+						helpExpire("write-outside-reviewed-pixels")
+					} else {
+						if help.writes == 0 {
+							help.bbox = image.Rect(x, y, x+1, y+1)
+						} else {
+							help.bbox = help.bbox.Union(image.Rect(x, y, x+1, y+1))
+						}
+						if _, seen := help.firstOld[i]; !seen {
+							help.firstOld[i] = old
+						}
+						help.lastText[i] = true
+						help.writes++
+						if help.writes > 3258 {
+							helpExpire("write-count-exceeded")
+						}
+					}
+				} else if cs == 0x0d46 && (ip == 0x0181 || ip == 0x01b4 || ip == 0x01d2) && image.Pt(x, y).In(helpPortrait) {
+					help.lastText[i] = false // 顧問肖像蓋過的像素保留原版印後值
+				} else if !(cs == 0x0b68 && ip == 0x051c && image.Pt(x, y).In(cursorBox(int(d.Mouse.X), int(d.Mouse.Y)).Inset(-2))) {
+					helpExpire(fmt.Sprintf("unexpected-canvas-writer %04X:%04X (%d,%d)", cs, ip, x, y))
 				}
 			}
 			if intro != nil && intro.phase == "reading" {
@@ -1697,6 +1845,34 @@ func main() {
 					ev.lastRead = m.Steps
 				}
 			}
+			if helpAnyInk && cs == 0x0d21 && ip == 0x00c6 {
+				a := uint32(c.Seg[golem.SS])*16 + uint32(c.R[golem.BX])
+				if a == helpReadBase || a == helpReadBase+1 {
+					if help.phase != "reading" && a == helpReadBase && m.VideoMode() == 0x13 && m.Mem[a] == 'O' &&
+						hash(canvas()) == helpBeforeSHA {
+						helpExpire("superseded-by-new-print")
+						help.phase, help.chars, help.readPos, help.writes = "reading", 0, 0, 0
+						help.sum, help.firstOld, help.lastText = sha256.New(), map[int]byte{}, map[int]bool{}
+						help.startStep = m.Steps
+						events = append(events, map[string]any{"candidate_id": help.id, "stage": "source", "step": m.Steps, "entry_ip": "0D21:00C6", "source_linear": a})
+					}
+					if help.phase == "reading" {
+						if a != helpReadBase+uint32(help.readPos%2) || (help.readPos%2 == 1 && m.Mem[a] != 0) {
+							helpExpire("source-read-mismatch")
+						} else {
+							if help.readPos%2 == 0 {
+								help.sum.Write([]byte{m.Mem[a]})
+								help.chars++
+								if help.chars > 205 {
+									helpExpire("source-read-count-exceeded")
+								}
+							}
+							help.readPos++
+							help.lastRead = m.Steps
+						}
+					}
+				}
+			}
 			if intro != nil && introAnyInk && cs == 0x0d21 && ip == 0x00c6 {
 				a := uint32(c.Seg[golem.SS])*16 + uint32(c.R[golem.BX])
 				if a == introReadLinear || a == introReadLinear+1 {
@@ -1983,6 +2159,52 @@ func main() {
 						f.phase, f.patch, f.before, f.afterSafe = "expired", nil, nil, nil
 					}
 				}
+			}
+		}
+		if helpAnyInk && !*control {
+			if help.phase != "idle" && help.phase != "expired" && m.VideoMode() != 0x13 {
+				helpExpire("mode-changed")
+			}
+			if help.phase == "reading" && m.Steps-help.lastRead > 20000 {
+				if help.chars == 205 && help.readPos == 410 && fmt.Sprintf("%x", help.sum.Sum(nil)) == helpPrintSHA &&
+					help.writes == 3258 && help.bbox.Eq(image.Rect(69, 106, 250, 165)) && hash(canvas()) == helpAfterSHA {
+					help.phase, help.completeStep = "waiting-screen", m.Steps
+				} else if m.Steps-help.lastRead > 2000000 {
+					helpExpire("incomplete-reviewed-output")
+				}
+			}
+			if help.phase == "waiting-screen" {
+				clean := bytes.Clone(m.Mem[0xa0000:0xafa00])
+				box := cursorBox(int(d.Mouse.X), int(d.Mouse.Y)).Intersect(helpText)
+				for y := box.Min.Y; y < box.Max.Y; y++ {
+					for x := box.Min.X; x < box.Max.X; x++ {
+						clean[y*320+x] = canvas()[y*320+x]
+					}
+				}
+				if m.Steps-help.completeStep > 2000000 {
+					helpExpire("screen-sync-timeout")
+				} else if bytes.Equal(helpTextBytes(clean), helpTextBytes(canvas())) {
+					// 印字前底圖＝印後畫面中最後由改色常式寫下的文字像素換回第一次改寫前的值。
+					before := bytes.Clone(canvas())
+					for i, text := range help.lastText {
+						if text {
+							before[i] = help.firstOld[i]
+						}
+					}
+					var err error
+					help.patch, err = overlay.NewPatch(before, canvas(), 320, 200, helpText)
+					if err != nil {
+						helpExpire("invalid-observed-patch")
+					} else {
+						help.afterSafe = helpTextBytes(canvas())
+						help.phase = "active"
+						help.accepted++
+						events = append(events, map[string]any{"candidate_id": help.id, "stage": "active", "step": m.Steps,
+							"visible_chars": help.chars, "changed_pixels": help.writes})
+					}
+				}
+			} else if help.phase == "active" && !bytes.Equal(helpTextBytes(canvas()), help.afterSafe) {
+				helpExpire("canvas-page-changed")
 			}
 		}
 		if intro != nil && introAnyInk && !*control {
@@ -2420,6 +2642,62 @@ func main() {
 					}
 					lineRecords = append(lineRecords, map[string]any{"candidate_id": pg.id, "applied": ok, "reason": reason, "accepted_events": pg.accepted})
 				}
+			}
+			if help != nil {
+				hreason, ok := help.phase, false
+				if help.normal == nil {
+					hreason = help.fontReason
+				} else if help.phase != "active" || help.patch == nil {
+					hreason = help.phase
+				} else if applied {
+					hreason = "other-overlay-active"
+				} else if d.Mouse.Buttons != 0 {
+					hreason = "mouse-button-held"
+				} else {
+					// 同介紹頁：游標範圍換回印後底層再合成中文，最後把真 VGA 的游標像素畫回最上層。
+					mx, my := int(d.Mouse.X), int(d.Mouse.Y)
+					clean := bytes.Clone(indexed)
+					box := cursorBox(mx, my).Intersect(helpText)
+					for y := box.Min.Y; y < box.Max.Y; y++ {
+						for x := box.Min.X; x < box.Max.X; x++ {
+							clean[y*320+x] = help.afterSafe[(y-helpText.Min.Y)*helpText.Dx()+x-helpText.Min.X]
+						}
+					}
+					if !bytes.Equal(helpTextBytes(clean), help.afterSafe) {
+						hreason = "vga-safe-mismatch"
+					} else {
+						origin := helpText.Min.Mul(4)
+						frame, composed, why, err := overlay.Compose(clean, m.DAC[:], 320, 200, 4,
+							help.patch, help.shadow, origin, 47, enabled)
+						must(err)
+						hreason = why
+						if composed {
+							panel := image.Rectangle{Min: origin, Max: helpText.Max.Mul(4)}
+							draw.Draw(output, panel, frame, panel.Min, draw.Src)
+							for _, layer := range []struct {
+								mask  *image.Alpha
+								index int
+							}{{help.normal, 68}, {help.accent, 149}} {
+								p := layer.index * 3
+								fg := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
+								draw.DrawMask(output, panel, image.NewUniform(fg), image.Point{}, layer.mask, image.Point{}, draw.Over)
+							}
+							for y := box.Min.Y; y < box.Max.Y; y++ {
+								for x := box.Min.X; x < box.Max.X; x++ {
+									if v := indexed[y*320+x]; v != clean[y*320+x] {
+										p := int(v) * 3
+										c := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
+										draw.Draw(output, image.Rect(x*4, y*4, x*4+4, y*4+4), image.NewUniform(c), image.Point{}, draw.Src)
+									}
+								}
+							}
+							ok, applied = true, true
+							hreason, reason = "applied", "applied"
+							help.appliedFrames++
+						}
+					}
+				}
+				lineRecords = append(lineRecords, map[string]any{"candidate_id": help.id, "applied": ok, "reason": hreason, "accepted_events": help.accepted})
 			}
 			optionsTitleShown := false
 			if title != nil {

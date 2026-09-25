@@ -4041,3 +4041,9 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **輸入與工具：**前端 `tools/live_menu.go` SHA-256 `d0bfc236ed66f299e183f9253318e1bc8c97c95d2383040a50121491c900b7a2`（字幕推廣為逐張資料表，新增 `-build-captions-a`／`-build-caption-font-dir`／`-build-values`／`-checkpoint-steps`）；探針 `tools/probe_goal141_captions.go` SHA-256 `7fed2ca4a847ab90ecb01369cf7869daa7330ef7c7bdf5a1151d488b21c67fe7`；無跳過輸入 `tools/goal141-captions.inputs.json` SHA-256 `17627777dcdf69f56d7d98bca3ea4a0f1843057b8483bc8ee5462386c6167662`；烘字 `tools/bake_build_captions.py`。
 - **已證實：**字幕期間按鍵會讓原版在第四張後跳過其餘字幕（85.2M Enter 路徑 548M 進海上，無鍵路徑 1,207M 進海上），兩條路徑各雙冷啟動 JSON 相同、無監看控制一致。十張字幕逐張的讀字基址、顯示字串、改色、印前／印後底圖、首次真 VGA 同步與換頁見[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)文末。`@BUILD1` 顯示期間 85.8M 左右原版背景讀入 `PHYS0.SS`／`ICONS.SS`／`BUILDING.SS`，`@BUILD4` 期間讀 `NAMES.TXT`，底層畫布不變。
 - **驗收：**`tools/check_goal141_window.py` PASS（摘要 `75f8837b…`）；全面回歸與目標138收據相同。收據只在忽略的 `workplace/reports/goal141-captions/`，首輪（舊撤銷條件）封存在 `attempts/1/`。
+
+## 2026-09-26：目標142首則教學提示 @TUTORIAL1 正式覆蓋
+
+- **輸入與工具：**前端 `tools/live_menu.go` SHA-256 `747ba2c2fa6517fe342449957ada86e72f92b1d4020cf0f6ec376ab3f7ab6e47`（新增 `-tutorial-help-a`）；Discoverer 輸入 `tools/goal142-discoverer.inputs.json` SHA-256 `de60e124d18e4c3c08582abd67a7cb7ba4cfb27be94014189dfa77597ecb6d08`；探針 `tools/probe_goal141_captions.go`（加記其他寫入者範圍）；預覽 `tools/preview_goal142_help.py`、烘字 `tools/bake_help_masks.py`。
+- **已證實：**選 Discoverer 時英格蘭開局在 565.08M 印出 `@TUTORIAL1`，選 Explorer 則不出現；讀字、改色、肖像寫入範圍、印前／印後底圖與按 Enter 關閉見[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)文末。雙冷啟動 JSON 相同、無監看控制一致。
+- **驗收：**`tools/check_goal142_window.py` PASS（摘要 `6806f2cf…`）。收據只在忽略的 `workplace/reports/goal142-help/`。

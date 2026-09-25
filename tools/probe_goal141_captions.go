@@ -39,6 +39,7 @@ type print141 struct {
 	BeforeSHA    string
 	AfterSHA     string
 	OtherWriters map[string]int
+	OtherBoxes   map[string][4]int // 目標142：其他寫入者在本筆印字期間的範圍 (minX,minY,maxX,maxY)
 }
 
 func must141(err error) {
@@ -79,7 +80,8 @@ func main() {
 	inputBytes := file141(*inputs)
 	// 5c14…：目標132錄製路徑（85.2M 多一次 Enter，第四頁後跳過其餘字幕）；1762…：同路徑去掉該鍵，十張字幕全顯示。
 	if h := sha141(inputBytes); h != "5c143497e6425f38495216f62fe582aa2b035a1afdb7351852dc50126ed487bc" &&
-		h != "17627777dcdf69f56d7d98bca3ea4a0f1843057b8483bc8ee5462386c6167662" {
+		h != "17627777dcdf69f56d7d98bca3ea4a0f1843057b8483bc8ee5462386c6167662" &&
+		h != "de60e124d18e4c3c08582abd67a7cb7ba4cfb27be94014189dfa77597ecb6d08" { // 目標142：同路徑改選第一張難度卡（Discoverer），600M 按 Enter 關 help，終點 700M
 		panic("輸入收據版本不符")
 	}
 	var replay replay141
@@ -94,7 +96,11 @@ func main() {
 	m.SetSoundBlasterPro(true)
 	const canvas uint32 = 0x2cae0
 	// @BUILD1 約在 78～89M 印字；最後一張字幕之後 1225.4M 才有玩家左移。
-	const start, stop uint64 = 76000000, 1225000000
+	const start uint64 = 76000000
+	stop := uint64(1225000000)
+	if replay.End > start && replay.End < stop {
+		stop = replay.End
+	}
 	prints := []*print141{}
 	var cur *print141
 	frames := []map[string]any{}
@@ -117,7 +123,7 @@ func main() {
 			if cur == nil || a != cur.Next || m.Steps-cur.Last > 200000 {
 				b := append([]byte(nil), m.Mem[canvas:canvas+64000]...)
 				cur = &print141{Start: m.Steps, Base: a, Colors: map[uint8]int{},
-					MinX: 320, MinY: 200, MaxX: -1, MaxY: -1, BeforeSHA: sha141(b), OtherWriters: map[string]int{}}
+					MinX: 320, MinY: 200, MaxX: -1, MaxY: -1, BeforeSHA: sha141(b), OtherWriters: map[string]int{}, OtherBoxes: map[string][4]int{}}
 				prints = append(prints, cur)
 				if len(prints) > 4000 {
 					panic("印字事件超出上限")
@@ -141,12 +147,17 @@ func main() {
 				otherWrites[site]++
 				return
 			}
-			if site != "0D21:012C" {
-				cur.OtherWriters[site]++
-				return
-			}
 			i := int(a - canvas)
 			x, y := i%320, i/320
+			if site != "0D21:012C" {
+				cur.OtherWriters[site]++
+				b, seen := cur.OtherBoxes[site]
+				if !seen {
+					b = [4]int{x, y, x, y}
+				}
+				cur.OtherBoxes[site] = [4]int{min(b[0], x), min(b[1], y), max(b[2], x), max(b[3], y)}
+				return
+			}
 			cur.Writes++
 			cur.Colors[value]++
 			cur.MinX, cur.MinY = min(cur.MinX, x), min(cur.MinY, y)

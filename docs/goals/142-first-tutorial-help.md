@@ -1,6 +1,6 @@
 # 目標142：首則教學提示 @TUTORIAL1 接正式 Ebitengine（A 版）
 
-狀態：進行中；開始：2026-09-26。對應 [Issue #36](https://github.com/wicanr2/colonization_cht/issues/36)，承接[規格026（DRAFT）](../spec/026-build-intro-and-tutorial-prefetch-draft.md)的 help 預讀證據與[規格025](../spec/025-first-nation-introduction-draft.md)的長文三層字模做法。
+狀態：完成；開始與完成：2026-09-26。對應 [Issue #36](https://github.com/wicanr2/colonization_cht/issues/36)，承接[規格026（DRAFT）](../spec/026-build-intro-and-tutorial-prefetch-draft.md)的 help 預讀證據與[規格025](../spec/025-first-nation-introduction-draft.md)的長文三層字模做法。
 
 ## 已知
 
@@ -13,6 +13,12 @@
 2. 建立 help 的 DRAFT→READY 規格：來源鍵、`%STRING0` 執行期值、三層字模版面、游標與關閉撤銷、缺譯回退。
 3. 正式前端加預設關閉的旗標；中英同輸入、關閉撤銷、負例、真 GUI 驗收；既有欄位回歸不退步。
 4. 更新文件、worklist 與 #36，私有推送並回讀。
+
+## 本輪結果
+
+- 規格026 的 `@TUTORIAL1` A 版限定 CONFORMED；正式中文欄位由五十六段增為五十七段。
+- 新增獨立的 help 閘門：讀字期間原版同時畫顧問肖像，改以逐點最後寫入者重建印前底圖。
+- 第一次真 GUI 時 help 被判缺譯：help TSV 欄內有雙引號，Go csv 嚴格模式解析失敗；改為逐行以 tab 切欄後重跑，首輪收據封存在 `attempts/gui-1/`。
 
 ## 停止線
 
