@@ -1,6 +1,6 @@
 # 目前脈絡
 
-目前真相：[目標141](docs/goals/141-remaining-build-captions.md)完成 #35：英格蘭十張開場字幕在明示 `-build1-a -build-captions-a` 時全部顯示中文（規格026 字幕部分限定 CONFORMED）；介紹頁後任何按鍵會讓原版在第四張後跳過其餘字幕。`@BUILD1` 撤銷條件已拿掉開檔數（規格029 更正）。正式中文欄位為五十六段。下一個 Issue 為 #36（首則 help）。
+目前真相：[目標141](docs/goals/141-remaining-build-captions.md)完成 #35：英格蘭十張開場字幕在明示 `-build1-a -build-captions-a` 時全部顯示中文（規格026 字幕部分限定 CONFORMED）；介紹頁後任何按鍵會讓原版在第四張後跳過其餘字幕。`@BUILD1` 撤銷條件已拿掉開檔數（規格029 更正）。正式中文欄位為五十六段。下一個 Issue 為 #36（首則 help），進行中：[目標142](docs/goals/142-first-tutorial-help.md)；已找到觸發條件是選 Discoverer 難度。
 
 目前真相：[目標140](docs/goals/140-other-nation-cards-overlay.md)完成 #34：法國、西班牙、荷蘭三張旗卡 A 版在明示 `-nation-cards-rest-a` 時顯示中文（規格022 限定 CONFORMED）。正式中文欄位為四十六段。
 
