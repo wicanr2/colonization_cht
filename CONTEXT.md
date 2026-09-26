@@ -1,5 +1,7 @@
 # 目前脈絡
 
+目前真相：[目標158](docs/goals/158-text-denominator.md)（#27 第四輪）：全遊戲 TXT 遊戲畫面分母 3,587 行，已翻譯草稿 1,764 行（49%），未建檔 1,823 行（GAME.TXT 1,348、NAMES.TXT 217、LABELS.TXT 208 等）。
+
 目前真相：[目標157](docs/goals/157-reverify-after-terms.md)：改稿後全部正式欄位字模已重烘，全部旗標載入無綁定失效，畫面顯示新譯名。使用者決定譯文變動欄位的視覺重驗延到 #27 定稿後、#15 前一次做（[Issue #38](https://github.com/wicanr2/colonization_cht/issues/38)）；驗證矩陣相關列標為待重驗。
 
 目前真相：[目標156](docs/goals/156-apply-terms.md)（#27 第三輪）：譯稿依定稿譯名改了 238 列，術語檢查只剩 33 列有理由不換。改稿使 34 個正式欄位的字模綁定失效，目前全部回原文（fail-closed）；重烘與重驗在目標157。

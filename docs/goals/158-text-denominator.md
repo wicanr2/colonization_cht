@@ -1,6 +1,6 @@
 # 目標158：全遊戲 TXT 訊息分母（Issue #27 第四輪）
 
-狀態：進行中；開始：2026-09-26。對應 [Issue #27](https://github.com/wicanr2/colonization_cht/issues/27)。
+狀態：完成；開始與完成：2026-09-26。對應 [Issue #27](https://github.com/wicanr2/colonization_cht/issues/27)。
 
 ## 範圍
 
@@ -13,3 +13,41 @@
 
 - `tools/text_inventory.py` 重跑得到相同報表；缺原版回 SKIP 77。
 - 分母與覆蓋率寫入目標文件，未建檔單位清單可供後續批次翻譯。
+
+## 結果（`tools/text_inventory.py`）
+
+單位是「含英文字母的顯示行」：排除 `;` 註解、`@` 段落與控制行、不含字母的資料行；「名稱,數值」資料行只取名稱。與十份譯稿依來源位移重疊判定覆蓋。
+
+| 類別 | 行數 | 已抽取 | 已翻譯 |
+|---|---:|---:|---:|
+| 遊戲畫面（game） | 3,587 | 1,764 | 1,764 |
+| README | 138 | 102 | 102 |
+| 除錯訊息（DEBUG.TXT） | 118 | 0 | 0 |
+| 安裝說明（AUTOEXEC／CONFIG） | 19 | 0 | 0 |
+| 記憶體警告（MEMORY／MEMORY2） | 13 | 0 | 0 |
+
+遊戲畫面各檔：
+
+| 檔案 | 行數 | 已翻譯 | 未建檔 |
+|---|---:|---:|---:|
+| GAME.TXT | 1,640 | 292 | 1,348 |
+| PEDIA.TXT | 959 | 954 | 5 |
+| NAMES.TXT | 301 | 84 | 217 |
+| LABELS.TXT | 258 | 50 | 208 |
+| COLONY.TXT | 173 | 173 | 0 |
+| MAPEDIT.TXT | 103 | 99 | 4 |
+| MENU.TXT | 80 | 68 | 12 |
+| MAPMENU.TXT | 28 | 28 | 0 |
+| OPENING.TXT | 19 | 1 | 18 |
+| WOODCUT.TXT | 17 | 14 | 3 |
+| CLOSING.TXT | 9 | 1 | 8 |
+| TRIBE.TXT | 0 | 0 | 0 |
+
+遊戲畫面文字已翻譯草稿 49%（1,764／3,587 行），未建檔 1,823 行。摘要 SHA-256 `c423baa31eff7017a5ad9a97f51a6e85512c9fb4f32bb323f6e57e18f701d938`，只在已忽略的 `workplace/reports/goal158-inventory/`；未建檔清單（含原文）在同目錄 `detail.json`。
+
+## 限制
+
+- 「已翻譯」是草稿層級，畫面顯示另計（見[驗證矩陣](../verification-matrix.md)）。
+- 行是分母單位，不等於訊息則數：GAME.TXT 的長訊息跨多行，翻譯時以段落為單位。
+- DEBUG.TXT 是否在正常遊玩中可見尚未取證，暫不列入遊戲畫面分母。
+- 「名稱,熱鍵字母」資料行（例如 NAMES.TXT 的指令表）保留整行計入。

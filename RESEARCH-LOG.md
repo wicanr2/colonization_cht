@@ -4100,3 +4100,9 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **輸入與工具：**前端 `tools/live_menu.go` SHA-256 `0babd2974ec63e837dfb7f604b86a5b530a4db30e24b0a5b2559788a638e1ace`；定稿表 SHA-256 `031e388a7bfbcf83908ee5f9cfcc1bfd94b9748a4ff746f0ebbfcf53961f72ce`；`tools/rebake_goal157.sh`。
 - **已證實：**譯文未變欄位的新字模與舊字模 alpha、尺寸、位置相同；全部旗標載入沒有綁定失效或超界。
 - **未驗：**譯文變動欄位的真 GUI 與同輸入重播（Issue #38）。
+
+## 2026-09-26：目標158全遊戲 TXT 分母
+
+- **工具：**`tools/text_inventory.py`；摘要 SHA-256 `c423baa31eff7017a5ad9a97f51a6e85512c9fb4f32bb323f6e57e18f701d938`（只在 workplace）。
+- **結果：**遊戲畫面 3,587 行、已抽取 1,764、已翻譯 1,764、未建檔 1,823；README 138 行（已翻 102）；DEBUG 118、安裝說明 19、記憶體警告 13 行另列。
+- **未知：**DEBUG.TXT 在正常遊玩中是否可見。
