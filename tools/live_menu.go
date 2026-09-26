@@ -477,6 +477,36 @@ func (st *seaState) seaDraw(mask *image.Alpha, text string, x, y, size int) bool
 	return clipped
 }
 
+// 目標151（規格034）：靜態內嵌文字（開場製作名單職稱橫幅）。沒有印字事件可當權杖，
+// 以當幀真 VGA 索引畫面在指紋矩形內逐 byte 相符為唯一觸發條件，相符才清除文字帶原文並畫中文。
+type staticItem struct {
+	id, zh, reason string
+	fp, band       image.Rectangle
+	sha            string
+	ink            byte
+	mask           *image.Alpha
+	pos            image.Point
+	on             bool
+	accepted       int
+}
+
+func parseRect(text string) (image.Rectangle, bool) {
+	f := strings.Split(text, ",")
+	if len(f) != 4 {
+		return image.Rectangle{}, false
+	}
+	v := make([]int, 4)
+	for i := range f {
+		n, err := strconv.Atoi(f[i])
+		if err != nil {
+			return image.Rectangle{}, false
+		}
+		v[i] = n
+	}
+	r := image.Rect(v[0], v[1], v[2], v[3])
+	return r, !r.Empty() && r.In(image.Rect(0, 0, 320, 200))
+}
+
 func seaMisses(sea *seaState) map[string]int {
 	if sea == nil {
 		return nil
@@ -579,6 +609,9 @@ func main() {
 	buildValues := flag.String("build-values", "/repo/text/build-caption-values.zh-Hant.tsv", "開場字幕變數值唯一 TSV")
 	optionsTitleA := flag.Bool("game-options-title-a", false, "啟用規格030遊戲選項標題 A／34px")
 	optionsTitleFont := flag.String("game-options-title-font", "/out/goal132-options-title-font.json", "本機依固定字型與真 TSV 烘製的遊戲選項標題字模")
+	staticA := flag.Bool("static-credits-a", false, "啟用規格034開場製作名單職稱橫幅靜態覆蓋")
+	staticCatalog := flag.String("static-catalog", "/repo/text/static-overlay.zh-Hant.tsv", "靜態覆蓋唯一 TSV")
+	staticMasks := flag.String("static-mask-dir", "/out/goal151-static-masks", "本機依固定字型與 TSV 烘製的靜態覆蓋字模目錄")
 	seaA := flag.Bool("sea-status-a", false, "啟用規格032海上選單列與狀態欄（22px＋黑影）")
 	seaCatalog := flag.String("sea-catalog", "/repo/text/sea-status.zh-Hant.tsv", "海上詞典唯一 TSV")
 	seaAtlas := flag.String("sea-atlas", "/out/goal143-sea-atlas.json", "本機依固定字型與詞典烘製的海上字元圖集")
@@ -924,6 +957,77 @@ func main() {
 	}
 	labelsSource := read(filepath.Join(*root, "LABELS.TXT"))
 	namesSource := read(filepath.Join(*root, "NAMES.TXT"))
+	var statics []*staticItem
+	if *staticA {
+		staticBytes := read(*staticCatalog)
+		lines := strings.Split(strings.TrimRight(string(staticBytes), "\n"), "\n")
+		header := strings.Split(lines[0], "\t")
+		col := map[string]int{}
+		for i, h := range header {
+			col[h] = i
+		}
+		for _, line := range lines[1:] {
+			row := strings.Split(line, "\t")
+			if len(row) != len(header) {
+				continue
+			}
+			get := func(k string) string { return row[col[k]] }
+			it := &staticItem{id: get("candidate_id"), zh: get("zh_hant"), sha: get("fingerprint_sha256")}
+			fp, ok1 := parseRect(get("fingerprint_rect"))
+			band, ok2 := parseRect(get("text_band"))
+			it.fp, it.band = fp, band
+			img, err := os.ReadFile(filepath.Join(*root, get("image_file")))
+			switch {
+			case !ok1 || !ok2 || !band.In(fp) || err != nil || hash(img) != get("image_sha256") || it.zh == "" || get("status") != "draft":
+				it.reason = "missing-or-invalid-translation"
+			}
+			if it.reason == "" {
+				var mask struct {
+					ID          string `json:"candidate_id"`
+					Catalog     string `json:"catalog_sha256"`
+					Translation string `json:"translation_sha256"`
+					Font        string `json:"font_sha256"`
+					Px          int    `json:"font_px"`
+					Width       int    `json:"width"`
+					Height      int    `json:"height"`
+					X           int    `json:"x"`
+					Y           int    `json:"y"`
+					Ink         int    `json:"ink_index"`
+					Alpha       []byte `json:"alpha"`
+				}
+				b, err := os.ReadFile(filepath.Join(*staticMasks, strings.ReplaceAll(it.id, ":", "-")+".json"))
+				var r image.Rectangle
+				if err != nil || json.Unmarshal(b, &mask) != nil {
+					it.reason = "font-mask-unavailable"
+				} else if r = image.Rect(mask.X, mask.Y, mask.X+mask.Width, mask.Y+mask.Height); mask.ID != it.id ||
+					mask.Catalog != hash(staticBytes) || mask.Translation != hash([]byte(it.zh)) || mask.Font != fontHash ||
+					mask.Px < 15 || mask.Px > 22 || mask.Ink < 0 || mask.Ink > 255 {
+					it.reason = "font-binding-mismatch"
+				} else if mask.Width <= 0 || mask.Height <= 0 || len(mask.Alpha) != mask.Width*mask.Height ||
+					!r.In(image.Rectangle{Min: band.Min.Mul(4), Max: band.Max.Mul(4)}) {
+					it.reason = "font-mask-out-of-bounds"
+				} else {
+					it.mask = image.NewAlpha(image.Rect(0, 0, mask.Width, mask.Height))
+					copy(it.mask.Pix, mask.Alpha)
+					it.pos, it.ink = r.Min, byte(mask.Ink)
+				}
+			}
+			if *missing {
+				it.mask, it.reason = nil, "missing-ink"
+			}
+			statics = append(statics, it)
+		}
+		// 重複鍵整組停用（fail-closed），不讓先出現的那一列生效。
+		count := map[string]int{}
+		for _, it := range statics {
+			count[it.id]++
+		}
+		for _, it := range statics {
+			if count[it.id] > 1 {
+				it.mask, it.reason = nil, "duplicate-key"
+			}
+		}
+	}
 	var sea *seaState
 	seaReason := ""
 	if *seaA {
@@ -2980,6 +3084,57 @@ func main() {
 			}
 			if *allMenu && applied {
 				reason = "applied"
+			}
+			for _, it := range statics {
+				reason, ok := it.reason, false
+				if it.mask != nil && !*control {
+					region := make([]byte, 0, it.fp.Dx()*it.fp.Dy())
+					for y := it.fp.Min.Y; y < it.fp.Max.Y; y++ {
+						region = append(region, indexed[y*320+it.fp.Min.X:y*320+it.fp.Max.X]...)
+					}
+					if hash(region) != it.sha {
+						reason = "fingerprint-mismatch"
+					} else {
+						// 文字帶內亮度低於 122 的色號視為原文（含抗鋸齒），以同列最近的非文字像素補回紋理。
+						lum := func(v byte) int { return int(m.DAC[int(v)*3]) + int(m.DAC[int(v)*3+1]) + int(m.DAC[int(v)*3+2]) }
+						clean := bytes.Clone(indexed)
+						for y := it.band.Min.Y; y < it.band.Max.Y; y++ {
+							for x := it.band.Min.X; x < it.band.Max.X; x++ {
+								if lum(indexed[y*320+x]) >= 122 {
+									continue
+								}
+							search:
+								for dx := 1; dx < it.band.Dx(); dx++ {
+									for _, nx := range []int{x - dx, x + dx} {
+										if nx >= it.band.Min.X && nx < it.band.Max.X && lum(indexed[y*320+nx]) >= 122 {
+											clean[y*320+x] = indexed[y*320+nx]
+											break search
+										}
+									}
+								}
+							}
+						}
+						patch, err := overlay.NewPatch(clean, indexed, 320, 200, it.band)
+						if err != nil {
+							reason = "invalid-observed-patch"
+						} else {
+							frame, composed, why, err := overlay.Compose(indexed, m.DAC[:], 320, 200, 4, patch, it.mask, it.pos, it.ink, enabled)
+							must(err)
+							reason = why
+							if composed {
+								out := image.Rectangle{Min: it.band.Min.Mul(4), Max: it.band.Max.Mul(4)}
+								draw.Draw(output, out, frame, out.Min, draw.Src)
+								ok, reason = true, "applied"
+							}
+						}
+					}
+				}
+				if ok && !it.on {
+					it.accepted++
+					events = append(events, map[string]any{"candidate_id": it.id, "stage": "active", "step": m.Steps})
+				}
+				it.on = ok
+				lineRecords = append(lineRecords, map[string]any{"candidate_id": it.id, "applied": ok, "reason": reason, "accepted_events": it.accepted})
 			}
 			if sea != nil {
 				for _, layer := range []*seaLayer{sea.bar, sea.panel} {

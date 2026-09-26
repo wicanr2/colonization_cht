@@ -1,5 +1,7 @@
 # 目前脈絡
 
+目前真相：[目標151](docs/goals/151-static-overlay-implementation.md)完成 #13：開場製作名單七個職稱橫幅靜態覆蓋（`--static-credits-a`，規格034 限定 CONFORMED）；真 GUI 不按鍵看完開場，七項各套用一次，人名橫幅與無橫幅畫面不變。
+
 目前真相：[目標150](docs/goals/150-dynamic-overlay-verification.md)完成 #12：海上拼字引擎加入縮字（22～15px）；全部欄位旗標同時開的兩條正常路徑中英同狀態，39 個鍵都套用。
 
 目前真相：[目標149](docs/goals/149-dynamic-overlay-ready.md)完成 #11：規格033 升 READY，涵蓋固定單行、逐字事件列、模板動態行三類。

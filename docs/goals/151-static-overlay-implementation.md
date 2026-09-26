@@ -1,6 +1,6 @@
 # 目標151：靜態文字覆蓋正式實作與驗證（Issue #13）
 
-狀態：進行中；開始：2026-09-26。對應 [Issue #13](https://github.com/wicanr2/colonization_cht/issues/13)，依[規格034](../spec/034-static-text-overlay-draft.md)。
+狀態：完成；開始與完成：2026-09-26。對應 [Issue #13](https://github.com/wicanr2/colonization_cht/issues/13)，依[規格034](../spec/034-static-text-overlay-draft.md)。
 
 ## 範圍
 
@@ -14,3 +14,20 @@
 - 中英同輸入重播：原版記憶體狀態相同；中文差異只在文字帶。
 - 負例：缺字模、指紋竄改、重複鍵時 fail-closed。
 - 全面回歸六點與目標138收據相同。
+
+## 結果（`tools/check_goal151_window.py` PASS）
+
+| 項目 | 結果 |
+|---|---|
+| 真 GUI 不按鍵看完開場（1130M） | 七個職稱各套用一次；現場截圖與重播在文字帶內逐像素相同 |
+| 人名橫幅 480M、無橫幅 1060M | 指紋不符，中英畫面相同 |
+| 中英同輸入九個檢查點與終點 | 原版 RAM、索引、色盤相同；中文差異只在文字帶 |
+| 負例 | 缺字模 `missing-ink`、字模目錄空 `font-mask-unavailable`、譯文改動 `font-binding-mismatch`、重複鍵整組 `duplicate-key`；畫面都與原版相同 |
+| 全面回歸 | 六點與目標138收據相同 |
+
+檢查器摘要 SHA-256 `f167e2133ccbaccebd4bf715113e3d9798560c53eb6471655ed4e5e9cf8135f6`。
+
+## 已知限制
+
+- 只覆蓋製作名單職稱；人名、開場海圖拉丁字與品牌標誌依清冊不覆蓋。
+- 按鍵跳過開場時職稱橫幅不會出現，覆蓋自然不觸發。

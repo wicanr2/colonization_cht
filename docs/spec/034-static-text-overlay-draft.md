@@ -1,6 +1,6 @@
-# 規格034：靜態內嵌文字覆蓋（DRAFT）
+# 規格034：靜態內嵌文字覆蓋
 
-狀態：DRAFT；日期：2026-09-26。對應 [Issue #9](https://github.com/wicanr2/colonization_cht/issues/9)，候選來自[目標146 清冊](../goals/146-static-text-inventory.md)。本規格只授權可丟棄原型，不授權正式覆蓋。
+狀態：開場製作名單七個職稱橫幅限定 CONFORMED（[目標151](../goals/151-static-overlay-implementation.md)，[Issue #13](https://github.com/wicanr2/colonization_cht/issues/13)）；其餘清冊項目不覆蓋。日期：2026-09-26。DRAFT 與原型見 [Issue #9](https://github.com/wicanr2/colonization_cht/issues/9)，候選來自[目標146 清冊](../goals/146-static-text-inventory.md)。
 
 ## 識別條件
 
@@ -33,8 +33,30 @@
 
 原型報告 SHA-256 `0f502f04823ab4d68d14fa0d5f9fbe306f46c0e6e54538f1cccc332632b0d44d`；輸出圖只在已忽略的 `workplace/reports/goal147-static-proto/`。
 
-## READY 前缺口
+## 正式契約（READY）
 
-- 中文字級與譯名（職稱）需經使用者確認（#10）。
-- 橫幅在動畫中逐格捲入，完整顯示的影格有限；正式實作要量出每個橫幅的穩定影格範圍與真 VGA 同步。
-- 人名保留原文；其餘清冊項目依清冊建議不覆蓋。
+- 唯一譯稿 `text/static-overlay.zh-Hant.tsv`：欄位 `candidate_id, image_file, image_sha256, fingerprint_rect, fingerprint_sha256, text_band, source_text, zh_hant, status, notes`。
+- 前端旗標 `--static-credits-a`；字模目錄 `--static-mask-dir` 由 `tools/bake_static_masks.py` 以 Cubic 11 與 TSV 本機烘製（只在 workplace）。字模綁定 TSV SHA、譯文 SHA、字型 SHA；任一不符為 `font-binding-mismatch`。
+- 每幀以真 VGA 索引畫面比對指紋矩形 SHA；相符才在文字帶內把亮度（DAC 三色和）低於 122 的像素換成同列最近亮像素，再以原版文字色號畫中文。
+- fail-closed：圖檔 SHA 不符、缺譯、重複鍵（整組停用）、缺字模、字模超出文字帶一律回原文並記錄原因。英文控制 `--control` 不套用。
+- 轉入事件：每次由未套用轉為套用記一筆 `active`。
+
+## 七個職稱的量測
+
+指紋矩形都是 `(30,166)–(290,196)`，涵蓋整條卷軸與上下木框；指紋 SHA 見 TSV。
+
+| 鍵 | 中文 | 文字帶（邏輯） | 原文墨跡範圍 | 穩定影格（依目標146檢查點） |
+|---|---|---|---|---|
+| adventure | MicroProse 冒險遊戲 | 66–252 × 176–182 | 77–243 | 310–340M |
+| design | 遊戲設計 | 80–238 × 176–182 | 111–211 | 450–470M |
+| programming | 程式設計 | 同上 | 107–213 | 550–560M |
+| graphics | 電腦美術 | 同上 | 86–236 | 650–660M |
+| music | 原創音樂 | 同上 | 102–220 | 800–820M |
+| sound | 音效程式 | 同上 | 85–238 | 950–970M |
+| qa | 品質保證 | 同上 | 87–233（Q 尾巴在第182列） | 1110–1120M |
+
+文字帶取卷軸內部在第176～182列的亮區，比原文墨跡寬，清除時不會碰到木框。
+
+字級：原文大寫字高5列（第177～181列，四倍20px）；中文候選22px（墨跡高21px），與原文墨跡高相差1px，放進7列（28px）文字帶，七項都在22px放得下，最長「MicroProse 冒險遊戲」215px，小於文字帶748px；縮字規則（22→15px，下限2/3）不需觸發。基線：字模在文字帶內垂直置中；水平置中於卷軸。放不下時回原文。
+
+人名橫幅（兩側分開的卷軸）與無橫幅畫面指紋不符，保持原文。

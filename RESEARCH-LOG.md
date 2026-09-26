@@ -4059,3 +4059,9 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 
 - **輸入與工具：**前端 `tools/live_menu.go` SHA-256 `023fdd7a153fcdb98f65000748fa6da31a76256dfc4bd9799bf4dc2e0e55ea8a`（海上引擎多字級與縮字）；全流程輸入 `tools/goal150-full-path.inputs.json` SHA-256 `bd076f875216d5764f1971066134d39e8d8710c59eeb3d9b4bfd94c4835d1b8c`。
 - **驗證：**`tools/check_goal150_window.py` PASS（摘要 `4254133b…`）；全面回歸相同。收據只在忽略的 `workplace/reports/goal150-dynamic/`。
+
+## 2026-09-26：目標151開場製作名單職稱靜態覆蓋
+
+- **輸入與工具：**前端 `tools/live_menu.go` SHA-256 `ab378d78d63d16725558de0d3ac12b466aa000e9692e18018cf2e90db78e6e52`（新增 `-static-credits-a`／`-static-catalog`／`-static-mask-dir`）；譯稿 `text/static-overlay.zh-Hant.tsv` SHA-256 `f57ed87a177f5057f9c298d1efc7f29de1291048624c0d4e0c703c4c2a65bccf`（7 列）；字模 `tools/bake_static_masks.py`（Cubic 11，全部 22px）；GUI `tools/probe_goal151_gui.sh`、重播 `tools/probe_goal151_replays.sh`。
+- **已證實：**七個職稱橫幅指紋矩形 `(30,166)–(290,196)` 逐 byte 相符時才套用；原文墨跡與文字帶量測見[規格034](docs/spec/034-static-text-overlay-draft.md)。真 GUI 不按鍵看完開場（1130M），七項各轉入一次（301.95M～1101.05M）；人名橫幅（480M）與無橫幅（1060M）指紋不符、不改動。中英同輸入九個檢查點原版 RAM／索引相同，中文差異只在文字帶。負例：缺字模、字模目錄空、譯文改動、重複鍵都回原文。
+- **驗收：**`tools/check_goal151_window.py` PASS（摘要 `f167e213…`）；全面回歸六點與目標138收據相同。收據只在忽略的 `workplace/reports/goal151-static/`。
