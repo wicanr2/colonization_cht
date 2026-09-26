@@ -4106,3 +4106,9 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **工具：**`tools/text_inventory.py`；摘要 SHA-256 `527d6df95b32f33cba18300ccb4de13f659e40dcbc24d6a1e2c4fb985fc59aa6`（只在 workplace）。
 - **結果：**遊戲畫面 3,561 行、已抽取 1,764、已翻譯 1,764、未建檔 1,797；README 138 行（已翻 102）；DEBUG 118、安裝說明 19、記憶體警告 13 行另列。
 - **未知：**DEBUG.TXT 在正常遊玩中是否可見。
+
+## 2026-09-26：目標159未建檔遊戲文字語料
+
+- **工具：**`tools/prep_corpus_batches.py`、`tools/merge_corpus.py`；清冊 `text/corpus.zh-Hant.tsv` SHA-256 `1483f5ce585c43337dbab8118928cff783af936682493e1fc5e5f2b6554c2947`（867 列）。
+- **結果：**遊戲畫面分母 3,561 行全部已抽取、3,558 行已翻譯（摘要 SHA-256 `b74db14b…`，只在 workplace）。
+- **強推論：**LABELS.TXT 片段的執行期拼接順序、部分 `%STRINGn` 代入內容，由子代理依語境推定，notes 已標示，未取證。

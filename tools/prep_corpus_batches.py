@@ -28,14 +28,11 @@ def covered_ranges(text_dir):
     from collections import defaultdict
     ranges = defaultdict(list)
     for cat, (fcol, ocol, lcol, _) in CATALOGS.items():
+        if not (text_dir / cat).is_file():
+            continue
         for r in csv.DictReader(io.StringIO((text_dir / cat).read_text(encoding="utf-8")), delimiter="\t", quoting=csv.QUOTE_NONE):
             off = int(r[ocol], 0)
             ranges[Path(r[fcol]).name].append((off, off + int(r[lcol])))
-    extra = text_dir / "corpus.zh-Hant.tsv"
-    if extra.is_file():
-        for r in csv.DictReader(io.StringIO(extra.read_text(encoding="utf-8")), delimiter="\t", quoting=csv.QUOTE_NONE):
-            off = int(r["text_offset"], 0)
-            ranges[r["source_file"]].append((off, off + int(r["text_byte_length"])))
     return ranges
 
 

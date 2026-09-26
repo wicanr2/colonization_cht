@@ -1,5 +1,7 @@
 # 目前脈絡
 
+目前真相：[目標159](docs/goals/159-corpus-translation.md)（#27 第五輪）：未建檔遊戲文字 867 則譯成草稿，新清冊 `text/corpus.zh-Hant.tsv`；遊戲畫面分母 3,561 行全部已抽取、3,558 行已翻譯（3 行英文冠詞刻意留空）。草稿不等於畫面顯示。
+
 目前真相：[目標158](docs/goals/158-text-denominator.md)（#27 第四輪）：全遊戲 TXT 遊戲畫面分母 3,561 行，已翻譯草稿 1,764 行（50%），未建檔 1,797 行（GAME.TXT 1,348、NAMES.TXT 217、LABELS.TXT 208 等）。
 
 目前真相：[目標157](docs/goals/157-reverify-after-terms.md)：改稿後全部正式欄位字模已重烘，全部旗標載入無綁定失效，畫面顯示新譯名。使用者決定譯文變動欄位的視覺重驗延到 #27 定稿後、#15 前一次做（[Issue #38](https://github.com/wicanr2/colonization_cht/issues/38)）；驗證矩陣相關列標為待重驗。

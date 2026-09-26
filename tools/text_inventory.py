@@ -31,6 +31,7 @@ CATALOGS = {
     "pedia-bilingual.tsv": ("source_file", "text_offset", "text_byte_length", "zh_hant"),
     "readme-bilingual.tsv": ("source_member", "span_offset", "span_byte_length", "zh_hant"),
     "sea-status.zh-Hant.tsv": ("source_file", "byte_offset", "source_byte_length", "zh_hant"),
+    "corpus.zh-Hant.tsv": ("source_file", "text_offset", "text_byte_length", "zh_hant"),  # 目標159 起的語料
 }
 DATA_TAIL = re.compile(r",[\s\d,.\-+]*$")
 
@@ -72,6 +73,8 @@ def main():
         return 77
     ranges = defaultdict(list)  # 檔名 → [(起, 迄, 已翻譯, 清冊)]
     for cat, (fcol, ocol, lcol, zcol) in CATALOGS.items():
+        if not (a.text / cat).is_file():
+            continue
         for r in csv.DictReader(io.StringIO((a.text / cat).read_text(encoding="utf-8")), delimiter="\t", quoting=csv.QUOTE_NONE):
             off, n = int(r[ocol], 0), int(r[lcol])
             ranges[Path(r[fcol]).name].append((off, off + n, bool(r[zcol].strip()), cat))

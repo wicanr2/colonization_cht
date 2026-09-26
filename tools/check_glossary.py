@@ -25,6 +25,7 @@ CATALOGS = {
     "readme-bilingual.tsv": ("message_id", "source_en", "zh_hant"),
     "sea-status.zh-Hant.tsv": ("candidate_id", "source_text", "zh_hant"),
     "static-overlay.zh-Hant.tsv": ("candidate_id", "source_text", "zh_hant"),
+    "corpus.zh-Hant.tsv": ("message_id", "source_en", "zh_hant"),  # 目標159 起的語料
 }
 
 
