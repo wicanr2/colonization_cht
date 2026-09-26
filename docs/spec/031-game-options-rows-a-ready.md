@@ -8,7 +8,7 @@
 
 | 列 | `GAME.TXT` 位移 | 原文 | 譯文 | A 字級 | 實際墨跡（px） |
 |---:|---:|---|---|---:|---|
-| 1 | `0x4E9` | Show Indian Moves | (I) 顯示原住民行動 | 25 | 229×25 |
+| 1 | `0x4E9` | Show Indian Moves | (I) 顯示印地安人行動 | 25 | 256×25 |
 | 2 | `0x4FD` | Show Foreign Moves | (F) 顯示外國行動 | 28 | 233×27 |
 | 3 | `0x512` | Fast Piece Slide | (S) 單位快速滑動 | 28 | 233×27 |
 | 4 | `0x525` | End of Turn | (E) 回合結束 | 25 | 155×25 |

@@ -13,7 +13,7 @@ from validate_translation_draft import read_catalog, validate_sources
 
 
 # 規格031：遊戲選項八列 A 字級與已量實際墨跡（寬×高 px）；快捷鍵為「(~X) 中文」。
-OPTION_ROWS = {'GAME.TXT:0x000004E9': (25, (229, 25)), 'GAME.TXT:0x000004FD': (28, (233, 27)),
+OPTION_ROWS = {'GAME.TXT:0x000004E9': (25, (256, 25)), 'GAME.TXT:0x000004FD': (28, (233, 27)),
                'GAME.TXT:0x00000512': (28, (233, 27)), 'GAME.TXT:0x00000525': (25, (155, 25)),
                'GAME.TXT:0x00000533': (28, (176, 27)), 'GAME.TXT:0x0000053E': (28, (173, 27)),
                'GAME.TXT:0x00000550': (27, (223, 29)), 'GAME.TXT:0x00000566': (28, (175, 27))}

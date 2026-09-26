@@ -4094,3 +4094,9 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 
 - **輸入與工具：**定稿表 `text/terms.zh-Hant.tsv` SHA-256 `031e388a7bfbcf83908ee5f9cfcc1bfd94b9748a4ff746f0ebbfcf53961f72ce`；合併驗證 `tools/apply_term_edits.py`；檢查 `tools/check_glossary.py`（摘要 SHA-256 `50043184…`，只在 workplace）。
 - **結果：**改 238 列、45 處有理由不換；剩 33 列全部有理由。改稿後以全部旗標載入前端，34 個正式欄位 `font-binding-mismatch`（載入收據在 `workplace/reports/goal156-apply/bind/`）。
+
+## 2026-09-26：目標157改稿後重烘
+
+- **輸入與工具：**前端 `tools/live_menu.go` SHA-256 `0babd2974ec63e837dfb7f604b86a5b530a4db30e24b0a5b2559788a638e1ace`；定稿表 SHA-256 `031e388a7bfbcf83908ee5f9cfcc1bfd94b9748a4ff746f0ebbfcf53961f72ce`；`tools/rebake_goal157.sh`。
+- **已證實：**譯文未變欄位的新字模與舊字模 alpha、尺寸、位置相同；全部旗標載入沒有綁定失效或超界。
+- **未驗：**譯文變動欄位的真 GUI 與同輸入重播（Issue #38）。

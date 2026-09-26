@@ -50,8 +50,11 @@ def main():
                 if z.strip() and z.strip() not in g["zh"]:
                     g["zh"].append(z.strip())
     terms = list(groups.values())
-    patterns_by_en = [(t["en"], re.compile(r"(?<![A-Za-z])" + re.escape(t["en"]) + r"(?:s|es)?(?![A-Za-z])", re.I)) for t in terms]
-    patterns = [(t, re.compile(r"(?<![A-Za-z])" + re.escape(t["en"]) + r"(?:s|es)?(?![A-Za-z])", re.I)) for t in terms]
+    def pattern(en):  # 單複數同詞：colony／colonies、fort／forts
+        stem = re.escape(en[:-1]) + r"(?:y|ies)" if en[-1:].lower() == "y" and en[-2:-1].lower() not in "aeiou" else re.escape(en) + r"(?:s|es)?"
+        return re.compile(r"(?<![A-Za-z])" + stem + r"(?![A-Za-z])", re.I)
+    patterns_by_en = [(t["en"], pattern(t["en"])) for t in terms]
+    patterns = [(t, pattern(t["en"])) for t in terms]
     summary, detail = {"glossary_rows": len(rows(a.glossary)), "printed_terms": len(terms), "catalogs": {}}, []
     per_term = Counter()
     for name, (key_col, en_col, zh_col) in CATALOGS.items():

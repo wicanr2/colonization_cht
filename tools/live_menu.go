@@ -207,7 +207,7 @@ var (
 	optionRowOffsets = [8]int{0x4e9, 0x4fd, 0x512, 0x525, 0x533, 0x53e, 0x550, 0x566}
 	optionRowWrites  = [8]int{338, 349, 283, 186, 172, 316, 343, 246}
 	optionRowSizes   = [8]int{25, 28, 28, 25, 28, 28, 27, 28}
-	optionRowInk     = [8]image.Point{{229, 25}, {233, 27}, {233, 27}, {155, 25}, {176, 27}, {173, 27}, {223, 29}, {175, 27}}
+	optionRowInk     = [8]image.Point{{256, 25}, {233, 27}, {233, 27}, {155, 25}, {176, 27}, {173, 27}, {223, 29}, {175, 27}}
 	// 奇數列（索引0、2、4、6）與偶數列各兩種已驗印前底圖：一般、反白。
 	optionRowBackgrounds = [2][2]string{
 		{"3c24c328cb52d0ddfe5da07f462e685f9d41c89fabad06722a38095ff0078947", "903ff7549ac31fbb35f8a978ed3072aa4d6c7ab035dcea9ede983aea48490159"},
@@ -1227,9 +1227,9 @@ func main() {
 				{id: "NAMES.TXT:0x000008EA", file: "NAMES.TXT", offset: 0x8ea, length: 7,
 					linear: 0x4cbbe, readCS: 0x0e2d, readIP: 0x11cf,
 					safe: image.Rect(125, 12, 190, 24), bbox: image.Rect(141, 15, 171, 20),
-					pixels: 123, position: image.Pt(578, 60), fontSize: 21,
+					pixels: 123, position: image.Pt(590, 60), fontSize: 21, // 目標157：「英國：」69×19，兩欄共同中心 x=624
 					nationCard: true, display: []byte("ENGLAND:"), displayLinear: 0x2a6ae,
-					inkSize: image.Pt(92, 19), cardColor: 12},
+					inkSize: image.Pt(69, 19), cardColor: 12},
 				{id: "LABELS.TXT:0x000008F2", file: "LABELS.TXT", offset: 0x8f2, length: 11,
 					linear: 0x4dfd1, readCS: 0x0e2d, readIP: 0x11cf,
 					safe: image.Rect(125, 83, 190, 96), bbox: image.Rect(135, 87, 178, 93),

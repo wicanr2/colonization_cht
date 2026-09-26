@@ -14,7 +14,7 @@ from validate_nation_card_fragments import FONT_SHA, validate
 
 
 FIELDS = (
-    ("NAMES.TXT:0x000008EA", 21, (92, 19), (578, 60), (125, 12, 190, 24), True),
+    ("NAMES.TXT:0x000008EA", 21, (69, 19), (590, 60), (125, 12, 190, 24), True),  # 目標157：「英國：」，維持兩欄共同中心 x=624（.5 進位，同法國旗卡）
     ("LABELS.TXT:0x000008F2", 25, (54, 23), (597, 348), (125, 83, 190, 96), False),
 )
 

@@ -68,7 +68,7 @@ def run_row(row, a):
     out = {"id": row["id"], "path": row["path"], "title": row["title"], "specs": row["specs"], "flags": row["flags"],
            "checker": row["checker"], "checker_sha256": sha((a.repo / "tools" / row["checker"]).read_bytes()),
            "status": status, "checker_output_sha256": sha(proc.stdout), "known_diffs": row["known_diffs"],
-           "regenerate": row["regenerate"]}
+           "regenerate": row["regenerate"], "stale_since": row.get("stale_since")}
     if status == "FAIL":
         out["error_tail"] = proc.stderr.decode("utf-8", "replace")[-400:]
     if row["dir"]:
@@ -98,6 +98,7 @@ def markdown(report):
              "- 原版輸入（各收據記錄的檔案雜湊合併，同名檔衝突 " + str(len(report["input_conflicts"])) + " 個）：" +
              "、".join(f"`{k}` `{v[:12]}…`" for k, v in sorted(report["input_files"].items())),
              f"- 結果：{report['summary']}", "",
+             "「待重驗」表示該列收據早於現行譯文（目標156 改稿）：字模已重烘、全部旗標載入綁定通過，但真 GUI 與重播尚未依新譯文重跑。", "",
              "原版基線指英文控制收據的原版 RAM／VGA 索引／色盤；中文模式必須與它相同，差異只在中文安全區（由各檢查器核對）。", "",
              "| 列 | 路徑 | 規格 | 檢查器 | 結果 | 基線 | 中文 | 英文 | 負例 | GUI 輸入 | 畫面格式 | 已知差異 |",
              "|---|---|---|---|---|---|---|---|---|---|---|---|"]
@@ -105,7 +106,7 @@ def markdown(report):
         frames = sorted({v.get("frame", "") for c in ("zh", "control") for v in r.get(c, {}).values() if v.get("frame")})
         lines.append("| {} | {} | {} | `{}` | {} | {} | {} | {} | {} | {} | {} | {} |".format(
             r["title"], {"dynamic": "動態", "static": "靜態", "both": "兩者"}[r["path"]], "、".join(r["specs"]) or "—",
-            r["checker"], r["status"], len(r.get("baseline", {})), len(r.get("zh", {})), len(r.get("control", {})),
+            r["checker"], r["status"] + ("（待重驗）" if r.get("stale_since") else ""), len(r.get("baseline", {})), len(r.get("zh", {})), len(r.get("control", {})),
             len(r.get("negative", {})), len(r.get("gui_inputs", {})), "；".join(frames) or "—", r["known_diffs"] or "—"))
     lines += ["", "## 未驗範圍", ""] + [f"- {x}" for x in report["not_covered"]]
     lines += ["", "## 重產收據", "", "各列收據由表中 `regenerate` 腳本在 Docker 內重產（每列數十分鐘到數小時）；本矩陣只重跑檢查器，不重跑模擬。完整清單見 JSON 報告。", ""]
@@ -130,11 +131,12 @@ def main():
                 if inputs.setdefault(k, v) != v:
                     conflicts.add(k)
     counts = {s: sum(r["status"] == s for r in rows) for s in ("PASS", "SKIP", "FAIL")}
+    stale = sum(bool(r.get("stale_since")) for r in rows)
     paths = {k: {c: sum(len(r.get(c, {})) for r in rows if r["path"] == k) for c in COLUMNS} for k in ("dynamic", "static")}
     complete = all(all(paths[k][c] > 0 for c in COLUMNS) for k in paths)
     report = {"matrix_sha256": sha((a.repo / "tools/verification-matrix.json").read_bytes()), "dosgolem_rev": git_head(a.dosgolem),
               "input_files": inputs, "input_conflicts": sorted(conflicts), "rows": rows, "path_totals": paths, "not_covered": spec["not_covered"],
-              "summary": f"PASS {counts['PASS']}、SKIP {counts['SKIP']}、FAIL {counts['FAIL']}；原版輸入衝突 {len(conflicts)}；動態與靜態四類收據齊備：{'是' if complete else '否'}"}
+              "summary": f"PASS {counts['PASS']}、SKIP {counts['SKIP']}、FAIL {counts['FAIL']}；收據待重驗 {stale} 列；原版輸入衝突 {len(conflicts)}；動態與靜態四類收據齊備：{'是' if complete else '否'}"}
     body = json.dumps(report, ensure_ascii=False, indent=1, sort_keys=True) + "\n"
     (a.output / "matrix.json").write_text(body, encoding="utf-8")
     md = markdown(report)

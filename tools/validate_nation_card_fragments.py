@@ -14,7 +14,7 @@ FIELDS = ["candidate_id", "source_file", "source_sha256", "byte_offset",
           "source_bytes_sha256", "source_byte_length", "source_text",
           "zh_hant", "status", "notes"]
 EXPECTED = {
-    "NAMES.TXT:0x000008EA": ("NAMES.TXT", 0x8EA, b"England", "英格蘭"),
+    "NAMES.TXT:0x000008EA": ("NAMES.TXT", 0x8EA, b"England", "英國"),
     "NAMES.TXT:0x00000906": ("NAMES.TXT", 0x906, b"France", "法國"),
     "LABELS.TXT:0x000008F2": ("LABELS.TXT", 0x8F2, b"Immigration", "移民"),
     "LABELS.TXT:0x000008FF": ("LABELS.TXT", 0x8FF, b"Cooperation", "合作"),
