@@ -38,7 +38,7 @@
 - 唯一譯稿 `text/static-overlay.zh-Hant.tsv`：欄位 `candidate_id, image_file, image_sha256, fingerprint_rect, fingerprint_sha256, text_band, source_text, zh_hant, status, notes`。
 - 前端旗標 `--static-credits-a`；字模目錄 `--static-mask-dir` 由 `tools/bake_static_masks.py` 以 Cubic 11 與 TSV 本機烘製（只在 workplace）。字模綁定 TSV SHA、譯文 SHA、字型 SHA；任一不符為 `font-binding-mismatch`。
 - 每幀以真 VGA 索引畫面比對指紋矩形 SHA；相符才在文字帶內把亮度（DAC 三色和）低於 122 的像素換成同列最近亮像素，再以原版文字色號畫中文。
-- fail-closed：圖檔 SHA 不符、缺譯、重複鍵（整組停用）、缺字模、字模超出文字帶一律回原文並記錄原因。英文控制 `--control` 不套用。
+- fail-closed：圖檔 SHA 不符（`image-version-mismatch`）、缺譯、重複鍵（整組停用）、缺字模、字模超出文字帶一律回原文並記錄原因。英文控制 `--control` 不套用。
 - 轉入事件：每次由未套用轉為套用記一筆 `active`。
 
 ## 七個職稱的量測

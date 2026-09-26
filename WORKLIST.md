@@ -32,7 +32,7 @@
 | #23 | completed | [依 READY 規格驗證 Colonization 的 OPL 相容層與首畫面](https://github.com/wicanr2/colonization_cht/issues/23) | `colonization-opl-compatibility-spec` | 依 READY 規格最小實作後，正式 OPENING.EXE 冷啟動取得可見／轉交收據，或以新證據縮小 blocker。 |
 | #24 | completed | [釐清 PSOUND 後續控制流進入映像外位址的受阻點（blocker）](https://github.com/wicanr2/colonization_cht/issues/24) | `colonization-opl-compatibility-checkpoint` | 正式冷啟動定位第一個進入映像外 offset 的控制轉移／堆疊邊，並以證據判定最小缺口；若足夠只建立 DRAFT。 |
 | #25 | completed | [釐清開場滑鼠事件與正常遊戲啟動鏈](https://github.com/wicanr2/colonization_cht/issues/25) | `psound-post-profile-control-flow` | 以同狀態座標對照釐清開場滑鼠的作用，並由 dosgolem 重生至少一條進入實際遊戲畫面的正常玩家路徑，或留下具體服務缺口。 |
-| #26 | in_progress | [建立第一條真實訊息的繁體中文顯示垂直切片](https://github.com/wicanr2/colonization_cht/issues/26) | `dynamic-overlay-ready` | 一則真實動態訊息完成中文顯示、英文／缺譯回退、幾何與正常玩家路徑驗證；靜態候選另依證據資格處理。 |
+| #26 | completed | [建立第一條真實訊息的繁體中文顯示垂直切片](https://github.com/wicanr2/colonization_cht/issues/26) | `dynamic-overlay-ready` | 一則真實動態訊息完成中文顯示、英文／缺譯回退、幾何與正常玩家路徑驗證；靜態候選另依證據資格處理。 |
 | #27 | in_progress | [建立可追溯的全遊戲繁體中文譯文語料](https://github.com/wicanr2/colonization_cht/issues/27) | `dynamic-coverage` | 已辨識玩家可見文字有可追溯譯文、占位符與控制碼驗證、字型覆蓋及分別列出的草稿／正常路徑／顯示驗收量測。 |
 | #28 | completed | [重排難度畫面標題並逐欄調整中文字級](https://github.com/wicanr2/colonization_cht/issues/28) | — | 以原版同狀態畫面量測標題及各欄原文字級、對齊與安全矩形；可丟棄版式對照供使用者確認，正式畫面更符合原版風格且每欄中文字級獨立驗證。 |
 | #29 | completed | [追查選國後姓名畫面文字來源與安全中文覆蓋](https://github.com/wicanr2/colonization_cht/issues/29) | `normal-gameplay-route`, `dynamic-text-draft` | 正常玩家輸入可重播提示與預設名來源、輸入語意、逐欄安全矩形、原文回退及正式中英文同狀態驗收。 |

@@ -55,9 +55,13 @@
    "zh": ["replay/zh"], "control": ["replay/control"], "negative": ["neg/*"], "gui_inputs": ["gui-opening.inputs.json"],
    "regenerate": ["probe_goal151_gui.sh", "probe_goal151_replays.sh"], "known_diffs": "人名橫幅 GUI 截圖與重播有一幀動畫差，該畫面不套用"},
   {"id": "regression", "path": "both", "title": "全面回歸六點（主選單至旗卡、@BUILD1、遊戲選項、英格蘭介紹）", "specs": [], "flags": ["各點原本旗標"],
-   "checker": "check_regression.py", "args": ["--game", "{game}", "--baseline", "{reports}/goal138-retire", "--candidate", "{reports}/goal151-static"], "dir": "goal151-static",
+   "checker": "check_regression.py", "args": ["--game", "{game}", "--baseline", "{reports}/goal138-retire", "--candidate", "{reports}/goal153-slice"], "dir": "goal153-slice",
    "zh": ["regress/*", "regress135/*"], "control": [], "negative": [], "gui_inputs": [], "regenerate": ["probe_goal133_regressions.sh", "probe_goal135_replays.sh"],
-   "known_diffs": "基準為目標138收據；候選為目前前端"}
+   "known_diffs": "基準為目標138收據；候選為目前前端（目標153）"},
+  {"id": "version-gate", "path": "both", "title": "原版版本不符 fail-closed（五個核心檔拒絕啟動、製作名單圖檔回原文）與新前端下靜態重播不變", "specs": ["034"], "flags": ["--static-credits-a"],
+   "checker": "check_goal153_slice.py", "args": ["--game", "{game}", "--reports", "{reports}"], "dir": "goal153-slice",
+   "zh": ["static/replay/zh"], "control": ["static/replay/control"], "negative": ["wrong-image-run"], "gui_inputs": [],
+   "regenerate": ["probe_goal153_versions.sh", "probe_goal151_replays.sh"], "known_diffs": "改動圖檔會讓原版開場解碼失敗，故圖檔負例只跑到 2M 步（守門在載入時判定）"}
  ],
  "not_covered": [
   "國王接見畫面（0D21:00C6 動態印字）",

@@ -978,7 +978,9 @@ func main() {
 			it.fp, it.band = fp, band
 			img, err := os.ReadFile(filepath.Join(*root, get("image_file")))
 			switch {
-			case !ok1 || !ok2 || !band.In(fp) || err != nil || hash(img) != get("image_sha256") || it.zh == "" || get("status") != "draft":
+			case err != nil || hash(img) != get("image_sha256"):
+				it.reason = "image-version-mismatch"
+			case !ok1 || !ok2 || !band.In(fp) || it.zh == "" || get("status") != "draft":
 				it.reason = "missing-or-invalid-translation"
 			}
 			if it.reason == "" {

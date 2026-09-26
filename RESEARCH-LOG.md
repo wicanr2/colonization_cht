@@ -4071,3 +4071,9 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **輸入與工具：**矩陣定義 `tools/verification-matrix.json` SHA-256 `fef698db34d70673e095a6c1eadfabade293a200c4426f4abc3458c578335fae`；執行器 `tools/verification_matrix.py`；回歸 `tools/check_regression.py`（基準目標138、候選目標151收據）。dosgolem `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`。
 - **已證實：**十四列檢查器 PASS；原版輸入 `GAME.TXT`、`LABELS.TXT`、`NAMES.TXT`、`NATIONS.PIK`、`OPENING.EXE`、`VICEROY.EXE` 跨收據雜湊一致；連跑兩次報告位元組相同（JSON `e11496fa…`）；缺原版 SKIP 77。
 - **範圍：**只重跑檢查器，不重跑模擬；收據只在忽略的 `workplace/reports/`。
+
+## 2026-09-26：目標153版本不符 fail-closed
+
+- **輸入與工具：**前端 `tools/live_menu.go` SHA-256 `85dd7a23166d88a1bfad57e9f849d442e373f8c1c855de78896c0ff3149eea25`；探測 `tools/probe_goal153_versions.sh`；檢查 `tools/check_goal153_slice.py`。
+- **已證實：**暫存副本中 `OPENING.EXE`、`VICEROY.EXE`、`GAME.TXT`、`LABELS.TXT`、`NAMES.TXT` 任一改一位元組，前端以代碼 2 拒絕啟動且不產生輸出；只改 `OPENCRD1.SS` 時七個職稱從第一幀起記 `image-version-mismatch`、從未啟用。改動該圖檔最後一位元組會使原版在 `0080:0448` 執行未實作的 80186 opcode 而中止（原版行為，非覆蓋層）。
+- **驗收：**PASS（摘要 `55df5c7a…`）；新前端下目標151 重播逐位元組相同，全面回歸相同。收據只在忽略的 `workplace/reports/goal153-slice/`。

@@ -4,7 +4,7 @@
 
 - dosgolem：`9dd36726eeaf9c1f3a745aabdcbb84413791d90f`
 - 原版輸入（各收據記錄的檔案雜湊合併，同名檔衝突 0 個）：`GAME.TXT` `67a6b5e22d1a…`、`LABELS.TXT` `e4af0da201eb…`、`NAMES.TXT` `4bf5ba261f71…`、`OPENING.EXE` `3c08c4af3a70…`、`VICEROY.EXE` `a17ed64c2767…`
-- 結果：PASS 14、SKIP 0、FAIL 0；原版輸入衝突 0；動態與靜態四類收據齊備：是
+- 結果：PASS 15、SKIP 0、FAIL 0；原版輸入衝突 0；動態與靜態四類收據齊備：是
 
 原版基線指英文控制收據的原版 RAM／VGA 索引／色盤；中文模式必須與它相同，差異只在中文安全區（由各檢查器核對）。
 
@@ -23,7 +23,8 @@
 | 全部動態欄位同時開：Explorer 無跳過路徑與 Discoverer 路徑 | 動態 | 033 | `check_goal150_window.py` | PASS | 2 | 2 | 2 | 1 | 0 | 1280x800 RGB | 主選單第一列在錄製路徑因游標遮擋保留原文；輸入來自 tools/goal150-full-path.inputs.json 與目標142 現場輸入 |
 | 規格033 資料模型：每則事件只歸一組鍵 | 動態 | 033 | `check_goal144_text_model.py` | PASS | 0 | 0 | 0 | 0 | 0 | — | 探針收據，不含中文畫面 |
 | 開場製作名單七個職稱橫幅 | 靜態 | 034 | `check_goal151_window.py` | PASS | 1 | 1 | 1 | 4 | 1 | 1280x800 RGB | 人名橫幅 GUI 截圖與重播有一幀動畫差，該畫面不套用 |
-| 全面回歸六點（主選單至旗卡、@BUILD1、遊戲選項、英格蘭介紹） | 兩者 | — | `check_regression.py` | PASS | 0 | 6 | 0 | 0 | 0 | 1280x800 RGB | 基準為目標138收據；候選為目前前端 |
+| 全面回歸六點（主選單至旗卡、@BUILD1、遊戲選項、英格蘭介紹） | 兩者 | — | `check_regression.py` | PASS | 0 | 6 | 0 | 0 | 0 | 1280x800 RGB | 基準為目標138收據；候選為目前前端（目標153） |
+| 原版版本不符 fail-closed（五個核心檔拒絕啟動、製作名單圖檔回原文）與新前端下靜態重播不變 | 兩者 | 034 | `check_goal153_slice.py` | PASS | 1 | 1 | 1 | 1 | 0 | 1280x800 RGB | 改動圖檔會讓原版開場解碼失敗，故圖檔負例只跑到 2M 步（守門在載入時判定） |
 
 ## 未驗範圍
 
