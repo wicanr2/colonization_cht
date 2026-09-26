@@ -1,0 +1,257 @@
+en	zh	category	image	variants	basis	reason
+Colonist	殖民地居民	unit	Image071.jpg	一般居民／殖民者	說明書印出對照	速查字彙表譯名；主冊 p40 作「一般居民」偏描述，列為變體
+Soldier	士兵	unit	Image078.jpg		說明書印出對照	參考卡戰鬥力圖表譯名
+Pioneer	前鋒	unit	Image028.jpg	開路先鋒／先鋒工兵部隊／拓荒者	說明書印出對照	主冊單位定義段（p40）譯名，出現最多
+Missionary	傳教士	unit	Image028.jpg		說明書印出對照	主冊單位定義段（p40）譯名
+Dragoon	龍騎兵	unit	Image078.jpg		說明書印出對照	參考卡戰鬥力圖表譯名
+Scout	斥候	unit	Image069.jpg	斥侯	說明書印出對照	說明書「斥候」「斥侯」各約 3 次；參考卡與 p40 印作「斥侯」為錯字，取正字
+Regular	正規軍	unit	Image078.jpg		說明書印出對照	參考卡戰鬥力圖表譯名
+Continental Army	大陸正規軍	unit	Image078.jpg	新大陸軍／大陸軍隊／大陸軍	說明書印出對照	參考卡譯名；參考卡印作 Continental Regular
+Continental Cavalry	大陸騎兵	unit	Image078.jpg		說明書印出對照	參考卡戰鬥力圖表譯名
+Cavalry	騎兵	unit	Image078.jpg		說明書印出對照	參考卡戰鬥力圖表譯名
+Artillery	砲台	unit	Image078.jpg	火砲／砲台單位	說明書印出對照	參考卡戰鬥力圖表譯名
+Damaged Artillery	受損的砲台	unit	Image078.jpg		說明書印出對照	參考卡戰鬥力圖表譯名；說明書僅此一譯
+Treasure Train	運財列車	unit	Image078.jpg	載運寶藏的車隊／運財車／寶藏車隊	說明書印出對照	參考卡戰鬥力圖表譯名
+Wagon Train	貨車	unit	Image078.jpg	運貨列車／馬車隊／貨運馬車	說明書印出對照	參考卡戰鬥力圖表譯名
+Brave	勇士	unit	Image078.jpg	原住民戰士	說明書印出對照	參考卡原住民單位譯名
+Armed Brave	武裝勇士	unit	Image078.jpg	持槍原住民戰士	說明書印出對照	參考卡原住民單位譯名
+Mounted Brave	騎馬的勇士	unit	Image078.jpg	騎馬原住民戰士	說明書印出對照	參考卡原住民單位譯名；含「的」但為單位正式名稱
+Mounted Warrior	騎馬的戰士	unit	Image078.jpg	騎馬持槍戰士	說明書印出對照	參考卡原住民單位譯名；含「的」但為單位正式名稱
+Indian Convert	印地安歸順者	unit	Image073.jpg	歸化的印地安人／已歸化的印地安人	說明書印出對照	印出對照且非描述；主冊章節標題「歸化的印地安人」含「的」列為變體
+Mercenary	外籍傭兵	unit	Image074.jpg	圖利	說明書印出對照	出現 3 次，最多
+Caravel	輕帆船	ship	Image078.jpg	卡拉維爾帆船	說明書印出對照	參考卡海上單位圖表譯名
+Merchantman	商船	ship	Image078.jpg		說明書印出對照	參考卡海上單位圖表譯名
+Galleon	帆船	ship	Image078.jpg	大型帆船	說明書印出對照	參考卡海上單位圖表譯名
+Privateer	私掠船	ship	Image078.jpg	海盜船	說明書印出對照	參考卡海上單位圖表譯名
+Frigate	快速艦	ship	Image078.jpg	巡防艦	說明書印出對照	參考卡海上單位圖表譯名
+Man-o-War	戰船	ship	Image046.jpg	戰列艦	說明書印出對照	參考卡只印英文；主冊 p76 Men-o-war／Men of War 皆作戰船
+Free Colonist	自由移民	job	Image078.jpg	自由殖民者	說明書印出對照	參考卡譯名，亦為主冊 p29 章節標題
+Indentured Servant	僕役	job	Image022.jpg	簽約的僕役／奴僕／契約僕役	說明書僅中文（配合譯稿英文）	主冊 p28 章節標題「輕行罪犯與僕役」；「簽約的僕役」為描述
+Petty Criminal	輕刑罪犯	job	Image022.jpg	罪犯／輕行犯／輕刑罪犯／輕罪犯	說明書印出對照	主冊 p28 章節標題譯名；使用者決定修正誤植（說明書章節標題印作輕行罪犯）
+Specialist	專家	job	Image075.jpg		說明書印出對照	速查字彙表譯名
+Farmer	農夫	job	Image067.jpg		說明書僅中文（配合譯稿英文）	速查手冊用語；英文取自遊戲職業名
+Fisherman	漁夫	job	Image026.jpg		說明書印出對照	出現 2 次，一致
+Lumberjack	伐木工人	job	Image019.jpg	伐木工	說明書印出對照	出現 3 次，最多
+Ore Miner	礦工	job	Image028.jpg		說明書印出對照	主冊 p41 譯名
+Carpenter	木匠	job	Image027.jpg		說明書印出對照	主冊領地圖說譯名
+Blacksmith	鐵匠	job	Image027.jpg		說明書印出對照	主冊領地圖說譯名
+Tobacconist	煙草商	job	Image027.jpg		說明書印出對照	主冊領地圖說譯名
+Statesman	政治家	job	Image027.jpg		說明書印出對照	主冊領地圖說譯名
+Preacher	牧師	job	Image074.jpg		說明書印出對照	印出對照，主冊 p30 亦用牧師
+Gunsmith	槍匠	job	Image010.jpg		說明書印出對照	主冊 p5 譯名
+Distiller	釀酒人	job	Image072.jpg		說明書印出對照	速查字彙表譯名
+Expert Farmer	專家農夫	job			非說明書，沿用譯稿	說明書技能圖表只印英文
+Master Sugar Planter	專業甘蔗種植者	job			非說明書，沿用譯稿	說明書技能圖表只印英文
+Master Tobacco Planter	專業菸草種植者	job			非說明書，沿用譯稿	說明書技能圖表只印英文
+Master Cotton Planter	專業棉花種植者	job			非說明書，沿用譯稿	說明書技能圖表只印英文
+Master Fur Trapper	專業毛皮獵人	job			非說明書，沿用譯稿	說明書技能圖表印作 Expert Fur Trapper，無中文
+Expert Lumberjack	專家伐木工	job			非說明書，沿用譯稿	說明書技能圖表印作 Expert Lumber Jack，無中文
+Expert Ore Miner	專家礦工	job			非說明書，沿用譯稿	說明書技能圖表只印英文
+Expert Silver Miner	專家銀礦工	job			非說明書，沿用譯稿	說明書技能圖表只印英文
+Expert Fisherman	專家漁夫	job			非說明書，沿用譯稿	說明書技能圖表只印英文
+Expert Distiller	釀酒專家	job	Image066.jpg	專家釀酒師	說明書僅中文（配合譯稿英文）	速查手冊 p8 例句用語；技能圖表印作 Master Distiller
+Master Tobacconist	專業菸草工人	job			非說明書，沿用譯稿	說明書技能圖表只印英文
+Master Weaver	專業織布工	job			非說明書，沿用譯稿	說明書技能圖表只印英文
+Master Fur Trader	專業毛皮商人	job			非說明書，沿用譯稿	說明書技能圖表只印英文
+Expert Carpenter	專家木匠	job			非說明書，沿用譯稿	說明書技能圖表印作 Master Carpenter，無中文
+Expert Blacksmith	專家鐵匠	job			非說明書，沿用譯稿	說明書技能圖表印作 Master Blacksmith，無中文
+Master Gunsmith	專業槍匠	job			非說明書，沿用譯稿	說明書技能圖表只印英文
+Firebrand Preacher	激進傳教士	job			非說明書，沿用譯稿	說明書技能圖表只印英文
+Elder Statesman	資深政治家	job	Image029.jpg		說明書印出對照	主冊 p43 譯名，與譯稿一致
+Student	學生	job			非說明書，沿用譯稿	說明書未見
+Hardy Pioneer	強健拓荒者	job			非說明書，沿用譯稿	說明書技能圖表只印英文
+Veteran Soldier	老手級士兵	job	Image078.jpg	老手士兵／老兵士兵	說明書印出對照	參考卡譯名
+Seasoned Scout	斥候	job	Image069.jpg	斥侯／資深斥候	說明書印出對照	說明書 Seasoned Scouts 印作斥候；參考卡印作斥侯
+Veteran Dragoon	老手級龍騎兵	job	Image078.jpg	老兵龍騎兵	說明書印出對照	參考卡譯名；參考卡印作 Verteran Dragoon
+Jesuit Missionary	專業傳教士	job	Image040.jpg	專業級的傳教士／耶穌會傳教士／耶穌會會員	說明書印出對照	說明書印作 Expert Missionaries
+Stockade	柵欄	building	Image030.jpg		說明書印出對照	建築章節防禦設施圖說譯名
+Fort	堡壘	building	Image031.jpg		說明書印出對照	建築章節條目譯名
+Fortress	碉堡	building	Image030.jpg	要塞	說明書印出對照	建築章節防禦設施圖說譯名
+Armory	軍械室	building	Image031.jpg	軍械庫	說明書印出對照	建築章節軍火製造設施圖說譯名
+Magazine	彈藥庫	building	Image031.jpg		說明書印出對照	建築章節軍火製造設施圖說譯名
+Arsenal	兵工廠	building	Image031.jpg		說明書印出對照	建築章節軍火製造設施圖說譯名
+Docks	碼頭	building	Image031.jpg		說明書印出對照	建築章節海事建築圖說譯名；說明書印作 Dock
+Drydocks	乾船塢	building	Image031.jpg		說明書印出對照	建築章節海事建築圖說譯名；說明書印作 Dry Dock
+Shipyard	造船廠	building	Image031.jpg	造船場	說明書印出對照	建築章節圖說作造船廠，條目內文作造船場；取圖說，與譯稿一致
+Town Hall	市政大廳	building	Image029.jpg	議事廳／市政廳	說明書印出對照	建築章節「原始建築」條目譯名
+Colonial Assembly	殖民地議會	building			非說明書，沿用譯稿	說明書未見
+Schoolhouse	學校	building	Image031.jpg		說明書印出對照	建築章節教育機構圖說譯名
+College	學院	building	Image031.jpg		說明書印出對照	建築章節教育機構圖說譯名
+University	大學	building	Image031.jpg		說明書印出對照	建築章節教育機構圖說譯名
+Warehouse	倉庫	building	Image032.jpg	庫房／庫存區	說明書印出對照	建築章節倉庫及改建圖說譯名
+Warehouse Expansion	倉庫擴建	building		擴建	非說明書，沿用譯稿	說明書只印簡稱「擴建」，不足以單獨成名
+Stables	馬廄	building	Image032.jpg	馬房	說明書印出對照	建築章節圖說譯名；說明書印作 Stable
+Custom House	海關	building	Image032.jpg	海關大樓	說明書印出對照	建築章節海關圖說譯名
+Printing Press	印刷廠	building	Image032.jpg	印刷機	說明書印出對照	建築章節政治活動圖說譯名
+Newspaper	報社	building	Image032.jpg		說明書印出對照	建築章節政治活動圖說譯名
+Weaver's House	紡織舖	building	Image030.jpg	製衣舖／織布工之家	說明書印出對照	建築章節條目譯名（p44）；p46 列舉作製衣舖
+Weaver's Shop	織布工工坊	building			非說明書，沿用譯稿	說明書建築圖表只印英文
+Textile Mill	紡織廠	building	Image031.jpg		說明書印出對照	建築章節奢侈品工業圖說譯名
+Tobacconist's House	煙草舖	building	Image030.jpg	菸草工人之家	說明書印出對照	建築章節條目譯名
+Tobacconist's Shop	菸草工人工坊	building			非說明書，沿用譯稿	說明書建築圖表只印英文
+Cigar Factory	雪茄廠	building	Image031.jpg		說明書印出對照	建築章節奢侈品工業圖說譯名
+Rum Distiller's House	蒸餾廠	building	Image030.jpg	釀酒舖／釀酒廠／釀酒師之家	說明書印出對照	建築章節條目譯名（p44）；說明書印作 Distiller's House
+Rum Distillery	蒸餾所	building	Image072.jpg	釀酒廠／蘭姆酒廠	說明書印出對照	速查字彙表 Distillery 首譯；說明書印作 Distillery
+Rum Factory	甜酒廠	building	Image031.jpg	煉糖廠／蘭姆酒工廠	說明書印出對照	使用者決定修正誤譯：說明書譯作煉糖廠（英文印作 Sugar Refinery），依 Rum＝甜酒改為甜酒廠
+Capitol	議會大廈	building			非說明書，沿用譯稿	說明書未見
+Capitol Expansion	議會大廈擴建	building			非說明書，沿用譯稿	說明書未見
+Fur Trader's House	毛皮店舖	building	Image030.jpg	皮衣舖／毛皮商人之家	說明書印出對照	建築章節條目譯名（p44）；p46 列舉作皮衣舖
+Fur Trader's Shop	毛皮商人工坊	building			非說明書，沿用譯稿	說明書建築圖表印作 Fur Trading Post，無中文
+Coat Factory	皮衣廠	building	Image031.jpg	外套工廠	說明書印出對照	建築章節奢侈品工業圖說譯名
+Carpenter's Shop	木匠店	building	Image029.jpg	木匠屋／木匠工坊	說明書印出對照	建築章節「原始建築」條目譯名
+Lumber Mill	木材廠	building	Image030.jpg	鋸木廠	說明書印出對照	建築章節其它建築物標題譯名
+Church	教堂	building	Image032.jpg		說明書印出對照	建築章節宗教建築圖說譯名
+Cathedral	大教堂	building	Image032.jpg		說明書印出對照	建築章節宗教建築圖說譯名
+Blacksmith's House	鐵匠舖	building	Image029.jpg	鐵匠之家	說明書印出對照	建築章節「原始建築」條目譯名
+Blacksmith's Shop	鐵匠店	building	Image030.jpg	鐵匠工坊	說明書印出對照	建築章節鍊鐵設施圖說譯名
+Iron Works	鍊鐵廠	building	Image030.jpg	鐵工廠	說明書印出對照	建築章節鍊鐵設施圖說譯名；說明書印作 Ironworks，遊戲內為 IRON  WORKS（兩個空格）
+Food	食物	goods	Image079.jpg	糧食	說明書印出對照	地形圖表生產欄譯名
+Sugar	蔗糖	goods	Image079.jpg	甘蔗／糖	說明書印出對照	地形圖表生產欄譯名（SUG）
+Tobacco	煙草	goods	Image079.jpg	菸草	說明書印出對照	地形圖表生產欄譯名
+Cotton	棉花	goods	Image079.jpg		說明書印出對照	地形圖表生產欄譯名
+Furs	毛皮	goods	Image028.jpg		說明書印出對照	主冊 p40 圖說譯名，地形圖表亦同
+Lumber	木材	goods	Image028.jpg		說明書印出對照	主冊 p40 圖說譯名，地形圖表亦同
+Ore	礦石	goods	Image079.jpg	礦產	說明書印出對照	地形圖表生產欄譯名
+Silver	銀	goods	Image079.jpg	白銀	說明書印出對照	地形圖表生產欄譯名
+Horses	馬	goods	Image028.jpg	馬匹	說明書印出對照	主冊 p40 圖說譯名；「馬匹」僅中文
+Rum	甜酒	goods	Image028.jpg	蘭姆酒	說明書印出對照	主冊 p40 圖說譯名
+Cigars	雪茄	goods	Image030.jpg		說明書印出對照	主冊建築章節譯名
+Cloth	衣服	goods	Image071.jpg	布料	說明書印出對照	速查字彙表譯名，主冊 p38 亦同；說明書印作 Cloths
+Coats	皮衣	goods	Image067.jpg	外套	說明書印出對照	速查手冊譯名，主冊 p38 亦同
+Trade Goods	交易商品	goods	Image057.jpg	貿易貨品	說明書印出對照	主冊 p98 譯名
+Tools	工具	goods	Image028.jpg		說明書印出對照	主冊 p40 圖說譯名
+Muskets	槍	goods	Image074.jpg	槍枝／火槍	說明書印出對照	唯一印出對照；「槍枝」僅中文但出現較多
+Hammers	鎯頭	goods	Image028.jpg	槌子／鉚頭	說明書印出對照	主冊 p40 圖說譯名
+Tundra	凍土	terrain	Image079.jpg	苔原	說明書印出對照	地形圖表譯名
+Desert	沙漠	terrain	Image079.jpg		說明書印出對照	地形圖表譯名
+Plains	平原	terrain	Image079.jpg	平原(糧食地)	說明書印出對照	地形圖表譯名
+Prairie	牧草草原	terrain	Image079.jpg	牧場／草原	說明書印出對照	地形圖表譯名
+Grassland	草原	terrain	Image079.jpg	草地	說明書印出對照	地形圖表譯名；說明書印作 Grasslands
+Savannah	熱帶草原	terrain	Image079.jpg	稀樹草原	說明書印出對照	地形圖表譯名
+Marsh	沼池	terrain	Image079.jpg	沼地／鹽沼	說明書印出對照	地形圖表譯名；主冊 p15 與速查 p7 作沼地
+Swamp	沼澤	terrain	Image079.jpg		說明書印出對照	地形圖表譯名
+Arctic	極地	terrain	Image079.jpg		說明書印出對照	地形圖表譯名
+Hills	丘陵	terrain	Image079.jpg		說明書印出對照	地形圖表譯名
+Mountains	高山	terrain	Image079.jpg	山脈	說明書印出對照	地形圖表譯名
+Ocean	海洋	terrain	Image079.jpg		說明書印出對照	地形圖表譯名
+Sea Lane	海道	terrain	Image016.jpg	海洋／海上航道／航道	說明書印出對照	主冊地形章節譯名；地形圖表與 Ocean 合列為海洋
+High Seas	公海	terrain	Image073.jpg		說明書印出對照	速查字彙表譯名
+Forest	森林	terrain	Image072.jpg		說明書印出對照	速查字彙表譯名，與譯稿一致
+Borreal Forest	寒帶森林	terrain			非說明書，沿用譯稿	遊戲內拼法即 BORREAL
+Scrub Forest	灌木林	terrain			非說明書，沿用譯稿	說明書未見
+Mixed Forest	混合林	terrain			非說明書，沿用譯稿	說明書未見
+Broadleaf Forest	闊葉林	terrain			非說明書，沿用譯稿	說明書未見
+Conifer Forest	針葉林	terrain			非說明書，沿用譯稿	說明書未見
+Tropical Forest	熱帶森林	terrain			非說明書，沿用譯稿	說明書未見
+Wetland Forest	濕地林	terrain			非說明書，沿用譯稿	說明書未見
+Rain Forest	雨林	terrain			非說明書，沿用譯稿	說明書未見
+Lake	湖	terrain	Image016.jpg		說明書印出對照	主冊地形章節譯名
+River	河流	terrain	Image016.jpg		說明書印出對照	主冊地形章節譯名，與譯稿一致；說明書印作 Rivers
+Major River	主河道	terrain	Image016.jpg	大河	說明書印出對照	主冊地形章節譯名；遊戲內英文待核
+Road	道路	terrain	Image075.jpg		說明書印出對照	速查字彙表譯名
+Unexplored	未探索	terrain			非說明書，沿用譯稿	說明書未見
+Fishery	漁場	terrain	Image016.jpg	魚床／魚場	說明書印出對照	主冊特殊資源段譯名；遊戲內英文待核
+Silver Deposits	銀礦	terrain	Image016.jpg		說明書印出對照	主冊特殊資源段譯名；遊戲內英文待核
+Ore Deposits	礦區	terrain	Image016.jpg		說明書印出對照	主冊特殊資源段譯名；遊戲內英文待核
+Mineral Deposits	大礦場	terrain	Image016.jpg		說明書印出對照	主冊特殊資源段譯名；遊戲內英文待核
+Trapping Area	捕獸區	terrain	Image016.jpg		說明書印出對照	主冊特殊資源段譯名；遊戲內英文待核
+Game Areas	遊獵區	terrain	Image016.jpg		說明書印出對照	主冊特殊資源段譯名；遊戲內英文待核
+Oasis	綠洲	terrain	Image016.jpg		說明書印出對照	主冊特殊資源段譯名
+Prime Cotton Land	主要棉花產地	terrain	Image016.jpg		說明書印出對照	主冊特殊資源段譯名；遊戲內英文待核
+Prime Tobacco Land	主要煙草產地	terrain	Image016.jpg		說明書印出對照	主冊特殊資源段譯名；遊戲內英文待核
+Prime Sugar Land	主要糖產地	terrain	Image016.jpg		說明書印出對照	主冊特殊資源段譯名；遊戲內英文待核
+Prime Timber Land	主要木材產地	terrain	Image016.jpg		說明書印出對照	主冊特殊資源段譯名；遊戲內英文待核
+Prime Food Land	主要糧食產地	terrain	Image016.jpg		說明書印出對照	主冊特殊資源段譯名；遊戲內英文待核
+Rumors of Lost Cities	謠傳中的失落古城	terrain	Image016.jpg		說明書印出對照	主冊特殊資源段譯名；遊戲內英文待核
+Adam Smith	亞當史密斯	father	Image031.jpg	亞當・斯密	說明書印出對照	出現 2 次；p45 說明書印作 Adem Smith
+Jakob Fugger	雅各布富格爾	father		雅各布・富格爾	非說明書，沿用譯稿	說明書只印英文；使用者決定人名照說明書連寫
+Peter Minuit	彼得米努伊特	father		彼得・米努伊特	非說明書，沿用譯稿	說明書只印英文；使用者決定人名照說明書連寫
+Peter Stuyvesant	彼德史杜文生	father	Image032.jpg	彼得・斯特伊弗桑特	說明書印出對照	主冊海關段譯名；建國之父章節只印英文
+Jan de Witt	揚德維特	father		揚・德・維特	非說明書，沿用譯稿	說明書只印英文；使用者決定人名照說明書連寫
+Ferdinand Magellan	麥哲倫	father	Image048.jpg	斐迪南・麥哲倫	說明書印出對照	建國之父章節譯名
+Francisco de Coronado	法蘭西斯科德科羅納多	father		法蘭西斯科・德・科羅納多	非說明書，沿用譯稿	說明書只印英文；使用者決定人名照說明書連寫
+Hernando de Soto	埃爾南多德索托	father		埃爾南多・德・索托	非說明書，沿用譯稿	說明書只印英文；使用者決定人名照說明書連寫
+Henry Hudson	哈德遜	father	Image048.jpg	亨利哈德遜／亨利・哈德遜	說明書印出對照	建國之父章節（p81）譯名；p90 作亨利哈德遜
+La Salle	拉薩爾	father			非說明書，沿用譯稿	說明書只印英文，且印作 Sieur de La Salle
+Hernan Cortes	埃爾南科爾特斯	father		埃爾南・科爾特斯	非說明書，沿用譯稿	說明書只印英文；使用者決定人名照說明書連寫
+George Washington	喬治華盛頓	father	Image047.jpg	喬治・華盛頓	說明書印出對照	建國之父章節譯名
+Paul Revere	保羅里維爾	father		保羅・里維爾	非說明書，沿用譯稿	說明書只印英文；使用者決定人名照說明書連寫
+Francis Drake	法蘭西斯德雷克	father		法蘭西斯・德雷克	非說明書，沿用譯稿	說明書只印英文；使用者決定人名照說明書連寫
+John Paul Jones	約翰保羅瓊斯	father		約翰・保羅・瓊斯	非說明書，沿用譯稿	說明書只印英文；使用者決定人名照說明書連寫
+Thomas Jefferson	傑佛遜	father	Image047.jpg	湯瑪斯・傑佛遜	說明書印出對照	建國之父章節譯名
+Pocahontas	寶嘉康蒂	father			非說明書，沿用譯稿	說明書只印英文
+Thomas Paine	湯瑪斯潘恩	father		湯瑪斯・潘恩	非說明書，沿用譯稿	說明書只印英文；使用者決定人名照說明書連寫
+Simon Bolivar	西蒙玻利瓦	father		西蒙・玻利瓦	非說明書，沿用譯稿	說明書只印英文；使用者決定人名照說明書連寫
+Benjamin Franklin	班哲明佛蘭克林	father	Image047.jpg	班傑明・富蘭克林	說明書印出對照	建國之父章節譯名
+William Brewster	威廉布魯斯特	father		威廉・布魯斯特	非說明書，沿用譯稿	說明書只印英文；使用者決定人名照說明書連寫
+William Penn	威廉潘	father		威廉・潘	非說明書，沿用譯稿	說明書只印英文；使用者決定人名照說明書連寫
+Father Jean de Brebeuf	讓德布雷伯夫神父	father		讓・德・布雷伯夫神父	非說明書，沿用譯稿	說明書只印英文；使用者決定人名照說明書連寫
+Juan de Sepulveda	胡安德塞普爾韋達	father		胡安・德・塞普爾韋達	非說明書，沿用譯稿	說明書只印英文；使用者決定人名照說明書連寫
+Bartolome de Las Casas	巴托洛梅德拉斯卡薩斯	father		巴托洛梅・德・拉斯・卡薩斯	非說明書，沿用譯稿	說明書只印英文；使用者決定人名照說明書連寫
+Apache	阿帕契	tribe	Image008.jpg		說明書印出對照	部落一覽譯名
+Arawak	阿羅瓦克	tribe	Image008.jpg		說明書印出對照	部落一覽譯名
+Aztec	阿茲特克	tribe	Image008.jpg		說明書印出對照	部落一覽譯名
+Cherokee	奇洛基	tribe	Image008.jpg		說明書印出對照	部落一覽譯名
+Inca	印加	tribe	Image008.jpg		說明書印出對照	部落一覽譯名
+Iroquois	埃羅克依	tribe	Image008.jpg		說明書印出對照	部落一覽譯名
+Sioux	蘇族	tribe	Image008.jpg		說明書印出對照	部落一覽譯名
+Tupi	突比	tribe	Image008.jpg		說明書印出對照	部落一覽譯名
+England	英國	nation	Image064.jpg	英格蘭／英國政權	說明書印出對照	速查手冊選擇國家譯名；遊戲畫面形容詞形 English 譯稿作英格蘭；使用者決定國名用說明書譯名
+France	法國	nation	Image064.jpg	法國政權	說明書印出對照	速查手冊選擇國家譯名；使用者決定國名用說明書譯名
+Spain	西班牙	nation	Image064.jpg	西班牙政權	說明書印出對照	速查手冊選擇國家譯名；使用者決定國名用說明書譯名
+Netherlands	荷蘭	nation	Image064.jpg	荷蘭政權	說明書印出對照	速查手冊選擇國家譯名；使用者決定國名用說明書譯名
+United States	美利堅合眾國	nation	Image076.jpg		說明書印出對照	速查字彙表譯名，與譯稿一致
+Liberty Bells	自由鐘	concept	Image025.jpg		說明書印出對照	主冊譯名，與譯稿一致
+Crosses	十字架	concept	Image025.jpg		說明書印出對照	主冊譯名，與譯稿一致
+Sons of Liberty	自由子民	concept	Image025.jpg		說明書印出對照	主冊譯名
+Tory	保皇黨	concept	Image025.jpg	親英保皇黨／保皇黨情結	說明書印出對照	主冊譯名，出現最多
+Rebel	叛軍	concept	Image075.jpg	反叛	說明書印出對照	速查字彙表「反叛，叛軍」取名詞義
+Rebel Sentiment	反叛情緒	concept	Image044.jpg		說明書印出對照	主冊 p72 譯名
+Royal Expeditionary Force	皇家遠征軍	concept	Image010.jpg	遠征軍	說明書印出對照	主冊 p5 譯名
+Founding Father	建國之父	concept	Image013.jpg		說明書印出對照	出現 3 次，一致
+Continental Congress	大陸議會	concept	Image071.jpg		說明書印出對照	速查字彙表譯名，主冊 p11 亦同
+Colony	殖民領地	concept	Image010.jpg	殖民地／城鎮	說明書印出對照	出現 2 次，最多；主冊 p4 段首譯名
+Tax	稅率	concept	Image075.jpg	徵稅	說明書印出對照	說明書印作 Tax Rate；畫面標籤 Tax: 譯稿亦作稅率
+Taxation	課稅	concept	Image010.jpg	徵稅／稅款	說明書印出對照	主冊 p5 段首譯名
+Boycott	杯葛	concept	Image044.jpg		說明書印出對照	主冊 p72 譯名
+Treasure	寶藏	concept	Image076.jpg		說明書印出對照	速查字彙表譯名，主冊亦同
+Treasury	國庫	concept	Image076.jpg		說明書印出對照	速查字彙表譯名，主冊亦同
+Veteran	老手	concept	Image043.jpg	老兵	說明書印出對照	印出 2 次作老手，最多
+Independence	獨立	concept	Image073.jpg		說明書印出對照	速查字彙表譯名
+War of Independence	獨立戰爭	concept	Image076.jpg		說明書印出對照	速查字彙表譯名
+Revolution	革命	concept	Image075.jpg		說明書印出對照	速查字彙表譯名
+Rebellion	反叛	concept	Image075.jpg		說明書印出對照	速查字彙表譯名
+Liberty	自由	concept	Image073.jpg		說明書印出對照	速查字彙表譯名
+Crown	皇城	concept	Image010.jpg	皇室	說明書印出對照	主冊 p5 譯名，出現 2 次
+King	國王	concept	Image033.jpg		說明書僅中文（配合譯稿英文）	主冊 p51 用語
+Blockade	封鎖	concept	Image071.jpg		說明書印出對照	速查字彙表譯名
+Bombardment	砲轟	concept	Image071.jpg	沿岸砲轟	說明書印出對照	速查字彙表譯名；沿岸砲轟含限定語
+Ambush	伏襲	concept	Image045.jpg		說明書印出對照	主冊 p75 譯名
+Fountain of Youth	青春之泉	concept	Image072.jpg		說明書印出對照	速查字彙表譯名，快速入門篇亦同
+Rumor	謠言	concept	Image075.jpg		說明書印出對照	速查字彙表譯名
+Mission	傳教所	concept		使命／教會	非說明書，沿用譯稿	說明書「使命」為 mission 另一詞義之誤譯，不採
+Indian	印地安人	concept	Image054.jpg		說明書印出對照	主冊 p92 譯名，出現最多
+Native	原住民	concept	Image074.jpg	原始居民	說明書印出對照	速查字彙表首譯；說明書印作 Natives
+Tribe	部落	concept	Image076.jpg		說明書印出對照	速查字彙表譯名
+Village	村莊	concept	Image076.jpg	部落	說明書印出對照	速查字彙表首譯，主冊 p60 亦用村莊
+Camp	營地	concept	Image071.jpg	營區	說明書印出對照	速查字彙表譯名
+Capital	首都	concept	Image071.jpg	國會／洲議會／部落首都	說明書印出對照	速查字彙表首譯
+Chief	酋長	concept	Image071.jpg		說明書印出對照	速查字彙表譯名，主冊亦同
+Settlement	居住地	concept	Image013.jpg	城鎮共有地／部落／領地／城鎮	說明書印出對照	主冊最早出現（p11）
+Specialty	專長	concept	Image075.jpg		說明書印出對照	速查字彙表譯名
+Tribute	貢品	concept	Image076.jpg	貢獻	說明書印出對照	速查字彙表「貢獻，貢品」取名詞義，與譯稿「索取貢品」一致
+Plunder	掠奪品	concept	Image074.jpg		說明書印出對照	速查字彙表譯名
+Harbor	港口	concept	Image073.jpg	避難所	說明書印出對照	速查字彙表首譯
+Immigration	移民	concept	Image064.jpg	移居	說明書印出對照	速查手冊譯名
+Immigrant	移民	concept	Image073.jpg		說明書印出對照	速查字彙表譯名
+Population	人口	concept	Image074.jpg		說明書印出對照	速查字彙表譯名
+Turn	回合	concept	Image076.jpg		說明書印出對照	速查字彙表譯名
+Storage	庫存	concept	Image075.jpg		說明書印出對照	速查字彙表譯名
+Exploration	探索	concept	Image045.jpg		說明書印出對照	主冊建國之父類別譯名，與譯稿一致
+Military	軍事	concept	Image045.jpg		說明書印出對照	主冊建國之父類別譯名，與譯稿一致
+Political	政治	concept	Image045.jpg		說明書印出對照	主冊建國之父類別譯名，與譯稿一致
+Religious	宗教	concept	Image045.jpg		說明書印出對照	主冊建國之父類別譯名，與譯稿一致
+English	英國	nation		英格蘭	說明書印出對照	遊戲畫面用形容詞形；使用者決定國名用說明書譯名（同 England）
+French	法國	nation			說明書印出對照	遊戲畫面用形容詞形；使用者決定國名用說明書譯名（同 France）
+Spanish	西班牙	nation			說明書印出對照	遊戲畫面用形容詞形；使用者決定國名用說明書譯名（同 Spain）
+Dutch	荷蘭	nation			說明書印出對照	遊戲畫面用形容詞形；使用者決定國名用說明書譯名（同 Netherlands）

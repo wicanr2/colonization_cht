@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""目標154（Issue #27）：以第三波說明書術語表核對既有譯稿，列出英文原文含術語、但譯文未用說明書譯名的列。
+"""目標154／155（Issue #27）：以第三波說明書術語表或定稿譯名表核對既有譯稿，列出英文原文含術語、但譯文未用說明書譯名的列。
 
 只列衝突，不改譯稿。可提交的摘要只含鍵、術語對照與數量；含英文原文的明細寫到已忽略的 workplace。
 原版缺失時，需讀原版位元組才能取得原文的清冊記為 unverifiable。
@@ -17,7 +17,7 @@ from pathlib import Path
 CATALOGS = {
     "draft.zh-Hant.tsv": ("candidate_id", None, "zh_hant"),
     "build-caption-values.zh-Hant.tsv": ("placeholder", "source_text", "zh_hant"),
-    "colony-bilingual.tsv": ("message_id", "source_name", "zh_hant"),
+    # colony-bilingual.tsv（殖民地地名）不套術語：地名是專有名詞，Fort／Indian 等字在地名中不按術語譯。
     "help-bilingual.tsv": ("message_id", "source_en", "zh_hant"),
     "nation-card-fragments.zh-Hant.tsv": ("candidate_id", "source_text", "zh_hant"),
     "nation-introduction.zh-Hant.tsv": ("message_id", "source_en_display", "zh_hant_draft"),
@@ -41,9 +41,10 @@ def main():
     p.add_argument("--detail", type=Path, required=True)
     a = p.parse_args()
     # 同一英文（不分大小寫）在說明書有多個譯名時全部接受；歷史背景名詞（other）不列入。
+    # 定稿表（有 basis 欄，每個英文一個譯名）全部採用；說明書術語表只取印出對照。
     groups = {}
     for r in rows(a.glossary):
-        if r["en"] and r["zh"] and r["evidence"] == "印出對照" and r["category"] != "other":
+        if r["en"] and r["zh"] and ("basis" in r or (r["evidence"] == "印出對照" and r["category"] != "other")):
             g = groups.setdefault(r["en"].lower(), {"en": r["en"], "zh": [], "image": r["image"]})
             for z in re.split(r"[，,/／]", r["zh"]):
                 if z.strip() and z.strip() not in g["zh"]:
