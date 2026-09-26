@@ -1,5 +1,7 @@
 # 目前脈絡
 
+目前真相：[目標149](docs/goals/149-dynamic-overlay-ready.md)完成 #11：規格033 升 READY，涵蓋固定單行、逐字事件列、模板動態行三類。
+
 目前真相：[目標148](docs/goals/148-font-terms-scope-decisions.md)完成 #10，使用者決定：字型維持 Cubic 11；術語以第三波中文版說明書優先；完成範圍為所有可達文字；版面超界時自動縮字到欄位字級 2/3，仍放不下才回原文。
 
 目前真相：[目標147](docs/goals/147-static-overlay-prototype.md)完成 #9：[規格034](docs/spec/034-static-text-overlay-draft.md)靜態覆蓋 DRAFT 與製作名單橫幅原型（正反對照 PASS）。
