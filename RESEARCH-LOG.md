@@ -4077,3 +4077,10 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **輸入與工具：**前端 `tools/live_menu.go` SHA-256 `85dd7a23166d88a1bfad57e9f849d442e373f8c1c855de78896c0ff3149eea25`；探測 `tools/probe_goal153_versions.sh`；檢查 `tools/check_goal153_slice.py`。
 - **已證實：**暫存副本中 `OPENING.EXE`、`VICEROY.EXE`、`GAME.TXT`、`LABELS.TXT`、`NAMES.TXT` 任一改一位元組，前端以代碼 2 拒絕啟動且不產生輸出；只改 `OPENCRD1.SS` 時七個職稱從第一幀起記 `image-version-mismatch`、從未啟用。改動該圖檔最後一位元組會使原版在 `0080:0448` 執行未實作的 80186 opcode 而中止（原版行為，非覆蓋層）。
 - **驗收：**PASS（摘要 `55df5c7a…`）；新前端下目標151 重播逐位元組相同，全面回歸相同。收據只在忽略的 `workplace/reports/goal153-slice/`。
+
+## 2026-09-26：目標154第三波說明書術語表
+
+- **輸入與工具：**`第三波-殖民帝國.rar` SHA-256 `a7263e4176d329a74de6572b4e2539ff0121bd6c8e293573013fdcb227287161`（RAR v4、UTF-16 檔名）；解包映像 `colonization-manual:20260926`（`tools/Dockerfile.manual`，image id `sha256:547fb1a7f275…`，unar 1.10.1）；解包清單 `workplace/original/manual/manifest.sha256` SHA-256 `d5139ed09c6e7239648667dcc6ee30dbf84b0f5112fe8b52e04525ad97c723f4`。術語表 `text/glossary.zh-Hant.tsv` SHA-256 `a90c14c68eeeea3553ffd1fd1e3adf6cdb632336fbd3186a5bc0ad96a4c2c209`。
+- **已證實：**說明書為雙頁掃描，主冊頁 1～106，另附快速入門與英文速查手冊（QS 頁）、參考卡與磁片標籤。術語以「中文(English)」印出者 665 列。
+- **強推論：**子代理判讀；抽樣 Image010、Image044 兩張逐項核對無誤，其餘未逐項複核。
+- **衝突候選：**355 列（摘要 SHA-256 `b5730e339f05cbe96663fa382f9b33ec25cc6fab1c9663a171d861c4b11712fd`，只在 workplace）。

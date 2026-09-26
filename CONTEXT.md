@@ -1,5 +1,7 @@
 # 目前脈絡
 
+目前真相：[目標154](docs/goals/154-manual-glossary.md)（#27 第一輪）：第三波說明書 84 頁判讀出術語表 `text/glossary.zh-Hant.tsv`（1,044 列）；對既有譯稿列出 355 列術語衝突候選，尚未定稿、未改譯稿。#27 保持開放。
+
 目前真相：[目標153](docs/goals/153-first-slice-closure.md)完成 #26：第一個中文垂直切片的驗收條件逐條對到收據；補驗原版版本不符 fail-closed（五個核心檔拒絕啟動、製作名單圖檔回原文）。驗證矩陣現為十五列。
 
 目前真相：[目標152](docs/goals/152-verification-matrix.md)完成 #14：[驗證矩陣](docs/verification-matrix.md)十四列（動態十二、靜態一、回歸一）檢查器全數 PASS，動態與靜態都有原版基線、中文、英文與負例收據；矩陣只重跑檢查器，不重跑模擬。未驗範圍列在矩陣文末。

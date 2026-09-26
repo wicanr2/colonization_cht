@@ -1,0 +1,4 @@
+# 目標154：解包第三波說明書掃描（RAR v4、UTF-16 檔名）。colonization-research 的 unrar-free 無法轉換檔名，p7zip 缺 RAR 解碼器。
+# 建置需網路抓 Debian 套件；執行一律 --network none。
+FROM python:3.13-bookworm
+RUN apt-get update && apt-get install -y --no-install-recommends unar=1.10.7+ds1+really1.10.1-2+b2 && rm -rf /var/lib/apt/lists/*
