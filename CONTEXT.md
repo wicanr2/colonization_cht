@@ -1,5 +1,7 @@
 # 目前脈絡
 
+目前真相：[目標144](docs/goals/144-dynamic-text-model.md)完成 #6：[規格033](docs/spec/033-dynamic-text-model-draft.md)動態文字資料模型 DRAFT，三種真實輸出情境驗證通過。其餘大項依 #7→#8→#9→#10→#11→#12→#13→#14→#26→#27 順序處理，#15 封裝最後。
+
 目前真相：[目標143](docs/goals/143-sea-menu-and-status.md)完成 #37：海上選單列、回合訊息與狀態欄在明示 `-sea-status-a` 時以執行期字元圖集拼字顯示中文（規格032 限定 CONFORMED），數值保留原值並隨原版重印更新；詞典目前只含英格蘭開局所見詞，其餘保留原文並記錄缺譯。
 
 目前真相：[目標142](docs/goals/142-first-tutorial-help.md)完成 #36：首則教學提示 `@TUTORIAL1` 只在 Discoverer 難度開局出現；A 版（30px）在明示 `-tutorial-help-a` 時顯示中文（規格026 該則限定 CONFORMED）。正式中文欄位為五十七段。
