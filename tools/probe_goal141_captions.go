@@ -31,6 +31,7 @@ type print141 struct {
 	Start, Last  uint64
 	Base, Next   uint32
 	Text         []byte
+	Raw          []byte // 目標143：本筆全部讀取位元組（狀態欄字串為連續讀取，不是字元與 0 交錯）
 	Reads        int
 	Writes       int
 	Colors       map[uint8]int
@@ -81,7 +82,8 @@ func main() {
 	// 5c14…：目標132錄製路徑（85.2M 多一次 Enter，第四頁後跳過其餘字幕）；1762…：同路徑去掉該鍵，十張字幕全顯示。
 	if h := sha141(inputBytes); h != "5c143497e6425f38495216f62fe582aa2b035a1afdb7351852dc50126ed487bc" &&
 		h != "17627777dcdf69f56d7d98bca3ea4a0f1843057b8483bc8ee5462386c6167662" &&
-		h != "de60e124d18e4c3c08582abd67a7cb7ba4cfb27be94014189dfa77597ecb6d08" { // 目標142：同路徑改選第一張難度卡（Discoverer），600M 按 Enter 關 help，終點 700M
+		h != "de60e124d18e4c3c08582abd67a7cb7ba4cfb27be94014189dfa77597ecb6d08" &&
+		h != "34fcab582c387a33dca900462547ab5ea388c2568457142d60088d25b7f456a1" { // 目標143：跳過字幕的 Explorer 路徑，海上 600／620／640M 各左移一次，終點 700M // 目標142：同路徑改選第一張難度卡（Discoverer），600M 按 Enter 關 help，終點 700M
 		panic("輸入收據版本不符")
 	}
 	var replay replay141
@@ -120,6 +122,7 @@ func main() {
 			if op != a {
 				return
 			}
+			// 目標143：狀態欄字串逐 byte 連續讀取；同基址遞增仍屬同一筆。
 			if cur == nil || a != cur.Next || m.Steps-cur.Last > 200000 {
 				b := append([]byte(nil), m.Mem[canvas:canvas+64000]...)
 				cur = &print141{Start: m.Steps, Base: a, Colors: map[uint8]int{},
@@ -133,6 +136,7 @@ func main() {
 			if cur.Reads%2 == 0 {
 				cur.Text = append(cur.Text, value)
 			}
+			cur.Raw = append(cur.Raw, value)
 			cur.Reads++
 			cur.Next = a + 1
 			cur.Last = m.Steps
@@ -211,6 +215,8 @@ func main() {
 			d.ReleaseMouse(e.Button)
 		case "enter":
 			d.PushKey(golem.Key{Scan: 0x1c, ASCII: 13})
+		case "left":
+			d.PushKey(golem.Key{Scan: 0x4b})
 		default:
 			panic("非法輸入事件")
 		}

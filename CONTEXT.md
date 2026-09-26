@@ -1,6 +1,8 @@
 # 目前脈絡
 
-目前真相：[目標142](docs/goals/142-first-tutorial-help.md)完成 #36：首則教學提示 `@TUTORIAL1` 只在 Discoverer 難度開局出現；A 版（30px）在明示 `-tutorial-help-a` 時顯示中文（規格026 該則限定 CONFORMED）。正式中文欄位為五十七段。下一個 Issue 為 #37（海上選單列與狀態欄），進行中：[目標143](docs/goals/143-sea-menu-and-status.md)。
+目前真相：[目標143](docs/goals/143-sea-menu-and-status.md)完成 #37：海上選單列、回合訊息與狀態欄在明示 `-sea-status-a` 時以執行期字元圖集拼字顯示中文（規格032 限定 CONFORMED），數值保留原值並隨原版重印更新；詞典目前只含英格蘭開局所見詞，其餘保留原文並記錄缺譯。
+
+目前真相：[目標142](docs/goals/142-first-tutorial-help.md)完成 #36：首則教學提示 `@TUTORIAL1` 只在 Discoverer 難度開局出現；A 版（30px）在明示 `-tutorial-help-a` 時顯示中文（規格026 該則限定 CONFORMED）。正式中文欄位為五十七段。
 
 目前真相：[目標141](docs/goals/141-remaining-build-captions.md)完成 #35：英格蘭十張開場字幕在明示 `-build1-a -build-captions-a` 時全部顯示中文（規格026 字幕部分限定 CONFORMED）；介紹頁後任何按鍵會讓原版在第四張後跳過其餘字幕。`@BUILD1` 撤銷條件已拿掉開檔數（規格029 更正）。正式中文欄位為五十六段。
 

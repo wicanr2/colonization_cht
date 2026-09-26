@@ -293,6 +293,171 @@ var (
 	helpPrintSHA  = "4181fdd58a74d0031037027762468fbf8cbe28565ff097f4726a0fa73a37936b"
 )
 
+// 目標143（規格032）：海上主畫面頂列（選單／回合訊息）與右側狀態欄。原版每行是一次 0D21:00C6 連續讀字，
+// 可見值會變；執行期依當次英文字串與模板、唯一詞典 TSV 組出中文，再以本機字元圖集拼字。
+type seaEvent struct {
+	last              uint64
+	next              uint32
+	raw               []byte
+	firstOld, lastVal map[int]byte
+	writes            int
+	bbox              image.Rectangle
+	colors            map[byte]int
+}
+
+type seaPart struct {
+	text  string
+	color byte
+	x     int // 四倍輸出座標
+}
+
+type seaRow struct {
+	bbox              image.Rectangle
+	text              string
+	parts             []seaPart
+	firstOld, lastVal map[int]byte
+}
+
+type seaLayer struct {
+	name      string
+	safe      image.Rectangle
+	rows      []*seaRow
+	patch     *overlay.Patch
+	shadow    *image.Alpha
+	fg        map[byte]*image.Alpha
+	afterSafe []byte
+	dirty     bool
+	reason    string
+}
+
+type seaState struct {
+	dict           map[string]map[string]string // 角色 → 英文 → 中文
+	menu           []string                     // 選單六詞：快捷鍵字母＋中文
+	glyphs         map[rune]*image.Alpha
+	widths         map[rune]int
+	height, cjkTop int
+	cur            *seaEvent
+	menuRun        []*seaEvent
+	panel, bar     *seaLayer
+	misses         map[string]int
+}
+
+var (
+	seaPanelRect = image.Rect(240, 48, 320, 200)
+	seaBarRect   = image.Rect(0, 0, 320, 8)
+	seaMenuText  = "GAMEVIEWORDERSREPORTSTRADECOLONIZOPEDIA"
+	seaMenuWords = []int{4, 4, 6, 7, 5, 13}
+	seaPatterns  = struct{ season, gold, moves, locat, unit, terrain, goods, title *regexp.Regexp }{
+		regexp.MustCompile(`^(\S+) (\d+)$`),
+		regexp.MustCompile(`^(Gold:)(\d+)\$  (Tax:) (\d+)%$`),
+		regexp.MustCompile(`^(Moves:) (\S+)$`),
+		regexp.MustCompile(`^(Locat:) \((\d+), (\d+)\)$`),
+		regexp.MustCompile(`^(\S+\.) (.+)$`),
+		regexp.MustCompile(`^\((.+)\)$`),
+		regexp.MustCompile(`^(\d+) (.+)$`),
+		regexp.MustCompile(`^(\S+) (.+) (Inbound From) (.+)$`),
+	}
+)
+
+// seaTranslate 把一行原版英文依模板換成中文；任一詞缺譯即回傳 false，保留原文。
+func (st *seaState) seaTranslate(text string) (string, bool) {
+	t := strings.TrimRight(text, " \x00")
+	d := func(role, en string) (string, bool) { zh, ok := st.dict[role][en]; return zh, ok }
+	if m := seaPatterns.gold.FindStringSubmatch(t); m != nil {
+		a, ok1 := d("label", m[1])
+		b, ok2 := d("label", m[3])
+		return a + m[2] + "$　" + b + m[4] + "%", ok1 && ok2
+	}
+	if m := seaPatterns.locat.FindStringSubmatch(t); m != nil {
+		a, ok := d("label", m[1])
+		return a + "(" + m[2] + ", " + m[3] + ")", ok
+	}
+	if m := seaPatterns.moves.FindStringSubmatch(t); m != nil {
+		a, ok := d("label", m[1])
+		return a + m[2], ok
+	}
+	if m := seaPatterns.title.FindStringSubmatch(t); m != nil {
+		n, ok1 := d("nation", m[1])
+		u, ok2 := d("unit", m[2])
+		l, ok3 := d("label", m[3])
+		pt, ok4 := d("port", m[4])
+		return n + u + l + pt, ok1 && ok2 && ok3 && ok4
+	}
+	if m := seaPatterns.season.FindStringSubmatch(t); m != nil {
+		if se, ok := d("season", m[1]); ok {
+			return m[2] + "年" + se, true
+		}
+	}
+	if m := seaPatterns.unit.FindStringSubmatch(t); m != nil {
+		n, ok1 := d("nation_abbrev", m[1])
+		u, ok2 := d("unit", m[2])
+		return n + u, ok1 && ok2
+	}
+	if m := seaPatterns.terrain.FindStringSubmatch(t); m != nil {
+		if tr, ok := d("terrain", m[1]); ok {
+			return "（" + tr + "）", true
+		}
+		return "", false
+	}
+	if m := seaPatterns.goods.FindStringSubmatch(t); m != nil {
+		if g, ok := d("goods", m[2]); ok {
+			return m[1] + " " + g, true
+		}
+		return "", false
+	}
+	for _, role := range []string{"order", "cargo"} {
+		if zh, ok := d(role, t); ok {
+			return zh, true
+		}
+	}
+	return "", false
+}
+
+func (st *seaState) seaWidth(text string) (int, bool) {
+	w := 0
+	for _, r := range text {
+		gw, ok := st.widths[r]
+		if !ok {
+			return 0, false
+		}
+		w += gw
+	}
+	return w, true
+}
+
+// seaDraw 把字串貼到遮罩（以最大值合併），回傳是否有墨跡越出遮罩。
+func (st *seaState) seaDraw(mask *image.Alpha, text string, x, y int) bool {
+	clipped := false
+	for _, r := range text {
+		g := st.glyphs[r]
+		for gy := 0; gy < g.Rect.Dy(); gy++ {
+			for gx := 0; gx < g.Rect.Dx(); gx++ {
+				v := g.Pix[gy*g.Stride+gx]
+				if v == 0 {
+					continue
+				}
+				px, py := x+gx, y+gy
+				if !image.Pt(px, py).In(mask.Rect) {
+					clipped = true
+					continue
+				}
+				if i := mask.PixOffset(px, py); v > mask.Pix[i] {
+					mask.Pix[i] = v
+				}
+			}
+		}
+		x += st.widths[r]
+	}
+	return clipped
+}
+
+func seaMisses(sea *seaState) map[string]int {
+	if sea == nil {
+		return nil
+	}
+	return sea.misses
+}
+
 func helpTextBytes(buf []byte) []byte {
 	b := make([]byte, 0, helpText.Dx()*helpText.Dy())
 	for y := helpText.Min.Y; y < helpText.Max.Y; y++ {
@@ -388,6 +553,9 @@ func main() {
 	buildValues := flag.String("build-values", "/repo/text/build-caption-values.zh-Hant.tsv", "開場字幕變數值唯一 TSV")
 	optionsTitleA := flag.Bool("game-options-title-a", false, "啟用規格030遊戲選項標題 A／34px")
 	optionsTitleFont := flag.String("game-options-title-font", "/out/goal132-options-title-font.json", "本機依固定字型與真 TSV 烘製的遊戲選項標題字模")
+	seaA := flag.Bool("sea-status-a", false, "啟用規格032海上選單列與狀態欄（22px＋黑影）")
+	seaCatalog := flag.String("sea-catalog", "/repo/text/sea-status.zh-Hant.tsv", "海上詞典唯一 TSV")
+	seaAtlas := flag.String("sea-atlas", "/out/goal143-sea-atlas.json", "本機依固定字型與詞典烘製的海上字元圖集")
 	helpA := flag.Bool("tutorial-help-a", false, "啟用目標142首則教學提示 @TUTORIAL1 A 版（正文30px）")
 	helpCatalog := flag.String("help-catalog", "/repo/text/help-bilingual.tsv", "help 雙語唯一 TSV")
 	helpMasks := flag.String("help-mask-dir", "/out/goal142-help-masks", "本機依固定字型與真 TSV 烘製的 help 三層字模目錄")
@@ -730,6 +898,97 @@ func main() {
 	}
 	labelsSource := read(filepath.Join(*root, "LABELS.TXT"))
 	namesSource := read(filepath.Join(*root, "NAMES.TXT"))
+	var sea *seaState
+	seaReason := ""
+	if *seaA {
+		sea = &seaState{dict: map[string]map[string]string{}, misses: map[string]int{},
+			panel: &seaLayer{name: "sea:panel", safe: seaPanelRect}, bar: &seaLayer{name: "sea:bar", safe: seaBarRect}}
+		seaBytes := read(*seaCatalog)
+		menuSource := read(filepath.Join(*root, "MENU.TXT"))
+		sources := map[string][]byte{"NAMES.TXT": namesSource, "LABELS.TXT": labelsSource, "MENU.TXT": menuSource}
+		seaLines := strings.Split(strings.TrimRight(string(seaBytes), "\n"), "\n")
+		header := strings.Split(seaLines[0], "\t")
+		col := map[string]int{}
+		for i, h := range header {
+			col[h] = i
+		}
+		seen := map[string]bool{}
+		menuZh := map[string]string{}
+		for _, line := range seaLines[1:] {
+			row := strings.Split(line, "\t")
+			if len(row) != len(header) {
+				seaReason = "catalog-format"
+				continue
+			}
+			get := func(k string) string { return row[col[k]] }
+			src, ok := sources[get("source_file")]
+			offset, e1 := strconv.ParseUint(get("byte_offset"), 0, 32)
+			length, e2 := strconv.Atoi(get("source_byte_length"))
+			text := get("source_text")
+			if !ok || e1 != nil || e2 != nil || seen[get("candidate_id")] || int(offset)+length > len(src) ||
+				get("source_sha256") != hash(src) || string(src[offset:int(offset)+length]) != text ||
+				len(text) != length || get("zh_hant") == "" || get("status") != "draft" {
+				seaReason = "catalog-source-mismatch"
+				continue
+			}
+			seen[get("candidate_id")] = true
+			role := get("role")
+			if sea.dict[role] == nil {
+				sea.dict[role] = map[string]string{}
+			}
+			if _, dup := sea.dict[role][text]; dup {
+				seaReason = "catalog-duplicate"
+			}
+			sea.dict[role][text] = get("zh_hant")
+			if role == "menu" {
+				menuZh[text] = get("zh_hant")
+			}
+		}
+		for _, key := range []string{"~GAME", "~VIEW", "~ORDERS", "~REPORTS", "~TRADE", "~COLONIZOPEDIA"} {
+			zh, ok := menuZh[key]
+			if !ok {
+				seaReason = "catalog-missing-menu"
+				break
+			}
+			sea.menu = append(sea.menu, "("+key[1:2]+")"+"\x00"+zh)
+		}
+		var atlas struct {
+			Font    string `json:"font_sha256"`
+			Px      int    `json:"font_px"`
+			Height  int    `json:"height"`
+			CJKTop  int    `json:"cjk_ink_top"`
+			Catalog string `json:"catalog_sha256"`
+			Glyphs  map[string]struct {
+				W     int    `json:"w"`
+				Alpha []byte `json:"alpha"`
+			} `json:"glyphs"`
+		}
+		b, err := os.ReadFile(*seaAtlas)
+		if err != nil || json.Unmarshal(b, &atlas) != nil {
+			seaReason = "font-mask-unavailable"
+		} else if atlas.Font != fontHash || atlas.Px != 22 || atlas.Catalog != hash(seaBytes) || atlas.Height <= 0 {
+			seaReason = "font-binding-mismatch"
+		} else {
+			sea.glyphs, sea.widths = map[rune]*image.Alpha{}, map[rune]int{}
+			sea.height, sea.cjkTop = atlas.Height, atlas.CJKTop
+			for k, g := range atlas.Glyphs {
+				r := []rune(k)
+				if len(r) != 1 || g.W <= 0 || len(g.Alpha) != g.W*atlas.Height {
+					seaReason = "font-mask-out-of-bounds"
+					break
+				}
+				a := image.NewAlpha(image.Rect(0, 0, g.W, atlas.Height))
+				copy(a.Pix, g.Alpha)
+				sea.glyphs[r[0]], sea.widths[r[0]] = a, g.W
+			}
+		}
+		if *missing {
+			seaReason = "missing-ink"
+		}
+		if seaReason != "" {
+			sea.glyphs = nil
+		}
+	}
 	difficulty := []*difficultyLine{}
 	var prompt *difficultyLine
 	if *allMenu {
@@ -1431,6 +1690,92 @@ func main() {
 		}
 	}
 	helpAnyInk := help != nil && help.normal != nil
+	seaOn := sea != nil && sea.glyphs != nil
+	// seaFinish 把完成的印字事件歸入頂列或狀態欄；無法翻譯者記錄缺譯並保留原文。
+	seaFinish := func() {
+		ev := sea.cur
+		sea.cur = nil
+		if ev == nil || ev.writes == 0 {
+			return
+		}
+		interleaved := len(ev.raw) == 2 && ev.raw[1] == 0
+		text := strings.TrimRight(string(ev.raw), "\x00")
+		if interleaved {
+			text = string(ev.raw[:1])
+		}
+		row := &seaRow{bbox: ev.bbox, text: text, firstOld: ev.firstOld, lastVal: ev.lastVal}
+		switch {
+		case ev.bbox.In(seaBarRect) && interleaved:
+			// 選單列逐字印出；從第一個字 G（x=13）起累積，整列 39 字完全相同才成立。
+			if text == "G" && ev.bbox.Min.X == 13 {
+				sea.menuRun = nil
+			}
+			sea.menuRun = append(sea.menuRun, ev)
+			got := ""
+			for _, g := range sea.menuRun {
+				got += string(g.raw[:1])
+			}
+			if !strings.HasPrefix(seaMenuText, got) {
+				sea.menuRun = nil
+				return
+			}
+			if got != seaMenuText {
+				return
+			}
+			menuRow := &seaRow{text: got, firstOld: map[int]byte{}, lastVal: map[int]byte{}}
+			k := 0
+			for w, n := range seaMenuWords {
+				first := sea.menuRun[k].bbox
+				parts := strings.SplitN(sea.menu[w], "\x00", 2)
+				x := first.Min.X * 4
+				menuRow.parts = append(menuRow.parts, seaPart{parts[0], 149, x})
+				key, _ := sea.seaWidth(parts[0])
+				menuRow.parts = append(menuRow.parts, seaPart{parts[1], 68, x + key})
+				k += n
+			}
+			for _, g := range sea.menuRun {
+				menuRow.bbox = menuRow.bbox.Union(g.bbox)
+				for i, v := range g.firstOld {
+					menuRow.firstOld[i] = v
+				}
+				for i, v := range g.lastVal {
+					menuRow.lastVal[i] = v
+				}
+			}
+			sea.menuRun = nil
+			sea.bar.rows, sea.bar.dirty = []*seaRow{menuRow}, true
+		case ev.bbox.In(seaBarRect):
+			sea.menuRun = nil
+			zh, ok := sea.seaTranslate(text)
+			w, glyphOK := sea.seaWidth(zh)
+			if !ok || !glyphOK {
+				sea.misses[text]++
+				sea.bar.rows, sea.bar.dirty = nil, true
+				return
+			}
+			row.parts = []seaPart{{zh, 149, 640 - w/2}}
+			sea.bar.rows, sea.bar.dirty = []*seaRow{row}, true
+		case ev.bbox.In(seaPanelRect) && !interleaved:
+			kept := sea.panel.rows[:0]
+			for _, r := range sea.panel.rows {
+				if !r.bbox.Overlaps(ev.bbox) {
+					kept = append(kept, r)
+				}
+			}
+			sea.panel.rows, sea.panel.dirty = kept, true
+			color := byte(0)
+			for c := range ev.colors {
+				color = c
+			}
+			zh, ok := sea.seaTranslate(text)
+			if _, glyphOK := sea.seaWidth(zh); !ok || !glyphOK || len(ev.colors) != 1 || (color != 68 && color != 149) {
+				sea.misses[text]++
+				return
+			}
+			row.parts = []seaPart{{zh, color, ev.bbox.Min.X * 4}}
+			sea.panel.rows = append(sea.panel.rows, row)
+		}
+	}
 	helpExpire := func(reason string) {
 		if help == nil || help.phase == "idle" || help.phase == "expired" {
 			return
@@ -1473,7 +1818,7 @@ func main() {
 			f.phase, f.patch, f.before, f.afterSafe = "expired", nil, nil, nil
 		}
 	}
-	if !*control && (captionAnyInk || (title != nil && title.ink != nil) || rowsAnyInk || introAnyInk || retireAnyInk || helpAnyInk) {
+	if !*control && (captionAnyInk || (title != nil && title.ink != nil) || rowsAnyInk || introAnyInk || retireAnyInk || helpAnyInk || seaOn) {
 		m.WatchWrites(0x2cae0, 0x2cae0+64000, func(a uint32, old, value uint8) {
 			if old == value {
 				return
@@ -1515,6 +1860,20 @@ func main() {
 				} else if !(cs == 0x0cae && ip == 0x00a8 && image.Pt(x, y).In(ev.helper) && (target == nil || target.got == 0)) {
 					// 原版在 Yes 印完、No 印字前以 0CAE:00A8 畫 No 按鈕底圖；其他情形一律撤銷。
 					retireExpire(ev, fmt.Sprintf("unexpected-canvas-writer %04X:%04X (%d,%d)", cs, ip, x, y))
+				}
+			}
+			if seaOn && sea.cur != nil && cs == 0x0d21 && ip == 0x012c && m.Steps-sea.cur.last < 200000 {
+				ev, i := sea.cur, y*320+x
+				if _, seen := ev.firstOld[i]; !seen {
+					ev.firstOld[i] = old
+				}
+				ev.lastVal[i] = value
+				ev.writes++
+				ev.colors[value]++
+				if ev.writes == 1 {
+					ev.bbox = image.Rect(x, y, x+1, y+1)
+				} else {
+					ev.bbox = ev.bbox.Union(image.Rect(x, y, x+1, y+1))
 				}
 			}
 			if help != nil && help.phase == "reading" {
@@ -1845,6 +2204,15 @@ func main() {
 					ev.lastRead = m.Steps
 				}
 			}
+			if seaOn && cs == 0x0d21 && ip == 0x00c6 {
+				a := uint32(c.Seg[golem.SS])*16 + uint32(c.R[golem.BX])
+				if sea.cur == nil || a != sea.cur.next || m.Steps-sea.cur.last > 200000 {
+					seaFinish()
+					sea.cur = &seaEvent{firstOld: map[int]byte{}, lastVal: map[int]byte{}, colors: map[byte]int{}}
+				}
+				sea.cur.raw = append(sea.cur.raw, m.Mem[a])
+				sea.cur.next, sea.cur.last = a+1, m.Steps
+			}
 			if helpAnyInk && cs == 0x0d21 && ip == 0x00c6 {
 				a := uint32(c.Seg[golem.SS])*16 + uint32(c.R[golem.BX])
 				if a == helpReadBase || a == helpReadBase+1 {
@@ -2157,6 +2525,67 @@ func main() {
 					if !bytes.Equal(rectBytes(canvas(), f.rect), f.afterSafe) {
 						events = append(events, map[string]any{"candidate_id": f.id, "stage": "expired", "step": m.Steps, "reason": "canvas-field-changed"})
 						f.phase, f.patch, f.before, f.afterSafe = "expired", nil, nil, nil
+					}
+				}
+			}
+		}
+		if seaOn && !*control {
+			if sea.cur != nil && m.Steps-sea.cur.last > 20000 {
+				seaFinish()
+			}
+			for _, layer := range []*seaLayer{sea.bar, sea.panel} {
+				safeBytes := func(buf []byte) []byte {
+					b := make([]byte, 0, layer.safe.Dx()*layer.safe.Dy())
+					for y := layer.safe.Min.Y; y < layer.safe.Max.Y; y++ {
+						b = append(b, buf[y*320+layer.safe.Min.X:y*320+layer.safe.Max.X]...)
+					}
+					return b
+				}
+				if !layer.dirty && (layer.afterSafe == nil || bytes.Equal(safeBytes(canvas()), layer.afterSafe)) {
+					continue
+				}
+				// 重建：逐行核對文字像素仍為當次改色值，且改寫前不是文字色；其餘行保留原文。
+				layer.dirty, layer.patch = false, nil
+				cur := canvas()
+				before := bytes.Clone(cur)
+				w, h := layer.safe.Dx()*4, layer.safe.Dy()*4
+				layer.shadow = image.NewAlpha(image.Rect(0, 0, w, h))
+				layer.fg = map[byte]*image.Alpha{68: image.NewAlpha(image.Rect(0, 0, w, h)), 149: image.NewAlpha(image.Rect(0, 0, w, h))}
+				kept := layer.rows[:0]
+				for _, r := range layer.rows {
+					ok := len(r.parts) > 0
+					for i, v := range r.lastVal {
+						if cur[i] != v || r.firstOld[i] == 68 || r.firstOld[i] == 149 {
+							ok = false
+							break
+						}
+					}
+					if !ok {
+						continue
+					}
+					y := r.bbox.Min.Y*4 - sea.cjkTop - layer.safe.Min.Y*4
+					clipped := false
+					for _, pt := range r.parts {
+						x := pt.x - layer.safe.Min.X*4
+						clipped = sea.seaDraw(layer.shadow, pt.text, x+2, y+2) || clipped
+						clipped = sea.seaDraw(layer.fg[pt.color], pt.text, x, y) || clipped
+					}
+					if clipped {
+						sea.misses["clipped:"+r.text]++
+						continue
+					}
+					for i, v := range r.firstOld {
+						before[i] = v
+					}
+					kept = append(kept, r)
+				}
+				layer.rows = kept
+				layer.afterSafe = safeBytes(cur)
+				layer.reason = "no-translated-rows"
+				if len(kept) > 0 {
+					if p, err := overlay.NewPatch(before, cur, 320, 200, layer.safe); err == nil {
+						layer.patch, layer.reason = p, ""
+						events = append(events, map[string]any{"candidate_id": layer.name, "stage": "active", "step": m.Steps, "rows": len(kept)})
 					}
 				}
 			}
@@ -2507,6 +2936,49 @@ func main() {
 			}
 			if *allMenu && applied {
 				reason = "applied"
+			}
+			if sea != nil {
+				for _, layer := range []*seaLayer{sea.bar, sea.panel} {
+					reason, ok := seaReason, false
+					if reason == "" {
+						reason = layer.reason
+					}
+					if seaOn && !*control && layer.patch != nil {
+						// 游標範圍換回印後底層再比對；中文畫完後把真 VGA 的游標像素疊回最上層。
+						mx, my := int(d.Mouse.X), int(d.Mouse.Y)
+						clean := bytes.Clone(indexed)
+						box := cursorBox(mx, my).Intersect(layer.safe)
+						for y := box.Min.Y; y < box.Max.Y; y++ {
+							for x := box.Min.X; x < box.Max.X; x++ {
+								clean[y*320+x] = canvas()[y*320+x]
+							}
+						}
+						frame, composed, why, err := overlay.Compose(clean, m.DAC[:], 320, 200, 4,
+							layer.patch, layer.shadow, layer.safe.Min.Mul(4), 0, enabled)
+						must(err)
+						reason = why
+						if composed {
+							out := image.Rectangle{Min: layer.safe.Min.Mul(4), Max: layer.safe.Max.Mul(4)}
+							draw.Draw(output, out, frame, out.Min, draw.Src)
+							for _, index := range []byte{68, 149} {
+								p := int(index) * 3
+								fg := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
+								draw.DrawMask(output, out, image.NewUniform(fg), image.Point{}, layer.fg[index], image.Point{}, draw.Over)
+							}
+							for y := box.Min.Y; y < box.Max.Y; y++ {
+								for x := box.Min.X; x < box.Max.X; x++ {
+									if v := indexed[y*320+x]; v != clean[y*320+x] {
+										p := int(v) * 3
+										c := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
+										draw.Draw(output, image.Rect(x*4, y*4, x*4+4, y*4+4), image.NewUniform(c), image.Point{}, draw.Src)
+									}
+								}
+							}
+							ok, reason = true, "applied"
+						}
+					}
+					lineRecords = append(lineRecords, map[string]any{"candidate_id": layer.name, "applied": ok, "reason": reason, "rows": len(layer.rows)})
+				}
 			}
 			for _, caption := range captions {
 				captionReason := caption.phase
@@ -2875,6 +3347,10 @@ func main() {
 	must(os.WriteFile(*out+".memory", m.Mem, 0644))
 	c := m.CPU
 	state := map[string]any{"memory_sha256": hash(m.Mem), "registers": c.R, "segments": c.Seg, "ip": c.IP, "flags": c.Flags, "steps": m.Steps, "ticks": m.Ticks, "frames": m.Frames, "cycles": c.Cycles, "frame_sha256": hash(m.Mem[0xa0000:0xafa00]), "palette_sha256": hash(m.DAC[:])}
-	dumpJSON(*out+".json", map[string]any{"state": state, "checkpoints": checkpoints, "frames": frames, "events": events, "drops": drops, "input_hashes": inputs, "catalog_sha256": hash(catalogBytes), "translation_sha256": hash([]byte(lines[0].translation)), "font_sha256": fontHash, "control": *control, "missing": *missing, "all_menu": *allMenu, "step_convention": "before-instruction-number = legacy-pre-Step + 1", "opened": d.Opened})
+	report := map[string]any{"state": state, "checkpoints": checkpoints, "frames": frames, "events": events, "drops": drops, "input_hashes": inputs, "catalog_sha256": hash(catalogBytes), "translation_sha256": hash([]byte(lines[0].translation)), "font_sha256": fontHash, "control": *control, "missing": *missing, "all_menu": *allMenu, "step_convention": "before-instruction-number = legacy-pre-Step + 1", "opened": d.Opened}
+	if sea != nil {
+		report["sea_misses"] = seaMisses(sea)
+	}
+	dumpJSON(*out+".json", report)
 	fmt.Printf("完成 %d 事件、%d 幀、%d 截圖，原版狀態 %s\n", len(events), len(frames), len(checkpoints), hash(m.Mem))
 }

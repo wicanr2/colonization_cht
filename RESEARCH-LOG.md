@@ -4047,3 +4047,10 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **輸入與工具：**前端 `tools/live_menu.go` SHA-256 `747ba2c2fa6517fe342449957ada86e72f92b1d4020cf0f6ec376ab3f7ab6e47`（新增 `-tutorial-help-a`）；Discoverer 輸入 `tools/goal142-discoverer.inputs.json` SHA-256 `de60e124d18e4c3c08582abd67a7cb7ba4cfb27be94014189dfa77597ecb6d08`；探針 `tools/probe_goal141_captions.go`（加記其他寫入者範圍）；預覽 `tools/preview_goal142_help.py`、烘字 `tools/bake_help_masks.py`。
 - **已證實：**選 Discoverer 時英格蘭開局在 565.08M 印出 `@TUTORIAL1`，選 Explorer 則不出現；讀字、改色、肖像寫入範圍、印前／印後底圖與按 Enter 關閉見[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)文末。雙冷啟動 JSON 相同、無監看控制一致。
 - **驗收：**`tools/check_goal142_window.py` PASS（摘要 `6806f2cf…`）。收據只在忽略的 `workplace/reports/goal142-help/`。
+
+## 2026-09-26：目標143海上選單列與狀態欄（執行期拼字）
+
+- **輸入與工具：**前端 `tools/live_menu.go` SHA-256 `5e10cedc4df6cc0e877a150908439b877a1f82e53c7b24cfc6ac05a4850321ba`（新增 `-sea-status-a`／`-sea-catalog`／`-sea-atlas`）；海上輸入 `tools/goal143-sea.inputs.json` SHA-256 `34fcab582c387a33dca900462547ab5ea388c2568457142d60088d25b7f456a1`；詞典 `text/sea-status.zh-Hant.tsv` SHA-256 `57a82e4145979f3950f88f30061c5f55af7bdb2fbb6448c3a464879407d641b0`（24 列）；圖集 `tools/bake_sea_atlas.py`；探針 `tools/probe_goal141_captions.go` 加記完整讀字與左移鍵。
+- **已證實：**狀態欄每行是一次連續讀字字串、單一色號改色、移動後整組先清再印；選單列逐字印出、首字母色號 149；回合訊息暫佔頂列約 23M 步後重印選單。雙冷啟動相同、無監看控制一致。
+- **強推論：**狀態欄 `Gold:`／`Tax:` 沿用 `LABELS.TXT @CTITLE` 同字。
+- **驗收：**`tools/check_goal143_window.py` PASS（摘要 `6ecd5ae1…`）。收據只在忽略的 `workplace/reports/goal143-sea/`。
