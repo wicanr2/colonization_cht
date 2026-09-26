@@ -31,7 +31,7 @@ xdotool windowfocus "$window"
 
 wait_step() {
   local step=""
-  for ((i=0; i<18000; i++)); do
+  for ((i=0; i<${COLONIZATION_WAIT_TICKS:-18000}; i++)); do  # 每 0.1 秒一次；主機高負載時以 COLONIZATION_WAIT_TICKS 放寬，只影響牆鐘等待
     kill -0 "$game_pid"
     step=$(sed -n 's/.*"step": \([0-9]*\).*/\1/p' "$out.status.json" 2>/dev/null | tail -1 || true)
     if [[ -n "$step" && "$step" -ge "$1" ]]; then return; fi

@@ -11,7 +11,7 @@
 
 ## 本輪結果
 
-- 三項都通過，細節見[規格031](../spec/031-game-options-rows-a-ready.md)與[規格030](../spec/030-game-options-title-a-ready.md)的「後續驗證」節。讀存檔可行，未另開 Issue。
+- 三項都通過（其他國家的國別以[目標161](161-formal-field-reverify.md)重驗收據為準），細節見[規格031](../spec/031-game-options-rows-a-ready.md)與[規格030](../spec/030-game-options-title-a-ready.md)的「後續驗證」節。讀存檔可行，未另開 Issue。
 - 真 GUI 多次重跑，原因都在操作時序：並行時等待逾時、主選單須停留後按住、主選單出現步數不固定需改相對等待、讀檔後的訊息框需關閉。另有一次腳本產生時切片為空、把內容插進每個字元之間，當即停止該容器並重建腳本。各次嘗試收據封存在 `workplace/reports/goal137-options-followups/attempts/`。
 
 ## 停止線

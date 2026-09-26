@@ -38,6 +38,12 @@ def check_case(reports, name, shot_name, groups):
          f"{name}：中文越出九欄安全區或未繪製")
     lines = last_lines(replay[0])
     need(all(lines[key]["applied"] for key in ROWS + [TITLE]), f"{name}：終點九欄不是全部中文")
+    # 國別：國家路徑必須只出現該國的首次介紹頁事件（目標161 發現選卡時序競態會誤選英國，舊西班牙收據即為此例）。
+    nation = {"options-france": "1", "options-spain": "2", "options-netherlands": "3"}.get(name)
+    if nation:
+        pages = {e["candidate_id"] for e in replay[0]["events"] if str(e.get("candidate_id", "")).startswith("GAME.TXT:@NATION") and
+                 e["candidate_id"] != "GAME.TXT:@NATION"}
+        need(pages == {f"GAME.TXT:@NATION{nation}A", f"GAME.TXT:@NATION{nation}B"}, f"{name}：國別不符，介紹頁事件為 {sorted(pages)}")
     sources = [e for e in replay[0]["events"] if e.get("candidate_id") == GROUP and e.get("stage") == "source"]
     need(len(sources) == groups, f"{name}：整組八列印字事件數為 {len(sources)}，預期 {groups}")
     gui = json.loads((reports / f"{name}.json").read_text())

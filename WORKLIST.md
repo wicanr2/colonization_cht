@@ -44,7 +44,7 @@
 | #35 | completed | [其餘九張開場字幕 @BUILD2～10 中文化](https://github.com/wicanr2/colonization_cht/issues/35) | `dynamic-overlay-implementation` | 九張字幕逐張有當次事件、底圖、真 VGA 同步與換頁撤銷證據，正式前端與真 GUI 驗收後逐張 CONFORMED。 |
 | #36 | completed | [觸發並中文化首則教學提示（help）](https://github.com/wicanr2/colonization_cht/issues/36) | `normal-gameplay-route` | 正常玩家可重現觸發首則 help 並有原版印字事件；help 視窗 DRAFT 規格與使用者確認的版面，後續依 READY／CONFORMED 流程接正式前端。 |
 | #37 | completed | [海上主畫面選單列與右側狀態欄中文化](https://github.com/wicanr2/colonization_cht/issues/37) | `dynamic-text-draft` | 選單列與狀態欄分類靜態／動態字，逐欄有原版事件、底圖、重印閘門與使用者確認的版面，正式前端與真 GUI 驗收後 CONFORMED。 |
-| #38 | planned | [語料定稿後重驗正式欄位](https://github.com/wicanr2/colonization_cht/issues/38) | `translation-corpus` | 目標156改稿影響的欄位（134、135、136、137、141、142、143、150）重跑真 GUI、中英同輸入重播與檢查器 PASS；新全面回歸基準；驗證矩陣無待重驗列。 |
+| #38 | completed | [語料定稿後重驗正式欄位](https://github.com/wicanr2/colonization_cht/issues/38) | `translation-corpus` | 目標156改稿影響的欄位（134、135、136、137、141、142、143、150）重跑真 GUI、中英同輸入重播與檢查器 PASS；新全面回歸基準；驗證矩陣無待重驗列。 |
 
 ## 驗證
 

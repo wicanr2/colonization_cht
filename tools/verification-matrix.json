@@ -18,9 +18,9 @@
     "--game",
     "{game}",
     "--reports",
-    "{reports}/goal134-options-rows"
+    "{reports}/goal161-134"
    ],
-   "dir": "goal134-options-rows",
+   "dir": "goal161-134",
    "zh": [
     "zh-1280m",
     "zh-full",
@@ -41,8 +41,7 @@
     "probe_goal134_gui.sh",
     "probe_goal134_replays.sh"
    ],
-   "known_diffs": "GUI 截圖與重播可有一幀延遲，只比安全區",
-   "stale_since": "目標156 改稿（收據早於現行譯文；字模已重烘、載入綁定通過，視覺待重驗）"
+   "known_diffs": "GUI 截圖與重播可有一幀延遲，只比安全區；目標161 以定稿譯名重驗"
   },
   {
    "id": "england-intro",
@@ -59,9 +58,9 @@
     "--game",
     "{game}",
     "--reports",
-    "{reports}/goal135-nation-intro"
+    "{reports}/goal161-135"
    ],
-   "dir": "goal135-nation-intro",
+   "dir": "goal161-135",
    "zh": [
     "zh-*m"
    ],
@@ -78,8 +77,7 @@
     "probe_goal135_gui.sh",
     "probe_goal135_replays.sh"
    ],
-   "known_diffs": "",
-   "stale_since": "目標156 改稿（收據早於現行譯文；字模已重烘、載入綁定通過，視覺待重驗）"
+   "known_diffs": "目標161 以定稿譯名重驗"
   },
   {
    "id": "other-intros",
@@ -96,9 +94,9 @@
     "--game",
     "{game}",
     "--reports",
-    "{reports}/goal136-nation-intro"
+    "{reports}/goal161-136"
    ],
-   "dir": "goal136-nation-intro",
+   "dir": "goal161-136",
    "zh": [
     "*-zh-*m"
    ],
@@ -115,8 +113,7 @@
     "probe_goal136_gui.sh",
     "probe_goal136_replays.sh"
    ],
-   "known_diffs": "",
-   "stale_since": "目標156 改稿（收據早於現行譯文；字模已重烘、載入綁定通過，視覺待重驗）"
+   "known_diffs": "目標161 以定稿譯名重驗"
   },
   {
    "id": "options-followups",
@@ -134,9 +131,9 @@
     "--game",
     "{game}",
     "--reports",
-    "{reports}/goal137-options-followups"
+    "{reports}/goal161-137"
    ],
-   "dir": "goal137-options-followups",
+   "dir": "goal161-137",
    "zh": [
     "*-replay-zh"
    ],
@@ -154,8 +151,7 @@
     "probe_goal137_save_explore_gui.sh",
     "probe_goal137_replays.sh"
    ],
-   "known_diffs": "只驗英格蘭存檔一例；本列無專屬負例，回退由目標134負例涵蓋",
-   "stale_since": "目標156 改稿（收據早於現行譯文；字模已重烘、載入綁定通過，視覺待重驗）"
+   "known_diffs": "只驗英國存檔一例；檢查器驗證國別（介紹頁事件）；本列無專屬負例，回退由目標134負例涵蓋"
   },
   {
    "id": "retire",
@@ -288,9 +284,9 @@
     "--game",
     "{game}",
     "--reports",
-    "{reports}/goal141-captions"
+    "{reports}/goal161-141"
    ],
-   "dir": "goal141-captions",
+   "dir": "goal161-141",
    "zh": [
     "replay-zh"
    ],
@@ -307,8 +303,7 @@
     "probe_goal141_gui.sh",
     "probe_goal141_replays.sh"
    ],
-   "known_diffs": "介紹頁後按鍵會讓原版跳過第五張起的字幕",
-   "stale_since": "目標156 改稿（收據早於現行譯文；字模已重烘、載入綁定通過，視覺待重驗）"
+   "known_diffs": "介紹頁後按鍵會讓原版跳過第五張起的字幕；目標161 以定稿譯名重驗"
   },
   {
    "id": "tutorial-help",
@@ -325,9 +320,9 @@
     "--game",
     "{game}",
     "--reports",
-    "{reports}/goal142-help"
+    "{reports}/goal161-142"
    ],
-   "dir": "goal142-help",
+   "dir": "goal161-142",
    "zh": [
     "replay-zh"
    ],
@@ -344,8 +339,7 @@
     "probe_goal142_gui.sh",
     "probe_goal142_replays.sh"
    ],
-   "known_diffs": "GUI 截圖一幀延遲，只比安全區",
-   "stale_since": "目標156 改稿（收據早於現行譯文；字模已重烘、載入綁定通過，視覺待重驗）"
+   "known_diffs": "GUI 截圖一幀延遲，只比安全區；目標161 以定稿譯名重驗"
   },
   {
    "id": "sea-status",
@@ -362,9 +356,9 @@
     "--game",
     "{game}",
     "--reports",
-    "{reports}/goal143-sea"
+    "{reports}/goal161-143"
    ],
-   "dir": "goal143-sea",
+   "dir": "goal161-143",
    "zh": [
     "replay-zh",
     "smoke-zh"
@@ -383,8 +377,7 @@
     "probe_goal143_gui.sh",
     "probe_goal143_replays.sh"
    ],
-   "known_diffs": "",
-   "stale_since": "目標156 改稿（收據早於現行譯文；字模已重烘、載入綁定通過，視覺待重驗）"
+   "known_diffs": "目標161 以定稿譯名重驗"
   },
   {
    "id": "dynamic-combined",
@@ -401,9 +394,11 @@
     "--game",
     "{game}",
     "--reports",
-    "{reports}"
+    "{reports}",
+    "--dynamic-dir",
+    "goal161-150"
    ],
-   "dir": "goal150-dynamic",
+   "dir": "goal161-150",
    "zh": [
     "full-zh",
     "help-zh"
@@ -419,8 +414,7 @@
    "regenerate": [
     "probe_goal150_replays.sh"
    ],
-   "known_diffs": "主選單第一列在錄製路徑因游標遮擋保留原文；輸入來自 tools/goal150-full-path.inputs.json 與目標142 現場輸入",
-   "stale_since": "目標156 改稿（收據早於現行譯文；字模已重烘、載入綁定通過，視覺待重驗）"
+   "known_diffs": "海上路徑與目標143 比對原版狀態相同、畫面差異只在海上安全區（目標156 改稿）；主選單第一列在錄製路徑因游標遮擋保留原文"
   },
   {
    "id": "text-model",
@@ -500,11 +494,11 @@
     "--game",
     "{game}",
     "--baseline",
-    "{reports}/goal138-retire",
+    "{reports}/goal161-regress-a",
     "--candidate",
-    "{reports}/goal153-slice"
+    "{reports}/goal161-regress-b"
    ],
-   "dir": "goal153-slice",
+   "dir": "goal161-regress-b",
    "zh": [
     "regress/*",
     "regress135/*"
@@ -516,8 +510,7 @@
     "probe_goal133_regressions.sh",
     "probe_goal135_replays.sh"
    ],
-   "known_diffs": "基準為目標138收據；候選為目前前端（目標153）",
-   "stale_since": "目標156 改稿（收據早於現行譯文；字模已重烘、載入綁定通過，視覺待重驗）"
+   "known_diffs": "基準為目標161 以現行前端建立的回歸收據，兩次獨立重跑逐位元組相同"
   },
   {
    "id": "version-gate",
@@ -551,12 +544,10 @@
     "probe_goal153_versions.sh",
     "probe_goal151_replays.sh"
    ],
-   "known_diffs": "改動圖檔會讓原版開場解碼失敗，故圖檔負例只跑到 2M 步（守門在載入時判定）",
-   "stale_since": "目標156 改稿（收據早於現行譯文；字模已重烘、載入綁定通過，視覺待重驗）"
+   "known_diffs": "改動圖檔會讓原版開場解碼失敗，故圖檔負例只跑到 2M 步（守門在載入時判定）"
   }
  ],
  "not_covered": [
-  "目標156 改稿後的視覺重驗（使用者決定延到語料定稿後、#15 封裝前一次做）",
   "國王接見畫面（0D21:00C6 動態印字）",
   "GAME 下拉選單",
   "Loading Game... 訊息",

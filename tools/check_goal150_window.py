@@ -7,6 +7,8 @@ from pathlib import Path
 
 from PIL import Image, ImageChops
 
+from check_goal143_window import BAR, PANEL, outside
+
 from check_goal134_window import load, same_state
 
 FULL_EXPECTED = {  # Explorer 無跳過路徑：主選單、難度、旗卡、姓名、英格蘭介紹、十張字幕、海上、遊戲選項九欄
@@ -43,12 +45,14 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--game", type=Path, required=True)
     p.add_argument("--reports", type=Path, required=True)
+    p.add_argument("--dynamic-dir", default="goal150-dynamic", help="本目標收據子目錄（目標161 重驗用 goal161-150）")
+    p.add_argument("--sea-baseline", default="goal143-sea", help="海上路徑基準收據子目錄（replay-zh.*）")
     a = p.parse_args()
     if not (a.game / "OPENING.EXE").is_file():
         print("SKIP：缺合法原版，未宣稱動態覆蓋綜合驗證通過")
         return 77
-    r = a.reports / "goal150-dynamic"
-    old = a.reports / "goal143-sea"
+    r = a.reports / a.dynamic_dir
+    old = a.reports / a.sea_baseline
     result = {"result": "PASS"}
     sea = json.loads((r / "sea-regress.json").read_text())
     ref = json.loads((old / "replay-zh.json").read_text())
@@ -56,7 +60,8 @@ def main():
     for c in (c for c in ref["checkpoints"] if c["label"].startswith("cp-")):
         x = Image.open(r / f"sea-regress.{c['label']}.png").convert("RGB")
         y = Image.open(old / f"replay-zh.{c['label']}.png").convert("RGB")
-        need(ImageChops.difference(x, y).getbbox() is None, f"多字級圖集畫面與目標143不同：{c['label']}")
+        # 目標156 改稿後海上詞典譯文改變：畫面差異只准落在頂列與狀態欄安全區（原版狀態已於上方逐位元組比對）。
+        need(outside(x, y, (BAR, PANEL)) is None, f"多字級圖集畫面在海上安全區外與目標143不同：{c['label']}")
     long_ = json.loads((r / "shrink-long.json").read_text())
     too = json.loads((r / "shrink-toolong.json").read_text())
     last = lambda d: {l["candidate_id"]: l for l in d["frames"][-1]["lines"]}["sea:panel"]
