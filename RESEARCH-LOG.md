@@ -4089,3 +4089,8 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 
 - **輸入與工具：**`text/terms.zh-Hant.tsv` SHA-256 `412bca718488d8d12b9ede5d130c50ba673f9daf8bfcb061bc4676c448b5b41b`（256 列）；`tools/check_glossary.py`。
 - **結果：**需改稿 229 列（摘要 SHA-256 `9fadfcde…`，只在 workplace）。定稿譯名的說明書出處記在 `image` 欄；非說明書者標「非說明書，沿用譯稿」。
+
+## 2026-09-26：目標156譯稿套用定稿譯名
+
+- **輸入與工具：**定稿表 `text/terms.zh-Hant.tsv` SHA-256 `031e388a7bfbcf83908ee5f9cfcc1bfd94b9748a4ff746f0ebbfcf53961f72ce`；合併驗證 `tools/apply_term_edits.py`；檢查 `tools/check_glossary.py`（摘要 SHA-256 `50043184…`，只在 workplace）。
+- **結果：**改 238 列、45 處有理由不換；剩 33 列全部有理由。改稿後以全部旗標載入前端，34 個正式欄位 `font-binding-mismatch`（載入收據在 `workplace/reports/goal156-apply/bind/`）。

@@ -42,7 +42,7 @@ Gunsmith	槍匠	job	Image010.jpg		說明書印出對照	主冊 p5 譯名
 Distiller	釀酒人	job	Image072.jpg		說明書印出對照	速查字彙表譯名
 Expert Farmer	專家農夫	job			非說明書，沿用譯稿	說明書技能圖表只印英文
 Master Sugar Planter	專業甘蔗種植者	job			非說明書，沿用譯稿	說明書技能圖表只印英文
-Master Tobacco Planter	專業菸草種植者	job			非說明書，沿用譯稿	說明書技能圖表只印英文
+Master Tobacco Planter	專業煙草種植者	job		專業菸草種植者	依基礎詞定稿推得	複合名詞跟隨基礎詞定稿（Tobacco＝煙草、Tobacconist＝煙草商、Pioneer＝前鋒、Preacher＝牧師），避免同一職業兩套譯名
 Master Cotton Planter	專業棉花種植者	job			非說明書，沿用譯稿	說明書技能圖表只印英文
 Master Fur Trapper	專業毛皮獵人	job			非說明書，沿用譯稿	說明書技能圖表印作 Expert Fur Trapper，無中文
 Expert Lumberjack	專家伐木工	job			非說明書，沿用譯稿	說明書技能圖表印作 Expert Lumber Jack，無中文
@@ -50,18 +50,18 @@ Expert Ore Miner	專家礦工	job			非說明書，沿用譯稿	說明書技能�
 Expert Silver Miner	專家銀礦工	job			非說明書，沿用譯稿	說明書技能圖表只印英文
 Expert Fisherman	專家漁夫	job			非說明書，沿用譯稿	說明書技能圖表只印英文
 Expert Distiller	釀酒專家	job	Image066.jpg	專家釀酒師	說明書僅中文（配合譯稿英文）	速查手冊 p8 例句用語；技能圖表印作 Master Distiller
-Master Tobacconist	專業菸草工人	job			非說明書，沿用譯稿	說明書技能圖表只印英文
+Master Tobacconist	專業煙草商	job		專業菸草工人	依基礎詞定稿推得	複合名詞跟隨基礎詞定稿（Tobacco＝煙草、Tobacconist＝煙草商、Pioneer＝前鋒、Preacher＝牧師），避免同一職業兩套譯名
 Master Weaver	專業織布工	job			非說明書，沿用譯稿	說明書技能圖表只印英文
 Master Fur Trader	專業毛皮商人	job			非說明書，沿用譯稿	說明書技能圖表只印英文
 Expert Carpenter	專家木匠	job			非說明書，沿用譯稿	說明書技能圖表印作 Master Carpenter，無中文
 Expert Blacksmith	專家鐵匠	job			非說明書，沿用譯稿	說明書技能圖表印作 Master Blacksmith，無中文
 Master Gunsmith	專業槍匠	job			非說明書，沿用譯稿	說明書技能圖表只印英文
-Firebrand Preacher	激進傳教士	job			非說明書，沿用譯稿	說明書技能圖表只印英文
+Firebrand Preacher	激進牧師	job		激進傳教士	依基礎詞定稿推得	複合名詞跟隨基礎詞定稿（Tobacco＝煙草、Tobacconist＝煙草商、Pioneer＝前鋒、Preacher＝牧師），避免同一職業兩套譯名
 Elder Statesman	資深政治家	job	Image029.jpg		說明書印出對照	主冊 p43 譯名，與譯稿一致
 Student	學生	job			非說明書，沿用譯稿	說明書未見
-Hardy Pioneer	強健拓荒者	job			非說明書，沿用譯稿	說明書技能圖表只印英文
+Hardy Pioneer	強健前鋒	job		強健拓荒者	依基礎詞定稿推得	複合名詞跟隨基礎詞定稿（Tobacco＝煙草、Tobacconist＝煙草商、Pioneer＝前鋒、Preacher＝牧師），避免同一職業兩套譯名
 Veteran Soldier	老手級士兵	job	Image078.jpg	老手士兵／老兵士兵	說明書印出對照	參考卡譯名
-Seasoned Scout	斥候	job	Image069.jpg	斥侯／資深斥候	說明書印出對照	說明書 Seasoned Scouts 印作斥候；參考卡印作斥侯
+Seasoned Scout	資深斥候	job	Image069.jpg	斥候／斥侯	說明書印出對照	說明書 Seasoned Scouts 印作斥候，但與 Scout（斥候）是不同單位，畫面不能同名；沿用譯稿資深斥候
 Veteran Dragoon	老手級龍騎兵	job	Image078.jpg	老兵龍騎兵	說明書印出對照	參考卡譯名；參考卡印作 Verteran Dragoon
 Jesuit Missionary	專業傳教士	job	Image040.jpg	專業級的傳教士／耶穌會傳教士／耶穌會會員	說明書印出對照	說明書印作 Expert Missionaries
 Stockade	柵欄	building	Image030.jpg		說明書印出對照	建築章節防禦設施圖說譯名
@@ -88,7 +88,7 @@ Weaver's House	紡織舖	building	Image030.jpg	製衣舖／織布工之家	說�
 Weaver's Shop	織布工工坊	building			非說明書，沿用譯稿	說明書建築圖表只印英文
 Textile Mill	紡織廠	building	Image031.jpg		說明書印出對照	建築章節奢侈品工業圖說譯名
 Tobacconist's House	煙草舖	building	Image030.jpg	菸草工人之家	說明書印出對照	建築章節條目譯名
-Tobacconist's Shop	菸草工人工坊	building			非說明書，沿用譯稿	說明書建築圖表只印英文
+Tobacconist's Shop	煙草商工坊	building		菸草工人工坊	依基礎詞定稿推得	複合名詞跟隨基礎詞 Tobacconist＝煙草商
 Cigar Factory	雪茄廠	building	Image031.jpg		說明書印出對照	建築章節奢侈品工業圖說譯名
 Rum Distiller's House	蒸餾廠	building	Image030.jpg	釀酒舖／釀酒廠／釀酒師之家	說明書印出對照	建築章節條目譯名（p44）；說明書印作 Distiller's House
 Rum Distillery	蒸餾所	building	Image072.jpg	釀酒廠／蘭姆酒廠	說明書印出對照	速查字彙表 Distillery 首譯；說明書印作 Distillery
@@ -121,7 +121,7 @@ Coats	皮衣	goods	Image067.jpg	外套	說明書印出對照	速查手冊譯名�
 Trade Goods	交易商品	goods	Image057.jpg	貿易貨品	說明書印出對照	主冊 p98 譯名
 Tools	工具	goods	Image028.jpg		說明書印出對照	主冊 p40 圖說譯名
 Muskets	槍	goods	Image074.jpg	槍枝／火槍	說明書印出對照	唯一印出對照；「槍枝」僅中文但出現較多
-Hammers	鎯頭	goods	Image028.jpg	槌子／鉚頭	說明書印出對照	主冊 p40 圖說譯名
+Hammers	榔頭	goods	Image028.jpg	鎯頭／槌子／鉚頭	說明書印出對照	主冊 p40 圖說譯名；說明書印作鎯頭，Cubic 11 無「鎯」字，改用同詞標準字榔頭
 Tundra	凍土	terrain	Image079.jpg	苔原	說明書印出對照	地形圖表譯名
 Desert	沙漠	terrain	Image079.jpg		說明書印出對照	地形圖表譯名
 Plains	平原	terrain	Image079.jpg	平原(糧食地)	說明書印出對照	地形圖表譯名

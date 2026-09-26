@@ -50,6 +50,7 @@ def main():
                 if z.strip() and z.strip() not in g["zh"]:
                     g["zh"].append(z.strip())
     terms = list(groups.values())
+    patterns_by_en = [(t["en"], re.compile(r"(?<![A-Za-z])" + re.escape(t["en"]) + r"(?:s|es)?(?![A-Za-z])", re.I)) for t in terms]
     patterns = [(t, re.compile(r"(?<![A-Za-z])" + re.escape(t["en"]) + r"(?:s|es)?(?![A-Za-z])", re.I)) for t in terms]
     summary, detail = {"glossary_rows": len(rows(a.glossary)), "printed_terms": len(terms), "catalogs": {}}, []
     per_term = Counter()
@@ -67,16 +68,18 @@ def main():
                     continue
                 off, n = int(r["byte_offset"], 0), int(r["source_byte_length"])
                 en = src.read_bytes()[off:off + n].decode("latin1")
+            en = en.replace("\\n", " \n")  # 譯稿以字面 \n 表示換行；補空白讓詞界判斷成立
             hits = [t for t, pat in patterns if pat.search(en)]
             if not hits:
                 continue
             stats["matched"] += 1
-            # 較長術語優先：若長術語已對上，其中的短術語不另算（例如 Royal Expeditionary Force 內的 Force）
+            # 較長術語優先：短術語只在長術語之外仍有出現時才另算（例如 Free Colonist 之外的 colonist）
             hits.sort(key=lambda t: -len(t["en"]))
-            covered, bad = [], []
+            covered, bad, rest = [], [], en
             for t in hits:
-                if any(t["en"].lower() in c.lower() for c in covered):
+                if any(t["en"].lower() in c.lower() for c in covered) and not dict(patterns_by_en)[t["en"]].search(rest):
                     continue
+                rest = dict(patterns_by_en)[t["en"]].sub(" ", rest)
                 covered.append(t["en"])
                 if not any(z in r[zh_col] for z in t["zh"]):
                     bad.append(t)
