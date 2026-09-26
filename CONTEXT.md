@@ -1,5 +1,7 @@
 # 目前脈絡
 
+目前真相：[目標147](docs/goals/147-static-overlay-prototype.md)完成 #9：[規格034](docs/spec/034-static-text-overlay-draft.md)靜態覆蓋 DRAFT 與製作名單橫幅原型（正反對照 PASS）。下一個是 #10，需要使用者決定字型、術語與完成範圍。
+
 目前真相：[目標146](docs/goals/146-static-text-inventory.md)完成 #8：靜態內嵌文字清冊六項（開場海圖兩處拉丁字、兩個品牌標誌、製作名單橫幅、未觀測的遊戲標題標誌）；只有製作名單職稱適合覆蓋。普查另發現四處尚未中文化的動態文字（Loading、版本字串、國王接見、GAME 下拉選單）。
 
 目前真相：[目標145](docs/goals/145-coverage-report.md)完成 #7：可重跑的清冊與覆蓋率報表；810 列已抽取且已翻譯（草稿），正常路徑中文實際顯示 73 個鍵，命中但未建檔 17 種字串。
