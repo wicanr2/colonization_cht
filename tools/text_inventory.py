@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """目標158（Issue #27）：全遊戲 TXT 訊息分母與譯稿覆蓋率；原版缺失回 SKIP 77。
 
-單位是「含英文字母的顯示行」：排除 `;` 註解、`@` 段落與控制行、不含字母的資料行（數字、座標）。
+單位是「含英文字母的顯示行」：排除 `;` 註解（含資料行尾的註解）、`@` 段落與控制行、不含字母的資料行（數字、座標）。
 NAMES.TXT 等「名稱,數值…」資料行只取第一個逗號前的名稱。
 各行依所屬檔案分類；遊戲畫面分母只含 game 類，安裝說明、記憶體警告、除錯訊息與 README 另列。
 既有譯稿以來源檔位移範圍對照：與某筆清冊範圍重疊即「已抽取」，該筆譯文非空即「已翻譯」。
@@ -48,6 +48,8 @@ def units(name, data):
         text = line.decode("cp437")
         s = text.strip()
         if not s or s.startswith(";") or (s.startswith("@") and name != "AUTOEXEC.TXT"):
+            continue
+        if ";" in s and not re.search(r"[A-Za-z]", s[:s.index(";")]):  # 資料行尾的註解（例如動畫參數表）
             continue
         if "," in s and DATA_TAIL.search(s):
             s = s[:s.index(",")].strip()
