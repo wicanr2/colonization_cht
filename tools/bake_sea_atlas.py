@@ -15,6 +15,7 @@ from PIL import Image, ImageDraw, ImageFont
 from preview_goal102_nation_intro import FONT_SHA
 
 SIZE = 22
+FLOOR = 15  # 使用者 2026-09-26 決定：超界縮字下限為欄位字級 2/3（22px → 15px）
 FIELDS = ["candidate_id", "source_file", "source_sha256", "byte_offset", "source_byte_length",
           "source_bytes_sha256", "source_text", "zh_hant", "role", "status", "notes"]
 # 模板固定字（見規格032）：季節列「年」、全形括號、全形空白。
@@ -54,23 +55,28 @@ def main():
                 "海上詞典來源不符：" + r["candidate_id"])
     chars = sorted(set("".join(r["zh_hant"] for r in rows) + TEMPLATE_CHARS +
                        "".join(chr(c) for c in range(0x20, 0x7f))))
-    font = ImageFont.truetype(str(a.font), SIZE)
-    ascent, descent = font.getmetrics()
-    height = ascent + descent
-    probe = font.getbbox("國", anchor="ls")
-    glyphs = {}
-    for ch in chars:
-        width = round(font.getlength(ch))
-        require(width > 0, "字元寬度為零：" + repr(ch))
-        cell = Image.new("L", (width, height))
-        ImageDraw.Draw(cell).text((0, ascent), ch, font=font, fill=255, anchor="ls")
-        glyphs[ch] = {"w": width, "alpha": base64.b64encode(cell.tobytes()).decode()}
-    payload = {"font_sha256": FONT_SHA, "font_px": SIZE, "height": height, "ascent": ascent,
-               "cjk_ink_top": ascent + probe[1], "cjk_ink_bottom": ascent + probe[3],
+    sizes = {}
+    for size in range(SIZE, FLOOR - 1, -1):
+        font = ImageFont.truetype(str(a.font), size)
+        ascent, descent = font.getmetrics()
+        height = ascent + descent
+        probe = font.getbbox("國", anchor="ls")
+        glyphs = {}
+        for ch in chars:
+            width = round(font.getlength(ch))
+            require(width > 0, "字元寬度為零：" + repr(ch))
+            cell = Image.new("L", (width, height))
+            ImageDraw.Draw(cell).text((0, ascent), ch, font=font, fill=255, anchor="ls")
+            glyphs[ch] = {"w": width, "alpha": base64.b64encode(cell.tobytes()).decode()}
+        sizes[str(size)] = {"height": height, "ascent": ascent, "cjk_ink_top": ascent + probe[1],
+                            "cjk_ink_bottom": ascent + probe[3], "glyphs": glyphs}
+    top = sizes[str(SIZE)]
+    payload = {"font_sha256": FONT_SHA, "font_px": SIZE, "floor_px": FLOOR, "height": top["height"],
+               "ascent": top["ascent"], "cjk_ink_top": top["cjk_ink_top"], "cjk_ink_bottom": top["cjk_ink_bottom"],
                "catalog_sha256": sha(catalog), "charset_sha256": sha("".join(chars).encode()),
-               "glyphs": glyphs, "scope": "local-only；衍生字模不加入 Git 或散布包"}
+               "glyphs": top["glyphs"], "sizes": sizes, "scope": "local-only；衍生字模不加入 Git 或散布包"}
     (a.output / "sea-atlas.json").write_text(json.dumps(payload, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"字元 {len(chars)}、高 {height}（ascent {ascent}）、中文墨跡 {payload['cjk_ink_top']}–{payload['cjk_ink_bottom']}")
+    print(f"字元 {len(chars)}、字級 {SIZE}～{FLOOR}px、22px 高 {top['height']}、中文墨跡 {top['cjk_ink_top']}–{top['cjk_ink_bottom']}")
     return 0
 
 

@@ -309,6 +309,14 @@ type seaPart struct {
 	text  string
 	color byte
 	x     int // 四倍輸出座標
+	size  int // 本段字級；超界時由 22px 逐級縮到 15px（欄位字級 2/3）
+}
+
+type seaFont struct {
+	glyphs map[rune]*image.Alpha
+	widths map[rune]int
+	height int
+	cjkTop int
 }
 
 type seaRow struct {
@@ -336,6 +344,7 @@ type seaState struct {
 	glyphs         map[rune]*image.Alpha
 	widths         map[rune]int
 	height, cjkTop int
+	fonts          map[int]*seaFont
 	cur            *seaEvent
 	menuRun        []*seaEvent
 	panel, bar     *seaLayer
@@ -413,10 +422,16 @@ func (st *seaState) seaTranslate(text string) (string, bool) {
 	return "", false
 }
 
-func (st *seaState) seaWidth(text string) (int, bool) {
+func (st *seaState) seaWidth(text string) (int, bool) { return st.seaWidthAt(text, 22) }
+
+func (st *seaState) seaWidthAt(text string, size int) (int, bool) {
+	f := st.fonts[size]
+	if f == nil {
+		return 0, false
+	}
 	w := 0
 	for _, r := range text {
-		gw, ok := st.widths[r]
+		gw, ok := f.widths[r]
 		if !ok {
 			return 0, false
 		}
@@ -425,11 +440,22 @@ func (st *seaState) seaWidth(text string) (int, bool) {
 	return w, true
 }
 
+// seaFit 回傳能在 limit 輸出像素內放下的最大字級（22px 起逐級到 15px）；放不下回傳 0。
+func (st *seaState) seaFit(text string, limit int) int {
+	for size := 22; size >= 15; size-- {
+		if w, ok := st.seaWidthAt(text, size); ok && w <= limit {
+			return size
+		}
+	}
+	return 0
+}
+
 // seaDraw 把字串貼到遮罩（以最大值合併），回傳是否有墨跡越出遮罩。
-func (st *seaState) seaDraw(mask *image.Alpha, text string, x, y int) bool {
+func (st *seaState) seaDraw(mask *image.Alpha, text string, x, y, size int) bool {
 	clipped := false
+	f := st.fonts[size]
 	for _, r := range text {
-		g := st.glyphs[r]
+		g := f.glyphs[r]
 		for gy := 0; gy < g.Rect.Dy(); gy++ {
 			for gx := 0; gx < g.Rect.Dx(); gx++ {
 				v := g.Pix[gy*g.Stride+gx]
@@ -446,7 +472,7 @@ func (st *seaState) seaDraw(mask *image.Alpha, text string, x, y int) bool {
 				}
 			}
 		}
-		x += st.widths[r]
+		x += f.widths[r]
 	}
 	return clipped
 }
@@ -955,31 +981,46 @@ func main() {
 		var atlas struct {
 			Font    string `json:"font_sha256"`
 			Px      int    `json:"font_px"`
-			Height  int    `json:"height"`
-			CJKTop  int    `json:"cjk_ink_top"`
 			Catalog string `json:"catalog_sha256"`
-			Glyphs  map[string]struct {
-				W     int    `json:"w"`
-				Alpha []byte `json:"alpha"`
-			} `json:"glyphs"`
+			Floor   int    `json:"floor_px"`
+			Sizes   map[string]struct {
+				Height int `json:"height"`
+				CJKTop int `json:"cjk_ink_top"`
+				Glyphs map[string]struct {
+					W     int    `json:"w"`
+					Alpha []byte `json:"alpha"`
+				} `json:"glyphs"`
+			} `json:"sizes"`
 		}
 		b, err := os.ReadFile(*seaAtlas)
 		if err != nil || json.Unmarshal(b, &atlas) != nil {
 			seaReason = "font-mask-unavailable"
-		} else if atlas.Font != fontHash || atlas.Px != 22 || atlas.Catalog != hash(seaBytes) || atlas.Height <= 0 {
+		} else if atlas.Font != fontHash || atlas.Px != 22 || atlas.Floor != 15 || atlas.Catalog != hash(seaBytes) || len(atlas.Sizes) != 8 {
 			seaReason = "font-binding-mismatch"
 		} else {
-			sea.glyphs, sea.widths = map[rune]*image.Alpha{}, map[rune]int{}
-			sea.height, sea.cjkTop = atlas.Height, atlas.CJKTop
-			for k, g := range atlas.Glyphs {
-				r := []rune(k)
-				if len(r) != 1 || g.W <= 0 || len(g.Alpha) != g.W*atlas.Height {
+			sea.fonts = map[int]*seaFont{}
+			for size := 15; size <= 22; size++ {
+				src, ok := atlas.Sizes[strconv.Itoa(size)]
+				if !ok || src.Height <= 0 {
 					seaReason = "font-mask-out-of-bounds"
 					break
 				}
-				a := image.NewAlpha(image.Rect(0, 0, g.W, atlas.Height))
-				copy(a.Pix, g.Alpha)
-				sea.glyphs[r[0]], sea.widths[r[0]] = a, g.W
+				f := &seaFont{glyphs: map[rune]*image.Alpha{}, widths: map[rune]int{}, height: src.Height, cjkTop: src.CJKTop}
+				for k, g := range src.Glyphs {
+					r := []rune(k)
+					if len(r) != 1 || g.W <= 0 || len(g.Alpha) != g.W*src.Height {
+						seaReason = "font-mask-out-of-bounds"
+						break
+					}
+					a := image.NewAlpha(image.Rect(0, 0, g.W, src.Height))
+					copy(a.Pix, g.Alpha)
+					f.glyphs[r[0]], f.widths[r[0]] = a, g.W
+				}
+				sea.fonts[size] = f
+			}
+			if seaReason == "" {
+				sea.glyphs, sea.widths = sea.fonts[22].glyphs, sea.fonts[22].widths
+				sea.height, sea.cjkTop = sea.fonts[22].height, sea.fonts[22].cjkTop
 			}
 		}
 		if *missing {
@@ -1728,9 +1769,9 @@ func main() {
 				first := sea.menuRun[k].bbox
 				parts := strings.SplitN(sea.menu[w], "\x00", 2)
 				x := first.Min.X * 4
-				menuRow.parts = append(menuRow.parts, seaPart{parts[0], 149, x})
+				menuRow.parts = append(menuRow.parts, seaPart{parts[0], 149, x, 22})
 				key, _ := sea.seaWidth(parts[0])
-				menuRow.parts = append(menuRow.parts, seaPart{parts[1], 68, x + key})
+				menuRow.parts = append(menuRow.parts, seaPart{parts[1], 68, x + key, 22})
 				k += n
 			}
 			for _, g := range sea.menuRun {
@@ -1747,13 +1788,14 @@ func main() {
 		case ev.bbox.In(seaBarRect):
 			sea.menuRun = nil
 			zh, ok := sea.seaTranslate(text)
-			w, glyphOK := sea.seaWidth(zh)
-			if !ok || !glyphOK {
+			size := sea.seaFit(zh, 1280-2)
+			if !ok || size == 0 {
 				sea.misses[text]++
 				sea.bar.rows, sea.bar.dirty = nil, true
 				return
 			}
-			row.parts = []seaPart{{zh, 149, 640 - w/2}}
+			w, _ := sea.seaWidthAt(zh, size)
+			row.parts = []seaPart{{zh, 149, 640 - w/2, size}}
 			sea.bar.rows, sea.bar.dirty = []*seaRow{row}, true
 		case ev.bbox.In(seaPanelRect) && !interleaved:
 			kept := sea.panel.rows[:0]
@@ -1768,11 +1810,13 @@ func main() {
 				color = c
 			}
 			zh, ok := sea.seaTranslate(text)
-			if _, glyphOK := sea.seaWidth(zh); !ok || !glyphOK || len(ev.colors) != 1 || (color != 68 && color != 149) {
+			// 右界留 2 輸出像素給陰影；放不下時逐級縮字，到 15px 仍不行則保留原文。
+			size := sea.seaFit(zh, seaPanelRect.Max.X*4-ev.bbox.Min.X*4-2)
+			if !ok || size == 0 || len(ev.colors) != 1 || (color != 68 && color != 149) {
 				sea.misses[text]++
 				return
 			}
-			row.parts = []seaPart{{zh, color, ev.bbox.Min.X * 4}}
+			row.parts = []seaPart{{zh, color, ev.bbox.Min.X * 4, size}}
 			sea.panel.rows = append(sea.panel.rows, row)
 		}
 	}
@@ -2563,12 +2607,12 @@ func main() {
 					if !ok {
 						continue
 					}
-					y := r.bbox.Min.Y*4 - sea.cjkTop - layer.safe.Min.Y*4
 					clipped := false
 					for _, pt := range r.parts {
+						y := r.bbox.Min.Y*4 - sea.fonts[pt.size].cjkTop - layer.safe.Min.Y*4
 						x := pt.x - layer.safe.Min.X*4
-						clipped = sea.seaDraw(layer.shadow, pt.text, x+2, y+2) || clipped
-						clipped = sea.seaDraw(layer.fg[pt.color], pt.text, x, y) || clipped
+						clipped = sea.seaDraw(layer.shadow, pt.text, x+2, y+2, pt.size) || clipped
+						clipped = sea.seaDraw(layer.fg[pt.color], pt.text, x, y, pt.size) || clipped
 					}
 					if clipped {
 						sea.misses["clipped:"+r.text]++

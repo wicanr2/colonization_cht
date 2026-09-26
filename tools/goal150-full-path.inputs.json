@@ -1,0 +1,222 @@
+{
+  "end": 1290000000,
+  "inputs": [
+    {
+      "button": 0,
+      "kind": "move",
+      "step": 0,
+      "x": 160,
+      "y": 100
+    },
+    {
+      "button": 0,
+      "kind": "enter",
+      "step": 3200000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "press",
+      "step": 12400000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "release",
+      "step": 12600000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "move",
+      "step": 22000000,
+      "x": 128,
+      "y": 110
+    },
+    {
+      "button": 0,
+      "kind": "press",
+      "step": 22400000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "release",
+      "step": 22600000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "move",
+      "step": 23000000,
+      "x": 16,
+      "y": 16
+    },
+    {
+      "button": 0,
+      "kind": "move",
+      "step": 32000000,
+      "x": 265,
+      "y": 55
+    },
+    {
+      "button": 0,
+      "kind": "press",
+      "step": 32200000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "release",
+      "step": 32600000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "move",
+      "step": 40200000,
+      "x": 55,
+      "y": 83
+    },
+    {
+      "button": 0,
+      "kind": "press",
+      "step": 40600000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "release",
+      "step": 40800000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "move",
+      "step": 43800000,
+      "x": 55,
+      "y": 50
+    },
+    {
+      "button": 0,
+      "kind": "press",
+      "step": 44000000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "release",
+      "step": 44400000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "move",
+      "step": 46200000,
+      "x": 65,
+      "y": 184
+    },
+    {
+      "button": 0,
+      "kind": "press",
+      "step": 46400000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "move",
+      "step": 46600000,
+      "x": 16,
+      "y": 16
+    },
+    {
+      "button": 0,
+      "kind": "release",
+      "step": 46600000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "enter",
+      "step": 55200000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "enter",
+      "step": 65200000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "enter",
+      "step": 75200000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "left",
+      "step": 1225400000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "move",
+      "step": 1250200000,
+      "x": 23,
+      "y": 3
+    },
+    {
+      "button": 0,
+      "kind": "press",
+      "step": 1250400000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "release",
+      "step": 1250600000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "move",
+      "step": 1270200000,
+      "x": 45,
+      "y": 16
+    },
+    {
+      "button": 0,
+      "kind": "press",
+      "step": 1270400000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "button": 0,
+      "kind": "release",
+      "step": 1270600000,
+      "x": 0,
+      "y": 0
+    }
+  ]
+}

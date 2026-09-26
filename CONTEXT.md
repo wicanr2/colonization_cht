@@ -1,5 +1,7 @@
 # 目前脈絡
 
+目前真相：[目標150](docs/goals/150-dynamic-overlay-verification.md)完成 #12：海上拼字引擎加入縮字（22～15px）；全部欄位旗標同時開的兩條正常路徑中英同狀態，39 個鍵都套用。
+
 目前真相：[目標149](docs/goals/149-dynamic-overlay-ready.md)完成 #11：規格033 升 READY，涵蓋固定單行、逐字事件列、模板動態行三類。
 
 目前真相：[目標148](docs/goals/148-font-terms-scope-decisions.md)完成 #10，使用者決定：字型維持 Cubic 11；術語以第三波中文版說明書優先；完成範圍為所有可達文字；版面超界時自動縮字到欄位字級 2/3，仍放不下才回原文。

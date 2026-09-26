@@ -4054,3 +4054,8 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **已證實：**狀態欄每行是一次連續讀字字串、單一色號改色、移動後整組先清再印；選單列逐字印出、首字母色號 149；回合訊息暫佔頂列約 23M 步後重印選單。雙冷啟動相同、無監看控制一致。
 - **強推論：**狀態欄 `Gold:`／`Tax:` 沿用 `LABELS.TXT @CTITLE` 同字。
 - **驗收：**`tools/check_goal143_window.py` PASS（摘要 `6ecd5ae1…`）。收據只在忽略的 `workplace/reports/goal143-sea/`。
+
+## 2026-09-26：目標150動態覆蓋綜合驗證
+
+- **輸入與工具：**前端 `tools/live_menu.go` SHA-256 `023fdd7a153fcdb98f65000748fa6da31a76256dfc4bd9799bf4dc2e0e55ea8a`（海上引擎多字級與縮字）；全流程輸入 `tools/goal150-full-path.inputs.json` SHA-256 `bd076f875216d5764f1971066134d39e8d8710c59eeb3d9b4bfd94c4835d1b8c`。
+- **驗證：**`tools/check_goal150_window.py` PASS（摘要 `4254133b…`）；全面回歸相同。收據只在忽略的 `workplace/reports/goal150-dynamic/`。
