@@ -1,5 +1,7 @@
 # 目前脈絡
 
+目前真相：[目標152](docs/goals/152-verification-matrix.md)完成 #14：[驗證矩陣](docs/verification-matrix.md)十四列（動態十二、靜態一、回歸一）檢查器全數 PASS，動態與靜態都有原版基線、中文、英文與負例收據；矩陣只重跑檢查器，不重跑模擬。未驗範圍列在矩陣文末。
+
 目前真相：[目標151](docs/goals/151-static-overlay-implementation.md)完成 #13：開場製作名單七個職稱橫幅靜態覆蓋（`--static-credits-a`，規格034 限定 CONFORMED）；真 GUI 不按鍵看完開場，七項各套用一次，人名橫幅與無橫幅畫面不變。
 
 目前真相：[目標150](docs/goals/150-dynamic-overlay-verification.md)完成 #12：海上拼字引擎加入縮字（22～15px）；全部欄位旗標同時開的兩條正常路徑中英同狀態，39 個鍵都套用。

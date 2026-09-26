@@ -38,6 +38,7 @@
 
 - [目前脈絡與未完成界線](CONTEXT.md)
 - [工作計畫](WORKLIST.md)（由 `docs/worklist.json` 產生）
+- [驗證矩陣](docs/verification-matrix.md)（由 `tools/verification_matrix.py` 產生；各正式覆蓋的檢查結果與未驗範圍）
 - [研究證據](RESEARCH-LOG.md)與[工作歷程](WORKLOG.md)
 - [Cubic 11 字型來源與權利邊界](font/README.md)
 - [專案規則](AGENTS.md)

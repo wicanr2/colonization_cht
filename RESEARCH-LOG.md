@@ -4065,3 +4065,9 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **輸入與工具：**前端 `tools/live_menu.go` SHA-256 `ab378d78d63d16725558de0d3ac12b466aa000e9692e18018cf2e90db78e6e52`（新增 `-static-credits-a`／`-static-catalog`／`-static-mask-dir`）；譯稿 `text/static-overlay.zh-Hant.tsv` SHA-256 `f57ed87a177f5057f9c298d1efc7f29de1291048624c0d4e0c703c4c2a65bccf`（7 列）；字模 `tools/bake_static_masks.py`（Cubic 11，全部 22px）；GUI `tools/probe_goal151_gui.sh`、重播 `tools/probe_goal151_replays.sh`。
 - **已證實：**七個職稱橫幅指紋矩形 `(30,166)–(290,196)` 逐 byte 相符時才套用；原文墨跡與文字帶量測見[規格034](docs/spec/034-static-text-overlay-draft.md)。真 GUI 不按鍵看完開場（1130M），七項各轉入一次（301.95M～1101.05M）；人名橫幅（480M）與無橫幅（1060M）指紋不符、不改動。中英同輸入九個檢查點原版 RAM／索引相同，中文差異只在文字帶。負例：缺字模、字模目錄空、譯文改動、重複鍵都回原文。
 - **驗收：**`tools/check_goal151_window.py` PASS（摘要 `f167e213…`）；全面回歸六點與目標138收據相同。收據只在忽略的 `workplace/reports/goal151-static/`。
+
+## 2026-09-26：目標152驗證矩陣
+
+- **輸入與工具：**矩陣定義 `tools/verification-matrix.json` SHA-256 `fef698db34d70673e095a6c1eadfabade293a200c4426f4abc3458c578335fae`；執行器 `tools/verification_matrix.py`；回歸 `tools/check_regression.py`（基準目標138、候選目標151收據）。dosgolem `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`。
+- **已證實：**十四列檢查器 PASS；原版輸入 `GAME.TXT`、`LABELS.TXT`、`NAMES.TXT`、`NATIONS.PIK`、`OPENING.EXE`、`VICEROY.EXE` 跨收據雜湊一致；連跑兩次報告位元組相同（JSON `e11496fa…`）；缺原版 SKIP 77。
+- **範圍：**只重跑檢查器，不重跑模擬；收據只在忽略的 `workplace/reports/`。
