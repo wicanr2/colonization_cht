@@ -5,9 +5,10 @@ set -eu
 
 repo=/repo
 game=/game
-# 用法：probe_goal141_captions.sh [輸出子目錄 輸入檔]；預設為十張字幕全顯示的無跳過輸入。
+# 用法：probe_goal141_captions.sh [輸出子目錄 輸入檔 觀測起點]；預設為十張字幕全顯示的無跳過輸入。
 out=$repo/workplace/reports/goal141-captions/${1:-full}
 inputs=${2:-$repo/tools/goal141-captions.inputs.json}
+from=${3:-76000000}
 test -d "$repo/workplace/dosgolem" && test -f "$game/OPENING.EXE" && test -f "$inputs"
 test "$(stat -c %u "$out")" = "$(id -u)"
 export GOCACHE=$repo/workplace/gocache
@@ -18,7 +19,7 @@ for run in a b control; do
     test ! -e "$out/$run.json"
     flag=""
     [ "$run" = control ] && flag="-control"
-    /tmp/goal141-probe -root "$game" -inputs "$inputs" $flag -out "$out/$run" > "$out/$run.log" 2>&1 &
+    /tmp/goal141-probe -root "$game" -inputs "$inputs" -from "$from" $flag -out "$out/$run" > "$out/$run.log" 2>&1 &
     pids="$pids $!"
 done
 for p in $pids; do wait "$p"; done

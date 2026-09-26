@@ -56,6 +56,7 @@ func main() {
 	inputs := flag.String("inputs", "", "英格蘭正常玩家路徑輸入（目標132前綴或目標141無跳過版）")
 	out := flag.String("out", "", "workplace 內輸出前綴")
 	control := flag.Bool("control", false, "無讀寫監看的同輸入控制")
+	from := flag.Uint64("from", 76000000, "觀測起點（目標146：靜態文字普查自 10M 起）")
 	flag.Parse()
 	if *inputs == "" || *out == "" {
 		panic("必須指定 inputs 與 out")
@@ -83,7 +84,8 @@ func main() {
 	if h := sha141(inputBytes); h != "5c143497e6425f38495216f62fe582aa2b035a1afdb7351852dc50126ed487bc" &&
 		h != "17627777dcdf69f56d7d98bca3ea4a0f1843057b8483bc8ee5462386c6167662" &&
 		h != "de60e124d18e4c3c08582abd67a7cb7ba4cfb27be94014189dfa77597ecb6d08" &&
-		h != "34fcab582c387a33dca900462547ab5ea388c2568457142d60088d25b7f456a1" { // 目標143：跳過字幕的 Explorer 路徑，海上 600／620／640M 各左移一次，終點 700M // 目標142：同路徑改選第一張難度卡（Discoverer），600M 按 Enter 關 help，終點 700M
+		h != "34fcab582c387a33dca900462547ab5ea388c2568457142d60088d25b7f456a1" &&
+		h != "d9568b4aa182d9247b8ff7d5299bd86fb1021d2be6f935a1872e2d0b90f0bf0f" { // 目標146：無跳過路徑終點 80M；目標143：跳過字幕的 Explorer 路徑，海上 600／620／640M 各左移一次，終點 700M // 目標142：同路徑改選第一張難度卡（Discoverer），600M 按 Enter 關 help，終點 700M
 		panic("輸入收據版本不符")
 	}
 	var replay replay141
@@ -98,7 +100,7 @@ func main() {
 	m.SetSoundBlasterPro(true)
 	const canvas uint32 = 0x2cae0
 	// @BUILD1 約在 78～89M 印字；最後一張字幕之後 1225.4M 才有玩家左移。
-	const start uint64 = 76000000
+	start := *from
 	stop := uint64(1225000000)
 	if replay.End > start && replay.End < stop {
 		stop = replay.End
@@ -108,6 +110,7 @@ func main() {
 	frames := []map[string]any{}
 	lastFrameKey := ""
 	otherWrites := map[string]int{}
+	otherBoxes := map[string][4]int{} // 目標146：印字事件以外的寫入者範圍
 	if !*control {
 		m.WatchReads(0x20000, 0x4ffff, func(a uint32, value uint8) {
 			if m.Steps < start || m.Steps >= stop {
@@ -149,6 +152,13 @@ func main() {
 			site := fmt.Sprintf("%04X:%04X", cs, ip)
 			if cur == nil || m.Steps-cur.Last > 200000 {
 				otherWrites[site]++
+				i := int(a - canvas)
+				x, y := i%320, i/320
+				b, seen := otherBoxes[site]
+				if !seen {
+					b = [4]int{x, y, x, y}
+				}
+				otherBoxes[site] = [4]int{min(b[0], x), min(b[1], y), max(b[2], x), max(b[3], y)}
 				return
 			}
 			i := int(a - canvas)
@@ -231,7 +241,7 @@ func main() {
 	result := map[string]any{"version": "goal141-captions-v1", "control": *control,
 		"address_space": "DOS real-mode CS:IP; 20-bit linear RAM; 320x200 indexed canvas; file offsets",
 		"input_sha256":  sha141(inputBytes), "input_hashes": wants, "window": []uint64{start, stop},
-		"prints": prints, "frames": frames, "other_writes": otherWrites, "opened": d.Opened, "state": state}
+		"prints": prints, "frames": frames, "other_writes": otherWrites, "other_boxes": otherBoxes, "opened": d.Opened, "state": state}
 	b, err := json.Marshal(result)
 	must141(err)
 	must141(os.WriteFile(*out+".json", append(b, '\n'), 0644))
