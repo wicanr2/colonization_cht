@@ -1,6 +1,8 @@
 # 目前脈絡
 
-目前真相：[目標147](docs/goals/147-static-overlay-prototype.md)完成 #9：[規格034](docs/spec/034-static-text-overlay-draft.md)靜態覆蓋 DRAFT 與製作名單橫幅原型（正反對照 PASS）。下一個是 #10，需要使用者決定字型、術語與完成範圍。
+目前真相：[目標148](docs/goals/148-font-terms-scope-decisions.md)完成 #10，使用者決定：字型維持 Cubic 11；術語以第三波中文版說明書優先；完成範圍為所有可達文字；版面超界時自動縮字到欄位字級 2/3，仍放不下才回原文。
+
+目前真相：[目標147](docs/goals/147-static-overlay-prototype.md)完成 #9：[規格034](docs/spec/034-static-text-overlay-draft.md)靜態覆蓋 DRAFT 與製作名單橫幅原型（正反對照 PASS）。
 
 目前真相：[目標146](docs/goals/146-static-text-inventory.md)完成 #8：靜態內嵌文字清冊六項（開場海圖兩處拉丁字、兩個品牌標誌、製作名單橫幅、未觀測的遊戲標題標誌）；只有製作名單職稱適合覆蓋。普查另發現四處尚未中文化的動態文字（Loading、版本字串、國王接見、GAME 下拉選單）。
 
