@@ -29,6 +29,7 @@ CATALOGS = {  # 檔名 → (鍵欄, 來源檔欄, 檔案雜湊欄, 位移欄, �
     "build-caption-values.zh-Hant.tsv": (None, "source_file", "source_file_sha256", "byte_offset", "source_byte_length", "source_bytes_sha256", "zh_hant"),
     "colony-bilingual.tsv": ("message_id", "source_member", "source_member_sha256", "text_offset", "text_byte_length", "source_bytes_sha256", "zh_hant"),
     "readme-bilingual.tsv": ("message_id", "source_member", "source_member_sha256", "span_offset", "span_byte_length", "source_bytes_sha256", "zh_hant"),
+    "corpus.zh-Hant.tsv": ("message_id", "source_file", "source_file_sha256", "text_offset", "text_byte_length", "source_bytes_sha256", "zh_hant"),
 }
 # 各目標同輸入重播的中文收據（前端 frames.lines 記錄每幀每欄是否套用）。
 RECEIPTS = [
@@ -70,7 +71,7 @@ def main():
     extracted, translated, english = {}, {}, defaultdict(list)
     per_catalog = {}
     for name, (key_col, file_col, fsha_col, off_col, len_col, bsha_col, zh_col) in CATALOGS.items():
-        rows = list(csv.DictReader(io.StringIO((a.text / name).read_text(encoding="utf-8")), delimiter="\t"))
+        rows = list(csv.DictReader(io.StringIO((a.text / name).read_text(encoding="utf-8")), delimiter="\t", quoting=csv.QUOTE_NONE))
         stats = {"rows": len(rows), "extracted": 0, "translated": 0, "unverifiable": 0}
         for i, r in enumerate(rows):
             key = r[key_col] if key_col else f"{r['nation']}:{r['caption']}:{r['placeholder']}"

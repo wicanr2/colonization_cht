@@ -4112,3 +4112,7 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **工具：**`tools/prep_corpus_batches.py`、`tools/merge_corpus.py`；清冊 `text/corpus.zh-Hant.tsv` SHA-256 `1483f5ce585c43337dbab8118928cff783af936682493e1fc5e5f2b6554c2947`（867 列）。
 - **結果：**遊戲畫面分母 3,561 行全部已抽取、3,558 行已翻譯（摘要 SHA-256 `b74db14b…`，只在 workplace）。
 - **強推論：**LABELS.TXT 片段的執行期拼接順序、部分 `%STRINGn` 代入內容，由子代理依語境推定，notes 已標示，未取證。
+
+## 2026-09-26：目標160全遊戲語料收尾
+
+- **結果：**覆蓋率摘要 SHA-256 `5109a04840ea11f1a3cc7fa84305fdd41d06be4b35b7a170677c33178c9e35bc`（只在 workplace）：已抽取 1,677 筆、已翻譯 1,674 筆；EXE 字串掃描只見執行期錯誤與除錯殘留。
