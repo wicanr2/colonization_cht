@@ -27,48 +27,18 @@ for ((i=0; i<100; i++)); do
 done
 [[ -n "$window" ]]
 xdotool windowfocus "$window"
+source "$(dirname "$0")/gui_step_input.sh"
 
-wait_step() {
-  local step=""
-  for ((i=0; i<72000; i++)); do  # 並行時模擬較慢，單次等待上限兩小時
-    kill -0 "$game_pid"
-    step=$(sed -n 's/.*"step": \([0-9]*\).*/\1/p' "$out.status.json" 2>/dev/null | tail -1 || true)
-    if [[ -n "$step" && "$step" -ge "$1" ]]; then return; fi
-    sleep .1
-  done
-  echo "等待原版步數 $1 逾時；最後 ${step:-無}" >&2
-  return 1
-}
-wait_stage() {
-  for ((i=0; i<900; i++)); do
-    kill -0 "$game_pid"
-    if grep -q '"stage": "'"$1"'"' "$out.status.json" 2>/dev/null; then return; fi
-    sleep .1
-  done
-  return 1
-}
-click() {
-  xdotool mousemove --window "$window" "$1" "$2"
-  sleep .2
-  xdotool mousedown 1
-  sleep .2
-  xdotool mouseup 1
-}
-enter_once() {
-  xdotool keydown Return
-  sleep .2
-  xdotool keyup Return
-}
 
 wait_step 3000000
 enter_once
 wait_step 12000000
 click 640 400
 wait_stage menu
-xdotool mousemove --window "$window" 64 64
+move_to 64 64
 click 512 440
 wait_stage difficulty
-xdotool mousemove --window "$window" 64 64
+move_to 64 64
 wait_step 32000000
 click 1060 220
 wait_step 40000000
@@ -77,7 +47,7 @@ wait_step 43500000
 click 220 200
 wait_step 46000000
 click 260 736
-xdotool mousemove --window "$window" 64 64
+move_to 64 64
 wait_step 55000000
 enter_once
 wait_step 65000000
@@ -91,26 +61,21 @@ wait_step 565000000
 import -window "$window" "$out.title.png"
 wait_step 590000000
 import -window "$window" "$out.menu.png"
-press_left() {
-  xdotool keydown Left
-  sleep .2
-  xdotool keyup Left
-}
 wait_step 600000000
-press_left
+key_once Left
 wait_step 612000000
 import -window "$window" "$out.move1.png"
 wait_step 620000000
-press_left
+key_once Left
 wait_step 640000000
-press_left
+key_once Left
 wait_step 652000000
 import -window "$window" "$out.move3.png"
 # 游標停在狀態欄文字上：游標範圍以原版像素疊在中文之上。
-xdotool mousemove --window "$window" 1100 300
+move_to 1100 300
 wait_step 662000000
 import -window "$window" "$out.cursor.png"
-xdotool mousemove --window "$window" 64 64
+move_to 64 64
 wait_step 672000000
 import -window "$window" "$out.away.png"
 wait "$game_pid"

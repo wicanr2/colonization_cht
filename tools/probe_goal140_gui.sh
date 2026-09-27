@@ -27,48 +27,18 @@ for ((i=0; i<100; i++)); do
 done
 [[ -n "$window" ]]
 xdotool windowfocus "$window"
+source "$(dirname "$0")/gui_step_input.sh"
 
-wait_step() {
-  local step=""
-  for ((i=0; i<72000; i++)); do  # 並行時模擬較慢，單次等待上限兩小時
-    kill -0 "$game_pid"
-    step=$(sed -n 's/.*"step": \([0-9]*\).*/\1/p' "$out.status.json" 2>/dev/null | tail -1 || true)
-    if [[ -n "$step" && "$step" -ge "$1" ]]; then return; fi
-    sleep .1
-  done
-  echo "等待原版步數 $1 逾時；最後 ${step:-無}" >&2
-  return 1
-}
-wait_stage() {
-  for ((i=0; i<900; i++)); do
-    kill -0 "$game_pid"
-    if grep -q '"stage": "'"$1"'"' "$out.status.json" 2>/dev/null; then return; fi
-    sleep .1
-  done
-  return 1
-}
-click() {
-  xdotool mousemove --window "$window" "$1" "$2"
-  sleep .2
-  xdotool mousedown 1
-  sleep .2
-  xdotool mouseup 1
-}
-enter_once() {
-  xdotool keydown Return
-  sleep .2
-  xdotool keyup Return
-}
 
 wait_step 3000000
 enter_once
 wait_step 12000000
 click 640 400
 wait_stage menu
-xdotool mousemove --window "$window" 64 64
+move_to 64 64
 click 512 440
 wait_stage difficulty
-xdotool mousemove --window "$window" 64 64
+move_to 64 64
 wait_step 32000000
 click 1060 220
 wait_step 40000000
@@ -78,13 +48,13 @@ wait_step 43500000
 pick() {  # 四倍座標 x y 起始百萬步 截圖名
   local base=$3
   wait_step "${base}000000"
-  xdotool mousemove --window "$window" "$1" "$2"
+  move_to "$1" "$2"
   wait_step "${base}500000"
-  xdotool mousedown 1
+  gui_act $GUI_HOLD_STEPS xdotool mousedown 1
   wait_step "$((base + 1))000000"
-  xdotool mouseup 1
+  gui_act $((2 * GUI_UPDATE_STEPS)) xdotool mouseup 1
   wait_step "$((base + 1))500000"
-  xdotool mousemove --window "$window" 64 64
+  move_to 64 64
   wait_step "$((base + 2))500000"
   import -window "$window" "$out.$4.png"
 }
@@ -93,16 +63,16 @@ pick 620 580 47 spain
 pick 1020 580 50 netherlands
 # 游標只壓荷蘭上欄：該欄回英文、下欄維持中文。
 wait_step 53000000
-xdotool mousemove --window "$window" 1020 424
+move_to 1020 424
 wait_step 54000000
 import -window "$window" "$out.cursor.png"
-xdotool mousemove --window "$window" 64 64
+move_to 64 64
 wait_step 55500000
 import -window "$window" "$out.away.png"
 # 點左下完成提示離開選國頁，三張旗卡中文都必須撤銷。
 wait_step 56000000
 click 260 736
-xdotool mousemove --window "$window" 64 64
+move_to 64 64
 wait_step 60000000
 import -window "$window" "$out.name.png"
 wait "$game_pid"

@@ -2685,3 +2685,8 @@
 
 - 前端新增 `key` 輸入種類，只用 dosgolem 既有 `PushKey`；單元測試、真 GUI（數字鍵盤 8／7、F1、Esc）、中英同輸入重播、移除按鍵反向對照、六點回歸對 `goal161-regress-a` 全部 PASS。
 - 驗證矩陣改用 `rich2-py:latest` 執行（研究映像沒有 Pillow）；`--output` 是目錄，產物複製回 `docs/verification-matrix.md`。
+
+## 2026-09-28：目標164 GUI 步數對齊（#40）
+
+- 第一版只把點擊改成步數對齊，高負載下法國仍選成英國；逐點截圖發現 43.5M 的 `click 220 200` 落在選國頁左側被當成「完成」。改為等 `NATIONS.PIK` 畫完再點旗卡並刪除該點擊後，兩輪六次全對。第一次嘗試封存在 `workplace/reports/goal164-step-clicks/attempts/wallclock-card-race/`。
+- 第二輪曾在腳本檔被改寫時仍在執行，已停止並整輪重跑，未採用其結果。

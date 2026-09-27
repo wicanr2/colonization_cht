@@ -308,6 +308,9 @@ func (g *windowGame) Update() error {
 		if strings.EqualFold(name, "DIFFICUL.PIK") {
 			stage = "difficulty"
 		}
+		if strings.EqualFold(name, "NATIONS.PIK") { // 目標164：選國頁載入旗卡圖
+			stage = "nations"
+		}
 	}
 	dumpJSON(g.out+".status.tmp", map[string]any{"step": g.m.Steps, "stage": stage, "frame": g.record,
 		"rejected_input_count": len(g.rejected)})

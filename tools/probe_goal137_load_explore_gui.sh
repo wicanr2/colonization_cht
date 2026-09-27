@@ -30,38 +30,8 @@ for ((i=0; i<100; i++)); do
 done
 [[ -n "$window" ]]
 xdotool windowfocus "$window"
+source "$(dirname "$0")/gui_step_input.sh"
 
-wait_step() {
-  local step=""
-  for ((i=0; i<72000; i++)); do  # 並行時模擬較慢，單次等待上限兩小時
-    kill -0 "$game_pid"
-    step=$(sed -n 's/.*"step": \([0-9]*\).*/\1/p' "$out.status.json" 2>/dev/null | tail -1 || true)
-    if [[ -n "$step" && "$step" -ge "$1" ]]; then return; fi
-    sleep .1
-  done
-  echo "等待原版步數 $1 逾時；最後 ${step:-無}" >&2
-  return 1
-}
-wait_stage() {
-  for ((i=0; i<900; i++)); do
-    kill -0 "$game_pid"
-    if grep -q '"stage": "'"$1"'"' "$out.status.json" 2>/dev/null; then return; fi
-    sleep .1
-  done
-  return 1
-}
-click() {
-  xdotool mousemove --window "$window" "$1" "$2"
-  sleep .2
-  xdotool mousedown 1
-  sleep .2
-  xdotool mouseup 1
-}
-enter_once() {
-  xdotool keydown Return
-  sleep .2
-  xdotool keyup Return
-}
 
 wait_step 3000000
 enter_once
@@ -71,13 +41,13 @@ wait_stage menu
 now_step() { sed -n 's/.*"step": \([0-9]*\).*/\1/p' "$out.status.json" | tail -1; }
 wait_after() { wait_step $(( $(now_step) + $1 )); }
 # 主選單出現時點不固定；以目前步數為基準。第4列「載入遊戲」須先停留再按住，否則只反白不選取。
-xdotool mousemove --window "$window" 440 536
+move_to 440 536
 wait_after 1000000
-xdotool mousedown 1
+gui_act $GUI_HOLD_STEPS xdotool mousedown 1
 wait_after 500000
-xdotool mouseup 1
+gui_act $((2 * GUI_UPDATE_STEPS)) xdotool mouseup 1
 wait_after 500000
-xdotool mousemove --window "$window" 64 64
+move_to 64 64
 wait_after 4000000
 import -window "$window" "$out.load-list.png"
 enter_once

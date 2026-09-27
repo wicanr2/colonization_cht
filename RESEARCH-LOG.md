@@ -4133,3 +4133,9 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **輸入與工具：**同目標161的原版與隔離 dosgolem `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`；前端 `tools/window_prototype.go` SHA-256 `139bce614327c675e13f3808035d2ebcc12241f8dd804a513d46e6c622a57e60`；檢查器 `tools/check_goal163_window.py` SHA-256 `23ccb4865a94ba174fd56533c1b4b761d8cbbc337b2d98cf50e98f62fe583647`；視窗 `eob-remake-go:1.26.7-ebiten2.9.9`，驗證 `rich2-py:latest`。
 - **已證實：**鍵名對應標準 PC BIOS 鍵字（高位元組 set-1 掃描碼、低位元組 ASCII）。真 GUI 英國路徑到海上，現場輸入 SHA-256 `e9d5cc093221fbc6a741c6e1cd8bb31b4dc13018122710e0c216036961ffb8b2`：數字鍵盤 8 使船往北、7 往西北，F1 開啟地形百科，Esc 返回；四張現場截圖與同輸入中文重播逐像素相同，中英原版狀態在 590M／612M／640M／670M／705M 一致，終點狀態 `56ba6d59…`。移除全部 `key` 事件的反向重播在按鍵後全部不同。六點回歸對 `goal161-regress-a` PASS。
 - **未知：**其餘功能鍵與 Alt／Ctrl 組合在本遊戲的效果；轉送已驗，遊戲語意未逐項驗。收據只在忽略的 `workplace/reports/goal163-keys/`。
+
+## 2026-09-28：目標164 GUI 步數對齊
+
+- **輸入與工具：**前端 `tools/window_prototype.go` SHA-256 `34e57bd1…`（狀態檔 `nations` 階段）；共用輸入 `tools/gui_step_input.sh` SHA-256 `c14ecb64…`；檢查器 `tools/check_goal164_step_clicks.py` SHA-256 `ac9f1534…`；視窗 `eob-remake-go:1.26.7-ebiten2.9.9`，驗證 `rich2-py:latest`。
+- **已證實：**前端每次 Update 先讀輸入、再執行 200,000 步、最後寫狀態檔；動作後等狀態步數前進兩次 Update 即保證已被讀到。目標161 收據中多數點擊只按住一次 Update，且常與移動同步數。選國頁左側 `(55,50)` 的點擊使原版以預設國家結束選國（逐點截圖：43.5M 選國頁、45.4M 已是英國預設姓名頁）。
+- **已證實：**修正後主機負載 68～127 下法國、西班牙、荷蘭各兩次，介紹頁事件分別為 `@NATION1A/B`、`@NATION2A/B`、`@NATION3A/B`。

@@ -27,55 +27,18 @@ for ((i=0; i<100; i++)); do
 done
 [[ -n "$window" ]]
 xdotool windowfocus "$window"
+source "$(dirname "$0")/gui_step_input.sh"
 
-wait_step() {
-  local step last_report=0
-  for ((i=0; i<18000; i++)); do
-    kill -0 "$game_pid"
-    step=$(sed -n 's/.*"step": \([0-9]*\).*/\1/p' "$out.status.json" 2>/dev/null | tail -1 || true)
-    if [[ -n "$step" && "$step" -ge $((last_report + 100000000)) ]]; then
-      echo "原版仍在前進：$step"
-      last_report=$step
-    fi
-    if [[ -n "$step" && "$step" -ge "$1" ]]; then
-      echo "原版步數 >= $1：$step"
-      return
-    fi
-    sleep .1
-  done
-  echo "等待原版步數 $1 逾時；最後觀測 ${step:-無}" >&2
-  return 1
-}
-wait_stage() {
-  for ((i=0; i<900; i++)); do
-    kill -0 "$game_pid"
-    if grep -q '"stage": "'"$1"'"' "$out.status.json" 2>/dev/null; then return; fi
-    sleep .1
-  done
-  return 1
-}
-click() {
-  xdotool mousemove --window "$window" "$1" "$2"
-  sleep .2
-  xdotool mousedown 1
-  sleep .2
-  xdotool mouseup 1
-}
-key_once() {
-  xdotool keydown "$1"
-  sleep .2
-  xdotool keyup "$1"
-}
 
 wait_step 3000000
 key_once Return
 wait_step 12000000
 click 640 400
 wait_stage menu
-xdotool mousemove --window "$window" 64 64
+move_to 64 64
 click 512 440
 wait_stage difficulty
-xdotool mousemove --window "$window" 64 64
+move_to 64 64
 wait_step 32000000
 click 1060 220
 wait_step 40000000
@@ -84,7 +47,7 @@ wait_step 43500000
 click 220 200
 wait_step 46000000
 click 260 736
-xdotool mousemove --window "$window" 64 64
+move_to 64 64
 wait_step 55000000
 key_once Return
 wait_step 65000000

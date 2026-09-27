@@ -29,48 +29,18 @@ for ((i=0; i<100; i++)); do
 done
 [[ -n "$window" ]]
 xdotool windowfocus "$window"
+source "$(dirname "$0")/gui_step_input.sh"
 
-wait_step() {
-  local step=""
-  for ((i=0; i<${COLONIZATION_WAIT_TICKS:-18000}; i++)); do  # 每 0.1 秒一次；主機高負載時以 COLONIZATION_WAIT_TICKS 放寬，只影響牆鐘等待
-    kill -0 "$game_pid"
-    step=$(sed -n 's/.*"step": \([0-9]*\).*/\1/p' "$out.status.json" 2>/dev/null | tail -1 || true)
-    if [[ -n "$step" && "$step" -ge "$1" ]]; then return; fi
-    sleep .1
-  done
-  echo "等待原版步數 $1 逾時；最後 ${step:-無}" >&2
-  return 1
-}
-wait_stage() {
-  for ((i=0; i<900; i++)); do
-    kill -0 "$game_pid"
-    if grep -q '"stage": "'"$1"'"' "$out.status.json" 2>/dev/null; then return; fi
-    sleep .1
-  done
-  return 1
-}
-click() {
-  xdotool mousemove --window "$window" "$1" "$2"
-  sleep .2
-  xdotool mousedown 1
-  sleep .2
-  xdotool mouseup 1
-}
-enter_once() {
-  xdotool keydown Return
-  sleep .2
-  xdotool keyup Return
-}
 
 wait_step 3000000
 enter_once
 wait_step 12000000
 click 640 400
 wait_stage menu
-xdotool mousemove --window "$window" 64 64
+move_to 64 64
 click 512 440
 wait_stage difficulty
-xdotool mousemove --window "$window" 64 64
+move_to 64 64
 wait_step 32000000
 click 1060 220
 wait_step 40000000
@@ -79,7 +49,7 @@ wait_step 43500000
 click 220 200
 wait_step 46000000
 click 260 736
-xdotool mousemove --window "$window" 64 64
+move_to 64 64
 wait_step 55000000
 enter_once
 wait_step 65000000
@@ -91,9 +61,7 @@ enter_once
 
 # 對齊已驗錄製輸入：1225M 左移、1250M 開 GAME、1270M 點 Game Options。
 wait_step 1225000000
-xdotool keydown Left
-sleep .2
-xdotool keyup Left
+key_once Left
 wait_step 1250000000
 click 92 12
 wait_step 1270000000
@@ -104,7 +72,7 @@ import -window "$window" "$out.options.png"
 # 模擬比牆鐘慢；點擊後須等原版步數前進再移開，否則移動會與按下同批送達而點到視窗外。
 click 560 308
 wait_step 1284000000
-xdotool mousemove --window "$window" 80 400
+move_to 80 400
 wait_step 1292000000
 import -window "$window" "$out.clicked.png"
 wait "$game_pid"

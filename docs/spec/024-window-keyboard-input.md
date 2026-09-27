@@ -135,3 +135,7 @@ Ebitengine 焦點內只取按下邊緣；修飾鍵依 Alt、Ctrl、Shift 的優�
 驗收：單元測試逐鍵核對鍵字、非法名稱拒絕、Shift+F1、數字鍵盤去重與 Alt 組合（`tools/window_prototype_test.go`）。真 Ebitengine／Xvfb 以玩家鍵鼠走英國路徑到海上，實按數字鍵盤 8（船往北）、7（往西北）、F1（開啟地形百科）、Esc（返回）；現場四張截圖與同輸入中文重播逐像素相同；中英原版狀態在五個檢查點一致；移除全部 `key` 事件的反向重播在按鍵前狀態相同、按鍵後全部不同。前端 `tools/window_prototype.go` SHA-256 `139bce614327c675e13f3808035d2ebcc12241f8dd804a513d46e6c622a57e60`，檢查器 `tools/check_goal163_window.py` PASS（摘要 `0901f25b…`），收據只在忽略的 `workplace/reports/goal163-keys/`。
 
 未驗：其餘功能鍵與 Alt／Ctrl 組合在本遊戲的效果（轉送已驗，遊戲語意逐項未驗）；輸入法與非 ASCII 字元仍拒絕。
+
+## 2026-09-28：狀態檔選國頁階段（目標164）
+
+`tools/window_prototype.go` 的狀態檔 `stage` 新增 `nations`（原版開啟 `NATIONS.PIK` 時），只供真 GUI 腳本判斷畫面時機；輸入種類、鍵字與轉送行為不變。來源 SHA-256 `34e57bd143619fe219ebb07b20c193b03da9abff68e36d6c98230e2d954bfb8c`。

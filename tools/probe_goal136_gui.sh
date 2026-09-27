@@ -37,67 +37,30 @@ for ((i=0; i<100; i++)); do
 done
 [[ -n "$window" ]]
 xdotool windowfocus "$window"
+source "$(dirname "$0")/gui_step_input.sh"
 
-wait_step() {
-  local step=""
-  for ((i=0; i<${COLONIZATION_WAIT_TICKS:-18000}; i++)); do  # 每 0.1 秒一次；主機高負載時以 COLONIZATION_WAIT_TICKS 放寬，只影響牆鐘等待
-    kill -0 "$game_pid"
-    step=$(sed -n 's/.*"step": \([0-9]*\).*/\1/p' "$out.status.json" 2>/dev/null | tail -1 || true)
-    if [[ -n "$step" && "$step" -ge "$1" ]]; then return; fi
-    sleep .1
-  done
-  echo "等待步數 $1 逾時；最後 ${step:-無}" >&2
-  return 1
-}
-wait_stage() {
-  for ((i=0; i<900; i++)); do
-    kill -0 "$game_pid"
-    if grep -q '"stage": "'"$1"'"' "$out.status.json" 2>/dev/null; then return; fi
-    sleep .1
-  done
-  return 1
-}
-click() {
-  xdotool mousemove --window "$window" "$1" "$2"
-  sleep .2
-  xdotool mousedown 1
-  sleep .2
-  xdotool mouseup 1
-}
-enter_once() {
-  xdotool keydown Return
-  sleep .2
-  xdotool keyup Return
-}
 
 wait_step 3000000
 enter_once
 wait_step 12000000
 click 640 400
 wait_stage menu
-xdotool mousemove --window "$window" 64 64
+move_to 64 64
 click 512 440
 wait_stage difficulty
-xdotool mousemove --window "$window" 64 64
+move_to 64 64
 wait_step 32000000
 click 1060 220
 wait_step 40000000
 click 220 332
-wait_step 43500000
-click 220 200
-# 選國頁旗卡中心（四倍座標）；英格蘭為預設。比照探針節奏：先停在旗卡上，再按住、放開，
-# 移動與按下落在同一畫格時原版不會改選。
-wait_step 44000000
-xdotool mousemove --window "$window" "${card[0]}" "${card[1]}"
-wait_step 44500000
-xdotool mousedown 1
-wait_step 45000000
-xdotool mouseup 1
-wait_step 45500000
-xdotool mousemove --window "$window" 64 64
-wait_step 46000000
+# 選國頁（NATIONS.PIK）畫完後才點旗卡；英格蘭為預設。先停在旗卡上，再按住、放開。
+wait_screen nations 2000000
+move_to "${card[0]}" "${card[1]}"
+gui_act $GUI_HOLD_STEPS xdotool mousedown 1
+gui_act $((2 * GUI_UPDATE_STEPS)) xdotool mouseup 1
+move_to 64 64
 click 260 736
-xdotool mousemove --window "$window" 64 64
+move_to 64 64
 # 非英格蘭會先停在姓名畫面；Enter 確認預設名後才進介紹 A 頁。
 wait_step 50000000
 enter_once
