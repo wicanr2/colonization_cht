@@ -51,6 +51,16 @@
 | #42 | planned | [國王接見、GAME 下拉選單、載入訊息與版本字串](https://github.com/wicanr2/colonization_cht/issues/42) | `dialog-overlay-engine` | 四處各有 RE 證據、規格、真 GUI 與中英同輸入驗證。 |
 | #43 | planned | [其餘 23 則教學提示](https://github.com/wicanr2/colonization_cht/issues/43) | `dialog-overlay-engine` | 各則有正常路徑觸發證據與真 GUI／中英重播驗證，或記錄無法觸發原因。 |
 | #44 | planned | [殖民地、歐洲港口、報告與百科畫面](https://github.com/wicanr2/colonization_cht/issues/44) | `function-key-forwarding`, `dialog-overlay-engine` | 逐畫面普查、規格與真 GUI／中英同輸入收據。 |
+| #45 | planned | [全可達文字普查與完成清冊](https://github.com/wicanr2/colonization_cht/issues/45) | — | 機器可讀清冊（畫面×文字來源×機制×狀態）與分類報表；後續畫面 Issue 依此驗收。 |
+| #46 | planned | [對話框選項列與輸入欄中文化](https://github.com/wicanr2/colonization_cht/issues/46) | `dialog-overlay-engine` | 規格與三種選項框、一種輸入框正常路徑中英同輸入驗證，負例回原文。 |
+| #47 | planned | [dosgolem：OPL2／OPL3 FM 合成（移植 ymfm）](https://github.com/wicanr2/colonization_cht/issues/47) | — | 決定性取樣輸出、對 ymfm 單元對拍、BSD-3 授權告知。 |
+| #48 | planned | [dosgolem：Sound Blaster DSP 數位音效與混音](https://github.com/wicanr2/colonization_cht/issues/48) | `opl-synthesis` | DMA 播放與混音的決定性取樣；本遊戲音效事件同輸入重現。 |
+| #49 | planned | [前端音訊輸出與中英同狀態驗證](https://github.com/wicanr2/colonization_cht/issues/49) | `opl-synthesis`, `sb-dsp-audio` | 真 GUI 可聽見音樂與音效，WAV 與無頭取樣一致；開關音訊原版狀態相同。 |
+| #50 | planned | [發行：Linux AppImage](https://github.com/wicanr2/colonization_cht/issues/50) | — | 可重現 AppImage、乾淨容器 smoke、原版不入包。 |
+| #51 | planned | [發行：Windows x86_64](https://github.com/wicanr2/colonization_cht/issues/51) | — | 容器內交叉編譯與 Wine smoke，原版不入包。 |
+| #52 | planned | [發行：macOS](https://github.com/wicanr2/colonization_cht/issues/52) | — | osxcross universal 編譯、lipo／簽章檢查，記錄驗證層級。 |
+| #53 | planned | [完整版封裝與 Release](https://github.com/wicanr2/colonization_cht/issues/53) | `reachable-text-census`, `dialog-options-inputs`, `remaining-dynamic-spots`, `remaining-tutorial-help`, `main-game-screens`, `frontend-audio`, `release-appimage`, `release-windows`, `release-macos` | 依賴全部完成、驗證矩陣全 PASS、三平台封包與 Release。 |
+| #54 | planned | [推廣影片（1～2 分鐘）](https://github.com/wicanr2/colonization_cht/issues/54) | `full-release` | 可重現錄製與剪輯腳本、MP4 附在完整版 Release。 |
 
 ## 驗證
 
