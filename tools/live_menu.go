@@ -16,6 +16,7 @@ import (
 	"image/draw"
 	"image/png"
 	"io"
+	"math"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -635,7 +636,15 @@ func main() {
 	control := flag.Bool("control", false, "無指令觀測、無合成對照")
 	missing := flag.Bool("missing", false, "缺字模回退對照")
 	window := flag.Bool("window", false, "使用已連結的 Ebitengine 視窗前端")
+	play := flag.Bool("play", false, "遊玩模式：不累積逐幀驗證紀錄，未指定 -window-steps 時不設步數上限（發行包使用）")
 	flag.Parse()
+	if *play {
+		stepsSet := false
+		flag.Visit(func(f *flag.Flag) { stepsSet = stepsSet || f.Name == "window-steps" })
+		if !stepsSet {
+			*windowSteps = math.MaxUint64
+		}
+	}
 	if *window && frontendRunner == nil {
 		fmt.Fprintln(os.Stderr, "未連結 Ebitengine 視窗前端")
 		os.Exit(2)
@@ -3456,7 +3465,9 @@ func main() {
 			if frontendFrameSink != nil {
 				frontendFrameSink(output, rec)
 			}
-			frames = append(frames, rec)
+			if !*play {
+				frames = append(frames, rec)
+			}
 			return
 		}
 		prefix := *out + "." + label

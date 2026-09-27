@@ -22,3 +22,17 @@
 - 封包兩次產生逐位元組相同；包內無原版檔案。
 - smoke 與回歸通過；README、MANIFEST 與授權聲明一致。
 - Release 可下載且雜湊相符。
+
+## 結果
+
+- 授權：`LICENSE`（RRSAL-1.0），第 2 條 (c) 點名截圖、譯稿中的原版英文、量測座標與畫面指紋、第三波說明書術語對照；第三方元件為 Cubic 11（含以其烘製的字模）與 Ebitengine。`font/Cubic-11-OFL.txt` 取自原作者儲存庫（SHA-256 `2b6e5938…`）。README 改寫為現況並加授權、致謝與聲明段；AGENTS.md 公開性條文依使用者決定更新。
+- 前端 `-play`（預設關閉；前端 SHA-256 `ae45f0bfeb17a507b23829169a02d3eb58fa2eac54e8bbe6106b0eabe8cd7c0f`）：六點回歸與目標161 基準相同。
+- 封包 `dist-all/v.0.1.0-20260927/patch/colonization-cht-v.0.1.0-20260927-linux-x86_64.tar.gz`，SHA-256 `ce985dbee5d4722e3cbe2b19aae3ddec0bb8f2c850163c1be1e1e34d7dfe958e`，77 個檔案：前端、啟動器、七份執行期 TSV、以 Cubic 11 烘製的字模、授權檔、說明與 `MANIFEST.json`（含原版五個檔案的必要指紋）。兩次封裝逐位元組相同；包內無原版檔案。字模複本的 `scope` 聲明改寫為隨包散布的授權說明，避免與發布決定矛盾。
+- smoke（`dist-all/v.0.1.0-20260927/smoke/smoke-summary.json`）：乾淨容器解包、清單逐檔雜湊相符。以啟動器重播全流程輸入到 12.9 億步：
+  - 不開存檔層：終點原版記憶體、索引與輸出圖和目標161 收據逐位元組相同。
+  - 開存檔層：畫面相同，自動存檔 `COLONY09.SAV` 寫進存檔目錄，原版目錄沒有新增檔案；記憶體差異只因寫檔成功。
+
+## 已知限制
+
+- 沒有音效；鍵盤只轉送可列印字元、Backspace、Enter、Esc 與方向鍵。
+- 只驗 Linux x86_64；需要 X11／OpenGL。

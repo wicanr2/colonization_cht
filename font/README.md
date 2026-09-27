@@ -1,7 +1,6 @@
 # Cubic 11 字型來源與本機使用界線
 
-使用者 2026-09-26 決定全案維持「俐方體11號」（Cubic 11，見[目標148](../docs/goals/148-font-terms-scope-decisions.md)）。本專案的中文畫面採此字型，但**沒有把
-字型檔或烘製字模放進 Git**。使用者只確認過部分畫面的視覺方向；
+使用者 2026-09-26 決定全案維持「俐方體11號」（Cubic 11，見[目標148](../docs/goals/148-font-terms-scope-decisions.md)）。本專案的中文畫面採此字型；字型檔與烘製字模**不放進 Git**。使用者只確認過部分畫面的視覺方向；
 每個覆蓋欄位仍須依原版墨跡與安全矩形另量字級，不能把 24px
 當成全域規則。
 
@@ -21,9 +20,16 @@
 原始作者的[字型專案](https://github.com/ACh-K/Cubic-11)與
 [OFL 授權全文](https://github.com/ACh-K/Cubic-11/blob/main/OFL.txt)
 說明字型採 SIL Open Font License 1.1；`bitmapfont` 模組的
-Apache-2.0 程式碼授權**不能**取代字型本身的授權。若將來要
-散布字型或含其字形的可散布套件，應先核對實際版本、授權文件、
-保留名稱與包內告知；目前只在本機唯讀量測與烘製，不作發行決定。
+Apache-2.0 程式碼授權**不能**取代字型本身的授權。
+
+## 發行包中的字形
+
+依 Issue #15 的發布決定（2026-09-27），發行包收錄以本字型烘製的字模（Alpha 遮罩與字元圖集，
+不含 TTF 字型檔），並隨包附上字型授權全文 `LICENSES/Cubic-11-OFL.txt`。儲存庫中的
+[`Cubic-11-OFL.txt`](Cubic-11-OFL.txt) 取自原作者儲存庫 `main` 分支的 `OFL.txt`
+（2026-09-27 取得，SHA-256 `2b6e5938e5cffa0b9e183bd05f8c363e174e7ebed1a0556e2855fd1707fa2188`），
+內含 Cubic 11 與其所依據的 JF Dot M+H 12、M+ BITMAP FONTS 聲明及 OFL 條文。字型檔與烘製
+字模仍不加入 Git。
 
 ## 十七欄本機重烘入口
 

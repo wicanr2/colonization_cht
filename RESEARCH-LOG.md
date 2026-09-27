@@ -4122,3 +4122,8 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **輸入與工具：**前端為目標157 版本；收據在 `workplace/reports/goal161-*`；驗證矩陣 JSON SHA-256 `f029a928c66cb7508b5621960a6ec72b16ab5ed84488f58d010fe130e28d15d5`。
 - **已證實：**134、135、136、137、141、142、143、150 檢查器 PASS；回歸兩次重跑逐位元組相同；與舊基準比，選項列與英國介紹兩頁只有輸出圖不同，原版狀態相同。
 - **訂正：**舊目標137 西班牙收據的介紹頁事件為 @NATION0A／0B（英國），西班牙以目標161 收據為準。
+
+## 2026-09-27：目標162技術預覽封裝
+
+- **輸入與工具：**前端 `tools/live_menu.go` SHA-256 `ae45f0bfeb17a507b23829169a02d3eb58fa2eac54e8bbe6106b0eabe8cd7c0f`（新增 `-play`）；`tools/package_release.py`；啟動器 `tools/release/colonization-cht.sh`；smoke 映像 eob-remake-go:1.26.7-ebiten2.9.9。
+- **已證實：**封包 `v.0.1.0-20260927` SHA-256 `ce985dbee5d4722e3cbe2b19aae3ddec0bb8f2c850163c1be1e1e34d7dfe958e`，兩次封裝相同；smoke 不開存檔層時與目標161 全流程收據逐位元組相同。

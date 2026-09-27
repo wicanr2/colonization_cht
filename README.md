@@ -1,48 +1,67 @@
-# 《殖民帝國》繁體中文顯示轉譯
+# 《殖民帝國》繁體中文化（Colonization CHT）
 
-《Sid Meier's Colonization》（1994）是經營殖民地、調配資源與貿易，並在不同勢力間作出治理選擇的歷史策略遊戲。本專案的目的，是降低語言隔閡，讓繁體中文玩家能直接理解遊戲中的選單、訊息與說明。
+《Sid Meier's Colonization》（MicroProse，1994）是經營殖民地、調配資源與貿易，最後爭取獨立的歷史策略遊戲。本專案讓繁體中文玩家能直接讀懂遊戲裡的選單、訊息與說明。
 
-這不是重製版（remake）。原版 DOS 程式、規則、資料及存檔保持原樣，由 [dosgolem](https://github.com/wicanr2/dosgolem) 執行；本專案只在輸出畫面階段辨識原版文字，於放大畫布疊上繁體中文。動態印字與烘入圖像的靜態文字都在研究範圍內，但只有取得原版事件、來源與安全矩形證據的內容才會啟用覆蓋；不符時保留原文。
+做法是「顯示轉譯層」而不是重製：原版 DOS 程式、規則、資料與存檔都不修改，由 [dosgolem](https://github.com/wicanr2/dosgolem) 模擬執行；本專案在原版把文字畫到畫面的那一刻辨識出是哪一句，再於放大後的畫面上疊上中文。辨識不到或證據不足的地方保留英文，不猜。
 
-## 畫面
+## 下載與執行（技術預覽版）
 
-![真實 Ebitengine 視窗中的繁體中文主選單](docs/screenshots/menu-zh.png)
+[Releases](https://github.com/wicanr2/colonization_cht/releases) 提供 Linux x86_64 技術預覽版。需要：
 
-主選單：五列選項已由原版印字事件觸發中文覆蓋。畫面來自合法 DOS 版、dosgolem 正常冷啟動及 Ebitengine 真視窗；原版大型標題仍保持英文。
+- 有 X11 與 OpenGL 的 Linux 桌面。
+- 自己合法取得的 DOS 版原版遊戲目錄（含 `VICEROY.EXE`）。發行包不含任何原版檔案；原版檔案的 SHA-256 必須與包內 `MANIFEST.json` 相同，否則程式拒絕啟動。
 
-![真實 Ebitengine 視窗中的繁體中文難度頁](docs/screenshots/difficulty-zh.png)
+```sh
+./colonization-cht.sh --game /你的路徑/COLONIZE
+```
 
-難度頁：圖中展示依原版兩行共同中心線排版的「選擇／難度」、原樣保留的「完成後點此」提示，以及第一張卡片的「發現者／最簡單」。兩行標題分別採34／38px；第二張卡片的「探險家／簡單」亦已完成真視窗驗收，但不在這張截圖中。其他卡片與英文字仍待驗證。
-
-![真實 Ebitengine 視窗中的第一張國家旗卡繁體中文紅字](docs/screenshots/nation-card-first-zh.png)
-
-國家頁：左側標題與第一張旗卡的「英格蘭：／移民」已中文化；旗卡兩行依原版字高分別使用21／25px，紅字與黑影保留原版風格。相鄰旗卡與其他國家仍是原文。這三張圖只證明有限玩家路徑的顯示，不代表完整遊戲已中文化。
-
-四國介紹長文另有[A 頁排版對照](docs/screenshots/nation-intro-layout-draft-a.png)與[B 頁排版對照](docs/screenshots/nation-intro-layout-draft-b.png)：每列依序呈現原版、貼近原版字高的中文候選、較緊湊的中文候選。它們是 dosgolem 原版底圖上的**離線原型**，不是 Ebitengine 正式中文畫面；介紹長文目前仍顯示原文。
-
-上述截圖含原版遊戲畫面像素，僅放在目前的**私有研究儲存庫**；尚未取得公開散布判定，不得轉入公開發行包。
+原版目錄只讀；存檔寫到 `~/.local/share/colonization-cht/save`。預覽版沒有音效；鍵盤目前只轉送可列印字元、Backspace、Enter、Esc 與方向鍵，功能鍵（F1～F10 顧問報告等）、數字鍵盤與組合鍵尚未轉送，相關操作請改用滑鼠點選單；遊戲節奏與原版實機不同。
 
 ## 目前狀態
 
-已驗證從原版 `OPENING.EXE -g` 啟動、進入 `VICEROY.EXE` 主選單，再以真實 DOS 滑鼠點選「新世界」、難度頁完成區與選國頁完成提示，抵達姓名畫面；四張旗卡各可經正常滑鼠選國、姓名 Enter 進入兩頁原版介紹，並由 B 頁按鍵抵達各國下一可見畫面。英格蘭路徑已由 dosgolem 正常輸入與雙重播穿過十張英文開場字幕、抵達可見海上遊戲介面；首則教學訊息目前只證實預讀，抽樣畫面尚未見其視窗。現有五十七段中文畫面文字：主選單五列、難度頁標題兩段、完成提示一段、第一及第二張卡片各兩行、第三張卡片兩行（`-third-card-a`，[規格016](docs/spec/016-difficulty-card-text-draft.md)）、國家頁左側標題與第一張旗卡各兩行、其餘三張旗卡各兩行（`-nation-cards-rest-a`，[規格022](docs/spec/022-neighbor-nation-card-red-text-draft.md)）、姓名頁的固定提示一段，另有需明示旗標的英格蘭十張開場字幕（首張 `-build1-a`，[規格029](docs/spec/029-build1-caption-window-ready.md)；其餘九張 `-build-captions-a`，[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)，介紹頁後按鍵會讓原版跳過第五張起的字幕）與遊戲選項視窗九欄（標題 `-game-options-title-a`，[規格030](docs/spec/030-game-options-title-a-ready.md)；八列 `-game-options-rows-a`，[規格031](docs/spec/031-game-options-rows-a-ready.md)），以及四國首次國家介紹八頁（`-nation-intro-a`，英格蘭兩頁亦可只開 `-england-intro-a`，[規格025](docs/spec/025-first-nation-introduction-draft.md)）。可編輯姓名、介紹長文、退休確認框三欄（`-retire-a`，[規格028](docs/spec/028-retire-confirmation-overlay-draft.md)）亦已完成。首則教學提示（`-tutorial-help-a`，Discoverer 難度開局才會出現，[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)）亦已完成。海上主畫面的選單列、回合訊息與右側狀態欄（`-sea-status-a`，[規格032](docs/spec/032-sea-menu-and-status-draft.md)）以執行期拼字顯示中文，數值保留原值；其他單位、地形、貨物與其餘 help 仍保持原文。開場製作名單的七個職稱橫幅（`--static-credits-a`，[規格034](docs/spec/034-static-text-overlay-draft.md)）以畫面指紋觸發靜態覆蓋，人名保留原文。這些有限欄位的 Ebitengine／Xvfb 真視窗以同一份輸入重播中英文兩組，原版 CPU、完整 RAM、索引畫面、色盤及虛擬時間一致；新增畫面差異只在已驗證的中文安全區。真視窗也已用玩家鍵盤實際驗證英格蘭海上左移及 `Game Options` 的 Esc 離頁；這只證明輸入通道，不代表海上介面已有中文覆蓋。第一張旗卡需明確開啟 `--nation-card-a`；現行十七欄字模已由本機固定原始字型與真實 TSV 重烘，與歷史已驗字模逐欄相同，但原版及字型仍須另行合法取得，尚不可公開發行。
+**畫面上已經是中文的部分**（每一欄都有原版事件或畫面指紋證據，並以中英同輸入重播驗證原版狀態不變）：
 
-[繁中翻譯草稿](text/draft.zh-Hant.tsv)現有379筆可追溯候選，其中十張開場字幕共十一個原文行已有逐行繁中草稿；另有[163 篇百科原文／繁中對照（25篇建國元勳、16篇貨物、24篇單位、29篇地形、27篇職業、42篇建築）](text/pedia-bilingual.tsv)、[24 則教學與地圖編輯說明的原文／繁中對照](text/help-bilingual.tsv)、[7 則版本3玩家補充說明的原文／繁中對照](text/readme-bilingual.tsv)、[173 筆預設殖民地名稱的原文／繁中對照](text/colony-bilingual.tsv)，以及[英格蘭、法國、西班牙、荷蘭各兩節共八節介紹雙語草稿](text/nation-introduction.zh-Hant.tsv)。它們都只是可追溯的譯稿；八節介紹及十張開場字幕有 dosgolem 正常路徑原版印字證據，介紹長文、字幕及說明文字尚未接入中文實際畫面。除製作名單職稱外的靜態圖中文字、其他選單、完整操作及整局遊玩都未完成；請以[目前狀態](CONTEXT.md)為準，不以譯稿筆數推算畫面完成率。
+- 開場製作名單職稱、主選單、難度頁、國家選擇頁與四張旗卡、姓名提示
+- 四國首次國家介紹（各兩頁）
+- 英國開局的十張開場字幕、首則教學提示（發現者難度）
+- 海上主畫面的選單列、回合訊息與右側狀態欄
+- 遊戲選項視窗（標題與八列）、退休確認框
 
-開場字幕另有[四國共24筆變數值草稿](text/build-caption-values.zh-Hant.tsv)，已核對固定難度的原版印字；它與十一行字幕模板仍未接入正式中文畫面，荷蘭國名前的英文冠詞來源也尚未釐清。
+**譯稿已完成、但還沒接到畫面上的部分**：全遊戲 TXT 文字的繁中草稿已齊（遊戲畫面分母 3,561 行全部有譯稿），包括百科、教學說明、殖民地名稱、各種對話與報告。這些要逐一畫面取證後才會顯示。
 
-目前沒有可下載的正式中文化版本。現有 Linux／Xvfb 程式是可撤回的驗證原型，不具備完整鍵盤、音訊、存讀檔與正式玩家節奏。
+術語以第三波中文版說明書為準，見[定稿譯名表](text/terms.zh-Hant.tsv)。各畫面的驗證結果見[驗證矩陣](docs/verification-matrix.md)，詳細現況見 [CONTEXT.md](CONTEXT.md)。
 
-## 研究與執行入口
+## 畫面
 
-需要自行持有合法 DOS 原版。所有建置、遊戲執行、分析與抓圖都在 Docker 容器內進行；本案只使用 `workplace/dosgolem` 的獨立副本，不修改共用專案。視窗原型由 [組裝器](tools/build_window_prototype.py)及[真視窗驗證腳本](tools/probe_window_prototype.sh)產生；固定工具鏈、掛載與驗證契約見[視窗原型規格](docs/spec/013-window-prototype.md)，難度標題的輸出守門與版式分別見[規格014](docs/spec/014-difficulty-text-output-draft.md)及[規格018](docs/spec/018-difficulty-heading-layout-draft.md)，第一、二張卡片兩行分別見[規格017](docs/spec/017-first-difficulty-card-overlay.md)與[規格019](docs/spec/019-second-difficulty-card-overlay.md)，國家選擇頁左側兩行見[規格020](docs/spec/020-nation-heading-overlay.md)，第一張旗卡兩行見[規格021](docs/spec/021-nation-card-red-text-draft.md)，姓名固定提示見[規格023](docs/spec/023-player-name-screen-draft.md)。開場字幕與首則教學預讀的界線見[規格026](docs/spec/026-build-intro-and-tutorial-prefetch-draft.md)。
+![Ebitengine 視窗中的繁體中文主選單](docs/screenshots/menu-zh.png)
 
-- [目前脈絡與未完成界線](CONTEXT.md)
-- [工作計畫](WORKLIST.md)（由 `docs/worklist.json` 產生）
-- [驗證矩陣](docs/verification-matrix.md)（由 `tools/verification_matrix.py` 產生；各正式覆蓋的檢查結果與未驗範圍）
+主選單五列選項由原版印字事件觸發中文；原版大型標題維持英文。
+
+![Ebitengine 視窗中的繁體中文難度頁](docs/screenshots/difficulty-zh.png)
+
+難度頁：兩行標題依原版共同中心線排版，第一張卡片「發現者／最簡單」。
+
+![Ebitengine 視窗中的第一張國家旗卡](docs/screenshots/nation-card-first-zh.png)
+
+國家頁：旗卡兩行依原版字高分別用 21／25px，保留紅字黑影風格。這張截圖拍攝於國名改用說明書譯名之前，現行版本上欄是「英國：」。
+
+四國介紹長文的早期版面對照：[A 頁](docs/screenshots/nation-intro-layout-draft-a.png)、[B 頁](docs/screenshots/nation-intro-layout-draft-b.png)（每列依序為原版與兩種中文候選）。
+
+## 開發與研究入口
+
+所有建置、遊戲執行、分析與抓圖都在 Docker 容器內進行，需要自備合法原版。
+
+- [目前脈絡](CONTEXT.md)、[工作計畫](WORKLIST.md)（由 `docs/worklist.json` 產生）
+- [規格](docs/spec/)與[各輪目標](docs/goals/)
+- [驗證矩陣](docs/verification-matrix.md)（`tools/verification_matrix.py` 產生）
 - [研究證據](RESEARCH-LOG.md)與[工作歷程](WORKLOG.md)
-- [Cubic 11 字型來源與權利邊界](font/README.md)
-- [專案規則](AGENTS.md)
+- [字型來源](font/README.md)、[專案規則](AGENTS.md)
+- 封裝：`tools/package_release.py`、啟動器 `tools/release/colonization-cht.sh`
 
-## 權利邊界
+## 授權、致謝與聲明
 
-原版 EXE、資料檔、字型、音樂、存檔與解包輸出不加入 Git 或發行包。已找回的 Cubic 11 來源標示 OFL-1.1，但實際封裝及授權告知仍須審查；截圖與原文的公開散布、正式封裝及全遊戲完成標準也仍待確認。私有研究成果不等於公開發布許可。本專案與原作權利人沒有隸屬關係。
+本專案採[復古重製 source-available 授權條款 1.0（RRSAL-1.0）](LICENSE)：非商業用途免費，可修改與再散布；遊戲實況、影片、評論與報導明示允許（含平台分潤）。商業用途請先洽 wicanr2@gmail.com，歡迎來談。這是 source-available 授權，不是開放原始碼（open source）授權。
+
+- **不在授權範圍內**：原版遊戲的執行檔、資料、畫面、文字與說明書，屬於 MicroProse 及其權利承繼人或各自的權利人。儲存庫裡的截圖、譯稿中的原版英文對照、量測座標與畫面指紋、第三波說明書術語對照，其中屬於原版的部分依授權第 2 條 (c) 處理。
+- **第三方元件**：中文字型[俐方體11號（Cubic 11）](https://github.com/ACh-K/Cubic-11)與以它烘製的字模依其授權（[全文](font/Cubic-11-OFL.txt)）；[Ebitengine](https://github.com/hajimehoshi/ebiten) 依 Apache-2.0。
+- 本專案與 MicroProse、其權利承繼人及第三波沒有任何隸屬、合作或授權關係。
