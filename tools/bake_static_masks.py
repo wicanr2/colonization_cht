@@ -20,7 +20,7 @@ from PIL import Image, ImageDraw, ImageFont
 from preview_goal102_nation_intro import FONT_SHA
 
 FIELDS = ["candidate_id", "image_file", "image_sha256", "fingerprint_rect", "fingerprint_sha256", "text_band",
-          "source_text", "zh_hant", "status", "notes"]
+          "source_text", "zh_hant", "status", "notes", "ink_indices"]
 FIELD_PX, FLOOR_PX = 22, 15
 
 
@@ -68,9 +68,12 @@ def main():
         pal = hit[0].with_suffix(".pal").read_bytes()
         counts = Counter(region(hit[1], band))
         lum = lambda v: sum(pal[v * 3:v * 3 + 3])
-        ink = min((v for v, c in counts.items() if c >= 10), key=lum)
+        # 目標166：有 ink_indices 時以列出的色號為原文（第一個為中文字色）；否則沿用最暗色號。
+        ink = int(r["ink_indices"].split(",")[0]) if r["ink_indices"] else min((v for v, c in counts.items() if c >= 10), key=lum)
         width, height = (band[2] - band[0]) * 4 - 8, (band[3] - band[1]) * 4
-        for size in range(FIELD_PX, FLOOR_PX - 1, -1):
+        # 製作名單橫幅量得 22px；目標166 起帶 ink_indices 的列另依原版大寫字高 7 邏輯像素從 28px 起算。
+        start = 28 if r["ink_indices"] else FIELD_PX
+        for size in range(start, FLOOR_PX - 1, -1):
             font = ImageFont.truetype(str(a.font), size)
             l, t, rr, b = font.getbbox(r["zh_hant"])
             if rr - l <= width and b - t <= height:

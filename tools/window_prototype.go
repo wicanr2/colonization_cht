@@ -305,6 +305,9 @@ func (g *windowGame) Update() error {
 		stage = "menu"
 	}
 	for _, name := range g.d.Opened {
+		if strings.EqualFold(name, "VICEROY.EXE") && stage == "opening" { // 目標166：開場程式印出載入訊息後載入主程式
+			stage = "loading"
+		}
 		if strings.EqualFold(name, "DIFFICUL.PIK") {
 			stage = "difficulty"
 		}

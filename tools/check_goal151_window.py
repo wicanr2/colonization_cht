@@ -32,7 +32,8 @@ def sha(data):
 
 def bands(catalog):
     rows = csv.DictReader(io.StringIO(catalog.read_text(encoding="utf-8")), delimiter="\t")
-    return {r["candidate_id"]: tuple(4 * int(v) for v in r["text_band"].split(",")) for r in rows}
+    return {r["candidate_id"]: tuple(4 * int(v) for v in r["text_band"].split(",")) for r in rows
+            if r["candidate_id"].startswith(PREFIX)}  # 目標166 起清冊另有非製作名單列
 
 
 def checkpoint(report, step):

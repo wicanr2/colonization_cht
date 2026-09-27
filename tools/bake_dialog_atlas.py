@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """目標165（規格035）：烘製通用對話框的執行期字元圖集（A 版 30px，縮字下限 20px）；只輸出本機研究產物。
 
-字集涵蓋語料清冊全部 GAME.TXT 譯文、定稿譯名、NAMES.TXT 譯文與可列印 ASCII；前端拼字時再依安全區寬度重排。
+字集涵蓋語料清冊全部 GAME.TXT 譯文、定稿譯名、NAMES.TXT 譯文、譯稿 TSV（目標166 逐行字典）、變數值表與可列印 ASCII；
+前端拼字時再依安全區寬度重排。
 """
 
 import argparse
@@ -35,6 +36,8 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--corpus", type=Path, default=Path("/repo/text/corpus.zh-Hant.tsv"))
     p.add_argument("--terms", type=Path, default=Path("/repo/text/terms.zh-Hant.tsv"))
+    p.add_argument("--draft", type=Path, default=Path("/repo/text/draft.zh-Hant.tsv"))
+    p.add_argument("--values", type=Path, default=Path("/repo/text/variable-values.zh-Hant.tsv"))
     p.add_argument("--game", type=Path, required=True)
     p.add_argument("--font", type=Path, required=True)
     p.add_argument("--output", type=Path, required=True)
@@ -44,10 +47,14 @@ def main():
         return 77
     require(a.output.is_dir() and a.output.stat().st_uid == os.getuid(), "本機輸出目錄不存在或擁有者不符")
     require(sha(a.font.read_bytes()) == FONT_SHA, "Cubic 11 指紋不符")
-    corpus, terms = a.corpus.read_bytes(), a.terms.read_bytes()
+    corpus, terms, draft, values = (a.corpus.read_bytes(), a.terms.read_bytes(),
+                                    a.draft.read_bytes(), a.values.read_bytes())
     rows = list(csv.DictReader(io.StringIO(corpus.decode("utf-8")), delimiter="\t", quoting=csv.QUOTE_NONE))
     text = "".join(r["zh_hant"] for r in rows if r["source_file"] in ("GAME.TXT", "NAMES.TXT"))
     text += "".join(r[1] for r in csv.reader(io.StringIO(terms.decode("utf-8")), delimiter="\t") if len(r) > 1)
+    for extra in (draft, values):
+        rows = list(csv.DictReader(io.StringIO(extra.decode("utf-8")), delimiter="\t", quoting=csv.QUOTE_NONE))
+        text += "".join(r.get("zh_hant") or r.get("zh") or "" for r in rows)
     chars = sorted({c for c in text if c not in "{}\\\t\n" and ord(c) >= 0x20} |
                    {chr(c) for c in range(0x20, 0x7f)} - set("{}\\"))
     sizes = {}
@@ -67,7 +74,7 @@ def main():
         sizes[str(size)] = {"height": height, "ascent": ascent, "cjk_ink_top": ascent + probe[1],
                             "cjk_ink_bottom": ascent + probe[3], "glyphs": glyphs}
     payload = {"font_sha256": FONT_SHA, "font_px": SIZE, "floor_px": FLOOR,
-               "corpus_sha256": sha(corpus), "terms_sha256": sha(terms),
+               "bindings": {"corpus": sha(corpus), "terms": sha(terms), "draft": sha(draft), "values": sha(values)},
                "charset_sha256": sha("".join(chars).encode()), "sizes": sizes,
                "scope": "由 Cubic 11 烘製的字模；授權見 font/Cubic-11-OFL.txt"}
     (a.output / "dialog-atlas.json").write_text(json.dumps(payload, ensure_ascii=False) + "\n", encoding="utf-8")

@@ -555,6 +555,45 @@
    "known_diffs": "只驗正文；選項列與輸入欄維持原文"
   },
   {
+   "id": "dynamic-spots",
+   "path": "both",
+   "title": "載入訊息、主選單版本字串、國王接見、GAME 下拉選單",
+   "specs": [
+    "034",
+    "036"
+   ],
+   "flags": [
+    "--dialog-a",
+    "--static-credits-a"
+   ],
+   "checker": "check_goal166_window.py",
+   "args": [
+    "--game",
+    "{game}",
+    "--reports",
+    "{reports}/goal166-spots"
+   ],
+   "dir": "goal166-spots",
+   "zh": [
+    "replay-zh"
+   ],
+   "control": [
+    "replay-control"
+   ],
+   "negative": [
+    "neg-nodialog",
+    "neg-nostatic"
+   ],
+   "gui_inputs": [
+    "gui-spots.inputs.json"
+   ],
+   "regenerate": [
+    "probe_goal166_gui.sh",
+    "probe_goal166_replays.sh"
+   ],
+   "known_diffs": "只驗英國國王接見與 GAME 下拉選單"
+  },
+  {
    "id": "regression",
    "path": "both",
    "title": "全面回歸六點（主選單至旗卡、@BUILD1、遊戲選項、英格蘭介紹）",

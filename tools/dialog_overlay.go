@@ -1,6 +1,7 @@
 package main
 
 // 目標165（規格035）：通用對話框整句中文覆蓋的純邏輯（模板比對、變數譯名、依框寬重排與三層字模）。
+// 目標166（規格036）：同一段落偵測另支援置中段落（^）與逐行清單（下拉選單、選項列、單行字串）。
 // 監看、權杖與啟用閘門在 live_menu.go；本檔不讀寫原版記憶體。
 
 import (
@@ -22,7 +23,9 @@ type dialogTemplate struct {
 	id    string
 	re    *regexp.Regexp
 	names []string // 依出現順序的變數名：%STRINGn、%NUMBERn、%COUNTRY
-	zh    string   // 正文譯稿（空行前），保留 {} 強調標記與 %變數
+	zh    string   // 正文譯稿（空行前），保留 {} 強調標記與 %變數；置中段落另保留 \n 與 ^
+	// 目標166：原文含 ^ 置中碼的段落（例如國王接見），依譯稿的 ^^ 行置中、其餘依寬度重排。
+	centered bool
 }
 
 type dialogFont struct {
@@ -33,13 +36,15 @@ type dialogFont struct {
 
 type dialogCatalog struct {
 	templates []dialogTemplate
+	lines     []dialogTemplate  // 目標166：逐行清單比對用的單行模板
 	terms     map[string]string // 英文→譯名；兩處譯名衝突者為空字串（視為查無）
 	fonts     map[int]*dialogFont
 }
 
 type dialogChar struct {
-	c   byte
-	box image.Rectangle // 無墨跡（空白）時為空矩形
+	c      byte
+	box    image.Rectangle // 無墨跡（空白）時為空矩形
+	colors map[byte]int    // 目標166：本字改色點的色號分布
 }
 
 type dialogGlyph struct {
@@ -118,33 +123,114 @@ func loadDialogCatalog(corpus, terms []byte, game []byte, gameSHA string, exclud
 			return nil, fmt.Errorf("重複鍵：%s", r["message_id"])
 		}
 		seen[r["message_id"]] = true
-		body := string(bytes.SplitN(raw, []byte("\r\n\r\n"), 2)[0])
-		if strings.ContainsAny(body, "^@") {
-			continue // 置中碼與指令列另案
+		parts := strings.SplitN(string(raw), "\r\n\r\n", 2)
+		zhParts := strings.SplitN(r["zh_hant"], `\n\n`, 2)
+		body := parts[0]
+		if strings.Contains(body, "@") {
+			continue // 指令列另案
 		}
-		body = dialogNormalize(strings.NewReplacer("{", "", "}", "").Replace(body))
-		pattern, names := "^", []string{}
-		last := 0
-		for _, m := range dialogVar.FindAllStringIndex(body, -1) {
-			pattern += regexp.QuoteMeta(body[last:m[0]])
-			name := body[m[0]:m[1]]
-			if strings.HasPrefix(name, "%NUMBER") {
-				pattern += `(\d+)`
-			} else {
-				pattern += `(.+?)`
+		centered := strings.Contains(body, "^")
+		zh := zhParts[0]
+		if !centered {
+			zh = strings.ReplaceAll(zh, `\n`, "")
+		}
+		cat.templates = append(cat.templates, makeDialogTemplate(r["message_id"], body, zh, centered))
+		if !centered && !strings.Contains(body, "\r\n") {
+			cat.lines = append(cat.lines, makeDialogTemplate(r["message_id"], body, zh, false))
+		}
+		// 選項行：空行後逐行對應譯稿空行後的各行；行數不同即不採用。
+		if len(parts) == 2 && len(zhParts) == 2 {
+			var eo, zo []string
+			for _, l := range strings.Split(parts[1], "\r\n") {
+				if strings.TrimSpace(l) != "" && !strings.ContainsAny(l, "@^") {
+					eo = append(eo, l)
+				}
 			}
-			names = append(names, name)
-			last = m[1]
+			for _, l := range strings.Split(zhParts[1], `\n`) {
+				if strings.TrimSpace(l) != "" {
+					zo = append(zo, l)
+				}
+			}
+			if len(eo) == len(zo) {
+				for i := range eo {
+					cat.lines = append(cat.lines, makeDialogTemplate(fmt.Sprintf("%s#%d", r["message_id"], i+1), eo[i], zo[i], false))
+				}
+			}
 		}
-		pattern += regexp.QuoteMeta(body[last:]) + "$"
-		zh := strings.SplitN(r["zh_hant"], `\n\n`, 2)[0]
-		zh = strings.ReplaceAll(zh, `\n`, "")
-		cat.templates = append(cat.templates, dialogTemplate{id: r["message_id"], re: regexp.MustCompile(pattern), names: names, zh: zh})
 	}
 	for _, r := range splitTSV(terms) {
 		cat.addTerm(r["en"], r["zh"])
 	}
 	return cat, nil
+}
+
+// makeDialogTemplate 把原文正規化成整句比對用的正規式：去 {}、^，換行當空白並壓縮空白。
+func makeDialogTemplate(id, body, zh string, centered bool) dialogTemplate {
+	body = dialogNormalize(strings.NewReplacer("{", "", "}", "", "^", "", "\r\n", " ").Replace(body))
+	pattern, names := "^", []string{}
+	last := 0
+	for _, m := range dialogVar.FindAllStringIndex(body, -1) {
+		pattern += regexp.QuoteMeta(body[last:m[0]])
+		name := body[m[0]:m[1]]
+		if strings.HasPrefix(name, "%NUMBER") {
+			pattern += `(\d+)`
+		} else {
+			pattern += `(.+?)`
+		}
+		names = append(names, name)
+		last = m[1]
+	}
+	pattern += regexp.QuoteMeta(body[last:]) + "$"
+	return dialogTemplate{id: id, re: regexp.MustCompile(pattern), names: names, zh: zh, centered: centered}
+}
+
+// addDraft 由譯稿 TSV（draft.zh-Hant.tsv）加入逐行模板：GAME.TXT 單行列與 MENU.TXT 選單項目。
+// 每列以原檔位移與片段雜湊核對；exclude 內是已由專屬欄位處理的鍵。
+// 含熱鍵標記 ~ 或 # 的列顯示方式未取證，本輪不採用。
+func (c *dialogCatalog) addDraft(draft []byte, files map[string][]byte, exclude map[string]bool) error {
+	rows := splitTSV(draft)
+	if rows == nil {
+		return fmt.Errorf("譯稿 TSV 欄位不符")
+	}
+	for _, r := range rows {
+		data, ok := files[r["source_file"]]
+		if !ok || exclude[r["candidate_id"]] {
+			continue
+		}
+		off, err1 := strconv.ParseInt(r["byte_offset"], 0, 64)
+		n, err2 := strconv.Atoi(r["source_byte_length"])
+		if r["source_sha256"] != fmt.Sprintf("%x", sha256.Sum256(data)) || err1 != nil || err2 != nil || off < 0 || int(off)+n > len(data) {
+			return fmt.Errorf("%s 版本或位移不符：%s", r["source_file"], r["candidate_id"])
+		}
+		raw := string(data[off : int(off)+n])
+		if fmt.Sprintf("%x", sha256.Sum256([]byte(raw))) != r["source_bytes_sha256"] {
+			return fmt.Errorf("%s 片段雜湊不符：%s", r["source_file"], r["candidate_id"])
+		}
+		zh := strings.TrimSpace(r["zh_hant"])
+		if zh == "" || strings.Contains(raw, "\r\n") || strings.ContainsAny(raw, "~#@^") || strings.ContainsAny(zh, "~#^") {
+			continue
+		}
+		c.lines = append(c.lines, makeDialogTemplate(r["candidate_id"], raw, zh, false))
+	}
+	return nil
+}
+
+// addValues 讀執行檔提供的變數值譯名（例如版本日期）；每列以原檔位移核對原文。
+func (c *dialogCatalog) addValues(tsv []byte, files map[string][]byte) error {
+	rows := splitTSV(tsv)
+	if rows == nil {
+		return fmt.Errorf("變數值 TSV 欄位不符")
+	}
+	for _, r := range rows {
+		data, ok := files[r["source_file"]]
+		off, err := strconv.ParseInt(r["byte_offset"], 0, 64)
+		if !ok || err != nil || fmt.Sprintf("%x", sha256.Sum256(data)) != r["source_sha256"] ||
+			off < 0 || int(off)+len(r["en"]) > len(data) || string(data[off:int(off)+len(r["en"])]) != r["en"] {
+			return fmt.Errorf("變數值來源不符：%s", r["en"])
+		}
+		c.addTerm(r["en"], r["zh"])
+	}
+	return nil
 }
 
 func (c *dialogCatalog) addTerm(en, zh string) {
@@ -183,43 +269,56 @@ func dialogShownText(chars []dialogChar) string {
 			}
 			lastX = ch.box.Min.X
 		}
-		b.WriteByte(ch.c)
+		if ch.c != 0 {
+			b.WriteByte(ch.c)
+		}
 	}
 	return dialogNormalize(b.String())
 }
 
+var dialogPlainValue = regexp.MustCompile(`^[0-9][0-9.,%$]*$`)
+
 // match 回傳唯一命中的模板與代入變數後的中文；reason 非空即回原文。
 func (c *dialogCatalog) match(shown string) (id, zh, reason string) {
+	t, zh, reason := c.matchIn(c.templates, shown)
+	if t != nil {
+		id = t.id
+	}
+	return id, zh, reason
+}
+
+// matchIn 在指定模板集合中整句比對；數字與純數值變數原樣保留，其餘查譯名。
+func (c *dialogCatalog) matchIn(list []dialogTemplate, shown string) (*dialogTemplate, string, string) {
 	var hit *dialogTemplate
 	var groups []string
-	for i := range c.templates {
-		t := &c.templates[i]
+	for i := range list {
+		t := &list[i]
 		if m := t.re.FindStringSubmatch(shown); m != nil {
-			if hit != nil {
-				return "", "", "template-not-unique"
+			if hit != nil && hit.zh != t.zh {
+				return nil, "", "template-not-unique"
 			}
 			hit, groups = t, m[1:]
 		}
 	}
 	if hit == nil {
-		return "", "", "no-template"
+		return nil, "", "no-template"
 	}
-	zh = hit.zh
+	zh := hit.zh
 	for i, name := range hit.names {
 		v := groups[i]
-		if !strings.HasPrefix(name, "%NUMBER") {
+		if !strings.HasPrefix(name, "%NUMBER") && !dialogPlainValue.MatchString(v) {
 			tr := c.terms[v]
 			if tr == "" {
-				return hit.id, "", "variable-without-term"
+				return hit, "", "variable-without-term"
 			}
 			v = tr
 		}
-		zh = strings.Replace(zh, name, v, 1)
+		zh = strings.Replace(zh, name, v, -1)
 	}
 	if strings.Contains(zh, "%") {
-		return hit.id, "", "unresolved-variable"
+		return hit, "", "unresolved-variable"
 	}
-	return hit.id, zh, ""
+	return hit, zh, ""
 }
 
 func dialogMarked(zh string) ([]dialogGlyph, bool) {
@@ -350,14 +449,13 @@ func dialogBlit(dst, src *image.Alpha, x, y int) {
 }
 
 // loadDialogAtlas 讀 tools/bake_dialog_atlas.py 的圖集並核對字型、語料與術語表雜湊。
-func (c *dialogCatalog) loadDialogAtlas(b []byte, fontSHA, corpusSHA, termsSHA string) string {
+func (c *dialogCatalog) loadDialogAtlas(b []byte, fontSHA string, bind map[string]string) string {
 	var atlas struct {
-		Font   string `json:"font_sha256"`
-		Px     int    `json:"font_px"`
-		Floor  int    `json:"floor_px"`
-		Corpus string `json:"corpus_sha256"`
-		Terms  string `json:"terms_sha256"`
-		Sizes  map[string]struct {
+		Font  string            `json:"font_sha256"`
+		Px    int               `json:"font_px"`
+		Floor int               `json:"floor_px"`
+		Bind  map[string]string `json:"bindings"`
+		Sizes map[string]struct {
 			Height    int `json:"height"`
 			CJKTop    int `json:"cjk_ink_top"`
 			CJKBottom int `json:"cjk_ink_bottom"`
@@ -370,9 +468,13 @@ func (c *dialogCatalog) loadDialogAtlas(b []byte, fontSHA, corpusSHA, termsSHA s
 	if json.Unmarshal(b, &atlas) != nil {
 		return "font-mask-unavailable"
 	}
-	if atlas.Font != fontSHA || atlas.Px != dialogFontPx || atlas.Floor != dialogFloorPx ||
-		atlas.Corpus != corpusSHA || atlas.Terms != termsSHA {
+	if atlas.Font != fontSHA || atlas.Px != dialogFontPx || atlas.Floor != dialogFloorPx || len(atlas.Bind) != len(bind) {
 		return "font-binding-mismatch"
+	}
+	for k, v := range bind {
+		if atlas.Bind[k] != v {
+			return "font-binding-mismatch"
+		}
 	}
 	c.fonts = map[int]*dialogFont{}
 	for size := dialogFloorPx; size <= dialogFontPx; size++ {
@@ -411,6 +513,8 @@ type dialogRun struct {
 
 type dialogShown struct {
 	id, zh, reason         string
+	normalC, accentC       byte // 目標166：原版觀測字色
+	shadowC                byte // 0 表示原版沒有陰影
 	safe                   image.Rectangle
 	before                 []byte
 	shadow, normal, accent *image.Alpha
@@ -474,7 +578,12 @@ func (d *dialogRuntime) onWrite(i int, old, value byte, text, cursor bool) {
 			r.shadowWritten = true
 		}
 		if n := len(r.chars); n > 0 {
-			r.chars[n-1].box = r.chars[n-1].box.Union(image.Rect(x, y, x+1, y+1))
+			ch := &r.chars[n-1]
+			ch.box = ch.box.Union(image.Rect(x, y, x+1, y+1))
+			if ch.colors == nil {
+				ch.colors = map[byte]int{}
+			}
+			ch.colors[value]++
 		}
 		return
 	}
@@ -499,9 +608,100 @@ func scanDialogBox(canvas []byte, x, y int) (l, t, r int) {
 	return l, t, r
 }
 
-// finish 對一段已結束的逐字事件做比對與版面；回傳要顯示的狀態，或原因（不是對話框時兩者皆空）。
+type runLine struct {
+	text string
+	box  image.Rectangle
+	capH int // 原版大寫字母與數字的最大墨跡高（邏輯像素），作為中文字級上限
+}
+
+// runLines 依 x 回捲切行；空白沒有墨跡，歸入目前行。
+func runLines(chars []dialogChar) []runLine {
+	var out []runLine
+	var cur runLine
+	lastX := -1
+	for _, ch := range chars {
+		if !ch.box.Empty() {
+			if lastX >= 0 && ch.box.Min.X < lastX {
+				out = append(out, cur)
+				cur = runLine{}
+			}
+			lastX = ch.box.Min.X
+			cur.box = cur.box.Union(ch.box)
+			if (ch.c >= 'A' && ch.c <= 'Z') || (ch.c >= '0' && ch.c <= '9') {
+				cur.capH = max(cur.capH, ch.box.Dy())
+			}
+		}
+		if ch.c != 0 {
+			cur.text += string(rune(ch.c))
+		}
+	}
+	if !cur.box.Empty() {
+		out = append(out, cur)
+	}
+	for i := range out {
+		out[i].text = dialogNormalize(out[i].text)
+		if out[i].capH == 0 {
+			out[i].capH = out[i].box.Dy()
+		}
+	}
+	return out
+}
+
+// runStyle 由原版觀測色號決定中文字色：有陰影色 47／128 為木紋框配色；
+// 否則以各字主色中最多者為一般色、其次為強調色，不畫陰影。
+func runStyle(r *dialogRun) (normal, accent, shadow byte) {
+	if r.shadowWritten {
+		return 68, 149, 47
+	}
+	count := map[byte]int{}
+	for _, ch := range r.chars {
+		best, n := byte(0), -1
+		for c, k := range ch.colors {
+			if k > n || (k == n && c < best) {
+				best, n = c, k
+			}
+		}
+		if n > 0 {
+			count[best]++
+		}
+	}
+	first, second, n1, n2 := byte(0), byte(0), -1, -1
+	for c, k := range count {
+		switch {
+		case k > n1 || (k == n1 && c < first):
+			second, n2 = first, n1
+			first, n1 = c, k
+		case k > n2 || (k == n2 && c < second):
+			second, n2 = c, k
+		}
+	}
+	if n2 <= 0 {
+		second = first
+	}
+	return first, second, 0
+}
+
+// observedPitch 取相鄰行上緣距離的最小值（邏輯像素）；單行時回傳 fallback。
+func observedPitch(lines []runLine, fallback int) int {
+	p := 0
+	for i := 1; i < len(lines); i++ {
+		if d := lines[i].box.Min.Y - lines[i-1].box.Min.Y; d > 0 && (p == 0 || d < p) {
+			p = d
+		}
+	}
+	if p == 0 {
+		return fallback
+	}
+	return p
+}
+
+// finish 對一段已結束的逐字事件做比對與版面；回傳要顯示的狀態，或原因（無墨跡時兩者皆空）。
 func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialogShown, string, string) {
-	if r == nil || !r.shadowWritten || r.readPos%2 == 1 {
+	if r == nil || r.readPos%2 == 1 {
+		return nil, "", ""
+	}
+	lines := runLines(r.chars)
+	if len(lines) == 0 {
 		return nil, "", ""
 	}
 	var ink image.Rectangle
@@ -515,32 +715,215 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 		}
 	}
 	shown := dialogShownText(r.chars)
-	if first < 0 {
-		return nil, shown, "no-ink"
-	}
-	id, zh, why := d.cat.match(shown)
-	if why != "" {
-		return nil, shown, why
-	}
 	before := bytes.Clone(canvas)
 	for i, text := range r.lastText {
 		if text {
 			before[i] = r.firstOld[i]
 		}
 	}
-	c0 := r.chars[first].box
-	l, t, rt := scanDialogBox(before, c0.Min.X, (c0.Min.Y+c0.Max.Y)/2)
-	safe := image.Rect(l+3, t+3, rt-3, ink.Max.Y+2)
-	if l == 0 || t == 0 || rt == 319 || !ink.In(safe) {
-		return nil, shown, "ink-outside-box"
+	normalC, accentC, shadowC := runStyle(r)
+	st := &dialogShown{before: before, normalC: normalC, accentC: accentC, shadowC: shadowC,
+		phase: "waiting-screen", complete: step}
+	t, zh, why := d.cat.matchIn(d.cat.templates, shown)
+	switch {
+	case why == "" && t.centered:
+		// 置中段落（例如國王接見）：沒有色號 0 外框，安全區取原版墨跡外擴 2 邏輯像素。
+		st.safe = ink.Inset(-2).Intersect(image.Rect(0, 0, 320, 200))
+		if !r.others.Empty() && r.others.Overlaps(st.safe) {
+			return nil, shown, "unexpected-writer-in-safe"
+		}
+		st.shadow, st.normal, st.accent, st.size = d.cat.centeredMasks(zh, st.safe.Dx()*4, st.safe.Dy()*4,
+			observedPitch(lines, 10)*4, shadowC != 0)
+	case why == "":
+		if !r.shadowWritten {
+			return nil, shown, "no-box-style"
+		}
+		c0 := r.chars[first].box
+		l, top, rt := scanDialogBox(before, c0.Min.X, (c0.Min.Y+c0.Max.Y)/2)
+		st.safe = image.Rect(l+3, top+3, rt-3, ink.Max.Y+2)
+		if l == 0 || top == 0 || rt == 319 || !ink.In(st.safe) {
+			return nil, shown, "ink-outside-box"
+		}
+		if !r.others.Empty() && r.others.Overlaps(st.safe) {
+			return nil, shown, "unexpected-writer-in-safe"
+		}
+		st.shadow, st.normal, st.accent, st.size = d.cat.dialogMasks(zh, st.safe.Dx()*4, st.safe.Dy()*4)
+	case why == "no-template":
+		// 逐行清單：每一行都必須各自唯一命中；任何一行不中即整段回原文。
+		items := make([]string, len(lines))
+		for i, l := range lines {
+			lt, lzh, lwhy := d.cat.matchIn(d.cat.lines, l.text)
+			if lwhy != "" {
+				return nil, shown, "line-" + lwhy
+			}
+			items[i] = lzh
+			t = lt
+		}
+		var union image.Rectangle
+		for _, l := range lines {
+			union = union.Union(l.box)
+		}
+		st.safe = image.Rect(union.Min.X-1, union.Min.Y-1, union.Max.X+2, union.Max.Y+2).Intersect(image.Rect(0, 0, 320, 200))
+		st.shadow, st.normal, st.accent, st.size = d.cat.lineMasks(items, lines, st.safe, observedPitch(lines, union.Dy()+3), shadowC != 0)
+		if len(lines) == 1 {
+			st.id = t.id
+		} else {
+			st.id = t.id + "+list"
+		}
+		st.zh = strings.Join(items, "／")
+		if st.size == 0 {
+			return nil, shown, "layout-overflow"
+		}
+		return st, shown, ""
+	default:
+		return nil, shown, why
 	}
-	if !r.others.Empty() && r.others.Overlaps(safe) {
-		return nil, shown, "unexpected-writer-in-safe"
-	}
-	sh, n, ac, size := d.cat.dialogMasks(zh, safe.Dx()*4, safe.Dy()*4)
-	if size == 0 {
+	if st.size == 0 {
 		return nil, shown, "layout-overflow"
 	}
-	return &dialogShown{id: id, zh: zh, safe: safe, before: before, shadow: sh, normal: n, accent: ac,
-		size: size, phase: "waiting-screen", complete: step}, shown, ""
+	st.id, st.zh = t.id, zh
+	return st, shown, ""
+}
+
+// lineMasks 逐行在原位畫中文：行左緣對齊原版字首、字頭對齊原版行上緣；
+// 中文墨跡高不超過原版大寫字墨跡高的 4 倍（逐段取最大者），也不超過行距；
+// 寬度不得超過整段最右緣。任一行放不下即整段回原文。
+func (c *dialogCatalog) lineMasks(items []string, lines []runLine, safe image.Rectangle, pitch int, shadow bool) (sh, n, ac *image.Alpha, size int) {
+	rect := image.Rect(0, 0, safe.Dx()*4, safe.Dy()*4)
+	capH := 0
+	for _, l := range lines {
+		capH = max(capH, l.capH)
+	}
+	for size = dialogFontPx; size >= dialogFloorPx; size-- {
+		f := c.fonts[size]
+		if f == nil || f.cjkBottom-f.cjkTop > pitch*4-4 || f.cjkBottom-f.cjkTop > capH*4 {
+			continue
+		}
+		sh, n, ac = image.NewAlpha(rect), image.NewAlpha(rect), image.NewAlpha(rect)
+		ok := true
+		for i, l := range lines {
+			glyphs, good := dialogMarked(items[i])
+			x, y := (l.box.Min.X-safe.Min.X)*4, (l.box.Min.Y-safe.Min.Y)*4-f.cjkTop
+			w := 0
+			for _, g := range glyphs {
+				gw, has := f.widths[g.r]
+				if !has {
+					good = false
+					break
+				}
+				w += gw
+			}
+			if !good || x+w+4 > rect.Dx() || y+f.cjkBottom > rect.Dy() {
+				ok = false
+				break
+			}
+			for _, g := range glyphs {
+				a := f.glyphs[g.r]
+				dialogBlit(n, a, x, y)
+				if shadow {
+					dialogBlit(sh, a, x+4, y+4)
+				}
+				if g.accent {
+					dialogBlit(ac, a, x, y)
+				}
+				x += f.widths[g.r]
+			}
+		}
+		if ok {
+			return sh, n, ac, size
+		}
+	}
+	return nil, nil, nil, 0
+}
+
+// centeredMasks 排版含 ^ 置中碼的譯稿：^^ 開頭的行置中、單獨的 ^ 為空行、其餘相鄰行合併後依寬度重排。
+// 行距取原版觀測行距（輸出像素）；字級以行距為上限並逐級縮到下限。
+func (c *dialogCatalog) centeredMasks(zh string, w, h, pitch int, shadow bool) (sh, n, ac *image.Alpha, size int) {
+	type item struct {
+		text     string
+		centered bool
+		blank    bool
+	}
+	var items []item
+	body := ""
+	flush := func() {
+		if body != "" {
+			items = append(items, item{text: body})
+			body = ""
+		}
+	}
+	for _, l := range strings.Split(zh, `\n`) {
+		switch {
+		case strings.HasPrefix(l, "^^"):
+			flush()
+			items = append(items, item{text: strings.TrimPrefix(l, "^^"), centered: true})
+		case strings.TrimSpace(l) == "^":
+			flush()
+			items = append(items, item{blank: true})
+		default:
+			body += strings.TrimPrefix(l, "^")
+		}
+	}
+	flush()
+	rect := image.Rect(0, 0, w, h)
+	for size = dialogFontPx; size >= dialogFloorPx; size-- {
+		f := c.fonts[size]
+		if f == nil || f.cjkBottom-f.cjkTop > pitch-4 {
+			continue
+		}
+		type placed struct {
+			glyphs   []dialogGlyph
+			centered bool
+		}
+		var rows []*placed
+		ok := true
+		for _, it := range items {
+			if it.blank {
+				rows = append(rows, nil)
+				continue
+			}
+			glyphs, good := dialogMarked(it.text)
+			if !good {
+				return nil, nil, nil, 0
+			}
+			wrapped, good := dialogWrap(glyphs, f, w-8)
+			if !good {
+				ok = false
+				break
+			}
+			for _, g := range wrapped {
+				rows = append(rows, &placed{g, it.centered})
+			}
+		}
+		if !ok || 4+len(rows)*pitch > h {
+			continue
+		}
+		sh, n, ac = image.NewAlpha(rect), image.NewAlpha(rect), image.NewAlpha(rect)
+		for k, row := range rows {
+			if row == nil {
+				continue
+			}
+			lw := 0
+			for _, g := range row.glyphs {
+				lw += f.widths[g.r]
+			}
+			x, y := 4, 4+k*pitch-f.cjkTop
+			if row.centered {
+				x = (w - lw) / 2
+			}
+			for _, g := range row.glyphs {
+				a := f.glyphs[g.r]
+				dialogBlit(n, a, x, y)
+				if shadow {
+					dialogBlit(sh, a, x+4, y+4)
+				}
+				if g.accent {
+					dialogBlit(ac, a, x, y)
+				}
+				x += f.widths[g.r]
+			}
+		}
+		return sh, n, ac, size
+	}
+	return nil, nil, nil, 0
 }

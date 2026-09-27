@@ -1,0 +1,2 @@
+en	zh	source_file	source_sha256	byte_offset	notes
+7-Feb-95	1995年2月7日	VICEROY.EXE	a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3	0x0001E1B0	主選單版本字串 %STRING1（GAME.TXT 0x179 模板）的日期值；目標166

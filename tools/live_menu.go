@@ -22,6 +22,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"unicode"
 
 	golem "github.com/wicanr2/dosgolem"
 	"github.com/wicanr2/dosgolem/overlay"
@@ -481,6 +482,7 @@ func (st *seaState) seaDraw(mask *image.Alpha, text string, x, y, size int) bool
 // 目標151（規格034）：靜態內嵌文字（開場製作名單職稱橫幅）。沒有印字事件可當權杖，
 // 以當幀真 VGA 索引畫面在指紋矩形內逐 byte 相符為唯一觸發條件，相符才清除文字帶原文並畫中文。
 type staticItem struct {
+	inkSet         map[byte]bool // 目標166：原文色號集合；nil 表示以亮度低於 122 判斷
 	id, zh, reason string
 	fp, band       image.Rectangle
 	sha            string
@@ -622,7 +624,9 @@ func main() {
 	dialogA := flag.Bool("dialog-a", false, "啟用規格035通用對話框正文整句中文（A 版 30px）")
 	dialogCorpus := flag.String("dialog-corpus", "/repo/text/corpus.zh-Hant.tsv", "對話框模板語料清冊")
 	dialogTerms := flag.String("dialog-terms", "/repo/text/terms.zh-Hant.tsv", "變數譯名定稿表")
-	dialogAtlas := flag.String("dialog-atlas", "/out/goal165-dialog-atlas.json", "本機依固定字型、語料與術語表烘製的對話框字元圖集")
+	dialogAtlas := flag.String("dialog-atlas", "/out/goal165-dialog-atlas.json", "本機依固定字型、語料、術語表、譯稿與變數值表烘製的對話框字元圖集")
+	dialogDraft := flag.String("dialog-draft", "/repo/text/draft.zh-Hant.tsv", "逐行清單字典來源（GAME.TXT 單行列與 MENU.TXT 項目）")
+	dialogValues := flag.String("dialog-values", "/repo/text/variable-values.zh-Hant.tsv", "執行檔提供的變數值譯名")
 	introA := flag.Bool("england-intro-a", false, "啟用規格025英格蘭首次介紹兩頁（標題34px／正文38px）")
 	introAll := flag.Bool("nation-intro-a", false, "啟用規格025四國首次介紹八頁（標題34px／正文38px）")
 	introCatalog := flag.String("intro-catalog", "/repo/text/nation-introduction.zh-Hant.tsv", "國家介紹長文唯一 TSV")
@@ -970,20 +974,16 @@ func main() {
 	}
 	// 目標165（規格035）：通用對話框正文。模板、變數譯名與圖集任一不成立，整個引擎回原文。
 	var dlg *dialogRuntime
+	var dialogBind map[string]string
 	if *dialogA {
 		dlg = &dialogRuntime{misses: map[string]int{}}
 		corpusBytes, termsBytes := read(*dialogCorpus), read(*dialogTerms)
 		cat, err := loadDialogCatalog(corpusBytes, termsBytes, rawSource, versions["GAME.TXT"], map[string]bool{})
 		if err != nil {
 			dlg.fontReason = "missing-or-invalid-translation"
-		} else if b, err := os.ReadFile(*dialogAtlas); err != nil {
-			dlg.fontReason = "font-mask-unavailable"
 		} else {
 			dlg.cat = cat
-			dlg.fontReason = cat.loadDialogAtlas(b, fontHash, hash(corpusBytes), hash(termsBytes))
-		}
-		if *missing {
-			dlg.fontReason = "missing-ink"
+			dialogBind = map[string]string{"corpus": hash(corpusBytes), "terms": hash(termsBytes)}
 		}
 	}
 	labelsSource := read(filepath.Join(*root, "LABELS.TXT"))
@@ -1004,6 +1004,15 @@ func main() {
 			}
 			get := func(k string) string { return row[col[k]] }
 			it := &staticItem{id: get("candidate_id"), zh: get("zh_hant"), sha: get("fingerprint_sha256")}
+			// 目標166：ink_indices 列出原文色號（例如深色木紋上的亮綠字）；空白時沿用亮度規則。
+			if i, ok := col["ink_indices"]; ok && row[i] != "" {
+				it.inkSet = map[byte]bool{}
+				for _, f := range strings.Split(row[i], ",") {
+					if v, err := strconv.Atoi(f); err == nil && v >= 0 && v < 256 {
+						it.inkSet[byte(v)] = true
+					}
+				}
+			}
 			fp, ok1 := parseRect(get("fingerprint_rect"))
 			band, ok2 := parseRect(get("text_band"))
 			it.fp, it.band = fp, band
@@ -1034,7 +1043,7 @@ func main() {
 					it.reason = "font-mask-unavailable"
 				} else if r = image.Rect(mask.X, mask.Y, mask.X+mask.Width, mask.Y+mask.Height); mask.ID != it.id ||
 					mask.Catalog != hash(staticBytes) || mask.Translation != hash([]byte(it.zh)) || mask.Font != fontHash ||
-					mask.Px < 15 || mask.Px > 22 || mask.Ink < 0 || mask.Ink > 255 {
+					mask.Px < 15 || mask.Px > 22 && (it.inkSet == nil || mask.Px > 28) || mask.Ink < 0 || mask.Ink > 255 {
 					it.reason = "font-binding-mismatch"
 				} else if mask.Width <= 0 || mask.Height <= 0 || len(mask.Alpha) != mask.Width*mask.Height ||
 					!r.In(image.Rectangle{Min: band.Min.Mul(4), Max: band.Max.Mul(4)}) {
@@ -1867,6 +1876,48 @@ func main() {
 			rowExpire(r, reason)
 		}
 	}
+	// 目標166（規格036）：逐行字典另收譯稿與變數值表；已由專屬欄位處理的鍵不進通用引擎。
+	if dlg != nil && dlg.cat != nil {
+		exclude := map[string]bool{}
+		for _, l := range lines {
+			exclude[l.id] = true
+		}
+		for _, l := range difficulty {
+			exclude[l.id] = true
+		}
+		if prompt != nil {
+			exclude[prompt.id] = true
+		}
+		if title != nil {
+			exclude[title.id] = true
+		}
+		if rows != nil {
+			for _, r := range rows.rows {
+				exclude[r.id] = true
+			}
+		}
+		for _, ev := range retire {
+			for _, f := range ev.fields {
+				exclude[f.id] = true
+			}
+		}
+		draftBytes, valuesBytes := read(*dialogDraft), read(*dialogValues)
+		files := map[string][]byte{"GAME.TXT": rawSource, "VICEROY.EXE": read(filepath.Join(*root, "VICEROY.EXE"))}
+		if b, err := os.ReadFile(filepath.Join(*root, "MENU.TXT")); err == nil {
+			files["MENU.TXT"] = b
+		}
+		if dlg.cat.addDraft(draftBytes, files, exclude) != nil || dlg.cat.addValues(valuesBytes, files) != nil {
+			dlg.fontReason = "missing-or-invalid-translation"
+		} else if b, err := os.ReadFile(*dialogAtlas); err != nil {
+			dlg.fontReason = "font-mask-unavailable"
+		} else {
+			dialogBind["draft"], dialogBind["values"] = hash(draftBytes), hash(valuesBytes)
+			dlg.fontReason = dlg.cat.loadDialogAtlas(b, fontHash, dialogBind)
+		}
+	}
+	if dlg != nil && *missing {
+		dlg.fontReason = "missing-ink"
+	}
 	helpAnyInk := help != nil && help.normal != nil
 	dlgOn := dlg != nil && dlg.fontReason == ""
 	seaOn := sea != nil && sea.glyphs != nil
@@ -1977,7 +2028,10 @@ func main() {
 		if st == nil {
 			if why != "" {
 				dlg.misses[why+"\t"+shown]++
-				events = append(events, map[string]any{"candidate_id": "GAME.TXT:dialog", "stage": "fallback", "step": m.Steps, "reason": why, "shown": shown})
+				// 單字元、符號等零碎印字只計入 dialog_misses，不逐次記事件。
+				if len(strings.FieldsFunc(shown, func(r rune) bool { return !unicode.IsLetter(r) })) > 0 && len(shown) >= 3 {
+					events = append(events, map[string]any{"candidate_id": "GAME.TXT:dialog", "stage": "fallback", "step": m.Steps, "reason": why, "shown": shown})
+				}
 			}
 			return
 		}
@@ -3194,18 +3248,25 @@ func main() {
 					if hash(region) != it.sha {
 						reason = "fingerprint-mismatch"
 					} else {
-						// 文字帶內亮度低於 122 的色號視為原文（含抗鋸齒），以同列最近的非文字像素補回紋理。
+						// 文字帶內亮度低於 122 的色號視為原文（含抗鋸齒），以同列最近的非文字像素補回紋理；
+						// 有 ink_indices 時改以列出的色號判斷。
 						lum := func(v byte) int { return int(m.DAC[int(v)*3]) + int(m.DAC[int(v)*3+1]) + int(m.DAC[int(v)*3+2]) }
+						isText := func(v byte) bool {
+							if it.inkSet != nil {
+								return it.inkSet[v]
+							}
+							return lum(v) < 122
+						}
 						clean := bytes.Clone(indexed)
 						for y := it.band.Min.Y; y < it.band.Max.Y; y++ {
 							for x := it.band.Min.X; x < it.band.Max.X; x++ {
-								if lum(indexed[y*320+x]) >= 122 {
+								if !isText(indexed[y*320+x]) {
 									continue
 								}
 							search:
 								for dx := 1; dx < it.band.Dx(); dx++ {
 									for _, nx := range []int{x - dx, x + dx} {
-										if nx >= it.band.Min.X && nx < it.band.Max.X && lum(indexed[y*320+nx]) >= 122 {
+										if nx >= it.band.Min.X && nx < it.band.Max.X && !isText(indexed[y*320+nx]) {
 											clean[y*320+x] = indexed[y*320+nx]
 											break search
 										}
@@ -3476,8 +3537,6 @@ func main() {
 				} else if st := dlg.cur; st != nil {
 					did, dreason = st.id, st.phase
 					if st.phase != "active" || st.patch == nil {
-					} else if applied {
-						dreason = "other-overlay-active"
 					} else if d.Mouse.Buttons != 0 {
 						dreason = "mouse-button-held"
 					} else {
@@ -3494,8 +3553,12 @@ func main() {
 							dreason = "vga-safe-mismatch"
 						} else {
 							origin := st.safe.Min.Mul(4)
+							shadowIdx := st.shadowC
+							if shadowIdx == 0 {
+								shadowIdx = 47 // 原版無陰影：陰影遮罩全空，此色號不會用到
+							}
 							frame, composed, why, err := overlay.Compose(clean, m.DAC[:], 320, 200, 4,
-								st.patch, st.shadow, origin, 47, enabled)
+								st.patch, st.shadow, origin, shadowIdx, enabled)
 							must(err)
 							dreason = why
 							if composed {
@@ -3504,7 +3567,7 @@ func main() {
 								for _, layer := range []struct {
 									mask  *image.Alpha
 									index int
-								}{{st.normal, 68}, {st.accent, 149}} {
+								}{{st.normal, int(st.normalC)}, {st.accent, int(st.accentC)}} {
 									p := layer.index * 3
 									fg := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
 									draw.DrawMask(output, panel, image.NewUniform(fg), image.Point{}, layer.mask, image.Point{}, draw.Over)
