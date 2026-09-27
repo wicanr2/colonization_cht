@@ -15,7 +15,7 @@
 ./colonization-cht.sh --game /你的路徑/COLONIZE
 ```
 
-原版目錄只讀；存檔寫到 `~/.local/share/colonization-cht/save`。預覽版沒有音效；鍵盤目前只轉送可列印字元、Backspace、Enter、Esc 與方向鍵，功能鍵（F1～F10 顧問報告等）、數字鍵盤與組合鍵尚未轉送，相關操作請改用滑鼠點選單；遊戲節奏與原版實機不同。
+原版目錄只讀；存檔寫到 `~/.local/share/colonization-cht/save`。預覽版沒有音效；遊戲節奏與原版實機不同。鍵盤：`v.0.1.0-20260927` 只轉送可列印字元、Backspace、Enter、Esc 與方向鍵；目前的原始碼已加上 F1～F10（含 Shift／Ctrl／Alt 組合）、數字鍵盤、Home／End／PgUp／PgDn 與 Alt／Ctrl 加字母，會在下一個版本提供。
 
 ## 目前狀態
 

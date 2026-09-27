@@ -113,3 +113,25 @@ CPU、完整 RAM、原版索引、色盤及開檔與先前英文控制逐項相�
 `tools/window_prototype.go` 新增五種具名鍵事件與焦點內的按下邊緣轉送，並維持 Space 原有單字元路徑。真 Ebitengine／Xvfb 視窗由玩家滑鼠與 Enter 冷啟動抵達英格蘭海上；在1,225,400,000步實按 Left，船隻於真視窗移到左方；打開 `GAME → Game Options` 後於1,290,400,000步實按 Escape，真視窗回到海上。原版輸入收據 SHA-256 `dfc4d5cb870efd45c173f7b2eb8fede711bb2951d2204053af92701a8dde5c98`，來源檔 SHA-256 `2e6d4238d4ed0a49797e6750c2ca5135345c2120a17bbd93aafce01f992ee1eb`，終點原版索引 SHA-256 `95e4fb3efcd7cf0391f46767711274096221d305da97885ed7a1d2f1e06d61c0`。同收據英文控制的原版 CPU、完整 RAM、索引、色盤、開檔及虛擬時間均相同。
 
 只刪除 Left／Escape 的兩個本機反向重播，其終點原版索引各與真視窗不同；失焦真視窗 Left 不入收據、不在重聚焦時補送，英文控制的完整原版狀態相同。先前已驗姓名真視窗收據由新前端重播，與舊英文控制的原版狀態、完整 RAM、索引、色盤及開檔一致。`tools/check_goal124_keyboard.py` 正例、`tools/test_goal124_keyboard.py` 缺原版 `SKIP 77` 與八類篡改負例，以及 Go／Ebitengine 單元測試均通過。本節只把**具名鍵轉送與已驗 Left／Escape 正常玩家路徑**升為限定 CONFORMED；右／上／下在本遊戲的效果、其他畫面的 Escape、help 觸發及新增中文顯示仍未知。所有原版收據與畫面僅存已忽略 `workplace/reports/goal124-keyboard/`。
+
+## 2026-09-27：功能鍵、數字鍵盤與組合鍵（限定 CONFORMED，目標163）
+
+型別契約：`windowInput.kind` 新增 `key`，`Text` 為前端鍵名、`X=Y=Button=0`。鍵名對應標準 PC BIOS 鍵字（高位元組 set-1 掃描碼、低位元組 ASCII），以 dosgolem 既有 `PushKey` 排入 BIOS 環形緩衝，不改 dosgolem、不含本遊戲位址：
+
+| 鍵名 | 鍵字 |
+|---|---|
+| `f1`～`f10` | `3B00`～`4400` |
+| `shift-f1`～`shift-f10` | `5400`～`5D00` |
+| `ctrl-f1`～`ctrl-f10` | `5E00`～`6700` |
+| `alt-f1`～`alt-f10` | `6800`～`7100` |
+| `home`／`end`／`pgup`／`pgdn`／`insert`／`delete` | `4700`／`4F00`／`4900`／`5100`／`5200`／`5300` |
+| `tab` | `0F09` |
+| `kp1`～`kp9`、`kp0`、`kpdot` | NumLock 關閉時的移動鍵字（`kp5` 為 `4C00`） |
+| `alt-a`～`alt-z` | 字母掃描碼、ASCII 0 |
+| `ctrl-a`～`ctrl-z` | 字母掃描碼、ASCII 1～26 |
+
+Ebitengine 焦點內只取按下邊緣；修飾鍵依 Alt、Ctrl、Shift 的優先順序判斷。Alt／Ctrl 按住時不另送字元；數字鍵盤按下的同一幀去掉平台另產生的數字或小數點字元，避免重複輸入。
+
+驗收：單元測試逐鍵核對鍵字、非法名稱拒絕、Shift+F1、數字鍵盤去重與 Alt 組合（`tools/window_prototype_test.go`）。真 Ebitengine／Xvfb 以玩家鍵鼠走英國路徑到海上，實按數字鍵盤 8（船往北）、7（往西北）、F1（開啟地形百科）、Esc（返回）；現場四張截圖與同輸入中文重播逐像素相同；中英原版狀態在五個檢查點一致；移除全部 `key` 事件的反向重播在按鍵前狀態相同、按鍵後全部不同。前端 `tools/window_prototype.go` SHA-256 `139bce614327c675e13f3808035d2ebcc12241f8dd804a513d46e6c622a57e60`，檢查器 `tools/check_goal163_window.py` PASS（摘要 `0901f25b…`），收據只在忽略的 `workplace/reports/goal163-keys/`。
+
+未驗：其餘功能鍵與 Alt／Ctrl 組合在本遊戲的效果（轉送已驗，遊戲語意逐項未驗）；輸入法與非 ASCII 字元仍拒絕。

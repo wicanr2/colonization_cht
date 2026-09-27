@@ -482,6 +482,42 @@
    "known_diffs": "人名橫幅 GUI 截圖與重播有一幀動畫差，該畫面不套用"
   },
   {
+   "id": "function-keys",
+   "path": "both",
+   "title": "功能鍵、數字鍵盤與組合鍵轉送",
+   "specs": [
+    "024"
+   ],
+   "flags": [
+    "（前端輸入，無旗標）"
+   ],
+   "checker": "check_goal163_window.py",
+   "args": [
+    "--game",
+    "{game}",
+    "--reports",
+    "{reports}/goal163-keys"
+   ],
+   "dir": "goal163-keys",
+   "zh": [
+    "replay-zh"
+   ],
+   "control": [
+    "replay-control"
+   ],
+   "negative": [
+    "neg-nokeys"
+   ],
+   "gui_inputs": [
+    "gui-keys.inputs.json"
+   ],
+   "regenerate": [
+    "probe_goal163_gui.sh",
+    "probe_goal163_replays.sh"
+   ],
+   "known_diffs": "只驗數字鍵盤 8／7 與 F1；其餘鍵的遊戲語意未逐項驗"
+  },
+  {
    "id": "regression",
    "path": "both",
    "title": "全面回歸六點（主選單至旗卡、@BUILD1、遊戲選項、英格蘭介紹）",

@@ -78,11 +78,58 @@ func TestWindowInputValidation(t *testing.T) {
 func TestSpecialWindowInputs(t *testing.T) {
 	pressed := map[ebiten.Key]bool{ebiten.KeyEscape: true, ebiten.KeyArrowLeft: true,
 		ebiten.KeySpace: true}
-	events := specialWindowInputs(func(key ebiten.Key) bool { return pressed[key] })
+	none := func(ebiten.Key) bool { return false }
+	events := specialWindowInputs(func(key ebiten.Key) bool { return pressed[key] }, none)
 	if len(events) != 2 || events[0].Kind != "escape" || events[1].Kind != "left" {
 		t.Fatalf("特殊鍵次序或空格雙送：%+v", events)
 	}
-	if got := specialWindowInputs(func(ebiten.Key) bool { return false }); len(got) != 0 {
+	if got := specialWindowInputs(none, none); len(got) != 0 {
 		t.Fatalf("沒有新按下邊緣卻送鍵：%+v", got)
+	}
+}
+
+func TestBIOSKeyWords(t *testing.T) {
+	m := golem.New()
+	d := golem.NewDOS(m, t.TempDir())
+	defer d.Close()
+	cases := []struct {
+		name string
+		word uint16
+	}{{"f1", 0x3b00}, {"f10", 0x4400}, {"shift-f1", 0x5400}, {"ctrl-f2", 0x5f00}, {"alt-f10", 0x7100},
+		{"home", 0x4700}, {"pgdn", 0x5100}, {"tab", 0x0f09}, {"kp5", 0x4c00}, {"kp1", 0x4f00},
+		{"alt-x", 0x2d00}, {"ctrl-a", 0x1e01}, {"ctrl-z", 0x2c1a}}
+	for _, c := range cases {
+		applyWindowInput(d, windowInput{Kind: "key", Text: c.name})
+	}
+	for _, c := range cases {
+		got, ok := m.PopKey()
+		if !ok || got != c.word {
+			t.Fatalf("%s 鍵字為 %04x（存在=%v），要 %04x", c.name, got, ok, c.word)
+		}
+	}
+	for _, bad := range []windowInput{{Kind: "key", Text: "f11"}, {Kind: "key", Text: ""}, {Kind: "key", Text: "kp1", X: 1}} {
+		if validWindowInput(bad) {
+			t.Fatalf("非法按鍵被接受：%+v", bad)
+		}
+	}
+}
+
+func TestModifierAndKeypadInputs(t *testing.T) {
+	just := map[ebiten.Key]bool{ebiten.KeyF1: true, ebiten.KeyNumpad8: true, ebiten.KeyX: true}
+	held := map[ebiten.Key]bool{ebiten.KeyShift: true}
+	events := specialWindowInputs(func(k ebiten.Key) bool { return just[k] }, func(k ebiten.Key) bool { return held[k] })
+	if len(events) != 2 || events[0].Text != "shift-f1" || events[1].Text != "kp8" {
+		t.Fatalf("Shift+F1 或數字鍵盤轉送錯誤：%+v", events)
+	}
+	if got := filterWindowChars([]rune("8a"), events, func(k ebiten.Key) bool { return held[k] }); string(got) != "a" {
+		t.Fatalf("數字鍵盤重複字元未去除：%q", string(got))
+	}
+	alt := map[ebiten.Key]bool{ebiten.KeyAlt: true}
+	events = specialWindowInputs(func(k ebiten.Key) bool { return just[k] }, func(k ebiten.Key) bool { return alt[k] })
+	if len(events) != 3 || events[0].Text != "alt-f1" || events[2].Text != "alt-x" {
+		t.Fatalf("Alt 組合轉送錯誤：%+v", events)
+	}
+	if got := filterWindowChars([]rune("x"), events, func(k ebiten.Key) bool { return alt[k] }); len(got) != 0 {
+		t.Fatalf("Alt 組合仍送出字元：%q", string(got))
 	}
 }

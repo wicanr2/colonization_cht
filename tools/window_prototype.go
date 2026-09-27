@@ -79,6 +79,9 @@ func validWindowInput(e windowInput) bool {
 		return supportedDOSChar(e.Text) && e.X == 0 && e.Y == 0 && e.Button == 0
 	case "backspace", "enter", "escape", "left", "right", "up", "down":
 		return e.Text == "" && e.X == 0 && e.Y == 0 && e.Button == 0
+	case "key":
+		_, ok := biosKeyWords[e.Text]
+		return ok && e.X == 0 && e.Y == 0 && e.Button == 0
 	default:
 		return false
 	}
@@ -114,8 +117,36 @@ func applyWindowInput(d *golem.DOS, e windowInput) {
 		if !d.PushText(e.Text) {
 			panic("dosgolem 拒絕已審核字元")
 		}
+	case "key":
+		w := biosKeyWords[e.Text]
+		d.PushKey(golem.Key{Scan: uint8(w >> 8), ASCII: uint8(w)})
 	}
 }
+
+// 目標163：標準 PC BIOS 鍵字（高位元組 set-1 掃描碼、低位元組 ASCII）。
+// 只是 PC 鍵盤慣例，不含本遊戲位址；數字鍵盤依 NumLock 關閉時的移動鍵語意。
+var letterScanCodes = [26]uint8{0x1E, 0x30, 0x2E, 0x20, 0x12, 0x21, 0x22, 0x23, 0x17, 0x24, 0x25, 0x26, 0x32,
+	0x31, 0x18, 0x19, 0x10, 0x13, 0x1F, 0x14, 0x16, 0x2F, 0x11, 0x2D, 0x15, 0x2C}
+
+var biosKeyWords = func() map[string]uint16 {
+	w := map[string]uint16{"home": 0x4700, "end": 0x4F00, "pgup": 0x4900, "pgdn": 0x5100,
+		"insert": 0x5200, "delete": 0x5300, "tab": 0x0F09,
+		"kp7": 0x4700, "kp8": 0x4800, "kp9": 0x4900, "kp4": 0x4B00, "kp5": 0x4C00, "kp6": 0x4D00,
+		"kp1": 0x4F00, "kp2": 0x5000, "kp3": 0x5100, "kp0": 0x5200, "kpdot": 0x5300}
+	for i := 0; i < 10; i++ {
+		n := fmt.Sprint(i + 1)
+		w["f"+n] = uint16(0x3B+i) << 8
+		w["shift-f"+n] = uint16(0x54+i) << 8
+		w["ctrl-f"+n] = uint16(0x5E+i) << 8
+		w["alt-f"+n] = uint16(0x68+i) << 8
+	}
+	for i, scan := range letterScanCodes {
+		c := string(rune('a' + i))
+		w["alt-"+c] = uint16(scan) << 8
+		w["ctrl-"+c] = uint16(scan)<<8 | uint16(i+1)
+	}
+	return w
+}()
 
 var specialWindowKeys = [...]struct {
 	key  ebiten.Key
@@ -127,15 +158,83 @@ var specialWindowKeys = [...]struct {
 	{ebiten.KeyArrowUp, "up"}, {ebiten.KeyArrowDown, "down"},
 }
 
+var namedWindowKeys = func() []struct {
+	key  ebiten.Key
+	name string
+} {
+	keys := []struct {
+		key  ebiten.Key
+		name string
+	}{{ebiten.KeyHome, "home"}, {ebiten.KeyEnd, "end"}, {ebiten.KeyPageUp, "pgup"}, {ebiten.KeyPageDown, "pgdn"},
+		{ebiten.KeyInsert, "insert"}, {ebiten.KeyDelete, "delete"}, {ebiten.KeyTab, "tab"},
+		{ebiten.KeyNumpad7, "kp7"}, {ebiten.KeyNumpad8, "kp8"}, {ebiten.KeyNumpad9, "kp9"},
+		{ebiten.KeyNumpad4, "kp4"}, {ebiten.KeyNumpad5, "kp5"}, {ebiten.KeyNumpad6, "kp6"},
+		{ebiten.KeyNumpad1, "kp1"}, {ebiten.KeyNumpad2, "kp2"}, {ebiten.KeyNumpad3, "kp3"},
+		{ebiten.KeyNumpad0, "kp0"}, {ebiten.KeyNumpadDecimal, "kpdot"}}
+	return keys
+}()
+
+var functionWindowKeys = [10]ebiten.Key{ebiten.KeyF1, ebiten.KeyF2, ebiten.KeyF3, ebiten.KeyF4, ebiten.KeyF5,
+	ebiten.KeyF6, ebiten.KeyF7, ebiten.KeyF8, ebiten.KeyF9, ebiten.KeyF10}
+
 // 每次 Update 只取按下邊緣；空格仍由 AppendInputChars 轉送一次。
-func specialWindowInputs(justPressed func(ebiten.Key) bool) []windowInput {
+// pressed 用來判斷修飾鍵（Shift／Ctrl／Alt）是否按住。
+func specialWindowInputs(justPressed, pressed func(ebiten.Key) bool) []windowInput {
 	var events []windowInput
 	for _, key := range specialWindowKeys {
 		if justPressed(key.key) {
 			events = append(events, windowInput{Kind: key.kind})
 		}
 	}
+	prefix := ""
+	switch {
+	case pressed(ebiten.KeyAlt):
+		prefix = "alt-"
+	case pressed(ebiten.KeyControl):
+		prefix = "ctrl-"
+	case pressed(ebiten.KeyShift):
+		prefix = "shift-"
+	}
+	for i, key := range functionWindowKeys {
+		if justPressed(key) {
+			events = append(events, windowInput{Kind: "key", Text: prefix + "f" + fmt.Sprint(i+1)})
+		}
+	}
+	for _, key := range namedWindowKeys {
+		if justPressed(key.key) {
+			events = append(events, windowInput{Kind: "key", Text: key.name})
+		}
+	}
+	if prefix == "alt-" || prefix == "ctrl-" {
+		for i := 0; i < 26; i++ {
+			if justPressed(ebiten.KeyA + ebiten.Key(i)) {
+				events = append(events, windowInput{Kind: "key", Text: prefix + string(rune('a'+i))})
+			}
+		}
+	}
 	return events
+}
+
+// filterWindowChars 去掉與同幀特殊鍵重複的字元：Alt／Ctrl 組合不另送字元；
+// 數字鍵盤按下時，平台可能另產生數字或小數點字元，一併去掉。
+func filterWindowChars(chars []rune, specials []windowInput, pressed func(ebiten.Key) bool) []rune {
+	if pressed(ebiten.KeyAlt) || pressed(ebiten.KeyControl) {
+		return nil
+	}
+	keypad := false
+	for _, e := range specials {
+		keypad = keypad || strings.HasPrefix(e.Text, "kp")
+	}
+	if !keypad {
+		return chars
+	}
+	var out []rune
+	for _, r := range chars {
+		if (r < '0' || r > '9') && r != '.' {
+			out = append(out, r)
+		}
+	}
+	return out
 }
 func (g *windowGame) emit(e windowInput) {
 	e.Step = g.m.Steps
@@ -157,8 +256,8 @@ func (g *windowGame) Update() error {
 	}
 	x, y, inside := logicalMouse(ebiten.CursorPosition())
 	focused := ebiten.IsFocused()
-	chars := ebiten.AppendInputChars(nil)
-	specials := specialWindowInputs(inpututil.IsKeyJustPressed)
+	specials := specialWindowInputs(inpututil.IsKeyJustPressed, ebiten.IsKeyPressed)
+	chars := filterWindowChars(ebiten.AppendInputChars(nil), specials, ebiten.IsKeyPressed)
 	if !focused || !inside {
 		g.release()
 	} else {

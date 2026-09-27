@@ -4127,3 +4127,9 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 
 - **輸入與工具：**前端 `tools/live_menu.go` SHA-256 `ae45f0bfeb17a507b23829169a02d3eb58fa2eac54e8bbe6106b0eabe8cd7c0f`（新增 `-play`）；`tools/package_release.py`；啟動器 `tools/release/colonization-cht.sh`；smoke 映像 eob-remake-go:1.26.7-ebiten2.9.9。
 - **已證實：**封包 `v.0.1.0-20260927` SHA-256 `ce985dbee5d4722e3cbe2b19aae3ddec0bb8f2c850163c1be1e1e34d7dfe958e`，兩次封裝相同；smoke 不開存檔層時與目標161 全流程收據逐位元組相同。
+
+## 2026-09-27：目標163功能鍵、數字鍵盤與組合鍵
+
+- **輸入與工具：**同目標161的原版與隔離 dosgolem `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`；前端 `tools/window_prototype.go` SHA-256 `139bce614327c675e13f3808035d2ebcc12241f8dd804a513d46e6c622a57e60`；檢查器 `tools/check_goal163_window.py` SHA-256 `23ccb4865a94ba174fd56533c1b4b761d8cbbc337b2d98cf50e98f62fe583647`；視窗 `eob-remake-go:1.26.7-ebiten2.9.9`，驗證 `rich2-py:latest`。
+- **已證實：**鍵名對應標準 PC BIOS 鍵字（高位元組 set-1 掃描碼、低位元組 ASCII）。真 GUI 英國路徑到海上，現場輸入 SHA-256 `e9d5cc093221fbc6a741c6e1cd8bb31b4dc13018122710e0c216036961ffb8b2`：數字鍵盤 8 使船往北、7 往西北，F1 開啟地形百科，Esc 返回；四張現場截圖與同輸入中文重播逐像素相同，中英原版狀態在 590M／612M／640M／670M／705M 一致，終點狀態 `56ba6d59…`。移除全部 `key` 事件的反向重播在按鍵後全部不同。六點回歸對 `goal161-regress-a` PASS。
+- **未知：**其餘功能鍵與 Alt／Ctrl 組合在本遊戲的效果；轉送已驗，遊戲語意未逐項驗。收據只在忽略的 `workplace/reports/goal163-keys/`。
