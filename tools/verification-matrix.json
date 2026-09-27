@@ -518,6 +518,43 @@
    "known_diffs": "只驗數字鍵盤 8／7 與 F1；其餘鍵的遊戲語意未逐項驗"
   },
   {
+   "id": "dialog-body",
+   "path": "both",
+   "title": "通用對話框正文（Land Ho、登陸詢問、原住民三則）",
+   "specs": [
+    "035"
+   ],
+   "flags": [
+    "--dialog-a"
+   ],
+   "checker": "check_goal165_window.py",
+   "args": [
+    "--game",
+    "{game}",
+    "--reports",
+    "{reports}/goal165-dialog"
+   ],
+   "dir": "goal165-dialog",
+   "zh": [
+    "replay-zh"
+   ],
+   "control": [
+    "replay-control"
+   ],
+   "negative": [
+    "neg-noatlas",
+    "neg-noterm"
+   ],
+   "gui_inputs": [
+    "gui-dialog.inputs.json"
+   ],
+   "regenerate": [
+    "probe_goal165_gui.sh",
+    "probe_goal165_replays.sh"
+   ],
+   "known_diffs": "只驗正文；選項列與輸入欄維持原文"
+  },
+  {
    "id": "regression",
    "path": "both",
    "title": "全面回歸六點（主選單至旗卡、@BUILD1、遊戲選項、英格蘭介紹）",

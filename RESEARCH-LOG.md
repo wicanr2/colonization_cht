@@ -4139,3 +4139,10 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **輸入與工具：**前端 `tools/window_prototype.go` SHA-256 `34e57bd1…`（狀態檔 `nations` 階段）；共用輸入 `tools/gui_step_input.sh` SHA-256 `c14ecb64…`；檢查器 `tools/check_goal164_step_clicks.py` SHA-256 `ac9f1534…`；視窗 `eob-remake-go:1.26.7-ebiten2.9.9`，驗證 `rich2-py:latest`。
 - **已證實：**前端每次 Update 先讀輸入、再執行 200,000 步、最後寫狀態檔；動作後等狀態步數前進兩次 Update 即保證已被讀到。目標161 收據中多數點擊只按住一次 Update，且常與移動同步數。選國頁左側 `(55,50)` 的點擊使原版以預設國家結束選國（逐點截圖：43.5M 選國頁、45.4M 已是英國預設姓名頁）。
 - **已證實：**修正後主機負載 68～127 下法國、西班牙、荷蘭各兩次，介紹頁事件分別為 `@NATION1A/B`、`@NATION2A/B`、`@NATION3A/B`。
+
+## 2026-09-28：目標165 通用對話框正文
+
+- **輸入與工具：**同目標161 的原版與隔離 dosgolem `9dd36726eeaf9c1f3a745aabdcbb84413791d90f`；探針 `tools/probe_goal165_dialogs.go`；前端 `tools/live_menu.go` SHA-256 `bf123b43…`、`tools/dialog_overlay.go` SHA-256 `28d53ef8…`；圖集 `tools/bake_dialog_atlas.py`（Cubic 11 `8de9c249…`，語料 `1483f5ce…`、術語表 `031e388a…`）；檢查器 `tools/check_goal165_window.py` SHA-256 `c8236f59…`。
+- **已證實：**`0D21:00C6` 對話框逐字從同一 `SS:BX` 基址讀「字元、0」，基址隨呼叫深度不同（`0x2AC7A`、`0x2AC76`，help 為 `0x2AC72`）；`0D21:012C` 以 68／149 畫字、47／128 畫陰影；原版依框寬重新換行、壓縮連續空白、不顯示 `{}`。外框為色號 0，內側 134／128 斜面，框內木紋。選項列與輸入欄是正文印完後另一段讀字。
+- **已證實：**真 GUI 現場輸入 SHA-256 `0b17d0a9…` 下五則對話框中文、中英原版狀態一致（終點 `26caf797…`），兩個反向對照符合規格。
+- **強推論：**`@LANDFALL` 與 `@LANDFALL2` 由船停靠位置（海岸或河口）決定；本輪只觀察到各一次。

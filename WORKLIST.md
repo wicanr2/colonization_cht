@@ -47,7 +47,7 @@
 | #38 | completed | [語料定稿後重驗正式欄位](https://github.com/wicanr2/colonization_cht/issues/38) | `translation-corpus` | 目標156改稿影響的欄位（134、135、136、137、141、142、143、150）重跑真 GUI、中英同輸入重播與檢查器 PASS；新全面回歸基準；驗證矩陣無待重驗列。 |
 | #39 | completed | [功能鍵、數字鍵盤與組合鍵轉送](https://github.com/wicanr2/colonization_cht/issues/39) | — | 逐鍵單元測試；真 GUI 實按 F1 報告與數字鍵盤移動，中英同輸入重播一致；規格024 擴充段 CONFORMED。 |
 | #40 | completed | [GUI 驗證腳本改為步數對齊](https://github.com/wicanr2/colonization_cht/issues/40) | — | 點擊序列以步數對齊；高負載下三國選國各重跑兩次都正確。 |
-| #41 | planned | [通用對話框整句中文覆蓋引擎](https://github.com/wicanr2/colonization_cht/issues/41) | `translation-corpus` | READY 規格；至少三類真實訊息正常路徑顯示中文，中英重播一致，負例回原文。 |
+| #41 | completed | [通用對話框整句中文覆蓋引擎](https://github.com/wicanr2/colonization_cht/issues/41) | `translation-corpus` | READY 規格；至少三類真實訊息正常路徑顯示中文，中英重播一致，負例回原文。 |
 | #42 | planned | [國王接見、GAME 下拉選單、載入訊息與版本字串](https://github.com/wicanr2/colonization_cht/issues/42) | `dialog-overlay-engine` | 四處各有 RE 證據、規格、真 GUI 與中英同輸入驗證。 |
 | #43 | planned | [其餘 23 則教學提示](https://github.com/wicanr2/colonization_cht/issues/43) | `dialog-overlay-engine` | 各則有正常路徑觸發證據與真 GUI／中英重播驗證，或記錄無法觸發原因。 |
 | #44 | planned | [殖民地、歐洲港口、報告與百科畫面](https://github.com/wicanr2/colonization_cht/issues/44) | `function-key-forwarding`, `dialog-overlay-engine` | 逐畫面普查、規格與真 GUI／中英同輸入收據。 |

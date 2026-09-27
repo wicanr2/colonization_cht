@@ -1,5 +1,7 @@
 # 目前脈絡
 
+目前真相：[目標165](docs/goals/165-dialog-overlay-engine.md)完成 #41：通用對話框正文引擎（規格035 正文段限定 CONFORMED，前端旗標 `--dialog-a`）；真 GUI 五則對話框中文，驗證矩陣 17 列 PASS。下一步依序 #42～#46，再做音訊與發行。
+
 目前真相：[目標164](docs/goals/164-gui-step-aligned-clicks.md)完成 #40：真 GUI 腳本改用步數對齊的共用輸入函式，選國改為等選國頁畫完再點；高負載下三國各兩次都選中正確國家。
 
 目前真相（2026-09-27 使用者決定）：這一輪的段落終點是「遊戲內所有可達文字全中文、音訊（AdLib 音樂與 Sound Blaster 音效）可播放、滑鼠與按鍵都支援」，達成後打包完整版、發 Release、做推廣影片。音訊把 ymfm（BSD-3）的 OPL 核心移植到 dosgolem 隔離副本，SB DSP 自寫；平台為 Linux AppImage、Windows x86_64、macOS；推廣影片 1～2 分鐘，由決定性重播錄製，MP4 附在 Release。新工作登記為 #45～#54，與 #40～#44 依序處理。

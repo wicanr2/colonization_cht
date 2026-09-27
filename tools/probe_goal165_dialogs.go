@@ -1,0 +1,315 @@
+// 目標165可丟棄探針（Issue #41）：沿任意真 GUI 輸入收據記錄每一筆 0D21:00C6 讀字、0D21:012C 改色、印前／印後底圖與其他寫入者，
+// 供普查正常路徑上的對話框。由目標141字幕探針改寫；輸入不設白名單，收據雜湊記入輸出。
+// 原版只讀；原始畫布、事件與完整狀態只存 workplace。
+package main
+
+import (
+	"crypto/sha256"
+	"encoding/json"
+	"flag"
+	"fmt"
+	"os"
+	"path/filepath"
+	"syscall"
+
+	golem "github.com/wicanr2/dosgolem"
+)
+
+type input141 struct {
+	Step   uint64 `json:"step"`
+	Kind   string `json:"kind"`
+	X      int    `json:"x"`
+	Y      int    `json:"y"`
+	Button int    `json:"button"`
+	Text   string `json:"text"`
+}
+type replay141 struct {
+	Inputs []input141 `json:"inputs"`
+	End    uint64     `json:"end"`
+}
+
+// 一次 0D21:00C6 連續讀字（SS:BX 線性位址遞增）視為一筆印字字串。
+type print141 struct {
+	Start, Last  uint64
+	Base, Next   uint32
+	Text         []byte
+	Raw          []byte // 目標143：本筆全部讀取位元組（狀態欄字串為連續讀取，不是字元與 0 交錯）
+	Reads        int
+	Writes       int
+	Colors       map[uint8]int
+	MinX, MinY   int
+	MaxX, MaxY   int
+	BeforeSHA    string
+	AfterSHA     string
+	OtherWriters map[string]int
+	OtherBoxes   map[string][4]int // 目標142：其他寫入者在本筆印字期間的範圍 (minX,minY,maxX,maxY)
+	before       []byte            // 目標165：印前畫布，只為對話框段落落檔
+	Chars        []char165         // 目標165：逐字事件（同基址重讀的字元與 0 交錯）各字的步數與墨跡範圍
+}
+
+type char165 struct {
+	C                      byte
+	Step                   uint64
+	MinX, MinY, MaxX, MaxY int
+}
+
+func must141(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
+func file141(path string) []byte { b, err := os.ReadFile(path); must141(err); return b }
+func sha141(b []byte) string     { return fmt.Sprintf("%x", sha256.Sum256(b)) }
+
+func main() {
+	root := flag.String("root", "/game", "唯讀原版目錄")
+	inputs := flag.String("inputs", "", "英格蘭正常玩家路徑輸入（目標132前綴或目標141無跳過版）")
+	out := flag.String("out", "", "workplace 內輸出前綴")
+	control := flag.Bool("control", false, "無讀寫監看的同輸入控制")
+	from := flag.Uint64("from", 76000000, "觀測起點（目標146：靜態文字普查自 10M 起）")
+	snapEvery := flag.Uint64("snap-every", 0, "目標165：每隔多少步另存一次索引畫面與色盤（0 為不存）")
+	flag.Parse()
+	if *inputs == "" || *out == "" {
+		panic("必須指定 inputs 與 out")
+	}
+	parent, err := os.Stat(filepath.Dir(*out))
+	must141(err)
+	stat, ok := parent.Sys().(*syscall.Stat_t)
+	if !parent.IsDir() || !ok || int(stat.Uid) != os.Getuid() {
+		panic("輸出目錄不存在或擁有者不符")
+	}
+	wants := map[string]string{
+		"OPENING.EXE": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+		"VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+		"GAME.TXT":    "67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a",
+		"NAMES.TXT":   "4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061",
+		"LABELS.TXT":  "e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204",
+	}
+	for name, want := range wants {
+		if sha141(file141(filepath.Join(*root, name))) != want {
+			panic("原版版本不符：" + name)
+		}
+	}
+	inputBytes := file141(*inputs)
+	var replay replay141
+	must141(json.Unmarshal(inputBytes, &replay))
+	m := golem.New()
+	must141(m.LoadEXE(file141(filepath.Join(*root, "OPENING.EXE"))))
+	m.Write8(uint32(golem.PSPSeg)*16+0x80, 2)
+	m.WriteBytes(uint32(golem.PSPSeg)*16+0x81, []byte{'-', 'g', 13})
+	d := golem.NewDOS(m, *root)
+	d.Install()
+	defer d.Close()
+	m.SetSoundBlasterPro(true)
+	const canvas uint32 = 0x2cae0
+	// @BUILD1 約在 78～89M 印字；最後一張字幕之後 1225.4M 才有玩家左移。
+	start := *from
+	stop := uint64(1 << 62)
+	if replay.End > start && replay.End < stop {
+		stop = replay.End
+	}
+	prints := []*print141{}
+	var cur *print141
+	frames := []map[string]any{}
+	lastFrameKey := ""
+	otherWrites := map[string]int{}
+	otherBoxes := map[string][4]int{} // 目標146：印字事件以外的寫入者範圍
+	if !*control {
+		m.WatchReads(0x20000, 0x4ffff, func(a uint32, value uint8) {
+			if m.Steps < start || m.Steps >= stop {
+				return
+			}
+			cs, ip := m.CPU.OpAddr()
+			if cs != 0x0d21 || ip != 0x00c6 {
+				return
+			}
+			c := m.CPU
+			op := uint32(c.Seg[golem.SS])*16 + uint32(c.R[golem.BX])
+			if op != a {
+				return
+			}
+			// 目標143：狀態欄字串逐 byte 連續讀取；同基址遞增仍屬同一筆。
+			// 目標165：對話框與 help 逐字呼叫，每字都從同一基址重讀「字元、0」；兩萬步內的重讀併為同一段。
+			sameRun := cur != nil && a == cur.Base && cur.Reads%2 == 0 && m.Steps-cur.Last < 20000
+			if !sameRun && (cur == nil || a != cur.Next || m.Steps-cur.Last > 200000) {
+				b := append([]byte(nil), m.Mem[canvas:canvas+64000]...)
+				// 目標165：上一段尚未等到印後就被接手（例如正文後緊接選項），此刻畫布即其印後。
+				if cur != nil && cur.before != nil && (cur.Colors[47] > 0 || cur.Colors[128] > 0) {
+					cur.AfterSHA = sha141(b)
+					must141(os.WriteFile(fmt.Sprintf("%s.print-%d.before.canvas", *out, cur.Start), cur.before, 0644))
+					must141(os.WriteFile(fmt.Sprintf("%s.print-%d.after.canvas", *out, cur.Start), b, 0644))
+					must141(os.WriteFile(fmt.Sprintf("%s.print-%d.pal", *out, cur.Start), m.DAC[:], 0644))
+					cur.before = nil
+				}
+				cur = &print141{Start: m.Steps, Base: a, Colors: map[uint8]int{},
+					MinX: 320, MinY: 200, MaxX: -1, MaxY: -1, BeforeSHA: sha141(b), before: b, OtherWriters: map[string]int{}, OtherBoxes: map[string][4]int{}}
+				prints = append(prints, cur)
+				if len(prints) > 40000 {
+					panic("印字事件超出上限")
+				}
+			}
+			if cur.Reads%2 == 0 {
+				cur.Text = append(cur.Text, value)
+				cur.Chars = append(cur.Chars, char165{C: value, Step: m.Steps, MinX: 320, MinY: 200, MaxX: -1, MaxY: -1})
+			}
+			cur.Raw = append(cur.Raw, value)
+			cur.Reads++
+			cur.Next = a + 1
+			cur.Last = m.Steps
+		})
+		m.WatchWrites(canvas, canvas+64000-1, func(a uint32, old, value uint8) {
+			if m.Steps < start || m.Steps >= stop || old == value {
+				return
+			}
+			cs, ip := m.CPU.OpAddr()
+			site := fmt.Sprintf("%04X:%04X", cs, ip)
+			if cur == nil || m.Steps-cur.Last > 200000 {
+				otherWrites[site]++
+				i := int(a - canvas)
+				x, y := i%320, i/320
+				b, seen := otherBoxes[site]
+				if !seen {
+					b = [4]int{x, y, x, y}
+				}
+				otherBoxes[site] = [4]int{min(b[0], x), min(b[1], y), max(b[2], x), max(b[3], y)}
+				return
+			}
+			i := int(a - canvas)
+			x, y := i%320, i/320
+			if site != "0D21:012C" {
+				cur.OtherWriters[site]++
+				b, seen := cur.OtherBoxes[site]
+				if !seen {
+					b = [4]int{x, y, x, y}
+				}
+				cur.OtherBoxes[site] = [4]int{min(b[0], x), min(b[1], y), max(b[2], x), max(b[3], y)}
+				return
+			}
+			cur.Writes++
+			cur.Colors[value]++
+			cur.MinX, cur.MinY = min(cur.MinX, x), min(cur.MinY, y)
+			cur.MaxX, cur.MaxY = max(cur.MaxX, x), max(cur.MaxY, y)
+			if n := len(cur.Chars); n > 0 {
+				c := &cur.Chars[n-1]
+				c.MinX, c.MinY, c.MaxX, c.MaxY = min(c.MinX, x), min(c.MinY, y), max(c.MaxX, x), max(c.MaxY, y)
+			}
+			cur.AfterSHA = ""
+		})
+		m.SetOnFrame(func() {
+			if m.Steps < start || m.Steps >= stop {
+				return
+			}
+			base := m.Mem[canvas : canvas+64000]
+			indexed := m.Indexed()
+			same := string(base) == string(indexed)
+			key := fmt.Sprint(m.VideoMode(), sha141(base), sha141(indexed), sha141(m.DAC[:]))
+			if key == lastFrameKey {
+				return
+			}
+			lastFrameKey = key
+			if len(frames) >= 30000 {
+				return // 目標165：長路徑只保留前三萬筆畫格變化
+			}
+			frames = append(frames, map[string]any{"s": m.Steps, "frame": m.Frames, "mode": m.VideoMode(),
+				"canvas": sha141(base), "vga": sha141(indexed), "same": same, "pal": sha141(m.DAC[:])})
+		})
+	}
+	advance := func(target uint64) {
+		for m.Steps < target && !d.Exited && !m.CPU.Halted {
+			must141(m.Step())
+			if *snapEvery > 0 && m.Steps >= start && m.Steps%*snapEvery == 0 {
+				must141(os.WriteFile(fmt.Sprintf("%s.snap-%d.idx", *out, m.Steps), m.Indexed(), 0644))
+				must141(os.WriteFile(fmt.Sprintf("%s.snap-%d.pal", *out, m.Steps), m.DAC[:], 0644))
+			}
+			// 印字結束 20 萬步後記錄印後底圖一次。
+			if cur != nil && cur.AfterSHA == "" && m.Steps-cur.Last == 200000 {
+				b := append([]byte(nil), m.Mem[canvas:canvas+64000]...)
+				cur.AfterSHA = sha141(b)
+				// 目標165：只替帶陰影色 47／128 的段落或 24 字以上的字串（對話框候選）保存印前／印後畫布與色盤，避免狀態欄短字串灌爆輸出。
+				if cur.Colors[47] > 0 || cur.Colors[128] > 0 || len(cur.Text) >= 24 {
+					must141(os.WriteFile(fmt.Sprintf("%s.print-%d.before.canvas", *out, cur.Start), cur.before, 0644))
+					must141(os.WriteFile(fmt.Sprintf("%s.print-%d.after.canvas", *out, cur.Start), b, 0644))
+					must141(os.WriteFile(fmt.Sprintf("%s.print-%d.pal", *out, cur.Start), m.DAC[:], 0644))
+				}
+				cur.before = nil
+			}
+		}
+		if m.Steps != target {
+			panic("原版提前結束")
+		}
+	}
+	for _, e := range replay.Inputs {
+		if e.Step >= stop {
+			break
+		}
+		advance(e.Step)
+		switch e.Kind {
+		case "move":
+			d.MoveMouse(e.X, e.Y)
+		case "press":
+			d.PressMouse(e.Button)
+		case "release":
+			d.ReleaseMouse(e.Button)
+		case "enter":
+			if !d.PushKeyNamed("Return") {
+				panic("dosgolem 缺少 Return")
+			}
+		case "backspace", "escape", "left", "right", "up", "down":
+			name := map[string]string{"backspace": "Backspace", "escape": "Escape", "left": "Left", "right": "Right", "up": "Up", "down": "Down"}[e.Kind]
+			if !d.PushKeyNamed(name) {
+				panic("dosgolem 缺少 " + name)
+			}
+		case "text":
+			if !d.PushText(e.Text) {
+				panic("dosgolem 拒絕字元")
+			}
+		case "key":
+			k, ok := biosKeyWords[e.Text]
+			if !ok {
+				panic("未知鍵名 " + e.Text)
+			}
+			d.PushKey(golem.Key{Scan: uint8(k >> 8), ASCII: uint8(k)})
+		default:
+			panic("非法輸入事件")
+		}
+	}
+	advance(stop)
+	must141(os.WriteFile(*out+".final.idx", m.Indexed(), 0644))
+	must141(os.WriteFile(*out+".final.pal", m.DAC[:], 0644))
+	state := map[string]any{"steps": m.Steps, "cycles": m.CPU.Cycles, "ticks": m.Ticks, "frames": m.Frames,
+		"registers": m.CPU.R, "segments": m.CPU.Seg, "ip": m.CPU.IP, "flags": m.CPU.Flags,
+		"memory_sha256": sha141(m.Mem), "indexed_sha256": sha141(m.Indexed()),
+		"palette_sha256": sha141(m.DAC[:]), "canvas_sha256": sha141(m.Mem[canvas : canvas+64000])}
+	result := map[string]any{"version": "goal165-dialogs-v1", "control": *control,
+		"address_space": "DOS real-mode CS:IP; 20-bit linear RAM; 320x200 indexed canvas; file offsets",
+		"input_sha256":  sha141(inputBytes), "input_hashes": wants, "window": []uint64{start, stop},
+		"prints": prints, "frames": frames, "other_writes": otherWrites, "other_boxes": otherBoxes, "opened": d.Opened, "state": state}
+	b, err := json.Marshal(result)
+	must141(err)
+	must141(os.WriteFile(*out+".json", append(b, '\n'), 0644))
+	fmt.Printf("對話框探針：印字 %d、畫格變化 %d、狀態 %s\n", len(prints), len(frames), state["memory_sha256"])
+}
+
+// 與 tools/window_prototype.go 相同的標準 PC BIOS 鍵字（目標163）。
+var letterScanCodes = [26]uint8{0x1E, 0x30, 0x2E, 0x20, 0x12, 0x21, 0x22, 0x23, 0x17, 0x24, 0x25, 0x26, 0x32,
+	0x31, 0x18, 0x19, 0x10, 0x13, 0x1F, 0x14, 0x16, 0x2F, 0x11, 0x2D, 0x15, 0x2C}
+
+var biosKeyWords = func() map[string]uint16 {
+	w := map[string]uint16{"home": 0x4700, "end": 0x4F00, "pgup": 0x4900, "pgdn": 0x5100,
+		"insert": 0x5200, "delete": 0x5300, "tab": 0x0F09,
+		"kp7": 0x4700, "kp8": 0x4800, "kp9": 0x4900, "kp4": 0x4B00, "kp5": 0x4C00, "kp6": 0x4D00,
+		"kp1": 0x4F00, "kp2": 0x5000, "kp3": 0x5100, "kp0": 0x5200, "kpdot": 0x5300}
+	for i := 0; i < 10; i++ {
+		n := fmt.Sprint(i + 1)
+		w["f"+n] = uint16(0x3B+i) << 8
+		w["shift-f"+n] = uint16(0x54+i) << 8
+		w["ctrl-f"+n] = uint16(0x5E+i) << 8
+		w["alt-f"+n] = uint16(0x68+i) << 8
+	}
+	for i, scan := range letterScanCodes {
+		c := string(rune('a' + i))
+		w["alt-"+c] = uint16(scan) << 8
+		w["ctrl-"+c] = uint16(scan)<<8 | uint16(i+1)
+	}
+	return w
+}()
