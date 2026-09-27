@@ -315,8 +315,12 @@ func (g *windowGame) Update() error {
 			stage = "nations"
 		}
 	}
-	dumpJSON(g.out+".status.tmp", map[string]any{"step": g.m.Steps, "stage": stage, "frame": g.record,
-		"rejected_input_count": len(g.rejected)})
+	status := map[string]any{"step": g.m.Steps, "stage": stage, "frame": g.record,
+		"rejected_input_count": len(g.rejected)}
+	if frontendStatusExtra != nil {
+		status["dialog"] = frontendStatusExtra // 目標167：最近一段訊息框印字
+	}
+	dumpJSON(g.out+".status.tmp", status)
 	must(os.Rename(g.out+".status.tmp", g.out+".status.json"))
 	return nil
 }

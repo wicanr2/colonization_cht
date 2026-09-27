@@ -10,6 +10,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 	"syscall"
 
 	golem "github.com/wicanr2/dosgolem"
@@ -68,6 +69,14 @@ func main() {
 	control := flag.Bool("control", false, "無讀寫監看的同輸入控制")
 	from := flag.Uint64("from", 76000000, "觀測起點（目標146：靜態文字普查自 10M 起）")
 	snapEvery := flag.Uint64("snap-every", 0, "目標165：每隔多少步另存一次索引畫面與色盤（0 為不存）")
+	// 目標167：自動應答。輸入檔用完後，對話框印完即依文字選按鍵，閒置時依序送出玩家意圖鍵；產生的輸入另存。
+	autoKeys := flag.String("auto-keys", "", "閒置時依序送出的鍵（逗號分隔：kp4、enter、down、text:b 等）")
+	autoAnswers := flag.String("auto-answers", "", "對話框應答：文字片段=鍵+鍵;…（未列者按 enter）")
+	autoIdle := flag.Uint64("auto-idle", 15000000, "閒置多少步送下一個意圖鍵")
+	autoDelay := flag.Uint64("auto-delay", 4000000, "對話框印完後多少步應答")
+	autoEnd := flag.Uint64("auto-end", 0, "自動應答的終點步數（0 為不啟用）")
+	autoFrom := flag.Uint64("auto-from", 0, "意圖鍵最早在此步數後送出")
+	wavOut := flag.Bool("wav", false, "目標168：開啟 OPL3 合成並把整段聲音寫成 <out>.wav")
 	flag.Parse()
 	if *inputs == "" || *out == "" {
 		panic("必須指定 inputs 與 out")
@@ -93,6 +102,9 @@ func main() {
 	inputBytes := file141(*inputs)
 	var replay replay141
 	must141(json.Unmarshal(inputBytes, &replay))
+	if *autoEnd > 0 {
+		replay.End = *autoEnd
+	}
 	m := golem.New()
 	must141(m.LoadEXE(file141(filepath.Join(*root, "OPENING.EXE"))))
 	m.Write8(uint32(golem.PSPSeg)*16+0x80, 2)
@@ -101,10 +113,21 @@ func main() {
 	d.Install()
 	defer d.Close()
 	m.SetSoundBlasterPro(true)
+	if *wavOut {
+		m.EnableOPLSynth(true)
+	}
 	const canvas uint32 = 0x2cae0
 	// @BUILD1 約在 78～89M 印字；最後一張字幕之後 1225.4M 才有玩家左移。
 	start := *from
 	stop := uint64(1 << 62)
+	dialogPending, dialogText, dialogAt := false, "", uint64(0)
+	// 目標167：像對話框的段落（有陰影色，或畫面中央十字以上的段落）印完即等待應答。
+	markDialog := func(p *print141) {
+		if p.Colors[47] > 0 || p.Colors[128] > 0 || (len(p.Chars) >= 10 && p.MinY > 8 && p.MaxX < 240) {
+			dialogPending, dialogAt = true, m.Steps
+			dialogText += string(p.Text) + " "
+		}
+	}
 	if replay.End > start && replay.End < stop {
 		stop = replay.End
 	}
@@ -136,6 +159,7 @@ func main() {
 				// 目標165：上一段尚未等到印後就被接手（例如正文後緊接選項），此刻畫布即其印後。
 				if cur != nil && cur.before != nil && (cur.Colors[47] > 0 || cur.Colors[128] > 0) {
 					cur.AfterSHA = sha141(b)
+					markDialog(cur)
 					must141(os.WriteFile(fmt.Sprintf("%s.print-%d.before.canvas", *out, cur.Start), cur.before, 0644))
 					must141(os.WriteFile(fmt.Sprintf("%s.print-%d.after.canvas", *out, cur.Start), b, 0644))
 					must141(os.WriteFile(fmt.Sprintf("%s.print-%d.pal", *out, cur.Start), m.DAC[:], 0644))
@@ -214,9 +238,18 @@ func main() {
 				"canvas": sha141(base), "vga": sha141(indexed), "same": same, "pal": sha141(m.DAC[:])})
 		})
 	}
+	var pitChanges [][2]uint64
+	lastDiv := uint32(0)
 	advance := func(target uint64) {
 		for m.Steps < target && !d.Exited && !m.CPU.Halted {
 			must141(m.Step())
+			// 目標168：每十萬步記一次 PIT 分頻變化（判斷音樂計時器頻率）。
+			if m.Steps%100000 == 0 {
+				if div := m.PITDivisor(); div != lastDiv {
+					pitChanges = append(pitChanges, [2]uint64{m.Steps, uint64(div)})
+					lastDiv = div
+				}
+			}
 			if *snapEvery > 0 && m.Steps >= start && m.Steps%*snapEvery == 0 {
 				must141(os.WriteFile(fmt.Sprintf("%s.snap-%d.idx", *out, m.Steps), m.Indexed(), 0644))
 				must141(os.WriteFile(fmt.Sprintf("%s.snap-%d.pal", *out, m.Steps), m.DAC[:], 0644))
@@ -225,6 +258,7 @@ func main() {
 			if cur != nil && cur.AfterSHA == "" && m.Steps-cur.Last == 200000 {
 				b := append([]byte(nil), m.Mem[canvas:canvas+64000]...)
 				cur.AfterSHA = sha141(b)
+				markDialog(cur)
 				// 目標165：只替帶陰影色 47／128 的段落或 24 字以上的字串（對話框候選）保存印前／印後畫布與色盤，避免狀態欄短字串灌爆輸出。
 				if cur.Colors[47] > 0 || cur.Colors[128] > 0 || len(cur.Text) >= 24 {
 					must141(os.WriteFile(fmt.Sprintf("%s.print-%d.before.canvas", *out, cur.Start), cur.before, 0644))
@@ -238,11 +272,7 @@ func main() {
 			panic("原版提前結束")
 		}
 	}
-	for _, e := range replay.Inputs {
-		if e.Step >= stop {
-			break
-		}
-		advance(e.Step)
+	apply := func(e input141) {
 		switch e.Kind {
 		case "move":
 			d.MoveMouse(e.X, e.Y)
@@ -273,17 +303,142 @@ func main() {
 			panic("非法輸入事件")
 		}
 	}
+	lastInput := uint64(0)
+	for _, e := range replay.Inputs {
+		if e.Step >= stop {
+			break
+		}
+		advance(e.Step)
+		apply(e)
+		lastInput = e.Step
+	}
+	if *autoEnd > 0 {
+		toInput := func(name string) input141 {
+			switch {
+			case strings.HasPrefix(name, "text:"):
+				return input141{Kind: "text", Text: strings.TrimPrefix(name, "text:")}
+			case name == "enter" || name == "down" || name == "up" || name == "left" || name == "right" || name == "escape" || name == "backspace":
+				return input141{Kind: name}
+			default:
+				return input141{Kind: "key", Text: name}
+			}
+		}
+		generated := []input141{}
+		send := func(name string) {
+			e := toInput(name)
+			e.Step = m.Steps
+			apply(e)
+			generated = append(generated, e)
+			lastInput = m.Steps
+		}
+		var intents []string
+		if *autoKeys != "" {
+			intents = strings.Split(*autoKeys, ",")
+		}
+		answers := [][2]string{}
+		for _, a := range strings.Split(*autoAnswers, ";") {
+			if k, v, ok := strings.Cut(a, "="); ok {
+				answers = append(answers, [2]string{k, v})
+			}
+		}
+		dialogPending, dialogText = false, ""
+		for m.Steps+100000 <= *autoEnd && !d.Exited && !m.CPU.Halted {
+			advance(m.Steps + 100000)
+			if dialogPending && m.Steps-dialogAt >= *autoDelay {
+				keys := []string{"enter"}
+				for _, a := range answers {
+					if strings.Contains(dialogText, a[0]) {
+						keys = strings.Split(a[1], "+")
+					}
+				}
+				fmt.Printf("應答 %d：%q → %v\n", m.Steps, dialogText, keys)
+				for i, k := range keys {
+					if i > 0 {
+						advance(m.Steps + 1000000)
+					}
+					send(k)
+				}
+				dialogPending, dialogText = false, ""
+			} else if !dialogPending && m.Steps >= *autoFrom && m.Steps-lastInput >= *autoIdle && len(intents) > 0 {
+				fmt.Printf("意圖 %d：%s\n", m.Steps, intents[0])
+				send(intents[0])
+				intents = intents[1:]
+			}
+		}
+		all := append(append([]input141{}, replay.Inputs...), generated...)
+		b, err := json.MarshalIndent(map[string]any{"inputs": all, "end": m.Steps}, "", "  ")
+		must141(err)
+		must141(os.WriteFile(*out+".auto.inputs.json", append(b, '\n'), 0644))
+		stop = m.Steps
+	}
 	advance(stop)
+	if *wavOut {
+		pcm := m.DrainAudio()
+		rate := m.AudioRate()
+		data := make([]byte, 44+len(pcm)*2)
+		copy(data, "RIFF")
+		le := func(off int, v uint32, n int) {
+			for i := 0; i < n; i++ {
+				data[off+i] = byte(v >> (8 * i))
+			}
+		}
+		le(4, uint32(36+len(pcm)*2), 4)
+		copy(data[8:], "WAVEfmt ")
+		le(16, 16, 4)
+		le(20, 1, 2)
+		le(22, 2, 2)
+		le(24, rate, 4)
+		le(28, rate*4, 4)
+		le(32, 4, 2)
+		le(34, 16, 2)
+		copy(data[36:], "data")
+		le(40, uint32(len(pcm)*2), 4)
+		for i, v := range pcm {
+			le(44+i*2, uint32(uint16(v)), 2)
+		}
+		must141(os.WriteFile(*out+".wav", data, 0644))
+	}
 	must141(os.WriteFile(*out+".final.idx", m.Indexed(), 0644))
 	must141(os.WriteFile(*out+".final.pal", m.DAC[:], 0644))
 	state := map[string]any{"steps": m.Steps, "cycles": m.CPU.Cycles, "ticks": m.Ticks, "frames": m.Frames,
 		"registers": m.CPU.R, "segments": m.CPU.Seg, "ip": m.CPU.IP, "flags": m.CPU.Flags,
 		"memory_sha256": sha141(m.Mem), "indexed_sha256": sha141(m.Indexed()),
 		"palette_sha256": sha141(m.DAC[:]), "canvas_sha256": sha141(m.Mem[canvas : canvas+64000])}
+	bank1, firstOPL, lastOPL := 0, uint64(0), uint64(0)
+	for i, w := range m.OPL {
+		if w.Bank == 1 {
+			bank1++
+		}
+		if i == 0 {
+			firstOPL = w.Step
+		}
+		lastOPL = w.Step
+	}
+	// 目標168：完整 OPL 寫入序列（步數、組、暫存器、值），供離線合成與對拍。
+	oplSeq := make([][4]uint64, 0, len(m.OPL))
+	for _, w := range m.OPL {
+		oplSeq = append(oplSeq, [4]uint64{w.Step, uint64(w.Bank), uint64(w.Reg), uint64(w.Val)})
+	}
+	ob, err := json.Marshal(oplSeq)
+	must141(err)
+	must141(os.WriteFile(*out+".opl.json", ob, 0644))
+	// 目標168：Sound Blaster DSP 與 DMA 埠的寫入統計（判斷是否播放數位音效）。
+	sbPorts := map[string]int{}
+	dspCmds := [][2]uint64{}
+	for _, w := range m.PortLog {
+		if (w.Port >= 0x220 && w.Port <= 0x22f) || w.Port <= 0x0f || (w.Port >= 0x80 && w.Port <= 0x8f) {
+			sbPorts[fmt.Sprintf("%03X", w.Port)]++
+			if w.Port == 0x22c && len(dspCmds) < 200 {
+				dspCmds = append(dspCmds, [2]uint64{w.Step, uint64(w.Val)})
+			}
+		}
+	}
+	audio := map[string]any{"sb_ports": sbPorts, "dsp_writes": dspCmds, "pit_changes": pitChanges, "irq0_every": m.IRQ0Every, "opl_writes": len(m.OPL),
+		"opl_bank1_writes": bank1, "first_opl_step": firstOPL, "last_opl_step": lastOPL, "ticks": m.Ticks}
 	result := map[string]any{"version": "goal165-dialogs-v1", "control": *control,
 		"address_space": "DOS real-mode CS:IP; 20-bit linear RAM; 320x200 indexed canvas; file offsets",
 		"input_sha256":  sha141(inputBytes), "input_hashes": wants, "window": []uint64{start, stop},
-		"prints": prints, "frames": frames, "other_writes": otherWrites, "other_boxes": otherBoxes, "opened": d.Opened, "state": state}
+		"prints": prints, "frames": frames, "other_writes": otherWrites, "other_boxes": otherBoxes, "opened": d.Opened, "state": state, "audio": audio}
 	b, err := json.Marshal(result)
 	must141(err)
 	must141(os.WriteFile(*out+".json", append(b, '\n'), 0644))

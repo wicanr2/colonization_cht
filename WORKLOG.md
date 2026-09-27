@@ -2703,3 +2703,15 @@
 - 真 GUI 前兩次截圖時機錯：固定步數截圖在步數對齊的點擊後落在畫面出現之前（主選單 23.6M 才出現、載入訊息晚於 14M）。改為依前端狀態檔的畫面階段截圖並記錄步數，重播與檢查器共用這份步數；前兩次嘗試封存在 `workplace/reports/goal166-spots/attempts/`。
 - 靜態覆蓋原本只處理「淺底深字」，載入訊息是深色木紋上的亮綠字，改以清冊的原文色號集合判斷；製作名單字模重烘後像素不變。
 - 目標151 檢查器原以清冊列數比對製作名單欄位數，改為只數製作名單前綴的列。
+
+## 2026-09-28：目標167 其餘教學提示（#43）
+
+- 固定步數的 GUI 腳本在遊戲自行延遲後與畫面脫節，改寫 `tools/gui_auto.py` 依前端狀態檔的對話框文字應答；過程嘗試封存在 `workplace/reports/goal167-tutorial/attempts/`。
+- `@TUTORIAL2` 首次回原文（`ink-outside-box`）：顧問肖像擋住首字左側的框線掃描，改由最後一行起掃。
+- `Caravel` 在術語表與 NAMES 對照譯名不同而查無，改為定稿術語優先。
+- `@TUTORIAL5`、`11` 的母港 `London` 只在譯稿 NAMES.TXT 列，未進變數對照；補上並加單元測試。
+- 重播前兩次把反向對照圖集目錄 `neg-nohelp-atlas` 連同舊收據一起移進 attempts，重播腳本前置檢查失敗；移回後重跑。
+- 前端以 `workplace/dosgolem` 的 `colonization-audio` 分支（`a3a5609`，含未啟用的 OPL 合成）建置；前端不呼叫 `EnableOPLSynth`，驗證矩陣記錄此提交。
+- 回歸：六點回歸以新前端對 `goal161-regress-a` PASS（`workplace/reports/goal167-regress/`）；驗證矩陣 PASS 19。
+- 流程勘誤：OPL 合成（#47）的移植與機器接線在規格037 READY 之前完成，違反規格閘門；已補規格並以驗收決定是否保留。子代理曾在主機執行一次空的 python heredoc（無輸出、無寫入），違反「分析只在容器」；之後派工 prompt 明列此限制。
+- 驗證：真 GUI、中英重播、兩項負例、缺原版 SKIP 77、`go vet`／`go test` 通過。容器皆 `--rm`。

@@ -37,7 +37,9 @@ type dialogFont struct {
 type dialogCatalog struct {
 	templates []dialogTemplate
 	lines     []dialogTemplate  // 目標166：逐行清單比對用的單行模板
-	terms     map[string]string // 英文→譯名；兩處譯名衝突者為空字串（視為查無）
+	seen      map[string]bool   // 已載入的訊息鍵（跨語料檢查重複）
+	terms     map[string]string // 英文→譯名；定稿譯名彼此衝突者為空字串（視為查無）
+	canon     map[string]bool   // 目標167：來自定稿譯名表（優先於 NAMES.TXT 對照）的詞
 	fonts     map[int]*dialogFont
 }
 
@@ -94,12 +96,24 @@ func loadDialogCatalog(corpus, terms []byte, game []byte, gameSHA string, exclud
 	if fmt.Sprintf("%x", sha256.Sum256(game)) != gameSHA {
 		return nil, fmt.Errorf("GAME.TXT 版本不符")
 	}
+	cat := &dialogCatalog{terms: map[string]string{}, seen: map[string]bool{}}
+	if err := cat.addCorpus(corpus, game, gameSHA, exclude); err != nil {
+		return nil, err
+	}
+	for _, r := range splitTSV(terms) {
+		cat.addTerm(r["en"], r["zh"])
+	}
+	return cat, nil
+}
+
+// addCorpus 加入一份語料 TSV 的 GAME.TXT 模板（語料清冊或 help 雙語清冊，欄名相同）；
+// NAMES.TXT 列另作變數譯名對照。每列以原檔位移、長度與片段雜湊核對。
+func (cat *dialogCatalog) addCorpus(corpus, game []byte, gameSHA string, exclude map[string]bool) error {
 	rows := splitTSV(corpus)
 	if rows == nil {
-		return nil, fmt.Errorf("語料清冊欄位不符")
+		return fmt.Errorf("語料清冊欄位不符")
 	}
-	cat := &dialogCatalog{terms: map[string]string{}}
-	seen := map[string]bool{}
+	seen := cat.seen
 	for _, r := range rows {
 		if r["source_file"] != "GAME.TXT" {
 			if r["source_file"] == "NAMES.TXT" {
@@ -113,14 +127,14 @@ func loadDialogCatalog(corpus, terms []byte, game []byte, gameSHA string, exclud
 		off, err1 := strconv.ParseInt(r["text_offset"], 0, 64)
 		n, err2 := strconv.Atoi(r["text_byte_length"])
 		if err1 != nil || err2 != nil || off < 0 || int(off)+n > len(game) {
-			return nil, fmt.Errorf("位移不符：%s", r["message_id"])
+			return fmt.Errorf("位移不符：%s", r["message_id"])
 		}
 		raw := game[off : int(off)+n]
 		if fmt.Sprintf("%x", sha256.Sum256(raw)) != r["source_bytes_sha256"] {
-			return nil, fmt.Errorf("片段雜湊不符：%s", r["message_id"])
+			return fmt.Errorf("片段雜湊不符：%s", r["message_id"])
 		}
 		if seen[r["message_id"]] {
-			return nil, fmt.Errorf("重複鍵：%s", r["message_id"])
+			return fmt.Errorf("重複鍵：%s", r["message_id"])
 		}
 		seen[r["message_id"]] = true
 		parts := strings.SplitN(string(raw), "\r\n\r\n", 2)
@@ -158,10 +172,7 @@ func loadDialogCatalog(corpus, terms []byte, game []byte, gameSHA string, exclud
 			}
 		}
 	}
-	for _, r := range splitTSV(terms) {
-		cat.addTerm(r["en"], r["zh"])
-	}
-	return cat, nil
+	return nil
 }
 
 // makeDialogTemplate 把原文正規化成整句比對用的正規式：去 {}、^，換行當空白並壓縮空白。
@@ -184,7 +195,8 @@ func makeDialogTemplate(id, body, zh string, centered bool) dialogTemplate {
 	return dialogTemplate{id: id, re: regexp.MustCompile(pattern), names: names, zh: zh, centered: centered}
 }
 
-// addDraft 由譯稿 TSV（draft.zh-Hant.tsv）加入逐行模板：GAME.TXT 單行列與 MENU.TXT 選單項目。
+// addDraft 由譯稿 TSV（draft.zh-Hant.tsv）加入逐行模板：GAME.TXT 單行列與 MENU.TXT 選單項目；
+// NAMES.TXT 列另作變數譯名對照。
 // 每列以原檔位移與片段雜湊核對；exclude 內是已由專屬欄位處理的鍵。
 // 含熱鍵標記 ~ 或 # 的列顯示方式未取證，本輪不採用。
 func (c *dialogCatalog) addDraft(draft []byte, files map[string][]byte, exclude map[string]bool) error {
@@ -207,6 +219,11 @@ func (c *dialogCatalog) addDraft(draft []byte, files map[string][]byte, exclude 
 			return fmt.Errorf("%s 片段雜湊不符：%s", r["source_file"], r["candidate_id"])
 		}
 		zh := strings.TrimSpace(r["zh_hant"])
+		if r["source_file"] == "NAMES.TXT" {
+			// 目標167：譯稿的 NAMES.TXT 單詞（例如歐洲母港名）作變數譯名對照，優先序低於定稿譯名。
+			c.addNamePairs(raw, zh)
+			continue
+		}
 		if zh == "" || strings.Contains(raw, "\r\n") || strings.ContainsAny(raw, "~#@^") || strings.ContainsAny(zh, "~#^") {
 			continue
 		}
@@ -233,16 +250,31 @@ func (c *dialogCatalog) addValues(tsv []byte, files map[string][]byte) error {
 	return nil
 }
 
+// addTerm 加入定稿譯名：優先於 NAMES.TXT 對照；定稿譯名彼此衝突即視為查無。
 func (c *dialogCatalog) addTerm(en, zh string) {
 	en, zh = strings.TrimSpace(en), strings.TrimSpace(zh)
 	if en == "" || zh == "" {
 		return
 	}
-	if old, ok := c.terms[en]; ok && old != zh {
+	if c.canon == nil {
+		c.canon = map[string]bool{}
+	}
+	if old, ok := c.terms[en]; ok && c.canon[en] && old != zh {
 		c.terms[en] = ""
 		return
 	}
-	c.terms[en] = zh
+	c.terms[en], c.canon[en] = zh, true
+}
+
+// addWeakTerm 加入 NAMES.TXT 對照：只補定稿譯名沒有的詞；對照彼此衝突時保留先出現者。
+func (c *dialogCatalog) addWeakTerm(en, zh string) {
+	en, zh = strings.TrimSpace(en), strings.TrimSpace(zh)
+	if en == "" || zh == "" {
+		return
+	}
+	if _, ok := c.terms[en]; !ok {
+		c.terms[en] = zh
+	}
 }
 
 // addNamePairs 只在原文與譯文逗號數相同時逐欄配對含英文字母的欄位。
@@ -253,7 +285,7 @@ func (c *dialogCatalog) addNamePairs(en, zh string) {
 	}
 	for i := range e {
 		if strings.IndexFunc(e[i], unicode.IsLetter) >= 0 {
-			c.addTerm(e[i], z[i])
+			c.addWeakTerm(e[i], z[i])
 		}
 	}
 }
@@ -593,16 +625,31 @@ func (d *dialogRuntime) onWrite(i int, old, value byte, text, cursor bool) {
 	}
 }
 
-// scanDialogBox 由框內一點向左、右、上掃描到色號 0 的外框。
-func scanDialogBox(canvas []byte, x, y int) (l, t, r int) {
-	l, r, t = x, x, y
-	for l > 0 && canvas[y*320+l] != 0 {
+// dialogLike 判斷一段逐字印字像不像等待玩家應答的訊息框：有陰影色，或在地圖區（頂列與右側狀態欄以外）十字以上。
+// 只供真 GUI 自動應答與探勘使用，不影響覆蓋。
+func (r *dialogRun) dialogLike() bool {
+	var ink image.Rectangle
+	n := 0
+	for _, ch := range r.chars {
+		if !ch.box.Empty() {
+			ink = ink.Union(ch.box)
+			n++
+		}
+	}
+	return r.shadowWritten || (n >= 10 && ink.Min.Y > 8 && ink.Max.X <= 240)
+}
+
+// scanDialogBox 掃描色號 0 的外框：左右框沿 (hx,hy) 所在列、上框沿 tx 欄由 ty 往上。
+// 目標167：顧問肖像常壓在框的左上，所以呼叫端以最後一行（肖像下方）掃左右、以首行最右側往上掃。
+func scanDialogBox(canvas []byte, hx, hy, tx, ty int) (l, t, r int) {
+	l, r, t = hx, hx, ty
+	for l > 0 && canvas[hy*320+l] != 0 {
 		l--
 	}
-	for r < 319 && canvas[y*320+r] != 0 {
+	for r < 319 && canvas[hy*320+r] != 0 {
 		r++
 	}
-	for t > 0 && canvas[t*320+x] != 0 {
+	for t > 0 && canvas[t*320+tx] != 0 {
 		t--
 	}
 	return l, t, r
@@ -729,24 +776,20 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 	case why == "" && t.centered:
 		// 置中段落（例如國王接見）：沒有色號 0 外框，安全區取原版墨跡外擴 2 邏輯像素。
 		st.safe = ink.Inset(-2).Intersect(image.Rect(0, 0, 320, 200))
-		if !r.others.Empty() && r.others.Overlaps(st.safe) {
-			return nil, shown, "unexpected-writer-in-safe"
-		}
 		st.shadow, st.normal, st.accent, st.size = d.cat.centeredMasks(zh, st.safe.Dx()*4, st.safe.Dy()*4,
 			observedPitch(lines, 10)*4, shadowC != 0)
 	case why == "":
 		if !r.shadowWritten {
 			return nil, shown, "no-box-style"
 		}
-		c0 := r.chars[first].box
-		l, top, rt := scanDialogBox(before, c0.Min.X, (c0.Min.Y+c0.Max.Y)/2)
+		last := lines[len(lines)-1].box
+		l, top, rt := scanDialogBox(before, last.Min.X, (last.Min.Y+last.Max.Y)/2, lines[0].box.Max.X-2, lines[0].box.Min.Y)
 		st.safe = image.Rect(l+3, top+3, rt-3, ink.Max.Y+2)
 		if l == 0 || top == 0 || rt == 319 || !ink.In(st.safe) {
 			return nil, shown, "ink-outside-box"
 		}
-		if !r.others.Empty() && r.others.Overlaps(st.safe) {
-			return nil, shown, "unexpected-writer-in-safe"
-		}
+		// 目標167：印字期間其他寫入者（例如顧問肖像壓在框上）不撤銷；逐點以最後寫入者重建印前底圖，
+		// 只還原最後由改色常式寫下的像素，肖像像素保留原版印後值。
 		st.shadow, st.normal, st.accent, st.size = d.cat.dialogMasks(zh, st.safe.Dx()*4, st.safe.Dy()*4)
 	case why == "no-template":
 		// 逐行清單：每一行都必須各自唯一命中；任何一行不中即整段回原文。

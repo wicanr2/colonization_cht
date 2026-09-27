@@ -40,6 +40,10 @@ var versions = map[string]string{
 
 // 視窗前端由另外連結的檔案註冊；單獨建置此驗證器時不引入圖形依賴。
 var frontendFrameSink func(*image.RGBA, map[string]any)
+
+// frontendStatusExtra 由轉譯層填寫、視窗前端併入狀態檔（目標167：最近一段訊息框印字）。
+var frontendStatusExtra map[string]any
+
 var frontendRunner func(*golem.Machine, *golem.DOS, func(string), string)
 
 func must(err error) {
@@ -1901,17 +1905,24 @@ func main() {
 				exclude[f.id] = true
 			}
 		}
+		// 目標167：help 雙語清冊的教學提示也進通用引擎；--tutorial-help-a 開啟時首則仍由專屬欄位處理。
+		helpExclude := map[string]bool{}
+		if help != nil {
+			helpExclude[help.id] = true
+		}
+		helpBytes := read(*helpCatalog)
 		draftBytes, valuesBytes := read(*dialogDraft), read(*dialogValues)
-		files := map[string][]byte{"GAME.TXT": rawSource, "VICEROY.EXE": read(filepath.Join(*root, "VICEROY.EXE"))}
+		files := map[string][]byte{"GAME.TXT": rawSource, "NAMES.TXT": namesSource, "VICEROY.EXE": read(filepath.Join(*root, "VICEROY.EXE"))}
 		if b, err := os.ReadFile(filepath.Join(*root, "MENU.TXT")); err == nil {
 			files["MENU.TXT"] = b
 		}
-		if dlg.cat.addDraft(draftBytes, files, exclude) != nil || dlg.cat.addValues(valuesBytes, files) != nil {
+		if dlg.cat.addCorpus(helpBytes, rawSource, versions["GAME.TXT"], helpExclude) != nil ||
+			dlg.cat.addDraft(draftBytes, files, exclude) != nil || dlg.cat.addValues(valuesBytes, files) != nil {
 			dlg.fontReason = "missing-or-invalid-translation"
 		} else if b, err := os.ReadFile(*dialogAtlas); err != nil {
 			dlg.fontReason = "font-mask-unavailable"
 		} else {
-			dialogBind["draft"], dialogBind["values"] = hash(draftBytes), hash(valuesBytes)
+			dialogBind["draft"], dialogBind["values"], dialogBind["help"] = hash(draftBytes), hash(valuesBytes), hash(helpBytes)
 			dlg.fontReason = dlg.cat.loadDialogAtlas(b, fontHash, dialogBind)
 		}
 	}
@@ -2023,8 +2034,17 @@ func main() {
 		events = append(events, map[string]any{"candidate_id": dlg.cur.id, "stage": "expired", "step": m.Steps, "reason": reason})
 		dlg.cur.phase, dlg.cur.patch, dlg.cur.afterSafe, dlg.cur.before = "expired", nil, nil, nil
 	}
+	dialogSeq := 0
 	dialogFinish := func(r *dialogRun) {
 		st, shown, why := dlg.finish(r, canvas(), m.Steps)
+		// 目標167：公開最近一段像訊息框的印字，供真 GUI 自動應答依畫面行動（不影響原版與覆蓋）。
+		if r != nil && r.dialogLike() {
+			if shown == "" {
+				shown = dialogShownText(r.chars)
+			}
+			dialogSeq++
+			frontendStatusExtra = map[string]any{"dialog_seq": dialogSeq, "dialog_step": m.Steps, "dialog_text": shown}
+		}
 		if st == nil {
 			if why != "" {
 				dlg.misses[why+"\t"+shown]++

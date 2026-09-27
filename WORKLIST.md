@@ -49,8 +49,8 @@
 | #40 | completed | [GUI 驗證腳本改為步數對齊](https://github.com/wicanr2/colonization_cht/issues/40) | — | 點擊序列以步數對齊；高負載下三國選國各重跑兩次都正確。 |
 | #41 | completed | [通用對話框整句中文覆蓋引擎](https://github.com/wicanr2/colonization_cht/issues/41) | `translation-corpus` | READY 規格；至少三類真實訊息正常路徑顯示中文，中英重播一致，負例回原文。 |
 | #42 | completed | [國王接見、GAME 下拉選單、載入訊息與版本字串](https://github.com/wicanr2/colonization_cht/issues/42) | `dialog-overlay-engine` | 四處各有 RE 證據、規格、真 GUI 與中英同輸入驗證。 |
-| #43 | planned | [其餘 23 則教學提示](https://github.com/wicanr2/colonization_cht/issues/43) | `dialog-overlay-engine` | 各則有正常路徑觸發證據與真 GUI／中英重播驗證，或記錄無法觸發原因。 |
-| #44 | planned | [殖民地、歐洲港口、報告與百科畫面](https://github.com/wicanr2/colonization_cht/issues/44) | `function-key-forwarding`, `dialog-overlay-engine` | 逐畫面普查、規格與真 GUI／中英同輸入收據。 |
+| #43 | completed | [其餘 23 則教學提示](https://github.com/wicanr2/colonization_cht/issues/43) | `dialog-overlay-engine` | 各則有正常路徑觸發證據與真 GUI／中英重播驗證，或記錄無法觸發原因。 |
+| #44 | planned | [殖民地、歐洲港口、報告與百科畫面](https://github.com/wicanr2/colonization_cht/issues/44) | `function-key-forwarding`, `dialog-overlay-engine` | 逐畫面普查、規格與真 GUI／中英同輸入收據；含目標167 移交的 @TUTORIAL3、4、6～10、12、15～19。 |
 | #45 | planned | [全可達文字普查與完成清冊](https://github.com/wicanr2/colonization_cht/issues/45) | — | 機器可讀清冊（畫面×文字來源×機制×狀態）與分類報表；後續畫面 Issue 依此驗收。 |
 | #46 | planned | [對話框選項列與輸入欄中文化](https://github.com/wicanr2/colonization_cht/issues/46) | `dialog-overlay-engine` | 規格與三種選項框、一種輸入框正常路徑中英同輸入驗證，負例回原文。 |
 | #47 | planned | [dosgolem：OPL2／OPL3 FM 合成（移植 ymfm）](https://github.com/wicanr2/colonization_cht/issues/47) | — | 決定性取樣輸出、對 ymfm 單元對拍、BSD-3 授權告知。 |

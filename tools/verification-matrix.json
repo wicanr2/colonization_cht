@@ -657,6 +657,44 @@
     "probe_goal151_replays.sh"
    ],
    "known_diffs": "改動圖檔會讓原版開場解碼失敗，故圖檔負例只跑到 2M 步（守門在載入時判定）"
+  },
+  {
+   "id": "tutorial-dialogs",
+   "path": "both",
+   "title": "其餘教學提示（顧問肖像木紋框）：@TUTORIAL2、5、11、13、14",
+   "specs": [
+    "035"
+   ],
+   "flags": [
+    "--dialog-a",
+    "--tutorial-help-a"
+   ],
+   "checker": "check_goal167_window.py",
+   "args": [
+    "--game",
+    "{game}",
+    "--reports",
+    "{reports}/goal167-tutorial"
+   ],
+   "dir": "goal167-tutorial",
+   "zh": [
+    "replay-zh"
+   ],
+   "control": [
+    "replay-control"
+   ],
+   "negative": [
+    "neg-noatlas",
+    "neg-nohelp"
+   ],
+   "gui_inputs": [
+    "gui-tutorial.inputs.json"
+   ],
+   "regenerate": [
+    "probe_goal167_gui.sh",
+    "probe_goal167_replays.sh"
+   ],
+   "known_diffs": "只驗本路徑觸發的五則；其餘 13 則與地圖編輯器說明移交 #44／#45"
   }
  ],
  "not_covered": [

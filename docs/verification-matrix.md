@@ -2,9 +2,9 @@
 
 由 `tools/verification_matrix.py` 依 `tools/verification-matrix.json` 產生；不要手改。收據只在已忽略的 `workplace/reports/`，本頁只列雜湊與數量。
 
-- dosgolem：`9dd36726eeaf9c1f3a745aabdcbb84413791d90f`
+- dosgolem：`a3a5609022cf708093a7377ab775b0be62bacc91`
 - 原版輸入（各收據記錄的檔案雜湊合併，同名檔衝突 0 個）：`GAME.TXT` `67a6b5e22d1a…`、`LABELS.TXT` `e4af0da201eb…`、`NAMES.TXT` `4bf5ba261f71…`、`OPENING.EXE` `3c08c4af3a70…`、`VICEROY.EXE` `a17ed64c2767…`
-- 結果：PASS 18、SKIP 0、FAIL 0；收據待重驗 0 列；原版輸入衝突 0；動態與靜態四類收據齊備：是
+- 結果：PASS 19、SKIP 0、FAIL 0；收據待重驗 0 列；原版輸入衝突 0；動態與靜態四類收據齊備：是
 
 「待重驗」表示該列收據早於現行譯文（目標156 改稿）：字模已重烘、全部旗標載入綁定通過，但真 GUI 與重播尚未依新譯文重跑。
 
@@ -30,6 +30,7 @@
 | 載入訊息、主選單版本字串、國王接見、GAME 下拉選單 | 兩者 | 034、036 | `check_goal166_window.py` | PASS | 1 | 1 | 1 | 2 | 1 | 1280x800 RGB | 只驗英國國王接見與 GAME 下拉選單 |
 | 全面回歸六點（主選單至旗卡、@BUILD1、遊戲選項、英格蘭介紹） | 兩者 | — | `check_regression.py` | PASS | 0 | 6 | 0 | 0 | 0 | 1280x800 RGB | 基準為目標161 以現行前端建立的回歸收據，兩次獨立重跑逐位元組相同 |
 | 原版版本不符 fail-closed（五個核心檔拒絕啟動、製作名單圖檔回原文）與新前端下靜態重播不變 | 兩者 | 034 | `check_goal153_slice.py` | PASS | 1 | 1 | 1 | 1 | 0 | 1280x800 RGB | 改動圖檔會讓原版開場解碼失敗，故圖檔負例只跑到 2M 步（守門在載入時判定） |
+| 其餘教學提示（顧問肖像木紋框）：@TUTORIAL2、5、11、13、14 | 兩者 | 035 | `check_goal167_window.py` | PASS | 1 | 1 | 1 | 2 | 1 | 1280x800 RGB | 只驗本路徑觸發的五則；其餘 13 則與地圖編輯器說明移交 #44／#45 |
 
 ## 未驗範圍
 

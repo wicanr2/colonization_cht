@@ -204,3 +204,33 @@ func TestAddDraft(t *testing.T) {
 		t.Fatal("版本不符應失敗")
 	}
 }
+
+func TestAddDraftNames(t *testing.T) {
+	names := []byte("Amsterdam\r\nLondon\r\n")
+	sum := fmt.Sprintf("%x", sha256.Sum256(names))
+	raw := names[11:17]
+	row := strings.Join([]string{"NAMES.TXT:a", "NAMES.TXT", sum, "0x0000000B", fmt.Sprintf("%x", sha256.Sum256(raw)), "6", "倫敦", "draft", ""}, "\t")
+	draft := "candidate_id\tsource_file\tsource_sha256\tbyte_offset\tsource_bytes_sha256\tsource_byte_length\tzh_hant\tstatus\tnotes\n" + row + "\n"
+	c := &dialogCatalog{terms: map[string]string{}}
+	c.addTerm("Amsterdam", "阿姆斯特丹")
+	if err := c.addDraft([]byte(draft), map[string][]byte{"NAMES.TXT": names}, nil); err != nil {
+		t.Fatal(err)
+	}
+	if c.terms["London"] != "倫敦" || len(c.lines) != 0 {
+		t.Fatalf("NAMES 列應成為變數對照而非逐行模板：%v %d", c.terms, len(c.lines))
+	}
+}
+
+func TestTermPriority(t *testing.T) {
+	c := &dialogCatalog{terms: map[string]string{}}
+	c.addNamePairs("Caravel, Galleon", "卡拉維爾帆船, 大帆船")
+	c.addTerm("Caravel", "輕帆船")
+	c.addNamePairs("Galleon", "蓋倫船")
+	if c.terms["Caravel"] != "輕帆船" || c.terms["Galleon"] != "大帆船" {
+		t.Fatalf("定稿譯名應優先、對照保留先出現者：%v", c.terms)
+	}
+	c.addTerm("Caravel", "別的譯名")
+	if c.terms["Caravel"] != "" {
+		t.Fatal("定稿譯名彼此衝突應視為查無")
+	}
+}

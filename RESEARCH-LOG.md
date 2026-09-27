@@ -4152,3 +4152,10 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **輸入與工具：**同目標161 的原版與隔離 dosgolem；`OPENING.TXT` SHA-256 `17b329d8…`；前端 `tools/live_menu.go` SHA-256 `918ff787…`、`tools/dialog_overlay.go` SHA-256 `b9dfd09b…`、`tools/window_prototype.go` SHA-256 `c770b5e0…`；靜態清冊 `0bd2b1ec…`、變數值表 `ff4bbb12…`；檢查器 `tools/check_goal166_window.py` SHA-256 `547c3734…`。
 - **已證實：**版本字串 `0D21:00C6` 逐字、色號 252（COLONIZATION）與 254，模板在 `GAME.TXT` 0x179；日期值 `7-Feb-95` 在 VICEROY.EXE 0x1E1B0。國王接見色號 0 與手寫體邊緣色 242（非陰影），行距 8。GAME 下拉選單色號 68、行距 8，印字期間 `0CBA:009C`／`0CBA:00CA`／`0CAE:00A8` 畫選單底，滑過時整份重印。載入訊息由 OPENING.EXE 印出、不走 `0D21:00C6`，色號 254／0／253，原版開啟 VICEROY.EXE 時仍顯示。
 - **已證實：**真 GUI 現場輸入 SHA-256 `4a2e8ac4…` 下四處中文，中英原版狀態一致（終點 `4c7f05f6…`），五張截圖與重播逐像素相同；六點回歸對 `goal161-regress-a` PASS。
+
+## 2026-09-28：目標167 其餘教學提示
+
+- **輸入與工具：**同目標166 的原版；隔離 dosgolem `colonization-audio` 分支 `a3a5609`（前端不啟用 OPL 合成）；前端 `tools/live_menu.go` SHA-256 `3b46b17f…`、`tools/dialog_overlay.go` SHA-256 `a4743794…`；檢查器 `tools/check_goal167_window.py` SHA-256 `ea773114…`；GUI 應答器 `tools/gui_auto.py` SHA-256 `771273e0…`。
+- **已證實：**教學提示與一般訊息同為 `0D21:00C6` 逐字、`0D21:012C` 改色、色號 0 外框的木紋框；印字期間顧問肖像由其他常式寫在框左上。真 GUI 現場輸入 SHA-256 `0ef8f2dd…` 下 `@TUTORIAL2`、`5`、`11`、`13`、`14` 中文，中英原版狀態一致（終點 `43b93a30…`）。
+- **已證實：**`@SEACOLONY`（海上按 B）的逐字寫入只在後台緩衝區（`0x2CAE0` 起的 64,000 位元組）；730.0M～745M 真 VGA 取樣未見對話框。
+- **未知：**`@SEACOLONY` 是否在其他時機顯示；`@TUTORIAL4`、`6`～`10`、`12`、`15`～`19` 的觸發條件（待 #44 取證）。
