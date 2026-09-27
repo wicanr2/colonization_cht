@@ -1,6 +1,6 @@
 # 目前脈絡
 
-目前真相：[目標162](docs/goals/162-release-preview.md)（#15）：RRSAL-1.0 授權、Cubic 11 授權告知、可重現的 Linux 技術預覽封包 `v.0.1.0-20260927` 與 smoke 通過；依使用者決定公開儲存庫並發布預覽版 Release。
+目前真相：[目標162](docs/goals/162-release-preview.md)（#15）：RRSAL-1.0 授權、Cubic 11 授權告知、可重現的 Linux 技術預覽封包 `v.0.1.0-20260927` 與 smoke 通過；儲存庫已公開，預覽版 Release `v.0.1.0-20260927` 已發布並下載核對雜湊。GitHub 上已無開放 Issue。
 
 目前真相：[目標161](docs/goals/161-formal-field-reverify.md)完成 #38：定稿譯名改稿後的正式欄位全部重驗 PASS，驗證矩陣 15 列 PASS、無待重驗；新回歸基準為 `goal161-regress-a`。剩下 #15（封裝、授權與發布，需使用者決定）。
 

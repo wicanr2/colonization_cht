@@ -1,6 +1,6 @@
 # 目標162：封裝、授權與技術預覽發布（Issue #15）
 
-狀態：進行中；開始：2026-09-27。對應 [Issue #15](https://github.com/wicanr2/colonization_cht/issues/15)。
+狀態：完成；開始與完成：2026-09-27。對應 [Issue #15](https://github.com/wicanr2/colonization_cht/issues/15)。
 
 ## 使用者決定（2026-09-27）
 
@@ -36,3 +36,8 @@
 
 - 沒有音效；鍵盤只轉送可列印字元、Backspace、Enter、Esc 與方向鍵。
 - 只驗 Linux x86_64；需要 X11／OpenGL。
+
+## 發布
+
+- 儲存庫已公開：https://github.com/wicanr2/colonization_cht
+- tag `v.0.1.0-20260927`（指向 `db5b7ab`），預覽版 Release：https://github.com/wicanr2/colonization_cht/releases/tag/v.0.1.0-20260927 ，附件只有 patch 封包與 `SHA256SUMS.json`；重新下載後封包 SHA-256 相符。
