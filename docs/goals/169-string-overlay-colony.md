@@ -1,6 +1,6 @@
 # 目標169：通用字串覆蓋與殖民地畫面（Issue #44 第一部分）
 
-狀態：進行中；開始：2026-09-28。對應 [Issue #44](https://github.com/wicanr2/colonization_cht/issues/44)，規格見[規格038](../spec/038-string-overlay-draft.md)。
+狀態：完成；2026-09-28。對應 [Issue #44](https://github.com/wicanr2/colonization_cht/issues/44)，規格見[規格038](../spec/038-string-overlay-draft.md)。
 
 ## 已知
 
@@ -23,3 +23,15 @@
 ## 停止線
 
 殖民地畫面內的操作（點建築、移動殖民者、貨物面板）、歐洲港口、報告與百科是 #44 後續目標。地圖上的城名標籤不走 `0D21:012C`，另行取證。
+
+## 結果
+
+- 規格038 READY 並限定 CONFORMED（殖民地首屏）；規格035 追加上框掃描附記（顧問肖像壓住上框中段時改取逐欄眾數）。
+- 真 GUI 建立 Jamestown，殖民地首屏與海上狀態欄字串中文，`@TUTORIAL4` 中文且關閉後殖民地字串自動恢復；中英原版狀態一致；兩個反向對照符合。檢查器 `tools/check_goal169_window.py` PASS，驗證矩陣新增 `colony-strings` 列。
+- 前端改為原版出錯時也先寫輸入收據與 `crash.json`（第三次真 GUI 在 673.2M 因 CPU 跳進圖形資料中止，見 WORKLOG）。
+
+## 移交
+
+- 歐洲港口、報告 F1～F10、百科：探勘清冊在 `workplace/reports/goal170-census-explore/REPORT.md`，下一個目標處理（含熱鍵首字母分串的按鈕、港口對話框字高 8 的正文、報告的標籤＋值組合字串）。
+- 木刻畫標題牌（三色浮雕字）、地圖城名標籤：另需多色版面規則，列入 #45 普查。
+- CPU 跳進資料的中止：未重現，有輸入收據後再追查；若重現，另開 dosgolem Issue。

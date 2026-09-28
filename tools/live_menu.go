@@ -631,6 +631,10 @@ func main() {
 	dialogAtlas := flag.String("dialog-atlas", "/out/goal165-dialog-atlas.json", "本機依固定字型、語料、術語表、譯稿與變數值表烘製的對話框字元圖集")
 	dialogDraft := flag.String("dialog-draft", "/repo/text/draft.zh-Hant.tsv", "逐行清單字典來源（GAME.TXT 單行列與 MENU.TXT 項目）")
 	dialogValues := flag.String("dialog-values", "/repo/text/variable-values.zh-Hant.tsv", "執行檔提供的變數值譯名")
+	stringA := flag.Bool("string-a", false, "啟用規格038連續字串通用覆蓋（需同時啟用 --dialog-a）")
+	stringTemplates := flag.String("string-templates", "/repo/text/string-templates.zh-Hant.tsv", "字串模板表")
+	stringAtlas := flag.String("string-atlas", "/out/goal169-string-atlas.json", "本機依固定字型與字串層來源烘製的字元圖集（30～12px）")
+	colonyNames := flag.String("colony-names", "/repo/text/colony-bilingual.tsv", "COLONY.TXT 殖民地名稱雙語清冊")
 	introA := flag.Bool("england-intro-a", false, "啟用規格025英格蘭首次介紹兩頁（標題34px／正文38px）")
 	introAll := flag.Bool("nation-intro-a", false, "啟用規格025四國首次介紹八頁（標題34px／正文38px）")
 	introCatalog := flag.String("intro-catalog", "/repo/text/nation-introduction.zh-Hant.tsv", "國家介紹長文唯一 TSV")
@@ -979,6 +983,7 @@ func main() {
 	// 目標165（規格035）：通用對話框正文。模板、變數譯名與圖集任一不成立，整個引擎回原文。
 	var dlg *dialogRuntime
 	var dialogBind map[string]string
+	var dialogOwned map[string]bool
 	if *dialogA {
 		dlg = &dialogRuntime{misses: map[string]int{}}
 		corpusBytes, termsBytes := read(*dialogCorpus), read(*dialogTerms)
@@ -1905,6 +1910,7 @@ func main() {
 				exclude[f.id] = true
 			}
 		}
+		dialogOwned = exclude
 		// 目標167：help 雙語清冊的教學提示也進通用引擎；--tutorial-help-a 開啟時首則仍由專屬欄位處理。
 		helpExclude := map[string]bool{}
 		if help != nil {
@@ -1931,6 +1937,40 @@ func main() {
 	}
 	helpAnyInk := help != nil && help.normal != nil
 	dlgOn := dlg != nil && dlg.fontReason == ""
+	// 目標169（規格038）：連續字串通用覆蓋；沿用對話框目錄的術語與逐行模板，另收片段字典、模板與殖民地名稱。
+	var str *stringRuntime
+	if *stringA {
+		str = &stringRuntime{misses: map[string]int{}, reason: "dialog-catalog-unavailable"}
+		if dlgOn {
+			files := map[string][]byte{}
+			for _, name := range []string{"LABELS.TXT", "NAMES.TXT", "WOODCUT.TXT", "COLONY.TXT", "MENU.TXT", "GAME.TXT"} {
+				if b, err := os.ReadFile(filepath.Join(*root, name)); err == nil {
+					files[name] = b
+				}
+			}
+			tb, sb, cb, db, nb, colb := read(*stringTemplates), read(*seaCatalog), read(*dialogCorpus), read(*dialogDraft), read(*dialogTerms), read(*colonyNames)
+			cat, err := loadStringCatalog(dlg.cat, tb, sb, cb, db, colb, files)
+			if err == nil {
+				err = cat.addOwned(db, files, dialogOwned)
+			}
+			if err == nil && *nationCardCatalog != "" {
+				err = cat.addOwned(read(*nationCardCatalog), files, nil)
+			}
+			if err != nil {
+				str.reason = "missing-or-invalid-translation"
+			} else if b, err := os.ReadFile(*stringAtlas); err != nil {
+				str.reason = "font-mask-unavailable"
+			} else {
+				bind := map[string]string{"templates": hash(tb), "sea": hash(sb), "corpus": hash(cb), "draft": hash(db), "terms": hash(nb), "colony": hash(colb)}
+				cat.fonts, str.reason = loadAtlasFonts(b, fontHash, bind, stringFontPx, stringFloorPx)
+				str.cat = cat
+			}
+		}
+		if *missing {
+			str.reason = "missing-ink"
+		}
+	}
+	strOn := str != nil && str.reason == ""
 	seaOn := sea != nil && sea.glyphs != nil
 	// seaFinish 把完成的印字事件歸入頂列或狀態欄；無法翻譯者記錄缺譯並保留原文。
 	seaFinish := func() {
@@ -2061,6 +2101,39 @@ func main() {
 			"source_linear": r.base, "shown": shown, "font_px": st.size,
 			"safe": []int{st.safe.Min.X, st.safe.Min.Y, st.safe.Max.X, st.safe.Max.Y}})
 	}
+	stringDrop := func(it *stringItem, reason string) {
+		events = append(events, map[string]any{"candidate_id": it.id, "stage": "expired", "step": m.Steps, "reason": reason, "shown": it.text})
+	}
+	stringFinish := func(r *stringRun) {
+		text := string(r.text)
+		// 設計第 3 點：規格032 海上層能翻的字串歸海上層。
+		var ink image.Rectangle
+		for _, b := range r.boxes {
+			ink = ink.Union(b)
+		}
+		if seaOn && (ink.In(seaBarRect) || ink.In(seaPanelRect)) {
+			if _, ok := sea.seaTranslate(text); ok {
+				return
+			}
+		}
+		panel := image.Rectangle{}
+		if seaOn {
+			panel = seaPanelRect
+		}
+		it, why := str.finish(r, canvas(), m.Steps, panel)
+		if it == nil {
+			if why != "" {
+				str.misses[why+"\t"+text]++
+			}
+			return
+		}
+		for _, old := range str.add(it) {
+			stringDrop(old, "superseded")
+		}
+		events = append(events, map[string]any{"candidate_id": it.id, "stage": "source", "step": r.start, "entry_ip": "0D21:00C6",
+			"source_linear": r.base, "shown": text, "zh": it.zh, "font_px": it.size,
+			"safe": []int{it.safe.Min.X, it.safe.Min.Y, it.safe.Max.X, it.safe.Max.Y}})
+	}
 	introAnyInk := false
 	if intro != nil {
 		for _, pg := range intro.pages {
@@ -2096,13 +2169,17 @@ func main() {
 			f.phase, f.patch, f.before, f.afterSafe = "expired", nil, nil, nil
 		}
 	}
-	if !*control && (captionAnyInk || (title != nil && title.ink != nil) || rowsAnyInk || introAnyInk || retireAnyInk || helpAnyInk || seaOn || dlgOn) {
+	if !*control && (captionAnyInk || (title != nil && title.ink != nil) || rowsAnyInk || introAnyInk || retireAnyInk || helpAnyInk || seaOn || dlgOn || strOn) {
 		m.WatchWrites(0x2cae0, 0x2cae0+64000, func(a uint32, old, value uint8) {
 			if old == value {
 				return
 			}
 			cs, ip := m.CPU.OpAddr()
 			x, y := int(a-0x2cae0)%320, int(a-0x2cae0)/320
+			if strOn && str.cur != nil {
+				str.onWrite(int(a-0x2cae0), old, value, cs == 0x0d21 && ip == 0x012c,
+					cs == 0x0b68 && ip == 0x051c && image.Pt(x, y).In(cursorBox(int(d.Mouse.X), int(d.Mouse.Y)).Inset(-2)))
+			}
 			if dlgOn && dlg.run != nil && m.Steps-dlg.run.last < dialogGap {
 				dlg.onWrite(int(a-0x2cae0), old, value, cs == 0x0d21 && ip == 0x012c,
 					cs == 0x0b68 && ip == 0x051c && image.Pt(x, y).In(cursorBox(int(d.Mouse.X), int(d.Mouse.Y)).Inset(-2)))
@@ -2494,6 +2571,12 @@ func main() {
 				}
 				sea.cur.raw = append(sea.cur.raw, m.Mem[a])
 				sea.cur.next, sea.cur.last = a+1, m.Steps
+			}
+			if strOn && cs == 0x0d21 && ip == 0x00c6 && m.VideoMode() == 0x13 {
+				a := uint32(c.Seg[golem.SS])*16 + uint32(c.R[golem.BX])
+				if done := str.onRead(a, m.Mem[a], m.Steps); done != nil {
+					stringFinish(done)
+				}
 			}
 			if dlgOn && cs == 0x0d21 && ip == 0x00c6 && m.VideoMode() == 0x13 {
 				a := uint32(c.Seg[golem.SS])*16 + uint32(c.R[golem.BX])
@@ -2955,6 +3038,16 @@ func main() {
 				} else if st.phase == "active" && !bytes.Equal(rectBytes(canvas(), st.safe), st.afterSafe) {
 					dialogExpire("canvas-page-changed")
 				}
+			}
+		}
+		if strOn && !*control {
+			for _, ch := range str.step(canvas(), m.Mem[0xa0000:0xafa00], cursorBox(int(d.Mouse.X), int(d.Mouse.Y)), m.Steps, m.VideoMode() == 0x13) {
+				it := ch[0].(*stringItem)
+				ev := map[string]any{"candidate_id": it.id, "stage": ch[1], "step": m.Steps, "shown": it.text}
+				if ch[2] != "" {
+					ev["reason"] = ch[2]
+				}
+				events = append(events, ev)
 			}
 		}
 		if intro != nil && introAnyInk && !*control {
@@ -3689,6 +3782,74 @@ func main() {
 				}
 			}
 		}
+		if strOn && !*control {
+			// 規格038：最後繪製，疊在其他層之上；對話框啟用時不畫與其重疊的字串；按住滑鼠整層回原文。
+			shown, sreason := 0, "idle"
+			var dialogSafe image.Rectangle
+			if dlg != nil && dlg.cur != nil && dlg.cur.phase == "active" {
+				dialogSafe = dlg.cur.safe
+			}
+			cur := cursorBox(int(d.Mouse.X), int(d.Mouse.Y))
+			paint := func(x, y int, v byte) {
+				p := int(v) * 3
+				c := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
+				draw.Draw(output, image.Rect(x*4, y*4, x*4+4, y*4+4), image.NewUniform(c), image.Point{}, draw.Src)
+			}
+			for _, it := range str.items {
+				if it.phase != "active" {
+					continue
+				}
+				switch {
+				case !enabled:
+					sreason = "disabled"
+					continue
+				case d.Mouse.Buttons != 0:
+					sreason = "mouse-button-held"
+					continue
+				case it.safe.Overlaps(dialogSafe):
+					sreason = "dialog-over-string"
+					continue
+				case !stringSame(indexed, it, cur):
+					sreason = "vga-safe-mismatch"
+					continue
+				}
+				i := 0
+				for y := it.safe.Min.Y; y < it.safe.Max.Y; y++ {
+					for x := it.safe.Min.X; x < it.safe.Max.X; x++ {
+						if it.before[i] != it.after[i] {
+							paint(x, y, it.before[i])
+						}
+						i++
+					}
+				}
+				origin := it.safe.Min.Mul(4)
+				panel := image.Rectangle{Min: origin, Max: it.safe.Max.Mul(4)}
+				for _, layer := range []struct {
+					mask  *image.Alpha
+					index byte
+				}{{it.shadow, 0}, {it.norm, it.color}} {
+					p := int(layer.index) * 3
+					fg := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
+					draw.DrawMask(output, panel, image.NewUniform(fg), image.Point{}, layer.mask, image.Point{}, draw.Over)
+				}
+				box := cur.Intersect(it.safe)
+				for y := box.Min.Y; y < box.Max.Y; y++ {
+					for x := box.Min.X; x < box.Max.X; x++ {
+						if v := indexed[y*320+x]; v != it.after[(y-it.safe.Min.Y)*it.safe.Dx()+x-it.safe.Min.X] {
+							paint(x, y, v)
+						}
+					}
+				}
+				it.appliedFrame++
+				shown++
+			}
+			if shown > 0 {
+				sreason = "applied"
+			}
+			lineRecords = append(lineRecords, map[string]any{"candidate_id": "STRING", "applied": shown > 0, "reason": sreason, "shown": shown, "accepted_events": str.accepted})
+		} else if str != nil {
+			lineRecords = append(lineRecords, map[string]any{"candidate_id": "STRING", "applied": false, "reason": str.reason})
+		}
 		rec := map[string]any{"step": m.Steps, "applied": applied, "reason": reason, "pending": anyPending, "dropped": len(drops), "events": len(events), "lines": lineRecords}
 		if label == "" {
 			if frontendFrameSink != nil {
@@ -3795,6 +3956,10 @@ func main() {
 	if dlg != nil {
 		report["dialog_misses"] = dlg.misses
 		report["dialog_reason"] = dlg.fontReason
+	}
+	if str != nil {
+		report["string_misses"] = str.misses
+		report["string_reason"] = str.reason
 	}
 	dumpJSON(*out+".json", report)
 	fmt.Printf("完成 %d 事件、%d 幀、%d 截圖，原版狀態 %s\n", len(events), len(frames), len(checkpoints), hash(m.Mem))

@@ -3,7 +3,7 @@
 
 依前端狀態檔（$out.status.json）的畫面資訊行動，不依固定步數：
 - 最近一段像訊息框的印字（dialog_seq 增加）印完後隔 --delay 步，依文字片段選按鍵應答（未列者按 Return），
-  應答前先截圖並把名稱與步數寫入 $out.shots；
+  應答前先截圖並把名稱與步數寫入 $out.shots；--after 大於 0 時，應答後隔這麼多步且沒有新訊息框，再截一張 after-N（目標169）；
 - 沒有待應答的訊息框、且距上次輸入已過 --idle 步時，依序送出 --intents 的意圖鍵。
 每個按鍵都以 xdotool 真按，並等前端讀到（狀態步數前進兩次 Update）才放開，與 tools/gui_step_input.sh 相同。
 """
@@ -39,6 +39,7 @@ def main():
     p.add_argument("--delay", type=int, default=4000000)
     p.add_argument("--start", type=int, required=True, help="意圖鍵最早送出的步數")
     p.add_argument("--end", type=int, required=True)
+    p.add_argument("--after", type=int, default=0)
     a = p.parse_args()
     path = a.out + ".status.json"
     intents = [k for k in a.intents.split(",") if k]
@@ -76,7 +77,7 @@ def main():
         with open(a.out + ".shots", "a") as f:
             f.write(f"{name} {s}\n")
 
-    seen, pending, pending_at, text, last_input, n = 0, False, 0, "", step(), 0
+    seen, pending, pending_at, text, last_input, n, after_due = 0, False, 0, "", step(), 0, 0
     while alive():
         st = status(path)
         now = st["step"]
@@ -97,6 +98,10 @@ def main():
             for k in keys:
                 key(k)
             pending, text, last_input = False, "", step()
+            after_due = last_input + a.after if a.after > 0 else 0
+        elif after_due and not pending and now >= after_due:
+            shot(f"after-{n}")
+            after_due = 0
         elif not pending and now >= a.start and now - last_input >= a.idle and intents:
             k = intents.pop(0)
             print(f"意圖 {now}：{k}", flush=True)

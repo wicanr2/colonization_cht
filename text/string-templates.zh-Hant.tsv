@@ -1,0 +1,5 @@
+template_id	pattern_en	zh_hant	evidence	status	notes
+colony-title	{colony}.   {w1}, {n1}.  Gold: {n2}$	{colony}　{n1}年{w1}　金錢：{n2}$	殖民地畫面頂列 (90,1)，1,049,403,133 步；Gold: 見 LABELS.TXT 0xBB2	draft	季節字取字典；年份與金額原值不譯
+paren-term	({w1})	（{w1}）	海上狀態欄地形行 (243,100)，1,047,401,124 步	draft	括號內整串查字典
+nation-unit-eng	Eng. {w1}	英．{w1}	海上狀態欄單位行 (242,86)，目標169 重播 r1 的 Eng. Soldiers／Eng. Pioneers；Eng. 見 NAMES.TXT 0x99B	draft	國籍縮寫同規格032
+paren-count-goods	({n1} {w1})	（{n1} {w1}）	海上狀態欄載貨行，目標169 重播 r1 的 (100 Tools)	draft	數量原值不譯

@@ -13,7 +13,7 @@ a = p.parse_args()
 if not a.output.parent.is_dir() or a.output.parent.stat().st_uid != os.getuid():
     raise ValueError('輸出父目錄不存在或擁有者不符')
 s = (a.repo / 'tools/live_menu.go').read_bytes()
-if hashlib.sha256(s).hexdigest() != '3b46b17f1fbb985c8b0e629f904826c3b0b7794388e6a823d1948280bfca2f3a':
+if hashlib.sha256(s).hexdigest() != '097aa22637c71cd88b0e7c05051c98319315b24f58346b6ae887a5c4e1fe63ac':
     raise ValueError('適配器來源不同，需重新審查')
 if b'frontendRunner(m, d, render, *out)' not in s or b'frontendFrameSink(output, rec)' not in s:
     raise ValueError('視窗接線不符')
@@ -25,6 +25,8 @@ if a.output.stat().st_uid != os.getuid():
 (a.output / 'window_test.go').write_bytes((a.repo / 'tools/window_prototype_test.go').read_bytes())
 (a.output / 'dialog.go').write_bytes((a.repo / 'tools/dialog_overlay.go').read_bytes())
 (a.output / 'dialog_test.go').write_bytes((a.repo / 'tools/dialog_overlay_test.go').read_bytes())
+(a.output / 'strings.go').write_bytes((a.repo / 'tools/string_overlay.go').read_bytes())
+(a.output / 'strings_test.go').write_bytes((a.repo / 'tools/string_overlay_test.go').read_bytes())
 (a.output / 'go.mod').write_text('module colonization-window-prototype\n\ngo 1.24.0\n\nrequire github.com/hajimehoshi/ebiten/v2 v2.9.9\n')
 (a.output / 'go.sum').write_bytes((a.reference / 'go.sum').read_bytes())
 (a.output / 'go.work').write_text('go 1.24.0\nuse .\nuse /dosgolem\n')

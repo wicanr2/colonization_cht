@@ -371,6 +371,13 @@ func runWindow(m *golem.Machine, d *golem.DOS, render func(string), out string) 
 	ebiten.SetWindowClosingHandled(true)
 	ebiten.SetRunnableOnUnfocused(true)
 	ebiten.SetCursorMode(ebiten.CursorModeHidden)
-	must(ebiten.RunGame(g))
+	err := ebiten.RunGame(g)
+	// 目標169：原版執行出錯時也先寫下現場輸入與錯誤位置，才能以重播重現。
 	dumpJSON(out+".inputs.json", windowReceipt{Inputs: g.inputs, End: m.Steps, Rejected: g.rejected})
+	if err != nil {
+		c := m.CPU
+		dumpJSON(out+".crash.json", map[string]any{"error": err.Error(), "steps": m.Steps,
+			"cs_ip": fmt.Sprintf("%04X:%04X", c.Seg[golem.CS], c.IP), "registers": c.R, "segments": c.Seg})
+		panic(err)
+	}
 }

@@ -10,6 +10,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 	"syscall"
 
@@ -46,6 +47,19 @@ type print141 struct {
 	OtherBoxes   map[string][4]int // 目標142：其他寫入者在本筆印字期間的範圍 (minX,minY,maxX,maxY)
 	before       []byte            // 目標165：印前畫布，只為對話框段落落檔
 	Chars        []char165         // 目標165：逐字事件（同基址重讀的字元與 0 交錯）各字的步數與墨跡範圍
+}
+
+// 目標169：連續讀取模式的一串文字（以 0 結尾），逐字記墨跡範圍；相同文字、位置與色號只記一次並計次。
+type string169 struct {
+	First, Last uint64
+	Count       int
+	Base        uint32
+	Text        string
+	Box         [4]int
+	Chars       [][4]int
+	Colors      map[uint8]int
+	next        uint32
+	lastRead    uint64
 }
 
 type char165 struct {
@@ -131,6 +145,25 @@ func main() {
 	if replay.End > start && replay.End < stop {
 		stop = replay.End
 	}
+	strs := map[string]*string169{}
+	var strCur *string169
+	strDone := func() {
+		c := strCur
+		strCur = nil
+		if c == nil || c.Box[2] < 0 {
+			return
+		}
+		key := fmt.Sprint(c.Text, c.Box, c.Colors)
+		if old, ok := strs[key]; ok {
+			old.Count++
+			old.Last = c.First
+			return
+		}
+		if len(strs) < 20000 {
+			c.Count, c.Last = 1, c.First
+			strs[key] = c
+		}
+	}
 	prints := []*print141{}
 	var cur *print141
 	frames := []map[string]any{}
@@ -172,6 +205,18 @@ func main() {
 					panic("印字事件超出上限")
 				}
 			}
+			// 目標169：連續讀取字串（位址遞增、0 結尾）另行逐串記錄；逐字模式的「字元、0」會成為單字元字串。
+			if strCur == nil || a != strCur.next || m.Steps-strCur.lastRead > 200000 {
+				strDone()
+				strCur = &string169{First: m.Steps, Base: a, Box: [4]int{320, 200, -1, -1}, Colors: map[uint8]int{}}
+			}
+			if value == 0 {
+				strDone()
+			} else {
+				strCur.Text += string(rune(value))
+				strCur.Chars = append(strCur.Chars, [4]int{320, 200, -1, -1})
+				strCur.next, strCur.lastRead = a+1, m.Steps
+			}
 			if cur.Reads%2 == 0 {
 				cur.Text = append(cur.Text, value)
 				cur.Chars = append(cur.Chars, char165{C: value, Step: m.Steps, MinX: 320, MinY: 200, MaxX: -1, MaxY: -1})
@@ -208,6 +253,12 @@ func main() {
 				}
 				cur.OtherBoxes[site] = [4]int{min(b[0], x), min(b[1], y), max(b[2], x), max(b[3], y)}
 				return
+			}
+			if sc := strCur; sc != nil && len(sc.Chars) > 0 {
+				sc.Colors[value]++
+				sc.Box = [4]int{min(sc.Box[0], x), min(sc.Box[1], y), max(sc.Box[2], x), max(sc.Box[3], y)}
+				b := &sc.Chars[len(sc.Chars)-1]
+				*b = [4]int{min(b[0], x), min(b[1], y), max(b[2], x), max(b[3], y)}
 			}
 			cur.Writes++
 			cur.Colors[value]++
@@ -435,10 +486,16 @@ func main() {
 	}
 	audio := map[string]any{"sb_ports": sbPorts, "dsp_writes": dspCmds, "pit_changes": pitChanges, "irq0_every": m.IRQ0Every, "opl_writes": len(m.OPL),
 		"opl_bank1_writes": bank1, "first_opl_step": firstOPL, "last_opl_step": lastOPL, "ticks": m.Ticks}
+	strDone()
+	strList := make([]*string169, 0, len(strs))
+	for _, v := range strs {
+		strList = append(strList, v)
+	}
+	sort.Slice(strList, func(i, j int) bool { return strList[i].First < strList[j].First })
 	result := map[string]any{"version": "goal165-dialogs-v1", "control": *control,
 		"address_space": "DOS real-mode CS:IP; 20-bit linear RAM; 320x200 indexed canvas; file offsets",
 		"input_sha256":  sha141(inputBytes), "input_hashes": wants, "window": []uint64{start, stop},
-		"prints": prints, "frames": frames, "other_writes": otherWrites, "other_boxes": otherBoxes, "opened": d.Opened, "state": state, "audio": audio}
+		"strings": strList, "prints": prints, "frames": frames, "other_writes": otherWrites, "other_boxes": otherBoxes, "opened": d.Opened, "state": state, "audio": audio}
 	b, err := json.Marshal(result)
 	must141(err)
 	must141(os.WriteFile(*out+".json", append(b, '\n'), 0644))

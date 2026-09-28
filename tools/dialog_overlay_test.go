@@ -234,3 +234,25 @@ func TestTermPriority(t *testing.T) {
 		t.Fatal("定稿譯名彼此衝突應視為查無")
 	}
 }
+
+func TestScanDialogBoxPortrait(t *testing.T) {
+	canvas := make([]byte, 64000)
+	for i := range canvas {
+		canvas[i] = 5
+	}
+	for x := 10; x < 200; x++ {
+		canvas[40*320+x] = 0 // 上框
+	}
+	for y := 40; y < 120; y++ {
+		canvas[y*320+10], canvas[y*320+199] = 0, 0 // 左右框
+	}
+	for y := 0; y < 60; y++ {
+		for x := 120; x < 190; x++ {
+			canvas[y*320+x] = 9 // 肖像壓住上框的一段
+		}
+	}
+	l, top, r := scanDialogBox(canvas, 20, 100, 15, 195, 50)
+	if l != 10 || top != 40 || r != 199 {
+		t.Fatalf("外框 %d %d %d", l, top, r)
+	}
+}

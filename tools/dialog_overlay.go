@@ -482,6 +482,15 @@ func dialogBlit(dst, src *image.Alpha, x, y int) {
 
 // loadDialogAtlas 讀 tools/bake_dialog_atlas.py 的圖集並核對字型、語料與術語表雜湊。
 func (c *dialogCatalog) loadDialogAtlas(b []byte, fontSHA string, bind map[string]string) string {
+	fonts, reason := loadAtlasFonts(b, fontSHA, bind, dialogFontPx, dialogFloorPx)
+	if reason == "" {
+		c.fonts = fonts
+	}
+	return reason
+}
+
+// loadAtlasFonts 讀字元圖集並核對字型、字級範圍與綁定雜湊（目標169：通用字串層共用）。
+func loadAtlasFonts(b []byte, fontSHA string, bind map[string]string, px, floor int) (map[int]*dialogFont, string) {
 	var atlas struct {
 		Font  string            `json:"font_sha256"`
 		Px    int               `json:"font_px"`
@@ -498,36 +507,36 @@ func (c *dialogCatalog) loadDialogAtlas(b []byte, fontSHA string, bind map[strin
 		} `json:"sizes"`
 	}
 	if json.Unmarshal(b, &atlas) != nil {
-		return "font-mask-unavailable"
+		return nil, "font-mask-unavailable"
 	}
-	if atlas.Font != fontSHA || atlas.Px != dialogFontPx || atlas.Floor != dialogFloorPx || len(atlas.Bind) != len(bind) {
-		return "font-binding-mismatch"
+	if atlas.Font != fontSHA || atlas.Px != px || atlas.Floor != floor || len(atlas.Bind) != len(bind) {
+		return nil, "font-binding-mismatch"
 	}
 	for k, v := range bind {
 		if atlas.Bind[k] != v {
-			return "font-binding-mismatch"
+			return nil, "font-binding-mismatch"
 		}
 	}
-	c.fonts = map[int]*dialogFont{}
-	for size := dialogFloorPx; size <= dialogFontPx; size++ {
+	fonts := map[int]*dialogFont{}
+	for size := floor; size <= px; size++ {
 		src, ok := atlas.Sizes[strconv.Itoa(size)]
 		if !ok || src.Height <= 0 || src.CJKBottom <= src.CJKTop {
-			return "font-mask-out-of-bounds"
+			return nil, "font-mask-out-of-bounds"
 		}
 		f := &dialogFont{glyphs: map[rune]*image.Alpha{}, widths: map[rune]int{}, cjkTop: src.CJKTop, cjkBottom: src.CJKBottom}
 		for k, g := range src.Glyphs {
 			r := []rune(k)
 			pix, err := base64.StdEncoding.DecodeString(g.Alpha)
 			if len(r) != 1 || g.W <= 0 || err != nil || len(pix) != g.W*src.Height {
-				return "font-mask-out-of-bounds"
+				return nil, "font-mask-out-of-bounds"
 			}
 			a := image.NewAlpha(image.Rect(0, 0, g.W, src.Height))
 			copy(a.Pix, pix)
 			f.glyphs[r[0]], f.widths[r[0]] = a, g.W
 		}
-		c.fonts[size] = f
+		fonts[size] = f
 	}
-	return ""
+	return fonts, ""
 }
 
 // ---- 執行期狀態（規格035 覆蓋設計 1、2、5、7）----
@@ -639,20 +648,31 @@ func (r *dialogRun) dialogLike() bool {
 	return r.shadowWritten || (n >= 10 && ink.Min.Y > 8 && ink.Max.X <= 240)
 }
 
-// scanDialogBox 掃描色號 0 的外框：左右框沿 (hx,hy) 所在列、上框沿 tx 欄由 ty 往上。
-// 目標167：顧問肖像常壓在框的左上，所以呼叫端以最後一行（肖像下方）掃左右、以首行最右側往上掃。
-func scanDialogBox(canvas []byte, hx, hy, tx, ty int) (l, t, r int) {
-	l, r, t = hx, hx, ty
+// scanDialogBox 掃描色號 0 的外框：左右框沿 (hx,hy) 所在列、上框取 [x0,x1) 各欄由 ty 往上的最常見列。
+// 顧問肖像常壓在框的左上或上緣，所以呼叫端以最後一行（肖像下方）掃左右、以首行整段寬度掃上框。
+func scanDialogBox(canvas []byte, hx, hy, x0, x1, ty int) (l, t, r int) {
+	l, r = hx, hx
 	for l > 0 && canvas[hy*320+l] != 0 {
 		l--
 	}
 	for r < 319 && canvas[hy*320+r] != 0 {
 		r++
 	}
-	for t > 0 && canvas[t*320+tx] != 0 {
-		t--
+	count := map[int]int{}
+	for x := max(x0, 0); x < min(x1, 320); x++ {
+		y := ty
+		for y > 0 && canvas[y*320+x] != 0 {
+			y--
+		}
+		count[y]++
 	}
-	return l, t, r
+	best := -1
+	for y, n := range count {
+		if best < 0 || n > count[best] || (n == count[best] && y > best) {
+			best = y
+		}
+	}
+	return l, max(best, 0), r
 }
 
 type runLine struct {
@@ -783,7 +803,7 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 			return nil, shown, "no-box-style"
 		}
 		last := lines[len(lines)-1].box
-		l, top, rt := scanDialogBox(before, last.Min.X, (last.Min.Y+last.Max.Y)/2, lines[0].box.Max.X-2, lines[0].box.Min.Y)
+		l, top, rt := scanDialogBox(before, last.Min.X, (last.Min.Y+last.Max.Y)/2, lines[0].box.Min.X, lines[0].box.Max.X, lines[0].box.Min.Y)
 		st.safe = image.Rect(l+3, top+3, rt-3, ink.Max.Y+2)
 		if l == 0 || top == 0 || rt == 319 || !ink.In(st.safe) {
 			return nil, shown, "ink-outside-box"
