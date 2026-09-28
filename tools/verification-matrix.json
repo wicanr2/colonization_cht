@@ -775,6 +775,46 @@
     "probe_goal170_replays.sh"
    ],
    "known_diffs": "對話框選項列（#46）維持原文；報告表格內放不下的殖民地名回原文；百科正文另案"
+  },
+  {
+   "id": "colonizopedia",
+   "path": "both",
+   "title": "殖民百科：六個類別的清單與首篇條目（標題、副標、數值行與正文段落）",
+   "specs": [
+    "036",
+    "038"
+   ],
+   "flags": [
+    "--dialog-a",
+    "--string-a",
+    "--sea-status-a"
+   ],
+   "checker": "check_goal171_window.py",
+   "args": [
+    "--game",
+    "{game}",
+    "--reports",
+    "{reports}/goal171-pedia"
+   ],
+   "dir": "goal171-pedia",
+   "zh": [
+    "replay-zh"
+   ],
+   "control": [
+    "replay-control"
+   ],
+   "negative": [
+    "neg-noatlas",
+    "neg-nocigars"
+   ],
+   "gui_inputs": [
+    "gui-pedia.inputs.json"
+   ],
+   "regenerate": [
+    "probe_goal171_gui.sh",
+    "probe_goal171_replays.sh"
+   ],
+   "known_diffs": "只驗六類首篇；其餘條目同一機制未逐篇真 GUI；Miscellaneous／Complete 類別未出現"
   }
  ],
  "not_covered": [

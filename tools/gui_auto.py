@@ -107,7 +107,8 @@ def main():
             shot(f"answer-{n}")
             print(f"應答 {now}：{text!r} → {keys}", flush=True)
             for k in keys:
-                key(k)
+                if k != "none":  # 目標171：none 表示不按鍵（例如下拉選單，交給下一個點擊意圖）
+                    key(k)
             pending, text, last_input = False, "", step()
             after_due = last_input + a.after if a.after > 0 else 0
         elif after_due and not pending and now >= after_due:

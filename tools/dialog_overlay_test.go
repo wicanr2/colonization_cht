@@ -269,3 +269,35 @@ func TestDialogSizes(t *testing.T) {
 		t.Fatalf("字高 5 起始 22px：%d", size)
 	}
 }
+
+func TestCenteredParagraphs(t *testing.T) {
+	c := dialogFixture(t)
+	dialogTestFonts(c, "甲乙丙")
+	_, n, ac, size := c.centeredMasks(`^{甲}\n乙乙\n^\n{丙}`, 400, 400, 40, false)
+	if n == nil || size != 30 {
+		t.Fatalf("應放得下：%d", size)
+	}
+	// 標題行獨立一行（第 0 行），內文在第 1 行，第 2 行空白，第 3 行強調。
+	row := func(k int) int { return 4 + k*40 - 2 + 5 }
+	if ac.AlphaAt(6, row(0)).A == 0 || n.AlphaAt(6, row(1)).A == 0 || n.AlphaAt(6, row(2)).A != 0 || ac.AlphaAt(6, row(3)).A == 0 {
+		t.Fatal("單一 ^ 開頭的行應自成一段")
+	}
+}
+
+func TestAddPedia(t *testing.T) {
+	pedia := []byte("@CARGO1\r\n^{FOO}\r\nFoo is a \xf9thing.\r\n")
+	sum := func(b []byte) string { return fmt.Sprintf("%x", sha256.Sum256(b)) }
+	raw := pedia[9:]
+	head := "message_id\tsource_file\tsource_file_sha256\tsection_offset\ttext_offset\ttext_byte_length\tsource_bytes_sha256\tsource_en\tzh_hant\tstatus\tnotes\n"
+	row := strings.Join([]string{"PEDIA.TXT:@CARGO1", "PEDIA.TXT", sum(pedia), "0x0", "0x9", fmt.Sprint(len(raw)), sum(raw), "x", `^{甲}\n乙`, "draft", ""}, "\t")
+	c := &dialogCatalog{terms: map[string]string{}, seen: map[string]bool{}}
+	if err := c.addPedia([]byte(head+row+"\n"), pedia); err != nil {
+		t.Fatal(err)
+	}
+	if id, zh, why := c.match("FOO Foo is a \u00f9thing."); why != "" || id != "PEDIA.TXT:@CARGO1" || zh != `^{甲}\n乙` {
+		t.Fatalf("%q %q %q", id, zh, why)
+	}
+	if (&dialogCatalog{seen: map[string]bool{}}).addPedia([]byte(head+row+"\n"), append(pedia, 'x')) == nil {
+		t.Fatal("版本不符應失敗")
+	}
+}

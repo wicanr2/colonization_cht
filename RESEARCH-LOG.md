@@ -4173,3 +4173,8 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **輸入與工具：**同目標169；前端 `tools/live_menu.go` SHA-256 `df27e9a9…`、`tools/string_overlay.go` `dd1ae623…`、`tools/dialog_overlay.go` `d6c2b923…`、`tools/gui_auto.py` `72a93fba…`；檢查器 `tools/check_goal170_window.py` `812c2258…`；探勘清冊 `workplace/reports/goal170-census-explore/REPORT.md`。
 - **已證實：**港口按鈕熱鍵首字母另成一串（色 14／15）；F9 部族名與型態以 1 像素位移重印四次（色 0 三次、67 一次）描邊；港口說明框（`@TUTORIAL17`）與訓練對話框為色號 0 外框、無陰影、字高 5；招募與購買對話框字高 8、帶陰影。真 GUI 現場輸入 `d276bb41…` 下中英原版狀態一致（終點 `63cf5837…`）。
 - **已證實：**港口畫面反覆以逐字方式印出數字（例如 `3`），GUI 自動化須忽略。
+
+## 2026-09-29：目標171 殖民百科
+
+- **輸入與工具：**同目標170；前端 `tools/live_menu.go` SHA-256 `80806ad0…`、`tools/dialog_overlay.go` `64a777f0…`；檢查器 `tools/check_goal171_window.py` `63cf4a54…`；百科雙語稿 `text/pedia-bilingual.tsv`。
+- **已證實：**條目正文逐字印字、無外框，標題行與強調段色號 149、內文 68，字高 5；原文 `^` 開頭的行在畫面上自成一行。百科下拉選單是逐字印字，會被 GUI 自動化誤認為訊息框。清單排序與 PEDIA.TXT 鍵序不同（雪茄是 `@CARGO10`）。真 GUI 現場輸入 `36f807d7…` 下中英原版狀態一致（終點 `9f248277…`）。

@@ -1,6 +1,6 @@
 # 目標171：殖民百科（Issue #44 第三部分）
 
-狀態：進行中；開始：2026-09-29。對應 [Issue #44](https://github.com/wicanr2/colonization_cht/issues/44)，沿用[規格036](../spec/036-line-list-and-centered-text.md)與[規格038](../spec/038-string-overlay-draft.md)。
+狀態：完成；2026-09-29。對應 [Issue #44](https://github.com/wicanr2/colonization_cht/issues/44)，沿用[規格036](../spec/036-line-list-and-centered-text.md)與[規格038](../spec/038-string-overlay-draft.md)。
 
 ## 已知
 
@@ -20,3 +20,14 @@
 ## 停止線
 
 Miscellaneous／Complete 類別（選單未出現）、條目間交叉連結、150 篇逐篇真 GUI 不在本目標；其餘條目以同一機制處理，普查列入 #45。
+
+## 結果
+
+- 規格036 附記：單一 `^` 開頭的行自成一段；通用引擎載入百科雙語稿（原文逐位元組轉碼位，CP437 項目符號可比對）。
+- 真 GUI（`tools/probe_goal171_gui.sh`，現場輸入 SHA-256 `36f807d7…`）：從選單依序開貨物、單位、地形、殖民地居民技能、殖民地建築、建國之父六類，清單頁與首篇條目（雪茄、武裝勇士、極地、專家鐵匠、軍械室、亞當史密斯）的標題、副標、相關名稱行與正文段落都是中文。
+- 同輸入：中英原版狀態一致（終點 `9f248277…`）；83 組截圖安全區與中文重播逐像素相同。反向對照：缺對話框圖集時正文與依賴它的字串層都回原文；百科稿移除雪茄條目並烘製相符圖集時只有該條正文回原文。檢查器 `tools/check_goal171_window.py` PASS。
+- 回歸：六點回歸、目標167／169／170 三條路徑以新前端重播對舊真 GUI 截圖核對 PASS；驗證矩陣 PASS 22。
+
+## 移交
+
+- 其餘 144 篇條目以同一機制處理，未逐篇真 GUI；Miscellaneous／Complete 類別未出現。列入 #45 普查。

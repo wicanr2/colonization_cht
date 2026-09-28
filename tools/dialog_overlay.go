@@ -177,6 +177,41 @@ func (cat *dialogCatalog) addCorpus(corpus, game []byte, gameSHA string, exclude
 }
 
 // makeDialogTemplate 把原文正規化成整句比對用的正規式：去 {}、^，換行當空白並壓縮空白。
+// addPedia 加入百科雙語稿的條目正文（目標171）：每列以 PEDIA.TXT 位移、長度與片段雜湊核對，
+// 正文含 ^ 段落碼，以置中段落型版面（規格036）排版。
+func (c *dialogCatalog) addPedia(tsv, pedia []byte) error {
+	rows := splitTSV(tsv)
+	if rows == nil {
+		return fmt.Errorf("百科雙語稿欄位不符")
+	}
+	sum := fmt.Sprintf("%x", sha256.Sum256(pedia))
+	for _, r := range rows {
+		if r["source_file"] != "PEDIA.TXT" || r["zh_hant"] == "" {
+			continue
+		}
+		off, err1 := strconv.ParseInt(r["text_offset"], 0, 64)
+		n, err2 := strconv.Atoi(r["text_byte_length"])
+		if r["source_file_sha256"] != sum || err1 != nil || err2 != nil || off < 0 || int(off)+n > len(pedia) {
+			return fmt.Errorf("PEDIA.TXT 版本或位移不符：%s", r["message_id"])
+		}
+		raw := pedia[off : int(off)+n]
+		if fmt.Sprintf("%x", sha256.Sum256(raw)) != r["source_bytes_sha256"] {
+			return fmt.Errorf("PEDIA.TXT 片段雜湊不符：%s", r["message_id"])
+		}
+		if c.seen[r["message_id"]] {
+			return fmt.Errorf("重複鍵：%s", r["message_id"])
+		}
+		c.seen[r["message_id"]] = true
+		// 原文逐位元組轉成碼位（CP437 的 0xF9 項目符號成為 U+00F9），與執行期重組顯示字串的方式相同。
+		body := make([]rune, len(raw))
+		for i, b := range raw {
+			body[i] = rune(b)
+		}
+		c.templates = append(c.templates, makeDialogTemplate(r["message_id"], string(body), r["zh_hant"], true))
+	}
+	return nil
+}
+
 func makeDialogTemplate(id, body, zh string, centered bool) dialogTemplate {
 	body = dialogNormalize(strings.NewReplacer("{", "", "}", "", "^", "", "\r\n", " ").Replace(body))
 	pattern, names := "^", []string{}
@@ -944,8 +979,12 @@ func (c *dialogCatalog) centeredMasks(zh string, w, h, pitch int, shadow bool) (
 		case strings.TrimSpace(l) == "^":
 			flush()
 			items = append(items, item{blank: true})
+		case strings.HasPrefix(l, "^"):
+			// 目標171：單一 ^ 開頭的行自成一段（百科標題行 ^{CIGARS}、GAME.TXT ^Treasury:），其後的行另起段落。
+			flush()
+			items = append(items, item{text: strings.TrimPrefix(l, "^")})
 		default:
-			body += strings.TrimPrefix(l, "^")
+			body += l
 		}
 	}
 	flush()

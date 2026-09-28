@@ -630,6 +630,7 @@ func main() {
 	dialogTerms := flag.String("dialog-terms", "/repo/text/terms.zh-Hant.tsv", "變數譯名定稿表")
 	dialogAtlas := flag.String("dialog-atlas", "/out/goal165-dialog-atlas.json", "本機依固定字型、語料、術語表、譯稿與變數值表烘製的對話框字元圖集")
 	dialogDraft := flag.String("dialog-draft", "/repo/text/draft.zh-Hant.tsv", "逐行清單字典來源（GAME.TXT 單行列與 MENU.TXT 項目）")
+	dialogPedia := flag.String("dialog-pedia", "/repo/text/pedia-bilingual.tsv", "目標171：百科條目正文雙語稿")
 	dialogValues := flag.String("dialog-values", "/repo/text/variable-values.zh-Hant.tsv", "執行檔提供的變數值譯名")
 	stringA := flag.Bool("string-a", false, "啟用規格038連續字串通用覆蓋（需同時啟用 --dialog-a）")
 	stringTemplates := flag.String("string-templates", "/repo/text/string-templates.zh-Hant.tsv", "字串模板表")
@@ -1923,13 +1924,16 @@ func main() {
 		if b, err := os.ReadFile(filepath.Join(*root, "MENU.TXT")); err == nil {
 			files["MENU.TXT"] = b
 		}
+		pediaBytes := read(*dialogPedia)
 		if dlg.cat.addCorpus(helpBytes, rawSource, versions["GAME.TXT"], helpExclude) != nil ||
-			dlg.cat.addDraft(draftBytes, files, exclude) != nil || dlg.cat.addValues(valuesBytes, files) != nil {
+			dlg.cat.addDraft(draftBytes, files, exclude) != nil || dlg.cat.addValues(valuesBytes, files) != nil ||
+			dlg.cat.addPedia(pediaBytes, read(filepath.Join(*root, "PEDIA.TXT"))) != nil {
 			dlg.fontReason = "missing-or-invalid-translation"
 		} else if b, err := os.ReadFile(*dialogAtlas); err != nil {
 			dlg.fontReason = "font-mask-unavailable"
 		} else {
 			dialogBind["draft"], dialogBind["values"], dialogBind["help"] = hash(draftBytes), hash(valuesBytes), hash(helpBytes)
+			dialogBind["pedia"] = hash(pediaBytes)
 			dlg.fontReason = dlg.cat.loadDialogAtlas(b, fontHash, dialogBind)
 		}
 	}
