@@ -634,6 +634,7 @@ func main() {
 	stringA := flag.Bool("string-a", false, "啟用規格038連續字串通用覆蓋（需同時啟用 --dialog-a）")
 	stringTemplates := flag.String("string-templates", "/repo/text/string-templates.zh-Hant.tsv", "字串模板表")
 	stringAtlas := flag.String("string-atlas", "/out/goal169-string-atlas.json", "本機依固定字型與字串層來源烘製的字元圖集（30～12px）")
+	stringDry := flag.String("string-dry-run", "", "目標170：只載入字串層字典，逐行翻譯此檔的原文並輸出 JSON 後結束（不執行原版）")
 	colonyNames := flag.String("colony-names", "/repo/text/colony-bilingual.tsv", "COLONY.TXT 殖民地名稱雙語清冊")
 	introA := flag.Bool("england-intro-a", false, "啟用規格025英格蘭首次介紹兩頁（標題34px／正文38px）")
 	introAll := flag.Bool("nation-intro-a", false, "啟用規格025四國首次介紹八頁（標題34px／正文38px）")
@@ -1943,7 +1944,7 @@ func main() {
 		str = &stringRuntime{misses: map[string]int{}, reason: "dialog-catalog-unavailable"}
 		if dlgOn {
 			files := map[string][]byte{}
-			for _, name := range []string{"LABELS.TXT", "NAMES.TXT", "WOODCUT.TXT", "COLONY.TXT", "MENU.TXT", "GAME.TXT"} {
+			for _, name := range []string{"LABELS.TXT", "NAMES.TXT", "WOODCUT.TXT", "COLONY.TXT", "MENU.TXT", "GAME.TXT", "PEDIA.TXT"} {
 				if b, err := os.ReadFile(filepath.Join(*root, name)); err == nil {
 					files[name] = b
 				}
@@ -1971,6 +1972,18 @@ func main() {
 		}
 	}
 	strOn := str != nil && str.reason == ""
+	if *stringDry != "" {
+		if str == nil || str.cat == nil {
+			panic("字串層未載入")
+		}
+		var results []map[string]string
+		for _, line := range strings.Split(strings.TrimRight(string(read(*stringDry)), "\n"), "\n") {
+			zh, id, why := str.cat.translate(line)
+			results = append(results, map[string]string{"en": line, "zh": zh, "id": id, "reason": why})
+		}
+		dumpJSON(*out+".dry.json", map[string]any{"string_reason": str.reason, "results": results})
+		return
+	}
 	seaOn := sea != nil && sea.glyphs != nil
 	// seaFinish 把完成的印字事件歸入頂列或狀態欄；無法翻譯者記錄缺譯並保留原文。
 	seaFinish := func() {
@@ -2105,6 +2118,10 @@ func main() {
 		events = append(events, map[string]any{"candidate_id": it.id, "stage": "expired", "step": m.Steps, "reason": reason, "shown": it.text})
 	}
 	stringFinish := func(r *stringRun) {
+		if r = str.join(r); r == nil {
+			return // 目標170：單字母熱鍵先暫存，等下一串合併
+		}
+		r = str.outline(r) // 目標170：描邊字（同文 1 像素位移重印）併成一串
 		text := string(r.text)
 		// 設計第 3 點：規格032 海上層能翻的字串歸海上層。
 		var ink image.Rectangle
@@ -3827,7 +3844,10 @@ func main() {
 				for _, layer := range []struct {
 					mask  *image.Alpha
 					index byte
-				}{{it.shadow, 0}, {it.norm, it.color}} {
+				}{{it.shadow, it.shadowColor}, {it.norm, it.color}, {it.accent, it.accentColor}} {
+					if layer.mask == nil {
+						continue
+					}
 					p := int(layer.index) * 3
 					fg := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
 					draw.DrawMask(output, panel, image.NewUniform(fg), image.Point{}, layer.mask, image.Point{}, draw.Over)

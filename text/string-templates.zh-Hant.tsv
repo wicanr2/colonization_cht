@@ -3,3 +3,25 @@ colony-title	{colony}.   {w1}, {n1}.  Gold: {n2}$	{colony}　{n1}年{w1}　金�
 paren-term	({w1})	（{w1}）	海上狀態欄地形行 (243,100)，1,047,401,124 步	draft	括號內整串查字典
 nation-unit-eng	Eng. {w1}	英．{w1}	海上狀態欄單位行 (242,86)，目標169 重播 r1 的 Eng. Soldiers／Eng. Pioneers；Eng. 見 NAMES.TXT 0x99B	draft	國籍縮寫同規格032
 paren-count-goods	({n1} {w1})	（{n1} {w1}）	海上狀態欄載貨行，目標169 重播 r1 的 (100 Tools)	draft	數量原值不譯
+port-title	{w1}, {w2}.  {w3}, {n1}.  Tax:{n2}%  Gold: {n3}$	{w2}{w1}　{n1}年{w3}　稅率：{n2}%　金錢：{n3}$	歐洲港口頂列 (69,1)，目標170 探勘 e3 1,076,469,741 步	draft	
+paren-term-type	({w1}: {w2})	（{w1}：{w2}）	百科條目副標 y 13–18，目標170 探勘 c1～c6	draft	
+label-number	{w1}: {n1}	{w1}：{n1}	F1 地形產量、F8 Rebels／Tories、F10 Total Score，目標170 探勘	draft	
+label-plus	{w1}: +{n1}	{w1}：+{n1}	F1 產量加成（原文前導 4 空白不佔墨跡），目標170 探勘	draft	
+label-times	{w1}: x{n1}	{w1}：x{n1}	F1 專家倍率，目標170 探勘	draft	
+label-plus-ratio	{w1}: +{n1}/{n2}	{w1}：+{n1}/{n2}	F1 Game: +2/4，目標170 探勘	draft	
+label-pair-percent	{w1}: {n1}%   {w2}: {n2}%	{w1}：{n1}%　{w2}：{n2}%	F3 Rebel／Tory Sentiment，目標170 探勘	draft	
+label-pair-number	{w1}: {n1}   {w2}: {n2}	{w1}：{n1}　{w2}：{n2}	百科單位 Combat／Moves，目標170 探勘	draft	
+move-defense	{w1}: {n1}    {w2}: +{n2}%	{w1}：{n1}　{w2}：+{n2}%	F1 與百科地形 Move Cost／Defense or Ambush Bonus，目標170 探勘	draft	
+label-trailing	{w1}:	{w1}：	F3、F8、F9 標籤與數值分兩串（原文尾端一個空白，比對前去除），目標170 探勘	draft	
+possessive	{person}'s	{person}的	F8 元首名（NAMES.TXT @LEADERNAME，顯示原名），目標170 探勘	draft	
+count-term	{n1} {w1}	{n1} {w1}	F9 4 Villages，目標170 探勘	draft	
+with-expert	{w1} (With {w2})	{w1}（配合{w2}）	百科貨物條目，目標170 探勘	draft	
+nation-citizens	{w1} Citizens:  +{n1}	{w1}公民：+{n1}	F10 分數，目標170 探勘	draft	
+nation-congress	{w1} Continental Congress: +{n1}	{w1}大陸議會：+{n1}	F10 分數，目標170 探勘	draft	
+gold-score	Gold: ({n1}$) +{n2}	金錢：（{n1}$）+{n2}	F10 分數，目標170 探勘	draft	
+score-title	{w1} {person} of the {w2}: {w3} {n1}	{w2}{w1} {person}：{n1}年{w3}	F10 Discoverer Walter Raleigh of the English: Spring 1496，目標170 探勘	draft	
+plow-river	Plow/River: +{n1}	耕地／河流：+{n1}	F1 地形產量加成（原文前導 4 空白），目標170 探勘	draft	
+road-river	Road/River: +{n1}	道路／河流：+{n1}	F1 地形產量加成（原文前導 4 空白），目標170 探勘	draft	
+sentiment	Rebel Sentiment: {n1}%   Tory Sentiment: {n2}%	反叛情緒：{n1}%　保皇情緒：{n2}%	F3 大陸議會報告，目標170 探勘；Rebel Sentiment 沿定稿譯名	draft	
+nation-label	{w1} {w2}:	{w1}{w2}：	F3 English Expeditionary Force（原文尾端一個空白），目標170 探勘	draft	
+forest	{w1} Forest	{w1}	百科地形清單 Boreal Forest；NAMES.TXT @FORESTED 的譯名已含「森林」，目標170 探勘	draft	

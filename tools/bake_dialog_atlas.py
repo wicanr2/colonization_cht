@@ -19,7 +19,7 @@ from PIL import Image, ImageDraw, ImageFont
 from preview_goal102_nation_intro import FONT_SHA
 
 SIZE = 30
-FLOOR = 20  # 使用者 2026-09-26 決定：超界縮字下限為欄位字級 2/3
+FLOOR = 12  # 目標170：字高 5 的框起始 22px、下限 15px；字高 7 仍為 30～20px（使用者 2026-09-26 決定下限 2/3）
 csv.field_size_limit(1 << 24)
 
 

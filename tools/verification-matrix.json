@@ -735,6 +735,46 @@
     "probe_goal169_replays.sh"
    ],
    "known_diffs": "只驗殖民地首屏字串；殖民地內操作、歐洲、報告、百科與木刻畫標題牌（多色）另行處理"
+  },
+  {
+   "id": "europe-reports",
+   "path": "both",
+   "title": "歐洲港口（主畫面、熱鍵按鈕、說明框與三個對話框提示）與顧問報告 F1～F10",
+   "specs": [
+    "035",
+    "038"
+   ],
+   "flags": [
+    "--dialog-a",
+    "--string-a",
+    "--sea-status-a"
+   ],
+   "checker": "check_goal170_window.py",
+   "args": [
+    "--game",
+    "{game}",
+    "--reports",
+    "{reports}/goal170-eu"
+   ],
+   "dir": "goal170-eu",
+   "zh": [
+    "replay-zh"
+   ],
+   "control": [
+    "replay-control"
+   ],
+   "negative": [
+    "neg-noatlas",
+    "neg-noport"
+   ],
+   "gui_inputs": [
+    "gui-eu.inputs.json"
+   ],
+   "regenerate": [
+    "probe_goal170_gui.sh",
+    "probe_goal170_replays.sh"
+   ],
+   "known_diffs": "對話框選項列（#46）維持原文；報告表格內放不下的殖民地名回原文；百科正文另案"
   }
  ],
  "not_covered": [

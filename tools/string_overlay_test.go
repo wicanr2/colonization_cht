@@ -104,11 +104,14 @@ func TestStringStartPx(t *testing.T) {
 	}
 }
 
-// 模擬一串「Door:」：五個字元各寫一點墨跡，讀到 0 完成。
+var fixtureStep uint64 = 100
+
+// 模擬一串「Door:」：五個字元各寫一點墨跡，讀到 0 完成；步數逐次遞增。
 func stringRunFixture(s *stringRuntime, x0, y0 int, color byte, canvas []byte) *stringRun {
 	var done *stringRun
 	for i, ch := range []byte("Door:\x00") {
-		if r := s.onRead(uint32(0x1000+i), ch, uint64(100+i)); r != nil {
+		fixtureStep += 10
+		if r := s.onRead(uint32(0x1000+i), ch, fixtureStep); r != nil {
 			done = r
 			break
 		}
@@ -221,5 +224,102 @@ func TestStringAddSupersede(t *testing.T) {
 	c := &stringItem{ink: image.Rect(242, 100, 280, 105), safe: image.Rect(241, 99, 281, 106)}
 	if d := s.add(c); len(d) != 1 || d[0] != a || len(s.items) != 2 {
 		t.Fatal("墨跡重疊應撤銷舊項目")
+	}
+}
+
+func TestStringJoinHotkey(t *testing.T) {
+	c := stringFixture(t)
+	stringTestFonts(c, "門：(D)")
+	s := &stringRuntime{cat: c, misses: map[string]int{}}
+	canvas := make([]byte, 64000)
+	mk := func(text string, x0 int, color byte, base uint32, step uint64) *stringRun {
+		var done *stringRun
+		for i, ch := range []byte(text + "\x00") {
+			if r := s.onRead(base+uint32(i), ch, step+uint64(i)); r != nil {
+				done = r
+				break
+			}
+			for dy := 0; dy < 5; dy++ {
+				p := (20+dy)*320 + x0 + i*8
+				s.onWrite(p, canvas[p], color, true, false)
+			}
+		}
+		return done
+	}
+	k := mk("D", 40, 14, 0x3000, 100)
+	if s.join(k) != nil || s.key == nil {
+		t.Fatal("單字母應暫存")
+	}
+	rest := mk("oor:", 44, 15, 0x3100, 110)
+	m := s.join(rest)
+	if m == nil || string(m.text) != "Door:" || m.keyColor != 14 || len(m.colors) != 1 {
+		t.Fatalf("應合併：%+v", m)
+	}
+	it, why := s.finish(m, canvas, 200, image.Rectangle{})
+	if it == nil || it.zh != "(D)門：" || it.accentColor != 14 || it.color != 15 || it.accent == nil {
+		t.Fatalf("熱鍵按鈕：%v %s", it, why)
+	}
+	// 間隔太遠或同色則不合併。
+	s.join(mk("D", 40, 14, 0x3000, 300))
+	if m := s.join(mk("oor:", 60, 15, 0x3100, 310)); m.keyColor != 0 {
+		t.Fatal("不相鄰不應合併")
+	}
+}
+
+func TestStringPersonSlot(t *testing.T) {
+	names := []byte("@LEADERNAME\r\nAnn Bee,   1, 0, 0\r\n\r\n@OTHER\r\nNot Person, 1\r\n")
+	head := func(cols string) []byte { return []byte(cols + "\n") }
+	c, err := loadStringCatalog(&dialogCatalog{terms: map[string]string{}},
+		[]byte("template_id\tpattern_en\tzh_hant\tevidence\tstatus\tnotes\np\t{person}'s\t{person}的\t假\tdraft\t\n"),
+		head("candidate_id\tsource_file\tsource_sha256\tbyte_offset\tsource_byte_length\tsource_bytes_sha256\tsource_text\tzh_hant\trole\tstatus\tnotes"),
+		head("message_id\tsource_file\tsource_file_sha256\ttext_offset\ttext_byte_length\tsource_bytes_sha256\tsource_en\tzh_hant\tstatus\tnotes"),
+		head("candidate_id\tsource_file\tsource_sha256\tbyte_offset\tsource_bytes_sha256\tsource_byte_length\tzh_hant\tstatus\tnotes"),
+		head("message_id\tsource_member_sha256\ttext_offset\ttext_byte_length\tsource_bytes_sha256\tsource_name\tzh_hant"),
+		map[string][]byte{"NAMES.TXT": names})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if zh, _, why := c.translate("Ann Bee's "); zh != "Ann Bee的" || why != "" {
+		t.Fatalf("%q %q", zh, why)
+	}
+	if _, _, why := c.translate("Not Person's"); why != "no-template" {
+		t.Fatal("只收元首段的名字")
+	}
+}
+
+func TestStringOutline(t *testing.T) {
+	c := stringFixture(t)
+	stringTestFonts(c, "門：")
+	s := &stringRuntime{cat: c, misses: map[string]int{}}
+	canvas := make([]byte, 64000)
+	for i := range canvas {
+		canvas[i] = 7
+	}
+	var r *stringRun
+	for n, off := range [][2]int{{0, 1}, {1, 0}, {1, 1}} {
+		color := byte(0)
+		if n == 2 {
+			color = 67
+		}
+		copyRun := stringRunFixture(s, 40+off[0], 20+off[1], color, canvas)
+		r = s.outline(copyRun)
+	}
+	if !r.outline || r.outlineC != 0 || len(r.colors) != 1 {
+		t.Fatalf("三次位移重印應併成描邊字：%+v", r)
+	}
+	it, why := s.finish(r, canvas, 300, image.Rectangle{})
+	if it == nil || it.color != 67 || it.shadowColor != 0 || !it.ink.Eq(image.Rect(40, 20, 58, 26)) {
+		t.Fatalf("描邊字項目不符：%v %s", it, why)
+	}
+	for i, v := range it.before {
+		if v != 7 {
+			t.Fatalf("三次重印的文字像素都應還原：%d=%d", i, v)
+		}
+	}
+	// 位移超過 1 像素不併。
+	s.last = nil
+	s.outline(stringRunFixture(s, 40, 20, 0, canvas))
+	if m := s.outline(stringRunFixture(s, 43, 20, 67, canvas)); m.outline {
+		t.Fatal("位移過大不應合併")
 	}
 }

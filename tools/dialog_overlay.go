@@ -56,7 +56,8 @@ type dialogGlyph struct {
 
 const (
 	dialogFontPx    = 30 // A 版：與 help A 版同字級（原版墨跡 7 邏輯像素）
-	dialogFloorPx   = 20 // 使用者 2026-09-26 決定：縮字下限為欄位字級 2/3
+	dialogFloorPx   = 20 // 使用者 2026-09-26 決定：縮字下限為欄位字級 2/3（字高 7 時）
+	dialogAtlasMin  = 12 // 目標170：圖集字級下限（字高 5 的框起始 22px、下限 15px）
 	dialogPitchAtPx = 40 // 30px 時行距 40 輸出像素（原版 10 邏輯像素）
 )
 
@@ -429,12 +430,25 @@ func isASCIIAlnum(r rune) bool {
 
 // dialogMasks 在 w×h 輸出像素的安全區內排版，回傳陰影、一般、強調三層與所用字級；放不下回傳 0。
 // 字頭（中文墨跡上緣）對齊安全區上緣 +4、左緣 +4；陰影向右下 4 輸出像素。
-func (c *dialogCatalog) dialogMasks(zh string, w, h int) (shadow, normal, accent *image.Alpha, size int) {
+// dialogSizes 依原版大寫字高量起始字級 ⌊capH×4.4⌋（上限 30）與下限（起始的 2/3）；字高未知時用 30／20。
+func dialogSizes(capH int) (start, floor int) {
+	if capH <= 0 {
+		return dialogFontPx, dialogFloorPx
+	}
+	start, floor = stringStartPx(capH)
+	if start > dialogFontPx {
+		return dialogFontPx, dialogFloorPx
+	}
+	return start, max(floor, dialogAtlasMin)
+}
+
+func (c *dialogCatalog) dialogMasks(zh string, w, h, capH int) (shadow, normal, accent *image.Alpha, size int) {
 	glyphs, ok := dialogMarked(zh)
 	if !ok || len(glyphs) == 0 {
 		return nil, nil, nil, 0
 	}
-	for size = dialogFontPx; size >= dialogFloorPx; size-- {
+	start, floor := dialogSizes(capH)
+	for size = start; size >= floor; size-- {
 		f := c.fonts[size]
 		if f == nil {
 			return nil, nil, nil, 0
@@ -482,7 +496,7 @@ func dialogBlit(dst, src *image.Alpha, x, y int) {
 
 // loadDialogAtlas 讀 tools/bake_dialog_atlas.py 的圖集並核對字型、語料與術語表雜湊。
 func (c *dialogCatalog) loadDialogAtlas(b []byte, fontSHA string, bind map[string]string) string {
-	fonts, reason := loadAtlasFonts(b, fontSHA, bind, dialogFontPx, dialogFloorPx)
+	fonts, reason := loadAtlasFonts(b, fontSHA, bind, dialogFontPx, dialogAtlasMin)
 	if reason == "" {
 		c.fonts = fonts
 	}
@@ -645,7 +659,8 @@ func (r *dialogRun) dialogLike() bool {
 			n++
 		}
 	}
-	return r.shadowWritten || (n >= 10 && ink.Min.Y > 8 && ink.Max.X <= 240)
+	// 目標170：不再限制 x<240（港口說明框、訓練對話框延伸到右側）；狀態欄是連續字串，不經本判斷。
+	return r.shadowWritten || (n >= 10 && ink.Min.Y > 8)
 }
 
 // scanDialogBox 掃描色號 0 的外框：左右框沿 (hx,hy) 所在列、上框取 [x0,x1) 各欄由 ty 往上的最常見列。
@@ -799,9 +814,7 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 		st.shadow, st.normal, st.accent, st.size = d.cat.centeredMasks(zh, st.safe.Dx()*4, st.safe.Dy()*4,
 			observedPitch(lines, 10)*4, shadowC != 0)
 	case why == "":
-		if !r.shadowWritten {
-			return nil, shown, "no-box-style"
-		}
+		// 目標170：有色號 0 外框即可，不再要求陰影色（港口說明框、訓練對話框無陰影）。
 		last := lines[len(lines)-1].box
 		l, top, rt := scanDialogBox(before, last.Min.X, (last.Min.Y+last.Max.Y)/2, lines[0].box.Min.X, lines[0].box.Max.X, lines[0].box.Min.Y)
 		st.safe = image.Rect(l+3, top+3, rt-3, ink.Max.Y+2)
@@ -810,7 +823,14 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 		}
 		// 目標167：印字期間其他寫入者（例如顧問肖像壓在框上）不撤銷；逐點以最後寫入者重建印前底圖，
 		// 只還原最後由改色常式寫下的像素，肖像像素保留原版印後值。
-		st.shadow, st.normal, st.accent, st.size = d.cat.dialogMasks(zh, st.safe.Dx()*4, st.safe.Dy()*4)
+		capH := 0
+		for _, l := range lines {
+			capH = max(capH, l.capH)
+		}
+		st.shadow, st.normal, st.accent, st.size = d.cat.dialogMasks(zh, st.safe.Dx()*4, st.safe.Dy()*4, capH)
+		if st.shadow != nil && shadowC == 0 {
+			st.shadow = image.NewAlpha(st.shadow.Rect) // 原版無陰影
+		}
 	case why == "no-template":
 		// 逐行清單：每一行都必須各自唯一命中；任何一行不中即整段回原文。
 		items := make([]string, len(lines))
@@ -857,7 +877,8 @@ func (c *dialogCatalog) lineMasks(items []string, lines []runLine, safe image.Re
 	for _, l := range lines {
 		capH = max(capH, l.capH)
 	}
-	for size = dialogFontPx; size >= dialogFloorPx; size-- {
+	start, floor := dialogSizes(capH)
+	for size = start; size >= floor; size-- {
 		f := c.fonts[size]
 		if f == nil || f.cjkBottom-f.cjkTop > pitch*4-4 || f.cjkBottom-f.cjkTop > capH*4 {
 			continue

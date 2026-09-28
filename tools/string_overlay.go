@@ -26,6 +26,7 @@ type stringCatalog struct {
 	frags     map[string]string // 片段字典：英文→中文；衝突者為空字串（視為查無）
 	templates []stringTemplate
 	colony    map[string]string // COLONY.TXT 預設名→「中文（原名）」
+	people    map[string]bool   // 目標170：NAMES.TXT @LEADERNAME 的元首名（玩家可改名，顯示原名）
 	owned     map[string]bool   // 專屬欄位已處理的原文，本層不處理
 	fonts     map[int]*dialogFont
 }
@@ -38,7 +39,7 @@ const (
 )
 
 var (
-	stringSlot   = regexp.MustCompile(`\{(n\d|w\d|colony)\}`)
+	stringSlot   = regexp.MustCompile(`\{(n\d|w\d|colony|person)\}`)
 	stringLetter = regexp.MustCompile(`[A-Za-z]`)
 )
 
@@ -86,7 +87,18 @@ func verifiedRaw(files map[string][]byte, file, fileSHA, offset, length, rawSHA,
 
 // loadStringCatalog 建立片段字典（海上詞典、語料清冊與譯稿的 LABELS／NAMES／WOODCUT 單行列）、模板與殖民地名稱。
 func loadStringCatalog(dlg *dialogCatalog, templates, sea, corpus, draft, colony []byte, files map[string][]byte) (*stringCatalog, error) {
-	c := &stringCatalog{dlg: dlg, frags: map[string]string{}, colony: map[string]string{}, owned: map[string]bool{}}
+	c := &stringCatalog{dlg: dlg, frags: map[string]string{}, colony: map[string]string{}, owned: map[string]bool{}, people: map[string]bool{}}
+	if names, ok := files["NAMES.TXT"]; ok {
+		section := ""
+		for _, line := range strings.Split(string(names), "\r\n") {
+			switch {
+			case strings.HasPrefix(line, "@"):
+				section = line
+			case section == "@LEADERNAME" && line != "" && !strings.HasPrefix(line, ";"):
+				c.people[strings.TrimSpace(strings.SplitN(line, ",", 2)[0])] = true
+			}
+		}
+	}
 	single := func(raw, zh string) bool {
 		return zh != "" && !strings.Contains(raw, "\r\n") && !strings.ContainsAny(raw, "~#@^") && !strings.ContainsAny(zh, "~#^{}")
 	}
@@ -126,15 +138,16 @@ func loadStringCatalog(dlg *dialogCatalog, templates, sea, corpus, draft, colony
 	}
 	for _, r := range rows {
 		f := r["source_file"]
-		if f != "LABELS.TXT" && f != "WOODCUT.TXT" && f != "NAMES.TXT" {
+		if f != "LABELS.TXT" && f != "WOODCUT.TXT" && f != "NAMES.TXT" && f != "PEDIA.TXT" && f != "MENU.TXT" {
 			continue
 		}
 		raw, ok, err := verifiedRaw(files, f, r["source_sha256"], r["byte_offset"], r["source_byte_length"], r["source_bytes_sha256"], r["candidate_id"])
 		if err != nil {
 			return nil, err
 		}
+		// 目標170：MENU.TXT 選單項目與 PEDIA.TXT 類別名（百科副標）也收；MENU 項目去掉前導縮排。
 		if ok && !strings.Contains(raw, ",") && single(raw, r["zh_hant"]) {
-			c.addFrag(raw, r["zh_hant"])
+			c.addFrag(strings.TrimLeft(raw, " "), r["zh_hant"])
 		}
 	}
 	rows = tsvRows(colony)
@@ -247,7 +260,14 @@ func (c *stringCatalog) lookup(en string) string {
 
 // translate 依設計第 4 點把一串原文換成中文；回傳原因（空字串表示成功）。
 func (c *stringCatalog) translate(text string) (zh, id, reason string) {
-	t := strings.TrimRight(text, " ")
+	t := strings.Trim(text, " ") // 前導縮排與尾端空白都不佔墨跡
+	// 目標170：整串精確相同者優先（殖民地名稱、片段字典），再試模板，最後逐行模板。
+	if zh, ok := c.colony[t]; ok {
+		return zh, "colony", ""
+	}
+	if zh := c.lookup(t); zh != "" {
+		return zh, "dictionary", ""
+	}
 	var hits []string
 	var hitID string
 	for _, tpl := range c.templates {
@@ -265,6 +285,8 @@ func (c *stringCatalog) translate(text string) (zh, id, reason string) {
 				if zh, has := c.colony[v]; has {
 					v = zh
 				}
+			case s == "person":
+				ok = ok && c.people[v]
 			default:
 				v = c.lookup(v)
 				ok = ok && v != ""
@@ -281,12 +303,6 @@ func (c *stringCatalog) translate(text string) (zh, id, reason string) {
 		return hits[0], "template:" + hitID, ""
 	case len(hits) > 1:
 		return "", "", "ambiguous-template"
-	}
-	if zh, ok := c.colony[t]; ok {
-		return zh, "colony", ""
-	}
-	if zh := c.lookup(t); zh != "" {
-		return zh, "dictionary", ""
 	}
 	if c.dlg != nil {
 		if tpl, zh, why := c.dlg.matchIn(c.dlg.lines, t); why == "" {
@@ -305,7 +321,9 @@ func stringStartPx(capH int) (start, floor int) {
 
 // stringMasks 單行排版：靠原版墨跡左緣，中文墨跡頂端對齊原版墨跡頂端；寬度放不下即逐級縮字。
 // limitRight 是右界（輸出像素，相對安全區左緣）；shadow 為陰影位移（0 表示不畫陰影）。
-func (c *stringCatalog) stringMasks(zh string, ink, safe image.Rectangle, capH, limitRight, shadow int) (sh, n *image.Alpha, size int) {
+func (c *stringCatalog) stringMasks(prefix, zh string, ink, safe image.Rectangle, capH, limitRight, shadow int) (sh, n, ac *image.Alpha, size int) {
+	full := prefix + zh
+	nPrefix := len([]rune(prefix))
 	start, floor := stringStartPx(capH)
 	rect := image.Rect(0, 0, safe.Dx()*4, safe.Dy()*4)
 	for size = start; size >= floor; size-- {
@@ -316,7 +334,7 @@ func (c *stringCatalog) stringMasks(zh string, ink, safe image.Rectangle, capH, 
 		x, y := (ink.Min.X-safe.Min.X)*4, (ink.Min.Y-safe.Min.Y)*4-f.cjkTop
 		w := 0
 		good := true
-		for _, r := range zh {
+		for _, r := range full {
 			gw, has := f.widths[r]
 			if !has {
 				good = false
@@ -325,28 +343,40 @@ func (c *stringCatalog) stringMasks(zh string, ink, safe image.Rectangle, capH, 
 			w += gw
 		}
 		if !good {
-			return nil, nil, 0
+			return nil, nil, nil, 0
 		}
-		if x+w+shadow > limitRight || y+f.cjkBottom+shadow > rect.Dy() || y+f.cjkTop < 0 {
+		pad := shadow
+		if shadow < 0 {
+			pad = -shadow
+		}
+		if x+w+pad > limitRight || y+f.cjkBottom+pad > rect.Dy() || y+f.cjkTop-max(-shadow, 0) < 0 || x-max(-shadow, 0) < 0 {
 			continue
 		}
 		// 安全區只延伸到中文實際需要的寬度（不少於原版墨跡外擴 1 像素），避免把之後畫的圖示包進比對範圍。
-		need := max(rect.Dx()-(safe.Max.X-ink.Max.X-1)*4, x+w+shadow)
+		need := max(rect.Dx()-(safe.Max.X-ink.Max.X-1)*4, x+w+pad)
 		if safe.Max.X > ink.Max.X+1 {
 			rect.Max.X = min(rect.Dx(), (need+3)/4*4)
 		}
-		sh, n = image.NewAlpha(rect), image.NewAlpha(rect)
-		for _, r := range zh {
+		sh, n, ac = image.NewAlpha(rect), image.NewAlpha(rect), image.NewAlpha(rect)
+		for i, r := range []rune(full) {
 			a := f.glyphs[r]
-			dialogBlit(n, a, x, y)
+			if i < nPrefix {
+				dialogBlit(ac, a, x, y)
+			} else {
+				dialogBlit(n, a, x, y)
+			}
 			if shadow > 0 {
 				dialogBlit(sh, a, x+shadow, y+shadow)
+			} else if shadow < 0 {
+				for _, d := range [][2]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {1, 1}, {-1, 1}, {1, -1}} {
+					dialogBlit(sh, a, x+d[0]*-shadow, y+d[1]*-shadow)
+				}
 			}
 			x += f.widths[r]
 		}
-		return sh, n, size
+		return sh, n, ac, size
 	}
-	return nil, nil, 0
+	return nil, nil, nil, 0
 }
 
 // ---- 執行期（設計第 1、2、7 點）----
@@ -360,15 +390,23 @@ type stringRun struct {
 	firstOld    map[int]byte
 	lastVal     map[int]byte
 	others      image.Rectangle
+	keyColor    byte            // 目標170：熱鍵首字母另成一串時合併進來的首字母色號（0 表示沒有）
+	keyNext     byte            // 首字母後其餘字母的色號
+	outline     bool            // 目標170：同一串以 1 像素位移重印數次的描邊字
+	outlineC    byte            // 描邊色（先印的幾次）
+	outlineInk  image.Rectangle // 各次重印墨跡的聯集
 }
 
 type stringItem struct {
 	id, text, zh string
 	ink, safe    image.Rectangle
 	color        byte
+	accentColor  byte // 目標170：熱鍵按鈕「(R)」的色號
+	shadowColor  byte // 陰影或描邊色號
 	size         int
 	shadowOff    int
 	shadow, norm *image.Alpha
+	accent       *image.Alpha
 	before       []byte // 印前畫布的安全區（本串文字像素已還原）
 	after        []byte // 完成時畫布的安全區
 	phase        string // waiting-screen、active、suspended
@@ -379,6 +417,8 @@ type stringItem struct {
 type stringRuntime struct {
 	cat      *stringCatalog
 	cur      *stringRun
+	key      *stringRun // 目標170：暫存的單字母字串，等待與緊接的同列字串合併
+	last     *stringRun // 目標170：上一串（描邊字比對用）
 	items    []*stringItem
 	misses   map[string]int
 	reason   string
@@ -430,6 +470,109 @@ func stringRect(buf []byte, r image.Rectangle) []byte {
 	return b
 }
 
+// join 處理熱鍵按鈕：單一字母的一串先暫存；緊接的下一串若在同一基線、左緣緊貼（間隔 0～3 像素）、
+// 色號不同且兩串各自單色，就合併成一串並記下首字母色號。回傳要交給 finish 的一串（暫存時回傳 nil）。
+func (s *stringRuntime) join(r *stringRun) *stringRun {
+	var ink image.Rectangle
+	for _, b := range r.boxes {
+		ink = ink.Union(b)
+	}
+	k := s.key
+	s.key = nil
+	if len(r.text) == 1 && stringLetter.Match(r.text) && !ink.Empty() && len(r.colors) == 1 {
+		s.key = r
+		return nil
+	}
+	if k == nil || len(r.colors) != 1 || ink.Empty() || r.start-k.last >= stringGap {
+		return r
+	}
+	var kink image.Rectangle
+	for _, b := range k.boxes {
+		kink = kink.Union(b)
+	}
+	gap := ink.Min.X - kink.Max.X
+	var kc, rc byte
+	for c := range k.colors {
+		kc = c
+	}
+	for c := range r.colors {
+		rc = c
+	}
+	if gap < 0 || gap > 3 || abs(ink.Max.Y-kink.Max.Y) > 1 || kc == rc {
+		return r
+	}
+	m := &stringRun{base: k.base, next: r.next, start: k.start, last: r.last, text: append(append([]byte{}, k.text...), r.text...),
+		boxes: append(append([]image.Rectangle{}, k.boxes...), r.boxes...), colors: map[byte]int{rc: r.colors[rc]},
+		firstOld: map[int]byte{}, lastVal: map[int]byte{}, others: k.others.Union(r.others), keyColor: kc, keyNext: rc}
+	for _, src := range []*stringRun{k, r} {
+		for i, v := range src.firstOld {
+			if _, seen := m.firstOld[i]; !seen {
+				m.firstOld[i] = v
+			}
+		}
+		for i, v := range src.lastVal {
+			m.lastVal[i] = v
+		}
+	}
+	return m
+}
+
+// outline 處理描邊字：與上一串文字相同、墨跡左上角位移不超過 1 像素、且在 100,000 步內，即併成一串：
+// 墨跡取聯集、印前值保留最早者，先印者的色號當描邊色，最後一次的色號當字色。
+func (s *stringRuntime) outline(r *stringRun) *stringRun {
+	l := s.last
+	s.last = r
+	if l == nil || string(l.text) != string(r.text) || len(r.colors) != 1 || r.start < l.last || r.start-l.last >= 100000 {
+		return r
+	}
+	var li, ri image.Rectangle
+	for _, b := range l.boxes {
+		li = li.Union(b)
+	}
+	for _, b := range r.boxes {
+		ri = ri.Union(b)
+	}
+	if li.Empty() || ri.Empty() || abs(li.Min.X-ri.Min.X) > 1 || abs(li.Min.Y-ri.Min.Y) > 1 {
+		return r
+	}
+	oc := l.outlineC
+	if !l.outline {
+		if len(l.colors) != 1 {
+			return r
+		}
+		for c := range l.colors {
+			oc = c
+		}
+	}
+	m := *r
+	m.outline, m.outlineC = true, oc
+	m.outlineInk = li.Union(l.outlineInk).Union(ri)
+	m.firstOld, m.lastVal = map[int]byte{}, map[int]byte{}
+	for i, v := range l.firstOld {
+		m.firstOld[i] = v
+	}
+	for i, v := range r.firstOld {
+		if _, seen := m.firstOld[i]; !seen {
+			m.firstOld[i] = v
+		}
+	}
+	for _, src := range []*stringRun{l, r} {
+		for i, v := range src.lastVal {
+			m.lastVal[i] = v
+		}
+	}
+	m.others = l.others.Union(r.others)
+	s.last = &m
+	return &m
+}
+
+func abs(v int) int {
+	if v < 0 {
+		return -v
+	}
+	return v
+}
+
 // finish 依設計第 3～6 點處理一串完成的文字；回傳新項目，或原因（空字串且無項目表示不需處理）。
 // panel 非空時，落在其中的字串沿用規格032 狀態欄樣式：右界延伸到欄邊、黑色陰影向右下 2 輸出像素。
 func (s *stringRuntime) finish(r *stringRun, canvas []byte, step uint64, panel image.Rectangle) (*stringItem, string) {
@@ -461,6 +604,8 @@ func (s *stringRuntime) finish(r *stringRun, canvas []byte, step uint64, panel i
 	if capH == 0 {
 		capH = ink.Dy()
 	}
+	face := ink
+	ink = ink.Union(r.outlineInk)
 	safe := ink.Inset(-1).Intersect(image.Rect(0, 0, 320, 200))
 	if r.others.Overlaps(safe) {
 		return nil, "other-writer"
@@ -469,13 +614,22 @@ func (s *stringRuntime) finish(r *stringRun, canvas []byte, step uint64, panel i
 	if why != "" {
 		return nil, why
 	}
+	prefix := ""
+	if r.keyColor != 0 {
+		// 熱鍵按鈕依規格032 選單列樣式：「(R)」用首字母原色，中文用其餘字母原色。
+		prefix = "(" + string(r.text[0]) + ")"
+	}
 	limit, shadow := safe.Dx()*4, 0
 	if !panel.Empty() && ink.In(panel) {
 		// 設計第 6 點（狀態欄樣式）：安全區延伸到欄右緣，右界留 2 輸出像素給陰影。
 		safe = image.Rect(safe.Min.X, safe.Min.Y, panel.Max.X, safe.Max.Y)
 		limit, shadow = safe.Dx()*4, 2
 	}
-	sh, n, size := s.cat.stringMasks(zh, ink, safe, capH, limit, shadow)
+	shadowC := byte(0)
+	if r.outline {
+		shadow, shadowC = -4, r.outlineC // 負值：描邊（字形向四周各擴 4 輸出像素）
+	}
+	sh, n, ac, size := s.cat.stringMasks(prefix, zh, face, safe, capH, limit, shadow)
 	if n == nil {
 		return nil, "does-not-fit"
 	}
@@ -485,8 +639,8 @@ func (s *stringRuntime) finish(r *stringRun, canvas []byte, step uint64, panel i
 	for i, v := range r.firstOld {
 		before[i] = v
 	}
-	return &stringItem{id: "STRING:" + id, text: text, zh: zh, ink: ink, safe: safe, color: color, size: size, shadowOff: shadow,
-		shadow: sh, norm: n, before: stringRect(before, safe), after: stringRect(canvas, safe), phase: "waiting-screen", complete: step}, ""
+	return &stringItem{id: "STRING:" + id, text: text, zh: prefix + zh, ink: ink, safe: safe, color: color, accentColor: r.keyColor, shadowColor: shadowC,
+		size: size, shadowOff: shadow, shadow: sh, norm: n, accent: ac, before: stringRect(before, safe), after: stringRect(canvas, safe), phase: "waiting-screen", complete: step}, ""
 }
 
 // add 加入新項目：原版墨跡與新項目重疊的舊項目（同位置重印）撤銷；超過上限先撤銷最舊者。回傳被撤銷的項目。

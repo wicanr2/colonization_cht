@@ -81,7 +81,7 @@ func TestDialogShown(t *testing.T) {
 func TestDialogMasks(t *testing.T) {
 	c := dialogFixture(t)
 	c.fonts = map[int]*dialogFont{}
-	for size := dialogFloorPx; size <= dialogFontPx; size++ {
+	for size := dialogAtlasMin; size <= dialogFontPx; size++ {
 		f := &dialogFont{glyphs: map[rune]*image.Alpha{}, widths: map[rune]int{}, cjkTop: 2, cjkBottom: size - 2}
 		for _, r := range "問候蘇族英國。甲" {
 			a := image.NewAlpha(image.Rect(0, 0, size, size+5))
@@ -92,27 +92,27 @@ func TestDialogMasks(t *testing.T) {
 		}
 		c.fonts[size] = f
 	}
-	sh, n, ac, size := c.dialogMasks("{蘇族}問候{英國}。", 400, 100)
+	sh, n, ac, size := c.dialogMasks("{蘇族}問候{英國}。", 400, 100, 7)
 	if size != 30 || sh == nil || n == nil || ac == nil {
 		t.Fatalf("30px 應放得下：%d", size)
 	}
 	if ac.AlphaAt(4+5, 10).A == 0 || ac.AlphaAt(4+2*30+5, 10).A != 0 {
 		t.Fatal("強調層只含 {} 內字")
 	}
-	if _, _, _, size := c.dialogMasks("問候問候問候問候問候問候", 200, 40); size != 0 {
+	if _, _, _, size := c.dialogMasks("問候問候問候問候問候問候", 200, 40, 7); size != 0 {
 		t.Fatalf("放不下應回 0，得 %d", size)
 	}
-	if _, _, _, size := c.dialogMasks("問候問候問候", 200, 100); size != 30 {
+	if _, _, _, size := c.dialogMasks("問候問候問候", 200, 100, 7); size != 30 {
 		t.Fatalf("兩行 30px：%d", size)
 	}
-	if _, _, _, size := c.dialogMasks("缺字", 400, 100); size != 0 {
+	if _, _, _, size := c.dialogMasks("缺字", 400, 100, 7); size != 0 {
 		t.Fatal("圖集缺字應回原文")
 	}
 }
 
 func dialogTestFonts(c *dialogCatalog, chars string) {
 	c.fonts = map[int]*dialogFont{}
-	for size := dialogFloorPx; size <= dialogFontPx; size++ {
+	for size := dialogAtlasMin; size <= dialogFontPx; size++ {
 		f := &dialogFont{glyphs: map[rune]*image.Alpha{}, widths: map[rune]int{}, cjkTop: 2, cjkBottom: size - 2}
 		for _, r := range chars {
 			a := image.NewAlpha(image.Rect(0, 0, size, size+5))
@@ -254,5 +254,18 @@ func TestScanDialogBoxPortrait(t *testing.T) {
 	l, top, r := scanDialogBox(canvas, 20, 100, 15, 195, 50)
 	if l != 10 || top != 40 || r != 199 {
 		t.Fatalf("外框 %d %d %d", l, top, r)
+	}
+}
+
+func TestDialogSizes(t *testing.T) {
+	for _, tc := range [][3]int{{7, 30, 20}, {5, 22, 15}, {0, 30, 20}, {9, 30, 20}} {
+		if s, f := dialogSizes(tc[0]); s != tc[1] || f != tc[2] {
+			t.Errorf("字高 %d：%d／%d", tc[0], s, f)
+		}
+	}
+	c := dialogFixture(t)
+	dialogTestFonts(c, "問候")
+	if _, _, _, size := c.dialogMasks("問候", 400, 100, 5); size != 22 {
+		t.Fatalf("字高 5 起始 22px：%d", size)
 	}
 }
