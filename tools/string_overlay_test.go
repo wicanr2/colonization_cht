@@ -323,3 +323,26 @@ func TestStringOutline(t *testing.T) {
 		t.Fatal("位移過大不應合併")
 	}
 }
+
+func TestStringAmbiguousSame(t *testing.T) {
+	c := stringFixture(t)
+	for _, row := range [][3]string{{"a", "{w1} ({n1} Boats)", "{w1}（{n1} 船）"}, {"b", "{w1} ({n1} {w2})", "{w1}（{n1} {w2}）"}} {
+		tpl, err := makeStringTemplate(row[0], row[1], row[2])
+		if err != nil {
+			t.Fatal(err)
+		}
+		c.templates = append(c.templates, tpl)
+	}
+	c.addFrag("Boats", "船")
+	if zh, _, why := c.translate("Door: (2 Boats)"); why != "" || zh != "門：（2 船）" {
+		t.Fatalf("相同譯文的多列命中應接受：%q %q", zh, why)
+	}
+	c.addFrag("Carts", "車")
+	c.templates = append(c.templates, func() stringTemplate {
+		x, _ := makeStringTemplate("c", "{w1} ({n1} Carts)", "{w1}有{n1}車")
+		return x
+	}())
+	if _, _, why := c.translate("Door: (2 Carts)"); why != "ambiguous-template" {
+		t.Fatal("譯文不同的多列命中仍應視為不明確：" + why)
+	}
+}

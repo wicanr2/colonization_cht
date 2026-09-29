@@ -84,3 +84,10 @@
 - **元首名槽位：**`{person}` 只接受 NAMES.TXT `@LEADERNAME` 段列出的名字，原樣顯示（玩家開局可改名，比照殖民地自訂名保持原文）。模板 `{person}'s`→「{person}的」。
 - **乾跑：**前端旗標 `--string-dry-run <檔案>` 只載入字串層字典，逐行翻譯並輸出 `<out>.dry.json` 後結束，不執行原版；用於以探勘清冊檢查命中率。
 - **驗收（目標170）：**歐洲港口主畫面與報告 F1～F10 限定 CONFORMED（`tools/check_goal170_window.py`；`tools/string_overlay.go` SHA-256 `dd1ae623…`、`tools/live_menu.go` `df27e9a9…`、模板表 `652a6b7b…`）。
+
+## 2026-09-29：目標172 附記
+
+- 全大寫的片段（建造清單 `ARMORY`、`PRINTING PRESS`）查不到時，改查每字首字大寫的寫法。
+- 多列模板命中但譯文完全相同時視為命中（泛用的 `{w1} ({n1} {w2})` 與專用的 `{w1} ({n1} Tons)`）；譯文不同仍為 `ambiguous-template`。
+- 模板表新增職業選單產量欄、建造清單、貨物噸數、地形附加、裝備需求、職業選單標題、BUY 說明框各列，以及逐行清單分欄後的右欄（`col-*`）（見模板表的證據欄）。
+- **驗收（目標172）：**殖民地職業選單、建造清單、懸停標籤與港口三個選項列限定 CONFORMED（`tools/check_goal172_window.py`、`tools/check_rebase_replay.py`；`tools/string_overlay.go` SHA-256 `fe8551c8…`、`tools/live_menu.go` `f9d261d6…`、模板表 `fb9c7625…`）。

@@ -621,8 +621,11 @@ type dialogRuntime struct {
 	fontReason string
 	run        *dialogRun
 	cur        *dialogShown
+	prev       *dialogShown // 目標172：與目前一段不重疊、先後印出的前一段（例如選單標題）
 	accepted   int
 	misses     map[string]int // 有陰影色但未能中文化的顯示字串與原因
+	// 目標172：逐行清單的行查不到逐行模板時，改問規格038 字串層的字典與模板（對話框選項列、選單）。
+	lineFallback func(string) (string, bool)
 }
 
 const dialogGap = 20000 // 兩萬步內無讀取即視為一段結束（字距約 800～1,400 步、換行約 2,500 步）
@@ -726,10 +729,20 @@ func scanDialogBox(canvas []byte, hx, hy, x0, x1, ty int) (l, t, r int) {
 }
 
 type runLine struct {
-	text string
-	box  image.Rectangle
-	capH int // 原版大寫字母與數字的最大墨跡高（邏輯像素），作為中文字級上限
+	text    string
+	box     image.Rectangle
+	capH    int             // 原版大寫字母與數字的最大墨跡高（邏輯像素），作為中文字級上限
+	colors  map[byte]int    // 目標172：本行改色點的色號分布（選項列買不起的行為灰色）
+	right   image.Rectangle // 目標172：「=」右對齊標記之後的墨跡（職業選單右欄）
+	inRight bool
+	// gapLeft 是行內出現大段無墨空隙或連續兩個以上空白（歐洲港口價格欄、建造清單成本欄）之前的正規化文字；
+	// 此時 right 為空隙之後的墨跡。沒有空隙或已有「=」時為空。
+	gapLeft string
+	gapRaw  int
 }
+
+// lineGapPx 是判定行內右欄的最小無墨空隙（邏輯像素）；原版字間空白約 3～6 點。
+const lineGapPx = 16
 
 // runLines 依 x 回捲切行；空白沒有墨跡，歸入目前行。
 func runLines(chars []dialogChar) []runLine {
@@ -742,8 +755,20 @@ func runLines(chars []dialogChar) []runLine {
 				out = append(out, cur)
 				cur = runLine{}
 			}
+			if !cur.inRight && !cur.box.Empty() && (ch.box.Min.X-cur.box.Max.X >= lineGapPx || strings.HasSuffix(cur.text, "  ")) {
+				cur.inRight, cur.gapRaw = true, len(cur.text)+1
+			}
 			lastX = ch.box.Min.X
 			cur.box = cur.box.Union(ch.box)
+			if cur.inRight {
+				cur.right = cur.right.Union(ch.box)
+			}
+			if cur.colors == nil {
+				cur.colors = map[byte]int{}
+			}
+			for c, n := range ch.colors {
+				cur.colors[c] += n
+			}
 			if (ch.c >= 'A' && ch.c <= 'Z') || (ch.c >= '0' && ch.c <= '9') {
 				cur.capH = max(cur.capH, ch.box.Dy())
 			}
@@ -751,11 +776,17 @@ func runLines(chars []dialogChar) []runLine {
 		if ch.c != 0 {
 			cur.text += string(rune(ch.c))
 		}
+		if ch.c == '=' {
+			cur.inRight = true
+		}
 	}
 	if !cur.box.Empty() {
 		out = append(out, cur)
 	}
 	for i := range out {
+		if g := out[i].gapRaw; g > 0 {
+			out[i].gapLeft = dialogNormalize(out[i].text[:g-1])
+		}
 		out[i].text = dialogNormalize(out[i].text)
 		if out[i].capH == 0 {
 			out[i].capH = out[i].box.Dy()
@@ -854,7 +885,16 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 		l, top, rt := scanDialogBox(before, last.Min.X, (last.Min.Y+last.Max.Y)/2, lines[0].box.Min.X, lines[0].box.Max.X, lines[0].box.Min.Y)
 		st.safe = image.Rect(l+3, top+3, rt-3, ink.Max.Y+2)
 		if l == 0 || top == 0 || rt == 319 || !ink.In(st.safe) {
-			return nil, shown, "ink-outside-box"
+			// 目標172：整句命中但沒有色號 0 外框（例如殖民地 BUY 說明框），改用無框段落版面：
+			// 安全區為原版墨跡外擴 2 邏輯像素，依原版行距排版。
+			st.safe = ink.Inset(-2).Intersect(image.Rect(0, 0, 320, 200))
+			st.shadow, st.normal, st.accent, st.size = d.cat.centeredMasks(zh, st.safe.Dx()*4, st.safe.Dy()*4,
+				observedPitch(lines, 10)*4, shadowC != 0)
+			if st.size == 0 {
+				return nil, shown, "layout-overflow"
+			}
+			st.id, st.zh = t.id, zh
+			return st, shown, ""
 		}
 		// 目標167：印字期間其他寫入者（例如顧問肖像壓在框上）不撤銷；逐點以最後寫入者重建印前底圖，
 		// 只還原最後由改色常式寫下的像素，肖像像素保留原版印後值。
@@ -869,13 +909,59 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 	case why == "no-template":
 		// 逐行清單：每一行都必須各自唯一命中；任何一行不中即整段回原文。
 		items := make([]string, len(lines))
+		id := ""
 		for i, l := range lines {
-			lt, lzh, lwhy := d.cat.matchIn(d.cat.lines, l.text)
+			var lt *dialogTemplate
+			lzh, lwhy := "", "no-template"
+			if left, right, ok := strings.Cut(l.text, " = "); ok && !l.right.Empty() && d.lineFallback != nil {
+				// 目標172：「=」是右對齊標記：左欄、右欄分別翻譯，以 \t 分隔交給 lineMasks 分欄排版。
+				lz, ok1 := d.lineFallback(left)
+				rz, ok2 := d.lineFallback(right)
+				if !ok1 || !ok2 {
+					return nil, shown, "line-no-template"
+				}
+				lzh, lwhy = lz+"\t"+rz, ""
+			} else if l.gapLeft != "" && strings.HasPrefix(l.text, l.gapLeft) && d.lineFallback != nil {
+				// 行內大段空隙（港口價格欄）：兩欄都命中才分欄；否則整行照舊翻譯。
+				lz, ok1 := d.lineFallback(l.gapLeft)
+				rz, ok2 := d.lineFallback(strings.TrimSpace(l.text[len(l.gapLeft):]))
+				if ok1 && ok2 {
+					lzh, lwhy = lz+"\t"+rz, ""
+				}
+			}
+			if lwhy == "" {
+				if id == "" {
+					id = "STRING:line"
+				}
+			} else {
+				lt, lzh, lwhy = d.cat.matchIn(d.cat.lines, l.text)
+				if lwhy != "" && d.lineFallback != nil {
+					if zh, ok := d.lineFallback(l.text); ok {
+						lzh, lwhy, lt = zh, "", nil
+						if id == "" {
+							id = "STRING:line"
+						}
+					}
+				}
+			}
 			if lwhy != "" {
 				return nil, shown, "line-" + lwhy
 			}
 			items[i] = lzh
-			t = lt
+			// 目標172：本行主要色號是整段的第二色（例如買不起的灰色選項）時，整行用強調層（該色）畫。
+			if dom, best := byte(0), 0; accentC != 0 && accentC != normalC {
+				for c, n := range l.colors {
+					if c != shadowC && n > best {
+						dom, best = c, n
+					}
+				}
+				if dom == accentC && !strings.ContainsAny(lzh, "{}") {
+					items[i] = "{" + strings.ReplaceAll(lzh, "\t", "}\t{") + "}"
+				}
+			}
+			if lt != nil {
+				t, id = lt, lt.id
+			}
 		}
 		var union image.Rectangle
 		for _, l := range lines {
@@ -884,9 +970,9 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 		st.safe = image.Rect(union.Min.X-1, union.Min.Y-1, union.Max.X+2, union.Max.Y+2).Intersect(image.Rect(0, 0, 320, 200))
 		st.shadow, st.normal, st.accent, st.size = d.cat.lineMasks(items, lines, st.safe, observedPitch(lines, union.Dy()+3), shadowC != 0)
 		if len(lines) == 1 {
-			st.id = t.id
+			st.id = id
 		} else {
-			st.id = t.id + "+list"
+			st.id = id + "+list"
 		}
 		st.zh = strings.Join(items, "／")
 		if st.size == 0 {
@@ -921,31 +1007,44 @@ func (c *dialogCatalog) lineMasks(items []string, lines []runLine, safe image.Re
 		sh, n, ac = image.NewAlpha(rect), image.NewAlpha(rect), image.NewAlpha(rect)
 		ok := true
 		for i, l := range lines {
-			glyphs, good := dialogMarked(items[i])
-			x, y := (l.box.Min.X-safe.Min.X)*4, (l.box.Min.Y-safe.Min.Y)*4-f.cjkTop
-			w := 0
-			for _, g := range glyphs {
-				gw, has := f.widths[g.r]
-				if !has {
-					good = false
+			y := (l.box.Min.Y-safe.Min.Y)*4 - f.cjkTop
+			// 目標172：含 \t 的項目分兩欄：左欄靠原版行左緣，右欄右緣對齊原版右欄墨跡右緣。
+			cols := strings.SplitN(items[i], "\t", 2)
+			leftEnd := 0
+			for k, col := range cols {
+				glyphs, good := dialogMarked(col)
+				w := 0
+				for _, g := range glyphs {
+					gw, has := f.widths[g.r]
+					if !has {
+						good = false
+						break
+					}
+					w += gw
+				}
+				x := (l.box.Min.X - safe.Min.X) * 4
+				if k == 1 {
+					x = (l.right.Max.X-safe.Min.X)*4 - w
+				}
+				if !good || x+w+4 > rect.Dx() || y+f.cjkBottom > rect.Dy() || x < leftEnd {
+					ok = false
 					break
 				}
-				w += gw
+				for _, g := range glyphs {
+					a := f.glyphs[g.r]
+					dialogBlit(n, a, x, y)
+					if shadow {
+						dialogBlit(sh, a, x+4, y+4)
+					}
+					if g.accent {
+						dialogBlit(ac, a, x, y)
+					}
+					x += f.widths[g.r]
+				}
+				leftEnd = x + 8
 			}
-			if !good || x+w+4 > rect.Dx() || y+f.cjkBottom > rect.Dy() {
-				ok = false
+			if !ok {
 				break
-			}
-			for _, g := range glyphs {
-				a := f.glyphs[g.r]
-				dialogBlit(n, a, x, y)
-				if shadow {
-					dialogBlit(sh, a, x+4, y+4)
-				}
-				if g.accent {
-					dialogBlit(ac, a, x, y)
-				}
-				x += f.widths[g.r]
 			}
 		}
 		if ok {

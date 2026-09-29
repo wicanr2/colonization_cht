@@ -144,6 +144,20 @@ func TestRunLinesAndStyle(t *testing.T) {
 	if len(lines) != 2 || lines[0].text != "Save Game" || lines[1].text != "Load Game" || observedPitch(lines, 10) != 8 {
 		t.Fatalf("%+v", lines)
 	}
+	// 目標172：行內大段無墨空隙（港口價格欄）記為右欄；一般字間空白不算。
+	gap := append(mk("Master Carpenters    ", 17, 61, 68), mk("(Cost: 1000)", 150, 61, 68)...)
+	gl := runLines(gap)
+	if len(gl) != 1 || gl[0].gapLeft != "Master Carpenters" || gl[0].text != "Master Carpenters (Cost: 1000)" || gl[0].right.Min.X != 150 {
+		t.Fatalf("空隙分欄 %+v", gl)
+	}
+	// 長名稱使空隙變窄時，以原文連續空白判定。
+	tight := append(mk("TOBACCONIST'S SHOP    ", 17, 61, 68)[:20], mk("(64 Hammers)", 97, 61, 68)...)
+	if tl := runLines(tight); len(tl) != 1 || tl[0].gapLeft != "TOBACCONIST'S SHOP" || tl[0].right.Min.X != 97 {
+		t.Fatalf("連續空白分欄 %+v", tl)
+	}
+	if lines[0].gapLeft != "" || !lines[0].right.Empty() {
+		t.Fatalf("一般字間不應分欄 %+v", lines[0])
+	}
 	r := &dialogRun{chars: append(mk("COLO", 0, 0, 252), mk("Version 3.0", 20, 0, 254)...)}
 	if n, a, s := runStyle(r); n != 254 || a != 252 || s != 0 {
 		t.Fatalf("字色 %d %d %d", n, a, s)

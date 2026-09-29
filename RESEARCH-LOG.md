@@ -4178,3 +4178,10 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 
 - **輸入與工具：**同目標170；前端 `tools/live_menu.go` SHA-256 `80806ad0…`、`tools/dialog_overlay.go` `64a777f0…`；檢查器 `tools/check_goal171_window.py` `63cf4a54…`；百科雙語稿 `text/pedia-bilingual.tsv`。
 - **已證實：**條目正文逐字印字、無外框，標題行與強調段色號 149、內文 68，字高 5；原文 `^` 開頭的行在畫面上自成一行。百科下拉選單是逐字印字，會被 GUI 自動化誤認為訊息框。清單排序與 PEDIA.TXT 鍵序不同（雪茄是 `@CARGO10`）。真 GUI 現場輸入 `36f807d7…` 下中英原版狀態一致（終點 `9f248277…`）。
+
+## 2026-09-29：目標172 殖民地畫面內操作與對話框選項列
+
+- **輸入與工具：**同目標171；前端 `tools/live_menu.go` SHA-256 `f9d261d6…`、`tools/dialog_overlay.go` `5f9138f0…`、`tools/string_overlay.go` `fe8551c8…`；模板表 `fb9c7625…`；檢查器 `tools/check_goal172_window.py` `60676a7c…`、`tools/check_rebase_replay.py` `f15e6750…`；探勘清冊 `workplace/reports/goal172-census-explore/REPORT.md`。
+- **已證實：**職業選單與建造清單是「標題一段＋整份清單一段」的逐字印字；職業選單以 `=` 為右對齊標記（不出墨），建造清單與港口購買、訓練清單則是名稱後接連續空白、右欄右對齊，長名稱時名稱與右欄的空隙只剩約 9 邏輯像素。懸停標籤是連續字串，色 15、字高 5。真 GUI 現場輸入 `9c375e71…` 下中英原版狀態一致（終點 `4024be0c…`）。
+- **已證實：**同一份真 GUI 腳本在不同前端下會走到不同世界（部族不同），不能拿重拍的真 GUI 當舊路徑的回歸基準。
+

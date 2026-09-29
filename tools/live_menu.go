@@ -1976,6 +1976,16 @@ func main() {
 		}
 	}
 	strOn := str != nil && str.reason == ""
+	if strOn && dlgOn {
+		dlg.lineFallback = func(text string) (string, bool) {
+			// 目標172：少於兩個英文字母的行（單一字母、數字）不借用字串層，免得零碎印字變成覆蓋而擋住其他欄位。
+			if len(stringLetter.FindAllString(text, 2)) < 2 {
+				return "", false
+			}
+			zh, _, why := str.cat.translate(text)
+			return zh, why == ""
+		}
+	}
 	if *stringDry != "" {
 		if str == nil || str.cat == nil {
 			panic("字串層未載入")
@@ -2084,12 +2094,18 @@ func main() {
 		events = append(events, map[string]any{"candidate_id": help.id, "stage": "expired", "step": m.Steps, "reason": reason})
 		help.phase, help.patch, help.afterSafe, help.firstOld, help.lastText = "expired", nil, nil, nil, nil
 	}
-	dialogExpire := func(reason string) {
-		if dlg == nil || dlg.cur == nil || dlg.cur.phase == "expired" {
+	dialogExpireOne := func(st *dialogShown, reason string) {
+		if st == nil || st.phase == "expired" {
 			return
 		}
-		events = append(events, map[string]any{"candidate_id": dlg.cur.id, "stage": "expired", "step": m.Steps, "reason": reason})
-		dlg.cur.phase, dlg.cur.patch, dlg.cur.afterSafe, dlg.cur.before = "expired", nil, nil, nil
+		events = append(events, map[string]any{"candidate_id": st.id, "stage": "expired", "step": m.Steps, "reason": reason})
+		st.phase, st.patch, st.afterSafe, st.before = "expired", nil, nil, nil
+	}
+	dialogExpire := func(reason string) {
+		if dlg != nil {
+			dialogExpireOne(dlg.prev, reason)
+			dialogExpireOne(dlg.cur, reason)
+		}
 	}
 	dialogSeq := 0
 	dialogFinish := func(r *dialogRun) {
@@ -2112,7 +2128,14 @@ func main() {
 			}
 			return
 		}
-		dialogExpire("superseded-by-new-dialog")
+		// 目標172：標題與清單常是先後兩段（殖民地職業選單、建造清單）；上一段仍有效、與新段不重疊且相隔 2M 步內即保留。
+		if old := dlg.cur; old != nil && old.phase != "expired" && !old.safe.Overlaps(st.safe) && st.complete-old.complete < 2000000 {
+			dialogExpireOne(dlg.prev, "superseded-by-new-dialog")
+			dlg.prev = old
+		} else {
+			dialogExpire("superseded-by-new-dialog")
+			dlg.prev = nil
+		}
 		dlg.cur = st
 		events = append(events, map[string]any{"candidate_id": st.id, "stage": "source", "step": r.start, "entry_ip": "0D21:00C6",
 			"source_linear": r.base, "shown": shown, "font_px": st.size,
@@ -3034,9 +3057,12 @@ func main() {
 				dlg.run = nil
 				dialogFinish(r)
 			}
-			if st := dlg.cur; st != nil && st.phase != "expired" {
+			for _, st := range []*dialogShown{dlg.prev, dlg.cur} {
+				if st == nil || st.phase == "expired" {
+					continue
+				}
 				if m.VideoMode() != 0x13 {
-					dialogExpire("mode-changed")
+					dialogExpireOne(st, "mode-changed")
 				} else if st.phase == "waiting-screen" {
 					clean := bytes.Clone(m.Mem[0xa0000:0xafa00])
 					box := cursorBox(int(d.Mouse.X), int(d.Mouse.Y)).Intersect(st.safe)
@@ -3046,10 +3072,10 @@ func main() {
 						}
 					}
 					if m.Steps-st.complete > 2000000 {
-						dialogExpire("screen-sync-timeout")
+						dialogExpireOne(st, "screen-sync-timeout")
 					} else if bytes.Equal(rectBytes(clean, st.safe), rectBytes(canvas(), st.safe)) {
 						if p, err := overlay.NewPatch(st.before, canvas(), 320, 200, st.safe); err != nil {
-							dialogExpire("invalid-observed-patch")
+							dialogExpireOne(st, "invalid-observed-patch")
 						} else {
 							st.patch, st.afterSafe, st.phase = p, rectBytes(canvas(), st.safe), "active"
 							dlg.accepted++
@@ -3057,7 +3083,7 @@ func main() {
 						}
 					}
 				} else if st.phase == "active" && !bytes.Equal(rectBytes(canvas(), st.safe), st.afterSafe) {
-					dialogExpire("canvas-page-changed")
+					dialogExpireOne(st, "canvas-page-changed")
 				}
 			}
 		}
@@ -3668,56 +3694,62 @@ func main() {
 				did, dreason, dok := "GAME.TXT:dialog", "idle", false
 				if dlg.fontReason != "" {
 					dreason = dlg.fontReason
-				} else if st := dlg.cur; st != nil {
-					did, dreason = st.id, st.phase
-					if st.phase != "active" || st.patch == nil {
-					} else if d.Mouse.Buttons != 0 {
-						dreason = "mouse-button-held"
-					} else {
-						// 同 help：游標範圍換回印後底層再合成中文，最後把真 VGA 的游標像素畫回最上層。
-						mx, my := int(d.Mouse.X), int(d.Mouse.Y)
-						clean := bytes.Clone(indexed)
-						box := cursorBox(mx, my).Intersect(st.safe)
-						for y := box.Min.Y; y < box.Max.Y; y++ {
-							for x := box.Min.X; x < box.Max.X; x++ {
-								clean[y*320+x] = st.afterSafe[(y-st.safe.Min.Y)*st.safe.Dx()+x-st.safe.Min.X]
-							}
+				} else {
+					// 目標172：保留的前一段（標題）與目前一段（清單）各自合成。
+					for _, st := range []*dialogShown{dlg.prev, dlg.cur} {
+						if st == nil {
+							continue
 						}
-						if !bytes.Equal(rectBytes(clean, st.safe), st.afterSafe) {
-							dreason = "vga-safe-mismatch"
+						did, dreason = st.id, st.phase
+						if st.phase != "active" || st.patch == nil {
+						} else if d.Mouse.Buttons != 0 {
+							dreason = "mouse-button-held"
 						} else {
-							origin := st.safe.Min.Mul(4)
-							shadowIdx := st.shadowC
-							if shadowIdx == 0 {
-								shadowIdx = 47 // 原版無陰影：陰影遮罩全空，此色號不會用到
-							}
-							frame, composed, why, err := overlay.Compose(clean, m.DAC[:], 320, 200, 4,
-								st.patch, st.shadow, origin, shadowIdx, enabled)
-							must(err)
-							dreason = why
-							if composed {
-								panel := image.Rectangle{Min: origin, Max: st.safe.Max.Mul(4)}
-								draw.Draw(output, panel, frame, panel.Min, draw.Src)
-								for _, layer := range []struct {
-									mask  *image.Alpha
-									index int
-								}{{st.normal, int(st.normalC)}, {st.accent, int(st.accentC)}} {
-									p := layer.index * 3
-									fg := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
-									draw.DrawMask(output, panel, image.NewUniform(fg), image.Point{}, layer.mask, image.Point{}, draw.Over)
+							// 同 help：游標範圍換回印後底層再合成中文，最後把真 VGA 的游標像素畫回最上層。
+							mx, my := int(d.Mouse.X), int(d.Mouse.Y)
+							clean := bytes.Clone(indexed)
+							box := cursorBox(mx, my).Intersect(st.safe)
+							for y := box.Min.Y; y < box.Max.Y; y++ {
+								for x := box.Min.X; x < box.Max.X; x++ {
+									clean[y*320+x] = st.afterSafe[(y-st.safe.Min.Y)*st.safe.Dx()+x-st.safe.Min.X]
 								}
-								for y := box.Min.Y; y < box.Max.Y; y++ {
-									for x := box.Min.X; x < box.Max.X; x++ {
-										if v := indexed[y*320+x]; v != clean[y*320+x] {
-											p := int(v) * 3
-											c := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
-											draw.Draw(output, image.Rect(x*4, y*4, x*4+4, y*4+4), image.NewUniform(c), image.Point{}, draw.Src)
+							}
+							if !bytes.Equal(rectBytes(clean, st.safe), st.afterSafe) {
+								dreason = "vga-safe-mismatch"
+							} else {
+								origin := st.safe.Min.Mul(4)
+								shadowIdx := st.shadowC
+								if shadowIdx == 0 {
+									shadowIdx = 47 // 原版無陰影：陰影遮罩全空，此色號不會用到
+								}
+								frame, composed, why, err := overlay.Compose(clean, m.DAC[:], 320, 200, 4,
+									st.patch, st.shadow, origin, shadowIdx, enabled)
+								must(err)
+								dreason = why
+								if composed {
+									panel := image.Rectangle{Min: origin, Max: st.safe.Max.Mul(4)}
+									draw.Draw(output, panel, frame, panel.Min, draw.Src)
+									for _, layer := range []struct {
+										mask  *image.Alpha
+										index int
+									}{{st.normal, int(st.normalC)}, {st.accent, int(st.accentC)}} {
+										p := layer.index * 3
+										fg := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
+										draw.DrawMask(output, panel, image.NewUniform(fg), image.Point{}, layer.mask, image.Point{}, draw.Over)
+									}
+									for y := box.Min.Y; y < box.Max.Y; y++ {
+										for x := box.Min.X; x < box.Max.X; x++ {
+											if v := indexed[y*320+x]; v != clean[y*320+x] {
+												p := int(v) * 3
+												c := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
+												draw.Draw(output, image.Rect(x*4, y*4, x*4+4, y*4+4), image.NewUniform(c), image.Point{}, draw.Src)
+											}
 										}
 									}
+									dok, applied = true, true
+									dreason, reason = "applied", "applied"
+									st.appliedFrames++
 								}
-								dok, applied = true, true
-								dreason, reason = "applied", "applied"
-								st.appliedFrames++
 							}
 						}
 					}
@@ -3806,9 +3838,13 @@ func main() {
 		if strOn && !*control {
 			// 規格038：最後繪製，疊在其他層之上；對話框啟用時不畫與其重疊的字串；按住滑鼠整層回原文。
 			shown, sreason := 0, "idle"
-			var dialogSafe image.Rectangle
-			if dlg != nil && dlg.cur != nil && dlg.cur.phase == "active" {
-				dialogSafe = dlg.cur.safe
+			var dialogSafes []image.Rectangle
+			if dlg != nil {
+				for _, st := range []*dialogShown{dlg.prev, dlg.cur} {
+					if st != nil && st.phase == "active" {
+						dialogSafes = append(dialogSafes, st.safe.Inset(2)) // 目標172：只看安全區內縮 2 點，避免相鄰的說明字串被擋
+					}
+				}
 			}
 			cur := cursorBox(int(d.Mouse.X), int(d.Mouse.Y))
 			paint := func(x, y int, v byte) {
@@ -3827,7 +3863,7 @@ func main() {
 				case d.Mouse.Buttons != 0:
 					sreason = "mouse-button-held"
 					continue
-				case it.safe.Overlaps(dialogSafe):
+				case overlapsAny(it.ink, dialogSafes):
 					sreason = "dialog-over-string"
 					continue
 				case !stringSame(indexed, it, cur):

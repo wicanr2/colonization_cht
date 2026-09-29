@@ -40,6 +40,11 @@ def main():
     p.add_argument("--values", type=Path, default=Path("/repo/text/variable-values.zh-Hant.tsv"))
     p.add_argument("--help-catalog", type=Path, default=Path("/repo/text/help-bilingual.tsv"))
     p.add_argument("--pedia", type=Path, default=Path("/repo/text/pedia-bilingual.tsv"))
+    # 目標172：逐行清單的行會改問字串層（規格038），其模板、海上詞典與殖民地名稱的字也收進本圖集；
+    # 只收字、不綁雜湊（字串層自己的圖集已綁定這些來源），缺字時該行回原文。
+    p.add_argument("--templates", type=Path, default=Path("/repo/text/string-templates.zh-Hant.tsv"))
+    p.add_argument("--sea", type=Path, default=Path("/repo/text/sea-status.zh-Hant.tsv"))
+    p.add_argument("--colony", type=Path, default=Path("/repo/text/colony-bilingual.tsv"))
     p.add_argument("--game", type=Path, required=True)
     p.add_argument("--font", type=Path, required=True)
     p.add_argument("--output", type=Path, required=True)
@@ -54,7 +59,8 @@ def main():
     rows = list(csv.DictReader(io.StringIO(corpus.decode("utf-8")), delimiter="\t", quoting=csv.QUOTE_NONE))
     text = "".join(r["zh_hant"] for r in rows if r["source_file"] in ("GAME.TXT", "NAMES.TXT"))
     text += "".join(r[1] for r in csv.reader(io.StringIO(terms.decode("utf-8")), delimiter="\t") if len(r) > 1)
-    for extra in (draft, values, helpcat, pedia):
+    templates, sea, colony = a.templates.read_bytes(), a.sea.read_bytes(), a.colony.read_bytes()
+    for extra in (draft, values, helpcat, pedia, templates, sea, colony):
         rows = list(csv.DictReader(io.StringIO(extra.decode("utf-8")), delimiter="\t", quoting=csv.QUOTE_NONE))
         text += "".join(r.get("zh_hant") or r.get("zh") or "" for r in rows)
     chars = sorted({c for c in text if c not in "{}\\\t\n" and ord(c) >= 0x20} |

@@ -248,7 +248,24 @@ func makeStringTemplate(id, pattern, zh string) (stringTemplate, error) {
 }
 
 // lookup 查一個片段：片段字典、定稿術語與 NAMES 對照；查無或衝突回空字串。
+// 目標172：全大寫的片段（建造清單 ARMORY、PRINTING PRESS）查不到時，改查每字首字大寫的寫法。
 func (c *stringCatalog) lookup(en string) string {
+	if zh := c.lookupExact(en); zh != "" {
+		return zh
+	}
+	if strings.ToUpper(en) == en && strings.ToLower(en) != en {
+		words := strings.Split(strings.ToLower(en), " ")
+		for i, w := range words {
+			if w != "" {
+				words[i] = strings.ToUpper(w[:1]) + w[1:]
+			}
+		}
+		return c.lookupExact(strings.Join(words, " "))
+	}
+	return ""
+}
+
+func (c *stringCatalog) lookupExact(en string) string {
 	if zh := c.frags[en]; zh != "" {
 		return zh
 	}
@@ -302,7 +319,13 @@ func (c *stringCatalog) translate(text string) (zh, id, reason string) {
 	case len(hits) == 1:
 		return hits[0], "template:" + hitID, ""
 	case len(hits) > 1:
-		return "", "", "ambiguous-template"
+		// 目標172：多列命中但譯文完全相同（例如泛用與專用模板給出同一句），視為命中。
+		for _, h := range hits[1:] {
+			if h != hits[0] {
+				return "", "", "ambiguous-template"
+			}
+		}
+		return hits[0], "template:" + hitID, ""
 	}
 	if c.dlg != nil {
 		if tpl, zh, why := c.dlg.matchIn(c.dlg.lines, t); why == "" {
@@ -708,4 +731,14 @@ func (s *stringRuntime) step(canvas, vga []byte, cursor image.Rectangle, now uin
 	}
 	s.items = kept
 	return changes
+}
+
+// overlapsAny 判斷 r 是否與任一矩形重疊。
+func overlapsAny(r image.Rectangle, list []image.Rectangle) bool {
+	for _, x := range list {
+		if r.Overlaps(x) {
+			return true
+		}
+	}
+	return false
 }

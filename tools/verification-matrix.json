@@ -815,6 +815,46 @@
     "probe_goal171_replays.sh"
    ],
    "known_diffs": "只驗六類首篇；其餘條目同一機制未逐篇真 GUI；Miscellaneous／Complete 類別未出現"
+  },
+  {
+   "id": "colony-interactions",
+   "path": "both",
+   "title": "殖民地畫面內操作：職業選單（兩欄）、建造清單、懸停標籤；對話框選項列改問字串層",
+   "specs": [
+    "035",
+    "038"
+   ],
+   "flags": [
+    "--dialog-a",
+    "--string-a",
+    "--sea-status-a"
+   ],
+   "checker": "check_goal172_window.py",
+   "args": [
+    "--game",
+    "{game}",
+    "--reports",
+    "{reports}/goal172-colony"
+   ],
+   "dir": "goal172-colony",
+   "zh": [
+    "replay-zh"
+   ],
+   "control": [
+    "replay-control"
+   ],
+   "negative": [
+    "neg-noatlas",
+    "neg-noyield"
+   ],
+   "gui_inputs": [
+    "gui-colony.inputs.json"
+   ],
+   "regenerate": [
+    "probe_goal172_gui.sh",
+    "probe_goal172_replays.sh"
+   ],
+   "known_diffs": "BUY 說明框未走到；武裝面板、多人口殖民地未到達"
   }
  ],
  "not_covered": [
