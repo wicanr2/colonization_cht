@@ -1,0 +1,160 @@
+file	pattern	screen	mechanism	reach	reason
+GAME.TXT	DOS|DOSYES|RETIRE	對話框	dialog	normal	離開遊戲確認（Exit to DOS? Yes/No），Esc 或 GAME 選單可開
+GAME.TXT	BEGINMENU	主選單	dialog	normal	主選單版本行與五個選項列（NEW WORLD、AMERICA、CUSTOMIZE、LOAD、Hall of Fame）
+GAME.TXT	AMERICA	開局設定	dialog	normal	選 AMERICA 開局時詢問原版美洲圖或自製地圖
+GAME.TXT	MAPTOLOAD	開局設定	dialog	conditional	選用地圖編輯器產生的地圖時才列出地圖檔
+GAME.TXT	MULTI|MULTINEXT|MULTIREV	對話框	dialog	unreachable	多人模式開局、輪替與革命警告；主選單沒有多人入口
+GAME.TXT	GAMEOPTIONS|COLONYOPTIONS|SOUNDOPTIONS	對話框	dialog	normal	GAME 選單的遊戲、殖民地報告、音效選項勾選框
+GAME.TXT	SAVEGAME|SAVEGOOD|LOADGAME|LOADGOOD	存讀檔	dialog	normal	選存檔槽、選讀檔、存讀成功訊息
+GAME.TXT	SAVEERROR|LOADNOT|LOADOLD|LOADSIZE|LOADERROR	存讀檔	dialog	conditional	存讀檔失敗、檔案無效、舊版或地圖尺寸不符時
+GAME.TXT	PICKNATION|DIFFICULTY	開局設定	nation	normal	選歐洲國家與難度的清單；卡片畫面另有 LABELS／NAMES 來源，此段是否實際印出待核對
+GAME.TXT	LEADERNAME	開局設定	input	normal	開局輸入玩家姓名欄
+GAME.TXT	FINDCITY	海上地圖	input	normal	VIEW 選單 Find Colony 的輸入欄
+GAME.TXT	NOCITY	海上地圖	dialog	conditional	Find Colony 找不到名稱時
+GAME.TXT	VICEROY	開場字幕	dialog	normal	開局國王接見羊皮紙卷軸（規格036；目標166／167 已觀測）
+GAME.TXT	VICEROY2	開場字幕	dialog	conditional	荷蘭開局的國王接見版本（Stadtholder）
+GAME.TXT	@VICEROY	不顯示	none	unreachable	以 @@ 註銷的舊版國王接見段落（內文行皆以 @ 起首），不被程式引用（強推論）
+GAME.TXT	LANDHO	海上地圖	input	normal	首次看到新大陸時為陸地命名的輸入欄
+GAME.TXT	COLONY	海上地圖	input	normal	建立殖民地時命名輸入欄
+GAME.TXT	RENAMECOLONY	殖民地	input	conditional	玩家主動為殖民地改名時
+GAME.TXT	LANDFALL	海上地圖	dialog	normal	船靠岸時詢問是否登陸（Stay With Ships）
+GAME.TXT	LANDFALL2	海上地圖	dialog	normal	船隻無法沿河上溯時詢問登陸；目標167 已觀測
+GAME.TXT	ONLYPIO|ONLYCOL|SHIPCOMBAT|SHIPLAKE|LANDFIRST|SEACOLONY|NOPORT	海上地圖	dialog	conditional	下達單位無法執行的指令時的錯誤提示（例：at sea、lake）
+GAME.TXT	BUILT	海上地圖	dialog	normal	建立殖民地後報告其產出
+GAME.TXT	FULL	海上地圖	dialog	conditional	殖民地過於擁擠時提醒另覓地點
+GAME.TXT	NOTEACHER|NEEDCOLLEGE|NEEDUNIVERSITY|SCHOOL1|COLLEGE2|UNIV3	殖民地	dialog	conditional	把殖民者放進學校類建築教學時的限制提示；需先建學校
+GAME.TXT	TRAINFAIL|TRAINCRIMINAL|TRAININDENTURED|TRAINPROFESSION	對話框	dialog	conditional	學校教學結果；需有教師在學校
+GAME.TXT	SIEGE	殖民地	dialog	conditional	殖民地被敵軍兵力包圍（戰爭中）
+GAME.TXT	ABANDON|ABANDON2	殖民地	dialog	conditional	把最後一名殖民者移出殖民地、確認放棄時
+GAME.TXT	SAILHOME	海上地圖	dialog	normal	船隻抵達公海時詢問是否駛往歐洲
+GAME.TXT	SAILAWAY	歐洲港口	dialog	normal	歐洲港口船隻啟航前往新大陸確認
+GAME.TXT	SAILPORT|TRAVELPLACE	對話框	dialog	conditional	有多個可選港口或殖民地時，選擇目的地清單
+GAME.TXT	UNREST	對話框	dialog	normal	宗教動盪帶來新移民（十字架累積）；目標167 已觀測
+GAME.TXT	RECRUITCHOOSE	歐洲港口	dialog	conditional	William Brewster 加入後由玩家挑選移民
+GAME.TXT	RECRUIT|RECRUIT2|KINGRECRUIT|PURCHASE|REALLYBUY	歐洲港口	dialog	normal	歐洲港口 RECRUIT／TRAIN／PURCHASE 對話框與購買確認
+GAME.TXT	NODOCKS	殖民地	dialog	normal	未建碼頭就把人放到海洋格時的提示
+GAME.TXT	CARGOREADY0|CARGOREADY1|CARGOREADY2	對話框	dialog	conditional	殖民地一批貨物備妥的通知；確切觸發條件未核對（假說：貿易路線或運貨單位相關）
+GAME.TXT	LUMBER|COTTON|TOBACCO|CANESUGAR|FURS|ORE|TOOLS	對話框	dialog	normal	殖民地加工原料耗盡的回合訊息（run out of）
+GAME.TXT	FOOD1|FOOD2|VANISH|STARVE1|STARVE2|FOODLOW	對話框	dialog	conditional	殖民地糧食不足、飢荒或殖民地消失
+GAME.TXT	SPOIL1|SPOIL2|SPOIL3|SPOIL4	對話框	dialog	normal	倉庫容量超過，貨物損失的回合訊息
+GAME.TXT	BUYME0|BUYME1	殖民地	dialog	normal	殖民地畫面 BUY 按鈕說明框（目標172 已觀測 BUYME0）
+GAME.TXT	DEFOREST|DEPLETION|CLEARCUT	對話框	dialog	conditional	殖民地附近伐林、礦脈枯竭、拓荒者清林得木材
+GAME.TXT	UNITFLAG|COLONYFLAG	除錯	dialog	unreachable	內部資料旗標錯誤訊息（Flags Error），僅程式內部異常時出現
+GAME.TXT	LOSTCITY\d|SCREWED|BURIAL[123]	海上地圖	dialog	normal	探索傳聞遺跡（Lost City Rumor）的隨機結果：寶藏、墓地、青春之泉等
+GAME.TXT	SNEAK|CANCELPEACE|SIGNTREATY|DECLAREWAR|HAVETREATY|VIOLATE	外交	dialog	conditional	各勢力宣戰、和約、偷襲、越界的外交通報
+GAME.TXT	WHACKINDIANS	原住民村落	dialog	conditional	單位移向原住民單位或村落時確認是否攻擊
+GAME.TXT	VILLAGEHAPPY|VILLAGESAVAGE|VILLAGEMEDIUM|VILLAGEBAD|VILLAGEWAR	原住民村落	dialog	normal	偵察兵或殖民者抵達原住民村落的開場描述
+GAME.TXT	INDIANWELCOME|INDIANBOW|INDIANTREATY|INDIANHELLO1|INDIANHELLO2|INDIANPEACE|INDIANCOME|INDIANSHUN	外交	dialog	normal	首次接觸原住民部族的會面與和約訊息；目標167 已觀測兩則
+GAME.TXT	INDIANWAGONS|INDIANCITY|INDIANGOLD|INDIANWAR	外交	dialog	conditional	原住民因暴行索賠或宣戰
+GAME.TXT	INDIANGRUDGE	獨立戰爭	dialog	conditional	原住民在獨立戰爭中選邊
+GAME.TXT	INDIANSLAVES|INDIANSCONVERT|INDIANGIVEFOOD|INDIANGIVESTUFF|INDIANCOMMENT|INDIANBEGFOOD	對話框	dialog	conditional	原住民皈依、贈糧、贈禮、乞糧等關係事件
+GAME.TXT	INDIANLAND|INDIANROAD|INDIANFOREST|INDIANFOREST2|INDIANBRIBE	海上地圖	dialog	conditional	在原住民土地建殖民地、修路、伐林時的抗議與收買
+GAME.TXT	NOPLOW|NOROAD|TOONEAR|TOONEARBUILD|TOOMOUNTAIN|DISBANDSHIP|CANNOTATTACK	海上地圖	dialog	conditional	無效指令提示：已開墾、已有道路、離殖民地太近、山地、載人船解散等
+GAME.TXT	HALF|SHIPSLOW|SHIPRUN|FORTFIRE|EVASIVE|ARTILLERY|ARTILLERY2|VETERAN|VALOR|PICKACARGO|OVERBOARD	戰鬥	dialog	conditional	戰鬥過程與結果：疲兵、海戰閃避、要塞開火、火砲受損、晉升、奪取貨物
+GAME.TXT	NOLOOT|LOOT|LOOT2|LOOTCASH|LOOTFOREIGN|LOOTCAPTURE|WAGONCAPTURE|COLONISTCAPTURE|COLONISTCAPTURE2|CARGOCAPTURE|DEMOTE|SHIPDAMAGE|SHIPSUNK|LOOTWAGONS	戰鬥	dialog	conditional	戰鬥結果通報：劫掠、俘獲、降級、船隻受損或沉沒
+GAME.TXT	RAIDNOTHING|RAIDWREAK|RAIDSTORES|RAIDBURN|RAIDSCALP|RAIDSHIP|RAIDGOLD	戰鬥	dialog	conditional	原住民襲擊殖民地的結果
+GAME.TXT	MISSION[0-3]|HERESY[01]|INDIANBURN	原住民村落	dialog	conditional	傳教士建立傳教站、譴責他國異端、傳教站被焚
+GAME.TXT	INDIANWIN[012]|INDIANLOSE|INDIANWINCOLONY|INDIANWINCOLONY2|INDIANBURNCOLONY|INDIANBURNCOLONY2|INDIANSURPRISE	戰鬥	dialog	conditional	與原住民交戰的勝負與屠殺、焚毀殖民地
+GAME.TXT	CAPTURED|CAPTURED2|CAPTURED3|BURNED|BURNED2|BURNED3|EUROPEWIN|EUROPELOSE	戰鬥	dialog	conditional	歐洲勢力間交戰、攻陷或焚毀殖民地
+GAME.TXT	WAREHOUSEFULL|SOMEBOYCOTT	對話框	dialog	conditional	卸貨時倉庫已滿、貨物遭議會抵制無法卸下
+GAME.TXT	EXTORTSTUFF|EXTORTPOOR|EXTORTLAUGH|EXTORTNO	原住民村落	dialog	conditional	以軍隊向村落勒索貢品（Demand Tribute）的回應
+GAME.TXT	DONTKNOWSHIPS|MADATSHIPS|MADATWAGONS|GRUDGEWAGONS|CONFISCATE	原住民村落	dialog	conditional	船隻或貨車與村落交易被拒或被沒收
+GAME.TXT	CHIEFHOWDY|CHIEFGUIDES|CHIEFAREA|CHIEFGIFT|CHIEFBORED|CHIEFKILL	原住民村落	dialog	normal	偵察兵求見酋長（Speak With Chief）的隨機結果
+GAME.TXT	KILLWAGONS	對話框	dialog	conditional	貨車在原住民地區失蹤
+GAME.TXT	TRADE[01]|BADCARGO|BADHAGGLE[0-3]|BRING|DEFICIT|BUYWHICH|TRADEWHICH|BUY[01]|NOTENOUGH	原住民村落	dialog	conditional	船或貨車與原住民村落交易、討價還價
+GAME.TXT	LEARNMASTER|LEARNCRIMINAL|LEARNALREADY|LEARNMAD|LEARNSLOW|LEARNSTAY|LEARNLATER|LEARNDONE	原住民村落	dialog	normal	殖民者進村學藝（Live Among The Natives）的各種回應
+GAME.TXT	TRADEMANY|TRADESTART|TRADETYPE|TRADENONE|TRADENONE2|TRADESELECT|TRADEDELETE|SUREDELETE|CARGOLOAD|CARGOUNLOAD|ROUTELOOP	對話框	dialog	conditional	TRADE 選單建立、編輯、刪除貿易路線的對話框
+GAME.TXT	TRADENAME	對話框	input	conditional	貿易路線命名輸入欄
+GAME.TXT	TRADENAMES	對話框	input	conditional	貿易路線預設名稱片段（Run、Ferry 等），用途為組預設名（強推論）
+GAME.TXT	PISS[0-5]	外交	dialog	conditional	原住民部族對玩家態度惡化的通報與原因
+GAME.TXT	KINGTAX|TAXOPTIONS|KINGBLESS|TEAPARTY|KISSUP|KISSSORRY	對話框	dialog	normal	國王加稅通知、接受或拒稅（茶黨事件）與抵制；加稅隨交易頻繁出現
+GAME.TXT	KINGNO|KINGFUND|KINGLOWER|KINGNOTHING|KINGRAISE|KINGLAUGH|KINGWELCOME0	對話框	dialog	conditional	國王回覆請求減稅、請款、請求獨立等；玩家觸發入口未確認（假說：未開放的謁見功能）
+GAME.TXT	MERCANTILISM|PURCHASETAX	對話框	dialog	conditional	建造特定建築或購買後國王的重商主義回應與加稅
+GAME.TXT	PRICEUP|PRICEDOWN	對話框	dialog	normal	歐洲市場商品價格漲跌通報
+GAME.TXT	WHICHFREEDOM|FREEDOM	國會與建國之父	dialog	normal	大陸會議選下一位建國之父、建國之父加入通報
+GAME.TXT	CLAND|CCONT|CTEMP|CCLIM	開局設定	dialog	conditional	CUSTOMIZE New World 的陸地、地形、氣溫、氣候選項；自訂畫面實際標籤是否來自 LABELS 待核對
+GAME.TXT	EUROPEARM|EUROPESHIPCLICK|ARMOPTIONS|EUROPESHIPOPTIONS	歐洲港口	dialog	normal	點歐洲碼頭單位或港內船隻的選項列
+GAME.TXT	COLONYUNIT|UNITOPTIONS|SHIPOPTIONS	殖民地	dialog	normal	點殖民地內（或港內）單位或船隻的選項列
+GAME.TXT	KINGFRIGATE|KINGGALLEON2|KINGGALLEON3|CASHTREASURE	對話框	dialog	conditional	國王贈船、運寶艦隊與出售寶藏
+GAME.TXT	USEDUPTOOLS|NEEDTOOLS|NEEDTOOLS0|NEWCOLONIST|MORETHANTHREE	對話框	dialog	normal	拓荒者用完工具、建造缺工具、人口增長、建築超過三人
+GAME.TXT	ALREADYHAVE|NOMOREWAREHOUSE|NOMOREWAGONS|LOBOTOMIZE|TEACHCONVERT|KEEPSTOCKADE|SUREDISBAND	殖民地	dialog	conditional	建造重複項目、清除專長、柵欄殖民地減員下限、解散確認
+GAME.TXT	KINGMERCY|KINGNEWWAR|KINGVICTORY|KINGWIFE|KINGWAR|KINGNAVACT|KINGSTAMPACT|COUNTRIES	對話框	dialog	conditional	歐洲本國事件（王室婚禮、戰爭、航海法、印花稅法）；COUNTRIES 為代入國名片段
+GAME.TXT	ORDINAL	對話框	dialog	normal	序數片段（first、second…）代入其他訊息；實際使用處未核對
+GAME.TXT	NATION[0-3][AB]	國家介紹	nation	normal	開局國家歷史介紹與特長說明（英法西荷）
+GAME.TXT	CUSTOM	殖民地	dialog	conditional	海關出口貨物勾選框；需 Peter Stuyvesant 與海關
+GAME.TXT	CONTINENTAL	獨立戰爭	dialog	conditional	老兵升為大陸軍（獨立戰爭期間）
+GAME.TXT	SCOUTCOLONY|LOSTOURSCOUTS|LOSTTHEIRSCOUTS	外交	dialog	conditional	偵察兵抵達他國殖民地或被俘
+GAME.TXT	HELLOFIRST|HELLOAHOY|HELLOMEEK|HELLOMANLY|GREATKINGS|GREATDEEDS|GREATLEADER|GREATLEADER2|MYLEADER|MEEKNESS|PIRACY|SIEGES|HEATHEN|APOSTATES|TRIBUTE|WANTSTUFF|RID|WORTHY|GIVECASH|PEACEMANLY|PEACEMEEK|OLDPEACEMEEK|OLDPEACEMANLY|NOTWITHDRAW|WITHDRAW|NOTHINGWITHDRAW|MAYBEWITHDRAW|PROVOKE|WARMEEK|WARMANLY|THREATS|GIFTS|MILITARY|NOCONTACT|ALREADYSMITE|SMITEINDIANS|SMITEEUROPE|UNFORTUNATE|MERCENARY	外交	dialog	conditional	與歐洲對手接觸及談判；需先遇到他國殖民者。GREAT*、MYLEADER、MEEKNESS 為代入片段
+GAME.TXT	HELLOUSA|PIRACYUSA|SIEGESUSA|HEATHENUSA|APOSTATESUSA|TRIBUTEUSA|WANTSTUFFUSA|RIDUSA|PEACEUSA	外交	dialog	conditional	他國已獲准獨立後的新共和國外交版本
+GAME.TXT	SUCCESSION	外交	dialog	conditional	西班牙王位繼承戰爭事件，移除一個歐洲對手
+GAME.TXT	REBELMAJORITY|REBELUNANIMOUS|TORYMINORITY|TORYMAJORITY|SONSUP|SONSDOWN|REBELUP|REBELUP50|REBELDOWN|INEFFICIENT|EFFICIENT	對話框	dialog	conditional	自由之子比例跨門檻、叛軍情緒升降、政府效率變化
+GAME.TXT	REFIT|WELLSEASONED|EXTINCT|TOOMANYUNITS|TOOMANYCOLONIES|UPKEEP	對話框	dialog	conditional	船隻修復、偵察兵升級、部族滅絕、單位或殖民地達上限、維護費不足
+GAME.TXT	KINGBUY	對話框	dialog	conditional	國王擴充皇家遠征軍，遊戲中後期
+GAME.TXT	SEIZURE|SEIZURESEA|SEIZURELAND|INDEPENDENCE|INVASION|TOOTORY|DECLARE|DEADCONVERTS|MOBILIZE|MOBILIZE2|CANTMOBILIZE|KINGMOBILIZE|EUROPENOTAVAIL|FOREIGNNOTAVAIL|EUROPENOTLEAVE|NOWARSDURINGREV|NOCOLONIESEITHER|NOMAYORSDURINGREV|AMBUSHHINT|CONSIDER|INTERVENTION|FRIEND|INTERVENE|LOSING[123]|WARN[123]|WINNING|TORYUPRISING|MERCENARIES|MERCS|ALREADYREVOLUTION|HOWTOWIN	獨立戰爭	dialog	conditional	宣布獨立前後與獨立戰爭期間的訊息；FRIEND 為外援將領名片段
+GAME.TXT	PICKMUSIC|PICKINDEPENDENCE|PICKMILITARY|PICKINDIAN	對話框	dialog	normal	GAME 選單 Pick Music 的曲目清單
+GAME.TXT	HOWMUCH[1-5]	對話框	input	conditional	指定裝卸、移動、買賣貨物數量的輸入欄；以特殊拖曳方式觸發（強推論）
+GAME.TXT	EXPLOITS|SCORE	結局	string	conditional	遊戲結束評分與以玩家命名的紀念物清單
+GAME.TXT	OTHERGRANTED|OTHERMIGHT|OTHERLESS	外交	dialog	conditional	其他歐洲國家殖民地獨立的進展
+GAME.TXT	SCORED|LOSENOCOLONIES|SOONRETIRING0|SOONRETIRING1|RETIRING|RETIRING2	結局	dialog	conditional	退休年限、評分完成、失去所有殖民地等遊戲終局訊息
+GAME.TXT	TRADEMERCANTILISM|TRADEATWAR|TRADENOCARGO|TRADENOWANT|TRADEWITH	外交	dialog	conditional	貨車或船與他國殖民地交易（需 Jan de Witt 等條件）
+GAME.TXT	INDIANWARPATH|INDIANWARPATH2|INDIANWARFARE	原住民村落	dialog	conditional	煽動原住民攻擊他國（Incite Indians）
+GAME.TXT	TIMECHANGE	對話框	dialog	normal	1600 年起時間尺度改為一年兩回合的說明框
+GAME.TXT	TUTORIAL([1-9]|1[0-8])	教學提示	tutorial	normal	Discoverer 難度開教學時隨正常進度出現；目標167 已觀測 1、2、3、5、11、13、14
+GAME.TXT	TUTORIAL19|TUTNOLUMBER|TUTNOSPACES	教學提示	tutorial	conditional	皈依者加入、在無森林或少可耕格處建殖民地時的教學提示
+GAME.TXT	KINGLOSE|KINGWIN	結局	dialog	conditional	獨立戰爭勝敗後國王羊皮紙卷軸（與 VICEROY 同版面）
+GAME.TXT	BUILD([1-9]|10)	開場字幕	caption	normal	開局航行版畫字幕十段（規格029；目標141）
+GAME.TXT	END	不顯示	none	unreachable	檔尾結束標記，無內容
+PEDIA.TXT	PEDIA	百科	string	normal	條目副標「(名稱: 類別)」的類別名
+PEDIA.TXT	MISCELLANEOUS	百科	string	normal	Miscellaneous 類別的 12 個概念名清單；目標170 未到達此類別，正文來源未知
+PEDIA.TXT	FATHER(\d|1\d|2[0-4])	百科	pedia	normal	建國之父條目 25 則，百科清單可列出
+PEDIA.TXT	CARGO(\d|1[0-5])	百科	pedia	normal	貨物條目 16 則
+PEDIA.TXT	UNIT(\d|1\d|2[0-2])	百科	pedia	normal	單位條目 23 則
+PEDIA.TXT	UNIT23	百科	pedia	unreachable	只有標題 {Colonists} 的殘段；百科單位清單只列 23 則（目標170）
+PEDIA.TXT	TERRAIN(\d|1[0-5]|2[4-8])	百科	pedia	normal	地形條目 21 則，與目標170 百科清單數一致
+PEDIA.TXT	TERRAIN(1[6-9]|2[0-3])	百科	pedia	unreachable	重複的八種森林條目；百科清單只列 21 則（假說：地圖上無此編號地形）
+PEDIA.TXT	JOB(\d|1[0-7]|19|2[0-7])	百科	pedia	normal	殖民者技能條目 27 則
+PEDIA.TXT	JOB18	百科	pedia	unreachable	只有標題 {Student} 的殘段；技能清單只列 27 則
+PEDIA.TXT	BUILDING(\d|1[2-9]|2\d|3[2-9]|4[01])	百科	pedia	normal	建築條目 38 則
+PEDIA.TXT	BUILDING(10|11|30|31)	百科	pedia	unreachable	只有標題的殘段（Town Hall 等級、Colonial Assembly、Capitol）；建築清單只列 38 則
+NAMES.TXT	SEASONS	海上地圖	string	normal	季節名，頂列日期字串
+NAMES.TXT	UNFORESTED|FORESTED|OTHER|OTHER_NAMES	海上地圖	string	normal	地形名與河流、未探索等附加名（名稱,數值資料列只取名稱）
+NAMES.TXT	RESOURCE	海上地圖	string	normal	特殊資源名（Oasis、Wheat 等）
+NAMES.TXT	COUNTRY|NATIONALITY|NATIONABBREV|HOMEPORT|COLONYNAME	多畫面共用	string	normal	國名、國籍形容詞、縮寫、母港、殖民地總稱，散見港口頂列、報告與訊息代入
+NAMES.TXT	LEADERNAME	開局設定	input	normal	各國預設領袖名，姓名輸入欄預填與報告顯示
+NAMES.TXT	DIFFICULTY	開局設定	nation	normal	難度名；目標077 證實第一張難度卡由此載入
+NAMES.TXT	INDEPENDENT	獨立戰爭	string	conditional	宣布獨立後的新國名
+NAMES.TXT	MISSION	原住民村落	string	conditional	傳教站名稱前綴，建立傳教站後出現
+NAMES.TXT	CLASS|JOB|UNIT|CARGO|BUILDING|ORDERS	殖民地	string	normal	身分、職業、單位、貨物、建築、指令名，殖民地與地圖面板共用
+NAMES.TXT	ACTIONS	原住民村落	dialog	normal	單位進入村落時的行動選項列（Trade、Mission、Speak With Chief 等）
+NAMES.TXT	VALUES	原住民村落	dialog	conditional	交易訊息 TRADE0 代入的品質形容詞片段（強推論）
+NAMES.TXT	ATTITUDE|ATTITUDINAL|LEVELS|TRIBES	報告	string	normal	原住民態度、程度副詞、文明等級與部族名，印地安顧問報告與村落訊息
+NAMES.TXT	FOUNDING|FATHERS	國會與建國之父	string	normal	建國之父類別與人名
+NAMES.TXT	SCENARIO|COLORS	不顯示	none	unreachable	地圖尺寸參數與顏色數值資料列，非顯示文字
+LABELS.TXT	INFO	海上地圖	string	normal	地圖右側單位資訊欄標籤（Moves、With）
+LABELS.TXT	MISC	多畫面共用	string	normal	混合標籤：開局自訂與難度卡、地圖狀態、港口船期、顧問報告與大陸會議標題
+LABELS.TXT	ROUTE	貿易路線	string	conditional	貿易路線編輯畫面欄名；需使用 TRADE 選單
+LABELS.TXT	CMISC|CTITLE	殖民地	string	normal	殖民地畫面面板標題、按鈕與頂列（目標172 已觀測 BUY、CHANGE 等）
+LABELS.TXT	CMESSAGE	歐洲港口	string	normal	買賣與裝卸交易訊息片段（bought for、Tax、Net）；殖民地內也可能共用
+LABELS.TXT	EUROLABEL	歐洲港口	string	normal	歐洲港口按鈕 RECRUIT、PURCHASE、TRAIN（目標170 已觀測）
+MENU.TXT	GAME|VIEW|ORDERS|REPORTS|TRADE|PEDIA	下拉選單	menu	normal	頂端下拉選單六組項目
+MENU.TXT	CUP	除錯	menu	unreachable	CHEAT 選單（Create Unit、Reveal Map 等），需作弊模式才出現
+MENU.TXT	END	不顯示	none	unreachable	檔尾結束標記，無內容
+COLONY.TXT	ENGLISH|FRENCH|SPANISH|DUTCH	海上地圖	string	normal	各國預設殖民地名（名稱,年份），命名欄預填與地圖名牌
+COLONY.TXT	STOP	不顯示	none	unreachable	各國名單的結束標記，無內容
+MAPEDIT.TXT	MAPTOLOAD|MAPTOEDIT|SAVE|LOAD|ERROR|EXIT|CREATENOW|CONTINENTS[12]|HELP[1-5]|ABOUT	地圖編輯器	dialog	unreachable	地圖編輯器（獨立程式）的對話框與說明；遊戲正常路徑不會進入
+MAPEDIT.TXT	SAVEAS|NEWNAME|XS|YS	地圖編輯器	input	unreachable	地圖編輯器的檔名與尺寸輸入欄；遊戲正常路徑不會進入
+MAPMENU.TXT	GAME|VIEW|CUP|HELP	地圖編輯器	menu	unreachable	地圖編輯器的下拉選單；遊戲正常路徑不會進入
+MAPMENU.TXT	END	不顯示	none	unreachable	檔尾結束標記，無內容
+WOODCUT.TXT	.*	事件版畫	caption	normal	事件木刻版畫標題（A NEW WORLD 等），里程碑事件時全螢幕顯示
+OPENING.TXT	CREDITS|OPENING	不顯示	none	unreachable	開場動畫的座標與時序參數表，非顯示文字
+OPENING.TXT	MESSAGES	開場字幕	string	normal	開場動畫結束後的 Loading Game... 字樣
+CLOSING.TXT	CLOSING	不顯示	none	unreachable	結局動畫參數表，非顯示文字
+CLOSING.TXT	MESSAGES	結局	string	conditional	結局動畫後的 Loading Game... 字樣；需贏得獨立
+TRIBE.TXT	.*	不顯示	none	unreachable	原住民部族在美洲地圖上的座標資料與結束標記，非顯示文字
+DEBUG.TXT	MOTD|MOTD2|MEMORY|CREATE|CREATE2|CSHIP|FOREIGN|FOREIGN2|SETVIEW|SETHUMAN|SETAUTO|SETREPORT|SETEUROPE|DANGER|BADGUYS|OPTIONS|FORCED|TEST	除錯	dialog	unreachable	除錯與作弊選單的對話框（版本資訊、建立單位、切換視角等）；需作弊模式
+DEBUG.TXT	SOUND	除錯	input	unreachable	除錯音效測試的輸入欄；需作弊模式
+DEBUG.TXT	END	不顯示	none	unreachable	除錯段落結束標記，無內容
+EXE	82667b088d38	海上地圖	string	normal	海上狀態欄地形附加「(Major River)」：字串層括號模板 paren-term 已有，字典缺 Major River
+EXE	3f02988e15cd	海上地圖	menu	normal	已顯示：頂端選單列由海上狀態欄層（規格032，sea:bar）繪製；此為對話框層把整列無空白拼接後記下的未套用
+EXE	c9ee0a41420e|84a1cab8db2f	開局設定	input	normal	需新機制：命名殖民地、命名新陸地的輸入欄（#46）
+EXE	74df22d196ea	開局設定	input	normal	需新機制：開局輸入領袖姓名的輸入欄（#46）
