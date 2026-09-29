@@ -1,6 +1,6 @@
 # 目標174：輸入欄標籤（Issue #46 第二部分）
 
-狀態：進行中；開始：2026-09-29。對應 [Issue #46](https://github.com/wicanr2/colonization_cht/issues/46)，擴充[規格035](../spec/035-dialog-overlay-draft.md)。
+狀態：完成；2026-09-29。對應 [Issue #46](https://github.com/wicanr2/colonization_cht/issues/46)，擴充[規格035](../spec/035-dialog-overlay-draft.md)。
 
 ## 已知
 
@@ -25,3 +25,17 @@
 ## 停止線
 
 特定局勢的改名、貿易路線命名、貨物數量輸入欄以同一機制處理，真 GUI 觸發併入 #56（殖民地其餘欄位）與 #60（一般事件）。
+
+## 結果
+
+- 規格035 附記（輸入列標籤）：單行、標籤後接輸入內容與游標 `_` 的逐字印字只翻標籤，中文右緣對齊原標籤右緣，安全區只含標籤墨跡。`Amount:` 五處補入 draft。
+- 真 GUI（`tools/probe_goal174_gui.sh`，現場輸入 SHA-256 `1dcb538c…`）：命名新陸地、命名殖民地的「名稱：」，VIEW 選單 Find Colony 的「殖民領地：」都是中文；輸入框內的 `New England_`、`Jamestown_`、`J_` 保持原樣。
+- 同輸入：中英原版狀態一致（終點 `fc9e3168…`）；四張截圖的標籤區真 GUI 與中文重播逐像素相同，標籤右側 160 邏輯像素的輸入內容中英相同。反向對照：draft 移除標籤譯名、模板表移除 `label-trailing` 時 `Colony:` 回原文且畫面與英文相同。檢查器 `tools/check_goal174_window.py` PASS。
+- 回歸：目標167／169／170／171／172 五條路徑以新前端重播，`tools/check_rebase_replay.py` 對目標172 回歸結果逐檢查點比對：原版狀態與英文控制全同，中文只有命名新陸地、命名殖民地兩個檢查點改變，差異區只有標籤。六點回歸未重跑：它不啟用對話框層，本目標改動只在對話框層。驗證矩陣 PASS 24。
+- 普查重跑：需新機制由 16 降為 0；已顯示中文 360。
+- 開局姓名提示 `@LEADERNAME` 由規格023（`--nation-cards-rest-a`）處理，只開對話框層的路徑中是英文；發行啟動腳本缺對話框層與字串層，已留言 [#53](https://github.com/wicanr2/colonization_cht/issues/53)。
+
+## 移交
+
+- 改名、貿易路線命名、貨物數量輸入欄以同一機制處理，真 GUI 併入 #56、#60。
+- Find Colony 找不到時的「"J" not found.」（`@NOCITY`，變數是玩家輸入）、VIEW 下拉選單、地圖上的殖民地名稱歸 #55。

@@ -150,6 +150,11 @@ func TestRunLinesAndStyle(t *testing.T) {
 	if len(gl) != 1 || gl[0].gapLeft != "Master Carpenters" || gl[0].text != "Master Carpenters (Cost: 1000)" || gl[0].right.Min.X != 150 {
 		t.Fatalf("空隙分欄 %+v", gl)
 	}
+	// 目標174：輸入列記下第一個冒號為止的標籤文字與墨跡。
+	in := runLines(mk("Name: Jamestown_", 40, 90, 68))
+	if len(in) != 1 || in[0].labelText != "Name:" || in[0].label != image.Rect(40, 90, 59, 96) || in[0].text != "Name: Jamestown_" {
+		t.Fatalf("輸入列標籤 %+v", in)
+	}
 	// 長名稱使空隙變窄時，以原文連續空白判定。
 	tight := append(mk("TOBACCONIST'S SHOP    ", 17, 61, 68)[:20], mk("(64 Hammers)", 97, 61, 68)...)
 	if tl := runLines(tight); len(tl) != 1 || tl[0].gapLeft != "TOBACCONIST'S SHOP" || tl[0].right.Min.X != 97 {
@@ -191,6 +196,25 @@ func TestCenteredAndLineMasks(t *testing.T) {
 	}
 	if _, _, _, s := c.lineMasks([]string{"是是是是是是是是是是", "否"}, lines, safe, 12, true); s != 0 {
 		t.Fatal("超出整段右緣應回原文")
+	}
+}
+
+// 目標174：輸入列只在標籤墨跡內排版，中文右緣對齊標籤右緣。
+func TestInputLabelMasks(t *testing.T) {
+	c := &dialogCatalog{}
+	dialogTestFonts(c, "名稱：")
+	label := image.Rect(40, 90, 70, 96)
+	safe := image.Rect(label.Min.X-1, label.Min.Y-1, label.Max.X+1, label.Max.Y+2)
+	_, n, _, size := c.lineMasks([]string{"\t名稱："}, []runLine{{box: label, right: label, capH: 6}}, safe, 9, false)
+	if size == 0 {
+		t.Fatal("標籤應放得下")
+	}
+	right := (label.Max.X - safe.Min.X) * 4
+	if n.AlphaAt(right-2, 8).A == 0 || n.AlphaAt(right-3*size-2, 8).A != 0 {
+		t.Fatalf("標籤應靠右對齊，字級 %d", size)
+	}
+	if _, _, _, s := c.lineMasks([]string{"\t名稱名稱名稱名稱："}, []runLine{{box: label, right: label, capH: 6}}, safe, 9, false); s != 0 {
+		t.Fatal("標籤譯文超出標籤範圍應回原文")
 	}
 }
 

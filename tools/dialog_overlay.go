@@ -739,6 +739,9 @@ type runLine struct {
 	// 此時 right 為空隙之後的墨跡。沒有空隙或已有「=」時為空。
 	gapLeft string
 	gapRaw  int
+	// 目標174：本行第一個冒號（含）之前的文字與墨跡，輸入列（例如 `Name: Jamestown_`）只翻這段標籤。
+	labelText string
+	label     image.Rectangle
 }
 
 // lineGapPx 是判定行內右欄的最小無墨空隙（邏輯像素）；原版字間空白約 3～6 點。
@@ -778,6 +781,9 @@ func runLines(chars []dialogChar) []runLine {
 		}
 		if ch.c == '=' {
 			cur.inRight = true
+		}
+		if ch.c == ':' && cur.labelText == "" && !cur.box.Empty() {
+			cur.labelText, cur.label = dialogNormalize(cur.text), cur.box
 		}
 	}
 	if !cur.box.Empty() {
@@ -906,6 +912,29 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 		if st.shadow != nil && shadowC == 0 {
 			st.shadow = image.NewAlpha(st.shadow.Rect) // 原版無陰影
 		}
+	case why == "no-template" && len(lines) == 1 && lines[0].labelText != "" && strings.HasSuffix(lines[0].text, "_"):
+		// 目標174：輸入列＝標籤＋玩家輸入內容＋游標 `_`。只把標籤換成中文（逐行字典，其次字串層），
+		// 右緣對齊原版標籤墨跡右緣；安全區只含標籤，輸入內容與游標保留原版像素。
+		l := lines[0]
+		_, lzh, lwhy := d.cat.matchIn(d.cat.lines, l.labelText)
+		if lwhy != "" && d.lineFallback != nil {
+			if z, ok := d.lineFallback(l.labelText); ok {
+				lzh, lwhy = z, ""
+			}
+		}
+		if lwhy != "" {
+			return nil, shown, "input-label-" + lwhy
+		}
+		lab := runLine{box: l.label, right: l.label, capH: l.capH}
+		st.safe = image.Rect(l.label.Min.X-1, l.label.Min.Y-1, l.label.Max.X+1, l.label.Max.Y+2).Intersect(image.Rect(0, 0, 320, 200))
+		st.shadow, st.normal, st.accent, st.size = d.cat.lineMasks([]string{"\t" + lzh}, []runLine{lab}, st.safe,
+			l.box.Dy()+3, shadowC != 0)
+		if st.size == 0 {
+			return nil, shown, "layout-overflow"
+		}
+		// 同一標籤在多個段落出現（新陸地、殖民地、改名），不以命中的譯稿列當鍵，免得歸錯段落。
+		st.id, st.zh = "STRING:input-label", lzh
+		return st, shown, ""
 	case why == "no-template":
 		// 逐行清單：每一行都必須各自唯一命中；任何一行不中即整段回原文。
 		items := make([]string, len(lines))

@@ -4191,3 +4191,9 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **已證實：**TXT 段落鍵是行首第一個詞 `@鍵`／`@@鍵`，鍵後同一行可接文字；GAME.TXT 500 段、PEDIA.TXT 166 段（另有 181 行 `@;` 註解）、MAPEDIT.TXT 19 段、DEBUG.TXT 20 段。原文 `{}` 強調與 `~` 熱鍵標記不印到畫面。
 - **已證實：**前端收據中，字串層 active 事件自帶顯示文字；對話框引擎經字串層翻譯的逐行清單 active 事件不帶文字，要取同鍵最近一次 source。對話框層的 fallback 與 misses 只代表該層未套用，同一畫面可能由另一層顯示中文。
 
+## 2026-09-29：目標174 輸入欄標籤
+
+- **輸入與工具：**同目標172；前端 `tools/dialog_overlay.go` SHA-256 `8fd5c974…`、`tools/live_menu.go` `9aa794a4…`；draft `ab62b513…`；檢查器 `tools/check_goal174_window.py` `2a1dd2a4…`。
+- **已證實：**命名新陸地、命名殖民地、Find Colony 的輸入列是提示句之外另一段逐字印字，內容為標籤＋輸入內容＋游標；打字後重印時標籤像素不變（fallback 切行只含輸入內容的墨跡）。VIEW 下拉選單 Find Colony 為第 4 列，無熱鍵。真 GUI 現場輸入 `1dcb538c…` 下中英原版狀態一致（終點 `fc9e3168…`）。
+- **已證實：**發行啟動腳本 `tools/release/colonization-cht.sh` 未啟用 `--dialog-a`、`--string-a`。
+

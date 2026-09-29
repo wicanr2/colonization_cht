@@ -8,15 +8,15 @@ GAME.TXT	GAMEOPTIONS|COLONYOPTIONS|SOUNDOPTIONS	對話框	dialog	normal	GAME 選
 GAME.TXT	SAVEGAME|SAVEGOOD|LOADGAME|LOADGOOD	存讀檔	dialog	normal	選存檔槽、選讀檔、存讀成功訊息
 GAME.TXT	SAVEERROR|LOADNOT|LOADOLD|LOADSIZE|LOADERROR	存讀檔	dialog	conditional	存讀檔失敗、檔案無效、舊版或地圖尺寸不符時
 GAME.TXT	PICKNATION|DIFFICULTY	開局設定	nation	normal	選歐洲國家與難度的清單；卡片畫面另有 LABELS／NAMES 來源，此段是否實際印出待核對
-GAME.TXT	LEADERNAME	開局設定	input	normal	開局輸入玩家姓名欄
-GAME.TXT	FINDCITY	海上地圖	input	normal	VIEW 選單 Find Colony 的輸入欄
+GAME.TXT	LEADERNAME	開局設定	dialog	normal	開局輸入玩家姓名欄；提示句由對話框引擎、輸入列標籤由規格035 目標174 附記處理，輸入內容保留原樣
+GAME.TXT	FINDCITY	海上地圖	dialog	normal	VIEW 選單 Find Colony 的輸入欄；提示句由對話框引擎、輸入列標籤由規格035 目標174 附記處理，輸入內容保留原樣
 GAME.TXT	NOCITY	海上地圖	dialog	conditional	Find Colony 找不到名稱時
 GAME.TXT	VICEROY	開場字幕	dialog	normal	開局國王接見羊皮紙卷軸（規格036；目標166／167 已觀測）
 GAME.TXT	VICEROY2	開場字幕	dialog	conditional	荷蘭開局的國王接見版本（Stadtholder）
 GAME.TXT	@VICEROY	不顯示	none	unreachable	以 @@ 註銷的舊版國王接見段落（內文行皆以 @ 起首），不被程式引用（強推論）
-GAME.TXT	LANDHO	海上地圖	input	normal	首次看到新大陸時為陸地命名的輸入欄
-GAME.TXT	COLONY	海上地圖	input	normal	建立殖民地時命名輸入欄
-GAME.TXT	RENAMECOLONY	殖民地	input	conditional	玩家主動為殖民地改名時
+GAME.TXT	LANDHO	海上地圖	dialog	normal	首次看到新大陸時為陸地命名的輸入欄；提示句由對話框引擎、輸入列標籤由規格035 目標174 附記處理，輸入內容保留原樣
+GAME.TXT	COLONY	海上地圖	dialog	normal	建立殖民地時命名輸入欄；提示句由對話框引擎、輸入列標籤由規格035 目標174 附記處理，輸入內容保留原樣
+GAME.TXT	RENAMECOLONY	殖民地	dialog	conditional	玩家主動為殖民地改名時；提示句由對話框引擎、輸入列標籤由規格035 目標174 附記處理，輸入內容保留原樣
 GAME.TXT	LANDFALL	海上地圖	dialog	normal	船靠岸時詢問是否登陸（Stay With Ships）
 GAME.TXT	LANDFALL2	海上地圖	dialog	normal	船隻無法沿河上溯時詢問登陸；目標167 已觀測
 GAME.TXT	ONLYPIO|ONLYCOL|SHIPCOMBAT|SHIPLAKE|LANDFIRST|SEACOLONY|NOPORT	海上地圖	dialog	conditional	下達單位無法執行的指令時的錯誤提示（例：at sea、lake）
@@ -64,8 +64,8 @@ GAME.TXT	KILLWAGONS	對話框	dialog	conditional	貨車在原住民地區失蹤
 GAME.TXT	TRADE[01]|BADCARGO|BADHAGGLE[0-3]|BRING|DEFICIT|BUYWHICH|TRADEWHICH|BUY[01]|NOTENOUGH	原住民村落	dialog	conditional	船或貨車與原住民村落交易、討價還價
 GAME.TXT	LEARNMASTER|LEARNCRIMINAL|LEARNALREADY|LEARNMAD|LEARNSLOW|LEARNSTAY|LEARNLATER|LEARNDONE	原住民村落	dialog	normal	殖民者進村學藝（Live Among The Natives）的各種回應
 GAME.TXT	TRADEMANY|TRADESTART|TRADETYPE|TRADENONE|TRADENONE2|TRADESELECT|TRADEDELETE|SUREDELETE|CARGOLOAD|CARGOUNLOAD|ROUTELOOP	對話框	dialog	conditional	TRADE 選單建立、編輯、刪除貿易路線的對話框
-GAME.TXT	TRADENAME	對話框	input	conditional	貿易路線命名輸入欄
-GAME.TXT	TRADENAMES	對話框	input	conditional	貿易路線預設名稱片段（Run、Ferry 等），用途為組預設名（強推論）
+GAME.TXT	TRADENAME	對話框	dialog	conditional	貿易路線命名輸入欄；提示句由對話框引擎、輸入列標籤由規格035 目標174 附記處理，輸入內容保留原樣
+GAME.TXT	TRADENAMES	對話框	dialog	conditional	貿易路線預設名稱片段（Run、Ferry 等），用途為組預設名（強推論）；提示句由對話框引擎、輸入列標籤由規格035 目標174 附記處理，輸入內容保留原樣
 GAME.TXT	PISS[0-5]	外交	dialog	conditional	原住民部族對玩家態度惡化的通報與原因
 GAME.TXT	KINGTAX|TAXOPTIONS|KINGBLESS|TEAPARTY|KISSUP|KISSSORRY	對話框	dialog	normal	國王加稅通知、接受或拒稅（茶黨事件）與抵制；加稅隨交易頻繁出現
 GAME.TXT	KINGNO|KINGFUND|KINGLOWER|KINGNOTHING|KINGRAISE|KINGLAUGH|KINGWELCOME0	對話框	dialog	conditional	國王回覆請求減稅、請款、請求獨立等；玩家觸發入口未確認（假說：未開放的謁見功能）
@@ -92,7 +92,7 @@ GAME.TXT	REFIT|WELLSEASONED|EXTINCT|TOOMANYUNITS|TOOMANYCOLONIES|UPKEEP	對話�
 GAME.TXT	KINGBUY	對話框	dialog	conditional	國王擴充皇家遠征軍，遊戲中後期
 GAME.TXT	SEIZURE|SEIZURESEA|SEIZURELAND|INDEPENDENCE|INVASION|TOOTORY|DECLARE|DEADCONVERTS|MOBILIZE|MOBILIZE2|CANTMOBILIZE|KINGMOBILIZE|EUROPENOTAVAIL|FOREIGNNOTAVAIL|EUROPENOTLEAVE|NOWARSDURINGREV|NOCOLONIESEITHER|NOMAYORSDURINGREV|AMBUSHHINT|CONSIDER|INTERVENTION|FRIEND|INTERVENE|LOSING[123]|WARN[123]|WINNING|TORYUPRISING|MERCENARIES|MERCS|ALREADYREVOLUTION|HOWTOWIN	獨立戰爭	dialog	conditional	宣布獨立前後與獨立戰爭期間的訊息；FRIEND 為外援將領名片段
 GAME.TXT	PICKMUSIC|PICKINDEPENDENCE|PICKMILITARY|PICKINDIAN	對話框	dialog	normal	GAME 選單 Pick Music 的曲目清單
-GAME.TXT	HOWMUCH[1-5]	對話框	input	conditional	指定裝卸、移動、買賣貨物數量的輸入欄；以特殊拖曳方式觸發（強推論）
+GAME.TXT	HOWMUCH[1-5]	對話框	dialog	conditional	指定裝卸、移動、買賣貨物數量的輸入欄；以特殊拖曳方式觸發（強推論）；提示句由對話框引擎、輸入列標籤由規格035 目標174 附記處理，輸入內容保留原樣
 GAME.TXT	EXPLOITS|SCORE	結局	string	conditional	遊戲結束評分與以玩家命名的紀念物清單
 GAME.TXT	OTHERGRANTED|OTHERMIGHT|OTHERLESS	外交	dialog	conditional	其他歐洲國家殖民地獨立的進展
 GAME.TXT	SCORED|LOSENOCOLONIES|SOONRETIRING0|SOONRETIRING1|RETIRING|RETIRING2	結局	dialog	conditional	退休年限、評分完成、失去所有殖民地等遊戲終局訊息
@@ -120,7 +120,7 @@ NAMES.TXT	SEASONS	海上地圖	string	normal	季節名，頂列日期字串
 NAMES.TXT	UNFORESTED|FORESTED|OTHER|OTHER_NAMES	海上地圖	string	normal	地形名與河流、未探索等附加名（名稱,數值資料列只取名稱）
 NAMES.TXT	RESOURCE	海上地圖	string	normal	特殊資源名（Oasis、Wheat 等）
 NAMES.TXT	COUNTRY|NATIONALITY|NATIONABBREV|HOMEPORT|COLONYNAME	多畫面共用	string	normal	國名、國籍形容詞、縮寫、母港、殖民地總稱，散見港口頂列、報告與訊息代入
-NAMES.TXT	LEADERNAME	開局設定	input	normal	各國預設領袖名，姓名輸入欄預填與報告顯示
+NAMES.TXT	LEADERNAME	開局設定	string	normal	各國預設領袖名：報告等欄位以字串層顯示；姓名輸入欄內的預填名屬玩家輸入內容，依目標174 決定保留原樣
 NAMES.TXT	DIFFICULTY	開局設定	nation	normal	難度名；目標077 證實第一張難度卡由此載入
 NAMES.TXT	INDEPENDENT	獨立戰爭	string	conditional	宣布獨立後的新國名
 NAMES.TXT	MISSION	原住民村落	string	conditional	傳教站名稱前綴，建立傳教站後出現
@@ -156,5 +156,7 @@ DEBUG.TXT	SOUND	除錯	input	unreachable	除錯音效測試的輸入欄；需作
 DEBUG.TXT	END	不顯示	none	unreachable	除錯段落結束標記，無內容
 EXE	82667b088d38	海上地圖	string	normal	海上狀態欄地形附加「(Major River)」：字串層括號模板 paren-term 已有，字典缺 Major River
 EXE	3f02988e15cd	海上地圖	menu	normal	已顯示：頂端選單列由海上狀態欄層（規格032，sea:bar）繪製；此為對話框層把整列無空白拼接後記下的未套用
-EXE	c9ee0a41420e|84a1cab8db2f	開局設定	input	normal	需新機制：命名殖民地、命名新陸地的輸入欄（#46）
-EXE	74df22d196ea	開局設定	input	normal	需新機制：開局輸入領袖姓名的輸入欄（#46）
+EXE	c9ee0a41420e|84a1cab8db2f	開局設定	input	normal	命名殖民地、命名新陸地的輸入列：標籤由規格035 目標174 附記翻譯，輸入內容保留原樣
+EXE	74df22d196ea	開局設定	input	normal	已顯示：開局姓名欄只有預填姓名與游標，屬玩家輸入內容，依目標174 決定保留原版字元
+EXE	15d1c75e9845	海上地圖	dialog	normal	已顯示：Find Colony 打字後的輸入列重印，標籤像素未變，前一段 Colony: 標籤覆蓋仍有效（目標174 除錯重播 fallback 切行證據）
+EXE	52ae9fbfd404|9dc1b911eee2	下拉選單	menu	normal	VIEW 下拉選單整段（MENU.TXT @VIEW 各行），對話框層逐行清單未命中，歸 #55

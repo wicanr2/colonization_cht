@@ -2123,7 +2123,12 @@ func main() {
 				dlg.misses[why+"\t"+shown]++
 				// 單字元、符號等零碎印字只計入 dialog_misses，不逐次記事件。
 				if len(strings.FieldsFunc(shown, func(r rune) bool { return !unicode.IsLetter(r) })) > 0 && len(shown) >= 3 {
-					events = append(events, map[string]any{"candidate_id": "GAME.TXT:dialog", "stage": "fallback", "step": m.Steps, "reason": why, "shown": shown})
+					// 目標174：一併記下引擎切出的各行（文字與墨跡），回原文時可直接看出切行結果。
+					var lines []string
+					for _, l := range runLines(r.chars) {
+						lines = append(lines, fmt.Sprintf("%s @%v", l.text, l.box))
+					}
+					events = append(events, map[string]any{"candidate_id": "GAME.TXT:dialog", "stage": "fallback", "step": m.Steps, "reason": why, "shown": shown, "lines": lines})
 				}
 			}
 			return

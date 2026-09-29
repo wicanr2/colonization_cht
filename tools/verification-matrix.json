@@ -855,6 +855,44 @@
     "probe_goal172_replays.sh"
    ],
    "known_diffs": "BUY 說明框未走到；武裝面板、多人口殖民地未到達"
+  },
+  {
+   "id": "input-labels",
+   "path": "dynamic",
+   "title": "輸入欄標籤：命名新陸地、命名殖民地、Find Colony（輸入內容保留原樣）",
+   "specs": [
+    "035"
+   ],
+   "flags": [
+    "--dialog-a",
+    "--string-a",
+    "--sea-status-a"
+   ],
+   "checker": "check_goal174_window.py",
+   "args": [
+    "--game",
+    "{game}",
+    "--reports",
+    "{reports}/goal174-input"
+   ],
+   "dir": "goal174-input",
+   "zh": [
+    "replay-zh"
+   ],
+   "control": [
+    "replay-control"
+   ],
+   "negative": [
+    "neg-nolabel"
+   ],
+   "gui_inputs": [
+    "gui-input.inputs.json"
+   ],
+   "regenerate": [
+    "probe_goal174_gui.sh",
+    "probe_goal174_replays.sh"
+   ],
+   "known_diffs": "改名、貿易路線命名、貨物數量輸入欄未觸發；Name: 另有字串層片段字典來源，反向對照只驗 Colony:"
   }
  ],
  "not_covered": [
