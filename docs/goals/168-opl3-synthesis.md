@@ -1,6 +1,6 @@
 # 目標168：OPL3 音樂合成（Issue #47）
 
-狀態：進行中；開始：2026-09-28。對應 [Issue #47](https://github.com/wicanr2/colonization_cht/issues/47)，規格見[規格037](../spec/037-opl3-audio.md)。
+狀態：完成；2026-09-30。對應 [Issue #47](https://github.com/wicanr2/colonization_cht/issues/47)，規格見[規格037](../spec/037-opl3-audio.md)。
 
 ## 已知
 
@@ -21,3 +21,14 @@
 ## 停止線
 
 不做前端播放（#49）與數位音效（#48）。
+
+## 結果
+
+- 規格037 READY，驗收見規格：開關合成不影響原版狀態；本遊戲實際 OPL 寫入序列 62.2 秒與 ymfm C++ 原版逐樣本相同；同輸入兩次 WAV 逐位元組相同；dosgolem `go test ./...` 全過。
+- 提交：隔離副本 `workplace/dosgolem` 本地分支 `colonization-audio` 的 `a3a5609`（未推送，上游推送位址 DISABLED）。
+- ymfm 授權（`audio/opl/LICENSE.ymfm`，BSD-3-Clause）須隨發行包附上，已記入 [#53](https://github.com/wicanr2/colonization_cht/issues/53)。
+- 未做：DOSBox-X 錄音交叉檢查（見規格037「未做」）。
+
+## 移交
+
+- 音效卡初始化時的 DSP DMA 測試在 dosgolem 中得不到 IRQ，驅動因此判定數位音效不可用；數位音效（`COLDIG.BIN`）的取證與 DMA／IRQ 實作由 [#48](https://github.com/wicanr2/colonization_cht/issues/48) 處理。
