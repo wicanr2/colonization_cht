@@ -14,7 +14,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-EXTRA = "goal17[24]-re*/replay-zh.json"
+EXTRA = "goal17[247]-re*/replay-zh.json"
 
 
 def need(ok, reason):

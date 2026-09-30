@@ -342,6 +342,9 @@ type seaLayer struct {
 	afterSafe []byte
 	dirty     bool
 	reason    string
+	// 目標177：最近一次所有保留行都完整時的安全區畫面；partial 為目前有行被部分遮住。
+	cleanSafe []byte
+	partial   bool
 }
 
 type seaState struct {
@@ -654,6 +657,7 @@ func main() {
 	control := flag.Bool("control", false, "無指令觀測、無合成對照")
 	missing := flag.Bool("missing", false, "缺字模回退對照")
 	window := flag.Bool("window", false, "使用已連結的 Ebitengine 視窗前端")
+	stringSelftest := flag.String("string-selftest", "", "目標177：診斷用，逐行讀入英文，回報字串層與海上層的翻譯結果到 <檔名>.json 後結束")
 	audioOn := flag.Bool("audio", false, "目標176：開啟 dosgolem OPL3 合成與前端播放（規格040）；搭配 --sb-digital 時混入數位音效")
 	sbDigital := flag.Bool("sb-digital", false, "目標175：開啟 dosgolem 數位音效（8237 DMA、DSP 播放、IRQ7；規格039），遊戲會走數位音效可用的路徑")
 	play := flag.Bool("play", false, "遊玩模式：不累積逐幀驗證紀錄，未指定 -window-steps 時不設步數上限（發行包使用）")
@@ -1969,6 +1973,26 @@ func main() {
 			if err == nil && *nationCardCatalog != "" {
 				err = cat.addOwned(read(*nationCardCatalog), files, nil)
 			}
+			if err == nil && *stringSelftest != "" {
+				// 目標177：離線自測，列出查不到譯名的名稱；不進入遊戲。
+				out := map[string]map[string]string{}
+				for _, line := range strings.Split(string(read(*stringSelftest)), "\n") {
+					t := strings.TrimRight(line, "\r")
+					if t == "" {
+						continue
+					}
+					zh, id, why := cat.translate(t)
+					r := map[string]string{"zh": zh, "id": id, "reason": why}
+					if sea != nil {
+						if z, ok := sea.seaTranslate(t); ok {
+							r["sea"] = z
+						}
+					}
+					out[t] = r
+				}
+				dumpJSON(*stringSelftest+".json", out)
+				os.Exit(0)
+			}
 			if err != nil {
 				str.reason = "missing-or-invalid-translation"
 			} else if b, err := os.ReadFile(*stringAtlas); err != nil {
@@ -2167,6 +2191,29 @@ func main() {
 		var ink image.Rectangle
 		for _, b := range r.boxes {
 			ink = ink.Union(b)
+		}
+		if seaOn && ink.Overlaps(seaPanelRect) {
+			// 目標177：狀態欄上有新的印字時，與它重疊、文字不同的舊行一律移除（改印，不是遮擋），
+			// 否則部分遮擋的保留規則會讓舊行與新字疊在一起。
+			kept := sea.panel.rows[:0]
+			for _, row := range sea.panel.rows {
+				if row.bbox.Overlaps(ink) && row.text != text {
+					sea.panel.dirty = true
+					continue
+				}
+				kept = append(kept, row)
+			}
+			sea.panel.rows = kept
+			// 字串層中與新印字重疊、文字不同的舊項同樣視為被改印（新字可能由海上層接手，不經 str.add 的取代）。
+			keptItems := str.items[:0]
+			for _, it := range str.items {
+				if it.ink.Overlaps(ink) && it.text != text {
+					stringDrop(it, "superseded")
+					continue
+				}
+				keptItems = append(keptItems, it)
+			}
+			str.items = keptItems
 		}
 		if seaOn && (ink.In(seaBarRect) || ink.In(seaPanelRect)) {
 			if _, ok := sea.seaTranslate(text); ok {
@@ -2980,17 +3027,26 @@ func main() {
 				layer.shadow = image.NewAlpha(image.Rect(0, 0, w, h))
 				layer.fg = map[byte]*image.Alpha{68: image.NewAlpha(image.Rect(0, 0, w, h)), 149: image.NewAlpha(image.Rect(0, 0, w, h))}
 				kept := layer.rows[:0]
+				partial := false
 				for _, r := range layer.rows {
 					ok := len(r.parts) > 0
+					intact := 0
 					for i, v := range r.lastVal {
-						if cur[i] != v || r.firstOld[i] == 68 || r.firstOld[i] == 149 {
+						if r.firstOld[i] == 68 || r.firstOld[i] == 149 {
 							ok = false
 							break
 						}
+						if cur[i] == v {
+							intact++
+						}
 					}
-					if !ok {
+					// 目標177：文字像素三成以上未變且有完整畫面紀錄時保留，被蓋住的點合成後改回目前畫面。
+					whole := intact == len(r.lastVal)
+					// 只在字串層開著時放寬：字串層收尾會移除被改印的舊行，才分得出遮擋與改印。
+					if !ok || !(whole || (strOn && layer.cleanSafe != nil && float64(intact) >= stringIntactMin*float64(len(r.lastVal)))) {
 						continue
 					}
+					partial = partial || !whole
 					clipped := false
 					for _, pt := range r.parts {
 						y := r.bbox.Min.Y*4 - sea.fonts[pt.size].cjkTop - layer.safe.Min.Y*4
@@ -3003,12 +3059,18 @@ func main() {
 						continue
 					}
 					for i, v := range r.firstOld {
-						before[i] = v
+						if cur[i] == r.lastVal[i] {
+							before[i] = v
+						}
 					}
 					kept = append(kept, r)
 				}
 				layer.rows = kept
 				layer.afterSafe = safeBytes(cur)
+				layer.partial = partial
+				if !partial {
+					layer.cleanSafe = layer.afterSafe
+				}
 				layer.reason = "no-translated-rows"
 				if len(kept) > 0 {
 					if p, err := overlay.NewPatch(before, cur, 320, 200, layer.safe); err == nil {
@@ -3497,6 +3559,20 @@ func main() {
 								fg := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
 								draw.DrawMask(output, out, image.NewUniform(fg), image.Point{}, layer.fg[index], image.Point{}, draw.Over)
 							}
+							if layer.partial && layer.cleanSafe != nil {
+								// 目標177：與最近完整畫面不同的點（遮擋物）改回目前畫面。
+								i := 0
+								for y := layer.safe.Min.Y; y < layer.safe.Max.Y; y++ {
+									for x := layer.safe.Min.X; x < layer.safe.Max.X; x++ {
+										if v := indexed[y*320+x]; v != layer.cleanSafe[i] && !image.Pt(x, y).In(box) {
+											p := int(v) * 3
+											c := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
+											draw.Draw(output, image.Rect(x*4, y*4, x*4+4, y*4+4), image.NewUniform(c), image.Point{}, draw.Src)
+										}
+										i++
+									}
+								}
+							}
 							for y := box.Min.Y; y < box.Max.Y; y++ {
 								for x := box.Min.X; x < box.Max.X; x++ {
 									if v := indexed[y*320+x]; v != clean[y*320+x] {
@@ -3866,7 +3942,9 @@ func main() {
 				draw.Draw(output, image.Rect(x*4, y*4, x*4+4, y*4+4), image.NewUniform(c), image.Point{}, draw.Src)
 			}
 			for _, it := range str.items {
-				if it.phase != "active" {
+				// 目標177：暫停中（畫布部分被蓋住）的項目，英文墨跡仍有三成以上未變就照畫，被蓋住的點稍後改回目前畫面。
+				occluded := it.phase == "suspended" && stringIntact(indexed, it) >= stringIntactMin
+				if it.phase != "active" && !occluded {
 					continue
 				}
 				switch {
@@ -3876,17 +3954,25 @@ func main() {
 				case d.Mouse.Buttons != 0:
 					sreason = "mouse-button-held"
 					continue
-				case overlapsAny(it.ink, dialogSafes):
-					sreason = "dialog-over-string"
-					continue
-				case !stringSame(indexed, it, cur):
+				case !occluded && !stringSame(indexed, it, cur):
 					sreason = "vga-safe-mismatch"
 					continue
+				}
+				// 目標177：與作用中對話框重疊時不再整項略過；先記下重疊處的輸出（對話框層的結果），畫完再貼回。
+				var keepDialog []*image.RGBA
+				var keepRects []image.Rectangle
+				for _, ds := range dialogSafes {
+					if o := ds.Intersect(it.safe); !o.Empty() {
+						r := image.Rectangle{Min: o.Min.Mul(4), Max: o.Max.Mul(4)}
+						c := image.NewRGBA(r)
+						draw.Draw(c, r, output, r.Min, draw.Src)
+						keepDialog, keepRects = append(keepDialog, c), append(keepRects, r)
+					}
 				}
 				i := 0
 				for y := it.safe.Min.Y; y < it.safe.Max.Y; y++ {
 					for x := it.safe.Min.X; x < it.safe.Max.X; x++ {
-						if it.before[i] != it.after[i] {
+						if it.before[i] != it.after[i] && indexed[y*320+x] == it.after[i] {
 							paint(x, y, it.before[i])
 						}
 						i++
@@ -3906,12 +3992,18 @@ func main() {
 					draw.DrawMask(output, panel, image.NewUniform(fg), image.Point{}, layer.mask, image.Point{}, draw.Over)
 				}
 				box := cur.Intersect(it.safe)
+				if occluded {
+					box = it.safe // 目標177：被蓋住的點一律改回目前畫面
+				}
 				for y := box.Min.Y; y < box.Max.Y; y++ {
 					for x := box.Min.X; x < box.Max.X; x++ {
 						if v := indexed[y*320+x]; v != it.after[(y-it.safe.Min.Y)*it.safe.Dx()+x-it.safe.Min.X] {
 							paint(x, y, v)
 						}
 					}
+				}
+				for k, c := range keepDialog {
+					draw.Draw(output, keepRects[k], c, keepRects[k].Min, draw.Src)
 				}
 				it.appliedFrame++
 				shown++

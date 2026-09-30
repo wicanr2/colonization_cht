@@ -23,7 +23,9 @@ type dialogTemplate struct {
 	id    string
 	re    *regexp.Regexp
 	names []string // 依出現順序的變數名：%STRINGn、%NUMBERn、%COUNTRY
-	zh    string   // 正文譯稿（空行前），保留 {} 強調標記與 %變數；置中段落另保留 \n 與 ^
+	// quoted 標示原文以雙引號緊貼包住的變數（目標177）：玩家輸入，原樣代入、不查術語表。
+	quoted []bool
+	zh     string // 正文譯稿（空行前），保留 {} 強調標記與 %變數；置中段落另保留 \n 與 ^
 	// 目標166：原文含 ^ 置中碼的段落（例如國王接見），依譯稿的 ^^ 行置中、其餘依寬度重排。
 	centered bool
 }
@@ -214,21 +216,26 @@ func (c *dialogCatalog) addPedia(tsv, pedia []byte) error {
 
 func makeDialogTemplate(id, body, zh string, centered bool) dialogTemplate {
 	body = dialogNormalize(strings.NewReplacer("{", "", "}", "", "^", "", "\r\n", " ").Replace(body))
-	pattern, names := "^", []string{}
+	pattern, names, quoted := "^", []string{}, []bool{}
 	last := 0
 	for _, m := range dialogVar.FindAllStringIndex(body, -1) {
 		pattern += regexp.QuoteMeta(body[last:m[0]])
 		name := body[m[0]:m[1]]
-		if strings.HasPrefix(name, "%NUMBER") {
+		q := m[0] > 0 && m[1] < len(body) && body[m[0]-1] == '"' && body[m[1]] == '"'
+		switch {
+		case strings.HasPrefix(name, "%NUMBER"):
 			pattern += `(\d+)`
-		} else {
+		case q:
+			pattern += `(.*?)` // 目標177：玩家輸入可為空（直接按 Enter）
+		default:
 			pattern += `(.+?)`
 		}
 		names = append(names, name)
+		quoted = append(quoted, q)
 		last = m[1]
 	}
 	pattern += regexp.QuoteMeta(body[last:]) + "$"
-	return dialogTemplate{id: id, re: regexp.MustCompile(pattern), names: names, zh: zh, centered: centered}
+	return dialogTemplate{id: id, re: regexp.MustCompile(pattern), names: names, quoted: quoted, zh: zh, centered: centered}
 }
 
 // addDraft 由譯稿 TSV（draft.zh-Hant.tsv）加入逐行模板：GAME.TXT 單行列與 MENU.TXT 選單項目；
@@ -260,12 +267,52 @@ func (c *dialogCatalog) addDraft(draft []byte, files map[string][]byte, exclude 
 			c.addNamePairs(raw, zh)
 			continue
 		}
+		if r["source_file"] == "MENU.TXT" && zh != "" && !strings.Contains(raw, "\r\n") && !strings.ContainsAny(raw, "@^") {
+			// 目標177：下拉選單的 ~ 是熱鍵標記（不印出，後一字以強調色顯示）、# 是無墨的對齊空白（照印）。
+			c.lines = append(c.lines, makeDialogTemplate(r["candidate_id"], strings.ReplaceAll(raw, "~", ""), menuZh(zh), false))
+			continue
+		}
 		if zh == "" || strings.Contains(raw, "\r\n") || strings.ContainsAny(raw, "~#@^") || strings.ContainsAny(zh, "~#^") {
 			continue
 		}
 		c.lines = append(c.lines, makeDialogTemplate(r["candidate_id"], raw, zh, false))
 	}
 	return nil
+}
+
+// menuZh 把下拉選單譯稿的標記換成顯示用文字（目標177）：括號外的 ~X 熱鍵集中到行首成 (X)，
+// 與頂端選單列、港口按鈕的熱鍵樣式一致；括號內的 ~X 留在原位；熱鍵字母以強調色（{}）標示；# 換成空白。
+func menuZh(zh string) string {
+	var keys, out []rune
+	depth := 0
+	rs := []rune(zh)
+	for i := 0; i < len(rs); i++ {
+		switch r := rs[i]; {
+		case r == '~' && i+1 < len(rs):
+			i++
+			if depth > 0 {
+				out = append(out, '{', rs[i], '}')
+			} else {
+				keys = append(keys, rs[i])
+			}
+		case r == '#':
+			out = append(out, ' ')
+		default:
+			if r == '(' {
+				depth++
+			} else if r == ')' && depth > 0 {
+				depth--
+			}
+			out = append(out, r)
+		}
+	}
+	s := strings.TrimRight(string(out), " ")
+	if len(keys) == 0 {
+		return s
+	}
+	// 熱鍵放在譯稿原本的縮排之後；熱鍵後面的分隔空白一併去掉。
+	indent := len(zh) - len(strings.TrimLeft(zh, " "))
+	return zh[:indent] + "({" + string(keys) + "})" + strings.TrimLeft(s, " ")
 }
 
 // addValues 讀執行檔提供的變數值譯名（例如版本日期）；每列以原檔位移核對原文。
@@ -374,7 +421,7 @@ func (c *dialogCatalog) matchIn(list []dialogTemplate, shown string) (*dialogTem
 	zh := hit.zh
 	for i, name := range hit.names {
 		v := groups[i]
-		if !strings.HasPrefix(name, "%NUMBER") && !dialogPlainValue.MatchString(v) {
+		if !strings.HasPrefix(name, "%NUMBER") && !dialogPlainValue.MatchString(v) && !hit.quoted[i] {
 			tr := c.terms[v]
 			if tr == "" {
 				return hit, "", "variable-without-term"
@@ -789,6 +836,18 @@ func runLines(chars []dialogChar) []runLine {
 	if !cur.box.Empty() {
 		out = append(out, cur)
 	}
+	// 目標177：同一段印字裡整份重畫（下拉選單反白移動時重印），位置與文字都相同的行只留第一次。
+	uniq := out[:0]
+	for _, l := range out {
+		dup := false
+		for _, u := range uniq {
+			dup = dup || (u.box == l.box && u.text == l.text)
+		}
+		if !dup {
+			uniq = append(uniq, l)
+		}
+	}
+	out = uniq
 	for i := range out {
 		if g := out[i].gapRaw; g > 0 {
 			out[i].gapLeft = dialogNormalize(out[i].text[:g-1])

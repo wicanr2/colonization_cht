@@ -4208,3 +4208,9 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **輸入與工具：**前端 `tools/window_prototype.go`、`tools/live_menu.go`；檢查器 `tools/check_goal176_window.py`；dosgolem 隔離副本 `b0bf259`；收據 `workplace/reports/goal176-audio/`。
 - **已證實：**同一份真 GUI 輸入（`4f10522c…`），開關音訊不影響原版狀態；真 GUI 與重播 WAV 逐位元組相同（`3ce3b2b6…`）。數位音效開啟與否的兩組終點狀態不同（`f184861e…`、`d15210ff…`），與規格039 的預期一致。
 
+## 2026-09-30：目標177 海上地圖、下拉選單與名稱
+
+- **輸入與工具：**同目標174；前端雜湊見目標177 文件；檢查器 `tools/check_goal177_window.py`；探針收據 `workplace/reports/goal177-sea/probe.json`。
+- **已證實：**下拉選單在同一段逐字印字裡整份重畫多次；MENU.TXT 的 `~` 不印出、後一字以強調色顯示，`#` 照印無墨。ORDERS 選單整份是一段印字，停用（色號 8）項目只讀到一半字元（`Clear Forest (~P)` 讀成 `CerFrs ~)`），使整段讀取次數為奇數。地圖上的殖民地名稱標籤不在 0D21:00C6 的畫布印字紀錄中。真 GUI 現場輸入 `45eaf7f7…` 下中英原版狀態一致（終點 `491ad820…`）。
+- **已證實：**選單開著時按 Escape 會開出離開確認框（只顯示「Yes No」）。
+

@@ -698,6 +698,29 @@ func stringSame(buf []byte, it *stringItem, skip image.Rectangle) bool {
 	return true
 }
 
+// stringIntactMin 是暫停中項目仍繪製的門檻：原版英文墨跡至少這個比例未被改動（目標177）。
+const stringIntactMin = 0.3
+
+// stringIntact 回原版英文墨跡（印前與完成時不同的點）在 buf 中仍與完成時相同的比例。
+func stringIntact(buf []byte, it *stringItem) float64 {
+	i, ink, same := 0, 0, 0
+	for y := it.safe.Min.Y; y < it.safe.Max.Y; y++ {
+		for x := it.safe.Min.X; x < it.safe.Max.X; x++ {
+			if it.before[i] != it.after[i] {
+				ink++
+				if buf[y*320+x] == it.after[i] {
+					same++
+				}
+			}
+			i++
+		}
+	}
+	if ink == 0 {
+		return 0
+	}
+	return float64(same) / float64(ink)
+}
+
 // step 每個畫格推進各項目的狀態（設計第 7 點）；回傳狀態改變的事件（項目、階段、原因）。
 func (s *stringRuntime) step(canvas, vga []byte, cursor image.Rectangle, now uint64, mode13 bool) (changes [][3]any) {
 	if s.cur != nil && now-s.cur.last >= stringGap {

@@ -933,6 +933,47 @@
     "probe_goal176_replays.sh"
    ],
    "known_diffs": "容器以 ALSA null 裝置驗證播放器；實際聽感需在有音效卡的環境試聽 workplace 的 WAV；本列無專屬負例，以開關音訊兩兩比對與 WAV 有無數位音效區隔代替"
+  },
+  {
+   "id": "sea-menus-occlusion",
+   "path": "dynamic",
+   "title": "下拉選單六個、引號變數訊息、狀態欄部分遮擋仍顯示中文",
+   "specs": [
+    "032",
+    "035",
+    "036",
+    "038"
+   ],
+   "flags": [
+    "--dialog-a",
+    "--string-a",
+    "--sea-status-a"
+   ],
+   "checker": "check_goal177_window.py",
+   "args": [
+    "--game",
+    "{game}",
+    "--reports",
+    "{reports}/goal177-sea"
+   ],
+   "dir": "goal177-sea",
+   "zh": [
+    "replay-zh"
+   ],
+   "control": [
+    "replay-control"
+   ],
+   "negative": [
+    "neg-nomenu"
+   ],
+   "gui_inputs": [
+    "gui-sea.inputs.json"
+   ],
+   "regenerate": [
+    "probe_goal177_gui.sh",
+    "probe_goal177_replays.sh"
+   ],
+   "known_diffs": "ORDERS 選單含停用項目的上半段、地圖殖民地名稱標籤、教學框壓住狀態欄的部分行仍為原文（目標178）"
   }
  ],
  "not_covered": [

@@ -1,6 +1,6 @@
 # 目標177：海上地圖、下拉選單與名稱（Issue #55）
 
-狀態：進行中；開始：2026-09-30。對應 [Issue #55](https://github.com/wicanr2/colonization_cht/issues/55)，依普查（[目標173](173-reachable-text-census.md)）。
+狀態：完成（第一部分）；2026-09-30。對應 [Issue #55](https://github.com/wicanr2/colonization_cht/issues/55)，依普查（[目標173](173-reachable-text-census.md)）。
 
 ## 已知
 
@@ -23,3 +23,19 @@
 ## 退出條件
 
 六個下拉選單中文；右側狀態欄與地圖殖民地名依決定顯示；普查中本範圍的「已到達但仍是英文」清零；驗證矩陣新增一列並全 PASS。
+
+## 結果
+
+- 下拉選單（規格036 附記）：GAME、VIEW、ORDERS（下半段）、REPORTS、TRADE、COLONIZOPEDIA 六個選單中文，熱鍵以「(X)」樣式、強調色標示；同一段印字的重畫去重。
+- 引號變數（規格035 附記）：Find Colony 找不到時的訊息原樣代入玩家輸入，允許空字串。
+- 部分遮擋（規格038、032 附記）：字串層與海上層逐點遮擋；狀態欄改印時取代舊行與舊項；字串層與對話框重疊時照畫、重疊處還原對話框結果。
+- 名稱：`--string-selftest` 離線自測 NAMES／LABELS 547 個名稱，查不到的 12 個都有理由（人名保留、冠詞留空、同字異譯待畫面處理）；`(Major River)` 在完整旗標下由字串層翻譯。
+- 真 GUI（`tools/probe_goal177_gui.sh`，現場輸入 SHA-256 `45eaf7f7…`）：中英原版狀態一致（終點 `491ad820…`）；六個選單安全區真 GUI 與重播相同、中文改變安全區；反向對照中 VIEW、ORDERS、REPORTS 回原文；士兵教學框壓住狀態欄時狀態欄仍有中文。檢查器 `tools/check_goal177_window.py` PASS。
+- 回歸：目標172、174 兩條路徑以新前端重播，原版狀態逐檢查點相同；畫面差異都是被部分遮住的狀態欄行、頂端殖民地列、面板標題、選單與 Find Colony 改為中文。驗證矩陣 PASS 26；普查已顯示中文 368。
+- 前端雜湊：`tools/dialog_overlay.go` `b8b25fc0…`、`tools/live_menu.go` `57366c35…`、`tools/string_overlay.go` `0ebcfd47…`。
+
+## 移交（目標178，同屬 #55）
+
+- ORDERS 選單含停用（灰色）項目的上半段：停用項目只讀一半字元，對話框層在讀取位置為奇數時整段略過。
+- 地圖上的殖民地名稱標籤：不在畫布印字路徑（強推論：先畫在螢幕外緩衝再搬上畫面，`NAMEPLAT.SS`）。
+- 教學框壓住狀態欄時，被蓋住超過七成或在教學框出現前幾秒改印過的行仍為原文。

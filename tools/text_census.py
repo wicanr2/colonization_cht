@@ -187,8 +187,9 @@ class Census:
         return [r for r in self.rows if r["file"] == name and r["section"] == k.group(1)] if k else []
 
     def by_text(self, text):
-        """精確歸屬：唯一一列時回傳該列；對到多列（通用片段）或對不到回空，另回傳是否不明確。"""
-        t = loose_end(norm(text))
+        """精確歸屬：唯一一列時回傳該列；對到多列（通用片段）或對不到回空，另回傳是否不明確。
+        執行期文字裡殘留的 ~ 是熱鍵標記（規格036 目標177 附記），比對前去掉。"""
+        t = loose_end(norm(text.replace("~", "")))
         ids = self.exact.get(t) or {id(r) for rx, r in self.patterns if rx.fullmatch(t)}
         if len(ids) == 1:
             return [self.by_id[next(iter(ids))]], False

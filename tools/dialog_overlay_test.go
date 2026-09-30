@@ -231,11 +231,14 @@ func TestAddDraft(t *testing.T) {
 	if err := c.addDraft([]byte(draft), map[string][]byte{"MENU.TXT": menu}, nil); err != nil {
 		t.Fatal(err)
 	}
-	if len(c.lines) != 1 {
-		t.Fatalf("含 ~ 的列不採用：%d", len(c.lines))
+	if len(c.lines) != 2 {
+		t.Fatalf("目標177：MENU.TXT 含 ~ 的列也採用：%d", len(c.lines))
 	}
 	if _, zh, why := c.matchIn(c.lines, "Save Game"); why != "" || zh != "儲存遊戲" {
 		t.Fatalf("%q %q", zh, why)
+	}
+	if _, zh, why := c.matchIn(c.lines, "View Pieces"); why != "" || zh != "({V})檢視單位" {
+		t.Fatalf("熱鍵列：%q %q", zh, why)
 	}
 	bad := strings.Replace(draft, sum, strings.Repeat("0", 64), 1)
 	if (&dialogCatalog{}).addDraft([]byte(bad), map[string][]byte{"MENU.TXT": menu}, nil) == nil {
@@ -337,5 +340,62 @@ func TestAddPedia(t *testing.T) {
 	}
 	if (&dialogCatalog{seen: map[string]bool{}}).addPedia([]byte(head+row+"\n"), append(pedia, 'x')) == nil {
 		t.Fatal("版本不符應失敗")
+	}
+}
+
+// 目標177：下拉選單譯稿的熱鍵與對齊標記。
+func TestMenuZh(t *testing.T) {
+	for in, want := range map[string]string{
+		"  ~M移動單位":        "  ({M})移動單位",
+		"  放大#   ~Z":      "  ({Z})放大",
+		"  ~F~1 地形資訊":     "  ({F1})地形資訊",
+		"  顯示~H隱藏地形":      "  ({H})顯示隱藏地形",
+		"  加入殖民領地 (~B)":   "  加入殖民領地 ({B})",
+		"  縮放層級 #60 x 48": "  縮放層級  60 x 48",
+		"  儲存遊戲":          "  儲存遊戲",
+	} {
+		if got := menuZh(in); got != want {
+			t.Errorf("%q → %q，應為 %q", in, got, want)
+		}
+	}
+}
+
+// 目標177：同一段印字裡整份重畫的行只留一次。
+func TestRunLinesRedrawDedupe(t *testing.T) {
+	mk := func(s string, x, y int) []dialogChar {
+		var out []dialogChar
+		for _, r := range s {
+			ch := dialogChar{c: byte(r)}
+			if r != ' ' {
+				ch.box, ch.colors = image.Rect(x, y, x+3, y+6), map[byte]int{68: 9}
+			}
+			out = append(out, ch)
+			x += 4
+		}
+		return out
+	}
+	var chars []dialogChar
+	for i := 0; i < 3; i++ {
+		chars = append(chars, mk("Move Pieces", 49, 13)...)
+		chars = append(chars, mk("View Pieces", 49, 21)...)
+	}
+	if lines := runLines(chars); len(lines) != 2 || lines[0].text != "Move Pieces" || lines[1].text != "View Pieces" {
+		t.Fatalf("重畫應去重：%+v", lines)
+	}
+}
+
+// 目標177：雙引號包住的變數是玩家輸入，原樣代入；未包引號的變數仍須查術語表。
+func TestQuotedVariable(t *testing.T) {
+	c := &dialogCatalog{terms: map[string]string{}}
+	c.templates = []dialogTemplate{makeDialogTemplate("q", `"%STRING0" not found.`, `找不到「%STRING0」。`, false),
+		makeDialogTemplate("p", `%STRING0 not found.`, `找不到%STRING0。`, false)}
+	if _, zh, why := c.matchIn(c.templates[:1], `"Jam" not found.`); why != "" || zh != `找不到「Jam」。` {
+		t.Fatalf("引號變數：%q %q", zh, why)
+	}
+	if _, zh, why := c.matchIn(c.templates[:1], `"" not found.`); why != "" || zh != `找不到「」。` {
+		t.Fatalf("空的引號變數：%q %q", zh, why)
+	}
+	if _, _, why := c.matchIn(c.templates[1:], `Jam not found.`); why != "variable-without-term" {
+		t.Fatalf("未包引號應查術語表：%q", why)
 	}
 }

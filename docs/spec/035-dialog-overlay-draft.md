@@ -116,3 +116,8 @@
 - **開局姓名提示：**`@LEADERNAME` 的提示句由規格023 專屬欄位（`--nation-cards-rest-a`）處理，只開對話框層的路徑中是英文；姓名欄沒有標籤，預填姓名屬輸入內容，保留原樣。
 - **驗收（目標174）：**命名新陸地、命名殖民地、Find Colony 三個輸入列限定 CONFORMED（`tools/check_goal174_window.py`；`tools/dialog_overlay.go`、`tools/live_menu.go` 雜湊見 RESEARCH-LOG）。改名、貿易路線命名、貨物數量未觸發。
 
+
+## 2026-09-30：引號變數附記（目標177）
+
+- **證據：**Find Colony 找不到時印出 `"J" not found.`（`@NOCITY`，語料模板 `"%STRING0" not found.`），變數是玩家剛輸入的文字；逐步到「術語表查不到」而回原文（`variable-without-term`）。
+- **規則：**模板原文中以一對雙引號緊貼包住的變數（`"%STRINGn"`）視為玩家輸入，值不查術語表、原樣代入譯文，可為空字串（玩家直接按 Enter 時印出 `"" not found.`）；其他變數維持「查不到回原文」。
