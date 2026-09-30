@@ -91,6 +91,7 @@ func main() {
 	autoEnd := flag.Uint64("auto-end", 0, "自動應答的終點步數（0 為不啟用）")
 	autoFrom := flag.Uint64("auto-from", 0, "意圖鍵最早在此步數後送出")
 	wavOut := flag.Bool("wav", false, "目標168：開啟 OPL3 合成並把整段聲音寫成 <out>.wav")
+	sbDigital := flag.Bool("sb-digital", false, "目標175：開啟 dosgolem 數位音效（8237 DMA、DSP 播放、IRQ7）")
 	flag.Parse()
 	if *inputs == "" || *out == "" {
 		panic("必須指定 inputs 與 out")
@@ -127,6 +128,9 @@ func main() {
 	d.Install()
 	defer d.Close()
 	m.SetSoundBlasterPro(true)
+	if *sbDigital && !m.EnableSBDigital() {
+		panic("數位音效無法開啟")
+	}
 	if *wavOut {
 		m.EnableOPLSynth(true)
 	}
@@ -479,13 +483,16 @@ func main() {
 	for _, w := range m.PortLog {
 		if (w.Port >= 0x220 && w.Port <= 0x22f) || w.Port <= 0x0f || (w.Port >= 0x80 && w.Port <= 0x8f) {
 			sbPorts[fmt.Sprintf("%03X", w.Port)]++
-			if w.Port == 0x22c && len(dspCmds) < 200 {
+			if w.Port == 0x22c && len(dspCmds) < 20000 {
 				dspCmds = append(dspCmds, [2]uint64{w.Step, uint64(w.Val)})
 			}
 		}
 	}
 	audio := map[string]any{"sb_ports": sbPorts, "dsp_writes": dspCmds, "pit_changes": pitChanges, "irq0_every": m.IRQ0Every, "opl_writes": len(m.OPL),
 		"opl_bank1_writes": bank1, "first_opl_step": firstOPL, "last_opl_step": lastOPL, "ticks": m.Ticks}
+	if sd := m.SBDigital(); sd != nil {
+		audio["sb_digital"] = map[string]any{"blocks": sd.Blocks, "irq7_sent": sd.IRQ7Sent, "bytes_read": sd.BytesRead, "plays": sd.Plays}
+	}
 	strDone()
 	strList := make([]*string169, 0, len(strs))
 	for _, v := range strs {

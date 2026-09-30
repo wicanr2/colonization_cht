@@ -4197,3 +4197,9 @@ Enter 或 ESC 都使索引畫面到同一下一可見頁，且各新增
 - **已證實：**命名新陸地、命名殖民地、Find Colony 的輸入列是提示句之外另一段逐字印字，內容為標籤＋輸入內容＋游標；打字後重印時標籤像素不變（fallback 切行只含輸入內容的墨跡）。VIEW 下拉選單 Find Colony 為第 4 列，無熱鍵。真 GUI 現場輸入 `1dcb538c…` 下中英原版狀態一致（終點 `fc9e3168…`）。
 - **已證實：**發行啟動腳本 `tools/release/colonization-cht.sh` 未啟用 `--dialog-a`、`--string-a`。
 
+## 2026-09-30：目標175 Sound Blaster 數位音效
+
+- **輸入與工具：**dosgolem 隔離副本 `b0bf259`（規格 197）；探針 `tools/probe_goal165_dialogs.go -sb-digital`；收據 `workplace/reports/goal175-sb/`（`old`、`off`、`dig`、`p170`、`p171`、`p174`、`p174b`）。
+- **已證實：**驅動初始化以 5 位元組單次 DMA（0x40←189，約 14.9 kHz）測 IRQ7；收到後送 0xD1。建立殖民地的木刻畫面以 0x14 單次 DMA 播放 `COLDIG.BIN` 位移 0x5F5DF 起連續 60,739 位元組（10,989 Hz，約 5.5 秒），先 2,593 位元組，再以實體 0xD0000／0xD2000 兩個 8 KB 緩衝輪流 7 塊，最後 802 位元組。`COLDIG.BIN` 無檔頭，全為無號 8 位元 PCM。
+- **強推論：**0xD000 段是 EMS 頁框，驅動經 EMS 分段搬入取樣。
+

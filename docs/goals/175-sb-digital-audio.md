@@ -1,6 +1,6 @@
 # 目標175：Sound Blaster 數位音效（Issue #48）
 
-狀態：進行中；開始：2026-09-30。對應 [Issue #48](https://github.com/wicanr2/colonization_cht/issues/48)，規格見[規格039](../spec/039-sb-dsp-dma-draft.md)。
+狀態：完成；2026-09-30。對應 [Issue #48](https://github.com/wicanr2/colonization_cht/issues/48)，規格見[規格039](../spec/039-sb-dsp-dma-draft.md)。
 
 ## 已知
 
@@ -22,3 +22,16 @@
 ## 停止線
 
 前端播放、音量與取樣率轉換屬 #49。
+
+## 結果
+
+- dosgolem（隔離副本 `b0bf259`，規格 197）：`EnableSBDigital` 提供 8237 DMA 通道 1、DSP 八位元單次與自動重載播放、IRQ7、混音器，輸出混入 OPL 合成的立體聲；預設不啟用。
+- 取證：開啟後初始化 DMA 測試收到 IRQ7、驅動開喇叭；建立殖民地的木刻畫面播放約 5.5 秒、10,989 Hz 的取樣，內容逐位元組來自 `COLDIG.BIN`（位移 0x5F5DF 起連續 60,739 位元組），以兩個 8 KB 緩衝串流。
+- 驗收：預設關閉時舊版與新版 dosgolem 狀態相同、新前端重播與既有收據逐位元組相同；dosgolem 測試全過；同輸入兩次 WAV 相同。
+- 前端：`--sb-digital` 旗標（`tools/live_menu.go`）。前端目前沒有音訊輸出，播放與音量由 #49 接上；開啟後遊戲走數位音效可用的路徑，原版狀態與關閉時不同，正常路徑完整驗證併入 #53 的完整旗標重跑。
+
+## 移交
+
+- #49：前端播放（OPL＋數位音效的混合輸出）、音量平衡（本規格增益 64 為暫定）。
+- #53：發行啟動腳本開啟 `--sb-digital`，並以完整旗標重跑各正常路徑。
+- 特定局勢是否有其他數位取樣：各畫面 Issue 觸發時看 `Plays`。
