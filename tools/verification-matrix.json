@@ -893,6 +893,46 @@
     "probe_goal174_replays.sh"
    ],
    "known_diffs": "改名、貿易路線命名、貨物數量輸入欄未觸發；Name: 另有字串層片段字典來源，反向對照只驗 Colony:"
+  },
+  {
+   "id": "frontend-audio",
+   "path": "dynamic",
+   "title": "前端音訊：OPL3 音樂與數位音效播放、錄音與開關音訊不影響原版",
+   "specs": [
+    "037",
+    "039",
+    "040"
+   ],
+   "flags": [
+    "--audio",
+    "--sb-digital",
+    "--audio-wav"
+   ],
+   "checker": "check_goal176_window.py",
+   "args": [
+    "--game",
+    "{game}",
+    "--reports",
+    "{reports}/goal176-audio"
+   ],
+   "dir": "goal176-audio",
+   "zh": [
+    "replay-a",
+    "replay-c"
+   ],
+   "control": [
+    "replay-b",
+    "replay-d"
+   ],
+   "negative": [],
+   "gui_inputs": [
+    "gui-audio.inputs.json"
+   ],
+   "regenerate": [
+    "probe_goal176_gui.sh",
+    "probe_goal176_replays.sh"
+   ],
+   "known_diffs": "容器以 ALSA null 裝置驗證播放器；實際聽感需在有音效卡的環境試聽 workplace 的 WAV；本列無專屬負例，以開關音訊兩兩比對與 WAV 有無數位音效區隔代替"
   }
  ],
  "not_covered": [

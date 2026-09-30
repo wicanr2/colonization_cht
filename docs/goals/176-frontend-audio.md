@@ -1,6 +1,6 @@
 # 目標176：前端音訊輸出（Issue #49）
 
-狀態：進行中；開始：2026-09-30。對應 [Issue #49](https://github.com/wicanr2/colonization_cht/issues/49)，規格見[規格040](../spec/040-frontend-audio.md)。
+狀態：完成；2026-09-30。對應 [Issue #49](https://github.com/wicanr2/colonization_cht/issues/49)，規格見[規格040](../spec/040-frontend-audio.md)。
 
 ## 已知
 
@@ -20,3 +20,14 @@
 ## 停止線
 
 音量設定介面、音效開關選單不做；發行啟動腳本開啟音訊屬 #53。
+
+## 結果
+
+- 前端旗標 `--audio`、`--audio-wav`、`--audio-mute`；每次 `Update` 結束取一次 `DrainAudio()`，重播在同樣的 200,000 步邊界取樣。播放以 48 kHz 線性內插串流，不足補靜音、積壓超過 0.25 秒只留 0.1 秒。
+- 驗收見規格040：開關音訊不影響原版（兩種機器設定各兩組比對）、真 GUI 與重播 WAV 逐位元組相同、開場／海上／建城木刻三段有聲、播放器實際被讀取。驗證矩陣 PASS 25。
+- 試聽檔：`workplace/reports/goal176-audio/gui-audio.wav`（約 95 秒，含開場音樂、海上音樂、建城時的數位音效；不提交）。
+
+## 移交
+
+- #53：發行啟動腳本加上 `--audio --sb-digital`，並以完整旗標重跑各正常路徑。
+- 音量平衡（數位音效增益 64 為暫定）與音效開關選單未做。

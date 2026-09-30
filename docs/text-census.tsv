@@ -32,7 +32,7 @@ COLONY.TXT:@DUTCH:0x000009AD	txt	海上地圖	string	normal	pending		1
 COLONY.TXT:@DUTCH:0x000009BA	txt	海上地圖	string	normal	pending		1		
 COLONY.TXT:@DUTCH:0x000009CA	txt	海上地圖	string	normal	pending		1		
 COLONY.TXT:@DUTCH:0x000009DB	txt	海上地圖	string	normal	pending		1		
-COLONY.TXT:@ENGLISH:0x0000011B	txt	海上地圖	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	
+COLONY.TXT:@ENGLISH:0x0000011B	txt	海上地圖	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	
 COLONY.TXT:@ENGLISH:0x0000012B	txt	海上地圖	string	normal	pending		1		
 COLONY.TXT:@ENGLISH:0x0000013A	txt	海上地圖	string	normal	pending		1		
 COLONY.TXT:@ENGLISH:0x00000148	txt	海上地圖	string	normal	pending		1		
@@ -196,10 +196,10 @@ EXE:00b1209c9832	exe	（執行期字串）	string	normal	shown	confirmed	1	colon
 EXE:06d6aab46fb4	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:07e6ddbbc0b7	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
 EXE:0b050b0c4ccf	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
-EXE:0e9fc7bdf44e	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	
+EXE:0e9fc7bdf44e	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	
 EXE:0ebebedd65b7	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:0fc2fdffc666	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
-EXE:15d1c75e9845	exe	海上地圖	dialog	normal	shown	人工歸類	1	人工歸類	input-labels
+EXE:15d1c75e9845	exe	海上地圖	dialog	normal	shown	人工歸類	1	人工歸類	frontend-audio,input-labels
 EXE:1864c234a4e3	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:19fb37c4b698	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:1b0b40852888	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
@@ -207,18 +207,18 @@ EXE:1fb609c93b97	exe	（執行期字串）	string	normal	shown	confirmed	1	colon
 EXE:21bf103dcab8	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:2595c12adad9	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
 EXE:26458b92c96f	exe	（執行期字串）	string	normal	shown	confirmed	1	goal172-re170,goal174-re170	europe-reports
-EXE:271e78257d39	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	goal172-re167,goal174-re167,tutorial-dialogs
-EXE:2bddb6a7704e	exe	（執行期字串）	string	normal	shown	confirmed	1	input-labels	
+EXE:271e78257d39	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	goal172-re167,goal174-re167,tutorial-dialogs
+EXE:2bddb6a7704e	exe	（執行期字串）	string	normal	shown	confirmed	1	frontend-audio,input-labels	
 EXE:2d2ff7f3599a	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:2f19e75ab47b	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
 EXE:31fda6f25201	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:34e360eb2104	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:35b7f02d055d	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
-EXE:37e78b031b03	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	goal172-re167,goal174-re167,tutorial-dialogs
+EXE:37e78b031b03	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	goal172-re167,goal174-re167,tutorial-dialogs
 EXE:381057ca386c	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
 EXE:3db67c85ce1a	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
 EXE:3e7db988ee08	exe	（執行期字串）	string	normal	shown	confirmed	1	colony-interactions,goal174-re172	
-EXE:3f02988e15cd	exe	海上地圖	menu	normal	shown	人工歸類	1	人工歸類	colonizopedia,colony-interactions,colony-strings,dynamic-spots,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
+EXE:3f02988e15cd	exe	海上地圖	menu	normal	shown	人工歸類	1	人工歸類	colonizopedia,colony-interactions,colony-strings,dynamic-spots,europe-reports,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
 EXE:43dc6b16b5fa	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:479ac92abae9	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:48d6ff4d2955	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
@@ -228,8 +228,8 @@ EXE:4b90b806fb1f	exe	（執行期字串）	string	normal	shown	confirmed	1	europ
 EXE:4dc00a221a1c	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
 EXE:4e84116b2031	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:4f1ea86999b3	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
-EXE:4fb067284ad6	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	
-EXE:52ae9fbfd404	exe	下拉選單	menu	normal	pending		1		input-labels
+EXE:4fb067284ad6	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	
+EXE:52ae9fbfd404	exe	下拉選單	menu	normal	pending		1		frontend-audio,input-labels
 EXE:55691a2f1617	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:581bbf591aee	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:58c0d4251c5e	exe	（執行期字串）	string	normal	shown	confirmed	1	colony-interactions,goal174-re172	
@@ -243,16 +243,16 @@ EXE:6f58196e382b	exe	（執行期字串）	string	normal	shown	confirmed	1	goal1
 EXE:70afd6e54fc4	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:736883f0426e	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
 EXE:73eae8a1f8ce	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
-EXE:74df22d196ea	exe	開局設定	input	normal	shown	人工歸類	1	人工歸類	colonizopedia,colony-interactions,colony-strings,dialog-body,dynamic-spots,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
+EXE:74df22d196ea	exe	開局設定	input	normal	shown	人工歸類	1	人工歸類	colonizopedia,colony-interactions,colony-strings,dialog-body,dynamic-spots,europe-reports,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
 EXE:74ff96105f4c	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:7a5c1bb1da04	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
-EXE:7aec0706f4e9	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,europe-reports,goal172-re170,goal172-re171,goal174-re170,goal174-re171,input-labels	goal172-re167,goal174-re167,tutorial-dialogs
+EXE:7aec0706f4e9	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,europe-reports,frontend-audio,goal172-re170,goal172-re171,goal174-re170,goal174-re171,input-labels	goal172-re167,goal174-re167,tutorial-dialogs
 EXE:7c07b8477093	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:7d95e64e836a	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:7e1cf8920477	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:803bc3298399	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:82667b088d38	exe	海上地圖	string	normal	pending		1		goal172-re167,goal174-re167,tutorial-dialogs
-EXE:84a1cab8db2f	exe	開局設定	input	normal	shown	confirmed	1	goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	colonizopedia,colony-interactions,colony-strings,dialog-body,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,tutorial-dialogs
+EXE:84a1cab8db2f	exe	開局設定	input	normal	shown	confirmed	1	frontend-audio,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	colonizopedia,colony-interactions,colony-strings,dialog-body,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,tutorial-dialogs
 EXE:86ad1f65b1b7	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:881539a8e7ef	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
 EXE:8bc9d10451ee	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
@@ -266,9 +266,10 @@ EXE:9dc1b911eee2	exe	下拉選單	menu	normal	pending		1		input-labels
 EXE:9dff484d92df	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
 EXE:a81a440386e4	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:a97ed4defaf6	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
+EXE:ad437828b303	exe	下拉選單	menu	normal	pending		1		frontend-audio
 EXE:ad986107dc9b	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:b0262cb86f20	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
-EXE:b20f1981bc90	exe	（執行期字串）	string	normal	shown	confirmed	1	colony-interactions,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	colonizopedia,colony-strings,europe-reports
+EXE:b20f1981bc90	exe	（執行期字串）	string	normal	shown	confirmed	1	colony-interactions,frontend-audio,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	colonizopedia,colony-strings,europe-reports
 EXE:b22f45156912	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
 EXE:b4e527b71cbf	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
 EXE:bb42ea471437	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
@@ -276,23 +277,23 @@ EXE:bd1b22c866c7	exe	（執行期字串）	string	normal	shown	confirmed	1	europ
 EXE:bd3f42a45516	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,europe-reports,goal172-re170,goal172-re171,goal174-re170,goal174-re171	
 EXE:bf31e3c815d7	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:bfb8dda3a3e2	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
-EXE:c9ee0a41420e	exe	開局設定	input	normal	shown	confirmed	1	goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re169,goal172-re170,goal172-re171
+EXE:c9ee0a41420e	exe	開局設定	input	normal	shown	confirmed	1	frontend-audio,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re169,goal172-re170,goal172-re171
 EXE:cd4d6d01ed88	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
 EXE:ce4678ffb0de	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
-EXE:d187fcbc44b1	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	goal172-re167,goal174-re167,tutorial-dialogs
-EXE:d303fd0b1c67	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	goal172-re167,goal174-re167,tutorial-dialogs
+EXE:d187fcbc44b1	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	goal172-re167,goal174-re167,tutorial-dialogs
+EXE:d303fd0b1c67	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	goal172-re167,goal174-re167,tutorial-dialogs
 EXE:d61b2891c883	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
 EXE:d6f363c0b392	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:ddf1df2ebf56	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:df8145f22d83	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:e6289a993655	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
-EXE:ea77952f2f0d	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	goal172-re167,goal174-re167,tutorial-dialogs
+EXE:ea77952f2f0d	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	goal172-re167,goal174-re167,tutorial-dialogs
 EXE:ec9704efba7e	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:eca75848af8c	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
 EXE:ef4d7d77a8cc	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,europe-reports,goal172-re170,goal172-re171,goal174-re170,goal174-re171	
 EXE:f05f70e0dde3	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 EXE:fbd2880d7e10	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
-EXE:fdbb97432551	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	goal172-re167,goal174-re167,tutorial-dialogs
+EXE:fdbb97432551	exe	（執行期字串）	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	goal172-re167,goal174-re167,tutorial-dialogs
 GAME.TXT:@ABANDON	txt	殖民地	dialog	conditional	pending		5		
 GAME.TXT:@ABANDON2	txt	殖民地	dialog	conditional	pending		6		
 GAME.TXT:@ALREADYHAVE	txt	殖民地	dialog	conditional	pending		2		
@@ -310,14 +311,14 @@ GAME.TXT:@BADHAGGLE0	txt	原住民村落	dialog	conditional	pending		3
 GAME.TXT:@BADHAGGLE1	txt	原住民村落	dialog	conditional	pending		3		
 GAME.TXT:@BADHAGGLE2	txt	原住民村落	dialog	conditional	pending		3		
 GAME.TXT:@BADHAGGLE3	txt	原住民村落	dialog	conditional	pending		2		
-GAME.TXT:@BEGINMENU	txt	主選單	dialog	normal	shown	confirmed	6	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
+GAME.TXT:@BEGINMENU	txt	主選單	dialog	normal	shown	confirmed	6	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
 GAME.TXT:@BRING	txt	原住民村落	dialog	conditional	pending		3		
-GAME.TXT:@BUILD1	txt	開場字幕	caption	normal	shown	confirmed	1	build-captions,dynamic-combined,regression	colonizopedia,colony-interactions,colony-strings,dialog-body,dynamic-spots,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
+GAME.TXT:@BUILD1	txt	開場字幕	caption	normal	shown	confirmed	1	build-captions,dynamic-combined,regression	colonizopedia,colony-interactions,colony-strings,dialog-body,dynamic-spots,europe-reports,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
 GAME.TXT:@BUILD10	txt	開場字幕	caption	normal	shown	confirmed	1	build-captions,dynamic-combined	
-GAME.TXT:@BUILD2	txt	開場字幕	caption	normal	shown	confirmed	2	build-captions,dynamic-combined	colonizopedia,colony-interactions,colony-strings,dialog-body,dynamic-spots,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
-GAME.TXT:@BUILD3	txt	開場字幕	caption	normal	shown	confirmed	1	build-captions,dynamic-combined	colonizopedia,colony-interactions,colony-strings,dialog-body,dynamic-spots,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
-GAME.TXT:@BUILD4	txt	開場字幕	caption	normal	shown	confirmed	1	build-captions,dynamic-combined	colonizopedia,colony-interactions,colony-strings,dialog-body,dynamic-spots,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
-GAME.TXT:@BUILD5	txt	開場字幕	caption	normal	shown	confirmed	1	build-captions,dynamic-combined	colonizopedia,colony-interactions,colony-strings,dialog-body,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
+GAME.TXT:@BUILD2	txt	開場字幕	caption	normal	shown	confirmed	2	build-captions,dynamic-combined	colonizopedia,colony-interactions,colony-strings,dialog-body,dynamic-spots,europe-reports,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
+GAME.TXT:@BUILD3	txt	開場字幕	caption	normal	shown	confirmed	1	build-captions,dynamic-combined	colonizopedia,colony-interactions,colony-strings,dialog-body,dynamic-spots,europe-reports,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
+GAME.TXT:@BUILD4	txt	開場字幕	caption	normal	shown	confirmed	1	build-captions,dynamic-combined	colonizopedia,colony-interactions,colony-strings,dialog-body,dynamic-spots,europe-reports,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
+GAME.TXT:@BUILD5	txt	開場字幕	caption	normal	shown	confirmed	1	build-captions,dynamic-combined	colonizopedia,colony-interactions,colony-strings,dialog-body,europe-reports,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
 GAME.TXT:@BUILD6	txt	開場字幕	caption	normal	shown	confirmed	1	build-captions,dynamic-combined	
 GAME.TXT:@BUILD7	txt	開場字幕	caption	normal	shown	confirmed	1	build-captions,dynamic-combined	
 GAME.TXT:@BUILD8	txt	開場字幕	caption	normal	shown	confirmed	1	build-captions,dynamic-combined	
@@ -361,7 +362,7 @@ GAME.TXT:@CLEARCUT	txt	對話框	dialog	conditional	pending		2
 GAME.TXT:@COLLEGE2	txt	殖民地	dialog	conditional	pending		2		
 GAME.TXT:@COLONISTCAPTURE	txt	戰鬥	dialog	conditional	pending		1		
 GAME.TXT:@COLONISTCAPTURE2	txt	戰鬥	dialog	conditional	pending		2		
-GAME.TXT:@COLONY	txt	海上地圖	dialog	normal	shown	confirmed	2	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	
+GAME.TXT:@COLONY	txt	海上地圖	dialog	normal	shown	confirmed	2	colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	
 GAME.TXT:@COLONYFLAG	txt	除錯	dialog	unreachable	unreachable		1		
 GAME.TXT:@COLONYOPTIONS	txt	對話框	dialog	normal	pending		11		
 GAME.TXT:@COLONYUNIT	txt	殖民地	dialog	normal	pending		1		
@@ -399,7 +400,7 @@ GAME.TXT:@EXTORTLAUGH	txt	原住民村落	dialog	conditional	pending		2
 GAME.TXT:@EXTORTNO	txt	原住民村落	dialog	conditional	pending		2		
 GAME.TXT:@EXTORTPOOR	txt	原住民村落	dialog	conditional	pending		3		
 GAME.TXT:@EXTORTSTUFF	txt	原住民村落	dialog	conditional	pending		4		
-GAME.TXT:@FINDCITY	txt	海上地圖	dialog	normal	shown	confirmed	2	input-labels	
+GAME.TXT:@FINDCITY	txt	海上地圖	dialog	normal	shown	confirmed	2	frontend-audio,input-labels	
 GAME.TXT:@FOOD1	txt	對話框	dialog	conditional	pending		2		
 GAME.TXT:@FOOD2	txt	對話框	dialog	conditional	pending		3		
 GAME.TXT:@FOODLOW	txt	對話框	dialog	conditional	pending		3		
@@ -442,7 +443,7 @@ GAME.TXT:@INDIANBURN	txt	原住民村落	dialog	conditional	pending		2
 GAME.TXT:@INDIANBURNCOLONY	txt	戰鬥	dialog	conditional	pending		3		
 GAME.TXT:@INDIANBURNCOLONY2	txt	戰鬥	dialog	conditional	pending		2		
 GAME.TXT:@INDIANCITY	txt	外交	dialog	conditional	pending		6		
-GAME.TXT:@INDIANCOME	txt	外交	dialog	normal	shown	confirmed	3	colonizopedia,colony-interactions,colony-strings,dialog-body,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs	
+GAME.TXT:@INDIANCOME	txt	外交	dialog	normal	shown	confirmed	3	colonizopedia,colony-interactions,colony-strings,dialog-body,europe-reports,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs	
 GAME.TXT:@INDIANCOMMENT	txt	對話框	dialog	conditional	pending		4		
 GAME.TXT:@INDIANFOREST	txt	海上地圖	dialog	conditional	pending		6		
 GAME.TXT:@INDIANFOREST2	txt	海上地圖	dialog	conditional	pending		4		
@@ -454,7 +455,7 @@ GAME.TXT:@INDIANHELLO1	txt	外交	dialog	normal	pending		2
 GAME.TXT:@INDIANHELLO2	txt	外交	dialog	normal	pending		2		
 GAME.TXT:@INDIANLAND	txt	海上地圖	dialog	conditional	pending		5		
 GAME.TXT:@INDIANLOSE	txt	戰鬥	dialog	conditional	pending		1		
-GAME.TXT:@INDIANPEACE	txt	外交	dialog	normal	shown	confirmed	3	colonizopedia,colony-interactions,colony-strings,dialog-body,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs	
+GAME.TXT:@INDIANPEACE	txt	外交	dialog	normal	shown	confirmed	3	colonizopedia,colony-interactions,colony-strings,dialog-body,europe-reports,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs	
 GAME.TXT:@INDIANROAD	txt	海上地圖	dialog	conditional	pending		6		
 GAME.TXT:@INDIANSCONVERT	txt	對話框	dialog	conditional	pending		3		
 GAME.TXT:@INDIANSHUN	txt	外交	dialog	normal	pending		2		
@@ -466,7 +467,7 @@ GAME.TXT:@INDIANWAR	txt	外交	dialog	conditional	pending		3
 GAME.TXT:@INDIANWARFARE	txt	原住民村落	dialog	conditional	pending		3		
 GAME.TXT:@INDIANWARPATH	txt	原住民村落	dialog	conditional	pending		2		
 GAME.TXT:@INDIANWARPATH2	txt	原住民村落	dialog	conditional	pending		4		
-GAME.TXT:@INDIANWELCOME	txt	外交	dialog	normal	shown	confirmed	8	colony-interactions,dialog-body,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	
+GAME.TXT:@INDIANWELCOME	txt	外交	dialog	normal	shown	confirmed	8	colony-interactions,dialog-body,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	
 GAME.TXT:@INDIANWIN0	txt	戰鬥	dialog	conditional	pending		1		
 GAME.TXT:@INDIANWIN1	txt	戰鬥	dialog	conditional	pending		2		
 GAME.TXT:@INDIANWIN2	txt	戰鬥	dialog	conditional	pending		2		
@@ -504,11 +505,11 @@ GAME.TXT:@KINGWIFE	txt	對話框	dialog	conditional	pending		4
 GAME.TXT:@KINGWIN	txt	結局	dialog	conditional	pending		4		
 GAME.TXT:@KISSSORRY	txt	對話框	dialog	normal	pending		1		
 GAME.TXT:@KISSUP	txt	對話框	dialog	normal	pending		5		
-GAME.TXT:@LANDFALL	txt	海上地圖	dialog	normal	shown	confirmed	4	colony-interactions,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	
-GAME.TXT:@LANDFALL2	txt	海上地圖	dialog	normal	shown	confirmed	5	colonizopedia,colony-interactions,colony-strings,dialog-body,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs	
+GAME.TXT:@LANDFALL	txt	海上地圖	dialog	normal	shown	confirmed	4	colony-interactions,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	
+GAME.TXT:@LANDFALL2	txt	海上地圖	dialog	normal	shown	confirmed	5	colonizopedia,colony-interactions,colony-strings,dialog-body,europe-reports,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs	
 GAME.TXT:@LANDFIRST	txt	海上地圖	dialog	conditional	pending		3		
-GAME.TXT:@LANDHO	txt	海上地圖	dialog	normal	shown	confirmed	3	colonizopedia,colony-interactions,colony-strings,dialog-body,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs	
-GAME.TXT:@LEADERNAME	txt	開局設定	dialog	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,tutorial-dialogs,tutorial-help	dialog-body
+GAME.TXT:@LANDHO	txt	海上地圖	dialog	normal	shown	confirmed	3	colonizopedia,colony-interactions,colony-strings,dialog-body,europe-reports,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs	
+GAME.TXT:@LEADERNAME	txt	開局設定	dialog	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,tutorial-dialogs,tutorial-help	dialog-body
 GAME.TXT:@LEARNALREADY	txt	原住民村落	dialog	normal	pending		4		
 GAME.TXT:@LEARNCRIMINAL	txt	原住民村落	dialog	normal	pending		3		
 GAME.TXT:@LEARNDONE	txt	原住民村落	dialog	normal	pending		4		
@@ -568,8 +569,8 @@ GAME.TXT:@MULTI	txt	對話框	dialog	unreachable	unreachable		2
 GAME.TXT:@MULTINEXT	txt	對話框	dialog	unreachable	unreachable		2		
 GAME.TXT:@MULTIREV	txt	對話框	dialog	unreachable	unreachable		6		
 GAME.TXT:@MYLEADER	txt	外交	dialog	conditional	pending		4		
-GAME.TXT:@NATION0A	txt	國家介紹	nation	normal	shown	confirmed	14	dynamic-combined,england-intro,options-followups,regression	colonizopedia,colony-interactions,colony-strings,dialog-body,dynamic-spots,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
-GAME.TXT:@NATION0B	txt	國家介紹	nation	normal	shown	confirmed	4	dynamic-combined,england-intro,options-followups,regression	colonizopedia,colony-interactions,colony-strings,dialog-body,dynamic-spots,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
+GAME.TXT:@NATION0A	txt	國家介紹	nation	normal	shown	confirmed	14	dynamic-combined,england-intro,options-followups,regression	colonizopedia,colony-interactions,colony-strings,dialog-body,dynamic-spots,europe-reports,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
+GAME.TXT:@NATION0B	txt	國家介紹	nation	normal	shown	confirmed	4	dynamic-combined,england-intro,options-followups,regression	colonizopedia,colony-interactions,colony-strings,dialog-body,dynamic-spots,europe-reports,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
 GAME.TXT:@NATION1A	txt	國家介紹	nation	normal	shown	confirmed	14	options-followups,other-intros	
 GAME.TXT:@NATION1B	txt	國家介紹	nation	normal	shown	confirmed	4	options-followups,other-intros	
 GAME.TXT:@NATION2A	txt	國家介紹	nation	normal	shown	confirmed	15	options-followups,other-intros	
@@ -581,7 +582,7 @@ GAME.TXT:@NEEDTOOLS	txt	對話框	dialog	normal	pending		3
 GAME.TXT:@NEEDTOOLS0	txt	對話框	dialog	normal	pending		3		
 GAME.TXT:@NEEDUNIVERSITY	txt	殖民地	dialog	conditional	pending		2		
 GAME.TXT:@NEWCOLONIST	txt	對話框	dialog	normal	pending		1		
-GAME.TXT:@NOCITY	txt	海上地圖	dialog	conditional	pending		1		input-labels
+GAME.TXT:@NOCITY	txt	海上地圖	dialog	conditional	pending		1		frontend-audio,input-labels
 GAME.TXT:@NOCOLONIESEITHER	txt	獨立戰爭	dialog	conditional	pending		1		
 GAME.TXT:@NOCONTACT	txt	外交	dialog	conditional	pending		1		
 GAME.TXT:@NODOCKS	txt	殖民地	dialog	normal	pending		2		
@@ -647,7 +648,7 @@ GAME.TXT:@RECRUIT2	txt	歐洲港口	dialog	normal	pending		2
 GAME.TXT:@RECRUITCHOOSE	txt	歐洲港口	dialog	conditional	pending		5		
 GAME.TXT:@REFIT	txt	對話框	dialog	conditional	pending		1		
 GAME.TXT:@RENAMECOLONY	txt	殖民地	dialog	conditional	pending		2		
-GAME.TXT:@RETIRE	txt	對話框	dialog	normal	shown	confirmed	3	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,retire,tutorial-dialogs	
+GAME.TXT:@RETIRE	txt	對話框	dialog	normal	shown	confirmed	3	colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,retire,tutorial-dialogs	
 GAME.TXT:@RETIRING	txt	結局	dialog	conditional	pending		3		
 GAME.TXT:@RETIRING2	txt	結局	dialog	conditional	pending		3		
 GAME.TXT:@RID	txt	外交	dialog	conditional	pending		2		
@@ -664,7 +665,7 @@ GAME.TXT:@SCORE	txt	結局	string	conditional	pending		24
 GAME.TXT:@SCORED	txt	結局	dialog	conditional	pending		3		
 GAME.TXT:@SCOUTCOLONY	txt	外交	dialog	conditional	pending		6		
 GAME.TXT:@SCREWED	txt	海上地圖	dialog	normal	pending		4		
-GAME.TXT:@SEACOLONY	txt	海上地圖	dialog	conditional	shown	confirmed	2	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	tutorial-dialogs
+GAME.TXT:@SEACOLONY	txt	海上地圖	dialog	conditional	shown	confirmed	2	colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	tutorial-dialogs
 GAME.TXT:@SEIZURE	txt	獨立戰爭	dialog	conditional	pending		1		
 GAME.TXT:@SEIZURELAND	txt	獨立戰爭	dialog	conditional	pending		1		
 GAME.TXT:@SEIZURESEA	txt	獨立戰爭	dialog	conditional	pending		1		
@@ -739,20 +740,20 @@ GAME.TXT:@TRIBUTE	txt	外交	dialog	conditional	pending		6
 GAME.TXT:@TRIBUTEUSA	txt	外交	dialog	conditional	pending		6		
 GAME.TXT:@TUTNOLUMBER	txt	教學提示	tutorial	conditional	pending		5		
 GAME.TXT:@TUTNOSPACES	txt	教學提示	tutorial	conditional	pending		6		
-GAME.TXT:@TUTORIAL1	txt	教學提示	tutorial	normal	shown	confirmed	4	dynamic-combined,tutorial-help	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
+GAME.TXT:@TUTORIAL1	txt	教學提示	tutorial	normal	shown	confirmed	4	dynamic-combined,tutorial-help	colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs
 GAME.TXT:@TUTORIAL10	txt	教學提示	tutorial	normal	pending		5		
-GAME.TXT:@TUTORIAL11	txt	教學提示	tutorial	normal	shown	confirmed	5	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs	
+GAME.TXT:@TUTORIAL11	txt	教學提示	tutorial	normal	shown	confirmed	5	colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs	
 GAME.TXT:@TUTORIAL12	txt	教學提示	tutorial	normal	pending		7		
-GAME.TXT:@TUTORIAL13	txt	教學提示	tutorial	normal	shown	confirmed	9	colony-interactions,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs	colonizopedia,colony-strings,europe-reports
-GAME.TXT:@TUTORIAL14	txt	教學提示	tutorial	normal	shown	confirmed	7	colonizopedia,europe-reports,goal172-re167,goal172-re170,goal172-re171,goal174-re167,goal174-re170,goal174-re171,input-labels,tutorial-dialogs	
+GAME.TXT:@TUTORIAL13	txt	教學提示	tutorial	normal	shown	confirmed	9	colony-interactions,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs	colonizopedia,colony-strings,europe-reports
+GAME.TXT:@TUTORIAL14	txt	教學提示	tutorial	normal	shown	confirmed	7	colonizopedia,europe-reports,frontend-audio,goal172-re167,goal172-re170,goal172-re171,goal174-re167,goal174-re170,goal174-re171,input-labels,tutorial-dialogs	
 GAME.TXT:@TUTORIAL15	txt	教學提示	tutorial	normal	pending		3		
 GAME.TXT:@TUTORIAL16	txt	教學提示	tutorial	normal	pending		8		
 GAME.TXT:@TUTORIAL17	txt	教學提示	tutorial	normal	shown	confirmed	11	europe-reports,goal172-re170,goal174-re170	
 GAME.TXT:@TUTORIAL18	txt	教學提示	tutorial	normal	pending		7		
 GAME.TXT:@TUTORIAL19	txt	教學提示	tutorial	conditional	pending		5		
-GAME.TXT:@TUTORIAL2	txt	教學提示	tutorial	normal	shown	confirmed	2	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs	
+GAME.TXT:@TUTORIAL2	txt	教學提示	tutorial	normal	shown	confirmed	2	colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs	
 GAME.TXT:@TUTORIAL3	txt	教學提示	tutorial	normal	pending		2		
-GAME.TXT:@TUTORIAL4	txt	教學提示	tutorial	normal	shown	confirmed	7	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	
+GAME.TXT:@TUTORIAL4	txt	教學提示	tutorial	normal	shown	confirmed	7	colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	
 GAME.TXT:@TUTORIAL5	txt	教學提示	tutorial	normal	shown	confirmed	3	goal172-re167,goal174-re167,tutorial-dialogs	
 GAME.TXT:@TUTORIAL6	txt	教學提示	tutorial	normal	pending		3		
 GAME.TXT:@TUTORIAL7	txt	教學提示	tutorial	normal	pending		9		
@@ -768,7 +769,7 @@ GAME.TXT:@USEDUPTOOLS	txt	對話框	dialog	normal	pending		2
 GAME.TXT:@VALOR	txt	戰鬥	dialog	conditional	pending		3		
 GAME.TXT:@VANISH	txt	對話框	dialog	conditional	pending		3		
 GAME.TXT:@VETERAN	txt	戰鬥	dialog	conditional	pending		2		
-GAME.TXT:@VICEROY	txt	開場字幕	dialog	normal	shown	confirmed	8	colonizopedia,colony-interactions,colony-strings,dynamic-spots,europe-reports,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs	
+GAME.TXT:@VICEROY	txt	開場字幕	dialog	normal	shown	confirmed	8	colonizopedia,colony-interactions,colony-strings,dynamic-spots,europe-reports,frontend-audio,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,tutorial-dialogs	
 GAME.TXT:@VICEROY2	txt	開場字幕	dialog	conditional	pending		8		
 GAME.TXT:@VILLAGEBAD	txt	原住民村落	dialog	normal	pending		3		
 GAME.TXT:@VILLAGEHAPPY	txt	原住民村落	dialog	normal	pending		3		
@@ -814,7 +815,7 @@ LABELS.TXT:@CMISC:0x00000B77	txt	殖民地	string	normal	pending		1
 LABELS.TXT:@CMISC:0x00000B8C	txt	殖民地	string	normal	pending		1		
 LABELS.TXT:@CMISC:0x00000B9B	txt	殖民地	string	normal	pending		1		
 LABELS.TXT:@CTITLE:0x00000BAC	txt	殖民地	string	normal	pending		1		
-LABELS.TXT:@CTITLE:0x00000BB2	txt	殖民地	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+LABELS.TXT:@CTITLE:0x00000BB2	txt	殖民地	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
 LABELS.TXT:@CTITLE:0x00000BB9	txt	殖民地	string	normal	shown	confirmed	1	colony-interactions,goal174-re172	
 LABELS.TXT:@CTITLE:0x00000BBE	txt	殖民地	string	normal	shown	confirmed	1	colony-interactions,goal174-re172	
 LABELS.TXT:@CTITLE:0x00000BC6	txt	殖民地	string	normal	shown	confirmed	1	colony-interactions,goal174-re172	
@@ -822,13 +823,13 @@ LABELS.TXT:@CTITLE:0x00000BDF	txt	殖民地	string	normal	pending		1
 LABELS.TXT:@CTITLE:0x00000BF0	txt	殖民地	string	normal	pending		1		
 LABELS.TXT:@CTITLE:0x00000BF8	txt	殖民地	string	normal	pending		1		
 LABELS.TXT:@CTITLE:0x00000C00	txt	殖民地	string	normal	pending		1		
-LABELS.TXT:@CTITLE:0x00000C19	txt	殖民地	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+LABELS.TXT:@CTITLE:0x00000C19	txt	殖民地	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
 LABELS.TXT:@EUROLABEL:0x00000D1B	txt	歐洲港口	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 LABELS.TXT:@EUROLABEL:0x00000D24	txt	歐洲港口	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 LABELS.TXT:@EUROLABEL:0x00000D2E	txt	歐洲港口	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 LABELS.TXT:@EUROLABEL:0x00000D35	txt	歐洲港口	string	normal	pending		1		
-LABELS.TXT:@INFO:0x000000C0	txt	海上地圖	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
-LABELS.TXT:@INFO:0x000000C8	txt	海上地圖	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+LABELS.TXT:@INFO:0x000000C0	txt	海上地圖	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+LABELS.TXT:@INFO:0x000000C8	txt	海上地圖	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
 LABELS.TXT:@INFO:0x000000D0	txt	海上地圖	string	normal	pending		1		
 LABELS.TXT:@INFO:0x000000D7	txt	海上地圖	string	normal	pending		1		
 LABELS.TXT:@MISC:0x000000E7	txt	多畫面共用	string	normal	pending		1		
@@ -837,12 +838,12 @@ LABELS.TXT:@MISC:0x000000EE	txt	多畫面共用	string	normal	pending		1
 LABELS.TXT:@MISC:0x000000FB	txt	多畫面共用	string	normal	pending		1		
 LABELS.TXT:@MISC:0x00000101	txt	多畫面共用	string	normal	pending		1		
 LABELS.TXT:@MISC:0x00000109	txt	多畫面共用	string	normal	pending		1		
-LABELS.TXT:@MISC:0x00000116	txt	多畫面共用	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+LABELS.TXT:@MISC:0x00000116	txt	多畫面共用	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
 LABELS.TXT:@MISC:0x00000124	txt	多畫面共用	string	normal	pending		1		
 LABELS.TXT:@MISC:0x00000135	txt	多畫面共用	string	normal	pending		1		
 LABELS.TXT:@MISC:0x0000013F	txt	多畫面共用	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 LABELS.TXT:@MISC:0x0000014E	txt	多畫面共用	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
-LABELS.TXT:@MISC:0x00000159	txt	多畫面共用	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	
+LABELS.TXT:@MISC:0x00000159	txt	多畫面共用	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	
 LABELS.TXT:@MISC:0x0000016B	txt	多畫面共用	string	normal	pending		1		
 LABELS.TXT:@MISC:0x0000017D	txt	多畫面共用	string	normal	pending		1		
 LABELS.TXT:@MISC:0x00000188	txt	多畫面共用	string	normal	pending		1		
@@ -894,7 +895,7 @@ LABELS.TXT:@MISC:0x000003ED	txt	多畫面共用	string	normal	pending		1
 LABELS.TXT:@MISC:0x000003F3	txt	多畫面共用	string	normal	pending		1		
 LABELS.TXT:@MISC:0x000003FA	txt	多畫面共用	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 LABELS.TXT:@MISC:0x00000404	txt	多畫面共用	string	normal	pending		1		
-LABELS.TXT:@MISC:0x00000411	txt	多畫面共用	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+LABELS.TXT:@MISC:0x00000411	txt	多畫面共用	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
 LABELS.TXT:@MISC:0x0000041A	txt	多畫面共用	string	normal	pending		1		
 LABELS.TXT:@MISC:0x00000424	txt	多畫面共用	string	normal	pending		1		
 LABELS.TXT:@MISC:0x0000042D	txt	多畫面共用	string	normal	pending		1		
@@ -990,19 +991,19 @@ LABELS.TXT:@MISC:0x00000846	txt	多畫面共用	string	normal	pending		1
 LABELS.TXT:@MISC:0x0000084C	txt	多畫面共用	string	normal	pending		1		
 LABELS.TXT:@MISC:0x00000854	txt	多畫面共用	string	normal	pending		1		
 LABELS.TXT:@MISC:0x00000859	txt	多畫面共用	string	normal	pending		1		
-LABELS.TXT:@MISC:0x0000086E	txt	多畫面共用	string	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
-LABELS.TXT:@MISC:0x00000888	txt	多畫面共用	string	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
-LABELS.TXT:@MISC:0x00000890	txt	多畫面共用	string	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
+LABELS.TXT:@MISC:0x0000086E	txt	多畫面共用	string	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
+LABELS.TXT:@MISC:0x00000888	txt	多畫面共用	string	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
+LABELS.TXT:@MISC:0x00000890	txt	多畫面共用	string	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
 LABELS.TXT:@MISC:0x000008A2	txt	多畫面共用	string	normal	pending		1		
-LABELS.TXT:@MISC:0x000008A9	txt	多畫面共用	string	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
+LABELS.TXT:@MISC:0x000008A9	txt	多畫面共用	string	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
 LABELS.TXT:@MISC:0x000008B2	txt	多畫面共用	string	normal	shown	confirmed	1	build-captions,dynamic-combined,dynamic-spots,function-keys,nation-cards-rest,options-followups,regression,retire,sea-status	
 LABELS.TXT:@MISC:0x000008B8	txt	多畫面共用	string	normal	shown	confirmed	1	third-card	
 LABELS.TXT:@MISC:0x000008C2	txt	多畫面共用	string	normal	pending		1		
 LABELS.TXT:@MISC:0x000008C9	txt	多畫面共用	string	normal	pending		1		
-LABELS.TXT:@MISC:0x000008D3	txt	多畫面共用	string	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
-LABELS.TXT:@MISC:0x000008DB	txt	多畫面共用	string	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
+LABELS.TXT:@MISC:0x000008D3	txt	多畫面共用	string	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
+LABELS.TXT:@MISC:0x000008DB	txt	多畫面共用	string	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
 LABELS.TXT:@MISC:0x000008EB	txt	多畫面共用	string	normal	pending		1		
-LABELS.TXT:@MISC:0x000008F2	txt	多畫面共用	string	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
+LABELS.TXT:@MISC:0x000008F2	txt	多畫面共用	string	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
 LABELS.TXT:@MISC:0x000008FF	txt	多畫面共用	string	normal	shown	confirmed	1	nation-cards-rest	
 LABELS.TXT:@MISC:0x0000090C	txt	多畫面共用	string	normal	shown	confirmed	1	nation-cards-rest	
 LABELS.TXT:@MISC:0x00000916	txt	多畫面共用	string	normal	shown	confirmed	1	nation-cards-rest	
@@ -1039,7 +1040,7 @@ LABELS.TXT:@MISC:0x00000A71	txt	多畫面共用	string	normal	shown	confirmed	1	
 LABELS.TXT:@MISC:0x00000A81	txt	多畫面共用	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 LABELS.TXT:@MISC:0x00000A90	txt	多畫面共用	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
 LABELS.TXT:@MISC:0x00000AA4	txt	多畫面共用	string	normal	shown	confirmed	1	europe-reports,goal172-re170,goal174-re170	
-LABELS.TXT:@MISC:0x00000AB5	txt	多畫面共用	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	
+LABELS.TXT:@MISC:0x00000AB5	txt	多畫面共用	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	
 LABELS.TXT:@ROUTE:0x00000AF9	txt	貿易路線	string	conditional	pending		1		
 LABELS.TXT:@ROUTE:0x00000B0B	txt	貿易路線	string	conditional	pending		1		
 LABELS.TXT:@ROUTE:0x00000B18	txt	貿易路線	string	conditional	pending		1		
@@ -1108,7 +1109,7 @@ MENU.TXT:@CUP:0x00000604	txt	除錯	menu	unreachable	unreachable		1
 MENU.TXT:@CUP:0x00000614	txt	除錯	menu	unreachable	unreachable		1		
 MENU.TXT:@CUP:0x0000062C	txt	除錯	menu	unreachable	unreachable		1		
 MENU.TXT:@CUP:0x00000648	txt	除錯	menu	unreachable	unreachable		1		
-MENU.TXT:@GAME:0x000000BD	txt	下拉選單	menu	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+MENU.TXT:@GAME:0x000000BD	txt	下拉選單	menu	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
 MENU.TXT:@GAME:0x000000C4	txt	下拉選單	menu	normal	pending		1		
 MENU.TXT:@GAME:0x000000D4	txt	下拉選單	menu	normal	pending		1		
 MENU.TXT:@GAME:0x000000ED	txt	下拉選單	menu	normal	pending		1		
@@ -1118,7 +1119,7 @@ MENU.TXT:@GAME:0x00000119	txt	下拉選單	menu	normal	pending		1
 MENU.TXT:@GAME:0x00000126	txt	下拉選單	menu	normal	pending		1		
 MENU.TXT:@GAME:0x0000013E	txt	下拉選單	menu	normal	pending		1		
 MENU.TXT:@GAME:0x00000148	txt	下拉選單	menu	normal	shown	confirmed	1	dynamic-spots	
-MENU.TXT:@ORDERS:0x0000025B	txt	下拉選單	menu	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+MENU.TXT:@ORDERS:0x0000025B	txt	下拉選單	menu	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
 MENU.TXT:@ORDERS:0x00000264	txt	下拉選單	menu	normal	pending		1		
 MENU.TXT:@ORDERS:0x00000276	txt	下拉選單	menu	normal	pending		1		
 MENU.TXT:@ORDERS:0x0000028D	txt	下拉選單	menu	normal	pending		1		
@@ -1139,7 +1140,7 @@ MENU.TXT:@ORDERS:0x0000036F	txt	下拉選單	menu	normal	pending		1
 MENU.TXT:@ORDERS:0x00000384	txt	下拉選單	menu	normal	pending		1		
 MENU.TXT:@ORDERS:0x000003A3	txt	下拉選單	menu	normal	pending		1		
 MENU.TXT:@ORDERS:0x000003BC	txt	下拉選單	menu	normal	pending		1		
-MENU.TXT:@PEDIA:0x0000066B	txt	下拉選單	menu	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+MENU.TXT:@PEDIA:0x0000066B	txt	下拉選單	menu	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
 MENU.TXT:@PEDIA:0x0000067B	txt	下拉選單	menu	normal	pending		1		
 MENU.TXT:@PEDIA:0x0000068A	txt	下拉選單	menu	normal	pending		1		
 MENU.TXT:@PEDIA:0x00000698	txt	下拉選單	menu	normal	pending		1		
@@ -1148,7 +1149,7 @@ MENU.TXT:@PEDIA:0x000006BC	txt	下拉選單	menu	normal	pending		1
 MENU.TXT:@PEDIA:0x000006D0	txt	下拉選單	menu	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
 MENU.TXT:@PEDIA:0x000006E4	txt	下拉選單	menu	normal	pending		1		
 MENU.TXT:@PEDIA:0x000006F5	txt	下拉選單	menu	normal	pending		1		
-MENU.TXT:@REPORTS:0x000003E9	txt	下拉選單	menu	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+MENU.TXT:@REPORTS:0x000003E9	txt	下拉選單	menu	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
 MENU.TXT:@REPORTS:0x000003F3	txt	下拉選單	menu	normal	pending		1		
 MENU.TXT:@REPORTS:0x0000040F	txt	下拉選單	menu	normal	pending		1		
 MENU.TXT:@REPORTS:0x00000429	txt	下拉選單	menu	normal	pending		1		
@@ -1159,11 +1160,11 @@ MENU.TXT:@REPORTS:0x0000048C	txt	下拉選單	menu	normal	pending		1
 MENU.TXT:@REPORTS:0x000004A2	txt	下拉選單	menu	normal	pending		1		
 MENU.TXT:@REPORTS:0x000004C2	txt	下拉選單	menu	normal	pending		1		
 MENU.TXT:@REPORTS:0x000004D9	txt	下拉選單	menu	normal	pending		1		
-MENU.TXT:@TRADE:0x00000502	txt	下拉選單	menu	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+MENU.TXT:@TRADE:0x00000502	txt	下拉選單	menu	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
 MENU.TXT:@TRADE:0x0000050A	txt	下拉選單	menu	normal	pending		1		
 MENU.TXT:@TRADE:0x0000051E	txt	下拉選單	menu	normal	pending		1		
 MENU.TXT:@TRADE:0x00000534	txt	下拉選單	menu	normal	pending		1		
-MENU.TXT:@VIEW:0x00000160	txt	下拉選單	menu	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+MENU.TXT:@VIEW:0x00000160	txt	下拉選單	menu	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
 MENU.TXT:@VIEW:0x00000167	txt	下拉選單	menu	normal	pending		1		
 MENU.TXT:@VIEW:0x00000177	txt	下拉選單	menu	normal	pending		1		
 MENU.TXT:@VIEW:0x00000187	txt	下拉選單	menu	normal	pending		1		
@@ -1270,11 +1271,11 @@ NAMES.TXT:@COLONYNAME:0x000009F9	txt	多畫面共用	string	normal	shown	confirm
 NAMES.TXT:@COLONYNAME:0x00000A06	txt	多畫面共用	string	normal	pending		1		
 NAMES.TXT:@COLONYNAME:0x00000A12	txt	多畫面共用	string	normal	pending		1		
 NAMES.TXT:@COLONYNAME:0x00000A1D	txt	多畫面共用	string	normal	pending		1		
-NAMES.TXT:@COUNTRY:0x000008EA	txt	多畫面共用	string	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
+NAMES.TXT:@COUNTRY:0x000008EA	txt	多畫面共用	string	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
 NAMES.TXT:@COUNTRY:0x00000906	txt	多畫面共用	string	normal	shown	confirmed	1	nation-cards-rest	
 NAMES.TXT:@COUNTRY:0x00000921	txt	多畫面共用	string	normal	shown	confirmed	1	nation-cards-rest	
 NAMES.TXT:@COUNTRY:0x0000093D	txt	多畫面共用	string	normal	shown	confirmed	1	nation-cards-rest	
-NAMES.TXT:@DIFFICULTY:0x00000C0C	txt	開局設定	nation	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
+NAMES.TXT:@DIFFICULTY:0x00000C0C	txt	開局設定	nation	normal	shown	confirmed	1	build-captions,colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,nation-cards-rest,options-followups,regression,retire,sea-status,third-card,tutorial-dialogs,tutorial-help	
 NAMES.TXT:@DIFFICULTY:0x00000C18	txt	開局設定	nation	normal	shown	confirmed	1	build-captions,dynamic-combined,dynamic-spots,function-keys,nation-cards-rest,options-followups,regression,retire,sea-status	
 NAMES.TXT:@DIFFICULTY:0x00000C22	txt	開局設定	nation	normal	shown	confirmed	1	third-card	
 NAMES.TXT:@DIFFICULTY:0x00000C30	txt	開局設定	nation	normal	pending		1		
@@ -1318,7 +1319,7 @@ NAMES.TXT:@FOUNDING:0x00002F22	txt	國會與建國之父	string	normal	pending		
 NAMES.TXT:@FOUNDING:0x00002F2C	txt	國會與建國之父	string	normal	pending		1		
 NAMES.TXT:@FOUNDING:0x00002F37	txt	國會與建國之父	string	normal	pending		1		
 NAMES.TXT:@FOUNDING:0x00002F42	txt	國會與建國之父	string	normal	pending		1		
-NAMES.TXT:@HOMEPORT:0x000009C1	txt	多畫面共用	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+NAMES.TXT:@HOMEPORT:0x000009C1	txt	多畫面共用	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
 NAMES.TXT:@HOMEPORT:0x000009C9	txt	多畫面共用	string	normal	pending		1		
 NAMES.TXT:@HOMEPORT:0x000009D6	txt	多畫面共用	string	normal	pending		1		
 NAMES.TXT:@HOMEPORT:0x000009DF	txt	多畫面共用	string	normal	pending		1		
@@ -1345,7 +1346,7 @@ NAMES.TXT:@JOB:0x0000196D	txt	殖民地	string	normal	shown	confirmed	1	colonizo
 NAMES.TXT:@JOB:0x000019A2	txt	殖民地	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
 NAMES.TXT:@JOB:0x000019D8	txt	殖民地	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
 NAMES.TXT:@JOB:0x00001A0E	txt	殖民地	string	normal	pending		1		
-NAMES.TXT:@JOB:0x00001A42	txt	殖民地	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	goal172-re167,goal174-re167,tutorial-dialogs
+NAMES.TXT:@JOB:0x00001A42	txt	殖民地	string	normal	shown	confirmed	1	colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels	goal172-re167,goal174-re167,tutorial-dialogs
 NAMES.TXT:@JOB:0x00001A76	txt	殖民地	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
 NAMES.TXT:@JOB:0x00001AAC	txt	殖民地	string	normal	shown	confirmed	1	colonizopedia,goal172-re171,goal174-re171	
 NAMES.TXT:@JOB:0x00001AE2	txt	殖民地	string	normal	pending		1		
@@ -1367,16 +1368,16 @@ NAMES.TXT:@MISSION:0x00000BC5	txt	原住民村落	string	conditional	pending		1
 NAMES.TXT:@MISSION:0x00000BD0	txt	原住民村落	string	conditional	pending		1		
 NAMES.TXT:@MISSION:0x00000BE1	txt	原住民村落	string	conditional	pending		1		
 NAMES.TXT:@MISSION:0x00000BF2	txt	原住民村落	string	conditional	pending		1		
-NAMES.TXT:@NATIONABBREV:0x0000099B	txt	多畫面共用	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+NAMES.TXT:@NATIONABBREV:0x0000099B	txt	多畫面共用	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
 NAMES.TXT:@NATIONABBREV:0x000009A1	txt	多畫面共用	string	normal	pending		1		
 NAMES.TXT:@NATIONABBREV:0x000009A6	txt	多畫面共用	string	normal	pending		1		
 NAMES.TXT:@NATIONABBREV:0x000009AD	txt	多畫面共用	string	normal	pending		1		
-NAMES.TXT:@NATIONALITY:0x00000969	txt	多畫面共用	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+NAMES.TXT:@NATIONALITY:0x00000969	txt	多畫面共用	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
 NAMES.TXT:@NATIONALITY:0x00000972	txt	多畫面共用	string	normal	pending		1		
 NAMES.TXT:@NATIONALITY:0x0000097A	txt	多畫面共用	string	normal	pending		1		
 NAMES.TXT:@NATIONALITY:0x00000983	txt	多畫面共用	string	normal	pending		1		
-NAMES.TXT:@ORDERS:0x00002855	txt	殖民地	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
-NAMES.TXT:@ORDERS:0x0000286A	txt	殖民地	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+NAMES.TXT:@ORDERS:0x00002855	txt	殖民地	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+NAMES.TXT:@ORDERS:0x0000286A	txt	殖民地	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
 NAMES.TXT:@ORDERS:0x0000287F	txt	殖民地	string	normal	pending		1		
 NAMES.TXT:@ORDERS:0x00002894	txt	殖民地	string	normal	pending		1		
 NAMES.TXT:@ORDERS:0x000028A9	txt	殖民地	string	normal	pending		1		
@@ -1397,7 +1398,7 @@ NAMES.TXT:@OTHER_NAMES:0x000006B8	txt	海上地圖	string	normal	pending		1
 NAMES.TXT:@OTHER_NAMES:0x000006C0	txt	海上地圖	string	normal	pending		1		
 NAMES.TXT:@OTHER_NAMES:0x000006C7	txt	海上地圖	string	normal	pending		1		
 NAMES.TXT:@OTHER_NAMES:0x000006D4	txt	海上地圖	string	normal	pending		1		
-NAMES.TXT:@OTHER_NAMES:0x000006E1	txt	海上地圖	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+NAMES.TXT:@OTHER_NAMES:0x000006E1	txt	海上地圖	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
 NAMES.TXT:@RESOURCE:0x0000072C	txt	海上地圖	string	normal	pending		1		
 NAMES.TXT:@RESOURCE:0x00000747	txt	海上地圖	string	normal	pending		1		
 NAMES.TXT:@RESOURCE:0x00000762	txt	海上地圖	string	normal	pending		1		
@@ -1412,8 +1413,8 @@ NAMES.TXT:@RESOURCE:0x0000083A	txt	海上地圖	string	normal	pending		1
 NAMES.TXT:@RESOURCE:0x00000855	txt	海上地圖	string	normal	pending		1		
 NAMES.TXT:@RESOURCE:0x00000870	txt	海上地圖	string	normal	pending		1		
 NAMES.TXT:@RESOURCE:0x0000088C	txt	海上地圖	string	normal	pending		1		
-NAMES.TXT:@SEASONS:0x000000C0	txt	海上地圖	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
-NAMES.TXT:@SEASONS:0x000000C8	txt	海上地圖	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+NAMES.TXT:@SEASONS:0x000000C0	txt	海上地圖	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+NAMES.TXT:@SEASONS:0x000000C8	txt	海上地圖	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
 NAMES.TXT:@TRIBES:0x00002BF3	txt	報告	string	normal	pending		1		
 NAMES.TXT:@TRIBES:0x00002C20	txt	報告	string	normal	pending		1		
 NAMES.TXT:@TRIBES:0x00002C4E	txt	報告	string	normal	pending		1		
@@ -1461,7 +1462,7 @@ NAMES.TXT:@UNIT:0x00002519	txt	殖民地	string	normal	shown	confirmed	1	coloniz
 NAMES.TXT:@UNIT:0x00002552	txt	殖民地	string	normal	pending		1		
 NAMES.TXT:@UNIT:0x0000258B	txt	殖民地	string	normal	pending		1		
 NAMES.TXT:@UNIT:0x000025C4	txt	殖民地	string	normal	pending		1		
-NAMES.TXT:@UNIT:0x000025FD	txt	殖民地	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
+NAMES.TXT:@UNIT:0x000025FD	txt	殖民地	string	normal	shown	強推論	1	colonizopedia,colony-interactions,colony-strings,dynamic-combined,dynamic-spots,europe-reports,frontend-audio,function-keys,goal172-re167,goal172-re169,goal172-re170,goal172-re171,goal174-re167,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels,sea-status,tutorial-dialogs	
 NAMES.TXT:@UNIT:0x00002636	txt	殖民地	string	normal	pending		1		
 NAMES.TXT:@UNIT:0x0000266F	txt	殖民地	string	normal	pending		1		
 NAMES.TXT:@UNIT:0x000026A8	txt	殖民地	string	normal	pending		1		
@@ -1650,4 +1651,4 @@ PEDIA.TXT:@UNIT6	txt	百科	pedia	normal	pending		5
 PEDIA.TXT:@UNIT7	txt	百科	pedia	normal	pending		4		
 PEDIA.TXT:@UNIT8	txt	百科	pedia	normal	pending		5		
 PEDIA.TXT:@UNIT9	txt	百科	pedia	normal	pending		4		
-WOODCUT.TXT:@WOODCUT	txt	事件版畫	caption	normal	pending		17		colonizopedia,colony-interactions,colony-strings,europe-reports,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels
+WOODCUT.TXT:@WOODCUT	txt	事件版畫	caption	normal	pending		17		colonizopedia,colony-interactions,colony-strings,europe-reports,frontend-audio,goal172-re169,goal172-re170,goal172-re171,goal174-re169,goal174-re170,goal174-re171,goal174-re172,input-labels

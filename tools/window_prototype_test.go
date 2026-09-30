@@ -133,3 +133,33 @@ func TestModifierAndKeypadInputs(t *testing.T) {
 		t.Fatalf("Alt 組合仍送出字元：%q", string(got))
 	}
 }
+
+// 目標176：49,715 Hz 換算到 48,000 Hz；定值訊號換算後不變，不足時補靜音，積壓超過 0.25 秒只留 0.1 秒。
+func TestAudioStreamResample(t *testing.T) {
+	s := &audioStream{rate: 49715}
+	in := make([]int16, 49715/10*2)
+	for i := range in {
+		in[i] = 1000
+	}
+	s.push(in)
+	frames := len(s.out) / 4
+	if frames < 4790 || frames > 4800 {
+		t.Fatalf("0.1 秒應換出約 4,800 個取樣，得 %d", frames)
+	}
+	for i := 0; i < len(s.out); i += 2 {
+		if v := int16(uint16(s.out[i]) | uint16(s.out[i+1])<<8); v != 1000 {
+			t.Fatalf("定值訊號換算後應不變：%d", v)
+		}
+	}
+	p := make([]byte, len(s.out)+8)
+	for i := range p {
+		p[i] = 0xff
+	}
+	if n, _ := s.Read(p); n != len(p) || p[len(p)-1] != 0 || s.ReadBytes != uint64(len(p)) {
+		t.Fatal("不足時應補靜音並回報完整長度")
+	}
+	s.push(make([]int16, 49715/2*2)) // 0.5 秒
+	if len(s.out) != audioPlayRate*4/10 || s.Dropped == 0 {
+		t.Fatalf("積壓應截到 0.1 秒：%d 位元組、丟 %d", len(s.out), s.Dropped)
+	}
+}

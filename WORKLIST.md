@@ -55,7 +55,7 @@
 | #46 | completed | [對話框選項列與輸入欄中文化](https://github.com/wicanr2/colonization_cht/issues/46) | `dialog-overlay-engine` | 規格與三種選項框、一種輸入框正常路徑中英同輸入驗證，負例回原文。 |
 | #47 | completed | [dosgolem：OPL2／OPL3 FM 合成（移植 ymfm）](https://github.com/wicanr2/colonization_cht/issues/47) | — | 決定性取樣輸出、對 ymfm 單元對拍、BSD-3 授權告知。 |
 | #48 | completed | [dosgolem：Sound Blaster DSP 數位音效與混音](https://github.com/wicanr2/colonization_cht/issues/48) | `opl-synthesis` | DMA 播放與混音的決定性取樣；本遊戲音效事件同輸入重現。 |
-| #49 | planned | [前端音訊輸出與中英同狀態驗證](https://github.com/wicanr2/colonization_cht/issues/49) | `opl-synthesis`, `sb-dsp-audio` | 真 GUI 可聽見音樂與音效，WAV 與無頭取樣一致；開關音訊原版狀態相同。 |
+| #49 | completed | [前端音訊輸出與中英同狀態驗證](https://github.com/wicanr2/colonization_cht/issues/49) | `opl-synthesis`, `sb-dsp-audio` | 真 GUI 可聽見音樂與音效，WAV 與無頭取樣一致；開關音訊原版狀態相同。 |
 | #50 | planned | [發行：Linux AppImage](https://github.com/wicanr2/colonization_cht/issues/50) | — | 可重現 AppImage、乾淨容器 smoke、原版不入包。 |
 | #51 | planned | [發行：Windows x86_64](https://github.com/wicanr2/colonization_cht/issues/51) | — | 容器內交叉編譯與 Wine smoke，原版不入包。 |
 | #52 | planned | [發行：macOS](https://github.com/wicanr2/colonization_cht/issues/52) | — | osxcross universal 編譯、lipo／簽章檢查，記錄驗證層級。 |

@@ -159,4 +159,4 @@ EXE	3f02988e15cd	海上地圖	menu	normal	已顯示：頂端選單列由海上�
 EXE	c9ee0a41420e|84a1cab8db2f	開局設定	input	normal	命名殖民地、命名新陸地的輸入列：標籤由規格035 目標174 附記翻譯，輸入內容保留原樣
 EXE	74df22d196ea	開局設定	input	normal	已顯示：開局姓名欄只有預填姓名與游標，屬玩家輸入內容，依目標174 決定保留原版字元
 EXE	15d1c75e9845	海上地圖	dialog	normal	已顯示：Find Colony 打字後的輸入列重印，標籤像素未變，前一段 Colony: 標籤覆蓋仍有效（目標174 除錯重播 fallback 切行證據）
-EXE	52ae9fbfd404|9dc1b911eee2	下拉選單	menu	normal	VIEW 下拉選單整段（MENU.TXT @VIEW 各行），對話框層逐行清單未命中，歸 #55
+EXE	52ae9fbfd404|9dc1b911eee2|ad437828b303	下拉選單	menu	normal	VIEW 下拉選單整段（MENU.TXT @VIEW 各行），對話框層逐行清單未命中，歸 #55

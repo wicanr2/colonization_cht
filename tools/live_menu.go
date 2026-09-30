@@ -654,6 +654,7 @@ func main() {
 	control := flag.Bool("control", false, "無指令觀測、無合成對照")
 	missing := flag.Bool("missing", false, "缺字模回退對照")
 	window := flag.Bool("window", false, "使用已連結的 Ebitengine 視窗前端")
+	audioOn := flag.Bool("audio", false, "目標176：開啟 dosgolem OPL3 合成與前端播放（規格040）；搭配 --sb-digital 時混入數位音效")
 	sbDigital := flag.Bool("sb-digital", false, "目標175：開啟 dosgolem 數位音效（8237 DMA、DSP 播放、IRQ7；規格039），遊戲會走數位音效可用的路徑")
 	play := flag.Bool("play", false, "遊玩模式：不累積逐幀驗證紀錄，未指定 -window-steps 時不設步數上限（發行包使用）")
 	flag.Parse()
@@ -1833,6 +1834,9 @@ func main() {
 	m.SetSoundBlasterPro(true)
 	if *sbDigital && !m.EnableSBDigital() {
 		panic("數位音效無法開啟")
+	}
+	if *audioOn {
+		m.EnableOPLSynth(true)
 	}
 	canvas := func() []byte { return m.Mem[0x2cae0 : 0x2cae0+64000] }
 	sourceOK := func(l *menuLine) bool {

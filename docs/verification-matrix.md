@@ -2,9 +2,9 @@
 
 由 `tools/verification_matrix.py` 依 `tools/verification-matrix.json` 產生；不要手改。收據只在已忽略的 `workplace/reports/`，本頁只列雜湊與數量。
 
-- dosgolem：`a3a5609022cf708093a7377ab775b0be62bacc91`
+- dosgolem：`b0bf25963ce5a29fb3a3fcf92e211423d4cd4ac8`
 - 原版輸入（各收據記錄的檔案雜湊合併，同名檔衝突 0 個）：`GAME.TXT` `67a6b5e22d1a…`、`LABELS.TXT` `e4af0da201eb…`、`NAMES.TXT` `4bf5ba261f71…`、`OPENING.EXE` `3c08c4af3a70…`、`VICEROY.EXE` `a17ed64c2767…`
-- 結果：PASS 24、SKIP 0、FAIL 0；收據待重驗 0 列；原版輸入衝突 0；動態與靜態四類收據齊備：是
+- 結果：PASS 25、SKIP 0、FAIL 0；收據待重驗 0 列；原版輸入衝突 0；動態與靜態四類收據齊備：是
 
 「待重驗」表示該列收據早於現行譯文（目標156 改稿）：字模已重烘、全部旗標載入綁定通過，但真 GUI 與重播尚未依新譯文重跑。
 
@@ -36,6 +36,7 @@
 | 殖民百科：六個類別的清單與首篇條目（標題、副標、數值行與正文段落） | 兩者 | 036、038 | `check_goal171_window.py` | PASS | 1 | 1 | 1 | 2 | 1 | 1280x800 RGB | 只驗六類首篇；其餘條目同一機制未逐篇真 GUI；Miscellaneous／Complete 類別未出現 |
 | 殖民地畫面內操作：職業選單（兩欄）、建造清單、懸停標籤；對話框選項列改問字串層 | 兩者 | 035、038 | `check_goal172_window.py` | PASS | 1 | 1 | 1 | 2 | 1 | 1280x800 RGB | BUY 說明框未走到；武裝面板、多人口殖民地未到達 |
 | 輸入欄標籤：命名新陸地、命名殖民地、Find Colony（輸入內容保留原樣） | 動態 | 035 | `check_goal174_window.py` | PASS | 1 | 1 | 1 | 1 | 1 | 1280x800 RGB | 改名、貿易路線命名、貨物數量輸入欄未觸發；Name: 另有字串層片段字典來源，反向對照只驗 Colony: |
+| 前端音訊：OPL3 音樂與數位音效播放、錄音與開關音訊不影響原版 | 動態 | 037、039、040 | `check_goal176_window.py` | PASS | 2 | 2 | 2 | 0 | 1 | 1280x800 RGB | 容器以 ALSA null 裝置驗證播放器；實際聽感需在有音效卡的環境試聽 workplace 的 WAV；本列無專屬負例，以開關音訊兩兩比對與 WAV 有無數位音效區隔代替 |
 
 ## 未驗範圍
 

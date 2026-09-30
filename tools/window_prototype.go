@@ -2,20 +2,157 @@
 package main
 
 import (
+	"encoding/binary"
 	"encoding/json"
 	"flag"
 	"fmt"
 	"image"
 	"os"
 	"strings"
+	"sync"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/audio"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	golem "github.com/wicanr2/dosgolem"
 )
 
 var windowSteps = flag.Uint64("window-steps", 100000000, "原型執行上限，不修改DOS時鐘")
 var replayPath = flag.String("replay-inputs", "", "僅驗收：重播先前真實視窗輸入")
+var audioWAVPath = flag.String("audio-wav", "", "目標176：結束時把前端取得的 dosgolem 原始音訊（交錯 int16 立體聲）寫成 WAV；需 --audio")
+var audioMute = flag.Bool("audio-mute", false, "目標176：只合成與錄音，不開播放裝置（無音效裝置的容器用）")
+
+// windowStepsPerUpdate 是每次 Update 推進的指令數；重播在同樣的邊界取音訊（規格040）。
+const windowStepsPerUpdate = 200000
+
+// audioPlayRate 是播放串流的取樣率；dosgolem 的 49,715 Hz 以線性內插換算過來。
+const audioPlayRate = 48000
+
+// audioStream 是給 Ebitengine 播放器讀的 16 位元立體聲串流。不足時補靜音、積壓超過 0.25 秒時丟最舊的，
+// 兩者都只影響播放，不回饋到模擬（規格040）。
+type audioStream struct {
+	mu                 sync.Mutex
+	rate               uint64  // 來源取樣率
+	src                []int16 // 尚未換算的來源（交錯）
+	srcBase            uint64  // src[0] 的來源取樣編號
+	outN               uint64  // 已產生的輸出取樣數
+	out                []byte
+	ReadBytes, Dropped uint64
+}
+
+func (s *audioStream) push(samples []int16) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.src = append(s.src, samples...)
+	for {
+		num := s.outN * s.rate
+		i, frac := num/audioPlayRate, int64(num%audioPlayRate)
+		if i < s.srcBase || i+1-s.srcBase >= uint64(len(s.src)/2) {
+			break
+		}
+		k := int(i-s.srcBase) * 2
+		var b [4]byte
+		for c := 0; c < 2; c++ {
+			a, z := int64(s.src[k+c]), int64(s.src[k+2+c])
+			binary.LittleEndian.PutUint16(b[c*2:], uint16(int16(a+(z-a)*frac/audioPlayRate)))
+		}
+		s.out = append(s.out, b[:]...)
+		s.outN++
+	}
+	if drop := (s.outN*s.rate)/audioPlayRate - s.srcBase; drop > 0 && drop <= uint64(len(s.src)/2) {
+		s.src = s.src[drop*2:]
+		s.srcBase += drop
+	}
+	if limit := audioPlayRate * 4 / 4; len(s.out) > limit {
+		keep := audioPlayRate * 4 / 10
+		s.Dropped += uint64(len(s.out) - keep)
+		s.out = append([]byte(nil), s.out[len(s.out)-keep:]...)
+	}
+}
+
+func (s *audioStream) Read(p []byte) (int, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	n := copy(p, s.out)
+	s.out = s.out[n:]
+	clear(p[n:])
+	s.ReadBytes += uint64(len(p))
+	return len(p), nil
+}
+
+// frontendAudio 收集 DrainAudio 的原始取樣（錄 WAV）並餵給播放串流。
+type frontendAudio struct {
+	rate   uint32
+	wav    []int16
+	stream *audioStream
+	player *audio.Player
+	err    string
+}
+
+func newFrontendAudio(m *golem.Machine, play bool) *frontendAudio {
+	if m.AudioRate() == 0 {
+		return nil
+	}
+	a := &frontendAudio{rate: m.AudioRate(), stream: &audioStream{rate: uint64(m.AudioRate())}}
+	if play {
+		ctx := audio.NewContext(audioPlayRate)
+		p, err := ctx.NewPlayer(a.stream)
+		if err != nil {
+			a.err = err.Error()
+			fmt.Fprintln(os.Stderr, "音效裝置無法開啟，改為靜音：", err)
+			return a
+		}
+		p.SetBufferSize(100 * 1000 * 1000) // 0.1 秒
+		p.Play()
+		a.player = p
+	}
+	return a
+}
+
+func (a *frontendAudio) drain(m *golem.Machine) {
+	if a == nil {
+		return
+	}
+	s := m.DrainAudio()
+	if *audioWAVPath != "" {
+		a.wav = append(a.wav, s...)
+	}
+	a.stream.push(s)
+}
+
+func (a *frontendAudio) status() map[string]any {
+	if a == nil {
+		return nil
+	}
+	a.stream.mu.Lock()
+	defer a.stream.mu.Unlock()
+	return map[string]any{"rate": a.rate, "played_bytes": a.stream.ReadBytes, "dropped_bytes": a.stream.Dropped,
+		"produced_frames": a.stream.srcBase, "player": a.player != nil, "error": a.err}
+}
+
+func (a *frontendAudio) writeWAV() {
+	if a == nil || *audioWAVPath == "" {
+		return
+	}
+	data := make([]byte, 44+len(a.wav)*2)
+	copy(data, "RIFF")
+	binary.LittleEndian.PutUint32(data[4:], uint32(36+len(a.wav)*2))
+	copy(data[8:], "WAVEfmt ")
+	binary.LittleEndian.PutUint32(data[16:], 16)
+	binary.LittleEndian.PutUint16(data[20:], 1)
+	binary.LittleEndian.PutUint16(data[22:], 2)
+	binary.LittleEndian.PutUint32(data[24:], a.rate)
+	binary.LittleEndian.PutUint32(data[28:], a.rate*4)
+	binary.LittleEndian.PutUint16(data[32:], 4)
+	binary.LittleEndian.PutUint16(data[34:], 16)
+	copy(data[36:], "data")
+	binary.LittleEndian.PutUint32(data[40:], uint32(len(a.wav)*2))
+	for i, v := range a.wav {
+		binary.LittleEndian.PutUint16(data[44+i*2:], uint16(v))
+	}
+	must(os.WriteFile(*audioWAVPath, data, 0644))
+}
+
 var activeWindow *windowGame
 
 func init() {
@@ -48,6 +185,7 @@ type windowGame struct {
 	lastX, lastY int
 	inputs       []windowInput
 	rejected     []string
+	audio        *frontendAudio
 }
 
 func logicalMouse(x, y int) (int, int, bool) {
@@ -291,7 +429,7 @@ func (g *windowGame) Update() error {
 			g.emit(event)
 		}
 	}
-	end := g.m.Steps + 200000
+	end := g.m.Steps + windowStepsPerUpdate
 	if end > *windowSteps {
 		end = *windowSteps
 	}
@@ -300,6 +438,7 @@ func (g *windowGame) Update() error {
 			return err
 		}
 	}
+	g.audio.drain(g.m)
 	stage := "opening"
 	if g.record != nil && g.record["events"].(int) >= 5 {
 		stage = "menu"
@@ -319,6 +458,9 @@ func (g *windowGame) Update() error {
 		"rejected_input_count": len(g.rejected)}
 	if frontendStatusExtra != nil {
 		status["dialog"] = frontendStatusExtra // 目標167：最近一段訊息框印字
+	}
+	if a := g.audio.status(); a != nil {
+		status["audio"] = a // 目標176：播放器已讀取的位元組數等
 	}
 	dumpJSON(g.out+".status.tmp", status)
 	must(os.Rename(g.out+".status.tmp", g.out+".status.json"))
@@ -354,15 +496,26 @@ func runWindow(m *golem.Machine, d *golem.DOS, render func(string), out string) 
 			}
 			previous = e.Step
 		}
+		// 目標176：在與真 GUI 相同的邊界（每 windowStepsPerUpdate 道指令）取音訊，數位音效讀記憶體的時點才相同。
+		a := newFrontendAudio(m, false)
+		start := m.Steps
+		step := func() {
+			must(m.Step())
+			if a != nil && (m.Steps-start)%windowStepsPerUpdate == 0 {
+				a.drain(m)
+			}
+		}
 		for _, e := range receipt.Inputs {
 			for m.Steps < e.Step {
-				must(m.Step())
+				step()
 			}
 			applyWindowInput(d, e)
 		}
 		for m.Steps < receipt.End {
-			must(m.Step())
+			step()
 		}
+		a.drain(m)
+		a.writeWAV()
 		return
 	}
 	dumpJSON(out+".status.json", map[string]any{"step": 0, "stage": "opening"})
@@ -371,7 +524,9 @@ func runWindow(m *golem.Machine, d *golem.DOS, render func(string), out string) 
 	ebiten.SetWindowClosingHandled(true)
 	ebiten.SetRunnableOnUnfocused(true)
 	ebiten.SetCursorMode(ebiten.CursorModeHidden)
+	g.audio = newFrontendAudio(m, !*audioMute)
 	err := ebiten.RunGame(g)
+	g.audio.writeWAV()
 	// 目標169：原版執行出錯時也先寫下現場輸入與錯誤位置，才能以重播重現。
 	dumpJSON(out+".inputs.json", windowReceipt{Inputs: g.inputs, End: m.Steps, Rejected: g.rejected})
 	if err != nil {

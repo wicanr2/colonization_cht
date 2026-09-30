@@ -1,5 +1,7 @@
 # 目前脈絡
 
+目前真相：[目標176](docs/goals/176-frontend-audio.md)完成 #49：前端 `--audio` 播放 OPL3 音樂與數位音效，真 GUI 與重播 WAV 逐位元組相同，開關音訊不影響原版；驗證矩陣 25 列。下一步依序 #55～#61 其餘畫面，最後 #50～#54 發行（#53 須開 `--dialog-a --string-a --audio --sb-digital` 並以完整旗標重跑）。
+
 目前真相：#47（目標168，OPL3 合成）與 #48（[目標175](docs/goals/175-sb-digital-audio.md)，數位音效）完成：dosgolem 隔離副本 `b0bf259` 提供 `EnableSBDigital`，建城木刻畫面播放 `COLDIG.BIN` 取樣；前端旗標 `--sb-digital`。下一步 #49 前端音訊輸出。
 
 目前真相：[目標174](docs/goals/174-input-field-labels.md)完成 #46：輸入欄標籤中文、輸入內容保留原樣；普查需新機制降為 0，驗證矩陣 24 列。發行啟動腳本缺對話框層與字串層（已記 #53）。下一步 #47～#49 音訊，再 #55～#61 其餘畫面，最後 #50～#54 發行。
