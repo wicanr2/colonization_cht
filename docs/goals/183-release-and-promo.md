@@ -1,6 +1,6 @@
 # 目標183：三平台交付與推廣影片
 
-狀態：封包與影片已完成，遠端發布中。使用者於2026-10-04授權commit、push、更新Issue、Linux AppImage、Windows、macOS完整版封裝與推廣影片。入口為[目前脈絡](../../CONTEXT.md)，契約為[規格044](../spec/044-release-and-promo.md)。對應Issue [#50](https://github.com/wicanr2/colonization_cht/issues/50)至[#54](https://github.com/wicanr2/colonization_cht/issues/54)。
+狀態：完成。使用者於2026-10-04授權commit、push、更新Issue、Linux AppImage、Windows、macOS完整版封裝與推廣影片。入口為[目前脈絡](../../CONTEXT.md)，契約為[規格044](../spec/044-release-and-promo.md)。對應Issue [#50](https://github.com/wicanr2/colonization_cht/issues/50)至[#54](https://github.com/wicanr2/colonization_cht/issues/54)。
 
 本版收進目前全部顯示、輸入、音樂及音效功能。譯文完整與畫面已驗範圍分開報告；974項未抽樣清冊及三個報表城市名不宣稱完成。既有技術預覽保持原樣。
 
@@ -41,3 +41,17 @@
 原始影片收據、音樂、版號符號地址、完整測試與封包清單都在本機`workplace/reports/goal183-release/`；正式影片收據在交付`promo/`，公開只附MP4。首輪封包檢查漏列AppImage合法`.DirIcon`圖示連結，按原規格修正為精確連結守門，乾淨展開v2通過。容器stdin與聯絡圖預設字型失敗均為工具問題，修正後重跑。
 
 私用完整包抽樣入口：[smoke_full_local.py](../../tools/smoke_full_local.py)，Linux／Wine以同一正常輸入重播，macOS只做檔案與shell檢查。
+
+## 遠端交付與私用包收尾
+
+`PASS_RELEASE_PUBLISHED`：程式提交`898d4e1`已推送main，tag `v.1.0.0-20261005`指向此提交；[正式Release](https://github.com/wicanr2/colonization_cht/releases/tag/v.1.0.0-20261005)已發布。GitHub五個資產的名稱、大小與平台計算SHA-256全等，沒有上傳full-local、原始PNG或WAV；舊版未改動。Issue #50、#51、#52、#54已關閉；#53及#55～#61已留言並保持OPEN。`PASS_RELEASE_PROMO`代表MP4技術驗證、八幀抽看及遠端附件完成，不含人耳或連續遊玩錄影驗收。
+
+私用包第一輪歸零時間戳造成Linux三位元組、Wine四位元組RAM差異，全部位於原始RAM線性偏移`0x67687`至`0x6768A`。dosgolem `internal/dos/find.go`的DOS日期取來源`ModTime()`已查證；私用包改為保留來源時間、Python ZIP解包還原manifest時間後，Linux及Wine相同正常輸入的完整原版狀態皆回到`599a732f…`，原失敗不覆寫。這是封包輸入metadata與解包工具問題，沒有修改原版或dosgolem。macOS仍只驗實際私用包清單與shell，未真機。
+
+| 本機私用包 | 位元組 | SHA-256 |
+|---|---:|---|
+| `colonization-cht-v.1.0.0-20261005-full-local-linux-x86_64.tar.gz` | 21527043 | `555cc53428e8ee311e7810fa5bb8c6e0e176da7712de767a6580574de49ace93` |
+| `colonization-cht-v.1.0.0-20261005-full-local-macos-universal.zip` | 18322999 | `c37e51fdb675da12110f52db1c70229ee93366652833c794396b87a5652af24b` |
+| `colonization-cht-v.1.0.0-20261005-full-local-windows-x86_64.zip` | 18108323 | `af0410dfd0925b829ad02d161751f1028f481284e60dc16fd5f214cb13ea1ef7` |
+
+收尾Docker自檢：本輪一次性容器已結束，背景程序已回收；沒有root-owned輸出或`.md`目錄，原版未追蹤，隔離dosgolem乾淨且推送DISABLED。

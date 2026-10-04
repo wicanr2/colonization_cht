@@ -4757,3 +4757,9 @@ confirmed：[目標182](docs/goals/182-platform-build-preflight.md)與[規格043
 confirmed：兩次候選與正式建置通用檔全等，SHA-256 `1c17376afc9e55013a0528a65f30bd4ebf6a26d535cbfe73dd2a7215c2f748ef`；正式ZIP兩份各14177251bytes，SHA-256 `b6a1b5fc9d40098a02808f23b185dec92301adff711b7619da1b265273804d1f`。94檔清單、授權、譯稿／字模、原版排除、Bash3.2／5.2參數替身與壞簽章拒絕通過，完整收據由目標182索引。GNU Bash3.2.57、Bison3.8.2及M4 1.4.19只為容器內驗證工具，不隨包散布。
 
 unknown：沒有macOS二進位執行、真機、Gatekeeper放行、最低系統相容、音訊、鍵鼠與存讀檔收據。臨時簽章沒有Developer ID或Apple公證；逐頁雜湊相同只證明資料自洽。限定CONFORMED不增加全文中文化或正常玩家路徑證據，不以Linux替身充當Mac驗收。
+
+## 2026-10-05：私用封包原版檔案時間戳
+
+推論等級：confirmed，限本次封包输入與正常主選單。原版VICEROY.EXE SHA-256 `a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3`，來源mtime_ns `851441520000000000`。dosgolem隔離副本`b0bf25963ce5a29fb3a3fcf92e211423d4cd4ac8`、`internal/dos/find.go` SHA-256 `936bb72d9abcb7334ba90ba7ab39aed02b878fd16ff630aea2a16887d90273ce`，Go1.26.7與固定驗證映像。`dosDateTime`實際以os.FileInfo.ModTime填DOS時間與日期兩個word。地址基準為完整1MiB RAM收據的線性檔案偏移，首版差異0x67687～0x6768A；不混用IDA或DOS段地址。
+
+私用包保留原版mtime，Python ZIP解包依manifest還原時間。相同6921125d…正常輸入與50M終點下，Linux／Wine完整CPU／RAM／原版索引／色盤全部相同，RAM恢復599a732f…。未改EXE、dosgolem、規則或存檔。原始失敗、檔案指紋、重建包與v2收據保留workplace/reports/goal183-release；[目標183](docs/goals/183-release-and-promo.md)為重跑與交付索引。

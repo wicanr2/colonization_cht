@@ -6,11 +6,11 @@
 
 | 項目 | 目前狀態與證據 |
 |---|---|
-| 本輪交付 | 使用者授權提交、推送、更新Issue、三平台完整版封包與推廣影片；[目標183](docs/goals/183-release-and-promo.md)及[規格044](docs/spec/044-release-and-promo.md)為入口。已有功能全部收進封包，未抽樣画面與macOS真機限制照實保留；既有Release不覆寫。 |
+| 本輪交付 | 提交與推送、三平台正式包、90秒影片與遠端Issue更新完成；[目標183](docs/goals/183-release-and-promo.md)為交接入口。Linux／Wine私用完整包相同輸入狀態已驗，macOS仍未真機。所有未抽樣畫面保持原有證據等級，既有Release未覆寫。 |
 | 工作順序 | 2026-10-04使用者決定「先把文字都翻譯完成，最後抽樣對拍」。先整批處理譯文與接線，最後以代表性正常玩家路徑驗證；不再以每個待驗詞條的完整多側GUI驗收作為下一筆翻譯的前置。既有驗收保留，未抽樣欄位不冒稱已顯示或CONFORMED。 |
 | 全語料譯文 | 2026-10-04以現行來源重算：遊戲畫面3561行全部已建檔，3558行已翻譯，3行英文冠詞有理由刻意省略，未建檔與缺譯均為0。現行十份來源清冊1684鍵，1681鍵有譯文、3鍵省略；字串模板66、靜態圖譯文8、定稿術語256與變數譯名1也已檢查。來源、占位符、控制碼、熱鍵及字型缺字檢查通過，與畫面普查882／1945分開統計。[重跑入口](docs/goals/160-corpus-closure.md)。 |
 | 翻譯收尾抽樣 | 同日v223七點既有正常GUI輸入抽樣保留；本批再以目前程式抽樣十點，涵蓋港口買賣價格、木匠／無職業頂列、招募／碼頭、關閉港口、存檔及返回世界。中文／原文／缺字模三側各點RAM／索引／色盤、完整終點CPU／RAM／VGA、開檔／輸入及COLONY00／03存檔相同。新增差異只在三欄安全區，關框無殘字，缺字模回原文。重播既有正常GUI實際輸入，沒有新錄GUI；不提高882計數。[本批入口](docs/goals/181-colony-remaining.md)。 |
-| 目前程式 | 現行來源含79組正文限定選項、17個WOODCUT來源標題及三種已驗事件頁的暫藏守門；中間物為`workplace/reports/goal181-colony-rest/20261004-woodcut-titles/formal-modal2/colonization-window`，SHA-256 aae282aa3dccea70ab10773bf04f6f19bef4e882beb2810ab5ca1c920d5fd38d。160項Go／go vet／抓圖同步與公開入口133項Go通過。三個事件標題及原圖保留已限定CONFORMED；十一點、完整終點原版與COLONY09全等，關閉及後續畫面同前版。摘要3bbaebeab6dd8371c8fa8f954fc0ffa608b911e3bf3da70091e7f0d05a1fde7b。第一輪清底斑點及比較器失敗保留，不提高882計數。前一原住民058ab7fe…十點及港口f45271c2…三側驗收保留。字串圖集沿20261004-port-fields的f824c6c7…，字模形狀與字集不變。 |
+| 目前程式 | 正式Linux二進位SHA-256 `34357f5747aac5f6bdd5c1babca08c919686c960fda9a14d1a9563221078faea`。現行中文化含79組來源限定選項、17個WOODCUT標題與三種已驗事件暫藏守門；本輪只新增正式內嵌版號與視窗標題，翻譯鍵、覆蓋幾何及字模不變，公開Go／go vet再次通過。事件版畫、港口與原住民等最近抽樣及舊160／133項回歸沿[目標160](docs/goals/160-corpus-closure.md)保留；正式平台、音訊及影片驗證見[目標183](docs/goals/183-release-and-promo.md)。 |
 | 港口三類欄位 | English Colonists、English Colonists ( Carpenter )與Food (Bidding 2, Asking 10)已中文顯示。港口原版畫面指紋、頂列／底列位置、cap5與指定NAMES版本分類共同守門；各欄22～15px量測，實際22px。112組職業投影皆容納，正常畫面只採本次實際三類值。十點收據SHA-256 6522cc69da3adb38e229bde724fa9aa72305d99378c7abf17be3be3626cffcf0。F1提示已以18px顯示「（按 F1 取得說明）」；cap1局部重繪拒絕不列為容量缺口。其他單位、其他商品／職業正常情境與報表城市名版面仍待處理。 |
 | 原住民／一般訊息接線 | [目標160](docs/goals/160-corpus-closure.md)的20261004-dialog-links建立79組來源限定選項。正常和平交涉、入村、接受學習、完成與關閉十點抽樣通過，兩側完整原版狀態及COLONY09全等。學習選項30px限定CONFORMED；28職業只做容量投影。原版人物圖像唯一定位於[250,26]，5503個不透明像素與原版完全相同；137個舊英文清除點中45點在透明區、92點在圖像外，全部有印前值證據。先前132點只查x≥243；整圖補足x=242的5點。寫入世代候選無圖像效果且本案例不需要，未採用。不提高882計數，#58／#60進行中。抽樣摘要SHA-256 2b8b8924456314e3b1e05092d782e2b5ebaec8e701c0fe448c5e506f272a8e1a。 |
 | 貿易路線／Issue #56 | 規格035／038第一路線原有九ROUTE來源、兩Jamestown裝卸提示及目的地／母港清單維持CONFORMED；另v187～v191前兩列預設Jamestown中文限定CONFORMED。40新正常GUI、各六側完整原版及全部存檔相同，新增差異只在城市欄；改選London及刪除第二目的地無舊中文，玩家路線名原字。25破壞拒絕、缺原版SKIP77。其他編號、第三／四列、網格母港、自動跑商與正常同名城市反例仍未驗。[目標181](docs/goals/181-colony-remaining.md)。 |
@@ -29,7 +29,7 @@
 | 存讀檔探索 | 由主選單正常載入原版 `COLONY09.SAV`，再選第一個欄位手動儲存成 `COLONY00.SAV` 並回到海上畫面，未注入快照。真 GUI、中英重播的終點 RAM 與兩份存檔逐位元組相同，六張安全區相同；首次回到世界畫面的抓圖未對齊，未算通過。收據在 `codex-audit/load-route-v2/`、`load-replays-v2/` 與 `load-save-summary.json`。空欄位與兩標題現已限定CONFORMED，其他存讀檔結果仍待驗；讀檔成功COLONY02提示另已驗，不能標為整個存讀檔完成；原版存檔只留本機。 |
 | 封裝接線／Issue #53 | 啟動器已補 `--dialog-a --string-a --audio --sb-digital`，封包來源補齊13份 TSV及圖集，22份過期綁定字模已依正式工具鏈重烘。封裝依實際二進位附上 Go、模組、dosgolem、字型與 ymfm 共12份授權，拒絕 Go 版本或平台不符、dosgolem 未提交修改與既有版本目錄。當前來源的全部啟動旗標50M短程啟動通過、原版狀態相同；完整發行驗收尚未完成。 對話框與專用字模沿slot-fonts-v66，字串圖集改取20261004-port-fields/font，封裝選單與專用欄位也已重烘，封裝前新增譯稿與字型指紋核對；過期圖集拒絕測試通過，尚未新建Release。 |
 | 工具鏈 | 畫面檢查與 Go／GUI 驗證使用 [tools/Dockerfile.verification](tools/Dockerfile.verification) 的 `colonization-verification:20260930-r1`；正式字模烘製使用 [font/README.md](font/README.md) 指定的固定 `rich2-py` 映像，不使用驗證映像的 Pillow 重烘正式字模。 |
-| 發行 | 既有Linux技術預覽`v.0.1.0-20260927`保留；新版三平台正式包驗證通過，影片、本機full-local、Git提交與遠端交付由[目標183](docs/goals/183-release-and-promo.md)收尾。全可達情境與Issue #53舊完整依賴仍未全部完成，不因封包成立就關閉。 |
+| 發行 | [v.1.0.0-20261005](https://github.com/wicanr2/colonization_cht/releases/tag/v.1.0.0-20261005)已正式發布：三平台patch、90秒MP4與雜湊五個資產遠端SHA-256相同，tag指向`898d4e1`。#50／51／52／54已關閉，#53與#55～61保留未驗範圍並維持OPEN。正式輸出`dist-all/v.1.0.0-20261005/`，自帶原版三平台包只留其中full-local。舊技術預覽保留。 |
 | 原版與隔離副本 | 原版唯讀；dosgolem 隔離副本 `b0bf259`，`upstream` 推送位址 `DISABLED`，未修改 `/home/anr2/cht/dosgolem`。 |
 
 接手驗證中間物與摘要：`workplace/reports/goal178-orders/codex-audit/`；正式矩陣與普查以生成後的 `docs/verification-matrix.md`、`docs/text-census.md` 為準。

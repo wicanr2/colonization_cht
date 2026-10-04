@@ -1234,43 +1234,73 @@
     {
       "id": "release-appimage",
       "issue": 50,
-      "state": "in_progress",
+      "state": "completed",
       "title": "發行：Linux AppImage",
       "depends_on": [],
       "acceptance": "可重現 AppImage、乾淨容器 smoke、原版不入包。",
       "verify": {
-        "kind": "manual",
-        "note": "規格041與目標182：正式AppImage封裝入口、兩次位元組全等重建、獨立解包110檔、授權／來源／原版排除及正常中文主選單已驗。workplace測試版本不作正式交付；最終完整版號與封包仍待驗，遠端Issue未關閉。"
+        "kind": "all_present",
+        "checks": [
+          {
+            "path": "docs/goals/183-release-and-promo.md",
+            "pattern": "PASS_RELEASE_APPIMAGE"
+          },
+          {
+            "path": "docs/goals/183-release-and-promo.md",
+            "pattern": "PASS_RELEASE_PUBLISHED"
+          }
+        ],
+        "note": "正式交付與遠端Issue已核對；macOS限建置、簽章資料與封包，未真機。"
       }
     },
     {
       "id": "release-windows",
       "issue": 51,
-      "state": "in_progress",
+      "state": "completed",
       "title": "發行：Windows x86_64",
       "depends_on": [],
       "acceptance": "容器內交叉編譯與 Wine smoke，原版不入包。",
       "verify": {
-        "kind": "manual",
-        "note": "規格042與目標182：現行Windows純Go建置可重現，公開工具ZIP兩次全等、95檔清單／編碼／授權／原版排除通過。包內批次檔正常中文主選單與Windows／Linux同輸入重播的完整原版及WAV全等，預設存檔位置與拒絕守門已驗。僅workplace測試版本；真機與最終完整版號／交付仍待驗，遠端Issue未關閉。"
+        "kind": "all_present",
+        "checks": [
+          {
+            "path": "docs/goals/183-release-and-promo.md",
+            "pattern": "PASS_RELEASE_WINDOWS"
+          },
+          {
+            "path": "docs/goals/183-release-and-promo.md",
+            "pattern": "PASS_RELEASE_PUBLISHED"
+          }
+        ],
+        "note": "正式交付與遠端Issue已核對；macOS限建置、簽章資料與封包，未真機。"
       }
     },
     {
       "id": "release-macos",
       "issue": 52,
-      "state": "in_progress",
+      "state": "completed",
       "title": "發行：macOS",
       "depends_on": [],
       "acceptance": "osxcross universal 編譯、lipo／簽章檢查，記錄驗證層級。",
       "verify": {
-        "kind": "manual",
-        "note": "目標182與規格043：macOS兩架構臨時簽章、逐頁雜湊、依賴與universal重建相同；公開工具ZIP兩份全等、94檔清單／授權／原版排除及拒絕守門通過。Bash3.2／5.2替身只驗完整參數、mkdir請求與退出碼。規格限建置／簽章資料／封包／shell接線CONFORMED；未驗macOS執行、真機或Gatekeeper。只用workplace測試版本，最終交付未完成，遠端Issue未關閉。"
+        "kind": "all_present",
+        "checks": [
+          {
+            "path": "docs/goals/183-release-and-promo.md",
+            "pattern": "PASS_RELEASE_MACOS_BUILD_PACKAGE"
+          },
+          {
+            "path": "docs/goals/183-release-and-promo.md",
+            "pattern": "PASS_RELEASE_PUBLISHED"
+          }
+        ],
+        "note": "正式交付與遠端Issue已核對；macOS限建置、簽章資料與封包，未真機。"
       }
     },
     {
       "id": "full-release",
       "issue": 53,
-      "state": "planned",
+      "state": "in_progress",
       "title": "完整版封裝與 Release",
       "depends_on": [
         "colony-europe-reports-rest",
@@ -1293,21 +1323,31 @@
       "acceptance": "依賴全部完成、驗證矩陣全 PASS、三平台封包與 Release。",
       "verify": {
         "kind": "manual",
-        "note": "完整版這一輪（使用者 2026-09-27 決定）；依 Issue 順序處理。"
+        "note": "v.1.0.0-20261005三平台完整功能封包與影片已發布；舊全可達依賴未全部完成，882已驗、974待情境、89不可達，#53維持OPEN。"
       }
     },
     {
       "id": "promo-video",
       "issue": 54,
-      "state": "planned",
+      "state": "completed",
       "title": "推廣影片（1～2 分鐘）",
       "depends_on": [
         "full-release"
       ],
       "acceptance": "可重現錄製與剪輯腳本、MP4 附在完整版 Release。",
       "verify": {
-        "kind": "manual",
-        "note": "完整版這一輪（使用者 2026-09-27 決定）；依 Issue 順序處理。"
+        "kind": "all_present",
+        "checks": [
+          {
+            "path": "docs/goals/183-release-and-promo.md",
+            "pattern": "PASS_RELEASE_PROMO"
+          },
+          {
+            "path": "docs/goals/183-release-and-promo.md",
+            "pattern": "PASS_RELEASE_PUBLISHED"
+          }
+        ],
+        "note": "正式交付與遠端Issue已核對；macOS限建置、簽章資料與封包，未真機。"
       }
     },
     {

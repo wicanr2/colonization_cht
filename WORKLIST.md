@@ -56,11 +56,11 @@
 | #47 | completed | [dosgolem：OPL2／OPL3 FM 合成（移植 ymfm）](https://github.com/wicanr2/colonization_cht/issues/47) | — | 決定性取樣輸出、對 ymfm 單元對拍、BSD-3 授權告知。 |
 | #48 | completed | [dosgolem：Sound Blaster DSP 數位音效與混音](https://github.com/wicanr2/colonization_cht/issues/48) | `opl-synthesis` | DMA 播放與混音的決定性取樣；本遊戲音效事件同輸入重現。 |
 | #49 | completed | [前端音訊輸出與中英同狀態驗證](https://github.com/wicanr2/colonization_cht/issues/49) | `opl-synthesis`, `sb-dsp-audio` | 真 GUI 可聽見音樂與音效，WAV 與無頭取樣一致；開關音訊原版狀態相同。 |
-| #50 | in_progress | [發行：Linux AppImage](https://github.com/wicanr2/colonization_cht/issues/50) | — | 可重現 AppImage、乾淨容器 smoke、原版不入包。 |
-| #51 | in_progress | [發行：Windows x86_64](https://github.com/wicanr2/colonization_cht/issues/51) | — | 容器內交叉編譯與 Wine smoke，原版不入包。 |
-| #52 | in_progress | [發行：macOS](https://github.com/wicanr2/colonization_cht/issues/52) | — | osxcross universal 編譯、lipo／簽章檢查，記錄驗證層級。 |
-| #53 | planned | [完整版封裝與 Release](https://github.com/wicanr2/colonization_cht/issues/53) | `colony-europe-reports-rest`, `dialog-options-inputs`, `frontend-audio`, `general-event-dialogs`, `main-game-screens`, `natives-diplomacy`, `pedia-rest`, `reachable-text-census`, `release-appimage`, `release-macos`, `release-windows`, `remaining-dynamic-spots`, `remaining-tutorial-help`, `sea-menus-names`, `start-save-tutorial-woodcut`, `war-independence-ending` | 依賴全部完成、驗證矩陣全 PASS、三平台封包與 Release。 |
-| #54 | planned | [推廣影片（1～2 分鐘）](https://github.com/wicanr2/colonization_cht/issues/54) | `full-release` | 可重現錄製與剪輯腳本、MP4 附在完整版 Release。 |
+| #50 | completed | [發行：Linux AppImage](https://github.com/wicanr2/colonization_cht/issues/50) | — | 可重現 AppImage、乾淨容器 smoke、原版不入包。 |
+| #51 | completed | [發行：Windows x86_64](https://github.com/wicanr2/colonization_cht/issues/51) | — | 容器內交叉編譯與 Wine smoke，原版不入包。 |
+| #52 | completed | [發行：macOS](https://github.com/wicanr2/colonization_cht/issues/52) | — | osxcross universal 編譯、lipo／簽章檢查，記錄驗證層級。 |
+| #53 | in_progress | [完整版封裝與 Release](https://github.com/wicanr2/colonization_cht/issues/53) | `colony-europe-reports-rest`, `dialog-options-inputs`, `frontend-audio`, `general-event-dialogs`, `main-game-screens`, `natives-diplomacy`, `pedia-rest`, `reachable-text-census`, `release-appimage`, `release-macos`, `release-windows`, `remaining-dynamic-spots`, `remaining-tutorial-help`, `sea-menus-names`, `start-save-tutorial-woodcut`, `war-independence-ending` | 依賴全部完成、驗證矩陣全 PASS、三平台封包與 Release。 |
+| #54 | completed | [推廣影片（1～2 分鐘）](https://github.com/wicanr2/colonization_cht/issues/54) | `full-release` | 可重現錄製與剪輯腳本、MP4 附在完整版 Release。 |
 | #55 | in_progress | [海上地圖、下拉選單與名稱字串](https://github.com/wicanr2/colonization_cht/issues/55) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
 | #56 | in_progress | [殖民地、歐洲港口、報告與國會的其餘欄位](https://github.com/wicanr2/colonization_cht/issues/56) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
 | #57 | in_progress | [百科其餘條目](https://github.com/wicanr2/colonization_cht/issues/57) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
