@@ -1,6 +1,6 @@
 # 目標184：Linux 正常啟動的速度、爆音與主選單恢復
 
-狀態：修正版交付完成。主選單持續英文與即時音訊實聽待確認。入口為[目前脈絡](../../CONTEXT.md)，對應[Issue #53](https://github.com/wicanr2/colonization_cht/issues/53)。
+狀態：v.1.0.1修正版交付完成，音樂停頓續修中。主選單持續英文未重現，即時音訊仍有供給缺口。入口為[目前脈絡](../../CONTEXT.md)，對應[Issue #53](https://github.com/wicanr2/colonization_cht/issues/53)。
 
 合成效能契約見[規格045](../spec/045-linux-runtime-performance.md)。
 
@@ -74,3 +74,30 @@ Linux／Wine私用完整包正常輸入通過，macOS清單與shell通過。Wind
 | `promo/colonization-cht-v.1.0.1-20261005-promo.mp4` | 3939570 | `1204dd2d89829de7c6c6b172af31bd3c02a012e6b67d637b2a801eedd4423276` |
 
 所有本輪輸出擁有權1000:1000，沒有root-owned檔案或.md目錄；容器與背景程序已回收。隔離dosgolem乾淨且upstream推送DISABLED，共享dosgolem未改。Git差異檢查對補丁必要context空白的誤報另以精確補丁比對及反向套用檢查通過，其他來源空白檢查通過。
+
+## 音樂停頓續修與播放分支
+
+2026-10-05使用者要求「解決音樂停頓的問題」。目前來源及隔離dosgolem均沿v.1.0.1，不回到舊版重新普查。依音訊／試玩路由與平台規格停止線，先量測模擬產生取樣的速度。
+
+`audio-stop-profile/run.cpu.pprof`的50M採樣顯示，CPU執行累積63.68%，字串指令34.96%，普通記憶體讀寫的自身CPU占比約22.6%；OPL合成約2%。這批剩餘成本主要在模擬器，不能由增加播放緩衝解決。既有規格037的指令數時鐘不變，200k指令約產生17.27ms音訊。
+
+`audio-phase-probe/inputs.json`沿正式正常選單輸入，終點延長為200M。每10M指令產生約0.864秒音訊，基準共17.27秒音訊／35.78秒耗時；主選單停留段每10M仍需1.33～1.99秒。這是實際耗時與原始供給量的對帳，不是音效卡驗收。
+
+| 可丟棄試驗 | 結果 |
+|---|---|
+| 普通記憶體批次搬移 | 第一版保守排除整個平面模式，200M約39.40秒；無足夠改善。 |
+| 閒置寫入觀測早退 | 只在原callback必定無作用時排除寫入觀測，200M約35.20秒；無足夠改善。 |
+| 只排除VGA記憶體範圍 | 修正第一版適用條件，200M約44.83秒；仍不達即時門檻。與UTC基準的RAM只差DOS檔案時間`0x67688`，此批使用台北時區；其他終點狀態、事件、索引、色盤、PNG與原始WAV相同。 |
+| 採樣導引編譯（PGO） | 正式dosgolem來源不變，使用Go1.26.7 `-pgo=audio-stop-profile/run.cpu.pprof`；200M約44.52秒。完整RAM、終點狀態、事件、索引、色盤、PNG與原始WAV相同，供給仍不足。 |
+
+各批受主機負載影響，不拿單次耗時推論一般加速率。收據為`audio-phase-probe/audio-supply-comparison.json`，保存原始輸入及採樣雜湊、分段耗時、逐檔比較與限制。這些原型沒有進正式dosgolem或正式包。PGO契約引用[Go官方文件](https://go.dev/doc/pgo)。
+
+[實際時間音訊探針](../../tools/probe_realtime_audio.py)只複製組裝後來源，在隔離副本增加每10ms的48k串流讀取。以單調時鐘的累積時間追上錯過的讀取，不按ticker次數假裝時間停住；消費者不回饋到模擬。使用同一有界Docker/Xvfb，參數為`--source /repo/workplace/reports/goal184-linux/source-release --inputs /repo/workplace/reports/goal184-linux/audio-phase-probe/inputs.json --output <全新輸出>`，另掛唯讀`/game`、`/dosgolem`及可寫Go cache。結果保存`original.wav.clock.json`與`.playback.wav`，原始WAV另存；它可驗供給與缺樣，不能代替硬體實聽。
+
+下一個未決分支會改變音訊節奏或播放架構，依[共同決策技能](/home/anr2/.codex/skills/grilling/SKILL.md)先讓使用者決定。原速獨立播放需要確認曲目與切換，音效沿原路徑；保音高慢速播放會拉長音樂與音效。兩者均不得回饋原版CPU、時鐘或存檔。正式實作仍需補充READY規格，不由「繼續」猜定。
+
+本機試聽`audio-phase-probe/music-original-tempo.wav`為16秒原速；`music-half-tempo-same-pitch.wav`為同段約32秒的保音高半速。由既有私用原始WAV第5～21秒，用FFmpeg5.1.9 `atempo=0.5`製作，方法見[FFmpeg官方契約](https://ffmpeg.org/ffmpeg-filters.html#atempo)。`music-tempo-prototype.json`保存來源與輸出SHA-256。試聽只展示節奏取捨，沒有接入遊戲、不公開、不作修復成功的證據。
+
+時鐘探針基準位於`audio-clock-baseline/`：50.712秒、需求9736320位元組、缺樣6423832位元組，缺樣約66%；來源858569幀，約17.27秒，無積壓丟棄。完整原版RAM、終點狀態、事件、索引、色盤、PNG與原始WAV均與基準相同。原始收據與比較見`run/original.wav.clock.json`及`comparison.json`。播放器錄音僅為容器內的時鐘消費者，沒有音效卡或人耳驗收。
+
+本批已[更新Issue #53](https://github.com/wicanr2/colonization_cht/issues/53#issuecomment-5985306618)，維持OPEN。隔離dosgolem乾淨、upstream推送DISABLED；本輪未建新映像，本輪容器全回收，未清理其他專案容器。全工作樹沒有root-owned產物或.md目錄，新增探針與本機輸出均1000:1000。
