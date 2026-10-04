@@ -3,7 +3,7 @@
 set -euo pipefail
 platform=${1:?linux/windows}
 version=${2:?版本}
-batch=/repo/workplace/reports/goal183-release
+batch=${COLONIZATION_RELEASE_WORK:-/repo/workplace/reports/goal183-release}
 dir=$batch/smoke/$platform
 [[ ! -e "$dir" && -f /game/OPENING.EXE ]]
 mkdir -p "$dir/save"
@@ -18,13 +18,14 @@ for ((i=0; i<100; i++)); do
 done
 if [[ "$platform" == linux ]]; then
   export COLONIZATION_CHT_SAVE="$dir/save"
-  linux_root=$(python3 -c 'import json;print(json.load(open("/repo/workplace/reports/goal183-release/packages-check.json"))["appimage"]["root"])')
+  linux_root=$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["appimage"]["root"])' "$batch/packages-check.json")
   "$linux_root/bin/colonization-window" --version >"$dir/version.json"
   "$linux_root/AppRun" --game /game --play=false --audio-mute \
     --window-steps 50000000 --audio-wav "$dir/original.wav" --out "$out" >"$dir/run.log" 2>&1 &
 else
   export WINEPREFIX="$dir/wine-prefix" WINEDEBUG=-all
-  export COLONIZATION_CHT_SAVE="Z:\\repo\\workplace\\reports\\goal183-release\\smoke\\windows\\save"
+  COLONIZATION_CHT_SAVE=$(python3 -c 'import sys;print("Z:" + sys.argv[1].replace("/", "\\"))' "$dir/save")
+  export COLONIZATION_CHT_SAVE
   python3 /repo/tools/smoke_release_windows.py "$batch" "$dir" >"$dir/run.log" 2>&1 &
 fi
 game_pid=$!

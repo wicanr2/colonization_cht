@@ -1,0 +1,124 @@
+diff --git a/overlay/compositor.go b/overlay/compositor.go
+index a53302e..4f6a2c7 100644
+--- a/overlay/compositor.go
++++ b/overlay/compositor.go
+@@ -56,8 +56,10 @@ func NewPatch(before, after []byte, width, height int, safe image.Rectangle) (*P
+ 
+ func paintPixel(dst *image.RGBA, x, y, scale int, c color.RGBA) {
+ 	for yy := y * scale; yy < (y+1)*scale; yy++ {
++		row := dst.Pix[yy*dst.Stride+x*scale*4 : yy*dst.Stride+(x+1)*scale*4]
+ 		for xx := x * scale; xx < (x+1)*scale; xx++ {
+-			dst.SetRGBA(xx, yy, c)
++			i := (xx - x*scale) * 4
++			row[i], row[i+1], row[i+2], row[i+3] = c.R, c.G, c.B, c.A
+ 		}
+ 	}
+ }
+@@ -68,28 +70,55 @@ func paintPixel(dst *image.RGBA, x, y, scale int, c color.RGBA) {
+ func Compose(indexed, palette []byte, width, height, scale int, patch *Patch,
+ 	ink *image.Alpha, position image.Point, colorIndex byte, enabled bool,
+ ) (*image.RGBA, bool, string, error) {
+-	n, err := dimensions(width, height)
++	output, colors, err := decodeFrame(indexed, palette, width, height, scale)
+ 	if err != nil {
+ 		return nil, false, "invalid-input", err
+ 	}
++	applied, reason := applyLayer(output, indexed, colors, width, height, scale, patch, ink, position, colorIndex, enabled)
++	return output, applied, reason, nil
++}
++
++// decodeFrame validates and expands the source once, independently of overlay count.
++func decodeFrame(indexed, palette []byte, width, height, scale int) (*image.RGBA, [256]color.RGBA, error) {
++	var colors [256]color.RGBA
++	n, err := dimensions(width, height)
++	if err != nil {
++		return nil, colors, err
++	}
+ 	if len(indexed) != n || len(palette) != 768 || scale < 1 || scale > 8 || n > maxOutputPixels/scale/scale {
+-		return nil, false, "invalid-input", fmt.Errorf("invalid frame length, palette length, scale or output size")
++		return nil, colors, fmt.Errorf("invalid frame length, palette length, scale or output size")
+ 	}
+-	var colors [256]color.RGBA
+ 	for i := range colors {
+ 		for c := 0; c < 3; c++ {
+ 			if palette[3*i+c] > 63 {
+-				return nil, false, "invalid-input", fmt.Errorf("palette channel outside VGA DAC range")
++				return nil, colors, fmt.Errorf("palette channel outside VGA DAC range")
+ 			}
+ 		}
+ 		p := palette[3*i : 3*i+3]
+ 		colors[i] = color.RGBA{R: p[0]<<2 | p[0]>>4, G: p[1]<<2 | p[1]>>4, B: p[2]<<2 | p[2]>>4, A: 255}
+ 	}
+ 	output := image.NewRGBA(image.Rect(0, 0, width*scale, height*scale))
+-	for i, index := range indexed {
+-		paintPixel(output, i%width, i/width, scale, colors[index])
++	for y := 0; y < height; y++ {
++		base := y * scale * output.Stride
++		row := output.Pix[base : base+output.Stride]
++		for x, index := range indexed[y*width : (y+1)*width] {
++			c := colors[index]
++			for dx := 0; dx < scale; dx++ {
++				i := (x*scale + dx) * 4
++				row[i], row[i+1], row[i+2], row[i+3] = c.R, c.G, c.B, c.A
++			}
++		}
++		for dy := 1; dy < scale; dy++ {
++			copy(output.Pix[base+dy*output.Stride:base+(dy+1)*output.Stride], row)
++		}
+ 	}
+-	fallback := func(reason string) (*image.RGBA, bool, string, error) { return output, false, reason, nil }
++	return output, colors, nil
++}
++
++// applyLayer compares only original indexed pixels before touching its safe rectangle.
++func applyLayer(output *image.RGBA, indexed []byte, colors [256]color.RGBA, width, height, scale int,
++	patch *Patch, ink *image.Alpha, position image.Point, colorIndex byte, enabled bool) (bool, string) {
++	fallback := func(reason string) (bool, string) { return false, reason }
+ 	if !enabled {
+ 		return fallback("disabled")
+ 	}
+@@ -138,5 +167,5 @@ func Compose(indexed, palette []byte, width, height, scale int, patch *Patch,
+ 	}
+ 	inkRect := image.Rectangle{Min: position, Max: position.Add(ink.Bounds().Size())}
+ 	draw.DrawMask(output, inkRect, image.NewUniform(colors[colorIndex]), image.Point{}, ink, ink.Bounds().Min, draw.Over)
+-	return output, true, "applied", nil
++	return true, "applied"
+ }
+diff --git a/overlay/layers.go b/overlay/layers.go
+index 343736b..b0ba548 100644
+--- a/overlay/layers.go
++++ b/overlay/layers.go
+@@ -3,7 +3,6 @@ package overlay
+ import (
+ 	"fmt"
+ 	"image"
+-	"image/draw"
+ )
+ 
+ // Layer 是獨立比對原始畫面的覆蓋層，不持有遊戲狀態。
+@@ -37,23 +36,15 @@ func ComposeLayers(indexed, palette []byte, width, height, scale int, layers []L
+ 			}
+ 		}
+ 	}
+-	base, _, _, err := Compose(indexed, palette, width, height, scale, nil, nil, image.Point{}, 0, false)
++	base, colors, err := decodeFrame(indexed, palette, width, height, scale)
+ 	if err != nil {
+ 		return nil, nil, err
+ 	}
+ 	results := make([]LayerResult, len(layers))
+ 	for i, layer := range layers {
+-		frame, applied, reason, err := Compose(indexed, palette, width, height, scale,
++		applied, reason := applyLayer(base, indexed, colors, width, height, scale,
+ 			layer.Patch, layer.Ink, layer.Position, layer.ColorIndex, layer.Enabled)
+-		if err != nil {
+-			return nil, nil, err
+-		}
+ 		results[i] = LayerResult{Applied: applied, Reason: reason}
+-		if applied {
+-			safe := layer.Patch.safe
+-			scaled := image.Rect(safe.Min.X*scale, safe.Min.Y*scale, safe.Max.X*scale, safe.Max.Y*scale)
+-			draw.Draw(base, scaled, frame, scaled.Min, draw.Src)
+-		}
+ 	}
+ 	return base, results, nil
+ }

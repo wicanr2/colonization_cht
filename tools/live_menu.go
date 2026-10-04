@@ -2602,9 +2602,13 @@ func main() {
 		})
 	}
 	enabled := true
+	menuPending := 0
 	drop := func(l *menuLine, reason string) {
 		if l.patch != nil || l.pendingEvent != nil {
 			drops = append(drops, map[string]any{"candidate_id": l.id, "step": m.Steps, "reason": reason, "patch": l.patch != nil, "pending": l.pendingEvent != nil})
+		}
+		if l.pendingEvent != nil {
+			menuPending--
 		}
 		l.patch = nil
 		l.pendingEvent = nil
@@ -2661,6 +2665,12 @@ func main() {
 			cs, ip := c.Seg[golem.CS], c.IP
 			if strOn && (len(str.cargo.parts) > 0 || str.cargo.header.role != "") && m.VideoMode() != 0x13 {
 				str.cargo = cargoAssembly{}
+			}
+			// 規格045：沒有pending且不在任何既有讀字／入口事件時，其餘觀測必定無作用。
+			if menuPending == 0 && !(cs == 0x0d21 && ip == 0x00c6 ||
+				cs == 0x0e2d && (ip == 0x11cf || ip == 0x09f4) ||
+				cs == 0x937c && ip == 0x0538) {
+				return
 			}
 			for _, caption := range captions {
 				if caption.ink == nil || cs != 0x0d21 || ip != 0x00c6 {
@@ -2986,6 +2996,7 @@ func main() {
 								l.patch = nil
 							}
 							l.pendingEvent = nil
+							menuPending--
 						}
 					}
 				}
@@ -3020,6 +3031,7 @@ func main() {
 				l.afterSafe = nil
 				desc := bytes.Clone(m.Mem[param : param+14])
 				l.pendingEvent = &pending{step: m.Steps, ss: ss, sp: sp, before: bytes.Clone(canvas()), description: desc, descriptionPtr: param, record: map[string]any{"candidate_id": l.id, "entry_step": m.Steps, "legacy_entry_step": m.Steps - 1, "entry_ip": "937C:0538", "return_ip": "937C:1D50", "ss": ss, "entry_sp": sp, "source": fmt.Sprintf("6F16:%04X", l.runtimeOffset), "source_sha256": hash(l.source), "descriptor_linear": param, "descriptor_hex": hex.EncodeToString(desc), "canvas_descriptor_hex": hex.EncodeToString(descriptor), "registers": c.R, "segments": c.Seg}}
+				menuPending++
 			}
 		})
 	}

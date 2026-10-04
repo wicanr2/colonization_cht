@@ -75,7 +75,7 @@ if a.mode == 'prepare':
         'method': '正常玩家路徑實際截圖的固定畫面剪輯，並非連續動態遊玩錄影',
         'font': {'name': 'Cubic 11', 'sha256': sha(font), 'license': 'font/Cubic-11-OFL.txt'},
         'scenes': receipts, 'durations': durations,
-        'audio_method': '實際dosgolem原版OPL音樂四段循環，接縫交疊0.5秒，音量2倍，淡入1秒與淡出3秒；無自製配樂',
+        'audio_method': c.get('audio_method', '實際dosgolem原版OPL音樂四段循環，接縫交疊0.5秒，音量2倍，淡入1秒與淡出3秒；無自製配樂'),
         'audio_receipt': c['audio_receipt'], 'original_files': c['original_files'],
         'dosgolem_commit': c['dosgolem_commit'],
     }, ensure_ascii=False, indent=2) + '\n')
@@ -85,10 +85,26 @@ elif a.mode == 'encode':
     assert sha(wav) == receipt['wav_sha256']
     film = b / f"colonization-cht-{c['version']}-promo.mp4"
     assert not film.exists()
+    score = '[1:a]asplit=4[a0][a1][a2][a3];[a0][a1]acrossfade=d=0.5:c1=tri:c2=tri[a01];[a01][a2]acrossfade=d=0.5:c1=tri:c2=tri[a012];[a012][a3]acrossfade=d=0.5:c1=tri:c2=tri,aresample=48000,volume=2,afade=t=in:d=1,afade=t=out:st=87:d=3[score]'
+    if c.get('audio_mode') == 'continuous':
+        start = float(c['audio_start_seconds'])
+        assert 0 <= start <= 10
+        duration = float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'default=nw=1:nk=1', str(wav)]))
+        assert duration >= start + 90, '連續錄音長度不足，不能補循環'
+        edit = f'atrim=start={start}:duration=90,asetpts=PTS-STARTPTS,aresample=48000,afade=t=in:d=1,afade=t=out:st=87:d=3'
+        measurement = subprocess.run(['ffmpeg', '-hide_banner', '-nostdin', '-threads', '2', '-i', str(wav), '-af',
+                                      edit+',loudnorm=I=-18:TP=-2:LRA=11:print_format=json', '-f', 'null', '-'],
+                                     capture_output=True, text=True, check=True, timeout=90).stderr
+        measured = json.loads(measurement[measurement.rfind('{'):measurement.rfind('}')+1])
+        (b / 'audio-loudness-measurement.json').write_text(json.dumps(measured, indent=2)+'\n')
+        norm = (f"loudnorm=I=-18:TP=-2:LRA=11:measured_I={float(measured['input_i'])}:"
+                f"measured_TP={float(measured['input_tp'])}:measured_LRA={float(measured['input_lra'])}:"
+                f"measured_thresh={float(measured['input_thresh'])}:offset={float(measured['target_offset'])}:linear=true")
+        score = '[1:a]'+edit+','+norm+',aresample=48000[score]'
     args = ['ffmpeg', '-hide_banner', '-nostdin', '-threads', '2', '-filter_threads', '2',
             '-filter_complex_threads', '2', '-f', 'concat', '-safe', '0', '-i', str(b / 'concat.txt'), '-i', str(wav),
             '-t', '90', '-vf', 'fps=30,format=yuv420p,fade=t=in:d=0.8,fade=t=out:st=89:d=1',
-            '-filter_complex', '[1:a]asplit=4[a0][a1][a2][a3];[a0][a1]acrossfade=d=0.5:c1=tri:c2=tri[a01];[a01][a2]acrossfade=d=0.5:c1=tri:c2=tri[a012];[a012][a3]acrossfade=d=0.5:c1=tri:c2=tri,aresample=48000,volume=2,afade=t=in:d=1,afade=t=out:st=87:d=3[score]',
+            '-filter_complex', score,
             '-map', '0:v', '-map', '[score]',
             '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '18', '-threads', '2',
             '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', str(film)]
@@ -111,6 +127,7 @@ else:
     assert 'mean_volume: -inf' not in check and 'mean_volume:' in check
     # 固定畫面是剪輯設計；黑幀只允許首尾淡入淡出。
     import re
+    assert float(re.search(r'max_volume: ([\d.\-]+) dB', check).group(1)) < -0.1, '影音輸出削波'
     black = [(float(x), float(y)) for x, y in re.findall(r'black_start:([\d.]+) black_end:([\d.]+)', check)]
     assert all(x < 1 or x >= 89 for x, y in black), black
     for i, second in enumerate([4, 14, 26, 38, 50, 62, 74, 85]):

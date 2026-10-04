@@ -14,6 +14,7 @@
 *.png
 !docs/screenshots/menu-zh.png
 !docs/screenshots/difficulty-zh.png
+!docs/screenshots/colonizopedia-zh.png
 
 # 編輯器與作業系統暫存檔。
 __pycache__/

@@ -1,5 +1,5 @@
 {
-  "version": "v.1.0.0-20261005",
+  "version": "v.1.0.1-20261005",
   "font": "/font/Cubic_11.ttf",
   "scenes": [
     {
@@ -33,14 +33,14 @@
       "normal_input_sha256": "253c62a1f30387d76b736fc17cd22b7040ad53263088fe51e0cd6c5f81fee122"
     },
     {
-      "path": "/repo/workplace/reports/goal181-colony-rest/20261004-woodcut-titles/final-sample/zh.cp-776800000.png",
-      "sha256": "c80a6760d6d24a4e611cdf92c76fe5d8882a01ea8a48f9b8f70239c73ae4ab71",
-      "title": "讀懂每一次相遇",
-      "caption": "原住民訊息與學習選項，正常路徑已抽樣。",
-      "source_receipt": "/repo/workplace/reports/goal181-colony-rest/20261004-woodcut-titles/final-sample/zh.json",
-      "source_receipt_sha256": "84479ea3684c5e649e6bc2920808464a8a7abfe796bd1fc401032b762e4bb6fc",
-      "normal_input_receipt": "/repo/workplace/reports/goal181-colony-rest/colony-v3/gui-colony.inputs.json",
-      "normal_input_sha256": "253c62a1f30387d76b736fc17cd22b7040ad53263088fe51e0cd6c5f81fee122"
+      "path": "/repo/workplace/reports/goal180-pedia-rest/building-final-v3/gui-pedia.building-article-14.png",
+      "sha256": "e05b0d761d226a2743666f93925251ad47b0e69f42d72d9a2e09f0af4deedd95",
+      "title": "殖民百科，讀懂每項建築",
+      "caption": "正文與先決條件顯示繁體中文，保留原版版畫。",
+      "source_receipt": "/repo/workplace/reports/goal180-pedia-rest/building-final-v3/gui-pedia.json",
+      "source_receipt_sha256": "3d8679ee4ee758b04dad50a8b89388e8dd0cb0f45bda688e71a714bb07c89685",
+      "normal_input_receipt": "/repo/workplace/reports/goal180-pedia-rest/building-final-v3/gui-pedia.inputs.json",
+      "normal_input_sha256": "217af6321b916e9e79f236dc3ed78d03329e5f80c913387a79689b945a7c4eba"
     },
     {
       "path": "/repo/workplace/reports/goal181-colony-rest/cargo-messages-formal-gui-v153/gui-colony.cargo-loading-preview.png",
@@ -63,8 +63,8 @@
       "normal_input_sha256": "c3b69af723dd708aff78d236f0a6d89f15775ad2156936725ac180bc33d2521b"
     }
   ],
-  "audio": "/repo/workplace/reports/goal183-release/music-short/original.wav",
-  "audio_receipt": "/repo/workplace/reports/goal183-release/music-short/receipt.json",
+  "audio": "/repo/workplace/reports/goal184-linux/music-continuous/original.wav",
+  "audio_receipt": "/repo/workplace/reports/goal184-linux/music-continuous/receipt.json",
   "original_files": {
     "OPENING.EXE": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
     "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
@@ -72,5 +72,8 @@
     "LABELS.TXT": "e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204",
     "NAMES.TXT": "4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061"
   },
-  "dosgolem_commit": "b0bf25963ce5a29fb3a3fcf92e211423d4cd4ac8"
+  "dosgolem_commit": "b0bf25963ce5a29fb3a3fcf92e211423d4cd4ac8",
+  "audio_mode": "continuous",
+  "audio_start_seconds": 3,
+  "audio_method": "原版dosgolem連續錄音取第3～93秒，不重複拼接；兩遍響度正規化至−18 LUFS、真峰值目標−2 dBTP，淡入1秒、淡出3秒，保留原音高與節奏。"
 }

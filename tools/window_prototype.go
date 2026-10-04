@@ -2,6 +2,7 @@
 package main
 
 import (
+	"bytes"
 	"crypto/sha256"
 	"encoding/binary"
 	"encoding/json"
@@ -18,7 +19,7 @@ import (
 	golem "github.com/wicanr2/dosgolem"
 )
 
-var windowSteps = flag.Uint64("window-steps", 100000000, "原型執行上限，不修改DOS時鐘")
+var windowSteps = flag.Uint64("window-steps", ^uint64(0), "驗收執行上限；正常遊玩預設不設上限，不修改DOS時鐘")
 var replayPath = flag.String("replay-inputs", "", "僅驗收：重播先前真實視窗輸入")
 var audioWAVPath = flag.String("audio-wav", "", "目標176：結束時把前端取得的 dosgolem 原始音訊（交錯 int16 立體聲）寫成 WAV；需 --audio")
 var audioMute = flag.Bool("audio-mute", false, "目標176：只合成與錄音，不開播放裝置（無音效裝置的容器用）")
@@ -32,14 +33,19 @@ const audioPlayRate = 48000
 // audioStream 是給 Ebitengine 播放器讀的 16 位元立體聲串流。不足時補靜音、積壓超過 0.25 秒時丟最舊的，
 // 兩者都只影響播放，不回饋到模擬（規格040）。
 type audioStream struct {
-	mu                 sync.Mutex
-	rate               uint64  // 來源取樣率
-	src                []int16 // 尚未換算的來源（交錯）
-	srcBase            uint64  // src[0] 的來源取樣編號
-	outN               uint64  // 已產生的輸出取樣數
-	out                []byte
-	ReadBytes, Dropped uint64
+	mu                                sync.Mutex
+	rate                              uint64  // 來源取樣率
+	src                               []int16 // 尚未換算的來源（交錯）
+	srcBase                           uint64  // src[0] 的來源取樣編號
+	outN                              uint64  // 已產生的輸出取樣數
+	out                               []byte
+	ReadBytes, Dropped, UnderrunBytes uint64
+	last, fadeAnchor                  [2]int32
+	gap, resuming                     bool
+	fadeFrame                         int
 }
+
+const audioFadeFrames = audioPlayRate / 200 // 5ms，僅消除斷流邊界的人工跳幅。
 
 func (s *audioStream) push(samples []int16) {
 	s.mu.Lock()
@@ -68,6 +74,7 @@ func (s *audioStream) push(samples []int16) {
 		keep := audioPlayRate * 4 / 10
 		s.Dropped += uint64(len(s.out) - keep)
 		s.out = append([]byte(nil), s.out[len(s.out)-keep:]...)
+		s.gap = true // 下一次讀取漸接被保留的取樣，不直接跳到新位置。
 	}
 }
 
@@ -77,6 +84,35 @@ func (s *audioStream) Read(p []byte) (int, error) {
 	n := copy(p, s.out)
 	s.out = s.out[n:]
 	clear(p[n:])
+	s.UnderrunBytes += uint64(len(p) - n)
+	for i := 0; i+4 <= len(p); i += 4 {
+		valid := i+4 <= n
+		if valid && s.gap {
+			s.gap, s.resuming, s.fadeFrame, s.fadeAnchor = false, true, 0, s.last
+		} else if !valid && !s.gap {
+			s.gap, s.resuming, s.fadeFrame, s.fadeAnchor = true, false, 0, s.last
+		}
+		if s.gap || s.resuming {
+			if s.fadeFrame < audioFadeFrames {
+				s.fadeFrame++
+			}
+			for c := 0; c < 2; c++ {
+				v := int32(int16(binary.LittleEndian.Uint16(p[i+c*2:])))
+				if s.gap {
+					v = s.fadeAnchor[c] * int32(audioFadeFrames-s.fadeFrame) / audioFadeFrames
+				} else {
+					v = (s.fadeAnchor[c]*int32(audioFadeFrames-s.fadeFrame) + v*int32(s.fadeFrame)) / audioFadeFrames
+				}
+				binary.LittleEndian.PutUint16(p[i+c*2:], uint16(int16(v)))
+			}
+			if s.resuming && s.fadeFrame == audioFadeFrames {
+				s.resuming = false
+			}
+		}
+		for c := 0; c < 2; c++ {
+			s.last[c] = int32(int16(binary.LittleEndian.Uint16(p[i+c*2:])))
+		}
+	}
 	s.ReadBytes += uint64(len(p))
 	return len(p), nil
 }
@@ -128,7 +164,7 @@ func (a *frontendAudio) status() map[string]any {
 	a.stream.mu.Lock()
 	defer a.stream.mu.Unlock()
 	return map[string]any{"rate": a.rate, "played_bytes": a.stream.ReadBytes, "dropped_bytes": a.stream.Dropped,
-		"produced_frames": a.stream.srcBase, "player": a.player != nil, "error": a.err}
+		"underrun_bytes": a.stream.UnderrunBytes, "produced_frames": a.stream.srcBase, "player": a.player != nil, "error": a.err}
 }
 
 func (a *frontendAudio) writeWAV() {
@@ -197,7 +233,12 @@ func logicalMouse(x, y int) (int, int, bool) {
 }
 func frontendFrame(im *image.RGBA, rec map[string]any) {
 	if activeWindow != nil {
-		activeWindow.latest, activeWindow.record, activeWindow.dirty = im, rec, true
+		g := activeWindow
+		same := im != nil && g.latest != nil && im.Rect == g.latest.Rect && im.Stride == g.latest.Stride && bytes.Equal(im.Pix, g.latest.Pix)
+		if !same {
+			g.latest, g.dirty = im, true
+		}
+		g.record = rec
 	}
 }
 func supportedDOSChar(s string) bool {

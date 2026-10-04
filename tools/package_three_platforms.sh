@@ -2,7 +2,7 @@
 # 固定Go1.26.7與AppImage工具容器內執行，產生兩份可重現暫存封包。
 set -euo pipefail
 version=${1:?版本}
-batch=/repo/workplace/reports/goal183-release
+batch=${COLONIZATION_RELEASE_WORK:-/repo/workplace/reports/goal183-release}
 [[ $(go env GOVERSION) == go1.26.7 && -x "$batch/inspect-version" ]]
 for side in a b; do
   for format in appimage windows-zip macos-zip; do

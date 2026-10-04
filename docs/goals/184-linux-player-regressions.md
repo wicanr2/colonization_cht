@@ -1,0 +1,61 @@
+# 目標184：Linux 正常啟動的速度、爆音與主選單恢復
+
+狀態：修正版已完成本機驗證，遠端交付收尾中。主選單持續英文與即時音訊實聽待確認。入口為[目前脈絡](../../CONTEXT.md)，對應[Issue #53](https://github.com/wicanr2/colonization_cht/issues/53)。
+
+合成效能契約見[規格045](../spec/045-linux-runtime-performance.md)。
+
+dosgolem基底為`b0bf25963ce5a29fb3a3fcf92e211423d4cd4ac8`，本輪作品中立的輸出優化保存於[補丁](../../tools/dosgolem-overlay-performance.patch)，只套用到本專案隔離副本；shared dosgolem與upstream推送設定不變。
+
+使用者實際執行 `v.1.0.0-20261005/full-local/` 的 Linux `start.sh`，回報速度慢、音樂爆音，以及主選單滑鼠移開後中文仍回退英文。先以同一個啟動器重現並量測，不用先前 ALSA null 播放或 WAV 解碼成功替代即時播放驗收。
+
+- [正常啟動探針](../../tools/probe_linux_regression.py)：有界 Docker/Xvfb 執行實際啟動器，保存懸停前、懸停中、移開後的畫面、狀態與時間。
+- [CPU 採樣器](../../tools/profile_linux_replay.py)：在忽略的工作目錄複製來源，僅採樣副本加入分析掛勾，不修改正式程式。
+- 中間證據位於 `workplace/reports/goal184-linux/`。原版唯讀，所有輸出由 UID/GID 1000:1000 建立。
+
+退出條件為找到各現象的可重現原因，依既有或補充 READY 規格修正；主選單五列懸停後恢復、正常點擊與原版狀態相同；同輸入原始 WAV 不變，播放供給與耗用依真實時間量測。修正版另立版號，不覆寫已發布版本。README 百科截圖與影片配樂改善延續使用者先前要求。
+
+## 2026-10-05 已驗結果與限制
+
+| 項目 | 結果與本機收據 |
+|---|---|
+| 舊版瓶頸 | `old-gui/timing.json`：正常50M指令115.890秒。`old-profile/cpu-top.txt`：重複整幀解碼占CPU主要成本。 |
+| 合成器 | 隔離提交`c83740bc5fcb2f2d8f2afb5d57cee6e92bd12f75`；`oracle-result-v2.json`的128例RGBA與逐欄結果全等。25停用層20幀約快114倍，僅限合成器局部。 |
+| 正式正常GUI | `final-gui/timing.json`：50M指令36.203秒，約快3.2倍；五列中文移開後恢復。不同主機負載與軟體繪圖會影響耗時。 |
+| 私用一鍵入口 | `private-gui/`：實際新版`start.sh`正常50M指令12.208秒，懸停後五列恢復中文。此批與另一批AppRun耗時不同，保留兩筆，不外推固定倍率。 |
+| 預設執行上限 | `unbounded-gui/`不傳`--window-steps`，執行110.2M指令後正常關窗。修正已發布前端仍用原型100M上限的問題。 |
+| 主選單恢復 | `sweep-gui/`14組正常懸停、邊界及移到空白操作全部恢復五列。正式GUI再驗通過。使用者所述的持續英文未重現，不宣稱已修好。 |
+| 使用者輸入 | `user-run/`是使用者本機last-run紀錄的唯讀副本；`user-replay-taipei/`在台北時區重播後，完整原版狀態、事件及終點PNG全等。兩個空白處檢查點均有五列中文。 |
+| 百科抽樣 | `pedia-replay/`對`pedia-control/`：正常百科輸入的CPU、RAM、索引、色盤及原始WAV全等，建築正文顯示中文。比較摘要為`same-state-final.json`。 |
+| 播放層 | 缺樣與恢復採5ms連續淡出／淡入，增加`underrun_bytes`；Go測試與go vet通過。原始錄音、音高、取樣率及DOS時鐘不變。仍可能停頓，沒有即時音訊人耳驗收。 |
+
+使用者實際舊版播放器讀取17625600位元組，對應約91.8秒；原版只產生267872幀、約5.39秒音訊。這證實供給明顯不足，與音訊檔案能解碼是不同問題。容器ALSA null也不能作為硬體實聽證據。
+
+首輪使用者重播只有RAM線性偏移`0x67688`一位元組不同。dosgolem `internal/dos/find.go`以當地時區打包檔案時間；原使用者為台北，首輪容器為UTC，兩者差8小時。改用`TZ=Asia/Taipei`後完整RAM相同。原始失敗收據保留，這是驗證環境差異。
+
+## README 截圖與配樂
+
+使用者本輪明確授權README中文百科截圖。公開[皮衣廠截圖](../screenshots/colonizopedia-zh.png)來自既有正常GUI第330600000步，正文與建築先決條件為中文。PNG SHA-256 `e05b0d761d226a2743666f93925251ad47b0e69f42d72d9a2e09f0af4deedd95`；來源為`goal180-pedia-rest/building-final-v3/gui-pedia.building-article-14.png`及`gui-pedia.shots`，正常輸入SHA-256 `217af6321b916e9e79f236dc3ed78d03329e5f80c913387a79689b945a7c4eba`。其他原始畫面不新增公開。
+
+影片改錄原版連續約95秒音樂，使用第3～93秒，取消舊版四段26秒循環。二階段響度校正目標−18 LUFS、峰值上限−2 dBTP，首1秒淡入、尾3秒淡出，沒有改音高或節奏。成片實測−17.9 LUFS、真峰值−2.5 dBFS，90秒1920×1080／30fps H.264／AAC。八幀字幕與中文百科畫面抽看通過，黑幀0；仍是正常玩家截圖剪輯，音樂未人耳確認。
+
+長錄音原始WAV SHA-256 `eb247dfde548651797f76d6b9e1b934b59c112d17f2de454ce660a857d1b0263`，前50M音訊與舊正式版全等。原始WAV及收據只留`music-continuous/`；公開只附成片，沿用使用者既有影片音樂授權。
+
+## 修正版重建入口
+
+沿[目標183](183-release-and-promo.md)的容器與三平台流程，設定`COLONIZATION_RELEASE_WORK=/repo/workplace/reports/goal184-linux/release`，版號使用`v.1.0.1-20261005`。源碼先以`tools/build_window_prototype.py`組裝，dosgolem基底套用本頁補丁，`upstream`推送仍為`DISABLED`。共享dosgolem不修改。
+
+| 工作 | 入口與必要參數 |
+|---|---|
+| 獨立合成比較 | [verify_compositor_optimization.go](../../tools/verify_compositor_optimization.go)。在隔離Go模組`compositor-oracle`內以`git show b0bf259:overlay/...`取舊package到`legacy/`，目前dosgolem模組用replace指向已套補丁的副本；完整暫存模組在`oracle/`。 |
+| 正式封包 | [package_three_platforms.sh](../../tools/package_three_platforms.sh)傳版號；[檢查器](../../tools/check_release_packages.py)傳`--batch`與`--version`。 |
+| 啟動與同輸入 | [smoke_release.sh](../../tools/smoke_release.sh)、[replay_release.py](../../tools/replay_release.py)沿上述環境變數；[check_release_smoke.py](../../tools/check_release_smoke.py)傳`--batch`與`--version`。 |
+| 回歸重播 | [replay_linux_checks.py](../../tools/replay_linux_checks.py)傳二進位、真實輸入、獨立輸出，可傳存檔種子及檢查點；只有此輪譯稿／字模未變時才沿用目標183圖集。 |
+| 連續音樂 | [record_promo_music.py](../../tools/record_promo_music.py)傳舊正式二進位、封包圖集及正式GUI輸入，`--steps 1100000000 --raw-control`；先核對原50M前段音訊；此段捕錄在dosgolem仍為`b0bf259`時執行，錄完再套本輪補丁。 |
+| 影片 | [promo-scenes.json](../../tools/release/promo-scenes.json)綁定本輪音源與百科圖；[build_promo.py](../../tools/build_promo.py)依`prepare/encode/check`執行。 |
+| 正式與私用包 | [assemble_release.py](../../tools/assemble_release.py)排他建立新版`dist-all/`；[smoke_full_local.py](../../tools/smoke_full_local.py)另設`COLONIZATION_RELEASE_VERSION`，Linux／Wine驗原版狀態，macOS只驗清單與shell。 |
+
+正式Linux二進位SHA-256 `214ab372640fd064a721b890255120c00df4af32dcad06cc8e9cb15072f9ca90`。公開三包均重建兩次逐位元組相同；Linux／Wine正常GUI、相同輸入原版全狀態與WAV相同，RAM `599a732f2a40af0902a6a9968814101a6810c285898918c919669fa88d412f98`。macOS限兩架構建置、臨時簽章資料、封包與shell，未真機或Gatekeeper。
+
+正式根目錄為`dist-all/v.1.0.1-20261005/`。SHA-256見根目錄清單，私用包另見`full-local/SHA256SUMS.json`。Linux新的一鍵入口為`full-local/colonization-cht-v.1.0.1-20261005-full-local-linux-x86_64/start.sh`。舊版原封保留。
+
+Linux／Wine私用完整包正常輸入通過，macOS清單與shell通過。Windows第一輪Wine拒絕在root-owned `/tmp`下建立設定目錄，改用已核對1000:1000的工作根目錄，原封包與命令乾淨重跑通過；第一份失敗保留。此為驗證環境問題。

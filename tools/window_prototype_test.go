@@ -180,16 +180,73 @@ func TestAudioStreamResample(t *testing.T) {
 			t.Fatalf("定值訊號換算後應不變：%d", v)
 		}
 	}
-	p := make([]byte, len(s.out)+8)
+	p := make([]byte, len(s.out)+audioFadeFrames*4)
 	for i := range p {
 		p[i] = 0xff
 	}
 	if n, _ := s.Read(p); n != len(p) || p[len(p)-1] != 0 || s.ReadBytes != uint64(len(p)) {
 		t.Fatal("不足時應補靜音並回報完整長度")
 	}
+	if s.UnderrunBytes != audioFadeFrames*4 {
+		t.Fatal("缺樣計數不同")
+	}
 	s.push(make([]int16, 49715/2*2)) // 0.5 秒
 	if len(s.out) != audioPlayRate*4/10 || s.Dropped == 0 {
 		t.Fatalf("積壓應截到 0.1 秒：%d 位元組、丟 %d", len(s.out), s.Dropped)
+	}
+}
+
+func TestAudioStreamGapEdges(t *testing.T) {
+	s := &audioStream{rate: 48000}
+	queue := func(left, right int16, frames int) {
+		for i := 0; i < frames; i++ {
+			for _, v := range []int16{left, right} {
+				s.out = append(s.out, byte(v), byte(uint16(v)>>8))
+			}
+		}
+	}
+	read := func(frames int) []int16 {
+		b := make([]byte, frames*4)
+		_, _ = s.Read(b)
+		values := make([]int16, frames*2)
+		for i := range values {
+			values[i] = int16(uint16(b[i*2]) | uint16(b[i*2+1])<<8)
+		}
+		return values
+	}
+	queue(12000, -6000, 240)
+	initial := read(240)
+	if initial[0] != 12000 || initial[1] != -6000 {
+		t.Fatal("供給充足時不能改寫原取樣")
+	}
+	previous := []int16{12000, -6000}
+	check := func(values []int16, bound int) {
+		t.Helper()
+		for i, v := range values {
+			c := i % 2
+			diff := int(v) - int(previous[c])
+			if diff < -bound || diff > bound {
+				t.Fatalf("播放邊界跳幅%d超過%d", diff, bound)
+			}
+			previous[c] = v
+		}
+	}
+	for i := 0; i < 8; i++ {
+		check(read(40), 50) // 淡出跨八次Read，不能重啟或直接跳零。
+	}
+	if previous[0] != 0 || previous[1] != 0 || s.UnderrunBytes != 320*4 {
+		t.Fatal("長缺樣應平滑到零且計數正確")
+	}
+	queue(-12000, 6000, 320)
+	check(read(320), 50)
+	if previous[0] != -12000 || previous[1] != 6000 {
+		t.Fatal("恢復後應回到未修改的取樣")
+	}
+	check(read(20), 50) // 短缺樣尚未淡完，立即恢復也不能跳幅。
+	queue(12000, -6000, 300)
+	check(read(300), 100)
+	if previous[0] != 12000 || previous[1] != -6000 {
+		t.Fatal("短缺樣恢復失敗")
 	}
 }
 

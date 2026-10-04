@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 import subprocess
 
-b = Path('/repo/workplace/reports/goal183-release')
+b = Path(os.environ.get('COLONIZATION_RELEASE_WORK', '/repo/workplace/reports/goal183-release'))
 root = Path(json.loads((b / 'packages-check.json').read_text())['appimage']['root'])
 out = b / 'smoke/shared-linux'
 assert not out.exists()

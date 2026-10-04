@@ -4,7 +4,7 @@ set -euo pipefail
 version=${1:?版本}
 platform=${2:?linux/windows/macos}
 [[ $version =~ ^v\.[0-9]+\.[0-9]+\.[0-9]+-[0-9]{8}$ ]]
-batch=/repo/workplace/reports/goal183-release
+batch=${COLONIZATION_RELEASE_WORK:-/repo/workplace/reports/goal183-release}
 source_dir=/source
 [[ -d "$source_dir" && $(stat -c %u:%g "$batch") == "$(id -u):$(id -g)" ]]
 mkdir -p "$batch/binaries"

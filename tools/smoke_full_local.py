@@ -11,9 +11,9 @@ import zipfile
 
 platform = sys.argv[1]
 assert platform in {'linux', 'windows', 'macos'}
-version = 'v.1.0.0-20261005'
+version = os.environ.get('COLONIZATION_RELEASE_VERSION', 'v.1.0.0-20261005')
 repo = Path('/repo')
-base = repo / 'workplace/reports/goal183-release'
+base = Path(os.environ.get('COLONIZATION_RELEASE_WORK', '/repo/workplace/reports/goal183-release'))
 delivery = repo / 'dist-all' / version
 package = next((delivery / 'full-local').glob('*-' + platform + '-*' + ('.tar.gz' if platform == 'linux' else '.zip')))
 out = base / (sys.argv[2] if len(sys.argv) == 3 else 'full-local-smoke') / platform
