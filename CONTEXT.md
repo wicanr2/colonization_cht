@@ -7,7 +7,7 @@
 | 項目 | 目前狀態與證據 |
 |---|---|
 | Linux 玩家回報 | [目標184](docs/goals/184-linux-player-regressions.md)修正重複整幀解碼瓶頸，正式50M正常GUI由115.890秒降至36.203秒；播放缺樣邊界加5ms淡出／淡入，仍可能停頓且未人耳驗收。主選單14組懸停及使用者實際輸入的兩個空白處檢查點均恢復五列；持續英文未重現，保留追蹤。 |
-| 本輪交付 | `v.1.0.1-20261005`三平台修正版、改用連續原版音樂的90秒影片與README中文百科截圖已完成本機驗證；遠端交付收尾中。Linux／Wine私用完整包相同輸入狀態已驗，macOS仍未真機。入口為[目標184](docs/goals/184-linux-player-regressions.md)，舊[目標183](docs/goals/183-release-and-promo.md)保留歷史交付。 |
+| 本輪交付 | `v.1.0.1-20261005`三平台修正版、連續原版音樂90秒影片與README中文百科截圖已發布，提交`0b9a791`及新tag已推送，遠端五資產SHA-256全等，#53／#54已更新。Linux／Wine私用完整包相同輸入狀態已驗，macOS仍未真機。入口為[目標184](docs/goals/184-linux-player-regressions.md)，舊[目標183](docs/goals/183-release-and-promo.md)保留歷史交付。 |
 | 工作順序 | 2026-10-04使用者決定「先把文字都翻譯完成，最後抽樣對拍」。先整批處理譯文與接線，最後以代表性正常玩家路徑驗證；不再以每個待驗詞條的完整多側GUI驗收作為下一筆翻譯的前置。既有驗收保留，未抽樣欄位不冒稱已顯示或CONFORMED。 |
 | 全語料譯文 | 2026-10-04以現行來源重算：遊戲畫面3561行全部已建檔，3558行已翻譯，3行英文冠詞有理由刻意省略，未建檔與缺譯均為0。現行十份來源清冊1684鍵，1681鍵有譯文、3鍵省略；字串模板66、靜態圖譯文8、定稿術語256與變數譯名1也已檢查。來源、占位符、控制碼、熱鍵及字型缺字檢查通過，與畫面普查882／1945分開統計。[重跑入口](docs/goals/160-corpus-closure.md)。 |
 | 翻譯收尾抽樣 | 同日v223七點既有正常GUI輸入抽樣保留；本批再以目前程式抽樣十點，涵蓋港口買賣價格、木匠／無職業頂列、招募／碼頭、關閉港口、存檔及返回世界。中文／原文／缺字模三側各點RAM／索引／色盤、完整終點CPU／RAM／VGA、開檔／輸入及COLONY00／03存檔相同。新增差異只在三欄安全區，關框無殘字，缺字模回原文。重播既有正常GUI實際輸入，沒有新錄GUI；不提高882計數。[本批入口](docs/goals/181-colony-remaining.md)。 |
@@ -30,7 +30,7 @@
 | 存讀檔探索 | 由主選單正常載入原版 `COLONY09.SAV`，再選第一個欄位手動儲存成 `COLONY00.SAV` 並回到海上畫面，未注入快照。真 GUI、中英重播的終點 RAM 與兩份存檔逐位元組相同，六張安全區相同；首次回到世界畫面的抓圖未對齊，未算通過。收據在 `codex-audit/load-route-v2/`、`load-replays-v2/` 與 `load-save-summary.json`。空欄位與兩標題現已限定CONFORMED，其他存讀檔結果仍待驗；讀檔成功COLONY02提示另已驗，不能標為整個存讀檔完成；原版存檔只留本機。 |
 | 封裝接線／Issue #53 | 全部中文顯示、輸入與音訊旗標及13份TSV／字模已收進三平台包，依實際二進位附12份授權與平台資料。正式封包、私用Linux／Wine正常輸入及macOS清單／shell通過；#53仍因974項未抽樣清冊與玩家回報待確認而保持OPEN，不宣稱全文中文化或全部即時音訊已驗。 |
 | 工具鏈 | 畫面檢查與 Go／GUI 驗證使用 [tools/Dockerfile.verification](tools/Dockerfile.verification) 的 `colonization-verification:20260930-r1`；正式字模烘製使用 [font/README.md](font/README.md) 指定的固定 `rich2-py` 映像，不使用驗證映像的 Pillow 重烘正式字模。 |
-| 發行 | [v.1.0.0-20261005](https://github.com/wicanr2/colonization_cht/releases/tag/v.1.0.0-20261005)已正式發布：三平台patch、90秒MP4與雜湊五個資產遠端SHA-256相同，tag指向`898d4e1`。#50／51／52／54已關閉，#53與#55～61保留未驗範圍並維持OPEN。正式輸出`dist-all/v.1.0.0-20261005/`，自帶原版三平台包只留其中full-local。舊技術預覽保留。 |
+| 發行 | [v.1.0.1-20261005](https://github.com/wicanr2/colonization_cht/releases/tag/v.1.0.1-20261005)已發布：三平台patch、90秒MP4與SHA-256清單，tag指向`0b9a791`。#53維持OPEN，#54維持CLOSED；玩家持續英文及即時音訊實聽待確認。正式輸出`dist-all/v.1.0.1-20261005/`，自帶原版完整包只留full-local。舊Release與tag未改動。 |
 | 原版與隔離副本 | 原版唯讀；dosgolem 隔離副本 `b0bf259`，`upstream` 推送位址 `DISABLED`，未修改 `/home/anr2/cht/dosgolem`。 |
 
 接手驗證中間物與摘要：`workplace/reports/goal178-orders/codex-audit/`；正式矩陣與普查以生成後的 `docs/verification-matrix.md`、`docs/text-census.md` 為準。

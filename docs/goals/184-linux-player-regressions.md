@@ -1,6 +1,6 @@
 # 目標184：Linux 正常啟動的速度、爆音與主選單恢復
 
-狀態：修正版已完成本機驗證，遠端交付收尾中。主選單持續英文與即時音訊實聽待確認。入口為[目前脈絡](../../CONTEXT.md)，對應[Issue #53](https://github.com/wicanr2/colonization_cht/issues/53)。
+狀態：修正版交付完成。主選單持續英文與即時音訊實聽待確認。入口為[目前脈絡](../../CONTEXT.md)，對應[Issue #53](https://github.com/wicanr2/colonization_cht/issues/53)。
 
 合成效能契約見[規格045](../spec/045-linux-runtime-performance.md)。
 
@@ -59,3 +59,18 @@ dosgolem基底為`b0bf25963ce5a29fb3a3fcf92e211423d4cd4ac8`，本輪作品中立
 正式根目錄為`dist-all/v.1.0.1-20261005/`。SHA-256見根目錄清單，私用包另見`full-local/SHA256SUMS.json`。Linux新的一鍵入口為`full-local/colonization-cht-v.1.0.1-20261005-full-local-linux-x86_64/start.sh`。舊版原封保留。
 
 Linux／Wine私用完整包正常輸入通過，macOS清單與shell通過。Windows第一輪Wine拒絕在root-owned `/tmp`下建立設定目錄，改用已核對1000:1000的工作根目錄，原封包與命令乾淨重跑通過；第一份失敗保留。此為驗證環境問題。
+
+## 遠端交付與收尾
+
+`PASS_RELEASE_PUBLISHED`：提交`0b9a791fd48a06da455373891aeeb529c5e541cc`與tag `v.1.0.1-20261005`已推送，[修正版Release](https://github.com/wicanr2/colonization_cht/releases/tag/v.1.0.1-20261005)五個資產名稱、大小與遠端SHA-256全等。舊`v.1.0.0-20261005`資產與tag未改；私用包、原始WAV及其他PNG未上傳。
+
+`PASS_RELEASE_PROMO`：新版MP4格式、音量、黑幀、八幀布局與遠端附件完成，不含人耳驗收。[Issue #53更新](https://github.com/wicanr2/colonization_cht/issues/53#issuecomment-5983206247)保持OPEN；[Issue #54更新](https://github.com/wicanr2/colonization_cht/issues/54#issuecomment-5983207110)維持CLOSED。未驗的全文清冊不變。
+
+| 公開檔案 | 位元組 | SHA-256 |
+|---|---:|---|
+| `patch/colonization-cht-v.1.0.1-20261005-linux-x86_64.AppImage` | 18516472 | `5d6c558b71704071ffb23ff3faaa9e3fe84f0c8cfaa6eef3e9e28574792f7441` |
+| `patch/colonization-cht-v.1.0.1-20261005-macos-universal.zip` | 14179419 | `d58a755a668c0ca24a24f29e7de858bd04d3a05ca0b784eea100a2fd5e24783b` |
+| `patch/colonization-cht-v.1.0.1-20261005-windows-x86_64.zip` | 13977717 | `66bc9c22c3fda54e468bf5d198dd5a1869965bf96574bee0e24c343e71b239e3` |
+| `promo/colonization-cht-v.1.0.1-20261005-promo.mp4` | 3939570 | `1204dd2d89829de7c6c6b172af31bd3c02a012e6b67d637b2a801eedd4423276` |
+
+所有本輪輸出擁有權1000:1000，沒有root-owned檔案或.md目錄；容器與背景程序已回收。隔離dosgolem乾淨且upstream推送DISABLED，共享dosgolem未改。Git差異檢查對補丁必要context空白的誤報另以精確補丁比對及反向套用檢查通過，其他來源空白檢查通過。
