@@ -27,7 +27,8 @@ type dialogTemplate struct {
 	quoted []bool
 	zh     string // 正文譯稿（空行前），保留 {} 強調標記與 %變數；置中段落另保留 \n 與 ^
 	// 目標166：原文含 ^ 置中碼的段落（例如國王接見），依譯稿的 ^^ 行置中、其餘依寬度重排。
-	centered bool
+	centered        bool
+	literalPercents int // 規格036：只由百科原始 %% 確認的字面百分比數量；其他模板為0。
 }
 
 type dialogFont struct {
@@ -37,18 +38,29 @@ type dialogFont struct {
 }
 
 type dialogCatalog struct {
-	templates []dialogTemplate
-	lines     []dialogTemplate  // 目標166：逐行清單比對用的單行模板
-	seen      map[string]bool   // 已載入的訊息鍵（跨語料檢查重複）
-	terms     map[string]string // 英文→譯名；定稿譯名彼此衝突者為空字串（視為查無）
-	canon     map[string]bool   // 目標167：來自定稿譯名表（優先於 NAMES.TXT 對照）的詞
-	fonts     map[int]*dialogFont
+	messageOptions   map[string][]dialogTemplate // 規格036：原檔正文鍵對應的完整選項。
+	templates        []dialogTemplate
+	unitCaptionNames map[string]string // 規格035 READY：只來自驗證的UNIT資料列。
+	dockOptionSets   [][]dialogTemplate
+	dockOptions      []dialogTemplate
+	shipOptions      []dialogTemplate   // 規格036 READY：空貨艙完整三列。
+	shipOptionSets   [][]dialogTemplate // 規格036 READY：正常載貨與下錨的完整列組合。
+	lines            []dialogTemplate   // 目標166：逐行清單比對用的單行模板
+	seen             map[string]bool    // 已載入的訊息鍵（跨語料檢查重複）
+	terms            map[string]string  // 英文→譯名；定稿譯名彼此衝突者為空字串（視為查無）
+	canon            map[string]bool    // 目標167：來自定稿譯名表（優先於 NAMES.TXT 對照）的詞
+	fonts            map[int]*dialogFont
+	// 規格035：只供已取證 ABANDON 正文的殖民地名稱欄；來源綁定有效時由前端接入。
+	colonyValue     func(string) string
+	saveDescription func(string) (string, bool)
 }
 
 type dialogChar struct {
-	c      byte
-	box    image.Rectangle // 無墨跡（空白）時為空矩形
-	colors map[byte]int    // 目標166：本字改色點的色號分布
+	c                  byte
+	box                image.Rectangle // 無墨跡（空白）時為空矩形
+	colors             map[byte]int    // 目標166：本字改色點的色號分布
+	contig             bool            // 目標178：來自段內連續字串（選單的停用項目）
+	prefixContinuation bool            // 規格036：暫留無墨跡熱鍵前綴，收尾須確認後續字形。
 }
 
 type dialogGlyph struct {
@@ -152,6 +164,51 @@ func (cat *dialogCatalog) addCorpus(corpus, game []byte, gameSHA string, exclude
 			zh = strings.ReplaceAll(zh, `\n`, "")
 		}
 		cat.templates = append(cat.templates, makeDialogTemplate(r["message_id"], body, zh, centered))
+		// 規格035／036 READY：原始整列仍先以完整來源雜湊驗證，加入已驗第3至5列及駐守後第2列；未驗第1列不加入。
+		if r["message_id"] == "GAME.TXT:@UNITOPTIONS:0x00009A64" {
+			eo := strings.Split(strings.TrimSpace(body), "\r\n")
+			zo := strings.Split(r["zh_hant"], `\n`)
+			if len(eo) == 5 && len(zo) == 5 && eo[1] == "Clear orders." && eo[2] == "Sentry / Board ship." && eo[3] == "Fortify." && eo[4] == "No changes." {
+				for i := 1; i < 5; i++ {
+					cat.lines = append(cat.lines, makeDialogTemplate(fmt.Sprintf("%s#%d", r["message_id"], i+1), eo[i], zo[i], false))
+				}
+			}
+		}
+
+		// 規格035 READY：只載入原版已觀測的完整六列碼頭組合。
+		if r["message_id"] == "GAME.TXT:@ARMOPTIONS:0x000098AC" {
+			eo := strings.Split(strings.TrimSpace(body), "\r\n")
+			zo := strings.Split(r["zh_hant"], `\n`)
+			if len(eo) == 12 && len(zo) == 12 {
+				for _, i := range []int{0, 3, 5, 7, 9, 11} {
+					cat.dockOptions = append(cat.dockOptions, makeDialogTemplate(fmt.Sprintf("%s#%d", r["message_id"], i+1), eo[i], zo[i], false))
+				}
+				for _, indices := range [][]int{{1, 3, 5, 7, 9, 11}, {0, 4, 7, 11}, {1, 4, 7, 11}, {1, 6, 11}, {1, 3, 8, 11}, {0, 10, 11}, {1, 10, 11}, {0, 2, 3, 5, 7, 9, 11}} {
+					var group []dialogTemplate
+					for _, i := range indices {
+						group = append(group, makeDialogTemplate(fmt.Sprintf("%s#%d", r["message_id"], i+1), eo[i], zo[i], false))
+					}
+					cat.dockOptionSets = append(cat.dockOptionSets, group)
+				}
+
+			}
+		}
+		if r["message_id"] == "GAME.TXT:@SHIPOPTIONS:0x00009AC0" {
+			eo := strings.Split(strings.TrimSpace(body), "\r\n")
+			zo := strings.Split(r["zh_hant"], `\n`)
+			if len(eo) == 6 && len(zo) == 6 && eo[1] == "Clear orders." && eo[2] == "Sentry." && eo[3] == "Anchor in harbor (\"Fortify\")." && eo[5] == "No changes." && eo[4] == "Unload all cargo." {
+				for _, indices := range [][]int{{2, 3, 4, 5}, {1, 2, 5}} {
+					group := make([]dialogTemplate, 0, len(indices))
+					for _, i := range indices {
+						group = append(group, makeDialogTemplate(fmt.Sprintf("%s#%d", r["message_id"], i+1), eo[i], zo[i], false))
+					}
+					cat.shipOptionSets = append(cat.shipOptionSets, group)
+				}
+				for _, i := range []int{2, 3, 5} {
+					cat.shipOptions = append(cat.shipOptions, makeDialogTemplate(fmt.Sprintf("%s#%d", r["message_id"], i+1), eo[i], zo[i], false))
+				}
+			}
+		}
 		if !centered && !strings.Contains(body, "\r\n") {
 			cat.lines = append(cat.lines, makeDialogTemplate(r["message_id"], body, zh, false))
 		}
@@ -169,7 +226,11 @@ func (cat *dialogCatalog) addCorpus(corpus, game []byte, gameSHA string, exclude
 				}
 			}
 			if len(eo) == len(zo) {
+				if len(eo) > 0 && cat.messageOptions == nil {
+					cat.messageOptions = map[string][]dialogTemplate{}
+				}
 				for i := range eo {
+					cat.messageOptions[r["message_id"]] = append(cat.messageOptions[r["message_id"]], makeDialogTemplate(fmt.Sprintf("%s#%d", r["message_id"], i+1), eo[i], zo[i], false))
 					cat.lines = append(cat.lines, makeDialogTemplate(fmt.Sprintf("%s#%d", r["message_id"], i+1), eo[i], zo[i], false))
 				}
 			}
@@ -204,18 +265,30 @@ func (c *dialogCatalog) addPedia(tsv, pedia []byte) error {
 			return fmt.Errorf("重複鍵：%s", r["message_id"])
 		}
 		c.seen[r["message_id"]] = true
-		// 原文逐位元組轉成碼位（CP437 的 0xF9 項目符號成為 U+00F9），與執行期重組顯示字串的方式相同。
+		// 原文逐位元組轉成碼位；規格036證實0xF9在此印字入口不繪製，匹配正文時略去。
 		body := make([]rune, len(raw))
 		for i, b := range raw {
 			body[i] = rune(b)
 		}
-		c.templates = append(c.templates, makeDialogTemplate(r["message_id"], string(body), r["zh_hant"], true))
+		// 規格036目標180：百科原版將 %% 顯示為 %；TSV 原始控制碼仍保留。
+		shownBody := strings.NewReplacer("%%", "%", "\u00F9", "").Replace(string(body))
+		shownZh := strings.NewReplacer("%%", "%", `\t`, "\t").Replace(r["zh_hant"])
+		t := makeDialogTemplate(r["message_id"], shownBody, shownZh, true)
+		escaped := strings.Count(r["zh_hant"], "%%")
+		if strings.Count(r["zh_hant"], "%") == 2*escaped {
+			t.literalPercents = escaped
+		}
+		c.templates = append(c.templates, t)
 	}
 	return nil
 }
 
 func makeDialogTemplate(id, body, zh string, centered bool) dialogTemplate {
 	body = dialogNormalize(strings.NewReplacer("{", "", "}", "", "^", "", "\r\n", " ").Replace(body))
+	// 規格035／036 READY：只處理已取證的同一強調群組，不猜原版兩個變數的分界。
+	if id == "GAME.TXT:@COLONYUNIT:0x00009A33" && body == "Options for %STRING0%STRING1:" && zh == "{%STRING0%STRING1}的選項：" {
+		return dialogTemplate{id: id, re: regexp.MustCompile(`^Options for (.+?):$`), names: []string{"%STRING0%STRING1"}, quoted: []bool{false}, zh: zh, centered: centered}
+	}
 	pattern, names, quoted := "^", []string{}, []bool{}
 	last := 0
 	for _, m := range dialogVar.FindAllStringIndex(body, -1) {
@@ -248,6 +321,10 @@ func (c *dialogCatalog) addDraft(draft []byte, files map[string][]byte, exclude 
 		return fmt.Errorf("譯稿 TSV 欄位不符")
 	}
 	for _, r := range rows {
+		// 此列由來源驗證的槽位專用回呼載入。
+		if r["candidate_id"] == slotEmptyID {
+			continue
+		}
 		data, ok := files[r["source_file"]]
 		if !ok || exclude[r["candidate_id"]] {
 			continue
@@ -276,6 +353,10 @@ func (c *dialogCatalog) addDraft(draft []byte, files map[string][]byte, exclude 
 			continue
 		}
 		c.lines = append(c.lines, makeDialogTemplate(r["candidate_id"], raw, zh, false))
+		// 規格035 SAVEGOOD：已驗完整正文，原版會自動折行。
+		if r["candidate_id"] == "GAME.TXT:0x000007B9" && r["source_file"] == "GAME.TXT" {
+			c.templates = append(c.templates, makeDialogTemplate(r["candidate_id"], raw, zh, false))
+		}
 	}
 	return nil
 }
@@ -374,6 +455,12 @@ func (c *dialogCatalog) addNamePairs(en, zh string) {
 }
 
 // dialogShownText 依逐字事件重組原版顯示字串：x 回捲即換行，行間補一個空白，再壓縮空白。
+// dialogHotkeyMark 判斷選單熱鍵記號 `~`：連續字串路徑會把它讀進來但不印出（沒有墨跡），逐字路徑則不含它。
+func dialogHotkeyMark(ch dialogChar) bool { return ch.c == '~' && ch.box.Empty() }
+
+// dialogNonprintingBullet 保留原始事件，但不把已取證的無墨跡F9放入顯示字串（規格036目標180）。
+func dialogNonprintingBullet(ch dialogChar) bool { return ch.c == 0xF9 && ch.box.Empty() }
+
 func dialogShownText(chars []dialogChar) string {
 	var b strings.Builder
 	lastX := -1
@@ -384,7 +471,7 @@ func dialogShownText(chars []dialogChar) string {
 			}
 			lastX = ch.box.Min.X
 		}
-		if ch.c != 0 {
+		if ch.c != 0 && !dialogHotkeyMark(ch) && !dialogNonprintingBullet(ch) {
 			b.WriteByte(ch.c)
 		}
 	}
@@ -403,6 +490,8 @@ func (c *dialogCatalog) match(shown string) (id, zh, reason string) {
 }
 
 // matchIn 在指定模板集合中整句比對；數字與純數值變數原樣保留，其餘查譯名。
+var dialogSaveFilename = regexp.MustCompile(`^COLONY[0-9]{2}[.]SAV$`)
+
 func (c *dialogCatalog) matchIn(list []dialogTemplate, shown string) (*dialogTemplate, string, string) {
 	var hit *dialogTemplate
 	var groups []string
@@ -421,7 +510,54 @@ func (c *dialogCatalog) matchIn(list []dialogTemplate, shown string) (*dialogTem
 	zh := hit.zh
 	for i, name := range hit.names {
 		v := groups[i]
-		if !strings.HasPrefix(name, "%NUMBER") && !dialogPlainValue.MatchString(v) && !hit.quoted[i] {
+		if hit.id == "GAME.TXT:0x00000854" && name == "%STRING0" {
+			// 規格035：已取證的讀檔成功欄位只保留已量測格式的檔名，不經術語翻譯。
+			if !dialogSaveFilename.MatchString(v) {
+				return hit, "", "unverified-save-filename"
+			}
+		} else if hit.id == "GAME.TXT:0x000007B9" && name == "%STRING0" {
+			if !dialogSaveFilename.MatchString(v) {
+				return hit, "", "unverified-save-filename"
+			}
+		} else if hit.id == "GAME.TXT:0x000007B9" && name == "%STRING1" {
+			if c.saveDescription == nil {
+				return hit, "", "unverified-save-description"
+			}
+			var ok bool
+			v, ok = c.saveDescription(v)
+			if !ok {
+				return hit, "", "unverified-save-description"
+			}
+		} else if hit.id == "GAME.TXT:@TUTORIAL12" && name == "%STRING0" {
+			// 規格035 READY：名稱只經殖民地顯示回呼，拒絕玩家強調碼。
+			if c.colonyValue == nil {
+				return hit, "", "unverified-colony-name"
+			}
+			if strings.ContainsAny(v, "{}") {
+				return hit, "", "unrenderable-variable"
+			}
+			v = c.colonyValue(v)
+		} else if (hit.id == "GAME.TXT:@CARGOLOAD:0x0000862B" || hit.id == "GAME.TXT:@CARGOUNLOAD:0x0000866E") && name == "%STRING0" {
+			if c.colonyValue == nil {
+				return hit, "", "cargo-colony-provider-unavailable"
+			}
+			if strings.ContainsAny(v, "{}") {
+				return hit, "", "unrenderable-variable"
+			}
+			v = c.colonyValue(v)
+		} else if hit.id == "GAME.TXT:@ABANDON:0x00001994" && name == "%STRING0" && c.colonyValue != nil {
+			// 名稱是玩家資料，不能交給一般術語或強調碼解讀。
+			if strings.ContainsAny(v, "{}") {
+				return hit, "", "unrenderable-variable"
+			}
+			v = c.colonyValue(v)
+		} else if hit.id == "GAME.TXT:@COLONYUNIT:0x00009A33" && name == "%STRING0%STRING1" {
+			tr := c.unitCaptionNames[v]
+			if tr == "" {
+				return hit, "", "unverified-unit-caption-name"
+			}
+			v = tr
+		} else if !strings.HasPrefix(name, "%NUMBER") && !dialogPlainValue.MatchString(v) && !hit.quoted[i] {
 			tr := c.terms[v]
 			if tr == "" {
 				return hit, "", "variable-without-term"
@@ -430,7 +566,7 @@ func (c *dialogCatalog) matchIn(list []dialogTemplate, shown string) (*dialogTem
 		}
 		zh = strings.Replace(zh, name, v, -1)
 	}
-	if strings.Contains(zh, "%") {
+	if strings.Count(zh, "%") != hit.literalPercents {
 		return hit, "", "unresolved-variable"
 	}
 	return hit, zh, ""
@@ -646,15 +782,21 @@ type dialogRun struct {
 	lastText      map[int]bool
 	shadowWritten bool
 	others        image.Rectangle // 段內其他寫入者（游標除外）的範圍
+	contig        bool            // 目標178：段內連續字串（停用項目）讀取中
+	contigNext    uint32          // 連續字串下一個預期位址
 }
 
 type dialogShown struct {
+	optionBody             []byte // 正文印完的原版安全區；只供同框選項識別，不寫回原版。
 	id, zh, reason         string
-	normalC, accentC       byte // 目標166：原版觀測字色
-	shadowC                byte // 0 表示原版沒有陰影
+	normalC, accentC       byte     // 目標166：原版觀測字色
+	shadowC                byte     // 0 表示原版沒有陰影
+	dimC                   byte     // 目標178：行色層的色號（停用項目）
+	items                  []string // 目標178：逐行清單各行的原文（供普查逐行歸屬）
 	safe                   image.Rectangle
 	before                 []byte
 	shadow, normal, accent *image.Alpha
+	dim                    *image.Alpha // 目標178：主色號不是一般色也不是強調色的行；沒有這種行時為 nil
 	size                   int
 	phase                  string // waiting-screen、active、expired
 	complete               uint64
@@ -672,24 +814,130 @@ type dialogRuntime struct {
 	accepted   int
 	misses     map[string]int // 有陰影色但未能中文化的顯示字串與原因
 	// 目標172：逐行清單的行查不到逐行模板時，改問規格038 字串層的字典與模板（對話框選項列、選單）。
-	lineFallback func(string) (string, bool)
+	lineFallback   func(string) (string, bool)
+	lineFallbackAt func(string, int) (string, bool) // 規格038 READY：只傳完整清單的來源列索引。
+	slotFallback   func(string) (string, bool)
+}
+
+// fallbackLine 不向標籤或分欄回呼提供清單列身分。
+func (d *dialogRuntime) fallbackLine(text string, lineIndex int) (string, bool) {
+	if d.lineFallbackAt != nil {
+		if zh, ok := d.lineFallbackAt(text, lineIndex); ok {
+			return zh, true
+		}
+	}
+	if d.lineFallback != nil {
+		return d.lineFallback(text)
+	}
+	return "", false
 }
 
 const dialogGap = 20000 // 兩萬步內無讀取即視為一段結束（字距約 800～1,400 步、換行約 2,500 步）
 
+// menuListNext 判斷段內連續字串的首字（已畫出）是否接在垂直清單的下一列：
+// 左緣與上一行對齊（差 ≤1 邏輯像素）且在其下方（目標178，規格036 附記規則 1）。
+func menuListNext(chars []dialogChar) bool {
+	first := chars[len(chars)-1]
+	if first.box.Empty() {
+		return false
+	}
+	lines := runLines(chars[:len(chars)-1])
+	if len(lines) == 0 {
+		return false
+	}
+	last := lines[len(lines)-1]
+	return abs(first.box.Min.X-last.box.Min.X) <= 1 && first.box.Min.Y > last.box.Min.Y
+}
+
+// menuPrefixNext 只暫留既有清單後的無墨跡熱鍵前綴；還不能據此啟用覆蓋。
+func menuPrefixNext(chars []dialogChar, next byte) bool {
+	if len(chars) < 3 || next < 'A' || (next > 'Z' && next < 'a') || next > 'z' {
+		return false
+	}
+	first := chars[len(chars)-1]
+	if first.c != '~' || !first.box.Empty() {
+		return false
+	}
+	lines := runLines(chars[:len(chars)-1])
+	if len(lines) < 2 {
+		return false
+	}
+	for i := 1; i < len(lines); i++ {
+		if abs(lines[i].box.Min.X-lines[0].box.Min.X) > 1 {
+			return false
+		}
+	}
+	return true
+}
+
+// menuPrefixesValid 用真正字形確認暫留項目仍接在清單下一列。
+func menuPrefixesValid(chars []dialogChar) bool {
+	for i, ch := range chars {
+		if !ch.prefixContinuation {
+			continue
+		}
+		lines := runLines(chars[:i])
+		if len(lines) < 2 {
+			return false
+		}
+		var first image.Rectangle
+		for _, next := range chars[i+1:] {
+			if !next.contig {
+				break
+			}
+			if !next.box.Empty() {
+				first = next.box
+				break
+			}
+		}
+		last := lines[len(lines)-1].box
+		if first.Empty() || abs(first.Min.X-last.Min.X) > 1 || first.Min.Y <= last.Min.Y {
+			return false
+		}
+	}
+	return true
+}
+
 // onRead 處理一次 0D21:00C6 讀取；若上一段已結束，先回傳該段供呼叫端收尾。
 func (d *dialogRuntime) onRead(a uint32, v byte, step uint64) (finished *dialogRun) {
 	if r := d.run; r != nil && step-r.last < dialogGap {
-		if r.readPos%2 == 1 && a == r.base+1 {
+		// 原版F9直接返回，沒有讀base+1的0；只在下一字同基址重讀時補齊觀測配對。
+		if !r.contig && r.readPos%2 == 1 && a == r.base && len(r.chars) > 0 && dialogNonprintingBullet(r.chars[len(r.chars)-1]) {
+			r.readPos++
+		}
+		if r.contig && a == r.contigNext {
+			r.last = step
+			if v == 0 {
+				r.contig = false
+				if r.readPos%2 == 1 {
+					r.readPos++
+				}
+			} else {
+				r.chars = append(r.chars, dialogChar{c: v, contig: true})
+				r.contigNext++
+			}
+			return nil
+		}
+		if !r.contig && r.readPos%2 == 1 && a == r.base+1 {
 			if v != 0 {
-				d.run = nil // 連續字串（狀態欄、選單列），不是逐字對話
+				if len(r.chars) < 2 || (!menuListNext(r.chars) && !menuPrefixNext(r.chars, v)) {
+					d.run = nil // 連續字串（狀態欄、選單列、殖民地畫面的數字），不是逐字對話
+					return nil
+				}
+				// 目標178：段內已有完整項目時，基址後接非 0 位元組表示這一項是連續字串（選單的停用項目），
+				// 屬於同一段；讀到 0 才結束，其後仍從基址重讀「字元、0」。
+				r.chars[len(r.chars)-1].prefixContinuation = r.chars[len(r.chars)-1].box.Empty()
+				r.contig, r.contigNext = true, a+1
+				r.chars[len(r.chars)-1].contig = true
+				r.chars = append(r.chars, dialogChar{c: v, contig: true})
+				r.last = step
 				return nil
 			}
 			r.readPos++
 			r.last = step
 			return nil
 		}
-		if r.readPos%2 == 0 && a == r.base {
+		if !r.contig && r.readPos%2 == 0 && a == r.base {
 			r.chars = append(r.chars, dialogChar{c: v})
 			r.readPos++
 			r.last = step
@@ -741,7 +989,9 @@ func (r *dialogRun) dialogLike() bool {
 	for _, ch := range r.chars {
 		if !ch.box.Empty() {
 			ink = ink.Union(ch.box)
-			n++
+			if !ch.contig { // 目標178：併入的連續字串（例如殖民地畫面的數字與按鈕）不讓整段像訊息框
+				n++
+			}
 		}
 	}
 	// 目標170：不再限制 x<240（港口說明框、訓練對話框延伸到右側）；狀態欄是連續字串，不經本判斷。
@@ -823,7 +1073,7 @@ func runLines(chars []dialogChar) []runLine {
 				cur.capH = max(cur.capH, ch.box.Dy())
 			}
 		}
-		if ch.c != 0 {
+		if ch.c != 0 && !dialogHotkeyMark(ch) && !dialogNonprintingBullet(ch) {
 			cur.text += string(rune(ch.c))
 		}
 		if ch.c == '=' {
@@ -908,14 +1158,93 @@ func observedPitch(lines []runLine, fallback int) int {
 	return p
 }
 
+// 行色層（目標178，規格036 附記）。
+const (
+	layerNormal = iota // 一般色層（含整行強調層的行）
+	layerDim           // 第三層，整行單色，不用熱鍵強調
+)
+
+// lineDominant 回傳一行的主色號與前景色數；木紋陰影47同時排除已驗下方陰影128。
+// 其他陰影配色只排除指定色，同數取色號較小者。
+func lineDominant(l runLine, shadowC byte) (dom byte, kinds int) {
+	best := -1
+	for c, n := range l.colors {
+		if c == shadowC || (shadowC == 47 && c == 128) {
+			continue
+		}
+		kinds++
+		if n > best || (n == best && c < dom) {
+			dom, best = c, n
+		}
+	}
+	return dom, kinds
+}
+
+// lineRoles 決定逐行清單的強調色與各行所屬色層：
+// 含兩種以上色號的行，其次要色號（合計最多者）是強調色，優先於全段字元主色統計；
+// 主色號既不是一般色也不是強調色的行歸第三層，全段只允許一種第三色號。
+func lineRoles(lines []runLine, normalC, accentC, shadowC byte) (accent, dimC byte, layers []int, why string) {
+	accent = accentC
+	minor := map[byte]int{}
+	for _, l := range lines {
+		dom, kinds := lineDominant(l, shadowC)
+		if kinds < 2 {
+			continue
+		}
+		for c, n := range l.colors {
+			if c != shadowC && !(shadowC == 47 && c == 128) && c != dom {
+				minor[c] += n
+			}
+		}
+	}
+	best := -1
+	for c, n := range minor {
+		if n > best || (n == best && c < accent) {
+			accent, best = c, n
+		}
+	}
+	layers = make([]int, len(lines))
+	for i, l := range lines {
+		dom, kinds := lineDominant(l, shadowC)
+		if dom == normalC || (dom == accent && accent != 0 && accent != normalC) {
+			continue
+		}
+		// 規格036 接手補審：第三層混色沒有原版證據，回原文。
+		if kinds >= 2 {
+			return accent, 0, nil, "line-colors"
+		}
+		if dimC != 0 && dimC != dom {
+			return accent, 0, nil, "line-colors"
+		}
+		dimC = dom
+		layers[i] = layerDim
+	}
+	return accent, dimC, layers, ""
+}
+
 // finish 對一段已結束的逐字事件做比對與版面；回傳要顯示的狀態，或原因（無墨跡時兩者皆空）。
 func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialogShown, string, string) {
 	if r == nil || r.readPos%2 == 1 {
 		return nil, "", ""
 	}
+	if !menuPrefixesValid(r.chars) {
+		return nil, dialogShownText(r.chars), "contiguous-prefix-layout"
+	}
 	lines := runLines(r.chars)
 	if len(lines) == 0 {
 		return nil, "", ""
+	}
+	// 目標178（規格036 附記規則 1）：段內併入連續字串時，各行必須左緣對齊（垂直清單）；
+	// 否則是混合多個元件的畫面（例如殖民地畫面），靜默略過，由字串層各自處理。
+	for _, ch := range r.chars {
+		if ch.contig {
+			for _, l := range lines[1:] {
+				if abs(l.box.Min.X-lines[0].box.Min.X) > 1 {
+					return nil, "", ""
+				}
+			}
+			break
+		}
 	}
 	var ink image.Rectangle
 	first := -1
@@ -928,6 +1257,27 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 		}
 	}
 	shown := dialogShownText(r.chars)
+	slotList := d.slotListContext(len(lines))
+	// 規格035：候選收尾前已被完全抹除，不把舊文字覆蓋到新畫面。
+	if len(r.firstOld) > 0 {
+		alive := false
+		for _, text := range r.lastText {
+			alive = alive || text
+		}
+		// 規格036：新前綴候選須完整存活，不能把關框後殘存的一點當成整份清單仍顯示。
+		prefix, intact := false, true
+		for _, ch := range r.chars {
+			prefix = prefix || ch.prefixContinuation
+		}
+		if prefix || slotList {
+			for i := range r.firstOld {
+				intact = intact && r.lastText[i]
+			}
+		}
+		if !alive || ((prefix || slotList) && !intact) {
+			return nil, shown, "text-erased-before-finish"
+		}
+	}
 	before := bytes.Clone(canvas)
 	for i, text := range r.lastText {
 		if text {
@@ -960,6 +1310,11 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 			}
 			st.id, st.zh = t.id, zh
 			return st, shown, ""
+		}
+		// 規格035 READY：標題須從原版文字起點繪製，保留左側圖示與原版基線。
+		if t.id == "GAME.TXT:@COLONYUNIT:0x00009A33" {
+			st.safe.Min.X = max(st.safe.Min.X, ink.Min.X-1)
+			st.safe.Min.Y = max(st.safe.Min.Y, ink.Min.Y-1)
 		}
 		// 目標167：印字期間其他寫入者（例如顧問肖像壓在框上）不撤銷；逐點以最後寫入者重建印前底圖，
 		// 只還原最後由改色常式寫下的像素，肖像像素保留原版印後值。
@@ -996,12 +1351,44 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 		return st, shown, ""
 	case why == "no-template":
 		// 逐行清單：每一行都必須各自唯一命中；任何一行不中即整段回原文。
+		// 目標178：先決定強調色與各行色層（停用項目的第三色）。
+		accentC, dimC, layers, rwhy := lineRoles(lines, normalC, accentC, shadowC)
+		dockList := d.cat.observedDockOptions(lines)
+		if dockList != nil && normalC == 68 && st.accentC == 149 && shadowC == 47 {
+			// 規格035 READY：六個已驗字格／來源組合的68／149／47已直接量測。
+			accentC, dimC, layers, rwhy = 149, 0, make([]int, len(lines)), ""
+		} else {
+			dockList = nil
+		}
+
+		if rwhy != "" {
+			return nil, shown, rwhy
+		}
+		st.accentC, st.dimC = accentC, dimC
+		shipList := d.cat.observedShipOptions(lines)
+		if shipList == nil {
+			shipList = dockList
+		}
+		optionList, optionWhy, optionHandled := d.parentChoices(lines, canvas, step)
+		if shipList == nil && optionHandled && optionWhy != "" {
+			return nil, shown, optionWhy
+		}
 		items := make([]string, len(lines))
 		id := ""
 		for i, l := range lines {
 			var lt *dialogTemplate
 			lzh, lwhy := "", "no-template"
-			if left, right, ok := strings.Cut(l.text, " = "); ok && !l.right.Empty() && d.lineFallback != nil {
+			if slotList {
+				if d.slotFallback == nil {
+					return nil, shown, "slot-no-translation"
+				}
+				var ok bool
+				lzh, ok = d.slotFallback(l.text)
+				if !ok {
+					return nil, shown, "slot-no-translation"
+				}
+				lwhy, id = "", "STRING:save-slot"
+			} else if left, right, ok := strings.Cut(l.text, " = "); ok && !l.right.Empty() && d.lineFallback != nil {
 				// 目標172：「=」是右對齊標記：左欄、右欄分別翻譯，以 \t 分隔交給 lineMasks 分欄排版。
 				lz, ok1 := d.lineFallback(left)
 				rz, ok2 := d.lineFallback(right)
@@ -1022,9 +1409,15 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 					id = "STRING:line"
 				}
 			} else {
-				lt, lzh, lwhy = d.cat.matchIn(d.cat.lines, l.text)
-				if lwhy != "" && d.lineFallback != nil {
-					if zh, ok := d.lineFallback(l.text); ok {
+				if shipList != nil {
+					lt, lzh, lwhy = d.cat.matchIn(shipList[i:i+1], l.text)
+				} else if optionHandled {
+					lt, lzh, lwhy = d.cat.matchIn(optionList[i:i+1], l.text)
+				} else {
+					lt, lzh, lwhy = d.cat.matchIn(d.cat.lines, l.text)
+				}
+				if lwhy != "" && (d.lineFallback != nil || d.lineFallbackAt != nil) {
+					if zh, ok := d.fallbackLine(l.text, i); ok {
 						lzh, lwhy, lt = zh, "", nil
 						if id == "" {
 							id = "STRING:line"
@@ -1037,13 +1430,8 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 			}
 			items[i] = lzh
 			// 目標172：本行主要色號是整段的第二色（例如買不起的灰色選項）時，整行用強調層（該色）畫。
-			if dom, best := byte(0), 0; accentC != 0 && accentC != normalC {
-				for c, n := range l.colors {
-					if c != shadowC && n > best {
-						dom, best = c, n
-					}
-				}
-				if dom == accentC && !strings.ContainsAny(lzh, "{}") {
+			if layers[i] == layerNormal && accentC != 0 && accentC != normalC {
+				if dom, _ := lineDominant(l, shadowC); dom == accentC && !strings.ContainsAny(lzh, "{}") {
 					items[i] = "{" + strings.ReplaceAll(lzh, "\t", "}\t{") + "}"
 				}
 			}
@@ -1056,13 +1444,22 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 			union = union.Union(l.box)
 		}
 		st.safe = image.Rect(union.Min.X-1, union.Min.Y-1, union.Max.X+2, union.Max.Y+2).Intersect(image.Rect(0, 0, 320, 200))
-		st.shadow, st.normal, st.accent, st.size = d.cat.lineMasks(items, lines, st.safe, observedPitch(lines, union.Dy()+3), shadowC != 0)
+		// LOADGAME 標題下一列已是槽位反白邊緣，保留墨跡外一列即可。
+		if len(lines) == 1 && id == "GAME.TXT:0x00000826" {
+			st.safe.Max.Y = union.Max.Y + 1
+		}
+		st.shadow, st.normal, st.accent, st.dim, st.size = d.cat.lineLayerMasks(items, lines, st.safe,
+			observedPitch(lines, union.Dy()+3), shadowC != 0, layers)
 		if len(lines) == 1 {
 			st.id = id
 		} else {
 			st.id = id + "+list"
 		}
 		st.zh = strings.Join(items, "／")
+		st.items = make([]string, len(lines))
+		for i, l := range lines {
+			st.items[i] = l.text
+		}
 		if st.size == 0 {
 			return nil, shown, "layout-overflow"
 		}
@@ -1074,6 +1471,9 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 		return nil, shown, "layout-overflow"
 	}
 	st.id, st.zh = t.id, zh
+	if len(d.cat.messageOptions[st.id]) > 0 && len(canvas) == 320*200 {
+		st.optionBody = rectBytes(canvas, st.safe)
+	}
 	return st, shown, ""
 }
 
@@ -1081,6 +1481,13 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 // 中文墨跡高不超過原版大寫字墨跡高的 4 倍（逐段取最大者），也不超過行距；
 // 寬度不得超過整段最右緣。任一行放不下即整段回原文。
 func (c *dialogCatalog) lineMasks(items []string, lines []runLine, safe image.Rectangle, pitch int, shadow bool) (sh, n, ac *image.Alpha, size int) {
+	sh, n, ac, _, size = c.lineLayerMasks(items, lines, safe, pitch, shadow, nil)
+	return sh, n, ac, size
+}
+
+// lineLayerMasks 同 lineMasks；layers 依行指定色層（目標178）：第三層的行畫在 dm，
+// layerDim 的行不畫強調字母。沒有第三層的行時 dm 為 nil。
+func (c *dialogCatalog) lineLayerMasks(items []string, lines []runLine, safe image.Rectangle, pitch int, shadow bool, layers []int) (sh, n, ac, dm *image.Alpha, size int) {
 	rect := image.Rect(0, 0, safe.Dx()*4, safe.Dy()*4)
 	capH := 0
 	for _, l := range lines {
@@ -1092,9 +1499,19 @@ func (c *dialogCatalog) lineMasks(items []string, lines []runLine, safe image.Re
 		if f == nil || f.cjkBottom-f.cjkTop > pitch*4-4 || f.cjkBottom-f.cjkTop > capH*4 {
 			continue
 		}
-		sh, n, ac = image.NewAlpha(rect), image.NewAlpha(rect), image.NewAlpha(rect)
+		sh, n, ac, dm = image.NewAlpha(rect), image.NewAlpha(rect), image.NewAlpha(rect), image.NewAlpha(rect)
+		usedDim := false
 		ok := true
 		for i, l := range lines {
+			layer := layerNormal
+			if i < len(layers) {
+				layer = layers[i]
+			}
+			usedDim = usedDim || layer != layerNormal
+			base := n
+			if layer != layerNormal {
+				base = dm
+			}
 			y := (l.box.Min.Y-safe.Min.Y)*4 - f.cjkTop
 			// 目標172：含 \t 的項目分兩欄：左欄靠原版行左緣，右欄右緣對齊原版右欄墨跡右緣。
 			cols := strings.SplitN(items[i], "\t", 2)
@@ -1120,11 +1537,11 @@ func (c *dialogCatalog) lineMasks(items []string, lines []runLine, safe image.Re
 				}
 				for _, g := range glyphs {
 					a := f.glyphs[g.r]
-					dialogBlit(n, a, x, y)
+					dialogBlit(base, a, x, y)
 					if shadow {
 						dialogBlit(sh, a, x+4, y+4)
 					}
-					if g.accent {
+					if g.accent && layer != layerDim {
 						dialogBlit(ac, a, x, y)
 					}
 					x += f.widths[g.r]
@@ -1136,10 +1553,13 @@ func (c *dialogCatalog) lineMasks(items []string, lines []runLine, safe image.Re
 			}
 		}
 		if ok {
-			return sh, n, ac, size
+			if !usedDim {
+				dm = nil
+			}
+			return sh, n, ac, dm, size
 		}
 	}
-	return nil, nil, nil, 0
+	return nil, nil, nil, nil, 0
 }
 
 // centeredMasks 排版含 ^ 置中碼的譯稿：^^ 開頭的行置中、單獨的 ^ 為空行、其餘相鄰行合併後依寬度重排。
@@ -1236,4 +1656,216 @@ func (c *dialogCatalog) centeredMasks(zh string, w, h, pitch int, shadow bool) (
 		return sh, n, ac, size
 	}
 	return nil, nil, nil, 0
+}
+
+func saveSlotTitle(st *dialogShown) bool {
+	return st != nil && (st.phase == "waiting-screen" || st.phase == "active") && (st.id == "GAME.TXT:0x00000826" || st.id == "GAME.TXT:0x0000078E")
+}
+
+func (d *dialogRuntime) slotListContext(rows int) bool {
+	if rows != 8 && rows != 10 {
+		return false
+	}
+	return saveSlotTitle(d.cur) || (d.cur != nil && d.cur.id == "STRING:save-slot+list" && (d.cur.phase == "waiting-screen" || d.cur.phase == "active") && saveSlotTitle(d.prev))
+}
+
+// 自己的槽位清單重印時，標題仍須逐像素完全相同；不延長其他對話框。
+func (d *dialogRuntime) retainSlotTitle(st *dialogShown, canvas []byte) bool {
+	return st != nil && st.id == "STRING:save-slot+list" && d.cur != nil && d.cur.id == st.id && saveSlotTitle(d.prev) && d.prev.phase == "active" && !d.prev.safe.Overlaps(st.safe) && bytes.Equal(stringRect(canvas, d.prev.safe), d.prev.afterSafe)
+}
+
+// 規格035 READY：只取原版UNIT資料列的名稱欄，不解讀數值或遊戲規則。
+func (c *dialogCatalog) bindUnitCaptionNames(corpus, source []byte) bool {
+	c.unitCaptionNames = nil
+	const expected = "4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061"
+	if fmt.Sprintf("%x", sha256.Sum256(source)) != expected {
+		return false
+	}
+	marker := []byte("@UNIT\r\n")
+	if bytes.Count(source, marker) != 1 {
+		return false
+	}
+	start := bytes.Index(source, marker) + len(marker)
+	stop := len(source)
+	if n := bytes.Index(source[start:], []byte("\r\n@")); n >= 0 {
+		stop = start + n + 2
+	}
+	spans := map[int]int{}
+	for pos := start; pos < stop; {
+		end := stop
+		if n := bytes.IndexByte(source[pos:stop], '\n'); n >= 0 {
+			end = pos + n
+		}
+		lineEnd := end
+		if lineEnd > pos && source[lineEnd-1] == '\r' {
+			lineEnd--
+		}
+		if bytes.Contains(source[pos:lineEnd], []byte(",")) {
+			spans[pos] = lineEnd - pos
+		}
+		pos = end + 1
+	}
+	rows := splitTSV(corpus)
+	if rows == nil {
+		return false
+	}
+	values := map[string]string{}
+	for _, row := range rows {
+		if row["source_file"] != "NAMES.TXT" || !strings.HasPrefix(row["message_id"], "NAMES.TXT:@UNIT:") {
+			continue
+		}
+		off, e1 := strconv.ParseInt(row["text_offset"], 0, 64)
+		n, e2 := strconv.Atoi(row["text_byte_length"])
+		if e1 != nil || e2 != nil || off < 0 || n <= 0 || int(off)+n > len(source) || spans[int(off)] != n || row["source_file_sha256"] != expected {
+			return false
+		}
+		raw := source[int(off) : int(off)+n]
+		if fmt.Sprintf("%x", sha256.Sum256(raw)) != row["source_bytes_sha256"] {
+			return false
+		}
+		en, zh := strings.Split(string(raw), ","), strings.Split(row["zh_hant"], ",")
+		if len(en) != len(zh) || len(en) < 2 {
+			return false
+		}
+		key, value := dialogNormalize(en[0]), strings.TrimSpace(zh[0])
+		if key == "" || value == "" || strings.ContainsAny(value, "{}%\r\n\t") {
+			return false
+		}
+		if old, ok := values[key]; ok && old != value {
+			values[key] = ""
+		} else if !ok {
+			values[key] = value
+		}
+	}
+	if len(values) == 0 {
+		return false
+	}
+	for pos, n := range spans {
+		key := dialogNormalize(strings.SplitN(string(source[pos:pos+n]), ",", 2)[0])
+		if _, exists := values[key]; exists {
+			continue
+		}
+		value := c.terms[key]
+		if c.canon[key] && value != "" && !strings.ContainsAny(value, "{}%\r\n\t") {
+			values[key] = value
+		}
+	}
+	c.unitCaptionNames = values
+	return true
+}
+
+// 規格036 READY：只接受正常觀測的三種完整列組合，保持船隻及士兵來源獨立。
+func (c *dialogCatalog) observedShipOptions(lines []runLine) []dialogTemplate {
+	groups := append([][]dialogTemplate{c.shipOptions}, c.shipOptionSets...)
+	for _, group := range groups {
+		if len(group) == 0 || len(group) != len(lines) {
+			continue
+		}
+		matched := true
+		for i, l := range lines {
+			if _, _, why := c.matchIn(group[i:i+1], l.text); why != "" {
+				matched = false
+				break
+			}
+		}
+		if matched {
+			return group
+		}
+	}
+	return nil
+}
+
+func (c *dialogCatalog) matchesObservedShip(lines []runLine) bool {
+	return c.observedShipOptions(lines) != nil
+}
+
+// 規格035 READY：字格、色層、整份六列和來源模板皆須符合。
+
+func (c *dialogCatalog) observedDockOptions(lines []runLine) []dialogTemplate {
+	for _, group := range append([][]dialogTemplate{c.dockOptions}, c.dockOptionSets...) {
+		if len(group) != len(lines) || len(group) == 0 {
+			continue
+		}
+		y0 := 0
+		switch len(lines) {
+		case 7:
+			y0 = 67
+		case 6:
+			y0 = 73
+		case 4:
+			y0 = 85
+		case 3:
+			y0 = 91
+		default:
+			continue
+		}
+		matched := true
+		for i, l := range lines {
+			if l.box.Min != image.Pt(82, y0+i*12) || l.capH != 8 || l.box.Max.X > 234 || l.box.Max.Y > y0+i*12+9 {
+				matched = false
+				break
+			}
+			for color := range l.colors {
+				if color != 68 && color != 149 && color != 47 && color != 128 {
+					matched = false
+				}
+			}
+			if _, _, why := c.matchIn(group[i:i+1], l.text); why != "" {
+				matched = false
+				break
+			}
+		}
+		if matched {
+			return group
+		}
+	}
+	return nil
+}
+
+// 規格036 READY：完整選項僅借同一原版框內且未改印的已辨識正文。
+func (d *dialogRuntime) parentChoices(lines []runLine, canvas []byte, step uint64) ([]dialogTemplate, string, bool) {
+	if len(lines) == 0 || len(canvas) != 320*200 {
+		return nil, "", false
+	}
+	first, last := lines[0].box, lines[len(lines)-1].box
+	l, top, rt := scanDialogBox(canvas, last.Min.X, (last.Min.Y+last.Max.Y)/2, first.Min.X, first.Max.X, first.Min.Y)
+	if l == 0 || top == 0 || rt == 319 {
+		return nil, "", false
+	}
+	var selected []dialogTemplate
+	for _, body := range []*dialogShown{d.cur, d.prev} {
+		if body == nil || (body.phase != "active" && body.phase != "waiting-screen") || step < body.complete || step-body.complete >= 2000000 {
+			continue
+		}
+		group := d.cat.messageOptions[body.id]
+		if len(group) == 0 || len(body.optionBody) != body.safe.Dx()*body.safe.Dy() || !bytes.Equal(body.optionBody, rectBytes(canvas, body.safe)) {
+			continue
+		}
+		if body.safe.Min.X != l+3 || body.safe.Max.X != rt-3 || body.safe.Min.Y != top+3 || first.Min.Y < body.safe.Max.Y {
+			continue
+		}
+		fits := true
+		for _, line := range lines {
+			fits = fits && line.box.Min.X >= body.safe.Min.X && line.box.Max.X <= body.safe.Max.X
+		}
+		if !fits {
+			continue
+		}
+		if selected != nil {
+			return nil, "option-body-not-unique", true
+		}
+		selected = group
+	}
+	if selected == nil {
+		return nil, "", false
+	}
+	if len(selected) != len(lines) {
+		return nil, "option-count-mismatch", true
+	}
+	for i, line := range lines {
+		if _, _, why := d.cat.matchIn(selected[i:i+1], line.text); why != "" {
+			return nil, "option-" + why, true
+		}
+	}
+	return selected, "", true
 }

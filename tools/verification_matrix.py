@@ -59,6 +59,95 @@ def describe(base, name):
     return out, report.get("input_hashes")
 
 
+def source_identity(row, game, reports, repo):
+    """重跑來源證據，並將聲明綁定該列 GUI 輸入與完整原版終點。"""
+    claim = row.get("source_identity")
+    if not claim:
+        return None
+    base = reports / row["dir"]
+    args = [x.replace("{game}", str(game)).replace("{reports}", str(reports)).replace("{repo}", str(repo))
+            for x in claim["args"]]
+    checker = repo / "tools" / claim["checker"]
+    proc = subprocess.run([sys.executable, str(checker), *args], cwd=repo / "tools", capture_output=True)
+    result = {"status": {0: "PASS", 77: "SKIP"}.get(proc.returncode, "FAIL"),
+              "checker": claim["checker"], "checker_sha256": sha(checker.read_bytes()),
+              "checker_output_sha256": sha(proc.stdout)}
+    if result["status"] != "PASS":
+        result["error_tail"] = proc.stderr.decode("utf-8", "replace")[-400:]
+        return result
+    try:
+        proof = json.loads(proc.stdout)
+        if "--lookup-reports" not in args or Path(args[args.index("--lookup-reports") + 1]).resolve() != base.resolve():
+            raise ValueError("來源觀測目錄未綁定矩陣列")
+        aliases = proof["observed_template_source_aliases"]
+        if proof.get("result") != "PASS" or proof.get("grade") != "confirmed" or not aliases or aliases != claim["aliases"]:
+            raise ValueError("來源映射與已驗證據不同")
+        inputs = {sha(p.read_bytes()) for pat in row["gui_inputs"] for p in base.glob(pat)}
+        if proof["lookup_gui_inputs_sha256"] not in inputs:
+            raise ValueError("來源觀測使用了另一份 GUI 輸入")
+        controls = [json.loads((base / (name + ".json")).read_text())["state"]
+                    for name in receipts(base, row["control"])]
+        if not any(s["steps"] == proof["lookup_original_step"] and
+                   s["memory_sha256"] == proof["lookup_original_memory_sha256"] for s in controls):
+            raise ValueError("來源觀測完整原版終點不同")
+        result.update(aliases=aliases, grade=proof["grade"],
+                      gui_inputs_sha256=proof["lookup_gui_inputs_sha256"],
+                      original_step=proof["lookup_original_step"],
+                      original_memory_sha256=proof["lookup_original_memory_sha256"],
+                      evidence_sha256=proof["evidence_sha256"], limit=proof["limit"])
+    except (ValueError, KeyError, IndexError, TypeError) as exc:
+        result.update(status="FAIL", error_tail=str(exc))
+    return result
+
+
+def checked_fields(row, game, reports, repo):
+    """普查只採用該列檢查器實際驗過的鍵、原文與安全區。"""
+    if row.get('census_scope') != 'checker':
+        return None
+    base = reports / row['dir']
+    args = [x.replace('{game}', str(game)).replace('{reports}', str(reports)).replace('{repo}', str(repo))
+            for x in row['args']]
+    checker = repo / 'tools' / row['checker']
+    proc = subprocess.run([sys.executable, str(checker), *args], cwd=repo / 'tools', capture_output=True)
+    result = {'status': {0: 'PASS', 77: 'SKIP'}.get(proc.returncode, 'FAIL'),
+              'checker_sha256': sha(checker.read_bytes()), 'checker_output_sha256': sha(proc.stdout)}
+    if result['status'] != 'PASS':
+        result['error_tail'] = proc.stderr.decode('utf-8', 'replace')[-400:]
+        return result
+    try:
+        proof = json.loads(proc.stdout)
+        if proof.get('result') != 'PASS' or '--reports' not in args or Path(args[args.index('--reports') + 1]).resolve() != base.resolve():
+            raise ValueError('已驗欄位未綁定該列收據')
+        inputs = {sha(p.read_bytes()) for pat in row['gui_inputs'] for p in base.glob(pat)}
+        if proof['inputs_sha256'] not in inputs:
+            raise ValueError('已驗欄位使用另一份GUI輸入')
+        controls = [json.loads((base / (name + '.json')).read_text())['state']
+                    for name in receipts(base, row['control'])]
+        if not any(s['steps'] == proof['final_step'] and s['memory_sha256'] == proof['final_memory_sha256'] for s in controls):
+            raise ValueError('已驗欄位完整原版終點不同')
+        fields = proof['verified_fields']
+        if not fields or any(not isinstance(f['candidate_id'], str) or not f['candidate_id'] or
+                             not isinstance(f['shown'], str) or not f['shown'] or
+                             len(f['safe']) != 4 or any(type(v) is not int for v in f['safe']) or
+                             not (0 <= f['safe'][0] < f['safe'][2] <= 320 and 0 <= f['safe'][1] < f['safe'][3] <= 200)
+                             for f in fields):
+            raise ValueError('已驗欄位清冊不完整')
+        for field in fields:
+            if 'source_ids' in field:
+                ids = field['source_ids']
+                if (not isinstance(ids, list) or not ids or
+                        any(not isinstance(cid, str) or not cid for cid in ids) or len(set(ids)) != len(ids)):
+                    raise ValueError('已驗欄位原始來源清冊不合法')
+        unique = {(f['candidate_id'], f['shown'], tuple(f['safe'])) for f in fields}
+        if len(unique) != len(fields):
+            raise ValueError('已驗欄位重複')
+        result.update(fields=fields, field_count=len(fields), gui_inputs_sha256=proof['inputs_sha256'],
+                      original_step=proof['final_step'], original_memory_sha256=proof['final_memory_sha256'])
+    except (ValueError, KeyError, IndexError, TypeError) as exc:
+        result.update(status='FAIL', error_tail=str(exc))
+    return result
+
+
 def run_row(row, a):
     args = [x.replace("{game}", str(a.game)).replace("{reports}", str(a.reports)).replace("{repo}", str(a.repo))
             for x in row["args"]]
@@ -69,8 +158,22 @@ def run_row(row, a):
            "checker": row["checker"], "checker_sha256": sha((a.repo / "tools" / row["checker"]).read_bytes()),
            "status": status, "checker_output_sha256": sha(proc.stdout), "known_diffs": row["known_diffs"],
            "regenerate": row["regenerate"], "stale_since": row.get("stale_since")}
+    if row.get("key_evidence"):
+        out["key_evidence"] = row["key_evidence"]
+    if row.get("source_identity"):
+        identity = source_identity(row, a.game, a.reports, a.repo)
+        out["source_identity"] = identity
+        if status == "PASS" and identity["status"] != "PASS":
+            status = out["status"] = identity["status"]
+            out["error_tail"] = identity.get("error_tail", "來源證據未通過")
+    if row.get('census_scope'):
+        scope = checked_fields(row, a.game, a.reports, a.repo)
+        out['census_scope'] = scope
+        if scope is None or scope['status'] != 'PASS':
+            out['status'] = 'FAIL' if scope is None else scope['status']
+            out['error_tail'] = '不支援的普查欄位範圍' if scope is None else scope.get('error_tail', '普查欄位未通過')
     if status == "FAIL":
-        out["error_tail"] = proc.stderr.decode("utf-8", "replace")[-400:]
+        out.setdefault("error_tail", proc.stderr.decode("utf-8", "replace")[-400:])
     if row["dir"]:
         base = a.reports / row["dir"]
         adapter = base / "window-src" / "adapter.go"
@@ -121,6 +224,8 @@ def main():
     p.add_argument("--dosgolem", type=Path, required=True)
     p.add_argument("--output", type=Path, required=True)
     a = p.parse_args()
+    # 先建立輸出目錄，避免完整檢查跑完後才因目錄缺失而丟失報告。
+    a.output.mkdir(parents=True, exist_ok=True)
     spec = json.loads((a.repo / "tools/verification-matrix.json").read_text(encoding="utf-8"))
     rows = [run_row(r, a) for r in spec["rows"]]
     # 合併各收據記錄的原版檔案雜湊；同名檔雜湊不同即為版本混用。

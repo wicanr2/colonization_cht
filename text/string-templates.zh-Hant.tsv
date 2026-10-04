@@ -42,3 +42,26 @@ cost-complete	Cost to complete {w1}: {n1}$.	完成{w1}還需 {n1}$。	殖民地 
 treasury	Treasury: {n1}$.	國庫：{n1}$。	殖民地 BUY 說明框，目標172 探勘 c2	draft	
 cost-complete-line	Cost to complete {w1}: {n1}$	完成{w1}還需 {n1}$	同 cost-complete；句點另成一段印出，逐行文字不含句點	draft	
 treasury-line	Treasury: {n1}$	國庫：{n1}$	同 treasury；句點另成一段印出	draft	
+pedia-unit-cargo	Combat: {n1}   Moves: {n2}   (Cargo Holds: {n3})	戰鬥：{n1}　行動：{n2}　（貨艙：{n3}）	目標180正常GUI、同狀態字高／安全區與定稿查譯；規格038 READY	draft	原版數值不變；欄位22～15px逐級選字，超界回原文
+pedia-unit-veteran	Combat: {n1}   (Veteran: {n2})   Moves: {n3}	戰鬥：{n1}（老手：{n2}）　行動：{n3}	目標180正常GUI、同狀態字高／安全區與定稿查譯；規格038 READY	draft	原版數值不變；欄位22～15px逐級選字，超界回原文
+pedia-unit-artillery	Combat: {n1}   (Attack: +{n2} Damaged: -{n3})   Moves: {n4}	戰鬥：{n1}（進攻：+{n2}，受損：-{n3}）　行動：{n4}	目標180正常GUI、同狀態字高／安全區與定稿查譯；規格038 READY	draft	原版數值不變；欄位22～15px逐級選字，超界回原文
+pedia-unit-pair	{w1} (and {w2})	{w1}（含{w2}）	目標180正常GUI、同狀態字高／安全區與定稿查譯；規格038 READY	draft	原版數值不變；欄位22～15px逐級選字，超界回原文
+pedia-artillery-pair	Artillery (and {w1}	砲台（含{w1}）	目標180正常GUI、同狀態字高／安全區與定稿查譯；規格038 READY	draft	原版數值不變；欄位22～15px逐級選字，超界回原文
+pedia-boreal-subtitle	(Boreal Forest: {w1})	（北方森林：{w1}）	目標180正常GUI、同狀態字高／安全區與定稿查譯；規格038 READY	draft	原版數值不變；欄位22～15px逐級選字，超界回原文
+pedia-prerequisite	Prerequisite: {w1}	先決條件：{w1}	目標180正常建築81個共同取樣點、22欄位量測與定稿查譯；規格038 READY	draft	詞槽只查定稿建築名稱；欄位22～15px逐級選字，超界回原文
+pedia-coast-river	Coast/River: +{n1}	海岸／河流：+{n1}	目標180兩次正常地形欄位、47個共同取樣點與22px實際字模量測；規格038 READY	draft	原版數值不變；欄位22～15px逐級選字，超界回原文
+father-trade	{w1} (Trade Adviser)	{w1}（貿易顧問）	目標181正常議會五項、字高7／行距12與最長譯文量測；規格036 READY	draft	姓名必查唯一既有譯名；本欄30～20px，超界或缺詞整段回原文
+father-exploration	{w1} (Exploration Adviser)	{w1}（探索顧問）	目標181正常議會五項、字高7／行距12與最長譯文量測；規格036 READY	draft	姓名必查唯一既有譯名；本欄30～20px，超界或缺詞整段回原文
+father-military	{w1} (Military Adviser)	{w1}（軍事顧問）	目標181正常議會五項、字高7／行距12與最長譯文量測；規格036 READY	draft	姓名必查唯一既有譯名；本欄30～20px，超界或缺詞整段回原文
+father-political	{w1} (Political Adviser)	{w1}（政治顧問）	目標181正常議會五項、字高7／行距12與最長譯文量測；規格036 READY	draft	姓名必查唯一既有譯名；本欄30～20px，超界或缺詞整段回原文
+father-religious	{w1} (Religious Adviser)	{w1}（宗教顧問）	目標181正常議會五項、字高7／行距12與最長譯文量測；規格036 READY	draft	姓名必查唯一既有譯名；本欄30～20px，超界或缺詞整段回原文
+next-congress	Next Continental Congress Session: ({w1})	下次大陸議會會期：（{w1}）	目標181正常F3與字高5，規格038 READY	draft	只查既有元勳譯名；超界回原文
+rebel-score	Rebel Sentiment:  +{n1}	反叛情緒：+{n1}	目標181正常F10與字高5，規格038 READY	draft	精確兩空白；原版加分不變，超界回原文
+cargo-loading-header	Loading: {w1}	裝載中：{w1}	docs/spec/038-string-overlay-draft.md；目標181 v142／v144／v150 READY	draft	只限已驗Furs／Caravel來源角色；城市名保留玩家原字或既有預設名對照；未知來源與超界回原文。
+cargo-loading-commodity	Loading {w1}	裝載中{w1}	docs/spec/038-string-overlay-draft.md；目標181 v142／v144／v150 READY	draft	只限已驗Furs／Caravel來源角色；城市名保留玩家原字或既有預設名對照；未知來源與超界回原文。
+cargo-moved-unit	{n1} {w1} moved to {w2}	{n1} {w1}已移動至{w2}	docs/spec/038-string-overlay-draft.md；目標181 v142／v144／v150 READY	draft	只限已驗Furs／Caravel來源角色；城市名保留玩家原字或既有預設名對照；未知來源與超界回原文。
+cargo-moved-city	{n1} {w1} moved to {colony}	{n1} {w1}已移動至{colony}	docs/spec/038-string-overlay-draft.md；目標181 v142／v144／v150 READY	draft	只限已驗Furs／Caravel來源角色；城市名保留玩家原字或既有預設名對照；未知來源與超界回原文。
+route-editor-title	EDIT TRADE ROUTE {n1}	編輯貿易路線 {n1}	docs/spec/038-string-overlay-draft.md；目標181 v161／v165／v167 READY	draft	只限已驗第一標題原生欄位，通用模板排除；玩家名稱、其他編號及未驗上下文回原文。
+port-field-unit	{w1} {w2}	{w1}{w2}	規格038港口欄位整批接線；原版頂列與名稱資料	draft	只供已辨識港口頂列；詞槽限國籍與殖民地居民原始名稱。
+port-field-profession	{w1} {w2} ( {w3} )	{w1}{w2}（{w3}）	規格038港口欄位整批接線；原版頂列與職業資料	draft	只供已辨識港口頂列；職業限NAMES.TXT的JOB主名稱。
+port-field-market	{w1} (Bidding {n1}, Asking {n2})	{w1}（出價{n1}，開價{n2}）	規格038港口欄位整批接線；原版底列與商品資料	draft	商品限NAMES.TXT的CARGO；原版價格數值保留。

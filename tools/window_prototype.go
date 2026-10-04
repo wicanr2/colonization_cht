@@ -2,6 +2,7 @@
 package main
 
 import (
+	"crypto/sha256"
 	"encoding/binary"
 	"encoding/json"
 	"flag"
@@ -462,6 +463,11 @@ func (g *windowGame) Update() error {
 	if a := g.audio.status(); a != nil {
 		status["audio"] = a // 目標176：播放器已讀取的位元組數等
 	}
+	// 規格013 READY：只綁定獨立畫布；狀態步數不代表Draw已呈現。
+	if g.latest != nil && g.latest.Stride == g.latest.Rect.Dx()*4 {
+		status["canvas_rgba_sha256"] = fmt.Sprintf("%x", sha256.Sum256(g.latest.Pix))
+		status["canvas_size"] = []int{g.latest.Rect.Dx(), g.latest.Rect.Dy()}
+	}
 	dumpJSON(g.out+".status.tmp", status)
 	must(os.Rename(g.out+".status.tmp", g.out+".status.json"))
 	return nil
@@ -520,7 +526,7 @@ func runWindow(m *golem.Machine, d *golem.DOS, render func(string), out string) 
 	}
 	dumpJSON(out+".status.json", map[string]any{"step": 0, "stage": "opening"})
 	ebiten.SetWindowSize(1280, 800)
-	ebiten.SetWindowTitle("Colonization CHT prototype")
+	ebiten.SetWindowTitle("Colonization CHT " + frontendReleaseVersion)
 	ebiten.SetWindowClosingHandled(true)
 	ebiten.SetRunnableOnUnfocused(true)
 	ebiten.SetCursorMode(ebiten.CursorModeHidden)

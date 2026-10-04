@@ -1,990 +1,2784 @@
 {
- "note": "目標152 驗證矩陣定義。收據目錄相對 workplace/reports；args 內 {game}、{reports}、{repo} 由執行器代入。原版基線＝英文控制收據的原版 RAM／VGA 索引／色盤（前端不改寫原版）。",
- "rows": [
-  {
-   "id": "options-title-rows",
-   "path": "dynamic",
-   "title": "遊戲選項標題與八列",
-   "specs": [
-    "030",
-    "031"
-   ],
-   "flags": [
-    "--game-options-title-a",
-    "--game-options-rows-a"
-   ],
-   "checker": "check_goal134_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal161-134"
-   ],
-   "dir": "goal161-134",
-   "zh": [
-    "zh-1280m",
-    "zh-full",
-    "gui-replay-zh"
-   ],
-   "control": [
-    "control-1280m",
-    "control-full",
-    "gui-replay-control"
-   ],
-   "negative": [
-    "neg-*"
-   ],
-   "gui_inputs": [
-    "gui-real.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal134_gui.sh",
-    "probe_goal134_replays.sh"
-   ],
-   "known_diffs": "GUI 截圖與重播可有一幀延遲，只比安全區；目標161 以定稿譯名重驗"
-  },
-  {
-   "id": "england-intro",
-   "path": "dynamic",
-   "title": "英格蘭首次介紹兩頁",
-   "specs": [
-    "025"
-   ],
-   "flags": [
-    "--nation-intro-a"
-   ],
-   "checker": "check_goal135_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal161-135"
-   ],
-   "dir": "goal161-135",
-   "zh": [
-    "zh-*m"
-   ],
-   "control": [
-    "control-*m"
-   ],
-   "negative": [
-    "neg-*"
-   ],
-   "gui_inputs": [
-    "gui-real.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal135_gui.sh",
-    "probe_goal135_replays.sh"
-   ],
-   "known_diffs": "目標161 以定稿譯名重驗"
-  },
-  {
-   "id": "other-intros",
-   "path": "dynamic",
-   "title": "法國、西班牙、荷蘭首次介紹",
-   "specs": [
-    "025"
-   ],
-   "flags": [
-    "--nation-intro-a"
-   ],
-   "checker": "check_goal136_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal161-136"
-   ],
-   "dir": "goal161-136",
-   "zh": [
-    "*-zh-*m"
-   ],
-   "control": [
-    "*-control-*m"
-   ],
-   "negative": [
-    "neg-*"
-   ],
-   "gui_inputs": [
-    "gui-*.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal136_gui.sh",
-    "probe_goal136_replays.sh"
-   ],
-   "known_diffs": "目標161 以定稿譯名重驗"
-  },
-  {
-   "id": "options-followups",
-   "path": "dynamic",
-   "title": "其他國家遊戲選項、快捷鍵與讀檔路徑",
-   "specs": [
-    "031"
-   ],
-   "flags": [
-    "--game-options-title-a",
-    "--game-options-rows-a"
-   ],
-   "checker": "check_goal137_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal161-137"
-   ],
-   "dir": "goal161-137",
-   "zh": [
-    "*-replay-zh"
-   ],
-   "control": [
-    "*-replay-control"
-   ],
-   "negative": [],
-   "gui_inputs": [
-    "*.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal137_hotkey_gui.sh",
-    "probe_goal137_load_explore_gui.sh",
-    "probe_goal137_nation_options_gui.sh",
-    "probe_goal137_save_explore_gui.sh",
-    "probe_goal137_replays.sh"
-   ],
-   "known_diffs": "只驗英國存檔一例；檢查器驗證國別（介紹頁事件）；本列無專屬負例，回退由目標134負例涵蓋"
-  },
-  {
-   "id": "retire",
-   "path": "dynamic",
-   "title": "退休確認框三欄",
-   "specs": [
-    "028"
-   ],
-   "flags": [
-    "--retire-a"
-   ],
-   "checker": "check_goal138_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal138-retire"
-   ],
-   "dir": "goal138-retire",
-   "zh": [
-    "*-zh"
-   ],
-   "control": [
-    "*-control"
-   ],
-   "negative": [
-    "neg-*"
-   ],
-   "gui_inputs": [
-    "gui-retire.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal138_retire_gui.sh",
-    "probe_goal138_replays.sh"
-   ],
-   "known_diffs": ""
-  },
-  {
-   "id": "third-card",
-   "path": "dynamic",
-   "title": "第三張難度卡",
-   "specs": [
-    "016"
-   ],
-   "flags": [
-    "--third-card-a"
-   ],
-   "checker": "check_goal139_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal139-third-card"
-   ],
-   "dir": "goal139-third-card",
-   "zh": [
-    "*-zh"
-   ],
-   "control": [
-    "*-control"
-   ],
-   "baseline": [
-    "*-base"
-   ],
-   "negative": [
-    "neg-*"
-   ],
-   "gui_inputs": [
-    "gui-third.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal139_gui.sh",
-    "probe_goal139_replays.sh"
-   ],
-   "known_diffs": ""
-  },
-  {
-   "id": "nation-cards-rest",
-   "path": "dynamic",
-   "title": "其餘三張國家旗卡",
-   "specs": [
-    "022"
-   ],
-   "flags": [
-    "--nation-cards-rest-a"
-   ],
-   "checker": "check_goal140_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal140-nation-cards"
-   ],
-   "dir": "goal140-nation-cards",
-   "zh": [
-    "*-zh"
-   ],
-   "control": [
-    "*-control"
-   ],
-   "baseline": [
-    "*-base"
-   ],
-   "negative": [
-    "neg-*"
-   ],
-   "gui_inputs": [
-    "gui-cards.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal140_gui.sh",
-    "probe_goal140_replays.sh"
-   ],
-   "known_diffs": ""
-  },
-  {
-   "id": "build-captions",
-   "path": "dynamic",
-   "title": "十張開場字幕",
-   "specs": [
-    "026",
-    "029"
-   ],
-   "flags": [
-    "--build1-a",
-    "--build-captions-a"
-   ],
-   "checker": "check_goal141_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal161-141"
-   ],
-   "dir": "goal161-141",
-   "zh": [
-    "replay-zh"
-   ],
-   "control": [
-    "replay-control"
-   ],
-   "negative": [
-    "neg-*"
-   ],
-   "gui_inputs": [
-    "gui-captions.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal141_gui.sh",
-    "probe_goal141_replays.sh"
-   ],
-   "known_diffs": "介紹頁後按鍵會讓原版跳過第五張起的字幕；目標161 以定稿譯名重驗"
-  },
-  {
-   "id": "tutorial-help",
-   "path": "dynamic",
-   "title": "首則教學提示",
-   "specs": [
-    "026"
-   ],
-   "flags": [
-    "--tutorial-help-a"
-   ],
-   "checker": "check_goal142_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal161-142"
-   ],
-   "dir": "goal161-142",
-   "zh": [
-    "replay-zh"
-   ],
-   "control": [
-    "replay-control"
-   ],
-   "negative": [
-    "neg-*"
-   ],
-   "gui_inputs": [
-    "gui-help.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal142_gui.sh",
-    "probe_goal142_replays.sh"
-   ],
-   "known_diffs": "GUI 截圖一幀延遲，只比安全區；目標161 以定稿譯名重驗"
-  },
-  {
-   "id": "sea-status",
-   "path": "dynamic",
-   "title": "海上選單列、回合訊息與狀態欄",
-   "specs": [
-    "032"
-   ],
-   "flags": [
-    "--sea-status-a"
-   ],
-   "checker": "check_goal143_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal161-143"
-   ],
-   "dir": "goal161-143",
-   "zh": [
-    "replay-zh",
-    "smoke-zh"
-   ],
-   "control": [
-    "replay-control",
-    "smoke-control"
-   ],
-   "negative": [
-    "neg-*"
-   ],
-   "gui_inputs": [
-    "gui-sea.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal143_gui.sh",
-    "probe_goal143_replays.sh"
-   ],
-   "known_diffs": "目標161 以定稿譯名重驗"
-  },
-  {
-   "id": "dynamic-combined",
-   "path": "dynamic",
-   "title": "全部動態欄位同時開：Explorer 無跳過路徑與 Discoverer 路徑",
-   "specs": [
-    "033"
-   ],
-   "flags": [
-    "全部動態旗標"
-   ],
-   "checker": "check_goal150_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}",
-    "--dynamic-dir",
-    "goal161-150"
-   ],
-   "dir": "goal161-150",
-   "zh": [
-    "full-zh",
-    "help-zh"
-   ],
-   "control": [
-    "full-control",
-    "help-control"
-   ],
-   "negative": [
-    "shrink-toolong"
-   ],
-   "gui_inputs": [],
-   "regenerate": [
-    "probe_goal150_replays.sh"
-   ],
-   "known_diffs": "海上路徑與目標143 比對原版狀態相同、畫面差異只在海上安全區（目標156 改稿）；主選單第一列在錄製路徑因游標遮擋保留原文"
-  },
-  {
-   "id": "text-model",
-   "path": "dynamic",
-   "title": "規格033 資料模型：每則事件只歸一組鍵",
-   "specs": [
-    "033"
-   ],
-   "flags": [],
-   "checker": "check_goal144_text_model.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}",
-    "--dictionary",
-    "{repo}/text/sea-status.zh-Hant.tsv"
-   ],
-   "dir": null,
-   "zh": [],
-   "control": [],
-   "negative": [],
-   "gui_inputs": [],
-   "regenerate": [
-    "probe_goal141_captions.sh"
-   ],
-   "known_diffs": "探針收據，不含中文畫面"
-  },
-  {
-   "id": "static-credits",
-   "path": "static",
-   "title": "開場製作名單七個職稱橫幅",
-   "specs": [
-    "034"
-   ],
-   "flags": [
-    "--static-credits-a"
-   ],
-   "checker": "check_goal151_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal151-static",
-    "--catalog",
-    "{repo}/text/static-overlay.zh-Hant.tsv"
-   ],
-   "dir": "goal151-static",
-   "zh": [
-    "replay/zh"
-   ],
-   "control": [
-    "replay/control"
-   ],
-   "negative": [
-    "neg/*"
-   ],
-   "gui_inputs": [
-    "gui-opening.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal151_gui.sh",
-    "probe_goal151_replays.sh"
-   ],
-   "known_diffs": "人名橫幅 GUI 截圖與重播有一幀動畫差，該畫面不套用"
-  },
-  {
-   "id": "function-keys",
-   "path": "both",
-   "title": "功能鍵、數字鍵盤與組合鍵轉送",
-   "specs": [
-    "024"
-   ],
-   "flags": [
-    "（前端輸入，無旗標）"
-   ],
-   "checker": "check_goal163_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal163-keys"
-   ],
-   "dir": "goal163-keys",
-   "zh": [
-    "replay-zh"
-   ],
-   "control": [
-    "replay-control"
-   ],
-   "negative": [
-    "neg-nokeys"
-   ],
-   "gui_inputs": [
-    "gui-keys.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal163_gui.sh",
-    "probe_goal163_replays.sh"
-   ],
-   "known_diffs": "只驗數字鍵盤 8／7 與 F1；其餘鍵的遊戲語意未逐項驗"
-  },
-  {
-   "id": "dialog-body",
-   "path": "both",
-   "title": "通用對話框正文（Land Ho、登陸詢問、原住民三則）",
-   "specs": [
-    "035"
-   ],
-   "flags": [
-    "--dialog-a"
-   ],
-   "checker": "check_goal165_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal165-dialog"
-   ],
-   "dir": "goal165-dialog",
-   "zh": [
-    "replay-zh"
-   ],
-   "control": [
-    "replay-control"
-   ],
-   "negative": [
-    "neg-noatlas",
-    "neg-noterm"
-   ],
-   "gui_inputs": [
-    "gui-dialog.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal165_gui.sh",
-    "probe_goal165_replays.sh"
-   ],
-   "known_diffs": "只驗正文；選項列與輸入欄維持原文"
-  },
-  {
-   "id": "dynamic-spots",
-   "path": "both",
-   "title": "載入訊息、主選單版本字串、國王接見、GAME 下拉選單",
-   "specs": [
-    "034",
-    "036"
-   ],
-   "flags": [
-    "--dialog-a",
-    "--static-credits-a"
-   ],
-   "checker": "check_goal166_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal166-spots"
-   ],
-   "dir": "goal166-spots",
-   "zh": [
-    "replay-zh"
-   ],
-   "control": [
-    "replay-control"
-   ],
-   "negative": [
-    "neg-nodialog",
-    "neg-nostatic"
-   ],
-   "gui_inputs": [
-    "gui-spots.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal166_gui.sh",
-    "probe_goal166_replays.sh"
-   ],
-   "known_diffs": "只驗英國國王接見與 GAME 下拉選單"
-  },
-  {
-   "id": "regression",
-   "path": "both",
-   "title": "全面回歸六點（主選單至旗卡、@BUILD1、遊戲選項、英格蘭介紹）",
-   "specs": [],
-   "flags": [
-    "各點原本旗標"
-   ],
-   "checker": "check_regression.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--baseline",
-    "{reports}/goal161-regress-a",
-    "--candidate",
-    "{reports}/goal161-regress-b"
-   ],
-   "dir": "goal161-regress-b",
-   "zh": [
-    "regress/*",
-    "regress135/*"
-   ],
-   "control": [],
-   "negative": [],
-   "gui_inputs": [],
-   "regenerate": [
-    "probe_goal133_regressions.sh",
-    "probe_goal135_replays.sh"
-   ],
-   "known_diffs": "基準為目標161 以現行前端建立的回歸收據，兩次獨立重跑逐位元組相同"
-  },
-  {
-   "id": "version-gate",
-   "path": "both",
-   "title": "原版版本不符 fail-closed（五個核心檔拒絕啟動、製作名單圖檔回原文）與新前端下靜態重播不變",
-   "specs": [
-    "034"
-   ],
-   "flags": [
-    "--static-credits-a"
-   ],
-   "checker": "check_goal153_slice.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}"
-   ],
-   "dir": "goal153-slice",
-   "zh": [
-    "static/replay/zh"
-   ],
-   "control": [
-    "static/replay/control"
-   ],
-   "negative": [
-    "wrong-image-run"
-   ],
-   "gui_inputs": [],
-   "regenerate": [
-    "probe_goal153_versions.sh",
-    "probe_goal151_replays.sh"
-   ],
-   "known_diffs": "改動圖檔會讓原版開場解碼失敗，故圖檔負例只跑到 2M 步（守門在載入時判定）"
-  },
-  {
-   "id": "tutorial-dialogs",
-   "path": "both",
-   "title": "其餘教學提示（顧問肖像木紋框）：@TUTORIAL2、5、11、13、14",
-   "specs": [
-    "035"
-   ],
-   "flags": [
-    "--dialog-a",
-    "--tutorial-help-a"
-   ],
-   "checker": "check_goal167_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal167-tutorial"
-   ],
-   "dir": "goal167-tutorial",
-   "zh": [
-    "replay-zh"
-   ],
-   "control": [
-    "replay-control"
-   ],
-   "negative": [
-    "neg-noatlas",
-    "neg-nohelp"
-   ],
-   "gui_inputs": [
-    "gui-tutorial.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal167_gui.sh",
-    "probe_goal167_replays.sh"
-   ],
-   "known_diffs": "只驗本路徑觸發的五則；其餘 13 則與地圖編輯器說明移交 #44／#45"
-  },
-  {
-   "id": "colony-strings",
-   "path": "both",
-   "title": "連續字串通用覆蓋：殖民地畫面首屏、海上狀態欄補齊與 @TUTORIAL4",
-   "specs": [
-    "035",
-    "038"
-   ],
-   "flags": [
-    "--dialog-a",
-    "--string-a",
-    "--sea-status-a"
-   ],
-   "checker": "check_goal169_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal169-colony"
-   ],
-   "dir": "goal169-colony",
-   "zh": [
-    "replay-zh"
-   ],
-   "control": [
-    "replay-control"
-   ],
-   "negative": [
-    "neg-noatlas",
-    "neg-notitle"
-   ],
-   "gui_inputs": [
-    "gui-colony.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal169_gui.sh",
-    "probe_goal169_replays.sh"
-   ],
-   "known_diffs": "只驗殖民地首屏字串；殖民地內操作、歐洲、報告、百科與木刻畫標題牌（多色）另行處理"
-  },
-  {
-   "id": "europe-reports",
-   "path": "both",
-   "title": "歐洲港口（主畫面、熱鍵按鈕、說明框與三個對話框提示）與顧問報告 F1～F10",
-   "specs": [
-    "035",
-    "038"
-   ],
-   "flags": [
-    "--dialog-a",
-    "--string-a",
-    "--sea-status-a"
-   ],
-   "checker": "check_goal170_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal170-eu"
-   ],
-   "dir": "goal170-eu",
-   "zh": [
-    "replay-zh"
-   ],
-   "control": [
-    "replay-control"
-   ],
-   "negative": [
-    "neg-noatlas",
-    "neg-noport"
-   ],
-   "gui_inputs": [
-    "gui-eu.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal170_gui.sh",
-    "probe_goal170_replays.sh"
-   ],
-   "known_diffs": "對話框選項列（#46）維持原文；報告表格內放不下的殖民地名回原文；百科正文另案"
-  },
-  {
-   "id": "colonizopedia",
-   "path": "both",
-   "title": "殖民百科：六個類別的清單與首篇條目（標題、副標、數值行與正文段落）",
-   "specs": [
-    "036",
-    "038"
-   ],
-   "flags": [
-    "--dialog-a",
-    "--string-a",
-    "--sea-status-a"
-   ],
-   "checker": "check_goal171_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal171-pedia"
-   ],
-   "dir": "goal171-pedia",
-   "zh": [
-    "replay-zh"
-   ],
-   "control": [
-    "replay-control"
-   ],
-   "negative": [
-    "neg-noatlas",
-    "neg-nocigars"
-   ],
-   "gui_inputs": [
-    "gui-pedia.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal171_gui.sh",
-    "probe_goal171_replays.sh"
-   ],
-   "known_diffs": "只驗六類首篇；其餘條目同一機制未逐篇真 GUI；Miscellaneous／Complete 類別未出現"
-  },
-  {
-   "id": "colony-interactions",
-   "path": "both",
-   "title": "殖民地畫面內操作：職業選單（兩欄）、建造清單、懸停標籤；對話框選項列改問字串層",
-   "specs": [
-    "035",
-    "038"
-   ],
-   "flags": [
-    "--dialog-a",
-    "--string-a",
-    "--sea-status-a"
-   ],
-   "checker": "check_goal172_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal172-colony"
-   ],
-   "dir": "goal172-colony",
-   "zh": [
-    "replay-zh"
-   ],
-   "control": [
-    "replay-control"
-   ],
-   "negative": [
-    "neg-noatlas",
-    "neg-noyield"
-   ],
-   "gui_inputs": [
-    "gui-colony.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal172_gui.sh",
-    "probe_goal172_replays.sh"
-   ],
-   "known_diffs": "BUY 說明框未走到；武裝面板、多人口殖民地未到達"
-  },
-  {
-   "id": "input-labels",
-   "path": "dynamic",
-   "title": "輸入欄標籤：命名新陸地、命名殖民地、Find Colony（輸入內容保留原樣）",
-   "specs": [
-    "035"
-   ],
-   "flags": [
-    "--dialog-a",
-    "--string-a",
-    "--sea-status-a"
-   ],
-   "checker": "check_goal174_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal174-input"
-   ],
-   "dir": "goal174-input",
-   "zh": [
-    "replay-zh"
-   ],
-   "control": [
-    "replay-control"
-   ],
-   "negative": [
-    "neg-nolabel"
-   ],
-   "gui_inputs": [
-    "gui-input.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal174_gui.sh",
-    "probe_goal174_replays.sh"
-   ],
-   "known_diffs": "改名、貿易路線命名、貨物數量輸入欄未觸發；Name: 另有字串層片段字典來源，反向對照只驗 Colony:"
-  },
-  {
-   "id": "frontend-audio",
-   "path": "dynamic",
-   "title": "前端音訊：OPL3 音樂與數位音效播放、錄音與開關音訊不影響原版",
-   "specs": [
-    "037",
-    "039",
-    "040"
-   ],
-   "flags": [
-    "--audio",
-    "--sb-digital",
-    "--audio-wav"
-   ],
-   "checker": "check_goal176_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal176-audio"
-   ],
-   "dir": "goal176-audio",
-   "zh": [
-    "replay-a",
-    "replay-c"
-   ],
-   "control": [
-    "replay-b",
-    "replay-d"
-   ],
-   "negative": [],
-   "gui_inputs": [
-    "gui-audio.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal176_gui.sh",
-    "probe_goal176_replays.sh"
-   ],
-   "known_diffs": "容器以 ALSA null 裝置驗證播放器；實際聽感需在有音效卡的環境試聽 workplace 的 WAV；本列無專屬負例，以開關音訊兩兩比對與 WAV 有無數位音效區隔代替"
-  },
-  {
-   "id": "sea-menus-occlusion",
-   "path": "dynamic",
-   "title": "下拉選單六個、引號變數訊息、狀態欄部分遮擋仍顯示中文",
-   "specs": [
-    "032",
-    "035",
-    "036",
-    "038"
-   ],
-   "flags": [
-    "--dialog-a",
-    "--string-a",
-    "--sea-status-a"
-   ],
-   "checker": "check_goal177_window.py",
-   "args": [
-    "--game",
-    "{game}",
-    "--reports",
-    "{reports}/goal177-sea"
-   ],
-   "dir": "goal177-sea",
-   "zh": [
-    "replay-zh"
-   ],
-   "control": [
-    "replay-control"
-   ],
-   "negative": [
-    "neg-nomenu"
-   ],
-   "gui_inputs": [
-    "gui-sea.inputs.json"
-   ],
-   "regenerate": [
-    "probe_goal177_gui.sh",
-    "probe_goal177_replays.sh"
-   ],
-   "known_diffs": "ORDERS 選單含停用項目的上半段、地圖殖民地名稱標籤、教學框壓住狀態欄的部分行仍為原文（目標178）"
-  }
- ],
- "not_covered": [
-  "國王接見畫面（0D21:00C6 動態印字）",
-  "GAME 下拉選單",
-  "Loading Game... 訊息",
-  "主選單版本字串",
-  "首則以外的 help（23 則）",
-  "海上以外的遊戲畫面：殖民地、歐洲港口、報告、外交、百科",
-  "開場以外的靜態圖文字（清冊其餘五項依決定不覆蓋）",
-  "按鍵跳過開場時職稱橫幅不出現（覆蓋不觸發，非缺陷）",
-  "整局遊玩、存讀檔、音訊與正式玩家節奏"
- ]
+  "note": "目標152 驗證矩陣定義。收據目錄相對 workplace/reports；args 內 {game}、{reports}、{repo} 由執行器代入。原版基線＝英文控制收據的原版 RAM／VGA 索引／色盤（前端不改寫原版）。",
+  "rows": [
+    {
+      "id": "options-title-rows",
+      "path": "dynamic",
+      "title": "遊戲選項標題與八列",
+      "specs": [
+        "030",
+        "031"
+      ],
+      "flags": [
+        "--game-options-title-a",
+        "--game-options-rows-a"
+      ],
+      "checker": "check_goal134_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal161-134"
+      ],
+      "dir": "goal161-134",
+      "zh": [
+        "zh-1280m",
+        "zh-full",
+        "gui-replay-zh"
+      ],
+      "control": [
+        "control-1280m",
+        "control-full",
+        "gui-replay-control"
+      ],
+      "negative": [
+        "neg-*"
+      ],
+      "gui_inputs": [
+        "gui-real.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal134_gui.sh",
+        "probe_goal134_replays.sh"
+      ],
+      "known_diffs": "GUI 截圖與重播可有一幀延遲，只比安全區；目標161 以定稿譯名重驗"
+    },
+    {
+      "id": "england-intro",
+      "path": "dynamic",
+      "title": "英格蘭首次介紹兩頁",
+      "specs": [
+        "025"
+      ],
+      "flags": [
+        "--nation-intro-a"
+      ],
+      "checker": "check_goal135_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal161-135"
+      ],
+      "dir": "goal161-135",
+      "zh": [
+        "zh-*m"
+      ],
+      "control": [
+        "control-*m"
+      ],
+      "negative": [
+        "neg-*"
+      ],
+      "gui_inputs": [
+        "gui-real.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal135_gui.sh",
+        "probe_goal135_replays.sh"
+      ],
+      "known_diffs": "目標161 以定稿譯名重驗"
+    },
+    {
+      "id": "other-intros",
+      "path": "dynamic",
+      "title": "法國、西班牙、荷蘭首次介紹",
+      "specs": [
+        "025"
+      ],
+      "flags": [
+        "--nation-intro-a"
+      ],
+      "checker": "check_goal136_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal161-136"
+      ],
+      "dir": "goal161-136",
+      "zh": [
+        "*-zh-*m"
+      ],
+      "control": [
+        "*-control-*m"
+      ],
+      "negative": [
+        "neg-*"
+      ],
+      "gui_inputs": [
+        "gui-*.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal136_gui.sh",
+        "probe_goal136_replays.sh"
+      ],
+      "known_diffs": "目標161 以定稿譯名重驗"
+    },
+    {
+      "id": "options-followups",
+      "path": "dynamic",
+      "title": "其他國家遊戲選項、快捷鍵與讀檔路徑",
+      "specs": [
+        "031"
+      ],
+      "flags": [
+        "--game-options-title-a",
+        "--game-options-rows-a"
+      ],
+      "checker": "check_goal137_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal161-137"
+      ],
+      "dir": "goal161-137",
+      "zh": [
+        "*-replay-zh"
+      ],
+      "control": [
+        "*-replay-control"
+      ],
+      "negative": [],
+      "gui_inputs": [
+        "*.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal137_hotkey_gui.sh",
+        "probe_goal137_load_explore_gui.sh",
+        "probe_goal137_nation_options_gui.sh",
+        "probe_goal137_save_explore_gui.sh",
+        "probe_goal137_replays.sh"
+      ],
+      "known_diffs": "只驗英國存檔一例；檢查器驗證國別（介紹頁事件）；本列無專屬負例，回退由目標134負例涵蓋"
+    },
+    {
+      "id": "retire",
+      "path": "dynamic",
+      "title": "退休確認框三欄",
+      "specs": [
+        "028"
+      ],
+      "flags": [
+        "--retire-a"
+      ],
+      "checker": "check_goal138_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal138-retire"
+      ],
+      "dir": "goal138-retire",
+      "zh": [
+        "*-zh"
+      ],
+      "control": [
+        "*-control"
+      ],
+      "negative": [
+        "neg-*"
+      ],
+      "gui_inputs": [
+        "gui-retire.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal138_retire_gui.sh",
+        "probe_goal138_replays.sh"
+      ],
+      "known_diffs": ""
+    },
+    {
+      "id": "third-card",
+      "path": "dynamic",
+      "title": "第三張難度卡",
+      "specs": [
+        "016"
+      ],
+      "flags": [
+        "--third-card-a"
+      ],
+      "checker": "check_goal139_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal139-third-card"
+      ],
+      "dir": "goal139-third-card",
+      "zh": [
+        "*-zh"
+      ],
+      "control": [
+        "*-control"
+      ],
+      "baseline": [
+        "*-base"
+      ],
+      "negative": [
+        "neg-*"
+      ],
+      "gui_inputs": [
+        "gui-third.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal139_gui.sh",
+        "probe_goal139_replays.sh"
+      ],
+      "known_diffs": ""
+    },
+    {
+      "id": "nation-cards-rest",
+      "path": "dynamic",
+      "title": "其餘三張國家旗卡",
+      "specs": [
+        "022"
+      ],
+      "flags": [
+        "--nation-cards-rest-a"
+      ],
+      "checker": "check_goal140_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal140-nation-cards"
+      ],
+      "dir": "goal140-nation-cards",
+      "zh": [
+        "*-zh"
+      ],
+      "control": [
+        "*-control"
+      ],
+      "baseline": [
+        "*-base"
+      ],
+      "negative": [
+        "neg-*"
+      ],
+      "gui_inputs": [
+        "gui-cards.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal140_gui.sh",
+        "probe_goal140_replays.sh"
+      ],
+      "known_diffs": ""
+    },
+    {
+      "id": "build-captions",
+      "path": "dynamic",
+      "title": "十張開場字幕",
+      "specs": [
+        "026",
+        "029"
+      ],
+      "flags": [
+        "--build1-a",
+        "--build-captions-a"
+      ],
+      "checker": "check_goal141_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal161-141"
+      ],
+      "dir": "goal161-141",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-*"
+      ],
+      "gui_inputs": [
+        "gui-captions.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal141_gui.sh",
+        "probe_goal141_replays.sh"
+      ],
+      "known_diffs": "介紹頁後按鍵會讓原版跳過第五張起的字幕；目標161 以定稿譯名重驗"
+    },
+    {
+      "id": "tutorial-help",
+      "path": "dynamic",
+      "title": "首則教學提示",
+      "specs": [
+        "026"
+      ],
+      "flags": [
+        "--tutorial-help-a"
+      ],
+      "checker": "check_goal142_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal161-142"
+      ],
+      "dir": "goal161-142",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-*"
+      ],
+      "gui_inputs": [
+        "gui-help.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal142_gui.sh",
+        "probe_goal142_replays.sh"
+      ],
+      "known_diffs": "GUI 截圖一幀延遲，只比安全區；目標161 以定稿譯名重驗"
+    },
+    {
+      "id": "sea-status",
+      "path": "dynamic",
+      "title": "海上選單列、回合訊息與狀態欄",
+      "specs": [
+        "032"
+      ],
+      "flags": [
+        "--sea-status-a"
+      ],
+      "checker": "check_goal143_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal161-143"
+      ],
+      "dir": "goal161-143",
+      "zh": [
+        "replay-zh",
+        "smoke-zh"
+      ],
+      "control": [
+        "replay-control",
+        "smoke-control"
+      ],
+      "negative": [
+        "neg-*"
+      ],
+      "gui_inputs": [
+        "gui-sea.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal143_gui.sh",
+        "probe_goal143_replays.sh"
+      ],
+      "known_diffs": "目標161 以定稿譯名重驗"
+    },
+    {
+      "id": "dynamic-combined",
+      "path": "dynamic",
+      "title": "全部動態欄位同時開：Explorer 無跳過路徑與 Discoverer 路徑",
+      "specs": [
+        "033"
+      ],
+      "flags": [
+        "全部動態旗標"
+      ],
+      "checker": "check_goal150_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}",
+        "--dynamic-dir",
+        "goal161-150"
+      ],
+      "dir": "goal161-150",
+      "zh": [
+        "full-zh",
+        "help-zh"
+      ],
+      "control": [
+        "full-control",
+        "help-control"
+      ],
+      "negative": [
+        "shrink-toolong"
+      ],
+      "gui_inputs": [],
+      "regenerate": [
+        "probe_goal150_replays.sh"
+      ],
+      "known_diffs": "海上路徑與目標143 比對原版狀態相同、畫面差異只在海上安全區（目標156 改稿）；主選單第一列在錄製路徑因游標遮擋保留原文"
+    },
+    {
+      "id": "text-model",
+      "path": "dynamic",
+      "title": "規格033 資料模型：每則事件只歸一組鍵",
+      "specs": [
+        "033"
+      ],
+      "flags": [],
+      "checker": "check_goal144_text_model.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}",
+        "--dictionary",
+        "{repo}/text/sea-status.zh-Hant.tsv"
+      ],
+      "dir": null,
+      "zh": [],
+      "control": [],
+      "negative": [],
+      "gui_inputs": [],
+      "regenerate": [
+        "probe_goal141_captions.sh"
+      ],
+      "known_diffs": "探針收據，不含中文畫面"
+    },
+    {
+      "id": "static-credits",
+      "path": "static",
+      "title": "開場製作名單七個職稱橫幅",
+      "specs": [
+        "034"
+      ],
+      "flags": [
+        "--static-credits-a"
+      ],
+      "checker": "check_goal151_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal151-static",
+        "--catalog",
+        "{repo}/text/static-overlay.zh-Hant.tsv"
+      ],
+      "dir": "goal151-static",
+      "zh": [
+        "replay/zh"
+      ],
+      "control": [
+        "replay/control"
+      ],
+      "negative": [
+        "neg/*"
+      ],
+      "gui_inputs": [
+        "gui-opening.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal151_gui.sh",
+        "probe_goal151_replays.sh"
+      ],
+      "known_diffs": "人名橫幅 GUI 截圖與重播有一幀動畫差，該畫面不套用"
+    },
+    {
+      "id": "function-keys",
+      "path": "both",
+      "title": "功能鍵、數字鍵盤與組合鍵轉送",
+      "specs": [
+        "024"
+      ],
+      "flags": [
+        "（前端輸入，無旗標）"
+      ],
+      "checker": "check_goal163_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal163-keys"
+      ],
+      "dir": "goal163-keys",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-nokeys"
+      ],
+      "gui_inputs": [
+        "gui-keys.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal163_gui.sh",
+        "probe_goal163_replays.sh"
+      ],
+      "known_diffs": "只驗數字鍵盤 8／7 與 F1；其餘鍵的遊戲語意未逐項驗"
+    },
+    {
+      "id": "dialog-body",
+      "path": "both",
+      "title": "通用對話框正文（Land Ho、登陸詢問、原住民三則）",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a"
+      ],
+      "checker": "check_goal165_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal165-dialog"
+      ],
+      "dir": "goal165-dialog",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas",
+        "neg-noterm"
+      ],
+      "gui_inputs": [
+        "gui-dialog.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal165_gui.sh",
+        "probe_goal165_replays.sh"
+      ],
+      "known_diffs": "只驗正文；選項列與輸入欄維持原文"
+    },
+    {
+      "id": "dynamic-spots",
+      "path": "both",
+      "title": "載入訊息、主選單版本字串、國王接見、GAME 下拉選單",
+      "specs": [
+        "034",
+        "036"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--static-credits-a"
+      ],
+      "checker": "check_goal166_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal166-spots"
+      ],
+      "dir": "goal166-spots",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-nodialog",
+        "neg-nostatic"
+      ],
+      "gui_inputs": [
+        "gui-spots.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal166_gui.sh",
+        "probe_goal166_replays.sh"
+      ],
+      "known_diffs": "只驗英國國王接見與 GAME 下拉選單"
+    },
+    {
+      "id": "regression",
+      "path": "both",
+      "title": "全面回歸六點（主選單至旗卡、@BUILD1、遊戲選項、英格蘭介紹）",
+      "specs": [],
+      "flags": [
+        "各點原本旗標"
+      ],
+      "checker": "check_regression.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--baseline",
+        "{reports}/goal161-regress-a",
+        "--candidate",
+        "{reports}/goal161-regress-b"
+      ],
+      "dir": "goal161-regress-b",
+      "zh": [
+        "regress/*",
+        "regress135/*"
+      ],
+      "control": [],
+      "negative": [],
+      "gui_inputs": [],
+      "regenerate": [
+        "probe_goal133_regressions.sh",
+        "probe_goal135_replays.sh"
+      ],
+      "known_diffs": "基準為目標161 以現行前端建立的回歸收據，兩次獨立重跑逐位元組相同"
+    },
+    {
+      "id": "version-gate",
+      "path": "both",
+      "title": "原版版本不符 fail-closed（五個核心檔拒絕啟動、製作名單圖檔回原文）與新前端下靜態重播不變",
+      "specs": [
+        "034"
+      ],
+      "flags": [
+        "--static-credits-a"
+      ],
+      "checker": "check_goal153_slice.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}"
+      ],
+      "dir": "goal153-slice",
+      "zh": [
+        "static/replay/zh"
+      ],
+      "control": [
+        "static/replay/control"
+      ],
+      "negative": [
+        "wrong-image-run"
+      ],
+      "gui_inputs": [],
+      "regenerate": [
+        "probe_goal153_versions.sh",
+        "probe_goal151_replays.sh"
+      ],
+      "known_diffs": "改動圖檔會讓原版開場解碼失敗，故圖檔負例只跑到 2M 步（守門在載入時判定）"
+    },
+    {
+      "id": "tutorial-dialogs",
+      "path": "both",
+      "title": "其餘教學提示（顧問肖像木紋框）：@TUTORIAL2、5、11、13、14",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--tutorial-help-a"
+      ],
+      "checker": "check_goal167_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal167-tutorial"
+      ],
+      "dir": "goal167-tutorial",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas",
+        "neg-nohelp"
+      ],
+      "gui_inputs": [
+        "gui-tutorial.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal167_gui.sh",
+        "probe_goal167_replays.sh"
+      ],
+      "known_diffs": "只驗本路徑觸發的五則；其餘 13 則與地圖編輯器說明移交 #44／#45"
+    },
+    {
+      "id": "colony-strings",
+      "path": "both",
+      "title": "連續字串通用覆蓋：殖民地畫面首屏、海上狀態欄補齊與 @TUTORIAL4",
+      "specs": [
+        "035",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal169_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal169-colony"
+      ],
+      "dir": "goal169-colony",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas",
+        "neg-notitle"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal169_gui.sh",
+        "probe_goal169_replays.sh"
+      ],
+      "known_diffs": "只驗殖民地首屏字串；殖民地內操作、歐洲、報告、百科與木刻畫標題牌（多色）另行處理"
+    },
+    {
+      "id": "europe-reports",
+      "path": "both",
+      "title": "歐洲港口（主畫面、熱鍵按鈕、說明框與三個對話框提示）與顧問報告 F1～F10",
+      "specs": [
+        "035",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal170_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal170-eu"
+      ],
+      "dir": "goal170-eu",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas",
+        "neg-noport"
+      ],
+      "gui_inputs": [
+        "gui-eu.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal170_gui.sh",
+        "probe_goal170_replays.sh"
+      ],
+      "known_diffs": "對話框選項列（#46）維持原文；報告表格內放不下的殖民地名回原文；百科正文另案"
+    },
+    {
+      "id": "colonizopedia",
+      "path": "both",
+      "title": "殖民百科：六個類別的清單與首篇條目（標題、副標、數值行與正文段落）",
+      "specs": [
+        "036",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal171_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal171-pedia"
+      ],
+      "dir": "goal171-pedia",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas",
+        "neg-nocigars"
+      ],
+      "gui_inputs": [
+        "gui-pedia.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal171_gui.sh",
+        "probe_goal171_replays.sh"
+      ],
+      "known_diffs": "只驗六類首篇；其餘條目同一機制未逐篇真 GUI；Miscellaneous／Complete 類別未出現"
+    },
+    {
+      "id": "colony-interactions",
+      "path": "both",
+      "title": "殖民地畫面內操作：職業選單（兩欄）、建造清單、懸停標籤；對話框選項列改問字串層",
+      "specs": [
+        "035",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal172_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal172-colony"
+      ],
+      "dir": "goal172-colony",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas",
+        "neg-noyield"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal172_gui.sh",
+        "probe_goal172_replays.sh"
+      ],
+      "known_diffs": "BUY 說明框未走到；武裝面板、多人口殖民地未到達"
+    },
+    {
+      "id": "input-labels",
+      "path": "dynamic",
+      "title": "輸入欄標籤：命名新陸地、命名殖民地、Find Colony（輸入內容保留原樣）",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal174_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal174-input"
+      ],
+      "dir": "goal174-input",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-nolabel"
+      ],
+      "gui_inputs": [
+        "gui-input.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal174_gui.sh",
+        "probe_goal174_replays.sh"
+      ],
+      "known_diffs": "改名、貿易路線命名、貨物數量輸入欄未觸發；Name: 另有字串層片段字典來源，反向對照只驗 Colony:"
+    },
+    {
+      "id": "frontend-audio",
+      "path": "dynamic",
+      "title": "前端音訊：OPL3 音樂與數位音效播放、錄音與開關音訊不影響原版",
+      "specs": [
+        "037",
+        "039",
+        "040"
+      ],
+      "flags": [
+        "--audio",
+        "--sb-digital",
+        "--audio-wav"
+      ],
+      "checker": "check_goal176_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal176-audio"
+      ],
+      "dir": "goal176-audio",
+      "zh": [
+        "replay-a",
+        "replay-c"
+      ],
+      "control": [
+        "replay-b",
+        "replay-d"
+      ],
+      "negative": [],
+      "gui_inputs": [
+        "gui-audio.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal176_gui.sh",
+        "probe_goal176_replays.sh"
+      ],
+      "known_diffs": "容器以 ALSA null 裝置驗證播放器；實際聽感需在有音效卡的環境試聽 workplace 的 WAV；本列無專屬負例，以開關音訊兩兩比對與 WAV 有無數位音效區隔代替"
+    },
+    {
+      "id": "sea-menus-occlusion",
+      "path": "dynamic",
+      "title": "下拉選單六個、引號變數訊息、狀態欄部分遮擋仍顯示中文",
+      "specs": [
+        "032",
+        "035",
+        "036",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal177_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal177-sea"
+      ],
+      "dir": "goal177-sea",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-nomenu"
+      ],
+      "gui_inputs": [
+        "gui-sea.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal177_gui.sh",
+        "probe_goal177_replays.sh"
+      ],
+      "known_diffs": "本列保存較早的部分遮擋收據；當時超過七成遮擋仍露原文。現行整行暫藏已由目標178 v55／規格032限定CONFORMED，本列不作新策略驗收；Issue #55其餘詞彙仍待接。"
+    },
+    {
+      "id": "ship-orders-prefix-close",
+      "path": "dynamic",
+      "title": "船隻命令／VIEW中文、關閉恢復與六個MENU來源",
+      "specs": [
+        "036"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal178_menu_sources.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal178-orders/codex-audit/ship-prefix-final-gui-v66",
+        "--provenance",
+        "{reports}/goal178-orders/codex-audit/menu-glyph-provenance-v74",
+        "--ship-layout",
+        "{reports}/goal178-orders/codex-audit/ship-prefix-prototype-v64/layout-measurements.json",
+        "--view-layout",
+        "{reports}/goal178-orders/codex-audit/menu-source-layout-v75/layout-measurements.json"
+      ],
+      "dir": "goal178-orders/codex-audit/ship-prefix-final-gui-v66",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "baseline": [
+        "baseline-v59"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal178-orders/codex-audit/ship-prefix-final-gui-v66.sh",
+        "workplace/reports/goal178-orders/codex-audit/ship-prefix-final-gui-v66/replays.sh",
+        "workplace/reports/goal178-orders/codex-audit/menu-glyph-provenance-v74/probe.go",
+        "workplace/reports/goal178-orders/codex-audit/menu-source-layout-v75/measure.py"
+      ],
+      "known_diffs": "限定COLONY03正常船隻／VIEW欄位；六個MENU來源逐列核對，第一個Fortify及其他局勢仍待驗。"
+    },
+    {
+      "id": "orders-disabled-map-label",
+      "path": "dynamic",
+      "title": "ORDERS 選單停用項目（含可用項目整份）與地圖殖民地名稱標籤中文",
+      "specs": [
+        "036",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal178_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal178-orders/recovery-178",
+        "--occlusion-baseline",
+        "{reports}/goal178-orders",
+        "--status-reports",
+        "{reports}/goal178-orders/recovery-gui"
+      ],
+      "dir": "goal178-orders/recovery-178",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noorders"
+      ],
+      "gui_inputs": [
+        "gui-sea.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal178_gui.sh",
+        "probe_goal178_replays.sh"
+      ],
+      "known_diffs": "當前來源的完整既有覆蓋旗標重播通過：68 個原版檢查點相同；ORDERS 四張、地圖標籤 35 張與原 GUI 安全區相同。修正單字元誤取代與遮擋後來源恢復，45 張中文變化均只在狀態欄。控制、反向對照與原 GUI 取自原基準；另以 recovery-gui 的 53 張狀態欄驗證當前來源，來源恢復限定 CONFORMED。新 GUI 地圖標籤 34 張相同、1 張水面色盤差異仍待對齊，未冒充全過。遮擋期間殘字、其他國家名稱及正式封包全部旗標仍未驗收，阻擋目標178／Issue #55。玩家自訂殖民地名保持原樣（使用者 2026-09-28 決定）"
+    },
+    {
+      "id": "pedia-cargo-all",
+      "path": "dynamic",
+      "title": "正常讀檔後逐篇貨物百科（16 篇）",
+      "specs": [
+        "036",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal179_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal179-pedia-cargo"
+      ],
+      "dir": "goal179-pedia-cargo",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-pedia.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal179_gui.sh",
+        "probe_goal179_replays.sh"
+      ],
+      "known_diffs": "只驗 16 篇貨物條目，包含真 GUI、中英同狀態與缺圖集反向對照。使用原版正常 GUI 儲存的檔案，不注入快照；存檔只留本機，其指紋由檢查器核對。其餘百科仍由 Issue #57 逐列驗收。"
+    },
+    {
+      "id": "pedia-unit-all",
+      "path": "dynamic",
+      "title": "正常讀檔後逐篇單位百科（23篇）",
+      "specs": [
+        "036",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal180_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal180-pedia-rest/unit-fixed",
+        "--category",
+        "unit"
+      ],
+      "dir": "goal180-pedia-rest/unit-fixed",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-pedia.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal180_gui.sh",
+        "probe_goal180_replays.sh"
+      ],
+      "known_diffs": "真 GUI、中文重播的 23 篇正文及 75 個已啟用字串欄位安全區相同；中英與缺圖集負例完整原版狀態相同。固定來源為本機 goal180-pedia-rest/strings-fixed-build、formatted-dialog-atlas、six-string-templates.tsv；重產須指定這些已留存來源，當前預設入口是較新的 final-build。六個附欄模板與百科 Savannah 守門已驗；項目符號修正不屬此組來源。"
+    },
+    {
+      "id": "pedia-terrain-all",
+      "path": "dynamic",
+      "title": "正常讀檔後逐篇地形百科（21篇）",
+      "specs": [
+        "036",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal180_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal180-pedia-rest/terrain-final-v2",
+        "--category",
+        "terrain",
+        "--require-no-string-misses"
+      ],
+      "dir": "goal180-pedia-rest/terrain-final-v2",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-pedia.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal180_gui.sh",
+        "probe_goal180_replays.sh"
+      ],
+      "known_diffs": "正式 final-build、formatted-dialog-atlas、final-string-atlas、final-string-templates.tsv：正常GUI的21篇正文與96個字串欄位安全區與中文重播一致；包括海岸／河流，未翻譯字串0。中英、缺圖集負例完整原版狀態相同。21次正常查詢來源已確認，五組同文模板只歸屬實際來源8～11／15；16～23其他情境仍待驗，不是29個原始地形段落全部完成。",
+      "key_evidence": {
+        "PEDIA.TXT:@TERRAIN16": "強推論",
+        "PEDIA.TXT:@TERRAIN17": "強推論",
+        "PEDIA.TXT:@TERRAIN18": "強推論",
+        "PEDIA.TXT:@TERRAIN19": "強推論",
+        "PEDIA.TXT:@TERRAIN23": "強推論"
+      },
+      "source_identity": {
+        "checker": "check_goal180_source_identity.py",
+        "args": [
+          "--game",
+          "{game}",
+          "--reports",
+          "{reports}/goal180-pedia-rest",
+          "--all-markers",
+          "--lookup-reports",
+          "{reports}/goal180-pedia-rest/terrain-final-v2"
+        ],
+        "aliases": {
+          "PEDIA.TXT:@TERRAIN16": "PEDIA.TXT:@TERRAIN8",
+          "PEDIA.TXT:@TERRAIN17": "PEDIA.TXT:@TERRAIN9",
+          "PEDIA.TXT:@TERRAIN18": "PEDIA.TXT:@TERRAIN10",
+          "PEDIA.TXT:@TERRAIN19": "PEDIA.TXT:@TERRAIN11",
+          "PEDIA.TXT:@TERRAIN23": "PEDIA.TXT:@TERRAIN15"
+        }
+      }
+    },
+    {
+      "id": "pedia-job-all",
+      "path": "dynamic",
+      "title": "正常讀檔後逐篇職業百科（27篇）",
+      "specs": [
+        "036",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal180_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal180-pedia-rest/job-fixed-v2",
+        "--category",
+        "job"
+      ],
+      "dir": "goal180-pedia-rest/job-fixed-v2",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-pedia.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal180_gui.sh",
+        "probe_goal180_replays.sh"
+      ],
+      "known_diffs": "真 GUI、中文重播的 27 篇正文及 118 個已啟用字串欄位安全區相同；中英與缺圖集負例完整原版狀態相同。固定來源為本機 goal180-pedia-rest/formatted-build-v2、formatted-dialog-atlas、baseline-string-templates.tsv；重產須指定這些已留存來源，當前預設入口是較新的 final-build。包含 JOB8 空白段與 JOB27；JOB18 仍無清單命中。"
+    },
+    {
+      "id": "pedia-father-all",
+      "path": "dynamic",
+      "title": "正常讀檔後逐篇開國元勳百科（25篇）",
+      "specs": [
+        "036",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal180_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal180-pedia-rest/father-fixed-v2",
+        "--category",
+        "father"
+      ],
+      "dir": "goal180-pedia-rest/father-fixed-v2",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-pedia.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal180_gui.sh",
+        "probe_goal180_replays.sh"
+      ],
+      "known_diffs": "真 GUI、中文重播的 25 篇正文及 52 個已啟用字串欄位安全區相同；中英與缺圖集負例完整原版狀態相同。固定來源為本機 goal180-pedia-rest/formatted-build-v2、formatted-dialog-atlas、baseline-string-templates.tsv；重產須指定這些已留存來源，當前預設入口是較新的 final-build。包含五篇百分比；不涵蓋後續建築分段修正。"
+    },
+    {
+      "id": "pedia-building-all",
+      "path": "dynamic",
+      "title": "正常讀檔後逐篇建築百科（38篇正文與全部22個先決條件）",
+      "specs": [
+        "036",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal180_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal180-pedia-rest/building-final-v3",
+        "--category",
+        "building",
+        "--require-no-string-misses",
+        "--require-pedia-fields"
+      ],
+      "dir": "goal180-pedia-rest/building-final-v3",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-pedia.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal180_gui.sh",
+        "probe_goal180_replays.sh"
+      ],
+      "known_diffs": "正式sync-final-build：38篇正文、70個字串欄位與正常GUI安全區一致；22個先決條件均在逐篇GUI取樣點實際啟用。全部81個原版取樣點、中英及缺圖集完整狀態相同，未翻譯字串0。先決條件限定3M同步等待已驗，其餘字串仍2M；不涵蓋其他百科入口與重複地形來源。"
+    },
+    {
+      "id": "pedia-menu-boundary",
+      "path": "dynamic",
+      "title": "正常百科下拉選單六項鍵盤環繞與進入單位清單",
+      "specs": [
+        "036",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal180_menu_options.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal180-pedia-rest/menu-options"
+      ],
+      "dir": "goal180-pedia-rest/menu-options",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-pedia.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal180_menu_options.sh",
+        "probe_goal180_replays.sh"
+      ],
+      "known_diffs": "八次Down驗證六類循環，Enter進入單位清單，14個原版取樣點與三側完整狀態相同；此下拉選單不顯示Miscellaneous／Complete，不由此宣稱其他路徑無讀取端。"
+    },
+    {
+      "id": "colony-buy-insufficient",
+      "path": "dynamic",
+      "title": "正常建城後資金不足BUYME0正文與三個建造面板欄位",
+      "specs": [
+        "036",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_window.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/load-unit-v6"
+      ],
+      "dir": "goal181-colony-rest/load-unit-v6",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal181_gui.sh",
+        "probe_goal181_replays.sh",
+        "probe_goal181_buy_sources.go",
+        "measure_goal181_buy.py"
+      ],
+      "known_diffs": "正常建城後資金不足碼頭正文與三個面板欄位，18個共同原版取樣點、GUI安全區、中英及缺圖集完整狀態相同；正文30px、長數值壓力22px、超界回原文。原版實際查詢BUYME0，事件BUYME1只是同文模板；來源映射只綁定本收據，可支付BUYME1選項仍待驗，不代表Issue #56完成。",
+      "key_evidence": {
+        "GAME.TXT:@BUYME1": "強推論",
+        "GAME.TXT:@BUYME1:0x00002F09": "強推論"
+      },
+      "source_identity": {
+        "checker": "check_goal181_window.py",
+        "args": [
+          "--game",
+          "{game}",
+          "--reports",
+          "{reports}/goal181-colony-rest/load-unit-v6",
+          "--lookup-reports",
+          "{reports}/goal181-colony-rest/load-unit-v6"
+        ],
+        "aliases": {
+          "GAME.TXT:@BUYME1:0x00002F09": "GAME.TXT:@BUYME0"
+        }
+      }
+    },
+    {
+      "id": "colony-jobs-and-fathers",
+      "path": "dynamic",
+      "title": "正常讀檔進城、職業17項與議會五項元勳選擇",
+      "specs": [
+        "036",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_city.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/city-father-v8",
+        "--require-jobs",
+        "--require-fathers"
+      ],
+      "dir": "goal181-colony-rest/city-father-v8",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal181_gui.sh",
+        "probe_goal181_replays.sh"
+      ],
+      "known_diffs": "正常COLONY01.SAV讀檔，12個共同取樣點與完整原版狀態相同；進城三欄、21px職業標題／17項清單、30px議會正文／五項選擇的GUI安全區相同，缺對話框圖集回原文。GUI設定city-turn-v5及新議會綁定字串圖集、現行模板；範圍不包含生產、更多職業、武裝與可支付BUY。 普查僅計入檢查器通過的七個欄位，不採未取GUI安全區的懸停事件。",
+      "census_scope": "checker"
+    },
+    {
+      "id": "colony-buy-payable",
+      "path": "dynamic",
+      "title": "正常伐木與木匠後的可支付BUYME1正文及兩項選擇",
+      "specs": [
+        "036",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_city.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/city-buy-v9",
+        "--require-jobs",
+        "--require-fathers",
+        "--require-buy"
+      ],
+      "dir": "goal181-colony-rest/city-buy-v9",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal181_gui.sh",
+        "probe_goal181_replays.sh"
+      ],
+      "known_diffs": "正常讀入COLONY01.SAV、伐木、選任元勳、木匠與回合操作，1496年貨車481$／國庫1000$；26個共同取樣點、GUI安全區及中英／缺圖集完整原版狀態相同。正文30px、27位數排版壓力26px、超界回原文；原版實際查詢BUYME1與兩項選擇已驗。僅計檢查器通過的十一欄，不推定生產或價格公式。 1495／1496標題另已取正常GUI安全區驗收。",
+      "census_scope": "checker",
+      "source_identity": {
+        "checker": "check_goal181_city.py",
+        "args": [
+          "--game",
+          "{game}",
+          "--reports",
+          "{reports}/goal181-colony-rest/city-buy-v9",
+          "--require-jobs",
+          "--require-fathers",
+          "--require-buy",
+          "--lookup-reports",
+          "{reports}/goal181-colony-rest/city-buy-v9"
+        ],
+        "aliases": {
+          "GAME.TXT:@BUYME1:0x00002F09": "GAME.TXT:@BUYME1",
+          "GAME.TXT:@BUYME1:0x00002F09#2+list": "GAME.TXT:@BUYME1"
+        }
+      }
+    },
+    {
+      "id": "colony-profession-equipment",
+      "path": "dynamic",
+      "title": "正常居民職業第二頁六項裝備需求與停用灰色",
+      "specs": [
+        "036",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_city.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/city-more-v18",
+        "--require-jobs",
+        "--require-more"
+      ],
+      "dir": "goal181-colony-rest/city-more-v18",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal181_gui.sh",
+        "probe_goal181_replays.sh"
+      ],
+      "known_diffs": "正常主選單讀COLONY01.SAV、進城、居民職業及更多；六個原版取樣點、GUI安全區、中英與缺圖集完整原版狀態相同。第二頁標題及六項21px，士兵／斥候／龍騎兵保留原版色8停用灰色。重生設定city-more-v18、新議會字串圖集與現行模板；只採檢查器七欄，不代表已裝備或武裝操作完成。",
+      "census_scope": "checker"
+    },
+    {
+      "id": "colony-abandon-cancel",
+      "path": "dynamic",
+      "title": "正常棄城確認正文、兩選項及取消返回城市",
+      "specs": [
+        "035",
+        "036",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_city.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/city-abandon-v25",
+        "--require-jobs",
+        "--require-more",
+        "--require-abandon"
+      ],
+      "dir": "goal181-colony-rest/city-abandon-v25",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal181_gui.sh",
+        "probe_goal181_replays.sh",
+        "probe_goal181_buy_sources.go"
+      ],
+      "known_diffs": "正常主選單讀COLONY01.SAV、進城、職業第二頁點前鋒、棄城確認及正常取消；八個共同取樣點、GUI安全區、中文／英文／缺圖集完整原版狀態相同。正文及兩選項30px，名稱欄位沿已審殖民地名稱顯示。候選完全抹除即回原文，取消後無殘像；只採檢查器九欄。重生指定city-abandon-v23路徑、city-abandon-v25輸出、abandon-final-build-v25正式二進位及新議會字串圖集。來源探針指定--marker-prefix @ABANDON並綁定同輸入與完整終點，不推定ABANDON2或接受棄城結果。",
+      "census_scope": "checker",
+      "source_identity": {
+        "checker": "check_goal181_city.py",
+        "args": [
+          "--game",
+          "{game}",
+          "--reports",
+          "{reports}/goal181-colony-rest/city-abandon-v25",
+          "--require-jobs",
+          "--require-more",
+          "--require-abandon",
+          "--lookup-reports",
+          "{reports}/goal181-colony-rest/city-abandon-v25"
+        ],
+        "aliases": {
+          "GAME.TXT:@ABANDON:0x00001994": "GAME.TXT:@ABANDON",
+          "GAME.TXT:@ABANDON2:0x00001A5B#2+list": "GAME.TXT:@ABANDON"
+        }
+      }
+    },
+    {
+      "id": "load-good-notice",
+      "path": "dynamic",
+      "title": "正常第三欄讀檔成功提示與關閉返回世界",
+      "specs": [
+        "035",
+        "036"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_load.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/load-normal-v43",
+        "--lookup-reports",
+        "{reports}/goal181-colony-rest/load-normal-v43"
+      ],
+      "dir": "goal181-colony-rest/load-normal-v43",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "regenerate": [
+        "probe_goal181_load.sh",
+        "probe_goal181_buy_sources.go"
+      ],
+      "known_diffs": "正常主選單讀v35合法COLONY02.SAV、讀檔成功與關閉提示；三個共同取樣點、正常GUI中文安全區、三側完整原版狀態相同。檔名僅在LOADGOOD的STRING0保留COLONY兩位數.SAV原值；30px與100個格式候選已量測，其他格式回原文。正式來源load-final-build-v42與現行圖集；不外推SAVEGOOD、其他讀檔欄位或存檔格式。",
+      "census_scope": "checker",
+      "source_identity": {
+        "checker": "check_goal181_load.py",
+        "args": [
+          "--game",
+          "{game}",
+          "--reports",
+          "{reports}/goal181-colony-rest/load-normal-v43",
+          "--lookup-reports",
+          "{reports}/goal181-colony-rest/load-normal-v43"
+        ],
+        "aliases": {
+          "GAME.TXT:0x00000854": "GAME.TXT:@LOADGOOD"
+        }
+      }
+    },
+    {
+      "id": "land-orders-source",
+      "path": "dynamic",
+      "title": "陸地命令十列中文、兩個停用灰色與第一Fortify來源",
+      "specs": [
+        "036"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal178_land.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal178-orders/codex-audit/land-orders-gui-v79",
+        "--provenance",
+        "{reports}/goal178-orders/codex-audit/land-menu-source-v80",
+        "--layout",
+        "{reports}/goal178-orders/codex-audit/land-menu-layout-v81/layout-measurements.json"
+      ],
+      "dir": "goal178-orders/codex-audit/land-orders-gui-v79",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "baseline": [],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal178-orders/codex-audit/land-orders-gui-v79.sh",
+        "workplace/reports/goal178-orders/codex-audit/land-orders-gui-v79/replays.sh",
+        "workplace/reports/goal178-orders/codex-audit/land-menu-source-v80/probe.go",
+        "workplace/reports/goal178-orders/codex-audit/land-menu-layout-v81/measure-and-audit.py"
+      ],
+      "known_diffs": "限定COLONY00正常點士兵、關教學框後的十列；僅原始28D來源，不外推Join Colony、Pillage或其他單位。"
+    },
+    {
+      "id": "colony-rename-cancel",
+      "path": "dynamic",
+      "title": "正常城市改名兩欄、英文姓名編輯及取消",
+      "specs": [
+        "035",
+        "036"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_rename.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/rename-gui-v50",
+        "--provenance",
+        "{reports}/goal181-colony-rest/rename-source-v51",
+        "--layout",
+        "{reports}/goal181-colony-rest/rename-layout-v52"
+      ],
+      "dir": "goal181-colony-rest/rename-gui-v50",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "baseline": [],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/rename-gui-v50.sh",
+        "workplace/reports/goal181-colony-rest/rename-gui-v50/replays.sh",
+        "probe_goal181_buy_sources.go",
+        "workplace/reports/goal181-colony-rest/rename-layout-v52/measure-second.sh"
+      ],
+      "known_diffs": "正常主選單第四欄讀COLONY03、進城點標題；九張GUI逐像素與中文重播相同，三側完整原版／存檔不變。提示30px，標籤因欄寬選29px；只採兩個已驗欄位及實際RENAMECOLONY段落，姓名英文保留。未驗接受改名或其他姓名長度。"
+    },
+    {
+      "id": "save-good-notice",
+      "path": "dynamic",
+      "title": "正常另存檔成功中文提示與關閉",
+      "specs": [
+        "035",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_savegood.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/save-gui-v56",
+        "--provenance",
+        "{reports}/goal181-colony-rest/save-source-v57",
+        "--layout",
+        "{reports}/goal181-colony-rest/save-layout-v58",
+        "--cases",
+        "{reports}/goal181-colony-rest/save-prototype-v55/matcher-layout-cases.json"
+      ],
+      "dir": "goal181-colony-rest/save-gui-v56",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "baseline": [],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/save-gui-v56.sh",
+        "workplace/reports/goal181-colony-rest/save-gui-v56/replays.sh",
+        "workplace/reports/goal181-colony-rest/save-source-v57/probe.go",
+        "workplace/reports/goal181-colony-rest/save-layout-v58/prepare-measurement.py",
+        "workplace/reports/goal181-colony-rest/save-layout-v58/correct-candidates.sh"
+      ],
+      "known_diffs": "正常讀COLONY03、另存第一空列COLONY00，七張GUI逐像素與中文重播相同，四側完整原版及新舊存檔一致。SAVEGOOD正文30px；只採GAME.TXT:@SAVEGOOD，姓名／檔名保留原文，未知描述回原文。其他存檔錯誤未驗。"
+    },
+    {
+      "id": "save-load-slot-lists",
+      "path": "dynamic",
+      "title": "正常存讀檔標題、空槽與描述清單",
+      "specs": [
+        "035",
+        "036",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_slots.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/slot-gui-v67",
+        "--provenance",
+        "{reports}/goal181-colony-rest/slot-source-v68",
+        "--layout",
+        "{reports}/goal181-colony-rest/slot-formal-build-v66/layout-cases.json"
+      ],
+      "dir": "goal181-colony-rest/slot-gui-v67",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "baseline": [],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/slot-gui-v67.sh",
+        "workplace/reports/goal181-colony-rest/slot-replays-v67.sh",
+        "workplace/reports/goal181-colony-rest/slot-source-v68/replay.sh",
+        "workplace/reports/goal181-colony-rest/slot-formal-build-v66/prepare-layout.py"
+      ],
+      "known_diffs": "正常讀 COLONY03、存第一空列00，九GUI逐像素與中文重播相同，五側完整原版及新舊存檔一致。LOADGAME安全區底緣縮一列，兩標題及10／8列清單21px；空槽來源只供槽位回呼，未知描述、列數、字模不足或文字部分抹除均整段原文。v55程式同現行譯稿／字模、同新輸入對照，新增中文只在核准矩形，五個關框後畫面完全相同。其他存讀檔錯誤仍待驗。"
+    },
+    {
+      "id": "europe-cancel-and-report-fields",
+      "path": "dynamic",
+      "title": "正常歐洲港口取消、教學與F2至F10已量測欄位",
+      "specs": [
+        "035",
+        "036",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_europe.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/europe-gui-v75",
+        "--evidence",
+        "{reports}/goal181-colony-rest/europe-verify-v76"
+      ],
+      "dir": "goal181-colony-rest/europe-gui-v75",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "baseline": [
+        "baseline-v66"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/europe-gui-v75.sh",
+        "workplace/reports/goal181-colony-rest/europe-gui-v75/replays.sh",
+        "workplace/reports/goal181-colony-rest/europe-verify-v76/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-verify-v76/source/replay.sh",
+        "workplace/reports/goal181-colony-rest/europe-verify-v76/observer/replay.sh"
+      ],
+      "known_diffs": "正常讀COLONY03、E進港、取消招募／購買／訓練，再按F2至F10；109欄與26GUI逐像素／五側完整原版及存檔一致。購買7列30px，訓練18列21px，新報表2欄22px；原版128為下方陰影，真正混色停用列仍回原文。只採實際完整組合，不把25姓名合成排版當命中；三個城市名因欄寬回原文，未驗購入成功或其他局勢。"
+    },
+    {
+      "id": "europe-artillery-purchase",
+      "path": "dynamic",
+      "title": "正常歐洲砲台購入確認、接受與金錢標題",
+      "specs": [
+        "035",
+        "036",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_purchase.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/purchase-gui-v79",
+        "--evidence",
+        "{reports}/goal181-colony-rest/purchase-verify-v82"
+      ],
+      "dir": "goal181-colony-rest/purchase-gui-v79",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/purchase-gui-v79.sh",
+        "workplace/reports/goal181-colony-rest/purchase-replays-v79.sh",
+        "workplace/reports/goal181-colony-rest/purchase-observer-v80/prepare.py",
+        "workplace/reports/goal181-colony-rest/purchase-observer-v80/replay.sh",
+        "workplace/reports/goal181-colony-rest/purchase-source-v80/prepare.py",
+        "workplace/reports/goal181-colony-rest/purchase-source-v80/replay.sh",
+        "workplace/reports/goal181-colony-rest/purchase-layout-v81/test.sh",
+        "workplace/reports/goal181-colony-rest/purchase-verify-v82/freeze.py"
+      ],
+      "known_diffs": "正常COLONY03讀檔、E進港、選500$砲台及Enter接受，金錢1000$→500$，碼頭出現砲台，再返回世界；僅確認正文、是／否選項及500$港口標題三欄。九GUI與中文／觀測畫面全等，五側完整原版、四側九共同取樣與原版存檔不變。正文／選項30px，標題22px；24組合成量測不計原版命中，不外推其他單位、取消、稅率事件。"
+    },
+    {
+      "id": "colony-fisherman-no-docks",
+      "path": "dynamic",
+      "title": "正常職業清單選漁夫的未建碼頭正文",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_nodocks.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/unit-gui-v85",
+        "--evidence",
+        "{reports}/goal181-colony-rest/unit-verify-v87"
+      ],
+      "dir": "goal181-colony-rest/unit-gui-v85",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/unit-gui-v85.sh",
+        "workplace/reports/goal181-colony-rest/unit-replays-v85.sh",
+        "workplace/reports/goal181-colony-rest/unit-observer-v86/prepare.py",
+        "workplace/reports/goal181-colony-rest/unit-observer-v86/replay.sh",
+        "workplace/reports/goal181-colony-rest/unit-source-v86/prepare.py",
+        "workplace/reports/goal181-colony-rest/unit-source-v86/replay.sh",
+        "workplace/reports/goal181-colony-rest/unit-verify-v87/freeze.py"
+      ],
+      "known_diffs": "正常COLONY03進城、工作者職業清單選Fisherman，顯示NODOCKS正文並Escape關閉返回世界；一欄30px、兩行，safe[67,118,256,152]、墨跡[6,4,731,76]。八GUI與中文／觀測畫面全等，五側完整原版、四側八取樣與存檔一致。只採實際正文，不外推其他職業、拖曳或單位選項。"
+    },
+    {
+      "id": "colony-soldier-unit-options",
+      "path": "dynamic",
+      "title": "正常單位面板士兵標題及當次三列選項",
+      "specs": [
+        "035",
+        "036"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_unit.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/unit-formal-gui-v95",
+        "--evidence",
+        "{reports}/goal181-colony-rest/unit-formal-verify-v96"
+      ],
+      "dir": "goal181-colony-rest/unit-formal-gui-v95",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/unit-formal-build-v94/prepare.py",
+        "workplace/reports/goal181-colony-rest/unit-formal-build-v94/build.sh",
+        "workplace/reports/goal181-colony-rest/unit-formal-gui-v95.sh",
+        "workplace/reports/goal181-colony-rest/unit-formal-replays-v95.sh",
+        "workplace/reports/goal181-colony-rest/unit-formal-verify-v96/prepare.py",
+        "workplace/reports/goal181-colony-rest/unit-formal-verify-v96/replay.sh",
+        "workplace/reports/goal181-colony-rest/unit-formal-verify-v96/freeze.py"
+      ],
+      "known_diffs": "正常COLONY03選任士兵、切右下單位面板並點士兵，中文標題及當次警戒／登船、駐守、不做更動三列30px；圖示及兩個核准文字區外不變。11GUI與中文／觀測全畫面相同，六側完整原版與五側11取樣、來源查詢及存檔一致。22個名稱只有合成字模量測，不外推其餘兩列、其他單位或其他選項狀態。"
+    },
+    {
+      "id": "colony-fortified-unit-options",
+      "path": "dynamic",
+      "title": "正常士兵駐守後的清除命令三列選項",
+      "specs": [
+        "035",
+        "036"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_clear.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/clear-formal-gui-v106",
+        "--evidence",
+        "{reports}/goal181-colony-rest/clear-formal-verify-v107"
+      ],
+      "dir": "goal181-colony-rest/clear-formal-gui-v106",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/clear-formal-build-v105/prepare.py",
+        "workplace/reports/goal181-colony-rest/clear-formal-build-v105/build.sh",
+        "workplace/reports/goal181-colony-rest/clear-formal-build-v105/run-gui.sh",
+        "workplace/reports/goal181-colony-rest/clear-formal-gui-v106.sh",
+        "workplace/reports/goal181-colony-rest/clear-formal-verify-v107/prepare.py",
+        "workplace/reports/goal181-colony-rest/clear-formal-verify-v107/observe.sh",
+        "workplace/reports/goal181-colony-rest/clear-formal-verify-v107/replays.sh",
+        "workplace/reports/goal181-colony-rest/clear-formal-verify-v107/freeze.py"
+      ],
+      "known_diffs": "正常COLONY03選任士兵、駐守後再開清單，清除命令／警戒或登船／不做更動三列30px。13GUI、六側完整原版、五側13取樣、來源與存檔一致；只改一個核准清單區，圖示與其他畫面不變。未觀測Move to front及其他單位狀態不外推；UNITOPTIONS已shown，不增加來源完成數。"
+    },
+    {
+      "id": "colony-harbor-ship-options",
+      "path": "dynamic",
+      "title": "正常港口輕帆船標題、三列選項及Escape關閉",
+      "specs": [
+        "035",
+        "036"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_ship.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/ship-formal-gui-v119",
+        "--evidence",
+        "{reports}/goal181-colony-rest/ship-formal-verify-v121"
+      ],
+      "dir": "goal181-colony-rest/ship-formal-gui-v119",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/ship-formal-build-v118/prepare.py",
+        "workplace/reports/goal181-colony-rest/ship-formal-build-v118/build.sh",
+        "workplace/reports/goal181-colony-rest/ship-formal-build-v118/prepare-gui.py",
+        "workplace/reports/goal181-colony-rest/ship-formal-build-v118/run-gui.sh",
+        "workplace/reports/goal181-colony-rest/ship-formal-gui-v119.sh",
+        "workplace/reports/goal181-colony-rest/ship-formal-verify-v121/prepare.py",
+        "workplace/reports/goal181-colony-rest/ship-formal-verify-v121/observer/replay.sh",
+        "workplace/reports/goal181-colony-rest/ship-formal-verify-v121/source/replay.sh",
+        "workplace/reports/goal181-colony-rest/ship-formal-verify-v121/replays.sh",
+        "workplace/reports/goal181-colony-rest/ship-formal-verify-v121/freeze.py"
+      ],
+      "known_diffs": "正常COLONY03航向Jamestown、進城、關原文教學後的Caravel標題及原始第3／4／6列選項30px。14GUI、六側完整原版、五側14取樣、來源與03／原版新增09存檔相同；圖示與兩核准區外不變。23個合成名称量測不計正常命中；其他船隻局勢、未驗三列及TUTORIAL12不外推。"
+    },
+    {
+      "id": "colony-dock-arrival-tutorial",
+      "path": "dynamic",
+      "title": "正常抵港教學、Enter關閉與畫布指紋同步",
+      "specs": [
+        "013",
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_tutorial.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/tutorial-formal-gui-v127",
+        "--evidence",
+        "{reports}/goal181-colony-rest/tutorial-formal-verify-v128"
+      ],
+      "dir": "goal181-colony-rest/tutorial-formal-gui-v127",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/tutorial-formal-build-v126/prepare.py",
+        "workplace/reports/goal181-colony-rest/tutorial-formal-build-v126/build.sh",
+        "workplace/reports/goal181-colony-rest/tutorial-formal-build-v126/prepare-normal-gui.py",
+        "workplace/reports/goal181-colony-rest/tutorial-formal-build-v126/run-normal-gui.sh",
+        "workplace/reports/goal181-colony-rest/tutorial-gui127.sh",
+        "workplace/reports/goal181-colony-rest/tutorial-formal-verify-v128/prepare.py",
+        "workplace/reports/goal181-colony-rest/tutorial-formal-verify-v128/observer/replay.sh",
+        "workplace/reports/goal181-colony-rest/tutorial-formal-verify-v128/source/replay.sh",
+        "workplace/reports/goal181-colony-rest/tutorial-formal-verify-v128/replays.sh",
+        "workplace/reports/goal181-colony-rest/tutorial-formal-verify-v128/freeze.py"
+      ],
+      "known_diffs": "正常COLONY03航向Jamestown、進城後的抵港教學，原版cap9、876×456安全區、30px五行及Enter關閉。14GUI全畫面與畫布指紋一致；六側完整原版、五側14取樣、來源及本次03／原版新增09存檔相同，只有教學安全區相對v118改變。五個合成名稱不計正常命中；其他教學及裝貨操作未驗。"
+    },
+    {
+      "id": "colony-cargo-ship-options",
+      "path": "dynamic",
+      "title": "正常船隻載貨四列、下錨三列與卸貨／清除後恢復",
+      "specs": [
+        "036"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_shipcargo.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/cargo-options-formal-gui-v137",
+        "--evidence",
+        "{reports}/goal181-colony-rest/cargo-options-formal-verify-v138"
+      ],
+      "dir": "goal181-colony-rest/cargo-options-formal-gui-v137",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/cargo-options-formal-build-v136/prepare.py",
+        "workplace/reports/goal181-colony-rest/cargo-options-formal-build-v136/build.sh",
+        "workplace/reports/goal181-colony-rest/cargo-options-formal-build-v136/run-normal-gui.sh",
+        "workplace/reports/goal181-colony-rest/cargo-gui137.sh",
+        "workplace/reports/goal181-colony-rest/cargo-options-formal-verify-v138/prepare.py",
+        "workplace/reports/goal181-colony-rest/cargo-options-formal-verify-v138/replays.sh",
+        "workplace/reports/goal181-colony-rest/cargo-options-formal-verify-v138/observer/replay.sh",
+        "workplace/reports/goal181-colony-rest/cargo-options-formal-verify-v138/source/replay.sh",
+        "workplace/reports/goal181-colony-rest/cargo-options-formal-verify-v138/freeze.py"
+      ],
+      "known_diffs": "正常Jamestown港口Caravel載27毛皮後第3／4／5／6列，以及下錨後第2／3／6列；正常卸貨／清除後恢復及Escape關閉。兩清單各按原版cap8、pitch12量測30px，23GUI指紋全等，六側完整原版、五側23取樣與來源／03／新增09一致，僅兩安全區改變且圖示／其他畫面不變。SHIPOPTIONS父段落已shown，只補條件狀態收據。其他組合、船隻、Move to front與移貨提示未驗。"
+    },
+    {
+      "id": "colony-cargo-messages",
+      "path": "dynamic",
+      "title": "港口裝貨標題、按住提示與毛皮移入船隻／城市",
+      "specs": [
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_shipcargo.py",
+      "args": [
+        "--cargo-messages",
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/cargo-messages-formal-gui-v153",
+        "--evidence",
+        "{reports}/goal181-colony-rest/cargo-messages-formal-verify-v154"
+      ],
+      "dir": "goal181-colony-rest/cargo-messages-formal-gui-v153",
+      "zh": [
+        "replay-zh"
+      ],
+      "control": [
+        "replay-control"
+      ],
+      "negative": [
+        "neg-noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/cargo-messages-formal-build-v152/prepare.py",
+        "workplace/reports/goal181-colony-rest/cargo-messages-formal-build-v152/bake.sh",
+        "workplace/reports/goal181-colony-rest/cargo-messages-formal-build-v152/build.sh",
+        "workplace/reports/goal181-colony-rest/cargo-messages-formal-build-v152/run-normal-gui.sh",
+        "workplace/reports/goal181-colony-rest/cargo-gui153.sh",
+        "workplace/reports/goal181-colony-rest/cargo-messages-formal-verify-v154/prepare.py",
+        "workplace/reports/goal181-colony-rest/cargo-messages-formal-verify-v154/build-observer.sh",
+        "workplace/reports/goal181-colony-rest/cargo-messages-formal-verify-v154/prepare-replays.py",
+        "workplace/reports/goal181-colony-rest/cargo-messages-formal-verify-v154/run-main.sh",
+        "workplace/reports/goal181-colony-rest/cargo-messages-formal-verify-v154/run-baseline.sh",
+        "workplace/reports/goal181-colony-rest/cargo-messages-formal-verify-v154/run-observer-source.sh",
+        "workplace/reports/goal181-colony-rest/cargo-messages-formal-verify-v154/run-city.sh",
+        "workplace/reports/goal181-colony-rest/cargo-messages-formal-verify-v154/freeze.py",
+        "workplace/reports/goal181-colony-rest/cargo-messages-formal-verify-v154/negative-checks.py"
+      ],
+      "known_diffs": "只驗Furs／Caravel來源池、四種貨物訊息及完整Loading Furs按住例外。24GUI指紋／五側完整原版及24原版取樣、來源RAM／03／09存檔全等；四欄原版cap5，三欄22px、Jamestown對照20px，差異只在原安全區。26圖同名城市回歸保留玩家名稱，不依字面套船名。23個破壞收據拒絕及缺原版SKIP77；其他商品／船型與廣泛按住文字未驗。"
+    },
+    {
+      "id": "trade-route-sea",
+      "path": "dynamic",
+      "title": "第一海上貿易路線、裝卸貨及母港目的地",
+      "specs": [
+        "035",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_trade.py",
+      "args": [
+        "--side",
+        "sea",
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/trade-port-role-sea-gui-v176",
+        "--evidence",
+        "{reports}/goal181-colony-rest/trade-port-role-formal-v178"
+      ],
+      "dir": "goal181-colony-rest/trade-port-role-sea-gui-v176",
+      "zh": [
+        "zh"
+      ],
+      "control": [
+        "control"
+      ],
+      "negative": [
+        "noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/trade-port-role-build-v175/prepare.py",
+        "workplace/reports/goal181-colony-rest/trade-port-role-build-v175/bake.sh",
+        "workplace/reports/goal181-colony-rest/trade-port-role-build-v175/build.sh",
+        "workplace/reports/goal181-colony-rest/trade-port-role-build-v175/run-gui-sea.sh",
+        "workplace/reports/goal181-colony-rest/trade-port-role-build-v175/gui-sea.sh",
+        "workplace/reports/goal181-colony-rest/trade-port-role-formal-v178/prepare.py",
+        "workplace/reports/goal181-colony-rest/trade-port-role-formal-v178/build-observer.sh",
+        "workplace/reports/goal181-colony-rest/trade-port-role-formal-v178/prepare-replays.py",
+        "workplace/reports/goal181-colony-rest/trade-port-role-formal-v178/run-sea-main.sh",
+        "workplace/reports/goal181-colony-rest/trade-port-role-formal-v178/run-sea-observer-baseline.sh",
+        "workplace/reports/goal181-colony-rest/trade-port-role-formal-v178/freeze.py",
+        "workplace/reports/goal181-colony-rest/trade-port-role-formal-v178/negative-checks.py"
+      ],
+      "known_diffs": "只驗第一路線1、ROUTE九來源、London (England)與Jamestown兩城市提示。海21／陸19正常GUI與各六側完整原版、所有原版取樣及03／新COLONY00相同。編輯器／兩提示22px、清單30px，新增差異只在核准區，缺字模回原文；同文玩家路線名稱保留原字。113Go、穩定入口107Go、25個破壞收據拒絕、缺原版SKIP77；其他編號、網格城市名、母港及實際自動跑商未驗。"
+    },
+    {
+      "id": "trade-route-land",
+      "path": "dynamic",
+      "title": "第一陸上貿易路線與目的地清單",
+      "specs": [
+        "035",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_trade.py",
+      "args": [
+        "--side",
+        "land",
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/trade-port-role-land-gui-v177",
+        "--evidence",
+        "{reports}/goal181-colony-rest/trade-port-role-formal-v178"
+      ],
+      "dir": "goal181-colony-rest/trade-port-role-land-gui-v177",
+      "zh": [
+        "zh"
+      ],
+      "control": [
+        "control"
+      ],
+      "negative": [
+        "noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/trade-port-role-build-v175/prepare.py",
+        "workplace/reports/goal181-colony-rest/trade-port-role-build-v175/bake.sh",
+        "workplace/reports/goal181-colony-rest/trade-port-role-build-v175/build.sh",
+        "workplace/reports/goal181-colony-rest/trade-port-role-build-v175/run-gui-land.sh",
+        "workplace/reports/goal181-colony-rest/trade-port-role-build-v175/gui-land.sh",
+        "workplace/reports/goal181-colony-rest/trade-port-role-formal-v178/prepare.py",
+        "workplace/reports/goal181-colony-rest/trade-port-role-formal-v178/build-observer.sh",
+        "workplace/reports/goal181-colony-rest/trade-port-role-formal-v178/prepare-replays.py",
+        "workplace/reports/goal181-colony-rest/trade-port-role-formal-v178/run-land-main.sh",
+        "workplace/reports/goal181-colony-rest/trade-port-role-formal-v178/run-land-observer-baseline.sh",
+        "workplace/reports/goal181-colony-rest/trade-port-role-formal-v178/freeze.py",
+        "workplace/reports/goal181-colony-rest/trade-port-role-formal-v178/negative-checks.py"
+      ],
+      "known_diffs": "只驗第一路線1、ROUTE九來源、London (England)與Jamestown兩城市提示。海21／陸19正常GUI與各六側完整原版、所有原版取樣及03／新COLONY00相同。編輯器／兩提示22px、清單30px，新增差異只在核准區，缺字模回原文；同文玩家路線名稱保留原字。113Go、穩定入口107Go、25個破壞收據拒絕、缺原版SKIP77；其他編號、網格城市名、母港及實際自動跑商未驗。"
+    },
+    {
+      "id": "trade-grid-sea",
+      "path": "dynamic",
+      "title": "第一海上貿易路線前兩列預設城市",
+      "specs": [
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_tradegrid.py",
+      "args": [
+        "--side",
+        "sea",
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/trade-grid-sea-gui-v188",
+        "--evidence",
+        "{reports}/goal181-colony-rest/trade-grid-formal-v190"
+      ],
+      "dir": "goal181-colony-rest/trade-grid-sea-gui-v188",
+      "zh": [
+        "zh"
+      ],
+      "control": [
+        "control"
+      ],
+      "negative": [
+        "noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/trade-grid-build-v187/prepare.py",
+        "workplace/reports/goal181-colony-rest/trade-port-role-build-v175/bake.sh",
+        "workplace/reports/goal181-colony-rest/trade-grid-build-v187/build.sh",
+        "workplace/reports/goal181-colony-rest/trade-grid-build-v187/run-gui-sea.sh",
+        "workplace/reports/goal181-colony-rest/trade-grid-build-v187/gui-sea.sh",
+        "workplace/reports/goal181-colony-rest/trade-grid-formal-v190/prepare.py",
+        "workplace/reports/goal181-colony-rest/trade-grid-formal-v190/build-observer.sh",
+        "workplace/reports/goal181-colony-rest/trade-grid-formal-v190/prepare-replays.py",
+        "workplace/reports/goal181-colony-rest/trade-grid-formal-v190/run-sea-main.sh",
+        "workplace/reports/goal181-colony-rest/trade-grid-formal-v190/run-sea-observer-baseline.sh",
+        "workplace/reports/goal181-colony-rest/trade-grid-formal-v190/freeze.py",
+        "workplace/reports/goal181-colony-rest/trade-grid-formal-v190/negative-checks.py"
+      ],
+      "known_diffs": "第一編輯器前兩列實際Jamestown預設名。海21／陸19正常GUI及各六側完整原版、全部存檔相同；22px限定首欄，London改印／刪除沒有舊中文，缺圖集回原文。119Go與穩定入口113Go；合成數字／單字母與錯誤位置防護通過，正常GUI仍只採Jamestown／London。其他編號、網格母港與自動跑商未驗。"
+    },
+    {
+      "id": "trade-grid-land",
+      "path": "dynamic",
+      "title": "第一陸上貿易路線前兩列預設城市",
+      "specs": [
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_tradegrid.py",
+      "args": [
+        "--side",
+        "land",
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/trade-grid-land-gui-v189",
+        "--evidence",
+        "{reports}/goal181-colony-rest/trade-grid-formal-v190"
+      ],
+      "dir": "goal181-colony-rest/trade-grid-land-gui-v189",
+      "zh": [
+        "zh"
+      ],
+      "control": [
+        "control"
+      ],
+      "negative": [
+        "noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/trade-grid-build-v187/prepare.py",
+        "workplace/reports/goal181-colony-rest/trade-port-role-build-v175/bake.sh",
+        "workplace/reports/goal181-colony-rest/trade-grid-build-v187/build.sh",
+        "workplace/reports/goal181-colony-rest/trade-grid-build-v187/run-gui-land.sh",
+        "workplace/reports/goal181-colony-rest/trade-grid-build-v187/gui-land.sh",
+        "workplace/reports/goal181-colony-rest/trade-grid-formal-v190/prepare.py",
+        "workplace/reports/goal181-colony-rest/trade-grid-formal-v190/build-observer.sh",
+        "workplace/reports/goal181-colony-rest/trade-grid-formal-v190/prepare-replays.py",
+        "workplace/reports/goal181-colony-rest/trade-grid-formal-v190/run-land-main.sh",
+        "workplace/reports/goal181-colony-rest/trade-grid-formal-v190/run-land-observer-baseline.sh",
+        "workplace/reports/goal181-colony-rest/trade-grid-formal-v190/freeze.py",
+        "workplace/reports/goal181-colony-rest/trade-grid-formal-v190/negative-checks.py"
+      ],
+      "known_diffs": "第一編輯器前兩列實際Jamestown預設名。海21／陸19正常GUI及各六側完整原版、全部存檔相同；22px限定首欄，London改印／刪除沒有舊中文，缺圖集回原文。119Go與穩定入口113Go；合成數字／單字母與錯誤位置防護通過，正常GUI仍只採Jamestown／London。其他編號、網格母港與自動跑商未驗。"
+    },
+    {
+      "id": "europe-dock-purchase",
+      "path": "dynamic",
+      "title": "歐洲購船後輕帆船裝載標題與碼頭清單",
+      "specs": [
+        "035",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_dock.py",
+      "args": [
+        "--side",
+        "purchase",
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/europe-purchase-formal-gui-v202",
+        "--evidence",
+        "{reports}/goal181-colony-rest/europe-dock-formal-verify-v204"
+      ],
+      "dir": "goal181-colony-rest/europe-purchase-formal-gui-v202",
+      "zh": [
+        "zh"
+      ],
+      "control": [
+        "control"
+      ],
+      "negative": [
+        "noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/europe-dock-profiles-v200/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-profiles-v200/freeze-ready.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-build-v201/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-build-v201/build.sh",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-build-v201/build-entry-check.sh",
+        "workplace/reports/goal181-colony-rest/europe-purchase-formal-gui-v202/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-purchase-formal-gui-v202/run-gui.sh",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-verify-v204/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-verify-v204/build-observer.sh",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-verify-v204/run-purchase-batch.sh",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-verify-v204/purchase-concat/replay.sh",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-verify-v204/prepare-matrix-links.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-verify-v204/freeze.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-verify-v204/negative-checks.py"
+      ],
+      "known_diffs": "六種完整碼頭清單30px與固定Caravel港口裝載標題22px；新正常購船16／狀態29GUI，各六側完整原版、所有取樣與新舊存檔相同。新增差異只在核准區，缺圖集回原文且無舊港口中文。123Go、穩定入口113Go、31破壞拒絕及缺原版SKIP77；傳教士取消、移到碼頭最前面與其他船型未驗。"
+    },
+    {
+      "id": "europe-dock-dock",
+      "path": "dynamic",
+      "title": "歐洲碼頭六種完整清單",
+      "specs": [
+        "035",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_dock.py",
+      "args": [
+        "--side",
+        "dock",
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/europe-dock-formal-gui-v203",
+        "--evidence",
+        "{reports}/goal181-colony-rest/europe-dock-formal-verify-v204"
+      ],
+      "dir": "goal181-colony-rest/europe-dock-formal-gui-v203",
+      "zh": [
+        "zh"
+      ],
+      "control": [
+        "control"
+      ],
+      "negative": [
+        "noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/europe-dock-profiles-v200/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-profiles-v200/freeze-ready.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-build-v201/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-build-v201/build.sh",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-build-v201/build-entry-check.sh",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-gui-v203/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-gui-v203/run-gui.sh",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-verify-v204/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-verify-v204/build-observer.sh",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-verify-v204/run-dock-batch.sh",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-verify-v204/purchase-concat/replay.sh",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-verify-v204/prepare-matrix-links.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-verify-v204/freeze.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-formal-verify-v204/negative-checks.py"
+      ],
+      "known_diffs": "六種完整碼頭清單30px與固定Caravel港口裝載標題22px；新正常購船16／狀態29GUI，各六側完整原版、所有取樣與新舊存檔相同。新增差異只在核准區，缺圖集回原文且無舊港口中文。123Go、穩定入口113Go、31破壞拒絕及缺原版SKIP77；傳教士取消、移到碼頭最前面與其他船型未驗。"
+    },
+    {
+      "id": "europe-dock-missionary",
+      "path": "dynamic",
+      "title": "歐洲傳教士清單與正常取消身分後復原",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_dock.py",
+      "args": [
+        "--side",
+        "missionary",
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/europe-missionary-formal-gui-v213",
+        "--evidence",
+        "{reports}/goal181-colony-rest/europe-missionary-formal-verify-v214"
+      ],
+      "dir": "goal181-colony-rest/europe-missionary-formal-gui-v213",
+      "zh": [
+        "zh"
+      ],
+      "control": [
+        "control"
+      ],
+      "negative": [
+        "noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/europe-missionary-prototype-v210/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-missionary-prototype-v210/build.sh",
+        "workplace/reports/goal181-colony-rest/europe-missionary-prototype-verify-v211/check.py",
+        "workplace/reports/goal181-colony-rest/europe-missionary-prototype-verify-v211/freeze-ready.py",
+        "workplace/reports/goal181-colony-rest/europe-missionary-formal-build-v212/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-missionary-formal-build-v212/build.sh",
+        "workplace/reports/goal181-colony-rest/europe-missionary-formal-build-v212/build-entry-check.sh",
+        "workplace/reports/goal181-colony-rest/europe-missionary-formal-gui-v213/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-missionary-formal-gui-v213/run-gui.sh",
+        "workplace/reports/goal181-colony-rest/europe-missionary-formal-verify-v214/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-missionary-formal-verify-v214/build-observer.sh",
+        "workplace/reports/goal181-colony-rest/europe-missionary-formal-verify-v214/run-main.sh",
+        "workplace/reports/goal181-colony-rest/europe-missionary-formal-verify-v214/run-fallback.sh",
+        "workplace/reports/goal181-colony-rest/europe-missionary-formal-verify-v214/freeze.py",
+        "workplace/reports/goal181-colony-rest/europe-missionary-formal-verify-v214/negative-checks.py"
+      ],
+      "known_diffs": "兩組已取證的傳教士三列清單30px；19張新正常GUI與各六側完整原版、所有取樣及新舊存檔相同。只改兩清單安全區；正常取消後恢復六列，關框及存檔畫面相同。124Go與穩定入口113Go、29破壞拒絕與缺原版SKIP77；移到碼頭最前面與單位標題未驗。"
+    },
+    {
+      "id": "europe-dock-front",
+      "path": "dynamic",
+      "title": "歐洲碼頭七列與正常移到最前面",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_dock.py",
+      "args": [
+        "--side",
+        "front",
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/europe-dock-seven-formal-gui-v224",
+        "--evidence",
+        "{reports}/goal181-colony-rest/europe-dock-seven-formal-verify-v225"
+      ],
+      "dir": "goal181-colony-rest/europe-dock-seven-formal-gui-v224",
+      "zh": [
+        "zh"
+      ],
+      "control": [
+        "control"
+      ],
+      "negative": [
+        "noatlas"
+      ],
+      "gui_inputs": [
+        "gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/europe-dock-seven-prototype-v221/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-seven-prototype-v221/build.sh",
+        "workplace/reports/goal181-colony-rest/europe-dock-seven-prototype-verify-v222/check.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-seven-prototype-verify-v222/freeze-ready.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-seven-formal-build-v223/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-seven-formal-build-v223/build.sh",
+        "workplace/reports/goal181-colony-rest/europe-dock-seven-formal-build-v223/build-entry-check.sh",
+        "workplace/reports/goal181-colony-rest/europe-dock-seven-formal-gui-v224/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-seven-formal-gui-v224/run-gui.sh",
+        "workplace/reports/goal181-colony-rest/europe-dock-seven-formal-verify-v225/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-seven-formal-verify-v225/build-observer.sh",
+        "workplace/reports/goal181-colony-rest/europe-dock-seven-formal-verify-v225/run-main.sh",
+        "workplace/reports/goal181-colony-rest/europe-dock-seven-formal-verify-v225/run-fallback.sh",
+        "workplace/reports/goal181-colony-rest/europe-dock-seven-formal-verify-v225/freeze.py",
+        "workplace/reports/goal181-colony-rest/europe-dock-seven-formal-verify-v225/negative-checks.py"
+      ],
+      "known_diffs": "一組已取證的碼頭七列清單30px；19張新正常GUI與各六側完整原版、所有取樣及新舊存檔相同。只改前後七列安全區；正常移到最前面後該單位變六列，關框及存檔畫面相同。125Go與穩定入口113Go、29破壞拒絕與缺原版SKIP77；Board七列與單位標題未驗。"
+    }
+  ],
+  "not_covered": [
+    "docs/text-census.tsv 中尚未驗到的可達文字，包括國王接見其餘局勢、教學提示、殖民地、歐洲港口、報告、外交及尚未驗收的百科頁面",
+    "靜態文字與事件版畫清冊中尚未通過覆蓋驗收的項目",
+    "按鍵跳過開場時職稱橫幅不出現（覆蓋不觸發，非缺陷）",
+    "其他名稱與海上詞彙、Join Colony及Pillage仍待逐列驗收",
+    "整局正常玩家路徑、存讀檔缺譯、人耳音訊、正式啟動器全部旗標與三平台交付驗收"
+  ]
 }

@@ -123,3 +123,21 @@ confirmed：在`tools/live_menu.go`明確註冊視窗runner與每幀RGBA接收�
 `--prefix goal059-ebiten`；不得再覆寫目標058原始本機收據。前一次未改前綴的
 初次重跑曾覆寫本機目標058檔，故舊收據的數值仍以本規格上節歷史記錄為準。
 真實失焦／關窗及完整玩家版未驗，規格狀態維持READY。
+
+
+## 2026-10-03 READY：真視窗截圖與畫布指紋同步
+
+confirmed程式觀測：Update先發布frame.step，Draw稍後呈現，步數穩定本身不足以綁定畫面。v123合成反例拒絕穩定舊圖、永久錯圖、缺指紋及非指定程序；v124全部14張正常GUI的1280×800 RGBA指紋與發布畫布一致，v125又獨立驗證14張重播全等、原版及存檔不變。v120差異的具體排程成因仍屬強推論，不冒稱原版缺陷。
+
+授權Update的觀測狀態增加canvas_rgba_sha256及canvas_size，不寫原版狀態。指紋為最新連續RGBA畫布的SHA-256；現行像素alpha255。tools/gui_auto.py新增capture_frame_synced(out,window,name,pid)，先驗證本使用者的colonization-window程序，再有界暫停所有執行緒，擷取真正X視窗，核對PNG轉RGBA的指紋／尺寸與前後frame.step／畫布指紋。最多32次，錯圖保留為attempt檔，缺指紋或全部不符即拒絕；成功才寫shots。每次有finally恢復，不送額外遊戲輸入。非指定程序不送任何訊號。main已持有明示pid，改用同步入口；既有三參數capture_frame留作歷史重生入口，不能據此聲稱新同步契約通過。
+
+適用Linux Docker／Xvfb與既有前端畫布，非Windows／macOS或牆鐘效能承諾。正式來源的完整Go與截圖反例、重新取得正常14GUI及獨立重播／原版／存檔驗收後才能限定CONFORMED。重生入口見目標181的gui-capture-prototype-v123/及gui-capture-verify-v125/，私有原型清冊SHA-256 9930833d349a92c16a4be9a40236e36ac86a581788069637a03dc7e95c800732。
+
+
+## 2026-10-03 CONFORMED：真GUI畫布指紋同步
+
+v123～v125私有正常14GUI與完整原版審查後依READY接入v126，86個正式Go測試、go vet及實際字模／同步反例通過，無SKIP。新正常v127共14GUI的畫布指紋與中文重播逐像素全等；v128六側完整原版、五側14共同原版取樣、原版來源探針RAM及各側03／新增09存檔相同。相對v118只有抵港教學安全區改變，正常Enter關閉、後續船隻選單與Escape關閉沒有殘留。教學cap9、safe[50,73,269,187]、30px五行及玩家名／ESC／G的處理沿READY逐欄契約，不外推其他教學或裝貨結果。
+
+正式輸入SHA-256 acc0b870bb5c3a4d57eb1757c7a33d6bdd9ff1a510ae1164a50ba9d52c68bf4d，終點134000000，RAM e72d072a604d1ec7dc1b44cf634bb934f4400ed7bcb91de51923d249f7ed7bf6，凍結清冊5c236781c08f1cbffcbe43dc0f58a6e12a2c59588b6a1b8f46ca1680e7904af4，正式二進位763989f737b674d6aff9742181a853a99bbaf89ae477de003c4421196feaca08。初始COLONY03不變；原版新增COLONY09的SHA-256 3f3fc49dd46f7f590db8f72902c528d2fbc398edbc45dd7d8f6cf1615476c2f5，只與本次等價輸入的原版來源比較，未沿用舊輸入的新增存檔預期。23種破壞收據拒絕及缺原版SKIP77通過。限定檢查tools/check_goal181_tutorial.py，同步反例tools/test_gui_capture.py，重生入口與完整指紋見目標181的v126～v129。
+
+v129全矩陣52PASS，零SKIP／FAIL／過期／指紋衝突；兩次普查與移除新列反向逐位元組相同。1935列中857已顯示／989待接／89不可達，只提升GAME.TXT:@TUTORIAL12。字模、譯稿與原版素材／規則／資料格式不改；原版圖片及存檔仍只留workplace。v120舊GUI對齊限制保留為歷史證據，此次新正常收據獨立通過。

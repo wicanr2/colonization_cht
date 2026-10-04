@@ -20,7 +20,7 @@ FATHER_KEYS = [f"FATHER{i}" for i in range(25)]
 CARGO_KEYS = [f"CARGO{i}" for i in range(16)]
 UNIT_KEYS = [f"UNIT{i}" for i in range(24)]
 TERRAIN_KEYS = [f"TERRAIN{i}" for i in range(29)]
-JOB_KEYS = [f"JOB{i}" for i in range(27)]
+JOB_KEYS = [f"JOB{i}" for i in range(28)]
 BUILDING_KEYS = [f"BUILDING{i}" for i in range(42)]
 KEYS = FATHER_KEYS + CARGO_KEYS + UNIT_KEYS + TERRAIN_KEYS + JOB_KEYS + BUILDING_KEYS
 # 原版第12篇職業 marker 的尾端確實帶一個 ASCII 空白。保留可見且穩定的

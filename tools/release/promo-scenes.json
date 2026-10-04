@@ -1,0 +1,76 @@
+{
+  "version": "v.1.0.0-20261005",
+  "font": "/font/Cubic_11.ttf",
+  "scenes": [
+    {
+      "path": "/repo/workplace/reports/goal183-release/smoke/windows/main-menu.png",
+      "sha256": "c0945f2c803a78d2e73fa5da2dc9d5754974d14d032b811bc6d0c1f016e07609",
+      "title": "從主選單開始",
+      "caption": "選單、提示與說明，以熟悉的文字呈現。",
+      "source_receipt": "/repo/workplace/reports/goal183-release/smoke/windows/run.json",
+      "source_receipt_sha256": "2437dd345938911488fc79e63afe5717a8bef8aef3f0e5ea82de7d6018f82242",
+      "normal_input_receipt": "/repo/workplace/reports/goal183-release/smoke/windows/run.inputs.json",
+      "normal_input_sha256": "6921125d499014f08d9b805fc8e1de116774d7ca4ff3b8d5029be822415a3a40"
+    },
+    {
+      "path": "/repo/workplace/reports/goal181-colony-rest/20261004-woodcut-titles/final-sample/zh.cp-1090000000.png",
+      "sha256": "4a61b8bb3f7157f89f7ccc07cfc1afceda97e096a5820ed920b9a70c48d5fa2b",
+      "title": "航向新世界",
+      "caption": "查看地形、單位與回合訊息。",
+      "source_receipt": "/repo/workplace/reports/goal181-colony-rest/20261004-woodcut-titles/final-sample/zh.json",
+      "source_receipt_sha256": "84479ea3684c5e649e6bc2920808464a8a7abfe796bd1fc401032b762e4bb6fc",
+      "normal_input_receipt": "/repo/workplace/reports/goal181-colony-rest/colony-v3/gui-colony.inputs.json",
+      "normal_input_sha256": "253c62a1f30387d76b736fc17cd22b7040ad53263088fe51e0cd6c5f81fee122"
+    },
+    {
+      "path": "/repo/workplace/reports/goal181-colony-rest/20261004-woodcut-titles/final-sample/zh.cp-635000000.png",
+      "sha256": "736f7a17e9a0b85a8d7e0557204078f4652e0bfae72ef10ce93117b0a2d78a9a",
+      "title": "經典版畫，中文標題",
+      "caption": "保留原版圖像，疊上繁體中文。",
+      "source_receipt": "/repo/workplace/reports/goal181-colony-rest/20261004-woodcut-titles/final-sample/zh.json",
+      "source_receipt_sha256": "84479ea3684c5e649e6bc2920808464a8a7abfe796bd1fc401032b762e4bb6fc",
+      "normal_input_receipt": "/repo/workplace/reports/goal181-colony-rest/colony-v3/gui-colony.inputs.json",
+      "normal_input_sha256": "253c62a1f30387d76b736fc17cd22b7040ad53263088fe51e0cd6c5f81fee122"
+    },
+    {
+      "path": "/repo/workplace/reports/goal181-colony-rest/20261004-woodcut-titles/final-sample/zh.cp-776800000.png",
+      "sha256": "c80a6760d6d24a4e611cdf92c76fe5d8882a01ea8a48f9b8f70239c73ae4ab71",
+      "title": "讀懂每一次相遇",
+      "caption": "原住民訊息與學習選項，正常路徑已抽樣。",
+      "source_receipt": "/repo/workplace/reports/goal181-colony-rest/20261004-woodcut-titles/final-sample/zh.json",
+      "source_receipt_sha256": "84479ea3684c5e649e6bc2920808464a8a7abfe796bd1fc401032b762e4bb6fc",
+      "normal_input_receipt": "/repo/workplace/reports/goal181-colony-rest/colony-v3/gui-colony.inputs.json",
+      "normal_input_sha256": "253c62a1f30387d76b736fc17cd22b7040ad53263088fe51e0cd6c5f81fee122"
+    },
+    {
+      "path": "/repo/workplace/reports/goal181-colony-rest/cargo-messages-formal-gui-v153/gui-colony.cargo-loading-preview.png",
+      "sha256": "a73f9f6bb0e976a5c1efa51215e58cf617432d3635ad31243986d6a4f72c1a81",
+      "title": "經營你的殖民地",
+      "caption": "調配資源，安排工作，裝載貨物。",
+      "source_receipt": "/repo/workplace/reports/goal181-colony-rest/cargo-messages-formal-gui-v153/gui-colony.json",
+      "source_receipt_sha256": "76063f85afc27a1f40f70b48f355e87dc0758acca07fefc3ca3bbce4748db9b0",
+      "normal_input_receipt": "/repo/workplace/reports/goal181-colony-rest/cargo-messages-formal-gui-v153/gui-colony.inputs.json",
+      "normal_input_sha256": "ed628100da40e8e68aa0f7dde45e8421d5cdf2c6c82fe85b122a7f40ac190005"
+    },
+    {
+      "path": "/repo/workplace/reports/goal181-colony-rest/20261004-port-fields/sample/zh.cp-63855000.png",
+      "sha256": "ecbf3800ae000cebd98517f94129d9c8bab40c101e79ba8d9f6a1c8c70b1e8e8",
+      "title": "讓貿易往來更清楚",
+      "caption": "歐洲港口的招募、交易與報表已有中文欄位。",
+      "source_receipt": "/repo/workplace/reports/goal181-colony-rest/20261004-port-fields/sample/zh.json",
+      "source_receipt_sha256": "3e8142bb000624044b1cb91f3241fc808f2f5a66ae36223708b72e9b35a9bf3c",
+      "normal_input_receipt": "/repo/workplace/reports/goal181-colony-rest/europe-dock-seven-formal-gui-v224/gui-colony.inputs.json",
+      "normal_input_sha256": "c3b69af723dd708aff78d236f0a6d89f15775ad2156936725ac180bc33d2521b"
+    }
+  ],
+  "audio": "/repo/workplace/reports/goal183-release/music-short/original.wav",
+  "audio_receipt": "/repo/workplace/reports/goal183-release/music-short/receipt.json",
+  "original_files": {
+    "OPENING.EXE": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+    "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+    "GAME.TXT": "67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a",
+    "LABELS.TXT": "e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204",
+    "NAMES.TXT": "4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061"
+  },
+  "dosgolem_commit": "b0bf25963ce5a29fb3a3fcf92e211423d4cd4ac8"
+}

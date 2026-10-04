@@ -110,8 +110,9 @@ PEDIA.TXT	FATHER(\d|1\d|2[0-4])	百科	pedia	normal	建國之父條目 25 則，
 PEDIA.TXT	CARGO(\d|1[0-5])	百科	pedia	normal	貨物條目 16 則
 PEDIA.TXT	UNIT(\d|1\d|2[0-2])	百科	pedia	normal	單位條目 23 則
 PEDIA.TXT	UNIT23	百科	pedia	unreachable	只有標題 {Colonists} 的殘段；百科單位清單只列 23 則（目標170）
-PEDIA.TXT	TERRAIN(\d|1[0-5]|2[4-8])	百科	pedia	normal	地形條目 21 則，與目標170 百科清單數一致
-PEDIA.TXT	TERRAIN(1[6-9]|2[0-3])	百科	pedia	unreachable	重複的八種森林條目；百科清單只列 21 則（假說：地圖上無此編號地形）
+PEDIA.TXT	TERRAIN(\d|1[0-5]|2[4-8])	百科	pedia	normal	正常清單21次實際來源查詢與GUI及原版終點已核對（目標180）；同文模板不當作來源鍵
+PEDIA.TXT	TERRAIN(1[6-9]|23)	百科	pedia	conditional	與8～11／15同文同譯；正常清單實際查詢8～11／15，這些額外段落的其他情境未證；模板命中不證明原始段落已查詢（目標180）
+PEDIA.TXT	TERRAIN2[0-2]	百科	pedia	conditional	正常清單未證實原始來源命中；內容並非全與12～14相同，仍待情境百科路徑核對（目標180勘誤）
 PEDIA.TXT	JOB(\d|1[0-7]|19|2[0-7])	百科	pedia	normal	殖民者技能條目 27 則
 PEDIA.TXT	JOB18	百科	pedia	unreachable	只有標題 {Student} 的殘段；技能清單只列 27 則
 PEDIA.TXT	BUILDING(\d|1[2-9]|2\d|3[2-9]|4[01])	百科	pedia	normal	建築條目 38 則
@@ -160,3 +161,10 @@ EXE	c9ee0a41420e|84a1cab8db2f	開局設定	input	normal	命名殖民地、命名
 EXE	74df22d196ea	開局設定	input	normal	已顯示：開局姓名欄只有預填姓名與游標，屬玩家輸入內容，依目標174 決定保留原版字元
 EXE	15d1c75e9845	海上地圖	dialog	normal	已顯示：Find Colony 打字後的輸入列重印，標籤像素未變，前一段 Colony: 標籤覆蓋仍有效（目標174 除錯重播 fallback 切行證據）
 EXE	52ae9fbfd404|9dc1b911eee2|ad437828b303	下拉選單	menu	normal	已顯示：VIEW 下拉選單整段（MENU.TXT @VIEW 各行）；目標177 起以 MENU.TXT 鍵顯示中文（check_goal177_window.py），此列是舊收據的回原文紀錄
+EXE	6584421131b4	存讀檔	dialog	normal	目標179正常讀檔清單：存檔描述與九個 (EMPTY) 欄位被正文層彙總為一段，畫面仍有英文；只分類畫面角色，原始儲存來源語意尚未證實，依 Issue #61 收尾
+EXE	414cb9e4c237	百科	string	normal	目標180地形海岸／河流加成欄；舊六模板收據兩次漏譯，八模板已READY實作，正常GUI最終重驗中
+EXE	8f3daa9aec62	歐洲港口	dialog	normal	目標170正常招募選項整段彙總，1023982862步line-no-template；新版逐行清單已有機制，不由其他局勢的通過收據宣稱本組合全驗
+EXE	6f58196e382b	歐洲港口	dialog	normal	目標170正常購買船艦／火砲選項整段彙總，1048033390步line-no-template；新版逐行清單已有機制，正式全部旗標仍須覆蓋此組合
+EXE	26458b92c96f	歐洲港口	dialog	normal	目標170正常訓練職業與價格選項整段彙總，1072597858步line-no-template；新版逐行清單已有機制，正式全部旗標仍須覆蓋此組合
+EXE	1ed8f7aa3c8d	存讀檔	dialog	normal	目標181正常COLONY01.SAV讀檔清單：第二欄描述與其餘EMPTY欄被正文層彙總，仍有英文；僅分類畫面角色，來源語意與中文安全區依Issue #61續驗
+EXE	e4351e498b79	存讀檔	dialog	normal	正常第三欄讀檔的槽位清單合併觀測；來源位址未知，六次回退，保留待接，不由LOADGOOD正文推定列表已中文化

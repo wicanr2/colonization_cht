@@ -1,0 +1,11 @@
+# 沿用既有Wine映像；r1只補齊正常GUI輸入／狀態檢查工具。
+FROM psychicwar-wine@sha256:4e41c4dca4d6a4450945fe13d0ebc198d07d36090fac87929d7f3696f79315ce
+
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y \
+       python3=3.12.3-0ubuntu2.1 \
+       xdotool=1:3.20160805.1-5build1 \
+    && dpkg-query -W > /usr/local/share/colonization-verification-packages.txt \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /repo

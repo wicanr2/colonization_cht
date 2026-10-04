@@ -330,18 +330,42 @@ type seaRow struct {
 	text              string
 	parts             []seaPart
 	firstOld, lastVal map[int]byte
+	suspended         bool
+}
+
+// visibility 保留被遮住的來源；暫停後須完整恢復原墨跡才重新繪製。
+// 規格032：部分相似不能讓已暫停的舊內容重新作用。
+func (r *seaRow) visibility(cur []byte, allowPartial bool) (paint, retain, whole bool) {
+	if len(r.parts) == 0 || len(r.lastVal) == 0 {
+		return false, false, false
+	}
+	intact := 0
+	for i, v := range r.lastVal {
+		if r.firstOld[i] == 68 || r.firstOld[i] == 149 {
+			return false, false, false
+		}
+		if cur[i] == v {
+			intact++
+		}
+	}
+	whole = intact == len(r.lastVal)
+	paint = whole || (!r.suspended && allowPartial && float64(intact) >= stringIntactMin*float64(len(r.lastVal)))
+	r.suspended = !paint
+	return paint, true, whole
 }
 
 type seaLayer struct {
-	name      string
-	safe      image.Rectangle
-	rows      []*seaRow
-	patch     *overlay.Patch
-	shadow    *image.Alpha
-	fg        map[byte]*image.Alpha
-	afterSafe []byte
-	dirty     bool
-	reason    string
+	wholeInk     *image.Alpha
+	erasedSource map[int]byte
+	name         string
+	safe         image.Rectangle
+	rows         []*seaRow
+	patch        *overlay.Patch
+	shadow       *image.Alpha
+	fg           map[byte]*image.Alpha
+	afterSafe    []byte
+	dirty        bool
+	reason       string
 	// 目標177：最近一次所有保留行都完整時的安全區畫面；partial 為目前有行被部分遮住。
 	cleanSafe []byte
 	partial   bool
@@ -1005,6 +1029,12 @@ func main() {
 	}
 	labelsSource := read(filepath.Join(*root, "LABELS.TXT"))
 	namesSource := read(filepath.Join(*root, "NAMES.TXT"))
+	if dlg != nil && dlg.cat != nil {
+		data := read(*dialogCorpus)
+		if hash(data) == dialogBind["corpus"] {
+			dlg.cat.bindUnitCaptionNames(data, namesSource)
+		}
+	}
 	var statics []*staticItem
 	if *staticA {
 		staticBytes := read(*staticCatalog)
@@ -1960,7 +1990,7 @@ func main() {
 		str = &stringRuntime{misses: map[string]int{}, reason: "dialog-catalog-unavailable"}
 		if dlgOn {
 			files := map[string][]byte{}
-			for _, name := range []string{"LABELS.TXT", "NAMES.TXT", "WOODCUT.TXT", "COLONY.TXT", "MENU.TXT", "GAME.TXT", "PEDIA.TXT"} {
+			for _, name := range []string{"LABELS.TXT", "NAMES.TXT", "WOODCUT.TXT", "COLONY.TXT", "MENU.TXT", "GAME.TXT", "PEDIA.TXT", "VICEROY.EXE"} {
 				if b, err := os.ReadFile(filepath.Join(*root, name)); err == nil {
 					files[name] = b
 				}
@@ -2009,6 +2039,18 @@ func main() {
 	}
 	strOn := str != nil && str.reason == ""
 	if strOn && dlgOn {
+		dlg.cat.saveDescription = str.cat.translateSaveDescription
+		dlg.slotFallback = str.cat.translateSaveSlot
+		// 規格035 ABANDON：沿已核對來源及字模的殖民地名稱清冊，只改顯示。
+		dlg.cat.colonyValue = func(name string) string {
+			if zh, ok := str.cat.colony[name]; ok {
+				return zh
+			}
+			return name
+		}
+		dlg.lineFallbackAt = func(text string, lineIndex int) (string, bool) {
+			return str.routePortTranslate(text, lineIndex, canvas(), dlg.cur, m.Steps)
+		}
 		dlg.lineFallback = func(text string) (string, bool) {
 			// 目標172：少於兩個英文字母的行（單一字母、數字）不借用字串層，免得零碎印字變成覆蓋而擋住其他欄位。
 			if len(stringLetter.FindAllString(text, 2)) < 2 {
@@ -2166,7 +2208,9 @@ func main() {
 			return
 		}
 		// 目標172：標題與清單常是先後兩段（殖民地職業選單、建造清單）；上一段仍有效、與新段不重疊且相隔 2M 步內即保留。
-		if old := dlg.cur; old != nil && old.phase != "expired" && !old.safe.Overlaps(st.safe) && st.complete-old.complete < 2000000 {
+		if dlg.retainSlotTitle(st, canvas()) {
+			dialogExpireOne(dlg.cur, "superseded-by-new-dialog")
+		} else if old := dlg.cur; old != nil && old.phase != "expired" && !old.safe.Overlaps(st.safe) && st.complete-old.complete < 2000000 {
 			dialogExpireOne(dlg.prev, "superseded-by-new-dialog")
 			dlg.prev = old
 		} else {
@@ -2174,14 +2218,35 @@ func main() {
 			dlg.prev = nil
 		}
 		dlg.cur = st
-		events = append(events, map[string]any{"candidate_id": st.id, "stage": "source", "step": r.start, "entry_ip": "0D21:00C6",
+		ev := map[string]any{"candidate_id": st.id, "stage": "source", "step": r.start, "entry_ip": "0D21:00C6",
 			"source_linear": r.base, "shown": shown, "font_px": st.size,
-			"safe": []int{st.safe.Min.X, st.safe.Min.Y, st.safe.Max.X, st.safe.Max.Y}})
+			"safe": []int{st.safe.Min.X, st.safe.Min.Y, st.safe.Max.X, st.safe.Max.Y}}
+		if len(st.items) > 0 {
+			ev["items"] = st.items // 目標178：逐行清單各行原文，普查逐行歸屬用
+		}
+		events = append(events, ev)
 	}
 	stringDrop := func(it *stringItem, reason string) {
 		events = append(events, map[string]any{"candidate_id": it.id, "stage": "expired", "step": m.Steps, "reason": reason, "shown": it.text})
 	}
 	stringFinish := func(r *stringRun) {
+		if r.buf2 {
+			// 目標178：離屏地圖緩衝區上的文字（殖民地名稱標籤），不經連續字串的合併與海上層分工。
+			it, why := str.finishLabel(r, m.Mem[0x3bb00:0x3bb00+64000], canvas(), m.Steps)
+			if it == nil {
+				if why != "" {
+					str.misses[why+"\t"+string(r.text)]++
+				}
+				return
+			}
+			for _, old := range str.add(it) {
+				stringDrop(old, "superseded")
+			}
+			events = append(events, map[string]any{"candidate_id": it.id, "stage": "source", "step": r.start, "entry_ip": "0D21:00C6",
+				"source_linear": r.base, "shown": it.text, "zh": it.zh, "font_px": it.size, "buffer": "map",
+				"safe": []int{it.safe.Min.X, it.safe.Min.Y, it.safe.Max.X, it.safe.Max.Y}})
+			return
+		}
 		if r = str.join(r); r == nil {
 			return // 目標170：單字母熱鍵先暫存，等下一串合併
 		}
@@ -2192,9 +2257,16 @@ func main() {
 		for _, b := range r.boxes {
 			ink = ink.Union(b)
 		}
-		if seaOn && ink.Overlaps(seaPanelRect) {
+		for _, old := range str.retirePortHeader(r, ink) {
+			stringDrop(old, "superseded")
+		}
+		for _, old := range str.retireRouteGrid(text, ink) {
+			stringDrop(old, "superseded")
+		}
+		if seaOn && ink.Overlaps(seaPanelRect) && len(stringLetter.FindAllString(text, 2)) >= 2 {
 			// 目標177：狀態欄上有新的印字時，與它重疊、文字不同的舊行一律移除（改印，不是遮擋），
 			// 否則部分遮擋的保留規則會讓舊行與新字疊在一起。
+			// 目標178：先套用完整字串的最低資格；訊息框的單字元片段不是狀態欄改印。
 			kept := sea.panel.rows[:0]
 			for _, row := range sea.panel.rows {
 				if row.bbox.Overlaps(ink) && row.text != text {
@@ -2274,8 +2346,20 @@ func main() {
 		}
 	}
 	if !*control && (captionAnyInk || (title != nil && title.ink != nil) || rowsAnyInk || introAnyInk || retireAnyInk || helpAnyInk || seaOn || dlgOn || strOn) {
-		m.WatchWrites(0x2cae0, 0x2cae0+64000, func(a uint32, old, value uint8) {
+		// 目標178：dosgolem 只有單一寫入監看；範圍延伸到離屏地圖緩衝區（0x3BB00 起，第 8 至 189 列），
+		// 其中的 0D21:012C 墨跡歸給進行中的字串（殖民地名稱標籤）。緩衝區第 0～7 列與畫布末列重疊，不監看。
+		m.WatchWrites(0x2cae0, 0x3bb00+190*320-1, func(a uint32, old, value uint8) {
 			if old == value {
+				return
+			}
+			if a >= 0x3bb00+8*320 {
+				if strOn && str.cur != nil {
+					bcs, bip := m.CPU.OpAddr()
+					str.onWriteBuf(int(a-0x3bb00), old, value, bcs == 0x0d21 && bip == 0x012c)
+				}
+				return
+			}
+			if a >= 0x2cae0+64000 {
 				return
 			}
 			cs, ip := m.CPU.OpAddr()
@@ -2284,7 +2368,7 @@ func main() {
 				str.onWrite(int(a-0x2cae0), old, value, cs == 0x0d21 && ip == 0x012c,
 					cs == 0x0b68 && ip == 0x051c && image.Pt(x, y).In(cursorBox(int(d.Mouse.X), int(d.Mouse.Y)).Inset(-2)))
 			}
-			if dlgOn && dlg.run != nil && m.Steps-dlg.run.last < dialogGap {
+			if dlgOn && dlg.run != nil {
 				dlg.onWrite(int(a-0x2cae0), old, value, cs == 0x0d21 && ip == 0x012c,
 					cs == 0x0b68 && ip == 0x051c && image.Pt(x, y).In(cursorBox(int(d.Mouse.X), int(d.Mouse.Y)).Inset(-2)))
 			}
@@ -2468,12 +2552,24 @@ func main() {
 		})
 	}
 	if !*control && len(difficulty) > 0 {
+		// 原有讀取條件首先要求位址相等；先按位址分組，避免遊戲期間每次
+		// 無關讀取都遍歷所有難度／國家欄位。相同位址保留原來的欄位順序。
+		difficultyReads := map[uint32][]*difficultyLine{}
+		for _, l := range difficulty {
+			if !l.prompt {
+				difficultyReads[l.linear] = append(difficultyReads[l.linear], l)
+			}
+		}
 		m.WatchReads(0x4c000, 0x4e000, func(a uint32, _ uint8) {
+			candidates := difficultyReads[a]
+			if len(candidates) == 0 {
+				return
+			}
 			cs, ip := m.CPU.OpAddr()
 			if m.VideoMode() != 0x13 {
 				return
 			}
-			for _, l := range difficulty {
+			for _, l := range candidates {
 				if l.prompt {
 					continue
 				}
@@ -2563,6 +2659,9 @@ func main() {
 			}
 			c := m.CPU
 			cs, ip := c.Seg[golem.CS], c.IP
+			if strOn && (len(str.cargo.parts) > 0 || str.cargo.header.role != "") && m.VideoMode() != 0x13 {
+				str.cargo = cargoAssembly{}
+			}
 			for _, caption := range captions {
 				if caption.ink == nil || cs != 0x0d21 || ip != 0x00c6 {
 					continue
@@ -2676,9 +2775,28 @@ func main() {
 				sea.cur.raw = append(sea.cur.raw, m.Mem[a])
 				sea.cur.next, sea.cur.last = a+1, m.Steps
 			}
+			if strOn && cs == 0x0e2d && ip == 0x11cf {
+				if m.VideoMode() != 0x13 {
+					str.cargo = cargoAssembly{}
+				} else {
+					codeA := uint32(cs)*16 + uint32(ip)
+					str.cargo.observe(m.Mem, c.Seg[golem.SS], c.R[golem.BP], m.Mem[codeA:codeA+18])
+				}
+			}
 			if strOn && cs == 0x0d21 && ip == 0x00c6 && m.VideoMode() == 0x13 {
 				a := uint32(c.Seg[golem.SS])*16 + uint32(c.R[golem.BX])
-				if done := str.onRead(a, m.Mem[a], m.Steps); done != nil {
+				fresh := str.cur == nil || a != str.cur.next || m.Steps-str.cur.last >= stringGap
+				done := str.onRead(a, m.Mem[a], m.Steps)
+				if fresh && str.cur != nil {
+					raw, ok := cargoCString(m.Mem, a)
+					if p := str.cargo.proof(m.Mem); ok && p.role != "" && raw == p.text {
+						str.cur.cargo = p
+					}
+					if p := str.cargo.headerProof(m.Mem); ok && p.role != "" && raw == p.text {
+						str.cur.cargo = p
+					}
+				}
+				if done != nil {
 					stringFinish(done)
 				}
 			}
@@ -3021,29 +3139,32 @@ func main() {
 				}
 				// 重建：逐行核對文字像素仍為當次改色值，且改寫前不是文字色；其餘行保留原文。
 				layer.dirty, layer.patch = false, nil
+				layer.erasedSource = map[int]byte{}
 				cur := canvas()
 				before := bytes.Clone(cur)
 				w, h := layer.safe.Dx()*4, layer.safe.Dy()*4
 				layer.shadow = image.NewAlpha(image.Rect(0, 0, w, h))
+				layer.wholeInk = image.NewAlpha(image.Rect(0, 0, w, h))
 				layer.fg = map[byte]*image.Alpha{68: image.NewAlpha(image.Rect(0, 0, w, h)), 149: image.NewAlpha(image.Rect(0, 0, w, h))}
 				kept := layer.rows[:0]
 				partial := false
 				for _, r := range layer.rows {
-					ok := len(r.parts) > 0
-					intact := 0
-					for i, v := range r.lastVal {
-						if r.firstOld[i] == 68 || r.firstOld[i] == 149 {
-							ok = false
-							break
-						}
-						if cur[i] == v {
-							intact++
-						}
+					paint, retain, whole := r.visibility(cur, strOn && layer.cleanSafe != nil && layer.name != "sea:panel")
+					if !retain {
+						continue
 					}
-					// 目標177：文字像素三成以上未變且有完整畫面紀錄時保留，被蓋住的點合成後改回目前畫面。
-					whole := intact == len(r.lastVal)
-					// 只在字串層開著時放寬：字串層收尾會移除被改印的舊行，才分得出遮擋與改印。
-					if !ok || !(whole || (strOn && layer.cleanSafe != nil && float64(intact) >= stringIntactMin*float64(len(r.lastVal)))) {
+					if !paint || (layer.name == "sea:panel" && !whole) {
+						if layer.name == "sea:panel" {
+							for i, v := range r.firstOld {
+								if cur[i] == r.lastVal[i] {
+									before[i] = v
+									layer.erasedSource[i] = r.lastVal[i]
+								}
+							}
+						}
+						// 規格032 READY：被遮住的狀態欄整行暫藏，保留來源供完整恢復。
+						kept = append(kept, r)
+						partial = true
 						continue
 					}
 					partial = partial || !whole
@@ -3053,6 +3174,10 @@ func main() {
 						x := pt.x - layer.safe.Min.X*4
 						clipped = sea.seaDraw(layer.shadow, pt.text, x+2, y+2, pt.size) || clipped
 						clipped = sea.seaDraw(layer.fg[pt.color], pt.text, x, y, pt.size) || clipped
+						if whole {
+							sea.seaDraw(layer.wholeInk, pt.text, x, y, pt.size)
+							sea.seaDraw(layer.wholeInk, pt.text, x+2, y+2, pt.size)
+						}
 					}
 					if clipped {
 						sea.misses["clipped:"+r.text]++
@@ -3061,6 +3186,7 @@ func main() {
 					for i, v := range r.firstOld {
 						if cur[i] == r.lastVal[i] {
 							before[i] = v
+							layer.erasedSource[i] = r.lastVal[i]
 						}
 					}
 					kept = append(kept, r)
@@ -3565,6 +3691,18 @@ func main() {
 								for y := layer.safe.Min.Y; y < layer.safe.Max.Y; y++ {
 									for x := layer.safe.Min.X; x < layer.safe.Max.X; x++ {
 										if v := indexed[y*320+x]; v != layer.cleanSafe[i] && !image.Pt(x, y).In(box) {
+											stable := false
+											for oy := 0; oy < 4; oy++ {
+												for ox := 0; ox < 4; ox++ {
+													stable = stable || layer.wholeInk.AlphaAt((x-layer.safe.Min.X)*4+ox, (y-layer.safe.Min.Y)*4+oy).A != 0
+												}
+											}
+											if stable {
+												continue
+											} // 可丟棄原型：完整可見行的新印字不應被舊基準裁破。
+											if original, erased := layer.erasedSource[y*320+x]; erased && v == original {
+												continue // 可丟棄原型：不得把剛清掉的英文當遮擋物貼回。
+											}
 											p := int(v) * 3
 											c := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
 											draw.Draw(output, image.Rect(x*4, y*4, x*4+4, y*4+4), image.NewUniform(c), image.Point{}, draw.Src)
@@ -3821,7 +3959,10 @@ func main() {
 									for _, layer := range []struct {
 										mask  *image.Alpha
 										index int
-									}{{st.normal, int(st.normalC)}, {st.accent, int(st.accentC)}} {
+									}{{st.normal, int(st.normalC)}, {st.dim, int(st.dimC)}, {st.accent, int(st.accentC)}} {
+										if layer.mask == nil {
+											continue
+										}
 										p := layer.index * 3
 										fg := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
 										draw.DrawMask(output, panel, image.NewUniform(fg), image.Point{}, layer.mask, image.Point{}, draw.Over)
@@ -3936,12 +4077,58 @@ func main() {
 				}
 			}
 			cur := cursorBox(int(d.Mouse.X), int(d.Mouse.Y))
+			woodcutOpen := str.woodcutVisible(indexed, cur)
+			if woodcutOpen {
+				dialogSafes = nil // 事件頁不保留舊對話框的輸出區。
+				// 規格038：這三種事件頁以原版VGA作底層，其他舊覆蓋暫藏。
+				for i, v := range indexed {
+					p := int(v) * 3
+					c := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
+					for dy := 0; dy < 4; dy++ {
+						for dx := 0; dx < 4; dx++ {
+							output.SetRGBA((i%320)*4+dx, (i/320)*4+dy, c)
+						}
+					}
+				}
+				for _, record := range lineRecords {
+					record["applied"], record["reason"] = false, "woodcut-original-page"
+				}
+				applied, reason = false, "woodcut-original-page"
+			}
 			paint := func(x, y int, v byte) {
 				p := int(v) * 3
 				c := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
 				draw.Draw(output, image.Rect(x*4, y*4, x*4+4, y*4+4), image.NewUniform(c), image.Point{}, draw.Src)
 			}
 			for _, it := range str.items {
+				if woodcutOpen && !strings.HasPrefix(it.id, "STRING:woodcut:") {
+					continue
+				}
+				if it.ink.In(seaPanelRect) && sea != nil && sea.panel.patch != nil {
+					claimed := false
+					for _, row := range sea.panel.rows {
+						claimed = claimed || row.bbox.Overlaps(it.ink)
+					}
+					if claimed {
+						continue // 規格038 READY：海上層已負責，避免舊字串別名清掉中文。
+					}
+				}
+				if enabled && d.Mouse.Buttons == 0 && it.phase == "suspended" && it.safe.In(seaPanelRect) && stringIntact(indexed, it) < 1 {
+					k := 0
+					for y := it.safe.Min.Y; y < it.safe.Max.Y; y++ {
+						for x := it.safe.Min.X; x < it.safe.Max.X; x++ {
+							protected := false
+							for _, ds := range dialogSafes {
+								protected = protected || image.Pt(x, y).In(ds)
+							}
+							if !protected && it.before[k] != it.after[k] && indexed[y*320+x] == it.after[k] {
+								paint(x, y, it.before[k])
+							}
+							k++
+						}
+					}
+					continue
+				}
 				// 目標177：暫停中（畫布部分被蓋住）的項目，英文墨跡仍有三成以上未變就照畫，被蓋住的點稍後改回目前畫面。
 				occluded := it.phase == "suspended" && stringIntact(indexed, it) >= stringIntactMin
 				if it.phase != "active" && !occluded {
@@ -3951,7 +4138,7 @@ func main() {
 				case !enabled:
 					sreason = "disabled"
 					continue
-				case d.Mouse.Buttons != 0:
+				case d.Mouse.Buttons != 0 && !cargoHeldAllowed(it, indexed, cur, dialogSafes):
 					sreason = "mouse-button-held"
 					continue
 				case !occluded && !stringSame(indexed, it, cur):

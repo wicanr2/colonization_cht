@@ -2,11 +2,40 @@ package main
 
 import (
 	"encoding/json"
+	"image"
 	"testing"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	golem "github.com/wicanr2/dosgolem"
 )
+
+func TestSeaRowOcclusionRecovery(t *testing.T) {
+	r := &seaRow{parts: []seaPart{{text: "測試"}}, bbox: image.Rect(0, 0, 10, 1), firstOld: map[int]byte{}, lastVal: map[int]byte{}}
+	cur := make([]byte, 10)
+	for i := range cur {
+		r.firstOld[i], r.lastVal[i], cur[i] = 12, 68, 68
+	}
+	check := func(paint, retain, whole bool) {
+		t.Helper()
+		p, k, w := r.visibility(cur, true)
+		if p != paint || k != retain || w != whole {
+			t.Fatalf("可畫／保留／完整 = %v／%v／%v，預期 %v／%v／%v", p, k, w, paint, retain, whole)
+		}
+	}
+	check(true, true, true)
+	for i := 0; i < 8; i++ {
+		cur[i] = 1
+	}
+	check(false, true, false) // 被遮住八成，保留來源但不繪製。
+	for i := 0; i < 7; i++ {
+		cur[i] = 68
+	}
+	check(false, true, false) // 九成相似仍不能恢復舊來源。
+	cur[7] = 68
+	check(true, true, true)
+	r.firstOld[0] = 149
+	check(false, false, false) // 無法證明印前底圖時丟棄，不能以保留來源繞過。
+}
 
 func TestWindowCoordinates(t *testing.T) {
 	for _, v := range []struct {
@@ -162,4 +191,30 @@ func TestAudioStreamResample(t *testing.T) {
 	if len(s.out) != audioPlayRate*4/10 || s.Dropped == 0 {
 		t.Fatalf("積壓應截到 0.1 秒：%d 位元組、丟 %d", len(s.out), s.Dropped)
 	}
+}
+
+func TestSeaPanelWholeLineRecovery(t *testing.T) {
+	r := &seaRow{parts: []seaPart{{text: "測試"}}, firstOld: map[int]byte{}, lastVal: map[int]byte{}}
+	cur := make([]byte, 10)
+	for i := range cur {
+		r.firstOld[i], r.lastVal[i], cur[i] = 12, 68, 68
+	}
+	check := func(paint, retain, whole bool) {
+		t.Helper()
+		p, k, w := r.visibility(cur, false)
+		if p != paint || k != retain || w != whole {
+			t.Fatalf("整行可畫／保留／完整 = %v／%v／%v", p, k, w)
+		}
+	}
+	check(true, true, true)
+	cur[0] = 1
+	check(false, true, false) // 九成原字仍在：整行暫藏，不能保留中文碎字。
+	cur[1] = 1
+	check(false, true, false)
+	cur[0] = 68
+	check(false, true, false) // 部分恢復不能提前繪製。
+	cur[1] = 68
+	check(true, true, true)
+	r.firstOld[0] = 149
+	check(false, false, false) // 缺合格底圖時仍撤銷，不得用暫藏放寬來源證據。
 }

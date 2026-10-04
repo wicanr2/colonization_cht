@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Colonization CHT
+Exec=colonization-cht.sh
+Icon=colonization-cht
+Categories=Game;StrategyGame;
+Terminal=false

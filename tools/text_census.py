@@ -14,6 +14,8 @@
 
 證據（只取收據自己記錄的，不做事後配對）
 - 以鍵套用：`frames[].lines[]` 的 applied 列、`events` 的 active 事件，鍵為 `檔案:@段落`、`檔案:0x位移` 或靜態圖 id。
+- 同文模板鍵與原版來源不同時，重跑矩陣該列的 source_identity 證據檢查，只歸屬已驗的實際來源；
+  沒有來源證據的同文模板不當成原始段落，避免重複計數。
 - 以文字套用：字串層 active 事件的 `shown`；對話框引擎經字串層翻譯的逐行清單（`STRING:line`）active 不帶文字，
   引擎一次只處理一段，取同鍵最近一次 source 事件的 `shown`。
 - 海上狀態欄只記整層套用：以其詞典 `sea-status.zh-Hant.tsv` 的來源位移推定（強推論）。
@@ -38,6 +40,8 @@ import json
 import re
 from collections import Counter, defaultdict
 from pathlib import Path
+
+from verification_matrix import source_identity, checked_fields
 
 
 FILES = ["GAME.TXT", "PEDIA.TXT", "NAMES.TXT", "LABELS.TXT", "MENU.TXT", "COLONY.TXT", "MAPEDIT.TXT", "MAPMENU.TXT",
@@ -196,20 +200,31 @@ class Census:
         return [], len(ids) > 1
 
 
-def observations(path):
+def observations(path, verified_fields=None):
     """一份收據 → (以鍵套用, 以文字套用, 未套用文字, 海上層是否套用)。"""
     d = json.loads(path.read_text())
     keys, applied, missed, sea = set(), set(), Counter(), False
-    for fr in d.get("frames", []):
+    allowed = None if verified_fields is None else {
+        (f['candidate_id'], f['shown'], tuple(f['safe'])): f.get('source_ids', []) for f in verified_fields}
+    for fr in ([] if allowed is not None else d.get("frames", [])):
         for line in fr.get("lines", []):
             if str(line.get("applied")) == "True":
                 keys.add(line["candidate_id"])
-    last_source = {}
+    last_source, last_items, source_events, sources_by_text = {}, {}, {}, {}
     for e in d.get("events", []):
         cid = e.get("candidate_id", "")
         if e.get("stage") == "source" and e.get("shown"):
             last_source[cid] = e["shown"]
+            last_items[cid] = e.get("items") or []
+            source_events[cid] = e
+            sources_by_text[cid, e['shown']] = e
         if e.get("stage") == "active":
+            if allowed is not None:
+                source = sources_by_text.get((cid, e.get('shown')), source_events.get(cid, {}))
+                field_key = (cid, source.get('shown'), tuple(source.get('safe', [])))
+                if field_key not in allowed:
+                    continue
+                keys.update(allowed[field_key])
             if cid.startswith("STRING"):
                 # 字串層的 active 自帶 shown；對話框引擎經字串層翻譯的逐行清單（STRING:line）不帶，
                 # 引擎一次只處理一段，取同鍵最近一次 source 的文字。
@@ -218,6 +233,10 @@ def observations(path):
                     applied.add(norm(text))
             else:
                 keys.add(cid)
+            # 目標178：逐行清單的 source 事件另帶各行原文（items）；鍵可能是 STRING:line，也可能是最後一行的 MENU.TXT 鍵加 +list，
+            # 每一行各自算已套用。
+            if not e.get("shown"):
+                applied.update(norm(t) for t in last_items.get(cid, []))
         elif e.get("stage") == "fallback" and e.get("shown"):
             missed[norm(e["shown"])] += 1
     sea = any(k.startswith("sea:") for k in keys)
@@ -236,7 +255,7 @@ def main():
     p.add_argument("--text", type=Path, required=True)
     p.add_argument("--reports", type=Path, required=True)
     p.add_argument("--matrix", type=Path, required=True)
-    p.add_argument("--extra", nargs="*", default=[], help="驗證矩陣以外的新前端重播收據（相對 --reports 的樣式）")
+    p.add_argument("--extra", nargs="*", default=[], help="探勘用的額外重播（相對 --reports）；未通過矩陣GUI驗收不得計入正式完成數")
     p.add_argument("--map", type=Path, required=True)
     p.add_argument("--census", type=Path, required=True, help="可提交的清冊 TSV（只含鍵）")
     p.add_argument("--report", type=Path, required=True, help="可提交的報表 Markdown")
@@ -258,28 +277,68 @@ def main():
                for s in tsv(a.text / "static-overlay.zh-Hant.tsv")}
 
     matrix = json.loads(a.matrix.read_text(encoding="utf-8"))
+    # reviewed 限制隨矩陣列保存；模板識別不能升格為原版來源位移證據。
+    key_evidence, source_aliases, field_scopes = {}, {}, {}
+    for row in matrix["rows"]:
+        if row.get('census_scope'):
+            scope = checked_fields(row, a.game, a.reports, Path(__file__).resolve().parents[1])
+            if scope is not None and scope['status'] == 'SKIP':
+                print('SKIP：已驗欄位缺合法原版，未產生普查')
+                return 77
+            if scope is None or scope['status'] != 'PASS':
+                raise ValueError('普查欄位證據未通過：' + row['id'])
+            for field in scope['fields']:
+                for cid in field.get('source_ids', []):
+                    matches = c.by_key(cid)
+                    if len(matches) != 1 or matches[0]['id'] != cid:
+                        raise ValueError('已驗欄位原始來源不是唯一完整鍵：' + cid)
+            field_scopes[row['id']] = scope['fields']
+        for cid, grade in row.get("key_evidence", {}).items():
+            if grade != "強推論" or not c.by_key(cid):
+                raise ValueError(f"來源鍵證據限制不合法：{cid} {grade}")
+            key_evidence[cid] = grade
+        identity = source_identity(row, a.game, a.reports, Path(__file__).resolve().parents[1])
+        if identity:
+            if identity["status"] == "SKIP":
+                print("SKIP：來源證據缺合法原版，未產生普查")
+                return 77
+            if identity["status"] != "PASS":
+                raise ValueError("來源證據未通過：" + identity.get("error_tail", row["id"]))
+            for template, source in identity["aliases"].items():
+                if len(c.by_key(template)) != 1 or len(c.by_key(source)) != 1:
+                    raise ValueError(f"來源映射沒有唯一普查列：{template} → {source}")
+            source_aliases[row["id"]] = identity["aliases"]
+    ambiguous_keys = set(key_evidence) | {cid for aliases in source_aliases.values() for cid in aliases}
     recs = [(row["id"], Path(q)) for row in matrix["rows"] for z in row["zh"]
             for q in sorted(glob.glob(str(a.reports / row["dir"] / (z + ".json"))))]
     recs += [(Path(q).parent.name, Path(q)) for pat in a.extra for q in sorted(glob.glob(str(a.reports / pat)))]
 
     runtime = defaultdict(lambda: {"shown": set(), "reached": set(), "missed": 0})
     sea_rids, ambiguous = set(), Counter()
-    for rid, path in recs:
-        keys, applied, missed, sea = observations(path)
+    observed = [(rid, observations(path, field_scopes.get(rid))) for rid, path in recs]
+    known_applied = {t for _, (_, applied, _, _) in observed for t in applied}
+    scoped_unverified = []
+    for rid, (keys, applied, missed, sea) in observed:
         if sea:
             sea_rids.add(rid)
         for cid in keys:
             if cid in statics:
                 statics[cid]["shown"].add(rid)
                 statics[cid]["evidence"] = "confirmed"
-            for r in c.by_key(cid):
+            aliases = source_aliases.get(rid, {})
+            if cid in ambiguous_keys and cid not in aliases:
+                continue  # 未提供來源證據的同文模板不能充當原始來源鍵。
+            source = aliases.get(cid, cid)
+            for r in c.by_key(source):
                 r["shown"].add(rid)
-                r["evidence"] = "confirmed"
+                r["evidence"] = "confirmed" if cid in aliases else key_evidence.get(cid, "confirmed")
         for t in applied:
             hit, amb = c.by_text(t)
             for r in hit:
+                if f"{r['file']}:@{r['section']}" in ambiguous_keys:
+                    continue
                 r["shown"].add(rid)
-                r["evidence"] = "confirmed"
+                r["evidence"] = key_evidence.get(f"{r['file']}:@{r['section']}", "confirmed")
             if not hit and not amb:
                 runtime[t]["shown"].add(rid)
         for t, n in missed.items():
@@ -291,6 +350,12 @@ def main():
             if amb:
                 ambiguous[t] += n
             elif not hit:
+                # 欄位驗收不授權把整份收據的重畫片段當作新原始來源。
+                # 仍保留已分類或其他已驗文字的歷史未套用觀測。
+                if (rid in field_scopes and t not in known_applied
+                        and not any(re.fullmatch(m["pattern"], text_hash(t)) for m in exe_map)):
+                    scoped_unverified.append({"receipt": rid, "hash": text_hash(t), "text": t, "count": n})
+                    continue
                 runtime[t]["reached"].add(rid)
                 runtime[t]["missed"] += n
     if sea_rids:
@@ -352,11 +417,15 @@ def main():
           f"- 收據：驗證矩陣 {len(matrix['rows'])} 列的中文重播與新前端重播，共 {len(recs)} 份",
           f"- 分母 {len(rows)} 列：TXT {sum(r['kind'] == 'txt' for r in rows)}、靜態圖 {len(statics)}、執行期字串 {len(exe_rows)}；"
           f"不顯示在遊戲畫面的段落 {len(hidden)} 列不計入",
-          f"- {LABELS['shown']} {total['shown']}（其中海上層強推論 {sum(r['evidence'] == '強推論' for r in rows)}）、"
+          f"- {LABELS['shown']} {total['shown']}（其中強推論 {sum(r['evidence'] == '強推論' for r in rows)}）、"
           f"{LABELS['pending']} {total['pending']}（正常路徑 {pend['normal']}、特定局勢 {pend['conditional']}）、"
           f"{LABELS['new-mechanism']} {total['new-mechanism']}、{LABELS['unreachable']} {total['unreachable']}",
           f"- 收據中已到達但仍是英文：{len(gap)} 列；歸屬不到 TXT、尚未分類的執行期字串：{len(unclassified)} 種；"
           f"對到多列而不歸屬的通用片段：{len(ambiguous)} 種", "",
+          "百科正常地形路徑的21次查詢已與GUI及完整原版終點核對；五組同文模板16→8、17→9、18→10、19→11、23→15只歸屬實際查詢來源。矩陣的 `source_identity` 證據檢查器會自動重跑，其他路徑的同文模板不能充當原始來源鍵。16～23仍是特定情境待驗；未宣稱全文每位元組搬運已驗。證據見目標180。", "",
+          "資金不足BUY正文依原版@BUYME0查詢歸屬兩行來源；可支付貨車依原版@BUYME1查詢、相同完整終點與GUI正文／兩選項歸屬四行來源。模板同文不替代原始來源證據；正式完成數只取已驗矩陣欄位，不採未完成GUI驗收的額外探勘重播。證據見目標181。", "",
+          "指定census_scope=checker的矩陣列只計入檢查器實際驗過的鍵、原文與安全區；每次重跑檢查器並綁定同列GUI輸入及完整原版終點，其他已啟用事件不提高完成數。", "",
+          f"限定欄位收據另有 {len(scoped_unverified)} 筆未驗診斷片段，保留於私有明細；它們尚未證實為獨立原始來源，不計入分母。既有來源與未套用觀測照常保留。", "",
           "| 畫面 | " + " | ".join(LABELS[s] for s in STATUSES) + " |", "|---|" + "---:|" * len(STATUSES)]
     md += [f"| {s} | " + " | ".join(str(by[s][x]) for x in STATUSES) + " |" for s in sorted(by)]
     md += ["", "## 已到達但仍是英文", ""]
@@ -373,10 +442,12 @@ def main():
     def clean(r):
         return {k: (sorted(v) if isinstance(v, set) else v) for k, v in r.items() if k != "sec"}
     a.detail.write_text(json.dumps({"rows": [clean(r) for r in rows], "hidden": [clean(r) for r in hidden],
-                                    "unclassified": unclassified, "ambiguous": dict(ambiguous)}, ensure_ascii=False, indent=1, sort_keys=True) + "\n",
+                                    "unclassified": unclassified, "ambiguous": dict(ambiguous),
+                                    "scoped_unverified": scoped_unverified}, ensure_ascii=False, indent=1, sort_keys=True) + "\n",
                         encoding="utf-8")
     print(json.dumps({"rows": len(rows), "status": dict(total), "pending_reach": dict(pend), "hidden": len(hidden),
                       "reached_gap": len(gap), "exe": len(exe_rows), "unclassified": len(unclassified),
+                      "scoped_unverified": len(scoped_unverified),
                       "unused_patterns": len(c.unused), "census_sha256": sha(a.census.read_bytes()),
                       "report_sha256": sha(a.report.read_bytes())}, ensure_ascii=False, sort_keys=True))
     return 0

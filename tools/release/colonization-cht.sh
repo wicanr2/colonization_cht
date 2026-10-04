@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 殖民帝國繁體中文化（Colonization CHT）技術預覽啟動器。
+# 殖民帝國繁體中文化（Colonization CHT）啟動器。
 # 用法：./colonization-cht.sh --game /path/to/COLONIZE [其他前端參數]
 # 需要自備合法取得、指紋相符的 DOS 版原版目錄；本包不含任何原版檔案。
 # 原版目錄只讀；存檔寫到 $COLONIZATION_CHT_SAVE（預設 ~/.local/share/colonization-cht/save）。
@@ -10,7 +10,7 @@ game=""
 args=()
 while (($#)); do
   case "$1" in
-    --game) game=${2:-}; shift 2 ;;
+    --game) if (($# < 2)); then echo "--game 缺少原版目錄" >&2; exit 2; fi; game=$2; shift 2 ;;
     --game=*) game=${1#--game=}; shift ;;
     -h|--help) sed -n '2,5p' "$0"; exit 0 ;;
     *) args+=("$1"); shift ;;
@@ -38,4 +38,9 @@ exec "$here/bin/colonization-window" --window --play --root "$game" --scratch "$
   --game-options-rows-a --game-options-rows-font-dir "$m/option-rows" \
   --retire-a --retire-font-dir "$m/retire" \
   --static-credits-a --static-catalog "$t/static-overlay.zh-Hant.tsv" --static-mask-dir "$m/static" \
+  --dialog-a --dialog-corpus "$t/corpus.zh-Hant.tsv" --dialog-terms "$t/terms.zh-Hant.tsv" \
+  --dialog-draft "$t/draft.zh-Hant.tsv" --dialog-pedia "$t/pedia-bilingual.tsv" \
+  --dialog-values "$t/variable-values.zh-Hant.tsv" --dialog-atlas "$m/dialog-atlas.json" \
+  --string-a --string-templates "$t/string-templates.zh-Hant.tsv" --string-atlas "$m/string-atlas.json" \
+  --colony-names "$t/colony-bilingual.tsv" --audio --sb-digital \
   --out "$save/../last-run" "${args[@]}"

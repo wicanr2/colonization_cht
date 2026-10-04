@@ -52,7 +52,13 @@ def read_catalog(path):
         prefix = f"第 {number} 列："
         require(None not in row and all(value is not None for value in row.values()), prefix + "欄數不符")
         require(all("\n" not in value and "\r" not in value and "\t" not in value and "\x00" not in value for value in row.values()), prefix + "欄位含不允許的控制字元")
-        require(re.fullmatch(r"[A-Z0-9_-]+\.TXT", row["source_file"]), prefix + "來源檔名不合法")
+        require(re.fullmatch(r"[A-Z0-9_-]+\.TXT", row["source_file"]) or
+                (row["source_file"] == "VICEROY.EXE" and row["candidate_id"] == "VICEROY.EXE:0x0001FA8E"), prefix + "來源檔名不合法")
+        if row["source_file"] == "VICEROY.EXE":
+            require(row["source_sha256"] == "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3" and
+                    row["byte_offset"] == "0x0001FA8E" and row["source_byte_length"] == "7" and
+                    row["source_bytes_sha256"] == "9251e2d6e3d0ccd4ce35aa27a82a36251ad36af2cb17b229c34a3daa2f0cdaa7",
+                    prefix + "槽位空欄來源定位不符")
         require(HASH.fullmatch(row["source_sha256"]) and HASH.fullmatch(row["source_bytes_sha256"]), prefix + "SHA-256 格式錯誤")
         require(OFFSET.fullmatch(row["byte_offset"]), prefix + "位移格式錯誤")
         require(re.fullmatch(r"[1-9][0-9]*", row["source_byte_length"]), prefix + "長度不是正整數")
@@ -78,8 +84,14 @@ def validate_sources(rows, game):
         start = int(row["byte_offset"], 16)
         end = start + int(row["source_byte_length"])
         require(0 <= start < end <= len(data), prefix + "來源範圍越界")
-        require(start == 0 or data[start - 2:start] == b"\r\n", prefix + "片段不在原始 CRLF 行首")
-        require(data[end:end + 2] == b"\r\n", prefix + "片段未完整涵蓋原始行")
+        if filename == "VICEROY.EXE":
+            # READY 規格038只開放這一個已驗零結尾片段，其他來源仍使用 CRLF 完整行。
+            require(row["candidate_id"] == "VICEROY.EXE:0x0001FA8E" and start == 129678 and
+                    end == 129685 and data[start - 1:start] == b"\x00" and
+                    data[end:end + 1] == b"\x00" and data[start:end] == b"(EMPTY)", prefix + "槽位空欄邊界不符")
+        else:
+            require(start == 0 or data[start - 2:start] == b"\r\n", prefix + "片段不在原始 CRLF 行首")
+            require(data[end:end + 2] == b"\r\n", prefix + "片段未完整涵蓋原始行")
         source = data[start:end]
         require(b"\r" not in source and b"\n" not in source, prefix + "片段不應包含換行")
         require(hashlib.sha256(source).hexdigest() == row["source_bytes_sha256"], prefix + "來源片段 SHA-256 不符")
@@ -109,7 +121,7 @@ def main(argv=None):
     except (OSError, UnicodeError, csv.Error, Invalid) as exc:
         print(f"驗證失敗：{exc}", file=sys.stderr)
         return 1
-    print(f"驗證通過：{count} 筆草稿；來源指紋、位元組範圍、CRLF、變數及控制符號一致。")
+    print(f"驗證通過：{count} 筆草稿；來源指紋、位元組範圍、片段邊界、變數及控制符號一致。")
     print("此結果不代表畫面事件、字型覆蓋或術語已定案；candidate_id 不是正式執行期識別。")
     return 0
 

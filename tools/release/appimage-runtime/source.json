@@ -1,0 +1,8 @@
+{
+  "url": "https://codeload.github.com/AppImage/type2-runtime/tar.gz/75849dc",
+  "sha256": "3efa7575abc43d3867db75a0e5168ba835b5acc9ca4248f6e879a2f11b7c1de8",
+  "bytes": 31040,
+  "observed_runtime_commit": "75849dc",
+  "runtime_sha256": "1cc49bcf1e2ccd593c379adb17c9f85a36d619088296504de95b1d06215aebbf",
+  "scope": "第三方工具來源；不含原版遊戲"
+}

@@ -10,6 +10,10 @@
 """
 
 import argparse
+import hashlib
+import signal
+from pathlib import Path
+from PIL import Image
 import json
 import os
 import subprocess
@@ -28,6 +32,77 @@ def status(path):
             time.sleep(0.02)
     raise RuntimeError("讀不到狀態檔")
 
+
+def capture_frame(out, window, name):
+    """量測實際生成畫面的步數；擷取跨畫面時保留嘗試，不以像素結果挑圖。"""
+    path = out + ".status.json"
+    for attempt in range(8):
+        before = status(path)
+        s = (before.get("frame") or {}).get("step")
+        if not isinstance(s, int) or s <= 0:
+            raise RuntimeError("缺少原版畫面步數，不能建立 GUI 擷取收據")
+        target = f"{out}.{name}.attempt-{attempt}.png"
+        subprocess.run(["import", "-window", window, target], check=True)
+        after = status(path)
+        stable = s == (after.get("frame") or {}).get("step")
+        with open(out + ".capture-attempts.jsonl", "a") as f:
+            f.write(json.dumps({"name": name, "attempt": attempt, "frame_step": s,
+                                "update_step": before["step"], "stable": stable}) + "\n")
+        if stable:
+            os.replace(target, f"{out}.{name}.png")
+            with open(out + ".shots", "a") as f:
+                f.write(f"{name} {s}\n")
+            return
+        time.sleep(0.02)
+    raise RuntimeError("GUI 擷取期間畫面持續前進，未建立未對齊的收據")
+
+
+def _validate_capture_pid(pid):
+    proc=Path('/proc')/str(pid)
+    if proc.stat().st_uid!=os.getuid() or (proc/'exe').readlink().name!='colonization-window':
+        raise RuntimeError('非本使用者的指定遊戲程序')
+
+def _freeze(pid):
+    proc=Path('/proc')/str(pid)
+    os.kill(pid,signal.SIGSTOP)
+    deadline=time.monotonic()+2
+    while True:
+        states=[(p/'status').read_text().split('State:',1)[1].splitlines()[0].strip()[0] for p in (proc/'task').iterdir()]
+        if states and all(s=='T' for s in states):return
+        if time.monotonic()>=deadline:raise RuntimeError('指定遊戲執行緒未全部停止')
+        time.sleep(.01)
+
+def _resume(pid):os.kill(pid,signal.SIGCONT)
+def _grab(window,target):subprocess.run(['import','-window',str(window),str(target)],check=True)
+
+def capture_frame_synced(out,window,name,pid):
+    _validate_capture_pid(pid)
+    path=out+'.status.json'
+    for attempt in range(32):
+        try:
+            _freeze(pid)
+            before=status(path); frame_step=(before.get('frame') or {}).get('step')
+            expected=before.get('canvas_rgba_sha256'); size=before.get('canvas_size')
+            if not isinstance(frame_step,int) or frame_step<=0 or not isinstance(expected,str) or len(expected)!=64 or not isinstance(size,list) or len(size)!=2:
+                raise RuntimeError('缺少畫面步數或畫布指紋，不建立收據')
+            target=Path(f'{out}.{name}.attempt-{attempt}.png')
+            _grab(window,target)
+            with Image.open(target) as im:
+                actual_size=list(im.size); actual=hashlib.sha256(im.convert('RGBA').tobytes()).hexdigest()
+            after=status(path)
+            stable=frame_step==(after.get('frame') or {}).get('step') and expected==after.get('canvas_rgba_sha256')
+            aligned=stable and actual==expected and actual_size==size
+            receipt={'name':name,'attempt':attempt,'frame_step':frame_step,'update_step':before['step'],'stable':stable,'canvas_rgba_sha256':expected,'capture_rgba_sha256':actual,'canvas_size':size,'capture_size':actual_size,'aligned':aligned}
+            with open(out+'.capture-attempts.jsonl','a') as f:f.write(json.dumps(receipt)+'\n')
+            if aligned:
+                os.replace(target,f'{out}.{name}.png')
+                with open(out+'.shots','a') as f:f.write(f'{name} {frame_step}\n')
+                return
+        finally:
+            _resume(pid)
+        # 只讓指定前端完成下一次呈現；不送任何原版輸入。
+        time.sleep(.05)
+    raise RuntimeError('32次有界取樣均未與發布畫布對齊，保留所有失敗嘗試')
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
@@ -80,10 +155,7 @@ def main():
         act(["mouseup", "1"], 2 * UPDATE)
 
     def shot(name):
-        s = step()
-        subprocess.run(["import", "-window", a.window, f"{a.out}.{name}.png"], check=True)
-        with open(a.out + ".shots", "a") as f:
-            f.write(f"{name} {s}\n")
+        capture_frame_synced(a.out, a.window, name, a.pid)
 
     seen, pending, pending_at, text, last_input, n, after_due = 0, False, 0, "", step(), 0, 0
     while alive():

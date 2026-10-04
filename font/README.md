@@ -77,8 +77,38 @@ python3 /repo/tools/verify_goal103_font_rebuild.py \
 尚無專案內獨立可重建來源；其他機器需取得同 SHA 字型及相容
 工具環境後重新驗證，不能把這輪結果寫成無外部依賴的公開包。
 
+封裝前用 [`tools/rebake_release_fonts.sh`](../tools/rebake_release_fonts.sh)在同一固定映像重烘開場字幕、遊戲選項與退休框，預設輸出至 `workplace/reports/goal178-orders/release-fonts/`；它們綁定整份譯稿雜湊，增補其他譯稿後也須重烘。`colonization-verification:20260930-r1` 用於畫面檢查與 Go／GUI 驗證，其 Pillow／FreeType 版本與本字模基準不同，不可替代正式字模工具鏈。
+
+早期百科對照曾使用對話框圖集 `workplace/reports/goal181-colony-rest/slot-fonts-v66/dialog/dialog-atlas.json`，當時字串圖集為 `workplace/reports/goal181-colony-rest/slot-fonts-v66/string/string-atlas.json`；來源與限定驗收見[目標180](../docs/goals/180-pedia-remaining.md)。這些是本機封裝中間物，不是正式下載入口。重烘仍在上述固定字型映像內，將原版掛 `/game` 唯讀、字型目錄掛 `/font` 唯讀、專案掛 `/repo` 可寫；先建立且核對尚未使用的輸出目錄擁有者，再執行：
+
+```sh
+dialog_out=/repo/workplace/reports/goal180-pedia-rest/rebake-dialog
+string_out=/repo/workplace/reports/goal180-pedia-rest/rebake-string
+test ! -e "$dialog_out" && test ! -e "$string_out"
+mkdir "$dialog_out" "$string_out"
+test "$(stat -c %u "$dialog_out")" = "$(id -u)"
+test "$(stat -c %u "$string_out")" = "$(id -u)"
+python3 /repo/tools/bake_dialog_atlas.py --game /game --font /font/Cubic_11.ttf --output "$dialog_out"
+python3 /repo/tools/bake_string_atlas.py --game /game --font /font/Cubic_11.ttf --output "$string_out"
+```
+
+兩個烘製器預設讀取現行 `text/`；不要混用舊稿副本與現行封包。`tools/package_release.py` 在封裝前核對圖集與隨包譯稿的全部綁定及字型指紋，不符即停止；圖集存在不能代替正常玩家路徑驗收。
+
 目標102的八頁量測入口為
 [`tools/preview_goal102_nation_intro.py`](../tools/preview_goal102_nation_intro.py)；
 原版畫素與原型輸出留在忽略的 `workplace/`，字型只從上述
 本機外部來源唯讀掛載；
 私有對照截圖只供版面審查，不是正式遊戲畫面或散布許可。
+
+
+現行封裝字模取 `workplace/reports/goal181-colony-rest/slot-fonts-v66/`：`menu/` 為15個已重烘選單字模，`release/` 為字幕、遊戲選項及退休框；`dialog/` 為當前對話框圖集；字串圖集取 `workplace/reports/goal181-colony-rest/20261004-port-fields/font/string-atlas.json`，港口三類模板只改來源綁定，字模形狀與字集完全相同。固定映像與原字型指紋沿本頁工具鏈，重烘使用 `tools/bake_string_atlas.py --game /game --font /font/Cubic_11.ttf --output <乾淨輸出目錄>`，須在上述固定字模映像執行。
+
+現行前端中間物為 `workplace/reports/goal181-colony-rest/20261004-woodcut-titles/formal-modal2/colonization-window`，三種事件標題及關閉後畫面已通過十一點抽樣。原版標題cap7，依三欄安全區量測30～20px，採30px；三個互斥色層、安全區、基線及51組容量投影見[規格038](../docs/spec/038-string-overlay-draft.md)與[目標160](../docs/goals/160-corpus-closure.md)。字模沿上列入口，沒有新增或重烘。前一原住民十點及港口三側十點驗收保留；學習兩列cap8／行距12採30px，28職業只做容量投影，見[規格036](../docs/spec/036-line-list-and-centered-text.md)。港口三欄cap5採22px，場景／名稱分類守門見規格038與[目標181](../docs/goals/181-colony-remaining.md)。封裝仍由 `tools/package_release.py --binary` 明確指定並核對全部綁定，尚未產生正式完整版。存讀檔四欄的原版字高、候選字級、21px選擇及超寬原文回退見[規格035](../docs/spec/035-dialog-overlay-draft.md)與目標181。
+
+第一路線前兩列預設Jamestown的原版cap5與22px中文另已正常GUI驗收。172個預設名的688項投影採22或18px，最長譯名採18px；其他城名未取得正常GUI驗收。來源、基線、安全區與超寬回原文見規格038及目標181。
+
+歐洲碼頭六組的原版cap8／行距12與30px中文、購輕帆船後標題的cap5與22px中文已正常GUI驗收。既有字模形狀未改，字串圖集沿上列現行入口；未知清單與缺字模回原文。限定來源、安全區及容量策略見規格035／038與目標181。
+
+碼頭傳教士兩組三列另以原版cap8／行距12量測30～20px，採30px；正常取消後復原與缺字模整份原文回退已驗。字模仍沿既有入口，限定來源與安全區見規格035。
+
+碼頭含移到最前面的七列另以原版cap8／行距12試30～20px，採30px，墨跡[6,4,361,324]未超界；正常移動後兩清單與缺字模整份回退已驗。字模與譯稿仍沿既有入口，僅已驗完整組合中文化。

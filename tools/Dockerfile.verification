@@ -1,0 +1,9 @@
+# 20260930-r1：沿用已存在且含 Go、Ebitengine、Xvfb 與圖像工具的固定映像。
+# 補足研究映像缺少的 Pillow；不掛載主機 runtime 或 Python library。
+FROM eob-remake-go@sha256:39d6e05c9abc60a566e376cde6afd29c24aa21c30eeec1e1fd92c8b16e62aa60
+
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y python3-pil=9.4.0-1.1+deb12u1 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /repo

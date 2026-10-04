@@ -13,7 +13,7 @@ a = p.parse_args()
 if not a.output.parent.is_dir() or a.output.parent.stat().st_uid != os.getuid():
     raise ValueError('輸出父目錄不存在或擁有者不符')
 s = (a.repo / 'tools/live_menu.go').read_bytes()
-if hashlib.sha256(s).hexdigest() != '57366c35691103e9950ff53d48812efe19dcb470b0622eef341113ae59af1039':
+if hashlib.sha256(s).hexdigest() != 'dcfefd3abd4556169188bf13014fad85052e9dde0a4f6a7b0507af2c42b6c667':
     raise ValueError('適配器來源不同，需重新審查')
 if b'frontendRunner(m, d, render, *out)' not in s or b'frontendFrameSink(output, rec)' not in s:
     raise ValueError('視窗接線不符')
@@ -22,6 +22,7 @@ if a.output.stat().st_uid != os.getuid():
     raise ValueError('輸出目錄擁有者不符')
 (a.output / 'adapter.go').write_bytes(s)
 (a.output / 'window.go').write_bytes((a.repo / 'tools/window_prototype.go').read_bytes())
+(a.output / 'version.go').write_bytes((a.repo / 'tools/frontend_version.go').read_bytes())
 (a.output / 'window_test.go').write_bytes((a.repo / 'tools/window_prototype_test.go').read_bytes())
 (a.output / 'dialog.go').write_bytes((a.repo / 'tools/dialog_overlay.go').read_bytes())
 (a.output / 'dialog_test.go').write_bytes((a.repo / 'tools/dialog_overlay_test.go').read_bytes())
