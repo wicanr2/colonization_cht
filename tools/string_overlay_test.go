@@ -232,13 +232,16 @@ func TestPediaPrerequisiteDelayedScreenCopy(t *testing.T) {
 	if ch := s.step(canvas, vga, none, 100+2351391, true); len(ch) != 1 || ch[0][1] != "active" {
 		t.Fatal("真VGA同步後應啟用")
 	}
-	ordinary, c, v := fixture("STRING:dictionary:Door")
-	if ch := ordinary.step(c, v, none, 100+2351390, true); len(ch) != 1 || ch[0][2] != "screen-sync-timeout" {
-		t.Fatal("其他欄位仍維持既有逾時")
-	}
-	late, c, v := fixture("STRING:template:pedia-prerequisite")
-	if ch := late.step(c, v, none, 100+3000001, true); len(ch) != 1 || ch[0][2] != "screen-sync-timeout" {
-		t.Fatal("此欄等待仍須有界")
+	// 原版先印標題，再組装整頁；完成的文字不能因螢幕尚未同步而丟失。
+	for _, id := range []string{"STRING:dictionary:Door", "STRING:template:pedia-prerequisite"} {
+		late, c, v := fixture(id)
+		if ch := late.step(c, v, none, 100+100000000, true); len(ch) != 0 || len(late.items) != 1 || late.accepted != 0 {
+			t.Fatal("未同步只能保留，不能顯示或丟棄")
+		}
+		copy(v, c)
+		if ch := late.step(c, v, none, 100+100000001, true); len(ch) != 1 || ch[0][1] != "active" || late.accepted != 1 {
+			t.Fatal("實際VGA同步後須顯示完整文字")
+		}
 	}
 	changed, c, v := fixture("STRING:template:pedia-prerequisite")
 	c[position] = 69
@@ -621,8 +624,16 @@ func TestColonyDelayedCopyRetention(t *testing.T) {
 	late.step(c, v, none, 3000101, true)
 	c[pos+1] = 68
 	late.step(c, v, none, 5000001, true)
-	if ch := late.step(c, v, none, 7000002, true); len(ch) != 1 || ch[0][2] != "screen-sync-timeout" {
-		t.Fatal("轉螢幕階段後仍須有界")
+	if ch := late.step(c, v, none, 7000002, true); len(ch) != 0 || late.items[0].phase != "waiting-screen" || late.accepted != 0 {
+		t.Fatal("轉螢幕階段後保留完整字串，不提前繪製")
+	}
+	c[pos] = 0
+	if ch := late.step(c, v, none, 7000003, true); len(ch) != 1 || ch[0][2] != "canvas-changed-before-screen" || len(late.items) != 0 {
+		t.Fatal("等待中原版文字被清掉，必須撤銷")
+	}
+	c[pos], v[pos], v[pos+1] = 68, 68, 68
+	if ch := late.step(c, v, none, 7000004, true); len(ch) != 0 || late.accepted != 0 {
+		t.Fatal("被清掉的印字紀錄不能隨相同像素復活")
 	}
 }
 

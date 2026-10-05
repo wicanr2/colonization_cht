@@ -943,11 +943,6 @@ func (s *stringRuntime) step(canvas, vga []byte, cursor image.Rectangle, now uin
 	}
 	kept := s.items[:0]
 	for _, it := range s.items {
-		screenWait := uint64(2000000)
-		if it.id == "STRING:template:pedia-prerequisite" {
-			// 規格038目標180：本欄原版同步最慢2,351,390步，加兩次GUI更新裕度。
-			screenWait = 3000000
-		}
 		same := stringSame(canvas, it, cursor)
 		switch {
 		case !mode13:
@@ -971,9 +966,8 @@ func (s *stringRuntime) step(canvas, vga []byte, cursor image.Rectangle, now uin
 		case it.phase == "waiting-screen" && !same:
 			changes = append(changes, [3]any{it, "expired", "canvas-changed-before-screen"})
 			continue
-		case it.phase == "waiting-screen" && now-it.complete > screenWait:
-			changes = append(changes, [3]any{it, "expired", "screen-sync-timeout"})
-			continue
+		// 規格038：完整印字在畫布未改變時保留，真VGA同步才啟用。
+		// 原版整頁組裝可能超過舊等待上限；容量仍由add限制為512項。
 		case it.phase == "waiting-screen" && stringSame(vga, it, cursor):
 			it.phase = "active"
 			s.accepted++

@@ -1,5 +1,17 @@
 # 規格038：連續字串通用覆蓋（DRAFT）
 
+## 2026-10-05：完成印字的螢幕等待保留（READY）
+
+承接[目標184](../goals/184-linux-player-regressions.md)與使用者的印字例程替換要求。中文仍在放大輸出畫布繪製；原版例程照常執行，原字串、CPU、RAM、VGA、存檔及音訊保持原樣。
+
+- confirmed：固定版原版建築百科的五欄均由`0D21:00C6`讀取，現有字典／模板已匹配，22px字模均適合原版安全區。百科標題安全區`[106,4,215,11]`，副標題`[108,12,212,20]`，建築、職業、商品名稱分別`[35,44,77,52]`、`[114,44,184,52]`、`[221,44,241,52]`。右、下界不含，均為原版320×200座標。原版大寫字高5，候選22～15px，最終22px；墨跡頂端沿用原版基線證據，不延伸矩形、不改版面。
+- confirmed：`text-retention/pedia-prototype/run.json`中五欄在328.35M步才與VGA同步，等待2,396,131～2,465,372步。舊2M上限在完整頁面出現前撤銷它們。已取得譯文及`string_misses=0`不證明中文已顯示。
+- confirmed：330.6M步正常GUI輸入前綴的候選與v.1.0.2英文控制完整CPU／RAM／VGA／色盤／原始WAV及四個共同取樣點全等。RAM SHA-256 `45fecad313d71751ecaf62f502dbc3eadc77fdca6b0e99f7da15c8d0a5de515e`，WAV `5b27683068caa0acdc93ddf20942b889499ac9e25b0a87308ffe0a024fb615c3`。對原README圖新增13,664個輸出像素差異，全在上述五欄；正文、圖示、背景不變。
+- 新契約：已完成且原版畫布仍符合印後紀錄的`waiting-screen`項目保留到真VGA同步。不再以指令數丟棄完整文字，也不提高全域等待常數。畫布變更、模式變更、同位置新印字、512項容量上限、來源／字模／版面拒絕仍維持原規則。`waiting-copy`的離屏搬移契約不變。
+- 完成字串的紀錄與游標各自合成；游標最後還原實際像素。未取得繪製證據或譯文的事件仍回原文並記錄，沒有對字元、共用查詢函式或原版記憶體做文字替換。
+- 原版EXE、PEDIA與正常存檔指紋沿[目標180](../goals/180-pedia-remaining.md)。工具為dosgolem隔離副本`c5953b9`、Go1.26.7與`colonization-verification:20260930-r1`；位址為執行期實模式CS:IP。可丟棄來源與精確輸入由[原型工具](../../tools/probe_text_retention.py)保存於本機`workplace/reports/goal184-linux/text-retention/`。
+- 正式驗收要求：等待超過舊上限後能啟用，畫布先改變時不能復活；正常百科GUI及滑鼠往返，中英同輸入原版狀態一致，缺字模回原文。尚未因此聲稱其餘百科或全遊戲全文完成。新規則取代正文設計第7點的`waiting-screen`逾時與先決條件3M特例，保留歷史收據。
+
 狀態：限定 CONFORMED（2026-09-28，見文末）；READY 2026-09-28；DRAFT 2026-09-28（[目標169](../goals/169-string-overlay-colony.md)，[Issue #44](https://github.com/wicanr2/colonization_cht/issues/44)）。前端旗標 `--string-a`。
 
 ## 原版證據（confirmed，探針 `tools/probe_goal165_dialogs.go` 逐串紀錄）

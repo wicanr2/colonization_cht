@@ -119,3 +119,15 @@ Linux／Wine私用完整包正常輸入通過，macOS清單與shell通過。Wind
 `PASS_RELEASE_PUBLISHED`：程式提交`e5b606e37a4e25a0a061194435c533e56aeee21c`及不可變tag `v.1.0.2-20261005`已推送，[Release](https://github.com/wicanr2/colonization_cht/releases/tag/v.1.0.2-20261005)五附件的名稱、大小與官方SHA-256全等。[Issue #53留言](https://github.com/wicanr2/colonization_cht/issues/53#issuecomment-5988602216)已更新，Issue保持OPEN。機器核對收據為`music-independent/release-remote.json`及`remote-verification.json`。舊版、私用包與原始音訊未公開或覆寫。
 
 本輪容器全回收，未建新映像，其他專案資源保留；工作根無root-owned檔案或.md目錄，新增程式、文件及交付均1000:1000。兩個Git工作樹乾淨，隔離dosgolem upstream推送DISABLED。
+
+## 2026-10-05：百科殘留英文與游標重繪續修
+
+使用者指出 README 百科截圖的標題、副標題與三個圖示名稱仍是英文，要求由印字例程替換並避免滑鼠覆寫。[保留文字原型](../../tools/probe_text_retention.py)只修改可丟棄組裝副本，先量測完成印字到 VGA 同步的延遲，並試驗主選單中文合成後還原游標。原版 CPU、RAM、輸入、存檔與音訊不改；正式來源尚未採用候選。
+
+已證實：`building-final-v3/gui-pedia.json`在325.87M～325.95M步取得五欄完整原文與譯文，全部在328.02M步因2M等待上限被撤銷。這五欄皆經`0D21:00C6`讀字，不是烘入圖像。`string_misses=0`只證明有譯文，不能證明已顯示；舊38篇正文／22欄先決條件驗收範圍維持原記錄。
+
+正式抽樣入口沿[百科GUI腳本](../../tools/probe_goal179_gui.sh)，設定`COLONIZATION_PEDIA_FIRST=14`、`COLONIZATION_PEDIA_COUNT=15`、`COLONIZATION_PEDIA_HOVER=1`及建築類別222座標，只正常進入使用者指出的篇目並測五個文字欄位。中英／缺圖集三側由[重播工具](../../tools/replay_text_retention.py)在有界Docker/Xvfb、唯讀`/game`內執行；參數`--binary <正式二進位> --gui <正常GUI輸出> --output <新目錄>`。正式來源與收據位於本機`text-retention/`，不注入百科或記憶體。
+
+独立檢查使用[收據檢查器](../../tools/check_text_retention.py)`--reports /repo/workplace/reports/goal184-linux/text-retention`，核對11張百科GUI、五欄啟用、缺圖集回原文、30張主選單往返、完整原版狀態、共同VGA／色盤及存檔。此範圍不重算全遊戲普查完成數。
+
+`PASS_TEXT_RETENTION`（2026-10-05）：正式候選已接入（游標分層見規格012附記，等待保留見規格038附記），正式二進位與工作樹來源雜湊一致，Go vet／測試通過。首輪正式收據因`shot_after`移開游標後立即擷取，GUI仍留舊欄位游標而重播已就緒，對拍在`building-away-0`失敗（舊收據保留於`pedia-gui-formal-race`／`pedia-replays-formal-race`）；已在腳本補足移開後4M步重繪等待並新增`COLONIZATION_FONT_DIR`覆寫，全部素材指向正式包萃取的`extracted-v2`遮罩。重擷取（建築類別選單Y取輸入錄得的220）與三側重播後檢查器通過：11張百科GUI五欄中文、缺圖集回原文、30組主選單游標檢查、中英缺三側完整原版狀態及存檔一致。摘要為本機`text-retention/verification.json`；矩陣列與普查計數維持不變。

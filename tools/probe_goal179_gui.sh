@@ -17,7 +17,7 @@ game_pid=''
 trap '[[ -z "$game_pid" ]] || kill "$game_pid" 2>/dev/null || true; kill "$xp" 2>/dev/null || true; [[ -z "$game_pid" ]] || wait "$game_pid" 2>/dev/null || true; wait "$xp" 2>/dev/null || true' EXIT
 out=$target/gui-pedia
 "${COLONIZATION_WINDOW_BIN:-$audit/rebuild-recovery/colonization-window}" --window --root /game --scratch "$target/scratch" \
-  --all-menu --catalog /repo/text/draft.zh-Hant.tsv --font-dir "$r/goal096-fonts-verified" \
+  --all-menu --catalog /repo/text/draft.zh-Hant.tsv --font-dir "${COLONIZATION_FONT_DIR:-$r/goal096-fonts-verified}" \
   --sea-status-a --sea-atlas "$r/goal143-sea/atlas/sea-atlas.json" \
   --dialog-a --dialog-atlas "${COLONIZATION_DIALOG_ATLAS:-$r/goal174-input/dialog-atlas/dialog-atlas.json}" \
   --string-a --string-atlas "${COLONIZATION_STRING_ATLAS:-$r/goal174-input/atlas/string-atlas.json}" \
@@ -26,7 +26,7 @@ out=$target/gui-pedia
 game_pid=$!
 window=''
 for ((i=0;i<600;i++)); do
-  window=$(xdotool search --name 'Colonization CHT prototype' 2>/dev/null | head -1 || true)
+  window=$(xdotool search --name 'Colonization CHT' 2>/dev/null | head -1 || true)
   [[ -z "$window" ]] || break
   sleep .1
 done
@@ -37,6 +37,9 @@ shot_after() {
   local s=$(gui_step)
   wait_step $((s+4000000))
   move_to 64 64
+  s=$(gui_step)
+  # 游標移開後等原版輪詢並重繪，否則擷取到仍停在舊欄位的游標，重播對拍必錯。
+  wait_step $((s+4000000))
   s=$(gui_step)
   import -window "$window" "$out.$1.png"
   echo "$1 $s" >>"$out.shots"
@@ -58,11 +61,25 @@ shot_after pedia-menu
 category=${COLONIZATION_PEDIA_CATEGORY:-cargo}
 click 1100 "${COLONIZATION_PEDIA_MENU_Y:-62}"
 shot_after "$category-list"
-for ((entry=0;entry<${COLONIZATION_PEDIA_COUNT:-16};entry++)); do
+for ((entry=${COLONIZATION_PEDIA_FIRST:-0};entry<${COLONIZATION_PEDIA_COUNT:-16};entry++)); do
   # 原版每次返回清單都選第一列，從已確認的起點走到該項。
   for ((down=0;down<entry;down++)); do key_once Down; done
   enter_once
   shot_after "$category-article-$entry"
+  if [[ ${COLONIZATION_PEDIA_HOVER:-0} == 1 ]]; then
+    # 在五個已確認的標題／圖示文字欄移動游標，移開後仍應完整中文。
+    points=('512 24' '512 56' '160 188' '500 188' '900 188')
+    for ((hover=0;hover<${#points[@]};hover++)); do
+      read -r hx hy <<<"${points[$hover]}"
+      move_to "$hx" "$hy"
+      s=$(gui_step)
+      wait_step $((s+400000))
+      s=$(gui_step)
+      import -window "$window" "$out.$category-hover-$hover.png"
+      echo "$category-hover-$hover $s" >>"$out.shots"
+      shot_after "$category-away-$hover"
+    done
+  fi
   key_once Escape
   shot_after "$category-list-$entry"
 done

@@ -3571,8 +3571,40 @@ func main() {
 			}
 			var e error
 			var results []overlay.LayerResult
-			output, results, e = overlay.ComposeLayers(indexed, m.DAC[:], 320, 200, 4, layers)
+			// 規格012：已驗證印字與游標分層，只在輸出副本移除游標。
+			clean := indexed
+			cur := cursorBox(int(d.Mouse.X), int(d.Mouse.Y))
+			for _, l := range lines {
+				if l.patch == nil || len(l.afterSafe) != l.safe().Dx()*l.safe().Dy() {
+					continue
+				}
+				box := cur.Intersect(l.safe())
+				if box.Empty() {
+					continue
+				}
+				if &clean[0] == &indexed[0] {
+					clean = bytes.Clone(indexed)
+				}
+				for y := box.Min.Y; y < box.Max.Y; y++ {
+					for x := box.Min.X; x < box.Max.X; x++ {
+						clean[y*320+x] = l.afterSafe[(y-l.safe().Min.Y)*l.safe().Dx()+x-l.safe().Min.X]
+					}
+				}
+			}
+			output, results, e = overlay.ComposeLayers(clean, m.DAC[:], 320, 200, 4, layers)
 			must(e)
+			// 僅還原真正與底層不同的游標像素，保留矩形內其餘中文。
+			for y := max(0, cur.Min.Y); y < min(200, cur.Max.Y); y++ {
+				for x := max(0, cur.Min.X); x < min(320, cur.Max.X); x++ {
+					i := y*320 + x
+					if indexed[i] == clean[i] {
+						continue
+					}
+					p := int(indexed[i]) * 3
+					c := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
+					draw.Draw(output, image.Rect(x*4, y*4, x*4+4, y*4+4), image.NewUniform(c), image.Point{}, draw.Src)
+				}
+			}
 			for i, result := range results[:len(lines)] {
 				l := lines[i]
 				lineReason := result.Reason
