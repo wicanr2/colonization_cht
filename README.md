@@ -6,13 +6,13 @@
 
 ## 下載與執行
 
-[完整功能修正版 v.1.0.1-20261005](https://github.com/wicanr2/colonization_cht/releases/tag/v.1.0.1-20261005)提供 Linux x86_64 AppImage、Windows x86_64 ZIP、macOS Intel／Apple Silicon 通用 ZIP，以及90秒推廣影片。這一版收進目前全部中文顯示、輸入、音樂與音效功能，改善畫面合成速度與播放斷流邊界，部分畫面仍保留原文。
+[完整功能修正版 v.1.0.2-20261005](https://github.com/wicanr2/colonization_cht/releases/tag/v.1.0.2-20261005)提供 Linux x86_64 AppImage、Windows x86_64 ZIP、macOS Intel／Apple Silicon 通用 ZIP，以及90秒推廣影片。這一版收進目前全部中文顯示、輸入、音樂與音效功能，改善畫面合成速度，並將原版音樂改為獨立原速播放。部分畫面仍保留原文。
 
 需要自己合法取得的 DOS 版 COLONIZE 目錄。公開封包不含原版檔案；程式依包內 `MANIFEST.json` 的 SHA-256 核對版本，不符就拒絕啟動。
 
 | 平台 | 執行方式 | 預設存檔位置 |
 |---|---|---|
-| Linux | `chmod +x *.AppImage`，再執行 `./colonization-cht-v.1.0.1-20261005-linux-x86_64.AppImage --game /你的路徑/COLONIZE` | `~/.local/share/colonization-cht/save` |
+| Linux | `chmod +x *.AppImage`，再執行 `./colonization-cht-v.1.0.2-20261005-linux-x86_64.AppImage --game /你的路徑/COLONIZE` | `~/.local/share/colonization-cht/save` |
 | Windows | 解包後執行 `colonization-cht.bat --game "C:\你的路徑\COLONIZE"` | `%LOCALAPPDATA%\colonization-cht\save` |
 | macOS | 解包後在終端執行 `./colonization-cht.sh --game /你的路徑/COLONIZE` | `~/Library/Application Support/colonization-cht/save` |
 
@@ -20,7 +20,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 
 原版目錄只讀。可用環境變數 `COLONIZATION_CHT_SAVE` 改存檔位置。預設播放音樂與音效，`--audio-mute` 可靜音。鍵盤包含F1～F10及修飾鍵、數字鍵盤與導覽鍵；輸入法及非英數輸入不轉送。遊戲節奏與原版實機不同。舊技術預覽版保留於Releases。
 
-即時音樂仍可能因模擬速度不足而停頓；播放邊界已加入短淡入淡出，尚未人耳驗收。主選單游標遮擋時會暫時顯示原文，已抽樣的移開操作恢復中文；使用者回報的持續英文仍在追蹤。
+音樂由原版驅動獨立原速播放，供給與主DOS速度分開。即時消費抽樣沒有音樂缺樣；曲目自然結束後仍等待原版下一首指令。數位音效保留原路徑，尚未音效卡或人耳驗收。主選單游標遮擋時會暫時顯示原文，已抽樣的移開操作恢復中文；使用者回報的持續英文仍在追蹤。
 
 ## 目前狀態
 

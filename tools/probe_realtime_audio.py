@@ -41,7 +41,7 @@ func startAudioClockProbe(a *frontendAudio) {
             if missing <= 0 { return }
             if late := float64(missing) / audioPlayRate - 0.01; late > p.maxLateSeconds { p.maxLateSeconds = late }
             buf := make([]byte, missing * 4)
-            a.stream.Read(buf)
+            a.playbackReader().Read(buf)
             p.pcm = append(p.pcm, buf...)
             frames = target
             p.calls++
@@ -95,6 +95,14 @@ func stopAudioClockProbe(a *frontendAudio) {
         "method": "10ms monotonic-clock reads; missed ticks caught up by elapsed time; no simulation feedback",
     }
     a.stream.mu.Unlock()
+    if a.music != nil {
+        st := a.music.status()
+        rec["music"] = st
+        rec["fallback_buffer_dropped_bytes"] = rec["dropped_bytes"]
+        rec["read_bytes"] = st["music_read_bytes"]
+        rec["underrun_bytes"] = st["music_underrun_bytes"]
+        rec["dropped_bytes"] = st["music_dropped_bytes"]
+    }
     b, err := json.MarshalIndent(rec, "", "  "); must(err)
     must(os.WriteFile(*audioWAVPath + ".clock.json", append(b, '\n'), 0644))
 }
@@ -116,14 +124,22 @@ assert 'clockProbe' not in t
 old = 'type frontendAudio struct {'
 assert t.count(old) == 1
 t = t.replace(old, old + '\n clockProbe *audioClockProbe')
-old = 'a := &frontendAudio{rate: m.AudioRate(), stream: &audioStream{rate: uint64(m.AudioRate())}}'
+if not (src / 'music.go').exists():
+    # 舊基準來源沒有獨立播放器，保留可重播入口。
+    (src / 'audio_reader_probe.go').write_text('package main\nimport "io"\nfunc (a *frontendAudio) playbackReader() io.Reader { return a.stream }\n')
+    begin = HELPER.index('    if a.music != nil {')
+    end = HELPER.index('    b, err :=', begin)
+    helper = HELPER[:begin] + HELPER[end:]
+else:
+    helper = HELPER
+old = '\n\tif play {\n'
 assert t.count(old) == 1
-t = t.replace(old, old + '\n startAudioClockProbe(a)')
+t = t.replace(old, '\n startAudioClockProbe(a)' + old)
 old = 'func (a *frontendAudio) writeWAV() {'
 assert t.count(old) == 1
 t = t.replace(old, old + '\n if a != nil { stopAudioClockProbe(a) }')
 f.write_text(t)
-(src / 'audio_clock_probe.go').write_text(HELPER)
+(src / 'audio_clock_probe.go').write_text(helper)
 subprocess.run(['gofmt', '-w', 'window.go', 'audio_clock_probe.go'], cwd=src, check=True)
 subprocess.run(['go', 'build', '-o', str(a.output / 'probe-window'), '.'], cwd=src, check=True, timeout=150)
 subprocess.run(['python3', '/repo/tools/replay_linux_checks.py', '--binary', str(a.output / 'probe-window'), '--inputs', str(a.inputs), '--output', str(a.output / 'run')], check=True, timeout=450)

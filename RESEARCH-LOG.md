@@ -4763,3 +4763,15 @@ unknown：沒有macOS二進位執行、真機、Gatekeeper放行、最低系統�
 推論等級：confirmed，限本次封包输入與正常主選單。原版VICEROY.EXE SHA-256 `a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3`，來源mtime_ns `851441520000000000`。dosgolem隔離副本`b0bf25963ce5a29fb3a3fcf92e211423d4cd4ac8`、`internal/dos/find.go` SHA-256 `936bb72d9abcb7334ba90ba7ab39aed02b878fd16ff630aea2a16887d90273ce`，Go1.26.7與固定驗證映像。`dosDateTime`實際以os.FileInfo.ModTime填DOS時間與日期兩個word。地址基準為完整1MiB RAM收據的線性檔案偏移，首版差異0x67687～0x6768A；不混用IDA或DOS段地址。
 
 私用包保留原版mtime，Python ZIP解包依manifest還原時間。相同6921125d…正常輸入與50M終點下，Linux／Wine完整CPU／RAM／原版索引／色盤全部相同，RAM恢復599a732f…。未改EXE、dosgolem、規則或存檔。原始失敗、檔案指紋、重建包與v2收據保留workplace/reports/goal183-release；[目標183](docs/goals/183-release-and-promo.md)為重跑與交付索引。
+
+## 2026-10-05：原速獨立音樂的最小API證據
+
+入口：[規格046](docs/spec/046-independent-music.md)及[目標184](docs/goals/184-linux-player-regressions.md)。使用者選定獨立播放，原始檔名與SHA、IDA Pro9.4及兩種位址空間見規格；不深入硬體driver或ISR。正常原版PSOUND命令入口CS:0B18、更新CS:0BF9與190240指令節拍已證實；查詢8只讀voice-active，不是重新起曲。開場34h,2、停止1/0、主選單33h,0及第679135514步下一首22h,2均由正常輸入觀測取得。
+
+忽略的`music-independent/ida-driver.json`與`ida-music-api.json`綁定runtime body SHA；IDA EA為去512位元組MZ header後的offset，不與DOS線性位址混用。初始化後停止再起曲的前111筆OPL bank/register/value與原版開場相同。曲譜由原版API執行，不解析或轉存進公開包。原速節拍為hardware-spec approximation，沒有逐波形或同實機時鐘聲明。
+
+原型開場90秒用7.706秒合成，主選單90秒用2.089秒，第55秒自然結束。正式即時消費83.892秒音樂缺樣0、丟棄0；最長單次Read12.610ms、消費者延誤50ms，播放器保留100ms緩衝。59.0至71.1秒空白為曲尾等待原版下一首，與供給缺樣分開。數位音效串流缺樣2846960位元組仍如實記錄，這項沒有改成獨立播放。
+
+第一輪600M收據保留：36位元組偶發缺樣由私用API超越取樣目標後的續接計數造成。計數改用實際已提供的取樣，65秒串流與800M即時測試均為零缺樣。通用分流每幀只讀一次SB sample，混音、DMA與記憶體全等；隔離dosgolem提交`c5953b90a0fc76c57f8dbbe0555f7a85d3198fe8`，重建補丁見[音效分流補丁](tools/dosgolem-digital-audio-tap.patch)。共享dosgolem未改，upstream推送DISABLED。
+
+彙整收據`workplace/reports/goal184-linux/music-independent/music-verification.json` SHA-256 `3eb1042260009754c57b36a3bf3d6a5829c2b2de7b18f1964b8933503b21081e`保存各來源雜湊、全狀態比對及播放非靜音檢查。沒有人耳或音效卡驗收。

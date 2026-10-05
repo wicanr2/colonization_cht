@@ -45,6 +45,7 @@ var frontendFrameSink func(*image.RGBA, map[string]any)
 var frontendStatusExtra map[string]any
 
 var frontendRunner func(*golem.Machine, *golem.DOS, func(string), string)
+var frontendBeforeInstruction func()
 
 func must(err error) {
 	if err != nil {
@@ -2655,6 +2656,9 @@ func main() {
 	}
 	if !*control {
 		m.SetBeforeInstruction(func() {
+			if frontendBeforeInstruction != nil {
+				frontendBeforeInstruction()
+			}
 			if len(d.Opened) != lastOpened {
 				for _, l := range lines {
 					drop(l, "file-open")
@@ -3032,6 +3036,12 @@ func main() {
 				desc := bytes.Clone(m.Mem[param : param+14])
 				l.pendingEvent = &pending{step: m.Steps, ss: ss, sp: sp, before: bytes.Clone(canvas()), description: desc, descriptionPtr: param, record: map[string]any{"candidate_id": l.id, "entry_step": m.Steps, "legacy_entry_step": m.Steps - 1, "entry_ip": "937C:0538", "return_ip": "937C:1D50", "ss": ss, "entry_sp": sp, "source": fmt.Sprintf("6F16:%04X", l.runtimeOffset), "source_sha256": hash(l.source), "descriptor_linear": param, "descriptor_hex": hex.EncodeToString(desc), "canvas_descriptor_hex": hex.EncodeToString(descriptor), "registers": c.R, "segments": c.Seg}}
 				menuPending++
+			}
+		})
+	} else {
+		m.SetBeforeInstruction(func() {
+			if frontendBeforeInstruction != nil {
+				frontendBeforeInstruction()
 			}
 		})
 	}

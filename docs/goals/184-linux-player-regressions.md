@@ -1,8 +1,8 @@
 # 目標184：Linux 正常啟動的速度、爆音與主選單恢復
 
-狀態：v.1.0.1修正版交付完成，音樂停頓續修中。主選單持續英文未重現，即時音訊仍有供給缺口。入口為[目前脈絡](../../CONTEXT.md)，對應[Issue #53](https://github.com/wicanr2/colonization_cht/issues/53)。
+狀態：v.1.0.2音樂修正版本機驗收完成，遠端發布中。原速獨立音樂即時缺樣0；曲尾等待下一首及數位音效路徑保留，主選單持續英文未重現。入口為[目前脈絡](../../CONTEXT.md)，對應[Issue #53](https://github.com/wicanr2/colonization_cht/issues/53)。
 
-合成效能契約見[規格045](../spec/045-linux-runtime-performance.md)。
+合成效能契約見[規格045](../spec/045-linux-runtime-performance.md)，使用者選定的原速獨立播放見[規格046](../spec/046-independent-music.md)。
 
 dosgolem基底為`b0bf25963ce5a29fb3a3fcf92e211423d4cd4ac8`，本輪作品中立的輸出優化保存於[補丁](../../tools/dosgolem-overlay-performance.patch)，只套用到本專案隔離副本；shared dosgolem與upstream推送設定不變。
 
@@ -101,3 +101,17 @@ Linux／Wine私用完整包正常輸入通過，macOS清單與shell通過。Wind
 時鐘探針基準位於`audio-clock-baseline/`：50.712秒、需求9736320位元組、缺樣6423832位元組，缺樣約66%；來源858569幀，約17.27秒，無積壓丟棄。完整原版RAM、終點狀態、事件、索引、色盤、PNG與原始WAV均與基準相同。原始收據與比較見`run/original.wav.clock.json`及`comparison.json`。播放器錄音僅為容器內的時鐘消費者，沒有音效卡或人耳驗收。
 
 本批已[更新Issue #53](https://github.com/wicanr2/colonization_cht/issues/53#issuecomment-5985306618)，維持OPEN。隔離dosgolem乾淨、upstream推送DISABLED；本輪未建新映像，本輪容器全回收，未清理其他專案容器。全工作樹沒有root-owned產物或.md目錄，新增探針與本機輸出均1000:1000。
+
+## 原速獨立音樂修正版 v.1.0.2-20261005
+
+使用者選擇獨立播放，契約與限定驗證見[規格046](../spec/046-independent-music.md)。主DOS原狀態、原始WAV及數位音效路徑不變；FM音樂／音效由同一原版命令在私用聲音機合成。曲譜與驅動從自備資料讀取，不入公開封包。
+
+本機入口為`workplace/reports/goal184-linux/music-independent/`。`music-verification.json` SHA-256 `3eb1042260009754c57b36a3bf3d6a5829c2b2de7b18f1964b8933503b21081e`記錄83.892秒音樂缺樣0、丟棄0、非靜音及50M完整同狀態比較；`clock-800m/run/original.wav.clock.json`記錄實際讀取。原始JSON頂層保留未使用的fallback-buffer數據，獨立音樂要讀music子欄位；現行探針已分開名稱。曲尾約12秒等待下一首及數位音效缺樣不冒稱已消除。
+
+重跑：[組裝器](../../tools/build_window_prototype.py)加入原速播放器；隔離dosgolem先依規格046套分流補丁。Docker/Xvfb掛唯讀`/game`及`/dosgolem`、可寫`/cache`，以`COLONIZATION_MUSIC_ROOT=/game go test ./...`驗原版API；[時鐘探針](../../tools/probe_realtime_audio.py)傳`--source <組裝目錄> --inputs music-independent/inputs-800m.json --output <全新目錄>`。800M輸入沿本頁正常主選單輸入，延長end，沒有測試注入或改鐘。
+
+三平台打包沿本頁入口，改設`COLONIZATION_RELEASE_WORK=/repo/workplace/reports/goal184-linux/music-independent/release`及版號`v.1.0.2-20261005`。公開三包各封裝兩次全等，Linux／Wine正常GUI與同輸入CPU、RAM及原始WAV全等，RAM `ca45ba3539c3b961291ac97c19dd6f1d4a65ac782b1e5fbadb54e487b05950c7`，WAV `3062c132ffb18df60e4fe435c9eea613e0aa8f1a41f35b2c7a3c0375983f3f39`。這套新GUI輸入與舊輪不同，不要求其終態雜湊等於舊輪。Linux二進位 `91c035367143f0d83b5e1e0adc151fc4fdb83f815e31696c2511cafd4e55f4db`。
+
+正式根目錄`dist-all/v.1.0.2-20261005/`，私用Linux已展開的一鍵入口為`full-local/colonization-cht-v.1.0.2-20261005-full-local-linux-x86_64/start.sh`。Windows、macOS完整ZIP同在full-local，不公開。三種完整包已核對檔案與manifest；Linux／Wine實際啟動及原版狀態相同，macOS限清單／shell。
+
+影片沿已驗連續原版音源與中文百科畫面重新生成版號，90秒H.264／AAC、1920×1080／30fps、黑幀0、非靜音，八幀檢視無字幕裁切。成片SHA-256 `e01ece1635e5f539fe318cc5cdc3fe8595961e7c753f940b55d8df209f96adce`；原始捕錄commit仍如實記錄為b0bf259，不冒稱新版錄影。

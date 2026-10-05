@@ -3486,3 +3486,15 @@ v139收尾正式21份指紋、UID/GID 1000、root-owned／錯誤.md目錄／誤�
 時鐘探針200M基準完成：50.712秒需求9736320位元組，缺樣6423832位元組，約66%；無積壓丟棄。來源858569幀約17.27秒；完整原版RAM、狀態、事件、索引、色盤、PNG與原始WAV均與原基準全等。此收據證實供給缺口，沒有硬體實聽，也未宣稱停頓已修好。
 
 本批供給證據已更新Issue #53留言5985306618，維持OPEN。WORKLIST由唯一JSON重生，未變更舊Release或tag。隔離dosgolem乾淨且upstream推送DISABLED；本輪未重建映像，全部有界容器已回收。全工作樹無root-owned產物或.md目錄，輸出1000:1000；其他專案容器保留。
+
+## 2026-10-05：原速獨立音樂與 v.1.0.2修正版
+
+使用者選擇「獨立播放」。依平台規格、READY閘門及文件路由，最小RE確認PSOUND命令／查詢與更新節拍；原型90秒供給足夠、前111筆OPL音符暫存器順序相同後，規格046升READY再接入。獨立聲音機只執行原版驅動與曲譜，主DOS不回寫；SB數位音效分流每幀只取一次，原混音與DMA不變。原版曲尾等待下一首，不人工循環。
+
+正式接線、所有支援命令範圍、通用音效分流、65秒串流、Go測試與go vet通過。600M首輪36位元組缺樣收據保留；修正按實際提供取樣續接後，800M真實時間讀取83.892秒需求16106880位元組，音樂缺樣0、丟棄0。最大Read12.610ms、讀取者延誤50ms；數位音效缺樣仍明載，59.0～71.1秒曲尾等待也分開記錄。50M新版／舊版CPU、RAM、事件、畫面及原始WAV全等。規格046限定CONFORMED，沒有音效卡或人耳驗收。
+
+隔離dosgolem提交c5953b90a0fc76c57f8dbbe0555f7a85d3198fe8，通用補丁保存tools/dosgolem-digital-audio-tap.patch；shared dosgolem未改，upstream推送DISABLED。三平台各封裝兩次逐位元組相同，Linux/Wine正式正常GUI及同輸入原版CPU/RAM/WAV全等，私用完整版start入口也通過。macOS只驗雙架構、臨時簽章資料、封包與shell。
+
+正式根目錄dist-all/v.1.0.2-20261005，Linux完整包已展開供直接start.sh。公開包排除原版檔案，full-local與原始音訊留本機。推廣片沿已驗95秒原版長錄音與中文百科畫面，重新生成首尾版號，90秒H.264/AAC、黑幀0、八幀檢視無裁切；README仍保留已授權的百科圖。來源擷取commit如實保留b0bf259。
+
+本機證據與命令入口見docs/goals/184-linux-player-regressions.md及music-independent/music-verification.json。Git身分wicanr2@gmail.com已核對；主機gh auth成功。一次Issue唯讀請求的自動審核逾時，依工具允許有界重試成功，不算憑證或產品缺陷。準備提交／推送及更新Issue #53與新Release，舊tag及封包不改。Docker容器均一次性且背景程序有trap，收尾仍需核對擁有權與清理狀態。

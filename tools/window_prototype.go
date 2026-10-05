@@ -23,6 +23,7 @@ var windowSteps = flag.Uint64("window-steps", ^uint64(0), "驗收執行上限；
 var replayPath = flag.String("replay-inputs", "", "僅驗收：重播先前真實視窗輸入")
 var audioWAVPath = flag.String("audio-wav", "", "目標176：結束時把前端取得的 dosgolem 原始音訊（交錯 int16 立體聲）寫成 WAV；需 --audio")
 var audioMute = flag.Bool("audio-mute", false, "目標176：只合成與錄音，不開播放裝置（無音效裝置的容器用）")
+var independentMusic = flag.Bool("independent-music", true, "規格046：原版音樂獨立原速播放；停用時使用舊音訊串流")
 
 // windowStepsPerUpdate 是每次 Update 推進的指令數；重播在同樣的邊界取音訊（規格040）。
 const windowStepsPerUpdate = 200000
@@ -124,16 +125,29 @@ type frontendAudio struct {
 	stream *audioStream
 	player *audio.Player
 	err    string
+	music  *musicPlayback
 }
 
-func newFrontendAudio(m *golem.Machine, play bool) *frontendAudio {
+func newFrontendAudio(m *golem.Machine, d *golem.DOS, play bool) *frontendAudio {
 	if m.AudioRate() == 0 {
 		return nil
 	}
 	a := &frontendAudio{rate: m.AudioRate(), stream: &audioStream{rate: uint64(m.AudioRate())}}
+	if *independentMusic {
+		native, err := newNativeMusic(d.Root)
+		if err != nil {
+			a.err = err.Error()
+			fmt.Fprintln(os.Stderr, "獨立音樂無法啟動，沿用原音訊：", err)
+		} else {
+			a.music = &musicPlayback{native: native, stream: &audioStream{rate: uint64(m.AudioRate())},
+				digital: &audioStream{rate: uint64(m.AudioRate())}, fallback: a.stream}
+			m.EnableDigitalAudioTap(true)
+			frontendBeforeInstruction = a.music.observe(m, d)
+		}
+	}
 	if play {
 		ctx := audio.NewContext(audioPlayRate)
-		p, err := ctx.NewPlayer(a.stream)
+		p, err := ctx.NewPlayer(a.playbackReader())
 		if err != nil {
 			a.err = err.Error()
 			fmt.Fprintln(os.Stderr, "音效裝置無法開啟，改為靜音：", err)
@@ -155,6 +169,9 @@ func (a *frontendAudio) drain(m *golem.Machine) {
 		a.wav = append(a.wav, s...)
 	}
 	a.stream.push(s)
+	if a.music != nil {
+		a.music.digital.push(m.DrainDigitalAudio())
+	}
 }
 
 func (a *frontendAudio) status() map[string]any {
@@ -162,9 +179,17 @@ func (a *frontendAudio) status() map[string]any {
 		return nil
 	}
 	a.stream.mu.Lock()
-	defer a.stream.mu.Unlock()
-	return map[string]any{"rate": a.rate, "played_bytes": a.stream.ReadBytes, "dropped_bytes": a.stream.Dropped,
+	rec := map[string]any{"rate": a.rate, "played_bytes": a.stream.ReadBytes, "dropped_bytes": a.stream.Dropped,
 		"underrun_bytes": a.stream.UnderrunBytes, "produced_frames": a.stream.srcBase, "player": a.player != nil, "error": a.err}
+	a.stream.mu.Unlock()
+	if a.music != nil {
+		music := a.music.status()
+		rec["music"] = music
+		rec["played_bytes"] = music["music_read_bytes"]
+		rec["underrun_bytes"] = music["music_underrun_bytes"]
+		rec["dropped_bytes"] = music["music_dropped_bytes"].(uint64) + music["digital_dropped_bytes"].(uint64)
+	}
+	return rec
 }
 
 func (a *frontendAudio) writeWAV() {
@@ -544,7 +569,8 @@ func runWindow(m *golem.Machine, d *golem.DOS, render func(string), out string) 
 			previous = e.Step
 		}
 		// 目標176：在與真 GUI 相同的邊界（每 windowStepsPerUpdate 道指令）取音訊，數位音效讀記憶體的時點才相同。
-		a := newFrontendAudio(m, false)
+		a := newFrontendAudio(m, d, false)
+		defer a.close()
 		start := m.Steps
 		step := func() {
 			must(m.Step())
@@ -571,7 +597,8 @@ func runWindow(m *golem.Machine, d *golem.DOS, render func(string), out string) 
 	ebiten.SetWindowClosingHandled(true)
 	ebiten.SetRunnableOnUnfocused(true)
 	ebiten.SetCursorMode(ebiten.CursorModeHidden)
-	g.audio = newFrontendAudio(m, !*audioMute)
+	g.audio = newFrontendAudio(m, d, !*audioMute)
+	defer g.audio.close()
 	err := ebiten.RunGame(g)
 	g.audio.writeWAV()
 	// 目標169：原版執行出錯時也先寫下現場輸入與錯誤位置，才能以重播重現。
