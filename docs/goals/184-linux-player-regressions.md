@@ -1,6 +1,6 @@
 # 目標184：Linux 正常啟動的速度、爆音與主選單恢復
 
-狀態：v.1.0.2音樂修正版本機驗收完成，遠端發布中。原速獨立音樂即時缺樣0；曲尾等待下一首及數位音效路徑保留，主選單持續英文未重現。入口為[目前脈絡](../../CONTEXT.md)，對應[Issue #53](https://github.com/wicanr2/colonization_cht/issues/53)。
+狀態：v.1.0.2音樂修正版已驗收及發布。原速獨立音樂即時缺樣0；曲尾等待下一首及數位音效路徑保留，主選單持續英文未重現。入口為[目前脈絡](../../CONTEXT.md)，對應[Issue #53](https://github.com/wicanr2/colonization_cht/issues/53)。
 
 合成效能契約見[規格045](../spec/045-linux-runtime-performance.md)，使用者選定的原速獨立播放見[規格046](../spec/046-independent-music.md)。
 
@@ -115,3 +115,7 @@ Linux／Wine私用完整包正常輸入通過，macOS清單與shell通過。Wind
 正式根目錄`dist-all/v.1.0.2-20261005/`，私用Linux已展開的一鍵入口為`full-local/colonization-cht-v.1.0.2-20261005-full-local-linux-x86_64/start.sh`。Windows、macOS完整ZIP同在full-local，不公開。三種完整包已核對檔案與manifest；Linux／Wine實際啟動及原版狀態相同，macOS限清單／shell。
 
 影片沿已驗連續原版音源與中文百科畫面重新生成版號，90秒H.264／AAC、1920×1080／30fps、黑幀0、非靜音，八幀檢視無字幕裁切。成片SHA-256 `e01ece1635e5f539fe318cc5cdc3fe8595961e7c753f940b55d8df209f96adce`；原始捕錄commit仍如實記錄為b0bf259，不冒稱新版錄影。
+
+`PASS_RELEASE_PUBLISHED`：程式提交`e5b606e37a4e25a0a061194435c533e56aeee21c`及不可變tag `v.1.0.2-20261005`已推送，[Release](https://github.com/wicanr2/colonization_cht/releases/tag/v.1.0.2-20261005)五附件的名稱、大小與官方SHA-256全等。[Issue #53留言](https://github.com/wicanr2/colonization_cht/issues/53#issuecomment-5988602216)已更新，Issue保持OPEN。機器核對收據為`music-independent/release-remote.json`及`remote-verification.json`。舊版、私用包與原始音訊未公開或覆寫。
+
+本輪容器全回收，未建新映像，其他專案資源保留；工作根無root-owned檔案或.md目錄，新增程式、文件及交付均1000:1000。兩個Git工作樹乾淨，隔離dosgolem upstream推送DISABLED。

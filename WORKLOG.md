@@ -3498,3 +3498,5 @@ v139收尾正式21份指紋、UID/GID 1000、root-owned／錯誤.md目錄／誤�
 正式根目錄dist-all/v.1.0.2-20261005，Linux完整包已展開供直接start.sh。公開包排除原版檔案，full-local與原始音訊留本機。推廣片沿已驗95秒原版長錄音與中文百科畫面，重新生成首尾版號，90秒H.264/AAC、黑幀0、八幀檢視無裁切；README仍保留已授權的百科圖。來源擷取commit如實保留b0bf259。
 
 本機證據與命令入口見docs/goals/184-linux-player-regressions.md及music-independent/music-verification.json。Git身分wicanr2@gmail.com已核對；主機gh auth成功。一次Issue唯讀請求的自動審核逾時，依工具允許有界重試成功，不算憑證或產品缺陷。準備提交／推送及更新Issue #53與新Release，舊tag及封包不改。Docker容器均一次性且背景程序有trap，收尾仍需核對擁有權與清理狀態。
+
+交付收尾：程式提交e5b606e37a4e25a0a061194435c533e56aeee21c與v.1.0.2-20261005 tag已推送，[Release](https://github.com/wicanr2/colonization_cht/releases/tag/v.1.0.2-20261005)五個資產名稱／大小／SHA-256全等，沒有full-local上傳。[Issue #53](https://github.com/wicanr2/colonization_cht/issues/53#issuecomment-5988602216)已更新並回讀OPEN。Linux已驗start.sh展開至dist-all，新版Windows與macOS私用ZIP同在full-local。原版排除與擁有權檢查通過，兩個工作樹提交後乾淨，隔離dosgolem推送DISABLED；本輪一次性容器全回收，沒重建映像，不清理其他專案資源。
