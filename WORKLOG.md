@@ -3500,3 +3500,10 @@ v139收尾正式21份指紋、UID/GID 1000、root-owned／錯誤.md目錄／誤�
 本機證據與命令入口見docs/goals/184-linux-player-regressions.md及music-independent/music-verification.json。Git身分wicanr2@gmail.com已核對；主機gh auth成功。一次Issue唯讀請求的自動審核逾時，依工具允許有界重試成功，不算憑證或產品缺陷。準備提交／推送及更新Issue #53與新Release，舊tag及封包不改。Docker容器均一次性且背景程序有trap，收尾仍需核對擁有權與清理狀態。
 
 交付收尾：程式提交e5b606e37a4e25a0a061194435c533e56aeee21c與v.1.0.2-20261005 tag已推送，[Release](https://github.com/wicanr2/colonization_cht/releases/tag/v.1.0.2-20261005)五個資產名稱／大小／SHA-256全等，沒有full-local上傳。[Issue #53](https://github.com/wicanr2/colonization_cht/issues/53#issuecomment-5988602216)已更新並回讀OPEN。Linux已驗start.sh展開至dist-all，新版Windows與macOS私用ZIP同在full-local。原版排除與擁有權檢查通過，兩個工作樹提交後乾淨，隔離dosgolem推送DISABLED；本輪一次性容器全回收，沒重建映像，不清理其他專案資源。
+
+## 2026-10-06：游標精靈定位收尾（預防性）
+
+- 使用者選定收尾工作樹未提交的游標精靈修正。確認三個舊二進位皆不含新函式，新碼尚未編譯驗證；早場舊二進位重跑另覆寫檢查器輸入。
+- 驗證容器內新組裝通過go vet與全部go test（含TestMenuCursorDisturbance）；新二進位091b2c68…。新二進位31張真視窗掃描列內無英文列；新重播／新對照／舊重播／GUI四路原版狀態全等a8615132…；百科三側與舊收據全等，無回歸。
+- 延遲機制否定：舊二進位積極掃描亦無英文列；transit檢查點精靈皆靜止；密集檢查點證實移動後0.2M步內精靈已就位；實拍框外小差異為import截圖撕裂。規格012附記改列未重現假說的預防性強固；使用者持續英文仍追蹤，不冒稱修復。
+- 早場檢查器輸入移位保存並由cursorbox還原，重跑通過PASS_TEXT_RETENTION。Git身分wicanr2@gmail.com已核對；本輪一次性容器全回收（均--rm、--network none、UID/GID 1000:1000），輸出擁有權正常，不清理其他專案資源。提交待推送由使用者確認。

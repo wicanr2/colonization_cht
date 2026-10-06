@@ -33,6 +33,7 @@
 | 工具鏈 | 畫面檢查與 Go／GUI 驗證使用 [tools/Dockerfile.verification](tools/Dockerfile.verification) 的 `colonization-verification:20260930-r1`；正式字模烘製使用 [font/README.md](font/README.md) 指定的固定 `rich2-py` 映像，不使用驗證映像的 Pillow 重烘正式字模。 |
 | 發行 | [v.1.0.1-20261005](https://github.com/wicanr2/colonization_cht/releases/tag/v.1.0.1-20261005)已發布：三平台patch、90秒MP4與SHA-256清單，tag指向`0b9a791`。#53維持OPEN，#54維持CLOSED；玩家持續英文及即時音訊實聽待確認。正式輸出`dist-all/v.1.0.1-20261005/`，自帶原版完整包只留full-local。舊Release與tag未改動。 |
 | 原版與隔離副本 | 原版唯讀；dosgolem 隔離副本 `b0bf259`，`upstream` 推送位址 `DISABLED`，未修改 `/home/anr2/cht/dosgolem`。 |
+| 游標精靈定位 | 精靈改以安全區實際差異定位（規格012附記），不再依前端滑鼠框。go vet／全測試通過，新二進位`091b2c68…`；31張實拍列內無英文、四路原版狀態全等、百科三側全等。延遲機制未重現（密集檢查點0.2M步內就位、實拍差異為截圖撕裂），列為預防性強固；檢查器輸入已還原並重過`PASS_TEXT_RETENTION`。使用者持續英文仍追蹤。 |
 
 接手驗證中間物與摘要：`workplace/reports/goal178-orders/codex-audit/`；正式矩陣與普查以生成後的 `docs/verification-matrix.md`、`docs/text-census.md` 為準。
 

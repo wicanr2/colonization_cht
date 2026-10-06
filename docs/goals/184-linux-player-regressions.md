@@ -131,3 +131,15 @@ Linux／Wine私用完整包正常輸入通過，macOS清單與shell通過。Wind
 独立檢查使用[收據檢查器](../../tools/check_text_retention.py)`--reports /repo/workplace/reports/goal184-linux/text-retention`，核對11張百科GUI、五欄啟用、缺圖集回原文、30張主選單往返、完整原版狀態、共同VGA／色盤及存檔。此範圍不重算全遊戲普查完成數。
 
 `PASS_TEXT_RETENTION`（2026-10-05）：正式候選已接入（游標分層見規格012附記，等待保留見規格038附記），正式二進位與工作樹來源雜湊一致，Go vet／測試通過。首輪正式收據因`shot_after`移開游標後立即擷取，GUI仍留舊欄位游標而重播已就緒，對拍在`building-away-0`失敗（舊收據保留於`pedia-gui-formal-race`／`pedia-replays-formal-race`）；已在腳本補足移開後4M步重繪等待並新增`COLONIZATION_FONT_DIR`覆寫，全部素材指向正式包萃取的`extracted-v2`遮罩。重擷取（建築類別選單Y取輸入錄得的220）與三側重播後檢查器通過：11張百科GUI五欄中文、缺圖集回原文、30組主選單游標檢查、中英缺三側完整原版狀態及存檔一致。摘要為本機`text-retention/verification.json`；矩陣列與普查計數維持不變。
+
+## 2026-10-06：游標精靈定位收尾（預防性）
+
+工作樹留有未提交的精靈實際差異定位修正（`menuCursorDisturbance`、單元測試、組裝雜湊、規格012附記），三個舊二進位經符號檢查皆未含新函式；早場舊二進位選單重跑另覆寫檢查器輸入。本輪在驗證映像`colonization-verification:20260930-r1`（Go1.26.7、dosgolem`c5953b9`）完成收尾，收據位於本機`text-retention/menuwrap-*`。
+
+新組裝`menuwrap-new`通過`go vet`與全部`go test`（含`TestMenuCursorDisturbance`三種情境）；新二進位`newcode-window` SHA-256 `091b2c68d69ede42f083f232ef7cf600cd1379ada746b48c9d3089bbda5a06db`。新二進位真視窗掃描`menuwrap-gui`（31張，終點`a8615132…`）：列內規則全過，無英文列。新重播／新對照／舊重播同輸入三路原版終點全等`a8615132…`，`run.memory`／`original.wav`／`run.final.idx`／`run.final.pal`全等，與GUI終點四路一致。百科三側新重播`menuwrap-pedia`與`pedia-replays-formal`狀態、檢查點圖及記憶體全等，無回歸。
+
+延遲機制定位為未重現假說：舊二進位積極掃描（截圖間隔0.5M）`menuwrap-gui-old`同樣無英文列；`menu-transit`六個VGA檢查點精靈皆靜止；密集檢查點`menuwrap-dense`（移動後每0.2M）在首幀精靈已就位，輪詢更新在0.2M步內；新舊實拍的框外小差異皆為`import`擷取撕裂。規格012附記已改列預防性強固。使用者持續英文仍追蹤中，不冒稱已修復。
+
+檢查器修復：早場`menu-replay-formal`／`menu-control-v2`移為`menu-replay-newinputs-80m`／`menu-control-newinputs-80m`，由`*-cursorbox`還原後重跑通過`PASS_TEXT_RETENTION`。
+
+重跑：工作區輔助`menuwrap-sweep.py --binary <二進位> --out <全新基底> --scratch <全新暫存>`（GUI需Xvfb、`--audio-mute`及完整正式旗標）、`menuwrap-replay.py`（重播／對照／舊重播三路比對）、`menuwrap-pixels.py --dir`（列內精靈框規則）、`menuwrap-transit.py --dir`（VGA精靈定位）。容器掛唯讀`/repo`／`/game`／`/dosgolem`、可寫Go cache，`--network none`，UID/GID 1000:1000。

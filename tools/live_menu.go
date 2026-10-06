@@ -271,6 +271,27 @@ func introPanelBytes(buf []byte) []byte {
 // 游標只疊在真 VGA 上（底層畫布沒有游標）；以滑鼠左上角起 16×16 保守涵蓋。
 func cursorBox(x, y int) image.Rectangle { return image.Rect(x, y, x+16, y+16) }
 
+// menuCursorDisturbance 定位安全區內與已驗證印後英文不同的像素範圍（游標精靈）。
+// 差異合乎 16×16 精靈框才回傳 ok；整列重印等大範圍變動回傳 false，沿原失敗即關閉。
+func menuCursorDisturbance(indexed, after []byte, safe image.Rectangle) (image.Rectangle, bool) {
+	box, first := image.Rectangle{}, true
+	for y := safe.Min.Y; y < safe.Max.Y; y++ {
+		for x := safe.Min.X; x < safe.Max.X; x++ {
+			if indexed[y*320+x] != after[(y-safe.Min.Y)*safe.Dx()+x-safe.Min.X] {
+				if first {
+					box, first = image.Rect(x, y, x+1, y+1), false
+				} else {
+					box = box.Union(image.Rect(x, y, x+1, y+1))
+				}
+			}
+		}
+	}
+	if first || box.Dx() > 16 || box.Dy() > 16 {
+		return image.Rectangle{}, false
+	}
+	return box, true
+}
+
 // 目標142：首則教學提示 @TUTORIAL1（Discoverer 難度英格蘭開局）。整段印字為權杖；讀字期間原版同時畫顧問肖像，
 // 故逐點記錄最後寫入者，只還原最後由 0D21:012C 寫下的文字像素。
 type helpState struct {
@@ -3571,15 +3592,17 @@ func main() {
 			}
 			var e error
 			var results []overlay.LayerResult
-			// 規格012：已驗證印字與游標分層，只在輸出副本移除游標。
+			// 規格012：已驗證印字與游標分層。遊戲內游標精靈的位置可能落後前端滑鼠，
+			// 只清前端游標框會在精靈實際處比對失敗、整列回英文；改以安全區內的實際
+			// 差異定位精靈，只移除精靈本身，其餘一律中文。
 			clean := indexed
-			cur := cursorBox(int(d.Mouse.X), int(d.Mouse.Y))
+			var sprites []image.Rectangle
 			for _, l := range lines {
 				if l.patch == nil || len(l.afterSafe) != l.safe().Dx()*l.safe().Dy() {
 					continue
 				}
-				box := cur.Intersect(l.safe())
-				if box.Empty() {
+				box, ok := menuCursorDisturbance(indexed, l.afterSafe, l.safe())
+				if !ok {
 					continue
 				}
 				if &clean[0] == &indexed[0] {
@@ -3590,19 +3613,22 @@ func main() {
 						clean[y*320+x] = l.afterSafe[(y-l.safe().Min.Y)*l.safe().Dx()+x-l.safe().Min.X]
 					}
 				}
+				sprites = append(sprites, box)
 			}
 			output, results, e = overlay.ComposeLayers(clean, m.DAC[:], 320, 200, 4, layers)
 			must(e)
-			// 僅還原真正與底層不同的游標像素，保留矩形內其餘中文。
-			for y := max(0, cur.Min.Y); y < min(200, cur.Max.Y); y++ {
-				for x := max(0, cur.Min.X); x < min(320, cur.Max.X); x++ {
-					i := y*320 + x
-					if indexed[i] == clean[i] {
-						continue
+			// 僅還原精靈實際位置上真正與底層不同的像素，保留其餘中文。
+			for _, box := range sprites {
+				for y := box.Min.Y; y < box.Max.Y; y++ {
+					for x := box.Min.X; x < box.Max.X; x++ {
+						i := y*320 + x
+						if indexed[i] == clean[i] {
+							continue
+						}
+						p := int(indexed[i]) * 3
+						c := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
+						draw.Draw(output, image.Rect(x*4, y*4, x*4+4, y*4+4), image.NewUniform(c), image.Point{}, draw.Src)
 					}
-					p := int(indexed[i]) * 3
-					c := color.RGBA{m.DAC[p]<<2 | m.DAC[p]>>4, m.DAC[p+1]<<2 | m.DAC[p+1]>>4, m.DAC[p+2]<<2 | m.DAC[p+2]>>4, 255}
-					draw.Draw(output, image.Rect(x*4, y*4, x*4+4, y*4+4), image.NewUniform(c), image.Point{}, draw.Src)
 				}
 			}
 			for i, result := range results[:len(lines)] {

@@ -275,3 +275,35 @@ func TestSeaPanelWholeLineRecovery(t *testing.T) {
 	r.firstOld[0] = 149
 	check(false, false, false) // 缺合格底圖時仍撤銷，不得用暫藏放寬來源證據。
 }
+
+func TestMenuCursorDisturbance(t *testing.T) {
+	safe := image.Rect(86, 107, 232, 114)
+	after := make([]byte, safe.Dx()*safe.Dy())
+	indexed := make([]byte, 320*200)
+	// 無差異：沒有精靈，不必清理。
+	if _, ok := menuCursorDisturbance(indexed, after, safe); ok {
+		t.Fatal("無差異不該回傳精靈")
+	}
+	// 精靈落在前端滑鼠框之外（遊戲輪詢落後）：仍須定位到實際位置。
+	for y := 100; y < 108; y++ {
+		for x := 90; x < 98; x++ {
+			indexed[y*320+x] = 15
+		}
+	}
+	box, ok := menuCursorDisturbance(indexed, after, safe)
+	if !ok || box != image.Rect(90, 107, 98, 108) {
+		t.Fatalf("落後精靈定位 = %v／%v", box, ok)
+	}
+	for y := 100; y < 108; y++ {
+		for x := 90; x < 98; x++ {
+			indexed[y*320+x] = 0
+		}
+	}
+	// 整列重印：差異超過精靈框，不得當精靈清理，沿原失敗即關閉。
+	for x := safe.Min.X; x < safe.Max.X; x++ {
+		indexed[110*320+x] = 7
+	}
+	if _, ok := menuCursorDisturbance(indexed, after, safe); ok {
+		t.Fatal("整列重印不得當精靈清理")
+	}
+}
