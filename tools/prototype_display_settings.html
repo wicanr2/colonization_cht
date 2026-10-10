@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-Hant">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>殖民帝國：顯示設定操作原型</title>
+<style>
+:root{color-scheme:dark;font:16px/1.6 system-ui,sans-serif;background:#171b20;color:#eef1eb}
+body{max-width:1280px;margin:20px auto;padding:0 16px}h1{font-size:24px}p{color:#b9c2bf}
+button,select{font:inherit;color:inherit;background:#293239;border:1px solid #69756d;border-radius:6px;padding:6px 14px;cursor:pointer}
+button:hover{background:#39463d}button:focus-visible,select:focus-visible{outline:3px solid #d5ba78}
+.toolbar{height:48px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;background:#262d31;padding:0 14px}
+.toolbar span{font-size:14px}.viewport{position:relative}canvas{display:block;max-width:100%;height:auto;image-rendering:pixelated}
+.notice{background:#382e1d;color:#ffe2a3;padding:8px 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid canvas{width:100%}.grid label{display:block;margin:8px 0}.sample{border:1px solid #526055}
+dialog{max-width:480px;width:calc(100% - 64px);border:1px solid #bba66d;border-radius:10px;background:#242c30;color:inherit;padding:24px}
+dialog::backdrop{background:#000a}dialog h2{margin-top:0}dialog label{display:block;margin:16px 0 4px}dialog select{width:100%}
+.actions{display:flex;justify-content:flex-end;gap:12px;margin-top:24px}#inputLog{font:13px/1.5 monospace;max-height:160px;overflow:auto;white-space:pre-wrap}
+details{margin:16px 0}summary{cursor:pointer}a{color:#d9c991}@media(max-width:700px){.grid{grid-template-columns:1fr}.toolbar span{font-size:12px}}
+</style>
+<h1>顯示設定操作原型</h1>
+<p>設定入口在遊戲畫面外。遊戲區維持原有比例與座標。這是可丟棄的 HTML 原型，沒有執行 DOS 程式。</p>
+<div class="sample">
+  <div class="toolbar" id="toolbar"><span id="current">繁體中文 · 原始像素</span><button id="openSettings">顯示設定</button></div>
+  <div class="viewport"><canvas id="game" width="1280" height="800" aria-label="同狀態遊戲截圖"></canvas></div>
+  <div class="notice" id="notice">繁中與英文來自同狀態收據。簡中、日文與韓文尚無遊戲譯稿，選取後會明示尚未提供。</div>
+</div>
+<details open><summary>圖像放大比較</summary>
+<p>同一張原版畫面的建築區域。右側只示範邊緣處理，沒有增加新繪製的細節。正式版將另行保護文字與游標。</p>
+<div class="grid">
+ <div><label>原始像素，整數放大</label><canvas id="nearest" width="800" height="448"></canvas></div>
+ <div><label>保留原色的邊緣處理候選（Scale4x）</label><canvas id="enhanced" width="800" height="448"></canvas></div>
+</div>
+<p>如果 HD 要採用重新繪製的地形、人物或建築，須先另做風格樣張；此原型尚未示範重繪。</p>
+</details>
+<details><summary>原型輸入紀錄與來源</summary>
+<p>只有遊戲區的滑鼠操作會出現在下方。設定視窗內的按鍵、點擊、滾輪與 Escape 都由設定介面處理。原型未驗證正式前端的輸入、暫停或音訊行為。</p>
+<pre id="inputLog"></pre><pre id="sourceLog"></pre>
+</details>
+<dialog id="settings" aria-labelledby="settingsTitle">
+ <h2 id="settingsTitle">顯示設定</h2>
+ <p>正式版建議在開啟設定時暫停模擬。關閉後繼續原狀態。</p>
+ <label for="locale">介面語言</label>
+ <select id="locale"><option value="zh-Hant">繁體中文</option><option value="zh-Hans">简体中文</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="en">English</option></select>
+ <label for="graphics">圖像模式</label>
+ <select id="graphics"><option value="original">原始像素</option><option value="edge">邊緣處理候選</option></select>
+ <p>英文使用原版字體。其他語言的字體與排版待逐欄驗證；本原型未重繪字體。</p>
+ <div class="actions"><button id="cancel">取消</button><button id="apply">套用</button></div>
+</dialog>
+<script id="prototype-data" type="application/json">__PROTOTYPE_DATA__</script>
+<script>
+'use strict';
+const data=JSON.parse(document.getElementById('prototype-data').textContent);
+const game=document.getElementById('game'),ctx=game.getContext('2d',{willReadFrequently:true});
+const dialog=document.getElementById('settings'),locale=document.getElementById('locale'),graphics=document.getElementById('graphics');
+const names={'zh-Hant':'繁體中文','zh-Hans':'简体中文',ja:'日本語',ko:'한국어',en:'English'};
+let activeLocale='zh-Hant',activeGraphics='original';
+const sources={};
+function loadImage(src){return new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=reject;im.src=src;});}
+function scale2x(input){
+ const {width:w,height:h}=input,out=new ImageData(w*2,h*2);
+ const src=new Uint32Array(input.data.buffer,input.data.byteOffset,w*h),dst=new Uint32Array(out.data.buffer);
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+  const e=src[y*w+x],b=src[Math.max(0,y-1)*w+x],d=src[y*w+Math.max(0,x-1)],f=src[y*w+Math.min(w-1,x+1)],q=src[Math.min(h-1,y+1)*w+x];
+  const i=y*4*w+x*2,change=b!==q&&d!==f;
+  dst[i]=change&&d===b?d:e;dst[i+1]=change&&b===f?f:e;
+  dst[i+2*w]=change&&d===q?d:e;dst[i+2*w+1]=change&&q===f?f:e;
+ }
+ return out;
+}
+function raw320(){const c=document.createElement('canvas');c.width=320;c.height=200;const t=c.getContext('2d');t.imageSmoothingEnabled=false;t.drawImage(sources.en,0,0,320,200);return t.getImageData(0,0,320,200);}
+function compare(){
+ const raw=raw320(),crop=new ImageData(200,112);
+ for(let y=0;y<112;y++)crop.data.set(raw.data.subarray(((y+8)*320)*4,((y+8)*320+200)*4),y*200*4);
+ const base=document.createElement('canvas');base.width=200;base.height=112;base.getContext('2d').putImageData(crop,0,0);
+ const n=document.getElementById('nearest').getContext('2d');n.imageSmoothingEnabled=false;n.drawImage(base,0,0,800,448);
+ document.getElementById('enhanced').getContext('2d').putImageData(scale2x(scale2x(crop)),0,0);
+}
+function render(){
+ ctx.imageSmoothingEnabled=false;ctx.drawImage(sources[activeLocale==='en'?'en':'zh-Hant'],0,0);
+ if(activeGraphics==='edge'){
+  // 只處理已展示的建築示例區；正式引擎尚未取得文字／游標分層契約。
+  const raw=raw320(),crop=new ImageData(200,112);
+  for(let y=0;y<112;y++)crop.data.set(raw.data.subarray(((y+8)*320)*4,((y+8)*320+200)*4),y*200*4);
+  ctx.putImageData(scale2x(scale2x(crop)),0,32);
+ }
+ document.getElementById('current').textContent=names[activeLocale]+' · '+(activeGraphics==='original'?'原始像素':'建築區邊緣處理示例');
+ document.getElementById('notice').textContent=['zh-Hant','en'].includes(activeLocale)?'目前顯示同狀態的'+names[activeLocale]+'截圖。這不是正式遊戲的即時切換。':'尚未提供'+names[activeLocale]+'遊戲譯稿；原型仍顯示繁中截圖，僅示範語言選項。';
+}
+document.getElementById('openSettings').onclick=()=>{locale.value=activeLocale;graphics.value=activeGraphics;dialog.showModal();};
+document.getElementById('cancel').onclick=()=>dialog.close();
+document.getElementById('apply').onclick=()=>{activeLocale=locale.value;activeGraphics=graphics.value;render();dialog.close();};
+for(const kind of ['keydown','keyup','pointerdown','pointerup','wheel'])dialog.addEventListener(kind,e=>e.stopPropagation());
+const log=[];
+for(const kind of ['pointerdown','pointerup','pointermove'])game.addEventListener(kind,e=>{
+ if(dialog.open)return;
+ const b=game.getBoundingClientRect(),x=Math.floor((e.clientX-b.left)*320/b.width),y=Math.floor((e.clientY-b.top)*200/b.height);
+ if(x<0||x>=320||y<0||y>=200)return;
+ if(kind==='pointermove'&&e.buttons===0)return;
+ log.push(kind+' DOS('+x+','+y+')');document.getElementById('inputLog').textContent=log.slice(-16).join('\n');
+});
+Promise.all(Object.entries(data.images).map(async([key,im])=>{sources[key]=await loadImage(im.url);})).then(()=>{
+ render();compare();document.getElementById('sourceLog').textContent=JSON.stringify(data.provenance,null,2);
+}).catch(e=>{document.getElementById('notice').textContent='原型圖片載入失敗：'+e.message;});
+</script>
+</html>

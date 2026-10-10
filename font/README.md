@@ -9,9 +9,8 @@
 - 字型檔名：`Cubic_11.ttf`
 - SHA-256：`8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`
 - 檔內名稱版本：`Version 1.430`；此份字型的 Unicode 對照表含 10,250 個字形碼點。
-- 本機已核對的兩個唯讀來源：
+- 本機已核對的唯讀來源：
   - `/home/anr2/cht/tmp/gocache-104/mod/github.com/hajimehoshi/bitmapfont/v4@v4.1.0/internal/cubic11/Cubic_11.ttf`
-  - `/home/anr2/cht/psychic-war/workplace/font-cmp/Cubic_11.ttf`
 - 可重取的版本入口：Go 模組
   [`github.com/hajimehoshi/bitmapfont/v4@v4.1.0`](https://github.com/hajimehoshi/bitmapfont/tree/v4.1.0)，
   檔案位於 `internal/cubic11/Cubic_11.ttf`。取得模組後仍須驗證

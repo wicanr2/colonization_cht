@@ -4973,3 +4973,10 @@ confirmed來源審查：正式檔案集合查558項TXT，440字串查譯、68MEN
 - 原始VICEROY.EXE、GAME.TXT指紋沿本節前述及docs/text-census-baseline.json；工具為Go1.26.7、dosgolem82a14b2與公開probe_goal181_buy_sources.go，輸入為本輪正常GUI的9b246ee6e4aa2fc36e3db4eae8fa8487527e7b4393afff9fdcfe19e61c741979。沒有IDA分析或原版狀態注入。
 - 輔助觀測在原版執行期CS:IP 0E2D:0832、128119489步看到@BUYME0，bytes f3a6；149980及175336是DOS機器線性RAM位址，不是EXE檔案位移。完整觀測收據e6030418d5ead937e963669438e8d478d210fe1923ffc722f02410523c1e68a6，位置由目標185索引。
 - 輔助觀測終點173200000步RAM 51b2058a…與正式GUI的ab8e2c82…不同，原因未確定。本次不宣稱同狀態或由此提高來源信用。最初102批的BUY同文模板歸屬拒絕，保留收據；重新從101批合併後只新增已驗食物教學。正式GUI三側重播與兩份存檔仍全等。
+
+## 2026-10-10：多語系與 HD 的前端邊界查證
+
+- 入口為[目標186](docs/goals/186-display-settings-and-gameplay-video.md)。本輪只查現行程式、固定字型與既有正常GUI收據，沒有修改原版、執行新的IDA分析或提出新的遊戲語意結論。
+- confirmed：`tools/live_menu.go` 的 `render` 從320×200索引畫面及DAC色盤產生1280×800畫布；對照組為四倍最近鄰放大，中文組經`overlay.ComposeLayers`及後續覆蓋。`tools/window_prototype.go` 的`logicalMouse`將畫布座標除以四，F1～F10與多組修飾鍵送入原版。這些是Go來源定位，不是DOS位址或EXE檔案偏移。
+- 字型輸入為`Cubic_11.ttf`，SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`。在hr-go-ebiten固定映像1430a2cf…內以Python3.11、Pillow9.4.0、24px抽查`A0%漢汉あア한글`，將每字遮罩與U+10FFFF比較。confirmed：`한`及`글`與未定義字遮罩相同，其餘抽查字不同；未檢查完整Unicode對照表，不稱日韓全字形覆蓋。這個工具鏈不取代正式字模烘製環境。
+- 原型的繁中及英文畫面取自同一次已驗貨車路徑的75900000步收據；含像素HTML只放本機。重繪樣張由imagegen參照同路徑城市畫面生成；構圖與字形均不是原版exact證據，未用來更動原版命中區或遊戲規則。來源及輸出雜湊見目標186所索引的`prototype-evidence.json`。

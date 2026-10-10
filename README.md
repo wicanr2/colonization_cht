@@ -4,6 +4,20 @@
 
 做法是「顯示轉譯層」而不是重製：原版 DOS 程式、規則、資料與存檔都不修改，由 [dosgolem](https://github.com/wicanr2/dosgolem) 模擬執行；本專案在原版把文字畫到畫面的那一刻辨識出是哪一句，再於放大後的畫面上疊上中文。辨識不到或證據不足的地方保留英文，不猜。
 
+## 遊戲背景與《殖民帝國》的起源
+
+《殖民帝國》是 MicroProse 於 1994 年推出的回合制策略遊戲，延續《文明》的經營與策略設計，把焦點放在美洲殖民地的成長與獨立。玩家選擇英國、法國、荷蘭或西班牙，從探索海岸、建立聚落開始，安排居民生產、加工與貿易，再處理原住民關係、歐洲列強競爭及母國的要求，最後爭取獨立。[官方遊戲介紹](https://store.steampowered.com/app/327400/Sid_Meiers_Colonization_Classic/)
+
+遊戲題材源於十五世紀末以後的歐洲跨洋擴張。哥倫布在西班牙王室支持下尋找通往亞洲的西行航路，1492 年的航行促成歐洲與美洲持續接觸，後續發展為探索、征服與殖民。當時美洲已有眾多原住民族、語言與社會；遊戲所稱的「新世界」，反映的是歐洲來者的視角。[美國國會圖書館：哥倫布的航行](https://www.loc.gov/exhibits/1492/columbus.html)、[1492 年以前的美洲](https://www.loc.gov/exhibits/1492/america.html)
+
+## 當年北美移民的情況
+
+十七至十八世紀的移民有不同處境。有人參與商業殖民事業，有人為宗教生活遷徙，也有人為擺脫貧困與債務而遠行。1607 年建立的詹姆斯敦是北美第一個永久英國殖民聚落，由維吉尼亞公司資助；新英格蘭的清教徒聚落及其他宗教群體，則呈現了不同的移居動機。[美國國家公園署：詹姆斯敦簡史](https://www.nps.gov/jame/learn/historyculture/a-short-history-of-jamestown.htm)、[美國國會圖書館：探索與定居](https://www.loc.gov/exhibits/british/brit-1.html)
+
+並非每個人都付得起船費。部分歐洲移民簽下契約，以多年勞動換取渡海機會；也有受判流放者被運往殖民地。抵達之後，生活仍受食物、疾病與補給限制，早期詹姆斯敦曾經歷嚴重飢荒。這些處境有助理解遊戲中的契約僕役、移民與糧食管理。[美國國會圖書館：契約僕役、學徒與流放者](https://guides.loc.gov/indentured-servants)、[詹姆斯敦簡史](https://www.nps.gov/jame/learn/historyculture/a-short-history-of-jamestown.htm)
+
+跨大西洋人口移動也包含被奴役、遭強迫運送的非洲人，不能都視為自願移民。殖民擴張同時改變原住民族的土地與生活，帶來貿易、衝突與剝奪。遊戲把這段歷史簡化成策略系統，背景介紹與實際歷史仍須分開閱讀。[美國國會圖書館：移民與遷徙](https://www.loc.gov/collections/songs-of-america/articles-and-essays/historical-topics/immigration-and-migration/)
+
 ## 下載與執行
 
 [完整功能修正版 v.1.0.3-20261010](https://github.com/wicanr2/colonization_cht/releases/tag/v.1.0.3-20261010)提供 Linux x86_64 AppImage、Windows x86_64 ZIP、macOS Intel／Apple Silicon 通用 ZIP，以及重新製作的90秒推廣影片。本版修復英國新局停止，收錄目前完成的文字重繪、殖民地、港口與貿易接線，以及中文顯示、輸入、音樂與音效功能。部分情境仍保留原文。
@@ -78,6 +92,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 所有建置、遊戲執行、分析與抓圖都在 Docker 容器內進行，需要自備合法原版。
 
 - [目前脈絡](CONTEXT.md)、[工作計畫](WORKLIST.md)（由 `docs/worklist.json` 產生）
+- [多語系、HD 切換與實際遊玩影片規劃](docs/goals/186-display-settings-and-gameplay-video.md)及可丟棄操作原型；新增功能尚未收進目前發行版。
 - [規格](docs/spec/)與[各輪目標](docs/goals/)
 - [驗證矩陣](docs/verification-matrix.md)（`tools/verification_matrix.py` 產生）
 - [研究證據](RESEARCH-LOG.md)與[工作歷程](WORKLOG.md)

@@ -1472,6 +1472,42 @@
         "kind": "manual",
         "note": "目前正式8e22e074…已完成教學6／7／15城市變數，規格035限定CONFORMED。新13正常GUI四側、全部21教學逐變數與來源隔離、30px量測及回退PASS；完整開局27行、教學21、版畫17、正常存讀及五種失敗與既有代表抽樣審查PASS。99列矩陣／普查已同步，教學6／7／15實際shown。入口tools/check_goal185_start_completion.py與tools/check_goal185_tutorial_cargo.py。功能驗收完成；遠端#61仍OPEN。自動核准審查拒絕遠端關閉，要求使用者明確授權關閉操作。"
       }
+    },
+    {
+      "id": "multilingual-display",
+      "issue": 62,
+      "state": "in_progress",
+      "title": "五語切換與英數字型統一",
+      "depends_on": ["l10n-decision"],
+      "acceptance": "繁中、簡中、日文、韓文及英文可切換；英文使用原版字體，其餘語言的英數用該語言字型。資料包、逐欄排版、輸入隔離、正常GUI、同狀態與存讀檔驗收通過，原版操作不變。",
+      "verify": {
+        "kind": "manual",
+        "note": "入口docs/goals/186-display-settings-and-gameplay-video.md；目前只有規劃與可丟棄HTML原型。正式設定架構、日韓字型與新增譯稿尚未確認或建置，不能把五個可點選項當成五語完成。"
+      }
+    },
+    {
+      "id": "hd-graphics",
+      "issue": 63,
+      "state": "in_progress",
+      "title": "圖像HD重繪與安全切換",
+      "depends_on": ["static-text-survey"],
+      "acceptance": "依使用者確認的風格重繪地形、人物與建築；原始像素與HD可獨立於語言切換。正常GUI、動畫、遮擋、座標、效能、同狀態與素材權利驗收通過，原版規則與存檔不變。",
+      "verify": {
+        "kind": "manual",
+        "note": "使用者已選重繪地形、人物與建築，先做風格樣張；精細像素與手繪插畫兩個本機候選已生成，畫風待選。入口docs/goals/186-display-settings-and-gameplay-video.md；樣張未對齊正式資產，不是全遊戲HD完成證據。"
+      }
+    },
+    {
+      "id": "gameplay-promo-video",
+      "issue": 64,
+      "state": "in_progress",
+      "title": "包含連續實際遊玩畫面的推廣影片",
+      "depends_on": ["promo-video"],
+      "acceptance": "正常玩家輸入錄製連續實際前端畫面，保存版本、輸入、時間與來源雜湊；90秒1080p30影片通過音畫、遊玩動態、黑幀、異常凍結、字幕與來源驗收，再隨新固定版本發行。",
+      "verify": {
+        "kind": "manual",
+        "note": "入口docs/goals/186-display-settings-and-gameplay-video.md及規格044。已錄現行正式版51.933秒真實X11操作，40筆正常輸入、104抽樣／93變化通過；原版WAV另存，與畫面牆鐘不同步。仍未完成90秒音軌、字幕、剪輯與成片驗收，v.1.0.3舊靜態影片保留，不覆寫發行。"
+      }
     }
   ]
 }
