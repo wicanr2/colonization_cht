@@ -69,7 +69,7 @@
 | #60 | in_progress | [一般事件訊息](https://github.com/wicanr2/colonization_cht/issues/60) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
 | #61 | in_progress | [開局、存讀檔、教學提示其餘與事件版畫](https://github.com/wicanr2/colonization_cht/issues/61) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
 | #62 | in_progress | [五語切換與英數字型統一](https://github.com/wicanr2/colonization_cht/issues/62) | `l10n-decision` | 繁中、簡中、日文、韓文及英文可切換；英文使用原版字體，其餘語言的英數用該語言字型。資料包、逐欄排版、輸入隔離、正常GUI、同狀態與存讀檔驗收通過，原版操作不變。 |
-| #63 | in_progress | [圖像HD重繪與安全切換](https://github.com/wicanr2/colonization_cht/issues/63) | `static-text-survey` | 依使用者確認的風格重繪地形、人物與建築；原始像素與HD可獨立於語言切換。正常GUI、動畫、遮擋、座標、效能、同狀態與素材權利驗收通過，原版規則與存檔不變。 |
+| #63 | in_progress | [圖像HD重繪與安全切換](https://github.com/wicanr2/colonization_cht/issues/63) | `static-text-survey` | 依已定稿的第一張精細像素風重繪地形、人物與建築；原始像素與HD可獨立於語言切換。正常GUI、動畫、遮擋、座標、效能、同狀態與素材權利驗收通過，原版規則與存檔不變。 |
 | #64 | in_progress | [包含連續實際遊玩畫面的推廣影片](https://github.com/wicanr2/colonization_cht/issues/64) | `promo-video` | 正常玩家輸入錄製連續實際前端畫面，保存版本、輸入、時間與來源雜湊；90秒1080p30影片通過音畫、遊玩動態、黑幀、異常凍結、字幕與來源驗收，再隨新固定版本發行。 |
 
 ## 驗證

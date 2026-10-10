@@ -1,0 +1,23 @@
+{
+  "schema": "colonization-cht-art-direction/1",
+  "image": "hd-pixel-concept.png",
+  "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+  "dimensions": [
+    1536,
+    1024
+  ],
+  "generated_date": "2026-10-10",
+  "approved_date": "2026-10-11",
+  "decision": "第一張精細像素風定稿，用於地形、人物與建築重繪。",
+  "user_instruction": "定稿第一張畫風 請直接紀錄在 AGENTS.md 內 該草稿也進入 repo",
+  "approval_scope": "此張生成草稿入庫；畫風定稿。正式資產位置與互動範圍沿用原版證據。",
+  "status": "approved-art-direction-not-game-ready-assets",
+  "tool": "image_gen.imagegen",
+  "transparent_background": false,
+  "reference_role": "composition, camera, era, palette, and architectural reference; not an edit target",
+  "private_reference": "workplace/reports/goal185-player-experience/issue56-wagon-sample-gui/gui.colony.png",
+  "reference_sha256": "161b9abe82606d1591b4666aafc679525c0dec611396555b6f452404db2b554f",
+  "private_source": "workplace/reports/goal185-player-experience/display-settings-20261010/hd-pixel-concept.png",
+  "prompt": "Use case: stylized-concept. Asset type: disposable art-direction sample for the user's HD graphics layer for Sid Meier's Colonization (1994). Input image 1 is ONLY a composition, camera, era, palette, and architectural reference, not an edit target. Generate a new landscape sample of the upper-left settlement artwork, excluding ALL UI, HUD, text, buttons, numbers, icons, flags, borders, logos and watermarks. Keep the same shallow top-down orthographic game view, same building footprints and arrangement as the referenced settlement: a white two-storey gabled town hall with three roof chimneys in the upper central area, smaller timber-and-plaster houses, a timber church and simple open timber workshop, sparse green deciduous trees, pale sandy grass ground, a split-rail fence at lower right, a small blue-coated settler with red cap near the town hall. Draw terrain, buildings and the small character together so the user can judge style compatibility. Preserve recognizability and readable silhouettes at actual gameplay scale. No new gameplay objects, no new roads, no modern architecture, no cinematic camera tilt, no photorealism. The result is a visual concept only, not an exact layout or final sprite atlas. Render at 1536x1024 or similar landscape proportion. Variant A: refined high-resolution pixel art, very deliberate crisp small square pixels, richer material detail than 1994 while preserving the original earthy cream, olive, brown and slate-blue palette. Retain pixel-art shading, clean edges, readable dark outlines, no blur, no smooth gradients. A coherent HD pixel-art redraw, not merely a nearest-neighbor enlargement.",
+  "rights_note": "依原版畫面參考生成的風格草稿，使用者明確授權此圖加入儲存庫。原版參考內容的權利仍歸原權利人，既有 LICENSE 邊界不變。"
+}
