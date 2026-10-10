@@ -151,6 +151,12 @@ RAM、調色盤或原始資料；無法安全識別文字／游標的區域維�
 遊戲專屬來源與座標留在本儲存庫。正式素材使用已確認、可驗雜湊的本機資料包，
 遊玩時直接載入，避免以即時生成圖像影響輸入延遲與畫面一致性。
 
+首座候選由[透明輪廓檢查器](../../tools/check_hd_candidate_geometry.py)只讀量測。
+以`--original`指定指紋相符的BUILDING.SS，`--decoded`指定盤點器第032幀PNG，
+`--candidate`及`--metadata`指定生成候選與來源紀錄，`--output`指定新的workplace JSON。
+工具核對原版、解碼索引與候選雜湊，量測92×108目的畫布的alpha覆蓋及外溢；
+不修改圖片，量測數字不作正式素材或畫質驗收通過門檻。
+
 資產盤點入口：[研究用SS盤點器](../../tools/inventory_hd_assets.py)。工具以固定
 `mpskit` commit與來源清冊雜湊核對外部解碼器，讀取實際檔案數、圖像數、尺寸及索引像素雜湊。
 解碼圖片、接觸表與清冊只輸出本機`workplace/reports/goal186-display-hd/`；
@@ -267,14 +273,37 @@ macOS 真機、音效卡與人耳驗收沿用現有限制，不能用 Linux／Wi
 | `building-032-source-proof.json` | 原版0D46:01D2的來源緩衝與BUILDING.SS第032幀的part3位移22616完整534bytes全同，該段在part3唯一。原版CS:IP、線性RAM與解壓part位移分別記錄於RESEARCH-LOG。尚未確認完整呼叫邊界、參數與遮擋契約。 |
 | 有／無觀測對照 | 75900000步CPU、完整RAM、VGA及DAC全同。畫面與既有GUI控制收據相同，完整RAM與歷史收據不同，原因仍未知，不宣稱與舊前端全面同狀態。 |
 | `building-032-candidate-v1.png`與JSON | 已按定稿畫風生成實際建築候選，保存完整提示及參考來源。輪廓、透明邊界及底部色點尚待修整與驗證，不能算正式HD素材。 |
+| `building-032-candidate-v2.png`與JSON | imagegen清理外圍色點，原樣保存1157×1359 RGBA，SHA-256為6b1960059e3abaaaa4bc4c4afc3ab19ebeb21d2f3336b5ba2b5fd6abad0f0476。只留本機，未代替定稿畫風。 |
+| `building-032-v2-geometry.json` | 92×108目的畫布，以alpha≥128量測：7040原版不透明點中6285點有候選覆蓋，755點未覆蓋、309點在原版輪廓外。這是幾何量測，沒有以百分比門檻宣稱正式素材通過。 |
 
 研究解碼器沿用固定mpskit commit `8c30544b51d1b4ab68f3a465784239c24b660e24`，
 清冊SHA-256 `340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18`。
 外部AGPL研究程式維持本機唯讀依賴，沒有複製進正式程式或公開儲存庫。
 
-## 設定核心的驗證
+## 設定核心與隔離真視窗的驗證
 
 [規格050](../spec/050-display-settings.md)已READY；新增設定狀態及兩條音訊暫停機制，
-尚未接入真視窗設定列。`settings-tests-r2.json`記錄174項Go測試全過、零skip，另通過
+尚未接入正式視窗設定列。`settings-tests-r2.json`記錄174項Go測試全過、零skip，另通過
 `go vet`。獨立音樂暫停五次讀取後的機器步數、完整RAM及命令佇列不變；恢復與
 無暫停對照的音訊及原版狀態相同。這些是核心測試，不是五語、HD或GUI完成證據。
+
+接續[規格051](../spec/051-display-settings-runtime-prototype.md)的隔離執行原型，
+以真視窗驗設定列及繁中／英文即時切換。前端五語文案唯一來源為
+[frontend-ui.tsv](../../text/frontend-ui.tsv)，與五語遊戲資料包分開計算。
+原型來源為[Go介面](../../tools/display_settings_ui_prototype.go)、
+[實際字型與座標測試](../../tools/display_settings_ui_prototype_test.go)，
+由[隔離組裝器](../../tools/build_display_settings_runtime_prototype.py)核對正式來源後
+複製至新的workplace目錄。組裝器只改副本，不連入正式建置或啟動器。
+真視窗操作由[設定列GUI探針](../../tools/probe_display_settings_gui.py)執行，使用已驗
+冷啟動／讀檔路徑的真實X11鍵鼠；設定動作與原版DOS輸入分別記錄，只輸出本機。
+GUI結束後由[原版狀態重播檢查器](../../tools/check_display_settings_replay.py)沿同一初始
+存檔及實際輸入，核對原型、正式前端、原文控制的完整狀態、影像與存檔。
+
+隔離原型已通過177Go、零skip及go vet。四組真GUI操作涵蓋按住與移動、Escape取消、
+未安裝語言／HD載入失敗保留、繁中→英文→繁中及正常進城後取消。18筆設定事件在
+各自暫停期間的原版步數、CPU、完整RAM、VGA、DAC、DOS輸入數及滑鼠狀態全同；
+英文遊戲區逐像素等於原版輸出，沒有強制原版重畫。實際21筆DOS輸入重播至
+73400000步，原型、正式前端與原文控制的完整原版狀態及存檔全同，三側重播WAV全同，
+兩種繁中重播與GUI終點PNG全同。完整雜湊及尚待項見規格051的2026-10-11表。
+GUI收據為`runtime-ui-gui-20261011-r2/`，重播收據為`runtime-ui-replays-20261011-r2/`。
+字型、完整五語包、正式設定保存、失焦／拖曳GUI與HD合成仍待完成，規格051保持DRAFT。

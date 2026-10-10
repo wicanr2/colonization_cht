@@ -1,0 +1,18 @@
+key	zh-Hant	zh-Hans	ja	ko	en
+ui.settings	顯示設定	显示设置	表示設定	화면 설정	Display settings
+ui.description	設定只影響顯示。關閉並放開按鍵後繼續遊戲。	设置只影响显示。关闭并松开按键后继续游戏。	設定は表示のみに適用されます。閉じてキーを離すとゲームを再開します。	설정은 화면 표시에만 적용됩니다. 닫고 키를 놓으면 게임이 계속됩니다.	These settings affect the display. Close and release all keys to continue playing.
+ui.language	語言	语言	言語	언어	Language
+ui.graphics	圖像	图像	画像	그래픽	Graphics
+ui.language.zh-Hant	繁體中文	繁體中文	繁體中文	繁體中文	繁體中文
+ui.language.zh-Hans	简体中文	简体中文	简体中文	简体中文	简体中文
+ui.language.ja	日本語	日本語	日本語	日本語	日本語
+ui.language.ko	한국어	한국어	한국어	한국어	한국어
+ui.language.en	English	English	English	English	English
+ui.graphics.original	原版像素	原版像素	オリジナルの画像	원본 픽셀	Original pixels
+ui.graphics.hd	HD 重繪	HD 重绘	HD 描き直し	HD 그래픽	HD redraw
+ui.independent	語言與圖像可分別選擇。	语言与图像可分别选择。	言語と画像は個別に選択できます。	언어와 그래픽을 따로 선택할 수 있습니다.	Language and graphics can be selected separately.
+ui.apply	套用	应用	適用	적용	Apply
+ui.cancel	取消	取消	キャンセル	취소	Cancel
+ui.paused	遊戲已暫停	游戏已暂停	ゲームを一時停止中	게임 일시 정지 중	Game paused
+ui.release	請放開所有按鍵與滑鼠按鈕。	请松开所有按键与鼠标按钮。	すべてのキーとマウスボタンを離してください。	모든 키와 마우스 버튼을 놓으세요.	Release all keys and mouse buttons.
+ui.error.unavailable	此顯示選項尚未安裝。	此显示选项尚未安装。	この表示オプションはインストールされていません。	이 화면 옵션이 설치되어 있지 않습니다.	This display option is not installed.

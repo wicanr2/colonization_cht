@@ -4993,3 +4993,14 @@ confirmed來源審查：正式檔案集合查558項TXT，440字串查譯、68MEN
 - 字型：[Noto CJK官方來源](https://github.com/notofonts/noto-cjk/tree/523d033d6cb47f4a80c58a35753646f5c3608a78)Sans2.004固定commit523d033d…，Regular TTC b76b0433…、OFL 6a73f954…。Pillow實際辨識JP／KR／SC／TC face 0／1／2／3，四語樣張與ASCII均無抽查缺字，Cubic11韓文缺字；不稱全語料覆蓋。公開樣張腳本重生PNG4986d9ea…，只作字型選擇，不作正式逐欄字模。字型決定待答。
 - 生成候選：building-032-candidate-v1.png為RGBA1157×1359、SHA-256 `5d13b043d1824359a3d0970ccd91cec78633d824bdc6efbf3cc6fa7551ae3aa7`。imagegen參照已定稿畫風及真實建築圖，完整提示與來源見本機同名JSON。原版輪廓、92×108目的矩形、透明邊界及零星色點未驗，不列正式HD完成數。
 - 設定核心：174Go、零skip及go vet通過，收據a49a7201…。獨立音樂暫停時五次讀取不推進原版步數、完整RAM或命令；恢復PCM及音樂原版狀態與無暫停控制相同。前端設定列、語言包交換與正常GUI仍未驗，規格050保持READY。初次測試缺硬編碼的既有標題收據，新增環境變數與固定指紋入口後同映像乾淨重跑成功，保留原失敗JSON。
+
+## 2026-10-11：真視窗設定原型與建築輪廓
+
+- 入口：[目標186](docs/goals/186-display-settings-and-gameplay-video.md)及DRAFT[規格051](docs/spec/051-display-settings-runtime-prototype.md)。Go1.26.7、Ebitengine2.9.9、golang.org/x/image0.31.0、Python3.11.2、Pillow9.4.0、隔離dosgolem82a14b2，映像hr-go-ebiten:1.26.7-2.9.9-r1／1430a2cf…。原版VICEROY.EXE為a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3，其餘資料沿既有基準。
+- 來源定位：本輪Go函式及檔名是前端程式定位，不是DOS地址。正式適配器7d136aef…與視窗cd287840…未改；組裝器只改workplace副本。原型二進位`48aae26d8cbea2a393f6eac09fee169513093798ea064f0751613af0a85c9f6c`，完整來源清冊`c9d5518e4bd8e2371a9d86413be29f63a9d9fee0ff62ef336a7ed8dce52d8b64`。五語前端17key使用TSV，不代表五語遊戲譯稿。
+- confirmed：177Go、零skip與go vet通過，測試收據`96aa4d6956ff4a7bfa3438eb9e87677544bfaba28ebb8637259f8b6e10f7c448`。以Noto固定TTC b76b0433…的真實區域字形，驗五語設定列及面板的兩軸文字邊界、超長拒絕及48px工具列座標。這是輸入驗證用候選字型，不代替待答的遊戲字型選擇。
+- confirmed：合法初始COLONY09.SAV 52ae8b7b…，真X11鍵鼠冷啟動、讀檔、世界與進城。四組設定操作共18設定事件，暫停期間CPU、完整RAM、VGA、DAC、步數、DOS輸入數及滑鼠狀態全同；按住a／Escape／滑鼠、取消及失敗載入未穿透。英文逐像素等於原版四倍最近鄰；切回繁中由現況重合成，不推進原版或送重畫輸入。GUI摘要`79023b7b0273e81b012871f284a288a3ae83cb1c2032b30dfc9c98c3c0c609dc`。
+- confirmed：21筆DOS輸入`8b3eed0165b0f797855ddefc53c57f84939ec5dd24f2447f666c9cd0878b4502`，設定事件`15733c3998de6aeb720f6c70772ddb04e15ff55da797bc9b6f09d2378db1372f`。同一輸入由原型、正式前端及原文控制重播至73400000步，CPU、RAM、時鐘、VGA、DAC、存檔全同，RAM為`4fa34c79a794c3c0cfd8237fbf0cbb17061685a7d1c99280372b0c57557a12f7`；兩種繁中重播與GUI終點PNG全同，三種重播WAV全同。摘要`fcc8a19fe20c94534997716e524725e27bec188d7a7bee0f717019e27f267b42`。未驗硬體音訊、macOS、失焦或原版拖曳GUI，不外推完整五語與HD。
+- 建築候選v2：imagegen精確物件清理，保持已定稿精細像素風，完整提示及三份參考角色保存本機JSON。原樣PNG為1157×1359 RGBA，SHA-256 `6b1960059e3abaaaa4bc4c4afc3ab19ebeb21d2f3336b5ba2b5fd6abad0f0476`，alpha外接矩形[15,9,1130,1298]。原版BUILDING.SS與第032幀索引指紋沿前節，無新增原版語意推論。
+- confirmed量測：只讀alpha在92×108目的畫布最近鄰抽樣，以128為alpha計數界線。原版7040不透明點中6285點有候選覆蓋，755點未覆蓋，309點在原版輪廓外，覆蓋率0.8927556818、交並比0.8552183971。這些數字只描述幾何，不是畫質或通過信心值；未修改圖像，也未批准正式HD素材。量測摘要`c2c688a4a0fa32aa91d4266e2b3c9ce6f1d62bb02a70f3409b414ec7f367ddca`，重生入口[check_hd_candidate_geometry.py](tools/check_hd_candidate_geometry.py)。
+- 原始收據一律在workplace/reports/goal186-display-hd；原版圖、RAM、存檔、WAV、字型與未定稿生成候選均不入Git。首次GUI關窗因驗證腳本直接銷毀X11視窗造成BadWindow；沿既有正常關窗工具修正後同映像乾淨重跑通過，沒有改產品處理規則。
