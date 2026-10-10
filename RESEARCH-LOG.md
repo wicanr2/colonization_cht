@@ -5013,3 +5013,13 @@ confirmed來源審查：正式檔案集合查558項TXT，440字串查譯、68MEN
 - 候選審查：使用當次advance右界及原版墨跡高度量測真字型，不猜固定字寬。active及完整VGA區域吻合才畫新英數，不沿用中文三成墨跡遮擋門檻；原版值、背景及生命週期保留。178Go、零skip、go vet、15圖19814點安全區內差異、三個顯示收據反例通過；兩次正常GUI各六圖與實際輸入重播全等，原版狀態、WAV與存檔全同。
 - 正式證據：二進位0ee7d5fde8daf1fc67a75ef20f83f11bc0cabcc518edf729ac7d97fdb48d777e，178Go收據b3ac13f8…；設定原型181Go df7a0f90…、零skip與go vet通過。新GUI輸入60筆，af4ba3ebf64dd7b9e6e0c0ba8f54f7bc3d65e3a4f02a92f63dce7cb60ad24dc4，174200000步RAM a7d28f24981f3a3c5a9996f417319351ed34e1d04a1370217a2a8e5640df4267。351個新單色來源事件中341次27px、10次百分比22px；六圖7495點差異只在當次繪製安全區。英文控制同開英數旗標仍與原版索引及DAC四倍最近鄰逐像素相同。正式摘要d3e3a45d02ca4408c98869413523edc18b3a1ab3612bd4d49cb822802cab3740，原始收據在workplace/reports/goal186-display-hd/retained-ascii-formal-replays-20261011。
 - 原版資料、規則、存檔、dosgolem與普查未改，保留英數不計譯文shown。多色、離屏、熱鍵、輸入欄及其他印字入口未知；完整五語、HD與新版交付未完成。原始圖像、RAM、WAV、存檔及字型不入Git。最初重播上限、測試DISPLAY、抓圖程序名稱及介面測試環境缺漏均屬腳本整合，分類後以同映像修正重跑，保留原失敗收據。
+
+## 2026-10-11：三語譯稿與文本組裝契約
+
+- 入口：[目標186](docs/goals/186-display-settings-and-gameplay-video.md)、[規格053](docs/spec/053-language-catalogs.md)。工具為hr-go-ebiten:1.26.7-2.9.9-r1，映像1430a2cfb652c5733914e8116dd2011da21da53ec6b4de3a1482b2a94472f5b5，Python3.11.2；沒有執行原版，沒有新增DOS位址語意。
+- confirmed來源：13份實際TSV共2006列，1835個不同繁中顯示值。完整列以鍵排序、無額外空白、ensure_ascii=False的UTF-8 JSON取SHA-256；來源鍵及列指紋聯集為a3ea14e763f8a34b9b29794fed96e6a3018bf56881b77c2005305ccdd3daad01。各檔名、來源欄及整檔指紋保存tools/language-catalogs.json，術語及值的原鍵用完整SHA-256引用，不在新譯稿重存原文。
+- confirmed格式：ASCII命名大括號槽位、%COUNTRY及%Fs完整保留；217筆ASCII逗號複合列均屬corpus的NAMES.TXT，獨立數字及命令代碼保持原值。port-title中的三個空白為實際U+3000，UTF-8 E3 80 80；Python repr中的\u3000不是檔內六個ASCII字元。這是TSV文字定位，不是EXE或RAM位址。
+- OpenCC官方ver.1.1.9 tag指向556ed22496d650bd0b13b6c163be9814637970ae；cp311 manylinux2014 x86_64 wheel為64994c68796d93cdba42f37e0c073fb8ed6f9d6707232be0ba84f24dc5a36bbb，tw2sp起稿重生為3132b7428424ef0373ca03e8f898092010bd46e14b724befc6e23f1e51db5230。wheel、完整解壓指紋及Apache2授權只在本機，來源為官方GitHub及PyPI，連結見規格053。
+- confirmed資料檢查：簡體2006筆、2003 translated及3明示省略，39列異體字／抵制用語修正後為cfa775478b398015e6f8ac7bb01d7e44b2105d37a5199263493ee9e1fa5a5eb3。日文1553筆為3a44c5a7d4d39d2ff88ca2cf8cb23a647b7bfaabd2045baced57bb53256896e2，韓文1553筆為b8784e2ad26e129c0693fff31b6eb8d80904ffdd967a33ad0465cbcad2b12729；各1550 translated、3明示省略。兩語均缺corpus300及pedia153，不完整稿不能組裝。
+- confirmed文本組裝：8項測試、12次命令通過。兩次簡體13表及清冊逐位元組相同，17963個非顯示欄位值全同，13份基準表指紋不變，繁中輸出全等；英文只有原版顯示清冊。收據workplace/reports/goal186-display-hd/language-text-check-20261011/check.json為3c21468c374aa233d401d5314fe1483bee9ac2f44a6779b2af6736882a7ae587。錯wheel、不完整稿、重複／孤兒鍵、過期來源、占位符、數值或控制碼差異均拒絕。
+- 證據限制：translated只代表已提供譯文，簡體機械起稿不代表逐句人工校對，日韓未完成母語校閱；字形、逐欄安全矩形、正式語言包、五語GUI及原版同狀態未驗。不增加普查shown，不修改遊戲資料、規則、存檔或發布包。研究輸入及起稿中間檔只留workplace。

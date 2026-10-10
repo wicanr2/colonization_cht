@@ -1,0 +1,140 @@
+{
+  "schema": 1,
+  "total": 2006,
+  "source_binding_sha256": "a3ea14e763f8a34b9b29794fed96e6a3018bf56881b77c2005305ccdd3daad01",
+  "tables": [
+    {
+      "catalog": "draft",
+      "file": "draft.zh-Hant.tsv",
+      "key_columns": [
+        "candidate_id"
+      ],
+      "display_column": "zh_hant",
+      "rows": 385,
+      "sha256": "ba843311d8cbec3f5fdc54eda949021c5551b1849311164f641c5efb0dd40239"
+    },
+    {
+      "catalog": "cards",
+      "file": "nation-card-fragments.zh-Hant.tsv",
+      "key_columns": [
+        "candidate_id"
+      ],
+      "display_column": "zh_hant",
+      "rows": 8,
+      "sha256": "bc592050eb87669feca745c0ee3948fc540d265385909aafab29b5ba47c383b0"
+    },
+    {
+      "catalog": "intro",
+      "file": "nation-introduction.zh-Hant.tsv",
+      "key_columns": [
+        "message_id"
+      ],
+      "display_column": "zh_hant_draft",
+      "rows": 8,
+      "sha256": "4e3e175a9b8f1ed2fc49be2cbf4db78a8de58d7df9399db84f9f568f0bb35ff8"
+    },
+    {
+      "catalog": "captions",
+      "file": "build-caption-values.zh-Hant.tsv",
+      "key_columns": [
+        "nation",
+        "caption",
+        "placeholder"
+      ],
+      "display_column": "zh_hant",
+      "rows": 24,
+      "sha256": "9da5e0a15ce8b44d370052fa9d3c7dcffd1d87523f08f6ff542565298c22487c"
+    },
+    {
+      "catalog": "help",
+      "file": "help-bilingual.tsv",
+      "key_columns": [
+        "message_id"
+      ],
+      "display_column": "zh_hant",
+      "rows": 24,
+      "sha256": "efb9bab213a554f762da3a2a22bde9893e762a02c7b92eb350a8183d3deefbce"
+    },
+    {
+      "catalog": "sea",
+      "file": "sea-status.zh-Hant.tsv",
+      "key_columns": [
+        "candidate_id",
+        "role"
+      ],
+      "display_column": "zh_hant",
+      "rows": 24,
+      "sha256": "626d945483963f5efb6b3311087d0f9107587ebf516e71693460910b41757983"
+    },
+    {
+      "catalog": "static",
+      "file": "static-overlay.zh-Hant.tsv",
+      "key_columns": [
+        "candidate_id"
+      ],
+      "display_column": "zh_hant",
+      "rows": 8,
+      "sha256": "0bd2b1ec092ce8bf4ce44fdbdbb09e6ca163a10bfdc7cc628f3d4cd2282216fa"
+    },
+    {
+      "catalog": "corpus",
+      "file": "corpus.zh-Hant.tsv",
+      "key_columns": [
+        "message_id"
+      ],
+      "display_column": "zh_hant",
+      "rows": 865,
+      "sha256": "1483f5ce585c43337dbab8118928cff783af936682493e1fc5e5f2b6554c2947"
+    },
+    {
+      "catalog": "terms",
+      "file": "terms.zh-Hant.tsv",
+      "key_columns": [
+        "en"
+      ],
+      "display_column": "zh",
+      "rows": 256,
+      "sha256": "031e388a7bfbcf83908ee5f9cfcc1bfd94b9748a4ff746f0ebbfcf53961f72ce"
+    },
+    {
+      "catalog": "pedia",
+      "file": "pedia-bilingual.tsv",
+      "key_columns": [
+        "message_id"
+      ],
+      "display_column": "zh_hant",
+      "rows": 164,
+      "sha256": "1bac83f5c3279385d5da2b3a8b7ccc0fcc68e27c10dd7cd849f0778f78b49457"
+    },
+    {
+      "catalog": "values",
+      "file": "variable-values.zh-Hant.tsv",
+      "key_columns": [
+        "en"
+      ],
+      "display_column": "zh",
+      "rows": 1,
+      "sha256": "ff4bbb12bb543e019ecdc647acd6c3ce5180ecf820b341cfbaffa06cafdc10c8"
+    },
+    {
+      "catalog": "templates",
+      "file": "string-templates.zh-Hant.tsv",
+      "key_columns": [
+        "template_id"
+      ],
+      "display_column": "zh_hant",
+      "rows": 66,
+      "sha256": "8033f8fd2ecfca57badedfa26fcac449407827077c2cd0029077e342cac5f9d7"
+    },
+    {
+      "catalog": "colonies",
+      "file": "colony-bilingual.tsv",
+      "key_columns": [
+        "message_id"
+      ],
+      "display_column": "zh_hant",
+      "rows": 173,
+      "sha256": "c81b970b9128ac98a33020e8615cf9a0ce538e905cac0ec8e741f224d4636b92"
+    }
+  ]
+}

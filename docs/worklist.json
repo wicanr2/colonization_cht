@@ -1478,11 +1478,13 @@
       "issue": 62,
       "state": "in_progress",
       "title": "五語切換與英數字型統一",
-      "depends_on": ["l10n-decision"],
+      "depends_on": [
+        "l10n-decision"
+      ],
       "acceptance": "繁中、簡中、日文、韓文及英文可切換；英文使用原版字體，其餘語言的英數用該語言字型。資料包、逐欄排版、輸入隔離、正常GUI、同狀態與存讀檔驗收通過，原版操作不變。",
       "verify": {
         "kind": "manual",
-        "note": "入口docs/goals/186-display-settings-and-gameplay-video.md；使用者確認畫面外設定列。規格050 READY，規格051隔離真視窗原型DRAFT；177Go、零skip及go vet通過，四組GUI／18設定事件驗證暫停、取消、失敗保留及繁中／英文切換。實際21筆DOS輸入三側重播至73400000步，原版完整狀態、存檔與重播WAV全同，繁中終點PNG全同。正式前端未接設定列；失焦／拖曳GUI、設定保存、字型決定、完整五語包及逐欄排版待完成。 規格052已限定CONFORMED，正式單色主畫布英數以當次ES:DI字格改用現有Cubic11，修正1縮小與離城殘影。正式178Go及設定原型181Go、go vet、零skip通過；新正常GUI六圖與60筆實際DOS輸入重播全等，三側完整原版狀態、存檔、WAV全同，英文仍原版字體。英數旗標尚未進發布包；多色、離屏、熱鍵與輸入欄待驗，不增加普查shown。"
+        "note": "入口docs/goals/186-display-settings-and-gameplay-video.md；使用者確認畫面外設定列。規格050 READY，規格051隔離真視窗原型DRAFT；177Go、零skip及go vet通過，四組GUI／18設定事件驗證暫停、取消、失敗保留及繁中／英文切換。實際21筆DOS輸入三側重播至73400000步，原版完整狀態、存檔與重播WAV全同，繁中終點PNG全同。正式前端未接設定列；失焦／拖曳GUI、設定保存、字型決定、完整五語包及逐欄排版待完成。 規格052已限定CONFORMED，正式單色主畫布英數以當次ES:DI字格改用現有Cubic11，修正1縮小與離城殘影。正式178Go及設定原型181Go、go vet、零skip通過；新正常GUI六圖與60筆實際DOS輸入重播全等，三側完整原版狀態、存檔、WAV全同，英文仍原版字體。英數旗標尚未進發布包；多色、離屏、熱鍵與輸入欄待驗，不增加普查shown。 規格053限定CONFORMED於文本契約：13表2006筆來源固定，簡體2006筆起稿及39列術語修正，日韓各1553筆、各缺453筆corpus／pedia正文。8項測試與12次文本命令通過；17963個非顯示欄位值及基準表不變，兩次簡體組裝全等，繁中原檔全等，英文僅原版顯示清冊，不完整日韓拒絕組裝。未驗字型、逐欄排版、五語GUI，不增加shown，未改發布包。入口docs/spec/053-language-catalogs.md及tools/language_catalog.py。"
       }
     },
     {
@@ -1490,7 +1492,9 @@
       "issue": 63,
       "state": "in_progress",
       "title": "圖像HD重繪與安全切換",
-      "depends_on": ["static-text-survey"],
+      "depends_on": [
+        "static-text-survey"
+      ],
       "acceptance": "依已定稿的第一張精細像素風重繪地形、人物與建築；原始像素與HD可獨立於語言切換。正常GUI、動畫、遮擋、座標、效能、同狀態與素材權利驗收通過，原版規則與存檔不變。",
       "verify": {
         "kind": "manual",
@@ -1502,7 +1506,9 @@
       "issue": 64,
       "state": "in_progress",
       "title": "包含連續實際遊玩畫面的推廣影片",
-      "depends_on": ["promo-video"],
+      "depends_on": [
+        "promo-video"
+      ],
       "acceptance": "正常玩家輸入錄製連續實際前端畫面，保存版本、輸入、時間與來源雜湊；90秒1080p30影片通過音畫、遊玩動態、黑幀、異常凍結、字幕與來源驗收，再隨新固定版本發行。",
       "verify": {
         "kind": "manual",
