@@ -110,6 +110,19 @@ workplace子目錄。工具核對三份SHA-256、真實字形、樣張寬度與�
 靜態清冊。不能因字型已含 ASCII，就宣稱原版英數全數改用新字型。
 原版可輸入字元的限制仍保留，不把切換介面語言宣稱為新增日韓輸入法支援。
 
+保留英數接續[規格052](../spec/052-retained-ascii-font.md)。候選沿用現有Cubic11，
+以[正式單色英數機制](../../tools/retained_ascii_overlay.go)接入，另在隔離副本加入[私有觀測](../../tools/retained_ascii_prototype.go)，
+量測當次原版字格與真字形，保留原值、不增加翻譯完成數。規格052已限定CONFORMED，
+正式178Go及設定原型181Go、go vet與零skip通過；新正常GUI六圖、三側完整原版狀態、
+音訊及存檔相同，7495點差異全在當次英數安全區，英文保持原版字體。
+以`--retained-ascii-a`搭配現有`--string-a`明示啟用；發布包未改，多色、離屏與輸入欄待驗。
+由[隔離英數組裝器](../../tools/build_retained_ascii_prototype.py)核對正式來源後複製；
+[真字型與拒絕測試](../../tools/retained_ascii_overlay_test.go)檢查邊界及原版資料不變。
+逐畫格驗證由[英數重播檢查器](../../tools/check_retained_ascii_replay.py)比對候選、只讀觀測與
+英文控制的原版狀態、音訊、存檔及PNG；所有可見差異須有當次來源，並限制在當次繪製安全區。
+[英數真GUI探針](../../tools/probe_retained_ascii_gui.py)使用既有合法存檔及正常路徑，
+透過X11鍵鼠走讀檔、城市、建造、購買與存檔，保存實際輸入及同步畫面；需另行重播驗證。
+
 ## 圖像 HD 的建議
 
 使用者已定稿第一張精細像素風，用於地形、人物與建築重繪。

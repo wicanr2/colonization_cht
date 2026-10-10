@@ -2330,6 +2330,13 @@ func main() {
 			panel = seaPanelRect
 		}
 		it, why := str.finish(r, canvas(), m.Steps, panel)
+		baselineWhy := why
+		if it == nil && *retainedASCIIEnabled {
+			it, why = finishRetainedASCII(str, r, canvas(), m.Steps, baselineWhy)
+			if it != nil && baselineWhy != "" {
+				str.misses[baselineWhy+"\t"+text]++
+			}
+		}
 		if it == nil {
 			if why != "" {
 				str.misses[why+"\t"+text]++
@@ -2833,6 +2840,7 @@ func main() {
 				a := uint32(c.Seg[golem.SS])*16 + uint32(c.R[golem.BX])
 				fresh := str.cur == nil || a != str.cur.next || m.Steps-str.cur.last >= stringGap
 				done := str.onRead(a, m.Mem[a], m.Steps)
+				observeRetainedASCIICursor(str.cur, done, c.R[golem.DI], c.Seg[golem.ES])
 				if fresh && str.cur != nil {
 					raw, ok := cargoCString(m.Mem, a)
 					if p := str.cargo.proof(m.Mem); ok && p.role != "" && raw == p.text {
@@ -4202,6 +4210,9 @@ func main() {
 				draw.Draw(output, image.Rect(x*4, y*4, x*4+4, y*4+4), image.NewUniform(c), image.Point{}, draw.Src)
 			}
 			for _, it := range str.items {
+				if it.id == "STRING:retained-ascii" && !retainedASCIIVisible(it, indexed, cur) {
+					continue
+				}
 				if woodcutOpen && !strings.HasPrefix(it.id, "STRING:woodcut:") {
 					continue
 				}

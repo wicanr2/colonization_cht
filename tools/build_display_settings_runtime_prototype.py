@@ -12,9 +12,9 @@ import sys
 
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE_HASHES = {
-    "tools/live_menu.go": "7d136aef0b2acbe34ea030f63e01240f1c7a033e193f512871368fc26a09a61e",
+    "tools/live_menu.go": "a1133c636f8ab46c89c6edb4a467b3ba561bd874d070e4adb1ffce77d6f3797e",
     "tools/window_prototype.go": "cd287840cfd35cdac4846eb93b5c0dff78860e58a0ecd05d1cd1be119d338fd2",
-    "tools/build_window_prototype.py": "28f7b023f63b3cfd07583b78e372ebe74983f016c097e40531d2bc9e96968a39",
+    "tools/build_window_prototype.py": "b091001528b08239d4b17a076e0984c375e6b3960f443cd2791cab4393ada839",
 }
 
 

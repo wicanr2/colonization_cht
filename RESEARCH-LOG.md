@@ -5004,3 +5004,12 @@ confirmed來源審查：正式檔案集合查558項TXT，440字串查譯、68MEN
 - 建築候選v2：imagegen精確物件清理，保持已定稿精細像素風，完整提示及三份參考角色保存本機JSON。原樣PNG為1157×1359 RGBA，SHA-256 `6b1960059e3abaaaa4bc4c4afc3ab19ebeb21d2f3336b5ba2b5fd6abad0f0476`，alpha外接矩形[15,9,1130,1298]。原版BUILDING.SS與第032幀索引指紋沿前節，無新增原版語意推論。
 - confirmed量測：只讀alpha在92×108目的畫布最近鄰抽樣，以128為alpha計數界線。原版7040不透明點中6285點有候選覆蓋，755點未覆蓋，309點在原版輪廓外，覆蓋率0.8927556818、交並比0.8552183971。這些數字只描述幾何，不是畫質或通過信心值；未修改圖像，也未批准正式HD素材。量測摘要`c2c688a4a0fa32aa91d4266e2b3c9ce6f1d62bb02a70f3409b414ec7f367ddca`，重生入口[check_hd_candidate_geometry.py](tools/check_hd_candidate_geometry.py)。
 - 原始收據一律在workplace/reports/goal186-display-hd；原版圖、RAM、存檔、WAV、字型與未定稿生成候選均不入Git。首次GUI關窗因驗證腳本直接銷毀X11視窗造成BadWindow；沿既有正常關窗工具修正後同映像乾淨重跑通過，沒有改產品處理規則。
+
+## 2026-10-11：保留英數的原版字格與正式覆蓋
+
+- 入口：[目標186](docs/goals/186-display-settings-and-gameplay-video.md)與[規格052](docs/spec/052-retained-ascii-font.md)，由DRAFT、字格證據、READY至正式限定CONFORMED。工具為hr-go-ebiten:1.26.7-2.9.9-r1／1430a2cf…、Go1.26.7、Ebitengine2.9.9、Python3.11.2、Pillow9.4.0、Xvfb與隔離dosgolem82a14b2。VICEROY.EXE a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3，其他原版指紋沿docs/text-census-baseline.json；Cubic11為8de9c249…，未換字型。
+- confirmed根因：前端stringRuntime.finish在少於兩個英文字母時跳過，無模板也回原文。第一候選通過176Go與原版狀態核對，畫面卻有14px的1及離城殘影；寬矩形合成測試沒有覆蓋真實逐字輸出。故保持DRAFT，未把第一候選推進正式路徑。
+- confirmed字格：原版CS:IP 0D21:00C6每次讀字與結尾0時記錄ES:DI，字元像素writer沿0D21:012C。ES為0x2CAE，DI為主畫布列位移，讀取SS:BX是20bit線性RAM來源；均非EXE檔位移或IDA EA。614完整事件的1636字格全部符合當字墨跡與同列advance，2／3／4／5／6／7點分別193／59／1223／57／94／10個。年份1506的1雖墨跡寬1，字格仍寬4；四字墨跡均高5。只讀觀測與控制的完整原版狀態相同，native-cell-check.json保存完整證據。
+- 候選審查：使用當次advance右界及原版墨跡高度量測真字型，不猜固定字寬。active及完整VGA區域吻合才畫新英數，不沿用中文三成墨跡遮擋門檻；原版值、背景及生命週期保留。178Go、零skip、go vet、15圖19814點安全區內差異、三個顯示收據反例通過；兩次正常GUI各六圖與實際輸入重播全等，原版狀態、WAV與存檔全同。
+- 正式證據：二進位0ee7d5fde8daf1fc67a75ef20f83f11bc0cabcc518edf729ac7d97fdb48d777e，178Go收據b3ac13f8…；設定原型181Go df7a0f90…、零skip與go vet通過。新GUI輸入60筆，af4ba3ebf64dd7b9e6e0c0ba8f54f7bc3d65e3a4f02a92f63dce7cb60ad24dc4，174200000步RAM a7d28f24981f3a3c5a9996f417319351ed34e1d04a1370217a2a8e5640df4267。351個新單色來源事件中341次27px、10次百分比22px；六圖7495點差異只在當次繪製安全區。英文控制同開英數旗標仍與原版索引及DAC四倍最近鄰逐像素相同。正式摘要d3e3a45d02ca4408c98869413523edc18b3a1ab3612bd4d49cb822802cab3740，原始收據在workplace/reports/goal186-display-hd/retained-ascii-formal-replays-20261011。
+- 原版資料、規則、存檔、dosgolem與普查未改，保留英數不計譯文shown。多色、離屏、熱鍵、輸入欄及其他印字入口未知；完整五語、HD與新版交付未完成。原始圖像、RAM、WAV、存檔及字型不入Git。最初重播上限、測試DISPLAY、抓圖程序名稱及介面測試環境缺漏均屬腳本整合，分類後以同映像修正重跑，保留原失敗收據。

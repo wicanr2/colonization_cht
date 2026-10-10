@@ -456,7 +456,9 @@ func (c *stringCatalog) stringMasks(prefix, zh string, ink, safe image.Rectangle
 // ---- 執行期（設計第 1、2、7 點）----
 
 type stringRun struct {
-	cargo cargoProof
+	retainedCursor   []image.Point
+	retainedSegments []uint16
+	cargo            cargoProof
 
 	base, next  uint32
 	start, last uint64
