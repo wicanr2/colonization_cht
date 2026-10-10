@@ -105,7 +105,7 @@ GAME.TXT	KINGLOSE|KINGWIN	結局	dialog	conditional	獨立戰爭勝敗後國王�
 GAME.TXT	BUILD([1-9]|10)	開場字幕	caption	normal	開局航行版畫字幕十段（規格029；目標141）
 GAME.TXT	END	不顯示	none	unreachable	檔尾結束標記，無內容
 PEDIA.TXT	PEDIA	百科	string	normal	條目副標「(名稱: 類別)」的類別名
-PEDIA.TXT	MISCELLANEOUS	百科	string	normal	Miscellaneous 類別的 12 個概念名清單；目標170 未到達此類別，正文來源未知
+PEDIA.TXT	MISCELLANEOUS	百科	string	unreachable	confirmed-entry: 指定VICEROY版本正常PEDIA只建立六類，12概念名清單的類別入口不建立；不宣稱個別概念提示不可達。入口證據tools/check_goal185_pedia_boundary.py。
 PEDIA.TXT	FATHER(\d|1\d|2[0-4])	百科	pedia	normal	建國之父條目 25 則，百科清單可列出
 PEDIA.TXT	CARGO(\d|1[0-5])	百科	pedia	normal	貨物條目 16 則
 PEDIA.TXT	UNIT(\d|1\d|2[0-2])	百科	pedia	normal	單位條目 23 則
@@ -168,3 +168,4 @@ EXE	6f58196e382b	歐洲港口	dialog	normal	目標170正常購買船艦／火砲
 EXE	26458b92c96f	歐洲港口	dialog	normal	目標170正常訓練職業與價格選項整段彙總，1072597858步line-no-template；新版逐行清單已有機制，正式全部旗標仍須覆蓋此組合
 EXE	1ed8f7aa3c8d	存讀檔	dialog	normal	目標181正常COLONY01.SAV讀檔清單：第二欄描述與其餘EMPTY欄被正文層彙總，仍有英文；僅分類畫面角色，來源語意與中文安全區依Issue #61續驗
 EXE	e4351e498b79	存讀檔	dialog	normal	正常第三欄讀檔的槽位清單合併觀測；來源位址未知，六次回退，保留待接，不由LOADGOOD正文推定列表已中文化
+MENU.TXT	PEDIA:0x000006E4|PEDIA:0x000006F5	下拉選單	menu	unreachable	confirmed-entry: 原版正常PEDIA只賦命令0x70～75，未讀入這兩個類別；VICEROY a17ed64c版本，入口證據tools/check_goal185_pedia_boundary.py。

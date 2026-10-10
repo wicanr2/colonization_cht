@@ -1,0 +1,275 @@
+diff --git a/docs/spec/000-index.md b/docs/spec/000-index.md
+index 07c1427..54cedd2 100644
+--- a/docs/spec/000-index.md
++++ b/docs/spec/000-index.md
+@@ -350,3 +350,5 @@
+ - [193 — 時序暫存器](193-crtc-timing.md)：READY。從 CRTC 算掃描位置，`3DA` 回報真的回掃狀態；**預設不啟用**，既有對拍收據建立在行為模型上。
+ 
+ - [197 — Sound Blaster 數位音效](197-sb-dsp-dma-digital-audio.md)：READY。8237 DMA 通道 1、DSP 八位元 DMA 播放、IRQ7；**預設不啟用**，驅動的 DMA 測試要收到 IRQ 才會開啟數位音效。
++
++- [198：EMS 同頁映射一致性](198-ems-page-alias-coherence.md)：READY。別名同步、延遲寫回、快照與 DOS 關閉清理。
+diff --git a/docs/spec/198-ems-page-alias-coherence.md b/docs/spec/198-ems-page-alias-coherence.md
+new file mode 100644
+index 0000000..662e681
+--- /dev/null
++++ b/docs/spec/198-ems-page-alias-coherence.md
+@@ -0,0 +1,19 @@
++# 198：EMS 同頁映射一致性
++
++狀態：READY。前置為 `008-ems-paging.md` 與 `014-ems.md` 的複製式分頁。
++
++## 契約
++
++同一 handle／邏輯頁可映射到多個實體頁。這些映射共享內容，客體寫入任一映射後，其他映射立即可讀。公開契約參照 [DOSBox-X EMM_MapPage](https://github.com/joncampbell123/dosbox-x/blob/master/src/ints/ems.cpp)。
++
++- 建立新別名之前，先將既有映射的最新內容寫回。
++- 客體寫入同步到目前有效的其他別名；不同邏輯頁不受影響。
++- 映射載入不觸發客體別名同步，避免將新頁內容寫入舊映射。
++- 後端頁維持既有延遲寫回介面；讀取 `EMSPages` 前仍需 `EMSFlushAll`。
++- DOS 持有寫入監看，Install／LoadState 安裝、Close 移除。監看識別碼不進入序列化格式；快照還原後的第一次客體寫入即須同步。
++
++## 驗證
++
++`go test ./internal/dos -run EMS -count=1` 涵蓋既有配置、映射與延遲寫回，以及 `ems_alias_contract_test.go` 的跨頁 word、換頁隔離、四處別名、映射表還原、全新機器／DOS 快照、重複 DOS 還原及 Close 清理。
++
++不更動 EMS 容量、DOS 配置策略、CPU 指令、時間、亂數或存檔格式。本規格不擴充既有 EMS 功能子集。
+diff --git a/internal/dos/dos.go b/internal/dos/dos.go
+index d8c53dd..fe78a0a 100644
+--- a/internal/dos/dos.go
++++ b/internal/dos/dos.go
+@@ -391,7 +391,8 @@ type DOS struct {
+ 
+ 	// EMS（`docs/spec/014`）：邏輯頁的內容放 Go 端，page frame 在
+ 	// 1 MB 空間裡的 D000h 段。
+-	ems *ems
++	ems        *ems
++	emsWatchID int
+ 
+ 	// XMS 的狀態（`xms.go`）：HMA 有沒有被拿走、A20 的巢狀開關次數、
+ 	// EMB 的鎖定次數、UMB 的配置。
+@@ -668,6 +669,7 @@ func (d *DOS) Install() {
+ 	d.captureMCBSnapshot()
+ 	d.installFont()
+ 	d.M.CPU.IntHook = d.handle
++	d.watchEMS()
+ }
+ 
+ // handle 是中斷分派。回 true 表示「處理完了」，CPU 不走向量表。
+@@ -857,6 +859,10 @@ func (d *DOS) UnimplementedReport() []string {
+ 
+ // Close 關掉所有還開著的檔。
+ func (d *DOS) Close() {
++	if d.emsWatchID != 0 {
++		d.M.Unwatch(d.emsWatchID)
++		d.emsWatchID = 0
++	}
+ 	for _, h := range d.handles {
+ 		if h.f != nil {
+ 			h.f.Close()
+diff --git a/internal/dos/ems.go b/internal/dos/ems.go
+index 8927a91..147ba7f 100644
+--- a/internal/dos/ems.go
++++ b/internal/dos/ems.go
+@@ -64,6 +64,9 @@ type ems struct {
+ 	handles map[uint16]*emsHandle
+ 	next    uint16
+ 
++	// Transient guards for mapping loads and coherent alias writes (spec 198).
++	loading, mirroring bool
++
+ 	// frame[p] 是實體頁 p 目前映著誰，nil ＝ 空。
+ 	// saved 是 AH=47h 存下來的那一份。
+ 	frame, saved [emsPhysPages]*emsMapping
+@@ -87,9 +90,34 @@ func (d *DOS) emsState() *ems {
+ 	if d.ems == nil {
+ 		d.ems = newEMS()
+ 	}
++	d.watchEMS()
+ 	return d.ems
+ }
+ 
++func (d *DOS) watchEMS() {
++	if d.emsWatchID == 0 {
++		d.emsWatchID = d.M.WatchWrite(emsFrameAddr(0), emsFrameAddr(emsPhysPages)-1, func(m *machine.Machine, addr uint32, old, value uint8) {
++			e := d.ems
++			if e == nil || e.loading || e.mirroring {
++				return
++			}
++			phys := int((addr - emsFrameAddr(0)) / emsPageSize)
++			off := int((addr - emsFrameAddr(0)) % emsPageSize)
++			mapping := e.frame[phys]
++			if mapping == nil {
++				return
++			}
++			e.mirroring = true
++			defer func() { e.mirroring = false }()
++			for p, other := range e.frame {
++				if p != phys && other != nil && *other == *mapping {
++					m.Write8(emsFrameAddr(p)+uint32(off), value)
++				}
++			}
++		})
++	}
++}
++
+ // emsFrameAddr 是實體頁 p 在 1 MB 空間裡的位址。
+ func emsFrameAddr(p int) uint32 {
+ 	return uint32(machine.EMSFrameSeg)*16 + uint32(p)*emsPageSize
+@@ -119,6 +147,16 @@ func (d *DOS) emsFlush(p int) {
+ func (d *DOS) emsLoad(p int, handle, page uint16) {
+ 	e := d.emsState()
+ 	h := e.handles[handle]
++	// Keep the existing delayed-writeback EMSPages interface. Before adding an
++	// alias, publish the live contents of any already mapped peer.
++	for other, mapping := range e.frame {
++		if other != p && mapping != nil && mapping.h == handle && mapping.page == page {
++			d.emsFlush(other)
++			break
++		}
++	}
++	e.loading = true
++	defer func() { e.loading = false }()
+ 	// 走 WriteBytes 而不是直接動 M.Mem：寫入監看要看得到這一筆
+ 	// （`oracle.WatchLinear` 監的就是「誰把這個位址寫成這樣」）。
+ 	d.M.WriteBytes(emsFrameAddr(p), h.pages[page])
+diff --git a/internal/dos/ems_alias_contract_test.go b/internal/dos/ems_alias_contract_test.go
+new file mode 100644
+index 0000000..b412578
+--- /dev/null
++++ b/internal/dos/ems_alias_contract_test.go
+@@ -0,0 +1,124 @@
++package dos
++
++import (
++	"bytes"
++	"testing"
++
++	"github.com/wicanr2/dosgolem/internal/cpu"
++	"github.com/wicanr2/dosgolem/internal/machine"
++)
++
++func aliasPair(t *testing.T) (*machine.Machine, *DOS, uint16, uint32) {
++	t.Helper()
++	m, d := newTest(t)
++	m.CPU.R[cpu.BX] = 2
++	if status := emsCallAX(m, d, 0x4300); status != 0 {
++		t.Fatal(status)
++	}
++	h := m.CPU.R[cpu.DX]
++	for p := 0; p < 2; p++ {
++		m.CPU.R[cpu.BX], m.CPU.R[cpu.DX] = 0, h
++		if status := emsCallAX(m, d, 0x4400+uint16(p)); status != 0 {
++			t.Fatal(status)
++		}
++	}
++	return m, d, h, uint32(machine.EMSFrameSeg) * 16
++}
++
++func TestEMSAliasCrossBoundaryAndRemap(t *testing.T) {
++	m, d, h, base := aliasPair(t)
++	defer d.Close()
++	m.Write16(base+emsPageSize-1, 0x1122)
++	if m.Read8(base+emsPageSize-1) != 0x22 || m.Read8(base+2*emsPageSize-1) != 0x22 || m.Read8(base) != 0x11 || m.Read8(base+emsPageSize) != 0x11 {
++		t.Fatal("cross-boundary word did not update both aliases")
++	}
++	m.CPU.R[cpu.BX], m.CPU.R[cpu.DX] = 1, h
++	if status := emsCallAX(m, d, 0x4400); status != 0 {
++		t.Fatal(status)
++	}
++	m.Write8(base, 0x33)
++	if m.Read8(base+emsPageSize) != 0x11 {
++		t.Fatal("different logical page changed the old alias")
++	}
++	m.CPU.R[cpu.BX], m.CPU.R[cpu.DX] = 0, h
++	if status := emsCallAX(m, d, 0x4400); status != 0 {
++		t.Fatal(status)
++	}
++	if m.Read8(base) != 0x11 {
++		t.Fatal("remap lost alias contents")
++	}
++}
++
++func TestEMSAliasSnapshotAndClose(t *testing.T) {
++	m, d, _, base := aliasPair(t)
++	defer d.Close()
++	m.Write8(base+7, 0x44)
++	var machineState, dosState bytes.Buffer
++	if err := m.SaveState(&machineState); err != nil {
++		t.Fatal(err)
++	}
++	if err := d.SaveState(&dosState); err != nil {
++		t.Fatal(err)
++	}
++	m2, d2 := newTest(t)
++	if err := m2.LoadState(bytes.NewReader(machineState.Bytes())); err != nil {
++		t.Fatal(err)
++	}
++	if err := d2.LoadState(bytes.NewReader(dosState.Bytes())); err != nil {
++		t.Fatal(err)
++	}
++	// No EMS service call is made between restore and this guest write.
++	m2.Write8(base+7, 0x55)
++	if m2.Read8(base+emsPageSize+7) != 0x55 {
++		t.Fatal("fresh snapshot restore lost alias synchronization")
++	}
++	for i := 0; i < 3; i++ {
++		if err := d2.LoadState(bytes.NewReader(dosState.Bytes())); err != nil {
++			t.Fatal(err)
++		}
++	}
++	m2.Write8(base+7, 0x66)
++	if m2.Read8(base+emsPageSize+7) != 0x66 {
++		t.Fatal("repeated DOS restore lost alias synchronization")
++	}
++	d2.Close()
++	m2.Write8(base+7, 0x77)
++	if m2.Read8(base+emsPageSize+7) != 0x66 {
++		t.Fatal("closed DOS left an active alias callback")
++	}
++}
++
++func TestEMSAliasMultipleMapAndRestore(t *testing.T) {
++	m, d, h, base := aliasPair(t)
++	defer d.Close()
++	m.CPU.Seg[cpu.DS], m.CPU.R[cpu.SI], m.CPU.R[cpu.CX], m.CPU.R[cpu.DX] = 0, 0x900, 4, h
++	for p := 0; p < 4; p++ {
++		m.Write16(0x900+uint32(p*4), 0)
++		m.Write16(0x902+uint32(p*4), uint16(p))
++	}
++	if status := emsCallAX(m, d, 0x5000); status != 0 {
++		t.Fatal(status)
++	}
++	m.Write8(base+3*emsPageSize+9, 0x88)
++	for p := 0; p < 4; p++ {
++		if m.Read8(base+uint32(p*emsPageSize)+9) != 0x88 {
++			t.Fatal("four-way mapping lost coherence")
++		}
++	}
++	if status := emsCallAX(m, d, 0x4700); status != 0 {
++		t.Fatal(status)
++	}
++	m.CPU.R[cpu.BX], m.CPU.R[cpu.DX] = 1, h
++	if status := emsCallAX(m, d, 0x4400); status != 0 {
++		t.Fatal(status)
++	}
++	m.Write8(base+9, 0x99)
++	if status := emsCallAX(m, d, 0x4800); status != 0 {
++		t.Fatal(status)
++	}
++	for p := 0; p < 4; p++ {
++		if m.Read8(base+uint32(p*emsPageSize)+9) != 0x88 {
++			t.Fatal("page map restore lost alias data")
++		}
++	}
++}
+diff --git a/internal/dos/state.go b/internal/dos/state.go
+index 35d7126..1fa5357 100644
+--- a/internal/dos/state.go
++++ b/internal/dos/state.go
+@@ -278,5 +278,6 @@ func (d *DOS) LoadState(r io.Reader) error {
+ 	}
+ 	d.rebuildProcessBlocks()
+ 	d.syncMCB()
++	d.watchEMS()
+ 	return nil
+ }

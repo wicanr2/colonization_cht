@@ -143,6 +143,14 @@ def checked_fields(row, game, reports, repo):
             raise ValueError('已驗欄位重複')
         result.update(fields=fields, field_count=len(fields), gui_inputs_sha256=proof['inputs_sha256'],
                       original_step=proof['final_step'], original_memory_sha256=proof['final_memory_sha256'])
+        if row.get('unavailable_source_ids'):
+            expected = row['unavailable_source_ids']
+            if (not isinstance(expected, list) or not expected or len(set(expected)) != len(expected) or
+                    any(not isinstance(key, str) or not key for key in expected) or
+                    proof.get('unavailable_source_ids') != expected or proof.get('grade') != 'confirmed' or
+                    proof.get('input') != 'VICEROY.EXE' or proof.get('input_sha256') != sha((game / 'VICEROY.EXE').read_bytes())):
+                raise ValueError('正常入口限制未綁定原版與已驗鍵')
+            result.update(unavailable_source_ids=expected, unavailable_grade='confirmed')
     except (ValueError, KeyError, IndexError, TypeError) as exc:
         result.update(status='FAIL', error_tail=str(exc))
     return result

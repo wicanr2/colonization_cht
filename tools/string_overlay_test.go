@@ -1059,6 +1059,49 @@ func TestTradeCitySourceTemplates(t *testing.T) {
 	}
 }
 
+func TestTradeSecondTitleAndDestinationRoles(t *testing.T) {
+	tpl, err := makeStringTemplate("route-editor-title", "EDIT TRADE ROUTE {n1}", "編輯貿易路線 {n1}")
+	if err != nil {
+		t.Fatal(err)
+	}
+	s, canvas := tradeContextFixture()
+	s.cat.templates = []stringTemplate{tpl}
+	s.cat.frags["EDIT TRADE ROUTE"] = "編輯貿易路線"
+	s.cat.colony = map[string]string{"Jamestown": "詹姆斯敦（Jamestown）"}
+	s.cat.portRoles = map[string]map[string]bool{"port": {"London": true}}
+	zh, _, ok := s.routeTitleTranslate("EDIT TRADE ROUTE 2", image.Rect(128, 5, 193, 10), 5, 15)
+	if !ok || zh != "編輯貿易路線 2" {
+		t.Fatal("當次編號", zh, ok)
+	}
+	title := s.items[0]
+	title.text, title.safe = "EDIT TRADE ROUTE 2", image.Rect(127, 4, 194, 11)
+	title.after = stringRect(canvas, title.safe)
+	if !s.routeEditorContext(canvas) {
+		t.Fatal("第二路線身份")
+	}
+	for _, cell := range []struct {
+		text, want string
+		face       image.Rectangle
+	}{
+		{"3.  London", "3.  倫敦", image.Rect(10, 109, 45, 114)},
+		{"4.  Jamestown", "4.  詹姆斯敦（Jamestown）", image.Rect(10, 129, 60, 135)},
+	} {
+		got, _, ok := s.routeGridTranslate(cell.text, cell.face, 5, 15, canvas)
+		if !ok || got != cell.want {
+			t.Fatal(cell.text, got, ok)
+		}
+	}
+	s.cat.portRoles = nil
+	if _, _, ok := s.routeGridTranslate("3.  London", image.Rect(10, 109, 45, 114), 5, 15, canvas); ok {
+		t.Fatal("未驗母港角色")
+	}
+	for _, text := range []string{"EDIT TRADE ROUTE 02", "EDIT TRADE ROUTE 3"} {
+		if _, _, ok := s.routeTitleTranslate(text, image.Rect(128, 5, 193, 10), 5, 15); ok {
+			t.Fatal("未知編號", text)
+		}
+	}
+}
+
 func TestTradeTitleSourceScope(t *testing.T) {
 	tpl, e := makeStringTemplate("route-editor-title", "EDIT TRADE ROUTE {n1}", "編輯貿易路線 {n1}")
 	if e != nil {
@@ -1300,6 +1343,81 @@ func woodcutFixture(t *testing.T, corpus, draft, present bool, change string) (*
 		[]byte(cor), []byte(dra), header("message_id\tsource_member_sha256\ttext_offset\ttext_byte_length\tsource_bytes_sha256\tsource_name\tzh_hant"), files)
 }
 
+func TestVoyageFieldRolesAndGeometry(t *testing.T) {
+	c := &stringCatalog{
+		frags:     map[string]string{"English": "英國", "Caravel": "輕帆船", "London": "倫敦", "Sailing For": "航向", "Now Arriving In": "即將抵達"},
+		portRoles: map[string]map[string]bool{"nation": {"English": true}, "ship": {"Caravel": true}, "port": {"London": true}},
+	}
+	s := &stringRuntime{cat: c}
+	for _, v := range []struct{ text, want string }{
+		{"English Caravel Sailing For London ", "英國輕帆船，航向倫敦"},
+		{"English Caravel Now Arriving In London ", "英國輕帆船，即將抵達倫敦"},
+	} {
+		r := &stringRun{text: []byte(v.text)}
+		if zh, _, ok := s.voyageFieldTranslate(r, image.Rect(93, 1, 226, 7), 5, 149); !ok || zh != v.want {
+			t.Fatal(zh, ok)
+		}
+	}
+	for _, text := range []string{"English Colonists Sailing For London", "My Caravel Sailing For London", "English Caravel Sailing For My Port", "English Caravel in London"} {
+		if _, _, ok := s.voyageFieldTranslate(&stringRun{text: []byte(text)}, image.Rect(93, 1, 226, 7), 5, 149); ok {
+			t.Fatal("未知詞槽或格式仍被替換", text)
+		}
+	}
+	r := &stringRun{text: []byte("Go To London")}
+	face := image.Rect(242, 93, 285, 98)
+	if zh, _, ok := s.voyageFieldTranslate(r, face, 5, 149); !ok || zh != "前往倫敦" {
+		t.Fatal(zh, ok)
+	}
+	for _, tag := range []string{"cap", "color", "position", "outline", "buffer", "mixed", "custom"} {
+		bad := *r
+		box, capH, color := face, 5, byte(149)
+		switch tag {
+		case "cap":
+			capH--
+		case "color":
+			color--
+		case "position":
+			box = box.Add(image.Pt(0, 1))
+		case "outline":
+			bad.outline = true
+		case "buffer":
+			bad.buf2 = true
+		case "mixed":
+			bad.mixed = true
+		case "custom":
+			bad.text = []byte("Go To My Port")
+		}
+		if _, _, ok := s.voyageFieldTranslate(&bad, box, capH, color); ok {
+			t.Fatal(tag)
+		}
+	}
+	delete(c.frags, "Sailing For")
+	if _, _, ok := s.voyageFieldTranslate(&stringRun{text: []byte("English Caravel Sailing For London")}, image.Rect(93, 1, 226, 7), 5, 149); ok {
+		t.Fatal("缺狀態譯文仍覆蓋")
+	}
+}
+
+func TestPortShipHeaderRoleGuard(t *testing.T) {
+	c := &stringCatalog{
+		frags: map[string]string{"English": "英國", "Caravel": "輕帆船", "London": "倫敦", "My Ship": "私人船名"},
+		portRoles: map[string]map[string]bool{
+			"nation": {"English": true}, "ship": {"Caravel": true}, "port": {"London": true},
+		},
+	}
+	if zh, ok := c.portShipHeader("English Caravel in London "); !ok || zh != "英國輕帆船，位於倫敦" {
+		t.Fatal(zh, ok)
+	}
+	for _, text := range []string{"English My Ship in London", "English Caravel in My Town", "Myself Caravel in London", "English Colonists in London", "English Caravel London"} {
+		if _, ok := c.portShipHeader(text); ok {
+			t.Fatal("未知分類或玩家名稱被替換", text)
+		}
+	}
+	delete(c.frags, "London")
+	if _, ok := c.portShipHeader("English Caravel in London"); ok {
+		t.Fatal("缺譯文仍被替換")
+	}
+}
+
 func TestWoodcutCatalogSources(t *testing.T) {
 	for _, sides := range [][2]bool{{true, false}, {false, true}, {true, true}} {
 		c, e := woodcutFixture(t, sides[0], sides[1], true, "")
@@ -1525,5 +1643,100 @@ func TestWoodcutVisibleSourceAndPageGuard(t *testing.T) {
 	}
 	if s.woodcutVisible(nil, image.Rectangle{}) {
 		t.Fatal("缺畫布不得識別")
+	}
+}
+
+func TestReprintBackgroundAndActualOutline(t *testing.T) {
+	makeRun := func(color byte, start uint64) *stringRun {
+		return &stringRun{text: []byte("Blink"), start: start, last: start + 10, colors: map[byte]int{color: 2}, boxes: []image.Rectangle{image.Rect(10, 10, 12, 11)}, firstOld: map[int]byte{3210: 130, 3211: 130}, lastVal: map[int]byte{3210: color, 3211: color}}
+	}
+	a, b := makeRun(0, 100), makeRun(15, 120)
+	s := &stringRuntime{last: a}
+	merged := s.outline(b)
+	if merged.outline {
+		t.Fatal("同位置覆印不應描邊")
+	}
+	a, b = makeRun(0, 100), makeRun(15, 120)
+	b.boxes[0] = b.boxes[0].Add(image.Pt(1, 0))
+	b.firstOld = map[int]byte{3211: 130, 3212: 130}
+	b.lastVal = map[int]byte{3211: 15, 3212: 15}
+	s.last = a
+	if !s.outline(b).outline {
+		t.Fatal("有位移的真描邊被移除")
+	}
+	safe := image.Rect(9, 9, 13, 12)
+	before := bytes.Repeat([]byte{130}, safe.Dx()*safe.Dy())
+	after := append([]byte(nil), before...)
+	after[5], after[6] = 15, 15
+	old := &stringItem{id: "STRING:dictionary", text: "Blink", ink: image.Rect(10, 10, 12, 11), safe: safe, color: 15, before: before, after: after, phase: "active"}
+	s.items = []*stringItem{old}
+	r := makeRun(0, 1000000)
+	r.firstOld = map[int]byte{3210: 15, 3211: 15}
+	canvas := bytes.Repeat([]byte{130}, 64000)
+	canvas[3210], canvas[3211] = 0, 0
+	if got := s.reprintBackground(r, old.id, old.ink, safe, 0, canvas); !bytes.Equal(got, before) {
+		t.Fatal("未沿用原背景", got)
+	}
+	for _, kind := range []string{"text", "id", "position", "phase", "background", "missing", "old-first", "other-writer"} {
+		rr := *r
+		oo := *old
+		cv := append([]byte(nil), canvas...)
+		s.items = []*stringItem{&oo}
+		id := old.id
+		ink := old.ink
+		switch kind {
+		case "text":
+			rr.text = []byte("Other")
+		case "id":
+			id = "OTHER"
+		case "position":
+			ink = ink.Add(image.Pt(1, 0))
+		case "phase":
+			oo.phase = "suspended"
+		case "background":
+			cv[9*320+9] ^= 1
+		case "missing":
+			rr.lastVal = map[int]byte{3210: 0}
+		case "old-first":
+			rr.firstOld = map[int]byte{3210: 130, 3211: 15}
+		case "other-writer":
+			rr.others = safe
+		}
+		if s.reprintBackground(&rr, id, ink, safe, 0, cv) != nil {
+			t.Fatal("錯誤沿用", kind)
+		}
+	}
+}
+
+// 合成矩形只驗幾何守門，原版像素另由正常GUI檢查器核對。
+func TestClosedDialogFrameGeometry(t *testing.T) {
+	canvas := bytes.Repeat([]byte{130}, 64000)
+	frame := image.Rect(51, 53, 269, 147)
+	safe := image.Rect(62, 56, 265, 70)
+	for x := frame.Min.X; x < frame.Max.X; x++ {
+		canvas[frame.Min.Y*320+x] = 0
+		canvas[(frame.Max.Y-1)*320+x] = 0
+	}
+	for y := frame.Min.Y; y < frame.Max.Y; y++ {
+		canvas[y*320+frame.Min.X] = 0
+		canvas[y*320+frame.Max.X-1] = 0
+	}
+	if got, ok := closedDialogFrame(canvas, safe); !ok || got != frame {
+		t.Fatal(got, ok)
+	}
+	for _, point := range []image.Point{{100, 53}, {100, 146}, {51, 92}, {268, 92}} {
+		changed := bytes.Clone(canvas)
+		changed[point.Y*320+point.X] = 130
+		if _, ok := closedDialogFrame(changed, safe); ok {
+			t.Fatal("缺邊仍接受", point)
+		}
+	}
+	for _, bad := range []image.Rectangle{image.Rectangle{}, image.Rect(0, 0, 320, 200), image.Rect(62, 56, 280, 70)} {
+		if _, ok := closedDialogFrame(canvas, bad); ok {
+			t.Fatal("錯安全區", bad)
+		}
+	}
+	if _, ok := closedDialogFrame(nil, safe); ok {
+		t.Fatal("缺畫布")
 	}
 }

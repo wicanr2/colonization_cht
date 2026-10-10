@@ -1895,6 +1895,9 @@ func main() {
 		m.EnableOPLSynth(true)
 	}
 	canvas := func() []byte { return m.Mem[0x2cae0 : 0x2cae0+64000] }
+	if dlg != nil {
+		dlg.readCanvas = canvas
+	}
 	sourceOK := func(l *menuLine) bool {
 		p := 0x6f160 + int(l.runtimeOffset)
 		return bytes.Equal(m.Mem[p:p+l.length], l.source) && m.Mem[p+l.length] == 0
@@ -2230,7 +2233,15 @@ func main() {
 			return
 		}
 		// 目標172：標題與清單常是先後兩段（殖民地職業選單、建造清單）；上一段仍有效、與新段不重疊且相隔 2M 步內即保留。
-		if dlg.retainSlotTitle(st, canvas()) {
+		if title := dlg.titleForLoadError(st, canvas()); title != nil {
+			if dlg.cur != title {
+				dialogExpireOne(dlg.cur, "superseded-by-new-dialog")
+			}
+			if dlg.prev != title {
+				dialogExpireOne(dlg.prev, "superseded-by-new-dialog")
+			}
+			dlg.prev = title
+		} else if dlg.retainSlotTitle(st, canvas()) || dlg.retainChoiceBody(st, canvas()) || dlg.retainBuildTitle(st, canvas()) {
 			dialogExpireOne(dlg.cur, "superseded-by-new-dialog")
 		} else if old := dlg.cur; old != nil && old.phase != "expired" && !old.safe.Overlaps(st.safe) && st.complete-old.complete < 2000000 {
 			dialogExpireOne(dlg.prev, "superseded-by-new-dialog")
@@ -3296,7 +3307,7 @@ func main() {
 			}
 		}
 		if dlgOn && !*control {
-			if dlg.run != nil && m.Steps-dlg.run.last >= dialogGap {
+			if dlg.run != nil && m.Steps-dlg.run.last >= dialogGap && !dlg.buildReadTransaction(dlg.run, m.Steps) {
 				r := dlg.run
 				dlg.run = nil
 				dialogFinish(r)
@@ -4149,16 +4160,26 @@ func main() {
 			// 規格038：最後繪製，疊在其他層之上；對話框啟用時不畫與其重疊的字串；按住滑鼠整層回原文。
 			shown, sreason := 0, "idle"
 			var dialogSafes []image.Rectangle
+			var dialogFrames []image.Rectangle
+			var dialogFrameSafe image.Rectangle
 			if dlg != nil {
 				for _, st := range []*dialogShown{dlg.prev, dlg.cur} {
 					if st != nil && st.phase == "active" {
+						dialogFrameSafe = dialogFrameSafe.Union(st.safe)
+						if frame, ok := closedDialogFrame(indexed, st.safe); ok {
+							dialogFrames = append(dialogFrames, frame)
+						}
 						dialogSafes = append(dialogSafes, st.safe.Inset(2)) // 目標172：只看安全區內縮 2 點，避免相鄰的說明字串被擋
 					}
 				}
 			}
+			if frame, ok := closedDialogFrame(indexed, dialogFrameSafe); ok {
+				dialogFrames = append(dialogFrames, frame)
+			}
 			cur := cursorBox(int(d.Mouse.X), int(d.Mouse.Y))
 			woodcutOpen := str.woodcutVisible(indexed, cur)
 			if woodcutOpen {
+				dialogFrames = nil
 				dialogSafes = nil // 事件頁不保留舊對話框的輸出區。
 				// 規格038：這三種事件頁以原版VGA作底層，其他舊覆蓋暫藏。
 				for i, v := range indexed {
@@ -4201,6 +4222,9 @@ func main() {
 							for _, ds := range dialogSafes {
 								protected = protected || image.Pt(x, y).In(ds)
 							}
+							for _, frame := range dialogFrames {
+								protected = protected || image.Pt(x, y).In(frame)
+							}
 							if !protected && it.before[k] != it.after[k] && indexed[y*320+x] == it.after[k] {
 								paint(x, y, it.before[k])
 							}
@@ -4228,7 +4252,11 @@ func main() {
 				// 目標177：與作用中對話框重疊時不再整項略過；先記下重疊處的輸出（對話框層的結果），畫完再貼回。
 				var keepDialog []*image.RGBA
 				var keepRects []image.Rectangle
-				for _, ds := range dialogSafes {
+				protectRects := dialogSafes
+				if occluded {
+					protectRects = append(append([]image.Rectangle(nil), dialogSafes...), dialogFrames...)
+				}
+				for _, ds := range protectRects {
 					if o := ds.Intersect(it.safe); !o.Empty() {
 						r := image.Rectangle{Min: o.Min.Mul(4), Max: o.Max.Mul(4)}
 						c := image.NewRGBA(r)

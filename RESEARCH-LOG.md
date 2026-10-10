@@ -4775,3 +4775,195 @@ unknown：沒有macOS二進位執行、真機、Gatekeeper放行、最低系統�
 第一輪600M收據保留：36位元組偶發缺樣由私用API超越取樣目標後的續接計數造成。計數改用實際已提供的取樣，65秒串流與800M即時測試均為零缺樣。通用分流每幀只讀一次SB sample，混音、DMA與記憶體全等；隔離dosgolem提交`c5953b90a0fc76c57f8dbbe0555f7a85d3198fe8`，重建補丁見[音效分流補丁](tools/dosgolem-digital-audio-tap.patch)。共享dosgolem未改，upstream推送DISABLED。
 
 彙整收據`workplace/reports/goal184-linux/music-independent/music-verification.json` SHA-256 `3eb1042260009754c57b36a3bf3d6a5829c2b2de7b18f1964b8933503b21081e`保存各來源雜湊、全狀態比對及播放非靜音檢查。沒有人耳或音效卡驗收。
+
+
+### 2026-10-06：碼頭Board七列原版證據與正式驗收
+
+confirmed：v228正常選第0列切換登船後重開見完整Board七列[1,2,3,5,7,9,11]；21GUI、四側完整原版與存檔、四次0E2D:0832／f3a6查詢通過。正式v232之後，v233新21GUI與v234六側原版／全部取樣／存檔及0D21:00C6原版印字來源逐筆通過。檔名與完整／片段雜湊、工具及位址空間沿規格035 READY；GAME.TXT:0x98AC為檔案位移，0E2D／0D21為執行期分段位址。
+
+原版x82、y67起每12、cap8、68／149／47；safe[81,66,236,150]，候選30～20px採30px、溢位0。相對v223只改切換後七列安全區，其他20圖與存檔相同，六列、Escape及保存無新增差異，缺圖集回原文。正式程式a10dbd94e357d56c8fbaec55ea189ebb6e2ad75cfd14ad58542cc3100aca4f6e，清冊d0818ae05f94b94d64c9e96747efe3ef9c9f47b077c9ac439f71ded9b06cea8b，v23563PASS及重複／反向普查全等，ARMOPTIONS已shown，完成信用0。港口單位標題及其他組合仍未驗。原版像素／RAM／存檔只在workplace。
+
+## 2026-10-07：新局提前停止的玩家路徑證據
+
+入口：[目標185](docs/goals/185-player-experience.md)。原版`OPENING.EXE` SHA-256為`3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`，`VICEROY.EXE`為`a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3`。工具為`colonization-verification:20260930-r1`、Go1.26.7及隔離dosgolem `c5953b90a0fc76c57f8dbbe0555f7a85d3198fe8`；以下CS:IP是dosgolem執行時分段位址，實體位址另列，不混用EXE偏移或IDA位址。
+
+confirmed：英國發現者新局經正常鍵鼠走到第一張字幕，載入`LEVN0002.PIK`時停止於635086794步，DOS.Exited=false、CPU.Halted=true。中文／原文／診斷與已發行v.1.0.2終點完整狀態全等，RAM SHA-256 `21d7dbf83ae80b7bf06b9112e48a3b8e6bca68e3b1fb88694eb6740209b896a7`。關數位音效仍停止於同一步；沒有以缺檔、翻譯或隨機結果直接解釋。
+
+confirmed：停止前`D27E:015B`的AH=48h請求0FA1h段失敗，AX=8、CF=1、BX=0C05h。MCB快照最大空塊49232 bytes，另有36416 bytes但不相鄰。第635059587步`D036:3F9E`的LEAVE之後SP指向零值區，下一個RETF跳入`0000:0000`。第635060009步`0E2D:0FE4`的REP MOVSW覆蓋實體0x1C起的中斷向量表，後續執行HLT。
+
+強推論：配置失敗與錯誤流程相關。未知：碎片形成、錯誤流程與堆疊損毀的完整資料流及最初原因。這些收據尚不足以判定DOS配置器有錯，也不授權忽略HLT、任意增大記憶體或修改原版程式。診斷只在忽略的來源副本增加觀測，沒有正式程式行為改動。
+
+本機證據根`workplace/reports/goal185-player-experience/`內的`newgame/gui.inputs.json`、`newgame-release/run.json`、`dos-memory-calls-v4.jsonl`、`before-failure-v4.memory`、`before-copy-ring-v3.json`與`low-writes-v4.jsonl`保存重現與原始定位。後續先從MCB／申請端到失敗consumer追查，取得最小充分證據後走DRAFT／READY，不深挖與阻塞無關的驅動時序。
+
+
+## 2026-10-07：EMS 同頁映射修復
+
+- 路由命中復古驗證、平台規格優先及文件分工；沿既有入口載入，不重開已完成翻譯或完整配置器考古。證據與規格入口為[規格047](docs/spec/047-ems-alias-coherence.md)及[目標185](docs/goals/185-player-experience.md)。
+- 原版OPENING.EXE SHA-256 `3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39`；VICEROY.EXE `a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3`。工具為colonization-verification:20260930-r1、Go1.26.7；執行定位為dosgolem CS:IP／實體記憶體，不能當作EXE檔案偏移。
+- confirmed：凍結v7仍於635086794步HLT，RAM `21d7dbf83ae80b7bf06b9112e48a3b8e6bca68e3b1fb88694eb6740209b896a7`。handle5邏輯頁1同時映射到實體頁0、1，實體頁0隨後在邏輯頁1、2間切換；D036:3C9D／實體0xD3FFD為零值區。收據ems-boundary-writes-v7.jsonl及before-copy-ring-v7.json保留。
+- confirmed：不含原版資料的獨立EMS契約在c5953b9三項FAIL，第二別名未取得最新內容、別名寫入不可見、再映射丟失新內容。公開前提取自DOSBox-X EMM_MapPage的共享後端頁契約，來源在規格047。
+- DRAFT原型先證實越過HLT。初版即時寫後端破壞EMSPages延遲寫回介面，未採用；修正版只同步實體別名、建立映射前發布最新內容。跨頁、四處映射、快照及Close清理、三套核心回歸通過後升READY，接入隔離副本，提交82a14b266e1b5bc904e2d0fe507daf6bea41a013。shared dosgolem未改、推送DISABLED。
+- confirmed／限定CONFORMED：正式二進位f4042b3db4b808e8d768502b5a6b521dcfbf1e104b3e6cd59f60f3ee4fafa3e6，134項含子項Go及go vet通過。新局25GUI與正式重播逐像素相同，三側完整原版、取樣RAM／索引／色盤、原始WAV全等，缺字模回原文；1745600000步終點RAM `8d4818ec34bb78f506955b827473e2168b640e9efe50fd910b2043ef29440f22`。另有正式二進位真GUI進世界及移動收據，沒有以原型二進位冒稱正式。
+- 既有15GUI、中文／原文及舊GUI完整CPU／RAM／VGA、原始WAV、COLONY00／03全等。新正式會話的存檔腳本誤點高海確認，僅採計世界入口與移動，不採計誤命名存檔截圖；存檔回歸取自既有正常會話。彙整ems-repair-review-final.json SHA-256 `2c9c4eebfe555cf8c4dbfb43503daadcb859f2c8a4e568ca8d445d660af9f7a5`，入口為tools/check_goal185_ems_repair.py。
+- 最早碎片形成未逐段逆向。原版資料、容量、配置策略、亂數、規則及存檔不改，沒有忽略HLT。舊版失敗收據與初版原型保留。普查882／1945與歷史63列矩陣不增加，不宣稱全部中文化或全部遊玩已完成。
+
+
+## 2026-10-08：高海正文重繪保留
+
+來源、工具及地址空間見[規格048](docs/spec/048-dialog-choice-body-retention.md)。confirmed：SAILHOME正文已命中，原版可見正文被重複選項superseded撤銷；初次optionBody與後續畫面不同，active afterSafe卻完整相同。原型只保留完整像素、同身份／安全區／選項項目及順序的正文，負例全部拒絕。原版cap8／pitch10，本欄中文30px、實際墨跡[275,448,990,476]容納756×96安全區，未換字型或推廣全域字級。
+
+READY後正式fe58445e…：原始失敗正常輸入與新10GUI／四側同狀態、原始WAV、存檔、缺字回退與取消無殘字通過，限定CONFORMED。圖片初讀空白是假判斷，PNG逐像素、正文矩形指紋與合成觀測均證實持續顯示，未為此改合成器。新GUI完整終點4066510b…與原始失敗輸入a1a110d4…為不同輸入，逐項保留，不並列當同狀態。彙整formal-review.json SHA-256 8ee922c12521c2ef244354cbe0614d5f591f47595dda42a211bd9a26789ceefb；原始像素／RAM／存檔只留workplace。
+
+## 2026-10-08：報表城名與儲存失敗來源
+
+confirmed：規格038三個報表城名的原色146、cap5、原版墨跡及header指紋已逐欄核對。173名三欄量測全容納；新10GUI四側原版／WAV／存檔及原文回退、區外不變通過，限定CONFORMED。工具為固定HR1430a2cf、Go1.26.7、Cubic11原指紋、dosgolem82a14b2；原版EXE指紋与CS:IP沿規格038。彙整adb6bf26090fb8d131dffd0c13705a488ceed385cffc86143ba08a11b959e0f5。
+
+confirmed：SAVEERROR原始GAME.TXT偏移0x7F0／27bytes與片段1fe8970fc7f4e6a847798b391a98750fef720eb49c9fd7f35bd4c700c8745263已核對。124575000步原版正常印出Error saving game COLONY00.SAV.，候選模板已載入但filename落入術語守門，line-variable-without-term回英文。9GUI三側完整原版一致，指紋9385e8ad6abbee32b6a808010c57f662713151758b640e5b8f3377901c2039bd；其餘檔名錯誤與最終字級仍未知，規格035維持DRAFT。
+
+百科導航：新F1 GUI／三側相同RAM03e9dcec…的runtime切片8C35:0000，SHA-256 95eedccea1a68fbdb3541dfda6d4bdd758f1d8d77adb3b5c4901f96f60fd3dbe。IDA Pro9.4原始binary EA0映射runtime8C35:0000，sub_EAC邊界EA0xEAC～0x1820，775筆bytes逐項一致；未改名。只確認bytes與導航，不把IDA EA當EXE偏移，不由函式存在推定16～23或雜項可達。資料庫與切片只留workplace。
+
+## 2026-10-08：儲存失敗檔名修正與讀檔缺口
+
+confirmed：SAVEERROR來源7F0、27bytes及原始GAME.TXT指紋沿規格035；原版cap8／pitch12、半開安全區[66,94,231,106]、30px與100檔名容量已量測。原型量測71f3eab6…、容量1759f8d0…；正式f39336c6、148Go／go vet、新8GUI／四側及完整原版／WAV／存檔、區外不變與回退通過。新輸入8689697d…、RAM94f8a05f…、彙整481d9b0641bf27961e92e03ff05f85380e51674b73f80b3cb82b441eef9dd30a。地址與原始片段均沿規格035，不從此泛化LOAD系列。
+
+confirmed：LOADERROR原始偏移0x971／28bytes，片段3e57ec4e…、84975000步原版輸出COLONY03.SAV，墨跡[67,95,231,104]、line-variable-without-term。三個GUI取樣與三側完整RAM f79a3491…／原始WAV及还原存檔全等。按Return後原版與控制結束，沒有改退出語意。原型、字級與正式修正尚未完成，LOADERROR維持DRAFT。初始存檔byte0變更只證實該無效副本在清單排除，未證LOADNOT來源。重生方法及完整雜湊見目標185與規格035。
+
+## 2026-10-08：四種讀檔來源與代表性畫面續驗
+
+四種原版讀檔提示來源、原始檔案偏移／長度／SHA與運算元空間沿規格035。單行cap8／pitch12，LOADSIZE正文cap9，安全区和30px由各欄獨立量測；400格式容量不作正常命中。cur／prev槽位標題active／完整afterSafe／不重疊／時間與來源鍵守門通過，初始延伸同id保留失敗已查明，不改全域等待。正式ed5444ea與新16GUI／四側、區外、原始WAV與还原存檔、原版退出全部一致，限定CONFORMED；摘要0e76d013…与規格035完整指紋相連。
+
+新31正常GUI与三側完整原版2d0f78a3ce588f820e910877d10efda502403bf34fbded27912500acb952010c相同，六類模板CARGO10／UNIT20／TERRAIN24／JOB14／BUILDING3／FATHER0及F1模板TERRAIN23啟用。模板23仍不能直接宣稱原版段落23被查詢，正常F1只確認所顯示雨林內容，不提高同文來源歸屬。View座標Locat與Iroquois Land實際no-template，字級、來源角色與正式新接線未知，應優先處理。首份缺完整輸入不採證，第二份輸入2ca098d3…與摘要dd5ea3f4…見目標185。
+
+## 2026-10-08：View兩欄與港口船隻來源補記
+
+勘誤：前條將View座標與原住民領土列為接線未知，是代表抽樣時的現況；後續規格038已完成原型、READY及正式10GUI／四側驗收。原版cap5／色68，座標[242,68,301或302,74]、領土[242,75,289,81]，原版RAM來源175666／175608等，不當EXE檔案偏移。座標尾值語意仍未知，保持原值；只翻已驗NAMES TRIBES主名稱。正式11fe199f…、輸入316463c1…、終點RAM4a04c88d…及摘要5c1c85a2…見目標185與規格038；29項容量不算正常命中。
+
+港口新增confirmed：VICEROY.EXE SHA-256 a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3，GAME.TXT 67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a，NAMES.TXT 4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061。工具為dosgolem82a14b2、Go1.26.7及固定hr-go-ebiten映像，攔截位址為原版執行期CS:IP 0D21:00C6。正常購船後COLONY00 a777d2fb…與v192中文／原文存檔相同，未注入資金或貨物。
+
+船隻頂列cap5／色149、墨跡[117,1,202,7]、安全區[116,0,203,8]，RAM來源175590／175408，實際22px。名稱只由固定NATIONALITY、六船型UNIT候選及HOMEPORT取值，完整訊息匹配；96項容量20～22px。三列操作對到EUROPESHIPOPTIONS偏移0x9B3D／75bytes、9f32942301758e884038362e26a03eebf1bbd02076aedc5d5b07983875e1d370的第1／2／4列，cap8、行距12、最終30px、安全區[81,90,207,126]。三列與正文在原版畫面完成時的像素關係已確認；afterSafe尚未形成不代表原版缺字，optionBody才是該時點已存的正文證據。
+
+原型與正式同狀態均不改原版CPU／RAM／VGA／音訊／存檔，正文、標題及三列懸停可見中文，取消無殘字。正式輸入f647c7cd…、終點133000000步／RAM46f14629…、前端d392c602…、摘要816e8374…；完整定位與雜湊在規格035／038及目標185。帶貨四列未取得READY／正式接線，其他船型只做容量，不外推原版規則、來源搬運或正常命中。原版像素、存檔及原始WAV只留workplace。
+
+## 2026-10-08：碼頭資金不足六列的色層
+
+confirmed：VICEROY／GAME／NAMES指紋與工具沿規格035本日港口證據；原版只讀。正常購船後COLONY00 a777d2fb…與原03 d3a462e7…種子，在碼頭木匠畫面原價150$／200$／150$三列變灰，另一組由正常取消搭乘預約取得；沒有注入貨物／金錢，預約不當實際登船。
+
+兩組六列cap8、左界82、上界73加12倍列號；灰裝備列2～4的前景只有8，其他列68／149，陰影47／128。ARMOPTIONS原始偏移0x98AC／362bytes，56d19f3e5b4344d1f6c5a4745ed009f6f0f251ed4e45032792da48ad66de45ed。字串讀者為原版執行期CS:IP 0D21:00C6，這不是EXE檔案偏移。原辨識器的六列內容／位置已匹配，色8使known_group=false；通用少數色統計另把68當強調，造成149混色行拒絕。不是原版價格或可選性錯誤。
+
+正式依來源及港口守門加入獨立灰層，兩組實際30px、安全區[81,72,236,144]。八灰色組合及九位數是容量投影；正常只驗兩組三灰列，字面逗號保留原模板拒絕。正常13GUI原始輸入3e66ba5b…、終點143400000步／RAM c22b6dc2…、前端2f0fbafd…及摘要8338305e…見規格035與目標185。四側及船隻11圖回歸保持原版、WAV、存檔，取消／返回無殘字；五張新增差異都在清單安全區，三灰列逐行前景8且無68／149混入。完整12列來源與帶貨四列不因此取得新完成信用。
+
+## 2026-10-08：帶貨四列與百科來源形狀
+
+confirmed：正常原版自動存檔09 f5982c9974e6b7e6…進Jamestown倉庫27噸毛皮，正常裝船／G選London／推進回合返歐，版畫與教學保持原版流程。正常另存00 c9655cc23ed5eaa1dff004161d99dd57c339c58f49e2635a49e71127f0ec3cd7，完整同輸入原版控制重播產生相同所有存檔。截斷JSON不作終點；重啟及新正式GUI均有完整終點。
+
+工具與OPENING／VICEROY／GAME／NAMES指紋沿規格035本日港口證據，攔截為執行期CS:IP 0D21:00C6。EUROPESHIPOPTIONS偏移0x9B3D／75bytes、9f329423…完整四列已在來源確認；原版cap8／行距12，四列墨跡[82,85,145,94]、[82,97,205,106]、[82,109,159,118]、[82,121,136,130]。原版前景68、強調149、陰影47／128，正文安全區[63,68,265,82]、optionBody2828bytes；完成步88770000時有效，不能拿不同位址空間混列。
+
+現行原前端把完整四列當段落，正式按場景／來源／完整墨跡／cap／有效正文像素優先走清單，四列30px／[81,84,207,132]，正常13GUI／四側及24圖回歸保持原版／WAV／存檔，取消無殘字。來源、指紋、原型與正式退出條件見規格035，正式輸入f6233915…／終點138000000步／RAM af5adc7a…／前端8e27f92b…／摘要36706c6b…。
+
+PEDIA.TXT cd0bf6880d62df13b5f9fb4212a7ac20e60032db9de7aa3ad00862c422bb34d1來源形狀確認：CARGO16、UNIT24、TERRAIN29、JOB28、BUILDING42、FATHER25，共164正文鍵；MISCELLANEOUS段只列12概念名稱，沒有MISCn／COMPLETE正文鍵。這不證明VICEROY沒有其他內嵌資料或間接讀取端，不將所有路徑改列不可達。
+
+正常返歐另產生Sailing For London、Now Arriving In London、Go To London整串no-template，兩列London／Jamestown目的地line-no-template；這些是實際顯示接線缺口，語意不由原文猜補，待逐欄原版與字級證據。原版素材、存檔及原始WAV仍只在workplace。
+
+## 2026-10-09：返歐航程整串與正常G兩列來源
+
+confirmed：正常初始COLONY09.SAV f5982c9974e6b7e6d36e52d47a384503fcca148da58471d1f330217c692e40f0，從主選單正常載入、進Jamestown、Shift拖27噸毛皮裝船、G選London、推進兩回合返歐。未注入座標、金錢、貨物或快照。VICEROY.EXE a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3；GAME.TXT 67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a；NAMES.TXT 4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061；LABELS.TXT e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204。工具為dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7／Ebitengine2.9.9、固定hr-go-ebiten image SHA-256 1430a2cfb652c5733914e8116dd2011da21da53ec6b4de3a1482b2a94472f5b5；Cubic11字型SHA-256 8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c。
+
+來源入口0D21:00C6是實模式CS:IP；175662、175710／175714、175686／175690／174708／175708均為20bit實體RAM線性位址，不當EXE檔案偏移。三欄原face、cap5／149色、原印字步數與safe見規格038及私用voyage-fields-observer/fields.jsonl。G兩列cap8、London原色68、Jamestown灰色8、陰影47／128；來源標題GAME.TXT檔案位移0x1CBB、safe[66,82,176,94]，原像素指紋243bbad99dab8e3b061f63862dd8765c1b1b24a364c674fabf47b1aab849c2af。舊貿易編輯器只接受另一個Y76標題及場景，不能用其拒絕結果推定缺譯文。
+
+勘誤：初稿所稱描邊是辨識器旗標。航行兩次face及safe相同，原色均149；既有outline合併函式將第一次字色作outlineC並合併相同墨跡。v1據此加同色外框造成中文字色塊，故只在本航程欄、outlineC等於填色且outlineInk等於face時取消偽外框。其他描邊不變。v2三側及正式新14GUI／四側都保持原版狀態、音訊與存檔，只有三張核准區改變；正式目視確認清楚，灰色保留。完整結果與指紋見規格035／038及docs/goals/185-player-experience.md，證據等級限定confirmed，不外推其他G清單或192組容量為正常命中。
+
+## 2026-10-09：完整職業標題與自訂頁三欄來源
+
+confirmed：正常COLONY03兩居民城市的政治家、農夫及甘蔗職業标题都能整則查譯，折行點隨文字寬度改變。政治家與甘蔗兩行的實模式印字入口0D21:00C6，20bit實體RAM174822／174818；cap5、68單色、x67、y19／25。農夫單行face[67,22,242,28]已有中文。正式兩行模板14GUI／四側及21圖回歸全等，來源與輸入見規格035。這證實顯示分流，不重實作或推測職業規則。
+
+confirmed：自訂頁標題三色0／253／254、cap8；完成提示254色／cap5；Moderate黑色底印後14色描邊／cap5，均由正常原版印字取得。原始RAM173986／173988／173888與LABELS檔案位移0x8B8分別記錄，不混用位址空間。原版標題指紋4a6a6ec0…在首次印字與完整畫面相同；其他專屬頁面的同文提示位置與指紋不同。源觀測、完整原版檔名／SHA-256、Go／dosgolem／image／字型版本及可重跑入口見規格038。READY只授權這三個顯示欄位，尚不聲稱正式GUI完成。
+
+### 2026-10-09：MAPTOLOAD標題來源與控制碼
+
+confirmed：正常美洲開局選編輯器地圖後，Select Map File to Load由0D21:00C6、20bitRAM174110輸出，單行face[108,89,212,98]、cap8、68／47／128色，runStyle68／149／47；52114132步只讀觀測與原GUI完整原版終點相同。GAME.TXT原始片段0x2C8／25bytes與譯稿^^已驗，addDraft目前排除含^的列。這是實際接線缺口，尚未正式修復；完整檔案／工具／字型指紋、DRAFT及下一原型入口见規格035。觀測SHA-2563470c3197505369ff2e21f67e24193067a1e52437f9dea315ce2f519c097b3d7。
+
+### 2026-10-09：建造清單與面板生命週期
+
+confirmed：輸入4284aa84…、初始COLONY03 d3a462e7…、十GUI／三側完整原版及原始WAV、存檔一致。清單標題0D21:00C6、20bitRAM175132、STRING:line、21px、safe[74,45,154,54]，98384560步source、98835001步active、107923065步superseded-by-new-dialog。貨車完整查譯成功却在兩次source後canvas-changed-before-screen；RAM175570／175544、22px、safe[235,131,278,139]。兩者原因已限定到顯示撤銷事件，後續原版writer與保持條件仍待RE；DRAFT與完整來源指紋見規格035／038。
+
+## 2026-10-09：百科MISCELLANEOUS區塊名与類別6／7窄查
+
+追加勘誤：目標180的原檔0x1FC7E是大寫MISCELLANEOUS區塊名，非画面Miscellaneous標籤。原byte來源仍保留；其raw DS偏移22DEh与PEDIA偏移22ECh傳入文字載入呼叫。不能由初始化取址宣稱玩家有第七類入口，也不能由直接xref缺項宣稱不可達。
+
+confirmed：現有IDA Pro9.4 IDAPython py312-v1 image4ac62de8…、UID/GID1000:1000最小輸出probe.json通过，原VICEROY.EXE a17ed64c…、IDA9.4、526函式，正式輸入与DB唯讀、只操作新副本。首場退出API寫錯ida_idaapi.qexit，改ida_pro.qexit全新DB通过；不列工具或遊戲缺陷。
+
+confirmed bytes／控制流：explicit IDA EA0x100000映射原檔0x75000，原0x7530B push22DEh／push22ECh、0x75329 stores ds:0846h、0x7533E stores [bx-6CA4h]，循环上限讀0846h。raw相對表索引935Ch保留，語意強推論為PEDIA雜項名稱表，尚未確認正常讀取端。explicit IDA EA0x110000映射原檔0x6A000，0x6AF6C／0x6AFF7／0x6B36D均間接讀[bx或si-6CA4h]；0x6B366 push6、0x6B3A8比較參數7，7分支循環0～6。這證明類別6／全七類程式分支存在，玩家入口仍未知。
+
+原始bytes与位址空間見私用ida-pedia-overlay-20261009/overlay.json af261c05…、ida-pedia-consumers-20261009/consumers.json 9aef9ca0…、ida-pedia-menu-20261009/menu.json 5e13fdfd…。普通MZ IDA EA0x29567对应原檔0x1B967，是jmp0:24B8h覆疊跳板；其字面offset不當作執行時CS:IP。原始函式名未覆蓋，新增segment只作定位，不當語意證據。
+
+正常六項GUI前綴用于診斷，原印字時序與畫布相同，但截斷終點RAM不能直接用舊整段checkpoint冒稱同狀態；C字串filter未命中，已回查字元暫存格式並改以來源175684／C字元取只讀堆疊。前綴脚本首次replay end超限被拒絕，未進遊戲、舊收據SHA不變；第二場所有輸出固定新目錄且明示截斷輸入，診斷不新增正常完成數。
+
+## 2026-10-09：正常城市改名後的G目的地缺口
+
+confirmed：正式70462b912fee1c1277c34c5200df7299d00991ab852a769ac8c673b2f140c79a，正常COLONY03 d3a462e709e59845af7d2f56a6a504429bc899ebc751964e647a2be69b381c77，經城市標題改名為Quebec，再由VIEW的Move Pieces開G。13GUI、三側完整原版／WAV／存檔及缺字回退一致；兩列London (England)／Quebec仍英文，line-no-template。輸入fee75757b770de38b68b1f584efca9f745f737170ec7b55ec33a56b9c369b83b，173200000步RAM190ee2baa3aeb012d62d5f3cb79d07b11a363501f73efef46630ae0585d6e3de。
+
+confirmed原版印字：0D21:00C6、標題線性RAM175112，完成155132956；清單線性RAM175470，155265001完成。第一列[77,97,155,106]、cap8；Quebec[77,109,109,118]、cap9。標題safe[66,82,176,94]的原版像素SHA-256仍為243bbad99dab8e3b061f63862dd8765c1b1b24a364c674fabf47b1aab849c2af。cap9不可當成舊Jamestown的cap8，不能只替換字串常數。觀測fields.jsonl SHA-256 293c01cbe94efc2bd07f33bd1222f042e739c687eaf446760f5fcfe6e3810045，觀測側完整原版終點一致。
+
+工具為固定hr-go-ebiten映像1430a2cf、Go1.26.7、隔離dosgolem82a14b2；VICEROY.EXE a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3、GAME.TXT 67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a。地址分別為執行時CS:IP及線性RAM，矩形為320×200邏輯畫布。欄位量測及DRAFT見規格035，不改原始定位或遊戲資料。
+
+探勘限制：先前W／空白與未確認模式的操作仍選中Caravel，不能當成陸地單位活化。交互探勘的縮短前綴未保留每個模態等待，沒有成功武裝；完整既有武裝收據不受影響。普通點城市可重入城市；本輪沒有建立第二城。第一份改名路徑仍在檢視模式，G未開選單；改由可見VIEW選單切回移動後，第二份才正常開啟目的地。這些是驗證路徑差異，不新增原版規則推論。
+
+
+## 2026-10-09 正常登陸前置與原版手冊操作依據
+
+confirmed：第三波說明書Image019.jpg第22至23頁與Image020.jpg第24至25頁說明移動、海上運輸及重新指定單位。這是紙本操作說明，不當成原程式producer／位址證據。來源留在workplace/original/manual/第三波-殖民帝國，影像未新增至公開目錄。SHA-256：Image019.jpg ce567b0c5eff16e4ae05e202eebb0bc37b9a593f25df40a439cbb57175636f1a；Image020.jpg 3d080272b44ed97a0a74293be5f91476e168e033123791dbbfd6c4a297b1c0e3。
+
+正常新局存檔到海岸取得COLONY01 87a3629db3b07612f8f139323f39d87f66173b14cc374bd87bd54698425fa81c；選擇登陸後COLONY02 7a04795926057f19ab9913d97f10383dc598d983992870641ea242c2d0111474。後者只證明正常保存該狀態，不能由檔名ashore推定單位已在陸上。tutorial6-land-control沿tutorial6-step-on-land-gui的正常輸入重播，原文畫面確認移動後有教學11，後續B曾只關閉提示；不能當作建城。原版、dosgolem82a14b2、Go1.26.7及座標基準沿目標185，沒有寫入原版RAM或修改存檔。
+
+## 2026-10-09：正常貨物教學與單位肖像標籤收尾
+
+confirmed：既有正常1507存檔續行原版回合，在1508年取得教學6。新版13GUI輸入d2b67d97ad2265a5e2942af1aea89132c6f24336549f9e752d807ba18a2c1790；實模式印字0D21:00C6、20bit RAM174958、142330700步，safe[52,113,271,157]。原文墨跡[54,116,260,154]，四行各8px、行距10px。正式24b7816beef942ae685fa367204ddae88454aa65073be5c38346016cafa24a6d四側同狀態，只有教學安全區改變；終點148400000步，RAMc3424de3f3a30798b93b3c14c0da3e7ae4090bd1c1fd0b198adc3d83ac20f443。這補足先前未命中記錄，不把失敗建城探勘改稱成功。
+
+confirmed：教學6來源為GAME.TXT 67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a，檔案位移0x136C2／189 bytes，片段70e89dc8d935a8f6adc0acaf411d22f8518e15007fe3b2678933ac2eb5afd71f。當次原文兩次城市值、貨物與母港均由原版輸出；只將城市值送入既有顯示回呼。全部21教學逐變數測試輸出37b1c775a1c1fc375c8c99edcc094cdc247845ff51afcbc65adb1e4ed553b1c9，不當21次正常GUI。30px版面輸出221942aedae3a207c4f4ef6a9570b8a77dc2644a54b99907b513719fde353c74，雙語墨跡相對[6,2,865,116]；中文字頂4px，拉丁上伸部2px。原始producer資料流未另行擴大逆向。
+
+confirmed：前鋒／士兵標籤來自0D21:00C6、RAM175478，觀測f5db70349df2202024de8dc007190d7cfb163f8d8fd82b8ffd015f6a8595f0db。正式標籤6c3f916e…的11GUI，在合併教學6的24b7816b…上四側重播逐圖相同；三張標籤安全區改變，士兵10圖回歸相同。國籍／UNIT／LABELS來源、位移、片段指紋與30px量測見規格035；184組容量不當正常命中，None／Expert的遊戲資料角色仍未知。
+
+工具為固定hr-go-ebiten映像1430a2cfb652c5733914e8116dd2011da21da53ec6b4de3a1482b2a94472f5b5、Go1.26.7、Ebitengine2.9.9、隔離dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013。VICEROY.EXE a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3，Cubic11字型指紋沿規格035。位址分別標明實模式入口與線性RAM，矩形為320×200原版邏輯畫布。入口為規格035的[貨物教學檢查器](tools/check_goal185_tutorial_cargo.py)及[單位標籤檢查器](tools/check_goal185_unit_caption.py)，原版畫面、記憶體、音訊及存檔只留忽略的workplace。
+
+## 2026-10-09：精簡ORDERS的逐字首列與連續停用列
+
+confirmed：原版第一列Activate unit在20bit RAM175684逐字重用「字元、NUL」，0D21:00C6，79172261至79181285步。第一字149色，其餘68，face[81,13,123,19]、cap5。隨後同基址以連續字串印~Wait for next unit、~Fortify、~Sentry、No Orders (~s~p~a~c~e~ bar)，四列均8色。讀取81b9697731045446d9c3441c90ef306e4d55463bf0d02022e458f89a5310785a及欄位e51d5fb0e89ce91562f8aa55346a14c1f08fbb7e70c295b7ec9c594b8d6abd1f保存原始值。位置、列距、顏色及整段原版狀態均以只讀觀測核對，不推導原版命令規則。
+
+confirmed：menuPrefixNext及menuPrefixesValid原先要求前方至少兩列，此例在第一個無墨跡~W即丟棄首列。私用首版暫留後合成六列，但runStyle因四個停用列較長而選8作一般色，68／149可選列觸發line-colors。第二版只在完整六列文字、原字格、cap5、色層及[76,9,164,78]封閉黑框成立時指定68／149／8。原其他守門保持，不調整等待時間。
+
+輸入VICEROY.EXE a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3、MENU.TXT 5a7d2f4bf9f657b68177fb9b38e74ac92a1f191732bbc122c28563a41d7a3702。第一列檔案0x264／16 bytes片段b8723a54dd015fa112dce6b6daf799bc69d0340c6fd0e64f840d6aed4ad67468。執行時RAM與檔案位移分開使用；運行期模板鍵MENU.TXT:0x264不等於普查完整來源鍵MENU.TXT:@ORDERS:0x264。兩個Fortify的0x28D／0x299同文，此次未解出producer來源，保留未知，不新增來源信用。
+
+正式cc0ec453a4f7490ea0e095fc4b9e6b0e0d84f370c350c8e812d5520e9cb6e3f7，167Go／go vet。新15正常GUI四側、原始八圖／17VIEW、當前教學13及建造31圖整合PASS。新輸入f30ad4a12957619cb73b1f05097fa40705653ac4610b5c695280ab88b2c1b80b；162400000步RAM0b4c97499680247f82471fb3619e633eca03023624283baae8c377bfd679495e。cap5候選22至15px、採21px與CJK19px；安全區[80,12,159,77]，墨跡相對[6,4,253,248]，逐列沿原頂部，無陰影。來源、量測與限定CONFORMED見規格035；入口[精簡選單檢查器](tools/check_goal185_compact_orders.py)。
+
+工具沿固定hr-go-ebiten映像1430a2cf…、Go1.26.7、Ebitengine2.9.9、隔離dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013與既有Cubic11指紋。原始畫面、記憶體、WAV及存檔只留workplace/reports/goal185-player-experience。當前21教學變數、17版畫、開局27行、百科164正文／19索引審查仍PASS；這些來源計數不當成新增正常命中。
+
+## 2026-10-10：四處城市槽位與正常貿易路線2缺口
+
+confirmed來源審查：正式檔案集合查558項TXT，440字串查譯、68MENU及37正文載入；173預設城名與62NAMES有接線。五個GAME未解析項是單行分流，Cooperation／Conquest旗卡及Moderate0x8B8有專屬消費端，三冠詞有省略記錄。Land已驗Apache Land消費端不證明Land of the其他語序或原始LABELS來源；Moderate0x7FD與0x8B8同文仍保留來源未知。source-audit計數不當正常命中或完整#55完成。
+
+四個實際城市槽位BUILT／FULL／INDIANFOREST2／TOONEAR原回variable-without-term。原文定位、片段SHA與強推論等級見規格035。TOONEAR的EXE標記檔案0x1E345、IDA MZ EA0x2BF45；明示匯入EA0x190000映射檔案0x21E72，原始0x225F7讀ds:8542h後加2，0x2260A推9A5h選標記。IDA sub_15EDC的EA0x15F02／原檔0x8302以索引乘0xCA，加5D46h後於EA0x15F0B／原檔0x830B寫word_33AE2。原始名稱、運算元與偏移保留；raw far segment未作runtime或callee同一性證明。
+
+正常建造回歸RAM e1ac9caf…，實模式DS=1C6Ah；DS:539Eh=3，DS:8542h=5D46h。DS:5D46h起每0xCA記錄、+2名稱欄，在20bit線性0x223E6／0x224B0／0x2257A分別為Jamestown、New Amsterdam、Quebec，座標51,29／46,15／47,31，+1Ah為0／3／1。名稱欄confirmed；TOONEAR最近結果名稱角色為強推論，不推演距離規則。證據89b2856c…、ec794b81…、cbaa2d29…各有獨立地址空間，見ida-toonear-callsite.json／ida-toonear-name-pointer.json／sea-colony-name-table.json。
+
+正式名稱資料8e22e0743f26677f16695fafc7dabf3c06676e999368d2c7990637d2df164bac，168Go／go vet。16真實來源名稱契約、其他槽位與輸入回顯隔離PASS，教學13／建造31／精簡選單15圖回歸原版全等。四則未各自正常命中，零新增shown與未驗畫面；資料契約完成不稱四個畫面CONFORMED。入口check_goal185_sea_city_variables.py與規格035，審查601921652f706002776589843594c9df54b612e5bffffa190e9068cca2199322。
+
+正常貿易兩路線、第三London／第四Jamestown的完整22GUI三側與觀測原版、WAV、存檔全等。原文控制為EDIT TRADE ROUTE 2，中文舊1；0D21:00C6、RAM175564，175602392步，face[128,5,193,10]、cap5／15色。第三3. London為RAM175482、195129481步、[10,109,45,114]；第四4. Jamestown同RAM、215300814步、[10,129,60,135]，均cap5／15色。目的地Jamestown選取列原[77,103,127,112]、cap8及68／47／128，layout-overflow；三列含(Delete Destination)為line-no-template。LABELS刪除列0xB57／20 bytes片段9c0e9937…。完整輸入71182eeeeb14b345569d163ceb907806d8d7ead7bf3c8b9d61a60e66cf785c34，233000000步RAMea46c734…；欄位06d07078…與DRAFT038保存安全區後續閘門，正式尚未修復。
+
+工具為固定Go映像1430a2cf…、Go1.26.7、Ebitengine2.9.9、dosgolem82a14b2；IDA9.4 py312-v1映像4ac62de8…以UID1000處理一次性DB副本，locked-v1已核對不存在。原版VICEROY a17ed64c…／GAME67a6b5e2…及其他輸入指紋沿規格。原始EXE／DB唯讀，沒有改原始名稱、SAV、遊戲規則或原版資料；所有原始字節、RAM、圖像及WAV只留workplace。
+
+## 2026-10-10：路線2、第三／四目的地與刪除選項限定完成
+
+- confirmed：沿上節唯讀原版VICEROY.EXE、GAME.TXT、NAMES.TXT與LABELS.TXT指紋及0D21:00C6證據，修復當次標題編號及新列來源角色。位址為20bit執行時線性RAM，檔案位移與320×200邏輯矩形分開列於規格035／038。
+- READY後正式採用，Go1.26.7／Ebitengine2.9.9／dosgolem82a14b2，二進位0484e99b5a03456b9910eca55fb27c384857b162c25b9ba364d68d3f63c93a27。字串層SHA-256 c7189c4310ed450bec5830ac546a18608b883c47c0dbdcf8f27c795c576bafef；對話框層36696cfa9b50078135d635d726b5108648f2ccff115987663142d04342a1569f。
+- confirmed：34新正常GUI與四側完整原版、每點RAM／VGA索引／色盤、WAV及存檔相同；16圖差異限定已量測安全區，18圖不變。正常取消、刪除第四列、重加及GAME手動存檔均驗證。標題／網格22px、選單30px，原字高、基線與最大譯文沿規格035／038本日READY。
+- 輸入427ff3182a6a73342eb6c5405be97e10c8dba6463c6742019a36618a87e6b333，終點352400000／RAM4e94481caf722e06d823898f514136329af0c18dce66a9b4003bf8dc3d3afd8e，COLONY01.SAV 77ea2c698f9bda7dfdbc43df7c561a9d8f901bdee7854a71966de38bb66f6ad7。摘要535ee7112cf5198632688e3f3b91df959a15258dbb9eac2d902b2184f5d81960；入口[貿易欄位檢查器](tools/check_goal185_trade_fields.py)與[目標185](docs/goals/185-player-experience.md)。
+- 教學13／建造31／精簡選單15回歸全等；169Go／go vet無skip。六個破壞讀取結果均拒絕，缺原版SKIP77。346名稱容量不算正常命中；四城市槽位資料契約與Land／Moderate來源未知的證據等級保持，未將#55／56整體稱為完成。
+
+## 2026-10-10：#56城市變數與建造換頁證據
+
+- 輸入：VICEROY.EXE SHA-256 a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3；其他原始檔指紋沿docs/text-census-baseline.json及本批source-rows.json。IDA Pro 9.4、Go1.26.7與dosgolem82a14b2，私用重生入口由目標185索引。空的ida-minimum資料庫初次查詢沒有有效指令，不採用；改用526函式的VICEROY.EXE.i64唯讀副本。
+- 地址空間：本節0x數字均為EXE檔案位移；既有IDA資料庫EA為檔位移加0xDC00，dseg基址0x2B5A0。額外16位元分析區段從0x500000開始，每區分開列出檔案位移，不等於原版CS:IP。MZ載入標頭0x2400；原始191F:09DC遠指標經既有載入基址映射至檔位移0x1BFCC，不與IDA線性EA混用。
+- confirmed：0x288C8取ds:8542h城市指標加2複製至9CD2h，0x288DB建立ABANDON、0x28902加後綴2。ALREADYHAVE在0x2E5A5設定建築槽位1，0x2E5C5以DS:0E95h呼叫0x2EF5F；NOMOREWAREHOUSE的0x2D145用DS:0D52h，NOMOREWAGONS的0x2D1F2用DS:0D62h，同呼叫0x2EF5F。0x2EF5F原始bytes EA DC09 1F19導向0x1BFCC的overlay 3／entry 0。0x2CFD0通知端在0x2D01D取城市指標加2，0x2D026寫槽位0。overlay入口至此通知端的關聯為強推論，尚無後三則各自的執行期資料流，不升格confirmed。
+- confirmed：建造標題表DS:939Eh的索引4為Select An Item To Build、5為No Production、6為More。0xBB6A計數迴圈呼叫0xB900資格檢查。0x2B4D2至0x2B749的實際分頁流程於超過22項時分頁、每頁16項；0x2B566前頁動作0x62、0x2B604次頁動作0x63，0x2B6EC／0x2B6F2分別遞減／遞增頁號。15項正常收據全部可見，不冒稱換頁GUI已驗。More及各建築／費用已有資料接線，沒有由未抽樣推定新缺口。
+- 三個EXE:歷史鍵為未命中整段文字的雜湊縮寫，不是EXE位移：26458b92c96f及6f58196e382b保留shown，8f3daa9aec62招募組合保留pending。#56為288實際TXT來源接線；五類291項含這三組歷史組合，154 shown／137 pending不變。
+- 驗證：來源摘要c291ca785d2320b3d1d6f4133d3ff87c0927758ccfe2b2a7fcaca4cb3a4bae76；19變數消費端510b0032f0954e47880929ebf677f30f1a2ad45c631f4f691fb2a0c7b79c7c30，19常數消費端a0d880b7bb1b0bf7e0bbcfac4439ea5851a20b4d6a8803ac1ccb32a45a9bb5c3。BUYME0／BUYME1同文且同譯，只允許regex及zh完全相同的別名，不能據此分辨實際來源。四城市資料契約READY，現行代表性GUI與93圖回歸PASS，完成摘要bd42464d1208d4144dc5efd4c6daf5e795a392efd1d751d3bda01b03c6b9e3cc；不稱四則各自畫面CONFORMED。

@@ -2772,6 +2772,1617 @@
         "workplace/reports/goal181-colony-rest/europe-dock-seven-formal-verify-v225/negative-checks.py"
       ],
       "known_diffs": "一組已取證的碼頭七列清單30px；19張新正常GUI與各六側完整原版、所有取樣及新舊存檔相同。只改前後七列安全區；正常移到最前面後該單位變六列，關框及存檔畫面相同。125Go與穩定入口113Go、29破壞拒絕與缺原版SKIP77；Board七列與單位標題未驗。"
+    },
+    {
+      "id": "europe-board-seven",
+      "path": "dynamic",
+      "title": "歐洲碼頭Board七列與登船切換後重開",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a",
+        "--sea-status-a"
+      ],
+      "checker": "check_goal181_dock.py",
+      "args": [
+        "--side",
+        "board",
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest/europe-board-seven-formal-gui-v233",
+        "--evidence",
+        "{reports}/goal181-colony-rest/europe-board-seven-formal-verify-v234"
+      ],
+      "dir": "goal181-colony-rest/europe-board-seven-formal-gui-v233",
+      "zh": [
+        "zh"
+      ],
+      "control": [
+        "control"
+      ],
+      "negative": [
+        "noatlas"
+      ],
+      "gui_inputs": [
+        "formal-gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/europe-board-seven-prototype-v230/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-board-seven-prototype-v230/build.sh",
+        "workplace/reports/goal181-colony-rest/europe-board-seven-prototype-verify-v231/check.py",
+        "workplace/reports/goal181-colony-rest/europe-board-seven-prototype-verify-v231/freeze-ready.py",
+        "workplace/reports/goal181-colony-rest/europe-board-seven-formal-build-v232/build.sh",
+        "workplace/reports/goal181-colony-rest/europe-board-seven-formal-build-v232/build-entry-check.sh",
+        "workplace/reports/goal181-colony-rest/europe-board-seven-formal-gui-v233/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-board-seven-formal-gui-v233/run-gui.sh",
+        "workplace/reports/goal181-colony-rest/europe-board-seven-formal-verify-v234/prepare.py",
+        "workplace/reports/goal181-colony-rest/europe-board-seven-formal-verify-v234/build-observer.sh",
+        "workplace/reports/goal181-colony-rest/europe-board-seven-formal-verify-v234/run-main.sh",
+        "workplace/reports/goal181-colony-rest/europe-board-seven-formal-verify-v234/run-fallback.sh",
+        "workplace/reports/goal181-colony-rest/europe-board-seven-formal-verify-v234/freeze.py",
+        "workplace/reports/goal181-colony-rest/europe-board-seven-formal-verify-v234/negative-checks.py"
+      ],
+      "known_diffs": "一組已取證的碼頭Board七列清單30px；21張新正常GUI與各六側完整原版、所有取樣及新舊存檔相同。只改登船切換後七列安全區；其餘20圖與v223基線相同，缺圖集回原文。142Go與穩定入口138Go、29破壞拒絕與缺原版SKIP77；單位標題未驗。"
+    },
+    {
+      "id": "europe-port-ship-header-empty-options",
+      "path": "dynamic",
+      "title": "歐洲船隻頂列及空貨艙三列操作",
+      "specs": [
+        "035",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_port_units.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "port-unit-formal-zh/run"
+      ],
+      "control": [
+        "port-unit-formal-control/run"
+      ],
+      "negative": [
+        "port-unit-formal-missing/run"
+      ],
+      "gui_inputs": [
+        "port-unit-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_port_formal.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "11張新正常GUI及四側同狀態；頂列22px、三選項30px。新增差異只在選船及三次懸停的核准區，其他7圖及取消／返回不變。96個船隻名稱組合只驗容量；普查僅採本次實際頂列，三列子集不提升完整四列EUROPESHIPOPTIONS來源。帶貨四列與其他船型正常情境尚未驗。"
+    },
+    {
+      "id": "europe-port-disabled-equipment",
+      "path": "dynamic",
+      "title": "碼頭六列清單的灰色裝備欄",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_port_dim.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "port-dim-formal-zh/run"
+      ],
+      "control": [
+        "port-dim-formal-control/run"
+      ],
+      "negative": [
+        "port-dim-formal-missing/run"
+      ],
+      "gui_inputs": [
+        "port-dim-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_port_dim_formal.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "13張新正常GUI／四側同狀態，只改五張清單安全區、其他8圖不變；兩組六列30px，灰色前景索引8保持，點灰列不改可選性，取消／返回無殘字。八種灰色組合與九位數只驗容量，普查僅採完整標題，不提升12列來源。"
+    },
+    {
+      "id": "europe-port-cargo-four-options",
+      "path": "dynamic",
+      "title": "歐洲帶貨船隻完整四列清單",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_port_four.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "port-four-formal-zh/run"
+      ],
+      "control": [
+        "port-four-formal-control/run"
+      ],
+      "negative": [
+        "port-four-formal-missing/run"
+      ],
+      "gui_inputs": [
+        "port-four-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_port_four_formal.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "完整四列以30px逐行顯示；13新正常GUI／四側同輸入，原版、WAV、存檔與回退相同。只修五張四列頁的原錯誤段落與清單區，其他8圖不變，四次懸停／取消／返回無殘字。完整EUROPESHIPOPTIONS來源已核對，不外推其他船型。"
+    },
+    {
+      "id": "voyage-fields-and-two-port-options",
+      "path": "dynamic",
+      "title": "返歐航程三欄與G兩列目的地",
+      "specs": [
+        "035",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_voyage.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "voyage-formal-zh/run"
+      ],
+      "control": [
+        "voyage-formal-control/run"
+      ],
+      "negative": [
+        "voyage-formal-missing/run"
+      ],
+      "gui_inputs": [
+        "voyage-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/probe_save.py",
+        "workplace/reports/goal185-player-experience/play_cargo_turns.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "14新正常GUI／四側同狀態，只改目的地、航行與抵達三張核准區，其餘11張相同；三欄22px、兩列27px與灰色8保留。24張港口三列／四列回歸全等。其他G清單形狀／名稱與192组容量不算正常命中。"
+    },
+    {
+      "id": "goal185-newgame-save",
+      "path": "dynamic",
+      "title": "新局正常手動存檔",
+      "specs": [
+        "047",
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_registration.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience",
+        "--profile",
+        "newgame-save"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "save-zh-20261008/run"
+      ],
+      "control": [
+        "save-control-20261008/run"
+      ],
+      "negative": [
+        "save-missing-20261008/run"
+      ],
+      "gui_inputs": [
+        "newgame-save-20261008/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/check_goal185_registration.py",
+        "workplace/reports/goal185-player-experience/probe_save.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "正常新局、移動及GAME儲存，三側同狀態與回退；普查只採已驗SAVEGOOD整則。"
+    },
+    {
+      "id": "goal185-newgame-reload",
+      "path": "dynamic",
+      "title": "關窗重啟讀回新局存檔",
+      "specs": [
+        "047",
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_registration.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience",
+        "--profile",
+        "newgame-reload"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "reload-newgame-20261008/gui"
+      ],
+      "control": [
+        "reload-control-20261008/run"
+      ],
+      "negative": [],
+      "gui_inputs": [
+        "reload-newgame-20261008/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/check_goal185_registration.py",
+        "workplace/reports/goal185-player-experience/probe_save.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "新行程正常讀回與原文控制同狀態，存檔相同；回退另由存檔三側與讀檔家族抽樣，普查只採LOADGOOD。"
+    },
+    {
+      "id": "goal185-choice-retention",
+      "path": "dynamic",
+      "title": "高海正文與選項同框保留",
+      "specs": [
+        "048",
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_registration.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience",
+        "--profile",
+        "choice-retention"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "retention-final-zh/run"
+      ],
+      "control": [
+        "retention-final-control/run"
+      ],
+      "negative": [
+        "retention-final-missing/run"
+      ],
+      "gui_inputs": [
+        "sailhome-formal-gui-v3/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/check_goal185_registration.py",
+        "workplace/reports/goal185-player-experience/probe_save.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "10正常GUI／四側，三次懸停及取消；只採同框正文與完整兩選項，其他正文組不外推。"
+    },
+    {
+      "id": "goal185-reports",
+      "path": "dynamic",
+      "title": "報表三處城名A版",
+      "specs": [
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_registration.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience",
+        "--profile",
+        "reports"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "closure-report-formal-zh/run"
+      ],
+      "control": [
+        "closure-report-formal-control/run"
+      ],
+      "negative": [
+        "closure-report-formal-missing/run"
+      ],
+      "gui_inputs": [
+        "closure-report-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/check_goal185_registration.py",
+        "workplace/reports/goal185-player-experience/probe_save.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "10正常GUI／四側，三處22px、其他7圖不變；173名稱容量不作正常命中。"
+    },
+    {
+      "id": "goal185-save-error",
+      "path": "dynamic",
+      "title": "儲存失敗檔名欄位",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_registration.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience",
+        "--profile",
+        "save-error"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "save-error-formal-zh/run"
+      ],
+      "control": [
+        "save-error-formal-control/run"
+      ],
+      "negative": [
+        "save-error-formal-missing/run"
+      ],
+      "gui_inputs": [
+        "save-error-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/check_goal185_registration.py",
+        "workplace/reports/goal185-player-experience/probe_save.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "8正常GUI／四側，唯讀私用存檔目錄故障，原版與回退全等；只採SAVEERROR。"
+    },
+    {
+      "id": "goal185-representatives",
+      "path": "dynamic",
+      "title": "六類百科及河流代表抽樣",
+      "specs": [
+        "036",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_registration.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience",
+        "--profile",
+        "representatives"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "representatives-v2-zh/run"
+      ],
+      "control": [
+        "representatives-v2-control/run"
+      ],
+      "negative": [
+        "representatives-v2-missing/run"
+      ],
+      "gui_inputs": [
+        "remaining-representatives-v2-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/check_goal185_registration.py",
+        "workplace/reports/goal185-player-experience/probe_save.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "31正常GUI／三側；只採六個無來源歧義的正文，TERRAIN23同文頁不提高原始來源數，舊View缺口保留歷史。"
+    },
+    {
+      "id": "goal185-view",
+      "path": "dynamic",
+      "title": "檢視座標與原住民領土整串",
+      "specs": [
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_registration.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience",
+        "--profile",
+        "view"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "view-fields-formal-zh/run"
+      ],
+      "control": [
+        "view-fields-formal-control/run"
+      ],
+      "negative": [
+        "view-fields-formal-missing/run"
+      ],
+      "gui_inputs": [
+        "view-fields-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/check_goal185_registration.py",
+        "workplace/reports/goal185-player-experience/probe_save.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "10正常GUI／四側，兩類22px，只改三張核准區；數字尾值語意未知而原樣保留，29容量不作正常命中。"
+    },
+    {
+      "id": "goal185-load-error",
+      "path": "dynamic",
+      "title": "讀檔失敗檔名欄位",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_registration.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience",
+        "--profile",
+        "load-error"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "load-family-error-zh/run"
+      ],
+      "control": [
+        "load-family-error-control/run"
+      ],
+      "negative": [
+        "load-family-error-missing/run"
+      ],
+      "gui_inputs": [
+        "load-family-error-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/check_goal185_registration.py",
+        "workplace/reports/goal185-player-experience/probe_save.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "已取證檔名來源30px、四側同狀態及回退；故障只在私用存檔，其他伴隨事件不提高普查。"
+    },
+    {
+      "id": "goal185-load-invalid",
+      "path": "dynamic",
+      "title": "無效存檔檔名欄位",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_registration.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience",
+        "--profile",
+        "load-invalid"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "load-family-invalid-zh/run"
+      ],
+      "control": [
+        "load-family-invalid-control/run"
+      ],
+      "negative": [
+        "load-family-invalid-missing/run"
+      ],
+      "gui_inputs": [
+        "load-family-invalid-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/check_goal185_registration.py",
+        "workplace/reports/goal185-player-experience/probe_save.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "已取證檔名來源30px、四側同狀態及回退；故障只在私用存檔，其他伴隨事件不提高普查。"
+    },
+    {
+      "id": "goal185-load-obsolete",
+      "path": "dynamic",
+      "title": "舊版存檔檔名欄位",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_registration.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience",
+        "--profile",
+        "load-obsolete"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "load-family-obsolete-zh/run"
+      ],
+      "control": [
+        "load-family-obsolete-control/run"
+      ],
+      "negative": [
+        "load-family-obsolete-missing/run"
+      ],
+      "gui_inputs": [
+        "load-family-obsolete-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/check_goal185_registration.py",
+        "workplace/reports/goal185-player-experience/probe_save.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "已取證檔名來源30px、四側同狀態及回退；故障只在私用存檔，其他伴隨事件不提高普查。"
+    },
+    {
+      "id": "goal185-load-map-size",
+      "path": "dynamic",
+      "title": "地圖尺寸不符檔名欄位",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_registration.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience",
+        "--profile",
+        "load-map-size"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "load-family-map-size-zh/run"
+      ],
+      "control": [
+        "load-family-map-size-control/run"
+      ],
+      "negative": [
+        "load-family-map-size-missing/run"
+      ],
+      "gui_inputs": [
+        "load-family-map-size-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/check_goal185_registration.py",
+        "workplace/reports/goal185-player-experience/probe_save.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "已取證檔名來源30px、四側同狀態及回退；故障只在私用存檔，其他伴隨事件不提高普查。"
+    },
+    {
+      "id": "go-to-two-selectable-ports",
+      "path": "dynamic",
+      "title": "G兩列目的地皆可選",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_coast.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "coast-formal-zh/run"
+      ],
+      "control": [
+        "coast-formal-control/run"
+      ],
+      "negative": [
+        "coast-formal-missing/run"
+      ],
+      "gui_inputs": [
+        "coast-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_go_to_coast_formal.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "10新正常GUI／四側，只改初開與兩次懸停三張清單安全區，其餘七張相同；27px、兩列68色。原灰色及返歐14張回歸全等，其他城市／母港／行數不外推。"
+    },
+    {
+      "id": "colony-two-line-profession-title",
+      "path": "dynamic",
+      "title": "城內老練士兵兩行職業標題",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_profession.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "profession-formal-zh/run"
+      ],
+      "control": [
+        "profession-formal-control/run"
+      ],
+      "negative": [
+        "profession-formal-missing/run"
+      ],
+      "gui_inputs": [
+        "profession-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_profession_formal.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "9新正常GUI／四側，只有两行標題安全區改变，其他八張與選項區相同；22px、取消／返回無殘字。只採已驗標題，其他折行／單位組合不外推。"
+    },
+    {
+      "id": "colony-profession-title-family",
+      "path": "dynamic",
+      "title": "兩居民城市職業標題折行與單行回歸",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_profession_family.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "profession-family-formal-zh/run"
+      ],
+      "control": [
+        "profession-family-formal-control/run"
+      ],
+      "negative": [
+        "profession-family-formal-missing/run"
+      ],
+      "gui_inputs": [
+        "profession-family-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_profession_family_formal.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "14新正常GUI／四側，僅甘蔗兩行標題安全區變更，其他13圖及選項區不變；22px。政治家9圖及農夫單行12圖回歸全等，取消無新增殘字。完整兩行模板已接，未抽樣職業組合不當作正常命中。"
+    },
+    {
+      "id": "start-custom-three-fields",
+      "path": "dynamic",
+      "title": "自訂新世界標題、設定值與完成提示",
+      "specs": [
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_custom_settings.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "custom-settings-formal-zh/run"
+      ],
+      "control": [
+        "custom-settings-formal-control/run"
+      ],
+      "negative": [
+        "custom-settings-formal-missing/run"
+      ],
+      "gui_inputs": [
+        "custom-settings-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_start_custom.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "6新正常GUI／四側，只改自訂頁三欄安全區，其餘5圖及原版操作不變；標題30px、值與提示22px，14張職業回歸全等。其他自訂值及母頁未增加正常命中。"
+    },
+    {
+      "id": "start-custom-eight-values",
+      "path": "dynamic",
+      "title": "自訂四種設定兩端值正常改選",
+      "specs": [
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_start_settings.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "start-settings-arrows-zh/run"
+      ],
+      "control": [
+        "start-settings-arrows-control/run"
+      ],
+      "negative": [
+        "start-settings-arrows-missing/run"
+      ],
+      "gui_inputs": [
+        "start-settings-arrows-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal185-player-experience/play_start_settings_arrows.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "10正常GUI／三側、四種設定卡八個實際值已中文；21／22px，原版與回退一致。未改程式，不把無清單的中間卡片點擊算成功；不以同文反推未查詢的GAME段落來源。"
+    },
+    {
+      "id": "start-map-load-centered-title",
+      "path": "dynamic",
+      "title": "美洲地圖載入標題與取消",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_map_title.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "map-title-formal-zh/run"
+      ],
+      "control": [
+        "map-title-formal-control/run"
+      ],
+      "negative": [
+        "map-title-formal-missing/run"
+      ],
+      "gui_inputs": [
+        "map-title-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_map_title_formal.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "7新正常GUI／四側，仅地圖標題安全區變更；30px居中、檔名原樣、取消／重入无殘字。自訂6圖回歸全等，其他^列不放寬。"
+    },
+    {
+      "id": "colony-build-heading-lifecycle",
+      "path": "dynamic",
+      "title": "建造面板與清單標題導航保留",
+      "specs": [
+        "035",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_build_lifecycle.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "build-lifecycle-formal-zh/run"
+      ],
+      "control": [
+        "build-lifecycle-formal-control/run"
+      ],
+      "negative": [
+        "build-lifecycle-formal-missing/run"
+      ],
+      "gui_inputs": [
+        "build-lifecycle-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_build_lifecycle_formal.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "14新正常GUI／四側，貨車安全區22px與建造標題21px限定保留；7圖只改兩安全區、其餘7圖不變，多次導航／取消无殘字。碼頭12圖、職業14圖、地圖7圖回歸，其他建造列組与長清單不外推。"
+    },
+    {
+      "id": "pedia-six-category-original-boundary",
+      "path": "dynamic",
+      "title": "原版百科六類入口與未建立末兩類",
+      "specs": [
+        "036",
+        "049"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_pedia_boundary.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "representatives-v2-zh/run"
+      ],
+      "control": [
+        "representatives-v2-control/run"
+      ],
+      "negative": [
+        "representatives-v2-missing/run"
+      ],
+      "gui_inputs": [
+        "remaining-representatives-v2-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "unavailable_source_ids": [
+        "MENU.TXT:@PEDIA:0x000006E4",
+        "MENU.TXT:@PEDIA:0x000006F5",
+        "PEDIA.TXT:@MISCELLANEOUS"
+      ],
+      "regenerate": [
+        "tools/check_goal185_pedia_boundary.py",
+        "workplace/reports/goal185-player-experience/ida_pedia_normal_init.py",
+        "workplace/reports/goal185-player-experience/prepare_pedia_marker_probe.py"
+      ],
+      "known_diffs": "原檔只建六項0x70～75，heap含分隔節點與六項終止鏈，31正常GUI／三側保留。Miscellaneous／Complete類別不建立；類別6／7靜態分支存在，其他概念提示不外推。"
+    },
+    {
+      "id": "go-to-single-home-port",
+      "path": "dynamic",
+      "title": "G單列母港與來源國名",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_one_port.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "one-port-formal-zh/run"
+      ],
+      "control": [
+        "one-port-formal-control/run"
+      ],
+      "negative": [
+        "one-port-formal-missing/run"
+      ],
+      "gui_inputs": [
+        "one-port-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_one_port_formal.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "9新正常GUI／四側，只改三張單列安全區，其他6圖不變；30px、懸停／取消／重開無殘字，兩列24圖回歸全等。角色來源四母港／四國名，16容量投影不算正常命中，其他行數不外推。"
+    },
+    {
+      "id": "woodcut-three-retained-samples",
+      "path": "dynamic",
+      "title": "事件版畫三種標題與原圖保留",
+      "specs": [
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_woodcut_sample.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal181-colony-rest"
+      ],
+      "dir": "goal181-colony-rest",
+      "zh": [
+        "20261004-woodcut-titles/final-sample/zh"
+      ],
+      "control": [
+        "20261004-woodcut-titles/final-sample/control"
+      ],
+      "negative": [],
+      "gui_inputs": [
+        "colony-v3/gui-colony.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "workplace/reports/goal181-colony-rest/20261004-woodcut-titles/prepare-observer.py",
+        "workplace/reports/goal181-colony-rest/20261004-woodcut-titles/prepare-sample.py",
+        "workplace/reports/goal181-colony-rest/20261004-woodcut-titles/sample/check.py"
+      ],
+      "known_diffs": "重驗既有正常GUI輸入的三種事件與十一點；完整原版／存檔及精確標題像素PASS。17標題接線與51容量投影不算17次正常命中，其餘14種未抽樣。缺字模回退沿已接受載入與遮罩反例，不稱本列新增缺字模重播。"
+    },
+    {
+      "id": "start-completion-america",
+      "path": "dynamic",
+      "title": "開局存讀教學收尾與美洲選擇兩欄",
+      "specs": [
+        "035",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_start_completion.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience",
+        "--repo",
+        "{repo}"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "map-title-formal-zh/run"
+      ],
+      "control": [
+        "map-title-formal-control/run"
+      ],
+      "negative": [
+        "map-title-formal-missing/run"
+      ],
+      "gui_inputs": [
+        "map-title-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/prepare_start_current_audit.py",
+        "workplace/reports/goal185-player-experience/play_start_map_editor.py"
+      ],
+      "known_diffs": "六項開局27行、21教學逐變數及17版畫來源接線；正常教學6／7／15、存讀與五種失敗、自訂設定、地圖載入及三種版畫審查PASS。其餘教學局勢沿已確認代表抽樣政策，只有實際已驗欄位提高shown。"
+    },
+    {
+      "id": "view-menu-close-survival",
+      "path": "dynamic",
+      "title": "VIEW懸停與關框後清除殘字",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_menu_survival.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "menu-survival-formal-zh/run"
+      ],
+      "control": [
+        "menu-survival-formal-control/run"
+      ],
+      "negative": [
+        "menu-survival-formal-missing/run"
+      ],
+      "baseline": [
+        "menu-survival-formal-baseline/run"
+      ],
+      "gui_inputs": [
+        "menu-survival-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_menu_survival.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "17新正常GUI／四側，只清除點選Move Pieces後的MENU殘字，其他16圖不變。兩種關框區逐像素等於原版，實際懸停保持中文，31百科與10VIEW回歸不變；157Go／go vet無skip。版面與21px不變，不增加新原文來源完成數。"
+    },
+    {
+      "id": "go-to-port-family-short",
+      "path": "dynamic",
+      "title": "目的地內框與短名",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_port_family.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience",
+        "--kind",
+        "short"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "port-family-short-formal-zh/run"
+      ],
+      "control": [
+        "port-family-short-formal-control/run"
+      ],
+      "negative": [
+        "port-family-short-formal-missing/run"
+      ],
+      "baseline": [
+        "port-family-short-formal-baseline/run"
+      ],
+      "gui_inputs": [
+        "port-family-short-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_port_family_formal.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "短名與長名共34新正常GUI四側，僅八張G安全區改變，懸停／取消／重開正常，33張既有目的地圖不變。172名容量不當172次正常命中，玩家改名不反推COLONY行來源；普查只採已驗SAILPORT標題。"
+    },
+    {
+      "id": "go-to-port-family-long",
+      "path": "dynamic",
+      "title": "目的地內框與長名",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_port_family.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience",
+        "--kind",
+        "long"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "port-family-long-formal-zh/run"
+      ],
+      "control": [
+        "port-family-long-formal-control/run"
+      ],
+      "negative": [
+        "port-family-long-formal-missing/run"
+      ],
+      "baseline": [
+        "port-family-long-formal-baseline/run"
+      ],
+      "gui_inputs": [
+        "port-family-long-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_port_family_formal.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "短名與長名共34新正常GUI四側，僅八張G安全區改變，懸停／取消／重開正常，33張既有目的地圖不變。172名容量不當172次正常命中，玩家改名不反推COLONY行來源；普查只採已驗SAILPORT標題。"
+    },
+    {
+      "id": "tutorial-city-arrival-growth",
+      "path": "dynamic",
+      "title": "到港與成長教學城市變數",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_tutorial_cities.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "tutorial-city-formal-zh/run"
+      ],
+      "control": [
+        "tutorial-city-formal-control/run"
+      ],
+      "negative": [
+        "tutorial-city-formal-missing/run"
+      ],
+      "baseline": [
+        "tutorial-city-formal-baseline/run"
+      ],
+      "gui_inputs": [
+        "tutorial-city-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_population_join_confirm.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "17新正常GUI四側，僅TUTORIAL7／15提示安全區改變；160Go／go vet無skip，城市回呼隔離一般術語，原文與缺字模回退一致。本列只驗教學7／15；教學6與完整#61由各自檢查器驗證。"
+    },
+    {
+      "id": "build-list-source-transaction",
+      "path": "dynamic",
+      "title": "15項建造清單來源事務與導航",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_build_transaction.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "build-transaction-formal-zh/run"
+      ],
+      "control": [
+        "build-transaction-formal-control/run"
+      ],
+      "negative": [
+        "build-transaction-formal-missing/run"
+      ],
+      "baseline": [
+        "build-transaction-formal-baseline/run"
+      ],
+      "gui_inputs": [
+        "build-transaction-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_build_transaction_formal.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "31新正常GUI四側，三張導航僅標題／清單區改變；原始失敗29圖正式重播修復兩張，舊12項14圖不變。161Go／go vet無skip，來源與VGA快照分離，不全域延長dialogGap；不外推超出視窗捲動或第三居民加入。"
+    },
+    {
+      "id": "end-turn-background-and-dialog-frames",
+      "path": "dynamic",
+      "title": "回合結束重印背景與原版彈窗邊框",
+      "specs": [
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_reprint_background.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "reprint-status-formal-zh/run"
+      ],
+      "control": [
+        "reprint-status-formal-control/run"
+      ],
+      "negative": [
+        "reprint-status-formal-missing/run"
+      ],
+      "baseline": [
+        "reprint-status-formal-baseline/run"
+      ],
+      "gui_inputs": [
+        "reprint-status-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_reprint_status_formal.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "11新正常GUI四側，八張只改回合結束區或原版框邊，29尾字點還原初始背景。原始25圖正式重播與長建造31圖回歸PASS，163Go／go vet無skip；不全域清字，不改字級，其他原文保留。"
+    },
+    {
+      "id": "tutorial-cargo-city",
+      "path": "dynamic",
+      "title": "貨物教學的兩次城市與母港",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_tutorial_cargo.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "tutorial6-current-formal-zh/run"
+      ],
+      "control": [
+        "tutorial6-current-formal-control/run"
+      ],
+      "negative": [
+        "tutorial6-current-formal-missing/run"
+      ],
+      "baseline": [
+        "tutorial6-current-formal-baseline/run"
+      ],
+      "gui_inputs": [
+        "tutorial6-current-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_tutorial6_later_colony.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "13新正常GUI四側僅一提示安全區改變，21教學逐變數來源審查通過；30px與雙語城名量測、缺回呼／錯誤術語隔離及超界回退通過。21來源審查不當21次正常命中。"
+    },
+    {
+      "id": "unit-selection-caption",
+      "path": "dynamic",
+      "title": "單位肖像前鋒與士兵標籤",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_unit_caption.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "unit-caption-current-zh/run"
+      ],
+      "control": [
+        "unit-caption-current-control/run"
+      ],
+      "negative": [
+        "unit-caption-current-missing/run"
+      ],
+      "baseline": [
+        "unit-caption-current-baseline/run"
+      ],
+      "gui_inputs": [
+        "unit-caption-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_unit_caption_formal.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "11正常GUI四側，三張前鋒標籤安全區改變、其他八張不變；士兵10圖當前正式回歸、184容量與守門通過。GUI為標籤正式6c3f版本，合併教學6的24b7正式重播逐圖相同；容量不當正常命中。"
+    },
+    {
+      "id": "orders-compact-six",
+      "path": "dynamic",
+      "title": "精簡ORDERS六列與停用色",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_compact_orders.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "orders-compact-formal-zh/run"
+      ],
+      "control": [
+        "orders-compact-formal-control/run"
+      ],
+      "negative": [
+        "orders-compact-formal-missing/run"
+      ],
+      "baseline": [
+        "orders-compact-formal-baseline/run"
+      ],
+      "gui_inputs": [
+        "orders-compact-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_orders_compact_formal.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "15新正常GUI四側，六張選單安全區改變、其餘九張不變；21px與原灰色8保留，停用點擊關框、兩次取消、重開及啟用依原版。167Go／go vet、8原始失敗與17VIEW回歸PASS，教學13／建造31整合全等；Fortify兩個同文來源不新增信用，其他啟用組合不外推。"
+    },
+    {
+      "id": "sea-city-name-data-contracts",
+      "path": "dynamic",
+      "title": "四處城市槽位資料回呼",
+      "specs": [
+        "035"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_sea_city_variables.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "sea-city-tutorial-regression/run"
+      ],
+      "control": [
+        "tutorial6-current-formal-control/run"
+      ],
+      "negative": [
+        "tutorial6-current-formal-missing/run"
+      ],
+      "gui_inputs": [
+        "tutorial6-current-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/sea-city-variable-connection-audit/sea_city_contracts_test.go",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "四個既有ID／城市槽位16名稱契約通過；未各自正常GUI，不新增shown或畫面CONFORMED。當前教學13／建造31／精簡選單15圖及完整原版／WAV／存檔全等；本列普查只保留已驗教學6。"
+    },
+    {
+      "id": "trade-route-two-four-fields",
+      "path": "dynamic",
+      "title": "路線2與第三／四目的地欄位",
+      "specs": [
+        "035",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_trade_fields.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "trade-fields-formal-zh/run"
+      ],
+      "control": [
+        "trade-fields-formal-control/run"
+      ],
+      "negative": [
+        "trade-fields-formal-missing/run"
+      ],
+      "baseline": [
+        "trade-fields-formal-baseline/run"
+      ],
+      "gui_inputs": [
+        "trade-fields-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/play_trade_fields_formal.py",
+        "workplace/reports/goal185-player-experience/replay.py"
+      ],
+      "known_diffs": "34新正常GUI四側，16張僅核准文字區改變，其餘18張不變；標題／網格22px、目的地選單30px。正常取消／刪除／恢復第四列及手動存檔、原版狀態／WAV／存檔與缺字回退全等。173名的346組只驗容量，其他路線編號、母港及自動跑商未外推。"
+    },
+    {
+      "id": "colony-source-completion",
+      "path": "dynamic",
+      "title": "殖民地／港口完整接線與代表性驗收",
+      "specs": [
+        "035",
+        "038"
+      ],
+      "flags": [
+        "--dialog-a",
+        "--string-a"
+      ],
+      "checker": "check_goal185_colony_completion.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal185-player-experience"
+      ],
+      "dir": "goal185-player-experience",
+      "zh": [
+        "issue56-formal-zh/run"
+      ],
+      "control": [
+        "issue56-formal-control/run"
+      ],
+      "negative": [
+        "issue56-formal-missing/run"
+      ],
+      "baseline": [
+        "issue56-formal-baseline/run"
+      ],
+      "gui_inputs": [
+        "issue56-formal-gui/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal185-player-experience/prepare_issue56_audit.py",
+        "workplace/reports/goal185-player-experience/run_issue56_regressions.py",
+        "workplace/reports/goal185-player-experience/run_issue56_formal_peers.py"
+      ],
+      "known_diffs": "288實際TXT來源接線、19變數及19常數消費端、180Go；34新正常GUI四側原版／WAV／存檔全等、畫面與已驗貿易版全等；93圖當前回歸與10列既有BUY／武裝／議會／港口／報表驗收。新四城市條件訊息與建造換頁未各自GUI，不增加shown；五類154 shown／137 pending保留。"
     }
   ],
   "not_covered": [

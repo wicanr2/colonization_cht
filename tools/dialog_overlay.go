@@ -38,18 +38,21 @@ type dialogFont struct {
 }
 
 type dialogCatalog struct {
-	messageOptions   map[string][]dialogTemplate // 規格036：原檔正文鍵對應的完整選項。
-	templates        []dialogTemplate
-	unitCaptionNames map[string]string // 規格035 READY：只來自驗證的UNIT資料列。
-	dockOptionSets   [][]dialogTemplate
-	dockOptions      []dialogTemplate
-	shipOptions      []dialogTemplate   // 規格036 READY：空貨艙完整三列。
-	shipOptionSets   [][]dialogTemplate // 規格036 READY：正常載貨與下錨的完整列組合。
-	lines            []dialogTemplate   // 目標166：逐行清單比對用的單行模板
-	seen             map[string]bool    // 已載入的訊息鍵（跨語料檢查重複）
-	terms            map[string]string  // 英文→譯名；定稿譯名彼此衝突者為空字串（視為查無）
-	canon            map[string]bool    // 目標167：來自定稿譯名表（優先於 NAMES.TXT 對照）的詞
-	fonts            map[int]*dialogFont
+	routeDeleteChoice string
+	voyageRoles       map[string]map[string]bool  // 規格035 READY：驗證NAMES來源角色。
+	messageOptions    map[string][]dialogTemplate // 規格036：原檔正文鍵對應的完整選項。
+	templates         []dialogTemplate
+	unitCaptionNames  map[string]string // 規格035 READY：只來自驗證的UNIT資料列。
+	dockOptionSets    [][]dialogTemplate
+	dockOptions       []dialogTemplate
+	portShipOptions   []dialogTemplate   // 規格035 READY：歐洲空貨艙船隻的三列完整選項。
+	shipOptions       []dialogTemplate   // 規格036 READY：空貨艙完整三列。
+	shipOptionSets    [][]dialogTemplate // 規格036 READY：正常載貨與下錨的完整列組合。
+	lines             []dialogTemplate   // 目標166：逐行清單比對用的單行模板
+	seen              map[string]bool    // 已載入的訊息鍵（跨語料檢查重複）
+	terms             map[string]string  // 英文→譯名；定稿譯名彼此衝突者為空字串（視為查無）
+	canon             map[string]bool    // 目標167：來自定稿譯名表（優先於 NAMES.TXT 對照）的詞
+	fonts             map[int]*dialogFont
 	// 規格035：只供已取證 ABANDON 正文的殖民地名稱欄；來源綁定有效時由前端接入。
 	colonyValue     func(string) string
 	saveDescription func(string) (string, bool)
@@ -183,7 +186,7 @@ func (cat *dialogCatalog) addCorpus(corpus, game []byte, gameSHA string, exclude
 				for _, i := range []int{0, 3, 5, 7, 9, 11} {
 					cat.dockOptions = append(cat.dockOptions, makeDialogTemplate(fmt.Sprintf("%s#%d", r["message_id"], i+1), eo[i], zo[i], false))
 				}
-				for _, indices := range [][]int{{1, 3, 5, 7, 9, 11}, {0, 4, 7, 11}, {1, 4, 7, 11}, {1, 6, 11}, {1, 3, 8, 11}, {0, 10, 11}, {1, 10, 11}, {0, 2, 3, 5, 7, 9, 11}} {
+				for _, indices := range [][]int{{1, 3, 5, 7, 9, 11}, {0, 4, 7, 11}, {1, 4, 7, 11}, {1, 6, 11}, {1, 3, 8, 11}, {0, 10, 11}, {1, 10, 11}, {0, 2, 3, 5, 7, 9, 11}, {1, 2, 3, 5, 7, 9, 11}} {
 					var group []dialogTemplate
 					for _, i := range indices {
 						group = append(group, makeDialogTemplate(fmt.Sprintf("%s#%d", r["message_id"], i+1), eo[i], zo[i], false))
@@ -191,6 +194,19 @@ func (cat *dialogCatalog) addCorpus(corpus, game []byte, gameSHA string, exclude
 					cat.dockOptionSets = append(cat.dockOptionSets, group)
 				}
 
+			}
+		}
+		if r["message_id"] == "GAME.TXT:@EUROPESHIPOPTIONS:0x00009B3D" {
+			eo := strings.Split(strings.TrimSpace(body), "\r\n")
+			zo := strings.Split(r["zh_hant"], `\n`)
+			if len(eo) == 4 && len(zo) == 4 {
+				for i := range eo {
+					cat.portShipOptions = append(cat.portShipOptions, makeDialogTemplate(fmt.Sprintf("%s#%d", r["message_id"], i+1), eo[i], zo[i], false))
+				}
+				if cat.messageOptions == nil {
+					cat.messageOptions = map[string][]dialogTemplate{}
+				}
+				cat.messageOptions["GAME.TXT:@EUROPESHIPCLICK:0x00009874"] = cat.portShipOptions
 			}
 		}
 		if r["message_id"] == "GAME.TXT:@SHIPOPTIONS:0x00009AC0" {
@@ -347,6 +363,11 @@ func (c *dialogCatalog) addDraft(draft []byte, files map[string][]byte, exclude 
 		if r["source_file"] == "MENU.TXT" && zh != "" && !strings.Contains(raw, "\r\n") && !strings.ContainsAny(raw, "@^") {
 			// 目標177：下拉選單的 ~ 是熱鍵標記（不印出，後一字以強調色顯示）、# 是無墨的對齊空白（照印）。
 			c.lines = append(c.lines, makeDialogTemplate(r["candidate_id"], strings.ReplaceAll(raw, "~", ""), menuZh(zh), false))
+			continue
+		}
+
+		if r["candidate_id"] == "GAME.TXT:0x000002C8" && r["source_file"] == "GAME.TXT" && raw == "^^Select Map File to Load" && zh == "^^選擇要載入的地圖檔" {
+			c.templates = append(c.templates, makeDialogTemplate(r["candidate_id"], raw, zh, true))
 			continue
 		}
 		if zh == "" || strings.Contains(raw, "\r\n") || strings.ContainsAny(raw, "~#@^") || strings.ContainsAny(zh, "~#^") {
@@ -515,6 +536,11 @@ func (c *dialogCatalog) matchIn(list []dialogTemplate, shown string) (*dialogTem
 			if !dialogSaveFilename.MatchString(v) {
 				return hit, "", "unverified-save-filename"
 			}
+		} else if (hit.id == "GAME.TXT:0x000007F0" || hit.id == "GAME.TXT:0x00000971" || hit.id == "GAME.TXT:0x0000088B" || hit.id == "GAME.TXT:0x000008C7" || hit.id == "GAME.TXT:@LOADSIZE:0x00000904") && name == "%STRING0" {
+			// 規格035 READY：已取證的存讀檔錯誤來源保留格式已核對的檔名。
+			if !dialogSaveFilename.MatchString(v) {
+				return hit, "", "unverified-save-filename"
+			}
 		} else if hit.id == "GAME.TXT:0x000007B9" && name == "%STRING0" {
 			if !dialogSaveFilename.MatchString(v) {
 				return hit, "", "unverified-save-filename"
@@ -528,7 +554,24 @@ func (c *dialogCatalog) matchIn(list []dialogTemplate, shown string) (*dialogTem
 			if !ok {
 				return hit, "", "unverified-save-description"
 			}
-		} else if hit.id == "GAME.TXT:@TUTORIAL12" && name == "%STRING0" {
+		} else if ((hit.id == "GAME.TXT:0x00001447" || hit.id == "GAME.TXT:@FULL:0x00001482" || hit.id == "GAME.TXT:@TOONEAR:0x00006A24" || hit.id == "GAME.TXT:@ABANDON2:0x00001A5B" || hit.id == "GAME.TXT:@ALREADYHAVE:0x0000AD9D" || hit.id == "GAME.TXT:@NOMOREWAREHOUSE:0x0001527E" || hit.id == "GAME.TXT:@NOMOREWAGONS:0x00015315") && name == "%STRING0") || (hit.id == "GAME.TXT:@INDIANFOREST2:0x00004F7B" && name == "%STRING1") {
+			if c.colonyValue == nil {
+				return hit, "", "unverified-colony-name"
+			}
+			if strings.ContainsAny(v, "{}") {
+				return hit, "", "unrenderable-variable"
+			}
+			v = c.colonyValue(v)
+		} else if hit.id == "GAME.TXT:@TUTORIAL6" && name == "%STRING1" {
+			// 規格035 READY：貨物提示中的名稱只沿既有城市顯示回呼。
+			if c.colonyValue == nil {
+				return hit, "", "unverified-colony-name"
+			}
+			if strings.ContainsAny(v, "{}") {
+				return hit, "", "unrenderable-variable"
+			}
+			v = c.colonyValue(v)
+		} else if (hit.id == "GAME.TXT:@TUTORIAL12" || hit.id == "GAME.TXT:@TUTORIAL7" || hit.id == "GAME.TXT:@TUTORIAL15") && name == "%STRING0" {
 			// 規格035 READY：名稱只經殖民地顯示回呼，拒絕玩家強調碼。
 			if c.colonyValue == nil {
 				return hit, "", "unverified-colony-name"
@@ -787,6 +830,7 @@ type dialogRun struct {
 }
 
 type dialogShown struct {
+	buildSource            []byte // 規格035 READY：來源畫布的建造標題快照，不替代VGA啟用快照。
 	optionBody             []byte // 正文印完的原版安全區；只供同框選項識別，不寫回原版。
 	id, zh, reason         string
 	normalC, accentC       byte     // 目標166：原版觀測字色
@@ -806,6 +850,7 @@ type dialogShown struct {
 }
 
 type dialogRuntime struct {
+	readCanvas func() []byte // 規格035 READY：原版來源畫布只讀。
 	cat        *dialogCatalog
 	fontReason string
 	run        *dialogRun
@@ -860,7 +905,7 @@ func menuPrefixNext(chars []dialogChar, next byte) bool {
 	}
 	lines := runLines(chars[:len(chars)-1])
 	if len(lines) < 2 {
-		return false
+		return compactOrdersPrefix(chars, next)
 	}
 	for i := 1; i < len(lines); i++ {
 		if abs(lines[i].box.Min.X-lines[0].box.Min.X) > 1 {
@@ -877,7 +922,7 @@ func menuPrefixesValid(chars []dialogChar) bool {
 			continue
 		}
 		lines := runLines(chars[:i])
-		if len(lines) < 2 {
+		if len(lines) < 2 && (i+1 >= len(chars) || !compactOrdersPrefix(chars[:i+1], chars[i+1].c)) {
 			return false
 		}
 		var first image.Rectangle
@@ -900,7 +945,7 @@ func menuPrefixesValid(chars []dialogChar) bool {
 
 // onRead 處理一次 0D21:00C6 讀取；若上一段已結束，先回傳該段供呼叫端收尾。
 func (d *dialogRuntime) onRead(a uint32, v byte, step uint64) (finished *dialogRun) {
-	if r := d.run; r != nil && step-r.last < dialogGap {
+	if r := d.run; r != nil && (step-r.last < dialogGap || d.buildReadTransaction(r, step)) {
 		// 原版F9直接返回，沒有讀base+1的0；只在下一字同基址重讀時補齊觀測配對。
 		if !r.contig && r.readPos%2 == 1 && a == r.base && len(r.chars) > 0 && dialogNonprintingBullet(r.chars[len(r.chars)-1]) {
 			r.readPos++
@@ -1285,9 +1330,25 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 		}
 	}
 	normalC, accentC, shadowC := runStyle(r)
+	if compactOrdersStyle(lines, canvas) {
+		normalC, accentC, shadowC = 68, 149, 0
+	}
 	st := &dialogShown{before: before, normalC: normalC, accentC: accentC, shadowC: shadowC,
 		phase: "waiting-screen", complete: step}
 	t, zh, why := d.cat.matchIn(d.cat.templates, shown)
+	if why == "no-template" && d.professionTitleContext(lines, normalC, accentC, shadowC) && d.lineFallback != nil {
+		if value, ok := d.lineFallback(shown); ok {
+			t, zh, why = &dialogTemplate{id: "STRING:profession-title"}, value, ""
+		}
+	}
+
+	if why == "" && t.id == "GAME.TXT:0x000002C8" && !mapTitleContext(lines, normalC, accentC, shadowC) {
+		return nil, shown, "map-title-geometry"
+	}
+	// 規格035 READY：完整四列仍有段落模板，來源與欄位符合時優先保留逐列語意。
+	if len(lines) == 4 && d.portShipChoices(lines, canvas, step) != nil {
+		t, zh, why = nil, "", "no-template"
+	}
 	switch {
 	case why == "" && t.centered:
 		// 置中段落（例如國王接見）：沒有色號 0 外框，安全區取原版墨跡外擴 2 邏輯像素。
@@ -1354,6 +1415,9 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 		// 目標178：先決定強調色與各行色層（停用項目的第三色）。
 		accentC, dimC, layers, rwhy := lineRoles(lines, normalC, accentC, shadowC)
 		dockList := d.cat.observedDockOptions(lines)
+		if group := d.portShipChoices(lines, canvas, step); group != nil {
+			dockList = group
+		}
 		if dockList != nil && normalC == 68 && st.accentC == 149 && shadowC == 47 {
 			// 規格035 READY：六個已驗字格／來源組合的68／149／47已直接量測。
 			accentC, dimC, layers, rwhy = 149, 0, make([]int, len(lines)), ""
@@ -1361,6 +1425,10 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 			dockList = nil
 		}
 
+		if group, observedLayers, ok := d.cat.portDisabledDockOptions(lines, canvas, normalC, st.accentC, shadowC); ok {
+			dockList, accentC, dimC, rwhy = group, 149, 8, ""
+			layers = observedLayers
+		}
 		if rwhy != "" {
 			return nil, shown, rwhy
 		}
@@ -1373,6 +1441,18 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 		if shipList == nil && optionHandled && optionWhy != "" {
 			return nil, shown, optionWhy
 		}
+		voyageItems := d.voyagePortChoices(lines, canvas, step)
+		if voyageItems == nil {
+			voyageItems = d.onePortChoices(lines, canvas, step)
+		}
+		familyArea := image.Rectangle{}
+		if voyageItems == nil {
+			voyageItems, familyArea = d.tradeStartChoices(lines, canvas, step)
+		}
+		if voyageItems == nil {
+			voyageItems, familyArea = d.familyPortChoices(lines, canvas, step)
+		}
+		captionItems, captionArea := d.unitCaptionChoices(lines, canvas)
 		items := make([]string, len(lines))
 		id := ""
 		for i, l := range lines {
@@ -1425,6 +1505,12 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 					}
 				}
 			}
+			if voyageItems != nil {
+				lzh, lwhy, lt, id = voyageItems[i], "", nil, "STRING:voyage-ports"
+			}
+			if captionItems != nil {
+				lzh, lwhy, lt, id = captionItems[i], "", nil, "STRING:unit-selection-caption"
+			}
 			if lwhy != "" {
 				return nil, shown, "line-" + lwhy
 			}
@@ -1444,6 +1530,12 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 			union = union.Union(l.box)
 		}
 		st.safe = image.Rect(union.Min.X-1, union.Min.Y-1, union.Max.X+2, union.Max.Y+2).Intersect(image.Rect(0, 0, 320, 200))
+		if !familyArea.Empty() {
+			st.safe = familyArea
+		}
+		if !captionArea.Empty() {
+			st.safe = captionArea
+		}
 		// LOADGAME 標題下一列已是槽位反白邊緣，保留墨跡外一列即可。
 		if len(lines) == 1 && id == "GAME.TXT:0x00000826" {
 			st.safe.Max.Y = union.Max.Y + 1
@@ -1455,6 +1547,14 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 		} else {
 			st.id = id + "+list"
 		}
+		// 規格035 READY：完整MENU不得由關框後的零星存活墨跡重新啟用。
+		if strings.HasPrefix(st.id, "MENU.TXT:") {
+			for index := range r.firstOld {
+				if !r.lastText[index] {
+					return nil, shown, "text-erased-before-finish"
+				}
+			}
+		}
 		st.zh = strings.Join(items, "／")
 		st.items = make([]string, len(lines))
 		for i, l := range lines {
@@ -1462,6 +1562,9 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 		}
 		if st.size == 0 {
 			return nil, shown, "layout-overflow"
+		}
+		if st.id == "STRING:line" && len(st.items) == 1 && st.items[0] == "Select An Item To Build" {
+			st.buildSource = rectBytes(canvas, st.safe)
 		}
 		return st, shown, ""
 	default:
@@ -1674,6 +1777,19 @@ func (d *dialogRuntime) retainSlotTitle(st *dialogShown, canvas []byte) bool {
 	return st != nil && st.id == "STRING:save-slot+list" && d.cur != nil && d.cur.id == st.id && saveSlotTitle(d.prev) && d.prev.phase == "active" && !d.prev.safe.Overlaps(st.safe) && bytes.Equal(stringRect(canvas, d.prev.safe), d.prev.afterSafe)
 }
 
+// 規格035 READY：只保留讀檔錯誤框外仍可見、來源已核對的槽位標題。
+func (d *dialogRuntime) titleForLoadError(next *dialogShown, canvas []byte) *dialogShown {
+	if next == nil || (next.id != "GAME.TXT:0x00000971" && next.id != "GAME.TXT:0x0000088B" && next.id != "GAME.TXT:0x000008C7" && next.id != "GAME.TXT:@LOADSIZE:0x00000904") || len(canvas) != 64000 {
+		return nil
+	}
+	for _, title := range []*dialogShown{d.cur, d.prev} {
+		if saveSlotTitle(title) && title.phase == "active" && next.complete >= title.complete && !title.safe.Overlaps(next.safe) && len(title.afterSafe) == title.safe.Dx()*title.safe.Dy() && bytes.Equal(stringRect(canvas, title.safe), title.afterSafe) {
+			return title
+		}
+	}
+	return nil
+}
+
 // 規格035 READY：只取原版UNIT資料列的名稱欄，不解讀數值或遊戲規則。
 func (c *dialogCatalog) bindUnitCaptionNames(corpus, source []byte) bool {
 	c.unitCaptionNames = nil
@@ -1782,6 +1898,10 @@ func (c *dialogCatalog) matchesObservedShip(lines []runLine) bool {
 // 規格035 READY：字格、色層、整份六列和來源模板皆須符合。
 
 func (c *dialogCatalog) observedDockOptions(lines []runLine) []dialogTemplate {
+	return c.observedDockOptionColors(lines, 0)
+}
+
+func (c *dialogCatalog) observedDockOptionColors(lines []runLine, dim byte) []dialogTemplate {
 	for _, group := range append([][]dialogTemplate{c.dockOptions}, c.dockOptionSets...) {
 		if len(group) != len(lines) || len(group) == 0 {
 			continue
@@ -1806,7 +1926,7 @@ func (c *dialogCatalog) observedDockOptions(lines []runLine) []dialogTemplate {
 				break
 			}
 			for color := range l.colors {
-				if color != 68 && color != 149 && color != 47 && color != 128 {
+				if color != 68 && color != 149 && color != 47 && color != 128 && !(dim != 0 && color == dim) {
 					matched = false
 				}
 			}
@@ -1820,6 +1940,27 @@ func (c *dialogCatalog) observedDockOptions(lines []runLine) []dialogTemplate {
 		}
 	}
 	return nil
+}
+
+// 規格035 READY：只按六列碼頭裝備欄的原版色辨識灰層，不改可選性或價格。
+func (c *dialogCatalog) portDisabledDockOptions(lines []runLine, canvas []byte, normal, accent, shadow byte) ([]dialogTemplate, []int, bool) {
+	if len(lines) != 6 || normal != 68 || accent != 149 || shadow != 47 || !portScene(canvas) {
+		return nil, nil, false
+	}
+	layers := make([]int, len(lines))
+	for i, line := range lines {
+		dom, kinds := lineDominant(line, shadow)
+		if dom == 8 {
+			if i < 1 || i > 3 || kinds != 1 {
+				return nil, nil, false
+			}
+			layers[i] = layerDim
+		} else if (dom != 68 && dom != 149) || line.colors[8] != 0 {
+			return nil, nil, false
+		}
+	}
+	group := c.observedDockOptionColors(lines, 8)
+	return group, layers, group != nil
 }
 
 // 規格036 READY：完整選項僅借同一原版框內且未改印的已辨識正文。
@@ -1868,4 +2009,477 @@ func (d *dialogRuntime) parentChoices(lines []runLine, canvas []byte, step uint6
 		}
 	}
 	return selected, "", true
+}
+
+// 規格035 READY：固定港口畫面、完整三列與正文印後像素共同確認選項身分。
+func (d *dialogRuntime) portShipChoices(lines []runLine, canvas []byte, step uint64) []dialogTemplate {
+	if (len(lines) != 3 && len(lines) != 4) || len(d.cat.portShipOptions) != 4 || !portScene(canvas) {
+		return nil
+	}
+	group, y0, right := d.cat.portShipOptions, 85, []int{145, 205, 159, 136}
+	if len(lines) == 3 {
+		group, y0, right = []dialogTemplate{group[0], group[1], group[3]}, 91, []int{145, 205, 136}
+	}
+	for i, line := range lines {
+		if line.capH != 8 || line.box != image.Rect(82, y0+12*i, right[i], y0+12*i+9) {
+			return nil
+		}
+		if _, _, why := d.cat.matchIn(group[i:i+1], line.text); why != "" {
+			return nil
+		}
+	}
+	for _, body := range []*dialogShown{d.cur, d.prev} {
+		if body != nil && body.id == "GAME.TXT:@EUROPESHIPCLICK:0x00009874" &&
+			(body.phase == "active" || body.phase == "waiting-screen") && body.safe == image.Rect(63, y0-17, 265, y0-3) &&
+			step >= body.complete && step-body.complete < 2000000 &&
+			len(body.optionBody) == body.safe.Dx()*body.safe.Dy() && bytes.Equal(body.optionBody, rectBytes(canvas, body.safe)) {
+			return group
+		}
+	}
+	return nil
+}
+
+// 規格048 READY：相同選項重繪時保留像素完整且身份已核對的正文。
+func (d *dialogRuntime) retainChoiceBody(next *dialogShown, canvas []byte) bool {
+	body, old := d.prev, d.cur
+	if body == nil || old == nil || next == nil || body.phase != "active" ||
+		next.id != old.id || next.safe != old.safe || body.safe.Overlaps(next.safe) ||
+		next.complete < old.complete || len(canvas) != 320*200 ||
+		len(body.afterSafe) != body.safe.Dx()*body.safe.Dy() ||
+		!bytes.Equal(body.afterSafe, rectBytes(canvas, body.safe)) {
+		return false
+	}
+	group := d.cat.messageOptions[body.id]
+	if body.id == "GAME.TXT:@EUROPESHIPCLICK:0x00009874" && len(group) == 4 && len(next.items) == 3 {
+		group = []dialogTemplate{group[0], group[1], group[3]}
+	}
+	if len(group) == 0 || len(next.items) != len(group) || len(old.items) != len(group) {
+		return false
+	}
+	for i, item := range next.items {
+		if item != old.items[i] {
+			return false
+		}
+		if _, _, why := d.cat.matchIn(group[i:i+1], item); why != "" {
+			return false
+		}
+	}
+	return true
+}
+
+// 規格035／038 READY：正常G兩列清單與原版標題像素守門。
+func (d *dialogRuntime) voyagePortChoices(lines []runLine, canvas []byte, step uint64) []string {
+	if len(lines) != 2 || len(canvas) != 64000 || d.lineFallback == nil {
+		return nil
+	}
+	if lines[0].text != "London (England)" || lines[0].capH != 8 || lines[0].box != image.Rect(77, 97, 155, 106) ||
+		lines[1].text != "Jamestown" || lines[1].capH != 8 || lines[1].box != image.Rect(77, 109, 127, 118) {
+		return nil
+	}
+	for i, l := range lines {
+		dom, _ := lineDominant(l, 47)
+		if (i == 0 && dom != 68) || (i == 1 && dom != 68 && dom != 8) {
+			return nil
+		}
+		for c := range l.colors {
+			if c != dom && c != 47 && c != 128 {
+				return nil
+			}
+		}
+	}
+	safe := image.Rect(66, 82, 176, 94)
+	for _, title := range []*dialogShown{d.cur, d.prev} {
+		if title == nil || title.id != "GAME.TXT:0x00001CBB" || title.safe != safe || title.size != 30 ||
+			(title.phase != "active" && title.phase != "waiting-screen") || step < title.complete || step-title.complete >= 2000000 ||
+			len(title.items) != 1 || title.items[0] != "Select a port to sail to:" {
+			continue
+		}
+		if fmt.Sprintf("%x", sha256.Sum256(rectBytes(canvas, safe))) != "243bbad99dab8e3b061f63862dd8765c1b1b24a364c674fabf47b1aab849c2af" {
+			continue
+		}
+		port, pok := d.lineFallback("London")
+		country, cok := d.lineFallback("England")
+		colony, jok := d.lineFallback("Jamestown")
+		if !pok || !cok || !jok {
+			return nil
+		}
+		return []string{port + "（" + country + "）", colony}
+	}
+	return nil
+}
+
+// 規格035 READY：完整兩行職業標題依同欄字格分流，整則模板由字串層驗證。
+func (d *dialogRuntime) professionTitleContext(lines []runLine, n, a, sh byte) bool {
+	if len(lines) != 2 || n != 68 || a != 68 || sh != 0 {
+		return false
+	}
+	for i, line := range lines {
+		if line.capH != 5 || line.box.Min != image.Pt(67, 19+i*6) || line.box.Max.Y != 25+i*6 || line.box.Max.X <= 67 || line.box.Max.X > 254 || len(line.colors) != 1 || line.colors[68] == 0 {
+			return false
+		}
+	}
+	shown := dialogNormalize(lines[0].text + " " + lines[1].text)
+	const prefix = "Select a Profession for "
+	if !strings.HasPrefix(shown, prefix) || !strings.HasSuffix(shown, "):") || strings.Count(shown, "(") != 1 || strings.Count(shown, ")") != 1 {
+		return false
+	}
+	body := strings.TrimPrefix(shown, prefix)
+	split := strings.IndexByte(body, '(')
+	return split > 0 && strings.TrimSpace(body[:split]) != "" && strings.TrimSpace(body[split+1:len(body)-2]) != ""
+}
+
+func mapTitleContext(lines []runLine, n, a, sh byte) bool {
+	if len(lines) != 1 || n != 68 || a != 149 || sh != 47 {
+		return false
+	}
+	line := lines[0]
+	if line.text != "Select Map File to Load" || line.box != image.Rect(108, 89, 212, 98) || line.capH != 8 || len(line.colors) != 3 || line.colors[68] <= 0 || line.colors[47] <= 0 || line.colors[128] <= 0 {
+		return false
+	}
+	return true
+}
+
+func (d *dialogRuntime) retainBuildTitle(next *dialogShown, canvas []byte) bool {
+	title, old := d.prev, d.cur
+	if title == nil || old == nil || next == nil || title.id != "STRING:line" || title.phase != "active" || (title.safe != image.Rect(74, 45, 154, 54) && title.safe != image.Rect(74, 33, 154, 42)) || title.size != 21 || len(title.items) != 1 || title.items[0] != "Select An Item To Build" || len(canvas) != 64000 || len(title.afterSafe) != 720 || !bytes.Equal(title.afterSafe, rectBytes(canvas, title.safe)) {
+		return false
+	}
+	if old.id != "STRING:line+list" || next.id != old.id || next.safe != old.safe || next.safe.Min.X != 78 || next.safe.Max.X != 241 || next.safe.Min.Y != title.safe.Max.Y+1 || next.safe.Dy() != len(next.items)*8 || next.size != 21 || title.safe.Overlaps(next.safe) || next.complete < old.complete || len(old.items) < 2 || len(old.items) != len(next.items) || next.safe.Max.Y > 171 {
+		return false
+	}
+	for i, item := range next.items {
+		if item != old.items[i] {
+			return false
+		}
+	}
+	return next.items[0] == "(No Production)" && next.items[len(next.items)-1] == "WAGON TRAIN (40 Hammers)"
+}
+
+func (d *dialogRuntime) onePortChoices(lines []runLine, canvas []byte, step uint64) []string {
+	if len(lines) != 1 || len(canvas) != 64000 || d.lineFallback == nil || d.cat == nil {
+		return nil
+	}
+	l := lines[0]
+	if l.capH != 8 || l.box.Min != image.Pt(77, 103) || l.box.Max.Y != 112 || l.box.Max.X > 254 {
+		return nil
+	}
+	dom, _ := lineDominant(l, 47)
+	if dom != 68 {
+		return nil
+	}
+	for color := range l.colors {
+		if color != 68 && color != 47 && color != 128 {
+			return nil
+		}
+	}
+	safe := image.Rect(66, 88, 176, 100)
+	found := false
+	for _, title := range []*dialogShown{d.cur, d.prev} {
+		if title == nil || title.id != "GAME.TXT:0x00001CBB" || title.safe != safe || title.size != 30 || (title.phase != "active" && title.phase != "waiting-screen") || step < title.complete || step-title.complete >= 2000000 || len(title.items) != 1 || title.items[0] != "Select a port to sail to:" {
+			continue
+		}
+		if fmt.Sprintf("%x", sha256.Sum256(rectBytes(canvas, safe))) == "243bbad99dab8e3b061f63862dd8765c1b1b24a364c674fabf47b1aab849c2af" {
+			found = true
+		}
+	}
+	if !found {
+		return nil
+	}
+	port, rest, ok := strings.Cut(l.text, " (")
+	if !ok || !strings.HasSuffix(rest, ")") {
+		return nil
+	}
+	country := strings.TrimSuffix(rest, ")")
+	if !d.cat.voyageRoles["port"][port] || !d.cat.voyageRoles["country"][country] {
+		return nil
+	}
+	p, pok := d.lineFallback(port)
+	c, cok := d.lineFallback(country)
+	if !pok || !cok {
+		return nil
+	}
+	return []string{p + "（" + c + "）"}
+}
+
+// 規格035 READY：正常TRADESTART的一個Jamestown選項，依完整原版內框排版。
+func (d *dialogRuntime) tradeStartChoices(lines []runLine, canvas []byte, step uint64) ([]string, image.Rectangle) {
+	no := image.Rectangle{}
+	if d.cat == nil || d.cat.colonyValue == nil || len(lines) != 1 || len(canvas) != 64000 {
+		return nil, no
+	}
+	line := lines[0]
+	if line.text != "Jamestown" || line.box != image.Rect(77, 103, 127, 112) || line.capH != 8 {
+		return nil, no
+	}
+	if dom, _ := lineDominant(line, 47); dom != 68 {
+		return nil, no
+	}
+	for color := range line.colors {
+		if color != 68 && color != 47 && color != 128 {
+			return nil, no
+		}
+	}
+	left, top, right := scanDialogBox(canvas, 77, 107, 77, 127, 103)
+	if left != 62 || top != 83 || right != 257 {
+		return nil, no
+	}
+	for _, title := range []*dialogShown{d.cur, d.prev} {
+		if title == nil || title.id != "GAME.TXT:@TRADESTART:0x00008390" || title.safe != image.Rect(65, 86, 254, 100) || title.size != 30 || (title.phase != "active" && title.phase != "waiting-screen") || step < title.complete || step-title.complete >= 2000000 || len(title.items) != 0 {
+			continue
+		}
+		digest := fmt.Sprintf("%x", sha256.Sum256(rectBytes(canvas, title.safe)))
+		if digest != "d92e03cf4309db02c1a6a5ed417be009b17af97534757f8b2206daaf316fcdb6" && digest != "f3903c8fd43c9bda810654eda5e24304db5ecf164850eb754b99cc24b2df7f16" {
+			continue
+		}
+		value := d.cat.colonyValue(line.text)
+		if value == "" || strings.ContainsAny(value, "{}\r\n\t") {
+			return nil, no
+		}
+		return []string{value}, image.Rect(76, 102, right-3, 114)
+	}
+	return nil, no
+}
+
+// 規格035 READY：讀當次列位置與原版內框，不推算或改動目的地數。
+func (d *dialogRuntime) familyPortChoices(lines []runLine, canvas []byte, step uint64) ([]string, image.Rectangle) {
+	no := image.Rectangle{}
+	if len(lines) < 2 || len(canvas) != 64000 || d.cat == nil || d.cat.colonyValue == nil || d.lineFallback == nil {
+		return nil, no
+	}
+	first, last := lines[0].box, lines[len(lines)-1].box
+	left, top, right := scanDialogBox(canvas, last.Min.X, (last.Min.Y+last.Max.Y)/2, first.Min.X, first.Max.X, first.Min.Y)
+	if left != 62 || right != 257 {
+		return nil, no
+	}
+	found := false
+	for _, title := range []*dialogShown{d.cur, d.prev} {
+		if title == nil || title.id != "GAME.TXT:0x00001CBB" || title.safe.Min.X != 66 || title.safe.Max.X != 176 || title.safe.Dy() != 12 || title.size != 30 || (title.phase != "active" && title.phase != "waiting-screen") || step < title.complete || step-title.complete >= 2000000 || len(title.items) != 1 || title.items[0] != "Select a port to sail to:" || top != title.safe.Min.Y-5 || first.Min.Y != title.safe.Max.Y+3 {
+			continue
+		}
+		if fmt.Sprintf("%x", sha256.Sum256(rectBytes(canvas, title.safe))) == "243bbad99dab8e3b061f63862dd8765c1b1b24a364c674fabf47b1aab849c2af" {
+			found = true
+		}
+	}
+	if !found {
+		return nil, no
+	}
+	var union image.Rectangle
+	for i, line := range lines {
+		if line.box.Min.X != 77 || line.box.Min.Y != first.Min.Y+i*12 || line.box.Dy() != 9 || line.box.Max.X <= 77 || line.box.Max.X > right-3 || (i == 0 && line.capH != 8) || (i > 0 && line.capH != 8 && line.capH != 9) {
+			return nil, no
+		}
+		dom, _ := lineDominant(line, 47)
+		if dom != 68 && dom != 8 {
+			return nil, no
+		}
+		for color := range line.colors {
+			if color != dom && color != 47 && color != 128 {
+				return nil, no
+			}
+		}
+		union = union.Union(line.box)
+	}
+	area := image.Rect(union.Min.X-1, union.Min.Y-1, right-3, union.Max.Y+2)
+	if !area.In(image.Rect(0, 0, 320, 200)) {
+		return nil, no
+	}
+	port, rest, ok := strings.Cut(lines[0].text, " (")
+	if !ok || !strings.HasSuffix(rest, ")") {
+		return nil, no
+	}
+	country := strings.TrimSuffix(rest, ")")
+	if !d.cat.voyageRoles["port"][port] || !d.cat.voyageRoles["country"][country] {
+		return nil, no
+	}
+	p, pok := d.lineFallback(port)
+	c, cok := d.lineFallback(country)
+	if !pok || !cok {
+		return nil, no
+	}
+	items := []string{p + "（" + c + "）"}
+	for offset, line := range lines[1:] {
+		name := line.text
+		if name == "" || name != strings.TrimSpace(name) || strings.ContainsAny(name, "{}\r\n\t") {
+			return nil, no
+		}
+		value := d.cat.colonyValue(name)
+		if name == "(Delete Destination)" {
+			if len(lines) != 3 || offset != 1 || d.cat.routeDeleteChoice == "" {
+				return nil, no
+			}
+			value = d.cat.routeDeleteChoice
+		}
+		if value == "" || strings.ContainsAny(value, "{}\r\n\t") {
+			return nil, no
+		}
+		items = append(items, value)
+	}
+	return items, area
+}
+
+// 規格035 READY：既有標題身份與原版快照完整，來源仍為同一建造清單時，不以字間停頓拆散事務。
+func (d *dialogRuntime) buildReadTransaction(r *dialogRun, step uint64) bool {
+	if r == nil || d.readCanvas == nil || step < r.last || step < r.start || step-r.start >= 2000000 {
+		return false
+	}
+	canvas := d.readCanvas()
+	if len(canvas) != 64000 {
+		return false
+	}
+	var title *dialogShown
+	for _, it := range []*dialogShown{d.cur, d.prev} {
+		if it == nil || it.id != "STRING:line" || len(it.items) != 1 || it.items[0] != "Select An Item To Build" || it.size != 21 || (it.phase != "active" && it.phase != "waiting-screen") || step < it.complete {
+			continue
+		}
+		if it.safe != image.Rect(74, 33, 154, 42) && it.safe != image.Rect(74, 45, 154, 54) {
+			continue
+		}
+		if len(it.buildSource) != it.safe.Dx()*it.safe.Dy() || !bytes.Equal(it.buildSource, rectBytes(canvas, it.safe)) {
+			continue
+		}
+		if title != nil {
+			return false
+		}
+		title = it
+	}
+	if title == nil {
+		return false
+	}
+	lines := runLines(r.chars)
+	if len(lines) == 0 || !strings.HasPrefix("(No Production)", lines[0].text) {
+		return false
+	}
+	for i, line := range lines {
+		if i > 0 && lines[0].text != "(No Production)" {
+			return false
+		}
+		if line.box.Min.X < 79 || line.box.Min.X > 80 || line.box.Max.X > 241 || line.box.Min.Y != title.safe.Max.Y+2+8*i || line.box.Max.Y > line.box.Min.Y+6 || line.capH != 5 {
+			return false
+		}
+		for color := range line.colors {
+			if color != 68 && color != 149 && color != 8 {
+				return false
+			}
+		}
+	}
+	return true
+}
+
+// 規格035 READY：原版國籍／UNIT名稱與LABELS字面值組成的肖像標籤。
+func (d *dialogRuntime) unitCaptionChoices(lines []runLine, canvas []byte) ([]string, image.Rectangle) {
+	no := image.Rectangle{}
+	if d == nil || d.cat == nil || d.lineFallback == nil || len(lines) == 0 || len(canvas) != 64000 || len(d.cat.unitCaptionNames) == 0 {
+		return nil, no
+	}
+	values := make([]string, len(lines))
+	frames := make([]image.Rectangle, len(lines))
+	var ink image.Rectangle
+	for i, line := range lines {
+		if line.capH != 8 || line.box.Dy() != 9 || !line.box.In(image.Rect(22, 6, 318, 187)) {
+			return nil, no
+		}
+		for color := range line.colors {
+			if color != 68 && color != 47 && color != 128 {
+				return nil, no
+			}
+		}
+		if dom, kinds := lineDominant(line, 47); dom != 68 || kinds != 1 {
+			return nil, no
+		}
+		frame := image.Rect(line.box.Min.X-21, line.box.Min.Y-5, line.box.Min.X-3, line.box.Min.Y+13)
+		for x := frame.Min.X; x < frame.Max.X; x++ {
+			if canvas[frame.Min.Y*320+x] != 15 || canvas[(frame.Max.Y-1)*320+x] != 15 {
+				return nil, no
+			}
+		}
+		for y := frame.Min.Y; y < frame.Max.Y; y++ {
+			if canvas[y*320+frame.Min.X] != 15 || canvas[y*320+frame.Max.X-1] != 15 {
+				return nil, no
+			}
+		}
+		head, tail, ok := strings.Cut(line.text, " (")
+		if !ok || !strings.HasSuffix(tail, ")") {
+			return nil, no
+		}
+		qualifier := strings.TrimSuffix(tail, ")")
+		if qualifier != "None" && qualifier != "Expert" {
+			return nil, no
+		}
+		nation, unit, ok := strings.Cut(head, " ")
+		if !ok || !d.cat.voyageRoles["nation"][nation] {
+			return nil, no
+		}
+		noun := d.cat.unitCaptionNames[unit]
+		if noun == "" {
+			return nil, no
+		}
+		country, ok1 := d.lineFallback(nation)
+		status, ok2 := d.lineFallback(qualifier)
+		if !ok1 || !ok2 || strings.ContainsAny(country+noun+status, "{}%\r\n\t") {
+			return nil, no
+		}
+		values[i] = country + noun + "（" + status + "）"
+		frames[i] = frame
+		ink = ink.Union(line.box)
+	}
+	area := image.Rect(ink.Min.X-1, ink.Min.Y-1, ink.Max.X+2, ink.Max.Y+2)
+	for _, frame := range frames {
+		if frame.Overlaps(area) {
+			return nil, no
+		}
+	}
+	return values, area
+}
+
+func compactOrdersPrefix(chars []dialogChar, next byte) bool {
+	if next != 'W' || len(chars) < 2 {
+		return false
+	}
+	prefix := chars[len(chars)-1]
+	if prefix.c != '~' || !prefix.box.Empty() {
+		return false
+	}
+	lines := runLines(chars[:len(chars)-1])
+	if len(lines) != 1 {
+		return false
+	}
+	line := lines[0]
+	if line.text != "Activate unit" || line.box != image.Rect(81, 13, 123, 19) || line.capH != 5 {
+		return false
+	}
+	if len(line.colors) != 2 || line.colors[68] == 0 || line.colors[149] == 0 {
+		return false
+	}
+	return true
+}
+
+func compactOrdersStyle(lines []runLine, canvas []byte) bool {
+	if len(lines) != 6 || len(canvas) != 64000 {
+		return false
+	}
+	texts := []string{"Activate unit", "Wait for next unit", "Fortify", "Sentry", "No Orders (space bar)", "Disband Unit (shift-D)"}
+	boxes := []image.Rectangle{image.Rect(81, 13, 123, 19), image.Rect(81, 21, 141, 27), image.Rect(81, 29, 105, 35), image.Rect(81, 37, 103, 43), image.Rect(81, 53, 157, 59), image.Rect(81, 69, 155, 75)}
+	for i, line := range lines {
+		if line.text != texts[i] || line.box != boxes[i] || line.capH != 5 {
+			return false
+		}
+		if i == 0 || i == 5 {
+			if len(line.colors) != 2 || line.colors[68] == 0 || line.colors[149] == 0 {
+				return false
+			}
+		} else if len(line.colors) != 1 || line.colors[8] == 0 {
+			return false
+		}
+	}
+	for x := 76; x < 164; x++ {
+		if canvas[9*320+x] != 0 || canvas[77*320+x] != 0 {
+			return false
+		}
+	}
+	for y := 9; y < 78; y++ {
+		if canvas[y*320+76] != 0 || canvas[y*320+163] != 0 {
+			return false
+		}
+	}
+	return true
 }

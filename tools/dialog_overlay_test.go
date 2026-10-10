@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"crypto/sha256"
 	"fmt"
 	"image"
@@ -8,6 +9,79 @@ import (
 	"strings"
 	"testing"
 )
+
+// 以合法原版已驗片段測檔名處理；缺原版明確skip，不以自製片段充當來源。
+func TestSaveErrorFilenameSource(t *testing.T) {
+	source, err := os.ReadFile("/game/GAME.TXT")
+	if os.IsNotExist(err) {
+		t.Skip("缺合法原版GAME.TXT")
+	}
+	if err != nil || fmt.Sprintf("%x", sha256.Sum256(source)) != "67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a" {
+		t.Fatal("原版來源不符", err)
+	}
+	raw := source[0x7F0 : 0x7F0+27]
+	if fmt.Sprintf("%x", sha256.Sum256(raw)) != "1fe8970fc7f4e6a847798b391a98750fef720eb49c9fd7f35bd4c700c8745263" {
+		t.Fatal("來源片段不符")
+	}
+	zh := "儲存遊戲 %STRING0 時發生錯誤。"
+	tpl := makeDialogTemplate("GAME.TXT:0x000007F0", string(raw), zh, false)
+	c := &dialogCatalog{terms: map[string]string{"COLONY00.SAV": "錯誤的術語"}}
+	for _, value := range []string{"COLONY00.SAV", "COLONY09.SAV", "COLONY99.SAV"} {
+		_, got, why := c.matchIn([]dialogTemplate{tpl}, strings.ReplaceAll(string(raw), "%STRING0", value))
+		if why != "" || got != strings.ReplaceAll(zh, "%STRING0", value) {
+			t.Fatal(value, got, why)
+		}
+	}
+	for _, value := range []string{"../COLONY00.SAV", "colony00.sav", "COLONY0.SAV", "COLONY100.SAV", "COLONY00.EXE", "{COLONY00.SAV}", "Other name"} {
+		_, _, why := c.matchIn([]dialogTemplate{tpl}, strings.ReplaceAll(string(raw), "%STRING0", value))
+		if why != "unverified-save-filename" {
+			t.Fatal(value, why)
+		}
+	}
+	tpl.id = "unverified-source"
+	if _, _, why := c.matchIn([]dialogTemplate{tpl}, strings.ReplaceAll(string(raw), "%STRING0", "COLONY09.SAV")); why != "variable-without-term" {
+		t.Fatal("一般變數守門被放寬", why)
+	}
+}
+
+func TestLoadErrorTitleRetention(t *testing.T) {
+	canvas := bytes.Repeat([]byte{67}, 64000)
+	title := &dialogShown{id: "GAME.TXT:0x00000826", phase: "active", safe: image.Rect(65, 67, 134, 73), complete: 100}
+	title.afterSafe = stringRect(canvas, title.safe)
+	next := &dialogShown{id: "GAME.TXT:0x00000971", safe: image.Rect(66, 94, 233, 106), complete: 5000000}
+	d := &dialogRuntime{cur: title}
+	if d.titleForLoadError(next, canvas) != title {
+		t.Fatal("完整cur標題未保留")
+	}
+	d.cur = &dialogShown{id: "STRING:save-slot+list", phase: "expired"}
+	d.prev = title
+	if d.titleForLoadError(next, canvas) != title {
+		t.Fatal("完整prev標題未保留")
+	}
+	for _, change := range []string{"wrong-next", "phase", "pixels", "overlap", "order", "partial", "unknown-title"} {
+		a, b := *title, *next
+		cc := append([]byte(nil), canvas...)
+		switch change {
+		case "wrong-next":
+			b.id = "unknown"
+		case "phase":
+			a.phase = "expired"
+		case "pixels":
+			cc[67*320+65] ^= 1
+		case "overlap":
+			b.safe = a.safe
+		case "order":
+			b.complete = 99
+		case "partial":
+			a.afterSafe = a.afterSafe[:1]
+		case "unknown-title":
+			a.id = "unknown"
+		}
+		if (&dialogRuntime{cur: &a}).titleForLoadError(&b, cc) != nil {
+			t.Fatal("標題守門未拒絕", change)
+		}
+	}
+}
 
 // 以自製的假 GAME.TXT 與語料測試（不含原版文字）。
 func dialogFixture(t *testing.T) *dialogCatalog {
@@ -102,7 +176,7 @@ func TestDialogColonyValueScope(t *testing.T) {
 		}
 	}
 	for _, fixture := range []struct{ id, variable string }{
-		{"GAME.TXT:@ABANDON2:0x00001A5B", "%STRING0"},
+		{"GAME.TXT:@ABANDON2:0x00001A5B", "%STRING1"},
 		{"GAME.TXT:@OTHER", "%STRING0"},
 		{"GAME.TXT:@ABANDON:0x00001994", "%STRING1"},
 	} {
@@ -714,6 +788,48 @@ func TestPrefixCandidatePartiallyErased(t *testing.T) {
 	}
 }
 
+// 自製字串與字模只測存活機制；原版VIEW收據另驗正常關框。
+func TestMenuListRejectsPartialErasure(t *testing.T) {
+	c := &dialogCatalog{lines: []dialogTemplate{
+		makeDialogTemplate("MENU.TXT:fixture-a", "Alpha", "甲", false),
+		makeDialogTemplate("MENU.TXT:fixture-b", "Bravo", "乙", false),
+	}}
+	dialogTestFonts(c, "甲乙")
+	makeRun := func() (*dialogRun, []byte) {
+		r := &dialogRun{readPos: 2, firstOld: map[int]byte{}, lastText: map[int]bool{}}
+		canvas := bytes.Repeat([]byte{47}, 64000)
+		for row, text := range []string{"Alpha", "Bravo"} {
+			for i, ch := range []byte(text) {
+				x, y := 49+i*4, 13+row*8
+				r.chars = append(r.chars, dialogChar{c: ch, box: image.Rect(x, y, x+3, y+5), colors: map[byte]int{68: 15}})
+				for dx := 0; dx < 2; dx++ {
+					index := y*320 + x + dx
+					r.firstOld[index], r.lastText[index], canvas[index] = 47, true, 68
+				}
+			}
+		}
+		return r, canvas
+	}
+	d := &dialogRuntime{cat: c}
+	r, canvas := makeRun()
+	if st, _, why := d.finish(r, canvas, 1000); st == nil || why != "" {
+		t.Fatal("完整MENU未接受", why)
+	}
+	for _, erased := range []int{1, 19, 20} {
+		r, canvas = makeRun()
+		n := 0
+		for index := range r.firstOld {
+			if n < erased {
+				r.lastText[index], canvas[index] = false, 8
+			}
+			n++
+		}
+		if st, _, why := d.finish(r, canvas, 1000); st != nil || why != "text-erased-before-finish" {
+			t.Fatal("抹除後的MENU仍被接受", erased, why)
+		}
+	}
+}
+
 func TestHotkeyMarkIgnored(t *testing.T) {
 	ink := image.Rect(0, 0, 3, 5)
 	chars := []dialogChar{{c: 'B', box: ink}, {c: '~'}, {c: 'R', box: image.Rect(4, 0, 7, 5)}}
@@ -1072,23 +1188,59 @@ func TestUnitCaptionWholeNameScope(t *testing.T) {
 
 // 抵港教學的玩家名稱須與一般術語及強調碼隔離。
 func TestDockTutorialColonyNameIsolation(t *testing.T) {
-	template := makeDialogTemplate("GAME.TXT:@TUTORIAL12", "Ship arrived %STRING0.", "船已抵達%STRING0。", false)
-	c := &dialogCatalog{templates: []dialogTemplate{template}, terms: map[string]string{"Camp": "一般術語"}}
-	if _, _, why := c.match("Ship arrived Camp."); why != "unverified-colony-name" {
+	for _, id := range []string{"GAME.TXT:@TUTORIAL12", "GAME.TXT:@TUTORIAL7", "GAME.TXT:@TUTORIAL15"} {
+		t.Run(id, func(t *testing.T) {
+			template := makeDialogTemplate(id, "Ship arrived %STRING0.", "船已抵達%STRING0。", false)
+			c := &dialogCatalog{templates: []dialogTemplate{template}, terms: map[string]string{"Camp": "一般術語"}}
+			if _, _, why := c.match("Ship arrived Camp."); why != "unverified-colony-name" {
+				t.Fatal(why)
+			}
+			c.colonyValue = func(name string) string {
+				if name == "Home" {
+					return "家園（Home）"
+				}
+				return name
+			}
+			for name, want := range map[string]string{"Home": "船已抵達家園（Home）。", "Camp": "船已抵達Camp。", "999": "船已抵達999。"} {
+				if _, zh, why := c.match("Ship arrived " + name + "."); why != "" || zh != want {
+					t.Fatal(name, zh, why)
+				}
+			}
+			if _, _, why := c.match("Ship arrived {Camp}."); why != "unrenderable-variable" {
+				t.Fatal(why)
+			}
+		})
+	}
+	other := &dialogCatalog{
+		templates:   []dialogTemplate{makeDialogTemplate("OTHER", "Ship arrived %STRING0.", "船已抵達%STRING0。", false)},
+		terms:       map[string]string{"Camp": "一般術語"},
+		colonyValue: func(string) string { t.Fatal("城市回呼外溢至其他模板"); return "" },
+	}
+	if _, zh, why := other.match("Ship arrived Camp."); why != "" || zh != "船已抵達一般術語。" {
+		t.Fatal(zh, why)
+	}
+}
+
+// 合成句只驗變數槽位隔離，原版正文另由真實GAME.TXT來源審查。
+func TestCargoTutorialCitySlotIsolation(t *testing.T) {
+	template := makeDialogTemplate("GAME.TXT:@TUTORIAL6", "Cargo %STRING0 at %STRING1, enter %STRING1, return %STRING2.", "%STRING0在%STRING1，駛入%STRING1，運回%STRING2。", false)
+	c := &dialogCatalog{
+		templates: []dialogTemplate{template},
+		terms:     map[string]string{"Furs": "毛皮", "London": "倫敦", "Camp": "錯誤術語"},
+	}
+	const shown = "Cargo Furs at Camp, enter Camp, return London."
+	if _, _, why := c.match(shown); why != "unverified-colony-name" {
 		t.Fatal(why)
 	}
-	c.colonyValue = func(name string) string {
-		if name == "Home" {
-			return "家園（Home）"
-		}
-		return name
+	var calls []string
+	c.colonyValue = func(name string) string { calls = append(calls, name); return name }
+	if _, zh, why := c.match(shown); why != "" || zh != "毛皮在Camp，駛入Camp，運回倫敦。" {
+		t.Fatal(zh, why)
 	}
-	for name, want := range map[string]string{"Home": "船已抵達家園（Home）。", "Camp": "船已抵達Camp。", "999": "船已抵達999。"} {
-		if _, zh, why := c.match("Ship arrived " + name + "."); why != "" || zh != want {
-			t.Fatal(name, zh, why)
-		}
+	if len(calls) != 2 || calls[0] != "Camp" || calls[1] != "Camp" {
+		t.Fatal("名稱回呼外溢至貨物或母港", calls)
 	}
-	if _, _, why := c.match("Ship arrived {Camp}."); why != "unrenderable-variable" {
+	if _, _, why := c.match("Cargo Furs at {Camp}, enter {Camp}, return London."); why != "unrenderable-variable" {
 		t.Fatal(why)
 	}
 }
@@ -1204,5 +1356,456 @@ func TestDialogOptionSourceGroups(t *testing.T) {
 	}
 	if _, _, why := c.matchIn(group[0:1], "Unknown"); why != "no-template" {
 		t.Fatal("未知選項被翻譯", why)
+	}
+}
+
+func choiceFixture() (*dialogRuntime, *dialogShown, []byte) {
+	canvas := bytes.Repeat([]byte{47}, 320*200)
+	body := &dialogShown{id: "BODY", safe: image.Rect(10, 10, 100, 30), phase: "active", complete: 1}
+	body.optionBody = rectBytes(canvas, body.safe)
+	body.afterSafe = bytes.Clone(body.optionBody)
+	old := &dialogShown{id: "BODY#1+list", safe: image.Rect(12, 35, 98, 60), items: []string{"Yes.", "No."}, phase: "expired", complete: 100}
+	next := &dialogShown{id: old.id, safe: old.safe, items: append([]string(nil), old.items...), complete: 9000000}
+	cat := &dialogCatalog{messageOptions: map[string][]dialogTemplate{"BODY": {
+		makeDialogTemplate("BODY#1", "Yes.", "是。", false), makeDialogTemplate("BODY#2", "No.", "不。", false),
+	}}}
+	return &dialogRuntime{cat: cat, prev: body, cur: old}, next, canvas
+}
+
+func TestChoiceBodyRetainsAuthenticatedRedraw(t *testing.T) {
+	d, next, canvas := choiceFixture()
+	if !d.retainChoiceBody(next, canvas) {
+		t.Fatal("unchanged authenticated body should survive a repeated choice redraw")
+	}
+}
+
+func TestChoiceBodyRejectsChangedContext(t *testing.T) {
+	checks := map[string]func(*dialogRuntime, *dialogShown, []byte){
+		"body expired":             func(d *dialogRuntime, n *dialogShown, c []byte) { d.prev.phase = "expired" },
+		"body changed":             func(d *dialogRuntime, n *dialogShown, c []byte) { c[10*320+10] = 99 },
+		"missing snapshot":         func(d *dialogRuntime, n *dialogShown, c []byte) { d.prev.afterSafe = nil },
+		"different identity":       func(d *dialogRuntime, n *dialogShown, c []byte) { n.id = "OTHER" },
+		"different safe rectangle": func(d *dialogRuntime, n *dialogShown, c []byte) { n.safe = n.safe.Add(image.Pt(1, 0)) },
+		"missing item":             func(d *dialogRuntime, n *dialogShown, c []byte) { n.items = n.items[:1] },
+		"wrong order":              func(d *dialogRuntime, n *dialogShown, c []byte) { n.items[0], n.items[1] = n.items[1], n.items[0] },
+		"different body group":     func(d *dialogRuntime, n *dialogShown, c []byte) { d.prev.id = "OTHER" },
+		"untrusted text":           func(d *dialogRuntime, n *dialogShown, c []byte) { n.items[0] = "Unknown."; d.cur.items[0] = "Unknown." },
+	}
+	for name, change := range checks {
+		t.Run(name, func(t *testing.T) {
+			d, n, c := choiceFixture()
+			change(d, n, c)
+			if d.retainChoiceBody(n, c) {
+				t.Fatal("unsafe body retained")
+			}
+		})
+	}
+}
+
+func TestProfessionFamilyContextGuards(t *testing.T) {
+	d := &dialogRuntime{}
+	original := []runLine{{text: "Select a Profession for Veteran Soldiers(Sugar", box: image.Rect(67, 19, 230, 25), capH: 5, colors: map[byte]int{68: 286}}, {text: "Planter):", box: image.Rect(67, 25, 97, 31), capH: 5, colors: map[byte]int{68: 58}}}
+	for _, kind := range []string{"valid", "cap", "x", "y", "right", "bottom", "colors", "shadow", "accent", "normal", "prefix", "suffix", "extra-paren", "empty-job", "empty-unit", "one", "three"} {
+		lines := append([]runLine(nil), original...)
+		n, a, sh := byte(68), byte(68), byte(0)
+		switch kind {
+		case "cap":
+			lines[0].capH = 8
+		case "x":
+			lines[0].box = lines[0].box.Add(image.Pt(1, 0))
+		case "y":
+			lines[1].box = lines[1].box.Add(image.Pt(0, 1))
+		case "right":
+			lines[0].box.Max.X = 255
+		case "bottom":
+			lines[1].box.Max.Y = 32
+		case "colors":
+			lines[1].colors = map[byte]int{68: 10, 8: 10}
+		case "shadow":
+			sh = 47
+		case "accent":
+			a = 149
+		case "normal":
+			n = 149
+		case "prefix":
+			lines[0].text = "Choose a Profession for Veteran Soldiers(Sugar"
+		case "suffix":
+			lines[1].text = "Planter)"
+		case "extra-paren":
+			lines[1].text = "Planter()):"
+		case "empty-job":
+			lines[0].text = "Select a Profession for Veteran Soldiers("
+			lines[1].text = "):"
+		case "empty-unit":
+			lines[0].text = "Select a Profession for (Sugar"
+			lines[1].text = "Planter):"
+		case "one":
+			lines = lines[:1]
+		case "three":
+			lines = append(lines, lines[1])
+		}
+		if got := d.professionTitleContext(lines, n, a, sh); got != (kind == "valid") {
+			t.Fatal(kind, got, strings.Join([]string{lines[0].text}, ""))
+		}
+	}
+}
+
+func TestMapTitleContextGuards(t *testing.T) {
+	row := runLine{text: "Select Map File to Load", box: image.Rect(108, 89, 212, 98), capH: 8, colors: map[byte]int{68: 180, 47: 130, 128: 78}}
+	if !mapTitleContext([]runLine{row}, 68, 149, 47) {
+		t.Fatal("正例")
+	}
+	for _, kind := range []string{"text", "box", "cap", "color", "normal", "accent", "shadow", "two"} {
+		r := row
+		n, a, sh := byte(68), byte(149), byte(47)
+		lines := []runLine{r}
+		switch kind {
+		case "text":
+			lines[0].text = "Another Title"
+		case "box":
+			lines[0].box = lines[0].box.Add(image.Pt(1, 0))
+		case "cap":
+			lines[0].capH = 7
+		case "color":
+			lines[0].colors = map[byte]int{68: 10, 47: 10, 8: 10}
+		case "normal":
+			n = 149
+		case "accent":
+			a = 68
+		case "shadow":
+			sh = 0
+		case "two":
+			lines = append(lines, r)
+		}
+		if mapTitleContext(lines, n, a, sh) {
+			t.Fatal("錯欄未拒絕", kind)
+		}
+	}
+}
+
+func TestBuildTitlePreservationGuards(t *testing.T) {
+	canvas, e := os.ReadFile("/out/build-lifecycle-observer/title-at-107923065.idx")
+	if e != nil {
+		t.Fatal(e)
+	}
+	items := []string{"(No Production)", "ARMORY (52 Hammers)", "DOCKS (52 Hammers)", "WAREHOUSE (80 Hammers)", "STABLE (64 Hammers)", "PRINTING PRESS (52 Hammers)(20 Tools)", "WEAVER'S SHOP (64 Hammers)(20 Tools)", "TOBACCONIST'S SHOP (64 Hammers)(20 Tools)", "RUM DISTILLERY (64 Hammers)(20 Tools)", "FUR TRADING POST (56 Hammers)(20 Tools)", "BLACKSMITH'S SHOP (64 Hammers)(20 Tools)", "WAGON TRAIN (40 Hammers)"}
+	for _, kind := range []string{"valid", "title", "phase", "title-safe", "snapshot", "title-size", "list-safe", "list-size", "identity", "row-count", "order", "overlap", "time"} {
+		title := &dialogShown{id: "STRING:line", phase: "active", safe: image.Rect(74, 45, 154, 54), size: 21, items: []string{"Select An Item To Build"}, afterSafe: rectBytes(canvas, image.Rect(74, 45, 154, 54))}
+		old := &dialogShown{id: "STRING:line+list", phase: "expired", safe: image.Rect(78, 55, 241, 151), size: 21, items: append([]string(nil), items...), complete: 98714158}
+		next := &dialogShown{id: old.id, safe: old.safe, size: 21, items: append([]string(nil), items...), complete: 107923065}
+		d := &dialogRuntime{prev: title, cur: old}
+		switch kind {
+		case "title":
+			title.items[0] = "Another Title"
+		case "phase":
+			title.phase = "expired"
+		case "title-safe":
+			title.safe = title.safe.Add(image.Pt(1, 0))
+		case "snapshot":
+			title.afterSafe = bytes.Clone(title.afterSafe)
+			title.afterSafe[0] ^= 1
+		case "title-size":
+			title.size = 22
+		case "list-safe":
+			next.safe = next.safe.Add(image.Pt(0, 1))
+		case "list-size":
+			next.size = 22
+		case "identity":
+			next.id = "OTHER"
+		case "row-count":
+			next.items = next.items[:11]
+		case "order":
+			next.items[1], next.items[2] = next.items[2], next.items[1]
+		case "overlap":
+			next.safe = title.safe
+		case "time":
+			next.complete = old.complete - 1
+		}
+		if got := d.retainBuildTitle(next, canvas); got != (kind == "valid") {
+			t.Fatal(kind, got)
+		}
+	}
+}
+
+func TestBuildTransactionGuards(t *testing.T) {
+	for _, kind := range []string{"valid-waiting", "valid-active", "missing-canvas", "snapshot", "title-id", "title-items", "title-phase", "title-safe", "title-size", "first-item", "color", "position", "start-time", "expired-time"} {
+		canvas := bytes.Repeat([]byte{130}, 64000)
+		safe := image.Rect(74, 33, 154, 42)
+		title := &dialogShown{id: "STRING:line", items: []string{"Select An Item To Build"}, phase: "waiting-screen", safe: safe, size: 21, complete: 100, buildSource: rectBytes(canvas, safe)}
+		chars := []dialogChar{}
+		for _, c := range []byte("(No Production)") {
+			chars = append(chars, dialogChar{c: c, box: image.Rect(80, 44, 83, 49), colors: map[byte]int{68: 3}})
+		}
+		r := &dialogRun{start: 200, last: 300, chars: chars}
+		d := &dialogRuntime{cur: title, readCanvas: func() []byte { return canvas }}
+		step := uint64(40000)
+		switch kind {
+		case "valid-active":
+			title.phase = "active"
+		case "missing-canvas":
+			d.readCanvas = nil
+		case "snapshot":
+			canvas[33*320+74] ^= 1
+		case "title-id":
+			title.id = "OTHER"
+		case "title-items":
+			title.items = []string{"Other"}
+		case "title-phase":
+			title.phase = "expired"
+		case "title-safe":
+			title.safe = title.safe.Add(image.Pt(1, 0))
+		case "title-size":
+			title.size = 30
+		case "first-item":
+			r.chars[0].c = 'X'
+		case "color":
+			r.chars[0].colors = map[byte]int{15: 3}
+		case "position":
+			for i := range r.chars {
+				r.chars[i].box = r.chars[i].box.Add(image.Pt(0, 1))
+			}
+		case "start-time":
+			step = 100
+		case "expired-time":
+			step = r.start + 2000000
+		}
+		got := d.buildReadTransaction(r, step)
+		want := kind == "valid-waiting" || kind == "valid-active"
+		if got != want {
+			t.Fatal(kind, got, want)
+		}
+	}
+}
+
+func TestUnitCaptionRoleAndGeometryGuards(t *testing.T) {
+	for _, kind := range []string{"valid", "nation-role", "unit-role", "unknown-qualifier", "controls", "cap", "height", "color", "portrait-top", "portrait-bottom", "portrait-left", "portrait-right", "missing-provider", "missing-unit-source", "missing-nation-source", "untranslated"} {
+		canvas := bytes.Repeat([]byte{130}, 64000)
+		frame := image.Rect(93, 90, 111, 108)
+		for x := frame.Min.X; x < frame.Max.X; x++ {
+			canvas[frame.Min.Y*320+x] = 15
+			canvas[(frame.Max.Y-1)*320+x] = 15
+		}
+		for y := frame.Min.Y; y < frame.Max.Y; y++ {
+			canvas[y*320+frame.Min.X] = 15
+			canvas[y*320+frame.Max.X-1] = 15
+		}
+		line := runLine{text: "English Pioneers (None)", box: image.Rect(114, 95, 224, 104), capH: 8, colors: map[byte]int{68: 3, 47: 1, 128: 1}}
+		cat := &dialogCatalog{unitCaptionNames: map[string]string{"Pioneers": "前鋒"}, voyageRoles: map[string]map[string]bool{"nation": {"English": true}}}
+		provider := func(s string) (string, bool) {
+			z, ok := map[string]string{"English": "英國", "None": "無"}[s]
+			return z, ok
+		}
+		d := &dialogRuntime{cat: cat, lineFallback: provider}
+		switch kind {
+		case "nation-role":
+			line.text = "London Pioneers (None)"
+		case "unit-role":
+			line.text = "English England (None)"
+		case "unknown-qualifier":
+			line.text = "English Pioneers (Camp)"
+		case "controls":
+			line.text = "English Pioneers ({None})"
+		case "cap":
+			line.capH = 5
+		case "height":
+			line.box.Max.Y++
+		case "color":
+			line.colors = map[byte]int{15: 3}
+		case "portrait-top":
+			canvas[90*320+100] = 130
+		case "portrait-bottom":
+			canvas[107*320+100] = 130
+		case "portrait-left":
+			canvas[95*320+93] = 130
+		case "portrait-right":
+			canvas[95*320+110] = 130
+		case "missing-provider":
+			d.lineFallback = nil
+		case "missing-unit-source":
+			cat.unitCaptionNames = nil
+		case "missing-nation-source":
+			cat.voyageRoles = nil
+		case "untranslated":
+			d.lineFallback = func(string) (string, bool) { return "", false }
+		}
+		items, area := d.unitCaptionChoices([]runLine{line}, canvas)
+		if kind == "valid" {
+			if len(items) != 1 || items[0] != "英國前鋒（無）" || area != image.Rect(113, 94, 226, 106) {
+				t.Fatal(kind, items, area)
+			}
+		} else if items != nil || !area.Empty() {
+			t.Fatal("錯條件仍接受", kind, items, area)
+		}
+	}
+}
+
+func compactOrdersChars() []dialogChar {
+	text := []byte("Activate unit")
+	boxes := []image.Rectangle{image.Rect(81, 13, 84, 18), image.Rect(85, 14, 88, 18), image.Rect(89, 13, 91, 19), image.Rect(92, 13, 93, 18), image.Rect(94, 14, 97, 18), image.Rect(98, 14, 101, 18), image.Rect(102, 13, 104, 19), image.Rect(105, 14, 108, 18), {}, image.Rect(111, 14, 114, 18), image.Rect(115, 14, 118, 18), image.Rect(119, 13, 120, 18), image.Rect(121, 13, 123, 19)}
+	chars := []dialogChar{}
+	for i, b := range text {
+		color := byte(68)
+		if i == 0 {
+			color = 149
+		}
+		chars = append(chars, dialogChar{c: b, box: boxes[i], colors: map[byte]int{color: 1}})
+	}
+	return append(chars, dialogChar{c: '~', prefixContinuation: true})
+}
+func TestCompactOrdersPrefixIsolation(t *testing.T) {
+	chars := compactOrdersChars()
+	if !compactOrdersPrefix(chars, 'W') || !menuPrefixNext(chars, 'W') {
+		t.Fatal("已觀測首列拒絕")
+	}
+	next := dialogChar{c: 'W', contig: true, box: image.Rect(81, 21, 84, 26), colors: map[byte]int{8: 1}}
+	if !menuPrefixesValid(append(chars, next)) {
+		t.Fatal("已觀測前綴幾何拒絕")
+	}
+	for _, name := range []string{"different-text", "different-position", "different-cap", "missing-key-color", "third-color", "printing-prefix", "wrong-prefix", "missing-first-row"} {
+		v := compactOrdersChars()
+		switch name {
+		case "different-text":
+			v[0].c = 'B'
+		case "different-position":
+			for i := range v {
+				if !v[i].box.Empty() {
+					v[i].box = v[i].box.Add(image.Pt(0, 1))
+				}
+			}
+		case "different-cap":
+			v[0].box.Max.Y++
+		case "missing-key-color":
+			v[0].colors = map[byte]int{68: 1}
+		case "third-color":
+			v[1].colors = map[byte]int{8: 1}
+		case "printing-prefix":
+			v[len(v)-1].box = image.Rect(124, 13, 125, 18)
+		case "wrong-prefix":
+			v[len(v)-1].c = '#'
+		case "missing-first-row":
+			v = v[len(v)-1:]
+		}
+		if compactOrdersPrefix(v, 'W') {
+			t.Fatal(name)
+		}
+	}
+	if compactOrdersPrefix(chars, 'F') {
+		t.Fatal("未觀測下一列接受")
+	}
+	bad := next
+	bad.box = bad.box.Add(image.Pt(3, 0))
+	if menuPrefixesValid(append(chars, bad)) {
+		t.Fatal("錯位後續字格接受")
+	}
+	bad = next
+	bad.contig = false
+	if menuPrefixesValid(append(chars, bad)) {
+		t.Fatal("非連續來源接受")
+	}
+}
+
+func compactStyleFixture() ([]runLine, []byte) {
+	texts := []string{"Activate unit", "Wait for next unit", "Fortify", "Sentry", "No Orders (space bar)", "Disband Unit (shift-D)"}
+	boxes := []image.Rectangle{image.Rect(81, 13, 123, 19), image.Rect(81, 21, 141, 27), image.Rect(81, 29, 105, 35), image.Rect(81, 37, 103, 43), image.Rect(81, 53, 157, 59), image.Rect(81, 69, 155, 75)}
+	lines := []runLine{}
+	for i, text := range texts {
+		colors := map[byte]int{8: 20}
+		if i == 0 || i == 5 {
+			colors = map[byte]int{68: 30, 149: 10}
+		}
+		lines = append(lines, runLine{text: text, box: boxes[i], capH: 5, colors: colors})
+	}
+	canvas := make([]byte, 64000)
+	for i := range canvas {
+		canvas[i] = 128
+	}
+	for x := 76; x < 164; x++ {
+		canvas[9*320+x] = 0
+		canvas[77*320+x] = 0
+	}
+	for y := 9; y < 78; y++ {
+		canvas[y*320+76] = 0
+		canvas[y*320+163] = 0
+	}
+	return lines, canvas
+}
+func TestCompactOrdersColorRoleIsolation(t *testing.T) {
+	lines, canvas := compactStyleFixture()
+	if !compactOrdersStyle(lines, canvas) {
+		t.Fatal("已驗色層拒絕")
+	}
+	for _, kind := range []string{"unknown-text", "different-box", "different-cap", "unknown-dim-color", "mixed-dim", "missing-accent", "extra-color", "missing-line", "top-border", "bottom-border", "left-border", "right-border", "short-canvas"} {
+		ls, raw := compactStyleFixture()
+		switch kind {
+		case "unknown-text":
+			ls[2].text = "Other"
+		case "different-box":
+			ls[1].box = ls[1].box.Add(image.Pt(1, 0))
+		case "different-cap":
+			ls[3].capH = 6
+		case "unknown-dim-color":
+			ls[4].colors = map[byte]int{7: 20}
+		case "mixed-dim":
+			ls[4].colors[68] = 1
+		case "missing-accent":
+			delete(ls[0].colors, 149)
+		case "extra-color":
+			ls[5].colors[47] = 1
+		case "missing-line":
+			ls = ls[:5]
+		case "top-border":
+			raw[9*320+100] = 128
+		case "bottom-border":
+			raw[77*320+100] = 128
+		case "left-border":
+			raw[30*320+76] = 128
+		case "right-border":
+			raw[30*320+163] = 128
+		case "short-canvas":
+			raw = raw[:1000]
+		}
+		if compactOrdersStyle(ls, raw) {
+			t.Fatal(kind)
+		}
+	}
+}
+
+// 純資料契約測試；真實原文與原版路徑由來源審查另驗。
+func TestAdditionalCitySlotIsolation(t *testing.T) {
+	for _, entry := range []struct {
+		id, slot string
+	}{
+		{"GAME.TXT:0x00001447", "%STRING0"},
+		{"GAME.TXT:@FULL:0x00001482", "%STRING0"},
+		{"GAME.TXT:@TOONEAR:0x00006A24", "%STRING0"},
+		{"GAME.TXT:@INDIANFOREST2:0x00004F7B", "%STRING1"},
+		{"GAME.TXT:@ABANDON2:0x00001A5B", "%STRING0"},
+		{"GAME.TXT:@ALREADYHAVE:0x0000AD9D", "%STRING0"},
+		{"GAME.TXT:@NOMOREWAREHOUSE:0x0001527E", "%STRING0"},
+		{"GAME.TXT:@NOMOREWAGONS:0x00015315", "%STRING0"},
+	} {
+		cat := &dialogCatalog{terms: map[string]string{"Camp": "錯誤術語", "Food": "食物"}}
+		body, zh := "%STRING0 / %STRING1", "%STRING0／%STRING1"
+		cat.templates = []dialogTemplate{makeDialogTemplate(entry.id, body, zh, false)}
+		calls := 0
+		cat.colonyValue = func(value string) string {
+			calls++
+			if value != "Camp" {
+				t.Fatal(entry.id, value)
+			}
+			return "營地（Camp）"
+		}
+		text := "Camp / Food"
+		want := "營地（Camp）／食物"
+		if entry.slot == "%STRING1" {
+			text, want = "Food / Camp", "食物／營地（Camp）"
+		}
+		if _, got, why := cat.match(text); why != "" || got != want || calls != 1 {
+			t.Fatal(entry.id, got, why, calls)
+		}
+		cat.colonyValue = nil
+		if _, _, why := cat.match(text); why != "unverified-colony-name" {
+			t.Fatal(entry.id, why)
+		}
 	}
 }

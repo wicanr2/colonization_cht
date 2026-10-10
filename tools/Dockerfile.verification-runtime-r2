@@ -1,0 +1,16 @@
+# 原驗證映像與 Go 基底於 2026-10-07 收尾時已不存在。
+# 本 revision 只恢復已編譯前端的 GUI／圖像／收據驗證，不提供 Go 建置。
+# Go 建置仍依 Dockerfile.verification 的原工具鏈契約。
+FROM python:3.13-bookworm@sha256:933b46a028fd786c9c3d426ebabc237e29a15912231ea8de576e95f0e4f41a4c
+
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y \
+       python3 python3-pil=9.4.0-1.1+deb12u1 \
+       xvfb xdotool xauth imagemagick \
+       libasound2 libgl1-mesa-dri libgl1 libx11-6 libxcursor1 libxi6 \
+       libxinerama1 libxrandr2 libxxf86vm1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Debian 的 Pillow 使用 Debian Python ABI，不交給 /usr/local 的 Python 3.13。
+ENV PATH=/usr/bin:/bin:/usr/local/bin
+WORKDIR /repo

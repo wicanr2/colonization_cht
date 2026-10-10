@@ -1,5 +1,18 @@
 # 目標180：其餘五類百科逐篇驗證
 
+## 2026-10-09：目前完成審查
+
+| 原要求 | 目前證據 | 結論 |
+|---|---|---|
+| 六類其餘146列、逐類清單與正文 | 既有六類150篇正常驗收與22個先決條件保留；目標185另有31GUI／三側代表性抽樣。 | 顯示驗收成立，歷史收據不冒稱重新全部走過。 |
+| 翻譯與正式接線 | 全部164正文、19索引／概念名已驗原檔指紋與正式loader；最新正式來源接線重驗PASS，摘要b4a311755238…。 | 來源已接，未觀測的重複地形來源仍保留推論等級。 |
+| Miscellaneous／Complete類別 | 原版正常初始化只讀六項，命令0x70～75；heap六項終止鏈與GUI相符，原檔0x72AD3等六處與0x23904分派已核對。 | 本版正常類別入口不存在；不修改原版或注入類別。類別6／7靜態分支保留。 |
+| 同狀態與回退、矩陣／普查 | 已驗正文與欄位各有正常GUI、原版及回退；新增入口限制列與大河精確scope，86列合併普查進行中。 | 86列生成報告与完整要求審查PASS，依2026-10-04代表抽樣接受標準完成。 |
+
+正常入口限制的公開檢查器是[check_goal185_pedia_boundary.py](../../tools/check_goal185_pedia_boundary.py)，規格049的單行分類已READY。原版完整SHA、IDA9.4、執行時與檔案位址分開記錄於RESEARCH-LOG。這個結論只排除類別清單入口，不把個別遊戲概念的情境提示全部宣稱不可達。
+
+完整#57審查入口：[check_goal185_pedia_completion.py](../../tools/check_goal185_pedia_completion.py)。核對全部164正文、19索引接線与目前正式來源相同，保留六類逐篇歷史驗收與当前31GUI／三側，確認三個入口分類與同文地形來源限制；通過前不標完成。
+
 狀態：進行中；日期：2026-10-01。對應 [Issue #57](https://github.com/wicanr2/colonization_cht/issues/57)，承接[目標179](179-pedia-cargo.md)。目前入口：[CONTEXT.md](../../CONTEXT.md)。
 
 沿用既有規格036／038；新增顯示修正須先補原版證據與欄位量測，再通過READY。由冷啟動主選單正常載入原版自行儲存的 `COLONY00.SAV`，依原版清單走訪單位23、地形21、職業27、建築38、開國元勳25項。來源清冊在本機 `workplace/reports/goal170-census-explore/REPORT.md` 與 `census/pedia-all2.tsv`；清單項數不能直接當成不同正文來源鍵的數量。
@@ -180,3 +193,7 @@ F1來源補查已核對實際鍵12／15，輸入與完整原版終點和context-
 
 
 21項來源觀測的受版控重產入口為[tools/probe_goal180_pedia_sources.go](../../tools/probe_goal180_pedia_sources.go)，從本輪已使用的本機key-matches-caller.go保留完整程式行為，只更新說明。既有驗證映像內於`/dosgolem`執行`/usr/local/go/bin/go run /repo/tools/probe_goal180_pedia_sources.go --root /game --inputs <該列gui-pedia.inputs.json> --scratch <獨立正常存檔副本> --out <新來源收據前綴> --from 58000000 --to <GUI終點步數> --verify-step <同一GUI終點步數>`；GOPROXY=off、GOTOOLCHAIN=local、GOCACHE指定已驗擁有權的快取。工具SHA-256 `f61e9c4fd79819e56cb95bd36e5a793101720b29f762fe93fdc7210303afcf8b`；工具只是觀測入口，不單獨授權來源歸屬。
+
+## 2026-10-09完成#57
+
+公開完成審查PASS，摘要c1a1dbd1871b8006dbfc5b17b4075e7592a281f91ad82930ea6d4c15759448a4。164正文与19索引正式來源接線、六類逐篇歷史驗收、31正常GUI／三側、正常兩類入口版本限制、矩陣与生成普查逐項核對。保留同文地形原始段落強推論，不稱全164個來源均新命中；不新增原版類別入口。先前未知結論按新證據更新，歷史紀錄不刪。完整四項Goal其他工作繼續。

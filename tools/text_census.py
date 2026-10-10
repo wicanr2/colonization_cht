@@ -158,7 +158,14 @@ class Census:
                     continue
                 for g in ([[u] for u in inside] if name in LIST_FILES else [inside]):
                     rid = f"{name}:@{key}" + (f":0x{g[0][0]:08X}" if name in LIST_FILES else "")
-                    row = new_row(rid, "txt", hits[0], g[0][0], g[-1][0] + g[-1][1], len(g), " / ".join(u[2] for u in g))
+                    row_hits = [m for m in map_rows if m["file"] == name and re.fullmatch(m["pattern"], f"{key}:0x{g[0][0]:08X}")] if name in LIST_FILES else []
+                    if len(row_hits) > 1:
+                        raise ValueError(f"單行 {rid} 分類重疊")
+                    mapping = row_hits[0] if row_hits else hits[0]
+                    if row_hits:
+                        used[(name, mapping["pattern"])] += 1
+                    row = new_row(rid, "txt", mapping, g[0][0], g[-1][0] + g[-1][1], len(g), " / ".join(u[2] for u in g))
+                    row['classification_override'] = bool(row_hits)
                     row.update(file=name, section=key, sec=(s0, s1))
                     self.rows.append(row)
                     # 段落內任意連續幾行以空白相接（含單行與全文）
@@ -198,6 +205,18 @@ class Census:
         if len(ids) == 1:
             return [self.by_id[next(iter(ids))]], False
         return [], len(ids) > 1
+
+
+def verify_unavailable(census, unavailable_ids):
+    """單行入口限制只採已通過原版／GUI檢查器的完整來源鍵。"""
+    for cid in unavailable_ids:
+        matches = census.by_key(cid)
+        if len(matches) != 1 or matches[0]['id'] != cid or matches[0]['reach'] != 'unreachable':
+            raise ValueError('已驗入口限制與分類不同：' + cid)
+    for record in census.rows:
+        if record['reach'] == 'unreachable' and (record.get('classification_override') or record['reason'].startswith('confirmed-entry:')):
+            if record['id'] not in unavailable_ids:
+                raise ValueError('單行不可達分類缺已驗入口證據：' + record['id'])
 
 
 def observations(path, verified_fields=None):
@@ -271,6 +290,8 @@ def main():
         if m["reach"] == "unreachable" and not m["reason"].strip():
             raise ValueError(f"unreachable 必須附理由：{m['file']} {m['pattern']}")
     c = Census(a.game, map_rows)
+    if c.unused:
+        raise ValueError('未使用分類樣式：' + ', '.join(f'{name}:{pattern}' for name, pattern in c.unused))
     exe_map = [m for m in map_rows if m["file"] == "EXE"]
     static_map = {"screen": "開場字幕", "mechanism": "static", "reach": "normal", "reason": "規格034 靜態覆蓋"}
     statics = {s["candidate_id"]: new_row(s["candidate_id"], "static", static_map, 0, 0, 1, s["source_text"])
@@ -278,7 +299,7 @@ def main():
 
     matrix = json.loads(a.matrix.read_text(encoding="utf-8"))
     # reviewed 限制隨矩陣列保存；模板識別不能升格為原版來源位移證據。
-    key_evidence, source_aliases, field_scopes = {}, {}, {}
+    key_evidence, source_aliases, field_scopes, unavailable_ids = {}, {}, {}, set()
     for row in matrix["rows"]:
         if row.get('census_scope'):
             scope = checked_fields(row, a.game, a.reports, Path(__file__).resolve().parents[1])
@@ -293,6 +314,7 @@ def main():
                     if len(matches) != 1 or matches[0]['id'] != cid:
                         raise ValueError('已驗欄位原始來源不是唯一完整鍵：' + cid)
             field_scopes[row['id']] = scope['fields']
+            unavailable_ids.update(scope.get('unavailable_source_ids', []))
         for cid, grade in row.get("key_evidence", {}).items():
             if grade != "強推論" or not c.by_key(cid):
                 raise ValueError(f"來源鍵證據限制不合法：{cid} {grade}")
@@ -308,6 +330,7 @@ def main():
                 if len(c.by_key(template)) != 1 or len(c.by_key(source)) != 1:
                     raise ValueError(f"來源映射沒有唯一普查列：{template} → {source}")
             source_aliases[row["id"]] = identity["aliases"]
+    verify_unavailable(c, unavailable_ids)
     ambiguous_keys = set(key_evidence) | {cid for aliases in source_aliases.values() for cid in aliases}
     recs = [(row["id"], Path(q)) for row in matrix["rows"] for z in row["zh"]
             for q in sorted(glob.glob(str(a.reports / row["dir"] / (z + ".json"))))]

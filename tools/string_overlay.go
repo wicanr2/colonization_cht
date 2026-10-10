@@ -27,18 +27,20 @@ type woodcutTitle struct {
 }
 
 type stringCatalog struct {
-	dlg       *dialogCatalog    // 定稿術語、NAMES 對照與逐行模板（規格035／036）
-	frags     map[string]string // 片段字典：英文→中文；衝突者為空字串（視為查無）
-	templates []stringTemplate
-	colony    map[string]string // COLONY.TXT 預設名→「中文（原名）」
-	people    map[string]bool   // 目標170：NAMES.TXT @LEADERNAME 的元首名（玩家可改名，顯示原名）
-	owned     map[string]bool   // 專屬欄位已處理的原文，本層不處理
-	fonts     map[int]*dialogFont
-	woodcut   map[string]woodcutTitle // 規格038：經原檔指紋驗證的事件標題。
-	portRoles map[string]map[string]bool
+	dlg        *dialogCatalog    // 定稿術語、NAMES 對照與逐行模板（規格035／036）
+	frags      map[string]string // 片段字典：英文→中文；衝突者為空字串（視為查無）
+	templates  []stringTemplate
+	colony     map[string]string // COLONY.TXT 預設名→「中文（原名）」
+	people     map[string]bool   // 目標170：NAMES.TXT @LEADERNAME 的元首名（玩家可改名，顯示原名）
+	owned      map[string]bool   // 專屬欄位已處理的原文，本層不處理
+	fonts      map[int]*dialogFont
+	woodcut    map[string]woodcutTitle // 規格038：經原檔指紋驗證的事件標題。
+	portRoles  map[string]map[string]bool
+	viewTribes map[string]bool // 規格038：指定NAMES版本的原住民主名稱。
 
-	routeLand string // 規格038 READY：只供已驗第一路線Land欄。
-	slotEmpty string // 規格038：只供存讀檔槽位，不加入通用字典。
+	customModerate string // 規格038 READY：只供自訂頁既有Moderate譯文。
+	routeLand      string // 規格038 READY：只供已驗第一路線Land欄。
+	slotEmpty      string // 規格038：只供存讀檔槽位，不加入通用字典。
 }
 
 const (
@@ -98,6 +100,7 @@ func verifiedRaw(files map[string][]byte, file, fileSHA, offset, length, rawSHA,
 // loadStringCatalog 建立片段字典（海上詞典、語料清冊與譯稿的 LABELS／NAMES／WOODCUT 單行列）、模板與殖民地名稱。
 func loadStringCatalog(dlg *dialogCatalog, templates, sea, corpus, draft, colony []byte, files map[string][]byte) (*stringCatalog, error) {
 	c := &stringCatalog{dlg: dlg, frags: map[string]string{}, colony: map[string]string{}, owned: map[string]bool{}, people: map[string]bool{}, woodcut: map[string]woodcutTitle{}}
+	c.viewTribes = verifiedViewTribes(files["NAMES.TXT"])
 	if names, ok := files["NAMES.TXT"]; ok {
 		section := ""
 		for _, line := range strings.Split(string(names), "\r\n") {
@@ -110,6 +113,9 @@ func loadStringCatalog(dlg *dialogCatalog, templates, sea, corpus, draft, colony
 		}
 	}
 	c.portRoles = portKinds(files["NAMES.TXT"])
+	if dlg != nil {
+		dlg.voyageRoles = c.portRoles
+	}
 	single := func(raw, zh string) bool {
 		return zh != "" && !strings.Contains(raw, "\r\n") && !strings.ContainsAny(raw, "~#@^") && !strings.ContainsAny(zh, "~#^{}")
 	}
@@ -143,6 +149,9 @@ func loadStringCatalog(dlg *dialogCatalog, templates, sea, corpus, draft, colony
 			c.addFrag(raw, r["zh_hant"])
 			if f == "WOODCUT.TXT" {
 				c.addWoodcut(raw, r["message_id"], r["zh_hant"])
+			}
+			if dlg != nil && r["message_id"] == "LABELS.TXT:@ROUTE:0x00000B57" && r["text_offset"] == "0x00000B57" && r["text_byte_length"] == "20" && raw == "(Delete Destination)" {
+				dlg.routeDeleteChoice = r["zh_hant"]
 			}
 			if r["message_id"] == "LABELS.TXT:@ROUTE:0x00000B2A" && r["text_offset"] == "0x00000B2A" && r["text_byte_length"] == "4" && raw == "Land" {
 				c.routeLand = r["zh_hant"]
@@ -205,6 +214,22 @@ func loadStringCatalog(dlg *dialogCatalog, templates, sea, corpus, draft, colony
 		}
 		seen[t.id] = true
 		c.templates = append(c.templates, t)
+	}
+
+	for _, row := range tsvRows(draft) {
+		if row["candidate_id"] != "LABELS.TXT:0x000008B8" {
+			continue
+		}
+		raw, ok, e := verifiedRaw(files, row["source_file"], row["source_sha256"], row["byte_offset"], row["source_byte_length"], row["source_bytes_sha256"], row["candidate_id"])
+		if e != nil {
+			return nil, e
+		}
+		if ok && raw == "Moderate" && row["zh_hant"] != "" {
+			if c.customModerate != "" {
+				return nil, fmt.Errorf("自訂頁值重複")
+			}
+			c.customModerate = row["zh_hant"]
+		}
 	}
 	return c, nil
 }
@@ -642,6 +667,19 @@ func (s *stringRuntime) outline(r *stringRun) *stringRun {
 	m := *r
 	m.outline, m.outlineC = true, oc
 	m.outlineInk = li.Union(l.outlineInk).Union(ri)
+	// 規格038 READY：完全同位置、同印字點的覆寫沒有可見描邊。
+	sameMask := li == ri && len(l.lastVal) == len(r.lastVal)
+	for index := range l.lastVal {
+		if _, ok := r.lastVal[index]; !ok {
+			sameMask = false
+		}
+	}
+	if sameMask {
+		m.outline = false
+		m.outlineC = 0
+		m.outlineInk = image.Rectangle{}
+	}
+
 	m.firstOld, m.lastVal = map[int]byte{}, map[int]byte{}
 	for i, v := range l.firstOld {
 		m.firstOld[i] = v
@@ -686,10 +724,14 @@ func (s *stringRuntime) finish(r *stringRun, canvas []byte, step uint64, panel i
 	if ink.Empty() {
 		return nil, ""
 	}
-	if s.cat.isOwned(text) {
+	custom := s.customSettingsContext(r, ink, capH, canvas)
+	if s.cat.isOwned(text) && !custom {
 		return nil, "owned-by-field"
 	}
 	if len(r.colors) != 1 {
+		if custom {
+			return s.finishCustomTitle(r, ink, capH, canvas, step)
+		}
 		return s.finishWoodcut(r, ink, capH, canvas, step)
 	}
 	var color byte
@@ -706,6 +748,15 @@ func (s *stringRuntime) finish(r *stringRun, canvas []byte, step uint64, panel i
 		return nil, "other-writer"
 	}
 	zh, id, why := s.translateObserved(text, canvas)
+	if custom && text == "Moderate" && s.cat.customModerate != "" {
+		zh, id, why = s.cat.customModerate, "custom-settings-moderate", ""
+	}
+	if value, key, ok := s.voyageFieldTranslate(r, face, capH, color); ok {
+		zh, id, why = value, key, ""
+	}
+	if value, key, ok := s.viewFieldTranslate(r, face, capH, color); ok {
+		zh, id, why = value, key, ""
+	}
 	if value, key, ok := s.routeTitleTranslate(text, face, capH, color); ok {
 		zh, id, why = value, key, ""
 	}
@@ -723,6 +774,14 @@ func (s *stringRuntime) finish(r *stringRun, canvas []byte, step uint64, panel i
 	if value, key, ok := s.portFieldTranslate(r, face, capH, color, canvas); ok {
 		zh, id, why = value, key, ""
 	}
+	if id == "colony" {
+		if area, ok := reportColonyArea(r, face, capH, color, canvas); ok {
+			safe = area
+			if r.others.Overlaps(safe) {
+				return nil, "other-writer"
+			}
+		}
+	}
 	if why != "" {
 		return nil, why
 	}
@@ -731,6 +790,9 @@ func (s *stringRuntime) finish(r *stringRun, canvas []byte, step uint64, panel i
 		// 熱鍵按鈕依規格032 選單列樣式：「(R)」用首字母原色，中文用其餘字母原色。
 		prefix = "(" + string(r.text[0]) + ")"
 	}
+	if buildWagonHeader(r, face, capH, color, canvas) {
+		safe.Max.Y = 138
+	}
 	limit, shadow := safe.Dx()*4, 0
 	if !panel.Empty() && ink.In(panel) {
 		// 設計第 6 點（狀態欄樣式）：安全區延伸到欄右緣，右界留 2 輸出像素給陰影。
@@ -738,7 +800,7 @@ func (s *stringRuntime) finish(r *stringRun, canvas []byte, step uint64, panel i
 		limit, shadow = safe.Dx()*4, 2
 	}
 	shadowC := byte(0)
-	if r.outline {
+	if r.outline && !(id == "voyage-ship-header" && r.outlineC == color && r.outlineInk == face) {
 		shadow, shadowC = -4, r.outlineC // 負值：描邊（字形向四周各擴 4 輸出像素）
 	}
 	sh, n, ac, size := s.cat.stringMasks(prefix, zh, face, safe, capH, limit, shadow)
@@ -754,8 +816,80 @@ func (s *stringRuntime) finish(r *stringRun, canvas []byte, step uint64, panel i
 	for i, v := range r.firstOld {
 		before[i] = v
 	}
+	if previous := s.reprintBackground(r, "STRING:"+id, ink, safe, color, canvas); previous != nil {
+		for y := safe.Min.Y; y < safe.Max.Y; y++ {
+			copy(before[y*320+safe.Min.X:y*320+safe.Max.X], previous[(y-safe.Min.Y)*safe.Dx():(y-safe.Min.Y+1)*safe.Dx()])
+		}
+	}
 	return &stringItem{id: "STRING:" + id, text: text, zh: prefix + zh, ink: ink, safe: safe, color: color, accentColor: r.keyColor, shadowColor: shadowC,
 		size: size, shadowOff: shadow, shadow: sh, norm: n, accent: ac, before: stringRect(before, safe), after: stringRect(canvas, safe), phase: "waiting-screen", complete: step}, ""
+}
+
+// 規格038 READY：場景、原版字級與位置符合時，使用已量測的報表城名區域。
+func reportColonyArea(r *stringRun, face image.Rectangle, capH int, color byte, canvas []byte) (image.Rectangle, bool) {
+	if r.outline || r.buf2 || r.mixed || capH != 5 || color != 146 || len(canvas) != 64000 {
+		return image.Rectangle{}, false
+	}
+	header := fmt.Sprintf("%x", sha256.Sum256(stringRect(canvas, image.Rect(90, 4, 220, 20))))
+	switch header {
+	case "06aa8bea2c3407960279472d93c5bfcf367e6271d1601af9000e721cf6bb025b":
+		if face.Min == image.Pt(2, 44) && face.Max.Y == 50 && face.Max.X <= 86 {
+			return image.Rect(1, 43, 86, 51), true
+		}
+	case "3bad9cb4bf2a5d7e90b16d728ca1a274abe2003c9ec7599c1a160f0c39585a55", "0960c4624f12a1f820147937a1be1579d3cdadda239fdd8813e1e6bc522e9296":
+		if face.Min == image.Pt(25, 27) && face.Max.Y == 33 && face.Max.X <= 111 {
+			return image.Rect(24, 26, 111, 34), true
+		}
+	}
+	return image.Rectangle{}, false
+}
+
+// 規格038 READY：只取來源已驗的TRIBES主名稱，不解讀技術等級、色盤或規則。
+func verifiedViewTribes(names []byte) map[string]bool {
+	if fmt.Sprintf("%x", sha256.Sum256(names)) != "4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061" {
+		return nil
+	}
+	result := map[string]bool{}
+	inside := false
+	for _, line := range strings.Split(string(names), "\r\n") {
+		line = strings.TrimSpace(line)
+		if strings.HasPrefix(line, "@") {
+			inside = line == "@TRIBES"
+			continue
+		}
+		if !inside || line == "" || strings.HasPrefix(line, ";") {
+			continue
+		}
+		if word := strings.TrimSpace(strings.SplitN(line, ",", 2)[0]); word != "" {
+			result[word] = true
+		}
+	}
+	return result
+}
+
+var viewLocationPattern = regexp.MustCompile(`^Locat: \(([0-9]+), ([0-9]+)\) ([0-9]+)$`)
+
+// 規格038 READY：View側欄整則替換；座標尾值未知，保留原數字。
+func (s *stringRuntime) viewFieldTranslate(r *stringRun, face image.Rectangle, capH int, color byte) (string, string, bool) {
+	if r.outline || r.buf2 || r.mixed || capH != 5 || color != 68 || face.Min.X != 242 || face.Max.X >= 320 {
+		return "", "", false
+	}
+	text := string(r.text)
+	if face.Min.Y == 68 && face.Max.Y == 74 {
+		m, prefix := viewLocationPattern.FindStringSubmatch(text), s.cat.lookup("Locat:")
+		if m != nil && prefix != "" {
+			return prefix + "（" + m[1] + ", " + m[2] + "） " + m[3], "view-location", true
+		}
+	}
+	if face.Min.Y == 75 && face.Max.Y == 81 && strings.HasSuffix(text, " Land") {
+		name := strings.TrimSuffix(text, " Land")
+		if s.cat.viewTribes[name] {
+			if zh := s.cat.lookup(name); zh != "" {
+				return zh + "的土地", "view-tribe-land", true
+			}
+		}
+	}
+	return "", "", false
 }
 
 // 地圖視窗（目標178）：標籤必須完整落在此範圍內。
@@ -1294,13 +1428,24 @@ func cargoHeldAllowed(it *stringItem, indexed []byte, cursor image.Rectangle, di
 	return bytes.Equal(stringRect(indexed, it.safe), it.after)
 }
 
-// 規格038 READY：只採已觀測第一路線、原生位置與原VGA當次內容。
+// 規格038 READY：只接受實際兩個標題的全文及原版字格。
+func routeTitleSafe(text string, safe image.Rectangle) bool {
+	switch text {
+	case "EDIT TRADE ROUTE 1":
+		return safe == image.Rect(127, 4, 193, 11)
+	case "EDIT TRADE ROUTE 2":
+		return safe == image.Rect(127, 4, 194, 11)
+	}
+	return false
+}
+
+// 規格038 READY：只採已觀測路線1／2、原生位置與原VGA當次內容。
 func (s *stringRuntime) routeEditorContext(canvas []byte) bool {
 	if s == nil || s.cat == nil || len(canvas) != 64000 {
 		return false
 	}
 	for _, it := range s.items {
-		if it == nil || it.id != "STRING:template:route-editor-title" || it.text != "EDIT TRADE ROUTE 1" || it.safe != image.Rect(127, 4, 193, 11) || it.color != 15 || it.size < 15 || it.size > 22 || (it.phase != "active" && it.phase != "waiting-screen") || len(it.after) != (193-127)*(11-4) {
+		if it == nil || it.id != "STRING:template:route-editor-title" || !routeTitleSafe(it.text, it.safe) || it.color != 15 || it.size < 15 || it.size > 22 || (it.phase != "active" && it.phase != "waiting-screen") || len(it.after) != it.safe.Dx()*it.safe.Dy() {
 			continue
 		}
 		if bytes.Equal(stringRect(canvas, it.safe), it.after) {
@@ -1328,18 +1473,18 @@ func (s *stringRuntime) routePortTranslate(text string, lineIndex int, canvas []
 
 // 規格038 READY：標題模板不進通用匹配，玩家命名與其他欄位保持原有路徑。
 func (s *stringRuntime) routeTitleTranslate(text string, face image.Rectangle, capH int, color byte) (string, string, bool) {
-	if s == nil || s.cat == nil || text != "EDIT TRADE ROUTE 1" || face != image.Rect(128, 5, 192, 10) || capH != 5 || color != 15 || s.cat.lookup("EDIT TRADE ROUTE") == "" {
+	if s == nil || s.cat == nil || !routeTitleSafe(text, face.Inset(-1)) || capH != 5 || color != 15 || s.cat.lookup("EDIT TRADE ROUTE") == "" {
 		return "", "", false
 	}
 	for _, tpl := range s.cat.templates {
 		if tpl.id == "route-editor-title" && tpl.re.MatchString(text) {
-			return strings.ReplaceAll(tpl.zh, "{n1}", "1"), "template:" + tpl.id, true
+			return strings.ReplaceAll(tpl.zh, "{n1}", strings.TrimPrefix(text, "EDIT TRADE ROUTE ")), "template:" + tpl.id, true
 		}
 	}
 	return "", "", false
 }
 
-// 規格038 READY：已觀測第一路線的前兩個目的地城市欄。
+// 規格038 READY：已觀測四列的城市名稱與第三列London母港。
 func (s *stringRuntime) routeGridTranslate(text string, face image.Rectangle, capH int, color byte, canvas []byte) (string, image.Rectangle, bool) {
 	if capH != 5 || color != 15 || !s.routeEditorContext(canvas) {
 		return "", image.Rectangle{}, false
@@ -1355,6 +1500,10 @@ func (s *stringRuntime) routeGridTranslate(text string, face image.Rectangle, ca
 		start, bottom = image.Pt(11, 69), 75
 	case "2":
 		start, bottom = image.Pt(10, 89), 95
+	case "3":
+		start, bottom = image.Pt(10, 109), 115
+	case "4":
+		start, bottom = image.Pt(10, 129), 135
 	default:
 		return "", image.Rectangle{}, false
 	}
@@ -1362,6 +1511,10 @@ func (s *stringRuntime) routeGridTranslate(text string, face image.Rectangle, ca
 		return "", image.Rectangle{}, false
 	}
 	zh, known := s.cat.colony[name]
+	if index == "3" && name == "London" && s.cat.portRoles["port"][name] {
+		zh = s.cat.lookup(name)
+		known = zh != ""
+	}
 	if !known || zh == "" {
 		return "", image.Rectangle{}, false
 	}
@@ -1382,6 +1535,10 @@ func (s *stringRuntime) retireRouteGrid(text string, ink image.Rectangle) []*str
 		start = image.Pt(11, 69)
 	case "2":
 		start = image.Pt(10, 89)
+	case "3":
+		start = image.Pt(10, 109)
+	case "4":
+		start = image.Pt(10, 129)
 	default:
 		return nil
 	}
@@ -1437,6 +1594,8 @@ func portKinds(names []byte) map[string]map[string]bool {
 		}
 		role := ""
 		switch section {
+		case "@COUNTRY":
+			role = "country"
 		case "@NATIONALITY":
 			role = "nation"
 		case "@JOB":
@@ -1445,13 +1604,20 @@ func portKinds(names []byte) map[string]map[string]bool {
 			role = "cargo"
 		case "@UNIT":
 			role = "unit"
+		case "@HOMEPORT":
+			role = "port"
 		}
 		if role == "" {
 			continue
 		}
 		word := strings.TrimSpace(strings.SplitN(line, ",", 2)[0])
 		if role == "unit" && word != "Colonists" {
-			continue
+			switch word {
+			case "Caravel", "Merchantman", "Galleon", "Privateer", "Frigate", "Man-O-War":
+				role = "ship"
+			default:
+				continue
+			}
 		}
 		if result[role] == nil {
 			result[role] = map[string]bool{}
@@ -1529,6 +1695,11 @@ func (s *stringRuntime) portFieldTranslate(r *stringRun, face image.Rectangle, c
 	if r.outline || r.buf2 || r.mixed || capH != 5 || !portScene(canvas) {
 		return "", "", false
 	}
+	if color == 149 && face.Min.Y == 1 && face.Max.Y == 7 && face.Min.X >= 1 && face.Max.X < 320 {
+		if zh, ok := s.cat.portShipHeader(string(r.text)); ok {
+			return zh, "port-ship-header", true
+		}
+	}
 	var ids []string
 	switch {
 	case color == 149 && face.Min.Y == 1 && face.Max.Y == 7 && face.Min.X >= 1 && face.Max.X < 320:
@@ -1542,6 +1713,27 @@ func (s *stringRuntime) portFieldTranslate(r *stringRun, face image.Rectangle, c
 		}
 	}
 	return "", "", false
+}
+
+var portShipHeaderPattern = regexp.MustCompile(`^([A-Za-z]+) (.+) in (.+)$`)
+
+// 規格038 READY：只替換來源分類與港口場景皆已核對的船隻頂列整則訊息。
+func (c *stringCatalog) portShipHeader(text string) (string, bool) {
+	m := portShipHeaderPattern.FindStringSubmatch(strings.TrimSpace(text))
+	if m == nil {
+		return "", false
+	}
+	values := make([]string, 3)
+	for i, role := range []string{"nation", "ship", "port"} {
+		if !c.portRoles[role][m[i+1]] {
+			return "", false
+		}
+		values[i] = c.lookup(m[i+1])
+		if values[i] == "" {
+			return "", false
+		}
+	}
+	return values[0] + values[1] + "，位於" + values[2], true
 }
 
 // addWoodcut 保留完整來源身份；同文異鍵或異譯永久拒絕，不借用通用片段字典。
@@ -1678,4 +1870,165 @@ func (s *stringRuntime) woodcutVisible(indexed []byte, cursor image.Rectangle) b
 		}
 	}
 	return false
+}
+
+// 規格038 READY：整串詞槽、原版欄位與指定版本名稱角色。
+var voyageHeaderPattern = regexp.MustCompile(`^([A-Za-z]+) (.+) (Sailing For|Now Arriving In) (.+)$`)
+
+func (s *stringRuntime) voyageFieldTranslate(r *stringRun, face image.Rectangle, capH int, color byte) (string, string, bool) {
+	if r.buf2 || r.mixed || capH != 5 || color != 149 {
+		return "", "", false
+	}
+	text := strings.TrimSpace(string(r.text))
+	if !r.outline && face.Min == image.Pt(242, 93) && face.Max.Y == 98 && face.Max.X < 320 && strings.HasPrefix(text, "Go To ") {
+		name := strings.TrimPrefix(text, "Go To ")
+		if s.cat.portRoles["port"][name] {
+			if zh := s.cat.lookup(name); zh != "" {
+				return "前往" + zh, "voyage-go-to", true
+			}
+		}
+	}
+	if face.Min.Y != 1 || face.Max.Y != 7 || face.Min.X < 1 || face.Max.X >= 320 {
+		return "", "", false
+	}
+	m := voyageHeaderPattern.FindStringSubmatch(text)
+	if m == nil {
+		return "", "", false
+	}
+	vals := make([]string, 3)
+	for i, role := range []string{"nation", "ship", "port"} {
+		raw := m[[]int{1, 2, 4}[i]]
+		if !s.cat.portRoles[role][raw] {
+			return "", "", false
+		}
+		vals[i] = s.cat.lookup(raw)
+		if vals[i] == "" {
+			return "", "", false
+		}
+	}
+	action := s.cat.lookup(m[3])
+	if action == "" {
+		return "", "", false
+	}
+	return vals[0] + vals[1] + "，" + action + vals[2], "voyage-ship-header", true
+}
+
+// 規格038 READY：原版自訂頁標題指紋與三欄原始字格共同限定。
+func (s *stringRuntime) customSettingsContext(r *stringRun, face image.Rectangle, capH int, canvas []byte) bool {
+	if len(canvas) != 64000 || r.buf2 || r.mixed || fmt.Sprintf("%x", sha256.Sum256(stringRect(canvas, image.Rect(100, 0, 220, 14)))) != "4a6a6ec04147c5284c155b21262d001f49674c8a115db3c558ad0c213d190013" {
+		return false
+	}
+	switch string(r.text) {
+	case "CUSTOMIZE NEW WORLD":
+		return !r.outline && capH == 8 && face == image.Rect(106, 4, 214, 12) && len(r.colors) == 3 && r.colors[0] > 0 && r.colors[253] > 0 && r.colors[254] > 0
+	case "(Click Here When Finished)":
+		return !r.outline && capH == 5 && face == image.Rect(116, 190, 205, 195) && len(r.colors) == 1 && r.colors[254] > 0
+	case "Moderate":
+		return r.outline && r.outlineC == 0 && capH == 5 && face == image.Rect(30, 101, 62, 107) && r.outlineInk == image.Rect(30, 101, 63, 107) && len(r.colors) == 1 && r.colors[14] > 0
+	}
+	return false
+}
+func (s *stringRuntime) finishCustomTitle(r *stringRun, ink image.Rectangle, capH int, canvas []byte, step uint64) (*stringItem, string) {
+	zh, _, why := s.cat.translate(string(r.text))
+	if why != "" {
+		return nil, why
+	}
+	safe := ink.Inset(-1)
+	if r.others.Overlaps(safe) || len(r.lastVal) < 3 || len(r.lastVal) != len(r.firstOld) {
+		return nil, "custom-source-changed"
+	}
+	for i, value := range r.lastVal {
+		_, old := r.firstOld[i]
+		if !old || i < 0 || i >= len(canvas) || !image.Pt(i%320, i/320).In(ink) || canvas[i] != value || (value != 0 && value != 253 && value != 254) {
+			return nil, "custom-source-changed"
+		}
+	}
+	sh, n, ac, px := s.cat.woodcutMasks(zh, ink, safe, capH)
+	if n == nil {
+		return nil, "does-not-fit"
+	}
+	before := append([]byte(nil), canvas...)
+	for i, v := range r.firstOld {
+		before[i] = v
+	}
+	return &stringItem{id: "STRING:custom-settings-title", text: string(r.text), zh: zh, ink: ink, safe: safe, color: 254, shadowColor: 0, accentColor: 253, size: px, shadowOff: 4, shadow: sh, norm: n, accent: ac, before: stringRect(before, safe), after: stringRect(canvas, safe), phase: "waiting-screen", complete: step}, ""
+}
+
+func buildWagonHeader(r *stringRun, face image.Rectangle, capH int, color byte, canvas []byte) bool {
+	if string(r.text) != "Wagon Train" || r.outline || r.buf2 || r.mixed || capH != 5 || color != 57 || face != image.Rect(236, 132, 277, 138) || len(canvas) != 64000 {
+		return false
+	}
+	return fmt.Sprintf("%x", sha256.Sum256(stringRect(canvas, image.Rect(304, 128, 319, 143)))) == "290379b8d45c8cf0a8a0f6bd98027a0d0b493b86be0a111e12ac381b457d6e0d"
+}
+
+// 規格038 READY：同字格原字前景完全覆寫，且背景沒有變化時才沿用已驗印前值。
+func (s *stringRuntime) reprintBackground(r *stringRun, id string, ink, safe image.Rectangle, color byte, canvas []byte) []byte {
+	if r == nil || r.buf2 || r.mixed || r.outline || r.others.Overlaps(safe) || len(canvas) != 64000 {
+		return nil
+	}
+	for _, old := range s.items {
+		if old == nil || old.id != id || old.text != string(r.text) || old.ink != ink || old.safe != safe || (old.phase != "active" && old.phase != "waiting-screen") || old.color == color || len(old.before) != safe.Dx()*safe.Dy() || len(old.after) != len(old.before) {
+			continue
+		}
+		total := 0
+		valid := true
+		for y := safe.Min.Y; y < safe.Max.Y; y++ {
+			for x := safe.Min.X; x < safe.Max.X; x++ {
+				at := y*320 + x
+				local := (y-safe.Min.Y)*safe.Dx() + x - safe.Min.X
+				if old.before[local] != old.after[local] {
+					total++
+					first, ok1 := r.firstOld[at]
+					last, ok2 := r.lastVal[at]
+					valid = valid && ok1 && ok2 && first == old.after[local] && old.after[local] == old.color && last == color && canvas[at] == color
+				} else {
+					valid = valid && canvas[at] == old.after[local]
+				}
+			}
+		}
+		if valid && total > 0 && total == len(r.firstOld) && total == len(r.lastVal) {
+			return append([]byte(nil), old.before...)
+		}
+	}
+	return nil
+}
+
+// 規格038 READY：四邊完整且包住已驗文字safe，才保護原版不透明彈窗。
+func closedDialogFrame(canvas []byte, safe image.Rectangle) (image.Rectangle, bool) {
+	no := image.Rectangle{}
+	if len(canvas) != 64000 || safe.Empty() || !safe.In(image.Rect(2, 2, 318, 198)) {
+		return no, false
+	}
+	x, y := safe.Min.X-1, safe.Min.Y-1
+	l, r, t, b := x, safe.Max.X, y, safe.Max.Y
+	for l > 0 && canvas[y*320+l] != 0 {
+		l--
+	}
+	for r < 319 && canvas[y*320+r] != 0 {
+		r++
+	}
+	for t > 0 && canvas[t*320+x] != 0 {
+		t--
+	}
+	for b < 199 && canvas[b*320+x] != 0 {
+		b++
+	}
+	if l <= 0 || r >= 319 || t <= 0 || b >= 199 {
+		return no, false
+	}
+	frame := image.Rect(l, t, r+1, b+1)
+	if !safe.In(frame.Inset(1)) {
+		return no, false
+	}
+	for xx := l; xx <= r; xx++ {
+		if canvas[t*320+xx] != 0 || canvas[b*320+xx] != 0 {
+			return no, false
+		}
+	}
+	for yy := t; yy <= b; yy++ {
+		if canvas[yy*320+l] != 0 || canvas[yy*320+r] != 0 {
+			return no, false
+		}
+	}
+	return frame, true
 }

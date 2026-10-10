@@ -12,6 +12,8 @@ MISSIONARY_EVIDENCE_SHA='f78d6fd6c608e89aba8101a5f7cb17dd0eaddaca536956d668ca64d
 MISSIONARY_ROOTS={'gui':'europe-missionary-formal-gui-v213','build':'europe-missionary-formal-build-v212','verify':'europe-missionary-formal-verify-v214','ready':'europe-missionary-prototype-verify-v211','baseline':'europe-dock-formal-build-v201'}
 FRONT_EVIDENCE_SHA='4b65c62b9c8c1840d79ae197605590d13e485dcdba01270717e9aa2536e3b5df'
 FRONT_ROOTS={'gui':'europe-dock-seven-formal-gui-v224','build':'europe-dock-seven-formal-build-v223','verify':'europe-dock-seven-formal-verify-v225','ready':'europe-dock-seven-prototype-verify-v222','baseline':'europe-missionary-formal-build-v212'}
+BOARD_EVIDENCE_SHA='d0818ae05f94b94d64c9e96747efe3ef9c9f47b077c9ac439f71ded9b06cea8b'
+BOARD_ROOTS={'gui':'europe-board-seven-formal-gui-v233','build':'europe-board-seven-formal-build-v232','verify':'europe-board-seven-formal-verify-v234','ready':'europe-board-seven-prototype-verify-v231','baseline':'europe-dock-seven-formal-build-v223'}
 ARM='GAME.TXT:@ARMOPTIONS:0x000098AC'
 ARM_SOURCE='GAME.TXT:@ARMOPTIONS'
 LABEL='LABELS.TXT:@MISC:0x00000205'
@@ -207,12 +209,87 @@ def verify_missionary(game,root,out,freeze_required=True,side='missionary'):
  scope='僅一種已觀測七列碼頭清單與正常移到最前面後兩清單；未驗Board七列或單位標題' if front else '僅兩種已觀測傳教士三列清單與正常取消後復原；未驗移到碼頭最前面或單位標題'
  return {'result':'PASS','grade':'confirmed','side':side,'field_count':profile_count,'verified_fields':fields,'normal_GUI':19,'original_final_sides':6,'inputs_sha256':proof['inputs_sha256'],'all_saves':proof['saves'],'changed_shots':changed,'areas':areas,'final_step':proof['end'],'final_memory_sha256':proof['memory_sha256'],'evidence_sha256':evidence,'scope':scope}
 
+def verify_board(game,root,out,freeze_required=True):
+ b=out.parent;roots=BOARD_ROOTS;g=b/roots['gui'];build=b/roots['build']
+ needle=('Board next ship.','Move to front of dock.');names=['rear-board-options'];safe=[81,66,236,150]
+ assert root.resolve()==g.resolve(),'GUI來源不同'
+ if freeze_required:
+  assert SHA(out/'batch.json')==BOARD_EVIDENCE_SHA,'reviewed manifest differs'
+  batch=json.loads((out/'batch.json').read_text());assert batch['schema']==1 and batch['roots']==roots
+  for name,digest in batch['original_files'].items():assert SHA(game/name)==digest,('original version differs',name)
+  for key,files in batch['artifact_hashes'].items():
+   for rel,digest in files.items():
+    p=Path(rel);assert not p.is_absolute() and '..' not in p.parts
+    assert SHA(b/roots[key]/p)==digest,('receipt differs',key,rel)
+ assert json.loads((b/roots['ready']/'ready-evidence.json').read_text())['status']=='READY_ONE_BOARD_SEVEN_DOCK_FIELD'
+ proof=json.loads((out/'gui-integrity.json').read_text());shots=proof['shots'];assert len(shots)==21
+ assert proof['root']==g.name and SHA(g/'formal-gui.inputs.json')==proof['inputs_sha256']
+ assert dict((n,int(s)) for n,s in [x.split() for x in (g/'formal-gui.shots').read_text().splitlines()])==shots
+ docs={tag:load(out/tag) for tag in ['zh','control','observer','baseline','noatlas']};gui=load(g/'formal-gui');control=docs['control']
+ assert gui[0]['state']['steps']==proof['end'] and gui[0]['state']['memory_sha256']==proof['memory_sha256']
+ for tag,d in dict(docs,gui=gui).items():
+  if tag!='control':same_state(d,control,tag+' 原版狀態改變')
+  assert sav(g/'scratch' if tag=='gui' else out/(tag+'-save'))==proof['saves'],tag+' 存檔改變'
+  if tag!='gui':
+   for ext in ['json','memory']:assert SHA(g/(tag+'.'+ext))==SHA(out/(tag+'.'+ext)),'矩陣收據連結不同'
+ assert proof['saves']['COLONY03.SAV']=='d3a462e709e59845af7d2f56a6a504429bc899ebc751964e647a2be69b381c77'
+ cps={tag:cp(d) for tag,d in docs.items()}
+ for tag,rows in cps.items():
+  assert set(rows)==set(shots.values()),tag+' 取樣不足'
+  for step,c in rows.items():assert all(c[k]==cps['control'][step][k] for k in ['memory_sha256','raw_sha256','palette_sha256']),tag+' 原始畫面不同'
+ events=docs['zh'][0]['events'];active=active_fields(events)
+ source=[e for e in events if e.get('stage')=='source' and str(e.get('candidate_id','')).startswith(ARM+'#') and all(n in e.get('shown','') for n in needle)]
+ layouts=json.loads((build/'board-layout.json').read_text());profiles={x['shown']:x for x in layouts};assert len(profiles)==1
+ runs=lines(out/'sea-observer-measure/runs.jsonl');measures=lines(out/'sea-observer-measure/lines.jsonl')
+ for e in source:
+  raw=[x for x in runs if x['start']==e['step'] and x['base']==e['source_linear'] and x['shown']==e['shown']];assert len(raw)==1
+  r=raw[0];assert e['entry_ip']=='0D21:00C6' and e['items']==[x['shown'] for x in r['lines']]
+  assert (r['normal_c'],r['accent_c'],r['shadow_c'])==(68,149,47)
+  assert [l['box']['Min']['Y'] for l in r['lines']]==list(range(67,140,12)) and all(l['cap_h']==8 and l['box']['Min']['X']==82 for l in r['lines'])
+  assert e['shown'] in profiles and e['font_px']==30 and e['safe']==rect(profiles[e['shown']]['safe'])==safe
+  mm=[x for x in measures if x['start']==e['step'] and x['base']==e['source_linear'] and x['shown']==e['shown']];assert len(mm)==1;m=mm[0]
+  assert m['actual_px']==30 and m['cap_h']==8 and m['pitch']==12 and m['overflow_px']==0 and rect(m['safe'])==e['safe']
+  assert [x['candidate_px'] for x in m['candidate_sizes']]==list(range(30,19,-1)) and rect(m['actual_ink'])==rect(profiles[e['shown']]['actual_ink'])
+  assert (e['candidate_id'],e['shown'],tuple(e['safe'])) in active,'清單未啟用'
+ assert source and set(e['shown'] for e in source)==set(profiles)
+ queries=json.loads((out/'source/source-query.log.matches.json').read_text())
+ assert (queries['final_step'],queries['memory_sha256'],queries['inputs_sha256'])==(proof['end'],proof['memory_sha256'],proof['inputs_sha256']) and sav(out/'source/scratch')==proof['saves']
+ matches=[x for x in queries['matches'] if x['header']==x['key']=='@ARMOPTIONS'];assert len(matches)==4
+ assert all(x['code_bytes']=='f3a6' and x['original_cs_ip']=='0E2D:0832' and x['file_op']['Name']=='GAME.TXT' and x['file_op']['Pos']<=39071<x['file_op']['Pos']+x['file_op']['Len'] for x in matches)
+ captures=lines(g/'formal-gui.capture-attempts.jsonl');changed=[];fields=[];seen=set();areas={}
+ for name,step in shots.items():
+  ims={tag:Image.open(png_for(out,tag,rows[step])).convert('RGB') for tag,rows in cps.items()};normal=Image.open(g/f'formal-gui.{name}.png').convert('RGB');z=ims['zh']
+  caps=[x for x in captures if x['name']==name and x['aligned']];assert len(caps)==1;c=caps[0]
+  assert c['stable'] and c['frame_step']==step and c['canvas_size']==c['capture_size']==list(normal.size)==[1280,800]
+  assert hashlib.sha256(normal.convert('RGBA').tobytes()).hexdigest()==c['canvas_rgba_sha256']==c['capture_rgba_sha256']
+  assert ImageChops.difference(z,normal).getbbox() is None and ImageChops.difference(z,ims['observer']).getbbox() is None,name+' GUI或觀測畫面不同'
+  allowed=[]
+  if name in names:
+   es=[e for e in source if e['step']<=step];assert es;e=es[-1];assert step-e['step']<10000000;allowed=[e['safe']]
+   box=tuple(v*4 for v in e['safe']);assert ImageChops.difference(z,ims['control']).crop(box).getbbox() is not None
+   assert ImageChops.difference(ims['noatlas'],ims['control']).crop(box).getbbox() is None,'缺圖集未回原文'
+   if e['shown'] not in seen:fields.append({'candidate_id':e['candidate_id'],'shown':e['shown'],'safe':e['safe'],'source_ids':[ARM_SOURCE]});seen.add(e['shown'])
+  diff=ImageChops.difference(z,ims['baseline'])
+  if diff.getbbox() is not None:changed.append(name)
+  inside(diff,allowed);areas[name]=allowed
+ assert changed==names and len(fields)==1
+ restored=[r for r in runs if r['start']<=shots['unit1-six-options'] and len(r['lines'])==6 and r['lines'][0]['shown']=="Don't get on next ship."]
+ assert restored and shots['unit1-six-options']-restored[-1]['start']<10000000
+ assert restored[-1]['lines'][-2]['shown']=='Bless as Missionaries.' and restored[-1]['lines'][-1]['shown']=='No changes.'
+ assert shots['rear-seven-options']<shots['rear-board-options']
+ assert not any(e.get('stage')=='source' and all(n in e.get('shown','') for n in needle) for e in docs['noatlas'][0]['events'])
+ for log,count in [('tests.log',142),('build-entry-tests.log',138)]:
+  s=(build/log).read_text();assert s.count('--- PASS:')==count and '--- SKIP:' not in s
+ for n in ['dialog.go','strings.go','adapter.go']:assert (build/n).read_bytes()==(build/'stable-build'/n).read_bytes()
+ assert (build/'font/string-atlas.json').read_bytes()==(b/roots['baseline']/'font/string-atlas.json').read_bytes()
+ return {'result':'PASS','grade':'confirmed','side':'board','field_count':1,'verified_fields':fields,'normal_GUI':21,'original_final_sides':6,'inputs_sha256':proof['inputs_sha256'],'all_saves':proof['saves'],'changed_shots':changed,'areas':areas,'final_step':proof['end'],'final_memory_sha256':proof['memory_sha256'],'evidence_sha256':BOARD_EVIDENCE_SHA,'scope':'僅一種已觀測Board七列碼頭清單與登船切換後重開；未驗單位標題或其他局勢'}
+
 def main():
  p=argparse.ArgumentParser(description=__doc__)
  for n in ['game','reports','evidence']:p.add_argument('--'+n,type=Path,required=True)
- p.add_argument('--side',choices=['purchase','dock','missionary','front'],required=True);a=p.parse_args()
+ p.add_argument('--side',choices=['purchase','dock','missionary','front','board'],required=True);a=p.parse_args()
  if any(not(a.game/n).is_file() for n in ['OPENING.EXE','VICEROY.EXE','MENU.TXT','GAME.TXT','LABELS.TXT','NAMES.TXT','COLONY.TXT']):print('SKIP：缺合法原版，未驗收碼頭清單');return 77
- try:r=verify_missionary(a.game,a.reports,a.evidence,side=a.side) if a.side in ['missionary','front'] else verify(a.game,a.reports,a.evidence,a.side)
+ try:r=verify_missionary(a.game,a.reports,a.evidence,side=a.side) if a.side in ['missionary','front'] else verify_board(a.game,a.reports,a.evidence) if a.side=='board' else verify(a.game,a.reports,a.evidence,a.side)
  except (OSError,ValueError,AssertionError,KeyError,TypeError,IndexError) as e:print('FAIL：'+str(e));return 1
  print(json.dumps(r,ensure_ascii=False,sort_keys=True));return 0
 if __name__=='__main__':raise SystemExit(main())

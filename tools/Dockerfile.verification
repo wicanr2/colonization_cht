@@ -1,9 +1,7 @@
-# 20260930-r1：沿用已存在且含 Go、Ebitengine、Xvfb 與圖像工具的固定映像。
-# 補足研究映像缺少的 Pillow；不掛載主機 runtime 或 Python library。
-FROM eob-remake-go@sha256:39d6e05c9abc60a566e376cde6afd29c24aa21c30eeec1e1fd92c8b16e62aa60
-
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y python3-pil=9.4.0-1.1+deb12u1 \
-    && rm -rf /var/lib/apt/lists/*
+# 20261008-r3：原 eob 基底已不存在，沿用其明確替代映像。
+# Go 1.26.7、Ebitengine 2.9.9、Xvfb、xdotool、ImageMagick、Pillow 9.4.0。
+# 目前可直接使用這個固定映像，不必另建功能相同的專案映像。
+# 原 20260930-r1 的基底與消失記錄保留於 Git 歷史及 WORKLOG。
+FROM hr-go-ebiten@sha256:1430a2cfb652c5733914e8116dd2011da21da53ec6b4de3a1482b2a94472f5b5
 
 WORKDIR /repo

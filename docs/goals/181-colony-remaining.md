@@ -1,5 +1,17 @@
 # 目標181：殖民地與港口其餘欄位
 
+## 2026-10-10完成#56
+
+依使用者2026-10-04決定，完整接線後以代表性正常GUI收尾。[完成檢查器](../../tools/check_goal185_colony_completion.py)通過288實際TXT來源、19變數及19常數消費端、180Go及go vet；正式程式73d863baa358dce354bf2d13b232735c2e9109a48d1b1c15a61d88df031e4ee2。新34正常GUI四側的完整原版、WAV及存檔全等，畫面與已驗貿易版全等；93圖當前來源回歸及既有BUY／武裝／多人口／議會／港口／報表10列PASS。
+
+五類普查291項含3個歷史整段清單鍵，154 shown／137 pending保留。本批四則城市名稱條件訊息只有READY資料契約，尚無各自正常GUI；超過22項的建造換頁及其他貿易局勢未抽樣，不改列不可達。這些證據限制不等於已發現缺接線，也不稱全文中文化或可完整遊玩。
+
+矩陣101列，本批9列重驗，另56可重驗及36歷史列沿用；普查仍1975／931／952／92。本機收據由[目標185](185-player-experience.md)索引；完成摘要SHA-256 bd42464d1208d4144dc5efd4c6daf5e795a392efd1d751d3bda01b03c6b9e3cc，普查TSV 2b65fd79c793b52a447b91e746730a95875e2455fd367e714584728a60e68589。新版封包與發行不在本次範圍。
+
+## 接手歷史與證據入口
+
+下段按當時進度保存；目前狀態以上節及CONTEXT為準。
+
 狀態：進行中；日期：2026-10-03。對應 [Issue #56](https://github.com/wicanr2/colonization_cht/issues/56)，目前入口為 [CONTEXT.md](../../CONTEXT.md)。百科其他入口仍由[目標180](180-pedia-remaining.md)追蹤；遮擋策略已選定整行暫藏、關框恢復，限定驗收與其餘選單分支由[目標178](178-orders-disabled-map-labels.md)及[規格032](../spec/032-sea-menu-and-status-draft.md)追蹤。
 
 本次正常路徑續查入口為本機 `workplace/reports/goal181-colony-rest/soldier-city-probe-v31.sh`，收據目錄 `soldier-city-v31/`；沿 v30 議會框以正常 Return 選任，再觀察下一年度。只作入口探勘，尚未驗收新增文字，不改矩陣或普查。
@@ -945,3 +957,30 @@ v216～v226碼頭七列與正常移到最前面限定CONFORMED。19新正常GUI�
 重播使用v224實際正常輸入，未重新錄GUI，未重算62項矩陣與畫面普查；其他值、F1提示與報表版式保留待驗。
 
 `hygiene.py`重跑擁有權、版控、私有證據忽略與dosgolem清潔檢查；Docker殘留另以主機docker ps -a核對。
+
+## 2026-10-06 Board七列探勘（v227／v228）
+
+`europe-board-seven-probe-v227/` 入口prepare.py／build.sh／gui.sh／run-gui.sh：現行工作樹組裝觀測二進位5965d5b5…（adapter 1faafc8a…），由COLONY03種子d3a462e7正常進港，走訪第一單位pristine、招募、第二單位七列、移到最前面、重開兩清單，並試祝福路徑。26張同步截圖全取；已驗六列／七列皆中文。祝福段因清單關閉後Escape直接離港而偏離（bless-reopen後續為海上），未見Board七列；偏離段只作路徑勘誤（Escape只在清單開啟時按），不算完成。
+
+`europe-board-seven-probe2-v228/` 入口prepare.py／gui.sh／run-gui.sh，沿v227觀測二進位（雜湊釘選），改測登船切換假說：招募後開第二單位七列、選第0列切換、重開，同法測第一單位。rear-board-options確認Board七列[1,2,3,5,7,9,11]（Board next ship.／Move to front of dock.／Arm／Equip Tools／Equip Horses／Bless／No changes.）現為英文fail-closed；unit1六列Board變體已中文（既有已驗組合）。觸發為正常選第0列後重開，可重現。下一步v229沿v228實際輸入做來源／字格／完整原版／存檔核對，不接新中文。
+
+`europe-board-seven-source-v229/` 入口prepare.py／run-control.sh／run-observer.sh／run-observer-measure.sh／source／check.py，沿v228實際21GUI輸入重生對照、現行觀測、釘選量測與來源探針。觀測側初用v214二進位，因缺七列接線截圖必然不同，改用與GUI同碼的v227二進位（run-observer.sh註記）；量測探針只在v214觀測版，另立measure側跑同一輸入（run-observer-measure.sh）。四側完整終點dd5fcb62…、21取樣、21同步GUI逐像素、全部存檔全等；4次ARMOPTIONS查詢皆0E2D:0832／f3a6／GAME.TXT覆蓋39071；Board七列x82／y67起行距12／cap8／68／149／47，六列Board同步觀測（已接線）；正式無source事件。通過PASS_NORMAL_BOARD_SEVEN_SOURCE，完成信用0。下一步v230私有候選（30～20px／超界／缺圖集／錯字格）才審READY。
+
+`europe-board-seven-prototype-v230/` 現行工作樹組裝，只加[1,2,3,5,7,9,11]組合（七列y67沿既有），board230_test由seven221_test改寫（全符篩選Board＋Move、v229量測路徑），另帶dock195／europe_layout回歸測試。142Go／go vet全過零SKIP，候選二進位87f2f1a0…，board-layout實際30px溢位0。
+
+`europe-board-seven-prototype-verify-v231/` 候選重播zh／缺圖集noatlas：六側終點dd5fcb62…、21取樣、存檔全等；source事件0D21:00C6／30px／safe[81,66,236,150]對齊量測與版面；僅rear-board-options在核准區內變中文，其餘20圖全等，缺圖集回原文。通過PASS_PRIVATE_BOARD_SEVEN。
+
+freeze-ready審查清冊96bc4e52…，規格035增2026-10-06 Board七列READY，只授權一處組合；`europe-board-seven-formal-build-v232/` 正式二進位a10dbd94…（142／0），stable-build eac5e0a0…（138／0）。正式採用為一行組合差異。下一步v233新正常GUI。
+
+`europe-board-seven-formal-gui-v233/` 正式a10dbd94…新正常GUI：rear-board-options確認七列全中文。前兩輪存檔段miss：mousedown／mouseup被遊戲輪詢拆到不同Update，shot_after移鼠把它變成拖曳，選單在別處放開即取消（game-menu截圖無選單、輸入錄得press／release分處兩點為證）；gui.sh覆寫click等2個Update再移鼠（failed-save-tail／failed-save-tail2保留），第三輪21圖、存檔COLONY00、終點c6177d01…通過。下一步v234五側正式驗證。
+
+`europe-board-seven-formal-verify-v234/` prepare由v232正式源加audit探針建觀測器（兩錨點一次命中，616c64df…），五側（zh／對照／觀測／基線／缺圖集）加來源探針沿v233新輸入重播，終點c6177d01…全等。檢查器增board側（BOARD_ROOTS＋verify_board，舊側零動）；基線初用v212因缺七列舊組合引入非本輪差異，改用上一版正式v223（run-baseline.sh註記）。凍結清冊d0818ae0…，PUBLIC_BOARD_PASS 21圖1欄，29破壞拒絕與缺原版SKIP77通過。下一步v235矩陣／普查。
+
+
+v227～v235碼頭Board七列與登船切換後重開限定CONFORMED。21新正常GUI、六側完整原版／全部取樣／新舊存檔、逐欄30px／來源／核准區／回退、29破壞拒絕與缺原版SKIP77、63PASS及重複／反向普查通過。採用1945項／882已顯示／974待驗／89不可達不變，完成信用0；正式程式a10dbd94e357d56c8fbaec55ea189ebb6e2ad75cfd14ad58542cc3100aca4f6e，清冊d0818ae05f94b94d64c9e96747efe3ef9c9f47b077c9ac439f71ded9b06cea8b。港口單位標題等未驗，Issue #56未完成。採用入口v235/adopt-documents.py，衛生入口v235/hygiene.py；歷史碼頭驗收保留。
+
+## 2026-10-10接續：貿易路線2欄位限定完成
+
+目前正式0484e99b…修復路線2標題舊1、第三London／第四Jamestown、目的地單列超界與刪除選項。規格035／038已限定CONFORMED；[檢查器](../../tools/check_goal185_trade_fields.py)通過34新正常GUI與四側完整原版／存檔，含取消、懸停、刪除、重加與手動存檔。教學13／建造31／精簡選單15圖回歸保持，詳細收據由[目標185](185-player-experience.md)索引。
+
+真正超出視窗建造捲動及其他貿易情境仍未驗，#56仍進行中。歷史第一路線海／陸、BUY、武裝、多人口與報表驗收保留。
