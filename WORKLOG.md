@@ -4123,3 +4123,7 @@ Goal保留完成#55／56／57／61的完整範圍，仍active。#55精簡ORDERS�
 正式根dist-all/v.1.0.3-20261010；三個公開功能包、MP4、三個私用完整版的完整雜湊與重生入口見目標185。交付總檢查cbe26579b1bb32a7b741102010bd841d0c0b78d8ba878d9070a8af716e9fec68為PASS_FINAL_DELIVERY_WITH_MACOS_RUNTIME_LIMITATION。原版資料完整版只留本機；本次Release準備上傳三公開包、MP4及SHA256SUMS.json，舊版tag與Release保留。
 
 發行提交前總檢查PASS：工作清單verify及生成稿全等、TSV十欄、修改Python語法與shell語法、已知入口正對照通過；普查dee3d359…與增量收據一致。Git未追蹤原版封存檔、EXE、存檔、RAM、WAV、TTF或IDA資料庫，未新增原始截圖。全工作樹find沒有root-owned檔或.md目錄；本輪容器均已自動刪除，隔離dosgolem乾淨且upstream推送DISABLED。Markdown／程式diff檢查通過，TSV保留空末欄分隔符並另驗欄數。
+
+發行提交71db6fe5def8c39d0433eb5fe4977835da7beb54與固定tag v.1.0.3-20261010已推送。Release先建草稿並上傳三平台公開功能包、MP4及SHA256SUMS.json，五附件名稱、大小與GitHub伺服器計算的SHA-256逐項和本機相同。按tag讀草稿的API回404，改從已授權帳號的Release清單取得草稿；沒有另建版本。額外附件回下載頻寬過低，停止後清除四個未完成副本，只完整驗了SHA清單副本；未將伺服器雜湊驗證冒稱全部回下載驗收。
+
+Release於2026-10-10T15:17:41Z公開，網址https://github.com/wicanr2/colonization_cht/releases/tag/v.1.0.3-20261010。公開後再次核對五附件SHA-256、固定tag及Asia/Taipei版號日期通過。舊v.1.0.2、v.1.0.1、v.1.0.0與預覽版的識別、正文與附件指紋不變。公開後摘要保存於目標185 release/及正式根smoke/；三平台自帶原版資料的完整版仍只留full-local/。最後交接文件另作提交推送，不移動已發布tag。

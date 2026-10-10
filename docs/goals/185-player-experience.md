@@ -1,6 +1,6 @@
 # 目標185：dosgolem遊玩體驗與Issue關閉審查
 
-日期：2026-10-10。狀態：#56完成，追加正常抽驗與新版三平台交付驗收通過；Release準備發布。未宣稱全部情境驗收完成。
+日期：2026-10-10。狀態：#56完成，追加正常抽驗、三平台完整版、推廣影片及新版Release均完成。未宣稱全部情境驗收完成。
 
 ## 2026-10-10追加抽驗與重新交付
 
@@ -54,6 +54,8 @@ bash /repo/tools/package_three_platforms.sh v.1.0.3-20261010
 Release說明草稿保存在 `release/release-notes.md`，只上傳三個`patch/`封包、MP4及根SHA256SUMS.json。公開後遠端附件核對留 `release/published-release.json`、`release/remote-asset-review.json`，不公開本機完整版或原始PNG／WAV。
 
 提交前文件、來源語法、工作清單、TSV格式、索引正對照與擁有權檢查由 `release/final_check.py` 執行，結果留 `release/final-check.json`。普查說明採用後的重生也由此入口處理。
+
+[v.1.0.3-20261010 Release](https://github.com/wicanr2/colonization_cht/releases/tag/v.1.0.3-20261010)已於2026-10-10T15:17:41Z公開。抽驗提交e66770d、發行提交71db6fe5def8c39d0433eb5fe4977835da7beb54與固定tag已推送。`release/check_remote_release.py`核對五個附件的GitHub伺服器SHA-256、大小、版號日期與遠端tag，結果PASS_PUBLISHED_RELEASE。額外回下載因頻寬過低停止，只完整核對SHA清單副本；不宣稱全部附件都回下載通過。四個舊Release的識別、正文與附件指紋均未改，見 `release/previous-release-review.json`。正式交付 `smoke/`保存公開後核對摘要；原版完整版未上傳。
 
 BUY原始來源的輔助觀測留 `release/buy-source-observer/`，使用公開probe_goal181_buy_sources.go，觀測到@BUYME0，但該觀測器完整RAM與正式GUI不同，不宣稱同狀態。初次102批的BUY同文來源歸屬已拒絕，留 `history-census-102-template-alias-rejected/`；現行增量重新從101批合併，只新增已驗食物教學信用。
 
