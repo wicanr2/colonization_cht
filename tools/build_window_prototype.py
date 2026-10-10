@@ -32,5 +32,5 @@ if a.output.stat().st_uid != os.getuid():
 (a.output / 'strings_test.go').write_bytes((a.repo / 'tools/string_overlay_test.go').read_bytes())
 (a.output / 'go.mod').write_text('module colonization-window-prototype\n\ngo 1.24.0\n\nrequire github.com/hajimehoshi/ebiten/v2 v2.9.9\n')
 (a.output / 'go.sum').write_bytes((a.reference / 'go.sum').read_bytes())
-(a.output / 'go.work').write_text('go 1.24.0\nuse .\nuse /dosgolem\n')
+(a.output / 'go.work').write_text('go 1.26.7\nuse .\nuse /dosgolem\n')
 print(a.output)

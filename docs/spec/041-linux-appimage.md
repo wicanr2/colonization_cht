@@ -25,6 +25,18 @@
 
 原型測試版本`v.0.0.0-19700101`沒有正式發行意義。未選正式版號，未建立dist-all新版本、tag、Release或公開原版畫面。Windows、macOS封包與macOS簽章另行處理；此規格不外推它們的完成狀態。
 
+## 2026-10-10 封裝工具恢復
+
+狀態：CONFORMED。原封裝映像已不存在，本機也沒有原 appimagetool。改用官方固定版 1.9.0，下載入口為 `https://github.com/AppImage/appimagetool/releases/download/1.9.0/appimagetool-x86_64.AppImage`，SHA-256 為 `46fdd785094c7f6e545b61afcfb0f3d98d8eab243f644b4b17698c01d06083d1`。實際恢復檔以工具內白名單的完整指紋為準，原指紋繼續保留。
+
+沿用現存 `eob-remake-release:1.26.7-ebiten2.9.9-20261008-r2` 的 Go、Python 與 appimagetool，不另建映像。runtime 由 `hr-appimage:runtime-recovery-r1` 的 `/opt/runtime-x86_64` 恢復，仍須符合原 SHA-256 `1cc49bcf1e2ccd593c379adb17c9f85a36d619088296504de95b1d06215aebbf`。工具存於目標185已索引的 `release/tools/`，覆掛 `/opt/appimage-tools:ro`。入口仍為 `tools/package_three_platforms.sh`。
+
+只增加固定版封裝器的白名單，manifest 記錄實際工具指紋。runtime、來源與授權、payload、啟動器及原版排除契約沿用原規格。完成條件是兩次乾淨重建全等、獨立解包清冊全等與正常 GUI 啟動通過。
+
+1.9.0 會把 `SOURCE_DATE_EPOCH` 轉成 mksquashfs 命令參數，同時繼承該環境變數時，現有 mksquashfs 明確拒絕。這個固定版分支移除該環境變數，明示 `-mkfs-time 0 -all-time 0`，維持相同的零時間戳契約；其他工具分支不變。失敗紀錄留目標185發行工作區，不列為前端缺陷。
+
+v.1.0.3-20261010 兩次乾淨重建全等，18606584 bytes、SHA-256 `e41a46b5db821e9573bcc42f40e15fea7c905a87e2d17d67b5eccd1ef6d1fffa`。獨立解包110檔、manifest、授權與原版排除通過，SquashFS建立時間與一般檔案時間均0。正式包正常GUI及與Wine同輸入的完整原版、音訊及中文安全區通過；收據由[目標185](../goals/185-player-experience.md)索引。
+
 ## 2026-10-04 正式工具驗證
 
 公開封裝器的`--format appimage`在固定映像內兩次從相同乾淨輸入組裝，formal-a／b各18520568bytes，SHA-256皆`375019a92c20c59a2cef726aeba9e3e77181b1b69bdccfec46df94e6b6b91fcf`。測試版本與輸出均留上述本機工作區。獨立容器解包110檔，manifest、SHA256SUMS、13份TSV、字模、二進位及啟動器核對通過，未含原版素材；授權全文與來源完整。一般檔案時間與SquashFS建立時間均0，擷取後目錄時間由解包器決定，不宣稱目錄時間固定。

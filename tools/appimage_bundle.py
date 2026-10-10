@@ -12,6 +12,7 @@ TOOLS = {
     'appimagetool.AppImage': 'a6d71e2b6cd66f8e8d16c37ad164658985e0cf5fcaa950c90a482890cb9d13e0',
     'runtime-x86_64': '1cc49bcf1e2ccd593c379adb17c9f85a36d619088296504de95b1d06215aebbf',
 }
+APPIMAGETOOL_1_9_0 = '46fdd785094c7f6e545b61afcfb0f3d98d8eab243f644b4b17698c01d06083d1'
 NOTICES = ['AppImage-runtime-LICENSE.txt', 'libfuse-LGPL-2.1.txt', 'squashfuse-LICENSE.txt',
            'musl-COPYRIGHT.txt', 'mimalloc-LICENSE.txt', 'zstd-LICENSE.txt', 'zlib-LICENSE.txt']
 ARCHIVES = ['type2-runtime-75849dc.tar.gz', 'fuse-3.15.0.tar.xz', 'squashfuse-0.5.2.tar.gz']
@@ -23,9 +24,14 @@ def digest(path):
 
 def build_appimage(files, manifest, repo, top, tools=Path('/opt/appimage-tools')):
     """沿既有payload及manifest建置；成功才回傳封包，不寫正式交付目錄。"""
+    actual_tools = {}
     for name, expected in TOOLS.items():
-        if not (tools / name).is_file() or digest(tools / name) != expected:
+        accepted = {expected}
+        if name == 'appimagetool.AppImage':
+            accepted.add(APPIMAGETOOL_1_9_0)
+        if not (tools / name).is_file() or digest(tools / name) not in accepted:
             raise ValueError('AppImage工具指紋不同：' + name)
+        actual_tools[name] = digest(tools / name)
     assets = repo / 'tools/release/appimage-runtime'
     source_files = json.loads((assets / 'files.json').read_text())
     required = set(NOTICES + ARCHIVES + ['manifest.json', 'source.json'])
@@ -50,7 +56,7 @@ def build_appimage(files, manifest, repo, top, tools=Path('/opt/appimage-tools')
     bundled = copy.deepcopy(manifest)
     bundled['format'] = 'AppImage-type2'
     bundled['system_runtime'] = ['Linux x86_64', 'X11', 'OpenGL', 'ALSA', 'glibc', 'bash']
-    bundled['packaging_tools_sha256'] = TOOLS
+    bundled['packaging_tools_sha256'] = actual_tools
     bundled['dependencies']['AppImage-runtime'] = {
         'version': '75849dc', 'sha256': TOOLS['runtime-x86_64'],
         'license_files': ['LICENSES/' + name for name in NOTICES],
@@ -80,6 +86,11 @@ def build_appimage(files, manifest, repo, top, tools=Path('/opt/appimage-tools')
                '--runtime-file', str(tools / 'runtime-x86_64'), '--comp', 'zstd',
                '--mksquashfs-opt=-no-xattrs', '--mksquashfs-opt=-mem', '--mksquashfs-opt=256M',
                '--mksquashfs-opt=-processors', '--mksquashfs-opt=1', str(appdir), str(package)]
+        if actual_tools['appimagetool.AppImage'] == APPIMAGETOOL_1_9_0:
+            # 1.9.0 另傳時間參數，避免 mksquashfs 同時讀取環境變數而拒絕。
+            env.pop('SOURCE_DATE_EPOCH', None)
+            cmd[-2:-2] = ['--mksquashfs-opt=-mkfs-time', '--mksquashfs-opt=0',
+                          '--mksquashfs-opt=-all-time', '--mksquashfs-opt=0']
         result = subprocess.run(cmd, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                 text=True, timeout=180)
         if result.returncode:

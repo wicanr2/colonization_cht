@@ -1,6 +1,6 @@
 # 目標185：dosgolem遊玩體驗與Issue關閉審查
 
-日期：2026-10-10。狀態：#56完成，追加正常抽驗通過；新版三平台交付及Release進行中。未宣稱全部情境驗收完成。
+日期：2026-10-10。狀態：#56完成，追加正常抽驗與新版三平台交付驗收通過；Release準備發布。未宣稱全部情境驗收完成。
 
 ## 2026-10-10追加抽驗與重新交付
 
@@ -17,6 +17,43 @@
 矩陣與普查增量入口為同根 `register_wagon_sample.py`、`history-census-102-delta/`。新版影片畫面由 `release/replay_promo_scene.py` 使用本輪正式包與既有正常GUI輸入重生；素材與驗收都留 `release/`。
 
 採用後的普查指紋列由 `finalize_wagon_sample.py` 重驗。正式包字模來源、六個拒絕案例與時間戳由 `release/check_delivery_inputs.py` 核對；影片設定由 `release/prepare_promo_config.py` 核對正常輸入、程式與收據指紋後產生。
+
+交付總檢查入口為 `release/check_final_delivery.py`，摘要留 `release/delivery-review.json` 及正式根的 `smoke/delivery-review.json`。Linux／Windows自帶資料包正常一鍵啟動重播，完整RAM與公開包一致；macOS只驗雙架構、簽章、檔案清冊與shell，沒有真機聲明。
+
+### v.1.0.3-20261010交付驗收
+
+三平台公開包各兩次乾淨重建全等，私用完整版各經清冊與一鍵入口驗證。Linux／Windows正常啟動與同輸入完整RAM為c8032606aaddb6f045b97e16e58ff9057e49421260c75861100f1fb5ca42b3a1，WAV為3062c132ffb18df60e4fe435c9eea613e0aa8f1a41f35b2c7a3c0375983f3f39。Linux／Wine主選單五列及版本的安全區逐像素相同。
+
+| 交付物 | bytes | SHA-256 |
+|---|---:|---|
+| 公開Linux AppImage | 18606584 | e41a46b5db821e9573bcc42f40e15fea7c905a87e2d17d67b5eccd1ef6d1fffa |
+| 公開Windows ZIP | 14073582 | dbfbe605abfcd8ad726f9a270849af9f097e1afdfeb009d369a3fb7b0d40e627 |
+| 公開macOS通用ZIP | 14283310 | 653107ac79aa58f83e264930a905ac9bbb579e6221fb7f7bee3aa761d9b84c1d |
+| 推廣MP4 | 4006348 | 79014291f5b033442d7896adbbbf53985e7db373c6264eceec54cb23c877fa5b |
+| 私用Linux完整版 | 21615333 | 1cd196d67e9b5eb30d0250efecccddd5bb7ebfd16e489ea85ad0bb33b632135e |
+| 私用Windows完整版 | 18209135 | c7184c21f02ee17f78e366dd85eb9bbd111d9d09125ec29291c1cc0e34cff324 |
+| 私用macOS通用完整版 | 18431758 | fa5098f06fc0bd7a2628cb275d2f3f6360038183dce305f0108ab2f82385593b |
+
+正式根為 `dist-all/v.1.0.3-20261010/`。`patch/`及MP4可公開，`full-local/`含原版資料只留本機；原始存檔未隨包複製。完整交付審查SHA-256為cbe26579b1bb32a7b741102010bd841d0c0b78d8ba878d9070a8af716e9fec68。
+
+影片為90秒、1920×1080、30fps、H.264／AAC；六個現行畫面由正式Linux包及正式Windows正常GUI產生，三段原版終點與原GUI相同。原版連續音樂沿已驗舊收據，音源dosgolem b0bf259與現行畫面82a14b2分別登錄。影片非靜音，平均−20.5dB、峰值−2.5dB，無非預期黑幀；八幀與字幕安全邊界已目視。固定畫面剪輯不冒稱連續遊玩錄影；未新增人耳或音效卡驗收。
+
+封裝映像為eob-remake-release:1.26.7-ebiten2.9.9-20261008-r2，SHA-256 a7c1001218f195867205b5f87d49d79c4cf4f183a465dcee89db6c96a260ea4e。macOS沿hr-osxcross:1.26.7-15.5-r1，SHA-256 8f65ed80db84a005343cfdbaa3cdb3494192bd04d60771f99818d5f3ac9f3873；Wine沿eob-remake-wine-verify:ubuntu-noble-20261008-r2，SHA-256 c047a6a259a1fc9a90babf7c937310fa9df4b3465bf75f3fcaad1bc640099c2f。沒有建立重複映像。
+
+重建時，先在新私用批次使用build_window_prototype.py組裝來源，工作區Go版本為1.26.7，沿build_release.sh產生三平台二進位與inspect-version。容器掛載、原版與字型唯讀、UID/GID及資源限制依本頁既有契約；`/out`須指向新的私用工作根。字模恢復時，在封裝容器設定以下輸入，並依規格041覆掛已核對的工具目錄：
+
+```sh
+export COLONIZATION_RELEASE_WORK=/out/release
+export COLONIZATION_RELEASE_MASK_BUNDLE=/repo/workplace/reports/goal184-linux/music-independent/release/extracted/appimage/squashfs-root
+export COLONIZATION_RELEASE_MASK_MANIFEST_SHA256=b5ef89cf8f894e7e01a45a5c21cd80b5df97b01459e65228d9f5169d982153e2
+bash /repo/tools/package_three_platforms.sh v.1.0.3-20261010
+```
+
+歷史包不存在時可從保留的v.1.0.2公開AppImage恢復字模；仍須逐項核對manifest與現行譯稿，不以缺失中間物冒稱重烘。重播、影片、彙整與最終檢查入口均在本節前段索引。
+
+Release說明草稿保存在 `release/release-notes.md`，只上傳三個`patch/`封包、MP4及根SHA256SUMS.json。公開後遠端附件核對留 `release/published-release.json`、`release/remote-asset-review.json`，不公開本機完整版或原始PNG／WAV。
+
+提交前文件、來源語法、工作清單、TSV格式、索引正對照與擁有權檢查由 `release/final_check.py` 執行，結果留 `release/final-check.json`。普查說明採用後的重生也由此入口處理。
 
 BUY原始來源的輔助觀測留 `release/buy-source-observer/`，使用公開probe_goal181_buy_sources.go，觀測到@BUYME0，但該觀測器完整RAM與正式GUI不同，不宣稱同狀態。初次102批的BUY同文來源歸屬已拒絕，留 `history-census-102-template-alias-rejected/`；現行增量重新從101批合併，只新增已驗食物教學信用。
 

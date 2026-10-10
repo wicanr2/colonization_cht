@@ -4,6 +4,10 @@ set -euo pipefail
 version=${1:?版本}
 batch=${COLONIZATION_RELEASE_WORK:-/repo/workplace/reports/goal183-release}
 [[ $(go env GOVERSION) == go1.26.7 && -x "$batch/inspect-version" ]]
+mask_args=()
+if [[ -n ${COLONIZATION_RELEASE_MASK_BUNDLE:-} ]]; then
+  mask_args=(--mask-bundle "$COLONIZATION_RELEASE_MASK_BUNDLE" --mask-manifest-sha256 "${COLONIZATION_RELEASE_MASK_MANIFEST_SHA256:?字模manifest指紋}")
+fi
 for side in a b; do
   for format in appimage windows-zip macos-zip; do
     case "$format" in
@@ -13,7 +17,7 @@ for side in a b; do
     esac
     python3 /repo/tools/package_release.py --version "$version" --format "$format" \
       --binary "$batch/binaries/$binary" --version-inspector "$batch/inspect-version" \
-      --readme "/repo/tools/release/$readme" --output "$batch/packages-$side/$format" \
+      --readme "/repo/tools/release/$readme" --output "$batch/packages-$side/$format" "${mask_args[@]}" \
       >"$batch/package-$side-$format.json"
   done
 done

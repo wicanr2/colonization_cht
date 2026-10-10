@@ -1,66 +1,78 @@
 {
-  "version": "v.1.0.2-20261005",
+  "version": "v.1.0.3-20261010",
   "font": "/font/Cubic_11.ttf",
   "scenes": [
     {
-      "path": "/repo/workplace/reports/goal183-release/smoke/windows/main-menu.png",
+      "path": "/repo/workplace/reports/goal185-player-experience/release/smoke/windows/main-menu.png",
       "sha256": "c0945f2c803a78d2e73fa5da2dc9d5754974d14d032b811bc6d0c1f016e07609",
       "title": "從主選單開始",
       "caption": "選單、提示與說明，以熟悉的文字呈現。",
-      "source_receipt": "/repo/workplace/reports/goal183-release/smoke/windows/run.json",
-      "source_receipt_sha256": "2437dd345938911488fc79e63afe5717a8bef8aef3f0e5ea82de7d6018f82242",
-      "normal_input_receipt": "/repo/workplace/reports/goal183-release/smoke/windows/run.inputs.json",
-      "normal_input_sha256": "6921125d499014f08d9b805fc8e1de116774d7ca4ff3b8d5029be822415a3a40"
+      "source_receipt": "/repo/workplace/reports/goal185-player-experience/release/smoke/windows/run.json",
+      "source_receipt_sha256": "4c248347591fcaf9451a06d3f8d140d94440facd6dcf452cb97ecafca741a4ed",
+      "normal_input_receipt": "/repo/workplace/reports/goal185-player-experience/release/smoke/windows/run.inputs.json",
+      "normal_input_sha256": "ae59e762be36af3c775e11135f4f2c97e211eccb6316735bf33d846c00b7db90",
+      "frontend_binary": "/repo/workplace/reports/goal185-player-experience/release/extracted/windows-zip/colonization-cht-v.1.0.3-20261010-windows-x86_64/bin/colonization-window.exe",
+      "frontend_binary_sha256": "b9f0893026e22c5e5637facc62f06f2352248fa975dbf5ee5807c1b6b574253a"
     },
     {
-      "path": "/repo/workplace/reports/goal181-colony-rest/20261004-woodcut-titles/final-sample/zh.cp-1090000000.png",
-      "sha256": "4a61b8bb3f7157f89f7ccc07cfc1afceda97e096a5820ed920b9a70c48d5fa2b",
+      "path": "/repo/workplace/reports/goal185-player-experience/release/promo-wagon/run.cp-63525000.png",
+      "sha256": "91401a2cc0f72e98c1e93f7ebae593a29a6d395e5cccfc41c5d739fafaffec58",
       "title": "航向新世界",
       "caption": "查看地形、單位與回合訊息。",
-      "source_receipt": "/repo/workplace/reports/goal181-colony-rest/20261004-woodcut-titles/final-sample/zh.json",
-      "source_receipt_sha256": "84479ea3684c5e649e6bc2920808464a8a7abfe796bd1fc401032b762e4bb6fc",
-      "normal_input_receipt": "/repo/workplace/reports/goal181-colony-rest/colony-v3/gui-colony.inputs.json",
-      "normal_input_sha256": "253c62a1f30387d76b736fc17cd22b7040ad53263088fe51e0cd6c5f81fee122"
+      "source_receipt": "/repo/workplace/reports/goal185-player-experience/release/promo-wagon/run.json",
+      "source_receipt_sha256": "7ebec1f65cc69aa312ed06243cb6760342e7a22bda6401505f431ee5acffa3e4",
+      "normal_input_receipt": "/repo/workplace/reports/goal185-player-experience/issue56-wagon-sample-gui/gui.inputs.json",
+      "normal_input_sha256": "9b246ee6e4aa2fc36e3db4eae8fa8487527e7b4393afff9fdcfe19e61c741979",
+      "frontend_binary": "/repo/workplace/reports/goal185-player-experience/release/extracted/appimage/squashfs-root/bin/colonization-window",
+      "frontend_binary_sha256": "8e6cba679d85f1e2219c816e7272df0b640d6f12cc148fa0d759f36e718aec3b"
     },
     {
-      "path": "/repo/workplace/reports/goal181-colony-rest/20261004-woodcut-titles/final-sample/zh.cp-635000000.png",
-      "sha256": "736f7a17e9a0b85a8d7e0557204078f4652e0bfae72ef10ce93117b0a2d78a9a",
-      "title": "經典版畫，中文標題",
-      "caption": "保留原版圖像，疊上繁體中文。",
-      "source_receipt": "/repo/workplace/reports/goal181-colony-rest/20261004-woodcut-titles/final-sample/zh.json",
-      "source_receipt_sha256": "84479ea3684c5e649e6bc2920808464a8a7abfe796bd1fc401032b762e4bb6fc",
-      "normal_input_receipt": "/repo/workplace/reports/goal181-colony-rest/colony-v3/gui-colony.inputs.json",
-      "normal_input_sha256": "253c62a1f30387d76b736fc17cd22b7040ad53263088fe51e0cd6c5f81fee122"
-    },
-    {
-      "path": "/repo/workplace/reports/goal180-pedia-rest/building-final-v3/gui-pedia.building-article-14.png",
-      "sha256": "e05b0d761d226a2743666f93925251ad47b0e69f42d72d9a2e09f0af4deedd95",
-      "title": "殖民百科，讀懂每項建築",
-      "caption": "正文與先決條件顯示繁體中文，保留原版版畫。",
-      "source_receipt": "/repo/workplace/reports/goal180-pedia-rest/building-final-v3/gui-pedia.json",
-      "source_receipt_sha256": "3d8679ee4ee758b04dad50a8b89388e8dd0cb0f45bda688e71a714bb07c89685",
-      "normal_input_receipt": "/repo/workplace/reports/goal180-pedia-rest/building-final-v3/gui-pedia.inputs.json",
-      "normal_input_sha256": "217af6321b916e9e79f236dc3ed78d03329e5f80c913387a79689b945a7c4eba"
-    },
-    {
-      "path": "/repo/workplace/reports/goal181-colony-rest/cargo-messages-formal-gui-v153/gui-colony.cargo-loading-preview.png",
-      "sha256": "a73f9f6bb0e976a5c1efa51215e58cf617432d3635ad31243986d6a4f72c1a81",
+      "path": "/repo/workplace/reports/goal185-player-experience/release/promo-wagon/run.cp-125895001.png",
+      "sha256": "3328afe6ed773e8465412953d56c54e4fde86351da7e53131710b19a97698de7",
       "title": "經營你的殖民地",
-      "caption": "調配資源，安排工作，裝載貨物。",
-      "source_receipt": "/repo/workplace/reports/goal181-colony-rest/cargo-messages-formal-gui-v153/gui-colony.json",
-      "source_receipt_sha256": "76063f85afc27a1f40f70b48f355e87dc0758acca07fefc3ca3bbce4748db9b0",
-      "normal_input_receipt": "/repo/workplace/reports/goal181-colony-rest/cargo-messages-formal-gui-v153/gui-colony.inputs.json",
-      "normal_input_sha256": "ed628100da40e8e68aa0f7dde45e8421d5cdf2c6c82fe85b122a7f40ac190005"
+      "caption": "調配資源，安排工作，選擇建造項目。",
+      "source_receipt": "/repo/workplace/reports/goal185-player-experience/release/promo-wagon/run.json",
+      "source_receipt_sha256": "7ebec1f65cc69aa312ed06243cb6760342e7a22bda6401505f431ee5acffa3e4",
+      "normal_input_receipt": "/repo/workplace/reports/goal185-player-experience/issue56-wagon-sample-gui/gui.inputs.json",
+      "normal_input_sha256": "9b246ee6e4aa2fc36e3db4eae8fa8487527e7b4393afff9fdcfe19e61c741979",
+      "frontend_binary": "/repo/workplace/reports/goal185-player-experience/release/extracted/appimage/squashfs-root/bin/colonization-window",
+      "frontend_binary_sha256": "8e6cba679d85f1e2219c816e7272df0b640d6f12cc148fa0d759f36e718aec3b"
     },
     {
-      "path": "/repo/workplace/reports/goal181-colony-rest/20261004-port-fields/sample/zh.cp-63855000.png",
-      "sha256": "ecbf3800ae000cebd98517f94129d9c8bab40c101e79ba8d9f6a1c8c70b1e8e8",
-      "title": "讓貿易往來更清楚",
-      "caption": "歐洲港口的招募、交易與報表已有中文欄位。",
-      "source_receipt": "/repo/workplace/reports/goal181-colony-rest/20261004-port-fields/sample/zh.json",
-      "source_receipt_sha256": "3e8142bb000624044b1cb91f3241fc808f2f5a66ae36223708b72e9b35a9bf3c",
-      "normal_input_receipt": "/repo/workplace/reports/goal181-colony-rest/europe-dock-seven-formal-gui-v224/gui-colony.inputs.json",
-      "normal_input_sha256": "c3b69af723dd708aff78d236f0a6d89f15775ad2156936725ac180bc33d2521b"
+      "path": "/repo/workplace/reports/goal185-player-experience/release/promo-pedia/run.cp-348975001.png",
+      "sha256": "efccf901c94b0cb7f646749898474ef17e277e2c27c550e9bd755435b704bf4a",
+      "title": "翻開殖民百科",
+      "caption": "閱讀單位說明，掌握它們的用途。",
+      "source_receipt": "/repo/workplace/reports/goal185-player-experience/release/promo-pedia/run.json",
+      "source_receipt_sha256": "274320c801f26259f3b04f7ad86f6eec505b9ba639c7f0bdca9386696314da4f",
+      "normal_input_receipt": "/repo/workplace/reports/goal185-player-experience/closure-pedia-v1/gui.inputs.json",
+      "normal_input_sha256": "8202dd84ea66a59aa58de44ec02baec4f320fe3f589e0d44098823b683300234",
+      "frontend_binary": "/repo/workplace/reports/goal185-player-experience/release/extracted/appimage/squashfs-root/bin/colonization-window",
+      "frontend_binary_sha256": "8e6cba679d85f1e2219c816e7272df0b640d6f12cc148fa0d759f36e718aec3b"
+    },
+    {
+      "path": "/repo/workplace/reports/goal185-player-experience/release/promo-wagon/run.cp-117150000.png",
+      "sha256": "6c9baeca86e2e1aaf8e63fbf40d9cdc11a2c3192c720346db83b853e77fc2fe4",
+      "title": "規劃下一步建設",
+      "caption": "建造清單與所需材料已有中文欄位。",
+      "source_receipt": "/repo/workplace/reports/goal185-player-experience/release/promo-wagon/run.json",
+      "source_receipt_sha256": "7ebec1f65cc69aa312ed06243cb6760342e7a22bda6401505f431ee5acffa3e4",
+      "normal_input_receipt": "/repo/workplace/reports/goal185-player-experience/issue56-wagon-sample-gui/gui.inputs.json",
+      "normal_input_sha256": "9b246ee6e4aa2fc36e3db4eae8fa8487527e7b4393afff9fdcfe19e61c741979",
+      "frontend_binary": "/repo/workplace/reports/goal185-player-experience/release/extracted/appimage/squashfs-root/bin/colonization-window",
+      "frontend_binary_sha256": "8e6cba679d85f1e2219c816e7272df0b640d6f12cc148fa0d759f36e718aec3b"
+    },
+    {
+      "path": "/repo/workplace/reports/goal185-player-experience/release/promo-trade/run.cp-310860001.png",
+      "sha256": "3d0641bb9e14d530a1b2211ccb4b480d679401645dd940bffe2e19ad778d95f7",
+      "title": "安排你的貿易路線",
+      "caption": "編輯目的地，清楚查看裝卸欄位。",
+      "source_receipt": "/repo/workplace/reports/goal185-player-experience/release/promo-trade/run.json",
+      "source_receipt_sha256": "8ad808875d653db13e36578936ba6c0883698a4788019cb1f6f18dbd07a95cd3",
+      "normal_input_receipt": "/repo/workplace/reports/goal185-player-experience/issue56-formal-gui/gui.inputs.json",
+      "normal_input_sha256": "ca60373081b955374b902abde61060ca64a4e62eee18c0c98dc3950ec401ff82",
+      "frontend_binary": "/repo/workplace/reports/goal185-player-experience/release/extracted/appimage/squashfs-root/bin/colonization-window",
+      "frontend_binary_sha256": "8e6cba679d85f1e2219c816e7272df0b640d6f12cc148fa0d759f36e718aec3b"
     }
   ],
   "audio": "/repo/workplace/reports/goal184-linux/music-continuous/original.wav",
@@ -72,8 +84,10 @@
     "LABELS.TXT": "e4af0da201eb4df5ecdc2033d711d30f975c752f2967dc97b6a8159004582204",
     "NAMES.TXT": "4bf5ba261f71e9215450801d0ac4b00a66e91b046a3b592516524bea03bd6061"
   },
-  "dosgolem_commit": "b0bf25963ce5a29fb3a3fcf92e211423d4cd4ac8",
+  "dosgolem_commit": "82a14b266e1b5bc904e2d0fe507daf6bea41a013",
   "audio_mode": "continuous",
   "audio_start_seconds": 3,
-  "audio_method": "原版dosgolem連續錄音取第3～93秒，不重複拼接；兩遍響度正規化至−18 LUFS、真峰值目標−2 dBTP，淡入1秒、淡出3秒，保留原音高與節奏。"
+  "audio_method": "原版dosgolem連續錄音取第3～93秒，不重複拼接；兩遍響度正規化至−18 LUFS、真峰值目標−2 dBTP，淡入1秒、淡出3秒，保留原音高與節奏。",
+  "audio_dosgolem_commit": "b0bf25963ce5a29fb3a3fcf92e211423d4cd4ac8",
+  "audio_receipt_sha256": "4e3d9e499729d42456301cc9f6d8a56b6ded7cf074eec5530646419d78675ce3"
 }

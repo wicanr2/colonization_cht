@@ -49,6 +49,11 @@ if a.mode == 'prepare':
     opening.save(b / 'slides/00.png')
     receipts = []
     for i, scene in enumerate(c['scenes'], 1):
+        for key in ['source_receipt', 'normal_input_receipt']:
+            expected = scene['source_receipt_sha256' if key == 'source_receipt' else 'normal_input_sha256']
+            assert sha(Path(scene[key])) == expected, key
+        if 'frontend_binary' in scene:
+            assert sha(Path(scene['frontend_binary'])) == scene['frontend_binary_sha256']
         path = Path(scene['path'])
         assert sha(path) == scene['sha256']
         frame = Image.open(path).convert('RGB')
@@ -78,10 +83,14 @@ if a.mode == 'prepare':
         'audio_method': c.get('audio_method', '實際dosgolem原版OPL音樂四段循環，接縫交疊0.5秒，音量2倍，淡入1秒與淡出3秒；無自製配樂'),
         'audio_receipt': c['audio_receipt'], 'original_files': c['original_files'],
         'dosgolem_commit': c['dosgolem_commit'],
+        'audio_dosgolem_commit': c.get('audio_dosgolem_commit', c['dosgolem_commit']),
+        'audio_receipt_sha256': sha(Path(c['audio_receipt'])),
     }, ensure_ascii=False, indent=2) + '\n')
 elif a.mode == 'encode':
     wav = Path(c['audio'])
     receipt = json.loads(Path(c['audio_receipt']).read_text())
+    if 'audio_receipt_sha256' in c:
+        assert sha(Path(c['audio_receipt'])) == c['audio_receipt_sha256']
     assert sha(wav) == receipt['wav_sha256']
     film = b / f"colonization-cht-{c['version']}-promo.mp4"
     assert not film.exists()

@@ -6,13 +6,13 @@
 
 ## 下載與執行
 
-[完整功能修正版 v.1.0.2-20261005](https://github.com/wicanr2/colonization_cht/releases/tag/v.1.0.2-20261005)提供 Linux x86_64 AppImage、Windows x86_64 ZIP、macOS Intel／Apple Silicon 通用 ZIP，以及90秒推廣影片。這一版收進當時已完成的中文顯示、輸入、音樂與音效功能，改善畫面合成速度，並將原版音樂改為獨立原速播放。部分畫面仍保留原文。
+[完整功能修正版 v.1.0.3-20261010](https://github.com/wicanr2/colonization_cht/releases/tag/v.1.0.3-20261010)提供 Linux x86_64 AppImage、Windows x86_64 ZIP、macOS Intel／Apple Silicon 通用 ZIP，以及重新製作的90秒推廣影片。本版修復英國新局停止，收錄目前完成的文字重繪、殖民地、港口與貿易接線，以及中文顯示、輸入、音樂與音效功能。部分情境仍保留原文。
 
 需要自己合法取得的 DOS 版 COLONIZE 目錄。公開封包不含原版檔案；程式依包內 `MANIFEST.json` 的 SHA-256 核對版本，不符就拒絕啟動。
 
 | 平台 | 執行方式 | 預設存檔位置 |
 |---|---|---|
-| Linux | `chmod +x *.AppImage`，再執行 `./colonization-cht-v.1.0.2-20261005-linux-x86_64.AppImage --game /你的路徑/COLONIZE` | `~/.local/share/colonization-cht/save` |
+| Linux | `chmod +x *.AppImage`，再執行 `./colonization-cht-v.1.0.3-20261010-linux-x86_64.AppImage --game /你的路徑/COLONIZE` | `~/.local/share/colonization-cht/save` |
 | Windows | 解包後執行 `colonization-cht.bat --game "C:\你的路徑\COLONIZE"` | `%LOCALAPPDATA%\colonization-cht\save` |
 | macOS | 解包後在終端執行 `./colonization-cht.sh --game /你的路徑/COLONIZE` | `~/Library/Application Support/colonization-cht/save` |
 
@@ -24,7 +24,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 
 ## 目前狀態
 
-英國發現者新局停止已在目前源碼修復，正常世界入口、三側同狀態與既有存檔回歸通過。公開v.1.0.2尚未包含這項修復；其他中文接線、未抽樣情境與三平台新版交付仍未完成。[遊玩驗證](docs/goals/185-player-experience.md)保存修復、驗收範圍與Issue審查。殖民地、歐洲港口、報告與國會的剩餘接線已完成，經代表性正常路徑及回退抽樣驗收；未抽樣的條件訊息與建造換頁仍保留待驗，見[完成範圍](docs/goals/181-colony-remaining.md)。
+英國發現者新局停止已修復，正常世界入口、三側同狀態與既有存檔回歸通過。殖民地、歐洲港口、報告與國會的剩餘接線已完成，經代表性正常路徑及回退抽樣驗收，並收進本版三平台封包。[遊玩驗證](docs/goals/185-player-experience.md)保存修復與抽驗範圍；未抽樣的條件訊息與建造換頁仍保留待驗，見[完成範圍](docs/goals/181-colony-remaining.md)。
 
 **畫面上已經是中文的部分**（每一欄都有原版事件或畫面指紋證據，並以中英同輸入重播驗證原版狀態不變）：
 
@@ -84,7 +84,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 - [字型來源](font/README.md)、[專案規則](AGENTS.md)
 - 正式交付與影片：[目標183](docs/goals/183-release-and-promo.md)列出建置、版號、封裝、啟動抽樣、剪輯及彙整入口。[規格044](docs/spec/044-release-and-promo.md)記錄驗證範圍。
 - Linux 效能與播放修正、README百科截圖及影片配樂：[目標184](docs/goals/184-linux-player-regressions.md)保存修正版收據與重跑入口；[規格045](docs/spec/045-linux-runtime-performance.md)限定合成與播放邊界的驗證範圍。
-- 封裝：先用 [字模重烘入口](tools/rebake_release_fonts.sh)綁定現行譯稿，再於 [固定 Go 驗證映像](tools/Dockerfile.verification)執行 `tools/package_release.py`產生封包。AppImage使用`--format appimage`，工具與驗證範圍見[規格041](docs/spec/041-linux-appimage.md)；Windows ZIP使用`--format windows-zip`及[Windows說明](tools/release/README.windows.txt)，見[規格042](docs/spec/042-windows-zip.md)；macOS通用ZIP使用`--format macos-zip`及[macOS說明](tools/release/README.macos.txt)，見[規格043](docs/spec/043-macos-zip.md)。macOS只驗建置、簽章資料與封包，尚未真機執行。各格式都依實際二進位收集Go、模組與dosgolem授權，缺授權或工具版本不符就停止。
+- 封裝：以 [字模重烘入口](tools/rebake_release_fonts.sh)綁定現行譯稿，或依[規格044](docs/spec/044-release-and-promo.md)核對已驗正式包的字模、manifest與現行譯稿，再於固定Go1.26.7容器執行 `tools/package_release.py`。工具恢復與重建入口見[遊玩驗證](docs/goals/185-player-experience.md)。AppImage使用`--format appimage`，工具與驗證範圍見[規格041](docs/spec/041-linux-appimage.md)；Windows ZIP使用`--format windows-zip`及[Windows說明](tools/release/README.windows.txt)，見[規格042](docs/spec/042-windows-zip.md)；macOS通用ZIP使用`--format macos-zip`及[macOS說明](tools/release/README.macos.txt)，見[規格043](docs/spec/043-macos-zip.md)。macOS只驗建置、簽章資料與封包，尚未真機執行。各格式都依實際二進位收集Go、模組與dosgolem授權，缺授權或工具版本不符就停止。
 - 容器內前端組裝：[tools/build_window_prototype.py](tools/build_window_prototype.py)依已驗來源指紋產生可建置的Go工作目錄；使用下述驗證映像與本專案隔離dosgolem，輸出只放workplace。
 - 畫面檢查與前端測試：[驗證工具鏈](tools/Dockerfile.verification)（`colonization-verification:20260930-r1`，含 Pillow、Go、Ebitengine 與 Xvfb）；封存檔盤點與 probe 仍使用專案指定的研究映像。
 

@@ -61,6 +61,37 @@ def verify_atlas_bindings(path, repo, names):
         raise ValueError("圖集字型指紋不同：" + str(path))
 
 
+def reusable_masks(root, repo, manifest_sha):
+    """只接受指紋固定且與現行譯文相同的已驗正式包字模。"""
+    source = root / 'MANIFEST.json'
+    if not manifest_sha or sha(source.read_bytes()) != manifest_sha:
+        raise ValueError('字模來源 manifest 指紋不同')
+    manifest = json.loads(source.read_text())
+    if not VERSION.fullmatch(manifest['version']):
+        raise ValueError('字模來源版本不合法')
+    for name in TEXT:
+        data = (root / 'text' / name).read_bytes()
+        if data != (repo / 'text' / name).read_bytes() or manifest['files']['text/' + name] != {
+                'sha256': sha(data), 'bytes': len(data)}:
+            raise ValueError('字模來源譯文不同：' + name)
+    paths = sorted((root / 'masks').rglob('*'))
+    files = {}
+    for path in paths:
+        if path.is_symlink():
+            raise ValueError('字模不得為符號連結')
+        if not path.is_file():
+            continue
+        name = path.relative_to(root).as_posix()
+        data = path.read_bytes()
+        if path.suffix != '.json' or manifest['files'].get(name) != {'sha256': sha(data), 'bytes': len(data)}:
+            raise ValueError('字模來源清冊不同：' + name)
+        files[name] = (mask_bytes(path), 0o644)
+    expected = {name for name in manifest['files'] if name.startswith('masks/')}
+    if set(files) != expected or {name.split('/')[1] for name in files} != set(MASKS):
+        raise ValueError('字模集合不完整')
+    return files, {'version': manifest['version'], 'manifest_sha256': manifest_sha, 'files': len(files)}
+
+
 def dependency_notices(binary, repo, target=("linux", "amd64")):
     """由實際二進位列出的依賴收取授權，缺來源時停止封裝。只在固定 Go 工具映像內執行。"""
     metadata = subprocess.run(["go", "version", "-m", str(binary)], check=True, capture_output=True, text=True).stdout
@@ -115,6 +146,8 @@ def main():
     p.add_argument("--readme", type=Path, required=True)
     p.add_argument("--output", type=Path, required=True, help="dist-all 根目錄")
     p.add_argument("--format", choices=["tar.gz", "appimage", "windows-zip", "macos-zip"], default="tar.gz")
+    p.add_argument('--mask-bundle', type=Path)
+    p.add_argument('--mask-manifest-sha256')
     a = p.parse_args()
     if not VERSION.fullmatch(a.version):
         raise SystemExit("版號不符 v.X.Y.Z-YYYYMMDD")
@@ -128,11 +161,16 @@ def main():
             [str(a.version_inspector), str(a.binary), a.version],
             check=True, capture_output=True, text=True).stdout)
     reports = a.repo / "workplace/reports"
-    verify_atlas_bindings(reports / MASKS["dialog-atlas.json"], a.repo,
+    if bool(a.mask_bundle) != bool(a.mask_manifest_sha256):
+        raise ValueError('字模來源與 manifest 指紋必須一起指定')
+    mask_files, mask_source = reusable_masks(a.mask_bundle, a.repo, a.mask_manifest_sha256) if a.mask_bundle else ({}, None)
+    dialog_path = a.mask_bundle / 'masks/dialog-atlas.json' if a.mask_bundle else reports / MASKS['dialog-atlas.json']
+    string_path = a.mask_bundle / 'masks/string-atlas.json' if a.mask_bundle else reports / MASKS['string-atlas.json']
+    verify_atlas_bindings(dialog_path, a.repo,
                           {"corpus": "corpus.zh-Hant.tsv", "terms": "terms.zh-Hant.tsv",
                            "draft": "draft.zh-Hant.tsv", "values": "variable-values.zh-Hant.tsv",
                            "help": "help-bilingual.tsv", "pedia": "pedia-bilingual.tsv"})
-    verify_atlas_bindings(reports / MASKS["string-atlas.json"], a.repo,
+    verify_atlas_bindings(string_path, a.repo,
                           {"templates": "string-templates.zh-Hant.tsv", "sea": "sea-status.zh-Hant.tsv",
                            "corpus": "corpus.zh-Hant.tsv", "draft": "draft.zh-Hant.tsv",
                            "terms": "terms.zh-Hant.tsv", "colony": "colony-bilingual.tsv"})
@@ -157,6 +195,8 @@ def main():
     for name in TEXT:
         files[f"text/{name}"] = ((a.repo / "text" / name).read_bytes(), 0o644)
     for dest, src in MASKS.items():
+        if a.mask_bundle:
+            continue
         srcs = src if isinstance(src, list) else [src]
         for s in srcs:
             path = reports / s
@@ -167,6 +207,7 @@ def main():
                 files[f"masks/{dest}"] = (mask_bytes(path), 0o644)
             else:
                 files[f"masks/{dest}/{path.name}"] = (mask_bytes(path), 0o644)
+    files.update(mask_files)
     for bad in files:
         if re.search(r"\.(png|idx|pal|memory|sav|exe|ss|pik|ttf)$", bad, re.I) and bad != "bin/" + native_name:
             raise SystemExit("包內不得有原版或畫面檔：" + bad)
@@ -177,6 +218,8 @@ def main():
                 "files": {k: {"sha256": sha(v[0]), "bytes": len(v[0])} for k, v in sorted(files.items())}}
     if macos:
         manifest["binary_validation"] = binary_validation
+    if mask_source:
+        manifest['mask_source'] = mask_source
     if embedded_version is not None:
         manifest["frontend_version"] = embedded_version
     files["MANIFEST.json"] = ((json.dumps(manifest, ensure_ascii=False, indent=1, sort_keys=True) + "\n").encode(), 0o644)
