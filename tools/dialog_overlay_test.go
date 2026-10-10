@@ -1484,9 +1484,19 @@ func TestMapTitleContextGuards(t *testing.T) {
 }
 
 func TestBuildTitlePreservationGuards(t *testing.T) {
-	canvas, e := os.ReadFile("/out/build-lifecycle-observer/title-at-107923065.idx")
+	path := os.Getenv("COLONIZATION_BUILD_TITLE_FIXTURE")
+	if path == "" {
+		path = "/out/build-lifecycle-observer/title-at-107923065.idx"
+	}
+	canvas, e := os.ReadFile(path)
+	if os.IsNotExist(e) && os.Getenv("COLONIZATION_BUILD_TITLE_FIXTURE") == "" {
+		t.Skip("缺合法原版建造標題收據，可用COLONIZATION_BUILD_TITLE_FIXTURE指定唯讀檔案")
+	}
 	if e != nil {
 		t.Fatal(e)
+	}
+	if len(canvas) != 64000 || fmt.Sprintf("%x", sha256.Sum256(canvas)) != "d9e188e3bdcdf80b1e4510f7d34e1e0688a3744294dbccffb3a148666385f682" {
+		t.Fatal("原版建造標題收據指紋失配")
 	}
 	items := []string{"(No Production)", "ARMORY (52 Hammers)", "DOCKS (52 Hammers)", "WAREHOUSE (80 Hammers)", "STABLE (64 Hammers)", "PRINTING PRESS (52 Hammers)(20 Tools)", "WEAVER'S SHOP (64 Hammers)(20 Tools)", "TOBACCONIST'S SHOP (64 Hammers)(20 Tools)", "RUM DISTILLERY (64 Hammers)(20 Tools)", "FUR TRADING POST (56 Hammers)(20 Tools)", "BLACKSMITH'S SHOP (64 Hammers)(20 Tools)", "WAGON TRAIN (40 Hammers)"}
 	for _, kind := range []string{"valid", "title", "phase", "title-safe", "snapshot", "title-size", "list-safe", "list-size", "identity", "row-count", "order", "overlap", "time"} {

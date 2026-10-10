@@ -25,6 +25,8 @@ if a.output.stat().st_uid != os.getuid():
 (a.output / 'music.go').write_bytes((a.repo / 'tools/music_playback.go').read_bytes())
 (a.output / 'music_test.go').write_bytes((a.repo / 'tools/music_playback_test.go').read_bytes())
 (a.output / 'version.go').write_bytes((a.repo / 'tools/frontend_version.go').read_bytes())
+(a.output / 'display_settings.go').write_bytes((a.repo / 'tools/display_settings.go').read_bytes())
+(a.output / 'display_settings_test.go').write_bytes((a.repo / 'tools/display_settings_test.go').read_bytes())
 (a.output / 'window_test.go').write_bytes((a.repo / 'tools/window_prototype_test.go').read_bytes())
 (a.output / 'dialog.go').write_bytes((a.repo / 'tools/dialog_overlay.go').read_bytes())
 (a.output / 'dialog_test.go').write_bytes((a.repo / 'tools/dialog_overlay_test.go').read_bytes())

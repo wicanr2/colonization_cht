@@ -35,6 +35,7 @@ const audioPlayRate = 48000
 // 兩者都只影響播放，不回饋到模擬（規格040）。
 type audioStream struct {
 	mu                                sync.Mutex
+	paused                            bool
 	rate                              uint64  // 來源取樣率
 	src                               []int16 // 尚未換算的來源（交錯）
 	srcBase                           uint64  // src[0] 的來源取樣編號
@@ -82,6 +83,10 @@ func (s *audioStream) push(samples []int16) {
 func (s *audioStream) Read(p []byte) (int, error) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
+	if s.paused {
+		clear(p)
+		return len(p), nil
+	}
 	n := copy(p, s.out)
 	s.out = s.out[n:]
 	clear(p[n:])
@@ -126,6 +131,28 @@ type frontendAudio struct {
 	player *audio.Player
 	err    string
 	music  *musicPlayback
+}
+
+// 規格050：設定期間不消耗播放串流，也不推進獨立音樂DOS。
+func (a *frontendAudio) setPaused(paused bool) {
+	if a == nil {
+		return
+	}
+	a.stream.mu.Lock()
+	a.stream.paused = paused
+	a.stream.mu.Unlock()
+	if a.music != nil {
+		a.music.mu.Lock()
+		a.music.paused = paused
+		a.music.mu.Unlock()
+	}
+	if a.player != nil {
+		if paused {
+			a.player.Pause()
+		} else {
+			a.player.Play()
+		}
+	}
 }
 
 func newFrontendAudio(m *golem.Machine, d *golem.DOS, play bool) *frontendAudio {

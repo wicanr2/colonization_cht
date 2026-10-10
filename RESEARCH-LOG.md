@@ -4980,3 +4980,16 @@ confirmed來源審查：正式檔案集合查558項TXT，440字串查譯、68MEN
 - confirmed：`tools/live_menu.go` 的 `render` 從320×200索引畫面及DAC色盤產生1280×800畫布；對照組為四倍最近鄰放大，中文組經`overlay.ComposeLayers`及後續覆蓋。`tools/window_prototype.go` 的`logicalMouse`將畫布座標除以四，F1～F10與多組修飾鍵送入原版。這些是Go來源定位，不是DOS位址或EXE檔案偏移。
 - 字型輸入為`Cubic_11.ttf`，SHA-256 `8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`。在hr-go-ebiten固定映像1430a2cf…內以Python3.11、Pillow9.4.0、24px抽查`A0%漢汉あア한글`，將每字遮罩與U+10FFFF比較。confirmed：`한`及`글`與未定義字遮罩相同，其餘抽查字不同；未檢查完整Unicode對照表，不稱日韓全字形覆蓋。這個工具鏈不取代正式字模烘製環境。
 - 原型的繁中及英文畫面取自同一次已驗貨車路徑的75900000步收據；含像素HTML只放本機。重繪樣張由imagegen參照同路徑城市畫面生成；構圖與字形均不是原版exact證據，未用來更動原版命中區或遊戲規則。來源及輸出雜湊見目標186所索引的`prototype-evidence.json`。
+
+## 2026-10-11：SS盤點、建築來源與設定暫停
+
+- 入口：[目標186](docs/goals/186-display-settings-and-gameplay-video.md)及[規格050](docs/spec/050-display-settings.md)。工具為Go1.26.7、Python3.11、Pillow9.4.0、隔離dosgolem82a14b2與hr-go-ebiten映像1430a2cf…。沒有新增IDA分析，也沒有修改原版或dosgolem。
+- 原版核心指紋沿docs/text-census-baseline.json。焦點SS為BUILDING.SS `e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4`、PHYS0.SS `deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16`、ICONS.SS `a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716`、TERRAIN.SS `a6de9353f2240c214051820369abacf3bb82affbb4736a89c589886fb306f4b6`。外部mpskit固定commit8c30544b…、來源清冊340f9803…，研究工具逐檔核對清冊；原碼與解碼圖不入Git。
+- confirmed：實際206個SS有1517幀，1498非空。SS為四部分；檔內part1圖像標頭與part3資料位移均指解壓後部分，不能當作EXE檔位移或原版RAM。BUILDING第032幀為23×27，part1標頭位移512、part3位移22616、編碼長度欄534、不透明440點、透明索引253，解碼索引SHA-256 `d74c97554fc556cdb21899b7f720f2af79d2047cd3e11d57a38c99aa696246e2`。標頭其他padding欄位的語意仍未知，不由名稱猜測。
+- confirmed：正常殖民地75900000步的原版索引60c933b0…與DAC ad5461e6…，四份SS的345候選中42素材／71完整位置；BUILDING032唯一可見矩形[56,13,79,40]。正常世界63525000步有16素材／139位置，PHYS0第148幀海面有108處；海面16×16、色號60／61／62，解碼索引4f040c4d…。完整像素匹配只證可見位置，不證繪圖順序、裁切或動畫。
+- confirmed：正常輸入9b246ee6…與初始COLONY09.SAV 52ae8b7b…重播至67569346步，在原版CS:IP `0D46:01D2`寫建築像素。當次來源遠指標`5F3B:000E`，20位元線性RAM為`0x5F3BE`；其完整534bytes與BUILDING.SS解壓part3位移22616全同，該段在part3唯一，編碼SHA-256 `7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a`。三種地址空間各自定義，不作同一位址使用。其他建築與完整呼叫參數仍未知。
+- confirmed：有無寫入觀測在75900000步的CPU暫存器／旗標、完整RAM d1c90dc7…、VGA 60c933b0…與DAC ad5461e6…相同。與歷史正式GUI的完整RAM 341f8c31…不同，原因未知，不能外推跨前端同狀態。最新探針Go來源43225643…、二進位50dee4ee…、原始觀測9a2c9a0e…；完整來源比對摘要ae78b76a…，本機building-032-source-proof.json保存全雜湊與狀態。
+- 驗證：check_goal186_research.py的9項守門PASS，完整摘要 `621e329b1d95e2af9b02d17e74549fb6bca2c21a151ca00a3045580ae52db790`；盤點620b2780…、殖民地位置e5e60bee…、世界位置4311a1f1…。所有收據在workplace/reports/goal186-display-hd，原版像素不公開。
+- 字型：[Noto CJK官方來源](https://github.com/notofonts/noto-cjk/tree/523d033d6cb47f4a80c58a35753646f5c3608a78)Sans2.004固定commit523d033d…，Regular TTC b76b0433…、OFL 6a73f954…。Pillow實際辨識JP／KR／SC／TC face 0／1／2／3，四語樣張與ASCII均無抽查缺字，Cubic11韓文缺字；不稱全語料覆蓋。公開樣張腳本重生PNG4986d9ea…，只作字型選擇，不作正式逐欄字模。字型決定待答。
+- 生成候選：building-032-candidate-v1.png為RGBA1157×1359、SHA-256 `5d13b043d1824359a3d0970ccd91cec78633d824bdc6efbf3cc6fa7551ae3aa7`。imagegen參照已定稿畫風及真實建築圖，完整提示與來源見本機同名JSON。原版輪廓、92×108目的矩形、透明邊界及零星色點未驗，不列正式HD完成數。
+- 設定核心：174Go、零skip及go vet通過，收據a49a7201…。獨立音樂暫停時五次讀取不推進原版步數、完整RAM或命令；恢復PCM及音樂原版狀態與無暫停控制相同。前端設定列、語言包交換與正常GUI仍未驗，規格050保持READY。初次測試缺硬編碼的既有標題收據，新增環境變數與固定指紋入口後同映像乾淨重跑成功，保留原失敗JSON。

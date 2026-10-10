@@ -1482,7 +1482,7 @@
       "acceptance": "繁中、簡中、日文、韓文及英文可切換；英文使用原版字體，其餘語言的英數用該語言字型。資料包、逐欄排版、輸入隔離、正常GUI、同狀態與存讀檔驗收通過，原版操作不變。",
       "verify": {
         "kind": "manual",
-        "note": "入口docs/goals/186-display-settings-and-gameplay-video.md；目前只有規劃與可丟棄HTML原型。正式設定架構、日韓字型與新增譯稿尚未確認或建置，不能把五個可點選項當成五語完成。"
+        "note": "入口docs/goals/186-display-settings-and-gameplay-video.md；2026-10-11使用者確認畫面外設定列、開啟暫停及關閉放開後恢復。規格050 READY，設定狀態與兩條音訊暫停核心已實作，174Go及go vet通過、零skip；未接入真視窗。Cubic11與官方Noto Sans CJK四語／英數真字型樣張已展示，字型待選；五語包、逐欄排版與GUI未完成。"
       }
     },
     {
@@ -1494,7 +1494,7 @@
       "acceptance": "依已定稿的第一張精細像素風重繪地形、人物與建築；原始像素與HD可獨立於語言切換。正常GUI、動畫、遮擋、座標、效能、同狀態與素材權利驗收通過，原版規則與存檔不變。",
       "verify": {
         "kind": "manual",
-        "note": "使用者於2026-10-11定稿第一張精細像素風並授權草稿入庫；決定見AGENTS.md，原圖及來源紀錄為docs/screenshots/hd-pixel-concept.png與同名JSON。入口docs/goals/186-display-settings-and-gameplay-video.md；正式資產定位、分層與切換仍待實作驗收，HD工作維持未完成。"
+        "note": "使用者於2026-10-11定稿第一張精細像素風並授權草稿入庫，見AGENTS.md及docs/screenshots/hd-pixel-concept.png與JSON。206SS／1517幀盤點、殖民地42素材71位置、世界16素材139位置及9項研究守門通過；建築032來源與原版0D46:01D2緩衝完整534bytes全同且唯一，有無觀測完整原版狀態相同。首座建築候選已生成；正式輪廓、圖層、動畫、HD切換與GUI未驗，不能算完成。入口docs/goals/186-display-settings-and-gameplay-video.md與tools/check_goal186_research.py。"
       }
     },
     {

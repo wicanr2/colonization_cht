@@ -181,6 +181,7 @@ type musicPlayback struct {
 	queries                   atomic.Uint64
 	maxReadSeconds            float64
 	closed                    bool
+	paused                    bool
 }
 
 func (p *musicPlayback) enqueue(e musicCommand) {
@@ -229,16 +230,20 @@ func (p *musicPlayback) observe(m *golem.Machine, d *golem.DOS) func() {
 func (p *musicPlayback) Read(b []byte) (int, error) {
 	p.mu.Lock()
 	defer p.mu.Unlock()
+	if p.closed {
+		clear(b)
+		return 0, io.EOF
+	}
+	if p.paused {
+		clear(b)
+		return len(b), nil
+	}
 	start := time.Now()
 	defer func() {
 		if s := time.Since(start).Seconds(); s > p.maxReadSeconds {
 			p.maxReadSeconds = s
 		}
 	}()
-	if p.closed {
-		clear(b)
-		return 0, io.EOF
-	}
 	p.queueMu.Lock()
 	q, problem := p.queue, p.queueError
 	p.queue = nil
