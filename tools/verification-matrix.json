@@ -4384,6 +4384,23 @@
       ],
       "known_diffs": "288實際TXT來源接線、19變數及19常數消費端、180Go；34新正常GUI四側原版／WAV／存檔全等、畫面與已驗貿易版全等；93圖當前回歸與10列既有BUY／武裝／議會／港口／報表驗收。新四城市條件訊息與建造換頁未各自GUI，不增加shown；五類154 shown／137 pending保留。"
     }
+    ,{
+      "id": "wagon-build-save-sample",
+      "path": "dynamic",
+      "title": "貨車資金不足與正常存檔追加抽驗",
+      "specs": ["035", "038"],
+      "flags": ["--dialog-a", "--string-a"],
+      "checker": "check_goal185_wagon_sample.py",
+      "args": ["--game", "{game}", "--reports", "{reports}/goal185-player-experience"],
+      "dir": "goal185-player-experience",
+      "zh": ["issue56-wagon-sample-zh/run"],
+      "control": ["issue56-wagon-sample-control/run"],
+      "negative": ["issue56-wagon-sample-missing/run"],
+      "gui_inputs": ["issue56-wagon-sample-gui/gui.inputs.json"],
+      "census_scope": "checker",
+      "regenerate": ["tools/build_window_prototype.py", "workplace/reports/goal185-player-experience/play_issue56_wagon_sample.py", "workplace/reports/goal185-player-experience/replay.py"],
+      "known_diffs": "人口三人、1506春季正常讀檔，15圖四側CPU／RAM／索引／色盤／WAV／存檔全等；中文GUI等於中文重播，缺譯回退等於原文。食物教學、貨車1040／國庫1000提示與存檔成功三則中文通過；普查只採食物教學與存檔成功，不將BUY同文模板當成來源證據。未觸發的城市條件保留待抽樣。"
+    }
   ],
   "not_covered": [
     "docs/text-census.tsv 中尚未驗到的可達文字，包括國王接見其餘局勢、教學提示、殖民地、歐洲港口、報告、外交及尚未驗收的百科頁面",

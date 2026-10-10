@@ -292,7 +292,7 @@ EXE:3d6afa0c3880	exe	（執行期字串）	string	normal	shown	歷史驗收：co
 EXE:3db67c85ce1a	exe	（執行期字串）	string	normal	shown	歷史驗收：confirmed	1	colonizopedia,pedia-father-all	
 EXE:3df037be06b0	exe	（執行期字串）	string	normal	shown	歷史驗收：confirmed	1	pedia-terrain-all	
 EXE:3e7db988ee08	exe	（執行期字串）	string	normal	shown	歷史驗收：confirmed	1	colony-interactions	
-EXE:3f02988e15cd	exe	海上地圖	menu	normal	shown	人工歸類	1	人工歸類	build-list-source-transaction,colony-source-completion,end-turn-background-and-dialog-frames,go-to-port-family-long,go-to-port-family-short,orders-compact-six,pedia-six-category-original-boundary,sea-city-name-data-contracts,trade-route-two-four-fields,tutorial-cargo-city,tutorial-city-arrival-growth,unit-selection-caption
+EXE:3f02988e15cd	exe	海上地圖	menu	normal	shown	人工歸類	1	人工歸類	build-list-source-transaction,colony-source-completion,end-turn-background-and-dialog-frames,go-to-port-family-long,go-to-port-family-short,orders-compact-six,pedia-six-category-original-boundary,sea-city-name-data-contracts,trade-route-two-four-fields,tutorial-cargo-city,tutorial-city-arrival-growth,unit-selection-caption,wagon-build-save-sample
 EXE:414cb9e4c237	exe	百科	string	normal	shown	歷史驗收：confirmed	1	pedia-terrain-all	
 EXE:4346050e612f	exe	（執行期字串）	string	normal	shown	confirmed	1	trade-grid-land,trade-grid-sea	trade-route-land,trade-route-sea
 EXE:434971245338	exe	（執行期字串）	string	normal	shown	confirmed	1	voyage-fields-and-two-port-options	
@@ -981,7 +981,7 @@ GAME.TXT:@SAILHOME	txt	海上地圖	dialog	normal	shown	confirmed	5	goal185-choi
 GAME.TXT:@SAILPORT	txt	對話框	dialog	conditional	shown	confirmed	1	go-to-port-family-long,go-to-port-family-short	
 GAME.TXT:@SAVEERROR	txt	存讀檔	dialog	conditional	shown	confirmed	1	goal185-save-error	
 GAME.TXT:@SAVEGAME	txt	存讀檔	dialog	normal	shown	confirmed	1	save-load-slot-lists	
-GAME.TXT:@SAVEGOOD	txt	存讀檔	dialog	normal	shown	confirmed	1	goal185-newgame-save,save-good-notice	europe-board-seven
+GAME.TXT:@SAVEGOOD	txt	存讀檔	dialog	normal	shown	confirmed	1	goal185-newgame-save,save-good-notice,wagon-build-save-sample	europe-board-seven
 GAME.TXT:@SCHOOL1	txt	殖民地	dialog	conditional	pending		2		
 GAME.TXT:@SCORE	txt	結局	string	conditional	pending		24		
 GAME.TXT:@SCORED	txt	結局	dialog	conditional	pending		3		
@@ -1069,7 +1069,7 @@ GAME.TXT:@TUTORIAL12	txt	教學提示	tutorial	normal	shown	confirmed	7	colony-d
 GAME.TXT:@TUTORIAL13	txt	教學提示	tutorial	normal	shown	confirmed	9	colony-buy-insufficient	
 GAME.TXT:@TUTORIAL14	txt	教學提示	tutorial	normal	shown	歷史驗收：confirmed	7	colonizopedia,europe-reports,frontend-audio,input-labels,orders-disabled-map-label,sea-menus-occlusion,tutorial-dialogs	
 GAME.TXT:@TUTORIAL15	txt	教學提示	tutorial	normal	shown	confirmed	3	tutorial-city-arrival-growth	
-GAME.TXT:@TUTORIAL16	txt	教學提示	tutorial	normal	pending		8		
+GAME.TXT:@TUTORIAL16	txt	教學提示	tutorial	normal	shown	confirmed	8	wagon-build-save-sample	
 GAME.TXT:@TUTORIAL17	txt	教學提示	tutorial	normal	shown	confirmed	11	europe-cancel-and-report-fields	
 GAME.TXT:@TUTORIAL18	txt	教學提示	tutorial	normal	pending		7		
 GAME.TXT:@TUTORIAL19	txt	教學提示	tutorial	conditional	pending		5		

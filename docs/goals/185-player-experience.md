@@ -1,6 +1,24 @@
 # 目標185：dosgolem遊玩體驗與Issue關閉審查
 
-日期：2026-10-07。狀態：新局停止已修復，限定驗收通過；整體中文化與三平台交付仍未完成。
+日期：2026-10-10。狀態：#56完成，追加正常抽驗通過；新版三平台交付及Release進行中。未宣稱全部情境驗收完成。
+
+## 2026-10-10追加抽驗與重新交付
+
+使用者明確授權本輪抽驗後commit、push、重製推廣影片及三平台完整版加Release。沿規格044、現有封裝與權利邊界，不重新定義中文化完成標準；預定v.1.0.3-20261010，實際版號日期依Asia/Taipei發行日核對。
+
+新正常條件訊息抽驗入口為既有私用根中的 `play_issue56_wagon_sample.py`、`issue56-wagon-seed/`與`issue56-wagon-sample-gui/`；中英及缺字模重播留同名前綴的zh／control／missing目錄。輸入只經正常GUI，不改原版RAM或存檔內容。
+
+本輪打包中間物統一在同根 `release/`，由現有tools/build_release.sh、package_three_platforms.sh、assemble_release.py及build_promo.py重生；正式交付沿dist-all/<版本>/。原版資料完整包留full-local，公開Release僅完整功能包、MP4與雜湊清單。
+
+追加抽驗入口為[貨車與存檔檢查器](../../tools/check_goal185_wagon_sample.py)。15圖四側原版狀態、記憶體、索引、色盤、WAV與兩份存檔全等，中文GUI與中文重播逐像素相同，缺譯回退與原文相同。收據為同根 `issue56-wagon-sample-review.json`。食物教學、貨車資金不足與存檔成功三則中文通過；普查只採食物教學與存檔成功，不將BUY同文模板當成來源證據，不將未觸發的城市條件列為GUI通過。
+
+封裝工具恢復見[規格041](../spec/041-linux-appimage.md)，字模來源恢復見[規格044](../spec/044-release-and-promo.md)。固定工具與字模輸入收據留 `release/tools/`、`release/`；沿用已驗正式包的字模，不冒稱重烘。
+
+矩陣與普查增量入口為同根 `register_wagon_sample.py`、`history-census-102-delta/`。新版影片畫面由 `release/replay_promo_scene.py` 使用本輪正式包與既有正常GUI輸入重生；素材與驗收都留 `release/`。
+
+採用後的普查指紋列由 `finalize_wagon_sample.py` 重驗。正式包字模來源、六個拒絕案例與時間戳由 `release/check_delivery_inputs.py` 核對；影片設定由 `release/prepare_promo_config.py` 核對正常輸入、程式與收據指紋後產生。
+
+BUY原始來源的輔助觀測留 `release/buy-source-observer/`，使用公開probe_goal181_buy_sources.go，觀測到@BUYME0，但該觀測器完整RAM與正式GUI不同，不宣稱同狀態。初次102批的BUY同文來源歸屬已拒絕，留 `history-census-102-template-alias-rejected/`；現行增量重新從101批合併，只新增已驗食物教學信用。
 
 ## 2026-10-10收尾入口
 
