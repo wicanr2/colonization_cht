@@ -32,6 +32,15 @@ def main():
                 saved.get("created") == "COLONY00.SAV" and
                 saved.get("sha256") == sha((args.gui / "save/COLONY00.SAV").read_bytes()), "正常存檔收據不同")
         scenes += ["save-slots", "save-success", "saved-world"]
+    initial_extra = {}
+    if "normal_load_cycle" in gui:
+        loaded = gui["normal_load_cycle"]
+        require("normal_save_cycle" not in gui and loaded.get("kind") == "new-process-normal-load-and-colony-return" and
+                loaded.get("loaded") == "COLONY00.SAV" and
+                loaded.get("initial_saves") == tree(args.gui / "save"), "新行程讀回存檔收據不同")
+        require(set(loaded["initial_saves"]) == {"COLONY00.SAV", "COLONY09.SAV"}, "新行程初始存檔清冊不同")
+        initial_extra["COLONY00.SAV"] = (args.gui / "save/COLONY00.SAV").read_bytes()
+        scenes = ["main-menu", "load-slots", "load-success", "loaded-world", "colony"]
     require(gui["result"] == "PASS_NATIVE_LIVE_FIVE_LANGUAGE_GUI" and
             sorted((c["scene"], c["locale"]) for c in gui["checks"]) ==
             sorted((s, l) for s in scenes for l in ["zh-Hant", "zh-Hans", "ja", "ko", "en"]),
@@ -57,6 +66,8 @@ def main():
         run = root / name
         (run / "save").mkdir(parents=True)
         (run / "save/COLONY09.SAV").write_bytes(seed)
+        for save_name, contents in initial_extra.items():
+            (run / "save" / save_name).write_bytes(contents)
         script = run / "launch.sh"
         script.write_text(launcher.replace(marker, "exec " + shlex.quote(str(binary)) + " ", 1))
         env = os.environ.copy()

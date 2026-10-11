@@ -33,6 +33,8 @@ def main():
     for name in ["binary", "launcher", "game", "seed", "inputs", "ui-font", "ui-catalog", "bundles", "output"]:
         parser.add_argument("--" + name, type=Path, required=True)
     parser.add_argument("--save-cycle", action="store_true", help="追加正常存檔插槽、成功通知及返回世界的五語驗證")
+    parser.add_argument("--reload-save", type=Path, help="先前已驗正常存檔GUI目錄")
+    parser.add_argument("--reload-proof", type=Path, help="該GUI的四側重播check.json")
     args = parser.parse_args()
     need(Path("/.dockerenv").is_file() and os.environ.get("DISPLAY"), "需Docker與有界Xvfb")
     output = args.output.resolve()
@@ -44,6 +46,31 @@ def main():
     marker = "exec /out/issue56-source-connection-audit/colonization-window "
     launcher = args.launcher.read_text()
     need(launcher.count(marker) == 1, "啟動器替換點不唯一")
+    load_cycle, saved_bytes, saved_preferences = None, None, None
+    need(bool(args.reload_save) == bool(args.reload_proof) and not (args.reload_save and args.save_cycle),
+         "新行程讀回需成對提供來源與重播證明，且不得同時重新存檔")
+    if args.reload_save:
+        source_bytes, proof_bytes = (args.reload_save / "check.json").read_bytes(), args.reload_proof.read_bytes()
+        source, proof = json.loads(source_bytes), json.loads(proof_bytes)
+        saved_bytes = (args.reload_save / "save/COLONY00.SAV").read_bytes()
+        saved_preferences = (args.reload_save / "preferences/display.json").read_bytes()
+        expected_saves = {"COLONY00.SAV": sha(saved_bytes), "COLONY09.SAV": sha(seed)}
+        need(source["result"] == "PASS_NATIVE_LIVE_FIVE_LANGUAGE_GUI" and
+             source.get("normal_save_cycle") == {"kind": "normal-gui-save-slot-success-return",
+                                                 "created": "COLONY00.SAV", "sha256": sha(saved_bytes)} and
+             source["source_sha256"]["binary"] == sha(args.binary.read_bytes()), "正常存檔來源未通過")
+        need(proof["result"] == "PASS_NATIVE_LIVE_GUI_FOUR_REPLAYS" and
+             proof["source_sha256"]["gui"] == sha(source_bytes) and len(proof["runs"]) == 4 and
+             proof["source_sha256"]["inputs"] == source["gui_inputs_sha256"] ==
+             sha((args.reload_save / "gui.inputs.json").read_bytes()) and
+             all(x["state"] == json.loads((args.reload_save / "gui.json").read_bytes())["state"]
+                 for x in proof["runs"].values()) and
+             all(x["save_sha256"] == expected_saves for x in proof["runs"].values()) and
+             sha((args.reload_save / "save/COLONY09.SAV").read_bytes()) == sha(seed), "正常存檔四側證明不同")
+        need(json.loads(saved_preferences) == {"language": "zh-Hant", "graphics": "original"}, "前次保存設定不同")
+        load_cycle = {"kind": "new-process-normal-load-and-colony-return", "loaded": "COLONY00.SAV",
+                      "initial_saves": expected_saves, "source_gui_sha256": sha(source_bytes),
+                      "source_replay_sha256": sha(proof_bytes), "initial_preferences_sha256": sha(saved_preferences)}
     output.mkdir()
     save, preferences = output / "save", output / "preferences"
     save.mkdir()
@@ -52,6 +79,9 @@ def main():
     script = output / "launch.sh"
     script.write_text(launcher.replace(marker, "exec " + shlex.quote(str(args.binary)) + " ", 1))
     prefix, preference = output / "gui", preferences / "display.json"
+    if load_cycle is not None:
+        (save / "COLONY00.SAV").write_bytes(saved_bytes)
+        preference.write_bytes(saved_preferences)
     env = os.environ.copy()
     env["COLONIZATION_CHT_SAVE"] = str(save)
     command = ["bash", str(script), "--game", str(args.game), "--play=false", "--audio-mute",
@@ -166,6 +196,9 @@ def main():
                     if scene == "save-success":
                         need(any(i.get("kind") == "dialog" and i.get("id") == "GAME.TXT:0x000007B9"
                                  for i in record["items"]), "當次成功通知沒有實際重建")
+                    if scene == "load-success":
+                        need(any(i.get("kind") == "dialog" and i.get("id") == "GAME.TXT:0x00000854"
+                                 for i in record["items"]), "當次讀檔通知沒有實際重建")
                     if scene == "colony":
                         numerals = {item.get("source") for item in record["items"]
                                     if item.get("id") == "STRING:retained-ascii" and item.get("font_px", 0) > 0}
@@ -206,11 +239,35 @@ def main():
             send(event)
         wait(lambda s: any(i.get("id") == "GAME.TXT:0x000001B0" for i in (live(s).get("items") or [])), "未到已驗主選單")
         offset = switch_round("main-menu")
-        for event in path[5:15]:
-            send(event, offset)
-        wait(lambda s: s.get("step", 0) >= 63000000 + offset and
-             any(i["kind"] == "sea-bar" for i in (live(s).get("items") or [])), "未到正常世界畫面")
-        switch_round("world")
+        if load_cycle is None:
+            for event in path[5:15]:
+                send(event, offset)
+            wait(lambda s: s.get("step", 0) >= 63000000 + offset and
+                 any(i["kind"] == "sea-bar" for i in (live(s).get("items") or [])), "未到正常世界畫面")
+            switch_round("world")
+        else:
+            # 已驗正常讀回操作：goal185-player-experience/play_reload_newgame.py。
+            before = status()["step"]
+            click(512, 536 + 48)
+            wait(lambda s: s.get("step", 0) >= before + 3000000, "讀檔插槽未完成繪製")
+            switch_round("load-slots")
+            click(480, 310 + 48)
+            wait(lambda s: any(i.get("id") == "GAME.TXT:0x00000854"
+                              for i in live(s).get("items", [])), "新行程未正常讀回存檔")
+            switch_round("load-success")
+            before = status()["step"]
+            xdo("keydown", "Return")
+            time.sleep(0.08)
+            xdo("keyup", "Return")
+            wait(lambda s: s.get("step", 0) >= before + 4000000 and
+                 any(i["kind"] == "sea-bar" for i in live(s).get("items", [])) and
+                 not any(i.get("id") == "GAME.TXT:0x00000854" for i in live(s).get("items", [])),
+                 "讀檔通知關閉後來源未撤銷")
+            switch_round("loaded-world")
+            # 新存檔讀回後尚無選取；第一次點擊只選船，原版側欄隨即出現。
+            click(152 * 4, 112 * 4 + 48)
+            wait(lambda s: any(i.get("kind") == "sea-panel" and i.get("source") == "Eng. Caravel"
+                              for i in live(s).get("items", [])), "讀回後未正常選取船")
         before = status()["step"]
         click(152 * 4, 112 * 4 + 48)
         wait(lambda s: s.get("step", 0) >= before + 8000000, "切換後未繼續進城")
@@ -254,6 +311,8 @@ def main():
         process.wait(timeout=25)
         need(process.returncode == 0, "視窗未正常關閉")
         need(sha((save / "COLONY09.SAV").read_bytes()) == sha(seed), "顯示切換改動初始存檔")
+        if load_cycle is not None:
+            need(sha((save / "COLONY00.SAV").read_bytes()) == sha(saved_bytes), "新行程改動讀回存檔")
         need(prefix.with_suffix(".inputs.json").is_file(), "沒有實際DOS輸入收據")
         result = {"result": "PASS_NATIVE_LIVE_FIVE_LANGUAGE_GUI", "checks": checks, "final_live": final_live,
                   "source_sha256": {"binary": sha(args.binary.read_bytes()), "launcher": sha(args.launcher.read_bytes()),
@@ -262,6 +321,8 @@ def main():
                   "limitations": ["隔離視窗；完整來源生命週期、正式接線、HD及同輸入重播仍須另外驗證。"]}
         if save_cycle is not None:
             result["normal_save_cycle"] = save_cycle
+        if load_cycle is not None:
+            result["normal_load_cycle"] = load_cycle
         (output / "check.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
         print(result["result"], len(checks), flush=True)
     finally:
