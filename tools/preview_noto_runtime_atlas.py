@@ -18,7 +18,7 @@ from render_language_font_sample import HASHES
 
 GO_PINS = {
     "tools/dialog_overlay.go": "b93dcf45c424b8aac175f71da0e05d54782d9ccc36774fdd1ac7f0bbd69e8a50",
-    "tools/string_overlay.go": "543afd88d0cdebb3723dd08e39745c883208bfa6af121f0ccffa24955b5ae59e",
+    "tools/string_overlay.go": "9730c6095bbedb91497e3de0f2a773af32f30c8fdb0dcc9b60d1434d1ac61478",
 }
 CONSUMERS = {
     "dialog": {"corpus": "corpus.zh-Hant.tsv", "terms": "terms.zh-Hant.tsv",

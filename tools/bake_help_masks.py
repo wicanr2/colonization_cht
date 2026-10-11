@@ -13,7 +13,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 
 from preview_goal102_nation_intro import FONT_SHA
-from preview_goal142_help import CARAVEL, TEXT, layout
+from preview_goal142_help import TEXT, layout
 
 KEY = "GAME.TXT:@TUTORIAL1"
 FIELDS = ["message_id", "source_file", "source_file_sha256", "section_offset", "text_offset", "text_byte_length",
@@ -44,7 +44,10 @@ def bake(args):
     require(sha(game) == GAME_SHA == row["source_file_sha256"] and
             sha(game[offset:offset + length]) == row["source_bytes_sha256"] and row["status"] == "draft",
             "help 來源片段不符")
-    translation = row["zh_hant"].replace("%STRING0", CARAVEL)
+    terms = list(csv.DictReader(io.StringIO(args.terms.read_text()), delimiter="\t", strict=True))
+    caravel = [r["zh"] for r in terms if r["en"] == "Caravel" and r["category"] == "ship"]
+    require(len(caravel) == 1 and caravel[0] and not any(c in caravel[0] for c in "{}%~#^\r\n\t"), "Caravel定稿術語缺件或不符")
+    translation = row["zh_hant"].replace("%STRING0", caravel[0])
     require("%" not in translation, "help 譯文有未展開變數")
     lay = layout(translation, args.font, 0)
     require(lay["size"] == 30 and lay["fits"], "A 版字級或版面不符使用者決定")
@@ -86,6 +89,7 @@ def bake(args):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--catalog", type=Path, default=Path("/repo/text/help-bilingual.tsv"))
+    p.add_argument("--terms", type=Path, default=Path("/repo/text/terms.zh-Hant.tsv"))
     p.add_argument("--game", type=Path, required=True)
     p.add_argument("--font", type=Path, required=True)
     p.add_argument("--output", type=Path, required=True)

@@ -2007,3 +2007,17 @@ zh-Hans	colonies	COLONY.TXT:@DUTCH:30	4bfa450f2655d2c0783c443cf46303c405286814fd
 zh-Hans	colonies	COLONY.TXT:@DUTCH:31	5a0b8a50ae5863fbd1e065bab6b70d3a0bd4163ebd24660b8cbae58783e173f9	奈亚克（Naiack）	translated	OpenCC 1.1.9 tw2sp轉換起稿；尚未完成逐句人工校對。
 zh-Hans	corpus	GAME.TXT:@CHIEFHOWDY:0x00006E3E	4208afea3fe929579b40137d5aad26df21079be797b9e489d450005c7b263796	「旅人，你们好。我们是个以{%STRING0}闻名的和平村庄。若你们能带来我们急需的{%STRING1}，我们很乐意与你们交易；{%STRING2}或{%STRING3}，我们也愿意出好价钱收购。	translated	2026-10-11未閉合引號讀法勘誤：補回實體來源列，保留原文單邊引號；未經母語校閱
 zh-Hans	corpus	GAME.TXT:@WARMANLY:0x0000E83B	13dbdc506c0588f32350ac4d9a0c145e246d60ca2a0f7e24eefd1988f3baa617	「你们拒绝我们宽厚的提议？那我们就以%STRING0之名，把你们从新世界的版图上抹去。准备开战吧！	translated	2026-10-11未閉合引號讀法勘誤：補回實體來源列，保留原文單邊引號；未經母語校閱
+zh-Hans	templates	display-sea-gold	4e8686eb2520f5ab0065492408f6f6412d6243126715dae56efb8b8d0741acee	{w1}{n1}$　{w2}{n2}%	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+zh-Hans	templates	display-sea-location	dd123a824e536e1a9826875179a066f8c50e6acf0fca3e06b156b18be995e0e2	{w1}({n1}, {n2})	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+zh-Hans	templates	display-sea-moves	43a69fa761fa08c21569e9e3b417695b4af1bfae81832167eb6ec993877310ed	{w1}{w2}	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+zh-Hans	templates	display-sea-inbound	7c138bf33bb1af82965b3a908e909fc7471288d1e4fbc94d48341301bbe896a8	{w1}{w2}{w3}{w4}	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+zh-Hans	templates	display-sea-date	7f47952f62b62520840987db05a6308ef6741a46b849695fa3e2dbf9fc875015	{n1}年{w1}	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+zh-Hans	templates	display-sea-unit	012af9aa9ad16da29444eed4da55c0c2e8d4818fba47198073e2cf7a67cedf07	{w1}{w2}	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+zh-Hans	templates	display-sea-terrain	d04694b335e7458358b1600094666bb061ad8abaf327e90b1baea7897e4f487f	（{w1}）	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+zh-Hans	templates	display-sea-goods	58c10c1a53babf062d2ab2e9e58d58d5618dfbebbf778006a1c939b300b5d9f2	{n1} {w1}	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+zh-Hans	templates	display-view-location	64842af375f6ed85c0e1c0b9d2a4fe6723d4e8f09aa05a3c42ae7407aada7486	{w1}（{n1}, {n2}） {n3}	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+zh-Hans	templates	display-view-tribe-land	3392512f0f05d3453536be04bbeca73ac7a3b0d9084f1f2df7dc4a8757063e21	{w1}的土地	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+zh-Hans	templates	display-save-description	a4af57dc6c7284577bf1f5c40529c3de25d5c93355c2db3b4d892d786e5e6703	{w2}{w1} {person}（{n1}年{w3}）	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+zh-Hans	templates	display-port-ship-header	0d92aa853c3b4428ee4770783e5b439a223d62e54e8ee1a32e5cb1ad882a4981	{w1}{w2}，位于{w3}	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+zh-Hans	templates	display-voyage-go-to	a88c06d2605f3e71216eaea4dfc77c26899c0d2c1eba597c9efd6c3ac87384da	前往{w1}	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+zh-Hans	templates	display-voyage-ship-header	c3e3672a24ad0fc573573cfbcf846b05dcd313c11c54de8ab4762a4c8bc39467	{w1}{w2}，{w3}{w4}	translated	規格059組句起稿；保留原始來源角色，未經母語校閱

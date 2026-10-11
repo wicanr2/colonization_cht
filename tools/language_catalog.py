@@ -84,7 +84,7 @@ class BaseCatalog:
                 resolved.append(entry)
                 bindings.append({column: entry[column] for column in ("catalog", "key", "base_sha256")})
             self.tables.append((table, header, resolved, data))
-        require(len(self.entries) == self.registry["total"] == 2008, "基準語料不完整")
+        require(len(self.entries) == self.registry["total"] == 2022, "基準語料不完整")
         require(sha(canonical(bindings)) == self.registry["source_binding_sha256"], "完整基準鍵指紋不同")
 
 

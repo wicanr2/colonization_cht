@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "total": 2008,
-  "source_binding_sha256": "91bfc5e32a369f8c0a8654fe429a9f07ca386f16ec8fc12dde36d2a7eedbc4c8",
+  "total": 2022,
+  "source_binding_sha256": "489f2aff5d0bba6ba4795571b3f5405e86ce198b295dba0bec3fb7538b2642ac",
   "tables": [
     {
       "catalog": "draft",
@@ -123,8 +123,8 @@
         "template_id"
       ],
       "display_column": "zh_hant",
-      "rows": 66,
-      "sha256": "8033f8fd2ecfca57badedfa26fcac449407827077c2cd0029077e342cac5f9d7"
+      "rows": 80,
+      "sha256": "22d4248b0f3232f8ca521a4d0a12088f71263fb82dcb4df734b4ebd97d921c16"
     },
     {
       "catalog": "colonies",

@@ -2007,3 +2007,17 @@ ko	pedia	PEDIA.TXT:@UNIT8	f5122d637f8c7a5115ff0b03e508f4fe6999cd74b7ec443d05e0c8
 ko	pedia	PEDIA.TXT:@UNIT9	40b4a8c7393ca6bdb027d871dea190434f66ba2893171a957410e2b9b7a10e06	^{대륙군}\n고참 병사보다 한 단계 높은 전투력을 지닌 보병입니다. 깊은 숲을 잘 아는 고참이며 정규 군사 훈련도 받았습니다.	translated	目標186：原版英文及繁中對照起稿；未經母語校閱。
 ko	corpus	GAME.TXT:@CHIEFHOWDY:0x00006E3E	4208afea3fe929579b40137d5aad26df21079be797b9e489d450005c7b263796	“여행자 여러분, 반갑습니다. 우리는 {%STRING0}(으)로 이름난 평화로운 마을입니다. 절실히 필요한 {%STRING1}을 가져오면 기꺼이 거래하겠습니다. {%STRING2} 또는 {%STRING3}도 좋은 값에 사겠습니다.	translated	2026-10-11未閉合引號讀法勘誤：補回實體來源列，保留原文單邊引號；未經母語校閱
 ko	corpus	GAME.TXT:@WARMANLY:0x0000E83B	13dbdc506c0588f32350ac4d9a0c145e246d60ca2a0f7e24eefd1988f3baa617	“우리의 관대한 제안을 거절한다고? 그렇다면 %STRING0의 이름으로 너희를 신세계에서 지워 버리겠다. 전쟁을 각오해라!	translated	2026-10-11未閉合引號讀法勘誤：補回實體來源列，保留原文單邊引號；未經母語校閱
+ko	templates	display-sea-gold	4e8686eb2520f5ab0065492408f6f6412d6243126715dae56efb8b8d0741acee	{w1} {n1}$　{w2} {n2}%	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+ko	templates	display-sea-location	dd123a824e536e1a9826875179a066f8c50e6acf0fca3e06b156b18be995e0e2	{w1} ({n1}, {n2})	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+ko	templates	display-sea-moves	43a69fa761fa08c21569e9e3b417695b4af1bfae81832167eb6ec993877310ed	{w1} {w2}	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+ko	templates	display-sea-inbound	7c138bf33bb1af82965b3a908e909fc7471288d1e4fbc94d48341301bbe896a8	{w1} {w2} ({w3}: {w4})	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+ko	templates	display-sea-date	7f47952f62b62520840987db05a6308ef6741a46b849695fa3e2dbf9fc875015	{n1}년 {w1}	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+ko	templates	display-sea-unit	012af9aa9ad16da29444eed4da55c0c2e8d4818fba47198073e2cf7a67cedf07	{w1} {w2}	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+ko	templates	display-sea-terrain	d04694b335e7458358b1600094666bb061ad8abaf327e90b1baea7897e4f487f	({w1})	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+ko	templates	display-sea-goods	58c10c1a53babf062d2ab2e9e58d58d5618dfbebbf778006a1c939b300b5d9f2	{n1} {w1}	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+ko	templates	display-view-location	64842af375f6ed85c0e1c0b9d2a4fe6723d4e8f09aa05a3c42ae7407aada7486	{w1} ({n1}, {n2}) {n3}	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+ko	templates	display-view-tribe-land	3392512f0f05d3453536be04bbeca73ac7a3b0d9084f1f2df7dc4a8757063e21	{w1}의 땅	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+ko	templates	display-save-description	a4af57dc6c7284577bf1f5c40529c3de25d5c93355c2db3b4d892d786e5e6703	{w2} {w1} {person} ({n1}년 {w3})	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+ko	templates	display-port-ship-header	0d92aa853c3b4428ee4770783e5b439a223d62e54e8ee1a32e5cb1ad882a4981	{w3}의 {w1} {w2}	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+ko	templates	display-voyage-go-to	a88c06d2605f3e71216eaea4dfc77c26899c0d2c1eba597c9efd6c3ac87384da	{w1} 이동	translated	規格059組句起稿；保留原始來源角色，未經母語校閱
+ko	templates	display-voyage-ship-header	c3e3672a24ad0fc573573cfbcf846b05dcd313c11c54de8ab4762a4c8bc39467	{w1} {w2}: {w4} ({w3})	translated	規格059組句起稿；保留原始來源角色，未經母語校閱

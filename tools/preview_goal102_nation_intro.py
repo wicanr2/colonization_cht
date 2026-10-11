@@ -10,8 +10,6 @@ import platform
 from pathlib import Path
 
 import PIL
-import fontTools
-from fontTools.ttLib import TTFont
 from PIL import Image, ImageDraw, ImageFont, features
 
 from check_goal102_preprint import NATIONS, require, sha, verify as verify_preprint
@@ -248,6 +246,9 @@ def contact(pages, output, phase, font_path, gallery=None):
 
 
 def main():
+    import fontTools
+    from fontTools.ttLib import TTFont
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--game", type=Path, required=True)
     parser.add_argument("--catalog", type=Path, required=True)

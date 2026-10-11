@@ -1,6 +1,6 @@
 # 遊戲語言資料與來源隔離
 
-狀態：限定CONFORMED於勘誤後的語料驗證與文本組裝。先前清冊有兩組引號合併列，現行2008筆與重驗見文末。入口：[目標186](../goals/186-display-settings-and-gameplay-video.md)。
+狀態：限定CONFORMED於勘誤後的語料驗證與文本組裝。先前清冊有兩組引號合併列；接續新增14組句後現為2022筆，見[規格059](059-display-phrase-templates.md)。入口：[目標186](../goals/186-display-settings-and-gameplay-video.md)。
 本規格先處理完整語料及建置資料，不授權未驗的字型、畫面切換或正式語言包。
 
 ## 首次來源盤點（已勘誤，現行數量見文末）

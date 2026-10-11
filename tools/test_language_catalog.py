@@ -20,7 +20,7 @@ class LanguageCatalogTests(unittest.TestCase):
 
     def test_all_real_rows_and_unchanged_source_metadata(self):
         entries, missing = self.load(self.rows)
-        self.assertEqual((len(entries), missing), (2008, []))
+        self.assertEqual((len(entries), missing), (2022, []))
         original = catalog.make_views(self.base, {}, "zh-Hant")
         views = catalog.make_views(self.base, entries, "zh-Hans")
         self.assertEqual(len(views), 13)

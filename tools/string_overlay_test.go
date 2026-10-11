@@ -639,7 +639,7 @@ func TestColonyDelayedCopyRetention(t *testing.T) {
 
 // 規格035 SAVEGOOD：測試顯示字串形狀，不推定原版姓名或年份上限。
 func TestSaveDescriptionGrammar(t *testing.T) {
-	c := &stringCatalog{frags: map[string]string{"Discoverer": "難度A", "English": "國家A", "Spring": "季節A"}}
+	c := &stringCatalog{phrases: displayPhraseFixture(t, "zh-Hant"), frags: map[string]string{"Discoverer": "難度A", "English": "國家A", "Spring": "季節A"}}
 	for _, name := range []string{"Alice", "Anne-Marie O'Neil", "A (B)"} {
 		got, ok := c.translateSaveDescription("Discoverer " + name + " of the English (Spring 1496)")
 		want := "國家A難度A " + name + "（1496年季節A）"
@@ -713,7 +713,7 @@ func TestSlotEmptySourceValidation(t *testing.T) {
 }
 
 func TestSlotDescriptionScope(t *testing.T) {
-	c := &stringCatalog{slotEmpty: "（空白）", frags: map[string]string{"Discoverer": "難度A", "English": "國家A", "Spring": "季節A"}}
+	c := &stringCatalog{phrases: displayPhraseFixture(t, "zh-Hant"), slotEmpty: "（空白）", frags: map[string]string{"Discoverer": "難度A", "English": "國家A", "Spring": "季節A"}}
 	for _, name := range []string{"Alice", "Anne-Marie O'Neil", "A (B)"} {
 		input := "Discoverer " + name + " of the English, Spring 1496"
 		got, ok := c.translateSaveSlot(input)
@@ -1344,7 +1344,7 @@ func woodcutFixture(t *testing.T, corpus, draft, present bool, change string) (*
 }
 
 func TestVoyageFieldRolesAndGeometry(t *testing.T) {
-	c := &stringCatalog{
+	c := &stringCatalog{phrases: displayPhraseFixture(t, "zh-Hant"),
 		frags:     map[string]string{"English": "英國", "Caravel": "輕帆船", "London": "倫敦", "Sailing For": "航向", "Now Arriving In": "即將抵達"},
 		portRoles: map[string]map[string]bool{"nation": {"English": true}, "ship": {"Caravel": true}, "port": {"London": true}},
 	}
@@ -1398,7 +1398,7 @@ func TestVoyageFieldRolesAndGeometry(t *testing.T) {
 }
 
 func TestPortShipHeaderRoleGuard(t *testing.T) {
-	c := &stringCatalog{
+	c := &stringCatalog{phrases: displayPhraseFixture(t, "zh-Hant"),
 		frags: map[string]string{"English": "英國", "Caravel": "輕帆船", "London": "倫敦", "My Ship": "私人船名"},
 		portRoles: map[string]map[string]bool{
 			"nation": {"English": true}, "ship": {"Caravel": true}, "port": {"London": true},

@@ -394,6 +394,7 @@ type seaLayer struct {
 }
 
 type seaState struct {
+	phrases        displayPhrases
 	dict           map[string]map[string]string // 角色 → 英文 → 中文
 	menu           []string                     // 選單六詞：快捷鍵字母＋中文
 	glyphs         map[rune]*image.Alpha
@@ -426,46 +427,59 @@ var (
 // seaTranslate 把一行原版英文依模板換成中文；任一詞缺譯即回傳 false，保留原文。
 func (st *seaState) seaTranslate(text string) (string, bool) {
 	t := strings.TrimRight(text, " \x00")
-	d := func(role, en string) (string, bool) { zh, ok := st.dict[role][en]; return zh, ok }
+	d := func(role, en string) (string, bool) { zh, ok := st.dict[role][en]; return zh, ok && zh != "" }
 	if m := seaPatterns.gold.FindStringSubmatch(t); m != nil {
 		a, ok1 := d("label", m[1])
 		b, ok2 := d("label", m[3])
-		return a + m[2] + "$　" + b + m[4] + "%", ok1 && ok2
+		if ok1 && ok2 {
+			return st.phrases.format("display-sea-gold", map[string]string{"w1": a, "n1": m[2], "w2": b, "n2": m[4]})
+		}
+		return "", false
 	}
 	if m := seaPatterns.locat.FindStringSubmatch(t); m != nil {
-		a, ok := d("label", m[1])
-		return a + "(" + m[2] + ", " + m[3] + ")", ok
+		if a, ok := d("label", m[1]); ok {
+			return st.phrases.format("display-sea-location", map[string]string{"w1": a, "n1": m[2], "n2": m[3]})
+		}
+		return "", false
 	}
 	if m := seaPatterns.moves.FindStringSubmatch(t); m != nil {
-		a, ok := d("label", m[1])
-		return a + m[2], ok
+		if a, ok := d("label", m[1]); ok {
+			return st.phrases.format("display-sea-moves", map[string]string{"w1": a, "w2": m[2]})
+		}
+		return "", false
 	}
 	if m := seaPatterns.title.FindStringSubmatch(t); m != nil {
 		n, ok1 := d("nation", m[1])
 		u, ok2 := d("unit", m[2])
 		l, ok3 := d("label", m[3])
 		pt, ok4 := d("port", m[4])
-		return n + u + l + pt, ok1 && ok2 && ok3 && ok4
+		if ok1 && ok2 && ok3 && ok4 {
+			return st.phrases.format("display-sea-inbound", map[string]string{"w1": n, "w2": u, "w3": l, "w4": pt})
+		}
+		return "", false
 	}
 	if m := seaPatterns.season.FindStringSubmatch(t); m != nil {
 		if se, ok := d("season", m[1]); ok {
-			return m[2] + "年" + se, true
+			return st.phrases.format("display-sea-date", map[string]string{"w1": se, "n1": m[2]})
 		}
 	}
 	if m := seaPatterns.unit.FindStringSubmatch(t); m != nil {
 		n, ok1 := d("nation_abbrev", m[1])
 		u, ok2 := d("unit", m[2])
-		return n + u, ok1 && ok2
+		if ok1 && ok2 {
+			return st.phrases.format("display-sea-unit", map[string]string{"w1": n, "w2": u})
+		}
+		return "", false
 	}
 	if m := seaPatterns.terrain.FindStringSubmatch(t); m != nil {
 		if tr, ok := d("terrain", m[1]); ok {
-			return "（" + tr + "）", true
+			return st.phrases.format("display-sea-terrain", map[string]string{"w1": tr})
 		}
 		return "", false
 	}
 	if m := seaPatterns.goods.FindStringSubmatch(t); m != nil {
 		if g, ok := d("goods", m[2]); ok {
-			return m[1] + " " + g, true
+			return st.phrases.format("display-sea-goods", map[string]string{"n1": m[1], "w1": g})
 		}
 		return "", false
 	}
@@ -1000,7 +1014,9 @@ func main() {
 				hget("source_file") == "GAME.TXT" && hget("source_file_sha256") == versions["GAME.TXT"] &&
 				hget("source_bytes_sha256") == hash(rawSource[offset:int(offset)+length]) && hget("status") == "draft"
 			// 本路徑 %STRING0 的當次顯示值為 Caravel（由整段印字 SHA 釘住），譯名沿 PEDIA.TXT:@UNIT13。
-			help.translation = strings.ReplaceAll(hget("zh_hant"), "%STRING0", "卡拉維爾帆船")
+			caravel, termOK := displayTerm(read(*dialogTerms), "Caravel", "ship")
+			help.valid = help.valid && termOK
+			help.translation = strings.ReplaceAll(hget("zh_hant"), "%STRING0", caravel)
 		}
 		if !helpFormatOK || help.matches != 1 || !help.valid || strings.Contains(help.translation, "%") {
 			help.fontReason = "missing-or-invalid-translation"
@@ -1150,6 +1166,11 @@ func main() {
 	if *seaA {
 		sea = &seaState{dict: map[string]map[string]string{}, misses: map[string]int{},
 			panel: &seaLayer{name: "sea:panel", safe: seaPanelRect}, bar: &seaLayer{name: "sea:bar", safe: seaBarRect}}
+		var phraseErr error
+		sea.phrases, phraseErr = loadDisplayPhrases(read(*stringTemplates))
+		if phraseErr != nil {
+			seaReason = "display-phrase-catalog"
+		}
 		seaBytes := read(*seaCatalog)
 		menuSource := read(filepath.Join(*root, "MENU.TXT"))
 		sources := map[string][]byte{"NAMES.TXT": namesSource, "LABELS.TXT": labelsSource, "MENU.TXT": menuSource}

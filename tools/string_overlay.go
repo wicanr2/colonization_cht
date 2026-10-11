@@ -29,6 +29,7 @@ type woodcutTitle struct {
 type stringCatalog struct {
 	dlg        *dialogCatalog    // 定稿術語、NAMES 對照與逐行模板（規格035／036）
 	frags      map[string]string // 片段字典：英文→中文；衝突者為空字串（視為查無）
+	phrases    displayPhrases
 	templates  []stringTemplate
 	colony     map[string]string // COLONY.TXT 預設名→「中文（原名）」
 	people     map[string]bool   // 目標170：NAMES.TXT @LEADERNAME 的元首名（玩家可改名，顯示原名）
@@ -100,6 +101,11 @@ func verifiedRaw(files map[string][]byte, file, fileSHA, offset, length, rawSHA,
 // loadStringCatalog 建立片段字典（海上詞典、語料清冊與譯稿的 LABELS／NAMES／WOODCUT 單行列）、模板與殖民地名稱。
 func loadStringCatalog(dlg *dialogCatalog, templates, sea, corpus, draft, colony []byte, files map[string][]byte) (*stringCatalog, error) {
 	c := &stringCatalog{dlg: dlg, frags: map[string]string{}, colony: map[string]string{}, owned: map[string]bool{}, people: map[string]bool{}, woodcut: map[string]woodcutTitle{}}
+	var phraseErr error
+	c.phrases, phraseErr = loadDisplayPhrases(templates)
+	if phraseErr != nil {
+		return nil, phraseErr
+	}
 	c.viewTribes = verifiedViewTribes(files["NAMES.TXT"])
 	if names, ok := files["NAMES.TXT"]; ok {
 		section := ""
@@ -208,6 +214,9 @@ func loadStringCatalog(dlg *dialogCatalog, templates, sea, corpus, draft, colony
 	}
 	seen := map[string]bool{}
 	for _, r := range rows {
+		if strings.HasPrefix(r["template_id"], "display-") {
+			continue
+		}
 		t, err := makeStringTemplate(r["template_id"], r["pattern_en"], r["zh_hant"])
 		if err != nil || seen[t.id] {
 			return nil, fmt.Errorf("字串模板不符：%s", r["template_id"])
@@ -336,7 +345,7 @@ func (c *stringCatalog) translate(text string) (zh, id, reason string) {
 	var hits []string
 	var hitID string
 	for _, tpl := range c.templates {
-		if strings.HasPrefix(tpl.id, "cargo-") || strings.HasPrefix(tpl.id, "port-field-") || tpl.id == "route-editor-title" {
+		if strings.HasPrefix(tpl.id, "display-") || strings.HasPrefix(tpl.id, "cargo-") || strings.HasPrefix(tpl.id, "port-field-") || tpl.id == "route-editor-title" {
 			continue
 		} // 規格038 READY：貨物與港口模板只由專屬欄位回呼代入。
 		m := tpl.re.FindStringSubmatch(t)
@@ -880,14 +889,16 @@ func (s *stringRuntime) viewFieldTranslate(r *stringRun, face image.Rectangle, c
 	if face.Min.Y == 68 && face.Max.Y == 74 {
 		m, prefix := viewLocationPattern.FindStringSubmatch(text), s.cat.lookup("Locat:")
 		if m != nil && prefix != "" {
-			return prefix + "（" + m[1] + ", " + m[2] + "） " + m[3], "view-location", true
+			zh, ok := s.cat.phrases.format("display-view-location", map[string]string{"w1": prefix, "n1": m[1], "n2": m[2], "n3": m[3]})
+			return zh, "view-location", ok
 		}
 	}
 	if face.Min.Y == 75 && face.Max.Y == 81 && strings.HasSuffix(text, " Land") {
 		name := strings.TrimSuffix(text, " Land")
 		if s.cat.viewTribes[name] {
 			if zh := s.cat.lookup(name); zh != "" {
-				return zh + "的土地", "view-tribe-land", true
+				value, ok := s.cat.phrases.format("display-view-tribe-land", map[string]string{"w1": zh})
+				return value, "view-tribe-land", ok
 			}
 		}
 	}
@@ -1148,7 +1159,7 @@ func (c *stringCatalog) translateSaveDescription(text string) (string, bool) {
 	if difficulty == "" || nation == "" || season == "" {
 		return "", false
 	}
-	return nation + difficulty + " " + m[2] + "（" + m[5] + "年" + season + "）", true
+	return c.phrases.format("display-save-description", map[string]string{"w1": difficulty, "person": m[2], "w2": nation, "w3": season, "n1": m[5]})
 }
 
 // 規格038 READY：原版已驗唯一片段，與全檔指紋一併限制在槽位專用入口。
@@ -1735,7 +1746,7 @@ func (c *stringCatalog) portShipHeader(text string) (string, bool) {
 			return "", false
 		}
 	}
-	return values[0] + values[1] + "，位於" + values[2], true
+	return c.phrases.format("display-port-ship-header", map[string]string{"w1": values[0], "w2": values[1], "w3": values[2]})
 }
 
 // addWoodcut 保留完整來源身份；同文異鍵或異譯永久拒絕，不借用通用片段字典。
@@ -1886,7 +1897,8 @@ func (s *stringRuntime) voyageFieldTranslate(r *stringRun, face image.Rectangle,
 		name := strings.TrimPrefix(text, "Go To ")
 		if s.cat.portRoles["port"][name] {
 			if zh := s.cat.lookup(name); zh != "" {
-				return "前往" + zh, "voyage-go-to", true
+				value, ok := s.cat.phrases.format("display-voyage-go-to", map[string]string{"w1": zh})
+				return value, "voyage-go-to", ok
 			}
 		}
 	}
@@ -1912,7 +1924,8 @@ func (s *stringRuntime) voyageFieldTranslate(r *stringRun, face image.Rectangle,
 	if action == "" {
 		return "", "", false
 	}
-	return vals[0] + vals[1] + "，" + action + vals[2], "voyage-ship-header", true
+	zh, ok := s.cat.phrases.format("display-voyage-ship-header", map[string]string{"w1": vals[0], "w2": vals[1], "w3": action, "w4": vals[2]})
+	return zh, "voyage-ship-header", ok
 }
 
 // 規格038 READY：原版自訂頁標題指紋與三欄原始字格共同限定。

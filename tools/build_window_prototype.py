@@ -13,7 +13,7 @@ a = p.parse_args()
 if not a.output.parent.is_dir() or a.output.parent.stat().st_uid != os.getuid():
     raise ValueError('輸出父目錄不存在或擁有者不符')
 s = (a.repo / 'tools/live_menu.go').read_bytes()
-if hashlib.sha256(s).hexdigest() != '829eb470e679059c43cf1c01492b399453613747f304ecff2c865341e7e35747':
+if hashlib.sha256(s).hexdigest() != '2f5ab4b81a9608a14f05280cfaba5027472e648fda6e34d3db4ba8855d0a0a53':
     raise ValueError('適配器來源不同，需重新審查')
 if b'frontendRunner(m, d, render, *out)' not in s or b'frontendFrameSink(output, rec)' not in s:
     raise ValueError('視窗接線不符')
@@ -27,7 +27,7 @@ if a.output.stat().st_uid != os.getuid():
 (a.output / 'version.go').write_bytes((a.repo / 'tools/frontend_version.go').read_bytes())
 (a.output / 'display_settings.go').write_bytes((a.repo / 'tools/display_settings.go').read_bytes())
 (a.output / 'display_settings_test.go').write_bytes((a.repo / 'tools/display_settings_test.go').read_bytes())
-for name in ['display_ui.go', 'display_ui_test.go', 'display_preferences.go', 'display_preferences_test.go']:
+for name in ['display_phrases.go', 'display_phrases_test.go', 'display_ui.go', 'display_ui_test.go', 'display_preferences.go', 'display_preferences_test.go']:
     (a.output / name).write_bytes((a.repo / 'tools' / name).read_bytes())
 (a.output / 'window_test.go').write_bytes((a.repo / 'tools/window_prototype_test.go').read_bytes())
 (a.output / 'dialog.go').write_bytes((a.repo / 'tools/dialog_overlay.go').read_bytes())

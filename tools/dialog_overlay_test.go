@@ -1193,7 +1193,9 @@ func dialogLocaleTemplateText(t *testing.T, locale, catalog, key string) string 
 	path := "/repo/text/game." + locale + ".tsv"
 	keyColumn, textColumn := "key", "text"
 	if locale == "zh-Hant" {
-		if catalog == "corpus" {
+		if catalog == "templates" {
+			path, keyColumn, textColumn = "/repo/text/string-templates.zh-Hant.tsv", "template_id", "zh_hant"
+		} else if catalog == "corpus" {
 			path, keyColumn, textColumn = "/repo/text/corpus.zh-Hant.tsv", "message_id", "zh_hant"
 		} else {
 			path, keyColumn, textColumn = "/repo/text/draft.zh-Hant.tsv", "candidate_id", "zh_hant"

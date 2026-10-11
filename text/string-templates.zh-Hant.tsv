@@ -65,3 +65,17 @@ route-editor-title	EDIT TRADE ROUTE {n1}	編輯貿易路線 {n1}	docs/spec/038-s
 port-field-unit	{w1} {w2}	{w1}{w2}	規格038港口欄位整批接線；原版頂列與名稱資料	draft	只供已辨識港口頂列；詞槽限國籍與殖民地居民原始名稱。
 port-field-profession	{w1} {w2} ( {w3} )	{w1}{w2}（{w3}）	規格038港口欄位整批接線；原版頂列與職業資料	draft	只供已辨識港口頂列；職業限NAMES.TXT的JOB主名稱。
 port-field-market	{w1} (Bidding {n1}, Asking {n2})	{w1}（出價{n1}，開價{n2}）	規格038港口欄位整批接線；原版底列與商品資料	draft	商品限NAMES.TXT的CARGO；原版價格數值保留。
+display-sea-gold	{w1}{n1}$  {w2} {n2}%	{w1}{n1}$　{w2}{n2}%	規格059；fc040ba既有來源及組句，角色與欄位守門沿規格032／035／038	ready	只供來源已驗的專屬組句入口；不加入通用字串比對
+display-sea-location	{w1} ({n1}, {n2})	{w1}({n1}, {n2})	規格059；fc040ba既有來源及組句，角色與欄位守門沿規格032／035／038	ready	只供來源已驗的專屬組句入口；不加入通用字串比對
+display-sea-moves	{w1} {w2}	{w1}{w2}	規格059；fc040ba既有來源及組句，角色與欄位守門沿規格032／035／038	ready	只供來源已驗的專屬組句入口；不加入通用字串比對
+display-sea-inbound	{w1} {w2} {w3} {w4}	{w1}{w2}{w3}{w4}	規格059；fc040ba既有來源及組句，角色與欄位守門沿規格032／035／038	ready	只供來源已驗的專屬組句入口；不加入通用字串比對
+display-sea-date	{w1} {n1}	{n1}年{w1}	規格059；fc040ba既有來源及組句，角色與欄位守門沿規格032／035／038	ready	只供來源已驗的專屬組句入口；不加入通用字串比對
+display-sea-unit	{w1} {w2}	{w1}{w2}	規格059；fc040ba既有來源及組句，角色與欄位守門沿規格032／035／038	ready	只供來源已驗的專屬組句入口；不加入通用字串比對
+display-sea-terrain	({w1})	（{w1}）	規格059；fc040ba既有來源及組句，角色與欄位守門沿規格032／035／038	ready	只供來源已驗的專屬組句入口；不加入通用字串比對
+display-sea-goods	{n1} {w1}	{n1} {w1}	規格059；fc040ba既有來源及組句，角色與欄位守門沿規格032／035／038	ready	只供來源已驗的專屬組句入口；不加入通用字串比對
+display-view-location	{w1} ({n1}, {n2}) {n3}	{w1}（{n1}, {n2}） {n3}	規格059；fc040ba既有來源及組句，角色與欄位守門沿規格032／035／038	ready	只供來源已驗的專屬組句入口；不加入通用字串比對
+display-view-tribe-land	{w1} Land	{w1}的土地	規格059；fc040ba既有來源及組句，角色與欄位守門沿規格032／035／038	ready	只供來源已驗的專屬組句入口；不加入通用字串比對
+display-save-description	{w1} {person} of the {w2} ({w3} {n1})	{w2}{w1} {person}（{n1}年{w3}）	規格059；fc040ba既有來源及組句，角色與欄位守門沿規格032／035／038	ready	只供來源已驗的專屬組句入口；不加入通用字串比對
+display-port-ship-header	{w1} {w2} in {w3}	{w1}{w2}，位於{w3}	規格059；fc040ba既有來源及組句，角色與欄位守門沿規格032／035／038	ready	只供來源已驗的專屬組句入口；不加入通用字串比對
+display-voyage-go-to	Go To {w1}	前往{w1}	規格059；fc040ba既有來源及組句，角色與欄位守門沿規格032／035／038	ready	只供來源已驗的專屬組句入口；不加入通用字串比對
+display-voyage-ship-header	{w1} {w2} {w3} {w4}	{w1}{w2}，{w3}{w4}	規格059；fc040ba既有來源及組句，角色與欄位守門沿規格032／035／038	ready	只供來源已驗的專屬組句入口；不加入通用字串比對

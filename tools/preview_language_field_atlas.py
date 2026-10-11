@@ -20,7 +20,7 @@ LAYOUT_SHA = "2023597c649abd7570a9e20737410c7635d8029a10e8aa6cbfcd8897114f755b"
 COVERAGE_SHA = "8ddce673ba704cf37b9f5198d316b0e7e025ca0db909f0c2d4fb3c0847cb6aaf"
 GO_SOURCE_SHA = {
     "tools/dialog_overlay.go": "b93dcf45c424b8aac175f71da0e05d54782d9ccc36774fdd1ac7f0bbd69e8a50",
-    "tools/string_overlay.go": "543afd88d0cdebb3723dd08e39745c883208bfa6af121f0ccffa24955b5ae59e",
+    "tools/string_overlay.go": "9730c6095bbedb91497e3de0f2a773af32f30c8fdb0dcc9b60d1434d1ac61478",
 }
 
 

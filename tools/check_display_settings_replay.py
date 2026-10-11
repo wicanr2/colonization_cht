@@ -30,6 +30,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ["gui", "prototype", "formal", "launcher", "game", "seed", "output"]:
         parser.add_argument("--" + name, type=Path, required=True)
+    parser.add_argument("--formal-launcher", type=Path,
+                        help="前版使用自身已綁定的文本與字模；省略時沿用GUI啟動器")
     args = parser.parse_args()
     need(Path("/.dockerenv").is_file(), "請在Docker內執行")
     output = args.output.resolve()
@@ -44,6 +46,8 @@ def main():
     need(sha(args.launcher.read_bytes()) == gui_check["source_sha256"]["launcher"], "啟動器不符GUI")
     marker = "exec /out/issue56-source-connection-audit/colonization-window "
     need(launcher_source.count(marker) == 1, "啟動器替換點不唯一")
+    formal_source = args.formal_launcher.read_text() if args.formal_launcher else launcher_source
+    need(formal_source.count(marker) == 1, "前版啟動器替換點不唯一")
     inputs = args.gui / "gui.inputs.json"
     need(sha(inputs.read_bytes()) == gui_check["gui_inputs_sha256"], "GUI輸入收據不符")
     receipt = json.loads(inputs.read_text())
@@ -64,7 +68,8 @@ def main():
         save.mkdir()
         (save / "COLONY09.SAV").write_bytes(seed)
         launcher = run / "launch.sh"
-        launcher.write_text(launcher_source.replace(marker, "exec " + shlex.quote(str(binary)) + " ", 1))
+        source = formal_source if name == "formal" else launcher_source
+        launcher.write_text(source.replace(marker, "exec " + shlex.quote(str(binary)) + " ", 1))
         env = os.environ.copy()
         env["COLONIZATION_CHT_SAVE"] = str(save)
         cmd = ["bash", str(launcher), "--game", str(args.game), "--play=false", "--audio-mute",
@@ -82,7 +87,11 @@ def main():
                  f"{name}/{extension}原版bytes不相同")
         need(tree(save) == tree(args.gui / "save"), f"{name}存檔不相同")
         if not control:
-            need((run / "run.final.png").read_bytes() == (args.gui / "gui.final.png").read_bytes(),
+            from PIL import Image
+
+            with Image.open(run / "run.final.png") as a, Image.open(args.gui / "gui.final.png") as b:
+                same_image = a.size == b.size and a.convert("RGB").tobytes() == b.convert("RGB").tobytes()
+            need(same_image,
                  f"{name}繁中合成與GUI終點不同")
         runs[name] = {"binary_sha256": sha(binary.read_bytes()), "state": state,
                       "memory_sha256": sha((run / "run.memory").read_bytes()),
@@ -91,7 +100,9 @@ def main():
     need(len({r["wav_sha256"] for r in runs.values()}) == 1, "三種重播的原版音訊不同")
     result = {"result": "PASS_SETTINGS_GUI_THREE_REPLAYS", "gui_state": baseline, "runs": runs,
               "source_sha256": {"inputs": sha(inputs.read_bytes()), "events": sha((args.gui / "gui.display-events.json").read_bytes()),
-                                "seed": sha(seed), "probe": sha(Path(__file__).read_bytes())},
+                                "seed": sha(seed), "probe": sha(Path(__file__).read_bytes()),
+                                "launcher": sha(args.launcher.read_bytes()),
+                                "formal_launcher": sha((args.formal_launcher or args.launcher).read_bytes())},
               "settings_events": len(events), "dos_inputs": len(receipt["inputs"]),
               "limitations": ["No hardware audio or macOS runtime validation.",
                               "Replay WAV equality does not prove wall-clock GUI audio synchronization.",
