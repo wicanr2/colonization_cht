@@ -5023,3 +5023,29 @@ confirmed來源審查：正式檔案集合查558項TXT，440字串查譯、68MEN
 - confirmed資料檢查：簡體2006筆、2003 translated及3明示省略，39列異體字／抵制用語修正後為cfa775478b398015e6f8ac7bb01d7e44b2105d37a5199263493ee9e1fa5a5eb3。日文1553筆為3a44c5a7d4d39d2ff88ca2cf8cb23a647b7bfaabd2045baced57bb53256896e2，韓文1553筆為b8784e2ad26e129c0693fff31b6eb8d80904ffdd967a33ad0465cbcad2b12729；各1550 translated、3明示省略。兩語均缺corpus300及pedia153，不完整稿不能組裝。
 - confirmed文本組裝：8項測試、12次命令通過。兩次簡體13表及清冊逐位元組相同，17963個非顯示欄位值全同，13份基準表指紋不變，繁中輸出全等；英文只有原版顯示清冊。收據workplace/reports/goal186-display-hd/language-text-check-20261011/check.json為3c21468c374aa233d401d5314fe1483bee9ac2f44a6779b2af6736882a7ae587。錯wheel、不完整稿、重複／孤兒鍵、過期來源、占位符、數值或控制碼差異均拒絕。
 - 證據限制：translated只代表已提供譯文，簡體機械起稿不代表逐句人工校對，日韓未完成母語校閱；字形、逐欄安全矩形、正式語言包、五語GUI及原版同狀態未驗。不增加普查shown，不修改遊戲資料、規則、存檔或發布包。研究輸入及起稿中間檔只留workplace。
+
+## 2026-10-11：主選單五列原版墨跡與Noto逐列量測
+
+入口為[規格055](docs/spec/055-noto-main-menu.md)與目標186，位移基準為GAME.TXT檔案位移，
+畫面座標基準為原版320×200。GAME.TXT與VICEROY.EXE完整SHA-256見規格055。
+沿用dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013，未修改原版或執行器。
+
+- confirmed原版墨跡：既有正常GUI控制重播步數32835000的索引畫面
+  run.cp-32835000.idx為559df11e83c1fb01e2d844a4379af6369e279bf4ea7b4b30c95cbf2d4062c4a1，
+  來源noto-orders-formal-verify-20261011/replay-zh-Hant-control；其GUI輸入為
+  25b3ffcc195f28a545d37b36aaebca2fb5f2c5b1a0afbd45ee4b68cefdbbe437，
+  前端14a003cce886b70b793b28b71bd037bdaa18937fac74031519158e0fb41035f3。
+  五列色254的墨跡高6／6／5／5／6、點數180／163／152／77／112，與規格012相符。
+- confirmed候選量測：colonization-verification:20261007-runtime-r2內Pillow9.4.0、
+  FreeType2.12.1、Fontconfig2.14.1；固定Noto Sans2.004與OFL指紋見font/README.md。
+  每列每語各試14至28px，實際完整字形含overhang及descender，墨跡寬≤580、高≤24。
+  各語各列獨立選出的字級均為24／24／20／20／24，基線距裁切頂端21／21／18／18／21。
+  最寬日文第二列234px，全部完整譯文無換行、截斷或缺字。收據bake-check.json為
+  9e17581d5f9e26788973c2f7a6e297d75c38fde4efee7e2827b83d6d549d1923。
+- confirmed正常路徑：四語各五列均有六次937C:0538至937C:1D50原版印字事件，
+  SP增加10，完整來源及描述子守門保留；本輪不新增或推測DOS函式語意。
+  四語40GUI與16組四側重播的原版狀態、WAV、既有存檔全同，差異限五列安全區。
+  總收據551ef86711d04879cb915c6bbed909317d1f6730dff93135f0ab6de4cae47a1f，
+  路徑與重驗命令見規格055。
+- 限制：字級及來源證據只適用五列；日韓待母語校閱，未完成整包五語切換、設定列、
+  HD或新交付。本輪不改規則、存檔或來源普查shown，原始圖像及字模只留workplace。

@@ -13,7 +13,7 @@ a = p.parse_args()
 if not a.output.parent.is_dir() or a.output.parent.stat().st_uid != os.getuid():
     raise ValueError('輸出父目錄不存在或擁有者不符')
 s = (a.repo / 'tools/live_menu.go').read_bytes()
-if hashlib.sha256(s).hexdigest() != 'b1f5ccea319ec47ed4ba762513aed1479d5fc1af15d98d904268ecc3e13df26d':
+if hashlib.sha256(s).hexdigest() != 'd4c718f288a550138543eff4ee5db412cd578a2d8c5cd42082f7776190489a69':
     raise ValueError('適配器來源不同，需重新審查')
 if b'frontendRunner(m, d, render, *out)' not in s or b'frontendFrameSink(output, rec)' not in s:
     raise ValueError('視窗接線不符')
@@ -32,6 +32,8 @@ if a.output.stat().st_uid != os.getuid():
 (a.output / 'dialog_test.go').write_bytes((a.repo / 'tools/dialog_overlay_test.go').read_bytes())
 (a.output / 'noto_orders.go').write_bytes((a.repo / 'tools/noto_orders.go').read_bytes())
 (a.output / 'noto_orders_test.go').write_bytes((a.repo / 'tools/noto_orders_test.go').read_bytes())
+(a.output / 'noto_menu.go').write_bytes((a.repo / 'tools/noto_menu.go').read_bytes())
+(a.output / 'noto_menu_test.go').write_bytes((a.repo / 'tools/noto_menu_test.go').read_bytes())
 (a.output / 'strings.go').write_bytes((a.repo / 'tools/string_overlay.go').read_bytes())
 (a.output / 'retained_ascii.go').write_bytes((a.repo / 'tools/retained_ascii_overlay.go').read_bytes())
 (a.output / 'retained_ascii_test.go').write_bytes((a.repo / 'tools/retained_ascii_overlay_test.go').read_bytes())

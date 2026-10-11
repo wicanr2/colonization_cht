@@ -11,7 +11,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parent.parent
 PINS = {
-    "tools/live_menu.go": "b1f5ccea319ec47ed4ba762513aed1479d5fc1af15d98d904268ecc3e13df26d",
+    "tools/live_menu.go": "d4c718f288a550138543eff4ee5db412cd578a2d8c5cd42082f7776190489a69",
     "tools/window_prototype.go": "cd287840cfd35cdac4846eb93b5c0dff78860e58a0ecd05d1cd1be119d338fd2",
     "tools/string_overlay.go": "543afd88d0cdebb3723dd08e39745c883208bfa6af121f0ccffa24955b5ae59e",
     "tools/dialog_overlay.go": "db0b0cae19f66dc9778c7375b7df87a0323c6028d9712a5fa585049f12f8cf86",

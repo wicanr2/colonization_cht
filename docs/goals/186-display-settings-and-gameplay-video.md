@@ -30,6 +30,14 @@ v.1.0.3-20261010 與 #56 完成紀錄保留；本頁不代表新增功能已完�
 [正常GUI及同狀態檢查器](../../tools/check_noto_orders.py)。
 此入口只涵蓋已量測六列，完整五語驗收範圍維持不變。
 
+接續主選單五列的獨立量測與接線見[規格055](../spec/055-noto-main-menu.md)，
+工具入口為[Noto主選單烘製器](../../tools/bake_noto_menu.py)、
+[五列載入器](../../tools/noto_menu.go)、[來源與遮罩測試](../../tools/noto_menu_test.go)及
+[正常GUI與游標驗收](../../tools/check_noto_menu.py)。
+五列已限定CONFORMED，各語逐列24／24／20／20／24px。325Go零skip、go vet、
+45檔重生全等及四語40張正常GUI／16組四側同狀態通過；游標保留，切場撤銷。
+此新增驗收只適用主選單五列，完整五語與設定列切換仍未完成。
+
 以下為目前程式可回查的 confirmed 事實，不是新版完成證據。
 
 - [原版畫面合成](../../tools/live_menu.go) 在 `render` 內讀取 320×200

@@ -654,6 +654,9 @@ func main() {
 	fontPath := flag.String("font-mask", "/out/goal056-font-mask.json", "已驗字模")
 	allMenu := flag.Bool("all-menu", false, "啟用規格012的五列主選單")
 	fontDir := flag.String("font-dir", "/out", "五列本機字模目錄")
+	notoMenuLocale := flag.String("noto-menu-locale", "", "規格055：五列主選單zh-Hant／zh-Hans／ja／ko Noto顯示")
+	notoMenuDraft := flag.String("noto-menu-draft", "", "規格055烘製器的五列TSV")
+	notoMenuDir := flag.String("noto-menu-font-dir", "", "規格055綁定地區及五列TSV的字模目錄")
 	nationCardA := flag.Bool("nation-card-a", false, "啟用規格021第一張旗卡 A 版兩欄")
 	nationCardCatalog := flag.String("nation-card-catalog", "/repo/text/nation-card-fragments.zh-Hant.tsv", "旗卡顯示片段唯一 TSV")
 	nationCardFonts := flag.String("nation-card-font-dir", "/out/goal099-card-fonts", "旗卡兩欄本機已驗 A 版字模")
@@ -1601,6 +1604,16 @@ func main() {
 			l.ink = nil
 			l.fontReason = "missing-ink"
 		}
+	}
+	var notoMenu *notoMenuDisplay
+	if *notoMenuLocale != "" || *notoMenuDraft != "" || *notoMenuDir != "" {
+		draft, _ := os.ReadFile(*notoMenuDraft)
+		masks := map[string][]byte{}
+		for _, key := range notoMenuKeys {
+			masks[key], _ = os.ReadFile(filepath.Join(*notoMenuDir, strings.ReplaceAll(key, ":", "-")+".json"))
+		}
+		notoMenu = loadNotoMenu(*notoMenuLocale, catalogBytes, draft, rawSource, masks)
+		notoMenu.apply(lines, *missing)
 	}
 	for _, l := range difficulty {
 		if l.prompt {
@@ -4430,6 +4443,9 @@ func main() {
 	c := m.CPU
 	state := map[string]any{"memory_sha256": hash(m.Mem), "registers": c.R, "segments": c.Seg, "ip": c.IP, "flags": c.Flags, "steps": m.Steps, "ticks": m.Ticks, "frames": m.Frames, "cycles": c.Cycles, "frame_sha256": hash(m.Mem[0xa0000:0xafa00]), "palette_sha256": hash(m.DAC[:])}
 	report := map[string]any{"state": state, "checkpoints": checkpoints, "frames": frames, "events": events, "drops": drops, "input_hashes": inputs, "catalog_sha256": hash(catalogBytes), "translation_sha256": hash([]byte(lines[0].translation)), "font_sha256": fontHash, "control": *control, "missing": *missing, "all_menu": *allMenu, "step_convention": "before-instruction-number = legacy-pre-Step + 1", "opened": d.Opened}
+	if notoMenu != nil {
+		report["noto_menu"] = map[string]any{"locale": notoMenu.locale, "reason": notoMenu.reason, "font_px": notoMenuSizes}
+	}
 	if sea != nil {
 		report["sea_misses"] = seaMisses(sea)
 	}
