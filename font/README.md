@@ -1,10 +1,46 @@
-# Cubic 11 字型來源與本機使用界線
+# 字型來源與本機使用界線
 
-使用者 2026-09-26 決定全案維持「俐方體11號」（Cubic 11，見[目標148](../docs/goals/148-font-terms-scope-decisions.md)）。本專案的中文畫面採此字型；字型檔與烘製字模**不放進 Git**。使用者只確認過部分畫面的視覺方向；
-每個覆蓋欄位仍須依原版墨跡與安全矩形另量字級，不能把 24px
-當成全域規則。
+已發布版沿用使用者2026-09-26選定的「俐方體11號」（Cubic 11，見[目標148](../docs/goals/148-font-terms-scope-decisions.md)）。2026-10-11使用者為[目標186](../docs/goals/186-display-settings-and-gameplay-video.md)選定四語Noto Sans CJK，文字與保留英數使用同一地區字型；英文保留原版字體。正式前端尚未接入Noto。字型檔與烘製字模不放進Git；每個覆蓋欄位仍須依原版墨跡與安全矩形另量字級。
 
-## 固定輸入
+## 目標186的Noto固定輸入
+
+採用官方[Sans2.004固定commit](https://github.com/notofonts/noto-cjk/tree/523d033d6cb47f4a80c58a35753646f5c3608a78)的Regular OTC；本機下載來源與雜湊保存在`workplace/reports/goal186-display-hd/font-candidates/sources.json`。
+
+| 語言 | 字型 | OTC face索引 |
+|---|---|---|
+| 繁中 | Noto Sans CJK TC | 3 |
+| 簡中 | Noto Sans CJK SC | 2 |
+| 日文 | Noto Sans CJK JP | 0 |
+| 韓文 | Noto Sans CJK KR | 1 |
+
+| 本機檔案 | SHA-256 |
+|---|---|
+| `workplace/reports/goal186-display-hd/font-candidates/NotoSansCJK-Regular.ttc` | `b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a` |
+| `workplace/reports/goal186-display-hd/font-candidates/NotoSansCJK-LICENSE.txt` | `6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2` |
+
+重取來源為同commit的[`Sans/OTC/NotoSansCJK-Regular.ttc`](https://github.com/notofonts/noto-cjk/blob/523d033d6cb47f4a80c58a35753646f5c3608a78/Sans/OTC/NotoSansCJK-Regular.ttc)及[`LICENSE`](https://github.com/notofonts/noto-cjk/blob/523d033d6cb47f4a80c58a35753646f5c3608a78/LICENSE)。取得後先核對兩份指紋，不以另一版同名字型代替。
+
+[完整字集檢查器](../tools/check_language_font_coverage.py)已核對四語遊戲全文、17筆設定介面及95個可見ASCII碼點，Noto缺字0。[六列欄位原型](../tools/preview_language_field_layout.py)沿規格035原版欄位量測，四語候選均為18px；只適用於此欄，不改正式圖集。碼點覆蓋不證明區域字形品質、其他欄位排版或正式五語切換。詳細收據見[規格053](../docs/spec/053-language-catalogs.md#2026-10-11字型定案與四語字集驗證)。
+
+重驗使用`colonization-verification:20261007-runtime-r2`，固定映像ID為`sha256:c3457c559d90724a99734edb23f7c4788bbe2a37e39420eb6edc1e0f5dc3abf3`，Pillow9.4.0、FreeType2.12.1、Fontconfig2.14.1。先確認來源目錄與輸出父目錄存在及擁有權。專案唯讀掛為`/repo`，本頁下方的Cubic目錄唯讀掛為`/font`，只將`workplace/reports/goal186-display-hd`開為可寫；以目前UID/GID、`--rm`、無網路及有界資源在容器內執行：
+
+```bash
+python3 -B /repo/tools/check_language_font_coverage.py \
+  --cubic /font/Cubic_11.ttf \
+  --noto /repo/workplace/reports/goal186-display-hd/font-candidates/NotoSansCJK-Regular.ttc \
+  --license /repo/workplace/reports/goal186-display-hd/font-candidates/NotoSansCJK-LICENSE.txt \
+  --output /repo/workplace/reports/goal186-display-hd/new-glyph-check
+python3 -B /repo/tools/preview_language_field_layout.py \
+  --measurement /repo/workplace/reports/goal185-player-experience/orders-compact-candidate-v2/compact-orders-layout.json \
+  --review /repo/workplace/reports/goal185-player-experience/orders-compact-formal-review.json \
+  --noto /repo/workplace/reports/goal186-display-hd/font-candidates/NotoSansCJK-Regular.ttc \
+  --license /repo/workplace/reports/goal186-display-hd/font-candidates/NotoSansCJK-LICENSE.txt \
+  --output /repo/workplace/reports/goal186-display-hd/new-field-preview
+```
+
+兩個輸出都須改為尚不存在的workplace子目錄。排版原型依賴上述本機歷史量測與審查收據，缺檔或指紋不符即停止；可重取字型不代表能在缺少原版證據時重建正式覆蓋。下一步為欄位規格審查與逐欄字形烘製，通過READY後才接入正式顯示路徑。
+
+## 已發布版的Cubic固定輸入
 
 - 字型檔名：`Cubic_11.ttf`
 - SHA-256：`8de9c249b92bc414cb73f09ddb76c7cb327edb3907b638f0d0bd22691237fd5c`

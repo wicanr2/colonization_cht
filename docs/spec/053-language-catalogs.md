@@ -65,6 +65,8 @@ Python的repr會將它們顯示成`\u3000`，不能據此把譯文改成六個AS
 
 ## 2026-10-11文本驗收
 
+本節保留首次語料驗收；接續補稿的目前數量見文末。
+
 正式來源：[登錄表](../../tools/language-catalogs.json)、[檢查與組裝器](../../tools/language_catalog.py)、
 [真實語料測試](../../tools/test_language_catalog.py)、[簡體起稿工具](../../tools/build_simplified_catalog.py)。
 譯稿為[簡體](../../text/game.zh-Hans.tsv)、[日文](../../text/game.ja.tsv)、[韓文](../../text/game.ko.tsv)。
@@ -100,3 +102,131 @@ python3 /repo/tools/language_catalog.py compile --locale zh-Hans --catalog /repo
 
 輸出路徑須尚不存在，父目錄須已存在且屬目前使用者。未執行原版，不增加普查shown；
 限定CONFORMED不涵蓋完整日韓稿、遊戲字型、逐欄排版、五語切換、GUI、HD或新版交付。
+
+## 2026-10-11接續：日韓對話語料補齊
+
+沿既有文本契約，日文與韓文各追加300筆，未改來源鍵、基準列指紋或驗證器。
+新增來源為GAME.TXT的298筆、MAPEDIT.TXT的1筆及corpus內PEDIA.TXT的1筆。
+兩語corpus均由565增至865筆，涵蓋殖民地、外交、貿易、國王接見及獨立戰爭起稿。
+譯稿未經母語校閱，不增加正常畫面命中或普查shown。
+
+| 語料 | 已提供／基準 | 本輪結果 |
+|---|---|---|
+| 日文 | 1853／2006 | 1850筆譯文、3筆明示省略；pedia正文11／164，尚缺153筆。 |
+| 韓文 | 1853／2006 | 同上；缺少相同153個百科來源鍵。 |
+
+confirmed文本檢查：既有8項測試通過，兩語`check --partial`各回傳0；
+兩語`compile`均因「譯稿缺少153列」拒絕，沒有建立輸出目錄。
+各語原有1553筆的完整位元組前綴不變，13份基準表仍符合登錄雜湊。
+換行與強調標記錯位在匯入前修正，沒有放寬控制碼檢查。最後校核保留韓文
+LOSING3原文「超過90%%」的界線；BUY0／BUY1保留英文of的比較寫法，不另指定金額用途。
+
+本機收據為`workplace/reports/goal186-display-hd/language-dialog-check-20261011/`：
+
+- `check.json`保留初次追加收據，SHA-256為`fc7b9efa426790b9b8f64e0ded45837a44a1907cb5be94a987dc45f5fcae2854`。
+- `final-check.json`保存文字校核後的數量、來源與譯稿雜湊，SHA-256為`451c235d29407ba0d14e63f52c8a1bebafc37024a3a99561a444143399580697`。
+- `cli-check.json`保存兩語檢查與不完整組裝拒絕結果，SHA-256為`5157f8260cfa9c219826810755577cd13e1a0394b107b69c315e6f43fb78562c`。
+
+重驗使用既有`colonization-verification:20261007-runtime-r2`，映像ID前綴`c3457c559d90`，
+Python3.13.15。專案唯讀掛到`/repo`，以UID/GID1000、無網路及有界資源執行：
+
+```bash
+python3 -B /repo/tools/language_catalog.py check --locale ja --catalog /repo/text/game.ja.tsv --partial
+python3 -B /repo/tools/language_catalog.py check --locale ko --catalog /repo/text/game.ko.tsv --partial
+cd /repo/tools
+python3 -B -m unittest -v test_language_catalog
+```
+
+本輪只完成corpus補稿；百科、母語校閱、字型、逐欄排版、五語GUI、HD及新版交付仍待完成。
+沒有執行原版或修改已發布Release。Issue #62維持OPEN，本輪只讀核對遠端現況。
+
+## 2026-10-11接續：日韓百科與全文組裝
+
+本節為目前文本狀態，前兩節保留補稿前的驗收歷史。日文與韓文各追加153筆百科正文，
+涵蓋38筆建築、16筆貨物、25筆建國元勳、27筆職業、25筆地形及22筆單位。
+譯稿依既有英文與繁中對照撰寫，未經母語校閱；沒有新增原版文字或圖像副本。
+
+| 語料 | 已提供／基準 | 本輪結果 |
+|---|---|---|
+| 日文 | 2006／2006 | 2003筆譯文、3筆明示省略；corpus865／865、pedia164／164，缺稿0。 |
+| 韓文 | 2006／2006 | 同上；全部來源鍵、基準列指紋、槽位與排版控制結構檢查通過。 |
+
+confirmed文本契約：既有8項測試、兩語全文檢查及各兩次13表組裝全部通過。
+各語兩次輸出含清冊逐位元組相同，17963個非顯示欄位值逐格與基準相同。
+各語原有1853筆的完整位元組前綴保留，13份基準表仍符合固定登錄雜湊。
+匯入前將韓文人數範圍改用文字表達，避免誤用控制符號`~`；日文殖民地名稱
+沿現有術語表統一為「植民地」。沒有放寬驗證器或改動原版規則。
+
+| 檔案 | SHA-256 |
+|---|---|
+| `text/game.ja.tsv` | `72be390204c8348f8b0ec031985e01a51c220dbcb9b8e3fd34a6266894272e92` |
+| `text/game.ko.tsv` | `1138ec60c99a9f7077fbcf886a1096cb31864105713240068e24f1ffd3ef623b` |
+
+本機總收據為`workplace/reports/goal186-display-hd/language-pedia-check-20261011/check.json`，
+SHA-256為`fc3aad3fbdffc3b9fd26fd0e9b48a89056363ca951bd83a31266876fe06ab236`。
+收據保存來源、工具及譯稿指紋、七次命令的回傳碼、逐欄比對與重複組裝結果。
+文本相容檔在同目錄的`compiled-ja`、`compiled-ko`及各自`-repeat`，全部只留本機。
+
+重驗沿用`colonization-verification:20261007-runtime-r2`，映像ID前綴`c3457c559d90`，
+Python3.13.15。來源唯讀掛到`/repo`，只開放明確的workplace輸出目錄，
+以UID/GID1000、無網路及有界資源執行：
+
+```bash
+python3 -B /repo/tools/language_catalog.py check --locale ja --catalog /repo/text/game.ja.tsv
+python3 -B /repo/tools/language_catalog.py check --locale ko --catalog /repo/text/game.ko.tsv
+python3 -B /repo/tools/language_catalog.py compile --locale ja --catalog /repo/text/game.ja.tsv --output /repo/workplace/reports/new-ja-text-check
+python3 -B /repo/tools/language_catalog.py compile --locale ko --catalog /repo/text/game.ko.tsv --output /repo/workplace/reports/new-ko-text-check
+cd /repo/tools
+python3 -B -m unittest -v test_language_catalog
+```
+
+每次組裝使用新的輸出路徑，父目錄須已存在且屬目前使用者。全文起稿與文本組裝
+已完成；母語校閱、字型、逐欄排版、正式五語GUI、HD及新版交付仍未完成。
+沒有執行原版、增加普查shown、修改正式前端或已發布Release，也沒有寫入遠端Issue。
+
+## 2026-10-11字型定案與四語字集驗證
+
+使用者看過真實字型樣張後，選定繁中TC、簡中SC、日文JP、韓文KR四種Noto Sans CJK。
+各語言的文字與保留英數使用同一地區字型；英文維持原版字體。固定Sans2.004版本、
+OTC face索引、字型與OFL指紋及容器重驗命令見[字型來源](../../font/README.md)。
+這次決定適用於目標186，尚未修改正式圖集或前端。
+
+confirmed碼點覆蓋：[檢查器](../../tools/check_language_font_coverage.py)從固定13表及三語
+完整TSV讀取2006筆遊戲文字，另讀17筆設定介面。每語均納入95個可見ASCII，
+保守保留模板中的文字碼點，並展開Unicode跳脫碼；沒有把模板標記刪除後縮小字集。
+來源鍵、基準指紋、譯稿與工具雜湊均保存於本機收據。
+
+| 語言 | 遊戲所需碼點數，含ASCII | Noto遊戲缺字 | Noto設定介面缺字 | Cubic遊戲缺字 |
+|---|---|---|---|---|
+| 繁中 | 1833 | 0 | 0 | 0 |
+| 簡中 | 1809 | 0 | 0 | 8 |
+| 日文 | 1386 | 0 | 0 | 0 |
+| 韓文 | 906 | 0 | 0 | 798 |
+
+`fc-query`按固定face索引讀取Unicode對照。另以Pillow實際渲染每語全部所需碼點，
+均與該字型的缺字字模不同；Cubic所缺簡中8字及韓文798字則與其缺字字模相同。
+此檢查只證明目前字集具有對應字形，沒有證明區域字形品質、整段文字塑形或母語校閱。
+執行時變數若產生ASCII以外的新字元，仍須另行盤點。
+
+[六列命令欄原型](../../tools/preview_language_field_layout.py)引用規格035既有正常路徑
+量測與審查收據：原版cap5、最小行距8、安全區`[80,12,159,77]`，放大4倍後為316×260。
+工具直接讀六個既有TSV來源鍵，試22至15px，按實際墨跡高與放大後20px原版字高的
+差距選候選。四語均為18px、最大墨跡高20px；保留每列基線座標，左／右留4px。
+24列實際墨跡均未超過安全區或下一列，最長列為`MENU.TXT:0x00000384`。
+兩個Fortify同文來源尚未分辨，來源鍵僅作模板導覽，沿用原量測的限制。
+原型未渲染停用色與熱鍵色，不是正式GUI收據；其他欄位須各自量測，不能套用18px。
+
+兩個工具各重跑一次，JSON與PNG逐位元組相同。錯誤字型／授權／量測／審查指紋、
+既有輸出、workplace外輸出及不存在的父目錄等10項輸入均拒絕，沒有覆寫來源或正式圖集。
+
+| 本機收據，皆位於`workplace/reports/goal186-display-hd/` | SHA-256 |
+|---|---|
+| `language-glyph-check-20261011/coverage.json` | `8ddce673ba704cf37b9f5198d316b0e7e025ca0db909f0c2d4fb3c0847cb6aaf` |
+| `language-layout-preview-20261011/layout.json` | `2023597c649abd7570a9e20737410c7635d8029a10e8aa6cbfcd8897114f755b` |
+| `language-layout-preview-20261011/compact-orders-noto.png` | `4b109da4fcf00af0a13901790eae7d2b195ba52fea55b8c3d3a47a2502727a9c` |
+| `language-font-decision-check-20261011.json` | `0ff40244d7fc4f9953243ead34990d20532fcb2b18f2b49d53a8115f583ca30d` |
+
+原版欄位量測檔SHA-256為`35cecc614308c691b82b817b12e4717486986a5a39b95adf67714a1c743870e9`，
+原審查檔為`dc0a9b0ae43c8953d2e8845066e682e20df735b07ba460f2482eb9ef04ef32f8`。
+本節不擴張規格053的限定CONFORMED範圍；字形烘製、逐欄READY規格、五語GUI、HD
+及新版交付仍待完成。本輪沒有執行原版或增加shown。
