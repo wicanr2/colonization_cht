@@ -3598,7 +3598,7 @@ func main() {
 		for _, l := range lines {
 			anyPending = anyPending || l.pendingEvent != nil
 		}
-		if *control {
+		if *control || (*displayUIEnabled && displayLanguage == "en") {
 			// 對照組不用overlay.Compose，也不裝指令hook；只在截圖時直接解碼原圖。
 			if label != "" || frontendFrameSink != nil {
 				output = image.NewRGBA(image.Rect(0, 0, 1280, 800))
@@ -4186,7 +4186,7 @@ func main() {
 				}
 			}
 		}
-		if strOn && !*control {
+		if strOn && !*control && !(*displayUIEnabled && displayLanguage == "en") {
 			// 規格038：最後繪製，疊在其他層之上；對話框啟用時不畫與其重疊的字串；按住滑鼠整層回原文。
 			shown, sreason := 0, "idle"
 			var dialogSafes []image.Rectangle

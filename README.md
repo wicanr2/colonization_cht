@@ -92,7 +92,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 所有建置、遊戲執行、分析與抓圖都在 Docker 容器內進行，需要自備合法原版。
 
 - [目前脈絡](CONTEXT.md)、[工作計畫](WORKLIST.md)（由 `docs/worklist.json` 產生）
-- [多語系、HD 切換與實際遊玩影片規劃](docs/goals/186-display-settings-and-gameplay-video.md)及可丟棄操作原型；新增功能尚未收進目前發行版。
+- [多語系、HD 切換與實際遊玩影片](docs/goals/186-display-settings-and-gameplay-video.md)：設定列與保存已接線，完整五語及HD仍在開發，尚未收進目前發行版。
 - [規格](docs/spec/)與[各輪目標](docs/goals/)
 - [驗證矩陣](docs/verification-matrix.md)（`tools/verification_matrix.py` 產生）
 - [研究證據](RESEARCH-LOG.md)與[工作歷程](WORKLOG.md)

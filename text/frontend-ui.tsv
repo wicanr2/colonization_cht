@@ -16,3 +16,4 @@ ui.cancel	取消	取消	キャンセル	취소	Cancel
 ui.paused	遊戲已暫停	游戏已暂停	ゲームを一時停止中	게임 일시 정지 중	Game paused
 ui.release	請放開所有按鍵與滑鼠按鈕。	请松开所有按键与鼠标按钮。	すべてのキーとマウスボタンを離してください。	모든 키와 마우스 버튼을 놓으세요.	Release all keys and mouse buttons.
 ui.error.unavailable	此顯示選項尚未安裝。	此显示选项尚未安装。	この表示オプションはインストールされていません。	이 화면 옵션이 설치되어 있지 않습니다.	This display option is not installed.
+ui.error.save	無法保存顯示設定，尚未套用。	无法保存显示设置，尚未应用。	表示設定を保存できませんでした。設定は変更されていません。	화면 설정을 저장할 수 없습니다. 설정은 변경되지 않았습니다.	Display settings could not be saved. Nothing was applied.

@@ -1,4 +1,4 @@
-// 規格013：僅Linux可撤回視窗原型；由build_window_prototype.py與既有適配器接合。
+// 規格013、050、056：原版輸入與畫面外設定列；由build_window_prototype.py組裝。
 package main
 
 import (
@@ -275,6 +275,8 @@ type windowGame struct {
 	inputs       []windowInput
 	rejected     []string
 	audio        *frontendAudio
+	display      *displayUI
+	render       func(string)
 }
 
 func logicalMouse(x, y int) (int, int, bool) {
@@ -486,12 +488,29 @@ func (g *windowGame) Update() error {
 		g.release()
 		return ebiten.Termination
 	}
+	if g.display != nil && g.display.update(g) {
+		return g.publishStatus()
+	}
 	x, y, inside := logicalMouse(ebiten.CursorPosition())
+	if g.display != nil {
+		x, y, inside = g.display.logicalMouse(ebiten.CursorPosition())
+	}
 	focused := ebiten.IsFocused()
 	specials := specialWindowInputs(inpututil.IsKeyJustPressed, ebiten.IsKeyPressed)
 	chars := filterWindowChars(ebiten.AppendInputChars(nil), specials, ebiten.IsKeyPressed)
 	if !focused || !inside {
-		g.release()
+		// 規格050：拖曳經過畫面外工具列，維持已送入原版的按住狀態。
+		px, py := ebiten.CursorPosition()
+		if focused && px >= 0 && px < 1280 && py >= 0 && py < g.toolbarHeight() {
+			for i, button := range []ebiten.MouseButton{ebiten.MouseButtonLeft, ebiten.MouseButtonRight, ebiten.MouseButtonMiddle} {
+				if g.held[i] && !ebiten.IsMouseButtonPressed(button) {
+					g.emit(windowInput{Kind: "release", Button: i})
+					g.held[i] = false
+				}
+			}
+		} else {
+			g.release()
+		}
 	} else {
 		if x != g.lastX || y != g.lastY {
 			g.emit(windowInput{Kind: "move", X: x, Y: y})
@@ -533,6 +552,10 @@ func (g *windowGame) Update() error {
 		}
 	}
 	g.audio.drain(g.m)
+	return g.publishStatus()
+}
+
+func (g *windowGame) publishStatus() error {
 	stage := "opening"
 	if g.record != nil && g.record["events"].(int) >= 5 {
 		stage = "menu"
@@ -550,6 +573,11 @@ func (g *windowGame) Update() error {
 	}
 	status := map[string]any{"step": g.m.Steps, "stage": stage, "frame": g.record,
 		"rejected_input_count": len(g.rejected)}
+	if g.display != nil {
+		status["display"] = g.display.status()
+	}
+	status["dos_input_count"] = len(g.inputs)
+	status["dos_mouse"] = map[string]any{"x": g.d.Mouse.X, "y": g.d.Mouse.Y, "buttons": g.d.Mouse.Buttons}
 	if frontendStatusExtra != nil {
 		status["dialog"] = frontendStatusExtra // 目標167：最近一段訊息框印字
 	}
@@ -567,6 +595,9 @@ func (g *windowGame) Update() error {
 }
 func (g *windowGame) Draw(screen *ebiten.Image) {
 	if g.latest == nil {
+		if g.display != nil {
+			g.display.draw(screen)
+		}
 		return
 	}
 	if g.texture == nil {
@@ -576,11 +607,16 @@ func (g *windowGame) Draw(screen *ebiten.Image) {
 		g.texture.WritePixels(g.latest.Pix)
 		g.dirty = false
 	}
-	screen.DrawImage(g.texture, nil)
+	var options ebiten.DrawImageOptions
+	options.GeoM.Translate(0, float64(g.toolbarHeight()))
+	screen.DrawImage(g.texture, &options)
+	if g.display != nil {
+		g.display.draw(screen)
+	}
 }
-func (g *windowGame) Layout(int, int) (int, int) { return 1280, 800 }
+func (g *windowGame) Layout(int, int) (int, int) { return 1280, 800 + g.toolbarHeight() }
 func runWindow(m *golem.Machine, d *golem.DOS, render func(string), out string) {
-	g := &windowGame{m: m, d: d, out: out, lastX: -1, lastY: -1}
+	g := &windowGame{m: m, d: d, out: out, lastX: -1, lastY: -1, render: render}
 	activeWindow = g
 	if *replayPath != "" {
 		var receipt windowReceipt
@@ -618,8 +654,16 @@ func runWindow(m *golem.Machine, d *golem.DOS, render func(string), out string) 
 		a.writeWAV()
 		return
 	}
+	if *displayUIEnabled {
+		g.display = newDisplayUI()
+		defer func() {
+			for _, face := range g.display.fonts.faces {
+				face.Close()
+			}
+		}()
+	}
 	dumpJSON(out+".status.json", map[string]any{"step": 0, "stage": "opening"})
-	ebiten.SetWindowSize(1280, 800)
+	ebiten.SetWindowSize(1280, 800+g.toolbarHeight())
 	ebiten.SetWindowTitle("Colonization CHT " + frontendReleaseVersion)
 	ebiten.SetWindowClosingHandled(true)
 	ebiten.SetRunnableOnUnfocused(true)
@@ -636,4 +680,11 @@ func runWindow(m *golem.Machine, d *golem.DOS, render func(string), out string) 
 			"cs_ip": fmt.Sprintf("%04X:%04X", c.Seg[golem.CS], c.IP), "registers": c.R, "segments": c.Seg})
 		panic(err)
 	}
+}
+
+func (g *windowGame) toolbarHeight() int {
+	if g.display != nil {
+		return displayUIToolbarHeight
+	}
+	return 0
 }

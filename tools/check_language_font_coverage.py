@@ -81,7 +81,7 @@ def main():
     base = BaseCatalog()
     frontend_data = (ROOT / "text/frontend-ui.tsv").read_bytes()
     _, frontend_rows = read_tsv(frontend_data, ("key", *LOCALES, "en"))
-    require(len(frontend_rows) == len({row["key"] for row in frontend_rows}) == 17,
+    require(len(frontend_rows) == len({row["key"] for row in frontend_rows}) == 18,
             "前端文字鍵缺少或重複")
     cubic, cubic_info = font_charset(args.cubic, 0, "Cubic 11")
     noto = {}

@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""規格051 DRAFT：只在新的workplace目錄組裝設定列執行原型，不改正式Go來源。"""
-
+"""規格056：沿用舊入口，在新workplace目錄組裝正式設定列驗收版。"""
 import argparse
 import hashlib
 import json
@@ -9,23 +8,12 @@ from pathlib import Path
 import subprocess
 import sys
 
-
 ROOT = Path(__file__).resolve().parent.parent
-SOURCE_HASHES = {
-    "tools/live_menu.go": "d4c718f288a550138543eff4ee5db412cd578a2d8c5cd42082f7776190489a69",
-    "tools/window_prototype.go": "cd287840cfd35cdac4846eb93b5c0dff78860e58a0ecd05d1cd1be119d338fd2",
-    "tools/build_window_prototype.py": "07d152de32df7d40ee28c54aa8b0e4dbfa7477c8680e035ef46ebef30f5f6ca2",
-}
+SOURCE_HASHES = {'tools/live_menu.go': '829eb470e679059c43cf1c01492b399453613747f304ecff2c865341e7e35747', 'tools/window_prototype.go': '088d2a3f933e99df2ecdc5d348972fc52fb64d3a9794a2c1ecd2ebe8f1f89140', 'tools/build_window_prototype.py': '9352d37fd78d4749d2fca0e03b812114291b31b90d811b8e2c520e362656d97c', 'tools/display_ui.go': '946de52ef784c3a2df9b0fb4b3478bec37f885fdd16192fd7bb58bfc9e36d811', 'tools/display_ui_test.go': '730a174c8cc129dbe4a2e0a6cbaac8ab31532203fdddd563bc1af47ced42bfd3', 'tools/display_preferences.go': '29f6684666f89abc3741a518800b152944d039a6b3ebc016036cb085d4466848', 'tools/display_preferences_test.go': 'b9d51da367507ab21fc8f4487f2d86142515032d4174b64cfd36bc98d3287298'}
 
 
 def sha(data):
     return hashlib.sha256(data).hexdigest()
-
-
-def replace_once(source, old, new):
-    if source.count(old) != 1:
-        raise ValueError(f"原型替換點失配：{old[:100]!r}")
-    return source.replace(old, new, 1)
 
 
 def main():
@@ -44,60 +32,15 @@ def main():
             raise SystemExit(f"正式來源版本不符：{name}")
     subprocess.run([sys.executable, str(ROOT / "tools/build_window_prototype.py"), "--repo", str(ROOT),
                     "--output", str(output), "--reference", str(args.reference)], check=True, timeout=30)
-    adapter = (output / "adapter.go").read_text()
-    adapter = replace_once(adapter, '\t\tif *control {\n\t\t\t// 對照組',
-                           '\t\tif *control || prototypeDisplayLanguage == "en" {\n\t\t\t// 對照組')
-    adapter = replace_once(adapter, '\t\tif strOn && !*control {\n\t\t\t// 規格038：最後繪製',
-                           '\t\tif strOn && !*control && prototypeDisplayLanguage != "en" {\n\t\t\t// 規格038：最後繪製')
-    (output / "adapter.go").write_text(adapter)
-    window = (output / "window.go").read_text()
-    edits = [
-        ('\taudio        *frontendAudio\n', '\taudio        *frontendAudio\n\tdisplay *displayUIPrototype\n\trender func(string)\n'),
-        ('\tx, y, inside := logicalMouse(ebiten.CursorPosition())',
-         '\tif g.display != nil && g.display.update(g) { return g.publishStatus() }\n'
-         '\tx, y, inside := g.display.logicalMouse(ebiten.CursorPosition())'),
-        ('\tg.audio.drain(g.m)\n\tstage := "opening"',
-         '\tg.audio.drain(g.m)\n\treturn g.publishStatus()\n}\n\n'
-         'func (g *windowGame) publishStatus() error {\n\tstage := "opening"'),
-        ('\tif frontendStatusExtra != nil {',
-         '\tif g.display != nil { status["display"] = g.display.status() }\n\tif frontendStatusExtra != nil {'),
-        ('func (g *windowGame) Draw(screen *ebiten.Image) {\n\tif g.latest == nil {\n\t\treturn',
-         'func (g *windowGame) Draw(screen *ebiten.Image) {\n\tif g.latest == nil {\n\t\tg.display.draw(screen)\n\t\treturn'),
-        ('\tscreen.DrawImage(g.texture, nil)',
-         '\tvar options ebiten.DrawImageOptions\n\toptions.GeoM.Translate(0, prototypeToolbarHeight)\n'
-         '\tscreen.DrawImage(g.texture, &options)\n\tg.display.draw(screen)'),
-        ('func (g *windowGame) Layout(int, int) (int, int) { return 1280, 800 }',
-         'func (g *windowGame) Layout(int, int) (int, int) { return 1280, 800+prototypeToolbarHeight }'),
-        ('g := &windowGame{m: m, d: d, out: out, lastX: -1, lastY: -1}',
-         'g := &windowGame{m: m, d: d, out: out, lastX: -1, lastY: -1, render: render}'),
-        ('\tdumpJSON(out+".status.json", map[string]any{"step": 0, "stage": "opening"})',
-         '\tg.display = newDisplayUIPrototype()\n'
-         '\tdefer func() { for _, face := range g.display.fonts.faces { face.Close() } }()\n'
-         '\tdumpJSON(out+".status.json", map[string]any{"step": 0, "stage": "opening"})'),
-        ('ebiten.SetWindowSize(1280, 800)', 'ebiten.SetWindowSize(1280, 800+prototypeToolbarHeight)'),
-    ]
-    for old, new in edits:
-        window = replace_once(window, old, new)
-    (output / "window.go").write_text(window)
-    for source, target in [("display_settings_ui_prototype.go", "display_ui.go"),
-                           ("display_settings_ui_prototype_test.go", "display_ui_test.go")]:
-        (output / target).write_bytes((ROOT / "tools" / source).read_bytes())
-    mod = (output / "go.mod").read_text()
-    mod = replace_once(mod, 'require github.com/hajimehoshi/ebiten/v2 v2.9.9',
-                       'require (\n github.com/hajimehoshi/ebiten/v2 v2.9.9\n golang.org/x/image v0.31.0\n)')
-    (output / "go.mod").write_text(mod)
-    subprocess.run(["gofmt", "-w", *map(str, sorted(output.glob("*.go")))], check=True, timeout=30)
     sources = {name: sha((ROOT / name).read_bytes()) for name in SOURCE_HASHES}
-    for name in [Path(__file__).name, "display_settings_ui_prototype.go", "display_settings_ui_prototype_test.go"]:
-        sources["tools/" + name] = sha((ROOT / "tools" / name).read_bytes())
+    sources["tools/" + Path(__file__).name] = sha(Path(__file__).read_bytes())
     sources["text/frontend-ui.tsv"] = sha((ROOT / "text/frontend-ui.tsv").read_bytes())
-    result = {"kind": "draft-display-settings-runtime-prototype-not-release", "source_sha256": sources,
+    result = {"kind": "formal-display-settings-verification-build-not-release", "source_sha256": sources,
               "assembled_sha256": {p.name: sha(p.read_bytes()) for p in output.iterdir() if p.is_file()},
-              "limitations": ["Noto game font is selected; production field atlases are not installed.",
-                              "Only existing zh-Hant and original English gameplay display can activate.",
-                              "Other game language packs and HD are not installed."]}
+              "limitations": ["Only existing zh-Hant and original English gameplay can activate.",
+                              "Complete language packs and HD are not installed."]}
     (output / "prototype-sources.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
-    print("ASSEMBLED_DRAFT_DISPLAY_SETTINGS_PROTOTYPE", output)
+    print("ASSEMBLED_FORMAL_DISPLAY_SETTINGS", output)
 
 
 if __name__ == "__main__":
