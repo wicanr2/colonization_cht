@@ -38,6 +38,7 @@ type dialogFont struct {
 }
 
 type dialogCatalog struct {
+	notoOrders        *notoOrdersDisplay // 規格054：獨立字模與譯文，只在完整六列守門後使用。
 	routeDeleteChoice string
 	voyageRoles       map[string]map[string]bool  // 規格035 READY：驗證NAMES來源角色。
 	messageOptions    map[string][]dialogTemplate // 規格036：原檔正文鍵對應的完整選項。
@@ -1540,7 +1541,13 @@ func (d *dialogRuntime) finish(r *dialogRun, canvas []byte, step uint64) (*dialo
 		if len(lines) == 1 && id == "GAME.TXT:0x00000826" {
 			st.safe.Max.Y = union.Max.Y + 1
 		}
-		st.shadow, st.normal, st.accent, st.dim, st.size = d.cat.lineLayerMasks(items, lines, st.safe,
+		fieldFonts := d.cat
+		var fieldWhy string
+		items, fieldFonts, fieldWhy = d.cat.notoOrders.field(items, fieldFonts, lines, canvas, st.safe)
+		if fieldWhy != "" {
+			return nil, shown, fieldWhy
+		}
+		st.shadow, st.normal, st.accent, st.dim, st.size = fieldFonts.lineLayerMasks(items, lines, st.safe,
 			observedPitch(lines, union.Dy()+3), shadowC != 0, layers)
 		if len(lines) == 1 {
 			st.id = id

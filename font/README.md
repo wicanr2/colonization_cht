@@ -1,6 +1,6 @@
 # 字型來源與本機使用界線
 
-已發布版沿用使用者2026-09-26選定的「俐方體11號」（Cubic 11，見[目標148](../docs/goals/148-font-terms-scope-decisions.md)）。2026-10-11使用者為[目標186](../docs/goals/186-display-settings-and-gameplay-video.md)選定四語Noto Sans CJK，文字與保留英數使用同一地區字型；英文保留原版字體。正式前端尚未接入Noto。字型檔與烘製字模不放進Git；每個覆蓋欄位仍須依原版墨跡與安全矩形另量字級。
+已發布版沿用使用者2026-09-26選定的「俐方體11號」（Cubic 11，見[目標148](../docs/goals/148-font-terms-scope-decisions.md)）。2026-10-11使用者為[目標186](../docs/goals/186-display-settings-and-gameplay-video.md)選定四語Noto Sans CJK，文字與保留英數使用同一地區字型；英文保留原版字體。正式接線先限已量測的六列精簡ORDERS，入口見[規格054](../docs/spec/054-noto-field-atlas-draft.md)。字型檔與烘製字模不放進Git；其他覆蓋欄位仍須依原版墨跡與安全矩形另量字級。
 
 ## 目標186的Noto固定輸入
 
@@ -38,9 +38,9 @@ python3 -B /repo/tools/preview_language_field_layout.py \
   --output /repo/workplace/reports/goal186-display-hd/new-field-preview
 ```
 
-兩個輸出都須改為尚不存在的workplace子目錄。排版原型依賴上述本機歷史量測與審查收據，缺檔或指紋不符即停止；可重取字型不代表能在缺少原版證據時重建正式覆蓋。下一步為欄位規格審查與逐欄字形烘製，通過READY後才接入正式顯示路徑。
+兩個輸出都須改為尚不存在的workplace子目錄。排版原型依賴上述本機歷史量測與審查收據，缺檔或指紋不符即停止；可重取字型不代表能在缺少原版證據時重建正式覆蓋。其他欄位仍須依各自證據通過READY後接入正式顯示路徑。
 
-首組六列私用字模及實際Go消費端驗證見[規格054](../docs/spec/054-noto-field-atlas-draft.md)。原型沿現有字模格式保留Noto左右伸出的墨跡，六列字距最多增加1px；只驗18px與此六列，不授權正式替換或其他欄位。
+首組六列原型及正式接線見[規格054](../docs/spec/054-noto-field-atlas-draft.md)。[正式烘製器](../tools/bake_noto_orders.py)沿現有字模格式保留Noto左右伸出的墨跡，六列字距最多增加1px；18px只適用此六列，不能外推其他欄位。正式烘製沿同一Python映像、固定OTC與OFL，參數見規格054的重生入口。
 
 ## 已發布版的Cubic固定輸入
 

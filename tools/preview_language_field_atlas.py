@@ -19,7 +19,7 @@ from render_language_font_sample import HASHES
 LAYOUT_SHA = "2023597c649abd7570a9e20737410c7635d8029a10e8aa6cbfcd8897114f755b"
 COVERAGE_SHA = "8ddce673ba704cf37b9f5198d316b0e7e025ca0db909f0c2d4fb3c0847cb6aaf"
 GO_SOURCE_SHA = {
-    "tools/dialog_overlay.go": "2522405d5306d7170e151f5152f6b81bfb2ec6a60069a4cb4cea9ac0b4d9a3d0",
+    "tools/dialog_overlay.go": "db0b0cae19f66dc9778c7375b7df87a0323c6028d9712a5fa585049f12f8cf86",
     "tools/string_overlay.go": "543afd88d0cdebb3723dd08e39745c883208bfa6af121f0ccffa24955b5ae59e",
 }
 

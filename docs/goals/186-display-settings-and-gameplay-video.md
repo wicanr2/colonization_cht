@@ -24,6 +24,12 @@ v.1.0.3-20261010 與 #56 完成紀錄保留；本頁不代表新增功能已完�
 
 ## 已查證的邊界
 
+六列命令欄正式接線依[規格054](../spec/054-noto-field-atlas-draft.md)：
+[Noto烘製器](../../tools/bake_noto_orders.py)、
+[欄位載入器](../../tools/noto_orders.go)、[回歸測試](../../tools/noto_orders_test.go)、
+[正常GUI及同狀態檢查器](../../tools/check_noto_orders.py)。
+此入口只涵蓋已量測六列，完整五語驗收範圍維持不變。
+
 以下為目前程式可回查的 confirmed 事實，不是新版完成證據。
 
 - [原版畫面合成](../../tools/live_menu.go) 在 `render` 內讀取 320×200
@@ -132,10 +138,14 @@ pedia164／164均已起稿。本輪各補153筆百科，8項測試與兩語全�
 重複輸出全等，10項錯誤輸入拒絕。結果只適用於此六列原型，不能全域套用。
 完整收據與限制見[規格053的字集與原型紀錄](../spec/053-language-catalogs.md#2026-10-11字型定案與四語字集驗證)。
 首組字模接續[規格054](../spec/054-noto-field-atlas-draft.md)與
-[字模原型工具](../../tools/preview_language_field_atlas.py)，沿現有格式驗證字形完整性及實際Go消費端，尚未進正式前端。
+[字模原型工具](../../tools/preview_language_field_atlas.py)，沿現有格式驗證字形完整性及實際Go消費端。
 四語六列圖集各115／115／122／117字，修正Noto五個英文字母在舊字格的邊緣裁切；
 六列字距最多增加1px，24列均未超界。實際Go函式三層Alpha與獨立Python參考全同，
-34個重生檔案全等，20項Go反例與7項CLI拒絕通過。規格054仍DRAFT；沒有正常五語GUI信用。
+原型34個重生檔案全等，20項Go反例與7項CLI拒絕通過。其後使用者要求正式接線，
+規格054已限定CONFORMED於此六列：240Go、零skip及go vet通過；正式圖集21檔重生全等。
+四語60張正常GUI與16組四側重播通過，Noto只改六列安全區，CPU、RAM、VGA、DAC、
+WAV與原有存檔全同，錯地區圖集整欄回原文。完整五語切換及其他欄位仍未完成，
+收據入口為規格054文末與[正式檢查器](../../tools/check_noto_orders.py)。
 可用[字型樣張工具](../../tools/render_language_font_sample.py)重生：在既有Go／GUI容器內
 以`--cubic`、`--noto`、`--license`指定上述固定TTF、TTC與OFL檔，`--output`指定新的
 workplace子目錄。工具核對三份SHA-256、真實字形、樣張寬度與擁有權，拒絕覆寫。

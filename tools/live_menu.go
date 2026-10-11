@@ -679,6 +679,9 @@ func main() {
 	dialogTerms := flag.String("dialog-terms", "/repo/text/terms.zh-Hant.tsv", "變數譯名定稿表")
 	dialogAtlas := flag.String("dialog-atlas", "/out/goal165-dialog-atlas.json", "本機依固定字型、語料、術語表、譯稿與變數值表烘製的對話框字元圖集")
 	dialogDraft := flag.String("dialog-draft", "/repo/text/draft.zh-Hant.tsv", "逐行清單字典來源（GAME.TXT 單行列與 MENU.TXT 項目）")
+	notoOrdersLocale := flag.String("noto-orders-locale", "", "規格054：只啟用六列精簡ORDERS的zh-Hant／zh-Hans／ja／ko Noto顯示")
+	notoOrdersDraft := flag.String("noto-orders-draft", "", "規格054烘製器產生的七列TSV")
+	notoOrdersAtlas := flag.String("noto-orders-atlas", "", "規格054綁定地區與七列TSV的18px圖集")
 	dialogPedia := flag.String("dialog-pedia", "/repo/text/pedia-bilingual.tsv", "目標171：百科條目正文雙語稿")
 	dialogValues := flag.String("dialog-values", "/repo/text/variable-values.zh-Hant.tsv", "執行檔提供的變數值譯名")
 	stringA := flag.Bool("string-a", false, "啟用規格038連續字串通用覆蓋（需同時啟用 --dialog-a）")
@@ -2002,6 +2005,12 @@ func main() {
 			dialogBind["draft"], dialogBind["values"], dialogBind["help"] = hash(draftBytes), hash(valuesBytes), hash(helpBytes)
 			dialogBind["pedia"] = hash(pediaBytes)
 			dlg.fontReason = dlg.cat.loadDialogAtlas(b, fontHash, dialogBind)
+		}
+		if *notoOrdersLocale != "" {
+			// 缺檔由欄位載入器記錄並整欄回原文，不停用其他已驗證覆蓋。
+			nd, _ := os.ReadFile(*notoOrdersDraft)
+			na, _ := os.ReadFile(*notoOrdersAtlas)
+			dlg.cat.notoOrders = loadNotoOrders(*notoOrdersLocale, draftBytes, nd, na, files["MENU.TXT"])
 		}
 	}
 	if dlg != nil && *missing {
@@ -4427,6 +4436,10 @@ func main() {
 	if dlg != nil {
 		report["dialog_misses"] = dlg.misses
 		report["dialog_reason"] = dlg.fontReason
+		if dlg.cat != nil && dlg.cat.notoOrders != nil {
+			p := dlg.cat.notoOrders
+			report["noto_orders"] = map[string]any{"locale": p.locale, "reason": p.reason, "font_px": 18}
+		}
 	}
 	if str != nil {
 		report["string_misses"] = str.misses
