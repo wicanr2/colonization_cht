@@ -57,10 +57,12 @@ def main():
         expected_saves = {"COLONY00.SAV": sha(saved_bytes), "COLONY09.SAV": sha(seed)}
         need(source["result"] == "PASS_NATIVE_LIVE_FIVE_LANGUAGE_GUI" and
              source.get("normal_save_cycle") == {"kind": "normal-gui-save-slot-success-return",
-                                                 "created": "COLONY00.SAV", "sha256": sha(saved_bytes)} and
-             source["source_sha256"]["binary"] == sha(args.binary.read_bytes()), "正常存檔來源未通過")
+                                                 "created": "COLONY00.SAV", "sha256": sha(saved_bytes)}, "正常存檔來源未通過")
         need(proof["result"] == "PASS_NATIVE_LIVE_GUI_FOUR_REPLAYS" and
-             proof["source_sha256"]["gui"] == sha(source_bytes) and len(proof["runs"]) == 4 and
+             proof["source_sha256"]["gui"] == sha(source_bytes) and
+             set(proof["runs"]) == {"live", "observed", "formal", "original-control"} and
+             all(proof["runs"][name]["binary_sha256"] == source["source_sha256"]["binary"]
+                 for name in ["live", "observed"]) and
              proof["source_sha256"]["inputs"] == source["gui_inputs_sha256"] ==
              sha((args.reload_save / "gui.inputs.json").read_bytes()) and
              all(x["state"] == json.loads((args.reload_save / "gui.json").read_bytes())["state"]
@@ -199,6 +201,9 @@ def main():
                     if scene == "load-success":
                         need(any(i.get("kind") == "dialog" and i.get("id") == "GAME.TXT:0x00000854"
                                  for i in record["items"]), "當次讀檔通知沒有實際重建")
+                    if scene in {"load-slots", "save-slots"}:
+                        need(any(i.get("kind") == "dialog" and i.get("id") == "STRING:save-slot+list" and
+                                 i.get("font_px", 0) > 0 for i in record["items"]), "插槽清單沒有實際重建")
                     if scene == "colony":
                         numerals = {item.get("source") for item in record["items"]
                                     if item.get("id") == "STRING:retained-ascii" and item.get("font_px", 0) > 0}

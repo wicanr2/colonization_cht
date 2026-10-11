@@ -751,6 +751,155 @@ func draftKeepDialog(d *dialogRuntime, st *dialogShown, canvas []byte) {
 	st.afterSafe, st.phase = rectBytes(canvas, st.safe), "active"
 }
 
+// 規格060 DRAFT：反白重印會先改寫舊清單，仍須用原版未改寫的標題確認新清單身份。
+// 只借用辨識上下文，不復活舊清單，也不改變其生命週期。
+func draftDialogContext(d *dialogRuntime, r *dialogRun, canvas []byte) *dialogRuntime {
+	if d.cur == nil || d.cur.id != "STRING:save-slot+list" || d.cur.phase != "expired" ||
+		!saveSlotTitle(d.prev) || d.prev.phase != "active" || r == nil || r.readPos%2 != 0 || len(canvas) != 64000 {
+		return d
+	}
+	lines := runLines(r.chars)
+	if len(lines) != 8 && len(lines) != 10 {
+		return d
+	}
+	var ink image.Rectangle
+	for _, line := range lines {
+		ink = ink.Union(line.box)
+	}
+	if ink.Overlaps(d.prev.safe) || !bytes.Equal(rectBytes(canvas, d.prev.safe), d.prev.afterSafe) {
+		return d
+	}
+	context := *d
+	context.cur, context.prev = d.prev, nil
+	return &context
+}
+
+func draftAlphaBounds(masks []*image.Alpha) image.Rectangle {
+	var ink image.Rectangle
+	for _, mask := range masks {
+		if mask == nil {
+			continue
+		}
+		for y := mask.Rect.Min.Y; y < mask.Rect.Max.Y; y++ {
+			for x := mask.Rect.Min.X; x < mask.Rect.Max.X; x++ {
+				if mask.AlphaAt(x, y).A != 0 {
+					ink = ink.Union(image.Rect(x, y, x+1, y+1))
+				}
+			}
+		}
+	}
+	return ink
+}
+
+// 覆蓋區內仍逐像素核對。原版被底緣遮掉的墨點只可留在覆蓋區外；每個字格須仍可見。
+func draftSlotPaintBounds(o *nativeObservation, masks []*image.Alpha, safe image.Rectangle, canvas, indexed []byte, cursor image.Rectangle) (image.Rectangle, int, bool) {
+	if o == nil || o.dialogRun == nil || len(o.after) == 0 || len(canvas) != 64000 || len(indexed) != 64000 {
+		return image.Rectangle{}, 0, false
+	}
+	ink := draftAlphaBounds(masks)
+	if ink.Empty() {
+		return image.Rectangle{}, 0, false
+	}
+	paint := image.Rect(safe.Min.X+ink.Min.X/4, safe.Min.Y+ink.Min.Y/4,
+		safe.Min.X+(ink.Max.X+3)/4, safe.Min.Y+(ink.Max.Y+3)/4)
+	visible := map[int]bool{}
+	var missing []image.Point
+	for pos, value := range o.after {
+		if pos < 0 || pos >= 64000 || canvas[pos] != value || !image.Pt(pos%320, pos/320).In(safe) {
+			return image.Rectangle{}, 0, false
+		}
+		p := image.Pt(pos%320, pos/320)
+		if indexed[pos] == value || p.In(cursor) {
+			visible[pos] = true
+			paint = paint.Union(image.Rectangle{Min: p, Max: p.Add(image.Pt(1, 1))})
+		} else {
+			missing = append(missing, p)
+		}
+	}
+	for _, ch := range o.dialogRun.chars {
+		if ch.box.Empty() {
+			continue
+		}
+		seen := false
+		for pos := range visible {
+			if image.Pt(pos%320, pos/320).In(ch.box) {
+				seen = true
+				break
+			}
+		}
+		if !seen {
+			return image.Rectangle{}, 0, false
+		}
+	}
+	for _, p := range missing {
+		if p.Y < paint.Max.Y {
+			return image.Rectangle{}, 0, false
+		}
+	}
+	if !paint.In(safe) || !draftSameExceptCursor(indexed, canvas, paint, cursor) {
+		return image.Rectangle{}, 0, false
+	}
+	return paint, len(missing), true
+}
+
+func draftFitSlotDialog(t *draftLanguageTarget, st *dialogShown, o *nativeObservation, canvas, indexed []byte, cursor image.Rectangle) (*dialogShown, int) {
+	if st.id != "STRING:save-slot+list" || o == nil || o.dialogRun == nil {
+		return nil, 0
+	}
+	lines := runLines(o.dialogRun.chars)
+	if len(lines) != 8 && len(lines) != 10 {
+		return nil, 0
+	}
+	items := make([]string, len(lines))
+	capH := 0
+	for i, line := range lines {
+		var ok bool
+		items[i], ok = t.str.translateSaveSlot(line.text)
+		if !ok {
+			return nil, 0
+		}
+		capH = max(capH, line.capH)
+	}
+	_, _, layers, why := lineRoles(lines, st.normalC, st.accentC, st.shadowC)
+	if why != "" {
+		return nil, 0
+	}
+	_, floor := dialogSizes(capH)
+	for limit := st.size; limit >= floor; limit-- {
+		cat := *t.dlg
+		cat.fonts = map[int]*dialogFont{}
+		for size, font := range t.dlg.fonts {
+			if size <= limit {
+				cat.fonts[size] = font
+			}
+		}
+		sh, n, ac, dm, size := cat.lineLayerMasks(items, lines, st.safe,
+			observedPitch(lines, st.safe.Dy()+3), st.shadowC != 0, layers)
+		if size == 0 {
+			break
+		}
+		limit = size
+		masks := []*image.Alpha{sh, n, ac, dm}
+		paint, clipped, ok := draftSlotPaintBounds(o, masks, st.safe, canvas, indexed, cursor)
+		if !ok {
+			continue
+		}
+		crop := func(mask *image.Alpha) *image.Alpha {
+			if mask == nil {
+				return nil
+			}
+			out := image.NewAlpha(image.Rect(0, 0, paint.Dx()*4, paint.Dy()*4))
+			draw.Draw(out, out.Rect, mask, paint.Min.Sub(st.safe.Min).Mul(4), draw.Src)
+			return out
+		}
+		next := *st
+		next.safe, next.size = paint, size
+		next.shadow, next.normal, next.accent, next.dim = crop(sh), crop(n), crop(ac), crop(dm)
+		return &next, clipped
+	}
+	return nil, 0
+}
+
 // 這個切片重建保留的原文；完整暫停交易另驗，不能據此升READY。
 func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer, indexed, palette []byte, cursor image.Rectangle, step uint64, mode byte) (*image.RGBA, map[string]any, error) {
 	if len(canvas) != 64000 || len(buffer) != 64000 || len(indexed) != 64000 || len(palette) != 768 {
@@ -763,6 +912,7 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 		return out, result, nil
 	}
 	d := &dialogRuntime{cat: t.dlg, misses: map[string]int{}}
+	dialogSources := map[*dialogShown]*nativeObservation{}
 	s := &stringRuntime{cat: t.str, misses: map[string]int{}}
 	var context []byte
 	var contextStep uint64
@@ -805,9 +955,10 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 			}
 		}
 		if r := o.dialogRun; r != nil {
-			st, shown, why := d.finish(cloneNativeDialog(r), context, o.step)
+			st, shown, why := draftDialogContext(d, r, context).finish(cloneNativeDialog(r), context, o.step)
 			if st != nil {
 				draftKeepDialog(d, st, context)
+				dialogSources[st] = o
 			} else if why != "" {
 				d.misses[why+"\t"+shown]++
 			}
@@ -864,8 +1015,16 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 		if st == nil || st.phase == "expired" || !bytes.Equal(rectBytes(canvas, st.safe), st.afterSafe) {
 			continue
 		}
+		sourceSafe, clipped := st.safe, 0
 		if !draftSameExceptCursor(indexed, canvas, st.safe, cursor) {
-			continue
+			fitted, count := draftFitSlotDialog(t, st, dialogSources[st], canvas, indexed, cursor)
+			if fitted == nil {
+				if st.id == "STRING:save-slot+list" {
+					d.misses["slot-vga-safe-changed\t"+st.id]++
+				}
+				continue
+			}
+			st, clipped = fitted, count
 		}
 		for y := st.safe.Min.Y; y < st.safe.Max.Y; y++ {
 			for x := st.safe.Min.X; x < st.safe.Max.X; x++ {
@@ -877,7 +1036,11 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 		}
 		draftPaintLayers(out, st.safe, []*image.Alpha{st.shadow, st.normal, st.accent, st.dim}, []byte{st.shadowC, st.normalC, st.accentC, st.dimC}, palette)
 		dialogSafes = append(dialogSafes, st.safe)
-		records = append(records, map[string]any{"kind": "dialog", "id": st.id, "text": st.zh, "safe": st.safe, "font_px": st.size})
+		record := map[string]any{"kind": "dialog", "id": st.id, "text": st.zh, "safe": st.safe, "font_px": st.size}
+		if st.safe != sourceSafe {
+			record["source_safe"], record["native_clipped_pixels"] = sourceSafe, clipped
+		}
+		records = append(records, record)
 	}
 	for _, it := range s.items {
 		// 完整安全區不相同時回原文；本切片尚未處理部分遮擋與畫面世代。

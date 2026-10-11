@@ -11,6 +11,96 @@ import (
 	"testing"
 )
 
+func TestDraftSlotReprintRequiresIntactSourceTitle(t *testing.T) {
+	fixture := func(rows int) (*dialogRuntime, *dialogRun, []byte) {
+		canvas := make([]byte, 64000)
+		title := &dialogShown{id: "GAME.TXT:0x00000826", phase: "active", safe: image.Rect(1, 1, 5, 5)}
+		title.afterSafe = rectBytes(canvas, title.safe)
+		d := &dialogRuntime{cur: &dialogShown{id: "STRING:save-slot+list", phase: "expired"}, prev: title}
+		r := &dialogRun{readPos: rows * 4}
+		for row := 0; row < rows; row++ {
+			r.chars = append(r.chars, dialogChar{c: 'A', box: image.Rect(10, 10+row*6, 13, 15+row*6)},
+				dialogChar{c: 'B', box: image.Rect(14, 10+row*6, 17, 15+row*6)})
+		}
+		return d, r, canvas
+	}
+	for _, rows := range []int{8, 10} {
+		d, r, canvas := fixture(rows)
+		context := draftDialogContext(d, r, canvas)
+		if context == d || context.cur != d.prev || context.prev != nil || d.cur.phase != "expired" {
+			t.Fatal("完整重印未借用原版標題，或復活了舊清單", rows)
+		}
+	}
+	for name, damage := range map[string]func(*dialogRuntime, *dialogRun, []byte){
+		"other title":   func(d *dialogRuntime, _ *dialogRun, _ []byte) { d.prev.id = "OTHER" },
+		"expired title": func(d *dialogRuntime, _ *dialogRun, _ []byte) { d.prev.phase = "expired" },
+		"changed title": func(_ *dialogRuntime, _ *dialogRun, c []byte) { c[321] = 1 },
+		"other list":    func(d *dialogRuntime, _ *dialogRun, _ []byte) { d.cur.id = "STRING:line+list" },
+		"pending read":  func(_ *dialogRuntime, r *dialogRun, _ []byte) { r.readPos-- },
+		"wrong rows":    func(_ *dialogRuntime, r *dialogRun, _ []byte) { r.chars = r.chars[:18] },
+		"title overlap": func(_ *dialogRuntime, r *dialogRun, _ []byte) { r.chars[0].box = image.Rect(1, 1, 4, 4) },
+	} {
+		t.Run(name, func(t *testing.T) {
+			d, r, canvas := fixture(10)
+			damage(d, r, canvas)
+			if draftDialogContext(d, r, canvas) != d || d.cur.phase != "expired" {
+				t.Fatal("失效來源借用插槽身份或復活舊清單")
+			}
+		})
+	}
+}
+
+func TestDraftSlotPaintBoundsPreservesNativeClipping(t *testing.T) {
+	safe := image.Rect(10, 10, 18, 18)
+	fixture := func() (*nativeObservation, *image.Alpha, []byte, []byte) {
+		canvas := make([]byte, 64000)
+		o := &nativeObservation{after: map[int]byte{}, dialogRun: &dialogRun{chars: []dialogChar{
+			{c: 'A', box: image.Rect(11, 11, 12, 14)}, {c: 'B', box: image.Rect(15, 11, 16, 14)},
+		}}}
+		for _, p := range []image.Point{{11, 11}, {11, 13}, {15, 11}, {15, 13}} {
+			pos := p.Y*320 + p.X
+			o.after[pos], canvas[pos] = 68, 68
+		}
+		indexed := bytes.Clone(canvas)
+		indexed[13*320+11], indexed[13*320+15] = 5, 5
+		mask := image.NewAlpha(image.Rect(0, 0, 32, 32))
+		for y := 4; y < 12; y++ {
+			for x := 4; x < 24; x++ {
+				mask.SetAlpha(x, y, color.Alpha{A: 255})
+			}
+		}
+		return o, mask, canvas, indexed
+	}
+	o, mask, canvas, indexed := fixture()
+	beforeCanvas, beforeVGA := bytes.Clone(canvas), bytes.Clone(indexed)
+	paint, clipped, ok := draftSlotPaintBounds(o, []*image.Alpha{mask}, safe, canvas, indexed, image.Rectangle{})
+	if !ok || paint != image.Rect(11, 11, 16, 13) || clipped != 2 ||
+		!bytes.Equal(canvas, beforeCanvas) || !bytes.Equal(indexed, beforeVGA) {
+		t.Fatal("底緣裁切量測錯誤或改寫原版", paint, clipped, ok)
+	}
+	for name, damage := range map[string]func(*nativeObservation, *image.Alpha, []byte, []byte){
+		"interior obstruction": func(_ *nativeObservation, _ *image.Alpha, _ []byte, v []byte) { v[11*320+12] = 5 },
+		"invisible glyph":      func(_ *nativeObservation, _ *image.Alpha, _ []byte, v []byte) { v[11*320+15] = 5 },
+		"new ink at clipped row": func(_ *nativeObservation, m *image.Alpha, _ []byte, _ []byte) {
+			m.SetAlpha(4, 12, color.Alpha{A: 255})
+		},
+		"changed source": func(_ *nativeObservation, _ *image.Alpha, c []byte, _ []byte) { c[13*320+11] = 0 },
+		"outside source": func(o *nativeObservation, _ *image.Alpha, _ []byte, _ []byte) { o.after[0] = 0 },
+		"invalid source": func(o *nativeObservation, _ *image.Alpha, _ []byte, _ []byte) { o.after[-1] = 0 },
+		"empty mask": func(_ *nativeObservation, m *image.Alpha, _ []byte, _ []byte) {
+			clear(m.Pix)
+		},
+	} {
+		t.Run(name, func(t *testing.T) {
+			o, mask, canvas, indexed := fixture()
+			damage(o, mask, canvas, indexed)
+			if _, _, ok := draftSlotPaintBounds(o, []*image.Alpha{mask}, safe, canvas, indexed, image.Rectangle{}); ok {
+				t.Fatal("裁切或遮擋仍啟用覆蓋")
+			}
+		})
+	}
+}
+
 func draftActualTargetsForTest(t *testing.T) map[string]*draftLanguageTarget {
 	t.Helper()
 	root, game := os.Getenv("DRAFT_BUNDLE_ROOT"), os.Getenv("TEST_GAME_ROOT")

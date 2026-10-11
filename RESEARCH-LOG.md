@@ -5096,3 +5096,49 @@ ida-pro-9.4-idapython:py312-v1映像，ID4ac62de83339；核心9.4、Python3.12.3
 以IDA定位器核對原版及既有trace／proof指紋；再在Go映像內建置畫布寫入探針，
 以--draw-query指定query.json，沿既有--seed及--inputs正常重播。
 位置、輸入指紋與完整收據由上述JSON保存；所有容器無網路、資源有界且使用UID1000。
+
+## 2026-10-12：讀檔清單底緣差分與重印上下文
+
+本節追加勘誤，不撤銷前批終點匯出的原始證據。路由仍命中文化顯示語意隔離。
+輸入VICEROY.EXE SHA-256為a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3，
+GAME.TXT為67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a。
+原版初始COLONY09.SAV為52ae8b7bd4bea1869afb825af165a8edc50882fc176d49985d4fb3c362d5469b，
+由原版正常保存並供新行程讀回的COLONY00.SAV為9fce2ddeebc0298544ddf06b9ed713e23d51e871b85190f7d4a6e19e34d84def。
+Go1.26.7、Ebiten2.9.9、隔離dosgolem 82a14b266e1b5bc904e2d0fe507daf6bea41a013；
+執行於hr-go-ebiten:1.26.7-2.9.9-r1及colonization-verification:20261007-runtime-r2。
+位址基準為dosgolem實模式CS:IP及20bit線性RAM，檔案SHA另列，不換算成IDA位址。
+
+confirmed：原版0D21:00C6讀字、0D21:012C改色的既有觀測路徑，在22440000步已收尾首份
+162字元、十列清單，來源線性RAM 0x2A9FA。診斷輸出start22176396、last22300981。
+前批終點只保留25080000及25245000步、來源0x2AA62的兩次重印；
+首份觀測已在較晚終點回收，不能由終點缺項推論首屏未觀測。
+標題GAME.TXT:0x00000826有效，首份清單確有插槽上下文，既有回呼可完成四語翻譯。
+
+confirmed：24800000步首屏的原版墨跡與實際VGA有十點差異，均在y134。
+邏輯畫布皆色號68，VGA的x／色號為122／134、150／134、151／134、164／136、
+171／133、191／132、192／132、217／132、231／130、232／132。
+原版邏輯畫布為線性RAM 0x2CAE0起64000bytes，VGA為0xA0000起64000bytes。
+完整原文安全區[68,74,254,137]因此不能直接覆蓋；差分的硬體或拷貝成因仍未知。
+首份清單已完整收尾，沒有證據支持本次缺口來自未完成段落。
+
+confirmed：反白重印先改寫舊清單，使舊清單expired，但來源標題仍有效。
+原重建器依已失效的目前清單判斷上下文，後兩次重印因而回退line-no-template。
+r21隔離修正只借用未改寫、active且不重疊的已驗標題，不復活舊清單；
+完整8／10列仍須通過來源回呼、字格、文字存活及像素守門。
+
+四語本次實際Noto各逐級量測後選18px，覆蓋矩形[69,74,252,134]。
+21至19px不能避開底緣差分；18px完整保留8542／8346／8860／7416個非零字模點。
+十個原版差異點留在矩形外，矩形內畫布／VGA仍完全相同；
+原版字格每格須仍有可見墨跡。字模伸入差異區、內部遮擋、不可見字格、缺候選、
+未知描述與過長譯文回原文，沒有將被裁切的Noto字形當通過。
+native_clipped_pixels是區外差分點計數，不是硬體裁切成因的證明。
+
+本機根為workplace/reports/goal186-display-hd/language-resources-20261011：
+native-slot-trace-r20-c/run.native.json為a02db8f935877b1f6a36b31ab8f4e0d730fb0be324b25414d492462b19aa2899，
+同批run.memory為84d6db27ccab8c484965d9a92bac8041957311325a58bc46bd96b4c71d3686f9。
+native-slot-real-fit-r21.json為9193387fdc34f1711a44ad2e54d57bbca6affadc36b72d7c7445dfa641abf002，
+含實際輸入及四語字模來源指紋。量測建立標題上下文，只證明排版。
+正常來源身份及玩家路徑由r21讀檔25組、存檔30組GUI和各自四側重播供證；
+CPU、完整RAM、VGA、DAC、WAV與存檔全同，英文逐像素等於原版。
+完整指紋、私用來源入口及重生流程見[規格060](docs/spec/060-language-bundle-swap.md#2026-10-12r21插槽清單隔離驗證)。
+正式前端與dosgolem未改，057及060仍DRAFT，不增加shown或HD信用。
