@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "total": 2006,
-  "source_binding_sha256": "a3ea14e763f8a34b9b29794fed96e6a3018bf56881b77c2005305ccdd3daad01",
+  "total": 2008,
+  "source_binding_sha256": "91bfc5e32a369f8c0a8654fe429a9f07ca386f16ec8fc12dde36d2a7eedbc4c8",
   "tables": [
     {
       "catalog": "draft",
@@ -83,7 +83,7 @@
         "message_id"
       ],
       "display_column": "zh_hant",
-      "rows": 865,
+      "rows": 867,
       "sha256": "1483f5ce585c43337dbab8118928cff783af936682493e1fc5e5f2b6554c2947"
     },
     {

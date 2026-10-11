@@ -36,8 +36,9 @@ def read_tsv(data, expected=None, legacy=False):
     require(len(data) <= 16 * 1024 * 1024, "TSV過大")
     source = data.decode("utf-8", errors="strict")
     require(not source.startswith("\ufeff") and "\x00" not in source, "TSV包含BOM或NUL")
-    # 舊表的原文欄含未雙寫的引號；只在已固定整檔雜湊的基準表沿用原讀法。
-    reader = csv.reader(io.StringIO(source), delimiter="\t", strict=not legacy)
+    # 正式Go消費端以實體列及tab切欄。已固定基準中的引號是原文字元，不能跨列配對。
+    reader = csv.reader(io.StringIO(source), delimiter="\t", strict=not legacy,
+                        quoting=csv.QUOTE_NONE if legacy else csv.QUOTE_MINIMAL)
     header = next(reader, [])
     require(header and len(header) == len(set(header)), "TSV缺少欄名或欄名重複")
     if expected is not None:
@@ -83,7 +84,7 @@ class BaseCatalog:
                 resolved.append(entry)
                 bindings.append({column: entry[column] for column in ("catalog", "key", "base_sha256")})
             self.tables.append((table, header, resolved, data))
-        require(len(self.entries) == self.registry["total"] == 2006, "基準語料不完整")
+        require(len(self.entries) == self.registry["total"] == 2008, "基準語料不完整")
         require(sha(canonical(bindings)) == self.registry["source_binding_sha256"], "完整基準鍵指紋不同")
 
 
@@ -149,7 +150,11 @@ def make_views(base, entries, locale):
             row = entry["row"].copy()
             row[table["display_column"]] = translated["text"]
             rows.append(row)
-        views[table["file"]] = write_tsv(header, rows)
+        # 消費端不是CSV parser；保持每個非顯示欄位的原始引號與實體列，只替換顯示欄。
+        require(all(not any(ch in value for ch in "\t\r\n") for row in rows for value in row.values()),
+                "消費端TSV不能包含實體換行或tab")
+        views[table["file"]] = ("\t".join(header) + "\n" +
+                                "".join("\t".join(row[field] for field in header) + "\n" for row in rows)).encode("utf-8")
     return views
 
 

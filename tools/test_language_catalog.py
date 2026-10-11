@@ -20,13 +20,13 @@ class LanguageCatalogTests(unittest.TestCase):
 
     def test_all_real_rows_and_unchanged_source_metadata(self):
         entries, missing = self.load(self.rows)
-        self.assertEqual((len(entries), missing), (2006, []))
+        self.assertEqual((len(entries), missing), (2008, []))
         original = catalog.make_views(self.base, {}, "zh-Hant")
         views = catalog.make_views(self.base, entries, "zh-Hans")
         self.assertEqual(len(views), 13)
         for table, header, resolved, data in self.base.tables:
             self.assertEqual(original[table["file"]], data)
-            _, actual = catalog.read_tsv(views[table["file"]], header)
+            _, actual = catalog.read_tsv(views[table["file"]], header, legacy=True)
             self.assertEqual(actual, [entry["row"] for entry in resolved])
 
     def test_partial_does_not_become_complete_or_compile(self):
@@ -80,7 +80,36 @@ class LanguageCatalogTests(unittest.TestCase):
         data = b'key\ttext\nitem\t"a"b\n'
         with self.assertRaises(csv.Error):
             catalog.read_tsv(data)
-        self.assertEqual(catalog.read_tsv(data, legacy=True)[1][0]["text"], 'ab')
+        self.assertEqual(catalog.read_tsv(data, legacy=True)[1][0]["text"], '"a"b')
+
+    def test_unclosed_source_quotes_do_not_merge_real_records(self):
+        keys = ["GAME.TXT:@CHIEFHOWDY:0x00006E3E", "GAME.TXT:@CHIEFGUIDES:0x00006F2F",
+                "GAME.TXT:@WARMANLY:0x0000E83B", "GAME.TXT:@THREATS:0x0000E8D7"]
+        for key in keys:
+            entry = self.base.entries["corpus", key]
+            self.assertFalse(any("\n" in value or "\t" in value for value in entry["row"].values()))
+        self.assertIn("%STRING3", self.base.entries["corpus", keys[0]]["text"])
+        self.assertNotIn("%STRING3", self.base.entries["corpus", keys[1]]["text"])
+        self.assertIn("%STRING0", self.base.entries["corpus", keys[2]]["text"])
+        self.assertNotIn("%STRING0", self.base.entries["corpus", keys[3]]["text"])
+
+    def test_compiled_views_match_real_go_tab_reader(self):
+        for locale in ("zh-Hans", "ja", "ko"):
+            path = catalog.ROOT / f"text/game.{locale}.tsv"
+            entries, missing = catalog.load_translation(self.base, path.read_bytes(), locale, False)
+            self.assertEqual(missing, [])
+            views = catalog.make_views(self.base, entries, locale)
+            for table, header, resolved, data in self.base.tables:
+                old = [line.split("\t") for line in data.decode().rstrip("\n").split("\n")]
+                actual = [line.split("\t") for line in views[table["file"]].decode().rstrip("\n").split("\n")]
+                self.assertEqual(len(actual), len(old))
+                self.assertEqual(actual[0], old[0])
+                display_index = header.index(table["display_column"])
+                for index, entry in enumerate(resolved, 1):
+                    self.assertEqual(len(actual[index]), len(header))
+                    self.assertEqual(actual[index][display_index], entries[entry["catalog"], entry["key"]]["text"])
+                    self.assertEqual(actual[index][:display_index], old[index][:display_index])
+                    self.assertEqual(actual[index][display_index+1:], old[index][display_index+1:])
 
     def test_compile_rechecks_changed_binding(self):
         entries, _ = self.load(self.rows)

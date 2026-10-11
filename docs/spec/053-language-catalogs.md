@@ -1,9 +1,9 @@
 # 遊戲語言資料與來源隔離
 
-狀態：限定CONFORMED，僅語料驗證與文本組裝契約。入口：[目標186](../goals/186-display-settings-and-gameplay-video.md)。
+狀態：限定CONFORMED於勘誤後的語料驗證與文本組裝。先前清冊有兩組引號合併列，現行2008筆與重驗見文末。入口：[目標186](../goals/186-display-settings-and-gameplay-video.md)。
 本規格先處理完整語料及建置資料，不授權未驗的字型、畫面切換或正式語言包。
 
-## 來源與範圍
+## 首次來源盤點（已勘誤，現行數量見文末）
 
 confirmed：現行正式消費端讀13份TSV，共2006列、1835種繁中顯示值。
 來源欄有`zh_hant`、`zh_hant_draft`及`zh`三種；動態字串、對話框、百科、
@@ -37,9 +37,9 @@ confirmed：現行正式消費端讀13份TSV，共2006列、1835種繁中顯示�
 
 ## 驗證與建置邊界
 
-- 固定13份基準檔雜湊、2006個唯一複合鍵及各列指紋。重複鍵、孤兒鍵、錯語言、
+- 固定13份基準檔雜湊、2008個唯一複合鍵及各列指紋。重複鍵、孤兒鍵、錯語言、
   過期基準、UTF-8錯誤、欄數錯誤、控制字元及未明示空白均拒絕。
-- 正式組裝要求完整2006列。partial只報目前覆蓋，不生成可用語言包，不補繁中冒充日韓。
+- 正式組裝要求完整2008列。partial只報目前覆蓋，不生成可用語言包，不補繁中冒充日韓。
 - `%STRINGn`、`%NUMBERn`、`%COUNTRY`、`%Fs`、模板變數及格式槽位保持多重集合相同；ASCII命名的
   大括號槽位及快捷鍵代碼也保留，例如`{person}`、`{SHIFT}`。`{}`、`^`、`~`
   與跳脫換行／定位控制保持結構。corpus的217筆NAMES.TXT複合欄保持項目數，
@@ -230,3 +230,43 @@ confirmed碼點覆蓋：[檢查器](../../tools/check_language_font_coverage.py)
 原審查檔為`dc0a9b0ae43c8953d2e8845066e682e20df735b07ba460f2482eb9ef04ef32f8`。
 本節不擴張規格053的限定CONFORMED範圍；字形烘製、逐欄READY規格、五語GUI、HD
 及新版交付仍待完成。本輪沒有執行原版或增加shown。
+
+## 2026-10-11勘誤：基準引號、遺漏來源鍵及消費端格式
+
+先前2006筆／corpus865筆的清冊使用CSV相容讀法，將原文未閉合引號當作欄位引號。
+兩組實體列被合併；舊收據與雜湊保留作為錯誤讀法的歷史，不再證明現行文本完整。
+原始13表及正式Go的實體列讀法沒有此變更，已發布繁中不因本次勘誤改寫。
+
+| 錯綁鍵 | 譯文實際所屬、先前遺漏的鍵 |
+|---|---|
+| GAME.TXT:@CHIEFHOWDY:0x00006E3E | GAME.TXT:@CHIEFGUIDES:0x00006F2F |
+| GAME.TXT:@WARMANLY:0x0000E83B | GAME.TXT:@THREATS:0x0000E8D7 |
+
+confirmed：corpus原檔1483f5ce585c43337dbab8118928cff783af936682493e1fc5e5f2b6554c2947，
+實有867列；13表共2008筆、1837種繁中顯示值。實體列以tab切欄，引號為原文字元，
+只有新語言編輯檔使用標準CSV引號讀寫。基準已固定整檔雜湊後才使用實體列讀法。
+給Go消費端的相容檔保持同一讀法，不產生跨列引號或重寫來源欄；譯文含實體tab／換行時拒絕。
+原始來源、控制碼與遊戲資料均不變。
+
+三語各將兩筆原譯文移回實際來源鍵，再為原鍵補兩筆譯文；既有2006筆譯文內容全保留。
+各語現為2008筆，2005筆譯文與3筆明示省略。基準列指紋依實際完整欄位重算，
+完整聯集SHA-256為91bfc5e32a369f8c0a8654fe429a9f07ca386f16ec8fc12dde36d2a7eedbc4c8。
+只更新語料登錄與新語言編輯稿，13份原始繁中表的整檔雜湊不變。
+
+10項真資料測試通過，新增四個實體鍵、單邊引號、全部三語輸出及正式Go讀法的反例回歸。
+五語文本各兩次組裝全等；四語52個文本檔由正式來源抽出的splitTSV讀回各2008筆，
+各語17981個非顯示欄位與原始實體列完全相同。英文只產生原版顯示清冊。
+此驗收只證明文本格式與來源隔離，未增加正常GUI、原版對拍或完整五語切換信用。
+
+| 本機收據（相對workplace/reports/goal186-display-hd/） | SHA-256 |
+|---|---|
+| language-runtime-audit-20261011/tsv-check.json | 05faf64b5d21a12e1c1a2de12a7afe00db50a7d33538dc5fd10ec667a285b2af |
+| language-runtime-audit-20261011/tsv-migration.json | c2d512c72279681308d2865800338c17457218ec1d32b435d2a8a35bf881a177 |
+| language-flat-tsv-check-20261011/check.json | 991ac85dbe10472db6c7e5308c3c389535d4ce8900ba4d67f75500eba877cb2b |
+| language-flat-tsv-check-20261011/go-consumer-result.json | 9140dcd7ba61bdc261ed0829a6bebdd46349de70c574614b125011eeedc4a452 |
+
+重驗仍使用本頁既有check／compile與unittest入口，完整性數量改為2008。
+Go收據以同一固定Go1.26.7映像，直接抽取受版控dialog_overlay.go的splitTSV，
+來源函式、測試程式與結果保存在上述language-flat-tsv-check目錄。
+首次完整Noto原型因使用舊清冊停止，ABORTED.json明示不得套用；重新烘製使用新的r2目錄。
+母語校閱、固定中文片段、每欄排版、完整語言包與HD仍未完成。
