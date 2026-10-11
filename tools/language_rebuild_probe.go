@@ -18,10 +18,11 @@ import (
 var draftNativeBundles = flag.String("draft-native-bundles", "", "規格060隔離原型的完整候選根目錄")
 
 type draftLanguageTarget struct {
-	pack *draftPreparedBundle
-	dlg  *dialogCatalog
-	str  *stringCatalog
-	sea  *seaState
+	pack  *draftPreparedBundle
+	dlg   *dialogCatalog
+	str   *stringCatalog
+	sea   *seaState
+	fixed map[string]*draftFixedMask
 }
 
 func draftTargetRequirements(root string) (draftBundleRequirements, error) {
@@ -149,10 +150,214 @@ func draftPrepareTargets(root string, files map[string][]byte, owned, helpOwned 
 		if err != nil {
 			return nil, fmt.Errorf("%s sea: %w", locale, err)
 		}
+		t.fixed, err = draftPrepareFixed(pack, needs)
+		if err != nil {
+			return nil, fmt.Errorf("%s fixed: %w", locale, err)
+		}
 		t.dlg, t.str = cat, sc
 		targets[locale] = t
 	}
 	return targets, nil
+}
+
+type draftFixedMask struct {
+	id, text                      string
+	safe                          image.Rectangle
+	position                      image.Point
+	size                          int
+	alpha, normal, shadow, accent *image.Alpha
+}
+
+type draftFixedJSON struct {
+	ID          string   `json:"candidate_id"`
+	MessageID   string   `json:"message_id"`
+	Translation string   `json:"translation_sha256"`
+	Keys        []string `json:"keys"`
+	Caption     string   `json:"caption"`
+	Size        int      `json:"font_size"`
+	X           int      `json:"x"`
+	Y           int      `json:"y"`
+	Width       int      `json:"width"`
+	Height      int      `json:"height"`
+	Alpha       []byte   `json:"alpha"`
+	Normal      []byte   `json:"normal"`
+	Shadow      []byte   `json:"shadow"`
+	Accent      []byte   `json:"highlight"`
+}
+
+// 與固定字模產生器相同的既有TSV處理：移除控制碼、字幕槽位及教學定稿術語。
+func draftFixedText(pack *draftPreparedBundle, requirement draftMaskRequirement, group string, mask draftFixedJSON) (string, error) {
+	rows := tsvRows(pack.files["text/"+requirement.Catalog])
+	if rows == nil {
+		return "", fmt.Errorf("fixed catalog format")
+	}
+	index := map[string]map[string]string{}
+	for _, r := range rows {
+		id := r["candidate_id"]
+		if id == "" {
+			id = r["message_id"]
+		}
+		if id == "" || index[id] != nil {
+			return "", fmt.Errorf("fixed catalog duplicate or empty key")
+		}
+		index[id] = r
+	}
+	keys := mask.Keys
+	if len(keys) == 0 {
+		keys = []string{requirement.ID}
+	}
+	var parts []string
+	for _, key := range keys {
+		r := index[key]
+		if r == nil {
+			return "", fmt.Errorf("fixed text missing: %s", key)
+		}
+		text := r["zh_hant"]
+		if group == "intro" {
+			text = r["zh_hant_draft"]
+		}
+		if text == "" {
+			return "", fmt.Errorf("fixed text empty: %s", key)
+		}
+		parts = append(parts, strings.ReplaceAll(strings.TrimPrefix(text, "^^"), "~", ""))
+	}
+	if group == "captions" {
+		for _, r := range tsvRows(pack.files["text/build-caption-values.zh-Hant.tsv"]) {
+			if r["nation"] == "england" && r["caption"] == mask.Caption {
+				if r["placeholder"] == "" || r["zh_hant"] == "" {
+					return "", fmt.Errorf("fixed caption value empty")
+				}
+				for i := range parts {
+					parts[i] = strings.ReplaceAll(parts[i], r["placeholder"], r["zh_hant"])
+				}
+			}
+		}
+	}
+	text := strings.Join(parts, "\n")
+	if (group == "card" || group == "cards-rest") && strings.HasPrefix(requirement.ID, "NAMES.TXT:") {
+		text += "："
+	}
+	if group == "help" {
+		var terms []string
+		for _, r := range tsvRows(pack.files["text/terms.zh-Hant.tsv"]) {
+			if r["en"] == "Caravel" && r["category"] == "ship" {
+				terms = append(terms, r["zh"])
+			}
+		}
+		if len(terms) != 1 || terms[0] == "" {
+			return "", fmt.Errorf("fixed tutorial term missing")
+		}
+		text = strings.ReplaceAll(text, "%STRING0", terms[0])
+	}
+	if strings.Contains(text, "%STRING") || strings.Contains(text, "^^") || strings.Contains(text, "~") || hash([]byte(text)) != mask.Translation {
+		return "", fmt.Errorf("fixed displayed text binding mismatch: %s", requirement.ID)
+	}
+	return text, nil
+}
+
+func draftPrepareFixed(pack *draftPreparedBundle, needs draftBundleRequirements) (map[string]*draftFixedMask, error) {
+	result := map[string]*draftFixedMask{}
+	for name, requirement := range needs.Masks {
+		var raw draftFixedJSON
+		if err := json.Unmarshal(pack.files["masks/"+name], &raw); err != nil {
+			return nil, err
+		}
+		if raw.ID == "" {
+			raw.ID = raw.MessageID
+		}
+		if raw.ID != requirement.ID || result[raw.ID] != nil || raw.Size <= 0 {
+			return nil, fmt.Errorf("fixed mask identity or size")
+		}
+		group := strings.TrimSuffix(strings.SplitN(name, "/", 2)[0], ".json")
+		text, err := draftFixedText(pack, requirement, group, raw)
+		if err != nil {
+			return nil, err
+		}
+		f := &draftFixedMask{id: raw.ID, text: text, safe: image.Rect(requirement.Safe[0]/4, requirement.Safe[1]/4, requirement.Safe[2]/4, requirement.Safe[3]/4), position: image.Pt(raw.X, raw.Y), size: raw.Size}
+		load := func(data []byte) *image.Alpha {
+			if len(data) == 0 {
+				return nil
+			}
+			m := image.NewAlpha(image.Rect(0, 0, raw.Width, raw.Height))
+			copy(m.Pix, data)
+			return m
+		}
+		f.alpha, f.normal, f.shadow, f.accent = load(raw.Alpha), load(raw.Normal), load(raw.Shadow), load(raw.Accent)
+		body := f.alpha
+		if requirement.Layered {
+			body = f.normal
+		}
+		if body == nil || bytes.Count(body.Pix, []byte{0}) == len(body.Pix) {
+			return nil, fmt.Errorf("fixed body ink empty: %s", f.id)
+		}
+		result[f.id] = f
+	}
+	if len(result) != 64 {
+		return nil, fmt.Errorf("fixed masks incomplete")
+	}
+	return result, nil
+}
+
+func draftPaintFixed(out *image.RGBA, mask *draftFixedMask, o *nativeObservation, j *nativeJournal, canvas, indexed, palette []byte, cursor image.Rectangle) (map[string]any, string) {
+	f := o.fixed
+	if f == nil || mask == nil || f.id != mask.id || f.safe != mask.safe || f.layered != (mask.normal != nil) {
+		return nil, "fixed-field-binding"
+	}
+	if !o.visible(canvas, nil, indexed) {
+		return nil, "fixed-native-expired-or-changed"
+	}
+	if f.buttonGuard && j.buttons {
+		return nil, "fixed-button-held"
+	}
+	guard := f.guard
+	if f.mouseRule == "target-ink" {
+		ink := mask.alpha.Bounds().Add(mask.position)
+		ink = ink.Union(ink.Add(f.shadow))
+		guard = image.Rect(ink.Min.X/4, ink.Min.Y/4, (ink.Max.X+3)/4, (ink.Max.Y+3)/4)
+	}
+	if (f.mouseRule == "point" && cursor.Min.In(guard)) || ((f.mouseRule == "overlap" || f.mouseRule == "target-ink") && cursor.Overlaps(guard)) {
+		return nil, "fixed-cursor-over-field"
+	}
+	if !f.vga && !draftSameExceptCursor(indexed, canvas, f.safe, cursor) {
+		return nil, "fixed-vga-safe-changed"
+	}
+	var layers []*image.Alpha
+	var colors []byte
+	var positions []image.Point
+	if f.layered {
+		layers = []*image.Alpha{mask.shadow, mask.normal, mask.accent}
+		colors = []byte{f.shade, f.foreground, f.accent}
+		positions = []image.Point{mask.position, mask.position, mask.position}
+	} else {
+		if f.shadow != (image.Point{}) {
+			layers = append(layers, mask.alpha)
+			colors = append(colors, f.shade)
+			positions = append(positions, mask.position.Add(f.shadow))
+		}
+		layers = append(layers, mask.alpha)
+		colors = append(colors, f.foreground)
+		positions = append(positions, mask.position)
+	}
+	scaled := image.Rectangle{Min: f.safe.Min.Mul(4), Max: f.safe.Max.Mul(4)}
+	for i, layer := range layers {
+		if layer == nil || !layer.Bounds().Add(positions[i]).In(scaled) {
+			return nil, "fixed-ink-out-of-bounds"
+		}
+	}
+	k := 0
+	for y := f.safe.Min.Y; y < f.safe.Max.Y; y++ {
+		for x := f.safe.Min.X; x < f.safe.Max.X; x++ {
+			if f.before[k] != f.after[k] {
+				draftPaintPixel(out, y*320+x, f.before[k], palette)
+			}
+			k++
+		}
+	}
+	for i, layer := range layers {
+		at := positions[i]
+		draw.DrawMask(out, layer.Bounds().Add(at), image.NewUniform(draftColor(colors[i], palette)), image.Point{}, layer, layer.Bounds().Min, draw.Over)
+	}
+	return map[string]any{"kind": "fixed", "id": f.id, "text": mask.text, "safe": f.safe, "font_px": mask.size, "position": mask.position, "layered": f.layered}, ""
 }
 
 // 沿規格032核對逐詞來源；整包載入器另核對地區、字型、圖集尺寸及綁定。
@@ -449,7 +654,7 @@ func draftKeepDialog(d *dialogRuntime, st *dialogShown, canvas []byte) {
 	st.afterSafe, st.phase = rectBytes(canvas, st.safe), "active"
 }
 
-// 這個切片驗對話、字串及海上；固定欄及完整暫停交易另驗，不能據此升READY。
+// 這個切片重建保留的原文；完整暫停交易另驗，不能據此升READY。
 func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer, indexed, palette []byte, cursor image.Rectangle, step uint64, mode byte) (*image.RGBA, map[string]any, error) {
 	if len(canvas) != 64000 || len(buffer) != 64000 || len(indexed) != 64000 || len(palette) != 768 {
 		return nil, nil, fmt.Errorf("invalid native frame")
@@ -534,6 +739,20 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 		return out, result, nil
 	}
 	var dialogSafes []image.Rectangle
+	var fixedSafes []image.Rectangle
+	fixedMisses := map[string]int{}
+	for _, o := range j.items {
+		if o.fixed == nil || o.fixed.expired {
+			continue
+		}
+		record, why := draftPaintFixed(out, t.fixed[o.fixed.id], o, j, canvas, indexed, palette, cursor)
+		if record != nil {
+			records = append(records, record)
+			fixedSafes = append(fixedSafes, o.fixed.safe)
+		} else {
+			fixedMisses[why+"\t"+o.fixed.id]++
+		}
+	}
 	var seaClaims []image.Rectangle
 	for _, row := range seaRows {
 		record, why := draftPaintSea(out, t.sea, row, canvas, indexed, palette, cursor)
@@ -575,6 +794,9 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 		for _, ink := range seaClaims {
 			blocked = blocked || ink.Overlaps(it.ink)
 		}
+		for _, safe := range fixedSafes {
+			blocked = blocked || safe.Inset(2).Overlaps(it.safe)
+		}
 		if blocked {
 			continue
 		}
@@ -604,7 +826,8 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 	}
 	result["items"], result["dialog_misses"], result["string_misses"] = records, d.misses, s.misses
 	result["sea_misses"] = seaMisses
-	result["limitations"] = []string{"只驗對話、字串與海上重建候選，固定欄未接入。", "歷史VGA同步、部分遮擋、畫面世代與正式提交交易仍待驗。"}
+	result["fixed_misses"] = fixedMisses
+	result["limitations"] = []string{"保留原文的對話、字串、海上及固定欄重建候選，完整正常GUI尚未驗收。", "歷史VGA同步、部分遮擋、畫面世代與正式提交交易仍待驗。"}
 	return out, result, nil
 }
 

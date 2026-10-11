@@ -2,8 +2,10 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"image"
 	"image/color"
+	"os"
 	"strings"
 	"testing"
 )
@@ -25,6 +27,134 @@ func TestDraftRebuildRequiresWholeSafeArea(t *testing.T) {
 	}
 	if draftSameExceptCursor(vga[:100], canvas, safe, cursor) || draftSameExceptCursor(canvas, canvas, image.Rect(-1, 0, 4, 4), cursor) {
 		t.Fatal("unsafe frame accepted")
+	}
+}
+
+func TestDraftFixedActualBundleMasks(t *testing.T) {
+	root := os.Getenv("DRAFT_BUNDLE_ROOT")
+	if root == "" {
+		t.Skip("需明確指定本機完整Noto候選包")
+	}
+	needs, err := draftTargetRequirements(root)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, locale := range []string{"zh-Hant", "zh-Hans", "ja", "ko"} {
+		t.Run(locale, func(t *testing.T) {
+			pack, err := draftPrepareBundle(os.DirFS(root), locale, needs)
+			if err != nil {
+				t.Fatal(err)
+			}
+			fixed, err := draftPrepareFixed(pack, needs)
+			if err != nil || len(fixed) != 64 {
+				t.Fatal("complete fixed preparation failed", err)
+			}
+			for _, f := range fixed {
+				if f.text == "" || f.size <= 0 || f.safe.Empty() || (f.alpha == nil) == (f.normal == nil) {
+					t.Fatal("incomplete typed fixed mask", f.id)
+				}
+			}
+			name := "menu/GAME.TXT-0x000001B0.json"
+			var mask draftFixedJSON
+			if err = json.Unmarshal(pack.files["masks/"+name], &mask); err != nil {
+				t.Fatal(err)
+			}
+			mask.Translation = strings.Repeat("0", 64)
+			if _, err = draftFixedText(pack, needs.Masks[name], "menu", mask); err == nil {
+				t.Fatal("wrong displayed text hash accepted")
+			}
+			if err = json.Unmarshal(pack.files["masks/"+name], &mask); err != nil {
+				t.Fatal(err)
+			}
+			mask.Keys = []string{"unreviewed-native-key"}
+			if _, err = draftFixedText(pack, needs.Masks[name], "menu", mask); err == nil {
+				t.Fatal("missing source key accepted")
+			}
+		})
+	}
+}
+
+func TestDraftFixedPaintUsesMeasuredPositionAndNativeGuards(t *testing.T) {
+	before := bytes.Repeat([]byte{1}, 64000)
+	canvas := bytes.Clone(before)
+	i := 21*320 + 21
+	canvas[i] = 68
+	safe := image.Rect(20, 20, 50, 40)
+	j := &nativeJournal{enabled: true}
+	def := nativeFixed{id: "fixed-key", safe: safe, foreground: 68, shade: 47, shadow: image.Pt(4, 4), buttonGuard: true, mouseRule: "target-ink"}
+	if !j.captureFixed(def, before, canvas, canvas, 1) {
+		t.Fatal("source rejected")
+	}
+	alpha := image.NewAlpha(image.Rect(0, 0, 2, 2))
+	alpha.SetAlpha(0, 0, color.Alpha{255})
+	mask := &draftFixedMask{id: def.id, text: "display fixture", safe: safe, position: image.Pt(100, 96), size: 24, alpha: alpha}
+	palette := make([]byte, 768)
+	palette[68*3] = 63
+	palette[47*3+1] = 63
+	paint := func(vga []byte, cursor image.Rectangle) (*image.RGBA, map[string]any, string) {
+		im := draftRGB(vga, palette)
+		record, why := draftPaintFixed(im, mask, j.items[0], j, canvas, vga, palette, cursor)
+		return im, record, why
+	}
+	im, record, why := paint(canvas, image.Rectangle{})
+	if record == nil || why != "" || im.RGBAAt(100, 96) != draftColor(68, palette) || im.RGBAAt(104, 100) != draftColor(47, palette) || im.RGBAAt(84, 84) != draftColor(1, palette) {
+		t.Fatal("measured target position, native erase or shadow lost", why)
+	}
+	unchanged := bytes.Clone(canvas)
+	j.buttons = true
+	if _, record, why = paint(canvas, image.Rectangle{}); record != nil || why != "fixed-button-held" {
+		t.Fatal("held button accepted", why)
+	}
+	j.buttons = false
+	if _, record, why = paint(canvas, image.Rect(25, 24, 41, 40)); record != nil || why != "fixed-cursor-over-field" {
+		t.Fatal("cursor over target ink accepted", why)
+	}
+	vga := bytes.Clone(canvas)
+	vga[20*320+20] = 2
+	if _, record, why = paint(vga, image.Rectangle{}); record != nil || why != "fixed-vga-safe-changed" {
+		t.Fatal("changed VGA background accepted", why)
+	}
+	mask.position = image.Pt(199, 159)
+	if _, record, why = paint(canvas, image.Rectangle{}); record != nil || why != "fixed-ink-out-of-bounds" {
+		t.Fatal("oversize target accepted", why)
+	}
+	if !bytes.Equal(canvas, unchanged) {
+		t.Fatal("fixed rebuild mutated native state")
+	}
+}
+
+func TestDraftFixedLayeredColorsPreserved(t *testing.T) {
+	before := make([]byte, 64000)
+	canvas := bytes.Clone(before)
+	canvas[11*320+11] = 68
+	j := &nativeJournal{enabled: true}
+	def := draftFixedLayered("layered-key", image.Rect(10, 10, 20, 20))
+	if !j.captureFixed(def, before, canvas, canvas, 1) {
+		t.Fatal("source rejected")
+	}
+	makeLayer := func(x int) *image.Alpha {
+		m := image.NewAlpha(image.Rect(0, 0, 40, 40))
+		m.SetAlpha(x, 0, color.Alpha{255})
+		return m
+	}
+	mask := &draftFixedMask{id: def.id, text: "layered fixture", safe: def.safe, position: image.Pt(40, 40), size: 28, shadow: makeLayer(0), normal: makeLayer(1), accent: makeLayer(2)}
+	palette := make([]byte, 768)
+	palette[47*3] = 63
+	palette[68*3+1] = 63
+	palette[149*3+2] = 63
+	im := draftRGB(canvas, palette)
+	if record, why := draftPaintFixed(im, mask, j.items[0], j, canvas, canvas, palette, image.Rectangle{}); record == nil || why != "" {
+		t.Fatal("layered mask rejected", why)
+	}
+	for x, ink := range []byte{47, 68, 149} {
+		if im.RGBAAt(40+x, 40) != draftColor(ink, palette) {
+			t.Fatal("native layer color lost", x, ink)
+		}
+	}
+	mask.alpha = mask.normal
+	mask.normal = nil
+	if record, why := draftPaintFixed(im, mask, j.items[0], j, canvas, canvas, palette, image.Rectangle{}); record != nil || why != "fixed-field-binding" {
+		t.Fatal("layered identity accepted flat glyph", why)
 	}
 }
 

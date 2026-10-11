@@ -52,15 +52,36 @@ def main():
             "\tstringFinish := func(r *stringRun) {\n\t\tif r.buf2 {\n\t\t\tjournal.captureString(r, canvas(), m.Mem[0x3bb00:0x3bb00+64000], m.Steps)\n",
         "\t\tr = str.outline(r) // 目標170：描邊字（同文 1 像素位移重印）併成一串\n":
             "\t\tr = str.outline(r) // 目標170：描邊字（同文 1 像素位移重印）併成一串\n\t\tjournal.captureString(r, canvas(), m.Mem[0x3bb00:0x3bb00+64000], m.Steps)\n",
+        "\trender := func(label string) {\n":
+            "\trender := func(label string) {\n\t\tjournal.cursor = cursorBox(int(d.Mouse.X), int(d.Mouse.Y))\n\t\tjournal.buttons = d.Mouse.Buttons != 0\n\t\tjournal.expireFixed(canvas(), m.Mem[0xa0000:0xafa00], m.VideoMode())\n",
+        "overlay.NewPatch(p.before, after, 320, 200, l.safe())":
+            "draftFixedPatch(journal, draftFixedMenu(l), p.before, after, m.Steps)",
+        "overlay.NewPatch(title.before, canvas(), 320, 200, image.Rect(65, 44, 253, 59))":
+            "draftFixedPatch(journal, draftFixedTitle(title), title.before, canvas(), m.Steps)",
+        "overlay.NewPatch(f.before, canvas(), 320, 200, f.rect)":
+            "draftFixedPatch(journal, draftFixedRetire(f), f.before, canvas(), m.Steps)",
+        "overlay.NewPatch(before, canvas(), 320, 200, helpText)":
+            "draftFixedPatch(journal, draftFixedLayered(help.id, helpText), before, canvas(), m.Steps)",
+        "overlay.NewPatch(intro.before, canvas(), 320, 200, introPanel)":
+            "draftFixedPatch(journal, draftFixedLayered(intro.page.id, introPanel), intro.before, canvas(), m.Steps)",
+        "overlay.NewPatch(r.before, canvas(), 320, 200, optionRowSafe(i))":
+            "draftFixedPatch(journal, draftFixedRow(r, i), r.before, canvas(), m.Steps)",
+        "overlay.NewPatch(caption.before, canvas(), 320, 200, caption.safe)":
+            "draftFixedPatch(journal, draftFixedCaption(caption), caption.before, canvas(), m.Steps)",
+        "overlay.NewPatch(l.before, after, 320, 200, l.safe)":
+            "draftFixedPatch(journal, draftFixedDifficulty(l), l.before, after, m.Steps)",
+        "overlay.NewPatch(clean, indexed, 320, 200, it.band)":
+            "draftFixedStaticPatch(journal, it, clean, indexed, canvas(), m.Steps)",
         "\tdumpJSON(*out+\".json\", report)\n":
-            "\tif *draftNativeCapture {\n\t\tdumpJSON(*out+\".native.json\", journal.export(canvas(), m.Mem[0x3bb00:0x3bb00+64000], m.VideoMode()))\n\t}\n\tdumpJSON(*out+\".json\", report)\n",
+            "\tif *draftNativeCapture {\n\t\tdumpJSON(*out+\".native.json\", journal.export(canvas(), m.Mem[0x3bb00:0x3bb00+64000], m.VideoMode(), m.Mem[0xa0000:0xafa00]))\n\t}\n\tdumpJSON(*out+\".json\", report)\n",
     }
     for old, new in replacements.items():
         if s.count(old) != 1:
             raise ValueError("觀測接點不唯一：" + old.strip())
         s = s.replace(old, new, 1)
     # 同時保存收尾時的原版游標位置，供重建與遮擋檢查回查。
-    for call in ("journal.captureSea(", "journal.captureSeaRuns(", "journal.captureDialog(", "journal.captureString("):
+    for call in ("journal.captureSea(", "journal.captureSeaRuns(", "journal.captureDialog(", "journal.captureString(",
+                 "draftFixedPatch(", "draftFixedStaticPatch("):
         lines = s.splitlines(keepends=True)
         s = "".join((line[:len(line)-len(line.lstrip())] +
                      "journal.cursor = cursorBox(int(d.Mouse.X), int(d.Mouse.Y))\n" + line)

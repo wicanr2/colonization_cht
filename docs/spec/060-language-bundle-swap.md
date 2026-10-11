@@ -254,3 +254,91 @@ DOS停止後的四語重建分別有12、12、11及12欄，均含頂列、日期
 組裝及重驗參數沿前節，輸出改用新的目錄；候選輸入仍為bundles-colony-fix。
 本輪只新增隔離重建證據，未新增現場GUI、存讀檔操作、HD或普查shown。
 規格060維持DRAFT，固定欄重建、失效生命週期、正式交換及四語正常GUI仍待完成。
+
+## 2026-10-11：固定欄原文快照與停止重建
+
+接續前節，隔離[觀測器](../../tools/language_observations.go)在既有固定欄接受原版輸出時，
+另存穩定鍵、安全區、原版印前／印後像素、色號、陰影及游標守門。
+不保存舊譯文或舊字模，也不從舊中文字模反推原文。
+一般固定欄以20bit線性RAM畫布0x2cae0為來源，靜態欄使用VGA 0xa0000；
+來源檔案與事件識別仍沿各欄既有READY／CONFORMED規格及指紋。
+快照、完整RAM、原版圖像與存檔只留本機workplace。
+
+每次渲染前核對整個來源安全區。背景、文字或模式改變便單向撤銷快照，
+之後相同像素重新出現也不能復用；需要新的已驗原版輸出事件。
+同鍵新事件取代舊事件，上限仍為256筆及32MiB估算成本。
+這個撤銷只涵蓋固定欄，不代表對話、字串與海上事件的生命週期已完成。
+目前接點仍經既有繁中字模初始化與接受條件；正式接線前須把原文接受與目標字型失敗拆開。
+
+隔離[重建器](../../tools/language_rebuild_probe.go)載入四語各64欄的實際Noto字模。
+各欄沿已量測位置、字級及安全區，並保留原版前景、陰影與強調色。
+顯示文字由包內TSV重解，字幕槽位、控制碼、名稱冒號及教學術語
+依現有產生器契約處理，再核對實際顯示文字的SHA-256。
+成功重建的固定欄阻擋重複字串覆蓋；來源、VGA、游標、按鈕或排版不符便保留原文並記錄。
+完整包驗證仍先於個別字模載入，不能單獨使用draftPrepareFixed略過地區、字型、幾何及資源綁定。
+
+[測試](../../tools/language_rebuild_probe_test.go)新增四語各64欄實際載入、
+譯文指紋與缺鍵反例、原文擦除與量測位置、色號、陰影、游標、按鈕、VGA遮擋及越界。
+[觀測測試](../../tools/language_observations_test.go)另驗深拷貝、背景改寫、
+相同像素返回仍失效、新事件重新啟用、同鍵取代、模式切換與VGA來源。
+最終457項Go測試零skip、go vet及建置通過。
+初次r8建置因新測試漏匯入bytes而失敗，補齊後以新的r9模組乾淨重跑。
+
+[四側檢查器](../../tools/check_language_observation_replay.py)完整重播原有25筆玩家輸入至76200000步。
+觀測開啟、關閉、前版及原文控制的CPU、完整RAM、VGA、DAC、WAV與存檔全同，
+三側既有合成RGB仍與原GUI全同。新增16筆固定欄事件後共217筆，容量移除0筆；
+終點固定欄全部已撤銷，海上／對話／字串仍重建12／12／11／12欄，
+五語RGBA與前節r7全同，英文逐像素等於原版控制。
+
+檢查器新增--checkpoint與可重複的--expect-fixed，只沿已驗GUI輸入的前綴停止。
+四側同狀態另作比較，不把新停點冒充歷史GUI終點或新增現場操作。
+32000000步的主選單五列均以四語重建，另有一筆版本字串；已檢視四語畫面，未見裁切或重疊。
+12000000步的載入訊息也四語通過，字級繁中28、簡中28、日文28、韓文29px。
+英文均與原版控制逐像素相同，四語差異只在宣告的安全區。
+--checkpoint-source newgame僅接受既有新局GUI輸入及驗證收據的固定指紋，
+用於接續難度、選國等抽樣；仍不宣稱與歷史新局程式或GUI同狀態。
+
+新局輸入SHA-256為bfaf3f2caf06d804bdf4d79376eb057c15fa4a5e157cb7df24a187aa2b1a9e74，
+既有newgame-save-review.json為a775ea0ef731e80c4fb3f3d4e754c87e2fbcafde3858cc5fa2ebd2e4af330073。
+沿該輸入的70290000步難度頁與77550000步選國頁，四側原版狀態全同；
+四語各重建五個與四個固定欄，英文逐像素等於原版，差異只在安全區。
+八張四語輸出已檢視，未見裁切或重疊。
+
+88770000步的英國介紹頁另驗多層字模，四語各重建一個固定欄。
+原版陰影47、正文68及強調149色號保留，四側完整原版狀態全同，
+英文逐像素等於原版，四語差異只在完整安全區；四張畫面已檢視。
+這個停點接受881筆事件，因256筆上限移除625筆，保留256筆、估算成本19188136bytes。
+目前介紹欄完整來源仍保留並與RAM相同；其他歷史事件不因此取得完整重建信用。
+正式快取仍須驗目前可見來源的保存策略，不能把本次容量移除當成完整生命週期通過。
+預期固定鍵如下：
+
+| 停點 | --expect-fixed，各鍵分別指定 |
+| --- | --- |
+| 主選單32000000 | GAME.TXT:0x000001B0、0x000001CB、0x000001E4、0x000001F9、0x00000204，各自保留GAME.TXT前綴 |
+| 載入12000000 | OPENING.TXT:@MESSAGES:loading |
+| 難度70290000 | LABELS.TXT:0x00000888、LABELS.TXT:0x00000890、LABELS.TXT:0x0000086E、NAMES.TXT:0x00000C0C、LABELS.TXT:0x000008A9 |
+| 選國77550000 | LABELS.TXT:0x000008D3、LABELS.TXT:0x000008DB、NAMES.TXT:0x000008EA、LABELS.TXT:0x000008F2 |
+| 英國介紹88770000 | GAME.TXT:@NATION0A |
+
+本機輸出沿前節language-resources-20261011根目錄，候選仍為bundles-colony-fix：
+
+| 收據 | SHA-256 |
+| --- | --- |
+| native-rebuilder-r9 | 220995fb91368ad4653e3343bd50f5107d9999a8a996a611d8a25d7acfe9e5af |
+| native-tests-r9.jsonl | f4db9ee43df901d05f30dce199e6f1520859fda0c7bdc6e5dea768d3a8ba6ae6 |
+| native-runtime-r9/observation-sources.json | faf675cdd2042a5e1d7e98e7ad32a51d4d75043a8098fc1fc18b2bff1f3bcab5 |
+| native-rebuild-replays-r9/check.json | c5d146e7f199460f45d1172b2a5b84c0df7574dc98bdcf7b028e7d2232c03e04 |
+| native-main-menu-r9/check.json | 984aa3002cb805da44913873176e969202167469e163986030dd61583980c80c |
+| native-loading-r9/check.json | 9e58fbf45af0744cee619bb8bef8f3847979a870956c7a27c9be4c20c70a7638 |
+| native-difficulty-r9/check.json | 49c9b155289e5096fe572cf047717e8bdf39f926ddb69f7868f69db480c981d7 |
+| native-nations-r9/check.json | f63cfdfc045ab0a0d2aa97944c1e3bb32be51d28b88f88694be31f727021f2d6 |
+| native-intro-r9/check.json | 775caff1731109599ccdd1cb4dcba693f459539120a46292feec0e59a5c5ff7a |
+| check-language-observation-replay-r9.py | 7495ef2a9f85fcdf40f6c463a40b31801ea894a7b8f8fef2997f51a9ea03d279 |
+| tools/check_language_observation_replay.py，新局三停點實測版 | 16cefdd62d6605fea13a741003cc8506187cf539e7879f54db6be2ef66f33f03 |
+
+上述檢查器副本是加入新局輸入來源前的逐字實測版本，正式工具其後擴充受指紋約束的來源選擇。
+重生沿前節Go1.26.7／Ebitengine2.9.9與既有Python驗證容器。
+組裝使用--with-rebuild；重播指定既有--gui、--formal、--launcher及--seed，
+--bundles指向完整候選；checkpoint另給明確步數及預期固定欄鍵。
+目前沒有正式設定提交、四語現場GUI或HD信用。規格060維持DRAFT，
+其他固定欄正常路徑、完整生命週期、畫面重建及整包交換仍待驗收。

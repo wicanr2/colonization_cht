@@ -4,9 +4,12 @@ package main
 import (
 	"bytes"
 	"flag"
+	"fmt"
 	"image"
 	"maps"
 	"slices"
+
+	"github.com/wicanr2/dosgolem/overlay"
 )
 
 var draftNativeCapture = flag.Bool("draft-native-capture", false, "規格060隔離原型：保存完整原文觀測")
@@ -24,6 +27,7 @@ type nativeObservation struct {
 	stringRun      *stringRun
 	dialogRun      *dialogRun
 	seaRuns        []*seaEvent
+	fixed          *nativeFixed
 	cost           int
 }
 
@@ -32,7 +36,136 @@ type nativeJournal struct {
 	items                    []*nativeObservation
 	cost                     int
 	cursor                   image.Rectangle
+	buttons                  bool
 	accepted, rejected, lost int
+}
+
+// 固定欄位只存原版鍵、前後像素及原版樣式，不保存舊譯文或舊字模。
+type nativeFixed struct {
+	id                        string
+	safe                      image.Rectangle
+	before, after             []byte
+	foreground, shade, accent byte
+	shadow                    image.Point
+	layered, vga, expired     bool
+	buttonGuard               bool
+	mouseRule                 string
+	guard                     image.Rectangle
+}
+
+func (j *nativeJournal) captureFixed(def nativeFixed, before, after, canvas []byte, step uint64) bool {
+	if !j.enabled {
+		return false
+	}
+	if def.id == "" || len(def.id) > 256 || len(before) != 64000 || len(after) != 64000 || len(canvas) != 64000 ||
+		def.safe.Empty() || !def.safe.In(image.Rect(0, 0, 320, 200)) {
+		j.rejected++
+		return false
+	}
+	changed := map[int]byte{}
+	for y := def.safe.Min.Y; y < def.safe.Max.Y; y++ {
+		for x := def.safe.Min.X; x < def.safe.Max.X; x++ {
+			i := y*320 + x
+			if before[i] != after[i] {
+				changed[i] = after[i]
+			}
+		}
+	}
+	if len(changed) == 0 {
+		j.rejected++
+		return false
+	}
+	def.before, def.after = rectBytes(before, def.safe), rectBytes(after, def.safe)
+	def.expired = false
+	o := &nativeObservation{kind: "fixed", step: step, ink: def.safe, after: changed, fixed: &def,
+		cost: len(def.id) + len(def.before) + len(def.after) + len(changed)*32 + 256}
+	if !j.add(o, canvas, nil) {
+		return false
+	}
+	for _, old := range j.items {
+		if old != o && old.fixed != nil && old.fixed.id == def.id {
+			old.fixed.expired = true
+		}
+	}
+	return true
+}
+
+// 當幀撤銷是單向的；之後像素碰巧相同不會重新作用，必須有新的已驗原版事件。
+func (j *nativeJournal) expireFixed(canvas, indexed []byte, mode byte) {
+	if !j.enabled {
+		return
+	}
+	for _, o := range j.items {
+		f := o.fixed
+		if f == nil || f.expired {
+			continue
+		}
+		source := canvas
+		if f.vga {
+			source = indexed
+		}
+		if mode != 0x13 || len(source) != 64000 || !bytes.Equal(rectBytes(source, f.safe), f.after) {
+			f.expired = true
+		}
+	}
+}
+
+func draftFixedPatch(j *nativeJournal, def nativeFixed, before, after []byte, step uint64) (*overlay.Patch, error) {
+	p, err := overlay.NewPatch(before, after, 320, 200, def.safe)
+	if err == nil {
+		j.captureFixed(def, before, after, after, step)
+	}
+	return p, err
+}
+
+func draftFixedMenu(l *menuLine) nativeFixed {
+	return nativeFixed{id: l.id, safe: l.safe(), foreground: 254}
+}
+
+func draftFixedDifficulty(l *difficultyLine) nativeFixed {
+	f := nativeFixed{id: l.id, safe: l.safe, foreground: 254, buttonGuard: l.card || l.nation}
+	if l.card {
+		f.mouseRule, f.guard = "point", l.cursorGuard
+	}
+	if l.prompt {
+		f.foreground, f.shade, f.shadow = 68, 47, image.Pt(4, 0)
+	}
+	if l.nationCard {
+		f.foreground, f.shade, f.shadow = l.cardColor, 0, image.Pt(4, 0)
+		f.mouseRule, f.guard = "overlap", l.safe
+	}
+	if l.thirdCard {
+		f.foreground, f.shade, f.shadow = 14, 0, image.Pt(4, 0)
+	}
+	return f
+}
+
+func draftFixedCaption(c *buildCaption) nativeFixed {
+	return nativeFixed{id: c.id, safe: c.safe, foreground: 14, shade: 47, shadow: image.Pt(4, 4), buttonGuard: true, mouseRule: "target-ink"}
+}
+
+func draftFixedTitle(t *optionsTitle) nativeFixed {
+	return nativeFixed{id: t.id, safe: image.Rect(65, 44, 253, 59), foreground: 68, shade: 47, shadow: image.Pt(4, 4), buttonGuard: true, mouseRule: "target-ink"}
+}
+
+func draftFixedRow(r *optionRow, i int) nativeFixed {
+	return nativeFixed{id: r.id, safe: optionRowSafe(i), foreground: 68, shade: 47, shadow: image.Pt(4, 4), buttonGuard: true, mouseRule: "target-ink"}
+}
+
+func draftFixedRetire(r *retireField) nativeFixed {
+	return nativeFixed{id: r.id, safe: r.rect, foreground: 68, shade: 47, shadow: image.Pt(4, 4), buttonGuard: true, mouseRule: "target-ink"}
+}
+
+func draftFixedLayered(id string, safe image.Rectangle) nativeFixed {
+	return nativeFixed{id: id, safe: safe, foreground: 68, shade: 47, accent: 149, layered: true, buttonGuard: true}
+}
+
+func draftFixedStaticPatch(j *nativeJournal, it *staticItem, before, after, canvas []byte, step uint64) (*overlay.Patch, error) {
+	p, err := overlay.NewPatch(before, after, 320, 200, it.band)
+	if err == nil && !it.on {
+		j.captureFixed(nativeFixed{id: it.id, safe: it.band, foreground: it.ink, vga: true}, before, after, canvas, step)
+	}
+	return p, err
 }
 
 func cloneNativeString(r *stringRun) *stringRun {
@@ -223,7 +356,17 @@ func (j *nativeJournal) captureSeaRuns(runs []*seaEvent, canvas []byte, step uin
 	return j.add(&nativeObservation{kind: kind, step: step, ink: ink, after: after, seaRuns: clones, cost: cost}, canvas, nil)
 }
 
-func (o *nativeObservation) visible(canvas, buffer []byte) bool {
+func (o *nativeObservation) visible(canvas, buffer []byte, indexed ...[]byte) bool {
+	if f := o.fixed; f != nil {
+		source := canvas
+		if f.vga {
+			if len(indexed) != 1 {
+				return false
+			}
+			source = indexed[0]
+		}
+		return !f.expired && len(source) == 64000 && bytes.Equal(rectBytes(source, f.safe), f.after)
+	}
 	if o.stringRun != nil && o.stringRun.mixed {
 		return false // 混合位置未建立重建契約，保留原文及證據。
 	}
@@ -242,10 +385,10 @@ func (o *nativeObservation) visible(canvas, buffer []byte) bool {
 	return true
 }
 
-func (j *nativeJournal) export(canvas, buffer []byte, mode byte) map[string]any {
+func (j *nativeJournal) export(canvas, buffer []byte, mode byte, indexed ...[]byte) map[string]any {
 	var items []map[string]any
 	for _, o := range j.items {
-		row := map[string]any{"kind": o.kind, "step": o.step, "ink": o.ink, "visible": mode == 0x13 && o.visible(canvas, buffer),
+		row := map[string]any{"kind": o.kind, "step": o.step, "ink": o.ink, "visible": mode == 0x13 && o.visible(canvas, buffer, indexed...),
 			"canvas_sha256": hash(o.canvas), "source_pixels": len(o.after), "after_pixels": o.after, "cost": o.cost, "cursor": o.cursor}
 		if r := o.stringRun; r != nil {
 			row["text"], row["source_base"], row["boxes"], row["colors"] = string(r.text), r.base, r.boxes, r.colors
@@ -275,6 +418,17 @@ func (j *nativeJournal) export(canvas, buffer []byte, mode byte) map[string]any 
 				runs = append(runs, map[string]any{"raw": r.raw, "box": r.bbox, "colors": r.colors})
 			}
 			row["text"], row["runs"] = string(text), runs
+		}
+		if f := o.fixed; f != nil {
+			row["text"], row["id"], row["safe"] = f.id, f.id, f.safe
+			row["surface"], row["expired"] = "canvas", f.expired
+			if f.vga {
+				row["surface"] = "vga"
+			}
+			row["before_safe"], row["after_safe"] = f.before, f.after
+			row["foreground"], row["shade"], row["accent"] = f.foreground, f.shade, f.accent
+			row["shadow_offset"], row["layered"], row["mouse_rule"], row["cursor_guard"] = f.shadow, f.layered, f.mouseRule, f.guard
+			row["identity_basis"] = fmt.Sprintf("reviewed native output / %s", f.id)
 		}
 		items = append(items, row)
 	}

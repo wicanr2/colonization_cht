@@ -2,6 +2,7 @@ package main
 
 // 下列為觀測資料結構的單元fixture，不作原版行為或同狀態證據。
 import (
+	"bytes"
 	"image"
 	"testing"
 )
@@ -18,6 +19,82 @@ func nativeStringFixture() (*stringRun, []byte) {
 		cargo: cargoProof{text: "A", role: "header", base: 1234}, outline: true, outlineC: 47,
 		outlineInk: image.Rect(30, 20, 32, 22), keyColor: 149, keyNext: 68}
 	return r, canvas
+}
+
+func TestDraftFixedSnapshotsAndOneWayExpiry(t *testing.T) {
+	before := bytes.Repeat([]byte{1}, 64000)
+	after := bytes.Clone(before)
+	safe := image.Rect(20, 20, 50, 40)
+	i := 21*320 + 21
+	after[i] = 68
+	j := &nativeJournal{enabled: true}
+	def := nativeFixed{id: "native-fixed-key", safe: safe, foreground: 68, shade: 47, shadow: image.Pt(4, 4)}
+	if !j.captureFixed(def, before, after, after, 1) {
+		t.Fatal("valid native fixed field rejected")
+	}
+	o := j.items[0]
+	before[i] = 7
+	after[i] = 9
+	if o.fixed.before[(21-20)*safe.Dx()+1] != 1 || o.fixed.after[(21-20)*safe.Dx()+1] != 68 || o.canvas[i] != 68 {
+		t.Fatal("fixed observation retained caller buffers")
+	}
+	current := bytes.Clone(o.canvas)
+	if !o.visible(current, nil) {
+		t.Fatal("unchanged fixed field hidden")
+	}
+	current[20*320+20] = 9
+	j.expireFixed(current, current, 0x13)
+	current[20*320+20] = 1
+	if !o.fixed.expired || o.visible(current, nil) {
+		t.Fatal("stale fixed field resurrected after background returned")
+	}
+	base := bytes.Repeat([]byte{1}, 64000)
+	if !j.captureFixed(def, base, current, current, 2) || j.items[1].fixed.expired || !o.fixed.expired {
+		t.Fatal("new reviewed native event did not reactivate")
+	}
+	if !j.captureFixed(def, base, current, current, 3) || !j.items[1].fixed.expired || j.items[2].fixed.expired {
+		t.Fatal("same identity did not replace older native event")
+	}
+	j.expireFixed(current, current, 0x12)
+	if !j.items[2].fixed.expired {
+		t.Fatal("video mode change retained fixed field")
+	}
+}
+
+func TestDraftFixedVGASurfaceAndInvalidInputs(t *testing.T) {
+	before := make([]byte, 64000)
+	vga := bytes.Clone(before)
+	vga[10*320+10] = 14
+	j := &nativeJournal{enabled: true}
+	def := nativeFixed{id: "native-static-key", safe: image.Rect(10, 10, 20, 20), foreground: 14, vga: true}
+	if !j.captureFixed(def, before, vga, before, 1) {
+		t.Fatal("VGA fixed source rejected")
+	}
+	o := j.items[0]
+	if o.visible(before, nil) || !o.visible(before, nil, vga) {
+		t.Fatal("VGA source confused with canvas")
+	}
+	j.expireFixed(before, vga, 0x13)
+	if o.fixed.expired {
+		t.Fatal("unrelated canvas change expired VGA source")
+	}
+	vga[11*320+11] = 1
+	j.expireFixed(before, vga, 0x13)
+	if !o.fixed.expired {
+		t.Fatal("VGA background rewrite retained static field")
+	}
+	for _, bad := range []nativeFixed{{id: "x", safe: image.Rect(-1, 0, 2, 2)}, {safe: image.Rect(1, 1, 2, 2)}} {
+		if j.captureFixed(bad, before, vga, before, 2) {
+			t.Fatal("invalid fixed source accepted")
+		}
+	}
+	if j.captureFixed(def, before[:5], vga, before, 2) || j.captureFixed(def, before, before, before, 2) {
+		t.Fatal("truncated or unchanged fixed source accepted")
+	}
+	quiet := &nativeJournal{}
+	if quiet.captureFixed(def, before, vga, before, 2) || quiet.accepted != 0 || quiet.rejected != 0 {
+		t.Fatal("disabled capture changed journal")
+	}
 }
 
 func TestNativeStringRetainsCompleteSource(t *testing.T) {
