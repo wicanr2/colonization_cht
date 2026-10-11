@@ -129,6 +129,33 @@ func draftActualTargetsForTest(t *testing.T) map[string]*draftLanguageTarget {
 	return targets
 }
 
+func TestDraftPortableLanguageResources(t *testing.T) {
+	if os.Getenv("DRAFT_EXPECT_NO_REPO") == "1" {
+		if _, err := os.Stat("/repo"); !os.IsNotExist(err) {
+			t.Fatal("portability container still exposes /repo", err)
+		}
+		if _, err := os.Stat(filepath.Join(filepath.Dir(os.Getenv("DRAFT_BUNDLE_ROOT")), "fields.json")); !os.IsNotExist(err) {
+			t.Fatal("portability container still exposes research evidence", err)
+		}
+	}
+	targets := draftActualTargetsForTest(t)
+	if len(targets) != 5 {
+		t.Fatal("missing prepared languages")
+	}
+	for locale, target := range targets {
+		if locale == "en" {
+			if !target.pack.manifest.Original || len(target.pack.files) != 0 {
+				t.Fatal("English resources changed")
+			}
+			continue
+		}
+		if target.pack.manifest.Locale != locale || len(target.pack.files) != 80 || len(target.fixed) != 64 ||
+			len(target.dlg.fonts) == 0 || len(target.str.fonts) == 0 || target.sea == nil {
+			t.Fatal("incomplete relocated language", locale)
+		}
+	}
+}
+
 func TestDraftInputASCIIBoundsAndLiteralText(t *testing.T) {
 	// 結構fixture只驗證守門與排版；原版證據另由正常GUI及同輸入重播驗證。
 	widths := []int{6, 6, 7, 5, 3, 3, 6, 6, 7, 5, 6, 4, 5, 7, 5, 7}

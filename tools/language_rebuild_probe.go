@@ -119,67 +119,8 @@ func (b *draftLanguageBackend) renderCurrent() (*image.RGBA, map[string]any, err
 	return b.active.frame, record, nil
 }
 
-func draftTargetRequirements(root string) (draftBundleRequirements, error) {
-	needs := draftBundleRequirements{
-		Font:    "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
-		License: "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
-		Fields:  "2be579643f7655f635a6bec4adcbae9a1fb11a4734d3b8daf80177934e15b61d",
-		Masks:   map[string]draftMaskRequirement{},
-	}
-	// 固定基準來自受版控的清冊，不從候選manifest取得預期值。
-	registry, err := os.ReadFile("/repo/tools/language-catalogs.json")
-	var index struct {
-		Source string `json:"source_binding_sha256"`
-		Tables []struct {
-			File string `json:"file"`
-		} `json:"tables"`
-	}
-	if err != nil {
-		return needs, err
-	}
-	if err = json.Unmarshal(registry, &index); err != nil {
-		return needs, err
-	}
-	needs.Source = index.Source
-	for _, table := range index.Tables {
-		needs.Tables = append(needs.Tables, table.File)
-	}
-	data, err := os.ReadFile(filepath.Join(filepath.Dir(root), "fields.json"))
-	if err != nil {
-		return needs, err
-	}
-	if hash(data) != needs.Fields {
-		return needs, fmt.Errorf("fixed field evidence mismatch")
-	}
-	var evidence struct {
-		Fields []struct {
-			ID     string          `json:"id"`
-			File   string          `json:"file"`
-			Group  string          `json:"group"`
-			Shadow int             `json:"shadow_offset"`
-			Safe   image.Rectangle `json:"safe"`
-		} `json:"fields"`
-	}
-	if err = json.Unmarshal(data, &evidence); err != nil {
-		return needs, err
-	}
-	for _, f := range evidence.Fields {
-		catalog := "draft.zh-Hant.tsv"
-		switch f.Group {
-		case "card", "cards-rest":
-			catalog = "nation-card-fragments.zh-Hant.tsv"
-		case "intro":
-			catalog = "nation-introduction.zh-Hant.tsv"
-		case "help":
-			catalog = "help-bilingual.tsv"
-		case "static":
-			catalog = "static-overlay.zh-Hant.tsv"
-		}
-		needs.Masks[f.File] = draftMaskRequirement{ID: f.ID, Shadow: f.Shadow,
-			Safe:    [4]int{f.Safe.Min.X * 4, f.Safe.Min.Y * 4, f.Safe.Max.X * 4, f.Safe.Max.Y * 4},
-			Layered: f.Group == "intro" || f.Group == "help", Catalog: catalog}
-	}
-	return needs, nil
+func draftTargetRequirements(_ string) (draftBundleRequirements, error) {
+	return draftIndexedRequirements()
 }
 
 // 在原版執行前準備五包。之後重建只使用這些記憶體物件。

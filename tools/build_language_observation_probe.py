@@ -139,7 +139,9 @@ def main():
         (output / name).write_bytes((ROOT / "tools" / name).read_bytes())
     extra_sources = []
     if a.with_rebuild:
-        extra_sources = ["tools/language_bundle_probe.go", "tools/language_rebuild_probe.go", "tools/language_rebuild_probe_test.go"]
+        extra_sources = ["tools/language_bundle_probe.go", "tools/language_bundle_probe_test.go",
+                         "tools/language_rebuild_probe.go", "tools/language_rebuild_probe_test.go",
+                         "tools/language_resource_index.go", "tools/language-catalogs.json"]
         for name in extra_sources:
             (output / Path(name).name).write_bytes((ROOT / name).read_bytes())
         old = "\tjournal := &nativeJournal{enabled: nativeOn}\n"
@@ -219,9 +221,11 @@ def main():
     subprocess.run(["gofmt", "-w", str(output / "adapter.go"), str(output / "language_observations.go"),
                     str(output / "language_observations_test.go")], check=True, timeout=30)
     for name in extra_sources:
-        subprocess.run(["gofmt", "-w", str(output / Path(name).name)], check=True, timeout=30)
+        if name.endswith(".go"):
+            subprocess.run(["gofmt", "-w", str(output / Path(name).name)], check=True, timeout=30)
     sources = {name: sha((ROOT / name).read_bytes()) for name in [*PINS, "tools/build_language_observation_probe.py",
-                                                               "tools/language_observations.go", "tools/language_observations_test.go", *extra_sources]}
+                                                               "tools/language_observations.go", "tools/language_observations_test.go", *extra_sources,
+                                                               *(["tools/build_language_resource_index.py"] if a.with_rebuild else [])]}
     (output / "observation-sources.json").write_text(json.dumps({"kind": "DRAFT-native-observation-probe", "source_sha256": sources,
         "reference_go_sum_sha256": sha((a.reference / "go.sum").read_bytes())}, indent=2) + "\n")
     print("ASSEMBLED_DRAFT_NATIVE_OBSERVATION_PROBE", output)

@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"io/fs"
 	"os"
-	"path/filepath"
 	"testing"
 	"testing/fstest"
 )
@@ -31,60 +30,31 @@ func draftFixture(t *testing.T) (fs.FS, draftBundleRequirements) {
 	if root == "" {
 		t.Fatal("DRAFT_BUNDLE_ROOT must name actual generated resources; no substitute fixture")
 	}
-	base := os.DirFS(root)
-	var registry struct {
-		Source string `json:"source_binding_sha256"`
-		Tables []struct {
-			File string `json:"file"`
-		} `json:"tables"`
-	}
-	data, err := os.ReadFile("/repo/tools/language-catalogs.json")
-	if err != nil || json.Unmarshal(data, &registry) != nil {
-		t.Fatal("registry unavailable", err)
-	}
-	needs := draftBundleRequirements{Source: registry.Source,
-		Font:    "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
-		License: "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2",
-		Fields:  "2be579643f7655f635a6bec4adcbae9a1fb11a4734d3b8daf80177934e15b61d",
-		Masks:   map[string]draftMaskRequirement{}}
-	for _, table := range registry.Tables {
-		needs.Tables = append(needs.Tables, table.File)
-	}
-	data, err = os.ReadFile(filepath.Join(filepath.Dir(root), "fields.json"))
-	if err != nil || draftDigest(data) != "2be579643f7655f635a6bec4adcbae9a1fb11a4734d3b8daf80177934e15b61d" {
-		t.Fatal("fixed-field evidence unavailable", err)
-	}
-	var evidence struct {
-		Fields []struct {
-			ID     string `json:"id"`
-			File   string `json:"file"`
-			Group  string `json:"group"`
-			Shadow int    `json:"shadow_offset"`
-			Safe   struct {
-				Min, Max struct{ X, Y int }
-			} `json:"safe"`
-		} `json:"fields"`
-	}
-	if err := json.Unmarshal(data, &evidence); err != nil {
+	needs, err := draftIndexedRequirements()
+	if err != nil {
 		t.Fatal(err)
 	}
-	for _, field := range evidence.Fields {
-		catalog := "draft.zh-Hant.tsv"
-		switch field.Group {
-		case "card", "cards-rest":
-			catalog = "nation-card-fragments.zh-Hant.tsv"
-		case "intro":
-			catalog = "nation-introduction.zh-Hant.tsv"
-		case "help":
-			catalog = "help-bilingual.tsv"
-		case "static":
-			catalog = "static-overlay.zh-Hant.tsv"
-		}
-		needs.Masks[field.File] = draftMaskRequirement{ID: field.ID, Shadow: field.Shadow,
-			Safe:    [4]int{field.Safe.Min.X * 4, field.Safe.Min.Y * 4, field.Safe.Max.X * 4, field.Safe.Max.Y * 4},
-			Layered: field.Group == "intro" || field.Group == "help", Catalog: catalog}
+	return os.DirFS(root), needs
+}
+
+func TestDraftResourceIndexOwnsExpectations(t *testing.T) {
+	a, err := draftIndexedRequirements()
+	if err != nil || len(a.Tables) != 13 || len(a.Masks) != 64 {
+		t.Fatal("compiled index incomplete", err)
 	}
-	return base, needs
+	first := a.Tables[0]
+	var file string
+	var original draftMaskRequirement
+	for key, value := range a.Masks {
+		file, original = key, value
+		break
+	}
+	a.Tables[0] = "candidate-controlled.tsv"
+	a.Masks[file] = draftMaskRequirement{}
+	b, err := draftIndexedRequirements()
+	if err != nil || b.Tables[0] != first || b.Masks[file] != original {
+		t.Fatal("requirements alias another preparation", err)
+	}
 }
 
 func TestDraftPrepareActualLanguageResources(t *testing.T) {

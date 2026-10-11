@@ -1,6 +1,6 @@
 # 完整語言包與原文快取交換
 
-狀態：DRAFT。只供隔離原型及證據審查，尚未授權正式後端。
+狀態：READY。已驗整包準備、原文觀測及交換契約可接正式後端；正式驗收尚未完成。
 入口為[目標186](../goals/186-display-settings-and-gameplay-video.md)。
 使用者已確認五語及四地區Noto；本規格處理既定切換要求，不變更原版資料格式或玩家操作。
 
@@ -872,3 +872,81 @@ r23c首輪在重打階段觸及2GiB容器上限，被Docker OOM終止；保留�
 
 本機收尾總收據`native-input-final-audit-r23d.json`的SHA-256為`4a2519fd42c6010c9362c2b5c6a48a45e86790e03ae37bc55d652ce91f70ee11`；
 35GUI、140筆暫停事件、12組游標逐像素及四側重播核對通過。
+
+## 2026-10-12：可攜可信索引（DRAFT）
+
+正式接線前先移除載入器對`/repo/tools/language-catalogs.json`及候選包旁研究清冊的依賴。
+[索引產生器](../../tools/build_language_resource_index.py)只接受本規格已綁定的64欄清冊指紋，
+將來源鍵、檔名、安全區、陰影及TSV歸屬產生為
+[編譯索引](../../tools/language_resource_index.go)。不複製原版像素、原文或譯文。
+13表的既有[公開清冊](../../tools/language-catalogs.json)以Go內嵌，並核對編譯時指紋。
+
+語言包仍使用原manifest及資源格式。預期值來自編譯索引，不由候選包自稱；
+原版檔案、字型、授權、文本及字模的守門保持原樣。索引每次回傳獨立資料，不能由候選修改。
+隔離組裝器連結索引與既有載入反例測試，並保存全部來源指紋。
+須在沒有`/repo`與研究清冊的容器中載入相同五語包，再核對正常GUI、存讀檔、
+來源失效及原版完整狀態；未通過前仍DRAFT，不進正式前端。
+重生為`tools/build_language_resource_index.py --fields <既有語言資源根>/fields.json`；
+加`--check`只核對。既有語言資源根由本規格前節列出，輸入指紋不符即停止。
+
+
+## 2026-10-12：r24可信索引與正常存檔驗證
+
+編譯索引與已驗64欄清冊完全一致。13表清冊內嵌後，執行期不讀取儲存庫清冊或
+候選包旁的fields.json；語言包格式、譯稿、字模與原版資料均未改。
+隔離組裝器新增連結原有25個載入反例，來源綁定由10份增至14份。
+
+- 完整592Go零skip、go vet及建置通過。
+- 無/repo及研究清冊的Go容器通過34項實際載入、反例及預期值獨立持有檢查。
+- 實際程式不提供研究來源，重播r23d的30筆輸入至89000000步；完整原版狀態、
+  原文觀測檔、五語重建RGBA、WAV及存檔與基準相同。
+- 新正常GUI含改名、刪字、重打、取消及存檔，共50組五語切換、200筆暫停事件通過。
+  42筆實際DOS輸入重播至104200000步，四側CPU、完整RAM、VGA、DAC、WAV及兩份存檔全同。
+  新COLONY00.SAV由原版正常寫入，SHA-256仍為9fce2ddeebc0298544ddf06b9ed713e23d51e871b85190f7d4a6e19e34d84def。
+- 獨立檢查四語256固定欄的全文、英數、字級、基線、陰影及完整墨跡；實際候選的256份字模
+  與已驗產物逐位元組相同。來源及字模權利邊界保持原樣。
+
+可攜重播首試只停在前置檢查：驗證映像內建空/repo工作目錄。
+核對該目錄無來源檔後，改以來源不可取得作判準；沒有放入研究清冊或修改產品條件。
+Go容器的/repo確實不存在。相同程式的正常重播隨後通過，兩種環境於收據分別記錄。
+
+重生以本節14份來源組裝--with-rebuild，索引先以產生器--check核對。
+無研究路徑測試只掛模組、候選包、原版、隔離dosgolem及快取；不掛專案根目錄。
+實際程式重播另外唯讀掛既有啟動模板、舊字模包、GUI輸入及原版基準，無儲存庫來源。
+正常GUI用既有探針追加--input-edit --save-cycle，四側檢查器重播同一輸入。
+Go回收沿GOMEMLIMIT=1200MiB，GUI仍限2GiB；峰值1832480768 bytes。
+
+| 本機檔案（沿既有語言資源根） | SHA-256 |
+|---|---|
+| native-rebuilder-r24 | 35c0179628b7e2169bd41c0c8f4914e6d99e6cd31af5c4e4f9a3a1db3108e413 |
+| native-runtime-r24/observation-sources.json | 829342c7ecc0730b47fc9b15d54d6f53c66f9320b30ca00805bdaf5bf63432ab |
+| native-tests-r24-full.jsonl | a10b87034549fdec00a28244cf1497a7c320ad37e6535c7bafc8f7e659d48e8d |
+| native-index-portable-r24/check.json | bf6949d06ff6acf912c98af661ac6110e64bf9b877fc332f31ae1b897585fe03 |
+| native-index-portable-r24/replay/check.json | 464ab823ddb1b0f9a110b025c9b31c536beead005576c3f2ed7ca63b090a3815 |
+| native-index-portable-r24/fixed-current-check.json | 5c94e58184292e187ff7401adf3afaf977c20733b70b6ba34df0916090e4afa9 |
+| native-live-portable-save-gui-r24/check.json | 411a8d4543e9fd4f1ae2c6be6c1a4f70dd4c84b032cd56278b0e59ddbe16f561 |
+| native-live-portable-save-gui-r24/gui.inputs.json | 693f7abd2c9de99d297cf976ddeed800ccc9c12ce323f5fe1bf454ef575bdc45 |
+| native-live-portable-save-gui-r24/resource.json | 29d892cc522853ac21f599cd65a4930ec01623c9cd9944d2ea627ee14a647647 |
+| native-live-portable-save-replays-r24/check.json | 01832d5f42d5e95d458468ccaca91e93879ea1fcb57e01498d12fe3832de60ea |
+| probe-language-live-portable-save-gui-r24.py | 3b3631781d48bbb04649725458e4fd206f6877a5c83931f3040123b2d7e5fc68 |
+| check-language-live-portable-save-replay-r24.py | 7ec3fad00a6e3b8658c18b373cc59f6a43e87299b5c1004309edf0048847beb9 |
+
+
+## 2026-10-12：READY證據審查
+
+| 原有閘門 | 已查驗證據與界線 |
+|---|---|
+| 四語逐欄、最長文案與英數 | 256固定欄獨立全文與完整墨跡檢查通過，與當前候選字模全同。152組完整字格、95 ASCII及3動態圖集沿規格057與本規格既有原版逐欄契約；清單及改名姓名已有正常GUI量測。未驗欄位不強制覆蓋。 |
+| 完整準備與失敗原子性 | 當前592項包含實際五語載入、25種錯誤資源及既有提交、取消、保存失敗回退；34項另在無研究來源環境通過。準備不持有DOS機器或修改生效資料。 |
+| 從原文重建當前畫面 | 原文與字模獨立的缺舊資源、長時間容量、缺譯、過長、畫面改寫、清單重印及輸入取消證據保留；可攜正常重播的原文觀測與五語RGBA全同。未知來源及被抹除內容回原文，不由舊譯文猜補。 |
+| 正常玩家路徑與正式驗收 | 既有存檔、新行程讀回與改名證據，加本次50GUI／四側正常存檔驗證，足以接正式後端。正式接線後仍須重跑四語與英文GUI、存讀檔及完整原版同狀態驗收，未達CONFORMED。 |
+
+本規格升READY。授權範圍為既定五語整包準備與交換、獨立原文觀測及已驗覆蓋契約。
+不變更原版行為、檔案、資料格式、字型決定或顯示設定操作。
+未驗欄位、未知樣式及過長譯文依既定契約回原文並記錄，仍是目標186未完成範圍。
+正式五語後端、剩餘顯示覆蓋與HD尚未完成，不以READY狀態增加shown或宣稱整個目標完成。
+
+本機收尾核對入口`native-index-final-audit-r24.py`的SHA-256為`70a3697f6da71a36b8eda85885bb98d759f5ae5a11817e8cfc1c41105ae66a0f`。
+
+收尾總收據`native-index-final-audit-r24.json`的SHA-256為`57bc9158eedadedcfaef86777e194c2f785bdf31a2800e6bf1b48ce70c0114cf`，
+14來源、592Go、50GUI、四側重播與可攜索引核對通過。

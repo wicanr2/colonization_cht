@@ -5164,3 +5164,15 @@ confirmed：未改變的標籤在重印時沒有墨跡寫入，但逐字ES:DI仍
 r22與先前35GUI基準的完整原版狀態、RAM、VGA、DAC及WAV相同。
 r23d四語逐欄選30px，安全區不含原版游標；正常刪字、重打與取消經35GUI及四側重播驗證。
 其他輸入欄及未知樣式尚未取證，保留原文。所有本機路徑、指紋與重生入口見規格060。
+
+
+## 2026-10-12：可信索引沒有改變來源或原版行為
+
+入口：[規格060](docs/spec/060-language-bundle-swap.md#2026-10-12r24可信索引與正常存檔驗證)。
+沿既有VICEROY.EXE／GAME.TXT指紋與dosgolem 82a14b266e1b5bc904e2d0fe507daf6bea41a013，
+Go1.26.7、Ebiten2.9.9、Pillow9.4及FreeType2.12.1。
+confirmed：編譯索引的64欄資料與fields.json
+2be579643f7655f635a6bec4adcbae9a1fb11a4734d3b8daf80177934e15b61d全同；
+候選資源、譯文、原版位址及像素沒有重寫。原文觀測檔與r23d逐位元組全同，
+五語重建RGBA及完整原版狀態、WAV、存檔亦同。
+沒有新解讀原版欄位或追加推測性語意。READY為技術接線授權，未驗欄位仍回原文。
