@@ -9,13 +9,16 @@ import (
 	"image"
 	"image/color"
 	"image/draw"
+	"maps"
 	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
+	"time"
 )
 
 var draftNativeBundles = flag.String("draft-native-bundles", "", "規格060隔離原型的完整候選根目錄")
+var draftNativeLive = flag.Bool("draft-native-live", false, "規格060隔離原型：接入真視窗五語重建與設定交易")
 
 type draftLanguageTarget struct {
 	pack  *draftPreparedBundle
@@ -34,17 +37,35 @@ type draftNativeFrame struct {
 }
 
 type draftLanguageDisplay struct {
-	options displayOptions
-	target  *draftLanguageTarget
-	frame   *image.RGBA
-	receipt map[string]any
+	options   displayOptions
+	target    *draftLanguageTarget
+	frame     *image.RGBA
+	receipt   map[string]any
+	nativeKey string
+	buildTime time.Duration
 }
 
 // 準備與生效資料分開；由既有設定保存成功後才呼叫提交。
 type draftLanguageBackend struct {
-	targets map[string]*draftLanguageTarget
-	sample  func() draftNativeFrame
-	active  *draftLanguageDisplay
+	targets           map[string]*draftLanguageTarget
+	sample            func() draftNativeFrame
+	active            *draftLanguageDisplay
+	renders, rebuilds uint64
+	maxBuildTime      time.Duration
+}
+
+func (f draftNativeFrame) key() string {
+	if f.journal == nil {
+		return ""
+	}
+	expired := 0
+	for _, o := range f.journal.items {
+		if o.fixed != nil && o.fixed.expired {
+			expired++
+		}
+	}
+	return fmt.Sprintf("%s/%d/%d/%d/%d/%v/%t", hash(bytes.Join([][]byte{f.canvas, f.buffer, f.indexed, f.palette}, nil)),
+		f.journal.accepted, f.journal.lost, expired, f.mode, f.cursor, f.journal.buttons)
 }
 
 func (b *draftLanguageBackend) prepare(options displayOptions) (func(), error) {
@@ -60,12 +81,42 @@ func (b *draftLanguageBackend) prepare(options displayOptions) (func(), error) {
 	if f.journal == nil {
 		return nil, fmt.Errorf("ui.error.unavailable")
 	}
+	started := time.Now()
 	frame, receipt, err := draftRebuildTarget(target, f.journal, f.canvas, f.buffer, f.indexed, f.palette, f.cursor, f.step, f.mode)
 	if err != nil {
 		return nil, err
 	}
-	next := &draftLanguageDisplay{options: options, target: target, frame: frame, receipt: receipt}
+	next := &draftLanguageDisplay{options: options, target: target, frame: frame, receipt: receipt, nativeKey: f.key(), buildTime: time.Since(started)}
 	return func() { b.active = next }, nil
+}
+
+func (b *draftLanguageBackend) renderCurrent() (*image.RGBA, map[string]any, error) {
+	if b.active == nil || b.sample == nil {
+		return nil, nil, fmt.Errorf("native live backend not initialized")
+	}
+	f := b.sample()
+	if f.journal == nil || len(f.canvas) != 64000 || len(f.buffer) != 64000 || len(f.indexed) != 64000 || len(f.palette) != 768 {
+		return nil, nil, fmt.Errorf("invalid native live frame")
+	}
+	key := f.key()
+	reused := key == b.active.nativeKey
+	if !reused {
+		started := time.Now()
+		frame, receipt, err := draftRebuildTarget(b.active.target, f.journal, f.canvas, f.buffer, f.indexed, f.palette, f.cursor, f.step, f.mode)
+		if err != nil {
+			return nil, nil, err
+		}
+		b.active = &draftLanguageDisplay{options: b.active.options, target: b.active.target, frame: frame, receipt: receipt,
+			nativeKey: key, buildTime: time.Since(started)}
+		b.rebuilds++
+	}
+	b.renders++
+	b.maxBuildTime = max(b.maxBuildTime, b.active.buildTime)
+	record := maps.Clone(b.active.receipt)
+	record["step"], record["live_reused"] = f.step, reused
+	record["live_renders"], record["live_rebuilds"] = b.renders, b.rebuilds
+	record["build_nanoseconds"], record["max_build_nanoseconds"] = int64(b.active.buildTime), int64(b.maxBuildTime)
+	return b.active.frame, record, nil
 }
 
 func draftTargetRequirements(root string) (draftBundleRequirements, error) {
@@ -830,7 +881,12 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 	}
 	for _, it := range s.items {
 		// 完整安全區不相同時回原文；本切片尚未處理部分遮擋與畫面世代。
-		if !stringSame(canvas, it, image.Rectangle{}) || !draftSameExceptCursor(indexed, canvas, it.safe, cursor) {
+		if !stringSame(canvas, it, image.Rectangle{}) {
+			s.misses["source-safe-changed\t"+it.text]++
+			continue
+		}
+		if !draftSameExceptCursor(indexed, canvas, it.safe, cursor) {
+			s.misses["vga-safe-changed\t"+it.text]++
 			continue
 		}
 		blocked := false
@@ -844,9 +900,12 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 			blocked = blocked || safe.Inset(2).Overlaps(it.safe)
 		}
 		if blocked {
+			s.misses["claimed-safe-area\t"+it.text]++
 			continue
 		}
-		if it.id == "STRING:retained-ascii" && !retainedASCIIVisible(it, indexed, cursor) {
+		// 重建項目沒有歷史phase；以當次原版VGA核對來源，不沿用waiting-screen。
+		if it.id == "STRING:retained-ascii" && !stringSame(indexed, it, cursor) {
+			s.misses["retained-vga-changed\t"+it.text]++
 			continue
 		}
 		k := 0
@@ -873,7 +932,7 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 	result["items"], result["dialog_misses"], result["string_misses"] = records, d.misses, s.misses
 	result["sea_misses"] = seaMisses
 	result["fixed_misses"] = fixedMisses
-	result["limitations"] = []string{"保留原文的對話、字串、海上及固定欄重建候選，完整正常GUI尚未驗收。", "歷史VGA同步、部分遮擋、畫面世代與正式提交交易仍待驗。"}
+	result["limitations"] = []string{"隔離重建目前只驗證抽樣正常路徑；完整來源生命週期仍待驗。", "歷史VGA同步、部分遮擋、畫面世代與正式前端接線仍待驗。"}
 	return out, result, nil
 }
 

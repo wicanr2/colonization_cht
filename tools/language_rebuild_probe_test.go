@@ -136,6 +136,67 @@ func TestDraftLanguageTransactionRejectsIncompleteCandidate(t *testing.T) {
 	}
 }
 
+func TestDraftLiveCacheTracksAllNativeInputs(t *testing.T) {
+	target := &draftLanguageTarget{pack: &draftPreparedBundle{manifest: draftBundleManifest{Locale: "en", Original: true}}}
+	f := draftNativeFrame{journal: &nativeJournal{}, canvas: make([]byte, 64000), buffer: make([]byte, 64000),
+		indexed: make([]byte, 64000), palette: make([]byte, 768), step: 1, mode: 0x13}
+	b := &draftLanguageBackend{targets: map[string]*draftLanguageTarget{"en": target}, sample: func() draftNativeFrame { return f }}
+	commit, err := b.prepare(displayOptions{"en", "original"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	commit()
+	first := b.active.frame
+	f.step++
+	im, record, err := b.renderCurrent()
+	if err != nil || im != first || record["step"] != f.step || record["live_reused"] != true || b.rebuilds != 0 || b.active.receipt["step"] != uint64(1) {
+		t.Fatal("unchanged native frame not reused or cached receipt mutated", err)
+	}
+	for _, kind := range []string{"canvas", "map", "vga", "palette", "cursor", "button", "source", "eviction", "expiry", "mode"} {
+		t.Run(kind, func(t *testing.T) {
+			before := b.active.frame
+			n := b.rebuilds
+			switch kind {
+			case "canvas":
+				f.canvas[6430]++
+			case "map":
+				f.buffer[6430]++
+			case "vga":
+				f.indexed[6430]++
+			case "palette":
+				f.palette[0]++
+			case "cursor":
+				f.cursor = image.Rect(10, 10, 26, 26)
+			case "button":
+				f.journal.buttons = true
+			case "source":
+				f.journal.accepted++
+			case "eviction":
+				f.journal.lost++
+			case "expiry":
+				f.journal.items = append(f.journal.items, &nativeObservation{fixed: &nativeFixed{expired: true}})
+			case "mode":
+				f.mode = 3
+			}
+			im, record, err := b.renderCurrent()
+			if err != nil || im == before || b.rebuilds != n+1 || record["live_reused"] != false {
+				t.Fatal("changed native input reused old display", err)
+			}
+			if kind == "vga" && im.RGBAAt(30*4, 20*4) != draftColor(f.indexed[6430], f.palette) {
+				t.Fatal("English live frame lost native pixels")
+			}
+		})
+	}
+	old := b.active
+	f.canvas = f.canvas[:1]
+	if _, _, err := b.renderCurrent(); err == nil || b.active != old {
+		t.Fatal("invalid live frame accepted or replaced active view")
+	}
+	if _, _, err := (&draftLanguageBackend{}).renderCurrent(); err == nil {
+		t.Fatal("uninitialized live backend accepted")
+	}
+}
+
 func TestDraftRebuildRequiresWholeSafeArea(t *testing.T) {
 	canvas := make([]byte, 64000)
 	vga := bytes.Clone(canvas)
@@ -153,6 +214,57 @@ func TestDraftRebuildRequiresWholeSafeArea(t *testing.T) {
 	}
 	if draftSameExceptCursor(vga[:100], canvas, safe, cursor) || draftSameExceptCursor(canvas, canvas, image.Rect(-1, 0, 4, 4), cursor) {
 		t.Fatal("unsafe frame accepted")
+	}
+}
+
+func TestDraftRetainedNumeralsUseCurrentNativeVisibility(t *testing.T) {
+	targets := draftActualTargetsForTest(t)
+	for _, locale := range []string{"zh-Hant", "zh-Hans", "ja", "ko"} {
+		t.Run(locale, func(t *testing.T) {
+			canvas, palette := make([]byte, 64000), make([]byte, 768)
+			palette[45], palette[46], palette[47] = 63, 63, 63
+			r := retainedFixture("90", image.Rect(83, 194, 90, 199))
+			r.lastVal = map[int]byte{}
+			for y := 194; y < 199; y++ {
+				for x := 83; x < 90; x++ {
+					i := y*320 + x
+					canvas[i], r.firstOld[i], r.lastVal[i] = 15, 0, 15
+				}
+			}
+			j := &nativeJournal{enabled: true}
+			if !j.captureString(r, canvas, nil, 1) {
+				t.Fatal("numeric source rejected")
+			}
+			before := bytes.Clone(canvas)
+			for _, kind := range []string{"visible", "canvas-overwritten", "background-changed", "vga-covered"} {
+				t.Run(kind, func(t *testing.T) {
+					current, vga := bytes.Clone(canvas), bytes.Clone(canvas)
+					switch kind {
+					case "canvas-overwritten":
+						current[194*320+83] = 0
+					case "background-changed":
+						current[193*320+82], vga[193*320+82] = 15, 15
+					case "vga-covered":
+						vga[194*320+83] = 0
+					}
+					im, record, err := draftRebuildTarget(targets[locale], j, current, make([]byte, 64000), vga, palette, image.Rectangle{}, 2, 0x13)
+					if err != nil {
+						t.Fatal(err)
+					}
+					items := record["items"].([]map[string]any)
+					if kind == "visible" {
+						if len(items) != 1 || items[0]["id"] != "STRING:retained-ascii" || items[0]["text"] != "90" || bytes.Equal(im.Pix, draftRGB(vga, palette).Pix) {
+							t.Fatal("visible native numerals not rendered with target font", record)
+						}
+					} else if len(items) != 0 || !bytes.Equal(im.Pix, draftRGB(vga, palette).Pix) {
+						t.Fatal("changed native source or background accepted", kind)
+					}
+				})
+			}
+			if !bytes.Equal(canvas, before) || j.items[0].stringRun == nil || string(j.items[0].stringRun.text) != "90" {
+				t.Fatal("rebuilding mutated native source")
+			}
+		})
 	}
 }
 

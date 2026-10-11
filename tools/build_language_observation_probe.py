@@ -154,9 +154,50 @@ def main():
 \t\tdraftTargets, err = draftPrepareTargets(*draftNativeBundles, files, dialogOwned, helpOwned)
 \t\tmust(err)
 \t}
+\tvar draftLive *draftLanguageBackend
+\tif *draftNativeLive {
+\t\tif draftTargets == nil || !*displayUIEnabled || *control { panic("隔離視窗需要完整原文觀測、語言候選及設定列，不能混用原文控制") }
+\t\tdraftLive = &draftLanguageBackend{targets: draftTargets, sample: func() draftNativeFrame {
+\t\t\treturn draftNativeFrame{journal, canvas(), m.Mem[0x3bb00:0x3bb00+64000], m.Mem[0xa0000:0xafa00], m.DAC[:], cursorBox(int(d.Mouse.X),int(d.Mouse.Y)), m.Steps, m.VideoMode()}
+\t\t}}
+\t\tfrontendDisplayPrepare = func(options displayOptions) (func(), error) {
+\t\t\tcommit, err := draftLive.prepare(options)
+\t\t\tif err != nil { return nil, err }
+\t\t\treturn func() { commit(); displayLanguage = options.Language }, nil
+\t\t}
+\t\tpreference, err := displayPreferencePath(*displayUIConfig)
+\t\tmust(err)
+\t\toptions, err := readDisplayPreferences(preference, *displayUIInitialLanguage, *displayUIInitialGraphics)
+\t\tmust(err)
+\t\tcommit, err := frontendDisplayPrepare(options)
+\t\tmust(err)
+\t\tcommit()
+\t}
 """
         if s.count(old) != 1:
             raise ValueError("重建準備接點不唯一")
+        s = s.replace(old, new, 1)
+        old = '\t\tif *control || (*displayUIEnabled && displayLanguage == "en") {\n'
+        new = '''\t\tvar draftLiveRecord map[string]any
+\t\tif draftLive != nil {
+\t\t\tvar err error
+\t\t\toutput, draftLiveRecord, err = draftLive.renderCurrent()
+\t\t\tmust(err)
+\t\t\tlineRecords, _ = draftLiveRecord["items"].([]map[string]any)
+\t\t\tapplied, reason = len(lineRecords) > 0, "draft-native-live"
+\t\t} else if *control || (*displayUIEnabled && displayLanguage == "en") {
+'''
+        if s.count(old) != 1:
+            raise ValueError("隔離視窗影像分支不唯一")
+        s = s.replace(old, new, 1)
+        old = '\t\tif strOn && !*control && !(*displayUIEnabled && displayLanguage == "en") {\n'
+        if s.count(old) != 1:
+            raise ValueError("隔離視窗與舊字串合成分界不唯一")
+        s = s.replace(old, old.replace("if strOn", "if draftLive == nil && strOn"), 1)
+        old = '\t\tif label == "" {\n'
+        new = '\t\tif draftLiveRecord != nil { rec["native_live"] = draftLiveRecord }\n' + old
+        if s.count(old) != 1:
+            raise ValueError("隔離視窗收據出口不唯一")
         s = s.replace(old, new, 1)
         old = '\tdumpJSON(*out+".json", report)\n'
         new = """\tif draftTargets != nil {
