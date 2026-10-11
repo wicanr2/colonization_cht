@@ -14,7 +14,7 @@ PINS = {
     "tools/live_menu.go": "829eb470e679059c43cf1c01492b399453613747f304ecff2c865341e7e35747",
     "tools/window_prototype.go": "088d2a3f933e99df2ecdc5d348972fc52fb64d3a9794a2c1ecd2ebe8f1f89140",
     "tools/string_overlay.go": "543afd88d0cdebb3723dd08e39745c883208bfa6af121f0ccffa24955b5ae59e",
-    "tools/dialog_overlay.go": "db0b0cae19f66dc9778c7375b7df87a0323c6028d9712a5fa585049f12f8cf86",
+    "tools/dialog_overlay.go": "b93dcf45c424b8aac175f71da0e05d54782d9ccc36774fdd1ac7f0bbd69e8a50",
 }
 
 

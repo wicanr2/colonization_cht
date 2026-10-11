@@ -17,7 +17,7 @@ from render_language_font_sample import HASHES
 
 
 GO_PINS = {
-    "tools/dialog_overlay.go": "db0b0cae19f66dc9778c7375b7df87a0323c6028d9712a5fa585049f12f8cf86",
+    "tools/dialog_overlay.go": "b93dcf45c424b8aac175f71da0e05d54782d9ccc36774fdd1ac7f0bbd69e8a50",
     "tools/string_overlay.go": "543afd88d0cdebb3723dd08e39745c883208bfa6af121f0ccffa24955b5ae59e",
 }
 CONSUMERS = {

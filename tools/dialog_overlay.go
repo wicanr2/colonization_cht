@@ -303,7 +303,7 @@ func (c *dialogCatalog) addPedia(tsv, pedia []byte) error {
 func makeDialogTemplate(id, body, zh string, centered bool) dialogTemplate {
 	body = dialogNormalize(strings.NewReplacer("{", "", "}", "", "^", "", "\r\n", " ").Replace(body))
 	// 規格035／036 READY：只處理已取證的同一強調群組，不猜原版兩個變數的分界。
-	if id == "GAME.TXT:@COLONYUNIT:0x00009A33" && body == "Options for %STRING0%STRING1:" && zh == "{%STRING0%STRING1}的選項：" {
+	if id == "GAME.TXT:@COLONYUNIT:0x00009A33" && body == "Options for %STRING0%STRING1:" {
 		return dialogTemplate{id: id, re: regexp.MustCompile(`^Options for (.+?):$`), names: []string{"%STRING0%STRING1"}, quoted: []bool{false}, zh: zh, centered: centered}
 	}
 	pattern, names, quoted := "^", []string{}, []bool{}
@@ -367,7 +367,11 @@ func (c *dialogCatalog) addDraft(draft []byte, files map[string][]byte, exclude 
 			continue
 		}
 
-		if r["candidate_id"] == "GAME.TXT:0x000002C8" && r["source_file"] == "GAME.TXT" && raw == "^^Select Map File to Load" && zh == "^^選擇要載入的地圖檔" {
+		if r["candidate_id"] == "GAME.TXT:0x000002C8" && r["source_file"] == "GAME.TXT" && raw == "^^Select Map File to Load" {
+			// 規格058：來源決定欄位；譯文只驗已取證的單行居中結構。
+			if !strings.HasPrefix(zh, "^^") || strings.Count(zh, "^") != 2 || strings.TrimSpace(zh[2:]) == "" || strings.ContainsAny(zh, "\r\n~#@") || strings.Contains(zh, `\n`) {
+				continue
+			}
 			c.templates = append(c.templates, makeDialogTemplate(r["candidate_id"], raw, zh, true))
 			continue
 		}
@@ -530,6 +534,12 @@ func (c *dialogCatalog) matchIn(list []dialogTemplate, shown string) (*dialogTem
 		return nil, "", "no-template"
 	}
 	zh := hit.zh
+	// 規格058：完整名稱不可依譯文字面值分割，也不可借一般槽位替換。
+	if hit.id == "GAME.TXT:@COLONYUNIT:0x00009A33" && len(hit.names) == 1 && hit.names[0] == "%STRING0%STRING1" {
+		if strings.Count(zh, "{%STRING0%STRING1}") != 1 || len(dialogVar.FindAllString(zh, -1)) != 2 || strings.Count(zh, "{") != 1 || strings.Count(zh, "}") != 1 {
+			return hit, "", "unverified-unit-caption-template"
+		}
+	}
 	for i, name := range hit.names {
 		v := groups[i]
 		if hit.id == "GAME.TXT:0x00000854" && name == "%STRING0" {

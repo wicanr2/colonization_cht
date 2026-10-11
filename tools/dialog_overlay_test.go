@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"crypto/sha256"
+	"encoding/csv"
 	"fmt"
 	"image"
 	"os"
@@ -1183,6 +1184,162 @@ func TestUnitCaptionWholeNameScope(t *testing.T) {
 	other := makeDialogTemplate("OTHER", "Options for {%STRING0%STRING1}:", "{%STRING0%STRING1}的選項：", false)
 	if len(other.names) != 2 {
 		t.Fatal("完整名稱特例外溢其他模板")
+	}
+}
+
+// 規格058：測試直接讀實際譯稿，不在程式再保存一份四語顯示文字。
+func dialogLocaleTemplateText(t *testing.T, locale, catalog, key string) string {
+	t.Helper()
+	path := "/repo/text/game." + locale + ".tsv"
+	keyColumn, textColumn := "key", "text"
+	if locale == "zh-Hant" {
+		if catalog == "corpus" {
+			path, keyColumn, textColumn = "/repo/text/corpus.zh-Hant.tsv", "message_id", "zh_hant"
+		} else {
+			path, keyColumn, textColumn = "/repo/text/draft.zh-Hant.tsv", "candidate_id", "zh_hant"
+		}
+	}
+	data, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	rows := splitTSV(data)
+	if locale != "zh-Hant" {
+		reader := csv.NewReader(bytes.NewReader(data))
+		reader.Comma = '\t'
+		records, err := reader.ReadAll()
+		if err != nil || len(records) == 0 {
+			t.Fatal("語言譯稿格式", err)
+		}
+		rows = nil
+		for _, values := range records[1:] {
+			row := map[string]string{}
+			for i, column := range records[0] {
+				row[column] = values[i]
+			}
+			rows = append(rows, row)
+		}
+	}
+	for _, row := range rows {
+		if row[keyColumn] == key && (locale == "zh-Hant" || row["catalog"] == catalog) {
+			return row[textColumn]
+		}
+	}
+	t.Fatalf("缺譯稿 %s %s %s", locale, catalog, key)
+	return ""
+}
+
+func TestLocalizedUnitTemplateSourceIdentity(t *testing.T) {
+	game, err := os.ReadFile("/game/GAME.TXT")
+	if os.IsNotExist(err) {
+		t.Skip("缺合法原版GAME.TXT")
+	}
+	if err != nil || fmt.Sprintf("%x", sha256.Sum256(game)) != "67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a" {
+		t.Fatal("原版來源不符", err)
+	}
+	const id = "GAME.TXT:@COLONYUNIT:0x00009A33"
+	body := string(game[0x9A33 : 0x9A33+31])
+	for _, locale := range []string{"zh-Hant", "zh-Hans", "ja", "ko"} {
+		t.Run(locale, func(t *testing.T) {
+			text := dialogLocaleTemplateText(t, locale, "corpus", id)
+			tpl := makeDialogTemplate(id, body, text, false)
+			if len(tpl.names) != 1 || tpl.names[0] != "%STRING0%STRING1" {
+				t.Fatal("完整名稱被切開", tpl.names)
+			}
+			c := &dialogCatalog{templates: []dialogTemplate{tpl}, terms: map[string]string{"Soldiers": "wrong-term"}, unitCaptionNames: map[string]string{"Soldiers": "bound-unit"}}
+			if _, got, why := c.match("Options for Soldiers:"); why != "" || got != strings.ReplaceAll(text, "%STRING0%STRING1", "bound-unit") {
+				t.Fatal(got, why)
+			}
+			for _, name := range []string{"England", "999", "Unknown"} {
+				if _, got, why := c.match("Options for " + name + ":"); got != "" || why != "unverified-unit-caption-name" {
+					t.Fatal(name, got, why)
+				}
+			}
+			for _, invalid := range []string{"%STRING0 %STRING1", "{%STRING0}{%STRING1}", "{%STRING0%STRING1}%STRING0", "{%STRING0%STRING1}%NUMBER0"} {
+				c.templates = []dialogTemplate{makeDialogTemplate(id, body, invalid, false)}
+				if _, got, why := c.match("Options for Soldiers:"); got != "" || why != "unverified-unit-caption-template" {
+					t.Fatal("未驗群組被接受", invalid, got, why)
+				}
+			}
+			other := makeDialogTemplate("OTHER", body, text, false)
+			if len(other.names) != 2 {
+				t.Fatal("完整名稱例外跨來源", other.names)
+			}
+			other = makeDialogTemplate(id, strings.Replace(body, "Options for", "Other", 1), text, false)
+			if len(other.names) != 2 {
+				t.Fatal("錯誤原始片段借用完整名稱例外", other.names)
+			}
+		})
+	}
+}
+
+func TestLocalizedMapTitleSourceIdentity(t *testing.T) {
+	game, err := os.ReadFile("/game/GAME.TXT")
+	if os.IsNotExist(err) {
+		t.Skip("缺合法原版GAME.TXT")
+	}
+	if err != nil || fmt.Sprintf("%x", sha256.Sum256(game)) != "67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a" {
+		t.Fatal("原版來源不符", err)
+	}
+	draft, err := os.ReadFile("/repo/text/draft.zh-Hant.tsv")
+	if err != nil {
+		t.Fatal(err)
+	}
+	const id = "GAME.TXT:0x000002C8"
+	for _, locale := range []string{"zh-Hant", "zh-Hans", "ja", "ko"} {
+		t.Run(locale, func(t *testing.T) {
+			text := dialogLocaleTemplateText(t, locale, "draft", id)
+			lines := strings.Split(strings.TrimSuffix(string(draft), "\n"), "\n")
+			var header, values []string
+			header = strings.Split(lines[0], "\t")
+			for _, line := range lines[1:] {
+				if strings.HasPrefix(line, id+"\t") {
+					values = strings.Split(line, "\t")
+				}
+			}
+			if len(values) != len(header) {
+				t.Fatal("缺原始地圖標題列")
+			}
+			for _, kind := range []string{"valid", "wrong-key", "no-prefix", "extra-markup", "empty", "control", "newline"} {
+				row := append([]string(nil), values...)
+				for i, column := range header {
+					if column == "candidate_id" && kind == "wrong-key" {
+						row[i] = "GAME.TXT:other"
+					}
+					if column == "zh_hant" {
+						row[i] = text
+						switch kind {
+						case "no-prefix":
+							row[i] = strings.TrimPrefix(text, "^^")
+						case "extra-markup":
+							row[i] = text + "^"
+						case "empty":
+							row[i] = "^^  "
+						case "control":
+							row[i] = text + "~X"
+						case "newline":
+							row[i] = text + "\\nOther"
+						}
+					}
+				}
+				c := &dialogCatalog{}
+				if err := c.addDraft([]byte(strings.Join(header, "\t")+"\n"+strings.Join(row, "\t")+"\n"), map[string][]byte{"GAME.TXT": game}, nil); err != nil {
+					t.Fatal(err)
+				}
+				if kind != "valid" {
+					if len(c.templates) != 0 {
+						t.Fatal("未驗標題被載入", kind)
+					}
+					continue
+				}
+				if len(c.templates) != 1 || !c.templates[0].centered {
+					t.Fatal("未載入居中標題", locale)
+				}
+				if _, got, why := c.match(strings.TrimPrefix(string(game[0x2C8:0x2C8+25]), "^^")); why != "" || got != text {
+					t.Fatal(got, why)
+				}
+			}
+		})
 	}
 }
 
