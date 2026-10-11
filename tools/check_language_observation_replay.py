@@ -31,7 +31,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("binary", "formal", "gui", "launcher", "seed", "game", "output"):
         parser.add_argument("--" + name, type=Path, required=True)
-    parser.add_argument("--bundles", type=Path, help="另驗停止DOS後的對話／字串四語重建切片")
+    parser.add_argument("--bundles", type=Path, help="另驗停止DOS後的對話／字串／海上四語重建切片")
     args = parser.parse_args()
     require(Path("/.dockerenv").is_file() and os.environ.get("DISPLAY"), "需Docker及有界Xvfb")
     root = args.output.resolve()
@@ -111,7 +111,7 @@ def main():
         for locale in ("zh-Hant", "zh-Hans", "ja", "ko", "en"):
             prefix = root / ("observed/run.rebuild-" + locale)
             record = json.loads(Path(str(prefix) + ".json").read_bytes())
-            require(record["kind"] == "DRAFT-paused-dialog-string-rebuild" and record["locale"] == locale and
+            require(record["kind"] == "DRAFT-paused-native-text-rebuild" and record["locale"] == locale and
                     record["step"] == baseline["steps"], "目標語言或重建步數不同")
             with Image.open(Path(str(prefix) + ".png")) as im:
                 rgba, rgb = im.convert("RGBA"), im.convert("RGB")
@@ -120,6 +120,10 @@ def main():
                 require(rgb.size == original_rgb.size and rgb.tobytes() == original_rgb.tobytes(), "英文重建不同於原版控制")
             else:
                 require(record["items"], "四語重建沒有任何實際欄位")
+                require(any(item["kind"] == "sea-bar" for item in record["items"]) and
+                        any(item["kind"] == "sea-panel" and item["source"].startswith("Spring ") for item in record["items"]) and
+                        any(item["kind"] == "sea-panel" and item["source"].startswith("Gold:") for item in record["items"]),
+                        "正常GUI基準的頂列、日期或金額未重建")
                 safe = Image.new("1", rgb.size)
                 from PIL import ImageDraw
                 draw = ImageDraw.Draw(safe)
@@ -138,10 +142,10 @@ def main():
     result = {"result": "PASS_NATIVE_OBSERVATIONS_FOUR_REPLAYS", "runs": results,
               "dos_inputs": len(receipt["inputs"]), "source_counts": dict(counts), "visible_source_counts": dict(visible),
               "accepted": captured["accepted"], "rejected": captured["rejected"], "evicted_by_limit": captured["evicted_by_limit"],
-              "draft_dialog_string_rebuilds": rebuilds,
+              "draft_native_text_rebuilds": rebuilds,
               "source_sha256": {"inputs": sha(inputs.read_bytes()), "seed": sha(seed), "launcher": sha(args.launcher.read_bytes()),
                                 "probe": sha(Path(__file__).read_bytes()), "capture": sha((root / "observed/run.native.json").read_bytes())},
-              "limitations": ["原文觀測與可選的對話／字串重建切片；完整畫面重建及正式快取交換尚未驗收。",
+              "limitations": ["原文觀測與可選的對話／字串／海上重建切片；固定欄、完整畫面重建及正式快取交換尚未驗收。",
                                "沿既有正常GUI輸入重播，本輪沒有新增現場GUI或HD驗收。"]}
     (root / "check.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     require(all((p.stat().st_uid, p.stat().st_gid) == (os.getuid(), os.getgid()) for p in root.rglob("*")), "輸出擁有權不同")

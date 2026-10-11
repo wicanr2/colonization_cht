@@ -11,6 +11,8 @@ import (
 	"image/draw"
 	"os"
 	"path/filepath"
+	"strconv"
+	"strings"
 )
 
 var draftNativeBundles = flag.String("draft-native-bundles", "", "規格060隔離原型的完整候選根目錄")
@@ -19,6 +21,7 @@ type draftLanguageTarget struct {
 	pack *draftPreparedBundle
 	dlg  *dialogCatalog
 	str  *stringCatalog
+	sea  *seaState
 }
 
 func draftTargetRequirements(root string) (draftBundleRequirements, error) {
@@ -142,10 +145,230 @@ func draftPrepareTargets(root string, files map[string][]byte, owned, helpOwned 
 			}
 			return name
 		}
+		t.sea, err = draftPrepareSea(pack, files)
+		if err != nil {
+			return nil, fmt.Errorf("%s sea: %w", locale, err)
+		}
 		t.dlg, t.str = cat, sc
 		targets[locale] = t
 	}
 	return targets, nil
+}
+
+// 沿規格032核對逐詞來源；整包載入器另核對地區、字型、圖集尺寸及綁定。
+func draftPrepareSea(pack *draftPreparedBundle, files map[string][]byte) (*seaState, error) {
+	st := &seaState{dict: map[string]map[string]string{}, fonts: map[int]*seaFont{}, misses: map[string]int{}}
+	var err error
+	st.phrases, err = loadDisplayPhrases(pack.files["text/string-templates.zh-Hant.tsv"])
+	if err != nil {
+		return nil, err
+	}
+	rows := tsvRows(pack.files["text/sea-status.zh-Hant.tsv"])
+	if rows == nil {
+		return nil, fmt.Errorf("sea catalog format")
+	}
+	seen := map[string]bool{}
+	for _, r := range rows {
+		source, ok := files[r["source_file"]]
+		offset, e1 := strconv.ParseUint(r["byte_offset"], 0, 32)
+		length, e2 := strconv.Atoi(r["source_byte_length"])
+		text, id := r["source_text"], r["candidate_id"]
+		if !ok || e1 != nil || e2 != nil || length <= 0 || offset+uint64(length) > uint64(len(source)) ||
+			r["source_sha256"] != hash(source) || len(text) != length || string(source[offset:offset+uint64(length)]) != text ||
+			id == "" || seen[id] || r["zh_hant"] == "" || r["status"] != "draft" {
+			return nil, fmt.Errorf("sea source mismatch: %s", id)
+		}
+		seen[id] = true
+		role := r["role"]
+		if st.dict[role] == nil {
+			st.dict[role] = map[string]string{}
+		}
+		if _, dup := st.dict[role][text]; dup {
+			return nil, fmt.Errorf("sea duplicate: %s", id)
+		}
+		st.dict[role][text] = r["zh_hant"]
+	}
+	for _, key := range []string{"~GAME", "~VIEW", "~ORDERS", "~REPORTS", "~TRADE", "~COLONIZOPEDIA"} {
+		zh := st.dict["menu"][key]
+		if zh == "" {
+			return nil, fmt.Errorf("sea missing menu: %s", key)
+		}
+		st.menu = append(st.menu, "("+key[1:2]+")\x00"+zh)
+	}
+	var atlas struct {
+		Sizes map[string]struct {
+			Height int `json:"height"`
+			Top    int `json:"cjk_ink_top"`
+			Glyphs map[string]struct {
+				W     int    `json:"w"`
+				Alpha []byte `json:"alpha"`
+			} `json:"glyphs"`
+		} `json:"sizes"`
+	}
+	if err = json.Unmarshal(pack.files["masks/sea-atlas.json"], &atlas); err != nil {
+		return nil, err
+	}
+	for size := 15; size <= 22; size++ {
+		src, ok := atlas.Sizes[strconv.Itoa(size)]
+		if !ok || src.Height <= 0 || src.Height > 128 || src.Top < 0 || src.Top >= src.Height || len(src.Glyphs) == 0 {
+			return nil, fmt.Errorf("sea invalid size: %d", size)
+		}
+		f := &seaFont{glyphs: map[rune]*image.Alpha{}, widths: map[rune]int{}, height: src.Height, cjkTop: src.Top}
+		for key, glyph := range src.Glyphs {
+			r := []rune(key)
+			if len(r) != 1 || glyph.W <= 0 || glyph.W > 128 || len(glyph.Alpha) != glyph.W*src.Height {
+				return nil, fmt.Errorf("sea invalid glyph")
+			}
+			mask := image.NewAlpha(image.Rect(0, 0, glyph.W, src.Height))
+			copy(mask.Pix, glyph.Alpha)
+			f.glyphs[r[0]], f.widths[r[0]] = mask, glyph.W
+		}
+		st.fonts[size] = f
+	}
+	return st, nil
+}
+
+type draftSeaRow struct {
+	observation *nativeObservation
+	row         *seaRow
+	layer       image.Rectangle
+}
+
+// 六欄分別以原版下一欄起點量寬；快捷鍵與譯文用同地區字型。
+func draftSeaMenu(st *seaState, runs []*seaEvent) (*seaRow, string) {
+	if len(runs) != len(seaMenuText) || len(st.menu) != len(seaMenuWords) {
+		return nil, "incomplete-menu"
+	}
+	row := &seaRow{firstOld: map[int]byte{}, lastVal: map[int]byte{}}
+	for _, r := range runs {
+		if r == nil || len(r.raw) != 2 || r.raw[1] != 0 || !r.bbox.In(seaBarRect) {
+			return nil, "incomplete-menu"
+		}
+		row.text += string(r.raw[:1])
+		row.bbox = row.bbox.Union(r.bbox)
+		for i, v := range r.firstOld {
+			row.firstOld[i] = v
+		}
+		for i, v := range r.lastVal {
+			row.lastVal[i] = v
+		}
+	}
+	if row.text != seaMenuText || runs[0].bbox.Min.X != 13 {
+		return nil, "menu-source-mismatch"
+	}
+	k := 0
+	for word, count := range seaMenuWords {
+		parts := strings.SplitN(st.menu[word], "\x00", 2)
+		if len(parts) != 2 {
+			return nil, "menu-format"
+		}
+		x, end := runs[k].bbox.Min.X*4, seaBarRect.Max.X*4
+		k += count
+		if k < len(runs) {
+			end = runs[k].bbox.Min.X * 4
+		}
+		size := st.seaFit(parts[0]+parts[1], end-x-2)
+		if size == 0 {
+			return nil, "menu-does-not-fit"
+		}
+		keyWidth, _ := st.seaWidthAt(parts[0], size)
+		row.parts = append(row.parts, seaPart{parts[0], 149, x, size}, seaPart{parts[1], 68, x + keyWidth, size})
+	}
+	return row, ""
+}
+
+func draftSeaObserve(st *seaState, o *nativeObservation) (*draftSeaRow, string) {
+	if len(o.seaRuns) == 0 {
+		return nil, "not-sea"
+	}
+	if o.kind == "sea-bar" && len(o.seaRuns) > 1 {
+		row, why := draftSeaMenu(st, o.seaRuns)
+		if why != "" {
+			return nil, why
+		}
+		return &draftSeaRow{o, row, seaBarRect}, ""
+	}
+	if len(o.seaRuns) != 1 {
+		return nil, "incomplete-sea-row"
+	}
+	ev := o.seaRuns[0]
+	text := strings.TrimRight(string(ev.raw), "\x00")
+	row := &seaRow{bbox: ev.bbox, text: text, firstOld: ev.firstOld, lastVal: ev.lastVal}
+	zh, ok := st.seaTranslate(text)
+	if !ok {
+		return nil, "no-sea-translation"
+	}
+	layer, x, ink := seaPanelRect, ev.bbox.Min.X*4, byte(149)
+	if ev.bbox.In(seaBarRect) {
+		layer, x = seaBarRect, 0
+	} else if !ev.bbox.In(seaPanelRect) || len(ev.colors) != 1 {
+		return nil, "sea-source-style"
+	} else {
+		for c := range ev.colors {
+			ink = c
+		}
+		if ink != 68 && ink != 149 {
+			return nil, "sea-source-style"
+		}
+	}
+	size := st.seaFit(zh, layer.Max.X*4-x-2)
+	if size == 0 {
+		return nil, "sea-does-not-fit"
+	}
+	if layer == seaBarRect {
+		width, _ := st.seaWidthAt(zh, size)
+		x = 640 - width/2
+	}
+	row.parts = []seaPart{{zh, ink, x, size}}
+	return &draftSeaRow{o, row, layer}, ""
+}
+
+func draftAlphaInk(mask *image.Alpha) image.Rectangle {
+	var ink image.Rectangle
+	for y := 0; y < mask.Rect.Dy(); y++ {
+		for x := 0; x < mask.Rect.Dx(); x++ {
+			if mask.AlphaAt(x, y).A != 0 {
+				ink = ink.Union(image.Rect(x, y, x+1, y+1))
+			}
+		}
+	}
+	return ink
+}
+
+func draftPaintSea(out *image.RGBA, st *seaState, candidate *draftSeaRow, canvas, indexed, palette []byte, cursor image.Rectangle) (map[string]any, string) {
+	o, row, layer := candidate.observation, candidate.row, candidate.layer
+	if !o.visible(canvas, nil) {
+		return nil, "sea-source-changed"
+	}
+	for i := range row.lastVal {
+		if row.firstOld[i] == 68 || row.firstOld[i] == 149 {
+			return nil, "sea-source-background"
+		}
+	}
+	shadow := image.NewAlpha(image.Rect(0, 0, layer.Dx()*4, layer.Dy()*4))
+	fg := map[byte]*image.Alpha{68: image.NewAlpha(shadow.Rect), 149: image.NewAlpha(shadow.Rect)}
+	var text strings.Builder
+	var sizes []int
+	for _, part := range row.parts {
+		x, y := part.x-layer.Min.X*4, row.bbox.Min.Y*4-st.fonts[part.size].cjkTop-layer.Min.Y*4
+		if st.seaDraw(shadow, part.text, x+2, y+2, part.size) || st.seaDraw(fg[part.color], part.text, x, y, part.size) {
+			return nil, "sea-clipped"
+		}
+		text.WriteString(part.text)
+		sizes = append(sizes, part.size)
+	}
+	ink := draftAlphaInk(shadow).Union(draftAlphaInk(fg[68])).Union(draftAlphaInk(fg[149])).Add(layer.Min.Mul(4))
+	safe := row.bbox.Union(image.Rect(ink.Min.X/4, ink.Min.Y/4, (ink.Max.X+3)/4, (ink.Max.Y+3)/4))
+	if !safe.In(layer) || !draftSameExceptCursor(canvas, o.canvas, safe, image.Rectangle{}) || !draftSameExceptCursor(indexed, canvas, safe, cursor) {
+		return nil, "sea-safe-changed"
+	}
+	for i, v := range row.firstOld {
+		if after, ok := row.lastVal[i]; ok && canvas[i] == after && v != after {
+			draftPaintPixel(out, i, v, palette)
+		}
+	}
+	draftPaintLayers(out, layer, []*image.Alpha{shadow, fg[68], fg[149]}, []byte{0, 68, 149}, palette)
+	return map[string]any{"kind": o.kind, "id": "SEA:" + o.kind, "source": row.text, "text": text.String(), "safe": safe, "font_px": sizes[0], "part_font_px": sizes, "native_ink": row.bbox}, ""
 }
 
 // 重建候選必須保留整個安全區，不能只以少數來源像素相同判定可用。
@@ -226,7 +449,7 @@ func draftKeepDialog(d *dialogRuntime, st *dialogShown, canvas []byte) {
 	st.afterSafe, st.phase = rectBytes(canvas, st.safe), "active"
 }
 
-// 這個切片先驗對話與字串。海上、固定欄及完整暫停交易另驗，不能據此升READY。
+// 這個切片驗對話、字串及海上；固定欄及完整暫停交易另驗，不能據此升READY。
 func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer, indexed, palette []byte, cursor image.Rectangle, step uint64, mode byte) (*image.RGBA, map[string]any, error) {
 	if len(canvas) != 64000 || len(buffer) != 64000 || len(indexed) != 64000 || len(palette) != 768 {
 		return nil, nil, fmt.Errorf("invalid native frame")
@@ -254,9 +477,31 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 		return s.routePortTranslate(text, line, context, d.cur, contextStep)
 	}
 	var records []map[string]any
+	var seaRows []*draftSeaRow
+	seaMisses := map[string]int{}
 	for _, o := range j.items {
 		context, contextStep = o.canvas, o.step
 		draftExpireRebuilt(d, context)
+		if len(o.seaRuns) > 0 {
+			// 沿規格032的原版行替換規則，不以目標語言排版決定原文存活。
+			kept := seaRows[:0]
+			for _, old := range seaRows {
+				if !old.row.bbox.Overlaps(o.ink) {
+					kept = append(kept, old)
+				}
+			}
+			seaRows = kept
+			row, why := draftSeaObserve(t.sea, o)
+			if row != nil {
+				seaRows = append(seaRows, row)
+			} else {
+				var source strings.Builder
+				for _, run := range o.seaRuns {
+					source.Write(bytes.TrimRight(run.raw, "\x00"))
+				}
+				seaMisses[why+"\t"+source.String()]++
+			}
+		}
 		if r := o.dialogRun; r != nil {
 			st, shown, why := d.finish(cloneNativeDialog(r), context, o.step)
 			if st != nil {
@@ -289,6 +534,16 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 		return out, result, nil
 	}
 	var dialogSafes []image.Rectangle
+	var seaClaims []image.Rectangle
+	for _, row := range seaRows {
+		record, why := draftPaintSea(out, t.sea, row, canvas, indexed, palette, cursor)
+		if record != nil {
+			records = append(records, record)
+			seaClaims = append(seaClaims, row.row.bbox)
+		} else {
+			seaMisses[why+"\t"+row.row.text]++
+		}
+	}
 	for _, st := range []*dialogShown{d.prev, d.cur} {
 		if st == nil || st.phase == "expired" || !bytes.Equal(rectBytes(canvas, st.safe), st.afterSafe) {
 			continue
@@ -316,6 +571,9 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 		blocked := false
 		for _, safe := range dialogSafes {
 			blocked = blocked || safe.Inset(2).Overlaps(it.safe)
+		}
+		for _, ink := range seaClaims {
+			blocked = blocked || ink.Overlaps(it.ink)
 		}
 		if blocked {
 			continue
@@ -345,7 +603,8 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 		}
 	}
 	result["items"], result["dialog_misses"], result["string_misses"] = records, d.misses, s.misses
-	result["limitations"] = []string{"只驗對話與字串重建候選，海上及固定欄未接入。", "歷史VGA同步、部分遮擋、畫面世代與正式提交交易仍待驗。"}
+	result["sea_misses"] = seaMisses
+	result["limitations"] = []string{"只驗對話、字串與海上重建候選，固定欄未接入。", "歷史VGA同步、部分遮擋、畫面世代與正式提交交易仍待驗。"}
 	return out, result, nil
 }
 
@@ -356,7 +615,7 @@ func draftExportRebuilds(targets map[string]*draftLanguageTarget, j *nativeJourn
 		if err != nil {
 			return err
 		}
-		record["kind"] = "DRAFT-paused-dialog-string-rebuild"
+		record["kind"] = "DRAFT-paused-native-text-rebuild"
 		record["rgba_sha256"] = hash(im.Pix)
 		savePNG(out+".rebuild-"+locale+".png", im)
 		dumpJSON(out+".rebuild-"+locale+".json", record)
