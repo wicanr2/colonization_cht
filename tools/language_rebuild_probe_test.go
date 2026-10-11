@@ -420,6 +420,9 @@ func TestDraftRetainedNumeralsUseCurrentNativeVisibility(t *testing.T) {
 			r.lastVal = map[int]byte{}
 			for y := 194; y < 199; y++ {
 				for x := 83; x < 90; x++ {
+					if x == 86 && y == 195 { // 字格內的背景反例，與透明外緣分開。
+						continue
+					}
 					i := y*320 + x
 					canvas[i], r.firstOld[i], r.lastVal[i] = 15, 0, 15
 				}
@@ -429,13 +432,15 @@ func TestDraftRetainedNumeralsUseCurrentNativeVisibility(t *testing.T) {
 				t.Fatal("numeric source rejected")
 			}
 			before := bytes.Clone(canvas)
-			for _, kind := range []string{"visible", "canvas-overwritten", "background-changed", "vga-covered"} {
+			for _, kind := range []string{"visible", "canvas-overwritten", "background-changed", "padding-changed", "vga-covered"} {
 				t.Run(kind, func(t *testing.T) {
 					current, vga := bytes.Clone(canvas), bytes.Clone(canvas)
 					switch kind {
 					case "canvas-overwritten":
 						current[194*320+83] = 0
 					case "background-changed":
+						current[195*320+86], vga[195*320+86] = 15, 15
+					case "padding-changed":
 						current[193*320+82], vga[193*320+82] = 15, 15
 					case "vga-covered":
 						vga[194*320+83] = 0
@@ -445,9 +450,12 @@ func TestDraftRetainedNumeralsUseCurrentNativeVisibility(t *testing.T) {
 						t.Fatal(err)
 					}
 					items := record["items"].([]map[string]any)
-					if kind == "visible" {
+					if kind == "visible" || kind == "padding-changed" {
 						if len(items) != 1 || items[0]["id"] != "STRING:retained-ascii" || items[0]["text"] != "90" || bytes.Equal(im.Pix, draftRGB(vga, palette).Pix) {
 							t.Fatal("visible native numerals not rendered with target font", record)
+						}
+						if kind == "padding-changed" && (items[0]["unused_padding_changed"] != true || items[0]["safe"] != image.Rect(83, 194, 90, 199)) {
+							t.Fatal("透明外緣未裁至原版排版區", record)
 						}
 					} else if len(items) != 0 || !bytes.Equal(im.Pix, draftRGB(vga, palette).Pix) {
 						t.Fatal("changed native source or background accepted", kind)
@@ -745,5 +753,148 @@ func TestLanguageRuntimeSelection(t *testing.T) {
 				t.Fatalf("got %q/%t/%v", root, live, err)
 			}
 		})
+	}
+}
+
+// 規格052：正常城內數值的未繪字外緣會被後續原版繪圖改動。
+// 以實際Noto字型及原版單字字格檢查裁切，內部來源仍須逐點完整。
+func TestDraftRetainedPaddingActualNoto(t *testing.T) {
+	for locale, target := range draftActualTargetsForTest(t) {
+		if locale == "en" {
+			continue
+		}
+		t.Run(locale, func(t *testing.T) {
+			for _, sample := range []struct {
+				text       string
+				ink        image.Rectangle
+				start, end image.Point
+				padding    image.Point
+			}{
+				{"1", image.Rect(272, 194, 273, 199), image.Pt(272, 194), image.Pt(275, 194), image.Pt(275, 195)},
+				{"4", image.Rect(9, 194, 12, 199), image.Pt(9, 194), image.Pt(13, 194), image.Pt(9, 199)},
+			} {
+				canvas := make([]byte, 64000)
+				r := retainedFixture(sample.text, sample.ink)
+				r.retainedCursor = []image.Point{sample.start, sample.end}
+				o := &nativeObservation{kind: "string", step: 42, ink: sample.ink, stringRun: r, after: map[int]byte{}}
+				for y := sample.ink.Min.Y; y < sample.ink.Max.Y; y++ {
+					pos := y*320 + sample.ink.Min.X
+					canvas[pos], o.after[pos], r.firstOld[pos] = 15, 15, 0
+				}
+				s := &stringRuntime{cat: target.str}
+				it, why := finishRetainedASCII(s, r, canvas, 42, "")
+				if it == nil {
+					t.Fatal(sample.text, why)
+				}
+				canvas[sample.padding.Y*320+sample.padding.X] = 47
+				indexed := bytes.Clone(canvas)
+				sourceBefore, sourceAfter := bytes.Clone(it.before), bytes.Clone(it.after)
+				oldMask := bytes.Clone(it.norm.Pix)
+				oldCanvas, oldVGA := bytes.Clone(canvas), bytes.Clone(indexed)
+				got := draftFitRetainedASCII(it, o, canvas, indexed, image.Rectangle{})
+				layout, ok := retainedASCIILayout(r, it.ink)
+				if !ok || got == nil || got.safe != layout || got.size != it.size {
+					t.Fatal("完整字格未保留", sample.text, got)
+				}
+				if !bytes.Equal(it.before, sourceBefore) || !bytes.Equal(it.after, sourceAfter) || !bytes.Equal(it.norm.Pix, oldMask) ||
+					!bytes.Equal(canvas, oldCanvas) || !bytes.Equal(indexed, oldVGA) {
+					t.Fatal("修改了原始項目或原版畫布")
+				}
+				// 世界座標下，每一個alpha值都相同；外緣只准原本就是透明。
+				for layer, original := range []*image.Alpha{it.norm, it.shadow, it.accent} {
+					cropped := []*image.Alpha{got.norm, got.shadow, got.accent}[layer]
+					for y := 0; y < original.Rect.Dy(); y++ {
+						for x := 0; x < original.Rect.Dx(); x++ {
+							p := image.Pt(x, y).Add(it.safe.Min.Mul(4)).Sub(got.safe.Min.Mul(4))
+							if original.AlphaAt(x, y) != cropped.AlphaAt(p.X, p.Y) {
+								t.Fatal("裁切改變字形", sample.text, layer, x, y)
+							}
+						}
+					}
+					if len(cropped.Pix) > 0 {
+						cropped.Pix[0] ^= 1
+					}
+				}
+				got.before[0] ^= 1
+				got.after[0] ^= 1
+				if !bytes.Equal(it.before, sourceBefore) || !bytes.Equal(it.after, sourceAfter) || !bytes.Equal(it.norm.Pix, oldMask) {
+					t.Fatal("裁切共用可寫來源")
+				}
+			}
+		})
+	}
+}
+
+func TestDraftRetainedPaddingRejectsChangedSource(t *testing.T) {
+	fixture := func() (*stringItem, *nativeObservation, []byte, []byte) {
+		ink := image.Rect(272, 194, 273, 199)
+		layout := image.Rect(272, 194, 275, 199)
+		safe := layout.Inset(-1)
+		canvas := make([]byte, 64000)
+		r := retainedFixture("1", ink)
+		r.retainedCursor = []image.Point{image.Pt(272, 194), image.Pt(275, 194)}
+		o := &nativeObservation{kind: "string", step: 42, ink: ink, stringRun: r, after: map[int]byte{}}
+		for y := 194; y < 199; y++ {
+			canvas[y*320+272] = 15
+			o.after[y*320+272] = 15
+		}
+		rect := image.Rect(0, 0, safe.Dx()*4, safe.Dy()*4)
+		n := image.NewAlpha(rect)
+		n.SetAlpha(4, 4, color.Alpha{A: 255})
+		it := &stringItem{id: "STRING:retained-ascii", text: "1", zh: "1", complete: 42, ink: ink, safe: safe,
+			before: make([]byte, safe.Dx()*safe.Dy()), after: stringRect(canvas, safe),
+			norm: n, shadow: image.NewAlpha(rect), accent: image.NewAlpha(rect)}
+		canvas[195*320+275] = 47
+		return it, o, canvas, bytes.Clone(canvas)
+	}
+	for name, damage := range map[string]func(*stringItem, *nativeObservation, []byte, []byte){
+		"wrong item":            func(it *stringItem, _ *nativeObservation, _, _ []byte) { it.id = "STRING:colony" },
+		"wrong source kind":     func(_ *stringItem, o *nativeObservation, _, _ []byte) { o.kind = "string-map" },
+		"wrong source ink":      func(_ *stringItem, o *nativeObservation, _, _ []byte) { o.ink.Min.X-- },
+		"wrong step":            func(_ *stringItem, o *nativeObservation, _, _ []byte) { o.step++ },
+		"wrong text":            func(_ *stringItem, o *nativeObservation, _, _ []byte) { o.stringRun.text = []byte("2") },
+		"wrong segment":         func(_ *stringItem, o *nativeObservation, _, _ []byte) { o.stringRun.retainedSegments[0] = 0x3bb0 },
+		"missing run":           func(_ *stringItem, o *nativeObservation, _, _ []byte) { o.stringRun = nil },
+		"empty pixels":          func(_ *stringItem, o *nativeObservation, _, _ []byte) { o.after = nil },
+		"invalid pixel":         func(_ *stringItem, o *nativeObservation, _, _ []byte) { o.after[64000] = 0 },
+		"source outside layout": func(_ *stringItem, o *nativeObservation, _, _ []byte) { o.after[195*320+275] = 47 },
+		"erased digit": func(_ *stringItem, _ *nativeObservation, c, v []byte) {
+			for y := 194; y < 199; y++ {
+				c[y*320+272] = 0
+				v[y*320+272] = 0
+			}
+		},
+		"changed inner background": func(_ *stringItem, _ *nativeObservation, c, v []byte) { c[195*320+274] = 3; v[195*320+274] = 3 },
+		"changed VGA":              func(_ *stringItem, _ *nativeObservation, _ []byte, v []byte) { v[195*320+272] = 3 },
+		"invalid safe":             func(it *stringItem, _ *nativeObservation, _, _ []byte) { it.safe.Min.X-- },
+		"missing before":           func(it *stringItem, _ *nativeObservation, _, _ []byte) { it.before = nil },
+		"missing after":            func(it *stringItem, _ *nativeObservation, _, _ []byte) { it.after = nil },
+		"missing mask":             func(it *stringItem, _ *nativeObservation, _, _ []byte) { it.shadow = nil },
+		"incorrect mask rectangle": func(it *stringItem, _ *nativeObservation, _, _ []byte) {
+			it.accent = image.NewAlpha(image.Rect(0, 0, 1, 1))
+		},
+		"ink in padding": func(it *stringItem, _ *nativeObservation, _, _ []byte) { it.norm.SetAlpha(0, 0, color.Alpha{A: 255}) },
+		"empty mask":     func(it *stringItem, _ *nativeObservation, _, _ []byte) { clear(it.norm.Pix) },
+	} {
+		t.Run(name, func(t *testing.T) {
+			it, o, c, v := fixture()
+			damage(it, o, c, v)
+			if draftFitRetainedASCII(it, o, c, v, image.Rectangle{}) != nil {
+				t.Fatal("不完整來源未拒絕")
+			}
+		})
+	}
+	it, o, c, v := fixture()
+	if draftFitRetainedASCII(nil, o, c, v, image.Rectangle{}) != nil || draftFitRetainedASCII(it, nil, c, v, image.Rectangle{}) != nil ||
+		draftFitRetainedASCII(it, o, c[:1], v, image.Rectangle{}) != nil || draftFitRetainedASCII(it, o, c, v[:1], image.Rectangle{}) != nil {
+		t.Fatal("非法輸入未拒絕")
+	}
+	v[195*320+272] = 3
+	if draftFitRetainedASCII(it, o, c, v, image.Rect(272, 195, 273, 196)) == nil {
+		t.Fatal("原版游標未沿既有例外")
+	}
+	c[195*320+272] = 3
+	if draftFitRetainedASCII(it, o, c, v, image.Rect(272, 195, 273, 196)) != nil {
+		t.Fatal("游標例外允許來源損壞")
 	}
 }

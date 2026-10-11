@@ -989,6 +989,7 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 	}
 	d := &dialogRuntime{cat: t.dlg, misses: map[string]int{}}
 	dialogSources := map[*dialogShown]*nativeObservation{}
+	retainedSources := map[*stringItem]*nativeObservation{}
 	var inputASCII *dialogShown
 	s := &stringRuntime{cat: t.str, misses: map[string]int{}}
 	var context []byte
@@ -1063,6 +1064,9 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 			}
 			if it != nil {
 				s.add(it)
+				if it.id == "STRING:retained-ascii" {
+					retainedSources[it] = o
+				}
 			} else if why != "" {
 				s.misses[why+"\t"+string(r.text)]++
 			}
@@ -1139,6 +1143,12 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 		records = append(records, record)
 	}
 	for _, it := range s.items {
+		sourceSafe := it.safe
+		if it.id == "STRING:retained-ascii" && (!stringSame(canvas, it, image.Rectangle{}) || !draftSameExceptCursor(indexed, canvas, it.safe, cursor)) {
+			if fitted := draftFitRetainedASCII(it, retainedSources[it], canvas, indexed, cursor); fitted != nil {
+				it = fitted
+			}
+		}
 		// 完整安全區不相同時回原文；本切片尚未處理部分遮擋與畫面世代。
 		if !stringSame(canvas, it, image.Rectangle{}) {
 			s.misses["source-safe-changed\t"+it.text]++
@@ -1177,7 +1187,11 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 			}
 		}
 		draftPaintLayers(out, it.safe, []*image.Alpha{it.shadow, it.norm, it.accent}, []byte{it.shadowColor, it.color, it.accentColor}, palette)
-		records = append(records, map[string]any{"kind": "string", "id": it.id, "source": it.text, "text": it.zh, "safe": it.safe, "font_px": it.size})
+		record := map[string]any{"kind": "string", "id": it.id, "source": it.text, "text": it.zh, "safe": it.safe, "font_px": it.size}
+		if it.safe != sourceSafe {
+			record["source_safe"], record["unused_padding_changed"] = sourceSafe, true
+		}
+		records = append(records, record)
 	}
 	// 只回貼原版游標改動的像素，保留游標框內未被遮擋的文字。
 	for y := max(0, cursor.Min.Y); y < min(200, cursor.Max.Y); y++ {
@@ -1193,6 +1207,75 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 	result["fixed_misses"] = fixedMisses
 	result["limitations"] = []string{"隔離重建目前只驗證抽樣正常路徑；完整來源生命週期仍待驗。", "未驗欄位、部分遮擋與畫面世代仍依原文回退。"}
 	return out, result, nil
+}
+
+// draftFitRetainedASCII只排除未繪字的外緣；來源與整個排版區仍須完整相同。
+func draftFitRetainedASCII(it *stringItem, o *nativeObservation, canvas, indexed []byte, cursor image.Rectangle) *stringItem {
+	if it == nil || it.id != "STRING:retained-ascii" || o == nil || o.stringRun == nil ||
+		o.kind != "string" || o.ink != it.ink || o.step != it.complete || string(o.stringRun.text) != it.text || len(canvas) != 64000 || len(indexed) != 64000 {
+		return nil
+	}
+	r := o.stringRun
+	layout, valid := retainedASCIILayout(r, it.ink)
+	if !valid || it.safe != layout.Inset(-1).Intersect(image.Rect(0, 0, 320, 200)) ||
+		len(it.before) != it.safe.Dx()*it.safe.Dy() || len(it.after) != len(it.before) || len(o.after) == 0 {
+		return nil
+	}
+	for pos, value := range o.after {
+		if pos < 0 || pos >= 64000 || !image.Pt(pos%320, pos/320).In(layout) || canvas[pos] != value {
+			return nil
+		}
+	}
+	for y := layout.Min.Y; y < layout.Max.Y; y++ {
+		for x := layout.Min.X; x < layout.Max.X; x++ {
+			old := (y-it.safe.Min.Y)*it.safe.Dx() + x - it.safe.Min.X
+			if canvas[y*320+x] != it.after[old] {
+				return nil
+			}
+		}
+	}
+	if !draftSameExceptCursor(indexed, canvas, layout, cursor) {
+		return nil
+	}
+	offset := layout.Min.Sub(it.safe.Min).Mul(4)
+	paint := image.Rect(offset.X, offset.Y, offset.X+layout.Dx()*4, offset.Y+layout.Dy()*4)
+	hasInk := false
+	for _, mask := range []*image.Alpha{it.norm, it.shadow, it.accent} {
+		if mask == nil || mask.Rect != image.Rect(0, 0, it.safe.Dx()*4, it.safe.Dy()*4) {
+			return nil
+		}
+		for y := mask.Rect.Min.Y; y < mask.Rect.Max.Y; y++ {
+			for x := mask.Rect.Min.X; x < mask.Rect.Max.X; x++ {
+				if mask.AlphaAt(x, y).A != 0 {
+					hasInk = true
+					if !image.Pt(x, y).In(paint) {
+						return nil
+					}
+				}
+			}
+		}
+	}
+	if !hasInk {
+		return nil
+	}
+	crop := func(mask *image.Alpha) *image.Alpha {
+		next := image.NewAlpha(image.Rect(0, 0, paint.Dx(), paint.Dy()))
+		draw.Draw(next, next.Rect, mask, paint.Min, draw.Src)
+		return next
+	}
+	cropBytes := func(data []byte) []byte {
+		next := make([]byte, layout.Dx()*layout.Dy())
+		for y := 0; y < layout.Dy(); y++ {
+			start := (layout.Min.Y-it.safe.Min.Y+y)*it.safe.Dx() + layout.Min.X - it.safe.Min.X
+			copy(next[y*layout.Dx():(y+1)*layout.Dx()], data[start:start+layout.Dx()])
+		}
+		return next
+	}
+	next := *it
+	next.safe = layout
+	next.before, next.after = cropBytes(it.before), cropBytes(it.after)
+	next.norm, next.shadow, next.accent = crop(it.norm), crop(it.shadow), crop(it.accent)
+	return &next
 }
 
 func draftExportRebuilds(targets map[string]*draftLanguageTarget, j *nativeJournal, canvas, buffer, indexed, palette []byte, cursor image.Rectangle, step uint64, mode byte, out string) error {

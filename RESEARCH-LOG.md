@@ -5189,3 +5189,23 @@ confirmed：正式啟動器75組五語GUI、300筆暫停事件及兩路八次重
 原版VICEROY.EXE維持a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3，
 GAME.TXT維持67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a。
 已抹除來源、未知樣式及過長欄位的回退界線保留；不稱全遊戲覆蓋或HD完成。
+
+## 2026-10-12：城內Noto數值與地圖城名外緣
+
+入口：[規格052](docs/spec/052-retained-ascii-font.md)及
+[規格038新增DRAFT](docs/spec/038-string-overlay-draft.md)。
+原版VICEROY.EXE維持a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3，
+GAME.TXT維持67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a。
+工具為Go1.26.7、Ebiten2.9.9、Python3.11.2、Pillow9.4及隔離dosgolem82a14b2。
+來源CS:IP 0D21:00C6／0D21:012C、ES:DI與20bit執行時RAM皆沿原位址基準。
+
+confirmed：正常城內的三個數值完整字形與排版矩形都存活，只有未繪字外緣被改。
+透明裁切保留19／27／27px、原字形與基線；完整來源、VGA與alpha守門仍生效。
+正式635Go、50組五語GUI、200筆暫停事件及42筆實際輸入四側重播至103600000步通過，
+完整原版CPU、RAM、VGA、DAC、WAV及存檔相同。舊年份已抹除者未復活，離城數值撤銷。
+
+confirmed：地圖城名201點字形與完整原版墨跡區存活，另有20點安全區背景差異，
+全在墨跡外；只讀稽核沒有改原版或RGBA。日文17px僅為私有完整雙語排版容量。
+改寫這20點的writer、複製時序與alpha相交尚未確認，正式來源守門未改。
+證據根為既有language-resources-20261011/retained-safe-audit-r26，
+map-safe-check.json指紋a15380d30ad7cfd8210b4d08a7f93a9c7b4c23f41f23e9e2a2aead9aa4961f00。
