@@ -32,6 +32,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ["binary", "launcher", "game", "seed", "inputs", "ui-font", "ui-catalog", "bundles", "output"]:
         parser.add_argument("--" + name, type=Path, required=True)
+    parser.add_argument("--save-cycle", action="store_true", help="追加正常存檔插槽、成功通知及返回世界的五語驗證")
     args = parser.parse_args()
     need(Path("/.dockerenv").is_file() and os.environ.get("DISPLAY"), "需Docker與有界Xvfb")
     output = args.output.resolve()
@@ -162,6 +163,9 @@ def main():
                     need(actual.tobytes() == original.tobytes(), "英文沒有使用原版像素")
                 else:
                     need(record.get("items") and actual.tobytes() != original.tobytes(), "非英文沒有任何已驗覆蓋")
+                    if scene == "save-success":
+                        need(any(i.get("kind") == "dialog" and i.get("id") == "GAME.TXT:0x000007B9"
+                                 for i in record["items"]), "當次成功通知沒有實際重建")
                     if scene == "colony":
                         numerals = {item.get("source") for item in record["items"]
                                     if item.get("id") == "STRING:retained-ascii" and item.get("font_px", 0) > 0}
@@ -217,6 +221,34 @@ def main():
         xdo("keyup", "Escape")
         wait(lambda s: s.get("step", 0) >= before + 4000000 and
              any(i["kind"] == "sea-bar" for i in (live(s).get("items") or [])), "返回世界後來源未恢復")
+        save_cycle = None
+        if args.save_cycle:
+            # 已驗正常操作來源：goal185-player-experience/play_newgame_save.py。
+            # 原有四倍畫布座標只增加畫面外設定列的48px高度。
+            def settle_click(x, y):
+                before = status()["step"]
+                click(x, y + 48)
+                wait(lambda s: s.get("step", 0) >= before + 3000000, "正常存檔操作未完成")
+
+            settle_click(96, 12)
+            settle_click(192, 252)
+            switch_round("save-slots")
+            settle_click(480, 310)
+            wait(lambda s: any(i.get("kind") == "dialog" and i.get("id") == "GAME.TXT:0x000007B9"
+                              for i in live(s).get("items", [])) and
+                 (save / "COLONY00.SAV").is_file(), "未完成正常原版存檔")
+            switch_round("save-success")
+            before = status()["step"]
+            xdo("keydown", "Return")
+            time.sleep(0.08)
+            xdo("keyup", "Return")
+            wait(lambda s: s.get("step", 0) >= before + 4000000 and
+                 any(i["kind"] == "sea-bar" for i in (live(s).get("items") or [])) and
+                 not any(i.get("id") == "GAME.TXT:0x000007B9" for i in live(s).get("items", [])),
+                 "存檔後未正常返回世界")
+            switch_round("saved-world")
+            save_cycle = {"kind": "normal-gui-save-slot-success-return",
+                          "created": "COLONY00.SAV", "sha256": sha((save / "COLONY00.SAV").read_bytes())}
         final_live = live(status())
         subprocess.run([sys.executable, str(ROOT / "tools/gui_close_window.py"), "--window", window], check=True, timeout=5)
         process.wait(timeout=25)
@@ -228,6 +260,8 @@ def main():
                                     "seed": sha(seed), "normal_path": sha(inputs), "probe": sha(Path(__file__).read_bytes())},
                   "gui_inputs_sha256": sha(prefix.with_suffix(".inputs.json").read_bytes()),
                   "limitations": ["隔離視窗；完整來源生命週期、正式接線、HD及同輸入重播仍須另外驗證。"]}
+        if save_cycle is not None:
+            result["normal_save_cycle"] = save_cycle
         (output / "check.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
         print(result["result"], len(checks), flush=True)
     finally:

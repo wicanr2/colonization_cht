@@ -25,7 +25,16 @@ def main():
             root.parent.is_dir() and root.parent.stat().st_uid == os.getuid(), "需新的workplace輸出")
     gui_path = args.gui / "check.json"
     gui = json.loads(gui_path.read_bytes())
-    require(gui["result"] == "PASS_NATIVE_LIVE_FIVE_LANGUAGE_GUI" and len(gui["checks"]) == 15,
+    scenes = ["main-menu", "world", "colony"]
+    if "normal_save_cycle" in gui:
+        saved = gui["normal_save_cycle"]
+        require(saved.get("kind") == "normal-gui-save-slot-success-return" and
+                saved.get("created") == "COLONY00.SAV" and
+                saved.get("sha256") == sha((args.gui / "save/COLONY00.SAV").read_bytes()), "正常存檔收據不同")
+        scenes += ["save-slots", "save-success", "saved-world"]
+    require(gui["result"] == "PASS_NATIVE_LIVE_FIVE_LANGUAGE_GUI" and
+            sorted((c["scene"], c["locale"]) for c in gui["checks"]) ==
+            sorted((s, l) for s in scenes for l in ["zh-Hant", "zh-Hans", "ja", "ko", "en"]),
             "隔離五語GUI尚未通過")
     require(sha(args.binary.read_bytes()) == gui["source_sha256"]["binary"], "GUI二進位不同")
     launcher = args.launcher.read_text()

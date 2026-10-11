@@ -610,3 +610,49 @@ r19依前節DRAFT契約合併完整相同的原文重印；其餘容量壓力先
 使用者UID、無網路及資源上限不變。正式前端及dosgolem未修改。
 其他固定欄正常路徑、完整生命週期、存讀檔與正式整包接線仍待驗，規格維持DRAFT。
 不增加shown、完整五語、HD或發行信用，原文快照、字型、畫面、WAV及存檔只留workplace。
+
+## 正常存檔生命週期抽樣契約
+
+DRAFT：沿既有五語GUI正常讀入COLONY09.SAV、進城及返回世界後，
+由原版GAME選單開啟Save Game，不注入座標以外的遊戲狀態。
+在存檔插槽、成功通知及返回世界各作五語切換，核對暫停原版狀態、
+英文原版像素、四語當次來源及安全區。完成原版COLONY00.SAV寫入後正常返回世界。
+此初始狀態選槽後直接保存，沒有描述輸入頁；成功判定須使用當次可見原文，
+不能沿用已關閉對話的診斷文字。
+初始COLONY09.SAV保持不變，新存檔只寫入本次私用目錄。
+以實際GUI輸入四側重播，核對完整原版狀態、RAM、VGA、DAC、WAV及兩份存檔。
+此切片不代替新行程讀回新存檔、其他遮擋／重畫或正式接線驗收。
+
+## 2026-10-12：正常存檔五語GUI與撤銷收據
+
+confirmed，限既有初始COLONY09.SAV的本次正常路徑：沿已驗r19二進位，
+追加--save-cycle，主選單、世界、殖民地、存檔插槽、成功通知及存檔後世界共30組五語切換通過。
+35筆實際DOS輸入四側重播至93600000步，CPU、完整RAM、VGA、DAC、WAV及兩份存檔全同。
+原版正常產生COLONY00.SAV，SHA-256為9fce2ddeebc0298544ddf06b9ed713e23d51e871b85190f7d4a6e19e34d84def，
+初始COLONY09.SAV未變。即時終點與GUI逐像素相同，即時／觀測模式的五語停止重建與交易全同。
+120筆設定事件中的原版狀態保持暫停；英文等於原版，四語差異只在當次安全區。
+已目視日文成功通知與韓文返回世界，成功通知關閉後未留下舊覆蓋。
+
+初次探針把另一條新局路徑的描述輸入階段套到本次已載入存檔，
+實際選槽後已直接保存；額外Enter導致返回檢查失敗。第二次可見性檢查誤讀對話收據
+不存在的source欄位；原版已正常存檔，但檢查器未認出成功通知。
+回查顯示語意隔離契約、實際對話收據及既有SAVEGOOD來源後，改驗當次可見
+GAME.TXT:0x000007B9與新檔案，通知關閉後要求該來源不再顯示。
+兩次失敗輸出均保留，沒有修改原版、產品程式或放寬安全區及原版狀態比較。
+新GUI及重播各用新的r19-c輸出，不覆寫r19及前兩次證據。
+
+本機根目錄仍為language-resources-20261011，完整指紋如下：
+
+| 收據 | SHA-256 |
+| --- | --- |
+| native-live-save-gui-r19-c/check.json | 3a128128754234d2e6a0874900a13c96a65a542312c9b4e22c0cebd1ec252cb5 |
+| native-live-save-gui-r19-c/gui.inputs.json | 983215db907ac1c91c4da8f92e1120dc33bd4230a1297bfbcdc755fa1e985c32 |
+| native-live-save-replays-r19-c/check.json | 402843ce73c805319103a4a709772f17a715697ede4c5ed8233b0063603234a3 |
+| probe-language-live-save-gui-r19-c.py | 9cc328c354bf63ce1721b79c51e2fa649a832b9639c7dfa1b38cfa664a1178e9 |
+| check-language-live-save-replay-r19-c.py | 98653758e7ba48e16ea923c4492a0ea554fa9cf908d8efd2f267a1620de68d56 |
+
+原型入口仍為[五語GUI探針](../../tools/probe_language_live_gui.py)及[四側重播檢查器](../../tools/check_language_live_replay.py)。
+GUI增加--save-cycle；重播沿該GUI的實際輸入，仍從相同初始COLONY09.SAV開始，
+由原版自行寫入COLONY00.SAV。535Go及go vet沿用本批未改的r19二進位證據。
+新行程讀回新存檔、其餘畫面、完整來源生命週期與正式接線仍待驗，規格維持DRAFT。
+不增加shown、完整五語、HD或發行信用；原版、畫面、音訊及存檔只留workplace。
