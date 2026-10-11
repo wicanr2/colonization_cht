@@ -718,3 +718,32 @@ func TestDraftSeaPaintRequiresSourceAndWholeSafeArea(t *testing.T) {
 		t.Fatal("text-colored background erased", why)
 	}
 }
+
+func TestLanguageRuntimeSelection(t *testing.T) {
+	for _, test := range []struct {
+		name, formal, probe              string
+		live, capture, settings, control bool
+		wantRoot                         string
+		wantLive, wantError              bool
+	}{
+		{"formal", "/languages", "", false, false, true, false, "/languages", true, false},
+		{"formal-no-ui", "/languages", "", false, false, false, false, "/languages", true, false},
+		{"formal-control", "/languages", "", false, false, true, true, "/languages", false, false},
+		{"legacy", "", "", false, false, false, false, "", false, false},
+		{"observed", "", "/probe", false, true, false, false, "/probe", false, false},
+		{"probe-live", "", "/probe", true, true, true, false, "/probe", true, false},
+		{"mixed-roots", "/languages", "/probe", false, true, true, false, "", false, true},
+		{"mixed-live", "/languages", "", true, true, true, false, "", false, true},
+		{"missing-capture", "", "/probe", false, false, true, false, "", false, true},
+		{"missing-bundle", "", "", true, true, true, false, "", false, true},
+		{"missing-ui", "", "/probe", true, true, false, false, "", false, true},
+		{"probe-control", "", "/probe", true, true, true, true, "", false, true},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			root, live, err := languageRuntimeSelection(test.formal, test.probe, test.live, test.capture, test.settings, test.control)
+			if (err != nil) != test.wantError || root != test.wantRoot || live != test.wantLive {
+				t.Fatalf("got %q/%t/%v", root, live, err)
+			}
+		})
+	}
+}

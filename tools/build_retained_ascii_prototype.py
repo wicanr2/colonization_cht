@@ -43,7 +43,7 @@ def main():
         if sha((ROOT / name).read_bytes()) != expected:
             raise SystemExit(f"來源版本不符：{name}")
     subprocess.run([sys.executable, str(ROOT / "tools/build_window_prototype.py"), "--repo", str(ROOT),
-                    "--reference", str(args.reference), "--output", str(output)], check=True, timeout=30)
+                    "--reference", str(args.reference), "--output", str(output), "--legacy-source"], check=True, timeout=30)
     source = (output / "adapter.go").read_text()
     source = replace_once(source, "\tflag.Parse()\n", "\tflag.Parse()\n\tdefer saveRetainedASCIIObservations(*out)\n")
     source = replace_once(source, "\t\t\t\tdone := str.onRead(a, m.Mem[a], m.Steps)\n",

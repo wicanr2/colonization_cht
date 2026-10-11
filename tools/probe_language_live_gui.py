@@ -32,6 +32,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ["binary", "launcher", "game", "seed", "inputs", "ui-font", "ui-catalog", "bundles", "output"]:
         parser.add_argument("--" + name, type=Path, required=True)
+    parser.add_argument("--formal-launcher", type=Path, help="直接使用已組裝的正式啟動器，不加隔離後端旗標")
     parser.add_argument("--save-cycle", action="store_true", help="追加正常存檔插槽、成功通知及返回世界的五語驗證")
     parser.add_argument("--input-edit", action="store_true", help="追加正常城市改名、刪字、重打及取消的五語驗證")
     parser.add_argument("--reload-save", type=Path, help="先前已驗正常存檔GUI目錄")
@@ -92,6 +93,15 @@ def main():
                "--display-ui-font", str(args.ui_font), "--display-ui-catalog", str(args.ui_catalog),
                "--display-config", str(preference), "--draft-native-capture", "--draft-native-live",
                "--draft-native-bundles", str(args.bundles), "--audio-wav", str(output / "audio.wav"), "--out", str(prefix)]
+    if args.formal_launcher:
+        formal_root = args.formal_launcher.parent
+        need((formal_root / "bin/colonization-window").resolve() == args.binary.resolve(), "正式啟動器與待驗二進位不同")
+        need((formal_root / "languages").resolve() == args.bundles.resolve() and
+             (formal_root / "ui/NotoSansCJK-Regular.ttc").read_bytes() == args.ui_font.read_bytes() and
+             (formal_root / "text/frontend-ui.tsv").read_bytes() == args.ui_catalog.read_bytes(), "正式啟動器資源不同")
+        command = ["bash", str(args.formal_launcher), "--game", str(args.game), "--play=false", "--audio-mute",
+                   "--window-steps", "500000000", "--display-diagnostics", "--native-text-diagnostics",
+                   "--display-config", str(preference), "--audio-wav", str(output / "audio.wav"), "--out", str(prefix)]
     log = (output / "process.log").open("wb")
     process = subprocess.Popen(command, env=env, stdin=subprocess.DEVNULL, stdout=log,
                                stderr=subprocess.STDOUT, start_new_session=True)
@@ -355,6 +365,10 @@ def main():
                   "limitations": ["隔離視窗；完整來源生命週期、正式接線、HD及同輸入重播仍須另外驗證。"]}
         if save_cycle is not None:
             result["normal_save_cycle"] = save_cycle
+        if args.formal_launcher:
+            result["formal_entry"] = {"launcher_sha256": sha(args.formal_launcher.read_bytes()),
+                                     "command": command, "prototype_flags": False}
+            result["limitations"] = ["正式入口與本次正常路徑；其他未驗欄位及HD仍未完成。"]
         if load_cycle is not None:
             result["normal_load_cycle"] = load_cycle
         (output / "check.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")

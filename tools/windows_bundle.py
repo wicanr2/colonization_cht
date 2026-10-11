@@ -14,11 +14,11 @@ def windows_launcher(source):
     tokens = shlex.split(source.split('\nexec ', 1)[1].replace('\\\n', ' '))
     if tokens[0] != '$here/bin/colonization-window' or tokens[-1] != '${args[@]}':
         raise ValueError('Linux啟動器的命令結構已改變')
-    required = {'--window', '--play', '--all-menu', '--dialog-a', '--string-a', '--audio', '--sb-digital'}
+    required = {'--window', '--play', '--all-menu', '--dialog-a', '--string-a', '--audio', '--sb-digital', '--language-bundles', '--display-settings', '--display-ui-font', '--display-ui-catalog'}
     if not required <= set(tokens):
         raise ValueError('完整中文或音訊旗標缺失')
     replacements = {'$here/bin/colonization-window': '%here%bin/colonization-window.exe',
-                    '$game': '%game%', '$save': '%save%', '$m': '%m%', '$t': '%t%'}
+                    '$game': '%game%', '$save': '%save%', '$m': '%m%', '$t': '%t%', '$l': '%l%', '$u': '%u%'}
     command = []
     for token in tokens[:-1]:
         original = token
@@ -76,6 +76,8 @@ if errorlevel 1 exit /b 1
 :invoke
 set "m=%here%masks"
 set "t=%here%text"
+set "l=%here%languages"
+set "u=%here%ui"
 @COMMAND@
 set "status=%errorlevel%"
 exit /b %status%

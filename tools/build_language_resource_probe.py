@@ -11,7 +11,7 @@ import sys
 ROOT = Path(__file__).resolve().parent.parent
 PINS = {
     "tools/live_menu.go": "2f5ab4b81a9608a14f05280cfaba5027472e648fda6e34d3db4ba8855d0a0a53",
-    "tools/build_window_prototype.py": "4e16cca620b654915d59c044796ace6ce408d66f66623161ff53096c6fbd3a85",
+    "tools/build_window_prototype.py": "5e655dd9e0ea92869376205e92f7c4edbd7c24b26bf6b464b75c9de25776f04c",
 }
 
 
@@ -33,7 +33,7 @@ def main():
         if sha((ROOT / name).read_bytes()) != digest:
             raise ValueError("正式來源不同：" + name)
     subprocess.run([sys.executable, str(ROOT / "tools/build_window_prototype.py"), "--repo", str(ROOT),
-                    "--reference", str(args.reference), "--output", str(output)], check=True, timeout=30)
+                    "--reference", str(args.reference), "--output", str(output), "--legacy-source"], check=True, timeout=30)
     source = (output / "adapter.go").read_text()
     marker = "\tseaOn := sea != nil && sea.glyphs != nil\n"
     if source.count(marker) != 1:

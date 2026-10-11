@@ -1,10 +1,10 @@
 # 完整語言包與原文快取交換
 
-狀態：READY。已驗整包準備、原文觀測及交換契約可接正式後端；正式驗收尚未完成。
+狀態：CONFORMED。整包載入、原文重建及交換已通過正式入口與正常存讀檔抽驗；全遊戲覆蓋與HD另列目標186。
 入口為[目標186](../goals/186-display-settings-and-gameplay-video.md)。
 使用者已確認五語及四地區Noto；本規格處理既定切換要求，不變更原版資料格式或玩家操作。
 
-## 目前證據
+## 接線前基準證據
 
 confirmed：182e911的正式前端仍在啟動時各自讀取13表與67份字模資源。
 67份包含64份固定字模及3份海上／對話／字串圖集；各有自己的來源、譯文、
@@ -950,3 +950,77 @@ Go回收沿GOMEMLIMIT=1200MiB，GUI仍限2GiB；峰值1832480768 bytes。
 
 收尾總收據`native-index-final-audit-r24.json`的SHA-256為`57bc9158eedadedcfaef86777e194c2f785bdf31a2800e6bf1b48ce70c0114cf`，
 14來源、592Go、50GUI、四側重播與可攜索引核對通過。
+
+## 2026-10-12：正式五語後端接線與驗收
+
+正式入口為[前端組裝器](../../tools/build_window_prototype.py)。
+預設連結已驗的[共用接線](../../tools/build_language_observation_probe.py)、
+[整包載入器](../../tools/language_bundle_probe.go)、
+[重建後端](../../tools/language_rebuild_probe.go)及可信編譯索引。
+原版幾何來源live_menu.go保持原指紋；舊量測探針明示--legacy-source，
+避免重複接線或把接線變更當成字模幾何變更。
+
+[正式啟動器](../../tools/release/colonization-cht.sh)以--language-bundles指定五語根目錄，
+並啟用既有設定列。非英文使用整包Noto，英文直接顯示原版畫布。
+內部觀測隨後端啟用；--native-text-diagnostics才匯出原文觀測與五語重建收據。
+舊隔離旗標仍供歷史探針使用，不能混用正式資源旗標。
+[正式封裝器](../../tools/package_release.py)新增--language-bundles、--ui-font及--ui-license，
+核對五語集合、80檔清冊、字型、授權及檔案指紋後收取資源。
+每包沿既有schema與kind識別，不改寫已驗譯稿、字模或manifest。
+Windows啟動器沿同一份命令轉換；本批只驗參數，不冒稱Windows或macOS實機通過。
+
+正式本機驗收套件在既有語言資源根的formal-bundle-r25。
+它由同一封裝函式收取328檔五語／設定列資源及授權，原版資料另唯讀提供。
+這是本機驗收中間物；沒有建立交付版本、tag、Release或改動原版。
+
+| 驗收 | 結果 |
+|---|---|
+| 正式組裝、資源與設定回歸 | 605Go零skip、go vet及建置通過；正式／隔離旗標的12種組合另有測試。 |
+| 正式GUI正常存檔 | 50組五語、200筆暫停事件；42筆實際DOS輸入至103000000步，改名刪字、重打、取消、插槽、成功通知及返回世界通過。 |
+| 正式GUI新行程讀回 | 25組五語、100筆暫停事件；23筆實際DOS輸入至51200000步，十列讀檔清單、成功通知、返回世界、選船及進城通過。 |
+| 原版同狀態 | 兩路各四側重播，完整CPU、RAM、VGA、DAC、WAV及存檔一致；即時與停止重建的五語RGBA一致，英文與原版逐像素相同。 |
+| 正式預設無診斷 | 同一42筆輸入不加隔離或診斷旗標，畫面、完整原版狀態、WAV及存檔一致；原文觀測、重建及設定事件匯出不存在。 |
+| 封裝拒絕 | 缺檔、錯地區、不合法路徑、錯字型、錯授權及缺語言六項拒絕通過。 |
+
+COLONY00.SAV由原版正常寫入，指紋仍為
+9fce2ddeebc0298544ddf06b9ed713e23d51e871b85190f7d4a6e19e34d84def。
+新行程讀回沿已驗存檔與保存偏好，沒有透過座標注入或直接入口取代玩家流程。
+四語姓名游標、8列存檔清單21px及10列讀檔清單18px沿先前逐欄契約，不外推其他欄位。
+兩路GUI仍限2GiB、GOMEMLIMIT=1200MiB，峰值分別1904087040及1791373312 bytes。
+
+重生以正式組裝器預設模式建立模組並建置；字模及譯稿沿既有已驗候選。
+[GUI探針](../../tools/probe_language_live_gui.py)新增--formal-launcher，直接執行套件啟動器，
+追加--input-edit --save-cycle；通過四側驗證後，以--reload-save及--reload-proof啟動新行程。
+[四側檢查器](../../tools/check_language_live_replay.py)同樣指定--formal-launcher；
+其他對照沿既有已驗前端及原版控制組。兩側原版輸入、輸出根及存檔彼此隔離。
+工具沿Go1.26.7／Ebiten2.9.9及Python3.11.2／Pillow9.4的固定Docker映像，
+每次Xvfb都有有界擁有程序與清理trap。
+
+本規格限定CONFORMED於上述整包與原文重建交換契約及已驗欄位。
+日文過長地圖譯名、被原版改寫安全區的90% (3)、1、4，以及其他未驗來源與樣式，
+仍回原文並記錄。完整五語覆蓋、HD、影片與三平台新版交付仍是目標186的未完成範圍。
+
+| 本機檔案（沿既有語言資源根） | SHA-256 |
+|---|---|
+| formal-window-r25 | c44241c9e1ac5869b106b6dff833e9f19766521fe6e71e57a803b5b656a500db |
+| formal-runtime-r25/observation-sources.json | 3c1a1d3cfa900161b604cae150eba2f545e8a087f10fe8fca8562e60686b9243 |
+| formal-tests-r25-full.jsonl | dc8ea9b3ce0d6821bee5415b276c5da2818cbff29bbe67fe5b83fe65fa4d1360 |
+| formal-bundle-r25/stage-check.json | 82131ba5a4dbf6edb5ae97de44b8b17e1c6461ec33146e91dd0a0eb07a4bda1b |
+| formal-package-rejections-r25.json | c38922880a94ebd6f0dea31f368b06675e00bebb1fbb4522a872f380a9d4467a |
+| formal-production-r25/check.json | 7f782398c9cd83d36a50c94870fccb04c339f661039e5672c1cd52850697bde7 |
+| formal-save-gui-r25/check.json | 17e73887e78359947de5a53ddec5f247d40725a076f5bbb900185fa5d4c30147 |
+| formal-save-gui-r25/gui.inputs.json | 91bbfa7821c6a5db5d1a11dca6611cbdac998da00cd23ed4439e8aacee9bc3f2 |
+| formal-save-gui-r25/resource.json | 983659204808a6881902021d2b7305845793a99277d5bdc6fef9290efc89ef89 |
+| formal-save-replays-r25/check.json | d883518eb266126d342141f1390f713dbd932e5af265db72d531bc5e6d28daf7 |
+| formal-reload-gui-r25/check.json | f2d4abd71966409a2c0cf077cd8bda519f6db220393a147418a30d59cb0a1394 |
+| formal-reload-gui-r25/gui.inputs.json | 3015567bd1d683f27df95f7fa8f8cedcf53fee9650c69985978755ff1a0aa1a9 |
+| formal-reload-gui-r25/resource.json | a9934f2fa0e2ce88abed6390901df3184b28941d950899f22a24d9458a099511 |
+| formal-reload-replays-r25/check.json | 6ca12001ad57fbab8b7b4c506f402e77f55a1406a2eddedda72ab33c5b6f3587 |
+| probe-language-formal-save-gui-r25.py | 42ca01a151a77c40a66812054741d87539605a868629187fca6ae14b1956969a |
+| check-language-formal-save-replay-r25.py | 4c0ba813868f03ea00f35fa7c7879f36cddb9becee2442e9bbd5914d70b73d68 |
+| probe-language-formal-reload-gui-r25.py | 42ca01a151a77c40a66812054741d87539605a868629187fca6ae14b1956969a |
+| check-language-formal-reload-replay-r25.py | 4c0ba813868f03ea00f35fa7c7879f36cddb9becee2442e9bbd5914d70b73d68 |
+| formal-final-audit-r25.py | 5b653c552d5141e0558a0d97d3fe61fb0e7a0fd86e0b5553ab29e671649b9a95 |
+
+正式接線收尾總收據formal-final-audit-r25.json為83e82c7d9edb30e296566cf4c3ac4683833fde62a40c1a56a15e94818fa79388，
+605Go、75GUI、300筆暫停事件、八次重播、12組原版姓名游標與328檔清冊均通過。

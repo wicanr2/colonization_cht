@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """組裝 Linux tar.gz／AppImage、Windows 或 macOS ZIP 到 dist-all/<版本>/patch/，只在容器內執行。
 
-包內只放本作品與第三方允許散布的元件：前端執行檔、啟動器、執行期譯稿 TSV、由 Cubic 11 烘製的字模、
+包內只放本作品與第三方允許散布的元件：前端執行檔、啟動器、五語譯稿 TSV、Noto及既有Cubic 11字模、設定列字型、
 授權檔與清單；不放任何原版檔案、截圖、存檔或解包資料。字模複本的 scope 聲明改寫成隨包散布的授權說明，
 其餘內容不動。封裝可重現：固定時間戳、擁有者與檔案順序，gzip 不寫時間。
 """
@@ -14,7 +14,7 @@ import json
 import re
 import subprocess
 import tarfile
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 VERSION = re.compile(r"^v\.[0-9]+\.[0-9]+\.[0-9]+-[0-9]{8}$")
 TEXT = ["draft.zh-Hant.tsv", "nation-card-fragments.zh-Hant.tsv", "nation-introduction.zh-Hant.tsv",
@@ -92,6 +92,56 @@ def reusable_masks(root, repo, manifest_sha):
     return files, {'version': manifest['version'], 'manifest_sha256': manifest_sha, 'files': len(files)}
 
 
+def language_bundle_files(root, repo, ui_font, ui_license, mask_names):
+    """收取已驗五語包；內容與manifest逐位元組保持一致，執行期另做完整型別核對。"""
+    registry = json.loads((repo / "tools/language-catalogs.json").read_bytes())
+    font_hash = "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a"
+    license_hash = "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+    if ui_font.is_symlink() or ui_license.is_symlink() or sha(ui_font.read_bytes()) != font_hash or sha(ui_license.read_bytes()) != license_hash:
+        raise ValueError("Noto字型或授權指紋不同")
+    files = {"ui/NotoSansCJK-Regular.ttc": (ui_font.read_bytes(), 0o644),
+             "LICENSES/NotoSansCJK-OFL.txt": (ui_license.read_bytes(), 0o644),
+             "text/frontend-ui.tsv": ((repo / "text/frontend-ui.tsv").read_bytes(), 0o644)}
+    expected = {"text/" + name for name in TEXT} | set(mask_names)
+    if len(expected) != 80 or len(mask_names) != 67:
+        raise ValueError("既有顯示資源清冊不完整")
+    locales = {"zh-Hant": (3, "Noto Sans CJK TC"), "zh-Hans": (2, "Noto Sans CJK SC"),
+               "ja": (0, "Noto Sans CJK JP"), "ko": (1, "Noto Sans CJK KR"), "en": (0, "")}
+    if root.is_symlink() or {p.name for p in root.iterdir()} not in (set(locales), set(locales) | {"check.json"}):
+        raise ValueError("五語根目錄集合不同")
+    for locale, (face, family) in locales.items():
+        directory = root / locale
+        source = directory / "manifest.json"
+        if directory.is_symlink() or source.is_symlink():
+            raise ValueError("語言包不得為符號連結")
+        manifest_bytes = source.read_bytes()
+        manifest = json.loads(manifest_bytes)
+        names = manifest.get("files_sha256", {})
+        if manifest.get("schema") != 1 or manifest.get("kind") != "DRAFT-display-language-bundle" or \
+                manifest.get("locale") != locale or manifest.get("original_rendering") != (locale == "en") or \
+                manifest.get("source_binding_sha256") != registry["source_binding_sha256"] or \
+                (locale != "en" and (manifest.get("font_sha256") != font_hash or manifest.get("license_sha256") != license_hash or \
+                 manifest.get("face") != face or manifest.get("family") != family)) or set(names) != (set() if locale == "en" else expected):
+            raise ValueError("語言包清冊或來源不同：" + locale)
+        actual = {p.relative_to(directory).as_posix() for p in directory.rglob("*") if p.is_file()}
+        if actual != set(names) | {"manifest.json"}:
+            raise ValueError("語言包有缺件或額外檔案：" + locale)
+        for name, digest in names.items():
+            relative = PurePosixPath(name)
+            path = directory / name
+            if not relative.parts or relative.is_absolute() or ".." in relative.parts or \
+                    any(p.is_symlink() for p in [path, *path.parents]) or path.stat().st_size > 64 << 20:
+                raise ValueError("不合法的語言資源路徑：" + name)
+            data = path.read_bytes()
+            if sha(data) != digest:
+                raise ValueError("語言資源指紋不同：" + locale + "/" + name)
+            if locale == "zh-Hant" and name.startswith("text/") and data != (repo / name).read_bytes():
+                raise ValueError("繁中包譯稿不同於目前來源：" + name)
+            files["languages/" + locale + "/" + name] = (data, 0o644)
+        files["languages/" + locale + "/manifest.json"] = (manifest_bytes, 0o644)
+    return files
+
+
 def dependency_notices(binary, repo, target=("linux", "amd64")):
     """由實際二進位列出的依賴收取授權，缺來源時停止封裝。只在固定 Go 工具映像內執行。"""
     metadata = subprocess.run(["go", "version", "-m", str(binary)], check=True, capture_output=True, text=True).stdout
@@ -139,6 +189,9 @@ def dependency_notices(binary, repo, target=("linux", "amd64")):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--language-bundles", type=Path, required=True)
+    p.add_argument("--ui-font", type=Path, required=True)
+    p.add_argument("--ui-license", type=Path, required=True)
     p.add_argument("--version", required=True)
     p.add_argument("--repo", type=Path, default=Path("/repo"))
     p.add_argument("--binary", type=Path, required=True)
@@ -208,6 +261,8 @@ def main():
             else:
                 files[f"masks/{dest}/{path.name}"] = (mask_bytes(path), 0o644)
     files.update(mask_files)
+    files.update(language_bundle_files(a.language_bundles, a.repo, a.ui_font, a.ui_license,
+                                     {name for name in files if name.startswith("masks/")}))
     for bad in files:
         if re.search(r"\.(png|idx|pal|memory|sav|exe|ss|pik|ttf)$", bad, re.I) and bad != "bin/" + native_name:
             raise SystemExit("包內不得有原版或畫面檔：" + bad)

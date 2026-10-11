@@ -1,6 +1,6 @@
 # 字型來源與本機使用界線
 
-已發布版沿用使用者2026-09-26選定的「俐方體11號」（Cubic 11，見[目標148](../docs/goals/148-font-terms-scope-decisions.md)）。2026-10-11使用者為[目標186](../docs/goals/186-display-settings-and-gameplay-video.md)選定四語Noto Sans CJK，文字與保留英數使用同一地區字型；英文保留原版字體。目前正式接入已量測的六列精簡ORDERS與主選單五列，入口見[規格054](../docs/spec/054-noto-field-atlas-draft.md)及[規格055](../docs/spec/055-noto-main-menu.md)。字型檔與烘製字模不放進Git；其他覆蓋欄位仍須依原版墨跡與安全矩形另量字級。
+已發布版沿用使用者2026-09-26選定的「俐方體11號」（Cubic 11，見[目標148](../docs/goals/148-font-terms-scope-decisions.md)）。2026-10-11使用者為[目標186](../docs/goals/186-display-settings-and-gameplay-video.md)選定四語Noto Sans CJK，文字與保留英數使用同一地區字型；英文保留原版字體。正式五語後端已接入四地區完整圖集及64固定欄，逐欄字級、正常存讀檔與覆蓋界線見[規格057](../docs/spec/057-noto-runtime-atlas.md)及[規格060](../docs/spec/060-language-bundle-swap.md)。字型檔與烘製字模不放進Git；其他覆蓋欄位仍須依原版墨跡與安全矩形另量字級。
 
 ## 目標186的Noto固定輸入
 

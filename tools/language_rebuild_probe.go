@@ -1,6 +1,6 @@
 package main
 
-// 規格060 DRAFT：只連結到隔離觀測器，在停止DOS後重建；不交換正式前端。
+// 規格057／060 READY：依原文觀測重建，透過既有顯示設定交易交換整包。
 import (
 	"bytes"
 	"encoding/json"
@@ -17,8 +17,27 @@ import (
 	"time"
 )
 
+var languageBundles = flag.String("language-bundles", "", "已驗五語顯示資源的根目錄")
+
 var draftNativeBundles = flag.String("draft-native-bundles", "", "規格060隔離原型的完整候選根目錄")
 var draftNativeLive = flag.Bool("draft-native-live", false, "規格060隔離原型：接入真視窗五語重建與設定交易")
+
+// 正式資源啟用即時顯示；控制組仍只顯示原版。舊探針須明示觀測及設定列。
+func languageRuntimeSelection(formal, probe string, probeLive, capture, settings, control bool) (string, bool, error) {
+	if formal != "" && (probe != "" || probeLive) {
+		return "", false, fmt.Errorf("language-bundles cannot be combined with draft-native bundle flags")
+	}
+	if probeLive && (probe == "" || !settings || control) {
+		return "", false, fmt.Errorf("native live probe requires bundles and display settings without control")
+	}
+	if probe != "" && !capture {
+		return "", false, fmt.Errorf("native bundle probe requires capture")
+	}
+	if formal != "" {
+		return formal, !control, nil
+	}
+	return probe, probeLive, nil
+}
 
 type draftLanguageTarget struct {
 	pack  *draftPreparedBundle
@@ -1172,7 +1191,7 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 	result["items"], result["dialog_misses"], result["string_misses"] = records, d.misses, s.misses
 	result["sea_misses"] = seaMisses
 	result["fixed_misses"] = fixedMisses
-	result["limitations"] = []string{"隔離重建目前只驗證抽樣正常路徑；完整來源生命週期仍待驗。", "歷史VGA同步、部分遮擋、畫面世代與正式前端接線仍待驗。"}
+	result["limitations"] = []string{"隔離重建目前只驗證抽樣正常路徑；完整來源生命週期仍待驗。", "未驗欄位、部分遮擋與畫面世代仍依原文回退。"}
 	return out, result, nil
 }
 

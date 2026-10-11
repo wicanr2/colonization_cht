@@ -1,6 +1,6 @@
 package main
 
-// 規格060 DRAFT：原文觀測只由隔離組裝器連結，不持有譯文或字模。
+// 規格060 READY：正式前端與隔離探針共用原文觀測，不持有譯文或字模。
 import (
 	"bytes"
 	"flag"
@@ -13,7 +13,11 @@ import (
 	"github.com/wicanr2/dosgolem/overlay"
 )
 
-var draftNativeCapture = flag.Bool("draft-native-capture", false, "規格060隔離原型：保存完整原文觀測")
+var draftNativeCapture = flag.Bool("draft-native-capture", false, "相容舊探針：匯出完整原文觀測與重建收據")
+
+func init() {
+	flag.BoolVar(draftNativeCapture, "native-text-diagnostics", false, "匯出原文觀測及五語重建收據")
+}
 
 const draftNativeMaxItems = 256
 const draftNativeMaxCost = 32 << 20

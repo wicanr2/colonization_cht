@@ -9,7 +9,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parent.parent
-SOURCE_HASHES = {'tools/live_menu.go': '2f5ab4b81a9608a14f05280cfaba5027472e648fda6e34d3db4ba8855d0a0a53', 'tools/window_prototype.go': '088d2a3f933e99df2ecdc5d348972fc52fb64d3a9794a2c1ecd2ebe8f1f89140', 'tools/build_window_prototype.py': '4e16cca620b654915d59c044796ace6ce408d66f66623161ff53096c6fbd3a85', 'tools/display_ui.go': '946de52ef784c3a2df9b0fb4b3478bec37f885fdd16192fd7bb58bfc9e36d811', 'tools/display_ui_test.go': '730a174c8cc129dbe4a2e0a6cbaac8ab31532203fdddd563bc1af47ced42bfd3', 'tools/display_preferences.go': '29f6684666f89abc3741a518800b152944d039a6b3ebc016036cb085d4466848', 'tools/display_preferences_test.go': 'b9d51da367507ab21fc8f4487f2d86142515032d4174b64cfd36bc98d3287298'}
+SOURCE_HASHES = {'tools/live_menu.go': '2f5ab4b81a9608a14f05280cfaba5027472e648fda6e34d3db4ba8855d0a0a53', 'tools/window_prototype.go': '088d2a3f933e99df2ecdc5d348972fc52fb64d3a9794a2c1ecd2ebe8f1f89140', 'tools/build_window_prototype.py': '5e655dd9e0ea92869376205e92f7c4edbd7c24b26bf6b464b75c9de25776f04c', 'tools/display_ui.go': '946de52ef784c3a2df9b0fb4b3478bec37f885fdd16192fd7bb58bfc9e36d811', 'tools/display_ui_test.go': '730a174c8cc129dbe4a2e0a6cbaac8ab31532203fdddd563bc1af47ced42bfd3', 'tools/display_preferences.go': '29f6684666f89abc3741a518800b152944d039a6b3ebc016036cb085d4466848', 'tools/display_preferences_test.go': 'b9d51da367507ab21fc8f4487f2d86142515032d4174b64cfd36bc98d3287298'}
 
 
 def sha(data):
@@ -31,7 +31,7 @@ def main():
         if sha((ROOT / name).read_bytes()) != expected:
             raise SystemExit(f"正式來源版本不符：{name}")
     subprocess.run([sys.executable, str(ROOT / "tools/build_window_prototype.py"), "--repo", str(ROOT),
-                    "--output", str(output), "--reference", str(args.reference)], check=True, timeout=30)
+                    "--output", str(output), "--reference", str(args.reference), "--legacy-source"], check=True, timeout=30)
     sources = {name: sha((ROOT / name).read_bytes()) for name in SOURCE_HASHES}
     sources["tools/" + Path(__file__).name] = sha(Path(__file__).read_bytes())
     sources["text/frontend-ui.tsv"] = sha((ROOT / "text/frontend-ui.tsv").read_bytes())

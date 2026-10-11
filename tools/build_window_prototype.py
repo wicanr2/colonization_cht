@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""只在容器內組裝可撤回的 Ebitengine 前端；固定來源，不改寫 Go 程式。"""
+"""在容器內組裝正式前端；依規格057／060 READY接入五語後端。"""
 import argparse
 import hashlib
 import os
@@ -9,6 +9,7 @@ p = argparse.ArgumentParser()
 p.add_argument('--repo', type=Path, default=Path('/repo'))
 p.add_argument('--output', type=Path, default=Path('/out/window-prototype'))
 p.add_argument('--reference', type=Path, default=Path('/reference'))
+p.add_argument('--legacy-source', action='store_true', help='僅供既有來源／對照探針，省略五語接線')
 a = p.parse_args()
 if not a.output.parent.is_dir() or a.output.parent.stat().st_uid != os.getuid():
     raise ValueError('輸出父目錄不存在或擁有者不符')
@@ -43,4 +44,7 @@ for name in ['display_phrases.go', 'display_phrases_test.go', 'display_ui.go', '
 (a.output / 'go.mod').write_text('module colonization-window-prototype\n\ngo 1.24.0\n\nrequire (\n github.com/hajimehoshi/ebiten/v2 v2.9.9\n golang.org/x/image v0.31.0\n)\n')
 (a.output / 'go.sum').write_bytes((a.reference / 'go.sum').read_bytes())
 (a.output / 'go.work').write_text('go 1.26.7\nuse .\nuse /dosgolem\n')
+if not a.legacy_source:
+    from build_language_observation_probe import attach_language_runtime
+    attach_language_runtime(a.repo, a.output, a.reference, formal=True)
 print(a.output)

@@ -1,6 +1,6 @@
 package main
 
-// 規格060 DRAFT：只用於隔離載入驗證，正式組裝器不連結本檔。
+// 規格060 READY：正式前端與隔離探針共用整包來源及資源核對。
 import (
 	"bytes"
 	"crypto/sha256"

@@ -24,56 +24,30 @@ v.1.0.3-20261010 與 #56 完成紀錄保留；本頁不代表新增功能已完�
 
 ## 已查證的邊界
 
-六列命令欄正式接線依[規格054](../spec/054-noto-field-atlas-draft.md)：
-[Noto烘製器](../../tools/bake_noto_orders.py)、
-[欄位載入器](../../tools/noto_orders.go)、[回歸測試](../../tools/noto_orders_test.go)、
-[正常GUI及同狀態檢查器](../../tools/check_noto_orders.py)。
-此入口只涵蓋已量測六列，完整五語驗收範圍維持不變。
+畫面外設定列、暫停、實體輸入放開後恢復及偏好保存依
+[規格056](../spec/056-display-settings-runtime.md)，原版快捷鍵與存檔格式保持原樣。
 
-接續主選單五列的獨立量測與接線見[規格055](../spec/055-noto-main-menu.md)，
-工具入口為[Noto主選單烘製器](../../tools/bake_noto_menu.py)、
-[五列載入器](../../tools/noto_menu.go)、[來源與遮罩測試](../../tools/noto_menu_test.go)及
-[正常GUI與游標驗收](../../tools/check_noto_menu.py)。
-五列已限定CONFORMED，各語逐列24／24／20／20／24px。325Go零skip、go vet、
-45檔重生全等及四語40張正常GUI／16組四側同狀態通過；游標保留，切場撤銷。
-此新增驗收只適用主選單五列，完整五語與設定列切換仍未完成。
+五語整包後端已接入[正式組裝器](../../tools/build_window_prototype.py)、
+[正式啟動器](../../tools/release/colonization-cht.sh)及[封裝器](../../tools/package_release.py)。
+四語逐欄Noto與英文原版畫布的正式驗收依
+[規格057](../spec/057-noto-runtime-atlas.md)及[規格060](../spec/060-language-bundle-swap.md)。
+605Go零skip、go vet與建置通過；75組正常GUI涵蓋改名取消、存檔及新行程讀回。
+兩條實際輸入路徑的八次重播均與GUI完整CPU、RAM、VGA、DAC、WAV及存檔一致。
+正式啟動不需要隔離旗標；原文觀測與五語重建匯出另由診斷旗標控制。
+本批沒有新Release，已發布版仍維持原狀。
 
-設定列正式接線及保存契約見[規格056](../spec/056-display-settings-runtime.md)，
-保存實作與反例入口為[顯示偏好設定](../../tools/display_preferences.go)及
-[檔案與交易測試](../../tools/display_preferences_test.go)，介面入口為
-[設定列與後端接點](../../tools/display_ui.go)及[五語介面測試](../../tools/display_ui_test.go)。
-完整語言包及HD後端另驗。
-完整動態字元圖集接續[規格057](../spec/057-noto-runtime-atlas.md)及
-[完整Noto圖集原型](../../tools/preview_noto_runtime_atlas.py)。圖集可用範圍與每欄正式排版分開驗證。
-四語八圖集、152組字級已通過正式Go格式比對；61檔兩次乾淨重生全同。
-規格057保持DRAFT，尚未授權完整語言包或逐欄正式顯示。
-兩個譯文判斷分支接續[規格058](../spec/058-dialog-source-identity.md)，
-以[真實來源與四語模板測試](../../tools/dialog_overlay_test.go)核對原始識別及回退。
-規格058維持READY：363Go零skip與go vet通過，七張正常繁中GUI像素與前版相同；
-三側重播全同，但GUI完整RAM仍有一個byte差異，原因未知，不稱同狀態通過。
-完整語言包的固定組句接續[規格059](../spec/059-display-phrase-templates.md)，
-沿用既有字串模板TSV及來源角色守門，不在程式保留各語譯文或詞序。
-入口為[組句載入與代入](../../tools/display_phrases.go)、
-[真實四語及回退測試](../../tools/display_phrases_test.go)。
-完整資源交換與原文快取接續[規格060](../spec/060-language-bundle-swap.md)，
-仍為DRAFT；四語各64固定欄位共256欄已量測，候選包各有13表及67資源。
-Go載入五語候選及25反例共30子測項、零skip與go vet通過。
-隔離原文觀測已保存218筆，正常GUI的25筆輸入四側重播完整原版狀態全同。
-停止DOS後四語對話／字串／海上仍重建12／12／11／12欄，頂列、日期及金額均已接線。
-固定欄保留原版前後像素並單向失效；四語各64欄實際載入及顯示譯文指紋通過。
-主選單、載入、難度、選國與英國介紹沿已驗GUI輸入前綴抽樣通過；先前473Go零skip與go vet通過。
-舊字模及圖集16個路徑實際缺失時，原文觀測全同，世界、載入、旗卡與介紹重建RGBA與前版全同。
-隔離記憶體後端已驗五語整包與重建畫面共同提交，取消及保存失敗保持舊物件與設定。
-一般及缺字模世界重播的五語RGBA與前版全同；25筆輸入延長停留至650000000步的
-四側同狀態通過，頂列、日期及金額仍保留，尚未完成容量策略。
-隔離r24的可信編譯索引與整包載入已驗，正式接線依READY的[規格057](../spec/057-noto-runtime-atlas.md)及[規格060](../spec/060-language-bundle-swap.md)。592Go零skip、go vet與建置通過；無研究路徑的五語載入與實際程式重播通過。50組五語真視窗包含改名、刪字、重打、取消及正常存檔；42筆實際輸入至104200000步的四側完整原版狀態、RAM、VGA、DAC、WAV與兩份存檔全同。四語256固定欄獨立量測通過，候選使用相同已驗字模。既有新行程讀回、插槽重印、已抹除來源及900000000步容量回收證據保留於規格060。正式後端、未驗欄位及HD仍未完成，不增加shown或新發行信用。
-進城數值以當次原文安全區判斷可見性；原版字格與Noto實測邊界決定字級。
-日文地圖Jamestown譯文過長，90% (3)、1與4安全區已改寫，仍回原版並記錄原因。
-英文與原版逐像素全同。其他固定欄、完整畫面、完整可見來源生命週期、
-正式交換、其餘現場GUI及存讀檔仍待完成，不增加完整五語信用。
-規格056已限定CONFORMED：353Go零skip、八組正常視窗及兩次重開通過；
-24筆實際DOS輸入三側重播至77000000步，原版完整狀態、WAV及存檔全同。
-拖曳、失焦、保存失敗與取消均保留原版契約。完整五語及HD不因設定列接線增加完成信用。
+64固定欄與3動態圖集、152組完整字格及95 ASCII沿已驗契約，
+每欄依原版墨跡、基線與安全區選字。六列命令欄與五列主選單的早期證據另見
+[規格054](../spec/054-noto-field-atlas-draft.md)及[規格055](../spec/055-noto-main-menu.md)。
+固定組句由[規格059](../spec/059-display-phrase-templates.md)的TSV載入，
+顯示翻譯不參與原版條件、資料查找或序列化。
+[規格058](../spec/058-dialog-source-identity.md)的歷史冷啟動RAM一byte差異仍未知，
+不能由本次不同正常路徑重標為已解。
+
+正式後端通過不等於全遊戲覆蓋完成。日文地圖Jamestown譯名過長，
+90% (3)、1與4的原版安全區已改寫，其餘未驗來源及樣式仍回原文並記錄。
+這些欄位、完整可見來源生命週期、HD、影片與三平台新版交付仍須接續完成，
+不增加普查shown或宣稱整個目標完成。
 
 以下為目前程式可回查的 confirmed 事實，不是新版完成證據。
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""規格060 DRAFT：隔離觀測完整原文run，不修改正式顯示來源。"""
+"""規格060 READY：共用正式前端與隔離探針的來源核對及原文觀測接線。"""
 import argparse
 import hashlib
 import json
@@ -11,7 +11,7 @@ import sys
 ROOT = Path(__file__).resolve().parent.parent
 PINS = {
     "tools/live_menu.go": "2f5ab4b81a9608a14f05280cfaba5027472e648fda6e34d3db4ba8855d0a0a53",
-    "tools/build_window_prototype.py": "4e16cca620b654915d59c044796ace6ce408d66f66623161ff53096c6fbd3a85",
+    "tools/build_window_prototype.py": "5e655dd9e0ea92869376205e92f7c4edbd7c24b26bf6b464b75c9de25776f04c",
     "tools/dialog_overlay.go": "b93dcf45c424b8aac175f71da0e05d54782d9ccc36774fdd1ac7f0bbd69e8a50",
     "tools/string_overlay.go": "9730c6095bbedb91497e3de0f2a773af32f30c8fdb0dcc9b60d1434d1ac61478",
 }
@@ -25,7 +25,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     for name in ("reference", "output"):
         p.add_argument("--" + name, type=Path, required=True)
-    p.add_argument("--with-rebuild", action="store_true", help="連結規格060的暫停重建切片，仍不改正式來源")
+    p.add_argument("--with-rebuild", action="store_true", help="連結規格060的整包後端及暫停重建驗證")
     a = p.parse_args()
     output = a.output.resolve()
     if not (a.reference / "go.sum").is_file():
@@ -37,11 +37,19 @@ def main():
         if sha((ROOT / name).read_bytes()) != digest:
             raise ValueError("正式來源不同：" + name)
     subprocess.run([sys.executable, str(ROOT / "tools/build_window_prototype.py"), "--repo", str(ROOT),
-                    "--reference", str(a.reference), "--output", str(output)], check=True, timeout=30)
+                    "--reference", str(a.reference), "--output", str(output), "--legacy-source"], check=True, timeout=30)
+    attach_language_runtime(ROOT, output, a.reference, with_rebuild=a.with_rebuild)
+
+
+def attach_language_runtime(repo, output, reference, *, with_rebuild=True, formal=False):
+    """依規格057／060 READY接入同一份原文觀測與整包後端。"""
+    for name, digest in PINS.items():
+        if sha((repo / name).read_bytes()) != digest:
+            raise ValueError("接線來源不同：" + name)
     s = (output / "adapter.go").read_text()
     replacements = {
         '\trawSource := read(filepath.Join(*root, "GAME.TXT"))\n':
-            '\tnativeOn := *draftNativeCapture && validVersion\n\trawSource := read(filepath.Join(*root, "GAME.TXT"))\n',
+            ('\tlanguageRoot, languageLive, languageErr := languageRuntimeSelection(*languageBundles, *draftNativeBundles, *draftNativeLive, *draftNativeCapture, *displayUIEnabled, *control)\n\tmust(languageErr)\n\tnativeOn := (*draftNativeCapture || *languageBundles != "") && validVersion\n' if with_rebuild else '\tnativeOn := *draftNativeCapture && validVersion\n') + '\trawSource := read(filepath.Join(*root, "GAME.TXT"))\n',
         "type staticItem struct {\n":
             "type staticItem struct {\n\tnativeSource bool\n\tnativePrimary *byte\n",
         '\t\t\tif it.reason == "" {\n\t\t\t\tvar mask struct {\n':
@@ -136,18 +144,17 @@ def main():
                     if call in line else line for line in lines)
     (output / "adapter.go").write_text(s)
     for name in ("language_observations.go", "language_observations_test.go"):
-        (output / name).write_bytes((ROOT / "tools" / name).read_bytes())
+        (output / name).write_bytes((repo / "tools" / name).read_bytes())
     extra_sources = []
-    if a.with_rebuild:
+    if with_rebuild:
         extra_sources = ["tools/language_bundle_probe.go", "tools/language_bundle_probe_test.go",
                          "tools/language_rebuild_probe.go", "tools/language_rebuild_probe_test.go",
                          "tools/language_resource_index.go", "tools/language-catalogs.json"]
         for name in extra_sources:
-            (output / Path(name).name).write_bytes((ROOT / name).read_bytes())
+            (output / Path(name).name).write_bytes((repo / name).read_bytes())
         old = "\tjournal := &nativeJournal{enabled: nativeOn}\n"
         new = old + """\tvar draftTargets map[string]*draftLanguageTarget
-\tif *draftNativeBundles != "" {
-\t\tif !*draftNativeCapture { panic("重建原型需要完整原文觀測") }
+\tif languageRoot != "" {
 \t\tfiles := map[string][]byte{}
 \t\tfor _, name := range []string{"LABELS.TXT", "NAMES.TXT", "WOODCUT.TXT", "COLONY.TXT", "MENU.TXT", "GAME.TXT", "PEDIA.TXT", "VICEROY.EXE"} {
 \t\t\tfiles[name] = read(filepath.Join(*root, name))
@@ -155,12 +162,11 @@ def main():
 \t\thelpOwned := map[string]bool{}
 \t\tif help != nil { helpOwned[help.id] = true }
 \t\tvar err error
-\t\tdraftTargets, err = draftPrepareTargets(*draftNativeBundles, files, dialogOwned, helpOwned)
+\t\tdraftTargets, err = draftPrepareTargets(languageRoot, files, dialogOwned, helpOwned)
 \t\tmust(err)
 \t}
 \tvar draftLive *draftLanguageBackend
-\tif *draftNativeLive {
-\t\tif draftTargets == nil || !*displayUIEnabled || *control { panic("隔離視窗需要完整原文觀測、語言候選及設定列，不能混用原文控制") }
+\tif languageLive {
 \t\tdraftLive = &draftLanguageBackend{targets: draftTargets, sample: func() draftNativeFrame {
 \t\t\treturn draftNativeFrame{journal, canvas(), m.Mem[0x3bb00:0x3bb00+64000], m.Mem[0xa0000:0xafa00], m.DAC[:], cursorBox(int(d.Mouse.X),int(d.Mouse.Y)), m.Steps, m.VideoMode()}
 \t\t}}
@@ -188,7 +194,7 @@ def main():
 \t\t\toutput, draftLiveRecord, err = draftLive.renderCurrent()
 \t\t\tmust(err)
 \t\t\tlineRecords, _ = draftLiveRecord["items"].([]map[string]any)
-\t\t\tapplied, reason = len(lineRecords) > 0, "draft-native-live"
+\t\t\tapplied, reason = len(lineRecords) > 0, "language-bundle"
 \t\t} else if *control || (*displayUIEnabled && displayLanguage == "en") {
 '''
         if s.count(old) != 1:
@@ -204,7 +210,7 @@ def main():
             raise ValueError("隔離視窗收據出口不唯一")
         s = s.replace(old, new, 1)
         old = '\tdumpJSON(*out+".json", report)\n'
-        new = """\tif draftTargets != nil {
+        new = """\tif draftTargets != nil && *draftNativeCapture {
 \t\tbeforeRAM, beforeSteps, beforeTicks, beforeFrames := hash(m.Mem), m.Steps, m.Ticks, m.Frames
 \t\tbeforeCPU := *m.CPU
 \t\tmust(draftExportRebuilds(draftTargets, journal, canvas(), m.Mem[0x3bb00:0x3bb00+64000], m.Mem[0xa0000:0xafa00], m.DAC[:], cursorBox(int(d.Mouse.X),int(d.Mouse.Y)),m.Steps,m.VideoMode(),*out))
@@ -223,12 +229,12 @@ def main():
     for name in extra_sources:
         if name.endswith(".go"):
             subprocess.run(["gofmt", "-w", str(output / Path(name).name)], check=True, timeout=30)
-    sources = {name: sha((ROOT / name).read_bytes()) for name in [*PINS, "tools/build_language_observation_probe.py",
+    sources = {name: sha((repo / name).read_bytes()) for name in [*PINS, "tools/build_language_observation_probe.py",
                                                                "tools/language_observations.go", "tools/language_observations_test.go", *extra_sources,
-                                                               *(["tools/build_language_resource_index.py"] if a.with_rebuild else [])]}
-    (output / "observation-sources.json").write_text(json.dumps({"kind": "DRAFT-native-observation-probe", "source_sha256": sources,
-        "reference_go_sum_sha256": sha((a.reference / "go.sum").read_bytes())}, indent=2) + "\n")
-    print("ASSEMBLED_DRAFT_NATIVE_OBSERVATION_PROBE", output)
+                                                               *(["tools/build_language_resource_index.py"] if with_rebuild else [])]}
+    (output / "observation-sources.json").write_text(json.dumps({"kind": "formal-language-runtime" if formal else "native-observation-probe", "source_sha256": sources,
+        "reference_go_sum_sha256": sha((reference / "go.sum").read_bytes())}, indent=2) + "\n")
+    print("ASSEMBLED_LANGUAGE_RUNTIME" if formal else "ASSEMBLED_NATIVE_OBSERVATION_PROBE", output)
 
 
 if __name__ == "__main__":

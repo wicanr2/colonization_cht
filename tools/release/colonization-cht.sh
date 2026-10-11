@@ -24,6 +24,8 @@ save=${COLONIZATION_CHT_SAVE:-${XDG_DATA_HOME:-$HOME/.local/share}/colonization-
 mkdir -p "$save"
 m=$here/masks
 t=$here/text
+l=$here/languages
+u=$here/ui
 exec "$here/bin/colonization-window" --window --play --root "$game" --scratch "$save" \
   --catalog "$t/draft.zh-Hant.tsv" --font-dir "$m/menu" --all-menu \
   --nation-card-a --nation-card-catalog "$t/nation-card-fragments.zh-Hant.tsv" --nation-card-font-dir "$m/card" \
@@ -43,4 +45,6 @@ exec "$here/bin/colonization-window" --window --play --root "$game" --scratch "$
   --dialog-values "$t/variable-values.zh-Hant.tsv" --dialog-atlas "$m/dialog-atlas.json" \
   --string-a --string-templates "$t/string-templates.zh-Hant.tsv" --string-atlas "$m/string-atlas.json" \
   --colony-names "$t/colony-bilingual.tsv" --audio --sb-digital \
+  --language-bundles "$l" --display-settings \
+  --display-ui-font "$u/NotoSansCJK-Regular.ttc" --display-ui-catalog "$t/frontend-ui.tsv" \
   --out "$save/../last-run" "${args[@]}"

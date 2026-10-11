@@ -18,6 +18,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ["binary", "formal", "gui", "launcher", "seed", "game", "bundles", "output"]:
         parser.add_argument("--" + name, type=Path, required=True)
+    parser.add_argument("--formal-launcher", type=Path, help="GUI實際使用的正式啟動器")
     args = parser.parse_args()
     require(Path("/.dockerenv").is_file() and os.environ.get("DISPLAY"), "需Docker與有界Xvfb")
     root = args.output.resolve()
@@ -51,6 +52,11 @@ def main():
     launcher = args.launcher.read_text()
     marker = "exec /out/issue56-source-connection-audit/colonization-window "
     require(launcher.count(marker) == 1 and sha(args.launcher.read_bytes()) == gui["source_sha256"]["launcher"], "啟動器不同")
+    if args.formal_launcher:
+        require(gui.get("formal_entry", {}).get("launcher_sha256") == sha(args.formal_launcher.read_bytes()) and
+                gui["formal_entry"].get("prototype_flags") is False and
+                (args.formal_launcher.parent / "bin/colonization-window").resolve() == args.binary.resolve(),
+                "正式入口收據不同")
     seed = args.seed.read_bytes()
     require(sha(seed) == gui["source_sha256"]["seed"], "初始存檔不同")
     inputs = args.gui / "gui.inputs.json"
@@ -77,6 +83,11 @@ def main():
         command = ["bash", str(script), "--game", str(args.game), "--play=false", "--audio-mute",
                    "--window-steps", str(receipt["end"]), "--replay-inputs", str(inputs),
                    "--audio-wav", str(run / "audio.wav"), "--out", str(run / "run"), *extra]
+        if name == "live" and args.formal_launcher:
+            command = ["bash", str(args.formal_launcher), "--game", str(args.game), "--play=false", "--audio-mute",
+                       "--window-steps", str(receipt["end"]), "--replay-inputs", str(inputs),
+                       "--audio-wav", str(run / "audio.wav"), "--out", str(run / "run"),
+                       "--native-text-diagnostics", "--display-language", "zh-Hant", "--display-graphics", "original"]
         if name == "live":
             command.extend(["--display-config", str(run / "display.json")])
         with (run / "process.log").open("wb") as log:
@@ -123,6 +134,9 @@ def main():
                                 "probe": sha(Path(__file__).read_bytes()),
                                 "transaction_checker": sha((ROOT / "tools/check_language_observation_replay.py").read_bytes())},
               "limitations": ["隔離視窗及本次正常路徑；完整來源生命週期、正式接線及HD未完成。"]}
+    if args.formal_launcher:
+        result["formal_entry"] = {"launcher_sha256": sha(args.formal_launcher.read_bytes()), "prototype_flags": False}
+        result["limitations"] = ["正式入口及本次正常路徑；其他未驗欄位與HD仍未完成。"]
     (root / "check.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     require(all((p.stat().st_uid, p.stat().st_gid) == (os.getuid(), os.getgid()) for p in root.rglob("*")), "輸出擁有權不同")
     print(result["result"], sha((root / "check.json").read_bytes()), flush=True)
