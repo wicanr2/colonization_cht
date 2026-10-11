@@ -60,3 +60,22 @@
 接續[規格058](058-dialog-source-identity.md)只修正來源辨識，Go語法樹核對loadAtlasFonts
 與dialogFont宣告的位元組未改；完整圖集原型的來源綁定已重新審查。
 本頁烘製收據仍保留當時工具與來源指紋，不改標成新版本重生，也不增加逐欄或GUI信用。
+
+## 2026-10-11接續：2022筆來源重生
+
+[規格059](059-display-phrase-templates.md)新增14組句後，使用相同固定字型、地區、
+工具及完整字格方法重生四語八圖集。各語字集數量維持1834／1810／1387／906，
+152組字級的Alpha、字距與墨跡資料與前批逐項相同；95個ASCII均在每級圖集中。
+各圖集來源綁定與新的2022筆文本全同，沒有沿用過期模板雜湊。
+
+與前批r2的61檔比較，52檔完全相同；改動僅四份組句模板、四個字串圖集的模板綁定，
+以及記錄本次來源的總收據。沒有重標舊收據，也沒有宣稱新的逐欄或正常四語GUI通過。
+
+本機入口為workplace/reports/goal186-display-hd/display-phrases-20261011/：
+
+| 收據 | SHA-256 |
+|---|---|
+| noto-atlases/check.json | 83f0a269bc3a4ad1e622653fbf5c71c0578316d8658fd04142fe4eb34184f8a2 |
+| noto-check.json | f5da9faa97cff9ab1e47a7b610319a07c33e8a23ad034f9714cd1d58af27a2e9 |
+
+規格保持DRAFT。整包交換與原文快取缺口接續[規格060](060-language-bundle-swap.md)。

@@ -73,6 +73,7 @@ Cubic既有字串圖集與教學字模已重新綁定；舊發行包與舊驗收
 
 | 收據 | SHA-256 |
 |---|---|
+| check.json | d3c670a77fb4f9ad52f818889b820bd1e1d5f10bf5e59f8f914d9688a173cb17 |
 | go-check.json | cfebf8da48bdfcff5aef6064a108393328ea1f5d1fc5188edb2b84ef7e0012ef |
 | text-rebuild-check.json | b5c5dd480bf07e9acb1f597ece1e60be77afd5e481cc48774be025cff366a022 |
 | gui/check.json | 0c5e5b44cb011fccc24502141c6c8e4d89fd2fae595aa6e8e7616a42f7913494 |
