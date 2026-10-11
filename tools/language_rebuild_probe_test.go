@@ -6,9 +6,135 @@ import (
 	"image"
 	"image/color"
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 )
+
+func draftActualTargetsForTest(t *testing.T) map[string]*draftLanguageTarget {
+	t.Helper()
+	root, game := os.Getenv("DRAFT_BUNDLE_ROOT"), os.Getenv("TEST_GAME_ROOT")
+	if root == "" || game == "" {
+		t.Skip("需明確指定完整Noto候選包及合法原版")
+	}
+	files := map[string][]byte{}
+	for _, name := range []string{"LABELS.TXT", "NAMES.TXT", "WOODCUT.TXT", "COLONY.TXT", "MENU.TXT", "GAME.TXT", "PEDIA.TXT", "VICEROY.EXE"} {
+		data, err := os.ReadFile(filepath.Join(game, name))
+		if os.IsNotExist(err) {
+			t.Skip("缺少合法原版輸入", name)
+		}
+		if err != nil {
+			t.Fatal(err)
+		}
+		// 其餘文字檔的指紋由各資料表載入器核對；versions只列冷啟動的五檔。
+		if want := versions[name]; want != "" && hash(data) != want {
+			t.Fatal("原版來源版本不同", name)
+		}
+		files[name] = data
+	}
+	targets, err := draftPrepareTargets(root, files, nil, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return targets
+}
+
+func TestDraftActualLanguageBundleTransaction(t *testing.T) {
+	targets := draftActualTargetsForTest(t)
+	for _, locale := range []string{"zh-Hant", "zh-Hans", "ja", "ko", "en"} {
+		t.Run(locale, func(t *testing.T) {
+			canvas, buffer, indexed, palette := make([]byte, 64000), make([]byte, 64000), make([]byte, 64000), make([]byte, 768)
+			indexed[6430], palette[3] = 1, 63
+			j := &nativeJournal{enabled: true}
+			nativeBefore := bytes.Join([][]byte{canvas, buffer, indexed, palette}, nil)
+			backend := &draftLanguageBackend{targets: targets, sample: func() draftNativeFrame {
+				return draftNativeFrame{j, canvas, buffer, indexed, palette, image.Rectangle{}, 123, 0x13}
+			}}
+			path := filepath.Join(t.TempDir(), "display.json")
+			initial, options := displayOptions{"en", "original"}, displayOptions{locale, "original"}
+			if err := applyDisplayPreferences(path, initial, backend.prepare); err != nil {
+				t.Fatal(err)
+			}
+			old, saved := backend.active, read(path)
+			pixels := bytes.Clone(old.frame.Pix)
+			candidate, err := backend.prepare(options)
+			if err != nil || candidate == nil || backend.active != old || !bytes.Equal(pixels, old.frame.Pix) || !bytes.Equal(saved, read(path)) {
+				t.Fatal("準備改變生效資料", err)
+			}
+			s := displaySettings{current: initial}
+			s.open(false)
+			s.released(true)
+			s.draft = options
+			s.cancel()
+			if backend.active != old || s.current != initial || !bytes.Equal(saved, read(path)) {
+				t.Fatal("取消改變生效語言包")
+			}
+			s.released(true)
+			s.open(false)
+			s.released(true)
+			s.draft = options
+			if s.apply(func(o displayOptions) error {
+				return applyDisplayPreferences(filepath.Join(path, "blocked"), o, backend.prepare)
+			}) ||
+				s.current != initial || s.phase != displayEditing || s.problem != "ui.error.save" || backend.active != old ||
+				!bytes.Equal(pixels, old.frame.Pix) || !bytes.Equal(saved, read(path)) {
+				t.Fatal("保存失敗改變生效語言包、畫面或設定")
+			}
+			if !s.apply(func(o displayOptions) error { return applyDisplayPreferences(path, o, backend.prepare) }) {
+				t.Fatal("成功交易失敗", s.problem)
+			}
+			persisted, err := readDisplayPreferences(path, "", "")
+			if err != nil || persisted != options || s.current != options || s.phase != displayResuming ||
+				backend.active == old || backend.active.options != options || backend.active.target != targets[locale] ||
+				backend.active.receipt["locale"] != locale || !bytes.Equal(pixels, old.frame.Pix) {
+				t.Fatal("未共同提交語言包、畫面與設定", err)
+			}
+			if locale != "en" && (len(backend.active.target.fixed) != 64 || backend.active.target.dlg == nil ||
+				backend.active.target.str == nil || backend.active.target.sea == nil) {
+				t.Fatal("提交的語言包不完整")
+			}
+			// 已準備的提交不再取用後端清冊或原版取樣函式。
+			backend.targets = nil
+			backend.sample = func() draftNativeFrame { panic("提交重新讀取原版") }
+			candidate()
+			if backend.active.target != targets[locale] || backend.active.options != options ||
+				!bytes.Equal(nativeBefore, bytes.Join([][]byte{canvas, buffer, indexed, palette}, nil)) {
+				t.Fatal("提交重新查找資料或改變原版")
+			}
+		})
+	}
+}
+
+func TestDraftLanguageTransactionRejectsIncompleteCandidate(t *testing.T) {
+	target := &draftLanguageTarget{pack: &draftPreparedBundle{manifest: draftBundleManifest{Locale: "en", Original: true}}}
+	old := &draftLanguageDisplay{options: displayOptions{"en", "original"}, target: target}
+	for _, kind := range []string{"invalid-language", "hd", "missing-target", "wrong-locale", "missing-sample", "missing-journal", "truncated-frame"} {
+		t.Run(kind, func(t *testing.T) {
+			options := displayOptions{"en", "original"}
+			b := &draftLanguageBackend{active: old, targets: map[string]*draftLanguageTarget{"en": target}, sample: func() draftNativeFrame {
+				return draftNativeFrame{journal: &nativeJournal{}}
+			}}
+			switch kind {
+			case "invalid-language":
+				options.Language = "invalid"
+			case "hd":
+				options.Graphics = "hd"
+			case "missing-target":
+				b.targets = nil
+			case "wrong-locale":
+				b.targets["en"] = &draftLanguageTarget{pack: &draftPreparedBundle{manifest: draftBundleManifest{Locale: "ja"}}}
+			case "missing-sample":
+				b.sample = nil
+			case "missing-journal":
+				b.sample = func() draftNativeFrame { return draftNativeFrame{} }
+			}
+			commit, err := b.prepare(options)
+			if err == nil || commit != nil || b.active != old {
+				t.Fatal("不完整候選進入生效資料", err)
+			}
+		})
+	}
+}
 
 func TestDraftRebuildRequiresWholeSafeArea(t *testing.T) {
 	canvas := make([]byte, 64000)

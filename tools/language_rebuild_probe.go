@@ -25,6 +25,49 @@ type draftLanguageTarget struct {
 	fixed map[string]*draftFixedMask
 }
 
+type draftNativeFrame struct {
+	journal                          *nativeJournal
+	canvas, buffer, indexed, palette []byte
+	cursor                           image.Rectangle
+	step                             uint64
+	mode                             byte
+}
+
+type draftLanguageDisplay struct {
+	options displayOptions
+	target  *draftLanguageTarget
+	frame   *image.RGBA
+	receipt map[string]any
+}
+
+// 準備與生效資料分開；由既有設定保存成功後才呼叫提交。
+type draftLanguageBackend struct {
+	targets map[string]*draftLanguageTarget
+	sample  func() draftNativeFrame
+	active  *draftLanguageDisplay
+}
+
+func (b *draftLanguageBackend) prepare(options displayOptions) (func(), error) {
+	if err := options.validate(); err != nil {
+		return nil, err
+	}
+	target := b.targets[options.Language]
+	if options.Graphics != "original" || target == nil || target.pack == nil ||
+		target.pack.manifest.Locale != options.Language || b.sample == nil {
+		return nil, fmt.Errorf("ui.error.unavailable")
+	}
+	f := b.sample()
+	if f.journal == nil {
+		return nil, fmt.Errorf("ui.error.unavailable")
+	}
+	frame, receipt, err := draftRebuildTarget(target, f.journal, f.canvas, f.buffer, f.indexed, f.palette, f.cursor, f.step, f.mode)
+	if err != nil {
+		return nil, err
+	}
+	next := &draftLanguageDisplay{options: options, target: target, frame: frame, receipt: receipt}
+	return func() { b.active = next }, nil
+}
+
 func draftTargetRequirements(root string) (draftBundleRequirements, error) {
 	needs := draftBundleRequirements{
 		Font:    "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a",
@@ -836,18 +879,57 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 
 func draftExportRebuilds(targets map[string]*draftLanguageTarget, j *nativeJournal, canvas, buffer, indexed, palette []byte, cursor image.Rectangle, step uint64, mode byte, out string) error {
 	before := hash(bytes.Join([][]byte{canvas, buffer, indexed, palette}, nil))
+	backend := &draftLanguageBackend{targets: targets, sample: func() draftNativeFrame {
+		return draftNativeFrame{j, canvas, buffer, indexed, palette, cursor, step, mode}
+	}}
+	preferences := out + ".display-preferences.json"
+	initial := displayOptions{"en", "original"}
+	if err := applyDisplayPreferences(preferences, initial, backend.prepare); err != nil {
+		return err
+	}
+	var transactions []map[string]any
 	for _, locale := range []string{"zh-Hant", "zh-Hans", "ja", "ko", "en"} {
-		im, record, err := draftRebuildTarget(targets[locale], j, canvas, buffer, indexed, palette, cursor, step, mode)
+		options := displayOptions{locale, "original"}
+		old := backend.active
+		oldPixels := hash(old.frame.Pix)
+		saved, err := os.ReadFile(preferences)
 		if err != nil {
 			return err
 		}
+		cancelled, err := backend.prepare(options)
+		if err != nil || cancelled == nil || backend.active != old || hash(old.frame.Pix) != oldPixels {
+			return fmt.Errorf("language preparation changed active view: %s: %v", locale, err)
+		}
+		// 不呼叫cancelled就是既有面板的取消；保存失敗沿原有交易函式。
+		if err := applyDisplayPreferences(filepath.Join(preferences, "blocked.json"), options, backend.prepare); err == nil || err.Error() != "ui.error.save" {
+			return fmt.Errorf("language save failure accepted: %s: %v", locale, err)
+		}
+		afterFailure, err := os.ReadFile(preferences)
+		if err != nil || !bytes.Equal(saved, afterFailure) || backend.active != old || hash(old.frame.Pix) != oldPixels {
+			return fmt.Errorf("cancel or save failure changed active language: %s", locale)
+		}
+		if err := applyDisplayPreferences(preferences, options, backend.prepare); err != nil {
+			return err
+		}
+		active := backend.active
+		persisted, err := readDisplayPreferences(preferences, "", "")
+		if err != nil || persisted != options || active.options != options || active.target != targets[locale] {
+			return fmt.Errorf("language bundle transaction mismatch: %s", locale)
+		}
+		im, record := active.frame, active.receipt
 		record["kind"] = "DRAFT-paused-native-text-rebuild"
 		record["rgba_sha256"] = hash(im.Pix)
 		savePNG(out+".rebuild-"+locale+".png", im)
 		dumpJSON(out+".rebuild-"+locale+".json", record)
+		transactions = append(transactions, map[string]any{"locale": locale, "cancel_kept_active": true,
+			"save_failure_kept_active_and_preferences": true, "whole_target_committed": true,
+			"rgba_sha256": hash(im.Pix), "saved": persisted})
 	}
-	if before != hash(bytes.Join([][]byte{canvas, buffer, indexed, palette}, nil)) {
+	after := hash(bytes.Join([][]byte{canvas, buffer, indexed, palette}, nil))
+	if before != after {
 		return fmt.Errorf("rebuild mutated native frame")
 	}
+	dumpJSON(out+".language-transactions.json", map[string]any{"kind": "DRAFT-language-bundle-transactions",
+		"step": step, "native_before_sha256": before, "native_after_sha256": after, "transactions": transactions})
 	return nil
 }

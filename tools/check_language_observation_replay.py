@@ -28,6 +28,32 @@ def tree(path):
     return {str(p.relative_to(path)): sha(p.read_bytes()) for p in sorted(path.rglob("*")) if p.is_file()}
 
 
+def check_transactions(run, state, rebuilds):
+    path = run / "run.language-transactions.json"
+    record = json.loads(path.read_bytes())
+    require(record["kind"] == "DRAFT-language-bundle-transactions" and record["step"] == state["steps"],
+            "交易收據種類或原版步數不同")
+    memory = (run / "run.memory").read_bytes()
+    native = b"".join([memory[0x2cae0:0x2cae0 + 64000], memory[0x3bb00:0x3bb00 + 64000],
+                       (run / "run.final.idx").read_bytes(), (run / "run.final.pal").read_bytes()])
+    require(record["native_before_sha256"] == record["native_after_sha256"] == sha(native),
+            "交易前後原版畫面來源與完整RAM不同")
+    entries = record["transactions"]
+    require([e["locale"] for e in entries] == ["zh-Hant", "zh-Hans", "ja", "ko", "en"], "五語交易次序或數量不同")
+    for entry in entries:
+        require(all(entry[k] is True for k in ["cancel_kept_active", "save_failure_kept_active_and_preferences",
+                                               "whole_target_committed"]) and
+                entry["saved"] == {"language": entry["locale"], "graphics": "original"} and
+                entry["rgba_sha256"] == rebuilds[entry["locale"]]["rgba_sha256"],
+                "取消、保存失敗或整包提交未驗證：" + entry["locale"])
+    saved = run / "run.display-preferences.json"
+    require(json.loads(saved.read_bytes()) == {"language": "en", "graphics": "original"} and
+            saved.stat().st_mode & 0o777 == 0o600 and not list(run.glob(".display-*.tmp")),
+            "交易結束的設定檔、權限或暫存檔不同")
+    return {"receipt_sha256": sha(path.read_bytes()), "preference_sha256": sha(saved.read_bytes()),
+            "native_sha256": sha(native), "languages": len(entries)}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("binary", "formal", "gui", "launcher", "seed", "game", "output"):
@@ -35,11 +61,15 @@ def main():
     parser.add_argument("--bundles", type=Path, help="另驗停止DOS後的對話／字串／海上四語重建切片")
     parser.add_argument("--fontless", action="store_true", help="觀測側用原文控制，所有舊遊戲字模與圖集參數指向實際缺檔")
     parser.add_argument("--rebuild-reference", type=Path, help="另核對同原版狀態的既有五語RGBA收據")
+    parser.add_argument("--transactions", action="store_true", help="獨立核對五語整包交易、取消與保存失敗收據")
     parser.add_argument("--checkpoint", type=int, help="僅重播正常GUI輸入的前綴，與前版及原文控制互核；不冒充原GUI終點")
+    parser.add_argument("--idle-until", type=int, help="沿完整設定GUI輸入延長停留，不新增輸入；四側互核，不冒充原GUI終點")
     parser.add_argument("--checkpoint-source", choices=("settings", "newgame"), default="settings",
                         help="checkpoint輸入來源；newgame僅接受既有已驗證新局GUI指紋")
     parser.add_argument("--expect-fixed", action="append", default=[], help="checkpoint應重建的固定原版欄位鍵，可重複指定")
     args = parser.parse_args()
+    require(args.idle_until is None or (args.checkpoint is None and args.checkpoint_source == "settings"),
+            "延長停留不能混用前綴停點或其他輸入來源")
     require(Path("/.dockerenv").is_file() and os.environ.get("DISPLAY"), "需Docker及有界Xvfb")
     root = args.output.resolve()
     require(root.is_relative_to((ROOT / "workplace").resolve()) and not root.exists() and
@@ -89,6 +119,7 @@ def main():
             absent_masks[flag] = str(absent / flag)
         require(not any(Path(p).exists() for p in absent_masks.values()), "舊字模反例路徑實際存在")
     source_input_sha = sha(inputs.read_bytes())
+    source_end = receipt["end"]
     reference_dir, reference_stem = args.gui, "gui"
     expected_end = receipt["end"]
     if args.checkpoint is not None:
@@ -101,6 +132,14 @@ def main():
         baseline, reference_dir, reference_stem = None, None, "run"
     else:
         require(not args.expect_fixed, "expect-fixed只用於明示checkpoint")
+    if args.idle_until is not None:
+        require(args.bundles and expected_end < args.idle_until <= expected_end + 600000000,
+                "停留終點須在既有GUI終點之後，最多增加六億步")
+        expected_end = args.idle_until
+        receipt = {"inputs": receipt["inputs"], "end": expected_end}
+        inputs = root / "idle.inputs.json"
+        inputs.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n")
+        baseline, reference_dir, reference_stem = None, None, "run"
     results = {}
     observed_extra = ["--draft-native-capture"]
     if args.bundles:
@@ -125,7 +164,7 @@ def main():
                    "--audio-wav", str(run / "audio.wav"), "--out", str(run / "run"), *extra]
         with (run / "process.log").open("wb") as log:
             subprocess.run(command, env=env, stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT,
-                           check=True, timeout=90)
+                           check=True, timeout=max(90, 90 * expected_end / source_end))
         report = json.loads((run / "run.json").read_bytes())
         require(report["state"]["steps"] == expected_end, name + "重播步數不同")
         if baseline is None:
@@ -137,7 +176,7 @@ def main():
         if name != "original-control" and not (name == "observed" and args.fontless):
             with Image.open(run / "run.final.png") as im:
                 actual = (im.size, im.convert("RGB").tobytes())
-            if args.fontless and args.checkpoint is not None:
+            if args.fontless and (args.checkpoint is not None or args.idle_until is not None):
                 if legacy_rgb is None:
                     legacy_rgb = actual
                 require(actual == legacy_rgb, name + "既有繁中合成RGB不同")
@@ -232,6 +271,10 @@ def main():
             rebuilds[locale] = {"items": len(record["items"]), "rgba_sha256": record["rgba_sha256"],
                                "receipt_sha256": sha(Path(str(prefix) + ".json").read_bytes())}
     rebuild_reference = None
+    transactions = None
+    if args.transactions:
+        require(args.bundles, "語言包交易需要完整目標包")
+        transactions = check_transactions(root / "observed", baseline, rebuilds)
     if args.rebuild_reference:
         require(args.bundles, "RGBA比較需要完整目標包")
         reference = json.loads(args.rebuild_reference.read_bytes())
@@ -259,8 +302,14 @@ def main():
     if args.fontless:
         result["fontless_observation"] = {"legacy_mask_overrides": absent_masks, "all_paths_absent": True,
                                           "observed_rgb_equals_native_control": True}
+    if args.idle_until is not None:
+        result["result"] = "PASS_NATIVE_IDLE_FOUR_REPLAYS"
+        result["idle"] = {"step": expected_end, "source_gui_inputs_sha256": source_input_sha,
+                          "comparison": "完整正常GUI輸入後延長停留；沒有新增輸入或現場GUI信用"}
     if rebuild_reference:
         result["rebuild_reference_sha256"] = rebuild_reference
+    if transactions:
+        result["language_bundle_transactions"] = transactions
     (root / "check.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     require(all((p.stat().st_uid, p.stat().st_gid) == (os.getuid(), os.getgid()) for p in root.rglob("*")), "輸出擁有權不同")
     print(result["result"], sha((root / "check.json").read_bytes()))

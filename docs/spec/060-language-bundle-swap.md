@@ -417,3 +417,68 @@ SHA-256為91bd1dc1530d473dfdf38947cbe8222dc7af30091daffdb9e1a1d5f866e04469。
 組裝仍用--with-rebuild；--fontless及--rebuild-reference加在既有檢查器參數上，
 固定欄另沿前節的--checkpoint、--checkpoint-source及完整--expect-fixed鍵。
 原始圖像、原文、字型、圖集、WAV與存檔只留workplace，不納入Git。
+
+## 2026-10-11：可見來源容量的停留反例契約
+
+DRAFT：以既有設定GUI的完整25筆原版輸入重播，之後不新增輸入，
+只延長原版執行終點，觀察游標等原版重印是否會擠掉仍在畫面上的來源。
+檢查器入口仍為check_language_observation_replay.py，新增--idle-until；
+只能沿設定GUI來源，不能混用前綴停點，最多增加六億步。
+四側核對完整原版狀態、RAM、VGA、DAC、音訊與存檔；
+非英文重建仍須包含已驗海上頂列、日期及金額。
+這是正常輸入後的停留重播，不增加現場GUI或shown信用。
+先保留現行FIFO的反例，再決定最小容量修正；本節尚未授權正式快取行為。
+
+## 2026-10-11：記憶體語言包交易切片契約
+
+DRAFT：沿規格056既有applyDisplayPreferences順序，以隔離後端驗證
+完整已準備語言包與當次重建畫面的共同提交。實作及測試入口沿
+language_rebuild_probe.go與language_rebuild_probe_test.go，不新增正式前端接線。
+準備只從已驗記憶體語言包與當次原文觀測建立新畫面，回傳提交函式；
+當前語言包、畫面及設定在提交前保持原樣。提交只交換一個包含完整語言包、
+畫面及設定的物件，不再讀檔、烘字或推進DOS。
+取消時丟棄候選；設定保存失敗時不提交，當前物件及既有設定檔保持原樣。
+本切片只處理已驗原版圖像模式，HD仍依自己的規格閘門。
+停止重播後依序驗證五語準備、取消、保存失敗及成功提交，再獨立核對
+各語RGBA與原版完整狀態。此證據不取代來源生命週期或正式GUI驗收。
+
+2026-10-12 confirmed：隔離後端以單一物件共同提交完整目標包、重建畫面與選項。
+實際五語候選的準備、取消、保存失敗、成功提交及七個不完整候選反例通過；
+473Go零skip、go vet及建置通過。r12測試誤把冷啟動五檔指紋表當成全部文字檔，
+修正為已登錄檔案先核對，其餘沿各表載入器驗來源，再以新r13模組乾淨重測。
+
+25筆既有正常GUI輸入至76200000步的一般與實際缺字模模式各作四側重播。
+每語依序準備後取消、製造設定保存失敗，再成功提交；取消及失敗均保留
+舊物件、畫面與設定檔。兩組原文觀測逐位元組全同，五語RGBA與r11全同，
+完整原版狀態、RAM、VGA、DAC、WAV及存檔全同。
+英國介紹88770000步另以缺字模、--transactions及新局GUI輸入前綴作四側比較，
+四語各完整一欄及全部五語RGBA與r11全同，五語交易與完整原版狀態通過。
+檢查器從完整RAM、VGA及DAC另算交易原文指紋，並核對各語RGBA與設定檔0600權限。
+這是停止DOS後的記憶體交易證據，正式前端、現場GUI及完整生命週期仍待驗。
+
+前述停留切片使用r11原型，25筆輸入不變，終點延長至650000000步。
+四側完整原版狀態通過；接受368筆、容量移除112筆、保留256筆，
+頂列、日期及金額仍能重建。這個停點未重現所懷疑的頂列遺失，
+沒有據此更改FIFO或宣稱可見來源保存已完成。
+原90秒重播額度不足，改按終點步數相對原GUI終點同比例計算，未改輸入及比較條件。
+
+本機收據沿上述language-resources-20261011根目錄：
+
+| 收據 | SHA-256 |
+| --- | --- |
+| native-rebuilder-r13 | 21c64a23a3378def0e0b6788b437a71290d0ec707261a08cce28158bb1a9d3df |
+| native-tests-r13.jsonl | 8d15ec30b84dfdf8a403c68112a4867a1debacc50854810d21fddb2f867c9f67 |
+| native-runtime-r13/observation-sources.json | 68086616caa69f64138707f5b6833d5df24ed98a078669f74c8240d6a3c5a2e8 |
+| native-transactions-replays-r13/check.json | c645048213180527e9e77a6d730841ef7d4a4de31ad50a382bc85b4edd70de1a |
+| native-transactions-fontless-r13/check.json | c8c1425faa1f50a8a7f46e7b08814c5dffb6fd0fd255989cd4b89f4577388961 |
+| language-transactions-world-audit-r13.json | abb95af352a53e452e229e861591b2f2b15a60a04359e715e454f60574e6f47f |
+| native-transactions-intro-r13/check.json | ada7ef1de32a8c28eaae8a9d79dfe56a34d9fb8b938dd73a0b34887fb94ac4ac |
+| native-idle-fontless-r11-b/check.json | 0bca058bc78710001ffa3024278da22b59286fc3e3043cfaf0328504b4abab28 |
+
+前三組世界及停留重播的檢查器副本為check-language-observation-idle-r13.py，
+SHA-256為7bf271faf11ad0112aaef48bb5c0291a56f448bee8cc42812c21e4c8a0d2173e。
+後續獨立交易核對及介紹重播使用check-language-observation-transactions-r14.py，
+SHA-256為5abbb6823091f9e2da7d659fe72769fcc239db0bac4d3b116e9b6dff0bba434e。
+重生沿既有Docker、唯讀原版及--with-rebuild組裝；--transactions要求完整交易收據，
+--idle-until另驗延長停留，兩者不增加現場GUI、shown、HD或發行信用。
+規格維持DRAFT；私用原文、字型、畫面、WAV、設定及存檔仍只留workplace。
