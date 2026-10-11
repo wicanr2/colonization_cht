@@ -133,8 +133,8 @@ def main():
     else:
         require(not args.expect_fixed, "expect-fixed只用於明示checkpoint")
     if args.idle_until is not None:
-        require(args.bundles and expected_end < args.idle_until <= expected_end + 600000000,
-                "停留終點須在既有GUI終點之後，最多增加六億步")
+        require(args.bundles and expected_end < args.idle_until <= expected_end + 1200000000,
+                "停留終點須在既有GUI終點之後，最多增加十二億步")
         expected_end = args.idle_until
         receipt = {"inputs": receipt["inputs"], "end": expected_end}
         inputs = root / "idle.inputs.json"
@@ -195,6 +195,11 @@ def main():
     require(captured["kind"] == "DRAFT-native-observations-not-language-rebuild" and
             captured["cost"] <= captured["max_cost"] and len(captured["items"]) <= captured["max_items"], "觀測種類或容量不同")
     require(captured["accepted"] > 0 and captured["items"], "未捕捉任何原文")
+    require(captured["accepted"] == len(captured["items"]) + captured["evicted_by_limit"] +
+            captured.get("coalesced_reprints", 0), "原文接受、保留、容量移除與重印合併數不符")
+    if "coalesced_reprints" in captured:
+        require(captured["evicted_by_limit"] == sum(captured[k] for k in
+                ["evicted_nonvisible", "evicted_visible", "evicted_unclassified"]), "容量移除分類數不符")
     require(not (root / "disabled/run.native.json").exists(), "關閉觀測仍輸出收據")
     memory = (root / "observed/run.memory").read_bytes()
     counts, visible = Counter(), Counter()

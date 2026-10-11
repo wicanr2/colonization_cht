@@ -61,7 +61,7 @@ def main():
         '\t\t\tif err != nil {\n\t\t\t\tstr.reason = "missing-or-invalid-translation"\n':
             '\t\t\tstr.cat = cat\n\t\t\tif err != nil {\n\t\t\t\tstr.reason = "missing-or-invalid-translation"\n',
         "\tseaOn := sea != nil && sea.glyphs != nil\n":
-            "\tjournal := &nativeJournal{enabled: nativeOn}\n\tseaOn := sea != nil && (sea.glyphs != nil || nativeOn)\n",
+            "\tjournal := &nativeJournal{enabled: nativeOn}\n\tjournal.sample = func() nativeSurfaces { return nativeSurfaces{canvas(), m.Mem[0x3bb00:0x3bb00+64000], m.Mem[0xa0000:0xafa00], m.DAC[:], m.VideoMode()} }\n\tseaOn := sea != nil && (sea.glyphs != nil || nativeOn)\n",
         "\t\tinterleaved := len(ev.raw) == 2 && ev.raw[1] == 0\n":
             "\t\tjournal.captureSea(ev, canvas(), m.Steps)\n\t\tinterleaved := len(ev.raw) == 2 && ev.raw[1] == 0\n",
         "\t\t\tmenuRow := &seaRow{text: got, firstOld: map[int]byte{}, lastVal: map[int]byte{}}\n":

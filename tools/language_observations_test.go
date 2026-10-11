@@ -294,3 +294,243 @@ func TestNativeCaptureBoundsAndDisabledMode(t *testing.T) {
 		t.Fatal("source journal exceeds bounds or drops newest event")
 	}
 }
+
+func nativeCapacitySurfaces() nativeSurfaces {
+	return nativeSurfaces{make([]byte, 64000), make([]byte, 64000), make([]byte, 64000), make([]byte, 768), 0x13}
+}
+
+func nativeCapacityAdd(t *testing.T, j *nativeJournal, f nativeSurfaces, index int, step uint64) {
+	t.Helper()
+	f.canvas[index] = 68
+	x, y := index%320, index/320
+	r := &stringRun{base: uint32(index), next: uint32(index + 1), text: []byte("A"),
+		boxes: []image.Rectangle{image.Rect(x, y, x+1, y+1)}, colors: map[byte]int{68: 1},
+		firstOld: map[int]byte{index: 0}, lastVal: map[int]byte{index: 68}}
+	if !j.captureString(r, f.canvas, nil, step) {
+		t.Fatal("capacity fixture source rejected")
+	}
+}
+
+func nativeCapacityAccounting(t *testing.T, j *nativeJournal) {
+	t.Helper()
+	cost := 0
+	for _, o := range j.items {
+		cost += o.cost
+	}
+	if cost != j.cost || cost > draftNativeMaxCost || len(j.items) > draftNativeMaxItems ||
+		j.accepted != len(j.items)+j.coalesced+j.lost || j.lost != j.evictedNonvisible+j.evictedVisible+j.evictedUnclassified {
+		t.Fatal("source accounting or bounds incorrect")
+	}
+}
+
+func TestNativeCapacityProtectsVisibleSurfaces(t *testing.T) {
+	for _, kind := range []string{"canvas", "map", "vga", "dac-changed", "expired-fixed", "mode-changed"} {
+		t.Run(kind, func(t *testing.T) {
+			f := nativeCapacitySurfaces()
+			j := &nativeJournal{enabled: true, sample: func() nativeSurfaces { return f }}
+			r, canvas := nativeStringFixture()
+			const index = 20*320 + 30
+			switch kind {
+			case "canvas", "mode-changed":
+				copy(f.canvas, canvas)
+				if !j.captureString(r, f.canvas, nil, 0) {
+					t.Fatal("canvas fixture rejected")
+				}
+			case "map":
+				r.buf2 = true
+				copy(f.buffer, canvas)
+				if !j.captureString(r, f.canvas, f.buffer, 0) {
+					t.Fatal("map fixture rejected")
+				}
+			default:
+				f.indexed[index] = 68
+				def := nativeFixed{id: "fixture", safe: image.Rect(30, 20, 31, 21), vga: true, paletteSHA: hash(f.palette)}
+				if !j.captureFixed(def, make([]byte, 64000), f.indexed, f.canvas, 0) {
+					t.Fatal("VGA fixture rejected")
+				}
+			}
+			first := j.items[0]
+			for n := 1; n < draftNativeMaxItems; n++ {
+				nativeCapacityAdd(t, j, f, 10000+n, uint64(n))
+				f.canvas[10000+n] = 0
+			}
+			keep := true
+			switch kind {
+			case "dac-changed":
+				f.palette[0]++
+				keep = false
+			case "expired-fixed":
+				first.fixed.expired = true
+				keep = false
+			case "mode-changed":
+				f.mode = 3
+				keep = false
+			}
+			nativeCapacityAdd(t, j, f, 10000+draftNativeMaxItems, draftNativeMaxItems)
+			if (j.items[0] == first) != keep || j.lost != 1 || j.evictedNonvisible != 1 || j.evictedVisible != 0 ||
+				j.items[len(j.items)-1].step != draftNativeMaxItems || j.items[1].step != 2 {
+				t.Fatal("visible source lost, invalid source kept, or completion order changed", kind)
+			}
+			nativeCapacityAccounting(t, j)
+		})
+	}
+}
+
+func TestNativeCapacityCoalescesExactReprintAtFull(t *testing.T) {
+	f := nativeCapacitySurfaces()
+	j := &nativeJournal{enabled: true, sample: func() nativeSurfaces { return f }}
+	r, canvas := nativeStringFixture()
+	copy(f.canvas, canvas)
+	if !j.captureString(r, f.canvas, nil, 0) {
+		t.Fatal("fixture rejected")
+	}
+	first := j.items[0]
+	for n := 1; n < draftNativeMaxItems; n++ {
+		nativeCapacityAdd(t, j, f, 10000+n, uint64(n))
+		f.canvas[10000+n] = 0
+	}
+	r.start, r.last = 998, 999
+	f.canvas[57000] = 17
+	if !j.captureString(r, f.canvas, nil, 999) {
+		t.Fatal("latest exact source rejected")
+	}
+	latest := j.items[len(j.items)-1]
+	if j.coalesced != 1 || j.lost != 0 || j.items[0].step != 1 || latest.step != 999 || latest.canvas[57000] != 17 ||
+		latest == first || first.stringRun.start != 10 || first.stringRun.last != 20 {
+		t.Fatal("exact reprint did not preserve latest context or changed original observation")
+	}
+	nativeCapacityAccounting(t, j)
+}
+
+func TestNativeExactReprintIncludesAllSourceEvidence(t *testing.T) {
+	r, canvas := nativeStringFixture()
+	j := &nativeJournal{enabled: true}
+	j.captureString(r, canvas, nil, 0)
+	a := j.items[0]
+	for name, change := range map[string]func(*nativeObservation){
+		"base":    func(o *nativeObservation) { o.stringRun.base++ },
+		"text":    func(o *nativeObservation) { o.stringRun.text[0]++ },
+		"box":     func(o *nativeObservation) { o.stringRun.boxes[0].Max.X++ },
+		"color":   func(o *nativeObservation) { o.stringRun.colors[1] = 1 },
+		"before":  func(o *nativeObservation) { o.stringRun.firstOld[6430]++ },
+		"after":   func(o *nativeObservation) { o.after[6430]++ },
+		"role":    func(o *nativeObservation) { o.stringRun.cargo.role = "changed" },
+		"outline": func(o *nativeObservation) { o.stringRun.outline = false },
+		"buffer":  func(o *nativeObservation) { o.stringRun.buf2 = true },
+		"mixed":   func(o *nativeObservation) { o.stringRun.mixed = true },
+		"char":    func(o *nativeObservation) { o.stringRun.charColor[0][1] = o.ink },
+		"segment": func(o *nativeObservation) { o.stringRun.retainedSegments[0]++ },
+		"cursor":  func(o *nativeObservation) { o.cursor.Min.X++ },
+		"writer":  func(o *nativeObservation) { o.stringRun.others = o.ink },
+	} {
+		t.Run(name, func(t *testing.T) {
+			b := *a
+			b.stringRun = cloneNativeString(a.stringRun)
+			b.after = make(map[int]byte)
+			for i, v := range a.after {
+				b.after[i] = v
+			}
+			if !nativeSameSource(a, &b) {
+				t.Fatal("identical source rejected")
+			}
+			change(&b)
+			if nativeSameSource(a, &b) {
+				t.Fatal("different native source coalesced", name)
+			}
+		})
+	}
+}
+
+func TestNativeCapacityAllVisibleIsBoundedAndReported(t *testing.T) {
+	r, canvas := nativeStringFixture()
+	f := nativeCapacitySurfaces()
+	copy(f.canvas, canvas)
+	j := &nativeJournal{enabled: true, sample: func() nativeSurfaces { return f }}
+	for n := 0; n < 300; n++ {
+		r.base = uint32(n + 1)
+		if !j.captureString(r, f.canvas, nil, uint64(n)) {
+			t.Fatal("unique visible source rejected")
+		}
+	}
+	if j.coalesced != 0 || j.evictedVisible != 44 || j.evictedNonvisible != 0 || j.items[0].step != 44 {
+		t.Fatal("all-visible overflow was not bounded or reported")
+	}
+	nativeCapacityAccounting(t, j)
+}
+
+func TestNativeCapacityInvalidSamplePreservesJournal(t *testing.T) {
+	f := nativeCapacitySurfaces()
+	j := &nativeJournal{enabled: true, sample: func() nativeSurfaces { return f }}
+	for n := 0; n < draftNativeMaxItems; n++ {
+		nativeCapacityAdd(t, j, f, 10000+n, uint64(n))
+	}
+	first, cost := j.items[0], j.cost
+	f.buffer = nil
+	r, canvas := nativeStringFixture()
+	if j.captureString(r, canvas, nil, 999) || j.items[0] != first || j.cost != cost || j.accepted != draftNativeMaxItems || j.rejected != 1 {
+		t.Fatal("invalid capacity sample changed journal")
+	}
+	nativeCapacityAccounting(t, j)
+}
+
+func TestNativeCapacityCostProtectsVisibleSource(t *testing.T) {
+	f := nativeCapacitySurfaces()
+	j := &nativeJournal{enabled: true, sample: func() nativeSurfaces { return f }}
+	for n := 0; n < 20; n++ {
+		i := 10000 + n
+		f.canvas[i] = 68
+		x, y := i%320, i/320
+		r := &stringRun{base: uint32(i), text: []byte("A"), boxes: []image.Rectangle{image.Rect(x, y, x+1, y+1)},
+			firstOld: map[int]byte{i: 0}, lastVal: map[int]byte{i: 68}}
+		// 額外成本只測預算守門，不作原版記憶體量測證據。
+		o := &nativeObservation{kind: "string", step: uint64(n), ink: r.boxes[0], after: r.lastVal, stringRun: r, cost: 2 << 20}
+		if !j.add(o, f.canvas, nil) {
+			t.Fatal("valid charged source rejected")
+		}
+		if n > 0 {
+			f.canvas[i] = 0
+		}
+	}
+	if j.items[0].step != 0 || j.lost == 0 || j.evictedNonvisible != j.lost || j.evictedVisible != 0 {
+		t.Fatal("cost overflow discarded visible source")
+	}
+	nativeCapacityAccounting(t, j)
+}
+
+func TestNativeReprintIdentityNormalizesOnlyTime(t *testing.T) {
+	for _, kind := range []string{"dialog", "sea", "fixed"} {
+		t.Run(kind, func(t *testing.T) {
+			a := &nativeObservation{kind: kind, ink: image.Rect(30, 20, 31, 21), after: map[int]byte{6430: 68}}
+			b := *a
+			switch kind {
+			case "dialog":
+				a.dialogRun = &dialogRun{base: 123, start: 1, last: 2, chars: []dialogChar{{c: 'A'}}}
+				b.dialogRun = cloneNativeDialog(a.dialogRun)
+				b.dialogRun.start, b.dialogRun.last = 3, 4
+			case "sea":
+				a.seaRuns = []*seaEvent{{last: 1, next: 123, raw: []byte("A")}}
+				b.seaRuns = []*seaEvent{cloneNativeSea(a.seaRuns[0])}
+				b.seaRuns[0].last = 2
+			case "fixed":
+				a.fixed = &nativeFixed{id: "fixture", foreground: 68}
+				x := *a.fixed
+				b.fixed = &x
+				b.fixed.expired = true
+			}
+			if !nativeSameSource(a, &b) {
+				t.Fatal("reprint times treated as source identity")
+			}
+			switch kind {
+			case "dialog":
+				b.dialogRun.chars[0].c = 'B'
+			case "sea":
+				b.seaRuns[0].next++
+			case "fixed":
+				b.fixed.foreground++
+			}
+			if nativeSameSource(a, &b) {
+				t.Fatal("source or style change treated as reprint")
+			}
+		})
+	}
+}

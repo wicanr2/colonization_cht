@@ -5049,3 +5049,50 @@ confirmed來源審查：正式檔案集合查558項TXT，440字串查譯、68MEN
   路徑與重驗命令見規格055。
 - 限制：字級及來源證據只適用五列；日韓待母語校閱，未完成整包五語切換、設定列、
   HD或新交付。本輪不改規則、存檔或來源普查shown，原始圖像及字模只留workplace。
+
+## 2026-10-12：首座建築原版呼叫邊界與繪製差分
+
+路由命中IDA9.4與Docker衛生，使用use-ida-pro-9-4技能及既有
+ida-pro-9.4-idapython:py312-v1映像，ID4ac62de83339；核心9.4、Python3.12.3。
+目前UID1000的最小新資料庫探針先通過，再從唯讀VICEROY.EXE於容器暫存建立一次性資料庫。
+未修改正式資料庫、原版、dosgolem或原始函式名；暫存資料庫於工作完成刪除。
+研究入口為[目標186](docs/goals/186-display-settings-and-gameplay-video.md)的單建築定位與畫布寫入探針。
+
+- confirmed輸入：VICEROY.EXE為a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3；
+  BUILDING.SS為e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4。
+  既有寫入收據9a2c9a0ecbf2317878d61b2f8f497a11da7ab4d394b94555e4de4233a9bee018綁定正常玩家輸入，
+  第032幀編碼534bytes為7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a。
+- confirmed位元組定位：原版執行位址為dosgolem real-mode 0D46:01D2，
+  16bytes為268807035ef042ebb5905a5b035efe79；IDA MZ載入空間唯一對應EA0x1C532。
+  IDA自動導覽函式sub_1C36A為EA0x1C36A至0x1C563，seg068基址EA0x1C360，
+  名稱及自動邊界本身不當語意證據。兩種位址空間分開記錄，不以數值相同判定對應。
+- confirmed單次正常路徑：原版入口0D46:000A於67569117步，入口碼c82800005253505756相符；
+  原版來源寫入0D46:01D2於67569346步，DS:000E為5F3B:000E且完整534bytes一致。
+  原版返回121D:1554於67579078步，SP由59358至59368，與原始retf 6一致。
+  入口AX=33、CX=13、DX=56、BX=11688及64bytes堆疊僅保存原始數值，尚未賦予一般參數語意。
+- confirmed原版差分：畫布20bit線性基址0x2CAe0、320×200。
+  目的矩形[56,13,79,40]的440個不透明索引像素與第032幀逐點全同，各點只寫一次。
+  透明索引253的位置及矩形以外全部保持繪製前底圖；返回畫布與逐點寫入重建完全相同。
+  75900000步的CPU、完整RAM、VGA及DAC與既有無觀測對照全同。
+- 限制：只確認一次未裁切的正常建築呼叫，並未確認一般參數格式、動畫、遮擋、撤除、
+  重畫或完整場景順序。歷史GUI完整RAM差異原因仍未知，沒有將本次研究重播冒充該GUI同狀態。
+  不升READY、不選正式HD素材、不增加shown；所有原版衍生快照及圖像只留workplace。
+
+本機根目錄workplace/reports/goal186-display-hd/hd-building032-draw-boundary-20261012：
+
+| 證據 | SHA-256 |
+| --- | --- |
+| query.json | 5509f26c1fc8322394a306f597155fc2b72883998ea35d55049fd09e50c0da1a |
+| runtime-probe-r4/draw-boundary.json | f91890d9c4b9c72c6a252c3aed12c9e09ce1cfb89bac521c92149a7f39bc458a |
+| runtime-probe-r4/writes.json | 9a2c9a0ecbf2317878d61b2f8f497a11da7ab4d394b94555e4de4233a9bee018 |
+| runtime-probe-r4/before-draw.idx | f4fa574ec0f72d1aabcdc95c5f101961fa3106db00c1d03a638410b239436c6d |
+| runtime-probe-r4/after-draw.idx | f2112b28209021e59d7cac3d38b40aefda1b92c92bea86018997deeef4ab13e9 |
+| boundary-audit.json | 7d975aec0d905d9e53bf7b2f091b8b3140cfb672de2826ec9a122637a11f1e6d |
+| hd-canvas-boundary-probe | e4b1657b87ff18f804f7d0042a3a7a7ba39eb0b443b25c112e4eacb2b88973a3 |
+| tools/ida_hd_draw_boundary.py | 0637a99efe83a59264c959a2d2918736d6f29aaae8d354d8c8bb289e470e425c |
+| tools/probe_hd_canvas_writes.go | b36019bf55ec53550ab928c9205239fb165fc55653ededda02bfc4cc830b850d |
+
+重生：先依[IDA工具鏈入口](/home/anr2/ida_94_official/README.md)通過UID／映像最小探針，
+以IDA定位器核對原版及既有trace／proof指紋；再在Go映像內建置畫布寫入探針，
+以--draw-query指定query.json，沿既有--seed及--inputs正常重播。
+位置、輸入指紋與完整收據由上述JSON保存；所有容器無網路、資源有界且使用UID1000。

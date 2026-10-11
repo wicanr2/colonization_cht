@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"image"
 	"maps"
+	"reflect"
 	"slices"
 
 	"github.com/wicanr2/dosgolem/overlay"
@@ -38,6 +39,77 @@ type nativeJournal struct {
 	cursor                   image.Rectangle
 	buttons                  bool
 	accepted, rejected, lost int
+	sample                   func() nativeSurfaces
+	coalesced                int
+	evictedNonvisible        int
+	evictedVisible           int
+	evictedUnclassified      int
+}
+
+type nativeSurfaces struct {
+	canvas, buffer, indexed, palette []byte
+	mode                             byte
+}
+
+func (f nativeSurfaces) valid() bool {
+	return len(f.canvas) == 64000 && len(f.buffer) == 64000 && len(f.indexed) == 64000 && len(f.palette) == 768
+}
+
+func (f nativeSurfaces) visible(o *nativeObservation) bool {
+	if f.mode != 0x13 || !o.visible(f.canvas, f.buffer, f.indexed) {
+		return false
+	}
+	return o.fixed == nil || o.fixed.paletteSHA == "" || hash(f.palette) == o.fixed.paletteSHA
+}
+
+// 完整原文與原版樣式相同的重印只保留最近事件；不比較譯文或目標字模。
+func nativeSameSource(a, b *nativeObservation) bool {
+	if a.stringRun == nil && a.dialogRun == nil && a.fixed == nil && len(a.seaRuns) == 0 {
+		return false
+	}
+	if a.kind != b.kind || a.ink != b.ink || a.cursor != b.cursor || !maps.Equal(a.after, b.after) {
+		return false
+	}
+	if (a.stringRun == nil) != (b.stringRun == nil) || (a.dialogRun == nil) != (b.dialogRun == nil) ||
+		(a.fixed == nil) != (b.fixed == nil) || len(a.seaRuns) != len(b.seaRuns) {
+		return false
+	}
+	if a.stringRun != nil {
+		x, y := *a.stringRun, *b.stringRun
+		x.start, x.last, y.start, y.last = 0, 0, 0, 0
+		if !reflect.DeepEqual(x, y) {
+			return false
+		}
+	}
+	if a.dialogRun != nil {
+		x, y := *a.dialogRun, *b.dialogRun
+		x.start, x.last, y.start, y.last = 0, 0, 0, 0
+		if !reflect.DeepEqual(x, y) {
+			return false
+		}
+	}
+	for i := range a.seaRuns {
+		x, y := *a.seaRuns[i], *b.seaRuns[i]
+		x.last, y.last = 0, 0
+		if !reflect.DeepEqual(x, y) {
+			return false
+		}
+	}
+	if a.fixed != nil {
+		x, y := *a.fixed, *b.fixed
+		x.expired, y.expired = false, false
+		if !reflect.DeepEqual(x, y) {
+			return false
+		}
+	}
+	return true
+}
+
+func (j *nativeJournal) remove(index int) {
+	j.cost -= j.items[index].cost
+	copy(j.items[index:], j.items[index+1:])
+	j.items[len(j.items)-1] = nil
+	j.items = j.items[:len(j.items)-1]
 }
 
 // 固定欄位只存原版鍵、前後像素及原版樣式，不保存舊譯文或舊字模。
@@ -317,11 +389,41 @@ func (j *nativeJournal) add(o *nativeObservation, canvas, buffer []byte) bool {
 		j.rejected++
 		return false
 	}
-	// 保留完成事件的時間順序，不以矩形相交猜測原版是否已撤銷整段文字。
+	// 滿載時保留當次可見來源；回收或合併都維持其餘完成事件的相對順序。
+	var current nativeSurfaces
+	if j.sample != nil && (len(j.items) >= draftNativeMaxItems || j.cost+o.cost > draftNativeMaxCost) {
+		current = j.sample()
+		if !current.valid() {
+			j.rejected++
+			return false
+		}
+		for i := len(j.items) - 1; i >= 0; i-- {
+			if nativeSameSource(j.items[i], o) {
+				j.remove(i)
+				j.coalesced++
+			}
+		}
+	}
 	for len(j.items) > 0 && (len(j.items) >= draftNativeMaxItems || j.cost+o.cost > draftNativeMaxCost) {
-		j.cost -= j.items[0].cost
-		j.items[0] = nil
-		j.items = j.items[1:]
+		victim := 0
+		if j.sample == nil {
+			j.evictedUnclassified++
+		} else {
+			victim = -1
+			for i, old := range j.items {
+				if !current.visible(old) {
+					victim = i
+					break
+				}
+			}
+			if victim < 0 {
+				victim = 0
+				j.evictedVisible++
+			} else {
+				j.evictedNonvisible++
+			}
+		}
+		j.remove(victim)
 		j.lost++
 	}
 	j.items = append(j.items, o)
@@ -510,5 +612,7 @@ func (j *nativeJournal) export(canvas, buffer []byte, mode byte, indexed ...[]by
 	}
 	return map[string]any{"kind": "DRAFT-native-observations-not-language-rebuild", "items": items,
 		"cost": j.cost, "accepted": j.accepted, "rejected": j.rejected, "evicted_by_limit": j.lost,
+		"coalesced_reprints": j.coalesced, "evicted_nonvisible": j.evictedNonvisible,
+		"evicted_visible": j.evictedVisible, "evicted_unclassified": j.evictedUnclassified,
 		"max_items": draftNativeMaxItems, "max_cost": draftNativeMaxCost, "video_mode": mode}
 }
