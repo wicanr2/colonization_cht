@@ -125,5 +125,83 @@ FreeType2.12.1，以及hr-go-ebiten:1.26.7-2.9.9-r1的Go1.26.7。
 Go測試需將DRAFT_BUNDLE_ROOT設為候選包根目錄，並單獨指定上述兩個Go檔；
 不把原型加入正式組裝來源。
 
-規格維持DRAFT。尚缺獨立原文觀測、暫停時重建、正式整包交換、四語正常GUI及
+規格維持DRAFT。本批尚缺獨立原文觀測、暫停時重建、正式整包交換、四語正常GUI及
 完整原版同狀態驗證。沒有新增shown、完整五語或HD完成信用。
+
+## 2026-10-11：獨立原文觀測與暫停重建切片
+
+工具仍由隔離組裝器連結，正式前端及dosgolem未改：
+
+- [原文觀測器](../../tools/language_observations.go)與
+  [深拷貝及容量測試](../../tools/language_observations_test.go)：在翻譯前保存完整來源run、
+  逐字位置、字色、印前／印後像素、描邊、貨物角色、離屏來源及當次原版畫布。
+  字串接點在快捷鍵與描邊合併之後；海上選單等待完整39字序列。
+  無模板或排版失敗的原文同樣保留，不由譯文回推。
+- [隔離組裝器](../../tools/build_language_observation_probe.py)：固定正式來源指紋，
+  僅在新workplace模組插入觀測接點。--with-rebuild另外連結完整包載入及停止後重建切片。
+- [四側重播檢查器](../../tools/check_language_observation_replay.py)：比較觀測開啟、關閉、
+  前版與原文控制。--bundles指定完整候選根目錄時，另檢查停止DOS後的五語輸出。
+- [暫停重建切片](../../tools/language_rebuild_probe.go)與
+  [完整安全區測試](../../tools/language_rebuild_probe_test.go)：執行前驗五個完整候選，
+  載入既有對話與字串目錄；停止DOS後只用記憶體中的原文與Noto資料重建。
+  本切片尚未接入海上、固定欄或正式設定提交。
+
+觀測上限為256筆及32MiB的估算成本預算，超限移除最舊完成事件並計數。
+成本不是Go heap實測值。沒有以矩形重疊猜測整段原文已失效；
+收據中的visible只證明保留的來源像素仍相同，不授權正式覆蓋。
+重建還須驗完整安全區、來源角色、既有模板條件與目前VGA。
+歷史VGA同步、部分遮擋及畫面世代仍待補足，不把此切片當成完整生命週期。
+
+第一批只讀觀測以規格059已驗正常GUI的25筆輸入重播至76200000步。
+四側CPU、完整RAM、VGA、DAC、WAV與存檔全同；三側繁中合成RGB亦與GUI基準全同。
+共保存201筆、拒絕91筆、容量移除0筆；終點53筆的全部來源像素與完整RAM獨立核對相同。
+201筆含140字串、30對話、6離屏字串、24海上狀態及1完整選單。
+拒絕數不等於缺譯數，包含沒有完整墨跡的片段。沒有新增現場GUI或普查shown信用。
+
+五項新觀測單元測試及既有完整回歸共443項通過，零skip、go vet及建置通過。
+初跑缺少唯讀原版及既有字型收據，18項明確skip；補齊相同既有輸入後乾淨重跑。
+收據位於本規格上述language-resources-20261011根目錄：
+
+| 收據 | SHA-256 |
+|---|---|
+| native-tests-full.jsonl | b01f90ccb455d512256654751817f1de1c2e96b3f7b692150ea3f20d51577baa |
+| native-replays/check.json | c82b4112d4d194d823130df7724e86e66fbf467f046c019f26e7e98e7e45f237 |
+
+只讀觀測二進位為1ac3949a139ada56ebd6044c89b5f2050f5172305a997dd290a0166b0f0f444c。
+這是新增游標及原始byte匯出前的收據；後續重建批次另存新輸出，不覆寫。
+重生時以--reference指定既有前端模組的go.sum目錄，不能指定無go.sum的dosgolem根目錄。
+建置仍在既有Go工具映像，隔離副本掛載於/dosgolem；正常重播仍用既有驗證映像及有界Xvfb。
+完整原文、畫布、字型、圖集及畫面收據只留workplace，不納入Git。
+
+後續切片在完整載入時發現日韓各155個殖民地名稱缺少既有消費端所需括註。
+依[規格053的格式勘誤](053-language-catalogs.md#2026-10-11殖民地名稱的消費端格式勘誤)
+補上同列已驗原名，11項文本測試通過。四語字模及圖集重生後，
+256欄圖像與152組字形資料和前批相同，只更新兩語文本及相關綁定。
+最新五語候選及25反例共30子測項通過，原型446項Go零skip、go vet及建置通過。
+
+同一條25筆正常玩家輸入再次作四側重播，終點76200000步的完整原版狀態、
+RAM／VGA／DAC、WAV及存檔全同，三側既有繁中合成RGB與GUI基準全同。
+原型在DOS停止後依序重建繁中、簡中、日文、韓文及英文，不重啟或重印。
+每語用自己的完整包重新解原文，不沿用前語譯文；重建前後再比CPU與完整RAM。
+實際套用欄數為8／8／7／8／0，英文直接使用原版；四語差異只在當次安全區。
+日文Jamestown含原名放不下，記錄does-not-fit並保留英文；韓文同欄可用19px重新排出。
+這個結果證明同一份原文可以重新評估字級與回退，未驗正式設定交易或所有玩家畫面。
+已檢視日韓輸出，頂列、日期及海上組句尚未由這個對話／字串切片接手。
+
+| 最新收據，相對本規格的language-resources-20261011根目錄 | SHA-256 |
+|---|---|
+| noto-atlases-colony-fix/check.json | 3f18bd32b361e78a1841af379f4aa8dea2450ce2e89512c7df8372f97f105133 |
+| noto-fixed-colony-fix/check.json | 64993f8b4e8a961685c6c20376f4f28348d9424693b3f0cb807f196917f7b049 |
+| bundles-colony-fix/check.json | 8889384c1a7c209d0f53d779992525e847175851d48e241e7763f25461ee9b85 |
+| bundle-colony-fix-tests.jsonl | 98f370aea7bddaabdc8b27b80e70e492008b25667dd579084c5e9e91236f78af |
+| native-tests-r5.jsonl | 53c1d2fab4c73413043d76bdde5e9fdfac3c2846e9cceaf7aa638c095ebd8ad7 |
+| native-rebuild-replays-r5/check.json | 7d82b01bdc0d161ae765d504658871b678d2b7111418dbde0cd8528df61ff75c |
+| native-rebuilder-r5 | 26bb1c3f73c46f55ed82849964c4815f6017887845d3963d5d935fc6f1e38f42 |
+
+實測檢查器逐字副本保存在同根check-language-observation-replay-r5.py，
+指紋e00caaf724c4afa27e44d7c3a8e90f45919a71585de5d5f72ff3e0c26ebea141。
+受版控版本其後僅修正收據限制的描述，檢查條件未改。
+重驗以--with-rebuild組裝新模組，檢查器的--bundles指向bundles-colony-fix，
+其餘--binary、--formal、--gui、--launcher、--seed、--game及新的--output均須明確指定。
+正式前端未連結這些原型；規格060維持DRAFT，海上與固定欄重建、失效生命週期、
+正式整包交換、四語正常GUI及存讀檔仍待完成。沒有新增shown或HD完成信用。

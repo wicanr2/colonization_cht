@@ -1,0 +1,121 @@
+#!/usr/bin/env python3
+"""規格060 DRAFT：隔離觀測完整原文run，不修改正式顯示來源。"""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+
+ROOT = Path(__file__).resolve().parent.parent
+PINS = {
+    "tools/live_menu.go": "2f5ab4b81a9608a14f05280cfaba5027472e648fda6e34d3db4ba8855d0a0a53",
+    "tools/build_window_prototype.py": "4e16cca620b654915d59c044796ace6ce408d66f66623161ff53096c6fbd3a85",
+    "tools/dialog_overlay.go": "b93dcf45c424b8aac175f71da0e05d54782d9ccc36774fdd1ac7f0bbd69e8a50",
+    "tools/string_overlay.go": "9730c6095bbedb91497e3de0f2a773af32f30c8fdb0dcc9b60d1434d1ac61478",
+}
+
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__)
+    for name in ("reference", "output"):
+        p.add_argument("--" + name, type=Path, required=True)
+    p.add_argument("--with-rebuild", action="store_true", help="連結規格060的暫停重建切片，仍不改正式來源")
+    a = p.parse_args()
+    output = a.output.resolve()
+    if not (a.reference / "go.sum").is_file():
+        raise ValueError("--reference需指向既有前端模組的go.sum目錄，不能用無此檔的dosgolem根目錄")
+    if not Path("/.dockerenv").is_file() or not output.is_relative_to((ROOT / "workplace").resolve()) or \
+            output.exists() or not output.parent.is_dir() or output.parent.stat().st_uid != os.getuid():
+        raise ValueError("需Docker及新的workplace輸出，父目錄擁有者須相同")
+    for name, digest in PINS.items():
+        if sha((ROOT / name).read_bytes()) != digest:
+            raise ValueError("正式來源不同：" + name)
+    subprocess.run([sys.executable, str(ROOT / "tools/build_window_prototype.py"), "--repo", str(ROOT),
+                    "--reference", str(a.reference), "--output", str(output)], check=True, timeout=30)
+    s = (output / "adapter.go").read_text()
+    replacements = {
+        "\tseaOn := sea != nil && sea.glyphs != nil\n":
+            "\tjournal := &nativeJournal{enabled: *draftNativeCapture}\n\tseaOn := sea != nil && sea.glyphs != nil\n",
+        "\t\tinterleaved := len(ev.raw) == 2 && ev.raw[1] == 0\n":
+            "\t\tjournal.captureSea(ev, canvas(), m.Steps)\n\t\tinterleaved := len(ev.raw) == 2 && ev.raw[1] == 0\n",
+        "\t\t\tmenuRow := &seaRow{text: got, firstOld: map[int]byte{}, lastVal: map[int]byte{}}\n":
+            "\t\t\tjournal.captureSeaRuns(sea.menuRun, canvas(), m.Steps)\n\t\t\tmenuRow := &seaRow{text: got, firstOld: map[int]byte{}, lastVal: map[int]byte{}}\n",
+        "\tdialogFinish := func(r *dialogRun) {\n":
+            "\tdialogFinish := func(r *dialogRun) {\n\t\tjournal.captureDialog(r, canvas(), m.Steps)\n",
+        "\tstringFinish := func(r *stringRun) {\n\t\tif r.buf2 {\n":
+            "\tstringFinish := func(r *stringRun) {\n\t\tif r.buf2 {\n\t\t\tjournal.captureString(r, canvas(), m.Mem[0x3bb00:0x3bb00+64000], m.Steps)\n",
+        "\t\tr = str.outline(r) // 目標170：描邊字（同文 1 像素位移重印）併成一串\n":
+            "\t\tr = str.outline(r) // 目標170：描邊字（同文 1 像素位移重印）併成一串\n\t\tjournal.captureString(r, canvas(), m.Mem[0x3bb00:0x3bb00+64000], m.Steps)\n",
+        "\tdumpJSON(*out+\".json\", report)\n":
+            "\tif *draftNativeCapture {\n\t\tdumpJSON(*out+\".native.json\", journal.export(canvas(), m.Mem[0x3bb00:0x3bb00+64000], m.VideoMode()))\n\t}\n\tdumpJSON(*out+\".json\", report)\n",
+    }
+    for old, new in replacements.items():
+        if s.count(old) != 1:
+            raise ValueError("觀測接點不唯一：" + old.strip())
+        s = s.replace(old, new, 1)
+    # 同時保存收尾時的原版游標位置，供重建與遮擋檢查回查。
+    for call in ("journal.captureSea(", "journal.captureSeaRuns(", "journal.captureDialog(", "journal.captureString("):
+        lines = s.splitlines(keepends=True)
+        s = "".join((line[:len(line)-len(line.lstrip())] +
+                     "journal.cursor = cursorBox(int(d.Mouse.X), int(d.Mouse.Y))\n" + line)
+                    if call in line else line for line in lines)
+    (output / "adapter.go").write_text(s)
+    for name in ("language_observations.go", "language_observations_test.go"):
+        (output / name).write_bytes((ROOT / "tools" / name).read_bytes())
+    extra_sources = []
+    if a.with_rebuild:
+        extra_sources = ["tools/language_bundle_probe.go", "tools/language_rebuild_probe.go", "tools/language_rebuild_probe_test.go"]
+        for name in extra_sources:
+            (output / Path(name).name).write_bytes((ROOT / name).read_bytes())
+        old = "\tjournal := &nativeJournal{enabled: *draftNativeCapture}\n"
+        new = old + """\tvar draftTargets map[string]*draftLanguageTarget
+\tif *draftNativeBundles != "" {
+\t\tif !*draftNativeCapture { panic("重建原型需要完整原文觀測") }
+\t\tfiles := map[string][]byte{}
+\t\tfor _, name := range []string{"LABELS.TXT", "NAMES.TXT", "WOODCUT.TXT", "COLONY.TXT", "MENU.TXT", "GAME.TXT", "PEDIA.TXT", "VICEROY.EXE"} {
+\t\t\tfiles[name] = read(filepath.Join(*root, name))
+\t\t}
+\t\thelpOwned := map[string]bool{}
+\t\tif help != nil { helpOwned[help.id] = true }
+\t\tvar err error
+\t\tdraftTargets, err = draftPrepareTargets(*draftNativeBundles, files, dialogOwned, helpOwned)
+\t\tmust(err)
+\t}
+"""
+        if s.count(old) != 1:
+            raise ValueError("重建準備接點不唯一")
+        s = s.replace(old, new, 1)
+        old = '\tdumpJSON(*out+".json", report)\n'
+        new = """\tif draftTargets != nil {
+\t\tbeforeRAM, beforeSteps, beforeTicks, beforeFrames := hash(m.Mem), m.Steps, m.Ticks, m.Frames
+\t\tbeforeCPU := *m.CPU
+\t\tmust(draftExportRebuilds(draftTargets, journal, canvas(), m.Mem[0x3bb00:0x3bb00+64000], m.Mem[0xa0000:0xafa00], m.DAC[:], cursorBox(int(d.Mouse.X),int(d.Mouse.Y)),m.Steps,m.VideoMode(),*out))
+\t\tif beforeRAM != hash(m.Mem) || beforeSteps != m.Steps || beforeTicks != m.Ticks || beforeFrames != m.Frames || beforeCPU.R != m.CPU.R || beforeCPU.Seg != m.CPU.Seg || beforeCPU.IP != m.CPU.IP || beforeCPU.Flags != m.CPU.Flags || beforeCPU.Cycles != m.CPU.Cycles {
+\t\t\tpanic("暫停重建改變原版狀態")
+\t\t}
+\t\treport["draft_rebuild_native_state_unchanged"] = true
+\t}
+""" + old
+        if s.count(old) != 1:
+            raise ValueError("重建輸出接點不唯一")
+        s = s.replace(old, new, 1)
+        (output / "adapter.go").write_text(s)
+    subprocess.run(["gofmt", "-w", str(output / "adapter.go"), str(output / "language_observations.go"),
+                    str(output / "language_observations_test.go")], check=True, timeout=30)
+    for name in extra_sources:
+        subprocess.run(["gofmt", "-w", str(output / Path(name).name)], check=True, timeout=30)
+    sources = {name: sha((ROOT / name).read_bytes()) for name in [*PINS, "tools/build_language_observation_probe.py",
+                                                               "tools/language_observations.go", "tools/language_observations_test.go", *extra_sources]}
+    (output / "observation-sources.json").write_text(json.dumps({"kind": "DRAFT-native-observation-probe", "source_sha256": sources,
+        "reference_go_sum_sha256": sha((a.reference / "go.sum").read_bytes())}, indent=2) + "\n")
+    print("ASSEMBLED_DRAFT_NATIVE_OBSERVATION_PROBE", output)
+
+
+if __name__ == "__main__":
+    main()

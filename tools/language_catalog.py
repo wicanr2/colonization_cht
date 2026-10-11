@@ -101,6 +101,8 @@ def check_translation(base, text, status, notes, partial):
 
 def check_row_translation(original, translated, partial):
     check_translation(original["text"], translated["text"], translated["status"], translated["notes"], partial)
+    if original["catalog"] == "colonies" and translated["status"] != "draft":
+        require(translated["text"].find("（") > 0, "殖民地名稱缺少消費端原名括註或譯名")
     if original["catalog"] == "corpus" and original["row"].get("source_file") == "NAMES.TXT" and "," in original["text"]:
         before, after = original["text"].split(","), translated["text"].split(",")
         require(len(before) == len(after), "複合欄位項目數不同")

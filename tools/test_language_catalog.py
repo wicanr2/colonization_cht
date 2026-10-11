@@ -118,6 +118,19 @@ class LanguageCatalogTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "來源綁定"):
             catalog.make_views(self.base, changed, "zh-Hans")
 
+    def test_colony_display_format_is_checked_before_resources(self):
+        entries, _ = self.load(self.rows)
+        key = ("colonies", "COLONY.TXT:@ENGLISH:15")
+        for value in ("紐波特", "（Newport）"):
+            changed = copy.deepcopy(entries)
+            changed[key]["text"] = value
+            with self.assertRaisesRegex(ValueError, "殖民地名稱"):
+                catalog.make_views(self.base, changed, "zh-Hans")
+            rows = copy.deepcopy(self.rows)
+            next(r for r in rows if (r["catalog"], r["key"]) == key)["text"] = value
+            with self.assertRaisesRegex(ValueError, "殖民地名稱"):
+                self.load(rows)
+
     def test_real_compound_fields_preserve_numbers_and_command_codes(self):
         cases = []
         for entry in self.base.entries.values():
