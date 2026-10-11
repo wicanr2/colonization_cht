@@ -40,8 +40,28 @@ def main():
                     "--reference", str(a.reference), "--output", str(output)], check=True, timeout=30)
     s = (output / "adapter.go").read_text()
     replacements = {
+        '\trawSource := read(filepath.Join(*root, "GAME.TXT"))\n':
+            '\tnativeOn := *draftNativeCapture && validVersion\n\trawSource := read(filepath.Join(*root, "GAME.TXT"))\n',
+        "type staticItem struct {\n":
+            "type staticItem struct {\n\tnativeSource bool\n\tnativePrimary *byte\n",
+        '\t\t\tif it.reason == "" {\n\t\t\t\tvar mask struct {\n':
+            '''\t\t\tit.nativeSource = err == nil && hash(img) == get("image_sha256") && ok1 && ok2 && band.In(fp) && get("status") == "draft"
+\t\t\tif raw := get("ink_indices"); raw != "" {
+\t\t\t\tfor i, part := range strings.Split(raw, ",") {
+\t\t\t\t\tv, e := strconv.Atoi(part)
+\t\t\t\t\tif e != nil || v < 0 || v > 255 { it.nativeSource = false; break }
+\t\t\t\t\tif i == 0 { primary := byte(v); it.nativePrimary = &primary }
+\t\t\t\t}
+\t\t\t}
+\t\t\tif it.reason == "" {
+\t\t\t\tvar mask struct {
+''',
+        '\t\t\t\tit.mask, it.reason = nil, "duplicate-key"\n':
+            '\t\t\t\tit.mask, it.reason, it.nativeSource = nil, "duplicate-key", false\n',
+        '\t\t\tif err != nil {\n\t\t\t\tstr.reason = "missing-or-invalid-translation"\n':
+            '\t\t\tstr.cat = cat\n\t\t\tif err != nil {\n\t\t\t\tstr.reason = "missing-or-invalid-translation"\n',
         "\tseaOn := sea != nil && sea.glyphs != nil\n":
-            "\tjournal := &nativeJournal{enabled: *draftNativeCapture}\n\tseaOn := sea != nil && sea.glyphs != nil\n",
+            "\tjournal := &nativeJournal{enabled: nativeOn}\n\tseaOn := sea != nil && (sea.glyphs != nil || nativeOn)\n",
         "\t\tinterleaved := len(ev.raw) == 2 && ev.raw[1] == 0\n":
             "\t\tjournal.captureSea(ev, canvas(), m.Steps)\n\t\tinterleaved := len(ev.raw) == 2 && ev.raw[1] == 0\n",
         "\t\t\tmenuRow := &seaRow{text: got, firstOld: map[int]byte{}, lastVal: map[int]byte{}}\n":
@@ -53,7 +73,7 @@ def main():
         "\t\tr = str.outline(r) // 目標170：描邊字（同文 1 像素位移重印）併成一串\n":
             "\t\tr = str.outline(r) // 目標170：描邊字（同文 1 像素位移重印）併成一串\n\t\tjournal.captureString(r, canvas(), m.Mem[0x3bb00:0x3bb00+64000], m.Steps)\n",
         "\trender := func(label string) {\n":
-            "\trender := func(label string) {\n\t\tjournal.cursor = cursorBox(int(d.Mouse.X), int(d.Mouse.Y))\n\t\tjournal.buttons = d.Mouse.Buttons != 0\n\t\tjournal.expireFixed(canvas(), m.Mem[0xa0000:0xafa00], m.VideoMode())\n",
+            "\trender := func(label string) {\n\t\tjournal.cursor = cursorBox(int(d.Mouse.X), int(d.Mouse.Y))\n\t\tjournal.buttons = d.Mouse.Buttons != 0\n\t\tjournal.expireFixed(canvas(), m.Mem[0xa0000:0xafa00], m.VideoMode(), m.DAC[:])\n\t\tjournal.observeStatics(statics, canvas(), m.Mem[0xa0000:0xafa00], m.DAC[:], m.Steps, m.VideoMode())\n",
         "overlay.NewPatch(p.before, after, 320, 200, l.safe())":
             "draftFixedPatch(journal, draftFixedMenu(l), p.before, after, m.Steps)",
         "overlay.NewPatch(title.before, canvas(), 320, 200, image.Rect(65, 44, 253, 59))":
@@ -70,8 +90,6 @@ def main():
             "draftFixedPatch(journal, draftFixedCaption(caption), caption.before, canvas(), m.Steps)",
         "overlay.NewPatch(l.before, after, 320, 200, l.safe)":
             "draftFixedPatch(journal, draftFixedDifficulty(l), l.before, after, m.Steps)",
-        "overlay.NewPatch(clean, indexed, 320, 200, it.band)":
-            "draftFixedStaticPatch(journal, it, clean, indexed, canvas(), m.Steps)",
         "\tdumpJSON(*out+\".json\", report)\n":
             "\tif *draftNativeCapture {\n\t\tdumpJSON(*out+\".native.json\", journal.export(canvas(), m.Mem[0x3bb00:0x3bb00+64000], m.VideoMode(), m.Mem[0xa0000:0xafa00]))\n\t}\n\tdumpJSON(*out+\".json\", report)\n",
     }
@@ -79,9 +97,37 @@ def main():
         if s.count(old) != 1:
             raise ValueError("觀測接點不唯一：" + old.strip())
         s = s.replace(old, new, 1)
+    # 原文事件識別獨立於字模；合成部分仍保留原本的字型與控制模式守門。
+    boundary = '\t\tif *control || (*displayUIEnabled && displayLanguage == "en") {\n'
+    if s.count(boundary) != 1:
+        raise ValueError("原文觀測與合成分界不唯一")
+    prefix, suffix = s.split(boundary)
+    source_gates = {
+        "captionAnyInk = captionAnyInk || c.ink != nil": (1, "captionAnyInk = captionAnyInk || c.ink != nil || nativeOn"),
+        "rowsAnyInk = rowsAnyInk || r.ink != nil": (1, "rowsAnyInk = rowsAnyInk || r.ink != nil || nativeOn"),
+        "introAnyInk = introAnyInk || pg.normal != nil": (1, "introAnyInk = introAnyInk || pg.normal != nil || nativeOn"),
+        "retireAnyInk = retireAnyInk || f.ink != nil": (1, "retireAnyInk = retireAnyInk || f.ink != nil || nativeOn"),
+        "helpAnyInk := help != nil && help.normal != nil": (1, "helpAnyInk := help != nil && (help.normal != nil || nativeOn)"),
+        'dlgOn := dlg != nil && dlg.fontReason == ""': (1, 'dlgOn := dlg != nil && (dlg.fontReason == "" || nativeOn)'),
+        'strOn := str != nil && str.reason == ""': (1, 'strOn := str != nil && (str.reason == "" || nativeOn)'),
+        "title != nil && title.ink != nil": (3, "title != nil && (title.ink != nil || nativeOn)"),
+        "caption.ink == nil ||": (2, "(caption.ink == nil && !nativeOn) ||"),
+        "!*control": (11, "(!*control || nativeOn)"),
+        "|| *control": (2, "|| (*control && !nativeOn)"),
+    }
+    for old, (count, new) in source_gates.items():
+        if prefix.count(old) != count:
+            raise ValueError(f"原文守門數量不同：{old}: {prefix.count(old)} != {count}")
+        prefix = prefix.replace(old, new)
+    sea_layers = "\t\t\tfor _, layer := range []*seaLayer{sea.bar, sea.panel} {\n"
+    if prefix.count(sea_layers) != 1:
+        raise ValueError("海上原文收尾與舊字模建構分界不唯一")
+    prefix = prefix.replace(sea_layers, sea_layers +
+                            "\t\t\t\tif sea.glyphs == nil || *control { continue }\n", 1)
+    s = prefix + boundary + suffix
     # 同時保存收尾時的原版游標位置，供重建與遮擋檢查回查。
     for call in ("journal.captureSea(", "journal.captureSeaRuns(", "journal.captureDialog(", "journal.captureString(",
-                 "draftFixedPatch(", "draftFixedStaticPatch("):
+                 "draftFixedPatch("):
         lines = s.splitlines(keepends=True)
         s = "".join((line[:len(line)-len(line.lstrip())] +
                      "journal.cursor = cursorBox(int(d.Mouse.X), int(d.Mouse.Y))\n" + line)
@@ -94,7 +140,7 @@ def main():
         extra_sources = ["tools/language_bundle_probe.go", "tools/language_rebuild_probe.go", "tools/language_rebuild_probe_test.go"]
         for name in extra_sources:
             (output / Path(name).name).write_bytes((ROOT / name).read_bytes())
-        old = "\tjournal := &nativeJournal{enabled: *draftNativeCapture}\n"
+        old = "\tjournal := &nativeJournal{enabled: nativeOn}\n"
         new = old + """\tvar draftTargets map[string]*draftLanguageTarget
 \tif *draftNativeBundles != "" {
 \t\tif !*draftNativeCapture { panic("重建原型需要完整原文觀測") }

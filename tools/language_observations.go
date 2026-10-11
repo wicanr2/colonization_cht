@@ -42,15 +42,17 @@ type nativeJournal struct {
 
 // 固定欄位只存原版鍵、前後像素及原版樣式，不保存舊譯文或舊字模。
 type nativeFixed struct {
-	id                        string
-	safe                      image.Rectangle
-	before, after             []byte
-	foreground, shade, accent byte
-	shadow                    image.Point
-	layered, vga, expired     bool
-	buttonGuard               bool
-	mouseRule                 string
-	guard                     image.Rectangle
+	id                         string
+	safe                       image.Rectangle
+	before, after              []byte
+	foreground, shade, accent  byte
+	shadow                     image.Point
+	layered, vga, expired      bool
+	buttonGuard                bool
+	mouseRule                  string
+	guard                      image.Rectangle
+	fingerprint                image.Rectangle
+	fingerprintSHA, paletteSHA string
 }
 
 func (j *nativeJournal) captureFixed(def nativeFixed, before, after, canvas []byte, step uint64) bool {
@@ -58,7 +60,9 @@ func (j *nativeJournal) captureFixed(def nativeFixed, before, after, canvas []by
 		return false
 	}
 	if def.id == "" || len(def.id) > 256 || len(before) != 64000 || len(after) != 64000 || len(canvas) != 64000 ||
-		def.safe.Empty() || !def.safe.In(image.Rect(0, 0, 320, 200)) {
+		def.safe.Empty() || !def.safe.In(image.Rect(0, 0, 320, 200)) ||
+		(!def.fingerprint.Empty() && (!def.fingerprint.In(image.Rect(0, 0, 320, 200)) ||
+			!def.safe.In(def.fingerprint) || len(def.fingerprintSHA) != 64 || len(def.paletteSHA) != 64)) {
 		j.rejected++
 		return false
 	}
@@ -91,7 +95,7 @@ func (j *nativeJournal) captureFixed(def nativeFixed, before, after, canvas []by
 }
 
 // 當幀撤銷是單向的；之後像素碰巧相同不會重新作用，必須有新的已驗原版事件。
-func (j *nativeJournal) expireFixed(canvas, indexed []byte, mode byte) {
+func (j *nativeJournal) expireFixed(canvas, indexed []byte, mode byte, palette ...[]byte) {
 	if !j.enabled {
 		return
 	}
@@ -105,6 +109,10 @@ func (j *nativeJournal) expireFixed(canvas, indexed []byte, mode byte) {
 			source = indexed
 		}
 		if mode != 0x13 || len(source) != 64000 || !bytes.Equal(rectBytes(source, f.safe), f.after) {
+			f.expired = true
+		} else if !f.fingerprint.Empty() && hash(rectBytes(source, f.fingerprint)) != f.fingerprintSHA {
+			f.expired = true
+		} else if f.paletteSHA != "" && (len(palette) != 1 || hash(palette[0]) != f.paletteSHA) {
 			f.expired = true
 		}
 	}
@@ -160,12 +168,76 @@ func draftFixedLayered(id string, safe image.Rectangle) nativeFixed {
 	return nativeFixed{id: id, safe: safe, foreground: 68, shade: 47, accent: 149, layered: true, buttonGuard: true}
 }
 
-func draftFixedStaticPatch(j *nativeJournal, it *staticItem, before, after, canvas []byte, step uint64) (*overlay.Patch, error) {
-	p, err := overlay.NewPatch(before, after, 320, 200, it.band)
-	if err == nil && !it.on {
-		j.captureFixed(nativeFixed{id: it.id, safe: it.band, foreground: it.ink, vga: true}, before, after, canvas, step)
+// 規格034及bake_static_masks.py的原版指紋、紋理補回與選色；不讀取中文字模。
+func (j *nativeJournal) observeStatics(items []*staticItem, canvas, indexed, palette []byte, step uint64, mode byte) {
+	if !j.enabled || mode != 0x13 || len(canvas) != 64000 || len(indexed) != 64000 || len(palette) != 768 {
+		return
 	}
-	return p, err
+	for _, it := range items {
+		if it == nil || !it.nativeSource || it.fp.Empty() || !it.fp.In(image.Rect(0, 0, 320, 200)) ||
+			it.band.Empty() || !it.band.In(it.fp) || hash(rectBytes(indexed, it.fp)) != it.sha {
+			continue
+		}
+		active := false
+		for _, o := range j.items {
+			if o.fixed != nil && o.fixed.vga && o.fixed.id == it.id && o.fixed.paletteSHA == hash(palette) && o.visible(canvas, nil, indexed) {
+				active = true
+				break
+			}
+		}
+		if active {
+			continue
+		}
+		lum := func(v byte) int { return int(palette[int(v)*3]) + int(palette[int(v)*3+1]) + int(palette[int(v)*3+2]) }
+		var ink byte
+		if it.nativePrimary != nil {
+			ink = *it.nativePrimary
+		} else {
+			counts := map[byte]int{}
+			var order []byte
+			for _, v := range rectBytes(indexed, it.band) {
+				if counts[v] == 0 {
+					order = append(order, v)
+				}
+				counts[v]++
+			}
+			found := false
+			for _, v := range order {
+				if counts[v] >= 10 && (!found || lum(v) < lum(ink)) {
+					ink, found = v, true
+				}
+			}
+			if !found {
+				j.rejected++
+				continue
+			}
+		}
+		isText := func(v byte) bool {
+			if it.inkSet != nil {
+				return it.inkSet[v]
+			}
+			return lum(v) < 122
+		}
+		clean := bytes.Clone(indexed)
+		for y := it.band.Min.Y; y < it.band.Max.Y; y++ {
+			for x := it.band.Min.X; x < it.band.Max.X; x++ {
+				if !isText(indexed[y*320+x]) {
+					continue
+				}
+			search:
+				for dx := 1; dx < it.band.Dx(); dx++ {
+					for _, nx := range []int{x - dx, x + dx} {
+						if nx >= it.band.Min.X && nx < it.band.Max.X && !isText(indexed[y*320+nx]) {
+							clean[y*320+x] = indexed[y*320+nx]
+							break search
+						}
+					}
+				}
+			}
+		}
+		j.captureFixed(nativeFixed{id: it.id, safe: it.band, foreground: ink, vga: true,
+			fingerprint: it.fp, fingerprintSHA: it.sha, paletteSHA: hash(palette)}, clean, indexed, canvas, step)
+	}
 }
 
 func cloneNativeString(r *stringRun) *stringRun {
@@ -365,7 +437,8 @@ func (o *nativeObservation) visible(canvas, buffer []byte, indexed ...[]byte) bo
 			}
 			source = indexed[0]
 		}
-		return !f.expired && len(source) == 64000 && bytes.Equal(rectBytes(source, f.safe), f.after)
+		return !f.expired && len(source) == 64000 && bytes.Equal(rectBytes(source, f.safe), f.after) &&
+			(f.fingerprint.Empty() || hash(rectBytes(source, f.fingerprint)) == f.fingerprintSHA)
 	}
 	if o.stringRun != nil && o.stringRun.mixed {
 		return false // 混合位置未建立重建契約，保留原文及證據。
@@ -429,6 +502,9 @@ func (j *nativeJournal) export(canvas, buffer []byte, mode byte, indexed ...[]by
 			row["foreground"], row["shade"], row["accent"] = f.foreground, f.shade, f.accent
 			row["shadow_offset"], row["layered"], row["mouse_rule"], row["cursor_guard"] = f.shadow, f.layered, f.mouseRule, f.guard
 			row["identity_basis"] = fmt.Sprintf("reviewed native output / %s", f.id)
+			if !f.fingerprint.Empty() {
+				row["fingerprint"], row["fingerprint_sha256"], row["source_palette_sha256"] = f.fingerprint, f.fingerprintSHA, f.paletteSHA
+			}
 		}
 		items = append(items, row)
 	}

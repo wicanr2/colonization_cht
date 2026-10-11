@@ -306,6 +306,9 @@ func draftPaintFixed(out *image.RGBA, mask *draftFixedMask, o *nativeObservation
 	if !o.visible(canvas, nil, indexed) {
 		return nil, "fixed-native-expired-or-changed"
 	}
+	if f.paletteSHA != "" && hash(palette) != f.paletteSHA {
+		return nil, "fixed-native-palette-changed"
+	}
 	if f.buttonGuard && j.buttons {
 		return nil, "fixed-button-held"
 	}

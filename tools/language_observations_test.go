@@ -21,6 +21,82 @@ func nativeStringFixture() (*stringRun, []byte) {
 	return r, canvas
 }
 
+func TestNativeStaticWithoutGlyphs(t *testing.T) {
+	canvas := bytes.Repeat([]byte{1}, 64000)
+	indexed := bytes.Clone(canvas)
+	palette := bytes.Repeat([]byte{63}, 768)
+	palette[0], palette[1], palette[2] = 0, 0, 0
+	for x := 14; x < 26; x++ {
+		indexed[14*320+x], indexed[15*320+x] = 254, 254
+	}
+	primary := byte(254)
+	it := &staticItem{id: "native-static", fp: image.Rect(10, 10, 50, 20), band: image.Rect(12, 12, 40, 18),
+		nativeSource: true, nativePrimary: &primary, inkSet: map[byte]bool{254: true, 0: true, 253: true}}
+	it.sha = hash(rectBytes(indexed, it.fp))
+	j := &nativeJournal{enabled: true}
+	j.observeStatics([]*staticItem{it}, canvas, indexed, palette, 1, 0x13)
+	if j.accepted != 1 || len(j.items) != 1 || j.items[0].fixed.foreground != 254 ||
+		j.items[0].fixed.before[(14-12)*28+2] != 1 || !j.items[0].visible(canvas, nil, indexed) {
+		t.Fatal("fontless static source or native color not preserved")
+	}
+	j.expireFixed(canvas, indexed, 0x13, palette)
+	j.observeStatics([]*staticItem{it}, canvas, indexed, palette, 2, 0x13)
+	if j.accepted != 1 || j.items[0].fixed.expired {
+		t.Fatal("stable native signature recorded repeatedly or expired")
+	}
+	indexed[10*320+10] = 2 // 指紋矩形改變，文字帶仍完全相同。
+	j.expireFixed(canvas, indexed, 0x13, palette)
+	j.observeStatics([]*staticItem{it}, canvas, indexed, palette, 3, 0x13)
+	if !j.items[0].fixed.expired || j.accepted != 1 || j.items[0].visible(canvas, nil, indexed) {
+		t.Fatal("unchanged text band bypassed native fingerprint")
+	}
+	indexed[10*320+10] = 1
+	j.observeStatics([]*staticItem{it}, canvas, indexed, palette, 4, 0x13)
+	if j.accepted != 2 || j.items[1].fixed.expired || !j.items[0].fixed.expired {
+		t.Fatal("fresh complete signature did not create a new native observation")
+	}
+	palette[3]--
+	j.expireFixed(canvas, indexed, 0x13, palette)
+	if !j.items[1].fixed.expired {
+		t.Fatal("native palette change did not expire static erasure")
+	}
+	it.nativeSource = false
+	j.observeStatics([]*staticItem{it}, canvas, indexed, palette, 5, 0x13)
+	if j.accepted != 2 {
+		t.Fatal("invalid original source accepted")
+	}
+}
+
+func TestNativeStaticCommonColorMatchesBaker(t *testing.T) {
+	canvas := bytes.Repeat([]byte{1}, 64000)
+	indexed := bytes.Clone(canvas)
+	palette := bytes.Repeat([]byte{63}, 768)
+	for _, v := range []int{2, 3, 4} {
+		for c := 0; c < 3; c++ {
+			palette[v*3+c] = 0
+		}
+	}
+	// 兩個同亮度常見色維持掃描先後；最先出現的4只有一個像素，不得入選。
+	indexed[12*320+12] = 4
+	for x := 13; x < 25; x++ {
+		indexed[14*320+x], indexed[15*320+x] = 3, 2
+	}
+	it := &staticItem{id: "native-credit", fp: image.Rect(10, 10, 50, 20), band: image.Rect(12, 12, 40, 18), nativeSource: true}
+	it.sha = hash(rectBytes(indexed, it.fp))
+	j := &nativeJournal{enabled: true}
+	j.observeStatics([]*staticItem{it}, canvas, indexed, palette, 1, 0x13)
+	if j.accepted != 1 || j.items[0].fixed.foreground != 3 {
+		t.Fatal("native common color differs from stable baker selection")
+	}
+	quiet := &nativeJournal{}
+	quiet.observeStatics([]*staticItem{it}, canvas, indexed, palette, 1, 0x13)
+	j.observeStatics([]*staticItem{it}, canvas[:1], indexed, palette, 2, 0x13)
+	j.observeStatics([]*staticItem{it}, canvas, indexed, palette, 2, 0x12)
+	if quiet.accepted != 0 || j.accepted != 1 {
+		t.Fatal("disabled capture or invalid frame recorded a static source")
+	}
+}
+
 func TestDraftFixedSnapshotsAndOneWayExpiry(t *testing.T) {
 	before := bytes.Repeat([]byte{1}, 64000)
 	after := bytes.Clone(before)

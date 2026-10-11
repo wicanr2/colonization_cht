@@ -33,6 +33,8 @@ def main():
     for name in ("binary", "formal", "gui", "launcher", "seed", "game", "output"):
         parser.add_argument("--" + name, type=Path, required=True)
     parser.add_argument("--bundles", type=Path, help="另驗停止DOS後的對話／字串／海上四語重建切片")
+    parser.add_argument("--fontless", action="store_true", help="觀測側用原文控制，所有舊遊戲字模與圖集參數指向實際缺檔")
+    parser.add_argument("--rebuild-reference", type=Path, help="另核對同原版狀態的既有五語RGBA收據")
     parser.add_argument("--checkpoint", type=int, help="僅重播正常GUI輸入的前綴，與前版及原文控制互核；不冒充原GUI終點")
     parser.add_argument("--checkpoint-source", choices=("settings", "newgame"), default="settings",
                         help="checkpoint輸入來源；newgame僅接受既有已驗證新局GUI指紋")
@@ -75,6 +77,17 @@ def main():
                                  "historical_gui_binary_sha256": verified["binary_sha256"],
                                  "scope": "只沿用已驗GUI輸入；不宣稱與歷史新局程式或GUI同狀態"}
     root.mkdir()
+    absent_masks = {}
+    if args.fontless:
+        require(args.bundles, "無字模觀測反例需要完整目標包")
+        absent = root / "absent-legacy-masks"
+        absent.mkdir()
+        for flag in ("font-mask", "font-dir", "nation-card-font-dir", "nation-cards-rest-font-dir",
+                     "third-card-font-dir", "intro-mask-dir", "build1-font", "build-caption-font-dir",
+                     "help-mask-dir", "sea-atlas", "game-options-title-font", "game-options-rows-font-dir",
+                     "retire-font-dir", "static-mask-dir", "dialog-atlas", "string-atlas"):
+            absent_masks[flag] = str(absent / flag)
+        require(not any(Path(p).exists() for p in absent_masks.values()), "舊字模反例路徑實際存在")
     source_input_sha = sha(inputs.read_bytes())
     reference_dir, reference_stem = args.gui, "gui"
     expected_end = receipt["end"]
@@ -92,6 +105,11 @@ def main():
     observed_extra = ["--draft-native-capture"]
     if args.bundles:
         observed_extra.extend(["--draft-native-bundles", str(args.bundles)])
+    if args.fontless:
+        observed_extra.append("--control")
+        for flag, path in absent_masks.items():
+            observed_extra.extend(["--" + flag, path])
+    legacy_rgb = None
     for name, binary, extra in [("observed", args.binary, observed_extra),
                                 ("disabled", args.binary, []), ("formal", args.formal, []),
                                 ("original-control", args.formal, ["--control"])]:
@@ -116,13 +134,24 @@ def main():
         for suffix in ("memory", "final.idx", "final.pal"):
             require((run / ("run." + suffix)).read_bytes() == (reference_dir / (reference_stem + "." + suffix)).read_bytes(), name + "原版bytes不同")
         require(tree(run / "save") == tree(reference_dir / "save"), name + "存檔不同")
-        if name != "original-control":
-            with Image.open(run / "run.final.png") as a, Image.open(reference_dir / (reference_stem + ".final.png")) as b:
-                require(a.size == b.size and a.convert("RGB").tobytes() == b.convert("RGB").tobytes(), name + "合成RGB不同")
+        if name != "original-control" and not (name == "observed" and args.fontless):
+            with Image.open(run / "run.final.png") as im:
+                actual = (im.size, im.convert("RGB").tobytes())
+            if args.fontless and args.checkpoint is not None:
+                if legacy_rgb is None:
+                    legacy_rgb = actual
+                require(actual == legacy_rgb, name + "既有繁中合成RGB不同")
+            else:
+                with Image.open(reference_dir / (reference_stem + ".final.png")) as im:
+                    require(actual == (im.size, im.convert("RGB").tobytes()), name + "合成RGB不同")
         results[name] = {"state": report["state"], "binary_sha256": sha(binary.read_bytes()),
                          "wav_sha256": sha((run / "audio.wav").read_bytes()), "save_sha256": tree(run / "save")}
         print("PASS_NATIVE_OBSERVATION_REPLAY", name, baseline["steps"], flush=True)
     require(len({v["wav_sha256"] for v in results.values()}) == 1, "四側WAV不同")
+    if args.fontless:
+        require(not any(Path(p).exists() for p in absent_masks.values()), "重播產生了舊字模反例路徑")
+        with Image.open(root / "observed/run.final.png") as a, Image.open(root / "original-control/run.final.png") as b:
+            require(a.size == b.size and a.convert("RGB").tobytes() == b.convert("RGB").tobytes(), "無字模觀測側不是原版畫面")
     captured = json.loads((root / "observed/run.native.json").read_bytes())
     require(captured["kind"] == "DRAFT-native-observations-not-language-rebuild" and
             captured["cost"] <= captured["max_cost"] and len(captured["items"]) <= captured["max_items"], "觀測種類或容量不同")
@@ -151,6 +180,15 @@ def main():
             if item["kind"] == "fixed":
                 observed = b"".join(memory[base + y * 320 + x0:base + y * 320 + x1] for y in range(y0, y1))
                 require(not item["expired"] and observed == after, "固定欄宣告可見但整個安全區不同")
+                if "fingerprint" in item:
+                    fp = item["fingerprint"]
+                    a, b = fp["Min"], fp["Max"]
+                    require(0 <= a["X"] <= x0 < x1 <= b["X"] <= 320 and
+                            0 <= a["Y"] <= y0 < y1 <= b["Y"] <= 200, "靜態指紋不含完整文字帶")
+                    region = b"".join(memory[base+y*320+a["X"]:base+y*320+b["X"]] for y in range(a["Y"], b["Y"]))
+                    require(sha(region) == item["fingerprint_sha256"] and
+                            sha((root / "observed/run.final.pal").read_bytes()) == item["source_palette_sha256"],
+                            "可見靜態欄的獨立RAM指紋或DAC不同")
     require(any(visible.values()), "終點沒有完整來源像素可核對")
     rebuilds = {}
     if args.bundles:
@@ -193,6 +231,15 @@ def main():
                 require(outside.getbbox() is None, "重建改動畫面安全區以外")
             rebuilds[locale] = {"items": len(record["items"]), "rgba_sha256": record["rgba_sha256"],
                                "receipt_sha256": sha(Path(str(prefix) + ".json").read_bytes())}
+    rebuild_reference = None
+    if args.rebuild_reference:
+        require(args.bundles, "RGBA比較需要完整目標包")
+        reference = json.loads(args.rebuild_reference.read_bytes())
+        require(reference["result"].startswith("PASS_NATIVE_") and
+                reference["runs"]["observed"]["state"] == results["observed"]["state"], "RGBA參考的原版狀態不同")
+        for locale, record in rebuilds.items():
+            require(record["rgba_sha256"] == reference["draft_native_text_rebuilds"][locale]["rgba_sha256"], locale + "重建與既有RGBA不同")
+        rebuild_reference = sha(args.rebuild_reference.read_bytes())
     result = {"result": "PASS_NATIVE_OBSERVATIONS_FOUR_REPLAYS", "runs": results,
               "dos_inputs": len(receipt["inputs"]), "source_counts": dict(counts), "visible_source_counts": dict(visible),
               "accepted": captured["accepted"], "rejected": captured["rejected"], "evicted_by_limit": captured["evicted_by_limit"],
@@ -209,6 +256,11 @@ def main():
                                 "comparison": "正常GUI輸入前綴；四側同狀態，沒有此停點的新增現場GUI信用"}
         if checkpoint_provenance:
             result["checkpoint"]["provenance"] = checkpoint_provenance
+    if args.fontless:
+        result["fontless_observation"] = {"legacy_mask_overrides": absent_masks, "all_paths_absent": True,
+                                          "observed_rgb_equals_native_control": True}
+    if rebuild_reference:
+        result["rebuild_reference_sha256"] = rebuild_reference
     (root / "check.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
     require(all((p.stat().st_uid, p.stat().st_gid) == (os.getuid(), os.getgid()) for p in root.rglob("*")), "輸出擁有權不同")
     print(result["result"], sha((root / "check.json").read_bytes()))
