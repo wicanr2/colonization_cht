@@ -41,6 +41,8 @@ def main():
         require(set(loaded["initial_saves"]) == {"COLONY00.SAV", "COLONY09.SAV"}, "新行程初始存檔清冊不同")
         initial_extra["COLONY00.SAV"] = (args.gui / "save/COLONY00.SAV").read_bytes()
         scenes = ["main-menu", "load-slots", "load-success", "loaded-world", "colony"]
+    if any(c.get("scene") == "input-original" for c in gui.get("checks", [])):
+        scenes += ["input-original", "input-backspace", "input-restored", "input-cancelled"]
     require(gui["result"] == "PASS_NATIVE_LIVE_FIVE_LANGUAGE_GUI" and
             sorted((c["scene"], c["locale"]) for c in gui["checks"]) ==
             sorted((s, l) for s in scenes for l in ["zh-Hant", "zh-Hans", "ja", "ko", "en"]),

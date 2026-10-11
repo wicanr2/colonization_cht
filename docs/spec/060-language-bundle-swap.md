@@ -795,4 +795,80 @@ GUI探針現在要求四語存讀檔清單實際重建，不能只靠選項切�
 重生沿前節的GUI、重播及隔離組裝入口，採本節r21來源；原版、字型、存檔與畫面只留workplace。
 目前完成本次8／10列清單隔離修正，沒有把未知原版行為填入正式程式。
 規格060及057仍DRAFT；下一個明確缺口是輸入欄的逐欄Noto與來源守門，再進正式接線審查。
+
+## 2026-10-12：輸入欄字格觀測契約（DRAFT）
+
+正常城市改名基準位於本節既有本機根目錄的`native-live-input-baseline-gui-r21/`。
+35次五語切換通過，29筆實際DOS輸入至87400000步；`check.json`的SHA-256為
+`57486eee45b734fc89ab044bf4e285e4ac270c10e4195b271b8ac6a6e02d5a23`。
+原版重印`Name: Jamestown_`時，未變更的標籤沒有再次寫入；墨跡不能單獨證明完整字格。
+
+隔離觀測器可在既有0D21:00C6原文字元讀取後記錄ES:DI，不改原版記憶體或正式來源。
+逐字與零結尾配對各記錄字格起點、終點及是否取得；連續字串不猜補終點。
+每次只保留一份待完成段落，最多4096字格，完成時複製到不可變觀測並計入容量。
+來源去重必須比較這些定位；停用觀測不得配置或改動資料。
+本節只授權隔離取證，尚未授權輸入欄正式覆蓋；字級、安全區及游標仍待實測。
+
+`native-input-cells-r22/`以同一條29筆輸入重播至87400000步，完整CPU／RAM／VGA／DAC及
+WAV與基準相同。ES均為2CAE；標籤從(62,103)開始，姓名從(95,103)開始。
+原值的游標字格為[146,103,153,119]；刪字後起點為(141,103)，重打後回到(146,103)。
+姓名可見墨跡為[95,103,145,112]，最大單字墨跡高度8，底線墨跡[146,109,152,111]。
+原版`Name: `後有3像素額外間距，不能把標籤終點當姓名起點。
+
+隔離覆蓋只接受仍存活的GAME.TXT:0x00000F5C改名提示、既定標籤及上述行起點。
+姓名與末尾游標須各有完整逐字ES:DI配對，字格連續、在同一列且墨跡位於字格內。
+姓名只用可列印ASCII原值逐字繪製，不解析譯文標記；空值、缺字、未知位置或不適合時回原文。
+安全區由姓名起點、實際游標起點及該列墨跡計算，不含游標字格。
+Noto候選逐級量測，墨跡不超過原版8像素高度放大四倍，另留1原版像素給陰影及游標間距。
+基線以原版此欄的111像素位置及Noto大寫H的墨跡下緣對齊，大小寫沿同一基線；
+保留原版首寫前背景，陰影沿原版樣式。
+整個安全區須與來源畫布及當前VGA一致，取消或離開提示後撤銷。此契約仍只供DRAFT隔離驗證。
+每個非空姓名字元須仍有原版主色墨跡，已被其他寫入者抹除的文字不得因切換重新出現。
 不增加shown、完整五語、HD或發行信用。
+
+## 2026-10-12：r23d改名姓名隔離驗證
+
+完整558項Go、go vet及建置通過，零skip。四地區實際Noto另驗字格未知、錯ES、
+上下文過期、背景改寫、缺字模及來源已抹除的回退；空格、大小寫及大括號保持原值。
+結構fixture只證明守門及排版，不當作原版行為證據。
+
+正常GUI沿城市標題開啟改名，刪除末字、重打及取消，七個畫面共35組五語切換通過。
+四語姓名各選30px，原值Jamestown安全區[94,102,146,113]，刪字後Jamestow為
+[94,102,141,113]，重打恢復，取消後撤銷。英文逐像素保留原版。
+候選逐欄量測，30px只適用此欄，不外推其他輸入欄。
+
+30筆實際DOS輸入重播至89000000步，即時／只觀測／正式／原版控制四側的完整CPU、
+RAM、VGA、DAC、WAV及存檔全同；即時終點與本次GUI逐像素相同。
+即時及只觀測五語重建、暫停交易也全同。沒有修改原版資料、dosgolem、正式前端或譯文。
+
+r23c首輪在重打階段觸及2GiB容器上限，被Docker OOM終止；保留該次畫面及程序紀錄。
+原版文字與游標已驗的畫面沒有因此作完成收據。設定GOMEMLIMIT=1200MiB後，
+相同2GiB映像及操作乾淨重跑35組通過；r23d再加入已抹除來源守門，重跑35組及四側通過，
+該GUI容器峰值1822228480 bytes。重生須沿用此有界回收環境，不以增加上限掩蓋失敗。
+
+重生先用[隔離組裝器](../../tools/build_language_observation_probe.py)的--with-rebuild，
+採上述r23d來源及既有Go環境；GUI由[正常視窗探針](../../tools/probe_language_live_gui.py)
+追加--input-edit，之後用[四側檢查器](../../tools/check_language_live_replay.py)重播該GUI收據。
+原版、字型、存檔及圖片維持本機；基準與候選位於本規格既有語言資源根目錄。
+
+| 本機檔案 | SHA-256 |
+|---|---|
+| native-rebuilder-r22 | 266563961a5175462c100ccf5aadb914eae7347b9049256838d6b37ddbfdd9a3 |
+| native-runtime-r22/observation-sources.json | 18af209d3b335957be7885e8bcf35064a00e065b931ba5e97949a593e92d3cc7 |
+| native-input-cells-r22/check.json | a9a96243fda27f4a67ced752425b4ea5e26235a8afd4752ce6ea72c108b62ba1 |
+| native-rebuilder-r23d | 9912aa56f19fbe86e960789b544753c7b19197e9b267f5d0c363a668a1b0959a |
+| native-runtime-r23d/observation-sources.json | 973768b0f6323b93273f1007193e8415143d3c6da1bd6f9435ab9604cb6989d8 |
+| native-tests-r23d-full.jsonl | ff9437f2457ef18697bc4b84b2a7788bc4cc6b7edafeffc8809d8a411fef2acb |
+| native-live-input-gui-r23d/check.json | 7d7b3707db4994c8340723f4bfd3fd252abe7d0dbf4589330c19dbebba830c98 |
+| native-live-input-gui-r23d/gui.inputs.json | 13f8c12a8281496454fb77c6acc03b3259a1508bfa078f7042778baab8fe190d |
+| native-live-input-gui-r23d/resource.json | 4425b76a98b0b80b2d624e65a00dc7969d080771be943a76aedb0e545490c63a |
+| native-live-input-replays-r23d/check.json | fbc3682d451f766b2fc2bcff03f087f2d93ae2a2e9af4afcc96ef0720c1d0eb4 |
+| probe-language-live-input-gui-r23d.py | 3b3631781d48bbb04649725458e4fd206f6877a5c83931f3040123b2d7e5fc68 |
+| check-language-live-input-replay-r23d.py | 7ec3fad00a6e3b8658c18b373cc59f6a43e87299b5c1004309edf0048847beb9 |
+
+規格060及057仍DRAFT。改名姓名切片已驗；其他輸入欄與未知樣式維持原文回退，正式接線另審查。
+
+收尾核對入口為本機`native-input-final-audit-r23d.py`，SHA-256為`19f606fd22e2b67a4dfe331ab2d927c6dcaacc007d8eb34782fadbfe3eaa3eac`。
+
+本機收尾總收據`native-input-final-audit-r23d.json`的SHA-256為`4a2519fd42c6010c9362c2b5c6a48a45e86790e03ae37bc55d652ce91f70ee11`；
+35GUI、140筆暫停事件、12組游標逐像素及四側重播核對通過。

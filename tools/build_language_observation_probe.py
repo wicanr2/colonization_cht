@@ -68,6 +68,8 @@ def main():
             "\t\t\tjournal.captureSeaRuns(sea.menuRun, canvas(), m.Steps)\n\t\t\tmenuRow := &seaRow{text: got, firstOld: map[int]byte{}, lastVal: map[int]byte{}}\n",
         "\tdialogFinish := func(r *dialogRun) {\n":
             "\tdialogFinish := func(r *dialogRun) {\n\t\tjournal.captureDialog(r, canvas(), m.Steps)\n",
+        "\t\t\t\tif done := dlg.onRead(a, m.Mem[a], m.Steps); done != nil {\n\t\t\t\t\tdialogFinish(done)\n\t\t\t\t}\n":
+            "\t\t\t\tif done := dlg.onRead(a, m.Mem[a], m.Steps); done != nil {\n\t\t\t\t\tdialogFinish(done)\n\t\t\t\t}\n\t\t\t\tif nativeOn { journal.observeDialogCursor(dlg.run, m.Mem[a], c.R[golem.DI], c.Seg[golem.ES]) }\n",
         "\tstringFinish := func(r *stringRun) {\n\t\tif r.buf2 {\n":
             "\tstringFinish := func(r *stringRun) {\n\t\tif r.buf2 {\n\t\t\tjournal.captureString(r, canvas(), m.Mem[0x3bb00:0x3bb00+64000], m.Steps)\n",
         "\t\tr = str.outline(r) // 目標170：描邊字（同文 1 像素位移重印）併成一串\n":

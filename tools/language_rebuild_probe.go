@@ -901,6 +901,122 @@ func draftFitSlotDialog(t *draftLanguageTarget, st *dialogShown, o *nativeObserv
 }
 
 // 這個切片重建保留的原文；完整暫停交易另驗，不能據此升READY。
+// 規格060：只處理已驗改名對話的原值，不解析玩家文字中的譯文標記。
+func draftInputASCII(o *nativeObservation, prompt *dialogShown, fonts map[int]*dialogFont) (*dialogShown, string) {
+	if o == nil || o.dialogRun == nil || prompt == nil || prompt.id != "GAME.TXT:0x00000F5C" ||
+		prompt.phase == "expired" || len(o.canvas) != 64000 || !bytes.Equal(rectBytes(o.canvas, prompt.safe), prompt.afterSafe) {
+		return nil, "input-context"
+	}
+	r := o.dialogRun
+	raw := make([]byte, len(r.chars))
+	for i, ch := range r.chars {
+		raw[i] = ch.c
+	}
+	if len(raw) < 8 || !bytes.HasPrefix(raw, []byte("Name: ")) || raw[len(raw)-1] != '_' || len(o.dialogCells) != len(raw) {
+		return nil, "input-source"
+	}
+	for i, ch := range r.chars {
+		c := o.dialogCells[i]
+		start, end := image.Pt(int(c.StartDI)%320, int(c.StartDI)/320), image.Pt(int(c.EndDI)%320, int(c.EndDI)/320)
+		if !c.StartKnown || !c.EndKnown || c.StartES != 0x2cae || c.EndES != 0x2cae ||
+			start.Y != 103 || end.Y != 103 || end.X <= start.X || end.X-start.X > 32 ||
+			(!ch.box.Empty() && !ch.box.In(image.Rect(start.X, start.Y, end.X, start.Y+16))) ||
+			(i >= 7 && c.StartDI != o.dialogCells[i-1].EndDI) {
+			return nil, "input-cell"
+		}
+	}
+	if o.dialogCells[0].StartDI != 103*320+62 || o.dialogCells[6].StartDI != 103*320+95 {
+		return nil, "input-origin"
+	}
+	text := string(raw[6 : len(raw)-1])
+	for _, c := range []byte(text) {
+		if c < 0x20 || c > 0x7e {
+			return nil, "input-byte"
+		}
+	}
+	caret := int(o.dialogCells[len(raw)-1].StartDI) % 320
+	if caret <= 96 || caret > 218 {
+		return nil, "input-width"
+	}
+	var ink image.Rectangle
+	capHeight := 0
+	for _, ch := range r.chars[6 : len(raw)-1] {
+		ink = ink.Union(ch.box)
+		capHeight = max(capHeight, ch.box.Dy())
+		for c := range ch.colors {
+			if c != 68 && c != 47 && c != 128 {
+				return nil, "input-style"
+			}
+		}
+		if ch.c != ' ' {
+			visible := false
+			for y := ch.box.Min.Y; y < ch.box.Max.Y; y++ {
+				for x := ch.box.Min.X; x < ch.box.Max.X; x++ {
+					i := y*320 + x
+					value, ok := o.after[i]
+					visible = visible || ok && value == 68 && o.canvas[i] == 68
+					if !r.lastText[i] {
+						if _, written := r.firstOld[i]; written {
+							return nil, "input-erased"
+						}
+					}
+				}
+			}
+			if !visible {
+				return nil, "input-erased"
+			}
+		}
+	}
+	if ink.Empty() || capHeight > 9 || ink.Min.Y < 103 || ink.Max.Y > 112 {
+		return nil, "input-ink"
+	}
+	// 原版字型的大寫高度8、基線111來自此欄證據；姓名大小寫不改變基線。
+	var plan *retainedASCIIPlan
+	baseline := 0
+	for size := stringFloorPx; size <= stringFontPx; size++ {
+		f := fonts[size]
+		if f == nil {
+			continue
+		}
+		bounds, ok := retainedTextBounds(f, text)
+		capital, capOK := retainedTextBounds(f, "H")
+		if !ok || !capOK || capital.Dy() > 8*4 || bounds.Dx() > (caret-96)*4 {
+			continue
+		}
+		y := 9*4 - capital.Max.Y
+		if bounds.Min.Y+y < 4 || bounds.Max.Y+y+4 > 11*4 {
+			continue
+		}
+		if plan == nil || size > plan.size {
+			plan = &retainedASCIIPlan{size, bounds, f}
+			baseline = y
+		}
+	}
+	if plan == nil {
+		return nil, "input-font"
+	}
+	safe := image.Rect(94, 102, caret, 113)
+	normal := image.NewAlpha(image.Rect(0, 0, safe.Dx()*4, safe.Dy()*4))
+	x, y := 4-plan.bounds.Min.X, baseline
+	for _, c := range text {
+		dialogBlit(normal, plan.font.glyphs[c], x, y)
+		x += plan.font.widths[c]
+	}
+	shadow := image.NewAlpha(normal.Rect)
+	dialogBlit(shadow, normal, 4, 4)
+	if !draftAlphaBounds([]*image.Alpha{normal, shadow}).In(normal.Rect) {
+		return nil, "input-mask"
+	}
+	before := bytes.Clone(o.canvas)
+	for i, alive := range r.lastText {
+		if alive && image.Pt(i%320, i/320).In(safe) {
+			before[i] = r.firstOld[i]
+		}
+	}
+	return &dialogShown{id: "STRING:input-ascii", zh: text, safe: safe, size: plan.size,
+		normal: normal, shadow: shadow, normalC: 68, shadowC: 47, before: before, afterSafe: rectBytes(o.canvas, safe), phase: "waiting-screen"}, ""
+}
+
 func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer, indexed, palette []byte, cursor image.Rectangle, step uint64, mode byte) (*image.RGBA, map[string]any, error) {
 	if len(canvas) != 64000 || len(buffer) != 64000 || len(indexed) != 64000 || len(palette) != 768 {
 		return nil, nil, fmt.Errorf("invalid native frame")
@@ -913,6 +1029,7 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 	}
 	d := &dialogRuntime{cat: t.dlg, misses: map[string]int{}}
 	dialogSources := map[*dialogShown]*nativeObservation{}
+	var inputASCII *dialogShown
 	s := &stringRuntime{cat: t.str, misses: map[string]int{}}
 	var context []byte
 	var contextStep uint64
@@ -955,6 +1072,16 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 			}
 		}
 		if r := o.dialogRun; r != nil {
+			for _, prompt := range []*dialogShown{d.prev, d.cur} {
+				if prompt != nil && prompt.id == "GAME.TXT:0x00000F5C" {
+					if candidate, why := draftInputASCII(o, prompt, t.str.fonts); candidate != nil {
+						inputASCII = candidate
+					} else if strings.HasPrefix(dialogShownText(r.chars), "Name: ") {
+						inputASCII = nil
+						d.misses[why+"\t"+dialogShownText(r.chars)]++
+					}
+				}
+			}
 			st, shown, why := draftDialogContext(d, r, context).finish(cloneNativeDialog(r), context, o.step)
 			if st != nil {
 				draftKeepDialog(d, st, context)
@@ -1011,7 +1138,16 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 			seaMisses[why+"\t"+row.row.text]++
 		}
 	}
-	for _, st := range []*dialogShown{d.prev, d.cur} {
+	if inputASCII != nil {
+		livePrompt := false
+		for _, prompt := range []*dialogShown{d.prev, d.cur} {
+			livePrompt = livePrompt || prompt != nil && prompt.id == "GAME.TXT:0x00000F5C" && prompt.phase != "expired" && bytes.Equal(rectBytes(canvas, prompt.safe), prompt.afterSafe)
+		}
+		if !livePrompt {
+			inputASCII = nil
+		}
+	}
+	for _, st := range []*dialogShown{d.prev, d.cur, inputASCII} {
 		if st == nil || st.phase == "expired" || !bytes.Equal(rectBytes(canvas, st.safe), st.afterSafe) {
 			continue
 		}

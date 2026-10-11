@@ -249,6 +249,82 @@ func TestNativeDialogRetainsCharactersAndErasure(t *testing.T) {
 	}
 }
 
+func TestNativeDialogCursorPairsAndOwnership(t *testing.T) {
+	d := &dialogRuntime{}
+	j := &nativeJournal{enabled: true}
+	read := func(a uint32, value byte, di uint16) {
+		if old := d.onRead(a, value, 10); old != nil {
+			t.Fatal("unexpected completion")
+		}
+		j.observeDialogCursor(d.run, value, di, 0x2cae)
+	}
+	read(1234, 'A', 33022)
+	read(1235, 0, 33028)
+	read(1234, ' ', 33028)
+	read(1235, 0, 33032)
+	r := d.run
+	r.chars[0].box = image.Rect(62, 103, 67, 111)
+	r.chars[0].colors = map[byte]int{68: 1}
+	r.firstOld[33022], r.lastText[33022] = 9, true
+	canvas := make([]byte, 64000)
+	canvas[33022] = 68
+	pending := j.pendingCells
+	if !j.captureDialog(r, canvas, 20) {
+		t.Fatal("paired source rejected")
+	}
+	if j.pendingDialog != nil || j.pendingCells != nil {
+		t.Fatal("completed source retained")
+	}
+	o := j.items[0]
+	if len(o.dialogCells) != 2 || o.dialogCells[0] != (nativeDialogCell{33022, 33028, 0x2cae, 0x2cae, true, true}) ||
+		o.dialogCells[1] != (nativeDialogCell{33028, 33032, 0x2cae, 0x2cae, true, true}) {
+		t.Fatalf("cursor evidence lost: %+v", o.dialogCells)
+	}
+	pending[0].StartDI++
+	if o.dialogCells[0].StartDI != 33022 {
+		t.Fatal("observation aliases pending data")
+	}
+	x := *o
+	x.dialogCells = append([]nativeDialogCell(nil), o.dialogCells...)
+	if !nativeSameSource(o, &x) {
+		t.Fatal("same source not equal")
+	}
+	x.dialogCells[0].StartDI++
+	if nativeSameSource(o, &x) {
+		t.Fatal("different source cursor coalesced")
+	}
+	rows := j.export(canvas, nil, 0x13)["items"].([]map[string]any)
+	if len(rows[0]["dialog_cells"].([]nativeDialogCell)) != 2 {
+		t.Fatal("export lost cells")
+	}
+}
+
+func TestNativeDialogCursorBoundsAndUnknownCells(t *testing.T) {
+	r := &dialogRun{readPos: 1, chars: []dialogChar{{c: 'A'}}}
+	j := &nativeJournal{}
+	j.observeDialogCursor(r, 'A', 1, 2)
+	if j.pendingDialog != nil || j.pendingCells != nil {
+		t.Fatal("disabled observer mutated")
+	}
+	j.enabled = true
+	j.observeDialogCursor(r, 'A', 1, 2)
+	abandoned := j.pendingCells
+	next := &dialogRun{readPos: 1, chars: []dialogChar{{c: 'B', contig: true}}, contig: true}
+	j.observeDialogCursor(next, 'B', 3, 4)
+	if j.pendingDialog != next || j.pendingCells[0].StartKnown {
+		t.Fatal("abandoned or continuous cursor reused")
+	}
+	abandoned[0].StartDI = 99
+	if j.pendingCells[0].StartDI != 0 {
+		t.Fatal("pending cells alias abandoned run")
+	}
+	next.chars = make([]dialogChar, 4097)
+	j.observeDialogCursor(next, 'C', 3, 4)
+	if j.pendingDialog != nil || j.pendingCells != nil {
+		t.Fatal("unbounded cursor metadata")
+	}
+}
+
 func TestNativeSeaMenuRetainsOriginalGlyphPositions(t *testing.T) {
 	canvas := make([]byte, 64000)
 	var runs []*seaEvent

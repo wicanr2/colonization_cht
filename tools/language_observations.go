@@ -18,6 +18,15 @@ var draftNativeCapture = flag.Bool("draft-native-capture", false, "規格060隔�
 const draftNativeMaxItems = 256
 const draftNativeMaxCost = 32 << 20
 
+type nativeDialogCell struct {
+	StartDI    uint16 `json:"start_di"`
+	EndDI      uint16 `json:"end_di"`
+	StartES    uint16 `json:"start_es"`
+	EndES      uint16 `json:"end_es"`
+	StartKnown bool   `json:"start_known"`
+	EndKnown   bool   `json:"end_known"`
+}
+
 type nativeObservation struct {
 	kind           string
 	step           uint64
@@ -27,6 +36,7 @@ type nativeObservation struct {
 	after          map[int]byte
 	stringRun      *stringRun
 	dialogRun      *dialogRun
+	dialogCells    []nativeDialogCell
 	seaRuns        []*seaEvent
 	fixed          *nativeFixed
 	cost           int
@@ -44,6 +54,35 @@ type nativeJournal struct {
 	evictedNonvisible        int
 	evictedVisible           int
 	evictedUnclassified      int
+	pendingDialog            *dialogRun
+	pendingCells             []nativeDialogCell
+}
+
+// 只記錄原版逐字、零結尾配對的游標，不從墨跡或連續字串猜補字格。
+func (j *nativeJournal) observeDialogCursor(r *dialogRun, value byte, di, es uint16) {
+	if !j.enabled {
+		return
+	}
+	if r == nil || len(r.chars) == 0 || len(r.chars) > 4096 {
+		j.pendingDialog, j.pendingCells = nil, nil
+		return
+	}
+	if j.pendingDialog != r {
+		j.pendingDialog, j.pendingCells = r, nil
+	}
+	for len(j.pendingCells) < len(r.chars) {
+		j.pendingCells = append(j.pendingCells, nativeDialogCell{})
+	}
+	i := len(r.chars) - 1
+	if r.contig || r.chars[i].contig {
+		return
+	}
+	c := &j.pendingCells[i]
+	if value != 0 && r.readPos%2 == 1 {
+		*c = nativeDialogCell{StartDI: di, StartES: es, StartKnown: true}
+	} else if value == 0 && r.readPos%2 == 0 && c.StartKnown {
+		c.EndDI, c.EndES, c.EndKnown = di, es, true
+	}
 }
 
 type nativeSurfaces struct {
@@ -84,7 +123,7 @@ func nativeSameSource(a, b *nativeObservation) bool {
 	if a.dialogRun != nil {
 		x, y := *a.dialogRun, *b.dialogRun
 		x.start, x.last, y.start, y.last = 0, 0, 0, 0
-		if !reflect.DeepEqual(x, y) {
+		if !reflect.DeepEqual(x, y) || !slices.Equal(a.dialogCells, b.dialogCells) {
 			return false
 		}
 	}
@@ -464,6 +503,11 @@ func (j *nativeJournal) captureDialog(r *dialogRun, canvas []byte, step uint64) 
 	if !j.enabled || r == nil {
 		return false
 	}
+	var cells []nativeDialogCell
+	if j.pendingDialog == r && len(j.pendingCells) == len(r.chars) {
+		cells = slices.Clone(j.pendingCells)
+	}
+	j.pendingDialog, j.pendingCells = nil, nil
 	if r.readPos%2 != 0 || len(r.chars) == 0 || len(r.chars) > 4096 || len(r.lastText) > 64000 || len(canvas) != 64000 {
 		j.rejected++
 		return false
@@ -486,12 +530,12 @@ func (j *nativeJournal) captureDialog(r *dialogRun, canvas []byte, step uint64) 
 		j.rejected++
 		return false
 	}
-	cost := (len(r.firstOld)+len(r.lastText)+len(after))*32 + len(r.chars)*64
+	cost := (len(r.firstOld)+len(r.lastText)+len(after))*32 + len(r.chars)*64 + len(cells)*16
 	for _, ch := range r.chars {
 		cost += len(ch.colors) * 32
 	}
 	return j.add(&nativeObservation{kind: "dialog", step: step, ink: ink, after: after,
-		dialogRun: cloneNativeDialog(r), cost: cost}, canvas, nil)
+		dialogRun: cloneNativeDialog(r), dialogCells: cells, cost: cost}, canvas, nil)
 }
 
 func (j *nativeJournal) captureSea(r *seaEvent, canvas []byte, step uint64) bool {
@@ -583,6 +627,7 @@ func (j *nativeJournal) export(canvas, buffer []byte, mode byte, indexed ...[]by
 			}
 			row["text"], row["source_base"], row["characters"] = string(text), r.base, chars
 			row["raw"] = text
+			row["dialog_cells"] = o.dialogCells
 			row["shadow_written"], row["other_writes"] = r.shadowWritten, r.others
 		}
 		if len(o.seaRuns) > 0 {

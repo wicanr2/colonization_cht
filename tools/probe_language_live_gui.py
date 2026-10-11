@@ -33,6 +33,7 @@ def main():
     for name in ["binary", "launcher", "game", "seed", "inputs", "ui-font", "ui-catalog", "bundles", "output"]:
         parser.add_argument("--" + name, type=Path, required=True)
     parser.add_argument("--save-cycle", action="store_true", help="追加正常存檔插槽、成功通知及返回世界的五語驗證")
+    parser.add_argument("--input-edit", action="store_true", help="追加正常城市改名、刪字、重打及取消的五語驗證")
     parser.add_argument("--reload-save", type=Path, help="先前已驗正常存檔GUI目錄")
     parser.add_argument("--reload-proof", type=Path, help="該GUI的四側重播check.json")
     args = parser.parse_args()
@@ -195,6 +196,12 @@ def main():
                     need(actual.tobytes() == original.tobytes(), "英文沒有使用原版像素")
                 else:
                     need(record.get("items") and actual.tobytes() != original.tobytes(), "非英文沒有任何已驗覆蓋")
+                    if scene in {"input-original", "input-backspace", "input-restored"}:
+                        value = "Jamestow" if scene == "input-backspace" else "Jamestown"
+                        need(any(i.get("id") == "STRING:input-ascii" and i.get("text") == value and
+                                 i.get("font_px", 0) >= 18 for i in record["items"]), "輸入原值沒有使用當地Noto")
+                    if scene == "input-cancelled":
+                        need(not any(i.get("id") == "STRING:input-ascii" for i in record["items"]), "取消後殘留姓名覆蓋")
                     if scene == "save-success":
                         need(any(i.get("kind") == "dialog" and i.get("id") == "GAME.TXT:0x000007B9"
                                  for i in record["items"]), "當次成功通知沒有實際重建")
@@ -277,6 +284,28 @@ def main():
         click(152 * 4, 112 * 4 + 48)
         wait(lambda s: s.get("step", 0) >= before + 8000000, "切換後未繼續進城")
         switch_round("colony")
+        if args.input_edit:
+            # 既有正常改名操作：goal185-player-experience/play_renamed_port_probe.py。
+            before = status()["step"]
+            click(352, 12 + 48)
+            wait(lambda s: s.get("step", 0) >= before + 3000000 and
+                 any(i.get("id") == "STRING:input-label" for i in live(s).get("items", [])),
+                 "正常改名輸入欄未開啟")
+            switch_round("input-original")
+            def input_key(key):
+                before = status()["step"]
+                xdo("keydown", key)
+                time.sleep(0.08)
+                xdo("keyup", key)
+                wait(lambda s: s.get("step", 0) >= before + 1000000, "原版編輯未完成")
+            input_key("BackSpace")
+            switch_round("input-backspace")
+            input_key("n")
+            switch_round("input-restored")
+            input_key("Escape")
+            wait(lambda s: not any(i.get("id") == "STRING:input-label" for i in live(s).get("items", [])),
+                 "取消後輸入標籤未撤銷")
+            switch_round("input-cancelled")
         before = status()["step"]
         xdo("keydown", "Escape")
         time.sleep(0.08)

@@ -5142,3 +5142,25 @@ native-slot-real-fit-r21.json為9193387fdc34f1711a44ad2e54d57bbca6affadc36b72d7c
 CPU、完整RAM、VGA、DAC、WAV與存檔全同，英文逐像素等於原版。
 完整指紋、私用來源入口及重生流程見[規格060](docs/spec/060-language-bundle-swap.md#2026-10-12r21插槽清單隔離驗證)。
 正式前端與dosgolem未改，057及060仍DRAFT，不增加shown或HD信用。
+
+## 2026-10-12：改名輸入欄的逐字游標與原值覆蓋
+
+入口：[規格060](docs/spec/060-language-bundle-swap.md#2026-10-12輸入欄字格觀測契約draft)；
+既有來源與標籤證據沿[規格035](docs/spec/035-dialog-overlay-draft.md)。
+原版VICEROY.EXE SHA-256為a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3；
+GAME.TXT為67a6b5e22d1addc1ae13658d0d7824622f6d21c6c2bfdefc91f9749450cc2e3a。
+工具為隔離dosgolem 82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7、
+Ebiten2.9.9及Pillow9.4。沒有對原始輸入寫入。
+
+confirmed：r22在執行期實模式0D21:00C6讀字點記錄ES:DI，ES為2CAE。
+GAME.TXT:0x00000F5C是檔案偏移的改名提示鍵；此數值不與執行期CS:IP混用。
+提示之後的原文Name: Jamestown_逐字配對完整，姓名從(95,103)開始；
+標籤從(62,103)開始，標籤結束後另有3像素間距。
+原值游標起點(146,103)，刪字後(141,103)，重打後回到(146,103)。
+原版末尾底線保留，非英文姓名以Noto繪製；沒有改變DOS文字輸入或新增中文輸入法。
+
+confirmed：未改變的標籤在重印時沒有墨跡寫入，但逐字ES:DI仍完整。
+因此不由空墨跡推定來源字元未繪製，也不以英文字形推定字格。
+r22與先前35GUI基準的完整原版狀態、RAM、VGA、DAC及WAV相同。
+r23d四語逐欄選30px，安全區不含原版游標；正常刪字、重打與取消經35GUI及四側重播驗證。
+其他輸入欄及未知樣式尚未取證，保留原文。所有本機路徑、指紋與重生入口見規格060。

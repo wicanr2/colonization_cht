@@ -129,6 +129,82 @@ func draftActualTargetsForTest(t *testing.T) map[string]*draftLanguageTarget {
 	return targets
 }
 
+func TestDraftInputASCIIBoundsAndLiteralText(t *testing.T) {
+	// 結構fixture只驗證守門與排版；原版證據另由正常GUI及同輸入重播驗證。
+	widths := []int{6, 6, 7, 5, 3, 3, 6, 6, 7, 5, 6, 4, 5, 7, 5, 7}
+	makeInput := func(value string) (*nativeObservation, *dialogShown) {
+		canvas := bytes.Repeat([]byte{128}, 64000)
+		r := &dialogRun{firstOld: map[int]byte{}, lastText: map[int]bool{}}
+		o := &nativeObservation{dialogRun: r, canvas: canvas}
+		o.after = map[int]byte{}
+		x := 62
+		for i, c := range []byte("Name: " + value + "_") {
+			if i == 6 {
+				x += 3
+			}
+			end := x + widths[i]
+			box := image.Rect(x, 103, end-1, 111)
+			if c == ' ' {
+				box = image.Rectangle{}
+			}
+			r.chars = append(r.chars, dialogChar{c: c, box: box, colors: map[byte]int{68: 1}})
+			if !box.Empty() {
+				pixel := 103*320 + x
+				r.firstOld[pixel], r.lastText[pixel], o.after[pixel], canvas[pixel] = 128, true, 68, 68
+			}
+			o.dialogCells = append(o.dialogCells, nativeDialogCell{uint16(103*320 + x), uint16(103*320 + end), 0x2cae, 0x2cae, true, true})
+			x = end
+		}
+		prompt := &dialogShown{id: "GAME.TXT:0x00000F5C", safe: image.Rect(61, 86, 219, 98)}
+		prompt.afterSafe = rectBytes(canvas, prompt.safe)
+		return o, prompt
+	}
+	for locale, target := range draftActualTargetsForTest(t) {
+		if locale == "en" {
+			continue
+		}
+		t.Run(locale, func(t *testing.T) {
+			for _, value := range []string{"Jamestown", "Jam{town}", "jam  town"} {
+				o, prompt := makeInput(value)
+				original := bytes.Clone(o.canvas)
+				st, why := draftInputASCII(o, prompt, target.str.fonts)
+				if st == nil || why != "" || st.zh != value || st.safe.Max.X != 146 || st.size < 18 {
+					t.Fatalf("input rejected or altered: %+v %s", st, why)
+				}
+				if !bytes.Equal(original, o.canvas) || st.safe.Overlaps(image.Rect(146, 103, 153, 119)) {
+					t.Fatal("original source or caret changed")
+				}
+				if draftAlphaInk(st.normal).Empty() || draftAlphaInk(st.shadow).Empty() {
+					t.Fatal("missing input glyphs")
+				}
+				for name, change := range map[string]func(){
+					"unknown cursor":  func() { o.dialogCells[6].EndKnown = false },
+					"wrong segment":   func() { o.dialogCells[6].StartES = 0xa000 },
+					"unknown context": func() { prompt.id = "OTHER" },
+					"expired context": func() { prompt.phase = "expired" },
+					"source changed":  func() { o.canvas[87*320+62]++ },
+				} {
+					oldCell, oldID, oldPhase := o.dialogCells[6], prompt.id, prompt.phase
+					change()
+					if got, _ := draftInputASCII(o, prompt, target.str.fonts); got != nil {
+						t.Fatal("accepted", name)
+					}
+					copy(o.canvas, original)
+					o.dialogCells[6], prompt.id, prompt.phase = oldCell, oldID, oldPhase
+				}
+				if got, _ := draftInputASCII(o, prompt, nil); got != nil {
+					t.Fatal("missing font accepted")
+				}
+				o.dialogRun.lastText[103*320+95] = false
+				delete(o.after, 103*320+95)
+				if got, _ := draftInputASCII(o, prompt, target.str.fonts); got != nil {
+					t.Fatal("erased source revived")
+				}
+			}
+		})
+	}
+}
+
 func TestDraftActualLanguageBundleTransaction(t *testing.T) {
 	targets := draftActualTargetsForTest(t)
 	for _, locale := range []string{"zh-Hant", "zh-Hans", "ja", "ko", "en"} {
