@@ -9,7 +9,8 @@
 confirmed：182e911的正式前端仍在啟動時各自讀取13表與67份字模資源。
 67份包含64份固定字模及3份海上／對話／字串圖集；各有自己的來源、譯文、
 字型及幾何契約。入口為[live_menu.go](../../tools/live_menu.go)，
-基準資源盤點收據見下方。四語完整Noto原型只有對話與字串圖集，不能涵蓋其餘65份資源。
+基準資源盤點收據見下方。此前Noto圖集原型只有對話與字串兩類；
+本輪已補齊固定字模及海上圖集候選，完整資源組裝見下文，正式前端尚未讀取。
 
 confirmed：[dialogShown](../../tools/dialog_overlay.go)只保留譯文、逐行原文、
 安全區及已繪字模，段落正文的原始字元與字格沒有完整保留。
@@ -59,3 +60,70 @@ workplace/reports/goal186-display-hd/display-phrases-20261011/runtime-resource-i
 工具為colonization-verification:20261007-runtime-r2內Python3.11.2，
 輸入為規格059已綁定的本機bundle。每份資源的字型、資料表雜湊、欄位、字級及尺寸
 均保存於收據；未把Cubic尺寸推定為四語Noto排版。
+
+固定欄位的隔離量測入口為[組裝器](../../tools/build_language_resource_probe.py)及
+[載入後匯出器](../../tools/language_resource_probe.go)。它在正式來源通過既有綁定後，
+匯出64份固定字模的來源身份、原版墨跡、安全區及目前位置；隨即結束，不執行DOS。
+輸出只留workplace，不能把其中Cubic字級或字模尺寸當成Noto定案。
+
+## 2026-10-11：64欄量測與完整資源候選
+
+四語各64欄共256欄完成離線量測。工具入口如下：
+
+- [逐欄烘製器](../../tools/preview_noto_fixed_masks.py)：以正式載入後匯出、原版墨跡及安全區
+  量測四地區Noto，不把Cubic字級當成新字級。
+- [獨立檢查器](../../tools/check_noto_fixed_masks.py)：核對13表、完整譯文、地區、來源綁定、
+  Alpha長度、定位、陰影及PNG。長文逐字核對，沒有裁切或省略。
+- [候選包組裝器](../../tools/preview_noto_language_bundle.py)：組裝每語13表、64固定字模及
+  海上／對話／字串3圖集；英文候選只宣告使用原版顯示，不含替代字形。
+- [Go隔離載入器](../../tools/language_bundle_probe.go)與
+  [實際資源測試](../../tools/language_bundle_probe_test.go)：讀取完整候選，驗證每檔指紋、
+  原版安全區、字模層、字型地區、文本綁定、各級字格及95個ASCII。
+  正式組裝器沒有連結這兩檔。
+
+原版欄位墨跡大部分來自正式來源的固定幾何。八列選項另取
+[原版逐欄差分](../../tools/prepare_goal113_options_preview.py)；介紹頁標題8列、正文9列及
+10列行距依[規格025](025-first-nation-introduction-draft.md)，教學正文7列及10列行距依
+[已驗量測](../../tools/preview_goal142_help.py)。製作名單5列及載入訊息7列依
+[規格034](034-static-text-overlay-draft.md)。這些來源在烘製器內固定指紋。
+包含陰影的原版改色聯集，沒有推定為前景獨立高度。
+
+每欄候選從該欄原文字高的四倍值計算，最低為其2/3且不低於12px；
+依完整文字的墨跡、可用寬高及原版對齊選擇最相稱的合格字級。
+主選單五列仍量得24／24／20／20／24px，其他欄位分別量測。
+問句及開場字幕保留原版雙行上限；介紹及教學分開量標題、正文與行距，
+大括號強調另畫一層。每份候選保存原版字高證據、全部試字級、最終字級、
+基線、文字行、定位、安全區、實際墨跡及回原文策略。
+烘製先畫在額外留白的畫布上核對，避免以裁切後bbox冒充無越界。
+
+候選包是DRAFT內部索引，尚未定為正式發行格式。每份manifest列出語言、字型地區、
+來源版本、授權指紋及80個檔案的SHA-256。海上圖集沿既有22至15px八級格式，
+字格取完整Noto圖集；海上各欄位的實際排版仍待原文重建後驗證。
+準備函式只回傳已載入資料，不存取DOS、設定保存或生效中的前端物件。
+
+Go驗證有30個子測項，含5個實際語言候選及25個錯誤輸入，零skip、go vet通過。
+兩次乾淨重生的固定字模565檔、完整候選包326檔逐位元組相同。
+反例涵蓋缺檔、錯語言／地區／來源／授權、錯內層文本綁定、錯安全區、
+錯Alpha、漏字級及缺ASCII。內層反例重算外層檔案hash，避免只驗到外層指紋。
+所有失敗均回傳錯誤及nil候選；尚未驗正式提交、取消及保存失敗後的資源交換。
+
+本機根目錄為workplace/reports/goal186-display-hd/language-resources-20261011/：
+
+| 收據 | SHA-256 |
+|---|---|
+| fields.json | 2be579643f7655f635a6bec4adcbae9a1fb11a4734d3b8daf80177934e15b61d |
+| noto-fixed/check.json | 93f35b3d28c40256b5e2e622254dccfd5f860401444e062e604b21ac2222fc1f |
+| bundles/check.json | b9d3e4874bb5433ebecfbb094697b1b3c5508aed6e4ab9479a7d0f7ccc01b893 |
+| bundle-probe-tests.jsonl | bad11a0190acf2628753d9764e3fbee35b8a8bd0a3b67c957e64f34e5cadb453 |
+
+工具鏈為colonization-verification:20261007-runtime-r2的Python3.11.2、Pillow9.4.0、
+FreeType2.12.1，以及hr-go-ebiten:1.26.7-2.9.9-r1的Go1.26.7。
+字型及授權仍依[固定來源](../../font/README.md)。
+重驗時先以逐欄烘製器的--fields、--baseline-masks、--noto、--license與新的--output
+生成固定資源，再以候選包組裝器的--fixed、--fields、--baseline-masks、--atlases與
+新的--output組裝。--atlases指定規格057最新2022筆的完整四語圖集。
+Go測試需將DRAFT_BUNDLE_ROOT設為候選包根目錄，並單獨指定上述兩個Go檔；
+不把原型加入正式組裝來源。
+
+規格維持DRAFT。尚缺獨立原文觀測、暫停時重建、正式整包交換、四語正常GUI及
+完整原版同狀態驗證。沒有新增shown、完整五語或HD完成信用。
