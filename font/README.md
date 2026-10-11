@@ -40,6 +40,8 @@ python3 -B /repo/tools/preview_language_field_layout.py \
 
 兩個輸出都須改為尚不存在的workplace子目錄。排版原型依賴上述本機歷史量測與審查收據，缺檔或指紋不符即停止；可重取字型不代表能在缺少原版證據時重建正式覆蓋。下一步為欄位規格審查與逐欄字形烘製，通過READY後才接入正式顯示路徑。
 
+首組六列私用字模及實際Go消費端驗證見[規格054](../docs/spec/054-noto-field-atlas-draft.md)。原型沿現有字模格式保留Noto左右伸出的墨跡，六列字距最多增加1px；只驗18px與此六列，不授權正式替換或其他欄位。
+
 ## 已發布版的Cubic固定輸入
 
 - 字型檔名：`Cubic_11.ttf`

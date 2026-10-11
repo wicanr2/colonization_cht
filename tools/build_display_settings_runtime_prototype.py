@@ -93,7 +93,7 @@ def main():
     sources["text/frontend-ui.tsv"] = sha((ROOT / "text/frontend-ui.tsv").read_bytes())
     result = {"kind": "draft-display-settings-runtime-prototype-not-release", "source_sha256": sources,
               "assembled_sha256": {p.name: sha(p.read_bytes()) for p in output.iterdir() if p.is_file()},
-              "limitations": ["UI font is a candidate; game font choice remains pending.",
+              "limitations": ["Noto game font is selected; production field atlases are not installed.",
                               "Only existing zh-Hant and original English gameplay display can activate.",
                               "Other game language packs and HD are not installed."]}
     (output / "prototype-sources.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
