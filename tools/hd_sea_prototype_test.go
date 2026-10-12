@@ -91,8 +91,15 @@ func TestHDSeaPrototypeNativeLifecycle(t *testing.T) {
 	need(err)
 	var negatives []string
 	entryChecked, finishChecked, ownershipChecked := false, false, false
+	bufferChecked := false
 	m.SetBeforeInstruction(func() {
 		h.beforeInstruction()
+		if !bufferChecked && h.sea.bufferSaves > 0 && m.CPU.IP == 0xca {
+			if cases, ok := hdSeaBufferNegatives(t, h.sea); ok {
+				negatives = append(negatives, cases...)
+				bufferChecked = true
+			}
+		}
 		if !entryChecked && h.sea.active {
 			negatives = append(negatives, hdSeaEntryNegatives(t, h.sea)...)
 			entryChecked = true
@@ -107,6 +114,9 @@ func TestHDSeaPrototypeNativeLifecycle(t *testing.T) {
 	var records []map[string]any
 	expected := map[uint64]int{75400000: 621, 119000000: 621, 121400000: 460, 125600000: 460,
 		102200000: 0, 106200000: 0, 110600000: 0, 129800000: 0, 134000000: 0}
+	// 來源為獨立唯讀追蹤的正常路徑，見規格062背景保存／還原表。
+	seaExpected := map[uint64]int{64600000: 33123, 75400000: 0, 102200000: 27647,
+		106200000: 31044, 110600000: 33123, 119000000: 0, 129800000: 33123, 134000000: 33102}
 	capture := func() {
 		if at == len(points) {
 			return
@@ -133,6 +143,12 @@ func TestHDSeaPrototypeNativeLifecycle(t *testing.T) {
 		}
 		if want, ok := expected[p.Step]; ok && record["painted"].(int) != want {
 			t.Fatalf("HD point %d step %d: %+v want painted %d", at, p.Step, record, want)
+		}
+		if want, ok := seaExpected[p.Step]; ok {
+			sea, present := record["sea"].(map[string]any)
+			if !present || sea["owned"] != want || sea["painted"] != want {
+				t.Fatalf("海洋來源點數不同：step=%d receipt=%+v want=%d", p.Step, record, want)
+			}
 		}
 		if !ownershipChecked {
 			if sea, ok := record["sea"].(map[string]any); ok && sea["painted"].(int) > 0 {
@@ -193,7 +209,7 @@ func TestHDSeaPrototypeNativeLifecycle(t *testing.T) {
 	if at != 49 || h.accepted != 10 || h.cursorRestores != 1050 || h.sea.accepted == 0 {
 		t.Fatalf("原型未走完已驗路徑：points=%d accepted=%d rejected=%d paints=%d restores=%d", at, h.accepted, h.rejected, h.cursorPaints, h.cursorRestores)
 	}
-	if !entryChecked || !finishChecked || !ownershipChecked || len(negatives) != 23 {
+	if !entryChecked || !finishChecked || !ownershipChecked || !bufferChecked || len(negatives) != 31 {
 		t.Fatalf("海洋反例未完整驗證：%v", negatives)
 	}
 	d.Close()
@@ -224,7 +240,89 @@ func hdSeaClone(p *hdSeaPrototype) *hdSeaPrototype {
 	for k, v := range p.pending {
 		n.pending[k] = v
 	}
+	n.backing = map[uint32]hdSeaCell{}
+	for k, v := range p.backing {
+		n.backing[k] = v
+	}
 	return &n
+}
+
+// 只在正常重播實際還原指令之前取樣；正向副本執行該原始REP，不製造遊戲狀態。
+func hdSeaBufferNegatives(t *testing.T, p *hdSeaPrototype) ([]string, bool) {
+	t.Helper()
+	c := p.h.m.CPU
+	if c.Seg[golem.CS] != 0xcba || c.IP != 0xca {
+		return nil, false
+	}
+	src := int(c.Seg[golem.DS])*16 + int(c.R[golem.SI])
+	dst := int(c.Seg[golem.ES])*16 + int(c.R[golem.DI])
+	width := int(c.R[golem.CX]) * 2
+	if dst < int(hdBuildingCanvas) || dst+width > int(hdBuildingCanvas)+64000 {
+		return nil, false
+	}
+	at := -1
+	for i := 0; i < width; i++ {
+		if v := p.backing[uint32(src+i)]; v.owned && v.native == p.h.m.Mem[src+i] {
+			at = i
+			break
+		}
+	}
+	if at < 0 {
+		return nil, false
+	}
+	source := uint32(src + at)
+	dest := uint32(dst + at)
+	pixel := int(dest - hdBuildingCanvas)
+	cell := p.backing[source]
+	execute := func(n *hdSeaPrototype) {
+		n.h.m.WatchWrite(0, uint32(len(n.h.m.Mem)-1), func(_ *golem.Machine, a uint32, old, value byte) { n.memoryWrite(a, old, value) })
+		if err := n.h.m.CPU.Step(); err != nil {
+			t.Fatal("隔離原版複製指令失敗", err)
+		}
+	}
+	positive := hdSeaClone(p)
+	execute(positive)
+	if positive.visible[pixel] != cell || positive.h.m.Mem[dest] != cell.native {
+		t.Fatal("實際背景來源未還原")
+	}
+	pc := int(c.Seg[golem.CS])*16 + int(c.IP)
+	mutations := []struct {
+		name   string
+		change func(*hdSeaPrototype)
+	}{
+		{"buffer-unknown-same-write", func(n *hdSeaPrototype) { n.memoryWrite(source, n.h.m.Mem[source], n.h.m.Mem[source]) }},
+		{"buffer-unknown-changed-write", func(n *hdSeaPrototype) {
+			old := n.h.m.Mem[source]
+			n.h.m.Mem[source] ^= 1
+			n.memoryWrite(source, old, n.h.m.Mem[source])
+		}},
+		{"buffer-stale-native-source", func(n *hdSeaPrototype) { n.h.m.Mem[source] ^= 1 }},
+		{"buffer-missing-ownership", func(n *hdSeaPrototype) { delete(n.backing, source) }},
+		{"buffer-wrong-copy-code", func(n *hdSeaPrototype) { n.h.m.Mem[pc+2] ^= 1 }},
+		{"buffer-wrong-copy-site", func(n *hdSeaPrototype) {
+			n.h.m.CPU.IP = 0x300
+			a := int(c.Seg[golem.CS])*16 + 0x300
+			copy(n.h.m.Mem[a:a+16], p.h.m.Mem[pc:pc+16])
+		}},
+		{"buffer-wrong-source-pointer", func(n *hdSeaPrototype) { n.h.m.CPU.Seg[golem.DS] = 0 }},
+	}
+	var names []string
+	for _, test := range mutations {
+		n := hdSeaClone(p)
+		test.change(n)
+		execute(n)
+		if n.visible[pixel].owned {
+			t.Fatal("背景還原未拒絕反例", test.name)
+		}
+		names = append(names, test.name)
+	}
+	// 取已完成還原的獨立副本，以未知來源覆寫同值，亦須撤銷。
+	n := hdSeaClone(positive)
+	n.memoryWrite(dest, n.h.m.Mem[dest], n.h.m.Mem[dest])
+	if n.visible[pixel].owned {
+		t.Fatal("還原後未知同值覆寫未撤銷")
+	}
+	return append(names, "buffer-restored-unknown-overwrite"), true
 }
 func hdSeaEntryNegatives(t *testing.T, p *hdSeaPrototype) []string {
 	t.Helper()

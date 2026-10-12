@@ -39,18 +39,49 @@ one('                    if graphics == "original" or not hd.get("painted"):',' 
 one('                        ImageDraw.Draw(safe).rectangle((224, 52, 315, 159), fill=1)','                        if hd.get("painted"): ImageDraw.Draw(safe).rectangle((224, 52, 315, 159), fill=1)\n                        safe=ImageChops.logical_or(safe,sea_mask(hd))')
 one('                    difference = ImageChops.difference(actual, original)\n                    outside','                    if graphics=="hd":safe=ImageChops.logical_or(safe,sea_mask(hd))\n                    difference = ImageChops.difference(actual, original)\n                    outside')
 one('                if locale == "en":','''                sea=hd.get("sea",{})
+                sea_targets={"sea-hover-near":(32,32),"sea-hover-far":(96,48),"sea-cursor-returned":(32,32)}
+                if scene in sea_targets:
+                    need((e["dos_mouse"]["x"],e["dos_mouse"]["y"])==sea_targets[scene],"海面收據沒有保留實際游標位置")
                 if graphics=="hd" and not fallback and scene in {"world","saved-world","hd-exited-again","sea-hover-near","sea-hover-far","sea-cursor-returned"}:
                     need(sea.get("painted",0)>0,"正常世界缺海洋HD")
+                if graphics=="hd" and not fallback and scene in {"world","saved-world","hd-exited-again"}:
+                    need(sea.get("owned")==33123 and sea.get("painted")==33123,"背景還原後海洋來源不完整")
                 if graphics=="hd" and scene in {"colony","hd-reentered-colony","hd-building-hover","hd-encyclopedia-closed","hd-building-encyclopedia"}:
                     need(sea.get("painted",0)==0,"城內仍有海洋HD")
                 if locale == "en":''')
 s=s.replace('"world", "saved-world", "hd-exited-again"','"world", "saved-world", "hd-exited-again", "sea-hover-near", "sea-hover-far", "sea-cursor-returned"')
 one('            switch_round("world")','''            switch_round("world")
             for scene,x,y in [("sea-hover-near",32,32),("sea-hover-far",96,48),("sea-cursor-returned",32,32)]:
-                before=status()["step"]
-                move(x*4,y*4+48)
-                wait(lambda state:state.get("step",0)>=before+2000000,"海面正常游標移動未完成")
                 switch_round(scene)''')
+one('                if scene == "hd-building-hover":','''                sea_targets={"sea-hover-near":(32,32),"sea-hover-far":(96,48),"sea-cursor-returned":(32,32)}
+                if scene in sea_targets:
+                    hover_start=status()["step"]
+                    x,y=sea_targets[scene]
+                    move(x*4,y*4+48)
+                    wait(lambda state:state.get("step",0)>=hover_start+2000000,"海面正常游標移動未完成")
+                if scene == "hd-building-hover":''')
+one('        def switch_round(scene):','        map_recoveries=[]\n        def switch_round(scene):')
+one('                record = live(s)','                map_fallback=False\n                record = live(s)')
+one('''                        need(len(maps) == 1 and maps[0].get("source") == "Jamestown" and
+                             "Jamestown" in maps[0].get("text", "") and maps[0].get("font_px") == expected,
+                             "正常世界或返回世界缺少完整地區字型城名")''','''                        map_fallback=(not maps and (graphics=="original" or fallback) and
+                                      record.get("string_misses",{}).get("map-source-or-occlusion-changed\\tJamestown",0)>0)
+                        if map_fallback:
+                            if graphics=="original":
+                                rect=(136*4,118*4,203*4,130*4)
+                                need(actual.crop(rect).tobytes()==original.crop(rect).tobytes(),"失配城名未完整回原圖")
+                        else:
+                            need(len(maps) == 1 and maps[0].get("source") == "Jamestown" and
+                                 "Jamestown" in maps[0].get("text", "") and maps[0].get("font_px") == expected,
+                                 "正常世界或返回世界缺少完整地區字型城名")''')
+one('                event_actions = same_state(first, step)','''                event_actions = same_state(first, step)
+                if map_fallback:
+                    recovered=wait(lambda state:any(i.get("native_surface")=="map" and i.get("source")=="Jamestown" and
+                                       i.get("font_px")==expected for i in live(state).get("items",[])),"原版來源完成後城名未恢復")
+                    need(recovered["display"]["current"]=={"language":locale,"graphics":graphics},"恢復時顯示設定不同")
+                    map_recoveries.append({"scene":scene,"locale":locale,"graphics":graphics,"fallback_step":step,
+                                           "recovered_step":recovered["step"],"reason":"map-source-or-occlusion-changed"})''')
+one('        result["verified_cursor_points"] = cursor_points','        result["map_source_recoveries"]=map_recoveries\n        result["verified_cursor_points"] = cursor_points')
 one('if c["graphics"] != "hd" or not c["native_live"].get("hd", {}).get("painted"):','if c["graphics"] != "hd" or not (c["native_live"].get("hd", {}).get("painted") or c["native_live"].get("hd", {}).get("sea",{}).get("painted")):')
 one('"result": "PASS_FORMAL_HD_FIVE_LANGUAGE_GUI"','"result": "PASS_SEA_PROTOTYPE_FIVE_LANGUAGE_GUI"')
 one('result["formal_entry"] =','result["prototype_entry"] =')
@@ -61,6 +92,10 @@ one('        final_live = live(status())','''        for scene in ["world","sea-
             covered={c["locale"] for c in checks if c["graphics"]=="hd" and c["scene"]==scene and c["native_live"].get("hd",{}).get("sea",{}).get("painted",0)>0}
             need(covered==set(LOCALES),"五語海洋正向不完整："+scene+str(covered))
         final_live = live(status())''')
+# 原版切場時items可序列化為null；等待條件須把它視為尚未出現文字。
+for obj in ['live(s)','live(state)']:
+    for tail in ['.get("items", [])','.get("items",[])']:
+        s=s.replace(obj+tail,'('+obj+'.get("items") or [])')
 compile(s,str(dest),"exec")
 dest.write_text(s)
 print("PASS_SEA_GUI_PROBE_BUILD",hashlib.sha256(dest.read_bytes()).hexdigest(),flush=True)

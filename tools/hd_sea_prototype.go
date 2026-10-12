@@ -36,6 +36,8 @@ type hdSeaPrototype struct {
 	art                                                                            *image.RGBA
 	stage, visible                                                                 [64000]hdSeaCell
 	pending                                                                        map[int]hdSeaPair
+	backing                                                                        map[uint32]hdSeaCell
+	bufferSaves, bufferRestores, peakBuffered                                      uint64
 	active, outside                                                                bool
 	retCS, retIP, sp                                                               uint16
 	x, y                                                                           int
@@ -69,7 +71,7 @@ func loadHDSeaPrototype(h *hdRuntime, game, path string) (*hdSeaPrototype, error
 	if im.Bounds() != image.Rect(0, 0, 1254, 1254) {
 		return nil, fmt.Errorf("sea candidate shape mismatch")
 	}
-	p := &hdSeaPrototype{h: h, art: image.NewRGBA(image.Rect(0, 0, 64, 64)), pending: map[int]hdSeaPair{}}
+	p := &hdSeaPrototype{h: h, art: image.NewRGBA(image.Rect(0, 0, 64, 64)), pending: map[int]hdSeaPair{}, backing: map[uint32]hdSeaCell{}}
 	for y := 0; y < 64; y++ {
 		for x := 0; x < 64; x++ {
 			c := color.RGBAModel.Convert(im.At((2*x+1)*1254/128, (2*y+1)*1254/128)).(color.RGBA)
@@ -79,9 +81,61 @@ func loadHDSeaPrototype(h *hdRuntime, game, path string) (*hdSeaPrototype, error
 			p.art.SetRGBA(x, y, c)
 		}
 	}
-	h.m.WatchWrite(hdSeaStage, hdSeaStage+63999, func(_ *golem.Machine, a uint32, old, value byte) { p.stageWrite(a, old, value) })
-	h.m.WatchWrite(hdBuildingCanvas, hdBuildingCanvas+63999, func(_ *golem.Machine, a uint32, old, value byte) { p.canvasWrite(a, old, value) })
+	h.m.WatchWrite(0, uint32(len(h.m.Mem)-1), func(_ *golem.Machine, a uint32, old, value byte) { p.memoryWrite(a, old, value) })
 	return p, nil
+}
+
+// RAM地址不是來源鍵。只有實際已驗複製可保存身分，每次其他寫入都撤銷。
+func (p *hdSeaPrototype) memoryWrite(addr uint32, old, value byte) {
+	if addr >= hdSeaStage && addr < hdSeaStage+64000 {
+		p.stageWrite(addr, old, value)
+		return
+	}
+	if addr >= hdBuildingCanvas && addr < hdBuildingCanvas+64000 {
+		p.canvasWrite(addr, old, value)
+		return
+	}
+	if p.accepted == 0 || addr >= 0xa0000 {
+		return
+	}
+	cell, src, ok := p.copySource(addr, value)
+	delete(p.backing, addr)
+	if !ok || src < int(hdBuildingCanvas) || src >= int(hdBuildingCanvas)+64000 {
+		return
+	}
+	p.backing[addr] = cell
+	p.bufferSaves++
+	if uint64(len(p.backing)) > p.peakBuffered {
+		p.peakBuffered = uint64(len(p.backing))
+	}
+}
+
+func (p *hdSeaPrototype) copySource(addr uint32, value byte) (hdSeaCell, int, bool) {
+	m := p.h.m
+	c := m.CPU
+	cs, ip := c.OpAddr()
+	if cs != 0xcba || ip != 0xca {
+		return hdSeaCell{}, 0, false
+	}
+	pc := int(cs)*16 + int(ip)
+	if !bytes.Equal(m.Mem[pc:pc+16], []byte{0xf3, 0xa5, 3, 0xf3, 0x79, 0x0c, 0x81, 0xee, 0, 0x80, 0x8c, 0xd9, 0x81, 0xc1, 0, 8}) {
+		return hdSeaCell{}, 0, false
+	}
+	delta := int(addr) - (int(c.Seg[golem.ES])*16 + int(c.R[golem.DI]))
+	src := int(c.Seg[golem.DS])*16 + int(c.R[golem.SI]) + delta
+	if delta < 0 || delta >= 2 || int(c.R[golem.SI])+delta >= 65536 || int(c.R[golem.DI])+delta >= 65536 || src < 0 || src >= 0xa0000 || src >= len(m.Mem) || m.Mem[src] != value {
+		return hdSeaCell{}, 0, false
+	}
+	var cell hdSeaCell
+	switch {
+	case src >= int(hdSeaStage) && src < int(hdSeaStage)+64000:
+		cell = p.stage[src-int(hdSeaStage)]
+	case src >= int(hdBuildingCanvas) && src < int(hdBuildingCanvas)+64000:
+		cell = p.visible[src-int(hdBuildingCanvas)]
+	default:
+		cell = p.backing[uint32(src)]
+	}
+	return cell, src, cell.owned && cell.native == value
 }
 func (p *hdSeaPrototype) beforeInstruction() {
 	if p == nil {
@@ -203,25 +257,15 @@ func (p *hdSeaPrototype) canvasWrite(addr uint32, old, value byte) {
 	}
 	p.visible[i].owned = false
 	clear(p.pending)
-	if cs != 0xcba || ip != 0xca {
-		return
-	}
-	pc := int(cs)*16 + int(ip)
-	if !bytes.Equal(m.Mem[pc:pc+16], []byte{0xf3, 0xa5, 3, 0xf3, 0x79, 0x0c, 0x81, 0xee, 0, 0x80, 0x8c, 0xd9, 0x81, 0xc1, 0, 8}) {
-		return
-	}
-	dest := int(m.CPU.Seg[golem.ES])*16 + int(m.CPU.R[golem.DI])
-	delta := int(addr) - dest
-	src := int(m.CPU.Seg[golem.DS])*16 + int(m.CPU.R[golem.SI]) + delta
-	if delta < 0 || delta >= 2 || src < int(hdSeaStage) || src >= int(hdSeaStage)+64000 || m.Mem[src] != value {
-		return
-	}
-	cell := p.stage[src-int(hdSeaStage)]
-	if !cell.owned || cell.native != value {
+	cell, src, ok := p.copySource(addr, value)
+	if !ok || (src >= int(hdBuildingCanvas) && src < int(hdBuildingCanvas)+64000) {
 		return
 	}
 	p.visible[i] = cell
 	p.transferred++
+	if src < int(hdSeaStage) || src >= int(hdSeaStage)+64000 {
+		p.bufferRestores++
+	}
 }
 func (p *hdSeaPrototype) paint(out *image.RGBA, f draftNativeFrame) map[string]any {
 	if p == nil {
@@ -243,5 +287,5 @@ func (p *hdSeaPrototype) paint(out *image.RGBA, f draftNativeFrame) map[string]a
 		painted++
 		mask[i>>3] |= 1 << uint(i&7)
 	}
-	return map[string]any{"prototype": true, "asset": "sea-148-v2", "accepted": p.accepted, "rejected": p.rejected, "owned": owned, "painted": painted, "transferred": p.transferred, "cursor_paint_points": p.cursorPaints, "cursor_restore_points": p.cursorRestores, "mask": mask, "pending": len(p.pending), "revision": p.revision}
+	return map[string]any{"prototype": true, "asset": "sea-148-v2", "accepted": p.accepted, "rejected": p.rejected, "owned": owned, "painted": painted, "transferred": p.transferred, "cursor_paint_points": p.cursorPaints, "cursor_restore_points": p.cursorRestores, "buffer_saves": p.bufferSaves, "buffer_restores": p.bufferRestores, "buffered": len(p.backing), "peak_buffered": p.peakBuffered, "mask": mask, "pending": len(p.pending), "revision": p.revision}
 }
