@@ -5415,3 +5415,32 @@ Go1.26.7、Python3.11.2、Pillow9.4.0、隔離dosgolem82a14b266e1b5bc904e2d0fe50
 內建imagegen生成候選v2為27deaccd2785a85d5ba45c462ee7ca47d160ec48683b291b379573fded5f9674，
 只用定稿概念圖及自己的v1參考，完整提示與圖像只留本機。離線525872像素合成外緣全等，不是即時HD驗收。
 來源工具、原始定位、完整收據及重生入口由[規格062](docs/spec/062-hd-sea-draw-lifecycle.md)集中索引。
+
+## 2026-10-12 海洋第148幀的即時隔離原型
+
+confirmed限[規格062](docs/spec/062-hd-sea-draw-lifecycle.md)列明的正常路徑。
+VICEROY.EXE、PHYS0.SS、完整263bytes來源及寫入指紋沿R32證據，未新增IDA位址或推測符號。
+原版CS:IP、遠指標及線性RAM皆為dosgolem執行定位；工具為Go1.26.7、Python3.11.2、
+Pillow9.4.0及獨立dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013。
+原型逐點傳遞暫存至主畫布來源；未知覆寫含同值均撤銷，游標沿既有指令碼及反向值配對。
+生成v2原圖與提示沿hd-sea-r32，本輪不再生成圖像；64×64取樣不改原始候選。
+
+公開來源686Go零skip、go vet及23反例通過，缺原版另驗skip。
+53筆正常輸入至134600000步，49點CPU、完整RAM、VGA、DAC及存檔與原版收據一致；
+571次海洋來源繪製、23040點游標繪製及還原，合成不改CPU、cycles或RAM。
+182組五語原版／HD真GUI、728筆暫停事件及6642點不透明游標通過。
+實際GUI輸入SHA-256為65e1e6bac98a70b3c342396c63e9c99f4841859a013d924e0f61e8fa40b8a0cb。
+75筆輸入四側重播至220400000步，完整原版狀態、WAV及COLONY00／09存檔一致。
+四側WAV皆4863197bd8fc329abbbc483d21ac1ab0e49e7bb47e5ce0b66e2671ca10227718，
+終點RAM為f5c450027e3ed6f3692630b0f19a5de2cd93f9315add16dc0138571654c5b1a6。
+
+公開組裝35份Go，二進位54fd9c66caeec8821f0bc8ebdf0a49587eadbc569987f6cf6421d0c11d02ab77，
+與GUI相同；公開產生器與已驗GUI／重播工具逐位元組相同。
+收據public-check-r6.json為d2b83b20e8c94169121a8e982a8385f3b47fcf0ec6bff9fa217e42bf746920ed；
+GUI為fc048fe9a4d8010ed2ee6a8384a9fadd04b8f8afcbed0d4b2fe18fa7c8376557，
+四側重播為b20cc978d8cd9ed62a288caf16c6dcc4312e41264926afa55cf31e722d067ba7。
+來源、其餘雜湊與完整命令由規格062及本機hd-sea-live-r33/commands-r33.json索引。
+
+正常存檔返回世界的有效海洋點由33123降至20297，後續進城再離城重畫回33123。
+只證實這些實際檢查點；完整暫存還原來源、岸線銜接、裁切、動畫與效能仍未知。
+正式海洋保持DRAFT，不改首座CONFORMED，也不增加完整HD、五語或新版交付完成數。

@@ -2,7 +2,7 @@
 
 狀態：DRAFT。入口為[目標186](../goals/186-display-settings-and-gameplay-video.md)，
 工作項目為[Issue #63](https://github.com/wicanr2/colonization_cht/issues/63)。
-本頁只追查 PHYS0.SS 第148幀，不授權正式 HD 行為。
+本頁追查 PHYS0.SS 第148幀並驗證隔離原型，不授權正式 HD 行為。
 
 ## 已有來源證據
 
@@ -120,6 +120,87 @@ Pillow9.4.0與隔離dosgolem `82a14b266e1b5bc904e2d0fe507daf6bea41a013`。
 目前探針來源SHA-256為`4673045febe62ed24210a6748f9b1da4814347b75f66c23312c1157c865c89b3`，
 二進位為`4adaa35735cb85c26df0201a8a98852435d47fb3b472e197598fbce174f3ef0b`。
 來源鏈已足以製作隔離原型；正式規格保持DRAFT，不增加HD正式完成數。
+
+## 2026-10-12隔離海洋即時原型
+
+confirmed限本節正常玩家路徑及反例；正式規格仍為DRAFT。
+原型為[海洋顯示來源](../../tools/hd_sea_prototype.go)及
+[正常路徑與反例測試](../../tools/hd_sea_prototype_test.go)，不由正式組裝器引用。
+原版輸入、完整編碼雜湊、指令碼與位址空間沿本頁前述證據。
+工具為Go1.26.7、Python3.11.2、Pillow9.4.0及同一dosgolem 82a14b2獨立副本。
+
+### 原型契約
+
+- 只接受AX149、完整263bytes來源、原始入口碼、16×16未裁切及3C50:0000目的描述。
+  在100000步內依實際返回CS:IP及SP增加10完成，每點須恰寫一次、RAM值一致，
+  且完整寫入指紋符合本頁證據。錯來源、逾時、缺點、重複或外溢均不建立身分。
+- 暫存畫布每點保存來源身分、局部位移及原版色號。任何後畫均撤銷，包含同值寫入。
+  主畫布只沿已驗0CBA:00CA指令碼、實際DS:SI／ES:DI及每byte色號傳遞仍有效來源。
+- 游標沿首座建築已驗0B68:051C、A000:FB00繪製及FA00反向還原配對；
+  原始游標來源、局部位移、前後值及指令碼均核對。其他主畫布寫入清除未完成配對。
+  未驗游標或原版畫布關係時，整次HD合成回原圖。
+- 海洋v2原圖維持1254×1254 RGB；原型以像素中心最近鄰取樣為64×64。
+  只繪有效主畫布來源且當前色號相符的4×4區塊。其後依序合成首座建築、
+  當前語言文字、原版不透明游標及畫面外設定介面，原版輸入座標不變。
+- 原型須額外指定`--hd-sea-prototype-asset`並先成功載入已驗首座HD來源。
+  PHYS0.SS或候選指紋不同時拒絕；沒有此參數時保持正式首座行為。
+  此處的原型拒絕不能外推為正式海洋的缺件回退契約。
+
+### 正常路徑與驗證
+
+| 驗證 | 結果 |
+| --- | --- |
+| 公開來源乾淨組裝 | 35份Go；二進位與實際GUI所用檔案逐位元組相同，build及vet通過。 |
+| Go回歸 | 686項通過、零skip；另以缺原版目錄驗明確skip，不把該次計為通過。 |
+| 原版正常路徑 | 53筆既有實際輸入、134600000步、49點完整RAM／CPU／VGA／DAC及存檔一致；合成不改原版。 |
+| 海洋生命週期 | 上述正常重播完成571次來源繪製，23040點游標繪製及還原；進城0點、正常離城重畫。 |
+| 反例 | 23項全拒絕，涵蓋入口／來源／裁切／逾時、返回像素、同值覆寫、過期來源及未完成或未知游標。 |
+| 真X11視窗 | 182組五語原版／HD切換、728筆暫停設定事件、6642點不透明游標；含正常海面移動、進出城、改名取消、百科及存檔。 |
+| 同輸入四側重播 | 75筆實際DOS輸入、220400000步；原型即時、同版純觀測、前版正式R27與原文控制的完整CPU、RAM、VGA、DAC、WAV及存檔一致。 |
+| 工具重生 | 公開GUI及重播產生器逐位元組重生本次實際工具；沒有以成功字串代替原始收據核對。 |
+
+真視窗世界檢查點繪33123個原版海洋點，正常存檔返回世界為20297點，
+後續進城再離城為33123點。這些是不同操作後的有效來源數，不表示整張海圖均已HD。
+存檔返回後仍有部分原圖回退，其他暫存還原鏈尚未追查。
+已目視韓文HD海面與英文原版對照；海洋與未重繪岸線的色調銜接仍待處理。
+未驗其他地形、裁切繪製、動畫、純HD成本、各平台FPS或人耳同步。
+
+GUI二進位SHA-256為
+`54fd9c66caeec8821f0bc8ebdf0a49587eadbc569987f6cf6421d0c11d02ab77`。
+海洋原型Go來源SHA-256為
+`46764df0e6ce4cb8ff2cefef38dea747dfce9f5e26326c7bb26e5264a14a27fc`。
+四側WAV皆為
+`4863197bd8fc329abbbc483d21ac1ab0e49e7bb47e5ce0b66e2671ca10227718`。
+本次GUI終點完整RAM為
+`f5c450027e3ed6f3692630b0f19a5de2cd93f9315add16dc0138571654c5b1a6`。
+
+### 可重生入口
+
+[海洋隔離組裝器](../../tools/build_hd_sea_prototype.py)在既有Go容器內執行，
+以`--output-dir /out/<新名稱>`指定新輸出，以`--reference`指定含固定go.sum的
+`/repo/workplace/reports/goal186-display-hd/hd-formal-r31/runtime`。
+專案、原版與獨立dosgolem分別唯讀掛到/repo、/game、/dosgolem；
+既有Go快取掛/go-cache，只有/out及快取可寫。使用前述固定Go映像與UID1000，
+保持無網路、有界CPU／記憶體／PID及外層逾時。
+
+[海洋GUI產生器](../../tools/build_hd_sea_gui_probe.py)及
+[海洋四側重播產生器](../../tools/build_hd_sea_replay_probe.py)均以
+`--output /out/<新名稱>.py`建立新工具，再以各自`--help`查必填參數。
+兩者沿現有五語／正式首座驗證器，只對隔離副本增加海洋候選參數與逐點安全遮罩。
+使用隔離啟動器副本，不將prototype_entry收據登錄為正式入口。
+GUI與重播沿既有verification映像、真X11及有trap的Xvfb，不在主機執行。
+
+本機完整命令及腳本位於`workplace/reports/goal186-display-hd/hd-sea-live-r33/`，
+由`commands-r33.json`索引。候選原圖／生成提示、原版畫面、原始收據、
+存檔與音訊只留本機；正式首座、已發布版本及dosgolem未改。
+
+| 本機收據 | SHA-256 |
+| --- | --- |
+| repro-r6/build.json | d59b4c6cf8ffea83c0b2e2b8325f4c9fa16fe6f57e45cc8a4bfa7b369cb02802 |
+| public-native-r6/check.json | eee23377815d6b0276a56bf9a78a2b54d11f9be999512ba3e8b158c20d123dcf |
+| public-check-r6.json | d2b83b20e8c94169121a8e982a8385f3b47fcf0ec6bff9fa217e42bf746920ed |
+| gui-r1/check.json | fc048fe9a4d8010ed2ee6a8384a9fadd04b8f8afcbed0d4b2fe18fa7c8376557 |
+| replays-r3/check.json | b20cc978d8cd9ed62a288caf16c6dcc4312e41264926afa55cf31e722d067ba7 |
 
 ## 下一個正式閘門
 
