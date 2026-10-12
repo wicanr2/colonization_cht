@@ -121,6 +121,15 @@ c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8。
 
 ## 隔離原型要求
 
+執行期蒐證入口為[可丟棄HD原型](../../tools/hd_runtime_prototype.go)及
+[隔離組裝器](../../tools/build_hd_runtime_prototype.py)。兩者不由正式建置引用。
+原版重播檢查為[生命週期測試](../../tools/hd_runtime_prototype_test.go)，
+須提供合法原版與本機53筆實際GUI輸入；原版重播不取代HD正常GUI驗收。
+真視窗入口由[HD視窗探針組裝器](../../tools/build_hd_runtime_gui_probe.py)從固定版
+五語探針建立，追加原版／HD切換、重進、浮標及退出驗證，只寫本機workplace。
+完成後由[HD四側重播組裝器](../../tools/build_hd_runtime_replay_probe.py)沿固定版既有檢查器，
+比較原型HD、原型未啟用HD、正式前端及原文控制的原版狀態、WAV與存檔。
+
 - 只接受已驗原版指紋、入口碼、完整來源、畫布與幾何；未知來源維持原版。
 - 在已辨識呼叫進入時保存該次底圖，返回後核對實際寫入與像素，才建立顯示覆蓋。
   保存畫面、清除原圖與HD合成都在前端記憶體，不寫入DOS。
@@ -133,13 +142,50 @@ c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8。
   現有文字清除與繪字仍在同一介面，分層介面須經本規格審查後實作。
 - 開關HD不得推進DOS、改寫存檔或混用上一畫面的底圖；缺件回原版並記錄原因。
 
+## 執行期與真視窗隔離驗證（2026-10-12）
+
+原型6fefe32f…由正式R27前端的可丟棄副本組裝，只改adapter及語言合成介面，
+另加兩份原型Go；33份Go來源有完整指紋。14項正式來源綁定沒有改動。
+原版程式、輸入、音訊、存檔與已發布版沒有改寫。
+
+confirmed限本路徑：
+
+- 原版53筆輸入重播至134600000步，49個檢查點的CPU、完整RAM、VGA及DAC相同；
+  原型合成沒有改寫CPU、cycles或RAM，兩個原版存檔相同。
+- 10次建築來源／參數／440點實際寫入通過，1050點游標暫繪完成互逆還原。
+  440筆依局部位移排序，以uint16小端位移加色號編碼成1320bytes，指紋為
+  1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1。
+- 18反例全拒絕：錯x、幀、y、畫布、寬、來源指標、來源bytes、入口碼及逾時返回；
+  未知同值／改值寫入、過期像素、未完成游標配對交錯、未知游標來源、未完成游標緩衝；
+  重複繪點、矩形外寫入及錯繪點。反例只改Machine私有複本。
+- 676項既有Go零skip及go vet通過，既有原版模式未退步。
+- 152組真X11原版／HD及五語檢查通過。各次open、ready、apply、resume共608筆事件，
+  都在各自同一步數保持CPU暫存器、完整RAM、VGA、DAC、DOS輸入數及滑鼠狀態。
+  五語進城及重進為621點，正常重新懸停的浮標保留460點，百科及離城為0點，
+  關閉百科恢復621點。3280點不透明游標逐4×4像素等於原版。
+- 本批67筆實際DOS輸入重播至193000000步，原型HD、原型未啟用HD、正式R27及
+  原文控制的完整CPU、RAM、VGA、DAC、WAV與存檔全同；HD重播終點合成畫面與真視窗相同。
+
+本批右鍵確實開啟PEDIA.TXT:@BUILDING32，來源鍵、正文及實際畫面同時核對。
+第一次Escape關閉百科並返回殖民地，第二次返回世界，第三次開退出確認框。
+前批R29固定路徑只顯示浮標的收據仍保留，不將本批結果回填成前批已開啟。
+
+繪製順序為原版VGA、當次底圖恢復與HD、所選語言、82點原版游標；
+畫面外設定列最後顯示。原版模式沿既有介面逐像素恢復，不寫DOS。
+未知來源或游標／畫布不同步時回原版並記錄具體原因。本批完成的152組沒有同步回退；
+早期失敗樣張曾記錄不同步，保留在本機，不能宣稱所有暫態皆已閉合。
+
+單一有界容器的四側重播牆鐘為42.213／34.759／25.544／23.781秒，
+順序沿上列四側。各側含不同觀測與合成工作，這是探索量測，不能當作純HD成本或平台FPS。
+R4視窗抽樣1.328GiB，容器上限2GiB；R3起GOMEMLIMIT為1200MiB。
+未做跨平台效能或真硬體音訊驗收。
+
 ## READY前尚缺
 
-1. 一座可用且指紋明確的正式候選，確認尺寸、透明邊界與底圖恢復。
-2. 原版正常GUI進城、浮標遮擋、離城及重進已驗；仍需HD執行期的同路徑與實際視窗遮擋驗收。
-3. 原版與候選合成的同狀態畫面，五語、游標、設定列及HD開關抽樣。
-4. 來源／畫布／幾何錯誤、過期底圖與未知寫入反例，以及比例相稱的效能量測。
-5. 證據審查後限定READY範圍。地形、人物與動畫不因本建築通過而取得信用。
+1. 將已驗v4候選定為正式素材，建立來源、權利、尺寸與透明邊界清冊。
+2. 定義正式素材缺件、指紋錯誤及保存HD偏好後缺件的回退；目前明示研究資產錯誤會中止原型啟動。
+3. 核對正式分層介面及打包入口，依證據審查限定READY範圍，再作正式同路徑驗證。
+4. 地形、人物、動畫及其他座標／來源均未驗，不因本建築通過而取得信用。
 
 ## 重生與收據
 
@@ -210,3 +256,28 @@ IDA沿相同已驗9.4映像，在/tmp複製唯讀VICEROY.EXE新建資料庫；
 
 新收據只解除本路徑的原版遮擋、離城、重進與游標來源未知。
 歷史GUI完整RAM差異、返回附近碼成因及其他游標狀態仍保持原等級。
+
+### HD執行期原型的重生
+
+本機根為workplace/reports/goal186-display-hd/hd-runtime-r30-r2。
+先在既有Go容器執行build_hd_runtime_prototype.py的--output-dir，檢查build.json，
+再用上述生命週期測試、HD視窗組裝器及四側重播組裝器。輸出必須是新的workplace路徑，
+原版、正式R27副本、dosgolem及研究輸入唯讀；只開本輪輸出與離線Go快取可寫。
+完整GUI與重播命令分別保存在本機run-gui-r5.sh、run-replays-r5.sh；
+Docker沿AGENTS.md，GUI沿既有verification映像，建置沿Go1.26.7映像。
+
+| 執行期收據 | SHA-256 |
+| --- | --- |
+| hd-runtime-prototype | 6fefe32f41fe019b30b0496ae2906a8ed8ae7e0f091d82266b5799eebf475545 |
+| build.json | 409f84524b6277e5d3255ee298943b8ba0e6b1c880b3f5ee1921a5faa6a571f4 |
+| native-replay/check.json | 2cc7ba747985437b5ccb45affe4a0c0ef24c53e0e7c49b84c0012352fe2fbf0d |
+| regression-check.json | eef1909d0610e6bab1ea4ff15590038ca2b7da2ed25118d58f94fb520e1d3bf4 |
+| gui-r5/check.json | 1d7d70fd5563143d570c2c493a4606eed23c50cdefebcfe7d6bc65f09aaaa4ae |
+| gui-r5/gui.inputs.json | d6cb0158fac68cfc208bed2dcdac82a8e48c1cbc21ebfa03c4f5058dcba763ee |
+| gui-r5/gui.display-events.json | 7bd3e4311d7f22973ca40c56b22e31bfb044fb512f4b31a78fca5aa6d4b2eab4 |
+| replays-r5/check.json | fe217de8c613506af0a848498d5364f3325b19851865d5c79ad1a429c42c8ffd |
+| tools/hd_runtime_prototype.go | d5135dc7fcbd69ad3d1234910b8d89e0243ce468523c601afae9703164a30c43 |
+| tools/hd_runtime_prototype_test.go | d4fbab7aed428169c46296694e8eff7ae10471024ed70cb0d47ffff78b0a532d |
+| tools/build_hd_runtime_prototype.py | 00fa2577b2ab4de59f5a936dd4255c7a61976910a6a171f1026705fd7fab7f17 |
+| tools/build_hd_runtime_gui_probe.py | c611e88ee9d516490e3074cf93b7f33ea74288ed7516708140be91c28dbf63a2 |
+| tools/build_hd_runtime_replay_probe.py | 966b0892d865a4ddafef0b94a816ab00edd5d9fdfc969029176ff1588c9ae82c |

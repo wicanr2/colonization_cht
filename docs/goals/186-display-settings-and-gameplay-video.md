@@ -279,7 +279,17 @@ IDA自動函式邊界及名稱只作導覽，仍須原版正常路徑的進入�
 [IDA游標查詢](../../tools/ida_hd_cursor.py)確認單一游標來源82個不透明點，
 五組暫繪／還原配對完整。私有離線HD原型保留浮標與游標，離城無殘留；
 v4候選及完整生成提示只留本機，未定正式素材。
-下一步驗HD執行期、五語分層與開關，再審READY；沒有正式HD完成信用。
+新增[HD執行期原型](../../tools/hd_runtime_prototype.go)、
+[原型組裝器](../../tools/build_hd_runtime_prototype.py)與
+[原版生命週期測試](../../tools/hd_runtime_prototype_test.go)，只改正式前端的隔離副本。
+[HD視窗組裝器](../../tools/build_hd_runtime_gui_probe.py)驗152組正常五語原版／HD切換、
+浮標、百科進出、存檔及離城，608筆設定事件保持原版狀態，3280點不透明游標相同。
+[HD四側重播組裝器](../../tools/build_hd_runtime_replay_probe.py)沿67筆實際輸入至193000000步，
+原型HD、原型未啟用HD、正式前端及原文控制的CPU、完整RAM、VGA、DAC、WAV與存檔全同。
+676項既有Go零skip、go vet、49點原版重播及18反例通過。
+本批右鍵正常開啟PEDIA.TXT:@BUILDING32，關閉後返回殖民地；不沿用前批未開啟的場景假設。
+規格061仍DRAFT，下一步審正式素材、缺件及保存HD偏好的回退，再接正式建置。
+本輪沒有正式HD、其他素材或動畫完成信用。
 
 ## 可丟棄原型與重跑入口
 

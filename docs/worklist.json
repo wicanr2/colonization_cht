@@ -1498,7 +1498,7 @@
       "acceptance": "依已定稿的第一張精細像素風重繪地形、人物與建築；原始像素與HD可獨立於語言切換。正常GUI、動畫、遮擋、座標、效能、同狀態與素材權利驗收通過，原版規則與存檔不變。",
       "verify": {
         "kind": "manual",
-        "note": "資產盤點、BUILDING032完整來源與參數證據保留。55組正常GUI、53筆實際DOS輸入至134600000步；49個不同檢查點及終點與觀測、無觀測兩側CPU、完整RAM、VGA、DAC及存檔相同。九次重畫與19463筆矩形寫入含5986筆同值可重建；已驗原版浮標、存檔、離城及重進。IDA及114次緩衝區寫入確認單一游標82點遮罩，五組暫繪還原互逆；離線HD原型保留浮標與游標，離城無殘留。公開重生工具及六種錯誤證據反例通過。規格061保持DRAFT，入口docs/goals/186-display-settings-and-gameplay-video.md；v4候選未定稿，正式素材、HD執行期、五語分層、開關、動畫與完整場景待驗。返回附近碼成因及歷史GUI RAM差異仍未知，不增加正式HD完成信用。來源與收據見RESEARCH-LOG及docs/spec/061-hd-building-draw-lifecycle.md。"
+        "note": "首座BUILDING032已接可丟棄HD執行期，正式14項來源綁定保持相同。676項既有Go零skip、go vet、49點原版重播與18個來源／幾何／寫入／游標反例通過。152組正常五語原版／HD視窗、608筆原子設定事件及3280點不透明游標通過；進城621點、浮標460點、百科及離城0點、關百科621點。67筆實際DOS輸入四側重播至193000000步，完整CPU、RAM、VGA、DAC、WAV及存檔全同。本批右鍵來源PEDIA.TXT:@BUILDING32已核對，不沿用前批未開啟的場景假設。規格061仍DRAFT；v4與原版參考只留本機，正式素材、缺件及保存HD偏好的回退、正式建置接續。地形、人物、其他建築、動畫及完整HD未完成；歷史GUI RAM差異及返回附近碼成因仍未知，不增加正式HD完成信用。入口docs/goals/186-display-settings-and-gameplay-video.md；來源與收據見RESEARCH-LOG及docs/spec/061-hd-building-draw-lifecycle.md。"
       }
     },
     {
