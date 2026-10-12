@@ -10,6 +10,11 @@ v.1.0.3-20261010 與 #56 完成紀錄保留；本頁不代表新增功能已完�
 [HD 重繪 #63](https://github.com/wicanr2/colonization_cht/issues/63)、
 [實際遊玩影片 #64](https://github.com/wicanr2/colonization_cht/issues/64)。
 
+下一類HD素材接續[規格062](../spec/062-hd-sea-draw-lifecycle.md)與
+[唯讀海洋繪製探針](../../tools/probe_hd_terrain_draws.go)，先追PHYS0.SS第148幀。
+[來源鏈檢查器](../../tools/check_hd_terrain_draws.py)交叉核對原版狀態與既有完整像素定位。
+首座建築既有正式驗收保留；海洋研究尚未接正式合成。
+
 ## 已確認的要求
 
 | 項目 | 使用者決定 |
