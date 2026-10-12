@@ -187,6 +187,25 @@ def dependency_notices(binary, repo, target=("linux", "amd64")):
     return files, dependencies
 
 
+def hd_asset_files(repo):
+    """規格061 READY：只收已驗生成素材，逐項核對，拒絕額外檔案。"""
+    root = repo / "graphics"
+    if root.is_symlink() or {p.name for p in root.iterdir()} != {"manifest.json", "building-032.png"}:
+        raise ValueError("HD素材目錄不同")
+    files = {}
+    for name, digest, limit in [
+            ("manifest.json", "7afb648f75182a3f6b04b090cf48b9bf9999f8a67e125df5a3c58fb68c80eb62", 64 << 10),
+            ("building-032.png", "c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8", 8 << 20)]:
+        path = root / name
+        if path.is_symlink() or not path.is_file() or path.stat().st_size > limit:
+            raise ValueError("HD素材不是有界檔案：" + name)
+        raw = path.read_bytes()
+        if sha(raw) != digest:
+            raise ValueError("HD素材指紋不同：" + name)
+        files["graphics/" + name] = (raw, 0o644)
+    return files
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--language-bundles", type=Path, required=True)
@@ -263,8 +282,10 @@ def main():
     files.update(mask_files)
     files.update(language_bundle_files(a.language_bundles, a.repo, a.ui_font, a.ui_license,
                                      {name for name in files if name.startswith("masks/")}))
+    hd_files = hd_asset_files(a.repo)
+    files.update(hd_files)
     for bad in files:
-        if re.search(r"\.(png|idx|pal|memory|sav|exe|ss|pik|ttf)$", bad, re.I) and bad != "bin/" + native_name:
+        if re.search(r"\.(png|idx|pal|memory|sav|exe|ss|pik|ttf)$", bad, re.I) and bad not in {"bin/" + native_name, *hd_files}:
             raise SystemExit("包內不得有原版或畫面檔：" + bad)
     manifest = {"version": a.version, "platform": platform, "license": "LicenseRef-RRSAL-1.0（第三方元件依各自授權）",
                 "requires_original": {"note": "需自備合法取得的 DOS 版原版 COLONIZE 目錄；以下檔案 SHA-256 不符時前端拒絕啟動",

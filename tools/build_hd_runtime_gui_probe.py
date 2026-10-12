@@ -6,6 +6,7 @@ from pathlib import Path
 
 p = argparse.ArgumentParser(description=__doc__)
 p.add_argument("--output", type=Path, required=True)
+p.add_argument("--formal", action="store_true", help="規格061 READY：驗證正式啟動器")
 a = p.parse_args()
 repo = Path(__file__).resolve().parents[1]
 out = a.output.resolve()
@@ -159,6 +160,15 @@ one('        if process.poll() is None:\n            os.killpg(process.pid, sign
                 pass
         if process.poll() is None:
             os.killpg(process.pid, signal.SIGTERM)''')
+if a.formal:
+    one('need(not args.formal_launcher and not args.reload_save, "HD DRAFT只使用隔離入口")',
+        'need(args.formal_launcher and not args.reload_save, "正式HD驗收需要正式啟動器")\n'
+        '    need(args.hd_asset.resolve() == (args.formal_launcher.parent / "graphics/building-032.png").resolve(), "正式HD素材路徑不同")')
+    one('    command += ["--hd-prototype-asset", str(args.hd_asset)]\n', '')
+    one('hd.get("prototype") is True', 'hd.get("formal") is True')
+    one('result["limitations"] = ["正式入口與本次正常路徑；其他未驗欄位及HD仍未完成。"]',
+        'result["limitations"] = ["正式入口、單座HD與本次正常路徑；其他素材、動畫及完整五語仍未完成。"]')
+    one('"result": "PASS_HD_RUNTIME_FIVE_LANGUAGE_GUI"', '"result": "PASS_FORMAL_HD_FIVE_LANGUAGE_GUI"')
 compile(s, str(out), "exec")
 out.write_text(s)
 print("PASS_HD_RUNTIME_GUI_PROBE_BUILD", hashlib.sha256(out.read_bytes()).hexdigest())

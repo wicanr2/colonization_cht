@@ -1,0 +1,164 @@
+#!/usr/bin/env python3
+"""規格061：以正式啟動器及真X11驗保存HD後缺件／錯件與恢復。"""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import signal
+import subprocess
+import sys
+import time
+
+from probe_language_live_gui import STATE_KEYS
+
+
+def need(ok, reason):
+    if not ok:
+        raise AssertionError(reason)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    for name in ["bundle", "game", "output"]:
+        parser.add_argument("--" + name, type=Path, required=True)
+    args = parser.parse_args()
+    root = args.output.resolve()
+    need(Path("/.dockerenv").is_file() and os.environ.get("DISPLAY") and os.getuid() != 0,
+         "需非root Docker及有界Xvfb")
+    need(root.is_relative_to(Path("/out")) and not root.exists() and
+         root.parent.stat().st_uid == os.getuid(), "需新的自有輸出目錄")
+    root.mkdir()
+    preference = root / "display.json"
+    saved = b'{"language":"ja","graphics":"hd"}\n'
+    preference.write_bytes(saved)
+    results = []
+    for case in ["missing-directory", "missing-image", "bad-image", "bad-manifest", "restored"]:
+        out = root / case
+        out.mkdir()
+        assets = out / "graphics"
+        if case != "missing-directory":
+            shutil.copytree(args.bundle / "graphics", assets)
+        if case == "missing-image":
+            (assets / "building-032.png").unlink()
+        if case == "bad-image":
+            (assets / "building-032.png").write_bytes(b"damaged")
+        if case == "bad-manifest":
+            (assets / "manifest.json").write_bytes(b"{}\n")
+        prefix = out / "gui"
+        command = ["bash", str(args.bundle / "colonization-cht.sh"), "--game", str(args.game),
+                   "--play=false", "--audio-mute", "--window-steps", "100000000",
+                   "--display-config", str(preference), "--display-diagnostics", "--native-text-diagnostics",
+                   "--hd-assets", str(assets), "--out", str(prefix)]
+        env = dict(os.environ, COLONIZATION_CHT_SAVE=str(out / "save"), GOMEMLIMIT="1200MiB", GOMAXPROCS="2")
+        log = (out / "process.log").open("wb")
+        process = subprocess.Popen(command, env=env, stdout=log, stderr=subprocess.STDOUT,
+                                   stdin=subprocess.DEVNULL, start_new_session=True)
+        window = None
+
+        def status():
+            need(process.poll() is None, "正式前端提前結束：" + case)
+            try:
+                return json.loads(prefix.with_suffix(".status.json").read_bytes())
+            except (FileNotFoundError, json.JSONDecodeError):
+                return {}
+
+        def wait(predicate, reason):
+            until = time.monotonic() + 45
+            while time.monotonic() < until:
+                current = status()
+                if predicate(current):
+                    return current
+                time.sleep(0.025)
+            raise TimeoutError(reason + ":" + case)
+
+        def xdo(*parts):
+            subprocess.run(["xdotool", *map(str, parts)], check=True, timeout=4,
+                           stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+
+        def click(x, y):
+            xdo("mousemove", "--window", window, x, y)
+            xdo("mousedown", 1)
+            time.sleep(0.08)
+            xdo("mouseup", 1)
+            time.sleep(0.08)
+
+        try:
+            until = time.monotonic() + 45
+            while time.monotonic() < until:
+                status()
+                found = subprocess.run(["xdotool", "search", "--onlyvisible", "--name", "Colonization CHT"],
+                                       capture_output=True, text=True, timeout=3)
+                if found.returncode == 0 and found.stdout.strip():
+                    window = found.stdout.splitlines()[0]
+                    break
+                time.sleep(0.025)
+            need(window is not None, "找不到正式視窗")
+            xdo("windowfocus", window)
+            wait(lambda s: s.get("step", 0) >= 4000000, "冷啟動未推進")
+            xdo("mousemove", "--window", window, 115, 24)
+            xdo("mousedown", 1)
+            wait(lambda s: s.get("display", {}).get("phase") == 1, "設定未暫停")
+            xdo("mouseup", 1)
+            current = wait(lambda s: s.get("display", {}).get("phase") == 2, "設定未開啟")
+            effective = {"language": "ja", "graphics": "hd" if case == "restored" else "original"}
+            need(current["display"]["current"] == effective, "啟動有效選項不同")
+            live = current.get("frame", {}).get("native_live", {})
+            need(live.get("hd_available") == (case == "restored"), "HD可用性不同")
+            if case != "restored":
+                need(live.get("hd_asset_reason"), "缺件沒有原因收據")
+                click(808, 480)
+                click(912, 644)
+                current = wait(lambda s: s.get("display", {}).get("problem") == "ui.error.unavailable",
+                               "缺件仍允許HD套用")
+                need(current["display"]["current"] == effective, "失敗交易改變生效選項")
+            need(preference.read_bytes() == saved, "啟動或失敗交易改寫HD偏好")
+            subprocess.run(["import", "-window", window, str(out / "settings.png")], check=True, timeout=5)
+            xdo("keydown", "Escape")
+            time.sleep(0.08)
+            xdo("keyup", "Escape")
+            wait(lambda s: s.get("display", {}).get("phase") == 0, "取消後未恢復")
+            events = json.loads(prefix.with_suffix(".display-events.json").read_bytes())
+            expected = ["open", "ready"] + ([] if case == "restored" else ["apply-error"]) + ["cancel-escape", "resume"]
+            need([e["action"] for e in events] == expected, "設定事件不同")
+            need(all(all(e[k] == events[0][k] for k in STATE_KEYS) for e in events),
+                 "暫停交易改變原版或輸入")
+            subprocess.run([sys.executable, "/repo/tools/gui_close_window.py", "--window", window],
+                           check=True, timeout=5, stdout=subprocess.DEVNULL)
+            process.wait(timeout=15)
+            need(process.returncode == 0 and preference.read_bytes() == saved, "正常結束改寫偏好")
+            results.append({"case": case, "effective": effective, "events": len(events),
+                            "reason": live.get("hd_asset_reason"), "command": command,
+                            "preferences_unchanged": True, "native_state_unchanged_during_settings": True})
+            print("PASS_FORMAL_HD_STARTUP", case, flush=True)
+        finally:
+            for key in ["Escape", "Return"]:
+                try:
+                    subprocess.run(["xdotool", "keyup", key], timeout=3, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                except subprocess.SubprocessError:
+                    pass
+            try:
+                subprocess.run(["xdotool", "mouseup", "1"], timeout=3, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                if process.poll() is None and window is not None:
+                    subprocess.run([sys.executable, "/repo/tools/gui_close_window.py", "--window", window],
+                                   check=True, timeout=5, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                    process.wait(timeout=10)
+            except subprocess.SubprocessError:
+                pass
+            if process.poll() is None:
+                os.killpg(process.pid, signal.SIGTERM)
+                try:
+                    process.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    os.killpg(process.pid, signal.SIGKILL)
+                    process.wait(timeout=5)
+            log.close()
+    result = {"result": "PASS_FORMAL_HD_STARTUP_FALLBACK_GUI", "cases": results,
+              "binary_sha256": hashlib.sha256((args.bundle / "bin/colonization-window").read_bytes()).hexdigest(),
+              "probe_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
+    (root / "check.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
+
+
+if __name__ == "__main__":
+    main()

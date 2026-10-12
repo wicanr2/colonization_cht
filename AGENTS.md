@@ -114,6 +114,7 @@ RE 證據 → DRAFT 規格 → 證據審查 → READY 規格
 | `docs/spec/` | DRAFT／READY／CONFORMED 規格。 |
 | `text/` | 以可追溯來源鍵保存的原文、譯文、狀態與術語參照。 |
 | `font/` | 字型來源記錄、授權資料、子集與可重現烘製腳本。 |
+| `graphics/` | 經規格審查的生成HD圖像；`manifest.json`記來源、權利、尺寸及雜湊，正式載入與封裝逐檔核對。 |
 | `workplace/` | 可刪除的解包、dump、快照與研究中間物；必須 gitignore。 |
 | `dist-all/` | 日後唯一正式交付根目錄；建立前必讀輸出目錄契約。 |
 

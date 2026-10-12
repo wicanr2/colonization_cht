@@ -66,6 +66,8 @@ type draftLanguageDisplay struct {
 
 // 準備與生效資料分開；由既有設定保存成功後才呼叫提交。
 type draftLanguageBackend struct {
+	hd                *hdRuntime
+	hdReason          string
 	targets           map[string]*draftLanguageTarget
 	sample            func() draftNativeFrame
 	active            *draftLanguageDisplay
@@ -92,7 +94,7 @@ func (b *draftLanguageBackend) prepare(options displayOptions) (func(), error) {
 		return nil, err
 	}
 	target := b.targets[options.Language]
-	if options.Graphics != "original" || target == nil || target.pack == nil ||
+	if (options.Graphics != "original" && (options.Graphics != "hd" || b.hd == nil)) || target == nil || target.pack == nil ||
 		target.pack.manifest.Locale != options.Language || b.sample == nil {
 		return nil, fmt.Errorf("ui.error.unavailable")
 	}
@@ -101,11 +103,11 @@ func (b *draftLanguageBackend) prepare(options displayOptions) (func(), error) {
 		return nil, fmt.Errorf("ui.error.unavailable")
 	}
 	started := time.Now()
-	frame, receipt, err := draftRebuildTarget(target, f.journal, f.canvas, f.buffer, f.indexed, f.palette, f.cursor, f.step, f.mode)
+	frame, receipt, err := b.rebuildWithHD(target, options, f)
 	if err != nil {
 		return nil, err
 	}
-	next := &draftLanguageDisplay{options: options, target: target, frame: frame, receipt: receipt, nativeKey: f.key(), buildTime: time.Since(started)}
+	next := &draftLanguageDisplay{options: options, target: target, frame: frame, receipt: receipt, nativeKey: f.key() + b.hd.key(), buildTime: time.Since(started)}
 	return func() { b.active = next }, nil
 }
 
@@ -117,11 +119,11 @@ func (b *draftLanguageBackend) renderCurrent() (*image.RGBA, map[string]any, err
 	if f.journal == nil || len(f.canvas) != 64000 || len(f.buffer) != 64000 || len(f.indexed) != 64000 || len(f.palette) != 768 {
 		return nil, nil, fmt.Errorf("invalid native live frame")
 	}
-	key := f.key()
+	key := f.key() + b.hd.key()
 	reused := key == b.active.nativeKey
 	if !reused {
 		started := time.Now()
-		frame, receipt, err := draftRebuildTarget(b.active.target, f.journal, f.canvas, f.buffer, f.indexed, f.palette, f.cursor, f.step, f.mode)
+		frame, receipt, err := b.rebuildWithHD(b.active.target, b.active.options, f)
 		if err != nil {
 			return nil, nil, err
 		}
@@ -132,6 +134,7 @@ func (b *draftLanguageBackend) renderCurrent() (*image.RGBA, map[string]any, err
 	b.renders++
 	b.maxBuildTime = max(b.maxBuildTime, b.active.buildTime)
 	record := maps.Clone(b.active.receipt)
+	record["hd_available"], record["hd_asset_reason"] = b.hd != nil, b.hdReason
 	record["step"], record["live_reused"] = f.step, reused
 	record["live_renders"], record["live_rebuilds"] = b.renders, b.rebuilds
 	record["build_nanoseconds"], record["max_build_nanoseconds"] = int64(b.active.buildTime), int64(b.maxBuildTime)
@@ -981,10 +984,16 @@ func draftInputASCII(o *nativeObservation, prompt *dialogShown, fonts map[int]*d
 }
 
 func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer, indexed, palette []byte, cursor image.Rectangle, step uint64, mode byte) (*image.RGBA, map[string]any, error) {
+	return draftRebuildTargetOn(t, j, canvas, buffer, indexed, palette, cursor, step, mode, nil)
+}
+func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buffer, indexed, palette []byte, cursor image.Rectangle, step uint64, mode byte, base *image.RGBA) (*image.RGBA, map[string]any, error) {
 	if len(canvas) != 64000 || len(buffer) != 64000 || len(indexed) != 64000 || len(palette) != 768 {
 		return nil, nil, fmt.Errorf("invalid native frame")
 	}
-	out := draftRGB(indexed, palette)
+	out := base
+	if out == nil {
+		out = draftRGB(indexed, palette)
+	}
 	result := map[string]any{"locale": t.pack.manifest.Locale, "original_rendering": t.pack.manifest.Original, "step": step}
 	if t.pack.manifest.Original {
 		result["items"] = []map[string]any{}

@@ -18,7 +18,7 @@ def windows_launcher(source):
     if not required <= set(tokens):
         raise ValueError('完整中文或音訊旗標缺失')
     replacements = {'$here/bin/colonization-window': '%here%bin/colonization-window.exe',
-                    '$game': '%game%', '$save': '%save%', '$m': '%m%', '$t': '%t%', '$l': '%l%', '$u': '%u%'}
+                    '$game': '%game%', '$save': '%save%', '$m': '%m%', '$t': '%t%', '$l': '%l%', '$u': '%u%', '$here': '%here%'}
     command = []
     for token in tokens[:-1]:
         original = token

@@ -6,6 +6,7 @@ from pathlib import Path
 
 p = argparse.ArgumentParser(description=__doc__)
 p.add_argument("--output", type=Path, required=True)
+p.add_argument("--formal", action="store_true", help="規格061 READY：驗證正式啟動器")
 a = p.parse_args()
 repo = Path(__file__).resolve().parents[1]
 out = a.output.resolve()
@@ -51,6 +52,15 @@ one('results[name] = {"state": report["state"], "binary_sha256": sha(binary.read
 one('"result": "PASS_NATIVE_LIVE_GUI_FOUR_REPLAYS"', '"result": "PASS_HD_RUNTIME_GUI_FOUR_REPLAYS"')
 one('["隔離視窗及本次正常路徑；完整來源生命週期、正式接線及HD未完成。"]',
     '["規格061 DRAFT單座候選及本次正常路徑；正式素材、正式HD及完整五語仍未完成。"]')
+if a.formal:
+    one('require(not args.formal_launcher, "DRAFT HD只使用隔離入口")',
+        'require(args.formal_launcher, "正式HD重播需要正式啟動器")')
+    one('gui["result"] == "PASS_HD_RUNTIME_FIVE_LANGUAGE_GUI"', 'gui["result"] == "PASS_FORMAL_HD_FIVE_LANGUAGE_GUI"')
+    one('"--display-language", "zh-Hant", "--display-graphics", "original"]',
+        '"--display-language", "en", "--display-graphics", "hd"]')
+    one('"result": "PASS_HD_RUNTIME_GUI_FOUR_REPLAYS"', '"result": "PASS_FORMAL_HD_GUI_FOUR_REPLAYS"')
+    one('result["limitations"] = ["正式入口及本次正常路徑；其他未驗欄位與HD仍未完成。"]',
+        'result["limitations"] = ["正式入口、單座HD及本次正常路徑；其他素材、動畫與完整五語仍未完成。"]')
 compile(s, str(out), "exec")
 out.write_text(s)
 print("PASS_HD_RUNTIME_REPLAY_PROBE_BUILD", hashlib.sha256(out.read_bytes()).hexdigest())

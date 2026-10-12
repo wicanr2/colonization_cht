@@ -45,6 +45,9 @@ var frontendDisplayPrepare = func(options displayOptions) (func(), error) {
 	return func() { displayLanguage = options.Language }, nil
 }
 
+// 啟動選項可因已確認的素材缺件回退；Apply不經此接點。
+var frontendDisplayStartupOptions = func(options displayOptions) displayOptions { return options }
+
 var displayUILanguages = []string{"zh-Hant", "zh-Hans", "ja", "ko", "en"}
 var displayUIKeys = []string{"ui.settings", "ui.description", "ui.language", "ui.graphics",
 	"ui.language.zh-Hant", "ui.language.zh-Hans", "ui.language.ja", "ui.language.ko", "ui.language.en",
@@ -243,6 +246,7 @@ func newDisplayUI() *displayUI {
 	must(err)
 	options, err := readDisplayPreferences(u.configPath, *displayUIInitialLanguage, *displayUIInitialGraphics)
 	must(err)
+	options = frontendDisplayStartupOptions(options)
 	commit, err := frontendDisplayPrepare(options)
 	must(err)
 	if commit == nil {

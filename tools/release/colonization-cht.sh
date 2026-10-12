@@ -45,6 +45,6 @@ exec "$here/bin/colonization-window" --window --play --root "$game" --scratch "$
   --dialog-values "$t/variable-values.zh-Hant.tsv" --dialog-atlas "$m/dialog-atlas.json" \
   --string-a --string-templates "$t/string-templates.zh-Hant.tsv" --string-atlas "$m/string-atlas.json" \
   --colony-names "$t/colony-bilingual.tsv" --audio --sb-digital \
-  --language-bundles "$l" --display-settings \
+  --language-bundles "$l" --display-settings --hd-assets "$here/graphics" \
   --display-ui-font "$u/NotoSansCJK-Regular.ttc" --display-ui-catalog "$t/frontend-ui.tsv" \
   --out "$save/../last-run" "${args[@]}"

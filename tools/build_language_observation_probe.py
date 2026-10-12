@@ -149,7 +149,8 @@ def attach_language_runtime(repo, output, reference, *, with_rebuild=True, forma
     if with_rebuild:
         extra_sources = ["tools/language_bundle_probe.go", "tools/language_bundle_probe_test.go",
                          "tools/language_rebuild_probe.go", "tools/language_rebuild_probe_test.go",
-                         "tools/language_resource_index.go", "tools/language-catalogs.json"]
+                         "tools/language_resource_index.go", "tools/language-catalogs.json",
+                         "tools/hd_runtime.go", "tools/hd_runtime_test.go"]
         for name in extra_sources:
             (output / Path(name).name).write_bytes((repo / name).read_bytes())
         old = "\tjournal := &nativeJournal{enabled: nativeOn}\n"
@@ -165,9 +166,17 @@ def attach_language_runtime(repo, output, reference, *, with_rebuild=True, forma
 \t\tdraftTargets, err = draftPrepareTargets(languageRoot, files, dialogOwned, helpOwned)
 \t\tmust(err)
 \t}
+\tvar hd *hdRuntime
+\thdReason := "HD assets not requested"
+\tif languageLive && !*control {
+\t\tvar err error
+\t\thd, err = loadHDRuntime(m, *root, *hdAssets)
+\t\tif err != nil { hdReason = err.Error(); fmt.Fprintln(os.Stderr, "HD停用：", hdReason) } else { hdReason = "" }
+\t}
+\tfrontendDisplayStartupOptions = func(options displayOptions) displayOptions { return hdStartupOptions(hd, options) }
 \tvar draftLive *draftLanguageBackend
 \tif languageLive {
-\t\tdraftLive = &draftLanguageBackend{targets: draftTargets, sample: func() draftNativeFrame {
+\t\tdraftLive = &draftLanguageBackend{hd: hd, hdReason: hdReason, targets: draftTargets, sample: func() draftNativeFrame {
 \t\t\treturn draftNativeFrame{journal, canvas(), m.Mem[0x3bb00:0x3bb00+64000], m.Mem[0xa0000:0xafa00], m.DAC[:], cursorBox(int(d.Mouse.X),int(d.Mouse.Y)), m.Steps, m.VideoMode()}
 \t\t}}
 \t\tfrontendDisplayPrepare = func(options displayOptions) (func(), error) {
@@ -179,6 +188,7 @@ def attach_language_runtime(repo, output, reference, *, with_rebuild=True, forma
 \t\tmust(err)
 \t\toptions, err := readDisplayPreferences(preference, *displayUIInitialLanguage, *displayUIInitialGraphics)
 \t\tmust(err)
+\t\toptions = frontendDisplayStartupOptions(options)
 \t\tcommit, err := frontendDisplayPrepare(options)
 \t\tmust(err)
 \t\tcommit()
@@ -223,6 +233,10 @@ def attach_language_runtime(repo, output, reference, *, with_rebuild=True, forma
         if s.count(old) != 1:
             raise ValueError("重建輸出接點不唯一")
         s = s.replace(old, new, 1)
+        hook = "m.SetBeforeInstruction(func() {"
+        if s.count(hook) != 2:
+            raise ValueError("HD原版觀測接點不同")
+        s = s.replace(hook, hook + "\n hd.beforeInstruction()")
         (output / "adapter.go").write_text(s)
     subprocess.run(["gofmt", "-w", str(output / "adapter.go"), str(output / "language_observations.go"),
                     str(output / "language_observations_test.go")], check=True, timeout=30)

@@ -278,7 +278,7 @@ IDA自動函式邊界及名稱只作導覽，仍須原版正常路徑的進入�
 [原版及游標稽核](../../tools/check_hd_lifecycle.py)與
 [IDA游標查詢](../../tools/ida_hd_cursor.py)確認單一游標來源82個不透明點，
 五組暫繪／還原配對完整。私有離線HD原型保留浮標與游標，離城無殘留；
-v4候選及完整生成提示只留本機，未定正式素材。
+R29當時v4候選及提示只留本機，正式採用見下列R31驗收。
 新增[HD執行期原型](../../tools/hd_runtime_prototype.go)、
 [原型組裝器](../../tools/build_hd_runtime_prototype.py)與
 [原版生命週期測試](../../tools/hd_runtime_prototype_test.go)，只改正式前端的隔離副本。
@@ -288,8 +288,15 @@ v4候選及完整生成提示只留本機，未定正式素材。
 原型HD、原型未啟用HD、正式前端及原文控制的CPU、完整RAM、VGA、DAC、WAV與存檔全同。
 676項既有Go零skip、go vet、49點原版重播及18反例通過。
 本批右鍵正常開啟PEDIA.TXT:@BUILDING32，關閉後返回殖民地；不沿用前批未開啟的場景假設。
-規格061仍DRAFT，下一步審正式素材、缺件及保存HD偏好的回退，再接正式建置。
-本輪沒有正式HD、其他素材或動畫完成信用。
+R30原型後續的正式接線已在R31通過，[規格061](../spec/061-hd-building-draw-lifecycle.md)限定CONFORMED。
+[正式HD載入及合成](../../tools/hd_runtime.go)、[載入／交易測試](../../tools/hd_runtime_test.go)
+及[生成素材清冊](../../graphics/manifest.json)沿已驗單座與固定位置。685Go零skip及go vet、
+152組正式啟動器五語原版／HD視窗、608筆原子設定事件及3280點不透明游標通過。
+65筆實際DOS輸入四側重播至205400000步，完整CPU、RAM、VGA、DAC、WAV及存檔全同。
+[缺件啟動GUI探針](../../tools/probe_hd_startup_fallback.py)驗五個新行程，保留語言及原HD偏好，
+缺件時當次回原版，恢復後HD再生效；五個封裝拒絕反例通過。
+視窗及四側重播組裝器加--formal走正式入口；本機根為hd-formal-r31。
+其他建築、地形、人物、動畫、完整五語、效能及三平台新版交付仍未完成。
 
 ## 可丟棄原型與重跑入口
 

@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "kind": "display-hd-generated-assets",
+  "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+  "license": "LicenseRef-RRSAL-1.0",
+  "rights": {
+    "classification": "AI-generated redraw",
+    "tool": "built-in imagegen",
+    "original_reference_distributed": false,
+    "source_pixels_copied": false,
+    "scope": "display-only generated art; original game remains separately required; no rights grant over original game"
+  },
+  "assets": {
+    "building-032.png": {
+      "sha256": "c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8",
+      "bytes": 1161065,
+      "size": [
+        1158,
+        1359
+      ],
+      "mode": "RGBA",
+      "target_size": [
+        92,
+        108
+      ],
+      "target_rect": [
+        224,
+        52,
+        316,
+        160
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "retain original PNG alpha; clip to verified per-pixel ownership inside target rectangle",
+      "generation_prompt": "Use case: style-transfer.\nAsset type: one transparent HD pixel-art building sprite for a display-only overlay of Colonization (1994).\nImage 1 is the edit target and exact geometry reference: the original 23 by 27 pixel fur trader's house enlarged by nearest neighbour. Image 2 is the USER APPROVED fine pixel-art style reference only.\nRedraw ONLY the building in Image 1 using the crisp pixel clusters, restrained warm earthy colors, stone/wood/shingle textures and lighting of Image 2. Closely retain Image 1's silhouette, projected angle, proportions, roof slopes and the exact placement and height of its two tall narrow upper projections. Keep the broad lower rectangular facade and its existing dark openings in the same positions. The goal is a small faithful house with more legible material detail, not a large landmark.\nUse a real transparent background. Keep the building aligned within its original 23:27 canvas aspect ratio, with the same top/bottom/left/right extents and transparent gaps. The intended final display is 92 by 108 pixels, so use pixel-art detail that survives that size. No antialiased outlines, smooth painting or photorealism. No lettering, frame, ground tile, detached objects, new floors, balconies, arches, towers, people or extra scenery. Do not include any content from the style-reference sheet other than its visual style. Preserve the dark-to-light arrangement and the narrow organic green patches already in the target; do not grow them beyond the original silhouette.",
+      "reference_sha256": {
+        "native": "631346641d433465387356bc34880e009477165ef8f93b97ced5d2dd547c661d",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
+      }
+    }
+  }
+}
