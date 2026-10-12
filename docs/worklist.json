@@ -1498,7 +1498,7 @@
       "acceptance": "依已定稿的第一張精細像素風重繪地形、人物與建築；原始像素與HD可獨立於語言切換。正常GUI、動畫、遮擋、座標、效能、同狀態與素材權利驗收通過，原版規則與存檔不變。",
       "verify": {
         "kind": "manual",
-        "note": "206SS／1517幀、殖民地42素材71位置與世界16素材139位置保留。BUILDING032完整534bytes來源及三次未裁切呼叫的參數、440點與重畫底圖已驗；首次返回後2122筆寫入涵蓋621點，含366筆同值寫入，逐筆重建及四組CPU、完整RAM、VGA、DAC一致，舊觀測收據逐位元組相同。六項錯誤證據反例全拒絕。規格061維持DRAFT，入口docs/goals/186-display-settings-and-gameplay-video.md；v3未選正式素材，遮擋、離城、重進、HD合成、動畫與完整場景待驗。返回附近程式碼成因及歷史GUI完整RAM差異仍未知，不增加HD完成信用。來源與收據見RESEARCH-LOG及docs/spec/061-hd-building-draw-lifecycle.md。"
+        "note": "資產盤點、BUILDING032完整來源與參數證據保留。55組正常GUI、53筆實際DOS輸入至134600000步；49個不同檢查點及終點與觀測、無觀測兩側CPU、完整RAM、VGA、DAC及存檔相同。九次重畫與19463筆矩形寫入含5986筆同值可重建；已驗原版浮標、存檔、離城及重進。IDA及114次緩衝區寫入確認單一游標82點遮罩，五組暫繪還原互逆；離線HD原型保留浮標與游標，離城無殘留。公開重生工具及六種錯誤證據反例通過。規格061保持DRAFT，入口docs/goals/186-display-settings-and-gameplay-video.md；v4候選未定稿，正式素材、HD執行期、五語分層、開關、動畫與完整場景待驗。返回附近碼成因及歷史GUI RAM差異仍未知，不增加正式HD完成信用。來源與收據見RESEARCH-LOG及docs/spec/061-hd-building-draw-lifecycle.md。"
       }
     },
     {

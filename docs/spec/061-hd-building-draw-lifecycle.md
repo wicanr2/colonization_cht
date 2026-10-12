@@ -71,9 +71,53 @@ confirmed：首次返回至75900000步，同矩形有2122筆寫入，涵蓋全�
 | 72099553步 | 72109500步 | 完整來源、座標及畫布一致，440點各一次 |
 
 兩次進入前的621點等於首次建築前底圖，返回後等於首次建築後畫面。
-這足以支持本切片的底圖保存與重畫原型，尚未證實遮擋、離城或重進。
+這份早期收據足以支持本切片的底圖保存與重畫原型；後續正常GUI證據見下節。
 後兩次返回位置的16bytes碼各有一byte不同；完整碼在新IDA資料庫沒有匹配。
 差異成因未知。來源、幾何及逐點畫布證據不依賴猜測該呼叫者的用途。
+
+## 正常GUI生命週期與游標
+
+2026-10-12新增原版正常GUI收據。正式前端329d56d6…使用實際X11輸入，
+沒有注入遊戲狀態。55組檢查含原有十場景五語及新增五張英文原版畫面；
+53筆實際DOS輸入至134600000步。49個不同檢查點及終點的CPU暫存器、
+完整RAM、VGA索引與DAC均與觀測、無觀測重播一致，兩個原版存檔相同。
+本輪未比較WAV，不增加音訊對拍信用。
+
+confirmed限此正常路徑：首次建築68901370至68911317步，後續九次同來源重畫
+各寫440點；首次返回後19463筆矩形寫入含5986筆同值，逐筆可重建全部GUI檢查點。
+正常改名、取消、存檔、離城與重進均已觀察。
+懸停顯示Fur Trader's House浮標；右鍵沒有開啟建築對話框。
+第一次Escape離城，第二次開啟Exit to DOS確認框。
+保留原始場景標籤，不能將hd-building-context誤稱建築視窗。
+
+游標的已證實範圍如下，位址空間分開記錄：
+
+| 原始定位 | 證據與本次語意 |
+| --- | --- |
+| 原版0B68:0547 | 寫入16bytes碼26880547e2f007c3c800000006c44606，唯一匹配IDA EA0x1AAC7。 |
+| IDA sub_1AAAD，EA0x1AAAD至0x1AACF | 保留原始名稱，僅作導覽；EA0x1AAB4設定SI=06D4h，EA0x1AAB7設定DI=FB00h，EA0x1AABA設定CX=256。 |
+| IDA EA0x1AABD／0x1AABE／0x1AAC0／0x1AAC2／0x1AAC7 | lodsb、cmp al,0FFh、jnz、讀es:[di-100h]、寫es:[di]。FF分支取背景，其餘取來源色。 |
+| 原版RAM 1C6A:06D4，線性0x1CD74 | 完整256bytes指紋47fced19d04987d3a0de8b6fd929abae6ba886939a2a7ce408b0213360ef1e03，174個FF、82個不透明點。 |
+| 原版A000:FA00及A000:FB00 | 本次49個檢查點分別與16×16游標區的底圖及合成結果逐點相同；114次256點寫入共29184筆，來源全同。 |
+| 原版0B68:051C | 建築矩形內2100筆寫入形成五組暫繪／還原配對；每組兩側各210點，地址一致、舊新值互逆，區間內沒有其他矩形寫入，檢查點均在配對完成後。 |
+
+畫面差分只有78至82點，與背景同色時仍有82個游標不透明點。
+不能用indexed與canvas的差分取代來源透明遮罩。
+也不能因本次五組配對可還原，就全域忽略0B68:051C或同值寫入。
+未完成配對、來源不同、其他寫入交錯及未知游標維持原版回退。
+
+私有離線原型逐點撤除其他寫入的HD擁有權，只對上述已完整驗證的配對保留底層。
+浮標遮擋161點後保留其餘460點；游標82點放在最上層，修正先前整個游標矩形露出原圖的缺口。
+重進恢復621點；存檔頁、離城與退出確認框沒有HD殘留。
+這是原版GUI收據加離線合成，尚非HD執行期或切換驗收。
+
+v4候選以原版完整不透明點提取圖及已定稿畫風為參考，由內建imagegen生成，
+原樣保存在本機building-032-candidate-v4.png，SHA-256為
+c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8。
+原始尺寸1158×1359，92×108原型按最近鄰取樣；本輪alpha>0量測為
+5853點覆蓋、1187點未覆蓋、331點外溢，與早期alpha≥128收據的門檻不同。
+完整提示、來源指紋與本輪量測保存在本機JSON；v3與v4均未定為正式素材。
+數字不是美術通過門檻，含原版像素的參考與對照不入Git。
 
 ## 隔離原型要求
 
@@ -92,7 +136,7 @@ confirmed：首次返回至75900000步，同矩形有2122筆寫入，涵蓋全�
 ## READY前尚缺
 
 1. 一座可用且指紋明確的正式候選，確認尺寸、透明邊界與底圖恢復。
-2. 正常GUI進城、懸停／視窗遮擋、離城及重進，驗證撤除與重畫順序。
+2. 原版正常GUI進城、浮標遮擋、離城及重進已驗；仍需HD執行期的同路徑與實際視窗遮擋驗收。
 3. 原版與候選合成的同狀態畫面，五語、游標、設定列及HD開關抽樣。
 4. 來源／畫布／幾何錯誤、過期底圖與未知寫入反例，以及比例相稱的效能量測。
 5. 證據審查後限定READY範圍。地形、人物與動畫不因本建築通過而取得信用。
@@ -122,3 +166,47 @@ IDA重生指令為parameters-r1/run-ida.sh，Go重生腳本為run-parameters-r3.
 
 完整指令與原版快照只保存在本機。歷史GUI的完整RAM差異仍未知；
 本次正常GUI輸入重播不冒充該歷史GUI同狀態，也未增加文字shown、HD或新版交付完成信用。
+
+### 正常GUI收據的重生
+
+入口為[生命週期探針組裝器](../../tools/build_hd_lifecycle_probe.py)、
+[生命週期稽核器](../../tools/check_hd_lifecycle.py)及
+[IDA游標查詢](../../tools/ida_hd_cursor.py)。只接受本次已驗53筆GUI收據；
+不是任意遊戲輸入重播器。缺原版時前兩個工具明示SKIP並回傳77。
+下列命令在既有Docker內執行，掛載契約沿AGENTS.md；/out為上述本機證據根。
+
+```bash
+python3 /repo/tools/build_hd_lifecycle_probe.py \
+  --gui-dir /out/lifecycle-r29-r1/gui \
+  --output-dir /out/lifecycle-public-r29-r1 \
+  --draw-query /out/query.json
+python3 /repo/tools/check_hd_lifecycle.py \
+  --evidence-dir /out/lifecycle-public-r29-r1 \
+  --gui-dir /out/lifecycle-r29-r1/gui \
+  --cursor-ida /out/ida-cursor-public-r29-r2.json \
+  --game-root /game --output /out/lifecycle-public-r29-r1/audit-v3.json
+```
+
+組裝器沿Go1.26.7既有映像、/dosgolem唯讀副本與離線Go快取，執行go build、go vet及兩組重播。
+IDA沿相同已驗9.4映像，在/tmp複製唯讀VICEROY.EXE新建資料庫；
+設定COLONIZATION_HD_IDA_OUTPUT=/out/ida-cursor-public-r29-r2.json後，
+以idat -A -S/repo/tools/ida_hd_cursor.py /tmp/VICEROY.EXE執行。
+公開工具重生的既有原版檔案與先前私有收據逐位元組相同。
+六種錯誤證據均拒絕：錯原版、假GUI狀態、刪同值寫入、錯游標來源、錯舊值與錯IDA分支。
+
+| 本輪收據 | SHA-256 |
+| --- | --- |
+| lifecycle-r29-r1/gui/check.json | 3966749913e10f1d9f7b1c5c1a509486ab74ffdbcadfdb036696604597c0319a |
+| lifecycle-r29-r1/gui/gui.inputs.json | 3947d52a893ae3d6c6f388cefc1e67e4001d41270ca46e65856526a9b97471ca |
+| lifecycle-public-r29-r1/observed/draw-boundary.json | dd0da78185958acb9e9cb3acfd2965493e3ff74a4cbc9ddadfda8b40e1df129b |
+| lifecycle-public-r29-r1/observed/cursor-writes.json | f63993b47a9f632d02a650bd7cfe8bf08f1d46973995727dca52f2588421d991 |
+| ida-cursor-public-r29-r2.json | 7afbde56cffa45438a6a9638996487413c0a72b3dc202d5b29405bcaddf63726 |
+| lifecycle-public-r29-r1/audit-v3.json | 74247994a1ffa7ff3971d5ce3e3bd5fe83da8709f72053d352dd308a97bbca81 |
+| lifecycle-public-r29-r1/negative-audit.json | 085d6c386cb18b238b9651320a4753226fedc48c38caacd8872f7015e04eaee1 |
+| lifecycle-r29-replay-r3/lifecycle-audit-v4.json | 8c0be41f1573771af630ff6826fb3855691d088292d52f1e1a2dacf64db4cac5 |
+| tools/build_hd_lifecycle_probe.py | e9c136d12c6004db0c13c08cfb235a2a168fcfa0b174ba569f1a553a281ae451 |
+| tools/check_hd_lifecycle.py | b0117769d6a93c81b238c073317a13c92340508548b6337ce122f76c96fe8210 |
+| tools/ida_hd_cursor.py | 3a43dd5c92f93c5b5face1b6d78c99ce44d36091c6e63d7f07411c325066a6d2 |
+
+新收據只解除本路徑的原版遮擋、離城、重進與游標來源未知。
+歷史GUI完整RAM差異、返回附近碼成因及其他游標狀態仍保持原等級。
