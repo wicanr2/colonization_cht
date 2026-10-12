@@ -55,6 +55,109 @@ type hdDrawBoundary struct {
 	writes                     map[uint32][3]uint64
 	active, selected, complete bool
 	record                     map[string]any
+	parameters                 bool
+	lateWrites                 map[uint32]*hdLateWrite
+	stream                     bool
+	lateEvents                 [][6]uint64
+	lateCalls                  []map[string]any
+	lateCall                   map[string]any
+	lateCS, lateIP, lateSP     uint16
+}
+
+type hdLateWrite struct {
+	Count uint64 `json:"count"`
+	First uint64 `json:"first_step"`
+	Last  uint64 `json:"last_step"`
+	Site  string `json:"last_cs_ip"`
+	Old   uint8  `json:"first_old_value"`
+	Value uint8  `json:"last_value"`
+}
+
+func hdROISnapshot(m *golem.Machine) []byte {
+	data := make([]byte, 0, 23*27)
+	for y := 13; y < 40; y++ {
+		at := 0x2cae0 + y*320 + 56
+		data = append(data, m.Mem[at:at+23]...)
+	}
+	return data
+}
+
+// 只追已證實來源、座標與畫布的重畫；不把其他素材套入此單次參數解釋。
+func (b *hdDrawBoundary) afterSelectedStep() {
+	m := b.m
+	if b.lateCall != nil && m.CPU.Seg[golem.CS] == b.lateCS && m.CPU.IP == b.lateIP && m.CPU.R[golem.SP] == b.lateSP+10 {
+		b.lateCall["return_step"] = m.Steps
+		b.lateCall["after_roi_sha256"] = hdHash(hdROISnapshot(m))
+		b.lateCalls = append(b.lateCalls, b.lateCall)
+		b.lateCall = nil
+	}
+	if m.CPU.Seg[golem.CS] != 0xd46 || m.CPU.IP != b.entry || m.CPU.R[golem.AX] != 33 || m.CPU.R[golem.DX] != 56 {
+		return
+	}
+	stack := uint32(m.CPU.Seg[golem.SS])*16 + uint32(m.CPU.R[golem.SP])
+	if binary.LittleEndian.Uint16(m.Mem[stack+4:stack+6]) != 13 {
+		return
+	}
+	retIP := binary.LittleEndian.Uint16(m.Mem[stack : stack+2])
+	retCS := binary.LittleEndian.Uint16(m.Mem[stack+2 : stack+4])
+	reads := hdParameterSnapshot(m, retCS, retIP)
+	if reads["record_first_534_sha256"] != "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a" {
+		return
+	}
+	words, record := reads["ds_bx_words"].([]uint16), reads["record_words"].([]uint16)
+	if words[0] != 200 || words[1] != 320 || uint32(words[3])*16+uint32(words[2]) != 0x2cae0 || record[4] != 23 || record[5] != 27 {
+		return
+	}
+	pc := uint32(0xd46)*16 + uint32(b.entry)
+	if !bytes.Equal(m.Mem[pc:pc+uint32(len(b.prefix))], b.prefix) {
+		panic("後續已驗建築入口碼失配")
+	}
+	if b.lateCall != nil || len(b.lateCalls) >= 64 {
+		panic("已驗建築的後續呼叫重入或超出界限")
+	}
+	b.lateCS, b.lateIP, b.lateSP = retCS, retIP, m.CPU.R[golem.SP]
+	b.lateCall = map[string]any{"entry_step": m.Steps, "entry_registers": m.CPU.R,
+		"entry_segments": m.CPU.Seg, "parameter_reads": reads,
+		"return_cs_ip":      fmt.Sprintf("%04X:%04X", retCS, retIP),
+		"before_roi_sha256": hdHash(hdROISnapshot(m))}
+}
+
+// 僅記錄已驗單次呼叫的原始讀值。位移運算依IDA指令，欄位語意由外部證據審查。
+func hdParameterSnapshot(m *golem.Machine, retCS, retIP uint16) map[string]any {
+	read := func(segment, offset uint16, size int) []byte {
+		at := uint32(segment)*16 + uint32(offset)
+		if at+uint32(size) > uint32(len(m.Mem)) {
+			panic("參數觀測越界")
+		}
+		return m.Mem[at : at+uint32(size)]
+	}
+	words := func(data []byte) []uint16 {
+		values := make([]uint16, len(data)/2)
+		for i := range values {
+			values[i] = binary.LittleEndian.Uint16(data[i*2 : i*2+2])
+		}
+		return values
+	}
+	sp, ss := m.CPU.R[golem.SP], m.CPU.Seg[golem.SS]
+	args := words(read(ss, sp+4, 6))
+	recordOffset := uint16((m.CPU.R[golem.AX]&0x7fff)*12 + args[1] + 0x36)
+	record := words(read(args[2], recordOffset, 12))
+	if retIP < 16 {
+		panic("返回位置不足以擷取呼叫碼")
+	}
+	return map[string]any{
+		"inference":                   "raw reads only; parameter meanings require IDA data flow and native geometry review",
+		"ds_bx_far":                   fmt.Sprintf("%04X:%04X", m.CPU.Seg[golem.DS], m.CPU.R[golem.BX]),
+		"ds_bx_words":                 words(read(m.CPU.Seg[golem.DS], m.CPU.R[golem.BX], 12)),
+		"ss_sp_plus4_words":           args,
+		"record_offset_expression":    "uint16((AX & 0x7fff) * 12 + word[SS:SP+6] + 0x36)",
+		"record_far":                  fmt.Sprintf("%04X:%04X", args[2], recordOffset),
+		"record_words":                record,
+		"record_first_far":            fmt.Sprintf("%04X:%04X", record[1], record[0]),
+		"record_first_534_sha256":     hdHash(read(record[1], record[0], 534)),
+		"caller_before_return_16_hex": fmt.Sprintf("%x", read(retCS, retIP-16, 16)),
+		"caller_after_return_16_hex":  fmt.Sprintf("%x", read(retCS, retIP, 16)),
+	}
 }
 
 func hdNewBoundary(m *golem.Machine, path string) *hdDrawBoundary {
@@ -102,10 +205,14 @@ func hdNewBoundary(m *golem.Machine, path string) *hdDrawBoundary {
 }
 
 func (b *hdDrawBoundary) beforeStep() {
-	if b == nil || b.complete || b.m.Steps < 50000000 {
+	if b == nil || (b.complete && !b.stream) || b.m.Steps < 50000000 {
 		return
 	}
 	m := b.m
+	if b.complete && b.stream {
+		b.afterSelectedStep()
+		return
+	}
 	if b.active && m.CPU.Seg[golem.CS] == b.retCS && m.CPU.IP == b.retIP && m.CPU.R[golem.SP] == b.sp+10 {
 		if b.selected {
 			b.record["return_step"] = m.Steps
@@ -114,6 +221,12 @@ func (b *hdDrawBoundary) beforeStep() {
 			b.record["return_sp"] = m.CPU.R[golem.SP]
 			b.record["after_canvas_sha256"] = hdHash(m.Mem[0x2cae0 : 0x2cae0+64000])
 			b.record["writes"] = b.writes
+			if b.parameters {
+				if _, ok := b.record["parameter_reads"]; !ok {
+					panic("已選呼叫缺少入口參數快照")
+				}
+				b.lateWrites = map[uint32]*hdLateWrite{}
+			}
 			b.complete = true
 		}
 		b.active = false
@@ -148,9 +261,34 @@ func (b *hdDrawBoundary) beforeStep() {
 		"before_canvas_sha256": hdHash(b.before),
 		"address_space":        "dosgolem real-mode CS:IP and 20-bit linear RAM; canvas base 0x2cae0",
 		"limitations":          "One normal-path draw. Raw register and stack evidence; clipping, all draw order, occlusion and argument meanings are not a READY contract."}
+	if b.parameters && m.Steps == 67569117 {
+		b.record["parameter_reads"] = hdParameterSnapshot(m, b.retCS, b.retIP)
+	}
 }
 
 func (b *hdDrawBoundary) write(addr uint32, old, value uint8) {
+	if b != nil && b.parameters && b.complete {
+		i := int(addr) - 0x2cae0
+		if i%320 >= 56 && i%320 < 79 && i/320 >= 13 && i/320 < 40 {
+			r := b.lateWrites[addr]
+			if r == nil {
+				r = &hdLateWrite{First: b.m.Steps, Old: old}
+				b.lateWrites[addr] = r
+			}
+			r.Count++
+			r.Last = b.m.Steps
+			r.Value = value
+			cs, ip := b.m.CPU.OpAddr()
+			r.Site = fmt.Sprintf("%04X:%04X", cs, ip)
+			if b.stream {
+				if len(b.lateEvents) >= 100000 {
+					panic("單建築後續寫入事件超出界限")
+				}
+				b.lateEvents = append(b.lateEvents, [6]uint64{b.m.Steps, uint64(cs), uint64(ip), uint64(addr), uint64(old), uint64(value)})
+			}
+		}
+		return
+	}
 	if b == nil || !b.active || b.complete {
 		return
 	}
@@ -186,7 +324,15 @@ func main() {
 	out := flag.String("out", "", "本機研究輸出目錄，必須不存在")
 	control := flag.Bool("control", false, "不裝觀測器的同輸入對照")
 	drawQuery := flag.String("draw-query", "", "可選的唯一IDA建築入口研究收據")
+	drawParameters := flag.Bool("draw-parameters", false, "只讀單建築參數與返回後同矩形的所有寫入")
+	drawWriteStream := flag.Bool("draw-write-stream", false, "另存有界寫入順序與同來源同位置的後續呼叫")
 	flag.Parse()
+	if *drawWriteStream && !*drawParameters {
+		panic("寫入順序觀測需參數觀測")
+	}
+	if *drawParameters && (*control || *drawQuery == "") {
+		panic("參數觀測需IDA入口收據且不可用無觀測對照")
+	}
 	if *control && *drawQuery != "" {
 		panic("無觀測對照不可安裝呼叫邊界探針")
 	}
@@ -236,6 +382,10 @@ func main() {
 	}
 	m.EnableOPLSynth(true)
 	boundary := hdNewBoundary(m, *drawQuery)
+	if boundary != nil {
+		boundary.parameters = *drawParameters
+		boundary.stream = *drawWriteStream
+	}
 	counts := map[string]uint64{}
 	var samples []hdProbeWrite
 	if !*control {
@@ -314,6 +464,19 @@ func main() {
 		}
 		if hdHash(after) != boundary.record["after_canvas_sha256"] {
 			panic("返回畫布與逐點寫入不符")
+		}
+		if boundary.parameters {
+			boundary.record["post_return_writes"] = boundary.lateWrites
+			boundary.record["observed_end_step"] = m.Steps
+			hdNeed(os.WriteFile(filepath.Join(*out, "post-return-canvas.idx"), m.Mem[0x2cae0:0x2cae0+64000], 0644))
+		}
+		if boundary.stream {
+			if boundary.lateCall != nil {
+				panic("後續已驗建築呼叫未返回")
+			}
+			boundary.record["post_return_event_columns"] = []string{"step", "cs", "ip", "linear_address", "old", "value"}
+			boundary.record["post_return_write_events"] = boundary.lateEvents
+			boundary.record["post_return_same_source_calls"] = boundary.lateCalls
 		}
 		hdNeed(os.WriteFile(filepath.Join(*out, "after-draw.idx"), after, 0644))
 		b, err := json.MarshalIndent(boundary.record, "", "  ")

@@ -5235,3 +5235,64 @@ confirmed：原版填色上緣120、墨跡大寫字高7。舊CJK參考字使三�
 e511ea27eb28f45e82ffaa21059662a65f75943f5dd02527b68bd3135262fe68；
 限定審查7a5769e5810ae966b764b79ba440803cab59af867c07fd9f491ef54af85383a2。
 完整腳本與收據入口列於規格038。沒有增加原版語意、改寫原版或提升全遊戲覆蓋聲明。
+
+## 2026-10-12：首座建築參數與後續同值重畫
+
+路由仍命中資產考古與IDA／16-bit DOS，沿已載入的逆向證據契約及IDA9.4技能。
+本節續接[原始呼叫邊界](#2026-10-12首座建築原版呼叫邊界與繪製差分)，
+新增證據只解除本切片的參數與兩次重畫未知，不修改歷史原始收據。
+單一入口為[目標186](docs/goals/186-display-settings-and-gameplay-video.md)，
+DRAFT契約見[規格061](docs/spec/061-hd-building-draw-lifecycle.md)。
+
+輸入VICEROY.EXE為a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3；
+BUILDING.SS為e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4。
+正常GUI輸入9b246ee6e4aa2fc36e3db4eae8fa8487527e7b4393afff9fdcfe19e61c741979及
+初始存檔52ae8b7bd4bea1869afb825af165a8edc50882fc176d49985d4fb3c362d5469b未改。
+Go1.26.7、隔離dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013、
+IDA9.4／Python3.12.3，沿既有映像ID4ac62de83339的UID1000最低探針收據，
+從唯讀原版新建容器暫存資料庫；原始名稱、位元組及運算元未改。
+
+confirmed限三次未裁切呼叫，位址空間及逐項原始定位完整列於規格061：
+
+- 原版執行0D46:000A與IDA MZ載入空間EA0x1C36A由原始入口碼對應。
+  入口DX=56經[BP-2Ah]進入水平定位；SS:SP+4=13經[BP+6]進入垂直定位。
+  入口DS:BX=1C6A:2DA8，前四個word為200、320、0、2CAEh，
+  間接讀取目的遠指標2CAE:0000與列步長320；原版畫布線性位址為0x2CAE0。
+- 入口AX=33經[BP-2Eh]、遮罩7FFFh、乘12，加SS:SP+6及36h，
+  遠段取SS:SP+8，得到4F22:A886。記錄首遠指標為5F3B:000E；
+  完整534bytes與BUILDING.SS第032幀相同，記錄+8及+Ah為23與27。
+  此幀的序號對應有完整來源證明；其他SS、翻轉與裁切不外推。
+- 首次67569117至67579078步，後兩次67867911至67877872、
+  72099553至72109500步，皆在原版121D:1554返回。
+  後兩次440個不透明點各寫一次，來源、座標、畫布與像素一致。
+  每次重畫前的621點等於首次建築前底圖，返回後等於首次建築後畫面。
+- 首次返回後至75900000步共有2122筆寫入，涵蓋全部621點，包含366筆同值寫入。
+  原版0CBA:00CA為1242筆，0D46:01D2為772筆，0D46:01B4為108筆。
+  依舊值與時間逐筆重播可重建終點矩形；終點與首次畫面相同仍有中間重畫。
+  尚未將0CBA函式用途外推為一般背景或遮擋契約。
+- 逐筆觀測、參數觀測、舊觀測與無觀測四組CPU、完整RAM、VGA、DAC一致。
+  舊draw-boundary.json及第一批參數收據逐位元組相同。
+  六項反例全拒絕：錯原版、錯IDA、舊值破壞、刪除同值寫入、亂序、錯來源遠指標。
+  本輪未記錄WAV，不增加音訊對拍聲明。
+
+未知：後兩次返回位置16bytes的+0Ah由42h變1Ch，完整碼在新IDA資料庫零匹配；
+成因未證實，不藉此猜測overlay或自改碼。歷史GUI完整RAM差異也仍未知。
+本次正常GUI輸入重播沒有取代正式HD正常GUI。遮擋、離城、重進、素材安全邊界、
+動畫與合成介面尚未完成，不升READY，不增加shown或正式HD信用。
+
+本機根目錄workplace/reports/goal186-display-hd/hd-building032-draw-boundary-20261012：
+
+| 證據 | SHA-256 |
+| --- | --- |
+| parameters-r1/ida-parameters.json | f891aeed6b49d0aab9448cb10bfc7b63ead2762360e62b31f8c99abcc4ab08eb |
+| parameters-r3/stream/draw-boundary.json | 581013a3496a1228eb49ce17da494748601840a41ed1337612172ab0000e8e8a |
+| parameters-r3/parameter-audit-v2.json | ce321a3e3e5a11520a76661e9754417bdebd97240748236cd44adf65f00d211e |
+| parameters-r3/negative-audit.json | 8ee3fdc1b7d92a6c4bc9500bf2ccda4b620502e51795a7b4183c9b0616469ff0 |
+| parameters-r3/probe-check.json | cfd3f4f6a758dac71bb44f02d60130d4c076cd3054375b9c51c42ad1d8b15f96 |
+| tools/probe_hd_canvas_writes.go | e111ea99043e3d19d2b63badee41d081dee67025a0d5653b67d07082323f5feb |
+| parameters-r3/hd-parameter-probe | b56bc1b0953e3cca00cef09aa5a253a2c7c0240efe99dba9f7b29aa1541d9ae2 |
+| tools/ida_hd_draw_parameters.py | 8dae2d5cb374316b96ba9800fd729324f27285912f899392fd9cdafa8f845c1d |
+| tools/check_hd_draw_parameters.py | 001a6cbca298177f9ca9dffaa60d07cc52f1d2f2fbb8886bf6cd9afcfe0aa26f |
+
+重生由規格061指向既有Docker映像、原始輸入、查詢、Go建置與稽核腳本。
+資料庫在容器暫存刪除，原版像素、快照及候選只留workplace。
