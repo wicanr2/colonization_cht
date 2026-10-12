@@ -32,7 +32,7 @@ v.1.0.3-20261010 與 #56 完成紀錄保留；本頁不代表新增功能已完�
 四語逐欄Noto與英文原版畫布的正式驗收依
 [規格057](../spec/057-noto-runtime-atlas.md)及[規格060](../spec/060-language-bundle-swap.md)。
 整包接線基準為75組正常GUI與八次重播，涵蓋改名取消、存檔及新行程讀回。
-本輪透明外緣修正另通過635Go零skip、go vet、50組五語GUI與四次實際輸入重播，
+前批透明外緣修正另通過635Go零skip、go vet、50組五語GUI與四次實際輸入重播，
 完整CPU、RAM、VGA、DAC、WAV及存檔一致。
 正式啟動不需要隔離旗標；原文觀測與五語重建匯出另由診斷旗標控制。
 本批沒有新Release，已發布版仍維持原狀。
@@ -46,8 +46,13 @@ v.1.0.3-20261010 與 #56 完成紀錄保留；本頁不代表新增功能已完�
 不能由本次不同正常路徑重標為已解。
 
 城內90% (3)、1與4已依[規格052](../spec/052-retained-ascii-font.md)最新附記完成正式修正。
-地圖城名仍受離屏安全區差異阻擋，日文17px只證明私有排版容量，
-入口見[規格038](../spec/038-string-overlay-draft.md)最新DRAFT附記。
+地圖完整雙語Jamestown四語已依[規格038](../spec/038-string-overlay-draft.md)最新附記限定CONFORMED，
+字級23／23／17／22px，保留原版後畫像素；進城撤除，存檔返回世界重建。
+最新676Go零skip、go vet、50組五語GUI與42筆實際輸入四側重播至113400000步通過，
+完整CPU、RAM、VGA、DAC、WAV及存檔全等，城內十二個既有數值欄位保留。
+本機重生入口為既有language-resources-20261011/map-source-padding-r27的
+mapFormalApplyBuildR27.sh、mapFormalGUIR27.sh、mapFormalReplaysR27.sh及conformance-review.py；
+限定審查指紋7a5769e5810ae966b764b79ba440803cab59af867c07fd9f491ef54af85383a2。
 其他未驗來源及樣式仍回原文並記錄；完整可見來源生命週期、HD、影片與三平台新版交付仍須接續完成，
 不增加普查shown或宣稱整個目標完成。
 

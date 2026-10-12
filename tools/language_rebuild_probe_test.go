@@ -898,3 +898,293 @@ func TestDraftRetainedPaddingRejectsChangedSource(t *testing.T) {
 		t.Fatal("游標例外允許來源損壞")
 	}
 }
+
+func draftMapFixtureForTest() (*stringItem, *nativeObservation, *nativeJournal, []byte, []byte) {
+	ink, safe := image.Rect(146, 120, 196, 129), image.Rect(136, 118, 206, 130)
+	canvas := bytes.Repeat([]byte{10}, 64000)
+	r := &stringRun{text: []byte("Jamestown"), buf2: true, colors: map[byte]int{0: 1, 15: 1}, firstOld: map[int]byte{}}
+	o := &nativeObservation{kind: "string-map", step: 42, ink: ink, stringRun: r, after: map[int]byte{}}
+	for pos, value := range map[int]byte{120*320 + 146: 15, 121*320 + 147: 0} {
+		r.firstOld[pos], o.after[pos], canvas[pos] = 10, value, value
+	}
+	o.buffer = bytes.Clone(canvas)
+	before := bytes.Clone(canvas)
+	for pos, value := range r.firstOld {
+		before[pos] = value
+	}
+	rect := image.Rect(0, 0, safe.Dx()*4, safe.Dy()*4)
+	n, sh := image.NewAlpha(rect), image.NewAlpha(rect)
+	n.SetAlpha(40, 8, color.Alpha{A: 255}) // 原版墨跡內的完整正文。
+	n.SetAlpha(4, 8, color.Alpha{A: 180})  // 擴寬後的正文。
+	for y := 4; y < 8; y++ {
+		for x := 48; x < 52; x++ {
+			sh.SetAlpha(x, y, color.Alpha{A: 120})
+		}
+	}
+	sh.SetAlpha(45, 5, color.Alpha{A: 200})
+	it := &stringItem{id: "STRING:colony", text: "Jamestown", zh: "字", ink: ink, safe: safe, color: 15,
+		shadowOff: -stringLabelOutline, size: 23, norm: n, shadow: sh,
+		before: stringRect(before, safe), after: stringRect(canvas, safe), complete: 42}
+	canvas[119*320+148] = 68
+	return it, o, &nativeJournal{items: []*nativeObservation{o}}, canvas, bytes.Clone(canvas)
+}
+
+func TestDraftMapLabelPreservesNativeForeground(t *testing.T) {
+	it, o, j, canvas, indexed := draftMapFixtureForTest()
+	before, after, norm, shadow := bytes.Clone(it.before), bytes.Clone(it.after), bytes.Clone(it.norm.Pix), bytes.Clone(it.shadow.Pix)
+	oldCanvas, oldVGA, oldBuffer := bytes.Clone(canvas), bytes.Clone(indexed), bytes.Clone(o.buffer)
+	got, changed, clipped := draftFitMapLabel(it, o, j, canvas, indexed, image.Rectangle{})
+	if got == nil || changed != 1 || clipped != 16 || got.safe != it.safe || got.size != it.size || !bytes.Equal(got.norm.Pix, norm) {
+		t.Fatal("原正文、字級或後畫像素優先權未保留", changed, clipped)
+	}
+	if !stringSame(canvas, got, image.Rectangle{}) || draftMapMaskAt(got.shadow, got.safe, image.Pt(148, 119)) {
+		t.Fatal("舊背景或描邊覆蓋後畫內容")
+	}
+	for y := 0; y < it.shadow.Rect.Dy(); y++ {
+		for x := 0; x < it.shadow.Rect.Dx(); x++ {
+			if x >= 48 && x < 52 && y >= 4 && y < 8 {
+				continue
+			}
+			if got.shadow.AlphaAt(x, y) != it.shadow.AlphaAt(x, y) {
+				t.Fatal("改變了其他描邊")
+			}
+		}
+	}
+	palette := make([]byte, 768)
+	palette[15*3], palette[68*3+1] = 63, 63
+	out := draftRGB(indexed, palette)
+	k := 0
+	for y := got.safe.Min.Y; y < got.safe.Max.Y; y++ {
+		for x := got.safe.Min.X; x < got.safe.Max.X; x++ {
+			if got.before[k] != got.after[k] {
+				draftPaintPixel(out, y*320+x, got.before[k], palette)
+			}
+			k++
+		}
+	}
+	draftPaintLayers(out, got.safe, []*image.Alpha{got.shadow, got.norm}, []byte{0, 15}, palette)
+	for y := 119 * 4; y < 120*4; y++ {
+		for x := 148 * 4; x < 149*4; x++ {
+			if out.RGBAAt(x, y) != draftColor(68, palette) {
+				t.Fatal("原版後畫像素被覆蓋")
+			}
+		}
+	}
+	if !bytes.Equal(it.before, before) || !bytes.Equal(it.after, after) || !bytes.Equal(it.norm.Pix, norm) || !bytes.Equal(it.shadow.Pix, shadow) ||
+		!bytes.Equal(canvas, oldCanvas) || !bytes.Equal(indexed, oldVGA) || !bytes.Equal(o.buffer, oldBuffer) {
+		t.Fatal("候選修改了來源")
+	}
+	got.before[0] ^= 1
+	got.after[0] ^= 1
+	got.norm.Pix[0] ^= 1
+	got.shadow.Pix[0] ^= 1
+	if !bytes.Equal(it.before, before) || !bytes.Equal(it.after, after) || !bytes.Equal(it.norm.Pix, norm) || !bytes.Equal(it.shadow.Pix, shadow) {
+		t.Fatal("候選與來源共用可寫資料")
+	}
+}
+
+func TestDraftMapLabelRejectsUnsafeSource(t *testing.T) {
+	for name, damage := range map[string]func(*stringItem, *nativeObservation, *nativeJournal, []byte, []byte){
+		"wrong id":      func(it *stringItem, _ *nativeObservation, _ *nativeJournal, _, _ []byte) { it.id = "STRING:dictionary" },
+		"wrong surface": func(_ *stringItem, o *nativeObservation, _ *nativeJournal, _, _ []byte) { o.kind = "string" },
+		"wrong step":    func(_ *stringItem, o *nativeObservation, _ *nativeJournal, _, _ []byte) { o.step++ },
+		"wrong ink":     func(_ *stringItem, o *nativeObservation, _ *nativeJournal, _, _ []byte) { o.ink.Min.X-- },
+		"wrong text": func(_ *stringItem, o *nativeObservation, _ *nativeJournal, _, _ []byte) {
+			o.stringRun.text = []byte("Other")
+		},
+		"missing run":        func(_ *stringItem, o *nativeObservation, _ *nativeJournal, _, _ []byte) { o.stringRun = nil },
+		"main canvas":        func(_ *stringItem, o *nativeObservation, _ *nativeJournal, _, _ []byte) { o.stringRun.buf2 = false },
+		"mixed":              func(_ *stringItem, o *nativeObservation, _ *nativeJournal, _, _ []byte) { o.stringRun.mixed = true },
+		"other outline":      func(_ *stringItem, o *nativeObservation, _ *nativeJournal, _, _ []byte) { o.stringRun.outline = true },
+		"hotkey":             func(_ *stringItem, o *nativeObservation, _ *nativeJournal, _, _ []byte) { o.stringRun.keyColor = 5 },
+		"other color":        func(_ *stringItem, o *nativeObservation, _ *nativeJournal, _, _ []byte) { o.stringRun.colors[5] = 1 },
+		"wrong fill":         func(it *stringItem, _ *nativeObservation, _ *nativeJournal, _, _ []byte) { it.color = 5 },
+		"wrong shade":        func(it *stringItem, _ *nativeObservation, _ *nativeJournal, _, _ []byte) { it.shadowColor = 5 },
+		"wrong outline size": func(it *stringItem, _ *nativeObservation, _ *nativeJournal, _, _ []byte) { it.shadowOff-- },
+		"accent": func(it *stringItem, _ *nativeObservation, _ *nativeJournal, _, _ []byte) {
+			it.accent = image.NewAlpha(it.norm.Rect)
+		},
+		"outside map":             func(it *stringItem, _ *nativeObservation, _ *nativeJournal, _, _ []byte) { it.safe.Min.Y = 0 },
+		"missing before":          func(it *stringItem, _ *nativeObservation, _ *nativeJournal, _, _ []byte) { it.before = nil },
+		"missing after":           func(it *stringItem, _ *nativeObservation, _ *nativeJournal, _, _ []byte) { it.after = nil },
+		"missing buffer":          func(_ *stringItem, o *nativeObservation, _ *nativeJournal, _, _ []byte) { o.buffer = nil },
+		"missing pixels":          func(_ *stringItem, o *nativeObservation, _ *nativeJournal, _, _ []byte) { o.after = nil },
+		"invalid pixel":           func(_ *stringItem, o *nativeObservation, _ *nativeJournal, _, _ []byte) { o.after[64000] = 10 },
+		"writer outside ink":      func(_ *stringItem, o *nativeObservation, _ *nativeJournal, _, _ []byte) { o.after[119*320+148] = 68 },
+		"wrong source background": func(_ *stringItem, o *nativeObservation, _ *nativeJournal, _, _ []byte) { o.buffer[118*320+136] = 5 },
+		"wrong source before": func(_ *stringItem, o *nativeObservation, _ *nativeJournal, _, _ []byte) {
+			o.stringRun.firstOld[120*320+146] = 5
+		},
+		"restore outside ink": func(it *stringItem, _ *nativeObservation, _ *nativeJournal, _, _ []byte) { it.before[0] = 5 },
+		"erased glyph": func(_ *stringItem, _ *nativeObservation, _ *nativeJournal, c, v []byte) {
+			c[120*320+146] = 10
+			v[120*320+146] = 10
+		},
+		"inner background": func(_ *stringItem, _ *nativeObservation, _ *nativeJournal, c, v []byte) {
+			c[123*320+160] = 5
+			v[123*320+160] = 5
+		},
+		"VGA":            func(_ *stringItem, _ *nativeObservation, _ *nativeJournal, _ []byte, v []byte) { v[118*320+136] = 5 },
+		"missing normal": func(it *stringItem, _ *nativeObservation, _ *nativeJournal, _, _ []byte) { it.norm = nil },
+		"missing shadow": func(it *stringItem, _ *nativeObservation, _ *nativeJournal, _, _ []byte) { it.shadow = nil },
+		"wrong mask shape": func(it *stringItem, _ *nativeObservation, _ *nativeJournal, _, _ []byte) {
+			it.norm = image.NewAlpha(image.Rect(0, 0, 1, 1))
+		},
+		"empty normal": func(it *stringItem, _ *nativeObservation, _ *nativeJournal, _, _ []byte) { clear(it.norm.Pix) },
+		"native covers normal": func(it *stringItem, _ *nativeObservation, _ *nativeJournal, _, _ []byte) {
+			it.norm.SetAlpha(48, 4, color.Alpha{A: 1})
+		},
+		"other live map glyph": func(_ *stringItem, _ *nativeObservation, j *nativeJournal, _, _ []byte) {
+			j.items = append(j.items, &nativeObservation{kind: "string-map", stringRun: &stringRun{text: []byte("Other")}, after: map[int]byte{120*320 + 137: 10}})
+		},
+	} {
+		t.Run(name, func(t *testing.T) {
+			it, o, j, c, v := draftMapFixtureForTest()
+			damage(it, o, j, c, v)
+			if fitted, _, _ := draftFitMapLabel(it, o, j, c, v, image.Rectangle{}); fitted != nil {
+				t.Fatal("未拒絕不安全來源")
+			}
+		})
+	}
+	it, o, j, c, v := draftMapFixtureForTest()
+	if fit, _, _ := draftFitMapLabel(nil, o, j, c, v, image.Rectangle{}); fit != nil {
+		t.Fatal("nil item")
+	}
+	if fit, _, _ := draftFitMapLabel(it, nil, j, c, v, image.Rectangle{}); fit != nil {
+		t.Fatal("nil source")
+	}
+	if fit, _, _ := draftFitMapLabel(it, o, nil, c, v, image.Rectangle{}); fit != nil {
+		t.Fatal("nil journal")
+	}
+	v[120*320+146] = 5
+	if fit, _, _ := draftFitMapLabel(it, o, j, c, v, image.Rect(146, 120, 147, 121)); fit == nil {
+		t.Fatal("既有游標例外未保留")
+	}
+	c[120*320+146] = 5
+	if fit, _, _ := draftFitMapLabel(it, o, j, c, v, image.Rect(146, 120, 147, 121)); fit != nil {
+		t.Fatal("游標例外破壞來源守門")
+	}
+}
+
+func TestDraftNotoMapCompleteLabels(t *testing.T) {
+	for _, tc := range []struct {
+		locale string
+		size   int
+	}{{"zh-Hant", 23}, {"zh-Hans", 23}, {"ja", 17}, {"ko", 22}} {
+		t.Run(tc.locale, func(t *testing.T) {
+			target := draftActualTargetsForTest(t)[tc.locale]
+			text := target.str.colony["Jamestown"]
+			if !strings.Contains(text, "Jamestown") || target.str.labelPlan == nil {
+				t.Fatal("遺失完整雙語名或Noto回退")
+			}
+			fill, ink := image.Rect(146, 120, 195, 128), image.Rect(146, 120, 196, 129)
+			if _, old, _, _ := target.str.labelMasks(text, fill, ink, 7); (old == nil) != (tc.locale == "ja") {
+				t.Fatal("夾具未重現舊規劃器結果")
+			}
+			sh, n, safe, size := target.str.labelPlan(text, fill, ink, 7)
+			if n == nil || sh == nil || size != tc.size || !safe.In(stringMapView) {
+				t.Fatal("完整日文沒有選最大可用字級", size, safe)
+			}
+			width := func(px int) int {
+				w := 0
+				for _, ch := range text {
+					w += target.str.fonts[px].widths[ch]
+				}
+				return w
+			}
+			if width(size) > 264 || width(size+1) <= 264 {
+				t.Fatal("17px不是既定寬度內的最大候選")
+			}
+			f := target.str.fonts[size]
+			// 從各字形逐點建立完整正文，獨立核對沒有任何字形被安全矩形裁掉。
+			raw := map[image.Point]byte{}
+			x, minY := 0, 1000
+			for _, ch := range text {
+				g := f.glyphs[ch]
+				for y := g.Rect.Min.Y; y < g.Rect.Max.Y; y++ {
+					for gx := g.Rect.Min.X; gx < g.Rect.Max.X; gx++ {
+						value := g.AlphaAt(gx, y).A
+						if value != 0 {
+							p := image.Pt(x+gx, y)
+							if value > raw[p] {
+								raw[p] = value
+							}
+							minY = min(minY, y)
+						}
+					}
+				}
+				x += f.widths[ch]
+			}
+			startX := (fill.Min.X+fill.Max.X)*2 - width(size)/2 - safe.Min.X*4
+			startY := fill.Min.Y*4 - minY - safe.Min.Y*4
+			for p, value := range raw {
+				if n.AlphaAt(p.X+startX, p.Y+startY).A != value {
+					t.Fatal("完整字形遭裁切", p)
+				}
+			}
+			count := 0
+			for _, value := range n.Pix {
+				if value != 0 {
+					count++
+				}
+			}
+			if count != len(raw) {
+				t.Fatal("正文像素增加或遺失", count, len(raw))
+			}
+
+			// 完整正文的全域墨跡上緣必須與實測原版白色填色上緣一致。
+			actualTop := 1000
+			for y := n.Rect.Min.Y; y < n.Rect.Max.Y; y++ {
+				for x := n.Rect.Min.X; x < n.Rect.Max.X; x++ {
+					if n.AlphaAt(x, y).A != 0 {
+						actualTop = min(actualTop, y+safe.Min.Y*4)
+					}
+				}
+			}
+			if actualTop != 480 {
+				t.Fatal("完整正文未對齊原版填色上緣", actualTop)
+			}
+			_, source, _, canvas, _ := draftMapFixtureForTest()
+			run := source.stringRun
+			run.colors = map[byte]int{0: 109, 15: 92}
+			black := []image.Rectangle{image.Rect(146, 120, 151, 128), image.Rect(152, 122, 157, 128), image.Rect(158, 122, 164, 128), image.Rect(165, 122, 169, 128), image.Rect(170, 122, 175, 128), image.Rect(176, 121, 179, 129), image.Rect(180, 122, 184, 128), image.Rect(185, 122, 191, 128), image.Rect(192, 122, 196, 128)}
+			white := []image.Rectangle{image.Rect(146, 120, 150, 127), image.Rect(152, 122, 156, 127), image.Rect(158, 122, 163, 127), image.Rect(165, 122, 168, 127), image.Rect(170, 122, 174, 127), image.Rect(176, 121, 178, 128), image.Rect(180, 122, 183, 127), image.Rect(185, 122, 190, 127), image.Rect(192, 122, 195, 127)}
+			for i, b := range black {
+				run.boxes = append(run.boxes, b)
+				run.charColor = append(run.charColor, map[byte]image.Rectangle{0: b, 15: white[i]})
+			}
+			runtime := &stringRuntime{cat: target.str}
+			item, why := runtime.finishLabel(run, source.buffer, canvas, source.step)
+			if item == nil || why != "" || item.size != size || item.safe != safe || !bytes.Equal(item.norm.Pix, n.Pix) || !bytes.Equal(item.shadow.Pix, sh.Pix) {
+				t.Fatal("正式組裝未使用完整文案規劃", why)
+			}
+			bare := *target.str
+			bare.labelPlan = nil
+			legacy := &stringRuntime{cat: &bare}
+			old, reason := legacy.finishLabel(run, source.buffer, canvas, source.step)
+			if tc.locale == "ja" {
+				if old != nil || reason != "does-not-fit" {
+					t.Fatal("未保留原規劃器拒絕")
+				}
+			} else {
+				if old == nil || reason != "" || bytes.Equal(old.norm.Pix, n.Pix) {
+					t.Fatal("未保留原規劃器行為")
+				}
+			}
+
+			for _, bad := range []struct {
+				text      string
+				fill, ink image.Rectangle
+				cap       int
+			}{
+				{strings.Repeat(text, 8), fill, ink, 7},
+				{text, image.Rect(240, 120, 289, 128), image.Rect(240, 120, 290, 129), 7},
+				{text, fill, ink, 1},
+			} {
+				if _, mask, _, _ := target.str.labelPlan(bad.text, bad.fill, bad.ink, bad.cap); mask != nil {
+					t.Fatal("不可讀或越界候選未拒絕")
+				}
+			}
+		})
+	}
+}

@@ -42,6 +42,7 @@ type stringCatalog struct {
 	customModerate string // 規格038 READY：只供自訂頁既有Moderate譯文。
 	routeLand      string // 規格038 READY：只供已驗第一路線Land欄。
 	slotEmpty      string // 規格038：只供存讀檔槽位，不加入通用字典。
+	labelPlan      func(string, image.Rectangle, image.Rectangle, int) (*image.Alpha, *image.Alpha, image.Rectangle, int)
 }
 
 const (
@@ -1014,7 +1015,14 @@ func (s *stringRuntime) finishLabel(r *stringRun, b2, canvas []byte, step uint64
 	if id != "colony" {
 		return nil, "label-not-default-name"
 	}
-	sh, n, safe, size := s.cat.labelMasks(zh, fill, ink, capH)
+	var sh, n *image.Alpha
+	var safe image.Rectangle
+	var size int
+	if s.cat.labelPlan != nil {
+		sh, n, safe, size = s.cat.labelPlan(zh, fill, ink, capH)
+	} else {
+		sh, n, safe, size = s.cat.labelMasks(zh, fill, ink, capH)
+	}
 	if n == nil {
 		return nil, "does-not-fit"
 	}

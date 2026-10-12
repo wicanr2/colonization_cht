@@ -206,6 +206,14 @@ def main():
                     need(actual.tobytes() == original.tobytes(), "英文沒有使用原版像素")
                 else:
                     need(record.get("items") and actual.tobytes() != original.tobytes(), "非英文沒有任何已驗覆蓋")
+                    maps = [i for i in record["items"] if i.get("native_surface") == "map"]
+                    if scene in {"world", "saved-world"}:
+                        expected = {"zh-Hant": 23, "zh-Hans": 23, "ja": 17, "ko": 22}[locale]
+                        need(len(maps) == 1 and maps[0].get("source") == "Jamestown" and
+                             "Jamestown" in maps[0].get("text", "") and maps[0].get("font_px") == expected,
+                             "正常世界或返回世界缺少完整地區字型城名")
+                    elif scene != "loaded-world":
+                        need(not maps, "離開世界後殘留地圖城名")
                     if scene in {"input-original", "input-backspace", "input-restored"}:
                         value = "Jamestow" if scene == "input-backspace" else "Jamestown"
                         need(any(i.get("id") == "STRING:input-ascii" and i.get("text") == value and

@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 PINS = {
     "tools/live_menu.go": "2f5ab4b81a9608a14f05280cfaba5027472e648fda6e34d3db4ba8855d0a0a53",
     "tools/window_prototype.go": "088d2a3f933e99df2ecdc5d348972fc52fb64d3a9794a2c1ecd2ebe8f1f89140",
-    "tools/string_overlay.go": "9730c6095bbedb91497e3de0f2a773af32f30c8fdb0dcc9b60d1434d1ac61478",
+    "tools/string_overlay.go": "072643055789eee243db8f0d2f4ccf929ee70b32d959058476151d23c9c8ac90",
     "tools/dialog_overlay.go": "b93dcf45c424b8aac175f71da0e05d54782d9ccc36774fdd1ac7f0bbd69e8a50",
 }
 

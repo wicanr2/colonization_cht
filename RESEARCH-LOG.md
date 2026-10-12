@@ -5209,3 +5209,29 @@ confirmed：地圖城名201點字形與完整原版墨跡區存活，另有20點
 改寫這20點的writer、複製時序與alpha相交尚未確認，正式來源守門未改。
 證據根為既有language-resources-20261011/retained-safe-audit-r26，
 map-safe-check.json指紋a15380d30ad7cfd8210b4d08a7f93a9c7b4c23f41f23e9e2a2aead9aa4961f00。
+
+## 2026-10-12：四語Noto城名的後畫像素與基線
+
+入口：[規格038本日DRAFT、READY及限定CONFORMED](docs/spec/038-string-overlay-draft.md)。
+原版VICEROY.EXE維持a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3。
+工具為隔離dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7、
+Ebiten2.9.9、Python3.11.2及Pillow9.4；Docker映像沿既有固定版本。
+
+confirmed：63800000步正常畫面的20點差異全有城名完成後的主畫布寫入，共32次。
+來源CS:IP 0D21:00C6、glyph writer 0D21:012C、ES 3BB0；
+寫入CS:IP為0DE8:01D9／0182與0D46:01D2／0181。
+以上為dosgolem real-mode分段CPU位址，步數屬執行時，均非EXE檔案位移。
+勘誤：前輪未知的寫入位置與順序已有只讀證據；0DE8函式一般用途仍未知，
+不因寫入追蹤成功附會語意。完整來源、字形201點及原版墨跡矩形皆未變。
+
+confirmed：原版填色上緣120、墨跡大寫字高7。舊CJK參考字使三語完整正文
+從四倍輸出y479開始；改用完整文案alpha後四語皆對齊y480，
+正文避開全部後畫點，僅描邊相交。四語固定畫面保留全部20點，
+正文完整，字級為23／23／17／22px；正式GUI後續重印使用新的原版來源。
+本輪42筆實際輸入四側重播至113400000步，完整原版狀態、WAV與存檔相同。
+
+本機證據根為既有`language-resources-20261011/map-source-padding-r27/`。
+只讀證據指紋f697024c91eecc3fbb88878d9ab59ffa756f34d7255c3692b5dcb2db41293de1與
+e511ea27eb28f45e82ffaa21059662a65f75943f5dd02527b68bd3135262fe68；
+限定審查7a5769e5810ae966b764b79ba440803cab59af867c07fd9f491ef54af85383a2。
+完整腳本與收據入口列於規格038。沒有增加原版語意、改寫原版或提升全遊戲覆蓋聲明。

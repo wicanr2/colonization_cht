@@ -208,6 +208,9 @@ func draftPrepareTargets(root string, files map[string][]byte, owned, helpOwned 
 		if err != nil {
 			return nil, fmt.Errorf("%s fixed: %w", locale, err)
 		}
+		sc.labelPlan = func(text string, fill, ink image.Rectangle, capH int) (*image.Alpha, *image.Alpha, image.Rectangle, int) {
+			return draftNotoMapLabelMasks(sc.fonts, text, fill, ink, capH)
+		}
 		t.dlg, t.str = cat, sc
 		targets[locale] = t
 	}
@@ -990,6 +993,7 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 	d := &dialogRuntime{cat: t.dlg, misses: map[string]int{}}
 	dialogSources := map[*dialogShown]*nativeObservation{}
 	retainedSources := map[*stringItem]*nativeObservation{}
+	mapSources := map[*stringItem]*nativeObservation{}
 	var inputASCII *dialogShown
 	s := &stringRuntime{cat: t.str, misses: map[string]int{}}
 	var context []byte
@@ -1064,6 +1068,9 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 			}
 			if it != nil {
 				s.add(it)
+				if r.buf2 {
+					mapSources[it] = o
+				}
 				if it.id == "STRING:retained-ascii" {
 					retainedSources[it] = o
 				}
@@ -1144,6 +1151,16 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 	}
 	for _, it := range s.items {
 		sourceSafe := it.safe
+		mapSource := mapSources[it]
+		mapChanges, mapClipped := 0, 0
+		if mapSource != nil {
+			fitted, changes, clipped := draftFitMapLabel(it, mapSource, j, canvas, indexed, cursor)
+			if fitted == nil {
+				s.misses["map-source-or-occlusion-changed\t"+it.text]++
+				continue
+			}
+			it, mapChanges, mapClipped = fitted, changes, clipped
+		}
 		if it.id == "STRING:retained-ascii" && (!stringSame(canvas, it, image.Rectangle{}) || !draftSameExceptCursor(indexed, canvas, it.safe, cursor)) {
 			if fitted := draftFitRetainedASCII(it, retainedSources[it], canvas, indexed, cursor); fitted != nil {
 				it = fitted
@@ -1188,6 +1205,10 @@ func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer
 		}
 		draftPaintLayers(out, it.safe, []*image.Alpha{it.shadow, it.norm, it.accent}, []byte{it.shadowColor, it.color, it.accentColor}, palette)
 		record := map[string]any{"kind": "string", "id": it.id, "source": it.text, "text": it.zh, "safe": it.safe, "font_px": it.size}
+		if mapSource != nil {
+			record["native_surface"], record["native_ink"] = "map", it.ink
+			record["native_background_changes"], record["native_shadow_clipped_pixels"] = mapChanges, mapClipped
+		}
 		if it.safe != sourceSafe {
 			record["source_safe"], record["unused_padding_changed"] = sourceSafe, true
 		}
@@ -1276,6 +1297,168 @@ func draftFitRetainedASCII(it *stringItem, o *nativeObservation, canvas, indexed
 	next.before, next.after = cropBytes(it.before), cropBytes(it.after)
 	next.norm, next.shadow, next.accent = crop(it.norm), crop(it.shadow), crop(it.accent)
 	return &next
+}
+
+// draftMapMaskAt用原版邏輯像素量測四倍alpha；原版後畫內容有優先權。
+func draftMapMaskAt(mask *image.Alpha, safe image.Rectangle, p image.Point) bool {
+	if mask == nil {
+		return false
+	}
+	x0, y0 := (p.X-safe.Min.X)*4, (p.Y-safe.Min.Y)*4
+	for y := y0; y < y0+4; y++ {
+		for x := x0; x < x0+4; x++ {
+			if mask.AlphaAt(x, y).A != 0 {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+func draftFitMapLabel(it *stringItem, o *nativeObservation, j *nativeJournal, canvas, indexed []byte, cursor image.Rectangle) (*stringItem, int, int) {
+	if it == nil || o == nil || j == nil || o.stringRun == nil || it.id != "STRING:colony" ||
+		o.kind != "string-map" || o.step != it.complete || o.ink != it.ink || string(o.stringRun.text) != it.text ||
+		len(canvas) != 64000 || len(indexed) != 64000 || len(o.buffer) != 64000 || len(o.after) == 0 ||
+		it.ink.Empty() || !it.ink.In(it.safe) || !it.safe.In(stringMapView) ||
+		len(it.before) != it.safe.Dx()*it.safe.Dy() || len(it.after) != len(it.before) ||
+		it.color == 0 || it.shadowColor != 0 || it.shadowOff != -stringLabelOutline || it.accent != nil {
+		return nil, 0, 0
+	}
+	r := o.stringRun
+	if !r.buf2 || r.mixed || r.outline || r.keyColor != 0 || len(r.colors) != 2 || r.colors[0] == 0 || r.colors[it.color] == 0 ||
+		!bytes.Equal(it.after, stringRect(o.buffer, it.safe)) || !draftSameExceptCursor(indexed, canvas, it.safe, cursor) {
+		return nil, 0, 0
+	}
+	for pos, value := range o.after {
+		if pos < 0 || pos >= 64000 || !image.Pt(pos%320, pos/320).In(it.ink) || canvas[pos] != value {
+			return nil, 0, 0
+		}
+	}
+	rect := image.Rect(0, 0, it.safe.Dx()*4, it.safe.Dy()*4)
+	if it.norm == nil || it.shadow == nil || it.norm.Rect != rect || it.shadow.Rect != rect {
+		return nil, 0, 0
+	}
+	hasNormal := false
+	for _, value := range it.norm.Pix {
+		hasNormal = hasNormal || value != 0
+	}
+	if !hasNormal {
+		return nil, 0, 0
+	}
+	changed := []image.Point{}
+	for y := it.safe.Min.Y; y < it.safe.Max.Y; y++ {
+		for x := it.safe.Min.X; x < it.safe.Max.X; x++ {
+			pos := y*320 + x
+			k := (y-it.safe.Min.Y)*it.safe.Dx() + x - it.safe.Min.X
+			p := image.Pt(x, y)
+			expectedBefore := o.buffer[pos]
+			if value, ok := r.firstOld[pos]; ok {
+				expectedBefore = value
+			}
+			if it.before[k] != expectedBefore {
+				return nil, 0, 0
+			}
+			if !p.In(it.ink) && it.before[k] != it.after[k] {
+				return nil, 0, 0
+			}
+			if canvas[pos] != it.after[k] {
+				if p.In(it.ink) || draftMapMaskAt(it.norm, it.safe, p) {
+					return nil, 0, 0
+				}
+				changed = append(changed, p)
+			}
+		}
+	}
+	// 同一預設名的歷史重印由完整原版墨跡守門；其他仍存活的離屏字形不能被蓋住。
+	for _, other := range j.items {
+		if other == nil || other.stringRun == nil || other.kind != "string-map" ||
+			(other.ink == it.ink && string(other.stringRun.text) == it.text) {
+			continue
+		}
+		for pos, value := range other.after {
+			if pos < 0 || pos >= 64000 {
+				return nil, 0, 0
+			}
+			p := image.Pt(pos%320, pos/320)
+			if canvas[pos] == value && (draftMapMaskAt(it.norm, it.safe, p) || draftMapMaskAt(it.shadow, it.safe, p)) {
+				return nil, 0, 0
+			}
+		}
+	}
+	if len(changed) == 0 {
+		return it, 0, 0
+	}
+	next := *it
+	next.before, next.after = bytes.Clone(it.before), bytes.Clone(it.after)
+	clone := func(mask *image.Alpha) *image.Alpha {
+		copy := image.NewAlpha(mask.Rect)
+		draw.Draw(copy, copy.Rect, mask, mask.Rect.Min, draw.Src)
+		return copy
+	}
+	next.norm, next.shadow = clone(it.norm), clone(it.shadow)
+	clipped := 0
+	for _, p := range changed {
+		k := (p.Y-it.safe.Min.Y)*it.safe.Dx() + p.X - it.safe.Min.X
+		next.before[k], next.after[k] = canvas[p.Y*320+p.X], canvas[p.Y*320+p.X]
+		x0, y0 := (p.X-it.safe.Min.X)*4, (p.Y-it.safe.Min.Y)*4
+		for y := y0; y < y0+4; y++ {
+			for x := x0; x < x0+4; x++ {
+				if next.shadow.AlphaAt(x, y).A != 0 {
+					clipped++
+					next.shadow.Pix[next.shadow.PixOffset(x, y)] = 0
+				}
+			}
+		}
+	}
+	return &next, len(changed), clipped
+}
+
+// 僅供已驗Noto預設城名：依完整文案實際墨跡對齊原版填色上緣，選出可用最大字級。
+func draftNotoMapLabelMasks(fonts map[int]*dialogFont, text string, fill, ink image.Rectangle, capH int) (sh, n *image.Alpha, safe image.Rectangle, size int) {
+	if text == "" || capH <= 0 || ink.Empty() || fill.Empty() || !fill.In(ink) || !ink.In(stringMapView) {
+		return nil, nil, image.Rectangle{}, 0
+	}
+	start, _ := stringStartPx(capH)
+	limit := (ink.Dx() + stringLabelWiden) * 4
+	cx4 := (fill.Min.X + fill.Max.X) * 2
+	for size = min(start, stringFontPx); size >= stringFloorPx; size-- {
+		f := fonts[size]
+		if f == nil {
+			continue
+		}
+		bounds, ok := retainedTextBounds(f, text)
+		if !ok || bounds.Dy() > capH*4+4 {
+			continue
+		}
+		width := 0
+		for _, ch := range text {
+			width += f.widths[ch]
+		}
+		if max(width, bounds.Max.X)-min(0, bounds.Min.X) > limit {
+			continue
+		}
+		x0 := cx4 - width/2
+		top := fill.Min.Y*4 - bounds.Min.Y
+		paint := bounds.Add(image.Pt(x0, top)).Inset(-stringLabelOutline)
+		logical := image.Rect(paint.Min.X/4-1, paint.Min.Y/4-1, (paint.Max.X+3)/4+1, (paint.Max.Y+3)/4+1)
+		safe = ink.Inset(-1).Union(logical)
+		if !safe.In(stringMapView) {
+			continue
+		}
+		rect := image.Rect(0, 0, safe.Dx()*4, safe.Dy()*4)
+		sh, n = image.NewAlpha(rect), image.NewAlpha(rect)
+		x, y := x0-safe.Min.X*4, top-safe.Min.Y*4
+		for _, ch := range text {
+			glyph := f.glyphs[ch]
+			dialogBlit(n, glyph, x, y)
+			for _, d := range [][2]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {1, 1}, {-1, 1}, {1, -1}} {
+				dialogBlit(sh, glyph, x+d[0]*stringLabelOutline, y+d[1]*stringLabelOutline)
+			}
+			x += f.widths[ch]
+		}
+		return sh, n, safe, size
+	}
+	return nil, nil, image.Rectangle{}, 0
 }
 
 func draftExportRebuilds(targets map[string]*draftLanguageTarget, j *nativeJournal, canvas, buffer, indexed, palette []byte, cursor image.Rectangle, step uint64, mode byte, out string) error {
