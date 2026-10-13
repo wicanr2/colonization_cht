@@ -5582,3 +5582,35 @@ imagegen v1及v2仍有光暈，原始圖與提示只留本機，未選入正式�
   commands-r38.json及final-audit-r38.json索引重生入口與收尾稽核。
 - 規格063限定CONFORMED，只授予本人物來源及抽樣路徑。其他人物、動畫、背景RAM副本、
   完整HD、跨平台效能及新發行仍不在本輪完成範圍。
+
+## 2026-10-13 R39 城內十種建築的來源與正常路徑
+
+- confirmed限[規格064](docs/spec/064-hd-colony-building-batch.md)十種來源、13個位置與本批輸入。
+  BUILDING.SS為e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4，
+  VICEROY.EXE為a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3。
+  完整編碼／索引、part3位移及原版遠指標由規格064與source.json索引，不混用位址基準。
+- 固定mpskit為8c30544b51d1b4ab68f3a465784239c24b660e24；工具為Go1.26.7、
+  Python3.11.2／Pillow9.4.0及獨立dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013。
+  原版執行期CS:IP、20bit線性RAM與MADSPACK解壓part3各自記錄，沒有新增IDA資料庫。
+- 130次完整繪製從0D46:000A至121D:1554，實際SP增10，主畫布為線性RAM0x2CAE0。
+  既有0D46:01B4／01D2之外，本批第035、042及043幀另見0D46:0181，
+  16bytes為268807035ef042fecc7402ebe7ebd03b。逐筆值與完整來源相符，不推定其他繪製模式。
+- 全部344060筆矩形寫入及130筆完成事件由獨立檢查器重建。繪製前底圖、每個不透明點、
+  透明空隙、返回及各檢查點來源身分相符。後畫共撤除61920點，包含197點同值寫入；
+  新來源不接受游標或背景RAM還原。第043幀第三個位置被後畫遮住，不以終點色號復活。
+- 53筆正常GUI輸入沿3947d52a893ae3d6c6f388cefc1e67e4001d41270ca46e65856526a9b97471ca，
+  COLONY09沿52ae8b7bd4bea1869afb825af165a8edc50882fc176d49985d4fb3c362d5469b。
+  49點完整原版狀態、兩側終點及COLONY00／COLONY09全同；本批沒有新的GUI或WAV驗收聲明。
+  終點134600000步的RAM為41028d5a4fb2f2bbac1d2b8f3600ace20f4b1b9e1e99d49a4b4d86d285fe47f7。
+- 原版來源、指標、寫入端、舊／新值、同值復活、過期來源、轉送及狀態共21個反例拒絕，
+  缺原版exit77。研究探針二進位為1f99ebf6d3441401d3a3688fae85a4db7f37af9e5e1d83e053173691885d306d。
+- 第024幀候選由內建imagegen生成，1158×1359 RGBA原圖及alpha原樣保留，
+  SHA-256為cb83a56cde5f06bb13bc69237fe5476efb6b40eb8ea6cfb2fe0942f3fd3da462。
+  以同一原版第45點做92×108像素中心取樣及來源遮罩，263點有效來源、204區塊含alpha，
+  2790輸出點含alpha、2781點顏色改變，來源外變動0。此為離線顯示證據，未授予正式HD信用。
+- 本機根hd-building-batch-r39：source.json為a7457d86c0e587b8e06a2d94db0ade8c88a8167e4cf74a8d2910ff734f15be72，
+  source-check-r2.json為cf7ec7b733acec95cccc85101135ea85272a9cf1dfb98118f3aa4e95c30e7570，
+  negative-check-r2.json為1adc83c339522e9e25193e4f3a74507be3f1f76b8d8dc78335193258ddd2f00d。
+  完整提示、參考指紋與離線合成在building-024-candidate-v1.json；命令與稽核沿commands-r39.json及final-audit-r39.json。
+- 規格064維持DRAFT。正式來源還原、直接懸停、拖曳、其他生成素材與動畫仍待驗，
+  原始像素、研究收據及候選不入Git；本批不增加正式HD、完整五語或新版交付信用。
