@@ -5513,3 +5513,33 @@ CS:IP及線性RAM為dosgolem執行定位，沒有新增IDA位址或推測職業�
 imagegen v1及v2仍有光暈，原始圖與提示只留本機，未選入正式素材。
 人物直接懸停、游標還原、拖曳、其他來源及動畫仍未知，規格DRAFT。
 正式首座、海洋、dosgolem及已發布版未改；不增加shown、完整五語或HD信用。
+
+## 2026-10-13 R37 人物游標還原與隔離HD的限定證據
+
+- 原版ICONS.SS、VICEROY.EXE、完整101bytes與96個解碼索引指紋沿規格063。
+  生成v2採用使用者確認的原始768×2048 RGBA，SHA-256
+  be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346。
+- 工具為Go1.26.7、Python3.11.2／Pillow9.4.0及獨立dosgolem
+  82a14b266e1b5bc904e2d0fe507daf6bea41a013。位址為dosgolem實模式CS:IP及線性RAM，
+  不當作IDA EA；沒有修改原版或共用dosgolem。
+- confirmed限本次原版原始寫入：0B68:051C的DS=A000、ES=2CAE，16bytes
+  f3a48ac82bf92bf103f303fafecc75f0。FA00背景還原與FB00暫繪按當次SI／DI求實際來源，
+  同一畫布點、同一游標局部位移及反向舊／新值才恢復先前來源。
+  外圍背景點需保留配對，否則會清除人物的未完成配對。未知及同值後畫仍撤銷。
+- 原型修正後78次完整人物繪製、35418筆原始事件及2370個人物還原點由獨立檢查器重建。
+  10張懸停／移開／返回／按住拖曳／放開的原版RAM／CPU／VGA／DAC逐項與GUI相同，
+  每張120點來源。沒有背景RAM轉送收據，正式契約不接受這條未知路徑。
+- 235筆正常GUI輸入SHA-256
+  712855b73b112ce5c0171789d9ec5437cf2ae92483dd128987ebecaaab0321c1，
+  初始COLONY09.SAV沿52ae8b7bd4bea1869afb825af165a8edc50882fc176d49985d4fb3c362d5469b。
+  四側終點455400000步，完整RAM為fe984ae47ad5aaf404a944844320ac36b168e91abbcde33080e82e508051044d，
+  WAV為ea22d6fea8f6488207687c28afbe8a406d23c0eb0a0801ae85a04aa7c3b5bbc0，
+  COLONY00.SAV為1657937945fbe06352bf306d64d3f1df686ed9a059d0ee39aba6abcfdae4204a。
+  CPU、VGA、DAC及存檔逐位元組全同，不把WAV相同當成人耳驗收。
+- 公開入口與完整契約見規格063；本機根hd-person-live-r37的public-r2保存收據。
+  build-r1.json為cc02816a0345d1761a3a6941179fb574b8cbdf979c6c9ed84e78c97b7845a51a；
+  test-r1.json為e9c9682474c09b20870369d2d3d7ad95f647851618f581b655036c6caf72bbcd；
+  gui-r2/check.json為a30bcf50e51fb29029adb80c687a875185eb14f0ab1c56440ae0470e60cfbb93；
+  cursor-check-r1.json為7fb3dd7e01db6b5f6fc4decbd6b1ebff36dba863a622ddee5a3a442fed382594；
+  replays-r1/check.json為64e56cf41670c88251686ad361bfa0d43f3faf63c81797a35308b71e98c5de5a。
+- 本輪只授予隔離原型與限定READY契約信用。正式接線、其他人物、動畫及跨平台效能未驗。
