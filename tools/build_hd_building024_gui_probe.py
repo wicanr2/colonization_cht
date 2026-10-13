@@ -1,8 +1,9 @@
-"""規格064 DRAFT：木棚五語切換、懸停及按住拖曳的正常視窗驗證。"""
+"""規格064：正式或隔離木棚的五語切換、懸停及拖曳視窗驗證。"""
 import argparse,hashlib,json,os,subprocess
 from pathlib import Path
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--output",type=Path,required=True)
+parser.add_argument("--formal",action="store_true",help="依規格064 READY驗正式木棚，不加原型或診斷旗標")
 a=parser.parse_args();repo=Path(__file__).resolve().parents[1];dest=a.output.resolve()
 assert Path("/.dockerenv").is_file() and os.getuid()!=0
 assert dest.is_relative_to(Path("/out")) or dest.is_relative_to(repo/"workplace")
@@ -92,6 +93,43 @@ one("正式首座、海洋與第100幀人物；限本批正常GUI，其他人物
 # 既有252組到458M步；新增70組與診斷約增加180M步，保留有界餘量。
 assert s.count('"--window-steps", "500000000"')==2
 s=s.replace('"--window-steps", "500000000"','"--window-steps", "900000000"')
+if a.formal:
+ one('    shelter_root=output/"shelter"\n    shelter_root.mkdir()\n','')
+ one('    command += ["--hd-shelter-prototype-asset",str(args.shelter_asset),"--hd-shelter-probe-root",str(shelter_root)]',
+     '    need(args.shelter_asset.resolve()==(args.formal_launcher.parent/"graphics/building-024.png").resolve(),"正式木棚素材路徑不同")')
+ start=s.index('        def shelter_snapshot(label,buttons=0):')
+ end=s.index('        map_recoveries=[]',start)
+ s=s[:start]+'''        formal_shelter_points=[]
+        def shelter_snapshot(label,buttons=0):
+            def ready(state):
+                live=state.get("frame",{}).get("native_live",{})
+                hd=live.get("hd") or {}
+                if label in {"shelter-drag-moved","shelter-drag-returned"}:
+                    return hd.get("reason")=="unverified-cursor-or-native-surface"
+                if label=="shelter-drag-released":
+                    return hd.get("shelter",{}).get("valid")==263
+                return True
+            state=wait(ready,"木棚拖曳回退或恢復未完成："+label)
+            live=state.get("frame",{}).get("native_live",{})
+            hd=live.get("hd") or {}
+            if label in {"shelter-drag-moved","shelter-drag-returned"}:
+                need(live.get("locale")=="zh-Hant" and len(live.get("items",[]))>0,"木棚拖曳回退遺失語言")
+                need(not any(hd.get(k,{}).get("painted",0) for k in ["sea","person","shelter"]) and not hd.get("painted",0),"未知游標仍繪HD")
+            if label=="shelter-drag-released":
+                need(hd["shelter"].get("formal") is True and hd["shelter"].get("painted",0)>0,"放開後正式木棚未恢復")
+            formal_shelter_points.append({"label":label,"step":state["step"],"buttons":buttons,"locale":live.get("locale"),"language_items":len(live.get("items",[])),"hd_reason":hd.get("reason"),"shelter_valid":hd.get("shelter",{}).get("valid",0)})
+
+'''+s[end:]
+ assert s.count('shelter.get("prototype") is True')==2
+ s=s.replace('shelter.get("prototype") is True','shelter.get("formal") is True')
+ one('木棚不是隔離原型','木棚不是正式顯示層')
+ one('PASS_SHELTER_PROTOTYPE_FIVE_LANGUAGE_GUI','PASS_FORMAL_SHELTER_HD_FIVE_LANGUAGE_GUI')
+ one('result["prototype_entry"] =','result["formal_entry"] =')
+ one('"prototype_flags": True','"prototype_flags": False')
+ one('木棚DRAFT及正式首座、海洋與人物；來源／游標獨立稽核及同輸入重播另驗，不授予木棚正式HD信用。',
+     '正式首座、海洋、人物及第024幀木棚；限本批正常GUI，其他建築、動畫及完整HD未完成。')
+ one('            result["formal_entry"] =','            result["formal_shelter_points"] = formal_shelter_points\n            result["formal_entry"] =')
+ assert '--hd-shelter-' not in s and 'shelter_root' not in s
 compile(s,str(dest),"exec");dest.write_text(s)
-dest.with_name(dest.name+".build.json").write_text(json.dumps({"kind":"DRAFT-shelter-gui","base_sha256":hashlib.sha256(base.read_bytes()).hexdigest(),"generated_sha256":hashlib.sha256(dest.read_bytes()).hexdigest()},indent=2)+"\n")
-print("PASS_SHELTER_GUI_PROBE_BUILD",hashlib.sha256(dest.read_bytes()).hexdigest(),flush=True)
+dest.with_name(dest.name+".build.json").write_text(json.dumps({"kind":"formal-shelter-gui" if a.formal else "DRAFT-shelter-gui","base_sha256":hashlib.sha256(base.read_bytes()).hexdigest(),"generated_sha256":hashlib.sha256(dest.read_bytes()).hexdigest()},indent=2)+"\n")
+print("PASS_FORMAL_SHELTER_GUI_PROBE_BUILD" if a.formal else "PASS_SHELTER_GUI_PROBE_BUILD",hashlib.sha256(dest.read_bytes()).hexdigest(),flush=True)

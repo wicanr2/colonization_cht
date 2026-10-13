@@ -117,6 +117,46 @@
         "ICONS.SS": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
         "encoded_frame_sha256": "36d3a8e51b4bce57a879d96703d5fad70797f9e940e13aa3abc4d6f830e4d832"
       }
+    },
+    "building-024.png": {
+      "spec": "docs/spec/064-hd-colony-building-batch.md",
+      "sha256": "cb83a56cde5f06bb13bc69237fe5476efb6b40eb8ea6cfb2fe0942f3fd3da462",
+      "bytes": 636397,
+      "size": [
+        1158,
+        1359
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        23,
+        27
+      ],
+      "target_size": [
+        92,
+        108
+      ],
+      "native_opaque_pixels": 263,
+      "observed_native_rects": [
+        [
+          37,
+          45,
+          60,
+          72
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "retain original PNG alpha unchanged; draw only verified native opaque source cells; no alpha threshold",
+      "generation_prompt": "Use case: style-transfer.\nAsset type: one transparent fine pixel-art sprite for a 4x display-only HD overlay of a classic colonial game. Logical destination canvas 92 by 108 pixels, full-canvas ratio 23:27.\nInput images: Image 1 is the original BUILDING.SS frame 024 rendered in its real in-game palette, EXACT GEOMETRY and color reference. Image 2 is our already accepted and integrated building sprite, PIXEL MATERIAL and edge-treatment reference only. Image 3 is the user-approved fine pixel-art concept sheet, STYLE reference only; use its restrained warm wood and straw detail.\nPrimary request: redraw only the single small open wooden shelter from Image 1 in the approved crisp fine pixel-art style. Preserve the original canvas, object placement, facing direction, roof slope, posts, framing and open gaps. This sprite has a large transparent upper area: the shelter roof starts about 11 native rows down on the 27-row canvas. Keep that upper region empty. Do not recenter, enlarge, crop, or invent a taller building. The ochre/brown roof, dark wooden beams, vertical posts and see-through bays must occupy the same stepped silhouette as Image 1. Add readable subtle straw/wood pixel clusters inside that silhouette. Keep the gaps between posts truly transparent. Image 1's magenta RGB values with zero alpha are empty background, never a visible color to reproduce.\nStyle: fine, deliberate pixel clusters on a 92 by 108 logical grid, displayed enlarged with nearest-neighbor crispness, natural non-emissive materials, limited earthy ochre/tan/dark-brown palette. One sprite, not a scene or sprite sheet.\nBackground: actual alpha transparency outside the object and in its open bays. Preserve the empty canvas margins. Hard transparent edges as in the approved sprites; no soft glow, bloom, blur, gradient halo or antialiasing. No added ground, cast shadow, trees, people, cargo, tools, furniture, signs, words, text, border or watermark. Do not borrow the second image's tower/chimneys or the third image's scenery.",
+      "reference_sha256": {
+        "native": "f775dea48149bc25bc791d6d207477a860139c7c318f5a130d77c4b626352ad9",
+        "accepted_building032": "c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "91a6a162404b43e2c17d13bd1ffe5818286e27763ffab2a776f24bc1fbf70c03"
+      }
     }
   }
 }

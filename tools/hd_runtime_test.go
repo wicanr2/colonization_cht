@@ -31,7 +31,7 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 	m := golem.New()
 	before := bytes.Clone(m.Mem)
 	h, err := loadHDRuntime(m, game, assets)
-	if err != nil || h == nil || h.sea == nil || h.person == nil || h.person.art.Bounds() != image.Rect(0, 0, 24, 64) || h.sea.art.Bounds() != image.Rect(0, 0, 64, 64) || h.art.Bounds() != image.Rect(0, 0, 92, 108) || !bytes.Equal(before, m.Mem) {
+	if err != nil || h == nil || h.shelter == nil || h.shelter.art.Bounds() != image.Rect(0, 0, 92, 108) || h.sea == nil || h.person == nil || h.person.art.Bounds() != image.Rect(0, 0, 24, 64) || h.sea.art.Bounds() != image.Rect(0, 0, 64, 64) || h.art.Bounds() != image.Rect(0, 0, 92, 108) || !bytes.Equal(before, m.Mem) {
 		t.Fatal("正式素材載入失敗或改寫原版", err)
 	}
 	for name, mutate := range map[string]func(string, string){
@@ -61,6 +61,13 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 			os.Remove(p)
 			os.Symlink(filepath.Join(assets, "person-100.png"), p)
 		},
+		"missing-shelter": func(a, g string) { os.Remove(filepath.Join(a, "building-024.png")) },
+		"bad-shelter":     func(a, g string) { os.WriteFile(filepath.Join(a, "building-024.png"), []byte("wrong"), 0644) },
+		"linked-shelter": func(a, g string) {
+			p := filepath.Join(a, "building-024.png")
+			os.Remove(p)
+			os.Symlink(filepath.Join(assets, "building-024.png"), p)
+		},
 		"missing-icons": func(a, g string) { os.Remove(filepath.Join(g, "ICONS.SS")) },
 		"wrong-icons":   func(a, g string) { os.WriteFile(filepath.Join(g, "ICONS.SS"), []byte("wrong"), 0644) },
 		"linked-icons": func(a, g string) {
@@ -82,7 +89,7 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 					t.Fatal(err)
 				}
 			}
-			for _, n := range []string{"manifest.json", "building-032.png", "sea-148.png", "person-100.png"} {
+			for _, n := range []string{"manifest.json", "building-032.png", "sea-148.png", "person-100.png", "building-024.png"} {
 				if err := os.WriteFile(filepath.Join(a, n), readFile(filepath.Join(assets, n)), 0644); err != nil {
 					t.Fatal(err)
 				}

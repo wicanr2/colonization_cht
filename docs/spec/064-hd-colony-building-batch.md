@@ -1,6 +1,6 @@
 # 城內十種建築的HD來源擴充
 
-狀態：READY，僅限本頁R40第024幀正式接線契約。其餘九種建築仍為DRAFT。
+狀態：CONFORMED，僅限本頁R41第024幀正式顯示及抽樣路徑。其餘九種建築仍為DRAFT。
 
 ## 範圍與入口
 
@@ -16,6 +16,8 @@ prepare-source.py以固定mpskit解碼器重生來源；commands-r39.json保存�
 解碼像素、原版參考、寫入事件與存檔均只留本機。
 
 ## 研究契約
+
+本節限R39來源研究。第024幀的正常游標還原與正式顯示依R40／R41；其他九種仍不接受來源還原。
 
 - 原版BUILDING.SS為e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4；
   VICEROY.EXE為a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3。
@@ -33,7 +35,7 @@ prepare-source.py以固定mpskit解碼器重生來源；commands-r39.json保存�
 
 ## 下一閘門
 
-第024幀木棚已具備限定READY契約，依本頁R40節接續正式接線；其餘九種仍須各自驗素材與顯示路徑。
+第024幀木棚已正式接線並限定CONFORMED；其餘九種仍須各自驗素材與顯示路徑。
 新候選沿用已確認的精細像素風與人物v2的處理方式。
 正式素材仍須原版幾何、來源撤銷、正常游標與互動驗證，不憑最終畫面顏色復活身分。
 
@@ -230,6 +232,12 @@ WAV相同限技術輸出，不代替人耳或硬體逐週期驗收。
 
 ### R40重生入口與收據
 
+R40重生使用提交de0525a的來源；後續正式組裝新增相同欄位，不將歷史隔離組裝器套到新版本。
+正式來源與原版測試入口為[木棚顯示層](../../tools/hd_building024_runtime.go)及
+[木棚原版測試](../../tools/hd_building024_runtime_test.go)。GUI及四側重播沿前述組裝器的--formal分支，
+素材缺件沿[正式啟動回退探針](../../tools/probe_hd_startup_fallback.py)。
+正式驗收收據另留本機hd-building024-formal-r41，通過範圍見下方R41節。
+
 本機根為hd-building024-live-r40。build-test-r3.py重建公開原型及700Go回歸；
 run-gui-r2.sh沿修正後空白區拖曳與九億步有界上限完成正常GUI；
 run-lifecycle-r3.py重生含游標來源寫入的獨立原版收據，獨立檢查器輸出cursor-check-r4.json；
@@ -248,3 +256,60 @@ commands-r40.json及final-audit-r40.json索引實際命令、來源指紋與收�
 | cursor-negatives-r4.json | 24d53436f58d8599a87bc178977403630efdc84265b7a94c04fa643667da6087 |
 | replays-r2/check.json | 4786cac6165f44f12bcd39d896fb7a68682b06d7e85f23ea8796384389e9c013 |
 | missing-original-r1.json | 7357d98ae35a001cc1d20a8ecdf46ba43a4b09ca2b70fc3ea31001c7bef5bc81 |
+
+## 2026-10-13 R41第024幀正式顯示限定CONFORMED
+
+confirmed限前述固定原版、R39原圖與本批正常路徑。其他九種建築保持DRAFT。
+正式木棚來源及測試由前述入口接入，原圖1158×1359及alpha原樣加入graphics/building-024.png。
+完整提示、參考指紋與權利記錄在[生成清冊](../../graphics/manifest.json)，原版參考仍只留本機。
+清冊SHA-256為56fd8870e74ab0eb131a54805df581544354b5bfd7a58eceabe455abbf27b61f。
+
+正式組裝39個Go檔、22個來源綁定，沿既有啟動器及五檔素材白名單。
+beforeInstruction／finish／write／receipt／paint五個方法與R40相同，
+只改正式型別及收據標記，沒有原型或木棚診斷旗標。
+其餘三種素材、語言資源與原版執行器保持；不增加游標白名單或背景RAM轉送。
+
+| 項目 | 限定結果 |
+| --- | --- |
+| 建置與來源 | 703Go零skip、go vet通過。49點完整CPU／RAM／VGA／DAC與存檔相符；20木棚、17人物及31海洋反例通過。木棚逐點位移、色號、來源遮罩及游標統計與R40一致，包含大於255的局部位移。缺原版另驗三個明確skip。 |
+| 正常GUI | 322組五語原版／HD、1288筆原子設定事件、12218個不透明游標像素通過。108組HD木棚263點有效、204區塊實際含alpha；51組木棚0點，另2組守門回原圖。正常屋頂／柱身、改名／刪字／取消、存檔成功／返回／重進、百科與離城通過。 |
+| 拖曳及回退 | 十筆一般狀態抽樣另保存。按住移至木棚及返回時回原圖，繁中22欄保持；放開後263點有效木棚及HD恢復。沒有新增原型快照或接受未知游標。 |
+| 同輸入原版驗證 | 332筆實際GUI輸入，正式HD、同版本未啟用HD、前版正式人物及原文控制四側完整CPU／RAM／VGA／DAC、WAV及兩個存檔全同。終點604200000步、5700077357週期、3661畫格及31717計時刻度。 |
+| 啟動及封裝 | 14種新行程缺件／錯件／連結及恢復通過，69筆設定事件不改原版。原日文HD偏好位元組不變；缺木棚當次回原圖且保留語言，恢復正確素材後HD可生效。14項封裝反例全拒絕。 |
+
+兩組GUI來源守門分別為木棚柱身移開英文277800000步、拖曳完成日文315600000步，
+不計為持續覆蓋。十筆狀態抽樣與322組視窗切換分開：首筆屋頂懸停仍為原版模式；
+屋頂返回及按住／移動／返回另有四筆來源守門，並未全部宣稱HD持續顯示。
+本輪沒有重新解讀未知游標；回退原因沿unverified-cursor-or-native-surface。
+已目視繁中正常柱身移開HD畫面gui.display-438.png，原版參考與比較圖不公開。
+
+工具沿Go1.26.7、Python3.11.2／Pillow9.4.0及dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013。
+正式二進位為9e35af985715b852ddf5194f3c28c6d10876d4124506da2bad488b8da6bfd12d，
+實際輸入為c759a63e6c400403d178776a32a46fd7a215288f015ee768d7e5f4376168d20c。
+COLONY09沿52ae8b7bd4bea1869afb825af165a8edc50882fc176d49985d4fb3c362d5469b，
+COLONY00為9fce2ddeebc0298544ddf06b9ed713e23d51e871b85190f7d4a6e19e34d84def。
+四側終點RAM為36961ee582e3d8e5645fe5d9531c362e005c3fb89232db8803d9c3daa18f1b4d，
+WAV為02a6197e675ec6f04a9ebd643bd93df4d395830f278ce7dc4efb2b63f62e050b。
+音訊相同限技術輸出，不代替人耳或硬體逐週期驗收。
+
+### R41重生入口與收據
+
+本機根為workplace/reports/goal186-display-hd/hd-building024-formal-r41。
+build-test-r1.py從正式來源重建、核對五個方法並驗703Go及封裝；
+run-gui-r1.sh沿公開組裝器--formal產生的probe-gui-r3.py跑正常視窗，
+run-startup-r1.sh驗新行程缺件，run-replays-r1.sh重播本批實際輸入。
+check-reproducers-r1.py核對正式及歷史隔離GUI／重播逐位元組重生；歷史R40來源仍使用de0525a。
+commands-r41.json索引實際容器命令，final-audit-r41.json保存來源、權利與收尾稽核。
+
+| 收據 | SHA-256 |
+| --- | --- |
+| build-check.json | 02dbcdb26dfd12c433f78ab7b6e19e80889dd7c6d3ef5b0fd84afe51a295af04 |
+| binary-check.json | 145befc0a25a8fbe08697eab54ab61ea3f05283c2d65e0ffc6853972f25144dc |
+| native-shelter-r1/check.json | 4fa048b3245b4aa6901fce8e5060e743b2c8829a975d8b0f8cc264d92c2c8d70 |
+| startup-r1/check.json | 0ca6d4e885d07ddca9f185f548e2ad7521c2775b19dd1717182ed26e8f58a660 |
+| gui-r1/check.json | 2d0d803c32a623678d8ee500d42cd65d3cca4d54e2ef1aec360c2682d10eb298 |
+| replays-r1/check.json | b26b4260cb04619d7535a234309cc8daed73b751120c7ed31fc883aef48af2c1 |
+| reproducer-check.json | ce97b8fcc0e1bd51891d37fd703e42f7272a117598066476bda0a60217cbb500 |
+
+其他九種建築、人物／地形、動畫、跨平台效能、完整HD與新發行待續。
+本輪未建立tag、Release或dist-all交付包，已發布v.1.0.3-20261010不變。

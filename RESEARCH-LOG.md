@@ -5653,3 +5653,36 @@ imagegen v1及v2仍有光暈，原始圖與提示只留本機，未選入正式�
   其他完整收據由規格064索引；commands-r40.json及final-audit-r40.json保存重生入口與稽核。
 - 規格064限第024幀READY，其他九種DRAFT；木棚正式接線、其他素材、動畫及跨平台效能待驗。
   本批不增加正式HD、完整五語或新版交付信用；原版、候選、參考圖、寫入事件與存檔只留本機。
+
+## 2026-10-13 R41 木棚第024幀正式顯示與同狀態驗證
+
+- confirmed限[規格064](docs/spec/064-hd-colony-building-batch.md)木棚024、既定原版與本批正常輸入。
+  原版及來源編碼指紋沿R40，Go1.26.7、Python3.11.2／Pillow9.4.0與
+  dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013不變；位址沿實模式CS:IP及線性RAM。
+- 原圖cb83a56cde5f06bb13bc69237fe5476efb6b40eb8ea6cfb2fe0942f3fd3da462及alpha原樣採用。
+  正式清冊56fd8870e74ab0eb131a54805df581544354b5bfd7a58eceabe455abbf27b61f保留完整提示、參考與權利。
+  原版參考仍留本機，不公開原版像素；其他三種素材指紋不變。
+- 五個正式木棚方法與R40逐字核對，僅型別及收據標記不同。703Go零skip、go vet、
+  49點完整原版狀態／存檔、20木棚／17人物／31海洋反例通過；缺原版另驗三個明確skip。
+  49點木棚來源遮罩、局部位移、色號及游標統計相符，不將uint16位移截成byte。
+- 322組五語GUI、1288筆設定事件與12218個不透明游標像素通過。
+  108組HD木棚263點有效、204區塊含alpha，51組木棚0點；另兩組守門回原圖，
+  分別為英文柱身移開277800000步及日文拖曳完成315600000步，不計持續覆蓋。
+  十筆狀態抽樣另記屋頂返回及按住／移動／返回四筆來源守門；首筆屋頂仍原版模式。
+  未知來源維持回退，語言保持，放開後263點木棚與HD恢復；沒有新增游標白名單或RAM轉送。
+- 實際GUI輸入332筆，SHA-256為c759a63e6c400403d178776a32a46fd7a215288f015ee768d7e5f4376168d20c。
+  四側重播至604200000步、5700077357週期、3661畫格及31717計時刻度，完整CPU／RAM／VGA／DAC全同。
+  RAM為36961ee582e3d8e5645fe5d9531c362e005c3fb89232db8803d9c3daa18f1b4d，
+  WAV為02a6197e675ec6f04a9ebd643bd93df4d395830f278ce7dc4efb2b63f62e050b。
+  COLONY00為9fce2ddeebc0298544ddf06b9ed713e23d51e871b85190f7d4a6e19e34d84def，
+  COLONY09沿52ae8b7bd4bea1869afb825af165a8edc50882fc176d49985d4fb3c362d5469b。
+  音訊相同限本次技術輸出，不代替人耳或硬體逐週期驗收。
+- 14種新行程啟動缺件／錯件／連結及恢復、69筆設定事件、原日文HD偏好位元組保持通過；
+  14項封裝反例拒絕。正常GUI與四側重播沒有木棚原型或診斷旗標。
+- 本機根hd-building024-formal-r41，正式二進位9e35af985715b852ddf5194f3c28c6d10876d4124506da2bad488b8da6bfd12d。
+  build-check.json為02dbcdb26dfd12c433f78ab7b6e19e80889dd7c6d3ef5b0fd84afe51a295af04，
+  gui-r1/check.json為2d0d803c32a623678d8ee500d42cd65d3cca4d54e2ef1aec360c2682d10eb298，
+  replays-r1/check.json為b26b4260cb04619d7535a234309cc8daed73b751120c7ed31fc883aef48af2c1。
+  完整收據由規格064、commands-r41.json及final-audit-r41.json索引。
+- 規格064僅024限定CONFORMED。其他九種建築、其他素材、動畫、跨平台效能及完整HD待續；
+  沒有建立新tag、Release或dist-all交付包。

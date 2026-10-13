@@ -1,7 +1,8 @@
-"""規格064 DRAFT：木棚GUI實際輸入的四側完整原版狀態／音訊／存檔重播。"""
+"""規格064：正式或隔離木棚GUI實際輸入的四側完整原版狀態／音訊／存檔重播。"""
 import argparse,hashlib,os,subprocess
 from pathlib import Path
 p=argparse.ArgumentParser(description=__doc__);p.add_argument("--output",type=Path,required=True)
+p.add_argument("--formal",action="store_true",help="依規格064 READY驗正式木棚接線")
 a=p.parse_args();repo=Path(__file__).resolve().parents[1];dest=a.output.resolve()
 assert Path("/.dockerenv").is_file() and os.getuid()!=0
 assert dest.is_relative_to(Path("/out")) or dest.is_relative_to(repo/"workplace")
@@ -25,5 +26,16 @@ one("PASS_FORMAL_PERSON_HD_GUI_FOUR_REPLAYS","PASS_SHELTER_PROTOTYPE_GUI_FOUR_RE
 one('result["formal_entry"] =','result["prototype_entry"] =')
 one('"prototype_flags": False','"prototype_flags": True')
 one("正式首座、海洋與第100幀人物；限本次正常GUI輸入，其他人物、動畫及完整HD未完成。","木棚DRAFT及現行正式三種HD來源；限本次正常GUI輸入，不授予木棚正式接線信用。")
+if a.formal:
+ one('PASS_SHELTER_PROTOTYPE_FIVE_LANGUAGE_GUI','PASS_FORMAL_SHELTER_HD_FIVE_LANGUAGE_GUI')
+ one('gui.get("prototype_entry", {})','gui.get("formal_entry", {})')
+ one('gui["prototype_entry"].get("prototype_flags") is True','gui["formal_entry"].get("prototype_flags") is False')
+ one('        if name == "live":\n            command.extend(["--hd-shelter-prototype-asset",str(args.shelter_asset)])\n','')
+ one('PASS_SHELTER_PROTOTYPE_GUI_FOUR_REPLAYS','PASS_FORMAL_SHELTER_HD_GUI_FOUR_REPLAYS')
+ one('result["prototype_entry"] =','result["formal_entry"] =')
+ one('"prototype_flags": True','"prototype_flags": False')
+ one('木棚DRAFT及現行正式三種HD來源；限本次正常GUI輸入，不授予木棚正式接線信用。',
+     '正式首座、海洋、人物及第024幀木棚；限本次正常GUI輸入，其他建築、動畫及完整HD未完成。')
+ assert '--hd-shelter-' not in s
 compile(s,str(dest),"exec");dest.write_text(s)
-print("PASS_SHELTER_REPLAY_PROBE_BUILD",hashlib.sha256(dest.read_bytes()).hexdigest(),flush=True)
+print("PASS_FORMAL_SHELTER_REPLAY_PROBE_BUILD" if a.formal else "PASS_SHELTER_REPLAY_PROBE_BUILD",hashlib.sha256(dest.read_bytes()).hexdigest(),flush=True)

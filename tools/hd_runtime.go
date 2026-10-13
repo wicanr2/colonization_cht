@@ -103,6 +103,10 @@ func loadHDRuntime(m *golem.Machine, game, directory string) (*hdRuntime, error)
 	if err != nil {
 		return nil, err
 	}
+	h.shelter, err = loadHDShelterRuntime(h, game, directory)
+	if err != nil {
+		return nil, err
+	}
 	return h, nil
 }
 
@@ -114,7 +118,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "1cb71bbcb28ea82edb6de43dba1b5b1fb00f99f1ebfe829a6d4d79737e504bd8"
+const hdManifestSHA = "56fd8870e74ab0eb131a54805df581544354b5bfd7a58eceabe455abbf27b61f"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"
@@ -127,6 +131,7 @@ type hdBuildingPixel struct {
 	cursorIndex int
 }
 type hdRuntime struct {
+	shelter                                          *hdShelterRuntime
 	person                                           *hdPersonRuntime
 	sea                                              *hdSeaRuntime
 	m                                                *golem.Machine
@@ -180,6 +185,9 @@ func (h *hdRuntime) key() string {
 	}
 	if h.sea != nil {
 		if h.person != nil {
+			if h.shelter != nil {
+				return fmt.Sprintf("/hd/%d/sea/%d/person/%d/shelter/%d", h.revision, h.sea.revision, h.person.revision, h.shelter.revision)
+			}
 			return fmt.Sprintf("/hd/%d/sea/%d/person/%d", h.revision, h.sea.revision, h.person.revision)
 		}
 		return fmt.Sprintf("/hd/%d/sea/%d", h.revision, h.sea.revision)
@@ -192,6 +200,7 @@ func (h *hdRuntime) beforeInstruction() {
 	}
 	h.sea.beforeInstruction()
 	h.person.beforeInstruction()
+	h.shelter.beforeInstruction()
 	m := h.m
 	c := m.CPU
 	cs, ip := c.Seg[golem.CS], c.IP
@@ -395,6 +404,9 @@ func (h *hdRuntime) base(f draftNativeFrame) (*image.RGBA, map[string]any) {
 		rect := image.Rect(224+x, 52+y, 228+x, 56+y)
 		draw.Draw(out, rect, h.art, image.Pt(x, y), draw.Over)
 		painted++
+	}
+	if h.shelter != nil {
+		receipt["shelter"] = h.shelter.paint(out, f)
 	}
 	if h.person != nil {
 		receipt["person"] = h.person.paint(out, f)
