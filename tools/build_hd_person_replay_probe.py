@@ -1,8 +1,9 @@
-"""規格063 DRAFT：重播人物GUI的同一組正常輸入，核對四側原版狀態。"""
+"""規格063：重播正式或隔離人物GUI的同一組正常輸入，核對四側原版狀態。"""
 import argparse,hashlib,os,subprocess
 from pathlib import Path
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--output",type=Path,required=True)
+parser.add_argument("--formal",action="store_true",help="依規格063 READY驗證正式人物接線")
 args=parser.parse_args()
 repo=Path(__file__).resolve().parents[1];dest=args.output.resolve()
 assert Path("/.dockerenv").is_file() and os.getuid()!=0
@@ -28,5 +29,15 @@ one('PASS_FORMAL_HD_GUI_FOUR_REPLAYS','PASS_PERSON_PROTOTYPE_GUI_FOUR_REPLAYS')
 one('result["formal_entry"] =','result["prototype_entry"] =')
 one('"prototype_flags": False','"prototype_flags": True')
 one('正式首座建築與第148幀海洋；限本次正常GUI輸入，其他素材、動畫及完整五語未完成。','規格063 DRAFT人物與正式首座建築、海洋；限本次正常GUI輸入，尚未授予人物正式接線信用。')
+if args.formal:
+ one('PASS_PERSON_PROTOTYPE_FIVE_LANGUAGE_GUI','PASS_FORMAL_PERSON_HD_FIVE_LANGUAGE_GUI')
+ one('gui.get("prototype_entry", {})','gui.get("formal_entry", {})')
+ one('gui["prototype_entry"].get("prototype_flags") is True','gui["formal_entry"].get("prototype_flags") is False')
+ one('        if name == "live":\n            command.extend(["--hd-person-prototype-asset",str(args.person_asset)])\n','')
+ one('PASS_PERSON_PROTOTYPE_GUI_FOUR_REPLAYS','PASS_FORMAL_PERSON_HD_GUI_FOUR_REPLAYS')
+ one('result["prototype_entry"] =','result["formal_entry"] =')
+ one('"prototype_flags": True','"prototype_flags": False')
+ one('規格063 DRAFT人物與正式首座建築、海洋；限本次正常GUI輸入，尚未授予人物正式接線信用。',
+     '正式首座、海洋與第100幀人物；限本次正常GUI輸入，其他人物、動畫及完整HD未完成。')
 compile(s,str(dest),"exec");dest.write_text(s)
-print("PASS_PERSON_REPLAY_PROBE_BUILD",hashlib.sha256(dest.read_bytes()).hexdigest(),flush=True)
+print("PASS_FORMAL_PERSON_REPLAY_PROBE_BUILD" if args.formal else "PASS_PERSON_REPLAY_PROBE_BUILD",hashlib.sha256(dest.read_bytes()).hexdigest(),flush=True)

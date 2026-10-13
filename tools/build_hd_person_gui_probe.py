@@ -1,8 +1,9 @@
-"""規格063 DRAFT：重生五語人物懸停與拖曳視窗驗證。"""
+"""規格063：重生正式或隔離人物的五語懸停與拖曳視窗驗證。"""
 from pathlib import Path
 import argparse,hashlib,json,os,subprocess
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--output",type=Path,required=True)
+parser.add_argument("--formal",action="store_true",help="依規格063 READY驗證正式人物接線")
 args=parser.parse_args()
 repo=Path(__file__).resolve().parents[1];dest=args.output.resolve();out=dest.parent
 assert Path("/.dockerenv").is_file() and os.getuid()!=0
@@ -102,6 +103,21 @@ one('"prototype_flags": False','"prototype_flags": True')
 one('result["limitations"] = ["正式首座建築與第148幀海洋；其他素材、動畫及完整五語未完成，本輪重播另驗。"]',
     'result["limitations"] = ["規格063 DRAFT人物；首座及海洋正式來源沿用。人物直接懸停與拖曳、本輪同狀態重播另驗，不授予正式接線信用。"]')
 one('"sea_asset":sha(args.sea_asset.read_bytes())','"sea_asset":sha(args.sea_asset.read_bytes()),"person_asset":sha(args.person_asset.read_bytes())')
+if args.formal:
+ one('    person_root=output/"person"\n    person_root.mkdir()\n','')
+ one('    command += ["--hd-person-prototype-asset",str(args.person_asset),"--hd-person-probe-root",str(person_root)]',
+     '    need(args.person_asset.resolve()==(args.formal_launcher.parent/"graphics/person-100.png").resolve(),"正式人物素材路徑不同")')
+ start=s.index('        def person_snapshot(label,buttons=0):')
+ end=s.index('        person_targets={',start)
+ s=s[:start]+'        def person_snapshot(label,buttons=0):\n            return None\n\n'+s[end:]
+ assert s.count('person.get("prototype") is True')==2
+ s=s.replace('person.get("prototype") is True','person.get("formal") is True')
+ one('人物未由DRAFT原型繪製','人物未由正式執行期繪製')
+ one('PASS_PERSON_PROTOTYPE_FIVE_LANGUAGE_GUI','PASS_FORMAL_PERSON_HD_FIVE_LANGUAGE_GUI')
+ one('result["prototype_entry"] =','result["formal_entry"] =')
+ one('"prototype_flags": True','"prototype_flags": False')
+ one('規格063 DRAFT人物；首座及海洋正式來源沿用。人物直接懸停與拖曳、本輪同狀態重播另驗，不授予正式接線信用。',
+     '正式首座、海洋與第100幀人物；限本批正常GUI，其他人物、動畫及完整HD未完成。')
 p=dest;assert not p.exists();compile(s,str(p),"exec");p.write_text(s)
-dest.with_name(dest.name+".build.json").write_text(json.dumps({"kind":"person-prototype-gui","base_sha256":hashlib.sha256(source.read_bytes()).hexdigest(),"generated_sha256":hashlib.sha256(p.read_bytes()).hexdigest()},indent=2)+"\n")
-print("PASS_PERSON_GUI_PROBE_BUILD",hashlib.sha256(p.read_bytes()).hexdigest())
+dest.with_name(dest.name+".build.json").write_text(json.dumps({"kind":"formal-person-gui" if args.formal else "person-prototype-gui","base_sha256":hashlib.sha256(source.read_bytes()).hexdigest(),"generated_sha256":hashlib.sha256(p.read_bytes()).hexdigest()},indent=2)+"\n")
+print("PASS_FORMAL_PERSON_GUI_PROBE_BUILD" if args.formal else "PASS_PERSON_GUI_PROBE_BUILD",hashlib.sha256(p.read_bytes()).hexdigest())

@@ -5543,3 +5543,42 @@ imagegen v1及v2仍有光暈，原始圖與提示只留本機，未選入正式�
   cursor-check-r1.json為7fb3dd7e01db6b5f6fc4decbd6b1ebff36dba863a622ddee5a3a442fed382594；
   replays-r1/check.json為64e56cf41670c88251686ad361bfa0d43f3faf63c81797a35308b71e98c5de5a。
 - 本輪只授予隔離原型與限定READY契約信用。正式接線、其他人物、動畫及跨平台效能未驗。
+
+## 2026-10-13 R38 人物正式顯示層的限定同狀態驗收
+
+- 輸入與位址契約沿規格063 READY：VICEROY.EXE、ICONS.SS、101bytes來源及兩處6×16抽樣不變。
+  工具為Go1.26.7、Python3.11.2／Pillow9.4.0及獨立dosgolem
+  82a14b266e1b5bc904e2d0fe507daf6bea41a013；位址均為dosgolem實模式CS:IP或線性RAM，不是IDA EA。
+- 使用者確認的生成PNG原樣保存為graphics/person-100.png，SHA-256
+  be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346。
+  清冊SHA-256為1cb71bbcb28ea82edb6de43dba1b5b1fb00f99f1ebfe829a6d4d79737e504bd8，
+  原版參考不散布。
+- confirmed限正式輸入與本批路徑。人物beforeInstruction、finish、write、receipt及paint
+  五個方法與已驗R37一致，差異為型別、正式收據名稱及載入入口。
+  原始來源及游標2370點的依據仍為R37獨立原版收據，不把單純命名變更當作新增RE。
+- 正式二進位SHA-256為a91053bcf954e26356dcaa1c8aae7c355030439f4c38c1ac24538951ee4c1b86。
+  699Go零skip與go vet通過；49點原版狀態／存檔及17人物、31海洋反例通過。
+  正常入口沒有人物原型旗標，37個Go檔與20個來源綁定由本輪收據保存。
+- 252組正式五語原版／HD、1008筆設定事件及9512個不透明游標像素通過，沒有守門回退。
+  75組城內HD人物皆120點有效來源、92點實際含alpha合成；
+  51組主選單／世界／存檔／百科／離城等畫面皆0點。
+- 實際GUI輸入229筆，SHA-256為3a1b82689504583dddae90d11c39cf57d2774afc474fb74a31a35f570b21ce58。
+  初始COLONY09.SAV沿52ae8b7bd4bea1869afb825af165a8edc50882fc176d49985d4fb3c362d5469b。
+  四側完整終點458200000步、4363255421個CPU週期、24042個計時刻度與2776張畫格全同。
+  RAM為e6290e97eac356c5b1e8a024b552c02d8b7b6b6fe01b63af36211654ceab29bb，
+  VGA為323234f05887e1a82fc556c1161f4e6fc3fc401f4dc7937215db115caab171c2，
+  DAC為ad5461e69a77d43abcd3ab3c0baf1a0f2b0bec4fed919de591888747f1eb25b0。
+- 四側WAV為fed822c971d74f6781cd2fc74e29f03e2f36ed600edd191473dcca85dae54724，
+  COLONY00.SAV為9fce2ddeebc0298544ddf06b9ed713e23d51e871b85190f7d4a6e19e34d84def；
+  COLONY09指紋不變。WAV相同只證明本次技術輸出一致，不代替人耳或硬體逐週期驗收。
+- 11種正式啟動缺件／錯件／連結及恢復通過，54筆設定事件不改原版，
+  原日文HD偏好位元組保持；11項封裝錯件及額外原版反例全拒絕。
+  缺原版另外確認兩個明確skip。
+- 本機根hd-person-formal-r38：
+  build-check.json為c5e599858eec2c5d556c8c6958490b8824e9c309e45ae9eaea60f87aba63dea6，
+  gui-r1/check.json為d550d5b31c9142ffc754f8fa10dc332c99e1d5ac6402af57ac0acd64eb29c9cf，
+  startup-r1/check.json為167000e041f8e6d1e54128f209056252f182ec3961121c6fdb284dee13b06b3f，
+  replays-r1/check.json為a3eec7446702b819631540ca9a3deeda6dc63b121cce737f5d1ea16474ffafa7。
+  commands-r38.json及final-audit-r38.json索引重生入口與收尾稽核。
+- 規格063限定CONFORMED，只授予本人物來源及抽樣路徑。其他人物、動畫、背景RAM副本、
+  完整HD、跨平台效能及新發行仍不在本輪完成範圍。

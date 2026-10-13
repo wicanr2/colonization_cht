@@ -188,15 +188,16 @@ def dependency_notices(binary, repo, target=("linux", "amd64")):
 
 
 def hd_asset_files(repo):
-    """規格061／062 READY：只收已驗生成素材，逐項核對，拒絕額外檔案。"""
+    """規格061／062／063 READY：只收已驗生成素材，逐項核對，拒絕額外檔案。"""
     root = repo / "graphics"
-    if root.is_symlink() or {p.name for p in root.iterdir()} != {"manifest.json", "building-032.png", "sea-148.png"}:
+    if root.is_symlink() or {p.name for p in root.iterdir()} != {"manifest.json", "building-032.png", "sea-148.png", "person-100.png"}:
         raise ValueError("HD素材目錄不同")
     files = {}
     for name, digest, limit in [
-            ("manifest.json", "5bed874c804779ffeebb7b2dad1f8eafd778261dba4f3dae65230de19a55173c", 64 << 10),
+            ("manifest.json", "1cb71bbcb28ea82edb6de43dba1b5b1fb00f99f1ebfe829a6d4d79737e504bd8", 64 << 10),
             ("building-032.png", "c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8", 8 << 20),
-            ("sea-148.png", "2c5d3edc8d38e44dc02d7ccb88e79e4f749edd8a0b1d3dfd54ec04b467ba61ff", 8 << 20)]:
+            ("sea-148.png", "2c5d3edc8d38e44dc02d7ccb88e79e4f749edd8a0b1d3dfd54ec04b467ba61ff", 8 << 20),
+            ("person-100.png", "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346", 8 << 20)]:
         path = root / name
         if path.is_symlink() or not path.is_file() or path.stat().st_size > limit:
             raise ValueError("HD素材不是有界檔案：" + name)

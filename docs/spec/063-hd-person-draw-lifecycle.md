@@ -1,6 +1,6 @@
 # HD人物第100幀的來源與生命週期
 
-狀態：READY，僅限本頁R37正式接線契約。人物正式接線尚未CONFORMED。
+狀態：CONFORMED，僅限本頁R38正式第100幀人物與抽樣路徑。其他人物與動畫未完成。
 
 ## 範圍與目前證據
 
@@ -50,9 +50,9 @@ Python3.11.2／Pillow9.4.0。解碼器只作本機唯讀研究，不進正式程
 
 ## 下一閘門
 
-人物正常懸停、拖曳與游標還原的新增證據及限定接線契約見本頁R37節。
+第100幀人物正式接線與抽樣驗收已完成，見本頁R38節。
 生成v2已經使用者確認；不重新開啟美術選擇。
-正式實作仍須先通過READY審查；其他來源轉送、背景RAM副本及動畫不外推。
+其他人物、來源轉送、背景RAM副本及動畫不外推，新增來源仍依目標186建立證據與規格。
 本頁不增加正式HD、完整五語或新版交付的完成信用。
 
 ## 2026-10-13正常路徑的限定證據
@@ -136,7 +136,8 @@ UID1000、無網路、資源／逾時有界。原版圖像、原始寫入與存�
 可重現入口：`tools/build_hd_person_prototype.py`組裝隔離程式，
 `tools/build_hd_person_gui_probe.py`重生五語懸停與拖曳驗證，
 `tools/build_hd_person_replay_probe.py`重播同一組正常GUI輸入。
-三者只供本機DRAFT驗證，不由正式建置或啟動器引用。
+R37模式供本機DRAFT驗證，不由正式建置或啟動器引用。
+GUI與重播產生器另提供`--formal`，正式驗收見R38節。
 `tools/build_hd_person_lifecycle_probe.py`從同批GUI的10張診斷收據組裝獨立原版探針，
 追蹤游標及背景RAM寫入；不安裝HD，也不以HD來源判定取代原版證據。
 `tools/check_hd_person_cursor_lifecycle.py`獨立重建逐點來源及游標配對，
@@ -211,6 +212,10 @@ commands-r37.json保存實際Docker入口，final-audit-r37.json保存收尾稽�
 
 ### 正式接線的限定輸入與輸出
 
+正式實作入口為[人物顯示層](../../tools/hd_person_runtime.go)及
+[正常路徑測試](../../tools/hd_person_runtime_test.go)，由既有正式組裝器載入。
+R37原型仍保存為歷史驗證入口；重生R37時使用提交cacbf3e的來源，避免混入後續正式接線。
+
 正式實作必須沿本節契約，不把原型診斷旗標帶入正常玩家入口。
 
 - HD素材組為manifest.json、building-032.png、sea-148.png及person-100.png。
@@ -243,3 +248,60 @@ Go測試只授予內部回歸信用；原版信用限獨立dosgolem及正常GUI�
 本節只涵蓋ICONS.SS第100幀及抽樣路徑，未授予其他人物、職業變體、動畫、
 完整HD、完整五語、跨平台效能或新發行信用。背景RAM副本仍未知且不接受，
 除非出現會阻塞玩家路徑的新證據，不為擴大覆蓋猜補。
+
+## 2026-10-13 R38正式接線的限定CONFORMED
+
+本節只授予第100幀人物與以下原版、素材及正常路徑。正式來源位於
+[hd_person_runtime.go](../../tools/hd_person_runtime.go)與
+[hd_person_runtime_test.go](../../tools/hd_person_runtime_test.go)，
+由[正式組裝器](../../tools/build_language_observation_probe.py)綁定。
+[既有啟動器](../../tools/release/colonization-cht.sh)不新增玩家旗標，
+[封裝白名單](../../tools/package_release.py)只增加已驗生成的person-100.png。
+
+生成原圖與完整提示、參考指紋、使用者確認及權利資料在
+[素材清冊](../../graphics/manifest.json)。原版參考不公開。
+原圖768×2048 RGBA及alpha原樣保存，指紋沿be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346。
+清冊指紋為1cb71bbcb28ea82edb6de43dba1b5b1fb00f99f1ebfe829a6d4d79737e504bd8。
+
+### 驗收結果
+
+| 項目 | 限定結果 |
+| --- | --- |
+| 正式來源 | 37個Go檔、20個來源綁定，go vet通過。二進位a91053bcf954e26356dcaa1c8aae7c355030439f4c38c1ac24538951ee4c1b86。 |
+| 原型證據沿用 | beforeInstruction、finish、write、receipt及paint五個方法與R37相同；差異限型別、正式收據名稱及載入入口。R37原始寫入及游標證據不冒稱新RE。 |
+| 回歸 | 699Go零skip；49點原版狀態／存檔、17人物及31海洋反例通過。缺原版另驗兩個明確skip。 |
+| 正常GUI | 252組五語原版／HD切換、1008筆原子設定事件、9512個不透明游標像素通過，沒有HD守門回退。正常入口沒有人物原型或診斷旗標。 |
+| 人物生命週期 | 75組城內HD畫面皆120點有效來源，其中92點含alpha而實際合成；其餘保留原畫面。51組主選單、世界、存檔、百科、離城等HD畫面皆0點。包含直接懸停、移開、返回及正常按住拖曳／放開。 |
+| 同狀態 | 229筆實際GUI輸入四側重播至458200000步，完整CPU／RAM／VGA／DAC、WAV與COLONY00／COLONY09全同。 |
+| 缺件與恢復 | 11種新行程通過，54筆暫停設定事件不改原版，原日文HD偏好位元組不變。[正式回退探針](../../tools/probe_hd_startup_fallback.py)沿既有啟動器驗證。 |
+| 封裝 | 11個缺件、錯件、符號連結及額外原版反例全拒絕；素材組只含清冊、建築、海洋及人物生成PNG。 |
+
+已核對229筆實際輸入SHA-256為
+3a1b82689504583dddae90d11c39cf57d2774afc474fb74a31a35f570b21ce58。
+初始COLONY09.SAV仍為52ae8b7bd4bea1869afb825af165a8edc50882fc176d49985d4fb3c362d5469b。
+四側終點RAM為e6290e97eac356c5b1e8a024b552c02d8b7b6b6fe01b63af36211654ceab29bb，
+WAV為fed822c971d74f6781cd2fc74e29f03e2f36ed600edd191473dcca85dae54724，
+COLONY00.SAV為9fce2ddeebc0298544ddf06b9ed713e23d51e871b85190f7d4a6e19e34d84def。
+WAV相同不代替人耳或DOS硬體逐週期驗收。
+
+### 重生入口與收據
+
+本機證據根為workplace/reports/goal186-display-hd/hd-person-formal-r38。
+build-test-r1.py沿公開正式組裝器、Go測試與封裝白名單重建本機驗證包，
+run-gui-r1.sh使用build_hd_person_gui_probe.py --formal的產物，
+run-replays-r1.sh使用build_hd_person_replay_probe.py --formal的產物，
+run-startup-r1.sh沿正式啟動器驗11種新行程。
+commands-r38.json保存實際Docker命令；final-audit-r38.json保存來源、權利及擁有權稽核。
+這是本機驗證包，不是新版發行包。
+
+| 收據 | SHA-256 |
+| --- | --- |
+| build-check.json | c5e599858eec2c5d556c8c6958490b8824e9c309e45ae9eaea60f87aba63dea6 |
+| gui-r1/check.json | d550d5b31c9142ffc754f8fa10dc332c99e1d5ac6402af57ac0acd64eb29c9cf |
+| startup-r1/check.json | 167000e041f8e6d1e54128f209056252f182ec3961121c6fdb284dee13b06b3f |
+| replays-r1/check.json | a3eec7446702b819631540ca9a3deeda6dc63b121cce737f5d1ea16474ffafa7 |
+| final-audit-r38.json | 616db4e45f99eb718963107319cd3e80cb41acf9dab2fb6a816bff8f8697345a |
+
+正常GUI與Go測試的原版、前輪收據及獨立dosgolem唯讀；
+產物只留本輪本機目錄，生成PNG及程式才進Git。
+其他人物、動畫、背景RAM副本、跨平台效能、完整HD、完整五語及新發行沒有增加完成信用。

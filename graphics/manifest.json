@@ -67,6 +67,56 @@
         "PHYS0.SS": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
         "encoded_frame_sha256": "192698d118f87f0f0c4f1605962c000a63db80c935510cef2b4087bf2bd8399f"
       }
+    },
+    "person-100.png": {
+      "spec": "docs/spec/063-hd-person-draw-lifecycle.md",
+      "sha256": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346",
+      "bytes": 1003588,
+      "size": [
+        768,
+        2048
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        6,
+        16
+      ],
+      "target_size": [
+        24,
+        64
+      ],
+      "native_opaque_pixels": 60,
+      "observed_native_rects": [
+        [
+          238,
+          38,
+          244,
+          54
+        ],
+        [
+          12,
+          142,
+          18,
+          158
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "retain original PNG alpha unchanged; draw only verified native opaque source cells; no alpha threshold",
+      "user_approval": {
+        "date": "2026-10-13",
+        "decision": "使用者檢視v2後確認效果可接受，要求依此方式HD化；原圖及alpha原樣採用。"
+      },
+      "generation_prompt": "Use case: precise-object-edit.\nAsset type: transparent fine pixel-art game sprite, one standing person, eventual runtime size 24 by 64 pixels.\nInput images: Image 1 is our current generated sprite and the EDIT TARGET. Image 2 is the original 6 by 16 person enlarged with nearest neighbour, EXACT POSE/SILHOUETTE REFERENCE. Image 3 is the USER APPROVED fine pixel-art sheet, STYLE ONLY.\nCorrection: remove ALL soft glow, bloom, blur, smoky transparency and large soft blocks from Image 1. Redraw it as crisp fine pixel clusters on a 24 by 64 logical grid, shown enlarged by nearest neighbour. The cap, clothes and trousers must be normal non-emissive fabric. Use hard transparent edges. Background pixels must be fully transparent and person pixels fully opaque; no semitransparent halo anywhere.\nPreserve the exact 6:16 canvas ratio, original slim 6 by 16 silhouette, placement, pose and facing direction of Image 2. Keep its restrained brown clothing, pale cap/trousers and small turquoise fabric accents; the turquoise must not glow. Do not broaden the shoulders or arms, center a new frontal pose, or add a new costume. Add only fine, readable fabric/shoe shading within that original stepped silhouette, using the crisp natural pixel-art material treatment of Image 3.\nOne whole still person, aligned with original extents. Real alpha transparency around and within the silhouette. No antialiasing, smooth shading, light effects, ground, cast shadow, scenery, extra people, weapons, tools, text, frame, watermark or sprite sheet.",
+      "reference_sha256": {
+        "previous_generated_v1": "7d54e0cb8bac1e82b5f05e3ed3c5799074131db8adef84c47117404b39d4911c",
+        "native": "20ad152582ef93c618082be58fc87534fe8fac52df06d0119e6bd4a870c52ff2",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "ICONS.SS": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "encoded_frame_sha256": "36d3a8e51b4bce57a879d96703d5fad70797f9e940e13aa3abc4d6f830e4d832"
+      }
     }
   }
 }

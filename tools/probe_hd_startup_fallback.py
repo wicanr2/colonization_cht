@@ -35,7 +35,7 @@ def main():
     preference.write_bytes(saved)
     results = []
     for case in ["missing-directory", "missing-image", "bad-image", "bad-manifest",
-                 "missing-sea", "bad-sea", "linked-sea", "restored"]:
+                 "missing-sea", "bad-sea", "linked-sea", "missing-person", "bad-person", "linked-person", "restored"]:
         out = root / case
         out.mkdir()
         assets = out / "graphics"
@@ -54,6 +54,13 @@ def main():
         if case == "linked-sea":
             (assets / "sea-148.png").unlink()
             (assets / "sea-148.png").symlink_to(args.bundle / "graphics/sea-148.png")
+        if case == "missing-person":
+            (assets / "person-100.png").unlink()
+        if case == "bad-person":
+            (assets / "person-100.png").write_bytes(b"damaged")
+        if case == "linked-person":
+            (assets / "person-100.png").unlink()
+            (assets / "person-100.png").symlink_to(args.bundle / "graphics/person-100.png")
         prefix = out / "gui"
         command = ["bash", str(args.bundle / "colonization-cht.sh"), "--game", str(args.game),
                    "--play=false", "--audio-mute", "--window-steps", "100000000",

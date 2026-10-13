@@ -1,4 +1,4 @@
-// 規格061／062 READY：已驗建築與海洋的正式HD顯示層；不寫入DOS。
+// 規格061／062／063 READY：已驗建築、海洋與人物的HD顯示層；不寫入DOS。
 package main
 
 import (
@@ -99,6 +99,10 @@ func loadHDRuntime(m *golem.Machine, game, directory string) (*hdRuntime, error)
 		return nil, err
 	}
 	m.WatchWrite(hdBuildingCanvas, hdBuildingCanvas+63999, func(_ *golem.Machine, a uint32, old, value byte) { h.write(a, old, value) })
+	h.person, err = loadHDPersonRuntime(h, game, directory)
+	if err != nil {
+		return nil, err
+	}
 	return h, nil
 }
 
@@ -110,7 +114,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "5bed874c804779ffeebb7b2dad1f8eafd778261dba4f3dae65230de19a55173c"
+const hdManifestSHA = "1cb71bbcb28ea82edb6de43dba1b5b1fb00f99f1ebfe829a6d4d79737e504bd8"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"
@@ -123,6 +127,7 @@ type hdBuildingPixel struct {
 	cursorIndex int
 }
 type hdRuntime struct {
+	person                                           *hdPersonRuntime
 	sea                                              *hdSeaRuntime
 	m                                                *golem.Machine
 	art                                              *image.RGBA
@@ -174,6 +179,9 @@ func (h *hdRuntime) key() string {
 		return ""
 	}
 	if h.sea != nil {
+		if h.person != nil {
+			return fmt.Sprintf("/hd/%d/sea/%d/person/%d", h.revision, h.sea.revision, h.person.revision)
+		}
 		return fmt.Sprintf("/hd/%d/sea/%d", h.revision, h.sea.revision)
 	}
 	return fmt.Sprintf("/hd/%d", h.revision)
@@ -183,6 +191,7 @@ func (h *hdRuntime) beforeInstruction() {
 		return
 	}
 	h.sea.beforeInstruction()
+	h.person.beforeInstruction()
 	m := h.m
 	c := m.CPU
 	cs, ip := c.Seg[golem.CS], c.IP
@@ -386,6 +395,9 @@ func (h *hdRuntime) base(f draftNativeFrame) (*image.RGBA, map[string]any) {
 		rect := image.Rect(224+x, 52+y, 228+x, 56+y)
 		draw.Draw(out, rect, h.art, image.Pt(x, y), draw.Over)
 		painted++
+	}
+	if h.person != nil {
+		receipt["person"] = h.person.paint(out, f)
 	}
 	receipt["owned"], receipt["painted"], receipt["reason"] = owned, painted, "known-building"
 	return out, receipt
