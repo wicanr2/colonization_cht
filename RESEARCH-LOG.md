@@ -5473,3 +5473,21 @@ WAV 63271aa173cd3f8d033d5a18bb25f2ef69d514963723ba4132c73246631e7664，GUI終點
 這是本輪新增的受控時點證據，不推翻先前限定正常路徑驗收。
 收據、完整雜湊與命令見規格062及本機hd-sea-restore-r34/commands-r34.json。
 岸線、其他還原鏈、裁切、動畫、正式回退及效能仍未驗；海洋DRAFT不變。
+
+## 2026-10-13海洋第148幀正式顯示
+
+confirmed限[規格062正式契約](docs/spec/062-hd-sea-draw-lifecycle.md#2026-10-13正式接線契約)。
+原版VICEROY.EXE a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3，
+PHYS0.SS deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16；
+原始地址、來源263bytes及寫入指紋沿R32／R34，沒有新增IDA位址或推測語意。
+工具為Go1.26.7、Python3.11.2、Pillow9.4.0及獨立dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013。
+七個來源方法與R34正規化後相同，49點逐項遮罩及背景／游標還原統計相同。
+生成v3只用自己的v2及已定稿畫風，未上傳原版像素；完整提示、色調量測、原圖指紋
+2c5d3edc8d38e44dc02d7ccb88e79e4f749edd8a0b1d3dfd54ec04b467ba61ff保存在graphics清冊與本機R35。
+
+692Go零skip、go vet、31反例及49點完整原版狀態與存檔通過。
+182組正式五語GUI、728筆設定事件、6560點不透明游標、八種缺件／恢復與八項封裝拒絕通過。
+121筆實際輸入至286400000步，四側CPU、完整RAM、VGA、DAC、WAV與存檔全同；
+WAV d30d624aa9ac2b0d52b5a5190671acc56b9c2088fd9d7d6aca21846e46010059，GUI終點RAM 463f133a09497ffdc748aa5f8e13b7d04a426373e6993cac287f95897cfceca2。
+一組來源暫態回原圖，未計為持續覆蓋。合成五次中位數及Linux環境見規格062；
+原版／dosgolem／發布版本未改，其他地形、裁切、動畫、跨平台效能及完整HD仍未驗。

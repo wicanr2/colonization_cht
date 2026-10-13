@@ -7,6 +7,7 @@ from pathlib import Path
 p = argparse.ArgumentParser(description=__doc__)
 p.add_argument("--output", type=Path, required=True)
 p.add_argument("--formal", action="store_true", help="規格061 READY：驗證正式啟動器")
+p.add_argument("--building-only", action="store_true", help="只重生歷史首座檢查，供舊收據工具使用")
 a = p.parse_args()
 repo = Path(__file__).resolve().parents[1]
 out = a.output.resolve()
@@ -169,6 +170,9 @@ if a.formal:
     one('result["limitations"] = ["正式入口與本次正常路徑；其他未驗欄位及HD仍未完成。"]',
         'result["limitations"] = ["正式入口、單座HD與本次正常路徑；其他素材、動畫及完整五語仍未完成。"]')
     one('"result": "PASS_HD_RUNTIME_FIVE_LANGUAGE_GUI"', '"result": "PASS_FORMAL_HD_FIVE_LANGUAGE_GUI"')
+if a.formal and not a.building_only:
+    from build_hd_sea_gui_probe import extend_sea_checks
+    s = extend_sea_checks(s, formal=True)
 compile(s, str(out), "exec")
 out.write_text(s)
 print("PASS_HD_RUNTIME_GUI_PROBE_BUILD", hashlib.sha256(out.read_bytes()).hexdigest())

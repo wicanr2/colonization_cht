@@ -351,3 +351,11 @@ Docker沿AGENTS.md，GUI沿既有verification映像，建置沿Go1.26.7映像。
 | tools/build_hd_runtime_prototype.py | 00fa2577b2ab4de59f5a936dd4255c7a61976910a6a171f1026705fd7fab7f17 |
 | tools/build_hd_runtime_gui_probe.py | c611e88ee9d516490e3074cf93b7f33ea74288ed7516708140be91c28dbf63a2 |
 | tools/build_hd_runtime_replay_probe.py | 966b0892d865a4ddafef0b94a816ab00edd5d9fdfc969029176ff1588c9ae82c |
+
+## 2026-10-13共用HD清冊擴充
+
+首座原始生成圖、440點來源、621點幾何與游標方法不變。
+共用載入器新增海洋第148幀，完整清冊、PHYS0.SS、生成海洋與整組缺件回退
+依[規格062正式契約](062-hd-sea-draw-lifecycle.md#2026-10-13正式接線契約)。
+R35正式GUI重驗首座進城、懸停、百科、離城與重進，並重跑原有偏好守門；
+本次來源暫態回退另記，不外推持續HD或其他素材完成。歷史R31收據保留。

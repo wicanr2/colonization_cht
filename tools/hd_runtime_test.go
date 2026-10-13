@@ -23,7 +23,7 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 		}
 		return raw
 	}
-	for _, name := range []string{"VICEROY.EXE", "BUILDING.SS"} {
+	for _, name := range []string{"VICEROY.EXE", "BUILDING.SS", "PHYS0.SS"} {
 		if _, err := os.Stat(filepath.Join(game, name)); os.IsNotExist(err) {
 			t.Skip("缺少合法原版", name)
 		}
@@ -31,7 +31,7 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 	m := golem.New()
 	before := bytes.Clone(m.Mem)
 	h, err := loadHDRuntime(m, game, assets)
-	if err != nil || h == nil || h.art.Bounds() != image.Rect(0, 0, 92, 108) || !bytes.Equal(before, m.Mem) {
+	if err != nil || h == nil || h.sea == nil || h.sea.art.Bounds() != image.Rect(0, 0, 64, 64) || h.art.Bounds() != image.Rect(0, 0, 92, 108) || !bytes.Equal(before, m.Mem) {
 		t.Fatal("正式素材載入失敗或改寫原版", err)
 	}
 	for name, mutate := range map[string]func(string, string){
@@ -46,6 +46,20 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 		},
 		"wrong-building":   func(a, g string) { os.WriteFile(filepath.Join(g, "BUILDING.SS"), []byte("wrong"), 0644) },
 		"wrong-executable": func(a, g string) { os.WriteFile(filepath.Join(g, "VICEROY.EXE"), []byte("wrong"), 0644) },
+		"missing-sea":      func(a, g string) { os.Remove(filepath.Join(a, "sea-148.png")) },
+		"bad-sea":          func(a, g string) { os.WriteFile(filepath.Join(a, "sea-148.png"), []byte("wrong"), 0644) },
+		"linked-sea": func(a, g string) {
+			p := filepath.Join(a, "sea-148.png")
+			os.Remove(p)
+			os.Symlink(filepath.Join(assets, "sea-148.png"), p)
+		},
+		"missing-phys0": func(a, g string) { os.Remove(filepath.Join(g, "PHYS0.SS")) },
+		"wrong-phys0":   func(a, g string) { os.WriteFile(filepath.Join(g, "PHYS0.SS"), []byte("wrong"), 0644) },
+		"linked-phys0": func(a, g string) {
+			p := filepath.Join(g, "PHYS0.SS")
+			os.Remove(p)
+			os.Symlink(filepath.Join(game, "PHYS0.SS"), p)
+		},
 	} {
 		t.Run(name, func(t *testing.T) {
 			a, g := filepath.Join(t.TempDir(), "graphics"), filepath.Join(t.TempDir(), "game")
@@ -54,12 +68,12 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 					t.Fatal(err)
 				}
 			}
-			for _, n := range []string{"manifest.json", "building-032.png"} {
+			for _, n := range []string{"manifest.json", "building-032.png", "sea-148.png"} {
 				if err := os.WriteFile(filepath.Join(a, n), readFile(filepath.Join(assets, n)), 0644); err != nil {
 					t.Fatal(err)
 				}
 			}
-			for _, n := range []string{"VICEROY.EXE", "BUILDING.SS"} {
+			for _, n := range []string{"VICEROY.EXE", "BUILDING.SS", "PHYS0.SS"} {
 				if err := os.WriteFile(filepath.Join(g, n), readFile(filepath.Join(game, n)), 0644); err != nil {
 					t.Fatal(err)
 				}

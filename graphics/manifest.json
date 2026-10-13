@@ -41,6 +41,32 @@
         "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
         "encoded_frame_sha256": "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
       }
+    },
+    "sea-148.png": {
+      "spec": "docs/spec/062-hd-sea-draw-lifecycle.md",
+      "sha256": "2c5d3edc8d38e44dc02d7ccb88e79e4f749edd8a0b1d3dfd54ec04b467ba61ff",
+      "bytes": 1315857,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "fully opaque; clip to verified per-pixel ownership on the main canvas",
+      "generation_prompt": "Use case: precise-object-edit.\nAsset type: one fully opaque seamless ocean texture for a 64 by 64 pixel display-only HD tile in Colonization (1994).\nInput images: Image 1 is the edit target, our previously generated ocean v2. Image 2 is the user-approved fine pixel-art concept sheet, STYLE REFERENCE ONLY.\nPrimary request: adjust ONLY the ocean palette and microcontrast of Image 1 so that the ocean meets the restrained indigo coast of the existing game display. Preserve the square framing, top-down view, texture scale, and fine pixel-art character. Do not introduce a new art style.\nColor palette: a narrow, subdued deep indigo palette centered on RGB (25,30,127), hexadecimal #191E7F. Dark ripple colors around RGB (16,22,117), lit ripple clusters around RGB (32,44,138). Most of the tile must remain close to the base indigo. Remove the electric royal-blue/cyan appearance and conspicuous bright sparkles of Image 1. No white highlights. Avoid bright teal, saturated cyan, or black patches. This is calm open water, with small subtle broken horizontal ripple clusters.\nStyle/medium: crisp, deliberately placed fine pixel clusters in the style of Image 2. Low contrast so that repeating the texture does not compete with tiny map buildings or labels. The texture must still read as detailed water at the intended 64 by 64 display size.\nComposition/framing: one single square, uniform top-down open-water tile, seamless on all four edges. Even illumination. No large dark/light regions, vignette, directional lighting, border, horizon, shore, land, foam bands, ships, objects, text, icons, or sheet of multiple tiles. Do not copy any scenery from Image 2.\nConstraints: all pixels opaque; edge-to-edge ocean; retain pixel art; no smooth painting, blur, anti-aliased outlines, photorealism, grid, labels, watermark, or decorative frame.",
+      "reference_sha256": {
+        "previous_generated_v2": "27deaccd2785a85d5ba45c462ee7ca47d160ec48683b291b379573fded5f9674",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "PHYS0.SS": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "encoded_frame_sha256": "192698d118f87f0f0c4f1605962c000a63db80c935510cef2b4087bf2bd8399f"
+      }
     }
   }
 }

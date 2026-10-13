@@ -150,7 +150,8 @@ def attach_language_runtime(repo, output, reference, *, with_rebuild=True, forma
         extra_sources = ["tools/language_bundle_probe.go", "tools/language_bundle_probe_test.go",
                          "tools/language_rebuild_probe.go", "tools/language_rebuild_probe_test.go",
                          "tools/language_resource_index.go", "tools/language-catalogs.json",
-                         "tools/hd_runtime.go", "tools/hd_runtime_test.go"]
+                         "tools/hd_runtime.go", "tools/hd_runtime_test.go",
+                         "tools/hd_sea_runtime.go", "tools/hd_sea_runtime_test.go"]
         for name in extra_sources:
             (output / Path(name).name).write_bytes((repo / name).read_bytes())
         old = "\tjournal := &nativeJournal{enabled: nativeOn}\n"

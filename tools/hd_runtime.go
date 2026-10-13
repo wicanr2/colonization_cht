@@ -1,4 +1,4 @@
-// 規格061 READY：單一已驗建築的正式HD顯示層；不寫入DOS。
+// 規格061／062 READY：已驗建築與海洋的正式HD顯示層；不寫入DOS。
 package main
 
 import (
@@ -94,6 +94,10 @@ func loadHDRuntime(m *golem.Machine, game, directory string) (*hdRuntime, error)
 		}
 	}
 	h := &hdRuntime{m: m, art: art, pending: map[int]hdBuildingPixel{}}
+	h.sea, err = loadHDSeaRuntime(h, game, directory)
+	if err != nil {
+		return nil, err
+	}
 	m.WatchWrite(hdBuildingCanvas, hdBuildingCanvas+63999, func(_ *golem.Machine, a uint32, old, value byte) { h.write(a, old, value) })
 	return h, nil
 }
@@ -106,7 +110,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "7afb648f75182a3f6b04b090cf48b9bf9999f8a67e125df5a3c58fb68c80eb62"
+const hdManifestSHA = "5bed874c804779ffeebb7b2dad1f8eafd778261dba4f3dae65230de19a55173c"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"
@@ -119,6 +123,7 @@ type hdBuildingPixel struct {
 	cursorIndex int
 }
 type hdRuntime struct {
+	sea                                              *hdSeaRuntime
 	m                                                *golem.Machine
 	art                                              *image.RGBA
 	owned                                            [621]bool
@@ -168,12 +173,16 @@ func (h *hdRuntime) key() string {
 	if h == nil {
 		return ""
 	}
+	if h.sea != nil {
+		return fmt.Sprintf("/hd/%d/sea/%d", h.revision, h.sea.revision)
+	}
 	return fmt.Sprintf("/hd/%d", h.revision)
 }
 func (h *hdRuntime) beforeInstruction() {
 	if h == nil {
 		return
 	}
+	h.sea.beforeInstruction()
 	m := h.m
 	c := m.CPU
 	cs, ip := c.Seg[golem.CS], c.IP
@@ -356,6 +365,9 @@ func (h *hdRuntime) base(f draftNativeFrame) (*image.RGBA, map[string]any) {
 		receipt["reason"] = "unverified-cursor-or-native-surface"
 		receipt["cursor_reject"] = reason
 		return out, receipt
+	}
+	if h.sea != nil {
+		receipt["sea"] = h.sea.paint(out, f)
 	}
 	owned, painted := 0, 0
 	for i, v := range h.owned {
