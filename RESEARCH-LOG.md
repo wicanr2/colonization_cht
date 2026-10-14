@@ -5828,3 +5828,44 @@ WAV為aa138807c6f1aa8215a3b9784bee32182fe20bb3fa282b7a6f990180ef2b9403。
 唯讀盤點確認原版206SS、35PIK；ICONS.SS有131幀，CURSOR.SS有兩個17×17幀，
 完整指紋與尺寸仍由既有SS清冊回查。PIK格式、圖像用途、動畫關係、別名及實際可見性尚未證實。
 全量目標不排除小尺寸或尚未命中的來源，不以十四張正式PNG當分母。
+## 2026-10-14 R49全量來源與31種小圖像逐寫證據
+
+本節為來源研究，沒有新增正式HD。入口為目標186的全量覆蓋節與docs/hd-source-catalog.json。
+工具為Python3.11.2、Pillow9.4.0、Go1.26.7及dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013。
+解碼器為mpskit8c30544b51d1b4ab68f3a465784239c24b660e24，來源清冊SHA-256為
+340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18。
+檔案容器位移採解碼後MADSPACK區段；執行期採dosgolem實模式CS:IP及20bit線性RAM，均非IDA位址。
+
+| 結論 | 等級與證據 |
+|---|---|
+| 全部SS及PIK解碼 | confirmed限檔案形狀：288個根目錄檔案中，206個SS共1517幀紀錄，35個PIK共35張；1533筆已解碼、19筆空尺寸、69筆零不透明SS幀及33組共同編碼。其他47檔與程式繪圖未分類，完整玩家可見分母未知。 |
+| COLONY.PIK格式 | confirmed：原檔faaa637d528641a5f098eb4b1975696de182bd2d586b5f089d5a0d51320f5465，兩區段8及23040bytes；標頭4800400100004425，尺寸320×72。索引資料70c390b5178ce8cfc37afb9199d5e25cd1859c2b7adcca36df7d149d0efa20f4，沒有內嵌色盤。執行期色盤及透明度未知，未補造彩色預覽。 |
+| 大型圖片 | confirmed限檔案形狀：OPENING.PIK為960×132、126720索引像素。後續共用來源的局部索引不得以16bit容納此圖；尚未進正式資料格式。 |
+| 正常SS入口 | confirmed限既有流程：0D46:000A的12bytes為c828000052535057568b4702。50000000步以後2005次入口，1931次唯一、74次四來源候選，沒有未匹配入口。來源檔名／序號由完整編碼與原檔指紋連結，不由外觀或檔名猜用途。 |
+| 別名 | confirmed限共同編碼：74次匹配PHYS0.SS第108至111幀，編碼38ce3a97148a76a97363dbff2cc3eb86fe87219ed987974e334e5c780bca9290。完整候選集合保留，未以首筆或AX獨自授予原始來源身分。其他32組別名沒有新執行期信用。 |
+| 31種小圖像 | confirmed限逐寫及撤銷：ICONS.SS指紋a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716，420次完整繪製、131302筆寫入與420筆來源建立。主畫布0x2CAE0、描述子[200,320,0,0x2CAE]；入口、堆疊、紀錄／來源遠指標、幾何、返回與透明底圖逐項核對。每筆局部位置與色號均由解碼索引獨立重建。 |
+| 小圖像寫入端 | confirmed限本批：0D46:0181為268807035ef042fecc7402ebe7ebd03b，01B4為268807035ef042fecc7403ebe790ebcc，01D2為268807035ef042ebb5905a5b035efe79。未知後畫含同值均撤銷，999筆同值來源損失已核對；游標與RAM轉送未接受。 |
+| 原版保持 | confirmed限53筆固定正常輸入及49點：有／無觀測完整CPU、RAM、VGA、DAC與兩個存檔一致，終點134600000步。不是新增GUI或WAV驗收，不外推全遊戲。 |
+
+研究列號只用於連接來源索引，不是原版AX或正式素材鍵。31種為ICONS.SS第005、022至038、042、053、056、059、062、067至069、094、100及122至124幀。
+完整幾何與指紋保存在來源索引；第100幀已有正式人物素材，本批逐寫不重複增加正式完成數。
+一般游標的CURSOR.SS第000幀只有兩次17×17入口命中，尚未授予熱點、16×16執行期圖樣或HD游標信用。
+
+| 本機收據 | SHA-256 |
+|---|---|
+| decoded-public-r3/catalog.json | e0b14a6ba8a8bec5cae3fd165ea6d88de384dc4f61c1ec67ca8504c29189aa5d |
+| inventory-check-r1.json | d267b6c80cd3cb70054f86e0fa523819e066a9e627841e9a56bdd24d74470f01 |
+| entry-public-r1/check.json | d54a8ce59dce9c361e731e2cd4420ce7aabac137a4c264ff9cf054a793673beb |
+| 入口Go／執行檔 | c5141ad64a0965e1f97f974997f24afcbe29b64804de1bdd80c28016f854b830／bd98f11cd6e85808f110f094b8b1923c42b0656e5020c836d03efd190c153e3d |
+| small-public-r1/build.json | 324278b998dcfad66e4551d622a75a4287adfd6d4d5cc8d06155f6afd104f47d |
+| 小圖像Go／執行檔 | f678776b56ef102f2445a32e74408b3bd0779abe0744529864b2bb62f9c74a6f／7eba7f6ea3d2a3f5f07eeadb21b4fac00f887e75f9b1a5ba4c8da60dbc1cf531 |
+| small-public-r1/check.json | 54fa1127db66f9329071a106a4392b542371acc245e772c2dda9cf542d6e2ca3 |
+| small-negatives-r1/check.json | c7f55575368d694bb2290a169cc2095c779854325cd80e2a47b81bacf855ca7b |
+| source-index-public-r3.json | fae2a358b67c1ecbf7ee5dd7bd5000cc8d6f9cfd53103ca8d98c8a6b7b9a8145 |
+
+本機根為workplace/reports/goal186-display-hd/hd-full-assets-r49，命令索引為commands-r49.json。
+由公開盤點器重生R3，與R1的1532筆及R2的1533筆解碼逐位元組一致，各167張原版預覽及三張接觸表不變。
+R1錯假設PIK至少三區段而拒絕COLONY.PIK，原失敗保留；R2依實際兩區段讀索引，色盤保持未知。
+40個真實收據反例包含31來源逐一混淆、幾何、返回、透明底圖、原始舊值／色號、未驗寫入端、
+同值覆寫保留舊身分及事件截斷，全部拒絕。正向49點再驗通過。
+原版像素、色盤、預覽、RAM、存檔與逐寫收據僅留本機；公開索引只有指紋、幾何與限定證據連結。

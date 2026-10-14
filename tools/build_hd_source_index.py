@@ -1,0 +1,71 @@
+"""R49 DRAFT：從本機解碼收據建立不含原版像素的來源索引。"""
+import argparse,hashlib,json,os
+from pathlib import Path
+parser=argparse.ArgumentParser(description=__doc__)
+for name in ['catalog','manifest','assets','output']:parser.add_argument('--'+name,type=Path,required=True)
+parser.add_argument('--entry-report',type=Path,help='可選：R49正常路徑全SS唯讀入口收據')
+parser.add_argument('--small-report',type=Path,help='可選：R49的31種小圖像逐寫審查收據')
+parser.add_argument('--small-build',type=Path,help='與small-report一起使用的小圖像來源綁定')
+a=parser.parse_args();out=a.output.resolve()
+assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.parent.stat().st_uid==os.getuid() and not out.exists()
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+d=json.loads(a.catalog.read_bytes());manifest=json.loads(a.manifest.read_bytes())
+assert not d['summary']['failed_files'] and d['summary']['ss_files']==206 and d['summary']['pik_files']==35
+assert d['summary']['ss_frame_records']==1517 and len(d['frames'])==1552
+allowed=['research_id','file','file_sha256','ordinal','size','header_part1_offset','data_part3_offset','encoded_length','other_header_fields','decode_status','encoded_sha256','indexed_sha256','opaque_pixels','transparency_index','header_part0_hex','pixel_part1_offset','pixel_bytes','part1_trailing_bytes','embedded_palette']
+frames=[{k:f[k] for k in allowed if k in f} for f in d['frames']]
+for f in frames:
+ f['runtime_source_evidence']='not_assessed_by_this_inventory'
+ f['animation_evidence']='not_assessed_by_this_inventory'
+ f['formal_assets']=[]
+bindings=[]
+for name,asset in manifest['assets'].items():
+ assert sha(a.assets/name)==asset['sha256'] and (a.assets/name).stat().st_size==asset['bytes']
+ if 'original_binding' in asset:
+  original=asset['original_binding'];source_files=[n for n in original if n.endswith('.SS')]
+  assert len(source_files)==1;file=source_files[0];file_sha=original[file];encoded=original['encoded_frame_sha256'];ordinal=None
+ elif 'original_source' in asset:
+  original=asset['original_source'];file=original['file'];file_sha=original['sha256'];encoded=original['encoded_sha256'];ordinal=original['ordinal']
+ else:raise ValueError('未支援的正式來源紀錄：'+name)
+ matches=[f for f in frames if f['file']==file and f['file_sha256']==file_sha and f.get('encoded_sha256')==encoded and (ordinal is None or f['ordinal']==ordinal)]
+ assert len(matches)==1,(name,matches)
+ f=matches[0];f['formal_assets'].append(name)
+ bindings.append({'asset':name,'asset_sha256':asset['sha256'],'source_research_id':f['research_id'],'source_file':file,'source_ordinal':f['ordinal'],'source_encoded_sha256':f['encoded_sha256'],'spec':asset.get('spec',manifest['spec']),'claim':'matches verified formal manifest; conformance scope remains in cited spec'})
+ready=[f for f in frames if f['file']=='PHYS0.SS' and f['ordinal']==79 and f.get('encoded_sha256')=='a8a861754068c86a9c150442f7b07f1fbd297d82b8e5dcb2e3ee108bde4dc84c']
+assert len(ready)==1
+ready[0]['source_contract_reference']={'state':'READY','spec':'docs/spec/062-hd-sea-draw-lifecycle.md','section':'2026-10-14 R48第079幀含RAM還原的READY來源契約','formal_connected':False}
+assert len(bindings)==14 and sum(bool(f['formal_assets']) for f in frames)==14
+entry_evidence=None
+if a.entry_report:
+ entry=json.loads(a.entry_report.read_bytes())
+ assert entry['result']=='PASS_READONLY_FULL_SS_ENTRY_CATALOG' and entry['original_state_and_saves_equal'] is True
+ assert entry['checkpoints']==49 and entry['dos_inputs']==53 and entry['calls']==2005
+ assert entry['matched_calls']==2005 and entry['unique_match_calls']==1931 and entry['ambiguous_match_calls']==74 and entry['unmapped_calls']==0
+ assert entry['input_hashes']=={f['file']:f['sha256'] for f in d['files'] if f['format']=='SS'}
+ by_id={f['research_id']:f for f in frames}
+ for group in entry['groups'].values():
+  ids=group['candidate_research_ids'];assert ids and len(ids)==len(set(ids))
+  for source_id in ids:
+   f=by_id[source_id];assert f['encoded_sha256']==group['source_hash']
+   assert any(s['file']==f['file'] and s['ordinal']==f['ordinal'] and s['size']==f['size'] for s in group['sources'])
+   f['runtime_source_evidence']='entry_match_only' if len(ids)==1 else 'entry_alias_candidates_only'
+   f['normal_entry_sample']={'calls':group['calls'],'candidate_research_ids':ids,'source_far':group['source_far'],'record_far':group['record_far'],'ax':group['ax'],'rectangles':group['rectangles'],'claim':'0D46:000A entry only; writes, visibility and animation not granted'}
+ entry_evidence={'report_sha256':sha(a.entry_report),'source_sha256':entry['source_sha256'],'binary_sha256':entry['binary_sha256'],'checkpoints':49,'dos_inputs':53,'calls':2005,'unique_match_calls':1931,'ambiguous_match_calls':74,'unmapped_calls':0,'observer_state_and_saves_equal':True,'claim':entry['claim']}
+public={'schema':1,'kind':'DRAFT-native-source-index-not-complete-player-coverage','source_receipt_sha256':sha(a.catalog),'decoder':d['tools'],'formal_manifest_sha256':sha(a.manifest),'summary':d['summary'],'coverage_limits':{'player_visible_graphics_denominator':'unknown','formal_asset_bindings':14,'additional_ready_source_contracts':1,'complete_hd':False,'contains_original_pixels':False,'other_formats_and_program_drawn_graphics':'not_assessed'},'files':d['files'],'frames':frames,'declared_encoding_alias_groups':d['declared_encoding_alias_groups'],'formal_bindings':bindings,'limitations':['檔案解碼、索引指紋與幾何事實，不授予未驗來源的正式HD或動畫信用。','來源列包含空尺寸、零不透明像素與編碼別名；不可因尚未命中就排除。','正式素材只按現行清冊連結，完整驗收範圍以所連規格為準。','其他格式及程式直接繪圖尚未分類，玩家可見圖像的完整分母仍未知。','原版像素、色盤與預覽只留本機，本索引不含原始素材位元組。']}
+if entry_evidence:public['normal_entry_evidence']=entry_evidence
+assert bool(a.small_report)==bool(a.small_build)
+if a.small_report:
+ assert entry_evidence is not None
+ small=json.loads(a.small_report.read_bytes());build=json.loads(a.small_build.read_bytes())
+ assert small['result']=='PASS_SMALL_IMAGE_SOURCE_WRITES_49_NATIVE_POINTS' and small['production_connected'] is False
+ assert small['sources']==31 and small['source_calls']==420 and small['raw_events']==131722 and len(small['checkpoints'])==49
+ assert build['source_receipt_sha256']==sha(a.catalog) and build['entry_report_sha256']==sha(a.entry_report)
+ assert build['source_count']==31 and len(build['sources'])==31 and build['production_connected'] is False
+ for source in build['sources']:
+  f=by_id[source['research_id']]
+  assert f['file']==source['file']=='ICONS.SS' and f['file_sha256']==source['file_sha256']==build['original_sha256']
+  assert f['indexed_sha256']==source['indexed_sha256'] and f['encoded_sha256']==source['encoded_sha256']
+  f['small_image_draw_sample']={'calls':f['normal_entry_sample']['calls'],'state':'verified writes on 49 normal points; not HD conformance','report_sha256':sha(a.small_report),'unknown_writes':'revoke including same value','cursor_restoration_verified':False,'ram_restoration_verified':False}
+ public['small_image_write_evidence']={'report_sha256':sha(a.small_report),'build_sha256':sha(a.small_build),'source_sha256':build['source_sha256'],'binary_sha256':build['binary_sha256'],'sources':31,'calls':420,'raw_events':131722,'negative_scope':'separate true-receipt tests','production_connected':False}
+out.write_text(json.dumps(public,ensure_ascii=False,indent=2)+'\n')
+print('PASS_METADATA_ONLY_FULL_SOURCE_INDEX',len(frames),len(bindings),sha(out),flush=True)

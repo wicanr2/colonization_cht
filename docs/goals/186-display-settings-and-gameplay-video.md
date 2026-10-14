@@ -233,7 +233,7 @@ workplace子目錄。工具核對三份SHA-256、真實字形、樣張寬度與�
 ### 全量覆蓋與完成判準
 
 - 盤點所有圖像容器及執行期繪圖來源，不以首批四個SS或十四張生成圖作全量分母。
-  現有SS盤點為206檔／1517幀紀錄；合法原版另有35個PIK檔，尚須逐一驗證格式與用途。
+  R49已解碼206個SS／1517幀紀錄及35個PIK檔；執行期用途與完整可見分母另驗。
   ICONS.SS有131幀，包含2×2、4×4、6×5及8×8等小尺寸；CURSOR.SS有兩個17×17幀。
   這些是檔案事實，尚未證實的圖像用途、動畫關係與別名維持未知。
 - 逐項追蹤來源指紋、原版定位、尺寸、透明度、動畫幀、生成素材、正式接線、
@@ -248,7 +248,35 @@ workplace子目錄。工具核對三份SHA-256、真實字形、樣張寬度與�
 資產盤點沿本頁下方的inventory_hd_assets.py與合法原版來源。
 現有206檔完整指紋及尺寸清冊位於本機
 workplace/reports/goal186-display-hd/research-check-20261011/inventory/inventory.json；
-PIK與其他來源由同一目標接續，不另建第二份未完成工作清單。
+PIK已完成解碼盤點，其他格式與執行期來源由同一目標接續，不另建第二份未完成工作清單。
+
+全量來源入口為[SS／PIK盤點器](../../tools/inventory_hd_full_assets.py)與
+[來源索引組裝器](../../tools/build_hd_source_index.py)。
+盤點器以--game、--decoder、--baseline指定唯讀合法原版、固定mpskit及上述SS基準，
+--output指定新的/out子目錄；所有像素與預覽只輸出本機。
+索引組裝器以--catalog、--manifest、--assets指定該收據與正式素材，
+--output產生不含原版像素的[來源索引](../hd-source-catalog.json)。
+索引保存1552筆來源紀錄、原版指紋、幾何、別名與正式素材連結，不含原版像素，
+不取代工作清單，不把檔案解碼數當成玩家可見圖像分母。
+COLONY.PIK為320×72、兩個MADSPACK區段且沒有內嵌色盤；它的執行期色盤另驗。
+
+全SS入口由[唯讀探針組裝器](../../tools/build_hd_full_entry_probe.py)產生，
+以--catalog指定上列本機收據、--base-probe指定tools/probe_hd_building_batch.go，
+--output指定新的/out子目錄。以既有53筆正常輸入與49點原版基準重播，
+只查0D46:000A於50000000步以後的完整編碼，不安裝圖像覆蓋或寫入觀測器。
+R49共2005個入口皆有候選，1931次唯一、74次為PHYS0第108至111幀的共同編碼。
+候選集合完整保存，不以第一筆或AX單獨猜選別名；這條流程不代表全遊戲可見清冊。
+
+31種已命中小圖像接續[逐寫探針組裝器](../../tools/build_hd_small_image_lifecycle_probe.py)、
+[獨立檢查器](../../tools/check_hd_small_image_lifecycle.py)及
+[真實收據反例](../../tools/test_hd_small_image_lifecycle.py)。
+組裝器以--catalog、--entry-report指定上述收據，--reference指定R45正式模組，
+--output指定新研究模組；沿同一53筆正常輸入、49點與合法原版執行觀測及無觀測控制。
+檢查器與反例以--observed、--control、--build、--sources、--entry-report、--points、--output讀取該批資料。
+R49的420次完整繪製、131302筆寫入及420筆來源建立可獨立重建，40個來源／底圖／覆寫反例拒絕。
+未知後畫包含同值都撤銷來源；此批尚未接受游標或RAM還原，沒有新增HD或動畫信用。
+索引組裝器可加--entry-report及成對的--small-report／--small-build，連結上述限定證據。
+精確指紋、失敗勘誤與本機命令入口見RESEARCH-LOG.md的R49節，正式十四種素材保持。
 
 ### 定稿畫風與來源
 
