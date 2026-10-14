@@ -31,10 +31,10 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 	m := golem.New()
 	before := bytes.Clone(m.Mem)
 	h, err := loadHDRuntime(m, game, assets)
-	if err != nil || h == nil || h.shelter == nil || h.shelter.art.Bounds() != image.Rect(0, 0, 92, 108) || h.sea == nil || h.person == nil || h.person.art.Bounds() != image.Rect(0, 0, 24, 64) || h.sea.art.Bounds() != image.Rect(0, 0, 64, 64) || h.art.Bounds() != image.Rect(0, 0, 92, 108) || !bytes.Equal(before, m.Mem) {
+	if err != nil || h == nil || h.nine == nil || len(h.nine.frames) != 9 || h.shelter == nil || h.shelter.art.Bounds() != image.Rect(0, 0, 92, 108) || h.sea == nil || h.person == nil || h.person.art.Bounds() != image.Rect(0, 0, 24, 64) || h.sea.art.Bounds() != image.Rect(0, 0, 64, 64) || h.art.Bounds() != image.Rect(0, 0, 92, 108) || !bytes.Equal(before, m.Mem) {
 		t.Fatal("正式素材載入失敗或改寫原版", err)
 	}
-	for name, mutate := range map[string]func(string, string){
+	mutations := map[string]func(string, string){
 		"missing-manifest": func(a, g string) { os.Remove(filepath.Join(a, "manifest.json")) },
 		"bad-manifest":     func(a, g string) { os.WriteFile(filepath.Join(a, "manifest.json"), []byte("{}"), 0644) },
 		"missing-image":    func(a, g string) { os.Remove(filepath.Join(a, "building-032.png")) },
@@ -81,7 +81,18 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 			os.Remove(p)
 			os.Symlink(filepath.Join(game, "PHYS0.SS"), p)
 		},
-	} {
+	}
+	for _, frame := range hdNineFrames {
+		filename := frame.file
+		mutations["missing-"+filename] = func(a, g string) { os.Remove(filepath.Join(a, filename)) }
+		mutations["bad-"+filename] = func(a, g string) { os.WriteFile(filepath.Join(a, filename), []byte("wrong"), 0644) }
+		mutations["linked-"+filename] = func(a, g string) {
+			p := filepath.Join(a, filename)
+			os.Remove(p)
+			os.Symlink(filepath.Join(assets, filename), p)
+		}
+	}
+	for name, mutate := range mutations {
 		t.Run(name, func(t *testing.T) {
 			a, g := filepath.Join(t.TempDir(), "graphics"), filepath.Join(t.TempDir(), "game")
 			for _, p := range []string{a, g} {
@@ -89,7 +100,7 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 					t.Fatal(err)
 				}
 			}
-			for _, n := range []string{"manifest.json", "building-032.png", "sea-148.png", "person-100.png", "building-024.png"} {
+			for _, n := range []string{"manifest.json", "building-032.png", "sea-148.png", "person-100.png", "building-024.png", "building-016.png", "building-021.png", "building-027.png", "building-035.png", "building-039.png", "building-042.png", "building-043.png", "building-044.png", "building-045.png"} {
 				if err := os.WriteFile(filepath.Join(a, n), readFile(filepath.Join(assets, n)), 0644); err != nil {
 					t.Fatal(err)
 				}

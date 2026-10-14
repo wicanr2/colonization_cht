@@ -34,8 +34,11 @@ def main():
     saved = b'{"language":"ja","graphics":"hd"}\n'
     preference.write_bytes(saved)
     results = []
-    for case in ["missing-directory", "missing-image", "bad-image", "bad-manifest",
-                 "missing-sea", "bad-sea", "linked-sea", "missing-person", "bad-person", "linked-person", "missing-shelter", "bad-shelter", "linked-shelter", "restored"]:
+    cases = ["missing-directory", "missing-image", "bad-image", "bad-manifest",
+                 "missing-sea", "bad-sea", "linked-sea", "missing-person", "bad-person", "linked-person", "missing-shelter", "bad-shelter", "linked-shelter"]
+    cases += [kind+"-building-%03d"%n for n in [16,21,27,35,39,42,43,44,45] for kind in ["missing","bad","linked"]]
+    cases += ["restored"]
+    for case in cases:
         out = root / case
         out.mkdir()
         assets = out / "graphics"
@@ -68,6 +71,12 @@ def main():
         if case == "linked-shelter":
             (assets / "building-024.png").unlink()
             (assets / "building-024.png").symlink_to(args.bundle / "graphics/building-024.png")
+        for n in [16,21,27,35,39,42,43,44,45]:
+            name="building-%03d.png"%n
+            if case=="missing-building-%03d"%n: (assets/name).unlink()
+            if case=="bad-building-%03d"%n: (assets/name).write_bytes(b"damaged")
+            if case=="linked-building-%03d"%n:
+                (assets/name).unlink(); (assets/name).symlink_to(args.bundle/"graphics"/name)
         prefix = out / "gui"
         command = ["bash", str(args.bundle / "colonization-cht.sh"), "--game", str(args.game),
                    "--play=false", "--audio-mute", "--window-steps", "100000000",

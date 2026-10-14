@@ -140,9 +140,13 @@ def main():
  p=argparse.ArgumentParser(description=__doc__)
  for name in ["observed","model","output"]:p.add_argument("--"+name,type=Path,required=True)
  group=p.add_mutually_exclusive_group(required=True);group.add_argument("--native",type=Path);group.add_argument("--gui",type=Path)
+ p.add_argument("--formal",action="store_true",help="核對正式九來源的49點原版路徑")
  a=p.parse_args();out=a.output.resolve()
  need(Path("/.dockerenv").is_file() and os.getuid()!=0 and out.is_relative_to("/out") and out.parent.stat().st_uid==os.getuid() and not out.exists(),"需新的非root本機輸出")
  result=check(a.observed,a.model,a.native,a.gui);result["checker_sha256"]=sha(Path(__file__).read_bytes())
+ if a.formal:
+  need(a.native is not None and read(a.native).get("production_connected") is True,"正式審查需要正式原版路徑收據")
+  result.update(result="PASS_NINE_FORMAL_INDEPENDENT_DISPLAY_COMPARISON",production_connected=True)
  out.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n");print(result["result"],result["mode"],sha(out.read_bytes()),flush=True)
 if __name__=="__main__":
  try:main()

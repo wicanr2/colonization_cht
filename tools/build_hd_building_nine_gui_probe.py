@@ -2,6 +2,7 @@
 import argparse,hashlib,json,os,subprocess
 from pathlib import Path
 p=argparse.ArgumentParser(description=__doc__);p.add_argument("--output",type=Path,required=True)
+p.add_argument("--formal",action="store_true",help="驗證規格064 READY的正式九來源，不加原型旗標")
 a=p.parse_args();repo=Path(__file__).resolve().parents[1];dest=a.output.resolve()
 assert Path("/.dockerenv").is_file() and os.getuid()!=0
 assert dest.is_relative_to(Path("/out")) or dest.is_relative_to(repo/"workplace")
@@ -122,6 +123,31 @@ one('"shelter_asset":sha(args.shelter_asset.read_bytes())','"shelter_asset":sha(
 one("正式首座、海洋、人物及第024幀木棚；限本批正常GUI，其他建築、動畫及完整HD未完成。","九來源DRAFT及既有四種正式HD；限本批正常GUI，來源獨立審查與同輸入重播另驗。")
 # 既有604M步，加110組、27快照及首座正常返回，保留有界餘量。
 assert s.count('"--window-steps", "900000000"')==2;s=s.replace('"--window-steps", "900000000"','"--window-steps", "1200000000"')
+if a.formal:
+    one('    command += ["--hd-nine-prototype-assets",str(args.nine_assets),"--hd-nine-probe-root",str(nine_root)]','    # 正式來源由既有HD目錄載入，沒有九來源專用旗標。')
+    assert s.count('nine.get("prototype") is True')==2
+    s=s.replace('nine.get("prototype") is True','nine.get("formal") is True')
+    start=s.index('        def nine_snapshot(label,ordinal=0,locale=""):')
+    end=s.index('        map_recoveries=[]',start)
+    s=s[:start]+'''        def nine_snapshot(label,ordinal=0,locale=""):
+            before=status()["step"]
+            def ready(state):
+                if state.get("step",0)<before+200000:return False
+                if not ordinal:return True
+                current=live(state);hd=current.get("hd") or {}
+                nine=hd.get("nine") or {};source=nine.get("sources",{}).get(str(ordinal),{})
+                return current.get("locale")==locale and hd.get("reason")=="known-building" and nine.get("formal") is True and source.get("painted",0)>0
+            state=wait(ready,"關閉設定後正式九來源未恢復："+label)
+            proof={"state":state,"frame":state["frame"],"formal_status_sample":True}
+            directory=nine_root/label;directory.mkdir()
+            (directory/"check.json").write_text(json.dumps(proof,ensure_ascii=False)+"\\n")
+            return proof
+'''+s[end:]
+    one('"nine_assets":{p.name:sha(p.read_bytes()) for p in sorted(args.nine_assets.glob("building-*-candidate-v1.png"))}', '"nine_assets":{"building-%03d.png"%n:sha((args.nine_assets/("building-%03d.png"%n)).read_bytes()) for n in [16,21,27,35,39,42,43,44,45]}')
+    one('need(not any(hd.get(k,{}).get("painted",0) for k in ["sea","person","shelter"])', 'need(not any(hd.get(k,{}).get("painted",0) for k in ["sea","person","shelter","nine"])')
+    s=s.replace('PASS_NINE_PROTOTYPE_FIVE_LANGUAGE_GUI','PASS_FORMAL_NINE_FIVE_LANGUAGE_GUI')
+    s=s.replace('result["prototype_entry"]','result["formal_entry"]').replace('"prototype_flags": True','"prototype_flags": False')
+    s=s.replace('九來源DRAFT及既有四種正式HD；限本批正常GUI，來源獨立審查與同輸入重播另驗。','正式十三種HD素材；限本批正常GUI與狀態抽樣，原型72點原版收據沿R42，正式同輸入重播另驗。')
 compile(s,str(dest),"exec");dest.write_text(s)
-dest.with_name(dest.name+".build.json").write_text(json.dumps({"kind":"DRAFT-nine-gui","base_sha256":hashlib.sha256(base.read_bytes()).hexdigest(),"generated_sha256":hashlib.sha256(dest.read_bytes()).hexdigest()},indent=2)+"\n")
+dest.with_name(dest.name+".build.json").write_text(json.dumps({"kind":"formal-nine-gui" if a.formal else "DRAFT-nine-gui","base_sha256":hashlib.sha256(base.read_bytes()).hexdigest(),"generated_sha256":hashlib.sha256(dest.read_bytes()).hexdigest()},indent=2)+"\n")
 print("PASS_NINE_GUI_PROBE_BUILD",hashlib.sha256(dest.read_bytes()).hexdigest(),flush=True)

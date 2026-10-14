@@ -1,6 +1,6 @@
 # 城內十種建築的HD來源擴充
 
-狀態：CONFORMED，僅限本頁R41第024幀正式顯示及抽樣路徑。其餘九種建築依R42限定READY，尚未正式接線。
+狀態：CONFORMED，僅限R41第024幀及R43其餘九來源的正式顯示與抽樣路徑。R44中央第009幀仍DRAFT。
 
 ## 範圍與入口
 
@@ -35,7 +35,7 @@ prepare-source.py以固定mpskit解碼器重生來源；commands-r39.json保存�
 
 ## 下一閘門
 
-第024幀木棚已正式接線並限定CONFORMED；其餘九種仍須各自驗素材與顯示路徑。
+第024幀及其餘九來源已正式接線並限定CONFORMED；中央第009幀及其他來源仍須各自驗證。
 新候選沿用已確認的精細像素風與人物v2的處理方式。
 正式素材仍須原版幾何、來源撤銷、正常游標與互動驗證，不憑最終畫面顏色復活身分。
 
@@ -449,3 +449,61 @@ WAV為fa3f8927067a16a91383b98c58e669dca7caaed85199a2b10af89f43438a0718，
 COLONY00為1657937945fbe06352bf306d64d3f1df686ed9a059d0ee39aba6abcfdae4204a，
 COLONY09沿52ae8b7bd4bea1869afb825af165a8edc50882fc176d49985d4fb3c362d5469b。
 音訊相同只授予技術輸出信用，不代替人耳或硬體逐週期驗收。
+
+### R43正式實作入口
+
+正式來源為[九來源顯示層](../../tools/hd_building_nine_runtime.go)及[原版路徑測試](../../tools/hd_building_nine_runtime_test.go)。
+由build_window_prototype.py經build_language_observation_probe.py的正式分支載入；九來源原型重生須使用R42 READY提交ef6ccbd的來源，避免讀取後續正式組裝。
+本機正式驗證根為workplace/reports/goal186-display-hd/hd-building-nine-formal-r43，驗收結果見下節限定CONFORMED。
+
+### R44城內剩餘來源研究
+
+本節DRAFT只授權唯讀入口清冊，接續定位中央大建築等仍為原圖的可見缺口。
+本機根為workplace/reports/goal186-display-hd/hd-city-source-catalog-r44。
+先沿固定mpskit與原版清冊解碼BUILDING.SS及BDARK.SS，逐項綁定檔案SHA、part3位移、
+完整編碼與索引指紋，再以既有53筆正常輸入核對0D46:000A實際來源遠指標與紀錄。
+相同編碼的別名全部保留，不由檔名、AX或外觀強行選定來源；入口匹配不授予繪製、還原或正式HD信用。
+原版49點完整狀態、終點與存檔仍須與無觀測對照相符。研究不改正式來源清單與接受規則。
+重生入口為R43本機prepare-next-catalog.py及R44的source-catalog.json／entry-catalog.go，
+只留本機；有足夠來源證據後才整理公開窄探針及新READY契約。
+
+## 2026-10-14 R43九來源正式接線與限定CONFORMED
+
+本節confirmed限R42 READY的九個來源、固定原版及本批正常玩家路徑。
+九張原始生成PNG及alpha原樣加入graphics，既有四張保持；正式清冊指紋沿R42。
+正式41個Go檔／24來源綁定及14檔封裝白名單已接線；九來源五個方法與R42正規化後相同。
+正式入口沒有九來源原型、診斷請求或專用素材旗標；一般HD目錄及原版玩法、輸入與存檔保持。
+
+| 項目 | 限定結果 |
+| --- | --- |
+| 完整回歸 | 731Go零skip、go vet、49點原版狀態／存檔、180來源反例及既有31海洋／17人物／20木棚反例通過。缺原版另驗四個明確skip。 |
+| 獨立來源 | 正式120次呼叫、49點逐點來源與480筆實際游標還原全部對應R42獨立原版模型。 |
+| 正常GUI | 432組五語切換、1728筆設定事件及16810個不透明游標像素通過；九來源各五語共45次正常關閉後恢復。另27次滑鼠往返，共72筆正式狀態抽樣。 |
+| 啟動與封裝 | 41種新行程缺件／錯件／連結及恢復通過，204筆設定事件不改原版；日文HD偏好位元組保持。41項封裝反例全拒絕。 |
+| 四側重播 | 本輪586筆實際輸入至924600000步，正式HD、同版本未啟用HD、R41前版正式及原文控制的完整CPU／RAM／VGA／DAC、WAV與兩份存檔全同。 |
+
+日文colony在151600000步有一組來源守門回原圖，保留回退信用。
+木棚拖曳放開後只有139點已驗來源；正常離城重進後恢復263點，不將未驗後畫的同色還原當身分。
+未知游標仍整組回原圖並保留語言。正式72筆是現況診斷，沒有另存每點完整RAM或原始逐寫軌跡；
+獨立72點原版來源證據保留於R42，正式以49點獨立模型及同一實際輸入四側完整重播授予本批信用。
+已目視正式繁中城內畫面，九種來源比例、位置與透明空隙符合已驗幾何。
+工具沿Go1.26.7、Python3.11.2／Pillow9.4.0及dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013；
+位址沿實模式CS:IP及線性RAM，不新增原版來源或推測游標白名單。
+
+本機根為workplace/reports/goal186-display-hd/hd-building-nine-formal-r43。
+GUI與四側重播由本頁組裝器的--formal分支重生；commands-r43.json索引實際Docker命令，
+final-audit-r43.json保存文件、來源、素材、權利及清理稽核。原型產生結果另驗逐位元組不變。
+
+| 本機收據 | SHA-256 |
+| --- | --- |
+| build-check.json | 711b5534463e52aad83d712a7c2fd7f58f12fd678611e9ef09c3744b25a51c4d |
+| native-display-check.json | fc5cfbfcb9680d5d297ff25e7dbae75ff1ef207450a29792a081342ea340c61c |
+| gui-r1/check.json | e2f620344c48e57989cea11da78f4ff13f5c13d399e17cdbd4d4eec89218ff3e |
+| startup-r1/check.json | 77b37c2041ea65363c337d85608473e2d71cdddd513a2550fbb9db2c001bca91 |
+| replays-r1/check.json | d4d82d9150d7c230073d4b2cb77b8efefbb8ec05225ca5432d605167523f2b90 |
+
+正式二進位為8af42944420bfc1df4c68681d3b4a5a7a68abe023da38e7817bcde88cc61cb42。實際輸入SHA-256為1a7491e8b16f394cc0ca6290965527c70dabd78f8a08a47cee30e35e97c8feb3。
+四側終點RAM為d1223f86b5f62312f5b2be058e0a6f8dd55987bb72e54cfce40974e2466aa239，
+WAV為e6c00a92c50c17fbcf815254711b5dba9d19b7813ba31fb111ebbcafc8b4bbb6；COLONY00為1657937945fbe06352bf306d64d3f1df686ed9a059d0ee39aba6abcfdae4204a，
+COLONY09沿52ae8b7bd4bea1869afb825af165a8edc50882fc176d49985d4fb3c362d5469b。
+音訊相同只授予技術輸出信用，不代替人耳或硬體逐週期驗收。其他建築、地形、人物、動畫、跨平台效能與完整HD仍待完成；不建立tag、Release或新版交付包。

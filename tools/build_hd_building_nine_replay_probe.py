@@ -2,6 +2,7 @@
 import argparse,hashlib,os,subprocess
 from pathlib import Path
 p=argparse.ArgumentParser(description=__doc__);p.add_argument("--output",type=Path,required=True)
+p.add_argument("--formal",action="store_true",help="驗證正式九來源，不加原型旗標")
 a=p.parse_args();repo=Path(__file__).resolve().parents[1];dest=a.output.resolve()
 assert Path("/.dockerenv").is_file() and os.getuid()!=0
 assert dest.is_relative_to(Path("/out")) or dest.is_relative_to(repo/"workplace")
@@ -27,5 +28,12 @@ one("PASS_FORMAL_SHELTER_HD_GUI_FOUR_REPLAYS","PASS_NINE_PROTOTYPE_GUI_FOUR_REPL
 one('result["formal_entry"] =','result["prototype_entry"] =')
 one('"prototype_flags": False','"prototype_flags": True')
 one("正式首座、海洋、人物及第024幀木棚；限本次正常GUI輸入，其他建築、動畫及完整HD未完成。","九來源DRAFT及既有四種正式HD；限本批實際GUI輸入，不授予正式接線或完整HD信用。")
+if a.formal:
+    one('        if name == "live":\n            command.extend(["--hd-nine-prototype-assets",str(args.nine_assets)])\n','')
+    one('{p.name:sha(p.read_bytes()) for p in sorted(args.nine_assets.glob("building-*-candidate-v1.png"))}', '{"building-%03d.png"%n:sha((args.nine_assets/("building-%03d.png"%n)).read_bytes()) for n in [16,21,27,35,39,42,43,44,45]}')
+    s=s.replace('PASS_NINE_PROTOTYPE_FIVE_LANGUAGE_GUI','PASS_FORMAL_NINE_FIVE_LANGUAGE_GUI')
+    s=s.replace('PASS_NINE_PROTOTYPE_GUI_FOUR_REPLAYS','PASS_FORMAL_NINE_GUI_FOUR_REPLAYS')
+    s=s.replace('prototype_entry','formal_entry').replace('"prototype_flags") is True','"prototype_flags") is False').replace('"prototype_flags": True','"prototype_flags": False')
+    s=s.replace('九來源DRAFT及既有四種正式HD；限本批實際GUI輸入，不授予正式接線或完整HD信用。','正式十三種HD素材；限本批實際GUI輸入，其他來源、動畫與完整HD未完成。')
 compile(s,str(dest),"exec");dest.write_text(s)
 print("PASS_NINE_REPLAY_PROBE_BUILD",hashlib.sha256(dest.read_bytes()).hexdigest(),flush=True)

@@ -157,6 +157,528 @@
         "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
         "encoded_frame_sha256": "91a6a162404b43e2c17d13bd1ffe5818286e27763ffab2a776f24bc1fbf70c03"
       }
+    },
+    "building-016.png": {
+      "spec": "docs/spec/064-hd-colony-building-batch.md",
+      "sha256": "4378783b1ea54f32af12047fb06f260b496d68459f1eaacb5d42d5231c11ecd1",
+      "bytes": 776093,
+      "size": [
+        2170,
+        725
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        73,
+        18
+      ],
+      "target_size": [
+        292,
+        72
+      ],
+      "native_opaque_pixels": 504,
+      "observed_native_rects": [
+        [
+          123,
+          106,
+          196,
+          124
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        8,
+        119,
+        2162,
+        609
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        73,
+        18
+      ],
+      "sample_bounds_measurement": "alpha >= 128 for geometry only; sampled alpha unchanged",
+      "alpha_mass_outside_sample_rect": 9648,
+      "alpha_mass_total": 102616524,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Use case: style-transfer.\nAsset type: one transparent fine pixel-art sprite for a display-only 4x HD overlay of Colonization (1994). Native full canvas 73 by 18; logical destination 292 by 72 pixels. Retain that exact full-canvas aspect ratio.\nInput images: Image 1 is the original BUILDING.SS frame 016 in the actual game palette, EXACT GEOMETRY AND COLOR REFERENCE. Image 2 is an adopted HD building, MATERIAL/PIXEL STYLE reference only. Image 3 is the USER APPROVED fine pixel-art concept, STYLE reference only.\nPrimary request: redraw only Image 1 with restrained crisp fine pixel clusters, readable wood grain, natural non-emissive foliage and subtle material highlights in the approved style. A wide low wooden rail fence running horizontally across the middle/lower canvas, with the original conifer cluster at the far left and broadleaf tree at the far right. Preserve the same fence posts, rails, gaps, end braces and the two tree groups at their original locations. Keep all empty space above and below. No gate, ground strip or newly added fence sections.\nGeometry: preserve the full canvas, every object's original location, extents, projected angle, silhouette, count, and transparent gaps. Do not recenter, crop, enlarge, rearrange or add objects. Keep detail fine enough for the logical destination. Use a few small pixel clusters for leaves/needles and wood texture rather than smooth painting.\nPalette: keep Image 1's natural muted earthy browns and greens. If water is present, retain its blue range and small ripple detail inside its existing shape only. No neon, glow, bloom or high-contrast sparkles.\nTransparency: actual alpha background throughout all empty space outside and between the objects. The magenta RGB of zero-alpha reference pixels is empty, never visible magenta. Preserve hard transparent edges. No blur, halos, antialiasing or diffuse semitransparent cloud.\nConstraints: one sprite, not a complete scene or sheet. No new ground, large cast shadows, buildings, people, furniture, props, words, borders, watermark or reference-sheet background. Do not borrow objects from style references.",
+      "reference_sha256": {
+        "native": "fa46c78aa79ed83af1a9909400358dad51f8bedcd749e9f6b981355c93bdafd6",
+        "accepted_building032": "c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "37e3c67aad3611c0d6098cd3804fa17a6a33d8b0bf66e6df3e038089388a4568"
+      }
+    },
+    "building-021.png": {
+      "spec": "docs/spec/064-hd-colony-building-batch.md",
+      "sha256": "f81583f35c5102290424fd6575b67f08e47ab2488af61ed67eea0244fafe46f7",
+      "bytes": 1741015,
+      "size": [
+        1158,
+        1358
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        23,
+        27
+      ],
+      "target_size": [
+        92,
+        108
+      ],
+      "native_opaque_pixels": 446,
+      "observed_native_rects": [
+        [
+          173,
+          18,
+          196,
+          45
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        20,
+        29,
+        1143,
+        1263
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        23,
+        27
+      ],
+      "sample_bounds_measurement": "alpha >= 128 for geometry only; sampled alpha unchanged",
+      "alpha_mass_outside_sample_rect": 40199,
+      "alpha_mass_total": 266164356,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Use case: style-transfer.\nAsset type: one transparent fine pixel-art sprite for a display-only 4x HD overlay of Colonization (1994). Logical destination 92 by 108 pixels; full canvas aspect ratio 23:27.\nInput images: Image 1 is the original BUILDING.SS frame 021 rendered in its actual in-game palette, EXACT GEOMETRY AND COLOR REFERENCE. Image 2 is the already adopted HD building, PIXEL MATERIAL AND EDGE STYLE reference only. Image 3 is the USER APPROVED fine pixel-art concept, STYLE reference only.\nPrimary request: redraw only Image 1 using the crisp, restrained pixel clusters and natural wood/stone/foliage textures of the approved style. A small colonial cottage with a warm ochre roof, two visible wall faces, dark door and window openings, the small pale patch on its left wall, and green foliage behind and around it. Preserve each original opening and all roof/wall proportions. Do not borrow the tall chimneys or towers of the style reference.\nComposition: retain Image 1's complete 23 by 27 canvas, same object placement, facing, projected angle, silhouette, roof slopes, bounding extents and every transparent gap. Do not recenter, enlarge or crop. Add finer readable material details only inside its existing shapes. It must remain legible at 92 by 108 pixels.\nPalette: follow Image 1's actual warm earthy browns, buffs and greens. No glow or vivid neon colors.\nTransparency: actual alpha background outside the original object and inside its empty openings/gaps. The magenta RGB of transparent reference pixels is empty background, never a visible color. Keep hard transparent edges, without halo, blur, bloom or antialiasing.\nConstraints: one whole sprite, not a scene or sheet. No extra floors, towers, structures, ground, large shadow, people, tools, lettering, labels, signs, frame or watermark. Do not copy scenery from the style references. Preserve the original object count and topology.",
+      "reference_sha256": {
+        "native": "a0cafca7ccdea4073cbce5b5a672f915095d7d724e9351889ad637711d0bf9cd",
+        "accepted_building032": "c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "d50481bdb7cfbb742035730387bb72601750c1cce584a47b9099034b410e38c8"
+      }
+    },
+    "building-027.png": {
+      "spec": "docs/spec/064-hd-colony-building-batch.md",
+      "sha256": "59d78ffbe53983600336fa7b0919032fcb95f79f744f31c03242e6c2f7f4f4b1",
+      "bytes": 1377158,
+      "size": [
+        1158,
+        1359
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        23,
+        27
+      ],
+      "target_size": [
+        92,
+        108
+      ],
+      "native_opaque_pixels": 465,
+      "observed_native_rects": [
+        [
+          145,
+          15,
+          168,
+          42
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        40,
+        16,
+        1120,
+        1336
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        23,
+        27
+      ],
+      "sample_bounds_measurement": "alpha >= 128 for geometry only; sampled alpha unchanged",
+      "alpha_mass_outside_sample_rect": 14811,
+      "alpha_mass_total": 249689162,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Use case: style-transfer.\nAsset type: one transparent fine pixel-art sprite for a display-only 4x HD overlay of Colonization (1994). Logical destination 92 by 108 pixels; full canvas aspect ratio 23:27.\nInput images: Image 1 is the original BUILDING.SS frame 027 rendered in its actual in-game palette, EXACT GEOMETRY AND COLOR REFERENCE. Image 2 is the already adopted HD building, PIXEL MATERIAL AND EDGE STYLE reference only. Image 3 is the USER APPROVED fine pixel-art concept, STYLE reference only.\nPrimary request: redraw only Image 1 using the crisp, restrained pixel clusters and natural wood/stone/foliage textures of the approved style. A small pale buff cottage with the original tall sloping roof, blue small upper-left window, central dark lower doorway, green plant at the lower right and short broken path extending toward the lower left. Preserve this exact asymmetrical silhouette and arrangement.\nComposition: retain Image 1's complete 23 by 27 canvas, same object placement, facing, projected angle, silhouette, roof slopes, bounding extents and every transparent gap. Do not recenter, enlarge or crop. Add finer readable material details only inside its existing shapes. It must remain legible at 92 by 108 pixels.\nPalette: follow Image 1's actual warm earthy browns, buffs and greens. No glow or vivid neon colors.\nTransparency: actual alpha background outside the original object and inside its empty openings/gaps. The magenta RGB of transparent reference pixels is empty background, never a visible color. Keep hard transparent edges, without halo, blur, bloom or antialiasing.\nConstraints: one whole sprite, not a scene or sheet. No extra floors, towers, structures, ground, large shadow, people, tools, lettering, labels, signs, frame or watermark. Do not copy scenery from the style references. Preserve the original object count and topology.",
+      "reference_sha256": {
+        "native": "6e81d793ab70549e21a5d9ed61bbd786ee0d40cce6b395d57d21900ed7cafca8",
+        "accepted_building032": "c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "51dd0b1f21b29b0e7ee6f7e07d93e5418ed3368a11eaedffc81aa69b954e7d31"
+      }
+    },
+    "building-035.png": {
+      "spec": "docs/spec/064-hd-colony-building-batch.md",
+      "sha256": "05832b749f1cca7e97af3a8cdd3417c12284df2d6db43e4e6656de65c7a44e58",
+      "bytes": 946556,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        44,
+        22
+      ],
+      "target_size": [
+        176,
+        88
+      ],
+      "native_opaque_pixels": 507,
+      "observed_native_rects": [
+        [
+          128,
+          53,
+          172,
+          75
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        83,
+        111,
+        1733,
+        804
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        44,
+        21
+      ],
+      "sample_bounds_measurement": "alpha >= 128 for geometry only; sampled alpha unchanged",
+      "alpha_mass_outside_sample_rect": 37915,
+      "alpha_mass_total": 171890511,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Use case: style-transfer.\nAsset type: one transparent fine pixel-art sprite for a display-only 4x HD overlay of Colonization (1994). Native full canvas 44 by 22; logical destination 176 by 88 pixels. Retain that exact full-canvas aspect ratio.\nInput images: Image 1 is the original BUILDING.SS frame 035 in the actual game palette, EXACT GEOMETRY AND COLOR REFERENCE. Image 2 is an adopted HD building, MATERIAL/PIXEL STYLE reference only. Image 3 is the USER APPROVED fine pixel-art concept, STYLE reference only.\nPrimary request: redraw only Image 1 with restrained crisp fine pixel clusters, readable wood grain, natural non-emissive foliage and subtle material highlights in the approved style. An open timber shelter at the left with a pitched brown roof, two posts, dark open interior and pale low lower front panel; on the right are the original small conifer trees and low timber/log shapes. Preserve the exact existing gap, side-by-side placement and number of tree shapes. Do not fill the open bay with a new door or wall.\nGeometry: preserve the full canvas, every object's original location, extents, projected angle, silhouette, count, and transparent gaps. Do not recenter, crop, enlarge, rearrange or add objects. Keep detail fine enough for the logical destination. Use a few small pixel clusters for leaves/needles and wood texture rather than smooth painting.\nPalette: keep Image 1's natural muted earthy browns and greens. If water is present, retain its blue range and small ripple detail inside its existing shape only. No neon, glow, bloom or high-contrast sparkles.\nTransparency: actual alpha background throughout all empty space outside and between the objects. The magenta RGB of zero-alpha reference pixels is empty, never visible magenta. Preserve hard transparent edges. No blur, halos, antialiasing or diffuse semitransparent cloud.\nConstraints: one sprite, not a complete scene or sheet. No new ground, large cast shadows, buildings, people, furniture, props, words, borders, watermark or reference-sheet background. Do not borrow objects from style references.",
+      "reference_sha256": {
+        "native": "a050fb3c489f115bbb50519d9d9fc82349f663cd149c29759bf6af1bd67fa4fa",
+        "accepted_building032": "c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "8d75b678630f769528a01f79c897dcc33f982353c93674997fc02fc9df32c198"
+      }
+    },
+    "building-039.png": {
+      "spec": "docs/spec/064-hd-colony-building-batch.md",
+      "sha256": "2c2f7f9c3c325c64b919b02ca37fd8876ad74850fa7f7e737ef96d15f6a1b8c0",
+      "bytes": 1328035,
+      "size": [
+        1158,
+        1359
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        23,
+        27
+      ],
+      "target_size": [
+        92,
+        108
+      ],
+      "native_opaque_pixels": 459,
+      "observed_native_rects": [
+        [
+          67,
+          54,
+          90,
+          81
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        37,
+        17,
+        1138,
+        1300
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        23,
+        25
+      ],
+      "sample_bounds_measurement": "alpha >= 128 for geometry only; sampled alpha unchanged",
+      "alpha_mass_outside_sample_rect": 24516,
+      "alpha_mass_total": 282782872,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Use case: style-transfer.\nAsset type: one transparent fine pixel-art sprite for a display-only 4x HD overlay of Colonization (1994). Logical destination 92 by 108 pixels; full canvas aspect ratio 23:27.\nInput images: Image 1 is the original BUILDING.SS frame 039 rendered in its actual in-game palette, EXACT GEOMETRY AND COLOR REFERENCE. Image 2 is the already adopted HD building, PIXEL MATERIAL AND EDGE STYLE reference only. Image 3 is the USER APPROVED fine pixel-art concept, STYLE reference only.\nPrimary request: redraw only Image 1 using the crisp, restrained pixel clusters and natural wood/stone/foliage textures of the approved style. A small dark timber cottage with brown roof, pale chimney at the upper right, two dark ground-floor openings, green broadleaf foliage behind the roof and tiny plants at the base. Preserve the original slim chimney, roof slope, wall faces and opening positions.\nComposition: retain Image 1's complete 23 by 27 canvas, same object placement, facing, projected angle, silhouette, roof slopes, bounding extents and every transparent gap. Do not recenter, enlarge or crop. Add finer readable material details only inside its existing shapes. It must remain legible at 92 by 108 pixels.\nPalette: follow Image 1's actual warm earthy browns, buffs and greens. No glow or vivid neon colors.\nTransparency: actual alpha background outside the original object and inside its empty openings/gaps. The magenta RGB of transparent reference pixels is empty background, never a visible color. Keep hard transparent edges, without halo, blur, bloom or antialiasing.\nConstraints: one whole sprite, not a scene or sheet. No extra floors, towers, structures, ground, large shadow, people, tools, lettering, labels, signs, frame or watermark. Do not copy scenery from the style references. Preserve the original object count and topology.",
+      "reference_sha256": {
+        "native": "3595535d3b31ddadad213c0980155e855dba4ccd7c6a4ff77a20b3de4618d09a",
+        "accepted_building032": "c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "29dafe80be32105e570abf822fea90b1ce73bcc206523aa758346b24066c8936"
+      }
+    },
+    "building-042.png": {
+      "spec": "docs/spec/064-hd-colony-building-batch.md",
+      "sha256": "34f7ee08d3429ed6a6659b5c5eb6aa1ecfdf1656a814a494658368c475fdd8d4",
+      "bytes": 1581675,
+      "size": [
+        1502,
+        1047
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        53,
+        37
+      ],
+      "target_size": [
+        212,
+        148
+      ],
+      "native_opaque_pixels": 848,
+      "observed_native_rects": [
+        [
+          66,
+          87,
+          119,
+          124
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        24,
+        10,
+        1502,
+        1034
+      ],
+      "native_content_rect": [
+        1,
+        0,
+        53,
+        36
+      ],
+      "sample_bounds_measurement": "alpha >= 128 for geometry only; sampled alpha unchanged",
+      "alpha_mass_outside_sample_rect": 5638,
+      "alpha_mass_total": 177695025,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Use case: style-transfer.\nAsset type: one transparent fine pixel-art sprite for a display-only 4x HD overlay of Colonization (1994). Native full canvas 53 by 37; logical destination 212 by 148 pixels. Retain that exact full-canvas aspect ratio.\nInput images: Image 1 is the original BUILDING.SS frame 042 in the actual game palette, EXACT GEOMETRY AND COLOR REFERENCE. Image 2 is an adopted HD building, MATERIAL/PIXEL STYLE reference only. Image 3 is the USER APPROVED fine pixel-art concept, STYLE reference only.\nPrimary request: redraw only Image 1 with restrained crisp fine pixel clusters, readable wood grain, natural non-emissive foliage and subtle material highlights in the approved style. The original irregular broadleaf grove: a small separate tree at upper left, several overlapping leafy trees concentrated across the middle/right, visible slim brown trunks, and sparse broken low plants extending toward the lower edge. Preserve the exact number, arrangement, height differences and open spaces of Image 1. No extra forest floor, grass carpet or shadow oval.\nGeometry: preserve the full canvas, every object's original location, extents, projected angle, silhouette, count, and transparent gaps. Do not recenter, crop, enlarge, rearrange or add objects. Keep detail fine enough for the logical destination. Use a few small pixel clusters for leaves/needles and wood texture rather than smooth painting.\nPalette: keep Image 1's natural muted earthy browns and greens. If water is present, retain its blue range and small ripple detail inside its existing shape only. No neon, glow, bloom or high-contrast sparkles.\nTransparency: actual alpha background throughout all empty space outside and between the objects. The magenta RGB of zero-alpha reference pixels is empty, never visible magenta. Preserve hard transparent edges. No blur, halos, antialiasing or diffuse semitransparent cloud.\nConstraints: one sprite, not a complete scene or sheet. No new ground, large cast shadows, buildings, people, furniture, props, words, borders, watermark or reference-sheet background. Do not borrow objects from style references.",
+      "reference_sha256": {
+        "native": "a8e4180a57d5dd4facd568c0759b4bac657e49d23fd7d09fa17e2facf96c3547",
+        "accepted_building032": "c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "349af0f0328751db570320e0964f65a50fc6c7b393b991cd61e886a429536582"
+      }
+    },
+    "building-043.png": {
+      "spec": "docs/spec/064-hd-colony-building-batch.md",
+      "sha256": "0d9ad7021e2ddf5a2062e6705ba0be869e4ac3781046262eec0b4984a371b928",
+      "bytes": 1224225,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        44,
+        22
+      ],
+      "target_size": [
+        176,
+        88
+      ],
+      "native_opaque_pixels": 369,
+      "observed_native_rects": [
+        [
+          6,
+          14,
+          50,
+          36
+        ],
+        [
+          10,
+          76,
+          54,
+          98
+        ],
+        [
+          15,
+          102,
+          59,
+          124
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        12,
+        44,
+        1766,
+        852
+      ],
+      "native_content_rect": [
+        0,
+        1,
+        44,
+        22
+      ],
+      "sample_bounds_measurement": "alpha >= 128 for geometry only; sampled alpha unchanged",
+      "alpha_mass_outside_sample_rect": 11945,
+      "alpha_mass_total": 140848341,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Use case: style-transfer.\nAsset type: one transparent fine pixel-art sprite for a display-only 4x HD overlay of Colonization (1994). Native full canvas 44 by 22; logical destination 176 by 88 pixels. Retain that exact full-canvas aspect ratio.\nInput images: Image 1 is the original BUILDING.SS frame 043 in the actual game palette, EXACT GEOMETRY AND COLOR REFERENCE. Image 2 is an adopted HD building, MATERIAL/PIXEL STYLE reference only. Image 3 is the USER APPROVED fine pixel-art concept, STYLE reference only.\nPrimary request: redraw only Image 1 with restrained crisp fine pixel clusters, readable wood grain, natural non-emissive foliage and subtle material highlights in the approved style. The original low wide broadleaf group: two close trees toward the left and another tree toward the right, with their sparse trunks and broken trailing low vegetation. Retain the exact uneven skyline, trunk positions and transparent open middle area. No connecting strip of ground or added trees.\nGeometry: preserve the full canvas, every object's original location, extents, projected angle, silhouette, count, and transparent gaps. Do not recenter, crop, enlarge, rearrange or add objects. Keep detail fine enough for the logical destination. Use a few small pixel clusters for leaves/needles and wood texture rather than smooth painting.\nPalette: keep Image 1's natural muted earthy browns and greens. If water is present, retain its blue range and small ripple detail inside its existing shape only. No neon, glow, bloom or high-contrast sparkles.\nTransparency: actual alpha background throughout all empty space outside and between the objects. The magenta RGB of zero-alpha reference pixels is empty, never visible magenta. Preserve hard transparent edges. No blur, halos, antialiasing or diffuse semitransparent cloud.\nConstraints: one sprite, not a complete scene or sheet. No new ground, large cast shadows, buildings, people, furniture, props, words, borders, watermark or reference-sheet background. Do not borrow objects from style references.",
+      "reference_sha256": {
+        "native": "9acfeaf812d2b60ff823a6446be2f5368f6bb240a372ec1a66d8201c45a7ac7d",
+        "accepted_building032": "c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "31756e82c00bdbbd5dee53414b08061e47bf102e87cc3d70beef9be0dd5116aa"
+      }
+    },
+    "building-044.png": {
+      "spec": "docs/spec/064-hd-colony-building-batch.md",
+      "sha256": "004fdb0045fc47653fd40beef438d0f2922933639a68c95a1d7b504ed908afed",
+      "bytes": 1348199,
+      "size": [
+        1158,
+        1359
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        23,
+        27
+      ],
+      "target_size": [
+        92,
+        108
+      ],
+      "native_opaque_pixels": 262,
+      "observed_native_rects": [
+        [
+          8,
+          41,
+          31,
+          68
+        ],
+        [
+          96,
+          53,
+          119,
+          80
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        17,
+        21,
+        1138,
+        1323
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        23,
+        27
+      ],
+      "sample_bounds_measurement": "alpha >= 128 for geometry only; sampled alpha unchanged",
+      "alpha_mass_outside_sample_rect": 14733,
+      "alpha_mass_total": 154740000,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Use case: style-transfer.\nAsset type: one transparent fine pixel-art sprite for a display-only 4x HD overlay of Colonization (1994). Native full canvas 23 by 27; logical destination 92 by 108 pixels. Retain that exact full-canvas aspect ratio.\nInput images: Image 1 is the original BUILDING.SS frame 044 in the actual game palette, EXACT GEOMETRY AND COLOR REFERENCE. Image 2 is an adopted HD building, MATERIAL/PIXEL STYLE reference only. Image 3 is the USER APPROVED fine pixel-art concept, STYLE reference only.\nPrimary request: redraw only Image 1 with restrained crisp fine pixel clusters, readable wood grain, natural non-emissive foliage and subtle material highlights in the approved style. The original sparse diagonal vegetation arrangement: a narrow conifer toward upper right, a broadleaf tree at middle/left, and scattered short green plants/trunks descending toward the lower right. Preserve all separate objects, their exact relative placement, asymmetry and large transparent gaps. Do not combine them into one centered tree.\nGeometry: preserve the full canvas, every object's original location, extents, projected angle, silhouette, count, and transparent gaps. Do not recenter, crop, enlarge, rearrange or add objects. Keep detail fine enough for the logical destination. Use a few small pixel clusters for leaves/needles and wood texture rather than smooth painting.\nPalette: keep Image 1's natural muted earthy browns and greens. If water is present, retain its blue range and small ripple detail inside its existing shape only. No neon, glow, bloom or high-contrast sparkles.\nTransparency: actual alpha background throughout all empty space outside and between the objects. The magenta RGB of zero-alpha reference pixels is empty, never visible magenta. Preserve hard transparent edges. No blur, halos, antialiasing or diffuse semitransparent cloud.\nConstraints: one sprite, not a complete scene or sheet. No new ground, large cast shadows, buildings, people, furniture, props, words, borders, watermark or reference-sheet background. Do not borrow objects from style references.",
+      "reference_sha256": {
+        "native": "e1b505e34c5d79c1452ba42ec69dbf7b527cebc4be9f8e6622d59aa947618f0e",
+        "accepted_building032": "c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "f9bb3cc9064ce58f05443b8671a870d69fde96667e9a3dde1c24763b1c368332"
+      }
+    },
+    "building-045.png": {
+      "spec": "docs/spec/064-hd-colony-building-batch.md",
+      "sha256": "07049354109ff9bee01f103a2b408d227a607b8bba138cefc9de5af840f99915",
+      "bytes": 944026,
+      "size": [
+        1568,
+        1003
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        75,
+        48
+      ],
+      "target_size": [
+        300,
+        192
+      ],
+      "native_opaque_pixels": 1069,
+      "observed_native_rects": [
+        [
+          123,
+          55,
+          198,
+          103
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        18,
+        0,
+        1568,
+        979
+      ],
+      "native_content_rect": [
+        1,
+        0,
+        75,
+        48
+      ],
+      "sample_bounds_measurement": "alpha >= 128 for geometry only; sampled alpha unchanged",
+      "alpha_mass_outside_sample_rect": 37412,
+      "alpha_mass_total": 112525166,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Use case: style-transfer.\nAsset type: one transparent fine pixel-art sprite for a display-only 4x HD overlay of Colonization (1994). Native full canvas 75 by 48; logical destination 300 by 192 pixels. Retain that exact full-canvas aspect ratio.\nInput images: Image 1 is the original BUILDING.SS frame 045 in the actual game palette, EXACT GEOMETRY AND COLOR REFERENCE. Image 2 is an adopted HD building, MATERIAL/PIXEL STYLE reference only. Image 3 is the USER APPROVED fine pixel-art concept, STYLE reference only.\nPrimary request: redraw only Image 1 with restrained crisp fine pixel clusters, readable wood grain, natural non-emissive foliage and subtle material highlights in the approved style. The original large transparent colony scenery fragment: one cluster of narrow conifers near bottom left, a separated taller conifer group in the upper-right area, and the curving blue river/water fragment along the lower-right border. Preserve the large empty center, the exact river curve, direction and edge, tree count/positions and isolated transparent gaps. Water exists only within the original blue river shape. Do not fill the canvas with land or connect the separated tree groups.\nGeometry: preserve the full canvas, every object's original location, extents, projected angle, silhouette, count, and transparent gaps. Do not recenter, crop, enlarge, rearrange or add objects. Keep detail fine enough for the logical destination. Use a few small pixel clusters for leaves/needles and wood texture rather than smooth painting.\nPalette: keep Image 1's natural muted earthy browns and greens. If water is present, retain its blue range and small ripple detail inside its existing shape only. No neon, glow, bloom or high-contrast sparkles.\nTransparency: actual alpha background throughout all empty space outside and between the objects. The magenta RGB of zero-alpha reference pixels is empty, never visible magenta. Preserve hard transparent edges. No blur, halos, antialiasing or diffuse semitransparent cloud.\nConstraints: one sprite, not a complete scene or sheet. No new ground, large cast shadows, buildings, people, furniture, props, words, borders, watermark or reference-sheet background. Do not borrow objects from style references.",
+      "reference_sha256": {
+        "native": "ee5f8083b33c9d5e257f75d8ce3a51c3bf60e43ab9a21689150c0bc4cb0a0603",
+        "accepted_building032": "c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "129934aa9808419a2164569da49363b9a8c8486a0460fd9da876cb641b797de1"
+      }
     }
   }
 }
