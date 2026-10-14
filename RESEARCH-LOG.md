@@ -5897,3 +5897,45 @@ confirmed只限原圖指紋與離線取樣：PNG及alpha未重編碼，alpha128�
 精確試合成收據為preview-check-r1.json，收尾為final-audit-r50.json，SHA-256為
 f623c49714bf6837bc260f11c502cc69c577a2deef7076cecdf11844b8a1f2c4。
 原版參考、生成候選及離線截圖都留本機，正式十四種素材與README四張正式截圖保持。
+## 2026-10-14 R51小圖像游標與RAM還原
+
+confirmed限原版研究，正式十四種素材不變。工具、原版VICEROY.EXE、ICONS.SS及53筆輸入／49點指紋沿R49；
+dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7及Python3.11.2不變。
+位址採實模式CS:IP、20bit線性RAM與原版320×200畫布，不是IDA位址。
+來源組裝入口為tools/prepare_hd_small_image_ram_research.py，指紋與限定還原樣本連回docs/hd-source-catalog.json。
+
+- 31個ICONS來源、420次完整繪製與180696事件由獨立模型重建，控制與既有49點完整原版狀態及存檔相符。
+- 0CBA:00CA的16bytes為f3a503f3790c81ee00808cd981c10008，只有已擁有身分的主畫布逐byte保存至RAM，
+  及該RAM位元組回主畫布時接受。第005幀547保存、422還原；沒有其他幀的RAM正向樣本。
+  不接受RAM至RAM、主畫布直接複製認領或0C9F同碼。未知後畫含同值撤銷。
+- 0B68:051C的16bytes為f3a48ac82bf92bf103f303fafecc75f0，一般游標來源256bytes SHA-256為
+  47fced19d04987d3a0de8b6fd929abae6ba886939a2a7ce408b0213360ef1e03。
+  只有完整反向舊／新值配對可還原；第005幀104筆、第062幀156筆，共260筆。
+- 12個RAM反例為十項來源撤銷及兩項失真證據拒絕；之後49份正向模型逐byte相同。
+  第37點原先失去的第005幀125點可由保存／還原證據恢復，不以同色圖樣比對補身分。
+
+R1的錯舊值反例選到首次觀測的RAM保存，模型此前不知道目的舊值；覆寫前未知的值不影響已驗來源的保存。
+R2要求同一個保存同時有已知舊值及後續可見檢查點，沒有符合目標，停止且未取得反例信用。
+重查規格閘門與規格062後，R3將舊值反例獨立選在49個已有先前寫入的保存事件之一；
+其餘來源撤銷仍核對同一第37點還原。模型、原始收據與來源接受規則不變，不為此新增玩家輸入或改產品。
+R1失敗輸出保留，R3才授予完整12反例信用。
+
+一般游標另有confirmed位元組對照：CURSOR.SS第000幀17×17索引的左上16×16，將253轉成255，
+恰等於上述256bytes。原檔與索引指紋見來源索引；第000幀兩次繪圖入口的目的為17×17暫存區，
+並非主畫布。這只證明完整位元組對應，來源至游標RAM的資料流、熱點及HD仍未知。
+本批49點游標都是一般圖樣，未授予af47f5b2拖曳圖樣或CURSOR第001幀信用。
+
+| 本機收據或工具 | SHA-256 |
+|---|---|
+| sources/source-catalog.json | 33cb02b6c550d9f0f5294901f661b4d382cd0f400fca076ea7c3365dc8befc0e |
+| lifecycle-r1/build.json | 4d3682136954a836f41687389c1837a4312dea0c7b27d94e106c907f276f6c7c |
+| Go／執行檔 | 755cdf3190a0ca80ef201f815c67b90157958710bd4690c161858ef73e6190db／cb017d95d4a89c852c9e61d8d7d643b9a6e913b69152b45d62be0f8f12dcb936 |
+| model-r1/check.json | fd48090fb6ecc102edeea3076a4b116cf0fbc1f2d1a9feab6334eb593be9d1c5 |
+| negatives-r3/check.json | 5235e5910a013a5aca55639c96825278fcbaea30b1e02cf82bad40798055d28e |
+| cursor-source-leads-r1.json | 2b3817c05f1e9c838ac1367c032bd29dfb2f0118cebc5ffa30e9cfe3ff52e1c1 |
+| source-index-r1.json | dc50f7151531b4bf24bd0bef5a6efe2cee117eb73c3d5607ba53fa4c61fbcc63 |
+
+本機根為hd-small-images-ram-r51，公開工具重生於hd-small-images-ram-r51-public-r2，均在既有goal186-display-hd下。
+公開工具的Go、執行檔、檢查器與反例程式全等；沿用同一原版收據重驗，不冒稱第二次正常GUI。
+命令索引為commands-r51.json，最終稽核為final-audit-r51.json。
+原版像素、游標位元組、RAM、存檔與原始事件不公開；仍為研究DRAFT，完整HD、動畫及正常顯示接線待續。

@@ -283,6 +283,16 @@ workplace/reports/goal186-display-hd/hd-small-images-r50/candidate-prompts-r1.js
 使用內建image_gen，各幀獨立生成；原PNG與alpha原樣保存，沒有進正式素材清冊。
 第023幀去柔光v2仍未定稿。四點離線來源預覽只驗取樣與安全範圍，不能替代正常GUI或HD完成驗收。
 
+R51以[小圖像RAM研究組裝器](../../tools/prepare_hd_small_image_ram_research.py)接續來源還原。
+在容器以--r49-root指定完整R49本機收據、--output指定新的/out子目錄，
+產生來源、build-small-ram.py、check-small-ram.py及test-small-ram.py。
+將產物根唯讀／可寫分開掛載後，依commands-r51.json使用既有53筆輸入、49點與R45模組建置；
+執行觀測及無觀測控制到lifecycle-r1/observed、lifecycle-r1/control，模型輸出至model-r1，最後跑反例。
+原版來源與輸入仍以固定SHA-256守門，輸出只留本機，不安裝HD。
+R51驗180696事件、第005幀547保存／422還原，以及第005、062幀共260筆一般游標還原。
+12反例通過，49份正向模型重驗全等；其他小圖像沒有還原正向樣本，不外推全量覆蓋。
+來源索引可加--small-ram-root連結這份限定研究；一般游標的原圖位元組對應仍只是資料流追查線索。
+
 ### 定稿畫風與來源
 
 ![使用者定稿的第一張精細像素風樣張](../screenshots/hd-pixel-concept.png)

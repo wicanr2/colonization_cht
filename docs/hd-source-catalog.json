@@ -28554,6 +28554,14 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "small_image_restore_sample": {
+        "ram_saves": 547,
+        "ram_restores": 422,
+        "cursor_restores": 104,
+        "report_sha256": "fd48090fb6ecc102edeea3076a4b116cf0fbc1f2d1a9feab6334eb593be9d1c5",
+        "state": "verified native samples; not production HD or animation",
+        "cursor_bitmap_sha256": "47fced19d04987d3a0de8b6fd929abae6ba886939a2a7ce408b0213360ef1e03"
       }
     },
     {
@@ -30959,6 +30967,14 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "small_image_restore_sample": {
+        "ram_saves": 0,
+        "ram_restores": 0,
+        "cursor_restores": 156,
+        "report_sha256": "fd48090fb6ecc102edeea3076a4b116cf0fbc1f2d1a9feab6334eb593be9d1c5",
+        "state": "verified native samples; not production HD or animation",
+        "cursor_bitmap_sha256": "47fced19d04987d3a0de8b6fd929abae6ba886939a2a7ce408b0213360ef1e03"
       }
     },
     {
@@ -51104,5 +51120,28 @@
     "raw_events": 131722,
     "negative_scope": "separate true-receipt tests",
     "production_connected": false
+  },
+  "small_image_restore_evidence": {
+    "report_sha256": "fd48090fb6ecc102edeea3076a4b116cf0fbc1f2d1a9feab6334eb593be9d1c5",
+    "source_catalog_sha256": "33cb02b6c550d9f0f5294901f661b4d382cd0f400fca076ea7c3365dc8befc0e",
+    "source_calls": 420,
+    "raw_events": 180696,
+    "ram_saves": 547,
+    "ram_restores": 422,
+    "cursor_restores": 260,
+    "by_original_ordinal": {
+      "5": {
+        "ram_saves": 547,
+        "ram_restores": 422,
+        "cursor_restores": 104
+      },
+      "62": {
+        "ram_saves": 0,
+        "ram_restores": 0,
+        "cursor_restores": 156
+      }
+    },
+    "production_connected": false,
+    "claim": "RAM positive examples only ordinal 005; cursor positive examples 005 and 062; other frames not granted restoration coverage"
   }
 }

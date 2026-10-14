@@ -6,6 +6,7 @@ for name in ['catalog','manifest','assets','output']:parser.add_argument('--'+na
 parser.add_argument('--entry-report',type=Path,help='可選：R49正常路徑全SS唯讀入口收據')
 parser.add_argument('--small-report',type=Path,help='可選：R49的31種小圖像逐寫審查收據')
 parser.add_argument('--small-build',type=Path,help='與small-report一起使用的小圖像來源綁定')
+parser.add_argument('--small-ram-root',type=Path,help='可選：R51小圖像RAM／游標研究根目錄')
 a=parser.parse_args();out=a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.parent.stat().st_uid==os.getuid() and not out.exists()
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -67,5 +68,28 @@ if a.small_report:
   assert f['indexed_sha256']==source['indexed_sha256'] and f['encoded_sha256']==source['encoded_sha256']
   f['small_image_draw_sample']={'calls':f['normal_entry_sample']['calls'],'state':'verified writes on 49 normal points; not HD conformance','report_sha256':sha(a.small_report),'unknown_writes':'revoke including same value','cursor_restoration_verified':False,'ram_restoration_verified':False}
  public['small_image_write_evidence']={'report_sha256':sha(a.small_report),'build_sha256':sha(a.small_build),'source_sha256':build['source_sha256'],'binary_sha256':build['binary_sha256'],'sources':31,'calls':420,'raw_events':131722,'negative_scope':'separate true-receipt tests','production_connected':False}
+if a.small_ram_root:
+ assert a.small_report and a.small_build
+ root=a.small_ram_root;report_path=root/'model-r1/check.json';report=json.loads(report_path.read_bytes())
+ assert report['result']=='PASS_SMALL_IMAGE_RAM_RESEARCH_NATIVE_MODEL' and report['production_connected'] is False
+ assert report['source_calls']==420 and report['raw_events']==180696 and len(report['points'])==49
+ assert report['ram_saves_verified']==547 and report['ram_restorations_accepted']==422 and report['verified_cursor_restores']==260
+ catalog_path=root/'sources/source-catalog.json';catalog=json.loads(catalog_path.read_bytes())
+ assert catalog['r49_build_sha256']==sha(a.small_build) and len(catalog['sources'])==31
+ copies=json.loads((root/'model-r1/small-ram-copies.json').read_bytes())
+ counts={}
+ for copy in copies:
+  assert copy['kind'] in ['save','restore'];ordinal=copy['cell']['ordinal']
+  count=counts.setdefault(ordinal,{'ram_saves':0,'ram_restores':0,'cursor_restores':0})
+  count['ram_saves' if copy['kind']=='save' else 'ram_restores']+=1
+ assert sum(c['ram_saves'] for c in counts.values())==547 and sum(c['ram_restores'] for c in counts.values())==422
+ for ordinal,value in report['cursor_restores_by_ordinal'].items():
+  counts.setdefault(int(ordinal),{'ram_saves':0,'ram_restores':0,'cursor_restores':0})['cursor_restores']=value
+ for ordinal,count in counts.items():
+  source=next(s for s in catalog['sources'] if s['ordinal']==ordinal)
+  f=by_id[source['research_id']]
+  assert f['file']=='ICONS.SS' and f['ordinal']==ordinal and f['indexed_sha256']==source['indexed_sha256'] and f['encoded_sha256']==source['encoded_sha256']
+  f['small_image_restore_sample']=dict(count,report_sha256=sha(report_path),state='verified native samples; not production HD or animation',cursor_bitmap_sha256='47fced19d04987d3a0de8b6fd929abae6ba886939a2a7ce408b0213360ef1e03')
+ public['small_image_restore_evidence']={'report_sha256':sha(report_path),'source_catalog_sha256':sha(catalog_path),'source_calls':420,'raw_events':180696,'ram_saves':547,'ram_restores':422,'cursor_restores':260,'by_original_ordinal':counts,'production_connected':False,'claim':'RAM positive examples only ordinal 005; cursor positive examples 005 and 062; other frames not granted restoration coverage'}
 out.write_text(json.dumps(public,ensure_ascii=False,indent=2)+'\n')
 print('PASS_METADATA_ONLY_FULL_SOURCE_INDEX',len(frames),len(bindings),sha(out),flush=True)
