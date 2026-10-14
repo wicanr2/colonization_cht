@@ -70,7 +70,8 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 ## 畫面
 
 以下是開發中的五語顯示層與 HD 畫面，尚未收進目前發行版。截圖來自實際遊戲視窗，
-來源與指紋見[截圖紀錄](docs/screenshots/readme-captures.json)。其他地形、人物與動畫仍在開發。
+來源與指紋見[截圖紀錄](docs/screenshots/readme-captures.json)。全量 HD 包含商品、資源、單位、
+游標等小圖像與動畫幀，目前仍在逐項開發。
 
 ![繁體中文殖民地畫面與已接線的 HD 建築](docs/screenshots/hd-colony-zh.png)
 
@@ -93,7 +94,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 所有建置、遊戲執行、分析與抓圖都在 Docker 容器內進行，需要自備合法原版。
 
 - [目前脈絡](CONTEXT.md)、[工作計畫](WORKLIST.md)（由 `docs/worklist.json` 產生）
-- [多語系、HD 切換與實際遊玩影片](docs/goals/186-display-settings-and-gameplay-video.md)：五語整包後端與設定保存已接線；十二種城內建築與景物、單一海洋圖塊及一個人物素材已接正式HD顯示。其餘欄位與圖像仍在開發，尚未收進目前發行版。
+- [多語系、HD 切換與實際遊玩影片](docs/goals/186-display-settings-and-gameplay-video.md)：五語整包後端與設定保存已接線；十二種城內建築與景物、單一海洋圖塊及一個人物素材已接正式HD顯示。全量圖像包含小圖像與動畫幀，仍在逐項開發，尚未收進目前發行版。
 - [規格](docs/spec/)與[各輪目標](docs/goals/)
 - [驗證矩陣](docs/verification-matrix.md)（`tools/verification_matrix.py` 產生）
 - [研究證據](RESEARCH-LOG.md)與[工作歷程](WORKLOG.md)
