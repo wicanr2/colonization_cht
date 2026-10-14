@@ -278,6 +278,11 @@ R49的420次完整繪製、131302筆寫入及420筆來源建立可獨立重建�
 索引組裝器可加--entry-report及成對的--small-report／--small-build，連結上述限定證據。
 精確指紋、失敗勘誤與本機命令入口見RESEARCH-LOG.md的R49節，正式十四種素材保持。
 
+R50接續第022、023、024幀的精細像素候選，完整提示與參考在本機
+workplace/reports/goal186-display-hd/hd-small-images-r50/candidate-prompts-r1.json。
+使用內建image_gen，各幀獨立生成；原PNG與alpha原樣保存，沒有進正式素材清冊。
+第023幀去柔光v2仍未定稿。四點離線來源預覽只驗取樣與安全範圍，不能替代正常GUI或HD完成驗收。
+
 ### 定稿畫風與來源
 
 ![使用者定稿的第一張精細像素風樣張](../screenshots/hd-pixel-concept.png)

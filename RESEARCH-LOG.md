@@ -5869,3 +5869,31 @@ R1錯假設PIK至少三區段而拒絕COLONY.PIK，原失敗保留；R2依實際
 40個真實收據反例包含31來源逐一混淆、幾何、返回、透明底圖、原始舊值／色號、未驗寫入端、
 同值覆寫保留舊身分及事件截斷，全部拒絕。正向49點再驗通過。
 原版像素、色盤、預覽、RAM、存檔與逐寫收據僅留本機；公開索引只有指紋、幾何與限定證據連結。
+## 2026-10-14 R50三種小圖像候選與取樣
+
+沿目標186、R49原版來源及使用者精細像素風定稿，不改正式素材或原版行為。
+本機根為workplace/reports/goal186-display-hd/hd-small-images-r50，references.json保存31種參考來源及當次正常DAC。
+每個參考都由R49驗證有正向來源的檢查點選色盤，不從檔名或外觀推斷執行期用途。
+candidate-prompts-r1.json保存第022、023、024幀完整提示、參考角色與SHA-256；
+各candidate-v1.json另保存內建image_gen輸出位置、原始PNG、alpha與DRAFT限制。
+第023幀v2的提示與編輯目標指紋見icons-023-candidate-v2.json，柔光仍可見，尚未定稿。
+
+| 原PNG | SHA-256 |
+|---|---|
+| icons-022-candidate-v1.png | aa2230fc41fa34ccf782fd8b9c3311390add4c33bf380dd31099a63b3b5c44d8 |
+| icons-023-candidate-v1.png | 33f6e54298163709ea5ffa75ee29143e9eb214a70cfa1d4f9e35dc1fc7b703c5 |
+| icons-024-candidate-v1.png | b4dfd073993baf0bfdeb2ebc54a8f729226fecda6f3ccbccc7c9bf2175740051 |
+| icons-023-candidate-v2.png | 7bdc352c8ef4b39b616fd1d9ce800f7ad66f4fc6dd4e0f596a248031a1fc0073 |
+
+confirmed只限原圖指紋與離線取樣：PNG及alpha未重編碼，alpha128用於內容幾何，合成仍取原RGBA。
+依原版不透明外框、四倍局部位置及像素中心最近鄰對應候選內容矩形，並限當次來源身分繪製。
+三張城內快照各11001點變動，其中第022、023、024幀分別9572、728及701點，來源外零變動。
+世界點4沒有三種來源，零變動；原版後畫撤銷沿R49逐寫模型，沒有以圖像相似度復活來源。
+工具為Python3.11.2及Pillow9.4.0；位移為原版320×200畫布局部座標及1280×800呈現座標，不是EXE或IDA位址。
+
+這是離線原型，不是新增正常GUI、READY素材、正式HD、動畫或完整HD完成證據。
+第023幀兩次生成仍有柔光，保留兩版，不在素材檔案中以閾值刪改alpha。
+取樣後柔光被限制在原版不透明來源內，但不據此跳過最終美術與正常顯示驗收。
+精確試合成收據為preview-check-r1.json，收尾為final-audit-r50.json，SHA-256為
+f623c49714bf6837bc260f11c502cc69c577a2deef7076cecdf11844b8a1f2c4。
+原版參考、生成候選及離線截圖都留本機，正式十四種素材與README四張正式截圖保持。
