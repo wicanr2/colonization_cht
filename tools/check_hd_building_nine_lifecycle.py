@@ -10,6 +10,11 @@ def need(value,message):
  if not value:raise ValueError(message)
 def read(path):return json.loads(path.read_bytes())
 def sha(data):return hashlib.sha256(data).hexdigest()
+def sha_file(path):
+ digest=hashlib.sha256()
+ with path.open("rb") as file:
+  for block in iter(lambda:file.read(1048576),b""):digest.update(block)
+ return digest.hexdigest()
 def event_stream(path):
  """逐筆讀標準JSON陣列；同時接受歷史縮排及新串流輸出。"""
  decoder=json.JSONDecoder();buffer="";pos=0;eof=False;count=0
@@ -151,7 +156,7 @@ def main():
  need(Path("/.dockerenv").is_file() and os.getuid()!=0,"需非root容器")
  need((out.is_relative_to(Path("/out")) or out.is_relative_to(Path(__file__).resolve().parents[1]/"workplace")) and out.parent.stat().st_uid==os.getuid() and not out.exists(),"需新的本機輸出")
  out.mkdir();report=check(a.observed,a.control,a.sources,out);report["checker_sha256"]=sha(Path(__file__).read_bytes())
- report["receipts_sha256"]={str(p):sha(p.read_bytes()) for p in [a.observed/"draws.json",a.observed/"writes.json",a.control/"draws.json",a.sources/"source.json"]}
+ report["receipts_sha256"]={str(p):sha_file(p) for p in [a.observed/"draws.json",a.observed/"writes.json",a.control/"draws.json",a.sources/"source.json"]}
  target=out/"check.json";target.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n");print(report["result"],sha(target.read_bytes()),report["verified_cursor_restores"])
 if __name__=="__main__":
  try:main()

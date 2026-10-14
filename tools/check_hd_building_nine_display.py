@@ -1,8 +1,67 @@
 """規格064 R42 DRAFT：原型來源／游標與獨立原版模型的逐筆比較。"""
-import argparse,base64,hashlib,json,os
+import argparse,base64,hashlib,json,os,re
 from collections import Counter
 from pathlib import Path
 from check_hd_building_nine_lifecycle import ORDINALS,need,read,sha
+
+def read_native_state(path):
+ """讀Go縮排報表的原版state；歷史畫格可很大，只讀有界尾端。"""
+ with path.open("rb") as file:
+  header=file.read(1024);indent=re.match(rb'\{\r?\n([ \t]+)"',header)
+  need(indent is not None,"原版報表不是已驗Go縮排格式")
+  file.seek(max(0,path.stat().st_size-(8<<20)));tail=file.read(8<<20)
+ matches=list(re.finditer(rb'(?m)^'+re.escape(indent[1])+rb'"state"[ \t]*:[ \t]*',tail))
+ need(len(matches)==1,"報表尾端缺少唯一原版state")
+ text=tail[matches[0].end():].decode("utf-8");state,end=json.JSONDecoder().raw_decode(text)
+ expected={"memory_sha256","registers","segments","ip","flags","steps","ticks","frames","cycles","frame_sha256","palette_sha256"}
+ need(end<=4096 and isinstance(state,dict) and set(state)==expected,"原版state形狀不同")
+ for key in ["memory_sha256","frame_sha256","palette_sha256"]:
+  need(isinstance(state[key],str) and re.fullmatch(r"[0-9a-f]{64}",state[key]),"原版state指紋格式不同")
+ for key,size in [("registers",8),("segments",4)]:
+  need(isinstance(state[key],list) and len(state[key])==size and all(type(v)is int and 0<=v<=65535 for v in state[key]),"原版state暫存器不同")
+ for key in ["ip","flags","steps","ticks","frames","cycles"]:
+  limit=65536 if key in ["ip","flags"] else (1<<64)
+  need(type(state[key])is int and 0<=state[key]<limit,"原版state數值不同")
+ return state
+
+def image_check(path,proof):
+ from PIL import Image,ImageChops,ImageDraw
+ live=proof["frame"]["native_live"];hd=live.get("hd") or {}
+ indexed=(path/"indexed").read_bytes();palette=(path/"palette").read_bytes()
+ need(len(indexed)==64000 and len(palette)==768,"快照索引或色盤長度不同")
+ native=Image.frombytes("P",(320,200),indexed);native.putpalette([v<<2|v>>4 for v in palette])
+ original=native.convert("RGB").resize((1280,800),Image.Resampling.NEAREST)
+ with Image.open(path/"display.png") as image:actual=image.convert("RGB")
+ need(actual.size==(1280,800),"正常快照顯示尺寸不同")
+ safe=Image.new("1",actual.size);draw=ImageDraw.Draw(safe)
+ for item in live.get("items") or []:
+  rect=item["safe"];a,b=rect["Min"],rect["Max"]
+  draw.rectangle((a["X"]*4,a["Y"]*4,b["X"]*4-1,b["Y"]*4-1),fill=1)
+ if hd.get("painted",0)>0:draw.rectangle((224,52,315,159),fill=1)
+ for key in ["sea","person","shelter","nine"]:
+  source=hd.get(key) or {}
+  if not source:continue
+  raw=base64.b64decode(source["mask"],validate=True);need(len(raw)==8000,"顯示來源遮罩長度不同")
+  bits=[bool(raw[i>>3]&(1<<(i&7))) for i in range(64000)]
+  expected=source["painted"] if key=="sea" else source["valid"]
+  need(sum(bits)==expected,"顯示來源遮罩數不同")
+  mask=Image.new("1",(320,200));mask.putdata(bits)
+  safe=ImageChops.logical_or(safe,mask.resize(actual.size,Image.Resampling.NEAREST))
+ difference=ImageChops.difference(actual,original)
+ outside=Image.composite(difference,Image.new("RGB",actual.size),safe.point(lambda v:0 if v else 255,"1"))
+ need(outside.getbbox() is None,"正常恢復畫面越出來源或文字安全範圍")
+ cursor_points=0
+ if hd.get("painted",0)>0 or any((hd.get(k) or {}).get("painted",0)>0 for k in ["sea","person","shelter","nine"]):
+  cursor=(path/"cursor-source").read_bytes()
+  need(sha(cursor)=="47fced19d04987d3a0de8b6fd929abae6ba886939a2a7ce408b0213360ef1e03","HD快照使用未知游標")
+  mouse=proof["state"]["dos_mouse"]
+  for k,value in enumerate(cursor):
+   x,y=mouse["x"]+k%16,mouse["y"]+k//16
+   if value==255 or not (0<=x<320 and 0<=y<200):continue
+   rect=(x*4,y*4,x*4+4,y*4+4)
+   need(actual.crop(rect).tobytes()==original.crop(rect).tobytes(),"正常恢復畫面覆蓋不透明游標")
+   cursor_points+=1
+ return {"outside_changed":0,"verified_cursor_pixels":cursor_points,"locale":live["locale"],"hd_reason":hd.get("reason")}
 
 def traces(actual,proof,model):
  end=proof["end"]["steps"]
@@ -72,7 +131,7 @@ def check(observed,model,native=None,gui=None):
    for filename,suffix in [("canvas",".canvas"),("indexed",".idx"),("palette",".palette"),("cursor-source",".cursor"),("cursor-background",".cursor-background"),("cursor-final",".cursor-final")]:
     need((path.parent/filename).read_bytes()==Path(str(prefix)+suffix).read_bytes(),"GUI原始資料不同："+filename)
    counts=mask_cells(p["nine"],p["cells"],read(model/f"point-{i:03d}.nine-model.json"),(path.parent/"canvas").read_bytes())
-   summaries.append({"point":i,"label":path.parent.name,"by_ordinal":counts,"hd_reason":p["frame"].get("native_live",{}).get("hd",{}).get("reason")})
+   summaries.append({"point":i,"label":path.parent.name,"by_ordinal":counts,"image":image_check(path.parent,p)})
  result=traces(actual,proof,model)
  result.update({"result":"PASS_NINE_PROTOTYPE_INDEPENDENT_DISPLAY_COMPARISON","points":summaries,"mode":"native" if native else "normal-gui","production_connected":False,"ram_restorations_accepted":0,"model_sha256":sha((model/"check.json").read_bytes()),"prototype_sha256":sha(native.read_bytes() if native else (gui/"gui.nine.json").read_bytes())})
  return result

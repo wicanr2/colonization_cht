@@ -19,6 +19,15 @@ one('    log = (output / "process.log").open("wb")','''    nine_root=output/"nin
     nine_root.mkdir()
     command += ["--hd-nine-prototype-assets",str(args.nine_assets),"--hd-nine-probe-root",str(nine_root)]
     log = (output / "process.log").open("wb")''')
+one('return hd.get("shelter",{}).get("valid")==263','return hd.get("shelter",{}).get("valid",0)>0 and hd.get("shelter",{}).get("painted",0)>0')
+one('        shelter_snapshot("shelter-drag-released")','''        shelter_snapshot("shelter-drag-released")
+        # 未知副本撤銷的來源不由同色復活；以正常離城／重進建立完整來源。
+        before=status()["step"];xdo("keydown","Escape");time.sleep(0.08);xdo("keyup","Escape")
+        wait(lambda state:state.get("step",0)>=before+4000000 and any(i.get("kind")=="sea-bar" for i in live(state).get("items",[])),"木棚拖曳後正常離城未完成")
+        before=status()["step"];click(152*4,112*4+48)
+        wait(lambda state:state.get("step",0)>=before+8000000 and any(i.get("id")=="STRING:template:colony-title" for i in live(state).get("items",[])),"木棚拖曳後正常重進未完成")
+        wait(lambda state:live(state).get("hd",{}).get("shelter",{}).get("valid")==263,"正常重進未建立完整木棚來源")
+        shelter_snapshot("shelter-drag-redrawn")''')
 one("def main():",'''def nine_mask(hd):
     nine=hd.get("nine") or {}
     if not nine:return Image.new("1",(1280,800))
@@ -105,6 +114,9 @@ one('{"hd-building-hover"}) and','{"hd-building-hover","hd-building-hover-return
 one("PASS_FORMAL_SHELTER_HD_FIVE_LANGUAGE_GUI","PASS_NINE_PROTOTYPE_FIVE_LANGUAGE_GUI")
 one('result["formal_entry"] =','result["prototype_entry"] =')
 one('            result["prototype_entry"] =','            result["nine_normal_recoveries"] = nine_recoveries\n            result["prototype_entry"] =')
+one('                print("PASS_HD_RUNTIME_GUI_SWITCH", scene, locale, graphics, step, hd.get("painted", 0), flush=True)', '''                with (output/"verified-switches.jsonl").open("a") as journal:
+                    journal.write(json.dumps(checks[-1],ensure_ascii=False)+"\\n")
+                print("PASS_HD_RUNTIME_GUI_SWITCH", scene, locale, graphics, step, hd.get("painted", 0), flush=True)''')
 one('"prototype_flags": False','"prototype_flags": True')
 one('"shelter_asset":sha(args.shelter_asset.read_bytes())','"shelter_asset":sha(args.shelter_asset.read_bytes()),"nine_assets":{p.name:sha(p.read_bytes()) for p in sorted(args.nine_assets.glob("building-*-candidate-v1.png"))}')
 one("正式首座、海洋、人物及第024幀木棚；限本批正常GUI，其他建築、動畫及完整HD未完成。","九來源DRAFT及既有四種正式HD；限本批正常GUI，來源獨立審查與同輸入重播另驗。")

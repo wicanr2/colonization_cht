@@ -14,6 +14,9 @@ def one(old,new):
  global s
  assert s.count(old)==1,(old,s.count(old));s=s.replace(old,new,1)
 one("    args = parser.parse_args()", '    parser.add_argument("--nine-assets",type=Path,required=True)\n    args = parser.parse_args()')
+one('ROOT = Path("/repo")','from check_hd_building_nine_display import read_native_state\nfrom check_hd_building_nine_lifecycle import sha_file\n\nROOT = Path("/repo")')
+one('baseline = json.loads((args.gui / "gui.json").read_bytes())["state"]','baseline = read_native_state(args.gui / "gui.json")')
+one('"transaction_checker": sha((ROOT / "tools/check_language_observation_replay.py").read_bytes())', '"transaction_checker": sha((ROOT / "tools/check_language_observation_replay.py").read_bytes()),"native_gui_report":sha_file(args.gui/"gui.json"),"native_state_reader":sha_file(ROOT/"tools/check_hd_building_nine_display.py"),"file_hasher":sha_file(ROOT/"tools/check_hd_building_nine_lifecycle.py")')
 one("    expected = [(s, l, g)",'    scenes += ["nine-start","hd-building-hover-return"]+["nine-return-%03d"%n for n in [16,21,27,35,39,42,43,44,45]]\n    expected = [(s, l, g)')
 one("PASS_FORMAL_SHELTER_HD_FIVE_LANGUAGE_GUI","PASS_NINE_PROTOTYPE_FIVE_LANGUAGE_GUI")
 one('    require(sha(args.binary.read_bytes())','    require({p.name:sha(p.read_bytes()) for p in sorted(args.nine_assets.glob("building-*-candidate-v1.png"))}==gui["source_sha256"]["nine_assets"],"九來源素材不同")\n    require(sha(args.binary.read_bytes())')
