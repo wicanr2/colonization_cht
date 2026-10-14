@@ -1,0 +1,80 @@
+{
+  "kind": "README actual development screenshots",
+  "date": "2026-10-14",
+  "code_commit": "620f5fc6b3629e274e4a70958059b01e3e015d8e",
+  "binary_sha256": "bc997d4852efa9ea840f7590bc531e5ec7152247b05d3bf3c1a89b658454d5b3",
+  "released_version_unchanged": "v.1.0.3-20261010",
+  "formal_hd_assets": 14,
+  "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
+  "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
+  "captures": [
+    {
+      "file": "hd-colony-zh.png",
+      "sha256": "84b3618a741f805c56411b011ca20f03bc18652ebd16ad7e0d3e6bb95c93c68b",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "colony",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 152200000,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-building009-formal-r45/gui-r2/gui.display-234.png",
+      "source_gui_check_sha256": "eaca9d7850f6edc412ba553dee72c4de32e131b1d3e4fae9dd2a6ece823dcaca",
+      "source_kind": "actual game presentation, verified byte-for-byte against the real X11 window game area",
+      "capture_pixels_unchanged": true
+    },
+    {
+      "file": "hd-world-zh.png",
+      "sha256": "eaabe1abff0a26653dfefbc9b90841fc2aa3179dadf4b422e30dc24055dd96de",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "world",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 69200000,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-building009-formal-r45/gui-r2/gui.display-074.png",
+      "source_gui_check_sha256": "eaca9d7850f6edc412ba553dee72c4de32e131b1d3e4fae9dd2a6ece823dcaca",
+      "source_kind": "actual game presentation, verified byte-for-byte against the real X11 window game area",
+      "capture_pixels_unchanged": true
+    },
+    {
+      "file": "noto-menu-zh.png",
+      "sha256": "58f0e7a46ec6d1970664e29e0ddcdffcf0f6c496a5bc2a5de76506554125534e",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "main-menu",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 21800000,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-building009-formal-r45/gui-r2/gui.display-034.png",
+      "source_gui_check_sha256": "eaca9d7850f6edc412ba553dee72c4de32e131b1d3e4fae9dd2a6ece823dcaca",
+      "source_kind": "actual game presentation, verified byte-for-byte against the real X11 window game area",
+      "capture_pixels_unchanged": true
+    },
+    {
+      "file": "display-settings-zh.png",
+      "sha256": "e429e44989d86f027272896ace0623167a3c7eede34ce5a121ac7d69641b02ff",
+      "size": [
+        1280,
+        848
+      ],
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-terrain079-r47/readme-settings-r1/restored/settings.png",
+      "source_check_sha256": "78bdf609f134dd3d369d57c12e5f848491ac000f16c2fbe31ddc190b8c8bb451",
+      "source_kind": "real X11 window screenshot, normal display-settings panel",
+      "capture_pixels_unchanged": true
+    }
+  ],
+  "limitations": [
+    "Development display layer; not included in the current release.",
+    "Four language fonts and five language selections do not establish complete five-language coverage.",
+    "Remaining terrain, people, animation and full HD are incomplete.",
+    "No generated concept images or DRAFT terrain prototypes used."
+  ]
+}

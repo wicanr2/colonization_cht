@@ -69,23 +69,24 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 
 ## 畫面
 
-![殖民百科的繁體中文皮衣廠說明與先決條件](docs/screenshots/colonizopedia-zh.png)
+以下是開發中的五語顯示層與 HD 畫面，尚未收進目前發行版。截圖來自實際遊戲視窗，
+來源與指紋見[截圖紀錄](docs/screenshots/readme-captures.json)。其他地形、人物與動畫仍在開發。
 
-殖民百科的皮衣廠條目：正文與先決條件已顯示中文，保留原版版畫。這是[正常玩家路徑驗證](docs/goals/180-pedia-remaining.md)的實際遊戲截圖。
+![繁體中文殖民地畫面與已接線的 HD 建築](docs/screenshots/hd-colony-zh.png)
 
-![Ebitengine 視窗中的繁體中文主選單](docs/screenshots/menu-zh.png)
+殖民地：中央市政大廳、其餘建築與景物已使用定稿的精細像素風；未接線區域保留原圖。
 
-主選單五列選項由原版印字事件觸發中文；原版大型標題維持英文。
+![繁體中文世界畫面與 HD 海洋](docs/screenshots/hd-world-zh.png)
 
-![Ebitengine 視窗中的繁體中文難度頁](docs/screenshots/difficulty-zh.png)
+世界畫面：海洋使用已驗證的 HD 圖塊，地形與其他單位逐項接續。
 
-難度頁：兩行標題依原版共同中心線排版，第一張卡片「發現者／最簡單」。
+![五語與原版、HD 圖像模式的顯示設定](docs/screenshots/display-settings-zh.png)
 
-![Ebitengine 視窗中的第一張國家旗卡](docs/screenshots/nation-card-first-zh.png)
+顯示設定：語言與圖像模式可獨立切換；開啟時暫停，關閉並放開按鍵後恢復。
 
-國家頁：旗卡兩行依原版字高分別用 21／25px，保留紅字黑影風格。這張截圖拍攝於國名改用說明書譯名之前，現行版本上欄是「英國：」。
+![使用 Noto 字型的繁體中文主選單](docs/screenshots/noto-menu-zh.png)
 
-四國介紹長文的早期版面對照：[A 頁](docs/screenshots/nation-intro-layout-draft-a.png)、[B 頁](docs/screenshots/nation-intro-layout-draft-b.png)（每列依序為原版與兩種中文候選）。
+主選單：繁中使用 Noto 字型，原版大型標題維持原貌。各欄位的翻譯與排版仍分別驗證。
 
 ## 開發與研究入口
 

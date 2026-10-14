@@ -5,6 +5,16 @@
 工作項目為[Issue #63](https://github.com/wicanr2/colonization_cht/issues/63)。
 本頁保留PHYS0.SS第148幀的研究歷史；正式行為只由2026-10-13節授權。
 
+R47第079幀隔離地形原型為DRAFT，只沿R46已驗來源做可丟棄顯示及定稿畫風候選。
+固定16×16／256點、part3位移16112、285bytes完整編碼為
+a8a861754068c86a9c150442f7b07f1fbd297d82b8e5dcb2e3ee108bde4dc84c；
+逐寫指紋為43e7c310e74049db1a05f0bb8349d79e74ebde3e0a7e95c085624e2808a8d54c。
+原版紀錄4F22:03F6、來源5388:000A，AX80；只接受已驗三個0D46寫入點、完整返回及3C50暫存畫布。
+隔離顯示只傳遞已驗0CBA:00CA的暫存至主畫布來源；背景RAM與主畫布副本不授予身分。
+未知後畫含同值撤銷，正常游標仍須逐筆來源證據；候選以正常世界DAC保持色塊布局，不新增物件或地標。
+輸出根為workplace/reports/goal186-display-hd/hd-terrain079-r47，正式十四種素材與玩法保持。
+未通過完整正常GUI、獨立模型與相同實際輸入狀態／音訊／存檔驗證前，不授予READY或正式HD。
+
 2026-10-14的R46世界地形研究仍為DRAFT。入口為本機
 workplace/reports/goal186-display-hd/hd-building009-formal-r45/prepare-terrain-r46.py，
 輸出至hd-terrain-source-catalog-r46。只唯讀盤點固定PHYS0.SS及TERRAIN.SS的完整編碼，
