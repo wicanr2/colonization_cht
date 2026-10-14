@@ -147,7 +147,12 @@ def main():
  group=p.add_mutually_exclusive_group(required=True);group.add_argument("--native",type=Path);group.add_argument("--gui",type=Path)
  p.add_argument("--formal",action="store_true",help="核對正式九來源的49點原版路徑")
  p.add_argument("--central",action="store_true",help="規格064 R44：獨立核對中央第009幀原型")
+ p.add_argument("--include-central",action="store_true",help="規格064 R44 READY：獨立核對十來源")
  a=p.parse_args();out=a.output.resolve()
+ need(not (a.central and a.include_central),"來源模式互斥")
+ if a.include_central:
+  ORDINALS=ORDINALS|{9}
+  need(read(a.model/"check.json").get("source_profile")=="ten-including-central009","模型來源模式不同")
  need(Path("/.dockerenv").is_file() and os.getuid()!=0 and out.is_relative_to("/out") and out.parent.stat().st_uid==os.getuid() and not out.exists(),"需新的非root本機輸出")
  if a.central:
   need(not a.formal,"中央來源仍為DRAFT原型");ORDINALS={9};RECEIPT_KEY="center"

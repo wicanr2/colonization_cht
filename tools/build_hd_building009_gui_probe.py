@@ -3,6 +3,7 @@ import argparse,hashlib,os,subprocess
 from pathlib import Path
 
 p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True)
+p.add_argument('--formal',action='store_true',help='規格064 R44 READY：驗證正式第009幀，不加原型旗標')
 a=p.parse_args();repo=Path(__file__).resolve().parents[1];dest=a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0
 assert dest.is_relative_to('/out') and dest.parent.stat().st_uid==os.getuid() and not dest.exists()
@@ -82,5 +83,50 @@ s=s.replace('["sea","person","shelter","nine"]','["sea","person","shelter","nine
 s=s.replace('PASS_FORMAL_NINE_FIVE_LANGUAGE_GUI','PASS_CENTER_PROTOTYPE_FIVE_LANGUAGE_GUI')
 s=s.replace('result["formal_entry"]','result["prototype_entry"]').replace('"prototype_flags": False','"prototype_flags": True')
 s=s.replace('正式十三種HD素材；限本批正常GUI與狀態抽樣，原型72點原版收據沿R42，正式同輸入重播另驗。','中央DRAFT及正式十三種素材；14點中央原始快照、五語恢復與同輸入重播另驗，不授予正式信用。')
+if a.formal:
+    one('        def open_settings():','''        def choose_setting(x,y,key,value):
+            if status().get("display",{}).get("draft",{}).get(key)==value:return
+            move(x,y);xdo("mousedown",1)
+            try:
+                wait(lambda state:state.get("display",{}).get("phase")==2 and state["display"]["draft"].get(key)==value,"設定草稿尚未選取："+key+"="+value)
+            finally:
+                xdo("mouseup",1)
+            time.sleep(0.08)
+
+        def open_settings():''')
+    one('                click(363 + 136 * LOCALES.index(locale), 374)\n                click(464 if graphics == "original" else 808, 480)', '                choose_setting(363 + 136 * LOCALES.index(locale),374,"language",locale)\n                choose_setting(464 if graphics == "original" else 808,480,"graphics",graphics)')
+    one('    command += ["--hd-center-prototype-assets",str(args.center_assets),"--hd-center-probe-root",str(center_root)]','    # 中央來源由既有正式來源群組載入。')
+    one('def center_mask(hd):','''def center_record(hd):
+    # 只投影既有第009項診斷，不新增正式觀測器或收據欄位。
+    nine=hd.get("nine") or {};source=nine.get("sources",{}).get("9")
+    if source is None:return {}
+    need(nine.get("formal") is True,"中央來源群組不是正式版本")
+    return dict(source,formal=True,sources={"9":source})
+
+def center_mask(hd):''')
+    s=s.replace('hd.get("center") or {}','center_record(hd)')
+    s=s.replace('hd.get("center",{})','center_record(hd)')
+    s=s.replace('c["native_live"].get("hd", {}).get("center",{})','center_record(c["native_live"].get("hd", {}))')
+    s=s.replace('center.get("prototype") is True','center.get("formal") is True')
+    s=s.replace('recovered["hd"]["center"]["painted"]','center_record(recovered["hd"])["painted"]')
+    start=s.index('        def center_snapshot(label,locale="zh-Hant"):')
+    end=s.index('        map_recoveries=[]',start)
+    s=s[:start]+'''        def center_snapshot(label,locale="zh-Hant"):
+            before=status()["step"]
+            def ready(state):
+                if state.get("step",0)<before+200000:return False
+                current=live(state);hd=current.get("hd") or {}
+                return current.get("locale")==locale and hd.get("reason")=="known-building" and center_record(hd).get("painted",0)>0
+            state=wait(ready,"正式中央來源未恢復："+label)
+            proof={"state":state,"frame":state["frame"],"formal_status_sample":True}
+            directory=center_root/label;directory.mkdir()
+            (directory/"check.json").write_text(json.dumps(proof,ensure_ascii=False)+"\\n")
+            return proof
+'''+s[end:]
+    s=s.replace('building-009-candidate-v1.png','building-009.png')
+    s=s.replace('PASS_CENTER_PROTOTYPE_FIVE_LANGUAGE_GUI','PASS_FORMAL_CENTER_FIVE_LANGUAGE_GUI')
+    s=s.replace('result["prototype_entry"]','result["formal_entry"]').replace('"prototype_flags": True','"prototype_flags": False')
+    s=s.replace('中央DRAFT及正式十三種素材；14點中央原始快照、五語恢復與同輸入重播另驗，不授予正式信用。','正式十四種素材；14筆中央現況診斷，原型原始快照沿R44；正式49點獨立模型與同輸入四側重播另驗。')
+    assert '--hd-center-' not in s and 'center-request.json' not in s
 compile(s,str(dest),'exec');dest.write_text(s)
 print('PASS_CENTER_GUI_PROBE_BUILD',hashlib.sha256(dest.read_bytes()).hexdigest(),flush=True)

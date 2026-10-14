@@ -1,4 +1,4 @@
-// 規格064 R42 READY：九來源正式HD顯示。
+// 規格064 R44 READY：城內十來源正式HD顯示。
 // 只觀測原版寫入及合成四倍畫布，不寫入DOS。
 package main
 
@@ -33,6 +33,7 @@ var hdNineFrames = []hdNineFrame{
 	{ordinal: 43, w: 44, h: 22, encodedLen: 546, opaque: 369, encodedSHA: "31756e82c00bdbbd5dee53414b08061e47bf102e87cc3d70beef9be0dd5116aa", writesSHA: "4e40c62f6fae8204e485ddd6207239cd3c9031ea0ff234660d4fd35c56dd362c", artSHA: "0d9ad7021e2ddf5a2062e6705ba0be869e4ac3781046262eec0b4984a371b928", file: "building-043.png", artW: 1774, artH: 887, sample: [4]int{12, 44, 1766, 852}, content: [4]int{0, 1, 44, 22}, writers: 7},
 	{ordinal: 44, w: 23, h: 27, encodedLen: 462, opaque: 262, encodedSHA: "f9bb3cc9064ce58f05443b8671a870d69fde96667e9a3dde1c24763b1c368332", writesSHA: "687fc5f1be762b2d8dea63c8f58ec52efa3234a6e5acc122bf225b4898116a8c", artSHA: "004fdb0045fc47653fd40beef438d0f2922933639a68c95a1d7b504ed908afed", file: "building-044.png", artW: 1158, artH: 1359, sample: [4]int{17, 21, 1138, 1323}, content: [4]int{0, 0, 23, 27}, writers: 6},
 	{ordinal: 45, w: 75, h: 48, encodedLen: 1591, opaque: 1069, encodedSHA: "129934aa9808419a2164569da49363b9a8c8486a0460fd9da876cb641b797de1", writesSHA: "4cd7ef3f6f68a770158bddf9b98b1797c5c204acfbe83596bfc6bfaa33517627", artSHA: "07049354109ff9bee01f103a2b408d227a607b8bba138cefc9de5af840f99915", file: "building-045.png", artW: 1568, artH: 1003, sample: [4]int{18, 0, 1568, 979}, content: [4]int{1, 0, 75, 48}, writers: 6},
+	{ordinal: 9, w: 53, h: 37, encodedLen: 1254, opaque: 1095, encodedSHA: "8900416036b739238f3d36ef0bd6de7c64cc92e2273658c866e233a328380d8c", writesSHA: "80e2c7b872906ce4fc27a12926b6a9be2a77c90f75c509f0524346254781f0d6", artSHA: "bc7057fa60db21a120f3d2fd81d59f7ae77cfa56ac351aa6df9d455f7bac29b6", file: "building-009.png", artW: 1500, artH: 1049, sample: [4]int{9, 57, 1490, 1004}, content: [4]int{0, 0, 53, 36}, writers: 6},
 }
 var hdNineWriterCodes = map[uint16][]byte{
 	0x181: {0x26, 0x88, 0x07, 0x03, 0x5e, 0xf0, 0x42, 0xfe, 0xcc, 0x74, 0x02, 0xeb, 0xe7, 0xeb, 0xd0, 0x3b},
@@ -74,13 +75,13 @@ func hdNineRead(path, want string, limit int64) ([]byte, error) {
 		return nil, err
 	}
 	if hash(raw) != want {
-		return nil, fmt.Errorf("九來源指紋不同：%s", path)
+		return nil, fmt.Errorf("城內來源指紋不同：%s", path)
 	}
 	return raw, nil
 }
 func loadHDNineRuntime(h *hdRuntime, game, directory string) (*hdNineRuntime, error) {
 	if h == nil || directory == "" {
-		return nil, fmt.Errorf("九來源需要既有HD及素材目錄")
+		return nil, fmt.Errorf("城內來源需要既有HD及素材目錄")
 	}
 	if _, err := hdNineRead(filepath.Join(game, "BUILDING.SS"), hdBuildingFileSHA, 8<<20); err != nil {
 		return nil, err
@@ -94,7 +95,7 @@ func loadHDNineRuntime(h *hdRuntime, game, directory string) (*hdNineRuntime, er
 		}
 		c, err := png.DecodeConfig(bytes.NewReader(raw))
 		if err != nil || c.Width != f.artW || c.Height != f.artH {
-			return nil, fmt.Errorf("九來源原圖尺寸不同：%d", f.ordinal)
+			return nil, fmt.Errorf("城內來源原圖尺寸不同：%d", f.ordinal)
 		}
 		im, err := png.Decode(bytes.NewReader(raw))
 		if err != nil {
@@ -102,7 +103,7 @@ func loadHDNineRuntime(h *hdRuntime, game, directory string) (*hdNineRuntime, er
 		}
 		a, b := f.sample, f.content
 		if a[0] < 0 || a[1] < 0 || a[2] <= a[0] || a[3] <= a[1] || a[2] > f.artW || a[3] > f.artH || b[0] < 0 || b[1] < 0 || b[2] <= b[0] || b[3] <= b[1] || b[2] > f.w || b[3] > f.h {
-			return nil, fmt.Errorf("九來源取樣邊界不同：%d", f.ordinal)
+			return nil, fmt.Errorf("城內來源取樣邊界不同：%d", f.ordinal)
 		}
 		f.art = image.NewRGBA(image.Rect(0, 0, f.w*4, f.h*4))
 		for y := b[1] * 4; y < b[3]*4; y++ {
@@ -220,7 +221,7 @@ func (p *hdNineRuntime) finish() {
 	f.accepted++
 	if p.trace {
 		if len(p.calls) >= 20000 {
-			panic("九來源繪製紀錄超限")
+			panic("城內來源繪製紀錄超限")
 		}
 		p.entry["return_step"] = p.h.m.Steps
 		p.entry["return_registers"] = p.h.m.CPU.R
@@ -281,7 +282,7 @@ func (p *hdNineRuntime) write(addr uint32, old, value byte) {
 						f.restores++
 						if p.trace {
 							if len(p.pairs) >= 200000 {
-								panic("九來源游標紀錄超限")
+								panic("城內來源游標紀錄超限")
 							}
 							p.pairs = append(p.pairs, map[string]any{"ordinal": f.ordinal, "step": m.Steps, "linear": addr, "source_cursor_index": k, "native": prior.cell.native, "local": prior.cell.local, "paint_old": prior.old, "paint_value": prior.value, "restore_old": old, "restore_value": value, "registers": m.CPU.R, "segments": m.CPU.Seg, "code16": fmt.Sprintf("%x", m.Mem[pc:pc+16])})
 						}

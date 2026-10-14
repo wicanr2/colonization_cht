@@ -31,7 +31,7 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 	m := golem.New()
 	before := bytes.Clone(m.Mem)
 	h, err := loadHDRuntime(m, game, assets)
-	if err != nil || h == nil || h.nine == nil || len(h.nine.frames) != 9 || h.shelter == nil || h.shelter.art.Bounds() != image.Rect(0, 0, 92, 108) || h.sea == nil || h.person == nil || h.person.art.Bounds() != image.Rect(0, 0, 24, 64) || h.sea.art.Bounds() != image.Rect(0, 0, 64, 64) || h.art.Bounds() != image.Rect(0, 0, 92, 108) || !bytes.Equal(before, m.Mem) {
+	if err != nil || h == nil || h.nine == nil || len(h.nine.frames) != 10 || h.shelter == nil || h.shelter.art.Bounds() != image.Rect(0, 0, 92, 108) || h.sea == nil || h.person == nil || h.person.art.Bounds() != image.Rect(0, 0, 24, 64) || h.sea.art.Bounds() != image.Rect(0, 0, 64, 64) || h.art.Bounds() != image.Rect(0, 0, 92, 108) || !bytes.Equal(before, m.Mem) {
 		t.Fatal("正式素材載入失敗或改寫原版", err)
 	}
 	mutations := map[string]func(string, string){
@@ -100,7 +100,7 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 					t.Fatal(err)
 				}
 			}
-			for _, n := range []string{"manifest.json", "building-032.png", "sea-148.png", "person-100.png", "building-024.png", "building-016.png", "building-021.png", "building-027.png", "building-035.png", "building-039.png", "building-042.png", "building-043.png", "building-044.png", "building-045.png"} {
+			for _, n := range []string{"manifest.json", "building-032.png", "sea-148.png", "person-100.png", "building-024.png", "building-016.png", "building-021.png", "building-027.png", "building-035.png", "building-039.png", "building-042.png", "building-043.png", "building-044.png", "building-045.png", "building-009.png"} {
 				if err := os.WriteFile(filepath.Join(a, n), readFile(filepath.Join(assets, n)), 0644); err != nil {
 					t.Fatal(err)
 				}

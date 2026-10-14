@@ -36,7 +36,7 @@ def main():
     results = []
     cases = ["missing-directory", "missing-image", "bad-image", "bad-manifest",
                  "missing-sea", "bad-sea", "linked-sea", "missing-person", "bad-person", "linked-person", "missing-shelter", "bad-shelter", "linked-shelter"]
-    cases += [kind+"-building-%03d"%n for n in [16,21,27,35,39,42,43,44,45] for kind in ["missing","bad","linked"]]
+    cases += [kind+"-building-%03d"%n for n in [16,21,27,35,39,42,43,44,45,9] for kind in ["missing","bad","linked"]]
     cases += ["restored"]
     for case in cases:
         out = root / case
@@ -71,7 +71,7 @@ def main():
         if case == "linked-shelter":
             (assets / "building-024.png").unlink()
             (assets / "building-024.png").symlink_to(args.bundle / "graphics/building-024.png")
-        for n in [16,21,27,35,39,42,43,44,45]:
+        for n in [16,21,27,35,39,42,43,44,45,9]:
             name="building-%03d.png"%n
             if case=="missing-building-%03d"%n: (assets/name).unlink()
             if case=="bad-building-%03d"%n: (assets/name).write_bytes(b"damaged")

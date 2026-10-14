@@ -190,11 +190,11 @@ def dependency_notices(binary, repo, target=("linux", "amd64")):
 def hd_asset_files(repo):
     """規格061／062／063／064 READY：只收已驗生成素材，逐項核對，拒絕額外檔案。"""
     root = repo / "graphics"
-    if root.is_symlink() or {p.name for p in root.iterdir()} != {"manifest.json", "building-032.png", "sea-148.png", "person-100.png", "building-024.png", "building-016.png", "building-021.png", "building-027.png", "building-035.png", "building-039.png", "building-042.png", "building-043.png", "building-044.png", "building-045.png"}:
+    if root.is_symlink() or {p.name for p in root.iterdir()} != {"manifest.json", "building-032.png", "sea-148.png", "person-100.png", "building-024.png", "building-016.png", "building-021.png", "building-027.png", "building-035.png", "building-039.png", "building-042.png", "building-043.png", "building-044.png", "building-045.png", "building-009.png"}:
         raise ValueError("HD素材目錄不同")
     files = {}
     for name, digest, limit in [
-            ("manifest.json", "5919f8a752627403de010a8e3f451bef571e29672af926767359fc3896df3c9d", 64 << 10),
+            ("manifest.json", "366cfa212ca72a2e0a90daf8540fe9c307f1948b8728244fde87126a2545593e", 64 << 10),
             ("building-032.png", "c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8", 8 << 20),
             ("sea-148.png", "2c5d3edc8d38e44dc02d7ccb88e79e4f749edd8a0b1d3dfd54ec04b467ba61ff", 8 << 20),
             ("person-100.png", "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346", 8 << 20),
@@ -207,7 +207,8 @@ def hd_asset_files(repo):
             ("building-042.png", "34f7ee08d3429ed6a6659b5c5eb6aa1ecfdf1656a814a494658368c475fdd8d4", 8 << 20),
             ("building-043.png", "0d9ad7021e2ddf5a2062e6705ba0be869e4ac3781046262eec0b4984a371b928", 8 << 20),
             ("building-044.png", "004fdb0045fc47653fd40beef438d0f2922933639a68c95a1d7b504ed908afed", 8 << 20),
-            ("building-045.png", "07049354109ff9bee01f103a2b408d227a607b8bba138cefc9de5af840f99915", 8 << 20)]:
+            ("building-045.png", "07049354109ff9bee01f103a2b408d227a607b8bba138cefc9de5af840f99915", 8 << 20),
+            ("building-009.png", "bc7057fa60db21a120f3d2fd81d59f7ae77cfa56ac351aa6df9d455f7bac29b6", 8 << 20)]:
         path = root / name
         if path.is_symlink() or not path.is_file() or path.stat().st_size > limit:
             raise ValueError("HD素材不是有界檔案：" + name)

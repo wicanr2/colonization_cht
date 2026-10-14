@@ -284,7 +284,7 @@ func TestHDNineRuntimeNativeLifecycle(t *testing.T) {
 	before := hash(m.Mem)
 	h, err := loadHDRuntime(m, game, assets)
 	need(err)
-	if h.nine == nil || len(h.nine.frames) != 9 || hash(m.Mem) != before {
+	if h.nine == nil || len(h.nine.frames) != 10 || hash(m.Mem) != before {
 		t.Fatal("九來源載入失敗或改寫DOS")
 	}
 	p := h.nine
@@ -427,7 +427,7 @@ func TestHDNineRuntimeNativeLifecycle(t *testing.T) {
 		need(m.Step())
 	}
 	capture()
-	if at != 49 || count != 53 || p.accepted != 120 || p.rejected != 0 {
+	if at != 49 || count != 53 || p.accepted != 130 || p.rejected != 0 {
 		t.Fatal("九來源原版路徑不同", at, count, p.accepted, p.rejected)
 	}
 	for _, f := range p.frames {

@@ -157,13 +157,19 @@ def main():
  p=argparse.ArgumentParser(description=__doc__)
  for name in ["observed","control","sources","output"]:p.add_argument("--"+name,type=Path,required=True)
  p.add_argument("--central",action="store_true",help="規格064 R44：核對固定中央第009幀")
+ p.add_argument("--include-central",action="store_true",help="規格064 R44 READY：核對十來源")
  a=p.parse_args();out=a.output.resolve()
+ need(not (a.central and a.include_central),"來源模式互斥")
+ if a.include_central:
+  ORDINALS=ORDINALS|{9};SOURCE_SHA="e9d02ec13b78477e1532a439bec6947475c5aa1b840f0f64812b70643f084ec6";SOURCE_DRAWS="first-draws.json"
+  need(sha_file(a.sources/SOURCE_DRAWS)=="bd50880b37aa584aa97d5298bb6d2acf021f0fc5bbb8a98b755d446800bd6777","固定首筆來源索引不同")
  if a.central:
   ORDINALS={9};SOURCE_MANIFEST="center-source.json";SOURCE_SHA="5a01957b852922b4680c8b25e44b8955218471fb6f1b840e2c158a7fb4612a5d";SOURCE_DRAWS="center-lifecycle-r1/observed/draws.json"
  need(Path("/.dockerenv").is_file() and os.getuid()!=0,"需非root容器")
  need((out.is_relative_to(Path("/out")) or out.is_relative_to(Path(__file__).resolve().parents[1]/"workplace")) and out.parent.stat().st_uid==os.getuid() and not out.exists(),"需新的本機輸出")
  out.mkdir();report=check(a.observed,a.control,a.sources,out);report["checker_sha256"]=sha(Path(__file__).read_bytes())
  if a.central:report["result"]="PASS_CENTER_INDEPENDENT_NATIVE_SOURCE_AND_CURSOR_MODEL"
+ if a.include_central:report["source_profile"]="ten-including-central009"
  report["receipts_sha256"]={str(p):sha_file(p) for p in [a.observed/"draws.json",a.observed/"writes.json",a.control/"draws.json",a.sources/SOURCE_MANIFEST]}
  target=out/"check.json";target.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n");print(report["result"],sha(target.read_bytes()),report["verified_cursor_restores"])
 if __name__=="__main__":

@@ -679,6 +679,67 @@
         "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
         "encoded_frame_sha256": "129934aa9808419a2164569da49363b9a8c8486a0460fd9da876cb641b797de1"
       }
+    },
+    "building-009.png": {
+      "spec": "docs/spec/064-hd-colony-building-batch.md",
+      "sha256": "bc7057fa60db21a120f3d2fd81d59f7ae77cfa56ac351aa6df9d455f7bac29b6",
+      "bytes": 1261636,
+      "size": [
+        1500,
+        1049
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        53,
+        37
+      ],
+      "target_size": [
+        212,
+        148
+      ],
+      "native_opaque_pixels": 1095,
+      "observed_native_rects": [
+        [
+          87,
+          11,
+          140,
+          48
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        9,
+        57,
+        1490,
+        1004
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        53,
+        36
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 1970,
+      "alpha_mass_total": 199272207,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells; geometry threshold does not alter painting alpha",
+      "generation_prompt": "Create ONE isolated game sprite for the approved Sid Meier's Colonization HD display project. Reference 1 is private original geometry and colors: BUILDING.SS frame 009, native 53 x 37, a two-story broad pale sandstone colonial civic building seen frontally from slightly above, a taller narrow central cupola/tower above the pitched brown roof, multiple dark windows and doors, small green shrubs at the two base corners. Reference 2 is the already accepted building-032 sprite and supplies pixel brushwork, material detail, edge treatment and palette style. Reference 3 is the user-approved refined pixel-art concept and supplies the exact overall art direction; use only its central civic building style, not its whole scene. Preserve reference 1's silhouette, facade width, story proportions, tower placement and slight view angle; keep the entire building and attached shrubs inside the composition. Draw a landscape transparent RGBA sprite with aspect ratio 53:37, approximately 1502x1047. Match the refined readable pixel clusters, warm sandstone, timber, brown roof tiles and restrained greens of references 2 and 3. No photorealism, no blur, no painted gradients, no outline glow, no shadow card, no text, no numbers, no watermark, no interface. No people, flags, separate units, other buildings, ground rectangle, scenery or opaque background: those are separate original layers. The building should fill almost the full canvas, with only a small even transparent margin. Keep crisp pixels and transparent gaps between shrubs and walls. Do not upscale the crude original pixels; redraw architectural detail in the established approved pixel style. This is a new independently drawn sprite, not a cropped copy of the original. Output exactly one transparent building.",
+      "reference_sha256": {
+        "native_geometry": "af96f6556c498e092a0e82126f2b3a9d825915a2b45a5c61c39c63b690361732",
+        "accepted_building032": "c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "BUILDING.SS",
+        "sha256": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "ordinal": 9,
+        "encoded_sha256": "8900416036b739238f3d36ef0bd6de7c64cc92e2273658c866e233a328380d8c",
+        "decoded_indexed_sha256": "58d60aef5735eb02687d5724a6719f3074d2da85296c1715b261dd8eddcba710",
+        "decoded_part3_offset": 10617,
+        "encoded_length": 1254
+      }
     }
   }
 }
