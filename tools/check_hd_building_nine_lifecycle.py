@@ -4,6 +4,9 @@ from collections import Counter
 from pathlib import Path
 
 ORDINALS={16,21,27,35,39,42,43,44,45}
+SOURCE_MANIFEST="source.json"
+SOURCE_SHA="a7457d86c0e587b8e06a2d94db0ade8c88a8167e4cf74a8d2910ff734f15be72"
+SOURCE_DRAWS="lifecycle-r1/observed/draws.json"
 CURSOR="47fced19d04987d3a0de8b6fd929abae6ba886939a2a7ce408b0213360ef1e03"
 COPY="f3a48ac82bf92bf103f303fafecc75f0"
 def need(value,message):
@@ -46,9 +49,9 @@ def event_stream(path):
    need(isinstance(value,dict) and count<=8000000,"事件型別或總數超限")
    yield value
 def check(observed,control,sources,output):
- manifest=read(sources/"source.json")
- need(sha((sources/"source.json").read_bytes())=="a7457d86c0e587b8e06a2d94db0ade8c88a8167e4cf74a8d2910ff734f15be72","R39來源清冊不同")
- old=read(sources/"lifecycle-r1/observed/draws.json")
+ manifest=read(sources/SOURCE_MANIFEST)
+ need(sha((sources/SOURCE_MANIFEST).read_bytes())==SOURCE_SHA,"固定來源清冊不同")
+ old=read(sources/SOURCE_DRAWS)
  first={n:next(c for c in old["calls"] if c["ordinal"]==n) for n in ORDINALS}
  rows={r["ordinal"]:r for r in manifest["sources"] if r["ordinal"] in ORDINALS}
  pixels={n:(sources/f"building-{n:03}.pixels").read_bytes() for n in ORDINALS}
@@ -150,13 +153,18 @@ def check(observed,control,sources,output):
  (output/"cursor-pairs.json").write_text(json.dumps(restores)+"\n")
  return {"result":"PASS_NINE_INDEPENDENT_NATIVE_SOURCE_AND_CURSOR_MODEL","source_calls":len(calls),"raw_events":event_count,"event_kinds":dict(kinds),"verified_cursor_restores":len(restores),"points":summaries,"production_connected":False,"ram_restorations_accepted":0,"unknown_backing_addresses_observed":len(backing),"input_sha256":proof["input_sha256"],"limitations":["原版來源模型；尚未授予新素材正式接線或新GUI信用。","RAM事件只記錄，未知後畫與未知游標不授予還原。"]}
 def main():
+ global ORDINALS,SOURCE_MANIFEST,SOURCE_SHA,SOURCE_DRAWS
  p=argparse.ArgumentParser(description=__doc__)
  for name in ["observed","control","sources","output"]:p.add_argument("--"+name,type=Path,required=True)
+ p.add_argument("--central",action="store_true",help="規格064 R44：核對固定中央第009幀")
  a=p.parse_args();out=a.output.resolve()
+ if a.central:
+  ORDINALS={9};SOURCE_MANIFEST="center-source.json";SOURCE_SHA="5a01957b852922b4680c8b25e44b8955218471fb6f1b840e2c158a7fb4612a5d";SOURCE_DRAWS="center-lifecycle-r1/observed/draws.json"
  need(Path("/.dockerenv").is_file() and os.getuid()!=0,"需非root容器")
  need((out.is_relative_to(Path("/out")) or out.is_relative_to(Path(__file__).resolve().parents[1]/"workplace")) and out.parent.stat().st_uid==os.getuid() and not out.exists(),"需新的本機輸出")
  out.mkdir();report=check(a.observed,a.control,a.sources,out);report["checker_sha256"]=sha(Path(__file__).read_bytes())
- report["receipts_sha256"]={str(p):sha_file(p) for p in [a.observed/"draws.json",a.observed/"writes.json",a.control/"draws.json",a.sources/"source.json"]}
+ if a.central:report["result"]="PASS_CENTER_INDEPENDENT_NATIVE_SOURCE_AND_CURSOR_MODEL"
+ report["receipts_sha256"]={str(p):sha_file(p) for p in [a.observed/"draws.json",a.observed/"writes.json",a.control/"draws.json",a.sources/SOURCE_MANIFEST]}
  target=out/"check.json";target.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n");print(report["result"],sha(target.read_bytes()),report["verified_cursor_restores"])
 if __name__=="__main__":
  try:main()

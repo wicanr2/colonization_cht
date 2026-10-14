@@ -3,6 +3,7 @@ import argparse,base64,hashlib,json,os,re
 from collections import Counter
 from pathlib import Path
 from check_hd_building_nine_lifecycle import ORDINALS,need,read,sha
+RECEIPT_KEY="nine"
 
 def read_native_state(path):
  """讀Go縮排報表的原版state；歷史畫格可很大，只讀有界尾端。"""
@@ -38,7 +39,7 @@ def image_check(path,proof):
   rect=item["safe"];a,b=rect["Min"],rect["Max"]
   draw.rectangle((a["X"]*4,a["Y"]*4,b["X"]*4-1,b["Y"]*4-1),fill=1)
  if hd.get("painted",0)>0:draw.rectangle((224,52,315,159),fill=1)
- for key in ["sea","person","shelter","nine"]:
+ for key in ["sea","person","shelter","nine","center"]:
   source=hd.get(key) or {}
   if not source:continue
   raw=base64.b64decode(source["mask"],validate=True);need(len(raw)==8000,"顯示來源遮罩長度不同")
@@ -51,7 +52,7 @@ def image_check(path,proof):
  outside=Image.composite(difference,Image.new("RGB",actual.size),safe.point(lambda v:0 if v else 255,"1"))
  need(outside.getbbox() is None,"正常恢復畫面越出來源或文字安全範圍")
  cursor_points=0
- if hd.get("painted",0)>0 or any((hd.get(k) or {}).get("painted",0)>0 for k in ["sea","person","shelter","nine"]):
+ if hd.get("painted",0)>0 or any((hd.get(k) or {}).get("painted",0)>0 for k in ["sea","person","shelter","nine","center"]):
   cursor=(path/"cursor-source").read_bytes()
   need(sha(cursor)=="47fced19d04987d3a0de8b6fd929abae6ba886939a2a7ce408b0213360ef1e03","HD快照使用未知游標")
   mouse=proof["state"]["dos_mouse"]
@@ -76,7 +77,9 @@ def traces(actual,proof,model):
   # 探針在Machine.Step之前讀取；正式同步掛鉤在Steps遞增後讀取。
   need(c["entry_step"]==o["entry_step"]+1 and c["return_step"]==o["return_step"]+1,"來源觀測步數基準不同")
  known={(r["step"],r["linear"]):r for r in read(model/"cursor-pairs.json")}
- pairs=[p for p in actual["cursor_pairs"] if p["step"]<=end];seen=set()
+ raw_pairs=actual["cursor_pairs"]
+ need(raw_pairs is None or isinstance(raw_pairs,list),"實際游標配對不是陣列")
+ pairs=[p for p in (raw_pairs or []) if p["step"]<=end];seen=set()
  for p in pairs:
   key=p["step"],p["linear"];need(key not in seen and key in known,"實際游標配對無原版事件");seen.add(key);r=known[key];e=r["event"];c=r["cell"]
   for k,v in [("ordinal",c["ordinal"]),("local",c["local"]),("native",c["native"]),("source_cursor_index",r["cursor"]),("restore_old",e["old"]),("restore_value",e["value"]),("paint_old",e["value"]),("paint_value",e["old"]),("registers",e["registers"]),("segments",e["segments"]),("code16",e["code16"])]:
@@ -102,7 +105,8 @@ def mask_cells(receipt,cells,oracle,canvas):
 
 def check(observed,model,native=None,gui=None):
  proof=read(observed/"draws.json");baseline=read(model/"check.json")
- need(baseline["result"]=="PASS_NINE_INDEPENDENT_NATIVE_SOURCE_AND_CURSOR_MODEL" and baseline["ram_restorations_accepted"]==0,"獨立模型未通過")
+ expected_model="PASS_CENTER_INDEPENDENT_NATIVE_SOURCE_AND_CURSOR_MODEL" if RECEIPT_KEY=="center" else "PASS_NINE_INDEPENDENT_NATIVE_SOURCE_AND_CURSOR_MODEL"
+ need(baseline["result"]==expected_model and baseline["ram_restorations_accepted"]==0,"獨立模型未通過")
  bound=[v for k,v in baseline["receipts_sha256"].items() if k.endswith("observed/draws.json")]
  need(bound==[sha((observed/"draws.json").read_bytes())],"獨立模型與本次原版收據不同")
  for point in baseline["points"]:
@@ -111,16 +115,16 @@ def check(observed,model,native=None,gui=None):
  if native:
   actual=read(native);need(len(actual["points"])==len(proof["checkpoints"]),"原型檢查點數不同")
   for i,p in enumerate(actual["points"]):
-   oracle=read(model/f"point-{i:03d}.nine-model.json");receipt=p["nine"]
+   oracle=read(model/f"point-{i:03d}.nine-model.json");receipt=p[RECEIPT_KEY]
    raw=base64.b64decode(receipt["mask"],validate=True)
    need(len(raw)==8000,"原型遮罩長度不同");cells={k:v for k,v in oracle.items() if raw[int(k)>>3]&(1<<(int(k)&7))}
    counts=mask_cells(receipt,cells,oracle,(observed/(proof["checkpoints"][i]["snapshot_prefix"]+".canvas")).read_bytes())
    need(p["original_state_equal"] and p["step"]==proof["checkpoints"][i]["steps"],"原型狀態或步數不同")
    summaries.append({"point":i,"by_ordinal":counts})
  else:
-  dirs=sorted((gui/"nine").glob("nine-*/check.json"),key=lambda p:(read(p)["state"]["step"],read(p)["state"]["dos_input_count"]))
-  need(len(dirs)==len(proof["checkpoints"]) and 27<=len(dirs)<=100,"正常GUI快照數不同")
-  actual=read(gui/"gui.nine.json")
+  dirs=sorted((gui/RECEIPT_KEY).glob(RECEIPT_KEY+"-*/check.json"),key=lambda p:(read(p)["state"]["step"],read(p)["state"]["dos_input_count"]))
+  need(len(dirs)==len(proof["checkpoints"]) and (3 if RECEIPT_KEY=="center" else 27)<=len(dirs)<=100,"正常GUI快照數不同")
+  actual=read(gui/("gui."+RECEIPT_KEY+".json"))
   for i,path in enumerate(dirs):
    p=read(path);state=p["state"];point=proof["checkpoints"][i];prefix=observed/point["snapshot_prefix"]
    for k in ["memory_sha256","indexed_sha256","palette_sha256","registers","segments","ip","flags","cycles","dos_input_count"]:
@@ -130,20 +134,25 @@ def check(observed,model,native=None,gui=None):
    need(len(memory)==(observed/"final.memory").stat().st_size and sha(memory)==point["memory_sha256"],"GUI完整RAM指紋或長度不同")
    for filename,suffix in [("canvas",".canvas"),("indexed",".idx"),("palette",".palette"),("cursor-source",".cursor"),("cursor-background",".cursor-background"),("cursor-final",".cursor-final")]:
     need((path.parent/filename).read_bytes()==Path(str(prefix)+suffix).read_bytes(),"GUI原始資料不同："+filename)
-   counts=mask_cells(p["nine"],p["cells"],read(model/f"point-{i:03d}.nine-model.json"),(path.parent/"canvas").read_bytes())
+   counts=mask_cells(p[RECEIPT_KEY],p["cells"],read(model/f"point-{i:03d}.nine-model.json"),(path.parent/"canvas").read_bytes())
    summaries.append({"point":i,"label":path.parent.name,"by_ordinal":counts,"image":image_check(path.parent,p)})
  result=traces(actual,proof,model)
- result.update({"result":"PASS_NINE_PROTOTYPE_INDEPENDENT_DISPLAY_COMPARISON","points":summaries,"mode":"native" if native else "normal-gui","production_connected":False,"ram_restorations_accepted":0,"model_sha256":sha((model/"check.json").read_bytes()),"prototype_sha256":sha(native.read_bytes() if native else (gui/"gui.nine.json").read_bytes())})
+ result.update({"result":"PASS_NINE_PROTOTYPE_INDEPENDENT_DISPLAY_COMPARISON","points":summaries,"mode":"native" if native else "normal-gui","production_connected":False,"ram_restorations_accepted":0,"model_sha256":sha((model/"check.json").read_bytes()),"prototype_sha256":sha(native.read_bytes() if native else (gui/("gui."+RECEIPT_KEY+".json")).read_bytes())})
  return result
 
 def main():
+ global ORDINALS,RECEIPT_KEY
  p=argparse.ArgumentParser(description=__doc__)
  for name in ["observed","model","output"]:p.add_argument("--"+name,type=Path,required=True)
  group=p.add_mutually_exclusive_group(required=True);group.add_argument("--native",type=Path);group.add_argument("--gui",type=Path)
  p.add_argument("--formal",action="store_true",help="核對正式九來源的49點原版路徑")
+ p.add_argument("--central",action="store_true",help="規格064 R44：獨立核對中央第009幀原型")
  a=p.parse_args();out=a.output.resolve()
  need(Path("/.dockerenv").is_file() and os.getuid()!=0 and out.is_relative_to("/out") and out.parent.stat().st_uid==os.getuid() and not out.exists(),"需新的非root本機輸出")
+ if a.central:
+  need(not a.formal,"中央來源仍為DRAFT原型");ORDINALS={9};RECEIPT_KEY="center"
  result=check(a.observed,a.model,a.native,a.gui);result["checker_sha256"]=sha(Path(__file__).read_bytes())
+ if a.central:result["result"]="PASS_CENTER_PROTOTYPE_INDEPENDENT_DISPLAY_COMPARISON"
  if a.formal:
   need(a.native is not None and read(a.native).get("production_connected") is True,"正式審查需要正式原版路徑收據")
   result.update(result="PASS_NINE_FORMAL_INDEPENDENT_DISPLAY_COMPARISON",production_connected=True)

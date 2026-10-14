@@ -5,6 +5,7 @@ from pathlib import Path
 p=argparse.ArgumentParser(description=__doc__)
 for name in ["inputs","points","output","reference"]:p.add_argument("--"+name,type=Path,required=True)
 p.add_argument("--end",type=int,help="可選正常輸入終點；不得早於檢查點或晚於輸入收據")
+p.add_argument("--central",action="store_true",help="規格064 R44：僅蒐證中央第009幀")
 a=p.parse_args();repo=Path(__file__).resolve().parents[1];out=a.output.resolve()
 sha=lambda b:hashlib.sha256(b).hexdigest()
 assert Path("/.dockerenv").is_file() and os.getuid()!=0
@@ -62,6 +63,15 @@ func (b *buildingObserver) closeEvents() {
  buildingNeed(b.eventLog.Flush());buildingNeed(b.eventFile.Close());b.eventLog=nil
 }
 '''
+if a.central:
+ s,count=re.subn(r'if buildingSources\[2\]\.Ordinal\s*!=\s*24\s*\{[^}]*\}', 'if len(buildingSources)!=1 || buildingSources[0].Ordinal!=9 {panic("中央固定來源不同")}', s)
+ assert count==1
+ start=s.index('var buildingSources = []buildingSource{');end=s.index('\n}\n',start)+2
+ s=s[:start]+'''var buildingSources = []buildingSource{
+ {9,53,37,1095,1254,"8900416036b739238f3d36ef0bd6de7c64cc92e2273658c866e233a328380d8c","58d60aef5735eb02687d5724a6719f3074d2da85296c1715b261dd8eddcba710",nil},
+}'''+s[end:]
+ s=s.replace('readonly-nine-building-cursor-source-research','readonly-central-009-cursor-source-research')
+ s=s.replace('Nine fixed sources; raw cursor evidence only, no production HD or unverified RAM restoration claim.','Frame 009 only; raw cursor evidence, no production HD or RAM restoration claim.')
 out.mkdir();(out/"points.json").write_bytes(raw);(out/"main.go").write_text(s)
 for name in ["go.mod","go.sum","go.work"]:shutil.copyfile(a.reference/name,out/name)
 subprocess.run(["gofmt","-w","main.go"],cwd=out,check=True,timeout=30)
@@ -72,5 +82,6 @@ meta={"kind":"DRAFT-nine-native-source-collector","ordinals":[16,21,27,35,39,42,
       "source_sha256":sha((out/"main.go").read_bytes()),"binary_sha256":sha((out/"nine-probe").read_bytes()),
       "source_base_sha256":sha(base.read_bytes()),"collector_transform_sha256":sha(template.encode())}
 meta.update({"event_storage":"streamed JSON array; no retained event table","event_limit":8000000})
+if a.central:meta.update(kind="DRAFT-central-009-native-source-collector",ordinals=[9])
 (out/"build.json").write_text(json.dumps(meta,indent=2)+"\n")
 print("PASS_NINE_NATIVE_COLLECTOR_BUILD",meta["binary_sha256"],flush=True)
