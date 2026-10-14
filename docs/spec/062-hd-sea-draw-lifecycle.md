@@ -15,6 +15,12 @@ a8a861754068c86a9c150442f7b07f1fbd297d82b8e5dcb2e3ee108bde4dc84c；
 輸出根為workplace/reports/goal186-display-hd/hd-terrain079-r47，正式十四種素材與玩法保持。
 未通過完整正常GUI、獨立模型與相同實際輸入狀態／音訊／存檔驗證前，不授予READY或正式HD。
 
+R47另以[RAM逐寫研究組裝器](../../tools/build_hd_terrain_ram_lifecycle_probe.py)、
+[獨立來源檢查器](../../tools/check_hd_terrain_ram_lifecycle.py)及
+[RAM反例工具](../../tools/test_hd_terrain_ram_lifecycle.py)追查存檔視窗還原。
+三者只授予研究信用，不由正式組裝器載入；原型是否加入RAM來源鏈另驗。
+使用方式與固定原版收據見本頁R47研究節。
+
 2026-10-14的R46世界地形研究仍為DRAFT。入口為本機
 workplace/reports/goal186-display-hd/hd-building009-formal-r45/prepare-terrain-r46.py，
 輸出至hd-terrain-source-catalog-r46。只唯讀盤點固定PHYS0.SS及TERRAIN.SS的完整編碼，
@@ -474,3 +480,89 @@ TERRAIN.SS沒有在本批0D46入口命中；舊完整像素定位只保留搜尋
 | check.json | 360bfca950e323a99635a77017dc0d8f92578d8d9988e5cd36a12b1f7fe90823 |
 | terrain-model-r2/check.json | 34a931c771f94f376bf72eab50e25a09c63ddddc3ebdd1cb8813ff10a4233e14 |
 | terrain-model-negatives-r1.json | f23ea7ebd82c2881e42f6057c5c50a1a7c084796f08f9685c8c75d4fd63547fe |
+
+## 2026-10-14 R47第079幀隔離顯示與RAM還原研究
+
+本節confirmed限固定原版與以下實際玩家輸入，仍為DRAFT。正式十四種素材保持。
+原版PHYS0.SS、VICEROY.EXE、來源清冊、dosgolem82a14b2及工具版本沿R46。
+位址沿dosgolem實模式CS:IP與20位元線性RAM；MADSPACK part3位移沿本頁首節。
+
+生成候選為原始1254×1254 RGBA，SHA-256為
+081ffb5506aa7aca0e80571053b85f0bdc920cb5e7884cf028521a1dd7ffaa58。
+原PNG沒有重新編碼，完整提示與參考指紋在本機terrain-079-candidate-v1.json。
+以像素中心最近鄰取樣64×64，只繪有效來源的4×4區塊；沒有新增地標或遊戲物件。
+本輪原型只接受暫存至主畫布及已驗游標配對，RAM來源尚未接入。
+
+| 驗證 | 限定結果 |
+| --- | --- |
+| 原型建置 | 44Go檔，正式41檔加三個隔離檔；建置、go vet及735Go零skip通過。 |
+| 原版正常路徑 | 原有53筆輸入／49點完整CPU、RAM、VGA、DAC與存檔相同；第079幀接受27次完整繪製，23反例通過。缺原版另驗五個明確skip。 |
+| 必要正常GUI | 72組五語原版／HD、288設定事件、2542個不透明游標像素及五語正常恢復通過；存檔與退出皆走原版操作。 |
+| 原始快照 | 16點完整原版狀態相同，14張實際HD各1129點，另兩張為存檔返回與退出確認的原版模式，內部來源各48點，不冒稱兩張也有HD。 |
+| 獨立來源與合成 | 69次十三來源繪製、108485事件及9532次暫存轉送重建；其中第079幀15次來源、6144筆真實游標還原與原型逐筆一致。14張HD有241696個可直接核對的輸出像素，其餘文字與不透明游標由安全區驗證。 |
+| 四側重播 | 76筆實際GUI輸入至165800000步。隔離即時、同版觀測、正式R45及原文控制的完整CPU、RAM、VGA、DAC、WAV與存檔全同。 |
+
+原型二進位為e1476ce6ba04623cc51ac62b880398d722a5bf01604671ef81adcb0f4403ac9e。
+四側RAM為7133b9243e280ed5c3bd91597a4aec422fadf67dc4e14c50b48f35563e0ed292，
+WAV為649358c48a23e5e09dd36a0477ddf364b8e2d741cde8202f051f4660c62213d0。
+音訊全等限技術輸出，不代替人耳或硬體逐週期驗收。
+四側終點為英文原版模式；14張實際HD另由前述完整狀態與逐像素驗證授予信用。
+
+原型回歸R1漏列正式海洋遮罩，修正測試後乾淨重跑735項通過。
+個別重驗曾漏設DISPLAY，補回同一工具鏈的Xvfb後通過，不列產品缺陷。
+完整GUI R1成功470組前綴，退出確認斷言錯把保留在背景的來源要求為0，該輪不計整體通過。
+原版確認框只覆寫自身矩形，未被覆寫的來源按既有規則保留；R2改驗72組地形必要流程，保留R1失敗。
+呼叫邊界沿既有check_hd_building_nine_display.py：外層beforeStep與內層掛鉤差1，
+來源為dosgolem internal/machine/machine.go的Steps++先於beforeInstruction。
+實際記憶體寫入、快照步數與原版狀態仍直接全等，沒有平移原始收據。
+
+### RAM研究的範圍與重生入口
+
+本段只授予唯讀來源研究信用。十三來源在原有53筆輸入／49點的275319事件中，
+獨立證實5886個主畫布至RAM保存、4370個RAM至主畫布還原及348筆已知游標還原。
+第079幀分別為2561個保存、1899個還原，另64筆游標還原。
+返回世界110600000步可恢復1129點，進城保持0點；原型此時仍只有48點。
+
+- 只接受原有0CBA:00CA及完整16bytes複製碼，逐byte核對實際DS:SI、ES:DI、
+  word內位移、16位元邊界、來源身分與原版色號。0C9F:00CA仍未接受。
+- 保存來源必須來自仍有效主畫布；RAM只保存身分，不能直接繪到畫面。
+  RAM的其他寫入含同值與緩衝重用都撤銷身分，不以地址或色號重新認領。
+- 十二個實際事件反例包含錯碼、錯位置、錯來源、錯舊值、錯目的、跨界、
+  過期值及RAM／主畫布未知同值覆寫。十項撤銷來源、兩項拒絕失真證據。
+  全部反例之後重跑正向，49份來源模型逐byte全等。
+
+公開工具入口見本頁首節。依AGENTS.md在既有Go與verification映像執行：
+
+1. build_hd_terrain_ram_lifecycle_probe.py以--sources指定R46來源根，
+   --inputs指定原有lifecycle-r29-r1/gui/gui.inputs.json，
+   --points指定lifecycle-public-r29-r1/observed/gui-points.json，
+   --reference指定既有Go模組，--output指定新的/out/ram-oracle-r1。
+   只接受固定53筆輸入及49點指紋，不接受任意座標或狀態注入。
+2. 執行該目錄的terrain-probe，傳--root /game、--seed合法COLONY09.SAV、
+   前述--inputs／--sources／--lifecycle-points；--out分別為observed及control，
+   控制側另加--control。原版與來源唯讀，只有/out與快取可寫。
+3. check_hd_terrain_ram_lifecycle.py以--observed、--control、--sources指定上述根，
+   --output /out/ram-model-r2；test_hd_terrain_ram_lifecycle.py以
+   --evidence-root /out、--sources指定R46根、--output指定新的反例目錄。
+   各工具的--help列出完整參數；缺少合法原版不得以替代檔通過。
+
+公開組裝器重生的Go來源及執行檔與已驗私有探針逐byte全等，指紋分別為
+94d2311b45ac66f3c097308b68f0fb372ff5fa119278e5d105c1e08843495717與
+d6c3bd688115c53e073fa442b79603f1b9394083bce0c6175ecff6f62eb60acb。
+公開檢查器及十二反例入口亦已實際重跑。
+
+後續隔離原型可依此證據加入第079幀RAM保存與還原，再驗正常GUI、未知覆寫、
+存檔返回1129點與相同實際輸入；這項DRAFT授權不改正式顯示或其他地形範圍。
+通過前不得授予READY或新增正式HD素材。
+本機根hd-terrain079-r47，commands-r47.json保存實際命令，final-audit-r47.json保存稽核。
+候選、原版參考、完整RAM、寫入事件、WAV與存檔仍只留本機。
+
+| 本機收據 | SHA-256 |
+| --- | --- |
+| build-check-r2.json | af513094335baa4a1ae874d69f9ebbfd86b560fc0e17c0d941270471c67f555e |
+| native-terrain079-r3/check.json | ad13eb728c865f5a28cd05932a31c3cb92e65c756a780ebccc8c2664544a2d2e |
+| gui-r2/check.json | 88e640e57b126eb60df5be0cc726705da5b2497c163e606ad6e74b555ffa9eb3 |
+| gui-display-check-r1.json | 663dcd6a95af4b4ed8e648ee27d101fe55301196fc60a9514af9f6cbac56ecb5 |
+| ram-model-public-r1/check.json | 43eb3182a7aba9a2d31ee3b969e63a4f5f1529fbdbedf61a0bda881a0c8a8518 |
+| ram-negatives-public-r1/check.json | 93dd0e0965ff5269b9a8264323cb2a9d45ad5c53c410abde3ef27bb562b9a308 |
+| replays-r1/check.json | dd50da578e7dc93b28a8b7f37c9c08cccf3e74dca9272290755cd39cb202186e |
