@@ -6200,3 +6200,33 @@ GUI原版模型101次十三來源；079的21次、9280筆來源游標還原及33
 | source-index-r2.json | 965abac7f6a61fee458ea7f72b22f26e7eb43d2b65316e37c378713bb0608b26 |
 
 本機根hd-terrain079-formal-r58，命令入口commands-r58.json。其他地形、未知游標、背景與動畫未完成，原版像素與執行收據只留本機。
+
+
+## 2026-10-15 R59一般游標來源與候選
+
+原版來源、工具版本、位址空間及原始資料鏈見[規格066](docs/spec/066-hd-standard-cursor.md)。
+本機根hd-cursor-source-r59，命令索引commands-r59.json。confirmed限固定原版與53筆正常輸入：
+EXE檔案常數載入、兩次CURSOR.SS第000幀的84點繪圖、各256筆來源RAM複製、
+49點一般游標的82個不透明點、來源熱點[0,0]與來源外像素均相同。
+觀測與控制的完整原版狀態及存檔相同；14項失真收據全拒絕，恢復正向通過。
+公開工具重生Go與二進位逐byte相同，未修改dosgolem或正式28份來源。
+
+R51的253轉255是離線位元組對照。此次原版資料流為先把17×17暫存底圖設為255，
+透明253不寫入，之後逐列複製左上16×16；沒有逐byte轉換253的原版操作。
+啟動時已由EXE常數載入同一游標，不能宣稱全部游標RAM只來自SS繪圖。
+
+兩張內建image_gen原PNG、alpha、完整提示及參考指紋只留本機。兩版完全替換量測均有128點缺口，
+保留失敗，不改alpha。原版游標底層加原alpha只作隔離合成預覽，尚未取得HD接線或GUI信用。
+收據檢查首輪於寫結果時把CURSOR.SS位元組變數與SS段暫存器混用；修正命名後通過。
+最後版本另直接核對49點原始指紋與明示滑鼠輸入，14反例以最終工具重跑通過。
+
+| 收據或候選 | SHA-256 |
+|---|---|
+| source-check-r4.json | bc5d0f8025fa62dffaf33f3f65ccc7a10a9eff37ba549b3537ae68ad855e04dd |
+| negatives-r3/check.json | fac770e792d57630e906c178d1e0ae0411727ce4a452397403c01931c9373044 |
+| lifecycle-r1/build.json | 7d7f4ca2536afd4daa8d11289c018afa0cb9934910a1378927eee99de5e8f245 |
+| reproduce-r2-check.json | 94c483124d1c2552bffd16111b04b9c47e6a27a59d6af669116ec19518834743 |
+| cursor-000-candidate-v1.png | d47a39d4f1cc70300a5dc9933165305b2c4b5c85b0e6104b1517950803994f16 |
+| cursor-000-candidate-v2.png | 2839ce6c635c16af668ce251807e2723ed343052ab12cfa29a9be04cd9dbd8d4 |
+| cursor-000-candidate-v1.json | 986945182c0d943b381137d8c58d3a3edde4afdc89fbd668258afe6435f90852 |
+| cursor-000-candidate-v2.json | 85fb68367de99228e8fdacf68bb71eb60df8e2d33220a18c43a033db9da78c18 |

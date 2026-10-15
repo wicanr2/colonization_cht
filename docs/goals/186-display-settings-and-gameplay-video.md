@@ -478,6 +478,14 @@ macOS 真機、音效卡與人耳驗收沿用現有限制，不能用 Linux／Wi
 
 ## 資產與繪圖觀測
 
+一般游標來源與候選合成見[規格066](../spec/066-hd-standard-cursor.md)。
+來源追查入口為[唯讀游標探針](../../tools/build_hd_cursor_lifecycle_probe.py)與
+[獨立收據檢查器](../../tools/check_hd_cursor_lifecycle.py)及
+[失真收據反例](../../tools/test_hd_cursor_lifecycle.py)。
+R59沿既有53筆正常輸入及49點原版收據，觀測CURSOR.SS第000幀的17×17暫存繪圖與
+一般游標RAM 0x1cd74至0x1ce74的逐寫。原始輸出只留本機hd-cursor-source-r59，
+此工具不安裝HD；來源資料流與熱點經證據審查前維持DRAFT。
+
 本機輸出根為`workplace/reports/goal186-display-hd/`，原版圖像與原始觀測不入Git。
 研究工具為[inventory_hd_assets.py](../../tools/inventory_hd_assets.py)、
 [locate_hd_assets.py](../../tools/locate_hd_assets.py)及
