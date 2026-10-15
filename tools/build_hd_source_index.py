@@ -10,6 +10,7 @@ parser.add_argument('--small-ram-root',type=Path,help='可選：R51小圖像RAM�
 parser.add_argument('--cursor-report',type=Path,help='可選：R59一般游標來源與定位收據')
 parser.add_argument('--cursor-ready-report',type=Path,help='與cursor-report一起使用的R60 READY審查收據')
 parser.add_argument('--cursor-conformed-report',type=Path,help='正式游標來源必附的R61限定CONFORMED審查收據')
+parser.add_argument('--terrain-batch-report',type=Path,help='可選：規格067的R62十三來源正常GUI逐寫審查，不授予HD信用')
 a=parser.parse_args();out=a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.parent.stat().st_uid==os.getuid() and not out.exists()
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -113,5 +114,24 @@ if a.cursor_report:
  if a.cursor_conformed_report:f['source_contract_reference']['conformance_review_sha256']=sha(a.cursor_conformed_report)
  f['standard_cursor_sample']={'native_source_report_sha256':sha(a.cursor_report),'ready_review_sha256':sha(a.cursor_ready_report),'source_calls':2,'native_positions':49,'runtime_bitmap_sha256':cursor['cursor_sha256'],'visible_opaque_cells':82,'input_origin':[0,0],'gui_snapshots':29,'edge_samples':9,'fully_clipped_edge_samples':1,'claim':'standard cursor only; other cursor sources and hidden states not granted coverage'}
  public['coverage_limits']['additional_ready_source_contracts']=sum(f.get('source_contract_reference',{}).get('state')=='READY' and not f.get('source_contract_reference',{}).get('formal_connected') for f in frames)
+if a.terrain_batch_report:
+ batch=json.loads(a.terrain_batch_report.read_bytes())
+ assert batch['result']=='PASS_TERRAIN_BATCH_NATIVE_SOURCE_RAM_AND_29_GUI_POINTS' and batch['original_state_and_saves_equal'] is True
+ assert batch['production_connected'] is False and batch['ready'] is False
+ assert batch['new_targets']==[6,9,17,66,71,74,77,78,80,96,147,150] and len(batch['sources'])==13 and len(batch['points'])==29
+ assert batch['source_calls']==101 and batch['raw_events']==194628 and batch['stage_main_transfers']==12823
+ assert batch['ram_saves']==5886 and batch['ram_restores']==4370 and batch['cursor_restores']==10012 and batch['dos_inputs']==109
+ for key,sample in batch['sources'].items():
+  ordinal=int(key);assert sample['ordinal']==ordinal
+  f=next(f for f in frames if f['file']=='PHYS0.SS' and f['ordinal']==ordinal)
+  assert f['file_sha256']=='deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16'
+  assert f['encoded_sha256']==sample['encoded_sha256'] and f['indexed_sha256']==sample['indexed_sha256'] and f['size']==sample['size']
+  assert f['opaque_pixels']==sample['opaque_cells'] and sample['draw_calls']>0 and sample['stage_main_transfers']>0 and sample['vga_visible_pixels']>0
+  f['terrain_batch_native_sample']=dict(sample,report_sha256=sha(a.terrain_batch_report),state='confirmed native source samples; no new HD or animation credit')
+  if sample['new_target']:
+   assert not f['formal_assets']
+   f['runtime_source_evidence']='confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths'
+   f['source_contract_reference']={'state':'DRAFT','spec':'docs/spec/067-hd-world-terrain-batch.md','formal_connected':False}
+ public['terrain_batch_native_evidence']={'report_sha256':sha(a.terrain_batch_report),'sources':13,'new_targets':batch['new_targets'],'checkpoints':29,'dos_inputs':109,'input_sha256':batch['input_sha256'],'source_calls':101,'stage_main_transfers':12823,'ram_saves':5886,'ram_restores':4370,'cursor_restores':10012,'production_connected':False,'claim':'native source evidence only; positive counts remain per ordinal; zero examples do not grant restore coverage'}
 out.write_text(json.dumps(public,ensure_ascii=False,indent=2)+'\n')
 print('PASS_METADATA_ONLY_FULL_SOURCE_INDEX',len(frames),len(bindings),sha(out),flush=True)

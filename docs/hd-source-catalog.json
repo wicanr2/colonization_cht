@@ -41395,7 +41395,7 @@
       "indexed_sha256": "265ff6845988a15f9abd23dc9f23e373d755705a940f90e11c1e98e094b17338",
       "opaque_pixels": 151,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -41421,6 +41421,44 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "terrain_batch_native_sample": {
+        "ordinal": 6,
+        "new_target": true,
+        "size": [
+          16,
+          16
+        ],
+        "opaque_cells": 151,
+        "encoded_sha256": "65c0a36189a83da3c0062523a5e5a5dcce699f92e5e06975efb47fc3aa22f139",
+        "indexed_sha256": "265ff6845988a15f9abd23dc9f23e373d755705a940f90e11c1e98e094b17338",
+        "encoded_length": 202,
+        "decoded_part3_offset": 753,
+        "record_far": "4F22:008A",
+        "source_far": "4FC8:000B",
+        "record_words": [
+          11,
+          20424,
+          111,
+          84,
+          16,
+          16
+        ],
+        "sorted_local_offset_value_sha256": "51b2eda7050e99e1f9e133d25f793bbcd03e89d3ab8ac9364f4f975d9d54d44f",
+        "draw_calls": 4,
+        "stage_main_transfers": 604,
+        "ram_saves": 367,
+        "ram_restores": 245,
+        "cursor_restores": 80,
+        "vga_visible_pixels": 4257,
+        "vga_visible_points": 29,
+        "report_sha256": "4774317a1df07bf762d1d08f483b7c87f202b3588baa363d60c62d2201d0eee8",
+        "state": "confirmed native source samples; no new HD or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "DRAFT",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": false
       }
     },
     {
@@ -41494,7 +41532,7 @@
       "indexed_sha256": "bab1a8907e5d0ba4b754f87182d91f037e46627e0eadaebc30c022bb21c57275",
       "opaque_pixels": 160,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -41526,6 +41564,44 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "terrain_batch_native_sample": {
+        "ordinal": 9,
+        "new_target": true,
+        "size": [
+          16,
+          16
+        ],
+        "opaque_cells": 160,
+        "encoded_sha256": "d7af5a9a9b2b5b1954d0ea51fcb3b77365de315303e01d6f6aca7a2cf5909ecc",
+        "indexed_sha256": "bab1a8907e5d0ba4b754f87182d91f037e46627e0eadaebc30c022bb21c57275",
+        "encoded_length": 237,
+        "decoded_part3_offset": 1338,
+        "record_far": "4F22:00AE",
+        "source_far": "4FED:0004",
+        "record_words": [
+          4,
+          20461,
+          162,
+          84,
+          16,
+          16
+        ],
+        "sorted_local_offset_value_sha256": "5e646786f9fb35e6cd8c354f945ba95252739fe23c670dba7e7f3fe9f6e349a4",
+        "draw_calls": 5,
+        "stage_main_transfers": 640,
+        "ram_saves": 480,
+        "ram_restores": 320,
+        "cursor_restores": 18,
+        "vga_visible_pixels": 4480,
+        "vga_visible_points": 28,
+        "report_sha256": "4774317a1df07bf762d1d08f483b7c87f202b3588baa363d60c62d2201d0eee8",
+        "state": "confirmed native source samples; no new HD or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "DRAFT",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": false
       }
     },
     {
@@ -41724,7 +41800,7 @@
       "indexed_sha256": "656b41e8a9e6f68b909c4f80ba2cf7d84476672841bad1330b4fe65da93d2ca5",
       "opaque_pixels": 75,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -41750,6 +41826,44 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "terrain_batch_native_sample": {
+        "ordinal": 17,
+        "new_target": true,
+        "size": [
+          16,
+          16
+        ],
+        "opaque_cells": 75,
+        "encoded_sha256": "58592e83a79b0bcb280784bd65936a68fef444c57b19cece50d2e71fc2190db3",
+        "indexed_sha256": "656b41e8a9e6f68b909c4f80ba2cf7d84476672841bad1330b4fe65da93d2ca5",
+        "encoded_length": 122,
+        "decoded_part3_offset": 2924,
+        "record_far": "4F22:010E",
+        "source_far": "5050:0006",
+        "record_words": [
+          6,
+          20560,
+          26,
+          101,
+          16,
+          16
+        ],
+        "sorted_local_offset_value_sha256": "a8f2456a57ffde5ccb733ffdef655ed473efa424a58c387878d5e4ab8031c031",
+        "draw_calls": 4,
+        "stage_main_transfers": 300,
+        "ram_saves": 185,
+        "ram_restores": 123,
+        "cursor_restores": 60,
+        "vga_visible_pixels": 2113,
+        "vga_visible_points": 29,
+        "report_sha256": "4774317a1df07bf762d1d08f483b7c87f202b3588baa363d60c62d2201d0eee8",
+        "state": "confirmed native source samples; no new HD or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "DRAFT",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": false
       }
     },
     {
@@ -42973,7 +43087,7 @@
       "indexed_sha256": "8f46dd5d87f4ee908c34f1a83c531d70ffe52523d4366916bf5bde4c9fe7c602",
       "opaque_pixels": 151,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -43011,6 +43125,44 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "terrain_batch_native_sample": {
+        "ordinal": 66,
+        "new_target": true,
+        "size": [
+          16,
+          16
+        ],
+        "opaque_cells": 151,
+        "encoded_sha256": "86a9dd1ffe2799af3b9ba6103bc17cbaf263ce971676bf9d7f9c1eaec260d2c9",
+        "indexed_sha256": "8f46dd5d87f4ee908c34f1a83c531d70ffe52523d4366916bf5bde4c9fe7c602",
+        "encoded_length": 206,
+        "decoded_part3_offset": 12996,
+        "record_far": "4F22:035A",
+        "source_far": "52C5:000E",
+        "record_words": [
+          14,
+          21189,
+          43,
+          152,
+          16,
+          16
+        ],
+        "sorted_local_offset_value_sha256": "f1f4bcfb1ddd5bf30048ec2cbbb703dabd819faf95c914f098996287ff95a4c7",
+        "draw_calls": 9,
+        "stage_main_transfers": 1073,
+        "ram_saves": 26,
+        "ram_restores": 24,
+        "cursor_restores": 0,
+        "vga_visible_pixels": 1428,
+        "vga_visible_points": 29,
+        "report_sha256": "4774317a1df07bf762d1d08f483b7c87f202b3588baa363d60c62d2201d0eee8",
+        "state": "confirmed native source samples; no new HD or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "DRAFT",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": false
       }
     },
     {
@@ -43134,7 +43286,7 @@
       "indexed_sha256": "db365180f64a2f0cb3e12ed12d993a8bde433d4b061fcb6cca705bae8b172fd6",
       "opaque_pixels": 182,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -43160,6 +43312,44 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "terrain_batch_native_sample": {
+        "ordinal": 71,
+        "new_target": true,
+        "size": [
+          16,
+          16
+        ],
+        "opaque_cells": 182,
+        "encoded_sha256": "57bffb18c0fbdb61bfc9a6a2ad75f0c1d5060a25dde8de12cc148c920249c3c7",
+        "indexed_sha256": "db365180f64a2f0cb3e12ed12d993a8bde433d4b061fcb6cca705bae8b172fd6",
+        "encoded_length": 250,
+        "decoded_part3_offset": 14103,
+        "record_far": "4F22:0396",
+        "source_far": "530B:0001",
+        "record_words": [
+          1,
+          21259,
+          128,
+          152,
+          16,
+          16
+        ],
+        "sorted_local_offset_value_sha256": "a4d9d152f8f87b714f112e519d955031dc9c4828b467c662b696265c1d7d9cf5",
+        "draw_calls": 4,
+        "stage_main_transfers": 456,
+        "ram_saves": 258,
+        "ram_restores": 201,
+        "cursor_restores": 40,
+        "vga_visible_pixels": 3249,
+        "vga_visible_points": 29,
+        "report_sha256": "4774317a1df07bf762d1d08f483b7c87f202b3588baa363d60c62d2201d0eee8",
+        "state": "confirmed native source samples; no new HD or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "DRAFT",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": false
       }
     },
     {
@@ -43233,7 +43423,7 @@
       "indexed_sha256": "6d760dbbc51e49db751b419d8bc0b0d654eb68dbec2446b6129012fc9656bb29",
       "opaque_pixels": 193,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -43271,6 +43461,44 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "terrain_batch_native_sample": {
+        "ordinal": 74,
+        "new_target": true,
+        "size": [
+          16,
+          16
+        ],
+        "opaque_cells": 193,
+        "encoded_sha256": "4e3dfc879acdb9a25612b04aba61bffa344436984b99459744ec3a7c274caa7a",
+        "indexed_sha256": "6d760dbbc51e49db751b419d8bc0b0d654eb68dbec2446b6129012fc9656bb29",
+        "encoded_length": 239,
+        "decoded_part3_offset": 14827,
+        "record_far": "4F22:03BA",
+        "source_far": "5338:0005",
+        "record_words": [
+          5,
+          21304,
+          179,
+          152,
+          16,
+          16
+        ],
+        "sorted_local_offset_value_sha256": "79bc77c90df9ab14e7a869084bc2f592f61fd7a9e7fe637f72a229e331a76cd7",
+        "draw_calls": 9,
+        "stage_main_transfers": 1544,
+        "ram_saves": 653,
+        "ram_restores": 489,
+        "cursor_restores": 0,
+        "vga_visible_pixels": 11030,
+        "vga_visible_points": 29,
+        "report_sha256": "4774317a1df07bf762d1d08f483b7c87f202b3588baa363d60c62d2201d0eee8",
+        "state": "confirmed native source samples; no new HD or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "DRAFT",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": false
       }
     },
     {
@@ -43344,7 +43572,7 @@
       "indexed_sha256": "9e966d21ac82fa80066a80dd0bfaa776dc43d94b7f39783c85f020d8b79aeb78",
       "opaque_pixels": 193,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -43370,6 +43598,44 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "terrain_batch_native_sample": {
+        "ordinal": 77,
+        "new_target": true,
+        "size": [
+          16,
+          16
+        ],
+        "opaque_cells": 193,
+        "encoded_sha256": "86d5a969c1d9678244d816f2c56b13da4712b34a2e1dabd4ae9c09bcea4ec3aa",
+        "indexed_sha256": "9e966d21ac82fa80066a80dd0bfaa776dc43d94b7f39783c85f020d8b79aeb78",
+        "encoded_length": 266,
+        "decoded_part3_offset": 15585,
+        "record_far": "4F22:03DE",
+        "source_far": "5367:000B",
+        "record_words": [
+          11,
+          21351,
+          230,
+          152,
+          16,
+          16
+        ],
+        "sorted_local_offset_value_sha256": "24f63b6bc14be91cf98cce2a20ef97cb4a1fd4be5d2ba286c342228b3de07523",
+        "draw_calls": 4,
+        "stage_main_transfers": 772,
+        "ram_saves": 146,
+        "ram_restores": 146,
+        "cursor_restores": 0,
+        "vga_visible_pixels": 5597,
+        "vga_visible_points": 29,
+        "report_sha256": "4774317a1df07bf762d1d08f483b7c87f202b3588baa363d60c62d2201d0eee8",
+        "state": "confirmed native source samples; no new HD or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "DRAFT",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": false
       }
     },
     {
@@ -43393,7 +43659,7 @@
       "indexed_sha256": "eb8c148968ef170a91c7e17765b3102668f2079d12d0cf89d530eef001d66ad8",
       "opaque_pixels": 225,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -43425,6 +43691,44 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "terrain_batch_native_sample": {
+        "ordinal": 78,
+        "new_target": true,
+        "size": [
+          16,
+          16
+        ],
+        "opaque_cells": 225,
+        "encoded_sha256": "92966f3b77aee2f8a5e416233dff74b56bcf6621a4faa6cf6cc9a9910a2aeb70",
+        "indexed_sha256": "eb8c148968ef170a91c7e17765b3102668f2079d12d0cf89d530eef001d66ad8",
+        "encoded_length": 261,
+        "decoded_part3_offset": 15851,
+        "record_far": "4F22:03EA",
+        "source_far": "5378:0005",
+        "record_words": [
+          5,
+          21368,
+          247,
+          152,
+          16,
+          16
+        ],
+        "sorted_local_offset_value_sha256": "cd0492871fe6d92d8973d42190ea8bae7c074e90d0a111ada0f520abe50cb9d9",
+        "draw_calls": 5,
+        "stage_main_transfers": 340,
+        "ram_saves": 255,
+        "ram_restores": 170,
+        "cursor_restores": 22,
+        "vga_visible_pixels": 2380,
+        "vga_visible_points": 28,
+        "report_sha256": "4774317a1df07bf762d1d08f483b7c87f202b3588baa363d60c62d2201d0eee8",
+        "state": "confirmed native source samples; no new HD or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "DRAFT",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": false
       }
     },
     {
@@ -43512,6 +43816,39 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "terrain_batch_native_sample": {
+        "ordinal": 79,
+        "new_target": false,
+        "size": [
+          16,
+          16
+        ],
+        "opaque_cells": 256,
+        "encoded_sha256": "a8a861754068c86a9c150442f7b07f1fbd297d82b8e5dcb2e3ee108bde4dc84c",
+        "indexed_sha256": "41da53cb53136e8615c0c81b268f96ecad4dcfc039d7b3e97d0a9e7e616c3191",
+        "encoded_length": 285,
+        "decoded_part3_offset": 16112,
+        "record_far": "4F22:03F6",
+        "source_far": "5388:000A",
+        "record_words": [
+          10,
+          21384,
+          264,
+          152,
+          16,
+          16
+        ],
+        "sorted_local_offset_value_sha256": "43e7c310e74049db1a05f0bb8349d79e74ebde3e0a7e95c085624e2808a8d54c",
+        "draw_calls": 21,
+        "stage_main_transfers": 4516,
+        "ram_saves": 2561,
+        "ram_restores": 1899,
+        "cursor_restores": 9792,
+        "vga_visible_pixels": 31505,
+        "vga_visible_points": 29,
+        "report_sha256": "4774317a1df07bf762d1d08f483b7c87f202b3588baa363d60c62d2201d0eee8",
+        "state": "confirmed native source samples; no new HD or animation credit"
       }
     },
     {
@@ -43535,7 +43872,7 @@
       "indexed_sha256": "c8014aec20f5cc41231efaef470374d449725a3ef3262aa3fe6e7d21404d0b2b",
       "opaque_pixels": 34,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -43573,6 +43910,44 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "terrain_batch_native_sample": {
+        "ordinal": 80,
+        "new_target": true,
+        "size": [
+          16,
+          16
+        ],
+        "opaque_cells": 34,
+        "encoded_sha256": "f0f7ebbf75102beef7e3e45bc64b1419dbfc70ba5e6d6c35f10e2e0280a78da4",
+        "indexed_sha256": "c8014aec20f5cc41231efaef470374d449725a3ef3262aa3fe6e7d21404d0b2b",
+        "encoded_length": 92,
+        "decoded_part3_offset": 16397,
+        "record_far": "4F22:0402",
+        "source_far": "539A:0007",
+        "record_words": [
+          7,
+          21402,
+          9,
+          169,
+          16,
+          16
+        ],
+        "sorted_local_offset_value_sha256": "ab082ea94902826d0ef024e25d3acc89253a9461f025d2b2de4284eaa72bfa7f",
+        "draw_calls": 9,
+        "stage_main_transfers": 222,
+        "ram_saves": 0,
+        "ram_restores": 0,
+        "cursor_restores": 0,
+        "vga_visible_pixels": 78,
+        "vga_visible_points": 13,
+        "report_sha256": "4774317a1df07bf762d1d08f483b7c87f202b3588baa363d60c62d2201d0eee8",
+        "state": "confirmed native source samples; no new HD or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "DRAFT",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": false
       }
     },
     {
@@ -43971,7 +44346,7 @@
       "indexed_sha256": "aa4166e53ede106e1880022a8cae7632ff135ea24891854e7a029a6a1424ef72",
       "opaque_pixels": 70,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -44003,6 +44378,44 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "terrain_batch_native_sample": {
+        "ordinal": 96,
+        "new_target": true,
+        "size": [
+          16,
+          16
+        ],
+        "opaque_cells": 70,
+        "encoded_sha256": "2d414662242d31b319f67f61cfc4932600676693dad7cf2fb0d1d286b4c28965",
+        "indexed_sha256": "aa4166e53ede106e1880022a8cae7632ff135ea24891854e7a029a6a1424ef72",
+        "encoded_length": 154,
+        "decoded_part3_offset": 17960,
+        "record_far": "4F22:04C2",
+        "source_far": "53FC:0002",
+        "record_words": [
+          2,
+          21500,
+          151,
+          33,
+          16,
+          16
+        ],
+        "sorted_local_offset_value_sha256": "90c153fe439ab6c9a24867877b88655f204396181c72cc5a549d34675db687ca",
+        "draw_calls": 9,
+        "stage_main_transfers": 232,
+        "ram_saves": 58,
+        "ram_restores": 58,
+        "cursor_restores": 0,
+        "vga_visible_pixels": 1682,
+        "vga_visible_points": 29,
+        "report_sha256": "4774317a1df07bf762d1d08f483b7c87f202b3588baa363d60c62d2201d0eee8",
+        "state": "confirmed native source samples; no new HD or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "DRAFT",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": false
       }
     },
     {
@@ -47046,7 +47459,7 @@
       "indexed_sha256": "26eeaa61725567020dab6720d99c1ab03eb631c162dc7ab1930c7d8208ad73f8",
       "opaque_pixels": 43,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -47078,6 +47491,44 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "terrain_batch_native_sample": {
+        "ordinal": 147,
+        "new_target": true,
+        "size": [
+          16,
+          16
+        ],
+        "opaque_cells": 43,
+        "encoded_sha256": "6b078a23571559f62ed3728e3e8164e154aeb332e0c95936676a02e9cb15b51d",
+        "indexed_sha256": "26eeaa61725567020dab6720d99c1ab03eb631c162dc7ab1930c7d8208ad73f8",
+        "encoded_length": 75,
+        "decoded_part3_offset": 21930,
+        "record_far": "4F22:0726",
+        "source_far": "54F4:0004",
+        "record_words": [
+          4,
+          21748,
+          253,
+          192,
+          16,
+          16
+        ],
+        "sorted_local_offset_value_sha256": "3b4ccd15362c12158cfacc192cadc8d0cab9bcd5bae5ef5694162f5fbe219e14",
+        "draw_calls": 5,
+        "stage_main_transfers": 172,
+        "ram_saves": 129,
+        "ram_restores": 86,
+        "cursor_restores": 0,
+        "vga_visible_pixels": 1204,
+        "vga_visible_points": 28,
+        "report_sha256": "4774317a1df07bf762d1d08f483b7c87f202b3588baa363d60c62d2201d0eee8",
+        "state": "confirmed native source samples; no new HD or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "DRAFT",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": false
       }
     },
     {
@@ -47957,7 +48408,7 @@
       "indexed_sha256": "4d6b7e594a8b6ef3c1874433a016566b06579460019ad821e2f796c1e6206777",
       "opaque_pixels": 175,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -48001,6 +48452,44 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "terrain_batch_native_sample": {
+        "ordinal": 150,
+        "new_target": true,
+        "size": [
+          16,
+          16
+        ],
+        "opaque_cells": 175,
+        "encoded_sha256": "9051788c9cf4265ce5dab6de028a5744be49d9680d412ca6b1d0320bcff2c415",
+        "indexed_sha256": "4d6b7e594a8b6ef3c1874433a016566b06579460019ad821e2f796c1e6206777",
+        "encoded_length": 245,
+        "decoded_part3_offset": 22516,
+        "record_far": "4F22:074A",
+        "source_far": "5518:000E",
+        "record_words": [
+          14,
+          21784,
+          287,
+          118,
+          16,
+          16
+        ],
+        "sorted_local_offset_value_sha256": "d9540b14bd294077b52ba00934122eb09a33ade47842991329262f54927807cc",
+        "draw_calls": 13,
+        "stage_main_transfers": 1952,
+        "ram_saves": 768,
+        "ram_restores": 609,
+        "cursor_restores": 0,
+        "vga_visible_pixels": 13993,
+        "vga_visible_points": 29,
+        "report_sha256": "4774317a1df07bf762d1d08f483b7c87f202b3588baa363d60c62d2201d0eee8",
+        "state": "confirmed native source samples; no new HD or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "DRAFT",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": false
       }
     },
     {
@@ -51550,5 +52039,33 @@
     },
     "production_connected": false,
     "claim": "RAM positive examples only ordinal 005; cursor positive examples 005 and 062; other frames not granted restoration coverage"
+  },
+  "terrain_batch_native_evidence": {
+    "report_sha256": "4774317a1df07bf762d1d08f483b7c87f202b3588baa363d60c62d2201d0eee8",
+    "sources": 13,
+    "new_targets": [
+      6,
+      9,
+      17,
+      66,
+      71,
+      74,
+      77,
+      78,
+      80,
+      96,
+      147,
+      150
+    ],
+    "checkpoints": 29,
+    "dos_inputs": 109,
+    "input_sha256": "63b8cc52610760adf4a63e4d8351a262d6c4007db45e3939f24ce94de1f20cfb",
+    "source_calls": 101,
+    "stage_main_transfers": 12823,
+    "ram_saves": 5886,
+    "ram_restores": 4370,
+    "cursor_restores": 10012,
+    "production_connected": false,
+    "claim": "native source evidence only; positive counts remain per ordinal; zero examples do not grant restore coverage"
   }
 }

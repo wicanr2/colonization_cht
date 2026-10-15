@@ -488,6 +488,9 @@ R59沿既有53筆正常輸入及49點原版收據，觀測CURSOR.SS第000幀的1
 834Go、92組五語GUI、九個邊界／恢復、29點獨立原版模型及109筆實際輸入四側通過。
 最新收據留本機hd-cursor-formal-r61；原型歷史沿R60保留，範圍與限制見規格066。
 
+後續十二種世界地形沿[規格067](../spec/067-hd-world-terrain-batch.md)進行逐來源驗證與可丟棄原型。
+來源與還原研究不增加正式HD數量；未達READY前不接入正式顯示路徑。
+
 本機輸出根為`workplace/reports/goal186-display-hd/`，原版圖像與原始觀測不入Git。
 研究工具為[inventory_hd_assets.py](../../tools/inventory_hd_assets.py)、
 [locate_hd_assets.py](../../tools/locate_hd_assets.py)及

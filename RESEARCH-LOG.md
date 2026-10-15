@@ -6290,3 +6290,17 @@ v2 metadata直接參考誤列定稿圖；原紀錄保留，新勘誤記錄原版
 | compat-r1-check.json | 055ef82e745c5d700a5b594cc7a6c6d68cff170a4654ec5335056ff25f48bb81 |
 | performance-play-r1-check.json | 7eba6cef324b2c1649d130d9d04e6c865d890292093e92909c903eb6801a71cb |
 | production-play-r1-check.json | 74c9498f253ead90925fa09f4e348107421cd388403646d8a817e65ba126a4f7 |
+
+
+## 2026-10-15 R62十二來源原版模型審查
+
+規格067 R62 DRAFT：十二種新世界地形及079對照的101次來源、194628事件與12823次轉送重建通過；29份模型與R61相同。5886 RAM保存、4370還原、10012游標配對逐來源列出。080無RAM還原正向例，七種無游標還原正向例；沒有外推。36項逐來源與既有12項RAM反例通過，29／49份正向模型再驗保持。尚無新美術或正式HD，正式數量保持46種。
+
+原版執行、工具版本與位址空間沿規格067及R61；本批沒有修改正式顯示來源或原版輸入。
+
+| 收據 | SHA-256 |
+|---|---|
+| source-r1/check.json | 4774317a1df07bf762d1d08f483b7c87f202b3588baa363d60c62d2201d0eee8 |
+| source-negatives-r2/check.json | c6c08c5e58c37f3e30f82dadee9c5bb3cc2562ed3765ca46b7dfc5d5f2d91cca |
+| default-49-negatives-r1/check.json | 84a720c982d2e95c27fc76f9c4f9be9a24b8f8595624b83617f2c5d79c9c2fe1 |
+| source-index-r1.json | 9f9bf08a5afb60c164be178e8ff994b84cc13a08629726a8b82e2004f6391dce |
