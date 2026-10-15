@@ -190,11 +190,11 @@ def dependency_notices(binary, repo, target=("linux", "amd64")):
 def hd_asset_files(repo):
     """規格061／062／063／064／065 READY：只收已驗生成素材，逐項核對，拒絕額外檔案。"""
     root = repo / "graphics"
-    if root.is_symlink() or {p.name for p in root.iterdir()} != {"manifest.json", "building-032.png", "sea-148.png", "person-100.png", "building-024.png", "building-016.png", "building-021.png", "building-027.png", "building-035.png", "building-039.png", "building-042.png", "building-043.png", "building-044.png", "building-045.png", "building-009.png", "icons-022.png", "icons-024.png", "icons-025.png", "icons-026.png", "icons-027.png"}:
+    if root.is_symlink() or {p.name for p in root.iterdir()} != {"manifest.json", "building-032.png", "sea-148.png", "person-100.png", "building-024.png", "building-016.png", "building-021.png", "building-027.png", "building-035.png", "building-039.png", "building-042.png", "building-043.png", "building-044.png", "building-045.png", "building-009.png", "icons-022.png", "icons-024.png", "icons-025.png", "icons-026.png", "icons-027.png", "icons-028.png", "icons-029.png", "icons-030.png", "icons-031.png", "icons-032.png", "icons-033.png", "icons-034.png", "icons-035.png", "icons-036.png", "icons-037.png", "icons-038.png"}:
         raise ValueError("HD素材目錄不同")
     files = {}
     for name, digest, limit in [
-            ("manifest.json", "06dd3d277926c6d291e39a88088a462d0cf445e364785474b81912491265c79c", 128 << 10),
+            ("manifest.json", "f472d22fe653386b349095405133fd2ad8b529dbb0d6a783762451af6ecfa6ab", 128 << 10),
             ("building-032.png", "c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8", 8 << 20),
             ("sea-148.png", "2c5d3edc8d38e44dc02d7ccb88e79e4f749edd8a0b1d3dfd54ec04b467ba61ff", 8 << 20),
             ("person-100.png", "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346", 8 << 20),
@@ -212,6 +212,17 @@ def hd_asset_files(repo):
             ("icons-025.png", "5856ff32bdf7ef16ad2a47f548313ea3e19009f4386ab82b9a51bb4cf81e1d6a", 8 << 20),
             ("icons-026.png", "27aa649ab52f07522d05608b53b39cfb0b7e5a974e69060f197b6ddcc6ae20b2", 8 << 20),
             ("icons-027.png", "02210ba22e632b688253442b8df6c89bb1d909308ac4174b3679ebdd58798dac", 8 << 20),
+            ("icons-028.png", "5ce1c6b9c5e01b95273bbc01bab79ec9f0441b93aabee89ca87385c129b14da1", 8 << 20),
+            ("icons-029.png", "24b862d6f3f1ca8157b03757803891566331006688ef9f45b75d75941ecd2216", 8 << 20),
+            ("icons-030.png", "c3b187d8aab2f608da297d4924846e9008dbd5344fa85d28f755ea5b43862ab9", 8 << 20),
+            ("icons-031.png", "71d212dfcdcca9dd6685196a1afe237784f7674409e2f24e914af811f131ef9c", 8 << 20),
+            ("icons-032.png", "ff9047b9f5f17e2f777146ca98e19b912e69e5a4258a0ddc9d94919a34d0a3f2", 8 << 20),
+            ("icons-033.png", "83255fe1b54a440377de39a9986eeb006c20a1ea1bec029285a0765be2a7cb83", 8 << 20),
+            ("icons-034.png", "31b17472008c841982e39c58661f12c6360fd43c69bb2162d9140dcaba69ab7e", 8 << 20),
+            ("icons-035.png", "016841a1ce6ee72170fb4a846e462eac95457c5491a2e6f00182aa67fb3d044b", 8 << 20),
+            ("icons-036.png", "43d1a5a0078f788d25583937514eba6d8eac8f96b398f4f950156d4c6e7bc5af", 8 << 20),
+            ("icons-037.png", "5ec0f2a0c3cdd4369d76899a93ffe675346ebf8b65cdf2ac4080956dbaffbd44", 8 << 20),
+            ("icons-038.png", "25eb4306ca4b8510b3cf6487106d138885048df5bfb6588bb39d08e7d16b29f5", 8 << 20),
             ("icons-022.png", "aa2230fc41fa34ccf782fd8b9c3311390add4c33bf380dd31099a63b3b5c44d8", 8 << 20),
             ("icons-024.png", "b4dfd073993baf0bfdeb2ebc54a8f729226fecda6f3ccbccc7c9bf2175740051", 8 << 20)]:
         path = root / name

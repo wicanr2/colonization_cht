@@ -995,6 +995,567 @@
         "encoded_sha256": "d8ddf9a6bb0f6a136552ce621772a112bfc6a776c809d492b72c02bf7ec3c9dd",
         "encoded_length": 52
       }
+    },
+    "icons-028.png": {
+      "spec": "docs/spec/065-hd-small-images.md",
+      "sha256": "5ce1c6b9c5e01b95273bbc01bab79ec9f0441b93aabee89ca87385c129b14da1",
+      "bytes": 293323,
+      "size": [
+        1145,
+        1374
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        10,
+        12
+      ],
+      "target_size": [
+        40,
+        48
+      ],
+      "native_opaque_pixels": 75,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        293,
+        453,
+        848,
+        939
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        10,
+        11
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 15646,
+      "alpha_mass_total": 54546956,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: stylized-concept\nAsset type: one isolated small sprite for the approved fine-pixel-art HD display overlay of a historical strategy game.\nInput image 1: exact original identity, orientation, silhouette, proportions and color-placement reference. Input image 2: approved detailed pixel-art style only; do not copy its scenery, buildings or people.\nFreshly redraw ONLY the compact gray mineral mass enclosed by the same brown and olive jagged outline, preserving the original upper brown region, central gray region, lower brown feet and exact silhouette. Preserve viewpoint and overall occupied shape. Final use is 40 by 48 pixels. Use crisp stepped hand-placed pixel clusters and restrained material shading, matching the approved muted natural palette. This is a tiny functional game sprite, not a scene or concept illustration. Add readable fine texture inside the original subject, while keeping its original identity.\nComplete single sprite centered with generous genuinely transparent RGBA padding. Sharp solid opaque object interior and crisp pixel-art edges. No glow, halo, bloom, translucent fog, blur, soft focus, lighting aura or cast shadow. Keep all negative-space gaps transparent. Do not draw a background, ground, container, pedestal, scenery, border, text, label or watermark. No extra objects. Preserve the original silhouette and the main color organization in the first reference.",
+      "reference_sha256": {
+        "native_geometry": "e2e9ffeafaf69a94696fef3393b3abdcfed1070a69cd9ad602e92e976222db3b",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 28,
+        "encoded_sha256": "e78a0131f19d3ec3298909ba1600067b7fd44ca23787c4656545d283e4ce1e7f",
+        "encoded_length": 97
+      }
+    },
+    "icons-029.png": {
+      "spec": "docs/spec/065-hd-small-images.md",
+      "sha256": "24b862d6f3f1ca8157b03757803891566331006688ef9f45b75d75941ecd2216",
+      "bytes": 196635,
+      "size": [
+        1145,
+        1374
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        10,
+        12
+      ],
+      "target_size": [
+        40,
+        48
+      ],
+      "native_opaque_pixels": 40,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        331,
+        551,
+        845,
+        860
+      ],
+      "native_content_rect": [
+        0,
+        3,
+        10,
+        9
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 11311,
+      "alpha_mass_total": 25685503,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: stylized-concept\nAsset type: one isolated small sprite for the approved fine-pixel-art HD display overlay of a historical strategy game.\nInput image 1: exact original identity, orientation, silhouette, proportions and color-placement reference. Input image 2: approved detailed pixel-art style only; do not copy its scenery, buildings or people.\nFreshly redraw ONLY the small low silver-white mineral nugget with darker gray facets, matching the original slope and left-facing pointed end. Preserve viewpoint and overall occupied shape. Final use is 40 by 48 pixels. Use crisp stepped hand-placed pixel clusters and restrained material shading, matching the approved muted natural palette. This is a tiny functional game sprite, not a scene or concept illustration. Add readable fine texture inside the original subject, while keeping its original identity.\nComplete single sprite centered with generous genuinely transparent RGBA padding. Sharp solid opaque object interior and crisp pixel-art edges. No glow, halo, bloom, translucent fog, blur, soft focus, lighting aura or cast shadow. Keep all negative-space gaps transparent. Do not draw a background, ground, container, pedestal, scenery, border, text, label or watermark. No extra objects. Preserve the original silhouette and the main color organization in the first reference.",
+      "reference_sha256": {
+        "native_geometry": "2a6e420db2b2a1c5796c346ec031edc9ec76eb39dee92a307ff9ddc2fac2696e",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 29,
+        "encoded_sha256": "0a7085d1f07d4511d3ae49b380e738287f7374ba320ffb6a7da165c1f99e59ae",
+        "encoded_length": 63
+      }
+    },
+    "icons-030.png": {
+      "spec": "docs/spec/065-hd-small-images.md",
+      "sha256": "c3b187d8aab2f608da297d4924846e9008dbd5344fa85d28f755ea5b43862ab9",
+      "bytes": 347631,
+      "size": [
+        1305,
+        1205
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        13,
+        12
+      ],
+      "target_size": [
+        52,
+        48
+      ],
+      "native_opaque_pixels": 104,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        331,
+        294,
+        1000,
+        977
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        13,
+        12
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 9991,
+      "alpha_mass_total": 57136501,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: stylized-concept\nAsset type: one isolated small sprite for the approved fine-pixel-art HD display overlay of a historical strategy game.\nInput image 1: exact original identity, orientation, silhouette, proportions and color-placement reference. Input image 2: approved detailed pixel-art style only; do not copy its scenery, buildings or people.\nFreshly redraw ONLY the small white horse facing right with raised head, dark gray mane, leftward tail and the original leg stance and silhouette. Preserve viewpoint and overall occupied shape. Final use is 52 by 48 pixels. Use crisp stepped hand-placed pixel clusters and restrained material shading, matching the approved muted natural palette. This is a tiny functional game sprite, not a scene or concept illustration. Add readable fine texture inside the original subject, while keeping its original identity.\nComplete single sprite centered with generous genuinely transparent RGBA padding. Sharp solid opaque object interior and crisp pixel-art edges. No glow, halo, bloom, translucent fog, blur, soft focus, lighting aura or cast shadow. Keep all negative-space gaps transparent. Do not draw a background, ground, container, pedestal, scenery, border, text, label or watermark. No extra objects. Preserve the original silhouette and the main color organization in the first reference.",
+      "reference_sha256": {
+        "native_geometry": "382c6ef600a259fc4db41b6d0baa8eb9609e5a808ab219fd057ad889ebc703a3",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 30,
+        "encoded_sha256": "bf986fecd7c189b113fbb012e79ce825a55efa06c931bf10743587e2c7921db6",
+        "encoded_length": 147
+      }
+    },
+    "icons-031.png": {
+      "spec": "docs/spec/065-hd-small-images.md",
+      "sha256": "71d212dfcdcca9dd6685196a1afe237784f7674409e2f24e914af811f131ef9c",
+      "bytes": 205459,
+      "size": [
+        960,
+        1639
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        7,
+        12
+      ],
+      "target_size": [
+        28,
+        48
+      ],
+      "native_opaque_pixels": 64,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        324,
+        530,
+        636,
+        1132
+      ],
+      "native_content_rect": [
+        0,
+        1,
+        7,
+        12
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 14825,
+      "alpha_mass_total": 35212517,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: stylized-concept\nAsset type: one isolated small sprite for the approved fine-pixel-art HD display overlay of a historical strategy game.\nInput image 1: exact original identity, orientation, silhouette, proportions and color-placement reference. Input image 2: approved detailed pixel-art style only; do not copy its scenery, buildings or people.\nFreshly redraw ONLY the upright dark brown glass bottle with its short neck and blue band around the lower middle, in the exact original front three-quarter view. Preserve viewpoint and overall occupied shape. Final use is 28 by 48 pixels. Use crisp stepped hand-placed pixel clusters and restrained material shading, matching the approved muted natural palette. This is a tiny functional game sprite, not a scene or concept illustration. Add readable fine texture inside the original subject, while keeping its original identity.\nComplete single sprite centered with generous genuinely transparent RGBA padding. Sharp solid opaque object interior and crisp pixel-art edges. No glow, halo, bloom, translucent fog, blur, soft focus, lighting aura or cast shadow. Keep all negative-space gaps transparent. Do not draw a background, ground, container, pedestal, scenery, border, text, label or watermark. No extra objects. Preserve the original silhouette and the main color organization in the first reference.",
+      "reference_sha256": {
+        "native_geometry": "fa50a96873934bf7ce7db0af2dbba415d321cba8b543f4067aff7f075bb67147",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 31,
+        "encoded_sha256": "f1cd09ddfe77071ae2056a71500fec06b6a5a81495836795759250a9d483c827",
+        "encoded_length": 94
+      }
+    },
+    "icons-032.png": {
+      "spec": "docs/spec/065-hd-small-images.md",
+      "sha256": "ff9047b9f5f17e2f777146ca98e19b912e69e5a4258a0ddc9d94919a34d0a3f2",
+      "bytes": 173837,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        9,
+        12
+      ],
+      "target_size": [
+        36,
+        48
+      ],
+      "native_opaque_pixels": 44,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        475,
+        366,
+        612,
+        1083
+      ],
+      "native_content_rect": [
+        3,
+        0,
+        7,
+        12
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 34216,
+      "alpha_mass_total": 24609961,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: stylized-concept\nAsset type: one isolated small sprite for the approved fine-pixel-art HD display overlay of a historical strategy game.\nInput image 1: exact original identity, orientation, silhouette, proportions and color-placement reference. Input image 2: approved detailed pixel-art style only; do not copy its scenery, buildings or people.\nFreshly redraw ONLY the single upright brown cigar with a green band, preserving the narrow vertical proportions and original tip orientation. Preserve viewpoint and overall occupied shape. Final use is 36 by 48 pixels. Use crisp stepped hand-placed pixel clusters and restrained material shading, matching the approved muted natural palette. This is a tiny functional game sprite, not a scene or concept illustration. Add readable fine texture inside the original subject, while keeping its original identity.\nComplete single sprite centered with generous genuinely transparent RGBA padding. Sharp solid opaque object interior and crisp pixel-art edges. No glow, halo, bloom, translucent fog, blur, soft focus, lighting aura or cast shadow. Keep all negative-space gaps transparent. Do not draw a background, ground, container, pedestal, scenery, border, text, label or watermark. No extra objects. Preserve the original silhouette and the main color organization in the first reference.",
+      "reference_sha256": {
+        "native_geometry": "8713b5a271a3879487cb1aecaf0729e34d190af9d1926da75fbbd194ccada23e",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 32,
+        "encoded_sha256": "e45ae24d8df524f594dac9c068312b3977f75440e031f2fa89f4471662dc554a",
+        "encoded_length": 103
+      }
+    },
+    "icons-033.png": {
+      "spec": "docs/spec/065-hd-small-images.md",
+      "sha256": "83255fe1b54a440377de39a9986eeb006c20a1ea1bec029285a0765be2a7cb83",
+      "bytes": 1048944,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        12
+      ],
+      "target_size": [
+        32,
+        48
+      ],
+      "native_opaque_pixels": 68,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        335,
+        474,
+        693,
+        1103
+      ],
+      "native_content_rect": [
+        0,
+        1,
+        8,
+        12
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 28219,
+      "alpha_mass_total": 45139106,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: stylized-concept\nAsset type: one isolated small sprite for the approved fine-pixel-art HD display overlay of a historical strategy game.\nInput image 1: exact original identity, orientation, silhouette, proportions and color-placement reference. Input image 2: approved detailed pixel-art style only; do not copy its scenery, buildings or people.\nFreshly redraw ONLY the upright folded or rolled light gray-white cloth with tan edging, in the same narrow vertical silhouette with stepped folds. Preserve viewpoint and overall occupied shape. Final use is 32 by 48 pixels. Use crisp stepped hand-placed pixel clusters and restrained material shading, matching the approved muted natural palette. This is a tiny functional game sprite, not a scene or concept illustration. Add readable fine texture inside the original subject, while keeping its original identity.\nComplete single sprite centered with generous genuinely transparent RGBA padding. Sharp solid opaque object interior and crisp pixel-art edges. No glow, halo, bloom, translucent fog, blur, soft focus, lighting aura or cast shadow. Keep all negative-space gaps transparent. Do not draw a background, ground, container, pedestal, scenery, border, text, label or watermark. No extra objects. Preserve the original silhouette and the main color organization in the first reference.",
+      "reference_sha256": {
+        "native_geometry": "6f3473de242ae99ad923dd2f5cefe1a495f246945f32549b5fe05f622ae3239a",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 33,
+        "encoded_sha256": "664a76510ae1b7d580f06764e036b93ea59bd8005af46e2338f05d9681d9582e",
+        "encoded_length": 97
+      }
+    },
+    "icons-034.png": {
+      "spec": "docs/spec/065-hd-small-images.md",
+      "sha256": "31b17472008c841982e39c58661f12c6360fd43c69bb2162d9140dcaba69ab7e",
+      "bytes": 929552,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        12
+      ],
+      "target_size": [
+        32,
+        48
+      ],
+      "native_opaque_pixels": 80,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        320,
+        400,
+        704,
+        1136
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        8,
+        12
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 7633,
+      "alpha_mass_total": 56110754,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: stylized-concept\nAsset type: one isolated small sprite for the approved fine-pixel-art HD display overlay of a historical strategy game.\nInput image 1: exact original identity, orientation, silhouette, proportions and color-placement reference. Input image 2: approved detailed pixel-art style only; do not copy its scenery, buildings or people.\nFreshly redraw ONLY the long upright tan coat with darker collar and simple sleeve shoulders, preserving the original front view, length and silhouette. Preserve viewpoint and overall occupied shape. Final use is 32 by 48 pixels. Use crisp stepped hand-placed pixel clusters and restrained material shading, matching the approved muted natural palette. This is a tiny functional game sprite, not a scene or concept illustration. Add readable fine texture inside the original subject, while keeping its original identity.\nComplete single sprite centered with generous genuinely transparent RGBA padding. Sharp solid opaque object interior and crisp pixel-art edges. No glow, halo, bloom, translucent fog, blur, soft focus, lighting aura or cast shadow. Keep all negative-space gaps transparent. Do not draw a background, ground, container, pedestal, scenery, border, text, label or watermark. No extra objects. Preserve the original silhouette and the main color organization in the first reference.",
+      "reference_sha256": {
+        "native_geometry": "27e1cd545763e7694a5c261e95a1adac06b1d069406a36c8b10ce8ffc8530bc4",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 34,
+        "encoded_sha256": "85f9d697d6c3524c320269cd2938c157f29c16fce3d8690dc9a82c492f8de9b4",
+        "encoded_length": 108
+      }
+    },
+    "icons-035.png": {
+      "spec": "docs/spec/065-hd-small-images.md",
+      "sha256": "016841a1ce6ee72170fb4a846e462eac95457c5491a2e6f00182aa67fb3d044b",
+      "bytes": 240157,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        9,
+        12
+      ],
+      "target_size": [
+        36,
+        48
+      ],
+      "native_opaque_pixels": 55,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        315,
+        543,
+        821,
+        977
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        9,
+        10
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 62489,
+      "alpha_mass_total": 39948043,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: stylized-concept\nAsset type: one isolated small sprite for the approved fine-pixel-art HD display overlay of a historical strategy game.\nInput image 1: exact original identity, orientation, silhouette, proportions and color-placement reference. Input image 2: approved detailed pixel-art style only; do not copy its scenery, buildings or people.\nFreshly redraw ONLY the two adjoining ochre-brown block-shaped goods, lower block at front left and taller block at back right, preserving the reference arrangement and outline. Preserve viewpoint and overall occupied shape. Final use is 36 by 48 pixels. Use crisp stepped hand-placed pixel clusters and restrained material shading, matching the approved muted natural palette. This is a tiny functional game sprite, not a scene or concept illustration. Add readable fine texture inside the original subject, while keeping its original identity.\nComplete single sprite centered with generous genuinely transparent RGBA padding. Sharp solid opaque object interior and crisp pixel-art edges. No glow, halo, bloom, translucent fog, blur, soft focus, lighting aura or cast shadow. Keep all negative-space gaps transparent. Do not draw a background, ground, container, pedestal, scenery, border, text, label or watermark. No extra objects. Preserve the original silhouette and the main color organization in the first reference.",
+      "reference_sha256": {
+        "native_geometry": "5fa4ce21296f7124ebd70469905bad50c5f936f2a70cf9014ed37335cf42336c",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 35,
+        "encoded_sha256": "3c3e241e84a8c393bb116d32727cde14476523ff317b459a439e88c7dcb69f2b",
+        "encoded_length": 82
+      }
+    },
+    "icons-036.png": {
+      "spec": "docs/spec/065-hd-small-images.md",
+      "sha256": "43d1a5a0078f788d25583937514eba6d8eac8f96b398f4f950156d4c6e7bc5af",
+      "bytes": 166111,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        9,
+        12
+      ],
+      "target_size": [
+        36,
+        48
+      ],
+      "native_opaque_pixels": 38,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        296,
+        477,
+        808,
+        977
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        9,
+        11
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 34450,
+      "alpha_mass_total": 21815926,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: stylized-concept\nAsset type: one isolated small sprite for the approved fine-pixel-art HD display overlay of a historical strategy game.\nInput image 1: exact original identity, orientation, silhouette, proportions and color-placement reference. Input image 2: approved detailed pixel-art style only; do not copy its scenery, buildings or people.\nFreshly redraw ONLY the small diagonal hand tool with brown wooden handle extending down-left and a silver-gray metal head at upper right, matching the exact original silhouette. Preserve viewpoint and overall occupied shape. Final use is 36 by 48 pixels. Use crisp stepped hand-placed pixel clusters and restrained material shading, matching the approved muted natural palette. This is a tiny functional game sprite, not a scene or concept illustration. Add readable fine texture inside the original subject, while keeping its original identity.\nComplete single sprite centered with generous genuinely transparent RGBA padding. Sharp solid opaque object interior and crisp pixel-art edges. No glow, halo, bloom, translucent fog, blur, soft focus, lighting aura or cast shadow. Keep all negative-space gaps transparent. Do not draw a background, ground, container, pedestal, scenery, border, text, label or watermark. No extra objects. Preserve the original silhouette and the main color organization in the first reference.",
+      "reference_sha256": {
+        "native_geometry": "dfe03ad5a3e598bb27d9cf0bf05219a9d6e1e44f3ceca7ebc6f5d8c6cc41d1d5",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 36,
+        "encoded_sha256": "dcd32b8ea53065c46730526a3af71efe9d8ae70d9c8ce7b2f273dd820b3b7b83",
+        "encoded_length": 76
+      }
+    },
+    "icons-037.png": {
+      "spec": "docs/spec/065-hd-small-images.md",
+      "sha256": "5ec0f2a0c3cdd4369d76899a93ffe675346ebf8b65cdf2ac4080956dbaffbd44",
+      "bytes": 192681,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        6,
+        12
+      ],
+      "target_size": [
+        24,
+        48
+      ],
+      "native_opaque_pixels": 48,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        361,
+        469,
+        584,
+        1261
+      ],
+      "native_content_rect": [
+        1,
+        0,
+        6,
+        12
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 24536,
+      "alpha_mass_total": 30932485,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: stylized-concept\nAsset type: one isolated small sprite for the approved fine-pixel-art HD display overlay of a historical strategy game.\nInput image 1: exact original identity, orientation, silhouette, proportions and color-placement reference. Input image 2: approved detailed pixel-art style only; do not copy its scenery, buildings or people.\nFreshly redraw ONLY the single upright narrow brown musket with light gray barrel end at the top, two brass-colored bands and the same small right-side projection, preserving the original front-side view and orientation. Preserve viewpoint and overall occupied shape. Final use is 24 by 48 pixels. Use crisp stepped hand-placed pixel clusters and restrained material shading, matching the approved muted natural palette. This is a tiny functional game sprite, not a scene or concept illustration. Add readable fine texture inside the original subject, while keeping its original identity.\nComplete single sprite centered with generous genuinely transparent RGBA padding. Sharp solid opaque object interior and crisp pixel-art edges. No glow, halo, bloom, translucent fog, blur, soft focus, lighting aura or cast shadow. Keep all negative-space gaps transparent. Do not draw a background, ground, container, pedestal, scenery, border, text, label or watermark. No extra objects. Preserve the original silhouette and the main color organization in the first reference.",
+      "reference_sha256": {
+        "native_geometry": "05ea8c2d37a3fb66cdc0f990e38cafc6249a945dc067432a96dc72f09c30ba0a",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 37,
+        "encoded_sha256": "91cc5f35956d73f46088ec2846b061de0964c5d5e2a34ed31def569495bfc019",
+        "encoded_length": 84
+      }
+    },
+    "icons-038.png": {
+      "spec": "docs/spec/065-hd-small-images.md",
+      "sha256": "25eb4306ca4b8510b3cf6487106d138885048df5bfb6588bb39d08e7d16b29f5",
+      "bytes": 185643,
+      "size": [
+        957,
+        1643
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        7,
+        12
+      ],
+      "target_size": [
+        28,
+        48
+      ],
+      "native_opaque_pixels": 54,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        338,
+        504,
+        611,
+        1202
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        7,
+        12
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 18065,
+      "alpha_mass_total": 30905801,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: stylized-concept\nAsset type: one isolated small sprite for the approved fine-pixel-art HD display overlay of a historical strategy game.\nInput image 1: exact original identity, orientation, silhouette, proportions and color-placement reference. Input image 2: approved detailed pixel-art style only; do not copy its scenery, buildings or people.\nFreshly redraw ONLY the upright narrow silver-gray metallic object exactly as shown, with pointed light top, dark side projections and long dark lower stem; preserve the precise reference silhouette and color regions without inventing a new design. Preserve viewpoint and overall occupied shape. Final use is 28 by 48 pixels. Use crisp stepped hand-placed pixel clusters and restrained material shading, matching the approved muted natural palette. This is a tiny functional game sprite, not a scene or concept illustration. Add readable fine texture inside the original subject, while keeping its original identity.\nComplete single sprite centered with generous genuinely transparent RGBA padding. Sharp solid opaque object interior and crisp pixel-art edges. No glow, halo, bloom, translucent fog, blur, soft focus, lighting aura or cast shadow. Keep all negative-space gaps transparent. Do not draw a background, ground, container, pedestal, scenery, border, text, label or watermark. No extra objects. Preserve the original silhouette and the main color organization in the first reference.",
+      "reference_sha256": {
+        "native_geometry": "03b7fe23081666e9f82b6602a7216afdd6f88d4941001667a3bdfd2e65ecab7b",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 38,
+        "encoded_sha256": "9f8354e113810f6ca1a3654007189c0816b4183acea23a335bc5d3ea1718ba0b",
+        "encoded_length": 95
+      }
     }
   }
 }

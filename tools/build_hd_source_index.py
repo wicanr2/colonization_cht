@@ -35,7 +35,7 @@ for name,asset in manifest['assets'].items():
 ready=[f for f in frames if f['file']=='PHYS0.SS' and f['ordinal']==79 and f.get('encoded_sha256')=='a8a861754068c86a9c150442f7b07f1fbd297d82b8e5dcb2e3ee108bde4dc84c']
 assert len(ready)==1
 ready[0]['source_contract_reference']={'state':'READY','spec':'docs/spec/062-hd-sea-draw-lifecycle.md','section':'2026-10-14 R48第079幀含RAM還原的READY來源契約','formal_connected':False}
-assert len(bindings)==19 and sum(bool(f['formal_assets']) for f in frames)==19
+assert len(bindings)==30 and sum(bool(f['formal_assets']) for f in frames)==30
 entry_evidence=None
 if a.entry_report:
  entry=json.loads(a.entry_report.read_bytes())

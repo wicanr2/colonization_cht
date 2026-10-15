@@ -32,15 +32,34 @@ subprocess.run(['go','build','-trimpath','-o',str(bundle/'bin/colonization-windo
 subprocess.run(['go','vet','.'],cwd=module,check=True,timeout=120)
 s=files['probe-gui-r1.py']
 active=sorted(int(name[6:9]) for name in json.loads((formal_bundle/'graphics/manifest.json').read_bytes())['assets'] if name.startswith('icons-'))
-assert active==[22,24,25,26,27]
+assert active==[22,*range(24,39)]
+city_active=[n for n in active if n!=38]
+city_targets=[('022',(8,185)),('024',(45,185)),('025',(63,186)),('026',(83,185)),('027',(101,188)),('028',(120,187)),('029',(139,188)),('030',(157,185)),('031',(179,186)),('032',(200,185)),('033',(216,186)),('034',(235,185)),('035',(254,187)),('036',(273,187)),('037',(294,185))]
+s=s.replace('for n in [22,24]),"小圖像來源沒有完整HD合成"','for n in '+repr(city_active)+'),"小圖像來源沒有完整HD合成"')
 s=s.replace('[22,24]',repr(active))
-s=s.replace('[("022",(4,186)),("024",(47,186)),("022-again",(4,186))]', '[("022",(4,186)),("024",(47,186)),("025",(65,186)),("026",(85,186)),("027",(103,186))]')
+s=s.replace('[("022",(4,186)),("024",(47,186)),("022-again",(4,186))]',repr(city_targets))
+s=s.replace('terrain_snapshot(label,locale="zh-Hant"):','terrain_snapshot(label,locale="zh-Hant",ordinal=22):').replace('"ordinal":22,"locale":locale','"ordinal":ordinal,"locale":locale')
+s=s.replace('terrain_snapshot("small-%s-%s"%(action,part))','terrain_snapshot("small-%s-%s"%(action,part),ordinal=int(part))')
+s=s.replace('scene in terrain_scenes else','scene in terrain_scenes or scene in {"world","saved-world","hd-exited-again"} else')
+old='need(terrain.get("painted",0)==0,"離開世界後殘留小圖像來源")'
+assert s.count(old)==1
+s=s.replace(old,'need(all(source.get("painted",0)==0 for n,source in terrain.get("sources",{}).items() if int(n) not in {36,38}),"非城內殘留城內專用來源")\n                    if scene=="main-menu":need(terrain.get("painted",0)==0,"主選單殘留小圖像")\n                    if scene in {"world","saved-world","hd-exited-again"} and not fallback:need(all(terrain.get("sources",{}).get(str(n),{}).get("painted",0)>0 for n in [36,38]),"世界小圖像未恢復")')
+old='            switch_round("world")\n'
+assert s.count(old)==1
+s=s.replace(old,old+'''            for ordinal,xy in [(36,(282,158)),(38,(274,157))]:
+                for action,target in [("hover",xy),("away",(112,160)),("return",xy)]:
+                    before=status()["step"];x,y=target;move(x*4,y*4+48)
+                    wait(lambda state:state.get("step",0)>=before+1000000 and state.get("dos_mouse",{}).get("x")==x and state.get("dos_mouse",{}).get("y")==y,"世界小圖像游標未到達")
+                    terrain_snapshot("small-world-%s-%03d"%(action,ordinal),ordinal=ordinal)
+''')
+old='            switch_round("saved-world")\n';assert s.count(old)==1
+s=s.replace(old,old+'            terrain_snapshot("small-world-saved",ordinal=36)\n')
 s=s.replace('"--hd-small-prototype-assets",str(args.small_assets),','')
 s=s.replace('terrain.get("prototype") is True','terrain.get("formal") is True')
 s=s.replace('icons-%03d-candidate-v1.png','icons-%03d.png')
 s=s.replace('PASS_SMALL_RAM_FOCUSED_FIVE_LANGUAGE_GUI','PASS_SMALL_FORMAL_FOCUSED_FIVE_LANGUAGE_GUI')
 s=s.replace('"prototype_entry"','"formal_entry"').replace('"prototype_flags": True','"diagnostics_only": True')
-s=s.replace('正式十四種素材保持；小圖像022、024隔離原型的102組必要GUI，19張HD快照及1張原版模式快照。獨立原版與四側重播另驗，不授予完整HD或正式接線信用。','正式十九種素材的102組五語GUI；五張商品沿正式loader。25張HD快照及1張原版模式快照；獨立原版與四側重播另驗，完整HD未完成。')
+s=s.replace('正式十四種素材保持；小圖像022、024隔離原型的102組必要GUI，19張HD快照及1張原版模式快照。獨立原版與四側重播另驗，不授予完整HD或正式接線信用。','正式三十種素材的102組五語GUI；十六張小圖像沿正式loader。62張HD快照及1張原版模式快照；獨立原版與四側重播另驗，完整HD未完成。')
 (out/'probe-gui-r1.py').write_text(s)
 s=files['run-gui-r1.sh'].replace('/out/bundle','/out/gui-bundle-r1').replace('--small-assets /out/assets','--small-assets /out/gui-bundle-r1/graphics')
 (out/'run-gui-r1.sh').write_text(s)

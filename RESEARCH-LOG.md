@@ -6091,3 +6091,43 @@ PNG與alpha原樣保存，內容矩形只以alpha128量測幾何，合成仍使�
 | readme-settings-r1/check.json | b073f457670462bdf3c4aa0c995522f207f271e7bb545adc99e93d82d285ce6b |
 
 本機根hd-small-images-batch-r55，命令索引commands-r55.json，總審查conformance-review-r1.json。來源索引1552列及19正式綁定；全遊戲可見分母仍未知。原版像素、RAM、音訊、存檔及未選候選不公開；其他圖像、游標、動畫、裁切及跨平台效能未完成。
+
+
+## 2026-10-15 R56十一張小圖像正式擴充
+
+結論confirmed，限規格065 R56。原版ICONS.SS SHA-256為a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716，
+VICEROY.EXE為a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3。
+位址為dosgolem實模式CS:IP及20bit線性RAM；工具dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7、Python3.11.2／Pillow9.4。
+既有31來源入口、完整編碼、逐寫、返回、游標與RAM來源鏈不改。本批只新增028至038原PNG；完整提示、alpha及權利入graphics清冊。
+世界原004／037點各有036的38格與038的54格，READY先明示世界來源及城內十五來源，再接線。
+布料及外套原圖外圍柔光未進入已驗內容取樣與原版遮罩，原PNG沒有裁切、重編碼或人工修alpha。
+784Go零skip與go vet、49點完整原版狀態／存檔、591來源／RAM及69載入反例通過。
+63點原版／控制重建1580次來源、438381事件、1764游標還原與547／422 RAM計數；2381968個實際RGBA像素相同。
+十六張已生成來源各有游標正向，精確逐來源次數保存在conformance-review-r1.json。
+143筆實際輸入四側至259400000步的完整CPU／RAM／VGA／DAC、WAV及存檔一致，正常正式入口另驗十五張城內圖像。
+GUI日文進城一組因游標或畫布守門回原圖，日文正常返回後十五來源全部恢復；回退不增加持續覆蓋信用。
+36種新行程及179設定事件通過，舊素材新行程沿R55限定收據；31檔白名單與94項封裝拒絕通過。
+首輪linked-icons-038的GLFW init在進入main前無法開啟X11，不是HD loader結果。Xvfb help確認-noreset，
+加就緒檢查與socket目錄後在同一映像乾淨重跑全部36種通過；瞬時斷線成因仍未知，不把猜測寫成已證實。
+固定樣本檢查器沿舊三張城內變動假設而停止；依READY世界來源改為五張，原RGBA比較全保留，同一原始輸出重查通過。
+
+| 收據／輸出 | SHA-256 |
+|---|---|
+| bundle/bin/colonization-window | 40a31556bc92f9e38f778de8fbd44aa92002d69910c1d5da0c73d4596f15005a |
+| graphics/manifest.json | f472d22fe653386b349095405133fd2ad8b529dbb0d6a783762451af6ecfa6ab |
+| build-r1.json | 2dbcf202a166d2d38bc4cd2159ef4f3765364d5971e9c51eb2ac18815125fa0e |
+| tests-r1-check.json | 910282fca01904f46f14e7e79915c00b10b64a00fd45664cf606784513f25f58 |
+| native-full-r1/check.json | 6fc228ed2754f477c82beb00cf8c16bac002ca9ea8c072ae89882394f44a6485 |
+| native-pixels-r2-check.json | 0a4d902b08ef461ae2918a7d3ed4c60c6410b743a5dbaeb575c7f4749f8b6741 |
+| gui-build-r1.json | 788c1bbb41476fbcd51dc4246820a82a8e329934f3e3d8c5de305fa9eb2ba2e1 |
+| gui-r1/check.json | 558c304be54d5a1943eeda8e17245dbdb83a6636cfce98c257bb1a17ae7e4e9f |
+| replays-r1/check.json | 721c228a69058455920e139654b73be4bbe950b37b6151d33b6bd7f46d0df03e |
+| gui-model-r1/check.json | 649cb424b4ec2df8bd7c29c28ce606ee34ff67ed5664cd12fd6de5ed4f432fb6 |
+| gui-display-r1-check.json | 54f5d3051934aaeb1d3e95831f499ca7752485b337a09213728e9106223255bd |
+| startup-r2/check.json | 429cf35fbf0c8b4763fb603f093d6625227a4b3a3c4875ed886527fcb153085e |
+| package-r1-check.json | 0e5277f046c7b6e397817ed0393f8709d4f9b4388a5d372ee93318a87cc21770 |
+| production-play-r1-check.json | d182ac92c291869d26c4bf2eadeb6600c8b7612c7a9e7214f41d69f759e1a1fa |
+| source-index-r1.json | 3fc2b57863ab22374b598113f2d6c8a7d886719d35b6be59115648784a3e4357 |
+| readme-settings-r1/check.json | d75383d5f1512b1ebede94d9dc67d47bf422654ca6953551c4a2228dfd76fd74 |
+
+本機根hd-small-images-batch-r56，命令入口commands-r56.json。三十個正式綁定只算局部HD；其餘來源、未知游標、裁切、動畫與跨平台效能未完成。原版像素、RAM、音訊、存檔及未選候選只留本機。
