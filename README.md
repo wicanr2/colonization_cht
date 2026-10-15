@@ -71,7 +71,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 
 以下是開發中的五語顯示層與 HD 畫面，尚未收進目前發行版。截圖來自實際遊戲視窗，
 來源與指紋見[截圖紀錄](docs/screenshots/readme-captures.json)。全量 HD 包含商品、資源、單位、
-游標等小圖像與動畫幀，目前仍在逐項開發。
+其餘小圖像、特殊游標與動畫幀，目前仍在逐項開發。
 
 ![繁體中文殖民地畫面與 HD 建築、人物及商品小圖像](docs/screenshots/hd-colony-zh.png)
 
