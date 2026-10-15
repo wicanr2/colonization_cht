@@ -842,6 +842,159 @@
         "encoded_sha256": "07411abcaceae3539db17046e13607cf5b50ece5f6c5760e4f1af375e134bda6",
         "encoded_length": 103
       }
+    },
+    "icons-025.png": {
+      "spec": "docs/spec/065-hd-small-images.md",
+      "sha256": "5856ff32bdf7ef16ad2a47f548313ea3e19009f4386ab82b9a51bb4cf81e1d6a",
+      "bytes": 264918,
+      "size": [
+        1145,
+        1374
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        10,
+        12
+      ],
+      "target_size": [
+        40,
+        48
+      ],
+      "native_opaque_pixels": 63,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        301,
+        456,
+        878,
+        972
+      ],
+      "native_content_rect": [
+        0,
+        1,
+        10,
+        11
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 19621,
+      "alpha_mass_total": 46991074,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: stylized-concept\nAsset type: one isolated small commodity sprite for the approved fine-pixel-art HD display overlay.\nInput image 1: exact original identity, orientation, silhouette, proportions and color-placement reference. Input image 2: approved detailed pixel-art style only, never copy its scenery or buildings.\nFreshly redraw ONLY the low white cotton boll with its tan center and dark green leaves, matching the original horizontal silhouette. Preserve viewpoint and overall occupied shape. Final use is 40 by 48 pixels. Use crisp stepped hand-placed pixel clusters and restrained material shading, matching the approved muted natural palette. This is a tiny functional game sprite, not a scene or concept illustration.\nComplete single object centered with generous genuinely transparent RGBA padding. Sharp solid opaque object interior and crisp pixel-art edges. No glow, halo, bloom, translucent fog, blur, soft focus, lighting aura or cast shadow. Keep all negative-space gaps transparent. Do not draw a background, ground, container, pedestal, scenery, border, text, label or watermark. No extra objects. Do not reinterpret the subject into a different commodity. Preserve the original silhouette and green/brown/white color organization appropriate to the first reference.",
+      "reference_sha256": {
+        "native_geometry": "245870227ca18c94aa3720ba251481ac67927d0813d6b2ab47a5a1c711fa6e02",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 25,
+        "encoded_sha256": "9d046815241dabe7714a688f263e5b773fee79127b85ca6db4d3b6ce7606cb26",
+        "encoded_length": 102
+      }
+    },
+    "icons-026.png": {
+      "spec": "docs/spec/065-hd-small-images.md",
+      "sha256": "27aa649ab52f07522d05608b53b39cfb0b7e5a974e69060f197b6ddcc6ae20b2",
+      "bytes": 329741,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        9,
+        12
+      ],
+      "target_size": [
+        36,
+        48
+      ],
+      "native_opaque_pixels": 81,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        271,
+        368,
+        830,
+        1066
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        9,
+        12
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 16483,
+      "alpha_mass_total": 64168930,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: stylized-concept\nAsset type: one isolated small commodity sprite for the approved fine-pixel-art HD display overlay.\nInput image 1: exact original identity, orientation, silhouette, proportions and color-placement reference. Input image 2: approved detailed pixel-art style only, never copy its scenery or buildings.\nFreshly redraw ONLY the flat upright tan animal pelt, matching the original splayed hide silhouette and brown fur shading. Preserve viewpoint and overall occupied shape. Final use is 36 by 48 pixels. Use crisp stepped hand-placed pixel clusters and restrained material shading, matching the approved muted natural palette. This is a tiny functional game sprite, not a scene or concept illustration.\nComplete single object centered with generous genuinely transparent RGBA padding. Sharp solid opaque object interior and crisp pixel-art edges. No glow, halo, bloom, translucent fog, blur, soft focus, lighting aura or cast shadow. Keep all negative-space gaps transparent. Do not draw a background, ground, container, pedestal, scenery, border, text, label or watermark. No extra objects. Do not reinterpret the subject into a different commodity. Preserve the original silhouette and green/brown/white color organization appropriate to the first reference.",
+      "reference_sha256": {
+        "native_geometry": "fffe70bf2cbe445772c3a6b81c2640817add7b786ec4934cbe2350faa2915973",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 26,
+        "encoded_sha256": "e4d500fe234462ff3072bfa41cb02be376e48a6096bf1f53988ca62652764acc",
+        "encoded_length": 118
+      }
+    },
+    "icons-027.png": {
+      "spec": "docs/spec/065-hd-small-images.md",
+      "sha256": "02210ba22e632b688253442b8df6c89bb1d909308ac4174b3679ebdd58798dac",
+      "bytes": 191716,
+      "size": [
+        1374,
+        1145
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        10,
+        12
+      ],
+      "target_size": [
+        40,
+        48
+      ],
+      "native_opaque_pixels": 44,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        378,
+        457,
+        996,
+        681
+      ],
+      "native_content_rect": [
+        0,
+        3,
+        10,
+        8
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 65462,
+      "alpha_mass_total": 28161245,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: stylized-concept\nAsset type: one isolated small commodity sprite for the approved fine-pixel-art HD display overlay.\nInput image 1: exact original identity, orientation, silhouette, proportions and color-placement reference. Input image 2: approved detailed pixel-art style only, never copy its scenery or buildings.\nFreshly redraw ONLY the low horizontal stack of brown timber planks with pale fresh cut end on the left, matching the original wood-stack silhouette. Preserve viewpoint and overall occupied shape. Final use is 40 by 48 pixels. Use crisp stepped hand-placed pixel clusters and restrained material shading, matching the approved muted natural palette. This is a tiny functional game sprite, not a scene or concept illustration.\nComplete single object centered with generous genuinely transparent RGBA padding. Sharp solid opaque object interior and crisp pixel-art edges. No glow, halo, bloom, translucent fog, blur, soft focus, lighting aura or cast shadow. Keep all negative-space gaps transparent. Do not draw a background, ground, container, pedestal, scenery, border, text, label or watermark. No extra objects. Do not reinterpret the subject into a different commodity. Preserve the original silhouette and green/brown/white color organization appropriate to the first reference.",
+      "reference_sha256": {
+        "native_geometry": "89fd05e7c318d51b21899e60f14d967db54ceffa52dc4231331459afc81eca67",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 27,
+        "encoded_sha256": "d8ddf9a6bb0f6a136552ce621772a112bfc6a776c809d492b72c02bf7ec3c9dd",
+        "encoded_length": 52
+      }
     }
   }
 }

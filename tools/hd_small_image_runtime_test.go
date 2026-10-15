@@ -679,7 +679,7 @@ func TestHDSmallResourceContract(t *testing.T) {
 			available[f.ordinal] = true
 		}
 	}
-	if len(available) != 2 || !available[22] || !available[24] {
+	if len(available) != 5 || !available[22] || !available[24] || !available[25] || !available[26] || !available[27] {
 		t.Fatal("尚無候選來源被計為HD", available)
 	}
 	if _, err := loadHDSmallRuntime(nil, game, assets); err == nil {

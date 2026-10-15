@@ -56,7 +56,7 @@ func loadHDRuntime(m *golem.Machine, game, directory string) (*hdRuntime, error)
 	if !info.IsDir() || info.Mode()&os.ModeSymlink != 0 {
 		return nil, fmt.Errorf("HD asset directory is not a real directory")
 	}
-	manifest, err := hdReadFile(filepath.Join(directory, "manifest.json"), 64<<10)
+	manifest, err := hdReadFile(filepath.Join(directory, "manifest.json"), 128<<10)
 	if err != nil {
 		return nil, err
 	}
@@ -126,7 +126,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "560bfcf9447b012003666754991c2ff8770e369e34f0c32eae6fe2b0c33f9b2e"
+const hdManifestSHA = "06dd3d277926c6d291e39a88088a462d0cf445e364785474b81912491265c79c"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"

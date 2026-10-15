@@ -6051,3 +6051,43 @@ R54只加唯讀快照的GUI副本為44Go，正式其餘來源逐檔全同，素�
 正式合計16張生成PNG與清冊、43Go／26綁定，規格065限定CONFORMED；RAM正向仍限005幀。
 本機根為hd-small-images-formal-r54，命令索引commands-r54.json，總審查conformance-review-r1.json。
 原版像素、RAM、音訊、存檔與未選候選不公開；其他小圖像、未知游標、動畫、其餘圖像及跨平台效能未完成，沒有新發行。
+
+
+## 2026-10-15 R55三張商品HD正式擴充
+
+結論為confirmed，限規格065 R55。原版ICONS.SS SHA-256為a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716，
+VICEROY.EXE為a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3。
+位址基準為dosgolem實模式CS:IP及20bit線性RAM，工具dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7、Python3.11.2／Pillow9.4。
+既有31來源的入口0D46:000A、逐寫三站、返回與0CBA:00CA來源鏈不變；本次只為025、026、027提供HD原圖。
+生成使用內建image_gen，每張獨立生成；完整提示、原版來源與定稿風格指紋保存在graphics/manifest.json。
+PNG與alpha原樣保存，內容矩形只以alpha128量測幾何，合成仍使用原RGBA。
+023新候選305d74bd95d0c8bcfba54832a35398b1dd0f367f85bd1a9702cb3b6e968b1c18仍有柔光，未定稿且只留本機。
+
+751Go零skip與go vet、原53輸入／49點全狀態／存檔及558來源／RAM反例通過，載入反例25項。
+102組五語GUI、408事件與3690不透明游標像素；26點原版／控制獨立重建963次來源、304376事件，
+413次游標還原、547保存及422 RAM還原相符。835664個實際HD商品像素以原PNG及Go16bit alpha公式逐點重算全同。
+103筆實際輸入四側至222000000步，完整CPU／RAM／VGA／DAC、WAV及存檔相同。
+正式43Go遊玩入口另重播原R52的97筆輸入，兩個正常進城檢查點均實際繪出五張商品，frames為0。
+59種新行程缺件／錯件／連結／恢復、294設定事件保持日文HD偏好；20檔封裝與61項拒絕通過。
+清冊因完整提示增至69451bytes，依READY擴充同步將讀取與封裝上限改為128KiB，仍核對完整指紋。
+
+| 收據／輸出 | SHA-256 |
+|---|---|
+| bundle/bin/colonization-window | b529aae643f7e2ad466edd91e174240d3c16f6601e57f9718f71a945ab4eb18f |
+| graphics/manifest.json | 06dd3d277926c6d291e39a88088a462d0cf445e364785474b81912491265c79c |
+| build-r1.json | 5d46cde7e1b461d8978d6d1fc149b7678e6fbd17f7f64e9a1d01f3f71e598d4f |
+| tests-r1-check.json | 05f9fe76615cae361d68c703fc6d4bc4d1487cf0358399c8f191f0f97e760a98 |
+| native-full-r1/check.json | 6fec719034bd9a2328d4b5297d56d30390b31d10ef21c40f1a4c1d47c90fe952 |
+| native-pixels-r1-check.json | 00d84602e1dd342874887275bf66f33c2f8e6f29597030f19d17a313a7e8f697 |
+| gui-build-r1.json | 1fb02d8b6e01a2d8df89d15623ec99479fbdcbf4a128542dfba8a343aaa2afac |
+| gui-r1/check.json | f076f4feee8bf74f057e31f734eab9a4ae37463399dff6a343c4dd61ed356ca6 |
+| replays-r1/check.json | f4ba9c2ca969756cff26cea42d4fcc12983e160d47dc5c7468e7de09f57ec635 |
+| gui-model-r1/check.json | 2eeb73829ff0e3615c14e12779316d6328d736f57f68273094dbc74168fa43e9 |
+| gui-display-r1-check.json | 2eddc5d8e9ab3809c3277e232ad3683773be0cdbfaf12d1b98b22524854ee2dc |
+| startup-r1/check.json | d218275b0dbf30923a8460e9bef2adede6a9323e17977de565a4a81f2b44ca47 |
+| package-r1-check.json | 8686945074d3f1ac3fe574b7b5bfbf960d75aa9b885ef51a68edd7d6f888accb |
+| production-play-r1-check.json | fa9150416b75c871673107c84c8735e4c6287fb5ebdf07576a26104c4aed0edb |
+| source-index-r1.json | a077bbea64c1365cc9f83c897fdd7f7e43b2b9fdfcf2005f6f0f2337b394ac12 |
+| readme-settings-r1/check.json | b073f457670462bdf3c4aa0c995522f207f271e7bb545adc99e93d82d285ce6b |
+
+本機根hd-small-images-batch-r55，命令索引commands-r55.json，總審查conformance-review-r1.json。來源索引1552列及19正式綁定；全遊戲可見分母仍未知。原版像素、RAM、音訊、存檔及未選候選不公開；其他圖像、游標、動畫、裁切及跨平台效能未完成。

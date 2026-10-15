@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "560bfcf9447b012003666754991c2ff8770e369e34f0c32eae6fe2b0c33f9b2e",
+  "formal_manifest_sha256": "06dd3d277926c6d291e39a88088a462d0cf445e364785474b81912491265c79c",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -29234,7 +29234,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-025.png"
+      ],
       "normal_entry_sample": {
         "calls": 3,
         "candidate_research_ids": [
@@ -29291,7 +29293,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-026.png"
+      ],
       "normal_entry_sample": {
         "calls": 120,
         "candidate_research_ids": [
@@ -29456,7 +29460,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-027.png"
+      ],
       "normal_entry_sample": {
         "calls": 3,
         "candidate_research_ids": [
@@ -51110,6 +51116,36 @@
       "source_file": "ICONS.SS",
       "source_ordinal": 24,
       "source_encoded_sha256": "07411abcaceae3539db17046e13607cf5b50ece5f6c5760e4f1af375e134bda6",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-025.png",
+      "asset_sha256": "5856ff32bdf7ef16ad2a47f548313ea3e19009f4386ab82b9a51bb4cf81e1d6a",
+      "source_research_id": 852,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 25,
+      "source_encoded_sha256": "9d046815241dabe7714a688f263e5b773fee79127b85ca6db4d3b6ce7606cb26",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-026.png",
+      "asset_sha256": "27aa649ab52f07522d05608b53b39cfb0b7e5a974e69060f197b6ddcc6ae20b2",
+      "source_research_id": 853,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 26,
+      "source_encoded_sha256": "e4d500fe234462ff3072bfa41cb02be376e48a6096bf1f53988ca62652764acc",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-027.png",
+      "asset_sha256": "02210ba22e632b688253442b8df6c89bb1d909308ac4174b3679ebdd58798dac",
+      "source_research_id": 854,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 27,
+      "source_encoded_sha256": "d8ddf9a6bb0f6a136552ce621772a112bfc6a776c809d492b72c02bf7ec3c9dd",
       "spec": "docs/spec/065-hd-small-images.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec"
     }
