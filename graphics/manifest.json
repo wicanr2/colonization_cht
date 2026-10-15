@@ -2272,6 +2272,37 @@
         "encoded_sha256": "d69c554722b4abce4daf9b7003381e4103664c21cebf0d7ce48fe0ad1d825d5a",
         "encoded_length": 117
       }
+    },
+    "terrain-079.png": {
+      "spec": "docs/spec/062-hd-sea-draw-lifecycle.md",
+      "sha256": "081ffb5506aa7aca0e80571053b85f0bdc920cb5e7884cf028521a1dd7ffaa58",
+      "bytes": 1522358,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "fully opaque; clip to verified per-pixel ownership on the main canvas",
+      "generation_prompt": "Transform reference 1 into ONE fully opaque square HD map-terrain texture for the approved Colonization display overlay. Reference 1 is the exact native 16 by 16 PHYS0.SS frame 079 enlarged with nearest-neighbor, using its actual in-game palette. Preserve its broad dark-green, mid-green, light-green and gray-green region positions and their relative brightness. Add only restrained finely clustered pixel texture within those existing regions. Keep the original overhead texture view, full-bleed composition, and flat map scale. Reference 2 is the accepted HD sea tile and supplies the size of pixel clusters, the low-contrast texture density and sharp pixel brushwork, not blue colors or water. Reference 3 is the user-approved refined-pixel-art direction and supplies the overall material and palette restraint. Produce one square approximately 1254 by 1254 RGBA image, opaque to every edge, with no margin and no transparency. Do not add trees with trunks, rocks, flowers, buildings, units, roads, rivers, shores, clouds, text, symbols, grid lines or recognizable new objects. Avoid smooth gradients and photorealism. Preserve the large color-zone geometry; use subtle short pixel clusters and speckles appropriate for a 64 by 64 final game tile. No contact sheet, no alternate versions.",
+      "reference_sha256": {
+        "native_geometry": "81ccd3aa337a9f3b6f4dc9785160be021abfeb102dc0e0b2ce45a98db03b52fd",
+        "accepted_ocean_style": "2c5d3edc8d38e44dc02d7ccb88e79e4f749edd8a0b1d3dfd54ec04b467ba61ff",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 79,
+        "encoded_sha256": "a8a861754068c86a9c150442f7b07f1fbd297d82b8e5dcb2e3ee108bde4dc84c",
+        "encoded_length": 285
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
     }
   }
 }

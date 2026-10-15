@@ -78,7 +78,12 @@ func loadHDSeaRuntime(h *hdRuntime, game, directory string) (*hdSeaRuntime, erro
 			p.art.SetRGBA(x, y, c)
 		}
 	}
-	h.m.WatchWrite(0, uint32(len(h.m.Mem)-1), func(_ *golem.Machine, a uint32, old, value byte) { p.memoryWrite(a, old, value) })
+	h.m.WatchWrite(0, uint32(len(h.m.Mem)-1), func(_ *golem.Machine, a uint32, old, value byte) {
+		p.memoryWrite(a, old, value)
+		if h.terrain079 != nil {
+			h.terrain079.memoryWrite(a, old, value)
+		}
+	})
 	return p, nil
 }
 

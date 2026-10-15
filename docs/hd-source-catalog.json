@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "bad2cae036ac07d0e73bfbd606d7fff0a762138bec537189ce07a37dda1f2638",
+  "formal_manifest_sha256": "2d0e2ae15139151bcf0f5c9b8fdeb08a209602fd7c955705dfbc340aea109f84",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,8 +26,8 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 44,
-    "additional_ready_source_contracts": 1,
+    "formal_asset_bindings": 45,
+    "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
     "other_formats_and_program_drawn_graphics": "not_assessed"
@@ -43425,12 +43425,14 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-079.png"
+      ],
       "source_contract_reference": {
-        "state": "READY",
+        "state": "CONFORMED",
         "spec": "docs/spec/062-hd-sea-draw-lifecycle.md",
-        "section": "2026-10-14 R48第079幀含RAM還原的READY來源契約",
-        "formal_connected": false
+        "section": "2026-10-15 R58正式驗收與限定CONFORMED",
+        "formal_connected": true
       },
       "normal_entry_sample": {
         "calls": 27,
@@ -51447,6 +51449,16 @@
       "source_ordinal": 124,
       "source_encoded_sha256": "d69c554722b4abce4daf9b7003381e4103664c21cebf0d7ce48fe0ad1d825d5a",
       "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-079.png",
+      "asset_sha256": "081ffb5506aa7aca0e80571053b85f0bdc920cb5e7884cf028521a1dd7ffaa58",
+      "source_research_id": 1367,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 79,
+      "source_encoded_sha256": "a8a861754068c86a9c150442f7b07f1fbd297d82b8e5dcb2e3ee108bde4dc84c",
+      "spec": "docs/spec/062-hd-sea-draw-lifecycle.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec"
     }
   ],

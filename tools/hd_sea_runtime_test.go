@@ -201,6 +201,13 @@ func TestHDSeaRuntimeNativeLifecycle(t *testing.T) {
 						continue
 					}
 				}
+				if h.terrain079 != nil {
+					i := (y/4)*320 + x/4
+					cell := h.terrain079.visible[i]
+					if cell.owned && cell.native == f.canvas[i] {
+						continue
+					}
+				}
 				if base.RGBAAt(x, y) != native.RGBAAt(x, y) {
 					t.Fatal("HD越出已驗建築與海洋範圍", at, x, y)
 				}

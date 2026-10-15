@@ -6169,3 +6169,34 @@ GUI懸停位置由R51原版owner／local格選出，世界5組、城內28組，�
 | readme-settings-r1/check.json | 81072e22c2cc960bd79a10f2a90fa97c64282aead9b1776777068c152da7edfa |
 
 本機根hd-small-images-batch-r57，命令入口commands-r57.json。原版像素、RAM、音訊、存檔與參考不公開。RAM正向只授予005，未驗來源不外推。
+
+
+## 2026-10-15 R58世界079正式接線
+
+結論confirmed，限規格062 R58。PHYS0.SS SHA-256為deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16，VICEROY.EXE為a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3。位址為dosgolem實模式CS:IP與20bit線性RAM；dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7、Python3.11.2及Pillow9.4。
+來源沿R48：0D46入口、4F22:03F6紀錄、5388:000A來源、285bytes完整指紋、256點逐寫、返回與0CBA:00CA來源鏈。原PNG081ffb55…原樣入graphics，未重新編碼；完整提示與參考指紋入清冊，原版ROI未公開。
+規格062 R58限定CONFORMED，世界079與海洋共用既有觀測，合計45種正式素材／清冊46檔、45Go／28綁定。827Go零skip與go vet、49點原版來源及31反例、92組五語GUI、20點獨立來源／330992個像素、97筆實際輸入四側至199200000步通過。存檔前後十次五語恢復各1129點；沒有守門回退。正式play=true的世界、城內與存檔返回通過，原版狀態／WAV／存檔保持；固定Linux ABBA成本比例1.1623。6種本批新行程與139項封裝拒絕通過。
+GUI原版模型101次十三來源；079的21次、9280筆來源游標還原及330992個HD像素相符。三個正常遊玩檢查點按cp請求標籤對應實際呈現，且早於下一筆原版輸入；不把呈現延遲當作遊戲差異。
+首輪六個測試漏列新079或既有小圖像遮罩，兩條GUI語言分支也沿舊清單；修正有效來源範圍後重跑，正式與唯讀Go二進位均逐byte保持。GUI R1抓圖工具逾時原因未知，失敗及R2／R3原始輸出保留，R5才授予完整92組信用。共用像素檢查器的079遮罩採painted而非不存在的valid欄位；只修正診斷投影，原始收據不改。
+
+| 收據／輸出 | SHA-256 |
+|---|---|
+| bundle-r2/bin/colonization-window | bbdcac04319a4062cb4f97b0d3b41b036276e01fb242fcfb0298e964fa081209 |
+| graphics/manifest.json | 2d0e2ae15139151bcf0f5c9b8fdeb08a209602fd7c955705dfbc340aea109f84 |
+| build-r2.json | adb41bb69863c3ca561435905c8cd896ee7949b280bb1e2d39aab11f7b2ef003 |
+| tests-r2-check.json | 01a6b6e5bf489b7f6cdaf4794418210ceabce088811494b67a8d77de500fd3ce |
+| native-terrain079-r2/check.json | bc0323af4a345367632dbbbd7c6061b2fc5be840abf49d473940e331d88f6320 |
+| native-full-r2/check.json | 6fa067ee48dc07953a25193adb82451f14442d3b38b1ffc3733b717a637025d2 |
+| gui-build-r5.json | c5a2482d4a2e96fe9dd2eda65687fc256baa56177efde286e7cbf37a40700c42 |
+| gui-r5/check.json | 146752153d213c8f78d2487c852d5b431bcc9308b01937edfa75ab92a00e11e5 |
+| gui-model-r1/check.json | ea037dbadf6b38f607428f498b3f44b10478539099274c43ad69f57894b775f0 |
+| gui-display-check-r2.json | ec0333b62ff5ecc32b24fcdcc85dacc8af363fca73ab7d696d0c05afc45dceb0 |
+| replays-r2/check.json | b61782773796ac2833a84528fe9c7303e8555b2f00c617477e9b9c80e29f399b |
+| startup-r1/check.json | 4a20c364fe1d16c10928bfc518fac408b0bd07d01cf94b08ae15d6fc40f53b9f |
+| package-r1-check.json | 527505878ac15ce29810d62786a94747839fc879b50d1a0f2a295204ec690f1d |
+| production-play-r2-check.json | 84d6433babee8aa23682c4ad9cf206102ccd931f66c1cf399e318f77e6921bc2 |
+| performance-play-r2-check.json | b6439c16e8c31b93b3ebb35a7636046d0b1d2669c8fe624451c90bb21b4efd0a |
+| readme-settings-r1/check.json | 70e0555f9db741b52b3ab3841099ca142cdcbc115950f5678d44793795126aa9 |
+| source-index-r2.json | 965abac7f6a61fee458ea7f72b22f26e7eb43d2b65316e37c378713bb0608b26 |
+
+本機根hd-terrain079-formal-r58，命令入口commands-r58.json。其他地形、未知游標、背景與動畫未完成，原版像素與執行收據只留本機。

@@ -39,7 +39,7 @@ def main():
                  "missing-sea", "bad-sea", "linked-sea", "missing-person", "bad-person", "linked-person", "missing-shelter", "bad-shelter", "linked-shelter"]
     cases += [kind+"-building-%03d"%n for n in [16,21,27,35,39,42,43,44,45,9] for kind in ["missing","bad","linked"]]
     cases += [kind+"-icons-%03d"%n for n in [5, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 42, 53, 56, 59, 62, 67, 68, 69, 94, 122, 123, 124] for kind in ["missing","bad","linked"]]
-    cases += ["restored"]
+    cases += ["missing-terrain079","bad-terrain079","linked-terrain079","restored"]
     if args.cases:
         need(len(args.cases)==len(set(args.cases)) and set(args.cases)<=set(cases), "指定的缺件案例不同")
         cases = [case for case in cases if case in args.cases]
@@ -76,6 +76,10 @@ def main():
         if case == "linked-shelter":
             (assets / "building-024.png").unlink()
             (assets / "building-024.png").symlink_to(args.bundle / "graphics/building-024.png")
+        if case=="missing-terrain079": (assets/"terrain-079.png").unlink()
+        if case=="bad-terrain079": (assets/"terrain-079.png").write_bytes(b"damaged")
+        if case=="linked-terrain079":
+            (assets/"terrain-079.png").unlink(); (assets/"terrain-079.png").symlink_to(args.bundle/"graphics/terrain-079.png")
         for n in [16,21,27,35,39,42,43,44,45,9]:
             name="building-%03d.png"%n
             if case=="missing-building-%03d"%n: (assets/name).unlink()

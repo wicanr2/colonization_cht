@@ -94,6 +94,10 @@ func loadHDRuntime(m *golem.Machine, game, directory string) (*hdRuntime, error)
 		}
 	}
 	h := &hdRuntime{m: m, art: art, pending: map[int]hdBuildingPixel{}}
+	h.terrain079, err = loadHDTerrain079Runtime(h, game, directory)
+	if err != nil {
+		return nil, err
+	}
 	h.sea, err = loadHDSeaRuntime(h, game, directory)
 	if err != nil {
 		return nil, err
@@ -126,7 +130,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "bad2cae036ac07d0e73bfbd606d7fff0a762138bec537189ce07a37dda1f2638"
+const hdManifestSHA = "2d0e2ae15139151bcf0f5c9b8fdeb08a209602fd7c955705dfbc340aea109f84"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"
@@ -139,6 +143,7 @@ type hdBuildingPixel struct {
 	cursorIndex int
 }
 type hdRuntime struct {
+	terrain079                                       *hdTerrain079Runtime
 	small                                            *hdSmallRuntime
 	nine                                             *hdNineRuntime
 	shelter                                          *hdShelterRuntime
@@ -212,6 +217,7 @@ func (h *hdRuntime) beforeInstruction() {
 		return
 	}
 	h.sea.beforeInstruction()
+	h.terrain079.beforeInstruction()
 	h.person.beforeInstruction()
 	h.shelter.beforeInstruction()
 	h.nine.beforeInstruction()
@@ -402,6 +408,9 @@ func (h *hdRuntime) base(f draftNativeFrame) (*image.RGBA, map[string]any) {
 	if h.sea != nil {
 		receipt["sea"] = h.sea.paint(out, f)
 	}
+	if h.terrain079 != nil {
+		receipt["terrain079"] = h.terrain079.paint(out, f)
+	}
 	owned, painted := 0, 0
 	for i, v := range h.owned {
 		if !v {
@@ -472,6 +481,9 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 
 func (h *hdRuntime) key() string {
 	base := h.baseKey()
+	if h != nil && h.terrain079 != nil {
+		base = fmt.Sprintf("%s/terrain079/%d", base, h.terrain079.revision)
+	}
 	if h != nil && h.small != nil {
 		return fmt.Sprintf("%s/small/%d", base, h.small.revision)
 	}

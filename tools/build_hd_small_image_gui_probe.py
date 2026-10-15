@@ -1,4 +1,4 @@
-"""正式43個來源加一個唯讀快照工具，素材仍由正式loader載入。"""
+"""正式45個來源加一個唯讀快照工具，素材仍由正式loader載入。"""
 from pathlib import Path
 import argparse,ast,hashlib,json,os,shutil,subprocess
 parser=argparse.ArgumentParser(description=__doc__)
@@ -7,9 +7,9 @@ for name in ['reference','bundle','output']:parser.add_argument('--'+name,type=P
 a=parser.parse_args();repo,out=a.repo.resolve(),a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.is_relative_to('/out') and not out.exists() and out.parent.stat().st_uid==os.getuid()
 reference,formal_bundle=a.reference.resolve(),a.bundle.resolve()
-assert reference.is_dir() and formal_bundle.is_dir() and len(list(reference.glob('*.go')))==43
+assert reference.is_dir() and formal_bundle.is_dir() and len(list(reference.glob('*.go')))==45
 binding=json.loads((reference/'observation-sources.json').read_bytes())['source_sha256']
-assert len(binding)==26 and all(hashlib.sha256((repo/name).read_bytes()).hexdigest()==digest for name,digest in binding.items())
+assert len(binding)==28 and all(hashlib.sha256((repo/name).read_bytes()).hexdigest()==digest for name,digest in binding.items())
 tree=ast.parse((repo/'tools/prepare_hd_small_image_prototype.py').read_text())
 node=next(n for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='FILES' for t in n.targets))
 files=ast.literal_eval(node.value);out.mkdir()
@@ -31,6 +31,26 @@ bundle=out/'gui-bundle-r1';shutil.copytree(formal_bundle,bundle,symlinks=True)
 subprocess.run(['go','build','-trimpath','-o',str(bundle/'bin/colonization-window'),'.'],cwd=module,check=True,timeout=180)
 subprocess.run(['go','vet','.'],cwd=module,check=True,timeout=120)
 s=files['probe-gui-r1.py']
+terrain_helper='''def terrain079_mask(hd):
+    terrain=hd.get("terrain079") or {}
+    if not terrain:return Image.new("1",(1280,800))
+    need(terrain.get("formal") is True,"地形遮罩沒有正式來源")
+    raw=base64.b64decode(terrain["mask"],validate=True)
+    need(len(raw)==8000,"地形遮罩長度不同")
+    bits=[bool(raw[i>>3]&(1<<(i&7))) for i in range(64000)]
+    need(sum(bits)==terrain["painted"]<=terrain["owned"],"地形遮罩不同")
+    im=Image.new("1",(320,200));im.putdata(bits)
+    return im.resize((1280,800),Image.Resampling.NEAREST)
+
+'''
+assert s.count('def small_mask(hd):')==1
+s=s.replace('def small_mask(hd):',terrain_helper+'def small_mask(hd):',1)
+mask_tail='small_mask(hd)))'
+assert s.count(mask_tail)==2
+s=s.replace(mask_tail,'ImageChops.logical_or(small_mask(hd),terrain079_mask(hd))))')
+old='or hd.get("small",{}).get("painted")):'
+assert s.count(old)==1
+s=s.replace(old,'or hd.get("small",{}).get("painted") or hd.get("terrain079",{}).get("painted")):',1)
 active=sorted(int(name[6:9]) for name in json.loads((formal_bundle/'graphics/manifest.json').read_bytes())['assets'] if name.startswith('icons-'))
 assert active==[5, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 42, 53, 56, 59, 62, 67, 68, 69, 94, 122, 123, 124]
 city_active=[n for n in active if n not in {38,53}]
@@ -59,11 +79,12 @@ s=s.replace('terrain.get("prototype") is True','terrain.get("formal") is True')
 s=s.replace('icons-%03d-candidate-v1.png','icons-%03d.png')
 s=s.replace('PASS_SMALL_RAM_FOCUSED_FIVE_LANGUAGE_GUI','PASS_SMALL_FORMAL_FOCUSED_FIVE_LANGUAGE_GUI')
 s=s.replace('"prototype_entry"','"formal_entry"').replace('"prototype_flags": True','"diagnostics_only": True')
-s=s.replace('正式十四種素材保持；小圖像022、024隔離原型的102組必要GUI，19張HD快照及1張原版模式快照。獨立原版與四側重播另驗，不授予完整HD或正式接線信用。','正式四十四種素材的102組五語GUI；三十張小圖像沿正式loader。110張HD快照及1張原版模式快照；獨立原版與四側重播另驗，完整HD未完成。')
+s=s.replace('正式十四種素材保持；小圖像022、024隔離原型的102組必要GUI，19張HD快照及1張原版模式快照。獨立原版與四側重播另驗，不授予完整HD或正式接線信用。','正式四十五種素材的102組五語GUI；三十張小圖像沿正式loader。110張HD快照及1張原版模式快照；獨立原版與四側重播另驗，完整HD未完成。')
+compile(s,'formal_small_gui_current_terrain_mask','exec')
 (out/'probe-gui-r1.py').write_text(s)
 s=files['run-gui-r1.sh'].replace('/out/bundle','/out/gui-bundle-r1').replace('--small-assets /out/assets','--small-assets /out/gui-bundle-r1/graphics')
 (out/'run-gui-r1.sh').write_text(s)
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 report={'kind':'formal-small-read-only-GUI-probe','formal_binary_sha256':sha(formal_bundle/'bin/colonization-window'),'probe_binary_sha256':sha(bundle/'bin/colonization-window'),'base_go_sources_unchanged':{p.name:sha(p)==sha(module/p.name) for p in reference.glob('*.go') if p.name!='adapter.go'},'only_changed_go':['adapter.go','small_probe_helpers.go'],'production_assets':True,'prototype_asset_flags':False}
-assert all(report['base_go_sources_unchanged'].values()) and len(list(module.glob('*.go')))==44
+assert all(report['base_go_sources_unchanged'].values()) and len(list(module.glob('*.go')))==46
 (out/'gui-build-r1.json').write_text(json.dumps(report,indent=2)+'\n');print('PASS_SMALL_FORMAL_READ_ONLY_GUI_BUILD',report['probe_binary_sha256'],flush=True)
