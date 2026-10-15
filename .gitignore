@@ -63,3 +63,6 @@ __pycache__/
 
 # 規格062 R58世界地形原圖
 !graphics/terrain-079.png
+
+# 規格066 R61一般游標原圖
+!graphics/cursor-000.png

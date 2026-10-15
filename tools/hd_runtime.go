@@ -94,6 +94,10 @@ func loadHDRuntime(m *golem.Machine, game, directory string) (*hdRuntime, error)
 		}
 	}
 	h := &hdRuntime{m: m, art: art, pending: map[int]hdBuildingPixel{}}
+	h.cursor, err = loadHDCursorRuntime(game, directory)
+	if err != nil {
+		return nil, err
+	}
 	h.terrain079, err = loadHDTerrain079Runtime(h, game, directory)
 	if err != nil {
 		return nil, err
@@ -130,7 +134,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "2d0e2ae15139151bcf0f5c9b8fdeb08a209602fd7c955705dfbc340aea109f84"
+const hdManifestSHA = "52d874c63ac2a7b0e1ec01838e6218cf8ec20268900b1b64e4e48c432980f24e"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"
@@ -143,6 +147,7 @@ type hdBuildingPixel struct {
 	cursorIndex int
 }
 type hdRuntime struct {
+	cursor                                           *hdCursorRuntime
 	terrain079                                       *hdTerrain079Runtime
 	small                                            *hdSmallRuntime
 	nine                                             *hdNineRuntime
@@ -475,6 +480,9 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 		return nil, nil, err
 	}
 	b.hd.restoreCursor(out, f)
+	if b.hd.cursor != nil {
+		hd["cursor"] = b.hd.cursor.paint(b.hd, out, f)
+	}
 	record["hd"] = hd
 	return out, record, nil
 }

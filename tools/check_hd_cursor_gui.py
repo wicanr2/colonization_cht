@@ -5,10 +5,12 @@ from PIL import Image
 
 p=argparse.ArgumentParser(description=__doc__)
 for name in ['gui','asset','output']:p.add_argument('--'+name,type=Path,required=True)
+p.add_argument('--formal',action='store_true',help='驗正式載入路徑；省略時驗R60原型')
 a=p.parse_args();assert Path('/.dockerenv').is_file() and not a.output.exists()
 if not (a.gui/'check.json').is_file():print('SKIP：缺少已完成的本機原版GUI收據');sys.exit(77)
 read=lambda p:json.loads(p.read_bytes());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-gui=read(a.gui/'check.json');assert gui['result']=='PASS_DRAFT_CURSOR_FIVE_LANGUAGE_GUI' and len(gui['checks'])==92 and len(gui['cursor_edges'])==9
+state_key='formal' if a.formal else 'prototype'
+gui=read(a.gui/'check.json');assert gui['result']==('PASS_CURSOR_FORMAL_FIVE_LANGUAGE_GUI' if a.formal else 'PASS_DRAFT_CURSOR_FIVE_LANGUAGE_GUI') and len(gui['checks'])==92 and len(gui['cursor_edges'])==9
 assert gui['gui_inputs_sha256']==sha(a.gui/'gui.inputs.json')
 assert sha(a.asset)=='2839ce6c635c16af668ce251807e2723ed343052ab12cfa29a9be04cd9dbd8d4'
 with Image.open(a.asset) as im:art=im.convert('RGBA')
@@ -38,13 +40,13 @@ for path in sorted((a.gui/'terrain079').iterdir()):
   x,y=mx+k%16,my+k//16
   if 0<=x<320 and 0<=y<200:expected_indexed[y*320+x]=v;positions.append((k,x,y))
  native_origin_verified=indexed==expected_indexed
- source_proof_accepted=c.get('prototype') is True and c.get('source_sha256')=='47fced19d04987d3a0de8b6fd929abae6ba886939a2a7ce408b0213360ef1e03' and not c.get('reason')
+ source_proof_accepted=c.get(state_key) is True and c.get('source_sha256')=='47fced19d04987d3a0de8b6fd929abae6ba886939a2a7ce408b0213360ef1e03' and not c.get('reason')
  if source_proof_accepted:
   assert c['source_cells']==len(positions) and c['painted']==len(positions)
   raw=base64.b64decode(c['mask'],validate=True);assert len(raw)==8000 and sum(v.bit_count() for v in raw)==len(positions)
  generated=bool(c.get('painted'));pixels=0
  if generated:
-  assert native_origin_verified and c.get('prototype') is True and c['source_sha256']=='47fced19d04987d3a0de8b6fd929abae6ba886939a2a7ce408b0213360ef1e03'
+  assert native_origin_verified and c.get(state_key) is True and c['source_sha256']=='47fced19d04987d3a0de8b6fd929abae6ba886939a2a7ce408b0213360ef1e03'
   mask=base64.b64decode(c['mask'],validate=True)
   assert len(mask)==8000 and sum(v.bit_count() for v in mask)==c['painted']==c['source_cells']==len(positions)
  for k,x,y in positions:
@@ -63,5 +65,6 @@ for path in sorted((a.gui/'terrain079').iterdir()):
 assert len(rows)==29
 edges=[r for r in rows if r['label'].startswith('cursor-edge-')];assert len(edges)==9
 edge_pass=all(r['native_origin_verified'] and r['source_proof_accepted'] and r['actual_hd_cursor']==bool(r['visible_source_cells']) for r in edges)
-result={'result':'PASS_DRAFT_CURSOR_GUI_RGBA_AND_EDGES' if edge_pass else 'DRAFT_CURSOR_GUI_EDGE_GAP','snapshots':rows,'edge_samples':len(edges),'edge_hd_samples':sum(r['actual_hd_cursor'] for r in edges),'edge_fully_clipped_samples':sum(r['fully_clipped'] for r in edges),'verified_cursor_rgba_pixels':sum(r['verified_cursor_rgba_pixels'] for r in rows),'production_connected':False,'normal_five_language_checks':92,'gui_sha256':sha(a.gui/'check.json'),'asset_sha256':sha(a.asset),'checker_sha256':sha(Path(__file__)),'limitations':['Original CPU/RAM/WAV/save replay is separate.','Other cursor sources and hidden states are not granted coverage.']}
+label=('PASS_CURSOR_FORMAL_GUI_RGBA_AND_EDGES' if a.formal else 'PASS_DRAFT_CURSOR_GUI_RGBA_AND_EDGES') if edge_pass else ('CURSOR_FORMAL_GUI_EDGE_GAP' if a.formal else 'DRAFT_CURSOR_GUI_EDGE_GAP')
+result={'result':label,'snapshots':rows,'edge_samples':len(edges),'edge_hd_samples':sum(r['actual_hd_cursor'] for r in edges),'edge_fully_clipped_samples':sum(r['fully_clipped'] for r in edges),'verified_cursor_rgba_pixels':sum(r['verified_cursor_rgba_pixels'] for r in rows),'production_connected':a.formal,'normal_five_language_checks':92,'gui_sha256':sha(a.gui/'check.json'),'asset_sha256':sha(a.asset),'checker_sha256':sha(Path(__file__)),'limitations':['Original CPU/RAM/WAV/save replay is separate.','Other cursor sources and hidden states are not granted coverage.']}
 a.output.write_text(json.dumps(result,indent=2)+'\n');print(result['result'],len(rows),result['edge_hd_samples'],flush=True)

@@ -1,4 +1,4 @@
-"""正式45個來源加一個唯讀快照工具，素材仍由正式loader載入。"""
+"""正式47份Go來源加一個唯讀快照工具，素材仍由正式loader載入。"""
 from pathlib import Path
 import argparse,ast,hashlib,json,os,shutil,subprocess
 parser=argparse.ArgumentParser(description=__doc__)
@@ -7,9 +7,9 @@ for name in ['reference','bundle','output']:parser.add_argument('--'+name,type=P
 a=parser.parse_args();repo,out=a.repo.resolve(),a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.is_relative_to('/out') and not out.exists() and out.parent.stat().st_uid==os.getuid()
 reference,formal_bundle=a.reference.resolve(),a.bundle.resolve()
-assert reference.is_dir() and formal_bundle.is_dir() and len(list(reference.glob('*.go')))==45
+assert reference.is_dir() and formal_bundle.is_dir() and len(list(reference.glob('*.go')))==47
 binding=json.loads((reference/'observation-sources.json').read_bytes())['source_sha256']
-assert len(binding)==28 and all(hashlib.sha256((repo/name).read_bytes()).hexdigest()==digest for name,digest in binding.items())
+assert len(binding)==30 and all(hashlib.sha256((repo/name).read_bytes()).hexdigest()==digest for name,digest in binding.items())
 tree=ast.parse((repo/'tools/prepare_hd_small_image_prototype.py').read_text())
 node=next(n for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='FILES' for t in n.targets))
 files=ast.literal_eval(node.value);out.mkdir()
@@ -79,12 +79,34 @@ s=s.replace('terrain.get("prototype") is True','terrain.get("formal") is True')
 s=s.replace('icons-%03d-candidate-v1.png','icons-%03d.png')
 s=s.replace('PASS_SMALL_RAM_FOCUSED_FIVE_LANGUAGE_GUI','PASS_SMALL_FORMAL_FOCUSED_FIVE_LANGUAGE_GUI')
 s=s.replace('"prototype_entry"','"formal_entry"').replace('"prototype_flags": True','"diagnostics_only": True')
-s=s.replace('正式十四種素材保持；小圖像022、024隔離原型的102組必要GUI，19張HD快照及1張原版模式快照。獨立原版與四側重播另驗，不授予完整HD或正式接線信用。','正式四十五種素材的102組五語GUI；三十張小圖像沿正式loader。110張HD快照及1張原版模式快照；獨立原版與四側重播另驗，完整HD未完成。')
+s=s.replace('正式十四種素材保持；小圖像022、024隔離原型的102組必要GUI，19張HD快照及1張原版模式快照。獨立原版與四側重播另驗，不授予完整HD或正式接線信用。','正式四十六種素材的102組五語GUI；三十張小圖像沿正式loader。110張HD快照及1張原版模式快照；獨立原版與四側重播另驗，完整HD未完成。')
 compile(s,'formal_small_gui_current_terrain_mask','exec')
+
+cursor_template=ast.literal_eval(next(n.value for n in ast.parse((repo/'tools/build_hd_cursor_gui_probe.py').read_text()).body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='CURSOR_GUI_HELPER' for t in n.targets)))
+cursor_helper=cursor_template.replace("'__CURSOR_ASSET__'",repr(str(bundle/'graphics/cursor-000.png')))
+assert s.count('def terrain079_mask(hd):')==1
+s=s.replace('def terrain079_mask(hd):',cursor_helper+'def terrain079_mask(hd):',1)
+mask_tail='ImageChops.logical_or(small_mask(hd),terrain079_mask(hd))))'
+assert s.count(mask_tail)==2
+s=s.replace(mask_tail,mask_tail.replace('terrain079_mask(hd)','ImageChops.logical_or('+'terrain079_mask(hd)'+',cursor_mask(hd))'))
+lines=s.splitlines();english=last=0
+for i,line in enumerate(lines):
+ if line.strip().startswith('if graphics == "original" or not ('):
+  assert line.endswith('):');lines[i]=line[:-2]+' or hd.get("cursor",{}).get("painted")):';english+=1
+ if line.strip().startswith('if c["graphics"] != "hd" or not ('):
+  assert line.endswith('):');lines[i]=line[:-2]+' or c["native_live"].get("hd",{}).get("cursor",{}).get("painted")):';last+=1
+assert english==last==1
+s='\n'.join(lines)+'\n'
+old='            for k, value in enumerate(cursor):';assert s.count(old)==1
+s=s.replace(old,'            expected=cursor_expected(original,c["native_live"].get("hd",{}),c["dos_mouse"],cursor)\n'+old,1)
+old='need(actual.crop(rect).tobytes() == original.crop(rect).tobytes(), "HD或文字蓋住不透明游標")';assert s.count(old)==1
+s=s.replace(old,'need(actual.crop(rect).tobytes() == expected.crop(rect).tobytes(), "正式游標原alpha合成不符")',1)
+compile(s,'current_formal_cursor_GUI','exec')
+
 (out/'probe-gui-r1.py').write_text(s)
 s=files['run-gui-r1.sh'].replace('/out/bundle','/out/gui-bundle-r1').replace('--small-assets /out/assets','--small-assets /out/gui-bundle-r1/graphics')
 (out/'run-gui-r1.sh').write_text(s)
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 report={'kind':'formal-small-read-only-GUI-probe','formal_binary_sha256':sha(formal_bundle/'bin/colonization-window'),'probe_binary_sha256':sha(bundle/'bin/colonization-window'),'base_go_sources_unchanged':{p.name:sha(p)==sha(module/p.name) for p in reference.glob('*.go') if p.name!='adapter.go'},'only_changed_go':['adapter.go','small_probe_helpers.go'],'production_assets':True,'prototype_asset_flags':False}
-assert all(report['base_go_sources_unchanged'].values()) and len(list(module.glob('*.go')))==46
+assert all(report['base_go_sources_unchanged'].values()) and len(list(module.glob('*.go')))==48
 (out/'gui-build-r1.json').write_text(json.dumps(report,indent=2)+'\n');print('PASS_SMALL_FORMAL_READ_ONLY_GUI_BUILD',report['probe_binary_sha256'],flush=True)

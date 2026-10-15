@@ -1,6 +1,6 @@
 # 一般游標的HD顯示層
 
-狀態：限定READY，沿2026-10-15 R60一般游標顯示契約；尚未正式接線或CONFORMED。
+狀態：限定CONFORMED，沿2026-10-15 R60顯示契約與R61正式驗收；其他游標、隱藏狀態與動畫未完成。
 入口為[目標186](../goals/186-display-settings-and-gameplay-video.md)，工作項目為
 [Issue #63](https://github.com/wicanr2/colonization_cht/issues/63)。
 本規格只處理一般箭頭游標，不擴張其他游標、隱藏狀態或動畫。
@@ -84,6 +84,7 @@ bc5d0f8025fa62dffaf33f3f65ccc7a10a9eff37ba549b3537ae68ad855e04dd。
 原PNG的獨立RGBA比較為[check_hd_cursor_prototype.py](../../tools/check_hd_cursor_prototype.py)。
 正常五語GUI與邊界的唯讀副本由[GUI組裝器](../../tools/prepare_hd_cursor_gui_probe.py)重生。
 正常快照的定位、原alpha及來源外比較為[GUI檢查器](../../tools/check_hd_cursor_gui.py)。
+正式來源副本由[正式GUI組裝器](../../tools/build_hd_cursor_gui_probe.py)驗證；原型旗標不進正式路徑。
 原型只在已驗正式來源副本加入欄位、明示候選載入與最後合成；以獨立旗標選取本機原圖。
 沒有增加原版觀測或修改原版輸入。元件收據不能取代下列正常GUI驗證。
 
@@ -167,3 +168,49 @@ cursor-000-candidate-v2-provenance-r60.json，SHA-256為5b3406c8bbade64b4e7501a0
 | performance-play-r1-check.json | 9735278e25193e62804633c28d0b19531ac2ac4b5c4c422f55e0536f1a7bbd5a |
 | prototype-play-r1-check.json | 2c03494ff663af7abb7dc37d422e7d564ee9f211ef1f5ef6482bc055922273a4 |
 | cursor-000-candidate-v2-provenance-r60.json | 5b3406c8bbade64b4e7501a03e92a078911ad75e0a610817ca86d45ec852f461 |
+
+
+## 2026-10-15 R61一般游標正式驗收與限定CONFORMED
+
+原PNG及alpha已原樣接入[正式載入器](../../tools/hd_cursor_runtime.go)，
+[元件回歸](../../tools/hd_cursor_runtime_test.go)沿已驗原版49點。
+正式程式不含游標原型旗標；由graphics/cursor-000.png自動載入，沿R60的原版底層加原alpha方法，
+只新增最後合成，不增加原版RAM觀測、寫入、輸入或存檔變更。
+合計46張PNG與清冊47檔、47Go／30來源綁定。其他游標與全量HD未完成，沒有新發行。
+
+| 正式驗證 | 結果 |
+|---|---|
+| 完整回歸 | 834項Go零skip與go vet通過。游標49份元件／64288像素、6種守門與7種圖像／原版來源載入拒絕通過。舊來源的49點正常輸入、RAM與來源反例保持。 |
+| 正常GUI | 92組五語原版／HD、368設定事件與3772個游標來源格；46組HD皆82點，沒有守門回退。正常進城、離城與存檔返回完成。 |
+| 邊界與像素 | 29份實際快照與31840個游標像素相同；九個邊界／恢復有8份可見HD、1份右下角全裁切。來源外與原版定位保持。 |
+| 既有地形 | 原版模型101次十三來源、194628事件、12823轉送；079的21次來源、9792筆來源游標還原及489952個地形像素相同。 |
+| 實際輸入四側 | 109筆至219000000步，完整CPU／RAM／VGA／DAC、WAV及存檔相同；29點另由原版觀測與控制重生。 |
+| 正常遊玩與成本 | 未加觀測器的正式play=true、frames為0；兩次皆驗世界、城內、存檔返回的82點。四次原版狀態／音訊／存檔保持；固定Linux2CPU循序ABBA均值28.379／28.880秒，比率1.0177，不作加速或跨平台FPS聲明。 |
+| 回退與封裝 | 本批9種新行程含PNG與CURSOR.SS的缺件／錯件／連結、缺目錄／錯清冊／恢復，日文HD偏好保持。47檔白名單與142項封裝拒絕通過。舊素材新行程沿既有限定收據，沒有重標全部案例。 |
+
+小圖像及地形GUI工具已補入正式游標在英文／其他語言的遮罩與原alpha公式。
+兩個工具建置、go vet及29份實際快照各31840像素通過；未重跑舊111點小圖像GUI。
+首輪正式組裝留有原型載入函式名，第二輪重建腳本誤改固定參考路徑；
+修正後用新輸出目錄R3乾淨建置，正式執行檔及完整測試以R3為準，失敗收據保留。
+模板換行額外檢查曾誤以為需要雙反斜線；實際模板原已正確，沒有修改，兩個工具實際建置及快照比較通過。
+
+正式執行檔ab6b791d43dc40f4f34a6138930e8f54e80836bd06f74bba8d0e01ee1b1af39e，清冊52d874c63ac2a7b0e1ec01838e6218cf8ec20268900b1b64e4e48c432980f24e。
+本機根hd-cursor-formal-r61，命令入口commands-r61.json。原型歷史、透明輪廓與參考metadata勘誤沿R60保留。
+
+| 收據 | SHA-256 |
+|---|---|
+| build-r3.json | c94d9f6184f6a10b04f5cac7ddcea118a612a80efb68d8cddef5553a8bf253ac |
+| tests-r3-check.json | d8316a86cd03291bc3978ce0d1f87d4f14677ee047046dcd8eb4468d042296b8 |
+| native-cursor-r3/check.json | 35778d92ff893e02eb81ea8bb51c2fe8a7e3e4017baee82b119772186c711995 |
+| component-rgba-r1.json | cd622e4e4e3c22f83c13cc844f1e105f7b5e8e5c9dfea69e222d1fad69cc1755 |
+| gui-build-r1/gui-build-r1.json | 8f156cfc73c51a74d211be05a1e9a0b67585d4e6f67fd09d9fe1e1d2e3c7ff85 |
+| gui-build-r1/gui-r1/check.json | 0ce1c41cd00bc6456c6288e337850f82329230aca8cb583e0e3f5eaa7035cefe |
+| gui-pixels-r1.json | 3aaa5bdef48d3bf58556063e883fc03c2d7de645fe355a856081eac1bc532ed1 |
+| gui-model-r1/check.json | 01716acbbf4ecf728ee97adbcf993a741f6ad749a3357fdb7039c71447503720 |
+| terrain-source-display-r1.json | 3c238f7dcf12654986b2e0bc78cf7bb3f3fa7346e7abdc87790a86c7deaaa12c |
+| replays-r1/check.json | 824139018ec5ce7b6d503247299709483d7f82465bcd734115fc6f369a980b3a |
+| startup-r1/check.json | 925ad6d51fb763d2b6d95adab2f2c700b447229155812dd139d78f92572fb338 |
+| package-r1-check.json | 556710feef3a52ee513fd2fb53ad7ae8dbd49bbbc3e78cf87ba8b475e0ae8c17 |
+| compat-r1-check.json | 055ef82e745c5d700a5b594cc7a6c6d68cff170a4654ec5335056ff25f48bb81 |
+| performance-play-r1-check.json | 7eba6cef324b2c1649d130d9d04e6c865d890292093e92909c903eb6801a71cb |
+| production-play-r1-check.json | 74c9498f253ead90925fa09f4e348107421cd388403646d8a817e65ba126a4f7 |

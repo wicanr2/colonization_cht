@@ -5,9 +5,10 @@ from PIL import Image
 
 p=argparse.ArgumentParser(description=__doc__)
 for name in ['components','asset','native','receipts','output']:p.add_argument('--'+name,type=Path,required=True)
+p.add_argument('--formal',action='store_true',help='驗正式游標元件；省略時驗R60原型')
 a=p.parse_args();assert Path('/.dockerenv').is_file() and not a.output.exists()
 read=lambda p:json.loads(p.read_bytes());sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-report=read(a.components/'check.json');assert report['result']=='PASS_DRAFT_CURSOR_49_ORIGINAL_FRAME_COMPONENTS' and not report['normal_gui_claim']
+report=read(a.components/'check.json');assert report['result']==('PASS_FORMAL_CURSOR_49_ORIGINAL_FRAME_COMPONENTS' if a.formal else 'PASS_DRAFT_CURSOR_49_ORIGINAL_FRAME_COMPONENTS') and not report['normal_gui_claim']
 assert sha(a.asset)=='2839ce6c635c16af668ce251807e2723ed343052ab12cfa29a9be04cd9dbd8d4'
 with Image.open(a.asset) as im:art=im.convert('RGBA')
 bbox=art.getchannel('A').point(lambda v:255 if v>=128 else 0).getbbox();assert bbox==(106,188,721,1047)
@@ -39,5 +40,5 @@ for i,(row,point) in enumerate(zip(report['points'],points)):
  mask=base64.b64decode(row['mask'],validate=True);assert len(mask)==8000 and sum(v.bit_count() for v in mask)==len(cells)==row['painted']==row['source_cells']==82
  assert all(mask[k>>3]&(1<<(k&7)) for k in cells) and pixels==1312 and underlay==128
  summaries.append({'point':i,'verified_rgba_pixels':pixels,'under_alpha128_subpixels':underlay,'source_cells':len(cells),'outside_unchanged':True})
-result={'result':'PASS_DRAFT_CURSOR_49_COMPONENT_RGBA','points':summaries,'verified_rgba_pixels':sum(x['verified_rgba_pixels'] for x in summaries),'normal_gui_claim':False,'production_connected':False,'asset_sha256':sha(a.asset),'component_check_sha256':sha(a.components/'check.json'),'checker_sha256':sha(Path(__file__))}
+result={'result':'PASS_FORMAL_CURSOR_49_COMPONENT_RGBA' if a.formal else 'PASS_DRAFT_CURSOR_49_COMPONENT_RGBA','points':summaries,'verified_rgba_pixels':sum(x['verified_rgba_pixels'] for x in summaries),'normal_gui_claim':False,'production_connected':a.formal,'asset_sha256':sha(a.asset),'component_check_sha256':sha(a.components/'check.json'),'checker_sha256':sha(Path(__file__))}
 a.output.write_text(json.dumps(result,indent=2)+'\n');print(result['result'],result['verified_rgba_pixels'],flush=True)

@@ -39,7 +39,9 @@ def main():
                  "missing-sea", "bad-sea", "linked-sea", "missing-person", "bad-person", "linked-person", "missing-shelter", "bad-shelter", "linked-shelter"]
     cases += [kind+"-building-%03d"%n for n in [16,21,27,35,39,42,43,44,45,9] for kind in ["missing","bad","linked"]]
     cases += [kind+"-icons-%03d"%n for n in [5, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 42, 53, 56, 59, 62, 67, 68, 69, 94, 122, 123, 124] for kind in ["missing","bad","linked"]]
-    cases += ["missing-terrain079","bad-terrain079","linked-terrain079","restored"]
+    cases += ["missing-terrain079","bad-terrain079","linked-terrain079"]
+    cases += ["missing-cursor-image","bad-cursor-image","linked-cursor-image",
+              "missing-cursor-source","bad-cursor-source","linked-cursor-source","restored"]
     if args.cases:
         need(len(args.cases)==len(set(args.cases)) and set(args.cases)<=set(cases), "指定的缺件案例不同")
         cases = [case for case in cases if case in args.cases]
@@ -47,6 +49,16 @@ def main():
         out = root / case
         out.mkdir()
         assets = out / "graphics"
+        case_game = args.game
+        if case.endswith("-cursor-source"):
+            case_game = out / "game"
+            shutil.copytree(args.game, case_game)
+            cursor_source = case_game / "CURSOR.SS"
+            cursor_source.unlink()
+            if case == "bad-cursor-source":
+                cursor_source.write_bytes(b"damaged")
+            if case == "linked-cursor-source":
+                cursor_source.symlink_to(args.game / "CURSOR.SS")
         if case != "missing-directory":
             shutil.copytree(args.bundle / "graphics", assets)
         if case == "missing-image":
@@ -80,6 +92,10 @@ def main():
         if case=="bad-terrain079": (assets/"terrain-079.png").write_bytes(b"damaged")
         if case=="linked-terrain079":
             (assets/"terrain-079.png").unlink(); (assets/"terrain-079.png").symlink_to(args.bundle/"graphics/terrain-079.png")
+        if case=="missing-cursor-image": (assets/"cursor-000.png").unlink()
+        if case=="bad-cursor-image": (assets/"cursor-000.png").write_bytes(b"damaged")
+        if case=="linked-cursor-image":
+            (assets/"cursor-000.png").unlink(); (assets/"cursor-000.png").symlink_to(args.bundle/"graphics/cursor-000.png")
         for n in [16,21,27,35,39,42,43,44,45,9]:
             name="building-%03d.png"%n
             if case=="missing-building-%03d"%n: (assets/name).unlink()
@@ -93,7 +109,7 @@ def main():
             if case=="linked-icons-%03d"%n:
                 (assets/name).unlink(); (assets/name).symlink_to(args.bundle/"graphics"/name)
         prefix = out / "gui"
-        command = ["bash", str(args.bundle / "colonization-cht.sh"), "--game", str(args.game),
+        command = ["bash", str(args.bundle / "colonization-cht.sh"), "--game", str(case_game),
                    "--play=false", "--audio-mute", "--window-steps", "100000000",
                    "--display-config", str(preference), "--display-diagnostics", "--native-text-diagnostics",
                    "--hd-assets", str(assets), "--out", str(prefix)]

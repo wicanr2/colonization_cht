@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "2d0e2ae15139151bcf0f5c9b8fdeb08a209602fd7c955705dfbc340aea109f84",
+  "formal_manifest_sha256": "52d874c63ac2a7b0e1ec01838e6218cf8ec20268900b1b64e4e48c432980f24e",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,8 +26,8 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 45,
-    "additional_ready_source_contracts": 1,
+    "formal_asset_bindings": 46,
+    "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
     "other_formats_and_program_drawn_graphics": "not_assessed"
@@ -15405,7 +15405,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed standard cursor source, RAM copy and input-origin placement within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "cursor-000.png"
+      ],
       "normal_entry_sample": {
         "calls": 2,
         "candidate_research_ids": [
@@ -15431,10 +15433,11 @@
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
       },
       "source_contract_reference": {
-        "state": "READY",
+        "state": "CONFORMED",
         "spec": "docs/spec/066-hd-standard-cursor.md",
-        "section": "2026-10-15 R60一般游標顯示契約READY",
-        "formal_connected": false
+        "section": "2026-10-15 R61一般游標正式驗收與限定CONFORMED",
+        "formal_connected": true,
+        "conformance_review_sha256": "1389977917b73895da02d7e345656d778d506671decaf17c249a5f2967f09fe5"
       },
       "standard_cursor_sample": {
         "native_source_report_sha256": "bc5d0f8025fa62dffaf33f3f65ccc7a10a9eff37ba549b3537ae68ad855e04dd",
@@ -51481,6 +51484,16 @@
       "source_ordinal": 79,
       "source_encoded_sha256": "a8a861754068c86a9c150442f7b07f1fbd297d82b8e5dcb2e3ee108bde4dc84c",
       "spec": "docs/spec/062-hd-sea-draw-lifecycle.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "cursor-000.png",
+      "asset_sha256": "2839ce6c635c16af668ce251807e2723ed343052ab12cfa29a9be04cd9dbd8d4",
+      "source_research_id": 309,
+      "source_file": "CURSOR.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "d77899f35c0e5f40780af7fddd6918c58ff86005de5ea4ecfbde34f5989e7dde",
+      "spec": "docs/spec/066-hd-standard-cursor.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec"
     }
   ],

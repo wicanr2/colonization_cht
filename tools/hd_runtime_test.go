@@ -23,7 +23,7 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 		}
 		return raw
 	}
-	for _, name := range []string{"VICEROY.EXE", "BUILDING.SS", "PHYS0.SS", "ICONS.SS"} {
+	for _, name := range []string{"VICEROY.EXE", "BUILDING.SS", "PHYS0.SS", "ICONS.SS", "CURSOR.SS"} {
 		if _, err := os.Stat(filepath.Join(game, name)); os.IsNotExist(err) {
 			t.Skip("缺少合法原版", name)
 		}
@@ -67,6 +67,20 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 			p := filepath.Join(a, "building-024.png")
 			os.Remove(p)
 			os.Symlink(filepath.Join(assets, "building-024.png"), p)
+		},
+		"missing-cursor-image": func(a, g string) { os.Remove(filepath.Join(a, "cursor-000.png")) },
+		"bad-cursor-image":     func(a, g string) { os.WriteFile(filepath.Join(a, "cursor-000.png"), []byte("wrong"), 0644) },
+		"linked-cursor-image": func(a, g string) {
+			p := filepath.Join(a, "cursor-000.png")
+			os.Remove(p)
+			os.Symlink(filepath.Join(assets, "cursor-000.png"), p)
+		},
+		"missing-cursor-source": func(a, g string) { os.Remove(filepath.Join(g, "CURSOR.SS")) },
+		"bad-cursor-source":     func(a, g string) { os.WriteFile(filepath.Join(g, "CURSOR.SS"), []byte("wrong"), 0644) },
+		"linked-cursor-source": func(a, g string) {
+			p := filepath.Join(g, "CURSOR.SS")
+			os.Remove(p)
+			os.Symlink(filepath.Join(game, "CURSOR.SS"), p)
 		},
 		"missing-icons": func(a, g string) { os.Remove(filepath.Join(g, "ICONS.SS")) },
 		"wrong-icons":   func(a, g string) { os.WriteFile(filepath.Join(g, "ICONS.SS"), []byte("wrong"), 0644) },
@@ -113,12 +127,12 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 					t.Fatal(err)
 				}
 			}
-			for _, n := range []string{"manifest.json", "building-032.png", "sea-148.png", "person-100.png", "building-024.png", "building-016.png", "building-021.png", "building-027.png", "building-035.png", "building-039.png", "building-042.png", "building-043.png", "building-044.png", "building-045.png", "building-009.png", "icons-022.png", "icons-024.png", "icons-025.png", "icons-026.png", "icons-027.png", "icons-028.png", "icons-029.png", "icons-030.png", "icons-031.png", "icons-032.png", "icons-033.png", "icons-034.png", "icons-035.png", "icons-036.png", "icons-037.png", "icons-038.png", "icons-005.png", "icons-023.png", "icons-042.png", "icons-053.png", "icons-056.png", "icons-059.png", "icons-062.png", "icons-067.png", "icons-068.png", "icons-069.png", "icons-094.png", "icons-122.png", "icons-123.png", "icons-124.png", "terrain-079.png"} {
+			for _, n := range []string{"manifest.json", "building-032.png", "sea-148.png", "person-100.png", "building-024.png", "building-016.png", "building-021.png", "building-027.png", "building-035.png", "building-039.png", "building-042.png", "building-043.png", "building-044.png", "building-045.png", "building-009.png", "icons-022.png", "icons-024.png", "icons-025.png", "icons-026.png", "icons-027.png", "icons-028.png", "icons-029.png", "icons-030.png", "icons-031.png", "icons-032.png", "icons-033.png", "icons-034.png", "icons-035.png", "icons-036.png", "icons-037.png", "icons-038.png", "icons-005.png", "icons-023.png", "icons-042.png", "icons-053.png", "icons-056.png", "icons-059.png", "icons-062.png", "icons-067.png", "icons-068.png", "icons-069.png", "icons-094.png", "icons-122.png", "icons-123.png", "icons-124.png", "terrain-079.png", "cursor-000.png"} {
 				if err := os.WriteFile(filepath.Join(a, n), readFile(filepath.Join(assets, n)), 0644); err != nil {
 					t.Fatal(err)
 				}
 			}
-			for _, n := range []string{"VICEROY.EXE", "BUILDING.SS", "PHYS0.SS", "ICONS.SS"} {
+			for _, n := range []string{"VICEROY.EXE", "BUILDING.SS", "PHYS0.SS", "ICONS.SS", "CURSOR.SS"} {
 				if err := os.WriteFile(filepath.Join(g, n), readFile(filepath.Join(game, n)), 0644); err != nil {
 					t.Fatal(err)
 				}

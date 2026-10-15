@@ -6265,3 +6265,28 @@ v2 metadata直接參考誤列定稿圖；原紀錄保留，新勘誤記錄原版
 | prototype-play-r1-check.json | 2c03494ff663af7abb7dc37d422e7d564ee9f211ef1f5ef6482bc055922273a4 |
 | source-index-r1.json | 1f210ba45e2284bcff6c1820a644e8e07a9482807eb5b3b919da7680824033ae |
 | cursor-000-candidate-v2-provenance-r60.json | 5b3406c8bbade64b4e7501a03e92a078911ad75e0a610817ca86d45ec852f461 |
+
+
+## 2026-10-15 R61一般游標正式驗收與限定CONFORMED
+
+規格066 R61限定CONFORMED，一般游標已正式接線。原圖／alpha保持，原版輪廓加生成筆觸；46種正式素材／清冊47檔、47Go／30綁定。834Go零skip與go vet、49份元件／64288像素、6守門與7載入拒絕、92組五語GUI及29份快照／31840游標像素通過。九個邊界／恢復有8份可見HD、右下角1份全裁切，沒有守門回退。109筆實際輸入四側至219000000步的完整原版狀態／WAV／存檔相同；未加觀測器的play=true與循序ABBA亦通過。9種本批新行程及142項封裝拒絕通過。其他游標、隱藏狀態、背景、動畫與全量HD仍待接續，沒有新發行。
+
+原版來源、工具版本與位址空間沿R59／R60；原版資料指紋保持。正式只新增最後游標合成，沒有新增RAM觀測；原版底層與v2原alpha、右下全裁切及直接參考勘誤沿規格066。
+
+| 收據 | SHA-256 |
+|---|---|
+| build-r3.json | c94d9f6184f6a10b04f5cac7ddcea118a612a80efb68d8cddef5553a8bf253ac |
+| tests-r3-check.json | d8316a86cd03291bc3978ce0d1f87d4f14677ee047046dcd8eb4468d042296b8 |
+| native-cursor-r3/check.json | 35778d92ff893e02eb81ea8bb51c2fe8a7e3e4017baee82b119772186c711995 |
+| component-rgba-r1.json | cd622e4e4e3c22f83c13cc844f1e105f7b5e8e5c9dfea69e222d1fad69cc1755 |
+| gui-build-r1/gui-build-r1.json | 8f156cfc73c51a74d211be05a1e9a0b67585d4e6f67fd09d9fe1e1d2e3c7ff85 |
+| gui-build-r1/gui-r1/check.json | 0ce1c41cd00bc6456c6288e337850f82329230aca8cb583e0e3f5eaa7035cefe |
+| gui-pixels-r1.json | 3aaa5bdef48d3bf58556063e883fc03c2d7de645fe355a856081eac1bc532ed1 |
+| gui-model-r1/check.json | 01716acbbf4ecf728ee97adbcf993a741f6ad749a3357fdb7039c71447503720 |
+| terrain-source-display-r1.json | 3c238f7dcf12654986b2e0bc78cf7bb3f3fa7346e7abdc87790a86c7deaaa12c |
+| replays-r1/check.json | 824139018ec5ce7b6d503247299709483d7f82465bcd734115fc6f369a980b3a |
+| startup-r1/check.json | 925ad6d51fb763d2b6d95adab2f2c700b447229155812dd139d78f92572fb338 |
+| package-r1-check.json | 556710feef3a52ee513fd2fb53ad7ae8dbd49bbbc3e78cf87ba8b475e0ae8c17 |
+| compat-r1-check.json | 055ef82e745c5d700a5b594cc7a6c6d68cff170a4654ec5335056ff25f48bb81 |
+| performance-play-r1-check.json | 7eba6cef324b2c1649d130d9d04e6c865d890292093e92909c903eb6801a71cb |
+| production-play-r1-check.json | 74c9498f253ead90925fa09f4e348107421cd388403646d8a817e65ba126a4f7 |
