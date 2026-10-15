@@ -27,7 +27,7 @@
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
     "formal_asset_bindings": 45,
-    "additional_ready_source_contracts": 0,
+    "additional_ready_source_contracts": 1,
     "complete_hd": false,
     "contains_original_pixels": false,
     "other_formats_and_program_drawn_graphics": "not_assessed"
@@ -15403,7 +15403,7 @@
       "indexed_sha256": "6ccf457146503ab4a01cdf01147d6bc8f3cb428580a644f93d9b1b6f0b43d553",
       "opaque_pixels": 84,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed standard cursor source, RAM copy and input-origin placement within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -15429,6 +15429,28 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "source_contract_reference": {
+        "state": "READY",
+        "spec": "docs/spec/066-hd-standard-cursor.md",
+        "section": "2026-10-15 R60一般游標顯示契約READY",
+        "formal_connected": false
+      },
+      "standard_cursor_sample": {
+        "native_source_report_sha256": "bc5d0f8025fa62dffaf33f3f65ccc7a10a9eff37ba549b3537ae68ad855e04dd",
+        "ready_review_sha256": "818758a0776cb26903669de76f2ceeb657d086b3c99aa0dd2c512d5ff6897f1b",
+        "source_calls": 2,
+        "native_positions": 49,
+        "runtime_bitmap_sha256": "47fced19d04987d3a0de8b6fd929abae6ba886939a2a7ce408b0213360ef1e03",
+        "visible_opaque_cells": 82,
+        "input_origin": [
+          0,
+          0
+        ],
+        "gui_snapshots": 29,
+        "edge_samples": 9,
+        "fully_clipped_edge_samples": 1,
+        "claim": "standard cursor only; other cursor sources and hidden states not granted coverage"
       }
     },
     {

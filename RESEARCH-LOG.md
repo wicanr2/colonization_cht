@@ -6230,3 +6230,38 @@ R51的253轉255是離線位元組對照。此次原版資料流為先把17×17�
 | cursor-000-candidate-v2.png | 2839ce6c635c16af668ce251807e2723ed343052ab12cfa29a9be04cd9dbd8d4 |
 | cursor-000-candidate-v1.json | 986945182c0d943b381137d8c58d3a3edde4afdc89fbd668258afe6435f90852 |
 | cursor-000-candidate-v2.json | 85fb68367de99228e8fdacf68bb71eb60df8e2d33220a18c43a033db9da78c18 |
+
+
+## 2026-10-15 R60一般游標透明合成READY
+
+原版輸入與工具版本沿R59，位址仍採dosgolem實模式CS:IP及20bit RAM；原版SS／EXE指紋保持。
+生成候選v2原PNG與alpha保持，合成契約、Go16bit公式、原版輪廓下層與限制見[規格066](docs/spec/066-hd-standard-cursor.md)。
+原型47Go、唯讀GUI48Go，正式28份來源及45種素材未變。元件僅重用已驗原版快照，不當作新正常路徑。
+
+confirmed限本批原版與輸入：92組五語GUI與29份快照通過，來源外與31840個游標像素相同。
+九個邊界／恢復有8份可見HD、右下角1份全裁切。原版首像素透明，實際索引等於未畫游標底圖，
+來源／尾端證據仍通過；零點不算HD像素或守門回退。R1離線檢查未區分全裁切，R2依原版可見點數訂正，像素條件保持。
+R1 GUI城內日文有一次既有outside-cursor:3634回退，不計HD；R2同Go二進位加邊界完整重跑，46組HD皆82點，沒有回退。
+
+獨立原版模型101次十三來源、197794事件、12823轉送與5886保存／4370還原通過。
+079的21次來源、10560筆來源游標還原及489952個地形像素相同。
+99筆實際輸入四側至214400000步的完整原版狀態、WAV及存檔相同；play=true的四次循序ABBA亦保持。
+固定Linux2CPU成本基準均值35.448秒、候選34.586秒，比率0.9757；不作加速或跨平台FPS結論。
+
+地形像素首輪仍讀R58本機原圖路徑而缺檔；改綁同hash正式原圖後乾淨通過。
+來源索引首輪輸出命名空間仍為R58，守門在寫入前拒絕；修正為R60，舊收據未覆寫。
+v2 metadata直接參考誤列定稿圖；原紀錄保留，新勘誤記錄原版游標及v1為直接參考、定稿圖為經v1的間接畫風來源。
+完整命令見commands-r60.json；原型仍不進正式路徑與發行包，全量HD未完成。
+
+| 收據 | SHA-256 |
+|---|---|
+| ready-review-r1.json | 818758a0776cb26903669de76f2ceeb657d086b3c99aa0dd2c512d5ff6897f1b |
+| components-rgba-r1.json | e4cc5569fc97d8ab83f1959e33833fbfce051373a59356b8255a92dc77e042ef |
+| gui-r2-pixels-r2.json | 698f9f80290bf07f547c2544781a9d815be9d7e86b45fc51fd5787e416302583 |
+| gui-model-r1/check.json | 8eec45d66932f8f02c389978364e555aa51b3633ea3652b4045e1506b8b47d7e |
+| terrain-source-display-r1.json | 22511fed0c4f0a40e97e7e867a5513094e032ecce3f53a0c403a9fc00b4ea1ad |
+| replays-r1/check.json | 63a5b4e5658fce9cf0568ad770743ae324cf6562bdd4d8c9706096999119b09a |
+| performance-play-r1-check.json | 9735278e25193e62804633c28d0b19531ac2ac4b5c4c422f55e0536f1a7bbd5a |
+| prototype-play-r1-check.json | 2c03494ff663af7abb7dc37d422e7d564ee9f211ef1f5ef6482bc055922273a4 |
+| source-index-r1.json | 1f210ba45e2284bcff6c1820a644e8e07a9482807eb5b3b919da7680824033ae |
+| cursor-000-candidate-v2-provenance-r60.json | 5b3406c8bbade64b4e7501a03e92a078911ad75e0a610817ca86d45ec852f461 |

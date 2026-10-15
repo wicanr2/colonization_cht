@@ -7,6 +7,8 @@ parser.add_argument('--entry-report',type=Path,help='可選：R49正常路徑全
 parser.add_argument('--small-report',type=Path,help='可選：R49的31種小圖像逐寫審查收據')
 parser.add_argument('--small-build',type=Path,help='與small-report一起使用的小圖像來源綁定')
 parser.add_argument('--small-ram-root',type=Path,help='可選：R51小圖像RAM／游標研究根目錄')
+parser.add_argument('--cursor-report',type=Path,help='可選：R59一般游標來源與定位收據')
+parser.add_argument('--cursor-ready-report',type=Path,help='與cursor-report一起使用的R60 READY審查收據')
 a=parser.parse_args();out=a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.parent.stat().st_uid==os.getuid() and not out.exists()
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -91,5 +93,17 @@ if a.small_ram_root:
   assert f['file']=='ICONS.SS' and f['ordinal']==ordinal and f['indexed_sha256']==source['indexed_sha256'] and f['encoded_sha256']==source['encoded_sha256']
   f['small_image_restore_sample']=dict(count,report_sha256=sha(report_path),state='verified native samples; not production HD or animation',cursor_bitmap_sha256='47fced19d04987d3a0de8b6fd929abae6ba886939a2a7ce408b0213360ef1e03')
  public['small_image_restore_evidence']={'report_sha256':sha(report_path),'source_catalog_sha256':sha(catalog_path),'source_calls':420,'raw_events':180696,'ram_saves':547,'ram_restores':422,'cursor_restores':260,'by_original_ordinal':counts,'production_connected':False,'claim':'RAM positive examples only ordinal 005; cursor positive examples 005 and 062; other frames not granted restoration coverage'}
+assert bool(a.cursor_report)==bool(a.cursor_ready_report)
+if a.cursor_report:
+ cursor=json.loads(a.cursor_report.read_bytes());review=json.loads(a.cursor_ready_report.read_bytes())
+ assert cursor['result']=='PASS_STANDARD_CURSOR_ORIGINAL_SOURCE_RAM_AND_49_POSITIONS' and cursor['original_state_and_saves_equal'] is True
+ assert len(cursor['source_calls'])==2 and len(cursor['positions'])==49 and cursor['cursor_sha256']=='47fced19d04987d3a0de8b6fd929abae6ba886939a2a7ce408b0213360ef1e03'
+ assert review['result']=='PASS_STANDARD_CURSOR_READY_REVIEW' and review['spec_state']=='READY' and review['native_source_report_sha256']==sha(a.cursor_report)
+ f=next(f for f in frames if f['file']=='CURSOR.SS' and f['ordinal']==0)
+ assert f['research_id']==309 and f['file_sha256']==cursor['file_sha256']['CURSOR.SS'] and f['indexed_sha256']==cursor['source_indexed_sha256']
+ f['runtime_source_evidence']='confirmed standard cursor source, RAM copy and input-origin placement within fixed normal paths'
+ f['source_contract_reference']={'state':'CONFORMED' if f['formal_assets'] else 'READY','spec':'docs/spec/066-hd-standard-cursor.md','section':'2026-10-15 R60一般游標顯示契約READY','formal_connected':bool(f['formal_assets'])}
+ f['standard_cursor_sample']={'native_source_report_sha256':sha(a.cursor_report),'ready_review_sha256':sha(a.cursor_ready_report),'source_calls':2,'native_positions':49,'runtime_bitmap_sha256':cursor['cursor_sha256'],'visible_opaque_cells':82,'input_origin':[0,0],'gui_snapshots':29,'edge_samples':9,'fully_clipped_edge_samples':1,'claim':'standard cursor only; other cursor sources and hidden states not granted coverage'}
+ public['coverage_limits']['additional_ready_source_contracts']=sum(f.get('source_contract_reference',{}).get('state')=='READY' and not f.get('source_contract_reference',{}).get('formal_connected') for f in frames)
 out.write_text(json.dumps(public,ensure_ascii=False,indent=2)+'\n')
 print('PASS_METADATA_ONLY_FULL_SOURCE_INDEX',len(frames),len(bindings),sha(out),flush=True)
