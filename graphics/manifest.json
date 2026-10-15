@@ -740,6 +740,108 @@
         "decoded_part3_offset": 10617,
         "encoded_length": 1254
       }
+    },
+    "icons-022.png": {
+      "spec": "docs/spec/065-hd-small-images.md",
+      "sha256": "aa2230fc41fa34ccf782fd8b9c3311390add4c33bf380dd31099a63b3b5c44d8",
+      "bytes": 290197,
+      "size": [
+        957,
+        1644
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        7,
+        12
+      ],
+      "target_size": [
+        28,
+        48
+      ],
+      "native_opaque_pixels": 54,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        281,
+        412,
+        689,
+        1239
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        7,
+        12
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 8287,
+      "alpha_mass_total": 51288823,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: stylized-concept\nAsset type: one production candidate for a small commodity sprite in a historical strategy game's HD display overlay.\nInput image 1 is the exact original sprite identity, silhouette, pose, proportions and color placement reference. Input image 2 is ONLY the user's approved fine pixel-art style reference; do not copy its buildings, characters or scenery.\nPrimary request: freshly redraw ONLY the upright yellow ear of corn in its green leaves. One isolated small object, matching the original orientation, viewpoint, occupied silhouette and major color regions. Keep all original visual features distinguishable at a final display size of 28 by 48 pixels. Add fine stepped pixel clusters and subtle material shading within the existing subject, consistent with the second reference's restrained detailed pixel brushwork and natural muted palette.\nComposition: preserve the source subject's narrow proportions and centered placement, complete object visible with generous fully transparent padding. No cast shadow or ground plane. Crisp hand-placed pixel-art edges with restrained native detail, not a smooth painted illustration or a 3D render. No new objects or decorative accessories.\nBackground: genuinely transparent RGBA, preserve transparent gaps inside the original silhouette. No beige background, no checkerboard drawn into the image, no border, no label, no text, no interface, no watermark. One sprite only.\nConstraints: the original sprite is a functional tiny game icon. Match its identity rather than inventing a new design. Keep source browns, greens, highlights and contour organization. Only use the second reference for the approved pixel style. No scenery, farms, landscape, containers, floor, pedestal or extra items.",
+      "reference_sha256": {
+        "native_geometry": "6593dfd60706e65fb3c1a3134b2881d31ca2f6b2edf58a9e281c04a441af9f51",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 22,
+        "encoded_sha256": "4e5dfa187a19c1850537ea9c54882b2340e62a1020832d30a35e163446753705",
+        "encoded_length": 95
+      }
+    },
+    "icons-024.png": {
+      "spec": "docs/spec/065-hd-small-images.md",
+      "sha256": "b4dfd073993baf0bfdeb2ebc54a8f729226fecda6f3ccbccc7c9bf2175740051",
+      "bytes": 274195,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        12
+      ],
+      "target_size": [
+        32,
+        48
+      ],
+      "native_opaque_pixels": 65,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        423,
+        250,
+        914,
+        996
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        8,
+        12
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 4863,
+      "alpha_mass_total": 42093841,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: stylized-concept\nAsset type: one production candidate for a small commodity sprite in a historical strategy game's HD display overlay.\nInput image 1 is the exact original sprite identity, silhouette, pose, proportions and color placement reference. Input image 2 is ONLY the user's approved fine pixel-art style reference; do not copy its buildings, characters or scenery.\nPrimary request: freshly redraw ONLY the curved diagonal green and gold plant bundle exactly as shown. One isolated small object, matching the original orientation, viewpoint, occupied silhouette and major color regions. Keep all original visual features distinguishable at a final display size of 32 by 48 pixels. Add fine stepped pixel clusters and subtle material shading within the existing subject, consistent with the second reference's restrained detailed pixel brushwork and natural muted palette.\nComposition: preserve the source subject's narrow proportions and centered placement, complete object visible with generous fully transparent padding. No cast shadow or ground plane. Crisp hand-placed pixel-art edges with restrained native detail, not a smooth painted illustration or a 3D render. No new objects or decorative accessories.\nBackground: genuinely transparent RGBA, preserve transparent gaps inside the original silhouette. No beige background, no checkerboard drawn into the image, no border, no label, no text, no interface, no watermark. One sprite only.\nConstraints: the original sprite is a functional tiny game icon. Match its identity rather than inventing a new design. Keep source browns, greens, highlights and contour organization. Only use the second reference for the approved pixel style. No scenery, farms, landscape, containers, floor, pedestal or extra items.",
+      "reference_sha256": {
+        "native_geometry": "cec5260cbfc5b52cb3c56f71a6a88eca77db71ea3a810cbcd6a8d4ee8db13912",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 24,
+        "encoded_sha256": "07411abcaceae3539db17046e13607cf5b50ece5f6c5760e4f1af375e134bda6",
+        "encoded_length": 103
+      }
     }
   }
 }

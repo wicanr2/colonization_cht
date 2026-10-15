@@ -398,6 +398,11 @@ func TestHDNineRuntimeNativeLifecycle(t *testing.T) {
 				allowed[i] = true
 			}
 		}
+		for i, v := range h.small.visible {
+			if v.owned && v.native == f.canvas[i] && h.small.frames[v.slot].art != nil {
+				allowed[i] = true
+			}
+		}
 		native := draftRGB(f.indexed, f.palette)
 		for y := 0; y < 800; y++ {
 			for x := 0; x < 1280; x++ {

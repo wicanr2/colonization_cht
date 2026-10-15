@@ -35,7 +35,7 @@ for name,asset in manifest['assets'].items():
 ready=[f for f in frames if f['file']=='PHYS0.SS' and f['ordinal']==79 and f.get('encoded_sha256')=='a8a861754068c86a9c150442f7b07f1fbd297d82b8e5dcb2e3ee108bde4dc84c']
 assert len(ready)==1
 ready[0]['source_contract_reference']={'state':'READY','spec':'docs/spec/062-hd-sea-draw-lifecycle.md','section':'2026-10-14 R48第079幀含RAM還原的READY來源契約','formal_connected':False}
-assert len(bindings)==14 and sum(bool(f['formal_assets']) for f in frames)==14
+assert len(bindings)==16 and sum(bool(f['formal_assets']) for f in frames)==16
 entry_evidence=None
 if a.entry_report:
  entry=json.loads(a.entry_report.read_bytes())
@@ -52,7 +52,7 @@ if a.entry_report:
    f['runtime_source_evidence']='entry_match_only' if len(ids)==1 else 'entry_alias_candidates_only'
    f['normal_entry_sample']={'calls':group['calls'],'candidate_research_ids':ids,'source_far':group['source_far'],'record_far':group['record_far'],'ax':group['ax'],'rectangles':group['rectangles'],'claim':'0D46:000A entry only; writes, visibility and animation not granted'}
  entry_evidence={'report_sha256':sha(a.entry_report),'source_sha256':entry['source_sha256'],'binary_sha256':entry['binary_sha256'],'checkpoints':49,'dos_inputs':53,'calls':2005,'unique_match_calls':1931,'ambiguous_match_calls':74,'unmapped_calls':0,'observer_state_and_saves_equal':True,'claim':entry['claim']}
-public={'schema':1,'kind':'DRAFT-native-source-index-not-complete-player-coverage','source_receipt_sha256':sha(a.catalog),'decoder':d['tools'],'formal_manifest_sha256':sha(a.manifest),'summary':d['summary'],'coverage_limits':{'player_visible_graphics_denominator':'unknown','formal_asset_bindings':14,'additional_ready_source_contracts':1,'complete_hd':False,'contains_original_pixels':False,'other_formats_and_program_drawn_graphics':'not_assessed'},'files':d['files'],'frames':frames,'declared_encoding_alias_groups':d['declared_encoding_alias_groups'],'formal_bindings':bindings,'limitations':['檔案解碼、索引指紋與幾何事實，不授予未驗來源的正式HD或動畫信用。','來源列包含空尺寸、零不透明像素與編碼別名；不可因尚未命中就排除。','正式素材只按現行清冊連結，完整驗收範圍以所連規格為準。','其他格式及程式直接繪圖尚未分類，玩家可見圖像的完整分母仍未知。','原版像素、色盤與預覽只留本機，本索引不含原始素材位元組。']}
+public={'schema':1,'kind':'DRAFT-native-source-index-not-complete-player-coverage','source_receipt_sha256':sha(a.catalog),'decoder':d['tools'],'formal_manifest_sha256':sha(a.manifest),'summary':d['summary'],'coverage_limits':{'player_visible_graphics_denominator':'unknown','formal_asset_bindings':16,'additional_ready_source_contracts':1,'complete_hd':False,'contains_original_pixels':False,'other_formats_and_program_drawn_graphics':'not_assessed'},'files':d['files'],'frames':frames,'declared_encoding_alias_groups':d['declared_encoding_alias_groups'],'formal_bindings':bindings,'limitations':['檔案解碼、索引指紋與幾何事實，不授予未驗來源的正式HD或動畫信用。','來源列包含空尺寸、零不透明像素與編碼別名；不可因尚未命中就排除。','正式素材只按現行清冊連結，完整驗收範圍以所連規格為準。','其他格式及程式直接繪圖尚未分類，玩家可見圖像的完整分母仍未知。','原版像素、色盤與預覽只留本機，本索引不含原始素材位元組。']}
 if entry_evidence:public['normal_entry_evidence']=entry_evidence
 assert bool(a.small_report)==bool(a.small_build)
 if a.small_report:

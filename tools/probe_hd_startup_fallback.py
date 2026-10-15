@@ -37,6 +37,7 @@ def main():
     cases = ["missing-directory", "missing-image", "bad-image", "bad-manifest",
                  "missing-sea", "bad-sea", "linked-sea", "missing-person", "bad-person", "linked-person", "missing-shelter", "bad-shelter", "linked-shelter"]
     cases += [kind+"-building-%03d"%n for n in [16,21,27,35,39,42,43,44,45,9] for kind in ["missing","bad","linked"]]
+    cases += [kind+"-icons-%03d"%n for n in [22,24] for kind in ["missing","bad","linked"]]
     cases += ["restored"]
     for case in cases:
         out = root / case
@@ -76,6 +77,12 @@ def main():
             if case=="missing-building-%03d"%n: (assets/name).unlink()
             if case=="bad-building-%03d"%n: (assets/name).write_bytes(b"damaged")
             if case=="linked-building-%03d"%n:
+                (assets/name).unlink(); (assets/name).symlink_to(args.bundle/"graphics"/name)
+        for n in [22,24]:
+            name="icons-%03d.png"%n
+            if case=="missing-icons-%03d"%n: (assets/name).unlink()
+            if case=="bad-icons-%03d"%n: (assets/name).write_bytes(b"damaged")
+            if case=="linked-icons-%03d"%n:
                 (assets/name).unlink(); (assets/name).symlink_to(args.bundle/"graphics"/name)
         prefix = out / "gui"
         command = ["bash", str(args.bundle / "colonization-cht.sh"), "--game", str(args.game),

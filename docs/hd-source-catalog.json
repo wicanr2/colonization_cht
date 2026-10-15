@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "366cfa212ca72a2e0a90daf8540fe9c307f1948b8728244fde87126a2545593e",
+  "formal_manifest_sha256": "560bfcf9447b012003666754991c2ff8770e369e34f0c32eae6fe2b0c33f9b2e",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 14,
+    "formal_asset_bindings": 16,
     "additional_ready_source_contracts": 1,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -28987,7 +28987,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-022.png"
+      ],
       "normal_entry_sample": {
         "calls": 81,
         "candidate_research_ids": [
@@ -29173,7 +29175,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-024.png"
+      ],
       "normal_entry_sample": {
         "calls": 3,
         "candidate_research_ids": [
@@ -51087,6 +51091,26 @@
       "source_ordinal": 9,
       "source_encoded_sha256": "8900416036b739238f3d36ef0bd6de7c64cc92e2273658c866e233a328380d8c",
       "spec": "docs/spec/064-hd-colony-building-batch.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-022.png",
+      "asset_sha256": "aa2230fc41fa34ccf782fd8b9c3311390add4c33bf380dd31099a63b3b5c44d8",
+      "source_research_id": 849,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 22,
+      "source_encoded_sha256": "4e5dfa187a19c1850537ea9c54882b2340e62a1020832d30a35e163446753705",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-024.png",
+      "asset_sha256": "b4dfd073993baf0bfdeb2ebc54a8f729226fecda6f3ccbccc7c9bf2175740051",
+      "source_research_id": 851,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 24,
+      "source_encoded_sha256": "07411abcaceae3539db17046e13607cf5b50ece5f6c5760e4f1af375e134bda6",
+      "spec": "docs/spec/065-hd-small-images.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec"
     }
   ],

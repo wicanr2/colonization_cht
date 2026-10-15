@@ -111,6 +111,10 @@ func loadHDRuntime(m *golem.Machine, game, directory string) (*hdRuntime, error)
 	if err != nil {
 		return nil, err
 	}
+	h.small, err = loadHDSmallRuntime(h, game, directory)
+	if err != nil {
+		return nil, err
+	}
 	return h, nil
 }
 
@@ -122,7 +126,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "366cfa212ca72a2e0a90daf8540fe9c307f1948b8728244fde87126a2545593e"
+const hdManifestSHA = "560bfcf9447b012003666754991c2ff8770e369e34f0c32eae6fe2b0c33f9b2e"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"
@@ -135,6 +139,7 @@ type hdBuildingPixel struct {
 	cursorIndex int
 }
 type hdRuntime struct {
+	small                                            *hdSmallRuntime
 	nine                                             *hdNineRuntime
 	shelter                                          *hdShelterRuntime
 	person                                           *hdPersonRuntime
@@ -184,7 +189,7 @@ func hdBuildingWords(mem []byte, seg, off uint16, n int) ([]uint16, bool) {
 	}
 	return words, true
 }
-func (h *hdRuntime) key() string {
+func (h *hdRuntime) baseKey() string {
 	if h == nil {
 		return ""
 	}
@@ -210,6 +215,7 @@ func (h *hdRuntime) beforeInstruction() {
 	h.person.beforeInstruction()
 	h.shelter.beforeInstruction()
 	h.nine.beforeInstruction()
+	h.small.beforeInstruction()
 	m := h.m
 	c := m.CPU
 	cs, ip := c.Seg[golem.CS], c.IP
@@ -420,6 +426,9 @@ func (h *hdRuntime) base(f draftNativeFrame) (*image.RGBA, map[string]any) {
 	if h.nine != nil {
 		receipt["nine"] = h.nine.paint(out, f)
 	}
+	if h.small != nil {
+		receipt["small"] = h.small.paint(out, f)
+	}
 	if h.person != nil {
 		receipt["person"] = h.person.paint(out, f)
 	}
@@ -459,4 +468,12 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 	b.hd.restoreCursor(out, f)
 	record["hd"] = hd
 	return out, record, nil
+}
+
+func (h *hdRuntime) key() string {
+	base := h.baseKey()
+	if h != nil && h.small != nil {
+		return fmt.Sprintf("%s/small/%d", base, h.small.revision)
+	}
+	return base
 }

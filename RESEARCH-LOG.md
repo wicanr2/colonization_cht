@@ -5989,3 +5989,65 @@ confirmed：102組真實X11五語原版／HD切換、408筆暫停設定事件與
 不是第二次正常GUI。正式組裝器仍41Go／24綁定、十四張PNG與原清冊不變。
 本機根為hd-small-images-r52，命令索引為commands-r52.json，最終稽核為final-audit-r52.json。
 原版像素、候選PNG、RAM、存檔、音訊及原始事件均不公開；規格065保持DRAFT，全量HD繼續。
+
+## 2026-10-15 R53效能與R54小圖像正式顯示
+
+原版與工具版本沿R52，位址採dosgolem實模式CS:IP及20bit線性RAM。
+ICONS.SS SHA-256為a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716，
+VICEROY.EXE為a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3。
+dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7、Python3.11.2及Pillow9.4.0保持。
+
+confirmed：同一分析執行檔開／關小圖像層，完整原版狀態、WAV與存檔保持。
+CPU採樣中的小圖像方法共2.77%，原型逐幀驗證報表485357099bytes，關閉小圖像為147797838bytes。
+JSON成本含啟動字型載入與結束匯出，不將全部牆鐘差異歸因於新追蹤器。
+既有play=true不累積逐幀歷史，沒有為此修改正式程式。
+獨立遊玩模式ABBA、97筆實際輸入至208200000步，正式32.535／31.932秒，原型35.892／35.198秒；
+均值32.2335／35.545秒，比例1.1027，四次完整原版狀態保持。限固定Linux工具容器，跨平台FPS未知。
+
+R53收據根為hd-small-images-performance-r53：
+
+| 收據 | SHA-256 |
+|---|---|
+| profile-build-r1.json | 25d3c52a6732dc06761100bfa19f21c405c6fa95e3294c6102ed8fef2ce11b50 |
+| profile-run-r1-check.json | 9445457939c474d0d094b3b94cbad3fb4ad24354bfaa968542c18ef8948a872e |
+| profile-control-r1-check.json | adccaff882127d5795b12263f9ca183ba9d94c1421aa0992d336d297781959bb |
+| performance-play-r1-check.json | d3517fd79739362f95db4331c2d41f21acc1b8d0d7c71a480b4198811b15de69 |
+
+R53審查後規格065限定READY，R54才接正式組裝。第022、024幀的R50原PNG與alpha原樣公開，
+完整提示、參考指紋及生成美術權利見graphics/manifest.json；原版參考仍不公開。
+正式原版入口／來源／逐寫／返回／游標與RAM契約見[規格065](docs/spec/065-hd-small-images.md)。
+
+confirmed：正式742Go零skip、go vet、49點原版狀態／存檔、549來源／RAM反例與13載入反例通過。
+420次來源、547保存、422 RAM還原與260筆游標配對同R51；15張樣本PNG同R52且RGBA重算全同。
+102組五語GUI、408設定事件及3772不透明游標像素通過。
+20點獨立原版模型重建800次來源、272013事件、369游標還原及547／422 RAM計數，222048個小圖像RGBA像素相同。
+本批GUI游標還原為005幀104筆、022幀175筆、024幀87筆及025幀3筆；不外推其他來源。
+103筆實際輸入四側至213200000步的完整CPU／RAM／VGA／DAC、WAV與存檔相同。
+正式43Go以play=true另重播R52的97筆輸入，兩個正常進城檢查點實際繪出022及024，原版狀態與音訊／存檔保持。
+50種新行程缺件／恢復及249設定事件保持日文HD偏好，精確17檔封裝與52拒絕反例通過。
+
+| R54本機收據 | SHA-256 |
+|---|---|
+| build-r1.json | 6733498fbadbc40974f5143b8596a1df56480153cd43c951a138fac4ac1387e4 |
+| 正式執行檔 | b5f31f0b6457efb555d36971023eddda35f4c62b9e6e7d7daf79c2154fc96224 |
+| graphics/manifest.json | 560bfcf9447b012003666754991c2ff8770e369e34f0c32eae6fe2b0c33f9b2e |
+| tests-r1-check.json | c7bbd3b36a3072f43d8c5fb2fcaea82924fcb243c02ed0286deb5374ea435745 |
+| native-full-r1/check.json | 4d8aa8638ce35e45ab8666247e4113e09122f4fef38c31facdb0098439874f54 |
+| native-pixels-r1-check.json | 972e42a18127bf1cbd6848a5a5aa1b2271db8e66d71b23c98bec76a6058d4e0d |
+| gui-build-r1.json | 0d1884ac31ccb4c96cb492ae36945a783b9f8c34f35df91e0ac7239e617aaf1d |
+| gui-r1/check.json | 8354355a53b21380cdbcdac86cdc919ae0017cd959e356a69396b7de40107c7e |
+| replays-r1/check.json | 51fa278177b697d6ebc08829eb2dfb9fe015c427dbdddd02ead4e3b0e0932a60 |
+| gui-model-r1/check.json | e2fffabc33b0f7faa21004c88dee09f830797b07cce8d25d12b79fe86f6fb4e2 |
+| gui-display-r1-check.json | 16a2daf9800b75256090783a2ffca8f8ea3cc7bc31bf1863d3ee6796429f0d67 |
+| startup-r1/check.json | 6b000859e94761d5f6fa6ecc2f3b2886f63ff40dc467528fe3dd4aa0c41717e4 |
+| package-r1-check.json | 1741f7c853aa8924426c16ca759105ec5b32ef0df85d4f670a1d4430a2ab337e |
+| production-play-r1-check.json | 349e9c8acfc9099305a1822d6a0ae64e3fda4ffc7ef55399ccdc9ff58b289a45 |
+| source-index-r1.json | ebf07ce8edcbd0e1d53ce481e821925126b223a32e48859453a8dd1770bff79e |
+
+R52公開工具固定R45的41個來源及模組輸入後，重生45Go與f6ce520c…執行檔全等，
+工具新SHA-256為6e6ed069a9926d50cf61f7d1197461c7669bc9e57ad75642162fedae56418b43，原R52紀錄保留。
+R54只加唯讀快照的GUI副本為44Go，正式其餘來源逐檔全同，素材仍由正式loader載入，沒有原型素材旗標。
+兩個正常遊玩檢查點在run.json的checkpoints，修正原驗證腳本找獨立JSON的假設後，重查同一輸出通過。
+正式合計16張生成PNG與清冊、43Go／26綁定，規格065限定CONFORMED；RAM正向仍限005幀。
+本機根為hd-small-images-formal-r54，命令索引commands-r54.json，總審查conformance-review-r1.json。
+原版像素、RAM、音訊、存檔與未選候選不公開；其他小圖像、未知游標、動畫、其餘圖像及跨平台效能未完成，沒有新發行。

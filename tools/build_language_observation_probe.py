@@ -154,7 +154,8 @@ def attach_language_runtime(repo, output, reference, *, with_rebuild=True, forma
                          "tools/hd_sea_runtime.go", "tools/hd_sea_runtime_test.go",
                          "tools/hd_person_runtime.go", "tools/hd_person_runtime_test.go",
                          "tools/hd_building024_runtime.go", "tools/hd_building024_runtime_test.go",
-                         "tools/hd_building_nine_runtime.go", "tools/hd_building_nine_runtime_test.go"]
+                         "tools/hd_building_nine_runtime.go", "tools/hd_building_nine_runtime_test.go",
+                         "tools/hd_small_image_runtime.go", "tools/hd_small_image_runtime_test.go"]
         for name in extra_sources:
             (output / Path(name).name).write_bytes((repo / name).read_bytes())
         old = "\tjournal := &nativeJournal{enabled: nativeOn}\n"
