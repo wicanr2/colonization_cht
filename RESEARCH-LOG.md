@@ -5939,3 +5939,53 @@ R1失敗輸出保留，R3才授予完整12反例信用。
 公開工具的Go、執行檔、檢查器與反例程式全等；沿用同一原版收據重驗，不冒稱第二次正常GUI。
 命令索引為commands-r51.json，最終稽核為final-audit-r51.json。
 原版像素、游標位元組、RAM、存檔與原始事件不公開；仍為研究DRAFT，完整HD、動畫及正常顯示接線待續。
+
+## 2026-10-15 R52小圖像隔離執行與正常GUI
+
+原始輸入沿R51：VICEROY.EXE SHA-256 a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3，
+ICONS.SS SHA-256 a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716。
+工具為dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7、Python3.11.2及Pillow9.4.0。
+位址採dosgolem實模式CS:IP與20bit線性RAM，來源定位與原碼沿[規格065](docs/spec/065-hd-small-images.md)，不是IDA位址。
+
+confirmed：31來源共用的隔離追蹤器於原R29的53筆輸入／49點與R51模型全同，420次繪製、547保存、
+422 RAM還原及260筆一般游標配對保持，完整原版狀態與存檔相同。
+533個來源反例、16個RAM反例及其後13個載入缺件／錯件反例通過。
+原型只繪第022、024幀，原PNG與alpha原樣，分別為aa2230fc41fa34ccf782fd8b9c3311390add4c33bf380dd31099a63b3b5c44d8及
+b4dfd073993baf0bfdeb2ebc54a8f729226fecda6f3ccbccc7c9bf2175740051。
+第023幀及其他未生成幀不繪圖、不算HD；第100幀沿既有正式人物層。
+
+confirmed：102組真實X11五語原版／HD切換、408筆暫停設定事件與20份正常快照通過。
+對本次97筆實際輸入前綴另跑原版觀測／無觀測控制，800次來源、270612事件、339筆游標還原、
+547保存及422還原與實際顯示來源相符，20點完整CPU／RAM／VGA／DAC及存檔相同。
+19張HD及1張原版模式快照，222048個小圖像RGBA輸出像素依原候選及原版底圖獨立重算相同，
+來源外及不透明游標維持原版。全97筆輸入四側至208200000步，完整原版狀態、WAV與存檔全同。
+
+驗證腳本訂正：REP在一道CPU.Step內搬完CX個word，指令前掛鉤只來一次。
+原RAM反例只看首字而缺樣本，改查本次真正搬移範圍並確認目標確有寫入後通過，沒有改接受規則。
+像素獨立公式沿Go1.26.7的image/color.NRGBA.RGBA及image/draw.drawRGBA，保留16bit相加後才轉8bit，
+先各自轉8bit相加會出現1色階差異。GUI原版模型另有call序號；逐點身分比對保留三個正式欄位，
+原始call仍在模型可追溯。游標模型以surface0／offset記錄，與執行期linear比較時明示加0x2CAE0。
+
+效能只作觀察：循序ABBA保持相同實際輸入、英文HD與完整原版狀態。
+正式37.059／36.437秒，原型66.340／40.978秒，均值比例1.4602。
+原型樣本波動，不能由此認定成本成因、效能驗收通過或正式接線完成；下一步查成本。
+
+| R52本機收據或工具 | SHA-256 |
+|---|---|
+| build-r1.json | cb75da677a3e156eb5d36a279c3340b325e887e64ca605208508b337fa01e32c |
+| 原型執行檔 | f6ce520c515a97f750bdf16f6d01035924b7a28dfc7e3bc79a56944bbead2802 |
+| tests-r1-check.json | 91c91def4a41721b23fe550c40459774feb6855b37f95b44e5e34bf0b905ae41 |
+| native-r2/check.json | c28a24d8cbcb409ee914be960f8d5b54fd7f522fc92c312f16d9cb0ba726e529 |
+| native-pixels-r1-check.json | 6273b712a6c6b0590fb03c468eb4cf994e837ac3c2f4a2756e23873f57656999 |
+| gui-r1/check.json | 94c015c167c8074b56783d7c1d3b469a348606687f3b61afa789658bd8b50e2e |
+| replays-r1/check.json | ca6fcb6122b5e3a5582cc639aef2836788c14533f05d6cc978f5461254e371b0 |
+| gui-model-r1/check.json | bb96fd29ec519a493a9b7b566b175b97190b9910ff9b69cccd5c86df536824ec |
+| gui-display-r1-check.json | dcb561834b3e7d3f231c5d9f13ff38badcccd6e2635ed059a980ea27bd8bd847 |
+| performance-r1-check.json | 7f0cca70972167f4f735f3a7dcf616166ac3bb8f2d62aa39f5ca735807a326a6 |
+| 公開重生工具 | c15f1ca906b27bb3f04b43713bd9d0c99ec59b5367eab4668e7422ab0e2981b9 |
+| public-r1/build-r1.json | f9b63401f5100094e7d67b4e3f6f4bddea037441eec97dbb1e47aa23b6d9603e |
+
+公開入口[prepare_hd_small_image_prototype.py](tools/prepare_hd_small_image_prototype.py)重生45個Go檔及同一執行檔，
+不是第二次正常GUI。正式組裝器仍41Go／24綁定、十四張PNG與原清冊不變。
+本機根為hd-small-images-r52，命令索引為commands-r52.json，最終稽核為final-audit-r52.json。
+原版像素、候選PNG、RAM、存檔、音訊及原始事件均不公開；規格065保持DRAFT，全量HD繼續。
