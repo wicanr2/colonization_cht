@@ -6131,3 +6131,41 @@ GUI日文進城一組因游標或畫布守門回原圖，日文正常返回後�
 | readme-settings-r1/check.json | d75383d5f1512b1ebede94d9dc67d47bf422654ca6953551c4a2228dfd76fd74 |
 
 本機根hd-small-images-batch-r56，命令入口commands-r56.json。三十個正式綁定只算局部HD；其餘來源、未知游標、裁切、動畫與跨平台效能未完成。原版像素、RAM、音訊、存檔及未選候選只留本機。
+
+
+## 2026-10-15 R57十四張小圖像正式擴充
+
+結論confirmed，限規格065 R57。原版ICONS.SS SHA-256為a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716，
+VICEROY.EXE為a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3。
+位址為dosgolem實模式CS:IP及20bit線性RAM；工具dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013、
+Go1.26.7、Python3.11.2及Pillow9.4。既有來源入口、完整編碼、逐寫、返回、游標與RAM鏈不改。
+本批新增005、023、042、053、056、059、062、067至069、094、122至124。
+十三張由內建image_gen生成，023沿R55原PNG。R55拒絕的是原圖柔光；R57依實際四倍來源遮罩與
+內容取樣復審，柔光不進輸出，原PNG及alpha未改。這是新顯示證據，不撤銷舊紀錄。
+完整提示及參考指紋入graphics清冊，清冊149671bytes，同步提高正式讀取與封裝上限至256KiB。
+GUI懸停位置由R51原版owner／local格選出，世界5組、城內28組，未將座標注入遊戲狀態。
+第037點離線預覽採R56原版圖並驗與R55逐byte同；首輪腳本誤找不存在的R50第037圖，修正基準路徑，
+逐RGBA條件保持，離線檢查R2通過。來源索引摘要原沿用16的固定值，改由已核對清冊計算44；明細綁定原已正確。原失敗留本機，不當作產品缺陷。
+
+規格065 R57限定CONFORMED，30張小圖像、世界5種與城內28種，合計44種正式素材／清冊45檔。826Go零skip與go vet、49點原版狀態／存檔、633來源／RAM及125載入反例通過。102組五語GUI、111點獨立原版模型與7529424個RGBA像素相同；187筆實際輸入四側至327600000步，完整原版狀態、WAV及存檔保持。45種本批新行程與136項封裝拒絕通過。守門回退0組另記，不計持續HD，五語城內來源恢復。正式play=true驗28張城內圖像，frames為0。 獨立GUI來源1868次、事件517100筆、游標還原2184筆。
+
+| 收據／輸出 | SHA-256 |
+|---|---|
+| bundle/bin/colonization-window | 7a8057604b3fbba28a4de8f9fa72aeb2b01037afc403c66fadad92b75df52f95 |
+| graphics/manifest.json | bad2cae036ac07d0e73bfbd606d7fff0a762138bec537189ce07a37dda1f2638 |
+| build-r1.json | a62afaf2bcbbcdd7d7ca69151decc304c1df13e7a55352e49a1125213973a001 |
+| tests-r2-check.json | 03e99aeb327b2dd06b5495542ddde4f665074ccad34d7f8c08da892ccada303d |
+| native-full-r2/check.json | 34dcf49ab901f87e9e0c0fb3b0ae6bbe8f316b3e12058e3e5e58b07648009fd8 |
+| native-pixels-r3-check.json | bcd60d1b46e5e125a63620eff4f45b5d522906c9ef6e461bc47eb03fa50a85bb |
+| gui-build-r1.json | 6b6bfe480aed20ee2f96b5fe1da00a2ce0a9afa94eff1ef134964c7ed87c7eb6 |
+| gui-r1/check.json | 95296b82d6d078077aa63697e6522ea6dab732a94d0214e9eee8888523800319 |
+| replays-r1/check.json | cc81472cb9639cd086eb4d38d2657fbedd2572f950f4a2018b0e398e766c2388 |
+| gui-model-r1/check.json | f7c2f5224212db4f827ca32db44c55b04649df256fdf7317949b2161c60d9722 |
+| gui-display-r1-check.json | 9cb01e651e2e4bbeaf907e6c86c0b1a80e47ad44dc97bfee4bb8f1f34384823b |
+| startup-r1/check.json | d9c7b5005f303a1aa5ab3701d8b3c5fc70637f04dd3025fabde3648eace56b12 |
+| package-r1-check.json | cb526616dd8f4ed7ee885d045604518237c342fb9b84f5b76e1b303fdecbaabf |
+| production-play-r1-check.json | 6dd91bb5ee316290a2141bc015f8b5faba93f6d10263ee1038918dabc5e194d8 |
+| source-index-r2.json | 129f1ac36ddaeea0256df339d70836b2b395ab96c0c1724b18b883da30fa04ea |
+| readme-settings-r1/check.json | 81072e22c2cc960bd79a10f2a90fa97c64282aead9b1776777068c152da7edfa |
+
+本機根hd-small-images-batch-r57，命令入口commands-r57.json。原版像素、RAM、音訊、存檔與參考不公開。RAM正向只授予005，未驗來源不外推。

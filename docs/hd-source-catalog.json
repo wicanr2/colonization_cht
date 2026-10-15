@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "f472d22fe653386b349095405133fd2ad8b529dbb0d6a783762451af6ecfa6ab",
+  "formal_manifest_sha256": "bad2cae036ac07d0e73bfbd606d7fff0a762138bec537189ce07a37dda1f2638",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 16,
+    "formal_asset_bindings": 44,
     "additional_ready_source_contracts": 1,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -28504,7 +28504,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-005.png"
+      ],
       "normal_entry_sample": {
         "calls": 18,
         "candidate_research_ids": [
@@ -29118,7 +29120,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-023.png"
+      ],
       "normal_entry_sample": {
         "calls": 3,
         "candidate_research_ids": [
@@ -30261,7 +30265,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-042.png"
+      ],
       "normal_entry_sample": {
         "calls": 17,
         "candidate_research_ids": [
@@ -30592,7 +30598,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-053.png"
+      ],
       "normal_entry_sample": {
         "calls": 7,
         "candidate_research_ids": [
@@ -30705,7 +30713,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-056.png"
+      ],
       "normal_entry_sample": {
         "calls": 3,
         "candidate_research_ids": [
@@ -30812,7 +30822,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-059.png"
+      ],
       "normal_entry_sample": {
         "calls": 13,
         "candidate_research_ids": [
@@ -30925,7 +30937,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-062.png"
+      ],
       "normal_entry_sample": {
         "calls": 52,
         "candidate_research_ids": [
@@ -31132,7 +31146,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-067.png"
+      ],
       "normal_entry_sample": {
         "calls": 3,
         "candidate_research_ids": [
@@ -31189,7 +31205,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-068.png"
+      ],
       "normal_entry_sample": {
         "calls": 3,
         "candidate_research_ids": [
@@ -31246,7 +31264,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-069.png"
+      ],
       "normal_entry_sample": {
         "calls": 3,
         "candidate_research_ids": [
@@ -31903,7 +31923,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-094.png"
+      ],
       "normal_entry_sample": {
         "calls": 13,
         "candidate_research_ids": [
@@ -32681,7 +32703,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-122.png"
+      ],
       "normal_entry_sample": {
         "calls": 12,
         "candidate_research_ids": [
@@ -32756,7 +32780,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-123.png"
+      ],
       "normal_entry_sample": {
         "calls": 3,
         "candidate_research_ids": [
@@ -32813,7 +32839,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_match_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-124.png"
+      ],
       "normal_entry_sample": {
         "calls": 3,
         "candidate_research_ids": [
@@ -51278,6 +51306,146 @@
       "source_file": "ICONS.SS",
       "source_ordinal": 38,
       "source_encoded_sha256": "9f8354e113810f6ca1a3654007189c0816b4183acea23a335bc5d3ea1718ba0b",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-005.png",
+      "asset_sha256": "94ebc3642cd0b069229f2e23fa633085ed53d89cf5c9965eafde74d56af99619",
+      "source_research_id": 832,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "8485f409ac9e42446a89fb0bc862036886b90acab2b802a6b13b1d2f32bc68db",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-023.png",
+      "asset_sha256": "305d74bd95d0c8bcfba54832a35398b1dd0f367f85bd1a9702cb3b6e968b1c18",
+      "source_research_id": 850,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 23,
+      "source_encoded_sha256": "bf1d638baa43334633f4c6020d0304584bf957531b6502f08639b7c20c26d370",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-042.png",
+      "asset_sha256": "7f6f1eec0482e8751abf75e120d26d559e1edac12a1c3415061bdcc302be4d04",
+      "source_research_id": 869,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 42,
+      "source_encoded_sha256": "c6616b3ba2d5a7f88d8be4a8d482f609d53a0e206bda2668620984206eaaa115",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-053.png",
+      "asset_sha256": "e1fa16b2b82b837c47fb363df377e3710957ea46a92cd2bf4adfba0c676ea3b8",
+      "source_research_id": 880,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 53,
+      "source_encoded_sha256": "7a8771e90e7eb1505174af59bb9c6a8450e880a87bafe3ccaed2ddcea0f9c807",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-056.png",
+      "asset_sha256": "6daf183dc19f65c5a692bd00eea66bbb8706d20dab05ff445b57615a40a06564",
+      "source_research_id": 883,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 56,
+      "source_encoded_sha256": "d544d624df1f80a1f7c901d4a55d7482d1cfc81a14011c1052204f477b22cd54",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-059.png",
+      "asset_sha256": "2057be1b92f182c4a4b029c77d2d4184117a8d67e7a3d3cec72e80f5ab911dba",
+      "source_research_id": 886,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 59,
+      "source_encoded_sha256": "6494ccb207a1532a79de201f7a160381679d39626dd8aa09c0b4c857c2502d7a",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-062.png",
+      "asset_sha256": "e77fc69ec546250f2131cac885f7e7d5eaaa6789650e3455eeb298385c335680",
+      "source_research_id": 889,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 62,
+      "source_encoded_sha256": "af3a93128930bac4335ab2ea5797af85b6586aa78183c4ebcf391a7e84488689",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-067.png",
+      "asset_sha256": "895de84eead2ce925dc3d4aa0c0caa75c2654558a3c3d08c858b0dc90e5fd50b",
+      "source_research_id": 894,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 67,
+      "source_encoded_sha256": "c0a59d055bded77608e9dce440dd20f0307a30db4e347573b567d21bd0692dec",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-068.png",
+      "asset_sha256": "9cc4ee823734a13f16defc12252e60d1cb679c2200c392b823269eba4a98dd8b",
+      "source_research_id": 895,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 68,
+      "source_encoded_sha256": "f3cbbb381cfd781c4c72f7493f10bba233dfe9dd9de885941486dd584bb35c5b",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-069.png",
+      "asset_sha256": "0b379205f3b0c83e2af2dd93ad9d8b2eaf6f24a7c2a86a33063899ce5e202e56",
+      "source_research_id": 896,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 69,
+      "source_encoded_sha256": "aace82dada1a34f849ee054fb58bb7cbf15a892842ead0e56ab2f36bdce411f3",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-094.png",
+      "asset_sha256": "e82953c98cc131d7298651a5b3d1bb227a542e324dc7833d54b4cb6927d4413d",
+      "source_research_id": 921,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 94,
+      "source_encoded_sha256": "4bb03debbfdb740e290772799a9c4521cf94edae6c4c90975a738c61be076a6b",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-122.png",
+      "asset_sha256": "6f85e33891c499da120ae419f0d206c618f6bd9af5d6bfd37a9ad95fb51c7da7",
+      "source_research_id": 949,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 122,
+      "source_encoded_sha256": "aa5759026b1970969fa549768d2cbb3780e53a755322286c8175cb4e967c469c",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-123.png",
+      "asset_sha256": "4458545d6806f17d12b68ba634f5bf617bed20bb78f11fae7da0796cc8296fc1",
+      "source_research_id": 950,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 123,
+      "source_encoded_sha256": "48fcc09dab18d4a0e86729c15b9ef45922a2cf7e4aa1fde41c4857fef8753b29",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-124.png",
+      "asset_sha256": "4e69339b0740bc0c732363eea1eb4bbbe8009aa9a15fda2f1e81bfbb70dca62f",
+      "source_research_id": 951,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 124,
+      "source_encoded_sha256": "d69c554722b4abce4daf9b7003381e4103664c21cebf0d7ce48fe0ad1d825d5a",
       "spec": "docs/spec/065-hd-small-images.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec"
     }

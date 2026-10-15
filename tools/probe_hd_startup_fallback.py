@@ -38,7 +38,7 @@ def main():
     cases = ["missing-directory", "missing-image", "bad-image", "bad-manifest",
                  "missing-sea", "bad-sea", "linked-sea", "missing-person", "bad-person", "linked-person", "missing-shelter", "bad-shelter", "linked-shelter"]
     cases += [kind+"-building-%03d"%n for n in [16,21,27,35,39,42,43,44,45,9] for kind in ["missing","bad","linked"]]
-    cases += [kind+"-icons-%03d"%n for n in [22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38] for kind in ["missing","bad","linked"]]
+    cases += [kind+"-icons-%03d"%n for n in [5, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 42, 53, 56, 59, 62, 67, 68, 69, 94, 122, 123, 124] for kind in ["missing","bad","linked"]]
     cases += ["restored"]
     if args.cases:
         need(len(args.cases)==len(set(args.cases)) and set(args.cases)<=set(cases), "指定的缺件案例不同")
@@ -82,7 +82,7 @@ def main():
             if case=="bad-building-%03d"%n: (assets/name).write_bytes(b"damaged")
             if case=="linked-building-%03d"%n:
                 (assets/name).unlink(); (assets/name).symlink_to(args.bundle/"graphics"/name)
-        for n in [22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38]:
+        for n in [5, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 42, 53, 56, 59, 62, 67, 68, 69, 94, 122, 123, 124]:
             name="icons-%03d.png"%n
             if case=="missing-icons-%03d"%n: (assets/name).unlink()
             if case=="bad-icons-%03d"%n: (assets/name).write_bytes(b"damaged")

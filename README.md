@@ -94,7 +94,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 所有建置、遊戲執行、分析與抓圖都在 Docker 容器內進行，需要自備合法原版。
 
 - [目前脈絡](CONTEXT.md)、[工作計畫](WORKLIST.md)（由 `docs/worklist.json` 產生）
-- [多語系、HD 切換與實際遊玩影片](docs/goals/186-display-settings-and-gameplay-video.md)：五語整包後端與設定保存已接線；十二種城內建築與景物、單一海洋圖塊、一個人物與十六種小圖像已接正式HD顯示。全量圖像包含小圖像與動畫幀，仍在逐項開發，尚未收進目前發行版。
+- [多語系、HD 切換與實際遊玩影片](docs/goals/186-display-settings-and-gameplay-video.md)：五語整包後端與設定保存已接線；十二種城內建築與景物、單一海洋圖塊、一個人物與三十種小圖像已接正式HD顯示。全量圖像包含小圖像與動畫幀，仍在逐項開發，尚未收進目前發行版。
 - [規格](docs/spec/)與[各輪目標](docs/goals/)
 - [驗證矩陣](docs/verification-matrix.md)（`tools/verification_matrix.py` 產生）
 - [研究證據](RESEARCH-LOG.md)與[工作歷程](WORKLOG.md)
