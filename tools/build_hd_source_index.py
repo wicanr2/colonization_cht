@@ -18,6 +18,8 @@ parser.add_argument('--terrain-batch-conformed-report',type=Path,help='正式十
 parser.add_argument('--small-terrain-report',type=Path,help='規格068十五個AX槽位的原版來源審查')
 parser.add_argument('--small-terrain-ready-report',type=Path,help='規格068八個8×8來源的READY審查')
 parser.add_argument('--small-terrain-conformed-report',type=Path,help='規格068正式八來源的完整驗收與58種素材繼承審查')
+parser.add_argument('--menu-ready-report',type=Path,help='規格069主選單兩來源的READY審查')
+parser.add_argument('--menu-conformed-report',type=Path,help='規格069正式兩來源及66種素材繼承審查')
 a=parser.parse_args();out=a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.parent.stat().st_uid==os.getuid() and not out.exists()
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -37,15 +39,31 @@ for name,asset in manifest['assets'].items():
   original=asset['original_binding'];source_files=[n for n in original if n.endswith('.SS')]
   assert len(source_files)==1;file=source_files[0];file_sha=original[file];encoded=original['encoded_frame_sha256'];ordinal=None
  elif 'original_source' in asset:
-  original=asset['original_source'];file=original['file'];file_sha=original['sha256'];encoded=original['encoded_sha256'];ordinal=original['ordinal']
+  original=asset['original_source'];file=original['file'];file_sha=original['sha256'];encoded=original.get('encoded_sha256');ordinal=original['ordinal']
  else:raise ValueError('未支援的正式來源紀錄：'+name)
- matches=[f for f in frames if f['file']==file and f['file_sha256']==file_sha and f.get('encoded_sha256')==encoded and (ordinal is None or f['ordinal']==ordinal)]
+ if file.endswith('.PIK'):
+  assert encoded is None and original.get('indexed_sha256')
+  matches=[f for f in frames if f['file']==file and f['file_sha256']==file_sha and f['indexed_sha256']==original['indexed_sha256'] and f['ordinal']==ordinal]
+ else:
+  assert encoded
+  matches=[f for f in frames if f['file']==file and f['file_sha256']==file_sha and f.get('encoded_sha256')==encoded and (ordinal is None or f['ordinal']==ordinal)]
  assert len(matches)==1,(name,matches)
  f=matches[0];f['formal_assets'].append(name)
- bindings.append({'asset':name,'asset_sha256':asset['sha256'],'source_research_id':f['research_id'],'source_file':file,'source_ordinal':f['ordinal'],'source_encoded_sha256':f['encoded_sha256'],'spec':asset.get('spec',manifest['spec']),'claim':'matches verified formal manifest; conformance scope remains in cited spec'})
+ bindings.append({'asset':name,'asset_sha256':asset['sha256'],'source_research_id':f['research_id'],'source_file':file,'source_ordinal':f['ordinal'],'source_encoded_sha256':f.get('encoded_sha256'),'spec':asset.get('spec',manifest['spec']),'claim':'matches verified formal manifest; conformance scope remains in cited spec'})
+ if file.endswith('.PIK'):bindings[-1]['source_indexed_sha256']=f['indexed_sha256']
 ready=[f for f in frames if f['file']=='PHYS0.SS' and f['ordinal']==79 and f.get('encoded_sha256')=='a8a861754068c86a9c150442f7b07f1fbd297d82b8e5dcb2e3ee108bde4dc84c']
 assert len(ready)==1
 ready[0]['source_contract_reference']={'state':'CONFORMED','spec':'docs/spec/062-hd-sea-draw-lifecycle.md','section':'2026-10-15 R58正式驗收與限定CONFORMED','formal_connected':bool(ready[0]['formal_assets'])}
+menu_review=None
+if a.menu_conformed_report:
+ assert a.menu_ready_report and a.small_terrain_conformed_report
+ menu_ready=json.loads(a.menu_ready_report.read_bytes());assert menu_ready['result']=='PASS_MENU_BACKGROUND_READY_REVIEW' and menu_ready['spec_state']=='READY'
+ menu_review=json.loads(a.menu_conformed_report.read_bytes())
+ assert menu_review['result']=='PASS_MENU_FORMAL_CONFORMANCE_REVIEW' and menu_review['spec_state']=='CONFORMED'
+ assert menu_review['formal_assets']==68 and menu_review['manifest_sha256']==sha(a.manifest)
+ assert menu_review['ready_review_sha256']==sha(a.menu_ready_report)
+ assert len(menu_review['unchanged_inherited_assets'])==66
+ assert all(manifest['assets'][n]['sha256']==h for n,h in menu_review['unchanged_inherited_assets'].items())
 small_review=None
 if a.small_terrain_ready_report:
  small_review=json.loads(a.small_terrain_ready_report.read_bytes())
@@ -55,11 +73,13 @@ if a.small_terrain_conformed_report:
  assert small_review is not None and a.terrain_batch_conformed_report
  small_review=json.loads(a.small_terrain_conformed_report.read_bytes())
  assert small_review['result']=='PASS_SMALL_TERRAIN_FORMAL_CONFORMANCE_REVIEW' and small_review['spec_state']=='CONFORMED'
- assert small_review['formal_assets']==66 and small_review['manifest_sha256']==sha(a.manifest)
+ assert small_review['formal_assets']==66
+ assert small_review['manifest_sha256']==(menu_review['inherited_manifest_sha256'] if menu_review else sha(a.manifest))
+ if menu_review:assert menu_review['inherited_small_terrain_conformance_sha256']==sha(a.small_terrain_conformed_report)
  assert small_review['ready_review_sha256']==sha(a.small_terrain_ready_report)
  assert len(small_review['unchanged_inherited_assets'])==58
  assert all(manifest['assets'][n]['sha256']==h for n,h in small_review['unchanged_inherited_assets'].items())
-expected_assets=66 if a.small_terrain_conformed_report else 58 if a.terrain_batch_conformed_report else 46
+expected_assets=68 if menu_review else 66 if a.small_terrain_conformed_report else 58 if a.terrain_batch_conformed_report else 46
 assert len(bindings)==expected_assets and sum(bool(f['formal_assets']) for f in frames)==expected_assets
 batch_review=None
 if a.terrain_batch_ready_report:
@@ -218,6 +238,12 @@ if a.background_source_report:
  pik=by_id[1181];assert pik['file']=='OPENMENU.PIK' and pik['indexed_sha256']==background['pik_decoded_sha256']
  pik['background_native_decode_sample']={'state':'DRAFT','spec':'docs/spec/069-hd-menu-background-and-textures.md','writes':64000,'report_sha256':sha(a.background_source_report),'claim':'exact decoded stage pixels only; VGA and presentation lifecycle unverified','formal_connected':False}
  public['background_source_evidence']={'report_sha256':sha(a.background_source_report),'texture_sources':3,'native_menu_points':4,'source_events':background['events'],'pik_decode_writes':64000,'production_connected':False}
+if menu_review:
+ for ident,name in [(1181,'openmenu-000.png'),(1265,'opentile-000.png')]:
+  f=next(f for f in frames if f['research_id']==ident)
+  assert f['formal_assets']==[name]
+  f['source_contract_reference']={'state':'CONFORMED','spec':'docs/spec/069-hd-menu-background-and-textures.md','formal_connected':True,'review_sha256':sha(a.menu_conformed_report),'scope':'settled main menu; exact visible bitmap recognition for PIK, source ownership and text underlays for OPENTILE'}
+ public['menu_graphics_conformance']={'ready_review_sha256':sha(a.menu_ready_report),'review_sha256':sha(a.menu_conformed_report),'sources':[1181,1265],'formal_assets':68,'claim':'two settled-main-menu sources only; full visible denominator remains unknown'}
 public['coverage_limits']['additional_ready_source_contracts']=sum(f.get('source_contract_reference',{}).get('state')=='READY' and not f.get('source_contract_reference',{}).get('formal_connected') for f in frames)
 out.write_text(json.dumps(public,ensure_ascii=False,indent=2)+'\n')
 print('PASS_METADATA_ONLY_FULL_SOURCE_INDEX',len(frames),len(bindings),sha(out),flush=True)

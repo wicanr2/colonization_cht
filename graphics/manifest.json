@@ -3163,6 +3163,76 @@
         "opaque_cells": 47
       },
       "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "opentile-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "cb2a8af8077d1e6fd0082d753e7cc0251192df0705ebe34496f1954f5cdc4547",
+      "bytes": 1439996,
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGB",
+      "native_size": [
+        32,
+        24
+      ],
+      "target_size": [
+        128,
+        96
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "fully opaque sampled art; original PNG preserved unchanged",
+      "generation_prompt": "Create a faithful high-definition repaint of the FIRST reference as a seamless repeating rectangular background texture for the Colonization game interface. Match the user-approved fine pixel-art rendering of the SECOND reference, especially the timber material detail. The FIRST image is an original 32 by 24 pixel dark brown interface tile. Preserve its overall dark reddish-brown, chestnut and muted brown palette and soft broad horizontal distribution. Replace the coarse blocks with fine crisp hand-pixeled horizontal wood grain and tiny subtle fibers. Flat evenly lit wood surface, no plank borders, joints, nails, knots that stand out, perspective, bevel, shadows, objects, lettering, frame, icons or watermarks. Keep contrast restrained so green/gold UI text remains readable. Must tile seamlessly on ALL FOUR EDGES with no visible seams, identical detail scale and tone at opposite edges; no gradients or edge fading. Fill the complete rectangular canvas, opaque, no padding and no transparency. Landscape 4:3 aspect ratio, texture only. Do not draw scenery or buildings from the second reference; use its pixel brushwork only.",
+      "reference_sha256": {
+        "opentile.ss.png": "c402527e1e96de2dbb778817aa16fd28d4c183e9ac7a0b71cd1f66556b3e3ab5",
+        "hd-pixel-concept.png": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "OPENTILE.SS",
+        "sha256": "078cc88895ca523498cdcb90d29684ceb0f311007a53a4a20d16b17db7514402",
+        "ordinal": 0,
+        "indexed_sha256": "056247f0cb118421e53a69305625486e1d453cf5179690fb9f5bc7cd57b926c7",
+        "encoded_sha256": "17bbc06dd4b282eb5d649257f0fb639cda7d73820c0ce05f1db32fdea5203ad7",
+        "encoded_length": 722
+      },
+      "coverage": "verified source ownership and text underlay",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "openmenu-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "2d688773ecc1bf1a1555d53d632f33fa571cf25a0ea930d38b5219b61ddc819f",
+      "bytes": 2916197,
+      "size": [
+        1586,
+        992
+      ],
+      "mode": "RGB",
+      "native_size": [
+        320,
+        200
+      ],
+      "target_size": [
+        1280,
+        800
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "fully opaque sampled art; original PNG preserved unchanged",
+      "generation_prompt": "Make a precise layout correction to the FIRST image, using the SECOND low-resolution original solely to match geometry. Keep the first image's fine pixel-art style, title, forest, sea colors, wood detail and carving quality. Preserve the 8:5 full canvas. The original lower golden horizontal ornamental band is at y=155/200 through y=167/200 of total image height (77.5% to 83.5% from the TOP), NOT near 85%-90%. Move this lower gold band UP to exactly that 77.5%-83.5% interval. Fill everything BELOW 83.5% with the dark warm horizontal wood texture, down to the bottom edge (16.5% of image height). Retain the upper golden band at 6.5%-12% of total height, and retain the title at exactly its current coordinates. Keep the background sea and forest continuous above the relocated lower band. The sailing ship should remain at its original position and size from reference two. No added menu, UI, pointer or text. The title must still read COLONIZATION and Sid Meier's exactly. This edit corrects band placement and bottom wood depth, without redesigning the art.",
+      "reference_sha256": {
+        "exec-0ce5f302-486a-4be0-8392-c268bdef5a7e.png": "29566b6b9f0921b05cd715aaddabe41c818508b3aa6bd10d823e72173f4acf34",
+        "OPENMENU.PIK.png": "818466ff768e5ee4383aa5b5152a680fb95d6dc93482ee8b255c1bf412cc4cc2"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "OPENMENU.PIK",
+        "sha256": "f25c313c66a8f49bf79487fcecbcf76dafff2a81b713f2f3cb2e2d4349fd2004",
+        "ordinal": 0,
+        "indexed_sha256": "5325a3501b83df510cee60c134952130fdb9dfd4bdc00d9eb853fb7ae6021eff"
+      },
+      "coverage": "complete indexed background outside opaque menu panel and verified current cursor; panel border and full palette required",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
     }
   }
 }

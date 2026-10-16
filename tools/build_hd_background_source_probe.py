@@ -4,6 +4,9 @@ import argparse, hashlib, json, os, shutil, subprocess
 parser=argparse.ArgumentParser(description=__doc__)
 for name in ["entry","reference","output"]:
     parser.add_argument("--"+name,type=Path,required=True)
+parser.add_argument('--points',type=Path,help='可選：實際GUI檢查點；需同時提供inputs及end-step')
+parser.add_argument('--inputs',type=Path,help='與points配對的實際DOS輸入')
+parser.add_argument('--end-step',type=int,help='與points配對的有界原版終點')
 a=parser.parse_args()
 repo=Path(__file__).resolve().parents[1];out=a.output.resolve()
 assert Path("/.dockerenv").is_file() and os.getuid()!=0
@@ -12,12 +15,21 @@ sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 assert sha(a.entry/"entry-catalog.go")=="242751bcc3890494e414a8038e84419876af7506b5c2b2f83c9cbe80c87132ba"
 out.mkdir()
 ref=repo/"workplace/reports/goal186-display-hd/hd-building032-draw-boundary-20261012"
-points=json.loads((ref/"lifecycle-public-r29-r1/observed/gui-points.json").read_bytes())[:4]
+assert (a.points is None)==(a.inputs is None)==(a.end_step is None)
+points=json.loads((a.points or ref/"lifecycle-public-r29-r1/observed/gui-points.json").read_bytes())
+if a.points is None:points=points[:4]
+end=a.end_step or 21000000
+assert 1<=len(points)<=100 and 1<=end<=1200000000
+assert [(x['step'],x['dos_input_count']) for x in points]==sorted(set((x['step'],x['dos_input_count']) for x in points))
+assert all(0<=x['step']<=end for x in points)
 (out/"points.json").write_text(json.dumps(points,indent=2)+"\n")
 s=(a.entry/"entry-catalog.go").read_text()
 s=s.replace('import (','import (\n "bufio"')
 s=s.replace("821f1ba83576013bba52ca53a39273498af64c3269a819e40f2244d036a3e901",sha(out/"points.json"))
-s=s.replace("len(points) != 49","len(points) != 4").replace("end = 134600000","end = 21000000")
+s=s.replace("len(points) != 49","len(points) != "+str(len(points))).replace("end = 134600000","end = "+str(end))
+if a.inputs:
+    shutil.copyfile(a.inputs,out/'inputs.json')
+    s=s.replace('3947d52a893ae3d6c6f388cefc1e67e4001d41270ca46e65856526a9b97471ca',sha(out/'inputs.json'))
 s=s.replace("step := func() { observer.beforeStep();","step := func() { background.beforeStep(); observer.beforeStep();")
 assert "background.beforeStep(); observer.beforeStep();" in s
 needle="var checkpoints []map[string]any"
@@ -113,6 +125,6 @@ for name in ["go.mod","go.sum","go.work"]:shutil.copyfile(a.reference/name,out/n
 subprocess.run(["gofmt","-w","main.go"],cwd=out,check=True,timeout=20)
 for cmd in [["go","build","-trimpath","-o","background-probe","."],["go","vet","."]]:
     subprocess.run(cmd,cwd=out,check=True,timeout=120)
-meta={"kind":"DRAFT-readonly-background-source-collector","source_sha256":sha(out/"main.go"),"binary_sha256":sha(out/"background-probe"),"generator_sha256":sha(Path(__file__)),"entry_source_sha256":sha(a.entry/"entry-catalog.go"),"points_sha256":sha(out/"points.json"),"sources":3,"event_limit":6000000,"end":21000000,"production_connected":False}
+meta={"kind":"DRAFT-readonly-background-source-collector","source_sha256":sha(out/"main.go"),"binary_sha256":sha(out/"background-probe"),"generator_sha256":sha(Path(__file__)),"entry_source_sha256":sha(a.entry/"entry-catalog.go"),"points_sha256":sha(out/"points.json"),"sources":3,"event_limit":6000000,"end":end,"production_connected":False}
 (out/"build.json").write_text(json.dumps(meta,indent=2)+"\n")
 print("PASS_BACKGROUND_SOURCE_COLLECTOR_BUILD",meta["source_sha256"],flush=True)

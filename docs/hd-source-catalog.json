@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "c8ba408e87efd4a16d996251b7f8c5e04dc0ce6830c2647708d81894e1f04606",
+  "formal_manifest_sha256": "281c8bd28842e2c24810db0b44c0deb0b7b42d1ea8b636cfc2ab2e2b9acda116",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 66,
+    "formal_asset_bindings": 68,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -39650,7 +39650,9 @@
       "embedded_palette": true,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "openmenu-000.png"
+      ],
       "background_native_decode_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/069-hd-menu-background-and-textures.md",
@@ -39658,6 +39660,13 @@
         "report_sha256": "7127dbd0f20691e81f737d4fe54c378edd31135f26028d7add85bdaf6eb6f90b",
         "claim": "exact decoded stage pixels only; VGA and presentation lifecycle unverified",
         "formal_connected": false
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "d85cfb2fb95f4b4b47aefa7800d3e295b8400948cbb556fd69d8cd9ce129e5d2",
+        "scope": "settled main menu; exact visible bitmap recognition for PIK, source ownership and text underlays for OPENTILE"
       }
     },
     {
@@ -41682,7 +41691,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "opentile-000.png"
+      ],
       "cold_start_entry_sample": {
         "calls": 1,
         "candidate_research_ids": [
@@ -41710,6 +41721,13 @@
         ],
         "report_sha256": "7127dbd0f20691e81f737d4fe54c378edd31135f26028d7add85bdaf6eb6f90b",
         "formal_connected": false
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "d85cfb2fb95f4b4b47aefa7800d3e295b8400948cbb556fd69d8cd9ce129e5d2",
+        "scope": "settled main menu; exact visible bitmap recognition for PIK, source ownership and text underlays for OPENTILE"
       }
     },
     {
@@ -56603,6 +56621,27 @@
       "source_encoded_sha256": "917d80be948c17ca4233d10e5bf1cc8729a1f2cdc6c797cebda4fc3206cd1e5c",
       "spec": "docs/spec/068-hd-small-world-terrain.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "opentile-000.png",
+      "asset_sha256": "cb2a8af8077d1e6fd0082d753e7cc0251192df0705ebe34496f1954f5cdc4547",
+      "source_research_id": 1265,
+      "source_file": "OPENTILE.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "17bbc06dd4b282eb5d649257f0fb639cda7d73820c0ce05f1db32fdea5203ad7",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmenu-000.png",
+      "asset_sha256": "2d688773ecc1bf1a1555d53d632f33fa571cf25a0ea930d38b5219b61ddc819f",
+      "source_research_id": 1181,
+      "source_file": "OPENMENU.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "5325a3501b83df510cee60c134952130fdb9dfd4bdc00d9eb853fb7ae6021eff"
     }
   ],
   "limitations": [
@@ -56722,5 +56761,15 @@
     "source_events": 280237,
     "pik_decode_writes": 64000,
     "production_connected": false
+  },
+  "menu_graphics_conformance": {
+    "ready_review_sha256": "70a329673b8eeb39dfece2774fb655898229773233b2d24ba82174737e2a5999",
+    "review_sha256": "d85cfb2fb95f4b4b47aefa7800d3e295b8400948cbb556fd69d8cd9ce129e5d2",
+    "sources": [
+      1181,
+      1265
+    ],
+    "formal_assets": 68,
+    "claim": "two settled-main-menu sources only; full visible denominator remains unknown"
   }
 }

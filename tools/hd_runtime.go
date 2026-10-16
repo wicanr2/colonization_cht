@@ -98,6 +98,10 @@ func loadHDRuntime(m *golem.Machine, game, directory string) (*hdRuntime, error)
 	if err != nil {
 		return nil, err
 	}
+	h.texture, err = loadHDTextureRuntime(h, game, directory)
+	if err != nil {
+		return nil, err
+	}
 	h.smallTerrain, err = loadHDSmallTerrainRuntime(h, game, directory)
 	if err != nil {
 		return nil, err
@@ -142,7 +146,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "c8ba408e87efd4a16d996251b7f8c5e04dc0ce6830c2647708d81894e1f04606"
+const hdManifestSHA = "281c8bd28842e2c24810db0b44c0deb0b7b42d1ea8b636cfc2ab2e2b9acda116"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"
@@ -155,6 +159,7 @@ type hdBuildingPixel struct {
 	cursorIndex int
 }
 type hdRuntime struct {
+	texture                                          *hdTextureRuntime
 	smallTerrain                                     *hdSmallTerrainRuntime
 	terrainBatch                                     *hdTerrainBatchRuntime
 	cursor                                           *hdCursorRuntime
@@ -235,6 +240,7 @@ func (h *hdRuntime) beforeInstruction() {
 	h.terrain079.beforeInstruction()
 	h.terrainBatch.beforeInstruction()
 	h.smallTerrain.beforeInstruction()
+	h.texture.beforeInstruction()
 	h.person.beforeInstruction()
 	h.shelter.beforeInstruction()
 	h.nine.beforeInstruction()
@@ -412,7 +418,7 @@ func (h *hdRuntime) cursorProof(f draftNativeFrame) ([]byte, string) {
 	}
 	return source, ""
 }
-func (h *hdRuntime) base(f draftNativeFrame) (*image.RGBA, map[string]any) {
+func (h *hdRuntime) baseExisting(f draftNativeFrame) (*image.RGBA, map[string]any) {
 	out := draftRGB(f.indexed, f.palette)
 	receipt := map[string]any{"formal": true, "asset": "building-032", "accepted": h.accepted, "rejected": h.rejected,
 		"cursor_paint_points": h.cursorPaints, "cursor_restore_points": h.cursorRestores, "owned": 0, "painted": 0}
@@ -493,7 +499,24 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 		return nil, nil, fmt.Errorf("ui.error.unavailable")
 	}
 	base, hd := b.hd.base(f)
-	out, record, err := draftRebuildTargetOn(t, f.journal, f.canvas, f.buffer, f.indexed, f.palette, f.cursor, f.step, f.mode, base)
+	var hdBG draftHDBackground
+	bgMask := make([]byte, 8000)
+	bgPainted := 0
+	if b.hd.texture != nil && hash(f.palette) == hdTexturePaletteSHA && hd["reason"] != "unverified-cursor-or-native-surface" {
+		hdBG = func(out *image.RGBA, i int, v byte, palette []byte) bool {
+			ok := b.hd.texture.paintBackground(out, f, i, v, palette)
+			if ok {
+				bgMask[i>>3] |= 1 << uint(i&7)
+				bgPainted++
+			}
+			return ok
+		}
+	}
+	out, record, err := draftRebuildTargetOn(t, f.journal, f.canvas, f.buffer, f.indexed, f.palette, f.cursor, f.step, f.mode, base, hdBG)
+	if texture, ok := hd["texture"].(map[string]any); ok {
+		texture["background_repaints"] = bgPainted
+		texture["background_mask"] = bgMask
+	}
 	if err != nil {
 		return nil, nil, err
 	}
@@ -507,6 +530,9 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 
 func (h *hdRuntime) key() string {
 	base := h.baseKey()
+	if h != nil && h.texture != nil {
+		base = fmt.Sprintf("%s/texture/%d", base, h.texture.revision)
+	}
 	if h != nil && h.terrain079 != nil {
 		base = fmt.Sprintf("%s/terrain079/%d", base, h.terrain079.revision)
 	}

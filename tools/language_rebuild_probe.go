@@ -358,7 +358,7 @@ func draftPrepareFixed(pack *draftPreparedBundle, needs draftBundleRequirements)
 	return result, nil
 }
 
-func draftPaintFixed(out *image.RGBA, mask *draftFixedMask, o *nativeObservation, j *nativeJournal, canvas, indexed, palette []byte, cursor image.Rectangle) (map[string]any, string) {
+func draftPaintFixed(out *image.RGBA, mask *draftFixedMask, o *nativeObservation, j *nativeJournal, canvas, indexed, palette []byte, cursor image.Rectangle, hdBackgroundOverride ...draftHDBackground) (map[string]any, string) {
 	f := o.fixed
 	if f == nil || mask == nil || f.id != mask.id || f.safe != mask.safe || f.layered != (mask.normal != nil) {
 		return nil, "fixed-field-binding"
@@ -411,7 +411,7 @@ func draftPaintFixed(out *image.RGBA, mask *draftFixedMask, o *nativeObservation
 	for y := f.safe.Min.Y; y < f.safe.Max.Y; y++ {
 		for x := f.safe.Min.X; x < f.safe.Max.X; x++ {
 			if f.before[k] != f.after[k] {
-				draftPaintPixel(out, y*320+x, f.before[k], palette)
+				draftPaintPixel(out, y*320+x, f.before[k], palette, hdBackgroundOverride...)
 			}
 			k++
 		}
@@ -603,7 +603,7 @@ func draftAlphaInk(mask *image.Alpha) image.Rectangle {
 	return ink
 }
 
-func draftPaintSea(out *image.RGBA, st *seaState, candidate *draftSeaRow, canvas, indexed, palette []byte, cursor image.Rectangle) (map[string]any, string) {
+func draftPaintSea(out *image.RGBA, st *seaState, candidate *draftSeaRow, canvas, indexed, palette []byte, cursor image.Rectangle, hdBackgroundOverride ...draftHDBackground) (map[string]any, string) {
 	o, row, layer := candidate.observation, candidate.row, candidate.layer
 	if !o.visible(canvas, nil) {
 		return nil, "sea-source-changed"
@@ -632,7 +632,7 @@ func draftPaintSea(out *image.RGBA, st *seaState, candidate *draftSeaRow, canvas
 	}
 	for i, v := range row.firstOld {
 		if after, ok := row.lastVal[i]; ok && canvas[i] == after && v != after {
-			draftPaintPixel(out, i, v, palette)
+			draftPaintPixel(out, i, v, palette, hdBackgroundOverride...)
 		}
 	}
 	draftPaintLayers(out, layer, []*image.Alpha{shadow, fg[68], fg[149]}, []byte{0, 68, 149}, palette)
@@ -667,7 +667,13 @@ func draftColor(v byte, palette []byte) color.RGBA {
 	return color.RGBA{palette[p]<<2 | palette[p]>>4, palette[p+1]<<2 | palette[p+1]>>4, palette[p+2]<<2 | palette[p+2]>>4, 255}
 }
 
-func draftPaintPixel(out *image.RGBA, i int, v byte, palette []byte) {
+func draftPaintPixel(out *image.RGBA, i int, v byte, palette []byte, hdBackgroundOverride ...draftHDBackground) {
+	if len(hdBackgroundOverride) > 0 && hdBackgroundOverride[0] != nil && hdBackgroundOverride[0](out,
+		i, v, palette,
+	) {
+		return
+	}
+
 	x, y := (i%320)*4, (i/320)*4
 	draw.Draw(out, image.Rect(x, y, x+4, y+4), image.NewUniform(draftColor(v, palette)), image.Point{}, draw.Src)
 }
@@ -986,7 +992,7 @@ func draftInputASCII(o *nativeObservation, prompt *dialogShown, fonts map[int]*d
 func draftRebuildTarget(t *draftLanguageTarget, j *nativeJournal, canvas, buffer, indexed, palette []byte, cursor image.Rectangle, step uint64, mode byte) (*image.RGBA, map[string]any, error) {
 	return draftRebuildTargetOn(t, j, canvas, buffer, indexed, palette, cursor, step, mode, nil)
 }
-func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buffer, indexed, palette []byte, cursor image.Rectangle, step uint64, mode byte, base *image.RGBA) (*image.RGBA, map[string]any, error) {
+func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buffer, indexed, palette []byte, cursor image.Rectangle, step uint64, mode byte, base *image.RGBA, hdBackgroundOverride ...draftHDBackground) (*image.RGBA, map[string]any, error) {
 	if len(canvas) != 64000 || len(buffer) != 64000 || len(indexed) != 64000 || len(palette) != 768 {
 		return nil, nil, fmt.Errorf("invalid native frame")
 	}
@@ -1100,7 +1106,7 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 		if o.fixed == nil || o.fixed.expired {
 			continue
 		}
-		record, why := draftPaintFixed(out, t.fixed[o.fixed.id], o, j, canvas, indexed, palette, cursor)
+		record, why := draftPaintFixed(out, t.fixed[o.fixed.id], o, j, canvas, indexed, palette, cursor, hdBackgroundOverride...)
 		if record != nil {
 			records = append(records, record)
 			fixedSafes = append(fixedSafes, o.fixed.safe)
@@ -1110,7 +1116,7 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 	}
 	var seaClaims []image.Rectangle
 	for _, row := range seaRows {
-		record, why := draftPaintSea(out, t.sea, row, canvas, indexed, palette, cursor)
+		record, why := draftPaintSea(out, t.sea, row, canvas, indexed, palette, cursor, hdBackgroundOverride...)
 		if record != nil {
 			records = append(records, record)
 			seaClaims = append(seaClaims, row.row.bbox)
@@ -1146,7 +1152,7 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 			for x := st.safe.Min.X; x < st.safe.Max.X; x++ {
 				i := y*320 + x
 				if !image.Pt(x, y).In(cursor) && st.before[i] != canvas[i] {
-					draftPaintPixel(out, i, st.before[i], palette)
+					draftPaintPixel(out, i, st.before[i], palette, hdBackgroundOverride...)
 				}
 			}
 		}
@@ -1207,7 +1213,7 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 		for y := it.safe.Min.Y; y < it.safe.Max.Y; y++ {
 			for x := it.safe.Min.X; x < it.safe.Max.X; x++ {
 				if !image.Pt(x, y).In(cursor) && it.before[k] != it.after[k] {
-					draftPaintPixel(out, y*320+x, it.before[k], palette)
+					draftPaintPixel(out, y*320+x, it.before[k], palette, hdBackgroundOverride...)
 				}
 				k++
 			}
@@ -1228,7 +1234,7 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 		for x := max(0, cursor.Min.X); x < min(320, cursor.Max.X); x++ {
 			i := y*320 + x
 			if indexed[i] != canvas[i] {
-				draftPaintPixel(out, i, indexed[i], palette)
+				draftPaintPixel(out, i, indexed[i], palette, hdBackgroundOverride...)
 			}
 		}
 	}
@@ -1526,3 +1532,5 @@ func draftExportRebuilds(targets map[string]*draftLanguageTarget, j *nativeJourn
 		"step": step, "native_before_sha256": before, "native_after_sha256": after, "transactions": transactions})
 	return nil
 }
+
+type draftHDBackground func(*image.RGBA, int, byte, []byte) bool

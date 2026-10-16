@@ -44,6 +44,7 @@ def main():
                      112, 113, 116, 119, 126, 127, 136, 139]
     cases += [kind+"-terrain-%03d"%n for n in terrain_batch for kind in ["missing", "bad", "linked"]]
     cases += ["missing-terrain-source", "bad-terrain-source", "linked-terrain-source"]
+    cases += [kind+'-'+name for name in ['opentile-000','openmenu-000','menu-source','texture-source'] for kind in ['missing','bad','linked']]
     cases += ["missing-cursor-image","bad-cursor-image","linked-cursor-image",
               "missing-cursor-source","bad-cursor-source","linked-cursor-source","restored"]
     if args.cases:
@@ -54,10 +55,10 @@ def main():
         out.mkdir()
         assets = out / "graphics"
         case_game = args.game
-        if case.endswith("-cursor-source") or case.endswith("-terrain-source"):
+        if any(case.endswith('-'+name+'-source') for name in ['cursor','terrain','menu','texture']):
             case_game = out / "game"
             shutil.copytree(args.game, case_game)
-            source_name = "PHYS0.SS" if case.endswith("-terrain-source") else "CURSOR.SS"
+            source_name = next(filename for name,filename in [('terrain','PHYS0.SS'),('cursor','CURSOR.SS'),('menu','OPENMENU.PIK'),('texture','OPENTILE.SS')] if case.endswith('-'+name+'-source'))
             cursor_source = case_game / source_name
             cursor_source.unlink()
             if case.startswith("bad-"):
@@ -72,6 +73,12 @@ def main():
             (assets / "building-032.png").write_bytes(b"damaged")
         if case == "bad-manifest":
             (assets / "manifest.json").write_bytes(b"{}\n")
+        for name in ['opentile-000','openmenu-000']:
+            path=assets/(name+'.png')
+            if case=='missing-'+name:path.unlink()
+            if case=='bad-'+name:path.write_bytes(b'damaged')
+            if case=='linked-'+name:
+                path.unlink();path.symlink_to(args.bundle/'graphics'/path.name)
         if case == "missing-sea":
             (assets / "sea-148.png").unlink()
         if case == "bad-sea":
