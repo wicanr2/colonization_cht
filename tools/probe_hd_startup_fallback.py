@@ -24,7 +24,9 @@ def main():
     for name in ["bundle", "game", "output"]:
         parser.add_argument("--" + name, type=Path, required=True)
     parser.add_argument("--cases", nargs="+", help="只驗指定的既有案例；省略時驗全部案例")
+    parser.add_argument("--startup-timeout", type=float, default=45, help="開窗等待秒數；只適用資產初始化，範圍1至180")
     args = parser.parse_args()
+    need(1 <= args.startup_timeout <= 180, "開窗等待範圍不同")
     root = args.output.resolve()
     need(Path("/.dockerenv").is_file() and os.environ.get("DISPLAY") and os.getuid() != 0,
          "需非root Docker及有界Xvfb")
@@ -44,7 +46,7 @@ def main():
                      112, 113, 116, 119, 126, 127, 136, 139]
     cases += [kind+"-terrain-%03d"%n for n in terrain_batch for kind in ["missing", "bad", "linked"]]
     cases += ["missing-terrain-source", "bad-terrain-source", "linked-terrain-source"]
-    cases += [kind+'-'+name for name in ['opentile-000','openmenu-000','woodtile-000','menu-source','texture-source','wood-source'] for kind in ['missing','bad','linked']]
+    cases += [kind+'-'+name for name in ['opentile-000','openmenu-000','woodtile-000','parch-000','menu-source','texture-source','wood-source','parch-source'] for kind in ['missing','bad','linked']]
     cases += ["missing-cursor-image","bad-cursor-image","linked-cursor-image",
               "missing-cursor-source","bad-cursor-source","linked-cursor-source","restored"]
     if args.cases:
@@ -55,10 +57,10 @@ def main():
         out.mkdir()
         assets = out / "graphics"
         case_game = args.game
-        if any(case.endswith('-'+name+'-source') for name in ['cursor','terrain','menu','texture','wood']):
+        if any(case.endswith('-'+name+'-source') for name in ['cursor','terrain','menu','texture','wood','parch']):
             case_game = out / "game"
             shutil.copytree(args.game, case_game)
-            source_name = next(filename for name,filename in [('terrain','PHYS0.SS'),('cursor','CURSOR.SS'),('menu','OPENMENU.PIK'),('texture','OPENTILE.SS'),('wood','WOODTILE.SS')] if case.endswith('-'+name+'-source'))
+            source_name = next(filename for name,filename in [('terrain','PHYS0.SS'),('cursor','CURSOR.SS'),('menu','OPENMENU.PIK'),('texture','OPENTILE.SS'),('wood','WOODTILE.SS'),('parch','PARCH.SS')] if case.endswith('-'+name+'-source'))
             cursor_source = case_game / source_name
             cursor_source.unlink()
             if case.startswith("bad-"):
@@ -73,7 +75,7 @@ def main():
             (assets / "building-032.png").write_bytes(b"damaged")
         if case == "bad-manifest":
             (assets / "manifest.json").write_bytes(b"{}\n")
-        for name in ['opentile-000','openmenu-000','woodtile-000']:
+        for name in ['opentile-000','openmenu-000','woodtile-000','parch-000']:
             path=assets/(name+'.png')
             if case=='missing-'+name:path.unlink()
             if case=='bad-'+name:path.write_bytes(b'damaged')
@@ -165,7 +167,8 @@ def main():
             time.sleep(0.08)
 
         try:
-            until = time.monotonic() + 45
+            window_wait_started = time.monotonic()
+            until = window_wait_started + args.startup_timeout
             while time.monotonic() < until:
                 status()
                 found = subprocess.run(["xdotool", "search", "--onlyvisible", "--name", "Colonization CHT"],
@@ -175,6 +178,7 @@ def main():
                     break
                 time.sleep(0.025)
             need(window is not None, "找不到正式視窗")
+            startup_window_seconds = time.monotonic() - window_wait_started
             xdo("windowfocus", window)
             wait(lambda s: s.get("step", 0) >= 4000000, "冷啟動未推進")
             xdo("mousemove", "--window", window, 115, 24)
@@ -209,6 +213,7 @@ def main():
             process.wait(timeout=15)
             need(process.returncode == 0 and preference.read_bytes() == saved, "正常結束改寫偏好")
             results.append({"case": case, "effective": effective, "events": len(events),
+                            "startup_window_seconds": startup_window_seconds,
                             "reason": live.get("hd_asset_reason"), "command": command,
                             "preferences_unchanged": True, "native_state_unchanged_during_settings": True})
             print("PASS_FORMAL_HD_STARTUP", case, flush=True)

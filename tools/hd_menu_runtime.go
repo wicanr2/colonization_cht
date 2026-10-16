@@ -32,6 +32,7 @@ type hdTexturePair struct {
 	hasUnder   bool
 }
 type hdTextureRuntime struct {
+	sourceLength                                                              int
 	sourceEncodedSHA, sourcePixelsSHA, sourcePaletteSHA                       string
 	paletteIndices                                                            []byte
 	h                                                                         *hdRuntime
@@ -59,6 +60,18 @@ func loadHDTextureRuntime(h *hdRuntime, game, dir string) (*hdTextureRuntime, er
 	return loadHDTextureVariant(h, game, dir, false)
 }
 func loadHDTextureVariant(h *hdRuntime, game, dir string, world bool) (*hdTextureRuntime, error) {
+	if world {
+		return loadHDTextureKind(h, game, dir, "wood")
+	}
+	return loadHDTextureKind(h, game, dir, "menu")
+}
+func loadHDTextureKind(h *hdRuntime, game, dir, kind string) (*hdTextureRuntime, error) {
+	if kind != "wood" && kind != "menu" && kind != "parch" {
+		return nil, fmt.Errorf("unknown texture kind")
+	}
+	world, parch := kind == "wood", kind == "parch"
+	sourceLength := 722
+
 	sourceName, assetName := "OPENTILE.SS", "opentile-000.png"
 	originalSHA := "078cc88895ca523498cdcb90d29684ceb0f311007a53a4a20d16b17db7514402"
 	assetSHA := "cb2a8af8077d1e6fd0082d753e7cc0251192df0705ebe34496f1954f5cdc4547"
@@ -71,6 +84,15 @@ func loadHDTextureVariant(h *hdRuntime, game, dir string, world bool) (*hdTextur
 		assetSHA = "8580efcf85a45fa879938b5b73e8d54c58853dd9297e8ecd1f10801e637bb5d9"
 		encodedSHA = "e33bfeabb5830cec122f88ea7909f2c0fca49a9ec234b2e622cac584cd73499a"
 		pixelsSHA = "5cdc9463574bcab9041271e19a92b8a24af408d9c1e4f59e9b6fefbc23b55ce3"
+	}
+
+	if parch {
+		sourceName, assetName = "PARCH.SS", "parch-000.png"
+		originalSHA = "5ba57f44f97e5616dc0fb3d4755de9d1dd75a7e060f4e601c286230d17b72113"
+		assetSHA = "4ef702ede0e2d0a46ea94b54fdca602f01071a36a16a83dd57918b8fab15847e"
+		encodedSHA = "81f8779fb3041d7b59c81071b1544d4268d291b824c631ec2898a58ef3463414"
+		pixelsSHA = "f937c09473b81e48df5dec86faa1db94a18576408896699b3f663aac0e260831"
+		sourceLength = 804
 	}
 
 	raw, err := hdReadFile(filepath.Join(game, sourceName), 8<<20)
@@ -96,9 +118,14 @@ func loadHDTextureVariant(h *hdRuntime, game, dir string, world bool) (*hdTextur
 	}
 	p := &hdTextureRuntime{h: h, art: image.NewRGBA(image.Rect(0, 0, 128, 96)), owners: map[uint32]hdTextureCell{}, pending: map[uint32]hdTexturePair{}, underlays: map[uint32]hdTextureUnderlay{}}
 	p.sourceEncodedSHA, p.sourcePixelsSHA, p.sourcePaletteSHA = encodedSHA, pixelsSHA, hdTexturePaletteSHA
+	p.sourceLength = sourceLength
 	if world {
 		p.paletteIndices = []byte{128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138}
 		p.sourcePaletteSHA = "84794389fcc2d6ee1bc645822433a74736551ccd1c8d0ed73507235ac42e3896"
+	}
+	if parch {
+		p.paletteIndices = []byte{98, 99, 100, 106, 107}
+		p.sourcePaletteSHA = "7ad1391ceb732163dec0f70b714bd2efd13a53c01e878d90bbb899354ecb22c3"
 	}
 	for y := 0; y < 96; y++ {
 		for x := 0; x < 128; x++ {
@@ -109,7 +136,7 @@ func loadHDTextureVariant(h *hdRuntime, game, dir string, world bool) (*hdTextur
 			p.art.SetRGBA(x, y, c)
 		}
 	}
-	if world {
+	if world || parch {
 		return p, nil
 	}
 	for name, want := range map[string]string{"VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3", "OPENMENU.PIK": "f25c313c66a8f49bf79487fcecbcf76dafff2a81b713f2f3cb2e2d4349fd2004"} {
@@ -182,7 +209,7 @@ func (p *hdTextureRuntime) beforeInstruction() {
 		return
 	}
 	at := int(record[1])*16 + int(record[0])
-	if int(record[0])+722 > 65536 || at+722 > len(m.Mem) || hash(m.Mem[at:at+722]) != p.sourceEncodedSHA {
+	if int(record[0])+p.sourceLength > 65536 || at+p.sourceLength > len(m.Mem) || hash(m.Mem[at:at+p.sourceLength]) != p.sourceEncodedSHA {
 		return
 	}
 	base := uint32(dest[3])*16 + uint32(dest[2])
@@ -358,6 +385,12 @@ func (h *hdRuntime) base(f draftNativeFrame) (*image.RGBA, map[string]any) {
 	}
 	if h.worldTexture != nil && record["reason"] != "unverified-cursor-or-native-surface" {
 		record["world_texture"] = h.worldTexture.paint(out, f)
+	}
+	if h.parch != nil && record["reason"] != "unverified-cursor-or-native-surface" {
+		group := h.parch.paint(out, f)
+		group["formal"] = true
+		group["prototype"] = false
+		record["parch"] = group
 	}
 	return out, record
 }

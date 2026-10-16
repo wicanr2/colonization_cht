@@ -3270,6 +3270,42 @@
       },
       "coverage": "verified source ownership and text underlay; palette indices 128..138 fingerprint required",
       "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "parch-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "4ef702ede0e2d0a46ea94b54fdca602f01071a36a16a83dd57918b8fab15847e",
+      "bytes": 1462834,
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGB",
+      "native_size": [
+        32,
+        24
+      ],
+      "target_size": [
+        128,
+        96
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "fully opaque sampled art; original PNG preserved unchanged",
+      "generation_prompt": "Repaint the FIRST reference image as one opaque seamless fine-pixel-art background texture for the Colonization display overlay. FIRST image: verified original PARCH.SS frame 0, 32 by 24 native pixels enlarged without interpolation, with its actual colony-screen palette. Preserve its pale warm ivory, cream, muted wheat and light ochre color balance, flat lighting, low contrast and broad softly mottled distribution. SECOND image: the user-approved fine pixel-art style sheet; use only its small crisp pixel clusters and restrained material detail, do not copy any buildings, plants, river or objects. The output must be ONLY an edge-to-edge, seamless repeating 4:3 rectangular pale parchment/mottled cream texture. Replace the coarse original blocks with fine clean tiny pixel clusters and understated paper fibers. Suitable as a quiet background behind existing buildings and interface text; no added subject or scenery. Maintain even tone across all four edges, no center spotlight or vignette, no visible tile seams or large stains. Avoid text, letters, icons, border, frame, torn edges, folds, shadows, bevel, perspective, grass, plants, dirt clods, sand waves, water, objects, smooth gradients, blur, photographic texture, glossy/3D rendering and transparency. Opaque landscape 4:3 canvas, intended for pixel-center nearest-neighbor sampling to 128 by 96. This is a faithful HD redraw of the first texture in the accepted pixel-art style.",
+      "reference_sha256": {
+        "native_colony_palette_reference": "239d2d742d94068232292e1e8d0d88182d60e47e02a9028da24fb2f929a75198",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PARCH.SS",
+        "sha256": "5ba57f44f97e5616dc0fb3d4755de9d1dd75a7e060f4e601c286230d17b72113",
+        "ordinal": 0,
+        "indexed_sha256": "f937c09473b81e48df5dec86faa1db94a18576408896699b3f663aac0e260831",
+        "encoded_sha256": "81f8779fb3041d7b59c81071b1544d4268d291b824c631ec2898a58ef3463414",
+        "encoded_length": 804
+      },
+      "coverage": "verified source ownership and text underlay; palette indices 98,99,100,106,107 required",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
     }
   }
 }

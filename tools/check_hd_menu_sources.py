@@ -199,13 +199,16 @@ def check(root, decoded, output, expected_points=12, expected_inputs=10):
         for sample in fixture['samples']:
             if 'proof' not in sample:continue
             proof=read(Path(sample['proof']));idx=sample['point']
-            for source_id,prefix in [(1265,'texture'),(1552,'world_texture')]:
+            for source_id,prefix in [(1265,'texture'),(1552,'world_texture'),(1287,'parch')]:
                 if prefix+'_cells' not in proof:continue
                 for key,suffix in [(prefix+'_cells','owners'),(prefix+'_underlays','underlays')]:
                     model=read(output/f'point-{idx:03d}.texture-{suffix}.json')
                     model={k:v for k,v in model.items() if v['source_id']==source_id}
                     assert model==proof[key],(sample['label'],key)
-            comparisons.append({'sample':sample['label'],'owners':len(proof['texture_cells']),'underlays':len(proof['texture_underlays'])})
+            row={'sample':sample['label'],'owners':len(proof['texture_cells']),'underlays':len(proof['texture_underlays'])}
+            if 'parch_cells' in proof:
+                row.update(parch_owners=len(proof['parch_cells']),parch_underlays=len(proof['parch_underlays']))
+            comparisons.append(row)
         assert len(comparisons)==sum('proof' in sample for sample in fixture['samples'])
         result['gui_model_comparisons']=comparisons
         result['fixture_sha256']=sha(fixture_path)
