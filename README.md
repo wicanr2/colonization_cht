@@ -85,16 +85,16 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 
 顯示設定：語言與圖像模式可獨立切換；開啟時暫停，關閉並放開按鍵後恢復。
 
-![使用 Noto 字型的繁體中文主選單](docs/screenshots/noto-menu-zh.png)
+![HD 背景、木紋與 Noto 字型的繁體中文主選單](docs/screenshots/noto-menu-zh.png)
 
-主選單：繁中使用 Noto 字型，原版大型標題維持原貌。各欄位的翻譯與排版仍分別驗證。
+主選單：背景、大型標題與選單木紋已依定稿畫風重繪，繁中使用 Noto 字型。各欄位的翻譯與排版仍分別驗證。
 
 ## 開發與研究入口
 
 所有建置、遊戲執行、分析與抓圖都在 Docker 容器內進行，需要自備合法原版。
 
 - [目前脈絡](CONTEXT.md)、[工作計畫](WORKLIST.md)（由 `docs/worklist.json` 產生）
-- [多語系、HD 切換與實際遊玩影片](docs/goals/186-display-settings-and-gameplay-video.md)：五語整包後端與設定保存已接線；十二種城內建築與景物、海洋與二十一種世界地形圖塊及碎片、一個人物、三十種小圖像與一般游標已接正式HD顯示。全量圖像包含小圖像與動畫幀，仍在逐項開發，尚未收進目前發行版。
+- [多語系、HD 切換與實際遊玩影片](docs/goals/186-display-settings-and-gameplay-video.md)：五語整包後端與設定保存已接線；十二種城內建築與景物、海洋與二十一種世界地形圖塊及碎片、一個人物、三十種小圖像、一般游標及主選單背景與木紋已接正式HD顯示。全量圖像包含小圖像與動畫幀，仍在逐項開發，尚未收進目前發行版。
 - [規格](docs/spec/)與[各輪目標](docs/goals/)
 - [驗證矩陣](docs/verification-matrix.md)（`tools/verification_matrix.py` 產生）
 - [研究證據](RESEARCH-LOG.md)與[工作歷程](WORKLOG.md)
