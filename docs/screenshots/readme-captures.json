@@ -1,19 +1,19 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-16",
-  "code_commit": "c33d43204d27b869d373b80c716fd3ce1e86a36b",
-  "binary_sha256": "8a90a1bd10c85be006f04a09aa62f12d9181ea5e9fec638758c57d0a927c4111",
-  "formal_binary_sha256": "9bb9449a14303bf4e0d97df76c0c23d3920574850dfb80dfb784e9720740b5c5",
-  "source_build_sha256": "ba410e072f63a1943a7a7cee684064db29f6723089b5ddd84a3d64bf1aa4f9e6",
-  "read_only_gui_probe_build_sha256": "175bed8f179bbfc52dc6ee019024ed6090b3e7a4a08cc6e99315d4786405dada",
+  "code_commit": "468e835ffb5a36f9e012797104bfe19e7dcaec82",
+  "binary_sha256": "56b1aa5c0da67ed4169b67e1705378ee372450fb6a71fdb609f2514c14d8b516",
+  "formal_binary_sha256": "070483eaac00568e3d79517d11dd444c84a2ec1684a3d8fedc96c437ff4ba9b6",
+  "source_build_sha256": "0f0b023cb5bbe79e46ea3b81d7df51374e37689e1b3c3ed1ec1e724d99cfbb28",
+  "read_only_gui_probe_build_sha256": "9033d568cabbc8502b37ebd513bff89f699b5e22955aa07aba8b33b3e108ccf0",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 58,
+  "formal_hd_assets": 66,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
     {
       "file": "hd-colony-zh.png",
-      "sha256": "95f202dc26786055d77a1509114b79bf7a511ad01d0ec3758191df00f528f95f",
+      "sha256": "4e19a563d595710490d3b4e2664b7a2ef0787bca015ffdb6ff0f026e7bdf78d3",
       "size": [
         1280,
         800
@@ -21,17 +21,17 @@
       "scene": "colony",
       "language": "zh-Hant",
       "graphics": "hd",
-      "step": 174800000,
-      "binary_sha256": "8a90a1bd10c85be006f04a09aa62f12d9181ea5e9fec638758c57d0a927c4111",
-      "formal_binary_sha256": "9bb9449a14303bf4e0d97df76c0c23d3920574850dfb80dfb784e9720740b5c5",
-      "source_receipt": "workplace/reports/goal186-display-hd/hd-world-terrain-prototype-r63/formal-gui-r1/gui/gui.display-170.png",
-      "source_gui_check_sha256": "225dbb2aa5e8a6887b8fbbb70c113e1c81d7c6f6c5c211502237a2524fd7d57c",
+      "step": 201600000,
+      "binary_sha256": "56b1aa5c0da67ed4169b67e1705378ee372450fb6a71fdb609f2514c14d8b516",
+      "formal_binary_sha256": "070483eaac00568e3d79517d11dd444c84a2ec1684a3d8fedc96c437ff4ba9b6",
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-world-small-terrain-r64/gui-formal-r1/gui/gui.display-186.png",
+      "source_gui_check_sha256": "31856a1a5e72842672afd30fcb428c7e0d986b8a2bb512bb3cb0b3aefe4cb8f0",
       "source_kind": "actual formal game presentation with read-only capture helper; verified byte-for-byte against the real X11 window game area",
       "capture_pixels_unchanged": true
     },
     {
       "file": "hd-world-zh.png",
-      "sha256": "27dd9f75675c961daf419146bec3288d8b8253e5778dfb6c44ac7b9eb2a1600f",
+      "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
       "size": [
         1280,
         800
@@ -39,11 +39,11 @@
       "scene": "terrain079-start",
       "language": "zh-Hant",
       "graphics": "hd",
-      "step": 92000000,
-      "binary_sha256": "8a90a1bd10c85be006f04a09aa62f12d9181ea5e9fec638758c57d0a927c4111",
-      "formal_binary_sha256": "9bb9449a14303bf4e0d97df76c0c23d3920574850dfb80dfb784e9720740b5c5",
-      "source_receipt": "workplace/reports/goal186-display-hd/hd-world-terrain-prototype-r63/formal-gui-r1/gui/gui.display-118.png",
-      "source_gui_check_sha256": "225dbb2aa5e8a6887b8fbbb70c113e1c81d7c6f6c5c211502237a2524fd7d57c",
+      "step": 89800000,
+      "binary_sha256": "56b1aa5c0da67ed4169b67e1705378ee372450fb6a71fdb609f2514c14d8b516",
+      "formal_binary_sha256": "070483eaac00568e3d79517d11dd444c84a2ec1684a3d8fedc96c437ff4ba9b6",
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-world-small-terrain-r64/gui-formal-r1/gui/gui.display-118.png",
+      "source_gui_check_sha256": "31856a1a5e72842672afd30fcb428c7e0d986b8a2bb512bb3cb0b3aefe4cb8f0",
       "source_kind": "actual formal game presentation with read-only capture helper; verified byte-for-byte against the real X11 window game area",
       "capture_pixels_unchanged": true
     },
@@ -58,25 +58,25 @@
       "language": "zh-Hant",
       "graphics": "hd",
       "step": 22600000,
-      "binary_sha256": "8a90a1bd10c85be006f04a09aa62f12d9181ea5e9fec638758c57d0a927c4111",
-      "formal_binary_sha256": "9bb9449a14303bf4e0d97df76c0c23d3920574850dfb80dfb784e9720740b5c5",
-      "source_receipt": "workplace/reports/goal186-display-hd/hd-world-terrain-prototype-r63/formal-gui-r1/gui/gui.display-034.png",
-      "source_gui_check_sha256": "225dbb2aa5e8a6887b8fbbb70c113e1c81d7c6f6c5c211502237a2524fd7d57c",
+      "binary_sha256": "56b1aa5c0da67ed4169b67e1705378ee372450fb6a71fdb609f2514c14d8b516",
+      "formal_binary_sha256": "070483eaac00568e3d79517d11dd444c84a2ec1684a3d8fedc96c437ff4ba9b6",
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-world-small-terrain-r64/gui-formal-r1/gui/gui.display-034.png",
+      "source_gui_check_sha256": "31856a1a5e72842672afd30fcb428c7e0d986b8a2bb512bb3cb0b3aefe4cb8f0",
       "source_kind": "actual formal game presentation with read-only capture helper; verified byte-for-byte against the real X11 window game area",
       "capture_pixels_unchanged": true
     },
     {
       "file": "display-settings-zh.png",
-      "sha256": "de907d5f78df6a62ae251c2bdbd5a57c65fe0355ee3b69e6aa33786e579d1c6a",
+      "sha256": "e429e44989d86f027272896ace0623167a3c7eede34ce5a121ac7d69641b02ff",
       "size": [
         1280,
         848
       ],
       "language": "zh-Hant",
       "graphics": "hd",
-      "binary_sha256": "9bb9449a14303bf4e0d97df76c0c23d3920574850dfb80dfb784e9720740b5c5",
-      "source_receipt": "workplace/reports/goal186-display-hd/hd-world-terrain-prototype-r63/readme-settings-r1/restored/settings.png",
-      "source_check_sha256": "093c158a086e92b1a9b9d9c3181230e1ce184cd6d35856446cec761ae3a24b4d",
+      "binary_sha256": "070483eaac00568e3d79517d11dd444c84a2ec1684a3d8fedc96c437ff4ba9b6",
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-world-small-terrain-r64/readme-settings-r1/restored/settings.png",
+      "source_check_sha256": "3d76e61e47aba6e52b31d40cfccc449e184033e4776972c24036967b068bb4d0",
       "source_kind": "real X11 window screenshot from the uninstrumented formal binary, normal display-settings panel",
       "capture_pixels_unchanged": true
     }
