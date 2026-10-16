@@ -40,7 +40,8 @@ def main():
     cases += [kind+"-building-%03d"%n for n in [16,21,27,35,39,42,43,44,45,9] for kind in ["missing","bad","linked"]]
     cases += [kind+"-icons-%03d"%n for n in [5, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 42, 53, 56, 59, 62, 67, 68, 69, 94, 122, 123, 124] for kind in ["missing","bad","linked"]]
     cases += ["missing-terrain079","bad-terrain079","linked-terrain079"]
-    terrain_batch = [6, 9, 17, 66, 71, 74, 77, 78, 80, 96, 147, 150]
+    terrain_batch = [6, 9, 17, 66, 71, 74, 77, 78, 80, 96, 147, 150,
+                     112, 113, 116, 119, 126, 127, 136, 139]
     cases += [kind+"-terrain-%03d"%n for n in terrain_batch for kind in ["missing", "bad", "linked"]]
     cases += ["missing-terrain-source", "bad-terrain-source", "linked-terrain-source"]
     cases += ["missing-cursor-image","bad-cursor-image","linked-cursor-image",

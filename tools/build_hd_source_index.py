@@ -13,6 +13,9 @@ parser.add_argument('--cursor-conformed-report',type=Path,help='正式游標來�
 parser.add_argument('--terrain-batch-report',type=Path,help='可選：規格067的R62十三來源正常GUI逐寫審查，不授予HD信用')
 parser.add_argument('--terrain-batch-ready-report',type=Path,help='規格067 READY候選及合成契約審查')
 parser.add_argument('--terrain-batch-conformed-report',type=Path,help='正式十二來源的完整驗收與既有素材繼承審查')
+parser.add_argument('--small-terrain-report',type=Path,help='規格068十五個AX槽位的原版來源審查')
+parser.add_argument('--small-terrain-ready-report',type=Path,help='規格068八個8×8來源的READY審查')
+parser.add_argument('--small-terrain-conformed-report',type=Path,help='規格068正式八來源的完整驗收與58種素材繼承審查')
 a=parser.parse_args();out=a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.parent.stat().st_uid==os.getuid() and not out.exists()
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -41,7 +44,20 @@ for name,asset in manifest['assets'].items():
 ready=[f for f in frames if f['file']=='PHYS0.SS' and f['ordinal']==79 and f.get('encoded_sha256')=='a8a861754068c86a9c150442f7b07f1fbd297d82b8e5dcb2e3ee108bde4dc84c']
 assert len(ready)==1
 ready[0]['source_contract_reference']={'state':'CONFORMED','spec':'docs/spec/062-hd-sea-draw-lifecycle.md','section':'2026-10-15 R58正式驗收與限定CONFORMED','formal_connected':bool(ready[0]['formal_assets'])}
-expected_assets=58 if a.terrain_batch_conformed_report else 46
+small_review=None
+if a.small_terrain_ready_report:
+ small_review=json.loads(a.small_terrain_ready_report.read_bytes())
+ assert small_review['result']=='PASS_SMALL_TERRAIN_READY_REVIEW' and small_review['spec_state']=='READY'
+ assert small_review['native_source_report_sha256']==sha(a.small_terrain_report)
+if a.small_terrain_conformed_report:
+ assert small_review is not None and a.terrain_batch_conformed_report
+ small_review=json.loads(a.small_terrain_conformed_report.read_bytes())
+ assert small_review['result']=='PASS_SMALL_TERRAIN_FORMAL_CONFORMANCE_REVIEW' and small_review['spec_state']=='CONFORMED'
+ assert small_review['formal_assets']==66 and small_review['manifest_sha256']==sha(a.manifest)
+ assert small_review['ready_review_sha256']==sha(a.small_terrain_ready_report)
+ assert len(small_review['unchanged_inherited_assets'])==58
+ assert all(manifest['assets'][n]['sha256']==h for n,h in small_review['unchanged_inherited_assets'].items())
+expected_assets=66 if a.small_terrain_conformed_report else 58 if a.terrain_batch_conformed_report else 46
 assert len(bindings)==expected_assets and sum(bool(f['formal_assets']) for f in frames)==expected_assets
 batch_review=None
 if a.terrain_batch_ready_report:
@@ -52,7 +68,11 @@ if a.terrain_batch_conformed_report:
  assert batch_review is not None
  batch_review=json.loads(a.terrain_batch_conformed_report.read_bytes())
  assert batch_review['result']=='PASS_WORLD_TERRAIN_FORMAL_CONFORMANCE_REVIEW' and batch_review['spec_state']=='CONFORMED'
- assert batch_review['formal_assets']==58 and batch_review['manifest_sha256']==sha(a.manifest)
+ assert batch_review['formal_assets']==58
+ if a.small_terrain_conformed_report:
+  assert small_review['inherited_manifest_sha256']==batch_review['manifest_sha256']
+  assert small_review['inherited_terrain_batch_conformance_sha256']==sha(a.terrain_batch_conformed_report)
+ else:assert batch_review['manifest_sha256']==sha(a.manifest)
  assert batch_review['ready_review_sha256']==sha(a.terrain_batch_ready_report)
  assert len(batch_review['unchanged_inherited_assets'])==46
  assert all(manifest['assets'][name]['sha256']==digest for name,digest in batch_review['unchanged_inherited_assets'].items())
@@ -154,6 +174,24 @@ if a.terrain_batch_report:
    f['source_contract_reference']={'state':batch_review['spec_state'] if batch_review else 'DRAFT','spec':'docs/spec/067-hd-world-terrain-batch.md','formal_connected':bool(f['formal_assets'])}
    if batch_review:f['source_contract_reference']['review_sha256']=sha(a.terrain_batch_conformed_report or a.terrain_batch_ready_report)
  public['terrain_batch_native_evidence']={'report_sha256':sha(a.terrain_batch_report),'sources':13,'new_targets':batch['new_targets'],'checkpoints':29,'dos_inputs':109,'input_sha256':batch['input_sha256'],'source_calls':101,'stage_main_transfers':12823,'ram_saves':5886,'ram_restores':4370,'cursor_restores':10012,'production_connected':False,'claim':'native source evidence only; positive counts remain per ordinal; zero examples do not grant restore coverage'}
+if a.small_terrain_report:
+ small=json.loads(a.small_terrain_report.read_bytes());targets={112,113,116,119,126,127,136,139}
+ assert small['result']=='PASS_SMALL_TERRAIN_15_SOURCES_AND_65_ORIGINAL_MODELS' and small['original_state_and_saves_equal']
+ assert len(small['sources'])==15 and small['checkpoints']==65 and small['dos_inputs']==143 and not small['production_connected']
+ for key,sample in small['sources'].items():
+  n=int(key);f=next(f for f in frames if f['file']=='PHYS0.SS' and f['ordinal']==n)
+  assert f['file_sha256']=='deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16'
+  assert f['encoded_sha256']==sample['encoded_sha256'] and f['indexed_sha256']==sample['indexed_sha256'] and f['size']==sample['size']
+  assert f['opaque_pixels']==sample['opaque_cells'] and sample['ax']==n+1 and sample['draw_calls']>0
+  f['small_terrain_native_sample']=dict(sample,report_sha256=sha(a.small_terrain_report),state='confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points')
+  f['runtime_source_evidence']='confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths'
+  if n in targets:
+   assert sample['size']==[8,8] and sample['visible_native_cells']>0
+   assert bool(f['formal_assets'])==bool(a.small_terrain_conformed_report)
+   f['source_contract_reference']={'state':small_review['spec_state'] if small_review else 'DRAFT','spec':'docs/spec/068-hd-small-world-terrain.md','formal_connected':bool(f['formal_assets'])}
+   if small_review:f['source_contract_reference']['review_sha256']=sha(a.small_terrain_conformed_report or a.small_terrain_ready_report)
+  else:assert sample['visible_native_cells']==0 and not f['formal_assets']
+ public['small_terrain_native_evidence']={'report_sha256':sha(a.small_terrain_report),'sources':15,'targets':sorted(targets),'checkpoints':65,'dos_inputs':143,'production_connected':False,'claim':'native evidence only; zero visible samples do not imply unreachable sources; HD scope remains in spec068'}
 public['coverage_limits']['additional_ready_source_contracts']=sum(f.get('source_contract_reference',{}).get('state')=='READY' and not f.get('source_contract_reference',{}).get('formal_connected') for f in frames)
 out.write_text(json.dumps(public,ensure_ascii=False,indent=2)+'\n')
 print('PASS_METADATA_ONLY_FULL_SOURCE_INDEX',len(frames),len(bindings),sha(out),flush=True)

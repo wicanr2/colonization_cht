@@ -2859,6 +2859,310 @@
         "opaque_cells": 175
       },
       "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-112.png": {
+      "spec": "docs/spec/068-hd-small-world-terrain.md",
+      "sha256": "68815b2980e61c1a97409f13bf22f43b7fc2b78cc4fc025e3f4fc6be0327e743",
+      "bytes": 1209105,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        8
+      ],
+      "target_size": [
+        32,
+        32
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over inside verified native ownership; native index 0 retains current original palette color",
+      "generation_prompt": "Use case: stylized-concept. Asset type: one fine pixel-art coastal terrain fragment for a display-only HD overlay, PHYS0.SS source 112, native 8 by 8, final display 32 by 32.\nReference 1 is the exact native geometry and color layout, enlarged to 512 square. Reference 2 is the accepted HD ocean texture, supplying restrained fine pixel brushwork and water texture only. Reference 3 is the approved overall fine pixel-art style.\nRedraw ONLY the blue water and green land already present in reference 1. Keep every color region in exactly the same relative place and keep the same stepped shoreline. Blue remains water, green remains grass. Add subtle crisp pixel clusters, restrained water ripples and fine grassy texture suitable for the tiny final display.\nComposition is locked: one square, same coverage, same edges, no extra margin, no recentering, no rotated view, no new coastline. Preserve all original opaque BLACK regions as exact flat black, with no detail, gray glow, invented land or revealed scenery in them. Those black regions are not transparency. Preserve true transparent holes from reference 1 as actual alpha transparency. Fill the existing colored silhouette fully, including peripheral cells.\nDo not add people, buildings, trees, rocks, sand beaches, foam bands, props, text, borders, checkerboards, diagrams, grid lines or alternative versions. No blur, smooth painting, photorealism or soft glow. Output one approximately 1254 by 1254 RGBA square only.",
+      "reference_sha256": {
+        "native_geometry": "49f98af5a82949ed3543933589b0bf79ae9f3bc46603b8f81ea6b80f879a60bf",
+        "accepted_ocean_style": "2c5d3edc8d38e44dc02d7ccb88e79e4f749edd8a0b1d3dfd54ec04b467ba61ff",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 112,
+        "encoded_sha256": "2a07217da7c10296f43660af1eee8dff8691c716abdb2d10b363b2b03820f734",
+        "encoded_length": 79,
+        "indexed_sha256": "c6aa17fad32efd6ddd6032d6bc1987181fed7fddcbe9ced9ca94fe97aff24a96",
+        "sorted_local_offset_value_sha256": "ac5f54a761b8720b1f73ddc19f55ebc1f2b2b290f773ed4fbb32e073539203ca",
+        "opaque_cells": 57
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-113.png": {
+      "spec": "docs/spec/068-hd-small-world-terrain.md",
+      "sha256": "e8028a09d0f73ea70b3f391506d9434404fb3cfd2b7051f61343edc591ee3f97",
+      "bytes": 1241721,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        8
+      ],
+      "target_size": [
+        32,
+        32
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over inside verified native ownership; native index 0 retains current original palette color",
+      "generation_prompt": "Use case: stylized-concept. Asset type: one fine pixel-art coastal terrain fragment for a display-only HD overlay, PHYS0.SS source 113, native 8 by 8, final display 32 by 32.\nReference 1 is the exact native geometry and color layout, enlarged to 512 square. Reference 2 is the accepted HD ocean texture, supplying restrained fine pixel brushwork and water texture only. Reference 3 is the approved overall fine pixel-art style.\nRedraw ONLY the blue water and green land already present in reference 1. Keep every color region in exactly the same relative place and keep the same stepped shoreline. Blue remains water, green remains grass. Add subtle crisp pixel clusters, restrained water ripples and fine grassy texture suitable for the tiny final display.\nComposition is locked: one square, same coverage, same edges, no extra margin, no recentering, no rotated view, no new coastline. Preserve all original opaque BLACK regions as exact flat black, with no detail, gray glow, invented land or revealed scenery in them. Those black regions are not transparency. Preserve true transparent holes from reference 1 as actual alpha transparency. Fill the existing colored silhouette fully, including peripheral cells.\nDo not add people, buildings, trees, rocks, sand beaches, foam bands, props, text, borders, checkerboards, diagrams, grid lines or alternative versions. No blur, smooth painting, photorealism or soft glow. Output one approximately 1254 by 1254 RGBA square only.",
+      "reference_sha256": {
+        "native_geometry": "1d255357d569cf5cc7da95b85c2ae1f2c283b5dabb502a4b8a90c781c609c3be",
+        "accepted_ocean_style": "2c5d3edc8d38e44dc02d7ccb88e79e4f749edd8a0b1d3dfd54ec04b467ba61ff",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 113,
+        "encoded_sha256": "8a227bf6735ce0cab2792979f1043d8122365d18bd1360818d6b2d6f01a20dd2",
+        "encoded_length": 64,
+        "indexed_sha256": "c990fc664c20055ff5cab5d56d4f6d0864c433d9746985362af24ab6c84c1769",
+        "sorted_local_offset_value_sha256": "fddff40bbf5605a3db64bc4137a37071739db169afd538db59c53920a3cd9e6a",
+        "opaque_cells": 55
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-116.png": {
+      "spec": "docs/spec/068-hd-small-world-terrain.md",
+      "sha256": "afa949a845f2884360cb784dc786a598f913f78e32dbb93f61359202ebd19e6b",
+      "bytes": 563008,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        8
+      ],
+      "target_size": [
+        32,
+        32
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over inside verified native ownership; native index 0 retains current original palette color",
+      "generation_prompt": "Use case: stylized-concept. Asset type: one fine pixel-art coastal terrain fragment for a display-only HD overlay, PHYS0.SS source 116, native 8 by 8, final display 32 by 32.\nReference 1 is the exact native geometry and color layout, enlarged to 512 square. Reference 2 is the accepted HD ocean texture, supplying restrained fine pixel brushwork and water texture only. Reference 3 is the approved overall fine pixel-art style.\nRedraw ONLY the blue water and green land already present in reference 1. Keep every color region in exactly the same relative place and keep the same stepped shoreline. Blue remains water, green remains grass. Add subtle crisp pixel clusters, restrained water ripples and fine grassy texture suitable for the tiny final display.\nComposition is locked: one square, same coverage, same edges, no extra margin, no recentering, no rotated view, no new coastline. Preserve all original opaque BLACK regions as exact flat black, with no detail, gray glow, invented land or revealed scenery in them. Those black regions are not transparency. Preserve true transparent holes from reference 1 as actual alpha transparency. Fill the existing colored silhouette fully, including peripheral cells.\nDo not add people, buildings, trees, rocks, sand beaches, foam bands, props, text, borders, checkerboards, diagrams, grid lines or alternative versions. No blur, smooth painting, photorealism or soft glow. Output one approximately 1254 by 1254 RGBA square only.\nIf reference 1 contains no green, do not add any green land. Preserve the native water-only fragment.",
+      "reference_sha256": {
+        "native_geometry": "d4a8aa14a9e86db88af5fbed26813c328a15da4041a66591653f581e63df5a82",
+        "accepted_ocean_style": "2c5d3edc8d38e44dc02d7ccb88e79e4f749edd8a0b1d3dfd54ec04b467ba61ff",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 116,
+        "encoded_sha256": "3aa253527ed9efa48ce6c033bd15926f79a3404755e13fd1eaa5d4506ed130e0",
+        "encoded_length": 52,
+        "indexed_sha256": "496e9a4230f9dc180adf8b5ed5ddb98bfd01c8c84fe5de0f722f059427142a79",
+        "sorted_local_offset_value_sha256": "8904e52876ecdf2cadb941b8429e3c1f8150d4e9c9c5f7bd8459d7ad9f82037e",
+        "opaque_cells": 64
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-119.png": {
+      "spec": "docs/spec/068-hd-small-world-terrain.md",
+      "sha256": "c2aa727fda0ed14153a65bdb20f619e05c93627a3069a1844eb9911ba2c41274",
+      "bytes": 635748,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        8
+      ],
+      "target_size": [
+        32,
+        32
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over inside verified native ownership; native index 0 retains current original palette color",
+      "generation_prompt": "Use case: stylized-concept. Asset type: one fine pixel-art coastal terrain fragment for a display-only HD overlay, PHYS0.SS source 119, native 8 by 8, final display 32 by 32.\nReference 1 is the exact native geometry and color layout, enlarged to 512 square. Reference 2 is the accepted HD ocean texture, supplying restrained fine pixel brushwork and water texture only. Reference 3 is the approved overall fine pixel-art style.\nRedraw ONLY the blue water and green land already present in reference 1. Keep every color region in exactly the same relative place and keep the same stepped shoreline. Blue remains water, green remains grass. Add subtle crisp pixel clusters, restrained water ripples and fine grassy texture suitable for the tiny final display.\nComposition is locked: one square, same coverage, same edges, no extra margin, no recentering, no rotated view, no new coastline. Preserve all original opaque BLACK regions as exact flat black, with no detail, gray glow, invented land or revealed scenery in them. Those black regions are not transparency. Preserve true transparent holes from reference 1 as actual alpha transparency. Fill the existing colored silhouette fully, including peripheral cells.\nDo not add people, buildings, trees, rocks, sand beaches, foam bands, props, text, borders, checkerboards, diagrams, grid lines or alternative versions. No blur, smooth painting, photorealism or soft glow. Output one approximately 1254 by 1254 RGBA square only.\nIf reference 1 contains no green, do not add any green land. Preserve the native water-only fragment.",
+      "reference_sha256": {
+        "native_geometry": "56777ddd8683c7d3da7497c72ede1be6e3ce84a2174f716351edbe4cc59cf1a8",
+        "accepted_ocean_style": "2c5d3edc8d38e44dc02d7ccb88e79e4f749edd8a0b1d3dfd54ec04b467ba61ff",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 119,
+        "encoded_sha256": "266c89f6a5b5315100d9aa5c48df00e3f4233a5d96582d5faa7cab36529c5a7d",
+        "encoded_length": 51,
+        "indexed_sha256": "b39697ceaea574daf433e0ff6bf37a6e9d36745cc50188e1cfdded3079327cd8",
+        "sorted_local_offset_value_sha256": "39e7bee8f0385858d93f2c4b78d842ca3a7dcb8ff871606070b986871271b053",
+        "opaque_cells": 64
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-126.png": {
+      "spec": "docs/spec/068-hd-small-world-terrain.md",
+      "sha256": "1bcf543164b4ad4e67b15ad008bb82132d7640b1af1e061db4d249b715302561",
+      "bytes": 1236413,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        8
+      ],
+      "target_size": [
+        32,
+        32
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over inside verified native ownership; native index 0 retains current original palette color",
+      "generation_prompt": "Use case: stylized-concept. Asset type: one fine pixel-art coastal terrain fragment for a display-only HD overlay, PHYS0.SS source 126, native 8 by 8, final display 32 by 32.\nReference 1 is the exact native geometry and color layout, enlarged to 512 square. Reference 2 is the accepted HD ocean texture, supplying restrained fine pixel brushwork and water texture only. Reference 3 is the approved overall fine pixel-art style.\nRedraw ONLY the blue water and green land already present in reference 1. Keep every color region in exactly the same relative place and keep the same stepped shoreline. Blue remains water, green remains grass. Add subtle crisp pixel clusters, restrained water ripples and fine grassy texture suitable for the tiny final display.\nComposition is locked: one square, same coverage, same edges, no extra margin, no recentering, no rotated view, no new coastline. Preserve all original opaque BLACK regions as exact flat black, with no detail, gray glow, invented land or revealed scenery in them. Those black regions are not transparency. Preserve true transparent holes from reference 1 as actual alpha transparency. Fill the existing colored silhouette fully, including peripheral cells.\nDo not add people, buildings, trees, rocks, sand beaches, foam bands, props, text, borders, checkerboards, diagrams, grid lines or alternative versions. No blur, smooth painting, photorealism or soft glow. Output one approximately 1254 by 1254 RGBA square only.\nIf reference 1 contains no green, do not add any green land. Preserve the native water-only fragment.",
+      "reference_sha256": {
+        "native_geometry": "eb7513bd4704ac432d04f8a0e76e8d5e7e522f04add22a4271a5b9932b68566a",
+        "accepted_ocean_style": "2c5d3edc8d38e44dc02d7ccb88e79e4f749edd8a0b1d3dfd54ec04b467ba61ff",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 126,
+        "encoded_sha256": "592e724e264e0b9cb839106d8e7bbcd8b6e74fcff46bc668bfa210851f928247",
+        "encoded_length": 65,
+        "indexed_sha256": "cdddab9817876ac40cb2907eb696a755be18e8da9fd5d0f5296b9f3c2d98755b",
+        "sorted_local_offset_value_sha256": "6298100a2b6f9ed5b397d3e8664c2bb36e1965fd8147e026190c91307c1b8752",
+        "opaque_cells": 60
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-127.png": {
+      "spec": "docs/spec/068-hd-small-world-terrain.md",
+      "sha256": "f530a6c574d45f0d333c9ed934e6a4a95df087b21e48687161d4407eb456c7ec",
+      "bytes": 1195921,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        8
+      ],
+      "target_size": [
+        32,
+        32
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over inside verified native ownership; native index 0 retains current original palette color",
+      "generation_prompt": "Use case: stylized-concept. Asset type: one fine pixel-art coastal terrain fragment for a display-only HD overlay, PHYS0.SS source 127, native 8 by 8, final display 32 by 32.\nReference 1 is the exact native geometry and color layout, enlarged to 512 square. Reference 2 is the accepted HD ocean texture, supplying restrained fine pixel brushwork and water texture only. Reference 3 is the approved overall fine pixel-art style.\nRedraw ONLY the blue water and green land already present in reference 1. Keep every color region in exactly the same relative place and keep the same stepped shoreline. Blue remains water, green remains grass. Add subtle crisp pixel clusters, restrained water ripples and fine grassy texture suitable for the tiny final display.\nComposition is locked: one square, same coverage, same edges, no extra margin, no recentering, no rotated view, no new coastline. Preserve all original opaque BLACK regions as exact flat black, with no detail, gray glow, invented land or revealed scenery in them. Those black regions are not transparency. Preserve true transparent holes from reference 1 as actual alpha transparency. Fill the existing colored silhouette fully, including peripheral cells.\nDo not add people, buildings, trees, rocks, sand beaches, foam bands, props, text, borders, checkerboards, diagrams, grid lines or alternative versions. No blur, smooth painting, photorealism or soft glow. Output one approximately 1254 by 1254 RGBA square only.\nPreserve every green land region and blue water region from the exact native reference. Do not change the shoreline shape.",
+      "reference_sha256": {
+        "native_geometry": "9b03caf39f88f0999291b48b04148801bfd662331a56e0bfdee482afeb009b88",
+        "accepted_ocean_style": "2c5d3edc8d38e44dc02d7ccb88e79e4f749edd8a0b1d3dfd54ec04b467ba61ff",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 127,
+        "encoded_sha256": "eebd7c95cb1e5a0f360d015047eb6f15e1c5b22970cd8ad6a8f3cde6d1db5b03",
+        "encoded_length": 77,
+        "indexed_sha256": "9d3b431a5eb7cc1cf21be71d8db4bf97eafc0d2732b09199e737ac637ac8cd8c",
+        "sorted_local_offset_value_sha256": "a6fa79fbea2d9dd7a2a04da43d6f4569709e3dd596e85c793c361983ce33496d",
+        "opaque_cells": 59
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-136.png": {
+      "spec": "docs/spec/068-hd-small-world-terrain.md",
+      "sha256": "8acc65b9f0cffe5951642d6ba1e9049ce8af3d4f0f8ec795c3fd80a71d81c07e",
+      "bytes": 873762,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        8
+      ],
+      "target_size": [
+        32,
+        32
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over inside verified native ownership; native index 0 retains current original palette color",
+      "generation_prompt": "Use case: stylized-concept. Asset type: one fine pixel-art coastal terrain fragment for a display-only HD overlay, PHYS0.SS source 136, native 8 by 8, final display 32 by 32.\nReference 1 is the exact native geometry and color layout, enlarged to 512 square. Reference 2 is the accepted HD ocean texture, supplying restrained fine pixel brushwork and water texture only. Reference 3 is the approved overall fine pixel-art style.\nRedraw ONLY the blue water and green land already present in reference 1. Keep every color region in exactly the same relative place and keep the same stepped shoreline. Blue remains water, green remains grass. Add subtle crisp pixel clusters, restrained water ripples and fine grassy texture suitable for the tiny final display.\nComposition is locked: one square, same coverage, same edges, no extra margin, no recentering, no rotated view, no new coastline. Preserve all original opaque BLACK regions as exact flat black, with no detail, gray glow, invented land or revealed scenery in them. Those black regions are not transparency. Preserve true transparent holes from reference 1 as actual alpha transparency. Fill the existing colored silhouette fully, including peripheral cells.\nDo not add people, buildings, trees, rocks, sand beaches, foam bands, props, text, borders, checkerboards, diagrams, grid lines or alternative versions. No blur, smooth painting, photorealism or soft glow. Output one approximately 1254 by 1254 RGBA square only.\nPreserve every green land region and blue water region from the exact native reference. Do not change the shoreline shape.",
+      "reference_sha256": {
+        "native_geometry": "4a114a76a47fe77036756fa04c190a481cbc7af69bff20ee653998e3525fcbbf",
+        "accepted_ocean_style": "2c5d3edc8d38e44dc02d7ccb88e79e4f749edd8a0b1d3dfd54ec04b467ba61ff",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 136,
+        "encoded_sha256": "3830e3a31715c17b020830f46963ad99e660c16a3578a340739e8e5d07c2472f",
+        "encoded_length": 66,
+        "indexed_sha256": "2ebc9a4726e6f017f082fa6244b85b1f0349b8ebb89dc6f985aae57122f55a54",
+        "sorted_local_offset_value_sha256": "37956d26fe8a87b0104c14866e86ca97e8dfc10c6b362034835240eba806da9f",
+        "opaque_cells": 40
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-139.png": {
+      "spec": "docs/spec/068-hd-small-world-terrain.md",
+      "sha256": "38fa1e5ad7074e0da3e36a69284c1c136619b24dc9cc13ae067a517024068787",
+      "bytes": 1095056,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        8
+      ],
+      "target_size": [
+        32,
+        32
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over inside verified native ownership; native index 0 retains current original palette color",
+      "generation_prompt": "Use case: stylized-concept. Asset type: one fine pixel-art coastal terrain fragment for a display-only HD overlay, PHYS0.SS source 139, native 8 by 8, final display 32 by 32.\nReference 1 is the exact native geometry and color layout, enlarged to 512 square. Reference 2 is the accepted HD ocean texture, supplying restrained fine pixel brushwork and water texture only. Reference 3 is the approved overall fine pixel-art style.\nRedraw ONLY the blue water and green land already present in reference 1. Keep every color region in exactly the same relative place and keep the same stepped shoreline. Blue remains water, green remains grass. Add subtle crisp pixel clusters, restrained water ripples and fine grassy texture suitable for the tiny final display.\nComposition is locked: one square, same coverage, same edges, no extra margin, no recentering, no rotated view, no new coastline. Preserve all original opaque BLACK regions as exact flat black, with no detail, gray glow, invented land or revealed scenery in them. Those black regions are not transparency. Preserve true transparent holes from reference 1 as actual alpha transparency. Fill the existing colored silhouette fully, including peripheral cells.\nDo not add people, buildings, trees, rocks, sand beaches, foam bands, props, text, borders, checkerboards, diagrams, grid lines or alternative versions. No blur, smooth painting, photorealism or soft glow. Output one approximately 1254 by 1254 RGBA square only.\nPreserve every green land region and blue water region from the exact native reference. Do not change the shoreline shape.",
+      "reference_sha256": {
+        "native_geometry": "9d8aeced692a5297fdd9ec612958ba7b279c7659599f024878f1fdd47219cbb9",
+        "accepted_ocean_style": "2c5d3edc8d38e44dc02d7ccb88e79e4f749edd8a0b1d3dfd54ec04b467ba61ff",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 139,
+        "encoded_sha256": "917d80be948c17ca4233d10e5bf1cc8729a1f2cdc6c797cebda4fc3206cd1e5c",
+        "encoded_length": 74,
+        "indexed_sha256": "b7b2bdc2e6d90b54321d6b44ef37d916c9010b6bfc8ba811844f6ce9aed50e2b",
+        "sorted_local_offset_value_sha256": "364b6ef81fdfef47923209402bec7f807d50543f0cb5e0b57d363766cecfed71",
+        "opaque_cells": 47
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
     }
   }
 }

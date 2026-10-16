@@ -98,6 +98,10 @@ func loadHDRuntime(m *golem.Machine, game, directory string) (*hdRuntime, error)
 	if err != nil {
 		return nil, err
 	}
+	h.smallTerrain, err = loadHDSmallTerrainRuntime(h, game, directory)
+	if err != nil {
+		return nil, err
+	}
 	h.terrainBatch, err = loadHDTerrainBatchRuntime(h, game, directory)
 	if err != nil {
 		return nil, err
@@ -138,7 +142,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "ecd7362e4cf9306e9e2c9c63804e05b0161010fcd332ed5fc97f30331036fe6e"
+const hdManifestSHA = "c8ba408e87efd4a16d996251b7f8c5e04dc0ce6830c2647708d81894e1f04606"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"
@@ -151,6 +155,7 @@ type hdBuildingPixel struct {
 	cursorIndex int
 }
 type hdRuntime struct {
+	smallTerrain                                     *hdSmallTerrainRuntime
 	terrainBatch                                     *hdTerrainBatchRuntime
 	cursor                                           *hdCursorRuntime
 	terrain079                                       *hdTerrain079Runtime
@@ -229,6 +234,7 @@ func (h *hdRuntime) beforeInstruction() {
 	h.sea.beforeInstruction()
 	h.terrain079.beforeInstruction()
 	h.terrainBatch.beforeInstruction()
+	h.smallTerrain.beforeInstruction()
 	h.person.beforeInstruction()
 	h.shelter.beforeInstruction()
 	h.nine.beforeInstruction()
@@ -425,6 +431,9 @@ func (h *hdRuntime) base(f draftNativeFrame) (*image.RGBA, map[string]any) {
 	if h.terrainBatch != nil {
 		receipt["terrain_batch"] = h.terrainBatch.paint(out, f)
 	}
+	if h.smallTerrain != nil {
+		receipt["small_terrain"] = h.smallTerrain.paint(out, f)
+	}
 	owned, painted := 0, 0
 	for i, v := range h.owned {
 		if !v {
@@ -503,6 +512,9 @@ func (h *hdRuntime) key() string {
 	}
 	if h != nil && h.terrainBatch != nil {
 		base = fmt.Sprintf("%s/terrain-batch/%d", base, h.terrainBatch.revision)
+	}
+	if h != nil && h.smallTerrain != nil {
+		base = fmt.Sprintf("%s/small-terrain/%d", base, h.smallTerrain.revision)
 	}
 	if h != nil && h.small != nil {
 		return fmt.Sprintf("%s/small/%d", base, h.small.revision)

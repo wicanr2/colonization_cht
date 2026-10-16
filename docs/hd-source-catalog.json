@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "ecd7362e4cf9306e9e2c9c63804e05b0161010fcd332ed5fc97f30331036fe6e",
+  "formal_manifest_sha256": "c8ba408e87efd4a16d996251b7f8c5e04dc0ce6830c2647708d81894e1f04606",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 58,
+    "formal_asset_bindings": 66,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -44644,7 +44644,7 @@
       "indexed_sha256": "3e1938aa91f0e93511d63fdb23993d2dc352b344f0bd1d3d31856e776d1f3e56",
       "opaque_pixels": 15,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -44862,6 +44862,27 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "small_terrain_native_sample": {
+        "size": [
+          16,
+          16
+        ],
+        "opaque_cells": 15,
+        "encoded_sha256": "8cca6e84c2c9dcfab85702d73811b40363b974fc8dac97807c8bee1d8c6b3c5b",
+        "indexed_sha256": "3e1938aa91f0e93511d63fdb23993d2dc352b344f0bd1d3d31856e776d1f3e56",
+        "encoded_length": 62,
+        "record_far": "4F22:0522",
+        "source_far": "543F:0005",
+        "ax": 105,
+        "draw_calls": 99,
+        "sorted_local_offset_value_sha256": "a1909c6b92a245aa5034886f89cfb5afdccccaf259a75a2955a87ea95ed8c695",
+        "visible_native_cells": 0,
+        "visible_points": 0,
+        "cursor_restore_count": 0,
+        "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
+        "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
+        "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
       }
     },
     {
@@ -44885,7 +44906,7 @@
       "indexed_sha256": "9637107d53a251ad16c04cc5726f74bbf0427c0aa52e96b988777e819d46b509",
       "opaque_pixels": 15,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -45139,6 +45160,27 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "small_terrain_native_sample": {
+        "size": [
+          16,
+          16
+        ],
+        "opaque_cells": 15,
+        "encoded_sha256": "9d1b8585d1711a844fdc915bd3480070b3f52adeecb6cec089d968ffc2d4b7d1",
+        "indexed_sha256": "9637107d53a251ad16c04cc5726f74bbf0427c0aa52e96b988777e819d46b509",
+        "encoded_length": 86,
+        "record_far": "4F22:052E",
+        "source_far": "5443:0003",
+        "ax": 106,
+        "draw_calls": 120,
+        "sorted_local_offset_value_sha256": "fec990cddb399f500683580ede50ae889c67ee6b07131d4956186b9122c606d6",
+        "visible_native_cells": 0,
+        "visible_points": 0,
+        "cursor_restore_count": 0,
+        "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
+        "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
+        "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
       }
     },
     {
@@ -45162,7 +45204,7 @@
       "indexed_sha256": "ee2714a306034738b7f6c622abc2f7c6c841d591e5044cb94d3408ccfe09e95a",
       "opaque_pixels": 15,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -45398,6 +45440,27 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "small_terrain_native_sample": {
+        "size": [
+          16,
+          16
+        ],
+        "opaque_cells": 15,
+        "encoded_sha256": "7422b4afaa091a974dc4b4839f861f363b43aaca4f55bbc9277501fab4f69b5c",
+        "indexed_sha256": "ee2714a306034738b7f6c622abc2f7c6c841d591e5044cb94d3408ccfe09e95a",
+        "encoded_length": 62,
+        "record_far": "4F22:053A",
+        "source_far": "5448:0009",
+        "ax": 107,
+        "draw_calls": 106,
+        "sorted_local_offset_value_sha256": "8004ac26470269a105c3d34daca06dab3bc1f628a047f797a6944f230721d104",
+        "visible_native_cells": 0,
+        "visible_points": 0,
+        "cursor_restore_count": 0,
+        "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
+        "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
+        "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
       }
     },
     {
@@ -45421,7 +45484,7 @@
       "indexed_sha256": "e11e764a81fdba61e3c2c4414002caaae12d721ed31bbc85221c0f9e2eb7a735",
       "opaque_pixels": 15,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -45657,6 +45720,27 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "small_terrain_native_sample": {
+        "size": [
+          16,
+          16
+        ],
+        "opaque_cells": 15,
+        "encoded_sha256": "ce8f46382264bb5b16445063fdfadfbff2afa444e9f30d7a2752398269c8860c",
+        "indexed_sha256": "e11e764a81fdba61e3c2c4414002caaae12d721ed31bbc85221c0f9e2eb7a735",
+        "encoded_length": 55,
+        "record_far": "4F22:0546",
+        "source_far": "544C:0007",
+        "ax": 108,
+        "draw_calls": 108,
+        "sorted_local_offset_value_sha256": "1d95426543b176dce095e4a80974c5f685e6ef05473a6d8e13227af63a64ac2f",
+        "visible_native_cells": 0,
+        "visible_points": 0,
+        "cursor_restore_count": 0,
+        "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
+        "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
+        "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
       }
     },
     {
@@ -45846,7 +45930,7 @@
       "indexed_sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
       "opaque_pixels": 64,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_alias_candidates_only",
+      "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -45989,6 +46073,27 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "small_terrain_native_sample": {
+        "size": [
+          8,
+          8
+        ],
+        "opaque_cells": 64,
+        "encoded_sha256": "38ce3a97148a76a97363dbff2cc3eb86fe87219ed987974e334e5c780bca9290",
+        "indexed_sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+        "encoded_length": 33,
+        "record_far": "4F22:055E",
+        "source_far": "5451:000F",
+        "ax": 110,
+        "draw_calls": 23,
+        "sorted_local_offset_value_sha256": "d62c6dc27f2e1aefc91555ee496be62253e794f23698f3ae41e5b66bd5871f9c",
+        "visible_native_cells": 0,
+        "visible_points": 0,
+        "cursor_restore_count": 0,
+        "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
+        "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
+        "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
       }
     },
     {
@@ -46012,7 +46117,7 @@
       "indexed_sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
       "opaque_pixels": 64,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_alias_candidates_only",
+      "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -46155,6 +46260,27 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "small_terrain_native_sample": {
+        "size": [
+          8,
+          8
+        ],
+        "opaque_cells": 64,
+        "encoded_sha256": "38ce3a97148a76a97363dbff2cc3eb86fe87219ed987974e334e5c780bca9290",
+        "indexed_sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+        "encoded_length": 33,
+        "record_far": "4F22:056A",
+        "source_far": "5454:0000",
+        "ax": 111,
+        "draw_calls": 23,
+        "sorted_local_offset_value_sha256": "d62c6dc27f2e1aefc91555ee496be62253e794f23698f3ae41e5b66bd5871f9c",
+        "visible_native_cells": 0,
+        "visible_points": 0,
+        "cursor_restore_count": 0,
+        "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
+        "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
+        "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
       }
     },
     {
@@ -46178,7 +46304,7 @@
       "indexed_sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
       "opaque_pixels": 64,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_alias_candidates_only",
+      "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [],
       "normal_entry_sample": {
@@ -46321,6 +46447,27 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "small_terrain_native_sample": {
+        "size": [
+          8,
+          8
+        ],
+        "opaque_cells": 64,
+        "encoded_sha256": "38ce3a97148a76a97363dbff2cc3eb86fe87219ed987974e334e5c780bca9290",
+        "indexed_sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+        "encoded_length": 33,
+        "record_far": "4F22:0576",
+        "source_far": "5456:0001",
+        "ax": 112,
+        "draw_calls": 9,
+        "sorted_local_offset_value_sha256": "d62c6dc27f2e1aefc91555ee496be62253e794f23698f3ae41e5b66bd5871f9c",
+        "visible_native_cells": 0,
+        "visible_points": 0,
+        "cursor_restore_count": 0,
+        "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
+        "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
+        "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
       }
     },
     {
@@ -46344,9 +46491,11 @@
       "indexed_sha256": "c6aa17fad32efd6ddd6032d6bc1987181fed7fddcbe9ced9ca94fe97aff24a96",
       "opaque_pixels": 57,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-112.png"
+      ],
       "normal_entry_sample": {
         "calls": 7,
         "candidate_research_ids": [
@@ -46376,6 +46525,33 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "small_terrain_native_sample": {
+        "size": [
+          8,
+          8
+        ],
+        "opaque_cells": 57,
+        "encoded_sha256": "2a07217da7c10296f43660af1eee8dff8691c716abdb2d10b363b2b03820f734",
+        "indexed_sha256": "c6aa17fad32efd6ddd6032d6bc1987181fed7fddcbe9ced9ca94fe97aff24a96",
+        "encoded_length": 79,
+        "record_far": "4F22:0582",
+        "source_far": "5458:0002",
+        "ax": 113,
+        "draw_calls": 5,
+        "sorted_local_offset_value_sha256": "ac5f54a761b8720b1f73ddc19f55ebc1f2b2b290f773ed4fbb32e073539203ca",
+        "visible_native_cells": 2048,
+        "visible_points": 64,
+        "cursor_restore_count": 2,
+        "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
+        "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
+        "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/068-hd-small-world-terrain.md",
+        "formal_connected": true,
+        "review_sha256": "647c178a57f12d8af166f979293e313b73025ad7f252da5f1a80ac49c5753b0f"
       }
     },
     {
@@ -46399,9 +46575,11 @@
       "indexed_sha256": "c990fc664c20055ff5cab5d56d4f6d0864c433d9746985362af24ab6c84c1769",
       "opaque_pixels": 55,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-113.png"
+      ],
       "normal_entry_sample": {
         "calls": 7,
         "candidate_research_ids": [
@@ -46431,6 +46609,33 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "small_terrain_native_sample": {
+        "size": [
+          8,
+          8
+        ],
+        "opaque_cells": 55,
+        "encoded_sha256": "8a227bf6735ce0cab2792979f1043d8122365d18bd1360818d6b2d6f01a20dd2",
+        "indexed_sha256": "c990fc664c20055ff5cab5d56d4f6d0864c433d9746985362af24ab6c84c1769",
+        "encoded_length": 64,
+        "record_far": "4F22:058E",
+        "source_far": "545D:0001",
+        "ax": 114,
+        "draw_calls": 5,
+        "sorted_local_offset_value_sha256": "fddff40bbf5605a3db64bc4137a37071739db169afd538db59c53920a3cd9e6a",
+        "visible_native_cells": 2304,
+        "visible_points": 64,
+        "cursor_restore_count": 0,
+        "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
+        "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
+        "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/068-hd-small-world-terrain.md",
+        "formal_connected": true,
+        "review_sha256": "647c178a57f12d8af166f979293e313b73025ad7f252da5f1a80ac49c5753b0f"
       }
     },
     {
@@ -46504,9 +46709,11 @@
       "indexed_sha256": "496e9a4230f9dc180adf8b5ed5ddb98bfd01c8c84fe5de0f722f059427142a79",
       "opaque_pixels": 64,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-116.png"
+      ],
       "normal_entry_sample": {
         "calls": 24,
         "candidate_research_ids": [
@@ -46560,6 +46767,33 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "small_terrain_native_sample": {
+        "size": [
+          8,
+          8
+        ],
+        "opaque_cells": 64,
+        "encoded_sha256": "3aa253527ed9efa48ce6c033bd15926f79a3404755e13fd1eaa5d4506ed130e0",
+        "indexed_sha256": "496e9a4230f9dc180adf8b5ed5ddb98bfd01c8c84fe5de0f722f059427142a79",
+        "encoded_length": 52,
+        "record_far": "4F22:05B2",
+        "source_far": "5469:000C",
+        "ax": 117,
+        "draw_calls": 18,
+        "sorted_local_offset_value_sha256": "8904e52876ecdf2cadb941b8429e3c1f8150d4e9c9c5f7bd8459d7ad9f82037e",
+        "visible_native_cells": 4066,
+        "visible_points": 65,
+        "cursor_restore_count": 10,
+        "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
+        "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
+        "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/068-hd-small-world-terrain.md",
+        "formal_connected": true,
+        "review_sha256": "647c178a57f12d8af166f979293e313b73025ad7f252da5f1a80ac49c5753b0f"
       }
     },
     {
@@ -46633,9 +46867,11 @@
       "indexed_sha256": "b39697ceaea574daf433e0ff6bf37a6e9d36745cc50188e1cfdded3079327cd8",
       "opaque_pixels": 64,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-119.png"
+      ],
       "normal_entry_sample": {
         "calls": 12,
         "candidate_research_ids": [
@@ -46671,6 +46907,33 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "small_terrain_native_sample": {
+        "size": [
+          8,
+          8
+        ],
+        "opaque_cells": 64,
+        "encoded_sha256": "266c89f6a5b5315100d9aa5c48df00e3f4233a5d96582d5faa7cab36529c5a7d",
+        "indexed_sha256": "b39697ceaea574daf433e0ff6bf37a6e9d36745cc50188e1cfdded3079327cd8",
+        "encoded_length": 51,
+        "record_far": "4F22:05D6",
+        "source_far": "5473:0009",
+        "ax": 120,
+        "draw_calls": 9,
+        "sorted_local_offset_value_sha256": "39e7bee8f0385858d93f2c4b78d842ca3a7dcb8ff871606070b986871271b053",
+        "visible_native_cells": 1935,
+        "visible_points": 65,
+        "cursor_restore_count": 2,
+        "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
+        "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
+        "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/068-hd-small-world-terrain.md",
+        "formal_connected": true,
+        "review_sha256": "647c178a57f12d8af166f979293e313b73025ad7f252da5f1a80ac49c5753b0f"
       }
     },
     {
@@ -46844,9 +47107,11 @@
       "indexed_sha256": "cdddab9817876ac40cb2907eb696a755be18e8da9fd5d0f5296b9f3c2d98755b",
       "opaque_pixels": 60,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-126.png"
+      ],
       "normal_entry_sample": {
         "calls": 7,
         "candidate_research_ids": [
@@ -46876,6 +47141,33 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "small_terrain_native_sample": {
+        "size": [
+          8,
+          8
+        ],
+        "opaque_cells": 60,
+        "encoded_sha256": "592e724e264e0b9cb839106d8e7bbcd8b6e74fcff46bc668bfa210851f928247",
+        "indexed_sha256": "cdddab9817876ac40cb2907eb696a755be18e8da9fd5d0f5296b9f3c2d98755b",
+        "encoded_length": 65,
+        "record_far": "4F22:062A",
+        "source_far": "548F:0005",
+        "ax": 127,
+        "draw_calls": 5,
+        "sorted_local_offset_value_sha256": "6298100a2b6f9ed5b397d3e8664c2bb36e1965fd8147e026190c91307c1b8752",
+        "visible_native_cells": 2304,
+        "visible_points": 64,
+        "cursor_restore_count": 8,
+        "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
+        "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
+        "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/068-hd-small-world-terrain.md",
+        "formal_connected": true,
+        "review_sha256": "647c178a57f12d8af166f979293e313b73025ad7f252da5f1a80ac49c5753b0f"
       }
     },
     {
@@ -46899,9 +47191,11 @@
       "indexed_sha256": "9d3b431a5eb7cc1cf21be71d8db4bf97eafc0d2732b09199e737ac637ac8cd8c",
       "opaque_pixels": 59,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-127.png"
+      ],
       "normal_entry_sample": {
         "calls": 7,
         "candidate_research_ids": [
@@ -46931,6 +47225,33 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "small_terrain_native_sample": {
+        "size": [
+          8,
+          8
+        ],
+        "opaque_cells": 59,
+        "encoded_sha256": "eebd7c95cb1e5a0f360d015047eb6f15e1c5b22970cd8ad6a8f3cde6d1db5b03",
+        "indexed_sha256": "9d3b431a5eb7cc1cf21be71d8db4bf97eafc0d2732b09199e737ac637ac8cd8c",
+        "encoded_length": 77,
+        "record_far": "4F22:0636",
+        "source_far": "5493:0006",
+        "ax": 128,
+        "draw_calls": 5,
+        "sorted_local_offset_value_sha256": "a6fa79fbea2d9dd7a2a04da43d6f4569709e3dd596e85c793c361983ce33496d",
+        "visible_native_cells": 2304,
+        "visible_points": 64,
+        "cursor_restore_count": 6,
+        "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
+        "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
+        "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/068-hd-small-world-terrain.md",
+        "formal_connected": true,
+        "review_sha256": "647c178a57f12d8af166f979293e313b73025ad7f252da5f1a80ac49c5753b0f"
       }
     },
     {
@@ -47154,9 +47475,11 @@
       "indexed_sha256": "2ebc9a4726e6f017f082fa6244b85b1f0349b8ebb89dc6f985aae57122f55a54",
       "opaque_pixels": 40,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-136.png"
+      ],
       "normal_entry_sample": {
         "calls": 7,
         "candidate_research_ids": [
@@ -47186,6 +47509,33 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "small_terrain_native_sample": {
+        "size": [
+          8,
+          8
+        ],
+        "opaque_cells": 40,
+        "encoded_sha256": "3830e3a31715c17b020830f46963ad99e660c16a3578a340739e8e5d07c2472f",
+        "indexed_sha256": "2ebc9a4726e6f017f082fa6244b85b1f0349b8ebb89dc6f985aae57122f55a54",
+        "encoded_length": 66,
+        "record_far": "4F22:06A2",
+        "source_far": "54BA:000A",
+        "ax": 137,
+        "draw_calls": 5,
+        "sorted_local_offset_value_sha256": "37956d26fe8a87b0104c14866e86ca97e8dfc10c6b362034835240eba806da9f",
+        "visible_native_cells": 1324,
+        "visible_points": 64,
+        "cursor_restore_count": 18,
+        "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
+        "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
+        "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/068-hd-small-world-terrain.md",
+        "formal_connected": true,
+        "review_sha256": "647c178a57f12d8af166f979293e313b73025ad7f252da5f1a80ac49c5753b0f"
       }
     },
     {
@@ -47259,9 +47609,11 @@
       "indexed_sha256": "b7b2bdc2e6d90b54321d6b44ef37d916c9010b6bfc8ba811844f6ce9aed50e2b",
       "opaque_pixels": 47,
       "transparency_index": 253,
-      "runtime_source_evidence": "entry_match_only",
+      "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-139.png"
+      ],
       "normal_entry_sample": {
         "calls": 7,
         "candidate_research_ids": [
@@ -47291,6 +47643,33 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "small_terrain_native_sample": {
+        "size": [
+          8,
+          8
+        ],
+        "opaque_cells": 47,
+        "encoded_sha256": "917d80be948c17ca4233d10e5bf1cc8729a1f2cdc6c797cebda4fc3206cd1e5c",
+        "indexed_sha256": "b7b2bdc2e6d90b54321d6b44ef37d916c9010b6bfc8ba811844f6ce9aed50e2b",
+        "encoded_length": 74,
+        "record_far": "4F22:06C6",
+        "source_far": "54C6:0003",
+        "ax": 140,
+        "draw_calls": 5,
+        "sorted_local_offset_value_sha256": "364b6ef81fdfef47923209402bec7f807d50543f0cb5e0b57d363766cecfed71",
+        "visible_native_cells": 1128,
+        "visible_points": 64,
+        "cursor_restore_count": 10,
+        "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
+        "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
+        "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/068-hd-small-world-terrain.md",
+        "formal_connected": true,
+        "review_sha256": "647c178a57f12d8af166f979293e313b73025ad7f252da5f1a80ac49c5753b0f"
       }
     },
     {
@@ -52140,6 +52519,86 @@
       "source_encoded_sha256": "9051788c9cf4265ce5dab6de028a5744be49d9680d412ca6b1d0320bcff2c415",
       "spec": "docs/spec/067-hd-world-terrain-batch.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-112.png",
+      "asset_sha256": "68815b2980e61c1a97409f13bf22f43b7fc2b78cc4fc025e3f4fc6be0327e743",
+      "source_research_id": 1400,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 112,
+      "source_encoded_sha256": "2a07217da7c10296f43660af1eee8dff8691c716abdb2d10b363b2b03820f734",
+      "spec": "docs/spec/068-hd-small-world-terrain.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-113.png",
+      "asset_sha256": "e8028a09d0f73ea70b3f391506d9434404fb3cfd2b7051f61343edc591ee3f97",
+      "source_research_id": 1401,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 113,
+      "source_encoded_sha256": "8a227bf6735ce0cab2792979f1043d8122365d18bd1360818d6b2d6f01a20dd2",
+      "spec": "docs/spec/068-hd-small-world-terrain.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-116.png",
+      "asset_sha256": "afa949a845f2884360cb784dc786a598f913f78e32dbb93f61359202ebd19e6b",
+      "source_research_id": 1404,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 116,
+      "source_encoded_sha256": "3aa253527ed9efa48ce6c033bd15926f79a3404755e13fd1eaa5d4506ed130e0",
+      "spec": "docs/spec/068-hd-small-world-terrain.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-119.png",
+      "asset_sha256": "c2aa727fda0ed14153a65bdb20f619e05c93627a3069a1844eb9911ba2c41274",
+      "source_research_id": 1407,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 119,
+      "source_encoded_sha256": "266c89f6a5b5315100d9aa5c48df00e3f4233a5d96582d5faa7cab36529c5a7d",
+      "spec": "docs/spec/068-hd-small-world-terrain.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-126.png",
+      "asset_sha256": "1bcf543164b4ad4e67b15ad008bb82132d7640b1af1e061db4d249b715302561",
+      "source_research_id": 1414,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 126,
+      "source_encoded_sha256": "592e724e264e0b9cb839106d8e7bbcd8b6e74fcff46bc668bfa210851f928247",
+      "spec": "docs/spec/068-hd-small-world-terrain.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-127.png",
+      "asset_sha256": "f530a6c574d45f0d333c9ed934e6a4a95df087b21e48687161d4407eb456c7ec",
+      "source_research_id": 1415,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 127,
+      "source_encoded_sha256": "eebd7c95cb1e5a0f360d015047eb6f15e1c5b22970cd8ad6a8f3cde6d1db5b03",
+      "spec": "docs/spec/068-hd-small-world-terrain.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-136.png",
+      "asset_sha256": "8acc65b9f0cffe5951642d6ba1e9049ce8af3d4f0f8ec795c3fd80a71d81c07e",
+      "source_research_id": 1424,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 136,
+      "source_encoded_sha256": "3830e3a31715c17b020830f46963ad99e660c16a3578a340739e8e5d07c2472f",
+      "spec": "docs/spec/068-hd-small-world-terrain.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-139.png",
+      "asset_sha256": "38fa1e5ad7074e0da3e36a69284c1c136619b24dc9cc13ae067a517024068787",
+      "source_research_id": 1427,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 139,
+      "source_encoded_sha256": "917d80be948c17ca4233d10e5bf1cc8729a1f2cdc6c797cebda4fc3206cd1e5c",
+      "spec": "docs/spec/068-hd-small-world-terrain.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
     }
   ],
   "limitations": [
@@ -52223,5 +52682,23 @@
     "cursor_restores": 10012,
     "production_connected": false,
     "claim": "native source evidence only; positive counts remain per ordinal; zero examples do not grant restore coverage"
+  },
+  "small_terrain_native_evidence": {
+    "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
+    "sources": 15,
+    "targets": [
+      112,
+      113,
+      116,
+      119,
+      126,
+      127,
+      136,
+      139
+    ],
+    "checkpoints": 65,
+    "dos_inputs": 143,
+    "production_connected": false,
+    "claim": "native evidence only; zero visible samples do not imply unreachable sources; HD scope remains in spec068"
   }
 }
