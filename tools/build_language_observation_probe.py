@@ -162,7 +162,9 @@ def attach_language_runtime(repo, output, reference, *, with_rebuild=True, forma
                          "tools/hd_world_terrain_runtime_test.go",
                          "tools/hd_small_terrain_runtime.go", "tools/hd_small_terrain_sources.go",
                          "tools/hd_small_terrain_runtime_test.go",
-                         "tools/hd_menu_runtime.go", "tools/hd_menu_runtime_test.go"]
+                         "tools/hd_menu_runtime.go", "tools/hd_menu_runtime_test.go",
+                         "tools/hd_new_game_runtime.go", "tools/hd_new_game_sources.go",
+                         "tools/hd_new_game_runtime_test.go"]
         for name in extra_sources:
             (output / Path(name).name).write_bytes((repo / name).read_bytes())
         old = "\tjournal := &nativeJournal{enabled: nativeOn}\n"

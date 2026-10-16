@@ -72,3 +72,7 @@ __pycache__/
 
 # 規格069 R68紙質底紋原圖
 !graphics/parch-000.png
+
+# 規格069 R69 READY：新遊戲生成背景原PNG。
+!graphics/difficul-000.png
+!graphics/nations-000.png

@@ -3306,6 +3306,194 @@
       },
       "coverage": "verified source ownership and text underlay; palette indices 98,99,100,106,107 required",
       "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "difficul-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "5777b23b5238c486824089fbb007b3bee4b514d248455553fbed559599830e57",
+      "bytes": 2458691,
+      "size": [
+        1586,
+        992
+      ],
+      "mode": "RGB",
+      "native_size": [
+        320,
+        200
+      ],
+      "target_size": [
+        1280,
+        800
+      ],
+      "sampling": "pixel-center-nearest-neighbor; generated card frames mapped to verified native selection frames",
+      "alpha": "fully opaque generated art; original PNG preserved unchanged",
+      "generation_prompt": "Use case: style-transfer. Asset: opaque 8:5 full-screen fine pixel-art background for the original Colonization difficulty selection screen. Image 1 is the exact original layout and subject reference. Image 2 is the approved fine pixel-art style reference, used only for crisp tiny pixel clusters, restrained shading, wood material detail and earthy palette. Redraw the FIRST image with more refined pixel detail, retaining the exact composition, muted brown horizontal wood-grain background, five thin dark portrait frames, flat front-facing screen and all empty spaces. Preserve all five distinct early-modern European historical figures, their clothing colors, hats, poses, silhouettes, objects and lilac portrait backdrops. Exactly two cards in the upper row at native x128..195 and x233..300, y8..94; exactly three cards in the lower row at x24..91, x128..195 and x233..300, y105..192, on the original 320 by 200 coordinate grid. Keep these relative positions and card boundaries precise; leave upper-left wood area empty. No text, labels, letters, numbers, buttons, new objects, extra people, scenery, UI changes, crop or perspective. Fine crisp pixel painting consistent with reference 2; avoid smooth illustration, blur, photorealism, glossy 3D, heavy outlines and enlarged block pixels. The result is one edge-to-edge opaque landscape image, 8:5 aspect ratio, to sample at 1280 by 800 for a display-only overlay. Do not copy buildings, terrain or plants from the style reference.",
+      "reference_sha256": {
+        "archive_palette_reference": "6b7bc72a254aab71eccd1f2a0b3684336d56d81fec2e2d338b8b8fe830d279c2",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "DIFFICUL.PIK",
+        "sha256": "f278d5052cffeb6a00e3b8573690a32c981295186736f15984a08e0d5d0a5b00",
+        "ordinal": 0,
+        "indexed_sha256": "7fbcd1b44c3eec6eb5d2f901d49fd15411a287e5c55a451ad791c6dd1fa7d202"
+      },
+      "palette_sha256": "762b10807954069aa97266465cff2d72be0d1da568b668a19d15c3a5d0524e82",
+      "native_card_rects": [
+        [
+          128,
+          7,
+          196,
+          97
+        ],
+        [
+          233,
+          7,
+          301,
+          97
+        ],
+        [
+          23,
+          103,
+          91,
+          193
+        ],
+        [
+          128,
+          103,
+          196,
+          193
+        ],
+        [
+          233,
+          103,
+          301,
+          193
+        ]
+      ],
+      "generated_card_rects": [
+        [
+          621,
+          31,
+          964,
+          476
+        ],
+        [
+          1142,
+          31,
+          1486,
+          476
+        ],
+        [
+          99,
+          498,
+          442,
+          942
+        ],
+        [
+          621,
+          498,
+          964,
+          943
+        ],
+        [
+          1142,
+          498,
+          1486,
+          943
+        ]
+      ],
+      "outside_card_sampling": "Full-image sampling; generated-card pixels outside native cards use generated x=32 on the same row.",
+      "coverage": "Verified complete PIK decode and settled canvas/palette/foreground signatures; original glyphs and selection outlines preserved; no VGA ownership or animation claim.",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "nations-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "5ff2c9e794edde09433279fc1b610e1cbc95e24c4af0e08a649e82e959fec98c",
+      "bytes": 2277934,
+      "size": [
+        1586,
+        992
+      ],
+      "mode": "RGB",
+      "native_size": [
+        320,
+        200
+      ],
+      "target_size": [
+        1280,
+        800
+      ],
+      "sampling": "pixel-center-nearest-neighbor; generated card frames mapped to verified native selection frames",
+      "alpha": "fully opaque generated art; original PNG preserved unchanged",
+      "generation_prompt": "Use case: style-transfer. Asset: opaque 8:5 full-screen fine pixel-art background for the original Colonization nation selection screen. Image 1 is the exact original composition, historical flags and frame reference. Image 2 is the approved fine pixel-art style reference, used only for crisp tiny pixel clusters, restrained material shading and earthy wood detail. Redraw the FIRST image with refined crisp pixel detail. Preserve the exact warm brown horizontal wood-grain background, four thin dark rectangular flag frames and every empty area. Keep the entire left third empty wood, without decorations, for the original interface. Four flag cards in a two by two arrangement on the right: top-left native rectangle x112..200,y14..95 holds the quartered red-and-gold English royal banner with lions and fleur-de-lis; top-right x212..298,y15..95 holds the blue French banner with repeating golden fleur-de-lis; bottom-left x112..200,y105..191 holds the red/white/gold Spanish quartered heraldic banner; bottom-right x212..298,y105..191 holds the horizontal orange-white-blue Dutch banner. Preserve reference flag symbols, colors, waving folds, poles, direction and lilac backdrops; do not modernize or substitute flags. Preserve the exact card placement and proportions on a 320 by 200 grid. No text, labels, letters, numbers, buttons, new symbols, additional cards or scenery. No layout redesign, crop, perspective, blur, smooth illustration, photographic cloth or glossy 3D. Produce one edge-to-edge opaque landscape image in 8:5 aspect ratio for pixel-center nearest-neighbor sampling at 1280 by 800. Do not copy buildings, terrain or plants from image 2.",
+      "reference_sha256": {
+        "archive_palette_reference": "1fcf9cb2db59722cdcdd6e7df1e6c7e9e8ec52131fbf1463bb57f41254710163",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "NATIONS.PIK",
+        "sha256": "bd31e62d7b7652e6903aaea76b1641f11d5333ff6a6da13fd26411c9f080bf54",
+        "ordinal": 0,
+        "indexed_sha256": "2f1b16303558b4dba382ab75c72e2bc19c9e21f54d17262865337baea9b53bf5"
+      },
+      "palette_sha256": "adf1664eae7057124766a35b65afa8dcc85432e52237cad2764c6dd4250750d7",
+      "native_card_rects": [
+        [
+          112,
+          13,
+          200,
+          95
+        ],
+        [
+          211,
+          13,
+          299,
+          95
+        ],
+        [
+          112,
+          104,
+          200,
+          186
+        ],
+        [
+          211,
+          104,
+          299,
+          186
+        ]
+      ],
+      "generated_card_rects": [
+        [
+          569,
+          57,
+          1013,
+          465
+        ],
+        [
+          1061,
+          57,
+          1507,
+          465
+        ],
+        [
+          569,
+          496,
+          1013,
+          911
+        ],
+        [
+          1061,
+          496,
+          1507,
+          911
+        ]
+      ],
+      "outside_card_sampling": "Full-image sampling; generated-card pixels outside native cards use generated x=32 on the same row.",
+      "coverage": "Verified complete PIK decode and settled canvas/palette/foreground signatures; original glyphs and selection outlines preserved; no VGA ownership or animation claim.",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
     }
   }
 }

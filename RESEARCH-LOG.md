@@ -6396,3 +6396,31 @@ confirmed：正式43個HD樣本的7361264個木紋RGBA相同。繁中城內一�
 confirmed：62點原型及正式元件均驗71640次PARCH來源複製、496次游標還原與246672個RGBA，完整原版狀態及存檔保持。正常GUI另由公開原版探針重播；原型88狀態／70輸入與正式48狀態／55輸入分開核對。正式11份來源／字底與3778480個紙質RGBA相同。五語正常恢復均有已驗PARCH；字底回呼為0，不外推其他文字頁面。
 
 新原PNG原樣保存於graphics/parch-000.png；提示、參考指紋、原版來源與權利見graphics/manifest.json。正式審查0f456fb1e2cca8e05ea44fd63f24133f3372a2e9a696a7320e17f3d1b908042e。其他來源、特殊游標與動畫未由本批外推。
+
+## 2026-10-17：R69新遊戲PIK背景與保留原字形
+
+原版VICEROY.EXE a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3，
+dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7、Python3.11.2／Pillow9.4。
+固定mpskit版本與解碼清冊、完整重生入口見[規格069](docs/spec/069-hd-menu-background-and-textures.md) R69。
+以下位址均為dosgolem實模式CS:IP或20位元線性RAM，沒有IDA位址。
+
+| 原版輸入 | 檔案SHA-256 | 解碼像素SHA-256 |
+|---|---|---|
+| DIFFICUL.PIK | f278d5052cffeb6a00e3b8573690a32c981295186736f15984a08e0d5d0a5b00 | 7fbcd1b44c3eec6eb5d2f901d49fd15411a287e5c55a451ad791c6dd1fa7d202 |
+| NATIONS.PIK | bd31e62d7b7652e6903aaea76b1641f11d5333ff6a6da13fd26411c9f080bf54 | 2f1b16303558b4dba382ab75c72e2bc19c9e21f54d17262865337baea9b53bf5 |
+
+confirmed：正常選取五種難度與四國的20點／69輸入，各PIK在0x3C500由11B5:04EE／054A
+完整寫入64000格，每格一次，固定解碼來源相同。主畫布0x2CAE0的完整索引、
+768bytes DAC與8000bytes原字形集合共同界定九種穩定畫面。
+0D21:012C字形寫入與既有0B68:051C游標配對由獨立逐寫模型核對，
+未知同值寫入撤銷字形證據。這些已驗穩定畫面沒有同值字形巧合，不由此移除守門。
+
+confirmed：正式46項正常GUI取得32個原版狀態／76輸入，有／無觀測與GUI相同。
+公開獨立來源及Pillow像素模型核對26813312個HD背景RGBA及13383312個保留原版RGBA，
+兩來源各有五語正例。正式四側至75400000步的完整原版狀態、WAV與初始存檔相同，
+四份WAV另與實際GUI錄音相同，含未加私有擷取旗標的play=true。
+
+生成原PNG原樣保存於graphics/difficul-000.png及graphics/nations-000.png。
+原版參考只留本機；原PNG來源、完整提示、權利、尺寸、框位及指紋見graphics/manifest.json。
+正式審查0c0009ba01f30817d3b0f9194ef9822dffa334ad865201e58dc3b25a4cbac601。
+這是穩定畫面辨識，VGA往返來源所有權仍未知；其他圖像、動畫與全量HD未由本批外推。

@@ -91,6 +91,7 @@ func loadHDSeaRuntime(h *hdRuntime, game, directory string) (*hdSeaRuntime, erro
 		}
 		h.worldTexture.memoryWrite(a, old, value)
 		h.parch.memoryWrite(a, old, value)
+		h.newGame.memoryWrite(a, old, value)
 		if h.texture != nil {
 			h.texture.memoryWrite(a, old, value)
 		}

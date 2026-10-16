@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "52c7c2aae1ce493489acc86a98c6adc6c43ce77136cd1700e9ca741e3ef2ecb8",
+  "formal_manifest_sha256": "4549f8cc3966c78f378bede4431a7835a3f47332bdf70dbcfbc938c6f5ea3b0b",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 70,
+    "formal_asset_bindings": 72,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -28415,9 +28415,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete PIK decode and settled canvas/palette/foreground signatures within recorded normal paths; no VGA round-trip ownership",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "difficul-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "0c0009ba01f30817d3b0f9194ef9822dffa334ad865201e58dc3b25a4cbac601",
+        "scope": "five difficulty and four nation settled states; exact native foreground and selection outlines preserved; animation unverified"
+      }
     },
     {
       "research_id": 820,
@@ -36948,9 +36957,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete PIK decode and settled canvas/palette/foreground signatures within recorded normal paths; no VGA round-trip ownership",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "nations-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "0c0009ba01f30817d3b0f9194ef9822dffa334ad865201e58dc3b25a4cbac601",
+        "scope": "five difficulty and four nation settled states; exact native foreground and selection outlines preserved; animation unverified"
+      }
     },
     {
       "research_id": 1074,
@@ -56680,6 +56698,28 @@
       "source_encoded_sha256": "81f8779fb3041d7b59c81071b1544d4268d291b824c631ec2898a58ef3463414",
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "difficul-000.png",
+      "asset_sha256": "5777b23b5238c486824089fbb007b3bee4b514d248455553fbed559599830e57",
+      "source_research_id": 819,
+      "source_file": "DIFFICUL.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "7fbcd1b44c3eec6eb5d2f901d49fd15411a287e5c55a451ad791c6dd1fa7d202"
+    },
+    {
+      "asset": "nations-000.png",
+      "asset_sha256": "5ff2c9e794edde09433279fc1b610e1cbc95e24c4af0e08a649e82e959fec98c",
+      "source_research_id": 1073,
+      "source_file": "NATIONS.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "2f1b16303558b4dba382ab75c72e2bc19c9e21f54d17262865337baea9b53bf5"
     }
   ],
   "limitations": [
@@ -56827,5 +56867,15 @@
     ],
     "formal_assets": 70,
     "claim": "one paper texture source only; other images, special cursors, animation and full HD remain incomplete"
+  },
+  "new_game_backgrounds_conformance": {
+    "ready_review_sha256": "d9ec5a3f150e1069aadf7e690562890902d07747b054a2586fc931bfd02901ec",
+    "review_sha256": "0c0009ba01f30817d3b0f9194ef9822dffa334ad865201e58dc3b25a4cbac601",
+    "sources": [
+      819,
+      1073
+    ],
+    "formal_assets": 72,
+    "claim": "two settled new-game backgrounds only; other images, program-drawn graphics, animation and full HD remain incomplete"
   }
 }
