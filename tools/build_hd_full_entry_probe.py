@@ -13,7 +13,10 @@ def digest(path):
 parser = argparse.ArgumentParser(description=__doc__)
 for name in ["catalog", "base-probe", "output"]:
     parser.add_argument("--" + name, type=Path, required=True)
+parser.add_argument("--start-step", type=int, default=50000000,
+                    help="唯讀入口觀測起點；0含冷啟動，預設保持R49範圍")
 a = parser.parse_args()
+assert 0 <= a.start_step <= 50000000
 out = a.output.resolve()
 assert Path("/.dockerenv").is_file() and os.getuid() != 0
 assert out.is_relative_to("/out") and out.parent.stat().st_uid == os.getuid()
@@ -86,6 +89,10 @@ go = go.replace("Ten exact decoded sources; no production HD, animation, cursor 
                 "All nonempty decoded SS source candidates at 0D46:000A after 50000000 steps; alias sets preserved. Entry matching only, no drawing lifecycle, PIK, animation, HD, cursor or RAM restoration claim.")
 go = go.replace("readonly-colony-building-batch-normal-input-research", "readonly-full-ss-entry-catalog-normal-input-research")
 go = go.replace("// 規格064 DRAFT：十種城內建築的唯讀正常路徑探針。", "// 目標186 R49 DRAFT：全SS的唯讀正常路徑入口探針。")
+if a.start_step != 50000000:
+    assert go.count('b.m.Steps<50000000') == 1
+    go = go.replace('b.m.Steps<50000000', 'b.m.Steps<' + str(a.start_step))
+    go = go.replace('after 50000000 steps', 'after ' + str(a.start_step) + ' steps')
 out.mkdir()
 (out / "entry-catalog.go").write_text(go)
 proof = {"kind": "DRAFT-readonly-all-SS-source-entry-catalog", "inputs": inputs,
@@ -93,7 +100,7 @@ proof = {"kind": "DRAFT-readonly-all-SS-source-entry-catalog", "inputs": inputs,
          "base_probe_sha256": digest(a.base_probe), "sources": sources,
          "limitations": ["Research IDs are catalog row keys, not original AX values or production keys.",
                          "Alias candidate sets remain unresolved; no first-match identity.",
-                         "Only 0D46:000A after step 50000000; no PIK or whole-game coverage claim.",
+                         "Only 0D46:000A after step " + str(a.start_step) + "; no PIK or whole-game coverage claim.",
                          "No write observer, no ownership, no HD installation."]}
 (out / "source-catalog.json").write_text(json.dumps(proof, ensure_ascii=False, indent=2) + "\n")
 print("PASS_FULL_SS_ENTRY_PROBE_PREPARED", len(sources), digest(out / "entry-catalog.go"), flush=True)

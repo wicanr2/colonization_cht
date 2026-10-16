@@ -8776,6 +8776,21 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "cold_start_entry_sample": {
+        "calls": 10,
+        "candidate_research_ids": [
+          56
+        ],
+        "rectangles": [
+          [
+            87,
+            11,
+            140,
+            48
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -8977,6 +8992,21 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "cold_start_entry_sample": {
+        "calls": 10,
+        "candidate_research_ids": [
+          63
+        ],
+        "rectangles": [
+          [
+            123,
+            106,
+            196,
+            124
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -9128,6 +9158,21 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "cold_start_entry_sample": {
+        "calls": 10,
+        "candidate_research_ids": [
+          68
+        ],
+        "rectangles": [
+          [
+            173,
+            18,
+            196,
+            45
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -9229,6 +9274,21 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "cold_start_entry_sample": {
+        "calls": 10,
+        "candidate_research_ids": [
+          71
+        ],
+        "rectangles": [
+          [
+            37,
+            45,
+            60,
+            72
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -9330,6 +9390,21 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "cold_start_entry_sample": {
+        "calls": 10,
+        "candidate_research_ids": [
+          74
+        ],
+        "rectangles": [
+          [
+            145,
+            15,
+            168,
+            42
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -9481,6 +9556,21 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "cold_start_entry_sample": {
+        "calls": 10,
+        "candidate_research_ids": [
+          79
+        ],
+        "rectangles": [
+          [
+            56,
+            13,
+            79,
+            40
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -9582,6 +9672,21 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "cold_start_entry_sample": {
+        "calls": 10,
+        "candidate_research_ids": [
+          82
+        ],
+        "rectangles": [
+          [
+            128,
+            53,
+            172,
+            75
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -9708,6 +9813,21 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "cold_start_entry_sample": {
+        "calls": 10,
+        "candidate_research_ids": [
+          86
+        ],
+        "rectangles": [
+          [
+            67,
+            54,
+            90,
+            81
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -9809,6 +9929,21 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "cold_start_entry_sample": {
+        "calls": 10,
+        "candidate_research_ids": [
+          89
+        ],
+        "rectangles": [
+          [
+            66,
+            87,
+            119,
+            124
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -9872,6 +10007,33 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "cold_start_entry_sample": {
+        "calls": 30,
+        "candidate_research_ids": [
+          90
+        ],
+        "rectangles": [
+          [
+            6,
+            14,
+            50,
+            36
+          ],
+          [
+            10,
+            76,
+            54,
+            98
+          ],
+          [
+            15,
+            102,
+            59,
+            124
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -9929,6 +10091,27 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "cold_start_entry_sample": {
+        "calls": 20,
+        "candidate_research_ids": [
+          91
+        ],
+        "rectangles": [
+          [
+            8,
+            41,
+            31,
+            68
+          ],
+          [
+            96,
+            53,
+            119,
+            80
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -9980,6 +10163,21 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "cold_start_entry_sample": {
+        "calls": 10,
+        "candidate_research_ids": [
+          92
+        ],
+        "rectangles": [
+          [
+            123,
+            55,
+            198,
+            103
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -15454,6 +15652,21 @@
         "edge_samples": 9,
         "fully_clipped_edge_samples": 1,
         "claim": "standard cursor only; other cursor sources and hidden states not granted coverage"
+      },
+      "cold_start_entry_sample": {
+        "calls": 2,
+        "candidate_research_ids": [
+          309
+        ],
+        "rectangles": [
+          [
+            0,
+            0,
+            17,
+            17
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -28589,6 +28802,39 @@
         "report_sha256": "fd48090fb6ecc102edeea3076a4b116cf0fbc1f2d1a9feab6334eb593be9d1c5",
         "state": "verified native samples; not production HD or animation",
         "cursor_bitmap_sha256": "47fced19d04987d3a0de8b6fd929abae6ba886939a2a7ce408b0213360ef1e03"
+      },
+      "cold_start_entry_sample": {
+        "calls": 18,
+        "candidate_research_ids": [
+          832
+        ],
+        "rectangles": [
+          [
+            245,
+            135,
+            258,
+            151
+          ],
+          [
+            245,
+            68,
+            258,
+            84
+          ],
+          [
+            147,
+            104,
+            160,
+            120
+          ],
+          [
+            133,
+            146,
+            146,
+            162
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -29120,6 +29366,93 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 81,
+        "candidate_research_ids": [
+          849
+        ],
+        "rectangles": [
+          [
+            228,
+            57,
+            235,
+            69
+          ],
+          [
+            236,
+            57,
+            243,
+            69
+          ],
+          [
+            249,
+            57,
+            256,
+            69
+          ],
+          [
+            254,
+            57,
+            261,
+            69
+          ],
+          [
+            259,
+            57,
+            266,
+            69
+          ],
+          [
+            264,
+            57,
+            271,
+            69
+          ],
+          [
+            2,
+            163,
+            9,
+            175
+          ],
+          [
+            10,
+            163,
+            17,
+            175
+          ],
+          [
+            18,
+            163,
+            25,
+            175
+          ],
+          [
+            26,
+            163,
+            33,
+            175
+          ],
+          [
+            34,
+            163,
+            41,
+            175
+          ],
+          [
+            42,
+            163,
+            49,
+            175
+          ],
+          [
+            7,
+            181,
+            14,
+            193
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -29179,6 +29512,21 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 3,
+        "candidate_research_ids": [
+          850
+        ],
+        "rectangles": [
+          [
+            25,
+            181,
+            33,
+            193
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -29238,6 +29586,21 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 3,
+        "candidate_research_ids": [
+          851
+        ],
+        "rectangles": [
+          [
+            44,
+            181,
+            52,
+            193
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -29297,6 +29660,21 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 3,
+        "candidate_research_ids": [
+          852
+        ],
+        "rectangles": [
+          [
+            62,
+            181,
+            72,
+            193
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -29464,6 +29842,129 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 120,
+        "candidate_research_ids": [
+          853
+        ],
+        "rectangles": [
+          [
+            224,
+            33,
+            233,
+            45
+          ],
+          [
+            227,
+            33,
+            236,
+            45
+          ],
+          [
+            230,
+            33,
+            239,
+            45
+          ],
+          [
+            233,
+            33,
+            242,
+            45
+          ],
+          [
+            236,
+            33,
+            245,
+            45
+          ],
+          [
+            239,
+            33,
+            248,
+            45
+          ],
+          [
+            248,
+            70,
+            257,
+            82
+          ],
+          [
+            255,
+            70,
+            264,
+            82
+          ],
+          [
+            262,
+            70,
+            271,
+            82
+          ],
+          [
+            82,
+            181,
+            91,
+            193
+          ],
+          [
+            213,
+            134,
+            222,
+            146
+          ],
+          [
+            223,
+            134,
+            232,
+            146
+          ],
+          [
+            233,
+            134,
+            242,
+            146
+          ],
+          [
+            243,
+            134,
+            252,
+            146
+          ],
+          [
+            253,
+            134,
+            262,
+            146
+          ],
+          [
+            263,
+            134,
+            272,
+            146
+          ],
+          [
+            273,
+            134,
+            282,
+            146
+          ],
+          [
+            283,
+            134,
+            292,
+            146
+          ],
+          [
+            293,
+            134,
+            302,
+            146
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -29523,6 +30024,21 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 3,
+        "candidate_research_ids": [
+          854
+        ],
+        "rectangles": [
+          [
+            100,
+            181,
+            110,
+            193
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -29582,6 +30098,21 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 3,
+        "candidate_research_ids": [
+          855
+        ],
+        "rectangles": [
+          [
+            119,
+            181,
+            129,
+            193
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -29641,6 +30172,21 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 3,
+        "candidate_research_ids": [
+          856
+        ],
+        "rectangles": [
+          [
+            138,
+            181,
+            148,
+            193
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -29700,6 +30246,21 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 3,
+        "candidate_research_ids": [
+          857
+        ],
+        "rectangles": [
+          [
+            156,
+            181,
+            169,
+            193
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -29759,6 +30320,21 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 3,
+        "candidate_research_ids": [
+          858
+        ],
+        "rectangles": [
+          [
+            178,
+            181,
+            185,
+            193
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -29818,6 +30394,21 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 3,
+        "candidate_research_ids": [
+          859
+        ],
+        "rectangles": [
+          [
+            196,
+            181,
+            205,
+            193
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -29877,6 +30468,21 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 3,
+        "candidate_research_ids": [
+          860
+        ],
+        "rectangles": [
+          [
+            215,
+            181,
+            223,
+            193
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -29936,6 +30542,21 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 3,
+        "candidate_research_ids": [
+          861
+        ],
+        "rectangles": [
+          [
+            234,
+            181,
+            242,
+            193
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -29995,6 +30616,21 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 3,
+        "candidate_research_ids": [
+          862
+        ],
+        "rectangles": [
+          [
+            253,
+            181,
+            262,
+            193
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -30066,6 +30702,33 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 10,
+        "candidate_research_ids": [
+          863
+        ],
+        "rectangles": [
+          [
+            262,
+            122,
+            271,
+            134
+          ],
+          [
+            280,
+            153,
+            289,
+            165
+          ],
+          [
+            272,
+            181,
+            281,
+            193
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -30125,6 +30788,21 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 3,
+        "candidate_research_ids": [
+          864
+        ],
+        "rectangles": [
+          [
+            292,
+            181,
+            298,
+            193
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -30190,6 +30868,27 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 7,
+        "candidate_research_ids": [
+          865
+        ],
+        "rectangles": [
+          [
+            289,
+            122,
+            296,
+            134
+          ],
+          [
+            272,
+            153,
+            279,
+            165
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -30348,6 +31047,45 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 17,
+        "candidate_research_ids": [
+          869
+        ],
+        "rectangles": [
+          [
+            279,
+            122,
+            288,
+            134
+          ],
+          [
+            260,
+            135,
+            269,
+            147
+          ],
+          [
+            262,
+            117,
+            271,
+            129
+          ],
+          [
+            262,
+            153,
+            271,
+            165
+          ],
+          [
+            128,
+            165,
+            137,
+            177
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -30663,6 +31401,27 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 7,
+        "candidate_research_ids": [
+          880
+        ],
+        "rectangles": [
+          [
+            272,
+            122,
+            278,
+            134
+          ],
+          [
+            290,
+            153,
+            296,
+            165
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -30772,6 +31531,21 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 3,
+        "candidate_research_ids": [
+          883
+        ],
+        "rectangles": [
+          [
+            53,
+            163,
+            61,
+            175
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -30887,6 +31661,27 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 13,
+        "candidate_research_ids": [
+          886
+        ],
+        "rectangles": [
+          [
+            20,
+            142,
+            26,
+            158
+          ],
+          [
+            122,
+            34,
+            128,
+            50
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -31046,6 +31841,63 @@
         "report_sha256": "fd48090fb6ecc102edeea3076a4b116cf0fbc1f2d1a9feab6334eb593be9d1c5",
         "state": "verified native samples; not production HD or animation",
         "cursor_bitmap_sha256": "47fced19d04987d3a0de8b6fd929abae6ba886939a2a7ce408b0213360ef1e03"
+      },
+      "cold_start_entry_sample": {
+        "calls": 52,
+        "candidate_research_ids": [
+          889
+        ],
+        "rectangles": [
+          [
+            65,
+            163,
+            75,
+            175
+          ],
+          [
+            75,
+            163,
+            85,
+            175
+          ],
+          [
+            85,
+            163,
+            95,
+            175
+          ],
+          [
+            95,
+            163,
+            105,
+            175
+          ],
+          [
+            88,
+            13,
+            98,
+            25
+          ],
+          [
+            94,
+            13,
+            104,
+            25
+          ],
+          [
+            100,
+            13,
+            110,
+            25
+          ],
+          [
+            106,
+            13,
+            116,
+            25
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -31205,6 +32057,21 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 3,
+        "candidate_research_ids": [
+          894
+        ],
+        "rectangles": [
+          [
+            304,
+            133,
+            318,
+            146
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -31264,6 +32131,21 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 3,
+        "candidate_research_ids": [
+          895
+        ],
+        "rectangles": [
+          [
+            303,
+            147,
+            317,
+            160
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -31323,6 +32205,21 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 3,
+        "candidate_research_ids": [
+          896
+        ],
+        "rectangles": [
+          [
+            303,
+            162,
+            317,
+            175
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -31988,6 +32885,27 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 13,
+        "candidate_research_ids": [
+          921
+        ],
+        "rectangles": [
+          [
+            238,
+            62,
+            246,
+            78
+          ],
+          [
+            2,
+            142,
+            10,
+            158
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -32178,6 +33096,27 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 13,
+        "candidate_research_ids": [
+          927
+        ],
+        "rectangles": [
+          [
+            238,
+            38,
+            244,
+            54
+          ],
+          [
+            12,
+            142,
+            18,
+            158
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -32780,6 +33719,39 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 12,
+        "candidate_research_ids": [
+          949
+        ],
+        "rectangles": [
+          [
+            151,
+            165,
+            161,
+            177
+          ],
+          [
+            163,
+            165,
+            173,
+            177
+          ],
+          [
+            175,
+            165,
+            185,
+            177
+          ],
+          [
+            187,
+            165,
+            197,
+            177
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -32839,6 +33811,21 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 3,
+        "candidate_research_ids": [
+          950
+        ],
+        "rectangles": [
+          [
+            2,
+            132,
+            15,
+            143
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -32898,6 +33885,21 @@
         "unknown_writes": "revoke including same value",
         "cursor_restoration_verified": false,
         "ram_restoration_verified": false
+      },
+      "cold_start_entry_sample": {
+        "calls": 3,
+        "candidate_research_ids": [
+          951
+        ],
+        "rectangles": [
+          [
+            104,
+            132,
+            117,
+            143
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -38648,7 +39650,15 @@
       "embedded_palette": true,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "background_native_decode_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "writes": 64000,
+        "report_sha256": "7127dbd0f20691e81f737d4fe54c378edd31135f26028d7add85bdaf6eb6f90b",
+        "claim": "exact decoded stage pixels only; VGA and presentation lifecycle unverified",
+        "formal_connected": false
+      }
     },
     {
       "research_id": 1182,
@@ -40672,7 +41682,35 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "cold_start_entry_sample": {
+        "calls": 1,
+        "candidate_research_ids": [
+          1265
+        ],
+        "rectangles": [
+          [
+            0,
+            0,
+            32,
+            24
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "background_texture_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "source_writes": 768,
+        "visible_native_cells": [
+          6332,
+          6332,
+          6332,
+          6332
+        ],
+        "report_sha256": "7127dbd0f20691e81f737d4fe54c378edd31135f26028d7add85bdaf6eb6f90b",
+        "formal_connected": false
+      }
     },
     {
       "research_id": 1266,
@@ -41222,7 +42260,35 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "cold_start_entry_sample": {
+        "calls": 1,
+        "candidate_research_ids": [
+          1287
+        ],
+        "rectangles": [
+          [
+            0,
+            0,
+            32,
+            24
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "background_texture_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "source_writes": 768,
+        "visible_native_cells": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "report_sha256": "7127dbd0f20691e81f737d4fe54c378edd31135f26028d7add85bdaf6eb6f90b",
+        "formal_connected": false
+      }
     },
     {
       "research_id": 1288,
@@ -41462,6 +42528,21 @@
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
         "formal_connected": true,
         "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
+      },
+      "cold_start_entry_sample": {
+        "calls": 5,
+        "candidate_research_ids": [
+          1294
+        ],
+        "rectangles": [
+          [
+            128,
+            64,
+            144,
+            80
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -41608,6 +42689,27 @@
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
         "formal_connected": true,
         "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
+      },
+      "cold_start_entry_sample": {
+        "calls": 7,
+        "candidate_research_ids": [
+          1297
+        ],
+        "rectangles": [
+          [
+            128,
+            80,
+            144,
+            96
+          ],
+          [
+            16,
+            16,
+            32,
+            32
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -41873,6 +42975,21 @@
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
         "formal_connected": true,
         "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
+      },
+      "cold_start_entry_sample": {
+        "calls": 5,
+        "candidate_research_ids": [
+          1305
+        ],
+        "rectangles": [
+          [
+            112,
+            64,
+            128,
+            80
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -42248,7 +43365,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "cold_start_entry_sample": {
+        "calls": 1,
+        "candidate_research_ids": [
+          1320
+        ],
+        "rectangles": [
+          [
+            0,
+            0,
+            16,
+            16
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
+      }
     },
     {
       "research_id": 1321,
@@ -42648,7 +43780,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "cold_start_entry_sample": {
+        "calls": 1,
+        "candidate_research_ids": [
+          1336
+        ],
+        "rectangles": [
+          [
+            0,
+            0,
+            16,
+            16
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
+      }
     },
     {
       "research_id": 1337,
@@ -43175,6 +44322,33 @@
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
         "formal_connected": true,
         "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
+      },
+      "cold_start_entry_sample": {
+        "calls": 12,
+        "candidate_research_ids": [
+          1354
+        ],
+        "rectangles": [
+          [
+            160,
+            48,
+            176,
+            64
+          ],
+          [
+            144,
+            96,
+            160,
+            112
+          ],
+          [
+            32,
+            32,
+            48,
+            48
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -43365,6 +44539,21 @@
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
         "formal_connected": true,
         "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
+      },
+      "cold_start_entry_sample": {
+        "calls": 5,
+        "candidate_research_ids": [
+          1359
+        ],
+        "rectangles": [
+          [
+            112,
+            64,
+            128,
+            80
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -43517,6 +44706,33 @@
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
         "formal_connected": true,
         "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
+      },
+      "cold_start_entry_sample": {
+        "calls": 12,
+        "candidate_research_ids": [
+          1362
+        ],
+        "rectangles": [
+          [
+            144,
+            64,
+            160,
+            80
+          ],
+          [
+            128,
+            112,
+            144,
+            128
+          ],
+          [
+            16,
+            48,
+            32,
+            64
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -43657,6 +44873,21 @@
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
         "formal_connected": true,
         "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
+      },
+      "cold_start_entry_sample": {
+        "calls": 5,
+        "candidate_research_ids": [
+          1365
+        ],
+        "rectangles": [
+          [
+            128,
+            48,
+            144,
+            64
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -43753,6 +44984,27 @@
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
         "formal_connected": true,
         "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
+      },
+      "cold_start_entry_sample": {
+        "calls": 7,
+        "candidate_research_ids": [
+          1366
+        ],
+        "rectangles": [
+          [
+            128,
+            80,
+            144,
+            96
+          ],
+          [
+            16,
+            16,
+            32,
+            32
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -43873,6 +45125,51 @@
         "vga_visible_points": 29,
         "report_sha256": "4774317a1df07bf762d1d08f483b7c87f202b3588baa363d60c62d2201d0eee8",
         "state": "confirmed native source samples; no new HD or animation credit"
+      },
+      "cold_start_entry_sample": {
+        "calls": 27,
+        "candidate_research_ids": [
+          1367
+        ],
+        "rectangles": [
+          [
+            144,
+            48,
+            160,
+            64
+          ],
+          [
+            128,
+            64,
+            144,
+            80
+          ],
+          [
+            112,
+            80,
+            128,
+            96
+          ],
+          [
+            112,
+            96,
+            128,
+            112
+          ],
+          [
+            128,
+            96,
+            144,
+            112
+          ],
+          [
+            16,
+            32,
+            32,
+            48
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -43975,6 +45272,33 @@
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
         "formal_connected": true,
         "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
+      },
+      "cold_start_entry_sample": {
+        "calls": 12,
+        "candidate_research_ids": [
+          1368
+        ],
+        "rectangles": [
+          [
+            160,
+            48,
+            176,
+            64
+          ],
+          [
+            144,
+            96,
+            160,
+            112
+          ],
+          [
+            32,
+            32,
+            48,
+            48
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -44446,6 +45770,27 @@
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
         "formal_connected": true,
         "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
+      },
+      "cold_start_entry_sample": {
+        "calls": 12,
+        "candidate_research_ids": [
+          1384
+        ],
+        "rectangles": [
+          [
+            160,
+            112,
+            176,
+            128
+          ],
+          [
+            276,
+            84,
+            292,
+            100
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -44883,6 +46228,213 @@
         "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
         "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
         "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
+      },
+      "cold_start_entry_sample": {
+        "calls": 132,
+        "candidate_research_ids": [
+          1392
+        ],
+        "rectangles": [
+          [
+            128,
+            48,
+            144,
+            64
+          ],
+          [
+            144,
+            48,
+            160,
+            64
+          ],
+          [
+            160,
+            48,
+            176,
+            64
+          ],
+          [
+            176,
+            48,
+            192,
+            64
+          ],
+          [
+            112,
+            64,
+            128,
+            80
+          ],
+          [
+            128,
+            64,
+            144,
+            80
+          ],
+          [
+            144,
+            64,
+            160,
+            80
+          ],
+          [
+            192,
+            64,
+            208,
+            80
+          ],
+          [
+            208,
+            64,
+            224,
+            80
+          ],
+          [
+            224,
+            64,
+            240,
+            80
+          ],
+          [
+            112,
+            80,
+            128,
+            96
+          ],
+          [
+            128,
+            80,
+            144,
+            96
+          ],
+          [
+            144,
+            80,
+            160,
+            96
+          ],
+          [
+            112,
+            96,
+            128,
+            112
+          ],
+          [
+            128,
+            96,
+            144,
+            112
+          ],
+          [
+            112,
+            112,
+            128,
+            128
+          ],
+          [
+            128,
+            112,
+            144,
+            128
+          ],
+          [
+            144,
+            112,
+            160,
+            128
+          ],
+          [
+            208,
+            112,
+            224,
+            128
+          ],
+          [
+            224,
+            112,
+            240,
+            128
+          ],
+          [
+            128,
+            128,
+            144,
+            144
+          ],
+          [
+            144,
+            144,
+            160,
+            160
+          ],
+          [
+            160,
+            160,
+            176,
+            176
+          ],
+          [
+            192,
+            160,
+            208,
+            176
+          ],
+          [
+            16,
+            16,
+            32,
+            32
+          ],
+          [
+            32,
+            16,
+            48,
+            32
+          ],
+          [
+            48,
+            16,
+            64,
+            32
+          ],
+          [
+            16,
+            32,
+            32,
+            48
+          ],
+          [
+            16,
+            48,
+            32,
+            64
+          ],
+          [
+            32,
+            48,
+            48,
+            64
+          ],
+          [
+            16,
+            64,
+            32,
+            80
+          ],
+          [
+            32,
+            64,
+            48,
+            80
+          ],
+          [
+            48,
+            64,
+            64,
+            80
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -45181,6 +46733,249 @@
         "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
         "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
         "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
+      },
+      "cold_start_entry_sample": {
+        "calls": 159,
+        "candidate_research_ids": [
+          1393
+        ],
+        "rectangles": [
+          [
+            112,
+            48,
+            128,
+            64
+          ],
+          [
+            144,
+            48,
+            160,
+            64
+          ],
+          [
+            176,
+            48,
+            192,
+            64
+          ],
+          [
+            96,
+            64,
+            112,
+            80
+          ],
+          [
+            112,
+            64,
+            128,
+            80
+          ],
+          [
+            128,
+            64,
+            144,
+            80
+          ],
+          [
+            208,
+            64,
+            224,
+            80
+          ],
+          [
+            224,
+            64,
+            240,
+            80
+          ],
+          [
+            96,
+            80,
+            112,
+            96
+          ],
+          [
+            112,
+            80,
+            128,
+            96
+          ],
+          [
+            208,
+            80,
+            224,
+            96
+          ],
+          [
+            224,
+            80,
+            240,
+            96
+          ],
+          [
+            96,
+            96,
+            112,
+            112
+          ],
+          [
+            112,
+            96,
+            128,
+            112
+          ],
+          [
+            128,
+            96,
+            144,
+            112
+          ],
+          [
+            208,
+            96,
+            224,
+            112
+          ],
+          [
+            224,
+            96,
+            240,
+            112
+          ],
+          [
+            112,
+            112,
+            128,
+            128
+          ],
+          [
+            192,
+            112,
+            208,
+            128
+          ],
+          [
+            208,
+            112,
+            224,
+            128
+          ],
+          [
+            128,
+            128,
+            144,
+            144
+          ],
+          [
+            192,
+            128,
+            208,
+            144
+          ],
+          [
+            208,
+            128,
+            224,
+            144
+          ],
+          [
+            144,
+            144,
+            160,
+            160
+          ],
+          [
+            192,
+            144,
+            208,
+            160
+          ],
+          [
+            208,
+            144,
+            224,
+            160
+          ],
+          [
+            160,
+            160,
+            176,
+            176
+          ],
+          [
+            176,
+            160,
+            192,
+            176
+          ],
+          [
+            208,
+            160,
+            224,
+            176
+          ],
+          [
+            160,
+            176,
+            176,
+            192
+          ],
+          [
+            176,
+            176,
+            192,
+            192
+          ],
+          [
+            208,
+            176,
+            224,
+            192
+          ],
+          [
+            0,
+            16,
+            16,
+            32
+          ],
+          [
+            48,
+            16,
+            64,
+            32
+          ],
+          [
+            0,
+            32,
+            16,
+            48
+          ],
+          [
+            16,
+            32,
+            32,
+            48
+          ],
+          [
+            48,
+            32,
+            64,
+            48
+          ],
+          [
+            0,
+            48,
+            16,
+            64
+          ],
+          [
+            48,
+            48,
+            64,
+            64
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -45461,6 +47256,231 @@
         "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
         "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
         "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
+      },
+      "cold_start_entry_sample": {
+        "calls": 142,
+        "candidate_research_ids": [
+          1394
+        ],
+        "rectangles": [
+          [
+            128,
+            32,
+            144,
+            48
+          ],
+          [
+            144,
+            32,
+            160,
+            48
+          ],
+          [
+            160,
+            32,
+            176,
+            48
+          ],
+          [
+            176,
+            32,
+            192,
+            48
+          ],
+          [
+            112,
+            48,
+            128,
+            64
+          ],
+          [
+            128,
+            48,
+            144,
+            64
+          ],
+          [
+            144,
+            48,
+            160,
+            64
+          ],
+          [
+            192,
+            48,
+            208,
+            64
+          ],
+          [
+            208,
+            48,
+            224,
+            64
+          ],
+          [
+            224,
+            48,
+            240,
+            64
+          ],
+          [
+            112,
+            64,
+            128,
+            80
+          ],
+          [
+            128,
+            64,
+            144,
+            80
+          ],
+          [
+            144,
+            64,
+            160,
+            80
+          ],
+          [
+            112,
+            80,
+            128,
+            96
+          ],
+          [
+            128,
+            80,
+            144,
+            96
+          ],
+          [
+            112,
+            96,
+            128,
+            112
+          ],
+          [
+            128,
+            96,
+            144,
+            112
+          ],
+          [
+            144,
+            96,
+            160,
+            112
+          ],
+          [
+            208,
+            96,
+            224,
+            112
+          ],
+          [
+            224,
+            96,
+            240,
+            112
+          ],
+          [
+            128,
+            112,
+            144,
+            128
+          ],
+          [
+            144,
+            128,
+            160,
+            144
+          ],
+          [
+            160,
+            144,
+            176,
+            160
+          ],
+          [
+            192,
+            144,
+            208,
+            160
+          ],
+          [
+            176,
+            176,
+            192,
+            192
+          ],
+          [
+            192,
+            176,
+            208,
+            192
+          ],
+          [
+            208,
+            176,
+            224,
+            192
+          ],
+          [
+            16,
+            0,
+            32,
+            16
+          ],
+          [
+            32,
+            0,
+            48,
+            16
+          ],
+          [
+            48,
+            0,
+            64,
+            16
+          ],
+          [
+            16,
+            16,
+            32,
+            32
+          ],
+          [
+            16,
+            32,
+            32,
+            48
+          ],
+          [
+            32,
+            32,
+            48,
+            48
+          ],
+          [
+            16,
+            48,
+            32,
+            64
+          ],
+          [
+            32,
+            48,
+            48,
+            64
+          ],
+          [
+            48,
+            48,
+            64,
+            64
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -45741,6 +47761,231 @@
         "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
         "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
         "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
+      },
+      "cold_start_entry_sample": {
+        "calls": 144,
+        "candidate_research_ids": [
+          1395
+        ],
+        "rectangles": [
+          [
+            128,
+            48,
+            144,
+            64
+          ],
+          [
+            160,
+            48,
+            176,
+            64
+          ],
+          [
+            192,
+            48,
+            208,
+            64
+          ],
+          [
+            112,
+            64,
+            128,
+            80
+          ],
+          [
+            128,
+            64,
+            144,
+            80
+          ],
+          [
+            144,
+            64,
+            160,
+            80
+          ],
+          [
+            224,
+            64,
+            240,
+            80
+          ],
+          [
+            112,
+            80,
+            128,
+            96
+          ],
+          [
+            128,
+            80,
+            144,
+            96
+          ],
+          [
+            224,
+            80,
+            240,
+            96
+          ],
+          [
+            112,
+            96,
+            128,
+            112
+          ],
+          [
+            128,
+            96,
+            144,
+            112
+          ],
+          [
+            144,
+            96,
+            160,
+            112
+          ],
+          [
+            224,
+            96,
+            240,
+            112
+          ],
+          [
+            128,
+            112,
+            144,
+            128
+          ],
+          [
+            208,
+            112,
+            224,
+            128
+          ],
+          [
+            224,
+            112,
+            240,
+            128
+          ],
+          [
+            144,
+            128,
+            160,
+            144
+          ],
+          [
+            208,
+            128,
+            224,
+            144
+          ],
+          [
+            224,
+            128,
+            240,
+            144
+          ],
+          [
+            160,
+            144,
+            176,
+            160
+          ],
+          [
+            208,
+            144,
+            224,
+            160
+          ],
+          [
+            224,
+            144,
+            240,
+            160
+          ],
+          [
+            176,
+            160,
+            192,
+            176
+          ],
+          [
+            192,
+            160,
+            208,
+            176
+          ],
+          [
+            224,
+            160,
+            240,
+            176
+          ],
+          [
+            176,
+            176,
+            192,
+            192
+          ],
+          [
+            192,
+            176,
+            208,
+            192
+          ],
+          [
+            224,
+            176,
+            240,
+            192
+          ],
+          [
+            16,
+            16,
+            32,
+            32
+          ],
+          [
+            64,
+            16,
+            80,
+            32
+          ],
+          [
+            16,
+            32,
+            32,
+            48
+          ],
+          [
+            32,
+            32,
+            48,
+            48
+          ],
+          [
+            64,
+            32,
+            80,
+            48
+          ],
+          [
+            16,
+            48,
+            32,
+            64
+          ],
+          [
+            64,
+            48,
+            80,
+            64
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -45907,6 +48152,132 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "cold_start_entry_sample": {
+        "calls": 74,
+        "candidate_research_ids": [
+          1396,
+          1397,
+          1398,
+          1399
+        ],
+        "rectangles": [
+          [
+            184,
+            64,
+            192,
+            72
+          ],
+          [
+            184,
+            72,
+            192,
+            80
+          ],
+          [
+            176,
+            72,
+            184,
+            80
+          ],
+          [
+            168,
+            80,
+            176,
+            88
+          ],
+          [
+            168,
+            88,
+            176,
+            96
+          ],
+          [
+            168,
+            96,
+            176,
+            104
+          ],
+          [
+            168,
+            104,
+            176,
+            112
+          ],
+          [
+            168,
+            112,
+            176,
+            120
+          ],
+          [
+            168,
+            120,
+            176,
+            128
+          ],
+          [
+            160,
+            120,
+            168,
+            128
+          ],
+          [
+            152,
+            128,
+            160,
+            136
+          ],
+          [
+            152,
+            136,
+            160,
+            144
+          ],
+          [
+            56,
+            16,
+            64,
+            24
+          ],
+          [
+            56,
+            24,
+            64,
+            32
+          ],
+          [
+            56,
+            32,
+            64,
+            40
+          ],
+          [
+            56,
+            40,
+            64,
+            48
+          ],
+          [
+            56,
+            48,
+            64,
+            56
+          ],
+          [
+            56,
+            56,
+            64,
+            64
+          ],
+          [
+            48,
+            56,
+            56,
+            64
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -46094,6 +48465,132 @@
         "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
         "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
         "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
+      },
+      "cold_start_entry_sample": {
+        "calls": 74,
+        "candidate_research_ids": [
+          1396,
+          1397,
+          1398,
+          1399
+        ],
+        "rectangles": [
+          [
+            184,
+            64,
+            192,
+            72
+          ],
+          [
+            184,
+            72,
+            192,
+            80
+          ],
+          [
+            176,
+            72,
+            184,
+            80
+          ],
+          [
+            168,
+            80,
+            176,
+            88
+          ],
+          [
+            168,
+            88,
+            176,
+            96
+          ],
+          [
+            168,
+            96,
+            176,
+            104
+          ],
+          [
+            168,
+            104,
+            176,
+            112
+          ],
+          [
+            168,
+            112,
+            176,
+            120
+          ],
+          [
+            168,
+            120,
+            176,
+            128
+          ],
+          [
+            160,
+            120,
+            168,
+            128
+          ],
+          [
+            152,
+            128,
+            160,
+            136
+          ],
+          [
+            152,
+            136,
+            160,
+            144
+          ],
+          [
+            56,
+            16,
+            64,
+            24
+          ],
+          [
+            56,
+            24,
+            64,
+            32
+          ],
+          [
+            56,
+            32,
+            64,
+            40
+          ],
+          [
+            56,
+            40,
+            64,
+            48
+          ],
+          [
+            56,
+            48,
+            64,
+            56
+          ],
+          [
+            56,
+            56,
+            64,
+            64
+          ],
+          [
+            48,
+            56,
+            56,
+            64
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -46281,6 +48778,132 @@
         "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
         "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
         "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
+      },
+      "cold_start_entry_sample": {
+        "calls": 74,
+        "candidate_research_ids": [
+          1396,
+          1397,
+          1398,
+          1399
+        ],
+        "rectangles": [
+          [
+            184,
+            64,
+            192,
+            72
+          ],
+          [
+            184,
+            72,
+            192,
+            80
+          ],
+          [
+            176,
+            72,
+            184,
+            80
+          ],
+          [
+            168,
+            80,
+            176,
+            88
+          ],
+          [
+            168,
+            88,
+            176,
+            96
+          ],
+          [
+            168,
+            96,
+            176,
+            104
+          ],
+          [
+            168,
+            104,
+            176,
+            112
+          ],
+          [
+            168,
+            112,
+            176,
+            120
+          ],
+          [
+            168,
+            120,
+            176,
+            128
+          ],
+          [
+            160,
+            120,
+            168,
+            128
+          ],
+          [
+            152,
+            128,
+            160,
+            136
+          ],
+          [
+            152,
+            136,
+            160,
+            144
+          ],
+          [
+            56,
+            16,
+            64,
+            24
+          ],
+          [
+            56,
+            24,
+            64,
+            32
+          ],
+          [
+            56,
+            32,
+            64,
+            40
+          ],
+          [
+            56,
+            40,
+            64,
+            48
+          ],
+          [
+            56,
+            48,
+            64,
+            56
+          ],
+          [
+            56,
+            56,
+            64,
+            64
+          ],
+          [
+            48,
+            56,
+            56,
+            64
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -46468,6 +49091,132 @@
         "claim": "runtime AX slot plus exact record, encoded bytes, dimensions, full writes and native models; shared encoding does not establish distinct artwork",
         "report_sha256": "3d3955c9e4ef48a3833d9c3dd6c2a487419f58d8b1e73404a12835a844ebc84c",
         "state": "confirmed runtime AX slot and complete native source; shared encoding retained; visibility limited to sampled points"
+      },
+      "cold_start_entry_sample": {
+        "calls": 74,
+        "candidate_research_ids": [
+          1396,
+          1397,
+          1398,
+          1399
+        ],
+        "rectangles": [
+          [
+            184,
+            64,
+            192,
+            72
+          ],
+          [
+            184,
+            72,
+            192,
+            80
+          ],
+          [
+            176,
+            72,
+            184,
+            80
+          ],
+          [
+            168,
+            80,
+            176,
+            88
+          ],
+          [
+            168,
+            88,
+            176,
+            96
+          ],
+          [
+            168,
+            96,
+            176,
+            104
+          ],
+          [
+            168,
+            104,
+            176,
+            112
+          ],
+          [
+            168,
+            112,
+            176,
+            120
+          ],
+          [
+            168,
+            120,
+            176,
+            128
+          ],
+          [
+            160,
+            120,
+            168,
+            128
+          ],
+          [
+            152,
+            128,
+            160,
+            136
+          ],
+          [
+            152,
+            136,
+            160,
+            144
+          ],
+          [
+            56,
+            16,
+            64,
+            24
+          ],
+          [
+            56,
+            24,
+            64,
+            32
+          ],
+          [
+            56,
+            32,
+            64,
+            40
+          ],
+          [
+            56,
+            40,
+            64,
+            48
+          ],
+          [
+            56,
+            48,
+            64,
+            56
+          ],
+          [
+            56,
+            56,
+            64,
+            64
+          ],
+          [
+            48,
+            56,
+            56,
+            64
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -46552,6 +49301,27 @@
         "spec": "docs/spec/068-hd-small-world-terrain.md",
         "formal_connected": true,
         "review_sha256": "647c178a57f12d8af166f979293e313b73025ad7f252da5f1a80ac49c5753b0f"
+      },
+      "cold_start_entry_sample": {
+        "calls": 7,
+        "candidate_research_ids": [
+          1400
+        ],
+        "rectangles": [
+          [
+            160,
+            96,
+            168,
+            104
+          ],
+          [
+            48,
+            32,
+            56,
+            40
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -46636,6 +49406,27 @@
         "spec": "docs/spec/068-hd-small-world-terrain.md",
         "formal_connected": true,
         "review_sha256": "647c178a57f12d8af166f979293e313b73025ad7f252da5f1a80ac49c5753b0f"
+      },
+      "cold_start_entry_sample": {
+        "calls": 7,
+        "candidate_research_ids": [
+          1401
+        ],
+        "rectangles": [
+          [
+            152,
+            80,
+            160,
+            88
+          ],
+          [
+            40,
+            16,
+            48,
+            24
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -46794,6 +49585,51 @@
         "spec": "docs/spec/068-hd-small-world-terrain.md",
         "formal_connected": true,
         "review_sha256": "647c178a57f12d8af166f979293e313b73025ad7f252da5f1a80ac49c5753b0f"
+      },
+      "cold_start_entry_sample": {
+        "calls": 24,
+        "candidate_research_ids": [
+          1404
+        ],
+        "rectangles": [
+          [
+            176,
+            64,
+            184,
+            72
+          ],
+          [
+            160,
+            80,
+            168,
+            88
+          ],
+          [
+            160,
+            112,
+            168,
+            120
+          ],
+          [
+            144,
+            128,
+            152,
+            136
+          ],
+          [
+            48,
+            16,
+            56,
+            24
+          ],
+          [
+            48,
+            48,
+            56,
+            56
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -46934,6 +49770,33 @@
         "spec": "docs/spec/068-hd-small-world-terrain.md",
         "formal_connected": true,
         "review_sha256": "647c178a57f12d8af166f979293e313b73025ad7f252da5f1a80ac49c5753b0f"
+      },
+      "cold_start_entry_sample": {
+        "calls": 12,
+        "candidate_research_ids": [
+          1407
+        ],
+        "rectangles": [
+          [
+            160,
+            88,
+            168,
+            96
+          ],
+          [
+            144,
+            136,
+            152,
+            144
+          ],
+          [
+            48,
+            24,
+            56,
+            32
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -47168,6 +50031,27 @@
         "spec": "docs/spec/068-hd-small-world-terrain.md",
         "formal_connected": true,
         "review_sha256": "647c178a57f12d8af166f979293e313b73025ad7f252da5f1a80ac49c5753b0f"
+      },
+      "cold_start_entry_sample": {
+        "calls": 7,
+        "candidate_research_ids": [
+          1414
+        ],
+        "rectangles": [
+          [
+            152,
+            88,
+            160,
+            96
+          ],
+          [
+            40,
+            24,
+            48,
+            32
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -47252,6 +50136,27 @@
         "spec": "docs/spec/068-hd-small-world-terrain.md",
         "formal_connected": true,
         "review_sha256": "647c178a57f12d8af166f979293e313b73025ad7f252da5f1a80ac49c5753b0f"
+      },
+      "cold_start_entry_sample": {
+        "calls": 7,
+        "candidate_research_ids": [
+          1415
+        ],
+        "rectangles": [
+          [
+            160,
+            104,
+            168,
+            112
+          ],
+          [
+            48,
+            40,
+            56,
+            48
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -47536,6 +50441,27 @@
         "spec": "docs/spec/068-hd-small-world-terrain.md",
         "formal_connected": true,
         "review_sha256": "647c178a57f12d8af166f979293e313b73025ad7f252da5f1a80ac49c5753b0f"
+      },
+      "cold_start_entry_sample": {
+        "calls": 7,
+        "candidate_research_ids": [
+          1424
+        ],
+        "rectangles": [
+          [
+            144,
+            80,
+            152,
+            88
+          ],
+          [
+            32,
+            16,
+            40,
+            24
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -47670,6 +50596,27 @@
         "spec": "docs/spec/068-hd-small-world-terrain.md",
         "formal_connected": true,
         "review_sha256": "647c178a57f12d8af166f979293e313b73025ad7f252da5f1a80ac49c5753b0f"
+      },
+      "cold_start_entry_sample": {
+        "calls": 7,
+        "candidate_research_ids": [
+          1427
+        ],
+        "rectangles": [
+          [
+            144,
+            88,
+            152,
+            96
+          ],
+          [
+            32,
+            24,
+            40,
+            32
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -47941,6 +50888,27 @@
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
         "formal_connected": true,
         "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
+      },
+      "cold_start_entry_sample": {
+        "calls": 7,
+        "candidate_research_ids": [
+          1435
+        ],
+        "rectangles": [
+          [
+            144,
+            80,
+            160,
+            96
+          ],
+          [
+            32,
+            16,
+            48,
+            32
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -48772,6 +51740,801 @@
           ]
         ],
         "claim": "0D46:000A entry only; writes, visibility and animation not granted"
+      },
+      "cold_start_entry_sample": {
+        "calls": 571,
+        "candidate_research_ids": [
+          1436
+        ],
+        "rectangles": [
+          [
+            0,
+            0,
+            16,
+            16
+          ],
+          [
+            16,
+            0,
+            32,
+            16
+          ],
+          [
+            32,
+            0,
+            48,
+            16
+          ],
+          [
+            48,
+            0,
+            64,
+            16
+          ],
+          [
+            64,
+            0,
+            80,
+            16
+          ],
+          [
+            80,
+            0,
+            96,
+            16
+          ],
+          [
+            96,
+            0,
+            112,
+            16
+          ],
+          [
+            112,
+            0,
+            128,
+            16
+          ],
+          [
+            128,
+            0,
+            144,
+            16
+          ],
+          [
+            144,
+            0,
+            160,
+            16
+          ],
+          [
+            160,
+            0,
+            176,
+            16
+          ],
+          [
+            176,
+            0,
+            192,
+            16
+          ],
+          [
+            192,
+            0,
+            208,
+            16
+          ],
+          [
+            208,
+            0,
+            224,
+            16
+          ],
+          [
+            224,
+            0,
+            240,
+            16
+          ],
+          [
+            0,
+            16,
+            16,
+            32
+          ],
+          [
+            16,
+            16,
+            32,
+            32
+          ],
+          [
+            32,
+            16,
+            48,
+            32
+          ],
+          [
+            48,
+            16,
+            64,
+            32
+          ],
+          [
+            64,
+            16,
+            80,
+            32
+          ],
+          [
+            80,
+            16,
+            96,
+            32
+          ],
+          [
+            96,
+            16,
+            112,
+            32
+          ],
+          [
+            112,
+            16,
+            128,
+            32
+          ],
+          [
+            128,
+            16,
+            144,
+            32
+          ],
+          [
+            144,
+            16,
+            160,
+            32
+          ],
+          [
+            160,
+            16,
+            176,
+            32
+          ],
+          [
+            176,
+            16,
+            192,
+            32
+          ],
+          [
+            192,
+            16,
+            208,
+            32
+          ],
+          [
+            208,
+            16,
+            224,
+            32
+          ],
+          [
+            224,
+            16,
+            240,
+            32
+          ],
+          [
+            0,
+            32,
+            16,
+            48
+          ],
+          [
+            16,
+            32,
+            32,
+            48
+          ],
+          [
+            32,
+            32,
+            48,
+            48
+          ],
+          [
+            48,
+            32,
+            64,
+            48
+          ],
+          [
+            64,
+            32,
+            80,
+            48
+          ],
+          [
+            80,
+            32,
+            96,
+            48
+          ],
+          [
+            96,
+            32,
+            112,
+            48
+          ],
+          [
+            112,
+            32,
+            128,
+            48
+          ],
+          [
+            128,
+            32,
+            144,
+            48
+          ],
+          [
+            144,
+            32,
+            160,
+            48
+          ],
+          [
+            160,
+            32,
+            176,
+            48
+          ],
+          [
+            176,
+            32,
+            192,
+            48
+          ],
+          [
+            192,
+            32,
+            208,
+            48
+          ],
+          [
+            208,
+            32,
+            224,
+            48
+          ],
+          [
+            224,
+            32,
+            240,
+            48
+          ],
+          [
+            0,
+            48,
+            16,
+            64
+          ],
+          [
+            16,
+            48,
+            32,
+            64
+          ],
+          [
+            32,
+            48,
+            48,
+            64
+          ],
+          [
+            48,
+            48,
+            64,
+            64
+          ],
+          [
+            64,
+            48,
+            80,
+            64
+          ],
+          [
+            80,
+            48,
+            96,
+            64
+          ],
+          [
+            96,
+            48,
+            112,
+            64
+          ],
+          [
+            112,
+            48,
+            128,
+            64
+          ],
+          [
+            192,
+            48,
+            208,
+            64
+          ],
+          [
+            208,
+            48,
+            224,
+            64
+          ],
+          [
+            224,
+            48,
+            240,
+            64
+          ],
+          [
+            0,
+            64,
+            16,
+            80
+          ],
+          [
+            16,
+            64,
+            32,
+            80
+          ],
+          [
+            32,
+            64,
+            48,
+            80
+          ],
+          [
+            48,
+            64,
+            64,
+            80
+          ],
+          [
+            64,
+            64,
+            80,
+            80
+          ],
+          [
+            80,
+            64,
+            96,
+            80
+          ],
+          [
+            96,
+            64,
+            112,
+            80
+          ],
+          [
+            0,
+            80,
+            16,
+            96
+          ],
+          [
+            16,
+            80,
+            32,
+            96
+          ],
+          [
+            32,
+            80,
+            48,
+            96
+          ],
+          [
+            48,
+            80,
+            64,
+            96
+          ],
+          [
+            64,
+            80,
+            80,
+            96
+          ],
+          [
+            80,
+            80,
+            96,
+            96
+          ],
+          [
+            96,
+            80,
+            112,
+            96
+          ],
+          [
+            0,
+            96,
+            16,
+            112
+          ],
+          [
+            16,
+            96,
+            32,
+            112
+          ],
+          [
+            32,
+            96,
+            48,
+            112
+          ],
+          [
+            48,
+            96,
+            64,
+            112
+          ],
+          [
+            64,
+            96,
+            80,
+            112
+          ],
+          [
+            80,
+            96,
+            96,
+            112
+          ],
+          [
+            96,
+            96,
+            112,
+            112
+          ],
+          [
+            0,
+            112,
+            16,
+            128
+          ],
+          [
+            16,
+            112,
+            32,
+            128
+          ],
+          [
+            32,
+            112,
+            48,
+            128
+          ],
+          [
+            48,
+            112,
+            64,
+            128
+          ],
+          [
+            64,
+            112,
+            80,
+            128
+          ],
+          [
+            80,
+            112,
+            96,
+            128
+          ],
+          [
+            96,
+            112,
+            112,
+            128
+          ],
+          [
+            112,
+            112,
+            128,
+            128
+          ],
+          [
+            224,
+            112,
+            240,
+            128
+          ],
+          [
+            0,
+            128,
+            16,
+            144
+          ],
+          [
+            16,
+            128,
+            32,
+            144
+          ],
+          [
+            32,
+            128,
+            48,
+            144
+          ],
+          [
+            48,
+            128,
+            64,
+            144
+          ],
+          [
+            64,
+            128,
+            80,
+            144
+          ],
+          [
+            80,
+            128,
+            96,
+            144
+          ],
+          [
+            96,
+            128,
+            112,
+            144
+          ],
+          [
+            112,
+            128,
+            128,
+            144
+          ],
+          [
+            128,
+            128,
+            144,
+            144
+          ],
+          [
+            224,
+            128,
+            240,
+            144
+          ],
+          [
+            0,
+            144,
+            16,
+            160
+          ],
+          [
+            16,
+            144,
+            32,
+            160
+          ],
+          [
+            32,
+            144,
+            48,
+            160
+          ],
+          [
+            48,
+            144,
+            64,
+            160
+          ],
+          [
+            64,
+            144,
+            80,
+            160
+          ],
+          [
+            80,
+            144,
+            96,
+            160
+          ],
+          [
+            96,
+            144,
+            112,
+            160
+          ],
+          [
+            112,
+            144,
+            128,
+            160
+          ],
+          [
+            128,
+            144,
+            144,
+            160
+          ],
+          [
+            144,
+            144,
+            160,
+            160
+          ],
+          [
+            224,
+            144,
+            240,
+            160
+          ],
+          [
+            0,
+            160,
+            16,
+            176
+          ],
+          [
+            16,
+            160,
+            32,
+            176
+          ],
+          [
+            32,
+            160,
+            48,
+            176
+          ],
+          [
+            48,
+            160,
+            64,
+            176
+          ],
+          [
+            64,
+            160,
+            80,
+            176
+          ],
+          [
+            80,
+            160,
+            96,
+            176
+          ],
+          [
+            96,
+            160,
+            112,
+            176
+          ],
+          [
+            112,
+            160,
+            128,
+            176
+          ],
+          [
+            128,
+            160,
+            144,
+            176
+          ],
+          [
+            144,
+            160,
+            160,
+            176
+          ],
+          [
+            160,
+            160,
+            176,
+            176
+          ],
+          [
+            224,
+            160,
+            240,
+            176
+          ],
+          [
+            0,
+            176,
+            16,
+            192
+          ],
+          [
+            16,
+            176,
+            32,
+            192
+          ],
+          [
+            32,
+            176,
+            48,
+            192
+          ],
+          [
+            48,
+            176,
+            64,
+            192
+          ],
+          [
+            64,
+            176,
+            80,
+            192
+          ],
+          [
+            80,
+            176,
+            96,
+            192
+          ],
+          [
+            96,
+            176,
+            112,
+            192
+          ],
+          [
+            112,
+            176,
+            128,
+            192
+          ],
+          [
+            128,
+            176,
+            144,
+            192
+          ],
+          [
+            144,
+            176,
+            160,
+            192
+          ],
+          [
+            160,
+            176,
+            176,
+            192
+          ],
+          [
+            224,
+            176,
+            240,
+            192
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -48905,6 +52668,39 @@
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
         "formal_connected": true,
         "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
+      },
+      "cold_start_entry_sample": {
+        "calls": 17,
+        "candidate_research_ids": [
+          1438
+        ],
+        "rectangles": [
+          [
+            176,
+            48,
+            192,
+            64
+          ],
+          [
+            160,
+            64,
+            176,
+            80
+          ],
+          [
+            144,
+            112,
+            160,
+            128
+          ],
+          [
+            32,
+            48,
+            48,
+            64
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
       }
     },
     {
@@ -49880,7 +53676,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "cold_start_entry_sample": {
+        "calls": 1,
+        "candidate_research_ids": [
+          1477
+        ],
+        "rectangles": [
+          [
+            0,
+            0,
+            16,
+            16
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
+      }
     },
     {
       "research_id": 1478,
@@ -49905,7 +53716,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "cold_start_entry_sample": {
+        "calls": 1,
+        "candidate_research_ids": [
+          1478
+        ],
+        "rectangles": [
+          [
+            0,
+            0,
+            16,
+            16
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
+      }
     },
     {
       "research_id": 1479,
@@ -49930,7 +53756,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "cold_start_entry_sample": {
+        "calls": 1,
+        "candidate_research_ids": [
+          1479
+        ],
+        "rectangles": [
+          [
+            0,
+            0,
+            16,
+            16
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
+      }
     },
     {
       "research_id": 1480,
@@ -49955,7 +53796,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "cold_start_entry_sample": {
+        "calls": 1,
+        "candidate_research_ids": [
+          1480
+        ],
+        "rectangles": [
+          [
+            0,
+            0,
+            16,
+            16
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
+      }
     },
     {
       "research_id": 1481,
@@ -49980,7 +53836,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "cold_start_entry_sample": {
+        "calls": 1,
+        "candidate_research_ids": [
+          1481
+        ],
+        "rectangles": [
+          [
+            0,
+            0,
+            16,
+            16
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
+      }
     },
     {
       "research_id": 1482,
@@ -50005,7 +53876,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "cold_start_entry_sample": {
+        "calls": 1,
+        "candidate_research_ids": [
+          1482
+        ],
+        "rectangles": [
+          [
+            0,
+            0,
+            16,
+            16
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
+      }
     },
     {
       "research_id": 1483,
@@ -50030,7 +53916,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "cold_start_entry_sample": {
+        "calls": 1,
+        "candidate_research_ids": [
+          1483
+        ],
+        "rectangles": [
+          [
+            0,
+            0,
+            16,
+            16
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
+      }
     },
     {
       "research_id": 1484,
@@ -50055,7 +53956,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "cold_start_entry_sample": {
+        "calls": 1,
+        "candidate_research_ids": [
+          1484
+        ],
+        "rectangles": [
+          [
+            0,
+            0,
+            16,
+            16
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
+      }
     },
     {
       "research_id": 1485,
@@ -50080,7 +53996,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "cold_start_entry_sample": {
+        "calls": 1,
+        "candidate_research_ids": [
+          1485
+        ],
+        "rectangles": [
+          [
+            0,
+            0,
+            16,
+            16
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
+      }
     },
     {
       "research_id": 1486,
@@ -50105,7 +54036,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "cold_start_entry_sample": {
+        "calls": 1,
+        "candidate_research_ids": [
+          1486
+        ],
+        "rectangles": [
+          [
+            0,
+            0,
+            16,
+            16
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
+      }
     },
     {
       "research_id": 1487,
@@ -50130,7 +54076,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "cold_start_entry_sample": {
+        "calls": 1,
+        "candidate_research_ids": [
+          1487
+        ],
+        "rectangles": [
+          [
+            0,
+            0,
+            16,
+            16
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
+      }
     },
     {
       "research_id": 1488,
@@ -50155,7 +54116,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "cold_start_entry_sample": {
+        "calls": 1,
+        "candidate_research_ids": [
+          1488
+        ],
+        "rectangles": [
+          [
+            0,
+            0,
+            16,
+            16
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
+      }
     },
     {
       "research_id": 1489,
@@ -51755,7 +55731,35 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "cold_start_entry_sample": {
+        "calls": 1,
+        "candidate_research_ids": [
+          1552
+        ],
+        "rectangles": [
+          [
+            0,
+            0,
+            32,
+            24
+          ]
+        ],
+        "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "background_texture_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "source_writes": 768,
+        "visible_native_cells": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "report_sha256": "7127dbd0f20691e81f737d4fe54c378edd31135f26028d7add85bdaf6eb6f90b",
+        "formal_connected": false
+      }
     }
   ],
   "declared_encoding_alias_groups": [
@@ -52700,5 +56704,23 @@
     "dos_inputs": 143,
     "production_connected": false,
     "claim": "native evidence only; zero visible samples do not imply unreachable sources; HD scope remains in spec068"
+  },
+  "cold_start_entry_evidence": {
+    "report_sha256": "406b174592082d71330aacd421bf8d1a3cf771c8872a8a45db79252e36959c92",
+    "source_sha256": "87b1aa030afa26dc143a655c149fd6b266aad5a04da7d28a4b24be3546cd2fb5",
+    "binary_sha256": "73005eeada5e8eea39ae8eee9d17d9f703ce81b8aa3864866a0d79c60970fe9b",
+    "calls": 2022,
+    "additional_calls_before_50000000": 17,
+    "checkpoints": 49,
+    "dos_inputs": 53,
+    "production_connected": false
+  },
+  "background_source_evidence": {
+    "report_sha256": "7127dbd0f20691e81f737d4fe54c378edd31135f26028d7add85bdaf6eb6f90b",
+    "texture_sources": 3,
+    "native_menu_points": 4,
+    "source_events": 280237,
+    "pik_decode_writes": 64000,
+    "production_connected": false
   }
 }

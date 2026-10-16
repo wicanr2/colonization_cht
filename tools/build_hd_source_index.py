@@ -4,6 +4,8 @@ from pathlib import Path
 parser=argparse.ArgumentParser(description=__doc__)
 for name in ['catalog','manifest','assets','output']:parser.add_argument('--'+name,type=Path,required=True)
 parser.add_argument('--entry-report',type=Path,help='可選：R49正常路徑全SS唯讀入口收據')
+parser.add_argument('--cold-start-entry-report',type=Path,help='可選：規格069由步數0起的全SS入口收據，不授予HD信用')
+parser.add_argument('--background-source-report',type=Path,help='可選：規格069主選單背景／底紋逐寫模型，不授予HD信用')
 parser.add_argument('--small-report',type=Path,help='可選：R49的31種小圖像逐寫審查收據')
 parser.add_argument('--small-build',type=Path,help='與small-report一起使用的小圖像來源綁定')
 parser.add_argument('--small-ram-root',type=Path,help='可選：R51小圖像RAM／游標研究根目錄')
@@ -192,6 +194,30 @@ if a.small_terrain_report:
    if small_review:f['source_contract_reference']['review_sha256']=sha(a.small_terrain_conformed_report or a.small_terrain_ready_report)
   else:assert sample['visible_native_cells']==0 and not f['formal_assets']
  public['small_terrain_native_evidence']={'report_sha256':sha(a.small_terrain_report),'sources':15,'targets':sorted(targets),'checkpoints':65,'dos_inputs':143,'production_connected':False,'claim':'native evidence only; zero visible samples do not imply unreachable sources; HD scope remains in spec068'}
+if a.cold_start_entry_report:
+ cold=json.loads(a.cold_start_entry_report.read_bytes())
+ assert cold['result']=='PASS_READONLY_COLD_START_SS_ENTRY_CATALOG' and cold['original_state_and_saves_equal']
+ assert (cold['calls'],cold['unique_match_calls'],cold['ambiguous_match_calls'],cold['unmapped_calls'])==(2022,1948,74,0)
+ assert cold['checkpoints']==49 and cold['dos_inputs']==53
+ assert cold['input_hashes']=={f['file']:f['sha256'] for f in d['files'] if f['format']=='SS'}
+ by_id={f['research_id']:f for f in frames}
+ for group in cold['groups'].values():
+  for n in group['candidate_research_ids']:
+   f=by_id[n];assert f['encoded_sha256']==group['source_hash']
+   assert any(s['file']==f['file'] and s['ordinal']==f['ordinal'] and s['size']==f['size'] for s in group['sources'])
+   f['cold_start_entry_sample']={'calls':group['calls'],'candidate_research_ids':group['candidate_research_ids'],'rectangles':group['rectangles'],'claim':'entry only from step 0; no visibility, animation or HD credit'}
+ public['cold_start_entry_evidence']={'report_sha256':sha(a.cold_start_entry_report),'source_sha256':cold['source_sha256'],'binary_sha256':cold['binary_sha256'],'calls':2022,'additional_calls_before_50000000':17,'checkpoints':49,'dos_inputs':53,'production_connected':False}
+if a.background_source_report:
+ assert a.cold_start_entry_report
+ background=json.loads(a.background_source_report.read_bytes())
+ assert background['result']=='PASS_BACKGROUND_SOURCE_WRITES_AND_FOUR_TEXTURE_MODELS' and not background['production_connected']
+ assert background['checkpoints']==4 and background['dos_inputs']==7 and background['pik_native_write_count']==64000
+ for row in background['texture_sources']:
+  f=by_id[row['source_id']];assert f['file']==row['file'] and f['indexed_sha256']==row['indexed_sha256']
+  f['background_texture_native_sample']={'state':'DRAFT','spec':'docs/spec/069-hd-menu-background-and-textures.md','source_writes':row['writes'],'visible_native_cells':[p['visible'].get(str(row['source_id']),0) for p in background['points']],'report_sha256':sha(a.background_source_report),'formal_connected':False}
+ pik=by_id[1181];assert pik['file']=='OPENMENU.PIK' and pik['indexed_sha256']==background['pik_decoded_sha256']
+ pik['background_native_decode_sample']={'state':'DRAFT','spec':'docs/spec/069-hd-menu-background-and-textures.md','writes':64000,'report_sha256':sha(a.background_source_report),'claim':'exact decoded stage pixels only; VGA and presentation lifecycle unverified','formal_connected':False}
+ public['background_source_evidence']={'report_sha256':sha(a.background_source_report),'texture_sources':3,'native_menu_points':4,'source_events':background['events'],'pik_decode_writes':64000,'production_connected':False}
 public['coverage_limits']['additional_ready_source_contracts']=sum(f.get('source_contract_reference',{}).get('state')=='READY' and not f.get('source_contract_reference',{}).get('formal_connected') for f in frames)
 out.write_text(json.dumps(public,ensure_ascii=False,indent=2)+'\n')
 print('PASS_METADATA_ONLY_FULL_SOURCE_INDEX',len(frames),len(bindings),sha(out),flush=True)
