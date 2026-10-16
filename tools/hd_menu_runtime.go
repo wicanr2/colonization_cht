@@ -32,6 +32,8 @@ type hdTexturePair struct {
 	hasUnder   bool
 }
 type hdTextureRuntime struct {
+	sourceEncodedSHA, sourcePixelsSHA, sourcePaletteSHA                       string
+	paletteIndices                                                            []byte
 	h                                                                         *hdRuntime
 	art                                                                       *image.RGBA
 	owners                                                                    map[uint32]hdTextureCell
@@ -54,18 +56,35 @@ var hdTextureCopyCodes = map[uint16][]byte{
 }
 
 func loadHDTextureRuntime(h *hdRuntime, game, dir string) (*hdTextureRuntime, error) {
-	raw, err := hdReadFile(filepath.Join(game, "OPENTILE.SS"), 8<<20)
+	return loadHDTextureVariant(h, game, dir, false)
+}
+func loadHDTextureVariant(h *hdRuntime, game, dir string, world bool) (*hdTextureRuntime, error) {
+	sourceName, assetName := "OPENTILE.SS", "opentile-000.png"
+	originalSHA := "078cc88895ca523498cdcb90d29684ceb0f311007a53a4a20d16b17db7514402"
+	assetSHA := "cb2a8af8077d1e6fd0082d753e7cc0251192df0705ebe34496f1954f5cdc4547"
+	encodedSHA := "17bbc06dd4b282eb5d649257f0fb639cda7d73820c0ce05f1db32fdea5203ad7"
+	pixelsSHA := hdTexturePixelsSHA
+	if world {
+		sourceName = "WOODTILE.SS"
+		assetName = "woodtile-000.png"
+		originalSHA = "7b689b766b0f9027627b1a731d8e813a38678b21be41e00d294ecb2cd41ec89c"
+		assetSHA = "8580efcf85a45fa879938b5b73e8d54c58853dd9297e8ecd1f10801e637bb5d9"
+		encodedSHA = "e33bfeabb5830cec122f88ea7909f2c0fca49a9ec234b2e622cac584cd73499a"
+		pixelsSHA = "5cdc9463574bcab9041271e19a92b8a24af408d9c1e4f59e9b6fefbc23b55ce3"
+	}
+
+	raw, err := hdReadFile(filepath.Join(game, sourceName), 8<<20)
 	if err != nil {
 		return nil, err
 	}
-	if hash(raw) != "078cc88895ca523498cdcb90d29684ceb0f311007a53a4a20d16b17db7514402" {
+	if hash(raw) != originalSHA {
 		return nil, fmt.Errorf("texture original fingerprint")
 	}
-	raw, err = hdReadFile(filepath.Join(dir, "opentile-000.png"), 8<<20)
+	raw, err = hdReadFile(filepath.Join(dir, assetName), 8<<20)
 	if err != nil {
 		return nil, err
 	}
-	if hash(raw) != "cb2a8af8077d1e6fd0082d753e7cc0251192df0705ebe34496f1954f5cdc4547" {
+	if hash(raw) != assetSHA {
 		return nil, fmt.Errorf("texture candidate fingerprint")
 	}
 	im, err := png.Decode(bytes.NewReader(raw))
@@ -76,6 +95,11 @@ func loadHDTextureRuntime(h *hdRuntime, game, dir string) (*hdTextureRuntime, er
 		return nil, fmt.Errorf("texture candidate shape")
 	}
 	p := &hdTextureRuntime{h: h, art: image.NewRGBA(image.Rect(0, 0, 128, 96)), owners: map[uint32]hdTextureCell{}, pending: map[uint32]hdTexturePair{}, underlays: map[uint32]hdTextureUnderlay{}}
+	p.sourceEncodedSHA, p.sourcePixelsSHA, p.sourcePaletteSHA = encodedSHA, pixelsSHA, hdTexturePaletteSHA
+	if world {
+		p.paletteIndices = []byte{128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138}
+		p.sourcePaletteSHA = "84794389fcc2d6ee1bc645822433a74736551ccd1c8d0ed73507235ac42e3896"
+	}
 	for y := 0; y < 96; y++ {
 		for x := 0; x < 128; x++ {
 			c := color.RGBAModel.Convert(im.At((2*x+1)*1448/256, (2*y+1)*1086/192)).(color.RGBA)
@@ -84,6 +108,9 @@ func loadHDTextureRuntime(h *hdRuntime, game, dir string) (*hdTextureRuntime, er
 			}
 			p.art.SetRGBA(x, y, c)
 		}
+	}
+	if world {
+		return p, nil
 	}
 	for name, want := range map[string]string{"VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3", "OPENMENU.PIK": "f25c313c66a8f49bf79487fcecbcf76dafff2a81b713f2f3cb2e2d4349fd2004"} {
 		raw, err = hdReadFile(filepath.Join(game, name), 8<<20)
@@ -155,7 +182,7 @@ func (p *hdTextureRuntime) beforeInstruction() {
 		return
 	}
 	at := int(record[1])*16 + int(record[0])
-	if int(record[0])+722 > 65536 || at+722 > len(m.Mem) || hash(m.Mem[at:at+722]) != "17bbc06dd4b282eb5d649257f0fb639cda7d73820c0ce05f1db32fdea5203ad7" {
+	if int(record[0])+722 > 65536 || at+722 > len(m.Mem) || hash(m.Mem[at:at+722]) != p.sourceEncodedSHA {
 		return
 	}
 	base := uint32(dest[3])*16 + uint32(dest[2])
@@ -174,7 +201,7 @@ func (p *hdTextureRuntime) finish() {
 			return
 		}
 	}
-	if hash(p.writes[:]) != hdTexturePixelsSHA {
+	if hash(p.writes[:]) != p.sourcePixelsSHA {
 		p.rejected++
 		return
 	}
@@ -190,7 +217,7 @@ func (p *hdTextureRuntime) memoryWrite(addr uint32, old, value byte) {
 	}
 	m := p.h.m
 	cs, ip := m.CPU.OpAddr()
-	if p.picture == nil && addr == 0x3c500+63999 && cs == 0x11b5 {
+	if p.pictureArt != nil && p.picture == nil && addr == 0x3c500+63999 && cs == 0x11b5 {
 		pc := int(cs)*16 + int(ip)
 		known := (ip == 0x4ee && bytes.Equal(m.Mem[pc:pc+16], []byte{0xa4, 0xeb, 0xed, 0x33, 0xc9, 0x4a, 0x75, 9, 0xad, 0xb2, 0x10, 0xd1, 0xed, 0x8b, 0xe8, 0xd1})) || (ip == 0x54a && bytes.Equal(m.Mem[pc:pc+16], []byte{0xaa, 0xe2, 0xfa, 0xeb, 0x8f, 0xac, 0x0a, 0xc0, 0x74, 0x32, 0x3c, 1, 0x74, 5, 0x8a, 0xc8}))
 		if known && hash(m.Mem[0x3c500:0x3c500+64000]) == "5325a3501b83df510cee60c134952130fdb9dfd4bdc00d9eb853fb7ae6021eff" {
@@ -302,7 +329,7 @@ func (p *hdTextureRuntime) memoryWrite(addr uint32, old, value byte) {
 func (p *hdTextureRuntime) paint(out *image.RGBA, f draftNativeFrame) map[string]any {
 	mask := make([]byte, 8000)
 	painted := 0
-	supported := hash(f.palette) == hdTexturePaletteSHA
+	supported := p.paletteSupported(f.palette)
 	if supported {
 		for a, c := range p.owners {
 			if a < hdBuildingCanvas || a >= hdBuildingCanvas+64000 {
@@ -329,11 +356,14 @@ func (h *hdRuntime) base(f draftNativeFrame) (*image.RGBA, map[string]any) {
 			record["texture"] = h.texture.paint(out, f)
 		}
 	}
+	if h.worldTexture != nil && record["reason"] != "unverified-cursor-or-native-surface" {
+		record["world_texture"] = h.worldTexture.paint(out, f)
+	}
 	return out, record
 }
 
 func (p *hdTextureRuntime) paintBackground(out *image.RGBA, f draftNativeFrame, pos int, v byte, palette []byte) bool {
-	if pos < 0 || pos >= 64000 || len(f.canvas) != 64000 || hash(palette) != hdTexturePaletteSHA {
+	if pos < 0 || pos >= 64000 || len(f.canvas) != 64000 || !p.paletteSupported(palette) {
 		return false
 	}
 	addr := hdBuildingCanvas + uint32(pos)
@@ -390,4 +420,19 @@ func (p *hdTextureRuntime) paintPicture(out *image.RGBA, f draftNativeFrame) map
 	}
 	record["painted"], record["matched"] = count, true
 	return record
+}
+
+func (p *hdTextureRuntime) paletteSupported(palette []byte) bool {
+	if len(palette) != 768 {
+		return false
+	}
+	if len(p.paletteIndices) == 0 {
+		return hash(palette) == p.sourcePaletteSHA
+	}
+	raw := make([]byte, 0, len(p.paletteIndices)*4)
+	for _, i := range p.paletteIndices {
+		raw = append(raw, i)
+		raw = append(raw, palette[int(i)*3:int(i)*3+3]...)
+	}
+	return hash(raw) == p.sourcePaletteSHA
 }

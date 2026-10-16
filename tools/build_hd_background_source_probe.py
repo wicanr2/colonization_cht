@@ -7,6 +7,7 @@ for name in ["entry","reference","output"]:
 parser.add_argument('--points',type=Path,help='可選：實際GUI檢查點；需同時提供inputs及end-step')
 parser.add_argument('--inputs',type=Path,help='與points配對的實際DOS輸入')
 parser.add_argument('--end-step',type=int,help='與points配對的有界原版終點')
+parser.add_argument('--copy-closure',action='store_true',help='另記錄已驗RAM複製目的及後續撤銷寫入，最多300000個位址')
 a=parser.parse_args()
 repo=Path(__file__).resolve().parents[1];out=a.output.resolve()
 assert Path("/.dockerenv").is_file() and os.getuid()!=0
@@ -119,6 +120,18 @@ func (b *backgroundTrace) close() {
 }
 var backgroundDOS *golem.DOS
 '''
+if a.copy_closure:
+    TRACER=TRACER.replace('type backgroundTrace struct {','type backgroundTrace struct {\n copyAddresses map[uint32]bool',1)
+    needle=' if !yes{return};if b.events>=6000000'
+    assert TRACER.count(needle)==1
+    TRACER=TRACER.replace(needle,''' // Observe copy destinations and all later invalidations, without assigning ownership.
+ if cs,ip:=b.m.CPU.OpAddr();cs==0xcba && (ip==0x9c || ip==0x9e || ip==0xca) && a<0xa0000 {
+  if b.copyAddresses==nil{b.copyAddresses=map[uint32]bool{}}
+  b.copyAddresses[a]=true
+  if len(b.copyAddresses)>300000{panic("copy observation address limit")}
+ }
+ yes=yes||b.copyAddresses[a]
+'''+needle,1)
 s+="\n"+TRACER
 (out/"main.go").write_text(s)
 for name in ["go.mod","go.sum","go.work"]:shutil.copyfile(a.reference/name,out/name)
@@ -126,5 +139,6 @@ subprocess.run(["gofmt","-w","main.go"],cwd=out,check=True,timeout=20)
 for cmd in [["go","build","-trimpath","-o","background-probe","."],["go","vet","."]]:
     subprocess.run(cmd,cwd=out,check=True,timeout=120)
 meta={"kind":"DRAFT-readonly-background-source-collector","source_sha256":sha(out/"main.go"),"binary_sha256":sha(out/"background-probe"),"generator_sha256":sha(Path(__file__)),"entry_source_sha256":sha(a.entry/"entry-catalog.go"),"points_sha256":sha(out/"points.json"),"sources":3,"event_limit":6000000,"end":end,"production_connected":False}
+if a.copy_closure:meta['copy_closure_address_limit']=300000
 (out/"build.json").write_text(json.dumps(meta,indent=2)+"\n")
 print("PASS_BACKGROUND_SOURCE_COLLECTOR_BUILD",meta["source_sha256"],flush=True)

@@ -80,6 +80,8 @@ func TestHDMenuRegressionNative89(t *testing.T) {
 	m.EnableOPLSynth(true)
 	h, err := loadHDRuntime(m, game, os.Getenv("TEST_HD_ASSETS"))
 	need(err)
+	// 本項只隔離主選單圖層；世界木紋由TestHDWorldWoodNative89另驗。
+	h.worldTexture = nil
 	p := h.texture
 	if p == nil {
 		t.Fatal("底紋原型未載入")
@@ -581,5 +583,379 @@ func TestHDMenuAssetsAndOriginalGuards(t *testing.T) {
 				})
 			}
 		}
+	}
+}
+
+func TestHDWorldWoodNative89(t *testing.T) {
+	game, reference, out := os.Getenv("TEST_GAME_ROOT"), os.Getenv("TEST_WORLD_WOOD_REFERENCE"), os.Getenv("TEST_WORLD_WOOD_OUTPUT")
+	if game == "" || reference == "" || out == "" {
+		t.Skip("需要合法原版及正常GUI前綴")
+	}
+	for _, n := range []string{"OPENING.EXE", "VICEROY.EXE", "OPENTILE.SS", "WOODTILE.SS"} {
+		if _, err := os.Stat(filepath.Join(game, n)); os.IsNotExist(err) {
+			t.Skip("缺合法原版", n)
+		}
+	}
+	need := func(err error) {
+		t.Helper()
+		if err != nil {
+			t.Fatal(err)
+		}
+	}
+	read := func(p string) []byte { t.Helper(); b, err := os.ReadFile(p); need(err); return b }
+	var replay struct {
+		Inputs []windowInput
+		End    uint64
+	}
+	raw := read(os.Getenv("TEST_TEXTURE_INPUTS"))
+	if hash(raw) != "8b2b05308d091046379eca38e760f5fbf57fa863625ad53f78b8d3b30dab6b58" {
+		t.Fatal("原始輸入不同")
+	}
+	need(json.Unmarshal(raw, &replay))
+	type state struct {
+		Steps     uint64
+		Count     uint64 `json:"dos_input_count"`
+		Memory    string `json:"memory_sha256"`
+		Indexed   string `json:"indexed_sha256"`
+		Palette   string `json:"palette_sha256"`
+		Registers [8]uint16
+		Segments  [4]uint16
+		IP, Flags uint16
+		Cycles    uint64
+	}
+	var oracle struct {
+		Checkpoints []state
+		End         state
+	}
+	need(json.Unmarshal(read(filepath.Join(reference, "control/draws.json")), &oracle))
+	if len(oracle.Checkpoints) != 89 || oracle.End.Steps != 280665001 {
+		t.Fatal("89點範圍不同")
+	}
+	need(os.Mkdir(out, 0755))
+	scratch := filepath.Join(out, "save")
+	need(os.Mkdir(scratch, 0755))
+	seed := read(os.Getenv("TEST_TEXTURE_SEED"))
+	if hash(seed) != "52ae8b7bd4bea1869afb825af165a8edc50882fc176d49985d4fb3c362d5469b" {
+		t.Fatal("原始存檔不同")
+	}
+	need(os.WriteFile(filepath.Join(scratch, "COLONY09.SAV"), seed, 0644))
+	m := golem.New()
+	need(m.LoadEXE(read(filepath.Join(game, "OPENING.EXE"))))
+	m.Write8(uint32(golem.PSPSeg)*16+0x80, 2)
+	m.WriteBytes(uint32(golem.PSPSeg)*16+0x81, []byte{'-', 'g', 13})
+	d := golem.NewDOS(m, game)
+	d.Scratch = scratch
+	d.Install()
+	defer d.Close()
+	m.SetSoundBlasterPro(true)
+	if !m.EnableSBDigital() {
+		t.Fatal("缺數位音訊")
+	}
+	m.EnableOPLSynth(true)
+	h, err := loadHDRuntime(m, game, os.Getenv("TEST_HD_ASSETS"))
+	need(err)
+	p := h.worldTexture
+	if p == nil {
+		t.Fatal("底紋原型未載入")
+	}
+	var checkedTransfers, lastTransfers uint64
+	extraPages := map[uint32]uint64{}
+	m.WatchWrite(0, 0xaffff, func(_ *golem.Machine, a uint32, old, value byte) {
+		delta := p.transferred - lastTransfers
+		lastTransfers = p.transferred
+		if delta > 1 {
+			t.Fatal("單次來源複製計數異常", delta)
+		}
+		if delta == 0 {
+			return
+		}
+		observed := (a >= 0x2cae0 && a < 0x2cae0+64000) || (a >= 0x3c500 && a < 0x3c500+64000)
+		for _, base := range []uint32{404160, 404960, 181952} {
+			observed = observed || (a >= base && a < base+768)
+		}
+		if observed {
+			checkedTransfers += delta
+		} else {
+			extraPages[a>>8] += delta
+		}
+	})
+	m.SetBeforeInstruction(h.beforeInstruction)
+	checkState := func(s state) {
+		t.Helper()
+		c := m.CPU
+		if hash(m.Mem) != s.Memory || hash(m.Indexed()) != s.Indexed || hash(m.DAC[:]) != s.Palette || c.R != s.Registers || c.Seg != s.Segments || c.IP != s.IP || c.Flags != s.Flags || c.Cycles != s.Cycles {
+			t.Fatal("原版完整狀態不同", m.Steps)
+		}
+	}
+	at, count := 0, uint64(0)
+	var records []map[string]any
+	totalPixels := 0
+	seenLarge := false
+	var model struct {
+		Transfers map[string]uint64 `json:"texture_transfer_writes"`
+		Cursor    map[string]uint64 `json:"texture_cursor_pairs"`
+	}
+	need(json.Unmarshal(read(filepath.Join(os.Getenv("TEST_WORLD_WOOD_MODEL"), "check.json")), &model))
+	capture := func() {
+		if at == 89 {
+			return
+		}
+		s := oracle.Checkpoints[at]
+		if m.Steps > s.Steps || (m.Steps == s.Steps && count > s.Count) {
+			t.Fatal("略過原版點", at)
+		}
+		if m.Steps != s.Steps || count != s.Count {
+			return
+		}
+		checkState(s)
+		var want map[int]struct {
+			ID     int  `json:"source_id"`
+			Local  int  `json:"local"`
+			Native byte `json:"native"`
+		}
+		need(json.Unmarshal(read(filepath.Join(os.Getenv("TEST_WORLD_WOOD_MODEL"), fmt.Sprintf("point-%03d.texture-owners.json", at))), &want))
+		for k, w := range want {
+			if w.ID != 1552 {
+				delete(want, k)
+			}
+		}
+		owned := map[int]hdTextureCell{}
+		for a, c := range p.owners {
+			if a >= hdBuildingCanvas && a < hdBuildingCanvas+64000 {
+				owned[int(a-hdBuildingCanvas)] = c
+			}
+		}
+		if len(owned) != len(want) {
+			t.Fatal("來源格數不同", len(owned), len(want))
+		}
+		largeLocal := false
+		for k, w := range want {
+			c, ok := owned[k]
+			if !ok || w.ID != 1552 || int(c.local) != w.Local || c.native != w.Native {
+				t.Fatal("獨立來源模型不同", at, k, c, w)
+			}
+			largeLocal = largeLocal || w.Local > 255
+		}
+		seenLarge = seenLarge || largeLocal
+		f := draftNativeFrame{canvas: m.Mem[hdBuildingCanvas : hdBuildingCanvas+64000], indexed: m.Indexed(), palette: m.DAC[:], cursor: image.Rect(int(d.Mouse.X), int(d.Mouse.Y), int(d.Mouse.X)+16, int(d.Mouse.Y)+16), mode: m.VideoMode(), step: m.Steps}
+		h.worldTexture = nil
+		baseline, _ := h.base(f)
+		h.worldTexture = p
+		im, receipt := h.base(f)
+		h.restoreCursor(im, f)
+		h.cursor.paint(h, im, f)
+		h.restoreCursor(baseline, f)
+		h.cursor.paint(h, baseline, f)
+		pixels := 0
+		supported := p.paletteSupported(f.palette) && receipt["reason"] != "unverified-cursor-or-native-surface"
+		for y := 0; y < 800; y++ {
+			for x := 0; x < 1280; x++ {
+				if image.Pt(x/4, y/4).In(f.cursor) {
+					continue
+				}
+				k := (y/4)*320 + x/4
+				c, ok := owned[k]
+				if !ok || !supported {
+					if im.RGBAAt(x, y) != baseline.RGBAAt(x, y) {
+						t.Fatal("來源外像素被改", at, x, y)
+					}
+					continue
+				}
+				sx, sy := int(c.local)%32*4+x%4, int(c.local)/32*4+y%4
+				if im.RGBAAt(x, y) != p.art.RGBAAt(sx, sy) {
+					t.Fatal("底紋RGBA不同", at, x, y)
+				}
+				pixels++
+			}
+		}
+		expectedPixels := 0
+		for k := range owned {
+			if !image.Pt(k%320, k/320).In(f.cursor) {
+				expectedPixels += 16
+			}
+		}
+		if supported && pixels != expectedPixels {
+			t.Fatal("像素數不同", pixels)
+		}
+		totalPixels += pixels
+		checkState(s)
+		// 未證實色盤維持原版，原本合成畫布不能被改。
+		unsupported := f
+		unsupported.palette = append([]byte(nil), f.palette...)
+		unsupported.palette[128*3] ^= 1
+		n := image.NewRGBA(im.Bounds())
+		copy(n.Pix, baseline.Pix)
+		record := p.paint(n, unsupported)
+		if record["painted"].(int) != 0 || !bytes.Equal(n.Pix, baseline.Pix) {
+			t.Fatal("未證實色盤沒有回退")
+		}
+		// 任何未知同值寫入撤銷已驗來源。
+		clone := *p
+		clone.owners = map[uint32]hdTextureCell{}
+		for a, c := range p.owners {
+			clone.owners[a] = c
+		}
+		hh := *h
+		hh.m = golem.New()
+		copy(hh.m.Mem, m.Mem)
+		clone.h = &hh
+		clone.active = false
+		clone.pending = map[uint32]hdTexturePair{}
+		clone.underlays = map[uint32]hdTextureUnderlay{}
+		for k, c := range owned {
+			a := hdBuildingCanvas + uint32(k)
+			clone.memoryWrite(a, c.native, c.native)
+			if _, ok := clone.owners[a]; ok {
+				t.Fatal("同值未知寫入未撤銷")
+			}
+			break
+		}
+		var wantUnder map[int]struct {
+			ID     int  `json:"source_id"`
+			Local  int  `json:"local"`
+			Native byte `json:"native"`
+			Glyph  byte `json:"glyph_native"`
+		}
+		need(json.Unmarshal(read(filepath.Join(os.Getenv("TEST_WORLD_WOOD_MODEL"), fmt.Sprintf("point-%03d.texture-underlays.json", at))), &wantUnder))
+		for k, w := range wantUnder {
+			if w.ID != 1552 {
+				delete(wantUnder, k)
+			}
+		}
+		if len(wantUnder) != len(p.underlays) {
+			t.Fatal("獨立木紋文字底色數量不同", at, len(wantUnder), len(p.underlays))
+		}
+		for k, w := range wantUnder {
+			u, ok := p.underlays[hdBuildingCanvas+uint32(k)]
+			if !ok || int(u.cell.local) != w.Local || u.cell.native != w.Native || u.glyph != w.Glyph {
+				t.Fatal("獨立木紋底色不同", at, k)
+			}
+		}
+		if at%14 == 0 || at == 88 {
+			name := filepath.Join(out, fmt.Sprintf("point-%03d", at))
+			file, err := os.Create(name + ".png")
+			need(err)
+			need(png.Encode(file, im))
+			need(file.Close())
+			file, err = os.Create(name + ".baseline.png")
+			need(err)
+			need(png.Encode(file, baseline))
+			need(file.Close())
+		}
+		receipt["step"], receipt["point"], receipt["verified_rgba_pixels"] = m.Steps, at, pixels
+		records = append(records, receipt)
+		at++
+	}
+	step := func() { capture(); need(m.Step()) }
+	for _, e := range replay.Inputs {
+		if e.Step > 280665001 {
+			break
+		}
+		for m.Steps < e.Step {
+			step()
+		}
+		capture()
+		applyWindowInput(d, e)
+		count++
+		capture()
+	}
+	for m.Steps < 280665001 {
+		step()
+	}
+	capture()
+	checkState(oracle.End)
+	diagnostic, diagnosticErr := json.MarshalIndent(map[string]any{"points": at, "inputs": count, "accepted": p.accepted, "rejected": p.rejected, "transferred": p.transferred, "checked_transfers": checkedTransfers, "expected_transfers": model.Transfers["1552"], "cursor_restores": p.cursorRestores, "expected_cursor_restores": model.Cursor["1552"], "extra_pages": extraPages}, "", "  ")
+	need(diagnosticErr)
+	need(os.WriteFile(filepath.Join(out, "diagnostic-final.json"), diagnostic, 0644))
+	if at != 89 || count != 165 || p.accepted != 1 || p.rejected != 0 || p.transferred != model.Transfers["1552"] || p.cursorRestores != model.Cursor["1552"] {
+		t.Fatal("原版來源範圍不同", at, count, p.accepted, p.rejected, p.transferred)
+	}
+	if !bytes.Equal(m.Mem, read(filepath.Join(reference, "control/final.memory"))) {
+		t.Fatal("原版終點RAM不同")
+	}
+	d.Close()
+	for _, n := range []string{"COLONY09.SAV", "COLONY00.SAV"} {
+		if !bytes.Equal(read(filepath.Join(scratch, n)), read(filepath.Join(reference, "control/saves", n))) {
+			t.Fatal("原版存檔不同", n)
+		}
+	}
+	proof := map[string]any{"result": "PASS_WORLD_WOOD_NATIVE_89_SOURCE_RGBA_AND_UNDERLAY_POINTS", "production_connected": true, "checkpoints": 89, "dos_inputs": 165, "accepted": p.accepted, "transferred": p.transferred, "transferred_in_original_trace_regions": checkedTransfers, "transfers_outside_original_trace_regions_by_page": extraPages, "rgba_pixels": totalPixels, "large_index_positive_in_this_cohort": seenLarge, "cursor_source_restores": p.cursorRestores, "original_state_and_saves_equal": true, "points": records}
+	raw, err = json.MarshalIndent(proof, "", "  ")
+	need(err)
+	need(os.WriteFile(filepath.Join(out, "check.json"), append(raw, '\n'), 0644))
+}
+
+func TestHDWorldWoodAssetsAndPalette(t *testing.T) {
+	game, assets, reference := os.Getenv("TEST_GAME_ROOT"), os.Getenv("TEST_HD_ASSETS"), os.Getenv("TEST_WORLD_WOOD_REFERENCE")
+	if game == "" || assets == "" || reference == "" {
+		t.Skip("需要合法原版、生成圖及89點原版收據")
+	}
+	read := func(path string) []byte {
+		t.Helper()
+		b, err := os.ReadFile(path)
+		if err != nil {
+			t.Fatal(err)
+		}
+		return b
+	}
+	wood := read(filepath.Join(game, "WOODTILE.SS"))
+	art := read(filepath.Join(assets, "woodtile-000.png"))
+	for _, kind := range []string{"missing", "bad", "linked"} {
+		for _, source := range []bool{false, true} {
+			name := "art/" + kind
+			if source {
+				name = "original/" + kind
+			}
+			t.Run(name, func(t *testing.T) {
+				dir := t.TempDir()
+				for n, b := range map[string][]byte{"WOODTILE.SS": wood, "woodtile-000.png": art} {
+					if err := os.WriteFile(filepath.Join(dir, n), b, 0644); err != nil {
+						t.Fatal(err)
+					}
+				}
+				file, original := "woodtile-000.png", filepath.Join(assets, "woodtile-000.png")
+				if source {
+					file, original = "WOODTILE.SS", filepath.Join(game, "WOODTILE.SS")
+				}
+				path := filepath.Join(dir, file)
+				if err := os.Remove(path); err != nil {
+					t.Fatal(err)
+				}
+				if kind == "bad" {
+					if err := os.WriteFile(path, []byte("wrong"), 0644); err != nil {
+						t.Fatal(err)
+					}
+				}
+				if kind == "linked" {
+					if err := os.Symlink(original, path); err != nil {
+						t.Fatal(err)
+					}
+				}
+				if _, err := loadHDTextureVariant(&hdRuntime{m: golem.New()}, dir, dir, true); err == nil {
+					t.Fatal("未拒絕錯誤來源", name)
+				}
+			})
+		}
+	}
+	p, err := loadHDTextureVariant(&hdRuntime{m: golem.New()}, game, assets, true)
+	if err != nil {
+		t.Fatal(err)
+	}
+	palette := read(filepath.Join(reference, "control/point-000.palette"))
+	if !p.paletteSupported(palette) {
+		t.Fatal("已驗色盤未通過")
+	}
+	for i := 0; i < 256; i++ {
+		changed := append([]byte(nil), palette...)
+		changed[i*3] ^= 1
+		if p.paletteSupported(changed) != (i < 128 || i > 138) {
+			t.Fatal("色盤區段守門不同", i)
+		}
+	}
+	if p.paletteSupported(nil) || p.paletteSupported(palette[:767]) {
+		t.Fatal("短色盤未拒絕")
+	}
+	if p.pictureArt != nil || p.picture != nil {
+		t.Fatal("WOOD不應載入主選單來源快取")
 	}
 }

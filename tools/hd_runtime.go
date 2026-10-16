@@ -102,6 +102,10 @@ func loadHDRuntime(m *golem.Machine, game, directory string) (*hdRuntime, error)
 	if err != nil {
 		return nil, err
 	}
+	h.worldTexture, err = loadHDTextureVariant(h, game, directory, true)
+	if err != nil {
+		return nil, err
+	}
 	h.smallTerrain, err = loadHDSmallTerrainRuntime(h, game, directory)
 	if err != nil {
 		return nil, err
@@ -146,7 +150,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "281c8bd28842e2c24810db0b44c0deb0b7b42d1ea8b636cfc2ab2e2b9acda116"
+const hdManifestSHA = "1c0fce5e3d3bd73b0a38a1a1dc309e429a1cdfa7206428b8f73eb5529c2dae6e"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"
@@ -159,6 +163,7 @@ type hdBuildingPixel struct {
 	cursorIndex int
 }
 type hdRuntime struct {
+	worldTexture                                     *hdTextureRuntime
 	texture                                          *hdTextureRuntime
 	smallTerrain                                     *hdSmallTerrainRuntime
 	terrainBatch                                     *hdTerrainBatchRuntime
@@ -241,6 +246,7 @@ func (h *hdRuntime) beforeInstruction() {
 	h.terrainBatch.beforeInstruction()
 	h.smallTerrain.beforeInstruction()
 	h.texture.beforeInstruction()
+	h.worldTexture.beforeInstruction()
 	h.person.beforeInstruction()
 	h.shelter.beforeInstruction()
 	h.nine.beforeInstruction()
@@ -502,8 +508,18 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 	var hdBG draftHDBackground
 	bgMask := make([]byte, 8000)
 	bgPainted := 0
-	if b.hd.texture != nil && hash(f.palette) == hdTexturePaletteSHA && hd["reason"] != "unverified-cursor-or-native-surface" {
+	worldBGMask := make([]byte, 8000)
+	worldBGPainted := 0
+	if hd["reason"] != "unverified-cursor-or-native-surface" && ((b.hd.texture != nil && b.hd.texture.paletteSupported(f.palette)) || (b.hd.worldTexture != nil && b.hd.worldTexture.paletteSupported(f.palette))) {
 		hdBG = func(out *image.RGBA, i int, v byte, palette []byte) bool {
+			if b.hd.worldTexture != nil && b.hd.worldTexture.paintBackground(out, f, i, v, palette) {
+				worldBGMask[i>>3] |= 1 << uint(i&7)
+				worldBGPainted++
+				return true
+			}
+			if b.hd.texture == nil {
+				return false
+			}
 			ok := b.hd.texture.paintBackground(out, f, i, v, palette)
 			if ok {
 				bgMask[i>>3] |= 1 << uint(i&7)
@@ -516,6 +532,10 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 	if texture, ok := hd["texture"].(map[string]any); ok {
 		texture["background_repaints"] = bgPainted
 		texture["background_mask"] = bgMask
+	}
+	if group, ok := hd["world_texture"].(map[string]any); ok {
+		group["background_repaints"] = worldBGPainted
+		group["background_mask"] = worldBGMask
 	}
 	if err != nil {
 		return nil, nil, err
@@ -530,6 +550,9 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 
 func (h *hdRuntime) key() string {
 	base := h.baseKey()
+	if h != nil && h.worldTexture != nil {
+		base = fmt.Sprintf("%s/world-texture/%d", base, h.worldTexture.revision)
+	}
 	if h != nil && h.texture != nil {
 		base = fmt.Sprintf("%s/texture/%d", base, h.texture.revision)
 	}

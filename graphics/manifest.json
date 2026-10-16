@@ -3233,6 +3233,43 @@
       },
       "coverage": "complete indexed background outside opaque menu panel and verified current cursor; panel border and full palette required",
       "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "woodtile-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "8580efcf85a45fa879938b5b73e8d54c58853dd9297e8ecd1f10801e637bb5d9",
+      "bytes": 1451651,
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGB",
+      "native_size": [
+        32,
+        24
+      ],
+      "target_size": [
+        128,
+        96
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "fully opaque sampled art; original PNG preserved unchanged",
+      "generation_prompt": "Create one seamless opaque fine pixel-art wood texture for a 128 by 96 display tile in the Colonization interface. The FIRST image is the original WOODTILE source rendered with the verified actual world-screen palette, 32 by 24 native pixels enlarged only as a geometry/color reference. The SECOND image is our approved, already integrated dark fine-pixel menu wood tile: use this as a consistent material/rendering reference, but match the FIRST image's slightly lighter, warm walnut-brown and chestnut distribution. The THIRD image is the user-approved fine-pixel-art style sheet. Paint ONLY a flat repeating brown wood surface, preserving the FIRST source's broad horizontal light/dark distribution and 4:3 aspect ratio. Replace coarse blocks with small crisp wood-grain clusters and subtle horizontal fibers. Seamless on all four edges; uniform ambient light. Avoid large distinctive knots, plank seams, bolts, border, frame, bevel, perspective, objects, text, letters, watermark, transparency, glossy lighting, smooth gradients, blur, photo texture or 3D rendering. Keep the dark-to-mid brown range subdued enough for the existing original green/yellow interface text; do not alter or draw any UI text. Opaque edge-to-edge 4:3 rectangular texture, intended for nearest-neighbor sampling to 128 by 96. This is a new faithful repaint of the first reference using the accepted pixel-art style.",
+      "reference_sha256": {
+        "native_world_palette_reference": "e607472339823a269be3f6ac693284c89bc72d8a23e0ffba9916f268a09a187c",
+        "accepted_menu_wood": "cb2a8af8077d1e6fd0082d753e7cc0251192df0705ebe34496f1954f5cdc4547",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "WOODTILE.SS",
+        "sha256": "7b689b766b0f9027627b1a731d8e813a38678b21be41e00d294ecb2cd41ec89c",
+        "ordinal": 0,
+        "indexed_sha256": "5cdc9463574bcab9041271e19a92b8a24af408d9c1e4f59e9b6fefbc23b55ce3",
+        "encoded_sha256": "e33bfeabb5830cec122f88ea7909f2c0fca49a9ec234b2e622cac584cd73499a",
+        "encoded_length": 722
+      },
+      "coverage": "verified source ownership and text underlay; palette indices 128..138 fingerprint required",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
     }
   }
 }

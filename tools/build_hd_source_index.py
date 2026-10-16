@@ -20,6 +20,8 @@ parser.add_argument('--small-terrain-ready-report',type=Path,help='規格068八�
 parser.add_argument('--small-terrain-conformed-report',type=Path,help='規格068正式八來源的完整驗收與58種素材繼承審查')
 parser.add_argument('--menu-ready-report',type=Path,help='規格069主選單兩來源的READY審查')
 parser.add_argument('--menu-conformed-report',type=Path,help='規格069正式兩來源及66種素材繼承審查')
+parser.add_argument('--world-wood-ready-report',type=Path,help='規格069世界木紋READY審查')
+parser.add_argument('--world-wood-conformed-report',type=Path,help='規格069世界木紋正式驗收及68種素材繼承審查')
 a=parser.parse_args();out=a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.parent.stat().st_uid==os.getuid() and not out.exists()
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -54,13 +56,27 @@ for name,asset in manifest['assets'].items():
 ready=[f for f in frames if f['file']=='PHYS0.SS' and f['ordinal']==79 and f.get('encoded_sha256')=='a8a861754068c86a9c150442f7b07f1fbd297d82b8e5dcb2e3ee108bde4dc84c']
 assert len(ready)==1
 ready[0]['source_contract_reference']={'state':'CONFORMED','spec':'docs/spec/062-hd-sea-draw-lifecycle.md','section':'2026-10-15 R58正式驗收與限定CONFORMED','formal_connected':bool(ready[0]['formal_assets'])}
+wood_review=None
+assert bool(a.world_wood_ready_report)==bool(a.world_wood_conformed_report)
+if a.world_wood_conformed_report:
+ assert a.menu_conformed_report
+ wood_ready=json.loads(a.world_wood_ready_report.read_bytes())
+ assert wood_ready['result']=='PASS_WORLD_WOOD_READY_REVIEW' and wood_ready['spec_state']=='READY'
+ wood_review=json.loads(a.world_wood_conformed_report.read_bytes())
+ assert wood_review['result']=='PASS_WORLD_WOOD_FORMAL_CONFORMANCE_REVIEW' and wood_review['spec_state']=='CONFORMED'
+ assert wood_review['formal_assets']==69 and wood_review['manifest_sha256']==sha(a.manifest)
+ assert wood_review['ready_review_sha256']==sha(a.world_wood_ready_report)
+ assert wood_review['inherited_menu_conformance_sha256']==sha(a.menu_conformed_report)
+ assert set(wood_review['unchanged_inherited_assets'])==set(manifest['assets'])-{'woodtile-000.png'}
+ assert len(wood_review['unchanged_inherited_assets'])==68
+ assert all(manifest['assets'][n]['sha256']==h for n,h in wood_review['unchanged_inherited_assets'].items())
 menu_review=None
 if a.menu_conformed_report:
  assert a.menu_ready_report and a.small_terrain_conformed_report
  menu_ready=json.loads(a.menu_ready_report.read_bytes());assert menu_ready['result']=='PASS_MENU_BACKGROUND_READY_REVIEW' and menu_ready['spec_state']=='READY'
  menu_review=json.loads(a.menu_conformed_report.read_bytes())
  assert menu_review['result']=='PASS_MENU_FORMAL_CONFORMANCE_REVIEW' and menu_review['spec_state']=='CONFORMED'
- assert menu_review['formal_assets']==68 and menu_review['manifest_sha256']==sha(a.manifest)
+ assert menu_review['formal_assets']==68 and menu_review['manifest_sha256']==(wood_review['inherited_manifest_sha256'] if wood_review else sha(a.manifest))
  assert menu_review['ready_review_sha256']==sha(a.menu_ready_report)
  assert len(menu_review['unchanged_inherited_assets'])==66
  assert all(manifest['assets'][n]['sha256']==h for n,h in menu_review['unchanged_inherited_assets'].items())
@@ -79,7 +95,7 @@ if a.small_terrain_conformed_report:
  assert small_review['ready_review_sha256']==sha(a.small_terrain_ready_report)
  assert len(small_review['unchanged_inherited_assets'])==58
  assert all(manifest['assets'][n]['sha256']==h for n,h in small_review['unchanged_inherited_assets'].items())
-expected_assets=68 if menu_review else 66 if a.small_terrain_conformed_report else 58 if a.terrain_batch_conformed_report else 46
+expected_assets=69 if wood_review else 68 if menu_review else 66 if a.small_terrain_conformed_report else 58 if a.terrain_batch_conformed_report else 46
 assert len(bindings)==expected_assets and sum(bool(f['formal_assets']) for f in frames)==expected_assets
 batch_review=None
 if a.terrain_batch_ready_report:
@@ -244,6 +260,11 @@ if menu_review:
   assert f['formal_assets']==[name]
   f['source_contract_reference']={'state':'CONFORMED','spec':'docs/spec/069-hd-menu-background-and-textures.md','formal_connected':True,'review_sha256':sha(a.menu_conformed_report),'scope':'settled main menu; exact visible bitmap recognition for PIK, source ownership and text underlays for OPENTILE'}
  public['menu_graphics_conformance']={'ready_review_sha256':sha(a.menu_ready_report),'review_sha256':sha(a.menu_conformed_report),'sources':[1181,1265],'formal_assets':68,'claim':'two settled-main-menu sources only; full visible denominator remains unknown'}
+if wood_review:
+ f=next(f for f in frames if f['research_id']==1552)
+ assert f['file']=='WOODTILE.SS' and f['formal_assets']==['woodtile-000.png']
+ f['source_contract_reference']={'state':'CONFORMED','spec':'docs/spec/069-hd-menu-background-and-textures.md','formal_connected':True,'review_sha256':sha(a.world_wood_conformed_report),'scope':'verified RAM-copy source ownership and text underlays; palette indices 128..138; recorded normal GUI samples only'}
+ public['world_wood_conformance']={'ready_review_sha256':sha(a.world_wood_ready_report),'review_sha256':sha(a.world_wood_conformed_report),'sources':[1552],'formal_assets':69,'claim':'one wood source only; PARCH, animation and full HD remain incomplete'}
 public['coverage_limits']['additional_ready_source_contracts']=sum(f.get('source_contract_reference',{}).get('state')=='READY' and not f.get('source_contract_reference',{}).get('formal_connected') for f in frames)
 out.write_text(json.dumps(public,ensure_ascii=False,indent=2)+'\n')
 print('PASS_METADATA_ONLY_FULL_SOURCE_INDEX',len(frames),len(bindings),sha(out),flush=True)

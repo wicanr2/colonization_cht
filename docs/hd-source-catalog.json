@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "281c8bd28842e2c24810db0b44c0deb0b7b42d1ea8b636cfc2ab2e2b9acda116",
+  "formal_manifest_sha256": "1c0fce5e3d3bd73b0a38a1a1dc309e429a1cdfa7206428b8f73eb5529c2dae6e",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 68,
+    "formal_asset_bindings": 69,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -55749,7 +55749,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "woodtile-000.png"
+      ],
       "cold_start_entry_sample": {
         "calls": 1,
         "candidate_research_ids": [
@@ -55777,6 +55779,13 @@
         ],
         "report_sha256": "7127dbd0f20691e81f737d4fe54c378edd31135f26028d7add85bdaf6eb6f90b",
         "formal_connected": false
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "4e70453e2a26a44fc08bc701d919e487ff70222848e39c104006f79e2e33487d",
+        "scope": "verified RAM-copy source ownership and text underlays; palette indices 128..138; recorded normal GUI samples only"
       }
     }
   ],
@@ -56642,6 +56651,16 @@
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec",
       "source_indexed_sha256": "5325a3501b83df510cee60c134952130fdb9dfd4bdc00d9eb853fb7ae6021eff"
+    },
+    {
+      "asset": "woodtile-000.png",
+      "asset_sha256": "8580efcf85a45fa879938b5b73e8d54c58853dd9297e8ecd1f10801e637bb5d9",
+      "source_research_id": 1552,
+      "source_file": "WOODTILE.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "e33bfeabb5830cec122f88ea7909f2c0fca49a9ec234b2e622cac584cd73499a",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
     }
   ],
   "limitations": [
@@ -56771,5 +56790,14 @@
     ],
     "formal_assets": 68,
     "claim": "two settled-main-menu sources only; full visible denominator remains unknown"
+  },
+  "world_wood_conformance": {
+    "ready_review_sha256": "d69bea4dcf0f53816279187ef52da84b373641ad3502b2efff480cbd174a305a",
+    "review_sha256": "4e70453e2a26a44fc08bc701d919e487ff70222848e39c104006f79e2e33487d",
+    "sources": [
+      1552
+    ],
+    "formal_assets": 69,
+    "claim": "one wood source only; PARCH, animation and full HD remain incomplete"
   }
 }
