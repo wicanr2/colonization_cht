@@ -79,7 +79,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 
 ![繁體中文世界畫面與 HD 海洋、地形](docs/screenshots/hd-world-zh.png)
 
-世界畫面：海洋、部分地形與側欄圖示已使用 HD 素材，其餘地形與單位逐項接續。
+世界畫面：海洋、部分河岸與森林地形、側欄圖示已使用 HD 素材，其餘地形與單位逐項接續。
 
 ![五語與原版、HD 圖像模式的顯示設定](docs/screenshots/display-settings-zh.png)
 
