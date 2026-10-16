@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "52d874c63ac2a7b0e1ec01838e6218cf8ec20268900b1b64e4e48c432980f24e",
+  "formal_manifest_sha256": "ecd7362e4cf9306e9e2c9c63804e05b0161010fcd332ed5fc97f30331036fe6e",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 46,
+    "formal_asset_bindings": 58,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -41397,7 +41397,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-006.png"
+      ],
       "normal_entry_sample": {
         "calls": 5,
         "candidate_research_ids": [
@@ -41456,9 +41458,10 @@
         "state": "confirmed native source samples; no new HD or animation credit"
       },
       "source_contract_reference": {
-        "state": "DRAFT",
+        "state": "CONFORMED",
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
-        "formal_connected": false
+        "formal_connected": true,
+        "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
       }
     },
     {
@@ -41534,7 +41537,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-009.png"
+      ],
       "normal_entry_sample": {
         "calls": 7,
         "candidate_research_ids": [
@@ -41599,9 +41604,10 @@
         "state": "confirmed native source samples; no new HD or animation credit"
       },
       "source_contract_reference": {
-        "state": "DRAFT",
+        "state": "CONFORMED",
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
-        "formal_connected": false
+        "formal_connected": true,
+        "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
       }
     },
     {
@@ -41802,7 +41808,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-017.png"
+      ],
       "normal_entry_sample": {
         "calls": 5,
         "candidate_research_ids": [
@@ -41861,9 +41869,10 @@
         "state": "confirmed native source samples; no new HD or animation credit"
       },
       "source_contract_reference": {
-        "state": "DRAFT",
+        "state": "CONFORMED",
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
-        "formal_connected": false
+        "formal_connected": true,
+        "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
       }
     },
     {
@@ -43089,7 +43098,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-066.png"
+      ],
       "normal_entry_sample": {
         "calls": 12,
         "candidate_research_ids": [
@@ -43160,9 +43171,10 @@
         "state": "confirmed native source samples; no new HD or animation credit"
       },
       "source_contract_reference": {
-        "state": "DRAFT",
+        "state": "CONFORMED",
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
-        "formal_connected": false
+        "formal_connected": true,
+        "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
       }
     },
     {
@@ -43288,7 +43300,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-071.png"
+      ],
       "normal_entry_sample": {
         "calls": 5,
         "candidate_research_ids": [
@@ -43347,9 +43361,10 @@
         "state": "confirmed native source samples; no new HD or animation credit"
       },
       "source_contract_reference": {
-        "state": "DRAFT",
+        "state": "CONFORMED",
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
-        "formal_connected": false
+        "formal_connected": true,
+        "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
       }
     },
     {
@@ -43425,7 +43440,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-074.png"
+      ],
       "normal_entry_sample": {
         "calls": 12,
         "candidate_research_ids": [
@@ -43496,9 +43513,10 @@
         "state": "confirmed native source samples; no new HD or animation credit"
       },
       "source_contract_reference": {
-        "state": "DRAFT",
+        "state": "CONFORMED",
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
-        "formal_connected": false
+        "formal_connected": true,
+        "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
       }
     },
     {
@@ -43574,7 +43592,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-077.png"
+      ],
       "normal_entry_sample": {
         "calls": 5,
         "candidate_research_ids": [
@@ -43633,9 +43653,10 @@
         "state": "confirmed native source samples; no new HD or animation credit"
       },
       "source_contract_reference": {
-        "state": "DRAFT",
+        "state": "CONFORMED",
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
-        "formal_connected": false
+        "formal_connected": true,
+        "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
       }
     },
     {
@@ -43661,7 +43682,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-078.png"
+      ],
       "normal_entry_sample": {
         "calls": 7,
         "candidate_research_ids": [
@@ -43726,9 +43749,10 @@
         "state": "confirmed native source samples; no new HD or animation credit"
       },
       "source_contract_reference": {
-        "state": "DRAFT",
+        "state": "CONFORMED",
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
-        "formal_connected": false
+        "formal_connected": true,
+        "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
       }
     },
     {
@@ -43874,7 +43898,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-080.png"
+      ],
       "normal_entry_sample": {
         "calls": 12,
         "candidate_research_ids": [
@@ -43945,9 +43971,10 @@
         "state": "confirmed native source samples; no new HD or animation credit"
       },
       "source_contract_reference": {
-        "state": "DRAFT",
+        "state": "CONFORMED",
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
-        "formal_connected": false
+        "formal_connected": true,
+        "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
       }
     },
     {
@@ -44348,7 +44375,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-096.png"
+      ],
       "normal_entry_sample": {
         "calls": 12,
         "candidate_research_ids": [
@@ -44413,9 +44442,10 @@
         "state": "confirmed native source samples; no new HD or animation credit"
       },
       "source_contract_reference": {
-        "state": "DRAFT",
+        "state": "CONFORMED",
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
-        "formal_connected": false
+        "formal_connected": true,
+        "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
       }
     },
     {
@@ -47461,7 +47491,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-147.png"
+      ],
       "normal_entry_sample": {
         "calls": 7,
         "candidate_research_ids": [
@@ -47526,9 +47558,10 @@
         "state": "confirmed native source samples; no new HD or animation credit"
       },
       "source_contract_reference": {
-        "state": "DRAFT",
+        "state": "CONFORMED",
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
-        "formal_connected": false
+        "formal_connected": true,
+        "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
       }
     },
     {
@@ -48410,7 +48443,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-150.png"
+      ],
       "normal_entry_sample": {
         "calls": 17,
         "candidate_research_ids": [
@@ -48487,9 +48522,10 @@
         "state": "confirmed native source samples; no new HD or animation credit"
       },
       "source_contract_reference": {
-        "state": "DRAFT",
+        "state": "CONFORMED",
         "spec": "docs/spec/067-hd-world-terrain-batch.md",
-        "formal_connected": false
+        "formal_connected": true,
+        "review_sha256": "432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405"
       }
     },
     {
@@ -51983,6 +52019,126 @@
       "source_ordinal": 0,
       "source_encoded_sha256": "d77899f35c0e5f40780af7fddd6918c58ff86005de5ea4ecfbde34f5989e7dde",
       "spec": "docs/spec/066-hd-standard-cursor.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-006.png",
+      "asset_sha256": "53405c0a1fc73b5ec49fbe761a7e1e6c72046d48d64dea1a55a7f013458e29ff",
+      "source_research_id": 1294,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 6,
+      "source_encoded_sha256": "65c0a36189a83da3c0062523a5e5a5dcce699f92e5e06975efb47fc3aa22f139",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-009.png",
+      "asset_sha256": "c25474e28eaa8545a400714bc15053d6bcf2b420e0e2aeb834d89b692f5e654b",
+      "source_research_id": 1297,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 9,
+      "source_encoded_sha256": "d7af5a9a9b2b5b1954d0ea51fcb3b77365de315303e01d6f6aca7a2cf5909ecc",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-017.png",
+      "asset_sha256": "db2e8cc629d569f43d43f80fc9d04fae10a8719562149dcec514bb451a1edbbe",
+      "source_research_id": 1305,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 17,
+      "source_encoded_sha256": "58592e83a79b0bcb280784bd65936a68fef444c57b19cece50d2e71fc2190db3",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-066.png",
+      "asset_sha256": "a9c86687d36b3960dac157d89ddf2cc1aa59491e5c26adf9a265c4e52ed016ab",
+      "source_research_id": 1354,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 66,
+      "source_encoded_sha256": "86a9dd1ffe2799af3b9ba6103bc17cbaf263ce971676bf9d7f9c1eaec260d2c9",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-071.png",
+      "asset_sha256": "3ac8bcc578422e026e0ac62344a86d709fa24d7ffa13a6ea104766118353a072",
+      "source_research_id": 1359,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 71,
+      "source_encoded_sha256": "57bffb18c0fbdb61bfc9a6a2ad75f0c1d5060a25dde8de12cc148c920249c3c7",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-074.png",
+      "asset_sha256": "7153858ccb7c6121b71cb49ba74567403df777368557352e9f6f22a4ccc18a81",
+      "source_research_id": 1362,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 74,
+      "source_encoded_sha256": "4e3dfc879acdb9a25612b04aba61bffa344436984b99459744ec3a7c274caa7a",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-077.png",
+      "asset_sha256": "deaaa4e10ef707f8d4b58a108b48fdedce441c5e47e3711ab157e4928519e21f",
+      "source_research_id": 1365,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 77,
+      "source_encoded_sha256": "86d5a969c1d9678244d816f2c56b13da4712b34a2e1dabd4ae9c09bcea4ec3aa",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-078.png",
+      "asset_sha256": "1f9011c2eeb1a564a1a92ca7efb9785505e7599df59e2e31da65713883df5d79",
+      "source_research_id": 1366,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 78,
+      "source_encoded_sha256": "92966f3b77aee2f8a5e416233dff74b56bcf6621a4faa6cf6cc9a9910a2aeb70",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-080.png",
+      "asset_sha256": "3c00f1e33f831e32253da286c2637b64ee350d2f5c27221975f265eed838dc44",
+      "source_research_id": 1368,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 80,
+      "source_encoded_sha256": "f0f7ebbf75102beef7e3e45bc64b1419dbfc70ba5e6d6c35f10e2e0280a78da4",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-096.png",
+      "asset_sha256": "e5f5da26ea5bb831ebc7de78b1ef63f41ab72846a26044ae173983bbbf962367",
+      "source_research_id": 1384,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 96,
+      "source_encoded_sha256": "2d414662242d31b319f67f61cfc4932600676693dad7cf2fb0d1d286b4c28965",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-147.png",
+      "asset_sha256": "091b73d1442dad61cc9b60ba6c796c477d8ed4298905272e35776c1bc4ae5a26",
+      "source_research_id": 1435,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 147,
+      "source_encoded_sha256": "6b078a23571559f62ed3728e3e8164e154aeb332e0c95936676a02e9cb15b51d",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "terrain-150.png",
+      "asset_sha256": "7be4837b98142b085e1f13da61eda97820819d2db727b73e1299faede4250bb6",
+      "source_research_id": 1438,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 150,
+      "source_encoded_sha256": "9051788c9cf4265ce5dab6de028a5744be49d9680d412ca6b1d0320bcff2c415",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec"
     }
   ],

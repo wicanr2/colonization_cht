@@ -11,6 +11,8 @@ parser.add_argument('--cursor-report',type=Path,help='可選：R59一般游標�
 parser.add_argument('--cursor-ready-report',type=Path,help='與cursor-report一起使用的R60 READY審查收據')
 parser.add_argument('--cursor-conformed-report',type=Path,help='正式游標來源必附的R61限定CONFORMED審查收據')
 parser.add_argument('--terrain-batch-report',type=Path,help='可選：規格067的R62十三來源正常GUI逐寫審查，不授予HD信用')
+parser.add_argument('--terrain-batch-ready-report',type=Path,help='規格067 READY候選及合成契約審查')
+parser.add_argument('--terrain-batch-conformed-report',type=Path,help='正式十二來源的完整驗收與既有素材繼承審查')
 a=parser.parse_args();out=a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.parent.stat().st_uid==os.getuid() and not out.exists()
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -39,7 +41,21 @@ for name,asset in manifest['assets'].items():
 ready=[f for f in frames if f['file']=='PHYS0.SS' and f['ordinal']==79 and f.get('encoded_sha256')=='a8a861754068c86a9c150442f7b07f1fbd297d82b8e5dcb2e3ee108bde4dc84c']
 assert len(ready)==1
 ready[0]['source_contract_reference']={'state':'CONFORMED','spec':'docs/spec/062-hd-sea-draw-lifecycle.md','section':'2026-10-15 R58正式驗收與限定CONFORMED','formal_connected':bool(ready[0]['formal_assets'])}
-assert len(bindings)==46 and sum(bool(f['formal_assets']) for f in frames)==46
+expected_assets=58 if a.terrain_batch_conformed_report else 46
+assert len(bindings)==expected_assets and sum(bool(f['formal_assets']) for f in frames)==expected_assets
+batch_review=None
+if a.terrain_batch_ready_report:
+ batch_review=json.loads(a.terrain_batch_ready_report.read_bytes())
+ assert batch_review['result']=='PASS_WORLD_TERRAIN_READY_REVIEW' and batch_review['spec_state']=='READY'
+ assert batch_review['native_source_report_sha256']==sha(a.terrain_batch_report)
+if a.terrain_batch_conformed_report:
+ assert batch_review is not None
+ batch_review=json.loads(a.terrain_batch_conformed_report.read_bytes())
+ assert batch_review['result']=='PASS_WORLD_TERRAIN_FORMAL_CONFORMANCE_REVIEW' and batch_review['spec_state']=='CONFORMED'
+ assert batch_review['formal_assets']==58 and batch_review['manifest_sha256']==sha(a.manifest)
+ assert batch_review['ready_review_sha256']==sha(a.terrain_batch_ready_report)
+ assert len(batch_review['unchanged_inherited_assets'])==46
+ assert all(manifest['assets'][name]['sha256']==digest for name,digest in batch_review['unchanged_inherited_assets'].items())
 entry_evidence=None
 if a.entry_report:
  entry=json.loads(a.entry_report.read_bytes())
@@ -109,7 +125,11 @@ if a.cursor_report:
  if a.cursor_conformed_report:
   conformed=json.loads(a.cursor_conformed_report.read_bytes())
   assert conformed['result']=='PASS_CURSOR_FORMAL_CONFORMANCE_REVIEW' and conformed['spec_state']=='CONFORMED'
-  assert conformed['formal_assets']==46 and conformed['manifest_sha256']==sha(a.manifest)
+  assert conformed['formal_assets']==46
+  if conformed['manifest_sha256']!=sha(a.manifest):
+   assert a.terrain_batch_conformed_report and batch_review['inherited_cursor_conformance_sha256']==sha(a.cursor_conformed_report)
+   assert batch_review['inherited_manifest_sha256']==conformed['manifest_sha256']
+   assert batch_review['unchanged_inherited_assets']['cursor-000.png']==manifest['assets']['cursor-000.png']['sha256']
  f['source_contract_reference']={'state':'CONFORMED' if a.cursor_conformed_report else 'READY','spec':'docs/spec/066-hd-standard-cursor.md','section':'2026-10-15 R61一般游標正式驗收與限定CONFORMED' if a.cursor_conformed_report else '2026-10-15 R60一般游標顯示契約READY','formal_connected':bool(f['formal_assets'])}
  if a.cursor_conformed_report:f['source_contract_reference']['conformance_review_sha256']=sha(a.cursor_conformed_report)
  f['standard_cursor_sample']={'native_source_report_sha256':sha(a.cursor_report),'ready_review_sha256':sha(a.cursor_ready_report),'source_calls':2,'native_positions':49,'runtime_bitmap_sha256':cursor['cursor_sha256'],'visible_opaque_cells':82,'input_origin':[0,0],'gui_snapshots':29,'edge_samples':9,'fully_clipped_edge_samples':1,'claim':'standard cursor only; other cursor sources and hidden states not granted coverage'}
@@ -129,9 +149,11 @@ if a.terrain_batch_report:
   assert f['opaque_pixels']==sample['opaque_cells'] and sample['draw_calls']>0 and sample['stage_main_transfers']>0 and sample['vga_visible_pixels']>0
   f['terrain_batch_native_sample']=dict(sample,report_sha256=sha(a.terrain_batch_report),state='confirmed native source samples; no new HD or animation credit')
   if sample['new_target']:
-   assert not f['formal_assets']
+   assert bool(f['formal_assets'])==bool(a.terrain_batch_conformed_report)
    f['runtime_source_evidence']='confirmed draw, stage transfer and enumerated native restore samples within fixed normal paths'
-   f['source_contract_reference']={'state':'DRAFT','spec':'docs/spec/067-hd-world-terrain-batch.md','formal_connected':False}
+   f['source_contract_reference']={'state':batch_review['spec_state'] if batch_review else 'DRAFT','spec':'docs/spec/067-hd-world-terrain-batch.md','formal_connected':bool(f['formal_assets'])}
+   if batch_review:f['source_contract_reference']['review_sha256']=sha(a.terrain_batch_conformed_report or a.terrain_batch_ready_report)
  public['terrain_batch_native_evidence']={'report_sha256':sha(a.terrain_batch_report),'sources':13,'new_targets':batch['new_targets'],'checkpoints':29,'dos_inputs':109,'input_sha256':batch['input_sha256'],'source_calls':101,'stage_main_transfers':12823,'ram_saves':5886,'ram_restores':4370,'cursor_restores':10012,'production_connected':False,'claim':'native source evidence only; positive counts remain per ordinal; zero examples do not grant restore coverage'}
+public['coverage_limits']['additional_ready_source_contracts']=sum(f.get('source_contract_reference',{}).get('state')=='READY' and not f.get('source_contract_reference',{}).get('formal_connected') for f in frames)
 out.write_text(json.dumps(public,ensure_ascii=False,indent=2)+'\n')
 print('PASS_METADATA_ONLY_FULL_SOURCE_INDEX',len(frames),len(bindings),sha(out),flush=True)

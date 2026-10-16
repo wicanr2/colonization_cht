@@ -1,6 +1,7 @@
 # 世界地形十二來源的HD顯示契約
 
-狀態：DRAFT。只進行唯讀來源驗證，未授權新的正式HD行為。
+狀態：CONFORMED，限2026-10-16 R63的十二來源與本規格所列正常路徑。
+全量HD、其他圖像與動畫尚未完成。
 
 入口：[目標186](../goals/186-display-settings-and-gameplay-video.md)、
 [目前狀態](../../CONTEXT.md)與[工作項目63](https://github.com/wicanr2/colonization_cht/issues/63)。
@@ -26,6 +27,18 @@
   預設49點模型契約保持，批次入口固定R61的29點來源收據。
 - [逐來源反例](../../tools/test_hd_terrain_batch_ram_lifecycle.py)驗錯來源、寫入碼與AX，
   最後重驗全部正向模型；RAM反例沿[既有工具](../../tools/test_hd_terrain_ram_lifecycle.py)。
+- [隔離原型組裝器](../../tools/build_hd_world_terrain_prototype.py)只改workplace副本，
+  十二來源共用已驗的原版觀測回呼，未列入正式組裝器。
+- [原型原版重播測試](../../tools/hd_world_terrain_prototype_test.go)核對R61真實GUI的29點、
+  完整原版狀態、存檔、逐來源身分與透明格反例，不取代新的正常HD GUI。
+- [原型像素審查](../../tools/check_hd_world_terrain_prototype.py)從未修改的生成PNG獨立計算原alpha，
+  核對逐來源遮罩、游標配對及來源範圍外像素。
+- [五語GUI原型組裝器](../../tools/build_hd_world_terrain_gui_prototype.py)沿正常鍵鼠切換與存退路徑，
+  加入十二來源的懸停、移開與返回；只新增本機唯讀擷取。
+- [GUI原版收據組裝器](../../tools/build_hd_world_terrain_gui_oracle.py)沿實際輸入前綴重生65點原版觀測與控制，
+  不把原型畫面當作原版收據。
+- [GUI來源與像素審查](../../tools/check_hd_world_terrain_gui.py)核對65點原版資料流與36份英文懸停，
+  原版游標配對逐事件比對，來源alpha與游標像素分別驗證。
 
 位址採dosgolem執行期segment:offset與線性RAM。
 入口`0D46:000A`，AX為原ordinal加一；暫存畫布`0x3c500`、主畫布`0x2cae0`。
@@ -45,6 +58,62 @@
 
 正式接線後才驗五語切換、正常GUI、存退讀與四側原版狀態／音訊／存檔一致性。
 綠色來源模型不等於HD已完成。原版索引、色盤、圖像與暫存只留本機；公開資料只含程式與定位metadata。
+
+## 2026-10-16 R63 READY審查與正式實作契約
+
+本節追加並取代歷史DRAFT狀態。十二來源的原版繪製與透明格契約為confirmed，
+以R62來源收據及R63的29點原版完整狀態、存檔與逐來源模型驗證。
+沒有正向樣本的RAM或游標還原保持前述限制，不猜補原版路徑。
+
+候選清冊為本機`hd-world-terrain-prototype-r63/selected-candidates-r1.json`，
+SHA-256為`a42158df429a7da5e8771139240fa5bcbd5a27f5f69f6866dc117cc3d440ddb4`。
+第066、071、074、077、078採v2，其餘採v1。十二張皆為1254×1254 RGBA，
+由內建imagegen沿定稿精細像素風生成。原PNG與alpha完整保存，不裁切、不重編碼。
+完整提示、原版參考指紋及定稿圖指紋隨正式素材記入[素材清冊](../../graphics/manifest.json)。
+原版參考只留本機，不隨素材散布。生成畫風屬已確認顯示選擇，不宣稱原版美術等同。
+
+正式實作沿以下契約：
+
+- 十二來源使用同一typed群組，含ordinal、編碼長度／雜湊、不透明格數、逐寫雜湊及PNG指紋。
+  共用既有全RAM觀測回呼，不新增觀測器。原版輸入、記憶體、規則、音訊及存檔不寫入。
+- 完整來源繪製後才建立每格身分。透明格保持原值；重複寫入、矩形外寫入、錯來源、
+  錯寫入碼、過期返回或未知同值後畫皆拒絕或撤銷。轉送及RAM還原只沿已驗指令與位址界限。
+- 原PNG整張以像素中心最近鄰取樣至64×64。每個原版16×16來源格對應4×4顯示格，
+  只畫來源身分仍有效且主畫布值相同的格。使用原alpha與原版底圖做Over合成，
+  不補洞、不擴大遮罩、不把索引41當透明。1652個來源不透明格皆有生成alpha。
+- 原版後畫撤銷來源，游標在最上層。移開後只依真實已驗重畫／還原恢復HD。
+  游標RAM配對按原版實際事件比較，不要求每次滑鼠移動必有配對。
+- 正式載入必須同時驗證EXE、PHYS0.SS、manifest及十二張PNG的雜湊與尺寸；
+  缺件、錯件或符號連結失敗即關閉，恢復完整檔案後才啟用。原版圖像模式不畫HD，
+  文字仍沿獨立語言設定；英文與原版圖像的整張畫布核對原版像素。
+- 正式入口為[HD載入器](../../tools/hd_runtime.go)與
+  [正式組裝器](../../tools/build_language_observation_probe.py)。隔離原型的專用旗標不進正式入口。
+
+R63的`native-v2/check.json`為`91104901541382e5501d92d6ff191be79523b0794527e594a391f7c06a8bcf08`。
+29點通過、80次來源繪製、3325次RAM保存、2471次還原及220次有來源身分的游標配對。
+108項原版來源／透明格／未知同值反例及40項載入反例通過，之後正向載入保持。
+獨立像素審查核對823856個來源RGBA與28872144個範圍外像素，十二來源都有實繪，
+缺alpha格為零。既有49點及12項RAM反例再驗保持。
+
+以上足以描述正式行為，通過READY必要結果。正式完成仍須重新組裝並驗證完整Go／vet、
+29點原版狀態與像素、96組五語GUI、36份來源懸停、65點獨立原版收據、四側完整狀態／
+WAV／存檔、未加擷取器的正常啟動、載入回退與封裝拒絕。
+GUI測試控制檔須完整寫入後原子更名；控制檔競態不改成遊戲錯誤。
+
+## 2026-10-16 GUI取樣與原版還原路徑勘誤
+
+原型GUI首次選點取來源中心，第066來源與原版82個不透明游標格的交集為零，
+改為以已驗游標bitmap與各來源的正常可見格交集選點。這只修正取樣座標。
+第二次在第006來源停下；其懸停及移開並未讓原版產生該來源的RAM游標反向配對。
+以同一真實輸入前綴重生原版觀測與控制後，兩份快照的完整CPU／RAM／VGA／DAC與GUI相同，
+全部來源身分及游標還原計數也相同；第006來源兩次計數皆零。
+因此正常懸停的驗收為實際游標像素與來源遮擋正確、移開後HD恢復。
+RAM游標配對另按原版真正發生的事件逐項比較，不把每次移動當成必有該配對。
+
+此結論為上述前綴的confirmed，不外推其他流程。本機診斷收據為
+`hd-world-terrain-prototype-r63/cursor-diagnostic-r3/diagnostic-check-r2.json`，
+原始失敗保留，不計完整GUI或HD完成。該診斷在尚未存新檔前結束，只有原始COLONY09.SAV；
+正常完整驗證仍須核對COLONY00.SAV與COLONY09.SAV。
 
 
 ## 2026-10-15 R62十二來源原版模型審查
@@ -94,3 +163,56 @@ dosgolem來源76a9946aa7b8c790fa1622e205526659656b42bb749c26c2e0517dc99439421a�
 | source-negatives-r2/check.json | c6c08c5e58c37f3e30f82dadee9c5bb3cc2562ed3765ca46b7dfc5d5f2d91cca |
 | default-49-negatives-r1/check.json | 84a720c982d2e95c27fc76f9c4f9be9a24b8f8595624b83617f2c5d79c9c2fe1 |
 | source-index-r1.json | 9f9bf08a5afb60c164be178e8ff994b84cc13a08629726a8b82e2004f6391dce |
+
+
+## 2026-10-16 R63正式接線與限定CONFORMED
+
+規格067 R63限定CONFORMED，十二種新世界地形已正式接線，合計58種正式素材／清冊59檔、50Go／33綁定。872Go零skip與go vet、29點原版狀態／存檔及823856個RGBA、108來源與40載入反例通過。96組五語GUI、36份來源懸停、65點獨立原版模型與1020160個地形RGBA、47232個游標RGBA通過。143筆實際輸入四側至252000000步，完整原版狀態／WAV／存檔相同。未加擷取器的play=true、frames為0及循序ABBA通過，Linux成本比例1.5285只為有界抽樣。20種啟動回退／恢復與178項封裝拒絕通過。全量HD、其餘單位、背景、特殊游標與動畫未完成，沒有新發行。
+
+正式程式為[十二來源顯示層](../../tools/hd_world_terrain_runtime.go)、
+[typed來源](../../tools/hd_world_terrain_sources.go)及
+[正式原版測試](../../tools/hd_world_terrain_runtime_test.go)。
+[正式組裝器](../../tools/build_language_observation_probe.py)將它們列入50份Go來源；
+標準HD目錄同時載入十二張原PNG，不使用原型旗標。既有46張素材及其清冊欄位完全保持。
+
+本批以Go1.26.7、hr-go-ebiten:1.26.7-2.9.9-r1及
+colonization-verification:20261007-runtime-r2內Python3.11.2／Pillow9.4驗證。
+隔離dosgolem沿82a14b266e1b5bc904e2d0fe507daf6bea41a013，原版檔案及位址空間沿前述契約。
+正式執行檔SHA-256為9bb9449a14303bf4e0d97df76c0c23d3920574850dfb80dfb784e9720740b5c5；
+manifest為ecd7362e4cf9306e9e2c9c63804e05b0161010fcd332ed5fc97f30331036fe6e。
+完整審查為432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405，本機根hd-world-terrain-prototype-r63，
+唯一命令入口commands-r63.json。
+
+29點使用R61既有實際輸入前綴，原版來源與RAM數保持，另以正式原PNG獨立重算合成。
+新的正常GUI另送143筆鍵鼠輸入；65點原版觀測與控制到251625001步，
+完整四側重播至252000000步。96組切換由真X11遊戲區核對實際呈現，36份英文來源懸停
+獨立核對alpha、原版遮擋及游標最上層；原版圖像模式的英文整畫布保持原版像素。
+開啟顯示設定仍暫停，關閉及放開實體輸入後恢復，語言與圖像偏好不改。
+
+這次正常GUI有11種新來源的2502次原版游標反向配對，
+各來源為{"77": 376, "74": 296, "6": 276, "9": 560, "78": 196, "147": 40, "66": 80, "71": 294, "17": 322, "150": 56, "80": 6}。
+第080來源本次有6例，R62零例紀錄保留為較早樣本限制。
+第096來源本次仍無該還原正向例；懸停、原版遮擋與移開後HD恢復的像素驗證通過。
+沒有事件的還原路徑不猜補，也不把其他來源的計數加給它。
+
+20種啟動案例含十二張PNG逐張缺件、選定PNG錯件／符號連結、
+PHYS0.SS缺件／錯件／符號連結、素材目錄缺件、manifest錯件及恢復。
+缺件保持原版與可見錯誤，HD偏好保留；完整恢復才啟用。封裝只收58張已驗PNG與manifest，
+178項缺件、錯件、符號連結及額外檔案拒絕。
+未加擷取器的正式play=true重播原版狀態、WAV與兩個存檔皆相同，兩次current執行的frames為0。
+循序ABBA只記同Linux映像、2CPU及本次輸入的成本，不能外推跨平台FPS或完整遊戲效能。
+
+| 收據 | SHA-256 |
+|---|---|
+| go | 33a1748085e448189027bdf2b510a85a5ded7559d0b256e2d51859005280a8a4 |
+| native | 76110995676811e6e536458113b6b58f2d4d0054f40ff6d2906183253de68153 |
+| native_rgba | 2e0c74ecc47b3a246d866bc3b928ab2adcabf2e26cbc723fe29e746db352c17e |
+| gui | 225dbb2aa5e8a6887b8fbbb70c113e1c81d7c6f6c5c211502237a2524fd7d57c |
+| gui_rgba | 66d48122691e995213bc08b89a509be41fc7a7e0b9427b9e44249f36d34ef7b4 |
+| replays | abfbfc1f848a3d7fb12fd3066150ba4c3e7906287ae89935647a4012369d568f |
+| play | 5c62baea6cf74455fbda9e78ab7bd20697a6a65ba191196cbb6852474ad13b79 |
+| startup | 7ba441243ad63cc6ab7a6e56c83e000883e037b62e008f60cfd8dcc942d3c9fe |
+| package | b3f6e674f97b15fbfd31afe33da1f6fd5e6e8e8b38a39037fbf50076ae745fc3 |
+
+[來源索引](../hd-source-catalog.json)連結58張正式素材，保留1552列來源研究與未知的玩家可見完整分母。
+本規格不授予其他地形、其他游標、背景、動畫或全量HD完成信用。

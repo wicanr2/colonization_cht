@@ -13,7 +13,7 @@ WRITERS={'0D46:0181':'268807035ef042fecc7402ebe7ebd03b',
  '0D46:01D2':'268807035ef042ebb5905a5b035efe79'}
 BASES=[0x2cae0,0x3c500]
 
-def check(observed,control,sources,out,expected_points=49,all_ram=False):
+def check(observed,control,sources,out,expected_points=49,all_ram=False,expected_saves=('COLONY00.SAV','COLONY09.SAV')):
  need(type(expected_points) is int and expected_points>0 and type(all_ram) is bool,'檢查點或輸出選項無效')
  need(sha_file(sources/'source-catalog.json')==CATALOG,'固定來源清冊不同')
  rows={r['ordinal']:r for r in read(sources/'source-catalog.json')['sources'] if r['file']=='PHYS0.SS' and r['ordinal'] in ORDINALS}
@@ -132,7 +132,8 @@ def check(observed,control,sources,out,expected_points=49,all_ram=False):
    (out/name).write_text(json.dumps(main,sort_keys=True)+'\n')
    summaries.append({'point':index,'step':point['steps'],'main_owned':len(main),'main_by_ordinal':dict(Counter(c['ordinal'] for c in main.values())),'main_owners_file':name,'main_owners_sha256':sha_file(out/name)})
  need(at==count and next(events,None) is None and next_call==drawn==len(calls),'仍有未驗事件')
- for name in ['COLONY00.SAV','COLONY09.SAV']:need((observed/'saves'/name).read_bytes()==(control/'saves'/name).read_bytes(),'存檔不同')
+ need(set(expected_saves)=={p.name for p in (observed/'saves').glob('*.SAV')}=={p.name for p in (control/'saves').glob('*.SAV')},'存檔清單不同')
+ for name in expected_saves:need((observed/'saves'/name).read_bytes()==(control/'saves'/name).read_bytes(),'存檔不同')
  need((observed/'final.memory').read_bytes()==(control/'final.memory').read_bytes(),'完整終點RAM不同')
  (out/('terrain-batch-ram-copies.json' if all_ram else 'terrain079-ram-copies.json')).write_text(json.dumps(ram_copies)+'\n')
  (out/'cursor-pairs.json').write_text(json.dumps(restores)+'\n')

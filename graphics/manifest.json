@@ -2363,6 +2363,502 @@
         "visible_opaque_cells": 82
       },
       "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-006.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "53405c0a1fc73b5ec49fbe761a7e1e6c72046d48d64dea1a55a7f013458e29ff",
+      "bytes": 1575066,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over native underlay inside verified native write ownership",
+      "generation_prompt": "Use case: stylized-concept. Asset type: a single high definition pixel-art terrain overlay for a 1994 strategy game, source PHYS0.SS 006.\nInput image 1 is the exact native composition and silhouette reference, displayed as a 512-square enlargement of a 16 by 16 tile; image 2 is ONLY the approved fine pixel-art style reference.\nPrimary request: redraw the terrain in image 1 with crisp detailed pixel brushwork, natural texture and the color character of the approved style. A blue river bends from the left edge toward the middle and then runs down to the bottom edge, bordered by a thin grassy green bank. Keep the exact bend and entry/exit points.\nComposition is locked to image 1: same square canvas, same relative object size, same edges and coordinates, no recentering, no added padding, no changed viewing angle. Keep all disconnected pieces. Maintain blue water, green vegetation and brown wood where present in the native reference. Match its geometry rather than copying buildings or characters from image 2.\nTransparent background: actual alpha transparency wherever image 1 has transparency. Fill the original terrain silhouette completely; retain tiny peripheral terrain pixels. No backdrop, checkerboard, text, border, UI, buildings, people or invented props. No blur, glow, smooth painting or anti-aliased silhouette. Output one square terrain tile only.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "648c0304bb5b7a1b6f8e3ecb2e1fd4db0422bf330c5eadf3edb5948266150893"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 6,
+        "encoded_sha256": "65c0a36189a83da3c0062523a5e5a5dcce699f92e5e06975efb47fc3aa22f139",
+        "encoded_length": 202,
+        "sorted_local_offset_value_sha256": "51b2eda7050e99e1f9e133d25f793bbcd03e89d3ab8ac9364f4f975d9d54d44f",
+        "opaque_cells": 151
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-009.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "c25474e28eaa8545a400714bc15053d6bcf2b420e0e2aeb834d89b692f5e654b",
+      "bytes": 1704592,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over native underlay inside verified native write ownership",
+      "generation_prompt": "Use case: stylized-concept. Asset type: a single high definition pixel-art terrain overlay for a 1994 strategy game, source PHYS0.SS 009.\nInput image 1 is the exact native composition and silhouette reference, displayed as a 512-square enlargement of a 16 by 16 tile; image 2 is ONLY the approved fine pixel-art style reference.\nPrimary request: redraw the terrain in image 1 with crisp detailed pixel brushwork, natural texture and the color character of the approved style. A blue river runs down from the top edge, curves across the lower half, and exits the right edge. Keep the exact river course and thin green shoreline.\nComposition is locked to image 1: same square canvas, same relative object size, same edges and coordinates, no recentering, no added padding, no changed viewing angle. Keep all disconnected pieces. Maintain blue water, green vegetation and brown wood where present in the native reference. Match its geometry rather than copying buildings or characters from image 2.\nTransparent background: actual alpha transparency wherever image 1 has transparency. Fill the original terrain silhouette completely; retain tiny peripheral terrain pixels. No backdrop, checkerboard, text, border, UI, buildings, people or invented props. No blur, glow, smooth painting or anti-aliased silhouette. Output one square terrain tile only.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "870c85d21c8e88a44470de0a37fc271e1c917074ecf70af8dfc69cc5fa435228"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 9,
+        "encoded_sha256": "d7af5a9a9b2b5b1954d0ea51fcb3b77365de315303e01d6f6aca7a2cf5909ecc",
+        "encoded_length": 237,
+        "sorted_local_offset_value_sha256": "5e646786f9fb35e6cd8c354f945ba95252739fe23c670dba7e7f3fe9f6e349a4",
+        "opaque_cells": 160
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-017.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "db2e8cc629d569f43d43f80fc9d04fae10a8719562149dcec514bb451a1edbbe",
+      "bytes": 920435,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over native underlay inside verified native write ownership",
+      "generation_prompt": "Use case: stylized-concept. Asset type: a single high definition pixel-art terrain overlay for a 1994 strategy game, source PHYS0.SS 017.\nInput image 1 is the exact native composition and silhouette reference, displayed as a 512-square enlargement of a 16 by 16 tile; image 2 is ONLY the approved fine pixel-art style reference.\nPrimary request: redraw the terrain in image 1 with crisp detailed pixel brushwork, natural texture and the color character of the approved style. A short shallow blue river segment runs horizontally across the middle/lower half with a grassy green upper lip. Keep the flat shallow shape and exact placement.\nComposition is locked to image 1: same square canvas, same relative object size, same edges and coordinates, no recentering, no added padding, no changed viewing angle. Keep all disconnected pieces. Maintain blue water, green vegetation and brown wood where present in the native reference. Match its geometry rather than copying buildings or characters from image 2.\nTransparent background: actual alpha transparency wherever image 1 has transparency. Fill the original terrain silhouette completely; retain tiny peripheral terrain pixels. No backdrop, checkerboard, text, border, UI, buildings, people or invented props. No blur, glow, smooth painting or anti-aliased silhouette. Output one square terrain tile only.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "6207a49c1eb0e2d929b75952b49ffadda37d5cfced600b4c1118c1ca2d92c8d2"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 17,
+        "encoded_sha256": "58592e83a79b0bcb280784bd65936a68fef444c57b19cece50d2e71fc2190db3",
+        "encoded_length": 122,
+        "sorted_local_offset_value_sha256": "a8f2456a57ffde5ccb733ffdef655ed473efa424a58c387878d5e4ab8031c031",
+        "opaque_cells": 75
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-066.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "a9c86687d36b3960dac157d89ddf2cc1aa59491e5c26adf9a265c4e52ed016ab",
+      "bytes": 1514537,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over native underlay inside verified native write ownership",
+      "generation_prompt": "Use case: style-transfer. Asset type: a fine pixel-art woodland overlay, PHYS0.SS 066.\nImage 1 is the candidate to refine. Image 2 is the exact native silhouette/composition. Image 3 is the existing approved world-forest texture at the same game scale. Image 4 is the approved overall pixel brushwork.\nChange only surface texture and detail density in image 1. Preserve the exact square canvas, object locations, brown trunk locations, outer shape and every transparent opening from image 2. Match image 3's fine, subtle pixel texture density at game scale. The neutral dark-gray regions visible in the native reference are actual native dark pixels, NOT a transparency grid: render them as quiet charcoal/dark shaded texture with subtle irregular grain, never a checkerboard pattern. Keep the green and brown regions in their native locations. Keep the original relative coverage of each color group.\nUse crisp fine pixel brushwork and restrained highlights. Do not add new tree crowns, rocks, grass tufts, props, background, labels, borders or UI. Keep actual alpha transparency outside the native silhouette. No checkerboard pattern, smooth blur, glow or new margins. One square tile only.",
+      "reference_sha256": [
+        {
+          "role": "previous_candidate",
+          "sha256": "74416b68907e835fa7d53d4f1cbb31d81a41842b677425da32ab07afcc78b7fd"
+        },
+        {
+          "role": "native_geometry",
+          "sha256": "c2abab32cab069e67d0044d414fe66bedfba600bc8e38a69502330d818f26b79"
+        },
+        {
+          "role": "accepted_forest_style",
+          "sha256": "081ffb5506aa7aca0e80571053b85f0bdc920cb5e7884cf028521a1dd7ffaa58"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 66,
+        "encoded_sha256": "86a9dd1ffe2799af3b9ba6103bc17cbaf263ce971676bf9d7f9c1eaec260d2c9",
+        "encoded_length": 206,
+        "sorted_local_offset_value_sha256": "f1f4bcfb1ddd5bf30048ec2cbbb703dabd819faf95c914f098996287ff95a4c7",
+        "opaque_cells": 151
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-071.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "3ac8bcc578422e026e0ac62344a86d709fa24d7ffa13a6ea104766118353a072",
+      "bytes": 1672886,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over native underlay inside verified native write ownership",
+      "generation_prompt": "Use case: style-transfer. Asset type: a fine pixel-art woodland overlay, PHYS0.SS 071.\nImage 1 is the candidate to refine. Image 2 is the exact native silhouette/composition. Image 3 is the existing approved world-forest texture at the same game scale. Image 4 is the approved overall pixel brushwork.\nChange only surface texture and detail density in image 1. Preserve the exact square canvas, object locations, brown trunk locations, outer shape and every transparent opening from image 2. Match image 3's fine, subtle pixel texture density at game scale. The neutral dark-gray regions visible in the native reference are actual native dark pixels, NOT a transparency grid: render them as quiet charcoal/dark shaded texture with subtle irregular grain, never a checkerboard pattern. Keep the green and brown regions in their native locations. Keep the original relative coverage of each color group.\nUse crisp fine pixel brushwork and restrained highlights. Do not add new tree crowns, rocks, grass tufts, props, background, labels, borders or UI. Keep actual alpha transparency outside the native silhouette. No checkerboard pattern, smooth blur, glow or new margins. One square tile only.",
+      "reference_sha256": [
+        {
+          "role": "previous_candidate",
+          "sha256": "61674d3dad88bc1901a0c42163707b8952f66b078ef3afc30250e3e0b9505fcb"
+        },
+        {
+          "role": "native_geometry",
+          "sha256": "f5db385b74cf2b5d39e455531dac970a853c7712c3ba9ad75cc0651b2590681d"
+        },
+        {
+          "role": "accepted_forest_style",
+          "sha256": "081ffb5506aa7aca0e80571053b85f0bdc920cb5e7884cf028521a1dd7ffaa58"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 71,
+        "encoded_sha256": "57bffb18c0fbdb61bfc9a6a2ad75f0c1d5060a25dde8de12cc148c920249c3c7",
+        "encoded_length": 250,
+        "sorted_local_offset_value_sha256": "a4d9d152f8f87b714f112e519d955031dc9c4828b467c662b696265c1d7d9cf5",
+        "opaque_cells": 182
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-074.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "7153858ccb7c6121b71cb49ba74567403df777368557352e9f6f22a4ccc18a81",
+      "bytes": 1739946,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over native underlay inside verified native write ownership",
+      "generation_prompt": "Use case: style-transfer. Asset type: a fine pixel-art woodland overlay, PHYS0.SS 074.\nImage 1 is the candidate to refine. Image 2 is the exact native silhouette/composition. Image 3 is the existing approved world-forest texture at the same game scale. Image 4 is the approved overall pixel brushwork.\nChange only surface texture and detail density in image 1. Preserve the exact square canvas, object locations, brown trunk locations, outer shape and every transparent opening from image 2. Match image 3's fine, subtle pixel texture density at game scale. The neutral dark-gray regions visible in the native reference are actual native dark pixels, NOT a transparency grid: render them as quiet charcoal/dark shaded texture with subtle irregular grain, never a checkerboard pattern. Keep the green and brown regions in their native locations. Keep the original relative coverage of each color group.\nUse crisp fine pixel brushwork and restrained highlights. Do not add new tree crowns, rocks, grass tufts, props, background, labels, borders or UI. Keep actual alpha transparency outside the native silhouette. No checkerboard pattern, smooth blur, glow or new margins. One square tile only.",
+      "reference_sha256": [
+        {
+          "role": "previous_candidate",
+          "sha256": "eca83379feae400c9508c38fe6f918ba8746a3b59fb44ea55aeade3e01bbdd69"
+        },
+        {
+          "role": "native_geometry",
+          "sha256": "1c5340cd934f0bec4a0b90f00a544c45e2f9598ff0406c6c89086f70ab211182"
+        },
+        {
+          "role": "accepted_forest_style",
+          "sha256": "081ffb5506aa7aca0e80571053b85f0bdc920cb5e7884cf028521a1dd7ffaa58"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 74,
+        "encoded_sha256": "4e3dfc879acdb9a25612b04aba61bffa344436984b99459744ec3a7c274caa7a",
+        "encoded_length": 239,
+        "sorted_local_offset_value_sha256": "79bc77c90df9ab14e7a869084bc2f592f61fd7a9e7fe637f72a229e331a76cd7",
+        "opaque_cells": 193
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-077.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "deaaa4e10ef707f8d4b58a108b48fdedce441c5e47e3711ab157e4928519e21f",
+      "bytes": 1707957,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over native underlay inside verified native write ownership",
+      "generation_prompt": "Use case: style-transfer. Asset type: a fine pixel-art woodland overlay, PHYS0.SS 077.\nImage 1 is the candidate to refine. Image 2 is the exact native silhouette/composition. Image 3 is the existing approved world-forest texture at the same game scale. Image 4 is the approved overall pixel brushwork.\nChange only surface texture and detail density in image 1. Preserve the exact square canvas, object locations, brown trunk locations, outer shape and every transparent opening from image 2. Match image 3's fine, subtle pixel texture density at game scale. The neutral dark-gray regions visible in the native reference are actual native dark pixels, NOT a transparency grid: render them as quiet charcoal/dark shaded texture with subtle irregular grain, never a checkerboard pattern. Keep the green and brown regions in their native locations. Keep the original relative coverage of each color group.\nUse crisp fine pixel brushwork and restrained highlights. Do not add new tree crowns, rocks, grass tufts, props, background, labels, borders or UI. Keep actual alpha transparency outside the native silhouette. No checkerboard pattern, smooth blur, glow or new margins. One square tile only.",
+      "reference_sha256": [
+        {
+          "role": "previous_candidate",
+          "sha256": "658bfe648da0c690dc496e43af57fb95a7d61584b8bb3a27b9d959889f7e2fc1"
+        },
+        {
+          "role": "native_geometry",
+          "sha256": "1dc8f6ff6b5a583e7c64d64718c5bb6fc132d5d79309354e70ad5ca1af58f25f"
+        },
+        {
+          "role": "accepted_forest_style",
+          "sha256": "081ffb5506aa7aca0e80571053b85f0bdc920cb5e7884cf028521a1dd7ffaa58"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 77,
+        "encoded_sha256": "86d5a969c1d9678244d816f2c56b13da4712b34a2e1dabd4ae9c09bcea4ec3aa",
+        "encoded_length": 266,
+        "sorted_local_offset_value_sha256": "24f63b6bc14be91cf98cce2a20ef97cb4a1fd4be5d2ba286c342228b3de07523",
+        "opaque_cells": 193
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-078.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "1f9011c2eeb1a564a1a92ca7efb9785505e7599df59e2e31da65713883df5d79",
+      "bytes": 2223574,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over native underlay inside verified native write ownership",
+      "generation_prompt": "Use case: style-transfer. Asset type: a fine pixel-art woodland overlay, PHYS0.SS 078.\nImage 1 is the candidate to refine. Image 2 is the exact native silhouette/composition. Image 3 is the existing approved world-forest texture at the same game scale. Image 4 is the approved overall pixel brushwork.\nChange only surface texture and detail density in image 1. Preserve the exact square canvas, object locations, brown trunk locations, outer shape and every transparent opening from image 2. Match image 3's fine, subtle pixel texture density at game scale. The neutral dark-gray regions visible in the native reference are actual native dark pixels, NOT a transparency grid: render them as quiet charcoal/dark shaded texture with subtle irregular grain, never a checkerboard pattern. Keep the green and brown regions in their native locations. Keep the original relative coverage of each color group.\nUse crisp fine pixel brushwork and restrained highlights. Do not add new tree crowns, rocks, grass tufts, props, background, labels, borders or UI. Keep actual alpha transparency outside the native silhouette. No checkerboard pattern, smooth blur, glow or new margins. One square tile only.",
+      "reference_sha256": [
+        {
+          "role": "previous_candidate",
+          "sha256": "7d3bfbbeef51f2b1be9490e59efc8d944923ff013816b28b005e0bd217af60cd"
+        },
+        {
+          "role": "native_geometry",
+          "sha256": "8706c4aa489721a06ea2ac65f444bebbc3ae0c467f759a565d94e55658848975"
+        },
+        {
+          "role": "accepted_forest_style",
+          "sha256": "081ffb5506aa7aca0e80571053b85f0bdc920cb5e7884cf028521a1dd7ffaa58"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 78,
+        "encoded_sha256": "92966f3b77aee2f8a5e416233dff74b56bcf6621a4faa6cf6cc9a9910a2aeb70",
+        "encoded_length": 261,
+        "sorted_local_offset_value_sha256": "cd0492871fe6d92d8973d42190ea8bae7c074e90d0a111ada0f520abe50cb9d9",
+        "opaque_cells": 225
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-080.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "3c00f1e33f831e32253da286c2637b64ee350d2f5c27221975f265eed838dc44",
+      "bytes": 454878,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over native underlay inside verified native write ownership",
+      "generation_prompt": "Use case: stylized-concept. Asset type: one fine pixel-art terrain overlay tile for a 1994 strategy game, PHYS0.SS 080.\nInput image 1 is the exact native geometry and color reference, a 512-square enlargement of a 16 by 16 tile. Image 2 is ONLY the approved brushwork and material style reference.\nPrimary request: redraw image 1 with refined crisp pixel detail matching image 2. Small disconnected brown terrain markings, with a short diagonal irregular central branch and scattered brown pixels. Preserve these exact small brown forms and their positions without interpreting them as a new large object. No added foliage.\nLock the canvas, relative object size, silhouette, holes, edges and coordinates to image 1. Do not recenter, crop, enlarge the small object, add margins or change the viewing angle. Retain all disconnected native pieces. Use the green, brown, blue and tan colors in the same positions as image 1, with textured pixel variations within those colors. Copy no buildings or characters from image 2.\nUse real alpha transparency wherever image 1 is transparent. Fill the original terrain silhouette completely and retain tiny peripheral pixels. One square tile only. No checkerboard, backdrop, labels, border, UI, buildings, people or invented props. No blur, glow, smooth painting or anti-aliased silhouette.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "00e09b86175378f85dae871fbbebcb861763813e05e59cde482c1bb7bccb379c"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 80,
+        "encoded_sha256": "f0f7ebbf75102beef7e3e45bc64b1419dbfc70ba5e6d6c35f10e2e0280a78da4",
+        "encoded_length": 92,
+        "sorted_local_offset_value_sha256": "ab082ea94902826d0ef024e25d3acc89253a9461f025d2b2de4284eaa72bfa7f",
+        "opaque_cells": 34
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-096.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "e5f5da26ea5bb831ebc7de78b1ef63f41ab72846a26044ae173983bbbf962367",
+      "bytes": 894989,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over native underlay inside verified native write ownership",
+      "generation_prompt": "Use case: stylized-concept. Asset type: one fine pixel-art terrain overlay tile for a 1994 strategy game, PHYS0.SS 096.\nInput image 1 is the exact native geometry and color reference, a 512-square enlargement of a 16 by 16 tile. Image 2 is ONLY the approved brushwork and material style reference.\nPrimary request: redraw image 1 with refined crisp pixel detail matching image 2. A small upright irregular green and pale tan terrain detail with scattered blue water pixels around its base. Preserve the exact shapes, colors, separate small pieces and canvas placement from image 1; do not invent a large island, tree, animal or scene.\nLock the canvas, relative object size, silhouette, holes, edges and coordinates to image 1. Do not recenter, crop, enlarge the small object, add margins or change the viewing angle. Retain all disconnected native pieces. Use the green, brown, blue and tan colors in the same positions as image 1, with textured pixel variations within those colors. Copy no buildings or characters from image 2.\nUse real alpha transparency wherever image 1 is transparent. Fill the original terrain silhouette completely and retain tiny peripheral pixels. One square tile only. No checkerboard, backdrop, labels, border, UI, buildings, people or invented props. No blur, glow, smooth painting or anti-aliased silhouette.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "e87c550908c81f7cdb08e9e596d3548a5a8aabca5a8b80d3cf4aa5d9e41b6a1e"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 96,
+        "encoded_sha256": "2d414662242d31b319f67f61cfc4932600676693dad7cf2fb0d1d286b4c28965",
+        "encoded_length": 154,
+        "sorted_local_offset_value_sha256": "90c153fe439ab6c9a24867877b88655f204396181c72cc5a549d34675db687ca",
+        "opaque_cells": 70
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-147.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "091b73d1442dad61cc9b60ba6c796c477d8ed4298905272e35776c1bc4ae5a26",
+      "bytes": 500139,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over native underlay inside verified native write ownership",
+      "generation_prompt": "Use case: stylized-concept. Asset type: one fine pixel-art terrain overlay tile for a 1994 strategy game, PHYS0.SS 147.\nInput image 1 is the exact native geometry and color reference, a 512-square enlargement of a 16 by 16 tile. Image 2 is ONLY the approved brushwork and material style reference.\nPrimary request: redraw image 1 with refined crisp pixel detail matching image 2. A small low blue water fragment with a tiny green lip at the lower left. Keep the exact shallow footprint, separated peripheral pixels and canvas placement.\nLock the canvas, relative object size, silhouette, holes, edges and coordinates to image 1. Do not recenter, crop, enlarge the small object, add margins or change the viewing angle. Retain all disconnected native pieces. Use the green, brown, blue and tan colors in the same positions as image 1, with textured pixel variations within those colors. Copy no buildings or characters from image 2.\nUse real alpha transparency wherever image 1 is transparent. Fill the original terrain silhouette completely and retain tiny peripheral pixels. One square tile only. No checkerboard, backdrop, labels, border, UI, buildings, people or invented props. No blur, glow, smooth painting or anti-aliased silhouette.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "d1b178c419ad259df67a1f3b0cd822e7585370eab1830c044d355e276f389a67"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 147,
+        "encoded_sha256": "6b078a23571559f62ed3728e3e8164e154aeb332e0c95936676a02e9cb15b51d",
+        "encoded_length": 75,
+        "sorted_local_offset_value_sha256": "3b4ccd15362c12158cfacc192cadc8d0cab9bcd5bae5ef5694162f5fbe219e14",
+        "opaque_cells": 43
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-150.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "7be4837b98142b085e1f13da61eda97820819d2db727b73e1299faede4250bb6",
+      "bytes": 1438159,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "original generated alpha unchanged; Over native underlay inside verified native write ownership",
+      "generation_prompt": "Use case: stylized-concept. Asset type: one fine pixel-art terrain overlay tile for a 1994 strategy game, PHYS0.SS 150.\nInput image 1 is the exact native geometry and color reference, a 512-square enlargement of a 16 by 16 tile. Image 2 is ONLY the approved brushwork and material style reference.\nPrimary request: redraw image 1 with refined crisp pixel detail matching image 2. A diagonal sandy coast: muted tan land at upper left meets blue water toward lower right in the exact native stair-stepped footprint. Keep the exact shoreline angle and entry points on all edges.\nLock the canvas, relative object size, silhouette, holes, edges and coordinates to image 1. Do not recenter, crop, enlarge the small object, add margins or change the viewing angle. Retain all disconnected native pieces. Use the green, brown, blue and tan colors in the same positions as image 1, with textured pixel variations within those colors. Copy no buildings or characters from image 2.\nUse real alpha transparency wherever image 1 is transparent. Fill the original terrain silhouette completely and retain tiny peripheral pixels. One square tile only. No checkerboard, backdrop, labels, border, UI, buildings, people or invented props. No blur, glow, smooth painting or anti-aliased silhouette.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "614404a0138e9d613c8a2bf24c4ea6bec2dfffb56e12323baa53fc6cf2b70852"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 150,
+        "encoded_sha256": "9051788c9cf4265ce5dab6de028a5744be49d9680d412ca6b1d0320bcff2c415",
+        "encoded_length": 245,
+        "sorted_local_offset_value_sha256": "d9540b14bd294077b52ba00934122eb09a33ade47842991329262f54927807cc",
+        "opaque_cells": 175
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
     }
   }
 }

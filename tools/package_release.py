@@ -188,15 +188,27 @@ def dependency_notices(binary, repo, target=("linux", "amd64")):
 
 
 def hd_asset_files(repo):
-    """規格061至066 READY：只收已驗生成素材，逐項核對，拒絕額外檔案。"""
+    """規格061至067 READY：只收已驗生成素材，逐項核對，拒絕額外檔案。"""
     root = repo / "graphics"
-    if root.is_symlink() or {p.name for p in root.iterdir()} != {"manifest.json", "building-032.png", "sea-148.png", "person-100.png", "building-024.png", "building-016.png", "building-021.png", "building-027.png", "building-035.png", "building-039.png", "building-042.png", "building-043.png", "building-044.png", "building-045.png", "building-009.png", "icons-022.png", "icons-024.png", "icons-025.png", "icons-026.png", "icons-027.png", "icons-028.png", "icons-029.png", "icons-030.png", "icons-031.png", "icons-032.png", "icons-033.png", "icons-034.png", "icons-035.png", "icons-036.png", "icons-037.png", "icons-038.png", "icons-005.png", "icons-023.png", "icons-042.png", "icons-053.png", "icons-056.png", "icons-059.png", "icons-062.png", "icons-067.png", "icons-068.png", "icons-069.png", "icons-094.png", "icons-122.png", "icons-123.png", "icons-124.png", "terrain-079.png", "cursor-000.png"}:
+    if root.is_symlink() or {p.name for p in root.iterdir()} != {"manifest.json", "building-032.png", "sea-148.png", "person-100.png", "building-024.png", "building-016.png", "building-021.png", "building-027.png", "building-035.png", "building-039.png", "building-042.png", "building-043.png", "building-044.png", "building-045.png", "building-009.png", "icons-022.png", "icons-024.png", "icons-025.png", "icons-026.png", "icons-027.png", "icons-028.png", "icons-029.png", "icons-030.png", "icons-031.png", "icons-032.png", "icons-033.png", "icons-034.png", "icons-035.png", "icons-036.png", "icons-037.png", "icons-038.png", "icons-005.png", "icons-023.png", "icons-042.png", "icons-053.png", "icons-056.png", "icons-059.png", "icons-062.png", "icons-067.png", "icons-068.png", "icons-069.png", "icons-094.png", "icons-122.png", "icons-123.png", "icons-124.png", "terrain-079.png", "cursor-000.png", "terrain-006.png", "terrain-009.png", "terrain-017.png", "terrain-066.png", "terrain-071.png", "terrain-074.png", "terrain-077.png", "terrain-078.png", "terrain-080.png", "terrain-096.png", "terrain-147.png", "terrain-150.png"}:
         raise ValueError("HD素材目錄不同")
     files = {}
     for name, digest, limit in [
-            ("manifest.json", "52d874c63ac2a7b0e1ec01838e6218cf8ec20268900b1b64e4e48c432980f24e", 256 << 10),
+            ("manifest.json", "ecd7362e4cf9306e9e2c9c63804e05b0161010fcd332ed5fc97f30331036fe6e", 256 << 10),
             ("building-032.png", "c33885bd2570cc5ec0eb204aece69f1363b66fab5c1f16da82786f3b7e5139d8", 8 << 20),
             ("cursor-000.png", "2839ce6c635c16af668ce251807e2723ed343052ab12cfa29a9be04cd9dbd8d4", 8 << 20),
+            ("terrain-006.png", "53405c0a1fc73b5ec49fbe761a7e1e6c72046d48d64dea1a55a7f013458e29ff", 8 << 20),
+            ("terrain-009.png", "c25474e28eaa8545a400714bc15053d6bcf2b420e0e2aeb834d89b692f5e654b", 8 << 20),
+            ("terrain-017.png", "db2e8cc629d569f43d43f80fc9d04fae10a8719562149dcec514bb451a1edbbe", 8 << 20),
+            ("terrain-066.png", "a9c86687d36b3960dac157d89ddf2cc1aa59491e5c26adf9a265c4e52ed016ab", 8 << 20),
+            ("terrain-071.png", "3ac8bcc578422e026e0ac62344a86d709fa24d7ffa13a6ea104766118353a072", 8 << 20),
+            ("terrain-074.png", "7153858ccb7c6121b71cb49ba74567403df777368557352e9f6f22a4ccc18a81", 8 << 20),
+            ("terrain-077.png", "deaaa4e10ef707f8d4b58a108b48fdedce441c5e47e3711ab157e4928519e21f", 8 << 20),
+            ("terrain-078.png", "1f9011c2eeb1a564a1a92ca7efb9785505e7599df59e2e31da65713883df5d79", 8 << 20),
+            ("terrain-080.png", "3c00f1e33f831e32253da286c2637b64ee350d2f5c27221975f265eed838dc44", 8 << 20),
+            ("terrain-096.png", "e5f5da26ea5bb831ebc7de78b1ef63f41ab72846a26044ae173983bbbf962367", 8 << 20),
+            ("terrain-147.png", "091b73d1442dad61cc9b60ba6c796c477d8ed4298905272e35776c1bc4ae5a26", 8 << 20),
+            ("terrain-150.png", "7be4837b98142b085e1f13da61eda97820819d2db727b73e1299faede4250bb6", 8 << 20),
             ("terrain-079.png", "081ffb5506aa7aca0e80571053b85f0bdc920cb5e7884cf028521a1dd7ffaa58", 8 << 20),
             ("sea-148.png", "2c5d3edc8d38e44dc02d7ccb88e79e4f749edd8a0b1d3dfd54ec04b467ba61ff", 8 << 20),
             ("person-100.png", "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346", 8 << 20),

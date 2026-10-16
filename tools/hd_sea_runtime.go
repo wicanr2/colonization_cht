@@ -83,6 +83,9 @@ func loadHDSeaRuntime(h *hdRuntime, game, directory string) (*hdSeaRuntime, erro
 		if h.terrain079 != nil {
 			h.terrain079.memoryWrite(a, old, value)
 		}
+		if h.terrainBatch != nil {
+			h.terrainBatch.memoryWrite(a, old, value)
+		}
 	})
 	return p, nil
 }

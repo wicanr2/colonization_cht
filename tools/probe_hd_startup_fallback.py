@@ -40,6 +40,9 @@ def main():
     cases += [kind+"-building-%03d"%n for n in [16,21,27,35,39,42,43,44,45,9] for kind in ["missing","bad","linked"]]
     cases += [kind+"-icons-%03d"%n for n in [5, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 42, 53, 56, 59, 62, 67, 68, 69, 94, 122, 123, 124] for kind in ["missing","bad","linked"]]
     cases += ["missing-terrain079","bad-terrain079","linked-terrain079"]
+    terrain_batch = [6, 9, 17, 66, 71, 74, 77, 78, 80, 96, 147, 150]
+    cases += [kind+"-terrain-%03d"%n for n in terrain_batch for kind in ["missing", "bad", "linked"]]
+    cases += ["missing-terrain-source", "bad-terrain-source", "linked-terrain-source"]
     cases += ["missing-cursor-image","bad-cursor-image","linked-cursor-image",
               "missing-cursor-source","bad-cursor-source","linked-cursor-source","restored"]
     if args.cases:
@@ -50,15 +53,16 @@ def main():
         out.mkdir()
         assets = out / "graphics"
         case_game = args.game
-        if case.endswith("-cursor-source"):
+        if case.endswith("-cursor-source") or case.endswith("-terrain-source"):
             case_game = out / "game"
             shutil.copytree(args.game, case_game)
-            cursor_source = case_game / "CURSOR.SS"
+            source_name = "PHYS0.SS" if case.endswith("-terrain-source") else "CURSOR.SS"
+            cursor_source = case_game / source_name
             cursor_source.unlink()
-            if case == "bad-cursor-source":
+            if case.startswith("bad-"):
                 cursor_source.write_bytes(b"damaged")
-            if case == "linked-cursor-source":
-                cursor_source.symlink_to(args.game / "CURSOR.SS")
+            if case.startswith("linked-"):
+                cursor_source.symlink_to(args.game / source_name)
         if case != "missing-directory":
             shutil.copytree(args.bundle / "graphics", assets)
         if case == "missing-image":
@@ -92,6 +96,12 @@ def main():
         if case=="bad-terrain079": (assets/"terrain-079.png").write_bytes(b"damaged")
         if case=="linked-terrain079":
             (assets/"terrain-079.png").unlink(); (assets/"terrain-079.png").symlink_to(args.bundle/"graphics/terrain-079.png")
+        for n in terrain_batch:
+            name = "terrain-%03d.png"%n
+            if case == "missing-terrain-%03d"%n: (assets/name).unlink()
+            if case == "bad-terrain-%03d"%n: (assets/name).write_bytes(b"damaged")
+            if case == "linked-terrain-%03d"%n:
+                (assets/name).unlink(); (assets/name).symlink_to(args.bundle/"graphics"/name)
         if case=="missing-cursor-image": (assets/"cursor-000.png").unlink()
         if case=="bad-cursor-image": (assets/"cursor-000.png").write_bytes(b"damaged")
         if case=="linked-cursor-image":

@@ -408,6 +408,11 @@ func TestHDNineRuntimeNativeLifecycle(t *testing.T) {
 				allowed[i] = true
 			}
 		}
+		for i, cell := range h.terrainBatch.visible {
+			if cell.owned && cell.native == f.canvas[i] {
+				allowed[i] = true
+			}
+		}
 		native := draftRGB(f.indexed, f.palette)
 		for y := 0; y < 800; y++ {
 			for x := 0; x < 1280; x++ {

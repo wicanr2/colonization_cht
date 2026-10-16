@@ -6304,3 +6304,28 @@ v2 metadata直接參考誤列定稿圖；原紀錄保留，新勘誤記錄原版
 | source-negatives-r2/check.json | c6c08c5e58c37f3e30f82dadee9c5bb3cc2562ed3765ca46b7dfc5d5f2d91cca |
 | default-49-negatives-r1/check.json | 84a720c982d2e95c27fc76f9c4f9be9a24b8f8595624b83617f2c5d79c9c2fe1 |
 | source-index-r1.json | 9f9bf08a5afb60c164be178e8ff994b84cc13a08629726a8b82e2004f6391dce |
+
+## 2026-10-16 R63：十二來源alpha與正常GUI的限定證據
+
+輸入、原始定位與dosgolem位址空間沿[規格067](docs/spec/067-hd-world-terrain-batch.md)。
+VICEROY.EXE為a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3，
+PHYS0.SS為deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16。
+工具為Go1.26.7、Python3.11.2／Pillow9.4與隔離dosgolem82a14b2。
+生成原PNG、直接參考指紋與完整提示見graphics/manifest.json；原版參考不公開。
+
+confirmed：29點來源與CPU／RAM／VGA／DAC、兩個存檔保持；80次新來源、
+3325 RAM保存、2471還原與220有來源的游標配對保持。823856個RGBA及28872144個
+範圍外像素核對相同，108來源反例、40載入反例及既有49點／12 RAM反例保持。
+新正常GUI另有143筆輸入、65點獨立原版收據與36份懸停；
+1020160地形RGBA及47232游標RGBA相同。逐來源游標配對共2502例，
+第080來源有6例，第096來源無該正向例。R62的零例只描述R62樣本，不當作原版不會發生。
+
+勘誤：每次滑鼠移動必有來源RAM游標還原的假設不成立。
+cursor-diagnostic-r3/diagnostic-check-r2.json重生同一輸入的原版觀測／控制，
+兩點完整狀態、所有來源格與還原計數和GUI相同，第006來源計數皆零。
+因此依實際事件比較RAM配對，並分開驗游標像素、遮擋及移開後HD恢復。
+失敗證據保留；不補造存檔、不給診斷完整GUI信用、不改原版行為。
+
+正式審查432d55e8e0d90418ab09574cc20113236105a13e870af19f73942616f075f405，限定CONFORMED範圍見規格067。
+來源索引ba2bb3755e94a1f389202faa9a0a79b93dc1f69d6ae7e6c9f2814f053129df99仍為不含原版像素的研究索引，
+58張正式連結不等於1552列皆已HD，也沒有完整可見圖像分母。
