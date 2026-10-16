@@ -1,13 +1,13 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-16",
-  "code_commit": "fe97cf6fc52f4dd3801af76ebdd42f55e3239c72",
-  "binary_sha256": "f39c7335a1a57df8711384b27ceb1a555ac52a1334f9a8190c2e1524c5d10781",
-  "formal_binary_sha256": "b973a40a1258e6ee078d6304d77ab6f70ac7446603830d82d783e3fd872514ca",
-  "source_build_sha256": "733fcd77ea4e065d42e8ebcf326d97701c7e90ff14f755ae2eadd22632c22942",
-  "read_only_gui_probe_build_sha256": "04f97e6c7a3c7192568901cb790c42cd321202a5ad9d5a6f67287ff381d08f1a",
+  "code_commit": "d48eb9d47b1fa2ef0ca8fcc4385ef8274d7f9377",
+  "binary_sha256": "62a89fa74a9687998aa5fb78fe30811d91786d9da3e7f52c1f0393c0f4d8d03a",
+  "formal_binary_sha256": "f37156b63b0d1a90118eae97707269f227391f26519234d17bde2126e135f911",
+  "source_build_sha256": "1711e23aa567b8ebdb49895fff209f07e09d1331d4fea6b1c9566da2116c1449",
+  "read_only_gui_probe_build_sha256": "489b199691ceb41453939c7bb492616185d859aabc8beead5a72afe1d3230c39",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 68,
+  "formal_hd_assets": 69,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -33,23 +33,25 @@
     },
     {
       "file": "hd-world-zh.png",
-      "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
+      "sha256": "20281ac92112717d90c70b99aa5d22001c3c78b092c51363f9cbe62d594763ef",
       "size": [
         1280,
         800
       ],
-      "scene": "terrain079-start",
+      "scene": "world",
       "language": "zh-Hant",
       "graphics": "hd",
-      "step": 89800000,
-      "binary_sha256": "56b1aa5c0da67ed4169b67e1705378ee372450fb6a71fdb609f2514c14d8b516",
-      "formal_binary_sha256": "070483eaac00568e3d79517d11dd444c84a2ec1684a3d8fedc96c437ff4ba9b6",
-      "source_receipt": "workplace/reports/goal186-display-hd/hd-world-small-terrain-r64/gui-formal-r1/gui/gui.display-118.png",
-      "source_gui_check_sha256": "31856a1a5e72842672afd30fcb428c7e0d986b8a2bb512bb3cb0b3aefe4cb8f0",
+      "step": 67400000,
+      "binary_sha256": "62a89fa74a9687998aa5fb78fe30811d91786d9da3e7f52c1f0393c0f4d8d03a",
+      "formal_binary_sha256": "f37156b63b0d1a90118eae97707269f227391f26519234d17bde2126e135f911",
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-cold-start-sources-r65/world-wood-formal-gui-r1/gui/gui.display-078.png",
+      "source_gui_check_sha256": "11bf3da69309969a947d6b7e53f9718f491a424127ed774ae8d082d1d152b29c",
       "source_kind": "actual formal game presentation with read-only capture helper; verified byte-for-byte against the real X11 window game area",
       "capture_pixels_unchanged": true,
-      "code_commit": "468e835ffb5a36f9e012797104bfe19e7dcaec82",
-      "formal_hd_assets": 66
+      "code_commit": "d48eb9d47b1fa2ef0ca8fcc4385ef8274d7f9377",
+      "formal_hd_assets": 69,
+      "independent_pixels_sha256": "ed871c3a763ed84774aae08837bf952df8170a31c291455b654c2f93cc083f96",
+      "wood_source_cells": 13149
     },
     {
       "file": "noto-menu-zh.png",
@@ -96,18 +98,41 @@
     "No generated concept images or DRAFT terrain prototypes used.",
     "Game-area captures use a read-only helper; the display code and formal loader match the verified production sources.",
     "R66 adds the settled main-menu background, title art and wood texture; remaining backgrounds and animation are unfinished.",
-    "Only the menu image is refreshed in R66. The other three R64 images remain unchanged with per-image provenance."
+    "R67 refreshes only the verified Traditional Chinese world image. The R66 menu and R64 colony/settings images retain their exact prior PNGs and per-image provenance.",
+    "The R67 Traditional Chinese colony sample hit the existing native/cursor guard, so it is not used as an HD README image."
   ],
   "previous_build": {
     "kind": "README actual development screenshots",
     "date": "2026-10-16",
-    "code_commit": "468e835ffb5a36f9e012797104bfe19e7dcaec82",
+    "code_commit": "fe97cf6fc52f4dd3801af76ebdd42f55e3239c72",
+    "binary_sha256": "f39c7335a1a57df8711384b27ceb1a555ac52a1334f9a8190c2e1524c5d10781",
+    "formal_binary_sha256": "b973a40a1258e6ee078d6304d77ab6f70ac7446603830d82d783e3fd872514ca",
+    "source_build_sha256": "733fcd77ea4e065d42e8ebcf326d97701c7e90ff14f755ae2eadd22632c22942",
+    "read_only_gui_probe_build_sha256": "04f97e6c7a3c7192568901cb790c42cd321202a5ad9d5a6f67287ff381d08f1a",
+    "released_version_unchanged": "v.1.0.3-20261010",
+    "formal_hd_assets": 68
+  },
+  "provenance_scope": "World uses R67 and d48eb9d with 69 assets; menu retains R66 and fe97cf6 with 68 assets; colony/settings retain R64 and 468e835 with 66 assets.",
+  "graphics_manifest_sha256": "1c0fce5e3d3bd73b0a38a1a1dc309e429a1cdfa7206428b8f73eb5529c2dae6e",
+  "conformance_sha256": "4e70453e2a26a44fc08bc701d919e487ff70222848e39c104006f79e2e33487d",
+  "previous_world_capture": {
+    "file": "hd-world-zh.png",
+    "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
+    "size": [
+      1280,
+      800
+    ],
+    "scene": "terrain079-start",
+    "language": "zh-Hant",
+    "graphics": "hd",
+    "step": 89800000,
     "binary_sha256": "56b1aa5c0da67ed4169b67e1705378ee372450fb6a71fdb609f2514c14d8b516",
     "formal_binary_sha256": "070483eaac00568e3d79517d11dd444c84a2ec1684a3d8fedc96c437ff4ba9b6",
-    "source_build_sha256": "0f0b023cb5bbe79e46ea3b81d7df51374e37689e1b3c3ed1ec1e724d99cfbb28",
-    "read_only_gui_probe_build_sha256": "9033d568cabbc8502b37ebd513bff89f699b5e22955aa07aba8b33b3e108ccf0",
-    "released_version_unchanged": "v.1.0.3-20261010",
+    "source_receipt": "workplace/reports/goal186-display-hd/hd-world-small-terrain-r64/gui-formal-r1/gui/gui.display-118.png",
+    "source_gui_check_sha256": "31856a1a5e72842672afd30fcb428c7e0d986b8a2bb512bb3cb0b3aefe4cb8f0",
+    "source_kind": "actual formal game presentation with read-only capture helper; verified byte-for-byte against the real X11 window game area",
+    "capture_pixels_unchanged": true,
+    "code_commit": "468e835ffb5a36f9e012797104bfe19e7dcaec82",
     "formal_hd_assets": 66
-  },
-  "provenance_scope": "Main-menu capture uses R66 and fe97cf6; the other three images retain their explicitly recorded R64 code commit, 66-asset build and unchanged PNG bytes."
+  }
 }

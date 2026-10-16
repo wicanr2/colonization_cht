@@ -72,6 +72,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 以下是開發中的五語顯示層與 HD 畫面，尚未收進目前發行版。截圖來自實際遊戲視窗，
 來源與指紋見[截圖紀錄](docs/screenshots/readme-captures.json)。全量 HD 包含商品、資源、單位、
 其餘小圖像、特殊游標與動畫幀，目前仍在逐項開發。
+已接線的生成 HD 原圖與來源清冊收在 [graphics/](graphics/)。
 
 ![繁體中文殖民地畫面與 HD 建築、人物及商品小圖像](docs/screenshots/hd-colony-zh.png)
 
@@ -79,7 +80,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 
 ![繁體中文世界畫面與 HD 海洋、地形](docs/screenshots/hd-world-zh.png)
 
-世界畫面：海洋、部分河岸與森林地形、側欄圖示已使用 HD 素材，其餘地形與單位逐項接續。
+世界畫面：海洋、部分河岸與森林地形、側欄圖示、頂端與側欄木紋已使用 HD 素材，其餘地形與單位逐項接續。
 
 ![五語與原版、HD 圖像模式的顯示設定](docs/screenshots/display-settings-zh.png)
 
@@ -94,7 +95,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 所有建置、遊戲執行、分析與抓圖都在 Docker 容器內進行，需要自備合法原版。
 
 - [目前脈絡](CONTEXT.md)、[工作計畫](WORKLIST.md)（由 `docs/worklist.json` 產生）
-- [多語系、HD 切換與實際遊玩影片](docs/goals/186-display-settings-and-gameplay-video.md)：五語整包後端與設定保存已接線；十二種城內建築與景物、海洋與二十一種世界地形圖塊及碎片、一個人物、三十種小圖像、一般游標及主選單背景與木紋已接正式HD顯示。全量圖像包含小圖像與動畫幀，仍在逐項開發，尚未收進目前發行版。
+- [多語系、HD 切換與實際遊玩影片](docs/goals/186-display-settings-and-gameplay-video.md)：五語整包後端與設定保存已接線；十二種城內建築與景物、海洋與二十一種世界地形圖塊及碎片、一個人物、三十種小圖像、一般游標、主選單背景與木紋，以及世界與城內木紋已接正式HD顯示。全量圖像包含小圖像與動畫幀，仍在逐項開發，尚未收進目前發行版。
 - [規格](docs/spec/)與[各輪目標](docs/goals/)
 - [驗證矩陣](docs/verification-matrix.md)（`tools/verification_matrix.py` 產生）
 - [研究證據](RESEARCH-LOG.md)與[工作歷程](WORKLOG.md)
