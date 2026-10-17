@@ -79,3 +79,6 @@ __pycache__/
 
 # 規格069 R70 READY：生成原PNG，原版參考仍留本機。
 !/graphics/customiz-000.png
+
+# README R70：已驗正式視窗原PNG，來源見readme-captures.json。
+!/docs/screenshots/hd-custom-world-zh.png

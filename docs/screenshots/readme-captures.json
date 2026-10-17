@@ -1,13 +1,12 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-17",
-  "code_commit": "691c36cc71299f077f9203ab6b5ae4439220f08c",
-  "binary_sha256": "06a49e2e9e3931abad40c327b56c4f8a6afbe8644171f424d00463f02e9d082a",
-  "formal_binary_sha256": "8619c0a3c24feb89447513832f9e527cb99f0bc32661c2d0e427edd13dfa8621",
-  "source_build_sha256": "4140cf59d5b60a6e13c32f78c103854de2be1dc4119075c805eb2e2a7798a152",
-  "read_only_gui_probe_build_sha256": "c4ec67dea4d02c95b69444647c4e1ce4672bd0720a8eae89c26ac0261f611132",
+  "code_commit": "d6061ce3853a2395c195e7d49a1e3b514eee19a7",
+  "binary_sha256": "3721e55e6d80baf4ee372f3a3cfef25e899e2f1fe1740c5693a90428607dadc8",
+  "formal_binary_sha256": "3721e55e6d80baf4ee372f3a3cfef25e899e2f1fe1740c5693a90428607dadc8",
+  "source_build_sha256": "3d314377a117d0696d61c8f9a238f954478ded40f3ea594a9a203e09bde2f0fc",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 70,
+  "formal_hd_assets": 73,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -93,6 +92,34 @@
       "capture_pixels_unchanged": true,
       "code_commit": "468e835ffb5a36f9e012797104bfe19e7dcaec82",
       "formal_hd_assets": 66
+    },
+    {
+      "file": "hd-custom-world-zh.png",
+      "sha256": "ef121b47d7810f834ffcec03be77ff703b236eaa38c3c37ff2903de36c6f772f",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "custom-world",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 33600000,
+      "binary_sha256": "3721e55e6d80baf4ee372f3a3cfef25e899e2f1fe1740c5693a90428607dadc8",
+      "formal_binary_sha256": "3721e55e6d80baf4ee372f3a3cfef25e899e2f1fe1740c5693a90428607dadc8",
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-custom-world-background-r70/formal-gui-r1/gui.display-022.png",
+      "source_gui_check_sha256": "d5e655d23339486e005335328c911a35e35424675cebab6994c52c30ebfc46f7",
+      "same_state_original_check_sha256": "1b9653d3ebe7f43dc6d9d22fb2b2effc25d3d34459741c13dd810ce2ff2c51a9",
+      "independent_pixels_sha256": "1035eb4a4e38c3b7fe6b216cc97823b76a7e7ceebc5b624d972ff087aa0bf44f",
+      "source_kind": "actual uninstrumented formal game presentation from standard display diagnostics; byte-for-byte matched to the real X11 game area",
+      "capture_pixels_unchanged": true,
+      "code_commit": "d6061ce3853a2395c195e7d49a1e3b514eee19a7",
+      "formal_hd_assets": 73,
+      "source_id": 311,
+      "generated_cards": 12,
+      "painted_source_cells": 61470,
+      "picture_rgba_pixels_checked": 953248,
+      "graphics_manifest_sha256": "c5f997aea5ebaca854497d10b17e1f9a1271d01abf8261c9b3efd2762423c2ae",
+      "conformance_sha256": "8b384068a1c490d0e6f5f95162b481cdc17ce8c247ab6101bc97a5e75007c357"
     }
   ],
   "limitations": [
@@ -115,9 +142,9 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "Colony uses R68 and 691c36c with 70 assets; world retains R67 and d48eb9d with 69 assets; menu retains R66 and fe97cf6 with 68 assets; settings retains R64 and 468e835 with 66 assets.",
-  "graphics_manifest_sha256": "52c7c2aae1ce493489acc86a98c6adc6c43ce77136cd1700e9ca741e3ef2ecb8",
-  "conformance_sha256": "0f456fb1e2cca8e05ea44fd63f24133f3372a2e9a696a7320e17f3d1b908042e",
+  "provenance_scope": "Custom-world uses R70 and d6061ce with 73 assets. Colony retains R68/691c36c (70), world R67/d48eb9d (69), menu R66/fe97cf6 (68), settings R64/468e835 (66); each image retains its own provenance.",
+  "graphics_manifest_sha256": "c5f997aea5ebaca854497d10b17e1f9a1271d01abf8261c9b3efd2762423c2ae",
+  "conformance_sha256": "8b384068a1c490d0e6f5f95162b481cdc17ce8c247ab6101bc97a5e75007c357",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -157,5 +184,15 @@
     "capture_pixels_unchanged": true,
     "code_commit": "468e835ffb5a36f9e012797104bfe19e7dcaec82",
     "formal_hd_assets": 66
+  },
+  "previous_development_capture": {
+    "code_commit": "691c36cc71299f077f9203ab6b5ae4439220f08c",
+    "binary_sha256": "06a49e2e9e3931abad40c327b56c4f8a6afbe8644171f424d00463f02e9d082a",
+    "formal_binary_sha256": "8619c0a3c24feb89447513832f9e527cb99f0bc32661c2d0e427edd13dfa8621",
+    "source_build_sha256": "4140cf59d5b60a6e13c32f78c103854de2be1dc4119075c805eb2e2a7798a152",
+    "formal_hd_assets": 70,
+    "graphics_manifest_sha256": "52c7c2aae1ce493489acc86a98c6adc6c43ce77136cd1700e9ca741e3ef2ecb8",
+    "conformance_sha256": "0f456fb1e2cca8e05ea44fd63f24133f3372a2e9a696a7320e17f3d1b908042e",
+    "read_only_gui_probe_build_sha256": "c4ec67dea4d02c95b69444647c4e1ce4672bd0720a8eae89c26ac0261f611132"
   }
 }
