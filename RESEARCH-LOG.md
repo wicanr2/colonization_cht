@@ -6541,3 +6541,17 @@ dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7、Python3.11.2／Pil
 四側至223000000步的完整原版狀態、WAV與存檔和實際GUI相同。
 原稿、提示、來源及指紋見graphics與[規格070](docs/spec/070-hd-unit-small-images.md)，正式審查ba17a1b0aadbdcb5cb5d535685df0498630e6fdbd969cfbed183afd736844fee。
 世界移動、戰鬥、受損砲台065、動畫及全量HD未外推，沒有新發行。
+
+
+## 2026-10-17 R74：正常殖民者百科22幀
+
+推論等級confirmed，範圍限本輪正常百科與標準游標。輸入ICONS.SS SHA-256 a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716；VICEROY.EXE a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3。解碼收據e0b14a6ba8a8bec5cae3fd165ea6d88de384dc4f61c1ec67ca8504c29189aa5d。來源定位為ICONS.SS原始序號058、060、066、081至093、095至098、106及107，完整編碼／資料偏移見來源索引。
+
+工具為dosgolem 82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7及固定Docker映像colonization-verification:20261007-runtime-r2／hr-go-ebiten:1.26.7-2.9.9-r1。位址基準為dosgolem實模式CS:IP及20-bit RAM，不是IDA EA。三個writer原定位0D46:0181、0D46:01B4及0D46:01D2；來源、writer原碼、動態返回及未知後畫逐次核對。完整原始輸入、RAM、索引與參考只留本機。
+
+- 正常81筆輸入／54截點，22次完整繪製與26624事件獨立重建。來源清冊0bdb3f9006d7df6b459178cbab313a47aa4a723378f5a856bd0e32d86ba226fc，原始draws ea960edcc94d36cb3507529746741ade150ea465ef3a5496e156cd83ede76311。
+- RAM模型b6da3cef172296ce2abbd900413743d6287678a0cb3def046341112f6c2ba2ea；完整游標表面3ce2ee57799424f3c08acaf6e7c57f9f52c2f93f34dbad2c136bdd681cee3e81。1381格有效來源、1353格有原RGBA輸出，28格全透明取樣保留原版。主畫布轉送與RAM／游標來源還原正向樣本均0。
+- 原稿量測與READY審查27f5d23cd4d57b9842e3ba8fff7147cdb739d40b6c06fc803f759246524596d9。正式RGBA原版模型ff935f5064ed3934891e5db468f6125dcf23382166ed2a01c03c47597b31144e；五語GUI c7ef362b7ab1dbed83191a631bda59f0bfdf825453494fad79ee08bef01143d6。完整生成提示與原alpha見graphics/manifest.json。
+- 本機正式審查r74-colonists-conformance-r1.json為70349035b3ca433349d4fe3a6fc8219acef55e1231eadb714443f94500adb6f9；原版資料到來源、正式顯示、實際GUI、CPU／RAM／索引／DAC／WAV／存檔垂直鏈在限定流程通過。世界移動、戰鬥、動畫與完整玩家可見分母仍未知。
+- 追加勘誤：歷史Go負向資源副本有無關缺件，撤回相應逐檔信用；現行323個完整副本反例取代。原R73測試raw log遭錯誤入口覆寫，原彙整及圖像保持，本輪重跑通過。全131來源最終可見等式不適用游標覆蓋截點，未授予本輪全131重驗信用。詳規格070與WORKLOG本日紀錄。
+- R75第112幀原始117格不透明，R71有效所有權116格；另外19幀原稿雖已生成，來源與游標驗收尚未完成，維持DRAFT。

@@ -1,6 +1,6 @@
 # 單位小圖像的來源與HD覆蓋
 
-狀態：五艘船及三種車輛／火炮的正常百科顯示限定CONFORMED，2026-10-17；其他新來源維持DRAFT。正式HD為81張生成原PNG，完整玩家可見分母仍未知。
+狀態：五艘船、三種車輛／火炮及22幀殖民者的正常百科顯示限定CONFORMED，2026-10-17；其他新來源維持DRAFT。正式HD為103張生成原PNG，完整玩家可見分母仍未知。
 
 ## 範圍與來源
 
@@ -162,6 +162,86 @@ R73原始來源數勘誤：第一版驗收預期將篷車141格原始不透明�
 
 正式二進位為fa4307f1388e3bfd953359b501a0513ea0a62c2ba47214156895fb22a7f4f11f，清冊為336653b647cd381931be990409b71bd0abcfdbb6ebf3d3db0054c6d7ee6b70c8。
 [來源索引組裝器](../../tools/build_hd_source_index.py)新增--vehicle-ready-report與--vehicle-conformed-report，核對78張繼承原稿與本批驗收後附加三幀CONFORMED。1552筆原始事實、R71的80種研究及R72五船證據保持；已知未接線的新來源剩41種，未命中來源及其他格式仍未排除全量範圍。
+
+## R74殖民者同頁22幀：READY契約及限定CONFORMED
+本節保留實作前READY契約；2026-10-17完成正常殖民者百科同頁22幀的限定CONFORMED。既有81張原稿保持，新增原稿不代表全量HD完成。
+原始ICONS.SS、VICEROY.EXE、工具版本及位址空間沿本規格固定表。R71的獨立逐寫檢查已證實本表各幀的唯一來源、完整編碼、三個writer、返回、有效身分及正常可見像素。source call次數不代替可見性；本批採pedia-unit-05的逐點所有權與畫布核對。
+
+既有39槽位保持，在表尾追加22槽位，共61來源。來源與完整逐寫守門、未知後畫含同值撤銷、原版色號與既有標準游標守門保持，不增加觀測器或遊戲寫入。原稿保持單幀PNG與原alpha，alpha至少128只量取樣框；各幀依原版不透明內容矩形縮放，不套完整16格高度。新增清冊338537bytes仍低於512KiB，PNG上限8MiB保持。
+
+| 原始序號 | 原版尺寸／內容框 | 原PNG SHA-256 |
+|---|---|---|
+| 058 | [6, 16]／[0, 2, 6, 16] | 61743ce80d8c32b180b1cc8c778af73cde0935115f1a83cd0099f2e8cd6179ce |
+| 060 | [6, 16]／[0, 2, 6, 16] | 5422ec86e9c250d02fcdfaa731a3d8fdc34fcd3a74ceec5586aae72bd6836224 |
+| 066 | [8, 16]／[1, 1, 7, 16] | 2ee09b5d97a813fe09b714f45c6ef302b5a9021ba5b260ce7b7c66976cd930de |
+| 081 | [8, 16]／[0, 2, 8, 16] | 860dbb88125bf15711a9cec5f79429de211203f5a25119834200f01557b570f0 |
+| 082 | [6, 16]／[0, 2, 6, 16] | 6064d0f3c204d227e3cc202a131b65777a19920f6db007f22889359d412f39c2 |
+| 083 | [6, 16]／[0, 2, 6, 16] | daebfb120f397c41f2fc68e1e1ea8edf570a27a1f1dff300553234de119100da |
+| 084 | [6, 16]／[0, 2, 6, 16] | 0bc1b2bf46b52a2d038cc4abddcb8617da9b111d6cebabbaeb6dd41336dae201 |
+| 085 | [8, 16]／[0, 2, 8, 16] | f19cd765d4b288c2b56af2d20abaa1bdd0fe0c026da11f98088fe85078c5e203 |
+| 086 | [8, 16]／[0, 1, 8, 16] | 0eb43567c95ccf81cfcc107db10cacaa67d341b358da2043456a7793da8ef8c2 |
+| 087 | [8, 16]／[0, 2, 8, 16] | 9e440f2b86014f715a2ba92a9ab583ff71299d0d00f8e66eb77728c98cf460cd |
+| 088 | [8, 16]／[0, 2, 8, 16] | 418541b1e716f9ff84bdc962eaa1f3c927ff5e7f18aab689b07e96eba55431f7 |
+| 089 | [8, 16]／[0, 2, 8, 16] | e8c3874a0308134a36a634cd33201d2fc5350fa5fb8d42517e743e8f371733ad |
+| 090 | [6, 16]／[0, 3, 6, 16] | 304baa75c942ea22384ccddf23edb50556ce87bc5f0fafa9092a6386478d42b7 |
+| 091 | [6, 16]／[0, 3, 6, 16] | 6733d1909558a3d29136749d19c79b47489a9ee01869a55220cbcfdb603ddc53 |
+| 092 | [6, 16]／[0, 3, 6, 16] | 9941464e8109e280301c26a6fdcacce810e9caa93931c547d3cb39de4b2b3806 |
+| 093 | [8, 16]／[0, 2, 8, 16] | c1a16585d2424e742a00bc77824ebbcb54e98b786a99dce7bcd93331a8bf465d |
+| 095 | [8, 16]／[0, 3, 8, 16] | 8103c8a0a1c837df57c1f31fa6c37ff24203684f3f16315b47218ada3b84232e |
+| 096 | [7, 16]／[0, 2, 7, 16] | 1d7d88bc8004429571398c5f58e9528967e9565a1c5e5688a11389a7019e683c |
+| 097 | [7, 16]／[0, 2, 7, 16] | fc64e8b372dd064311e6e817a6a5b6bfcfdfc6515c8391e83c5297e5e359a38c |
+| 098 | [6, 16]／[0, 3, 6, 16] | 5561bf7138e91d27e89698b83431c7dd46bc5708f28b7fc6fe76bf66f26b562d |
+| 106 | [6, 16]／[0, 3, 6, 16] | dbae8283bf2236b5b69e457f78d278c2df78f640f6a79010f6b0f33314ae8417 |
+| 107 | [8, 16]／[0, 4, 8, 16] | fd6afc141275a481ac18631e86dcf0394c56fbdf8b578e83ba3afc360338dc9b |
+
+內建imagegen完整提示、參考指紋、尺寸及原稿見本機R71根r74-colonists-generation-r1.json，SHA-256為b63e5c9236e4aab8b863bbc1cf5bd6ed5149489cd3ad5372dc33bfed5c558887。READY審查r74-colonists-ready-review-r1.json為27f5d23cd4d57b9842e3ba8fff7147cdb739d40b6c06fc803f759246524596d9；逐格透明量測保存在samples。原稿放入[素材清冊](../../graphics/manifest.json)，原版參考只留本機。
+
+驗收須核對正常載入與百科操作、22幀獨立原版來源模型及每幀20項真實來源反例、五語原版／HD、逐幀游標懸停／返回、原RGBA透明處與旗標保留、區外相同、原版CPU／RAM／索引／DAC／音訊／存檔、缺件回退及封裝白名單。既有39來源須抽測回歸。來源測試可隔離新22幀的繪製；正式GUI仍以完整HD層驗證，不能以隔離圖取代正式畫面。世界移動、戰鬥、動畫與其餘圖像不授予信用。
+
+資源測試分批入口：[Go測試TestHDResourceAndStartupFallback](../../tools/hd_runtime_test.go)可用TEST_HD_RESOURCE_CASE_CATALOG輸出完整案例名；另設TEST_HD_RESOURCE_CASE_CATALOG_ONLY=1只列清單，不授予錯件驗收信用。TEST_HD_RESOURCE_CASE_SELECTION指定JSON字串陣列，拒絕空批次、重複或未知名稱。每批仍先驗完整副本載入，逐案使用原錯件操作、全載入拒絕與原版RAM不變檢查，復原全部暫存檔後才通過；案例全集與完成子案例的聯集必須一致。這些環境變數只用於測試，不進玩家流程。
+
+[本批獨立RGBA檢查器](../../tools/check_hd_colonist_pixels.py)以--root指定本機R71根、--assets指定graphics；--runtime-output指定54點原版測試輸出，加--gui則驗正式五語畫面。它另驗同頁既有59、94及100幀，保留原版旗標、原alpha、實際游標及其餘像素。
+
+## R74正式驗收收據
+
+規格070 R74正常殖民者百科22幀限定CONFORMED。合計103張生成原PNG／清冊104檔，59Go／42綁定；既有81張原稿與清冊紀錄保持。六類Go測試含子案例去重329項完成，計入案例零skip；完整副本逐檔拒絕323項、小圖像資源245項及go vet通過。54點／81輸入、440個真實來源反例及46080000個RGBA全等；既有31來源49點、五船24點、三類18點回歸通過。正式63項GUI中54項為五語原版／HD及22幀游標懸停／返回，驗2405376個來源RGBA、55648個游標RGBA及52737536個區外保留RGBA。97筆實際輸入四側至123800000步，CPU、完整RAM、索引、DAC、WAV及存檔與實際GUI相同，含play=true。4種啟動回退／恢復、104檔封裝及314項拒絕通過。1381格來源中1353格實際HD繪製，28格沿原alpha透明保留。世界移動、戰鬥與動畫仍待驗，全量HD未完成，沒有新發行。
+
+本批只在既有來源表尾追加22槽，共61來源／60張小圖像美術，第100幀沿人物層。正式程式演算法保持，原PNG、alpha、原版旗標與後畫字形逐點核對。54個原版截點的CPU、完整RAM、索引、DAC及輸入均與實際GUI相同；52點符合完整游標表面，另兩點為無本批來源的載入守門。22次完整來源繪製與26624事件經獨立模型重建。主畫布暫存轉送、RAM保存／還原與游標來源還原皆0，不新增還原信用。
+
+正式GUI採R1，驗收與建置採R2至R6；六版所有非測試Go來源與二進位一致。四個正常來源測試在R2完整通過；小圖像資源測試在R4完整通過。大資源測試計112個已復原完成的R4子案例、R5九批208個剩餘案例、R6補齊地形079的三個案例，聯集等於323個必要案例。中斷父行程、失敗嘗試及僅列名行程不授予通過信用。
+
+歷史資源測試勘誤：舊Go測試副本漏複製部分正式圖像及CUSTOMIZ.PIK，某些逐檔錯件案例可能因無關缺件而拒絕。撤回這類R72／R73逐檔負向信用，保留原紀錄；現行每批先證明完整自有副本能載入，再逐案以新Machine測缺檔、壞檔與連結，通過前逐byte復原全部檔案。103張原稿皆有這三類反例。正常來源、實際GUI、CLI啟動及封裝證據分開保留。
+
+R74第一次測試入口誤指R73舊腳本，失敗紀錄保存在r74-stale-test-entry-r1.jsonl及同名JSON；舊r73-vehicles-tests-r3.jsonl被該失敗輸出覆寫，不能再以歷史雜湊引用該原始log。原R73彙整、正式審查與18點圖像收據保持；本批已重新驗三類18點及9216000個RGBA。這次錯誤不改正式程式或素材。
+
+[全131來源檢查器](../../tools/check_hd_unit_lifecycle.py)的最終可見像素等式不適用本批游標覆蓋截點，R74全點檢查拒絕，未改寬條件也未授予全131重驗信用。正向來源沿R71已證實資料，另外以新22幀RAM模型、完整游標表面、54點來源測試及正式GUI驗收。其他玩家路徑仍待驗。
+
+本機證據根為workplace/reports/goal186-display-hd/hd-sprite-batch-r71；commands-r74.json保存容器、精確命令入口與工具雜湊。[來源索引組裝器](../../tools/build_hd_source_index.py)以--colonist-ready-report及--colonist-conformed-report附加限定驗收，原1552筆事實與R71研究保持。
+
+| 收據 | SHA-256 |
+|---|---|
+| r74-colonists-ready-review-r1.json | 27f5d23cd4d57b9842e3ba8fff7147cdb739d40b6c06fc803f759246524596d9 |
+| r74-colonists-conformance-r1.json | 70349035b3ca433349d4fe3a6fc8219acef55e1231eadb714443f94500adb6f9 |
+| r74-colonists-build-r6.json | 80a8d92df3990901c07a7ea52cac4067552d7aaee41405d963137c517b7857c3 |
+| r74-colonists-tests-combined-r1.json | c6d5793de57b03ffc5e49d064978e1b74170bf46f6be578fc9f29527478a08db |
+| r74-resource-complete-r6-check.json | 6775db636b5a092fa0e60fa12dad7799089254ce2d4fd155192e6f67b499f7d2 |
+| colonists-ram-r1/model-r1/check.json | b6da3cef172296ce2abbd900413743d6287678a0cb3def046341112f6c2ba2ea |
+| r74-colonists-cursor-surfaces-r1.json | 3ce2ee57799424f3c08acaf6e7c57f9f52c2f93f34dbad2c136bdd681cee3e81 |
+| r74-colonists-native-pixels-r1.json | ff935f5064ed3934891e5db468f6125dcf23382166ed2a01c03c47597b31144e |
+| r74-colonists-gui-pixels-r1.json | c7ef362b7ab1dbed83191a631bda59f0bfdf825453494fad79ee08bef01143d6 |
+| r74-colonists-replay-r1-check.json | db584141f21bcda5d8da06f341790b42a4bae27a42ed1b30143801459e16395a |
+| r74-colonists-startup-r3/check.json | 1ae42ee9811dc80b1927b737a69aa4842f489bf1bc358d4f6734241a2a751467 |
+| r74-colonists-package-r1-check.json | 1aee1cc36296e75697dbd16b8eb89b35f0f109abec2c2c38bfca5e6930dd2772 |
+| r74-source-index-formal-r2.json | 904f7d6f25f16f640cd7382ea3b867c58662e02c326ea3fa3d3f8e225372d0f6 |
+| commands-r74.json | e47b9de2dc545f13e5501dbe0704cea579b4504eadfbddff00155267b0654848 |
+
+正式二進位為7a9470f550b7160ff5ee83dcc83d3fc75ffcea5884d578cc58592fed6684903a，清冊為963b67ab9fdbdf02577a063dca488a525f7491cbf9d769c3f9c664117adcb758。
+
+## R75剩餘19幀原稿：DRAFT
+
+R71已知未接線來源現剩065、073至077、101至105、109至112、125、126、128及129，共19幀。原稿已依現行單幀PNG格式與定稿畫風生成，尚未加入graphics或正式來源表。完整提示、參考指紋、原alpha及尺寸保存在本機r75-unit19-generation-r2.json，SHA-256為5e0f75101623cbdc507df727906090300af5fd2786dea1556ef88981cce83f7e。原版參考及候選留本機。
+
+正常百科操作、來源、後畫與逐幀游標驗證接續本節；第112幀原始117格不透明像素只剩116格有效來源，沿R71後畫撤銷證據，不把原始數當成有效所有權。這19幀與其他未命中來源、世界用途及動畫均不計正式完成。
 
 ## 升級條件
 

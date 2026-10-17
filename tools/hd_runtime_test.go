@@ -2,9 +2,11 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"image"
 	"os"
 	"path/filepath"
+	"sort"
 	"testing"
 
 	golem "github.com/wicanr2/dosgolem"
@@ -23,7 +25,7 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 		}
 		return raw
 	}
-	for _, name := range []string{"VICEROY.EXE", "BUILDING.SS", "PHYS0.SS", "ICONS.SS", "CURSOR.SS", "OPENTILE.SS", "OPENMENU.PIK", "WOODTILE.SS", "PARCH.SS", "DIFFICUL.PIK", "NATIONS.PIK"} {
+	for _, name := range []string{"VICEROY.EXE", "BUILDING.SS", "PHYS0.SS", "ICONS.SS", "CURSOR.SS", "OPENTILE.SS", "OPENMENU.PIK", "WOODTILE.SS", "PARCH.SS", "DIFFICUL.PIK", "NATIONS.PIK", "CUSTOMIZ.PIK"} {
 		if _, err := os.Stat(filepath.Join(game, name)); os.IsNotExist(err) {
 			t.Skip("缺少合法原版", name)
 		}
@@ -31,7 +33,7 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 	m := golem.New()
 	before := bytes.Clone(m.Mem)
 	h, err := loadHDRuntime(m, game, assets)
-	if err != nil || h == nil || h.terrainBatch == nil || len(h.terrainBatch.frames) != 12 || h.smallTerrain == nil || len(h.smallTerrain.frames) != 8 || h.parch == nil || h.worldTexture == nil || h.texture == nil || h.small == nil || len(h.small.frames) != 39 || h.nine == nil || len(h.nine.frames) != 10 || h.shelter == nil || h.shelter.art.Bounds() != image.Rect(0, 0, 92, 108) || h.sea == nil || h.person == nil || h.person.art.Bounds() != image.Rect(0, 0, 24, 64) || h.sea.art.Bounds() != image.Rect(0, 0, 64, 64) || h.art.Bounds() != image.Rect(0, 0, 92, 108) || !bytes.Equal(before, m.Mem) {
+	if err != nil || h == nil || h.terrainBatch == nil || len(h.terrainBatch.frames) != 12 || h.smallTerrain == nil || len(h.smallTerrain.frames) != 8 || h.parch == nil || h.worldTexture == nil || h.texture == nil || h.small == nil || len(h.small.frames) != 61 || h.nine == nil || len(h.nine.frames) != 10 || h.shelter == nil || h.shelter.art.Bounds() != image.Rect(0, 0, 92, 108) || h.sea == nil || h.person == nil || h.person.art.Bounds() != image.Rect(0, 0, 24, 64) || h.sea.art.Bounds() != image.Rect(0, 0, 64, 64) || h.art.Bounds() != image.Rect(0, 0, 92, 108) || !bytes.Equal(before, m.Mem) {
 		t.Fatal("正式素材載入失敗或改寫原版", err)
 	}
 	mutations := map[string]func(string, string){
@@ -151,27 +153,92 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 			os.Symlink(filepath.Join(assets, filename), p)
 		}
 	}
-	for name, mutate := range mutations {
+
+	mutations["missing-terrain079"] = func(a, g string) { os.Remove(filepath.Join(a, "terrain-079.png")) }
+	mutations["bad-terrain079"] = func(a, g string) { os.WriteFile(filepath.Join(a, "terrain-079.png"), []byte("wrong"), 0644) }
+	mutations["linked-terrain079"] = func(a, g string) {
+		p := filepath.Join(a, "terrain-079.png")
+		os.Remove(p)
+		os.Symlink(filepath.Join(assets, "terrain-079.png"), p)
+	}
+
+	requiredCases := make([]string, 0, len(mutations))
+	for name := range mutations {
+		requiredCases = append(requiredCases, name)
+	}
+	sort.Strings(requiredCases)
+	if path := os.Getenv("TEST_HD_RESOURCE_CASE_CATALOG"); path != "" {
+		raw, err := json.Marshal(requiredCases)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if err = os.WriteFile(path, raw, 0644); err != nil {
+			t.Fatal(err)
+		}
+		if os.Getenv("TEST_HD_RESOURCE_CASE_CATALOG_ONLY") == "1" {
+			return
+		}
+	}
+	selectedCases := requiredCases
+	if path := os.Getenv("TEST_HD_RESOURCE_CASE_SELECTION"); path != "" {
+		raw, err := os.ReadFile(path)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if err = json.Unmarshal(raw, &selectedCases); err != nil {
+			t.Fatal(err)
+		}
+		if len(selectedCases) == 0 {
+			t.Fatal("資源案例批次不可為空")
+		}
+		seen := map[string]bool{}
+		for _, name := range selectedCases {
+			if _, ok := mutations[name]; !ok || seen[name] {
+				t.Fatal("資源案例不存在或重複", name)
+			}
+			seen[name] = true
+		}
+	}
+	a, g := filepath.Join(t.TempDir(), "graphics"), filepath.Join(t.TempDir(), "game")
+	for _, p := range []string{a, g} {
+		if err := os.Mkdir(p, 0755); err != nil {
+			t.Fatal(err)
+		}
+	}
+	entries, e := os.ReadDir(assets)
+	if e != nil {
+		t.Fatal(e)
+	}
+	for _, entry := range entries {
+		if !entry.Type().IsRegular() {
+			t.Fatal("素材來源型態不同", entry.Name())
+		}
+		n := entry.Name()
+		if e := os.WriteFile(filepath.Join(a, n), readFile(filepath.Join(assets, n)), 0644); e != nil {
+			t.Fatal(e)
+		}
+	}
+	for _, n := range []string{"VICEROY.EXE", "BUILDING.SS", "PHYS0.SS", "ICONS.SS", "CURSOR.SS", "OPENTILE.SS", "OPENMENU.PIK", "WOODTILE.SS", "PARCH.SS", "DIFFICUL.PIK", "NATIONS.PIK", "CUSTOMIZ.PIK"} {
+		if err := os.WriteFile(filepath.Join(g, n), readFile(filepath.Join(game, n)), 0644); err != nil {
+			t.Fatal(err)
+		}
+	}
+	fixtureMachine := golem.New()
+	fixtureMemory := hash(fixtureMachine.Mem)
+	fixtureHD, e := loadHDRuntime(fixtureMachine, g, a)
+	if e != nil || fixtureHD == nil || hash(fixtureMachine.Mem) != fixtureMemory {
+		t.Fatal("完整HD測試副本無法載入", e)
+	}
+	restoreFixture := hdRestoreResourceFixture(t, a, g)
+	for _, name := range selectedCases {
+		mutate := mutations[name]
 		t.Run(name, func(t *testing.T) {
-			a, g := filepath.Join(t.TempDir(), "graphics"), filepath.Join(t.TempDir(), "game")
-			for _, p := range []string{a, g} {
-				if err := os.Mkdir(p, 0755); err != nil {
-					t.Fatal(err)
-				}
-			}
-			for _, n := range []string{"manifest.json", "building-032.png", "sea-148.png", "person-100.png", "building-024.png", "building-016.png", "building-021.png", "building-027.png", "building-035.png", "building-039.png", "building-042.png", "building-043.png", "building-044.png", "building-045.png", "building-009.png", "icons-022.png", "icons-024.png", "icons-025.png", "icons-026.png", "icons-027.png", "icons-028.png", "icons-029.png", "icons-030.png", "icons-031.png", "icons-032.png", "icons-033.png", "icons-034.png", "icons-035.png", "icons-036.png", "icons-037.png", "icons-038.png", "icons-005.png", "icons-023.png", "icons-042.png", "icons-053.png", "icons-056.png", "icons-059.png", "icons-062.png", "icons-067.png", "icons-068.png", "icons-069.png", "icons-094.png", "icons-122.png", "icons-123.png", "icons-124.png", "terrain-079.png", "cursor-000.png", "terrain-006.png", "terrain-009.png", "terrain-017.png", "terrain-066.png", "terrain-071.png", "terrain-074.png", "terrain-077.png", "terrain-078.png", "terrain-080.png", "terrain-096.png", "terrain-147.png", "terrain-150.png", "terrain-112.png", "terrain-113.png", "terrain-116.png", "terrain-119.png", "terrain-126.png", "terrain-127.png", "terrain-136.png", "terrain-139.png", "opentile-000.png", "openmenu-000.png", "woodtile-000.png", "parch-000.png", "difficul-000.png", "nations-000.png", "customiz-000.png"} {
-				if err := os.WriteFile(filepath.Join(a, n), readFile(filepath.Join(assets, n)), 0644); err != nil {
-					t.Fatal(err)
-				}
-			}
-			for _, n := range []string{"VICEROY.EXE", "BUILDING.SS", "PHYS0.SS", "ICONS.SS", "CURSOR.SS", "OPENTILE.SS", "OPENMENU.PIK", "WOODTILE.SS", "PARCH.SS", "DIFFICUL.PIK", "NATIONS.PIK"} {
-				if err := os.WriteFile(filepath.Join(g, n), readFile(filepath.Join(game, n)), 0644); err != nil {
-					t.Fatal(err)
-				}
-			}
+			defer restoreFixture(t)
+			caseMachine := golem.New()
+			caseMemory := hash(caseMachine.Mem)
 			mutate(a, g)
-			bad, err := loadHDRuntime(m, g, a)
-			if bad != nil || err == nil || !bytes.Equal(before, m.Mem) {
+			bad, err := loadHDRuntime(caseMachine, g, a)
+			if bad != nil || err == nil || hash(caseMachine.Mem) != caseMemory {
 				t.Fatal("缺件或錯件未拒絕，或改寫原版", err)
 			}
 		})
@@ -228,5 +295,72 @@ func TestHDMissingResourcePreservesPreferenceAndTransaction(t *testing.T) {
 	after, err := os.ReadFile(path)
 	if err != nil || !bytes.Equal(raw, after) || b.active != old {
 		t.Fatal("啟動回退或Apply失敗改變偏好／生效資料", err)
+	}
+}
+
+func hdRestoreResourceFixture(t *testing.T, directories ...string) func(*testing.T) {
+	t.Helper()
+	original := map[string][]byte{}
+	for _, directory := range directories {
+		entries, err := os.ReadDir(directory)
+		if err != nil {
+			t.Fatal(err)
+		}
+		for _, entry := range entries {
+			if !entry.Type().IsRegular() {
+				t.Fatal("基準副本含非普通檔案", entry.Name())
+			}
+			path := filepath.Join(directory, entry.Name())
+			raw, err := os.ReadFile(path)
+			if err != nil {
+				t.Fatal(err)
+			}
+			original[path] = raw
+		}
+	}
+	return func(t *testing.T) {
+		t.Helper()
+		for _, directory := range directories {
+			entries, err := os.ReadDir(directory)
+			if err != nil {
+				t.Fatal(err)
+			}
+			for _, entry := range entries {
+				if _, ok := original[filepath.Join(directory, entry.Name())]; !ok {
+					t.Fatal("測試副本出現未知檔案", entry.Name())
+				}
+			}
+		}
+		for path, raw := range original {
+			info, err := os.Lstat(path)
+			if err != nil && !os.IsNotExist(err) {
+				t.Fatal(err)
+			}
+			if err == nil && info.Mode().IsRegular() {
+				current, e := os.ReadFile(path)
+				if e != nil {
+					t.Fatal(e)
+				}
+				if bytes.Equal(current, raw) {
+					continue
+				}
+			}
+			if err == nil {
+				if e := os.Remove(path); e != nil {
+					t.Fatal(e)
+				}
+			}
+			if e := os.WriteFile(path, raw, 0644); e != nil {
+				t.Fatal(e)
+			}
+			info, e := os.Lstat(path)
+			if e != nil || !info.Mode().IsRegular() {
+				t.Fatal("復原後檔案型態不同", path, e)
+			}
+			current, e := os.ReadFile(path)
+			if e != nil || !bytes.Equal(current, raw) {
+				t.Fatal("復原後內容不同", path, e)
+			}
+		}
 	}
 }

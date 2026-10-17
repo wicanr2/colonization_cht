@@ -4093,6 +4093,1128 @@
         "encoded_sha256": "d665336038923ec16ba48f901f9c96c68dfbf2f6302924854d9269b350208401",
         "encoded_length": 118
       }
+    },
+    "icons-058.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "61743ce80d8c32b180b1cc8c778af73cde0935115f1a83cd0099f2e8cd6179ce",
+      "bytes": 518064,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        6,
+        16
+      ],
+      "target_size": [
+        24,
+        64
+      ],
+      "native_opaque_pixels": 60,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        186,
+        165,
+        702,
+        1568
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        6,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 41609,
+      "alpha_mass_total": 125127650,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 58. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing colonist with a wide brown felt hat, brown knee-length work coat, pale neckcloth, dark brown trousers and black shoes. Arms held close to the sides. No handheld tool. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "84f6516584d1d79c65b8ba528f0ddfc634548e41a0714048c6bfb1583e462579",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 58,
+        "encoded_sha256": "d47a00529b4933300873a36285f01c1be346839535aa7ec2877409326377dd88",
+        "encoded_length": 103
+      }
+    },
+    "icons-060.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "5422ec86e9c250d02fcdfaa731a3d8fdc34fcd3a74ceec5586aae72bd6836224",
+      "bytes": 503966,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        6,
+        16
+      ],
+      "target_size": [
+        24,
+        64
+      ],
+      "native_opaque_pixels": 60,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        179,
+        261,
+        712,
+        1564
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        6,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 23272,
+      "alpha_mass_total": 117900801,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 60. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing colonist with a wide brown felt hat, ochre brown upper clothing, vivid red neckcloth, blue waist apron, brown trousers and black shoes. Arms close to the sides. No handheld tool. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "702b1b6768be3ebe0a7226f9ae1939816285c8e9837e87eed48189b179e3a290",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 60,
+        "encoded_sha256": "4fff2f332f95ffaad642fc498486dd21d5eaa9ebd9994c9a48f290c26c342a26",
+        "encoded_length": 103
+      }
+    },
+    "icons-066.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "2ee09b5d97a813fe09b714f45c6ef302b5a9021ba5b260ce7b7c66976cd930de",
+      "bytes": 417364,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        16
+      ],
+      "target_size": [
+        32,
+        64
+      ],
+      "native_opaque_pixels": 57,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        199,
+        278,
+        766,
+        1522
+      ],
+      "native_content_rect": [
+        1,
+        1,
+        7,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 6938,
+      "alpha_mass_total": 92236168,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 66. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing laborer with brown ochre shirt and blue trousers, one arm bent upward holding the long dark-handled blue-tipped tool visible in the native reference. Keep the red small head detail and the exact asymmetric silhouette. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "a7f022505f8330c2b929e685b14e07ad85092c21cf7bc612c8a212b07df2e537",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 66,
+        "encoded_sha256": "02593fc59c99b23f76ab63edbea38f5c886a23e71cd58b23247d4f2ce8936682",
+        "encoded_length": 120
+      }
+    },
+    "icons-081.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "860dbb88125bf15711a9cec5f79429de211203f5a25119834200f01557b570f0",
+      "bytes": 587554,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        16
+      ],
+      "target_size": [
+        32,
+        64
+      ],
+      "native_opaque_pixels": 70,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        119,
+        275,
+        809,
+        1589
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        8,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 32445,
+      "alpha_mass_total": 137799831,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 81. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing worker wearing a broad dark-blue hat, cream shirt, blue waist apron and dark trousers, holding a long wooden shaft with the grey metal tool head at shoulder height on the viewer's right. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "44e75499833e07f5a99a5cbf72908dbc6fb5ed865b2f17cb74b52f7e5bccde3e",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 81,
+        "encoded_sha256": "5a58e4b283a222f351c79bb6202fe24e70b2ae4943556f69453ddcba151b0b89",
+        "encoded_length": 121
+      }
+    },
+    "icons-082.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "6064d0f3c204d227e3cc202a131b65777a19920f6db007f22889359d412f39c2",
+      "bytes": 582136,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        6,
+        16
+      ],
+      "target_size": [
+        24,
+        64
+      ],
+      "native_opaque_pixels": 60,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        153,
+        152,
+        740,
+        1626
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        6,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 22297,
+      "alpha_mass_total": 139232477,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 82. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing colonist in a broad black hat, dark brown long open coat, white neckcloth, blue waistcoat, ochre knee breeches, white stockings and black shoes. Small red accent at the viewer's right chest. Arms low, no tool. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "9c56e5a35cff1158ee88c7900f6504f4fcdeb166d93e440f80cf03787ee6cdaa",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 82,
+        "encoded_sha256": "ca5691cab36caacb04d79beca64009b5afa8f12faa9d99c47e43c823994d3b70",
+        "encoded_length": 103
+      }
+    },
+    "icons-083.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "daebfb120f397c41f2fc68e1e1ea8edf570a27a1f1dff300553234de119100da",
+      "bytes": 539631,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        6,
+        16
+      ],
+      "target_size": [
+        24,
+        64
+      ],
+      "native_opaque_pixels": 60,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        168,
+        231,
+        738,
+        1591
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        6,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 31072,
+      "alpha_mass_total": 121963970,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 83. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing colonist in a broad black hat, dark brown long open coat, white neckcloth, GREEN waistcoat, ochre knee breeches, white stockings and black shoes. Small red accent at the viewer's right chest. Arms low, no tool. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "13cabd738ddf3ee47f7b35d18b3b99c9241ee2c0a8a4f9efff03174cd4e09909",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 83,
+        "encoded_sha256": "8f2678af9fccd87b9c16ba8e19bb2b83d2f8e841cd643351ef6c452fda549815",
+        "encoded_length": 103
+      }
+    },
+    "icons-084.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "0bc1b2bf46b52a2d038cc4abddcb8617da9b111d6cebabbaeb6dd41336dae201",
+      "bytes": 485190,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        6,
+        16
+      ],
+      "target_size": [
+        24,
+        64
+      ],
+      "native_opaque_pixels": 60,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        178,
+        267,
+        730,
+        1562
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        6,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 32460,
+      "alpha_mass_total": 112588519,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 84. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing colonist in a broad black hat, dark brown long open coat, white neckcloth, WHITE/LIGHT GREY waistcoat, ochre knee breeches, white stockings and black shoes. Small red accent at the viewer's right chest. Arms low, no tool. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "2f840d909319a2dd5c2ce9b818b953472e2b00e17c164b48bc25054c992c8958",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 84,
+        "encoded_sha256": "0a4156824cd23640c0507bb0b282d2f9006fdf35ea095a7dd6a8434eba9aa7b3",
+        "encoded_length": 103
+      }
+    },
+    "icons-085.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "f19cd765d4b288c2b56af2d20abaa1bdd0fe0c026da11f98088fe85078c5e203",
+      "bytes": 656768,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        16
+      ],
+      "target_size": [
+        32,
+        64
+      ],
+      "native_opaque_pixels": 77,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        97,
+        173,
+        790,
+        1601
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        8,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 56422,
+      "alpha_mass_total": 164928187,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 85. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A brown-clothed standing worker with brown hat and long dark tool shaft held upright on the viewer's right, ending in a dark grey square metal head beside the thigh. Match the native raised hand and entire tool silhouette. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "1df0d53b197389f0c1be1c2fe9c6cf157bee13e40190e8435915219c9703dee1",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 85,
+        "encoded_sha256": "224d9f8a2bed6e06f60f26bc07304a97de7c5c58bc19264680f95e1684f5a7d3",
+        "encoded_length": 123
+      }
+    },
+    "icons-086.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "0eb43567c95ccf81cfcc107db10cacaa67d341b358da2043456a7793da8ef8c2",
+      "bytes": 605620,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        16
+      ],
+      "target_size": [
+        32,
+        64
+      ],
+      "native_opaque_pixels": 74,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        108,
+        177,
+        784,
+        1635
+      ],
+      "native_content_rect": [
+        0,
+        1,
+        8,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 27771,
+      "alpha_mass_total": 144247605,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 86. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing worker in vivid red tall bent cap and red shirt, blue trousers and black shoes, holding a long pale grey segmented tool upright on the viewer's right. Keep its brown lower handle and horizontal brown hand detail, without inventing a different weapon. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "c780d5a3b1121fe71b1af07174bd5873bd3c88112a8b1d3ec197e7b8d157a78a",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 86,
+        "encoded_sha256": "2c128b56ae588e5dd8464a70de5eccac1a6d8b512b58e08dcc0fa1cad4063326",
+        "encoded_length": 116
+      }
+    },
+    "icons-087.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "9e440f2b86014f715a2ba92a9ab583ff71299d0d00f8e66eb77728c98cf460cd",
+      "bytes": 575535,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        16
+      ],
+      "target_size": [
+        32,
+        64
+      ],
+      "native_opaque_pixels": 68,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        122,
+        222,
+        811,
+        1561
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        8,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 35654,
+      "alpha_mass_total": 139858448,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 87. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing brown-clothed worker with wide brown hat, red neckcloth and pale chest band, holding a small black lantern with a bright yellow center at the viewer's right hip. Match the native arm position and lantern scale. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "140403d2c916e43e124fead9bc5fcbd68dd5a34a1ff4d9b2399f95897dd7abdf",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 87,
+        "encoded_sha256": "1afa034fc731b6ae04446b65cb9a167ebfc54d602b6e3f6ee6e84d8d4db7d7a8",
+        "encoded_length": 112
+      }
+    },
+    "icons-088.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "418541b1e716f9ff84bdc962eaa1f3c927ff5e7f18aab689b07e96eba55431f7",
+      "bytes": 540919,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        16
+      ],
+      "target_size": [
+        32,
+        64
+      ],
+      "native_opaque_pixels": 65,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        111,
+        194,
+        812,
+        1546
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        8,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 32876,
+      "alpha_mass_total": 129365043,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 88. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing worker in an ochre coat and wide brown hat, holding a small black lantern with a bright yellow center raised beside the head on the viewer's right; the opposite arm bends across the waist with the dark rectangular native object. Brown trousers and black footwear. Preserve the high lantern placement. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "44e4c30991831781ac20d3c82024892c46df03e773b2c1f0b53c875814dac102",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 88,
+        "encoded_sha256": "077f475854762306005b69f3d49bdaa891d04b583caa6a6353bd9b2dc23b9649",
+        "encoded_length": 108
+      }
+    },
+    "icons-089.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "e8c3874a0308134a36a634cd33201d2fc5350fa5fb8d42517e743e8f371733ad",
+      "bytes": 541875,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        16
+      ],
+      "target_size": [
+        32,
+        64
+      ],
+      "native_opaque_pixels": 66,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        113,
+        242,
+        794,
+        1546
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        8,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 14059,
+      "alpha_mass_total": 125717045,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 89. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing worker in a blue cap, pale blue shirt with white neckcloth, blue trousers and dark shoes, carrying a dark long-handled tool diagonally across the torso. Match the native tool arrangement, raised hand and light-blue sleeve on the viewer's right. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "26fbcdf22fdcb3e4ae9198c14ab2308308c50333bc5797ea2c6a2744ceb66f3f",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 89,
+        "encoded_sha256": "7a8054fd1f9191ae6cc4b5b9a8ae70ec43796a6648e2bf96443378cd296c4a55",
+        "encoded_length": 128
+      }
+    },
+    "icons-090.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "304baa75c942ea22384ccddf23edb50556ce87bc5f0fafa9092a6386478d42b7",
+      "bytes": 535740,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        6,
+        16
+      ],
+      "target_size": [
+        24,
+        64
+      ],
+      "native_opaque_pixels": 54,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        155,
+        242,
+        749,
+        1554
+      ],
+      "native_content_rect": [
+        0,
+        3,
+        6,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 12329,
+      "alpha_mass_total": 120584470,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 90. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing colonist with a white cloth head covering, dark brown long open coat, white neckcloth, BLUE waistcoat, ochre knee breeches, white stockings and black shoes. Small red accent at the viewer's right chest. Arms low, no tool. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "45729d834520d3bcefe093fb664c63442f85cd66360f416a522b3eee1761744f",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 90,
+        "encoded_sha256": "97a524825a290cc0f16e2f8e8901a7a27e4f0666beb1db90abfba85dfa670102",
+        "encoded_length": 96
+      }
+    },
+    "icons-091.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "6733d1909558a3d29136749d19c79b47489a9ee01869a55220cbcfdb603ddc53",
+      "bytes": 433483,
+      "size": [
+        991,
+        1588
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        6,
+        16
+      ],
+      "target_size": [
+        24,
+        64
+      ],
+      "native_opaque_pixels": 54,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        234,
+        233,
+        758,
+        1412
+      ],
+      "native_content_rect": [
+        0,
+        3,
+        6,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 22838,
+      "alpha_mass_total": 92930541,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 91. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing colonist with a white cloth head covering, dark brown long open coat, white neckcloth, GREEN waistcoat, ochre knee breeches, white stockings and black shoes. Small red accent at the viewer's right chest. Arms low, no tool. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "4259ddf4e103cd3f8d4604f960b8128b87666697519f9a0789a4599f8cb177dd",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 91,
+        "encoded_sha256": "b7747aa5cbcab61c1c43b27c8f86edd440570b0fa7c9e05650e8fd5cfb92224f",
+        "encoded_length": 96
+      }
+    },
+    "icons-092.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "9941464e8109e280301c26a6fdcacce810e9caa93931c547d3cb39de4b2b3806",
+      "bytes": 566990,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        6,
+        16
+      ],
+      "target_size": [
+        24,
+        64
+      ],
+      "native_opaque_pixels": 54,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        138,
+        197,
+        737,
+        1571
+      ],
+      "native_content_rect": [
+        0,
+        3,
+        6,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 13832,
+      "alpha_mass_total": 127358533,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 92. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing colonist with a white cloth head covering, dark brown long open coat, white neckcloth, WHITE/LIGHT GREY waistcoat, ochre knee breeches, white stockings and black shoes. Small red accent at the viewer's right chest. Arms low, no tool. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "52aa5dd45689be1395c87fd1e81ad95f6ff561eb736a7e4a8daac2f1508b1cd4",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 92,
+        "encoded_sha256": "26656e6a3e1d4904975db8abfddcefcfd7d16b520eb08c5db458e6e55eb6c413",
+        "encoded_length": 96
+      }
+    },
+    "icons-093.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "c1a16585d2424e742a00bc77824ebbcb54e98b786a99dce7bcd93331a8bf465d",
+      "bytes": 614381,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        16
+      ],
+      "target_size": [
+        32,
+        64
+      ],
+      "native_opaque_pixels": 76,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        113,
+        277,
+        817,
+        1581
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        8,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 17196,
+      "alpha_mass_total": 141660742,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 93. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing traveler in a broad brown hat, long ochre coat over a blue waistcoat, white neckcloth, brown trousers and dark shoes; carrying the large tan segmented pack on the viewer's right shoulder/back. Match its native raised hand and the pack silhouette. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "8cdce522d40342ffcf4f29f3345a66b91eb94d1751815f6ca67608a6ed28297a",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 93,
+        "encoded_sha256": "c0fadddf239b519cf7d15375299b9a5d2c7e4b117251c8fd30f4f0abb37cda4d",
+        "encoded_length": 122
+      }
+    },
+    "icons-095.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "8103c8a0a1c837df57c1f31fa6c37ff24203684f3f16315b47218ada3b84232e",
+      "bytes": 481958,
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        16
+      ],
+      "target_size": [
+        32,
+        64
+      ],
+      "native_opaque_pixels": 66,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        238,
+        122,
+        848,
+        1328
+      ],
+      "native_content_rect": [
+        0,
+        3,
+        8,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 23923,
+      "alpha_mass_total": 113325907,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 95. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing worker with brown cap, beige shirt, brown trousers and black shoes, bent arms around a small dark tool at chest height; keep the long dark grey horizontal object across the lower waist and the native stance. Do not add a separate workbench or ground. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "88da584fab7091024837e18b7bf0b41c1e54a30828f82b27f0823581927b7ed8",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 95,
+        "encoded_sha256": "56bbc7d96327a4e4307365ab067264c18ae6283a6ca6e77b395cec59fd760c45",
+        "encoded_length": 112
+      }
+    },
+    "icons-096.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "1d7d88bc8004429571398c5f58e9528967e9565a1c5e5688a11389a7019e683c",
+      "bytes": 590373,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        7,
+        16
+      ],
+      "target_size": [
+        28,
+        64
+      ],
+      "native_opaque_pixels": 75,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        148,
+        152,
+        741,
+        1589
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        7,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 4796,
+      "alpha_mass_total": 145237931,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 96. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing worker wearing a wide brown hat, pale blue shirt, grey shoulder straps and ochre waist clothing with long dark brown trousers, holding the long brown object seen along the viewer's right side. Match the native low arms and asymmetric leg/object outline. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "dc437c069296493591f3197c7390e69129354fdf6ad25124d2a8b314fb90cad1",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 96,
+        "encoded_sha256": "9bea2bc61a7536914be19a4a434f35b01cba37990237e74e774fdaeac3d51644",
+        "encoded_length": 120
+      }
+    },
+    "icons-097.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "fc64e8b372dd064311e6e817a6a5b6bfcfdfc6515c8391e83c5297e5e359a38c",
+      "bytes": 485164,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        7,
+        16
+      ],
+      "target_size": [
+        28,
+        64
+      ],
+      "native_opaque_pixels": 61,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        184,
+        215,
+        738,
+        1566
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        7,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 47574,
+      "alpha_mass_total": 115585455,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 97. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing colonist with wide brown hat, white high neckcloth, long brown coat and dark trousers, holding the small black rectangular object with a yellow lower accent at the viewer's right waist. Preserve the close folded arm position and compact native outline. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "59d9ab6a5f09f826a1c3c64a7c93e6fc2821bbabd3a33e56770c7a5ae8a37098",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 97,
+        "encoded_sha256": "466ef758931ff1f50f388601a0fa2e2c80777940020b09b399591fa66f46a8dd",
+        "encoded_length": 102
+      }
+    },
+    "icons-098.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "5561bf7138e91d27e89698b83431c7dd46bc5708f28b7fc6fe76bf66f26b562d",
+      "bytes": 406959,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        6,
+        16
+      ],
+      "target_size": [
+        24,
+        64
+      ],
+      "native_opaque_pixels": 50,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        195,
+        354,
+        712,
+        1528
+      ],
+      "native_content_rect": [
+        0,
+        3,
+        6,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 10991,
+      "alpha_mass_total": 88525386,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 98. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing colonist with white hair/head covering, long dark red coat, white neckcloth, cream waistcoat and breeches, dark lower stockings and black shoes. Hands down beside the body, no tool. Preserve the native narrow outline. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "937fe393888c075d08d72ec53a9077138c6ddf7506575b3eb9748752fb4252f7",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 98,
+        "encoded_sha256": "0667b6c059a2ed10dc6a2cee07b6124c7907b896b85c9df550537343e3c01842",
+        "encoded_length": 93
+      }
+    },
+    "icons-106.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "dbae8283bf2236b5b69e457f78d278c2df78f640f6a79010f6b0f33314ae8417",
+      "bytes": 494751,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        6,
+        16
+      ],
+      "target_size": [
+        24,
+        64
+      ],
+      "native_opaque_pixels": 54,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        195,
+        258,
+        691,
+        1632
+      ],
+      "native_content_rect": [
+        0,
+        3,
+        6,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 30287,
+      "alpha_mass_total": 113094579,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 106. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A standing plain laborer with short brown hair, pale grey shirt, blue trousers and bare feet. Arms down, no hat and no tool. Preserve the native quiet straight pose and simple clothing. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "defdf97957f2a1b18e801557c29d0521e1b79a44a754dd4fc5d0ec2863bb4f16",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 106,
+        "encoded_sha256": "2d768949596c070cc3b4c3d9c0e75c2fb89d22c2e4506d717725d88e08cbca8b",
+        "encoded_length": 96
+      }
+    },
+    "icons-107.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "fd6afc141275a481ac18631e86dcf0394c56fbdf8b578e83ba3afc360338dc9b",
+      "bytes": 505581,
+      "size": [
+        887,
+        1774
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        8,
+        16
+      ],
+      "target_size": [
+        32,
+        64
+      ],
+      "native_opaque_pixels": 60,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        49,
+        350,
+        840,
+        1594
+      ],
+      "native_content_rect": [
+        0,
+        4,
+        8,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 43753,
+      "alpha_mass_total": 113885732,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent HD unit sprite for a display-only Colonization overlay, original ICONS.SS frame 107. Image 1 is the native shape, pose, equipment and color reference; its beige surround is not part of the sprite. Image 2 is the user's approved person-100 pixel rendering style. Redraw only this single native character in that approved fine pixel style, using crisp deliberately stepped pixels, restrained material shading and the original strong color accents. Subject: A laborer with dark hair, grey shirt, blue trousers and bare feet, both arms raised overhead supporting a long heavy dark brown horizontal beam. Keep the native beam level above the head and match its wide silhouette. No extra equipment. Preserve the native front/three-quarter orientation, arm positions, footwear, full-body outline and proportions; do not derive a new pose from image 2. Full body from hat or raised tool to feet, centered with clear transparent margins. Keep tools completely inside the canvas. The renderer will map the opaque artwork bounding box onto the original native content rectangle. No ground, shadow, background, scenery, text, letters, flag, border, extra tool or extra person. Genuine transparent alpha background; no glow or translucent halo. This is one isolated sprite, not a contact sheet.",
+      "reference_sha256": {
+        "native_geometry": "695f6e652aada51dc36131e8b95ca6f2cde794ba6ecf2ab0fe8dee72c109c79f",
+        "approved_style": "be2ace90ee85444af2fdaabb568a4ec1c67b3d327e30122c1b30ac471f514346"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 107,
+        "encoded_sha256": "1ece271b711847287707fa13cac479b2e0c372157c0dcd71b0e8cd018cd9f5ef",
+        "encoded_length": 97
+      }
     }
   }
 }

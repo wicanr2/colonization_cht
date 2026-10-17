@@ -332,7 +332,7 @@ func TestHDSmallRuntimeNativeLifecycle(t *testing.T) {
 	h, err := loadHDRuntime(m, game, assets)
 	need(err)
 
-	if h.small == nil || len(h.small.frames) != 39 || hash(m.Mem) != before {
+	if h.small == nil || len(h.small.frames) != 61 || hash(m.Mem) != before {
 		t.Fatal("小圖像載入失敗或改寫DOS")
 	}
 	p := h.small
@@ -658,7 +658,7 @@ func TestHDSmallResourceContract(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(p.frames) != 39 || !bytes.Equal(before, m.Mem) {
+	if len(p.frames) != 61 || !bytes.Equal(before, m.Mem) {
 		t.Fatal("素材載入來源或原版記憶體不同")
 	}
 	available := map[int]bool{}
@@ -667,9 +667,16 @@ func TestHDSmallResourceContract(t *testing.T) {
 			available[f.ordinal] = true
 		}
 	}
-	if len(available) != 38 || !available[5] || !available[22] || !available[23] || !available[24] || !available[25] || !available[26] || !available[27] || !available[28] || !available[29] || !available[30] || !available[31] || !available[32] || !available[33] || !available[34] || !available[35] || !available[36] || !available[37] || !available[38] || !available[42] || !available[53] || !available[56] || !available[59] || !available[62] || !available[67] || !available[68] || !available[69] || !available[94] || !available[122] || !available[123] || !available[124] {
-		t.Fatal("尚無候選來源被計為HD", available)
+	wantedAvailable := []int{5, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 42, 53, 56, 59, 62, 67, 68, 69, 94, 122, 123, 124, 6, 7, 14, 15, 127, 8, 9, 16, 58, 60, 66, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 95, 96, 97, 98, 106, 107}
+	if len(available) != 60 {
+		t.Fatal("小圖像素材集合不同", available)
 	}
+	for _, ordinal := range wantedAvailable {
+		if !available[ordinal] {
+			t.Fatal("已READY素材未載入", ordinal)
+		}
+	}
+
 	if _, err := loadHDSmallRuntime(nil, game, assets); err == nil {
 		t.Fatal("缺少HD仍接受")
 	}
@@ -684,27 +691,31 @@ func TestHDSmallResourceContract(t *testing.T) {
 			}
 		}
 	}
-	for _, name := range names {
-		a, g := filepath.Join(t.TempDir(), "assets"), filepath.Join(t.TempDir(), "game")
-		for _, dir := range []string{a, g} {
-			if err := os.Mkdir(dir, 0755); err != nil {
+	a, g := filepath.Join(t.TempDir(), "assets"), filepath.Join(t.TempDir(), "game")
+	for _, dir := range []string{a, g} {
+		if err := os.Mkdir(dir, 0755); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if err := os.WriteFile(filepath.Join(g, "ICONS.SS"), icons, 0644); err != nil {
+		t.Fatal(err)
+	}
+	for _, f := range p.frames {
+		if f.file != "" {
+			raw, err := os.ReadFile(filepath.Join(assets, f.file))
+			if err != nil {
+				t.Fatal(err)
+			}
+			if err := os.WriteFile(filepath.Join(a, f.file), raw, 0644); err != nil {
 				t.Fatal(err)
 			}
 		}
-		if err := os.WriteFile(filepath.Join(g, "ICONS.SS"), icons, 0644); err != nil {
-			t.Fatal(err)
-		}
-		for _, f := range p.frames {
-			if f.file != "" {
-				raw, err := os.ReadFile(filepath.Join(assets, f.file))
-				if err != nil {
-					t.Fatal(err)
-				}
-				if err := os.WriteFile(filepath.Join(a, f.file), raw, 0644); err != nil {
-					t.Fatal(err)
-				}
-			}
-		}
+	}
+	if _, e := loadHDSmallRuntime(&hdRuntime{m: golem.New()}, g, a); e != nil {
+		t.Fatal("完整小圖像測試副本無法載入", e)
+	}
+	restoreFixture := hdRestoreResourceFixture(t, a, g)
+	for _, name := range names {
 		if name == "missing-icons" {
 			err = os.Remove(filepath.Join(g, "ICONS.SS"))
 		} else if name == "wrong-icons" {
@@ -750,12 +761,14 @@ func TestHDSmallResourceContract(t *testing.T) {
 		if !bytes.Equal(before, m.Mem) {
 			t.Fatal("錯件載入改寫原版", name)
 		}
+		restoreFixture(t)
 	}
 	fmt.Println("PASS_SMALL_IMAGE_RESOURCE_REJECTIONS", len(names)+2)
 }
 
 // 規格070 R72：五艘船的獨立正常來源、游標及真實反例。
 type hdSmallNativeFixture struct {
+	isolatedArt                                                                                bool
 	inputPath, pointPath, inputSHA, pointSHA, modelDir, outputEnv, imageKey, result, pointsKey string
 	points, inputs, positivePoints                                                             int
 	inputEnd, end                                                                              uint64
@@ -783,6 +796,19 @@ func TestHDVehicleRuntimeNativeLifecycle(t *testing.T) {
 		sources: map[int]int{8: 138, 9: 67, 16: 82},
 	})
 }
+
+func TestHDColonistRuntimeNativeLifecycle(t *testing.T) {
+	hdSmallNativeLifecycle(t, hdSmallNativeFixture{
+		inputPath: "baseline-colonists-r1/gui.inputs.json", pointPath: "r74-icons-entry-r1/points.json",
+		inputSHA: "9feb15c45241094ac65f095283c27d5ac8a839d379142feaf9b4f3cc94aad97f",
+		pointSHA: "465fb7834d18eca3c105df7d007795bcec6099e6733cff1ac9b798e532385945",
+		modelDir: "colonists-ram-r1/model-r1", outputEnv: "TEST_HD_COLONIST_OUTPUT", imageKey: "colonists",
+		result: "PASS_COLONIST_22_RUNTIME_NATIVE_54", pointsKey: "colonist_points",
+		points: 54, inputs: 81, positivePoints: 45, inputEnd: 156400000, end: 156200000,
+		sources: map[int]int{58: 60, 60: 60, 66: 51, 81: 69, 82: 59, 83: 60, 84: 60, 85: 75, 86: 74, 87: 68, 88: 63, 89: 62, 90: 54, 91: 53, 92: 54, 93: 75, 95: 63, 96: 75, 97: 60, 98: 50, 106: 52, 107: 56}, isolatedArt: true,
+	})
+}
+
 func hdSmallNativeLifecycle(t *testing.T, fixture hdSmallNativeFixture) {
 	root := os.Getenv("TEST_HD_UNIT_NATIVE")
 	if root == "" {
@@ -847,7 +873,7 @@ func hdSmallNativeLifecycle(t *testing.T, fixture hdSmallNativeFixture) {
 	h, err := loadHDRuntime(m, game, assets)
 	need(err)
 
-	if h.small == nil || len(h.small.frames) != 39 || hash(m.Mem) != before {
+	if h.small == nil || len(h.small.frames) != 61 || hash(m.Mem) != before {
 		t.Fatal("小圖像載入失敗或改寫DOS")
 	}
 	p := h.small
@@ -944,7 +970,19 @@ func hdSmallNativeLifecycle(t *testing.T, fixture hdSmallNativeFixture) {
 				t.Fatal("單位小圖像游標契約未通過", at)
 			}
 			only := draftRGB(f.indexed, f.palette)
-			receipt := p.paint(only, f)
+			painter := p
+			if fixture.isolatedArt {
+				// 只隔離本批來源的像素測試；正式GUI另驗完整HD合成。
+				copyRuntime := *p
+				copyRuntime.frames = append([]hdSmallFrame(nil), p.frames...)
+				for i := range copyRuntime.frames {
+					if _, ok := targets[copyRuntime.frames[i].ordinal]; !ok {
+						copyRuntime.frames[i].art = nil
+					}
+				}
+				painter = &copyRuntime
+			}
+			receipt := painter.paint(only, f)
 			h.restoreCursor(only, f)
 			for slot, a := range p.frames {
 				expectedPaint, ok := targets[a.ordinal]

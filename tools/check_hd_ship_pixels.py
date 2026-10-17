@@ -15,7 +15,7 @@ def sample_rgba(meta,art,x,y):
 def check(root,assets,runtime,profile='ships'):
  cfg=PROFILES[profile]
  manifest=read(assets/'manifest.json')
- assert sha((assets/'manifest.json').read_bytes())=='336653b647cd381931be990409b71bd0abcfdbb6ebf3d3db0054c6d7ee6b70c8'
+ assert sha((assets/'manifest.json').read_bytes())=='963b67ab9fdbdf02577a063dca488a525f7491cbf9d769c3f9c664117adcb758'
  cap=read(root/cfg['baseline']/'capture.json')
  model=read(root/cfg['ram']/'model-r1/check.json')
  result=read(runtime/'check.json')
@@ -81,7 +81,7 @@ def check_gui(root,assets,profile='ships'):
  gui=root/cfg['gui']
  cap=read(gui/'capture.json');base=read(root/cfg['baseline']/'capture.json');model=read(root/cfg['ram']/'model-r1/check.json')
  manifest=read(assets/'manifest.json')
- assert sha((assets/'manifest.json').read_bytes())=='336653b647cd381931be990409b71bd0abcfdbb6ebf3d3db0054c6d7ee6b70c8'
+ assert sha((assets/'manifest.json').read_bytes())=='963b67ab9fdbdf02577a063dca488a525f7491cbf9d769c3f9c664117adcb758'
  owners={}
  for i,(s,m) in enumerate(zip(base['samples'],model['points'])):
   if s['label'].startswith(cfg['native_prefix']):
