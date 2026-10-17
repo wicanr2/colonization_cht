@@ -6424,3 +6424,26 @@ confirmed：正式46項正常GUI取得32個原版狀態／76輸入，有／無�
 原版參考只留本機；原PNG來源、完整提示、權利、尺寸、框位及指紋見graphics/manifest.json。
 正式審查0c0009ba01f30817d3b0f9194ef9822dffa334ad865201e58dc3b25a4cbac601。
 這是穩定畫面辨識，VGA往返來源所有權仍未知；其他圖像、動畫與全量HD未由本批外推。
+
+## 2026-10-17：R70自訂地圖PIK、81組前景與完整背景
+
+原版CUSTOMIZ.PIK 38756837aa3ab1d7a1abc1205d1ddd7826e8a4efde176a03602290dc89d64e4f，
+索引像素51adc570de803d6ae2553c407d6841b16975154c33c16e2f13c9b167939ad525。
+VICEROY.EXE a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3，
+dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7、Python3.11.2／Pillow9.4。
+固定解碼器、原始指令bytes及重生入口見[規格069](docs/spec/069-hd-menu-background-and-textures.md) R70。
+位址均為dosgolem實模式CS:IP或20位元線性RAM，沒有IDA位址。
+
+confirmed：正常X11的81組選項、89點／350輸入，四個選取框皆符合實際點選。
+25571008至26119104步，11B5:04EE／054A在0x3C500完整寫入64000格、每格一次，來源相同。
+3405250事件、70132游標還原配對，沿0D21:012C字形與0CD3:0064／0CCC:006A邊框建立前景。
+81組字形／邊框配對以外，整張主畫布0x2CAE0逐格等於PIK；完整DAC為
+9227faa32ecc84f6758733ad7c043b02bc1beef5f62cf0b462251486d443c8cc。
+未知同值寫入撤銷前景；原版綠／黃操作欄顏色保持，不猜選項或VGA所有權。
+
+confirmed：正式89點驗85520512個RGBA與完整原版狀態；32項GUI另走23個原版狀態／84輸入，
+獨立Pillow核對21490960個背景RGBA、7676752個保留原版RGBA。四側至98600000步的原版狀態、
+WAV及初始存檔相同，四份WAV另與實際GUI錄音相同，含正式play=true。
+生成原PNG及完整提示／權利見graphics/customiz-000.png與graphics/manifest.json。
+正式審查8b384068a1c490d0e6f5f95162b481cdc17ce8c247ab6101bc97a5e75007c357。
+其他圖像、動畫與全量HD未由本批外推。

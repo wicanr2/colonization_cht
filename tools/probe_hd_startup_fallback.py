@@ -46,7 +46,7 @@ def main():
                      112, 113, 116, 119, 126, 127, 136, 139]
     cases += [kind+"-terrain-%03d"%n for n in terrain_batch for kind in ["missing", "bad", "linked"]]
     cases += ["missing-terrain-source", "bad-terrain-source", "linked-terrain-source"]
-    cases += [kind+'-'+name for name in ['opentile-000','openmenu-000','woodtile-000','parch-000','difficul-000','nations-000','menu-source','texture-source','wood-source','parch-source','difficulty-source','nations-source'] for kind in ['missing','bad','linked']]
+    cases += [kind+'-'+name for name in ['opentile-000','openmenu-000','woodtile-000','parch-000','difficul-000','nations-000','customiz-000','menu-source','texture-source','wood-source','parch-source','difficulty-source','nations-source','custom-source'] for kind in ['missing','bad','linked']]
     cases += ["missing-cursor-image","bad-cursor-image","linked-cursor-image",
               "missing-cursor-source","bad-cursor-source","linked-cursor-source","restored"]
     if args.cases:
@@ -57,10 +57,10 @@ def main():
         out.mkdir()
         assets = out / "graphics"
         case_game = args.game
-        if any(case.endswith('-'+name+'-source') for name in ['cursor','terrain','menu','texture','wood','parch','difficulty','nations']):
+        if any(case.endswith('-'+name+'-source') for name in ['cursor','terrain','menu','texture','wood','parch','difficulty','nations','custom']):
             case_game = out / "game"
             shutil.copytree(args.game, case_game)
-            source_name = next(filename for name,filename in [('terrain','PHYS0.SS'),('cursor','CURSOR.SS'),('menu','OPENMENU.PIK'),('texture','OPENTILE.SS'),('wood','WOODTILE.SS'),('parch','PARCH.SS'),('difficulty','DIFFICUL.PIK'),('nations','NATIONS.PIK')] if case.endswith('-'+name+'-source'))
+            source_name = next(filename for name,filename in [('terrain','PHYS0.SS'),('cursor','CURSOR.SS'),('menu','OPENMENU.PIK'),('texture','OPENTILE.SS'),('wood','WOODTILE.SS'),('parch','PARCH.SS'),('difficulty','DIFFICUL.PIK'),('nations','NATIONS.PIK'),('custom','CUSTOMIZ.PIK')] if case.endswith('-'+name+'-source'))
             cursor_source = case_game / source_name
             cursor_source.unlink()
             if case.startswith("bad-"):
@@ -75,7 +75,7 @@ def main():
             (assets / "building-032.png").write_bytes(b"damaged")
         if case == "bad-manifest":
             (assets / "manifest.json").write_bytes(b"{}\n")
-        for name in ['opentile-000','openmenu-000','woodtile-000','parch-000','difficul-000','nations-000']:
+        for name in ['opentile-000','openmenu-000','woodtile-000','parch-000','difficul-000','nations-000','customiz-000']:
             path=assets/(name+'.png')
             if case=='missing-'+name:path.unlink()
             if case=='bad-'+name:path.write_bytes(b'damaged')

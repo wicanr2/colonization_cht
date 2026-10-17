@@ -3494,6 +3494,197 @@
       "outside_card_sampling": "Full-image sampling; generated-card pixels outside native cards use generated x=32 on the same row.",
       "coverage": "Verified complete PIK decode and settled canvas/palette/foreground signatures; original glyphs and selection outlines preserved; no VGA ownership or animation claim.",
       "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "customiz-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "b01bdf7d2c3fe51a971319c42a1f46981939df5556060bb1796fbc89d72479bb",
+      "bytes": 2754427,
+      "size": [
+        1586,
+        992
+      ],
+      "mode": "RGB",
+      "native_size": [
+        320,
+        200
+      ],
+      "target_size": [
+        1280,
+        800
+      ],
+      "sampling": "pixel-center-nearest-neighbor; generated card frames mapped to verified native selection frames",
+      "alpha": "fully opaque generated art; original PNG preserved unchanged",
+      "generation_prompt": "Use case: style-transfer. Asset: opaque 8:5 full-screen fine pixel-art background for Colonization's custom-new-world menu. Image 1 is the original twelve-thumbnail layout and content reference; image 2 is the approved fine pixel-art style, used only for crisp tiny pixel clusters, restrained shading, earthy palette and textured wood. Redraw FIRST image with refined pixel detail while preserving ALL twelve distinct thumbnails, exact four-column/three-row arrangement, original content, relative card boundaries and generous horizontal brown wood grain between them. Native reference grid is 320x200: card columns approximately x12..79, x88..156, x164..232, x240..308; rows y17..64, y77..124, y137..184. Each card has a thin dark wooden frame. Column 1: three globes with progressively larger land area, dark blue oceans. Column 2: three distinct stylized maps with original coastline and island distribution. Column 3: cold snow-capped mountain valley, temperate forest and stream, warm lush green landscape. Column 4: dry desert and sparse vegetation, mild green plains and river, humid rainy green terrain. Preserve the original progression and recognizable silhouettes; do not swap cards or change their positions. Brown wood background remains empty at top, bottom and between cards. Flat front-facing game screen, no perspective. No text, labels, numbers, letters, logos, UI buttons, selection highlights, extra cards, people or buildings. Fine crisp pixel painting consistent with image 2, no blur, smooth photo-realism, glossy 3D, heavy outlines or enlarged block pixels. One edge-to-edge opaque landscape image, 8:5 aspect ratio, intended for runtime sampling to 1280x800; preserve the 320x200 layout proportions. Do not copy architecture or unrelated scenery from style reference.",
+      "reference_sha256": {
+        "archive_palette_reference": "2e01945184def164372098a436308dfe9f98474f5703859e2c8c913c875c5b98",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "CUSTOMIZ.PIK",
+        "sha256": "38756837aa3ab1d7a1abc1205d1ddd7826e8a4efde176a03602290dc89d64e4f",
+        "ordinal": 0,
+        "indexed_sha256": "51adc570de803d6ae2553c407d6841b16975154c33c16e2f13c9b167939ad525"
+      },
+      "palette_sha256": "9227faa32ecc84f6758733ad7c043b02bc1beef5f62cf0b462251486d443c8cc",
+      "native_card_rects": [
+        [
+          10,
+          16,
+          82,
+          64
+        ],
+        [
+          10,
+          76,
+          82,
+          124
+        ],
+        [
+          10,
+          135,
+          82,
+          183
+        ],
+        [
+          86,
+          16,
+          158,
+          64
+        ],
+        [
+          86,
+          76,
+          158,
+          124
+        ],
+        [
+          86,
+          135,
+          158,
+          183
+        ],
+        [
+          162,
+          16,
+          234,
+          64
+        ],
+        [
+          162,
+          76,
+          234,
+          124
+        ],
+        [
+          162,
+          135,
+          234,
+          183
+        ],
+        [
+          238,
+          16,
+          310,
+          64
+        ],
+        [
+          238,
+          76,
+          310,
+          124
+        ],
+        [
+          238,
+          135,
+          310,
+          183
+        ]
+      ],
+      "generated_card_rects": [
+        [
+          43,
+          77,
+          390,
+          315
+        ],
+        [
+          43,
+          365,
+          390,
+          602
+        ],
+        [
+          43,
+          641,
+          390,
+          886
+        ],
+        [
+          418,
+          77,
+          777,
+          315
+        ],
+        [
+          418,
+          365,
+          777,
+          602
+        ],
+        [
+          418,
+          641,
+          777,
+          886
+        ],
+        [
+          804,
+          77,
+          1170,
+          315
+        ],
+        [
+          804,
+          365,
+          1170,
+          602
+        ],
+        [
+          804,
+          641,
+          1170,
+          886
+        ],
+        [
+          1194,
+          77,
+          1544,
+          315
+        ],
+        [
+          1194,
+          365,
+          1544,
+          602
+        ],
+        [
+          1194,
+          641,
+          1544,
+          886
+        ]
+      ],
+      "outside_card_sampling": "Full-width generated wood strip x=0..1585,y=326..353 repeated vertically; cards independently mapped to native frames.",
+      "coverage": "Complete PIK decode, full palette and 81 native glyph/border geometry pairs; exact source equality outside protected original foreground; no VGA ownership or animation claim.",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "foreground_geometry_contracts": 81,
+      "generated_wood_band": [
+        0,
+        326,
+        1586,
+        354
+      ]
     }
   }
 }

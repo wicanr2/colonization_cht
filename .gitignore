@@ -76,3 +76,6 @@ __pycache__/
 # 規格069 R69 READY：新遊戲生成背景原PNG。
 !graphics/difficul-000.png
 !graphics/nations-000.png
+
+# 規格069 R70 READY：生成原PNG，原版參考仍留本機。
+!/graphics/customiz-000.png

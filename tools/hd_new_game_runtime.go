@@ -1,4 +1,4 @@
-// 規格069 R69 READY：新遊戲背景，只合成顯示，不修改DOS。
+// 規格069 R69／R70 READY：新遊戲背景，只合成顯示，不修改DOS。
 package main
 
 import (
@@ -17,6 +17,8 @@ type hdNewGameDefinition struct {
 	file, originalSHA, nativeSHA, asset, assetSHA, paletteSHA string
 	scenes                                                    map[string]string
 	nativeRects, artRects                                     []image.Rectangle
+	foregroundPairs                                           map[string]string
+	woodBand                                                  image.Rectangle
 }
 type hdNewGameFrame struct {
 	hdNewGameDefinition
@@ -28,12 +30,14 @@ type hdNewGameGlyphPair struct {
 	old, value byte
 	k          int
 	glyph      bool
+	border     bool
 }
 type hdNewGameRuntime struct {
 	h                  *hdRuntime
 	frames             []*hdNewGameFrame
 	frame              *hdNewGameFrame
 	glyph              [64000]bool
+	border             [64000]bool
 	pending            map[int]hdNewGameGlyphPair
 	counts             [64000]byte
 	decoding           bool
@@ -85,7 +89,11 @@ func loadHDNewGameRuntime(h *hdRuntime, game, dir string) (*hdNewGameRuntime, er
 						break
 					}
 				}
-				if !card {
+				if !card && !def.woodBand.Empty() {
+					sx = def.woodBand.Min.X + sx%def.woodBand.Dx()
+					sy = def.woodBand.Min.Y + sy%def.woodBand.Dy()
+				}
+				if !card && def.woodBand.Empty() {
 					for _, r := range def.artRects {
 						if image.Pt(sx, sy).In(r) {
 							sx = 32
@@ -102,7 +110,7 @@ func loadHDNewGameRuntime(h *hdRuntime, game, dir string) (*hdNewGameRuntime, er
 		}
 		p.frames = append(p.frames, f)
 	}
-	if len(p.frames) != 2 {
+	if len(p.frames) != 3 {
 		return nil, fmt.Errorf("new-game source group")
 	}
 	return p, nil
@@ -162,8 +170,9 @@ func (p *hdNewGameRuntime) memoryWrite(a uint32, old, value byte) {
 		if delta == 0 && src >= 0xfa00 && src < 0xfc00 && m.Mem[0xa0000+src] == value {
 			if _, ok := p.h.cursorSource(); ok {
 				if src >= 0xfb00 {
-					p.pending[k] = hdNewGameGlyphPair{old, value, src & 255, p.glyph[k]}
+					p.pending[k] = hdNewGameGlyphPair{old, value, src & 255, p.glyph[k], p.border[k]}
 					p.glyph[k] = false
+					p.border[k] = false
 					p.revision++
 					return
 				}
@@ -171,6 +180,7 @@ func (p *hdNewGameRuntime) memoryWrite(a uint32, old, value byte) {
 				delete(p.pending, k)
 				if ok && prior.k == src&255 && old == prior.value && value == prior.old {
 					p.glyph[k] = prior.glyph
+					p.border[k] = prior.border
 					p.revision++
 					return
 				}
@@ -179,8 +189,10 @@ func (p *hdNewGameRuntime) memoryWrite(a uint32, old, value byte) {
 	}
 	clear(p.pending)
 	v := cs == 0xd21 && ip == 0x12c && bytes.Equal(m.Mem[pc:pc+16], []byte{0x26, 0x88, 0x25, 0x47, 0xfe, 0xca, 0x74, 0x0a, 0xfe, 0xcd, 0x75, 0xdf, 0xac, 0xb5, 4, 0xeb})
-	if p.glyph[k] != v {
+	border := (cs == 0xcd3 && ip == 0x64 && bytes.Equal(m.Mem[pc:pc+16], []byte{0x26, 0x88, 0x05, 0x03, 0xfb, 0xe0, 0xf9, 0x07, 0x5f, 0xc9, 0xca, 0x0a, 0, 0x90, 0x55, 0x8b})) || (cs == 0xccc && ip == 0x6a && bytes.Equal(m.Mem[pc:pc+16], []byte{0x26, 0x88, 0x05, 0x47, 0xe0, 0xfa, 0x07, 0x5f, 0xc9, 0xca, 0x0a, 0, 0xc8, 6, 0, 0}))
+	if p.glyph[k] != v || p.border[k] != border {
 		p.glyph[k] = v
+		p.border[k] = border
 		p.revision++
 	}
 }
@@ -194,12 +206,37 @@ func (p *hdNewGameRuntime) glyphMask() []byte {
 	}
 	return mask
 }
+func (p *hdNewGameRuntime) borderMask() []byte {
+	mask := make([]byte, 8000)
+	for k, v := range p.border {
+		if v {
+			mask[k>>3] |= 1 << uint(k&7)
+		}
+	}
+	return mask
+}
 func (p *hdNewGameRuntime) selectFrame(f draftNativeFrame) *hdNewGameFrame {
 	if p == nil || f.mode != 0x13 || len(f.canvas) != 64000 || len(f.palette) != 768 {
 		return nil
 	}
 	canvas, palette, glyph := hash(f.canvas), hash(f.palette), hash(p.glyphMask())
 	for _, frame := range p.frames {
+		if len(frame.foregroundPairs) > 0 {
+			if frame.decoded == 0 || len(frame.native) != 64000 || frame.paletteSHA != palette || frame.foregroundPairs[glyph] != hash(p.borderMask()) {
+				continue
+			}
+			match := true
+			for k, v := range frame.native {
+				if !p.glyph[k] && !p.border[k] && f.canvas[k] != v {
+					match = false
+					break
+				}
+			}
+			if match {
+				return frame
+			}
+			continue
+		}
 		if frame.decoded > 0 && len(frame.native) == 64000 && frame.paletteSHA == palette && frame.scenes[canvas] == glyph {
 			return frame
 		}
@@ -214,7 +251,7 @@ func (p *hdNewGameRuntime) paint(out *image.RGBA, f draftNativeFrame) map[string
 	if frame := p.frame; frame != nil {
 		id = frame.id
 		for k, v := range frame.native {
-			if p.glyph[k] || f.canvas[k] != v {
+			if p.glyph[k] || (len(frame.foregroundPairs) > 0 && p.border[k]) || f.canvas[k] != v {
 				continue
 			}
 			x, y := k%320*4, k/320*4
@@ -223,11 +260,11 @@ func (p *hdNewGameRuntime) paint(out *image.RGBA, f draftNativeFrame) map[string
 			painted++
 		}
 	}
-	return map[string]any{"prototype": false, "formal": true, "matched": id != 0, "source_id": id, "painted": painted, "mask": mask, "glyph_mask": p.glyphMask(), "revision": p.revision, "rejected_decodes": p.rejected}
+	return map[string]any{"prototype": false, "formal": true, "matched": id != 0, "source_id": id, "painted": painted, "mask": mask, "glyph_mask": p.glyphMask(), "border_mask": p.borderMask(), "revision": p.revision, "rejected_decodes": p.rejected}
 }
 func (p *hdNewGameRuntime) paintBackground(out *image.RGBA, f draftNativeFrame, pos int, v byte, palette []byte) bool {
 	if p == nil || p.frame == nil || pos < 0 || pos >= 64000 || len(f.canvas) != 64000 ||
-		hash(palette) != p.frame.paletteSHA || p.frame.native[pos] != v {
+		hash(palette) != p.frame.paletteSHA || p.frame.native[pos] != v || (len(p.frame.foregroundPairs) > 0 && p.border[pos]) {
 		return false
 	}
 	x, y := pos%320*4, pos/320*4

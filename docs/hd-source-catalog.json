@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "4549f8cc3966c78f378bede4431a7835a3f47332bdf70dbcfbc938c6f5ea3b0b",
+  "formal_manifest_sha256": "c5f997aea5ebaca854497d10b17e1f9a1271d01abf8261c9b3efd2762423c2ae",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 72,
+    "formal_asset_bindings": 73,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -15715,9 +15715,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete PIK decode, full palette and 81 native glyph/border geometry pairs with exact source equality outside protected foreground; no VGA ownership",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "customiz-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "8b384068a1c490d0e6f5f95162b481cdc17ce8c247ab6101bc97a5e75007c357",
+        "scope": "twelve custom-world cards, 81 selection geometries, original glyphs and selection outlines preserved; other graphics and animation unverified"
+      }
     },
     {
       "research_id": 312,
@@ -56720,6 +56729,17 @@
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec",
       "source_indexed_sha256": "2f1b16303558b4dba382ab75c72e2bc19c9e21f54d17262865337baea9b53bf5"
+    },
+    {
+      "asset": "customiz-000.png",
+      "asset_sha256": "b01bdf7d2c3fe51a971319c42a1f46981939df5556060bb1796fbc89d72479bb",
+      "source_research_id": 311,
+      "source_file": "CUSTOMIZ.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "51adc570de803d6ae2553c407d6841b16975154c33c16e2f13c9b167939ad525"
     }
   ],
   "limitations": [
@@ -56877,5 +56897,14 @@
     ],
     "formal_assets": 72,
     "claim": "two settled new-game backgrounds only; other images, program-drawn graphics, animation and full HD remain incomplete"
+  },
+  "custom_world_conformance": {
+    "ready_review_sha256": "f156216235387b758f1109c33760cb156543670a58f116b3ae19a8ac2384b4e9",
+    "review_sha256": "8b384068a1c490d0e6f5f95162b481cdc17ce8c247ab6101bc97a5e75007c357",
+    "sources": [
+      311
+    ],
+    "formal_assets": 73,
+    "claim": "one twelve-card custom-world background only; other images, program-drawn graphics, animation and full HD remain incomplete"
   }
 }

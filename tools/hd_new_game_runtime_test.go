@@ -24,10 +24,11 @@ type hdNewGameOracleState struct {
 	Cycles    uint64
 }
 type hdNewGameModelPoint struct {
-	ID    int    `json:"source_id"`
-	Glyph []byte `json:"glyph_mask"`
-	Mask  []byte `json:"paint_mask"`
-	Cells int    `json:"paint_cells"`
+	ID     int    `json:"source_id"`
+	Glyph  []byte `json:"glyph_mask"`
+	Border []byte `json:"border_mask"`
+	Mask   []byte `json:"paint_mask"`
+	Cells  int    `json:"paint_cells"`
 }
 
 func hdNewGameRead(t *testing.T, path string) []byte {
@@ -197,7 +198,7 @@ func TestHDNewGameNative20(t *testing.T) {
 		t.Fatal("終點RAM不同")
 	}
 	for _, frame := range p.frames {
-		if frame.decoded != 1 {
+		if (frame.id != 311 && frame.decoded != 1) || (frame.id == 311 && frame.decoded != 0) {
 			t.Fatal("來源解碼次數不同", frame.id, frame.decoded)
 		}
 	}
@@ -349,7 +350,7 @@ func TestHDNewGameDecodeGuards(t *testing.T) {
 func TestHDNewGameAssetGuards(t *testing.T) {
 	game, _, assets := hdNewGameFixtures(t)
 	type member struct{ root, name string }
-	members := []member{{game, "DIFFICUL.PIK"}, {game, "NATIONS.PIK"}, {assets, "difficul-000.png"}, {assets, "nations-000.png"}}
+	members := []member{{game, "DIFFICUL.PIK"}, {game, "NATIONS.PIK"}, {game, "CUSTOMIZ.PIK"}, {assets, "difficul-000.png"}, {assets, "nations-000.png"}, {assets, "customiz-000.png"}}
 	for _, target := range members {
 		for _, kind := range []string{"missing", "bad", "linked"} {
 			t.Run(target.name+"-"+kind, func(t *testing.T) {
