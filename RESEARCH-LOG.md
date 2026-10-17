@@ -6567,3 +6567,29 @@ dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7、Python3.11.2／Pil
 - 原PNG、alpha與完整生成提示保存在graphics/manifest.json；READY審查3a0c4d06a85d481a2fb380c066f8e1324133be20971466b4d950ef0c7eed231a。53248000個正常來源RGBA與178張GUI的來源、游標、區外逐像素相同；065同頁既有009幀、112後畫字形及原版旗標均保留。
 - 正式審查r75-unit19-conformance-r1.json為a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5，完整流程232筆實際輸入至336600000步，四側CPU／RAM／索引／DAC／WAV／存檔等於實際GUI。世界移動、戰鬥、動畫與其餘來源仍未知。
 - 追加勘誤：舊三幀來源測試隔離原稿，正式GUI驗新舊砲台完整合成；單案例缺既有收據路徑與小資源PNG解碼期限皆屬驗證流程，原失敗保留不計信用。R3／R4完整319檔案反例與兩種無效呼叫以具名批次聯集驗證，R3兩個逾時父行程不計信用，不以逾時部分推算通過。
+
+## 2026-10-17至18 R76：殖民地與歐洲港口PIK來源
+
+推論等級confirmed，限上述正常場景、招募／購買／訓練開關與標準游標。
+VICEROY.EXE a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3，
+COLONY.PIK faaa637d528641a5f098eb4b1975696de182bd2d586b5f089d5a0d51320f5465，
+EUROPE.PIK 05386fef6140252040508bdc56ca0eaeb5d7563f55bb9046f714ba09d74af118。
+dosgolem 82a14b266e1b5bc904e2d0fe507daf6bea41a013，Go1.26.7；
+研究與執行沿既有固定Docker映像。地址基準為dosgolem real-mode CS:IP與20-bit linear RAM，非IDA EA。
+
+- COLONY解碼23040點至0x46500..0x4BEFF，對應stage 0x3C500的y128..199；
+  EUROPE解碼64000點至0x3C500..0x4BEFF。11B5:04EE與054A之code bytes、次數、
+  完整IDX雜湊及資料流見[規格069](docs/spec/069-hd-menu-background-and-textures.md)。
+  各自無缺點、無重複，原始來源檔及逐寫留本機。
+- 0C9F／0CBA的009C、009E、00CA經逐寫移交來源；0D21:012C字形保留已驗字底，
+  其他寫入即使同值也撤銷。正常GUI獨立模型67點，
+  16192筆標準游標反向配對還原、248筆同值撤銷，均保留原始定位及code bytes。
+  來源模型SHA-256 9c4d16bb55d4b2a3f90f0bcec393eff81ad5b9ddb6d14c97ab3fef547950d61f。
+- 色盤採來源實際使用色號的精確[index,R,G,B]指紋，53／79色號。
+  原版選單改動未用色號不影響來源RGB；兩種使用色號反例拒絕、未用色號保留已由元件測試核對。
+- 美術沿已定稿精細像素風生成，幾何對照083dcc801da7462ea82154a508300ec7fc62adbbfcba170b76b11126773bf88d。
+  生成原稿及完整提示保存graphics；美術是重繪近似，不宣稱與原版像素相同。
+- 19個完整RGBA重算、107項實際GUI、四側61筆輸入至158400000步及實際GUI WAV／存檔通過。
+  審查1cac135ef4f39a48aeefbbd56ae2e166a79d069ad090768cb6fd16607e8f9e6e。來源事實1552列保持，只更新308／824的正式證據。
+- 研究誤標場景、抓圖PNG期限、原版瞬間未發布完整畫面、整數取樣與研究原圖上一幀呈現的勘誤，
+  均追加於規格069與WORKLOG，失敗收據保留不計通過。原版未知場景、動畫、其餘格式及完整可見分母仍未知。

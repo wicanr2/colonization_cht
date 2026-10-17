@@ -1,0 +1,9 @@
+package main
+
+import "image"
+
+// 規格069 R76 READY。原版像素不進版控，僅記固定來源與顯示取樣。
+var hdSceneDefinitions = []hdSceneDefinition{
+	{id: 308, offset: 40960, height: 72, file: "COLONY.PIK", originalSHA: "faaa637d528641a5f098eb4b1975696de182bd2d586b5f089d5a0d51320f5465", nativeSHA: "70c390b5178ce8cfc37afb9199d5e25cd1859c2b7adcca36df7d149d0efa20f4", asset: "colony-000.png", assetSHA: "9a213f4f928becd7197f44ff20b2353dd94a1d222458f1fe51d802eeaecdd756", paletteSHA: "2e90f048458e720d90c72d1356cefcffbaaebf1df97c635c44b886283a59770c", nativeRects: []image.Rectangle{image.Rect(0, 0, 120, 49), image.Rect(120, 0, 121, 49), image.Rect(121, 0, 206, 49), image.Rect(206, 0, 207, 49), image.Rect(207, 0, 320, 49), image.Rect(0, 49, 320, 51), image.Rect(0, 51, 305, 72), image.Rect(305, 51, 320, 72)}, artRects: []image.Rectangle{image.Rect(0, 612, 575, 855), image.Rect(575, 612, 581, 855), image.Rect(581, 612, 1007, 855), image.Rect(1007, 612, 1013, 855), image.Rect(1013, 612, 1586, 855), image.Rect(0, 855, 1586, 867), image.Rect(0, 867, 1493, 966), image.Rect(1493, 867, 1586, 992)}},
+	{id: 824, offset: 0, height: 200, file: "EUROPE.PIK", originalSHA: "05386fef6140252040508bdc56ca0eaeb5d7563f55bb9046f714ba09d74af118", nativeSHA: "ec4a1200b087deb467d110d0559d27f8605d5e0a8a1dddf7f3b77919479a2d3d", asset: "europe-000.png", assetSHA: "fc4d8dfaa46b16ee1e03914b9a48eff84a1407dbd32ea9d045a2ad8ada7d5087", paletteSHA: "1ff4b3ba491e13699cef305d9ccfef1a578e8c41b91930fa79320953d6d7c4b3", nativeRects: []image.Rectangle{image.Rect(0, 0, 320, 118), image.Rect(0, 118, 224, 135), image.Rect(224, 118, 320, 135), image.Rect(0, 135, 320, 162), image.Rect(0, 162, 320, 179), image.Rect(0, 179, 305, 200), image.Rect(305, 179, 320, 200)}, artRects: []image.Rectangle{image.Rect(0, 0, 1586, 530), image.Rect(0, 554, 1118, 640), image.Rect(1118, 530, 1586, 640), image.Rect(0, 640, 1586, 779), image.Rect(0, 779, 1586, 872), image.Rect(0, 872, 1503, 975), image.Rect(1503, 872, 1586, 992)}},
+}

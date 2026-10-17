@@ -618,3 +618,175 @@ formal-gui-model-r1/check.json、formal-gui-pixels-r1.json及formal-replay-r1-ch
 原版參考、逐寫資料、字形／邊框集合及錄音留本機；生成原PNG原樣保存於graphics/customiz-000.png，
 提示、來源、權利、完整框位與木紋取樣在graphics/manifest.json。
 README另補本批正式實際畫面；其他圖像、特殊游標、動畫、完整五語文字、跨平台驗收與全量HD未完成，沒有新Release。
+
+## R76 殖民地與歐洲港口背景研究（DRAFT 歷程，2026-10-17）
+
+本節保存 DRAFT 歷程；現行 READY 授權見下節。既有 R66 至 R70 的限定 CONFORMED 保持；開工時生成圖為 R75 的 122 張。
+本機研究根為 workplace/reports/goal186-display-hd/hd-scene-backgrounds-r76。
+新增觀測選項沿用 [背景探針組裝器](../../tools/build_hd_background_source_probe.py)：
+--copy-closure-c9f 必須搭配 --copy-closure，只擴大唯讀複製觀測；
+--memory-snapshots 在每個實際 GUI 檢查點保存完整 RAM，不寫回原版。
+兩者預設關閉，既有探針的預設觀測範圍保持。
+
+| 原版來源 | 檔案 SHA-256 | 解碼索引 SHA-256 | 實際寫入 |
+|---|---|---|---|
+| COLONY.PIK，研究編號 308，320×72 | faaa637d528641a5f098eb4b1975696de182bd2d586b5f089d5a0d51320f5465 | 70c390b5178ce8cfc37afb9199d5e25cd1859c2b7adcca36df7d149d0efa20f4 | 線性 0x46500 至 0x4BEFF，共 23040 點，即 stage 0x3C500 的第 128 列起。 |
+| EUROPE.PIK，研究編號 824，320×200 | 05386fef6140252040508bdc56ca0eaeb5d7563f55bb9046f714ba09d74af118 | ec4a1200b087deb467d110d0559d27f8605d5e0a8a1dddf7f3b77919479a2d3d | 線性 0x3C500 至 0x4BEFF，共 64000 點。 |
+
+上述來源及目的位置已由 scene-source-probe-r1 的真實檔案讀取與逐寫資料確認。
+11B5:04EE 的 16 bytes 為 a4ebed33c94a7509adb210d1ed8be8d1，
+11B5:054A 為 aae2faeb8fac0ac074323c0174058ac8。
+COLONY 為 310／22730 次，EUROPE 為 868／63132 次；各自無重複、無缺點且完整索引 SHA 相同。
+scene-pik-file-decodes-r3.json 保存分類結果。
+同解碼器也處理其他材質，分類須限定 stage 與實際檔案讀取，不以呼叫位址單獨認定 PIK。
+地址空間均為 dosgolem real-mode CS:IP 與 20-bit linear RAM，不是 IDA EA。
+原版 EXE、種子存檔及 dosgolem 版本沿本規格既有固定指紋；本次隔離副本仍為
+82a14b266e1b5bc904e2d0fe507daf6bea41a013。
+
+R76 首次完整抓圖 r76-scenes-gui-r2 雖有 19 點 X11／原版狀態收據，
+其長按在共用主機負載下觸發重複 E，部分「europe」標籤實際為世界或殖民地。
+r76-scenes-gui-r2-semantic-audit.json 撤回這些標籤的港口驗收信用，
+保留原始圖像、輸入與 CPU／RAM 等同性。
+scene-source-probe-r3 對該實際輸入的 19 點完整狀態與無觀測控制相同，
+只證明原版可重播，不證明港口正常路徑驗收通過。
+修正僅涉及 Xvfb 自動重複延遲與抓圖每次按鍵只接受一筆 DOS 輸入，
+正式輸入程式與遊戲行為沒有修改。
+
+擬議背景生命週期沿既有 HD 層的來源擁有權方式：
+
+1. 僅接受已驗 PIK writer、完整唯一寫入、矩形與解碼 SHA，分辨 0 與 40960 的起始偏移。
+2. 主畫布與 stage 各記來源、來源內位置、目前色號及背景／字形底圖種類。
+3. 僅經 code bytes、來源／目的位址、實際色號都相符的 0C9F 或 0CBA 複製移交，
+   另追蹤有界 RAM 保存位置與所有後續撤銷。未知寫入即使同色也撤銷。
+4. 已驗 0D21:012C 字形寫入可保留有來源證明的字底，只供既有文字覆蓋擦除英文時重繪。
+   圖示、邊框及未知前景不能被背景覆蓋。
+5. 標準游標仍須來源、完整可見索引、畫布及透明底圖一致。
+   只接受既有 0B68:051C 反向配對還原，不將任意 VGA 讀回視為來源。
+6. 色盤不符、來源缺件、幾何或圖像指紋不符時回退原圖。
+   全部運算僅影響放大畫布，不修改原版 RAM、資料、輸入、存檔或音訊。
+7. 生成原 PNG 逐位元保存；顯示時依原版矩形與已量測生成圖區域取樣，
+   不把原版參考或解碼索引加入 Git。
+
+兩張生成候選目前留本機，均為 1586×992 RGB：
+港口 fc4d8dfaa46b16ee1e03914b9a48eff84a1407dbd32ea9d045a2ad8ada7d5087，
+殖民地 9a213f4f928becd7197f44ff20b2353dd94a1d222458f1fe51d802eeaecdd756。
+各自 prompt-r1.txt、原圖與參考指紋在本機根保存。
+殖民地原圖上方有未取樣區，正式檔不得裁切或重新編碼。
+
+READY 前仍須確認真實港口畫面、完整 RAM 保存還原、字底與原圖遮擋，
+量測生成圖與原版互動框的對應並審查取樣。
+正式接線後須有五語原版／HD、游標、選單開關、來源拒絕、封裝、
+CPU／完整 RAM／索引／DAC／WAV／存檔對照。
+沒有以上收據不升級為 CONFORMED，也不外推其他季節、港口動態、特殊游標或全量 HD。
+
+本節的逐寫獨立檢查器為 [背景來源生命週期檢查](../../tools/check_hd_scene_background_sources.py)。
+必須在 Docker 提供合法原版、兩側探針收據、實際 GUI 檢查點及本機解碼索引；缺少原版時明確 SKIP／exit 77。
+
+## R76 正式顯示契約（READY，2026-10-17）
+
+審查為 scene-background-ready-review-r1.json，SHA-256
+3aec3bbc6a45b61c4a79943b4f67f6c8a0f1b3e3dcfdfc55243d11927dabc2ed。
+只授權兩個背景的來源解碼、RAM 擁有權與放大畫布重繪，不修改原版。
+本節保存實作前的 READY 契約；現行限定 CONFORMED 與驗收見下節，全量 HD 尚未完成。
+
+- 正確目前版本正常 GUI 為 r76-scenes-gui-r4，19 點／45 筆實際 DOS 輸入。
+  每張擷取與 X11 遊戲區全像素相同，重播至 121000000 步的 CPU、完整 RAM、
+  可見索引、DAC 與無觀測原版相同。
+  現行來源模型 scene-source-model-current-r1/check.json 的 SHA-256 為
+  1fae60ad45337de7782584aa9d58cb153326388e12d6ae867a566dd34ad0912e。
+- 完整唯一解碼各一次：COLONY 23040 點、EUROPE 64000 點。殖民地可見背景 18080 點；
+  港口穩定背景 58255 點。三種選單關閉後均恢復為 58255 點。
+  字形底圖分別為 376 與 939 點，與原版來源及目前畫布逐點相符。
+- 主畫布、stage 與有界 RAM 保存來源經 0C9F／0CBA 的 009C、009E、00CA 逐寫核對。
+  三個 code bytes 分別為 f3a5a403f3790c81ee00808cd981c100、
+  a403f3790c81ee00808cd981c100088e、f3a503f3790c81ee00808cd981c10008。
+  009C／00CA 只接受目的位移 0 或 1；009E 只接受 0。來源及目的均不得跨 16-bit 偏移，
+  來源須低於線性 0xA0000，來源目前色號與擁有權色號須等於實際寫入值。
+  背景保存位置最多 300000 點。達上限時停用本背景層並留下原因，其他已驗層保持。
+- 模型有 17504 筆標準游標反向配對還原。原始殖民地懸停樣本在 160,20，
+  不在 COLONY 部分背景內，不計其背景重疊信用；正式 GUI 必須另在已證實背景點 240,169
+  驗證移入與移出。港口懸停為 160,100。兩者都須通過既有完整游標來源、索引與底圖守門。
+- 色盤採背景完整實際色號集合的精確 [index,R,G,B] 指紋。
+  COLONY 的 53 色號為 2e90f048458e720d90c72d1356cefcffbaaebf1df97c635c44b886283a59770c；
+  EUROPE 的 79 色號為 1ff4b3ba491e13699cef305d9ccfef1a578e8c41b91930fa79320953d6d7c4b3。
+  所有已觀測選單色盤變化均不含背景所用色號；未用色號不影響來源 RGBA。
+  這是來源等價判定，不是容差。正式反例必須覆蓋使用色號改動的拒絕，
+  以及未用色號改動仍保留背景來源的情境。
+- 生成圖逐位元保存為 graphics/colony-000.png 與 graphics/europe-000.png。
+  單張 PNG、原始大小及 alpha 的既有格式保持。原版局部矩形及生成圖對應取樣區由
+  background-geometry-r2.json 定義，SHA-256 為
+  083dcc801da7462ea82154a508300ec7fc62adbbfcba170b76b11126773bf88d，
+  並登錄清冊；所有來源點都有一個不重疊取樣矩形。
+  僅執行時按像素中心最近鄰取樣，原 PNG 不裁切、不縮放、不重新編碼。
+  港口尖塔已限制在原版港口區域內，不能延伸到上方按鈕。
+- 生成美術是已定稿畫風的重繪近似；來源、位置與遮擋已證實，不宣稱美術與原版像素相同。
+  可丟棄原型驗證保留 734720／93232 個原版 RGB 像素，含文字、前景與不透明游標。
+- 真實誤標籤路徑必須被來源檢查器拒絕；原版缺失須 SKIP／exit 77。
+  來源拒絕收據 scene-source-negatives-r1/check.json，
+  SHA-256 b9d8b3eed0093150ea430cf89b2f4349955ab7cf7897acea78f1a6ff1bb5df51。
+
+正式資料與實作入口為 [來源與取樣](../../tools/hd_scene_background_sources.go)、
+[背景生命週期](../../tools/hd_scene_background_runtime.go)。
+驗收仍須包含獨立來源／像素、五語實際 GUI、三種選單開關、兩個背景上的游標、
+原版狀態／WAV／存檔、逐檔缺件／錯件／連結拒絕與封裝。
+未通過前保持 READY，不外推其他季節、更多場景、特殊游標或動畫。
+
+正式元件測試入口為 [背景原版重播與守門](../../tools/hd_scene_background_runtime_test.go)，
+原版點與來源遮罩必須來自獨立檢查器，缺少合法原版時明確 skip，不計通過信用。
+
+[獨立背景RGBA檢查](../../tools/check_hd_scene_background_pixels.py)以生成原PNG、量測矩形與獨立原版擁有權重算整張畫面，不以正式程式的預先取樣圖作期望值。
+
+
+來源索引增補沿用 [唯一組裝器](../../tools/build_hd_source_index.py) 的既有 JSON schema 1。
+本批採 --inherited-index、--inherited-manifest、--scene-background-ready-report 與
+--scene-background-conformed-report，核對原版 1552 列事實、上一版清冊與全部 122 張舊資產紀錄。
+僅增補 308、824 的正式來源證據；其餘列與舊完成範圍逐項保持。
+上一版輸入可從 R75 的 Git commit 1209c96dc00f5223700c1e17258102c5a1291d1b 取出
+docs/hd-source-catalog.json 與 graphics/manifest.json，或用本機已固定雜湊的副本。
+輸出為新的 --output 路徑，驗證後才替換專案清冊。沒有正式 CONFORMED 審查不能使用這條增補路徑。
+
+## 2026-10-18 R76殖民地與港口背景限定CONFORMED
+
+狀態：CONFORMED，僅限 READY 的兩個 PIK、來源使用色號、原版複製、字底及標準游標契約。
+規格069 R76殖民地部分背景與歐洲港口背景限定CONFORMED。合計124張生成原PNG／清冊125檔、62Go／45綁定；122張繼承原稿與紀錄保持。31項含子案例Go測試及兩項既有新遊戲回歸零skip，建置與go vet通過。19點／45輸入及19456000個完整RGBA相同；107項正式GUI含60項HD與47項原圖，獨立原版來源模型67點，驗38409504個背景RGBA、78720個游標RGBA與45583104個原圖模式保留RGBA。五語、兩背景游標及招募／購買／訓練開關均有正例。61筆實際輸入四側至158400000步，CPU、完整RAM、索引、DAC、WAV及存檔與實際GUI相同，含play=true。5種啟動回退／恢復、125檔封裝與377項拒絕通過。其他圖像、動畫與完整HD未完成，沒有新發行。
+
+| 驗收 | 結果 |
+|---|---|
+| 正式組裝 | 62個Go檔／45來源綁定，125個圖像清冊檔；建置與go vet通過。 |
+| 元件與繼承 | 31項含子案例零skip；19點／45筆正常輸入逐格比對獨立來源擁有權，19456000個RGBA完整相同；既有新遊戲20點與守門兩項回歸通過。 |
+| 正式視窗 | 107項均與實際X11遊戲區逐byte相同。60項HD、47項原圖，兩背景各五語，含游標移入與移出、招募／購買／訓練開關。設定暫停時CPU／完整RAM／索引／DAC／輸入數與滑鼠保持。 |
+| 獨立來源與像素 | 67個實際GUI原版點有／無觀測完整狀態相同，完整PIK各解碼一次；38409504個背景RGBA與78720個標準游標RGBA相同，45583104個原圖模式區外RGBA保持。 |
+| 文字字底 | 29168個逐畫面回畫遮罩格均有獨立背景或已驗字底來源；四種CJK語言均有正例，未知前景不計來源。背景像素比較排除明列翻譯安全矩形及不透明游標，游標另驗；不把未比較區域算作全像素信用。 |
+| 正常模式與音訊 | 61筆實際DOS輸入至158400000步，HD play=true、現行原圖、R75原圖及無觀測控制四側，完整CPU／RAM／索引／DAC／WAV／存檔均與正式GUI相同。 |
+| 拒絕與封裝 | 兩來源／兩原稿共16種缺件、錯件、超限與連結檔反例；5種新行程回退／恢復保留偏好與原版暫停狀態。125檔白名單與377項實際拒絕通過。誤標場景被獨立檢查器拒絕；缺原版exit77且無假收據。 |
+| 繼承與權利 | 122張舊原PNG、清冊物件與限定驗收保持；288個原版輸入逐檔SHA相同。原PNG的caBX無參考原圖、縮圖或內嵌PNG／JPEG。原版研究輸出不入Git。 |
+
+正式二進位 SHA-256：d4b7c94d34311c3af7f9ebc19b1bea8a7c475ce278a3e96fcb212289d16f0904。
+清冊 SHA-256：1dba5fd9a5bbf5a8c76861e56709525305857a9a77ae9c988b564119f636333c。
+正式審查 scene-background-conformance-r1.json：1cac135ef4f39a48aeefbbd56ae2e166a79d069ad090768cb6fd16607e8f9e6e。
+[來源索引](../hd-source-catalog.json) SHA-256：21d1e68acac16a3568f6ad2e524f59e520ad733d60f779935b0bf726884719fd。
+索引維持1552筆原始事實；僅增補研究編號308、824，其他1550列及122筆舊綁定逐項保持。
+
+本機收據集中於 workplace/reports/goal186-display-hd/hd-scene-backgrounds-r76。
+review-r76-scenes-conformance-r1.py 逐項重驗收據與原始輸入。
+重跑入口為 build-r76-scenes-r1.py、r76-scenes-tests-r1-command.json、
+capture-r76-scenes-formal-r4.py、formal-source-command-r1.json、formal-pixel-command-r1.json、
+await-r76-gui-and-replay-r3.py 及 check-r76-scenes-package-r1.py。
+正式結果見 r76-scenes-build-r1.json、r76-scenes-tests-r1-check.json、
+r76-scenes-native19-r1/check.json、r76-scenes-native-pixels-r3.json、
+r76-scenes-formal-gui-r4/capture.json、scene-source-model-formal-r1/check.json、
+r76-scenes-gui-pixels-r1.json、r76-scenes-replay-r1-check.json、
+r76-scenes-startup-r1/check.json 與 r76-scenes-package-r1-check.json。
+公開逐寫、RGBA與索引組裝入口均見本規格上述連結；須合法原版，原版輸出留本機。
+
+### 原始失敗與驗證修正
+
+- 研究GUI R2的長按產生重複E，錯誤港口標籤信用已撤回；修正Xvfb自動重複延遲與每鍵一筆輸入後，以同一映像乾淨重跑，正式輸入程式保持。
+- 正式GUI R1在設定關閉後接收到指標移動，未完成收據不計通過；抓圖程式改為設定仍暫停時先將實體指標移到畫面外設定列，再放開滑鼠。
+- 正式GUI R2的PNG壓縮逾時留下截斷檔；保留原失敗，改為無壓縮PNG、30秒單次及45秒總界限。原稿與擷取RGB保持，未換圖或推算通過。
+- 正式GUI R3在59200000步由既有守門拒絕，第一個不合像素為18168，合計218個游標外差異。固定前24筆實際輸入、無新增輸入的21點原版重播證實：首點未發布完成，後20點均完整相符。正式程式守門保持。R4只允許對該守門回退保留反例後向前執行，來源不符不得重試；此次107項全部通過，未觸發額外重試。
+- 原型與首個像素檢查的Pillow浮點最近鄰在少數整數邊界與正式整數中心公式不同，獨立檢查器改用READY的整數公式。另有研究原圖擷取保存上一個呈現畫面的80×84區塊，位於所有本批背景來源外；完整19點輸出仍依原版索引／DAC重算並嚴格比較，原圖來源區另核對。正式GUI每次Apply重新呈現，47項原圖均嚴格核對明列翻譯矩形外的原版RGBA。
+
+兩張生成原PNG與完整提示已加入graphics；背景幾何、規則與原版互動區保持。
+世界移動、戰鬥、其餘29個PIK、51個未觀測ICONS候選、其他格式、特殊游標、
+事件圖與動畫仍待驗。沒有新增tag或Release，v.1.0.3-20261010保持。

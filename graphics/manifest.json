@@ -6184,6 +6184,402 @@
         "encoded_sha256": "3e4a724489ce7b301b4a95a371dda12688a3ee3739f796511cf8808fc934fb10",
         "encoded_length": 204
       }
+    },
+    "colony-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "9a213f4f928becd7197f44ff20b2353dd94a1d222458f1fe51d802eeaecdd756",
+      "bytes": 1487053,
+      "size": [
+        1586,
+        992
+      ],
+      "mode": "RGB",
+      "native_size": [
+        320,
+        72
+      ],
+      "target_size": [
+        1280,
+        288
+      ],
+      "sampling": "pixel-center-nearest-neighbor; disjoint measured native rectangles mapped to generated original PNG regions",
+      "alpha": "fully opaque generated art; original PNG preserved unchanged",
+      "generation_prompt": "Create ONE new fully opaque refined pixel-art backdrop, in the approved visual style of reference 2, using reference 1 ONLY for exact scene geometry. Reference 1 is a very wide 320 by 72 native backdrop: three empty large pale blue framed areas over a grassy riverbank, a tiny tree on the left, a narrow wooden bridge in the center with a dark empty cargo compartment below, distant blue hills at far right, and a row of SIXTEEN empty blue goods cells with a small red curved exit icon at the far bottom right. No people, merchandise or lettering exist in this source; do not add any. IMPORTANT CANVAS ARRANGEMENT: use a full 8:5 image canvas, but draw the ENTIRE panoramic reference 1 faithfully inside ONLY the bottom 36% of the canvas, from y=64% to y=100%, extending edge to edge horizontally. The top 64% of the image is a single completely flat muted blue (#7393bd), empty and undecorated, with no border, no clouds, no hills, no objects. The top area will not be displayed in the game. The occupied bottom panoramic band is 40:9 and must remain naturally proportioned. In the lower band, retain every border and compartment at the SAME relative coordinates as reference 1. Do not change the size or count of the three big top empty frames, the dark central cargo compartment, or sixteen empty equal goods cells. The three broad empty frames begin at band y=2.5% and end at band y=69%; their x boundaries remain approximately [0,37.5%], [37.8%,64.5%], [64.8%,100%]. The sixteen empty goods cells form one uninterrupted row from band y=72% to y=99.5%, spanning x=0% to 95.3%; reserve the rightmost 4.7% for the red curved exit icon. Keep the fine pixel-art grass and riverbank at band y=35% to y=70%, the small left tree at x=0% to 8%, the narrow bridge around x=31% to 42%, and the dark empty central cargo compartment around x=37% to 65%, band y=41% to 70%. Retain the blue sky and distant hills of the small panoramic source, confined to the band. Match reference 2's crisp handcrafted square pixel clusters, warm detailed timber, finely patterned green grass and atmospheric blue hills, game-readable silhouettes, no blur and no photographic realism. No modern buildings, extra bridge, ships, goods, glyphs, words, numbers, cursor, flags, logo, decorative frame or watermark. One backdrop asset, not an atlas or collage. This is a faithful display overlay; native text and interactive sprites must fit the unchanged lower-band layout.",
+      "reference_sha256": {
+        "archive_palette_reference": "763e67fc245dff0ba8b7343c72c05a9a7572c3544a98549168f646134521e7d5",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "COLONY.PIK",
+        "sha256": "faaa637d528641a5f098eb4b1975696de182bd2d586b5f089d5a0d51320f5465",
+        "ordinal": 0,
+        "indexed_sha256": "70c390b5178ce8cfc37afb9199d5e25cd1859c2b7adcca36df7d149d0efa20f4"
+      },
+      "native_canvas_offset": 40960,
+      "palette_indices": [
+        0,
+        7,
+        21,
+        25,
+        26,
+        27,
+        30,
+        31,
+        32,
+        41,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        82,
+        83,
+        86,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        107,
+        108,
+        109,
+        112,
+        118,
+        119,
+        135,
+        136,
+        137,
+        138
+      ],
+      "palette_projection_sha256": "2e90f048458e720d90c72d1356cefcffbaaebf1df97c635c44b886283a59770c",
+      "native_display_rects": [
+        [
+          0,
+          0,
+          120,
+          49
+        ],
+        [
+          120,
+          0,
+          121,
+          49
+        ],
+        [
+          121,
+          0,
+          206,
+          49
+        ],
+        [
+          206,
+          0,
+          207,
+          49
+        ],
+        [
+          207,
+          0,
+          320,
+          49
+        ],
+        [
+          0,
+          49,
+          320,
+          51
+        ],
+        [
+          0,
+          51,
+          305,
+          72
+        ],
+        [
+          305,
+          51,
+          320,
+          72
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          0,
+          612,
+          575,
+          855
+        ],
+        [
+          575,
+          612,
+          581,
+          855
+        ],
+        [
+          581,
+          612,
+          1007,
+          855
+        ],
+        [
+          1007,
+          612,
+          1013,
+          855
+        ],
+        [
+          1013,
+          612,
+          1586,
+          855
+        ],
+        [
+          0,
+          855,
+          1586,
+          867
+        ],
+        [
+          0,
+          867,
+          1493,
+          966
+        ],
+        [
+          1493,
+          867,
+          1586,
+          992
+        ]
+      ],
+      "coverage": "Complete verified PIK decode, RAM provenance, glyph underlay and standard cursor reverse-pair; formal conformance status is tracked in spec069.",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "europe-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "fc4d8dfaa46b16ee1e03914b9a48eff84a1407dbd32ea9d045a2ad8ada7d5087",
+      "bytes": 1842844,
+      "size": [
+        1586,
+        992
+      ],
+      "mode": "RGB",
+      "native_size": [
+        320,
+        200
+      ],
+      "target_size": [
+        1280,
+        800
+      ],
+      "sampling": "pixel-center-nearest-neighbor; disjoint measured native rectangles mapped to generated original PNG regions",
+      "alpha": "fully opaque generated art; original PNG preserved unchanged",
+      "generation_prompt": "Create a single faithful HD pixel-art redraw of the entire European harbor backdrop shown in reference image 1. Reference image 1 is ONLY the geometry and layout guide, a private native-game backdrop with no sprites or lettering. Reference image 2 is the user-approved art direction: refined hand-placed square pixels, crisp silhouette, restrained traditional game palette, richly textured timber, masonry, grass and water, fine pixel clusters, no photographic blur or painterly smoothing. Keep the exact composition and 8:5 aspect ratio of reference 1. The top roughly 59% is quiet muted light-blue sky with the SAME small cloud groups and ample empty space, no added structures or sun. The waterfront town sits at the far right beginning around x=54%, y=60%, its roofline and coast remain at exactly the same locations. Detailed old European 16th-century harbor houses have the same overall sizes, staggered roofline, ochre and pale stone facades and dark timber. Cool blue harbor water spans the lower left, shading into deeper water along the bottom. Retain the same short wooden landing pier near x=74% to 88%, y=73% to 82%, and the shore slopes toward the bottom right. Preserve ALL empty interface frames exactly in number, positions and proportions: three translucent pale-blue outline rectangles across the lower-left at y=59% to 68%, the central empty recessed dark cargo compartment at x=45% to 69%, y=81% to 89%, sixteen equal empty blue square goods cells from x=0% to 95.3%, y=90% to 99.5%, and the small red curved exit symbol at far bottom right x=96% to 100%, y=90% to 100%. These are part of the backdrop; redraw their texture and edges crisply without moving them. Leave all interface cells empty. No captions, words, letters, digits, currency, merchandise, ships, people, cursor, portraits, flags, extra windows, decorative border, logo or watermark. One single backdrop only, no contact sheet, no atlas. This is a display-only faithful redraw; retain scene geometry for overlaid native text and interactive sprites. Fill the canvas, fully opaque.",
+      "reference_sha256": {
+        "archive_palette_reference": "0d088afe27e27fe13a34de65c3632f8a911a095824da318138feb53fbe5d105f",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "EUROPE.PIK",
+        "sha256": "05386fef6140252040508bdc56ca0eaeb5d7563f55bb9046f714ba09d74af118",
+        "ordinal": 0,
+        "indexed_sha256": "ec4a1200b087deb467d110d0559d27f8605d5e0a8a1dddf7f3b77919479a2d3d"
+      },
+      "native_canvas_offset": 0,
+      "palette_indices": [
+        0,
+        1,
+        7,
+        8,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        63,
+        65,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        100,
+        101,
+        102,
+        103,
+        108,
+        109,
+        112,
+        118,
+        119,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        135,
+        136,
+        137,
+        138
+      ],
+      "palette_projection_sha256": "1ff4b3ba491e13699cef305d9ccfef1a578e8c41b91930fa79320953d6d7c4b3",
+      "native_display_rects": [
+        [
+          0,
+          0,
+          320,
+          118
+        ],
+        [
+          0,
+          118,
+          224,
+          135
+        ],
+        [
+          224,
+          118,
+          320,
+          135
+        ],
+        [
+          0,
+          135,
+          320,
+          162
+        ],
+        [
+          0,
+          162,
+          320,
+          179
+        ],
+        [
+          0,
+          179,
+          305,
+          200
+        ],
+        [
+          305,
+          179,
+          320,
+          200
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          0,
+          0,
+          1586,
+          530
+        ],
+        [
+          0,
+          554,
+          1118,
+          640
+        ],
+        [
+          1118,
+          530,
+          1586,
+          640
+        ],
+        [
+          0,
+          640,
+          1586,
+          779
+        ],
+        [
+          0,
+          779,
+          1586,
+          872
+        ],
+        [
+          0,
+          872,
+          1503,
+          975
+        ],
+        [
+          1503,
+          872,
+          1586,
+          992
+        ]
+      ],
+      "coverage": "Complete verified PIK decode, RAM provenance, glyph underlay and standard cursor reverse-pair; formal conformance status is tracked in spec069.",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
     }
   }
 }

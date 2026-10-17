@@ -110,6 +110,10 @@ func loadHDRuntime(m *golem.Machine, game, directory string) (*hdRuntime, error)
 	if err != nil {
 		return nil, err
 	}
+	h.scenes, err = loadHDSceneRuntime(h, game, directory)
+	if err != nil {
+		return nil, err
+	}
 	h.parch, err = loadHDTextureKind(h, game, directory, "parch")
 	if err != nil {
 		return nil, err
@@ -158,7 +162,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7"
+const hdManifestSHA = "1dba5fd9a5bbf5a8c76861e56709525305857a9a77ae9c988b564119f636333c"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"
@@ -171,6 +175,7 @@ type hdBuildingPixel struct {
 	cursorIndex int
 }
 type hdRuntime struct {
+	scenes  *hdSceneRuntime
 	newGame *hdNewGameRuntime
 
 	parch                                            *hdTextureRuntime
@@ -446,6 +451,9 @@ func (h *hdRuntime) baseExisting(f draftNativeFrame) (*image.RGBA, map[string]an
 		receipt["cursor_reject"] = reason
 		return out, receipt
 	}
+	if h.scenes != nil {
+		receipt["scene_picture"] = h.scenes.paint(out, f)
+	}
 	if h.sea != nil {
 		receipt["sea"] = h.sea.paint(out, f)
 	}
@@ -526,8 +534,15 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 	newGameBGPainted := 0
 	parchBGMask := make([]byte, 8000)
 	parchBGPainted := 0
-	if hd["reason"] != "unverified-cursor-or-native-surface" && ((b.hd.newGame != nil && b.hd.newGame.frame != nil) || (b.hd.texture != nil && b.hd.texture.paletteSupported(f.palette)) || (b.hd.worldTexture != nil && b.hd.worldTexture.paletteSupported(f.palette)) || (b.hd.parch != nil && b.hd.parch.paletteSupported(f.palette))) {
+	sceneBGMask := make([]byte, 8000)
+	sceneBGPainted := 0
+	if hd["reason"] != "unverified-cursor-or-native-surface" && ((b.hd.scenes != nil) || (b.hd.newGame != nil && b.hd.newGame.frame != nil) || (b.hd.texture != nil && b.hd.texture.paletteSupported(f.palette)) || (b.hd.worldTexture != nil && b.hd.worldTexture.paletteSupported(f.palette)) || (b.hd.parch != nil && b.hd.parch.paletteSupported(f.palette))) {
 		hdBG = func(out *image.RGBA, i int, v byte, palette []byte) bool {
+			if b.hd.scenes != nil && b.hd.scenes.paintBackground(out, f, i, v, palette) {
+				sceneBGMask[i>>3] |= 1 << uint(i&7)
+				sceneBGPainted++
+				return true
+			}
 			if b.hd.newGame != nil && b.hd.newGame.paintBackground(out, f, i, v, palette) {
 				newGameBGMask[i>>3] |= 1 << uint(i&7)
 				newGameBGPainted++
@@ -556,6 +571,10 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 		}
 	}
 	out, record, err := draftRebuildTargetOn(t, f.journal, f.canvas, f.buffer, f.indexed, f.palette, f.cursor, f.step, f.mode, base, hdBG)
+	if group, ok := hd["scene_picture"].(map[string]any); ok {
+		group["background_repaints"] = sceneBGPainted
+		group["background_mask"] = sceneBGMask
+	}
 	if texture, ok := hd["texture"].(map[string]any); ok {
 		texture["background_repaints"] = bgPainted
 		texture["background_mask"] = bgMask
@@ -585,6 +604,9 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 
 func (h *hdRuntime) key() string {
 	base := h.baseKey()
+	if h != nil && h.scenes != nil {
+		base = fmt.Sprintf("%s/scene-picture/%d", base, h.scenes.revision)
+	}
 	if h != nil && h.newGame != nil {
 		base = fmt.Sprintf("%s/new-game/%d", base, h.newGame.revision)
 	}

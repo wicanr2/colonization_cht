@@ -8,7 +8,10 @@ parser.add_argument('--points',type=Path,help='可選：實際GUI檢查點；需
 parser.add_argument('--inputs',type=Path,help='與points配對的實際DOS輸入')
 parser.add_argument('--end-step',type=int,help='與points配對的有界原版終點')
 parser.add_argument('--copy-closure',action='store_true',help='另記錄已驗RAM複製目的及後續撤銷寫入，最多300000個位址')
+parser.add_argument('--copy-closure-c9f',action='store_true',help='搭配copy-closure，另觀測0C9F的同型複製入口；只記錄，不授予擁有權')
+parser.add_argument('--memory-snapshots',action='store_true',help='每個實際GUI檢查點另存完整唯讀RAM，供游標與間接複製核對')
 a=parser.parse_args()
+assert not a.copy_closure_c9f or a.copy_closure
 repo=Path(__file__).resolve().parents[1];out=a.output.resolve()
 assert Path("/.dockerenv").is_file() and os.getuid()!=0
 assert out.is_relative_to("/out") and out.parent.stat().st_uid==os.getuid() and not out.exists()
@@ -132,7 +135,15 @@ if a.copy_closure:
  }
  yes=yes||b.copyAddresses[a]
 '''+needle,1)
+    if a.copy_closure_c9f:
+        needle='cs==0xcba && (ip==0x9c || ip==0x9e || ip==0xca)'
+        assert TRACER.count(needle)==1
+        TRACER=TRACER.replace(needle,'(cs==0xcba || cs==0xc9f) && (ip==0x9c || ip==0x9e || ip==0xca)',1)
 s+="\n"+TRACER
+if a.memory_snapshots:
+    needle='".palette": m.DAC[:]'
+    assert s.count(needle)==1
+    s=s.replace(needle,'".memory": m.Mem, '+needle,1)
 (out/"main.go").write_text(s)
 for name in ["go.mod","go.sum","go.work"]:shutil.copyfile(a.reference/name,out/name)
 subprocess.run(["gofmt","-w","main.go"],cwd=out,check=True,timeout=20)
@@ -140,5 +151,7 @@ for cmd in [["go","build","-trimpath","-o","background-probe","."],["go","vet","
     subprocess.run(cmd,cwd=out,check=True,timeout=120)
 meta={"kind":"DRAFT-readonly-background-source-collector","source_sha256":sha(out/"main.go"),"binary_sha256":sha(out/"background-probe"),"generator_sha256":sha(Path(__file__)),"entry_source_sha256":sha(a.entry/"entry-catalog.go"),"points_sha256":sha(out/"points.json"),"sources":3,"event_limit":6000000,"end":end,"production_connected":False}
 if a.copy_closure:meta['copy_closure_address_limit']=300000
+if a.copy_closure_c9f:meta['copy_closure_c9f']=True
+if a.memory_snapshots:meta['complete_readonly_ram_per_checkpoint']=True
 (out/"build.json").write_text(json.dumps(meta,indent=2)+"\n")
 print("PASS_BACKGROUND_SOURCE_COLLECTOR_BUILD",meta["source_sha256"],flush=True)

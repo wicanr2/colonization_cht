@@ -38,6 +38,10 @@ parser.add_argument('--colonist-ready-report',type=Path,help='規格070同頁22�
 parser.add_argument('--colonist-conformed-report',type=Path,help='規格070同頁22幀正式驗收及81張素材繼承審查')
 parser.add_argument('--unit19-ready-report',type=Path,help='規格070其餘19幀單位READY審查')
 parser.add_argument('--unit19-conformed-report',type=Path,help='規格070正常14頁19幀驗收及103張素材繼承審查')
+parser.add_argument('--inherited-index',type=Path,help='可選：經雜湊固定的上一版來源清冊；只供新增規格069兩背景，保留既有驗收')
+parser.add_argument('--inherited-manifest',type=Path,help='與inherited-index配對的上一版完整素材清冊')
+parser.add_argument('--scene-background-ready-report',type=Path,help='規格069兩背景READY審查')
+parser.add_argument('--scene-background-conformed-report',type=Path,help='規格069兩背景正式驗收與122張舊素材繼承審查')
 a=parser.parse_args();out=a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.parent.stat().st_uid==os.getuid() and not out.exists()
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -69,6 +73,53 @@ for name,asset in manifest['assets'].items():
  f=matches[0];f['formal_assets'].append(name)
  bindings.append({'asset':name,'asset_sha256':asset['sha256'],'source_research_id':f['research_id'],'source_file':file,'source_ordinal':f['ordinal'],'source_encoded_sha256':f.get('encoded_sha256'),'spec':asset.get('spec',manifest['spec']),'claim':'matches verified formal manifest; conformance scope remains in cited spec'})
  if file.endswith('.PIK'):bindings[-1]['source_indexed_sha256']=f['indexed_sha256']
+# 只增補經本輪審查的兩列；上一版已完成項及原始事實逐項原樣繼承。
+if any([a.inherited_index,a.inherited_manifest,a.scene_background_ready_report,a.scene_background_conformed_report]):
+ assert all([a.inherited_index,a.inherited_manifest,a.scene_background_ready_report,a.scene_background_conformed_report])
+ current_ready=json.loads(a.scene_background_ready_report.read_bytes())
+ current=json.loads(a.scene_background_conformed_report.read_bytes())
+ prior=json.loads(a.inherited_index.read_bytes());prior_manifest=json.loads(a.inherited_manifest.read_bytes())
+ assert current_ready['result']=='READY_SCENE_BACKGROUND_DISPLAY_ONLY'
+ assert current['result']=='PASS_SCENE_BACKGROUND_CONFORMANCE_REVIEW' and current['spec_state']=='CONFORMED'
+ assert current['sources']==[308,824] and current['formal_assets']==124 and current['graphics_files']==125
+ assert current['manifest_sha256']==sha(a.manifest) and current['ready_review_sha256']==sha(a.scene_background_ready_report)
+ assert current['inherited_source_index_sha256']==sha(a.inherited_index)
+ assert current['inherited_manifest_sha256']==sha(a.inherited_manifest)==prior['formal_manifest_sha256']
+ assert prior['source_receipt_sha256']==sha(a.catalog) and prior['kind']=='DRAFT-native-source-index-not-complete-player-coverage'
+ assert prior['schema']==1 and prior['coverage_limits']['complete_hd'] is False and prior['coverage_limits']['contains_original_pixels'] is False
+ new_assets={'colony-000.png','europe-000.png'}
+ assert set(prior_manifest['assets'])==set(manifest['assets'])-new_assets==set(current['unchanged_inherited_assets'])
+ assert len(prior_manifest['assets'])==len(prior['formal_bindings'])==122
+ assert all(manifest['assets'][name]==record and record['sha256']==current['unchanged_inherited_assets'][name] for name,record in prior_manifest['assets'].items())
+ before={row['research_id']:row for row in prior['frames']}
+ assert len(before)==len(frames)==1552 and prior['files']==d['files'] and prior['summary']==d['summary']
+ assert prior['declared_encoding_alias_groups']==d['declared_encoding_alias_groups']
+ for row in frames:
+  old=before[row['research_id']]
+  assert {k:old[k] for k in allowed if k in old}=={k:row[k] for k in allowed if k in row}
+  if row['research_id'] not in [308,824]:assert old['formal_assets']==row['formal_assets']
+ old_bindings={row['asset']:row for row in prior['formal_bindings']}
+ assert {row['asset']:row for row in bindings if row['asset'] not in new_assets}==old_bindings
+ assert current['native_points']==19 and current['native_rgba_pixels']==19456000
+ assert current['formal_source_points']==67 and current['gui_samples']==107 and current['gui_hd_samples']==60 and current['gui_original_samples']==47
+ assert current['go_passed_unique_cases']==31 and current['startup_cases']==5 and current['package_rejected_cases']==377
+ merged=json.loads(a.inherited_index.read_bytes())
+ for rid,name in [(308,'colony-000.png'),(824,'europe-000.png')]:
+  row=next(row for row in merged['frames'] if row['research_id']==rid)
+  fresh=next(row for row in frames if row['research_id']==rid)
+  assert not row['formal_assets'] and fresh['formal_assets']==[name]
+  row['formal_assets']=[name]
+  row['runtime_source_evidence']='confirmed complete PIK decode, exact source-used palette RGB, 0C9F/0CBA RAM provenance, glyph underlays and standard cursor reverse-pair; only settled visible native surfaces'
+  row['source_contract_reference']={'state':'CONFORMED','spec':'docs/spec/069-hd-menu-background-and-textures.md','formal_connected':True,'review_sha256':sha(a.scene_background_conformed_report),'scope':'normal colony partial backdrop and Europe harbor, five languages, recruit/purchase/train open/close and verified standard-cursor hover/return; other scenes, program-drawn graphics and animation unverified'}
+ merged['formal_manifest_sha256']=sha(a.manifest);merged['formal_bindings']=bindings
+ merged['coverage_limits']['formal_asset_bindings']=len(bindings)
+ merged['coverage_limits']['additional_ready_source_contracts']=sum(row.get('source_contract_reference',{}).get('state')=='READY' and not row.get('source_contract_reference',{}).get('formal_connected') for row in merged['frames'])
+ merged['scene_background_conformance']={'ready_review_sha256':sha(a.scene_background_ready_report),'review_sha256':sha(a.scene_background_conformed_report),'sources':[308,824],'formal_assets':124,'gui_samples':107,'native_source_points':67,'inherited_source_index_sha256':sha(a.inherited_index),'claim':'two verified normal backgrounds only; all 122 prior raw PNGs, records and delimited conformance states preserved; full player-visible graphics denominator remains unknown and full HD remains incomplete'}
+ assert all(row==before[row['research_id']] for row in merged['frames'] if row['research_id'] not in [308,824])
+ out.write_text(json.dumps(merged,ensure_ascii=False,indent=2)+'\n')
+ print('PASS_INHERITED_SCENE_SOURCE_INDEX',len(frames),len(bindings),sha(out),flush=True)
+ raise SystemExit(0)
+
 ready=[f for f in frames if f['file']=='PHYS0.SS' and f['ordinal']==79 and f.get('encoded_sha256')=='a8a861754068c86a9c150442f7b07f1fbd297d82b8e5dcb2e3ee108bde4dc84c']
 assert len(ready)==1
 ready[0]['source_contract_reference']={'state':'CONFORMED','spec':'docs/spec/062-hd-sea-draw-lifecycle.md','section':'2026-10-15 R58正式驗收與限定CONFORMED','formal_connected':bool(ready[0]['formal_assets'])}
