@@ -40,7 +40,7 @@ def main():
     cases = ["missing-directory", "missing-image", "bad-image", "bad-manifest",
                  "missing-sea", "bad-sea", "linked-sea", "missing-person", "bad-person", "linked-person", "missing-shelter", "bad-shelter", "linked-shelter"]
     cases += [kind+"-building-%03d"%n for n in [16,21,27,35,39,42,43,44,45,9] for kind in ["missing","bad","linked"]]
-    cases += [kind+"-icons-%03d"%n for n in [8, 9, 16, 6, 7, 14, 15, 127, 5, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 42, 53, 56, 59, 62, 67, 68, 69, 94, 122, 123, 124, 58, 60, 66, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 95, 96, 97, 98, 106, 107] for kind in ["missing","bad","linked"]]
+    cases += [kind+"-icons-%03d"%n for n in [8, 9, 16, 6, 7, 14, 15, 127, 5, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 42, 53, 56, 59, 62, 67, 68, 69, 94, 122, 123, 124, 58, 60, 66, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 95, 96, 97, 98, 106, 107, 65, 73, 74, 75, 76, 77, 101, 102, 103, 104, 105, 109, 110, 111, 112, 125, 126, 128, 129] for kind in ["missing","bad","linked"]]
     cases += ["missing-terrain079","bad-terrain079","linked-terrain079"]
     terrain_batch = [6, 9, 17, 66, 71, 74, 77, 78, 80, 96, 147, 150,
                      112, 113, 116, 119, 126, 127, 136, 139]
@@ -122,7 +122,7 @@ def main():
             if case=="bad-building-%03d"%n: (assets/name).write_bytes(b"damaged")
             if case=="linked-building-%03d"%n:
                 (assets/name).unlink(); (assets/name).symlink_to(args.bundle/"graphics"/name)
-        for n in [8, 9, 16, 6, 7, 14, 15, 127, 5, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 42, 53, 56, 59, 62, 67, 68, 69, 94, 122, 123, 124, 58, 60, 66, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 95, 96, 97, 98, 106, 107]:
+        for n in [8, 9, 16, 6, 7, 14, 15, 127, 5, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 42, 53, 56, 59, 62, 67, 68, 69, 94, 122, 123, 124, 58, 60, 66, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 95, 96, 97, 98, 106, 107, 65, 73, 74, 75, 76, 77, 101, 102, 103, 104, 105, 109, 110, 111, 112, 125, 126, 128, 129]:
             name="icons-%03d.png"%n
             if case=="missing-icons-%03d"%n: (assets/name).unlink()
             if case=="bad-icons-%03d"%n: (assets/name).write_bytes(b"damaged")

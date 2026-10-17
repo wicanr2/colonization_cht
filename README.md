@@ -100,7 +100,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 
 ![繁體中文貨車百科與 HD 車體小圖像](docs/screenshots/hd-vehicle-pedia-zh.png)
 
-百科貨車：車體已依定稿畫風重繪，原版旗標與後畫字形保持。砲台與寶藏圖像也已接入，受損砲台及其餘單位逐項接續。
+百科貨車：車體已依定稿畫風重繪，原版旗標與後畫字形保持。砲台、受損砲台與寶藏圖像也已接入百科，其他玩家路徑持續驗證。
 
 ![繁體中文殖民者百科與 HD 人物小圖像](docs/screenshots/hd-colonists-pedia-zh.png)
 
@@ -111,7 +111,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 所有建置、遊戲執行、分析與抓圖都在 Docker 容器內進行，需要自備合法原版。
 
 - [目前脈絡](CONTEXT.md)、[工作計畫](WORKLIST.md)（由 `docs/worklist.json` 產生）
-- [多語系、HD 切換與實際遊玩影片](docs/goals/186-display-settings-and-gameplay-video.md)：五語整包後端與設定保存已接線；十二種城內建築與景物、海洋與二十一種世界地形圖塊及碎片、一個人物、六十種小圖像含百科船艦、貨車、砲台、寶藏及殖民者、一般游標、主選單背景與木紋、世界與城內木紋，城內紙質背景，以及新遊戲的難度人物卡、國家旗卡與自訂地圖十二張小圖背景已接正式HD顯示。全量圖像包含小圖像與動畫幀，仍在逐項開發，尚未收進目前發行版。
+- [多語系、HD 切換與實際遊玩影片](docs/goals/186-display-settings-and-gameplay-video.md)：五語整包後端與設定保存已接線；十二種城內建築與景物、海洋與二十一種世界地形圖塊及碎片、一個人物、七十九種小圖像含百科船艦、貨車、砲台、寶藏、殖民者、步行與騎乘人物及受損砲台、一般游標、主選單背景與木紋、世界與城內木紋，城內紙質背景，以及新遊戲的難度人物卡、國家旗卡與自訂地圖十二張小圖背景已接正式HD顯示。全量圖像包含小圖像與動畫幀，仍在逐項開發，尚未收進目前發行版。
 - [規格](docs/spec/)與[各輪目標](docs/goals/)
 - [驗證矩陣](docs/verification-matrix.md)（`tools/verification_matrix.py` 產生）
 - [研究證據](RESEARCH-LOG.md)與[工作歷程](WORKLOG.md)

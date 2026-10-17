@@ -5,7 +5,7 @@ from PIL import Image,ImageDraw,ImageChops
 from check_hd_ship_pixels import sample_rgba
 sha=lambda b:hashlib.sha256(b).hexdigest()
 read=lambda p:json.loads(p.read_bytes())
-MANIFEST='963b67ab9fdbdf02577a063dca488a525f7491cbf9d769c3f9c664117adcb758'
+MANIFEST='c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7'
 MODEL='b6da3cef172296ce2abbd900413743d6287678a0cb3def046341112f6c2ba2ea'
 TARGETS={58,60,66,81,82,83,84,85,86,87,88,89,90,91,92,93,95,96,97,98,106,107}
 

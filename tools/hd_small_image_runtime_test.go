@@ -10,6 +10,7 @@ import (
 	"image/png"
 	"os"
 	"path/filepath"
+	"sort"
 	"testing"
 )
 
@@ -332,7 +333,7 @@ func TestHDSmallRuntimeNativeLifecycle(t *testing.T) {
 	h, err := loadHDRuntime(m, game, assets)
 	need(err)
 
-	if h.small == nil || len(h.small.frames) != 61 || hash(m.Mem) != before {
+	if h.small == nil || len(h.small.frames) != 80 || hash(m.Mem) != before {
 		t.Fatal("小圖像載入失敗或改寫DOS")
 	}
 	p := h.small
@@ -658,7 +659,7 @@ func TestHDSmallResourceContract(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(p.frames) != 61 || !bytes.Equal(before, m.Mem) {
+	if len(p.frames) != 80 || !bytes.Equal(before, m.Mem) {
 		t.Fatal("素材載入來源或原版記憶體不同")
 	}
 	available := map[int]bool{}
@@ -667,8 +668,8 @@ func TestHDSmallResourceContract(t *testing.T) {
 			available[f.ordinal] = true
 		}
 	}
-	wantedAvailable := []int{5, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 42, 53, 56, 59, 62, 67, 68, 69, 94, 122, 123, 124, 6, 7, 14, 15, 127, 8, 9, 16, 58, 60, 66, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 95, 96, 97, 98, 106, 107}
-	if len(available) != 60 {
+	wantedAvailable := []int{5, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 42, 53, 56, 59, 62, 67, 68, 69, 94, 122, 123, 124, 6, 7, 14, 15, 127, 8, 9, 16, 58, 60, 66, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 95, 96, 97, 98, 106, 107, 65, 73, 74, 75, 76, 77, 101, 102, 103, 104, 105, 109, 110, 111, 112, 125, 126, 128, 129}
+	if len(available) != 79 {
 		t.Fatal("小圖像素材集合不同", available)
 	}
 	for _, ordinal := range wantedAvailable {
@@ -691,6 +692,45 @@ func TestHDSmallResourceContract(t *testing.T) {
 			}
 		}
 	}
+	sort.Strings(names)
+	if path := os.Getenv("TEST_HD_SMALL_RESOURCE_CASE_CATALOG"); path != "" {
+		raw, e := json.Marshal(names)
+		if e != nil {
+			t.Fatal(e)
+		}
+		if e = os.WriteFile(path, raw, 0644); e != nil {
+			t.Fatal(e)
+		}
+		if os.Getenv("TEST_HD_SMALL_RESOURCE_CASE_CATALOG_ONLY") == "1" {
+			return
+		}
+	}
+	if path := os.Getenv("TEST_HD_SMALL_RESOURCE_CASE_SELECTION"); path != "" {
+		raw, e := os.ReadFile(path)
+		if e != nil {
+			t.Fatal(e)
+		}
+		var selected []string
+		if e = json.Unmarshal(raw, &selected); e != nil {
+			t.Fatal(e)
+		}
+		if len(selected) == 0 {
+			t.Fatal("小圖像資源批次不可為空")
+		}
+		known := map[string]bool{}
+		for _, name := range names {
+			known[name] = true
+		}
+		seen := map[string]bool{}
+		for _, name := range selected {
+			if !known[name] || seen[name] {
+				t.Fatal("小圖像資源案例不存在或重複", name)
+			}
+			seen[name] = true
+		}
+		names = selected
+	}
+
 	a, g := filepath.Join(t.TempDir(), "assets"), filepath.Join(t.TempDir(), "game")
 	for _, dir := range []string{a, g} {
 		if err := os.Mkdir(dir, 0755); err != nil {
@@ -716,52 +756,54 @@ func TestHDSmallResourceContract(t *testing.T) {
 	}
 	restoreFixture := hdRestoreResourceFixture(t, a, g)
 	for _, name := range names {
-		if name == "missing-icons" {
-			err = os.Remove(filepath.Join(g, "ICONS.SS"))
-		} else if name == "wrong-icons" {
-			err = os.WriteFile(filepath.Join(g, "ICONS.SS"), []byte("wrong"), 0644)
-		} else if name == "linked-icons" {
-			err = os.Remove(filepath.Join(g, "ICONS.SS"))
-			if err == nil {
-				err = os.Symlink(filepath.Join(game, "ICONS.SS"), filepath.Join(g, "ICONS.SS"))
-			}
-		} else {
-			for _, f := range p.frames {
-				if f.file == "" {
-					continue
+		t.Run(name, func(t *testing.T) {
+			defer restoreFixture(t)
+			if name == "missing-icons" {
+				err = os.Remove(filepath.Join(g, "ICONS.SS"))
+			} else if name == "wrong-icons" {
+				err = os.WriteFile(filepath.Join(g, "ICONS.SS"), []byte("wrong"), 0644)
+			} else if name == "linked-icons" {
+				err = os.Remove(filepath.Join(g, "ICONS.SS"))
+				if err == nil {
+					err = os.Symlink(filepath.Join(game, "ICONS.SS"), filepath.Join(g, "ICONS.SS"))
 				}
-				path := filepath.Join(a, f.file)
-				switch name {
-				case "missing-" + f.file:
-					err = os.Remove(path)
-				case "wrong-" + f.file:
-					err = os.WriteFile(path, []byte("wrong"), 0644)
-				case "truncated-" + f.file:
-					raw, e := os.ReadFile(path)
-					err = e
-					if err == nil {
-						err = os.WriteFile(path, raw[:32], 0644)
+			} else {
+				for _, f := range p.frames {
+					if f.file == "" {
+						continue
 					}
-				case "linked-" + f.file:
-					err = os.Remove(path)
-					if err == nil {
-						err = os.Symlink(filepath.Join(assets, f.file), path)
+					path := filepath.Join(a, f.file)
+					switch name {
+					case "missing-" + f.file:
+						err = os.Remove(path)
+					case "wrong-" + f.file:
+						err = os.WriteFile(path, []byte("wrong"), 0644)
+					case "truncated-" + f.file:
+						raw, e := os.ReadFile(path)
+						err = e
+						if err == nil {
+							err = os.WriteFile(path, raw[:32], 0644)
+						}
+					case "linked-" + f.file:
+						err = os.Remove(path)
+						if err == nil {
+							err = os.Symlink(filepath.Join(assets, f.file), path)
+						}
 					}
 				}
 			}
-		}
-		if err != nil {
-			t.Fatal(err)
-		}
-		m := golem.New()
-		before := bytes.Clone(m.Mem)
-		if p, err := loadHDSmallRuntime(&hdRuntime{m: m}, g, a); err == nil || p != nil {
-			t.Fatal("錯件未拒絕", name)
-		}
-		if !bytes.Equal(before, m.Mem) {
-			t.Fatal("錯件載入改寫原版", name)
-		}
-		restoreFixture(t)
+			if err != nil {
+				t.Fatal(err)
+			}
+			m := golem.New()
+			before := bytes.Clone(m.Mem)
+			if p, err := loadHDSmallRuntime(&hdRuntime{m: m}, g, a); err == nil || p != nil {
+				t.Fatal("錯件未拒絕", name)
+			}
+			if !bytes.Equal(before, m.Mem) {
+				t.Fatal("錯件載入改寫原版", name)
+			}
+		})
 	}
 	fmt.Println("PASS_SMALL_IMAGE_RESOURCE_REJECTIONS", len(names)+2)
 }
@@ -793,7 +835,7 @@ func TestHDVehicleRuntimeNativeLifecycle(t *testing.T) {
 		modelDir: "vehicles-ram-r1/model-r1", outputEnv: "TEST_HD_VEHICLE_OUTPUT", imageKey: "vehicles",
 		result: "PASS_THREE_VEHICLE_RUNTIME_NATIVE_18", pointsKey: "vehicle_points",
 		points: 18, inputs: 86, positivePoints: 9, inputEnd: 175600000, end: 175200000,
-		sources: map[int]int{8: 138, 9: 67, 16: 82},
+		sources: map[int]int{8: 138, 9: 67, 16: 82}, isolatedArt: true,
 	})
 }
 
@@ -806,6 +848,17 @@ func TestHDColonistRuntimeNativeLifecycle(t *testing.T) {
 		result: "PASS_COLONIST_22_RUNTIME_NATIVE_54", pointsKey: "colonist_points",
 		points: 54, inputs: 81, positivePoints: 45, inputEnd: 156400000, end: 156200000,
 		sources: map[int]int{58: 60, 60: 60, 66: 51, 81: 69, 82: 59, 83: 60, 84: 60, 85: 75, 86: 74, 87: 68, 88: 63, 89: 62, 90: 54, 91: 53, 92: 54, 93: 75, 95: 63, 96: 75, 97: 60, 98: 50, 106: 52, 107: 56}, isolatedArt: true,
+	})
+}
+
+func TestHDUnit19RuntimeNativeLifecycle(t *testing.T) {
+	hdSmallNativeLifecycle(t, hdSmallNativeFixture{
+		inputPath: "baseline-unit19-r1/gui.inputs.json", pointPath: "r75-icons-entry-r1/points.json",
+		inputSHA: "2a2007acb65dfe021ac4d2aa8323561607d505446289a49376aa57476518f24c", pointSHA: "ff19d096b2082c673c2d16cc02543f3d7f6ce0baefdb5025f643e66a575b0eae",
+		modelDir: "units19-ram-r1/model-r1", outputEnv: "TEST_HD_UNIT19_OUTPUT", imageKey: "units19",
+		result: "PASS_UNIT19_RUNTIME_NATIVE_61", pointsKey: "unit_points",
+		points: 61, inputs: 137, positivePoints: 52, inputEnd: 310000000, end: 309600000,
+		sources: map[int]int{65: 33, 73: 58, 74: 68, 75: 102, 76: 111, 77: 61, 101: 58, 102: 67, 103: 102, 104: 112, 105: 60, 109: 65, 110: 65, 111: 100, 112: 116, 125: 66, 126: 113, 128: 68, 129: 114}, isolatedArt: true,
 	})
 }
 
@@ -873,7 +926,7 @@ func hdSmallNativeLifecycle(t *testing.T, fixture hdSmallNativeFixture) {
 	h, err := loadHDRuntime(m, game, assets)
 	need(err)
 
-	if h.small == nil || len(h.small.frames) != 61 || hash(m.Mem) != before {
+	if h.small == nil || len(h.small.frames) != 80 || hash(m.Mem) != before {
 		t.Fatal("小圖像載入失敗或改寫DOS")
 	}
 	p := h.small

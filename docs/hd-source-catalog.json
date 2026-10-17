@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "963b67ab9fdbdf02577a063dca488a525f7491cbf9d769c3f9c664117adcb758",
+  "formal_manifest_sha256": "c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 103,
+    "formal_asset_bindings": 122,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -32552,7 +32552,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-065.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -32567,6 +32569,13 @@
         "sorted_local_offset_value_sha256": "6824cd739c3da0b6571fa861ac1cb8736f4f92b63bb614a8b1799e28dc0d781c",
         "first_entry_step": 92116014,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+        "scope": "19 remaining R71-observed unit frames in normal 14-page pedia, all19 standard-cursor hover/return, per-frame native content rectangles and raw alpha; world movement, combat and animation unverified"
       }
     },
     {
@@ -32983,7 +32992,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-073.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -32998,6 +33009,13 @@
         "sorted_local_offset_value_sha256": "c7980d916635aa601778ecd8824adb1e840321629483cc42e02c51deda902a79",
         "first_entry_step": 376520121,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+        "scope": "19 remaining R71-observed unit frames in normal 14-page pedia, all19 standard-cursor hover/return, per-frame native content rectangles and raw alpha; world movement, combat and animation unverified"
       }
     },
     {
@@ -33023,7 +33041,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-074.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -33038,6 +33058,13 @@
         "sorted_local_offset_value_sha256": "f3f329a67adbd08bb87266a6e815313ad731abcc4298ffacc110a78e07422758",
         "first_entry_step": 490474561,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+        "scope": "19 remaining R71-observed unit frames in normal 14-page pedia, all19 standard-cursor hover/return, per-frame native content rectangles and raw alpha; world movement, combat and animation unverified"
       }
     },
     {
@@ -33063,7 +33090,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-075.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -33078,6 +33107,13 @@
         "sorted_local_offset_value_sha256": "53c33443de71260a6cc2cb9c4a66cb7be57a13614de0ff789f7b852a07f28d4d",
         "first_entry_step": 459465416,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+        "scope": "19 remaining R71-observed unit frames in normal 14-page pedia, all19 standard-cursor hover/return, per-frame native content rectangles and raw alpha; world movement, combat and animation unverified"
       }
     },
     {
@@ -33103,7 +33139,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-076.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -33118,6 +33156,13 @@
         "sorted_local_offset_value_sha256": "b195d762fc715836807b710443c6e7c66864388547dcdb4e8dd9c608b335144c",
         "first_entry_step": 196745217,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+        "scope": "19 remaining R71-observed unit frames in normal 14-page pedia, all19 standard-cursor hover/return, per-frame native content rectangles and raw alpha; world movement, combat and animation unverified"
       }
     },
     {
@@ -33143,7 +33188,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-077.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -33158,6 +33205,13 @@
         "sorted_local_offset_value_sha256": "c364a59d89636d3f3d3f4b63bb222f682aa510dc422fbd4efc49db6ac29867d9",
         "first_entry_step": 301567363,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+        "scope": "19 remaining R71-observed unit frames in normal 14-page pedia, all19 standard-cursor hover/return, per-frame native content rectangles and raw alpha; world movement, combat and animation unverified"
       }
     },
     {
@@ -34318,7 +34372,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-101.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -34333,6 +34389,13 @@
         "sorted_local_offset_value_sha256": "e9606fd87bc489538e26ef7ed6b05d1fc0bf8bcfa2ffaa3cf960f7ea9115cd11",
         "first_entry_step": 376525643,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+        "scope": "19 remaining R71-observed unit frames in normal 14-page pedia, all19 standard-cursor hover/return, per-frame native content rectangles and raw alpha; world movement, combat and animation unverified"
       }
     },
     {
@@ -34358,7 +34421,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-102.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -34373,6 +34438,13 @@
         "sorted_local_offset_value_sha256": "d4007ff1fbf8a06ca121dc978ad0a0e318a2ff1ae9224f67b7ce091c3eaa57e2",
         "first_entry_step": 490480724,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+        "scope": "19 remaining R71-observed unit frames in normal 14-page pedia, all19 standard-cursor hover/return, per-frame native content rectangles and raw alpha; world movement, combat and animation unverified"
       }
     },
     {
@@ -34398,7 +34470,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-103.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -34413,6 +34487,13 @@
         "sorted_local_offset_value_sha256": "cc23a9161cc922b84d74b577472322f05ea0c878614785c9de2286fb6196d326",
         "first_entry_step": 459473734,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+        "scope": "19 remaining R71-observed unit frames in normal 14-page pedia, all19 standard-cursor hover/return, per-frame native content rectangles and raw alpha; world movement, combat and animation unverified"
       }
     },
     {
@@ -34438,7 +34519,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-104.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -34453,6 +34536,13 @@
         "sorted_local_offset_value_sha256": "91a113ca50a935b481ad2b6902bbe6c75c515d11800515bf313971aa863fb7c3",
         "first_entry_step": 196754123,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+        "scope": "19 remaining R71-observed unit frames in normal 14-page pedia, all19 standard-cursor hover/return, per-frame native content rectangles and raw alpha; world movement, combat and animation unverified"
       }
     },
     {
@@ -34478,7 +34568,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-105.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -34493,6 +34585,13 @@
         "sorted_local_offset_value_sha256": "41a4e848421a452fb8fa86187bb0f405eb05da949404f378d202173dfa2b91b4",
         "first_entry_step": 301572881,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+        "scope": "19 remaining R71-observed unit frames in normal 14-page pedia, all19 standard-cursor hover/return, per-frame native content rectangles and raw alpha; world movement, combat and animation unverified"
       }
     },
     {
@@ -34641,7 +34740,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-109.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -34656,6 +34757,13 @@
         "sorted_local_offset_value_sha256": "9463327c41beb9ecb8478e20bd9d7f1f12c6435d65deede9b4b00b15385954cc",
         "first_entry_step": 104096004,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+        "scope": "19 remaining R71-observed unit frames in normal 14-page pedia, all19 standard-cursor hover/return, per-frame native content rectangles and raw alpha; world movement, combat and animation unverified"
       }
     },
     {
@@ -34681,7 +34789,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-110.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -34696,6 +34806,13 @@
         "sorted_local_offset_value_sha256": "f9b426a8c5df52a66ecd883f85b6c8b9947139ea89ad3d2a16c8dc1a2fd79b8f",
         "first_entry_step": 81086975,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+        "scope": "19 remaining R71-observed unit frames in normal 14-page pedia, all19 standard-cursor hover/return, per-frame native content rectangles and raw alpha; world movement, combat and animation unverified"
       }
     },
     {
@@ -34721,7 +34838,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-111.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -34736,6 +34855,13 @@
         "sorted_local_offset_value_sha256": "e9e2f13047dbeb4646c1db3ad69aeb62bec60a9e8ab5dbcfcc502cc42a406a95",
         "first_entry_step": 325538956,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+        "scope": "19 remaining R71-observed unit frames in normal 14-page pedia, all19 standard-cursor hover/return, per-frame native content rectangles and raw alpha; world movement, combat and animation unverified"
       }
     },
     {
@@ -34761,7 +34887,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-112.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -34776,6 +34904,13 @@
         "sorted_local_offset_value_sha256": "b097c2f9958f565ce07359d8b3b298cd70907950f4cf9f53a0ce48233094834f",
         "first_entry_step": 350270959,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+        "scope": "19 remaining R71-observed unit frames in normal 14-page pedia, all19 standard-cursor hover/return, per-frame native content rectangles and raw alpha; world movement, combat and animation unverified"
       }
     },
     {
@@ -35329,7 +35464,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-125.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -35344,6 +35481,13 @@
         "sorted_local_offset_value_sha256": "997e5d59ec76bafdc75af5144962ced0ede9b9803c6a5aed015c569bfe0ff4f6",
         "first_entry_step": 430548496,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+        "scope": "19 remaining R71-observed unit frames in normal 14-page pedia, all19 standard-cursor hover/return, per-frame native content rectangles and raw alpha; world movement, combat and animation unverified"
       }
     },
     {
@@ -35369,7 +35513,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-126.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -35384,6 +35530,13 @@
         "sorted_local_offset_value_sha256": "20c99158b4f9c47a8ba1ab3657618851146037fd3fe6cad3739efc511583bbce",
         "first_entry_step": 130921490,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+        "scope": "19 remaining R71-observed unit frames in normal 14-page pedia, all19 standard-cursor hover/return, per-frame native content rectangles and raw alpha; world movement, combat and animation unverified"
       }
     },
     {
@@ -35458,7 +35611,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-128.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -35473,6 +35628,13 @@
         "sorted_local_offset_value_sha256": "6ca2778652456d84f1901c27c17bb8eab1dae124fc94a38480f1c798e4831b0c",
         "first_entry_step": 162121094,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+        "scope": "19 remaining R71-observed unit frames in normal 14-page pedia, all19 standard-cursor hover/return, per-frame native content rectangles and raw alpha; world movement, combat and animation unverified"
       }
     },
     {
@@ -35498,7 +35660,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-129.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -35513,6 +35677,13 @@
         "sorted_local_offset_value_sha256": "3e73552ec59bb69ecb7fa63f1e439ece8dd5030441439797feee4de800d48c90",
         "first_entry_step": 178863222,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+        "scope": "19 remaining R71-observed unit frames in normal 14-page pedia, all19 standard-cursor hover/return, per-frame native content rectangles and raw alpha; world movement, combat and animation unverified"
       }
     },
     {
@@ -58510,6 +58681,196 @@
       "source_encoded_sha256": "1ece271b711847287707fa13cac479b2e0c372157c0dcd71b0e8cd018cd9f5ef",
       "spec": "docs/spec/070-hd-unit-small-images.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-065.png",
+      "asset_sha256": "c1186be2b4127c33eb7464480c506691a0164a7d331cd18fbc051bc4ca76ce73",
+      "source_research_id": 892,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 65,
+      "source_encoded_sha256": "7c93323730b983889829fafff2584d0cf3c0dbab77dd08449363bdc66ae628f7",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-073.png",
+      "asset_sha256": "76bfd672ac14bbb9a68b81ab893efdf7a675d5c40733efa16d40331635ffe372",
+      "source_research_id": 900,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 73,
+      "source_encoded_sha256": "6dd44a10458f2576b555e7f2813ab476ed0a958e36c50150bb2e296aa2410e4d",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-074.png",
+      "asset_sha256": "74cca71efadd04f8697ba0a6cedec6506cc52eed8a3925c69fce61c2ff1b1e79",
+      "source_research_id": 901,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 74,
+      "source_encoded_sha256": "4dcd08e6ac3317bb9052ae3f278fb6c160a99df8a8802bfdcc3b9e9d4b51be99",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-075.png",
+      "asset_sha256": "f8861eab6bb9a69be1ea6314b2963978fd8be15ec27a0fc1ddb0f4ee71af2c25",
+      "source_research_id": 902,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 75,
+      "source_encoded_sha256": "ddfe8dd2a7fe21e6dad85369ae57004af1c7a3bd70007f23d987d00000812f3b",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-076.png",
+      "asset_sha256": "94a1b242e72c4ef31f1f344e9e9eaca13b430edbd57e6fbdad203370eb691f83",
+      "source_research_id": 903,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 76,
+      "source_encoded_sha256": "0dc0138b6a47a09cd04eda92f057476770b076897045c53d26582fd53ca1b1d4",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-077.png",
+      "asset_sha256": "6b64925d8335b5f3250e49696da2a9b50d18b0c3d63d31d1b4ef14c1797e31b7",
+      "source_research_id": 904,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 77,
+      "source_encoded_sha256": "4d7d64d2c06ad507408c57c06ef194f4626ed51a12953ee066d95abea5a821a7",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-101.png",
+      "asset_sha256": "d82df85384a2a6c75d7cb98184e1d593a78346ed55134a32d6a4fbea510bc9f9",
+      "source_research_id": 928,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 101,
+      "source_encoded_sha256": "a4f837747ab45eada75863a64e7176c0a1971aa7deb2d6496b99d25d19c7ad97",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-102.png",
+      "asset_sha256": "dc55590e45ecc9c95f56ba37125612b9a5f814bc7ff17527251a0f6b2129aaaf",
+      "source_research_id": 929,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 102,
+      "source_encoded_sha256": "175ca554de4c2d3d305ace60fa648ee304d720299ae96df9adc9ed39548a9f24",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-103.png",
+      "asset_sha256": "dd0d8180853e005b01d9580fa538e12613fb0cb2f8dd189f85d6345817aa8da1",
+      "source_research_id": 930,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 103,
+      "source_encoded_sha256": "a07203b1e19c6ad9b2afe8ba3f454e834e453bfb8ecb3c8b54a14b8e3be24165",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-104.png",
+      "asset_sha256": "44fd32a1b1701a173f23f437bbbbceba4e8087c7f45c644192314902f78f18ba",
+      "source_research_id": 931,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 104,
+      "source_encoded_sha256": "f665fba63e6380879b76d8a3e71f19fee2b32c9ec1e9f5072e3ded96f09f5907",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-105.png",
+      "asset_sha256": "c586c4f2d047be8fda3b847dca871665e1252bfed3b6030fcf0c655276b2c973",
+      "source_research_id": 932,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 105,
+      "source_encoded_sha256": "10a9b202d797839cc109e170b1718274428a3d939063773f2236c43058e70c56",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-109.png",
+      "asset_sha256": "81eee3e5b950fb663133bbdb3950800289972d618257c685181f965c50d46a9f",
+      "source_research_id": 936,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 109,
+      "source_encoded_sha256": "a0cef918ed3de3b59f74169bb14325421d6fd72873f67219e05475030daa08b1",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-110.png",
+      "asset_sha256": "05618744e0295a442dad9a816beb5565fd0173dd2f666a82d1d720b9f84d886e",
+      "source_research_id": 937,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 110,
+      "source_encoded_sha256": "3d8452d6e82dc431550cbfd124c1eb69edd9fe94176dc25d0cdb031304da4244",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-111.png",
+      "asset_sha256": "b2dd50563f2b1caf610b2f26061c398c54412354e779654e3a50080249046076",
+      "source_research_id": 938,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 111,
+      "source_encoded_sha256": "0589a87910544b9df69d30b552ad2fad8e2ddaaa2272a0941ca9880dcb58b645",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-112.png",
+      "asset_sha256": "2610ec1263fd3e534cfb522c25c70f7e6d56cfb485d030bb181dc6677e7aa254",
+      "source_research_id": 939,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 112,
+      "source_encoded_sha256": "9441bde61ee89f3d0b1a80968ec49d3c6256dc58dcfa967b6f0087585ec1ad16",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-125.png",
+      "asset_sha256": "7237926576e6612c297e7359afcc0e3cb47705be6f2b3eda3112d0f0bbfc2dd9",
+      "source_research_id": 952,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 125,
+      "source_encoded_sha256": "c9957f171c8c5ace8043272f62fe2f1b86d6da4ecf5dc9cf6520c0737b34261b",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-126.png",
+      "asset_sha256": "b49397ae191453cefb55113049b342779cfb079c4e7028fb37b5cc82174b405c",
+      "source_research_id": 953,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 126,
+      "source_encoded_sha256": "d71ac1014ffe4052f61e386210bc5a1d86c27200a9151511f5ab79b1e23f1709",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-128.png",
+      "asset_sha256": "7056fdc8859c79758cbd41041f4b9f6075e3495a78d09d3db97af8651376680f",
+      "source_research_id": 955,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 128,
+      "source_encoded_sha256": "b21111002b447e2ca662416f4c3227c18a3f64ac4adf4950d574d48959dfb9d0",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-129.png",
+      "asset_sha256": "fb55e840e9a47eebda26348b2ce1c08f935227c32a32a17b86d49def1e8968af",
+      "source_research_id": 956,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 129,
+      "source_encoded_sha256": "3e4a724489ce7b301b4a95a371dda12688a3ee3739f796511cf8808fc934fb10",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
     }
   ],
   "limitations": [
@@ -58745,12 +59106,44 @@
     "formal_assets": 103,
     "unit_gui_samples": 54,
     "resource_revalidation": {
-      "scope": "all 103 current raw PNGs; complete positively loaded private fixture and exact restore per case",
+      "scope": "R74 all 103 raw PNGs; complete positively loaded private fixture and exact restore per case",
       "case_count": 323,
       "six_test_families_completed_cases": 329,
       "review_sha256": "6775db636b5a092fa0e60fa12dad7799089254ce2d4fd155192e6f67b499f7d2",
       "legacy_fixture_erratum": "R72/R73 Go per-file fault credit withdrawn where the copied fixture omitted unrelated graphics or CUSTOMIZ.PIK. Current complete-fixture cases supersede those negatives; native, actual GUI and package evidence remain separate."
     },
     "claim": "22 colonist frames in recorded normal pedia only; other sources, program-drawn graphics, animation and full HD remain incomplete"
+  },
+  "unit19_pedia_conformance": {
+    "ready_review_sha256": "3a0c4d06a85d481a2fb380c066f8e1324133be20971466b4d950ef0c7eed231a",
+    "review_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+    "sources": [
+      65,
+      73,
+      74,
+      75,
+      76,
+      77,
+      101,
+      102,
+      103,
+      104,
+      105,
+      109,
+      110,
+      111,
+      112,
+      125,
+      126,
+      128,
+      129
+    ],
+    "formal_assets": 122,
+    "unit_gui_samples": 178,
+    "go_named_cases": 457,
+    "small_resource_rejection_types": 321,
+    "resource_cases": 131,
+    "resource_scope": "all new19 PNG triplets, all source/manifest faults and 20 inherited art representatives; other 249 catalog cases not rerun",
+    "claim": "19 unit frames in recorded normal pedia only; all 80 R71-observed small-image sources now connected in their verified scenes. Other sources, program-drawn graphics, world movement, combat, animation and full HD remain incomplete"
   }
 }

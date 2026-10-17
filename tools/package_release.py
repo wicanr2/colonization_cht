@@ -190,11 +190,11 @@ def dependency_notices(binary, repo, target=("linux", "amd64")):
 def hd_asset_files(repo):
     """規格061至070 READY：只收已驗生成素材，逐項核對，拒絕額外檔案。"""
     root = repo / "graphics"
-    if root.is_symlink() or {p.name for p in root.iterdir()} != {"manifest.json", "building-032.png", "sea-148.png", "person-100.png", "building-024.png", "building-016.png", "building-021.png", "building-027.png", "building-035.png", "building-039.png", "building-042.png", "building-043.png", "building-044.png", "building-045.png", "building-009.png", "icons-022.png", "icons-024.png", "icons-025.png", "icons-026.png", "icons-027.png", "icons-028.png", "icons-029.png", "icons-030.png", "icons-031.png", "icons-032.png", "icons-033.png", "icons-034.png", "icons-035.png", "icons-036.png", "icons-037.png", "icons-038.png", "icons-005.png", "icons-023.png", "icons-042.png", "icons-053.png", "icons-056.png", "icons-059.png", "icons-062.png", "icons-067.png", "icons-068.png", "icons-069.png", "icons-094.png", "icons-122.png", "icons-123.png", "icons-124.png", "terrain-079.png", "cursor-000.png", "terrain-006.png", "terrain-009.png", "terrain-017.png", "terrain-066.png", "terrain-071.png", "terrain-074.png", "terrain-077.png", "terrain-078.png", "terrain-080.png", "terrain-096.png", "terrain-147.png", "terrain-150.png", "terrain-112.png", "terrain-113.png", "terrain-116.png", "terrain-119.png", "terrain-126.png", "terrain-127.png", "terrain-136.png", "terrain-139.png", "opentile-000.png", "openmenu-000.png", "woodtile-000.png", "parch-000.png", "difficul-000.png", "nations-000.png", "customiz-000.png", "icons-006.png", "icons-007.png", "icons-014.png", "icons-015.png", "icons-127.png", "icons-008.png", "icons-009.png", "icons-016.png", "icons-058.png", "icons-060.png", "icons-066.png", "icons-081.png", "icons-082.png", "icons-083.png", "icons-084.png", "icons-085.png", "icons-086.png", "icons-087.png", "icons-088.png", "icons-089.png", "icons-090.png", "icons-091.png", "icons-092.png", "icons-093.png", "icons-095.png", "icons-096.png", "icons-097.png", "icons-098.png", "icons-106.png", "icons-107.png"}:
+    if root.is_symlink() or {p.name for p in root.iterdir()} != {"manifest.json", "building-032.png", "sea-148.png", "person-100.png", "building-024.png", "building-016.png", "building-021.png", "building-027.png", "building-035.png", "building-039.png", "building-042.png", "building-043.png", "building-044.png", "building-045.png", "building-009.png", "icons-022.png", "icons-024.png", "icons-025.png", "icons-026.png", "icons-027.png", "icons-028.png", "icons-029.png", "icons-030.png", "icons-031.png", "icons-032.png", "icons-033.png", "icons-034.png", "icons-035.png", "icons-036.png", "icons-037.png", "icons-038.png", "icons-005.png", "icons-023.png", "icons-042.png", "icons-053.png", "icons-056.png", "icons-059.png", "icons-062.png", "icons-067.png", "icons-068.png", "icons-069.png", "icons-094.png", "icons-122.png", "icons-123.png", "icons-124.png", "terrain-079.png", "cursor-000.png", "terrain-006.png", "terrain-009.png", "terrain-017.png", "terrain-066.png", "terrain-071.png", "terrain-074.png", "terrain-077.png", "terrain-078.png", "terrain-080.png", "terrain-096.png", "terrain-147.png", "terrain-150.png", "terrain-112.png", "terrain-113.png", "terrain-116.png", "terrain-119.png", "terrain-126.png", "terrain-127.png", "terrain-136.png", "terrain-139.png", "opentile-000.png", "openmenu-000.png", "woodtile-000.png", "parch-000.png", "difficul-000.png", "nations-000.png", "customiz-000.png", "icons-006.png", "icons-007.png", "icons-014.png", "icons-015.png", "icons-127.png", "icons-008.png", "icons-009.png", "icons-016.png", "icons-058.png", "icons-060.png", "icons-066.png", "icons-081.png", "icons-082.png", "icons-083.png", "icons-084.png", "icons-085.png", "icons-086.png", "icons-087.png", "icons-088.png", "icons-089.png", "icons-090.png", "icons-091.png", "icons-092.png", "icons-093.png", "icons-095.png", "icons-096.png", "icons-097.png", "icons-098.png", "icons-106.png", "icons-107.png", "icons-065.png", "icons-073.png", "icons-074.png", "icons-075.png", "icons-076.png", "icons-077.png", "icons-101.png", "icons-102.png", "icons-103.png", "icons-104.png", "icons-105.png", "icons-109.png", "icons-110.png", "icons-111.png", "icons-112.png", "icons-125.png", "icons-126.png", "icons-128.png", "icons-129.png"}:
         raise ValueError("HD素材目錄不同")
     files = {}
     for name, digest, limit in [
-            ("manifest.json", "963b67ab9fdbdf02577a063dca488a525f7491cbf9d769c3f9c664117adcb758", 512 << 10),
+            ("manifest.json", "c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7", 512 << 10),
             ("opentile-000.png", "cb2a8af8077d1e6fd0082d753e7cc0251192df0705ebe34496f1954f5cdc4547", 8 << 20),
             ("openmenu-000.png", "2d688773ecc1bf1a1555d53d632f33fa571cf25a0ea930d38b5219b61ddc819f", 8 << 20),
             ("woodtile-000.png", "8580efcf85a45fa879938b5b73e8d54c58853dd9297e8ecd1f10801e637bb5d9", 8 << 20),
@@ -298,6 +298,25 @@ def hd_asset_files(repo):
             ("icons-098.png", "5561bf7138e91d27e89698b83431c7dd46bc5708f28b7fc6fe76bf66f26b562d", 8 << 20),
             ("icons-106.png", "dbae8283bf2236b5b69e457f78d278c2df78f640f6a79010f6b0f33314ae8417", 8 << 20),
             ("icons-107.png", "fd6afc141275a481ac18631e86dcf0394c56fbdf8b578e83ba3afc360338dc9b", 8 << 20),
+            ("icons-065.png", "c1186be2b4127c33eb7464480c506691a0164a7d331cd18fbc051bc4ca76ce73", 8 << 20),
+            ("icons-073.png", "76bfd672ac14bbb9a68b81ab893efdf7a675d5c40733efa16d40331635ffe372", 8 << 20),
+            ("icons-074.png", "74cca71efadd04f8697ba0a6cedec6506cc52eed8a3925c69fce61c2ff1b1e79", 8 << 20),
+            ("icons-075.png", "f8861eab6bb9a69be1ea6314b2963978fd8be15ec27a0fc1ddb0f4ee71af2c25", 8 << 20),
+            ("icons-076.png", "94a1b242e72c4ef31f1f344e9e9eaca13b430edbd57e6fbdad203370eb691f83", 8 << 20),
+            ("icons-077.png", "6b64925d8335b5f3250e49696da2a9b50d18b0c3d63d31d1b4ef14c1797e31b7", 8 << 20),
+            ("icons-101.png", "d82df85384a2a6c75d7cb98184e1d593a78346ed55134a32d6a4fbea510bc9f9", 8 << 20),
+            ("icons-102.png", "dc55590e45ecc9c95f56ba37125612b9a5f814bc7ff17527251a0f6b2129aaaf", 8 << 20),
+            ("icons-103.png", "dd0d8180853e005b01d9580fa538e12613fb0cb2f8dd189f85d6345817aa8da1", 8 << 20),
+            ("icons-104.png", "44fd32a1b1701a173f23f437bbbbceba4e8087c7f45c644192314902f78f18ba", 8 << 20),
+            ("icons-105.png", "c586c4f2d047be8fda3b847dca871665e1252bfed3b6030fcf0c655276b2c973", 8 << 20),
+            ("icons-109.png", "81eee3e5b950fb663133bbdb3950800289972d618257c685181f965c50d46a9f", 8 << 20),
+            ("icons-110.png", "05618744e0295a442dad9a816beb5565fd0173dd2f666a82d1d720b9f84d886e", 8 << 20),
+            ("icons-111.png", "b2dd50563f2b1caf610b2f26061c398c54412354e779654e3a50080249046076", 8 << 20),
+            ("icons-112.png", "2610ec1263fd3e534cfb522c25c70f7e6d56cfb485d030bb181dc6677e7aa254", 8 << 20),
+            ("icons-125.png", "7237926576e6612c297e7359afcc0e3cb47705be6f2b3eda3112d0f0bbfc2dd9", 8 << 20),
+            ("icons-126.png", "b49397ae191453cefb55113049b342779cfb079c4e7028fb37b5cc82174b405c", 8 << 20),
+            ("icons-128.png", "7056fdc8859c79758cbd41041f4b9f6075e3495a78d09d3db97af8651376680f", 8 << 20),
+            ("icons-129.png", "fb55e840e9a47eebda26348b2ce1c08f935227c32a32a17b86d49def1e8968af", 8 << 20),
             ]:
         path = root / name
         if path.is_symlink() or not path.is_file() or path.stat().st_size > limit:
