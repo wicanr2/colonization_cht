@@ -1,12 +1,12 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-17",
-  "code_commit": "ee66e1f24c3d2aba09874806eb1b2c16934ff0da",
-  "binary_sha256": "52fd12fb78b298c5827ccff226c2a3f21c32517e77a1a4641d47521ae5bd07e4",
-  "formal_binary_sha256": "52fd12fb78b298c5827ccff226c2a3f21c32517e77a1a4641d47521ae5bd07e4",
-  "source_build_sha256": "c0cad36a22af78f6ba2022fa204260d33e4e237cdd826efe27bbe6e21f5bed3a",
+  "code_commit": "6bccc358be15626a98b147742c95ed284ab4ff49",
+  "binary_sha256": "fa4307f1388e3bfd953359b501a0513ea0a62c2ba47214156895fb22a7f4f11f",
+  "formal_binary_sha256": "fa4307f1388e3bfd953359b501a0513ea0a62c2ba47214156895fb22a7f4f11f",
+  "source_build_sha256": "acadd78b6a3f35445b9b4be3ddcf9e10665a1c3bfbc09fea87b1999696e6df74",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 78,
+  "formal_hd_assets": 81,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -149,6 +149,36 @@
       "graphics_manifest_sha256": "0c78251ffc365a49e229ede4e88715b095359ff85bd16c0508a5a738b2eee33c",
       "conformance_sha256": "fb5400b2190c423b5875e64eec63fcf3b9b4544baceb87b7e80e3dc91117b978",
       "scope": "one normal Galleon pedia presentation within five-ship conformance; native flag and alpha gaps retained; world movement and animation unverified"
+    },
+    {
+      "file": "hd-vehicle-pedia-zh.png",
+      "sha256": "bdbba8183989b51db18e5bf9ed774e44901e4a4f0837a91cde0932bccb87b1c3",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "unit-pedia-wagon-train",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 198400000,
+      "binary_sha256": "fa4307f1388e3bfd953359b501a0513ea0a62c2ba47214156895fb22a7f4f11f",
+      "formal_binary_sha256": "fa4307f1388e3bfd953359b501a0513ea0a62c2ba47214156895fb22a7f4f11f",
+      "code_commit": "6bccc358be15626a98b147742c95ed284ab4ff49",
+      "formal_hd_assets": 81,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-sprite-batch-r71/r73-vehicles-gui-r3/gui.display-206.png",
+      "source_gui_check_sha256": "44ce29585d1046b13346b6b2972ce8800853c111298fb568c06bedc486331e77",
+      "independent_pixels_sha256": "0a8867623b5ab0f4954eaac0b554d471ec98d1e6d58bcbfcdd101b7b550cce03",
+      "same_state_replay_sha256": "f03929bfc0b6ffad6ff030eb18579678deae1687c9688afed0882a5704b77d82",
+      "source_kind": "actual uninstrumented formal game presentation from standard display diagnostics; byte-for-byte matched to the real X11 game area",
+      "capture_pixels_unchanged": true,
+      "original_ordinal": 8,
+      "owned_source_cells": 138,
+      "painted_source_cells": 138,
+      "sampled_alpha_pixels": 2044,
+      "native_postwrite_glyph_cells_preserved": 3,
+      "graphics_manifest_sha256": "336653b647cd381931be990409b71bd0abcfdbb6ebf3d3db0054c6d7ee6b70c8",
+      "conformance_sha256": "ba17a1b0aadbdcb5cb5d535685df0498630e6fdbd969cfbed183afd736844fee",
+      "scope": "one normal Wagon Train pedia within three-vehicle conformance; native glyphs/flags retained; damaged artillery, world movement and animation unverified"
     }
   ],
   "limitations": [
@@ -159,7 +189,8 @@
     "Game-area captures use a read-only helper; the display code and formal loader match the verified production sources.",
     "R66 adds the settled main-menu background, title art and wood texture; remaining backgrounds and animation are unfinished.",
     "R68 refreshes the verified Traditional Chinese colony image with paper and wood textures. The R67 world, R66 menu and R64 settings images retain their exact prior PNGs and per-image provenance.",
-    "R72 adds one actual Traditional Chinese Galleon pedia capture from the five-ship scoped conformance; all five prior PNGs and their per-image provenance remain unchanged."
+    "R72 adds one actual Traditional Chinese Galleon pedia capture from the five-ship scoped conformance; all five prior PNGs and their per-image provenance remain unchanged.",
+    "R73 adds one actual Traditional Chinese Wagon Train pedia capture from scoped three-vehicle conformance; all six prior PNGs and per-image provenance remain unchanged."
   ],
   "previous_build": {
     "kind": "README actual development screenshots",
@@ -172,9 +203,9 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "Ship pedia uses R72/ee66e1f with 78 assets. Custom-world retains R70/d6061ce (73), colony R68/691c36c (70), world R67/d48eb9d (69), menu R66/fe97cf6 (68), settings R64/468e835 (66); each prior image and its own provenance are unchanged.",
-  "graphics_manifest_sha256": "0c78251ffc365a49e229ede4e88715b095359ff85bd16c0508a5a738b2eee33c",
-  "conformance_sha256": "fb5400b2190c423b5875e64eec63fcf3b9b4544baceb87b7e80e3dc91117b978",
+  "provenance_scope": "Vehicle pedia uses R73/6bccc35 with 81 assets. Ship pedia retains R72/ee66e1f (78), custom-world R70/d6061ce (73), colony R68/691c36c (70), world R67/d48eb9d (69), menu R66/fe97cf6 (68), settings R64/468e835 (66); prior PNGs and per-image provenance are unchanged.",
+  "graphics_manifest_sha256": "336653b647cd381931be990409b71bd0abcfdbb6ebf3d3db0054c6d7ee6b70c8",
+  "conformance_sha256": "ba17a1b0aadbdcb5cb5d535685df0498630e6fdbd969cfbed183afd736844fee",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -216,14 +247,14 @@
     "formal_hd_assets": 66
   },
   "previous_development_capture": {
-    "code_commit": "d6061ce3853a2395c195e7d49a1e3b514eee19a7",
-    "binary_sha256": "3721e55e6d80baf4ee372f3a3cfef25e899e2f1fe1740c5693a90428607dadc8",
-    "formal_binary_sha256": "3721e55e6d80baf4ee372f3a3cfef25e899e2f1fe1740c5693a90428607dadc8",
-    "source_build_sha256": "3d314377a117d0696d61c8f9a238f954478ded40f3ea594a9a203e09bde2f0fc",
-    "formal_hd_assets": 73,
-    "graphics_manifest_sha256": "c5f997aea5ebaca854497d10b17e1f9a1271d01abf8261c9b3efd2762423c2ae",
-    "conformance_sha256": "8b384068a1c490d0e6f5f95162b481cdc17ce8c247ab6101bc97a5e75007c357"
+    "code_commit": "ee66e1f24c3d2aba09874806eb1b2c16934ff0da",
+    "binary_sha256": "52fd12fb78b298c5827ccff226c2a3f21c32517e77a1a4641d47521ae5bd07e4",
+    "formal_binary_sha256": "52fd12fb78b298c5827ccff226c2a3f21c32517e77a1a4641d47521ae5bd07e4",
+    "source_build_sha256": "c0cad36a22af78f6ba2022fa204260d33e4e237cdd826efe27bbe6e21f5bed3a",
+    "formal_hd_assets": 78,
+    "graphics_manifest_sha256": "0c78251ffc365a49e229ede4e88715b095359ff85bd16c0508a5a738b2eee33c",
+    "conformance_sha256": "fb5400b2190c423b5875e64eec63fcf3b9b4544baceb87b7e80e3dc91117b978"
   },
-  "verification_build_sha256": "c0cad36a22af78f6ba2022fa204260d33e4e237cdd826efe27bbe6e21f5bed3a",
+  "verification_build_sha256": "54592b26b04e7efa92e97fb1b9204f65b9bed64e3a940868f3e4f2df871c38b3",
   "production_go_sources_equal_to_verified_build": true
 }
