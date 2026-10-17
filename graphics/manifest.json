@@ -3685,6 +3685,261 @@
         1586,
         354
       ]
+    },
+    "icons-006.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "c862cdfa55ab3de416018c3450dc90c392ed7fd54c7fb5f2a9c31538f23442bb",
+      "bytes": 633971,
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        13,
+        16
+      ],
+      "target_size": [
+        52,
+        64
+      ],
+      "native_opaque_pixels": 121,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        198,
+        144,
+        947,
+        1191
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        13,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 4321,
+      "alpha_mass_total": 110343553,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Generate exactly ONE isolated fine pixel-art sailing-ship game sprite. Image 1 is the exact original SUBJECT and GEOMETRY reference for ICONS.SS frame 006 (Merchantman). Ignore and remove its beige reference background. Image 2 is the approved HD sprite STYLE reference only: use the same restrained earthy palette, crisp small square pixel clusters, ivory cloth, shaded wood, visible rigging and tactile fine pixel-art treatment; do not copy image 2's different vessel silhouette. The exact pale tan merchant vessel, narrow tall profile, brown/tan hull and ivory sails; preserve its very specific tall left/central masts, staggered sail silhouettes and bulky stern on the right. Keep the original vessel orientation, proportions, relative placement and count of masts, sails and major hull masses from image 1. Add only the fine material detail needed to make those same shapes readable at approximately 52 to 56 by 64 pixels. One complete ship centered, fully visible, about 70 percent of canvas height, with generous transparent margins on every side. A roughly 4:5 portrait canvas is suitable. All background, margins and gaps between sails and rigging must be TRUE alpha transparency. No sea, ground, wake, shadows beneath the ship, scenery, pedestals, extra ships, labels, letters, numbers, text, watermark, checkerboard pattern, beige matte, glow, smooth photographic surfaces, glossy 3D or blur. Preserve the distinct outline of image 1 and the approved refined pixel-art visual language. Return a new original standalone PNG, not a sprite sheet or atlas.",
+      "reference_sha256": {
+        "native_geometry": "d9832c0666c260cae2831bb7f39b721e08b9b6e7978390c585ee3bd500af4cff",
+        "approved_style": "94ebc3642cd0b069229f2e23fa633085ed53d89cf5c9965eafde74d56af99619"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 6,
+        "encoded_sha256": "d41bb3d2ec6f99801c5bea52e89bd7f685d291fb74771e0b8a0ff6f3fa7a475a",
+        "encoded_length": 193
+      }
+    },
+    "icons-007.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "191f23d8ec4b49fbeff41864c0fd812f08b88fd0abbb83255955e3625da647a8",
+      "bytes": 726237,
+      "size": [
+        1121,
+        1403
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        14,
+        16
+      ],
+      "target_size": [
+        56,
+        64
+      ],
+      "native_opaque_pixels": 147,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        167,
+        176,
+        980,
+        1226
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        14,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 51962,
+      "alpha_mass_total": 132174076,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Generate exactly ONE isolated fine pixel-art sailing-ship game sprite. Image 1 is the exact original SUBJECT and GEOMETRY reference for ICONS.SS frame 007 (Galleon). Ignore and remove its beige reference background. Image 2 is the approved HD sprite STYLE reference only: use the same restrained earthy palette, crisp small square pixel clusters, ivory cloth, shaded wood, visible rigging and tactile fine pixel-art treatment; do not copy image 2's different vessel silhouette. The exact broad ochre/golden galleon with its tall dark mast, white square sails, tiny red mast pennant, dark bow on the left and high stepped golden stern on the right. Keep the original vessel orientation, proportions, relative placement and count of masts, sails and major hull masses from image 1. Add only the fine material detail needed to make those same shapes readable at approximately 52 to 56 by 64 pixels. One complete ship centered, fully visible, about 70 percent of canvas height, with generous transparent margins on every side. A roughly 4:5 portrait canvas is suitable. All background, margins and gaps between sails and rigging must be TRUE alpha transparency. No sea, ground, wake, shadows beneath the ship, scenery, pedestals, extra ships, labels, letters, numbers, text, watermark, checkerboard pattern, beige matte, glow, smooth photographic surfaces, glossy 3D or blur. Preserve the distinct outline of image 1 and the approved refined pixel-art visual language. Return a new original standalone PNG, not a sprite sheet or atlas.",
+      "reference_sha256": {
+        "native_geometry": "2cf09b1a8e88bcfc7ae4f19ea6996681c3c842ff15eb8ad9df517d82523671b7",
+        "approved_style": "94ebc3642cd0b069229f2e23fa633085ed53d89cf5c9965eafde74d56af99619"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 7,
+        "encoded_sha256": "b79c1f2ec195747440948fd98198ecae7c3f2d90a59aacdb49a7ce5487afbfce",
+        "encoded_length": 202
+      }
+    },
+    "icons-014.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "22e18c47baaf6f5188d9dcfadd4e69ab41812acaf39274b3f377ae7bba059c39",
+      "bytes": 720298,
+      "size": [
+        1120,
+        1404
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        13,
+        16
+      ],
+      "target_size": [
+        52,
+        64
+      ],
+      "native_opaque_pixels": 128,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        205,
+        171,
+        953,
+        1261
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        13,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 18944,
+      "alpha_mass_total": 120561595,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Generate exactly ONE isolated fine pixel-art sailing-ship game sprite. Image 1 is the exact original SUBJECT and GEOMETRY reference for ICONS.SS frame 014 (Privateer). Ignore and remove its beige reference background. Image 2 is the approved HD sprite STYLE reference only: use the same restrained earthy palette, crisp small square pixel clusters, ivory cloth, shaded wood, visible rigging and tactile fine pixel-art treatment; do not copy image 2's different vessel silhouette. The exact dark black-hulled privateer with ivory/gray sails, very dark diagonal rigging, tall irregular staggered sail silhouette and pale raised stern on the right. Keep the original vessel orientation, proportions, relative placement and count of masts, sails and major hull masses from image 1. Add only the fine material detail needed to make those same shapes readable at approximately 52 to 56 by 64 pixels. One complete ship centered, fully visible, about 70 percent of canvas height, with generous transparent margins on every side. A roughly 4:5 portrait canvas is suitable. All background, margins and gaps between sails and rigging must be TRUE alpha transparency. No sea, ground, wake, shadows beneath the ship, scenery, pedestals, extra ships, labels, letters, numbers, text, watermark, checkerboard pattern, beige matte, glow, smooth photographic surfaces, glossy 3D or blur. Preserve the distinct outline of image 1 and the approved refined pixel-art visual language. Return a new original standalone PNG, not a sprite sheet or atlas.",
+      "reference_sha256": {
+        "native_geometry": "048a363e9a76bb3d8bb848a055c10b050c2cfc04439d632c1b1d6ef994baeb40",
+        "approved_style": "94ebc3642cd0b069229f2e23fa633085ed53d89cf5c9965eafde74d56af99619"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 14,
+        "encoded_sha256": "885ffdbf33dca42e83fd1a93f95ef871fd5efe973f489debd71473200240ddf0",
+        "encoded_length": 191
+      }
+    },
+    "icons-015.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "4b938de1299c6c0f5895993715325ad66b8328b9616f5c98fc0f2bce8f09c3a9",
+      "bytes": 618092,
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        13,
+        16
+      ],
+      "target_size": [
+        52,
+        64
+      ],
+      "native_opaque_pixels": 131,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        204,
+        275,
+        940,
+        1116
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        13,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 10985,
+      "alpha_mass_total": 85925372,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Generate exactly ONE isolated fine pixel-art sailing-ship game sprite. Image 1 is the exact original SUBJECT and GEOMETRY reference for ICONS.SS frame 015 (Frigate). Ignore and remove its beige reference background. Image 2 is the approved HD sprite STYLE reference only: use the same restrained earthy palette, crisp small square pixel clusters, ivory cloth, shaded wood, visible rigging and tactile fine pixel-art treatment; do not copy image 2's different vessel silhouette. The exact narrow long-hulled frigate with a shallow brown/ochre hull, tall slim gray masts, ivory triangular/angled sails and copper-colored rigging details. Keep the original vessel orientation, proportions, relative placement and count of masts, sails and major hull masses from image 1. Add only the fine material detail needed to make those same shapes readable at approximately 52 to 56 by 64 pixels. One complete ship centered, fully visible, about 70 percent of canvas height, with generous transparent margins on every side. A roughly 4:5 portrait canvas is suitable. All background, margins and gaps between sails and rigging must be TRUE alpha transparency. No sea, ground, wake, shadows beneath the ship, scenery, pedestals, extra ships, labels, letters, numbers, text, watermark, checkerboard pattern, beige matte, glow, smooth photographic surfaces, glossy 3D or blur. Preserve the distinct outline of image 1 and the approved refined pixel-art visual language. Return a new original standalone PNG, not a sprite sheet or atlas.",
+      "reference_sha256": {
+        "native_geometry": "e85b40edf91918d88ed51e2f290c71a1e6f14493a4adb7d0da9eff6a9d42e9eb",
+        "approved_style": "94ebc3642cd0b069229f2e23fa633085ed53d89cf5c9965eafde74d56af99619"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 15,
+        "encoded_sha256": "84f986d89acd03ed96fc3d6c2e2a68607015491314e320149e81c0c752203e5e",
+        "encoded_length": 190
+      }
+    },
+    "icons-127.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "c18b01f9ab0af49f84184c9fb11bcd582af71b5b8bccd7f3e07b01b2d7e5b235",
+      "bytes": 895889,
+      "size": [
+        1122,
+        1402
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        14,
+        16
+      ],
+      "target_size": [
+        56,
+        64
+      ],
+      "native_opaque_pixels": 155,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        114,
+        183,
+        1039,
+        1256
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        14,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 6102,
+      "alpha_mass_total": 146406815,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: style-transfer. Generate exactly ONE isolated fine pixel-art sailing-ship game sprite. Image 1 is the exact original SUBJECT and GEOMETRY reference for ICONS.SS frame 127 (Man-o-War). Ignore and remove its beige reference background. Image 2 is the approved HD sprite STYLE reference only: use the same restrained earthy palette, crisp small square pixel clusters, ivory cloth, shaded wood, visible rigging and tactile fine pixel-art treatment; do not copy image 2's different vessel silhouette. The exact large golden/orange warship with its broad stepped golden stern on the right, dark mast and bow on the left, layered white sails and the original tiny golden mast pennant. Keep the original vessel orientation, proportions, relative placement and count of masts, sails and major hull masses from image 1. Add only the fine material detail needed to make those same shapes readable at approximately 52 to 56 by 64 pixels. One complete ship centered, fully visible, about 70 percent of canvas height, with generous transparent margins on every side. A roughly 4:5 portrait canvas is suitable. All background, margins and gaps between sails and rigging must be TRUE alpha transparency. No sea, ground, wake, shadows beneath the ship, scenery, pedestals, extra ships, labels, letters, numbers, text, watermark, checkerboard pattern, beige matte, glow, smooth photographic surfaces, glossy 3D or blur. Preserve the distinct outline of image 1 and the approved refined pixel-art visual language. Return a new original standalone PNG, not a sprite sheet or atlas.",
+      "reference_sha256": {
+        "native_geometry": "13b81bcd45a9443d6f6fdbc42adc4eb6ba7ae74f3e0889a6ec71754099fdd847",
+        "approved_style": "94ebc3642cd0b069229f2e23fa633085ed53d89cf5c9965eafde74d56af99619"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 127,
+        "encoded_sha256": "4798a978c18d26b279eb14d9b88ab1880c0c3a9588ccf050d8da432976f43f68",
+        "encoded_length": 204
+      }
     }
   }
 }

@@ -30,6 +30,8 @@ parser.add_argument('--custom-world-ready-report',type=Path,help='規格069自�
 parser.add_argument('--custom-world-conformed-report',type=Path,help='規格069自訂地圖正式驗收及72種素材繼承審查')
 parser.add_argument('--unit-report',type=Path,help='規格070正常單位圖鑑的獨立逐寫檢查收據，不授予HD信用')
 parser.add_argument('--unit-build',type=Path,help='與unit-report一起使用的131候選來源綁定')
+parser.add_argument('--ship-ready-report',type=Path,help='規格070五艘船的單幀PNG READY審查')
+parser.add_argument('--ship-conformed-report',type=Path,help='規格070正常百科五船正式驗收及73張素材繼承審查')
 a=parser.parse_args();out=a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.parent.stat().st_uid==os.getuid() and not out.exists()
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -64,6 +66,26 @@ for name,asset in manifest['assets'].items():
 ready=[f for f in frames if f['file']=='PHYS0.SS' and f['ordinal']==79 and f.get('encoded_sha256')=='a8a861754068c86a9c150442f7b07f1fbd297d82b8e5dcb2e3ee108bde4dc84c']
 assert len(ready)==1
 ready[0]['source_contract_reference']={'state':'CONFORMED','spec':'docs/spec/062-hd-sea-draw-lifecycle.md','section':'2026-10-15 R58正式驗收與限定CONFORMED','formal_connected':bool(ready[0]['formal_assets'])}
+ship_review=None
+ship_assets=set()
+assert bool(a.ship_ready_report)==bool(a.ship_conformed_report)
+if a.ship_conformed_report:
+ assert a.custom_world_conformed_report and a.unit_report and a.unit_build
+ ship_assets={'icons-%03d.png'%n for n in [6,7,14,15,127]}
+ ship_ready=json.loads(a.ship_ready_report.read_bytes())
+ assert ship_ready['result']=='PASS_FIVE_STANDALONE_SHIP_READY_REVIEW' and ship_ready['spec_state']=='READY'
+ ship_review=json.loads(a.ship_conformed_report.read_bytes())
+ assert ship_review['result']=='PASS_FIVE_STANDALONE_SHIP_FORMAL_CONFORMANCE_REVIEW' and ship_review['spec_state']=='CONFORMED'
+ assert ship_review['sources']==[6,7,14,15,127] and ship_review['formal_assets']==78 and ship_review['graphics_files']==79
+ assert ship_review['manifest_sha256']==sha(a.manifest) and ship_review['ready_review_sha256']==sha(a.ship_ready_report)
+ assert ship_review['inherited_custom_world_conformance_sha256']==sha(a.custom_world_conformed_report)
+ assert set(ship_review['unchanged_inherited_assets'])==set(manifest['assets'])-ship_assets
+ assert len(ship_review['unchanged_inherited_assets'])==73
+ assert all(manifest['assets'][n]['sha256']==h for n,h in ship_review['unchanged_inherited_assets'].items())
+ assert ship_review['native_points']==24 and ship_review['native_inputs']==109 and ship_review['native_rgba_pixels']==15360000
+ assert ship_review['ship_gui_samples']==100 and ship_review['gui_hd_samples']==75
+ assert ship_review['replay_end']==335800000 and ship_review['replay_inputs']==264
+ assert ship_review['startup_cases']==6 and ship_review['package_rejected_cases']==238
 custom_review=None
 custom_assets={'customiz-000.png'}
 assert bool(a.custom_world_ready_report)==bool(a.custom_world_conformed_report)
@@ -73,10 +95,10 @@ if a.custom_world_conformed_report:
  assert custom_ready['result']=='PASS_CUSTOM_WORLD_READY_REVIEW' and custom_ready['spec_state']=='READY'
  custom_review=json.loads(a.custom_world_conformed_report.read_bytes())
  assert custom_review['result']=='PASS_CUSTOM_WORLD_FORMAL_CONFORMANCE_REVIEW' and custom_review['spec_state']=='CONFORMED'
- assert custom_review['formal_assets']==73 and custom_review['manifest_sha256']==sha(a.manifest)
+ assert custom_review['formal_assets']==73 and custom_review['manifest_sha256']==(ship_review['inherited_manifest_sha256'] if ship_review else sha(a.manifest))
  assert custom_review['ready_review_sha256']==sha(a.custom_world_ready_report)
  assert custom_review['inherited_new_game_conformance_sha256']==sha(a.new_game_conformed_report)
- assert set(custom_review['unchanged_inherited_assets'])==set(manifest['assets'])-custom_assets
+ assert set(custom_review['unchanged_inherited_assets'])==set(manifest['assets'])-custom_assets-ship_assets
  assert len(custom_review['unchanged_inherited_assets'])==72
  assert all(manifest['assets'][n]['sha256']==h for n,h in custom_review['unchanged_inherited_assets'].items())
 new_game_review=None
@@ -91,7 +113,7 @@ if a.new_game_conformed_report:
  assert new_game_review['formal_assets']==72 and new_game_review['manifest_sha256']==(custom_review['inherited_manifest_sha256'] if custom_review else sha(a.manifest))
  assert new_game_review['ready_review_sha256']==sha(a.new_game_ready_report)
  assert new_game_review['inherited_parch_conformance_sha256']==sha(a.parch_conformed_report)
- assert set(new_game_review['unchanged_inherited_assets'])==set(manifest['assets'])-new_game_assets-custom_assets
+ assert set(new_game_review['unchanged_inherited_assets'])==set(manifest['assets'])-new_game_assets-custom_assets-ship_assets
  assert len(new_game_review['unchanged_inherited_assets'])==70
  assert all(manifest['assets'][n]['sha256']==h for n,h in new_game_review['unchanged_inherited_assets'].items())
 parch_review=None
@@ -105,7 +127,7 @@ if a.parch_conformed_report:
  assert parch_review['formal_assets']==70 and parch_review['manifest_sha256']==(new_game_review['inherited_manifest_sha256'] if new_game_review else sha(a.manifest))
  assert parch_review['ready_review_sha256']==sha(a.parch_ready_report)
  assert parch_review['inherited_world_wood_conformance_sha256']==sha(a.world_wood_conformed_report)
- assert set(parch_review['unchanged_inherited_assets'])==set(manifest['assets'])-{'parch-000.png'}-new_game_assets-custom_assets
+ assert set(parch_review['unchanged_inherited_assets'])==set(manifest['assets'])-{'parch-000.png'}-new_game_assets-custom_assets-ship_assets
  assert len(parch_review['unchanged_inherited_assets'])==69
  assert all(manifest['assets'][n]['sha256']==h for n,h in parch_review['unchanged_inherited_assets'].items())
 wood_review=None
@@ -119,7 +141,7 @@ if a.world_wood_conformed_report:
  assert wood_review['formal_assets']==69 and wood_review['manifest_sha256']==(parch_review['inherited_manifest_sha256'] if parch_review else sha(a.manifest))
  assert wood_review['ready_review_sha256']==sha(a.world_wood_ready_report)
  assert wood_review['inherited_menu_conformance_sha256']==sha(a.menu_conformed_report)
- assert set(wood_review['unchanged_inherited_assets'])==set(manifest['assets'])-{'woodtile-000.png','parch-000.png'}-new_game_assets-custom_assets
+ assert set(wood_review['unchanged_inherited_assets'])==set(manifest['assets'])-{'woodtile-000.png','parch-000.png'}-new_game_assets-custom_assets-ship_assets
  assert len(wood_review['unchanged_inherited_assets'])==68
  assert all(manifest['assets'][n]['sha256']==h for n,h in wood_review['unchanged_inherited_assets'].items())
 menu_review=None
@@ -147,7 +169,7 @@ if a.small_terrain_conformed_report:
  assert small_review['ready_review_sha256']==sha(a.small_terrain_ready_report)
  assert len(small_review['unchanged_inherited_assets'])==58
  assert all(manifest['assets'][n]['sha256']==h for n,h in small_review['unchanged_inherited_assets'].items())
-expected_assets=73 if custom_review else 72 if new_game_review else 70 if parch_review else 69 if wood_review else 68 if menu_review else 66 if a.small_terrain_conformed_report else 58 if a.terrain_batch_conformed_report else 46
+expected_assets=78 if ship_review else 73 if custom_review else 72 if new_game_review else 70 if parch_review else 69 if wood_review else 68 if menu_review else 66 if a.small_terrain_conformed_report else 58 if a.terrain_batch_conformed_report else 46
 assert len(bindings)==expected_assets and sum(bool(f['formal_assets']) for f in frames)==expected_assets
 batch_review=None
 if a.terrain_batch_ready_report:
@@ -357,6 +379,12 @@ if a.unit_report or a.unit_build:
  public['unit_pedia_native_evidence']={'report_sha256':sha(a.unit_report),'build_sha256':sha(a.unit_build),'sources':80,
    'source_calls':196,'checkpoints':35,'dos_inputs':353,'raw_events':5048144,'end_step':601800000,'production_connected':False,
    'claim':'23 distinct normal unit-pedia entries plus one wrap to first; unknown writes revoke, including 239 same-value losses; no stage transfer credit'}
+if ship_review:
+ for ordinal in ship_review['sources']:
+  f=next(f for f in frames if f['file']=='ICONS.SS' and f['ordinal']==ordinal)
+  assert f['formal_assets']==['icons-%03d.png'%ordinal] and 'unit_pedia_native_sample' in f
+  f['source_contract_reference']={'state':'CONFORMED','spec':'docs/spec/070-hd-unit-small-images.md','formal_connected':True,'review_sha256':sha(a.ship_conformed_report),'scope':'normal unit-pedia, original per-frame PNG RGBA and standard cursor only; native flags and 26 whole transparent source cells retained; world movement, combat and animation unverified'}
+ public['ship_pedia_conformance']={'ready_review_sha256':sha(a.ship_ready_report),'review_sha256':sha(a.ship_conformed_report),'sources':ship_review['sources'],'formal_assets':78,'ship_gui_samples':100,'claim':'five standalone ship sprites within recorded normal pedia only; other sources, program-drawn graphics, animation and full HD remain incomplete'}
 public['coverage_limits']['additional_ready_source_contracts']=sum(f.get('source_contract_reference',{}).get('state')=='READY' and not f.get('source_contract_reference',{}).get('formal_connected') for f in frames)
 out.write_text(json.dumps(public,ensure_ascii=False,indent=2)+'\n')
 print('PASS_METADATA_ONLY_FULL_SOURCE_INDEX',len(frames),len(bindings),sha(out),flush=True)

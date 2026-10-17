@@ -158,7 +158,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "c5f997aea5ebaca854497d10b17e1f9a1271d01abf8261c9b3efd2762423c2ae"
+const hdManifestSHA = "0c78251ffc365a49e229ede4e88715b095359ff85bd16c0508a5a738b2eee33c"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"

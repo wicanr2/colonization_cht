@@ -332,7 +332,7 @@ func TestHDSmallRuntimeNativeLifecycle(t *testing.T) {
 	h, err := loadHDRuntime(m, game, assets)
 	need(err)
 
-	if h.small == nil || len(h.small.frames) != 31 || hash(m.Mem) != before {
+	if h.small == nil || len(h.small.frames) != 36 || hash(m.Mem) != before {
 		t.Fatal("小圖像載入失敗或改寫DOS")
 	}
 	p := h.small
@@ -430,8 +430,15 @@ func TestHDSmallRuntimeNativeLifecycle(t *testing.T) {
 		}
 		output, record := h.base(f)
 		h.restoreCursor(output, f)
+		// R57小圖像邊界只核對本層；R66以後的背景沿各自獨立驗收。
+		sourceOnly := draftRGB(f.indexed, f.palette)
+		_, cursorReason := h.cursorProof(f)
+		if cursorReason == "" {
+			p.paint(sourceOnly, f)
+			h.restoreCursor(sourceOnly, f)
+		}
 		receipt := p.receipt(f)
-		if record["reason"] == "known-building" {
+		if cursorReason == "" {
 			artOwned := 0
 			for _, cell := range p.visible {
 				if cell.owned && p.frames[cell.slot].art != nil {
@@ -458,47 +465,7 @@ func TestHDSmallRuntimeNativeLifecycle(t *testing.T) {
 			guardPoints = append(guardPoints, at)
 		}
 		allowed := [64000]bool{}
-		for i, v := range h.owned {
-			if v {
-				allowed[hdBuildingCanvasIndex(i)] = true
-			}
-		}
-		for i, v := range h.sea.visible {
-			if v.owned && v.native == f.canvas[i] {
-				allowed[i] = true
-			}
-		}
-		for i, v := range h.person.visible {
-			if v.owned && v.native == f.canvas[i] {
-				allowed[i] = true
-			}
-		}
-		for i, v := range h.shelter.visible {
-			if v.owned && v.native == f.canvas[i] {
-				allowed[i] = true
-			}
-		}
-		for i, v := range h.nine.visible {
-			if v.owned && v.native == f.canvas[i] {
-				allowed[i] = true
-			}
-		}
-		for i, v := range p.visible {
-			if v.owned && v.native == f.canvas[i] {
-				allowed[i] = true
-			}
-		}
-		for i, v := range h.terrain079.visible {
-			if v.owned && v.native == f.canvas[i] {
-				allowed[i] = true
-			}
-		}
-		for i, cell := range h.terrainBatch.visible {
-			if cell.owned && cell.native == f.canvas[i] {
-				allowed[i] = true
-			}
-		}
-		for i, cell := range h.smallTerrain.visible {
+		for i, cell := range p.visible {
 			if cell.owned && cell.native == f.canvas[i] {
 				allowed[i] = true
 			}
@@ -506,7 +473,7 @@ func TestHDSmallRuntimeNativeLifecycle(t *testing.T) {
 		native := draftRGB(f.indexed, f.palette)
 		for y := 0; y < 800; y++ {
 			for x := 0; x < 1280; x++ {
-				if !allowed[(y/4)*320+x/4] && output.RGBAAt(x, y) != native.RGBAAt(x, y) {
+				if !allowed[(y/4)*320+x/4] && sourceOnly.RGBAAt(x, y) != native.RGBAAt(x, y) {
 					t.Fatal("小圖像越出已驗像素", at, x, y)
 				}
 			}
@@ -518,7 +485,7 @@ func TestHDSmallRuntimeNativeLifecycle(t *testing.T) {
 			}
 			smallOnly := draftRGB(f.indexed, f.palette)
 			smallReceipt := map[string]any{}
-			if record["reason"] == "known-building" {
+			if cursorReason == "" {
 				smallReceipt = p.paint(smallOnly, f)
 				h.restoreCursor(smallOnly, f)
 			}
@@ -555,6 +522,10 @@ func TestHDSmallRuntimeNativeLifecycle(t *testing.T) {
 		t.Fatal("小圖像原版路徑不同", at, count, p.accepted, p.rejected)
 	}
 	for _, f := range p.frames {
+		// R49固定路徑只涵蓋原31幀；新增五船由獨立正常路徑測試驗證。
+		if f.ordinal == 6 || f.ordinal == 7 || f.ordinal == 14 || f.ordinal == 15 || f.ordinal == 127 {
+			continue
+		}
 		if !entryChecked[f.ordinal] || !writerChecked[f.ordinal] || !finishChecked[f.ordinal] || !ownerChecked[f.ordinal] || len(negatives[f.ordinal]) != map[bool]int{true: 20, false: 17}[f.art != nil] {
 			t.Fatal("小圖像反例缺漏", f.ordinal, negatives[f.ordinal])
 		}
@@ -575,7 +546,7 @@ func TestHDSmallRuntimeNativeLifecycle(t *testing.T) {
 		t.Fatal("缺少小圖像收據輸出")
 	}
 	need(os.Mkdir(target, 0755))
-	data, err := json.MarshalIndent(map[string]any{"result": "PASS_SMALL_RUNTIME_NATIVE_49", "production_connected": true, "points": records, "accepted": p.accepted, "rejected": p.rejected, "dos_inputs": count, "end": m.Steps, "negative_cases": negatives, "guard_points": guardPoints, "calls": p.calls, "cursor_pairs": p.pairs, "buffer_saves": p.bufferSaves, "buffer_restores": p.bufferRestores, "peak_buffered": p.peakBuffered, "ram_negative_cases": ramNegatives}, "", "  ")
+	data, err := json.MarshalIndent(map[string]any{"result": "PASS_SMALL_RUNTIME_NATIVE_49", "pixel_comparison_scope": "small-only; newer backgrounds retain their independent conformance", "production_connected": true, "points": records, "accepted": p.accepted, "rejected": p.rejected, "dos_inputs": count, "end": m.Steps, "negative_cases": negatives, "guard_points": guardPoints, "calls": p.calls, "cursor_pairs": p.pairs, "buffer_saves": p.bufferSaves, "buffer_restores": p.bufferRestores, "peak_buffered": p.peakBuffered, "ram_negative_cases": ramNegatives}, "", "  ")
 	need(err)
 	need(os.WriteFile(filepath.Join(target, "check.json"), append(data, '\n'), 0644))
 }
@@ -685,7 +656,7 @@ func TestHDSmallResourceContract(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(p.frames) != 31 || !bytes.Equal(before, m.Mem) {
+	if len(p.frames) != 36 || !bytes.Equal(before, m.Mem) {
 		t.Fatal("素材載入來源或原版記憶體不同")
 	}
 	available := map[int]bool{}
@@ -694,7 +665,7 @@ func TestHDSmallResourceContract(t *testing.T) {
 			available[f.ordinal] = true
 		}
 	}
-	if len(available) != 30 || !available[5] || !available[22] || !available[23] || !available[24] || !available[25] || !available[26] || !available[27] || !available[28] || !available[29] || !available[30] || !available[31] || !available[32] || !available[33] || !available[34] || !available[35] || !available[36] || !available[37] || !available[38] || !available[42] || !available[53] || !available[56] || !available[59] || !available[62] || !available[67] || !available[68] || !available[69] || !available[94] || !available[122] || !available[123] || !available[124] {
+	if len(available) != 35 || !available[5] || !available[22] || !available[23] || !available[24] || !available[25] || !available[26] || !available[27] || !available[28] || !available[29] || !available[30] || !available[31] || !available[32] || !available[33] || !available[34] || !available[35] || !available[36] || !available[37] || !available[38] || !available[42] || !available[53] || !available[56] || !available[59] || !available[62] || !available[67] || !available[68] || !available[69] || !available[94] || !available[122] || !available[123] || !available[124] {
 		t.Fatal("尚無候選來源被計為HD", available)
 	}
 	if _, err := loadHDSmallRuntime(nil, game, assets); err == nil {
@@ -779,4 +750,254 @@ func TestHDSmallResourceContract(t *testing.T) {
 		}
 	}
 	fmt.Println("PASS_SMALL_IMAGE_RESOURCE_REJECTIONS", len(names)+2)
+}
+
+// 規格070 R72：五艘船的獨立正常來源、游標及真實反例。
+func TestHDShipRuntimeNativeLifecycle(t *testing.T) {
+	game, assets, receipts := os.Getenv("TEST_GAME_ROOT"), os.Getenv("TEST_HD_ASSETS"), os.Getenv("TEST_HD_RECEIPTS")
+	for _, name := range []string{"OPENING.EXE", "VICEROY.EXE", "BUILDING.SS", "PHYS0.SS", "ICONS.SS"} {
+		if _, err := os.Stat(filepath.Join(game, name)); os.IsNotExist(err) {
+			t.Skip("缺少合法原版", name)
+		}
+	}
+	need := func(err error) {
+		t.Helper()
+		if err != nil {
+			t.Fatal(err)
+		}
+	}
+	load := func(path string) []byte { t.Helper(); b, e := os.ReadFile(path); need(e); return b }
+	inputBytes := load(filepath.Join(os.Getenv("TEST_HD_SHIP_NATIVE"), "baseline-ships-r5/gui.inputs.json"))
+	pointBytes := load(filepath.Join(os.Getenv("TEST_HD_SHIP_NATIVE"), "icons-ships-entry-r1/points.json"))
+	if hash(inputBytes) != "639574cafe140655c699c9cc9709208f668af08751bdab4895b875c8673353e1" || hash(pointBytes) != "fd2fc2ee7ba3c7eb63c9250d742a26909b67a19ea83a0157212b8e40a8efd1e8" {
+		t.Fatal("正常輸入或49點收據不同")
+	}
+	var replay windowReceipt
+	need(json.Unmarshal(inputBytes, &replay))
+	var points []struct {
+		Step      uint64    `json:"step"`
+		Count     uint64    `json:"dos_input_count"`
+		Memory    string    `json:"memory_sha256"`
+		Indexed   string    `json:"indexed_sha256"`
+		Palette   string    `json:"palette_sha256"`
+		Registers [8]uint16 `json:"registers"`
+		Segments  [4]uint16 `json:"segments"`
+		IP        uint16    `json:"ip"`
+		Flags     uint16    `json:"flags"`
+	}
+	need(json.Unmarshal(pointBytes, &points))
+	if len(points) != 24 || len(replay.Inputs) != 109 || replay.End != 227600000 {
+		t.Fatal("正常路徑規模不同")
+	}
+	replay.End = 227400000 // 本批原版oracle終點為最後正常截點。
+	seed := load(filepath.Join(receipts, "lifecycle-r29-r1/gui/save/COLONY09.SAV"))
+	if hash(seed) != "52ae8b7bd4bea1869afb825af165a8edc50882fc176d49985d4fb3c362d5469b" {
+		t.Fatal("原始存檔不同")
+	}
+	scratch := t.TempDir()
+	need(os.WriteFile(filepath.Join(scratch, "COLONY09.SAV"), seed, 0644))
+	m := golem.New()
+	need(m.LoadEXE(load(filepath.Join(game, "OPENING.EXE"))))
+	m.Write8(uint32(golem.PSPSeg)*16+0x80, 2)
+	m.WriteBytes(uint32(golem.PSPSeg)*16+0x81, []byte{'-', 'g', 13})
+	d := golem.NewDOS(m, game)
+	d.Scratch = scratch
+	d.Install()
+	defer d.Close()
+	m.SetSoundBlasterPro(true)
+	if !m.EnableSBDigital() {
+		t.Fatal("缺少數位音效")
+	}
+	m.EnableOPLSynth(true)
+	before := hash(m.Mem)
+	h, err := loadHDRuntime(m, game, assets)
+	need(err)
+
+	if h.small == nil || len(h.small.frames) != 36 || hash(m.Mem) != before {
+		t.Fatal("小圖像載入失敗或改寫DOS")
+	}
+	p := h.small
+	p.trace = true
+
+	ships := map[int]int{6: 121, 7: 143, 14: 127, 15: 125, 127: 137}
+	negatives := map[int][]string{}
+	entryChecked, writerChecked, finishChecked, ownerChecked := map[int]bool{}, map[int]bool{}, map[int]bool{}, map[int]bool{}
+	prior := uint64(0)
+	m.SetBeforeInstruction(func() {
+		h.beforeInstruction()
+		if p.accepted != prior {
+			n := p.frames[p.selected].ordinal
+			if _, ok := ships[n]; ok && !finishChecked[n] {
+				negatives[n] = append(negatives[n], hdSmallFinishNegatives(t, p)...)
+				finishChecked[n] = true
+			}
+			prior = p.accepted
+		}
+		if p.active {
+			n := p.frames[p.selected].ordinal
+			if _, ok := ships[n]; !ok {
+				return
+			}
+			if !entryChecked[n] {
+				negatives[n] = append(negatives[n], hdSmallEntryNegatives(t, p)...)
+				entryChecked[n] = true
+			}
+			if !writerChecked[n] && m.CPU.Seg[golem.CS] == 0xd46 && hdSmallWriterCodes[m.CPU.IP] != nil {
+				negatives[n] = append(negatives[n], hdSmallWriterNegative(t, p))
+				writerChecked[n] = true
+			}
+		}
+	})
+	target := os.Getenv("TEST_HD_SHIP_OUTPUT")
+	if target == "" {
+		t.Fatal("缺少五船原版收據輸出")
+	}
+	need(os.Mkdir(target, 0755))
+	at, count := 0, uint64(0)
+	var records []map[string]any
+	shipPoints, guarded := 0, []int{}
+	capture := func() {
+		if at == len(points) {
+			return
+		}
+		point := points[at]
+		if m.Steps > point.Step || (m.Steps == point.Step && count > point.Count) {
+			t.Fatal("略過五船原版截點", at)
+		}
+		if m.Steps != point.Step || count != point.Count {
+			return
+		}
+		c := m.CPU
+		if hash(m.Mem) != point.Memory || hash(m.Indexed()) != point.Indexed || hash(m.DAC[:]) != point.Palette || c.R != point.Registers || c.Seg != point.Segments || c.IP != point.IP || c.Flags != point.Flags {
+			t.Fatal("五船覆蓋改變原版狀態", at)
+		}
+		f := draftNativeFrame{canvas: m.Mem[hdBuildingCanvas : hdBuildingCanvas+64000], indexed: m.Indexed(), palette: m.DAC[:], cursor: image.Rect(int(d.Mouse.X), int(d.Mouse.Y), int(d.Mouse.X)+16, int(d.Mouse.Y)+16), step: m.Steps, mode: m.VideoMode()}
+		type expectedCell struct {
+			Ordinal, Local int
+			Native         byte
+		}
+		var oracle map[string]expectedCell
+		need(json.Unmarshal(load(filepath.Join(os.Getenv("TEST_HD_SHIP_NATIVE"), "ships-ram-r1/model-r1", fmt.Sprintf("point-%03d.terrain-model.json", at))), &oracle))
+		owned := 0
+		for pos, cell := range p.visible {
+			if !cell.owned {
+				continue
+			}
+			ordinal := p.frames[cell.slot].ordinal
+			if _, ok := ships[ordinal]; !ok {
+				continue
+			}
+			expected, ok := oracle[fmt.Sprint(pos)]
+			if !ok || expected.Ordinal != ordinal || expected.Local != int(cell.local) || expected.Native != cell.native || f.canvas[pos] != cell.native {
+				t.Fatal("五船來源與獨立模型不同", at, pos, cell)
+			}
+			owned++
+		}
+		if owned != len(oracle) {
+			t.Fatal("五船來源缺漏", at, owned, len(oracle))
+		}
+		before, regs, segs, ip, flags, cycles := hash(m.Mem), c.R, c.Seg, c.IP, c.Flags, c.Cycles
+		_, reason := h.cursorProof(f)
+		if reason != "" {
+			if len(oracle) != 0 || (at != 1 && at != 2) {
+				t.Fatal("五船出現未知游標表面", at, reason)
+			}
+			guarded = append(guarded, at)
+		}
+		if len(oracle) > 0 {
+			shipPoints++
+			if reason != "" {
+				t.Fatal("五船游標契約未通過", at)
+			}
+			only := draftRGB(f.indexed, f.palette)
+			receipt := p.paint(only, f)
+			h.restoreCursor(only, f)
+			for slot, a := range p.frames {
+				expectedPaint, ok := ships[a.ordinal]
+				if !ok {
+					continue
+				}
+				r := receipt["sources"].(map[string]any)[fmt.Sprint(a.ordinal)].(map[string]any)
+				if r["owned"].(int) > 0 {
+					if r["painted"].(int) != expectedPaint {
+						t.Fatal("五船原alpha繪製格不同", at, a.ordinal, r)
+					}
+					if !ownerChecked[a.ordinal] {
+						negatives[a.ordinal] = append(negatives[a.ordinal], hdSmallOwnershipNegatives(t, p, f, slot)...)
+						ownerChecked[a.ordinal] = true
+					}
+				}
+			}
+			mask := map[int]bool{}
+			for key := range oracle {
+				var pos int
+				if _, e := fmt.Sscan(key, &pos); e != nil {
+					t.Fatal(e)
+				}
+				mask[pos] = true
+			}
+			native := draftRGB(f.indexed, f.palette)
+			for y := 0; y < 800; y++ {
+				for x := 0; x < 1280; x++ {
+					if !mask[(y/4)*320+x/4] && only.RGBAAt(x, y) != native.RGBAAt(x, y) {
+						t.Fatal("五船越出有效來源", at, x, y)
+					}
+				}
+			}
+			for name, im := range map[string]*image.RGBA{"original": native, "ships": only} {
+				file, e := os.Create(filepath.Join(target, fmt.Sprintf("point-%03d-%s.png", at, name)))
+				need(e)
+				need(png.Encode(file, im))
+				need(file.Close())
+			}
+			file, e := os.Create(filepath.Join(target, fmt.Sprintf("point-%03d-art.png", at)))
+			need(e)
+			for _, a := range p.frames {
+				if _, ok := ships[a.ordinal]; ok && a.accepted > 0 && receipt["sources"].(map[string]any)[fmt.Sprint(a.ordinal)].(map[string]any)["owned"].(int) > 0 {
+					need(png.Encode(file, a.art))
+					break
+				}
+			}
+			need(file.Close())
+			dumpJSON(filepath.Join(target, fmt.Sprintf("point-%03d.json", at)), map[string]any{"point": at, "cells": oracle, "small": receipt, "cursor": f.cursor, "cursor_source_sha256": hash(m.Mem[0x1cd74:0x1ce74])})
+		}
+		if hash(m.Mem) != before || c.R != regs || c.Seg != segs || c.IP != ip || c.Flags != flags || c.Cycles != cycles {
+			t.Fatal("五船合成改寫原版", at)
+		}
+		records = append(records, map[string]any{"point": at, "step": m.Steps, "ship_owned": owned, "cursor_reason": reason, "original_state_equal": true})
+		at++
+	}
+	for _, e := range replay.Inputs {
+		if e.Step > replay.End {
+			break
+		}
+		for m.Steps < e.Step {
+			capture()
+			need(m.Step())
+		}
+		capture()
+		applyWindowInput(d, e)
+		count++
+		capture()
+	}
+	for m.Steps < replay.End {
+		capture()
+		need(m.Step())
+	}
+	capture()
+	if at != 24 || count != 109 || shipPoints != 15 || p.rejected != 0 || len(guarded) != 2 {
+		t.Fatal("五船原版路徑未完成", at, count, shipPoints, p.rejected, guarded)
+	}
+	for _, f := range p.frames {
+		if _, ok := ships[f.ordinal]; !ok {
+			continue
+		}
+		if f.accepted != 1 || !entryChecked[f.ordinal] || !writerChecked[f.ordinal] || !finishChecked[f.ordinal] || !ownerChecked[f.ordinal] || len(negatives[f.ordinal]) != 20 {
+			t.Fatal("五船真實反例或來源缺漏", f.ordinal, f.accepted, negatives[f.ordinal])
+		}
+	}
+	if !bytes.Equal(load(filepath.Join(scratch, "COLONY09.SAV")), seed) {
+		t.Fatal("五船覆蓋改變存檔")
+	}
+	dumpJSON(filepath.Join(target, "check.json"), map[string]any{"result": "PASS_FIVE_SHIP_RUNTIME_NATIVE_24", "production_connected": true, "points": records, "ship_points": shipPoints, "dos_inputs": count, "end": m.Steps, "negative_cases": negatives, "guarded_non_source_points": guarded})
 }
