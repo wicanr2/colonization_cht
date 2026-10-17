@@ -1,12 +1,12 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-17",
-  "code_commit": "d6061ce3853a2395c195e7d49a1e3b514eee19a7",
-  "binary_sha256": "3721e55e6d80baf4ee372f3a3cfef25e899e2f1fe1740c5693a90428607dadc8",
-  "formal_binary_sha256": "3721e55e6d80baf4ee372f3a3cfef25e899e2f1fe1740c5693a90428607dadc8",
-  "source_build_sha256": "3d314377a117d0696d61c8f9a238f954478ded40f3ea594a9a203e09bde2f0fc",
+  "code_commit": "ee66e1f24c3d2aba09874806eb1b2c16934ff0da",
+  "binary_sha256": "52fd12fb78b298c5827ccff226c2a3f21c32517e77a1a4641d47521ae5bd07e4",
+  "formal_binary_sha256": "52fd12fb78b298c5827ccff226c2a3f21c32517e77a1a4641d47521ae5bd07e4",
+  "source_build_sha256": "c0cad36a22af78f6ba2022fa204260d33e4e237cdd826efe27bbe6e21f5bed3a",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 73,
+  "formal_hd_assets": 78,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -120,6 +120,35 @@
       "picture_rgba_pixels_checked": 953248,
       "graphics_manifest_sha256": "c5f997aea5ebaca854497d10b17e1f9a1271d01abf8261c9b3efd2762423c2ae",
       "conformance_sha256": "8b384068a1c490d0e6f5f95162b481cdc17ce8c247ab6101bc97a5e75007c357"
+    },
+    {
+      "file": "hd-ship-pedia-zh.png",
+      "sha256": "6646003826c29a2311539c9730ca39ad9f6fa506f2ad4a6d9f8458e91b15844d",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "unit-pedia-galleon",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 147400000,
+      "binary_sha256": "52fd12fb78b298c5827ccff226c2a3f21c32517e77a1a4641d47521ae5bd07e4",
+      "formal_binary_sha256": "52fd12fb78b298c5827ccff226c2a3f21c32517e77a1a4641d47521ae5bd07e4",
+      "code_commit": "ee66e1f24c3d2aba09874806eb1b2c16934ff0da",
+      "formal_hd_assets": 78,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-sprite-batch-r71/standalone-ships-gui-r1/gui.display-126.png",
+      "source_gui_check_sha256": "07e1e80e36e37f9ac68353e926ddcb4fa894eaf517735ddf4fc6d8a5631c618c",
+      "independent_pixels_sha256": "eb269e11f3dd5ce99ca663589471ca61e37246bc211dabdc58104704bba869f8",
+      "same_state_replay_sha256": "248a36f3a52af8d845157f15a655cf94dd916b15d8f392e051fdf6cbee025bf7",
+      "source_kind": "actual uninstrumented formal game presentation from standard display diagnostics; byte-for-byte matched to the real X11 game area",
+      "capture_pixels_unchanged": true,
+      "original_ordinal": 7,
+      "owned_source_cells": 146,
+      "painted_source_cells": 143,
+      "sampled_alpha_pixels": 2080,
+      "graphics_manifest_sha256": "0c78251ffc365a49e229ede4e88715b095359ff85bd16c0508a5a738b2eee33c",
+      "conformance_sha256": "fb5400b2190c423b5875e64eec63fcf3b9b4544baceb87b7e80e3dc91117b978",
+      "scope": "one normal Galleon pedia presentation within five-ship conformance; native flag and alpha gaps retained; world movement and animation unverified"
     }
   ],
   "limitations": [
@@ -129,7 +158,8 @@
     "No generated concept images or DRAFT terrain prototypes used.",
     "Game-area captures use a read-only helper; the display code and formal loader match the verified production sources.",
     "R66 adds the settled main-menu background, title art and wood texture; remaining backgrounds and animation are unfinished.",
-    "R68 refreshes the verified Traditional Chinese colony image with paper and wood textures. The R67 world, R66 menu and R64 settings images retain their exact prior PNGs and per-image provenance."
+    "R68 refreshes the verified Traditional Chinese colony image with paper and wood textures. The R67 world, R66 menu and R64 settings images retain their exact prior PNGs and per-image provenance.",
+    "R72 adds one actual Traditional Chinese Galleon pedia capture from the five-ship scoped conformance; all five prior PNGs and their per-image provenance remain unchanged."
   ],
   "previous_build": {
     "kind": "README actual development screenshots",
@@ -142,9 +172,9 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "Custom-world uses R70 and d6061ce with 73 assets. Colony retains R68/691c36c (70), world R67/d48eb9d (69), menu R66/fe97cf6 (68), settings R64/468e835 (66); each image retains its own provenance.",
-  "graphics_manifest_sha256": "c5f997aea5ebaca854497d10b17e1f9a1271d01abf8261c9b3efd2762423c2ae",
-  "conformance_sha256": "8b384068a1c490d0e6f5f95162b481cdc17ce8c247ab6101bc97a5e75007c357",
+  "provenance_scope": "Ship pedia uses R72/ee66e1f with 78 assets. Custom-world retains R70/d6061ce (73), colony R68/691c36c (70), world R67/d48eb9d (69), menu R66/fe97cf6 (68), settings R64/468e835 (66); each prior image and its own provenance are unchanged.",
+  "graphics_manifest_sha256": "0c78251ffc365a49e229ede4e88715b095359ff85bd16c0508a5a738b2eee33c",
+  "conformance_sha256": "fb5400b2190c423b5875e64eec63fcf3b9b4544baceb87b7e80e3dc91117b978",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -186,13 +216,14 @@
     "formal_hd_assets": 66
   },
   "previous_development_capture": {
-    "code_commit": "691c36cc71299f077f9203ab6b5ae4439220f08c",
-    "binary_sha256": "06a49e2e9e3931abad40c327b56c4f8a6afbe8644171f424d00463f02e9d082a",
-    "formal_binary_sha256": "8619c0a3c24feb89447513832f9e527cb99f0bc32661c2d0e427edd13dfa8621",
-    "source_build_sha256": "4140cf59d5b60a6e13c32f78c103854de2be1dc4119075c805eb2e2a7798a152",
-    "formal_hd_assets": 70,
-    "graphics_manifest_sha256": "52c7c2aae1ce493489acc86a98c6adc6c43ce77136cd1700e9ca741e3ef2ecb8",
-    "conformance_sha256": "0f456fb1e2cca8e05ea44fd63f24133f3372a2e9a696a7320e17f3d1b908042e",
-    "read_only_gui_probe_build_sha256": "c4ec67dea4d02c95b69444647c4e1ce4672bd0720a8eae89c26ac0261f611132"
-  }
+    "code_commit": "d6061ce3853a2395c195e7d49a1e3b514eee19a7",
+    "binary_sha256": "3721e55e6d80baf4ee372f3a3cfef25e899e2f1fe1740c5693a90428607dadc8",
+    "formal_binary_sha256": "3721e55e6d80baf4ee372f3a3cfef25e899e2f1fe1740c5693a90428607dadc8",
+    "source_build_sha256": "3d314377a117d0696d61c8f9a238f954478ded40f3ea594a9a203e09bde2f0fc",
+    "formal_hd_assets": 73,
+    "graphics_manifest_sha256": "c5f997aea5ebaca854497d10b17e1f9a1271d01abf8261c9b3efd2762423c2ae",
+    "conformance_sha256": "8b384068a1c490d0e6f5f95162b481cdc17ce8c247ab6101bc97a5e75007c357"
+  },
+  "verification_build_sha256": "c0cad36a22af78f6ba2022fa204260d33e4e237cdd826efe27bbe6e21f5bed3a",
+  "production_go_sources_equal_to_verified_build": true
 }
