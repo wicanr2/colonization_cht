@@ -1,12 +1,12 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-17",
-  "code_commit": "6bccc358be15626a98b147742c95ed284ab4ff49",
-  "binary_sha256": "fa4307f1388e3bfd953359b501a0513ea0a62c2ba47214156895fb22a7f4f11f",
-  "formal_binary_sha256": "fa4307f1388e3bfd953359b501a0513ea0a62c2ba47214156895fb22a7f4f11f",
-  "source_build_sha256": "acadd78b6a3f35445b9b4be3ddcf9e10665a1c3bfbc09fea87b1999696e6df74",
+  "code_commit": "38ee34f3c13504cf3d689fdbe5e6da4df3570d25",
+  "binary_sha256": "7a9470f550b7160ff5ee83dcc83d3fc75ffcea5884d578cc58592fed6684903a",
+  "formal_binary_sha256": "7a9470f550b7160ff5ee83dcc83d3fc75ffcea5884d578cc58592fed6684903a",
+  "source_build_sha256": "d896465ddcbc60fa31d7ef984c99c7c8ebc61e0a4560039a4da6bf2b14bb7dbe",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 81,
+  "formal_hd_assets": 103,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -179,6 +179,63 @@
       "graphics_manifest_sha256": "336653b647cd381931be990409b71bd0abcfdbb6ebf3d3db0054c6d7ee6b70c8",
       "conformance_sha256": "ba17a1b0aadbdcb5cb5d535685df0498630e6fdbd969cfbed183afd736844fee",
       "scope": "one normal Wagon Train pedia within three-vehicle conformance; native glyphs/flags retained; damaged artillery, world movement and animation unverified"
+    },
+    {
+      "file": "hd-colonists-pedia-zh.png",
+      "sha256": "2b89807308bfa4f7c26786160f87aa30b39bda7f8450bba828b3424aaa22c73f",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "unit-pedia-colonists",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 84800000,
+      "binary_sha256": "7a9470f550b7160ff5ee83dcc83d3fc75ffcea5884d578cc58592fed6684903a",
+      "formal_binary_sha256": "7a9470f550b7160ff5ee83dcc83d3fc75ffcea5884d578cc58592fed6684903a",
+      "code_commit": "38ee34f3c13504cf3d689fdbe5e6da4df3570d25",
+      "formal_hd_assets": 103,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-sprite-batch-r71/r74-colonists-gui-r1/gui.display-046.png",
+      "source_gui_check_sha256": "28d476997963a0df842c08c42e37ac2052afb2822fd6b1c377e2cebf22722069",
+      "independent_pixels_sha256": "c7ef362b7ab1dbed83191a631bda59f0bfdf825453494fad79ee08bef01143d6",
+      "same_state_replay_sha256": "db584141f21bcda5d8da06f341790b42a4bae27a42ed1b30143801459e16395a",
+      "source_kind": "actual uninstrumented formal game presentation from standard display diagnostics; byte-for-byte matched to the real X11 game area",
+      "capture_pixels_unchanged": true,
+      "original_ordinals": [
+        58,
+        60,
+        66,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        95,
+        96,
+        97,
+        98,
+        106,
+        107
+      ],
+      "new_owned_source_cells": 1381,
+      "new_painted_source_cells": 1353,
+      "whole_transparent_new_source_cells_retained": 28,
+      "inherited_ordinals": [
+        59,
+        94,
+        100
+      ],
+      "graphics_manifest_sha256": "963b67ab9fdbdf02577a063dca488a525f7491cbf9d769c3f9c664117adcb758",
+      "conformance_sha256": "70349035b3ca433349d4fe3a6fc8219acef55e1231eadb714443f94500adb6f9",
+      "scope": "normal Colonists pedia only; original flags, raw alpha, inherited person and standard cursor preserved; world movement, combat, animation and full HD incomplete"
     }
   ],
   "limitations": [
@@ -190,7 +247,8 @@
     "R66 adds the settled main-menu background, title art and wood texture; remaining backgrounds and animation are unfinished.",
     "R68 refreshes the verified Traditional Chinese colony image with paper and wood textures. The R67 world, R66 menu and R64 settings images retain their exact prior PNGs and per-image provenance.",
     "R72 adds one actual Traditional Chinese Galleon pedia capture from the five-ship scoped conformance; all five prior PNGs and their per-image provenance remain unchanged.",
-    "R73 adds one actual Traditional Chinese Wagon Train pedia capture from scoped three-vehicle conformance; all six prior PNGs and per-image provenance remain unchanged."
+    "R73 adds one actual Traditional Chinese Wagon Train pedia capture from scoped three-vehicle conformance; all six prior PNGs and per-image provenance remain unchanged.",
+    "R74 adds one actual Traditional Chinese Colonists pedia capture covering 22 new colonist frames and three inherited images. World movement, combat and animation remain unverified; all seven prior PNGs and per-image provenance remain unchanged."
   ],
   "previous_build": {
     "kind": "README actual development screenshots",
@@ -203,9 +261,9 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "Vehicle pedia uses R73/6bccc35 with 81 assets. Ship pedia retains R72/ee66e1f (78), custom-world R70/d6061ce (73), colony R68/691c36c (70), world R67/d48eb9d (69), menu R66/fe97cf6 (68), settings R64/468e835 (66); prior PNGs and per-image provenance are unchanged.",
-  "graphics_manifest_sha256": "336653b647cd381931be990409b71bd0abcfdbb6ebf3d3db0054c6d7ee6b70c8",
-  "conformance_sha256": "ba17a1b0aadbdcb5cb5d535685df0498630e6fdbd969cfbed183afd736844fee",
+  "provenance_scope": "Colonists pedia uses R74/38ee34f with 103 assets. All seven prior captures retain exact PNGs and individual code commits, binary hashes and asset totals.",
+  "graphics_manifest_sha256": "963b67ab9fdbdf02577a063dca488a525f7491cbf9d769c3f9c664117adcb758",
+  "conformance_sha256": "70349035b3ca433349d4fe3a6fc8219acef55e1231eadb714443f94500adb6f9",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -247,14 +305,14 @@
     "formal_hd_assets": 66
   },
   "previous_development_capture": {
-    "code_commit": "ee66e1f24c3d2aba09874806eb1b2c16934ff0da",
-    "binary_sha256": "52fd12fb78b298c5827ccff226c2a3f21c32517e77a1a4641d47521ae5bd07e4",
-    "formal_binary_sha256": "52fd12fb78b298c5827ccff226c2a3f21c32517e77a1a4641d47521ae5bd07e4",
-    "source_build_sha256": "c0cad36a22af78f6ba2022fa204260d33e4e237cdd826efe27bbe6e21f5bed3a",
-    "formal_hd_assets": 78,
-    "graphics_manifest_sha256": "0c78251ffc365a49e229ede4e88715b095359ff85bd16c0508a5a738b2eee33c",
-    "conformance_sha256": "fb5400b2190c423b5875e64eec63fcf3b9b4544baceb87b7e80e3dc91117b978"
+    "code_commit": "6bccc358be15626a98b147742c95ed284ab4ff49",
+    "binary_sha256": "fa4307f1388e3bfd953359b501a0513ea0a62c2ba47214156895fb22a7f4f11f",
+    "formal_binary_sha256": "fa4307f1388e3bfd953359b501a0513ea0a62c2ba47214156895fb22a7f4f11f",
+    "source_build_sha256": "acadd78b6a3f35445b9b4be3ddcf9e10665a1c3bfbc09fea87b1999696e6df74",
+    "formal_hd_assets": 81,
+    "graphics_manifest_sha256": "336653b647cd381931be990409b71bd0abcfdbb6ebf3d3db0054c6d7ee6b70c8",
+    "conformance_sha256": "ba17a1b0aadbdcb5cb5d535685df0498630e6fdbd969cfbed183afd736844fee"
   },
-  "verification_build_sha256": "54592b26b04e7efa92e97fb1b9204f65b9bed64e3a940868f3e4f2df871c38b3",
+  "verification_build_sha256": "80a8d92df3990901c07a7ea52cac4067552d7aaee41405d963137c517b7857c3",
   "production_go_sources_equal_to_verified_build": true
 }
