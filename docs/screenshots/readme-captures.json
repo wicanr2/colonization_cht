@@ -1,12 +1,12 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-17",
-  "code_commit": "38ee34f3c13504cf3d689fdbe5e6da4df3570d25",
-  "binary_sha256": "7a9470f550b7160ff5ee83dcc83d3fc75ffcea5884d578cc58592fed6684903a",
-  "formal_binary_sha256": "7a9470f550b7160ff5ee83dcc83d3fc75ffcea5884d578cc58592fed6684903a",
-  "source_build_sha256": "d896465ddcbc60fa31d7ef984c99c7c8ebc61e0a4560039a4da6bf2b14bb7dbe",
+  "code_commit": "8df4de67b2f592733f163bf4093ea51b4ee5be73",
+  "binary_sha256": "1f0f2418af3c5164e74c8d037161f27be28e11e00d3bdf1fd3a533ddf62a222c",
+  "formal_binary_sha256": "1f0f2418af3c5164e74c8d037161f27be28e11e00d3bdf1fd3a533ddf62a222c",
+  "source_build_sha256": "3bf4e894c1f0759a4c9389eefccd3c8ff780acecdcbd99f208534dd09a60c54c",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 103,
+  "formal_hd_assets": 122,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -236,6 +236,39 @@
       "graphics_manifest_sha256": "963b67ab9fdbdf02577a063dca488a525f7491cbf9d769c3f9c664117adcb758",
       "conformance_sha256": "70349035b3ca433349d4fe3a6fc8219acef55e1231eadb714443f94500adb6f9",
       "scope": "normal Colonists pedia only; original flags, raw alpha, inherited person and standard cursor preserved; world movement, combat, animation and full HD incomplete"
+    },
+    {
+      "file": "hd-dragoon-pedia-zh.png",
+      "sha256": "207be0ba41d1440d662fc56ccac6ba49b635194818240557d166d0059032e326",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "unit-pedia-dragoons",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 189200000,
+      "binary_sha256": "1f0f2418af3c5164e74c8d037161f27be28e11e00d3bdf1fd3a533ddf62a222c",
+      "formal_binary_sha256": "1f0f2418af3c5164e74c8d037161f27be28e11e00d3bdf1fd3a533ddf62a222c",
+      "code_commit": "8df4de67b2f592733f163bf4093ea51b4ee5be73",
+      "formal_hd_assets": 122,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-sprite-batch-r71/r75-unit19-gui-r1/gui.display-334.png",
+      "source_gui_check_sha256": "e8598644275b0351ac4aa8fe9a325ed0d78d7b53d9396ad63f41c5b631344503",
+      "independent_pixels_sha256": "3d7c7ffae6d11ee304da9aa3c732fc8033b76dc628b8ca5691fb929cacdb3d89",
+      "same_state_replay_sha256": "0f62d235f65dbbcc5c457cd2f3cefad9767fc199501aaafa3b68f6510cfb6f14",
+      "source_kind": "actual uninstrumented formal game presentation from standard display diagnostics; byte-for-byte matched to the real X11 game area",
+      "capture_pixels_unchanged": true,
+      "original_ordinals": [
+        76,
+        104
+      ],
+      "owned_source_cells": 224,
+      "painted_source_cells": 223,
+      "sampled_alpha_pixels": 3096,
+      "whole_transparent_source_cells_retained": 1,
+      "graphics_manifest_sha256": "c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7",
+      "conformance_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+      "scope": "正常龍騎兵百科，原版旗標與原alpha保留；世界移動、戰鬥及動畫未驗。"
     }
   ],
   "limitations": [
@@ -248,7 +281,8 @@
     "R68 refreshes the verified Traditional Chinese colony image with paper and wood textures. The R67 world, R66 menu and R64 settings images retain their exact prior PNGs and per-image provenance.",
     "R72 adds one actual Traditional Chinese Galleon pedia capture from the five-ship scoped conformance; all five prior PNGs and their per-image provenance remain unchanged.",
     "R73 adds one actual Traditional Chinese Wagon Train pedia capture from scoped three-vehicle conformance; all six prior PNGs and per-image provenance remain unchanged.",
-    "R74 adds one actual Traditional Chinese Colonists pedia capture covering 22 new colonist frames and three inherited images. World movement, combat and animation remain unverified; all seven prior PNGs and per-image provenance remain unchanged."
+    "R74 adds one actual Traditional Chinese Colonists pedia capture covering 22 new colonist frames and three inherited images. World movement, combat and animation remain unverified; all seven prior PNGs and per-image provenance remain unchanged.",
+    "R75新增正常龍騎兵百科實拍，對應19幀／14頁的限定驗收；既有八張原PNG與逐圖來源保持。世界移動、戰鬥、其他圖像、動畫及全量HD尚未完成。"
   ],
   "previous_build": {
     "kind": "README actual development screenshots",
@@ -261,9 +295,9 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "Colonists pedia uses R74/38ee34f with 103 assets. All seven prior captures retain exact PNGs and individual code commits, binary hashes and asset totals.",
-  "graphics_manifest_sha256": "963b67ab9fdbdf02577a063dca488a525f7491cbf9d769c3f9c664117adcb758",
-  "conformance_sha256": "70349035b3ca433349d4fe3a6fc8219acef55e1231eadb714443f94500adb6f9",
+  "provenance_scope": "龍騎兵百科採R75／8df4de6與122張素材。既有八張圖保留原PNG、個別程式commit、二進位指紋及當批素材數；實拍R1與驗收R3的正式程式及二進位相同。",
+  "graphics_manifest_sha256": "c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7",
+  "conformance_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -305,14 +339,14 @@
     "formal_hd_assets": 66
   },
   "previous_development_capture": {
-    "code_commit": "6bccc358be15626a98b147742c95ed284ab4ff49",
-    "binary_sha256": "fa4307f1388e3bfd953359b501a0513ea0a62c2ba47214156895fb22a7f4f11f",
-    "formal_binary_sha256": "fa4307f1388e3bfd953359b501a0513ea0a62c2ba47214156895fb22a7f4f11f",
-    "source_build_sha256": "acadd78b6a3f35445b9b4be3ddcf9e10665a1c3bfbc09fea87b1999696e6df74",
-    "formal_hd_assets": 81,
-    "graphics_manifest_sha256": "336653b647cd381931be990409b71bd0abcfdbb6ebf3d3db0054c6d7ee6b70c8",
-    "conformance_sha256": "ba17a1b0aadbdcb5cb5d535685df0498630e6fdbd969cfbed183afd736844fee"
+    "code_commit": "38ee34f3c13504cf3d689fdbe5e6da4df3570d25",
+    "binary_sha256": "7a9470f550b7160ff5ee83dcc83d3fc75ffcea5884d578cc58592fed6684903a",
+    "formal_binary_sha256": "7a9470f550b7160ff5ee83dcc83d3fc75ffcea5884d578cc58592fed6684903a",
+    "source_build_sha256": "d896465ddcbc60fa31d7ef984c99c7c8ebc61e0a4560039a4da6bf2b14bb7dbe",
+    "formal_hd_assets": 103,
+    "graphics_manifest_sha256": "963b67ab9fdbdf02577a063dca488a525f7491cbf9d769c3f9c664117adcb758",
+    "conformance_sha256": "70349035b3ca433349d4fe3a6fc8219acef55e1231eadb714443f94500adb6f9"
   },
-  "verification_build_sha256": "80a8d92df3990901c07a7ea52cac4067552d7aaee41405d963137c517b7857c3",
+  "verification_build_sha256": "297018cdf036887c2bc364968e402ef978aba241fed93b9932e0cbc44fa8ade5",
   "production_go_sources_equal_to_verified_build": true
 }
