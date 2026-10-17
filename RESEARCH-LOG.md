@@ -6447,3 +6447,51 @@ WAV及初始存檔相同，四份WAV另與實際GUI錄音相同，含正式play=
 生成原PNG及完整提示／權利見graphics/customiz-000.png與graphics/manifest.json。
 正式審查8b384068a1c490d0e6f5f95162b481cdc17ce8c247ab6101bc97a5e75007c357。
 其他圖像、動畫與全量HD未由本批外推。
+
+## 2026-10-17：R71正常單位百科來源與逐寫
+
+推論等級：confirmed，限本次23種百科條目及一次回到首列的正常操作。
+正式HD仍為73張原PNG，規格070保持DRAFT；沒有新增動畫、世界行走、戰鬥或音訊信用。
+
+輸入ICONS.SS為a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716，
+VICEROY.EXE為a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3，
+解碼收據為e0b14a6ba8a8bec5cae3fd165ea6d88de384dc4f61c1ec67ca8504c29189aa5d。
+COLONY09.SAV沿既有正常GUI種子52ae8b7bd4bea1869afb825af165a8edc50882fc176d49985d4fb3c362d5469b。
+dosgolem為隔離副本82a14b266e1b5bc904e2d0fe507daf6bea41a013，
+Go1.26.7、Python3.11.2與Pillow9.4.0；位址採實模式CS:IP及20bit線性RAM，不是IDA位址。
+
+[131候選組裝器](tools/build_hd_unit_lifecycle_probe.py)從步數0觀測0D46:000A，
+核對c828000052535057568b4702及完整來源、原始序號、尺寸、堆疊與描述子。
+全1552筆清冊有編碼別名時保存候選集合，不授予身分。
+本次80種來源全部唯一，196次完整繪製均落在描述子[200,320,0,0x2CAE]。
+三個實際寫入端0D46:0181、01B4、01D2原碼沿規格065，逐不透明點恰寫一次、返回SP增加10、
+透明底圖與周圍不變；沒有暫存轉送正向樣本。
+
+[獨立檢查器](tools/check_hd_unit_lifecycle.py)重建5048144個原始事件、來源建立與撤銷，
+35個截點的來源圖、CPU、完整RAM、可見索引、DAC及存檔均與無觀測控制和實際GUI相符。
+353筆實際輸入重播至601800000步。239次同值後畫也撤銷來源。
+80種包含既有31種，新增49種未接線來源；未命中幀不排除全量範圍。
+六反例分別破壞矩形、寫入指令、逐寫指紋、來源唯一性、截點RAM指紋及來源持有者，全部拒絕。
+
+歐洲港口R2先驗15點、41輸入、324次繪製及122252事件，只命中既有31種。
+百科探索R3在返回清單後重設選取列，後續重複火炮，不能算24種不同條目。
+R4每次以實際方向鍵重新選列，目視標題與圖示確認23種條目，第24次循環回首列。
+006／007／014／015／127依序對應Merchantman／Galleon／Privateer／Frigate／Man-o-War，
+用途由當次百科標題與完整來源確認，沒有只憑圖像外觀猜選。
+
+本機根workplace/reports/goal186-display-hd/hd-sprite-batch-r71：
+- icons-public-probe-r2/build.json：f1146a68f288fece3a1d8d187de6b82429133069d7c6e181c67483bcb0f42c48。
+- 實際輸入baseline-pedia-r4/gui.inputs.json：fecaad9eb38eb1a3d202d4c9ee701abe40be95ff8b25fc6fd11ea6ecc310dc11。
+- icons-pedia-check-r3.json：f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf。
+- unit-model-negatives-r1.json：6f8aa5a7195a4629ce24d417190d1ae30eebfdb74a63165afdbb7ce899320404。
+- 完整命令commands-r71.json：812bf057c56eae7000cbc9b95ad5dea770dda0a804a21dd2dbf8c757dd148b9f。
+
+來源索引組裝器以--unit-report及--unit-build附加80筆數值及雜湊。
+[公開來源索引](docs/hd-source-catalog.json)為0e6b04593c78a019f97414a8f4165c5369f271e8445791a41ee7e3d2eb2c005b；
+移除本批附加欄位後與R70所有既有欄位完全相同，73張生成原PNG及288份原版指紋保持。
+原始像素、逐寫色號、完整RAM、參考與候選都只留本機。
+
+五艘船的生成圖集為本機候選，原PNG與alpha保持，
+SHA-256為f7fcead6c9d0c971552de3602413e67b28815c0848c7cfdda8866112129c03dc。
+它及取樣比較只作可丟棄原型，原稿保存格式待使用者決定，沒有更動graphics清冊或正式程式。
+來源、取樣、游標／RAM還原與正常HD畫面的正式契約仍須依[規格070](docs/spec/070-hd-unit-small-images.md)審查。

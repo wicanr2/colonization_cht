@@ -28853,6 +28853,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 15,
+        "source_far": [
+          "560B:0005"
+        ],
+        "record_far": [
+          "4F22:63B1"
+        ],
+        "sorted_local_offset_value_sha256": "e7237a28a406dcd2ca8eecd2c4533b3ce77109365e4cbb2c89eb65677feaace9",
+        "first_entry_step": 44613754,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -28878,7 +28893,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5617:0006"
+        ],
+        "record_far": [
+          "4F22:63BD"
+        ],
+        "sorted_local_offset_value_sha256": "44efa85835a73b90633a014cd3049188acf3baeac9fedda5d537ce00c4be1ca7",
+        "first_entry_step": 278930321,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 834,
@@ -28903,7 +28933,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5623:0007"
+        ],
+        "record_far": [
+          "4F22:63C9"
+        ],
+        "sorted_local_offset_value_sha256": "c8c67dd14525378d852e8d2c6ad548311c9263cfcad932c99c36b2a5afafbaad",
+        "first_entry_step": 235363376,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 835,
@@ -28928,7 +28973,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5630:0001"
+        ],
+        "record_far": [
+          "4F22:63D5"
+        ],
+        "sorted_local_offset_value_sha256": "a31787707145198efe15676fcbfd9be368ec38a2bed47668a556e047b993b6d8",
+        "first_entry_step": 554587498,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 836,
@@ -28953,7 +29013,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "563A:0006"
+        ],
+        "record_far": [
+          "4F22:63E1"
+        ],
+        "sorted_local_offset_value_sha256": "b0bf3ecfacab9b795d5149e2e69df005da42cf35c399b6be3ee027735c3a180d",
+        "first_entry_step": 92111116,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 837,
@@ -29078,7 +29153,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5675:0001"
+        ],
+        "record_far": [
+          "4F22:641D"
+        ],
+        "sorted_local_offset_value_sha256": "0e908bb1d2288b022846c4f5c30fbc42ceaf868873ab582161de9d066a77cbc3",
+        "first_entry_step": 403346371,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 842,
@@ -29103,7 +29193,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5681:0000"
+        ],
+        "record_far": [
+          "4F22:6429"
+        ],
+        "sorted_local_offset_value_sha256": "e7e0bc3d95387a8b2ac05cb1eb0123ad52ea090ed25a8ee9537752abba5b7471",
+        "first_entry_step": 216148752,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 843,
@@ -29128,7 +29233,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "568C:000E"
+        ],
+        "record_far": [
+          "4F22:6435"
+        ],
+        "sorted_local_offset_value_sha256": "db655afb504c1c1acb9b0664c9fa45376cfc95e0a1fccfdf422c419e15a295b7",
+        "first_entry_step": 522054207,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 844,
@@ -29471,6 +29591,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 19,
+        "source_far": [
+          "56A6:0006"
+        ],
+        "record_far": [
+          "4F22:647D"
+        ],
+        "sorted_local_offset_value_sha256": "8060465c43a91649d32466a54beb4638d7e8c575a16e9169e96272e13b0860a5",
+        "first_entry_step": 53632546,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -29545,6 +29680,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "56AC:0005"
+        ],
+        "record_far": [
+          "4F22:6489"
+        ],
+        "sorted_local_offset_value_sha256": "b184cbbcffef180f2ffb2772294f5d00d8df836136f7bac381139e703777f4eb",
+        "first_entry_step": 53724999,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -29619,6 +29769,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "56B2:0007"
+        ],
+        "record_far": [
+          "4F22:6495"
+        ],
+        "sorted_local_offset_value_sha256": "8a54b3ff59527cf976d7dc1bb3f829dad74648327c4ae4b10ea58041903e0ac4",
+        "first_entry_step": 53729250,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -29693,6 +29858,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "56B8:000E"
+        ],
+        "record_far": [
+          "4F22:64A1"
+        ],
+        "sorted_local_offset_value_sha256": "34bda00a14d2563eb81294931f8fdaa36a368b4907841a04535861dbcc631887",
+        "first_entry_step": 53733587,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -29983,6 +30163,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 28,
+        "source_far": [
+          "56BF:0004"
+        ],
+        "record_far": [
+          "4F22:64AD"
+        ],
+        "sorted_local_offset_value_sha256": "873f6fd9e256edb772c058b54f5e11cf0b8236a89de28ea87210c5c2447479ef",
+        "first_entry_step": 53608831,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -30057,6 +30252,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "56C6:000A"
+        ],
+        "record_far": [
+          "4F22:64B9"
+        ],
+        "sorted_local_offset_value_sha256": "9dbf23ccfe1e4d316edffcb5f6390e533f6cb75766bbd6c3786836cfcd6bbe09",
+        "first_entry_step": 53742951,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -30131,6 +30341,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "56C9:000E"
+        ],
+        "record_far": [
+          "4F22:64C5"
+        ],
+        "sorted_local_offset_value_sha256": "a1b31ee85a28f0216abc514d1f3a238d2a77e4412ac72242a09c20442a152536",
+        "first_entry_step": 53746525,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -30205,6 +30430,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "56CF:000F"
+        ],
+        "record_far": [
+          "4F22:64D1"
+        ],
+        "sorted_local_offset_value_sha256": "2a0214f4ab0e38b2eccf0b6324445b2c2240fc2f2254cf7cdf5f6806624ae87a",
+        "first_entry_step": 53750805,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -30279,6 +30519,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "56D3:000E"
+        ],
+        "record_far": [
+          "4F22:64DD"
+        ],
+        "sorted_local_offset_value_sha256": "2c8c8e3bfee11e6e3cb0479a419f80fc02c04844fc78182b5a97d85209137592",
+        "first_entry_step": 53754498,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -30353,6 +30608,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "56DD:0001"
+        ],
+        "record_far": [
+          "4F22:64E9"
+        ],
+        "sorted_local_offset_value_sha256": "72426336c347ebb3c424892e77edd7816ab30c829317fbf3835423daaee4ec44",
+        "first_entry_step": 53759769,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -30427,6 +30697,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "56E2:000F"
+        ],
+        "record_far": [
+          "4F22:64F5"
+        ],
+        "sorted_local_offset_value_sha256": "2d6663a210b17b07f431bc8f4cb93af141fce3be5e503d45f2013535d514b734",
+        "first_entry_step": 53763915,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -30501,6 +30786,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "56E9:0006"
+        ],
+        "record_far": [
+          "4F22:6501"
+        ],
+        "sorted_local_offset_value_sha256": "a072b7ee98ff1907c3da4d786109f30c276f4acccb484fd5cc220a0b497d0154",
+        "first_entry_step": 53768209,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -30575,6 +30875,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "56EF:0007"
+        ],
+        "record_far": [
+          "4F22:650D"
+        ],
+        "sorted_local_offset_value_sha256": "11c87dfa844fbc3368621b7529133a9e911f754e9b2e8b5eebb79e50ffbae7a7",
+        "first_entry_step": 53772433,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -30649,6 +30964,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "56F6:0003"
+        ],
+        "record_far": [
+          "4F22:6519"
+        ],
+        "sorted_local_offset_value_sha256": "3e263823179b1dabd2ae432f68468c46541e9cd56fbc654d82b290a06f173600",
+        "first_entry_step": 53776883,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -30747,6 +31077,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 7,
+        "source_far": [
+          "56FB:0005"
+        ],
+        "record_far": [
+          "4F22:6525"
+        ],
+        "sorted_local_offset_value_sha256": "a931d7b927d2e0ea87a35d942dc98a816a07fb36a58832372953f03da4cd960e",
+        "first_entry_step": 44598817,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -30821,6 +31166,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5700:0001"
+        ],
+        "record_far": [
+          "4F22:6531"
+        ],
+        "sorted_local_offset_value_sha256": "3913978deb02749df32517806ae9de3efde18579bf28ac70e09a6c9d24b3dbfc",
+        "first_entry_step": 53786390,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -30907,6 +31267,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 6,
+        "source_far": [
+          "5705:0005"
+        ],
+        "record_far": [
+          "4F22:653D"
+        ],
+        "sorted_local_offset_value_sha256": "ec07b8f7c9bf3b3ccf0ba9c3fb78b4a7bacef44ddfe402a5c1deeada1340d6f1",
+        "first_entry_step": 44605870,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -31104,6 +31479,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 13,
+        "source_far": [
+          "571E:0003"
+        ],
+        "record_far": [
+          "4F22:656D"
+        ],
+        "sorted_local_offset_value_sha256": "e0dc59410cc3ffb45ef92e93ffbc31fc827419a0c0aed67c450f97072fe105c2",
+        "first_entry_step": 44603089,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -31440,6 +31830,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 6,
+        "source_far": [
+          "575F:0000"
+        ],
+        "record_far": [
+          "4F22:65F1"
+        ],
+        "sorted_local_offset_value_sha256": "22352d5acb59d6ffbd90fd92466b4ae54c005cd904709cb65cb6a51d583682ab",
+        "first_entry_step": 44600833,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -31564,6 +31969,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "576E:0004"
+        ],
+        "record_far": [
+          "4F22:6615"
+        ],
+        "sorted_local_offset_value_sha256": "adb2167aed9f21df8bf7a2b6f9f7827d44ab3f70629ab0b07f91125a20a23299",
+        "first_entry_step": 53693164,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -31614,7 +32034,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5779:000F"
+        ],
+        "record_far": [
+          "4F22:662D"
+        ],
+        "sorted_local_offset_value_sha256": "a53cee94d328c3c0947270f9973bb0382c74779bc34a09076701eb52fd02d4b5",
+        "first_entry_step": 146076121,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 886,
@@ -31700,6 +32135,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 5,
+        "source_far": [
+          "5780:0006"
+        ],
+        "record_far": [
+          "4F22:6639"
+        ],
+        "sorted_local_offset_value_sha256": "c582b30440a7624b8dc3b7a905dfcf63b3fefe5ec3133a28050aae6ff161317b",
+        "first_entry_step": 53675658,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -31725,7 +32175,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5786:000C"
+        ],
+        "record_far": [
+          "4F22:6645"
+        ],
+        "sorted_local_offset_value_sha256": "d56ff32fd3b948d4026b41dbe2ce44ce91e72b02aa60bfd31d6eb07f52c55dac",
+        "first_entry_step": 146087908,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 888,
@@ -31916,6 +32381,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 16,
+        "source_far": [
+          "5793:000A"
+        ],
+        "record_far": [
+          "4F22:665D"
+        ],
+        "sorted_local_offset_value_sha256": "7c514405c07e722ca9c012144fa0cad78e10e0a7c0160f151afad428d47b4053",
+        "first_entry_step": 53695416,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -31991,7 +32471,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "57A7:0005"
+        ],
+        "record_far": [
+          "4F22:6681"
+        ],
+        "sorted_local_offset_value_sha256": "6824cd739c3da0b6571fa861ac1cb8736f4f92b63bb614a8b1799e28dc0d781c",
+        "first_entry_step": 92116014,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 893,
@@ -32016,7 +32511,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "57AB:0008"
+        ],
+        "record_far": [
+          "4F22:668D"
+        ],
+        "sorted_local_offset_value_sha256": "17906ee13d8a5cf2391842230d21b78bde5bbaa9b7d8aa1c0f44fddc0965ec90",
+        "first_entry_step": 145965660,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 894,
@@ -32090,6 +32600,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "57B3:0000"
+        ],
+        "record_far": [
+          "4F22:6699"
+        ],
+        "sorted_local_offset_value_sha256": "3932f2356bd8d857d089240e09d6cd865c0190c37c5aca48618e50eba1e2e129",
+        "first_entry_step": 53799302,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -32164,6 +32689,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "57BD:000E"
+        ],
+        "record_far": [
+          "4F22:66A5"
+        ],
+        "sorted_local_offset_value_sha256": "76a47c5fd44ccb445f3a6e8a558c28e5c79bb08d289b4eaee3ffc36531a405bc",
+        "first_entry_step": 53804008,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -32238,6 +32778,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "57C6:000C"
+        ],
+        "record_far": [
+          "4F22:66B1"
+        ],
+        "sorted_local_offset_value_sha256": "1207ce8ee462cf5b49257afabdcc8410dfd9c20f64336f2122c1017eeb7f183f",
+        "first_entry_step": 53808508,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -32338,7 +32893,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "57D0:000C"
+        ],
+        "record_far": [
+          "4F22:66E1"
+        ],
+        "sorted_local_offset_value_sha256": "c7980d916635aa601778ecd8824adb1e840321629483cc42e02c51deda902a79",
+        "first_entry_step": 376520121,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 901,
@@ -32363,7 +32933,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "57D7:0004"
+        ],
+        "record_far": [
+          "4F22:66ED"
+        ],
+        "sorted_local_offset_value_sha256": "f3f329a67adbd08bb87266a6e815313ad731abcc4298ffacc110a78e07422758",
+        "first_entry_step": 490474561,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 902,
@@ -32388,7 +32973,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "57DE:000E"
+        ],
+        "record_far": [
+          "4F22:66F9"
+        ],
+        "sorted_local_offset_value_sha256": "53c33443de71260a6cc2cb9c4a66cb7be57a13614de0ff789f7b852a07f28d4d",
+        "first_entry_step": 459465416,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 903,
@@ -32413,7 +33013,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "57EA:0000"
+        ],
+        "record_far": [
+          "4F22:6705"
+        ],
+        "sorted_local_offset_value_sha256": "b195d762fc715836807b710443c6e7c66864388547dcdb4e8dd9c608b335144c",
+        "first_entry_step": 196745217,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 904,
@@ -32438,7 +33053,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "57F6:0004"
+        ],
+        "record_far": [
+          "4F22:6711"
+        ],
+        "sorted_local_offset_value_sha256": "c364a59d89636d3f3d3f4b63bb222f682aa510dc422fbd4efc49db6ac29867d9",
+        "first_entry_step": 301567363,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 905,
@@ -32538,7 +33168,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "57FD:0001"
+        ],
+        "record_far": [
+          "4F22:6741"
+        ],
+        "sorted_local_offset_value_sha256": "9128e4991947c379fe5052efc79214d72b5f558a03e4fd10e0b5bc26b04ccc83",
+        "first_entry_step": 145971857,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 909,
@@ -32563,7 +33208,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5804:000A"
+        ],
+        "record_far": [
+          "4F22:674D"
+        ],
+        "sorted_local_offset_value_sha256": "1bca152589a83cc3cabb14ab95e972b0be77e25cc5f388f172e2f0ad4d78a75d",
+        "first_entry_step": 145977683,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 910,
@@ -32588,7 +33248,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "580B:0001"
+        ],
+        "record_far": [
+          "4F22:6759"
+        ],
+        "sorted_local_offset_value_sha256": "2b4152a94e27697b10e2bea8862be35fbf3d975209b83e5926c84948a012b7ee",
+        "first_entry_step": 145983182,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 911,
@@ -32613,7 +33288,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5811:0008"
+        ],
+        "record_far": [
+          "4F22:6765"
+        ],
+        "sorted_local_offset_value_sha256": "230e10313fb8295e22a1dee3ddcf7fe5f55dd8df912ac0ff6f0ee1cf1bc0d794",
+        "first_entry_step": 145988695,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 912,
@@ -32638,7 +33328,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5817:000F"
+        ],
+        "record_far": [
+          "4F22:6771"
+        ],
+        "sorted_local_offset_value_sha256": "3cb0611901681638638528edf8b1e62f5a7970c147d614b7949c82729b9d8e90",
+        "first_entry_step": 145994574,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 913,
@@ -32663,7 +33368,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "581F:000A"
+        ],
+        "record_far": [
+          "4F22:677D"
+        ],
+        "sorted_local_offset_value_sha256": "3a4e654f7708739ec6b572c4fc4a5b911345a4b8cbb8e5e4fe8b45ca56c59f91",
+        "first_entry_step": 146000728,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 914,
@@ -32688,7 +33408,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5826:000E"
+        ],
+        "record_far": [
+          "4F22:6789"
+        ],
+        "sorted_local_offset_value_sha256": "a7db80ea9fae9d6ebe9f93157448d027ee5cf0a869ccb8e8471ffdea2e706fea",
+        "first_entry_step": 146006710,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 915,
@@ -32713,7 +33448,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "582D:000E"
+        ],
+        "record_far": [
+          "4F22:6795"
+        ],
+        "sorted_local_offset_value_sha256": "41c58ce8d69b9e48c661ef4b6ad4e99675b5fa6ba6a0160c551a7ff6523cf656",
+        "first_entry_step": 146012483,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 916,
@@ -32738,7 +33488,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5834:000A"
+        ],
+        "record_far": [
+          "4F22:67A1"
+        ],
+        "sorted_local_offset_value_sha256": "9703923f7d1bd611b64b020100c7c6ee81508e8059a35a6bb20b725e1d615e91",
+        "first_entry_step": 146018529,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 917,
@@ -32763,7 +33528,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "583C:000A"
+        ],
+        "record_far": [
+          "4F22:67AD"
+        ],
+        "sorted_local_offset_value_sha256": "136472614e1cd54119ac257b93be31daf249ba653332b27fbcbe44d3cd0b3d0b",
+        "first_entry_step": 146024360,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 918,
@@ -32788,7 +33568,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5842:000A"
+        ],
+        "record_far": [
+          "4F22:67B9"
+        ],
+        "sorted_local_offset_value_sha256": "f89c24949851a745f5a0214344baf143e15a280d01d3c8f1f624c64de499bbb0",
+        "first_entry_step": 146029623,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 919,
@@ -32813,7 +33608,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5848:000A"
+        ],
+        "record_far": [
+          "4F22:67C5"
+        ],
+        "sorted_local_offset_value_sha256": "fd5207c83a7e63f1ffeae8b1e561276df8916cb0c19fe58b5809d2314bc04e9f",
+        "first_entry_step": 146034886,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 920,
@@ -32838,7 +33648,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "584E:000A"
+        ],
+        "record_far": [
+          "4F22:67D1"
+        ],
+        "sorted_local_offset_value_sha256": "65b4c943ec696d9341da814766248a5002667751ab07ebb7ade07d7f0d7de0d1",
+        "first_entry_step": 146040625,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 921,
@@ -32924,6 +33749,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 4,
+        "source_far": [
+          "5856:0004"
+        ],
+        "record_far": [
+          "4F22:67DD"
+        ],
+        "sorted_local_offset_value_sha256": "adc7b5afcaf85a2d820b270c1f805c7e5ad7417cc200b249eab0c862e6f3dca2",
+        "first_entry_step": 53639328,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -32949,7 +33789,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "585D:000E"
+        ],
+        "record_far": [
+          "4F22:67E9"
+        ],
+        "sorted_local_offset_value_sha256": "01b7871fa56a45de351f7fc993ab246a3cfec238eebbcbbd1b4973ec3555105a",
+        "first_entry_step": 146053154,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 923,
@@ -32974,7 +33829,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5864:000E"
+        ],
+        "record_far": [
+          "4F22:67F5"
+        ],
+        "sorted_local_offset_value_sha256": "0dc550a85c5a8da038b993090fd5815b172f821d081ee6a186fb79313a34a644",
+        "first_entry_step": 146059285,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 924,
@@ -32999,7 +33869,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "586C:0006"
+        ],
+        "record_far": [
+          "4F22:6801"
+        ],
+        "sorted_local_offset_value_sha256": "ead225167ef7c330ee3f04cfb1396ae2fb387041f00460dc558fbc0ad0361716",
+        "first_entry_step": 146065213,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 925,
@@ -33024,7 +33909,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5872:000C"
+        ],
+        "record_far": [
+          "4F22:680D"
+        ],
+        "sorted_local_offset_value_sha256": "196f8c9353be71fb2840d97f02c923e630ff3c27917f8c8babf0e4229203a59b",
+        "first_entry_step": 146070654,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 926,
@@ -33135,6 +34035,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 4,
+        "source_far": [
+          "587E:0008"
+        ],
+        "record_far": [
+          "4F22:6825"
+        ],
+        "sorted_local_offset_value_sha256": "8cbf8e6a6166f5adfc6fab31349dc9fd7cb6e9b768acd6a89477a9763bd90c0a",
+        "first_entry_step": 53626279,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -33160,7 +34075,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5884:000D"
+        ],
+        "record_far": [
+          "4F22:6831"
+        ],
+        "sorted_local_offset_value_sha256": "e9606fd87bc489538e26ef7ed6b05d1fc0bf8bcfa2ffaa3cf960f7ea9115cd11",
+        "first_entry_step": 376525643,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 929,
@@ -33185,7 +34115,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "588B:0005"
+        ],
+        "record_far": [
+          "4F22:683D"
+        ],
+        "sorted_local_offset_value_sha256": "d4007ff1fbf8a06ca121dc978ad0a0e318a2ff1ae9224f67b7ce091c3eaa57e2",
+        "first_entry_step": 490480724,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 930,
@@ -33210,7 +34155,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5892:000F"
+        ],
+        "record_far": [
+          "4F22:6849"
+        ],
+        "sorted_local_offset_value_sha256": "cc23a9161cc922b84d74b577472322f05ea0c878614785c9de2286fb6196d326",
+        "first_entry_step": 459473734,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 931,
@@ -33235,7 +34195,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "589E:0001"
+        ],
+        "record_far": [
+          "4F22:6855"
+        ],
+        "sorted_local_offset_value_sha256": "91a113ca50a935b481ad2b6902bbe6c75c515d11800515bf313971aa863fb7c3",
+        "first_entry_step": 196754123,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 932,
@@ -33260,7 +34235,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "58AA:0005"
+        ],
+        "record_far": [
+          "4F22:6861"
+        ],
+        "sorted_local_offset_value_sha256": "41a4e848421a452fb8fa86187bb0f405eb05da949404f378d202173dfa2b91b4",
+        "first_entry_step": 301572881,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 933,
@@ -33285,7 +34275,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "58B0:000D"
+        ],
+        "record_far": [
+          "4F22:686D"
+        ],
+        "sorted_local_offset_value_sha256": "e8ed75c9db70a26eeedc9fdd56968ba64ad89bc121eb1c2cc0a5cdb30f331657",
+        "first_entry_step": 145954481,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 934,
@@ -33310,7 +34315,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "58B6:000D"
+        ],
+        "record_far": [
+          "4F22:6879"
+        ],
+        "sorted_local_offset_value_sha256": "ec80f48d9d1b78383c699d3f79f7f740cdf2d3f9c40e9b9d88f44faab67fd6b0",
+        "first_entry_step": 145959850,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 935,
@@ -33360,7 +34380,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "58C4:000A"
+        ],
+        "record_far": [
+          "4F22:6891"
+        ],
+        "sorted_local_offset_value_sha256": "9463327c41beb9ecb8478e20bd9d7f1f12c6435d65deede9b4b00b15385954cc",
+        "first_entry_step": 104096004,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 937,
@@ -33385,7 +34420,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 2,
+        "source_far": [
+          "58CC:0006"
+        ],
+        "record_far": [
+          "4F22:689D"
+        ],
+        "sorted_local_offset_value_sha256": "f9b426a8c5df52a66ecd883f85b6c8b9947139ea89ad3d2a16c8dc1a2fd79b8f",
+        "first_entry_step": 81086975,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 938,
@@ -33410,7 +34460,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "58D4:0008"
+        ],
+        "record_far": [
+          "4F22:68A9"
+        ],
+        "sorted_local_offset_value_sha256": "e9e2f13047dbeb4646c1db3ad69aeb62bec60a9e8ab5dbcfcc502cc42a406a95",
+        "first_entry_step": 325538956,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 939,
@@ -33435,7 +34500,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "58DF:0009"
+        ],
+        "record_far": [
+          "4F22:68B5"
+        ],
+        "sorted_local_offset_value_sha256": "b097c2f9958f565ce07359d8b3b298cd70907950f4cf9f53a0ce48233094834f",
+        "first_entry_step": 350270959,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 940,
@@ -33770,6 +34850,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 4,
+        "source_far": [
+          "5940:0006"
+        ],
+        "record_far": [
+          "4F22:692D"
+        ],
+        "sorted_local_offset_value_sha256": "a7ea9be3ee0969ec902b00eccc7da7f7435e7e6e67637cef95438433bab28e76",
+        "first_entry_step": 53841351,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -33844,6 +34939,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5947:000D"
+        ],
+        "record_far": [
+          "4F22:6939"
+        ],
+        "sorted_local_offset_value_sha256": "77cd510b6a9d0fd344c7097f4ca8fe6f4cd6d66839a76e78f425fbdb5b4ed21f",
+        "first_entry_step": 53704925,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -33918,6 +35028,21 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "594F:0000"
+        ],
+        "record_far": [
+          "4F22:6945"
+        ],
+        "sorted_local_offset_value_sha256": "664e6fddcb19c58f7f44154d821f3754814d556ffdd1e7ba800e204e45e314d2",
+        "first_entry_step": 53717121,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
       }
     },
     {
@@ -33943,7 +35068,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5956:0005"
+        ],
+        "record_far": [
+          "4F22:6951"
+        ],
+        "sorted_local_offset_value_sha256": "997e5d59ec76bafdc75af5144962ced0ede9b9803c6a5aed015c569bfe0ff4f6",
+        "first_entry_step": 430548496,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 953,
@@ -33968,7 +35108,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "595E:0004"
+        ],
+        "record_far": [
+          "4F22:695D"
+        ],
+        "sorted_local_offset_value_sha256": "20c99158b4f9c47a8ba1ab3657618851146037fd3fe6cad3739efc511583bbce",
+        "first_entry_step": 130921490,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 954,
@@ -33993,7 +35148,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "596A:000D"
+        ],
+        "record_far": [
+          "4F22:6969"
+        ],
+        "sorted_local_offset_value_sha256": "1f815560ce528714e9f1ccedfa527f5d645dd1059a613c89686bec6dbbb208a5",
+        "first_entry_step": 257052676,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 955,
@@ -34018,7 +35188,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "5977:0009"
+        ],
+        "record_far": [
+          "4F22:6975"
+        ],
+        "sorted_local_offset_value_sha256": "6ca2778652456d84f1901c27c17bb8eab1dae124fc94a38480f1c798e4831b0c",
+        "first_entry_step": 162121094,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 956,
@@ -34043,7 +35228,22 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [],
+      "unit_pedia_native_sample": {
+        "state": "DRAFT",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+        "calls": 1,
+        "source_far": [
+          "597F:0009"
+        ],
+        "record_far": [
+          "4F22:6981"
+        ],
+        "sorted_local_offset_value_sha256": "3e73552ec59bb69ecb7fa63f1e439ece8dd5030441439797feee4de800d48c90",
+        "first_entry_step": 178863222,
+        "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      }
     },
     {
       "research_id": 957,
@@ -56906,5 +58106,17 @@
     ],
     "formal_assets": 73,
     "claim": "one twelve-card custom-world background only; other images, program-drawn graphics, animation and full HD remain incomplete"
+  },
+  "unit_pedia_native_evidence": {
+    "report_sha256": "f47871e4eb52f5ddd74ff2fc977a53f86d8b5df164b3c9e22e7db84b9aba8eaf",
+    "build_sha256": "f1146a68f288fece3a1d8d187de6b82429133069d7c6e181c67483bcb0f42c48",
+    "sources": 80,
+    "source_calls": 196,
+    "checkpoints": 35,
+    "dos_inputs": 353,
+    "raw_events": 5048144,
+    "end_step": 601800000,
+    "production_connected": false,
+    "claim": "23 distinct normal unit-pedia entries plus one wrap to first; unknown writes revoke, including 239 same-value losses; no stage transfer credit"
   }
 }

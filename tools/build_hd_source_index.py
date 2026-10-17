@@ -28,6 +28,8 @@ parser.add_argument('--new-game-ready-report',type=Path,help='規格069新遊戲
 parser.add_argument('--new-game-conformed-report',type=Path,help='規格069新遊戲正式驗收及70種素材繼承審查')
 parser.add_argument('--custom-world-ready-report',type=Path,help='規格069自訂地圖READY審查')
 parser.add_argument('--custom-world-conformed-report',type=Path,help='規格069自訂地圖正式驗收及72種素材繼承審查')
+parser.add_argument('--unit-report',type=Path,help='規格070正常單位圖鑑的獨立逐寫檢查收據，不授予HD信用')
+parser.add_argument('--unit-build',type=Path,help='與unit-report一起使用的131候選來源綁定')
 a=parser.parse_args();out=a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.parent.stat().st_uid==os.getuid() and not out.exists()
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -333,6 +335,28 @@ if custom_review:
  f['runtime_source_evidence']='confirmed complete PIK decode, full palette and 81 native glyph/border geometry pairs with exact source equality outside protected foreground; no VGA ownership'
  f['source_contract_reference']={'state':'CONFORMED','spec':'docs/spec/069-hd-menu-background-and-textures.md','formal_connected':True,'review_sha256':sha(a.custom_world_conformed_report),'scope':'twelve custom-world cards, 81 selection geometries, original glyphs and selection outlines preserved; other graphics and animation unverified'}
  public['custom_world_conformance']={'ready_review_sha256':sha(a.custom_world_ready_report),'review_sha256':sha(a.custom_world_conformed_report),'sources':[311],'formal_assets':73,'claim':'one twelve-card custom-world background only; other images, program-drawn graphics, animation and full HD remain incomplete'}
+if a.unit_report or a.unit_build:
+ assert a.unit_report and a.unit_build
+ unit=json.loads(a.unit_report.read_bytes());unit_build=json.loads(a.unit_build.read_bytes())
+ assert unit['result']=='PASS_UNIT_SOURCE_WRITES_NATIVE_GUI_POINTS' and not unit['production_connected']
+ assert unit['candidate_sources']==unit_build['source_count']==131 and unit['hit_sources']==80
+ assert len(unit['checkpoints'])==35 and unit['dos_inputs']==353 and unit['source_calls']==196 and unit['raw_events']==5048144
+ assert unit['end']['steps']==601800000 and unit['verified_transferred_pixels']==0
+ assert unit_build['source_receipt_sha256']==sha(a.catalog)
+ assert sha(a.unit_build) in unit['receipts_sha256'].values()
+ assert unit['checker_sha256']==sha(Path(__file__).parent/'check_hd_unit_lifecycle.py')
+ rows=unit['source_observations'];assert len(rows)==unit['hit_sources'] and sum(r['calls'] for r in rows)==unit['source_calls']
+ for row in rows:
+  f=next(f for f in frames if f['research_id']==row['research_id'])
+  assert f['file']=='ICONS.SS' and f['ordinal']==row['ordinal']
+  assert all(f[k]==row[k] for k in ['encoded_sha256','indexed_sha256','size','opaque_pixels'])
+  assert row['descriptors']==[[200,320,0,0x2cae]] and len(row['write_sha256'])==1
+  f['unit_pedia_native_sample']={'state':'DRAFT','spec':'docs/spec/070-hd-unit-small-images.md','report_sha256':sha(a.unit_report),
+    'calls':row['calls'],'source_far':row['source_far'],'record_far':row['record_far'],'sorted_local_offset_value_sha256':row['write_sha256'][0],
+    'first_entry_step':row['first_entry_step'],'claim':'confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit'}
+ public['unit_pedia_native_evidence']={'report_sha256':sha(a.unit_report),'build_sha256':sha(a.unit_build),'sources':80,
+   'source_calls':196,'checkpoints':35,'dos_inputs':353,'raw_events':5048144,'end_step':601800000,'production_connected':False,
+   'claim':'23 distinct normal unit-pedia entries plus one wrap to first; unknown writes revoke, including 239 same-value losses; no stage transfer credit'}
 public['coverage_limits']['additional_ready_source_contracts']=sum(f.get('source_contract_reference',{}).get('state')=='READY' and not f.get('source_contract_reference',{}).get('formal_connected') for f in frames)
 out.write_text(json.dumps(public,ensure_ascii=False,indent=2)+'\n')
 print('PASS_METADATA_ONLY_FULL_SOURCE_INDEX',len(frames),len(bindings),sha(out),flush=True)
