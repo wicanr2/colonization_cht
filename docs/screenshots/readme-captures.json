@@ -1,12 +1,12 @@
 {
   "kind": "README actual development screenshots",
-  "date": "2026-10-17",
-  "code_commit": "8df4de67b2f592733f163bf4093ea51b4ee5be73",
-  "binary_sha256": "1f0f2418af3c5164e74c8d037161f27be28e11e00d3bdf1fd3a533ddf62a222c",
-  "formal_binary_sha256": "1f0f2418af3c5164e74c8d037161f27be28e11e00d3bdf1fd3a533ddf62a222c",
-  "source_build_sha256": "3bf4e894c1f0759a4c9389eefccd3c8ff780acecdcbd99f208534dd09a60c54c",
+  "date": "2026-10-18",
+  "code_commit": "dbfc95fc2b98654f9f4cf3d0abac946730bfbfce",
+  "binary_sha256": "d4b7c94d34311c3af7f9ebc19b1bea8a7c475ce278a3e96fcb212289d16f0904",
+  "formal_binary_sha256": "d4b7c94d34311c3af7f9ebc19b1bea8a7c475ce278a3e96fcb212289d16f0904",
+  "source_build_sha256": "95b0e81a52a949ead8f921335052a3b6996ab8a0cbfaaca6c2627bd20bcb52e1",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 122,
+  "formal_hd_assets": 124,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -269,6 +269,62 @@
       "graphics_manifest_sha256": "c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7",
       "conformance_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
       "scope": "正常龍騎兵百科，原版旗標與原alpha保留；世界移動、戰鬥及動畫未驗。"
+    },
+    {
+      "file": "hd-colony-harbor-zh.png",
+      "sha256": "3ca48e1df4cc2eac64d5c4f2256531d7330b5c12c76fa20271f11fc1288454d2",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "colony-harbor",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 54400000,
+      "binary_sha256": "d4b7c94d34311c3af7f9ebc19b1bea8a7c475ce278a3e96fcb212289d16f0904",
+      "formal_binary_sha256": "d4b7c94d34311c3af7f9ebc19b1bea8a7c475ce278a3e96fcb212289d16f0904",
+      "code_commit": "dbfc95fc2b98654f9f4cf3d0abac946730bfbfce",
+      "formal_hd_assets": 124,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-scene-backgrounds-r76/r76-scenes-formal-gui-r4/gui.display-030.png",
+      "source_gui_check_sha256": "6489bbbd4744214f9510550ff02b579fe5da15efed87ad289ec8f331b636a975",
+      "independent_pixels_sha256": "bc448a83ee5f91722a7470e354fdf0ee0700692655bc380b14fd475d36bc0018",
+      "same_state_replay_sha256": "0bfd41d944dcc153fa4f39f5912de5a9dfc27ce7b89070470b07fc9e6c8ba448",
+      "source_kind": "actual uninstrumented formal game presentation from standard display diagnostics; byte-for-byte matched to the real X11 game area",
+      "capture_pixels_unchanged": true,
+      "original_source_file": "COLONY.PIK",
+      "source_research_id": 308,
+      "owned_background_cells": 18080,
+      "graphics_manifest_sha256": "1dba5fd9a5bbf5a8c76861e56709525305857a9a77ae9c988b564119f636333c",
+      "conformance_sha256": "1cac135ef4f39a48aeefbbd56ae2e166a79d069ad090768cb6fd16607e8f9e6e",
+      "scope": "正常殖民地部分背景與歐洲港口的限定驗收；原版前景、文字、互動框與標準游標保持。其他場景、世界移動、戰鬥與動畫待驗。"
+    },
+    {
+      "file": "hd-europe-port-zh.png",
+      "sha256": "ee20c8335dab219eedb9cf2440aa655d0a1526ccda2f335df8416c22a973aa7e",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "europe-port",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 81400000,
+      "binary_sha256": "d4b7c94d34311c3af7f9ebc19b1bea8a7c475ce278a3e96fcb212289d16f0904",
+      "formal_binary_sha256": "d4b7c94d34311c3af7f9ebc19b1bea8a7c475ce278a3e96fcb212289d16f0904",
+      "code_commit": "dbfc95fc2b98654f9f4cf3d0abac946730bfbfce",
+      "formal_hd_assets": 124,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-scene-backgrounds-r76/r76-scenes-formal-gui-r4/gui.display-118.png",
+      "source_gui_check_sha256": "6489bbbd4744214f9510550ff02b579fe5da15efed87ad289ec8f331b636a975",
+      "independent_pixels_sha256": "bc448a83ee5f91722a7470e354fdf0ee0700692655bc380b14fd475d36bc0018",
+      "same_state_replay_sha256": "0bfd41d944dcc153fa4f39f5912de5a9dfc27ce7b89070470b07fc9e6c8ba448",
+      "source_kind": "actual uninstrumented formal game presentation from standard display diagnostics; byte-for-byte matched to the real X11 game area",
+      "capture_pixels_unchanged": true,
+      "original_source_file": "EUROPE.PIK",
+      "source_research_id": 824,
+      "owned_background_cells": 58255,
+      "graphics_manifest_sha256": "1dba5fd9a5bbf5a8c76861e56709525305857a9a77ae9c988b564119f636333c",
+      "conformance_sha256": "1cac135ef4f39a48aeefbbd56ae2e166a79d069ad090768cb6fd16607e8f9e6e",
+      "scope": "正常殖民地部分背景與歐洲港口的限定驗收；原版前景、文字、互動框與標準游標保持。其他場景、世界移動、戰鬥與動畫待驗。"
     }
   ],
   "limitations": [
@@ -276,13 +332,14 @@
     "Four language fonts and five language selections do not establish complete five-language coverage.",
     "Remaining small graphics, terrain, units, special cursors, backgrounds and animation are incomplete.",
     "No generated concept images or DRAFT terrain prototypes used.",
-    "Game-area captures use a read-only helper; the display code and formal loader match the verified production sources.",
+    "各圖的擷取方式與二進位以逐圖source_kind、code_commit及指紋為準；現行背景實拍直接使用正式程式，沒有另建抓圖專用顯示程式。",
     "R66 adds the settled main-menu background, title art and wood texture; remaining backgrounds and animation are unfinished.",
     "R68 refreshes the verified Traditional Chinese colony image with paper and wood textures. The R67 world, R66 menu and R64 settings images retain their exact prior PNGs and per-image provenance.",
     "R72 adds one actual Traditional Chinese Galleon pedia capture from the five-ship scoped conformance; all five prior PNGs and their per-image provenance remain unchanged.",
     "R73 adds one actual Traditional Chinese Wagon Train pedia capture from scoped three-vehicle conformance; all six prior PNGs and per-image provenance remain unchanged.",
     "R74 adds one actual Traditional Chinese Colonists pedia capture covering 22 new colonist frames and three inherited images. World movement, combat and animation remain unverified; all seven prior PNGs and per-image provenance remain unchanged.",
-    "R75新增正常龍騎兵百科實拍，對應19幀／14頁的限定驗收；既有八張原PNG與逐圖來源保持。世界移動、戰鬥、其他圖像、動畫及全量HD尚未完成。"
+    "R75新增正常龍騎兵百科實拍，對應19幀／14頁的限定驗收；既有八張原PNG與逐圖來源保持。世界移動、戰鬥、其他圖像、動畫及全量HD尚未完成。",
+    "R76新增殖民地下方背景與歐洲港口的繁中HD實拍，共十一張；既有九張原PNG及逐圖來源保持。其他圖像、特殊游標、完整五語文字、動畫與全量HD未完成，尚未收進目前發行版。"
   ],
   "previous_build": {
     "kind": "README actual development screenshots",
@@ -295,9 +352,9 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "龍騎兵百科採R75／8df4de6與122張素材。既有八張圖保留原PNG、個別程式commit、二進位指紋及當批素材數；實拍R1與驗收R3的正式程式及二進位相同。",
-  "graphics_manifest_sha256": "c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7",
-  "conformance_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5",
+  "provenance_scope": "新增殖民地與歐洲港口採R76／dbfc95f與124張素材。九張既有PNG及逐圖程式commit、二進位指紋、當批素材數與限定驗收範圍保持。新圖直接取正式程式的實際呈現，並逐byte匹配X11遊戲區。",
+  "graphics_manifest_sha256": "1dba5fd9a5bbf5a8c76861e56709525305857a9a77ae9c988b564119f636333c",
+  "conformance_sha256": "1cac135ef4f39a48aeefbbd56ae2e166a79d069ad090768cb6fd16607e8f9e6e",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -339,14 +396,14 @@
     "formal_hd_assets": 66
   },
   "previous_development_capture": {
-    "code_commit": "38ee34f3c13504cf3d689fdbe5e6da4df3570d25",
-    "binary_sha256": "7a9470f550b7160ff5ee83dcc83d3fc75ffcea5884d578cc58592fed6684903a",
-    "formal_binary_sha256": "7a9470f550b7160ff5ee83dcc83d3fc75ffcea5884d578cc58592fed6684903a",
-    "source_build_sha256": "d896465ddcbc60fa31d7ef984c99c7c8ebc61e0a4560039a4da6bf2b14bb7dbe",
-    "formal_hd_assets": 103,
-    "graphics_manifest_sha256": "963b67ab9fdbdf02577a063dca488a525f7491cbf9d769c3f9c664117adcb758",
-    "conformance_sha256": "70349035b3ca433349d4fe3a6fc8219acef55e1231eadb714443f94500adb6f9"
+    "code_commit": "8df4de67b2f592733f163bf4093ea51b4ee5be73",
+    "binary_sha256": "1f0f2418af3c5164e74c8d037161f27be28e11e00d3bdf1fd3a533ddf62a222c",
+    "formal_binary_sha256": "1f0f2418af3c5164e74c8d037161f27be28e11e00d3bdf1fd3a533ddf62a222c",
+    "source_build_sha256": "3bf4e894c1f0759a4c9389eefccd3c8ff780acecdcbd99f208534dd09a60c54c",
+    "formal_hd_assets": 122,
+    "graphics_manifest_sha256": "c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7",
+    "conformance_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5"
   },
-  "verification_build_sha256": "297018cdf036887c2bc364968e402ef978aba241fed93b9932e0cbc44fa8ade5",
+  "verification_build_sha256": "95b0e81a52a949ead8f921335052a3b6996ab8a0cbfaaca6c2627bd20bcb52e1",
   "production_go_sources_equal_to_verified_build": true
 }

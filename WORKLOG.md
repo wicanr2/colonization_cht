@@ -6341,3 +6341,5 @@ R75程式與19張生成原PNG已以8df4de67b2f592733f163bf4093ea51b4ee5be73推�
   完整HD、動畫、其他場景與新發行仍未完成。README新圖於本批程式commit後另附實際程式指紋。
 
 R76提交前自檢：1550列舊來源、122張舊原稿／紀錄、288個原版輸入與45個正式來源綁定保持。全工作樹find未發現root-owned檔案或同名.md目錄；隔離dosgolem工作樹乾淨，upstream push維持DISABLED。兩個專案測試映像無執行中或停止容器，沒有清理其他專案資源。公開原稿檔案屬UID1000，原版EXE／SS／PIK／存檔與本機研究輸出未追蹤。
+
+R76程式與兩張生成原PNG已以dbfc95fc2b98654f9f4cf3d0abac946730bfbfce推送origin/main。README新增同版繁中殖民地港口及歐洲港口實拍，共十一張；兩檔原樣複製且與實際X11遊戲區全等，原九張PNG與逐圖來源保持。來源、正式程式指紋及驗收範圍記入readme-captures.json，沒有新tag或Release。
