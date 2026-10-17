@@ -1,4 +1,4 @@
-// 規格065 R57及規格070 R72 READY：36來源共用追蹤，除100沿人物層外皆有正式生成素材。
+// 規格065 R57及規格070 R72／R73 READY：39來源共用追蹤，除100沿人物層外皆有正式生成素材。
 // 只觀測原版寫入及合成四倍畫布，不寫入DOS。
 package main
 
@@ -61,6 +61,9 @@ var hdSmallFrames = []hdSmallFrame{
 	{ordinal: 14, w: 13, h: 16, encodedLen: 191, opaque: 128, encodedSHA: "885ffdbf33dca42e83fd1a93f95ef871fd5efe973f489debd71473200240ddf0", writesSHA: "0e908bb1d2288b022846c4f5c30fbc42ceaf868873ab582161de9d066a77cbc3", artSHA: "22e18c47baaf6f5188d9dcfadd4e69ab41812acaf39274b3f377ae7bba059c39", file: "icons-014.png", artW: 1120, artH: 1404, sample: [4]int{205, 171, 953, 1261}, content: [4]int{0, 0, 13, 16}, writers: 7},
 	{ordinal: 15, w: 13, h: 16, encodedLen: 190, opaque: 131, encodedSHA: "84f986d89acd03ed96fc3d6c2e2a68607015491314e320149e81c0c752203e5e", writesSHA: "e7e0bc3d95387a8b2ac05cb1eb0123ad52ea090ed25a8ee9537752abba5b7471", artSHA: "4b938de1299c6c0f5895993715325ad66b8328b9616f5c98fc0f2bce8f09c3a9", file: "icons-015.png", artW: 1122, artH: 1402, sample: [4]int{204, 275, 940, 1116}, content: [4]int{0, 0, 13, 16}, writers: 6},
 	{ordinal: 127, w: 14, h: 16, encodedLen: 204, opaque: 155, encodedSHA: "4798a978c18d26b279eb14d9b88ab1880c0c3a9588ccf050d8da432976f43f68", writesSHA: "1f815560ce528714e9f1ccedfa527f5d645dd1059a613c89686bec6dbbb208a5", artSHA: "c18b01f9ab0af49f84184c9fb11bcd582af71b5b8bccd7f3e07b01b2d7e5b235", file: "icons-127.png", artW: 1122, artH: 1402, sample: [4]int{114, 183, 1039, 1256}, content: [4]int{0, 0, 14, 16}, writers: 6},
+	{ordinal: 8, w: 14, h: 16, encodedLen: 165, opaque: 141, encodedSHA: "b294109df44f954c1689f958464e24c185d89dee448d04626638d251497bc3c4", writesSHA: "a31787707145198efe15676fcbfd9be368ec38a2bed47668a556e047b993b6d8", artSHA: "19045ad0de2cd24bf172f0dcbb5466ee677e1d3270b741dee66df81e7b2b5203", file: "icons-008.png", artW: 1254, artH: 1254, sample: [4]int{162, 333, 1130, 1181}, content: [4]int{0, 4, 14, 16}, writers: 7},
+	{ordinal: 9, w: 14, h: 16, encodedLen: 91, opaque: 67, encodedSHA: "6c0e697e6d80561b66fd03332411f8597a43472d6a49707c0bfe6fe34b975c5e", writesSHA: "b0bf3ecfacab9b795d5149e2e69df005da42cf35c399b6be3ee027735c3a180d", artSHA: "9ae2a857a9f143a9747753d36e5d16dd506b0d2984fac310b20056c926d47ec2", file: "icons-009.png", artW: 1254, artH: 1254, sample: [4]int{102, 443, 1173, 916}, content: [4]int{0, 9, 14, 16}, writers: 7},
+	{ordinal: 16, w: 14, h: 16, encodedLen: 118, opaque: 82, encodedSHA: "d665336038923ec16ba48f901f9c96c68dfbf2f6302924854d9269b350208401", writesSHA: "db655afb504c1c1acb9b0664c9fa45376cfc95e0a1fccfdf422c419e15a295b7", artSHA: "edfb3e4e2eed371c6d8fe5fb9c905af05dd62b515fd4b81455e0f50d037e8889", file: "icons-016.png", artW: 1254, artH: 1254, sample: [4]int{122, 342, 1132, 1020}, content: [4]int{0, 7, 14, 16}, writers: 5},
 }
 var hdSmallWriterCodes = map[uint16][]byte{
 	0x181: {0x26, 0x88, 0x07, 0x03, 0x5e, 0xf0, 0x42, 0xfe, 0xcc, 0x74, 0x02, 0xeb, 0xe7, 0xeb, 0xd0, 0x3b},

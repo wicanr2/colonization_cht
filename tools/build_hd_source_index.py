@@ -32,6 +32,8 @@ parser.add_argument('--unit-report',type=Path,help='規格070正常單位圖鑑�
 parser.add_argument('--unit-build',type=Path,help='與unit-report一起使用的131候選來源綁定')
 parser.add_argument('--ship-ready-report',type=Path,help='規格070五艘船的單幀PNG READY審查')
 parser.add_argument('--ship-conformed-report',type=Path,help='規格070正常百科五船正式驗收及73張素材繼承審查')
+parser.add_argument('--vehicle-ready-report',type=Path,help='規格070三種車輛／火炮單幀PNG READY審查')
+parser.add_argument('--vehicle-conformed-report',type=Path,help='規格070三種車輛／火炮正式驗收及78張素材繼承審查')
 a=parser.parse_args();out=a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.parent.stat().st_uid==os.getuid() and not out.exists()
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -66,6 +68,25 @@ for name,asset in manifest['assets'].items():
 ready=[f for f in frames if f['file']=='PHYS0.SS' and f['ordinal']==79 and f.get('encoded_sha256')=='a8a861754068c86a9c150442f7b07f1fbd297d82b8e5dcb2e3ee108bde4dc84c']
 assert len(ready)==1
 ready[0]['source_contract_reference']={'state':'CONFORMED','spec':'docs/spec/062-hd-sea-draw-lifecycle.md','section':'2026-10-15 R58正式驗收與限定CONFORMED','formal_connected':bool(ready[0]['formal_assets'])}
+vehicle_review=None
+vehicle_assets=set()
+assert bool(a.vehicle_ready_report)==bool(a.vehicle_conformed_report)
+if a.vehicle_conformed_report:
+ assert a.ship_conformed_report and a.unit_report and a.unit_build
+ vehicle_assets={'icons-%03d.png'%n for n in [8,9,16]}
+ vehicle_ready=json.loads(a.vehicle_ready_report.read_bytes())
+ assert vehicle_ready['result']=='PASS_THREE_STANDALONE_VEHICLE_READY_REVIEW' and vehicle_ready['spec_state']=='READY'
+ vehicle_review=json.loads(a.vehicle_conformed_report.read_bytes())
+ assert vehicle_review['result']=='PASS_THREE_STANDALONE_VEHICLE_FORMAL_CONFORMANCE_REVIEW' and vehicle_review['spec_state']=='CONFORMED'
+ assert vehicle_review['sources']==[8,9,16] and vehicle_review['formal_assets']==81 and vehicle_review['graphics_files']==82
+ assert vehicle_review['manifest_sha256']==sha(a.manifest) and vehicle_review['ready_review_sha256']==sha(a.vehicle_ready_report)
+ assert vehicle_review['inherited_ship_conformance_sha256']==sha(a.ship_conformed_report)
+ assert set(vehicle_review['unchanged_inherited_assets'])==set(manifest['assets'])-vehicle_assets
+ assert len(vehicle_review['unchanged_inherited_assets'])==78
+ assert all(manifest['assets'][n]['sha256']==h for n,h in vehicle_review['unchanged_inherited_assets'].items())
+ assert vehicle_review['native_points']==18 and vehicle_review['native_inputs']==86 and vehicle_review['native_rgba_pixels']==9216000
+ assert vehicle_review['unit_gui_samples']==60 and vehicle_review['gui_hd_samples']==45
+ assert vehicle_review['startup_cases']==4 and vehicle_review['package_rejected_cases']==248
 ship_review=None
 ship_assets=set()
 assert bool(a.ship_ready_report)==bool(a.ship_conformed_report)
@@ -77,9 +98,9 @@ if a.ship_conformed_report:
  ship_review=json.loads(a.ship_conformed_report.read_bytes())
  assert ship_review['result']=='PASS_FIVE_STANDALONE_SHIP_FORMAL_CONFORMANCE_REVIEW' and ship_review['spec_state']=='CONFORMED'
  assert ship_review['sources']==[6,7,14,15,127] and ship_review['formal_assets']==78 and ship_review['graphics_files']==79
- assert ship_review['manifest_sha256']==sha(a.manifest) and ship_review['ready_review_sha256']==sha(a.ship_ready_report)
+ assert ship_review['manifest_sha256']==(vehicle_review['inherited_manifest_sha256'] if vehicle_review else sha(a.manifest)) and ship_review['ready_review_sha256']==sha(a.ship_ready_report)
  assert ship_review['inherited_custom_world_conformance_sha256']==sha(a.custom_world_conformed_report)
- assert set(ship_review['unchanged_inherited_assets'])==set(manifest['assets'])-ship_assets
+ assert set(ship_review['unchanged_inherited_assets'])==set(manifest['assets'])-ship_assets-vehicle_assets
  assert len(ship_review['unchanged_inherited_assets'])==73
  assert all(manifest['assets'][n]['sha256']==h for n,h in ship_review['unchanged_inherited_assets'].items())
  assert ship_review['native_points']==24 and ship_review['native_inputs']==109 and ship_review['native_rgba_pixels']==15360000
@@ -98,7 +119,7 @@ if a.custom_world_conformed_report:
  assert custom_review['formal_assets']==73 and custom_review['manifest_sha256']==(ship_review['inherited_manifest_sha256'] if ship_review else sha(a.manifest))
  assert custom_review['ready_review_sha256']==sha(a.custom_world_ready_report)
  assert custom_review['inherited_new_game_conformance_sha256']==sha(a.new_game_conformed_report)
- assert set(custom_review['unchanged_inherited_assets'])==set(manifest['assets'])-custom_assets-ship_assets
+ assert set(custom_review['unchanged_inherited_assets'])==set(manifest['assets'])-custom_assets-ship_assets-vehicle_assets
  assert len(custom_review['unchanged_inherited_assets'])==72
  assert all(manifest['assets'][n]['sha256']==h for n,h in custom_review['unchanged_inherited_assets'].items())
 new_game_review=None
@@ -113,7 +134,7 @@ if a.new_game_conformed_report:
  assert new_game_review['formal_assets']==72 and new_game_review['manifest_sha256']==(custom_review['inherited_manifest_sha256'] if custom_review else sha(a.manifest))
  assert new_game_review['ready_review_sha256']==sha(a.new_game_ready_report)
  assert new_game_review['inherited_parch_conformance_sha256']==sha(a.parch_conformed_report)
- assert set(new_game_review['unchanged_inherited_assets'])==set(manifest['assets'])-new_game_assets-custom_assets-ship_assets
+ assert set(new_game_review['unchanged_inherited_assets'])==set(manifest['assets'])-new_game_assets-custom_assets-ship_assets-vehicle_assets
  assert len(new_game_review['unchanged_inherited_assets'])==70
  assert all(manifest['assets'][n]['sha256']==h for n,h in new_game_review['unchanged_inherited_assets'].items())
 parch_review=None
@@ -127,7 +148,7 @@ if a.parch_conformed_report:
  assert parch_review['formal_assets']==70 and parch_review['manifest_sha256']==(new_game_review['inherited_manifest_sha256'] if new_game_review else sha(a.manifest))
  assert parch_review['ready_review_sha256']==sha(a.parch_ready_report)
  assert parch_review['inherited_world_wood_conformance_sha256']==sha(a.world_wood_conformed_report)
- assert set(parch_review['unchanged_inherited_assets'])==set(manifest['assets'])-{'parch-000.png'}-new_game_assets-custom_assets-ship_assets
+ assert set(parch_review['unchanged_inherited_assets'])==set(manifest['assets'])-{'parch-000.png'}-new_game_assets-custom_assets-ship_assets-vehicle_assets
  assert len(parch_review['unchanged_inherited_assets'])==69
  assert all(manifest['assets'][n]['sha256']==h for n,h in parch_review['unchanged_inherited_assets'].items())
 wood_review=None
@@ -141,7 +162,7 @@ if a.world_wood_conformed_report:
  assert wood_review['formal_assets']==69 and wood_review['manifest_sha256']==(parch_review['inherited_manifest_sha256'] if parch_review else sha(a.manifest))
  assert wood_review['ready_review_sha256']==sha(a.world_wood_ready_report)
  assert wood_review['inherited_menu_conformance_sha256']==sha(a.menu_conformed_report)
- assert set(wood_review['unchanged_inherited_assets'])==set(manifest['assets'])-{'woodtile-000.png','parch-000.png'}-new_game_assets-custom_assets-ship_assets
+ assert set(wood_review['unchanged_inherited_assets'])==set(manifest['assets'])-{'woodtile-000.png','parch-000.png'}-new_game_assets-custom_assets-ship_assets-vehicle_assets
  assert len(wood_review['unchanged_inherited_assets'])==68
  assert all(manifest['assets'][n]['sha256']==h for n,h in wood_review['unchanged_inherited_assets'].items())
 menu_review=None
@@ -169,7 +190,7 @@ if a.small_terrain_conformed_report:
  assert small_review['ready_review_sha256']==sha(a.small_terrain_ready_report)
  assert len(small_review['unchanged_inherited_assets'])==58
  assert all(manifest['assets'][n]['sha256']==h for n,h in small_review['unchanged_inherited_assets'].items())
-expected_assets=78 if ship_review else 73 if custom_review else 72 if new_game_review else 70 if parch_review else 69 if wood_review else 68 if menu_review else 66 if a.small_terrain_conformed_report else 58 if a.terrain_batch_conformed_report else 46
+expected_assets=81 if vehicle_review else 78 if ship_review else 73 if custom_review else 72 if new_game_review else 70 if parch_review else 69 if wood_review else 68 if menu_review else 66 if a.small_terrain_conformed_report else 58 if a.terrain_batch_conformed_report else 46
 assert len(bindings)==expected_assets and sum(bool(f['formal_assets']) for f in frames)==expected_assets
 batch_review=None
 if a.terrain_batch_ready_report:
@@ -385,6 +406,12 @@ if ship_review:
   assert f['formal_assets']==['icons-%03d.png'%ordinal] and 'unit_pedia_native_sample' in f
   f['source_contract_reference']={'state':'CONFORMED','spec':'docs/spec/070-hd-unit-small-images.md','formal_connected':True,'review_sha256':sha(a.ship_conformed_report),'scope':'normal unit-pedia, original per-frame PNG RGBA and standard cursor only; native flags and 26 whole transparent source cells retained; world movement, combat and animation unverified'}
  public['ship_pedia_conformance']={'ready_review_sha256':sha(a.ship_ready_report),'review_sha256':sha(a.ship_conformed_report),'sources':ship_review['sources'],'formal_assets':78,'ship_gui_samples':100,'claim':'five standalone ship sprites within recorded normal pedia only; other sources, program-drawn graphics, animation and full HD remain incomplete'}
+if vehicle_review:
+ for ordinal in vehicle_review['sources']:
+  f=next(f for f in frames if f['file']=='ICONS.SS' and f['ordinal']==ordinal)
+  assert f['formal_assets']==['icons-%03d.png'%ordinal] and 'unit_pedia_native_sample' in f
+  f['source_contract_reference']={'state':'CONFORMED','spec':'docs/spec/070-hd-unit-small-images.md','formal_connected':True,'review_sha256':sha(a.vehicle_conformed_report),'scope':'normal unit-pedia Wagon Train, Artillery and Treasure; per-frame native content rectangle, raw PNG alpha, native flags and standard cursor; world movement, combat and animation unverified'}
+ public['vehicle_pedia_conformance']={'ready_review_sha256':sha(a.vehicle_ready_report),'review_sha256':sha(a.vehicle_conformed_report),'sources':vehicle_review['sources'],'formal_assets':81,'unit_gui_samples':60,'claim':'three standalone vehicle/artillery sprites in recorded normal pedia only; other sources, program-drawn graphics, animation and full HD remain incomplete'}
 public['coverage_limits']['additional_ready_source_contracts']=sum(f.get('source_contract_reference',{}).get('state')=='READY' and not f.get('source_contract_reference',{}).get('formal_connected') for f in frames)
 out.write_text(json.dumps(public,ensure_ascii=False,indent=2)+'\n')
 print('PASS_METADATA_ONLY_FULL_SOURCE_INDEX',len(frames),len(bindings),sha(out),flush=True)

@@ -3940,6 +3940,159 @@
         "encoded_sha256": "4798a978c18d26b279eb14d9b88ab1880c0c3a9588ccf050d8da432976f43f68",
         "encoded_length": 204
       }
+    },
+    "icons-008.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "19045ad0de2cd24bf172f0dcbb5466ee677e1d3270b741dee66df81e7b2b5203",
+      "bytes": 799384,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        14,
+        16
+      ],
+      "target_size": [
+        56,
+        64
+      ],
+      "native_opaque_pixels": 141,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        162,
+        333,
+        1130,
+        1181
+      ],
+      "native_content_rect": [
+        0,
+        4,
+        14,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 30604,
+      "alpha_mass_total": 161914298,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: one standalone HD sprite master for a Colonization display-only overlay.\nPrimary request: Redraw the single original sprite from image 1 in the already approved refined pixel-art style represented by image 2.\nInput images: Image 1 is the exact original subject, pose, proportions and color reference; its beige surround is just a viewing background. Image 2 is an approved HD material, pixel brushwork, outline and shading reference only.\nSubject: A single covered wooden wagon, broad off-white arched canvas canopy over a dark warm-brown rectangular wooden chassis, two large tan wooden wheels visibly separated across the lower front, with the exact frontal/slightly angled view, canopy height, wheel placement, dark opening and outline in image 1. This is the covered Wagon Train sprite.\nStyle/medium: crisp, carefully placed small pixel clusters, restrained highlights, warm weathered wood, readable dark outlines and the same muted historic palette as the references. Preserve a compact silhouette readable at a tiny in-game size.\nComposition/framing: one complete isolated object, centered on a square transparent canvas with clear empty margins on every side. Keep all wheels, barrel/canopy/gold and projecting details fully visible. Match image 1's source proportions rather than widening or redesigning the object.\nConstraints: genuine transparent RGBA background; no beige or magenta backdrop; no ground, shadow outside the object, people, labels, frame, extra objects, flag, watermark or text. Do not draw image 2's ship or sails. Deliver just this one sprite, not a sprite sheet, atlas or comparison panel.",
+      "reference_sha256": {
+        "native_geometry": "e6bd3eb8c544019a4c9d504cf81870e614dd411ea80cd223ec5b8a9f67579abd",
+        "approved_style": "94ebc3642cd0b069229f2e23fa633085ed53d89cf5c9965eafde74d56af99619"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 8,
+        "encoded_sha256": "b294109df44f954c1689f958464e24c185d89dee448d04626638d251497bc3c4",
+        "encoded_length": 165
+      }
+    },
+    "icons-009.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "9ae2a857a9f143a9747753d36e5d16dd506b0d2984fac310b20056c926d47ec2",
+      "bytes": 465935,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        14,
+        16
+      ],
+      "target_size": [
+        56,
+        64
+      ],
+      "native_opaque_pixels": 67,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        102,
+        443,
+        1173,
+        916
+      ],
+      "native_content_rect": [
+        0,
+        9,
+        14,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 14343,
+      "alpha_mass_total": 83456123,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: one standalone HD sprite master for a Colonization display-only overlay.\nPrimary request: Redraw the single original sprite from image 1 in the already approved refined pixel-art style represented by image 2.\nInput images: Image 1 is the exact original subject, pose, proportions and color reference; its beige surround is just a viewing background. Image 2 is an approved HD material, pixel brushwork, outline and shading reference only.\nSubject: A single small artillery cannon on a tan wooden carriage with two separated wooden wheels, a very long straight dark-gray horizontal iron barrel pointing left, a black muzzle at the left end, one tan vertical mounting band and the same low profile as image 1. Maintain the simple exact orientation and silhouette.\nStyle/medium: crisp, carefully placed small pixel clusters, restrained highlights, warm weathered wood, readable dark outlines and the same muted historic palette as the references. Preserve a compact silhouette readable at a tiny in-game size.\nComposition/framing: one complete isolated object, centered on a square transparent canvas with clear empty margins on every side. Keep all wheels, barrel/canopy/gold and projecting details fully visible. Match image 1's source proportions rather than widening or redesigning the object.\nConstraints: genuine transparent RGBA background; no beige or magenta backdrop; no ground, shadow outside the object, people, labels, frame, extra objects, flag, watermark or text. Do not draw image 2's ship or sails. Deliver just this one sprite, not a sprite sheet, atlas or comparison panel.",
+      "reference_sha256": {
+        "native_geometry": "5270fe3e8766ccb1d0477eac8a3afb38c972215ddb88b93e10863c0357831c38",
+        "approved_style": "94ebc3642cd0b069229f2e23fa633085ed53d89cf5c9965eafde74d56af99619"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 9,
+        "encoded_sha256": "6c0e697e6d80561b66fd03332411f8597a43472d6a49707c0bfe6fe34b975c5e",
+        "encoded_length": 91
+      }
+    },
+    "icons-016.png": {
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "sha256": "edfb3e4e2eed371c6d8fe5fb9c905af05dd62b515fd4b81455e0f50d037e8889",
+      "bytes": 554568,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        14,
+        16
+      ],
+      "target_size": [
+        56,
+        64
+      ],
+      "native_opaque_pixels": 82,
+      "placement": "validated original draw call and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        122,
+        342,
+        1132,
+        1020
+      ],
+      "native_content_rect": [
+        0,
+        7,
+        14,
+        16
+      ],
+      "sample_bounds_measurement": "alpha >=128 for geometry only; sample original RGBA without alpha threshold",
+      "alpha_mass_outside_sample_rect": 30787,
+      "alpha_mass_total": 108637868,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: one standalone HD sprite master for a Colonization display-only overlay.\nPrimary request: Redraw the single original sprite from image 1 in the already approved refined pixel-art style represented by image 2.\nInput images: Image 1 is the exact original subject, pose, proportions and color reference; its beige surround is just a viewing background. Image 2 is an approved HD material, pixel brushwork, outline and shading reference only.\nSubject: A single low wooden treasure cart, dark warm-brown box/chest carrying the compact bright yellow/golden pile visible above the rim, two large separated tan wooden wheels and the small left projecting shaft, viewed from the exact frontal/slightly angled direction in image 1. Preserve the source silhouette and relative sizes.\nStyle/medium: crisp, carefully placed small pixel clusters, restrained highlights, warm weathered wood, readable dark outlines and the same muted historic palette as the references. Preserve a compact silhouette readable at a tiny in-game size.\nComposition/framing: one complete isolated object, centered on a square transparent canvas with clear empty margins on every side. Keep all wheels, barrel/canopy/gold and projecting details fully visible. Match image 1's source proportions rather than widening or redesigning the object.\nConstraints: genuine transparent RGBA background; no beige or magenta backdrop; no ground, shadow outside the object, people, labels, frame, extra objects, flag, watermark or text. Do not draw image 2's ship or sails. Deliver just this one sprite, not a sprite sheet, atlas or comparison panel.",
+      "reference_sha256": {
+        "native_geometry": "2b5aabc58ea626530862a15c9a43222b7100c3e916c6e55e0cfd2daa56dc1ff5",
+        "approved_style": "94ebc3642cd0b069229f2e23fa633085ed53d89cf5c9965eafde74d56af99619"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 16,
+        "encoded_sha256": "d665336038923ec16ba48f901f9c96c68dfbf2f6302924854d9269b350208401",
+        "encoded_length": 118
+      }
     }
   }
 }

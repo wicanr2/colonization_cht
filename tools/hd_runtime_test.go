@@ -31,14 +31,17 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 	m := golem.New()
 	before := bytes.Clone(m.Mem)
 	h, err := loadHDRuntime(m, game, assets)
-	if err != nil || h == nil || h.terrainBatch == nil || len(h.terrainBatch.frames) != 12 || h.smallTerrain == nil || len(h.smallTerrain.frames) != 8 || h.parch == nil || h.worldTexture == nil || h.texture == nil || h.small == nil || len(h.small.frames) != 36 || h.nine == nil || len(h.nine.frames) != 10 || h.shelter == nil || h.shelter.art.Bounds() != image.Rect(0, 0, 92, 108) || h.sea == nil || h.person == nil || h.person.art.Bounds() != image.Rect(0, 0, 24, 64) || h.sea.art.Bounds() != image.Rect(0, 0, 64, 64) || h.art.Bounds() != image.Rect(0, 0, 92, 108) || !bytes.Equal(before, m.Mem) {
+	if err != nil || h == nil || h.terrainBatch == nil || len(h.terrainBatch.frames) != 12 || h.smallTerrain == nil || len(h.smallTerrain.frames) != 8 || h.parch == nil || h.worldTexture == nil || h.texture == nil || h.small == nil || len(h.small.frames) != 39 || h.nine == nil || len(h.nine.frames) != 10 || h.shelter == nil || h.shelter.art.Bounds() != image.Rect(0, 0, 92, 108) || h.sea == nil || h.person == nil || h.person.art.Bounds() != image.Rect(0, 0, 24, 64) || h.sea.art.Bounds() != image.Rect(0, 0, 64, 64) || h.art.Bounds() != image.Rect(0, 0, 92, 108) || !bytes.Equal(before, m.Mem) {
 		t.Fatal("正式素材載入失敗或改寫原版", err)
 	}
 	mutations := map[string]func(string, string){
 		"missing-manifest": func(a, g string) { os.Remove(filepath.Join(a, "manifest.json")) },
 		"bad-manifest":     func(a, g string) { os.WriteFile(filepath.Join(a, "manifest.json"), []byte("{}"), 0644) },
-		"missing-image":    func(a, g string) { os.Remove(filepath.Join(a, "building-032.png")) },
-		"bad-image":        func(a, g string) { os.WriteFile(filepath.Join(a, "building-032.png"), []byte("bad"), 0644) },
+		"oversized-manifest": func(a, g string) {
+			os.WriteFile(filepath.Join(a, "manifest.json"), bytes.Repeat([]byte("x"), (512<<10)+1), 0644)
+		},
+		"missing-image": func(a, g string) { os.Remove(filepath.Join(a, "building-032.png")) },
+		"bad-image":     func(a, g string) { os.WriteFile(filepath.Join(a, "building-032.png"), []byte("bad"), 0644) },
 		"linked-image": func(a, g string) {
 			p := filepath.Join(a, "building-032.png")
 			os.Remove(p)

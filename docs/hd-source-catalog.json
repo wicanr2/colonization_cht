@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "0c78251ffc365a49e229ede4e88715b095359ff85bd16c0508a5a738b2eee33c",
+  "formal_manifest_sha256": "336653b647cd381931be990409b71bd0abcfdbb6ebf3d3db0054c6d7ee6b70c8",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 78,
+    "formal_asset_bindings": 81,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -28991,7 +28991,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-008.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -29006,6 +29008,13 @@
         "sorted_local_offset_value_sha256": "a31787707145198efe15676fcbfd9be368ec38a2bed47668a556e047b993b6d8",
         "first_entry_step": 554587498,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "ba17a1b0aadbdcb5cb5d535685df0498630e6fdbd969cfbed183afd736844fee",
+        "scope": "normal unit-pedia Wagon Train, Artillery and Treasure; per-frame native content rectangle, raw PNG alpha, native flags and standard cursor; world movement, combat and animation unverified"
       }
     },
     {
@@ -29031,7 +29040,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-009.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -29046,6 +29057,13 @@
         "sorted_local_offset_value_sha256": "b0bf3ecfacab9b795d5149e2e69df005da42cf35c399b6be3ee027735c3a180d",
         "first_entry_step": 92111116,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "ba17a1b0aadbdcb5cb5d535685df0498630e6fdbd969cfbed183afd736844fee",
+        "scope": "normal unit-pedia Wagon Train, Artillery and Treasure; per-frame native content rectangle, raw PNG alpha, native flags and standard cursor; world movement, combat and animation unverified"
       }
     },
     {
@@ -29269,7 +29287,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "icons-016.png"
+      ],
       "unit_pedia_native_sample": {
         "state": "DRAFT",
         "spec": "docs/spec/070-hd-unit-small-images.md",
@@ -29284,6 +29304,13 @@
         "sorted_local_offset_value_sha256": "db655afb504c1c1acb9b0664c9fa45376cfc95e0a1fccfdf422c419e15a295b7",
         "first_entry_step": 522054207,
         "claim": "confirmed recorded pedia source and native writes only; no new formal HD, world movement, combat or animation credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/070-hd-unit-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "ba17a1b0aadbdcb5cb5d535685df0498630e6fdbd969cfbed183afd736844fee",
+        "scope": "normal unit-pedia Wagon Train, Artillery and Treasure; per-frame native content rectangle, raw PNG alpha, native flags and standard cursor; world movement, combat and animation unverified"
       }
     },
     {
@@ -58035,6 +58062,36 @@
       "source_encoded_sha256": "4798a978c18d26b279eb14d9b88ab1880c0c3a9588ccf050d8da432976f43f68",
       "spec": "docs/spec/070-hd-unit-small-images.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-008.png",
+      "asset_sha256": "19045ad0de2cd24bf172f0dcbb5466ee677e1d3270b741dee66df81e7b2b5203",
+      "source_research_id": 835,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 8,
+      "source_encoded_sha256": "b294109df44f954c1689f958464e24c185d89dee448d04626638d251497bc3c4",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-009.png",
+      "asset_sha256": "9ae2a857a9f143a9747753d36e5d16dd506b0d2984fac310b20056c926d47ec2",
+      "source_research_id": 836,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 9,
+      "source_encoded_sha256": "6c0e697e6d80561b66fd03332411f8597a43472d6a49707c0bfe6fe34b975c5e",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "icons-016.png",
+      "asset_sha256": "edfb3e4e2eed371c6d8fe5fb9c905af05dd62b515fd4b81455e0f50d037e8889",
+      "source_research_id": 843,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 16,
+      "source_encoded_sha256": "d665336038923ec16ba48f901f9c96c68dfbf2f6302924854d9269b350208401",
+      "spec": "docs/spec/070-hd-unit-small-images.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
     }
   ],
   "limitations": [
@@ -58227,5 +58284,17 @@
     "formal_assets": 78,
     "ship_gui_samples": 100,
     "claim": "five standalone ship sprites within recorded normal pedia only; other sources, program-drawn graphics, animation and full HD remain incomplete"
+  },
+  "vehicle_pedia_conformance": {
+    "ready_review_sha256": "1f01163ee78a7c042f696f9fa8a55a63b382f80dc1f76fea428204658623ebec",
+    "review_sha256": "ba17a1b0aadbdcb5cb5d535685df0498630e6fdbd969cfbed183afd736844fee",
+    "sources": [
+      8,
+      9,
+      16
+    ],
+    "formal_assets": 81,
+    "unit_gui_samples": 60,
+    "claim": "three standalone vehicle/artillery sprites in recorded normal pedia only; other sources, program-drawn graphics, animation and full HD remain incomplete"
   }
 }

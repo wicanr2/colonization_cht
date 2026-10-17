@@ -332,7 +332,7 @@ func TestHDSmallRuntimeNativeLifecycle(t *testing.T) {
 	h, err := loadHDRuntime(m, game, assets)
 	need(err)
 
-	if h.small == nil || len(h.small.frames) != 36 || hash(m.Mem) != before {
+	if h.small == nil || len(h.small.frames) != 39 || hash(m.Mem) != before {
 		t.Fatal("小圖像載入失敗或改寫DOS")
 	}
 	p := h.small
@@ -522,8 +522,10 @@ func TestHDSmallRuntimeNativeLifecycle(t *testing.T) {
 		t.Fatal("小圖像原版路徑不同", at, count, p.accepted, p.rejected)
 	}
 	for _, f := range p.frames {
-		// R49固定路徑只涵蓋原31幀；新增五船由獨立正常路徑測試驗證。
-		if f.ordinal == 6 || f.ordinal == 7 || f.ordinal == 14 || f.ordinal == 15 || f.ordinal == 127 {
+		// R49固定路徑只涵蓋規格065原31幀；其他來源由各自正常路徑驗證。
+		switch f.ordinal {
+		case 5, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 42, 53, 56, 59, 62, 67, 68, 69, 94, 100, 122, 123, 124:
+		default:
 			continue
 		}
 		if !entryChecked[f.ordinal] || !writerChecked[f.ordinal] || !finishChecked[f.ordinal] || !ownerChecked[f.ordinal] || len(negatives[f.ordinal]) != map[bool]int{true: 20, false: 17}[f.art != nil] {
@@ -656,7 +658,7 @@ func TestHDSmallResourceContract(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(p.frames) != 36 || !bytes.Equal(before, m.Mem) {
+	if len(p.frames) != 39 || !bytes.Equal(before, m.Mem) {
 		t.Fatal("素材載入來源或原版記憶體不同")
 	}
 	available := map[int]bool{}
@@ -665,7 +667,7 @@ func TestHDSmallResourceContract(t *testing.T) {
 			available[f.ordinal] = true
 		}
 	}
-	if len(available) != 35 || !available[5] || !available[22] || !available[23] || !available[24] || !available[25] || !available[26] || !available[27] || !available[28] || !available[29] || !available[30] || !available[31] || !available[32] || !available[33] || !available[34] || !available[35] || !available[36] || !available[37] || !available[38] || !available[42] || !available[53] || !available[56] || !available[59] || !available[62] || !available[67] || !available[68] || !available[69] || !available[94] || !available[122] || !available[123] || !available[124] {
+	if len(available) != 38 || !available[5] || !available[22] || !available[23] || !available[24] || !available[25] || !available[26] || !available[27] || !available[28] || !available[29] || !available[30] || !available[31] || !available[32] || !available[33] || !available[34] || !available[35] || !available[36] || !available[37] || !available[38] || !available[42] || !available[53] || !available[56] || !available[59] || !available[62] || !available[67] || !available[68] || !available[69] || !available[94] || !available[122] || !available[123] || !available[124] {
 		t.Fatal("尚無候選來源被計為HD", available)
 	}
 	if _, err := loadHDSmallRuntime(nil, game, assets); err == nil {
@@ -753,7 +755,39 @@ func TestHDSmallResourceContract(t *testing.T) {
 }
 
 // 規格070 R72：五艘船的獨立正常來源、游標及真實反例。
+type hdSmallNativeFixture struct {
+	inputPath, pointPath, inputSHA, pointSHA, modelDir, outputEnv, imageKey, result, pointsKey string
+	points, inputs, positivePoints                                                             int
+	inputEnd, end                                                                              uint64
+	sources                                                                                    map[int]int
+}
+
 func TestHDShipRuntimeNativeLifecycle(t *testing.T) {
+	hdSmallNativeLifecycle(t, hdSmallNativeFixture{
+		inputPath: "baseline-ships-r5/gui.inputs.json", pointPath: "icons-ships-entry-r1/points.json",
+		inputSHA: "639574cafe140655c699c9cc9709208f668af08751bdab4895b875c8673353e1",
+		pointSHA: "fd2fc2ee7ba3c7eb63c9250d742a26909b67a19ea83a0157212b8e40a8efd1e8",
+		modelDir: "ships-ram-r1/model-r1", outputEnv: "TEST_HD_SHIP_OUTPUT", imageKey: "ships",
+		result: "PASS_FIVE_SHIP_RUNTIME_NATIVE_24", pointsKey: "ship_points",
+		points: 24, inputs: 109, positivePoints: 15, inputEnd: 227600000, end: 227400000,
+		sources: map[int]int{6: 121, 7: 143, 14: 127, 15: 125, 127: 137},
+	})
+}
+func TestHDVehicleRuntimeNativeLifecycle(t *testing.T) {
+	hdSmallNativeLifecycle(t, hdSmallNativeFixture{
+		inputPath: "baseline-vehicles-r1/gui.inputs.json", pointPath: "r73-icons-entry-r1/points.json",
+		inputSHA: "26f0bcb8bab7fce4fe0ea47c712fd9a236911a7b9cb00f361b4a65c177c934a7", pointSHA: "7221fa287182174aaf80f91879b343a4ec5f04cadade513825ef0ed50c7fa807",
+		modelDir: "vehicles-ram-r1/model-r1", outputEnv: "TEST_HD_VEHICLE_OUTPUT", imageKey: "vehicles",
+		result: "PASS_THREE_VEHICLE_RUNTIME_NATIVE_18", pointsKey: "vehicle_points",
+		points: 18, inputs: 86, positivePoints: 9, inputEnd: 175600000, end: 175200000,
+		sources: map[int]int{8: 138, 9: 67, 16: 82},
+	})
+}
+func hdSmallNativeLifecycle(t *testing.T, fixture hdSmallNativeFixture) {
+	root := os.Getenv("TEST_HD_UNIT_NATIVE")
+	if root == "" {
+		root = os.Getenv("TEST_HD_SHIP_NATIVE")
+	}
 	game, assets, receipts := os.Getenv("TEST_GAME_ROOT"), os.Getenv("TEST_HD_ASSETS"), os.Getenv("TEST_HD_RECEIPTS")
 	for _, name := range []string{"OPENING.EXE", "VICEROY.EXE", "BUILDING.SS", "PHYS0.SS", "ICONS.SS"} {
 		if _, err := os.Stat(filepath.Join(game, name)); os.IsNotExist(err) {
@@ -767,10 +801,10 @@ func TestHDShipRuntimeNativeLifecycle(t *testing.T) {
 		}
 	}
 	load := func(path string) []byte { t.Helper(); b, e := os.ReadFile(path); need(e); return b }
-	inputBytes := load(filepath.Join(os.Getenv("TEST_HD_SHIP_NATIVE"), "baseline-ships-r5/gui.inputs.json"))
-	pointBytes := load(filepath.Join(os.Getenv("TEST_HD_SHIP_NATIVE"), "icons-ships-entry-r1/points.json"))
-	if hash(inputBytes) != "639574cafe140655c699c9cc9709208f668af08751bdab4895b875c8673353e1" || hash(pointBytes) != "fd2fc2ee7ba3c7eb63c9250d742a26909b67a19ea83a0157212b8e40a8efd1e8" {
-		t.Fatal("正常輸入或49點收據不同")
+	inputBytes := load(filepath.Join(root, fixture.inputPath))
+	pointBytes := load(filepath.Join(root, fixture.pointPath))
+	if hash(inputBytes) != fixture.inputSHA || hash(pointBytes) != fixture.pointSHA {
+		t.Fatal("固定正常路徑收據不同")
 	}
 	var replay windowReceipt
 	need(json.Unmarshal(inputBytes, &replay))
@@ -786,10 +820,10 @@ func TestHDShipRuntimeNativeLifecycle(t *testing.T) {
 		Flags     uint16    `json:"flags"`
 	}
 	need(json.Unmarshal(pointBytes, &points))
-	if len(points) != 24 || len(replay.Inputs) != 109 || replay.End != 227600000 {
+	if len(points) != fixture.points || len(replay.Inputs) != fixture.inputs || replay.End != fixture.inputEnd {
 		t.Fatal("正常路徑規模不同")
 	}
-	replay.End = 227400000 // 本批原版oracle終點為最後正常截點。
+	replay.End = fixture.end // 本批原版oracle終點為最後正常截點。
 	seed := load(filepath.Join(receipts, "lifecycle-r29-r1/gui/save/COLONY09.SAV"))
 	if hash(seed) != "52ae8b7bd4bea1869afb825af165a8edc50882fc176d49985d4fb3c362d5469b" {
 		t.Fatal("原始存檔不同")
@@ -813,13 +847,13 @@ func TestHDShipRuntimeNativeLifecycle(t *testing.T) {
 	h, err := loadHDRuntime(m, game, assets)
 	need(err)
 
-	if h.small == nil || len(h.small.frames) != 36 || hash(m.Mem) != before {
+	if h.small == nil || len(h.small.frames) != 39 || hash(m.Mem) != before {
 		t.Fatal("小圖像載入失敗或改寫DOS")
 	}
 	p := h.small
 	p.trace = true
 
-	ships := map[int]int{6: 121, 7: 143, 14: 127, 15: 125, 127: 137}
+	targets := fixture.sources
 	negatives := map[int][]string{}
 	entryChecked, writerChecked, finishChecked, ownerChecked := map[int]bool{}, map[int]bool{}, map[int]bool{}, map[int]bool{}
 	prior := uint64(0)
@@ -827,7 +861,7 @@ func TestHDShipRuntimeNativeLifecycle(t *testing.T) {
 		h.beforeInstruction()
 		if p.accepted != prior {
 			n := p.frames[p.selected].ordinal
-			if _, ok := ships[n]; ok && !finishChecked[n] {
+			if _, ok := targets[n]; ok && !finishChecked[n] {
 				negatives[n] = append(negatives[n], hdSmallFinishNegatives(t, p)...)
 				finishChecked[n] = true
 			}
@@ -835,7 +869,7 @@ func TestHDShipRuntimeNativeLifecycle(t *testing.T) {
 		}
 		if p.active {
 			n := p.frames[p.selected].ordinal
-			if _, ok := ships[n]; !ok {
+			if _, ok := targets[n]; !ok {
 				return
 			}
 			if !entryChecked[n] {
@@ -848,9 +882,9 @@ func TestHDShipRuntimeNativeLifecycle(t *testing.T) {
 			}
 		}
 	})
-	target := os.Getenv("TEST_HD_SHIP_OUTPUT")
+	target := os.Getenv(fixture.outputEnv)
 	if target == "" {
-		t.Fatal("缺少五船原版收據輸出")
+		t.Fatal("缺少單位小圖像原版收據輸出")
 	}
 	need(os.Mkdir(target, 0755))
 	at, count := 0, uint64(0)
@@ -862,14 +896,14 @@ func TestHDShipRuntimeNativeLifecycle(t *testing.T) {
 		}
 		point := points[at]
 		if m.Steps > point.Step || (m.Steps == point.Step && count > point.Count) {
-			t.Fatal("略過五船原版截點", at)
+			t.Fatal("略過單位小圖像原版截點", at)
 		}
 		if m.Steps != point.Step || count != point.Count {
 			return
 		}
 		c := m.CPU
 		if hash(m.Mem) != point.Memory || hash(m.Indexed()) != point.Indexed || hash(m.DAC[:]) != point.Palette || c.R != point.Registers || c.Seg != point.Segments || c.IP != point.IP || c.Flags != point.Flags {
-			t.Fatal("五船覆蓋改變原版狀態", at)
+			t.Fatal("單位小圖像覆蓋改變原版狀態", at)
 		}
 		f := draftNativeFrame{canvas: m.Mem[hdBuildingCanvas : hdBuildingCanvas+64000], indexed: m.Indexed(), palette: m.DAC[:], cursor: image.Rect(int(d.Mouse.X), int(d.Mouse.Y), int(d.Mouse.X)+16, int(d.Mouse.Y)+16), step: m.Steps, mode: m.VideoMode()}
 		type expectedCell struct {
@@ -877,50 +911,50 @@ func TestHDShipRuntimeNativeLifecycle(t *testing.T) {
 			Native         byte
 		}
 		var oracle map[string]expectedCell
-		need(json.Unmarshal(load(filepath.Join(os.Getenv("TEST_HD_SHIP_NATIVE"), "ships-ram-r1/model-r1", fmt.Sprintf("point-%03d.terrain-model.json", at))), &oracle))
+		need(json.Unmarshal(load(filepath.Join(root, fixture.modelDir, fmt.Sprintf("point-%03d.terrain-model.json", at))), &oracle))
 		owned := 0
 		for pos, cell := range p.visible {
 			if !cell.owned {
 				continue
 			}
 			ordinal := p.frames[cell.slot].ordinal
-			if _, ok := ships[ordinal]; !ok {
+			if _, ok := targets[ordinal]; !ok {
 				continue
 			}
 			expected, ok := oracle[fmt.Sprint(pos)]
 			if !ok || expected.Ordinal != ordinal || expected.Local != int(cell.local) || expected.Native != cell.native || f.canvas[pos] != cell.native {
-				t.Fatal("五船來源與獨立模型不同", at, pos, cell)
+				t.Fatal("單位小圖像來源與獨立模型不同", at, pos, cell)
 			}
 			owned++
 		}
 		if owned != len(oracle) {
-			t.Fatal("五船來源缺漏", at, owned, len(oracle))
+			t.Fatal("單位小圖像來源缺漏", at, owned, len(oracle))
 		}
 		before, regs, segs, ip, flags, cycles := hash(m.Mem), c.R, c.Seg, c.IP, c.Flags, c.Cycles
 		_, reason := h.cursorProof(f)
 		if reason != "" {
 			if len(oracle) != 0 || (at != 1 && at != 2) {
-				t.Fatal("五船出現未知游標表面", at, reason)
+				t.Fatal("單位小圖像出現未知游標表面", at, reason)
 			}
 			guarded = append(guarded, at)
 		}
 		if len(oracle) > 0 {
 			shipPoints++
 			if reason != "" {
-				t.Fatal("五船游標契約未通過", at)
+				t.Fatal("單位小圖像游標契約未通過", at)
 			}
 			only := draftRGB(f.indexed, f.palette)
 			receipt := p.paint(only, f)
 			h.restoreCursor(only, f)
 			for slot, a := range p.frames {
-				expectedPaint, ok := ships[a.ordinal]
+				expectedPaint, ok := targets[a.ordinal]
 				if !ok {
 					continue
 				}
 				r := receipt["sources"].(map[string]any)[fmt.Sprint(a.ordinal)].(map[string]any)
 				if r["owned"].(int) > 0 {
 					if r["painted"].(int) != expectedPaint {
-						t.Fatal("五船原alpha繪製格不同", at, a.ordinal, r)
+						t.Fatal("單位小圖像原alpha繪製格不同", at, a.ordinal, r)
 					}
 					if !ownerChecked[a.ordinal] {
 						negatives[a.ordinal] = append(negatives[a.ordinal], hdSmallOwnershipNegatives(t, p, f, slot)...)
@@ -940,11 +974,11 @@ func TestHDShipRuntimeNativeLifecycle(t *testing.T) {
 			for y := 0; y < 800; y++ {
 				for x := 0; x < 1280; x++ {
 					if !mask[(y/4)*320+x/4] && only.RGBAAt(x, y) != native.RGBAAt(x, y) {
-						t.Fatal("五船越出有效來源", at, x, y)
+						t.Fatal("單位小圖像越出有效來源", at, x, y)
 					}
 				}
 			}
-			for name, im := range map[string]*image.RGBA{"original": native, "ships": only} {
+			for name, im := range map[string]*image.RGBA{"original": native, fixture.imageKey: only} {
 				file, e := os.Create(filepath.Join(target, fmt.Sprintf("point-%03d-%s.png", at, name)))
 				need(e)
 				need(png.Encode(file, im))
@@ -953,7 +987,7 @@ func TestHDShipRuntimeNativeLifecycle(t *testing.T) {
 			file, e := os.Create(filepath.Join(target, fmt.Sprintf("point-%03d-art.png", at)))
 			need(e)
 			for _, a := range p.frames {
-				if _, ok := ships[a.ordinal]; ok && a.accepted > 0 && receipt["sources"].(map[string]any)[fmt.Sprint(a.ordinal)].(map[string]any)["owned"].(int) > 0 {
+				if _, ok := targets[a.ordinal]; ok && a.accepted > 0 && receipt["sources"].(map[string]any)[fmt.Sprint(a.ordinal)].(map[string]any)["owned"].(int) > 0 {
 					need(png.Encode(file, a.art))
 					break
 				}
@@ -962,7 +996,7 @@ func TestHDShipRuntimeNativeLifecycle(t *testing.T) {
 			dumpJSON(filepath.Join(target, fmt.Sprintf("point-%03d.json", at)), map[string]any{"point": at, "cells": oracle, "small": receipt, "cursor": f.cursor, "cursor_source_sha256": hash(m.Mem[0x1cd74:0x1ce74])})
 		}
 		if hash(m.Mem) != before || c.R != regs || c.Seg != segs || c.IP != ip || c.Flags != flags || c.Cycles != cycles {
-			t.Fatal("五船合成改寫原版", at)
+			t.Fatal("單位小圖像合成改寫原版", at)
 		}
 		records = append(records, map[string]any{"point": at, "step": m.Steps, "ship_owned": owned, "cursor_reason": reason, "original_state_equal": true})
 		at++
@@ -985,19 +1019,19 @@ func TestHDShipRuntimeNativeLifecycle(t *testing.T) {
 		need(m.Step())
 	}
 	capture()
-	if at != 24 || count != 109 || shipPoints != 15 || p.rejected != 0 || len(guarded) != 2 {
-		t.Fatal("五船原版路徑未完成", at, count, shipPoints, p.rejected, guarded)
+	if at != fixture.points || count != uint64(fixture.inputs) || shipPoints != fixture.positivePoints || p.rejected != 0 || len(guarded) != 2 {
+		t.Fatal("單位小圖像原版路徑未完成", at, count, shipPoints, p.rejected, guarded)
 	}
 	for _, f := range p.frames {
-		if _, ok := ships[f.ordinal]; !ok {
+		if _, ok := targets[f.ordinal]; !ok {
 			continue
 		}
 		if f.accepted != 1 || !entryChecked[f.ordinal] || !writerChecked[f.ordinal] || !finishChecked[f.ordinal] || !ownerChecked[f.ordinal] || len(negatives[f.ordinal]) != 20 {
-			t.Fatal("五船真實反例或來源缺漏", f.ordinal, f.accepted, negatives[f.ordinal])
+			t.Fatal("單位小圖像真實反例或來源缺漏", f.ordinal, f.accepted, negatives[f.ordinal])
 		}
 	}
 	if !bytes.Equal(load(filepath.Join(scratch, "COLONY09.SAV")), seed) {
-		t.Fatal("五船覆蓋改變存檔")
+		t.Fatal("單位小圖像覆蓋改變存檔")
 	}
-	dumpJSON(filepath.Join(target, "check.json"), map[string]any{"result": "PASS_FIVE_SHIP_RUNTIME_NATIVE_24", "production_connected": true, "points": records, "ship_points": shipPoints, "dos_inputs": count, "end": m.Steps, "negative_cases": negatives, "guarded_non_source_points": guarded})
+	dumpJSON(filepath.Join(target, "check.json"), map[string]any{"result": fixture.result, "production_connected": true, "points": records, fixture.pointsKey: shipPoints, "dos_inputs": count, "end": m.Steps, "negative_cases": negatives, "guarded_non_source_points": guarded})
 }

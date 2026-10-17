@@ -20,18 +20,23 @@ def validate(canvas,indexed,memory,cursor,x,y):
  assert bytes(expected)==indexed,'outside-cursor'
  return opaque
 
+PROFILES={
+ 'ships':{'ram':'ships-ram-r1','baseline':'baseline-ships-r5','inputs':'639574cafe140655c699c9cc9709208f668af08751bdab4895b875c8673353e1','model':'0e66369e9cc74d7281e4ae8d8e10f5cd06eb3a7d999b36e863906252f88875cd','model_result':'PASS_FIVE_SHIP_RAM_RESEARCH_NATIVE_MODEL','points':24,'ordinals':{6,7,14,15,127},'prefix':'pedia-ship-','result':'PASS_FIVE_SHIP_STANDARD_CURSOR_VISIBLE_SURFACES','count_key':'ship_sources'},
+ 'vehicles':{'ram':'vehicles-ram-r1','baseline':'baseline-vehicles-r1','inputs':'26f0bcb8bab7fce4fe0ea47c712fd9a236911a7b9cb00f361b4a65c177c934a7','model':'1c8c59a9a36b36f5feb1cec12d925111b96619098213bc5a4e171bccb2e5d057','model_result':'PASS_THREE_VEHICLE_RAM_RESEARCH_NATIVE_MODEL','points':18,'ordinals':{8,9,16},'prefix':'pedia-vehicle-','result':'PASS_THREE_VEHICLE_STANDARD_CURSOR_VISIBLE_SURFACES','count_key':'vehicle_sources'}
+}
 def main():
  parser=argparse.ArgumentParser(description=__doc__)
+ parser.add_argument('--profile',choices=sorted(PROFILES),default='ships',help='選固定五船或三車／火炮的正常原版收據')
  parser.add_argument('--root',type=Path,required=True)
  parser.add_argument('--output',type=Path,required=True)
- args=parser.parse_args();p=args.root.resolve()
+ args=parser.parse_args();p=args.root.resolve();cfg=PROFILES[args.profile]
  assert Path('/.dockerenv').is_file() and os.getuid()!=0
  assert not args.output.exists() and args.output.parent.stat().st_uid==os.getuid()
- ram=p/'ships-ram-r1/observed-r1'
- assert sha((p/'baseline-ships-r5/gui.inputs.json').read_bytes())=='639574cafe140655c699c9cc9709208f668af08751bdab4895b875c8673353e1'
- cap=read(p/'baseline-ships-r5/capture.json');model=read(p/'ships-ram-r1/model-r1/check.json')
- assert sha((p/'ships-ram-r1/model-r1/check.json').read_bytes())=='0e66369e9cc74d7281e4ae8d8e10f5cd06eb3a7d999b36e863906252f88875cd'
- assert model['result']=='PASS_FIVE_SHIP_RAM_RESEARCH_NATIVE_MODEL' and len(model['points'])==len(cap['samples'])==24
+ ram=p/cfg['ram']/'observed-r1'
+ assert sha((p/cfg['baseline']/'gui.inputs.json').read_bytes())==cfg['inputs']
+ cap=read(p/cfg['baseline']/'capture.json');model=read(p/cfg['ram']/'model-r1/check.json')
+ assert sha((p/cfg['ram']/'model-r1/check.json').read_bytes())==cfg['model']
+ assert model['result']==cfg['model_result'] and len(model['points'])==len(cap['samples'])==cfg['points']
  checks=[];groups={}
  for sample,point in zip(cap['samples'],model['points']):
   i=point['point'];prefix=ram/('point-%03d'%i)
@@ -42,23 +47,23 @@ def main():
   mouse=sample['state']['dos_mouse'];reason=''
   try:opaque=validate(canvas,indexed,memory,cursor,mouse['x'],mouse['y'])
   except AssertionError as error:reason=str(error);opaque=set()
-  owners=read(p/'ships-ram-r1/model-r1'/point['main_owners_file'])
+  owners=read(p/cfg['ram']/'model-r1'/point['main_owners_file'])
   assert all(canvas[int(k)]==v['native'] for k,v in owners.items())
   hidden=sum(int(k) in opaque for k in owners)
   if reason:assert sample['label'] in ['load-menu','load-slot'] and not owners
   checks.append({'point':i,'label':sample['label'],'owned':len(owners),'cursor_covered_source_cells':hidden,'source_unchanged':True,'cursor_surface_verified':not reason,'guard_reason':reason})
-  if sample['label'].startswith('pedia-ship-'):
+  if sample['label'].startswith(cfg['prefix']):
    assert not reason
    ordinal=int(sample['label'].split('-')[2]);groups.setdefault(ordinal,[]).append((sample['label'],owners,hidden))
- assert set(groups)=={6,7,14,15,127}
+ assert set(groups)==cfg['ordinals']
  for ordinal,items in groups.items():
   assert len(items)==3 and items[0][1]==items[1][1]==items[2][1]
   assert items[0][2]==items[2][2]==0 and items[1][2]>0
  assert not checks[-1]['owned']
- out={'result':'PASS_FIVE_SHIP_STANDARD_CURSOR_VISIBLE_SURFACES','checker_sha256':sha(Path(__file__).read_bytes()),'production_connected':False,'native_points':24,'verified_cursor_surface_points':22,'guarded_non_source_points':2,
-      'checks':checks,'ship_sources':5,'native_ram_saves':0,'native_ram_restores':0,'cursor_source_restores':0,
+ out={'result':cfg['result'],'checker_sha256':sha(Path(__file__).read_bytes()),'production_connected':False,'native_points':cfg['points'],'verified_cursor_surface_points':cfg['points']-2,'guarded_non_source_points':2,
+      'checks':checks,cfg['count_key']:len(cfg['ordinals']),'native_ram_saves':0,'native_ram_restores':0,'cursor_source_restores':0,
       'cursor_contract':'docs/spec/066-hd-standard-cursor.md','claim':'full indexed surface equals unchanged main canvas plus verified original cursor; no VGA ownership or new RAM restoration claim',
-      'receipts_sha256':{str(f):sha(f.read_bytes()) for f in [p/'baseline-ships-r5/capture.json',p/'ships-ram-r1/model-r1/check.json']}}
+      'receipts_sha256':{str(f):sha(f.read_bytes()) for f in [p/cfg['baseline']/'capture.json',p/cfg['ram']/'model-r1/check.json']}}
  (args.output).write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
  print(out['result'],[(ordinal,items[1][2]) for ordinal,items in sorted(groups.items())],flush=True)
 
