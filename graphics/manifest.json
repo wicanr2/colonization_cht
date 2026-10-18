@@ -15412,6 +15412,54 @@
       ],
       "coverage": "R89 READY full PIK sources; exact 0E21:0091 word or 0E2D:00AA byte publication; current background, glyph and unknown foreground kept separate; final GUI conformance pending",
       "rights": "AI-generated display redraw under RRSAL-1.0; original references and unselected candidates remain private"
+    },
+    "king1-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "c703753a240057c7379a4c192e3d97349d45ef5d12a8e27beddd1bf1468e504b",
+      "bytes": 781976,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        189,
+        187
+      ],
+      "target_size": [
+        756,
+        748
+      ],
+      "native_opaque_pixels": 11930,
+      "observed_native_rects": [
+        [
+          0,
+          12,
+          189,
+          199
+        ]
+      ],
+      "sampling": "integer pixel-center nearest neighbor, full generated canvas",
+      "alpha": "raw PNG alpha unchanged; straight-alpha source-over +127 rounding; complete current original pose required; unknown foreground preserved",
+      "original_source": {
+        "file": "KING1.SS",
+        "ordinal": 0,
+        "file_sha256": "bfdcb69af1376dc4334d7822121a55c112e19cc473b6a11cc9c6ff599b9c9e7f",
+        "encoded_sha256": "096034463bc78340a4e7b16a8809e1deae9e6cf42aa58e8375875e86f6185769",
+        "indexed_sha256": "946f5f2d30ae8d5402e763a9d0393bfcfd4448e2d9edf2321e9b7f904ef18a60"
+      },
+      "generation_prompt": "Use case: style-transfer. Asset type: one transparent standalone HD pixel-art foreground sprite for a display-only layer of Colonization (1994). Image 1 is the EXACT composition and pose reference, 189:187 canvas ratio. Its black/empty areas are transparent, not a black background. Image 2 is the USER APPROVED fine pixel-art style reference only. Redraw the foreground figures from scratch with crisp deliberate pixel clusters, sharp material detail and restrained warm historical colors. Preserve the original canvas framing, figure scale, silhouette, limb positions and empty gaps. A pale white-haired elderly European king occupies the center/right in a bright red period coat and red breeches with gold buttons, cream lace cravat, white stockings and dark shoes. He is seated with his left image-side hand lowered onto the chair arm and his right image-side forearm raised outward, palm up, with the raised hand continuing to the right canvas edge exactly as in reference 1. His knees, lower legs and shoes retain their exact positions. A seated slender gray hunting hound occupies the lower left, looking up at him with a long muzzle, floppy ears, narrow chest and slim forelegs. This is a DOG, not a person. Retain exactly one king and one hound. Keep the same period appearance and expression, not a modern or caricatured face. No new people, no crown, no weapons, no additional objects. Treat the throne, carpet and background flecks around the figures as removable background remnants: redraw only the king and hound, with genuine transparency around and between their silhouettes, including the large upper-left empty space and the gaps between legs. No floor, no room, no complete chair, no scenery, no text, no border, no watermark, no atlas. Return one full-canvas PNG with alpha. Do not crop tightly or recenter the subjects.",
+      "generator": "built-in image_gen",
+      "reference_sha256": {
+        "original_private_reference": "495b5894e79789039464d8df7ce12b1dd56ee4b666b6d2df8eda04a331589d05",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "user_approval": {
+        "decision": "沿已定稿精細像素風及全量HD授權；使用者要求生成素材加入GitHub。",
+        "source": "AGENTS.md HD重繪定稿及目前對話"
+      },
+      "rights": "AI-generated project candidate under RRSAL-1.0; original reference remains private",
+      "ready_review_sha256": "a529574cc845ad2905b305c4e085d0b2e41099f733d5b3c67a657e89821d6d99"
     }
   }
 }

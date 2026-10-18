@@ -118,6 +118,10 @@ func loadHDRuntime(m *golem.Machine, game, directory string) (*hdRuntime, error)
 	if err != nil {
 		return nil, err
 	}
+	h.royal, err = loadHDRoyalRuntime(h, game, directory)
+	if err != nil {
+		return nil, err
+	}
 	h.parch, err = loadHDTextureKind(h, game, directory, "parch")
 	if err != nil {
 		return nil, err
@@ -166,7 +170,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "ae0c4e74a53bfafcdd6114108d8e45925a231b8ebc1635856d14827ff8c86368"
+const hdManifestSHA = "56b42309a722288627823654b0feb2c1cc463f48f10a4e998b768127ab8bf8f2"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"
@@ -180,6 +184,7 @@ type hdBuildingPixel struct {
 }
 type hdRuntime struct {
 	opening *hdOpeningRuntime
+	royal   *hdRoyalRuntime
 	scenes  *hdSceneRuntime
 	newGame *hdNewGameRuntime
 
@@ -276,6 +281,7 @@ func (h *hdRuntime) beforeInstruction() {
 	h.shelter.beforeInstruction()
 	h.nine.beforeInstruction()
 	h.small.beforeInstruction()
+	h.royal.beforeInstruction()
 	m := h.m
 	c := m.CPU
 	cs, ip := c.Seg[golem.CS], c.IP
@@ -550,6 +556,9 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 			}
 		}
 	}
+	if b.hd.royal != nil {
+		hd["royal"] = b.hd.royal.paint(base, f)
+	}
 	var hdBG draftHDBackground
 	bgMask := make([]byte, 8000)
 	bgPainted := 0
@@ -752,6 +761,9 @@ func (h *hdRuntime) key() string {
 	}
 	if h != nil && h.small != nil {
 		return fmt.Sprintf("%s/small/%d", base, h.small.revision)
+	}
+	if h != nil && h.royal != nil {
+		base = fmt.Sprintf("%s/royal/%d", base, h.royal.revision)
 	}
 	return base
 }
