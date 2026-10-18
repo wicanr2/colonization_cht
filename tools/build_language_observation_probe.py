@@ -151,7 +151,7 @@ def attach_language_runtime(repo, output, reference, *, with_rebuild=True, forma
                          "tools/language_rebuild_probe.go", "tools/language_rebuild_probe_test.go",
                          "tools/language_resource_index.go", "tools/language-catalogs.json",
                          "tools/hd_runtime.go", "tools/hd_runtime_test.go",
-                         "tools/hd_opening_runtime.go", "tools/hd_opening_sources.go", "tools/hd_opening_runtime_test.go",
+                         "tools/hd_opening_runtime.go", "tools/hd_opening_sources.go", "tools/hd_opening_sprites.go", "tools/hd_opening_runtime_test.go",
                          "tools/hd_sea_runtime.go", "tools/hd_sea_runtime_test.go",
                          "tools/hd_person_runtime.go", "tools/hd_person_runtime_test.go",
                          "tools/hd_building024_runtime.go", "tools/hd_building024_runtime_test.go",

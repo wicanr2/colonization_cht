@@ -166,7 +166,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "1e352b76c3f0cee0a72ad6f4fcd4cf6ab5122bc97e9deac3a02a175a889e6dbe"
+const hdManifestSHA = "5c8f2f86c28664c3c1beb92ec61c08e0abd54e3a771ac45a2316a7e37d8537c5"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"
@@ -261,6 +261,9 @@ func (h *hdRuntime) baseKey() string {
 func (h *hdRuntime) beforeInstruction() {
 	if h == nil {
 		return
+	}
+	if h.opening != nil {
+		h.opening.sprites.beforeInstruction()
 	}
 	h.sea.beforeInstruction()
 	h.terrain079.beforeInstruction()
@@ -700,7 +703,11 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 	// 共用語言引擎的VICEROY畫布在OPENING階段不能用於判定游標。
 	items, _ := record["items"].([]map[string]any)
 	if b.hd.opening != nil && len(items) == 0 {
-		hd["opening_cursor_background"] = b.hd.opening.paintWithin(out, f, f.cursor)
+		if b.hd.opening.sprites != nil {
+			hd["opening_cursor_background"] = b.hd.opening.sprites.paintWithin(out, f, f.cursor)
+		} else {
+			hd["opening_cursor_background"] = b.hd.opening.paintWithin(out, f, f.cursor)
+		}
 	}
 	hd["native_cursor_text_background_repaints"] = nativeCursorBackgroundPainted
 	hd["native_cursor_text_background_mask"] = nativeCursorBackgroundMask

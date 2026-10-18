@@ -570,3 +570,7 @@ GUI結束後由[原版狀態重播檢查器](../../tools/check_display_settings_
 兩種繁中重播與GUI終點PNG全同。完整雜湊及尚待項見規格051的2026-10-11表。
 GUI收據為`runtime-ui-gui-20261011-r2/`，重播收據為`runtime-ui-replays-20261011-r2/`。
 字型、完整五語包、正式設定保存、失焦／拖曳GUI與HD合成仍待完成，規格051保持DRAFT。
+
+### R83開場船隻八幀
+
+[規格069 R83](../spec/069-hd-menu-background-and-textures.md)已限定CONFORMED，完整來源、八幀正常GUI、逐RGBA、更新瞬間、游標進出及原版狀態／WAV／存檔通過。生成原PNG已納入graphics，現共155張。其餘開場SS與動畫、其他玩家可見圖像、完整五語、90秒實玩影片及新版三平台交付仍待完成；不以本批代替全量完成。

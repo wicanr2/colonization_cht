@@ -32,6 +32,7 @@ type hdOpeningCell struct {
 	value byte
 }
 type hdOpeningRuntime struct {
+	sprites                                                                                    *hdOpeningSpriteRuntime
 	h                                                                                          *hdRuntime
 	art                                                                                        [2]*image.RGBA
 	native                                                                                     [2][]byte
@@ -110,6 +111,13 @@ func loadHDOpeningRuntime(h *hdRuntime, game, directory string) (*hdOpeningRunti
 			}
 		}
 	}
+	var err error
+	p.sprites, err = loadHDOpeningSprites(p, game, directory)
+	if err != nil {
+		return nil, err
+	}
+	h.m.WatchWrite(hdOpeningMain, hdOpeningMain+63999, func(_ *golem.Machine, a uint32, o, v byte) { p.sprites.write(a, o, v) })
+	h.m.WatchWrite(0xa0000, 0xafa00-1, func(_ *golem.Machine, a uint32, o, v byte) { p.sprites.publish(a, o, v) })
 	h.m.WatchWrite(hdOpeningMain, hdOpeningMain+63999, func(_ *golem.Machine, a uint32, o, v byte) { p.write(a, o, v) })
 	h.m.WatchWrite(hdOpeningMap, hdOpeningMap+126719, func(_ *golem.Machine, a uint32, o, v byte) { p.write(a, o, v) })
 	return p, nil
@@ -208,6 +216,9 @@ func (p *hdOpeningRuntime) live() bool {
 	return len(p.h.m.Mem) >= 0x5570+0x9f+32 && bytes.Equal(p.h.m.Mem[0x5570+0x9f:0x5570+0x9f+32], hdOpeningSignature)
 }
 func (p *hdOpeningRuntime) retire() {
+	if p.sprites != nil {
+		p.sprites.retire()
+	}
 	have := p.mapValid
 	for _, c := range p.cells {
 		have = have || c.kind != 0

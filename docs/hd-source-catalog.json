@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "1e352b76c3f0cee0a72ad6f4fcd4cf6ab5122bc97e9deac3a02a175a889e6dbe",
+  "formal_manifest_sha256": "5c8f2f86c28664c3c1beb92ec61c08e0abd54e3a771ac45a2316a7e37d8537c5",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -39135,6 +39135,13 @@
         "formal_connected": true,
         "review_sha256": "228187c040df6071d840d1d70662518da0adb6913671cedeee3480290430ae4b",
         "scope": "canonical-palette opening PIK border and panoramic map; raw per-object PNG geometry and verified source restoration inside mouse rectangle; SS foreground animation and intermediate fades unverified"
+      },
+      "publication_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb",
+        "scope": "canonical-palette opening ship8 complete calls, native animation regions, verified PIK underlay, exact published VGA provenance, transient and normal mouse/exit; other SS and fades remain unverified"
       }
     },
     {
@@ -41330,6 +41337,13 @@
         "formal_connected": true,
         "review_sha256": "228187c040df6071d840d1d70662518da0adb6913671cedeee3480290430ae4b",
         "scope": "canonical-palette opening PIK border and panoramic map; raw per-object PNG geometry and verified source restoration inside mouse rectangle; SS foreground animation and intermediate fades unverified"
+      },
+      "publication_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb",
+        "scope": "canonical-palette opening ship8 complete calls, native animation regions, verified PIK underlay, exact published VGA provenance, transient and normal mouse/exit; other SS and fades remain unverified"
       }
     },
     {
@@ -43044,9 +43058,18 @@
       "indexed_sha256": "467036bd25945a2d2b662879ec55d7c0e9b120c54539ba46fa38fb319ecde5b2",
       "opaque_pixels": 512,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete original 512-cell SS draw and verified PIK underlay; exact 0557:009F byte publication with unknown same-value revocation",
+      "animation_evidence": "confirmed all eight original frames on normal GUI, original timing and position; shared body with native flag/wake regions only",
+      "formal_assets": [
+        "openship-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb",
+        "scope": "canonical-palette opening ship8 complete calls, native animation regions, verified PIK underlay, exact published VGA provenance, transient and normal mouse/exit; other SS and fades remain unverified"
+      }
     },
     {
       "research_id": 1251,
@@ -43069,9 +43092,18 @@
       "indexed_sha256": "016b409990dc5143a0b9b6f0df416af55b7ad788829ea28f0ac213297fb91d57",
       "opaque_pixels": 512,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete original 512-cell SS draw and verified PIK underlay; exact 0557:009F byte publication with unknown same-value revocation",
+      "animation_evidence": "confirmed all eight original frames on normal GUI, original timing and position; shared body with native flag/wake regions only",
+      "formal_assets": [
+        "openship-001.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb",
+        "scope": "canonical-palette opening ship8 complete calls, native animation regions, verified PIK underlay, exact published VGA provenance, transient and normal mouse/exit; other SS and fades remain unverified"
+      }
     },
     {
       "research_id": 1252,
@@ -43094,9 +43126,18 @@
       "indexed_sha256": "769aaeedfeea8b3336868d6bbbf2344061ba4e5eb0624d33c1897e2d52d62703",
       "opaque_pixels": 512,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete original 512-cell SS draw and verified PIK underlay; exact 0557:009F byte publication with unknown same-value revocation",
+      "animation_evidence": "confirmed all eight original frames on normal GUI, original timing and position; shared body with native flag/wake regions only",
+      "formal_assets": [
+        "openship-002.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb",
+        "scope": "canonical-palette opening ship8 complete calls, native animation regions, verified PIK underlay, exact published VGA provenance, transient and normal mouse/exit; other SS and fades remain unverified"
+      }
     },
     {
       "research_id": 1253,
@@ -43119,9 +43160,18 @@
       "indexed_sha256": "defd7a32804b1f6b96e5ceb2469b2d295eac35896408d0661e0c4befca2393ae",
       "opaque_pixels": 512,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete original 512-cell SS draw and verified PIK underlay; exact 0557:009F byte publication with unknown same-value revocation",
+      "animation_evidence": "confirmed all eight original frames on normal GUI, original timing and position; shared body with native flag/wake regions only",
+      "formal_assets": [
+        "openship-003.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb",
+        "scope": "canonical-palette opening ship8 complete calls, native animation regions, verified PIK underlay, exact published VGA provenance, transient and normal mouse/exit; other SS and fades remain unverified"
+      }
     },
     {
       "research_id": 1254,
@@ -43144,9 +43194,18 @@
       "indexed_sha256": "53176f37bf91913d581af28a472c153048be22e4741c1bda673b68d848b8cda7",
       "opaque_pixels": 512,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete original 512-cell SS draw and verified PIK underlay; exact 0557:009F byte publication with unknown same-value revocation",
+      "animation_evidence": "confirmed all eight original frames on normal GUI, original timing and position; shared body with native flag/wake regions only",
+      "formal_assets": [
+        "openship-004.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb",
+        "scope": "canonical-palette opening ship8 complete calls, native animation regions, verified PIK underlay, exact published VGA provenance, transient and normal mouse/exit; other SS and fades remain unverified"
+      }
     },
     {
       "research_id": 1255,
@@ -43169,9 +43228,18 @@
       "indexed_sha256": "ff59a3f7a03231ca34e91b926daa64a407192cad403bc7cdc1f53e4ca7d037f4",
       "opaque_pixels": 512,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete original 512-cell SS draw and verified PIK underlay; exact 0557:009F byte publication with unknown same-value revocation",
+      "animation_evidence": "confirmed all eight original frames on normal GUI, original timing and position; shared body with native flag/wake regions only",
+      "formal_assets": [
+        "openship-005.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb",
+        "scope": "canonical-palette opening ship8 complete calls, native animation regions, verified PIK underlay, exact published VGA provenance, transient and normal mouse/exit; other SS and fades remain unverified"
+      }
     },
     {
       "research_id": 1256,
@@ -43194,9 +43262,18 @@
       "indexed_sha256": "91df500ee4ddae10481010a73d722c54fb4cb7a432cbb1124e34b9ca96d3514d",
       "opaque_pixels": 512,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete original 512-cell SS draw and verified PIK underlay; exact 0557:009F byte publication with unknown same-value revocation",
+      "animation_evidence": "confirmed all eight original frames on normal GUI, original timing and position; shared body with native flag/wake regions only",
+      "formal_assets": [
+        "openship-006.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb",
+        "scope": "canonical-palette opening ship8 complete calls, native animation regions, verified PIK underlay, exact published VGA provenance, transient and normal mouse/exit; other SS and fades remain unverified"
+      }
     },
     {
       "research_id": 1257,
@@ -43219,9 +43296,18 @@
       "indexed_sha256": "e7ab05d503c1ab4903859a7632d4a4824234cd7f079dc3133697316e0aed2b5c",
       "opaque_pixels": 512,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete original 512-cell SS draw and verified PIK underlay; exact 0557:009F byte publication with unknown same-value revocation",
+      "animation_evidence": "confirmed all eight original frames on normal GUI, original timing and position; shared body with native flag/wake regions only",
+      "formal_assets": [
+        "openship-007.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb",
+        "scope": "canonical-palette opening ship8 complete calls, native animation regions, verified PIK underlay, exact published VGA provenance, transient and normal mouse/exit; other SS and fades remain unverified"
+      }
     },
     {
       "research_id": 1258,
@@ -59313,6 +59399,86 @@
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec",
       "source_indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+    },
+    {
+      "asset": "openship-000.png",
+      "asset_sha256": "09e14223e2be64d9ef5d5906c096a830a45e236518aff711ae8497f395f811d6",
+      "source_research_id": 1250,
+      "source_file": "OPENSHIP.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "97cadde158729f1ebc75b978ad366571bad84defff814924c9ac98832821bd5f",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openship-001.png",
+      "asset_sha256": "a23c30a4dfa47a1e4d33c620259b28f759b755847884c3f6a0912952b7be40bc",
+      "source_research_id": 1251,
+      "source_file": "OPENSHIP.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "f1486498f37ab0db33b1d21c098f1c4e68a348610b5ab3157aba716a1df1812b",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openship-002.png",
+      "asset_sha256": "3ce31e1cbd82324d62db9479e6045de9ccddf2d24421739ccf6c01455e17a1a0",
+      "source_research_id": 1252,
+      "source_file": "OPENSHIP.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "0f93de3425cc84de5e5178606959ec6a1b5779cb51258166040ba0e58b696e88",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openship-003.png",
+      "asset_sha256": "00cdfabed868febc55315a234e238adf44948c0d3f7bc0327dd7d3ec4db13a40",
+      "source_research_id": 1253,
+      "source_file": "OPENSHIP.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "3e98468b10bc65b1e201028b6d81f30159ff074b23fb0b85c03f211e4cdfba2a",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openship-004.png",
+      "asset_sha256": "f7f66a5d46e290809519063fc960db169b9a658cb6ea3009e4aa68b813195241",
+      "source_research_id": 1254,
+      "source_file": "OPENSHIP.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "11c5c63cce6409445e9651e0a30e0cab61636814b79f4626a3de3f0fe1130d7a",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openship-005.png",
+      "asset_sha256": "56aeed9475ba88425638c4d64a9f7890e61b53ac4ba08e53b1e89be22e302c04",
+      "source_research_id": 1255,
+      "source_file": "OPENSHIP.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "81741bb829c013d31c0c0cdad5711159f51350d8a46f47540edac3cb5089f86f",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openship-006.png",
+      "asset_sha256": "10144ef24645a17e5faf35743ee55344abd13696fc0ccdc1cbee8d64c120059c",
+      "source_research_id": 1256,
+      "source_file": "OPENSHIP.SS",
+      "source_ordinal": 6,
+      "source_encoded_sha256": "d6de61601287633a3d0d9a92979a89efe4cb447f376375a662f0ca7c310a210d",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openship-007.png",
+      "asset_sha256": "c41c401191e532b8b19906fd36660e85bd34d05136c8911e42cbfdb6cb6785bd",
+      "source_research_id": 1257,
+      "source_file": "OPENSHIP.SS",
+      "source_ordinal": 7,
+      "source_encoded_sha256": "0044bee7db210462744ac21d00405906a984dc2fda11973c9774064d6b19b3a5",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
     }
   ],
   "limitations": [
@@ -59678,5 +59844,23 @@
     "formal_assets": 147,
     "gui_samples": 6,
     "claim": "two PIK sources only; unknown foreground, animation, fades and full HD remain incomplete"
+  },
+  "opening_ship_conformance": {
+    "ready_sha256": "a06e2b57bbb0fed0b53f5aee1409a1ff6b9919e9961b694ddcf4062dae9cba8a",
+    "review_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb",
+    "sources": [
+      1250,
+      1251,
+      1252,
+      1253,
+      1254,
+      1255,
+      1256,
+      1257
+    ],
+    "new_raw_pngs": 8,
+    "formal_assets": 155,
+    "gui_samples": 17,
+    "claim": "eight OPENSHIP frames and published PIK sources only; other SS, fades and full HD remain incomplete"
   }
 }

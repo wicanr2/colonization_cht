@@ -6773,3 +6773,26 @@ eb97ac7f0ae28b65ee35c97a723ed75d0be5875ddc0cdc5e62203aba490fcc02保留本機。
 只證實完整基準色盤及本批PIK來源。原版移動船與其他SS動畫、中間淡入淡出仍未知，
 不外推全量HD或原版完整美術分母。完整原碼、來源／解碼雜湊、參數與重生入口見
 [規格069 R82](docs/spec/069-hd-menu-background-and-textures.md)及其公開原版來源／像素工具。
+
+
+## 2026-10-18：R83開場船隻八幀及發布來源
+
+已證實，來源為原版OPENING.EXE 3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39，
+OPENSHIP.SS eee07bfee9a7abf512d6bd9688409427149df3226edd024342871f41e143af10。
+dosgolem 82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7、Pillow9.4.0；
+位址空間為dosgolem real-mode CS:IP及20-bit linear RAM，不是EXE檔案偏移。
+
+04A2:0000與三個寫入端、完整512格寫入及返回契約見[規格069 R83](docs/spec/069-hd-menu-background-and-textures.md)。
+八幀均47×25，透明哨兵253，可見內容33×25。正常16次呼叫順序1至7後0，
+每幀217,77與218,77兩次；原版只有旗幟與水花局部值變化。
+主畫布1C430h與已發布VGA逐格分開；0557:009F精確複製來源與值才移交。
+14,000,000步主畫布重畫第7幀，已發布第6幀仍完整512格。
+任何未知同值寫入也撤銷來源；正常退場觀測21840個同值VGA撤銷。
+所有16次完整繪製均保有512個已驗PIK底圖，不從畫面相似或固定座標猜底圖。
+
+公開探針--opening-sprites需--source-model、固定--catalog、--decoded與新的/out內--out；
+原版參考、原IDX、完整記憶體與來源模型保持本機。
+opening-ship-ready-r1.json a06e2b57bbb0fed0b53f5aee1409a1ff6b9919e9961b694ddcf4062dae9cba8a，
+opening-ship-conformance-r1.json 86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb。
+八張生成原PNG原bytes與alpha保留，經正式來源、RGBA及GUI驗收後加入清冊。
+OPENSUN及其他SS無本批HD完成信用。

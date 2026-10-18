@@ -114,3 +114,13 @@ __pycache__/
 
 # README R82：已驗正式開場實拍，來源見readme-captures.json。
 !/docs/screenshots/hd-opening-zh.png
+
+# 規格069 R83：已驗開場船隻八幀生成原PNG。
+!/graphics/openship-000.png
+!/graphics/openship-001.png
+!/graphics/openship-002.png
+!/graphics/openship-003.png
+!/graphics/openship-004.png
+!/graphics/openship-005.png
+!/graphics/openship-006.png
+!/graphics/openship-007.png

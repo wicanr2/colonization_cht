@@ -8631,6 +8631,638 @@
       "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
       "coverage": "READY R82 opening PIK only; unknown foreground and unverified fades retain original; no animation conformance",
       "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "openship-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "09e14223e2be64d9ef5d5906c096a830a45e236518aff711ae8497f395f811d6",
+      "bytes": 1119747,
+      "size": [
+        1442,
+        1091
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        47,
+        25
+      ],
+      "target_size": [
+        188,
+        100
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from measured region; raw PNG bytes preserved",
+      "alpha": "retain raw PNG alpha; shared frame0 body, source-replace patches, integer source-over onto verified HD PIK underlay",
+      "generation_prompt": "Use case: style-transfer. Asset: ONE transparent fine-pixel-art ship sprite for the opening animation of Colonization (1994). Image 1 is the exact subject, silhouette, angle, mast arrangement and proportions reference. Its blue area is transparent palette background: remove it completely. Image 2 is the USER APPROVED fine pixel-art style reference only; do not copy its land, buildings or people. Redraw the small brown wooden sailing ship in image 1, with its bow facing left and raised stern on the right, three cream/tan billowing sails, fine rigging, three small dark-red pennants, and a thin attached muted sea-green wake. Preserve the original slightly elevated three-quarter side view and compact 33:25 visible-content proportions. Crisp intentional small pixel clusters, restrained warm wood grain, cream canvas shading, muted blue-green foam. Keep the complete ship and attached wake centered on genuine transparency with a small margin. No blue rectangle, solid background, sea tile, extra ship, people, guns, text, symbols, border, collage or atlas. One animation frame, frame 0. Do not change the angle, silhouette or number of masts. Match the approved refined pixel technique rather than merely enlarging the coarse reference.",
+      "reference_sha256": {
+        "native-openship-000-reference-r2.png": "08acfa4ee81c8cf9865170a12da05045417da6c90ba4ffc2327973e03b31aea4",
+        "hd-pixel-concept.png": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENSHIP.SS",
+        "sha256": "eee07bfee9a7abf512d6bd9688409427149df3226edd024342871f41e143af10",
+        "ordinal": 0,
+        "encoded_sha256": "97cadde158729f1ebc75b978ad366571bad84defff814924c9ac98832821bd5f",
+        "indexed_sha256": "467036bd25945a2d2b662879ec55d7c0e9b120c54539ba46fa38fb319ecde5b2"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          33,
+          25
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          73,
+          76,
+          1385,
+          1025
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R83 opening ship8 canonical-palette complete calls and published provenance; GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "openship-001.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "a23c30a4dfa47a1e4d33c620259b28f759b755847884c3f6a0912952b7be40bc",
+      "bytes": 1103506,
+      "size": [
+        1442,
+        1091
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        47,
+        25
+      ],
+      "target_size": [
+        188,
+        100
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from measured region; raw PNG bytes preserved",
+      "alpha": "retain raw PNG alpha; shared frame0 body, source-replace patches, integer source-over onto verified HD PIK underlay",
+      "generation_prompt": "Use case: precise-object-edit. Asset: ONE transparent ship-animation frame 1. Image 1 is the edit target and exact master composition to preserve. Image 2 is the original game's corresponding frame, supplied only to show the small pennant and wake changes. Keep the three red pennants exactly unchanged. Advance only the attached muted sea-green wake to the next subtle foam pattern. Preserve image 1's ship body, hull, every sail, mast, rigging, geometry, placement, framing, pixel texture, size and transparent margins exactly. Only the color/shading inside the three existing red pennants and the small attached wake may change. No movement or redrawing of the hull or sails. Make the wake variation restrained so the animation loops smoothly. Keep the same fine pixel-art style and muted palette. Return one complete full ship sprite on genuine transparency; no solid background, blue box, new objects, text, atlas, collage or duplicated ship.",
+      "reference_sha256": {
+        "openship-000-candidate-r1.png": "09e14223e2be64d9ef5d5906c096a830a45e236518aff711ae8497f395f811d6",
+        "native-openship-001-reference-r2.png": "892f1a9c7af4171e229fb3349c86a2984c78ef43af94125330552a8ffc122aba"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENSHIP.SS",
+        "sha256": "eee07bfee9a7abf512d6bd9688409427149df3226edd024342871f41e143af10",
+        "ordinal": 1,
+        "encoded_sha256": "f1486498f37ab0db33b1d21c098f1c4e68a348610b5ab3157aba716a1df1812b",
+        "indexed_sha256": "016b409990dc5143a0b9b6f0df416af55b7ad788829ea28f0ac213297fb91d57"
+      },
+      "native_display_rects": [
+        [
+          3,
+          15,
+          23,
+          24
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          188,
+          647,
+          986,
+          992
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R83 opening ship8 canonical-palette complete calls and published provenance; GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "openship-002.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "3ce31e1cbd82324d62db9479e6045de9ccddf2d24421739ccf6c01455e17a1a0",
+      "bytes": 1092826,
+      "size": [
+        1442,
+        1091
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        47,
+        25
+      ],
+      "target_size": [
+        188,
+        100
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from measured region; raw PNG bytes preserved",
+      "alpha": "retain raw PNG alpha; shared frame0 body, source-replace patches, integer source-over onto verified HD PIK underlay",
+      "generation_prompt": "Use case: precise-object-edit. Asset: ONE transparent ship-animation frame 2. Image 1 is the edit target and exact master composition to preserve. Image 2 is the original game's corresponding frame, supplied only to show the small pennant and wake changes. Keep all three red pennant silhouettes fixed; shift each pennant's warm red highlight toward its trailing right edge and darken its left half slightly. Advance the attached wake to the next subtle foam phase. Preserve image 1's ship body, hull, every sail, mast, rigging, geometry, placement, framing, pixel texture, size and transparent margins exactly. Only the color/shading inside the three existing red pennants and the small attached wake may change. No movement or redrawing of the hull or sails. Make the wake variation restrained so the animation loops smoothly. Keep the same fine pixel-art style and muted palette. Return one complete full ship sprite on genuine transparency; no solid background, blue box, new objects, text, atlas, collage or duplicated ship.",
+      "reference_sha256": {
+        "openship-000-candidate-r1.png": "09e14223e2be64d9ef5d5906c096a830a45e236518aff711ae8497f395f811d6",
+        "native-openship-002-reference-r2.png": "c4d8808035d2b053cfc091ca80375799aa393ca70e8bc537e4c9695d5a54704d"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENSHIP.SS",
+        "sha256": "eee07bfee9a7abf512d6bd9688409427149df3226edd024342871f41e143af10",
+        "ordinal": 2,
+        "encoded_sha256": "0f93de3425cc84de5e5178606959ec6a1b5779cb51258166040ba0e58b696e88",
+        "indexed_sha256": "769aaeedfeea8b3336868d6bbbf2344061ba4e5eb0624d33c1897e2d52d62703"
+      },
+      "native_display_rects": [
+        [
+          15,
+          1,
+          17,
+          2
+        ],
+        [
+          5,
+          3,
+          7,
+          4
+        ],
+        [
+          25,
+          5,
+          27,
+          6
+        ],
+        [
+          3,
+          15,
+          23,
+          24
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          667,
+          109,
+          747,
+          147
+        ],
+        [
+          268,
+          185,
+          348,
+          224
+        ],
+        [
+          1066,
+          262,
+          1146,
+          300
+        ],
+        [
+          188,
+          645,
+          986,
+          990
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R83 opening ship8 canonical-palette complete calls and published provenance; GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "openship-003.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "00cdfabed868febc55315a234e238adf44948c0d3f7bc0327dd7d3ec4db13a40",
+      "bytes": 1088777,
+      "size": [
+        1442,
+        1091
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        47,
+        25
+      ],
+      "target_size": [
+        188,
+        100
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from measured region; raw PNG bytes preserved",
+      "alpha": "retain raw PNG alpha; shared frame0 body, source-replace patches, integer source-over onto verified HD PIK underlay",
+      "generation_prompt": "Use case: precise-object-edit. Asset: ONE transparent ship-animation frame 3. Image 1 is the edit target and exact master composition to preserve. Image 2 is the original game's corresponding frame, supplied only to show the small pennant and wake changes. Keep the same pennant shading phase as frame 2: a slightly shaded left half and lit trailing right edge on each red pennant, without changing its outline. Advance only the small wake foam pattern another subtle phase. Preserve image 1's ship body, hull, every sail, mast, rigging, geometry, placement, framing, pixel texture, size and transparent margins exactly. Only the color/shading inside the three existing red pennants and the small attached wake may change. No movement or redrawing of the hull or sails. Make the wake variation restrained so the animation loops smoothly. Keep the same fine pixel-art style and muted palette. Return one complete full ship sprite on genuine transparency; no solid background, blue box, new objects, text, atlas, collage or duplicated ship.",
+      "reference_sha256": {
+        "openship-000-candidate-r1.png": "09e14223e2be64d9ef5d5906c096a830a45e236518aff711ae8497f395f811d6",
+        "native-openship-003-reference-r2.png": "7464c68947362feac239846aae62d5138053f73c0ea026be706960d724486f14"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENSHIP.SS",
+        "sha256": "eee07bfee9a7abf512d6bd9688409427149df3226edd024342871f41e143af10",
+        "ordinal": 3,
+        "encoded_sha256": "3e98468b10bc65b1e201028b6d81f30159ff074b23fb0b85c03f211e4cdfba2a",
+        "indexed_sha256": "defd7a32804b1f6b96e5ceb2469b2d295eac35896408d0661e0c4befca2393ae"
+      },
+      "native_display_rects": [
+        [
+          15,
+          1,
+          17,
+          2
+        ],
+        [
+          5,
+          3,
+          7,
+          4
+        ],
+        [
+          25,
+          5,
+          27,
+          6
+        ],
+        [
+          3,
+          15,
+          23,
+          24
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          668,
+          111,
+          748,
+          149
+        ],
+        [
+          269,
+          187,
+          349,
+          225
+        ],
+        [
+          1067,
+          264,
+          1147,
+          302
+        ],
+        [
+          189,
+          646,
+          987,
+          989
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R83 opening ship8 canonical-palette complete calls and published provenance; GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "openship-004.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "f7f66a5d46e290809519063fc960db169b9a658cb6ea3009e4aa68b813195241",
+      "bytes": 1110392,
+      "size": [
+        1442,
+        1091
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        47,
+        25
+      ],
+      "target_size": [
+        188,
+        100
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from measured region; raw PNG bytes preserved",
+      "alpha": "retain raw PNG alpha; shared frame0 body, source-replace patches, integer source-over onto verified HD PIK underlay",
+      "generation_prompt": "Use case: precise-object-edit. Asset: ONE transparent ship-animation frame 4 in an eight-frame loop. Image 1 is the edit target and exact master to preserve. Image 2 is the corresponding original frame, supplied only for the subtle red-pennant shading and attached wake phase. Keep the hull, all sails, masts, rigging, angle, silhouette, framing, size, transparency margins and fine pixel texture of image 1 exactly unchanged. Make only the three existing red pennants slightly more evenly sunlit inside their fixed outlines, and advance the small attached muted sea-green foam to a restrained phase 4 of the loop. The body must remain completely still. Keep the wake close to the original narrow attached strip and preserve its overall extent. No new water tile, broad shadow, blue box, background, objects, letters, duplicated ship, collage or atlas. One complete full ship sprite on genuine transparency; match the same warm muted fine pixel-art palette.",
+      "reference_sha256": {
+        "openship-000-candidate-r1.png": "09e14223e2be64d9ef5d5906c096a830a45e236518aff711ae8497f395f811d6",
+        "native-openship-004-reference-r2.png": "086ac62ede25cbb9b2465402c7b3fcd8f28fbe24ea01b310555bf4cd5f53fa2a"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENSHIP.SS",
+        "sha256": "eee07bfee9a7abf512d6bd9688409427149df3226edd024342871f41e143af10",
+        "ordinal": 4,
+        "encoded_sha256": "11c5c63cce6409445e9651e0a30e0cab61636814b79f4626a3de3f0fe1130d7a",
+        "indexed_sha256": "53176f37bf91913d581af28a472c153048be22e4741c1bda673b68d848b8cda7"
+      },
+      "native_display_rects": [
+        [
+          16,
+          1,
+          17,
+          2
+        ],
+        [
+          6,
+          3,
+          7,
+          4
+        ],
+        [
+          26,
+          5,
+          27,
+          6
+        ],
+        [
+          3,
+          15,
+          23,
+          24
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          708,
+          112,
+          748,
+          150
+        ],
+        [
+          310,
+          189,
+          349,
+          227
+        ],
+        [
+          1107,
+          266,
+          1146,
+          304
+        ],
+        [
+          190,
+          651,
+          987,
+          997
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R83 opening ship8 canonical-palette complete calls and published provenance; GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "openship-005.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "56aeed9475ba88425638c4d64a9f7890e61b53ac4ba08e53b1e89be22e302c04",
+      "bytes": 1122734,
+      "size": [
+        1442,
+        1091
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        47,
+        25
+      ],
+      "target_size": [
+        188,
+        100
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from measured region; raw PNG bytes preserved",
+      "alpha": "retain raw PNG alpha; shared frame0 body, source-replace patches, integer source-over onto verified HD PIK underlay",
+      "generation_prompt": "Use case: precise-object-edit. Asset: ONE transparent ship-animation frame 5 in an eight-frame loop. Image 1 is the edit target and exact master to preserve. Image 2 is the corresponding original frame, supplied only for the subtle red-pennant shading and attached wake phase. Keep the hull, all sails, masts, rigging, angle, silhouette, framing, size, transparency margins and fine pixel texture of image 1 exactly unchanged. Make only the three existing red pennants slightly more evenly sunlit inside their fixed outlines, and advance the small attached muted sea-green foam to a restrained phase 5 of the loop. The body must remain completely still. Keep the wake close to the original narrow attached strip and preserve its overall extent. No new water tile, broad shadow, blue box, background, objects, letters, duplicated ship, collage or atlas. One complete full ship sprite on genuine transparency; match the same warm muted fine pixel-art palette.",
+      "reference_sha256": {
+        "openship-000-candidate-r1.png": "09e14223e2be64d9ef5d5906c096a830a45e236518aff711ae8497f395f811d6",
+        "native-openship-005-reference-r2.png": "c54c0b461e695cde5fa5d457eb166bd42a7ab0ab341bcae23cb9e2d095276c13"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENSHIP.SS",
+        "sha256": "eee07bfee9a7abf512d6bd9688409427149df3226edd024342871f41e143af10",
+        "ordinal": 5,
+        "encoded_sha256": "81741bb829c013d31c0c0cdad5711159f51350d8a46f47540edac3cb5089f86f",
+        "indexed_sha256": "ff59a3f7a03231ca34e91b926daa64a407192cad403bc7cdc1f53e4ca7d037f4"
+      },
+      "native_display_rects": [
+        [
+          16,
+          1,
+          17,
+          2
+        ],
+        [
+          6,
+          3,
+          7,
+          4
+        ],
+        [
+          26,
+          5,
+          27,
+          6
+        ],
+        [
+          3,
+          15,
+          23,
+          24
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          708,
+          110,
+          747,
+          148
+        ],
+        [
+          309,
+          186,
+          349,
+          224
+        ],
+        [
+          1106,
+          263,
+          1146,
+          301
+        ],
+        [
+          189,
+          645,
+          987,
+          989
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R83 opening ship8 canonical-palette complete calls and published provenance; GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "openship-006.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "10144ef24645a17e5faf35743ee55344abd13696fc0ccdc1cbee8d64c120059c",
+      "bytes": 1103154,
+      "size": [
+        1442,
+        1091
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        47,
+        25
+      ],
+      "target_size": [
+        188,
+        100
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from measured region; raw PNG bytes preserved",
+      "alpha": "retain raw PNG alpha; shared frame0 body, source-replace patches, integer source-over onto verified HD PIK underlay",
+      "generation_prompt": "Use case: precise-object-edit. Asset: ONE transparent ship-animation frame 6 in an eight-frame loop. Image 1 is the edit target and exact master to preserve. Image 2 is the corresponding original frame, supplied only for the subtle red-pennant shading and attached wake phase. Keep the hull, all sails, masts, rigging, angle, silhouette, framing, size, transparency margins and fine pixel texture of image 1 exactly unchanged. Make only the three existing red pennants slightly more evenly sunlit inside their fixed outlines, and advance the small attached muted sea-green foam to a restrained phase 6 of the loop. The body must remain completely still. Keep the wake close to the original narrow attached strip and preserve its overall extent. No new water tile, broad shadow, blue box, background, objects, letters, duplicated ship, collage or atlas. One complete full ship sprite on genuine transparency; match the same warm muted fine pixel-art palette.",
+      "reference_sha256": {
+        "openship-000-candidate-r1.png": "09e14223e2be64d9ef5d5906c096a830a45e236518aff711ae8497f395f811d6",
+        "native-openship-006-reference-r2.png": "7bf5c087b20ebfa0b689d5151c64b812565d5b94c37a58adee5e6a9659c1aaed"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENSHIP.SS",
+        "sha256": "eee07bfee9a7abf512d6bd9688409427149df3226edd024342871f41e143af10",
+        "ordinal": 6,
+        "encoded_sha256": "d6de61601287633a3d0d9a92979a89efe4cb447f376375a662f0ca7c310a210d",
+        "indexed_sha256": "91df500ee4ddae10481010a73d722c54fb4cb7a432cbb1124e34b9ca96d3514d"
+      },
+      "native_display_rects": [
+        [
+          16,
+          1,
+          17,
+          2
+        ],
+        [
+          6,
+          3,
+          7,
+          4
+        ],
+        [
+          26,
+          5,
+          27,
+          6
+        ],
+        [
+          3,
+          15,
+          23,
+          24
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          708,
+          110,
+          747,
+          148
+        ],
+        [
+          309,
+          186,
+          349,
+          224
+        ],
+        [
+          1106,
+          262,
+          1146,
+          300
+        ],
+        [
+          190,
+          644,
+          986,
+          987
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R83 opening ship8 canonical-palette complete calls and published provenance; GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "openship-007.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "c41c401191e532b8b19906fd36660e85bd34d05136c8911e42cbfdb6cb6785bd",
+      "bytes": 1086691,
+      "size": [
+        1442,
+        1091
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        47,
+        25
+      ],
+      "target_size": [
+        188,
+        100
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from measured region; raw PNG bytes preserved",
+      "alpha": "retain raw PNG alpha; shared frame0 body, source-replace patches, integer source-over onto verified HD PIK underlay",
+      "generation_prompt": "Use case: precise-object-edit. Asset: ONE transparent ship-animation frame 7 in an eight-frame loop. Image 1 is the edit target and exact master to preserve. Image 2 is the corresponding original frame, supplied only for the subtle red-pennant shading and attached wake phase. Keep the hull, all sails, masts, rigging, angle, silhouette, framing, size, transparency margins and fine pixel texture of image 1 exactly unchanged. Make only the three existing red pennants slightly more evenly sunlit inside their fixed outlines, and advance the small attached muted sea-green foam to a restrained phase 7 of the loop. The body must remain completely still. Keep the wake close to the original narrow attached strip and preserve its overall extent. No new water tile, broad shadow, blue box, background, objects, letters, duplicated ship, collage or atlas. One complete full ship sprite on genuine transparency; match the same warm muted fine pixel-art palette.",
+      "reference_sha256": {
+        "openship-000-candidate-r1.png": "09e14223e2be64d9ef5d5906c096a830a45e236518aff711ae8497f395f811d6",
+        "native-openship-007-reference-r2.png": "0f0406ce20454a8aa4d7c61297e1fb59c5541f89d5cc2b9bfe1f5f7f784dcd12"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENSHIP.SS",
+        "sha256": "eee07bfee9a7abf512d6bd9688409427149df3226edd024342871f41e143af10",
+        "ordinal": 7,
+        "encoded_sha256": "0044bee7db210462744ac21d00405906a984dc2fda11973c9774064d6b19b3a5",
+        "indexed_sha256": "e7ab05d503c1ab4903859a7632d4a4824234cd7f079dc3133697316e0aed2b5c"
+      },
+      "native_display_rects": [
+        [
+          16,
+          1,
+          17,
+          2
+        ],
+        [
+          6,
+          3,
+          7,
+          4
+        ],
+        [
+          26,
+          5,
+          27,
+          6
+        ],
+        [
+          3,
+          15,
+          23,
+          24
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          707,
+          110,
+          747,
+          148
+        ],
+        [
+          309,
+          186,
+          348,
+          225
+        ],
+        [
+          1106,
+          263,
+          1145,
+          301
+        ],
+        [
+          189,
+          646,
+          986,
+          990
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R83 opening ship8 canonical-palette complete calls and published provenance; GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
     }
   }
 }
