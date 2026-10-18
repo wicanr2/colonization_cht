@@ -6989,3 +6989,16 @@ r5正常50400000步的11930格解碼／Main／VGA全等原版控制與存檔。
 未知底圖保留原版快照，不以相同顏色升格HD。生成草稿與注入視覺只屬DRAFT，未進生產路徑。
 本機根hd-royal-foreground-r90，入口king-draw-native-r5/check.json及
 king-prior-typed-background-r1/check.json。
+
+## 2026-10-19：R90正常人物發布及游標來源
+
+已證實。沿規格069固定VICEROY.EXE、KING1.SS與dosgolem版本，
+位址為實模式CS:IP／20bit線性RAM。當次GUI的0D66完整入口56120743步、
+返回56592616步，原始參數與固定編碼相同；029E共8422格、0272共3508格。
+獨立模型由繪製前具型別PIK、完整Stage前後及11930格實寫重建，再追Main、VGA與游標配對，
+不讀正式層的姿態選擇作oracle。未知同值寫入仍撤銷，877個未知底圖只用原版快照。
+
+30張完整RGBA／X11各30720000點、16次Noto及當次36筆三側重播全等。
+限定審查c37bf458b1abbce109a9c0fc0e187a3d8c11b6953631315400a3dd8e50163e7f，
+入口[規格069 R90](docs/spec/069-hd-menu-background-and-textures.md)；
+其他姿態與參數語意維持未知，不外推全量HD。

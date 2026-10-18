@@ -16,13 +16,84 @@ def read(path):
     return json.loads(path.read_bytes())
 
 
+def extend_royal(a):
+    baseline, ready, review = read(a.baseline), read(a.ready), read(a.conformed)
+    manifest = read(a.assets / 'manifest.json')
+    assert ready['result'] == 'PASS_R90_KING1_READY_REVIEW' and ready['state'] == 'READY'
+    assert review['result'] == 'PASS_R90_KING1_CONFORMANCE' and review['spec_state'] == 'CONFORMED'
+    assert review['sources'] == [992] and review['ready_sha256'] == sha(a.ready)
+    assert review['inherited_source_index_sha256'] == sha(a.baseline)
+    assert review['inherited_manifest_sha256'] == baseline['formal_manifest_sha256']
+    assert review['manifest_sha256'] == sha(a.assets / 'manifest.json')
+    assert review['formal_assets'] == len(manifest['assets']) == 218
+    assert review['old_raw_pngs_preserved'] == review['old_metadata_preserved'] == 217
+    assert review['go_named_passed'] == 48 and review['go_failed'] == review['go_skipped'] == 0
+    assert review['full_project_loader_positive']
+    assert review['package_files'] == 219 and review['package_faults'] == 10
+    assert review['gui_samples'] == 30 and review['unique_native_points'] == 28
+    assert review['gui_full_rgba'] == review['gui_x11_rgba'] == 30720000
+    assert review['gui_noto_fields'] == 16 and review['native_source_cells'] == 11930
+    assert review['typed_underlay_cells'] == 11053 and review['native_underlay_fallback_cells'] == 877
+    for key in ['five_languages_both_modes', 'four_cjk_body_cursor_hover_return',
+                'normal_departure_removes_royal', 'original_unknown_foreground_preserved',
+                'complete_current_publication_required', 'incomplete_generation_cannot_reuse_prior_pose',
+                'three_replays_state_audio_save_equal_GUI', 'raw_png_alpha_preserved',
+                'native_inputs_rules_and_save_unchanged']:
+        assert review[key]
+    assert review['actual_inputs'] == 36 and review['replay_end'] == 82400000
+    assert not review['complete_hd']
+    out = copy.deepcopy(baseline)
+    assert len(out['formal_bindings']) == 217 and len(out['frames']) == 1552
+    for binding in out['formal_bindings']:
+        name = binding['asset']
+        assert manifest['assets'][name]['sha256'] == binding['asset_sha256'] == sha(a.assets / name)
+    name = 'king1-000.png'
+    assert set(manifest['assets']) - {b['asset'] for b in out['formal_bindings']} == {name}
+    frame = next(f for f in out['frames'] if f['research_id'] == 992)
+    meta = manifest['assets'][name]
+    assert frame['file'] == 'KING1.SS' and frame['ordinal'] == 0 and not frame['formal_assets']
+    assert frame['size'] == [189, 187] and frame['opaque_pixels'] == 11930
+    assert frame['transparency_index'] == 253 and frame['decode_status'] == 'decoded'
+    assert sha(a.assets / name) == meta['sha256'] == ready['raw_asset_sha256']
+    for key in ['file', 'ordinal', 'file_sha256', 'encoded_sha256', 'indexed_sha256']:
+        assert meta['original_source'][key] == frame[key]
+    out['formal_bindings'].append({
+        'asset': name, 'asset_sha256': meta['sha256'], 'source_research_id': 992,
+        'source_file': frame['file'], 'source_ordinal': 0,
+        'source_encoded_sha256': frame['encoded_sha256'],
+        'source_indexed_sha256': frame['indexed_sha256'],
+        'spec': 'docs/spec/069-hd-menu-background-and-textures.md',
+        'claim': 'one complete current KING1 pose with typed or original underlay; cited conformance scope only'})
+    frame['formal_assets'] = [name]
+    frame['runtime_source_evidence'] = 'confirmed complete D66 decode, typed Stage/Main/VGA publication, cursor pairs and current whole pose; normal GUI30/native28 only'
+    frame['source_contract_reference'] = {
+        'state': 'CONFORMED', 'spec': 'docs/spec/069-hd-menu-background-and-textures.md',
+        'formal_connected': True, 'review_sha256': sha(a.conformed),
+        'scope': 'one KING1 king and hound pose, raw94/198/100 arguments and observed origin; unknown foreground and native underlay preserved; other poses unverified'}
+    old = {f['research_id']: f for f in baseline['frames']}
+    assert all(f == old[f['research_id']] for f in out['frames'] if f['research_id'] != 992)
+    out['formal_manifest_sha256'] = sha(a.assets / 'manifest.json')
+    out['coverage_limits']['formal_asset_bindings'] = 218
+    out['coverage_limits']['complete_hd'] = False
+    out['royal_foreground_conformance'] = {
+        'ready_sha256': sha(a.ready), 'review_sha256': sha(a.conformed), 'sources': [992],
+        'formal_assets': 218, 'gui_samples': 30, 'unique_native_points': 28,
+        'claim': 'one king and hound pose only; other images, animation and full HD incomplete'}
+    a.output.write_text(json.dumps(out, ensure_ascii=False, indent=2) + '\n')
+    print('PASS_ROYAL_CONFORMED_SOURCE_INDEX', 218, sha(a.output), flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ['baseline', 'assets', 'ready', 'conformed', 'output']:
         parser.add_argument('--' + name, type=Path, required=True)
+    parser.add_argument('--royal', action='store_true', help='規格069 R90：只擴充已完成的國王與獵犬來源')
     a = parser.parse_args()
     assert Path('/.dockerenv').exists() and os.getuid() != 0
     assert not a.output.exists() and a.output.parent.stat().st_uid == os.getuid()
+    if a.royal:
+        extend_royal(a)
+        return
     baseline, ready, review = read(a.baseline), read(a.ready), read(a.conformed)
     manifest = read(a.assets / 'manifest.json')
     ids = [1002, *range(1005, 1015)]

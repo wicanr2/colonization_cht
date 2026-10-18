@@ -72,7 +72,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 以下是開發中的五語顯示層與 HD 畫面，尚未收進目前發行版。截圖來自實際遊戲視窗，
 來源與指紋見[截圖紀錄](docs/screenshots/readme-captures.json)。全量 HD 包含商品、資源、單位、
 其餘小圖像、特殊游標與動畫幀，目前仍在逐項開發。
-目前 218 張已接線的生成 HD 原圖收在 [graphics/](graphics/)。雲、煙與魚形動畫已完成限定驗收；國王室內與十張出航背景已完成限定驗收。國王與獵犬已接線，驗收持續。已驗來源範圍見[目前狀態](CONTEXT.md)。
+目前 218 張已接線的生成 HD 原圖收在 [graphics/](graphics/)。雲、煙與魚形動畫已完成限定驗收；國王室內與十張出航背景已完成限定驗收。國王與獵犬已完成限定驗收。已驗來源範圍見[目前狀態](CONTEXT.md)。
 
 ![開場地圖、金色邊框與獨立物件的 HD 畫面](docs/screenshots/hd-opening-zh.png)
 

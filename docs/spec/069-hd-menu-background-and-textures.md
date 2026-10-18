@@ -2465,3 +2465,27 @@ bfa70a908d7f77e76b966ba3dbe0c614b34e15c536358ab1b6d487b4a937f0f9。
 r90-package-check-r1.json、r90-royal-formal-gui-r1/capture.json與r90-gui-source-state-r1.json。
 正式測試的第一個完整載入正例已載入成功，但把輸出清單寫到唯讀/r89而中止；
 改到/out後只重跑此未變測試並通過，人物47個具名範圍保持當批信用。
+
+### 2026-10-19 R90國王與獵犬限定CONFORMED
+
+| 驗收 | 已通過範圍 |
+|---|---|
+| 原版來源 | 當次36筆輸入的28個獨立狀態及完整呼叫全等控制／實拍；Stage11930格，由029E的8422格及0272的3508格組成，再經Main／VGA目前發布與游標配對。 |
+| 正式GUI | 30項含16HD／14原圖，國王與獵犬五語／兩模式、四語人物身上游標移入與返回；首張出航及隱藏游標保持，人物正常撤除。 |
+| 完整畫面 | RGBA與X11各30720000點相同，2251708個人物alpha像素與16次Noto欄位通過。由原PNG、當次原版來源及綁定字模獨立重建，不排除文字或游標。 |
+| 三側重播 | 36筆當次操作至82400000步，含play=true，CPU、完整RAM、IDX、DAC、WAV與存檔和實拍一致。WAV 353730立體聲frame、49715Hz、16bit且非靜音，SHA-256 391229d0b8ff776ffcec4755d5e025713847b8975b1c81a0e7c53782f77d6877。 |
+| 守門與資源 | 48具名範圍零失敗／零skip，完整載入採catalogue-only；新人物資源家族已驗。219檔封裝／10項拒絕、索引8項拒絕及舊R89索引逐byte回歸通過。 |
+| 原圖及索引 | 218張原PNG／218個連結；只更新992，其他1551列保持。舊217張原圖及metadata保持，原圖alpha未改。 |
+
+限定審查king1-conformance-r1.json：
+c37bf458b1abbce109a9c0fc0e187a3d8c11b6953631315400a3dd8e50163e7f。
+來源索引ee706c16d9a544bf13b16526b223cb4078bf42c83139226bacbd20533cca68f3。
+驗收固定e77810d3a9f6de9c165edbce0574ff9f4e416fb6與正式bfa70a90…組建；
+人物來源／合成程式的token與READY原型相同，只有名稱、素材路徑及正式收據標記改變。
+
+本機重生入口make-r90-conformance-r1.py、verify-r90-gui-sources-r1.py、
+check-r90-gui-sources-r1.py、check-r90-gui-pixels-r1.py與verify-r90-gui-replays-r1.py。
+公開清冊用[來源擴充器](../../tools/extend_hd_story_source_index.py)加--royal，
+--baseline指定R89的217連結，--assets指定218張原圖，
+--ready及--conformed指定本批審查，--output指定新檔案。
+僅接受完整CONFORMED證據，其他國王姿態、鏡像、比例、圖像及全量HD均未外推。

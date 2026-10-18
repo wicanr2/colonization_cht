@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "ae0c4e74a53bfafcdd6114108d8e45925a231b8ebc1635856d14827ff8c86368",
+  "formal_manifest_sha256": "56b42309a722288627823654b0feb2c1cc463f48f10a4e998b768127ab8bf8f2",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 217,
+    "formal_asset_bindings": 218,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -36615,9 +36615,18 @@
       "indexed_sha256": "946f5f2d30ae8d5402e763a9d0393bfcfd4448e2d9edf2321e9b7f904ef18a60",
       "opaque_pixels": 11930,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D66 decode, typed Stage/Main/VGA publication, cursor pairs and current whole pose; normal GUI30/native28 only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "king1-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "c37bf458b1abbce109a9c0fc0e187a3d8c11b6953631315400a3dd8e50163e7f",
+        "scope": "one KING1 king and hound pose, raw94/198/100 arguments and observed origin; unknown foreground and native underlay preserved; other poses unverified"
+      }
     },
     {
       "research_id": 993,
@@ -60668,6 +60677,17 @@
       "source_indexed_sha256": "f079f5624f414b7dfa731887f3739718196932d6083ccfa94ce0b45b199fb898",
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "king1-000.png",
+      "asset_sha256": "c703753a240057c7379a4c192e3d97349d45ef5d12a8e27beddd1bf1468e504b",
+      "source_research_id": 992,
+      "source_file": "KING1.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "096034463bc78340a4e7b16a8809e1deae9e6cf42aa58e8375875e86f6185769",
+      "source_indexed_sha256": "946f5f2d30ae8d5402e763a9d0393bfcfd4448e2d9edf2321e9b7f904ef18a60",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "one complete current KING1 pose with typed or original underlay; cited conformance scope only"
     }
   ],
   "limitations": [
@@ -61157,5 +61177,16 @@
     "gui_samples": 66,
     "unique_native_points": 60,
     "claim": "eleven story backgrounds only; original king and hound retained; other images, animation and full HD incomplete"
+  },
+  "royal_foreground_conformance": {
+    "ready_sha256": "a529574cc845ad2905b305c4e085d0b2e41099f733d5b3c67a657e89821d6d99",
+    "review_sha256": "c37bf458b1abbce109a9c0fc0e187a3d8c11b6953631315400a3dd8e50163e7f",
+    "sources": [
+      992
+    ],
+    "formal_assets": 218,
+    "gui_samples": 30,
+    "unique_native_points": 28,
+    "claim": "one king and hound pose only; other images, animation and full HD incomplete"
   }
 }
