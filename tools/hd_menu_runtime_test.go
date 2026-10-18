@@ -1333,3 +1333,466 @@ func TestHDParchAssetsAndPalette(t *testing.T) {
 		t.Fatal("WOOD不應載入主選單來源快取")
 	}
 }
+
+func TestHDPublishedTextureNative32(t *testing.T) {
+	game, _, assets := hdReportFixtures(t)
+	root, model, out := os.Getenv("TEST_HD_TEXTURE_PUBLISHED_REFERENCE"), os.Getenv("TEST_HD_TEXTURE_PUBLISHED_MODEL"), os.Getenv("TEST_HD_TEXTURE_PUBLISHED_OUTPUT")
+	if root == "" || model == "" || out == "" {
+		t.Skip("需要已發布底紋的32點原版來源")
+	}
+	var oracle struct {
+		Checkpoints []hdNewGameOracleState
+		End         hdNewGameOracleState
+	}
+	hdNewGameNeed(t, json.Unmarshal(hdNewGameRead(t, filepath.Join(root, "control/draws.json")), &oracle))
+	if len(oracle.Checkpoints) != 32 || oracle.End.Steps != 80600000 {
+		t.Fatal("原版來源範圍不同")
+	}
+	var replay struct{ Inputs []windowInput }
+	hdNewGameNeed(t, json.Unmarshal(hdNewGameRead(t, os.Getenv("TEST_HD_TEXTURE_PUBLISHED_INPUTS")), &replay))
+	hdNewGameNeed(t, os.Mkdir(out, 0755))
+	save := filepath.Join(out, "save")
+	hdNewGameNeed(t, os.Mkdir(save, 0755))
+	seed := hdNewGameRead(t, filepath.Join(root, "control/saves/COLONY09.SAV"))
+	if hash(seed) != "52ae8b7bd4bea1869afb825af165a8edc50882fc176d49985d4fb3c362d5469b" {
+		t.Fatal("原版種子不同")
+	}
+	hdNewGameNeed(t, os.WriteFile(filepath.Join(save, "COLONY09.SAV"), seed, 0644))
+	m := golem.New()
+	hdNewGameNeed(t, m.LoadEXE(hdNewGameRead(t, filepath.Join(game, "OPENING.EXE"))))
+	m.Write8(uint32(golem.PSPSeg)*16+0x80, 2)
+	m.WriteBytes(uint32(golem.PSPSeg)*16+0x81, []byte{'-', 'g', 13})
+	d := golem.NewDOS(m, game)
+	d.Scratch = save
+	d.Install()
+	defer d.Close()
+	m.SetSoundBlasterPro(true)
+	if !m.EnableSBDigital() {
+		t.Fatal("缺數位音訊")
+	}
+	m.EnableOPLSynth(true)
+	h := &hdRuntime{m: m}
+	ps := map[int]*hdTextureRuntime{}
+	for rid, kind := range map[int]string{1265: "menu", 1287: "parch", 1552: "wood"} {
+		p, e := loadHDTextureKind(h, game, assets, kind)
+		hdNewGameNeed(t, e)
+		ps[rid] = p
+	}
+	h.texture, h.parch, h.worldTexture = ps[1265], ps[1287], ps[1552]
+	m.WatchWrite(0, 0xaffff, func(_ *golem.Machine, a uint32, o, v byte) {
+		for _, p := range ps {
+			p.memoryWrite(a, o, v)
+		}
+	})
+	m.SetBeforeInstruction(h.beforeInstruction)
+	checkState := func(s hdNewGameOracleState) {
+		t.Helper()
+		c := m.CPU
+		if m.Steps != s.Steps || hash(m.Mem) != s.Memory || hash(m.Indexed()) != s.Indexed || hash(m.DAC[:]) != s.Palette || c.R != s.Registers || c.Seg != s.Segments || c.IP != s.IP || c.Flags != s.Flags || c.Cycles != s.Cycles {
+			t.Fatal("底紋觀測改變原版完整狀態", m.Steps)
+		}
+	}
+	at, count, total := 0, uint64(0), 0
+	records := []map[string]any{}
+	capture := func() {
+		if at == len(oracle.Checkpoints) {
+			return
+		}
+		s := oracle.Checkpoints[at]
+		if m.Steps > s.Steps || m.Steps == s.Steps && count > s.Count {
+			t.Fatal("略過原版點", at)
+		}
+		if m.Steps != s.Steps || count != s.Count {
+			return
+		}
+		checkState(s)
+		var main, published map[int][]any
+		hdNewGameNeed(t, json.Unmarshal(hdNewGameRead(t, filepath.Join(model, fmt.Sprintf("point-%03d.owners.json", at))), &main))
+		hdNewGameNeed(t, json.Unmarshal(hdNewGameRead(t, filepath.Join(model, fmt.Sprintf("point-%03d.published.json", at))), &published))
+		f := draftNativeFrame{canvas: m.Mem[hdBuildingCanvas : hdBuildingCanvas+64000], indexed: m.Indexed(), palette: m.DAC[:], cursor: image.Rect(int(d.Mouse.X), int(d.Mouse.Y), int(d.Mouse.X)+16, int(d.Mouse.Y)+16), mode: m.VideoMode(), step: m.Steps}
+		im := draftRGB(f.indexed, f.palette)
+		before := draftRGB(f.indexed, f.palette)
+		counts := map[int]int{}
+		masks := map[int][]byte{}
+		for rid, p := range ps {
+			for pos := 0; pos < 64000; pos++ {
+				for _, pair := range []struct {
+					got  hdSceneCell
+					want []any
+				}{{p.mainCell(pos), main[pos]}, {p.published[pos], published[pos]}} {
+					want := pair.want
+					has := len(want) > 0 && int(want[0].(float64)) == rid
+					if !has {
+						if pair.got.slot != 0 {
+							t.Fatal("未知點仍持有底紋", at, rid, pos)
+						}
+						continue
+					}
+					if !p.validPublishedCell(pair.got) || int(pair.got.local) != int(want[1].(float64)) || int(pair.got.value) != int(want[2].(float64)) || pair.got.glyph != (want[3].(string) == "glyph") {
+						t.Fatal("底紋來源與獨立模型不同", at, rid, pos, pair.got, want)
+					}
+				}
+			}
+			expected := hdNewGameRead(t, filepath.Join(model, fmt.Sprintf("point-%03d-published-%d-mask.bin", at, rid)))
+			if len(expected) != 64000 {
+				t.Fatal("遮罩長度")
+			}
+			masks[rid] = expected
+			packed := make([]byte, 8000)
+			n := 0
+			for pos, v := range expected {
+				if v != 0 {
+					packed[pos>>3] |= 1 << uint(pos&7)
+					n++
+				}
+			}
+			got := p.paintPublished(im, f)
+			if got["reason"] != "published-texture-background-only" || got["painted"].(int) != n || !bytes.Equal(got["mask"].([]byte), packed) {
+				t.Fatal("底紋來源遮罩不同", at, rid, got["reason"], got["painted"], n)
+			}
+			counts[rid] = n
+		}
+		for y := 0; y < 800; y++ {
+			for x := 0; x < 1280; x++ {
+				pos := y/4*320 + x/4
+				want := before.RGBAAt(x, y)
+				found := 0
+				for rid, p := range ps {
+					if masks[rid][pos] != 0 {
+						found++
+						c := p.published[pos]
+						want = p.art.RGBAAt(int(c.local)%32*4+x%4, int(c.local)/32*4+y%4)
+						total++
+					}
+				}
+				if found > 1 || im.RGBAAt(x, y) != want {
+					t.Fatal("發布底紋RGBA或原版前景不同", at, x, y)
+				}
+			}
+		}
+		checkState(s)
+		file, e := os.Create(filepath.Join(out, fmt.Sprintf("point-%03d.png", at)))
+		hdNewGameNeed(t, e)
+		hdNewGameNeed(t, png.Encode(file, im))
+		hdNewGameNeed(t, file.Close())
+		records = append(records, map[string]any{"point": at, "step": m.Steps, "painted": counts, "native_memory_sha256": hash(m.Mem)})
+		at++
+	}
+	step := func() { capture(); hdNewGameNeed(t, m.Step()) }
+	for _, e := range replay.Inputs {
+		if e.Step > oracle.End.Steps {
+			break
+		}
+		for m.Steps < e.Step {
+			step()
+		}
+		capture()
+		applyWindowInput(d, e)
+		count++
+		capture()
+	}
+	for m.Steps < oracle.End.Steps {
+		step()
+	}
+	capture()
+	checkState(oracle.End)
+	if at != 32 || count != 31 || total == 0 {
+		t.Fatal("原版範圍不同", at, count, total)
+	}
+	if !bytes.Equal(m.Mem, hdNewGameRead(t, filepath.Join(root, "control/final.memory"))) {
+		t.Fatal("完整終點RAM不同")
+	}
+	for rid, p := range ps {
+		if p.accepted != 1 || p.rejected != 0 || len(p.publishedPending) != 0 || p.publicationBlocked {
+			t.Fatal("解碼或游標生命週期不同", rid, p.accepted, p.rejected)
+		}
+	}
+	d.Close()
+	if !bytes.Equal(seed, hdNewGameRead(t, filepath.Join(save, "COLONY09.SAV"))) {
+		t.Fatal("原版存檔改變")
+	}
+	proof := map[string]any{"result": "PASS_PUBLISHED_TEXTURE_NATIVE32_SOURCE_RGBA_AND_STATE", "checkpoints": at, "dos_inputs": count, "source_rgba_pixels": total, "full_rgba_pixels": 32 * 1280 * 800, "points": records, "original_state_and_saves_equal": true, "production_connected": true}
+	raw, e := json.MarshalIndent(proof, "", "  ")
+	hdNewGameNeed(t, e)
+	hdNewGameNeed(t, os.WriteFile(filepath.Join(out, "check.json"), append(raw, '\n'), 0644))
+}
+
+func TestHDTexturePublishedWriteGuards(t *testing.T) {
+	game, _, assets := hdReportFixtures(t)
+	for _, name := range []string{"known", "normalized-source", "wrong-code", "wrong-source", "source-value", "same-value-revoke", "post-publication-main-write"} {
+		t.Run(name, func(t *testing.T) {
+			m := golem.New()
+			h := &hdRuntime{m: m}
+			p, err := loadHDTextureKind(h, game, assets, "wood")
+			hdNewGameNeed(t, err)
+			h.worldTexture = p
+			raw := hdNewGameRead(t, "/repo/workplace/reports/goal186-display-hd/hd-full-assets-r49/decoded-public-r3/pixels/1552.idx")
+			copy(p.native[:], raw)
+			p.accepted = 1
+			m.WatchWrite(0, 0xaffff, func(_ *golem.Machine, a uint32, o, v byte) { p.memoryWrite(a, o, v) })
+			pos := 40000
+			p.owners[hdBuildingCanvas+uint32(pos)] = hdTextureCell{local: 0, native: raw[0]}
+			m.Mem[hdBuildingCanvas+uint32(pos)] = raw[0]
+			m.CPU.Seg[golem.CS] = 0xe21
+			m.CPU.IP = 0x91
+			m.CPU.Seg[golem.DS] = 0x2cae
+			m.CPU.R[golem.SI] = uint16(pos)
+			if name == "normalized-source" {
+				m.CPU.Seg[golem.DS] = 0x34ae
+				m.CPU.R[golem.SI] = uint16(pos - 32768)
+			}
+			if name == "wrong-source" {
+				m.CPU.Seg[golem.DS]++
+			}
+			m.CPU.Seg[golem.ES] = 0xa000
+			m.CPU.R[golem.DI] = uint16(pos)
+			m.CPU.R[golem.CX] = 1
+			m.CPU.Flags &^= 0x400
+			copy(m.Mem[0xe210+0x91:], hdSceneVGACopyCode)
+			if name == "wrong-code" {
+				m.Mem[0xe210+0x91+15] ^= 1
+			}
+			if name == "source-value" {
+				m.Mem[hdBuildingCanvas+uint32(pos)] ^= 1
+			}
+			hdNewGameNeed(t, m.Step())
+			rejected := name == "wrong-code" || name == "wrong-source" || name == "source-value"
+			if (p.published[pos].slot == 0) != rejected {
+				t.Fatal("VGA來源守門不同", name, p.published[pos])
+			}
+			if name == "same-value-revoke" || name == "post-publication-main-write" {
+				before := p.published[pos]
+				m.CPU.Seg[golem.CS] = 0x1000
+				m.CPU.IP = 0
+				m.Mem[0x10000] = 0xaa
+				m.CPU.Seg[golem.ES] = 0xa000
+				if name == "post-publication-main-write" {
+					m.CPU.Seg[golem.ES] = 0x2cae
+				}
+				m.CPU.R[golem.DI] = uint16(pos)
+				m.CPU.R[golem.AX] = uint16(raw[0])
+				hdNewGameNeed(t, m.Step())
+				if name == "same-value-revoke" && p.published[pos].slot != 0 {
+					t.Fatal("未知VGA同值寫入未撤銷")
+				}
+				if name == "post-publication-main-write" && (p.published[pos] != before || p.mainCell(pos).slot != 0) {
+					t.Fatal("主畫布後寫污染已發布來源")
+				}
+			}
+		})
+	}
+}
+
+func TestHDTexturePublishedCursorVGAOperations(t *testing.T) {
+	game, _, assets := hdReportFixtures(t)
+	root := os.Getenv("TEST_HD_CURSOR_ROOT")
+	if root == "" {
+		t.Skip("需要游標32點原版資料")
+	}
+	m := golem.New()
+	h := &hdRuntime{m: m}
+	p, err := loadHDTextureKind(h, game, assets, "wood")
+	hdNewGameNeed(t, err)
+	raw := hdNewGameRead(t, "/repo/workplace/reports/goal186-display-hd/hd-full-assets-r49/decoded-public-r3/pixels/1552.idx")
+	copy(p.native[:], raw)
+	p.accepted = 1
+	m.WatchWrite(0, 0xaffff, func(_ *golem.Machine, a uint32, o, v byte) { p.memoryWrite(a, o, v) })
+	memory := hdNewGameRead(t, filepath.Join(root, "published-cursor-source-probe-r1/control/point-004.memory"))
+	pos := 40000
+	slot := uint8(1)
+	names := []string{"transparent", "opaque-save", "opaque-restore", "post-main-write", "unknown-vga-same", "wrong-code", "wrong-source", "wrong-ds", "wrong-source-offset", "wrong-composition", "wrong-background", "wrong-restore-k", "wrong-restore-old", "wrong-restore-background", "wrong-restore-composition", "pending-bound"}
+	for _, name := range names {
+		t.Run(name, func(t *testing.T) {
+			copy(m.Mem, memory)
+			clear(p.published[:])
+			clear(p.owners)
+			clear(p.underlays)
+			clear(p.publishedPending)
+			p.publicationBlocked = false
+			cell := hdSceneCell{slot: slot, local: 0, value: raw[0]}
+			p.published[pos] = cell
+			p.owners[hdBuildingCanvas+uint32(pos)] = hdTextureCell{local: 0, native: raw[0]}
+			m.Mem[hdBuildingCanvas+uint32(pos)] = raw[0]
+			m.Mem[0xa0000+pos] = raw[0]
+			source, known := h.cursorSource()
+			if !known {
+				t.Fatal("原版游標來源不同")
+			}
+			k := -1
+			for i, v := range source {
+				if name == "transparent" && v == 255 || name != "transparent" && v != 255 && v != raw[0] {
+					k = i
+					break
+				}
+			}
+			if k < 0 {
+				t.Fatal("缺游標來源格")
+			}
+			paint := source[k]
+			if paint == 255 {
+				paint = raw[0]
+			}
+			m.Mem[0xafa00+k] = raw[0]
+			m.Mem[0xafb00+k] = paint
+			code := []byte{0xf3, 0xa4, 0x8a, 0xc8, 0x2b, 0xf9, 0x2b, 0xf1, 3, 0xf3, 3, 0xfa, 0xfe, 0xcc, 0x75, 0xf0}
+			copy(m.Mem[0xb680+0x51c:], code)
+			m.CPU.Seg[golem.CS] = 0xb68
+			m.CPU.IP = 0x51c
+			m.CPU.Seg[golem.DS] = 0xa000
+			m.CPU.Seg[golem.ES] = 0xa000
+			m.CPU.R[golem.SI] = uint16(0xfb00 + k)
+			m.CPU.R[golem.DI] = uint16(pos)
+			m.CPU.R[golem.CX] = 1
+			m.CPU.Flags &^= 0x400
+			switch name {
+			case "wrong-code":
+				m.Mem[0xb680+0x51c+15] ^= 1
+			case "wrong-source":
+				m.Mem[0x1ce73] ^= 1
+			case "wrong-ds":
+				m.CPU.Seg[golem.DS]++
+			case "wrong-source-offset":
+				m.CPU.R[golem.SI] = 0xfc00
+			case "wrong-composition":
+				m.Mem[0xafb00+k] ^= 1
+			case "wrong-background":
+				m.Mem[0xafa00+k] ^= 1
+			case "pending-bound":
+				for i := 0; i < 257; i++ {
+					p.publishedPending[i] = hdSceneCursorPair{}
+				}
+			}
+			hdNewGameNeed(t, m.Step())
+			rejected := name == "wrong-code" || name == "wrong-source" || name == "wrong-ds" || name == "wrong-source-offset" || name == "wrong-composition" || name == "wrong-background" || name == "pending-bound"
+			if name == "transparent" {
+				if p.published[pos] != cell || len(p.publishedPending) != 0 {
+					t.Fatal("透明游標未保留發布來源")
+				}
+				return
+			}
+			if p.published[pos].slot != 0 {
+				t.Fatal("不透明或未知寫入仍持有來源", name)
+			}
+			if rejected {
+				if len(p.publishedPending) != 0 {
+					t.Fatal("未知寫入仍保存配對", name)
+				}
+				if name == "pending-bound" && !p.publicationBlocked {
+					t.Fatal("超限未關閉")
+				}
+				return
+			}
+			if _, yes := p.publishedPending[pos]; !yes {
+				t.Fatal("不透明游標未保存來源")
+			}
+			if name == "opaque-save" {
+				return
+			}
+			if name == "post-main-write" || name == "unknown-vga-same" {
+				m.CPU.Seg[golem.CS] = 0x1000
+				m.CPU.IP = 0
+				m.Mem[0x10000] = 0xaa
+				m.CPU.Seg[golem.ES] = 0x2cae
+				m.CPU.R[golem.AX] = uint16(raw[0] ^ 1)
+				if name == "unknown-vga-same" {
+					m.CPU.Seg[golem.ES] = 0xa000
+					m.CPU.R[golem.AX] = uint16(paint)
+				}
+				m.CPU.R[golem.DI] = uint16(pos)
+				hdNewGameNeed(t, m.Step())
+			}
+			restoreK := k
+			switch name {
+			case "wrong-restore-k":
+				for i, v := range source {
+					if i != k && v == source[k] {
+						restoreK = i
+						break
+					}
+				}
+				if restoreK == k {
+					t.Fatal("缺相同值不同k")
+				}
+				m.Mem[0xafa00+restoreK] = raw[0]
+				m.Mem[0xafb00+restoreK] = paint
+			case "wrong-restore-old":
+				m.Write8(uint32(0xa0000+pos), paint^1)
+			case "wrong-restore-background":
+				m.Mem[0xafa00+k] ^= 1
+			case "wrong-restore-composition":
+				m.Mem[0xafb00+k] ^= 1
+			}
+			m.CPU.Seg[golem.CS] = 0xb68
+			m.CPU.IP = 0x51c
+			m.CPU.Seg[golem.DS] = 0xa000
+			m.CPU.Seg[golem.ES] = 0xa000
+			m.CPU.R[golem.SI] = uint16(0xfa00 + restoreK)
+			m.CPU.R[golem.DI] = uint16(pos)
+			m.CPU.R[golem.CX] = 1
+			hdNewGameNeed(t, m.Step())
+			restored := name == "opaque-restore" || name == "post-main-write"
+			if (p.published[pos] == cell) != restored || len(p.publishedPending) != 0 {
+				t.Fatal("反向配對還原不同", name, p.published[pos])
+			}
+		})
+	}
+}
+
+func TestHDTexturePublishedTextBackgroundGuards(t *testing.T) {
+	game, root, assets := hdReportFixtures(t)
+	h := &hdRuntime{m: golem.New()}
+	p, err := loadHDTextureKind(h, game, assets, "wood")
+	hdNewGameNeed(t, err)
+	raw := hdNewGameRead(t, "/repo/workplace/reports/goal186-display-hd/hd-full-assets-r49/decoded-public-r3/pixels/1552.idx")
+	copy(p.native[:], raw)
+	p.accepted = 1
+	copy(h.m.Mem, hdNewGameRead(t, filepath.Join(root, "report-source-probe-r2/control/point-001.memory")))
+	palette := hdNewGameRead(t, filepath.Join(root, "report-source-probe-r2/control/point-001.palette"))
+	pos := 21506
+	cell := hdSceneCell{slot: 1, local: 0, value: h.m.Mem[0xa0000+pos], glyph: true}
+	p.published[pos] = cell
+	f := draftNativeFrame{canvas: h.m.Mem[hdBuildingCanvas : hdBuildingCanvas+64000], indexed: bytes.Clone(h.m.Mem[0xa0000 : 0xa0000+64000]), palette: palette, mode: 0x13}
+	out := image.NewRGBA(image.Rect(0, 0, 1280, 800))
+	if !p.paintPublishedBackground(out, f, pos, raw[0], palette) {
+		t.Fatal("已發布字底正例未回畫")
+	}
+	for _, name := range []string{"wrong-value", "wrong-indexed", "wrong-vga", "wrong-palette", "missing-source", "wrong-mode", "negative", "overflow", "short-canvas", "blocked"} {
+		t.Run(name, func(t *testing.T) {
+			p.published[pos] = cell
+			p.publicationBlocked = false
+			bad := f
+			bad.indexed = bytes.Clone(f.indexed)
+			bad.palette = bytes.Clone(palette)
+			at := pos
+			value := raw[0]
+			h.m.Mem[0xa0000+pos] = cell.value
+			switch name {
+			case "wrong-value":
+				value ^= 1
+			case "wrong-indexed":
+				bad.indexed[pos] ^= 1
+			case "wrong-vga":
+				h.m.Mem[0xa0000+pos] ^= 1
+			case "wrong-palette":
+				bad.palette[int(raw[0])*3] ^= 1
+			case "missing-source":
+				p.published[pos] = hdSceneCell{}
+			case "wrong-mode":
+				bad.mode = 0x12
+			case "negative":
+				at = -1
+			case "overflow":
+				at = 64000
+			case "short-canvas":
+				bad.canvas = bad.canvas[:63999]
+			case "blocked":
+				p.publicationBlocked = true
+			}
+			result := image.NewRGBA(image.Rect(0, 0, 1280, 800))
+			before := bytes.Clone(result.Pix)
+			if p.paintPublishedBackground(result, bad, at, value, bad.palette) || !bytes.Equal(before, result.Pix) {
+				t.Fatal("未知字底仍回畫", name)
+			}
+		})
+	}
+}

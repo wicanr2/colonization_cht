@@ -43429,6 +43429,12 @@
         "formal_connected": true,
         "review_sha256": "d85cfb2fb95f4b4b47aefa7800d3e295b8400948cbb556fd69d8cd9ce129e5d2",
         "scope": "settled main menu; exact visible bitmap recognition for PIK, source ownership and text underlays for OPENTILE"
+      },
+      "published_texture_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "d78e8de1959f7df72da0b52b0d107476b5bb6d0177b9051d8087fc475c43d385",
+        "scope": "verified per-cell texture VGA publication and standard cursor reverse pairs; WOODTILE popup backgrounds and glyph underlays in representative normal TC load path; unobserved paths retain prior scope; full HD incomplete"
       }
     },
     {
@@ -57589,6 +57595,12 @@
         "formal_connected": true,
         "review_sha256": "4e70453e2a26a44fc08bc701d919e487ff70222848e39c104006f79e2e33487d",
         "scope": "verified RAM-copy source ownership and text underlays; palette indices 128..138; recorded normal GUI samples only"
+      },
+      "published_texture_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "d78e8de1959f7df72da0b52b0d107476b5bb6d0177b9051d8087fc475c43d385",
+        "scope": "verified per-cell texture VGA publication and standard cursor reverse pairs; WOODTILE popup backgrounds and glyph underlays in representative normal TC load path; unobserved paths retain prior scope; full HD incomplete"
       }
     }
   ],
@@ -59470,5 +59482,17 @@
     "formal_source_points": 32,
     "formal_assets": 134,
     "claim": "verified glyph underlays and standard cursor only; previous raw PNGs and conformance scopes unchanged; full HD incomplete"
+  },
+  "published_texture_conformance": {
+    "ready_sha256": "fd3d039cb23437211311d5409eb19d74e540a2d59f073f4f5b15529ad2404205",
+    "review_sha256": "d78e8de1959f7df72da0b52b0d107476b5bb6d0177b9051d8087fc475c43d385",
+    "sources": [
+      1265,
+      1552
+    ],
+    "gui_samples": 9,
+    "formal_source_points": 9,
+    "formal_assets": 134,
+    "claim": "existing texture publication lifecycle and normal popup wood underlays only; no new art or full-HD credit"
   }
 }

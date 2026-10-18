@@ -535,6 +535,13 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 	if hd["reason"] == "unverified-cursor-or-native-surface" && b.hd.scenes != nil {
 		hd["published_scene_picture"] = b.hd.scenes.paintPublished(base, f)
 	}
+	if hd["reason"] == "unverified-cursor-or-native-surface" {
+		for key, p := range map[string]*hdTextureRuntime{"published_texture": b.hd.texture, "published_world_texture": b.hd.worldTexture, "published_parch": b.hd.parch} {
+			if p != nil {
+				hd[key] = p.paintPublished(base, f)
+			}
+		}
+	}
 	var hdBG draftHDBackground
 	bgMask := make([]byte, 8000)
 	bgPainted := 0
@@ -594,6 +601,34 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 			}
 		}
 	}
+	if hd["reason"] == "unverified-cursor-or-native-surface" {
+		for _, v := range []struct {
+			key   string
+			p     *hdTextureRuntime
+			mask  []byte
+			count *int
+		}{
+			{"published_texture", b.hd.texture, bgMask, &bgPainted},
+			{"published_world_texture", b.hd.worldTexture, worldBGMask, &worldBGPainted},
+			{"published_parch", b.hd.parch, parchBGMask, &parchBGPainted},
+		} {
+			v := v
+			if group, ok := hd[v.key].(map[string]any); ok && group["reason"] == "published-texture-background-only" {
+				previous := hdBG
+				hdBG = func(out *image.RGBA, pos int, value byte, palette []byte) bool {
+					if previous != nil && previous(out, pos, value, palette) {
+						return true
+					}
+					if v.p.paintPublishedBackground(out, f, pos, value, palette) {
+						v.mask[pos>>3] |= 1 << uint(pos&7)
+						*v.count++
+						return true
+					}
+					return false
+				}
+			}
+		}
+	}
 	nativeCursorBackgroundMask := make([]byte, 8000)
 	nativeCursorBackgroundPainted := 0
 	if hdBG != nil {
@@ -637,6 +672,17 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 	if group, ok := hd["parch"].(map[string]any); ok {
 		group["background_repaints"] = parchBGPainted
 		group["background_mask"] = parchBGMask
+	}
+	for _, v := range []struct {
+		key   string
+		mask  []byte
+		count int
+	}{
+		{"published_texture", bgMask, bgPainted}, {"published_world_texture", worldBGMask, worldBGPainted}, {"published_parch", parchBGMask, parchBGPainted},
+	} {
+		if g, ok := hd[v.key].(map[string]any); ok {
+			g["background_mask"], g["background_repaints"] = v.mask, v.count
+		}
 	}
 	if err != nil {
 		return nil, nil, err

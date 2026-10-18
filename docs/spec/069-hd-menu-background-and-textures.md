@@ -1368,3 +1368,88 @@ GUI原版WAV為346003幀、49715Hz、雙聲道且非靜音，SHA-256
 `--published-text-conformed-report`，只補WOODPANL及標準游標兩列，
 其他1550列、134筆既有連結及全部原稿保持。
 沒有新素材、字模、格式、tag或Release。完整HD、未知字底與其他動畫仍待完成。
+
+## 2026-10-18 R81 訊息視窗底紋 DRAFT
+
+R80正式基準及十六張README實拍保持。成功訊息的部分原版字底仍未由PIK來源表覆蓋，
+接續既有WOODTILE、OPENTILE及PARCH的原版來源與字底，不猜補未知點。
+先核對32點原版寫入中各底紋來源、主畫布／VGA複製、字底與游標還原，
+以可丟棄原型驗證後才升READY。既有[背景來源探針](../../tools/build_hd_background_source_probe.py)、
+[底紋檢查器](../../tools/check_hd_background_sources.py)及
+[世界木紋像素檢查器](../../tools/check_hd_world_texture_pixels.py)為入口。
+本機根`workplace/reports/goal186-display-hd/hd-published-textures-r81/`。
+不增加生成素材或全量HD信用；其他圖像、人物、世界移動、戰鬥、事件與動畫繼續追蹤。
+
+## 2026-10-18 R82 開場背景 DRAFT
+
+全量HD包含開場的OPENING.PIK與OPENBORD.PIK。實際解碼預覽顯示OPENING是960×132的
+橫向地圖，OPENBORD是320×200的邊框，不能套用既有320×200完整背景假設。
+先沿定稿精細像素風製作原PNG候選，保留來源雜湊、完整提示與原始檔。
+原版參考及未採候選只留本機；未達READY不接正式程式、不增加素材完成數。
+
+正式來源須另外確認OPENING.EXE的畫布、解碼、橫向捲動、前景、色盤／淡入淡出、
+游標狀態及轉交VICEROY時的來源撤銷。原版比例、動畫與輸入保持。
+本機根`workplace/reports/goal186-display-hd/hd-opening-backgrounds-r82/`。
+入口沿[全資產盤點器](../../tools/inventory_hd_assets.py)及規格069的原版來源探針。
+
+### R81 READY
+
+原版32點來源模型與隔離原型已驗。WOODTILE成功訊息有2347個已發布背景格，
+693個已發布字底格；文字內游標時背景2307格、字底690格，移出後恢復。
+三點原PNG獨立RGBA共46912個，字底來源2076格；文字安全區不計逐RGBA通過。
+隔離原型80600000步／31筆既有正常GUI輸入的CPU、完整RAM、IDX、DAC、WAV及存檔
+與R80實拍相同。原版解碼三次各768格逐寫、來源及回傳已核對，沒有猜補。
+
+正式行為限定三種既有底紋。每層保存64000格已發布來源與最多256格游標反向配對。
+來源由完整已驗解碼後的原畫布格授予；0CBA的既有精確複製、0D21:012C字底及
+0B68:051C主畫布游標生命週期保持。0E21:0091只從對應實體主畫布點發布來源。
+原版寫入碼、界限、當次值、來源值、色盤與VGA全部核對；未知同值寫入也撤銷。
+發布後的主畫布寫入不改動已顯示來源。VGA游標採R80已驗透明保留與不透明反向配對。
+超過256格關閉該發布層，不放寬其他圖層的完整表面守門。
+
+完整表面守門拒絕時，另外逐點繪製這三種已驗發布底紋。
+字底回呼須有相符發布層、VGA／索引當次值、原始底紋值及色盤。
+文字安全矩形、字型、來源事件、游標最後合成與原圖模式保持；未知點回原圖。
+原版規則、輸入、資料、存檔、134張生成原PNG、既有清冊與字模保持。
+正式驗收包含來源／寫入碼／界限／色盤／VGA／游標失配負例、
+32個實際原版輸入檢查點、獨立來源遮罩與RGBA，以及正常GUI代表性文字內游標操作。
+
+公開重生入口為[已發布底紋來源檢查器](../../tools/check_hd_published_texture_sources.py)，
+參數為--probe、--points、--decoded、--game及--output；decoded指向既有pixels目錄。
+其來源沿R80正式原版探針，檢查器自行重建，不讀正式程式的所有權結果。
+本機READY為published-texture-ready-r1.json；原型審查為texture-prototype-review-r1.json。
+成功訊息底紋的證據缺口已解；其他未驗來源仍不計HD完成。
+
+### R81 限定CONFORMED
+
+規格069 R81訊息木紋與字底限定CONFORMED。63個具名Go零失敗／零skip、建置及go vet通過；32點／31筆既有正常輸入至80600000步，獨立來源、32768000個完整RGBA及原版CPU／RAM／IDX／DAC／存檔一致。當次9項正常GUI含4HD、5原圖，繁中兩模式與文字內游標移入移出通過；47152個新底紋RGBA、2076格字底來源、5248個HD游標RGBA及9216000個X11遊戲區RGBA相同。24筆當次GUI輸入三側重播至63600000步，含play=true，與實拍的CPU、完整RAM、IDX、DAC、WAV及存檔一致。134張原PNG、清冊135檔、64Go／47綁定及原版288檔保持；只補OPENTILE／WOODTILE兩列來源發布證據，其他1550列及134筆連結保持。PARCH沒有發布正例，維持原有範圍；其他語言排版沿R80，未新增五語GUI信用。其餘圖像、人物、世界移動／戰鬥、事件、動畫、完整五語、實玩影片與新版交付仍待完成。
+
+| 指紋 | SHA-256 |
+|---|---|
+| 正式二進位 | d30dbbba9dcce8d29e62b0a6093835f77e47299fb1570276180324559178ae37 |
+| READY | fd3d039cb23437211311d5409eb19d74e540a2d59f073f4f5b15529ad2404205 |
+| 正式審查 | d78e8de1959f7df72da0b52b0d107476b5bb6d0177b9051d8087fc475c43d385 |
+| 公開來源索引 | 15af41658e2c506ea2c42c113ddd3a52fd45fe8fbfc23dd7eb6090571e3600b0 |
+| 當次GUI9項 | 4e7dac8e5586825acf71a80acf159b8b7e8029654551624eb05391b5caeed7f8 |
+| 當次底紋來源模型9點 | e35d3bed02d59adf2c4a61d51006093223deb8e9f5615e9c7a6ddc2cffdc9055 |
+
+32點原版來源基準沿R80實際輸入，終點80600000步；當次GUI是24筆輸入至63600000步，
+分別核對，不混用收據。正式GUI木紋RGBA47152與原型46912不同，
+因各自實際游標位置／安全區不同，均以當次來源模型核對。
+文字安全區不計RGBA全驗，只核對字底來源及繁中兩模式文字／字級／安全矩形一致。
+當次4840筆游標sidecar最高82格、終點0。OPENTILE有發布正例，WOODTILE有訊息視窗正例；
+PARCH只有既有解碼與主畫布證據，發布零正例不擴張它的正式範圍。
+
+WAV為273025幀、49715Hz、雙聲道且非靜音，SHA-256
+54dbba8e9b14c5d7eb35cc49ac972f8fb7e9e441ff7186d02f1293ce9d4d9c02，三側均與當次GUI相同，沒有新增人耳或音效卡真機驗收。
+本批針對底紋新增行為、共用守門及32點狀態抽測63個具名Go，
+R80的251個與五語GUI維持歷史驗收，不冒充本批重測。
+
+重生根為workplace/reports/goal186-display-hd/hd-published-textures-r81/。
+入口：build-r81-published-texture-r1.py、run-r81-published-texture-tests-r1.py、
+capture-r81-published-texture-r1.py、verify-r81-gui-sources-r1.py及
+verify-r81-gui-replays-r1.py；收據為published-texture-conformance-r1.json。
+公開像素檢查器沿[已發布背景檢查器](../../tools/check_hd_published_scene_pixels.py)，
+加--text-cursor與--texture-model；來源由[底紋模型](../../tools/check_hd_published_texture_sources.py)重建。
+來源索引組裝器加--published-texture-ready-report與--published-texture-conformed-report，
+只補兩列有發布正例的來源，其餘1550列與全部原PNG保持。沒有新素材、字模、格式、tag或Release。

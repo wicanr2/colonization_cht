@@ -10,6 +10,7 @@ import (
 	"image/draw"
 	"image/png"
 	"path/filepath"
+	"strings"
 )
 
 const hdTexturePixelsSHA = "056247f0cb118421e53a69305625486e1d453cf5179690fb9f5bc7cd57b926c7"
@@ -32,6 +33,10 @@ type hdTexturePair struct {
 	hasUnder   bool
 }
 type hdTextureRuntime struct {
+	native                                                                    [768]byte
+	published                                                                 [64000]hdSceneCell
+	publishedPending                                                          map[int]hdSceneCursorPair
+	publicationBlocked                                                        bool
 	sourceLength                                                              int
 	sourceEncodedSHA, sourcePixelsSHA, sourcePaletteSHA                       string
 	paletteIndices                                                            []byte
@@ -116,7 +121,7 @@ func loadHDTextureKind(h *hdRuntime, game, dir, kind string) (*hdTextureRuntime,
 	if im.Bounds() != image.Rect(0, 0, 1448, 1086) {
 		return nil, fmt.Errorf("texture candidate shape")
 	}
-	p := &hdTextureRuntime{h: h, art: image.NewRGBA(image.Rect(0, 0, 128, 96)), owners: map[uint32]hdTextureCell{}, pending: map[uint32]hdTexturePair{}, underlays: map[uint32]hdTextureUnderlay{}}
+	p := &hdTextureRuntime{h: h, publishedPending: map[int]hdSceneCursorPair{}, art: image.NewRGBA(image.Rect(0, 0, 128, 96)), owners: map[uint32]hdTextureCell{}, pending: map[uint32]hdTexturePair{}, underlays: map[uint32]hdTextureUnderlay{}}
 	p.sourceEncodedSHA, p.sourcePixelsSHA, p.sourcePaletteSHA = encodedSHA, pixelsSHA, hdTexturePaletteSHA
 	p.sourceLength = sourceLength
 	if world {
@@ -235,6 +240,7 @@ func (p *hdTextureRuntime) finish() {
 	for k, v := range p.writes {
 		p.owners[p.base+uint32(k)] = hdTextureCell{uint16(k), v}
 	}
+	copy(p.native[:], p.writes[:])
 	p.accepted++
 	p.revision++
 }
@@ -263,6 +269,9 @@ func (p *hdTextureRuntime) memoryWrite(addr uint32, old, value byte) {
 			p.counts[k]++
 			p.writes[k] = value
 		}
+	}
+	if p.accepted > 0 && addr >= 0xa0000 {
+		p.publish(addr, old, value)
 	}
 	if p.accepted == 0 || addr >= 0xa0000 {
 		return
@@ -471,4 +480,120 @@ func (p *hdTextureRuntime) paletteSupported(palette []byte) bool {
 		raw = append(raw, palette[int(i)*3:int(i)*3+3]...)
 	}
 	return hash(raw) == p.sourcePaletteSHA
+}
+
+// 規格069 R81 READY：只追原版已發布底紋，不放寬完整表面守門。
+func (p *hdTextureRuntime) mainCell(at int) hdSceneCell {
+	addr := hdBuildingCanvas + uint32(at)
+	if cell, ok := p.owners[addr]; ok {
+		return hdSceneCell{slot: 1, local: cell.local, value: cell.native}
+	}
+	if under, ok := p.underlays[addr]; ok {
+		return hdSceneCell{slot: 1, local: under.cell.local, value: under.glyph, glyph: true}
+	}
+	return hdSceneCell{}
+}
+func (p *hdTextureRuntime) validPublishedCell(c hdSceneCell) bool {
+	return p.accepted > 0 && c.slot == 1 && int(c.local) < len(p.native) && (c.glyph || p.native[c.local] == c.value)
+}
+func (p *hdTextureRuntime) publish(a uint32, oldValue, value byte) {
+	if p.publicationBlocked || a < 0xa0000 || a >= 0xa0000+64000 {
+		return
+	}
+	at := int(a - 0xa0000)
+	oldCell := p.published[at]
+	p.published[at] = hdSceneCell{}
+	pair, paired := p.publishedPending[at]
+	delete(p.publishedPending, at)
+	m, c := p.h.m, p.h.m.CPU
+	cs, ip := c.OpAddr()
+	pc := int(cs)*16 + int(ip)
+	delta := int(a) - (int(c.Seg[golem.ES])*16 + int(c.R[golem.DI]))
+	sourceOffset := int(c.R[golem.SI]) + delta
+	cursorCode := []byte{0xf3, 0xa4, 0x8a, 0xc8, 0x2b, 0xf9, 0x2b, 0xf1, 3, 0xf3, 3, 0xfa, 0xfe, 0xcc, 0x75, 0xf0}
+	if cs == 0xb68 && ip == 0x51c && c.Seg[golem.DS] == 0xa000 && c.Seg[golem.ES] == 0xa000 &&
+		delta == 0 && sourceOffset >= 0xfa00 && sourceOffset < 0xfc00 && pc+16 <= len(m.Mem) && bytes.Equal(m.Mem[pc:pc+16], cursorCode) {
+		if source, known := p.h.cursorSource(); known && m.Mem[0xa0000+sourceOffset] == value {
+			k := sourceOffset & 255
+			back, composed := m.Mem[0xafa00+k], m.Mem[0xafb00+k]
+			if sourceOffset >= 0xfb00 && back == oldValue && composed == value && (source[k] == 255 && value == back || source[k] != 255 && value == source[k]) {
+				if source[k] == 255 && oldValue == value && oldCell.slot != 0 && oldCell.value == value {
+					p.published[at] = oldCell
+				} else if source[k] != 255 && oldCell.slot != 0 && oldCell.value == oldValue {
+					p.publishedPending[at] = hdSceneCursorPair{old: oldValue, value: value, k: k, cell: oldCell}
+				}
+			} else if sourceOffset < 0xfb00 && back == value {
+				if source[k] == 255 && composed == oldValue && oldValue == value && oldCell.slot != 0 && oldCell.value == value {
+					p.published[at] = oldCell
+				} else if paired && pair.old == value && pair.value == oldValue && pair.k == k && composed == oldValue && source[k] == oldValue {
+					p.published[at] = pair.cell
+				}
+			}
+		}
+	}
+	if len(p.publishedPending) > 256 {
+		p.publicationBlocked = true
+		clear(p.published[:])
+		clear(p.publishedPending)
+	}
+	if cs == 0xe21 && ip == 0x91 && c.Seg[golem.ES] == 0xa000 && pc >= 0 && pc+len(hdSceneVGACopyCode) <= len(m.Mem) && bytes.Equal(m.Mem[pc:pc+len(hdSceneVGACopyCode)], hdSceneVGACopyCode) {
+		src := int(c.Seg[golem.DS])*16 + int(c.R[golem.SI]) + delta
+		if delta >= 0 && delta < 2 && int(c.R[golem.SI])+delta < 65536 && int(c.R[golem.DI])+delta < 64000 && src == int(hdBuildingCanvas)+at && src < len(m.Mem) && m.Mem[src] == value {
+			cell := p.mainCell(at)
+			if p.validPublishedCell(cell) && cell.value == value {
+				p.published[at] = cell
+			}
+		}
+	}
+	if oldCell != p.published[at] {
+		p.revision++
+	}
+}
+
+func (p *hdTextureRuntime) paintPublished(out *image.RGBA, f draftNativeFrame) map[string]any {
+	mask := make([]byte, 8000)
+	r := map[string]any{"formal": true, "prototype": false, "surface": "published-vga", "painted": 0, "mask": mask, "palette_supported": false}
+	if p != nil {
+		r["palette_supported"] = p.paletteSupported(f.palette)
+	}
+	if p == nil || p.publicationBlocked || f.mode != 0x13 || len(f.canvas) != 64000 || len(f.indexed) != 64000 || len(f.palette) != 768 || f.cursor.Dx() != 16 || f.cursor.Dy() != 16 || len(p.h.m.Mem) < 0xa0000+64000 || !bytes.Equal(p.h.m.Mem[0xa0000:0xa0000+64000], f.indexed) {
+		r["reason"] = "unverified-vga-surface"
+		return r
+	}
+	source, reason := p.h.cursorProof(f)
+	if reason != "" && !strings.HasPrefix(reason, "outside-cursor:") {
+		r["reason"] = "unverified-cursor"
+		return r
+	}
+	if source == nil {
+		source, _ = p.h.cursorSource()
+	}
+	count := 0
+	if p.paletteSupported(f.palette) {
+		for at, c := range p.published {
+			if !p.validPublishedCell(c) || c.glyph || c.value != f.indexed[at] || (image.Pt(at%320, at/320).In(f.cursor) && source[(at/320-f.cursor.Min.Y)*16+at%320-f.cursor.Min.X] != 255) {
+				continue
+			}
+			x, y := at%320*4, at/320*4
+			sx, sy := int(c.local)%32*4, int(c.local)/32*4
+			draw.Draw(out, image.Rect(x, y, x+4, y+4), p.art, image.Pt(sx, sy), draw.Src)
+			mask[at>>3] |= 1 << uint(at&7)
+			count++
+		}
+	}
+	r["painted"], r["reason"] = count, "published-texture-background-only"
+	return r
+}
+func (p *hdTextureRuntime) paintPublishedBackground(out *image.RGBA, f draftNativeFrame, pos int, value byte, palette []byte) bool {
+	if p == nil || p.publicationBlocked || pos < 0 || pos >= 64000 || f.mode != 0x13 || len(f.indexed) != 64000 || len(f.canvas) != 64000 || len(p.h.m.Mem) < 0xa0000+64000 {
+		return false
+	}
+	c := p.published[pos]
+	if !p.validPublishedCell(c) || c.value != f.indexed[pos] || p.h.m.Mem[0xa0000+pos] != c.value || p.native[c.local] != value || !p.paletteSupported(palette) {
+		return false
+	}
+	x, y := pos%320*4, pos/320*4
+	sx, sy := int(c.local)%32*4, int(c.local)/32*4
+	draw.Draw(out, image.Rect(x, y, x+4, y+4), p.art, image.Pt(sx, sy), draw.Src)
+	return true
 }
