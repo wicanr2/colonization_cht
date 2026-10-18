@@ -46,6 +46,8 @@ parser.add_argument('--report-background-ready-report',type=Path,help='規格069
 parser.add_argument('--report-background-conformed-report',type=Path,help='規格069八報告正式驗收與124張舊原稿繼承審查')
 parser.add_argument('--room-score-ready-report',type=Path,help='規格069國會室內與計分背景READY審查r2')
 parser.add_argument('--room-score-conformed-report',type=Path,help='規格069兩背景限定驗收及132張舊原稿繼承審查')
+parser.add_argument('--published-surface-ready-report',type=Path,help='規格069 R79已發布顯示來源READY審查')
+parser.add_argument('--published-surface-conformed-report',type=Path,help='規格069 R79正常讀檔背景限定驗收，素材不增加')
 a=parser.parse_args();out=a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.parent.stat().st_uid==os.getuid() and not out.exists()
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -77,6 +79,38 @@ for name,asset in manifest['assets'].items():
  f=matches[0];f['formal_assets'].append(name)
  bindings.append({'asset':name,'asset_sha256':asset['sha256'],'source_research_id':f['research_id'],'source_file':file,'source_ordinal':f['ordinal'],'source_encoded_sha256':f.get('encoded_sha256'),'spec':asset.get('spec',manifest['spec']),'claim':'matches verified formal manifest; conformance scope remains in cited spec'})
  if file.endswith('.PIK'):bindings[-1]['source_indexed_sha256']=f['indexed_sha256']
+# R79 只增加已驗顯示生命週期，134張原稿與既有來源事實保持。
+if a.published_surface_ready_report or a.published_surface_conformed_report:
+ assert a.published_surface_ready_report and a.published_surface_conformed_report and a.inherited_index and a.inherited_manifest
+ assert not a.room_score_ready_report and not a.room_score_conformed_report
+ ready=json.loads(a.published_surface_ready_report.read_bytes());review=json.loads(a.published_surface_conformed_report.read_bytes())
+ prior=json.loads(a.inherited_index.read_bytes());old_manifest=json.loads(a.inherited_manifest.read_bytes())
+ assert ready['result']=='READY_PUBLISHED_SCENE_DISPLAY_ONLY'
+ assert review['result']=='PASS_PUBLISHED_SCENE_CONFORMANCE_REVIEW' and review['spec_state']=='CONFORMED'
+ assert review['ready_sha256']==sha(a.published_surface_ready_report)
+ assert review['manifest_sha256']==sha(a.manifest)==sha(a.inherited_manifest)==prior['formal_manifest_sha256']
+ assert review['inherited_source_index_sha256']==sha(a.inherited_index)
+ assert old_manifest==manifest and len(manifest['assets'])==134
+ assert review['gui_samples']==32 and review['formal_source_points']==32 and review['native_points']==27
+ assert review['go_named_passed']==215 and not review['go_failed'] and not review['go_skipped']
+ assert review['four_replays_gui_audio_state_save_equal'] is True and review['original_inputs_unchanged'] is True
+ assert prior['source_receipt_sha256']==sha(a.catalog) and len(prior['frames'])==1552 and prior['files']==d['files']
+ assert prior['formal_bindings']==bindings and prior['coverage_limits']['complete_hd'] is False
+ before={f['research_id']:f for f in prior['frames']}
+ for frame in frames:
+  previous=before[frame['research_id']]
+  assert {k:frame[k] for k in allowed if k in frame}=={k:previous[k] for k in allowed if k in previous}
+  assert frame['formal_assets']==previous['formal_assets']
+ merged=json.loads(a.inherited_index.read_bytes())
+ row=next(f for f in merged['frames'] if f['research_id']==1551)
+ row['runtime_source_evidence'] += '; additionally confirmed exact main-to-VGA publication in recorded normal load views; post-publication main writes do not revoke displayed background owners'
+ row['published_surface_reference']={'state':'CONFORMED','spec':'docs/spec/069-hd-menu-background-and-textures.md','review_sha256':sha(a.published_surface_conformed_report),'scope':'normal load list and success-message backgrounds, five languages, Original/HD and EN/TC cursor hover/return; cursor and foreground preserved as original, text underlay HD pending'}
+ merged['published_surface_conformance']={'ready_sha256':sha(a.published_surface_ready_report),'review_sha256':sha(a.published_surface_conformed_report),'source':1551,'gui_samples':32,'formal_source_points':32,'formal_assets':134,'claim':'published source background only; inherited134 PNGs and previous conformance scopes unchanged; full HD incomplete'}
+ assert all(f==before[f['research_id']] for f in merged['frames'] if f['research_id']!=1551)
+ out.write_text(json.dumps(merged,ensure_ascii=False,indent=2)+'\n')
+ print('PASS_INHERITED_PUBLISHED_SURFACE_INDEX',len(frames),len(bindings),sha(out),flush=True)
+ raise SystemExit(0)
+
 # R78 僅增補國會室內與計分木紋兩個來源；載入選單HD仍未完成。
 if a.room_score_ready_report or a.room_score_conformed_report:
  assert a.room_score_ready_report and a.room_score_conformed_report and a.inherited_index and a.inherited_manifest

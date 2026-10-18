@@ -143,3 +143,149 @@ func TestHDRoomScoreDecodePaletteAndUnderlay(t *testing.T) {
 		})
 	}
 }
+
+func TestHDScenePublishedWriteGuards(t *testing.T) {
+	game, _, assets := hdReportFixtures(t)
+	for _, name := range []string{"known", "normalized-source", "wrong-code", "wrong-source", "source-value", "same-value-revoke", "post-publication-main-write"} {
+		t.Run(name, func(t *testing.T) {
+			m := golem.New()
+			h := &hdRuntime{m: m}
+			p, err := loadHDSceneRuntime(h, game, assets)
+			hdNewGameNeed(t, err)
+			h.scenes = p
+			raw := hdNewGameRead(t, "/repo/workplace/reports/goal186-display-hd/hd-full-assets-r49/decoded-public-r3/pixels/1551.idx")
+			copy(m.Mem[hdBuildingCanvas:hdBuildingCanvas+64000], raw)
+			p.decodedAt(hdBuildingCanvas, 0)
+			pos := 40000
+			m.CPU.Seg[golem.CS] = 0xe21
+			m.CPU.IP = 0x91
+			m.CPU.Seg[golem.DS] = 0x2cae
+			m.CPU.R[golem.SI] = uint16(pos)
+			if name == "normalized-source" {
+				m.CPU.Seg[golem.DS] = 0x34ae
+				m.CPU.R[golem.SI] = uint16(pos - 32768)
+			}
+			if name == "wrong-source" {
+				m.CPU.Seg[golem.DS]++
+			}
+			m.CPU.Seg[golem.ES] = 0xa000
+			m.CPU.R[golem.DI] = uint16(pos)
+			m.CPU.R[golem.CX] = 1
+			m.CPU.Flags &^= 0x400
+			copy(m.Mem[0xe210+0x91:], hdSceneVGACopyCode)
+			if name == "wrong-code" {
+				m.Mem[0xe210+0x91+15] ^= 1
+			}
+			if name == "source-value" {
+				m.Mem[hdBuildingCanvas+uint32(pos)] ^= 1
+			}
+			hdNewGameNeed(t, m.Step())
+			rejected := name == "wrong-code" || name == "wrong-source" || name == "source-value"
+			if (p.published[pos].slot == 0) != rejected {
+				t.Fatal("VGA來源守門不同", name, p.published[pos])
+			}
+			if name == "same-value-revoke" || name == "post-publication-main-write" {
+				before := p.published[pos]
+				m.CPU.Seg[golem.CS] = 0x1000
+				m.CPU.IP = 0
+				m.Mem[0x10000] = 0xaa
+				m.CPU.Seg[golem.ES] = 0xa000
+				if name == "post-publication-main-write" {
+					m.CPU.Seg[golem.ES] = 0x2cae
+				}
+				m.CPU.R[golem.DI] = uint16(pos)
+				m.CPU.R[golem.AX] = uint16(raw[pos])
+				hdNewGameNeed(t, m.Step())
+				if name == "same-value-revoke" && p.published[pos].slot != 0 {
+					t.Fatal("未知VGA同值寫入未撤銷")
+				}
+				if name == "post-publication-main-write" && (p.published[pos] != before || p.visible[pos].slot != 0) {
+					t.Fatal("主畫布後寫污染已發布來源")
+				}
+			}
+		})
+	}
+}
+
+func TestHDScenePublishedSurfaceGuards(t *testing.T) {
+	game, root, assets := hdReportFixtures(t)
+	model := os.Getenv("TEST_HD_PUBLISHED_MODEL")
+	if model == "" {
+		t.Skip("需要已發布來源模型")
+	}
+	h := &hdRuntime{m: golem.New()}
+	p, err := loadHDSceneRuntime(h, game, assets)
+	hdNewGameNeed(t, err)
+	h.scenes = p
+	raw := hdNewGameRead(t, "/repo/workplace/reports/goal186-display-hd/hd-full-assets-r49/decoded-public-r3/pixels/1551.idx")
+	copy(h.m.Mem[hdBuildingCanvas:hdBuildingCanvas+64000], raw)
+	p.decodedAt(hdBuildingCanvas, 0)
+	memory := hdNewGameRead(t, filepath.Join(root, "report-source-probe-r2/control/point-001.memory"))
+	copy(h.m.Mem, memory)
+	var cells map[string][]any
+	hdNewGameNeed(t, json.Unmarshal(hdNewGameRead(t, filepath.Join(model, "point-001.published.json")), &cells))
+	pos := -1
+	for key, c := range cells {
+		at, e := strconv.Atoi(key)
+		hdNewGameNeed(t, e)
+		if int(c[0].(float64)) != 1551 || c[3].(string) != "background" || image.Pt(at%320, at/320).In(image.Rect(16, 16, 32, 32)) {
+			continue
+		}
+		for i, f := range p.frames {
+			if f.id == 1551 {
+				p.published[at] = hdSceneCell{slot: uint8(i + 1), local: uint16(c[1].(float64)), value: byte(c[2].(float64))}
+				pos = at
+			}
+		}
+		if pos >= 0 {
+			break
+		}
+	}
+	if pos < 0 {
+		t.Fatal("缺背景正例")
+	}
+	f := draftNativeFrame{canvas: bytes.Clone(memory[hdBuildingCanvas : hdBuildingCanvas+64000]), indexed: hdNewGameRead(t, filepath.Join(root, "report-source-probe-r2/control/point-001.idx")), palette: hdNewGameRead(t, filepath.Join(root, "report-source-probe-r2/control/point-001.palette")), cursor: image.Rect(16, 16, 32, 32), mode: 0x13}
+	im := draftRGB(f.indexed, f.palette)
+	if p.paintPublished(im, f)["painted"] != 1 {
+		t.Fatal("已驗背景正例被拒")
+	}
+	for _, name := range []string{"vga-changed", "indexed-changed", "published-value-changed", "palette-changed", "short-indexed", "short-canvas", "wrong-mode", "wrong-cursor", "blocked", "cursor-source-changed"} {
+		t.Run(name, func(t *testing.T) {
+			copy(h.m.Mem, memory)
+			p.blocked = false
+			bad := f
+			bad.indexed = bytes.Clone(f.indexed)
+			bad.canvas = bytes.Clone(f.canvas)
+			bad.palette = bytes.Clone(f.palette)
+			switch name {
+			case "vga-changed":
+				h.m.Mem[0xa0000+pos] ^= 1
+			case "indexed-changed":
+				bad.indexed[pos] ^= 1
+			case "published-value-changed":
+				bad.indexed[pos] ^= 1
+				h.m.Mem[0xa0000+pos] ^= 1
+			case "palette-changed":
+				bad.palette[int(p.published[pos].value)*3] ^= 1
+			case "short-indexed":
+				bad.indexed = bad.indexed[:63999]
+			case "short-canvas":
+				bad.canvas = bad.canvas[:63999]
+			case "wrong-mode":
+				bad.mode = 0x12
+			case "wrong-cursor":
+				bad.cursor = image.Rect(16, 16, 31, 32)
+			case "blocked":
+				p.blocked = true
+			case "cursor-source-changed":
+				h.m.Mem[0x1cd74] ^= 1
+			}
+			out := draftRGB(f.indexed, f.palette)
+			before := bytes.Clone(out.Pix)
+			got := p.paintPublished(out, bad)
+			if got["painted"] != 0 || !bytes.Equal(before, out.Pix) {
+				t.Fatal("未知來源仍畫HD", name, got)
+			}
+		})
+	}
+}

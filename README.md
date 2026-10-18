@@ -100,7 +100,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 
 ![繁體中文計分頁與 HD 木紋背景](docs/screenshots/hd-score-zh.png)
 
-計分頁：木紋背景已重繪，圖示位置、分數與操作沿原版。載入選單仍保留原版背景。
+計分頁：木紋背景已重繪，圖示位置、分數與操作沿原版。讀檔列表及成功訊息背景也已接入 HD；文字字底與游標接續處理。
 
 ![繁體中文世界畫面與 HD 海洋、地形](docs/screenshots/hd-world-zh.png)
 

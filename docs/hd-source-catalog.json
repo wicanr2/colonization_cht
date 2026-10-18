@@ -57498,7 +57498,7 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "confirmed complete PIK decode at explicit verified canvas bases, exact source-used palette RGB and original copy/glyph/cursor ownership; only native surfaces that pass the inherited guard",
+      "runtime_source_evidence": "confirmed complete PIK decode at explicit verified canvas bases, exact source-used palette RGB and original copy/glyph/cursor ownership; only native surfaces that pass the inherited guard; additionally confirmed exact main-to-VGA publication in recorded normal load views; post-publication main writes do not revoke displayed background owners",
       "animation_evidence": "not_assessed_by_this_inventory",
       "formal_assets": [
         "woodpanl-000.png"
@@ -57509,6 +57509,12 @@
         "formal_connected": true,
         "review_sha256": "a1049affbd62d15ef7413cd9063e6f0dccb9aafbda199e5a4ee3238e1d38c2de",
         "scope": "normal F3 congress-room background and F10 score background, five languages, original/HD and EN/TC standard cursor hover/return; load-menu/slot stay Original on native guard failure; actors, animation and other paths unverified"
+      },
+      "published_surface_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "17128580f3a25ea0b4710f09ddaa4c7cf10bcfc83ff4ec87bef3edd2130ee4e7",
+        "scope": "normal load list and success-message backgrounds, five languages, Original/HD and EN/TC cursor hover/return; cursor and foreground preserved as original, text underlay HD pending"
       }
     },
     {
@@ -59431,5 +59437,14 @@
     "inherited_source_index_sha256": "daf4b37b885bad57d8173672b51fc344aca441691e132abb2ecbebb0b9605f31",
     "load_menu_hd_complete": false,
     "claim": "two normal backgrounds only; all132 inherited raw PNGs/records and conformance scopes preserved; stage load-menu native guard failure stays Original, full HD incomplete"
+  },
+  "published_surface_conformance": {
+    "ready_sha256": "6748c4f7579186ea77f6dd30888403c927f32d9aeea8dec6321a8781fe10eed5",
+    "review_sha256": "17128580f3a25ea0b4710f09ddaa4c7cf10bcfc83ff4ec87bef3edd2130ee4e7",
+    "source": 1551,
+    "gui_samples": 32,
+    "formal_source_points": 32,
+    "formal_assets": 134,
+    "claim": "published source background only; inherited134 PNGs and previous conformance scopes unchanged; full HD incomplete"
   }
 }

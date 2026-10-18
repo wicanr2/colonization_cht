@@ -525,6 +525,9 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 		return nil, nil, fmt.Errorf("ui.error.unavailable")
 	}
 	base, hd := b.hd.base(f)
+	if hd["reason"] == "unverified-cursor-or-native-surface" && b.hd.scenes != nil {
+		hd["published_scene_picture"] = b.hd.scenes.paintPublished(base, f)
+	}
 	var hdBG draftHDBackground
 	bgMask := make([]byte, 8000)
 	bgPainted := 0

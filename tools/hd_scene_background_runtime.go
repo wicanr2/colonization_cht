@@ -9,6 +9,7 @@ import (
 	"image/draw"
 	"image/png"
 	"path/filepath"
+	"strings"
 )
 
 // 規格069 R76／R77 READY：來源、解碼畫布與原圖固定，所有狀態只供顯示。
@@ -39,7 +40,7 @@ type hdSceneCursorPair struct {
 type hdSceneRuntime struct {
 	h                                                           *hdRuntime
 	frames                                                      []*hdSceneFrame
-	visible, stage                                              [64000]hdSceneCell
+	visible, stage, published                                   [64000]hdSceneCell
 	backing                                                     map[uint32]hdSceneCell
 	pending                                                     map[int]hdSceneCursorPair
 	decodeBase                                                  uint32
@@ -234,7 +235,11 @@ func (p *hdSceneRuntime) copyCell(a uint32, value byte) (hdSceneCell, bool) {
 	return got, got.slot != 0 && int(got.slot) <= len(p.frames) && got.value == value
 }
 func (p *hdSceneRuntime) memoryWrite(a uint32, old, value byte) {
-	if p == nil || p.blocked || a >= 0xa0000 {
+	if p == nil || p.blocked {
+		return
+	}
+	if a >= 0xa0000 {
+		p.publish(a, value)
 		return
 	}
 	m := p.h.m
@@ -396,4 +401,82 @@ func (p *hdSceneRuntime) paintBackground(out *image.RGBA, f draftNativeFrame, po
 	sx, sy := int(c.local)%320*4, int(c.local)/320*4
 	draw.Draw(out, image.Rect(x, y, x+4, y+4), frame.art, image.Pt(sx, sy), draw.Src)
 	return true
+}
+
+var hdSceneVGACopyCode = []byte{0xf3, 0xa5, 3, 0xf3, 0x79, 0x0c, 0x81, 0xee, 0, 0x80, 0x8c, 0xd9, 0x81, 0xc1, 0, 8}
+
+// 規格069 R79 READY：主畫布送出後的寫入不能改變已顯示來源。
+// 每一筆未知VGA寫入，包括同值寫入，都先撤銷該點的來源。
+func (p *hdSceneRuntime) publish(a uint32, value byte) {
+	if a < 0xa0000 || a >= 0xa0000+64000 {
+		return
+	}
+	at := int(a - 0xa0000)
+	old := p.published[at]
+	p.published[at] = hdSceneCell{}
+	m, c := p.h.m, p.h.m.CPU
+	cs, ip := c.OpAddr()
+	pc := int(cs)*16 + int(ip)
+	if cs == 0xe21 && ip == 0x91 && c.Seg[golem.ES] == 0xa000 &&
+		pc >= 0 && pc+len(hdSceneVGACopyCode) <= len(m.Mem) &&
+		bytes.Equal(m.Mem[pc:pc+len(hdSceneVGACopyCode)], hdSceneVGACopyCode) {
+		delta := int(a) - (int(c.Seg[golem.ES])*16 + int(c.R[golem.DI]))
+		src := int(c.Seg[golem.DS])*16 + int(c.R[golem.SI]) + delta
+		if delta >= 0 && delta < 2 && int(c.R[golem.SI])+delta < 65536 &&
+			int(c.R[golem.DI])+delta < 64000 && src == int(hdBuildingCanvas)+at &&
+			src < len(m.Mem) && m.Mem[src] == value {
+			cell := p.visible[at]
+			if _, known := p.frame(cell); known && cell.value == value {
+				p.published[at] = cell
+			}
+		}
+	}
+	if old != p.published[at] {
+		p.revision++
+	}
+}
+
+// 只在既有完整主畫布守門拒絕時使用。其他HD層與文字來源契約保持。
+// 原版可見索引、原始VGA、來源值及色盤逐點核對；游標矩形保留原圖。
+func (p *hdSceneRuntime) paintPublished(out *image.RGBA, f draftNativeFrame) map[string]any {
+	records := map[string]any{}
+	r := map[string]any{"formal": true, "surface": "published-vga", "sources": records, "painted": 0}
+	if p == nil || p.blocked || f.mode != 0x13 || len(f.canvas) != 64000 || len(f.indexed) != 64000 ||
+		len(f.palette) != 768 || f.cursor.Dx() != 16 || f.cursor.Dy() != 16 ||
+		len(p.h.m.Mem) < 0xa0000+64000 ||
+		!bytes.Equal(p.h.m.Mem[0xa0000:0xa0000+64000], f.indexed) {
+		r["reason"] = "unverified-vga-surface"
+		return r
+	}
+	_, reason := p.h.cursorProof(f)
+	if reason != "" && !strings.HasPrefix(reason, "outside-cursor:") {
+		r["reason"] = "unverified-cursor"
+		return r
+	}
+	palettes := make([]bool, len(p.frames))
+	masks := make([][]byte, len(p.frames))
+	counts := make([]int, len(p.frames))
+	for i, frame := range p.frames {
+		palettes[i], masks[i] = frame.paletteSupported(f.palette), make([]byte, 8000)
+	}
+	for at, c := range p.published {
+		frame, known := p.frame(c)
+		if !known || c.glyph || !palettes[int(c.slot)-1] || c.value != f.indexed[at] ||
+			frame.native[int(c.local)] != c.value || image.Pt(at%320, at/320).In(f.cursor) {
+			continue
+		}
+		x, y := at%320*4, at/320*4
+		sx, sy := int(c.local)%320*4, int(c.local)/320*4
+		draw.Draw(out, image.Rect(x, y, x+4, y+4), frame.art, image.Pt(sx, sy), draw.Src)
+		i := int(c.slot) - 1
+		masks[i][at>>3] |= 1 << uint(at&7)
+		counts[i]++
+	}
+	total := 0
+	for i, frame := range p.frames {
+		records[fmt.Sprint(frame.id)] = map[string]any{"painted": counts[i], "palette_supported": palettes[i], "mask": masks[i]}
+		total += counts[i]
+	}
+	r["painted"], r["reason"] = total, "published-scene-background-only"
+	return r
 }

@@ -135,6 +135,67 @@ func TestHDReportNative27(t *testing.T) {
 				t.Fatal("正常來源被守門拒絕", at, receipt["reason"])
 			}
 		}
+
+		if publishedModel := os.Getenv("TEST_HD_PUBLISHED_MODEL"); publishedModel != "" {
+			var expectedPublished map[string][]any
+			hdNewGameNeed(t, json.Unmarshal(hdNewGameRead(t, filepath.Join(publishedModel, fmt.Sprintf("point-%03d.published.json", at))), &expectedPublished))
+			for pos, c := range p.published {
+				expected, yes := expectedPublished[strconv.Itoa(pos)]
+				if !yes {
+					if c.slot != 0 {
+						t.Fatal("未知VGA點仍持有來源", at, pos)
+					}
+					continue
+				}
+				frame, known := p.frame(c)
+				if !known || frame.id != int(expected[0].(float64)) || int(c.local) != int(expected[1].(float64)) || int(c.value) != int(expected[2].(float64)) || c.glyph != (expected[3].(string) == "glyph") {
+					t.Fatal("已送出來源與獨立逐寫模型不同", at, pos)
+				}
+			}
+			publishedImage := draftRGB(f.indexed, f.palette)
+			publishedReceipt := p.paintPublished(publishedImage, f)
+			sources, ok := publishedReceipt["sources"].(map[string]any)
+			if !ok || publishedReceipt["reason"] != "published-scene-background-only" {
+				t.Fatal("已送出來源未驗", at, publishedReceipt)
+			}
+			expectedCells := map[int]*hdSceneFrame{}
+			for _, frame := range p.frames {
+				expectedMask := hdNewGameRead(t, filepath.Join(publishedModel, fmt.Sprintf("point-%03d-published-%d-mask.bin", at, frame.id)))
+				packed := make([]byte, 8000)
+				count := 0
+				for pos, v := range expectedMask {
+					if v != 0 {
+						packed[pos>>3] |= 1 << uint(pos&7)
+						count++
+						expectedCells[pos] = frame
+					}
+				}
+				got := sources[fmt.Sprint(frame.id)].(map[string]any)
+				if got["painted"].(int) != count || !bytes.Equal(got["mask"].([]byte), packed) {
+					t.Fatal("已送出來源遮罩不同", at, frame.id)
+				}
+			}
+			before := draftRGB(f.indexed, f.palette)
+			for y := 0; y < 800; y++ {
+				for x := 0; x < 1280; x++ {
+					pos := y/4*320 + x/4
+					want := before.RGBAAt(x, y)
+					if frame := expectedCells[pos]; frame != nil {
+						c := p.published[pos]
+						want = frame.art.RGBAAt(int(c.local)%320*4+x%4, int(c.local)/320*4+y%4)
+					}
+					if publishedImage.RGBAAt(x, y) != want {
+						t.Fatal("已送出背景RGBA或原版前景不同", at, x, y)
+					}
+				}
+			}
+			checkState(s)
+			file, e := os.Create(filepath.Join(out, fmt.Sprintf("point-%03d-published.png", at)))
+			hdNewGameNeed(t, e)
+			hdNewGameNeed(t, png.Encode(file, publishedImage))
+			hdNewGameNeed(t, file.Close())
+		}
+
 		baseline := draftRGB(f.indexed, f.palette)
 		for y := 0; y < 800; y++ {
 			for x := 0; x < 1280; x++ {

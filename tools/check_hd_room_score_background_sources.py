@@ -3,8 +3,9 @@ from pathlib import Path
 import json,hashlib,collections,argparse,os,sys
 parser=argparse.ArgumentParser(description=__doc__)
 for name in ['probe','points','decoded','game','output']:parser.add_argument('--'+name,type=Path,required=True)
-parser.add_argument('--scope',choices=['reports-and-room-score','room-score-only','inherited-scenes'],default='reports-and-room-score',help='限定需要正例的正常路徑；完整十二來源均重建，不外推未出現來源')
-a=parser.parse_args();scope=a.scope
+parser.add_argument('--scope',choices=['reports-and-room-score','room-score-only','inherited-scenes','published-load'],default='reports-and-room-score',help='限定需要正例的正常路徑；完整十二來源均重建，不外推未出現來源')
+parser.add_argument('--published-surface',action='store_true',help='規格069 R79 DRAFT：另追已送到VGA的背景來源；不放寬既有原版畫布判定')
+a=parser.parse_args();scope=a.scope;published_surface=a.published_surface
 assert Path('/.dockerenv').exists() and os.getuid()!=0
 fingerprints={'VICEROY.EXE': 'a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3', 'COLONY.PIK': 'faaa637d528641a5f098eb4b1975696de182bd2d586b5f089d5a0d51320f5465', 'EUROPE.PIK': '05386fef6140252040508bdc56ca0eaeb5d7563f55bb9046f714ba09d74af118', 'REPORT1.PIK': '8050c481b9bd8eecd8011d44acafa3e700377dacb28321475fc25e51349ce91b', 'REPORT2.PIK': 'c0434e666b5dfb6d751ba67a6cf34e384365c527645e02f08eddabf5c2757d25', 'REPORT3.PIK': '01372be38f137144bf5a6b796154d01893473b0684a06f703af4840eff410a1b', 'REPORT4.PIK': 'dbdcd1d98c8eddd1a979a4d60e4e03721de2ecc79444dd9b08db80c8d2fe0bd1', 'REPORT5.PIK': 'f621afd662a05bbcc5cfe0c9ce99cd758d3142f89ce9b7c62267843fb87a1797', 'REPORT6.PIK': 'c6d59ac693f16f611e86b5884c666082525d5e73e5e63db7f8089b8aa6f903aa', 'REPORT7.PIK': 'b3fc6b0d11b87b7ed056c08ee04ed757369b54cc19dbfda29d87ffdafaedf542', 'REPORT8.PIK': 'f09699044156d9aeef55bfe9e5607e872d47eb68ad9fb930d40a3a4988b34fa6', 'CCBKGD.PIK':'d2c11061faf65c2c51fee36177eee79f0e2cdc9f67efa17d465dbea5e0e1ceca','WOODPANL.PIK':'0858856ad5b5dd0b6ab8e7a8f815fa602a9cf0237d8d323cd2b5ca141b32bc69'}
 for name,want in fingerprints.items():
@@ -42,6 +43,7 @@ owners={};values={};pending={};copies=collections.Counter();losses=collections.C
 reads=[v for v in j['reads'] if v['Name'].upper().endswith('.PIK')]
 cursor_source_sha='47fced19d04987d3a0de8b6fd929abae6ba886939a2a7ce408b0213360ef1e03'
 transactions={};completed=collections.Counter()
+published={};publication_sites=collections.Counter();publication_losses=collections.Counter();published_points=[]
 def capture(i):
  global cursor_source_sha
  p=points[i];stem='point-%03d'%i;mem=(obs/(stem+'.memory')).read_bytes();cv=(obs/(stem+'.canvas')).read_bytes();idx=(obs/(stem+'.idx')).read_bytes();pal=(obs/(stem+'.palette')).read_bytes()
@@ -59,6 +61,22 @@ def capture(i):
    if cv[at]!=tail[k] or idx[at]!=tail[256+k]:cursor_ok=False;why.append('cursor-surface')
  for at,v in enumerate(idx):
   if not(mx<=at%320<mx+16 and my<=at//320<my+16) and cv[at]!=v:cursor_ok=False;why.append('outside-cursor')
+ if published_surface:
+  assert mem[0xa0000:0xa0000+64000]==idx,('raw VGA/indexed mismatch',p['label'])
+  groups_vga={}
+  valid={}
+  vga_palettes={rid:sha(bytes(v for k in sorted(set(raw[rid])) for v in [k,*pal[k*3:k*3+3]]))==palettes[rid] for rid in raw}
+  for at,c in published.items():
+   assert c[2]==idx[at],('published/indexed mismatch',p['label'],at)
+   assert raw[c[0]][c[1]]==c[2] or c[3]=='glyph'
+   if not c[3]=='glyph' and not(mx<=at%320<mx+16 and my<=at//320<my+16):
+    if vga_palettes[c[0]]:valid[at]=c
+  for rid in raw:
+   mask=bytes(1 if at in valid and valid[at][0]==rid else 0 for at in range(64000))
+   (r/(stem+'-published-%d-mask.bin'%rid)).write_bytes(mask)
+   groups_vga[rid]={'owned':sum(c[0]==rid for c in published.values()),'painted':sum(mask),'mask_sha256':sha(mask)}
+  (r/(stem+'.published.json')).write_text(json.dumps(published,separators=(',',':'))+'\n')
+  published_points.append({'label':p['label'],'step':p['step'],'sources':groups_vga,'main_indexed_differences':sum(x!=y for x,y in zip(cv,idx))})
  groups={}
  for rid in raw:
   owned={a-base:c for a,c in owners.items() if base<=a<base+64000 and c[0]==rid}
@@ -79,7 +97,16 @@ for line in (obs/'background-writes.jsonl').open():
  row=json.loads(line);step,a,o,v,cs,ip,ds,si,es,di,ax,cx,flags,code=row
  while pi<len(points) and points[pi]['step']<=step:capture(pi);pi+=1
  while phase<len(reads) and reads[phase]['Step']<=step:current=reads[phase]['Name'].upper();phase+=1
- if a>=0xa0000:continue
+ if a>=0xa0000:
+  if published_surface and 0xa0000<=a<0xa0000+64000:
+   at=a-0xa0000;oldcell=published.pop(at,None)
+   delta=a-(es*16+di);src=ds*16+si+delta
+   if cs==0xe21 and ip==0x91 and code=='f3a503f3790c81ee00808cd981c10008' and es==0xa000 and 0<=delta<2 and si+delta<65536 and di+delta<64000 and src==base+at:
+    got=owners.get(src)
+    if got is not None and got[2]==v:
+     published[at]=got;publication_sites['%04X:%04X'%(cs,ip)]+=1
+   if oldcell is not None and at not in published:publication_losses['%04X:%04X'%(cs,ip)]+=1
+  continue
  prior=owners.get(a);cell=None
  known=(cs==0x11b5 and ip in [0x4ee,0x54a] and code=={0x4ee:'a4ebed33c94a7509adb210d1ed8be8d1',0x54a:'aae2faeb8fac0ac074323c0174058ac8'}[ip])
  rid=names.get(current)
@@ -122,11 +149,15 @@ for line in (obs/'background-writes.jsonl').open():
  values[a]=v;sites['%04X:%04X:%s'%(cs,ip,code)]+=1
 while pi<len(points):capture(pi);pi+=1
 assert not transactions
-required=[308,824] if scope=='inherited-scenes' else [120,1551] if scope=='room-score-only' else [120,1551,*range(1442,1450)]
-assert all(completed[rid]>0 and any(p['sources'][rid]['painted']>0 for p in results) for rid in required),'each required source needs actual painted native evidence'
+required=[1551] if scope=='published-load' else [308,824] if scope=='inherited-scenes' else [120,1551] if scope=='room-score-only' else [120,1551,*range(1442,1450)]
+positive_points=published_points if scope=='published-load' and published_surface else results
+assert all(completed[rid]>0 and any(p['sources'][str(rid) if isinstance(next(iter(p['sources'])),str) else rid]['painted']>0 for p in positive_points) for rid in required),'each required source needs actual painted native evidence'
 if scope=='inherited-scenes':assert completed[120]==0 and all(completed[rid]==0 for rid in range(1442,1450))
 out={'result':'PASS_ROOM_SCORE_BACKGROUND_SOURCE_MODEL_RESEARCH','complete_decodes':dict(completed),'address_space':'dosgolem real-mode CS:IP and 20-bit linear RAM; no IDA EA','points':results,'copies':dict(copies),'loss_sites':dict(losses),'same_value_revocations':same,'cursor_paints':paints,'cursor_reverse_pair_restores':restores,'decode_writes':dict(decodes),'cursor_source_sha256':cursor_source_sha,'remaining_backing_owners':sum(not(base<=a<base+64000 or stage<=a<stage+64000) for a in owners),'production_connected':False,'native_state_points_equal_control':len(points)}
 out['scope']=scope;out['required_sources']=required
+if published_surface:
+ out['published_surface']={'points':published_points,'copy_sites':dict(publication_sites),'revocations':dict(publication_losses),'production_connected':False}
+ assert any('load-menu' in p['label'] and p['sources'][1551]['painted']>0 for p in published_points)
 out['receipt_sha256']={str(f):sha(f.read_bytes()) for f in [Path(__file__),a_points,obs.parent/'build.json',obs/'draws.json',ctrl/'draws.json',obs/'background.json',obs/'background-writes.jsonl',obs/'final.memory',ctrl/'final.memory']}
 (r/'check.json').write_text(json.dumps(out,indent=2)+'\n')
 print('PASS_ROOM_SCORE_BACKGROUND_SOURCE_MODEL_RESEARCH',len(results),dict(copies),dict(decodes),restores,flush=True)
