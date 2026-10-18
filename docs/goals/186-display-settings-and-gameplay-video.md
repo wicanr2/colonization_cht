@@ -574,3 +574,5 @@ GUI收據為`runtime-ui-gui-20261011-r2/`，重播收據為`runtime-ui-replays-2
 ### R83開場船隻八幀
 
 [規格069 R83](../spec/069-hd-menu-background-and-textures.md)已限定CONFORMED，完整來源、八幀正常GUI、逐RGBA、更新瞬間、游標進出及原版狀態／WAV／存檔通過。生成原PNG已納入graphics，現共155張。其餘開場SS與動畫、其他玩家可見圖像、完整五語、90秒實玩影片及新版三平台交付仍待完成；不以本批代替全量完成。
+
+R84以正常完整開場接續其餘動畫來源，公開探針--sample-every控制快照量；80M／80點只確認太陽首幀與製作名單首張來源，不授予新的正式HD信用。下一步及證據見規格069 R84。

@@ -6796,3 +6796,18 @@ opening-ship-ready-r1.json a06e2b57bbb0fed0b53f5aee1409a1ff6b9919e9961b694ddcf40
 opening-ship-conformance-r1.json 86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb。
 八張生成原PNG原bytes與alpha保留，經正式來源、RGBA及GUI驗收後加入清冊。
 OPENSUN及其他SS無本批HD完成信用。
+
+
+## 2026-10-18：R84正常開場80M來源盤點
+
+已證實，原版OPENING.EXE與R83固定雜湊相同；dosgolem
+82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7。
+位址空間為real-mode CS:IP與20-bit linear RAM。單次Enter於800000步，
+80個百萬步快照至80000000步，CPU、完整RAM、IDX、DAC、原版PNG與DOS讀取／開檔全等控制。
+
+命中OPENSHIP全部八幀100次完整繪製、OPENSUN第0幀22次完整繪製，
+以及OPENCRD1第0幀26個入口。後者只有來源紀錄，不是完整繪製或HD信用。
+太陽12格均有PIK底圖，值均不同；其他六幀與其他開場SS仍未知。
+完整定位、來源雜湊及退出邊界見[規格069 R84](docs/spec/069-hd-menu-background-and-textures.md)。
+本機opening-animation-long-review-r1.json SHA-256為9d4cb599812cd2ce0c2c6980e420c310bdf94ec446a3125e15e5da7a83d9dc2d。
+公開探針新增有界--sample-every；來源模型函式不變，兩個短流程原版狀態與三個參數拒絕通過。

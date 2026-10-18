@@ -45,6 +45,7 @@ func main() {
 
 	sprites := flag.Bool("opening-sprites", false, "R83 DRAFT：另建開場SS與已發布來源，不安裝HD")
 	catalog := flag.String("catalog", "", "R83固定原版全資產清冊")
+	sampleEvery := flag.Uint64("sample-every", 200000, "R84研究快照間隔；200000的倍數，最多10000000")
 	flag.Parse()
 	if _, e := os.Stat("/.dockerenv"); e != nil || os.Geteuid() == 0 {
 		panic("Docker with non-root user required")
@@ -53,6 +54,9 @@ func main() {
 	need(e)
 	if !strings.HasPrefix(out, "/out/") || *decoded == "" || flag.NArg() != 0 {
 		panic("explicit private output/decoded paths required")
+	}
+	if *sampleEvery == 0 || *sampleEvery%200000 != 0 || *sampleEvery > 10000000 {
+		panic("sample-every must be a positive multiple of 200000, at most 10000000")
 	}
 	for _, name := range []string{"OPENING.EXE", "OPENING.PIK", "OPENBORD.PIK"} {
 		if _, e := os.Stat(filepath.Join(*game, name)); os.IsNotExist(e) {
@@ -243,7 +247,7 @@ func main() {
 			inputAt++
 		}
 
-		if m.Steps%200000 == 0 {
+		if m.Steps%*sampleEvery == 0 {
 			refs := map[string]int{}
 			for name, raw := range raws {
 				refs[name] = bytes.Index(m.Mem, raw)
@@ -286,7 +290,7 @@ func main() {
 	put(filepath.Join(out, "model.json"), model.receipt())
 	need(log.Flush())
 	need(file.Close())
-	put(filepath.Join(out, "check.json"), map[string]any{"result": "DRAFT_OPENING_COLD_NATIVE_OBSERVATION", "production_connected": false, "control": *control, "go_version": runtime.Version(), "binary_sha256": hash(read(os.Args[0])), "vga_observation_enabled": *vgaSamples, "original_exe_sha256": hash(exe), "original_pik_sha256": map[string]string{"OPENING.PIK": hash(read(filepath.Join(*game, "OPENING.PIK"))), "OPENBORD.PIK": hash(read(filepath.Join(*game, "OPENBORD.PIK")))}, "end": m.Steps, "events": events, "vga_writes_seen": vgaWrites, "log_scope": "At most 64 write samples per CS:IP, physical source region and destination; main/source memory observed, VGA optional. Physical region labels do not establish source identity before a complete native bitmap match. Remaining observed writes counted, not logged. Discovery only, no full ownership/parity credit.", "write_sites": sites, "opened": d.Opened, "reads": d.Reads, "points": points, "error": fail, "input_count": len(inputs), "inputs": inputs, "source_model_enabled": *sourceModel, "opening_sprites_enabled": *sprites, "address_space": "dosgolem real-mode CS:IP and 20-bit linear RAM", "limitations": []string{"Read-only sampled discovery; no complete write trace, source ownership or production credit", "Normal Enter at 800000 along established goal146 opening path; no direct entry or state injection"}})
+	put(filepath.Join(out, "check.json"), map[string]any{"result": "DRAFT_OPENING_COLD_NATIVE_OBSERVATION", "production_connected": false, "control": *control, "go_version": runtime.Version(), "binary_sha256": hash(read(os.Args[0])), "vga_observation_enabled": *vgaSamples, "original_exe_sha256": hash(exe), "original_pik_sha256": map[string]string{"OPENING.PIK": hash(read(filepath.Join(*game, "OPENING.PIK"))), "OPENBORD.PIK": hash(read(filepath.Join(*game, "OPENBORD.PIK")))}, "end": m.Steps, "events": events, "vga_writes_seen": vgaWrites, "log_scope": "At most 64 write samples per CS:IP, physical source region and destination; main/source memory observed, VGA optional. Physical region labels do not establish source identity before a complete native bitmap match. Remaining observed writes counted, not logged. Discovery only, no full ownership/parity credit.", "write_sites": sites, "opened": d.Opened, "reads": d.Reads, "points": points, "error": fail, "input_count": len(inputs), "inputs": inputs, "sample_every": *sampleEvery, "source_model_enabled": *sourceModel, "opening_sprites_enabled": *sprites, "address_space": "dosgolem real-mode CS:IP and 20-bit linear RAM", "limitations": []string{"Read-only sampled discovery; no complete write trace, source ownership or production credit", "Normal Enter at 800000 along established goal146 opening path; no direct entry or state injection"}})
 }
 
 type openingModelCell struct {
