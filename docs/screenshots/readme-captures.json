@@ -1,12 +1,12 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-18",
-  "code_commit": "dbfc95fc2b98654f9f4cf3d0abac946730bfbfce",
-  "binary_sha256": "d4b7c94d34311c3af7f9ebc19b1bea8a7c475ce278a3e96fcb212289d16f0904",
-  "formal_binary_sha256": "d4b7c94d34311c3af7f9ebc19b1bea8a7c475ce278a3e96fcb212289d16f0904",
-  "source_build_sha256": "95b0e81a52a949ead8f921335052a3b6996ab8a0cbfaaca6c2627bd20bcb52e1",
+  "code_commit": "0bce890d3b7ea22a1870870548a3c5854f83bbab",
+  "binary_sha256": "e980becf7ff4c638f681426d73757fba6f79570690bf6fc46b9706cb6501b1ed",
+  "formal_binary_sha256": "e980becf7ff4c638f681426d73757fba6f79570690bf6fc46b9706cb6501b1ed",
+  "source_build_sha256": "1caad44b80d5c7c6236da3574845a42048a60b195fa993fe97a756ca6cfc371d",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 124,
+  "formal_hd_assets": 132,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -325,6 +325,64 @@
       "graphics_manifest_sha256": "1dba5fd9a5bbf5a8c76861e56709525305857a9a77ae9c988b564119f636333c",
       "conformance_sha256": "1cac135ef4f39a48aeefbbd56ae2e166a79d069ad090768cb6fd16607e8f9e6e",
       "scope": "正常殖民地部分背景與歐洲港口的限定驗收；原版前景、文字、互動框與標準游標保持。其他場景、世界移動、戰鬥與動畫待驗。"
+    },
+    {
+      "file": "hd-labor-report-zh.png",
+      "sha256": "a8577641a4539988d022e17e3868af66edad6e44845f34e956e04f03293d6056",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "report-f4-a",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 116400000,
+      "binary_sha256": "e980becf7ff4c638f681426d73757fba6f79570690bf6fc46b9706cb6501b1ed",
+      "formal_binary_sha256": "e980becf7ff4c638f681426d73757fba6f79570690bf6fc46b9706cb6501b1ed",
+      "code_commit": "0bce890d3b7ea22a1870870548a3c5854f83bbab",
+      "formal_hd_assets": 132,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-report-backgrounds-r77/r77-reports-formal-gui-r1/gui.display-162.png",
+      "source_gui_check_sha256": "083f2b2cafb91aa83ac95d15694af7a582d0eecebe350ce49293f488e6c4b300",
+      "independent_pixels_sha256": "3631b5d452e95492c5d05108d2b7a983d66e68a228bf652899484a112688dca2",
+      "same_state_replay_sha256": "a1fd76ab592bdc01649471983c6a31d531dca85774f57602f06c33c91277bc04",
+      "same_state_replay_receipt": "workplace/reports/goal186-display-hd/hd-report-backgrounds-r77/r76-scenes-replay-r1-check.json",
+      "same_state_replay_scope": "R77 actual 74 input events through 262000000; original producer filename preserved; verified per-case commands, CPU/RAM/index/DAC/WAV/save",
+      "source_kind": "actual uninstrumented formal game presentation from standard display diagnostics; matched byte-for-byte to the real X11 game area",
+      "capture_pixels_unchanged": true,
+      "original_source_file": "REPORT4.PIK",
+      "source_research_id": 1445,
+      "graphics_manifest_sha256": "e3ff9d59ae66aa2bfe643d8c208c49367de97888704173b66d6230df2fc2b636",
+      "conformance_sha256": "553827bbd2636765fa7d5be57a814bcaf7829911efba4de26ed7e950505e5028",
+      "scope": "八種正常報告背景的限定驗收；已驗五語與原版／HD切換、翻頁、原版前景及標準游標。其他場景、世界移動、戰鬥與動畫仍待驗。"
+    },
+    {
+      "file": "hd-trade-report-zh.png",
+      "sha256": "c99904abc2e1a20b6e0009e8c5949bcae654940d2cad665e956f0ee300bfb5ff",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "report-f5-a",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 139600000,
+      "binary_sha256": "e980becf7ff4c638f681426d73757fba6f79570690bf6fc46b9706cb6501b1ed",
+      "formal_binary_sha256": "e980becf7ff4c638f681426d73757fba6f79570690bf6fc46b9706cb6501b1ed",
+      "code_commit": "0bce890d3b7ea22a1870870548a3c5854f83bbab",
+      "formal_hd_assets": 132,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-report-backgrounds-r77/r77-reports-formal-gui-r1/gui.display-222.png",
+      "source_gui_check_sha256": "083f2b2cafb91aa83ac95d15694af7a582d0eecebe350ce49293f488e6c4b300",
+      "independent_pixels_sha256": "3631b5d452e95492c5d05108d2b7a983d66e68a228bf652899484a112688dca2",
+      "same_state_replay_sha256": "a1fd76ab592bdc01649471983c6a31d531dca85774f57602f06c33c91277bc04",
+      "same_state_replay_receipt": "workplace/reports/goal186-display-hd/hd-report-backgrounds-r77/r76-scenes-replay-r1-check.json",
+      "same_state_replay_scope": "R77 actual 74 input events through 262000000; original producer filename preserved; verified per-case commands, CPU/RAM/index/DAC/WAV/save",
+      "source_kind": "actual uninstrumented formal game presentation from standard display diagnostics; matched byte-for-byte to the real X11 game area",
+      "capture_pixels_unchanged": true,
+      "original_source_file": "REPORT5.PIK",
+      "source_research_id": 1446,
+      "graphics_manifest_sha256": "e3ff9d59ae66aa2bfe643d8c208c49367de97888704173b66d6230df2fc2b636",
+      "conformance_sha256": "553827bbd2636765fa7d5be57a814bcaf7829911efba4de26ed7e950505e5028",
+      "scope": "八種正常報告背景的限定驗收；已驗五語與原版／HD切換、翻頁、原版前景及標準游標。其他場景、世界移動、戰鬥與動畫仍待驗。"
     }
   ],
   "limitations": [
@@ -339,7 +397,8 @@
     "R73 adds one actual Traditional Chinese Wagon Train pedia capture from scoped three-vehicle conformance; all six prior PNGs and per-image provenance remain unchanged.",
     "R74 adds one actual Traditional Chinese Colonists pedia capture covering 22 new colonist frames and three inherited images. World movement, combat and animation remain unverified; all seven prior PNGs and per-image provenance remain unchanged.",
     "R75新增正常龍騎兵百科實拍，對應19幀／14頁的限定驗收；既有八張原PNG與逐圖來源保持。世界移動、戰鬥、其他圖像、動畫及全量HD尚未完成。",
-    "R76新增殖民地下方背景與歐洲港口的繁中HD實拍，共十一張；既有九張原PNG及逐圖來源保持。其他圖像、特殊游標、完整五語文字、動畫與全量HD未完成，尚未收進目前發行版。"
+    "R76新增殖民地下方背景與歐洲港口的繁中HD實拍，共十一張；既有九張原PNG及逐圖來源保持。其他圖像、特殊游標、完整五語文字、動畫與全量HD未完成，尚未收進目前發行版。",
+    "R77新增繁中勞動與經濟報告實拍，共十三張；八種報告背景已驗，既有十一張PNG與逐圖來源保持。其他圖像、完整五語文字、特殊游標、動畫及全量HD未完成，尚未收進目前發行版。"
   ],
   "previous_build": {
     "kind": "README actual development screenshots",
@@ -352,9 +411,9 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "新增殖民地與歐洲港口採R76／dbfc95f與124張素材。九張既有PNG及逐圖程式commit、二進位指紋、當批素材數與限定驗收範圍保持。新圖直接取正式程式的實際呈現，並逐byte匹配X11遊戲區。",
-  "graphics_manifest_sha256": "1dba5fd9a5bbf5a8c76861e56709525305857a9a77ae9c988b564119f636333c",
-  "conformance_sha256": "1cac135ef4f39a48aeefbbd56ae2e166a79d069ad090768cb6fd16607e8f9e6e",
+  "provenance_scope": "新增勞動與經濟報告採R77／0bce890與132張素材，直接取正式程式的實際呈現並逐byte匹配X11遊戲區。十一張既有PNG及逐圖程式commit、二進位指紋、當批素材數與限定驗收保持。四側收據沿producer舊檔名保存，範圍以實際R77命令與輸入SHA核對。",
+  "graphics_manifest_sha256": "e3ff9d59ae66aa2bfe643d8c208c49367de97888704173b66d6230df2fc2b636",
+  "conformance_sha256": "553827bbd2636765fa7d5be57a814bcaf7829911efba4de26ed7e950505e5028",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -404,6 +463,15 @@
     "graphics_manifest_sha256": "c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7",
     "conformance_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5"
   },
-  "verification_build_sha256": "95b0e81a52a949ead8f921335052a3b6996ab8a0cbfaaca6c2627bd20bcb52e1",
-  "production_go_sources_equal_to_verified_build": true
+  "verification_build_sha256": "1caad44b80d5c7c6236da3574845a42048a60b195fa993fe97a756ca6cfc371d",
+  "production_go_sources_equal_to_verified_build": true,
+  "previous_scene_background_capture": {
+    "code_commit": "dbfc95fc2b98654f9f4cf3d0abac946730bfbfce",
+    "binary_sha256": "d4b7c94d34311c3af7f9ebc19b1bea8a7c475ce278a3e96fcb212289d16f0904",
+    "formal_binary_sha256": "d4b7c94d34311c3af7f9ebc19b1bea8a7c475ce278a3e96fcb212289d16f0904",
+    "source_build_sha256": "95b0e81a52a949ead8f921335052a3b6996ab8a0cbfaaca6c2627bd20bcb52e1",
+    "formal_hd_assets": 124,
+    "graphics_manifest_sha256": "1dba5fd9a5bbf5a8c76861e56709525305857a9a77ae9c988b564119f636333c",
+    "conformance_sha256": "1cac135ef4f39a48aeefbbd56ae2e166a79d069ad090768cb6fd16607e8f9e6e"
+  }
 }

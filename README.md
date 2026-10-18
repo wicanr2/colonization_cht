@@ -86,6 +86,14 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 
 歐洲港口：天空、海面、碼頭與城鎮已使用 HD 背景，招募、購買與訓練選單開關保持原版操作。
 
+![繁體中文勞動報告與 HD 紙質背景](docs/screenshots/hd-labor-report-zh.png)
+
+勞動報告：紙質背景已重繪，表格、人物小圖與原版操作位置保持。八種報告背景均已接入 HD。
+
+![繁體中文經濟報告與 HD 紙質背景](docs/screenshots/hd-trade-report-zh.png)
+
+經濟報告：商品、數值與圖表顯示在 HD 紙質背景上，翻頁與關閉保持原版操作。其他背景與動畫持續驗證。
+
 ![繁體中文世界畫面與 HD 海洋、地形](docs/screenshots/hd-world-zh.png)
 
 世界畫面：海洋、部分河岸與森林地形、側欄圖示、頂端與側欄木紋已使用 HD 素材，其餘地形與單位逐項接續。

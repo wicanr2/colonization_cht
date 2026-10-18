@@ -6374,3 +6374,13 @@ R76程式與兩張生成原PNG已以dbfc95fc2b98654f9f4cf3d0abac946730bfbfce推�
   Docker與擁有權收尾檢查隨本批提交記錄。
 
 R77提交前核對：46筆來源綁定與已驗R2建置一致，132張原PNG指紋相符；只更新八筆來源，未追蹤原版資料或本機研究輸出。完整工作樹無root-owned檔案或誤建Markdown目錄，WORKLIST由JSON重生後保持。所有本批一次性容器已結束並刪除，未重建映像或清理其他專案。
+
+R77正式接線已commit並push main：0bce890d3b7ea22a1870870548a3c5854f83bbab。
+八張生成原PNG、清冊、正式來源及驗證工具已進GitHub，原版輸入與私有收據不入Git。
+
+README追加兩張實拍，直接複製正式R2視窗呈現，沒有重編PNG：
+勞動報告為116400000步的gui.display-162.png，
+經濟報告為139600000步的gui.display-222.png。
+再次逐byte核對X11遊戲區；每張記錄正式commit、二進位、132張素材、
+manifest、CONFORMED、GUI、獨立像素及四側收據指紋。
+舊十一張PNG與十一筆來源物件保持，總計十三張。未宣稱全量HD或新版已發布。
