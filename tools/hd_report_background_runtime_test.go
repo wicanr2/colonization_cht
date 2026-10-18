@@ -29,6 +29,9 @@ func hdReportFixtures(t *testing.T) (string, string, string) {
 func TestHDReportNative27(t *testing.T) {
 	game, root, assets := hdReportFixtures(t)
 	ref, model := filepath.Join(root, "report-source-probe-r2"), filepath.Join(root, "report-source-model-r3")
+	if alternate := os.Getenv("TEST_HD_REPORT_MODEL"); alternate != "" {
+		model = alternate
+	}
 	var oracle struct {
 		Checkpoints []hdNewGameOracleState
 		End         hdNewGameOracleState
@@ -186,7 +189,7 @@ func TestHDReportNative27(t *testing.T) {
 		t.Fatal("完整終點RAM不同")
 	}
 	for _, frame := range p.frames {
-		want := map[int]uint64{308: 1, 824: 0, 1442: 1, 1443: 1, 1444: 1, 1445: 1, 1446: 2, 1447: 2, 1448: 1, 1449: 1}[frame.id]
+		want := map[int]uint64{120: 1, 1551: 2, 308: 1, 824: 0, 1442: 1, 1443: 1, 1444: 1, 1445: 1, 1446: 2, 1447: 2, 1448: 1, 1449: 1}[frame.id]
 		if frame.decoded != want {
 			t.Fatal("背景解碼次數", frame.id, frame.decoded)
 		}

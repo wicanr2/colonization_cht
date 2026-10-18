@@ -1009,3 +1009,128 @@ READY前仍須審查正式解碼基址、前景與字底、幾何、來源拒絕
 正式實作後再驗五語正常GUI、游標移入／移出、人物動態遮擋、完整原版狀態、
 實際GUI音訊、存檔、缺件回退與封裝。未通過前維持DRAFT，原稿不加入正式清冊。
 21個未接線PIK的數字保持；完整HD與新版交付尚未完成。
+
+## R78 國會室內與計分背景正式契約（READY，2026-10-18）
+
+現行狀態READY，前述DRAFT保留研究歷史。審查room-score-ready-review-r1.json，
+SHA-256 28121199d31c4c0abaebf1aa211a3c24f1118304bb83788a967bd59b5a363b3d。僅授權CCBKGD與WOODPANL的顯示層；原版資料、規則、輸入、音訊與存檔保持。
+
+1. CCBKGD只接受0x3C500完整解碼；WOODPANL接受已證實的0x3C500及0x2CAE0。
+   typed data以明列第二畫布表示WOODPANL雙來源位置，其他來源仍只接受原基址。
+   11B5:04EE／054A原碼、完整64000格唯一順序與IDX SHA逐次核對；未知或不完整來源不授權。
+2. 十二個背景槽位仍用uint8，local uint16、300000格RAM保存、8MiB單PNG及512KiB清冊上限保持。
+   複製、字底、標準游標反向配對、未知同值撤銷與完整原版可見表面守門沿R77。
+   室內人物及其他後畫區保留原版；不將背景通過外推人物動畫HD完成。
+3. 來源實際色號、精確[index,R,G,B]SHA與前節相同；使用色號改動拒絕，未用色號不影響背景。
+   原稿ccbkgd-000.png及woodpanl-000.png均1586×992 RGB，原byte及alpha保持。
+   完整原版[0,0,320,200]對應原稿[0,0,1586,992]，執行時整數像素中心最近鄰取樣到1280×800。
+   生成提示、原版檔／IDX與參考指紋入清冊；既有132張PNG及資產物件保持，schema1不變。
+4. 正常GUI驗載入選單的暫存木紋、F3第二頁國會室內與F10主畫布計分木紋，
+   三畫面各五語原版／HD，以及英文、繁中游標移入與移出。
+   GUI預檢只要求正確來源與完整原版守門；人物隨實際時間移動，不能用舊不同狀態的來源數當期望。
+   最終每個實際GUI原版點都由獨立逐寫重建CPU／完整RAM／IDX／DAC與所有權，逐格核對正式來源。
+5. 原版瞬間未發布完整表面時拒絕HD，保留反例；只許有界向前執行等待原版發布，不新增DOS輸入，
+   不對來源不符重試。此安全回退不算持續HD覆蓋，正式可見正例須另通過。
+6. 27點正常報告全RGBA、既有殖民地／歐洲19點與新遊戲20點回歸、完整十二來源檔案／色盤／解碼反例、
+   缺件回退／恢復及135檔封裝白名單均須驗證。四側正式play=true、現行原圖、R77原圖與無觀測控制
+   對實際GUI的完整原版狀態、WAV與存檔相同後，才可升CONFORMED。
+
+沿用背景生命週期及來源typed data；本批測試與公開來源／像素檢查入口隨實作掛入本節。
+尚未正式驗收，不外推其他19個PIK、其他ICONS、世界移動、戰鬥、人物動畫或全量HD。
+
+R78正式元件入口為[兩背景解碼、色盤及字底守門](../../tools/hd_room_score_background_runtime_test.go)。27點與19點測試以明列TEST_HD_REPORT_MODEL／TEST_HD_SCENE_MODEL提供本批完整十二來源模型，原版探針及輸入路徑保持。唯讀來源工具的--scope只限定當次需要正例的來源，仍重建全部十二來源，未出現者不取得信用。
+
+R78獨立原稿／全畫面／GUI像素入口為[國會室內與計分背景RGBA核對](../../tools/check_hd_room_score_background_pixels.py)。正常27點以--baseline-root明列R77原版擷取，不複製或改名舊收據；正式GUI另外核對兩來源、三個畫面及實際來源模型。
+
+### R78 READY審查r2：載入選單守門限制
+
+現行READY審查為room-score-ready-review-r2.json，
+SHA-256 b945d01732dccff2477e5a701a7c09a085150efb199ff9dc3c896c0714a6d373；r1保留歷史。
+正式GUI r1在載入選單的八個連續有界檢查點仍由完整原版表面守門拒絕，
+首個游標外差異均為23744。沒有完成capture.json，不計正式GUI、來源或四側信用。
+這些證據不足以視為稍等即可恢復的發布暫態，不延長重試或放寬守門。
+
+本批正式HD驗收限F3第二頁國會室內與F10計分頁，各五語、兩模式與英文／繁中游標。
+WOODPANL兩個完整解碼基址的來源契約保持，載入選單及存檔欄維持原圖負例，
+不計載入選單HD完成。其可見畫布差異另由原版逐寫追查。
+原版規則、原稿、字底與來源判準保持；全量HD範圍及Issue #63仍開放，
+沒有將此限制改成完成條件豁免。
+
+## 2026-10-18 R78國會室內與計分背景限定CONFORMED
+
+狀態：CONFORMED，限正常F3第二頁與F10的兩個背景。READY審查r2及先前原型／失敗均保留。
+載入選單與存檔欄維持原圖，沒有放寬完整原版表面守門；人物動畫未由本批驗收。
+
+| 驗收 | 結果 |
+|---|---|
+| 原稿與正式組裝 | 134張生成原PNG／清冊135檔，64Go／47綁定；建置與go vet通過。新兩張原稿逐byte及alpha保持，原132張圖與清冊物件保持。 |
+| 元件及原版回歸 | 196個具名Go案例零skip。27點／42輸入至192600000步，27648000個完整RGBA全等；舊背景19點／45輸入的19456000個完整RGBA與新遊戲20點回歸通過。十二來源的96個檔案／來源反例均以完整正向副本驗拒絕。 |
+| 正常GUI | 37項與實際X11遊戲區逐byte相同，18HD／19原圖。兩背景各有五語及兩模式正例，英文／繁中各驗游標移入移出。設定暫停期間原版狀態及輸入保持。 |
+| 獨立來源與背景 | 當次27個GUI原版點，觀測與全新無觀測控制的CPU／完整RAM／索引／DAC相同。17138160個背景RGBA、23616個HD游標RGBA及19127232個原圖模式保留RGBA相同。 |
+| 原版前景及字底 | 433008個室內前景RGBA與原版相同，未被背景或其他HD層覆蓋。九個室內HD點的前景指紋只有一種，不授予人物動畫或移動正例信用。7188個回畫格均有獨立背景或原字底來源。 |
+| 原版狀態、音訊及存檔 | 實際34筆DOS輸入至100200000步；正式HD play=true、現行原圖、前版R77原圖及無觀測控制四側，CPU／完整RAM／索引／DAC／WAV／存檔和GUI相同。430143frames、49715Hz、雙聲道且非靜音；沒有新增人耳或音效卡驗收。 |
+| 回退與封裝 | 缺室內原稿、錯木紋原稿、錯室內來源、連結木紋來源與恢復共5個新行程通過；偏好原值及原版暫停狀態保持。135檔白名單與407項實際拒絕通過。 |
+| 繼承與權利 | 1552筆原始來源事實保持，只更新120／1551的正式連結，其他1550列及132筆舊資產紀錄逐項保持。288個原版輸入SHA保持；原版資料、參考、快照、色號、錄音及未選候選不入Git。 |
+
+GUI背景比較排除明列翻譯安全矩形與不透明游標，游標另外核對。
+室內沒有文字事件時items為null，視為沒有排除文字區；原圖模式室內整張RGBA比較，
+HD模式的所有未知前景格另與原版比較。計分頁既有小圖像與翻譯依原契約，
+本批不增加它們在其他場景、世界移動、戰鬥或動畫的信用。
+
+| 指紋 | SHA-256 |
+|---|---|
+| 正式二進位 | 74fcb36302795905d7481a6a8c5e58b128669f052da727a73d136ada5fa69bf2 |
+| 圖像清冊 | f5d0fbebed17123932d129c006c488190864a1450036c9800f2edc78d09a0e00 |
+| 現行READY審查r2 | b945d01732dccff2477e5a701a7c09a085150efb199ff9dc3c896c0714a6d373 |
+| 正式審查room-score-conformance-r2.json | a1049affbd62d15ef7413cd9063e6f0dccb9aafbda199e5a4ee3238e1d38c2de |
+| 公開來源索引 | 11885b8fc355dcb3d6873e946fa93a87384acff248fc2e7d09a85fa2525ef24a |
+| 正式GUI37項 | 2024aefa03b6a2bff8613a8cfcf75cec0f37287b32b43637db6d1ccc6811ca89 |
+| 當次來源模型27點 | af41220e6dcea78fc89474ccaf1e609b2a068ef46ef3c28006e5cf7efdb42683 |
+
+本機根為workplace/reports/goal186-display-hd/hd-room-score-backgrounds-r78。
+重生入口為build-r78-room-score-r3.py、run-r78-room-score-tests-r1.py、
+capture-r78-room-score-formal-r2.py、await-r78-gui-and-source-r2.py、
+await-r78-gui-and-replay-r2.py、check-r78-inherited-native-pixels-r1.py、
+check-r78-room-score-package-r1.py及review-r78-room-score-conformance-r2.py。
+正式結果為r78-room-score-build-r3.json、r78-room-score-tests-r1-check.json、
+r78-room-score-native27-r1/check.json、r78-inherited-scene-native19-r1/check.json、
+r78-inherited-newgame-native20-r1/check.json、r78-room-score-native-pixels-r1.json、
+r78-inherited-scene-native19-pixels-r1.json、r78-room-score-formal-gui-r2/capture.json、
+formal-room-score-native27-check-r1.json、room-score-source-model-formal-r1/check.json、
+r78-room-score-gui-pixels-r3.json、r78-room-score-replay-r1-check.json、
+r78-room-score-startup-r2/check.json及r78-room-score-package-r1-check.json。
+
+來源清冊沿[唯一組裝器](../../tools/build_hd_source_index.py)的schema1，
+以--inherited-index、--inherited-manifest、--room-score-ready-report與
+--room-score-conformed-report增補兩列；上一版為Git 285e7a0c2cc1c6567296c6c7165c1f30aa4a6df0的
+docs/hd-source-catalog.json與graphics/manifest.json，或同雜湊本機快照。
+只允許已通過上述審查的新增連結；其他列與舊驗收範圍保持。
+
+### 載入選單限制及驗證修正
+
+- 正式GUI r1在八個檢查點均由表面守門拒絕，未完成capture.json，不計GUI或重播信用。
+  原版31600000步的26個差異已追到最後VGA複製之後的RAM寫入：
+  0E21:0091以f3a503f3790c81ee00808cd981c10008從精確主畫布位址複製舊值，
+  之後0CAC:00A8的f3ab03fb790c81ef00808cc181c10008改寫16格，
+  0D21:012C的26882547feca740afecd75dfacb504eb改寫10格。
+  快照VGA仍等於可見索引，主畫布已不同；每筆原碼、時序、舊值／新值及位址都核對。
+  這只證實該原版點的來源差異，不授權新的VGA所有權或放寬守門。
+  原始研究f1017844864d98a7700dc39397e345d8a94340ebced59ca537e8cd798638f9d2，
+  確認收據load-menu-native-guard-root-cause-r2.json為
+  9e5eed183f59ac10901564896b5eadae659cb9883bbafa5fda29f03942698f17。
+- 繼承來源模型首版在所有點完成後誤用被逐寫位址覆寫的CLI變數，沒有產生通過收據。
+  改為獨立scope變數後同輸入乾淨重跑，原來源判準保持。
+- 首次啟動Xvfb嘗試呼叫映像中不存在的xset，遊戲尚未執行即停止；
+  改用已核對的Xvfb原生autorepeat參數，同映像重跑，正式前端保持。
+- 啟動回退r1的連結來源案例未收到HD選項按下，實際apply紀錄仍為Original，
+  並非缺件被允許啟用HD。抓圖工具改為按住直到草稿／拒絕收據確認後再放開，
+  沒有增加等待期限或修改正式程式；全新r2五例全部通過。
+- GUI像素首版遇到室內items為null，未產生通過收據。改為零文字排除區，
+  第三版另對433008個原版前景RGBA逐點比較；既有像素及原稿保持。
+  審查r1保留，現行r2另加入這項前景信用，不更換收據或原圖。
+
+兩張生成原PNG、完整提示、來源與權利已加入graphics。
+其餘19個PIK、載入選單HD、51個未觀測ICONS候選、其他格式、特殊游標、
+人物、世界移動、戰鬥、事件與動畫仍待完成。沒有新tag或Release，既有v.1.0.3-20261010保持。
+
+R78固定27點基準模型由Git 285e7a0c2cc1c6567296c6c7165c1f30aa4a6df0的tools/check_hd_room_score_background_sources.py產生，其SHA及原始輸入路徑記在模型receipt_sha256。重生固定基準時使用該版工具與同一容器路徑；本批正式GUI模型使用現行工具的--scope room-score-only。--scope只區分當次須有正例的來源，既有逐寫及完整原版守門保持。

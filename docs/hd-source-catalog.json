@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "e3ff9d59ae66aa2bfe643d8c208c49367de97888704173b66d6230df2fc2b636",
+  "formal_manifest_sha256": "f5d0fbebed17123932d129c006c488190864a1450036c9800f2edc78d09a0e00",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 132,
+    "formal_asset_bindings": 134,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -10876,9 +10876,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete PIK decode at explicit verified canvas bases, exact source-used palette RGB and original copy/glyph/cursor ownership; only native surfaces that pass the inherited guard",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "ccbkgd-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "a1049affbd62d15ef7413cd9063e6f0dccb9aafbda199e5a4ee3238e1d38c2de",
+        "scope": "normal F3 congress-room background and F10 score background, five languages, original/HD and EN/TC standard cursor hover/return; load-menu/slot stay Original on native guard failure; actors, animation and other paths unverified"
+      }
     },
     {
       "research_id": 121,
@@ -57489,9 +57498,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete PIK decode at explicit verified canvas bases, exact source-used palette RGB and original copy/glyph/cursor ownership; only native surfaces that pass the inherited guard",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "woodpanl-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "a1049affbd62d15ef7413cd9063e6f0dccb9aafbda199e5a4ee3238e1d38c2de",
+        "scope": "normal F3 congress-room background and F10 score background, five languages, original/HD and EN/TC standard cursor hover/return; load-menu/slot stay Original on native guard failure; actors, animation and other paths unverified"
+      }
     },
     {
       "research_id": 1552,
@@ -59071,6 +59089,28 @@
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec",
       "source_indexed_sha256": "b948334de619d2bc566dd3fe9fe39b9c76846fe3676b5bb984a6f44310f63d94"
+    },
+    {
+      "asset": "ccbkgd-000.png",
+      "asset_sha256": "777dbf6db416dee4872a7f8dfa86adce85aeca0d03c92ba216d349ce8e2a8c34",
+      "source_research_id": 120,
+      "source_file": "CCBKGD.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "a0c9cfe6854a9eaa36a78020f87677e8bfe4660e1c12f23b3fd674ec6fd084e3"
+    },
+    {
+      "asset": "woodpanl-000.png",
+      "asset_sha256": "20a9e807bb330501e83565704a039134e4344a7550208c8813533ceb422d19d2",
+      "source_research_id": 1551,
+      "source_file": "WOODPANL.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "f31602f9a239a4f83fd6e27e644384009d628517185aeb80bb248479e67d0e71"
     }
   ],
   "limitations": [
@@ -59377,5 +59417,19 @@
     "native_source_points": 99,
     "inherited_source_index_sha256": "21d1e68acac16a3568f6ad2e524f59e520ad733d60f779935b0bf726884719fd",
     "claim": "eight normal report backgrounds only; all 124 inherited PNGs, records and conformance scopes unchanged; full player-visible denominator unknown and full HD incomplete"
+  },
+  "room_score_background_conformance": {
+    "ready_review_sha256": "b945d01732dccff2477e5a701a7c09a085150efb199ff9dc3c896c0714a6d373",
+    "review_sha256": "a1049affbd62d15ef7413cd9063e6f0dccb9aafbda199e5a4ee3238e1d38c2de",
+    "sources": [
+      120,
+      1551
+    ],
+    "formal_assets": 134,
+    "gui_samples": 37,
+    "native_source_points": 27,
+    "inherited_source_index_sha256": "daf4b37b885bad57d8173672b51fc344aca441691e132abb2ecbebb0b9605f31",
+    "load_menu_hd_complete": false,
+    "claim": "two normal backgrounds only; all132 inherited raw PNGs/records and conformance scopes preserved; stage load-menu native guard failure stays Original, full HD incomplete"
   }
 }

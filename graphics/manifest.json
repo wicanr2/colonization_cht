@@ -7679,6 +7679,248 @@
       ],
       "coverage": "Complete verified direct-main PIK decode at dosgolem linear RAM 0x2CAE0, exact used-index palette RGB, glyph underlays and standard cursor; formal conformance tracked in spec069. REPORT9.PIK unobserved.",
       "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "ccbkgd-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "777dbf6db416dee4872a7f8dfa86adce85aeca0d03c92ba216d349ce8e2a8c34",
+      "bytes": 2388114,
+      "size": [
+        1586,
+        992
+      ],
+      "mode": "RGB",
+      "native_size": [
+        320,
+        200
+      ],
+      "target_size": [
+        1280,
+        800
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from full generated raw PNG; only verified native background cells",
+      "alpha": "fully opaque RGB generated art; original PNG bytes preserved unchanged",
+      "generation_prompt": "Use case: precise-object-edit. Image 1 is the original 320 by 200 composition reference. Image 2 is the generated pixel-art candidate to correct. Make ONE correction to image 2: recompose it into the same 8:5 overall canvas and same relative architectural positions as image 1. The current image 2 is much too wide. Return a compact 1600 by 1000 landscape picture matching image 1's width-to-height ratio, retaining the full empty hall. Repaint the framing to achieve this proportion; do not stretch or squeeze architecture, crop the scene, add padding or put a border around the image. Keep image 2's refined square-pixel technique, sharp pixel clusters and restrained olive-cream, warm brown and grey marble palette. Keep the original number and relative positions of columns, railing, central door and floor planes exactly as image 1. The railing occupies y49%-58%, central wooden door x42%-58% and y15%-56%, thin brown stage steps y59%-65%, marble floor bottom35%. Empty room. No furniture, people, flags, chandelier, text, captions, GUI, watermark or added objects.",
+      "generation_history": [
+        {
+          "name": "room-candidate-r1.png",
+          "prompt": "為《Sid Meier's Colonization》顯示層重繪一張完整背景。第一張參考是原版國會室內背景，第二張是使用者已定稿的精細像素風。保留第一張的正面固定鏡頭、8:5橫向構圖和所有大形狀的位置，採第二張的精細像素筆觸、配色層次與材質。輸出單張完整8:5背景，建議1600×1000，無文字、無人物、無游標、無UI、無標誌。房間是殖民時代的空國會廳：中央後牆只有一扇深棕色木門，門在畫面x42%至58%、y15%至56%，門頂有低三角山花；米黃淡橄欖灰牆面、對稱的四個淺色壁柱與拱形壁龕；兩側牆面與淺色天花板形成原版透視。白色短欄杆在y49%至58%橫過後方，中央門前留開口。窄深棕木台階在y59%至65%，後方欄杆前地面為深金棕木質帶。下方35%為寬大的灰米色大理石方磚地板，按原版一點透視匯向中央木門。上下與左右建築邊界不能移動，欄杆和台階不能被新家具遮住。保持空房間，不加椅子、桌子、旗幟、吊燈、裝飾人物或任何互動物。像素清晰、手繪細節、乾淨輪廓，遊戲背景而非照片、3D渲染或模糊油畫。重繪材質與光影，保留原構圖，圖片應完整填滿畫布，不留白邊、不裁切。",
+          "selected": false,
+          "sha256": "7e36cbaec3736a003b67d8f630dc28e9c9d7840700888e0645902ed858b6c7eb",
+          "size": [
+            1983,
+            793
+          ],
+          "mode": "RGB",
+          "tool": "image_gen.imagegen",
+          "raw_png_bytes_preserved": true
+        },
+        {
+          "name": "room-candidate-r2.png",
+          "prompt": "Use case: precise-object-edit. Image 1 is the original 320 by 200 composition reference. Image 2 is the generated pixel-art candidate to correct. Make ONE correction to image 2: recompose it into the same 8:5 overall canvas and same relative architectural positions as image 1. The current image 2 is much too wide. Return a compact 1600 by 1000 landscape picture matching image 1's width-to-height ratio, retaining the full empty hall. Repaint the framing to achieve this proportion; do not stretch or squeeze architecture, crop the scene, add padding or put a border around the image. Keep image 2's refined square-pixel technique, sharp pixel clusters and restrained olive-cream, warm brown and grey marble palette. Keep the original number and relative positions of columns, railing, central door and floor planes exactly as image 1. The railing occupies y49%-58%, central wooden door x42%-58% and y15%-56%, thin brown stage steps y59%-65%, marble floor bottom35%. Empty room. No furniture, people, flags, chandelier, text, captions, GUI, watermark or added objects.",
+          "selected": true,
+          "sha256": "777dbf6db416dee4872a7f8dfa86adce85aeca0d03c92ba216d349ce8e2a8c34",
+          "size": [
+            1586,
+            992
+          ],
+          "mode": "RGB",
+          "tool": "image_gen.imagegen",
+          "raw_png_bytes_preserved": true
+        }
+      ],
+      "reference_sha256": {
+        "archive_palette_reference": "0fd5f859b1a56cd4e533a7c3afec7ab7126c78d27bb5aac6500083e1e60d024a",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "CCBKGD.PIK",
+        "sha256": "d2c11061faf65c2c51fee36177eee79f0e2cdc9f67efa17d465dbea5e0e1ceca",
+        "ordinal": 0,
+        "indexed_sha256": "a0c9cfe6854a9eaa36a78020f87677e8bfe4660e1c12f23b3fd674ec6fd084e3"
+      },
+      "native_canvas_offset": 0,
+      "palette_indices": [
+        7,
+        28,
+        30,
+        32,
+        33,
+        47,
+        94,
+        111,
+        152,
+        154,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241
+      ],
+      "palette_projection_sha256": "4f7b7364fd534feeb06d5ac3e5fe758bc5ead07281dd073fd4825daeef607a53",
+      "native_display_rects": [
+        [
+          0,
+          0,
+          320,
+          200
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          0,
+          0,
+          1586,
+          992
+        ]
+      ],
+      "coverage": "Exact complete PIK decode at explicit verified stage canvas; original foreground and standard cursor preserved; formal conformance tracked in spec069 R78.",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "woodpanl-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "20a9e807bb330501e83565704a039134e4344a7550208c8813533ceb422d19d2",
+      "bytes": 1936864,
+      "size": [
+        1586,
+        992
+      ],
+      "mode": "RGB",
+      "native_size": [
+        320,
+        200
+      ],
+      "target_size": [
+        1280,
+        800
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from full generated raw PNG; only verified native background cells",
+      "alpha": "fully opaque RGB generated art; original PNG bytes preserved unchanged",
+      "generation_prompt": "Use case: texture-edit. Redraw image 1, the original game wood-panel background, in the fine hand-painted square-pixel technique of image 2. Preserve image 1's overall 8:5 landscape composition, dark thin wood frame at the extreme edges and single uninterrupted medium dark warm brown wooden panel. Return one compact 1600 by 1000 8:5 full-canvas game texture. Horizontal dark walnut/copper wood grain, restrained amber highlights, small pixel clusters and crisp carved edge detail, compatible with a 1994 colonial strategy game remastered in fine pixel art. The wood grain should be detailed but calm and fairly even in brightness to keep overlaid text readable. Follow image 1's diagonal-horizontal grain flow and thin darker outline exactly. No objects, readable text, labels, UI, logos, decorations, segmentation into new planks, vignette, white margin, cast shadows from outside objects, photo realism, 3D rendering, blurry painting or external border. Fill the entire canvas with the wood material; dark frame thickness approximately 1.5% of the canvas width.",
+      "generation_history": [
+        {
+          "name": "score-wood-candidate-r1.png",
+          "prompt": "Use case: texture-edit. Redraw image 1, the original game wood-panel background, in the fine hand-painted square-pixel technique of image 2. Preserve image 1's overall 8:5 landscape composition, dark thin wood frame at the extreme edges and single uninterrupted medium dark warm brown wooden panel. Return one compact 1600 by 1000 8:5 full-canvas game texture. Horizontal dark walnut/copper wood grain, restrained amber highlights, small pixel clusters and crisp carved edge detail, compatible with a 1994 colonial strategy game remastered in fine pixel art. The wood grain should be detailed but calm and fairly even in brightness to keep overlaid text readable. Follow image 1's diagonal-horizontal grain flow and thin darker outline exactly. No objects, readable text, labels, UI, logos, decorations, segmentation into new planks, vignette, white margin, cast shadows from outside objects, photo realism, 3D rendering, blurry painting or external border. Fill the entire canvas with the wood material; dark frame thickness approximately 1.5% of the canvas width.",
+          "selected": true,
+          "sha256": "20a9e807bb330501e83565704a039134e4344a7550208c8813533ceb422d19d2",
+          "size": [
+            1586,
+            992
+          ],
+          "mode": "RGB",
+          "tool": "image_gen.imagegen",
+          "raw_png_bytes_preserved": true
+        }
+      ],
+      "reference_sha256": {
+        "archive_palette_reference": "684aba4cb590448f235e216e531d034e2861007458a2d08a013c7f6ec67b2b92",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "WOODPANL.PIK",
+        "sha256": "0858856ad5b5dd0b6ab8e7a8f815fa602a9cf0237d8d323cd2b5ca141b32bc69",
+        "ordinal": 0,
+        "indexed_sha256": "f31602f9a239a4f83fd6e27e644384009d628517185aeb80bb248479e67d0e71"
+      },
+      "native_canvas_offset": 0,
+      "palette_indices": [
+        43,
+        45,
+        46,
+        47,
+        87,
+        95,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138
+      ],
+      "palette_projection_sha256": "d57afdd6d792e1e29b9710fc122c4e3db7c94082def0c955688438215cee17f2",
+      "native_display_rects": [
+        [
+          0,
+          0,
+          320,
+          200
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          0,
+          0,
+          1586,
+          992
+        ]
+      ],
+      "coverage": "Exact complete PIK decode at explicit verified stage and main canvases; original foreground and standard cursor preserved; formal conformance tracked in spec069 R78.",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
     }
   }
 }

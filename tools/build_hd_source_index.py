@@ -44,6 +44,8 @@ parser.add_argument('--scene-background-ready-report',type=Path,help='規格069�
 parser.add_argument('--scene-background-conformed-report',type=Path,help='規格069兩背景正式驗收與122張舊素材繼承審查')
 parser.add_argument('--report-background-ready-report',type=Path,help='規格069八報告READY審查')
 parser.add_argument('--report-background-conformed-report',type=Path,help='規格069八報告正式驗收與124張舊原稿繼承審查')
+parser.add_argument('--room-score-ready-report',type=Path,help='規格069國會室內與計分背景READY審查r2')
+parser.add_argument('--room-score-conformed-report',type=Path,help='規格069兩背景限定驗收及132張舊原稿繼承審查')
 a=parser.parse_args();out=a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.parent.stat().st_uid==os.getuid() and not out.exists()
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -75,6 +77,53 @@ for name,asset in manifest['assets'].items():
  f=matches[0];f['formal_assets'].append(name)
  bindings.append({'asset':name,'asset_sha256':asset['sha256'],'source_research_id':f['research_id'],'source_file':file,'source_ordinal':f['ordinal'],'source_encoded_sha256':f.get('encoded_sha256'),'spec':asset.get('spec',manifest['spec']),'claim':'matches verified formal manifest; conformance scope remains in cited spec'})
  if file.endswith('.PIK'):bindings[-1]['source_indexed_sha256']=f['indexed_sha256']
+# R78 僅增補國會室內與計分木紋兩個來源；載入選單HD仍未完成。
+if a.room_score_ready_report or a.room_score_conformed_report:
+ assert a.room_score_ready_report and a.room_score_conformed_report and a.inherited_index and a.inherited_manifest
+ assert not any([a.report_background_ready_report,a.report_background_conformed_report,a.scene_background_ready_report,a.scene_background_conformed_report])
+ ready=json.loads(a.room_score_ready_report.read_bytes());current=json.loads(a.room_score_conformed_report.read_bytes())
+ prior=json.loads(a.inherited_index.read_bytes());prior_manifest=json.loads(a.inherited_manifest.read_bytes())
+ assert ready['result']=='READY_ROOM_SCORE_BACKGROUND_DISPLAY_ONLY' and ready['spec_state']=='READY' and ready['ready_revision']==2
+ assert current['result']=='PASS_ROOM_SCORE_BACKGROUND_CONFORMANCE_REVIEW' and current['spec_state']=='CONFORMED'
+ assert current['sources']==[120,1551] and current['formal_assets']==134 and current['graphics_files']==135
+ assert current['manifest_sha256']==sha(a.manifest) and current['ready_review_sha256']==sha(a.room_score_ready_report)
+ assert current['inherited_source_index_sha256']==sha(a.inherited_index)
+ assert current['inherited_manifest_sha256']==sha(a.inherited_manifest)==prior['formal_manifest_sha256']
+ assert prior['source_receipt_sha256']==sha(a.catalog) and prior['schema']==1 and prior['kind']=='DRAFT-native-source-index-not-complete-player-coverage'
+ assert prior['coverage_limits']['complete_hd'] is False and prior['coverage_limits']['contains_original_pixels'] is False
+ new_assets={'ccbkgd-000.png','woodpanl-000.png'}
+ assert set(prior_manifest['assets'])==set(manifest['assets'])-new_assets==set(current['unchanged_inherited_assets'])
+ assert len(prior_manifest['assets'])==len(prior['formal_bindings'])==132
+ assert all(manifest['assets'][name]==record and record['sha256']==current['unchanged_inherited_assets'][name] for name,record in prior_manifest['assets'].items())
+ before={row['research_id']:row for row in prior['frames']}
+ assert len(before)==len(frames)==1552 and prior['files']==d['files'] and prior['summary']==d['summary']
+ assert prior['declared_encoding_alias_groups']==d['declared_encoding_alias_groups']
+ for row in frames:
+  old=before[row['research_id']]
+  assert {k:old[k] for k in allowed if k in old}=={k:row[k] for k in allowed if k in row}
+  if row['research_id'] not in [120,1551]:assert old['formal_assets']==row['formal_assets']
+ assert {row['asset']:row for row in bindings if row['asset'] not in new_assets}=={row['asset']:row for row in prior['formal_bindings']}
+ assert current['native_points']==27 and current['native_inputs']==42 and current['native_end']==192600000 and current['native_rgba_pixels']==27648000
+ assert current['formal_source_points']==27 and current['gui_samples']==37 and current['gui_hd_samples']==18 and current['gui_original_samples']==19
+ assert current['go_passed_unique_cases']==196 and current['startup_cases']==5 and current['package_rejected_cases']==407
+ assert current['formal_actual_inputs']==34 and current['formal_end']==100200000 and current['load_menu_hd_complete'] is False
+ assert current['gui_room_foreground_rgba_pixels']==433008
+ merged=json.loads(a.inherited_index.read_bytes())
+ for rid,name in [(120,'ccbkgd-000.png'),(1551,'woodpanl-000.png')]:
+  row=next(row for row in merged['frames'] if row['research_id']==rid);fresh=next(row for row in frames if row['research_id']==rid)
+  assert not row['formal_assets'] and fresh['formal_assets']==[name]
+  row['formal_assets']=[name]
+  row['runtime_source_evidence']='confirmed complete PIK decode at explicit verified canvas bases, exact source-used palette RGB and original copy/glyph/cursor ownership; only native surfaces that pass the inherited guard'
+  row['source_contract_reference']={'state':'CONFORMED','spec':'docs/spec/069-hd-menu-background-and-textures.md','formal_connected':True,'review_sha256':sha(a.room_score_conformed_report),'scope':'normal F3 congress-room background and F10 score background, five languages, original/HD and EN/TC standard cursor hover/return; load-menu/slot stay Original on native guard failure; actors, animation and other paths unverified'}
+ merged['formal_manifest_sha256']=sha(a.manifest);merged['formal_bindings']=bindings
+ merged['coverage_limits']['formal_asset_bindings']=len(bindings)
+ merged['coverage_limits']['additional_ready_source_contracts']=sum(row.get('source_contract_reference',{}).get('state')=='READY' and not row.get('source_contract_reference',{}).get('formal_connected') for row in merged['frames'])
+ merged['room_score_background_conformance']={'ready_review_sha256':sha(a.room_score_ready_report),'review_sha256':sha(a.room_score_conformed_report),'sources':[120,1551],'formal_assets':134,'gui_samples':37,'native_source_points':27,'inherited_source_index_sha256':sha(a.inherited_index),'load_menu_hd_complete':False,'claim':'two normal backgrounds only; all132 inherited raw PNGs/records and conformance scopes preserved; stage load-menu native guard failure stays Original, full HD incomplete'}
+ assert all(row==before[row['research_id']] for row in merged['frames'] if row['research_id'] not in [120,1551])
+ out.write_text(json.dumps(merged,ensure_ascii=False,indent=2)+'\n')
+ print('PASS_INHERITED_ROOM_SCORE_SOURCE_INDEX',len(frames),len(bindings),sha(out),flush=True)
+ raise SystemExit(0)
+
 # R77 只增補八個已驗報告來源，保留 R76 的完整索引快照。
 if a.report_background_ready_report or a.report_background_conformed_report:
  assert a.report_background_ready_report and a.report_background_conformed_report and a.inherited_index and a.inherited_manifest

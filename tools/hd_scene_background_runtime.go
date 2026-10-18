@@ -14,7 +14,7 @@ import (
 // 規格069 R76／R77 READY：來源、解碼畫布與原圖固定，所有狀態只供顯示。
 type hdSceneDefinition struct {
 	id, offset, height                                        int
-	canvas                                                    uint32
+	canvas, alternateCanvas                                   uint32
 	file, originalSHA, nativeSHA, asset, assetSHA, paletteSHA string
 	nativeRects, artRects                                     []image.Rectangle
 }
@@ -76,6 +76,9 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 		if err != nil {
 			return nil, err
 		}
+		if def.alternateCanvas != 0 && (def.alternateCanvas != hdBuildingCanvas || def.canvas != 0) {
+			return nil, fmt.Errorf("scene alternate canvas")
+		}
 		wantBounds := image.Rectangle{}
 		for _, rect := range def.artRects {
 			wantBounds.Max.X = max(wantBounds.Max.X, rect.Max.X)
@@ -120,7 +123,7 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 		}
 		p.frames = append(p.frames, f)
 	}
-	if len(p.frames) != 10 {
+	if len(p.frames) != 12 {
 		return nil, fmt.Errorf("scene source group")
 	}
 	h.m.WatchWrite(0, 0xaffff, func(_ *golem.Machine, a uint32, o, v byte) { p.memoryWrite(a, o, v) })
@@ -178,7 +181,7 @@ func (p *hdSceneRuntime) decodedAt(base uint32, start int) {
 		if wantBase == 0 {
 			wantBase = 0x3c500
 		}
-		if wantBase != base || f.offset != start || f.nativeSHA != digest {
+		if (wantBase != base && (f.alternateCanvas == 0 || f.alternateCanvas != base)) || f.offset != start || f.nativeSHA != digest {
 			continue
 		}
 		f.native = append([]byte(nil), raw...)

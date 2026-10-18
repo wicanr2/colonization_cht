@@ -3,7 +3,8 @@ from pathlib import Path
 import json,hashlib,collections,argparse,os,sys
 parser=argparse.ArgumentParser(description=__doc__)
 for name in ['probe','points','decoded','game','output']:parser.add_argument('--'+name,type=Path,required=True)
-a=parser.parse_args()
+parser.add_argument('--scope',choices=['reports-and-room-score','room-score-only','inherited-scenes'],default='reports-and-room-score',help='限定需要正例的正常路徑；完整十二來源均重建，不外推未出現來源')
+a=parser.parse_args();scope=a.scope
 assert Path('/.dockerenv').exists() and os.getuid()!=0
 fingerprints={'VICEROY.EXE': 'a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3', 'COLONY.PIK': 'faaa637d528641a5f098eb4b1975696de182bd2d586b5f089d5a0d51320f5465', 'EUROPE.PIK': '05386fef6140252040508bdc56ca0eaeb5d7563f55bb9046f714ba09d74af118', 'REPORT1.PIK': '8050c481b9bd8eecd8011d44acafa3e700377dacb28321475fc25e51349ce91b', 'REPORT2.PIK': 'c0434e666b5dfb6d751ba67a6cf34e384365c527645e02f08eddabf5c2757d25', 'REPORT3.PIK': '01372be38f137144bf5a6b796154d01893473b0684a06f703af4840eff410a1b', 'REPORT4.PIK': 'dbdcd1d98c8eddd1a979a4d60e4e03721de2ecc79444dd9b08db80c8d2fe0bd1', 'REPORT5.PIK': 'f621afd662a05bbcc5cfe0c9ce99cd758d3142f89ce9b7c62267843fb87a1797', 'REPORT6.PIK': 'c6d59ac693f16f611e86b5884c666082525d5e73e5e63db7f8089b8aa6f903aa', 'REPORT7.PIK': 'b3fc6b0d11b87b7ed056c08ee04ed757369b54cc19dbfda29d87ffdafaedf542', 'REPORT8.PIK': 'f09699044156d9aeef55bfe9e5607e872d47eb68ad9fb930d40a3a4988b34fa6', 'CCBKGD.PIK':'d2c11061faf65c2c51fee36177eee79f0e2cdc9f67efa17d465dbea5e0e1ceca','WOODPANL.PIK':'0858856ad5b5dd0b6ab8e7a8f815fa602a9cf0237d8d323cd2b5ca141b32bc69'}
 for name,want in fingerprints.items():
@@ -121,8 +122,11 @@ for line in (obs/'background-writes.jsonl').open():
  values[a]=v;sites['%04X:%04X:%s'%(cs,ip,code)]+=1
 while pi<len(points):capture(pi);pi+=1
 assert not transactions
-assert all(completed[rid]>0 and any(p['sources'][rid]['painted']>0 for p in results) for rid in [120,1551,*range(1442,1450)]),'each new report source needs actual painted native evidence'
+required=[308,824] if scope=='inherited-scenes' else [120,1551] if scope=='room-score-only' else [120,1551,*range(1442,1450)]
+assert all(completed[rid]>0 and any(p['sources'][rid]['painted']>0 for p in results) for rid in required),'each required source needs actual painted native evidence'
+if scope=='inherited-scenes':assert completed[120]==0 and all(completed[rid]==0 for rid in range(1442,1450))
 out={'result':'PASS_ROOM_SCORE_BACKGROUND_SOURCE_MODEL_RESEARCH','complete_decodes':dict(completed),'address_space':'dosgolem real-mode CS:IP and 20-bit linear RAM; no IDA EA','points':results,'copies':dict(copies),'loss_sites':dict(losses),'same_value_revocations':same,'cursor_paints':paints,'cursor_reverse_pair_restores':restores,'decode_writes':dict(decodes),'cursor_source_sha256':cursor_source_sha,'remaining_backing_owners':sum(not(base<=a<base+64000 or stage<=a<stage+64000) for a in owners),'production_connected':False,'native_state_points_equal_control':len(points)}
+out['scope']=scope;out['required_sources']=required
 out['receipt_sha256']={str(f):sha(f.read_bytes()) for f in [Path(__file__),a_points,obs.parent/'build.json',obs/'draws.json',ctrl/'draws.json',obs/'background.json',obs/'background-writes.jsonl',obs/'final.memory',ctrl/'final.memory']}
 (r/'check.json').write_text(json.dumps(out,indent=2)+'\n')
 print('PASS_ROOM_SCORE_BACKGROUND_SOURCE_MODEL_RESEARCH',len(results),dict(copies),dict(decodes),restores,flush=True)

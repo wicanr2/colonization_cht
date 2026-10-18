@@ -29,6 +29,9 @@ func hdSceneFixtures(t *testing.T) (string, string, string) {
 func TestHDSceneNative19(t *testing.T) {
 	game, root, assets := hdSceneFixtures(t)
 	ref, model := filepath.Join(root, "scene-source-probe-r5"), filepath.Join(root, "scene-source-model-current-r1")
+	if alternate := os.Getenv("TEST_HD_SCENE_MODEL"); alternate != "" {
+		model = alternate
+	}
 	var oracle struct {
 		Checkpoints []hdNewGameOracleState
 		End         hdNewGameOracleState
@@ -112,7 +115,7 @@ func TestHDSceneNative19(t *testing.T) {
 		painted := map[int]int{}
 		for _, frame := range p.frames {
 			expected := make([]byte, 64000)
-			if frame.id == 308 || frame.id == 824 {
+			if frame.id == 308 || frame.id == 824 || (frame.id == 1551 && os.Getenv("TEST_HD_SCENE_MODEL") != "") {
 				expected = hdNewGameRead(t, filepath.Join(model, fmt.Sprintf("point-%03d-source-%d-mask.bin", at, frame.id)))
 			}
 			if len(expected) != 64000 {
@@ -190,7 +193,7 @@ func TestHDSceneNative19(t *testing.T) {
 	}
 	for _, frame := range p.frames {
 		want := uint64(0)
-		if frame.id == 308 || frame.id == 824 {
+		if frame.id == 308 || frame.id == 824 || (frame.id == 1551 && os.Getenv("TEST_HD_SCENE_MODEL") != "") {
 			want = 1
 		}
 		if frame.decoded != want {
