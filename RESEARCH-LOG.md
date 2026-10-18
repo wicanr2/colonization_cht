@@ -6974,3 +6974,18 @@ dosgolem 82a14b266e1b5bc904e2d0fe507daf6bea41a013與Go1.26.7。
 R89根的make-r89-ready-r1.py與兩份pixel審查記逐項指紋。
 幾何檢查器r2的Pillow浮點最近鄰在整數邊界少取一格；r3改用既定整數公式後同20張全等。
 原始失敗保留，生產渲染與幾何未因該驗證腳本問題改動。
+
+## 2026-10-19：R90大型國王來源與具型別底圖
+
+已證實範圍及全部原檔／編碼／索引指紋見[規格069 R90](docs/spec/069-hd-menu-background-and-textures.md)。
+dosgolem 82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7，
+位址為實模式CS:IP及20bit線性RAM。大型人物實際入口為0D66:0004，
+不沿用小人物0D46。原始DX94與stack198的anchor語意未知；唯一位置由完整11930格實寫證明。
+Stage及Main均有段位址正規化，必須核對線性位址，先前字面ES限制的部分結果不當作完整來源。
+
+r5正常50400000步的11930格解碼／Main／VGA全等原版控制與存檔。
+同一原版逐寫日誌回查48889693步人物入口前PIK擁有權：
+29609格背景、5734格未知前景；原SS不透明格中11053格背景及877格未知底圖。
+未知底圖保留原版快照，不以相同顏色升格HD。生成草稿與注入視覺只屬DRAFT，未進生產路徑。
+本機根hd-royal-foreground-r90，入口king-draw-native-r5/check.json及
+king-prior-typed-background-r1/check.json。

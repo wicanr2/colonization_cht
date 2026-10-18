@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "eb7f70da2fb48e5d508a9a5184108ad1996bd5617fca1da38dd9e2119771ce34",
+  "formal_manifest_sha256": "ae0c4e74a53bfafcdd6114108d8e45925a231b8ebc1635856d14827ff8c86368",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 134,
+    "formal_asset_bindings": 217,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -36865,9 +36865,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete PIK decode, typed RAM copies and current VGA publication; normal GUI66/native60 only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "kinglss1-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "c09fe239be7209f00154dc6d232b2aeb8f12e72ca0f11ca3a3f397d3839c1ef7",
+        "scope": "one original story background; native foreground, glyphs, cursor visibility, input and timing preserved; no king sprite or full-HD credit"
+      }
     },
     {
       "research_id": 1003,
@@ -36940,9 +36949,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete PIK decode, typed RAM copies and current VGA publication; normal GUI66/native60 only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "levn0001-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "c09fe239be7209f00154dc6d232b2aeb8f12e72ca0f11ca3a3f397d3839c1ef7",
+        "scope": "one original story background; native foreground, glyphs, cursor visibility, input and timing preserved; no king sprite or full-HD credit"
+      }
     },
     {
       "research_id": 1006,
@@ -36965,9 +36983,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete PIK decode, typed RAM copies and current VGA publication; normal GUI66/native60 only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "levn0002-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "c09fe239be7209f00154dc6d232b2aeb8f12e72ca0f11ca3a3f397d3839c1ef7",
+        "scope": "one original story background; native foreground, glyphs, cursor visibility, input and timing preserved; no king sprite or full-HD credit"
+      }
     },
     {
       "research_id": 1007,
@@ -36990,9 +37017,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete PIK decode, typed RAM copies and current VGA publication; normal GUI66/native60 only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "levn0003-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "c09fe239be7209f00154dc6d232b2aeb8f12e72ca0f11ca3a3f397d3839c1ef7",
+        "scope": "one original story background; native foreground, glyphs, cursor visibility, input and timing preserved; no king sprite or full-HD credit"
+      }
     },
     {
       "research_id": 1008,
@@ -37015,9 +37051,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete PIK decode, typed RAM copies and current VGA publication; normal GUI66/native60 only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "levn0004-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "c09fe239be7209f00154dc6d232b2aeb8f12e72ca0f11ca3a3f397d3839c1ef7",
+        "scope": "one original story background; native foreground, glyphs, cursor visibility, input and timing preserved; no king sprite or full-HD credit"
+      }
     },
     {
       "research_id": 1009,
@@ -37040,9 +37085,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete PIK decode, typed RAM copies and current VGA publication; normal GUI66/native60 only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "levn0005-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "c09fe239be7209f00154dc6d232b2aeb8f12e72ca0f11ca3a3f397d3839c1ef7",
+        "scope": "one original story background; native foreground, glyphs, cursor visibility, input and timing preserved; no king sprite or full-HD credit"
+      }
     },
     {
       "research_id": 1010,
@@ -37065,9 +37119,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete PIK decode, typed RAM copies and current VGA publication; normal GUI66/native60 only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "levn0006-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "c09fe239be7209f00154dc6d232b2aeb8f12e72ca0f11ca3a3f397d3839c1ef7",
+        "scope": "one original story background; native foreground, glyphs, cursor visibility, input and timing preserved; no king sprite or full-HD credit"
+      }
     },
     {
       "research_id": 1011,
@@ -37090,9 +37153,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete PIK decode, typed RAM copies and current VGA publication; normal GUI66/native60 only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "levn0007-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "c09fe239be7209f00154dc6d232b2aeb8f12e72ca0f11ca3a3f397d3839c1ef7",
+        "scope": "one original story background; native foreground, glyphs, cursor visibility, input and timing preserved; no king sprite or full-HD credit"
+      }
     },
     {
       "research_id": 1012,
@@ -37115,9 +37187,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete PIK decode, typed RAM copies and current VGA publication; normal GUI66/native60 only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "levn0008-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "c09fe239be7209f00154dc6d232b2aeb8f12e72ca0f11ca3a3f397d3839c1ef7",
+        "scope": "one original story background; native foreground, glyphs, cursor visibility, input and timing preserved; no king sprite or full-HD credit"
+      }
     },
     {
       "research_id": 1013,
@@ -37140,9 +37221,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete PIK decode, typed RAM copies and current VGA publication; normal GUI66/native60 only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "levn0009-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "c09fe239be7209f00154dc6d232b2aeb8f12e72ca0f11ca3a3f397d3839c1ef7",
+        "scope": "one original story background; native foreground, glyphs, cursor visibility, input and timing preserved; no king sprite or full-HD credit"
+      }
     },
     {
       "research_id": 1014,
@@ -37165,9 +37255,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete PIK decode, typed RAM copies and current VGA publication; normal GUI66/native60 only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "levn0010-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "c09fe239be7209f00154dc6d232b2aeb8f12e72ca0f11ca3a3f397d3839c1ef7",
+        "scope": "one original story background; native foreground, glyphs, cursor visibility, input and timing preserved; no king sprite or full-HD credit"
+      }
     },
     {
       "research_id": 1015,
@@ -60448,6 +60547,127 @@
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec",
       "source_indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+    },
+    {
+      "asset": "kinglss1-000.png",
+      "asset_sha256": "1c57a5064823e0c0e249d1d05a3fe8fe60cf82909213b7b87283af77a654bdde",
+      "source_research_id": 1002,
+      "source_file": "KINGLSS1.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "source_indexed_sha256": "0f916e46808d4a0470bd78fac18571cd0d3dbdfeb4b2484745b3e634874fd666",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "levn0001-000.png",
+      "asset_sha256": "a84dd22420d8e7ccae6b946c726a95f06a76f1b0203348f503b45a642c387934",
+      "source_research_id": 1005,
+      "source_file": "LEVN0001.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "source_indexed_sha256": "d8d0d8e5de5655411fd4935d2b96e6e84845ee924658668f9486196ede9882ab",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "levn0002-000.png",
+      "asset_sha256": "4ffe42db8bb35f335ccefc119d67abc8db4b4ccc0443ea1481afabc6aa66d6f4",
+      "source_research_id": 1006,
+      "source_file": "LEVN0002.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "source_indexed_sha256": "ea862cdccd15062dbbee15c3e48b187f6f3eeec5b2d0b34916709ab849e456fc",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "levn0003-000.png",
+      "asset_sha256": "eb67be5269b10bdd06ae684c5a765e8eab6eff1db1c2b0bf3e1ac735a7341651",
+      "source_research_id": 1007,
+      "source_file": "LEVN0003.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "source_indexed_sha256": "09d3f445bc0b5f44306c04cc59e7c9daae7285ae22e42328386c65a21ad7e346",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "levn0004-000.png",
+      "asset_sha256": "d6bc3d180ded72fad9bff9bf635042547318882efa65db28e75196ff4d5ffae8",
+      "source_research_id": 1008,
+      "source_file": "LEVN0004.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "source_indexed_sha256": "f2f8f3fe8284bfd2c5e891fe1da1418840eea7d1ff62323cbd304dd282e4fb3e",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "levn0005-000.png",
+      "asset_sha256": "0b68ffd8701d8da18ddbbaa2a6213836decdcf161102c29960b36adc0bb2e962",
+      "source_research_id": 1009,
+      "source_file": "LEVN0005.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "source_indexed_sha256": "8ad92f5763d792fdd5e556a82d759a697b70142b9be6c4486b2fb167da2cd752",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "levn0006-000.png",
+      "asset_sha256": "a6107a6fd2894978c6df67a909e72591129d6b7445c0d0f55920f5375f56d495",
+      "source_research_id": 1010,
+      "source_file": "LEVN0006.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "source_indexed_sha256": "8ed6acf0459ab453eb9ee5f730e8db96af81d13edd3fc5267cb290ef7379052f",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "levn0007-000.png",
+      "asset_sha256": "38376c3261d238fe1acd65003f3baf2a455f10ac83d891be44261f13877c394e",
+      "source_research_id": 1011,
+      "source_file": "LEVN0007.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "source_indexed_sha256": "f5d1b29aaa2dfa94a00ecc4c7d0526e1b45217b53a562b97a0e1eedee300954b",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "levn0008-000.png",
+      "asset_sha256": "a4a654d6206274d71c35c1ec90dbc5a78c09536b4bf727642e25722499dab50a",
+      "source_research_id": 1012,
+      "source_file": "LEVN0008.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "source_indexed_sha256": "1d649ded519c803fdb672e49f9910e14cfe76c2c92ddc734fceeaa40ef7f59f2",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "levn0009-000.png",
+      "asset_sha256": "d283d17b5144bd5f76980acb4580f5a25fa62caaffe1aa08d9f992c2c489167a",
+      "source_research_id": 1013,
+      "source_file": "LEVN0009.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "source_indexed_sha256": "e884c2c1d5cd994f2b03dc99a3eac9b661db69bd7681adffdd6b10232e1b1acf",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "levn0010-000.png",
+      "asset_sha256": "5352ea8ac04f4aa173e7e1bb6bb90e169ecf3e63e14251a7a15bc96ee2f7bfe7",
+      "source_research_id": 1014,
+      "source_file": "LEVN0010.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "source_indexed_sha256": "f079f5624f414b7dfa731887f3739718196932d6083ccfa94ce0b45b199fb898",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
     }
   ],
   "limitations": [
@@ -60916,5 +61136,26 @@
     "formal_assets": 206,
     "gui_samples": 42,
     "claim": "21 complete fish poses and scoped generated old-pose restoration only; other images, fades and full HD remain incomplete"
+  },
+  "nation_story_conformance": {
+    "ready_sha256": "63b7f01031c3d45cd1b8fff6ca5f6ecd7e192fc7f2c50ee700c9228c797addb5",
+    "review_sha256": "c09fe239be7209f00154dc6d232b2aeb8f12e72ca0f11ca3a3f397d3839c1ef7",
+    "sources": [
+      1002,
+      1005,
+      1006,
+      1007,
+      1008,
+      1009,
+      1010,
+      1011,
+      1012,
+      1013,
+      1014
+    ],
+    "formal_assets": 217,
+    "gui_samples": 66,
+    "unique_native_points": 60,
+    "claim": "eleven story backgrounds only; original king and hound retained; other images, animation and full HD incomplete"
   }
 }

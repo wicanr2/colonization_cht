@@ -2367,3 +2367,60 @@ verify-r87-conformance-index-r1.py。公開索引仍須兩份fish審查、繼承
 完整載入採catalogue-only，不聲稱重跑既有整個錯件家族。
 218檔封裝與40種新錯件拒絕通過，舊206張原PNG及metadata保持。
 正常HD視窗、當次輸入重播及最終來源清冊尚待，狀態保持READY。
+
+### 2026-10-19 R89十一背景限定CONFORMED
+
+| 驗收 | 已通過範圍 |
+|---|---|
+| 正常視窗 | 66項實拍，十一來源皆有正例；國王與最後出航頁各五語／兩模式，四語國王游標進出與最後出航的隱藏游標。 |
+| 獨立來源 | 同當次36筆輸入的60個獨立原版狀態，重複六張的完整狀態另驗相同；完整CPU、RAM、IDX、DAC、週期及原始檔與控制相同。6528筆游標側錄驗透明複製及反向還原。 |
+| 完整畫面 | RGBA與X11各67584000點相同，包含26個Noto欄位。由原PNG、獨立發布來源與綁定字模重算，不排除文字安全區。國名直接讀已核准術語表；初版檢查器誤用日韓國名的失敗保留。 |
+| 三側重播 | 36筆實際輸入至1154200000步，含play=true；CPU、完整RAM、IDX、DAC、WAV與存檔和實拍相同。WAV 4954808立體聲frame、49715Hz、16bit且非靜音，SHA-256 be40ee742d06149c60182dc799365943ea90957c5a2c6b8090ae5c37b0807a98。 |
+| 資源與來源索引 | 46具名範圍、完整218檔載入正例與40項封裝拒絕通過。217連結，只更新十一來源，其他1541列保持；八種錯誤審查拒絕。舊206張原PNG與metadata保持。 |
+
+限定審查nation-story-conformance-r1.json：c09fe239be7209f00154dc6d232b2aeb8f12e72ca0f11ca3a3f397d3839c1ef7。
+來源清冊SHA-256 659b0f3a4e79ccc1d62cd09045b86e1fc04034e9f50a02f941c9066e79e4f303。
+驗收固定bf2acced4c2522d2e1fe1239f94948f637aa3e00的69Go／52綁定組建，
+二進位4a060e33a51b907d5cc0514a4b31a74cff7e30dac18ce7a46938c2a923ea0da9。
+
+本機R89入口為make-r89-conformance-r1.py、verify-r89-gui-replays-r1.py、
+verify-r89-gui-sources60-r2.py、check-r89-gui-sources60-r1.py與check-r89-gui-pixels-r2.py。
+公開來源索引使用[十一背景擴充器](../../tools/extend_hd_story_source_index.py)，
+以--baseline、--assets、--ready、--conformed指定舊206連結、217張清冊與兩份審查，
+--output指定新的輸出檔；僅CONFORMED可輸出，不含原版像素。
+
+第一次GUI抓取因共用磁碟用盡而中止，只保留部分收據，不計驗收。
+修正儲存環境後，以同映像及同組建在新目錄完成r2；沒有修改原版或生產渲染。
+此次清冊覆蓋計數修正較早殘留的134為實際217個連結，不把此數字當作玩家可見圖像分母。
+國王與獵犬等前景仍為原版，後續R90另列DRAFT。全量HD與完整五語尚未完成。
+
+### 2026-10-19 R90國王與獵犬大型前景DRAFT
+
+範圍只限KING1.SS ordinal0、研究來源992，原版189×187、透明索引253及11930格不透明像素。
+原檔SHA-256 bfdcb69af1376dc4334d7822121a55c112e19cc473b6a11cc9c6ff599b9c9e7f；
+part3 offset0／12207-byte來源096034463bc78340a4e7b16a8809e1deae9e6cf42aa58e8375875e86f6185769；
+索引946f5f2d30ae8d5402e763a9d0393bfcfd4448e2d9edf2321e9b7f904ef18a60。
+EXE、dosgolem與Go版本沿R89，位址空間為dosgolem實模式CS:IP及20bit線性RAM。
+
+已證實入口0D66:0004，12-byte碼c86e010052535057568b4702，返回SP增加12。
+實際原始參數DX=94、stack額外值100、另一word=198及descriptor[200,320,0,3C50]，
+frame record為[14,4F26,94,198,189,187]。不把DX／198解釋成畫面左上角。
+只從第一個實際不透明寫入及完整11930格取得唯一矩形[0,12,189,199]，
+其餘比例、鏡像與參數保持未知及原圖回退。
+
+| 原版來源鏈 | 已證實內容 |
+|---|---|
+| Stage | 0D66:029E／268807035ef04247eb965a5b5f035efe共8422格；0D66:0272／268807035ef04247fecc7402ebd8ebbc共3508格。驗實際線性位址，ES有3C50／4350／4A50正規化別名。 |
+| Main | 0C9F:00CA／f3a503f3790c81ee00808cd981c10008，Stage到0x2CAE0同座標，完整11930格。不能將ES固定成2CAE。 |
+| VGA | 既有0E21:0091，完整11930格目前發布與原版索引相同。 |
+| 原版狀態 | 正常輸入至R89控制point006的50400000步，23筆輸入、CPU、完整RAM、IDX、DAC、週期與存檔全等；不計新增GUI。 |
+| 底圖 | 繪製前具型別PIK來源，整個矩形29609格背景／5734格未知前景；11930個原SS格中11053格有背景來源，其餘877格只保留已驗原版底圖。禁止按同色推定HD背景。 |
+
+生成原候選king1-000-candidate-r1.png保持1254×1254原bytes與alpha，
+SHA-256 c703753a240057c7379a4c192e3d97349d45ef5d12a8e27beddd1bf1468e504b。
+依已定稿畫風生成一位紅衣國王及一隻灰色獵犬；不改位置、數量與原版互動。
+原圖、完整提示與參考指紋只在本機hd-royal-foreground-r90，
+入口king1-generation-r1.json、king-draw-native-r5/check.json、
+king-prior-typed-background-r1/check.json及king1-visual-prototype-r1/check.json。
+首版視覺原型的同值背景判定只供可丟棄觀察；正式接線必須使用具型別底圖，
+保留其他前景，驗遮擋／游標／未知寫入撤銷與正常HD路徑後，才可升READY。
