@@ -1924,3 +1924,20 @@ R85游標／字幕補充已READY。私有11項具名測試零失敗、零skip及
 本次畫面檢查使用tools/check_hd_opening_ship_pixels.py，--model指向opening-caption-public-gui-r1，
 --formal指向r85-sun-caption-formal-gui-r1，--language-bundle-root指向r85-sun-bundle-r3，
 其餘--assets、--decoded、--output與--gui沿本節既有入口。
+
+### 2026-10-18 R85其餘開場動畫候選
+
+狀態為DRAFT，不授予正式HD信用。OPENWND1吹氣雲與OPENWND2火山煙共21幀，
+15張新生成、6檔原樣重用；OPENMON1／OPENMON2上方綠金魚共21個已觀測幀，
+19張新生成、2檔依相同原版來源重用。兩組均保存內建image_gen的原PNG、alpha與完整提示。
+
+| 本機收據 | SHA-256與範圍 |
+|---|---|
+| monster-candidates-r1.json | 28a238399294f3a66875bf0f658e9c920f53bc1f33946282cc966258f8c5f008；21檔候選、19張生成原圖、2檔相同來源重用。 |
+| monster-native-anchor-review-r1.json | 21幀均由完整呼叫的PIK底圖逐格反推世界座標；參考合成不計正常GUI。 |
+| monster-composite-references-r1.json | 原PIK與SS在已驗座標合成的完整魚形參考，含每幀來源編碼／索引雜湊。 |
+| monster-generation-r1.json、monster-generation-r2.json | 逐幀完整提示、參考角色、生成原圖來源、尺寸與SHA-256。 |
+| wind-candidates-r1.json、wind-generation-r1.json、wind-generation-r2.json | 21幀雲／煙原PNG、15張新生成與6檔重用，來源與提示保持。 |
+
+上述檔案位於本節R85本機根。候選仍須確認取樣幾何、舊姿態清除、原版來源發布、
+遮擋與游標，再經READY進正式接線。原PNG不得裁切、縮放或重新編碼；取樣只在顯示層進行。
