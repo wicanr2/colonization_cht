@@ -1,12 +1,12 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-18",
-  "code_commit": "0bce890d3b7ea22a1870870548a3c5854f83bbab",
-  "binary_sha256": "e980becf7ff4c638f681426d73757fba6f79570690bf6fc46b9706cb6501b1ed",
-  "formal_binary_sha256": "e980becf7ff4c638f681426d73757fba6f79570690bf6fc46b9706cb6501b1ed",
-  "source_build_sha256": "1caad44b80d5c7c6236da3574845a42048a60b195fa993fe97a756ca6cfc371d",
+  "code_commit": "d79ec5654fa3376c19f77cd3b142081cef01ac1f",
+  "binary_sha256": "74fcb36302795905d7481a6a8c5e58b128669f052da727a73d136ada5fa69bf2",
+  "formal_binary_sha256": "74fcb36302795905d7481a6a8c5e58b128669f052da727a73d136ada5fa69bf2",
+  "source_build_sha256": "97eff1330fc51926f1d73d977d9b495ac064998703a771e5474b15fc01ea0aba",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 132,
+  "formal_hd_assets": 134,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -383,6 +383,64 @@
       "graphics_manifest_sha256": "e3ff9d59ae66aa2bfe643d8c208c49367de97888704173b66d6230df2fc2b636",
       "conformance_sha256": "553827bbd2636765fa7d5be57a814bcaf7829911efba4de26ed7e950505e5028",
       "scope": "八種正常報告背景的限定驗收；已驗五語與原版／HD切換、翻頁、原版前景及標準游標。其他場景、世界移動、戰鬥與動畫仍待驗。"
+    },
+    {
+      "file": "hd-congress-room-zh.png",
+      "sha256": "e2c8325bab87e5d9eb3680a770608d2588e17ef3687d9906a438fa9f31a3ce48",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "report-f3-b",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 74400000,
+      "code_commit": "d79ec5654fa3376c19f77cd3b142081cef01ac1f",
+      "binary_sha256": "74fcb36302795905d7481a6a8c5e58b128669f052da727a73d136ada5fa69bf2",
+      "formal_binary_sha256": "74fcb36302795905d7481a6a8c5e58b128669f052da727a73d136ada5fa69bf2",
+      "formal_hd_assets": 134,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-room-score-backgrounds-r78/r78-room-score-formal-gui-r2/gui.display-042.png",
+      "source_gui_check_sha256": "2024aefa03b6a2bff8613a8cfcf75cec0f37287b32b43637db6d1ccc6811ca89",
+      "independent_pixels_sha256": "ef600c961901878d8c91b608222138a0ac170c857937d28ffcb4a26981366361",
+      "same_state_replay_sha256": "c012fafdf88f8b3bafe1e4c3419eb8ee9b2b617693e3d36c2570a7f7401ea10f",
+      "same_state_replay_receipt": "workplace/reports/goal186-display-hd/hd-room-score-backgrounds-r78/r78-room-score-replay-r1-check.json",
+      "source_kind": "actual formal game presentation from standard display diagnostics; byte-for-byte matched to the real X11 game area",
+      "capture_pixels_unchanged": true,
+      "original_source_file": "CCBKGD.PIK",
+      "source_research_id": 120,
+      "owned_background_cells": 60993,
+      "graphics_manifest_sha256": "f5d0fbebed17123932d129c006c488190864a1450036c9800f2edc78d09a0e00",
+      "conformance_sha256": "a1049affbd62d15ef7413cd9063e6f0dccb9aafbda199e5a4ee3238e1d38c2de",
+      "scope": "正常國會室內與計分背景限定驗收。室內前景人物保留原版，同一姿態不代表動畫HD完成。載入選單木紋維持原圖；其他圖像、世界移動、戰鬥與動畫待完成。"
+    },
+    {
+      "file": "hd-score-zh.png",
+      "sha256": "061c0475dbc5350e72d4ec2215a923b0c0d7c731531ff6c5d7ac1a9c787abcf0",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "report-f10-a",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 90400000,
+      "code_commit": "d79ec5654fa3376c19f77cd3b142081cef01ac1f",
+      "binary_sha256": "74fcb36302795905d7481a6a8c5e58b128669f052da727a73d136ada5fa69bf2",
+      "formal_binary_sha256": "74fcb36302795905d7481a6a8c5e58b128669f052da727a73d136ada5fa69bf2",
+      "formal_hd_assets": 134,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-room-score-backgrounds-r78/r78-room-score-formal-gui-r2/gui.display-102.png",
+      "source_gui_check_sha256": "2024aefa03b6a2bff8613a8cfcf75cec0f37287b32b43637db6d1ccc6811ca89",
+      "independent_pixels_sha256": "ef600c961901878d8c91b608222138a0ac170c857937d28ffcb4a26981366361",
+      "same_state_replay_sha256": "c012fafdf88f8b3bafe1e4c3419eb8ee9b2b617693e3d36c2570a7f7401ea10f",
+      "same_state_replay_receipt": "workplace/reports/goal186-display-hd/hd-room-score-backgrounds-r78/r78-room-score-replay-r1-check.json",
+      "source_kind": "actual formal game presentation from standard display diagnostics; byte-for-byte matched to the real X11 game area",
+      "capture_pixels_unchanged": true,
+      "original_source_file": "WOODPANL.PIK",
+      "source_research_id": 1551,
+      "owned_background_cells": 60800,
+      "graphics_manifest_sha256": "f5d0fbebed17123932d129c006c488190864a1450036c9800f2edc78d09a0e00",
+      "conformance_sha256": "a1049affbd62d15ef7413cd9063e6f0dccb9aafbda199e5a4ee3238e1d38c2de",
+      "scope": "正常國會室內與計分背景限定驗收。室內前景人物保留原版，同一姿態不代表動畫HD完成。載入選單木紋維持原圖；其他圖像、世界移動、戰鬥與動畫待完成。"
     }
   ],
   "limitations": [
@@ -398,7 +456,8 @@
     "R74 adds one actual Traditional Chinese Colonists pedia capture covering 22 new colonist frames and three inherited images. World movement, combat and animation remain unverified; all seven prior PNGs and per-image provenance remain unchanged.",
     "R75新增正常龍騎兵百科實拍，對應19幀／14頁的限定驗收；既有八張原PNG與逐圖來源保持。世界移動、戰鬥、其他圖像、動畫及全量HD尚未完成。",
     "R76新增殖民地下方背景與歐洲港口的繁中HD實拍，共十一張；既有九張原PNG及逐圖來源保持。其他圖像、特殊游標、完整五語文字、動畫與全量HD未完成，尚未收進目前發行版。",
-    "R77新增繁中勞動與經濟報告實拍，共十三張；八種報告背景已驗，既有十一張PNG與逐圖來源保持。其他圖像、完整五語文字、特殊游標、動畫及全量HD未完成，尚未收進目前發行版。"
+    "R77新增繁中勞動與經濟報告實拍，共十三張；八種報告背景已驗，既有十一張PNG與逐圖來源保持。其他圖像、完整五語文字、特殊游標、動畫及全量HD未完成，尚未收進目前發行版。",
+    "R78新增國會室內與繁中計分實拍，共十五張；人物前景保留原版，本批九個室內HD點同一姿態。載入選單仍為原版背景，其他圖像、人物動畫、完整五語文字及全量HD未完成，尚未收進目前發行版。"
   ],
   "previous_build": {
     "kind": "README actual development screenshots",
@@ -411,9 +470,9 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "新增勞動與經濟報告採R77／0bce890與132張素材，直接取正式程式的實際呈現並逐byte匹配X11遊戲區。十一張既有PNG及逐圖程式commit、二進位指紋、當批素材數與限定驗收保持。四側收據沿producer舊檔名保存，範圍以實際R77命令與輸入SHA核對。",
-  "graphics_manifest_sha256": "e3ff9d59ae66aa2bfe643d8c208c49367de97888704173b66d6230df2fc2b636",
-  "conformance_sha256": "553827bbd2636765fa7d5be57a814bcaf7829911efba4de26ed7e950505e5028",
+  "provenance_scope": "新增國會室內及計分頁採R78／d79ec56與134張原稿，直接複製正式程式呈現並逐byte匹配X11遊戲區。既有十三張PNG及逐圖程式commit、二進位指紋、當批素材數與限定驗收保持。",
+  "graphics_manifest_sha256": "f5d0fbebed17123932d129c006c488190864a1450036c9800f2edc78d09a0e00",
+  "conformance_sha256": "a1049affbd62d15ef7413cd9063e6f0dccb9aafbda199e5a4ee3238e1d38c2de",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -463,7 +522,7 @@
     "graphics_manifest_sha256": "c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7",
     "conformance_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5"
   },
-  "verification_build_sha256": "1caad44b80d5c7c6236da3574845a42048a60b195fa993fe97a756ca6cfc371d",
+  "verification_build_sha256": "97eff1330fc51926f1d73d977d9b495ac064998703a771e5474b15fc01ea0aba",
   "production_go_sources_equal_to_verified_build": true,
   "previous_scene_background_capture": {
     "code_commit": "dbfc95fc2b98654f9f4cf3d0abac946730bfbfce",
@@ -473,5 +532,14 @@
     "formal_hd_assets": 124,
     "graphics_manifest_sha256": "1dba5fd9a5bbf5a8c76861e56709525305857a9a77ae9c988b564119f636333c",
     "conformance_sha256": "1cac135ef4f39a48aeefbbd56ae2e166a79d069ad090768cb6fd16607e8f9e6e"
+  },
+  "previous_report_background_capture": {
+    "code_commit": "0bce890d3b7ea22a1870870548a3c5854f83bbab",
+    "binary_sha256": "e980becf7ff4c638f681426d73757fba6f79570690bf6fc46b9706cb6501b1ed",
+    "formal_binary_sha256": "e980becf7ff4c638f681426d73757fba6f79570690bf6fc46b9706cb6501b1ed",
+    "source_build_sha256": "1caad44b80d5c7c6236da3574845a42048a60b195fa993fe97a756ca6cfc371d",
+    "formal_hd_assets": 132,
+    "graphics_manifest_sha256": "e3ff9d59ae66aa2bfe643d8c208c49367de97888704173b66d6230df2fc2b636",
+    "conformance_sha256": "553827bbd2636765fa7d5be57a814bcaf7829911efba4de26ed7e950505e5028"
   }
 }

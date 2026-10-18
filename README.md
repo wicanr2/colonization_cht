@@ -94,6 +94,14 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 
 經濟報告：商品、數值與圖表顯示在 HD 紙質背景上，翻頁與關閉保持原版操作。其他背景與動畫持續驗證。
 
+![國會室內與 HD 廳堂背景](docs/screenshots/hd-congress-room-zh.png)
+
+國會室內：廳堂、欄杆與地板已重繪，前景人物保留原版。人物 HD 與動畫仍待完成。
+
+![繁體中文計分頁與 HD 木紋背景](docs/screenshots/hd-score-zh.png)
+
+計分頁：木紋背景已重繪，圖示位置、分數與操作沿原版。載入選單仍保留原版背景。
+
 ![繁體中文世界畫面與 HD 海洋、地形](docs/screenshots/hd-world-zh.png)
 
 世界畫面：海洋、部分河岸與森林地形、側欄圖示、頂端與側欄木紋已使用 HD 素材，其餘地形與單位逐項接續。
