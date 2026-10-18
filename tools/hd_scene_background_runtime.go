@@ -14,6 +14,7 @@ import (
 
 // 規格069 R76／R77 READY：來源、解碼畫布與原圖固定，所有狀態只供顯示。
 type hdSceneDefinition struct {
+	allowPictureCursorProof                                   bool
 	id, offset, height                                        int
 	canvas, alternateCanvas                                   uint32
 	file, originalSHA, nativeSHA, asset, assetSHA, paletteSHA string
@@ -125,7 +126,7 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 		}
 		p.frames = append(p.frames, f)
 	}
-	if len(p.frames) != 12 {
+	if len(p.frames) != 23 {
 		return nil, fmt.Errorf("scene source group")
 	}
 	h.m.WatchWrite(0, 0xaffff, func(_ *golem.Machine, a uint32, o, v byte) { p.memoryWrite(a, o, v) })
@@ -404,6 +405,8 @@ func (p *hdSceneRuntime) paintBackground(out *image.RGBA, f draftNativeFrame, po
 	return true
 }
 
+var hdSceneVGAByteCode = []byte{0xa4, 0xe2, 0xec, 0xeb, 0xd8, 0xd1, 0xee, 0x73, 0x04, 0x81, 0xf6, 0x00, 0xb4, 0x81, 0xfe, 0x00}
+
 var hdSceneVGACopyCode = []byte{0xf3, 0xa5, 3, 0xf3, 0x79, 0x0c, 0x81, 0xee, 0, 0x80, 0x8c, 0xd9, 0x81, 0xc1, 0, 8}
 
 // 規格069 R79 READY：主畫布送出後的寫入不能改變已顯示來源。
@@ -449,7 +452,9 @@ func (p *hdSceneRuntime) publish(a uint32, oldValue, value byte) {
 		clear(p.published[:])
 		clear(p.publishedPending)
 	}
-	if cs == 0xe21 && ip == 0x91 && c.Seg[golem.ES] == 0xa000 && pc >= 0 && pc+len(hdSceneVGACopyCode) <= len(m.Mem) && bytes.Equal(m.Mem[pc:pc+len(hdSceneVGACopyCode)], hdSceneVGACopyCode) {
+	knownWord := cs == 0xe21 && ip == 0x91 && delta >= 0 && delta < 2 && pc >= 0 && pc+16 <= len(m.Mem) && bytes.Equal(m.Mem[pc:pc+16], hdSceneVGACopyCode)
+	knownByte := cs == 0xe2d && ip == 0xaa && delta == 0 && pc >= 0 && pc+16 <= len(m.Mem) && bytes.Equal(m.Mem[pc:pc+16], hdSceneVGAByteCode)
+	if (knownWord || knownByte) && c.Seg[golem.ES] == 0xa000 {
 		src := int(c.Seg[golem.DS])*16 + int(c.R[golem.SI]) + delta
 		if delta >= 0 && delta < 2 && int(c.R[golem.SI])+delta < 65536 && int(c.R[golem.DI])+delta < 64000 && src == int(hdBuildingCanvas)+at && src < len(m.Mem) && m.Mem[src] == value {
 			cell := p.visible[at]
@@ -475,8 +480,10 @@ func (p *hdSceneRuntime) paintPublished(out *image.RGBA, f draftNativeFrame) map
 		r["reason"] = "unverified-vga-surface"
 		return r
 	}
+	pictureOnlyCursor := p.pictureOnlyCursor(f)
+	r["picture_only_cursor"] = pictureOnlyCursor
 	_, reason := p.h.cursorProof(f)
-	if reason != "" && !strings.HasPrefix(reason, "outside-cursor:") {
+	if !pictureOnlyCursor && reason != "" && !strings.HasPrefix(reason, "outside-cursor:") {
 		r["reason"] = "unverified-cursor"
 		return r
 	}
@@ -490,7 +497,7 @@ func (p *hdSceneRuntime) paintPublished(out *image.RGBA, f draftNativeFrame) map
 	for at, c := range p.published {
 		frame, known := p.frame(c)
 		if !known || c.glyph || !palettes[int(c.slot)-1] || c.value != f.indexed[at] ||
-			frame.native[int(c.local)] != c.value || (image.Pt(at%320, at/320).In(f.cursor) && cursorSource[(at/320-f.cursor.Min.Y)*16+at%320-f.cursor.Min.X] != 255) {
+			frame.native[int(c.local)] != c.value || (!pictureOnlyCursor && image.Pt(at%320, at/320).In(f.cursor) && cursorSource[(at/320-f.cursor.Min.Y)*16+at%320-f.cursor.Min.X] != 255) {
 			continue
 		}
 		x, y := at%320*4, at/320*4
@@ -521,5 +528,28 @@ func (p *hdSceneRuntime) paintPublishedBackground(out *image.RGBA, f draftNative
 	x, y := pos%320*4, pos/320*4
 	sx, sy := int(c.local)%320*4, int(c.local)/320*4
 	draw.Draw(out, image.Rect(x, y, x+4, y+4), frame.art, image.Pt(sx, sy), draw.Src)
+	return true
+}
+
+// 規格069 R89 READY： every current VGA cell under the nominal cursor must retain
+// independently validated picture publication. An opaque cursor write revokes it.
+func (p *hdSceneRuntime) pictureOnlyCursor(f draftNativeFrame) bool {
+	if p == nil || p.blocked || len(f.indexed) != 64000 || f.cursor.Dx() != 16 || f.cursor.Dy() != 16 {
+		return false
+	}
+	r := f.cursor.Intersect(image.Rect(0, 0, 320, 200))
+	if r.Empty() {
+		return false
+	}
+	for y := r.Min.Y; y < r.Max.Y; y++ {
+		for x := r.Min.X; x < r.Max.X; x++ {
+			at := y*320 + x
+			c := p.published[at]
+			frame, known := p.frame(c)
+			if !known || !frame.allowPictureCursorProof || c.value != f.indexed[at] || (!c.glyph && frame.native[int(c.local)] != c.value) {
+				return false
+			}
+		}
+	}
 	return true
 }

@@ -114,6 +114,9 @@ func TestHDReportNative27(t *testing.T) {
 		masks := map[int][]byte{}
 		painted := map[int]int{}
 		for _, frame := range p.frames {
+			if frame.id == 1002 || (frame.id >= 1005 && frame.id <= 1014) {
+				continue
+			}
 			expected := hdNewGameRead(t, filepath.Join(model, fmt.Sprintf("point-%03d-source-%d-mask.bin", at, frame.id)))
 			if len(expected) != 64000 {
 				t.Fatal("來源遮罩長度")
@@ -160,6 +163,9 @@ func TestHDReportNative27(t *testing.T) {
 			}
 			expectedCells := map[int]*hdSceneFrame{}
 			for _, frame := range p.frames {
+				if frame.id == 1002 || (frame.id >= 1005 && frame.id <= 1014) {
+					continue
+				}
 				expectedMask := hdNewGameRead(t, filepath.Join(publishedModel, fmt.Sprintf("point-%03d-published-%d-mask.bin", at, frame.id)))
 				packed := make([]byte, 8000)
 				count := 0
@@ -205,6 +211,9 @@ func TestHDReportNative27(t *testing.T) {
 				opaqueCursor := image.Pt(x/4, y/4).In(f.cursor) && cursorIndex >= 0 && cursorIndex < 256 && m.Mem[0x1cd74+cursorIndex] != 255
 				if !opaqueCursor {
 					for _, frame := range p.frames {
+						if frame.id == 1002 || (frame.id >= 1005 && frame.id <= 1014) {
+							continue
+						}
 						if masks[frame.id][k] != 0 {
 							c := p.visible[k]
 							wantedPixel = frame.art.RGBAAt(int(c.local)%320*4+x%4, int(c.local)/320*4+y%4)
@@ -250,6 +259,9 @@ func TestHDReportNative27(t *testing.T) {
 		t.Fatal("完整終點RAM不同")
 	}
 	for _, frame := range p.frames {
+		if frame.id == 1002 || (frame.id >= 1005 && frame.id <= 1014) {
+			continue
+		}
 		want := map[int]uint64{120: 1, 1551: 2, 308: 1, 824: 0, 1442: 1, 1443: 1, 1444: 1, 1445: 1, 1446: 2, 1447: 2, 1448: 1, 1449: 1}[frame.id]
 		if frame.decoded != want {
 			t.Fatal("背景解碼次數", frame.id, frame.decoded)
@@ -633,4 +645,206 @@ func TestHDPublishedNative32(t *testing.T) {
 	raw, err := json.MarshalIndent(proof, "", "  ")
 	hdNewGameNeed(t, err)
 	hdNewGameNeed(t, os.WriteFile(filepath.Join(out, "check.json"), append(raw, '\n'), 0644))
+}
+
+// 規格069 R89 READY：實際原版來源的byte發布與無游標守門。
+
+func hdStoryFixtures(t *testing.T) (string, string, string) {
+	t.Helper()
+	game, root, assets := os.Getenv("TEST_GAME_ROOT"), os.Getenv("TEST_HD_STORY_ROOT"), os.Getenv("TEST_HD_ASSETS")
+	if game == "" || root == "" || assets == "" {
+		t.Skip("需要合法原版、國王／出航來源收據與HD素材")
+	}
+	for _, def := range hdSceneDefinitions {
+		if _, e := os.Stat(filepath.Join(game, def.file)); os.IsNotExist(e) {
+			t.Skip("缺合法原版", def.file)
+		}
+	}
+	return game, root, assets
+}
+func hdStorySnapshot(t *testing.T, at int) (*hdRuntime, *hdSceneRuntime, draftNativeFrame) {
+	t.Helper()
+	game, root, assets := hdStoryFixtures(t)
+	m := golem.New()
+	h := &hdRuntime{m: m}
+	p, e := loadHDSceneRuntime(h, game, assets)
+	hdNewGameNeed(t, e)
+	h.scenes = p
+	for _, frame := range p.frames {
+		if frame.id != 1002 && (frame.id < 1005 || frame.id > 1014) {
+			continue
+		}
+		raw := hdNewGameRead(t, fmt.Sprintf("/repo/workplace/reports/goal186-display-hd/hd-full-assets-r49/decoded-public-r3/pixels/%04d.idx", frame.id))
+		base := frame.canvas
+		if base == 0 {
+			base = 0x3c500
+		}
+		copy(m.Mem[base:base+64000], raw)
+		p.decodedAt(base, 0)
+	}
+	stem := fmt.Sprintf("point-%03d", at)
+	dir := filepath.Join(root, "nation-story-source-probe-r3/observed")
+	copy(m.Mem, hdNewGameRead(t, filepath.Join(dir, stem+".memory")))
+	clear(p.visible[:])
+	clear(p.published[:])
+	for _, pair := range []struct {
+		target *[64000]hdSceneCell
+		suffix string
+	}{{&p.visible, ".owners.json"}, {&p.published, ".published.json"}} {
+		var cells map[string][]any
+		hdNewGameNeed(t, json.Unmarshal(hdNewGameRead(t, filepath.Join(root, "nation-story-published-source-model-r4", stem+pair.suffix)), &cells))
+		for key, c := range cells {
+			pos, e := strconv.Atoi(key)
+			hdNewGameNeed(t, e)
+			slot := 0
+			for i, frame := range p.frames {
+				if frame.id == int(c[0].(float64)) {
+					slot = i + 1
+				}
+			}
+			if slot == 0 {
+				t.Fatal("source", c)
+			}
+			pair.target[pos] = hdSceneCell{slot: uint8(slot), local: uint16(c[1].(float64)), value: byte(c[2].(float64)), glyph: c[3].(string) == "glyph"}
+		}
+	}
+	var points []struct {
+		Mouse struct{ X, Y int } `json:"dos_mouse"`
+		Step  uint64             `json:"step"`
+	}
+	hdNewGameNeed(t, json.Unmarshal(hdNewGameRead(t, filepath.Join(root, "normal-nation-story-points-r1.json")), &points))
+	v := points[at]
+	f := draftNativeFrame{canvas: m.Mem[hdBuildingCanvas : hdBuildingCanvas+64000], indexed: hdNewGameRead(t, filepath.Join(dir, stem+".idx")), palette: hdNewGameRead(t, filepath.Join(dir, stem+".palette")), cursor: image.Rect(v.Mouse.X, v.Mouse.Y, v.Mouse.X+16, v.Mouse.Y+16), mode: 0x13, step: v.Step}
+	return h, p, f
+}
+func TestHDStoryPictureCursorGuards(t *testing.T) {
+	_, root, _ := hdStoryFixtures(t)
+	for _, name := range []string{"known", "missing-cell", "unknown-slot", "invalid-local", "wrong-value", "changed-indexed", "legacy-source", "same-value-write", "wrong-cursor", "short-indexed", "blocked", "glyph-underlay"} {
+		t.Run(name, func(t *testing.T) {
+			h, p, f := hdStorySnapshot(t, 8)
+			pos := f.cursor.Min.Y*320 + f.cursor.Min.X
+			if !p.pictureOnlyCursor(f) {
+				t.Fatal("positive proof missing")
+			}
+			_, reason := h.cursorProof(f)
+			if reason == "" {
+				t.Fatal("needs hidden cursor fixture")
+			}
+			switch name {
+			case "missing-cell":
+				p.published[pos] = hdSceneCell{}
+			case "unknown-slot":
+				p.published[pos].slot = 255
+			case "invalid-local":
+				p.published[pos].local = 65535
+			case "wrong-value":
+				p.published[pos].value ^= 1
+			case "changed-indexed":
+				f.indexed = bytes.Clone(f.indexed)
+				f.indexed[pos] ^= 1
+			case "legacy-source":
+				for _, frame := range p.frames {
+					frame.allowPictureCursorProof = false
+				}
+			case "same-value-write":
+				h.m.CPU.Seg[golem.CS] = 0x1000
+				h.m.CPU.IP = 0
+				h.m.Mem[0x10000] = 0xaa
+				h.m.CPU.Seg[golem.ES] = 0xa000
+				h.m.CPU.R[golem.DI] = uint16(pos)
+				h.m.CPU.R[golem.AX] = uint16(f.indexed[pos])
+				hdNewGameNeed(t, h.m.Step())
+			case "wrong-cursor":
+				f.cursor.Max.X--
+			case "short-indexed":
+				f.indexed = f.indexed[:63999]
+			case "blocked":
+				p.blocked = true
+			case "glyph-underlay":
+				p.published[pos].glyph = true
+			}
+			accepted := name == "known" || name == "glyph-underlay"
+			if p.pictureOnlyCursor(f) != accepted {
+				t.Fatal("picture cursor guard", name)
+			}
+			im := draftRGB(hdNewGameRead(t, filepath.Join(root, "nation-story-source-probe-r3/observed/point-008.idx")), f.palette)
+			before := bytes.Clone(im.Pix)
+			got := p.paintPublished(im, f)
+			if !accepted && (got["painted"] != 0 || !bytes.Equal(before, im.Pix)) {
+				t.Fatal("unknown cursor painted", name, got)
+			}
+			if accepted && got["painted"] == 0 {
+				t.Fatal("positive not painted", name)
+			}
+		})
+	}
+}
+func TestHDStoryBytePublication(t *testing.T) {
+	game, _, assets := hdStoryFixtures(t)
+	for _, name := range []string{"known", "wrong-code", "wrong-CS", "wrong-IP", "wrong-ES", "wrong-DS", "changed-source", "missing-owner", "wrong-owner-value", "same-value-revoke", "post-main-write", "word-second-byte"} {
+		t.Run(name, func(t *testing.T) {
+			m := golem.New()
+			h := &hdRuntime{m: m}
+			p, e := loadHDSceneRuntime(h, game, assets)
+			hdNewGameNeed(t, e)
+			raw := hdNewGameRead(t, "/repo/workplace/reports/goal186-display-hd/hd-full-assets-r49/decoded-public-r3/pixels/1005.idx")
+			copy(m.Mem[hdBuildingCanvas:hdBuildingCanvas+64000], raw)
+			p.decodedAt(hdBuildingCanvas, 0)
+			pos := 40000
+			m.CPU.Seg[golem.CS] = 0xe2d
+			m.CPU.IP = 0xaa
+			m.CPU.Seg[golem.DS] = 0x2cae
+			m.CPU.Seg[golem.ES] = 0xa000
+			m.CPU.R[golem.SI] = uint16(pos)
+			m.CPU.R[golem.DI] = uint16(pos)
+			m.CPU.Flags &^= 0x400
+			copy(m.Mem[0xe2d0+0xaa:], hdSceneVGAByteCode)
+			switch name {
+			case "wrong-code":
+				m.Mem[0xe2d0+0xaa+15] ^= 1
+			case "wrong-CS":
+				m.CPU.Seg[golem.CS]++
+				copy(m.Mem[0xe2e0+0xaa:], hdSceneVGAByteCode)
+			case "wrong-IP":
+				m.CPU.IP++
+				copy(m.Mem[0xe2d0+0xab:], hdSceneVGAByteCode)
+			case "wrong-ES":
+				m.CPU.Seg[golem.ES]++
+			case "wrong-DS":
+				m.CPU.Seg[golem.DS]++
+			case "changed-source":
+				m.Mem[hdBuildingCanvas+uint32(pos)] ^= 1
+			case "missing-owner":
+				p.visible[pos] = hdSceneCell{}
+			case "wrong-owner-value":
+				p.visible[pos].value ^= 1
+			case "word-second-byte":
+				m.Mem[0xe2d0+0xaa] = 0xa5
+			}
+			hdNewGameNeed(t, m.Step())
+			accepted := name == "known" || name == "same-value-revoke" || name == "post-main-write"
+			if (p.published[pos].slot != 0) != accepted {
+				t.Fatal("byte publication", name, p.published[pos])
+			}
+			if name == "same-value-revoke" || name == "post-main-write" {
+				previous := p.published[pos]
+				m.CPU.Seg[golem.CS] = 0x1000
+				m.CPU.IP = 0
+				m.Mem[0x10000] = 0xaa
+				m.CPU.Seg[golem.ES] = 0xa000
+				if name == "post-main-write" {
+					m.CPU.Seg[golem.ES] = 0x2cae
+				}
+				m.CPU.R[golem.DI] = uint16(pos)
+				m.CPU.R[golem.AX] = uint16(raw[pos])
+				hdNewGameNeed(t, m.Step())
+				if name == "same-value-revoke" && p.published[pos].slot != 0 {
+					t.Fatal("same value kept")
+				}
+				if name == "post-main-write" && (p.published[pos] != previous || p.visible[pos].slot != 0) {
+					t.Fatal("main polluted")
+				}
+			}
+		})
+	}
 }

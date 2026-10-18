@@ -1,12 +1,12 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-19",
-  "code_commit": "f8e91288a2bb4e97a45f2c35493571fe93dfdd41",
-  "binary_sha256": "f4c4472b8f0eba3f8574f079cbb991c3f54d683eb8c0ca9ef49c81fae19261c3",
-  "formal_binary_sha256": "f4c4472b8f0eba3f8574f079cbb991c3f54d683eb8c0ca9ef49c81fae19261c3",
-  "source_build_sha256": "9fec81fafc18e6d5beccef63f095319dfc9d47d7bc168b6929c7da762354639d",
+  "code_commit": "9ef4f77146a43700efb2a526d1140dc00ffe88ef",
+  "binary_sha256": "1ca623fbde7e0c15a004e105b5bba70d5d63d18b8c23a55a5772980714a1c3ff",
+  "formal_binary_sha256": "1ca623fbde7e0c15a004e105b5bba70d5d63d18b8c23a55a5772980714a1c3ff",
+  "source_build_sha256": "87742cce3a9c6ee8316f577fb0e4fcb400858d249818cc0802938a2673ec5ad6",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 184,
+  "formal_hd_assets": 206,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -513,7 +513,7 @@
     },
     {
       "file": "hd-opening-zh.png",
-      "sha256": "77b54e6b88214cf76c791d7ccb352e86ae0e52043543fb47750accc1ef132c0a",
+      "sha256": "07896f4f0ecaa364d922a7e84311bb64ae23ba8d8adb45609744b8f3398acaa5",
       "size": [
         1280,
         800
@@ -521,52 +521,37 @@
       "scene": "opening",
       "language": "zh-Hant",
       "graphics": "hd",
-      "step": 122800000,
-      "code_commit": "f8e91288a2bb4e97a45f2c35493571fe93dfdd41",
-      "binary_sha256": "f4c4472b8f0eba3f8574f079cbb991c3f54d683eb8c0ca9ef49c81fae19261c3",
-      "formal_binary_sha256": "f4c4472b8f0eba3f8574f079cbb991c3f54d683eb8c0ca9ef49c81fae19261c3",
-      "formal_hd_assets": 184,
-      "source_receipt": "workplace/reports/goal186-display-hd/hd-opening-wind-smoke-r86/r86-wind-formal-gui-r1/gui.display-094.png",
-      "source_gui_check_sha256": "0aef3130e776c5c769f2883ea5036576ad69c6d9b1b28e40682624e545b70c37",
-      "source_gui_build_sha256": "9fec81fafc18e6d5beccef63f095319dfc9d47d7bc168b6929c7da762354639d",
-      "source_pixel_check_sha256": "e8461db6cd0318a0d95d75159f77fc6acbf684bb22780ec44b64384ef813b599",
-      "source_state_check_sha256": "996b7c2211ba721eb9b70b69fe6efd27d53d08ae07d809d4ad61a8dae0ecd0c9",
-      "graphics_manifest_sha256": "ffccf30200bd18a49869360222a98f0237ca8fd014711bafcf5f866c7d4618ce",
-      "ready_sha256": "10001a1dc561d63913ba159ca4a56054ae3d27b56d8228a58249526eccdf0f73",
-      "verification_state": "CONFORMED: scoped R86 wind10/smoke11 normal GUI63 and actual three replay state/audio/save passed",
+      "step": 329600000,
+      "code_commit": "9ef4f77146a43700efb2a526d1140dc00ffe88ef",
+      "binary_sha256": "1ca623fbde7e0c15a004e105b5bba70d5d63d18b8c23a55a5772980714a1c3ff",
+      "formal_binary_sha256": "1ca623fbde7e0c15a004e105b5bba70d5d63d18b8c23a55a5772980714a1c3ff",
+      "formal_hd_assets": 206,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-opening-fish-animation-r87/r87-fish-formal-gui-r2/gui.display-082.png",
+      "source_gui_check_sha256": "fb2ebb70f732c18cf46d1eca2abbdf6af79f1c254be321a36232a6dfa28070ad",
+      "source_gui_build_sha256": "87742cce3a9c6ee8316f577fb0e4fcb400858d249818cc0802938a2673ec5ad6",
+      "source_pixel_check_sha256": "8be34d63fc3e26add767ed1f5e540a7f23e181ba88da3bc29204bd40a520d58f",
+      "source_state_check_sha256": "da0527c23c39e38d1493c24f4c15c33ab698dc86860bc345f82619bc8bc25b9f",
+      "graphics_manifest_sha256": "eb7f70da2fb48e5d508a9a5184108ad1996bd5617fca1da38dd9e2119771ce34",
+      "ready_sha256": "c8989497a2d4cf314ff8731ea33ccad9d23db2e5eaf108a2a2c0585dcc26e1d5",
+      "verification_state": "CONFORMED: scoped R87 fish21, normal GUI42, independent full RGBA/X11 and all three actual replay state/audio/save passed",
       "source_kind": "actual formal game presentation; verified byte-for-byte against the real X11 window game area",
       "capture_pixels_unchanged": true,
       "original_source_files": [
         "OPENING.PIK",
         "OPENBORD.PIK",
-        "OPENSHIP.SS",
-        "OPENSUN.SS",
-        "OPENWND1.SS"
+        "OPENMON1.SS"
       ],
       "source_research_ids": [
         1092,
         1179,
-        1256,
-        1258,
-        1266
+        1196
       ],
-      "opening_border_cells": 11200,
-      "opening_map_cells": 41543,
-      "opening_ship_cells": 512,
-      "opening_sun_cells": 12,
-      "opening_wind_cells": 173,
-      "opening_smoke_cells": 0,
-      "captured_sun_frames": [
-        0
-      ],
-      "captured_wind_frames": [
-        0
-      ],
-      "captured_smoke_frames": [],
-      "verified_mouse_background_cells": 160,
-      "scope": "正式正常繁中模式開場吹氣雲第0幀；本狀態來源、完整RGBA及X11已驗。完整風煙21幀與當次三側原版狀態／WAV／存檔已限定CONFORMED。其他SS、淡入淡出與全量HD未完成。",
-      "conformance_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
-      "replay_check_sha256": "d8e50e80069ca56917a74541ddfb65ad05f987408cb2b2fb1de44b36877e2eaf"
+      "source_research_id_scope": "primary background and complete fish pose; other verified opening sources are in the pixel report",
+      "captured_fish_pose_id": 1196,
+      "captured_fish_ordinal": 14,
+      "scope": "正式繁中模式開場魚形第14幀；目前完整RGBA及X11已驗。二十一魚形與當次三側原版狀態、WAV及存檔已限定CONFORMED。其餘圖像、完整五語、影片與全量HD尚未完成。",
+      "conformance_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+      "replay_check_sha256": "6dfd962fcd802972254554a28474695fae8f32722bb0f9694d091ede51dbde2b"
     }
   ],
   "limitations": [
@@ -589,7 +574,8 @@
     "R82新增開場長圖與邊框實拍，共十八張；原版移動船及其他未知前景保留。13張生成原PNG與既有134張原稿已入graphics，其他圖像、動畫、完整五語及新版交付仍未完成。",
     "R83刷新開場實拍，加入已驗船隻八幀；R82當時移動船保留原圖的限制作歷史紀錄。共十八張，其他十七張及逐圖來源保持。其他SS、淡入淡出、其他圖像、完整五語、影片與新版交付仍未完成。",
     "R86刷新正常繁中模式的吹氣雲第0幀實拍，PNG直接複製未重編碼；63項正常GUI的原版來源、完整RGBA／X11及17個Noto欄位已驗。三側完整重播尚待收齊，維持READY；其他十七張與逐圖來源保持，其他圖像、完整五語與全量HD未完成。",
-    "R86當次三側完整重播已收齊並限定CONFORMED，取代前項READY限制；PNG及原始捕捉程式指紋不變。R87魚形接線不混入此圖驗收。"
+    "R86當次三側完整重播已收齊並限定CONFORMED，取代前項READY限制；PNG及原始捕捉程式指紋不變。R87魚形接線不混入此圖驗收。",
+    "R87開場圖更新為魚形第14幀實拍；二十一魚形限定CONFORMED，其他十七張及各自來源保持。R89十一背景尚未用於README截圖。"
   ],
   "previous_build": {
     "kind": "README actual development screenshots",
@@ -602,8 +588,8 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "Mixed historical captures with per-entry source receipts. The current opening capture uses the R86 READY cloud/smoke build and has exact normal GUI source/X11/RGBA verification; three-replay review is pending. Other17 captures and their original proof scopes are unchanged.",
-  "graphics_manifest_sha256": "ffccf30200bd18a49869360222a98f0237ca8fd014711bafcf5f866c7d4618ce",
+  "provenance_scope": "Latest opening capture uses the frozen 9ef4 R87 formal build and 206 PNGs; current repo R89 development assets and code are not claimed as its capture build. The other seventeen PNGs and metadata are unchanged.",
+  "graphics_manifest_sha256": "eb7f70da2fb48e5d508a9a5184108ad1996bd5617fca1da38dd9e2119771ce34",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -653,7 +639,7 @@
     "graphics_manifest_sha256": "c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7",
     "conformance_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5"
   },
-  "verification_build_sha256": "9fec81fafc18e6d5beccef63f095319dfc9d47d7bc168b6929c7da762354639d",
+  "verification_build_sha256": "87742cce3a9c6ee8316f577fb0e4fcb400858d249818cc0802938a2673ec5ad6",
   "production_go_sources_equal_to_verified_build": true,
   "previous_scene_background_capture": {
     "code_commit": "dbfc95fc2b98654f9f4cf3d0abac946730bfbfce",
@@ -795,7 +781,7 @@
     },
     "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb"
   },
-  "conformance_state": "CONFORMED for the captured R86 opening wind/smoke scope; subsequent R87 fish and full HD remain incomplete",
+  "conformance_state": "R87 fish21 scoped CONFORMED; other captures retain their individual verified scope",
   "previous_opening_sun_capture": {
     "capture": {
       "file": "hd-opening-zh.png",
@@ -851,5 +837,62 @@
     "code_commit": "4b4aaf0d09925e4e9e02fb742d0ea9b01ccfbd5f",
     "binary_sha256": "c414ba2ae7b6c078344685cac54ab4aa08118040fb83614ea0146d964180e084",
     "conformance_sha256": "b3cd83f8d9e588dcec995179856e2070735e460e94ef3c5a5f4296c7457e90a1"
+  },
+  "previous_opening_wind_capture": {
+    "file": "hd-opening-zh.png",
+    "sha256": "77b54e6b88214cf76c791d7ccb352e86ae0e52043543fb47750accc1ef132c0a",
+    "size": [
+      1280,
+      800
+    ],
+    "scene": "opening",
+    "language": "zh-Hant",
+    "graphics": "hd",
+    "step": 122800000,
+    "code_commit": "f8e91288a2bb4e97a45f2c35493571fe93dfdd41",
+    "binary_sha256": "f4c4472b8f0eba3f8574f079cbb991c3f54d683eb8c0ca9ef49c81fae19261c3",
+    "formal_binary_sha256": "f4c4472b8f0eba3f8574f079cbb991c3f54d683eb8c0ca9ef49c81fae19261c3",
+    "formal_hd_assets": 184,
+    "source_receipt": "workplace/reports/goal186-display-hd/hd-opening-wind-smoke-r86/r86-wind-formal-gui-r1/gui.display-094.png",
+    "source_gui_check_sha256": "0aef3130e776c5c769f2883ea5036576ad69c6d9b1b28e40682624e545b70c37",
+    "source_gui_build_sha256": "9fec81fafc18e6d5beccef63f095319dfc9d47d7bc168b6929c7da762354639d",
+    "source_pixel_check_sha256": "e8461db6cd0318a0d95d75159f77fc6acbf684bb22780ec44b64384ef813b599",
+    "source_state_check_sha256": "996b7c2211ba721eb9b70b69fe6efd27d53d08ae07d809d4ad61a8dae0ecd0c9",
+    "graphics_manifest_sha256": "ffccf30200bd18a49869360222a98f0237ca8fd014711bafcf5f866c7d4618ce",
+    "ready_sha256": "10001a1dc561d63913ba159ca4a56054ae3d27b56d8228a58249526eccdf0f73",
+    "verification_state": "CONFORMED: scoped R86 wind10/smoke11 normal GUI63 and actual three replay state/audio/save passed",
+    "source_kind": "actual formal game presentation; verified byte-for-byte against the real X11 window game area",
+    "capture_pixels_unchanged": true,
+    "original_source_files": [
+      "OPENING.PIK",
+      "OPENBORD.PIK",
+      "OPENSHIP.SS",
+      "OPENSUN.SS",
+      "OPENWND1.SS"
+    ],
+    "source_research_ids": [
+      1092,
+      1179,
+      1256,
+      1258,
+      1266
+    ],
+    "opening_border_cells": 11200,
+    "opening_map_cells": 41543,
+    "opening_ship_cells": 512,
+    "opening_sun_cells": 12,
+    "opening_wind_cells": 173,
+    "opening_smoke_cells": 0,
+    "captured_sun_frames": [
+      0
+    ],
+    "captured_wind_frames": [
+      0
+    ],
+    "captured_smoke_frames": [],
+    "verified_mouse_background_cells": 160,
+    "scope": "正式正常繁中模式開場吹氣雲第0幀；本狀態來源、完整RGBA及X11已驗。完整風煙21幀與當次三側原版狀態／WAV／存檔已限定CONFORMED。其他SS、淡入淡出與全量HD未完成。",
+    "conformance_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+    "replay_check_sha256": "d8e50e80069ca56917a74541ddfb65ad05f987408cb2b2fb1de44b36877e2eaf"
   }
 }

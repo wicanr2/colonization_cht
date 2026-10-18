@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "ffccf30200bd18a49869360222a98f0237ca8fd014711bafcf5f866c7d4618ce",
+  "formal_manifest_sha256": "eb7f70da2fb48e5d508a9a5184108ad1996bd5617fca1da38dd9e2119771ce34",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -41330,7 +41330,8 @@
         "opening-volcano-000.png",
         "opening-wind-000.png",
         "opening-mermaid-000.png",
-        "opening-sun-base-000.png"
+        "opening-sun-base-000.png",
+        "opening-fish-clear-000.png"
       ],
       "source_contract_reference": {
         "state": "CONFORMED",
@@ -41352,6 +41353,13 @@
         "formal_connected": true,
         "review_sha256": "b3cd83f8d9e588dcec995179856e2070735e460e94ef3c5a5f4296c7457e90a1",
         "scope": "seven OPENSUN frames and closed PIK eye base; native timing, position and verified full source before visible clipping; original publication and mouse restoration only"
+      },
+      "fish_object_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
       }
     },
     {
@@ -41442,9 +41450,18 @@
       "indexed_sha256": "34557722c9da0c107e108d93249474e80305c5e987ee45c622293d8e2539e93e",
       "opaque_pixels": 307,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon1-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1183,
@@ -41467,9 +41484,18 @@
       "indexed_sha256": "6ce693890fc4e5f159c0c5dd6c2295c4e0fe7842a97b29bc428ffc7a08272a99",
       "opaque_pixels": 327,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon1-001.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1184,
@@ -41492,9 +41518,18 @@
       "indexed_sha256": "d262fc19e0f734cca82304b3e18803409339f8478d1e3e7020857c9f5c59bae9",
       "opaque_pixels": 323,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon1-002.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1185,
@@ -41517,9 +41552,18 @@
       "indexed_sha256": "d262fc19e0f734cca82304b3e18803409339f8478d1e3e7020857c9f5c59bae9",
       "opaque_pixels": 323,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon1-003.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1186,
@@ -41542,9 +41586,18 @@
       "indexed_sha256": "6ce693890fc4e5f159c0c5dd6c2295c4e0fe7842a97b29bc428ffc7a08272a99",
       "opaque_pixels": 327,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon1-004.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1187,
@@ -41567,9 +41620,18 @@
       "indexed_sha256": "562b03cc802fc90e654e02af2d2eacc274aedc928f2bd8606cf27d1af884a049",
       "opaque_pixels": 501,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon1-005.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1188,
@@ -41592,9 +41654,18 @@
       "indexed_sha256": "83ce629fb541804f9e6f0e5dfc5b48b573bb75a2364f7c24be6a70d6e9a74125",
       "opaque_pixels": 519,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon1-006.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1189,
@@ -41617,9 +41688,18 @@
       "indexed_sha256": "dcb4eeb0ad0705efecced46d362cccc1662621f1e9e6b5ddd5bfa97b9e75c31b",
       "opaque_pixels": 540,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon1-007.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1190,
@@ -41642,9 +41722,18 @@
       "indexed_sha256": "2e9d15095af3f3a00bf8596054e6d4a2a8ad35c0e92d2db08aa09ea6cc22d0ce",
       "opaque_pixels": 572,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon1-008.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1191,
@@ -41667,9 +41756,18 @@
       "indexed_sha256": "09cd68e36fd4b3ef03e955804ab9111e1cd828896978e0e135949734111c4be0",
       "opaque_pixels": 565,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon1-009.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1192,
@@ -41692,9 +41790,18 @@
       "indexed_sha256": "5e19e41e23507520514a760a1836e555d8f7daeb081cf595a484fbf3ae506a9a",
       "opaque_pixels": 567,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon1-010.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1193,
@@ -41717,9 +41824,18 @@
       "indexed_sha256": "c07a0a95f36b943aa80d45d535d47fef5d17a284e9b3c70a7e0a5448196744ec",
       "opaque_pixels": 530,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon1-011.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1194,
@@ -41742,9 +41858,18 @@
       "indexed_sha256": "5442ebf73b8c019670585d9c002816744b2bf8b2ffb7d16ccb156092629beb3c",
       "opaque_pixels": 562,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon1-012.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1195,
@@ -41767,9 +41892,18 @@
       "indexed_sha256": "e274500e3a19253c9eb061a2804c90f04224bad627d23138cacdbf20ad8c55b5",
       "opaque_pixels": 256,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon1-013.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1196,
@@ -41792,9 +41926,18 @@
       "indexed_sha256": "60c7867963596c70ea4d397ea1d0e5f05b8ac33bf0b0ab6fd32033916feb5e8b",
       "opaque_pixels": 258,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon1-014.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1197,
@@ -41817,9 +41960,18 @@
       "indexed_sha256": "2e019460ac044fcb51afd358c958a1ec8cfdc1790f39fc07e64cda87538fc119",
       "opaque_pixels": 481,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon2-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1198,
@@ -41842,9 +41994,18 @@
       "indexed_sha256": "6e187b8cea036ac6d07df479a814770bf515018e2f8c5f6f25938f0ce8d18496",
       "opaque_pixels": 525,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon2-001.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1199,
@@ -41867,9 +42028,18 @@
       "indexed_sha256": "8297b54e836c2aaba92e84157d6e66075ca2dc6497026ba8cc2dcdb4992c0d26",
       "opaque_pixels": 544,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon2-002.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1200,
@@ -41892,9 +42062,18 @@
       "indexed_sha256": "1a349ea36ec012855b7cb55c43e5db44502088e3d5444113fc8bc6d887d1fcc1",
       "opaque_pixels": 576,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon2-003.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1201,
@@ -41917,9 +42096,18 @@
       "indexed_sha256": "ee2ee143d0d4b108c17d14b105e902aad5572b74905a47a29dcd0a949e5f551d",
       "opaque_pixels": 581,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon2-004.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1202,
@@ -41942,9 +42130,18 @@
       "indexed_sha256": "05b9ac153358c15794d0c3adea8a51360c9141c7b753002b0ebc47c4b02a9d9d",
       "opaque_pixels": 565,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original",
+      "animation_evidence": "confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained",
+      "formal_assets": [
+        "openmon2-005.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+        "scope": "21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained"
+      }
     },
     {
       "research_id": 1203,
@@ -60030,6 +60227,227 @@
       "source_encoded_sha256": "5f0aa4c1dc7c66ae1776456f636de968df5c27bd830794e7c6d97318e6ab8ecf",
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon1-000.png",
+      "asset_sha256": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+      "source_research_id": 1182,
+      "source_file": "OPENMON1.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "ae37f690afbf069b6a8f1eb6d2dc6faca614e718ef8e9be28378d706a948f8f8",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon1-001.png",
+      "asset_sha256": "c3a11ea6464b0b8e6bc7525f4e2cac990d84d8412a09d7bf29ba6d25f4beb337",
+      "source_research_id": 1183,
+      "source_file": "OPENMON1.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "a4fe567583d7d40fa0c0df157b53dc712893899f456bfdfcc2726abe8c36f900",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon1-002.png",
+      "asset_sha256": "c0abf16e75a15203b0a7bd9b206605bb0141af36ed4b6619aabedd17f2cf61eb",
+      "source_research_id": 1184,
+      "source_file": "OPENMON1.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "b482ac1bd84c03ea02e0e3c56dc223f93823e3bd95c5a44e336021ea9e8fdad5",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon1-003.png",
+      "asset_sha256": "c0abf16e75a15203b0a7bd9b206605bb0141af36ed4b6619aabedd17f2cf61eb",
+      "source_research_id": 1185,
+      "source_file": "OPENMON1.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "b482ac1bd84c03ea02e0e3c56dc223f93823e3bd95c5a44e336021ea9e8fdad5",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon1-004.png",
+      "asset_sha256": "c3a11ea6464b0b8e6bc7525f4e2cac990d84d8412a09d7bf29ba6d25f4beb337",
+      "source_research_id": 1186,
+      "source_file": "OPENMON1.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "a4fe567583d7d40fa0c0df157b53dc712893899f456bfdfcc2726abe8c36f900",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon1-005.png",
+      "asset_sha256": "8a7e4987b6311cb92e759a0039f33dab525fd28dfc8bb5f4b466f5441bb7349f",
+      "source_research_id": 1187,
+      "source_file": "OPENMON1.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "bdd4c5822d47d1f6f2327bf5c8636b01784650bf6492f69a757042396e2ecb8c",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon1-006.png",
+      "asset_sha256": "fda0184b21d1d2a7121a4df161930dc8be9cdacb64ee7fca01236edfeb815993",
+      "source_research_id": 1188,
+      "source_file": "OPENMON1.SS",
+      "source_ordinal": 6,
+      "source_encoded_sha256": "3219f45ba8276e64a5b0ce5aa946d4daa41566ebdb39c77c51eb3f5f9e3a2372",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon1-007.png",
+      "asset_sha256": "f31fde8d6f5001b60c9d3739dc25e444f43bcdd0fbaea755c2a3f7aeb398dd70",
+      "source_research_id": 1189,
+      "source_file": "OPENMON1.SS",
+      "source_ordinal": 7,
+      "source_encoded_sha256": "f3ac0eb93d05c1c432e0760db0d06fa26b96dc6d57e283df030fa61d58714e0c",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon1-008.png",
+      "asset_sha256": "6e58348513ac0b23763ad4c4eeacff38ae71d7c17aeb3262a00c2f6d063de9db",
+      "source_research_id": 1190,
+      "source_file": "OPENMON1.SS",
+      "source_ordinal": 8,
+      "source_encoded_sha256": "c421b4b189dc5ab2f03521a774bef419398b840d63c6e2329d26b5e696020480",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon1-009.png",
+      "asset_sha256": "3e1e9e69ef9b1e5316dc675cecf6f12763419ccc6e03701f5ff5040abcbcec44",
+      "source_research_id": 1191,
+      "source_file": "OPENMON1.SS",
+      "source_ordinal": 9,
+      "source_encoded_sha256": "b8a69ed1b4e7d4fa2a66f7670eeae163787135f979e411139fb81678ad2963eb",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon1-010.png",
+      "asset_sha256": "74047eec81fd866e8b0e86172802f956502f6c3964904d904a519e2fee89aaa3",
+      "source_research_id": 1192,
+      "source_file": "OPENMON1.SS",
+      "source_ordinal": 10,
+      "source_encoded_sha256": "d65b183a039284af24215d488c12c83a869782cb2974baa084cdce818320996d",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon1-011.png",
+      "asset_sha256": "2fa3f725f40c5605631747506482fcdf4f916e4520623e170f91000f12794fa2",
+      "source_research_id": 1193,
+      "source_file": "OPENMON1.SS",
+      "source_ordinal": 11,
+      "source_encoded_sha256": "f5bb9d3494aa85c7b0e7782f6318f73c742c13c3517655ad7881adcdf5f3b7e0",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon1-012.png",
+      "asset_sha256": "6d405f7fc0520592090e68c6e77bf9474d16c0b77adaa5ba66c201d60de76d00",
+      "source_research_id": 1194,
+      "source_file": "OPENMON1.SS",
+      "source_ordinal": 12,
+      "source_encoded_sha256": "fde58cd6969598c5de76029d375d3ab4c42612303ac87eb71e5c44f9a4fb8358",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon1-013.png",
+      "asset_sha256": "4cda4b2c1d0c7c1c7b856fca859a012851fb989e8256cb6422ac65b980cadd46",
+      "source_research_id": 1195,
+      "source_file": "OPENMON1.SS",
+      "source_ordinal": 13,
+      "source_encoded_sha256": "e09442cbab47941e1e299022eb6e4ef623e57e7dedd8be5283a521c682e2ef46",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon1-014.png",
+      "asset_sha256": "a19437e2265404a4decc585023d5a4249f9f516c1b682d49873bf1031d24d9c9",
+      "source_research_id": 1196,
+      "source_file": "OPENMON1.SS",
+      "source_ordinal": 14,
+      "source_encoded_sha256": "123a2a4e49e07b1414e8d5cddb6b4f4599cf0e5a4e572b64e0ca5a64f6c5fa3d",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon2-000.png",
+      "asset_sha256": "4df21248859a401ef388740f6089a102f9c5184a2532ba39cd3ddf18f8364d02",
+      "source_research_id": 1197,
+      "source_file": "OPENMON2.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "317e62a24993cfe844dfb02af6c672578b3c41f013dbc003d03159034e77def4",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon2-001.png",
+      "asset_sha256": "aa6f665b8a66e3374fc9b01043d7cd534f2864f3a99e30b007f4590d0f9f568a",
+      "source_research_id": 1198,
+      "source_file": "OPENMON2.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "174d02934e808f6a6ca765ec15c881172d08fea127cadd767551e79760d949f1",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon2-002.png",
+      "asset_sha256": "5c4079882c28e4603d227184043b6f863b52c9be2b8c127fff72c8061eb505f2",
+      "source_research_id": 1199,
+      "source_file": "OPENMON2.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "f1e8c20630cfda52f24a5ff87c8e43646f757f643394615a17e23c47462339ff",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon2-003.png",
+      "asset_sha256": "00176841dffebde08636fa70d8014873802c8509e7904b6eb800e1c218118903",
+      "source_research_id": 1200,
+      "source_file": "OPENMON2.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "85d01b8a092707a0c8c85348d6bc17333ee052e2e2535c606d916891296b5954",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon2-004.png",
+      "asset_sha256": "d679f6b15e1121a215c5f322edb0102123359a31a528aee6538a730f7cb037cd",
+      "source_research_id": 1201,
+      "source_file": "OPENMON2.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "bc32075fc390f7aabde3be14d9a0b498eb1fd69693cac0c9b35c6e64769d8ab0",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openmon2-005.png",
+      "asset_sha256": "486dcad244e17e78ca4df20506865016c5fa7f0d7d1054f229353e9b76677660",
+      "source_research_id": 1202,
+      "source_file": "OPENMON2.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "8323dc7f9932e18b0e88e6a23ffe52ad177bb06b323372e0da24c60de39ee83c",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "opening-fish-clear-000.png",
+      "asset_sha256": "96d98080dec2b7f0cdac9fea3e42a0ca093dc7ca6dee90f0c16f4a783ad62ada",
+      "source_research_id": 1179,
+      "source_file": "OPENING.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
     }
   ],
   "limitations": [
@@ -60466,5 +60884,37 @@
     "formal_assets": 184,
     "gui_samples": 63,
     "claim": "ten cloud and eleven smoke frames only; other SS, fades and full HD remain incomplete"
+  },
+  "opening_fish_conformance": {
+    "ready_sha256": "c8989497a2d4cf314ff8731ea33ccad9d23db2e5eaf108a2a2c0585dcc26e1d5",
+    "review_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
+    "sources": [
+      1182,
+      1183,
+      1184,
+      1185,
+      1186,
+      1187,
+      1188,
+      1189,
+      1190,
+      1191,
+      1192,
+      1193,
+      1194,
+      1195,
+      1196,
+      1197,
+      1198,
+      1199,
+      1200,
+      1201,
+      1202
+    ],
+    "new_generated_pngs": 20,
+    "reused_png_files": 2,
+    "formal_assets": 206,
+    "gui_samples": 42,
+    "claim": "21 complete fish poses and scoped generated old-pose restoration only; other images, fades and full HD remain incomplete"
   }
 }
