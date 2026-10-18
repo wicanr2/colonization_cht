@@ -58,6 +58,8 @@ parser.add_argument('--opening-ship-ready-report',type=Path,help='規格069 R83�
 parser.add_argument('--opening-ship-conformed-report',type=Path,help='規格069 R83八幀限定驗收及147張舊原稿繼承審查')
 parser.add_argument('--opening-sun-ready-report',type=Path,help='規格069 R85太陽七幀、閉眼底圖及右側裁切READY審查')
 parser.add_argument('--opening-sun-conformed-report',type=Path,help='規格069 R85限定驗收及155張舊原稿繼承審查')
+parser.add_argument('--opening-wind-ready-report',type=Path,help='規格069 R86十幀雲與十一幀煙READY審查')
+parser.add_argument('--opening-wind-conformed-report',type=Path,help='規格069 R86正常動畫限定驗收及163張舊原稿繼承審查')
 a=parser.parse_args();out=a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.parent.stat().st_uid==os.getuid() and not out.exists()
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -89,6 +91,59 @@ for name,asset in manifest['assets'].items():
  f=matches[0];f['formal_assets'].append(name)
  bindings.append({'asset':name,'asset_sha256':asset['sha256'],'source_research_id':f['research_id'],'source_file':file,'source_ordinal':f['ordinal'],'source_encoded_sha256':f.get('encoded_sha256'),'spec':asset.get('spec',manifest['spec']),'claim':'matches verified formal manifest; conformance scope remains in cited spec'})
  if file.endswith('.PIK'):bindings[-1]['source_indexed_sha256']=f['indexed_sha256']
+
+# R86 雲與煙共21幀；只增加新來源，保留全部既有驗收。
+if a.opening_wind_ready_report or a.opening_wind_conformed_report:
+ assert a.opening_wind_ready_report and a.opening_wind_conformed_report and a.inherited_index and a.inherited_manifest
+ assert not a.opening_sun_ready_report and not a.opening_sun_conformed_report
+ ready=json.loads(a.opening_wind_ready_report.read_bytes());review=json.loads(a.opening_wind_conformed_report.read_bytes())
+ prior=json.loads(a.inherited_index.read_bytes());old_manifest=json.loads(a.inherited_manifest.read_bytes())
+ assert ready['state']=='READY' and ready['result']=='PASS_R86_WIND21_READY_REVIEW'
+ assert review['result']=='PASS_OPENING_WIND_CONFORMANCE_REVIEW' and review['spec_state']=='CONFORMED'
+ assert review['ready_sha256']==sha(a.opening_wind_ready_report) and review['manifest_sha256']==sha(a.manifest)
+ assert review['inherited_manifest_sha256']==sha(a.inherited_manifest)==prior['formal_manifest_sha256']
+ assert review['inherited_source_index_sha256']==sha(a.inherited_index)
+ assert len(old_manifest['assets'])==163 and len(manifest['assets'])==len(bindings)==184
+ for name,old in old_manifest['assets'].items():
+  assert old==manifest['assets'][name] and sha(a.assets/name)==old['sha256']
+ assert review['go_named_passed']>=195 and review['go_failed']==review['go_skipped']==0
+ assert review['native_points']==145 and review['native_source_frames']==36
+ assert review['native_accepted']==1024 and review['native_rejected']==0
+ assert review['native_full_rgba_pixels']>=36*1280*800
+ assert review['gui_samples']==63 and review['gui_source_state_samples']==63
+ assert review['gui_verified_wind_frames']==list(range(10)) and review['gui_verified_smoke_frames']==list(range(11))
+ assert review['gui_verified_sun_frames']==list(range(7)) and review['gui_x11_rgba_pixels']==63*1280*800
+ assert review['gui_full_rgba_pixels']==61*1280*800
+ assert review['gui_fixed_text_fields']>=16 and review['gui_localized_text_rgba_pixels']>0
+ assert review['three_replays_gui_audio_state_save_equal']is True
+ assert review['current_binary_sha256']==review['binary_sha256'] and len(review['binary_sha256'])==64
+ assert review['current_source_bindings_verified']is True and review['raw_png_alpha_preserved']is True
+ assert review['original_static_pik_retained']is True and review['known_ship_occlusion_cells_verified']==2
+ assert review['inherited_native32_passed']is True and review['package_graphics_files']==185 and review['package_new_faults']==70
+ assert review['original_inputs_unchanged']is True and review['old_raw_pngs_unchanged']==163
+ assert review['new_generated_pngs']==15 and review['reused_png_files']==6 and review['complete_hd']is False
+ assert prior['source_receipt_sha256']==sha(a.catalog) and len(prior['frames'])==1552 and prior['files']==d['files']
+ ids=set(range(1266,1287))
+ assert bindings[:163]==prior['formal_bindings'] and {b['source_research_id']for b in bindings[163:]}==ids
+ before={f['research_id']:f for f in prior['frames']}
+ for frame in frames:
+  old=before[frame['research_id']]
+  assert {k:frame[k]for k in allowed if k in frame}=={k:old[k]for k in allowed if k in old}
+ merged=json.loads(a.inherited_index.read_bytes());new={f['research_id']:f for f in frames}
+ reference={'state':'CONFORMED','spec':'docs/spec/069-hd-menu-background-and-textures.md','formal_connected':True,'review_sha256':sha(a.opening_wind_conformed_report),'scope':'ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing'}
+ for row in merged['frames']:
+  ident=row['research_id']
+  if ident in ids:
+   assert not row['formal_assets'];row['formal_assets']=new[ident]['formal_assets']
+   row['runtime_source_evidence']='confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells'
+   row['animation_evidence']='confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained'
+   row['source_contract_reference']=reference
+ merged['formal_manifest_sha256']=sha(a.manifest);merged['formal_bindings']=bindings
+ merged['opening_wind_conformance']={'ready_sha256':sha(a.opening_wind_ready_report),'review_sha256':sha(a.opening_wind_conformed_report),'sources':sorted(ids),'new_generated_pngs':15,'reused_png_files':6,'formal_assets':184,'gui_samples':63,'claim':'ten cloud and eleven smoke frames only; other SS, fades and full HD remain incomplete'}
+ assert all(f==before[f['research_id']]for f in merged['frames']if f['research_id']not in ids)
+ out.write_text(json.dumps(merged,ensure_ascii=False,indent=2)+'\n')
+ print('PASS_INHERITED_OPENING_WIND_INDEX',len(frames),len(bindings),sha(out),flush=True)
+ raise SystemExit(0)
 
 # R85 太陽七幀、閉眼底圖與九格右裁切；保留R83及更早的驗收紀錄。
 if a.opening_sun_ready_report or a.opening_sun_conformed_report:

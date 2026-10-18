@@ -1,4 +1,4 @@
-// 規格069 R82／R83／R85：獨立原版來源模型；輸出只准本機/out，不替正式GUI授予HD信用。
+// 規格069 R82／R83／R85／R86：獨立原版來源模型；輸出只准本機/out，不替正式GUI授予HD信用。
 package main
 
 import (
@@ -48,10 +48,29 @@ func main() {
 	catalog := flag.String("catalog", "", "R83固定原版全資產清冊")
 	sampleEvery := flag.Uint64("sample-every", 200000, "R84研究快照間隔；200000的倍數，最多10000000")
 	allSprites := flag.Bool("all-opening-sprites", false, "觀測全部指紋吻合的OPEN及MPS片頭SS；不授予HD信用")
+	spriteFiles := flag.String("opening-sprite-files", "", "只觀測逗號分隔的已知OPEN動畫檔；省略時沿既有15來源範圍")
 	writeSamples := flag.Bool("write-samples", true, "記錄寫入入口樣本；長流程可停用，來源模型仍持續")
 	publicationFile := flag.String("publication-windows", "", "半開區間JSON [[start,end],...]；省略時持續觀測發布，空陣列停用")
 	stepFile := flag.String("sample-steps", "", "額外快照步數JSON，須為遞增的200000倍數")
 	flag.Parse()
+	var selectedFiles map[string]bool
+	var spriteFileNames []string
+	if *spriteFiles != "" {
+		if *allSprites || !*sprites {
+			panic("opening-sprite-files requires opening-sprites and excludes all-opening-sprites")
+		}
+		allowed := map[string]bool{"OPENSHIP.SS": true, "OPENSUN.SS": true, "OPENWND1.SS": true, "OPENWND2.SS": true, "OPENMON1.SS": true, "OPENMON2.SS": true, "OPENCRD1.SS": true, "OPENCRD2.SS": true}
+		selectedFiles = map[string]bool{}
+		for _, item := range strings.Split(*spriteFiles, ",") {
+			name := strings.TrimSpace(item)
+			if !allowed[name] || selectedFiles[name] {
+				panic("unknown or duplicate opening sprite file: " + name)
+			}
+			selectedFiles[name] = true
+			spriteFileNames = append(spriteFileNames, name)
+		}
+		sort.Strings(spriteFileNames)
+	}
 	var publicationEdges []uint64
 	if *publicationFile != "" {
 		var windows [][2]uint64
@@ -154,7 +173,7 @@ func main() {
 	}
 	var actor *openingActorProbe
 	if *sprites {
-		actor = newOpeningActorProbe(m, *decoded, *catalog, *game, *allSprites)
+		actor = newOpeningActorProbe(m, *decoded, *catalog, *game, *allSprites, selectedFiles)
 		actor.pic = model
 		if !*control {
 			actor.observePublication = *publicationFile == ""
@@ -336,12 +355,12 @@ func main() {
 		}
 	}
 	if actor != nil {
-		put(filepath.Join(out, "actors.json"), map[string]any{"state": "DRAFT", "all_opening_sprites": *allSprites, "publication_edges": publicationEdges, "entries": actor.entries, "calls": actor.calls, "points": actor.points, "verified_calls": actor.matched, "published_transfers": actor.publishedTransfers, "unknown_vga_revocations": actor.publishedUnknown, "same_value_vga_revocations": actor.publishedSame, "revoked": actor.revoked, "same_value_revoked": actor.same, "production_connected": false})
+		put(filepath.Join(out, "actors.json"), map[string]any{"state": "DRAFT", "all_opening_sprites": *allSprites, "opening_sprite_files": spriteFileNames, "publication_edges": publicationEdges, "entries": actor.entries, "calls": actor.calls, "points": actor.points, "verified_calls": actor.matched, "published_transfers": actor.publishedTransfers, "unknown_vga_revocations": actor.publishedUnknown, "same_value_vga_revocations": actor.publishedSame, "revoked": actor.revoked, "same_value_revoked": actor.same, "production_connected": false})
 	}
 	put(filepath.Join(out, "model.json"), model.receipt())
 	need(log.Flush())
 	need(file.Close())
-	put(filepath.Join(out, "check.json"), map[string]any{"result": "DRAFT_OPENING_COLD_NATIVE_OBSERVATION", "production_connected": false, "control": *control, "go_version": runtime.Version(), "binary_sha256": hash(read(os.Args[0])), "vga_observation_enabled": *vgaSamples, "original_exe_sha256": hash(exe), "original_pik_sha256": map[string]string{"OPENING.PIK": hash(read(filepath.Join(*game, "OPENING.PIK"))), "OPENBORD.PIK": hash(read(filepath.Join(*game, "OPENBORD.PIK")))}, "end": m.Steps, "events": events, "vga_writes_seen": vgaWrites, "log_scope": "At most 64 write samples per CS:IP, physical source region and destination; main/source memory observed, VGA optional. Physical region labels do not establish source identity before a complete native bitmap match. Remaining observed writes counted, not logged. Discovery only, no full ownership/parity credit.", "write_sites": sites, "opened": d.Opened, "reads": d.Reads, "points": points, "error": fail, "input_count": len(inputs), "inputs": inputs, "sample_every": *sampleEvery, "source_model_enabled": *sourceModel, "opening_sprites_enabled": *sprites, "all_opening_sprites_enabled": *allSprites, "write_samples_enabled": *writeSamples, "publication_windows_file": *publicationFile, "publication_edges": publicationEdges, "extra_snapshot_steps": extraSteps, "address_space": "dosgolem real-mode CS:IP and 20-bit linear RAM", "limitations": []string{"Read-only sampled discovery; no complete write trace, source ownership or production credit", "Normal Enter at 800000 along established goal146 opening path; no direct entry or state injection"}})
+	put(filepath.Join(out, "check.json"), map[string]any{"result": "DRAFT_OPENING_COLD_NATIVE_OBSERVATION", "production_connected": false, "control": *control, "go_version": runtime.Version(), "binary_sha256": hash(read(os.Args[0])), "vga_observation_enabled": *vgaSamples, "original_exe_sha256": hash(exe), "original_pik_sha256": map[string]string{"OPENING.PIK": hash(read(filepath.Join(*game, "OPENING.PIK"))), "OPENBORD.PIK": hash(read(filepath.Join(*game, "OPENBORD.PIK")))}, "end": m.Steps, "events": events, "vga_writes_seen": vgaWrites, "log_scope": "At most 64 write samples per CS:IP, physical source region and destination; main/source memory observed, VGA optional. Physical region labels do not establish source identity before a complete native bitmap match. Remaining observed writes counted, not logged. Discovery only, no full ownership/parity credit.", "write_sites": sites, "opened": d.Opened, "reads": d.Reads, "points": points, "error": fail, "input_count": len(inputs), "inputs": inputs, "sample_every": *sampleEvery, "source_model_enabled": *sourceModel, "opening_sprites_enabled": *sprites, "all_opening_sprites_enabled": *allSprites, "opening_sprite_files": spriteFileNames, "write_samples_enabled": *writeSamples, "publication_windows_file": *publicationFile, "publication_edges": publicationEdges, "extra_snapshot_steps": extraSteps, "address_space": "dosgolem real-mode CS:IP and 20-bit linear RAM", "limitations": []string{"Read-only sampled discovery; no complete write trace, source ownership or production credit", "Normal Enter at 800000 along established goal146 opening path; no direct entry or state injection"}})
 }
 
 type openingModelCell struct {
@@ -546,6 +565,7 @@ type openingActorCell struct {
 type openingActorProbe struct {
 	observePublication                                  bool
 	allSprites                                          bool
+	selectedFiles                                       map[string]bool
 	publicationEdges                                    []uint64
 	publicationEdge                                     int
 	firstUnder                                          map[int]bool
@@ -584,7 +604,7 @@ func actorWords(m *golem.Machine, seg, off uint16, n int) []uint16 {
 	}
 	return out
 }
-func newOpeningActorProbe(m *golem.Machine, decoded, catalog, game string, allSprites bool) *openingActorProbe {
+func newOpeningActorProbe(m *golem.Machine, decoded, catalog, game string, allSprites bool, selectedFiles map[string]bool) *openingActorProbe {
 	var cat struct {
 		Frames []openingActorFrame
 		Files  []struct {
@@ -598,7 +618,7 @@ func newOpeningActorProbe(m *golem.Machine, decoded, catalog, game string, allSp
 		files[f.File] = f.SHA
 	}
 	checked := map[string]bool{}
-	p := &openingActorProbe{m: m, allSprites: allSprites, byID: map[int]*openingActorFrame{}, writerCodes: map[uint16][]byte{}}
+	p := &openingActorProbe{m: m, allSprites: allSprites, selectedFiles: selectedFiles, byID: map[int]*openingActorFrame{}, writerCodes: map[uint16][]byte{}}
 	for _, f := range cat.Frames {
 		if (!strings.HasPrefix(f.File, "OPEN") && (!allSprites || f.File != "MPSLOGO.SS" && f.File != "MPSNAME.SS")) || !strings.HasSuffix(f.File, ".SS") || f.EncodedLength <= 0 || f.IndexedSHA == "" || f.Opaque == 0 {
 			continue
@@ -678,8 +698,14 @@ func (p *openingActorProbe) before() {
 		return
 	}
 	f := p.byID[matches[0]]
-	if !p.allSprites && f.File != "OPENSHIP.SS" && f.File != "OPENSUN.SS" {
-		return
+	if !p.allSprites {
+		if p.selectedFiles != nil {
+			if !p.selectedFiles[f.File] {
+				return
+			}
+		} else if f.File != "OPENSHIP.SS" && f.File != "OPENSUN.SS" {
+			return
+		}
 	}
 	// 原版診斷範圍擴充不改動正式HD定義。
 	x, y := int(int16(c.R[golem.DX])), int(int16(stack[2]))

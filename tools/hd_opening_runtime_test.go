@@ -20,7 +20,7 @@ func hdOpeningFixtures(t *testing.T) (string, string, string) {
 	if g == "" || a == "" || r == "" {
 		t.Skip("需要合法原版、生成素材與開場獨立模型")
 	}
-	for _, n := range []string{"OPENING.EXE", "OPENING.PIK", "OPENBORD.PIK", "OPENSHIP.SS", "OPENSUN.SS"} {
+	for _, n := range []string{"OPENING.EXE", "OPENING.PIK", "OPENBORD.PIK", "OPENSHIP.SS", "OPENSUN.SS", "OPENWND1.SS", "OPENWND2.SS"} {
 		if _, e := os.Stat(filepath.Join(g, n)); os.IsNotExist(e) {
 			t.Skip("缺合法原版", n)
 		}
@@ -427,7 +427,7 @@ func TestHDOpeningCacheInputs(t *testing.T) {
 
 func TestHDOpeningAssetRejection(t *testing.T) {
 	game, assets, _ := hdOpeningFixtures(t)
-	files := []string{"OPENING.EXE", "OPENING.PIK", "OPENBORD.PIK", "OPENSHIP.SS", "OPENSUN.SS"}
+	files := []string{"OPENING.EXE", "OPENING.PIK", "OPENBORD.PIK", "OPENSHIP.SS", "OPENSUN.SS", "OPENWND1.SS", "OPENWND2.SS"}
 	for _, d := range hdOpeningDefinitions {
 		files = append(files, d.asset)
 	}
@@ -438,7 +438,7 @@ func TestHDOpeningAssetRejection(t *testing.T) {
 		for _, kind := range []string{"missing", "wrong", "symlink"} {
 			t.Run(kind+"/"+name, func(t *testing.T) {
 				g, a := t.TempDir(), t.TempDir()
-				for _, f := range []string{"OPENING.EXE", "OPENING.PIK", "OPENBORD.PIK", "OPENSHIP.SS", "OPENSUN.SS"} {
+				for _, f := range []string{"OPENING.EXE", "OPENING.PIK", "OPENBORD.PIK", "OPENSHIP.SS", "OPENSUN.SS", "OPENWND1.SS", "OPENWND2.SS"} {
 					if e := os.WriteFile(filepath.Join(g, f), hdOpeningRead(t, filepath.Join(game, f)), 0644); e != nil {
 						t.Fatal(e)
 					}
@@ -930,16 +930,16 @@ func TestHDOpeningSpritesCompleteWriteGuards(t *testing.T) {
 	}
 }
 
-func TestHDSunNormalPublishedSources(t *testing.T) {
+func TestHDWindNormalPublishedSources(t *testing.T) {
 	game, assets, _ := hdOpeningFixtures(t)
-	root, output := os.Getenv("TEST_HD_SUN_ROOT"), os.Getenv("TEST_HD_SUN_OUTPUT")
+	root, output := os.Getenv("TEST_HD_WIND_ROOT"), os.Getenv("TEST_HD_WIND_OUTPUT")
 	if root == "" || output == "" {
-		t.Skip("需要太陽獨立來源與新的輸出")
+		t.Skip("需要36來源獨立模型與新的輸出")
 	}
 	if e := os.Mkdir(output, 0755); e != nil {
 		t.Fatal(e)
 	}
-	ref := filepath.Join(root, "opening-all-normal-observed-r2")
+	ref := filepath.Join(root, "normal36-observed-r1")
 	var oracle struct {
 		End    uint64
 		Inputs []windowInput
@@ -958,9 +958,11 @@ func TestHDSunNormalPublishedSources(t *testing.T) {
 		t.Fatal(e)
 	}
 	type point struct {
-		Step  uint64
-		Actor string `json:"published_actor_file"`
-		PIC   string `json:"published_pic_file"`
+		Step   uint64
+		Actor  string         `json:"published_actor_file"`
+		PIC    string         `json:"published_pic_file"`
+		Counts map[string]int `json:"published_actor_counts"`
+		Under  map[string]int `json:"published_underlay_counts"`
 	}
 	var model struct{ Points []point }
 	if e := json.Unmarshal(hdOpeningRead(t, filepath.Join(ref, "actors.json")), &model); e != nil {
@@ -994,6 +996,22 @@ func TestHDSunNormalPublishedSources(t *testing.T) {
 	s := p.sprites
 	m.SetBeforeInstruction(s.beforeInstruction)
 	selected := map[uint64]bool{70000000: true, 210000000: true, 240000000: true, 270000000: true, 310000000: true, 340000000: true, 370000000: true, 399200000: true}
+	for _, definition := range hdOpeningSpriteDefinitions {
+		key := fmt.Sprint(definition.id)
+		var bestStep uint64
+		bestCount := 0
+		for _, candidate := range model.Points {
+			count := candidate.Counts[key]
+			if count > bestCount && candidate.Under[key] == count {
+				bestStep, bestCount = candidate.Step, count
+			}
+		}
+		if bestCount == 0 {
+			t.Fatal("缺正常可見來源", definition.id)
+		}
+		selected[bestStep] = true
+	}
+	seen := map[int]bool{}
 	at, inputAt := 0, 0
 	records := []map[string]any{}
 	images := 0
@@ -1010,9 +1028,6 @@ func TestHDSunNormalPublishedSources(t *testing.T) {
 			}
 			if selected[m.Steps] {
 				modelRoot := ref
-				if m.Steps == 399200000 {
-					modelRoot = filepath.Join(root, "opening-all-normal-observed-r3")
-				}
 				expected := models[m.Steps]
 				pic := hdOpeningRead(t, filepath.Join(modelRoot, expected.PIC))
 				actor := hdOpeningRead(t, filepath.Join(modelRoot, expected.Actor))
@@ -1025,11 +1040,11 @@ func TestHDSunNormalPublishedSources(t *testing.T) {
 					a = pos * 12
 					id := binary.LittleEndian.Uint16(actor[a : a+2])
 					wantedActor := hdOpeningSpriteCell{}
-					if id >= 1250 && id < 1265 {
+					if _, known := hdOpeningSpriteSlot(id); known {
 						wantedActor = hdOpeningSpriteCell{id, binary.LittleEndian.Uint16(actor[a+2 : a+4]), actor[a+4], hdOpeningCell{actor[a+6], binary.LittleEndian.Uint32(actor[a+7 : a+11]), actor[a+11]}}
 					}
 					if s.published[pos] != wantedActor {
-						t.Fatal("已發布船／太陽來源不符", m.Steps, pos, s.published[pos], wantedActor)
+						t.Fatal("已發布36來源不符", m.Steps, pos, s.published[pos], wantedActor)
 					}
 				}
 				f := draftNativeFrame{indexed: m.Indexed(), palette: m.DAC[:], mode: m.VideoMode(), step: m.Steps}
@@ -1039,13 +1054,48 @@ func TestHDSunNormalPublishedSources(t *testing.T) {
 				if hash(m.Mem) != before {
 					t.Fatal("顯示寫入原版")
 				}
-				sunFrames, _ := receipt["sun_frames"].([7]int)
-				count := 0
-				for _, n := range sunFrames {
-					count += n
+
+				if receipt["reason"] != "verified-published-opening" {
+					t.Fatal("來源不能繪製", receipt)
 				}
-				if count == 0 || m.Steps == 399200000 && count != 9 {
-					t.Fatal("太陽幀或裁切", receipt)
+				groups := []struct {
+					ids    []int
+					counts []int
+				}{}
+				ship := receipt["frames"].([8]int)
+				sun := receipt["sun_frames"].([7]int)
+				wind := receipt["wind_frames"].([10]int)
+				smoke := receipt["smoke_frames"].([11]int)
+				groups = append(groups, struct {
+					ids    []int
+					counts []int
+				}{[]int{1250, 1251, 1252, 1253, 1254, 1255, 1256, 1257}, ship[:]})
+				groups = append(groups, struct {
+					ids    []int
+					counts []int
+				}{[]int{1258, 1259, 1260, 1261, 1262, 1263, 1264}, sun[:]})
+				groups = append(groups, struct {
+					ids    []int
+					counts []int
+				}{[]int{1266, 1267, 1268, 1269, 1270, 1271, 1272, 1273, 1274, 1275}, wind[:]})
+				groups = append(groups, struct {
+					ids    []int
+					counts []int
+				}{[]int{1276, 1277, 1278, 1279, 1280, 1281, 1282, 1283, 1284, 1285, 1286}, smoke[:]})
+				for _, group := range groups {
+					for i, count := range group.counts {
+						id := group.ids[i]
+						want := expected.Counts[fmt.Sprint(id)]
+						if count != want {
+							t.Fatal("可見來源數不符", m.Steps, id, count, want)
+						}
+						if count > 0 {
+							seen[id] = true
+						}
+					}
+				}
+				if m.Steps == 399200000 && sun[5] != 9 {
+					t.Fatal("太陽裁切改變", sun)
 				}
 				file := fmt.Sprintf("point-%08d.png", m.Steps)
 				fd, e := os.Create(filepath.Join(output, file))
@@ -1068,10 +1118,10 @@ func TestHDSunNormalPublishedSources(t *testing.T) {
 			t.Fatal(e)
 		}
 	}
-	if at != 41 || inputAt != 1 || images != 8 || s.accepted != 962 || s.rejected != 0 {
+	if at != len(oracle.Points) || at != 145 || inputAt != 1 || images != len(selected) || len(seen) != 36 || s.accepted != 1024 || s.rejected != 0 {
 		t.Fatal("正常來源範圍", at, inputAt, images, s.accepted, s.rejected)
 	}
-	raw, e := json.MarshalIndent(map[string]any{"result": "PASS_SUN7_NORMAL_PUBLISHED_NATIVE41", "points": at, "inputs": inputAt, "end": m.Steps, "accepted": s.accepted, "rejected": s.rejected, "images": images, "records": records}, "", "  ")
+	raw, e := json.MarshalIndent(map[string]any{"result": "PASS_WIND21_NORMAL_PUBLISHED_NATIVE145", "points": at, "inputs": inputAt, "end": m.Steps, "accepted": s.accepted, "rejected": s.rejected, "images": images, "records": records, "source_frames": len(seen)}, "", "  ")
 	if e != nil {
 		t.Fatal(e)
 	}
@@ -1174,5 +1224,200 @@ func TestHDOpeningCaptionCursorGuards(t *testing.T) {
 	}
 	if !hdOpeningCursorUncovered(image.Rect(310, 16, 326, 32), []map[string]any{{"safe": image.Rect(66, 176, 253, 183)}}) {
 		t.Fatal("clipped cursor outside caption")
+	}
+}
+
+func TestHDOpeningSpriteSlotSources(t *testing.T) {
+	if len(hdOpeningSpriteDefinitions) != 36 {
+		t.Fatal("source count")
+	}
+	for slot, d := range hdOpeningSpriteDefinitions {
+		got, ok := hdOpeningSpriteSlot(uint16(d.id))
+		if !ok || got != slot {
+			t.Fatal("source slot", d.id, got, slot)
+		}
+	}
+	for _, id := range []uint16{0, 1249, 1265, 1287, 65535} {
+		if _, ok := hdOpeningSpriteSlot(id); ok {
+			t.Fatal("unknown source accepted", id)
+		}
+	}
+}
+
+func TestHDWindCompleteSourceGuards(t *testing.T) {
+	decoded := os.Getenv("TEST_HD_DECODED")
+	if decoded == "" {
+		t.Skip("需要合法原版雲煙索引資料")
+	}
+	for slot := 15; slot < 36; slot++ {
+		d := hdOpeningSpriteDefinitions[slot]
+		raw := hdOpeningRead(t, filepath.Join(decoded, fmt.Sprintf("%04d.idx", d.id)))
+		if len(raw) != d.w*d.h {
+			t.Fatal("native shape", d.id)
+		}
+		for _, name := range []string{"valid", "missing", "duplicate", "wrong-value", "unknown-write"} {
+			t.Run(fmt.Sprintf("%d/%s", d.id, name), func(t *testing.T) {
+				m := golem.New()
+				s := &hdOpeningSpriteRuntime{p: &hdOpeningRuntime{h: &hdRuntime{m: m}}, selected: slot, x: 100, y: 50, active: true}
+				first := -1
+				for local, value := range raw {
+					if value == 253 {
+						continue
+					}
+					if first < 0 {
+						first = local
+					}
+					s.counts[local], s.writes[local] = 1, value
+				}
+				if first < 0 {
+					t.Fatal("empty source")
+				}
+				switch name {
+				case "missing":
+					s.counts[first] = 0
+				case "duplicate":
+					s.counts[first] = 2
+				case "wrong-value":
+					s.writes[first] ^= 1
+				case "unknown-write":
+					s.outside = true
+				}
+				before := bytes.Clone(m.Mem)
+				s.finish()
+				if !bytes.Equal(before, m.Mem) {
+					t.Fatal("source check wrote native state")
+				}
+				if name == "valid" {
+					if s.accepted != 1 || s.rejected != 0 || !s.nativeValid[slot] {
+						t.Fatal("complete source rejected")
+					}
+					if !bytes.Equal(s.native[slot][:len(raw)], raw) {
+						t.Fatal("cached source differs")
+					}
+				} else if s.accepted != 0 || s.rejected != 1 || s.nativeValid[slot] {
+					t.Fatal("malformed source accepted")
+				}
+			})
+		}
+	}
+}
+
+func TestHDWindResourceGuards(t *testing.T) {
+	game, assets, _ := hdOpeningFixtures(t)
+	artCopy := filepath.Join(t.TempDir(), "graphics")
+	gameCopy := filepath.Join(t.TempDir(), "game")
+	if e := os.Mkdir(artCopy, 0755); e != nil {
+		t.Fatal(e)
+	}
+	if e := os.Mkdir(gameCopy, 0755); e != nil {
+		t.Fatal(e)
+	}
+	entries, e := os.ReadDir(assets)
+	if e != nil {
+		t.Fatal(e)
+	}
+	for _, entry := range entries {
+		if entry.IsDir() {
+			t.Fatal("unexpected asset directory")
+		}
+		raw := hdOpeningRead(t, filepath.Join(assets, entry.Name()))
+		if e := os.WriteFile(filepath.Join(artCopy, entry.Name()), raw, 0644); e != nil {
+			t.Fatal(e)
+		}
+	}
+	for _, name := range []string{"OPENSHIP.SS", "OPENSUN.SS", "OPENWND1.SS", "OPENWND2.SS"} {
+		raw := hdOpeningRead(t, filepath.Join(game, name))
+		if e := os.WriteFile(filepath.Join(gameCopy, name), raw, 0644); e != nil {
+			t.Fatal(e)
+		}
+	}
+	load := func() error {
+		p := &hdOpeningRuntime{h: &hdRuntime{m: golem.New()}}
+		_, e := loadHDOpeningSprites(p, gameCopy, artCopy)
+		return e
+	}
+	if e := load(); e != nil {
+		t.Fatal("valid fixture", e)
+	}
+	for slot := 15; slot < 36; slot++ {
+		d := hdOpeningSpriteDefinitions[slot]
+		path := filepath.Join(artCopy, d.asset)
+		original := hdOpeningRead(t, path)
+		for _, kind := range []string{"missing", "corrupt", "symlink"} {
+			t.Run(d.asset+"/"+kind, func(t *testing.T) {
+				if e := os.Remove(path); e != nil {
+					t.Fatal(e)
+				}
+				switch kind {
+				case "corrupt":
+					bad := bytes.Clone(original)
+					bad[len(bad)-1] ^= 1
+					if e := os.WriteFile(path, bad, 0644); e != nil {
+						t.Fatal(e)
+					}
+				case "symlink":
+					if e := os.Symlink(filepath.Join(assets, d.asset), path); e != nil {
+						t.Fatal(e)
+					}
+				}
+				if e := load(); e == nil {
+					t.Error("invalid asset accepted")
+				}
+				if kind != "missing" {
+					if e := os.Remove(path); e != nil {
+						t.Fatal(e)
+					}
+				}
+				if e := os.WriteFile(path, original, 0644); e != nil {
+					t.Fatal(e)
+				}
+				if !bytes.Equal(hdOpeningRead(t, filepath.Join(assets, d.asset)), original) {
+					t.Fatal("original asset changed")
+				}
+			})
+		}
+	}
+	for _, name := range []string{"OPENWND1.SS", "OPENWND2.SS"} {
+		path := filepath.Join(gameCopy, name)
+		original := hdOpeningRead(t, path)
+		for _, kind := range []string{"missing", "corrupt", "symlink"} {
+			t.Run(name+"/"+kind, func(t *testing.T) {
+				if e := os.Remove(path); e != nil {
+					t.Fatal(e)
+				}
+				switch kind {
+				case "corrupt":
+					bad := bytes.Clone(original)
+					bad[len(bad)-1] ^= 1
+					if e := os.WriteFile(path, bad, 0644); e != nil {
+						t.Fatal(e)
+					}
+				case "symlink":
+					if e := os.Symlink(filepath.Join(game, name), path); e != nil {
+						t.Fatal(e)
+					}
+				}
+				if e := load(); e == nil {
+					t.Error("invalid original accepted")
+				}
+				if kind != "missing" {
+					if e := os.Remove(path); e != nil {
+						t.Fatal(e)
+					}
+				}
+				if e := os.WriteFile(path, original, 0644); e != nil {
+					t.Fatal(e)
+				}
+				if !bytes.Equal(hdOpeningRead(t, filepath.Join(game, name)), original) {
+					t.Fatal("legal original changed")
+				}
+			})
+		}
+	}
+	if e := load(); e != nil {
+		t.Fatal("restored fixture", e)
+	}
+	if _, e := loadHDRuntime(golem.New(), game, assets); e != nil {
+		t.Fatal("full184 runtime load", e)
 	}
 }

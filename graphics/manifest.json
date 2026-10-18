@@ -9982,6 +9982,1089 @@
       },
       "coverage": "READY R85 source-verified closed base and seven sun frames; formal normal GUI conformance pending",
       "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openwnd1-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "640eae91aa2d7c5c0b2458ca2ed5878a7eb1d8dd25ceee25798c7ab3d9dc4728",
+      "bytes": 874483,
+      "size": [
+        1570,
+        1002
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        20,
+        15
+      ],
+      "target_size": [
+        80,
+        60
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND1.SS",
+        "sha256": "774dc50231443957d2e051a39765ea1652daae7317c517ba77094b67e07d1afb",
+        "ordinal": 0,
+        "encoded_sha256": "631a5fbe326be17e666d24e2c2abe57f6c1fdf48283091b7bc26374aad9f84ab",
+        "indexed_sha256": "8f55a7fd1a64698d5f2d49fb9f6d1c0015cf169f12ddb7fd9dfc6bad1aceb624"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          20,
+          15
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          144,
+          509,
+          830,
+          966
+        ]
+      ],
+      "generation_prompt": "Use case: style-transfer. Asset type: one standalone transparent-background HD animation-frame PNG for the same approved fine pixel-art historical map. Image 1 defines the original frame's exact composition, proportions, contour, placement and phase. Image 2 is the approved HD artwork for consistent character/material detail, palette and crisp pixel clusters. Redraw the object seen in image 1 in that HD style. Remove ALL parchment map, lettering and map lines, leaving genuine alpha transparency around the object. Preserve negative gaps as alpha, no white/black/checkerboard backdrop, no added shadow on a floor, no text, no extra objects, no frame, no atlas. This is a single frame, not a sprite sheet. This frame is the antique map's curly orange-haired wind face at the upper right, pursed lips blowing a short curling gray blue-green cloud to the lower LEFT. Keep the head position relative to the cloud from image 1, including any clipping at the upper image boundary. Match the cloud's short compact curl silhouette for frame0; do not extend it into the much larger gust seen in other frames. Preserve the static head identity of image2. The actual original SS mask will select only the cloud/mouth region at runtime; do not change the overall head pose.",
+      "reference_sha256": {
+        "openwnd1-native-000-r2.png": "455051265fcbe843dee07af674b78b39dc0dedf60748ec8cf79682e3b027cc1b",
+        "opening-wind-000.png": "ec223225bcab1d069845e2ba6f908e1fc44027f5bd865abaf1cee846786de521"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openwnd1-001.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "126bb44afc8a1c2738206c06d1e7151751c18fd2ef53bd7f34555afb69f832ee",
+      "bytes": 1027034,
+      "size": [
+        1570,
+        1002
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        25,
+        21
+      ],
+      "target_size": [
+        100,
+        84
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND1.SS",
+        "sha256": "774dc50231443957d2e051a39765ea1652daae7317c517ba77094b67e07d1afb",
+        "ordinal": 1,
+        "encoded_sha256": "3b82944c0cbd56b367c0ffbfd6c7987ec4e3502d238adcaa6e035ed757dfcc20",
+        "indexed_sha256": "8fca18e04ad5cd7f5196a5ad0464d62fc172039f03b0dbb989498ebee1d3fd93"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          25,
+          21
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          103,
+          451,
+          910,
+          994
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit and style-transfer. Asset type: ONE transparent-background HD animation frame PNG. The FIRST image is the exact original animation phase to redraw; the SECOND image is the HD frame0 master for the same object's stable identity, pixel clusters, material detail, palette and canvas proportions. Draw the phase from the FIRST image, keeping the master character or rock body stable. The changing smoke/cloud must follow the first image's silhouette, extent, position, curl directions, openings and negative gaps, even where this differs from the frame0 master's compact plume. Keep the object anchored and the same scale in its canvas. Remove all original parchment background, lettering and map lines, keeping genuine alpha outside the object and inside negative gaps. No checkerboard, black or white background, no floor shadow, no text, no watermark, no atlas. Preserve fine crisp pixel art; no blur, photorealism or painterly smoothing. Target: the orange curly-haired antique-map wind face blowing a larger gray blue-green cloud toward the lower left, phase 1. Change only the original gust shape and the affected mouth/cloud region. The rest of the face keeps the HD master's identity, pose and lighting. Do not invent a second face or a flag.",
+      "reference_sha256": {
+        "openwnd1-native-001-r2.png": "1be4b189e4c0feff8d2bdb010091a480482aba880fdc3938fb07319c97aa4b1b",
+        "openwnd1-000-candidate-r1.png": "640eae91aa2d7c5c0b2458ca2ed5878a7eb1d8dd25ceee25798c7ab3d9dc4728"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openwnd1-002.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "1d6c3505856bf540dafbd274d397436b7da9f9fc94328b282c218c6779220cfc",
+      "bytes": 964363,
+      "size": [
+        1569,
+        1002
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        25,
+        21
+      ],
+      "target_size": [
+        100,
+        84
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND1.SS",
+        "sha256": "774dc50231443957d2e051a39765ea1652daae7317c517ba77094b67e07d1afb",
+        "ordinal": 2,
+        "encoded_sha256": "50171f81373fb5bd8c3357ad58ffa6e9be43bc0545fdb42d1cd25613e662f014",
+        "indexed_sha256": "6b7fa5d53c4ee80324f1667886294bd9f9290d847d07f655d8692bfcb52ff71b"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          25,
+          21
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          69,
+          451,
+          919,
+          977
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit and style-transfer. Asset type: ONE transparent-background HD animation frame PNG. The FIRST image is the exact original animation phase to redraw; the SECOND image is the HD frame0 master for the same object's stable identity, pixel clusters, material detail, palette and canvas proportions. Draw the phase from the FIRST image, keeping the master character or rock body stable. The changing smoke/cloud must follow the first image's silhouette, extent, position, curl directions, openings and negative gaps, even where this differs from the frame0 master's compact plume. Keep the object anchored and the same scale in its canvas. Remove all original parchment background, lettering and map lines, keeping genuine alpha outside the object and inside negative gaps. No checkerboard, black or white background, no floor shadow, no text, no watermark, no atlas. Preserve fine crisp pixel art; no blur, photorealism or painterly smoothing. Target: the orange curly-haired antique-map wind face blowing a larger gray blue-green cloud toward the lower left, phase 2. Change only the original gust shape and the affected mouth/cloud region. The rest of the face keeps the HD master's identity, pose and lighting. Do not invent a second face or a flag.",
+      "reference_sha256": {
+        "openwnd1-native-002-r2.png": "2218c66068c0c40582ea4ef6b7385c172a3a855a18284287fe8c5365d3098ad8",
+        "openwnd1-000-candidate-r1.png": "640eae91aa2d7c5c0b2458ca2ed5878a7eb1d8dd25ceee25798c7ab3d9dc4728"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openwnd1-003.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "711f736403512f20b7719c8707dd8e6c50c4fb0a0c76536e09c48981a08e403a",
+      "bytes": 1012759,
+      "size": [
+        1569,
+        1002
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        26,
+        21
+      ],
+      "target_size": [
+        104,
+        84
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND1.SS",
+        "sha256": "774dc50231443957d2e051a39765ea1652daae7317c517ba77094b67e07d1afb",
+        "ordinal": 3,
+        "encoded_sha256": "ab3fcf3ba9a850745aac77d59684f281c3ee0bbadde38c5fba5b88726b765c34",
+        "indexed_sha256": "055ae34bc4330c1bbfd3eb3a1c68446212d1376918ed0f5d3bc235a1b7ea2136"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          26,
+          21
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          74,
+          451,
+          978,
+          995
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit and style-transfer. Asset type: ONE transparent-background HD animation frame PNG. The FIRST image is the exact original animation phase to redraw; the SECOND image is the HD frame0 master for the same object's stable identity, pixel clusters, material detail, palette and canvas proportions. Draw the phase from the FIRST image, keeping the master character or rock body stable. The changing smoke/cloud must follow the first image's silhouette, extent, position, curl directions, openings and negative gaps, even where this differs from the frame0 master's compact plume. Keep the object anchored and the same scale in its canvas. Remove all original parchment background, lettering and map lines, keeping genuine alpha outside the object and inside negative gaps. No checkerboard, black or white background, no floor shadow, no text, no watermark, no atlas. Preserve fine crisp pixel art; no blur, photorealism or painterly smoothing. Target: the orange curly-haired antique-map wind face blowing a larger gray blue-green cloud toward the lower left, phase 3. Change only the original gust shape and the affected mouth/cloud region. The rest of the face keeps the HD master's identity, pose and lighting. Do not invent a second face or a flag.",
+      "reference_sha256": {
+        "openwnd1-native-003-r2.png": "bff6f1cf3e000593bb9b0d5ff0cb5334e6a4b343ba91610b25478b8e02e87290",
+        "openwnd1-000-candidate-r1.png": "640eae91aa2d7c5c0b2458ca2ed5878a7eb1d8dd25ceee25798c7ab3d9dc4728"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openwnd1-004.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "71214636aaef151352e438304af57d56734f0622ef0bb33e9dee51b6b5cfc5c3",
+      "bytes": 996327,
+      "size": [
+        1569,
+        1002
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        25,
+        21
+      ],
+      "target_size": [
+        100,
+        84
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND1.SS",
+        "sha256": "774dc50231443957d2e051a39765ea1652daae7317c517ba77094b67e07d1afb",
+        "ordinal": 4,
+        "encoded_sha256": "e3b39a1a098f5883f2ed753b542277005fbb685f2fd7150908f6141b63e62f9f",
+        "indexed_sha256": "b7bc2c76a3e4a1b7c911c5b98544825bf06e584e1601dbcf744b6db7077a2442"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          25,
+          21
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          37,
+          451,
+          872,
+          993
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit and style-transfer. Asset type: ONE transparent-background HD animation frame PNG. The FIRST image is the exact original animation phase to redraw; the SECOND image is the HD frame0 master for the same object's stable identity, pixel clusters, material detail, palette and canvas proportions. Draw the phase from the FIRST image, keeping the master character or rock body stable. The changing smoke/cloud must follow the first image's silhouette, extent, position, curl directions, openings and negative gaps, even where this differs from the frame0 master's compact plume. Keep the object anchored and the same scale in its canvas. Remove all original parchment background, lettering and map lines, keeping genuine alpha outside the object and inside negative gaps. No checkerboard, black or white background, no floor shadow, no text, no watermark, no atlas. Preserve fine crisp pixel art; no blur, photorealism or painterly smoothing. Target: the orange curly-haired antique-map wind face blowing a larger gray blue-green cloud toward the lower left, phase 4. Change only the original gust shape and the affected mouth/cloud region. The rest of the face keeps the HD master's identity, pose and lighting. Do not invent a second face or a flag.",
+      "reference_sha256": {
+        "openwnd1-native-004-r2.png": "9bdaf1ca7e6f1cc8c9aa1269ce7ffc75d033e04b31380f6772f274130cd45d75",
+        "openwnd1-000-candidate-r1.png": "640eae91aa2d7c5c0b2458ca2ed5878a7eb1d8dd25ceee25798c7ab3d9dc4728"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openwnd1-005.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "126bb44afc8a1c2738206c06d1e7151751c18fd2ef53bd7f34555afb69f832ee",
+      "bytes": 1027034,
+      "size": [
+        1570,
+        1002
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        25,
+        21
+      ],
+      "target_size": [
+        100,
+        84
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND1.SS",
+        "sha256": "774dc50231443957d2e051a39765ea1652daae7317c517ba77094b67e07d1afb",
+        "ordinal": 5,
+        "encoded_sha256": "3b82944c0cbd56b367c0ffbfd6c7987ec4e3502d238adcaa6e035ed757dfcc20",
+        "indexed_sha256": "8fca18e04ad5cd7f5196a5ad0464d62fc172039f03b0dbb989498ebee1d3fd93"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          25,
+          21
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          103,
+          451,
+          910,
+          994
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit and style-transfer. Asset type: ONE transparent-background HD animation frame PNG. The FIRST image is the exact original animation phase to redraw; the SECOND image is the HD frame0 master for the same object's stable identity, pixel clusters, material detail, palette and canvas proportions. Draw the phase from the FIRST image, keeping the master character or rock body stable. The changing smoke/cloud must follow the first image's silhouette, extent, position, curl directions, openings and negative gaps, even where this differs from the frame0 master's compact plume. Keep the object anchored and the same scale in its canvas. Remove all original parchment background, lettering and map lines, keeping genuine alpha outside the object and inside negative gaps. No checkerboard, black or white background, no floor shadow, no text, no watermark, no atlas. Preserve fine crisp pixel art; no blur, photorealism or painterly smoothing. Target: the orange curly-haired antique-map wind face blowing a larger gray blue-green cloud toward the lower left, phase 1. Change only the original gust shape and the affected mouth/cloud region. The rest of the face keeps the HD master's identity, pose and lighting. Do not invent a second face or a flag.",
+      "reference_sha256": {
+        "openwnd1-native-001-r2.png": "1be4b189e4c0feff8d2bdb010091a480482aba880fdc3938fb07319c97aa4b1b",
+        "openwnd1-000-candidate-r1.png": "640eae91aa2d7c5c0b2458ca2ed5878a7eb1d8dd25ceee25798c7ab3d9dc4728"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private",
+      "raw_reuse_source": "openwnd1-001.png",
+      "reuse_reason": "Original native size, encoded hash and indexed hash are identical; raw PNG copied unchanged"
+    },
+    "openwnd1-006.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "1d6c3505856bf540dafbd274d397436b7da9f9fc94328b282c218c6779220cfc",
+      "bytes": 964363,
+      "size": [
+        1569,
+        1002
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        25,
+        21
+      ],
+      "target_size": [
+        100,
+        84
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND1.SS",
+        "sha256": "774dc50231443957d2e051a39765ea1652daae7317c517ba77094b67e07d1afb",
+        "ordinal": 6,
+        "encoded_sha256": "50171f81373fb5bd8c3357ad58ffa6e9be43bc0545fdb42d1cd25613e662f014",
+        "indexed_sha256": "6b7fa5d53c4ee80324f1667886294bd9f9290d847d07f655d8692bfcb52ff71b"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          25,
+          21
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          69,
+          451,
+          919,
+          977
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit and style-transfer. Asset type: ONE transparent-background HD animation frame PNG. The FIRST image is the exact original animation phase to redraw; the SECOND image is the HD frame0 master for the same object's stable identity, pixel clusters, material detail, palette and canvas proportions. Draw the phase from the FIRST image, keeping the master character or rock body stable. The changing smoke/cloud must follow the first image's silhouette, extent, position, curl directions, openings and negative gaps, even where this differs from the frame0 master's compact plume. Keep the object anchored and the same scale in its canvas. Remove all original parchment background, lettering and map lines, keeping genuine alpha outside the object and inside negative gaps. No checkerboard, black or white background, no floor shadow, no text, no watermark, no atlas. Preserve fine crisp pixel art; no blur, photorealism or painterly smoothing. Target: the orange curly-haired antique-map wind face blowing a larger gray blue-green cloud toward the lower left, phase 2. Change only the original gust shape and the affected mouth/cloud region. The rest of the face keeps the HD master's identity, pose and lighting. Do not invent a second face or a flag.",
+      "reference_sha256": {
+        "openwnd1-native-002-r2.png": "2218c66068c0c40582ea4ef6b7385c172a3a855a18284287fe8c5365d3098ad8",
+        "openwnd1-000-candidate-r1.png": "640eae91aa2d7c5c0b2458ca2ed5878a7eb1d8dd25ceee25798c7ab3d9dc4728"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private",
+      "raw_reuse_source": "openwnd1-002.png",
+      "reuse_reason": "Original native size, encoded hash and indexed hash are identical; raw PNG copied unchanged"
+    },
+    "openwnd1-007.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "711f736403512f20b7719c8707dd8e6c50c4fb0a0c76536e09c48981a08e403a",
+      "bytes": 1012759,
+      "size": [
+        1569,
+        1002
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        26,
+        21
+      ],
+      "target_size": [
+        104,
+        84
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND1.SS",
+        "sha256": "774dc50231443957d2e051a39765ea1652daae7317c517ba77094b67e07d1afb",
+        "ordinal": 7,
+        "encoded_sha256": "ab3fcf3ba9a850745aac77d59684f281c3ee0bbadde38c5fba5b88726b765c34",
+        "indexed_sha256": "055ae34bc4330c1bbfd3eb3a1c68446212d1376918ed0f5d3bc235a1b7ea2136"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          26,
+          21
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          74,
+          451,
+          978,
+          995
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit and style-transfer. Asset type: ONE transparent-background HD animation frame PNG. The FIRST image is the exact original animation phase to redraw; the SECOND image is the HD frame0 master for the same object's stable identity, pixel clusters, material detail, palette and canvas proportions. Draw the phase from the FIRST image, keeping the master character or rock body stable. The changing smoke/cloud must follow the first image's silhouette, extent, position, curl directions, openings and negative gaps, even where this differs from the frame0 master's compact plume. Keep the object anchored and the same scale in its canvas. Remove all original parchment background, lettering and map lines, keeping genuine alpha outside the object and inside negative gaps. No checkerboard, black or white background, no floor shadow, no text, no watermark, no atlas. Preserve fine crisp pixel art; no blur, photorealism or painterly smoothing. Target: the orange curly-haired antique-map wind face blowing a larger gray blue-green cloud toward the lower left, phase 3. Change only the original gust shape and the affected mouth/cloud region. The rest of the face keeps the HD master's identity, pose and lighting. Do not invent a second face or a flag.",
+      "reference_sha256": {
+        "openwnd1-native-003-r2.png": "bff6f1cf3e000593bb9b0d5ff0cb5334e6a4b343ba91610b25478b8e02e87290",
+        "openwnd1-000-candidate-r1.png": "640eae91aa2d7c5c0b2458ca2ed5878a7eb1d8dd25ceee25798c7ab3d9dc4728"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private",
+      "raw_reuse_source": "openwnd1-003.png",
+      "reuse_reason": "Original native size, encoded hash and indexed hash are identical; raw PNG copied unchanged"
+    },
+    "openwnd1-008.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "71214636aaef151352e438304af57d56734f0622ef0bb33e9dee51b6b5cfc5c3",
+      "bytes": 996327,
+      "size": [
+        1569,
+        1002
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        25,
+        21
+      ],
+      "target_size": [
+        100,
+        84
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND1.SS",
+        "sha256": "774dc50231443957d2e051a39765ea1652daae7317c517ba77094b67e07d1afb",
+        "ordinal": 8,
+        "encoded_sha256": "e3b39a1a098f5883f2ed753b542277005fbb685f2fd7150908f6141b63e62f9f",
+        "indexed_sha256": "b7bc2c76a3e4a1b7c911c5b98544825bf06e584e1601dbcf744b6db7077a2442"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          25,
+          21
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          37,
+          451,
+          872,
+          993
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit and style-transfer. Asset type: ONE transparent-background HD animation frame PNG. The FIRST image is the exact original animation phase to redraw; the SECOND image is the HD frame0 master for the same object's stable identity, pixel clusters, material detail, palette and canvas proportions. Draw the phase from the FIRST image, keeping the master character or rock body stable. The changing smoke/cloud must follow the first image's silhouette, extent, position, curl directions, openings and negative gaps, even where this differs from the frame0 master's compact plume. Keep the object anchored and the same scale in its canvas. Remove all original parchment background, lettering and map lines, keeping genuine alpha outside the object and inside negative gaps. No checkerboard, black or white background, no floor shadow, no text, no watermark, no atlas. Preserve fine crisp pixel art; no blur, photorealism or painterly smoothing. Target: the orange curly-haired antique-map wind face blowing a larger gray blue-green cloud toward the lower left, phase 4. Change only the original gust shape and the affected mouth/cloud region. The rest of the face keeps the HD master's identity, pose and lighting. Do not invent a second face or a flag.",
+      "reference_sha256": {
+        "openwnd1-native-004-r2.png": "9bdaf1ca7e6f1cc8c9aa1269ce7ffc75d033e04b31380f6772f274130cd45d75",
+        "openwnd1-000-candidate-r1.png": "640eae91aa2d7c5c0b2458ca2ed5878a7eb1d8dd25ceee25798c7ab3d9dc4728"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private",
+      "raw_reuse_source": "openwnd1-004.png",
+      "reuse_reason": "Original native size, encoded hash and indexed hash are identical; raw PNG copied unchanged"
+    },
+    "openwnd1-009.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "640eae91aa2d7c5c0b2458ca2ed5878a7eb1d8dd25ceee25798c7ab3d9dc4728",
+      "bytes": 874483,
+      "size": [
+        1570,
+        1002
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        20,
+        15
+      ],
+      "target_size": [
+        80,
+        60
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND1.SS",
+        "sha256": "774dc50231443957d2e051a39765ea1652daae7317c517ba77094b67e07d1afb",
+        "ordinal": 9,
+        "encoded_sha256": "631a5fbe326be17e666d24e2c2abe57f6c1fdf48283091b7bc26374aad9f84ab",
+        "indexed_sha256": "8f55a7fd1a64698d5f2d49fb9f6d1c0015cf169f12ddb7fd9dfc6bad1aceb624"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          20,
+          15
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          144,
+          509,
+          830,
+          966
+        ]
+      ],
+      "generation_prompt": "Use case: style-transfer. Asset type: one standalone transparent-background HD animation-frame PNG for the same approved fine pixel-art historical map. Image 1 defines the original frame's exact composition, proportions, contour, placement and phase. Image 2 is the approved HD artwork for consistent character/material detail, palette and crisp pixel clusters. Redraw the object seen in image 1 in that HD style. Remove ALL parchment map, lettering and map lines, leaving genuine alpha transparency around the object. Preserve negative gaps as alpha, no white/black/checkerboard backdrop, no added shadow on a floor, no text, no extra objects, no frame, no atlas. This is a single frame, not a sprite sheet. This frame is the antique map's curly orange-haired wind face at the upper right, pursed lips blowing a short curling gray blue-green cloud to the lower LEFT. Keep the head position relative to the cloud from image 1, including any clipping at the upper image boundary. Match the cloud's short compact curl silhouette for frame0; do not extend it into the much larger gust seen in other frames. Preserve the static head identity of image2. The actual original SS mask will select only the cloud/mouth region at runtime; do not change the overall head pose.",
+      "reference_sha256": {
+        "openwnd1-native-000-r2.png": "455051265fcbe843dee07af674b78b39dc0dedf60748ec8cf79682e3b027cc1b",
+        "opening-wind-000.png": "ec223225bcab1d069845e2ba6f908e1fc44027f5bd865abaf1cee846786de521"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private",
+      "raw_reuse_source": "openwnd1-000.png",
+      "reuse_reason": "Original native size, encoded hash and indexed hash are identical; raw PNG copied unchanged"
+    },
+    "openwnd2-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "50f262a6de52be427996b88e039dea5954088d1aefcd4a00f55ffdc96e8523ba",
+      "bytes": 646576,
+      "size": [
+        1399,
+        1124
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        24,
+        21
+      ],
+      "target_size": [
+        96,
+        84
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND2.SS",
+        "sha256": "af84ca1b7fa3deb5c93401562277c858dd4b6ef66b158ff2b2480c4e1b5578f3",
+        "ordinal": 0,
+        "encoded_sha256": "5f0aa4c1dc7c66ae1776456f636de968df5c27bd830794e7c6d97318e6ab8ecf",
+        "indexed_sha256": "0e5b1786a08001625500c4d07b7a12a0c93a953cf42bc9c3388613d2aacff137"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          24,
+          21
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          441,
+          149,
+          907,
+          657
+        ]
+      ],
+      "generation_prompt": "Use case: style-transfer. Asset type: one standalone transparent-background HD animation-frame PNG for the same approved fine pixel-art historical map. Image 1 defines the original frame's exact composition, proportions, contour, placement and phase. Image 2 is the approved HD artwork for consistent character/material detail, palette and crisp pixel clusters. Redraw the object seen in image 1 in that HD style. Remove ALL parchment map, lettering and map lines, leaving genuine alpha transparency around the object. Preserve negative gaps as alpha, no white/black/checkerboard backdrop, no added shadow on a floor, no text, no extra objects, no frame, no atlas. This is a single frame, not a sprite sheet. This frame is a small antique-map volcano with ochre/copper rock and orange rim at the bottom, sending up compact curling gray blue-green smoke. Match frame0's short three-lobed smoke silhouette, smoke direction, plume scale, orange crater and volcano placement from image1. Use image2 only for coherent pixel technique and volcano identity; do not copy its taller smoke shape. The original SS mask will select only the changing smoke at runtime, so keep the rock body stable and anchored as in image1.",
+      "reference_sha256": {
+        "openwnd2-native-000-r2.png": "52c69e7f14f43caab038d005d15d879a7928e09d3a358a2b1275ac06cab3a8a1",
+        "opening-volcano-000.png": "24ef3ca78240d8fd7f893ba0026773665e2c1f29ac033a232577cae9734ac09b"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openwnd2-001.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "7e8c61222ee8ab952983489d48dfd12a99cd586f3b3c0309e8313df523887bc6",
+      "bytes": 687929,
+      "size": [
+        1399,
+        1124
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        23,
+        25
+      ],
+      "target_size": [
+        92,
+        100
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND2.SS",
+        "sha256": "af84ca1b7fa3deb5c93401562277c858dd4b6ef66b158ff2b2480c4e1b5578f3",
+        "ordinal": 1,
+        "encoded_sha256": "d13697176449283bc94085b7c7c54fd7152baac776d23e0ec776dc9071d0fb7e",
+        "indexed_sha256": "dcd2e4575fe2d461cb719225463b01f4c305d9816eb961e159e17fb36ce71ac8"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          23,
+          25
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          350,
+          93,
+          898,
+          671
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit and style-transfer. Asset type: ONE transparent-background HD animation frame PNG. The FIRST image is the exact original animation phase to redraw; the SECOND image is the HD frame0 master for the same object's stable identity, pixel clusters, material detail, palette and canvas proportions. Draw the phase from the FIRST image, keeping the master character or rock body stable. The changing smoke/cloud must follow the first image's silhouette, extent, position, curl directions, openings and negative gaps, even where this differs from the frame0 master's compact plume. Keep the object anchored and the same scale in its canvas. Remove all original parchment background, lettering and map lines, keeping genuine alpha outside the object and inside negative gaps. No checkerboard, black or white background, no floor shadow, no text, no watermark, no atlas. Preserve fine crisp pixel art; no blur, photorealism or painterly smoothing. Target: the ochre/orange antique-map volcano and its curling gray blue-green smoke, phase 1. Change only the original smoke silhouette and its directly affected crater/plume region. Keep the rock body, rim, lava colors and anchor stable. Do not turn the smoke into a flag, tree or new character.",
+      "reference_sha256": {
+        "openwnd2-native-001-r2.png": "30c695a82c3d50a606e4b2a43b4650189dd24b4d4274c20be1c828739b833df8",
+        "openwnd2-000-candidate-r1.png": "50f262a6de52be427996b88e039dea5954088d1aefcd4a00f55ffdc96e8523ba"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openwnd2-002.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "8b6b7709028b1ad8a96e646e33c58ddb110c16d38145cc7952bfd536f4a699a9",
+      "bytes": 679949,
+      "size": [
+        1399,
+        1124
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        24,
+        25
+      ],
+      "target_size": [
+        96,
+        100
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND2.SS",
+        "sha256": "af84ca1b7fa3deb5c93401562277c858dd4b6ef66b158ff2b2480c4e1b5578f3",
+        "ordinal": 2,
+        "encoded_sha256": "1879e570627645495b01f59ae9d48606609f112574e87c097cadcc19cc08488d",
+        "indexed_sha256": "4d701580a0dfad945b511b4f6780dec4d7631f8ef15bd71168b49b15e30c67a8"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          24,
+          25
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          372,
+          98,
+          915,
+          695
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit and style-transfer. Asset type: ONE transparent-background HD animation frame PNG. The FIRST image is the exact original animation phase to redraw; the SECOND image is the HD frame0 master for the same object's stable identity, pixel clusters, material detail, palette and canvas proportions. Draw the phase from the FIRST image, keeping the master character or rock body stable. The changing smoke/cloud must follow the first image's silhouette, extent, position, curl directions, openings and negative gaps, even where this differs from the frame0 master's compact plume. Keep the object anchored and the same scale in its canvas. Remove all original parchment background, lettering and map lines, keeping genuine alpha outside the object and inside negative gaps. No checkerboard, black or white background, no floor shadow, no text, no watermark, no atlas. Preserve fine crisp pixel art; no blur, photorealism or painterly smoothing. Target: the ochre/orange antique-map volcano and its curling gray blue-green smoke, phase 2. Change only the original smoke silhouette and its directly affected crater/plume region. Keep the rock body, rim, lava colors and anchor stable. Do not turn the smoke into a flag, tree or new character.",
+      "reference_sha256": {
+        "openwnd2-native-002-r2.png": "0fde1d128c12b688bb14dfed40721cb66dd2bc7bc8845f545bc95688b636caee",
+        "openwnd2-000-candidate-r1.png": "50f262a6de52be427996b88e039dea5954088d1aefcd4a00f55ffdc96e8523ba"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openwnd2-003.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "20febf81ab3c84f9d59ce5d72e9eb57c7cf721098f84366b4c030d29af353dcf",
+      "bytes": 706248,
+      "size": [
+        1399,
+        1124
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        25,
+        25
+      ],
+      "target_size": [
+        100,
+        100
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND2.SS",
+        "sha256": "af84ca1b7fa3deb5c93401562277c858dd4b6ef66b158ff2b2480c4e1b5578f3",
+        "ordinal": 3,
+        "encoded_sha256": "ff91369dd303b18ca2f26b4bfef04f96d2bc05368c6d2ed5868c80b891f40c3b",
+        "indexed_sha256": "24faf4a515d450940235c6d9c6d9ca8e97899ab687e74f86f6d2659e007f6948"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          25,
+          25
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          416,
+          115,
+          914,
+          685
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit and style-transfer. Asset type: ONE transparent-background HD animation frame PNG. The FIRST image is the exact original animation phase to redraw; the SECOND image is the HD frame0 master for the same object's stable identity, pixel clusters, material detail, palette and canvas proportions. Draw the phase from the FIRST image, keeping the master character or rock body stable. The changing smoke/cloud must follow the first image's silhouette, extent, position, curl directions, openings and negative gaps, even where this differs from the frame0 master's compact plume. Keep the object anchored and the same scale in its canvas. Remove all original parchment background, lettering and map lines, keeping genuine alpha outside the object and inside negative gaps. No checkerboard, black or white background, no floor shadow, no text, no watermark, no atlas. Preserve fine crisp pixel art; no blur, photorealism or painterly smoothing. Target: the ochre/orange antique-map volcano and its curling gray blue-green smoke, phase 3. Change only the original smoke silhouette and its directly affected crater/plume region. Keep the rock body, rim, lava colors and anchor stable. Do not turn the smoke into a flag, tree or new character.",
+      "reference_sha256": {
+        "openwnd2-native-003-r2.png": "f6ef957aef9b22cc834635c19ba8e94110f7746def76ae3744bfbce38a6982bd",
+        "openwnd2-000-candidate-r1.png": "50f262a6de52be427996b88e039dea5954088d1aefcd4a00f55ffdc96e8523ba"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openwnd2-004.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "9f886e5ae1b5ef59461de70ff614c8a41ab6a0584f1ad7d19c76ee1ce5f531ba",
+      "bytes": 660381,
+      "size": [
+        1399,
+        1124
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        25,
+        25
+      ],
+      "target_size": [
+        100,
+        100
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND2.SS",
+        "sha256": "af84ca1b7fa3deb5c93401562277c858dd4b6ef66b158ff2b2480c4e1b5578f3",
+        "ordinal": 4,
+        "encoded_sha256": "9b31821a45e238cdf344e00ec01ac9adbc80df7fff775e0e225138867eea0ba7",
+        "indexed_sha256": "6110a183f7f8736780179e03524c07ac1c8e605b515723008364366266f0302b"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          25,
+          25
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          339,
+          130,
+          911,
+          690
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit and style-transfer. Asset type: ONE transparent-background HD animation frame PNG. The FIRST image is the exact original animation phase to redraw; the SECOND image is the HD frame0 master for the same object's stable identity, pixel clusters, material detail, palette and canvas proportions. Draw the phase from the FIRST image, keeping the master character or rock body stable. The changing smoke/cloud must follow the first image's silhouette, extent, position, curl directions, openings and negative gaps, even where this differs from the frame0 master's compact plume. Keep the object anchored and the same scale in its canvas. Remove all original parchment background, lettering and map lines, keeping genuine alpha outside the object and inside negative gaps. No checkerboard, black or white background, no floor shadow, no text, no watermark, no atlas. Preserve fine crisp pixel art; no blur, photorealism or painterly smoothing. Target: the ochre/orange antique-map volcano and its curling gray blue-green smoke, phase 4. Change only the original smoke silhouette and its directly affected crater/plume region. Keep the rock body, rim, lava colors and anchor stable. Do not turn the smoke into a flag, tree or new character.",
+      "reference_sha256": {
+        "openwnd2-native-004-r2.png": "be9eb13359fe21911f14be6dc69cbff33a6dc45803022676d8f09fa637b1d1c1",
+        "openwnd2-000-candidate-r1.png": "50f262a6de52be427996b88e039dea5954088d1aefcd4a00f55ffdc96e8523ba"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openwnd2-005.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "d3afd12231840a64e4e7eaca824b326f67ad3f44eae1ee9cb961103eda7db230",
+      "bytes": 743984,
+      "size": [
+        1399,
+        1124
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        26,
+        25
+      ],
+      "target_size": [
+        104,
+        100
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND2.SS",
+        "sha256": "af84ca1b7fa3deb5c93401562277c858dd4b6ef66b158ff2b2480c4e1b5578f3",
+        "ordinal": 5,
+        "encoded_sha256": "48d41245b87341ee0bad30853beca43356065fccdbb47141f27d69551b3bd064",
+        "indexed_sha256": "a490ed5302e0d5da7a58b88a216da8ebb14c203f0137ad90be259a32e0cd09c9"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          26,
+          25
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          283,
+          87,
+          909,
+          684
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit and style-transfer. Asset type: ONE transparent-background HD animation frame PNG. The FIRST image is the exact original animation phase to redraw; the SECOND image is the HD frame0 master for the same object's stable identity, pixel clusters, material detail, palette and canvas proportions. Draw the phase from the FIRST image, keeping the master character or rock body stable. The changing smoke/cloud must follow the first image's silhouette, extent, position, curl directions, openings and negative gaps, even where this differs from the frame0 master's compact plume. Keep the object anchored and the same scale in its canvas. Remove all original parchment background, lettering and map lines, keeping genuine alpha outside the object and inside negative gaps. No checkerboard, black or white background, no floor shadow, no text, no watermark, no atlas. Preserve fine crisp pixel art; no blur, photorealism or painterly smoothing. Target: the ochre/orange antique-map volcano and its curling gray blue-green smoke, phase 5. Change only the original smoke silhouette and its directly affected crater/plume region. Keep the rock body, rim, lava colors and anchor stable. Do not turn the smoke into a flag, tree or new character.",
+      "reference_sha256": {
+        "openwnd2-native-005-r2.png": "dea8d378953db4064b82e0925f24e01bdbfe3033444baac8c9e6b879e1098e93",
+        "openwnd2-000-candidate-r1.png": "50f262a6de52be427996b88e039dea5954088d1aefcd4a00f55ffdc96e8523ba"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openwnd2-006.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "c623311dd0ed2a4e26397a7f4d9db7710911537d2b39ddff5133a042de763415",
+      "bytes": 711849,
+      "size": [
+        1399,
+        1124
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        23,
+        25
+      ],
+      "target_size": [
+        92,
+        100
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND2.SS",
+        "sha256": "af84ca1b7fa3deb5c93401562277c858dd4b6ef66b158ff2b2480c4e1b5578f3",
+        "ordinal": 6,
+        "encoded_sha256": "b9a80c90bedde8e7c5f3a1d56a66c1c5b455044fecc58302d44c4a84ef125fe4",
+        "indexed_sha256": "03e354915b824ec0266dad91e1a67d0fa7ebb0aa6d7d13b98984afb09e56a07a"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          23,
+          25
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          387,
+          100,
+          885,
+          696
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit and style-transfer. Asset type: ONE transparent-background HD animation frame PNG. The FIRST image is the exact original animation phase to redraw; the SECOND image is the HD frame0 master for the same object's stable identity, pixel clusters, material detail, palette and canvas proportions. Draw the phase from the FIRST image, keeping the master character or rock body stable. The changing smoke/cloud must follow the first image's silhouette, extent, position, curl directions, openings and negative gaps, even where this differs from the frame0 master's compact plume. Keep the object anchored and the same scale in its canvas. Remove all original parchment background, lettering and map lines, keeping genuine alpha outside the object and inside negative gaps. No checkerboard, black or white background, no floor shadow, no text, no watermark, no atlas. Preserve fine crisp pixel art; no blur, photorealism or painterly smoothing. Target: the ochre/orange antique-map volcano and its curling gray blue-green smoke, phase 6. Change only the original smoke silhouette and its directly affected crater/plume region. Keep the rock body, rim, lava colors and anchor stable. Do not turn the smoke into a flag, tree or new character.",
+      "reference_sha256": {
+        "openwnd2-native-006-r2.png": "8e3ee61918acba7555830ad6617cc0bd8986a5f71ca6c618f5d698c908701026",
+        "openwnd2-000-candidate-r1.png": "50f262a6de52be427996b88e039dea5954088d1aefcd4a00f55ffdc96e8523ba"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openwnd2-007.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "f96ab63b7d87175c656465af86f010cf1414810a97fc86923755aaa8806b2c13",
+      "bytes": 707727,
+      "size": [
+        1399,
+        1124
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        24,
+        25
+      ],
+      "target_size": [
+        96,
+        100
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND2.SS",
+        "sha256": "af84ca1b7fa3deb5c93401562277c858dd4b6ef66b158ff2b2480c4e1b5578f3",
+        "ordinal": 7,
+        "encoded_sha256": "57899ef256cd5b66d1c59d629f788bda5f0c2eed312659bc9fcf87164a867502",
+        "indexed_sha256": "ef229085313502ab3c7814ff3cfca460aa2e9c2443b35feae688dd4ed6b59d92"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          24,
+          25
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          379,
+          113,
+          915,
+          649
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit and style-transfer. Asset type: ONE transparent-background HD animation frame PNG. The FIRST image is the exact original animation phase to redraw; the SECOND image is the HD frame0 master for the same object's stable identity, pixel clusters, material detail, palette and canvas proportions. Draw the phase from the FIRST image, keeping the master character or rock body stable. The changing smoke/cloud must follow the first image's silhouette, extent, position, curl directions, openings and negative gaps, even where this differs from the frame0 master's compact plume. Keep the object anchored and the same scale in its canvas. Remove all original parchment background, lettering and map lines, keeping genuine alpha outside the object and inside negative gaps. No checkerboard, black or white background, no floor shadow, no text, no watermark, no atlas. Preserve fine crisp pixel art; no blur, photorealism or painterly smoothing. Target: the ochre/orange antique-map volcano and its curling gray blue-green smoke, phase 7. Change only the original smoke silhouette and its directly affected crater/plume region. Keep the rock body, rim, lava colors and anchor stable. Do not turn the smoke into a flag, tree or new character.",
+      "reference_sha256": {
+        "openwnd2-native-007-r2.png": "ab9470a9a0a2263449bae9ed62b8b7d62d7052449e1c37842c2a3947299191e4",
+        "openwnd2-000-candidate-r1.png": "50f262a6de52be427996b88e039dea5954088d1aefcd4a00f55ffdc96e8523ba"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openwnd2-008.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "26d8d9cbe543da4e5b29fe47db07175acb30fab0398e15086fbb163d6fb22c18",
+      "bytes": 700671,
+      "size": [
+        1399,
+        1124
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        25,
+        25
+      ],
+      "target_size": [
+        100,
+        100
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND2.SS",
+        "sha256": "af84ca1b7fa3deb5c93401562277c858dd4b6ef66b158ff2b2480c4e1b5578f3",
+        "ordinal": 8,
+        "encoded_sha256": "ee4a4316a0265ae6b112d03b4c790959dc7569c0fa5145c1a50976a13c928737",
+        "indexed_sha256": "7edbdbb010747824815f4cb33bd3c0920d7499040324289c747e6cdbe21d5916"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          25,
+          25
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          386,
+          88,
+          871,
+          664
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit and style-transfer. Asset type: ONE transparent-background HD animation frame PNG. The FIRST image is the exact original animation phase to redraw; the SECOND image is the HD frame0 master for the same object's stable identity, pixel clusters, material detail, palette and canvas proportions. Draw the phase from the FIRST image, keeping the master character or rock body stable. The changing smoke/cloud must follow the first image's silhouette, extent, position, curl directions, openings and negative gaps, even where this differs from the frame0 master's compact plume. Keep the object anchored and the same scale in its canvas. Remove all original parchment background, lettering and map lines, keeping genuine alpha outside the object and inside negative gaps. No checkerboard, black or white background, no floor shadow, no text, no watermark, no atlas. Preserve fine crisp pixel art; no blur, photorealism or painterly smoothing. Target: the ochre/orange antique-map volcano and its curling gray blue-green smoke, phase 8. Change only the original smoke silhouette and its directly affected crater/plume region. Keep the rock body, rim, lava colors and anchor stable. Do not turn the smoke into a flag, tree or new character.",
+      "reference_sha256": {
+        "openwnd2-native-008-r2.png": "72e870dcf900d9d6e0b0c68acf5fbaf8cb5dd51bb540ed8ccfa6d62067977f46",
+        "openwnd2-000-candidate-r1.png": "50f262a6de52be427996b88e039dea5954088d1aefcd4a00f55ffdc96e8523ba"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openwnd2-009.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "900819304747b7c2384f8d17165b7c3872c201eb376ad43cff7425437fbc2959",
+      "bytes": 675312,
+      "size": [
+        1399,
+        1124
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        25,
+        25
+      ],
+      "target_size": [
+        100,
+        100
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND2.SS",
+        "sha256": "af84ca1b7fa3deb5c93401562277c858dd4b6ef66b158ff2b2480c4e1b5578f3",
+        "ordinal": 9,
+        "encoded_sha256": "56310d335f4000add28582854cb237a53bbc754a4e048d6d8e2c3781cd907a56",
+        "indexed_sha256": "38f53f64fe1b6af233467d17fb699b585a2e49aeeb1581f81e1be882e5f90d19"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          25,
+          25
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          381,
+          121,
+          874,
+          667
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit and style-transfer. Asset type: ONE transparent-background HD animation frame PNG. The FIRST image is the exact original animation phase to redraw; the SECOND image is the HD frame0 master for the same object's stable identity, pixel clusters, material detail, palette and canvas proportions. Draw the phase from the FIRST image, keeping the master character or rock body stable. The changing smoke/cloud must follow the first image's silhouette, extent, position, curl directions, openings and negative gaps, even where this differs from the frame0 master's compact plume. Keep the object anchored and the same scale in its canvas. Remove all original parchment background, lettering and map lines, keeping genuine alpha outside the object and inside negative gaps. No checkerboard, black or white background, no floor shadow, no text, no watermark, no atlas. Preserve fine crisp pixel art; no blur, photorealism or painterly smoothing. Target: the ochre/orange antique-map volcano and its curling gray blue-green smoke, phase 9. Change only the original smoke silhouette and its directly affected crater/plume region. Keep the rock body, rim, lava colors and anchor stable. Do not turn the smoke into a flag, tree or new character.",
+      "reference_sha256": {
+        "openwnd2-native-009-r2.png": "b2b5408516912978ead60e3e49f4911e352c8afbf261e09ab943c1650718905d",
+        "openwnd2-000-candidate-r1.png": "50f262a6de52be427996b88e039dea5954088d1aefcd4a00f55ffdc96e8523ba"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openwnd2-010.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "50f262a6de52be427996b88e039dea5954088d1aefcd4a00f55ffdc96e8523ba",
+      "bytes": 646576,
+      "size": [
+        1399,
+        1124
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        24,
+        21
+      ],
+      "target_size": [
+        96,
+        84
+      ],
+      "sampling": "integer pixel-center nearest from measured cloud/plume rectangle; raw PNG unchanged",
+      "alpha": "preserve raw alpha; integer source-over onto verified original PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENWND2.SS",
+        "sha256": "af84ca1b7fa3deb5c93401562277c858dd4b6ef66b158ff2b2480c4e1b5578f3",
+        "ordinal": 10,
+        "encoded_sha256": "5f0aa4c1dc7c66ae1776456f636de968df5c27bd830794e7c6d97318e6ab8ecf",
+        "indexed_sha256": "0e5b1786a08001625500c4d07b7a12a0c93a953cf42bc9c3388613d2aacff137"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          24,
+          21
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          441,
+          149,
+          907,
+          657
+        ]
+      ],
+      "generation_prompt": "Use case: style-transfer. Asset type: one standalone transparent-background HD animation-frame PNG for the same approved fine pixel-art historical map. Image 1 defines the original frame's exact composition, proportions, contour, placement and phase. Image 2 is the approved HD artwork for consistent character/material detail, palette and crisp pixel clusters. Redraw the object seen in image 1 in that HD style. Remove ALL parchment map, lettering and map lines, leaving genuine alpha transparency around the object. Preserve negative gaps as alpha, no white/black/checkerboard backdrop, no added shadow on a floor, no text, no extra objects, no frame, no atlas. This is a single frame, not a sprite sheet. This frame is a small antique-map volcano with ochre/copper rock and orange rim at the bottom, sending up compact curling gray blue-green smoke. Match frame0's short three-lobed smoke silhouette, smoke direction, plume scale, orange crater and volcano placement from image1. Use image2 only for coherent pixel technique and volcano identity; do not copy its taller smoke shape. The original SS mask will select only the changing smoke at runtime, so keep the rock body stable and anchored as in image1.",
+      "reference_sha256": {
+        "openwnd2-native-000-r2.png": "52c69e7f14f43caab038d005d15d879a7928e09d3a358a2b1275ac06cab3a8a1",
+        "opening-volcano-000.png": "24ef3ca78240d8fd7f893ba0026773665e2c1f29ac033a232577cae9734ac09b"
+      },
+      "coverage": "READY R86 complete normal SS and selected36 publication; formal HD GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private",
+      "raw_reuse_source": "openwnd2-000.png",
+      "reuse_reason": "Original native size, encoded hash and indexed hash are identical; raw PNG copied unchanged"
     }
   }
 }

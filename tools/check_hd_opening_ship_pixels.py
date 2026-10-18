@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""規格069：由原PNG與獨立發布來源核對船隻與太陽動畫RGBA。"""
+"""規格069：由原PNG與獨立發布來源核對船隻、太陽、風與煙霧動畫RGBA。"""
 import argparse,base64,collections,csv,hashlib,json,os,struct
 from pathlib import Path
 from PIL import Image
@@ -77,21 +77,21 @@ def main():
  manifest=read(a.assets/'manifest.json');pics={1:Image.new('RGBA',(1280,800)),2:Image.new('RGBA',(3840,528))};ships={};dimensions={};selected={}
  for name,item in manifest['assets'].items():
   f=item.get('original_source',{}).get('file')
-  if f not in ['OPENBORD.PIK','OPENING.PIK','OPENSHIP.SS','OPENSUN.SS']:continue
+  if f not in ['OPENBORD.PIK','OPENING.PIK','OPENSHIP.SS','OPENSUN.SS','OPENWND1.SS','OPENWND2.SS']:continue
   path=a.assets/name;assert path.is_file()and not path.is_symlink()and sha(path)==item['sha256']
   im=Image.open(path).convert('RGBA');assert list(im.size)==item['size'];selected[name]=item['sha256']
-  if f in ['OPENSHIP.SS','OPENSUN.SS']:
-   ordinal=item['original_source']['ordinal'];ident=(1250 if f=='OPENSHIP.SS'else 1258)+ordinal;w,h=item['native_size'];dimensions[ident]=(w,h)
+  if f in ['OPENSHIP.SS','OPENSUN.SS','OPENWND1.SS','OPENWND2.SS']:
+   ordinal=item['original_source']['ordinal'];ident={'OPENSHIP.SS':1250,'OPENSUN.SS':1258,'OPENWND1.SS':1266,'OPENWND2.SS':1276}[f]+ordinal;w,h=item['native_size'];dimensions[ident]=(w,h)
    dst=ships[1250].copy()if f=='OPENSHIP.SS'and ordinal>0 else Image.new('RGBA',(w*4,h*4))
   else:dst=pics[1 if f=='OPENBORD.PIK'else 2]
   for r,b in zip(item['native_display_rects'],item['generated_display_rects']):
    x0,y0,x1,y1=r;piece=mapped(im,b,((x1-x0)*4,(y1-y0)*4))
-   if f in ['OPENSHIP.SS','OPENSUN.SS']or name in ['openbord-000.png','opening-000.png']:dst.paste(piece,(x0*4,y0*4))
+   if f in ['OPENSHIP.SS','OPENSUN.SS','OPENWND1.SS','OPENWND2.SS']or name in ['openbord-000.png','opening-000.png']:dst.paste(piece,(x0*4,y0*4))
    else:dst.alpha_composite(piece,(x0*4,y0*4))
-  if f in ['OPENSHIP.SS','OPENSUN.SS']:ships[ident]=dst
+  if f in ['OPENSHIP.SS','OPENSUN.SS','OPENWND1.SS','OPENWND2.SS']:ships[ident]=dst
  assert set(range(1250,1258)).issubset(ships)
- assert set(ships)in [set(range(1250,1258)),set(range(1250,1265))]
- assert len(selected)==(29 if 1258 in ships else 21)
+ assert set(ships)in [set(range(1250,1258)),set(range(1250,1265)),set(range(1250,1265))|set(range(1266,1287))]
+ assert len(selected)==14+len(ships)
  assert all(im.getchannel('A').getextrema()==(255,255)for im in pics.values())
  pics={k:im.tobytes()for k,im in pics.items()};ships={k:im.tobytes()for k,im in ships.items()}
  nativePIC={1:(a.decoded/'1092.idx').read_bytes(),2:(a.decoded/'1179.idx').read_bytes()}
@@ -104,7 +104,7 @@ def main():
    states[step]=extra_states[step];owners[step]=extra_owners[step];roots[step]=a.model_overlay
  if a.gui:samples=read(a.formal/'capture.json')['samples']
  else:samples=[{'label':f.stem,'image':str(f),'graphics':'hd','state':{'step':int(f.stem[6:])}}for f in sorted(a.formal.glob('point-*.png'))]
- totals=collections.Counter();results=[];frames=set();sun_frames=set()
+ totals=collections.Counter();results=[];frames=set();sun_frames=set();wind_frames=set();smoke_frames=set()
  for sample in samples:
   step=sample['state']['step'];state=states[step];o=owners[step];model=roots[step];actual=Image.open(sample['image']).convert('RGBA');assert actual.size==(1280,800)
   if a.gui:
@@ -119,7 +119,7 @@ def main():
   pic=list(struct.iter_unpack('<BIB',(model/o['published_pic_file']).read_bytes()));actor=list(struct.iter_unpack('<HHBBBIB',(model/o['published_actor_file']).read_bytes()))
   assert len(pic)==len(actor)==64000
   enabled=sample['graphics']=='hd'and state['mode']==19 and o['live_code']and mem[0xa0000:0xafa00]==idx and hashlib.sha256(pal).hexdigest()=='b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54'and mem[0xafc00:0xaff00]==pal
-  masks=[bytearray(8000),bytearray(8000)];counts=collections.Counter();seen=set();sun_seen=set()
+  masks=[bytearray(8000),bytearray(8000)];counts=collections.Counter();actor_counts=collections.Counter();seen=set();sun_seen=set();wind_seen=set();smoke_seen=set()
   for pos,(kind,local,value)in enumerate(pic):
    ident,sslocal,ssvalue,pad,underKind,underLocal,underValue=actor[pos]
    if ident not in nativeSS:ident=0
@@ -141,8 +141,13 @@ def main():
       src=((ssy+dy)*w*4+ssx+dx)*4;at=dest+dx*4;alpha=ships[ident][src+3]
       for channel in range(3):expected[at+channel]=(ships[ident][src+channel]*alpha+expected[at+channel]*(255-alpha)+127)//255
    if ident:
-    counts['sun_rgba'if ident>=1258 else'ship_rgba']+=16
-    (sun_seen if ident>=1258 else seen).add(ident-(1258 if ident>=1258 else 1250));masks[1][pos>>3]|=1<<(pos&7)
+    if 1250<=ident<1258:group,base,visible='ship_rgba',1250,seen
+    elif 1258<=ident<1265:group,base,visible='sun_rgba',1258,sun_seen
+    elif 1266<=ident<1276:group,base,visible='wind_rgba',1266,wind_seen
+    elif 1276<=ident<1287:group,base,visible='smoke_rgba',1276,smoke_seen
+    else:raise AssertionError(('unknown formal animation',ident))
+    counts[group]+=16;actor_counts[ident]+=1
+    visible.add(ident-base);masks[1][pos>>3]|=1<<(pos&7)
    else:counts['border_rgba'if kind==1 else'map_rgba']+=16;masks[0][pos>>3]|=1<<(pos&7)
   if a.gui and sample.get('native_live',{}).get('items'):
    before_text=bytes(expected)
@@ -156,8 +161,11 @@ def main():
   assert actual.tobytes()==expected,(sample['label'],'complete RGBA differs')
   if a.gui and enabled:
    receipt=sample['native_live']['hd']['opening_picture'];assert base64.b64decode(receipt['picture_mask'])==masks[0]and base64.b64decode(receipt['sprite_mask'])==masks[1]
-  frames.update(seen);sun_frames.update(sun_seen);totals.update(counts);totals['full_rgba']+=1280*800
-  results.append({'label':sample['label'],'step':step,'counts':dict(counts),'frames':sorted(seen),'sun_frames':sorted(sun_seen),'main_vga_equal':o['full_main_vga_equal']})
- report={'result':'PASS_OPENING_ANIMATION_INDEPENDENT_RGBA','samples':len(samples),'verified_frames':sorted(frames),'verified_sun_frames':sorted(sun_frames),'totals':dict(totals),'assets':selected,'results':results,'scope':'canonical palette, exact published original provenance, raw PNG integer geometry; unknown sources stay original'}
- a.output.mkdir();(a.output/'check.json').write_text(json.dumps(report,indent=2)+'\n');print(report['result'],report['samples'],report['verified_frames'],report['verified_sun_frames'],report['totals'],flush=True)
+   for field,first,count in [('frames',1250,8),('sun_frames',1258,7),('wind_frames',1266,10),('smoke_frames',1276,11)]:
+    if first not in nativeSS:continue
+    assert receipt[field]==[actor_counts[first+i]for i in range(count)],(sample['label'],field,'published frame counts differ')
+  frames.update(seen);sun_frames.update(sun_seen);wind_frames.update(wind_seen);smoke_frames.update(smoke_seen);totals.update(counts);totals['full_rgba']+=1280*800
+  results.append({'label':sample['label'],'step':step,'counts':dict(counts),'frames':sorted(seen),'sun_frames':sorted(sun_seen),'wind_frames':sorted(wind_seen),'smoke_frames':sorted(smoke_seen),'main_vga_equal':o['full_main_vga_equal']})
+ report={'result':'PASS_OPENING_ANIMATION_INDEPENDENT_RGBA','samples':len(samples),'verified_frames':sorted(frames),'verified_sun_frames':sorted(sun_frames),'verified_wind_frames':sorted(wind_frames),'verified_smoke_frames':sorted(smoke_frames),'totals':dict(totals),'assets':selected,'results':results,'scope':'canonical palette, exact published original provenance, raw PNG integer geometry; unknown sources stay original'}
+ a.output.mkdir();(a.output/'check.json').write_text(json.dumps(report,indent=2)+'\n');print(report['result'],report['samples'],report['verified_frames'],report['verified_sun_frames'],report['verified_wind_frames'],report['verified_smoke_frames'],report['totals'],flush=True)
 if __name__=='__main__':main()

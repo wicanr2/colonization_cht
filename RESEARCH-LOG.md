@@ -6885,3 +6885,24 @@ Go1.26.7與實模式CS:IP／20bit線性RAM位址空間沿R85。
 總審查b3cd83f8d9e588dcec995179856e2070735e460e94ef3c5a5f4296c7457e90a1，
 限定完成範圍與重生入口見[規格069 R85](docs/spec/069-hd-menu-background-and-textures.md)。
 未驗SS、淡入淡出與全量HD保持未完成，不從來源盤點推定顯示已完成。
+
+## 2026-10-19：R86吹氣雲、火山煙與原版船遮擋
+
+已證實。OPENING.EXE與解碼清冊沿R85固定指紋，dosgolem
+82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7；
+位址空間為真實模式CS:IP與20bit線性RAM，不是EXE檔案偏移。
+OPENWND1.SS為774dc50231443957d2e051a39765ea1652daae7317c517ba77094b67e07d1afb，
+OPENWND2.SS為af84ca1b7fa3deb5c93401562277c858dd4b6ef66b158ff2b2480c4e1b5578f3。
+原版04A2:0000及三個寫入端、0557:009F發布契約見[規格069 R86](docs/spec/069-hd-menu-background-and-textures.md)。
+
+正常Enter至400M，145點完整原版狀態及原PNG、DOS讀取／開檔與控制相同，
+正式同範圍36來源共1024次完整呼叫。1267與1268各有一格由已驗船1257／1250覆蓋；
+其餘可見雲／煙格及底圖完整，不以全不透明來源必須全數可見的錯誤假設補畫。
+來源審查678069640cff19484a8ce902d02cb8ab20bdd7760efe2696a13c9a628653dcf4。
+
+正式正常145點與36張完整RGBA36864000點通過；
+21幀原PNG／alpha保持，15張新生成與6檔原樣重用，幾何只改顯示取樣。
+原版PIK已含靜態雲／煙，保留其來源與底圖，不採三張清除背景候選。
+正式二進位f4c4472b8f0eba3f8574f079cbb991c3f54d683eb8c0ca9ef49c81fae19261c3，
+清冊ffccf30200bd18a49869360222a98f0237ca8fd014711bafcf5f866c7d4618ce。
+本機根hd-opening-wind-smoke-r86；GUI、原版WAV／存檔重播與CONFORMED仍待收齊。

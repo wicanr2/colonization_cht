@@ -1,4 +1,4 @@
-// 規格069 R83／R85 READY：開場SS完整呼叫與已發布來源；不改原版RAM、規則或計時。
+// 規格069 R83／R85／R86 READY：開場SS完整呼叫與已發布來源；不改原版RAM、規則或計時。
 package main
 
 import (
@@ -26,9 +26,9 @@ type hdOpeningSpriteCell struct {
 }
 type hdOpeningSpriteRuntime struct {
 	p                                                                 *hdOpeningRuntime
-	art                                                               [15]*image.NRGBA
-	native                                                            [15][1175]byte
-	nativeValid                                                       [15]bool
+	art                                                               [36]*image.NRGBA
+	native                                                            [36][1175]byte
+	nativeValid                                                       [36]bool
 	cells, published                                                  [64000]hdOpeningSpriteCell
 	pictures                                                          [64000]hdOpeningCell
 	active, outside                                                   bool
@@ -49,6 +49,9 @@ var hdOpeningSpriteWriterCodes = map[uint16][]byte{
 
 func loadHDOpeningSprites(p *hdOpeningRuntime, game, directory string) (*hdOpeningSpriteRuntime, error) {
 	s := &hdOpeningSpriteRuntime{p: p}
+	if len(hdOpeningSpriteDefinitions) != 36 {
+		return nil, fmt.Errorf("opening sprite definition count")
+	}
 	seen := map[string]bool{}
 	for i, d := range hdOpeningSpriteDefinitions {
 		if !seen[d.sourceFile] {
@@ -57,7 +60,7 @@ func loadHDOpeningSprites(p *hdOpeningRuntime, game, directory string) (*hdOpeni
 				return nil, e
 			}
 			if hash(raw) != d.sourceSHA {
-				return nil, fmt.Errorf("sun original fingerprint")
+				return nil, fmt.Errorf("opening sprite original fingerprint")
 			}
 			seen[d.sourceFile] = true
 		}
@@ -66,14 +69,14 @@ func loadHDOpeningSprites(p *hdOpeningRuntime, game, directory string) (*hdOpeni
 			return nil, e
 		}
 		if hash(raw) != d.artSHA {
-			return nil, fmt.Errorf("sun asset fingerprint")
+			return nil, fmt.Errorf("opening sprite asset fingerprint")
 		}
 		im, e := png.Decode(bytes.NewReader(raw))
 		if e != nil {
 			return nil, e
 		}
 		if im.Bounds() != image.Rect(0, 0, d.artSize.X, d.artSize.Y) || len(d.nativeRects) != len(d.artRects) || d.w*d.h > 1175 {
-			return nil, fmt.Errorf("sun geometry")
+			return nil, fmt.Errorf("opening sprite geometry")
 		}
 		dst := image.NewNRGBA(image.Rect(0, 0, d.w*4, d.h*4))
 		if i > 0 && i < 8 {
@@ -83,7 +86,7 @@ func loadHDOpeningSprites(p *hdOpeningRuntime, game, directory string) (*hdOpeni
 			a := d.artRects[k]
 			target := image.Rect(r.Min.X*4, r.Min.Y*4, r.Max.X*4, r.Max.Y*4)
 			if a.Empty() || !a.In(im.Bounds()) || target.Empty() || !target.In(dst.Bounds()) {
-				return nil, fmt.Errorf("sun rectangle")
+				return nil, fmt.Errorf("opening sprite rectangle")
 			}
 			for y := target.Min.Y; y < target.Max.Y; y++ {
 				for x := target.Min.X; x < target.Max.X; x++ {
@@ -130,7 +133,7 @@ func (s *hdOpeningSpriteRuntime) beforeInstruction() {
 		return
 	}
 	ordinal := int(c.R[golem.AX]&0x7fff) - 1
-	if ordinal < 0 || ordinal >= 8 {
+	if ordinal < 0 || ordinal >= 11 {
 		return
 	}
 	stack, ok := hdOpeningSpriteWords(m, c.Seg[golem.SS], c.R[golem.SP], 5)
@@ -354,8 +357,8 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 		if c.id == 0 {
 			continue
 		}
-		slot := int(c.id) - 1250
-		if slot < 0 || slot >= len(hdOpeningSpriteDefinitions) || int(c.local) >= 1175 || !s.nativeValid[slot] || s.native[slot][c.local] != c.value || c.value == 253 || f.indexed[pos] != c.value {
+		slot, known := hdOpeningSpriteSlot(c.id)
+		if !known || slot >= len(hdOpeningSpriteDefinitions) || int(c.local) >= 1175 || !s.nativeValid[slot] || s.native[slot][c.local] != c.value || c.value == 253 || f.indexed[pos] != c.value {
 			r["reason"] = "sprite-source"
 			return r
 		}
@@ -370,6 +373,8 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 	sprites := 0
 	frames := [8]int{}
 	sunFrames := [7]int{}
+	windFrames := [10]int{}
+	smokeFrames := [11]int{}
 	for pos := 0; pos < 64000; pos++ {
 		if !image.Pt(pos%320, pos/320).In(bounds) {
 			continue
@@ -397,7 +402,7 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 		if !s.validUnder(actor.under) {
 			continue
 		}
-		slot := int(actor.id) - 1250
+		slot, _ := hdOpeningSpriteSlot(actor.id)
 		sx, sy = int(actor.local)%hdOpeningSpriteDefinitions[slot].w*4, int(actor.local)/hdOpeningSpriteDefinitions[slot].w*4
 		for dy := 0; dy < 4; dy++ {
 			for dx := 0; dx < 4; dx++ {
@@ -410,8 +415,12 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 		sprites++
 		if slot < 8 {
 			frames[slot]++
-		} else {
+		} else if slot < 15 {
 			sunFrames[slot-8]++
+		} else if slot < 25 {
+			windFrames[slot-15]++
+		} else {
+			smokeFrames[slot-25]++
 		}
 		spriteMask[pos>>3] |= 1 << uint(pos&7)
 	}
@@ -421,8 +430,21 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 	r["sprite_painted"] = sprites
 	r["frames"] = frames
 	r["sun_frames"] = sunFrames
+	r["wind_frames"] = windFrames
+	r["smoke_frames"] = smokeFrames
 	r["picture_mask"] = mask
 	r["sprite_mask"] = spriteMask
 	r["reason"] = "verified-published-opening"
 	return r
+}
+
+// 1265是其他底紋來源；不得把它索引為開場動畫。
+func hdOpeningSpriteSlot(id uint16) (int, bool) {
+	if id >= 1250 && id <= 1264 {
+		return int(id - 1250), true
+	}
+	if id >= 1266 && id <= 1286 {
+		return int(id - 1251), true
+	}
+	return 0, false
 }

@@ -1969,3 +1969,71 @@ verify-r85-caption-replays-r1.py、make-r85-conformance-r2.py與verify-r85-confo
 tools/check_hd_opening_ship_pixels.py與tools/build_hd_source_index.py；
 索引須附--opening-sun-ready-report、--opening-sun-conformed-report、
 --inherited-index及--inherited-manifest，不從本節文字推定通過。
+
+### 2026-10-19 R86雲與煙動畫DRAFT
+
+範圍為OPENWND1十幀吹氣雲與OPENWND2十一幀火山煙。
+沿定稿像素風與既有逐格來源／發布模型，只改顯示；不更改原版動畫時序、位置、遮擋、輸入或存檔。
+
+| 原版來源 | 已證實資料 |
+|---|---|
+| OPENWND1.SS | SHA-256 774dc50231443957d2e051a39765ea1652daae7317c517ba77094b67e07d1afb；來源1266至1275，十幀20×15、25×21或26×21。 |
+| OPENWND2.SS | SHA-256 af84ca1b7fa3deb5c93401562277c858dd4b6ef66b158ff2b2480c4e1b5578f3；來源1276至1286，十一幀24×21或23至26×25。 |
+| 原始定位 | OPENING.EXE與解碼清冊沿R85固定雜湊；04A2:0000及0177／01AA／01C8、0557:009F。位址為dosgolem真實模式CS:IP及20bit線性RAM。 |
+| 完整正常來源 | 一次Enter至400M，145點CPU、完整RAM、IDX、DAC、原版PNG與DOS讀取／開檔和控制全等；選定36來源1024次完整呼叫。 |
+| 原版遮擋 | 1267與1268各有一格由已驗船幀1257／1250覆蓋。其餘可見雲／煙格皆有完整來源及PIK底圖；不要求被船覆蓋的雲格仍顯示。 |
+| 候選 | 21檔原PNG，15張新生成、6檔依相同原版尺寸及編碼／索引重用。只取樣已量測雲／煙矩形，保留原PNG與alpha。 |
+| 合成 | 原版PIK本來含靜態雲／煙。沿既有PIK底圖及來源alpha合成；新清除背景候選不用於正式路徑。未知前景保持原圖，最新已驗來源自然決定原版遮擋。 |
+| 實作界線 | SS槽位15擴為36，1265仍屬其他來源，不納入；序號上限11。沿既有完整繪製、來源原碼／值、發布及裁切守門。新增wind_frames十項與smoke_frames十一項計數。 |
+
+本機根為workplace/reports/goal186-display-hd/hd-opening-wind-smoke-r86。
+來源審查normal36-source-review-r2.json：
+678069640cff19484a8ce902d02cb8ab20bdd7760efe2696a13c9a628653dcf4。
+幾何原型wind-smoke-geometry-r2.json：
+3e57a0be5f965db4a02bf42c911b856fbd4b2ea3188898a5a36056eaa4da053f。
+
+獨立探針tools/probe_hd_opening_sources.go新增--opening-sprite-files，
+以逗號分隔八種已知OPEN動畫檔名；須搭配--opening-sprites、--source-model、--catalog與--decoded，
+且不得和--all-opening-sprites併用。省略新參數仍觀測原15來源。
+預設與明示15來源共34點完整原版狀態／畫面相同，8種非法選取均在輸出前拒絕。
+只改觀測來源選取，七個低層寫入／發布函式與R85逐byte相同。
+
+原先腳本錯把文字模式的PNG視為必有，已依實際模式修正，沿用完成的原版執行。
+後續全不透明格必須全數發布的斷言又被原版船隻遮擋否定；
+改為逐格驗證可見雲／煙及兩格船幀來源，不接受未知或缺失像素。
+原失敗輸出保留，未重跑400M，也未放寬原版狀態比較。
+
+### 2026-10-19 R86 READY
+
+前節DRAFT經來源、重用與幾何審查後進入READY。
+wind-ready-r1.json SHA-256為10001a1dc561d63913ba159ca4a56054ae3d27b56d8228a58249526eccdf0f73。
+
+允許正式接入1266至1286共21幀，採wind-smoke-geometry-r2.json逐幀所列取樣矩形，
+保留原版PIK底圖、生成PNG原bytes與alpha。21個新檔包含15張生成原圖及6檔已證實相同來源重用，
+既有163張原PNG與全部metadata保持，預計184張原PNG／清冊185檔。
+不使用三張清除背景候選，不增加固定世界座標或新的遮擋規則。
+1267／1268各一格由原版船幀1257／1250覆蓋，正式層依最新已發布來源保留船。
+
+正式實作及驗收依序完成36槽位與序號上限、逐檔來源與原PNG核對、各幀守門、
+正常400M來源及RGBA、正常GUI、當次輸入重播／音訊／存檔與既有場景抽樣。
+未完成正式驗收前保持READY，不能把本節來源與原型證據稱為CONFORMED。
+
+### 2026-10-19 R86正式正常來源與資源通過，GUI驗收持續
+
+狀態維持READY。正式組建f4c4472b8f0eba3f8574f079cbb991c3f54d683eb8c0ca9ef49c81fae19261c3，
+68Go／51項來源綁定，184張原PNG／清冊185檔；建置與go vet通過。
+TestHDWindNormalPublishedSources取代較窄的太陽專用長測試，正常Enter至400M，
+145點完整CPU、RAM、IDX、DAC與週期和獨立原版相同，1024次接受、零拒絕。
+36張完整畫面共36864000個RGBA全等，含船八幀、太陽七幀、雲十幀與煙十一幀；
+右側九格裁切與原版船遮擋保持。此為正常執行的渲染證據，GUI與完整重播另驗。
+
+195個具名守門零失敗／零skip，正式生產Go及該批測試函式逐byte相同；
+不稱為在正式組裝重跑195項。另一本正式正常長測試已通過。
+288個原版檔及舊163張原PNG／全部metadata保持。
+185檔封裝與70種錯件拒絕通過；既有正常32點底紋證據沿未變生產／測試來源及原PNG繼承，
+不冒稱本批重跑。正式GUI、當次獨立來源／X11像素與三側CPU／RAM／IDX／DAC／WAV／存檔仍進行。
+
+本機入口：r86-wind-build-r1.json、r86-build-and-inheritance-r1.json、
+r86-wind-native-r1/check.json、r86-wind-native-pixels-r1/check.json及r86-package-check-r1.json。
+新增索引參數--opening-wind-ready-report與--opening-wind-conformed-report，
+仍要求完整限定審查，來源清冊未提前更新為CONFORMED。
