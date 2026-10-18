@@ -6940,3 +6940,16 @@ READY審查c8989497a2d4cf314ff8731ea33ccad9d23db2e5eaf108a2a2c0585dcc26e1d5；
 21張完整RGBA21504000點／完整魚形722304點通過，不採正式層姿態回報作oracle。
 審查2ff40b88e2805e32a7ea809af7e121540df233b2067f8e3f07a5214d114aff2c。
 範圍與重生入口見[規格069 R86／R87](docs/spec/069-hd-menu-background-and-textures.md)。
+
+## 2026-10-19：R88商標黑畫面與R89國王／出航來源
+
+已證實的範圍：R88正常50M／50點原版狀態與控制相同，MPSLOGO.SS十六幀、42次完整來源；
+目前DAC全零且既有0557:009F發布模型無信用。黑畫面根因未知。
+初步BIOS初始色盤／DAC讀埠假說未被3M唯讀探針證實，沒有修改模擬器。
+輸入、工具與位址空間見[規格069 R88](docs/spec/069-hd-menu-background-and-textures.md)。
+
+R89正常新遊戲19項原版GUI已取得國王室內及首張出航。
+KINGLSS1.PIK為0a364d32229ef08ca8f1f62b5af9773429fd075a276ca3b0c3200fa33ea5ee49，
+LEVN0001.PIK為893eeb7371e98bcdcce35f3f700f9ff2f8a53c880fe16feb743bf90f96423928；
+其餘逐檔指紋沿固定解碼清冊及候選審查f33fedea4891c4ca4a99066db1b7ceda14d17dc82066b537d3bc1782ad63ad44。
+十張完整正常來源仍在蒐集，未READY，沒有新增HD完成數。

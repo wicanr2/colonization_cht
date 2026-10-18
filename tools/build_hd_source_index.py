@@ -60,6 +60,8 @@ parser.add_argument('--opening-sun-ready-report',type=Path,help='規格069 R85�
 parser.add_argument('--opening-sun-conformed-report',type=Path,help='規格069 R85限定驗收及155張舊原稿繼承審查')
 parser.add_argument('--opening-wind-ready-report',type=Path,help='規格069 R86十幀雲與十一幀煙READY審查')
 parser.add_argument('--opening-wind-conformed-report',type=Path,help='規格069 R86正常動畫限定驗收及163張舊原稿繼承審查')
+parser.add_argument('--opening-fish-ready-report',type=Path,help='規格069 R87完整魚形21幀及清除背景READY審查')
+parser.add_argument('--opening-fish-conformed-report',type=Path,help='規格069 R87正常完整魚形限定驗收及184張舊原稿繼承審查')
 a=parser.parse_args();out=a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.parent.stat().st_uid==os.getuid() and not out.exists()
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -91,6 +93,64 @@ for name,asset in manifest['assets'].items():
  f=matches[0];f['formal_assets'].append(name)
  bindings.append({'asset':name,'asset_sha256':asset['sha256'],'source_research_id':f['research_id'],'source_file':file,'source_ordinal':f['ordinal'],'source_encoded_sha256':f.get('encoded_sha256'),'spec':asset.get('spec',manifest['spec']),'claim':'matches verified formal manifest; conformance scope remains in cited spec'})
  if file.endswith('.PIK'):bindings[-1]['source_indexed_sha256']=f['indexed_sha256']
+
+
+# R87 完整魚形21幀及清除背景；只在全部正常驗收通過後繼承R86索引。
+if a.opening_fish_ready_report or a.opening_fish_conformed_report:
+ assert a.opening_fish_ready_report and a.opening_fish_conformed_report and a.inherited_index and a.inherited_manifest
+ assert not a.opening_wind_ready_report and not a.opening_wind_conformed_report
+ ready=json.loads(a.opening_fish_ready_report.read_bytes());review=json.loads(a.opening_fish_conformed_report.read_bytes())
+ prior=json.loads(a.inherited_index.read_bytes());old_manifest=json.loads(a.inherited_manifest.read_bytes())
+ assert ready['state']=='READY'and ready['result']=='PASS_R87_FISH21_READY_REVIEW'
+ assert review['result']=='PASS_OPENING_FISH_CONFORMANCE_REVIEW'and review['spec_state']=='CONFORMED'
+ assert review['ready_sha256']==sha(a.opening_fish_ready_report)and review['manifest_sha256']==sha(a.manifest)
+ assert review['inherited_manifest_sha256']==sha(a.inherited_manifest)==prior['formal_manifest_sha256']
+ assert review['inherited_source_index_sha256']==sha(a.inherited_index)
+ assert len(old_manifest['assets'])==184 and len(manifest['assets'])==len(bindings)==206
+ assert all(v==manifest['assets'][n]and sha(a.assets/n)==v['sha256']for n,v in old_manifest['assets'].items())
+ assert review['go_named_passed']>=88 and review['go_failed']==review['go_skipped']==0
+ assert review['native_points']==144 and review['native_source_frames']==57
+ assert review['native_accepted']==1100 and review['native_rejected']==0
+ assert review['native_full_rgba_pixels']==21*1280*800 and review['normal_verified_fish_source_ids']==list(range(1182,1203))
+ assert review['gui_samples']==review['gui_source_state_samples']==42
+ assert review['gui_hd_samples']==37 and review['gui_original_samples']==5
+ assert review['gui_verified_fish_source_ids']==list(range(1182,1203))
+ assert review['gui_x11_rgba_pixels']==42*1280*800 and review['gui_full_rgba_pixels']==40*1280*800
+ assert review['gui_whole_fish_rgba_pixels']>0 and review['gui_four_language_fish_and_cursor_verified']is True
+ assert review['three_replays_gui_audio_state_save_equal']is True
+ assert review['current_binary_sha256']==review['binary_sha256']and len(review['binary_sha256'])==64
+ assert review['current_source_bindings_verified']is True and review['raw_png_alpha_preserved']is True
+ assert review['whole_pose_from_current_publication_only']is True and review['known_foreground_preserved']is True
+ assert review['original_static_fish_retained_before_published_fish']is True and review['clear_used_only_for_verified_dynamic_object']is True
+ assert review['inherited_native32_passed']is True and review['full_project_loader_positive']is True
+ assert review['package_graphics_files']==207 and review['package_new_faults']==73
+ assert review['original_inputs_unchanged']is True and review['old_raw_pngs_unchanged']==184 and review['old_metadata_unchanged']==184
+ assert review['new_raw_asset_files']==22 and review['new_generated_pngs']==20 and review['reused_png_files']==2 and review['complete_hd']is False
+ assert prior['source_receipt_sha256']==sha(a.catalog)and len(prior['frames'])==1552 and prior['files']==d['files']
+ ids=set(range(1182,1203));changed=ids|{1179}
+ assert bindings[:184]==prior['formal_bindings']and {b['source_research_id']for b in bindings[184:]}==changed
+ assert {b['asset']for b in bindings[184:]if b['source_research_id']==1179}=={'opening-fish-clear-000.png'}
+ before={f['research_id']:f for f in prior['frames']}
+ for frame in frames:
+  old=before[frame['research_id']]
+  assert {k:frame[k]for k in allowed if k in frame}=={k:old[k]for k in allowed if k in old}
+ merged=json.loads(a.inherited_index.read_bytes());new={f['research_id']:f for f in frames}
+ reference={'state':'CONFORMED','spec':'docs/spec/069-hd-menu-background-and-textures.md','formal_connected':True,'review_sha256':sha(a.opening_fish_conformed_report),'scope':'21 OPENMON original frames mapped to complete generated fish poses only after exact currently published native whole-object validation; known foreground, original timing and source position retained'}
+ for row in merged['frames']:
+  ident=row['research_id']
+  if ident in ids:
+   assert not row['formal_assets'];row['formal_assets']=new[ident]['formal_assets']
+   row['runtime_source_evidence']='confirmed complete native shadow and currently published PIK/SS provenance; native world anchor and complete pose verified; unknown or mixed object keeps Original'
+   row['animation_evidence']='confirmed 21 native frames on normal GUI; complete generated fish and scoped old-alpha restoration, original source timing/position and known foreground retained'
+   row['source_contract_reference']=reference
+  elif ident==1179:
+   row['formal_assets']=new[ident]['formal_assets'];row['fish_object_contract_reference']=reference
+ merged['formal_manifest_sha256']=sha(a.manifest);merged['formal_bindings']=bindings
+ merged['opening_fish_conformance']={'ready_sha256':sha(a.opening_fish_ready_report),'review_sha256':sha(a.opening_fish_conformed_report),'sources':sorted(ids),'new_generated_pngs':20,'reused_png_files':2,'formal_assets':206,'gui_samples':42,'claim':'21 complete fish poses and scoped generated old-pose restoration only; other images, fades and full HD remain incomplete'}
+ assert all(f==before[f['research_id']]for f in merged['frames']if f['research_id']not in changed)
+ out.write_text(json.dumps(merged,ensure_ascii=False,indent=2)+'\n')
+ print('PASS_INHERITED_OPENING_FISH_INDEX',len(frames),len(bindings),sha(out),flush=True)
+ raise SystemExit(0)
 
 # R86 雲與煙共21幀；只增加新來源，保留全部既有驗收。
 if a.opening_wind_ready_report or a.opening_wind_conformed_report:
