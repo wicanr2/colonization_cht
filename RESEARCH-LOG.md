@@ -6906,3 +6906,20 @@ OPENWND2.SS為af84ca1b7fa3deb5c93401562277c858dd4b6ef66b158ff2b2480c4e1b5578f3�
 正式二進位f4c4472b8f0eba3f8574f079cbb991c3f54d683eb8c0ca9ef49c81fae19261c3，
 清冊ffccf30200bd18a49869360222a98f0237ca8fd014711bafcf5f866c7d4618ce。
 本機根hd-opening-wind-smoke-r86；GUI、原版WAV／存檔重播與CONFORMED仍待收齊。
+
+## 2026-10-19：R87魚形完整物件、局部遮罩與原版前景
+
+已證實，OPENMON1.SS 5da6ea59ab914fe4f73947c6925bbebb85815a5213e63bbcc6cdf6d44b61e1cd，
+OPENMON2.SS 4a56a5a3646e98a51de1f0b4c3376ab9db12c00d42972b58857ff485b634a490；dosgolem 82a14b266e1b5bc904e2d0fe507daf6bea41a013、
+Go1.26.7、真實模式CS:IP及20bit線性RAM沿R86。
+正常401M／144點與原版控制完整狀態及原PNG相同，57來源1100次完整繪製。
+
+世界矩形[584,16,640,55]的109個已發布點均有唯一原圖類別的完整原版姿態，涵蓋21幀；
+來源為當前發布PIK／SS與此前已驗完整shadow，已知船前景最多149格保留。
+不從步數或尚未發布的主畫布選幀。來源審查9189f3a17aa96206c7cd98bd93d4be7623264ca7d62cfc173c8da6690408059e，
+物件姿態審查d7ea0e7e8c1fd3e964e98cb8d4f5250667ebbdae7fdcd023a4894b8577c97dd6。
+
+原圖alpha1至7邊緣使直接包圍框量測錯位；alpha32只量可見幾何，實際alpha未改。
+局部SS遮罩與生成全魚接合造成舊頭／尾殘留，r1、r2原型撤回。
+完整物件r3私有21張RGBA21504000點及有界恢復通過；這是注入真實原版快照的渲染，
+正常Go觀測、GUI及正式封裝仍待驗。入口[規格069 R87](docs/spec/069-hd-menu-background-and-textures.md)。

@@ -2037,3 +2037,36 @@ TestHDWindNormalPublishedSources取代較窄的太陽專用長測試，正常Ent
 r86-wind-native-r1/check.json、r86-wind-native-pixels-r1/check.json及r86-package-check-r1.json。
 新增索引參數--opening-wind-ready-report與--opening-wind-conformed-report，
 仍要求完整限定審查，來源清冊未提前更新為CONFORMED。
+
+### 2026-10-19 R87魚形動畫與完整物件原型DRAFT
+
+範圍為OPENMON1十五幀與OPENMON2六幀的上方綠金魚。原PNG、原版行為與畫風定案保持；
+本節未READY，不能進正式顯示或增加184張正式素材完成數。
+
+| 來源與證據 | 已證實範圍 |
+|---|---|
+| OPENMON1.SS | SHA-256 5da6ea59ab914fe4f73947c6925bbebb85815a5213e63bbcc6cdf6d44b61e1cd，1182至1196。 |
+| OPENMON2.SS | SHA-256 4a56a5a3646e98a51de1f0b4c3376ab9db12c00d42972b58857ff485b634a490，1197至1202。 |
+| 正常來源 | Enter於800000步至401000000步，144點完整CPU、RAM、IDX、DAC、原版PNG及DOS讀取／開檔和控制一致；57來源1100次完整呼叫。 |
+| 完整物件 | 世界座標[584,16,640,55]共2184格。109個已發布物件點涵蓋21幀，完整原版PIK加已驗SS姿態逐格相符；已知船前景逐格保留，最多149格。 |
+| 姿態判定 | 只考慮此前已有完整來源shadow且當前已發布的魚形來源。實際世界座標、每格來源／值、完整物件原版內容與原圖類別都須相符；不以步數、主畫布未發布幀或序號猜姿態。 |
+| 生成輪廓 | PNG含alpha1至7的微弱邊緣，直接getbbox曾延伸到整張畫布。alpha32只用來量測可見取樣矩形，所有實際取樣alpha與原PNGbytes保持。 |
+| 撤回原型 | r1以整個SS矩形映射全魚，r2改靜態框仍有舊頭／尾殘留。生成全魚輪廓不能直接和原版局部SS遮罩接合，兩版不授予READY信用。 |
+| 完整魚形候選 | 私有r3使用完整魚形，清除背景只作用於舊HD靜態魚alpha非零區；原版底圖、SS與其他前景來源仍逐格守門。未驗、混合座標、混合姿態或不同原圖類別時保留原圖。 |
+| 私有渲染 | 69Go建置與go vet，21張完整RGBA21504000點與獨立Python原PNG重建相同，含722304個完整魚形RGBA；有界16×16邏輯游標區恢復與RAM只讀通過。此為注入已驗原版快照的原型，不是正常GUI或來源觀測驗收。 |
+
+本機根workplace/reports/goal186-display-hd/hd-opening-fish-animation-r87。
+normal57-source-review-r1.json：9189f3a17aa96206c7cd98bd93d4be7623264ca7d62cfc173c8da6690408059e。
+fish-published-selected57-r1.json：d7ea0e7e8c1fd3e964e98cb8d4f5250667ebbdae7fdcd023a4894b8577c97dd6。
+fish-whole-object-layout-r3.json：11bd8f929bad08809e123679daef1670aa85e58a7fa6bb8bcdc8e4d7247642d8。
+fish-prototype-pixels-r1/check.json：508bf0d98b4bd0d97f5d036fc8d6f153a37285c3f533f19eb8c2a5f2d4900f9e。
+
+公開原版來源入口仍為tools/probe_hd_opening_sources.go，
+--opening-sprite-files選OPENSHIP.SS、OPENSUN.SS、OPENWND1.SS、OPENWND2.SS、OPENMON1.SS、OPENMON2.SS；
+主寫入與發布模型不變。位址空間與固定OPENING.EXE／解碼清冊沿R86。
+--sample-steps對21個首次完整返回後加密取樣，最後一幀延至401M，原版輸入未增加。
+
+另以私有Go正常執行核對144點、完整發布來源與21幀，以及未知物件、前景、來源別名、
+失效回退與資源錯件；目前執行中。私有素材206張包含21個魚形檔及1張清除背景，
+其中19張新魚形生成、2檔已證實相同來源重用，清除背景為先前已保存的另1張生成原圖。
+正式原PNG仍184張，正常GUI、完整三側重播、正式封裝與CONFORMED尚未開始本批驗收。

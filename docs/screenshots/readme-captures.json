@@ -1,12 +1,12 @@
 {
   "kind": "README actual development screenshots",
-  "date": "2026-10-18",
-  "code_commit": "4b4aaf0d09925e4e9e02fb742d0ea9b01ccfbd5f",
-  "binary_sha256": "c414ba2ae7b6c078344685cac54ab4aa08118040fb83614ea0146d964180e084",
-  "formal_binary_sha256": "c414ba2ae7b6c078344685cac54ab4aa08118040fb83614ea0146d964180e084",
-  "source_build_sha256": "202a1cd336f1da072d3adccbbb9f140a86b890ea1bb07c697283539089717eab",
+  "date": "2026-10-19",
+  "code_commit": "f8e91288a2bb4e97a45f2c35493571fe93dfdd41",
+  "binary_sha256": "f4c4472b8f0eba3f8574f079cbb991c3f54d683eb8c0ca9ef49c81fae19261c3",
+  "formal_binary_sha256": "f4c4472b8f0eba3f8574f079cbb991c3f54d683eb8c0ca9ef49c81fae19261c3",
+  "source_build_sha256": "9fec81fafc18e6d5beccef63f095319dfc9d47d7bc168b6929c7da762354639d",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 163,
+  "formal_hd_assets": 184,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -513,7 +513,7 @@
     },
     {
       "file": "hd-opening-zh.png",
-      "sha256": "28eec67eee4ae31f11263cb1aff0ce1b46451729c67eae8a461d32413c83fdf4",
+      "sha256": "77b54e6b88214cf76c791d7ccb352e86ae0e52043543fb47750accc1ef132c0a",
       "size": [
         1280,
         800
@@ -521,46 +521,50 @@
       "scene": "opening",
       "language": "zh-Hant",
       "graphics": "hd",
-      "step": 67800000,
-      "code_commit": "4b4aaf0d09925e4e9e02fb742d0ea9b01ccfbd5f",
-      "binary_sha256": "c414ba2ae7b6c078344685cac54ab4aa08118040fb83614ea0146d964180e084",
-      "formal_binary_sha256": "c414ba2ae7b6c078344685cac54ab4aa08118040fb83614ea0146d964180e084",
-      "formal_hd_assets": 163,
-      "source_receipt": "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/r85-sun-caption-formal-gui-r1/gui.display-038.png",
-      "source_gui_check_sha256": "d718a37d69b345f6ac65debdc0368a8d859a0c787f5b9a4f9dbc1cac49ef69e4",
-      "source_gui_build_sha256": "202a1cd336f1da072d3adccbbb9f140a86b890ea1bb07c697283539089717eab",
-      "source_pixel_check_sha256": "d8a9fc2fb57e38f834bf149b623147b3f9ea2b3fde65c4dd8a441cf954ecf5d3",
-      "source_replay_check_sha256": "4e00de2868f42835e1834da5afa7bedf3d95ac8a20f008f99fa17255a8ad7b72",
-      "source_state_check_sha256": "694ecea976052eb4bf5fc7363d1f585dbc05e6f285ab326035c36929c0787722",
-      "graphics_manifest_sha256": "78d7a27f98c9eab13ba61ec6661acc681d194b334593c7e5fc4b73eac16824db",
-      "conformance_sha256": "b3cd83f8d9e588dcec995179856e2070735e460e94ef3c5a5f4296c7457e90a1",
-      "ready_sha256": "febe41870e0b3b494044f90c24b33a08f220a44135a811a90e6c3ea125e378db",
-      "caption_cursor_ready_sha256": "2de0e166f92d0129da8b49ee9e5934ae4b63611e056eee1f77ecff7b65a09093",
-      "verification_state": "CONFORMED within R85 scope; seven-frame normal GUI inherited through byte-identical source handlers; current SUN0 and four-language cursor GUI plus both current-binary three-replay runs verified",
+      "step": 122800000,
+      "code_commit": "f8e91288a2bb4e97a45f2c35493571fe93dfdd41",
+      "binary_sha256": "f4c4472b8f0eba3f8574f079cbb991c3f54d683eb8c0ca9ef49c81fae19261c3",
+      "formal_binary_sha256": "f4c4472b8f0eba3f8574f079cbb991c3f54d683eb8c0ca9ef49c81fae19261c3",
+      "formal_hd_assets": 184,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-opening-wind-smoke-r86/r86-wind-formal-gui-r1/gui.display-094.png",
+      "source_gui_check_sha256": "0aef3130e776c5c769f2883ea5036576ad69c6d9b1b28e40682624e545b70c37",
+      "source_gui_build_sha256": "9fec81fafc18e6d5beccef63f095319dfc9d47d7bc168b6929c7da762354639d",
+      "source_pixel_check_sha256": "e8461db6cd0318a0d95d75159f77fc6acbf684bb22780ec44b64384ef813b599",
+      "source_state_check_sha256": "996b7c2211ba721eb9b70b69fe6efd27d53d08ae07d809d4ad61a8dae0ecd0c9",
+      "graphics_manifest_sha256": "ffccf30200bd18a49869360222a98f0237ca8fd014711bafcf5f866c7d4618ce",
+      "ready_sha256": "10001a1dc561d63913ba159ca4a56054ae3d27b56d8228a58249526eccdf0f73",
+      "verification_state": "READY; normal native145 and full GUI63 source/X11/RGBA passed; complete three-replay review pending",
       "source_kind": "actual formal game presentation; verified byte-for-byte against the real X11 window game area",
       "capture_pixels_unchanged": true,
       "original_source_files": [
         "OPENING.PIK",
         "OPENBORD.PIK",
         "OPENSHIP.SS",
-        "OPENSUN.SS"
+        "OPENSUN.SS",
+        "OPENWND1.SS"
       ],
       "source_research_ids": [
         1092,
         1179,
-        1252,
-        1258
+        1256,
+        1258,
+        1266
       ],
-      "opening_border_cells": 18497,
-      "opening_map_cells": 41716,
+      "opening_border_cells": 11200,
+      "opening_map_cells": 41543,
       "opening_ship_cells": 512,
       "opening_sun_cells": 12,
+      "opening_wind_cells": 173,
+      "opening_smoke_cells": 0,
       "captured_sun_frames": [
         0
       ],
+      "captured_wind_frames": [
+        0
+      ],
+      "captured_smoke_frames": [],
       "verified_mouse_background_cells": 160,
-      "scope": "正式新組建的正常繁中開場，圖中SUN0、船隻、長圖、邊框與字幕游標恢復已驗。七幀來源與既有正常英文畫面依相同來源處理繼承，兩組新組建三側重播已通過；其他開場SS、淡入淡出與全量HD未完成。",
-      "source_long_replay_check_sha256": "67478fdcffb95e543c7a4f066d1fa855868a7605ed79fbfd6dcef705bf7c74c5"
+      "scope": "正式正常繁中模式開場，圖中吹氣雲第0幀、船隻、太陽與PIK背景來源及X11／RGBA已驗。此圖只表示本狀態；風煙完整21幀另由正常63項證據驗證，三側完整重播尚待完成。其他SS、淡入淡出與全量HD未完成。"
     }
   ],
   "limitations": [
@@ -581,7 +585,8 @@
     "R80新增繁中讀檔列表實拍，共十六張；已驗字底與一般箭頭已HD，未知成功訊息字底仍保留原圖。R78擷取當時的載入選單限制保持為歷史紀錄；全量HD、其餘圖像、動畫與完整五語仍未完成，尚未收進目前發行版。",
     "R81新增繁中成功訊息實拍，共十七張；內部WOODTILE木紋、字底與一般箭頭已HD。R80當時的未知字底限制保留為歷史紀錄；其餘圖像、動畫、完整五語與新版交付仍未完成。",
     "R82新增開場長圖與邊框實拍，共十八張；原版移動船及其他未知前景保留。13張生成原PNG與既有134張原稿已入graphics，其他圖像、動畫、完整五語及新版交付仍未完成。",
-    "R83刷新開場實拍，加入已驗船隻八幀；R82當時移動船保留原圖的限制作歷史紀錄。共十八張，其他十七張及逐圖來源保持。其他SS、淡入淡出、其他圖像、完整五語、影片與新版交付仍未完成。"
+    "R83刷新開場實拍，加入已驗船隻八幀；R82當時移動船保留原圖的限制作歷史紀錄。共十八張，其他十七張及逐圖來源保持。其他SS、淡入淡出、其他圖像、完整五語、影片與新版交付仍未完成。",
+    "R86刷新正常繁中模式的吹氣雲第0幀實拍，PNG直接複製未重編碼；63項正常GUI的原版來源、完整RGBA／X11及17個Noto欄位已驗。三側完整重播尚待收齊，維持READY；其他十七張與逐圖來源保持，其他圖像、完整五語與全量HD未完成。"
   ],
   "previous_build": {
     "kind": "README actual development screenshots",
@@ -594,9 +599,8 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "Mixed historical captures with per-entry source receipts; current opening capture uses the READY sun/cursor implementation. Unchanged other captures retain their original verification scopes.",
-  "graphics_manifest_sha256": "78d7a27f98c9eab13ba61ec6661acc681d194b334593c7e5fc4b73eac16824db",
-  "conformance_sha256": "b3cd83f8d9e588dcec995179856e2070735e460e94ef3c5a5f4296c7457e90a1",
+  "provenance_scope": "Mixed historical captures with per-entry source receipts. The current opening capture uses the R86 READY cloud/smoke build and has exact normal GUI source/X11/RGBA verification; three-replay review is pending. Other17 captures and their original proof scopes are unchanged.",
+  "graphics_manifest_sha256": "ffccf30200bd18a49869360222a98f0237ca8fd014711bafcf5f866c7d4618ce",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -646,7 +650,7 @@
     "graphics_manifest_sha256": "c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7",
     "conformance_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5"
   },
-  "verification_build_sha256": "b35309f9d49486cb3d4289225c1d5bec35a75edb3e0c43bbc3008da660cd9820",
+  "verification_build_sha256": "9fec81fafc18e6d5beccef63f095319dfc9d47d7bc168b6929c7da762354639d",
   "production_go_sources_equal_to_verified_build": true,
   "previous_scene_background_capture": {
     "code_commit": "dbfc95fc2b98654f9f4cf3d0abac946730bfbfce",
@@ -788,5 +792,61 @@
     },
     "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb"
   },
-  "conformance_state": "CONFORMED within R85 scope; seven-frame normal GUI inherited through byte-identical source handlers; current SUN0 and four-language cursor GUI plus both current-binary three-replay runs verified"
+  "conformance_state": "READY; normal native145 and full GUI63 source/X11/RGBA passed; complete three-replay review pending",
+  "previous_opening_sun_capture": {
+    "capture": {
+      "file": "hd-opening-zh.png",
+      "sha256": "28eec67eee4ae31f11263cb1aff0ce1b46451729c67eae8a461d32413c83fdf4",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "opening",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 67800000,
+      "code_commit": "4b4aaf0d09925e4e9e02fb742d0ea9b01ccfbd5f",
+      "binary_sha256": "c414ba2ae7b6c078344685cac54ab4aa08118040fb83614ea0146d964180e084",
+      "formal_binary_sha256": "c414ba2ae7b6c078344685cac54ab4aa08118040fb83614ea0146d964180e084",
+      "formal_hd_assets": 163,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/r85-sun-caption-formal-gui-r1/gui.display-038.png",
+      "source_gui_check_sha256": "d718a37d69b345f6ac65debdc0368a8d859a0c787f5b9a4f9dbc1cac49ef69e4",
+      "source_gui_build_sha256": "202a1cd336f1da072d3adccbbb9f140a86b890ea1bb07c697283539089717eab",
+      "source_pixel_check_sha256": "d8a9fc2fb57e38f834bf149b623147b3f9ea2b3fde65c4dd8a441cf954ecf5d3",
+      "source_replay_check_sha256": "4e00de2868f42835e1834da5afa7bedf3d95ac8a20f008f99fa17255a8ad7b72",
+      "source_state_check_sha256": "694ecea976052eb4bf5fc7363d1f585dbc05e6f285ab326035c36929c0787722",
+      "graphics_manifest_sha256": "78d7a27f98c9eab13ba61ec6661acc681d194b334593c7e5fc4b73eac16824db",
+      "conformance_sha256": "b3cd83f8d9e588dcec995179856e2070735e460e94ef3c5a5f4296c7457e90a1",
+      "ready_sha256": "febe41870e0b3b494044f90c24b33a08f220a44135a811a90e6c3ea125e378db",
+      "caption_cursor_ready_sha256": "2de0e166f92d0129da8b49ee9e5934ae4b63611e056eee1f77ecff7b65a09093",
+      "verification_state": "CONFORMED within R85 scope; seven-frame normal GUI inherited through byte-identical source handlers; current SUN0 and four-language cursor GUI plus both current-binary three-replay runs verified",
+      "source_kind": "actual formal game presentation; verified byte-for-byte against the real X11 window game area",
+      "capture_pixels_unchanged": true,
+      "original_source_files": [
+        "OPENING.PIK",
+        "OPENBORD.PIK",
+        "OPENSHIP.SS",
+        "OPENSUN.SS"
+      ],
+      "source_research_ids": [
+        1092,
+        1179,
+        1252,
+        1258
+      ],
+      "opening_border_cells": 18497,
+      "opening_map_cells": 41716,
+      "opening_ship_cells": 512,
+      "opening_sun_cells": 12,
+      "captured_sun_frames": [
+        0
+      ],
+      "verified_mouse_background_cells": 160,
+      "scope": "正式新組建的正常繁中開場，圖中SUN0、船隻、長圖、邊框與字幕游標恢復已驗。七幀來源與既有正常英文畫面依相同來源處理繼承，兩組新組建三側重播已通過；其他開場SS、淡入淡出與全量HD未完成。",
+      "source_long_replay_check_sha256": "67478fdcffb95e543c7a4f066d1fa855868a7605ed79fbfd6dcef705bf7c74c5"
+    },
+    "code_commit": "4b4aaf0d09925e4e9e02fb742d0ea9b01ccfbd5f",
+    "binary_sha256": "c414ba2ae7b6c078344685cac54ab4aa08118040fb83614ea0146d964180e084",
+    "conformance_sha256": "b3cd83f8d9e588dcec995179856e2070735e460e94ef3c5a5f4296c7457e90a1"
+  }
 }
