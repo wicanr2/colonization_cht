@@ -6748,3 +6748,28 @@ confirmed：0B68:051C、DS=ES=0xA000、完整碼
 - R7公開探針80點與無監看控制、R6完整狀態／PNG／讀取相同。審查d1d450fd61f778685af27b7e88dd68909f00e21f2c7373069c69a37fa5f29972，程式碼7518ae0bd60a22066d232099639e9edd52e1a19d3d2b93a22dfc776e4e58511f。入口tools/probe_hd_opening_sources.go，輸出只在本機/out。
 - 2.3M的04A2寫入樣本只落在之後的長圖實體範圍，當時尚未載入OPENING.PIK，不能稱地圖來源。實作前須以完整解碼／指紋授予來源，再追03BD複製與未知撤銷。
 - 新r2長圖保留既有美術題字，原PNG329d81b975d86764fe944ceb9de2c8a2674db4bb527df34d4fc52d5e7952f351。候選及提示只在hd-opening-backgrounds-r82，正式來源、幾何／動畫及遮擋仍DRAFT；未加入正式素材數。
+# 2026-10-18 R82開場來源補充
+
+confirmed，限規格069 R82抽樣路徑：OPENING.EXE為
+3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39，
+OPENING.PIK為80ea1dd4a00a4029052112882305e573bd7e20066eb095ceabe273a217689185，
+OPENBORD.PIK為53f73ae336b5eaca30fa190ec9059426712de6c9c0c181d085814d45c96dab03。
+工具為dosgolem 82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7及固定Docker映像。
+位址使用dosgolem實模式CS:IP與20位元實體RAM。
+
+0AC2:04F4／0550的完整原碼及連續寫入證實126720格長圖在0x38630、64000格邊框在0x1C430。
+03BD:00C8在DF清除、字寬／段界限與當次來源值相符時移交長圖來源，最大局部索引126719。
+無離頁80點及正常離頁112點與控制完整狀態相同；後者13400000步起開場碼已消失，來源撤銷。
+未知主畫布同值寫入仍撤銷，長圖同值未知寫入阻止後續移交。
+模型324abb592acd1fc9ecd4abe7dbd044aaee709b653afc2c8f4b920fd257188a97及
+eb97ac7f0ae28b65ee35c97a723ed75d0be5875ddc0cdc5e62203aba490fcc02保留本機。
+
+首輪繁中GUI的滑鼠矩形原圖方塊已追到共用重建末尾的indexed[i]!=canvas[i]條件。
+當時canvas是VICEROY固定0x2CAE0，開場實際畫布為0x1C430。
+獨立來源模型證實該256格全為長圖背景；READY補充後只恢復已驗來源且沒有翻譯項目的開場格，
+未知前景保持。R4六項實拍與獨立來源／原PNG全等，正式審查為
+228187c040df6071d840d1d70662518da0adb6913671cedeee3480290430ae4b。
+
+只證實完整基準色盤及本批PIK來源。原版移動船與其他SS動畫、中間淡入淡出仍未知，
+不外推全量HD或原版完整美術分母。完整原碼、來源／解碼雜湊、參數與重生入口見
+[規格069 R82](docs/spec/069-hd-menu-background-and-textures.md)及其公開原版來源／像素工具。

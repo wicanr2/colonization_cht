@@ -96,3 +96,18 @@ __pycache__/
 # README R80：已驗正式列表實拍，來源見readme-captures.json。
 !/docs/screenshots/hd-load-list-zh.png
 !/docs/screenshots/hd-load-success-zh.png
+
+# 規格069 R82：已驗開場生成原PNG；原版參考與未選候選保持忽略。
+!/graphics/openbord-000.png
+!/graphics/opening-000.png
+!/graphics/opening-sun-000.png
+!/graphics/opening-ship-static-000.png
+!/graphics/opening-dragon-000.png
+!/graphics/opening-compass-000.png
+!/graphics/opening-fish-top-000.png
+!/graphics/opening-squid-000.png
+!/graphics/opening-fish-bottom-000.png
+!/graphics/opening-galley-000.png
+!/graphics/opening-volcano-000.png
+!/graphics/opening-wind-000.png
+!/graphics/opening-mermaid-000.png

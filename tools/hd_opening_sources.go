@@ -1,0 +1,20 @@
+package main
+
+import "image"
+
+// 規格069 R82 READY；原始PNG及alpha保持，座標只供顯示。
+var hdOpeningDefinitions = []hdOpeningDefinition{
+	{kind: 1, asset: "openbord-000.png", sha: "4764f149760efcd2bee209e0b625270c1257a1e04d56e36d8bd86b150e919c18", size: image.Pt(1586, 992), nativeRects: []image.Rectangle{image.Rect(0, 0, 320, 14), image.Rect(0, 14, 320, 24), image.Rect(0, 24, 320, 156), image.Rect(0, 156, 320, 168), image.Rect(0, 168, 320, 200)}, artRects: []image.Rectangle{image.Rect(0, 0, 1586, 62), image.Rect(0, 62, 1586, 125), image.Rect(0, 125, 1586, 773), image.Rect(0, 773, 1586, 835), image.Rect(0, 835, 1586, 992)}, opaque: true},
+	{kind: 2, asset: "opening-000.png", sha: "d06c24c54a5c8957973495a359261c4436adf71ab5e828b3e74c9bceda737ea3", size: image.Pt(2169, 725), nativeRects: []image.Rectangle{image.Rect(0, 0, 960, 132)}, artRects: []image.Rectangle{image.Rect(0, 135, 2169, 594)}, opaque: true},
+	{kind: 2, asset: "opening-sun-000.png", sha: "c69a393d6af9ba22b5aea32ce1efe6b26a78ed6b737900ece5f1eb915546623c", size: image.Pt(1254, 1254), nativeRects: []image.Rectangle{image.Rect(666, 73, 726, 131)}, artRects: []image.Rectangle{image.Rect(42, 41, 1212, 1181)}, opaque: false},
+	{kind: 2, asset: "opening-ship-static-000.png", sha: "8af9b41cc6fa3727c2b79626e5dea27cf65d5a902d6adae0d3f2857e0f52284f", size: image.Pt(1536, 1024), nativeRects: []image.Rectangle{image.Rect(767, 65, 807, 98)}, artRects: []image.Rectangle{image.Rect(217, 97, 1419, 935)}, opaque: false},
+	{kind: 2, asset: "opening-dragon-000.png", sha: "6848b9e631d10121cc8b2c195e6edad273d12640cf69a8719571cc39f5482850", size: image.Pt(1698, 926), nativeRects: []image.Rectangle{image.Rect(328, 17, 390, 49)}, artRects: []image.Rectangle{image.Rect(64, 146, 1649, 861)}, opaque: false},
+	{kind: 2, asset: "opening-compass-000.png", sha: "6ba308b116f64055f2fe4c99608edea0823d49e0914b7c7a4481e0bf5ce8f7ed", size: image.Pt(1326, 1187), nativeRects: []image.Rectangle{image.Rect(421, 1, 438, 17)}, artRects: []image.Rectangle{image.Rect(250, 171, 1077, 1000)}, opaque: false},
+	{kind: 2, asset: "opening-fish-top-000.png", sha: "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a", size: image.Pt(1551, 1014), nativeRects: []image.Rectangle{image.Rect(584, 24, 633, 55)}, artRects: []image.Rectangle{image.Rect(139, 125, 1500, 885)}, opaque: false},
+	{kind: 2, asset: "opening-squid-000.png", sha: "ccccbee3c531f4fe4705c9f2187babc8201dbdf0843caaff0c388dc267e1290b", size: image.Pt(1659, 948), nativeRects: []image.Rectangle{image.Rect(515, 67, 569, 97)}, artRects: []image.Rectangle{image.Rect(127, 96, 1540, 874)}, opaque: false},
+	{kind: 2, asset: "opening-fish-bottom-000.png", sha: "e2b4bb5a7dca58f00fefedba777f73d764ceff68e76e07ccf65b2d9600fb2f97", size: image.Pt(1536, 1024), nativeRects: []image.Rectangle{image.Rect(372, 81, 413, 108)}, artRects: []image.Rectangle{image.Rect(158, 255, 1381, 770)}, opaque: false},
+	{kind: 2, asset: "opening-galley-000.png", sha: "fc8271c73682bd54ccadffaf105c783324f1d5202a2643466a18dfefc522f283", size: image.Pt(1271, 1238), nativeRects: []image.Rectangle{image.Rect(646, 3, 683, 39)}, artRects: []image.Rectangle{image.Rect(192, 178, 1101, 1074)}, opaque: false},
+	{kind: 2, asset: "opening-volcano-000.png", sha: "24ef3ca78240d8fd7f893ba0026773665e2c1f29ac033a232577cae9734ac09b", size: image.Pt(1527, 1030), nativeRects: []image.Rectangle{image.Rect(590, 109, 641, 132)}, artRects: []image.Rectangle{image.Rect(242, 110, 1328, 914)}, opaque: false},
+	{kind: 2, asset: "opening-wind-000.png", sha: "ec223225bcab1d069845e2ba6f908e1fc44027f5bd865abaf1cee846786de521", size: image.Pt(1504, 1046), nativeRects: []image.Rectangle{image.Rect(810, 0, 854, 31)}, artRects: []image.Rectangle{image.Rect(106, 173, 1423, 876)}, opaque: false},
+	{kind: 2, asset: "opening-mermaid-000.png", sha: "d01062a7f075f8d83ee00ff0db63eb1c5d7c6e7a08f3110cfe78f1b10265e238", size: image.Pt(1004, 1566), nativeRects: []image.Rectangle{image.Rect(434, 12, 457, 49)}, artRects: []image.Rectangle{image.Rect(64, 97, 970, 1511)}, opaque: false},
+}

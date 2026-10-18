@@ -386,6 +386,9 @@ func (p *hdTextureRuntime) paint(out *image.RGBA, f draftNativeFrame) map[string
 }
 func (h *hdRuntime) base(f draftNativeFrame) (*image.RGBA, map[string]any) {
 	out, record := h.baseExisting(f)
+	if h.opening != nil {
+		record["opening_picture"] = h.opening.paint(out, f)
+	}
 	if h.texture != nil {
 		if record["reason"] != "unverified-cursor-or-native-surface" {
 			record["picture"] = h.texture.paintPicture(out, f)

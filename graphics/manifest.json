@@ -7921,6 +7921,716 @@
       ],
       "coverage": "Exact complete PIK decode at explicit verified stage and main canvases; original foreground and standard cursor preserved; formal conformance tracked in spec069 R78.",
       "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "openbord-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "4764f149760efcd2bee209e0b625270c1257a1e04d56e36d8bd86b150e919c18",
+      "bytes": 1081183,
+      "size": [
+        1586,
+        992
+      ],
+      "mode": "RGB",
+      "native_size": [
+        320,
+        200
+      ],
+      "target_size": [
+        1280,
+        800
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from explicitly measured generated region; preserve source PNG bytes",
+      "alpha": "retain raw PNG alpha in selected source rectangle; integer source-over onto opaque generated base; no alpha normalization",
+      "generation_prompt": "Use case: style-transfer. Asset: an opaque HD redraw of the OPENBORD.PIK opening frame for a classic strategy-game display overlay. Image 1 is the edit target and exact layout reference. Image 2 is the approved fine pixel-art style reference only; do not copy its buildings or landscape. Redraw every wooden and ornamental part with the reference's intentional fine pixel clusters, warm oak grain, rich bronze-gold shading, crisp edges and restrained palette. Keep exactly the original composition and native 320 by 200 proportions, preferably output 1280 by 800: top wooden board occupies native y=0..14, thin interlaced carved gold border y=14..24, the central display opening is a perfectly uninterrupted solid opaque black rectangle x=0..320,y=24..156, second gold border y=156..166, bottom wooden board y=166..200. Preserve the widths, margins and straight horizontal edges. The center must remain empty pure black, with no scenery, texture, glow or transparency. Keep the wood horizontal and the gold braid elegant, legible and pixel-painted, matching the original colors and reference style. No new objects, corner ornaments, UI controls, text, letters, logos, labels or watermark. Do not use photography, soft oil-painting brushwork or blurry upscaling. Full-frame opaque image; no cropping.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-full-assets-r49/decoded-public-r3/previews/OPENBORD.PIK.png": "9e7c7983c9bab87eb0e782bc50799023a18f946eeb7f09bd1e482efcfaefffb9",
+        "docs/screenshots/hd-pixel-concept.png": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENBORD.PIK",
+        "sha256": "53f73ae336b5eaca30fa190ec9059426712de6c9c0c181d085814d45c96dab03",
+        "ordinal": 0,
+        "indexed_sha256": "ee23b1d787958481210fb6c328ccc067805bdbd8d83300c5d8157dd40cf90816"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          320,
+          14
+        ],
+        [
+          0,
+          14,
+          320,
+          24
+        ],
+        [
+          0,
+          24,
+          320,
+          156
+        ],
+        [
+          0,
+          156,
+          320,
+          168
+        ],
+        [
+          0,
+          168,
+          320,
+          200
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          0,
+          0,
+          1586,
+          62
+        ],
+        [
+          0,
+          62,
+          1586,
+          125
+        ],
+        [
+          0,
+          125,
+          1586,
+          773
+        ],
+        [
+          0,
+          773,
+          1586,
+          835
+        ],
+        [
+          0,
+          835,
+          1586,
+          992
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R82 opening PIK only; unknown foreground and unverified fades retain original; no animation conformance",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "opening-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "d06c24c54a5c8957973495a359261c4436adf71ab5e828b3e74c9bceda737ea3",
+      "bytes": 2345581,
+      "size": [
+        2169,
+        725
+      ],
+      "mode": "RGB",
+      "native_size": [
+        960,
+        132
+      ],
+      "target_size": [
+        3840,
+        528
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from explicitly measured generated region; preserve source PNG bytes",
+      "alpha": "retain raw PNG alpha in selected source rectangle; integer source-over onto opaque generated base; no alpha normalization",
+      "generation_prompt": "Use case: precise-object-edit. Image 1 is the target. Make the background-only layer of this antique map. Remove every decorative creature and free-standing object in the ocean: the green dragon, mermaid, little compass, both fish, squid, volcano, sun face and rays, both sailing ships, and wind cherub. Fill their places with continuous matching blue-green ocean or pale parchment and subtle rhumb lines. Preserve the American and European landmasses, coastal buildings, forests, the gold cartouche and its CARTE MICROPROSE 1994 lettering, OCEANVS OCCIDENTALIS, TERRA INCOGNITA, white padding and full panoramic framing. Keep the exact existing fine pixel-art material and color style. No replacement objects, extra text, new land, frames or panels. One continuous background map, no atlas.",
+      "reference_sha256": {
+        "opening-candidate-r2.png": "329d81b975d86764fe944ceb9de2c8a2674db4bb527df34d4fc52d5e7952f351"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENING.PIK",
+        "sha256": "80ea1dd4a00a4029052112882305e573bd7e20066eb095ceabe273a217689185",
+        "ordinal": 0,
+        "indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          960,
+          132
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          0,
+          135,
+          2169,
+          594
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R82 opening PIK only; unknown foreground and unverified fades retain original; no animation conformance",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "opening-sun-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "c69a393d6af9ba22b5aea32ce1efe6b26a78ed6b737900ece5f1eb915546623c",
+      "bytes": 750786,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        960,
+        132
+      ],
+      "target_size": [
+        3840,
+        528
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from explicitly measured generated region; preserve source PNG bytes",
+      "alpha": "retain raw PNG alpha in selected source rectangle; integer source-over onto opaque generated base; no alpha normalization",
+      "generation_prompt": "Use case: style-transfer. Asset: ONE isolated antique map sun-face sprite. Image 1 is the exact subject and silhouette reference; image 2 supplies only the fine pixel-art technique and warm gold/red palette. Redraw the complete original round gold sun face with all alternating long and short red-gold rays, its severe engraved human face and matching original proportions. Crisp intentional small pixel clusters, restrained bronze shadows, warm amber highlights. Center the complete single sun on a genuinely transparent background with all rays visible and a little transparent margin. Remove all parchment, water and map lines. No text, ships, other objects, collage or atlas.",
+      "reference_sha256": {
+        "native-opening-reference-sun.png": "04559d293cab7ea7e812701e7ffe064f91f998c0ead320fa02291efe31d73500",
+        "opening-candidate-r2.png": "329d81b975d86764fe944ceb9de2c8a2674db4bb527df34d4fc52d5e7952f351"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENING.PIK",
+        "sha256": "80ea1dd4a00a4029052112882305e573bd7e20066eb095ceabe273a217689185",
+        "ordinal": 0,
+        "indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+      },
+      "native_display_rects": [
+        [
+          666,
+          73,
+          726,
+          131
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          42,
+          41,
+          1212,
+          1181
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R82 opening PIK only; unknown foreground and unverified fades retain original; no animation conformance",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "opening-ship-static-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "8af9b41cc6fa3727c2b79626e5dea27cf65d5a902d6adae0d3f2857e0f52284f",
+      "bytes": 1482765,
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        960,
+        132
+      ],
+      "target_size": [
+        3840,
+        528
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from explicitly measured generated region; preserve source PNG bytes",
+      "alpha": "retain raw PNG alpha in selected source rectangle; integer source-over onto opaque generated base; no alpha normalization",
+      "generation_prompt": "Use case: style-transfer. Asset: ONE isolated decorative antique sailing-ship sprite. Image 1 is the exact subject, three-mast arrangement, side view, proportions and small flags to preserve. Image 2 supplies only the approved fine pixel-art technique and warm muted palette. Redraw this complete slender brown wooden ship with pale tan sails and fine dark rigging, matching the original silhouette. Crisp small pixel clusters and restrained light/shadow, no glossy 3D look. Center the whole ship, all masts and flags on a genuinely transparent background. Keep only a thin attached waterline if needed, no surrounding parchment, map lines, cartouche, other objects, text, collage or atlas.",
+      "reference_sha256": {
+        "native-opening-reference-ship-static.png": "0875c9a05ff7a787b3ee17fc241dfdfef0803c0ea26231d6de105b4e8ffb6f5d",
+        "opening-candidate-r2.png": "329d81b975d86764fe944ceb9de2c8a2674db4bb527df34d4fc52d5e7952f351"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENING.PIK",
+        "sha256": "80ea1dd4a00a4029052112882305e573bd7e20066eb095ceabe273a217689185",
+        "ordinal": 0,
+        "indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+      },
+      "native_display_rects": [
+        [
+          767,
+          65,
+          807,
+          98
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          217,
+          97,
+          1419,
+          935
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R82 opening PIK only; unknown foreground and unverified fades retain original; no animation conformance",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "opening-dragon-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "6848b9e631d10121cc8b2c195e6edad273d12640cf69a8719571cc39f5482850",
+      "bytes": 949442,
+      "size": [
+        1698,
+        926
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        960,
+        132
+      ],
+      "target_size": [
+        3840,
+        528
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from explicitly measured generated region; preserve source PNG bytes",
+      "alpha": "retain raw PNG alpha in selected source rectangle; integer source-over onto opaque generated base; no alpha normalization",
+      "generation_prompt": "Use case: style-transfer. Asset: ONE isolated antique sea-dragon sprite. Image 1 is the exact creature to preserve: ONE head facing right, one curved long neck, rounded olive-green coiled body, low left tail, a few dark dorsal spikes and four short clawed legs. Match this original silhouette and proportions. Image 2 supplies only the fine pixel technique and colors. Draw intentional fine pixel clusters with olive and yellow-green scales, dark forest-green outline and restrained warm highlights. Center the complete single creature on a genuinely transparent background. No second head, wings, new limbs, water, map lines, text, other objects, collage or atlas.",
+      "reference_sha256": {
+        "native-opening-reference-dragon-r2.png": "2511cb8e7fa8fe1366af1cc29bfade48c7e9cfc806f6c887134d01cb9d0ab56f",
+        "opening-candidate-r2.png": "329d81b975d86764fe944ceb9de2c8a2674db4bb527df34d4fc52d5e7952f351"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENING.PIK",
+        "sha256": "80ea1dd4a00a4029052112882305e573bd7e20066eb095ceabe273a217689185",
+        "ordinal": 0,
+        "indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+      },
+      "native_display_rects": [
+        [
+          328,
+          17,
+          390,
+          49
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          64,
+          146,
+          1649,
+          861
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R82 opening PIK only; unknown foreground and unverified fades retain original; no animation conformance",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "opening-compass-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "6ba308b116f64055f2fe4c99608edea0823d49e0914b7c7a4481e0bf5ce8f7ed",
+      "bytes": 648573,
+      "size": [
+        1326,
+        1187
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        960,
+        132
+      ],
+      "target_size": [
+        3840,
+        528
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from explicitly measured generated region; preserve source PNG bytes",
+      "alpha": "retain raw PNG alpha in selected source rectangle; integer source-over onto opaque generated base; no alpha normalization",
+      "generation_prompt": "Use case: style-transfer. ONE isolated antique compass medallion sprite. Image 1 gives the exact small circular shape and red/gold quartered design. Image 2 supplies only the fine pixel-art palette and material style. Draw the complete round red and gold disk, thin dark rim, simple engraved cross divisions, matching the original proportions. Crisp intentional small pixel clusters, muted antique gold shading. Center on genuinely transparent background. No lettering, external star spikes, compass needle, water, map lines, other objects or atlas.",
+      "reference_sha256": {
+        "native-opening-reference-compass.png": "edbfce2e195119bbc30539222ba9c22623f18e5ac2f83929b27163a22b3f4876",
+        "opening-candidate-r2.png": "329d81b975d86764fe944ceb9de2c8a2674db4bb527df34d4fc52d5e7952f351"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENING.PIK",
+        "sha256": "80ea1dd4a00a4029052112882305e573bd7e20066eb095ceabe273a217689185",
+        "ordinal": 0,
+        "indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+      },
+      "native_display_rects": [
+        [
+          421,
+          1,
+          438,
+          17
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          250,
+          171,
+          1077,
+          1000
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R82 opening PIK only; unknown foreground and unverified fades retain original; no animation conformance",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "opening-fish-top-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a",
+      "bytes": 843084,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        960,
+        132
+      ],
+      "target_size": [
+        3840,
+        528
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from explicitly measured generated region; preserve source PNG bytes",
+      "alpha": "retain raw PNG alpha in selected source rectangle; integer source-over onto opaque generated base; no alpha normalization",
+      "generation_prompt": "Use case: style-transfer. ONE isolated fantasy sea-fish sprite from an antique map. Match image 1's right-facing broad green-yellow head and body, large eye, small blue-green fins, and orange fan-shaped tail on the left. Image 2 supplies only the approved fine pixel-art treatment. Preserve the original silhouette, proportions and side view; fine olive scales and warm restrained highlights, clear small pixel clusters. Center the whole single fish on a genuinely transparent background. No surrounding waves, water rectangle, map, text, other creatures or atlas.",
+      "reference_sha256": {
+        "native-opening-reference-fish-top.png": "f33a88000ec3df0faa80b60d919a6c1502cdeff59fb1797074643462e34d2f8c",
+        "opening-candidate-r2.png": "329d81b975d86764fe944ceb9de2c8a2674db4bb527df34d4fc52d5e7952f351"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENING.PIK",
+        "sha256": "80ea1dd4a00a4029052112882305e573bd7e20066eb095ceabe273a217689185",
+        "ordinal": 0,
+        "indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+      },
+      "native_display_rects": [
+        [
+          584,
+          24,
+          633,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          139,
+          125,
+          1500,
+          885
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R82 opening PIK only; unknown foreground and unverified fades retain original; no animation conformance",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "opening-squid-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "ccccbee3c531f4fe4705c9f2187babc8201dbdf0843caaff0c388dc267e1290b",
+      "bytes": 705688,
+      "size": [
+        1659,
+        948
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        960,
+        132
+      ],
+      "target_size": [
+        3840,
+        528
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from explicitly measured generated region; preserve source PNG bytes",
+      "alpha": "retain raw PNG alpha in selected source rectangle; integer source-over onto opaque generated base; no alpha normalization",
+      "generation_prompt": "Use case: style-transfer. ONE isolated antique-map squid/sea-monster sprite. Image 1 is the exact body and curled-arm arrangement to preserve: green rounded left-facing head, small red eyes, deep red-brown curled tentacles flowing right. Image 2 provides only the fine pixel-art colors/materials. Match the original silhouette and proportions, crisp small pixel clusters with dark olive outline and subtle red/gold shading. Center the complete single creature on a genuinely transparent background. No invented extra heads, water, map lines, text, other objects, montage or atlas.",
+      "reference_sha256": {
+        "native-opening-reference-squid.png": "582fc47322f713e9e9a361f4ed6a0174fb93ce912670455dbefc0bb8c8e21a47",
+        "opening-candidate-r2.png": "329d81b975d86764fe944ceb9de2c8a2674db4bb527df34d4fc52d5e7952f351"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENING.PIK",
+        "sha256": "80ea1dd4a00a4029052112882305e573bd7e20066eb095ceabe273a217689185",
+        "ordinal": 0,
+        "indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+      },
+      "native_display_rects": [
+        [
+          515,
+          67,
+          569,
+          97
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          127,
+          96,
+          1540,
+          874
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R82 opening PIK only; unknown foreground and unverified fades retain original; no animation conformance",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "opening-fish-bottom-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "e2b4bb5a7dca58f00fefedba777f73d764ceff68e76e07ccf65b2d9600fb2f97",
+      "bytes": 1056131,
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        960,
+        132
+      ],
+      "target_size": [
+        3840,
+        528
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from explicitly measured generated region; preserve source PNG bytes",
+      "alpha": "retain raw PNG alpha in selected source rectangle; integer source-over onto opaque generated base; no alpha normalization",
+      "generation_prompt": "Use case: style-transfer. Asset: ONE isolated antique map fish sprite. Redraw the small green fish facing right, long low body, dark olive back, yellow-green belly, small triangular fins and left tail. Image 1 is the subject and proportions reference. Image 2 supplies only the approved fine pixel-art technique and muted antique-map palette. Preserve the original orientation and silhouette. Use crisp intentional small pixel clusters, restrained highlights, no glossy 3D rendering. Center the complete single asset on a genuinely transparent background with a little transparent margin. No map background, words, other objects, collage or atlas.",
+      "reference_sha256": {
+        "native-opening-reference-fish-bottom.png": "03c8cab189913bda9c154a5f21237a321ca4e0f045b9352909b0b54b3685851a",
+        "opening-candidate-r2.png": "329d81b975d86764fe944ceb9de2c8a2674db4bb527df34d4fc52d5e7952f351"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENING.PIK",
+        "sha256": "80ea1dd4a00a4029052112882305e573bd7e20066eb095ceabe273a217689185",
+        "ordinal": 0,
+        "indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+      },
+      "native_display_rects": [
+        [
+          372,
+          81,
+          413,
+          108
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          158,
+          255,
+          1381,
+          770
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R82 opening PIK only; unknown foreground and unverified fades retain original; no animation conformance",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "opening-galley-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "fc8271c73682bd54ccadffaf105c783324f1d5202a2643466a18dfefc522f283",
+      "bytes": 669981,
+      "size": [
+        1271,
+        1238
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        960,
+        132
+      ],
+      "target_size": [
+        3840,
+        528
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from explicitly measured generated region; preserve source PNG bytes",
+      "alpha": "retain raw PNG alpha in selected source rectangle; integer source-over onto opaque generated base; no alpha normalization",
+      "generation_prompt": "Use case: style-transfer. Asset: ONE isolated antique-map small sailing vessel sprite. Match the original compact brown ship with a high dark stern on the right, angled mast and spar on the left, tiny reddish pennant, tan sail or rigging, and short attached waterline. Keep its unusually angled profile and proportions. Image 1 is the subject and proportions reference. Image 2 supplies only the approved fine pixel-art technique and muted antique-map palette. Preserve the original orientation and silhouette. Use crisp intentional small pixel clusters, restrained highlights, no glossy 3D rendering. Center the complete single asset on a genuinely transparent background with a little transparent margin. No map background, words, other objects, collage or atlas.",
+      "reference_sha256": {
+        "native-opening-reference-galley.png": "c45c39d40b821449052ffcbbb39d073b7ab2059c57b403a4825c5d29bc64cd8f",
+        "opening-candidate-r2.png": "329d81b975d86764fe944ceb9de2c8a2674db4bb527df34d4fc52d5e7952f351"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENING.PIK",
+        "sha256": "80ea1dd4a00a4029052112882305e573bd7e20066eb095ceabe273a217689185",
+        "ordinal": 0,
+        "indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+      },
+      "native_display_rects": [
+        [
+          646,
+          3,
+          683,
+          39
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          192,
+          178,
+          1101,
+          1074
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R82 opening PIK only; unknown foreground and unverified fades retain original; no animation conformance",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "opening-volcano-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "24ef3ca78240d8fd7f893ba0026773665e2c1f29ac033a232577cae9734ac09b",
+      "bytes": 768393,
+      "size": [
+        1527,
+        1030
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        960,
+        132
+      ],
+      "target_size": [
+        3840,
+        528
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from explicitly measured generated region; preserve source PNG bytes",
+      "alpha": "retain raw PNG alpha in selected source rectangle; integer source-over onto opaque generated base; no alpha normalization",
+      "generation_prompt": "Use case: style-transfer. Asset: ONE isolated miniature antique-map volcano sprite. Match the low ochre rocky island, central dark crater, warm orange-brown lava glow and two small curling grey-blue smoke wisps rising above. Keep the complete original island and smoke proportions. Image 1 is the subject and proportions reference. Image 2 supplies only the approved fine pixel-art technique and muted antique-map palette. Preserve the original orientation and silhouette. Use crisp intentional small pixel clusters, restrained highlights, no glossy 3D rendering. Center the complete single asset on a genuinely transparent background with a little transparent margin. No map background, words, other objects, collage or atlas.",
+      "reference_sha256": {
+        "native-opening-reference-volcano.png": "81b937705cef78c618c83316e19d8ef71ab28908f3c69254e50085e92c599dbf",
+        "opening-candidate-r2.png": "329d81b975d86764fe944ceb9de2c8a2674db4bb527df34d4fc52d5e7952f351"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENING.PIK",
+        "sha256": "80ea1dd4a00a4029052112882305e573bd7e20066eb095ceabe273a217689185",
+        "ordinal": 0,
+        "indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+      },
+      "native_display_rects": [
+        [
+          590,
+          109,
+          641,
+          132
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          242,
+          110,
+          1328,
+          914
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R82 opening PIK only; unknown foreground and unverified fades retain original; no animation conformance",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "opening-wind-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "ec223225bcab1d069845e2ba6f908e1fc44027f5bd865abaf1cee846786de521",
+      "bytes": 823204,
+      "size": [
+        1504,
+        1046
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        960,
+        132
+      ],
+      "target_size": [
+        3840,
+        528
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from explicitly measured generated region; preserve source PNG bytes",
+      "alpha": "retain raw PNG alpha in selected source rectangle; integer source-over onto opaque generated base; no alpha normalization",
+      "generation_prompt": "Use case: style-transfer. Asset: ONE isolated antique-map wind-face ornament. Match the original gold-haired adult human FACE blowing wind between two small blue-grey clouds. Face and clouds only, with warm ochre curls and gentle cheek shading. Preserve the original small horizontal ornament silhouette; no body, limbs or additional characters. Image 1 is the subject and proportions reference. Image 2 supplies only the approved fine pixel-art technique and muted antique-map palette. Preserve the original orientation and silhouette. Use crisp intentional small pixel clusters, restrained highlights, no glossy 3D rendering. Center the complete single asset on a genuinely transparent background with a little transparent margin. No map background, words, other objects, collage or atlas.",
+      "reference_sha256": {
+        "native-opening-reference-wind.png": "a1c724b9858e7a648adcd221151beabd9ec266e6223afcc1cde9c15932d9d655",
+        "opening-candidate-r2.png": "329d81b975d86764fe944ceb9de2c8a2674db4bb527df34d4fc52d5e7952f351"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENING.PIK",
+        "sha256": "80ea1dd4a00a4029052112882305e573bd7e20066eb095ceabe273a217689185",
+        "ordinal": 0,
+        "indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+      },
+      "native_display_rects": [
+        [
+          810,
+          0,
+          854,
+          31
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          106,
+          173,
+          1423,
+          876
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R82 opening PIK only; unknown foreground and unverified fades retain original; no animation conformance",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "opening-mermaid-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "d01062a7f075f8d83ee00ff0db63eb1c5d7c6e7a08f3110cfe78f1b10265e238",
+      "bytes": 774482,
+      "size": [
+        1004,
+        1566
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        960,
+        132
+      ],
+      "target_size": [
+        3840,
+        528
+      ],
+      "sampling": "integer pixel-center-nearest-neighbor from explicitly measured generated region; preserve source PNG bytes",
+      "alpha": "retain raw PNG alpha in selected source rectangle; integer source-over onto opaque generated base; no alpha normalization",
+      "generation_prompt": "Use case: style-transfer. Asset: ONE isolated antique-map ADULT mermaid sprite, a fully clothed nonsexual decorative figure. Match image 1's diagonal upright pose, long golden hair, arms at her sides, and curved green fish tail extending down-left. Give her an opaque modest antique-gold bodice and short-sleeved tunic fully covering the chest and torso. Preserve the gold upper-body color and green tail proportions. No nudity, exposed chest, suggestive pose or sexual presentation. Image 1 is the subject and proportions reference. Image 2 supplies only the approved fine pixel-art technique and muted antique-map palette. Preserve the original orientation and silhouette. Use crisp intentional small pixel clusters, restrained highlights, no glossy 3D rendering. Center the complete single asset on a genuinely transparent background with a little transparent margin. No map background, words, other objects, collage or atlas.",
+      "reference_sha256": {
+        "native-opening-reference-mermaid.png": "2a1b0338841352bd76ee5950296b4fbbb20c14ddd67a66646721936b213cee48",
+        "opening-candidate-r2.png": "329d81b975d86764fe944ceb9de2c8a2674db4bb527df34d4fc52d5e7952f351"
+      },
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENING.PIK",
+        "sha256": "80ea1dd4a00a4029052112882305e573bd7e20066eb095ceabe273a217689185",
+        "ordinal": 0,
+        "indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+      },
+      "native_display_rects": [
+        [
+          434,
+          12,
+          457,
+          49
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          64,
+          97,
+          970,
+          1511
+        ]
+      ],
+      "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
+      "coverage": "READY R82 opening PIK only; unknown foreground and unverified fades retain original; no animation conformance",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
     }
   }
 }

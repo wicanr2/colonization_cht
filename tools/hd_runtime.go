@@ -56,7 +56,7 @@ func loadHDRuntime(m *golem.Machine, game, directory string) (*hdRuntime, error)
 	if !info.IsDir() || info.Mode()&os.ModeSymlink != 0 {
 		return nil, fmt.Errorf("HD asset directory is not a real directory")
 	}
-	manifest, err := hdReadFile(filepath.Join(directory, "manifest.json"), 512<<10)
+	manifest, err := hdReadFile(filepath.Join(directory, "manifest.json"), 16<<20)
 	if err != nil {
 		return nil, err
 	}
@@ -94,6 +94,10 @@ func loadHDRuntime(m *golem.Machine, game, directory string) (*hdRuntime, error)
 		}
 	}
 	h := &hdRuntime{m: m, art: art, pending: map[int]hdBuildingPixel{}}
+	h.opening, err = loadHDOpeningRuntime(h, game, directory)
+	if err != nil {
+		return nil, err
+	}
 	h.cursor, err = loadHDCursorRuntime(game, directory)
 	if err != nil {
 		return nil, err
@@ -162,7 +166,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "f5d0fbebed17123932d129c006c488190864a1450036c9800f2edc78d09a0e00"
+const hdManifestSHA = "1e352b76c3f0cee0a72ad6f4fcd4cf6ab5122bc97e9deac3a02a175a889e6dbe"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"
@@ -175,6 +179,7 @@ type hdBuildingPixel struct {
 	cursorIndex int
 }
 type hdRuntime struct {
+	opening *hdOpeningRuntime
 	scenes  *hdSceneRuntime
 	newGame *hdNewGameRuntime
 
@@ -691,6 +696,12 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 	if b.hd.cursor != nil {
 		hd["cursor"] = b.hd.cursor.paint(b.hd, out, f)
 	}
+	// 規格069 R82 READY：沒有翻譯項目時，只恢復開場滑鼠框內已驗來源。
+	// 共用語言引擎的VICEROY畫布在OPENING階段不能用於判定游標。
+	items, _ := record["items"].([]map[string]any)
+	if b.hd.opening != nil && len(items) == 0 {
+		hd["opening_cursor_background"] = b.hd.opening.paintWithin(out, f, f.cursor)
+	}
 	hd["native_cursor_text_background_repaints"] = nativeCursorBackgroundPainted
 	hd["native_cursor_text_background_mask"] = nativeCursorBackgroundMask
 	record["hd"] = hd
@@ -699,6 +710,11 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 
 func (h *hdRuntime) key() string {
 	base := h.baseKey()
+	if h != nil && h.opening != nil && h.m != nil {
+		base = fmt.Sprintf("%s/opening/%d/%s/%s/%s", base, h.opening.revision,
+			hash(h.m.Mem[0x5570+0x9f:0x5570+0x9f+32]), hash(h.m.Mem[0xafc00:0xaff00]),
+			hash(h.m.Mem[hdOpeningMain:hdOpeningMain+64000]))
+	}
 	if h != nil && h.m != nil && h.cursor != nil && len(h.m.Mem) >= 0xafc00 {
 		base = fmt.Sprintf("%s/cursor-source/%s", base, hash(bytes.Join([][]byte{h.m.Mem[0x1cd74:0x1ce74], h.m.Mem[0xafa00:0xafc00]}, nil)))
 	}

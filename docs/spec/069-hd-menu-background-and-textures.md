@@ -1488,3 +1488,103 @@ confirmed：完整長圖126720格出現在實體RAM 0x38630，邊框64000格在0
 R7研究審查SHA-256為d1d450fd61f778685af27b7e88dd68909f00e21f2c7373069c69a37fa5f29972。
 
 R7公開探針另通過四項負例：拒絕/out外輸出、缺原版、缺解碼輸入及錯誤索引指紋；均未寫成功收據。詳本機opening-public-probe-negative-r1.json。
+
+### R82 READY：開場長圖與邊框
+
+完整來源模型80點與無監看控制的CPU、完整RAM、IDX、DAC、PNG及檔案讀取相同。
+長圖於3664755步完成126720格連續解碼，邊框於3966913步完成64000格；
+完整原圖雜湊沿前節。主畫布已驗來源格使用uint32局部索引，實際最大126719。
+正常完整色盤點有21760格邊框、41728格長圖與512格未知移動船前景。
+四筆同值未知寫入仍撤銷。模型指紋為324abb592acd1fc9ecd4abe7dbd044aaee709b653afc2c8f4b920fd257188a97。
+
+正常滑鼠點選離開開場另驗六筆既有玩家輸入至22400000步，112點與全新控制相同。
+13400000步起開場程式碼身分不符，來源全部撤銷，之後不繪開場HD。
+獨立模型指紋為eb97ac7f0ae28b65ee35c97a723ed75d0be5875ddc0cdc5e62203aba490fcc02。
+轉場中主畫布與VGA不同的點保留原圖，不以延長等待或放寬比較取得通過。
+
+正式授權範圍如下：
+
+1. 固定主畫布0x1C430、長圖0x38630與64000格來源表。只接受前節兩個完整PIK解碼碼、
+   連續範圍及完整原始SHA；03BD:00C8逐字複製另驗原碼、DF、段界限、來源位置與當次值。
+   未知主畫布寫入即使同值也撤銷；長圖未知寫入阻止後續移交，已複製的主畫布格保留。
+2. 每次繪製另驗模式13、0557:009F的32位元組開場程式碼、完整主畫布／可見IDX／原VGA全等，
+   DAC與0xAFC00基準色盤均為b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54。
+   程式碼身分消失時清除來源。黑畫面、未驗淡入淡出及未知前景保留原圖；其他HD層守門保持。
+3. 使用一張邊框、一張地圖底圖與十一張獨立透明物件PNG。每張都是獨立原稿，沒有圖集。
+   整張長圖重畫候選造成太陽與船位移，未採用；改由原版座標固定各物件位置與比例。
+   生成原PNG與alpha不改寫。沿schema1的native_display_rects／generated_display_rects取樣，
+   alpha≥128邊界只用於測量物件顯示矩形，不正規化alpha；顯示矩形外原始位元組仍完整保存。
+   物件在記憶體內以原alpha合成至3840×528底圖，再只畫已驗來源格；移動船仍保留原版。
+   邊框五帶對應1280×800；完整提示、原圖、原始來源與幾何指紋入清冊。
+4. 單PNG上限維持8MiB。為容納全量HD來源紀錄，清冊上限由512KiB改為16MiB，
+   仍逐byte核對固定SHA、拒絕連結與超限檔案。schema1及原版資料格式保持。
+5. 正式驗收須驗完整來源／碼／界限／DF／色盤／VGA反例、同值撤銷、80點與112點獨立來源及RGBA、
+   正常GUI兩模式與離頁、當次輸入的原版狀態／音訊／存檔、繼承32點與資源／封裝回退。
+   未完成前維持READY，不外推其他開場動畫、中間色盤、五語、全量HD或新版發行。
+
+本機READY為hd-opening-backgrounds-r82/opening-ready-r1.json；
+幾何與原型為opening-components-prototype-review-r9.json，退場為opening-normal-exit-review-r10.json。
+來源入口沿[開場唯讀探針](../../tools/probe_hd_opening_sources.go)；正式元件與測試隨實作掛入本節。
+
+R82正式入口為[開場來源與繪製](../../tools/hd_opening_runtime.go)、
+[固定原稿及顯示矩形](../../tools/hd_opening_sources.go)及
+[來源／回退／正常路徑測試](../../tools/hd_opening_runtime_test.go)。
+獨立[原PNG與像素核對器](../../tools/check_hd_opening_pixels.py)以--assets、--model、
+--formal、--decoded與--output重生；正常GUI另加--gui。model由原版探針的--source-model產生，
+--normal-exit使用已驗六筆輸入，--inputs可指定當次GUI輸入，--save-seed指定相同合法測試存檔。
+
+### R82 READY補充：開場滑鼠矩形的已驗背景
+
+首輪正常GUI的英文HD與獨立原PNG全等。繁中HD在[640,400,704,464]有差異，
+恰為當次原版滑鼠16×16格。原因已證實為language_rebuild_probe.go在非英文重建末尾
+比較IDX與VICEROY固定畫布0x2CAE0，不同的格即回畫原圖；開場畫布實際為0x1C430。
+該開場點沒有已驗標準游標來源，也沒有任何已繪翻譯項目。
+當次獨立模型證實矩形256格全為已驗長圖背景。隔離原型只恢復這256格後，完整RGBA相同。
+
+READY因此授權：HD且沒有已繪翻譯項目時，語言合成後只在滑鼠矩形內重畫
+通過本節全部守門的開場來源格。未知格、原版模式與其他圖層保持。
+每格仍驗原始來源值與當次主畫布／IDX／VGA；不得因游標來源缺失就把整個矩形視為背景。
+這是開場來源的有限恢復，不改共用語言引擎或標準游標契約。
+開場畫布、開場程式碼與RAM色盤另納入HD快取鍵，避免VGA未發布時沿用先前通過的畫面。
+審查為本機opening-cursor-ready-r3.json；r2的「一律回畫」描述由上述條件式與畫布位置勘誤，
+原型及來源判準保持。首輪GUI像素檢查未通過，不計正式完成信用。
+
+### R82 限定CONFORMED
+
+開場PIK在完整基準色盤及本批正常路徑限定CONFORMED。新增13張生成原PNG，
+合計147張／清冊148檔、67Go／50來源綁定。兩個原始PIK的來源與13張圖分別記錄，
+不把每張獨立物件PNG計成新的原版圖像。原版SS移動船與其他未知前景保持。
+
+| 驗收 | 結果 |
+|---|---|
+| 建置與元件 | 建置、go vet及88個具名Go通過，零失敗／零skip。含原始檔與13張PNG的48個缺失／錯件／連結反例、解碼與複製碼、DF、段界限、高位局部索引、主畫布／VGA／色盤、同值撤銷、滑鼠矩形及快取鍵。 |
+| 原版來源與狀態 | 無離頁80點及正常離頁112點，共192點的完整CPU／RAM／IDX／DAC與獨立原版模型相同。22張完整RGBA共22528000個相同，含轉場回退與未知前景。 |
+| 繼承回歸 | R81正常32點／31輸入的32768000個完整RGBA、來源、原版狀態與存檔保持。這是本批重跑，不把歷史GUI算成本批新驗收。 |
+| 正常GUI | 六項實拍，三HD／三原圖，英文與繁中開場兩模式及離開開場回主選單。696320個邊框RGBA、1335296個長圖RGBA、2064384個原圖／前景RGBA與獨立原PNG及模型相同。六張X11遊戲區共6144000個RGBA全等；主選單兩圖只增加離頁及X11信用，文字沿既有規格。 |
+| 滑鼠矩形 | 原版滑鼠位於160,100，矩形256格逐格具備長圖來源。繁中合成後的有限恢復與獨立模型全等；未知格仍保留原圖，不授予開場標準游標來源。 |
+| 原版狀態、音訊、存檔 | 當次四筆實際GUI輸入三側重播至20000000步，含play=true。CPU、完整RAM、IDX、DAC、WAV與所有存檔均和實拍相同。WAV為85857幀、49715Hz、雙聲道且非靜音；沒有新的人耳、音效卡或平台真機驗收。 |
+| 資源與封裝 | 正向完整副本驗16MiB清冊上限、缺件回退、偏好與交易保持。封裝148檔白名單及46項拒絕通過，包含全部13張新PNG三種故障、清冊、額外檔案與連結目錄。沒有新平台發行包。 |
+| 權利與繼承 | 13張原PNG逐byte及alpha保持，完整提示與參考雜湊入清冊；舊134張圖及資產紀錄不變。原版288檔不變。1552列只更新1092／1179，其他1550列保持。原版參考、IDX、RAM、WAV、存檔及未選候選不入Git。 |
+
+| 指紋 | SHA-256 |
+|---|---|
+| 正式二進位 | 9094881266bdc4a91dbcc932a160277ab7cf812006f6710cb81330e05b078370 |
+| 原圖清冊 | 1e352b76c3f0cee0a72ad6f4fcd4cf6ab5122bc97e9deac3a02a175a889e6dbe |
+| READY主審查 | b36de92c45f8c91b85cda56cadb7e3f1c76eb78feef5e00a14c5d2731fabc855 |
+| 正式審查 | 228187c040df6071d840d1d70662518da0adb6913671cedeee3480290430ae4b |
+| 公開來源索引 | 4a364aad8d38a9ac86cdbfeb5d066dee1a2dcecf13765398c2fbc4b8968b8170 |
+| GUI及三側WAV | 03233f0f937bd8d4caf73c3c347ad1f4288ad4e202e2749f075953aee34f2464 |
+
+本機根為workplace/reports/goal186-display-hd/hd-opening-backgrounds-r82。
+重生入口為build-r82-opening-r4.py、run-r82-opening-tests-r4.py、
+capture-r82-opening-r2.py、verify-r82-gui-replays-r2.py、check-r82-opening-package-r2.py及
+review-r82-opening-r4.py。收據為r82-opening-build-r4.json、r82-opening-tests-r4-check.json、
+r82-opening-native-r4、r82-inherited-native32-r4/check.json、r82-opening-native80-pixels-r4/check.json、
+r82-opening-exit112-pixels-r4/check.json、r82-opening-formal-gui-r2/capture.json、
+opening-public-model-r12-gui-r2/model.json、r82-opening-gui-pixels-r2/check.json、
+r82-opening-replay-r2-check.json、r82-opening-package-r2.json與opening-conformance-r4.json。
+公開來源與像素工具參數見前節；來源索引組裝器以--opening-ready-report與
+--opening-conformed-report、--inherited-index及--inherited-manifest補入兩個PIK來源，其他列保持。
+
+中間淡入淡出、開場SS動畫、其他17個PIK、其他圖像、完整五語、
+連續實玩影片與新版交付仍待完成。沒有新tag或Release，v.1.0.3-20261010保持。

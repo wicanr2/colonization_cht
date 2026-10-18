@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "f5d0fbebed17123932d129c006c488190864a1450036c9800f2edc78d09a0e00",
+  "formal_manifest_sha256": "1e352b76c3f0cee0a72ad6f4fcd4cf6ab5122bc97e9deac3a02a175a889e6dbe",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -39124,9 +39124,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete original decode, uint32 map locals, exact RAM copy provenance, full opening canvas/VGA/index equality, canonical palette and normal exit; unknown foreground remains original",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openbord-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "228187c040df6071d840d1d70662518da0adb6913671cedeee3480290430ae4b",
+        "scope": "canonical-palette opening PIK border and panoramic map; raw per-object PNG geometry and verified source restoration inside mouse rectangle; SS foreground animation and intermediate fades unverified"
+      }
     },
     {
       "research_id": 1093,
@@ -41299,9 +41308,29 @@
       "pixel_bytes": 126720,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete original decode, uint32 map locals, exact RAM copy provenance, full opening canvas/VGA/index equality, canonical palette and normal exit; unknown foreground remains original",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-000.png",
+        "opening-sun-000.png",
+        "opening-ship-static-000.png",
+        "opening-dragon-000.png",
+        "opening-compass-000.png",
+        "opening-fish-top-000.png",
+        "opening-squid-000.png",
+        "opening-fish-bottom-000.png",
+        "opening-galley-000.png",
+        "opening-volcano-000.png",
+        "opening-wind-000.png",
+        "opening-mermaid-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "228187c040df6071d840d1d70662518da0adb6913671cedeee3480290430ae4b",
+        "scope": "canonical-palette opening PIK border and panoramic map; raw per-object PNG geometry and verified source restoration inside mouse rectangle; SS foreground animation and intermediate fades unverified"
+      }
     },
     {
       "research_id": 1180,
@@ -59141,6 +59170,149 @@
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec",
       "source_indexed_sha256": "f31602f9a239a4f83fd6e27e644384009d628517185aeb80bb248479e67d0e71"
+    },
+    {
+      "asset": "openbord-000.png",
+      "asset_sha256": "4764f149760efcd2bee209e0b625270c1257a1e04d56e36d8bd86b150e919c18",
+      "source_research_id": 1092,
+      "source_file": "OPENBORD.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "ee23b1d787958481210fb6c328ccc067805bdbd8d83300c5d8157dd40cf90816"
+    },
+    {
+      "asset": "opening-000.png",
+      "asset_sha256": "d06c24c54a5c8957973495a359261c4436adf71ab5e828b3e74c9bceda737ea3",
+      "source_research_id": 1179,
+      "source_file": "OPENING.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+    },
+    {
+      "asset": "opening-sun-000.png",
+      "asset_sha256": "c69a393d6af9ba22b5aea32ce1efe6b26a78ed6b737900ece5f1eb915546623c",
+      "source_research_id": 1179,
+      "source_file": "OPENING.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+    },
+    {
+      "asset": "opening-ship-static-000.png",
+      "asset_sha256": "8af9b41cc6fa3727c2b79626e5dea27cf65d5a902d6adae0d3f2857e0f52284f",
+      "source_research_id": 1179,
+      "source_file": "OPENING.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+    },
+    {
+      "asset": "opening-dragon-000.png",
+      "asset_sha256": "6848b9e631d10121cc8b2c195e6edad273d12640cf69a8719571cc39f5482850",
+      "source_research_id": 1179,
+      "source_file": "OPENING.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+    },
+    {
+      "asset": "opening-compass-000.png",
+      "asset_sha256": "6ba308b116f64055f2fe4c99608edea0823d49e0914b7c7a4481e0bf5ce8f7ed",
+      "source_research_id": 1179,
+      "source_file": "OPENING.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+    },
+    {
+      "asset": "opening-fish-top-000.png",
+      "asset_sha256": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a",
+      "source_research_id": 1179,
+      "source_file": "OPENING.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+    },
+    {
+      "asset": "opening-squid-000.png",
+      "asset_sha256": "ccccbee3c531f4fe4705c9f2187babc8201dbdf0843caaff0c388dc267e1290b",
+      "source_research_id": 1179,
+      "source_file": "OPENING.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+    },
+    {
+      "asset": "opening-fish-bottom-000.png",
+      "asset_sha256": "e2b4bb5a7dca58f00fefedba777f73d764ceff68e76e07ccf65b2d9600fb2f97",
+      "source_research_id": 1179,
+      "source_file": "OPENING.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+    },
+    {
+      "asset": "opening-galley-000.png",
+      "asset_sha256": "fc8271c73682bd54ccadffaf105c783324f1d5202a2643466a18dfefc522f283",
+      "source_research_id": 1179,
+      "source_file": "OPENING.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+    },
+    {
+      "asset": "opening-volcano-000.png",
+      "asset_sha256": "24ef3ca78240d8fd7f893ba0026773665e2c1f29ac033a232577cae9734ac09b",
+      "source_research_id": 1179,
+      "source_file": "OPENING.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+    },
+    {
+      "asset": "opening-wind-000.png",
+      "asset_sha256": "ec223225bcab1d069845e2ba6f908e1fc44027f5bd865abaf1cee846786de521",
+      "source_research_id": 1179,
+      "source_file": "OPENING.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+    },
+    {
+      "asset": "opening-mermaid-000.png",
+      "asset_sha256": "d01062a7f075f8d83ee00ff0db63eb1c5d7c6e7a08f3110cfe78f1b10265e238",
+      "source_research_id": 1179,
+      "source_file": "OPENING.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
     }
   ],
   "limitations": [
@@ -59494,5 +59666,17 @@
     "formal_source_points": 9,
     "formal_assets": 134,
     "claim": "existing texture publication lifecycle and normal popup wood underlays only; no new art or full-HD credit"
+  },
+  "opening_background_conformance": {
+    "ready_sha256": "b36de92c45f8c91b85cda56cadb7e3f1c76eb78feef5e00a14c5d2731fabc855",
+    "review_sha256": "228187c040df6071d840d1d70662518da0adb6913671cedeee3480290430ae4b",
+    "sources": [
+      1092,
+      1179
+    ],
+    "new_raw_pngs": 13,
+    "formal_assets": 147,
+    "gui_samples": 6,
+    "claim": "two PIK sources only; unknown foreground, animation, fades and full HD remain incomplete"
   }
 }

@@ -52,6 +52,8 @@ parser.add_argument('--published-text-ready-report',type=Path,help='規格069 R8
 parser.add_argument('--published-text-conformed-report',type=Path,help='規格069 R80正常字底與游標限定驗收，原素材保持')
 parser.add_argument('--published-texture-ready-report',type=Path,help='規格069 R81既有三底紋發布來源READY審查')
 parser.add_argument('--published-texture-conformed-report',type=Path,help='規格069 R81既有底紋限定驗收，原素材與其他來源保持')
+parser.add_argument('--opening-ready-report',type=Path,help='規格069 R82開場PIK READY審查')
+parser.add_argument('--opening-conformed-report',type=Path,help='規格069 R82開場PIK限定驗收及134張舊原稿繼承審查')
 a=parser.parse_args();out=a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.parent.stat().st_uid==os.getuid() and not out.exists()
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -83,6 +85,45 @@ for name,asset in manifest['assets'].items():
  f=matches[0];f['formal_assets'].append(name)
  bindings.append({'asset':name,'asset_sha256':asset['sha256'],'source_research_id':f['research_id'],'source_file':file,'source_ordinal':f['ordinal'],'source_encoded_sha256':f.get('encoded_sha256'),'spec':asset.get('spec',manifest['spec']),'claim':'matches verified formal manifest; conformance scope remains in cited spec'})
  if file.endswith('.PIK'):bindings[-1]['source_indexed_sha256']=f['indexed_sha256']
+# R82 只增加兩個原始PIK的13張生成圖，其他來源及歷史驗收保持。
+if a.opening_ready_report or a.opening_conformed_report:
+ assert a.opening_ready_report and a.opening_conformed_report and a.inherited_index and a.inherited_manifest
+ assert not a.published_texture_ready_report and not a.published_texture_conformed_report
+ ready=json.loads(a.opening_ready_report.read_bytes());review=json.loads(a.opening_conformed_report.read_bytes())
+ prior=json.loads(a.inherited_index.read_bytes());old_manifest=json.loads(a.inherited_manifest.read_bytes())
+ assert ready['state']=='READY' and review['result']=='PASS_OPENING_CONFORMANCE_REVIEW' and review['spec_state']=='CONFORMED'
+ assert review['ready_sha256']==sha(a.opening_ready_report) and review['manifest_sha256']==sha(a.manifest)
+ assert review['inherited_manifest_sha256']==sha(a.inherited_manifest)==prior['formal_manifest_sha256']
+ assert review['inherited_source_index_sha256']==sha(a.inherited_index)
+ assert len(old_manifest['assets'])==134 and len(manifest['assets'])==len(bindings)==147
+ assert all(manifest['assets'][k]==v and sha(a.assets/k)==v['sha256'] for k,v in old_manifest['assets'].items())
+ assert review['go_named_passed']>=88 and not review['go_failed'] and not review['go_skipped']
+ assert review['native_points']==192 and review['native_full_rgba_pixels']==22528000
+ assert review['gui_samples']==6 and review['gui_hd_samples']==3 and review['gui_original_samples']==3
+ assert review['formal_source_points']>0 and review['opening_border_rgba_pixels']>0 and review['opening_map_rgba_pixels']>0
+ assert review['three_replays_gui_audio_state_save_equal'] is True and review['complete_hd'] is False
+ assert review['cursor_source_restore_verified'] is True and review['inherited_native32_passed'] is True
+ assert review['package_graphics_files']==148 and review['original_inputs_unchanged'] is True
+ assert prior['source_receipt_sha256']==sha(a.catalog) and len(prior['frames'])==1552 and prior['files']==d['files']
+ assert bindings[:134]==prior['formal_bindings'] and {b['source_research_id'] for b in bindings[134:]}=={1092,1179}
+ before={f['research_id']:f for f in prior['frames']}
+ for frame in frames:
+  old=before[frame['research_id']]
+  assert {k:frame[k] for k in allowed if k in frame}=={k:old[k] for k in allowed if k in old}
+ merged=json.loads(a.inherited_index.read_bytes());new={f['research_id']:f for f in frames};ids={1092,1179}
+ for row in merged['frames']:
+  if row['research_id'] not in ids:continue
+  assert not row['formal_assets']
+  row['formal_assets']=new[row['research_id']]['formal_assets']
+  row['runtime_source_evidence']='confirmed complete original decode, uint32 map locals, exact RAM copy provenance, full opening canvas/VGA/index equality, canonical palette and normal exit; unknown foreground remains original'
+  row['source_contract_reference']={'state':'CONFORMED','spec':'docs/spec/069-hd-menu-background-and-textures.md','formal_connected':True,'review_sha256':sha(a.opening_conformed_report),'scope':'canonical-palette opening PIK border and panoramic map; raw per-object PNG geometry and verified source restoration inside mouse rectangle; SS foreground animation and intermediate fades unverified'}
+ merged['formal_manifest_sha256']=sha(a.manifest);merged['formal_bindings']=bindings
+ merged['opening_background_conformance']={'ready_sha256':sha(a.opening_ready_report),'review_sha256':sha(a.opening_conformed_report),'sources':sorted(ids),'new_raw_pngs':13,'formal_assets':147,'gui_samples':6,'claim':'two PIK sources only; unknown foreground, animation, fades and full HD remain incomplete'}
+ assert all(f==before[f['research_id']] for f in merged['frames'] if f['research_id'] not in ids)
+ out.write_text(json.dumps(merged,ensure_ascii=False,indent=2)+'\n')
+ print('PASS_INHERITED_OPENING_PIK_INDEX',len(frames),len(bindings),sha(out),flush=True)
+ raise SystemExit(0)
+
 # R81 只補三種既有底紋的發布生命週期，保留全部原始來源及歷史驗收。
 if a.published_texture_ready_report or a.published_texture_conformed_report:
  assert a.published_texture_ready_report and a.published_texture_conformed_report and a.inherited_index and a.inherited_manifest

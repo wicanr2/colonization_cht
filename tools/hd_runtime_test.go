@@ -12,6 +12,21 @@ import (
 	golem "github.com/wicanr2/dosgolem"
 )
 
+func hdResourceOriginalFiles() []string {
+	files := []string{"OPENING.EXE", "OPENING.PIK", "OPENBORD.PIK", "VICEROY.EXE", "BUILDING.SS", "PHYS0.SS", "ICONS.SS", "CURSOR.SS", "OPENTILE.SS", "OPENMENU.PIK", "WOODTILE.SS", "PARCH.SS", "DIFFICUL.PIK", "NATIONS.PIK", "CUSTOMIZ.PIK"}
+	seen := map[string]bool{}
+	for _, name := range files {
+		seen[name] = true
+	}
+	for _, frame := range hdSceneDefinitions {
+		if !seen[frame.file] {
+			files = append(files, frame.file)
+			seen[frame.file] = true
+		}
+	}
+	return files
+}
+
 func TestHDResourceAndStartupFallback(t *testing.T) {
 	game, assets := os.Getenv("TEST_GAME_ROOT"), os.Getenv("TEST_HD_ASSETS")
 	if game == "" || assets == "" {
@@ -25,7 +40,7 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 		}
 		return raw
 	}
-	for _, name := range []string{"VICEROY.EXE", "BUILDING.SS", "PHYS0.SS", "ICONS.SS", "CURSOR.SS", "OPENTILE.SS", "OPENMENU.PIK", "WOODTILE.SS", "PARCH.SS", "DIFFICUL.PIK", "NATIONS.PIK", "CUSTOMIZ.PIK"} {
+	for _, name := range hdResourceOriginalFiles() {
 		if _, err := os.Stat(filepath.Join(game, name)); os.IsNotExist(err) {
 			t.Skip("缺少合法原版", name)
 		}
@@ -40,7 +55,7 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 		"missing-manifest": func(a, g string) { os.Remove(filepath.Join(a, "manifest.json")) },
 		"bad-manifest":     func(a, g string) { os.WriteFile(filepath.Join(a, "manifest.json"), []byte("{}"), 0644) },
 		"oversized-manifest": func(a, g string) {
-			os.WriteFile(filepath.Join(a, "manifest.json"), bytes.Repeat([]byte("x"), (512<<10)+1), 0644)
+			os.WriteFile(filepath.Join(a, "manifest.json"), bytes.Repeat([]byte("x"), (16<<20)+1), 0644)
 		},
 		"missing-image": func(a, g string) { os.Remove(filepath.Join(a, "building-032.png")) },
 		"bad-image":     func(a, g string) { os.WriteFile(filepath.Join(a, "building-032.png"), []byte("bad"), 0644) },
@@ -161,6 +176,16 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 		os.Remove(p)
 		os.Symlink(filepath.Join(assets, "terrain-079.png"), p)
 	}
+	for _, frame := range hdOpeningDefinitions {
+		filename := frame.asset
+		mutations["missing-"+filename] = func(a, g string) { os.Remove(filepath.Join(a, filename)) }
+		mutations["bad-"+filename] = func(a, g string) { os.WriteFile(filepath.Join(a, filename), []byte("wrong"), 0644) }
+		mutations["linked-"+filename] = func(a, g string) {
+			p := filepath.Join(a, filename)
+			os.Remove(p)
+			os.Symlink(filepath.Join(assets, filename), p)
+		}
+	}
 
 	requiredCases := make([]string, 0, len(mutations))
 	for name := range mutations {
@@ -218,7 +243,7 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 			t.Fatal(e)
 		}
 	}
-	for _, n := range []string{"VICEROY.EXE", "BUILDING.SS", "PHYS0.SS", "ICONS.SS", "CURSOR.SS", "OPENTILE.SS", "OPENMENU.PIK", "WOODTILE.SS", "PARCH.SS", "DIFFICUL.PIK", "NATIONS.PIK", "CUSTOMIZ.PIK"} {
+	for _, n := range hdResourceOriginalFiles() {
 		if err := os.WriteFile(filepath.Join(g, n), readFile(filepath.Join(game, n)), 0644); err != nil {
 			t.Fatal(err)
 		}
