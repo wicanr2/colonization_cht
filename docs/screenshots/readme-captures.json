@@ -1,10 +1,10 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-18",
-  "code_commit": "d79ec5654fa3376c19f77cd3b142081cef01ac1f",
-  "binary_sha256": "74fcb36302795905d7481a6a8c5e58b128669f052da727a73d136ada5fa69bf2",
-  "formal_binary_sha256": "74fcb36302795905d7481a6a8c5e58b128669f052da727a73d136ada5fa69bf2",
-  "source_build_sha256": "97eff1330fc51926f1d73d977d9b495ac064998703a771e5474b15fc01ea0aba",
+  "code_commit": "c97e3a2085badb4fbe6540adf4948d65e6ea5b1a",
+  "binary_sha256": "3b7a7172b48f7c0105f0089da39acb928827f0361097e0c9d0684c98327c45c4",
+  "formal_binary_sha256": "3b7a7172b48f7c0105f0089da39acb928827f0361097e0c9d0684c98327c45c4",
+  "source_build_sha256": "6aadc0def5dd35129e55a97eb09dcd79a6a36fe63b2e2fdce7e666a352afef99",
   "released_version_unchanged": "v.1.0.3-20261010",
   "formal_hd_assets": 134,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
@@ -441,6 +441,37 @@
       "graphics_manifest_sha256": "f5d0fbebed17123932d129c006c488190864a1450036c9800f2edc78d09a0e00",
       "conformance_sha256": "a1049affbd62d15ef7413cd9063e6f0dccb9aafbda199e5a4ee3238e1d38c2de",
       "scope": "正常國會室內與計分背景限定驗收。室內前景人物保留原版，同一姿態不代表動畫HD完成。載入選單木紋維持原圖；其他圖像、世界移動、戰鬥與動畫待完成。"
+    },
+    {
+      "file": "hd-load-list-zh.png",
+      "sha256": "e64cfb71d7d3f944feefb11de8ea92831eb6a15ccb2babe10c5f576c85e018b2",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "load-menu",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 35000000,
+      "code_commit": "c97e3a2085badb4fbe6540adf4948d65e6ea5b1a",
+      "binary_sha256": "3b7a7172b48f7c0105f0089da39acb928827f0361097e0c9d0684c98327c45c4",
+      "formal_binary_sha256": "3b7a7172b48f7c0105f0089da39acb928827f0361097e0c9d0684c98327c45c4",
+      "formal_hd_assets": 134,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-published-text-cursor-r80/r80-published-text-cursor-formal-gui-r2/gui.display-018.png",
+      "source_gui_check_sha256": "3bc7bdc16ecde9386e153049aa2db8fa523a168da708ee63995dfab4412b39f7",
+      "independent_pixels_sha256": "0099436fee9b3e639e70ed8a8366a7434903b7a76ffbf87c5db6a32fc1313f8b",
+      "same_state_replay_sha256": "1fce758db5abf5e730cbc406c43a53d6afa6f781bd9d3fc6769ca1d10f01bf68",
+      "same_state_replay_receipt": "workplace/reports/goal186-display-hd/hd-published-text-cursor-r80/r80-published-text-cursor-replay-r2-check.json",
+      "source_kind": "actual formal game presentation from standard display diagnostics; byte-for-byte matched to the real X11 game area",
+      "capture_pixels_unchanged": true,
+      "original_source_file": "WOODPANL.PIK",
+      "source_research_id": 1551,
+      "published_background_cells": 61279,
+      "verified_text_background_repaints": 863,
+      "hd_cursor_source_cells": 82,
+      "graphics_manifest_sha256": "f5d0fbebed17123932d129c006c488190864a1450036c9800f2edc78d09a0e00",
+      "conformance_sha256": "1135c987785e9e07d90aa47f125abe5aebabe4ce5c229fd38a5b07bf33cc110e",
+      "scope": "正常讀檔列表、已驗來源字底與一般箭頭游標。未知成功訊息字底、其他圖像與動畫仍待完成。"
     }
   ],
   "limitations": [
@@ -457,7 +488,8 @@
     "R75新增正常龍騎兵百科實拍，對應19幀／14頁的限定驗收；既有八張原PNG與逐圖來源保持。世界移動、戰鬥、其他圖像、動畫及全量HD尚未完成。",
     "R76新增殖民地下方背景與歐洲港口的繁中HD實拍，共十一張；既有九張原PNG及逐圖來源保持。其他圖像、特殊游標、完整五語文字、動畫與全量HD未完成，尚未收進目前發行版。",
     "R77新增繁中勞動與經濟報告實拍，共十三張；八種報告背景已驗，既有十一張PNG與逐圖來源保持。其他圖像、完整五語文字、特殊游標、動畫及全量HD未完成，尚未收進目前發行版。",
-    "R78新增國會室內與繁中計分實拍，共十五張；人物前景保留原版，本批九個室內HD點同一姿態。載入選單仍為原版背景，其他圖像、人物動畫、完整五語文字及全量HD未完成，尚未收進目前發行版。"
+    "R78新增國會室內與繁中計分實拍，共十五張；人物前景保留原版，本批九個室內HD點同一姿態。載入選單仍為原版背景，其他圖像、人物動畫、完整五語文字及全量HD未完成，尚未收進目前發行版。",
+    "R80新增繁中讀檔列表實拍，共十六張；已驗字底與一般箭頭已HD，未知成功訊息字底仍保留原圖。R78擷取當時的載入選單限制保持為歷史紀錄；全量HD、其餘圖像、動畫與完整五語仍未完成，尚未收進目前發行版。"
   ],
   "previous_build": {
     "kind": "README actual development screenshots",
@@ -470,9 +502,9 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "新增國會室內及計分頁採R78／d79ec56與134張原稿，直接複製正式程式呈現並逐byte匹配X11遊戲區。既有十三張PNG及逐圖程式commit、二進位指紋、當批素材數與限定驗收保持。",
+  "provenance_scope": "新增讀檔列表採R80／c97e3a2與134張原稿，直接複製正式程式呈現，逐byte匹配X11遊戲區。既有十五張原PNG與逐圖commit、二進位、素材數及限定驗收保持。",
   "graphics_manifest_sha256": "f5d0fbebed17123932d129c006c488190864a1450036c9800f2edc78d09a0e00",
-  "conformance_sha256": "a1049affbd62d15ef7413cd9063e6f0dccb9aafbda199e5a4ee3238e1d38c2de",
+  "conformance_sha256": "1135c987785e9e07d90aa47f125abe5aebabe4ce5c229fd38a5b07bf33cc110e",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -522,7 +554,7 @@
     "graphics_manifest_sha256": "c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7",
     "conformance_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5"
   },
-  "verification_build_sha256": "97eff1330fc51926f1d73d977d9b495ac064998703a771e5474b15fc01ea0aba",
+  "verification_build_sha256": "6aadc0def5dd35129e55a97eb09dcd79a6a36fe63b2e2fdce7e666a352afef99",
   "production_go_sources_equal_to_verified_build": true,
   "previous_scene_background_capture": {
     "code_commit": "dbfc95fc2b98654f9f4cf3d0abac946730bfbfce",
@@ -541,5 +573,14 @@
     "formal_hd_assets": 132,
     "graphics_manifest_sha256": "e3ff9d59ae66aa2bfe643d8c208c49367de97888704173b66d6230df2fc2b636",
     "conformance_sha256": "553827bbd2636765fa7d5be57a814bcaf7829911efba4de26ed7e950505e5028"
+  },
+  "previous_room_score_background_capture": {
+    "code_commit": "d79ec5654fa3376c19f77cd3b142081cef01ac1f",
+    "binary_sha256": "74fcb36302795905d7481a6a8c5e58b128669f052da727a73d136ada5fa69bf2",
+    "formal_binary_sha256": "74fcb36302795905d7481a6a8c5e58b128669f052da727a73d136ada5fa69bf2",
+    "source_build_sha256": "97eff1330fc51926f1d73d977d9b495ac064998703a771e5474b15fc01ea0aba",
+    "formal_hd_assets": 134,
+    "graphics_manifest_sha256": "f5d0fbebed17123932d129c006c488190864a1450036c9800f2edc78d09a0e00",
+    "conformance_sha256": "a1049affbd62d15ef7413cd9063e6f0dccb9aafbda199e5a4ee3238e1d38c2de"
   }
 }

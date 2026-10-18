@@ -6467,3 +6467,7 @@ README接續加入已驗列表實拍。提交前檢查原版追蹤邊界、UID/G
 完整HD及新版交付仍未完成。
 
 R80收尾已驗：原版誤追蹤0、root-owned或異常.md目錄0；原版288檔與134張原稿保持。兩種專案映像無殘留容器，隔離dosgolem乾淨且upstream推送維持DISABLED。四種來源索引錯誤審查均拒絕且未產生索引。
+
+## 2026-10-18 README新增R80列表實拍
+
+直接複製正式GUI的scene-load-menu-zh-Hant-hd，步數35000000，1280×800，SHA-256 e64cfb71d7d3f944feefb11de8ea92831eb6a15ccb2babe10c5f576c85e018b2。X11遊戲區逐位元組相同，程式c97e3a2、二進位3b7a7172b48f7c0105f0089da39acb928827f0361097e0c9d0684c98327c45c4、正式審查1135c987785e9e07d90aa47f125abe5aebabe4ce5c229fd38a5b07bf33cc110e。共十六張，既有十五張原PNG及capture物件逐項保持；未修改134張生成原稿。未知成功訊息字底及完整HD限制保留，沒有新發行。

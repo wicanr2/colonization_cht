@@ -92,3 +92,6 @@ __pycache__/
 !/graphics/icons-009.png
 !/graphics/icons-016.png
 !/docs/screenshots/hd-vehicle-pedia-zh.png
+
+# README R80：已驗正式列表實拍，來源見readme-captures.json。
+!/docs/screenshots/hd-load-list-zh.png
