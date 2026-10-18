@@ -6544,3 +6544,10 @@ README開場實拍接續刷新；其他開場SS、淡入淡出、其他圖像、
 所有長時間建置、GUI、重播與測試容器已退出，沒有持續背景工作；
 本批輸出UID/GID為1000:1000，find檢查未見root-owned檔案或*.md目錄。
 提交與推送依使用者既有授權，README刷新後再次核對工作樹及容器。
+
+
+R83 README收尾：程式與八張生成原PNG提交1ff23ce。
+以正式GUI的opening-ship-returned-zh-Hant實拍直接刷新既有hd-opening-zh.png，
+不改PNG編碼；1280×800、21800000步，X11遊戲區及來源原PNG一致。
+其他十七張原PNG與逐圖來源保持，readme-captures.json保留R82開場來源作歷史。
+README穩定摘要更新為155張與八幀動畫，不新增發行完成聲明。

@@ -1,12 +1,12 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-18",
-  "code_commit": "c3069fa3e95365639577a5c7c8da9074ca5f7bf6",
-  "binary_sha256": "9094881266bdc4a91dbcc932a160277ab7cf812006f6710cb81330e05b078370",
-  "formal_binary_sha256": "9094881266bdc4a91dbcc932a160277ab7cf812006f6710cb81330e05b078370",
-  "source_build_sha256": "68da10b8aca91cdd777a98b1d1af7204163a9b1d1e615ce2111bec12f6740c1b",
+  "code_commit": "1ff23ce05a2f50ffedc539ee0bb960b7ea3b06b8",
+  "binary_sha256": "6b1339d62537997acc50bb4e137cda6e002bcce752ac0aabaef2437e5b3fe95b",
+  "formal_binary_sha256": "6b1339d62537997acc50bb4e137cda6e002bcce752ac0aabaef2437e5b3fe95b",
+  "source_build_sha256": "b35309f9d49486cb3d4289225c1d5bec35a75edb3e0c43bbc3008da660cd9820",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 147,
+  "formal_hd_assets": 155,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -513,7 +513,7 @@
     },
     {
       "file": "hd-opening-zh.png",
-      "sha256": "d2337ff31db5fcad7c8b09cbdbaad18d4c30a803df44db719190dbe7ce5d588e",
+      "sha256": "8b69422d391f9146dd671e86d082792e9c47eb4d520666e9a81c4e264f8ae6a4",
       "size": [
         1280,
         800
@@ -521,31 +521,42 @@
       "scene": "opening",
       "language": "zh-Hant",
       "graphics": "hd",
-      "step": 6400000,
-      "code_commit": "c3069fa3e95365639577a5c7c8da9074ca5f7bf6",
-      "binary_sha256": "9094881266bdc4a91dbcc932a160277ab7cf812006f6710cb81330e05b078370",
-      "formal_binary_sha256": "9094881266bdc4a91dbcc932a160277ab7cf812006f6710cb81330e05b078370",
-      "formal_hd_assets": 147,
-      "source_receipt": "workplace/reports/goal186-display-hd/hd-opening-backgrounds-r82/r82-opening-formal-gui-r2/gui.display-010.png",
-      "source_gui_check_sha256": "f74b3b3f9249b06b611566b8e555e4ae5e390862ae8ce604a8e0235453a54a5c",
-      "source_pixel_check_sha256": "b226d8ae727e9114ff9d2223b86484bb2dfe3589468fea0ba03cf03eb72f9708",
-      "source_replay_check_sha256": "9c908b88358ee9598ff5d8d145cd764e4d52af6925c4e614f1678e41f4bbf6e2",
-      "graphics_manifest_sha256": "1e352b76c3f0cee0a72ad6f4fcd4cf6ab5122bc97e9deac3a02a175a889e6dbe",
-      "conformance_sha256": "228187c040df6071d840d1d70662518da0adb6913671cedeee3480290430ae4b",
+      "step": 21800000,
+      "code_commit": "1ff23ce05a2f50ffedc539ee0bb960b7ea3b06b8",
+      "binary_sha256": "6b1339d62537997acc50bb4e137cda6e002bcce752ac0aabaef2437e5b3fe95b",
+      "formal_binary_sha256": "6b1339d62537997acc50bb4e137cda6e002bcce752ac0aabaef2437e5b3fe95b",
+      "formal_hd_assets": 155,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-opening-sprites-r83/r83-opening-formal-gui-r1/gui.display-058.png",
+      "source_gui_check_sha256": "0ee07e8311745cb12564ea871e14d3fa3d8ad6c3e0cfa08c16b1457ef0b8985e",
+      "source_gui_build_sha256": "8421ae9abdba2e122092f3a381381224229cf0c8155ff7fd3beaee58448fe2ef",
+      "source_pixel_check_sha256": "13c1ad7b08822e1b4b8be71ccb67f36fe3eccc48f3a53c89ea445ac138288b98",
+      "source_replay_check_sha256": "8b5491cdb11fa92c8ba3f8079518637673fed85f599cd65f0fc086a3a34af48c",
+      "graphics_manifest_sha256": "5c8f2f86c28664c3c1beb92ec61c08e0abd54e3a771ac45a2316a7e37d8537c5",
+      "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb",
       "source_kind": "actual formal game presentation; verified byte-for-byte against the real X11 window game area",
       "capture_pixels_unchanged": true,
       "original_source_files": [
         "OPENING.PIK",
-        "OPENBORD.PIK"
+        "OPENBORD.PIK",
+        "OPENSHIP.SS"
       ],
       "source_research_ids": [
         1179,
-        1092
+        1092,
+        1250,
+        1251,
+        1252,
+        1253,
+        1254,
+        1255,
+        1256,
+        1257
       ],
       "opening_border_cells": 21760,
       "opening_map_cells": 41728,
-      "verified_mouse_background_cells": 256,
-      "scope": "正常開場長圖與邊框，原版移動船及其他未知前景保持；開場SS動畫、中間淡入淡出與全量HD未完成。"
+      "opening_ship_cells": 512,
+      "verified_mouse_background_cells": 160,
+      "scope": "正常開場長圖、木紋、金色邊框及船隻八幀已HD；本張為八幀中的單一正常狀態。其他開場SS、中間淡入淡出、其他圖像與全量HD未完成。"
     }
   ],
   "limitations": [
@@ -565,7 +576,8 @@
     "R78新增國會室內與繁中計分實拍，共十五張；人物前景保留原版，本批九個室內HD點同一姿態。載入選單仍為原版背景，其他圖像、人物動畫、完整五語文字及全量HD未完成，尚未收進目前發行版。",
     "R80新增繁中讀檔列表實拍，共十六張；已驗字底與一般箭頭已HD，未知成功訊息字底仍保留原圖。R78擷取當時的載入選單限制保持為歷史紀錄；全量HD、其餘圖像、動畫與完整五語仍未完成，尚未收進目前發行版。",
     "R81新增繁中成功訊息實拍，共十七張；內部WOODTILE木紋、字底與一般箭頭已HD。R80當時的未知字底限制保留為歷史紀錄；其餘圖像、動畫、完整五語與新版交付仍未完成。",
-    "R82新增開場長圖與邊框實拍，共十八張；原版移動船及其他未知前景保留。13張生成原PNG與既有134張原稿已入graphics，其他圖像、動畫、完整五語及新版交付仍未完成。"
+    "R82新增開場長圖與邊框實拍，共十八張；原版移動船及其他未知前景保留。13張生成原PNG與既有134張原稿已入graphics，其他圖像、動畫、完整五語及新版交付仍未完成。",
+    "R83刷新開場實拍，加入已驗船隻八幀；R82當時移動船保留原圖的限制作歷史紀錄。共十八張，其他十七張及逐圖來源保持。其他SS、淡入淡出、其他圖像、完整五語、影片與新版交付仍未完成。"
   ],
   "previous_build": {
     "kind": "README actual development screenshots",
@@ -578,9 +590,9 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "新增開場實拍採R82正式程式與147張原稿，原PNG直接複製，逐byte匹配X11遊戲區。既有十七張原PNG與逐圖commit、二進位、素材數及限定驗收保持。",
-  "graphics_manifest_sha256": "1e352b76c3f0cee0a72ad6f4fcd4cf6ab5122bc97e9deac3a02a175a889e6dbe",
-  "conformance_sha256": "228187c040df6071d840d1d70662518da0adb6913671cedeee3480290430ae4b",
+  "provenance_scope": "R83刷新既有開場實拍，採含船隻八幀的正式程式與155張原稿；原PNG直接複製並逐byte匹配X11遊戲區。既有十七張原PNG與逐圖commit、二進位、素材數及限定驗收保持。",
+  "graphics_manifest_sha256": "5c8f2f86c28664c3c1beb92ec61c08e0abd54e3a771ac45a2316a7e37d8537c5",
+  "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -630,7 +642,7 @@
     "graphics_manifest_sha256": "c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7",
     "conformance_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5"
   },
-  "verification_build_sha256": "68da10b8aca91cdd777a98b1d1af7204163a9b1d1e615ce2111bec12f6740c1b",
+  "verification_build_sha256": "b35309f9d49486cb3d4289225c1d5bec35a75edb3e0c43bbc3008da660cd9820",
   "production_go_sources_equal_to_verified_build": true,
   "previous_scene_background_capture": {
     "code_commit": "dbfc95fc2b98654f9f4cf3d0abac946730bfbfce",
@@ -676,5 +688,50 @@
     "formal_hd_assets": 134,
     "graphics_manifest_sha256": "f5d0fbebed17123932d129c006c488190864a1450036c9800f2edc78d09a0e00",
     "conformance_sha256": "d78e8de1959f7df72da0b52b0d107476b5bb6d0177b9051d8087fc475c43d385"
+  },
+  "previous_opening_background_capture": {
+    "code_commit": "c3069fa3e95365639577a5c7c8da9074ca5f7bf6",
+    "binary_sha256": "9094881266bdc4a91dbcc932a160277ab7cf812006f6710cb81330e05b078370",
+    "formal_binary_sha256": "9094881266bdc4a91dbcc932a160277ab7cf812006f6710cb81330e05b078370",
+    "source_build_sha256": "68da10b8aca91cdd777a98b1d1af7204163a9b1d1e615ce2111bec12f6740c1b",
+    "formal_hd_assets": 147,
+    "graphics_manifest_sha256": "1e352b76c3f0cee0a72ad6f4fcd4cf6ab5122bc97e9deac3a02a175a889e6dbe",
+    "conformance_sha256": "228187c040df6071d840d1d70662518da0adb6913671cedeee3480290430ae4b",
+    "capture": {
+      "file": "hd-opening-zh.png",
+      "sha256": "d2337ff31db5fcad7c8b09cbdbaad18d4c30a803df44db719190dbe7ce5d588e",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "opening",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 6400000,
+      "code_commit": "c3069fa3e95365639577a5c7c8da9074ca5f7bf6",
+      "binary_sha256": "9094881266bdc4a91dbcc932a160277ab7cf812006f6710cb81330e05b078370",
+      "formal_binary_sha256": "9094881266bdc4a91dbcc932a160277ab7cf812006f6710cb81330e05b078370",
+      "formal_hd_assets": 147,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-opening-backgrounds-r82/r82-opening-formal-gui-r2/gui.display-010.png",
+      "source_gui_check_sha256": "f74b3b3f9249b06b611566b8e555e4ae5e390862ae8ce604a8e0235453a54a5c",
+      "source_pixel_check_sha256": "b226d8ae727e9114ff9d2223b86484bb2dfe3589468fea0ba03cf03eb72f9708",
+      "source_replay_check_sha256": "9c908b88358ee9598ff5d8d145cd764e4d52af6925c4e614f1678e41f4bbf6e2",
+      "graphics_manifest_sha256": "1e352b76c3f0cee0a72ad6f4fcd4cf6ab5122bc97e9deac3a02a175a889e6dbe",
+      "conformance_sha256": "228187c040df6071d840d1d70662518da0adb6913671cedeee3480290430ae4b",
+      "source_kind": "actual formal game presentation; verified byte-for-byte against the real X11 window game area",
+      "capture_pixels_unchanged": true,
+      "original_source_files": [
+        "OPENING.PIK",
+        "OPENBORD.PIK"
+      ],
+      "source_research_ids": [
+        1179,
+        1092
+      ],
+      "opening_border_cells": 21760,
+      "opening_map_cells": 41728,
+      "verified_mouse_background_cells": 256,
+      "scope": "正常開場長圖與邊框，原版移動船及其他未知前景保持；開場SS動畫、中間淡入淡出與全量HD未完成。"
+    }
   }
 }
