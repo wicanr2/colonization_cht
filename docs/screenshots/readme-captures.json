@@ -1,12 +1,12 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-18",
-  "code_commit": "1ff23ce05a2f50ffedc539ee0bb960b7ea3b06b8",
-  "binary_sha256": "6b1339d62537997acc50bb4e137cda6e002bcce752ac0aabaef2437e5b3fe95b",
-  "formal_binary_sha256": "6b1339d62537997acc50bb4e137cda6e002bcce752ac0aabaef2437e5b3fe95b",
-  "source_build_sha256": "b35309f9d49486cb3d4289225c1d5bec35a75edb3e0c43bbc3008da660cd9820",
+  "code_commit": "4b4aaf0d09925e4e9e02fb742d0ea9b01ccfbd5f",
+  "binary_sha256": "c414ba2ae7b6c078344685cac54ab4aa08118040fb83614ea0146d964180e084",
+  "formal_binary_sha256": "c414ba2ae7b6c078344685cac54ab4aa08118040fb83614ea0146d964180e084",
+  "source_build_sha256": "202a1cd336f1da072d3adccbbb9f140a86b890ea1bb07c697283539089717eab",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 155,
+  "formal_hd_assets": 163,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -513,7 +513,7 @@
     },
     {
       "file": "hd-opening-zh.png",
-      "sha256": "8b69422d391f9146dd671e86d082792e9c47eb4d520666e9a81c4e264f8ae6a4",
+      "sha256": "28eec67eee4ae31f11263cb1aff0ce1b46451729c67eae8a461d32413c83fdf4",
       "size": [
         1280,
         800
@@ -521,42 +521,45 @@
       "scene": "opening",
       "language": "zh-Hant",
       "graphics": "hd",
-      "step": 21800000,
-      "code_commit": "1ff23ce05a2f50ffedc539ee0bb960b7ea3b06b8",
-      "binary_sha256": "6b1339d62537997acc50bb4e137cda6e002bcce752ac0aabaef2437e5b3fe95b",
-      "formal_binary_sha256": "6b1339d62537997acc50bb4e137cda6e002bcce752ac0aabaef2437e5b3fe95b",
-      "formal_hd_assets": 155,
-      "source_receipt": "workplace/reports/goal186-display-hd/hd-opening-sprites-r83/r83-opening-formal-gui-r1/gui.display-058.png",
-      "source_gui_check_sha256": "0ee07e8311745cb12564ea871e14d3fa3d8ad6c3e0cfa08c16b1457ef0b8985e",
-      "source_gui_build_sha256": "8421ae9abdba2e122092f3a381381224229cf0c8155ff7fd3beaee58448fe2ef",
-      "source_pixel_check_sha256": "13c1ad7b08822e1b4b8be71ccb67f36fe3eccc48f3a53c89ea445ac138288b98",
-      "source_replay_check_sha256": "8b5491cdb11fa92c8ba3f8079518637673fed85f599cd65f0fc086a3a34af48c",
-      "graphics_manifest_sha256": "5c8f2f86c28664c3c1beb92ec61c08e0abd54e3a771ac45a2316a7e37d8537c5",
-      "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb",
+      "step": 67800000,
+      "code_commit": "4b4aaf0d09925e4e9e02fb742d0ea9b01ccfbd5f",
+      "binary_sha256": "c414ba2ae7b6c078344685cac54ab4aa08118040fb83614ea0146d964180e084",
+      "formal_binary_sha256": "c414ba2ae7b6c078344685cac54ab4aa08118040fb83614ea0146d964180e084",
+      "formal_hd_assets": 163,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/r85-sun-caption-formal-gui-r1/gui.display-038.png",
+      "source_gui_check_sha256": "d718a37d69b345f6ac65debdc0368a8d859a0c787f5b9a4f9dbc1cac49ef69e4",
+      "source_gui_build_sha256": "202a1cd336f1da072d3adccbbb9f140a86b890ea1bb07c697283539089717eab",
+      "source_pixel_check_sha256": "d8a9fc2fb57e38f834bf149b623147b3f9ea2b3fde65c4dd8a441cf954ecf5d3",
+      "source_replay_check_sha256": "4e00de2868f42835e1834da5afa7bedf3d95ac8a20f008f99fa17255a8ad7b72",
+      "source_state_check_sha256": "694ecea976052eb4bf5fc7363d1f585dbc05e6f285ab326035c36929c0787722",
+      "graphics_manifest_sha256": "78d7a27f98c9eab13ba61ec6661acc681d194b334593c7e5fc4b73eac16824db",
+      "conformance_sha256": null,
+      "ready_sha256": "febe41870e0b3b494044f90c24b33a08f220a44135a811a90e6c3ea125e378db",
+      "caption_cursor_ready_sha256": "2de0e166f92d0129da8b49ee9e5934ae4b63611e056eee1f77ecff7b65a09093",
+      "verification_state": "READY implementation; actual current normal GUI, full RGBA/X11 and short three-replay checks passed; long seven-frame replay still pending",
       "source_kind": "actual formal game presentation; verified byte-for-byte against the real X11 window game area",
       "capture_pixels_unchanged": true,
       "original_source_files": [
         "OPENING.PIK",
         "OPENBORD.PIK",
-        "OPENSHIP.SS"
+        "OPENSHIP.SS",
+        "OPENSUN.SS"
       ],
       "source_research_ids": [
-        1179,
         1092,
-        1250,
-        1251,
+        1179,
         1252,
-        1253,
-        1254,
-        1255,
-        1256,
-        1257
+        1258
       ],
-      "opening_border_cells": 21760,
-      "opening_map_cells": 41728,
+      "opening_border_cells": 18497,
+      "opening_map_cells": 41716,
       "opening_ship_cells": 512,
+      "opening_sun_cells": 12,
+      "captured_sun_frames": [
+        0
+      ],
       "verified_mouse_background_cells": 160,
-      "scope": "正常開場長圖、木紋、金色邊框及船隻八幀已HD；本張為八幀中的單一正常狀態。其他開場SS、中間淡入淡出、其他圖像與全量HD未完成。"
+      "scope": "正式新組建的正常繁中開場，太陽第0幀、船隻、長圖、邊框與字幕游標恢復已驗；七幀原版來源及既有英文正常畫面另有驗證，長流程三側重播仍待完成。其他開場SS、淡入淡出與全量HD未完成。"
     }
   ],
   "limitations": [
@@ -590,9 +593,9 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "R83刷新既有開場實拍，採含船隻八幀的正式程式與155張原稿；原PNG直接複製並逐byte匹配X11遊戲區。既有十七張原PNG與逐圖commit、二進位、素材數及限定驗收保持。",
-  "graphics_manifest_sha256": "5c8f2f86c28664c3c1beb92ec61c08e0abd54e3a771ac45a2316a7e37d8537c5",
-  "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb",
+  "provenance_scope": "Mixed historical captures with per-entry source receipts; current opening capture uses the READY sun/cursor implementation. Unchanged other captures retain their original verification scopes.",
+  "graphics_manifest_sha256": "78d7a27f98c9eab13ba61ec6661acc681d194b334593c7e5fc4b73eac16824db",
+  "conformance_sha256": null,
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -733,5 +736,56 @@
       "verified_mouse_background_cells": 256,
       "scope": "正常開場長圖與邊框，原版移動船及其他未知前景保持；開場SS動畫、中間淡入淡出與全量HD未完成。"
     }
-  }
+  },
+  "previous_opening_ship_capture": {
+    "capture": {
+      "file": "hd-opening-zh.png",
+      "sha256": "8b69422d391f9146dd671e86d082792e9c47eb4d520666e9a81c4e264f8ae6a4",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "opening",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 21800000,
+      "code_commit": "1ff23ce05a2f50ffedc539ee0bb960b7ea3b06b8",
+      "binary_sha256": "6b1339d62537997acc50bb4e137cda6e002bcce752ac0aabaef2437e5b3fe95b",
+      "formal_binary_sha256": "6b1339d62537997acc50bb4e137cda6e002bcce752ac0aabaef2437e5b3fe95b",
+      "formal_hd_assets": 155,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-opening-sprites-r83/r83-opening-formal-gui-r1/gui.display-058.png",
+      "source_gui_check_sha256": "0ee07e8311745cb12564ea871e14d3fa3d8ad6c3e0cfa08c16b1457ef0b8985e",
+      "source_gui_build_sha256": "8421ae9abdba2e122092f3a381381224229cf0c8155ff7fd3beaee58448fe2ef",
+      "source_pixel_check_sha256": "13c1ad7b08822e1b4b8be71ccb67f36fe3eccc48f3a53c89ea445ac138288b98",
+      "source_replay_check_sha256": "8b5491cdb11fa92c8ba3f8079518637673fed85f599cd65f0fc086a3a34af48c",
+      "graphics_manifest_sha256": "5c8f2f86c28664c3c1beb92ec61c08e0abd54e3a771ac45a2316a7e37d8537c5",
+      "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb",
+      "source_kind": "actual formal game presentation; verified byte-for-byte against the real X11 window game area",
+      "capture_pixels_unchanged": true,
+      "original_source_files": [
+        "OPENING.PIK",
+        "OPENBORD.PIK",
+        "OPENSHIP.SS"
+      ],
+      "source_research_ids": [
+        1179,
+        1092,
+        1250,
+        1251,
+        1252,
+        1253,
+        1254,
+        1255,
+        1256,
+        1257
+      ],
+      "opening_border_cells": 21760,
+      "opening_map_cells": 41728,
+      "opening_ship_cells": 512,
+      "verified_mouse_background_cells": 160,
+      "scope": "正常開場長圖、木紋、金色邊框及船隻八幀已HD；本張為八幀中的單一正常狀態。其他開場SS、中間淡入淡出、其他圖像與全量HD未完成。"
+    },
+    "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb"
+  },
+  "conformance_state": "READY implementation; actual current normal GUI, full RGBA/X11 and short three-replay checks passed; long seven-frame replay still pending"
 }
