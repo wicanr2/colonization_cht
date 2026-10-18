@@ -11,9 +11,10 @@ import (
 	"path/filepath"
 )
 
-// 規格069 R76 READY：來源及原圖固定，所有狀態只供顯示。
+// 規格069 R76／R77 READY：來源、解碼畫布與原圖固定，所有狀態只供顯示。
 type hdSceneDefinition struct {
 	id, offset, height                                        int
+	canvas                                                    uint32
 	file, originalSHA, nativeSHA, asset, assetSHA, paletteSHA string
 	nativeRects, artRects                                     []image.Rectangle
 }
@@ -41,6 +42,7 @@ type hdSceneRuntime struct {
 	visible, stage                                              [64000]hdSceneCell
 	backing                                                     map[uint32]hdSceneCell
 	pending                                                     map[int]hdSceneCursorPair
+	decodeBase                                                  uint32
 	decoding                                                    bool
 	start, next                                                 int
 	blocked                                                     bool
@@ -74,7 +76,12 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 		if err != nil {
 			return nil, err
 		}
-		if im.Bounds() != image.Rect(0, 0, 1586, 992) || def.offset < 0 || def.height <= 0 || def.offset+320*def.height != 64000 || len(def.nativeRects) == 0 || len(def.nativeRects) != len(def.artRects) {
+		wantBounds := image.Rectangle{}
+		for _, rect := range def.artRects {
+			wantBounds.Max.X = max(wantBounds.Max.X, rect.Max.X)
+			wantBounds.Max.Y = max(wantBounds.Max.Y, rect.Max.Y)
+		}
+		if im.Bounds() != wantBounds || def.offset < 0 || def.height <= 0 || def.offset+320*def.height != 64000 || len(def.nativeRects) == 0 || len(def.nativeRects) != len(def.artRects) {
 			return nil, fmt.Errorf("scene geometry")
 		}
 		f := &hdSceneFrame{hdSceneDefinition: def, art: image.NewRGBA(image.Rect(0, 0, 1280, def.height*4))}
@@ -113,7 +120,7 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 		}
 		p.frames = append(p.frames, f)
 	}
-	if len(p.frames) != 2 {
+	if len(p.frames) != 10 {
 		return nil, fmt.Errorf("scene source group")
 	}
 	h.m.WatchWrite(0, 0xaffff, func(_ *golem.Machine, a uint32, o, v byte) { p.memoryWrite(a, o, v) })
@@ -158,11 +165,20 @@ func (p *hdSceneRuntime) set(a uint32, c hdSceneCell) {
 	}
 	p.revision++
 }
-func (p *hdSceneRuntime) decoded(start int) {
-	raw := p.h.m.Mem[0x3c500+start : 0x3c500+64000]
+func (p *hdSceneRuntime) decoded(start int) { p.decodedAt(0x3c500, start) }
+func (p *hdSceneRuntime) decodedAt(base uint32, start int) {
+	if (base != 0x3c500 && base != hdBuildingCanvas) || start < 0 || start >= 64000 {
+		p.rejected++
+		return
+	}
+	raw := p.h.m.Mem[int(base)+start : int(base)+64000]
 	digest := hash(raw)
 	for slot, f := range p.frames {
-		if f.offset != start || f.nativeSHA != digest {
+		wantBase := f.canvas
+		if wantBase == 0 {
+			wantBase = 0x3c500
+		}
+		if wantBase != base || f.offset != start || f.nativeSHA != digest {
 			continue
 		}
 		f.native = append([]byte(nil), raw...)
@@ -178,7 +194,12 @@ func (p *hdSceneRuntime) decoded(start int) {
 		}
 		f.decoded++
 		for local, v := range raw {
-			p.stage[start+local] = hdSceneCell{slot: uint8(slot + 1), local: uint16(local), value: v}
+			cell := hdSceneCell{slot: uint8(slot + 1), local: uint16(local), value: v}
+			if base == 0x3c500 {
+				p.stage[start+local] = cell
+			} else {
+				p.visible[start+local] = cell
+			}
 		}
 		p.revision++
 		return
@@ -220,32 +241,42 @@ func (p *hdSceneRuntime) memoryWrite(a uint32, old, value byte) {
 	knownCode := func(code []byte) bool {
 		return pc >= 0 && pc+len(code) <= len(m.Mem) && bytes.Equal(m.Mem[pc:pc+len(code)], code)
 	}
+	bufferBase := uint32(0)
 	if a >= 0x3c500 && a < 0x3c500+64000 {
-		k := int(a - 0x3c500)
+		bufferBase = 0x3c500
+	} else if a >= hdBuildingCanvas && a < hdBuildingCanvas+64000 {
+		bufferBase = hdBuildingCanvas
+	}
+	if bufferBase != 0 {
+		k := int(a - bufferBase)
 		code, known := hdPictureWriterCodes[ip]
 		known = known && cs == 0x11b5 && knownCode(code)
 		if known {
+			if bufferBase == hdBuildingCanvas {
+				clear(p.pending)
+			}
 			p.set(a, hdSceneCell{})
-			if k == 0 || (k == 40960 && !p.decoding) {
+			if k == 0 || (bufferBase == 0x3c500 && k == 40960 && !p.decoding) {
+				p.decodeBase = bufferBase
 				p.start = k
 				p.next = k
 				p.decoding = true
 			}
 			if p.decoding {
-				if k != p.next {
+				if bufferBase != p.decodeBase || k != p.next {
 					p.decoding = false
 					p.rejected++
 				} else {
 					p.next++
 					if p.next == 64000 {
 						p.decoding = false
-						p.decoded(p.start)
+						p.decodedAt(p.decodeBase, p.start)
 					}
 				}
 			}
 			return
 		}
-		if p.decoding {
+		if p.decoding && p.decodeBase == bufferBase {
 			p.decoding = false
 			p.rejected++
 		}

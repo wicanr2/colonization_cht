@@ -790,3 +790,157 @@ r76-scenes-startup-r1/check.json 與 r76-scenes-package-r1-check.json。
 兩張生成原PNG與完整提示已加入graphics；背景幾何、規則與原版互動區保持。
 世界移動、戰鬥、其餘29個PIK、51個未觀測ICONS候選、其他格式、特殊游標、
 事件圖與動畫仍待驗。沒有新增tag或Release，v.1.0.3-20261010保持。
+
+## R77 八張報告背景研究（DRAFT，2026-10-18）
+
+本批承接全量HD，研究REPORT1.PIK至REPORT8.PIK；REPORT9.PIK未在這條正常路徑觀測，
+不以檔名猜測接線。原版資料與正常操作保持。既有124張素材及限定驗收保持。
+
+本機根為workplace/reports/goal186-display-hd/hd-report-backgrounds-r77。
+正常R76正式程式經實際X11操作，讀COLONY09後離城，F2至F10及正常Return翻頁、關閉，
+27個原版擷取與42筆輸入至192000000步。F3第二頁為CCBKGD室內場景，F10使用WOODPANL，
+不把它們當作REPORT9。八種報告有十次完整64000點解碼，其中REPORT5與6各兩次。
+
+已證實：八報告解碼直接寫dosgolem 20-bit linear RAM 0x2CAE0至0x3C4DF。
+11B5:04EE、054A的16bytes與R76相同，完整順序、值與原版PIK解碼IDX的SHA逐點相同，
+無缺點或重複。最初套用stage 0x3C500的研究模型被拒絕，沒有正式接線或HD信用；
+report-decoder-address-audit-r1.json給出實際主畫布寫入證據。
+位址基準為dosgolem real-mode CS:IP及20-bit linear RAM，非IDA EA。
+
+唯讀來源入口為[報告來源檢查器](../../tools/check_hd_report_background_sources.py)，
+同時核對兩個繼承背景與八個新來源；所有八個新來源須有完整解碼及實際可繪正例。
+合法原版缺失時exit77，不能製造假收據。繼承EUROPE未在本次報告路徑出現，
+不以本批對照外推其驗收；原有R76收據保持。
+
+[背景探針](../../tools/build_hd_background_source_probe.py)新增可選--report-keys，
+只按正式視窗相同BIOS鍵字重播f2至f10，即0x3C00至0x4400；
+其他kind=key仍拒絕，預設關閉。首個探針因未支援kind=key在F2前停止，
+原失敗保留，不計通過。第二版同一容器、同一42筆輸入的有／無觀測完整狀態相同。
+
+八張生成候選已按定稿像素筆觸與原版報告的暖色底圖重繪。
+寬幅的3、4、6號候選只留本機，經imagegen重新構圖後改用8:5候選；
+不以拉伸或裁切重編原PNG。所有原稿與完整提示先留本機，
+逐來源幾何、遮擋、色盤、字底及正常五語驗收達標後才正式載入。
+原版REPORT9、室內人物動畫、計分頁及其他圖像仍待接續。
+
+## R77 報告背景正式顯示契約（READY，2026-10-18）
+
+審查report-background-ready-review-r1.json，SHA-256 4e037b416c310436a157ab2dcf89ddd0696f837f8d20ab5f79e86b5b15e65026。
+八個來源為研究編號1442至1449，即REPORT1.PIK至REPORT8.PIK。
+現行原版模型report-source-model-r3/check.json為86b56026abf760940e54f1bab89d54bdeba0bd03e90aab50b41e52ec8616781d。
+八來源各完整64000點，REPORT5與6各解碼兩次，其餘各一次；同時核對繼承COLONY一次。
+27點／42筆實際GUI輸入至192000000步，CPU／完整RAM／索引／DAC與無觀測原版相同。
+載入選單與存檔欄兩個原圖檢查點仍在原版畫面發布中，既有守門拒絕且新背景覆蓋為零；
+所有報告點均通過完整游標／畫布守門，未放寬正式判準。
+新來源只認0x2CAE0主畫布；原有COLONY／EUROPE仍只認0x3C500暫存畫布。
+同型writer的來源基址不同，不以相似圖像或未知位置猜補。
+
+1. 保持11B5:04EE／054A、完整唯一順序與原版IDX雜湊；只有全部64000點完整才授予新來源。
+   解碼紀錄須含基址；主畫布只接受八報告，暫存畫布只接受原兩背景。
+   錯基址、錯code bytes、缺點、重複、插入未知寫入或未知完整PIK均不授予來源。
+2. 原版來源、所有權、字形底圖、同值撤銷、有界RAM、標準游標反向配對與全可見原版守門沿R76。
+   本批八報告沒有RAM轉送正向樣本，不宣稱這條路徑驗證了其還原。
+   文字清除只回畫原版before值與已證實PIK字底相符的位置。
+   字型、各欄字級、安全矩形、原版規則、互動座標、資料、輸入、音訊與存檔保持。
+3. 每個來源沿完整實際色號的精確[index,R,G,B]SHA。八組指紋與使用色號由
+   report-palette-evidence-r1.json及逐寫模型確認，清冊逐來源登錄；
+   使用色號任一RGB改動須拒絕，未用色號改動不影響來源像素。
+4. 原稿名為report1-000.png至report8-000.png，RGB原PNG逐byte保存，不重編、不裁切或拉伸輸出檔。
+   原版完整[0,0,320,200]對應生成原圖完整矩形，執行時按整數像素中心最近鄰取樣至1280×800。
+   第5張原稿為1585×992，其餘1586×992。清冊與typed data使用各自實際尺寸，
+   載入時依取樣矩形最右／下界核對原圖大小；原兩背景仍為1586×992，原有幾何不變。
+5. 10個背景槽位由uint8表示、local uint16仍最多64000，RAM保存上限300000、單PNG上限8MiB、
+   清冊上限512KiB保持。缺原版、缺圖、錯指紋、連結檔、幾何或alpha不符時沿既有安全回退。
+   未知畫面、前景與色盤不取得HD覆蓋計數。
+6. 原型八張保留合計428592個原版RGBA像素，含原文字、圖表、單位、按鈕、邊框與不透明游標。
+   這是英文原型幾何與保留區驗證；正式仍須五語正常GUI與全部驗收閘門，不視為正式完成。
+
+允許擴充既有背景typed data與顯示層，正式入口仍為hd_scene_background_sources.go及
+hd_scene_background_runtime.go；單張PNG與清冊schema 1保持，未使用圖集。
+新元件測試須核對完整27點獨立模型及所有舊／新來源，不以隔離新層代替正式視窗。
+舊19點R76回歸也須對八個未出現新來源明確驗零解碼／零來源，不能讀不到就略過。
+其餘原型、錯誤模型與未選寬幅候選留本機；CONFORMED仍待正式驗收。
+
+R77正式元件入口為[八報告27點與守門](../../tools/hd_report_background_runtime_test.go)；
+舊R76元件仍在[兩背景19點](../../tools/hd_scene_background_runtime_test.go)，拒絕測試以完整10來源副本先驗正向載入，逐項復原後才進下一例。
+
+R77獨立原稿與全畫面／GUI像素入口為[報告背景RGBA核對](../../tools/check_hd_report_background_pixels.py)，
+整數中心取樣沿既有公開公式；native27全RGBA與正式五語來源／游標分別驗證。
+
+R77 READY驗證參數勘誤：192000000是最後一張擷取的步數，正常關窗後的實際終點為192600000。
+輸入收據、實際GUI完整RAM與有／無觀測終點均確認此值。審查r1保留，現行
+report-background-ready-review-r2.json為36f342004a5fda590c4b2c7c27903aa6f2a8d1b6beb2de48bef6862a184fe58a。
+首批Go只有TestHDReportNative27在載入遊戲前被錯誤終點斷言拒絕；其餘162個具名案例完成，零skip。
+修正僅該測試預期值，顯示演算法與所有生成原稿保持。
+
+R77正式觀測容量勘誤：149項GUI完成後，第一版觀測器在6000000筆逐寫日誌上限停止。
+原版控制側已完整完成，失敗觀測側不計信用。背景來源檢查器逐筆略過a>=0xA0000，
+因此新增可選--ram-only只省略這些未用的顯示記憶體日誌；預設保留完整日誌。
+完整RAM、可見索引、色盤、CPU及所有主畫布／暫存畫布／有界RAM與標準游標反向配對紀錄仍保留。
+事件上限6000000與所有正式來源判準保持。第二版須核對第一版已完成RAM日誌前綴逐byte相同，
+並用同一149項實際GUI輸入重跑觀測。完整控制側沿原版第一版保留，其原始producer指紋另記，
+不把部分觀測或顯示記憶體日誌當作正式來源收據。
+GUI像素檢查器以--source-probe指定實際正式探針，避免誤讀失敗版本的快照。
+
+R77來源清冊沿[既有組裝器](../../tools/build_hd_source_index.py)的schema 1，
+使用--inherited-index與--inherited-manifest，搭配--report-background-ready-report及
+--report-background-conformed-report。上一版為Git 0beb8707623a224c926f84836ee279dbb34cc5c3的
+docs/hd-source-catalog.json與graphics/manifest.json，或同雜湊本機快照。
+僅更新1442至1449八列，其他1544列及124筆舊資產綁定逐項保持，未通過CONFORMED時拒絕增補。
+
+## 2026-10-18 R77八種報告背景限定CONFORMED
+
+狀態：CONFORMED，僅限REPORT1.PIK至REPORT8.PIK的正常報告、翻頁、已驗字底與標準游標。
+本節是目前八來源的驗收；前述DRAFT、READY與失敗保留為歷史。REPORT9、F3人物室內頁與F10計分背景未由本批接線。
+
+| 驗收 | 結果 |
+|---|---|
+| 素材及組裝 | 132張生成原PNG／清冊133檔、63Go／46綁定，建置及go vet通過。八張原PNG逐byte保存，原124張圖與清冊物件保持。 |
+| 元件與正常原版 | 163個具名案例按R1的162項與R2的1項去重聯集完成，零skip。27點／42筆正常輸入至192600000步，27648000個完整RGBA全等；舊背景19點的19456000個完整RGBA及新遊戲20點回歸通過。完整10來源副本的80個檔案／來源反例有正向基線。 |
+| 正式GUI | 149項與實際X11遊戲區逐byte相同，82項HD、67項原圖。八來源各有五語與兩模式正例；英文、繁中各驗八種游標移入及移出。設定暫停期間原版狀態與實體輸入守門保持。 |
+| 獨立來源 | 實際GUI的99點與有／無觀測CPU、完整RAM、索引及DAC相同。完整RAM日誌3686134筆；失敗觀測已完成的3684672筆RAM前綴逐byte相同。 |
+| 獨立像素 | 76108736個背景RGBA、107584個游標RGBA與65714848個原圖模式保留RGBA相同。背景比較排除明列翻譯安全矩形及不透明游標，游標另外比較。61528個字底回畫格全部有獨立背景或字形來源。 |
+| 正常模式、音訊及存檔 | 實際74筆輸入至262000000步，現行HD play=true、現行原圖、前版R76原圖與無觀測控制四側，CPU／完整RAM／索引／DAC／WAV／存檔和實際GUI相同。錄音1124726frames、49715Hz、雙聲道且非靜音；沒有新增人耳或音效卡驗收。 |
+| 回退與封裝 | 缺report1、錯report5、連結report8、錯report2來源及恢復共5種新行程案例通過；偏好原值保持，缺件時記憶體內回原版。133檔白名單與401種實際拒絕通過。 |
+| 清冊、原版及權利 | 1552列原始事實保持，只增補1442至1449的正式綁定；其他1544列及124筆舊資產紀錄逐項保持。288個原版輸入SHA保持。原PNG的caBX無原版參考、縮圖或內嵌PNG／JPEG。原版資料、快照及候選不入Git。 |
+
+| 指紋 | SHA-256 |
+|---|---|
+| 正式二進位 | e980becf7ff4c638f681426d73757fba6f79570690bf6fc46b9706cb6501b1ed |
+| 圖像清冊 | e3ff9d59ae66aa2bfe643d8c208c49367de97888704173b66d6230df2fc2b636 |
+| 現行READY審查r2 | 36f342004a5fda590c4b2c7c27903aa6f2a8d1b6beb2de48bef6862a184fe58a |
+| 正式審查report-background-conformance-r1.json | 553827bbd2636765fa7d5be57a814bcaf7829911efba4de26ed7e950505e5028 |
+| 公開來源索引 | daf4b37b885bad57d8173672b51fc344aca441691e132abb2ecbebb0b9605f31 |
+| 正式來源模型99點 | b6cca0a87d631d1ff5022502c4097b755199bdd7870ba8781c97421f853392d9 |
+| 正式GUI149項 | 083f2b2cafb91aa83ac95d15694af7a582d0eecebe350ce49293f488e6c4b300 |
+| 正式GUI像素 | 3631b5d452e95492c5d05108d2b7a983d66e68a228bf652899484a112688dca2 |
+| 四側重播收據 | a1fd76ab592bdc01649471983c6a31d531dca85774f57602f06c33c91277bc04 |
+
+本機根為workplace/reports/goal186-display-hd/hd-report-backgrounds-r77。
+重生入口為build-r77-reports-r2.py、run-r77-report-tests-r1.py及r2、
+capture-r77-reports-formal-r1.py、await-r77-gui-and-source-r2.py、
+await-r77-source-and-gui-pixels-r2.py、await-r77-gui-and-replay-r1.py、
+check-r77-reports-package-r1.py及review-r77-report-conformance-r1.py。
+正式結果為r77-reports-build-r2.json、r77-reports-tests-union-r2-check.json、
+r77-report-native27-r1/check.json、r77-report-native-pixels-r1.json、
+r77-reports-formal-gui-r1/capture.json、report-source-model-formal-r1/check.json、
+formal-report-native99-check-r1.json、formal-report-ram-only-prefix-r1.json、
+r77-reports-gui-pixels-r1.json、r77-reports-startup-r1/check.json及r77-reports-package-r1-check.json。
+公開來源、像素、測試與增補清冊入口均見上節連結。須合法原版，原版輸出留本機。
+
+四側重播沿原producer留下的檔名
+workplace/reports/goal186-display-hd/hd-report-backgrounds-r77/r76-scenes-replay-r1-check.json。
+其實際輸入SHA為233c65e863d8ababc2b3e25859026c14d5d129f9f4829d0dc9ea1b07f4d52cdf；
+四個command.json明列R77 bundle，僅previous側使用R76 bundle。審查重新逐檔核對74筆輸入、
+262000000終點、原版狀態、WAV及存檔，不依舊檔名推斷範圍，也不改名成其他批次收據。
+
+首批Go在載入遊戲前因錯誤終點斷言失敗，162項完成案例保持；
+修正測試終點後只重跑該項。R1失敗與R2成功均保留，不稱整份R1通過。
+正式觀測第一版達日誌上限的部分結果不計信用；第二版只省略檢查器未用的顯示記憶體日誌。
+完整控制側保留原producer SHA bb096ae0b96a5082b8bc933f8316ca104835c6487b6ab3f7cb82494cf838be15。
+上述前綴與99點完整狀態檢查證明來源一致，沒有調高上限或改動正式顯示判準。
+
+八張新原稿與完整生成提示已加入graphics。生成美術仍為已定稿畫風的重繪近似。
+本批沒有新報告RAM還原正向樣本，不外推世界移動、戰鬥、其他21個PIK、
+51個未觀測ICONS候選、其他格式、特殊游標、事件圖或動畫。
+完整五語文字、全量HD及新版交付仍未完成，v.1.0.3-20261010與既有tag／Release保持。

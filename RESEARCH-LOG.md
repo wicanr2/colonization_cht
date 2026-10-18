@@ -6593,3 +6593,39 @@ dosgolem 82a14b266e1b5bc904e2d0fe507daf6bea41a013，Go1.26.7；
   審查1cac135ef4f39a48aeefbbd56ae2e166a79d069ad090768cb6fd16607e8f9e6e。來源事實1552列保持，只更新308／824的正式證據。
 - 研究誤標場景、抓圖PNG期限、原版瞬間未發布完整畫面、整數取樣與研究原圖上一幀呈現的勘誤，
   均追加於規格069與WORKLOG，失敗收據保留不計通過。原版未知場景、動畫、其餘格式及完整可見分母仍未知。
+
+## 2026-10-18 R77：八種報告的主畫布來源及限定驗收
+
+推論等級confirmed，限正常F2至F9的REPORT1.PIK至REPORT8.PIK、翻頁與標準游標。
+VICEROY.EXE SHA-256 a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3；
+八個來源檔、解碼IDX及使用色號指紋逐項保存在graphics/manifest.json與
+[公開來源檢查器](tools/check_hd_report_background_sources.py)，不提交原始像素。
+解碼catalog為e0b14a6ba8a8bec5cae3fd165ea6d88de384dc4f61c1ec67ca8504c29189aa5d。
+工具為dosgolem 82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7、
+Python3.11.2／Pillow9.4.0及既有固定Docker映像。
+位址採dosgolem實模式CS:IP與20-bit線性RAM，不是IDA EA。
+
+- 11B5:04EE原碼a4ebed33c94a7509adb210d1ed8be8d1，
+  11B5:054A原碼aae2faeb8fac0ac074323c0174058ac8。
+  八報告直接解碼至0x2CAE0..0x3C4DF；每次完整64000格、順序唯一且IDX相同。
+  REPORT5、6各兩次，其餘各一次。原先套用0x3C500模型被拒絕，沒有正式信用；
+  舊COLONY／EUROPE仍依各自暫存位置，不將相同writer視為相同來源基址。
+- 0D21:012C原碼26882547feca740afecd75dfacb504eb。
+  字底、未知同值撤銷與標準游標配對沿規格069；本批新背景沒有RAM轉送正向樣本。
+  基準27點／42輸入至192600000步，最後擷取為192000000，兩者不混用。
+  REPORT9沒有命中；F3第二頁為CCBKGD，F10為WOODPANL，均保留原圖。
+- 正式149項GUI、99點來源模型及74筆實際輸入至262000000步。
+  完整3686134筆RAM日誌與失敗原觀測的3684672筆前綴逐byte相同；
+  有／無觀測及實際GUI的CPU、完整RAM、索引與DAC逐點相同。
+  原控制producer指紋保持，未以部分觀測充作正式收據。
+- 正常27點的27648000個完整RGBA與舊19點的19456000個RGBA全等；
+  正式GUI驗76108736個背景、107584個游標及65714848個原圖模式保留RGBA。
+  四側完整原版狀態、WAV與存檔等於實際GUI。美術為重繪近似，不宣稱與原版像素相同。
+- 正式審查553827bbd2636765fa7d5be57a814bcaf7829911efba4de26ed7e950505e5028；
+  來源索引daf4b37b885bad57d8173672b51fc344aca441691e132abb2ecbebb0b9605f31。
+  1552筆來源事實、其他1544列及124張繼承原稿／紀錄保持。
+  原版檔288份SHA保持，完整原始寫入、RAM、IDX、DAC與錄音只留本機。
+
+完整指紋、實際命令、四側原始收據檔名與驗證修正見[規格069](docs/spec/069-hd-menu-background-and-textures.md) R77。
+21個未接線PIK、51個未觀測ICONS候選、其他格式、世界移動、戰鬥與動畫仍待驗；
+完整玩家可見分母仍未知，不以本批當作全量HD完成。

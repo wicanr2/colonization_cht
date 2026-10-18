@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "1dba5fd9a5bbf5a8c76861e56709525305857a9a77ae9c988b564119f636333c",
+  "formal_manifest_sha256": "e3ff9d59ae66aa2bfe643d8c208c49367de97888704173b66d6230df2fc2b636",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 124,
+    "formal_asset_bindings": 132,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -54512,9 +54512,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete direct-main PIK decode at dosgolem linear RAM 0x2CAE0, exact source-used palette RGB, glyph underlays and standard cursor reverse-pair; only settled native surfaces",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "report1-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "553827bbd2636765fa7d5be57a814bcaf7829911efba4de26ed7e950505e5028",
+        "scope": "normal eight report backgrounds, five languages, original/HD, report pages, EN/TC standard-cursor hover/return; REPORT9, other backgrounds, actors and animation unverified"
+      }
     },
     {
       "research_id": 1443,
@@ -54537,9 +54546,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete direct-main PIK decode at dosgolem linear RAM 0x2CAE0, exact source-used palette RGB, glyph underlays and standard cursor reverse-pair; only settled native surfaces",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "report2-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "553827bbd2636765fa7d5be57a814bcaf7829911efba4de26ed7e950505e5028",
+        "scope": "normal eight report backgrounds, five languages, original/HD, report pages, EN/TC standard-cursor hover/return; REPORT9, other backgrounds, actors and animation unverified"
+      }
     },
     {
       "research_id": 1444,
@@ -54562,9 +54580,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete direct-main PIK decode at dosgolem linear RAM 0x2CAE0, exact source-used palette RGB, glyph underlays and standard cursor reverse-pair; only settled native surfaces",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "report3-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "553827bbd2636765fa7d5be57a814bcaf7829911efba4de26ed7e950505e5028",
+        "scope": "normal eight report backgrounds, five languages, original/HD, report pages, EN/TC standard-cursor hover/return; REPORT9, other backgrounds, actors and animation unverified"
+      }
     },
     {
       "research_id": 1445,
@@ -54587,9 +54614,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete direct-main PIK decode at dosgolem linear RAM 0x2CAE0, exact source-used palette RGB, glyph underlays and standard cursor reverse-pair; only settled native surfaces",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "report4-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "553827bbd2636765fa7d5be57a814bcaf7829911efba4de26ed7e950505e5028",
+        "scope": "normal eight report backgrounds, five languages, original/HD, report pages, EN/TC standard-cursor hover/return; REPORT9, other backgrounds, actors and animation unverified"
+      }
     },
     {
       "research_id": 1446,
@@ -54612,9 +54648,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete direct-main PIK decode at dosgolem linear RAM 0x2CAE0, exact source-used palette RGB, glyph underlays and standard cursor reverse-pair; only settled native surfaces",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "report5-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "553827bbd2636765fa7d5be57a814bcaf7829911efba4de26ed7e950505e5028",
+        "scope": "normal eight report backgrounds, five languages, original/HD, report pages, EN/TC standard-cursor hover/return; REPORT9, other backgrounds, actors and animation unverified"
+      }
     },
     {
       "research_id": 1447,
@@ -54637,9 +54682,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete direct-main PIK decode at dosgolem linear RAM 0x2CAE0, exact source-used palette RGB, glyph underlays and standard cursor reverse-pair; only settled native surfaces",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "report6-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "553827bbd2636765fa7d5be57a814bcaf7829911efba4de26ed7e950505e5028",
+        "scope": "normal eight report backgrounds, five languages, original/HD, report pages, EN/TC standard-cursor hover/return; REPORT9, other backgrounds, actors and animation unverified"
+      }
     },
     {
       "research_id": 1448,
@@ -54662,9 +54716,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete direct-main PIK decode at dosgolem linear RAM 0x2CAE0, exact source-used palette RGB, glyph underlays and standard cursor reverse-pair; only settled native surfaces",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "report7-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "553827bbd2636765fa7d5be57a814bcaf7829911efba4de26ed7e950505e5028",
+        "scope": "normal eight report backgrounds, five languages, original/HD, report pages, EN/TC standard-cursor hover/return; REPORT9, other backgrounds, actors and animation unverified"
+      }
     },
     {
       "research_id": 1449,
@@ -54687,9 +54750,18 @@
       "pixel_bytes": 64000,
       "part1_trailing_bytes": 0,
       "embedded_palette": true,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete direct-main PIK decode at dosgolem linear RAM 0x2CAE0, exact source-used palette RGB, glyph underlays and standard cursor reverse-pair; only settled native surfaces",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "report8-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "553827bbd2636765fa7d5be57a814bcaf7829911efba4de26ed7e950505e5028",
+        "scope": "normal eight report backgrounds, five languages, original/HD, report pages, EN/TC standard-cursor hover/return; REPORT9, other backgrounds, actors and animation unverified"
+      }
     },
     {
       "research_id": 1450,
@@ -58911,6 +58983,94 @@
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec",
       "source_indexed_sha256": "ec4a1200b087deb467d110d0559d27f8605d5e0a8a1dddf7f3b77919479a2d3d"
+    },
+    {
+      "asset": "report1-000.png",
+      "asset_sha256": "529b8a8392f94c46a593970870801371daf70e851446343b086a6ad8063d8f56",
+      "source_research_id": 1442,
+      "source_file": "REPORT1.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "799ff084b96283d89568b2f1c5037f862cc5d95fabc4c6010f47e7c2d2e3952d"
+    },
+    {
+      "asset": "report2-000.png",
+      "asset_sha256": "b7e52eafdf9f830b8103807b89139c2efa7cfdc4eb08e53c258433718583272b",
+      "source_research_id": 1443,
+      "source_file": "REPORT2.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "1637889ddf2d9d53b9043e82d97b97c80f80bec760ad38be5db3700f0c573683"
+    },
+    {
+      "asset": "report3-000.png",
+      "asset_sha256": "aa876913f682d2fd07657d53f53b8f179636c7a148d440bef61ca3e70a896be3",
+      "source_research_id": 1444,
+      "source_file": "REPORT3.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "9cce85d587b80c69a57afd4b6d3c265426f21bf4169de162807004634372d4d9"
+    },
+    {
+      "asset": "report4-000.png",
+      "asset_sha256": "ecfa6da65042c6878ac52a6ee5846d31096137b57e5c787f0650bee8aef69edc",
+      "source_research_id": 1445,
+      "source_file": "REPORT4.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "cc358aea0d90e957f9cd4226a3bf02137290408d4ab8a0713089eb098e01d317"
+    },
+    {
+      "asset": "report5-000.png",
+      "asset_sha256": "e319fa13165df66a36d05d7cf734849a40758a3214630cad4071b4e2e638eaf1",
+      "source_research_id": 1446,
+      "source_file": "REPORT5.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "9d7541308a0cf38e69c8eb1784ba3332d7d3b35efa33831985e7f797f57d3a52"
+    },
+    {
+      "asset": "report6-000.png",
+      "asset_sha256": "2772fac9aa4798b2e8de8c0220cb76a9707c23e4b79c81b4275f252f1a546bbb",
+      "source_research_id": 1447,
+      "source_file": "REPORT6.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "b3f81ce856a2ca53d9023c70ac84cacd5d8e043acbeae00d3766eca10a395d61"
+    },
+    {
+      "asset": "report7-000.png",
+      "asset_sha256": "68905d1be031d6b61321f21a47ce5acb64a38562b4bedbf189dcb89999d346ab",
+      "source_research_id": 1448,
+      "source_file": "REPORT7.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "43c76c42f2a99b76908c7f39d8c9f7ca908b75bd59451b40e0a394945c921f25"
+    },
+    {
+      "asset": "report8-000.png",
+      "asset_sha256": "809973e7312530c84ee4f41ad983d317ccab18fd97650b7270886e37cda65d2b",
+      "source_research_id": 1449,
+      "source_file": "REPORT8.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "b948334de619d2bc566dd3fe9fe39b9c76846fe3676b5bb984a6f44310f63d94"
     }
   ],
   "limitations": [
@@ -59198,5 +59358,24 @@
     "native_source_points": 67,
     "inherited_source_index_sha256": "aa66dd0c11f82de0d12bab4c10d64a94c8da796b14917d1f47d0edaefe1c0a73",
     "claim": "two verified normal backgrounds only; all 122 prior raw PNGs, records and delimited conformance states preserved; full player-visible graphics denominator remains unknown and full HD remains incomplete"
+  },
+  "report_background_conformance": {
+    "ready_review_sha256": "36f342004a5fda590c4b2c7c27903aa6f2a8d1b6beb2de48bef6862a184fe58a",
+    "review_sha256": "553827bbd2636765fa7d5be57a814bcaf7829911efba4de26ed7e950505e5028",
+    "sources": [
+      1442,
+      1443,
+      1444,
+      1445,
+      1446,
+      1447,
+      1448,
+      1449
+    ],
+    "formal_assets": 132,
+    "gui_samples": 149,
+    "native_source_points": 99,
+    "inherited_source_index_sha256": "21d1e68acac16a3568f6ad2e524f59e520ad733d60f779935b0bf726884719fd",
+    "claim": "eight normal report backgrounds only; all 124 inherited PNGs, records and conformance scopes unchanged; full player-visible denominator unknown and full HD incomplete"
   }
 }

@@ -10,6 +10,8 @@ parser.add_argument('--end-step',type=int,help='與points配對的有界原版�
 parser.add_argument('--copy-closure',action='store_true',help='另記錄已驗RAM複製目的及後續撤銷寫入，最多300000個位址')
 parser.add_argument('--copy-closure-c9f',action='store_true',help='搭配copy-closure，另觀測0C9F的同型複製入口；只記錄，不授予擁有權')
 parser.add_argument('--memory-snapshots',action='store_true',help='每個實際GUI檢查點另存完整唯讀RAM，供游標與間接複製核對')
+parser.add_argument('--report-keys',action='store_true',help='可選：按正式視窗相同BIOS鍵字重播F2至F10；僅擴大唯讀探針輸入')
+parser.add_argument('--ram-only',action='store_true',help='可選：省略a>=0xA0000的逐寫日誌；完整RAM、索引與色盤快照仍保留，不改變原版')
 a=parser.parse_args()
 assert not a.copy_closure_c9f or a.copy_closure
 repo=Path(__file__).resolve().parents[1];out=a.output.resolve()
@@ -28,6 +30,14 @@ assert [(x['step'],x['dos_input_count']) for x in points]==sorted(set((x['step']
 assert all(0<=x['step']<=end for x in points)
 (out/"points.json").write_text(json.dumps(points,indent=2)+"\n")
 s=(a.entry/"entry-catalog.go").read_text()
+if a.report_keys:
+    needle='\t\tcase "text":'
+    assert s.count(needle)==1
+    s=s.replace(needle,'''\t\tcase "key":
+            scan,ok:=map[string]uint8{"f2":0x3c,"f3":0x3d,"f4":0x3e,"f5":0x3f,"f6":0x40,"f7":0x41,"f8":0x42,"f9":0x43,"f10":0x44}[e.Text]
+            if !ok || e.X!=0 || e.Y!=0 || e.Button!=0 {panic("unverified report key")}
+            d.PushKey(golem.Key{Scan:scan})
+'''+needle,1)
 s=s.replace('import (','import (\n "bufio"')
 s=s.replace("821f1ba83576013bba52ca53a39273498af64c3269a819e40f2244d036a3e901",sha(out/"points.json"))
 s=s.replace("len(points) != 49","len(points) != "+str(len(points))).replace("end = 134600000","end = "+str(end))
@@ -139,6 +149,10 @@ if a.copy_closure:
         needle='cs==0xcba && (ip==0x9c || ip==0x9e || ip==0xca)'
         assert TRACER.count(needle)==1
         TRACER=TRACER.replace(needle,'(cs==0xcba || cs==0xc9f) && (ip==0x9c || ip==0x9e || ip==0xca)',1)
+if a.ram_only:
+    needle='if b==nil || b.m.Steps<14000000{return}'
+    assert TRACER.count(needle)==1
+    TRACER=TRACER.replace(needle,'if b==nil || b.m.Steps<14000000 || a>=0xa0000{return}',1)
 s+="\n"+TRACER
 if a.memory_snapshots:
     needle='".palette": m.DAC[:]'
@@ -153,5 +167,7 @@ meta={"kind":"DRAFT-readonly-background-source-collector","source_sha256":sha(ou
 if a.copy_closure:meta['copy_closure_address_limit']=300000
 if a.copy_closure_c9f:meta['copy_closure_c9f']=True
 if a.memory_snapshots:meta['complete_readonly_ram_per_checkpoint']=True
+if a.report_keys:meta['readonly_report_key_words']={f'f{i}':(0x3a+i)<<8 for i in range(2,11)}
+if a.ram_only:meta['ram_only_write_log']=True
 (out/"build.json").write_text(json.dumps(meta,indent=2)+"\n")
 print("PASS_BACKGROUND_SOURCE_COLLECTOR_BUILD",meta["source_sha256"],flush=True)
