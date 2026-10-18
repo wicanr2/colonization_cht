@@ -38,6 +38,7 @@ type hdSceneCursorPair struct {
 	cell       hdSceneCell
 }
 type hdSceneRuntime struct {
+	publishedPending                                            map[int]hdSceneCursorPair
 	h                                                           *hdRuntime
 	frames                                                      []*hdSceneFrame
 	visible, stage, published                                   [64000]hdSceneCell
@@ -57,7 +58,7 @@ var hdSceneCopyCodes = map[uint16][]byte{
 }
 
 func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, error) {
-	p := &hdSceneRuntime{h: h, backing: map[uint32]hdSceneCell{}, pending: map[int]hdSceneCursorPair{}, start: -1}
+	p := &hdSceneRuntime{h: h, publishedPending: map[int]hdSceneCursorPair{}, backing: map[uint32]hdSceneCell{}, pending: map[int]hdSceneCursorPair{}, start: -1}
 	for _, def := range hdSceneDefinitions {
 		original, err := hdReadFile(filepath.Join(game, def.file), 8<<20)
 		if err != nil {
@@ -239,7 +240,7 @@ func (p *hdSceneRuntime) memoryWrite(a uint32, old, value byte) {
 		return
 	}
 	if a >= 0xa0000 {
-		p.publish(a, value)
+		p.publish(a, old, value)
 		return
 	}
 	m := p.h.m
@@ -407,31 +408,57 @@ var hdSceneVGACopyCode = []byte{0xf3, 0xa5, 3, 0xf3, 0x79, 0x0c, 0x81, 0xee, 0, 
 
 // 規格069 R79 READY：主畫布送出後的寫入不能改變已顯示來源。
 // 每一筆未知VGA寫入，包括同值寫入，都先撤銷該點的來源。
-func (p *hdSceneRuntime) publish(a uint32, value byte) {
+
+func (p *hdSceneRuntime) publish(a uint32, oldValue, value byte) {
 	if a < 0xa0000 || a >= 0xa0000+64000 {
 		return
 	}
 	at := int(a - 0xa0000)
-	old := p.published[at]
+	oldCell := p.published[at]
 	p.published[at] = hdSceneCell{}
+	pair, paired := p.publishedPending[at]
+	delete(p.publishedPending, at)
 	m, c := p.h.m, p.h.m.CPU
 	cs, ip := c.OpAddr()
 	pc := int(cs)*16 + int(ip)
-	if cs == 0xe21 && ip == 0x91 && c.Seg[golem.ES] == 0xa000 &&
-		pc >= 0 && pc+len(hdSceneVGACopyCode) <= len(m.Mem) &&
-		bytes.Equal(m.Mem[pc:pc+len(hdSceneVGACopyCode)], hdSceneVGACopyCode) {
-		delta := int(a) - (int(c.Seg[golem.ES])*16 + int(c.R[golem.DI]))
+	delta := int(a) - (int(c.Seg[golem.ES])*16 + int(c.R[golem.DI]))
+	sourceOffset := int(c.R[golem.SI]) + delta
+	cursorCode := []byte{0xf3, 0xa4, 0x8a, 0xc8, 0x2b, 0xf9, 0x2b, 0xf1, 3, 0xf3, 3, 0xfa, 0xfe, 0xcc, 0x75, 0xf0}
+	if cs == 0xb68 && ip == 0x51c && c.Seg[golem.DS] == 0xa000 && c.Seg[golem.ES] == 0xa000 &&
+		delta == 0 && sourceOffset >= 0xfa00 && sourceOffset < 0xfc00 && pc+16 <= len(m.Mem) && bytes.Equal(m.Mem[pc:pc+16], cursorCode) {
+		if source, known := p.h.cursorSource(); known && m.Mem[0xa0000+sourceOffset] == value {
+			k := sourceOffset & 255
+			back, composed := m.Mem[0xafa00+k], m.Mem[0xafb00+k]
+			if sourceOffset >= 0xfb00 && back == oldValue && composed == value && (source[k] == 255 && value == back || source[k] != 255 && value == source[k]) {
+				if source[k] == 255 && oldValue == value && oldCell.slot != 0 && oldCell.value == value {
+					p.published[at] = oldCell
+				} else if source[k] != 255 && oldCell.slot != 0 && oldCell.value == oldValue {
+					p.publishedPending[at] = hdSceneCursorPair{old: oldValue, value: value, k: k, cell: oldCell}
+				}
+			} else if sourceOffset < 0xfb00 && back == value {
+				if source[k] == 255 && composed == oldValue && oldValue == value && oldCell.slot != 0 && oldCell.value == value {
+					p.published[at] = oldCell
+				} else if paired && pair.old == value && pair.value == oldValue && pair.k == k && composed == oldValue && source[k] == oldValue {
+					p.published[at] = pair.cell
+				}
+			}
+		}
+	}
+	if len(p.publishedPending) > 256 {
+		p.blocked = true
+		clear(p.published[:])
+		clear(p.publishedPending)
+	}
+	if cs == 0xe21 && ip == 0x91 && c.Seg[golem.ES] == 0xa000 && pc >= 0 && pc+len(hdSceneVGACopyCode) <= len(m.Mem) && bytes.Equal(m.Mem[pc:pc+len(hdSceneVGACopyCode)], hdSceneVGACopyCode) {
 		src := int(c.Seg[golem.DS])*16 + int(c.R[golem.SI]) + delta
-		if delta >= 0 && delta < 2 && int(c.R[golem.SI])+delta < 65536 &&
-			int(c.R[golem.DI])+delta < 64000 && src == int(hdBuildingCanvas)+at &&
-			src < len(m.Mem) && m.Mem[src] == value {
+		if delta >= 0 && delta < 2 && int(c.R[golem.SI])+delta < 65536 && int(c.R[golem.DI])+delta < 64000 && src == int(hdBuildingCanvas)+at && src < len(m.Mem) && m.Mem[src] == value {
 			cell := p.visible[at]
 			if _, known := p.frame(cell); known && cell.value == value {
 				p.published[at] = cell
 			}
 		}
 	}
-	if old != p.published[at] {
+	if oldCell != p.published[at] {
 		p.revision++
 	}
 }
@@ -459,10 +486,11 @@ func (p *hdSceneRuntime) paintPublished(out *image.RGBA, f draftNativeFrame) map
 	for i, frame := range p.frames {
 		palettes[i], masks[i] = frame.paletteSupported(f.palette), make([]byte, 8000)
 	}
+	cursorSource, _ := p.h.cursorSource()
 	for at, c := range p.published {
 		frame, known := p.frame(c)
 		if !known || c.glyph || !palettes[int(c.slot)-1] || c.value != f.indexed[at] ||
-			frame.native[int(c.local)] != c.value || image.Pt(at%320, at/320).In(f.cursor) {
+			frame.native[int(c.local)] != c.value || (image.Pt(at%320, at/320).In(f.cursor) && cursorSource[(at/320-f.cursor.Min.Y)*16+at%320-f.cursor.Min.X] != 255) {
 			continue
 		}
 		x, y := at%320*4, at/320*4
@@ -479,4 +507,19 @@ func (p *hdSceneRuntime) paintPublished(out *image.RGBA, f draftNativeFrame) map
 	}
 	r["painted"], r["reason"] = total, "published-scene-background-only"
 	return r
+}
+
+func (p *hdSceneRuntime) paintPublishedBackground(out *image.RGBA, f draftNativeFrame, pos int, value byte, palette []byte) bool {
+	if p == nil || p.blocked || pos < 0 || pos >= 64000 || f.mode != 0x13 || len(f.indexed) != 64000 || len(f.canvas) != 64000 || len(p.h.m.Mem) < 0xa0000+64000 {
+		return false
+	}
+	c := p.published[pos]
+	frame, yes := p.frame(c)
+	if !yes || c.value != f.indexed[pos] || p.h.m.Mem[0xa0000+pos] != c.value || frame.native[int(c.local)] != value || !frame.paletteSupported(palette) {
+		return false
+	}
+	x, y := pos%320*4, pos/320*4
+	sx, sy := int(c.local)%320*4, int(c.local)/320*4
+	draw.Draw(out, image.Rect(x, y, x+4, y+4), frame.art, image.Pt(sx, sy), draw.Src)
+	return true
 }

@@ -405,7 +405,7 @@ func (h *hdRuntime) cursorValid(f draftNativeFrame) ([]byte, bool) {
 	source, reason := h.cursorProof(f)
 	return source, reason == ""
 }
-func (h *hdRuntime) cursorProof(f draftNativeFrame) ([]byte, string) {
+func (h *hdRuntime) cursorPixelsProof(f draftNativeFrame) ([]byte, string) {
 	source, ok := h.cursorSource()
 	if !ok {
 		return nil, "source"
@@ -433,6 +433,13 @@ func (h *hdRuntime) cursorProof(f draftNativeFrame) ([]byte, string) {
 		if f.indexed[i] != tail[256+k] {
 			return nil, fmt.Sprintf("cursor-indexed:%d", k)
 		}
+	}
+	return source, ""
+}
+func (h *hdRuntime) cursorProof(f draftNativeFrame) ([]byte, string) {
+	source, reason := h.cursorPixelsProof(f)
+	if reason != "" {
+		return nil, reason
 	}
 	for i, v := range f.indexed {
 		if !image.Pt(i%320, i/320).In(f.cursor) && v != f.canvas[i] {
@@ -539,6 +546,8 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 	parchBGPainted := 0
 	sceneBGMask := make([]byte, 8000)
 	sceneBGPainted := 0
+	publishedBGMask := make([]byte, 8000)
+	publishedBGPainted := 0
 	if hd["reason"] != "unverified-cursor-or-native-surface" && ((b.hd.scenes != nil) || (b.hd.newGame != nil && b.hd.newGame.frame != nil) || (b.hd.texture != nil && b.hd.texture.paletteSupported(f.palette)) || (b.hd.worldTexture != nil && b.hd.worldTexture.paletteSupported(f.palette)) || (b.hd.parch != nil && b.hd.parch.paletteSupported(f.palette))) {
 		hdBG = func(out *image.RGBA, i int, v byte, palette []byte) bool {
 			if b.hd.scenes != nil && b.hd.scenes.paintBackground(out, f, i, v, palette) {
@@ -573,7 +582,42 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 			return ok
 		}
 	}
+	if hdBG == nil && b.hd.scenes != nil {
+		if group, ok := hd["published_scene_picture"].(map[string]any); ok && group["reason"] == "published-scene-background-only" {
+			hdBG = func(out *image.RGBA, pos int, value byte, palette []byte) bool {
+				if b.hd.scenes.paintPublishedBackground(out, f, pos, value, palette) {
+					publishedBGMask[pos>>3] |= 1 << uint(pos&7)
+					publishedBGPainted++
+					return true
+				}
+				return false
+			}
+		}
+	}
+	nativeCursorBackgroundMask := make([]byte, 8000)
+	nativeCursorBackgroundPainted := 0
+	if hdBG != nil {
+		cursorSource, cursorReason := b.hd.cursorPixelsProof(f)
+		cursorVerified := cursorReason == "" && len(b.hd.m.Mem) >= 0xa0000+64000 && bytes.Equal(b.hd.m.Mem[0xa0000:0xa0000+64000], f.indexed)
+		background := hdBG
+		hdBG = func(out *image.RGBA, pos int, value byte, palette []byte) bool {
+			if background(out, pos, value, palette) {
+				return true
+			}
+			if cursorVerified && pos >= 0 && pos < 64000 && image.Pt(pos%320, pos/320).In(f.cursor) && cursorSource[(pos/320-f.cursor.Min.Y)*16+pos%320-f.cursor.Min.X] == 255 {
+				draftPaintPixel(out, pos, value, palette)
+				nativeCursorBackgroundMask[pos>>3] |= 1 << uint(pos&7)
+				nativeCursorBackgroundPainted++
+				return true
+			}
+			return false
+		}
+	}
 	out, record, err := draftRebuildTargetOn(t, f.journal, f.canvas, f.buffer, f.indexed, f.palette, f.cursor, f.step, f.mode, base, hdBG)
+	if group, ok := hd["published_scene_picture"].(map[string]any); ok {
+		group["background_repaints"] = publishedBGPainted
+		group["background_mask"] = publishedBGMask
+	}
 	if group, ok := hd["scene_picture"].(map[string]any); ok {
 		group["background_repaints"] = sceneBGPainted
 		group["background_mask"] = sceneBGMask
@@ -601,12 +645,18 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 	if b.hd.cursor != nil {
 		hd["cursor"] = b.hd.cursor.paint(b.hd, out, f)
 	}
+	hd["native_cursor_text_background_repaints"] = nativeCursorBackgroundPainted
+	hd["native_cursor_text_background_mask"] = nativeCursorBackgroundMask
 	record["hd"] = hd
 	return out, record, nil
 }
 
 func (h *hdRuntime) key() string {
 	base := h.baseKey()
+	if h != nil && h.m != nil && h.cursor != nil && len(h.m.Mem) >= 0xafc00 {
+		base = fmt.Sprintf("%s/cursor-source/%s", base, hash(bytes.Join([][]byte{h.m.Mem[0x1cd74:0x1ce74], h.m.Mem[0xafa00:0xafc00]}, nil)))
+	}
+
 	if h != nil && h.scenes != nil {
 		base = fmt.Sprintf("%s/scene-picture/%d", base, h.scenes.revision)
 	}

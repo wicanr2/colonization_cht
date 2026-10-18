@@ -393,3 +393,244 @@ func TestHDReportPaletteDecodeAndUnderlayGuards(t *testing.T) {
 		}
 	}
 }
+
+func TestHDPublishedNative32(t *testing.T) {
+	game, _, assets := hdReportFixtures(t)
+	root := os.Getenv("TEST_HD_CURSOR_ROOT")
+	model := os.Getenv("TEST_HD_CURSOR_MODEL")
+	if root == "" || model == "" {
+		t.Skip("需要已發布游標32點原版來源")
+	}
+	ref := filepath.Join(root, "published-cursor-source-probe-r1")
+	var oracle struct {
+		Checkpoints []hdNewGameOracleState
+		End         hdNewGameOracleState
+	}
+	hdNewGameNeed(t, json.Unmarshal(hdNewGameRead(t, filepath.Join(ref, "control/draws.json")), &oracle))
+	if len(oracle.Checkpoints) != 32 || oracle.End.Steps != 72800000 {
+		t.Fatal("原版來源範圍不同")
+	}
+	var replay struct{ Inputs []windowInput }
+	hdNewGameNeed(t, json.Unmarshal(hdNewGameRead(t, filepath.Join("/r79", "formal-published-inputs-r1.json")), &replay))
+	out := os.Getenv("TEST_HD_PUBLISHED_OUTPUT")
+	if out == "" {
+		t.Skip("需要新的背景驗證輸出")
+	}
+	hdNewGameNeed(t, os.Mkdir(out, 0755))
+	save := filepath.Join(out, "save")
+	hdNewGameNeed(t, os.Mkdir(save, 0755))
+	seed := hdNewGameRead(t, filepath.Join(ref, "control/saves/COLONY09.SAV"))
+	if hash(seed) != "52ae8b7bd4bea1869afb825af165a8edc50882fc176d49985d4fb3c362d5469b" {
+		t.Fatal("原版種子不同")
+	}
+	hdNewGameNeed(t, os.WriteFile(filepath.Join(save, "COLONY09.SAV"), seed, 0644))
+	m := golem.New()
+	hdNewGameNeed(t, m.LoadEXE(hdNewGameRead(t, filepath.Join(game, "OPENING.EXE"))))
+	m.Write8(uint32(golem.PSPSeg)*16+0x80, 2)
+	m.WriteBytes(uint32(golem.PSPSeg)*16+0x81, []byte{'-', 'g', 13})
+	d := golem.NewDOS(m, game)
+	d.Scratch = save
+	d.Install()
+	defer d.Close()
+	m.SetSoundBlasterPro(true)
+	if !m.EnableSBDigital() {
+		t.Fatal("缺數位音訊")
+	}
+	m.EnableOPLSynth(true)
+	h := &hdRuntime{m: m}
+	p, err := loadHDSceneRuntime(h, game, assets)
+	hdNewGameNeed(t, err)
+	h.scenes = p
+	checkState := func(s hdNewGameOracleState) {
+		t.Helper()
+		c := m.CPU
+		if m.Steps != s.Steps || hash(m.Mem) != s.Memory || hash(m.Indexed()) != s.Indexed || hash(m.DAC[:]) != s.Palette || c.R != s.Registers || c.Seg != s.Segments || c.IP != s.IP || c.Flags != s.Flags || c.Cycles != s.Cycles {
+			t.Fatal("背景觀測改變原版完整狀態", m.Steps)
+		}
+	}
+	at, count := 0, uint64(0)
+	records := []map[string]any{}
+	total := 0
+	capture := func() {
+		if at == len(oracle.Checkpoints) {
+			return
+		}
+		s := oracle.Checkpoints[at]
+		if m.Steps > s.Steps || (m.Steps == s.Steps && count > s.Count) {
+			t.Fatal("略過原版點", at)
+		}
+		if m.Steps != s.Steps || count != s.Count {
+			return
+		}
+		checkState(s)
+		var wanted map[string][]any
+		hdNewGameNeed(t, json.Unmarshal(hdNewGameRead(t, filepath.Join(model, fmt.Sprintf("point-%03d.owners.json", at))), &wanted))
+		for pos, c := range p.visible {
+			expected, yes := wanted[strconv.Itoa(pos)]
+			if !yes {
+				if c.slot != 0 {
+					t.Fatal("無來源仍持有背景", at, pos)
+				}
+				continue
+			}
+			frame, known := p.frame(c)
+			if !known || frame.id != int(expected[0].(float64)) || int(c.local) != int(expected[1].(float64)) || int(c.value) != int(expected[2].(float64)) || c.glyph != (expected[3].(string) == "glyph") {
+				t.Fatal("獨立來源擁有權不同", at, pos, c, expected)
+			}
+		}
+		f := draftNativeFrame{canvas: m.Mem[hdBuildingCanvas : hdBuildingCanvas+64000], indexed: m.Indexed(), palette: m.DAC[:], cursor: image.Rect(int(d.Mouse.X), int(d.Mouse.Y), int(d.Mouse.X)+16, int(d.Mouse.Y)+16), mode: m.VideoMode(), step: m.Steps}
+		im, receipt := h.base(f)
+		h.restoreCursor(im, f)
+		masks := map[int][]byte{}
+		painted := map[int]int{}
+		for _, frame := range p.frames {
+			expected := hdNewGameRead(t, filepath.Join(model, fmt.Sprintf("point-%03d-source-%d-mask.bin", at, frame.id)))
+			if len(expected) != 64000 {
+				t.Fatal("來源遮罩長度")
+			}
+			packed := make([]byte, 8000)
+			for k, v := range expected {
+				if v != 0 {
+					packed[k>>3] |= 1 << uint(k&7)
+					painted[frame.id]++
+				}
+			}
+			masks[frame.id] = expected
+			if group, yes := receipt["scene_picture"].(map[string]any); yes {
+				src := group["sources"].(map[string]any)[fmt.Sprint(frame.id)].(map[string]any)
+				if src["painted"].(int) != painted[frame.id] || !bytes.Equal(src["mask"].([]byte), packed) {
+					t.Fatal("獨立來源遮罩不同", at, frame.id, src["painted"], painted[frame.id])
+				}
+			} else if painted[frame.id] != 0 {
+				t.Fatal("正常來源被守門拒絕", at, receipt["reason"])
+			}
+		}
+
+		if publishedModel := os.Getenv("TEST_HD_CURSOR_MODEL"); publishedModel != "" {
+			var expectedPublished map[string][]any
+			hdNewGameNeed(t, json.Unmarshal(hdNewGameRead(t, filepath.Join(publishedModel, fmt.Sprintf("point-%03d.published.json", at))), &expectedPublished))
+			for pos, c := range p.published {
+				expected, yes := expectedPublished[strconv.Itoa(pos)]
+				if !yes {
+					if c.slot != 0 {
+						t.Fatal("未知VGA點仍持有來源", at, pos)
+					}
+					continue
+				}
+				frame, known := p.frame(c)
+				if !known || frame.id != int(expected[0].(float64)) || int(c.local) != int(expected[1].(float64)) || int(c.value) != int(expected[2].(float64)) || c.glyph != (expected[3].(string) == "glyph") {
+					t.Fatal("已送出來源與獨立逐寫模型不同", at, pos)
+				}
+			}
+			publishedImage := draftRGB(f.indexed, f.palette)
+			publishedReceipt := p.paintPublished(publishedImage, f)
+			sources, ok := publishedReceipt["sources"].(map[string]any)
+			if !ok || publishedReceipt["reason"] != "published-scene-background-only" {
+				t.Fatal("已送出來源未驗", at, publishedReceipt)
+			}
+			expectedCells := map[int]*hdSceneFrame{}
+			for _, frame := range p.frames {
+				expectedMask := hdNewGameRead(t, filepath.Join(publishedModel, fmt.Sprintf("point-%03d-published-%d-mask.bin", at, frame.id)))
+				packed := make([]byte, 8000)
+				count := 0
+				for pos, v := range expectedMask {
+					if v != 0 {
+						packed[pos>>3] |= 1 << uint(pos&7)
+						count++
+						expectedCells[pos] = frame
+					}
+				}
+				got := sources[fmt.Sprint(frame.id)].(map[string]any)
+				if got["painted"].(int) != count || !bytes.Equal(got["mask"].([]byte), packed) {
+					t.Fatal("已送出來源遮罩不同", at, frame.id)
+				}
+			}
+			before := draftRGB(f.indexed, f.palette)
+			for y := 0; y < 800; y++ {
+				for x := 0; x < 1280; x++ {
+					pos := y/4*320 + x/4
+					want := before.RGBAAt(x, y)
+					if frame := expectedCells[pos]; frame != nil {
+						c := p.published[pos]
+						want = frame.art.RGBAAt(int(c.local)%320*4+x%4, int(c.local)/320*4+y%4)
+					}
+					if publishedImage.RGBAAt(x, y) != want {
+						t.Fatal("已送出背景RGBA或原版前景不同", at, x, y)
+					}
+				}
+			}
+			checkState(s)
+			file, e := os.Create(filepath.Join(out, fmt.Sprintf("point-%03d-published.png", at)))
+			hdNewGameNeed(t, e)
+			hdNewGameNeed(t, png.Encode(file, publishedImage))
+			hdNewGameNeed(t, file.Close())
+		}
+
+		baseline := draftRGB(f.indexed, f.palette)
+		for y := 0; y < 800; y++ {
+			for x := 0; x < 1280; x++ {
+				k := y/4*320 + x/4
+				wantedPixel := baseline.RGBAAt(x, y)
+				cursorIndex := (y/4-f.cursor.Min.Y)*16 + x/4 - f.cursor.Min.X
+				opaqueCursor := image.Pt(x/4, y/4).In(f.cursor) && cursorIndex >= 0 && cursorIndex < 256 && m.Mem[0x1cd74+cursorIndex] != 255
+				if !opaqueCursor {
+					for _, frame := range p.frames {
+						if masks[frame.id][k] != 0 {
+							c := p.visible[k]
+							wantedPixel = frame.art.RGBAAt(int(c.local)%320*4+x%4, int(c.local)/320*4+y%4)
+							total++
+						}
+					}
+				}
+				if im.RGBAAt(x, y) != wantedPixel {
+					t.Fatal("背景RGBA或前景保留不同", at, x, y)
+				}
+			}
+		}
+		checkState(s)
+		file, err := os.Create(filepath.Join(out, fmt.Sprintf("point-%03d.png", at)))
+		hdNewGameNeed(t, err)
+		hdNewGameNeed(t, png.Encode(file, im))
+		hdNewGameNeed(t, file.Close())
+		records = append(records, map[string]any{"point": at, "step": m.Steps, "painted": painted, "native_memory_sha256": hash(m.Mem), "native_indexed_sha256": hash(m.Indexed())})
+		at++
+	}
+	step := func() { capture(); hdNewGameNeed(t, m.Step()) }
+	for _, e := range replay.Inputs {
+		if e.Step > oracle.End.Steps {
+			break
+		}
+		for m.Steps < e.Step {
+			step()
+		}
+		capture()
+		applyWindowInput(d, e)
+		count++
+		capture()
+	}
+	for m.Steps < oracle.End.Steps {
+		step()
+	}
+	capture()
+	checkState(oracle.End)
+	if at != 32 || count != 31 || total == 0 {
+		t.Fatal("原版範圍不同", at, count, total)
+	}
+	if !bytes.Equal(m.Mem, hdNewGameRead(t, filepath.Join(ref, "control/final.memory"))) {
+		t.Fatal("完整終點RAM不同")
+	}
+	for _, frame := range p.frames {
+		want := map[int]uint64{120: 0, 1551: 1, 308: 1, 824: 0, 1442: 0, 1443: 0, 1444: 0, 1445: 0, 1446: 0, 1447: 0, 1448: 0, 1449: 0}[frame.id]
+		if frame.decoded != want {
+			t.Fatal("背景解碼次數", frame.id, frame.decoded)
+		}
+	}
+	d.Close()
+	if !bytes.Equal(seed, hdNewGameRead(t, filepath.Join(save, "COLONY09.SAV"))) {
+		t.Fatal("原版存檔被修改")
+	}
+	proof := map[string]any{"result": "PASS_PUBLISHED_CURSOR_NATIVE32_SOURCE_RGBA_AND_STATE", "checkpoints": at, "dos_inputs": count, "rgba_source_pixels": total, "full_rgba_pixels": 32 * 1280 * 800, "points": records, "original_state_and_saves_equal": true, "production_connected": true}
+	raw, err := json.MarshalIndent(proof, "", "  ")
+	hdNewGameNeed(t, err)
+	hdNewGameNeed(t, os.WriteFile(filepath.Join(out, "check.json"), append(raw, '\n'), 0644))
+}

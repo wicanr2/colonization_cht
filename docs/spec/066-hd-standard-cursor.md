@@ -218,3 +218,5 @@ cursor-000-candidate-v2-provenance-r60.json，SHA-256為5b3406c8bbade64b4e7501a0
 ## 2026-10-18 R80 已發布表面的標準游標READY
 
 新增路徑見[規格069 R80 READY](069-hd-menu-background-and-textures.md)。原版來源、82格、熱點及生成原alpha保持；只有完整VGA與局部游標證據均符，才處理游標外主畫布差異。原有完整守門及其他圖層保持，正式驗收尚待完成。
+
+R80新增路徑已限定CONFORMED：251個具名Go、32項五語GUI及23616個HD游標RGBA通過；實際文字內移入移出與四側原版狀態／音訊／存檔通過。審查1135c987785e9e07d90aa47f125abe5aebabe4ce5c229fd38a5b07bf33cc110e，詳細來源與限制見規格069。既有來源、原PNG、82格、熱點、取樣與原alpha保持。

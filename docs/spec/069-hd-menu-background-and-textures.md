@@ -1325,3 +1325,46 @@ sidecar原始值與14欄原事件的序號、步數、位址與來源值相同�
 原型同狀態來源／RGBA，正常五語讀檔、兩模式、文字內游標移入移出、
 原版回退與快取失效；實際GUI輸入四側原版狀態、音訊及存檔。
 素材、字模、格式與原版規則保持，不增加全量HD信用。
+
+R80 READY透明文字的原版回填說明：字底HD來源不足時，仍可在已通過完整原版
+文字安全區與局部標準游標證據的透明游標格，回填該文字事件已驗的原版before值。
+此操作只清除已被該中文訊息替換的英文筆畫，不授予HD來源、不覆蓋不透明游標，
+並單列原版回填遮罩。完整VGA、游標來源或局部暫存失配時不使用此路徑。
+
+R80正式像素入口沿[已發布畫面檢查器](../../tools/check_hd_published_scene_pixels.py)，加--text-cursor。獨立原PNG及原alpha公式比較82格游標，另核對字底來源遮罩、透明游標內原版回填，以及五語在兩圖像模式的文字／字級／安全矩形一致；不把排除的文字安全區計為逐RGBA覆蓋通過。
+
+### R80 限定CONFORMED
+
+規格069／066 R80已發布字底與標準游標限定CONFORMED，134張生成原PNG／135檔、64Go／47綁定保持。251個具名Go零skip、建置與go vet通過，54個快速案例包含於251內。32點／31輸入至72800000步的獨立來源及32768000個完整RGBA通過；既有27點報告、19點城內／港口、20點新遊戲回歸通過。32項五語GUI含18項HD及14項原圖，32點當次原版來源；16262800個HD背景RGBA、834512個保留原版前景RGBA、13442752個原圖模式RGBA、23616個HD游標RGBA及32768000個X11遊戲區RGBA相同。5152個字底格有獨立來源，透明游標下另21格只回填已驗原版字底，不計HD來源。五語文字、字級及安全矩形在兩模式相同；游標實際進出列表文字及成功訊息。31筆實際GUI輸入四側至80600000步，CPU、完整RAM、索引、DAC、WAV與存檔全等，含play=true。原版288檔、134張原PNG與既有清冊保持。成功訊息其餘字底未知，保留原圖；全量HD、其他圖像／動畫、完整五語及新版交付未完成。
+
+| 指紋 | SHA-256 |
+|---|---|
+| 正式二進位 | 3b7a7172b48f7c0105f0089da39acb928827f0361097e0c9d0684c98327c45c4 |
+| READY審查 | 0b48c02e1ac21824e902bf07e2a18f0956dd7b2ab8ef3b7bf7236967aa57e150 |
+| 正式審查 | 1135c987785e9e07d90aa47f125abe5aebabe4ce5c229fd38a5b07bf33cc110e |
+| 公開來源索引 | 05ad61a4387d9b6b64e0c1cbdc17753a9653bc5be0c3c8a93506afbd1d2a11d9 |
+| 正常GUI32項 | 3bc7bdc16ecde9386e153049aa2db8fa523a168da708ee63995dfab4412b39f7 |
+| 當次原版來源模型32點 | 028e1869634a3321f31b8669d0a3ecce2c9d3cfed352c65d40d547da254f2799 |
+
+32點基準來源沿R79實際輸入，終點72800000步；本批實際GUI是另一份31筆輸入，
+包含文字內游標操作，終點80600000步。兩者分別驗證，不混用步數或收據。
+當次7656筆sidecar的游標配對最高82點、終點0，透明繪製1374次、
+不透明保存922次、透明還原1251次、不透明反向還原821次。
+文字安全矩形內未逐RGBA計數；獨立核對字底來源、五語文字／字級／安全矩形一致，
+不把排除區計為已通過像素比較。
+GUI原版WAV為346003幀、49715Hz、雙聲道且非靜音，SHA-256
+`bc806543137f94dc9e6fe56286183a0a28eede0c864fc1f5b7cfd0edc1330781`；四側均與此實際GUI檔案相同。
+沒有新增人耳、音效卡或macOS真機驗收。
+
+重生根為`workplace/reports/goal186-display-hd/hd-published-text-cursor-r80/`。
+入口：`build-r80-published-text-cursor-r5.py`、
+`run-r80-published-text-cursor-tests-r1.py`、
+`capture-r80-published-text-cursor-formal-r2.py`、
+`await-r80-gui-and-source-r2.py`、`await-r80-gui-and-replay-r3.py`及
+`review-r80-published-text-cursor-r1.py`。
+公開來源檢查加`--published-surface --published-cursor --scope published-load`，
+探針另加`--cursor-publication`，GUI像素檢查另加`--text-cursor`。
+來源索引組裝器加`--published-text-ready-report`及
+`--published-text-conformed-report`，只補WOODPANL及標準游標兩列，
+其他1550列、134筆既有連結及全部原稿保持。
+沒有新素材、字模、格式、tag或Release。完整HD、未知字底與其他動畫仍待完成。

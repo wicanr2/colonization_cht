@@ -6695,3 +6695,23 @@ VGA快照仍等於可見索引，不能把主畫布直接當作當時可見影�
   正式來源模型`ca9be6bcb2a1ffc6f3b663b8852744c6d971945705106266ccaa22066b6a1712`；正式審查`17128580f3a25ea0b4710f09ddaa4c7cf10bcfc83ff4ec87bef3edd2130ee4e7`。
 - 翻譯安全區回填的原版字底及標準游標仍保留原版；已目視接縫，接續處理。
   不增加動畫、世界移動、戰鬥或全量HD信用。
+
+## 2026-10-18 R80 已發布字底及標準游標來源驗收
+
+原版VICEROY.EXE `a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3`；
+CURSOR.SS `3ff5a4b70f08780f845b1e973d7dce3ff34868bb73279174210fce76332fffcb`；
+WOODPANL.PIK `0858856ad5b5dd0b6ab8e7a8f815fa602a9cf0237d8d323cd2b5ca141b32bc69`。
+dosgolem `82a14b266e1b5bc904e2d0fe507daf6bea41a013`，Go1.26.7、
+Python3.11.2與Pillow9.4.0。位址為dosgolem實模式CS:IP及20位元RAM。
+
+confirmed：0B68:051C、DS=ES=0xA000、完整碼
+`f3a48ac82bf92bf103f303fafecc75f0`，來源0xAFA00至0xAFC00。
+當次7656筆sidecar逐次核對完整256位元組游標來源、背景及合成值。
+當次32點控制與正常GUI全等，模型精確重建透明複製及不透明反向配對，
+最高82個未完成點、終點0。未知VGA寫入及同值未知寫入仍撤銷來源。
+
+正式審查`1135c987785e9e07d90aa47f125abe5aebabe4ce5c229fd38a5b07bf33cc110e`；來源模型
+`028e1869634a3321f31b8669d0a3ecce2c9d3cfed352c65d40d547da254f2799`。
+5152個已發布字底格有來源；透明游標內21格只有已驗原版before值，不授予HD信用。
+成功訊息其他字底來源未知，仍回原圖。原版資料與134張生成原稿保持，
+本批不增加動畫、世界移動、戰鬥或全量HD信用。

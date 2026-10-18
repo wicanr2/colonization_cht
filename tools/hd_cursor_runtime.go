@@ -10,6 +10,7 @@ import (
 	"image/draw"
 	"image/png"
 	"path/filepath"
+	"strings"
 )
 
 const hdCursorAssetSHA = "2839ce6c635c16af668ce251807e2723ed343052ab12cfa29a9be04cd9dbd8d4"
@@ -65,11 +66,17 @@ func loadHDCursorRuntime(game, directory string) (*hdCursorRuntime, error) {
 	return p, nil
 }
 
-// 既有restoreCursor已恢復原版不透明游標，再依原alpha疊候選。
+// 規格066／069 R80 READY：原版不透明游標先還原，再依既有原alpha合成。
+// 已發布表面須另驗完整VGA與局部游標；來源與暫存參與HD快取鍵。
 // 未寫入原版RAM，也沒有新增來源觀測或滑鼠事件。
 func (p *hdCursorRuntime) paint(h *hdRuntime, out *image.RGBA, f draftNativeFrame) map[string]any {
 	r := map[string]any{"formal": true, "asset_sha256": hdCursorAssetSHA, "source_cells": 0, "painted": 0}
 	source, reason := h.cursorProof(f)
+	if strings.HasPrefix(reason, "outside-cursor:") && len(f.indexed) == 64000 && len(h.m.Mem) >= 0xa0000+64000 && bytes.Equal(h.m.Mem[0xa0000:0xa0000+64000], f.indexed) {
+		source, reason = h.cursorPixelsProof(f)
+		r["published_surface_cursor"] = reason == ""
+	}
+
 	if reason != "" {
 		r["reason"] = reason
 		return r
@@ -83,6 +90,9 @@ func (p *hdCursorRuntime) paint(h *hdRuntime, out *image.RGBA, f draftNativeFram
 		x, y := f.cursor.Min.X+k%16, f.cursor.Min.Y+k/16
 		if x < 0 || y < 0 || x >= 320 || y >= 200 {
 			continue
+		}
+		if r["published_surface_cursor"] == true {
+			draftPaintPixel(out, y*320+x, f.indexed[y*320+x], f.palette)
 		}
 		cells++
 		sx, sy := k%16*4, k/16*4

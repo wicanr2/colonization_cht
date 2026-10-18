@@ -15685,6 +15685,12 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "published_text_cursor_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "1135c987785e9e07d90aa47f125abe5aebabe4ce5c229fd38a5b07bf33cc110e",
+        "scope": "normal published scene glyph underlays, transparent cursor ownership and opaque reverse pairs, standard HD cursor over text; unknown popup underlays stay Original, full HD incomplete"
       }
     },
     {
@@ -57515,6 +57521,12 @@
         "spec": "docs/spec/069-hd-menu-background-and-textures.md",
         "review_sha256": "17128580f3a25ea0b4710f09ddaa4c7cf10bcfc83ff4ec87bef3edd2130ee4e7",
         "scope": "normal load list and success-message backgrounds, five languages, Original/HD and EN/TC cursor hover/return; cursor and foreground preserved as original, text underlay HD pending"
+      },
+      "published_text_cursor_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "1135c987785e9e07d90aa47f125abe5aebabe4ce5c229fd38a5b07bf33cc110e",
+        "scope": "normal published scene glyph underlays, transparent cursor ownership and opaque reverse pairs, standard HD cursor over text; unknown popup underlays stay Original, full HD incomplete"
       }
     },
     {
@@ -59446,5 +59458,17 @@
     "formal_source_points": 32,
     "formal_assets": 134,
     "claim": "published source background only; inherited134 PNGs and previous conformance scopes unchanged; full HD incomplete"
+  },
+  "published_text_cursor_conformance": {
+    "ready_sha256": "0b48c02e1ac21824e902bf07e2a18f0956dd7b2ab8ef3b7bf7236967aa57e150",
+    "review_sha256": "1135c987785e9e07d90aa47f125abe5aebabe4ce5c229fd38a5b07bf33cc110e",
+    "sources": [
+      309,
+      1551
+    ],
+    "gui_samples": 32,
+    "formal_source_points": 32,
+    "formal_assets": 134,
+    "claim": "verified glyph underlays and standard cursor only; previous raw PNGs and conformance scopes unchanged; full HD incomplete"
   }
 }

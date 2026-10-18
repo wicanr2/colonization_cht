@@ -1153,6 +1153,8 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 				i := y*320 + x
 				if !image.Pt(x, y).In(cursor) && st.before[i] != canvas[i] {
 					draftPaintPixel(out, i, st.before[i], palette, hdBackgroundOverride...)
+				} else if image.Pt(x, y).In(cursor) && st.before[i] != canvas[i] && len(hdBackgroundOverride) > 0 && hdBackgroundOverride[0] != nil {
+					hdBackgroundOverride[0](out, i, st.before[i], palette)
 				}
 			}
 		}
@@ -1214,6 +1216,8 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 			for x := it.safe.Min.X; x < it.safe.Max.X; x++ {
 				if !image.Pt(x, y).In(cursor) && it.before[k] != it.after[k] {
 					draftPaintPixel(out, y*320+x, it.before[k], palette, hdBackgroundOverride...)
+				} else if image.Pt(x, y).In(cursor) && it.before[k] != it.after[k] && len(hdBackgroundOverride) > 0 && hdBackgroundOverride[0] != nil {
+					hdBackgroundOverride[0](out, y*320+x, it.before[k], palette)
 				}
 				k++
 			}
