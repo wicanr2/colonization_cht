@@ -20,7 +20,7 @@ func hdOpeningFixtures(t *testing.T) (string, string, string) {
 	if g == "" || a == "" || r == "" {
 		t.Skip("需要合法原版、生成素材與開場獨立模型")
 	}
-	for _, n := range []string{"OPENING.EXE", "OPENING.PIK", "OPENBORD.PIK", "OPENSHIP.SS", "OPENSUN.SS", "OPENWND1.SS", "OPENWND2.SS"} {
+	for _, n := range []string{"OPENING.EXE", "OPENING.PIK", "OPENBORD.PIK", "OPENSHIP.SS", "OPENSUN.SS", "OPENWND1.SS", "OPENWND2.SS", "OPENMON1.SS", "OPENMON2.SS"} {
 		if _, e := os.Stat(filepath.Join(g, n)); os.IsNotExist(e) {
 			t.Skip("缺合法原版", n)
 		}
@@ -427,7 +427,10 @@ func TestHDOpeningCacheInputs(t *testing.T) {
 
 func TestHDOpeningAssetRejection(t *testing.T) {
 	game, assets, _ := hdOpeningFixtures(t)
-	files := []string{"OPENING.EXE", "OPENING.PIK", "OPENBORD.PIK", "OPENSHIP.SS", "OPENSUN.SS", "OPENWND1.SS", "OPENWND2.SS"}
+	if _, e := loadHDOpeningRuntime(&hdRuntime{m: golem.New()}, game, assets); e != nil {
+		t.Fatal("valid opening fixture", e)
+	}
+	files := []string{"opening-fish-clear-000.png", "OPENING.EXE", "OPENING.PIK", "OPENBORD.PIK", "OPENSHIP.SS", "OPENSUN.SS", "OPENWND1.SS", "OPENWND2.SS", "OPENMON1.SS", "OPENMON2.SS"}
 	for _, d := range hdOpeningDefinitions {
 		files = append(files, d.asset)
 	}
@@ -438,7 +441,7 @@ func TestHDOpeningAssetRejection(t *testing.T) {
 		for _, kind := range []string{"missing", "wrong", "symlink"} {
 			t.Run(kind+"/"+name, func(t *testing.T) {
 				g, a := t.TempDir(), t.TempDir()
-				for _, f := range []string{"OPENING.EXE", "OPENING.PIK", "OPENBORD.PIK", "OPENSHIP.SS", "OPENSUN.SS", "OPENWND1.SS", "OPENWND2.SS"} {
+				for _, f := range []string{"OPENING.EXE", "OPENING.PIK", "OPENBORD.PIK", "OPENSHIP.SS", "OPENSUN.SS", "OPENWND1.SS", "OPENWND2.SS", "OPENMON1.SS", "OPENMON2.SS"} {
 					if e := os.WriteFile(filepath.Join(g, f), hdOpeningRead(t, filepath.Join(game, f)), 0644); e != nil {
 						t.Fatal(e)
 					}
@@ -452,6 +455,9 @@ func TestHDOpeningAssetRejection(t *testing.T) {
 					if e := os.WriteFile(filepath.Join(a, f.asset), hdOpeningRead(t, filepath.Join(assets, f.asset)), 0644); e != nil {
 						t.Fatal(e)
 					}
+				}
+				if e := os.WriteFile(filepath.Join(a, "opening-fish-clear-000.png"), hdOpeningRead(t, filepath.Join(assets, "opening-fish-clear-000.png")), 0644); e != nil {
+					t.Fatal(e)
 				}
 				target, original := filepath.Join(a, name), filepath.Join(assets, name)
 				if filepath.Ext(name) != ".png" {
@@ -930,206 +936,6 @@ func TestHDOpeningSpritesCompleteWriteGuards(t *testing.T) {
 	}
 }
 
-func TestHDWindNormalPublishedSources(t *testing.T) {
-	game, assets, _ := hdOpeningFixtures(t)
-	root, output := os.Getenv("TEST_HD_WIND_ROOT"), os.Getenv("TEST_HD_WIND_OUTPUT")
-	if root == "" || output == "" {
-		t.Skip("需要36來源獨立模型與新的輸出")
-	}
-	if e := os.Mkdir(output, 0755); e != nil {
-		t.Fatal(e)
-	}
-	ref := filepath.Join(root, "normal36-observed-r1")
-	var oracle struct {
-		End    uint64
-		Inputs []windowInput
-		Points []struct {
-			Step      uint64
-			Memory    string `json:"memory_sha256"`
-			Indexed   string `json:"indexed_sha256"`
-			Palette   string `json:"palette_sha256"`
-			Registers [8]uint16
-			Segments  [4]uint16
-			IP, Flags uint16
-			Cycles    uint64
-		}
-	}
-	if e := json.Unmarshal(hdOpeningRead(t, filepath.Join(ref, "check.json")), &oracle); e != nil {
-		t.Fatal(e)
-	}
-	type point struct {
-		Step   uint64
-		Actor  string         `json:"published_actor_file"`
-		PIC    string         `json:"published_pic_file"`
-		Counts map[string]int `json:"published_actor_counts"`
-		Under  map[string]int `json:"published_underlay_counts"`
-	}
-	var model struct{ Points []point }
-	if e := json.Unmarshal(hdOpeningRead(t, filepath.Join(ref, "actors.json")), &model); e != nil {
-		t.Fatal(e)
-	}
-	models := map[uint64]point{}
-	for _, p := range model.Points {
-		models[p.Step] = p
-	}
-	m := golem.New()
-	if e := m.LoadEXE(hdOpeningRead(t, filepath.Join(game, "OPENING.EXE"))); e != nil {
-		t.Fatal(e)
-	}
-	m.Write8(uint32(golem.PSPSeg)*16+0x80, 2)
-	m.WriteBytes(uint32(golem.PSPSeg)*16+0x81, []byte{'-', 'g', 13})
-	d := golem.NewDOS(m, game)
-	d.Scratch = output
-	d.Install()
-	defer d.Close()
-	m.SetSoundBlasterPro(true)
-	if !m.EnableSBDigital() {
-		t.Fatal("數位音訊")
-	}
-	m.EnableOPLSynth(true)
-	h := &hdRuntime{m: m}
-	p, e := loadHDOpeningRuntime(h, game, assets)
-	if e != nil {
-		t.Fatal(e)
-	}
-	h.opening = p
-	s := p.sprites
-	m.SetBeforeInstruction(s.beforeInstruction)
-	selected := map[uint64]bool{70000000: true, 210000000: true, 240000000: true, 270000000: true, 310000000: true, 340000000: true, 370000000: true, 399200000: true}
-	for _, definition := range hdOpeningSpriteDefinitions {
-		key := fmt.Sprint(definition.id)
-		var bestStep uint64
-		bestCount := 0
-		for _, candidate := range model.Points {
-			count := candidate.Counts[key]
-			if count > bestCount && candidate.Under[key] == count {
-				bestStep, bestCount = candidate.Step, count
-			}
-		}
-		if bestCount == 0 {
-			t.Fatal("缺正常可見來源", definition.id)
-		}
-		selected[bestStep] = true
-	}
-	seen := map[int]bool{}
-	at, inputAt := 0, 0
-	records := []map[string]any{}
-	images := 0
-	for m.Steps < oracle.End {
-		for inputAt < len(oracle.Inputs) && oracle.Inputs[inputAt].Step == m.Steps {
-			applyWindowInput(d, oracle.Inputs[inputAt])
-			inputAt++
-		}
-		if at < len(oracle.Points) && oracle.Points[at].Step == m.Steps {
-			want := oracle.Points[at]
-			c := m.CPU
-			if hash(m.Mem) != want.Memory || hash(m.Indexed()) != want.Indexed || hash(m.DAC[:]) != want.Palette || c.R != want.Registers || c.Seg != want.Segments || c.IP != want.IP || c.Flags != want.Flags || c.Cycles != want.Cycles {
-				t.Fatal("原版狀態改變", m.Steps)
-			}
-			if selected[m.Steps] {
-				modelRoot := ref
-				expected := models[m.Steps]
-				pic := hdOpeningRead(t, filepath.Join(modelRoot, expected.PIC))
-				actor := hdOpeningRead(t, filepath.Join(modelRoot, expected.Actor))
-				for pos, v := range s.pictures {
-					a := pos * 6
-					wanted := hdOpeningCell{pic[a], binary.LittleEndian.Uint32(pic[a+1 : a+5]), pic[a+5]}
-					if v != wanted {
-						t.Fatal("已發布PIK來源不符", m.Steps, pos, v, wanted)
-					}
-					a = pos * 12
-					id := binary.LittleEndian.Uint16(actor[a : a+2])
-					wantedActor := hdOpeningSpriteCell{}
-					if _, known := hdOpeningSpriteSlot(id); known {
-						wantedActor = hdOpeningSpriteCell{id, binary.LittleEndian.Uint16(actor[a+2 : a+4]), actor[a+4], hdOpeningCell{actor[a+6], binary.LittleEndian.Uint32(actor[a+7 : a+11]), actor[a+11]}}
-					}
-					if s.published[pos] != wantedActor {
-						t.Fatal("已發布36來源不符", m.Steps, pos, s.published[pos], wantedActor)
-					}
-				}
-				f := draftNativeFrame{indexed: m.Indexed(), palette: m.DAC[:], mode: m.VideoMode(), step: m.Steps}
-				out := draftRGB(f.indexed, f.palette)
-				before := hash(m.Mem)
-				receipt := s.paintWithin(out, f, image.Rect(0, 0, 320, 200))
-				if hash(m.Mem) != before {
-					t.Fatal("顯示寫入原版")
-				}
-
-				if receipt["reason"] != "verified-published-opening" {
-					t.Fatal("來源不能繪製", receipt)
-				}
-				groups := []struct {
-					ids    []int
-					counts []int
-				}{}
-				ship := receipt["frames"].([8]int)
-				sun := receipt["sun_frames"].([7]int)
-				wind := receipt["wind_frames"].([10]int)
-				smoke := receipt["smoke_frames"].([11]int)
-				groups = append(groups, struct {
-					ids    []int
-					counts []int
-				}{[]int{1250, 1251, 1252, 1253, 1254, 1255, 1256, 1257}, ship[:]})
-				groups = append(groups, struct {
-					ids    []int
-					counts []int
-				}{[]int{1258, 1259, 1260, 1261, 1262, 1263, 1264}, sun[:]})
-				groups = append(groups, struct {
-					ids    []int
-					counts []int
-				}{[]int{1266, 1267, 1268, 1269, 1270, 1271, 1272, 1273, 1274, 1275}, wind[:]})
-				groups = append(groups, struct {
-					ids    []int
-					counts []int
-				}{[]int{1276, 1277, 1278, 1279, 1280, 1281, 1282, 1283, 1284, 1285, 1286}, smoke[:]})
-				for _, group := range groups {
-					for i, count := range group.counts {
-						id := group.ids[i]
-						want := expected.Counts[fmt.Sprint(id)]
-						if count != want {
-							t.Fatal("可見來源數不符", m.Steps, id, count, want)
-						}
-						if count > 0 {
-							seen[id] = true
-						}
-					}
-				}
-				if m.Steps == 399200000 && sun[5] != 9 {
-					t.Fatal("太陽裁切改變", sun)
-				}
-				file := fmt.Sprintf("point-%08d.png", m.Steps)
-				fd, e := os.Create(filepath.Join(output, file))
-				if e != nil {
-					t.Fatal(e)
-				}
-				if e = png.Encode(fd, out); e != nil {
-					t.Fatal(e)
-				}
-				if e = fd.Close(); e != nil {
-					t.Fatal(e)
-				}
-				records = append(records, map[string]any{"step": m.Steps, "opening": receipt, "image": file})
-				images++
-			}
-			t.Log("NATIVE", m.Steps, s.accepted, s.rejected)
-			at++
-		}
-		if e := m.Step(); e != nil {
-			t.Fatal(e)
-		}
-	}
-	if at != len(oracle.Points) || at != 145 || inputAt != 1 || images != len(selected) || len(seen) != 36 || s.accepted != 1024 || s.rejected != 0 {
-		t.Fatal("正常來源範圍", at, inputAt, images, s.accepted, s.rejected)
-	}
-	raw, e := json.MarshalIndent(map[string]any{"result": "PASS_WIND21_NORMAL_PUBLISHED_NATIVE145", "points": at, "inputs": inputAt, "end": m.Steps, "accepted": s.accepted, "rejected": s.rejected, "images": images, "records": records, "source_frames": len(seen)}, "", "  ")
-	if e != nil {
-		t.Fatal(e)
-	}
-	if e = os.WriteFile(filepath.Join(output, "check.json"), append(raw, '\n'), 0644); e != nil {
-		t.Fatal(e)
-	}
-}
-
 func TestHDSunVisibleIntersection(t *testing.T) {
 	decoded := os.Getenv("TEST_HD_DECODED")
 	if decoded == "" {
@@ -1228,7 +1034,7 @@ func TestHDOpeningCaptionCursorGuards(t *testing.T) {
 }
 
 func TestHDOpeningSpriteSlotSources(t *testing.T) {
-	if len(hdOpeningSpriteDefinitions) != 36 {
+	if len(hdOpeningSpriteDefinitions) != 57 {
 		t.Fatal("source count")
 	}
 	for slot, d := range hdOpeningSpriteDefinitions {
@@ -1325,14 +1131,18 @@ func TestHDWindResourceGuards(t *testing.T) {
 			t.Fatal(e)
 		}
 	}
-	for _, name := range []string{"OPENSHIP.SS", "OPENSUN.SS", "OPENWND1.SS", "OPENWND2.SS"} {
+	for _, name := range []string{"OPENSHIP.SS", "OPENSUN.SS", "OPENWND1.SS", "OPENWND2.SS", "OPENMON1.SS", "OPENMON2.SS"} {
 		raw := hdOpeningRead(t, filepath.Join(game, name))
 		if e := os.WriteFile(filepath.Join(gameCopy, name), raw, 0644); e != nil {
 			t.Fatal(e)
 		}
 	}
+	initial, e := loadHDOpeningRuntime(&hdRuntime{m: golem.New()}, game, artCopy)
+	if e != nil {
+		t.Fatal("valid complete opening fixture", e)
+	}
 	load := func() error {
-		p := &hdOpeningRuntime{h: &hdRuntime{m: golem.New()}}
+		p := initial
 		_, e := loadHDOpeningSprites(p, gameCopy, artCopy)
 		return e
 	}
@@ -1418,6 +1228,754 @@ func TestHDWindResourceGuards(t *testing.T) {
 		t.Fatal("restored fixture", e)
 	}
 	if _, e := loadHDRuntime(golem.New(), game, assets); e != nil {
-		t.Fatal("full184 runtime load", e)
+		t.Fatal("full206 runtime load", e)
+	}
+}
+
+func TestHDFishPublishedObjectPrototype(t *testing.T) {
+	root, assets, out := os.Getenv("TEST_HD_FISH_ROOT"), os.Getenv("TEST_HD_ASSETS"), os.Getenv("TEST_HD_FISH_OUTPUT")
+	if root == "" || assets == "" || out == "" {
+		t.Skip("需要私有21幀完整物件原型")
+	}
+	if e := os.Mkdir(out, 0755); e != nil {
+		t.Fatal(e)
+	}
+	ref := filepath.Join(root, "normal57-observed-r1")
+	var review struct {
+		Points []struct {
+			Step    uint64
+			Matches []int `json:"native_pose_matches"`
+			Reason  string
+		}
+	}
+	if e := json.Unmarshal(hdOpeningRead(t, filepath.Join(root, "fish-published-selected57-r1.json")), &review); e != nil {
+		t.Fatal(e)
+	}
+	selected := map[uint64]bool{}
+	seen := map[int]bool{}
+	for _, p := range review.Points {
+		for _, id := range p.Matches {
+			if !seen[id] {
+				selected[p.Step] = true
+				seen[id] = true
+			}
+		}
+	}
+	if len(seen) != 21 {
+		t.Fatal("缺21種正常原版姿態", seen)
+	}
+	var model struct {
+		Calls []struct {
+			ID       int    `json:"source_id"`
+			Return   uint64 `json:"return_step"`
+			Verified bool
+			Count    int `json:"unique_writes"`
+		}
+		Points []struct {
+			Step  uint64
+			PIC   string `json:"published_pic_file"`
+			Actor string `json:"published_actor_file"`
+		}
+	}
+	if e := json.Unmarshal(hdOpeningRead(t, filepath.Join(ref, "actors.json")), &model); e != nil {
+		t.Fatal(e)
+	}
+	decoded := os.Getenv("TEST_HD_DECODED")
+	records := []map[string]any{}
+	for _, point := range model.Points {
+		if !selected[point.Step] {
+			continue
+		}
+		m := golem.New()
+		memory := hdOpeningRead(t, filepath.Join(ref, fmt.Sprintf("point-%08d.memory", point.Step)))
+		if len(memory) != len(m.Mem) {
+			t.Fatal("完整原版RAM長度")
+		}
+		copy(m.Mem, memory)
+		m.Steps = point.Step
+		h := &hdRuntime{m: m}
+		p, e := loadHDOpeningRuntime(h, os.Getenv("TEST_GAME_ROOT"), assets)
+		if e != nil {
+			t.Fatal(e)
+		}
+		p.native[0] = hdOpeningRead(t, filepath.Join(decoded, "1092.idx"))
+		p.native[1] = hdOpeningRead(t, filepath.Join(decoded, "1179.idx"))
+		p.mapValid = true
+		s := p.sprites
+		for slot, d := range hdOpeningSpriteDefinitions {
+			native := hdOpeningRead(t, filepath.Join(decoded, fmt.Sprintf("%04d.idx", d.id)))
+			if len(native) != d.w*d.h {
+				t.Fatal("來源尺寸", d.id)
+			}
+			for i := range s.native[slot] {
+				s.native[slot][i] = 253
+			}
+			copy(s.native[slot][:], native)
+			for _, call := range model.Calls {
+				if call.Verified && call.Count == d.opaque && call.ID == d.id && call.Return <= point.Step {
+					s.nativeValid[slot] = true
+					break
+				}
+			}
+		}
+		pic := hdOpeningRead(t, filepath.Join(ref, point.PIC))
+		actors := hdOpeningRead(t, filepath.Join(ref, point.Actor))
+		for pos := 0; pos < 64000; pos++ {
+			at := pos * 6
+			s.pictures[pos] = hdOpeningCell{pic[at], binary.LittleEndian.Uint32(pic[at+1 : at+5]), pic[at+5]}
+			at = pos * 12
+			id := binary.LittleEndian.Uint16(actors[at : at+2])
+			if _, known := hdOpeningSpriteSlot(id); known {
+				s.published[pos] = hdOpeningSpriteCell{id, binary.LittleEndian.Uint16(actors[at+2 : at+4]), actors[at+4], hdOpeningCell{actors[at+6], binary.LittleEndian.Uint32(actors[at+7 : at+11]), actors[at+11]}}
+			}
+		}
+		f := draftNativeFrame{indexed: hdOpeningRead(t, filepath.Join(ref, fmt.Sprintf("point-%08d.idx", point.Step))), palette: hdOpeningRead(t, filepath.Join(ref, fmt.Sprintf("point-%08d.palette", point.Step))), mode: 19, step: point.Step}
+		before := hash(m.Mem)
+		imageOut := draftRGB(f.indexed, f.palette)
+		receipt := s.paintWithin(imageOut, f, image.Rect(0, 0, 320, 200))
+		pose := s.fishPose(f)
+		if receipt["reason"] != "verified-published-opening" || !pose.valid || pose.slot < 0 {
+			t.Fatal("不能驗完整魚形", point.Step, pose, receipt)
+		}
+		if hash(m.Mem) != before {
+			t.Fatal("繪製寫入原版RAM")
+		}
+		// The same whole-object decision must restore a bounded cursor area exactly.
+		cursor := image.Rect(584+pose.origin.X, 24+pose.origin.Y, 600+pose.origin.X, 40+pose.origin.Y)
+		restored := draftRGB(f.indexed, f.palette)
+		copy(restored.Pix, imageOut.Pix)
+		native := draftRGB(f.indexed, f.palette)
+		for y := cursor.Min.Y * 4; y < cursor.Max.Y*4; y++ {
+			for x := cursor.Min.X * 4; x < cursor.Max.X*4; x++ {
+				restored.SetRGBA(x, y, native.RGBAAt(x, y))
+			}
+		}
+		s.paintWithin(restored, f, cursor)
+		if !bytes.Equal(restored.Pix, imageOut.Pix) || hash(m.Mem) != before {
+			t.Fatal("有界完整魚形恢復不一致")
+		}
+		name := fmt.Sprintf("point-%08d.png", point.Step)
+		fd, e := os.Create(filepath.Join(out, name))
+		if e != nil {
+			t.Fatal(e)
+		}
+		if e = png.Encode(fd, imageOut); e != nil {
+			t.Fatal(e)
+		}
+		if e = fd.Close(); e != nil {
+			t.Fatal(e)
+		}
+		records = append(records, map[string]any{"step": point.Step, "image": name, "opening": receipt, "fish_pose": pose.slot + 1182, "scope": "private injected source model only, no normal rendered GUI or native hook credit"})
+	}
+	if len(records) != len(selected) {
+		t.Fatal("略過選定正常資料", len(records), len(selected))
+	}
+	proof := map[string]any{"result": "PASS_PRIVATE_FISH21_WHOLE_OBJECT_MODEL_RENDERER", "state": "DRAFT", "images": len(records), "source_frames": 21, "records": records, "production_connected": false, "normal_gui_credit": false}
+	raw, e := json.MarshalIndent(proof, "", "  ")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = os.WriteFile(filepath.Join(out, "check.json"), append(raw, '\n'), 0644); e != nil {
+		t.Fatal(e)
+	}
+}
+func TestHDFishNormalPublishedSources(t *testing.T) {
+	game, assets, _ := hdOpeningFixtures(t)
+	root, output := os.Getenv("TEST_HD_FISH_ROOT"), os.Getenv("TEST_HD_FISH_NATIVE_OUTPUT")
+	if root == "" || output == "" {
+		t.Skip("需要36來源獨立模型與新的輸出")
+	}
+	if e := os.Mkdir(output, 0755); e != nil {
+		t.Fatal(e)
+	}
+	ref := filepath.Join(root, "normal57-observed-r1")
+	var oracle struct {
+		End    uint64
+		Inputs []windowInput
+		Points []struct {
+			Step      uint64
+			Memory    string `json:"memory_sha256"`
+			Indexed   string `json:"indexed_sha256"`
+			Palette   string `json:"palette_sha256"`
+			Registers [8]uint16
+			Segments  [4]uint16
+			IP, Flags uint16
+			Cycles    uint64
+		}
+	}
+	if e := json.Unmarshal(hdOpeningRead(t, filepath.Join(ref, "check.json")), &oracle); e != nil {
+		t.Fatal(e)
+	}
+	type point struct {
+		Step   uint64
+		Actor  string         `json:"published_actor_file"`
+		PIC    string         `json:"published_pic_file"`
+		Counts map[string]int `json:"published_actor_counts"`
+		Under  map[string]int `json:"published_underlay_counts"`
+	}
+	var model struct{ Points []point }
+	if e := json.Unmarshal(hdOpeningRead(t, filepath.Join(ref, "actors.json")), &model); e != nil {
+		t.Fatal(e)
+	}
+	models := map[uint64]point{}
+	for _, p := range model.Points {
+		models[p.Step] = p
+	}
+	m := golem.New()
+	if e := m.LoadEXE(hdOpeningRead(t, filepath.Join(game, "OPENING.EXE"))); e != nil {
+		t.Fatal(e)
+	}
+	m.Write8(uint32(golem.PSPSeg)*16+0x80, 2)
+	m.WriteBytes(uint32(golem.PSPSeg)*16+0x81, []byte{'-', 'g', 13})
+	d := golem.NewDOS(m, game)
+	d.Scratch = output
+	d.Install()
+	defer d.Close()
+	m.SetSoundBlasterPro(true)
+	if !m.EnableSBDigital() {
+		t.Fatal("數位音訊")
+	}
+	m.EnableOPLSynth(true)
+	h := &hdRuntime{m: m}
+	p, e := loadHDOpeningRuntime(h, game, assets)
+	if e != nil {
+		t.Fatal(e)
+	}
+	h.opening = p
+	s := p.sprites
+	m.SetBeforeInstruction(s.beforeInstruction)
+
+	selected := map[uint64]bool{}
+	var poseReview struct {
+		Points []struct {
+			Step    uint64
+			Matches []int `json:"native_pose_matches"`
+		}
+	}
+	if e := json.Unmarshal(hdOpeningRead(t, filepath.Join(root, "fish-published-selected57-r1.json")), &poseReview); e != nil {
+		t.Fatal(e)
+	}
+	wanted := map[int]bool{}
+	for _, point := range poseReview.Points {
+		for _, id := range point.Matches {
+			if !wanted[id] {
+				selected[point.Step] = true
+				wanted[id] = true
+			}
+		}
+	}
+	if len(wanted) != 21 {
+		t.Fatal("缺完整21種姿態", wanted)
+	}
+	seen := map[int]bool{}
+	at, inputAt := 0, 0
+	records := []map[string]any{}
+	images := 0
+	for m.Steps < oracle.End {
+		for inputAt < len(oracle.Inputs) && oracle.Inputs[inputAt].Step == m.Steps {
+			applyWindowInput(d, oracle.Inputs[inputAt])
+			inputAt++
+		}
+		if at < len(oracle.Points) && oracle.Points[at].Step == m.Steps {
+			want := oracle.Points[at]
+			c := m.CPU
+			if hash(m.Mem) != want.Memory || hash(m.Indexed()) != want.Indexed || hash(m.DAC[:]) != want.Palette || c.R != want.Registers || c.Seg != want.Segments || c.IP != want.IP || c.Flags != want.Flags || c.Cycles != want.Cycles {
+				t.Fatal("原版狀態改變", m.Steps)
+			}
+			if selected[m.Steps] {
+				modelRoot := ref
+				expected := models[m.Steps]
+				pic := hdOpeningRead(t, filepath.Join(modelRoot, expected.PIC))
+				actor := hdOpeningRead(t, filepath.Join(modelRoot, expected.Actor))
+				for pos, v := range s.pictures {
+					a := pos * 6
+					wanted := hdOpeningCell{pic[a], binary.LittleEndian.Uint32(pic[a+1 : a+5]), pic[a+5]}
+					if v != wanted {
+						t.Fatal("已發布PIK來源不符", m.Steps, pos, v, wanted)
+					}
+					a = pos * 12
+					id := binary.LittleEndian.Uint16(actor[a : a+2])
+					wantedActor := hdOpeningSpriteCell{}
+					if _, known := hdOpeningSpriteSlot(id); known {
+						wantedActor = hdOpeningSpriteCell{id, binary.LittleEndian.Uint16(actor[a+2 : a+4]), actor[a+4], hdOpeningCell{actor[a+6], binary.LittleEndian.Uint32(actor[a+7 : a+11]), actor[a+11]}}
+					}
+					if s.published[pos] != wantedActor {
+						t.Fatal("已發布36來源不符", m.Steps, pos, s.published[pos], wantedActor)
+					}
+				}
+				f := draftNativeFrame{indexed: m.Indexed(), palette: m.DAC[:], mode: m.VideoMode(), step: m.Steps}
+				out := draftRGB(f.indexed, f.palette)
+				before := hash(m.Mem)
+				receipt := s.paintWithin(out, f, image.Rect(0, 0, 320, 200))
+				if hash(m.Mem) != before {
+					t.Fatal("顯示寫入原版")
+				}
+
+				if receipt["reason"] != "verified-published-opening" {
+					t.Fatal("來源不能繪製", receipt)
+				}
+				groups := []struct {
+					ids    []int
+					counts []int
+				}{}
+				ship := receipt["frames"].([8]int)
+				sun := receipt["sun_frames"].([7]int)
+				wind := receipt["wind_frames"].([10]int)
+				smoke := receipt["smoke_frames"].([11]int)
+				fish := receipt["fish_frames"].([21]int)
+				groups = append(groups, struct {
+					ids    []int
+					counts []int
+				}{[]int{1250, 1251, 1252, 1253, 1254, 1255, 1256, 1257}, ship[:]})
+				groups = append(groups, struct {
+					ids    []int
+					counts []int
+				}{[]int{1258, 1259, 1260, 1261, 1262, 1263, 1264}, sun[:]})
+				groups = append(groups, struct {
+					ids    []int
+					counts []int
+				}{[]int{1266, 1267, 1268, 1269, 1270, 1271, 1272, 1273, 1274, 1275}, wind[:]})
+				groups = append(groups, struct {
+					ids    []int
+					counts []int
+				}{[]int{1276, 1277, 1278, 1279, 1280, 1281, 1282, 1283, 1284, 1285, 1286}, smoke[:]})
+				groups = append(groups, struct {
+					ids    []int
+					counts []int
+				}{[]int{1182, 1183, 1184, 1185, 1186, 1187, 1188, 1189, 1190, 1191, 1192, 1193, 1194, 1195, 1196, 1197, 1198, 1199, 1200, 1201, 1202}, fish[:]})
+				for _, group := range groups {
+					for i, count := range group.counts {
+						id := group.ids[i]
+						want := expected.Counts[fmt.Sprint(id)]
+						if count != want {
+							t.Fatal("可見來源數不符", m.Steps, id, count, want)
+						}
+						if count > 0 {
+							seen[id] = true
+						}
+					}
+				}
+				if m.Steps == 399200000 && sun[5] != 9 {
+					t.Fatal("太陽裁切改變", sun)
+				}
+				file := fmt.Sprintf("point-%08d.png", m.Steps)
+				fd, e := os.Create(filepath.Join(output, file))
+				if e != nil {
+					t.Fatal(e)
+				}
+				if e = png.Encode(fd, out); e != nil {
+					t.Fatal(e)
+				}
+				if e = fd.Close(); e != nil {
+					t.Fatal(e)
+				}
+				records = append(records, map[string]any{"step": m.Steps, "opening": receipt, "image": file})
+				images++
+			}
+			t.Log("NATIVE", m.Steps, s.accepted, s.rejected)
+			at++
+		}
+		if e := m.Step(); e != nil {
+			t.Fatal(e)
+		}
+	}
+	verifiedSources := 0
+	for _, valid := range s.nativeValid {
+		if valid {
+			verifiedSources++
+		}
+	}
+	fishSeen := 0
+	for id := range seen {
+		if id >= 1182 && id <= 1202 {
+			fishSeen++
+		}
+	}
+	if at != len(oracle.Points) || at != 144 || inputAt != 1 || images != len(selected) || fishSeen != 21 || verifiedSources != 57 || s.accepted != 1100 || s.rejected != 0 {
+		t.Fatal("正常來源範圍", at, inputAt, images, s.accepted, s.rejected)
+	}
+	raw, e := json.MarshalIndent(map[string]any{"result": "PASS_PRIVATE_FISH21_NORMAL_NATIVE144_PUBLISHED57", "points": at, "inputs": inputAt, "end": m.Steps, "accepted": s.accepted, "rejected": s.rejected, "images": images, "records": records, "source_frames": verifiedSources, "rendered_fish_sources": fishSeen, "state": "DRAFT", "production_connected": false, "normal_gui_credit": false}, "", "  ")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = os.WriteFile(filepath.Join(output, "check.json"), append(raw, '\n'), 0644); e != nil {
+		t.Fatal(e)
+	}
+}
+
+func hdFishPrototypeSnapshot(t *testing.T, wantID int) (*hdOpeningSpriteRuntime, draftNativeFrame) {
+	t.Helper()
+	root := os.Getenv("TEST_HD_FISH_ROOT")
+	assets := os.Getenv("TEST_HD_ASSETS")
+	if root == "" || assets == "" {
+		t.Skip("需要私有魚形完整物件資料")
+	}
+	var review struct {
+		Points []struct {
+			Step    uint64
+			Matches []int `json:"native_pose_matches"`
+		}
+	}
+	if e := json.Unmarshal(hdOpeningRead(t, filepath.Join(root, "fish-published-selected57-r1.json")), &review); e != nil {
+		t.Fatal(e)
+	}
+	var step uint64
+	for _, p := range review.Points {
+		for _, id := range p.Matches {
+			if id == wantID && step == 0 {
+				step = p.Step
+			}
+		}
+	}
+	if step == 0 {
+		t.Fatal("缺正常原版姿態", wantID)
+	}
+	ref := filepath.Join(root, "normal57-observed-r1")
+	var model struct {
+		Calls []struct {
+			ID       int    `json:"source_id"`
+			Return   uint64 `json:"return_step"`
+			Verified bool
+			Count    int `json:"unique_writes"`
+		}
+		Points []struct {
+			Step  uint64
+			PIC   string `json:"published_pic_file"`
+			Actor string `json:"published_actor_file"`
+		}
+	}
+	if e := json.Unmarshal(hdOpeningRead(t, filepath.Join(ref, "actors.json")), &model); e != nil {
+		t.Fatal(e)
+	}
+	var picName, actorName string
+	for _, p := range model.Points {
+		if p.Step == step {
+			picName, actorName = p.PIC, p.Actor
+		}
+	}
+	if picName == "" {
+		t.Fatal("缺原版來源快照")
+	}
+	m := golem.New()
+	memory := hdOpeningRead(t, filepath.Join(ref, fmt.Sprintf("point-%08d.memory", step)))
+	if len(memory) != len(m.Mem) {
+		t.Fatal("完整RAM長度")
+	}
+	copy(m.Mem, memory)
+	m.Steps = step
+	p, e := loadHDOpeningRuntime(&hdRuntime{m: m}, os.Getenv("TEST_GAME_ROOT"), assets)
+	if e != nil {
+		t.Fatal(e)
+	}
+	decoded := os.Getenv("TEST_HD_DECODED")
+	p.native[0] = hdOpeningRead(t, filepath.Join(decoded, "1092.idx"))
+	p.native[1] = hdOpeningRead(t, filepath.Join(decoded, "1179.idx"))
+	p.mapValid = true
+	s := p.sprites
+	for slot, d := range hdOpeningSpriteDefinitions {
+		raw := hdOpeningRead(t, filepath.Join(decoded, fmt.Sprintf("%04d.idx", d.id)))
+		if len(raw) != d.w*d.h {
+			t.Fatal("原始來源長度", d.id)
+		}
+		for k := range s.native[slot] {
+			s.native[slot][k] = 253
+		}
+		copy(s.native[slot][:], raw)
+		for _, c := range model.Calls {
+			if c.Verified && c.ID == d.id && c.Count == d.opaque && c.Return <= step {
+				s.nativeValid[slot] = true
+				break
+			}
+		}
+	}
+	pic := hdOpeningRead(t, filepath.Join(ref, picName))
+	actor := hdOpeningRead(t, filepath.Join(ref, actorName))
+	for pos := 0; pos < 64000; pos++ {
+		at := pos * 6
+		s.pictures[pos] = hdOpeningCell{pic[at], binary.LittleEndian.Uint32(pic[at+1 : at+5]), pic[at+5]}
+		at = pos * 12
+		id := binary.LittleEndian.Uint16(actor[at : at+2])
+		if _, ok := hdOpeningSpriteSlot(id); ok {
+			s.published[pos] = hdOpeningSpriteCell{id, binary.LittleEndian.Uint16(actor[at+2 : at+4]), actor[at+4], hdOpeningCell{actor[at+6], binary.LittleEndian.Uint32(actor[at+7 : at+11]), actor[at+11]}}
+		}
+	}
+	f := draftNativeFrame{indexed: hdOpeningRead(t, filepath.Join(ref, fmt.Sprintf("point-%08d.idx", step))), palette: hdOpeningRead(t, filepath.Join(ref, fmt.Sprintf("point-%08d.palette", step))), mode: 19, step: step}
+	if pose := s.fishPose(f); !pose.valid {
+		t.Fatal("完整原版fixture必須先成功", pose)
+	}
+	return s, f
+}
+
+func TestHDFishWholeObjectGuards(t *testing.T) {
+	cases := []string{"unknown-picture", "unknown-underlay", "wrong-anchor", "mixed-origin", "missing-full-shadow", "bad-local", "bad-source-id", "palette", "mode", "video-surface", "program-exit"}
+	for _, name := range cases {
+		t.Run(name, func(t *testing.T) {
+			s, f := hdFishPrototypeSnapshot(t, 1182)
+			pose := s.fishPose(f)
+			full := draftRGB(f.indexed, f.palette)
+			s.paintWithin(full, f, image.Rect(0, 0, 320, 200))
+			fishPos, picPos := -1, -1
+			for pos, c := range s.published {
+				if c.id == 1182 {
+					fishPos = pos
+					break
+				}
+			}
+			for pos, c := range s.pictures {
+				if c.kind == 2 && image.Pt(int(c.local)%960, int(c.local)/960).In(hdOpeningFishWorld) && s.published[pos].id == 0 {
+					picPos = pos
+					break
+				}
+			}
+			if fishPos < 0 || picPos < 0 {
+				t.Fatal("fixture缺來源")
+			}
+			global := false
+			switch name {
+			case "unknown-picture":
+				s.pictures[picPos] = hdOpeningCell{}
+			case "unknown-underlay":
+				s.published[fishPos].under = hdOpeningCell{}
+			case "wrong-anchor":
+				c := s.published[fishPos]
+				c.under.local++
+				c.under.value = s.p.native[1][c.under.local]
+				s.published[fishPos] = c
+			case "mixed-origin":
+				found := false
+				for pos, c := range s.published {
+					if c.id != 1182 {
+						continue
+					}
+					local := int(c.local) + 1
+					if local >= 27*20 || local%27 == 0 || s.native[36][local] != c.value {
+						continue
+					}
+					c.local = uint16(local)
+					c.under.local++
+					c.under.value = s.p.native[1][c.under.local]
+					s.published[pos] = c
+					found = true
+					break
+				}
+				if !found {
+					t.Fatal("fixture缺相鄰同值格")
+				}
+			case "missing-full-shadow":
+				s.nativeValid[36] = false
+				global = true
+			case "bad-local":
+				s.published[fishPos].local = 65535
+				global = true
+			case "bad-source-id":
+				s.published[fishPos].id = 65535
+				global = true
+			case "palette":
+				f.palette[0] ^= 1
+				global = true
+			case "mode":
+				f.mode = 3
+				global = true
+			case "video-surface":
+				s.p.h.m.Mem[0xa0000] ^= 1
+				global = true
+			case "program-exit":
+				s.p.h.m.Mem[0x5570+0x9f] ^= 1
+				global = true
+			}
+			before := hash(s.p.h.m.Mem)
+			native := draftRGB(f.indexed, f.palette)
+			out := draftRGB(f.indexed, f.palette)
+			receipt := s.paintWithin(out, f, image.Rect(0, 0, 320, 200))
+			if hash(s.p.h.m.Mem) != before {
+				t.Fatal("拒絕路徑改寫原版RAM")
+			}
+			if global {
+				if receipt["painted"] != 0 || !bytes.Equal(out.Pix, native.Pix) {
+					t.Fatal("全域失效未保持原圖", receipt)
+				}
+				return
+			}
+			object := receipt["fish_object"].(map[string]any)
+			if object["verified"] != false || receipt["fish_frames"] != ([21]int{}) {
+				t.Fatal("未知物件仍有HD信用", object)
+			}
+			rect := hdOpeningFishWorld.Add(pose.origin)
+			for y := 0; y < 800; y++ {
+				for x := 0; x < 1280; x++ {
+					want := full.RGBAAt(x, y)
+					if image.Pt(x/4, y/4).In(rect) {
+						want = native.RGBAAt(x, y)
+					}
+					if out.RGBAAt(x, y) != want {
+						t.Fatal("物件回退或區外像素不符", x, y, receipt)
+					}
+				}
+			}
+		})
+	}
+}
+
+func TestHDFishEquivalentNativeAlias(t *testing.T) {
+	s, f := hdFishPrototypeSnapshot(t, 1186)
+	pose := s.fishPose(f)
+	if !pose.valid {
+		t.Fatal(pose)
+	}
+	good := draftRGB(f.indexed, f.palette)
+	s.paintWithin(good, f, image.Rect(0, 0, 320, 200))
+	replaced := false
+	for pos, c := range s.published {
+		if c.id == 1186 {
+			c.id = 1183
+			s.published[pos] = c
+			replaced = true
+			break
+		}
+	}
+	if !replaced {
+		t.Fatal("缺同源別名格")
+	}
+	next := s.fishPose(f)
+	if !next.valid || len(next.candidates) < 2 {
+		t.Fatal("等值且同原圖的來源別名應成立", next)
+	}
+	out := draftRGB(f.indexed, f.palette)
+	s.paintWithin(out, f, image.Rect(0, 0, 320, 200))
+	if !bytes.Equal(out.Pix, good.Pix) {
+		t.Fatal("來源別名改變畫面")
+	}
+	// Equal native poses with differing generated caches must fail closed.
+	s.fish.art[1].Pix[0] ^= 1
+	bad := s.fishPose(f)
+	if bad.valid || bad.reason != "ambiguous-fish-art" {
+		t.Fatal("未拒絕不同原圖類別", bad)
+	}
+}
+
+func TestHDFishOpeningResourceGuards(t *testing.T) {
+	game, assets := os.Getenv("TEST_GAME_ROOT"), os.Getenv("TEST_HD_ASSETS")
+	if game == "" || assets == "" {
+		t.Skip("需要合法原版與206原PNG")
+	}
+	root := t.TempDir()
+	g, a := filepath.Join(root, "game"), filepath.Join(root, "graphics")
+	if e := os.Mkdir(g, 0755); e != nil {
+		t.Fatal(e)
+	}
+	if e := os.Mkdir(a, 0755); e != nil {
+		t.Fatal(e)
+	}
+	gameNames := map[string]bool{"OPENING.EXE": true, "OPENING.PIK": true, "OPENBORD.PIK": true}
+	for _, d := range hdOpeningSpriteDefinitions {
+		gameNames[d.sourceFile] = true
+	}
+	originals := map[string][]byte{}
+	rawAssets := map[string][]byte{}
+	for name := range gameNames {
+		b := hdOpeningRead(t, filepath.Join(game, name))
+		originals[name] = b
+		if e := os.WriteFile(filepath.Join(g, name), b, 0644); e != nil {
+			t.Fatal(e)
+		}
+	}
+	entries, e := os.ReadDir(assets)
+	if e != nil {
+		t.Fatal(e)
+	}
+	for _, entry := range entries {
+		if entry.IsDir() {
+			t.Fatal("非預期資產目錄")
+		}
+		name := entry.Name()
+		b := hdOpeningRead(t, filepath.Join(assets, name))
+		rawAssets[name] = b
+		if e := os.WriteFile(filepath.Join(a, name), b, 0644); e != nil {
+			t.Fatal(e)
+		}
+	}
+	if len(rawAssets) != 207 || len(gameNames) != 9 {
+		t.Fatal("opening-only完整fixture", len(rawAssets), len(gameNames))
+	}
+	full := func() (*hdOpeningRuntime, error) { return loadHDOpeningRuntime(&hdRuntime{m: golem.New()}, g, a) }
+	initial, e := full()
+	if e != nil {
+		t.Fatal("拒絕案例開始前必須完整成功", e)
+	}
+	// Only new SS/PNG/clear inputs are mutated. All inherited PIK bytes remain
+	// verified before and after every case, so their immutable art cache is reused.
+	load := func() error { _, e := loadHDOpeningSprites(initial, g, a); return e }
+	verify := func() {
+		t.Helper()
+		for name, want := range rawAssets {
+			if !bytes.Equal(hdOpeningRead(t, filepath.Join(a, name)), want) {
+				t.Fatal("其他資產漂移", name)
+			}
+		}
+		for name, want := range originals {
+			if !bytes.Equal(hdOpeningRead(t, filepath.Join(g, name)), want) {
+				t.Fatal("其他原版fixture漂移", name)
+			}
+		}
+	}
+	targets := []struct {
+		root, name string
+		raw        []byte
+	}{}
+	for _, d := range hdOpeningSpriteDefinitions[36:] {
+		targets = append(targets, struct {
+			root, name string
+			raw        []byte
+		}{a, d.asset, rawAssets[d.asset]})
+	}
+	targets = append(targets, struct {
+		root, name string
+		raw        []byte
+	}{a, "opening-fish-clear-000.png", rawAssets["opening-fish-clear-000.png"]})
+	for _, name := range []string{"OPENMON1.SS", "OPENMON2.SS"} {
+		targets = append(targets, struct {
+			root, name string
+			raw        []byte
+		}{g, name, originals[name]})
+	}
+	for _, target := range targets {
+		for _, kind := range []string{"missing", "wrong", "symlink"} {
+			t.Run(target.name+"/"+kind, func(t *testing.T) {
+				verify()
+				p := filepath.Join(target.root, target.name)
+				if e := os.Remove(p); e != nil {
+					t.Fatal(e)
+				}
+				if kind == "wrong" {
+					if e := os.WriteFile(p, []byte("wrong"), 0644); e != nil {
+						t.Fatal(e)
+					}
+				}
+				if kind == "symlink" {
+					parent := assets
+					if target.root == g {
+						parent = game
+					}
+					if e := os.Symlink(filepath.Join(parent, target.name), p); e != nil {
+						t.Fatal(e)
+					}
+				}
+				if e := load(); e == nil {
+					t.Fatal("錯件未拒絕")
+				}
+				if _, e := os.Lstat(p); e == nil {
+					if e := os.Remove(p); e != nil {
+						t.Fatal(e)
+					}
+				}
+				if e := os.WriteFile(p, target.raw, 0644); e != nil {
+					t.Fatal(e)
+				}
+				verify()
+			})
+		}
+	}
+	if _, e := full(); e != nil {
+		t.Fatal("全部錯件恢復後必須完整成功", e)
 	}
 }

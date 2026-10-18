@@ -63,6 +63,89 @@ def fixed_static_text(expected,idx,pal,sample,bundle):
   stats['fixed_text_fields']+=1
  return stats
 
+
+def fish_art_cache(assets,manifest,pictures):
+ """由原PNG、清冊世界矩形與逐點alpha獨立重建完整魚形，保留原圖bytes。"""
+ definitions={};cache={};selected={}
+ for name,item in manifest['assets'].items():
+  source=item.get('original_source',{})
+  if source.get('file')not in ['OPENMON1.SS','OPENMON2.SS']:continue
+  ident=(1182 if source['file']=='OPENMON1.SS'else 1197)+source['ordinal']
+  path=assets/name;assert path.is_file()and not path.is_symlink()and sha(path)==item['sha256']
+  raw=Image.open(path).convert('RGBA');assert list(raw.size)==item['size']
+  assert len(item['native_display_rects'])==len(item['generated_display_rects'])==1
+  world=item['native_display_rects'][0];crop=item['generated_display_rects'][0]
+  assert list(raw.getchannel('A').point(lambda v:255 if v>=32 else 0).getbbox())==crop
+  ax,ay=item['native_source_anchor'];w,h=item['native_size']
+  assert world==[min(584,ax),min(24,ay),max(633,ax+w),max(55,ay+h)]
+  assert 584<=world[0]<world[2]<=640 and 16<=world[1]<world[3]<=55
+  definitions[ident]=item;selected[name]=item['sha256']
+ if not definitions:return {},{},{}
+ assert set(definitions)==set(range(1182,1203))
+ oldmeta=manifest['assets']['opening-fish-top-000.png']
+ old=Image.open(assets/'opening-fish-top-000.png').convert('RGBA')
+ assert oldmeta['native_display_rects']==[[584,24,633,55]]
+ oldpiece=mapped(old,oldmeta['generated_display_rects'][0],(196,124))
+ mask=Image.new('L',(224,156),0);mask.paste(oldpiece.getchannel('A'),(0,32))
+ path=assets/'opening-fish-clear-000.png';meta=manifest['assets'][path.name]
+ assert path.is_file()and not path.is_symlink()and sha(path)==meta['sha256']=='96d98080dec2b7f0cdac9fea3e42a0ca093dc7ca6dee90f0c16f4a783ad62ada'
+ clean=Image.open(path).convert('RGBA');assert clean.size==(1503,1047)and clean.getchannel('A').getextrema()==(255,255)
+ selected[path.name]=meta['sha256'];clean=mapped(clean,[0,0,1503,1047],(224,156))
+ base=Image.frombytes('RGBA',(3840,528),pictures[2]).crop((2336,64,2560,220))
+ base.paste(clean,(0,0),mask.point(lambda v:255 if v else 0))
+ for ident,item in definitions.items():
+  source=item['original_source'];name=source['file'].lower().replace('.ss','')+'-%03d.png'%source['ordinal']
+  raw=Image.open(assets/name).convert('RGBA');x0,y0,x1,y1=item['native_display_rects'][0]
+  piece=mapped(raw,item['generated_display_rects'][0],((x1-x0)*4,(y1-y0)*4))
+  layer=Image.new('RGBA',(224,156));layer.paste(piece,((x0-584)*4,(y0-16)*4))
+  dst=bytearray(base.tobytes());src=layer.tobytes()
+  for at in range(0,len(dst),4):
+   alpha=src[at+3]
+   for c in range(3):dst[at+c]=(src[at+c]*alpha+dst[at+c]*(255-alpha)+127)//255
+  cache[ident]=bytes(dst)
+ return cache,definitions,selected
+
+def published_fish_pose(idx,pic,actor,native_picture,native_ss,definitions,cache,verified):
+ """完整原版物件的同狀態判定；不讀正式渲染器回報，也不以步數猜姿態。"""
+ result={'present':False,'verified':False,'origin':None,'matches':[],'foreground':0}
+ present=set()
+ for pos,a in enumerate(actor):
+  ident,local,value,_,kind,under,uv=a
+  if ident not in definitions:continue
+  result['present']=True;present.add(ident);d=definitions[ident];w,h=d['native_size'];ax,ay=d['native_source_anchor']
+  if ident not in verified or not(kind==2 and 0<=local<w*h and under==(ay+local//w)*960+ax+local%w and native_picture[under]==uv):return result
+  offset=(pos%320-ax-local%w,pos//320-ay-local//w)
+  if result['origin']is not None and offset!=result['origin']:return result
+  result['origin']=offset
+ if not result['present']:return result
+ dx,dy=result['origin']
+ if not(0<=584+dx<640+dx<=320 and 0<=16+dy<55+dy<=200):return result
+ foreground=set()
+ for y in range(16,55):
+  for x in range(584,640):
+   pos=(y+dy)*320+x+dx;local=y*960+x;a=actor[pos];c=pic[pos]
+   if a[0]:
+    ident,sl,value,_,kind,under,uv=a
+    if not(kind==2 and under==local and native_picture[local]==uv and ident in verified and ident in native_ss and 0<=sl<len(native_ss[ident])and native_ss[ident][sl]==idx[pos]):return result
+    if ident not in definitions:foreground.add((x,y))
+   elif not(c[0]==2 and c[1]==local and c[2]==idx[pos]==native_picture[local]):return result
+ result['foreground']=len(foreground)
+ for ident in sorted(present&verified):
+  d=definitions[ident];ax,ay=d['native_source_anchor'];w,h=d['native_size'];matched=True
+  for y in range(16,55):
+   for x in range(584,640):
+    if (x,y)in foreground:continue
+    value=native_picture[y*960+x]
+    if ax<=x<ax+w and ay<=y<ay+h:
+     v=native_ss[ident][(y-ay)*w+x-ax]
+     if v!=253:value=v
+    if idx[(y+dy)*320+x+dx]!=value:matched=False;break
+   if not matched:break
+  if matched:result['matches'].append(ident)
+ matches=result['matches']
+ result['verified']=bool(matches)and all(cache[n]==cache[matches[0]]for n in matches)
+ return result
+
 def main():
  p=argparse.ArgumentParser(description=__doc__)
  for name in ('assets','model','formal','decoded','output'):p.add_argument('--'+name,type=Path,required=True)
@@ -77,6 +160,7 @@ def main():
  manifest=read(a.assets/'manifest.json');pics={1:Image.new('RGBA',(1280,800)),2:Image.new('RGBA',(3840,528))};ships={};dimensions={};selected={}
  for name,item in manifest['assets'].items():
   f=item.get('original_source',{}).get('file')
+  if name=='opening-fish-clear-000.png':continue
   if f not in ['OPENBORD.PIK','OPENING.PIK','OPENSHIP.SS','OPENSUN.SS','OPENWND1.SS','OPENWND2.SS']:continue
   path=a.assets/name;assert path.is_file()and not path.is_symlink()and sha(path)==item['sha256']
   im=Image.open(path).convert('RGBA');assert list(im.size)==item['size'];selected[name]=item['sha256']
@@ -94,8 +178,10 @@ def main():
  assert len(selected)==14+len(ships)
  assert all(im.getchannel('A').getextrema()==(255,255)for im in pics.values())
  pics={k:im.tobytes()for k,im in pics.items()};ships={k:im.tobytes()for k,im in ships.items()}
+ fish_cache,fish_definitions,fish_selected=fish_art_cache(a.assets,manifest,pics);selected.update(fish_selected)
+ dimensions.update({n:tuple(d['native_size'])for n,d in fish_definitions.items()})
  nativePIC={1:(a.decoded/'1092.idx').read_bytes(),2:(a.decoded/'1179.idx').read_bytes()}
- nativeSS={ident:(a.decoded/('%04d.idx'%ident)).read_bytes()for ident in ships}
+ nativeSS={ident:(a.decoded/('%04d.idx'%ident)).read_bytes()for ident in set(ships)|set(fish_definitions)}
  states={r['step']:r for r in read(a.model/'check.json')['points']};owners={r['step']:r for r in read(a.model/'actors.json')['points']}
  roots={step:a.model for step in states}
  if a.model_overlay:
@@ -104,7 +190,7 @@ def main():
    states[step]=extra_states[step];owners[step]=extra_owners[step];roots[step]=a.model_overlay
  if a.gui:samples=read(a.formal/'capture.json')['samples']
  else:samples=[{'label':f.stem,'image':str(f),'graphics':'hd','state':{'step':int(f.stem[6:])}}for f in sorted(a.formal.glob('point-*.png'))]
- totals=collections.Counter();results=[];frames=set();sun_frames=set();wind_frames=set();smoke_frames=set()
+ totals=collections.Counter();results=[];frames=set();sun_frames=set();wind_frames=set();smoke_frames=set();fish_sources=set()
  for sample in samples:
   step=sample['state']['step'];state=states[step];o=owners[step];model=roots[step];actual=Image.open(sample['image']).convert('RGBA');assert actual.size==(1280,800)
   if a.gui:
@@ -118,6 +204,9 @@ def main():
   original=Image.frombytes('P',(320,200),idx);original.putpalette([v<<2|v>>4 for v in pal]);expected=bytearray(original.convert('RGBA').resize((1280,800),Image.Resampling.NEAREST).tobytes())
   pic=list(struct.iter_unpack('<BIB',(model/o['published_pic_file']).read_bytes()));actor=list(struct.iter_unpack('<HHBBBIB',(model/o['published_actor_file']).read_bytes()))
   assert len(pic)==len(actor)==64000
+  source_calls=read(model/'actors.json')['calls']
+  verified={v['source_id']for v in source_calls if v.get('verified')and v['return_step']<=step}
+  fish_pose=published_fish_pose(idx,pic,actor,nativePIC[2],nativeSS,fish_definitions,fish_cache,verified)
   enabled=sample['graphics']=='hd'and state['mode']==19 and o['live_code']and mem[0xa0000:0xafa00]==idx and hashlib.sha256(pal).hexdigest()=='b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54'and mem[0xafc00:0xaff00]==pal
   masks=[bytearray(8000),bytearray(8000)];counts=collections.Counter();actor_counts=collections.Counter();seen=set();sun_seen=set();wind_seen=set();smoke_seen=set()
   for pos,(kind,local,value)in enumerate(pic):
@@ -128,6 +217,22 @@ def main():
     assert ident in nativeSS and sslocal<len(nativeSS[ident]) and nativeSS[ident][sslocal]==ssvalue==idx[pos]and ssvalue!=253
     if underKind:assert underKind in nativePIC and underLocal<len(nativePIC[underKind])and nativePIC[underKind][underLocal]==underValue
    if not enabled:counts['original_rgba']+=16;continue
+   actor_fish=ident in fish_definitions
+   if actor_fish and not underKind:counts['original_rgba']+=16;continue
+   pk,pl=(underKind,underLocal)if ident and underKind else(kind,local)
+   wx,wy=pl%960,pl//960
+   if pk==2 and 584<=wx<640 and 16<=wy<55 and fish_pose['present']and (not ident or actor_fish):
+    origin=fish_pose['origin']
+    if not fish_pose['verified']or pos%320!=wx+origin[0]or pos//320!=wy+origin[1]:counts['original_rgba']+=16;continue
+    data=fish_cache[fish_pose['matches'][0]]
+    for sub in range(4):
+     dest=((pos//320*4+sub)*1280+pos%320*4)*4;src=(((wy-16)*4+sub)*224+(wx-584)*4)*4
+     expected[dest:dest+16]=data[src:src+16]
+    counts['whole_fish_rgba']+=16
+    if actor_fish:actor_counts[ident]+=1;masks[1][pos>>3]|=1<<(pos&7);counts['fish_rgba']+=16
+    else:masks[0][pos>>3]|=1<<(pos&7);counts['map_rgba']+=16
+    continue
+   if actor_fish:counts['original_rgba']+=16;continue
    if ident:
     if not underKind:counts['original_rgba']+=16;continue
     kind,local=underKind,underLocal
@@ -161,11 +266,17 @@ def main():
   assert actual.tobytes()==expected,(sample['label'],'complete RGBA differs')
   if a.gui and enabled:
    receipt=sample['native_live']['hd']['opening_picture'];assert base64.b64decode(receipt['picture_mask'])==masks[0]and base64.b64decode(receipt['sprite_mask'])==masks[1]
-   for field,first,count in [('frames',1250,8),('sun_frames',1258,7),('wind_frames',1266,10),('smoke_frames',1276,11)]:
+   for field,first,count in [('frames',1250,8),('sun_frames',1258,7),('wind_frames',1266,10),('smoke_frames',1276,11),('fish_frames',1182,21)]:
     if first not in nativeSS:continue
     assert receipt[field]==[actor_counts[first+i]for i in range(count)],(sample['label'],field,'published frame counts differ')
+  if enabled and fish_pose['verified']:fish_sources.update(n for n in fish_definitions if actor_counts[n])
+  if a.gui and enabled and fish_definitions:
+   receipt=sample['native_live']['hd']['opening_picture']['fish_object']
+   assert receipt['present']==fish_pose['present']and receipt['verified']==fish_pose['verified'],(sample['label'],'fish source proof differs')
+   if fish_pose['verified']:
+    assert receipt['candidates']==fish_pose['matches']and [receipt['origin']['X'],receipt['origin']['Y']]==list(fish_pose['origin'])and receipt['foreground_cells']==fish_pose['foreground']
   frames.update(seen);sun_frames.update(sun_seen);wind_frames.update(wind_seen);smoke_frames.update(smoke_seen);totals.update(counts);totals['full_rgba']+=1280*800
-  results.append({'label':sample['label'],'step':step,'counts':dict(counts),'frames':sorted(seen),'sun_frames':sorted(sun_seen),'wind_frames':sorted(wind_seen),'smoke_frames':sorted(smoke_seen),'main_vga_equal':o['full_main_vga_equal']})
- report={'result':'PASS_OPENING_ANIMATION_INDEPENDENT_RGBA','samples':len(samples),'verified_frames':sorted(frames),'verified_sun_frames':sorted(sun_frames),'verified_wind_frames':sorted(wind_frames),'verified_smoke_frames':sorted(smoke_frames),'totals':dict(totals),'assets':selected,'results':results,'scope':'canonical palette, exact published original provenance, raw PNG integer geometry; unknown sources stay original'}
+  results.append({'label':sample['label'],'step':step,'counts':dict(counts),'frames':sorted(seen),'sun_frames':sorted(sun_seen),'wind_frames':sorted(wind_seen),'smoke_frames':sorted(smoke_seen),'fish_source_counts':{str(n):actor_counts[n]for n in fish_definitions if actor_counts[n]},'fish_pose':fish_pose,'main_vga_equal':o['full_main_vga_equal']})
+ report={'result':'PASS_OPENING_ANIMATION_INDEPENDENT_RGBA','samples':len(samples),'verified_frames':sorted(frames),'verified_sun_frames':sorted(sun_frames),'verified_wind_frames':sorted(wind_frames),'verified_smoke_frames':sorted(smoke_frames),'verified_fish_sources':sorted(fish_sources),'totals':dict(totals),'assets':selected,'results':results,'scope':'canonical palette, exact published original provenance, raw PNG integer geometry; unknown sources stay original'}
  a.output.mkdir();(a.output/'check.json').write_text(json.dumps(report,indent=2)+'\n');print(report['result'],report['samples'],report['verified_frames'],report['verified_sun_frames'],report['verified_wind_frames'],report['verified_smoke_frames'],report['totals'],flush=True)
 if __name__=='__main__':main()

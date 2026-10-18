@@ -6923,3 +6923,20 @@ Go1.26.7、真實模式CS:IP及20bit線性RAM沿R86。
 局部SS遮罩與生成全魚接合造成舊頭／尾殘留，r1、r2原型撤回。
 完整物件r3私有21張RGBA21504000點及有界恢復通過；這是注入真實原版快照的渲染，
 正常Go觀測、GUI及正式封裝仍待驗。入口[規格069 R87](docs/spec/069-hd-menu-background-and-textures.md)。
+
+## 2026-10-19：R86重播完成與R87正式完整魚形
+
+已證實。R86來源與實拍組建以f8e9128唯讀快照固定，三側使用當次13筆輸入至414200000步，
+CPU、完整RAM、IDX、DAC、WAV與存檔全等，含play=true。
+總審查314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107；
+來源索引bfea278aad790b624a63f42b244f1d607de9e16be7c3bef7a01edd5beadb215d，
+只改21個WND來源，其他1531列保持。
+
+R87沿前節原版指紋、Go1.26.7、dosgolem版本與位址空間，正常144點及21張完整RGBA已通過。
+READY審查c8989497a2d4cf314ff8731ea33ccad9d23db2e5eaf108a2a2c0585dcc26e1d5；
+正式清冊eb7f70da2fb48e5d508a9a5184108ad1996bd5617fca1da38dd9e2119771ce34，
+22個新原PNG保持原bytes與alpha，原版輸入不入Git。
+公開Python從原PNG、清冊幾何、獨立原版發布資料及此前完整來源返回推導姿態，
+21張完整RGBA21504000點／完整魚形722304點通過，不採正式層姿態回報作oracle。
+審查2ff40b88e2805e32a7ea809af7e121540df233b2067f8e3f07a5214d114aff2c。
+範圍與重生入口見[規格069 R86／R87](docs/spec/069-hd-menu-background-and-textures.md)。

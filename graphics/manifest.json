@@ -11065,6 +11065,1277 @@
       "rights": "AI-generated display redraw under RRSAL-1.0; original references private",
       "raw_reuse_source": "openwnd2-000.png",
       "reuse_reason": "Original native size, encoded hash and indexed hash are identical; raw PNG copied unchanged"
+    },
+    "openmon1-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+      "bytes": 807333,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        27,
+        20
+      ],
+      "target_size": [
+        220,
+        124
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON1.SS",
+        "sha256": "5da6ea59ab914fe4f73947c6925bbebb85815a5213e63bbcc6cdf6d44b61e1cd",
+        "ordinal": 0,
+        "encoded_sha256": "ae37f690afbf069b6a8f1eb6d2dc6faca614e718ef8e9be28378d706a948f8f8",
+        "indexed_sha256": "34557722c9da0c107e108d93249474e80305c5e987ee45c622293d8e2539e93e"
+      },
+      "native_display_rects": [
+        [
+          584,
+          24,
+          639,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          116,
+          124,
+          1514,
+          895
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        612,
+        28
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: style-transfer\nAsset type: one transparent HD animation frame for a historical strategy game's decorative sea-monster fish.\nInput images: Image 1 is the original game's complete fish pose reference, including paper behind it. Image 2 is the already approved HD fish artwork and the identity/style reference.\nPrimary request: redraw only the single whole fish in image 1 using the exact fish design, palette and refined pixel brushwork of image 2. The right-facing green-gold fish has its head and mouth in the exact opening frame shown in image 1; the orange forked tail remains at the baseline height.\nKeep the right-facing direction, one large gold eye in its blue-green socket, olive green and gold scales, blue-green lower fins, narrow curving tail stem and orange forked tail. Keep the same proportions, camera, body shape and scale across frames; change only the mouth/eye/tail pose supported by image 1. Full fish and all fins within the canvas with a small transparent margin. Use crisp detailed pixel clusters, the same shading density and outline weight as the approved artwork. No paper, map, sea, lettering, label, border, extra creature or extra fin. Background must be genuinely transparent with preserved alpha. Output exactly one complete fish frame, never a sheet or collage.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-composite-000-r1.png": "1cfe3336eeb1e6d7c14eff3333d64f5dd5088cde6ac6e30a6630775c3b74ed52",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openmon1-001.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "c3a11ea6464b0b8e6bc7525f4e2cac990d84d8412a09d7bf29ba6d25f4beb337",
+      "bytes": 801106,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        28,
+        21
+      ],
+      "target_size": [
+        224,
+        124
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON1.SS",
+        "sha256": "5da6ea59ab914fe4f73947c6925bbebb85815a5213e63bbcc6cdf6d44b61e1cd",
+        "ordinal": 1,
+        "encoded_sha256": "a4fe567583d7d40fa0c0df157b53dc712893899f456bfdfcc2726abe8c36f900",
+        "indexed_sha256": "6ce693890fc4e5f159c0c5dd6c2295c4e0fe7842a97b29bc428ffc7a08272a99"
+      },
+      "native_display_rects": [
+        [
+          584,
+          24,
+          640,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          110,
+          86,
+          1536,
+          894
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        612,
+        28
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE transparent sea-monster fish animation frame, never an atlas.\nInput images: Image 1 is the original game's exact whole-fish pose for OPENMON1.SS frame 1; paper and map lines in this reference are background only. Image 2 is the approved HD master for this animation. Image 3 is the established original HD fish design/style.\nPrimary request: make a consistent animation variant of the fish in image 2, changing only its mouth/eye and orange tail pose to match image 1. Read the whole original fish silhouette carefully, including how high the tail is lifted and how far the mouth opens. Keep the head and eye in the same relative location, identical green-gold scales, blue-green lower fins, one eye and one forked orange tail. Keep the same body proportions, canvas framing, camera and fish scale as image 2; do not shrink, enlarge, rotate, flip or redesign the fish. Preserve the crisp refined pixel clusters and color shading of image 2. The complete fish must remain inside the canvas with a transparent margin. Background is genuinely transparent; no paper, map lines, blue rectangle, text, label, water, watermark or second object. Deliver exactly one full fish in this single frame.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-composite-001-r1.png": "c65e7fb81336e69159cd9df7f4d44c9bd3b6be33bd0fe3e1fcdccd4d4a9119f1",
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-000-candidate-r1.png": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openmon1-002.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "c0abf16e75a15203b0a7bd9b206605bb0141af36ed4b6619aabedd17f2cf61eb",
+      "bytes": 814828,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        28,
+        21
+      ],
+      "target_size": [
+        224,
+        124
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON1.SS",
+        "sha256": "5da6ea59ab914fe4f73947c6925bbebb85815a5213e63bbcc6cdf6d44b61e1cd",
+        "ordinal": 2,
+        "encoded_sha256": "b482ac1bd84c03ea02e0e3c56dc223f93823e3bd95c5a44e336021ea9e8fdad5",
+        "indexed_sha256": "d262fc19e0f734cca82304b3e18803409339f8478d1e3e7020857c9f5c59bae9"
+      },
+      "native_display_rects": [
+        [
+          584,
+          24,
+          640,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          112,
+          125,
+          1511,
+          897
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        612,
+        28
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE transparent sea-monster fish animation frame, never an atlas.\nInput images: Image 1 is the original game's exact whole-fish pose for OPENMON1.SS frame 2; paper and map lines in this reference are background only. Image 2 is the approved HD master for this animation. Image 3 is the established original HD fish design/style.\nPrimary request: make a consistent animation variant of the fish in image 2, changing only its mouth/eye and orange tail pose to match image 1. Read the whole original fish silhouette carefully, including how high the tail is lifted and how far the mouth opens. Keep the head and eye in the same relative location, identical green-gold scales, blue-green lower fins, one eye and one forked orange tail. Keep the same body proportions, canvas framing, camera and fish scale as image 2; do not shrink, enlarge, rotate, flip or redesign the fish. Preserve the crisp refined pixel clusters and color shading of image 2. The complete fish must remain inside the canvas with a transparent margin. Background is genuinely transparent; no paper, map lines, blue rectangle, text, label, water, watermark or second object. Deliver exactly one full fish in this single frame.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-composite-002-r1.png": "f99f4d4a6ee59fec27be70b72a047f035457ccb8c90aaef5513397479b3040e2",
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-000-candidate-r1.png": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openmon1-003.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "c0abf16e75a15203b0a7bd9b206605bb0141af36ed4b6619aabedd17f2cf61eb",
+      "bytes": 814828,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        28,
+        21
+      ],
+      "target_size": [
+        224,
+        124
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON1.SS",
+        "sha256": "5da6ea59ab914fe4f73947c6925bbebb85815a5213e63bbcc6cdf6d44b61e1cd",
+        "ordinal": 3,
+        "encoded_sha256": "b482ac1bd84c03ea02e0e3c56dc223f93823e3bd95c5a44e336021ea9e8fdad5",
+        "indexed_sha256": "d262fc19e0f734cca82304b3e18803409339f8478d1e3e7020857c9f5c59bae9"
+      },
+      "native_display_rects": [
+        [
+          584,
+          24,
+          640,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          112,
+          125,
+          1511,
+          897
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        612,
+        28
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE transparent sea-monster fish animation frame, never an atlas.\nInput images: Image 1 is the original game's exact whole-fish pose for OPENMON1.SS frame 2; paper and map lines in this reference are background only. Image 2 is the approved HD master for this animation. Image 3 is the established original HD fish design/style.\nPrimary request: make a consistent animation variant of the fish in image 2, changing only its mouth/eye and orange tail pose to match image 1. Read the whole original fish silhouette carefully, including how high the tail is lifted and how far the mouth opens. Keep the head and eye in the same relative location, identical green-gold scales, blue-green lower fins, one eye and one forked orange tail. Keep the same body proportions, canvas framing, camera and fish scale as image 2; do not shrink, enlarge, rotate, flip or redesign the fish. Preserve the crisp refined pixel clusters and color shading of image 2. The complete fish must remain inside the canvas with a transparent margin. Background is genuinely transparent; no paper, map lines, blue rectangle, text, label, water, watermark or second object. Deliver exactly one full fish in this single frame.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-composite-002-r1.png": "f99f4d4a6ee59fec27be70b72a047f035457ccb8c90aaef5513397479b3040e2",
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-000-candidate-r1.png": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private",
+      "raw_png_reused_from": "openmon1-002.png",
+      "reuse_evidence": "same original file, encoded/indexed hashes, intrinsic dimensions and source anchor; exact generated PNG bytes reused"
+    },
+    "openmon1-004.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "c3a11ea6464b0b8e6bc7525f4e2cac990d84d8412a09d7bf29ba6d25f4beb337",
+      "bytes": 801106,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        28,
+        21
+      ],
+      "target_size": [
+        224,
+        124
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON1.SS",
+        "sha256": "5da6ea59ab914fe4f73947c6925bbebb85815a5213e63bbcc6cdf6d44b61e1cd",
+        "ordinal": 4,
+        "encoded_sha256": "a4fe567583d7d40fa0c0df157b53dc712893899f456bfdfcc2726abe8c36f900",
+        "indexed_sha256": "6ce693890fc4e5f159c0c5dd6c2295c4e0fe7842a97b29bc428ffc7a08272a99"
+      },
+      "native_display_rects": [
+        [
+          584,
+          24,
+          640,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          110,
+          86,
+          1536,
+          894
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        612,
+        28
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE transparent sea-monster fish animation frame, never an atlas.\nInput images: Image 1 is the original game's exact whole-fish pose for OPENMON1.SS frame 1; paper and map lines in this reference are background only. Image 2 is the approved HD master for this animation. Image 3 is the established original HD fish design/style.\nPrimary request: make a consistent animation variant of the fish in image 2, changing only its mouth/eye and orange tail pose to match image 1. Read the whole original fish silhouette carefully, including how high the tail is lifted and how far the mouth opens. Keep the head and eye in the same relative location, identical green-gold scales, blue-green lower fins, one eye and one forked orange tail. Keep the same body proportions, canvas framing, camera and fish scale as image 2; do not shrink, enlarge, rotate, flip or redesign the fish. Preserve the crisp refined pixel clusters and color shading of image 2. The complete fish must remain inside the canvas with a transparent margin. Background is genuinely transparent; no paper, map lines, blue rectangle, text, label, water, watermark or second object. Deliver exactly one full fish in this single frame.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-composite-001-r1.png": "c65e7fb81336e69159cd9df7f4d44c9bd3b6be33bd0fe3e1fcdccd4d4a9119f1",
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-000-candidate-r1.png": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private",
+      "raw_png_reused_from": "openmon1-001.png",
+      "reuse_evidence": "same original file, encoded/indexed hashes, intrinsic dimensions and source anchor; exact generated PNG bytes reused"
+    },
+    "openmon1-005.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "8a7e4987b6311cb92e759a0039f33dab525fd28dfc8bb5f4b466f5441bb7349f",
+      "bytes": 863925,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        52,
+        27
+      ],
+      "target_size": [
+        224,
+        132
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON1.SS",
+        "sha256": "5da6ea59ab914fe4f73947c6925bbebb85815a5213e63bbcc6cdf6d44b61e1cd",
+        "ordinal": 5,
+        "encoded_sha256": "bdd4c5822d47d1f6f2327bf5c8636b01784650bf6492f69a757042396e2ecb8c",
+        "indexed_sha256": "562b03cc802fc90e654e02af2d2eacc274aedc928f2bd8606cf27d1af884a049"
+      },
+      "native_display_rects": [
+        [
+          584,
+          22,
+          640,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          123,
+          136,
+          1511,
+          929
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        588,
+        22
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: style-transfer\nAsset type: one transparent HD animation frame for a historical strategy game's decorative sea-monster fish.\nInput images: Image 1 is the original game's complete fish pose reference, including paper behind it. Image 2 is the already approved HD fish artwork and the identity/style reference.\nPrimary request: redraw only the single whole fish in image 1 using the exact fish design, palette and refined pixel brushwork of image 2. The same right-facing green-gold fish begins the tail-lifting movement; match the orange forked tail, mouth and eye pose shown in image 1.\nKeep the right-facing direction, one large gold eye in its blue-green socket, olive green and gold scales, blue-green lower fins, narrow curving tail stem and orange forked tail. Keep the same proportions, camera, body shape and scale across frames; change only the mouth/eye/tail pose supported by image 1. Full fish and all fins within the canvas with a small transparent margin. Use crisp detailed pixel clusters, the same shading density and outline weight as the approved artwork. No paper, map, sea, lettering, label, border, extra creature or extra fin. Background must be genuinely transparent with preserved alpha. Output exactly one complete fish frame, never a sheet or collage.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-composite-005-r1.png": "2639429efb83cfadf8a86611b23aeb97e380f01fa847899f79f6dda8676bf643",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openmon1-006.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "fda0184b21d1d2a7121a4df161930dc8be9cdacb64ee7fca01236edfeb815993",
+      "bytes": 811395,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        51,
+        29
+      ],
+      "target_size": [
+        220,
+        140
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON1.SS",
+        "sha256": "5da6ea59ab914fe4f73947c6925bbebb85815a5213e63bbcc6cdf6d44b61e1cd",
+        "ordinal": 6,
+        "encoded_sha256": "3219f45ba8276e64a5b0ce5aa946d4daa41566ebdb39c77c51eb3f5f9e3a2372",
+        "indexed_sha256": "83ce629fb541804f9e6f0e5dfc5b48b573bb75a2364f7c24be6a70d6e9a74125"
+      },
+      "native_display_rects": [
+        [
+          584,
+          20,
+          639,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          122,
+          115,
+          1503,
+          896
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        588,
+        20
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE transparent sea-monster fish animation frame, never an atlas.\nInput images: Image 1 is the original game's exact whole-fish pose for OPENMON1.SS frame 6; paper and map lines in this reference are background only. Image 2 is the approved HD master for this animation. Image 3 is the established original HD fish design/style.\nPrimary request: make a consistent animation variant of the fish in image 2, changing only its mouth/eye and orange tail pose to match image 1. Read the whole original fish silhouette carefully, including how high the tail is lifted and how far the mouth opens. Keep the head and eye in the same relative location, identical green-gold scales, blue-green lower fins, one eye and one forked orange tail. Keep the same body proportions, canvas framing, camera and fish scale as image 2; do not shrink, enlarge, rotate, flip or redesign the fish. Preserve the crisp refined pixel clusters and color shading of image 2. The complete fish must remain inside the canvas with a transparent margin. Background is genuinely transparent; no paper, map lines, blue rectangle, text, label, water, watermark or second object. Deliver exactly one full fish in this single frame.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-composite-006-r1.png": "3ff030ddfeccbb73a1105ba5966a9868bfe87dfa0416b7ee6181246a3e8594dc",
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-000-candidate-r1.png": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openmon1-007.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "f31fde8d6f5001b60c9d3739dc25e444f43bcdd0fbaea755c2a3f7aeb398dd70",
+      "bytes": 821600,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        52,
+        31
+      ],
+      "target_size": [
+        224,
+        152
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON1.SS",
+        "sha256": "5da6ea59ab914fe4f73947c6925bbebb85815a5213e63bbcc6cdf6d44b61e1cd",
+        "ordinal": 7,
+        "encoded_sha256": "f3ac0eb93d05c1c432e0760db0d06fa26b96dc6d57e283df030fa61d58714e0c",
+        "indexed_sha256": "dcb4eeb0ad0705efecced46d362cccc1662621f1e9e6b5ddd5bfa97b9e75c31b"
+      },
+      "native_display_rects": [
+        [
+          584,
+          17,
+          640,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          129,
+          104,
+          1519,
+          896
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        588,
+        17
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE transparent sea-monster fish animation frame, never an atlas.\nInput images: Image 1 is the original game's exact whole-fish pose for OPENMON1.SS frame 7; paper and map lines in this reference are background only. Image 2 is the approved HD master for this animation. Image 3 is the established original HD fish design/style.\nPrimary request: make a consistent animation variant of the fish in image 2, changing only its mouth/eye and orange tail pose to match image 1. Read the whole original fish silhouette carefully, including how high the tail is lifted and how far the mouth opens. Keep the head and eye in the same relative location, identical green-gold scales, blue-green lower fins, one eye and one forked orange tail. Keep the same body proportions, canvas framing, camera and fish scale as image 2; do not shrink, enlarge, rotate, flip or redesign the fish. Preserve the crisp refined pixel clusters and color shading of image 2. The complete fish must remain inside the canvas with a transparent margin. Background is genuinely transparent; no paper, map lines, blue rectangle, text, label, water, watermark or second object. Deliver exactly one full fish in this single frame.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-composite-007-r1.png": "f3a2eb49dbc3e93cf4c9250f2c09fbfbbbfcad0cdea1ed34f6f4d381d0471b19",
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-000-candidate-r1.png": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openmon1-008.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "6e58348513ac0b23763ad4c4eeacff38ae71d7c17aeb3262a00c2f6d063de9db",
+      "bytes": 853045,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        52,
+        32
+      ],
+      "target_size": [
+        224,
+        156
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON1.SS",
+        "sha256": "5da6ea59ab914fe4f73947c6925bbebb85815a5213e63bbcc6cdf6d44b61e1cd",
+        "ordinal": 8,
+        "encoded_sha256": "c421b4b189dc5ab2f03521a774bef419398b840d63c6e2329d26b5e696020480",
+        "indexed_sha256": "2e9d15095af3f3a00bf8596054e6d4a2a8ad35c0e92d2db08aa09ea6cc22d0ce"
+      },
+      "native_display_rects": [
+        [
+          584,
+          16,
+          640,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          115,
+          111,
+          1517,
+          892
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        588,
+        16
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE transparent sea-monster fish animation frame, never an atlas.\nInput images: Image 1 is the original game's exact whole-fish pose for OPENMON1.SS frame 8; paper and map lines in this reference are background only. Image 2 is the approved HD master for this animation. Image 3 is the established original HD fish design/style.\nPrimary request: make a consistent animation variant of the fish in image 2, changing only its mouth/eye and orange tail pose to match image 1. Read the whole original fish silhouette carefully, including how high the tail is lifted and how far the mouth opens. Keep the head and eye in the same relative location, identical green-gold scales, blue-green lower fins, one eye and one forked orange tail. Keep the same body proportions, canvas framing, camera and fish scale as image 2; do not shrink, enlarge, rotate, flip or redesign the fish. Preserve the crisp refined pixel clusters and color shading of image 2. The complete fish must remain inside the canvas with a transparent margin. Background is genuinely transparent; no paper, map lines, blue rectangle, text, label, water, watermark or second object. Deliver exactly one full fish in this single frame.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-composite-008-r1.png": "a0a37cec7004055f0ada0af7a5adfdeaefc005da58d7d83d5622ebc1b7a9745c",
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-000-candidate-r1.png": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openmon1-009.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "3e1e9e69ef9b1e5316dc675cecf6f12763419ccc6e03701f5ff5040abcbcec44",
+      "bytes": 830555,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        51,
+        29
+      ],
+      "target_size": [
+        220,
+        144
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON1.SS",
+        "sha256": "5da6ea59ab914fe4f73947c6925bbebb85815a5213e63bbcc6cdf6d44b61e1cd",
+        "ordinal": 9,
+        "encoded_sha256": "b8a69ed1b4e7d4fa2a66f7670eeae163787135f979e411139fb81678ad2963eb",
+        "indexed_sha256": "09cd68e36fd4b3ef03e955804ab9111e1cd828896978e0e135949734111c4be0"
+      },
+      "native_display_rects": [
+        [
+          584,
+          19,
+          639,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          115,
+          91,
+          1515,
+          895
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        588,
+        19
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE transparent sea-monster fish animation frame, never an atlas.\nInput images: Image 1 is the original game's exact whole-fish pose for OPENMON1.SS frame 9; paper and map lines in this reference are background only. Image 2 is the approved HD master for this animation. Image 3 is the established original HD fish design/style.\nPrimary request: make a consistent animation variant of the fish in image 2, changing only its mouth/eye and orange tail pose to match image 1. Read the whole original fish silhouette carefully, including how high the tail is lifted and how far the mouth opens. Keep the head and eye in the same relative location, identical green-gold scales, blue-green lower fins, one eye and one forked orange tail. Keep the same body proportions, canvas framing, camera and fish scale as image 2; do not shrink, enlarge, rotate, flip or redesign the fish. Preserve the crisp refined pixel clusters and color shading of image 2. The complete fish must remain inside the canvas with a transparent margin. Background is genuinely transparent; no paper, map lines, blue rectangle, text, label, water, watermark or second object. Deliver exactly one full fish in this single frame.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-composite-009-r1.png": "16f25994cdeddd573c555ecba751c41dd4b81bb2666534309bf96cd75998c8d8",
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-000-candidate-r1.png": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openmon1-010.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "74047eec81fd866e8b0e86172802f956502f6c3964904d904a519e2fee89aaa3",
+      "bytes": 836829,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        51,
+        28
+      ],
+      "target_size": [
+        220,
+        140
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON1.SS",
+        "sha256": "5da6ea59ab914fe4f73947c6925bbebb85815a5213e63bbcc6cdf6d44b61e1cd",
+        "ordinal": 10,
+        "encoded_sha256": "d65b183a039284af24215d488c12c83a869782cb2974baa084cdce818320996d",
+        "indexed_sha256": "5e19e41e23507520514a760a1836e555d8f7daeb081cf595a484fbf3ae506a9a"
+      },
+      "native_display_rects": [
+        [
+          584,
+          20,
+          639,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          114,
+          110,
+          1520,
+          895
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        588,
+        20
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE transparent sea-monster fish animation frame, never an atlas.\nInput images: Image 1 is the original game's exact whole-fish pose for OPENMON1.SS frame 10; paper and map lines in this reference are background only. Image 2 is the approved HD master for this animation. Image 3 is the established original HD fish design/style.\nPrimary request: make a consistent animation variant of the fish in image 2, changing only its mouth/eye and orange tail pose to match image 1. Read the whole original fish silhouette carefully, including how high the tail is lifted and how far the mouth opens. Keep the head and eye in the same relative location, identical green-gold scales, blue-green lower fins, one eye and one forked orange tail. Keep the same body proportions, canvas framing, camera and fish scale as image 2; do not shrink, enlarge, rotate, flip or redesign the fish. Preserve the crisp refined pixel clusters and color shading of image 2. The complete fish must remain inside the canvas with a transparent margin. Background is genuinely transparent; no paper, map lines, blue rectangle, text, label, water, watermark or second object. Deliver exactly one full fish in this single frame.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-composite-010-r1.png": "ce39bae434f721619c0d03278b6597237609b20fbdc6f83430c813a28135f8c2",
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-000-candidate-r1.png": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openmon1-011.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "2fa3f725f40c5605631747506482fcdf4f916e4520623e170f91000f12794fa2",
+      "bytes": 807925,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        51,
+        31
+      ],
+      "target_size": [
+        220,
+        152
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON1.SS",
+        "sha256": "5da6ea59ab914fe4f73947c6925bbebb85815a5213e63bbcc6cdf6d44b61e1cd",
+        "ordinal": 11,
+        "encoded_sha256": "f5bb9d3494aa85c7b0e7782f6318f73c742c13c3517655ad7881adcdf5f3b7e0",
+        "indexed_sha256": "c07a0a95f36b943aa80d45d535d47fef5d17a284e9b3c70a7e0a5448196744ec"
+      },
+      "native_display_rects": [
+        [
+          584,
+          17,
+          639,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          124,
+          123,
+          1512,
+          895
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        588,
+        17
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE transparent sea-monster fish animation frame, never an atlas.\nInput images: Image 1 is the original game's exact whole-fish pose for OPENMON1.SS frame 11; paper and map lines in this reference are background only. Image 2 is the approved HD master for this animation. Image 3 is the established original HD fish design/style.\nPrimary request: make a consistent animation variant of the fish in image 2, changing only its mouth/eye and orange tail pose to match image 1. Read the whole original fish silhouette carefully, including how high the tail is lifted and how far the mouth opens. Keep the head and eye in the same relative location, identical green-gold scales, blue-green lower fins, one eye and one forked orange tail. Keep the same body proportions, canvas framing, camera and fish scale as image 2; do not shrink, enlarge, rotate, flip or redesign the fish. Preserve the crisp refined pixel clusters and color shading of image 2. The complete fish must remain inside the canvas with a transparent margin. Background is genuinely transparent; no paper, map lines, blue rectangle, text, label, water, watermark or second object. Deliver exactly one full fish in this single frame.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-composite-011-r1.png": "c998aafdd19db09c24b7b76da2820cc601d1c5d17c89a4dee1cef974e0452b9c",
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-000-candidate-r1.png": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openmon1-012.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "6d405f7fc0520592090e68c6e77bf9474d16c0b77adaa5ba66c201d60de76d00",
+      "bytes": 857718,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        51,
+        32
+      ],
+      "target_size": [
+        220,
+        156
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON1.SS",
+        "sha256": "5da6ea59ab914fe4f73947c6925bbebb85815a5213e63bbcc6cdf6d44b61e1cd",
+        "ordinal": 12,
+        "encoded_sha256": "fde58cd6969598c5de76029d375d3ab4c42612303ac87eb71e5c44f9a4fb8358",
+        "indexed_sha256": "5442ebf73b8c019670585d9c002816744b2bf8b2ffb7d16ccb156092629beb3c"
+      },
+      "native_display_rects": [
+        [
+          584,
+          16,
+          639,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          103,
+          62,
+          1527,
+          945
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        588,
+        16
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE transparent sea-monster fish animation frame, never an atlas.\nInput images: Image 1 is the original game's exact whole-fish pose for OPENMON1.SS frame 12; paper and map lines in this reference are background only. Image 2 is the approved HD master for this animation. Image 3 is the established original HD fish design/style.\nPrimary request: make a consistent animation variant of the fish in image 2, changing only its mouth/eye and orange tail pose to match image 1. Read the whole original fish silhouette carefully, including how high the tail is lifted and how far the mouth opens. Keep the head and eye in the same relative location, identical green-gold scales, blue-green lower fins, one eye and one forked orange tail. Keep the same body proportions, canvas framing, camera and fish scale as image 2; do not shrink, enlarge, rotate, flip or redesign the fish. Preserve the crisp refined pixel clusters and color shading of image 2. The complete fish must remain inside the canvas with a transparent margin. Background is genuinely transparent; no paper, map lines, blue rectangle, text, label, water, watermark or second object. Deliver exactly one full fish in this single frame.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-composite-012-r1.png": "f39a1008e7df299b039e8519268fc235996ef60864fb39cb5c86e0246978452b",
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-000-candidate-r1.png": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openmon1-013.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "4cda4b2c1d0c7c1c7b856fca859a012851fb989e8256cb6422ac65b980cadd46",
+      "bytes": 783428,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        50,
+        24
+      ],
+      "target_size": [
+        216,
+        144
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON1.SS",
+        "sha256": "5da6ea59ab914fe4f73947c6925bbebb85815a5213e63bbcc6cdf6d44b61e1cd",
+        "ordinal": 13,
+        "encoded_sha256": "e09442cbab47941e1e299022eb6e4ef623e57e7dedd8be5283a521c682e2ef46",
+        "indexed_sha256": "e274500e3a19253c9eb061a2804c90f04224bad627d23138cacdbf20ad8c55b5"
+      },
+      "native_display_rects": [
+        [
+          584,
+          19,
+          638,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          116,
+          128,
+          1519,
+          895
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        588,
+        19
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE transparent sea-monster fish animation frame, never an atlas.\nInput images: Image 1 is the original game's exact whole-fish pose for OPENMON1.SS frame 13; paper and map lines in this reference are background only. Image 2 is the approved HD master for this animation. Image 3 is the established original HD fish design/style.\nPrimary request: make a consistent animation variant of the fish in image 2, changing only its mouth/eye and orange tail pose to match image 1. Read the whole original fish silhouette carefully, including how high the tail is lifted and how far the mouth opens. Keep the head and eye in the same relative location, identical green-gold scales, blue-green lower fins, one eye and one forked orange tail. Keep the same body proportions, canvas framing, camera and fish scale as image 2; do not shrink, enlarge, rotate, flip or redesign the fish. Preserve the crisp refined pixel clusters and color shading of image 2. The complete fish must remain inside the canvas with a transparent margin. Background is genuinely transparent; no paper, map lines, blue rectangle, text, label, water, watermark or second object. Deliver exactly one full fish in this single frame.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-composite-013-r1.png": "c13372d22a1050c057f5eeb33c0feabdfc0247a3dcb6e2954917ccb127535b97",
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-000-candidate-r1.png": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openmon1-014.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "a19437e2265404a4decc585023d5a4249f9f516c1b682d49873bf1031d24d9c9",
+      "bytes": 807583,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        50,
+        23
+      ],
+      "target_size": [
+        216,
+        140
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON1.SS",
+        "sha256": "5da6ea59ab914fe4f73947c6925bbebb85815a5213e63bbcc6cdf6d44b61e1cd",
+        "ordinal": 14,
+        "encoded_sha256": "123a2a4e49e07b1414e8d5cddb6b4f4599cf0e5a4e572b64e0ca5a64f6c5fa3d",
+        "indexed_sha256": "60c7867963596c70ea4d397ea1d0e5f05b8ac33bf0b0ab6fd32033916feb5e8b"
+      },
+      "native_display_rects": [
+        [
+          584,
+          20,
+          638,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          123,
+          104,
+          1518,
+          894
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        588,
+        20
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE transparent sea-monster fish animation frame, never an atlas.\nInput images: Image 1 is the original game's exact whole-fish pose for OPENMON1.SS frame 14; paper and map lines in this reference are background only. Image 2 is the approved HD master for this animation. Image 3 is the established original HD fish design/style.\nPrimary request: make a consistent animation variant of the fish in image 2, changing only its mouth/eye and orange tail pose to match image 1. Read the whole original fish silhouette carefully, including how high the tail is lifted and how far the mouth opens. Keep the head and eye in the same relative location, identical green-gold scales, blue-green lower fins, one eye and one forked orange tail. Keep the same body proportions, canvas framing, camera and fish scale as image 2; do not shrink, enlarge, rotate, flip or redesign the fish. Preserve the crisp refined pixel clusters and color shading of image 2. The complete fish must remain inside the canvas with a transparent margin. Background is genuinely transparent; no paper, map lines, blue rectangle, text, label, water, watermark or second object. Deliver exactly one full fish in this single frame.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-composite-014-r1.png": "a877f0cb29cf95d74dd399077493d82a8e13f6e07895e7021bd8de1ffd33ac86",
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-000-candidate-r1.png": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openmon2-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "4df21248859a401ef388740f6089a102f9c5184a2532ba39cd3ddf18f8364d02",
+      "bytes": 797840,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        51,
+        26
+      ],
+      "target_size": [
+        220,
+        132
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON2.SS",
+        "sha256": "4a56a5a3646e98a51de1f0b4c3376ab9db12c00d42972b58857ff485b634a490",
+        "ordinal": 0,
+        "encoded_sha256": "317e62a24993cfe844dfb02af6c672578b3c41f013dbc003d03159034e77def4",
+        "indexed_sha256": "2e019460ac044fcb51afd358c958a1ec8cfdc1790f39fc07e64cda87538fc119"
+      },
+      "native_display_rects": [
+        [
+          584,
+          22,
+          639,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          117,
+          114,
+          1518,
+          893
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        588,
+        22
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE transparent sea-monster fish animation frame, never an atlas.\nInput images: Image 1 is the original game's exact whole-fish pose for OPENMON2.SS frame 0; paper and map lines in this reference are background only. Image 2 is the approved HD master for this animation. Image 3 is the established original HD fish design/style.\nPrimary request: make a consistent animation variant of the fish in image 2, changing only its mouth/eye and orange tail pose to match image 1. Read the whole original fish silhouette carefully, including how high the tail is lifted and how far the mouth opens. Keep the head and eye in the same relative location, identical green-gold scales, blue-green lower fins, one eye and one forked orange tail. Keep the same body proportions, canvas framing, camera and fish scale as image 2; do not shrink, enlarge, rotate, flip or redesign the fish. Preserve the crisp refined pixel clusters and color shading of image 2. The complete fish must remain inside the canvas with a transparent margin. Background is genuinely transparent; no paper, map lines, blue rectangle, text, label, water, watermark or second object. Deliver exactly one full fish in this single frame.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon2-composite-000-r1.png": "18f1fde25b58de6b456031f80fa8cf89dfc1bb08e95d42cb8a0e3e6b62846d6a",
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-000-candidate-r1.png": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openmon2-001.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "aa6f665b8a66e3374fc9b01043d7cd534f2864f3a99e30b007f4590d0f9f568a",
+      "bytes": 795443,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        52,
+        29
+      ],
+      "target_size": [
+        224,
+        140
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON2.SS",
+        "sha256": "4a56a5a3646e98a51de1f0b4c3376ab9db12c00d42972b58857ff485b634a490",
+        "ordinal": 1,
+        "encoded_sha256": "174d02934e808f6a6ca765ec15c881172d08fea127cadd767551e79760d949f1",
+        "indexed_sha256": "6e187b8cea036ac6d07df479a814770bf515018e2f8c5f6f25938f0ce8d18496"
+      },
+      "native_display_rects": [
+        [
+          584,
+          20,
+          640,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          118,
+          112,
+          1505,
+          895
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        588,
+        20
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE transparent sea-monster fish animation frame, never an atlas.\nInput images: Image 1 is the original game's exact whole-fish pose for OPENMON2.SS frame 1; paper and map lines in this reference are background only. Image 2 is the approved HD master for this animation. Image 3 is the established original HD fish design/style.\nPrimary request: make a consistent animation variant of the fish in image 2, changing only its mouth/eye and orange tail pose to match image 1. Read the whole original fish silhouette carefully, including how high the tail is lifted and how far the mouth opens. Keep the head and eye in the same relative location, identical green-gold scales, blue-green lower fins, one eye and one forked orange tail. Keep the same body proportions, canvas framing, camera and fish scale as image 2; do not shrink, enlarge, rotate, flip or redesign the fish. Preserve the crisp refined pixel clusters and color shading of image 2. The complete fish must remain inside the canvas with a transparent margin. Background is genuinely transparent; no paper, map lines, blue rectangle, text, label, water, watermark or second object. Deliver exactly one full fish in this single frame.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon2-composite-001-r1.png": "1f183dc6f036d08140d055b96a33b90608566fca1cef3d7f82c4a23c99ebd2fb",
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-000-candidate-r1.png": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openmon2-002.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "5c4079882c28e4603d227184043b6f863b52c9be2b8c127fff72c8061eb505f2",
+      "bytes": 802652,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        52,
+        32
+      ],
+      "target_size": [
+        224,
+        152
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON2.SS",
+        "sha256": "4a56a5a3646e98a51de1f0b4c3376ab9db12c00d42972b58857ff485b634a490",
+        "ordinal": 2,
+        "encoded_sha256": "f1e8c20630cfda52f24a5ff87c8e43646f757f643394615a17e23c47462339ff",
+        "indexed_sha256": "8297b54e836c2aaba92e84157d6e66075ca2dc6497026ba8cc2dcdb4992c0d26"
+      },
+      "native_display_rects": [
+        [
+          584,
+          17,
+          640,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          138,
+          92,
+          1511,
+          911
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        588,
+        17
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE transparent sea-monster fish animation frame, never an atlas.\nInput images: Image 1 is the original game's exact whole-fish pose for OPENMON2.SS frame 2; paper and map lines in this reference are background only. Image 2 is the approved HD master for this animation. Image 3 is the established original HD fish design/style.\nPrimary request: make a consistent animation variant of the fish in image 2, changing only its mouth/eye and orange tail pose to match image 1. Read the whole original fish silhouette carefully, including how high the tail is lifted and how far the mouth opens. Keep the head and eye in the same relative location, identical green-gold scales, blue-green lower fins, one eye and one forked orange tail. Keep the same body proportions, canvas framing, camera and fish scale as image 2; do not shrink, enlarge, rotate, flip or redesign the fish. Preserve the crisp refined pixel clusters and color shading of image 2. The complete fish must remain inside the canvas with a transparent margin. Background is genuinely transparent; no paper, map lines, blue rectangle, text, label, water, watermark or second object. Deliver exactly one full fish in this single frame.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon2-composite-002-r1.png": "225aa9e85dcddfb4698a7279fec96166f609d84b1cb2081b50c0584b62a1b6b8",
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-000-candidate-r1.png": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openmon2-003.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "00176841dffebde08636fa70d8014873802c8509e7904b6eb800e1c218118903",
+      "bytes": 793987,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        52,
+        33
+      ],
+      "target_size": [
+        224,
+        156
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON2.SS",
+        "sha256": "4a56a5a3646e98a51de1f0b4c3376ab9db12c00d42972b58857ff485b634a490",
+        "ordinal": 3,
+        "encoded_sha256": "85d01b8a092707a0c8c85348d6bc17333ee052e2e2535c606d916891296b5954",
+        "indexed_sha256": "1a349ea36ec012855b7cb55c43e5db44502088e3d5444113fc8bc6d887d1fcc1"
+      },
+      "native_display_rects": [
+        [
+          584,
+          16,
+          640,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          119,
+          125,
+          1513,
+          895
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        588,
+        16
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE transparent sea-monster fish animation frame, never an atlas.\nInput images: Image 1 is the original game's exact whole-fish pose for OPENMON2.SS frame 3; paper and map lines in this reference are background only. Image 2 is the approved HD master for this animation. Image 3 is the established original HD fish design/style.\nPrimary request: make a consistent animation variant of the fish in image 2, changing only its mouth/eye and orange tail pose to match image 1. Read the whole original fish silhouette carefully, including how high the tail is lifted and how far the mouth opens. Keep the head and eye in the same relative location, identical green-gold scales, blue-green lower fins, one eye and one forked orange tail. Keep the same body proportions, canvas framing, camera and fish scale as image 2; do not shrink, enlarge, rotate, flip or redesign the fish. Preserve the crisp refined pixel clusters and color shading of image 2. The complete fish must remain inside the canvas with a transparent margin. Background is genuinely transparent; no paper, map lines, blue rectangle, text, label, water, watermark or second object. Deliver exactly one full fish in this single frame.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon2-composite-003-r1.png": "513ffa3bd9d9066d567106a88cbc815269aec5d91e8d2facea3f653f461f09eb",
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-000-candidate-r1.png": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openmon2-004.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "d679f6b15e1121a215c5f322edb0102123359a31a528aee6538a730f7cb037cd",
+      "bytes": 800060,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        52,
+        30
+      ],
+      "target_size": [
+        224,
+        144
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON2.SS",
+        "sha256": "4a56a5a3646e98a51de1f0b4c3376ab9db12c00d42972b58857ff485b634a490",
+        "ordinal": 4,
+        "encoded_sha256": "bc32075fc390f7aabde3be14d9a0b498eb1fd69693cac0c9b35c6e64769d8ab0",
+        "indexed_sha256": "ee2ee143d0d4b108c17d14b105e902aad5572b74905a47a29dcd0a949e5f551d"
+      },
+      "native_display_rects": [
+        [
+          584,
+          19,
+          640,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          113,
+          123,
+          1525,
+          893
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        588,
+        19
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE transparent sea-monster fish animation frame, never an atlas.\nInput images: Image 1 is the original game's exact whole-fish pose for OPENMON2.SS frame 4; paper and map lines in this reference are background only. Image 2 is the approved HD master for this animation. Image 3 is the established original HD fish design/style.\nPrimary request: make a consistent animation variant of the fish in image 2, changing only its mouth/eye and orange tail pose to match image 1. Read the whole original fish silhouette carefully, including how high the tail is lifted and how far the mouth opens. Keep the head and eye in the same relative location, identical green-gold scales, blue-green lower fins, one eye and one forked orange tail. Keep the same body proportions, canvas framing, camera and fish scale as image 2; do not shrink, enlarge, rotate, flip or redesign the fish. Preserve the crisp refined pixel clusters and color shading of image 2. The complete fish must remain inside the canvas with a transparent margin. Background is genuinely transparent; no paper, map lines, blue rectangle, text, label, water, watermark or second object. Deliver exactly one full fish in this single frame.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon2-composite-004-r1.png": "9f579a43a025652c9504de9ae74fc10dcf0ce0f1c6f0f447c1d34042be0452f3",
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-000-candidate-r1.png": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "openmon2-005.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "486dcad244e17e78ca4df20506865016c5fa7f0d7d1054f229353e9b76677660",
+      "bytes": 826644,
+      "size": [
+        1551,
+        1014
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        51,
+        28
+      ],
+      "target_size": [
+        220,
+        140
+      ],
+      "sampling": "integer pixel-center nearest from measured visible fish rectangle; whole object and native source geometry recorded separately; raw PNG unchanged",
+      "alpha": "preserve every sampled raw alpha value; integer source-over onto verified object background",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENMON2.SS",
+        "sha256": "4a56a5a3646e98a51de1f0b4c3376ab9db12c00d42972b58857ff485b634a490",
+        "ordinal": 5,
+        "encoded_sha256": "8323dc7f9932e18b0e88e6a23ffe52ad177bb06b323372e0da24c60de39ee83c",
+        "indexed_sha256": "05b9ac153358c15794d0c3adea8a51360c9141c7b753002b0ebc47c4b02a9d9d"
+      },
+      "native_display_rects": [
+        [
+          584,
+          20,
+          639,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          112,
+          112,
+          1522,
+          895
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels; SS intrinsic dimensions and source anchor are separate",
+      "native_source_anchor": [
+        588,
+        20
+      ],
+      "display_layer": "verified complete opening fish object; never a standalone local SS overlay",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: ONE transparent sea-monster fish animation frame, never an atlas.\nInput images: Image 1 is the original game's exact whole-fish pose for OPENMON2.SS frame 5; paper and map lines in this reference are background only. Image 2 is the approved HD master for this animation. Image 3 is the established original HD fish design/style.\nPrimary request: make a consistent animation variant of the fish in image 2, changing only its mouth/eye and orange tail pose to match image 1. Read the whole original fish silhouette carefully, including how high the tail is lifted and how far the mouth opens. Keep the head and eye in the same relative location, identical green-gold scales, blue-green lower fins, one eye and one forked orange tail. Keep the same body proportions, canvas framing, camera and fish scale as image 2; do not shrink, enlarge, rotate, flip or redesign the fish. Preserve the crisp refined pixel clusters and color shading of image 2. The complete fish must remain inside the canvas with a transparent margin. Background is genuinely transparent; no paper, map lines, blue rectangle, text, label, water, watermark or second object. Deliver exactly one full fish in this single frame.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon2-composite-005-r1.png": "7c0d0e91a6567799dd9031683bd846c5d69cc3c0e21f4b0760c6cfa149bd7e66",
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/openmon1-000-candidate-r1.png": "4be2225b476ccb248856408a2b4a04e98970ead6109364e4efacb6adfd03f41f",
+        "graphics/opening-fish-top-000.png": "fc41e7d2fc68792db4cbad80087b17b21379d6ee06803fb2a0e00a199ac7109a"
+      },
+      "coverage": "READY R87 normal57 source/native144, full published object pose and independent21 full RGBA; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "opening-fish-clear-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "96d98080dec2b7f0cdac9fea3e42a0ca093dc7ca6dee90f0c16f4a783ad62ada",
+      "bytes": 1622314,
+      "size": [
+        1503,
+        1047
+      ],
+      "mode": "RGB",
+      "native_size": [
+        56,
+        39
+      ],
+      "target_size": [
+        224,
+        156
+      ],
+      "sampling": "integer pixel-center nearest; dynamic cache only, old generated static-fish alpha selects restoration",
+      "alpha": "opaque generated restoration patch; static source PNG and its alpha unchanged",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENING.PIK",
+        "sha256": "80ea1dd4a00a4029052112882305e573bd7e20066eb095ceabe273a217689185",
+        "ordinal": 0,
+        "indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+      },
+      "native_display_rects": [
+        [
+          584,
+          16,
+          640,
+          55
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          0,
+          0,
+          1503,
+          1047
+        ]
+      ],
+      "coordinate_space": "OPENING.PIK world pixels",
+      "display_layer": "dynamic fish restoration only after complete currently published native pose verification; never static PIK loading",
+      "generation_prompt": "Use case: precise-object-edit\nAsset type: one opaque background restoration patch for a fine pixel-art historical game animation.\nInput image 1 is the exact edit target rendered from the project's approved HD art, and supplies its pixel style, palette, composition and camera.\nPrimary request: Remove the whole green-gold fish, including orange tail, every fin and all its outlines. Reconstruct only the original antique paper/sea shading and thin blue cartographic lines behind it by joining the visible line ends. Keep every preexisting map line, border and letter outside the fish unchanged.\nPreserve the image framing and all retained objects in their original relative positions and proportions. Use the same crisp fine pixel clusters, warm parchment and muted teal sea/map shading. The reconstructed area must blend smoothly with the unchanged surrounding map, with no blur, new ornament, invented lettering, seam or residual fish/cloud/smoke. This is one rectangular opaque map patch, not a cutout; fill the whole canvas with the restored background. No transparency, new object, caption, collage, watermark or atlas.",
+      "reference_sha256": {
+        "workplace/reports/goal186-display-hd/hd-opening-all-animation-r85/opening-fish-clear-reference-r1.png": "46bd150f8b2cf1f25d9aeedb110a3077080421c31acb76717d378de5a43bd68f"
+      },
+      "coverage": "READY R87 fish pose restoration only; formal GUI and final conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
     }
   }
 }

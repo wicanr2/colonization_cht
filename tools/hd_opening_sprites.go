@@ -1,4 +1,4 @@
-// 規格069 R83／R85／R86 READY：開場SS完整呼叫與已發布來源；不改原版RAM、規則或計時。
+// 規格069 R83／R85／R86／R87 READY：開場SS完整呼叫與已發布來源；不改原版RAM、規則或計時。
 package main
 
 import (
@@ -25,19 +25,20 @@ type hdOpeningSpriteCell struct {
 	under     hdOpeningCell
 }
 type hdOpeningSpriteRuntime struct {
+	fish                                                              *hdOpeningFishRuntime
 	p                                                                 *hdOpeningRuntime
-	art                                                               [36]*image.NRGBA
-	native                                                            [36][1175]byte
-	nativeValid                                                       [36]bool
+	art                                                               [57]*image.NRGBA
+	native                                                            [57][1716]byte
+	nativeValid                                                       [57]bool
 	cells, published                                                  [64000]hdOpeningSpriteCell
 	pictures                                                          [64000]hdOpeningCell
 	active, outside                                                   bool
 	selected, x, y                                                    int
 	retCS, retIP, sp                                                  uint16
 	start                                                             uint64
-	counts                                                            [1175]uint16
-	writes                                                            [1175]byte
-	under                                                             [1175]hdOpeningCell
+	counts                                                            [1716]uint16
+	writes                                                            [1716]byte
+	under                                                             [1716]hdOpeningCell
 	accepted, rejected, revoked, same, transfers, unknownVGA, sameVGA uint64
 }
 
@@ -49,7 +50,7 @@ var hdOpeningSpriteWriterCodes = map[uint16][]byte{
 
 func loadHDOpeningSprites(p *hdOpeningRuntime, game, directory string) (*hdOpeningSpriteRuntime, error) {
 	s := &hdOpeningSpriteRuntime{p: p}
-	if len(hdOpeningSpriteDefinitions) != 36 {
+	if len(hdOpeningSpriteDefinitions) != 57 {
 		return nil, fmt.Errorf("opening sprite definition count")
 	}
 	seen := map[string]bool{}
@@ -75,7 +76,7 @@ func loadHDOpeningSprites(p *hdOpeningRuntime, game, directory string) (*hdOpeni
 		if e != nil {
 			return nil, e
 		}
-		if im.Bounds() != image.Rect(0, 0, d.artSize.X, d.artSize.Y) || len(d.nativeRects) != len(d.artRects) || d.w*d.h > 1175 {
+		if im.Bounds() != image.Rect(0, 0, d.artSize.X, d.artSize.Y) || len(d.nativeRects) != len(d.artRects) || d.w*d.h > 1716 {
 			return nil, fmt.Errorf("opening sprite geometry")
 		}
 		dst := image.NewNRGBA(image.Rect(0, 0, d.w*4, d.h*4))
@@ -97,6 +98,11 @@ func loadHDOpeningSprites(p *hdOpeningRuntime, game, directory string) (*hdOpeni
 			}
 		}
 		s.art[i] = dst
+	}
+	var fishErr error
+	s.fish, fishErr = loadHDOpeningFish(s, directory)
+	if fishErr != nil {
+		return nil, fishErr
 	}
 	return s, nil
 }
@@ -133,7 +139,7 @@ func (s *hdOpeningSpriteRuntime) beforeInstruction() {
 		return
 	}
 	ordinal := int(c.R[golem.AX]&0x7fff) - 1
-	if ordinal < 0 || ordinal >= 11 {
+	if ordinal < 0 || ordinal >= 15 {
 		return
 	}
 	stack, ok := hdOpeningSpriteWords(m, c.Seg[golem.SS], c.R[golem.SP], 5)
@@ -358,7 +364,7 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 			continue
 		}
 		slot, known := hdOpeningSpriteSlot(c.id)
-		if !known || slot >= len(hdOpeningSpriteDefinitions) || int(c.local) >= 1175 || !s.nativeValid[slot] || s.native[slot][c.local] != c.value || c.value == 253 || f.indexed[pos] != c.value {
+		if !known || slot >= len(hdOpeningSpriteDefinitions) || int(c.local) >= 1716 || !s.nativeValid[slot] || s.native[slot][c.local] != c.value || c.value == 253 || f.indexed[pos] != c.value {
 			r["reason"] = "sprite-source"
 			return r
 		}
@@ -367,6 +373,7 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 			return r
 		}
 	}
+	fishPose := s.fishPose(f)
 	mask := make([]byte, 8000)
 	spriteMask := make([]byte, 8000)
 	counts := [2]int{}
@@ -375,6 +382,7 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 	sunFrames := [7]int{}
 	windFrames := [10]int{}
 	smokeFrames := [11]int{}
+	fishFrames := [21]int{}
 	for pos := 0; pos < 64000; pos++ {
 		if !image.Pt(pos%320, pos/320).In(bounds) {
 			continue
@@ -384,6 +392,33 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 		actor := s.published[pos]
 		if actor.id != 0 && s.validUnder(actor.under) {
 			pic = actor.under
+		}
+
+		actorFish := actor.id >= 1182 && actor.id <= 1202
+		if actorFish && !s.validUnder(actor.under) {
+			hdOpeningOriginalCell(out, f, pos)
+			continue
+		}
+		if pic.kind == 2 && image.Pt(int(pic.local)%960, int(pic.local)/960).In(hdOpeningFishWorld) && fishPose.present && (actor.id == 0 || actorFish) {
+			wx, wy := int(pic.local)%960, int(pic.local)/960
+			if !fishPose.valid || pos%320 != wx+fishPose.origin.X || pos/320 != wy+fishPose.origin.Y {
+				hdOpeningOriginalCell(out, f, pos)
+				continue
+			}
+			draw.Draw(out, image.Rect(x, y, x+4, y+4), s.fish.art[fishPose.slot], image.Pt((wx-584)*4, (wy-16)*4), draw.Src)
+			if actorFish {
+				sprites++
+				fishFrames[int(actor.id)-1182]++
+				spriteMask[pos>>3] |= 1 << uint(pos&7)
+			} else {
+				counts[1]++
+				mask[pos>>3] |= 1 << uint(pos&7)
+			}
+			continue
+		}
+		if actorFish {
+			hdOpeningOriginalCell(out, f, pos)
+			continue
 		}
 		if pic.kind == 0 {
 			continue
@@ -432,6 +467,12 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 	r["sun_frames"] = sunFrames
 	r["wind_frames"] = windFrames
 	r["smoke_frames"] = smokeFrames
+	r["fish_frames"] = fishFrames
+	poseID := 0
+	if fishPose.valid {
+		poseID = 1182 + fishPose.slot
+	}
+	r["fish_object"] = map[string]any{"state": "READY", "formal": true, "present": fishPose.present, "verified": fishPose.valid, "reason": fishPose.reason, "pose_id": poseID, "origin": fishPose.origin, "candidates": fishPose.candidates, "foreground_cells": fishPose.foreground}
 	r["picture_mask"] = mask
 	r["sprite_mask"] = spriteMask
 	r["reason"] = "verified-published-opening"
@@ -445,6 +486,9 @@ func hdOpeningSpriteSlot(id uint16) (int, bool) {
 	}
 	if id >= 1266 && id <= 1286 {
 		return int(id - 1251), true
+	}
+	if id >= 1182 && id <= 1202 {
+		return int(id-1182) + 36, true
 	}
 	return 0, false
 }

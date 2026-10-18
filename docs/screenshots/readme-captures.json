@@ -533,7 +533,7 @@
       "source_state_check_sha256": "996b7c2211ba721eb9b70b69fe6efd27d53d08ae07d809d4ad61a8dae0ecd0c9",
       "graphics_manifest_sha256": "ffccf30200bd18a49869360222a98f0237ca8fd014711bafcf5f866c7d4618ce",
       "ready_sha256": "10001a1dc561d63913ba159ca4a56054ae3d27b56d8228a58249526eccdf0f73",
-      "verification_state": "READY; normal native145 and full GUI63 source/X11/RGBA passed; complete three-replay review pending",
+      "verification_state": "CONFORMED: scoped R86 wind10/smoke11 normal GUI63 and actual three replay state/audio/save passed",
       "source_kind": "actual formal game presentation; verified byte-for-byte against the real X11 window game area",
       "capture_pixels_unchanged": true,
       "original_source_files": [
@@ -564,7 +564,9 @@
       ],
       "captured_smoke_frames": [],
       "verified_mouse_background_cells": 160,
-      "scope": "正式正常繁中模式開場，圖中吹氣雲第0幀、船隻、太陽與PIK背景來源及X11／RGBA已驗。此圖只表示本狀態；風煙完整21幀另由正常63項證據驗證，三側完整重播尚待完成。其他SS、淡入淡出與全量HD未完成。"
+      "scope": "正式正常繁中模式開場吹氣雲第0幀；本狀態來源、完整RGBA及X11已驗。完整風煙21幀與當次三側原版狀態／WAV／存檔已限定CONFORMED。其他SS、淡入淡出與全量HD未完成。",
+      "conformance_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+      "replay_check_sha256": "d8e50e80069ca56917a74541ddfb65ad05f987408cb2b2fb1de44b36877e2eaf"
     }
   ],
   "limitations": [
@@ -586,7 +588,8 @@
     "R81新增繁中成功訊息實拍，共十七張；內部WOODTILE木紋、字底與一般箭頭已HD。R80當時的未知字底限制保留為歷史紀錄；其餘圖像、動畫、完整五語與新版交付仍未完成。",
     "R82新增開場長圖與邊框實拍，共十八張；原版移動船及其他未知前景保留。13張生成原PNG與既有134張原稿已入graphics，其他圖像、動畫、完整五語及新版交付仍未完成。",
     "R83刷新開場實拍，加入已驗船隻八幀；R82當時移動船保留原圖的限制作歷史紀錄。共十八張，其他十七張及逐圖來源保持。其他SS、淡入淡出、其他圖像、完整五語、影片與新版交付仍未完成。",
-    "R86刷新正常繁中模式的吹氣雲第0幀實拍，PNG直接複製未重編碼；63項正常GUI的原版來源、完整RGBA／X11及17個Noto欄位已驗。三側完整重播尚待收齊，維持READY；其他十七張與逐圖來源保持，其他圖像、完整五語與全量HD未完成。"
+    "R86刷新正常繁中模式的吹氣雲第0幀實拍，PNG直接複製未重編碼；63項正常GUI的原版來源、完整RGBA／X11及17個Noto欄位已驗。三側完整重播尚待收齊，維持READY；其他十七張與逐圖來源保持，其他圖像、完整五語與全量HD未完成。",
+    "R86當次三側完整重播已收齊並限定CONFORMED，取代前項READY限制；PNG及原始捕捉程式指紋不變。R87魚形接線不混入此圖驗收。"
   ],
   "previous_build": {
     "kind": "README actual development screenshots",
@@ -792,7 +795,7 @@
     },
     "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb"
   },
-  "conformance_state": "READY; normal native145 and full GUI63 source/X11/RGBA passed; complete three-replay review pending",
+  "conformance_state": "CONFORMED for the captured R86 opening wind/smoke scope; subsequent R87 fish and full HD remain incomplete",
   "previous_opening_sun_capture": {
     "capture": {
       "file": "hd-opening-zh.png",

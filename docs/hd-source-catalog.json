@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "78d7a27f98c9eab13ba61ec6661acc681d194b334593c7e5fc4b73eac16824db",
+  "formal_manifest_sha256": "ffccf30200bd18a49869360222a98f0237ca8fd014711bafcf5f866c7d4618ce",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -43644,9 +43644,18 @@
       "indexed_sha256": "8f55a7fd1a64698d5f2d49fb9f6d1c0015cf169f12ddb7fd9dfc6bad1aceb624",
       "opaque_pixels": 173,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd1-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1267,
@@ -43669,9 +43678,18 @@
       "indexed_sha256": "8fca18e04ad5cd7f5196a5ad0464d62fc172039f03b0dbb989498ebee1d3fd93",
       "opaque_pixels": 297,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd1-001.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1268,
@@ -43694,9 +43712,18 @@
       "indexed_sha256": "6b7fa5d53c4ee80324f1667886294bd9f9290d847d07f655d8692bfcb52ff71b",
       "opaque_pixels": 305,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd1-002.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1269,
@@ -43719,9 +43746,18 @@
       "indexed_sha256": "055ae34bc4330c1bbfd3eb3a1c68446212d1376918ed0f5d3bc235a1b7ea2136",
       "opaque_pixels": 308,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd1-003.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1270,
@@ -43744,9 +43780,18 @@
       "indexed_sha256": "b7bc2c76a3e4a1b7c911c5b98544825bf06e584e1601dbcf744b6db7077a2442",
       "opaque_pixels": 301,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd1-004.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1271,
@@ -43769,9 +43814,18 @@
       "indexed_sha256": "8fca18e04ad5cd7f5196a5ad0464d62fc172039f03b0dbb989498ebee1d3fd93",
       "opaque_pixels": 297,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd1-005.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1272,
@@ -43794,9 +43848,18 @@
       "indexed_sha256": "6b7fa5d53c4ee80324f1667886294bd9f9290d847d07f655d8692bfcb52ff71b",
       "opaque_pixels": 305,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd1-006.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1273,
@@ -43819,9 +43882,18 @@
       "indexed_sha256": "055ae34bc4330c1bbfd3eb3a1c68446212d1376918ed0f5d3bc235a1b7ea2136",
       "opaque_pixels": 308,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd1-007.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1274,
@@ -43844,9 +43916,18 @@
       "indexed_sha256": "b7bc2c76a3e4a1b7c911c5b98544825bf06e584e1601dbcf744b6db7077a2442",
       "opaque_pixels": 301,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd1-008.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1275,
@@ -43869,9 +43950,18 @@
       "indexed_sha256": "8f55a7fd1a64698d5f2d49fb9f6d1c0015cf169f12ddb7fd9dfc6bad1aceb624",
       "opaque_pixels": 173,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd1-009.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1276,
@@ -43894,9 +43984,18 @@
       "indexed_sha256": "0e5b1786a08001625500c4d07b7a12a0c93a953cf42bc9c3388613d2aacff137",
       "opaque_pixels": 273,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd2-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1277,
@@ -43919,9 +44018,18 @@
       "indexed_sha256": "dcd2e4575fe2d461cb719225463b01f4c305d9816eb961e159e17fb36ce71ac8",
       "opaque_pixels": 389,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd2-001.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1278,
@@ -43944,9 +44052,18 @@
       "indexed_sha256": "4d701580a0dfad945b511b4f6780dec4d7631f8ef15bd71168b49b15e30c67a8",
       "opaque_pixels": 397,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd2-002.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1279,
@@ -43969,9 +44086,18 @@
       "indexed_sha256": "24faf4a515d450940235c6d9c6d9ca8e97899ab687e74f86f6d2659e007f6948",
       "opaque_pixels": 407,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd2-003.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1280,
@@ -43994,9 +44120,18 @@
       "indexed_sha256": "6110a183f7f8736780179e03524c07ac1c8e605b515723008364366266f0302b",
       "opaque_pixels": 406,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd2-004.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1281,
@@ -44019,9 +44154,18 @@
       "indexed_sha256": "a490ed5302e0d5da7a58b88a216da8ebb14c203f0137ad90be259a32e0cd09c9",
       "opaque_pixels": 403,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd2-005.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1282,
@@ -44044,9 +44188,18 @@
       "indexed_sha256": "03e354915b824ec0266dad91e1a67d0fa7ebb0aa6d7d13b98984afb09e56a07a",
       "opaque_pixels": 393,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd2-006.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1283,
@@ -44069,9 +44222,18 @@
       "indexed_sha256": "ef229085313502ab3c7814ff3cfca460aa2e9c2443b35feae688dd4ed6b59d92",
       "opaque_pixels": 398,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd2-007.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1284,
@@ -44094,9 +44256,18 @@
       "indexed_sha256": "7edbdbb010747824815f4cb33bd3c0920d7499040324289c747e6cdbe21d5916",
       "opaque_pixels": 405,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd2-008.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1285,
@@ -44119,9 +44290,18 @@
       "indexed_sha256": "38f53f64fe1b6af233467d17fb699b585a2e49aeeb1581f81e1be882e5f90d19",
       "opaque_pixels": 399,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd2-009.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1286,
@@ -44144,9 +44324,18 @@
       "indexed_sha256": "0e5b1786a08001625500c4d07b7a12a0c93a953cf42bc9c3388613d2aacff137",
       "opaque_pixels": 273,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; verified ship foreground retains two covered wind cells",
+      "animation_evidence": "confirmed ten cloud and eleven smoke frames on normal GUI; original timing, position, foreground and raw source alpha retained",
+      "formal_assets": [
+        "openwnd2-010.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+        "scope": "ten OPENWND1 cloud and eleven OPENWND2 smoke frames only; exact native source and publication, original static PIK and ship occlusion, raw PNG alpha; recorded normal GUI and original timing"
+      }
     },
     {
       "research_id": 1287,
@@ -59631,6 +59820,216 @@
       "source_encoded_sha256": "6ac7720f76b203a4db62ca2bc95f002078e320f5d678e74117921d3b31d0fd7b",
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd1-000.png",
+      "asset_sha256": "640eae91aa2d7c5c0b2458ca2ed5878a7eb1d8dd25ceee25798c7ab3d9dc4728",
+      "source_research_id": 1266,
+      "source_file": "OPENWND1.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "631a5fbe326be17e666d24e2c2abe57f6c1fdf48283091b7bc26374aad9f84ab",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd1-001.png",
+      "asset_sha256": "126bb44afc8a1c2738206c06d1e7151751c18fd2ef53bd7f34555afb69f832ee",
+      "source_research_id": 1267,
+      "source_file": "OPENWND1.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "3b82944c0cbd56b367c0ffbfd6c7987ec4e3502d238adcaa6e035ed757dfcc20",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd1-002.png",
+      "asset_sha256": "1d6c3505856bf540dafbd274d397436b7da9f9fc94328b282c218c6779220cfc",
+      "source_research_id": 1268,
+      "source_file": "OPENWND1.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "50171f81373fb5bd8c3357ad58ffa6e9be43bc0545fdb42d1cd25613e662f014",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd1-003.png",
+      "asset_sha256": "711f736403512f20b7719c8707dd8e6c50c4fb0a0c76536e09c48981a08e403a",
+      "source_research_id": 1269,
+      "source_file": "OPENWND1.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "ab3fcf3ba9a850745aac77d59684f281c3ee0bbadde38c5fba5b88726b765c34",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd1-004.png",
+      "asset_sha256": "71214636aaef151352e438304af57d56734f0622ef0bb33e9dee51b6b5cfc5c3",
+      "source_research_id": 1270,
+      "source_file": "OPENWND1.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "e3b39a1a098f5883f2ed753b542277005fbb685f2fd7150908f6141b63e62f9f",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd1-005.png",
+      "asset_sha256": "126bb44afc8a1c2738206c06d1e7151751c18fd2ef53bd7f34555afb69f832ee",
+      "source_research_id": 1271,
+      "source_file": "OPENWND1.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "3b82944c0cbd56b367c0ffbfd6c7987ec4e3502d238adcaa6e035ed757dfcc20",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd1-006.png",
+      "asset_sha256": "1d6c3505856bf540dafbd274d397436b7da9f9fc94328b282c218c6779220cfc",
+      "source_research_id": 1272,
+      "source_file": "OPENWND1.SS",
+      "source_ordinal": 6,
+      "source_encoded_sha256": "50171f81373fb5bd8c3357ad58ffa6e9be43bc0545fdb42d1cd25613e662f014",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd1-007.png",
+      "asset_sha256": "711f736403512f20b7719c8707dd8e6c50c4fb0a0c76536e09c48981a08e403a",
+      "source_research_id": 1273,
+      "source_file": "OPENWND1.SS",
+      "source_ordinal": 7,
+      "source_encoded_sha256": "ab3fcf3ba9a850745aac77d59684f281c3ee0bbadde38c5fba5b88726b765c34",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd1-008.png",
+      "asset_sha256": "71214636aaef151352e438304af57d56734f0622ef0bb33e9dee51b6b5cfc5c3",
+      "source_research_id": 1274,
+      "source_file": "OPENWND1.SS",
+      "source_ordinal": 8,
+      "source_encoded_sha256": "e3b39a1a098f5883f2ed753b542277005fbb685f2fd7150908f6141b63e62f9f",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd1-009.png",
+      "asset_sha256": "640eae91aa2d7c5c0b2458ca2ed5878a7eb1d8dd25ceee25798c7ab3d9dc4728",
+      "source_research_id": 1275,
+      "source_file": "OPENWND1.SS",
+      "source_ordinal": 9,
+      "source_encoded_sha256": "631a5fbe326be17e666d24e2c2abe57f6c1fdf48283091b7bc26374aad9f84ab",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd2-000.png",
+      "asset_sha256": "50f262a6de52be427996b88e039dea5954088d1aefcd4a00f55ffdc96e8523ba",
+      "source_research_id": 1276,
+      "source_file": "OPENWND2.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "5f0aa4c1dc7c66ae1776456f636de968df5c27bd830794e7c6d97318e6ab8ecf",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd2-001.png",
+      "asset_sha256": "7e8c61222ee8ab952983489d48dfd12a99cd586f3b3c0309e8313df523887bc6",
+      "source_research_id": 1277,
+      "source_file": "OPENWND2.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "d13697176449283bc94085b7c7c54fd7152baac776d23e0ec776dc9071d0fb7e",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd2-002.png",
+      "asset_sha256": "8b6b7709028b1ad8a96e646e33c58ddb110c16d38145cc7952bfd536f4a699a9",
+      "source_research_id": 1278,
+      "source_file": "OPENWND2.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "1879e570627645495b01f59ae9d48606609f112574e87c097cadcc19cc08488d",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd2-003.png",
+      "asset_sha256": "20febf81ab3c84f9d59ce5d72e9eb57c7cf721098f84366b4c030d29af353dcf",
+      "source_research_id": 1279,
+      "source_file": "OPENWND2.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "ff91369dd303b18ca2f26b4bfef04f96d2bc05368c6d2ed5868c80b891f40c3b",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd2-004.png",
+      "asset_sha256": "9f886e5ae1b5ef59461de70ff614c8a41ab6a0584f1ad7d19c76ee1ce5f531ba",
+      "source_research_id": 1280,
+      "source_file": "OPENWND2.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "9b31821a45e238cdf344e00ec01ac9adbc80df7fff775e0e225138867eea0ba7",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd2-005.png",
+      "asset_sha256": "d3afd12231840a64e4e7eaca824b326f67ad3f44eae1ee9cb961103eda7db230",
+      "source_research_id": 1281,
+      "source_file": "OPENWND2.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "48d41245b87341ee0bad30853beca43356065fccdbb47141f27d69551b3bd064",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd2-006.png",
+      "asset_sha256": "c623311dd0ed2a4e26397a7f4d9db7710911537d2b39ddff5133a042de763415",
+      "source_research_id": 1282,
+      "source_file": "OPENWND2.SS",
+      "source_ordinal": 6,
+      "source_encoded_sha256": "b9a80c90bedde8e7c5f3a1d56a66c1c5b455044fecc58302d44c4a84ef125fe4",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd2-007.png",
+      "asset_sha256": "f96ab63b7d87175c656465af86f010cf1414810a97fc86923755aaa8806b2c13",
+      "source_research_id": 1283,
+      "source_file": "OPENWND2.SS",
+      "source_ordinal": 7,
+      "source_encoded_sha256": "57899ef256cd5b66d1c59d629f788bda5f0c2eed312659bc9fcf87164a867502",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd2-008.png",
+      "asset_sha256": "26d8d9cbe543da4e5b29fe47db07175acb30fab0398e15086fbb163d6fb22c18",
+      "source_research_id": 1284,
+      "source_file": "OPENWND2.SS",
+      "source_ordinal": 8,
+      "source_encoded_sha256": "ee4a4316a0265ae6b112d03b4c790959dc7569c0fa5145c1a50976a13c928737",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd2-009.png",
+      "asset_sha256": "900819304747b7c2384f8d17165b7c3872c201eb376ad43cff7425437fbc2959",
+      "source_research_id": 1285,
+      "source_file": "OPENWND2.SS",
+      "source_ordinal": 9,
+      "source_encoded_sha256": "56310d335f4000add28582854cb237a53bbc754a4e048d6d8e2c3781cd907a56",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "openwnd2-010.png",
+      "asset_sha256": "50f262a6de52be427996b88e039dea5954088d1aefcd4a00f55ffdc96e8523ba",
+      "source_research_id": 1286,
+      "source_file": "OPENWND2.SS",
+      "source_ordinal": 10,
+      "source_encoded_sha256": "5f0aa4c1dc7c66ae1776456f636de968df5c27bd830794e7c6d97318e6ab8ecf",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
     }
   ],
   "limitations": [
@@ -60035,5 +60434,37 @@
     "source_handlers_and_native_hooks_byte_unchanged": true,
     "seven_frame_gui_proof_scope": "prior normal GUI plus byte-identical source handlers; current normal GUI verifies changed cursor/caption rendering",
     "claim": "seven OPENSUN frames and closed eye base only; other SS, fades and full HD remain incomplete"
+  },
+  "opening_wind_conformance": {
+    "ready_sha256": "10001a1dc561d63913ba159ca4a56054ae3d27b56d8228a58249526eccdf0f73",
+    "review_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
+    "sources": [
+      1266,
+      1267,
+      1268,
+      1269,
+      1270,
+      1271,
+      1272,
+      1273,
+      1274,
+      1275,
+      1276,
+      1277,
+      1278,
+      1279,
+      1280,
+      1281,
+      1282,
+      1283,
+      1284,
+      1285,
+      1286
+    ],
+    "new_generated_pngs": 15,
+    "reused_png_files": 6,
+    "formal_assets": 184,
+    "gui_samples": 63,
+    "claim": "ten cloud and eleven smoke frames only; other SS, fades and full HD remain incomplete"
   }
 }
