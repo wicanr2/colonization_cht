@@ -1453,3 +1453,38 @@ verify-r81-gui-replays-r1.py；收據為published-texture-conformance-r1.json。
 加--text-cursor與--texture-model；來源由[底紋模型](../../tools/check_hd_published_texture_sources.py)重建。
 來源索引組裝器加--published-texture-ready-report與--published-texture-conformed-report，
 只補兩列有發布正例的來源，其餘1550列與全部原PNG保持。沒有新素材、字模、格式、tag或Release。
+
+
+### R82來源研究，維持DRAFT
+
+入口為[開場唯讀來源探針](../../tools/probe_hd_opening_sources.go)。
+參數為-game唯讀原版、-decoded既有本機pixels、-out新的/out內目錄，-control停用監看。
+預設只觀測主畫布與長圖記憶體；-vga-samples可另外記VGA入口。
+探針核對原版及解碼指紋、拒絕root或非Docker執行，原版缺失明確skip。
+同一Go workspace沿workplace/dosgolem與Go1.26.7工具鏈，主機不得直接go run。
+
+R7公開探針與無監看控制80點相同，且逐點與R6的完整RAM、CPU、IDX、DAC、PNG及檔案讀取相同。
+R6另數到379212845筆VGA寫入，只有896筆入口樣本；樣本不等於完整來源追蹤。
+正常Enter在800000步，終點16000000步；沿既有目標146的正常開場路徑，不是direct-entry。
+原版OPENING.EXE為3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39。
+
+confirmed：完整長圖126720格出現在實體RAM 0x38630，邊框64000格在0x1C430；
+分別以原始索引SHA-256核對。0AC2:04F4／0550為已觀測PIK寫入碼，
+03BD:00C8的f3a503f3790c81ee00808cd981c10008將長圖複製到主畫布。
+首個已見長圖樣本在5001463步，來源0x38630+640，目的0x1C430+24×320。
+0557:009F是整張主畫布送VGA，008E／0090是矩形複製；6M至15.8M抽樣主畫布與VGA全等。
+開場32個程式碼位元組在VICEROY控制組中已不同，但完整退場生命週期仍待模型驗證。
+位址基準為dosgolem real-mode CS:IP與20-bit實體RAM，不是IDA EA。
+
+0x38630範圍在2.3M時曾存其他SS資料，早於OPENING.PIK讀取；不能因位址落入此範圍就稱長圖。
+後續模型必須等完整連續解碼及固定原圖雜湊通過，再授予來源；未知同值寫入撤銷。
+基準色盤在RAM 0xAFC00，完整SHA-256為b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54，
+與6M原版DAC相同。黑畫面及完整色盤已有抽樣，中間淡入未驗，不能外推。
+
+長圖候選r2原PNG為2170×725，SHA-256為329d81b975d86764fe944ceb9de2c8a2674db4bb527df34d4fc52d5e7952f351。
+原始PNG完整保存，沿既有目標146的美術分類保留拉丁題字與品牌，不加入UI翻譯鍵。
+原版及未採候選維持本機；幾何、遮擋、動畫銜接、完整來源與正式接線仍DRAFT，
+不增加134張正式素材、不稱全量HD完成。
+R7研究審查SHA-256為d1d450fd61f778685af27b7e88dd68909f00e21f2c7373069c69a37fa5f29972。
+
+R7公開探針另通過四項負例：拒絕/out外輸出、缺原版、缺解碼輸入及錯誤索引指紋；均未寫成功收據。詳本機opening-public-probe-negative-r1.json。

@@ -6736,3 +6736,15 @@ confirmed：0B68:051C、DS=ES=0xA000、完整碼
 - 正式審查d78e8de1959f7df72da0b52b0d107476b5bb6d0177b9051d8087fc475c43d385，二進位d30dbbba9dcce8d29e62b0a6093835f77e47299fb1570276180324559178ae37；原版288檔及134張原PNG逐檔指紋保持。僅OPENTILE、WOODTILE的發布正例計入；PARCH發布沒有正例，保持既有範圍。
 - 開場來源沿既有目標025、044及146；ST1拉丁地圖題字、ST2品牌飾框與品牌標誌維持既有美術分類，不重開文字翻譯決策。新候選只有底圖，正式接線前須保留這些原版題字的既有顯示契約。
 - 原型像素腳本最初把final摘要當成cp檢查點，未寫成功收據；排除final後三個實際cp全部通過，未變更產品。R82初次建置未複製既有go.work，本機模組綁定補齊後同工具鏈乾淨重跑；屬工具環境。
+
+
+## 2026-10-18：R82開場背景來源，DRAFT
+
+- 沿既有目標025／044／146；正常Enter在800000步，至16000000步，沒有direct-entry。工具dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7，實體RAM／real-mode CS:IP，不是IDA EA。
+- confirmed：完整OPENING.PIK索引位於0x38630，完整OPENBORD.PIK位於0x1C430。檔案與索引雜湊沿規格069 R82、固定cataloge0b14a6ba8a8bec5cae3fd165ea6d88de384dc4f61c1ec67ca8504c29189aa5d。
+- confirmed：03BD:00C8的已見長圖複製樣本來源offset640到主畫布y24；0557:009F送整張VGA，008E／0090矩形送出。主畫布幾十萬筆寫入，VGA重複379212845筆；後續模型採主畫布完整來源與整張VGA相等守門，仍待原型／READY。
+- 原版PIK palette是MADSPACK part2，不是檔案最後768位元組；不能用tail替代。RAM 0xAFC00已包含與完整DAC相同的768個六位元色盤值，SHA-256 b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54。中間淡入未驗。
+- R3自然片頭在294M取得長圖後停止，保留partial收據，未宣稱完整成功；R4逐VGA日誌超過3000000筆而停止，未提高上限假裝通過。R5／R6改為入口樣本與計數，R7預設只監看主畫布及長圖。原版硬體時序未改。
+- R7公開探針80點與無監看控制、R6完整狀態／PNG／讀取相同。審查d1d450fd61f778685af27b7e88dd68909f00e21f2c7373069c69a37fa5f29972，程式碼7518ae0bd60a22066d232099639e9edd52e1a19d3d2b93a22dfc776e4e58511f。入口tools/probe_hd_opening_sources.go，輸出只在本機/out。
+- 2.3M的04A2寫入樣本只落在之後的長圖實體範圍，當時尚未載入OPENING.PIK，不能稱地圖來源。實作前須以完整解碼／指紋授予來源，再追03BD複製與未知撤銷。
+- 新r2長圖保留既有美術題字，原PNG329d81b975d86764fe944ceb9de2c8a2674db4bb527df34d4fc52d5e7952f351。候選及提示只在hd-opening-backgrounds-r82，正式來源、幾何／動畫及遮擋仍DRAFT；未加入正式素材數。
