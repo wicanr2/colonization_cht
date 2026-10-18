@@ -106,6 +106,10 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 
 讀檔列表：已驗木紋、文字字底及一般箭頭使用 HD，繁中與英數沿欄位使用 Noto 字型。其他未證實的字底保留原圖。
 
+![繁體中文成功訊息的 HD 木紋與字底](docs/screenshots/hd-load-success-zh.png)
+
+成功訊息：內部木紋、文字字底與一般箭頭使用 HD，繁中與英數沿欄位使用 Noto 字型。
+
 ![繁體中文世界畫面與 HD 海洋、地形](docs/screenshots/hd-world-zh.png)
 
 世界畫面：海洋、部分河岸與森林地形、側欄圖示、頂端與側欄木紋已使用 HD 素材，其餘地形與單位逐項接續。

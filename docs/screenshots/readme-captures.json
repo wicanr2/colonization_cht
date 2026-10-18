@@ -1,10 +1,10 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-18",
-  "code_commit": "c97e3a2085badb4fbe6540adf4948d65e6ea5b1a",
-  "binary_sha256": "3b7a7172b48f7c0105f0089da39acb928827f0361097e0c9d0684c98327c45c4",
-  "formal_binary_sha256": "3b7a7172b48f7c0105f0089da39acb928827f0361097e0c9d0684c98327c45c4",
-  "source_build_sha256": "6aadc0def5dd35129e55a97eb09dcd79a6a36fe63b2e2fdce7e666a352afef99",
+  "code_commit": "2479ece91d293ae5c3c174e755cc7800acc4ce71",
+  "binary_sha256": "d30dbbba9dcce8d29e62b0a6093835f77e47299fb1570276180324559178ae37",
+  "formal_binary_sha256": "d30dbbba9dcce8d29e62b0a6093835f77e47299fb1570276180324559178ae37",
+  "source_build_sha256": "de0debb9236d91e91a3cee07995a2b7174404c1bacd08672f95abbba76ad0fc7",
   "released_version_unchanged": "v.1.0.3-20261010",
   "formal_hd_assets": 134,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
@@ -472,6 +472,44 @@
       "graphics_manifest_sha256": "f5d0fbebed17123932d129c006c488190864a1450036c9800f2edc78d09a0e00",
       "conformance_sha256": "1135c987785e9e07d90aa47f125abe5aebabe4ce5c229fd38a5b07bf33cc110e",
       "scope": "正常讀檔列表、已驗來源字底與一般箭頭游標。未知成功訊息字底、其他圖像與動畫仍待完成。"
+    },
+    {
+      "file": "hd-load-success-zh.png",
+      "sha256": "1444e884355bad8650dc56beef1c44010bce311844285238982d1fd920c8d71e",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "load-slot",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 39000000,
+      "code_commit": "2479ece91d293ae5c3c174e755cc7800acc4ce71",
+      "binary_sha256": "d30dbbba9dcce8d29e62b0a6093835f77e47299fb1570276180324559178ae37",
+      "formal_binary_sha256": "d30dbbba9dcce8d29e62b0a6093835f77e47299fb1570276180324559178ae37",
+      "formal_hd_assets": 134,
+      "graphics_manifest_sha256": "f5d0fbebed17123932d129c006c488190864a1450036c9800f2edc78d09a0e00",
+      "conformance_sha256": "d78e8de1959f7df72da0b52b0d107476b5bb6d0177b9051d8087fc475c43d385",
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-published-textures-r81/r81-published-texture-formal-gui-r1/gui.display-014.png",
+      "source_gui_check_sha256": "4e7dac8e5586825acf71a80acf159b8b7e8029654551624eb05391b5caeed7f8",
+      "independent_pixels_sha256": "957217e8d92fcfd087643859240e71a5e6dd11dada608b605c715be3ad95aa8c",
+      "same_state_replay_sha256": "b599a3c5bdcb26e71b407b7e88f8893c4b9c1b971fcd6a0e5a5a124ee871406a",
+      "same_state_replay_receipt": "workplace/reports/goal186-display-hd/hd-published-textures-r81/r81-published-texture-replay-r1-check.json",
+      "source_kind": "actual formal game presentation from standard display diagnostics; byte-for-byte matched to real X11 game area",
+      "capture_pixels_unchanged": true,
+      "original_source_files": [
+        "WOODPANL.PIK",
+        "WOODTILE.SS"
+      ],
+      "source_research_ids": [
+        1551,
+        1552
+      ],
+      "published_background_cells": 57776,
+      "published_texture_cells": 2347,
+      "verified_texture_background_repaints": 693,
+      "hd_cursor_source_cells": 82,
+      "scope": "正常讀檔成功訊息、已驗WOODTILE木紋與字底及一般箭頭游標。其他圖像與動畫仍待完成。"
     }
   ],
   "limitations": [
@@ -489,7 +527,8 @@
     "R76新增殖民地下方背景與歐洲港口的繁中HD實拍，共十一張；既有九張原PNG及逐圖來源保持。其他圖像、特殊游標、完整五語文字、動畫與全量HD未完成，尚未收進目前發行版。",
     "R77新增繁中勞動與經濟報告實拍，共十三張；八種報告背景已驗，既有十一張PNG與逐圖來源保持。其他圖像、完整五語文字、特殊游標、動畫及全量HD未完成，尚未收進目前發行版。",
     "R78新增國會室內與繁中計分實拍，共十五張；人物前景保留原版，本批九個室內HD點同一姿態。載入選單仍為原版背景，其他圖像、人物動畫、完整五語文字及全量HD未完成，尚未收進目前發行版。",
-    "R80新增繁中讀檔列表實拍，共十六張；已驗字底與一般箭頭已HD，未知成功訊息字底仍保留原圖。R78擷取當時的載入選單限制保持為歷史紀錄；全量HD、其餘圖像、動畫與完整五語仍未完成，尚未收進目前發行版。"
+    "R80新增繁中讀檔列表實拍，共十六張；已驗字底與一般箭頭已HD，未知成功訊息字底仍保留原圖。R78擷取當時的載入選單限制保持為歷史紀錄；全量HD、其餘圖像、動畫與完整五語仍未完成，尚未收進目前發行版。",
+    "R81新增繁中成功訊息實拍，共十七張；內部WOODTILE木紋、字底與一般箭頭已HD。R80當時的未知字底限制保留為歷史紀錄；其餘圖像、動畫、完整五語與新版交付仍未完成。"
   ],
   "previous_build": {
     "kind": "README actual development screenshots",
@@ -502,9 +541,9 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "新增讀檔列表採R80／c97e3a2與134張原稿，直接複製正式程式呈現，逐byte匹配X11遊戲區。既有十五張原PNG與逐圖commit、二進位、素材數及限定驗收保持。",
+  "provenance_scope": "新增繁中成功訊息採R81／2479ece與134張原稿，直接複製正式程式呈現，逐byte匹配X11遊戲區。既有十六張原PNG與逐圖commit、二進位、素材數及限定驗收保持。",
   "graphics_manifest_sha256": "f5d0fbebed17123932d129c006c488190864a1450036c9800f2edc78d09a0e00",
-  "conformance_sha256": "1135c987785e9e07d90aa47f125abe5aebabe4ce5c229fd38a5b07bf33cc110e",
+  "conformance_sha256": "d78e8de1959f7df72da0b52b0d107476b5bb6d0177b9051d8087fc475c43d385",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -554,7 +593,7 @@
     "graphics_manifest_sha256": "c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7",
     "conformance_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5"
   },
-  "verification_build_sha256": "6aadc0def5dd35129e55a97eb09dcd79a6a36fe63b2e2fdce7e666a352afef99",
+  "verification_build_sha256": "de0debb9236d91e91a3cee07995a2b7174404c1bacd08672f95abbba76ad0fc7",
   "production_go_sources_equal_to_verified_build": true,
   "previous_scene_background_capture": {
     "code_commit": "dbfc95fc2b98654f9f4cf3d0abac946730bfbfce",
@@ -582,5 +621,14 @@
     "formal_hd_assets": 134,
     "graphics_manifest_sha256": "f5d0fbebed17123932d129c006c488190864a1450036c9800f2edc78d09a0e00",
     "conformance_sha256": "a1049affbd62d15ef7413cd9063e6f0dccb9aafbda199e5a4ee3238e1d38c2de"
+  },
+  "previous_published_text_cursor_capture": {
+    "code_commit": "c97e3a2085badb4fbe6540adf4948d65e6ea5b1a",
+    "binary_sha256": "3b7a7172b48f7c0105f0089da39acb928827f0361097e0c9d0684c98327c45c4",
+    "formal_binary_sha256": "3b7a7172b48f7c0105f0089da39acb928827f0361097e0c9d0684c98327c45c4",
+    "source_build_sha256": "6aadc0def5dd35129e55a97eb09dcd79a6a36fe63b2e2fdce7e666a352afef99",
+    "formal_hd_assets": 134,
+    "graphics_manifest_sha256": "f5d0fbebed17123932d129c006c488190864a1450036c9800f2edc78d09a0e00",
+    "conformance_sha256": "1135c987785e9e07d90aa47f125abe5aebabe4ce5c229fd38a5b07bf33cc110e"
   }
 }
