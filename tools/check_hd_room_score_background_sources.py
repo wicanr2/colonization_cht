@@ -5,7 +5,10 @@ parser=argparse.ArgumentParser(description=__doc__)
 for name in ['probe','points','decoded','game','output']:parser.add_argument('--'+name,type=Path,required=True)
 parser.add_argument('--scope',choices=['reports-and-room-score','room-score-only','inherited-scenes','published-load'],default='reports-and-room-score',help='限定需要正例的正常路徑；完整十二來源均重建，不外推未出現來源')
 parser.add_argument('--published-surface',action='store_true',help='規格069 R79 DRAFT：另追已送到VGA的背景來源；不放寬既有原版畫布判定')
+parser.add_argument('--published-cursor',action='store_true',help='規格069 R80 DRAFT：以當次游標記憶體sidecar核對透明複製與反向還原')
 a=parser.parse_args();scope=a.scope;published_surface=a.published_surface
+assert not a.published_cursor or published_surface
+published_cursor=a.published_cursor
 assert Path('/.dockerenv').exists() and os.getuid()!=0
 fingerprints={'VICEROY.EXE': 'a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3', 'COLONY.PIK': 'faaa637d528641a5f098eb4b1975696de182bd2d586b5f089d5a0d51320f5465', 'EUROPE.PIK': '05386fef6140252040508bdc56ca0eaeb5d7563f55bb9046f714ba09d74af118', 'REPORT1.PIK': '8050c481b9bd8eecd8011d44acafa3e700377dacb28321475fc25e51349ce91b', 'REPORT2.PIK': 'c0434e666b5dfb6d751ba67a6cf34e384365c527645e02f08eddabf5c2757d25', 'REPORT3.PIK': '01372be38f137144bf5a6b796154d01893473b0684a06f703af4840eff410a1b', 'REPORT4.PIK': 'dbdcd1d98c8eddd1a979a4d60e4e03721de2ecc79444dd9b08db80c8d2fe0bd1', 'REPORT5.PIK': 'f621afd662a05bbcc5cfe0c9ce99cd758d3142f89ce9b7c62267843fb87a1797', 'REPORT6.PIK': 'c6d59ac693f16f611e86b5884c666082525d5e73e5e63db7f8089b8aa6f903aa', 'REPORT7.PIK': 'b3fc6b0d11b87b7ed056c08ee04ed757369b54cc19dbfda29d87ffdafaedf542', 'REPORT8.PIK': 'f09699044156d9aeef55bfe9e5607e872d47eb68ad9fb930d40a3a4988b34fa6', 'CCBKGD.PIK':'d2c11061faf65c2c51fee36177eee79f0e2cdc9f67efa17d465dbea5e0e1ceca','WOODPANL.PIK':'0858856ad5b5dd0b6ab8e7a8f815fa602a9cf0237d8d323cd2b5ca141b32bc69'}
 for name,want in fingerprints.items():
@@ -43,6 +46,13 @@ owners={};values={};pending={};copies=collections.Counter();losses=collections.C
 reads=[v for v in j['reads'] if v['Name'].upper().endswith('.PIK')]
 cursor_source_sha='47fced19d04987d3a0de8b6fd929abae6ba886939a2a7ce408b0213360ef1e03'
 transactions={};completed=collections.Counter()
+cursor_rows={}
+if published_cursor:
+ assert read(a.probe/'build.json').get('cursor_publication_live_memory') is True
+ for line in (obs/'cursor-publication.jsonl').open():
+  row=json.loads(line);assert len(row)==8 and row[0] not in cursor_rows and len(bytes.fromhex(row[3]))==256
+  cursor_rows[row[0]]=row
+cursor_pairs={};cursor_publications=collections.Counter();cursor_pairs_peak=0;cursor_rows_used=0
 published={};publication_sites=collections.Counter();publication_losses=collections.Counter();published_points=[]
 def capture(i):
  global cursor_source_sha
@@ -69,7 +79,7 @@ def capture(i):
   for at,c in published.items():
    assert c[2]==idx[at],('published/indexed mismatch',p['label'],at)
    assert raw[c[0]][c[1]]==c[2] or c[3]=='glyph'
-   if not c[3]=='glyph' and not(mx<=at%320<mx+16 and my<=at//320<my+16):
+   if not c[3]=='glyph' and not(mx<=at%320<mx+16 and my<=at//320<my+16 and (not published_cursor or source[(at//320-my)*16+at%320-mx]!=255)):
     if vga_palettes[c[0]]:valid[at]=c
   for rid in raw:
    mask=bytes(1 if at in valid and valid[at][0]==rid else 0 for at in range(64000))
@@ -93,14 +103,34 @@ def capture(i):
  (r/(stem+'.owners.json')).write_text(json.dumps({at-base:c for at,c in owners.items() if base<=at<base+64000},separators=(',',':'))+'\n')
  results.append(out)
  print('POINT',p['label'],{rid:out['sources'][rid] for rid in [120,1551]},cursor_ok,flush=True)
-for line in (obs/'background-writes.jsonl').open():
+for event_number,line in enumerate((obs/'background-writes.jsonl').open()):
  row=json.loads(line);step,a,o,v,cs,ip,ds,si,es,di,ax,cx,flags,code=row
  while pi<len(points) and points[pi]['step']<=step:capture(pi);pi+=1
  while phase<len(reads) and reads[phase]['Step']<=step:current=reads[phase]['Name'].upper();phase+=1
  if a>=0xa0000:
   if published_surface and 0xa0000<=a<0xa0000+64000:
    at=a-0xa0000;oldcell=published.pop(at,None)
+   pair=cursor_pairs.pop(at,None)
    delta=a-(es*16+di);src=ds*16+si+delta
+   row_cursor=cursor_rows.get(event_number)
+   if row_cursor is not None:
+    cursor_rows_used+=1
+    _,cursor_step,cursor_a,source_hex,back,composed,source_value,main_value=row_cursor
+    assert (cursor_step,cursor_a)==(step,a) and source_value==v
+    source_bytes=bytes.fromhex(source_hex);k=si&255
+    known_cursor=(cs==0xb68 and ip==0x51c and ds==0xa000 and es==0xa000 and code==cursor and delta==0 and 0xfa00<=si<0xfc00 and sha(source_bytes)==cursor_source_sha)
+    if known_cursor and si>=0xfb00 and back==o and composed==v and v==(back if source_bytes[k]==255 else source_bytes[k]):
+     if source_bytes[k]==255 and o==v and oldcell is not None and oldcell[2]==v:
+      published[at]=oldcell;cursor_publications['transparent-paint']+=1
+     elif source_bytes[k]!=255 and oldcell is not None and oldcell[2]==o:
+      cursor_pairs[at]=(o,v,k,oldcell);cursor_publications['opaque-save']+=1
+    elif known_cursor and si<0xfb00 and back==v:
+     if source_bytes[k]==255 and composed==o==v and oldcell is not None and oldcell[2]==v:
+      published[at]=oldcell;cursor_publications['transparent-restore']+=1
+     elif pair is not None and pair[:3]==(v,o,k) and composed==o and source_bytes[k]==o:
+      published[at]=pair[3];cursor_publications['opaque-restore']+=1
+    cursor_pairs_peak=max(cursor_pairs_peak,len(cursor_pairs))
+    assert len(cursor_pairs)<=256,'cursor publication pair bound'
    if cs==0xe21 and ip==0x91 and code=='f3a503f3790c81ee00808cd981c10008' and es==0xa000 and 0<=delta<2 and si+delta<65536 and di+delta<64000 and src==base+at:
     got=owners.get(src)
     if got is not None and got[2]==v:
@@ -154,10 +184,13 @@ positive_points=published_points if scope=='published-load' and published_surfac
 assert all(completed[rid]>0 and any(p['sources'][str(rid) if isinstance(next(iter(p['sources'])),str) else rid]['painted']>0 for p in positive_points) for rid in required),'each required source needs actual painted native evidence'
 if scope=='inherited-scenes':assert completed[120]==0 and all(completed[rid]==0 for rid in range(1442,1450))
 out={'result':'PASS_ROOM_SCORE_BACKGROUND_SOURCE_MODEL_RESEARCH','complete_decodes':dict(completed),'address_space':'dosgolem real-mode CS:IP and 20-bit linear RAM; no IDA EA','points':results,'copies':dict(copies),'loss_sites':dict(losses),'same_value_revocations':same,'cursor_paints':paints,'cursor_reverse_pair_restores':restores,'decode_writes':dict(decodes),'cursor_source_sha256':cursor_source_sha,'remaining_backing_owners':sum(not(base<=a<base+64000 or stage<=a<stage+64000) for a in owners),'production_connected':False,'native_state_points_equal_control':len(points)}
+if published_cursor:
+ assert cursor_rows_used==len(cursor_rows)
+ out['published_cursor']={'operations':dict(cursor_publications),'pending_peak':cursor_pairs_peak,'pending_remaining':len(cursor_pairs),'sidecar_rows':len(cursor_rows),'sidecar_sha256':sha((obs/'cursor-publication.jsonl').read_bytes()),'production_connected':False}
 out['scope']=scope;out['required_sources']=required
 if published_surface:
  out['published_surface']={'points':published_points,'copy_sites':dict(publication_sites),'revocations':dict(publication_losses),'production_connected':False}
  assert any('load-menu' in p['label'] and p['sources'][1551]['painted']>0 for p in published_points)
-out['receipt_sha256']={str(f):sha(f.read_bytes()) for f in [Path(__file__),a_points,obs.parent/'build.json',obs/'draws.json',ctrl/'draws.json',obs/'background.json',obs/'background-writes.jsonl',obs/'final.memory',ctrl/'final.memory']}
+out['receipt_sha256']={str(f):sha(f.read_bytes()) for f in [Path(__file__),a_points,obs.parent/'build.json',obs/'draws.json',ctrl/'draws.json',obs/'background.json',obs/'background-writes.jsonl',obs/'final.memory',ctrl/'final.memory',*([obs/'cursor-publication.jsonl'] if published_cursor else [])]}
 (r/'check.json').write_text(json.dumps(out,indent=2)+'\n')
 print('PASS_ROOM_SCORE_BACKGROUND_SOURCE_MODEL_RESEARCH',len(results),dict(copies),dict(decodes),restores,flush=True)

@@ -214,3 +214,7 @@ cursor-000-candidate-v2-provenance-r60.json，SHA-256為5b3406c8bbade64b4e7501a0
 | compat-r1-check.json | 055ef82e745c5d700a5b594cc7a6c6d68cff170a4654ec5335056ff25f48bb81 |
 | performance-play-r1-check.json | 7eba6cef324b2c1649d130d9d04e6c865d890292093e92909c903eb6801a71cb |
 | production-play-r1-check.json | 74c9498f253ead90925fa09f4e348107421cd388403646d8a817e65ba126a4f7 |
+
+## 2026-10-18 R80 已發布表面的標準游標READY
+
+新增路徑見[規格069 R80 READY](069-hd-menu-background-and-textures.md)。原版來源、82格、熱點及生成原alpha保持；只有完整VGA與局部游標證據均符，才處理游標外主畫布差異。原有完整守門及其他圖層保持，正式驗收尚待完成。

@@ -12,6 +12,7 @@ parser.add_argument('--copy-closure-c9f',action='store_true',help='搭配copy-cl
 parser.add_argument('--memory-snapshots',action='store_true',help='每個實際GUI檢查點另存完整唯讀RAM，供游標與間接複製核對')
 parser.add_argument('--report-keys',action='store_true',help='可選：按正式視窗相同BIOS鍵字重播F2至F10；僅擴大唯讀探針輸入')
 parser.add_argument('--ram-only',action='store_true',help='可選：省略a>=0xA0000的逐寫日誌；完整RAM、索引與色盤快照仍保留，不改變原版')
+parser.add_argument('--cursor-publication',action='store_true',help='規格069 R80 DRAFT：另記VGA游標複製當下的來源與暫存值；不授予HD擁有權')
 a=parser.parse_args()
 assert not a.copy_closure_c9f or a.copy_closure
 repo=Path(__file__).resolve().parents[1];out=a.output.resolve()
@@ -153,6 +154,26 @@ if a.ram_only:
     needle='if b==nil || b.m.Steps<14000000{return}'
     assert TRACER.count(needle)==1
     TRACER=TRACER.replace(needle,'if b==nil || b.m.Steps<14000000 || a>=0xa0000{return}',1)
+if a.cursor_publication:
+    needle='type backgroundTrace struct {'
+    TRACER=TRACER.replace(needle,needle+'\n cursorFile *os.File\n cursorLog *bufio.Writer\n cursorEvents int',1)
+    needle=' b.events++'
+    extra=r'''
+ if cs==0xb68 && ip==0x51c && m.CPU.Seg[golem.DS]==0xa000 && m.CPU.Seg[golem.ES]==0xa000 && a>=0xa0000 && a<0xa0000+64000 {
+  delta:=int(a)-(int(m.CPU.Seg[golem.ES])*16+int(m.CPU.R[golem.DI]))
+  source:=int(m.CPU.R[golem.SI])+delta
+  if delta==0 && source>=0xfa00 && source<0xfc00 {
+   if b.cursorFile==nil {file,err:=os.Create(filepath.Join(b.out,"cursor-publication.jsonl"));buildingNeed(err);b.cursorFile=file;b.cursorLog=bufio.NewWriterSize(file,1<<20)}
+   k:=source&255
+   fmt.Fprintf(b.cursorLog,"[%d,%d,%d,%q,%d,%d,%d,%d]\n",b.events,m.Steps,a,fmt.Sprintf("%x",m.Mem[0x1cd74:0x1ce74]),m.Mem[0xafa00+k],m.Mem[0xafb00+k],m.Mem[0xa0000+source],m.Mem[buildingMain+a-0xa0000])
+   b.cursorEvents++
+  }
+ }
+'''
+    assert TRACER.count(needle)==1;TRACER=TRACER.replace(needle,extra+needle,1)
+    needle=' buildingNeed(b.log.Flush());buildingNeed(b.file.Close())'
+    extra=' if b.cursorFile!=nil {buildingNeed(b.cursorLog.Flush());buildingNeed(b.cursorFile.Close())}\n'
+    assert TRACER.count(needle)==1;TRACER=TRACER.replace(needle,extra+needle,1)
 s+="\n"+TRACER
 if a.memory_snapshots:
     needle='".palette": m.DAC[:]'
@@ -169,5 +190,6 @@ if a.copy_closure_c9f:meta['copy_closure_c9f']=True
 if a.memory_snapshots:meta['complete_readonly_ram_per_checkpoint']=True
 if a.report_keys:meta['readonly_report_key_words']={f'f{i}':(0x3a+i)<<8 for i in range(2,11)}
 if a.ram_only:meta['ram_only_write_log']=True
+if a.cursor_publication:meta['cursor_publication_live_memory']=True
 (out/"build.json").write_text(json.dumps(meta,indent=2)+"\n")
 print("PASS_BACKGROUND_SOURCE_COLLECTOR_BUILD",meta["source_sha256"],flush=True)
