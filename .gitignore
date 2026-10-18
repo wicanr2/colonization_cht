@@ -111,3 +111,6 @@ __pycache__/
 !/graphics/opening-volcano-000.png
 !/graphics/opening-wind-000.png
 !/graphics/opening-mermaid-000.png
+
+# README R82：已驗正式開場實拍，來源見readme-captures.json。
+!/docs/screenshots/hd-opening-zh.png

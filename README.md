@@ -74,6 +74,10 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 其餘小圖像、特殊游標與動畫幀，目前仍在逐項開發。
 目前 147 張已接線的生成 HD 原圖與來源清冊收在 [graphics/](graphics/)。
 
+![開場地圖、金色邊框與獨立物件的 HD 畫面](docs/screenshots/hd-opening-zh.png)
+
+開場：長圖、木紋與金色邊框已重繪。移動中的船與其他未接線動畫保留原版。
+
 ![繁體中文殖民地畫面與 HD 建築、人物及商品小圖像](docs/screenshots/hd-colony-zh.png)
 
 殖民地：中央市政大廳、其餘建築與景物、紙質背景及木紋已使用定稿的精細像素風；未接線區域保留原圖。
