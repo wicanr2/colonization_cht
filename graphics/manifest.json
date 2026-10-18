@@ -15460,6 +15460,1866 @@
       },
       "rights": "AI-generated project candidate under RRSAL-1.0; original reference remains private",
       "ready_review_sha256": "a529574cc845ad2905b305c4e085d0b2e41099f733d5b3c67a657e89821d6d99"
+    },
+    "building-000.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "be73e486cc1a2251df5b77b001268404e3aa9149f1a0d613215953b974951f07",
+      "bytes": 924209,
+      "size": [
+        2120,
+        742
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 0,
+      "native_size": [
+        73,
+        18
+      ],
+      "target_size": [
+        292,
+        72
+      ],
+      "native_opaque_pixels": 808,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          83,
+          51
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        15,
+        133,
+        2105,
+        570
+      ],
+      "native_content_rect": [
+        0,
+        3,
+        73,
+        18
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent sprite for the authorized display-only HD layer of Sid Meier's Colonization. Image 1 is the exact native 73 x 18 source enlarged 8x; its silhouette, relative position, proportions and empty spaces determine the composition. Image 2 is the user-approved fine pixel-art style; follow its restrained natural colors, small crisp pixel clusters, material texture and clarity. A low pale timber stockade palisade: uneven cut vertical log tops, a recessed central timber gateway, two green conifers precisely at the outer left and right. Preserve the front-facing shallow perspective and the original gate arrangement. No stone or towers. Preserve a very wide 73:18 full canvas and the exact original ground baseline. Redraw all visible native objects faithfully; keep their relative size and placement, including empty margins. The final sprite must read clearly at 292 x 72 display pixels. Use true alpha transparency around and between forms. Magenta in image 1 means transparent and must disappear. Do not fill the background. No extra scenery, people, props, weapons, text, border, ground rectangle, detached shadow, glow, smooth airbrushing, blur, watermark or atlas. Return one full-canvas PNG with original composition and alpha.",
+      "reference_sha256": {
+        "native": "9f47052ab8d5fef95aa57f436b8f25a29585b37ff95cae8baeb6ad2ae806d2ae",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "1876dfdb3f3142fe7a52b8e5cb5fbb41611b6e7863fde78af44cd5c786aaf49e"
+      },
+      "source_write_sha256": "42173fc2d6aa00420b9111b9714a28049fd8d644a56c620933ff5cd0174bb89c",
+      "source_writer_bits": 4,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-001.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "fbb98fe74f66c1e71223868888d7e2f03d025af7813899a68490160c8901f8de",
+      "bytes": 1386170,
+      "size": [
+        2120,
+        742
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 1,
+      "native_size": [
+        73,
+        18
+      ],
+      "target_size": [
+        292,
+        72
+      ],
+      "native_opaque_pixels": 1024,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          83,
+          51
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        21,
+        83,
+        2100,
+        643
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        73,
+        18
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent sprite for the authorized display-only HD layer of Sid Meier's Colonization. Image 1 is the exact native 73 x 18 source enlarged 8x; its silhouette, relative position, proportions and empty spaces determine the composition. Image 2 is the user-approved fine pixel-art style; follow its restrained natural colors, small crisp pixel clusters, material texture and clarity. A taller warm brown reinforced timber fort palisade: stout vertical logs with visible diagonal supporting beams, a centered small elevated triangular gate watch roof, and green conifers precisely at the far left and right. Preserve original shape. No stone bastions. Preserve a very wide 73:18 full canvas and the exact original ground baseline. Redraw all visible native objects faithfully; keep their relative size and placement, including empty margins. The final sprite must read clearly at 292 x 72 display pixels. Use true alpha transparency around and between forms. Magenta in image 1 means transparent and must disappear. Do not fill the background. No extra scenery, people, props, weapons, text, border, ground rectangle, detached shadow, glow, smooth airbrushing, blur, watermark or atlas. Return one full-canvas PNG with original composition and alpha.",
+      "reference_sha256": {
+        "native": "162af8be1bb18e6514f07e73d1373922abea9dc7d20a5d6723596f5418223706",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "24f1681a125518d254ed38554e0635b0220fadfff8610dbe0100cfe3f8b9a93b"
+      },
+      "source_write_sha256": "53d54df70ed0d97ae75d1a530c7d1e6a0a49d1107078eae7476fdaaa2f971a0f",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-002.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "28d992b808439e4ec0a9117f14ca645eec903e6ebde631b324894f8caf5d952f",
+      "bytes": 1225623,
+      "size": [
+        2117,
+        743
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 2,
+      "native_size": [
+        73,
+        18
+      ],
+      "target_size": [
+        292,
+        72
+      ],
+      "native_opaque_pixels": 1038,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          83,
+          51
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        38,
+        128,
+        2079,
+        610
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        73,
+        18
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent sprite for the authorized display-only HD layer of Sid Meier's Colonization. Image 1 is the exact native 73 x 18 source enlarged 8x; its silhouette, relative position, proportions and empty spaces determine the composition. Image 2 is the user-approved fine pixel-art style; follow its restrained natural colors, small crisp pixel clusters, material texture and clarity. A low pale stone fortress wall: two small square end bastions with dark brown pyramidal caps, a long horizontal stone curtain wall and recessed central gate. Match the shallow front-facing view. No extra towers or flags. Preserve a very wide 73:18 full canvas and the exact original ground baseline. Redraw all visible native objects faithfully; keep their relative size and placement, including empty margins. The final sprite must read clearly at 292 x 72 display pixels. Use true alpha transparency around and between forms. Magenta in image 1 means transparent and must disappear. Do not fill the background. No extra scenery, people, props, weapons, text, border, ground rectangle, detached shadow, glow, smooth airbrushing, blur, watermark or atlas. Return one full-canvas PNG with original composition and alpha.",
+      "reference_sha256": {
+        "native": "2b4a20b977512114eb6039f18c8cc76b9bf4bb8f364352fe6ff65b3088a21a0d",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "6064567b9d48b5c3b72768dc0a7d76a2a1184c891f083e15604454c2dbb49b4c"
+      },
+      "source_write_sha256": "f184c76aba2746d676e1287f476ce50ca1a53c5bc241400f980b00060ce8ef3f",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-003.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "7d7ba364a4c80631d8d17a21c999d64b17fbe9c94958498b9f1926e43b04858b",
+      "bytes": 1236641,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 3,
+      "native_size": [
+        44,
+        22
+      ],
+      "target_size": [
+        176,
+        88
+      ],
+      "native_opaque_pixels": 663,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          54,
+          55
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        65,
+        112,
+        1725,
+        814
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        44,
+        22
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Asset: ONE standalone transparent HD pixel-art game sprite, the armory workshop from Sid Meier's Colonization, for our authorized display-only HD layer. Image 1 is the exact original 44 by 22 sprite, enlarged 8x, and determines composition, silhouette, perspective and contents. Image 2 is our user-approved fine pixel-art style and determines pixel clusters, palette, materials and level of detail only. Redraw image 1 faithfully as crisp, finely detailed pixel art. Preserve its 2:1 full canvas, ground baseline, exact relative positions and scale: one modest pale plaster/stone workshop with a broad warm beige/brown thatched gable roof, a small chimney toward the left ridge, the original dark doorway and small windows, and the original two green conifer shapes on the right. Keep the original asymmetric perspective and all of the building and trees. The armory must remain a simple workshop, without fortification, cannons, weapons racks, people, signs, new props or a modern design. Improve the readable roof, wall, door and foliage textures using restrained natural fine pixel clusters matching image 2. Target display size is 176 by 88 pixels; it must read cleanly at that size. Use a horizontal full canvas with true alpha transparency around and between the original shapes. Any magenta visible in the original reference is transparency and must not appear in the output. Keep empty margins and original placement; do not tightly crop or recenter. No ground rectangle, scenery, detached cast shadow, glow, bloom, blur, smooth airbrushing, text, border, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "a772af2a17b8ec8be7bc2aed668507850a12f44b09eae43b60d4c916b2397149",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "cd1eeef2db89db69dd21bd9c9442e8f7799b36c43a108f4bc0e3fe582929fcc0"
+      },
+      "source_write_sha256": "33f06760b51f9ac523fa787c99484f8224e20c07d581f8b429d44d61d824b75a",
+      "source_writer_bits": 7,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-004.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "c7150437bc61edddc4491c85cfd28a283d832eb8eb1e3735495c0fbb0c9bd01b",
+      "bytes": 1567299,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 4,
+      "native_size": [
+        44,
+        22
+      ],
+      "target_size": [
+        176,
+        88
+      ],
+      "native_opaque_pixels": 711,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          54,
+          55
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        52,
+        79,
+        1750,
+        805
+      ],
+      "native_content_rect": [
+        0,
+        1,
+        44,
+        22
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent HD pixel-art building sprite for our authorized display-only HD layer. Image 1 is the exact 44 x 22 native sprite enlarged 8x and determines contents, silhouette, proportions, perspective and all placements. Image 2 is our user-approved fine pixel-art style reference, for small crisp pixel clusters, restrained natural colors, readable material textures and level of detail only. The original low magazine workshop: a broad pale plaster and stone industrial house with a beige thatched gable roof, a projecting lower left lean-to, the original small dark rectangular windows and doorway, and the small evergreen shape at the right. Keep its original low 44:22 silhouette. Faithfully redraw the native source with readable roof, wall, foliage and timber detail, keeping the original 2:1 full canvas, ground baseline and empty margins. It must read clearly at 176 x 88 display pixels. Use true alpha transparency around and between objects. Magenta in image 1 is transparent and must never appear in the output; avoid colored fringes, red or pink outlines. Keep the original composition; no extra architecture, people, props, weapons, signs, scenery, ground rectangle, detached shadow, text, border, glow, smooth airbrush, blur, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "73b3af65961e4d1e905bfa2b06785396a9a885581829bdc786484b84c273a3b5",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "21a85ba23b0270de975cf08b1a7edca71ac5638c883ae88538e1c7629e500761"
+      },
+      "source_write_sha256": "2d6d0ed9aa214dde39c67401eb986bf2f6ba1605b260889d4b1f3c10ce0d9dc9",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-005.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "600455bdefddde32395477711a0b0b6bd619dad98dd940d65b729bb526f51b88",
+      "bytes": 1611261,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 5,
+      "native_size": [
+        44,
+        22
+      ],
+      "target_size": [
+        176,
+        88
+      ],
+      "native_opaque_pixels": 882,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          54,
+          55
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        92,
+        84,
+        1733,
+        797
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        44,
+        22
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent HD pixel-art building sprite for our authorized display-only HD layer. Image 1 is the exact 44 x 22 native sprite enlarged 8x and determines contents, silhouette, proportions, perspective and all placements. Image 2 is our user-approved fine pixel-art style reference, for small crisp pixel clusters, restrained natural colors, readable material textures and level of detail only. The original larger arsenal workshop: a broad pale stone industrial house with a beige thatched roof, a projecting lower left lean-to and two rows of small dark windows across the larger right facade. Preserve the original compact low silhouette and all original door and window placements. No trees unless present in image 1. Faithfully redraw the native source with readable roof, wall, foliage and timber detail, keeping the original 2:1 full canvas, ground baseline and empty margins. It must read clearly at 176 x 88 display pixels. Use true alpha transparency around and between objects. Magenta in image 1 is transparent and must never appear in the output; avoid colored fringes, red or pink outlines. Keep the original composition; no extra architecture, people, props, weapons, signs, scenery, ground rectangle, detached shadow, text, border, glow, smooth airbrush, blur, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "34eb84d07cbb9e92deaa80d0c728d679a7be130ef8f8dd3dbb821aaa67e4823d",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "0417dc81babdb1d631469e230388255505840f541e14003e70a9d8d5fecab263"
+      },
+      "source_write_sha256": "54b2b0117c1873fa32cee74f03dcb0f4faaac3a814c8df021336597a406457cb",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-006.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "5ece7efa3f4f0d5b644a19fd7dd2e8cf85a16fc16328fd6472886674d9b9e587",
+      "bytes": 1115425,
+      "size": [
+        1569,
+        1003
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 6,
+      "native_size": [
+        75,
+        48
+      ],
+      "target_size": [
+        300,
+        192
+      ],
+      "native_opaque_pixels": 1127,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          85,
+          81
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        20,
+        24,
+        1569,
+        983
+      ],
+      "native_content_rect": [
+        1,
+        0,
+        75,
+        48
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent HD fine pixel-art sprite for our authorized display-only game layer. Image 1 is the exact native 75 x 48 sprite enlarged 8x; use it as a strict composition, silhouette and contents reference. Image 2 is the user-approved fine pixel-art style; use its restrained natural colors, fine crisp pixel clusters, readable materials and detail only. Faithfully redraw this sparse shoreline and simple wooden pier. There is a small clump of conifers at the lower left, a thin pale shoreline along the bottom, a simple pier across the lower right and a separate clump of conifers at the upper right. Blue water appears only in the narrow original lower-right and right-edge shapes. Preserve the very large transparent upper-left and central regions. There are no boats, no buildings and no crane. Keep the original 75:48 full canvas aspect, original baseline, proportions, object positions and every original empty area. The sprite must read clearly at 300 x 192 display pixels. Use fine material detail within the original shapes; no semantic embellishment. Use true alpha transparency around and between forms; magenta in image 1 is transparent and must vanish entirely, without pink/red/green/white boundary fringes. No text, border, rectangular scenery backdrop, detached cast shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "f00c8905029577286df7ebc27c83e918c3903b0bda6424833692b39ae607683b",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "7e8ffc27b1740a6e4ef5c472dedaa63c787b7dc4e356284b3b909f63784ce752"
+      },
+      "source_write_sha256": "f2c9ea8ce830fad72a2a1cf9fa8d6e39d2ac14636547a6b27b8509ef72ae30a7",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-007.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "37722b6edb876c96b6fc2f186fc98ac211292973e3fcd909f0f67a4a7165feef",
+      "bytes": 1230436,
+      "size": [
+        1568,
+        1003
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 7,
+      "native_size": [
+        75,
+        48
+      ],
+      "target_size": [
+        300,
+        192
+      ],
+      "native_opaque_pixels": 1130,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          85,
+          81
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        24,
+        3,
+        1568,
+        1000
+      ],
+      "native_content_rect": [
+        1,
+        0,
+        75,
+        48
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent HD fine pixel-art sprite for our authorized display-only game layer. Image 1 is the exact native 75 x 48 sprite enlarged 8x; use it as a strict composition, silhouette and contents reference. Image 2 is the user-approved fine pixel-art style; use its restrained natural colors, fine crisp pixel clusters, readable materials and detail only. Faithfully redraw this sparse shoreline and wooden dry-dock structure. Preserve the lower-left conifers, the thin bottom shoreline, the low pier across the lower right and the original tall narrow timber support structure and conifers at the upper right. Blue water appears only in the original narrow lower-right and right-edge shapes. Preserve every large transparent upper-left and central region. There are no boats, ships or new buildings. Keep the original 75:48 full canvas aspect, original baseline, proportions, object positions and every original empty area. The sprite must read clearly at 300 x 192 display pixels. Use fine material detail within the original shapes; no semantic embellishment. Use true alpha transparency around and between forms; magenta in image 1 is transparent and must vanish entirely, without pink/red/green/white boundary fringes. No text, border, rectangular scenery backdrop, detached cast shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "6761cd90abe22934833a3fe7bfd5ea6a4de8f7618d876025e1703218a0d5fa93",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "5830c1bae22b62b881f9ca599b87e6773a003b2323a84e6d4cba91337e085a1b"
+      },
+      "source_write_sha256": "0593e721473bf5a71934e3120da408fb32f3349ad694c4ee1864cab132be846e",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-008.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "2dcbd2f491626e43ef19f19b4f504138aa28f7b3c61865eea55feb9e243ca2be",
+      "bytes": 1389646,
+      "size": [
+        1568,
+        1003
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 8,
+      "native_size": [
+        75,
+        48
+      ],
+      "target_size": [
+        300,
+        192
+      ],
+      "native_opaque_pixels": 1175,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          85,
+          81
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        3,
+        0,
+        1568,
+        1003
+      ],
+      "native_content_rect": [
+        1,
+        0,
+        75,
+        48
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent HD fine pixel-art sprite for our authorized display-only game layer. Image 1 is the exact native 75 x 48 sprite enlarged 8x; use it as a strict composition, silhouette and contents reference. Image 2 is the user-approved fine pixel-art style; use its restrained natural colors, fine crisp pixel clusters, readable materials and detail only. Faithfully redraw this sparse shipbuilding shoreline. Keep the original unfinished low wooden boat hull with visible ribs at the lower left, the narrow pale slipway and shoreline across the bottom, the narrow blue water patch at the lower right and the original tall narrow timber support structure and conifers at the upper right. Preserve all relative positions and the large transparent upper-left and central regions. The hull has no mast, sail or flag, and there are no other ships or buildings. Keep the original 75:48 full canvas aspect, original baseline, proportions, object positions and every original empty area. The sprite must read clearly at 300 x 192 display pixels. Use fine material detail within the original shapes; no semantic embellishment. Use true alpha transparency around and between forms; magenta in image 1 is transparent and must vanish entirely, without pink/red/green/white boundary fringes. No text, border, rectangular scenery backdrop, detached cast shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "fa556a44e4574fce4907cf8537d83f9d091d5c5ebf3094deee0e9e71a5ef5c16",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "1baef8e1ec22e365e37c1eed7881ee778abaab80a1b57442dc376c060bb5251d"
+      },
+      "source_write_sha256": "e5ecb0b82689ef7df2c5d4bbc77ad773cda868e4b3f0907a09027fa5ecffc545",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-012.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "0a209fc01aba2700476081cef9c21a45350a57cb459269845aeb98ec220ba63e",
+      "bytes": 1886046,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 12,
+      "native_size": [
+        44,
+        22
+      ],
+      "target_size": [
+        176,
+        88
+      ],
+      "native_opaque_pixels": 639,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          54,
+          55
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        10,
+        13,
+        1764,
+        830
+      ],
+      "native_content_rect": [
+        0,
+        1,
+        43,
+        22
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent HD pixel-art building sprite for our authorized display-only HD layer. Image 1 is the exact 44 x 22 native sprite enlarged 8x and determines contents, silhouette, proportions, perspective and all placements. Image 2 is our user-approved fine pixel-art style reference, for small crisp pixel clusters, restrained natural colors, readable material textures and level of detail only. The original small schoolhouse: a pale masonry school with a narrow little bell-tower on its left, a modest brown roof, a long white picket fence across the front right and the original green trees behind. Preserve every fence gap, the original tower, and all relative positions. Faithfully redraw the native source with readable roof, wall, foliage and timber detail, keeping the original 2:1 full canvas, ground baseline and empty margins. It must read clearly at 176 x 88 display pixels. Use true alpha transparency around and between objects. Magenta in image 1 is transparent and must never appear in the output; avoid colored fringes, red or pink outlines. Keep the original composition; no extra architecture, people, props, weapons, signs, scenery, ground rectangle, detached shadow, text, border, glow, smooth airbrush, blur, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "11cb060d2b584adfd08e95157dd379f95e630e8324a20ebbf9946793087813b6",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "4beacffbb2182895e9a64136061856b8c63189dd825d279425ad28081a8eb62f"
+      },
+      "source_write_sha256": "e59a17eba39565660862374269673246b02ba13ebffe5b9199751e2331ea98a6",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-013.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "111a5a75f2ba31f6cc788a53f3b70d847349f6abd17a661d7aa2bee88282e57a",
+      "bytes": 1709841,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 13,
+      "native_size": [
+        44,
+        22
+      ],
+      "target_size": [
+        176,
+        88
+      ],
+      "native_opaque_pixels": 699,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          54,
+          55
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        9,
+        140,
+        1771,
+        737
+      ],
+      "native_content_rect": [
+        0,
+        4,
+        44,
+        21
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent HD pixel-art building sprite for our authorized display-only HD layer. Image 1 is the exact 44 x 22 native sprite enlarged 8x and determines contents, silhouette, proportions, perspective and all placements. Image 2 is our user-approved fine pixel-art style reference, for small crisp pixel clusters, restrained natural colors, readable material textures and level of detail only. The original college: a compact symmetric broad warm masonry school building with two horizontal wings, a low brown tiled roof, the original small dark window grid, central entrance, and small trees at the two edges. Match the original shallow perspective exactly. Faithfully redraw the native source with readable roof, wall, foliage and timber detail, keeping the original 2:1 full canvas, ground baseline and empty margins. It must read clearly at 176 x 88 display pixels. Use true alpha transparency around and between objects. Magenta in image 1 is transparent and must never appear in the output; avoid colored fringes, red or pink outlines. Keep the original composition; no extra architecture, people, props, weapons, signs, scenery, ground rectangle, detached shadow, text, border, glow, smooth airbrush, blur, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "0cbdd14b2dc1ffbb95ef3dcc5b8c611b91e32ffb8c52c6b621383c13c1148b4b",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "2e50c1e9da59c2951d9289c68d9c82a50530120d60486cf2b881dfba5d4ee486"
+      },
+      "source_write_sha256": "768966fba267b8a578b6681721e5782dcc5e34df0cd0a2faf0a3eb27f9c8e212",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-014.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "e61345a39b9f68d3623cb50ce089f99d1619ff0aec038172c0b8859ea9974d85",
+      "bytes": 2109631,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 14,
+      "native_size": [
+        44,
+        22
+      ],
+      "target_size": [
+        176,
+        88
+      ],
+      "native_opaque_pixels": 828,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          54,
+          55
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        25,
+        29,
+        1749,
+        841
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        44,
+        22
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent HD pixel-art building sprite for our authorized display-only HD layer. Image 1 is the exact 44 x 22 native sprite enlarged 8x and determines contents, silhouette, proportions, perspective and all placements. Image 2 is our user-approved fine pixel-art style reference, for small crisp pixel clusters, restrained natural colors, readable material textures and level of detail only. The original university: two warm masonry multi-storey wings flanking a slightly recessed pale central entrance, a brown roof with the original raised wing end sections and original window grid. Match the original width, shallow perspective, door placement and silhouette. Faithfully redraw the native source with readable roof, wall, foliage and timber detail, keeping the original 2:1 full canvas, ground baseline and empty margins. It must read clearly at 176 x 88 display pixels. Use true alpha transparency around and between objects. Magenta in image 1 is transparent and must never appear in the output; avoid colored fringes, red or pink outlines. Keep the original composition; no extra architecture, people, props, weapons, signs, scenery, ground rectangle, detached shadow, text, border, glow, smooth airbrush, blur, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "5f57ddb836714887f2b27cbbd82fdd69f478d34c2873122d41be19448a78311d",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "2c9ae2ab4721dd8b369c0d6e8e6a530943ae428335f8d6da7e10550272c079cd"
+      },
+      "source_write_sha256": "042e493634ac1019dbe1acf5e376bd56642609b6ed66c5891365ff9f7a42968b",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-015.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "de7baee7faf1ec9ef725b74dbb22e244cefc101209bb5c3912107965044f4202",
+      "bytes": 1665430,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 15,
+      "native_size": [
+        44,
+        22
+      ],
+      "target_size": [
+        176,
+        88
+      ],
+      "native_opaque_pixels": 684,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          54,
+          55
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        66,
+        55,
+        1709,
+        818
+      ],
+      "native_content_rect": [
+        0,
+        1,
+        43,
+        22
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent HD pixel-art building sprite for our authorized display-only HD layer. Image 1 is the exact 44 x 22 native sprite enlarged 8x and determines contents, silhouette, proportions, perspective and all placements. Image 2 is our user-approved fine pixel-art style reference, for small crisp pixel clusters, restrained natural colors, readable material textures and level of detail only. The original warehouse: a squat pale timber-and-plaster barn with a warm golden straw roof, a central dark double-door on the front gable, the original small dark loft opening, and the original green shrub on the right. Match the original asymmetrical side perspective and roof shape. Faithfully redraw the native source with readable roof, wall, foliage and timber detail, keeping the original 2:1 full canvas, ground baseline and empty margins. It must read clearly at 176 x 88 display pixels. Use true alpha transparency around and between objects. Magenta in image 1 is transparent and must never appear in the output; avoid colored fringes, red or pink outlines. Keep the original composition; no extra architecture, people, props, weapons, signs, scenery, ground rectangle, detached shadow, text, border, glow, smooth airbrush, blur, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "2eae775aee27e11e6788c060d9f2a1d6ef077ac8312e727f4b4bbf791f9f9271",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "f97813c95fc494a09a79fb93a15e5045237671e3b961f2783e4c48e02047d399"
+      },
+      "source_write_sha256": "5600a93bd21c326989615be5a39f2cb4c6edd15ffc4801b2b9408111c53e25a3",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-018.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "b00bd9cde6e143b3307f670f70899cefa20c02dc87e3073b9adc9d755f130968",
+      "bytes": 1284455,
+      "size": [
+        1158,
+        1359
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 18,
+      "native_size": [
+        23,
+        27
+      ],
+      "target_size": [
+        92,
+        108
+      ],
+      "native_opaque_pixels": 410,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          33,
+          60
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        92,
+        91,
+        1149,
+        1305
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        23,
+        27
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent fine pixel-art HD building sprite for our authorized display-only HD layer. Image 1 is the exact native 23 x 27 sprite enlarged 8x: it controls all contents, silhouette, perspective, relative placement and empty areas. Image 2 is the user-approved fine pixel-art style: use its crisp small pixel clusters, restrained natural colors, readable materials and amount of detail only. A small pale customs house at the upper left of its tall native canvas, with a low brown roof, a narrow colored bunting beneath the top windows, a little green tree behind the right, and a broad golden timber stair and landing extending down to the lower right. Preserve the large original transparent space at the lower left and the exact stair shape. Faithfully redraw this native sprite, retaining a 23:27 full canvas, exact ground baseline and empty margins. It must read clearly at only 92 x 108 display pixels. Preserve any small native flags, cloths or color marks in exactly their original placement and colors. Use true alpha transparency around and between forms; magenta in image 1 means transparent and must disappear entirely. Avoid red, green, pink or white outlines/fringes around the transparent boundary. No extra floors, architecture, scenery, props, people, weapons, signs, lettering, border, ground rectangle, detached shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "4073938c6791de553906e49d2ae64a27d22d7937a81f7e307d23fc6af5725cbf",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "2c02b5c6f29937b22e4a05b1ab3b729c54ef7a95ff45451168118106907ebc7e"
+      },
+      "source_write_sha256": "ecc35abb2f51122138d9aca0d8a4b9c82c1582c4356f014259ffb855cf36983d",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-019.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "fdabcccc60857158ef61b5fcfa63d7371dc4f60d3d0e01fd1766064f2dc37fd5",
+      "bytes": 1057970,
+      "size": [
+        1158,
+        1359
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 19,
+      "native_size": [
+        23,
+        27
+      ],
+      "target_size": [
+        92,
+        108
+      ],
+      "native_opaque_pixels": 490,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          33,
+          60
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        107,
+        106,
+        1111,
+        1266
+      ],
+      "native_content_rect": [
+        0,
+        1,
+        23,
+        27
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent fine pixel-art HD building sprite for our authorized display-only HD layer. Image 1 is the exact native 23 x 27 sprite enlarged 8x: it controls all contents, silhouette, perspective, relative placement and empty areas. Image 2 is the user-approved fine pixel-art style: use its crisp small pixel clusters, restrained natural colors, readable materials and amount of detail only. A narrow pale two-storey printing workshop with the original low brown roof, small window arrangement, red-white-blue bunting immediately beneath the roof and the little green tree at the right. Preserve the exact facade and native silhouette. Faithfully redraw this native sprite, retaining a 23:27 full canvas, exact ground baseline and empty margins. It must read clearly at only 92 x 108 display pixels. Preserve any small native flags, cloths or color marks in exactly their original placement and colors. Use true alpha transparency around and between forms; magenta in image 1 means transparent and must disappear entirely. Avoid red, green, pink or white outlines/fringes around the transparent boundary. No extra floors, architecture, scenery, props, people, weapons, signs, lettering, border, ground rectangle, detached shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "9169b6f9a132cf4fc123a4b40742506251494f4d4d0963c5b93963d7248a453a",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "5395ba55c8e365637c2ba339a780fb0697c45994b7b9bda1df260230d8c7c4f6"
+      },
+      "source_write_sha256": "9a5b2e09aa68ee631e6045b4201600928a71c01bc991783365e9e69275caaba8",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-020.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "f14a40b5750c9c0ed1cc6f72594cf7e50415a43b9449a8083d85ad04c222fa4a",
+      "bytes": 1466392,
+      "size": [
+        1158,
+        1359
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 20,
+      "native_size": [
+        23,
+        27
+      ],
+      "target_size": [
+        92,
+        108
+      ],
+      "native_opaque_pixels": 591,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          33,
+          60
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        113,
+        79,
+        1073,
+        1278
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        23,
+        27
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent fine pixel-art HD building sprite for our authorized display-only HD layer. Image 1 is the exact native 23 x 27 sprite enlarged 8x: it controls all contents, silhouette, perspective, relative placement and empty areas. Image 2 is the user-approved fine pixel-art style: use its crisp small pixel clusters, restrained natural colors, readable materials and amount of detail only. A taller pale three-storey newspaper workshop with the original warm brown hipped roof, small dark windows on each floor, central doorway and red-white-blue bunting immediately beneath the roof. Preserve the exact facade and native silhouette. Faithfully redraw this native sprite, retaining a 23:27 full canvas, exact ground baseline and empty margins. It must read clearly at only 92 x 108 display pixels. Preserve any small native flags, cloths or color marks in exactly their original placement and colors. Use true alpha transparency around and between forms; magenta in image 1 means transparent and must disappear entirely. Avoid red, green, pink or white outlines/fringes around the transparent boundary. No extra floors, architecture, scenery, props, people, weapons, signs, lettering, border, ground rectangle, detached shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "caea83ef424f628e5ca121abab6f27e5490eea543d3add20aca6ce8933b61a58",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "2a2c95aa34237fc3581f49de344c76da9b355e800acce20d3841e915e343ab25"
+      },
+      "source_write_sha256": "8b04f951f60559a7e6f74e82a7e400dc10ac61acba2d214b327af0b8b65429cf",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-022.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "e3c9e76f560b741e6bfcdc545959c0b883d945614c21c0396f3dfd0508aa0b3b",
+      "bytes": 1730452,
+      "size": [
+        1158,
+        1359
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 22,
+      "native_size": [
+        23,
+        27
+      ],
+      "target_size": [
+        92,
+        108
+      ],
+      "native_opaque_pixels": 524,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          33,
+          60
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        46,
+        79,
+        1126,
+        1304
+      ],
+      "native_content_rect": [
+        0,
+        1,
+        23,
+        27
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent fine pixel-art HD building sprite for our authorized display-only HD layer. Image 1 is the exact native 23 x 27 sprite enlarged 8x: it controls all contents, silhouette, perspective, relative placement and empty areas. Image 2 is the user-approved fine pixel-art style: use its crisp small pixel clusters, restrained natural colors, readable materials and amount of detail only. A modest narrow weaving workshop with warm pale plaster walls, brown thatched roof, a simple dark front opening, a small white cloth across the lower left of the facade and the original green foliage at the roof edges and ground. Faithfully redraw this native sprite, retaining a 23:27 full canvas, exact ground baseline and empty margins. It must read clearly at only 92 x 108 display pixels. Preserve any small native flags, cloths or color marks in exactly their original placement and colors. Use true alpha transparency around and between forms; magenta in image 1 means transparent and must disappear entirely. Avoid red, green, pink or white outlines/fringes around the transparent boundary. No extra floors, architecture, scenery, props, people, weapons, signs, lettering, border, ground rectangle, detached shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "f82d4d6b801ffacf66ef47992de72ebc24c557874e7540ed91c27419289ea075",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "0a5004b578d0520cc3d3a6672424ec672797235946048328aaeb53b5ff7246fc"
+      },
+      "source_write_sha256": "954166f2fc8727c1489d75627c595b55f91e69fd8c94caa828615bdc77e10397",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-023.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "c50fc75b33e60e5a6092688f0c03cff5d5eea024b85fde18cb4039726eceaafb",
+      "bytes": 1849400,
+      "size": [
+        1158,
+        1359
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 23,
+      "native_size": [
+        23,
+        27
+      ],
+      "target_size": [
+        92,
+        108
+      ],
+      "native_opaque_pixels": 559,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          33,
+          60
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        48,
+        29,
+        1126,
+        1301
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        23,
+        27
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent fine pixel-art HD building sprite for our authorized display-only HD layer. Image 1 is the exact native 23 x 27 sprite enlarged 8x: it controls all contents, silhouette, perspective, relative placement and empty areas. Image 2 is the user-approved fine pixel-art style: use its crisp small pixel clusters, restrained natural colors, readable materials and amount of detail only. The larger narrow textile mill with warm pale plaster walls, a raised brown thatched roof shape, the original dark windows and doorway, and a large draped white cloth across the upper facade. Preserve the exact perspective and the cloth silhouette. Faithfully redraw this native sprite, retaining a 23:27 full canvas, exact ground baseline and empty margins. It must read clearly at only 92 x 108 display pixels. Preserve any small native flags, cloths or color marks in exactly their original placement and colors. Use true alpha transparency around and between forms; magenta in image 1 means transparent and must disappear entirely. Avoid red, green, pink or white outlines/fringes around the transparent boundary. No extra floors, architecture, scenery, props, people, weapons, signs, lettering, border, ground rectangle, detached shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "61c73bd72d817c0b9905e4384ddec8be2d76226f6333c4ca31d812b8a2d1af4f",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "ab8790c65a319ad80dcc388b91ea0ad20e427f5f4cbb8bba51d3f8b3a21b6d90"
+      },
+      "source_write_sha256": "3be677ab9cbe60774f609eb46bd5da068cacb1e6998112827524b42554c4c5e5",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-025.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "1ec3dc44f3a942e3bec47b824c9fbc96ad37f162f2c34078b46f25bccb46e086",
+      "bytes": 1257262,
+      "size": [
+        1158,
+        1359
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 25,
+      "native_size": [
+        23,
+        27
+      ],
+      "target_size": [
+        92,
+        108
+      ],
+      "native_opaque_pixels": 431,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          33,
+          60
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        89,
+        97,
+        1088,
+        1268
+      ],
+      "native_content_rect": [
+        0,
+        1,
+        23,
+        27
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent fine pixel-art HD building sprite for our authorized display-only HD layer. Image 1 is the exact native 23 x 27 sprite enlarged 8x: it controls all contents, silhouette, perspective, relative placement and empty areas. Image 2 is the user-approved fine pixel-art style: use its crisp small pixel clusters, restrained natural colors, readable materials and amount of detail only. A narrow two-storey tobacconist workshop with pale warm plaster walls, a small brown hipped roof, the original dark windows and doorway, and sparse green shrubs at the lower left and right. Keep its plain compact original form. Faithfully redraw this native sprite, retaining a 23:27 full canvas, exact ground baseline and empty margins. It must read clearly at only 92 x 108 display pixels. Preserve any small native flags, cloths or color marks in exactly their original placement and colors. Use true alpha transparency around and between forms; magenta in image 1 means transparent and must disappear entirely. Avoid red, green, pink or white outlines/fringes around the transparent boundary. No extra floors, architecture, scenery, props, people, weapons, signs, lettering, border, ground rectangle, detached shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "67b8dc083d928f1dfae0578f69944af2af3a017d338bb8dcdcdebd59f73e2d90",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "1f9bbd236f1b3087241c59b75ce3af4a1508869e7f60c23f6354f60bf548dd32"
+      },
+      "source_write_sha256": "2e1c72a0512b92b8c83c4313ee55994945e384a8a3798e94a4ac3b4d398d7743",
+      "source_writer_bits": 7,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-026.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "7346b1ce2df7b0a586e25b2b51501dc5472abb0801b54b22ceeb679cebc8879e",
+      "bytes": 1324757,
+      "size": [
+        1158,
+        1359
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 26,
+      "native_size": [
+        23,
+        27
+      ],
+      "target_size": [
+        92,
+        108
+      ],
+      "native_opaque_pixels": 540,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          33,
+          60
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        114,
+        66,
+        1045,
+        1294
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        23,
+        27
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent fine pixel-art HD building sprite for our authorized display-only HD layer. Image 1 is the exact native 23 x 27 sprite enlarged 8x: it controls all contents, silhouette, perspective, relative placement and empty areas. Image 2 is the user-approved fine pixel-art style: use its crisp small pixel clusters, restrained natural colors, readable materials and amount of detail only. A taller narrow cigar workshop with pale warm walls, a steep warm brown roof and the original short roof projections, multiple dark windows with timber accents, and the original recessed ground-level entrance. Match the native building shape exactly. Faithfully redraw this native sprite, retaining a 23:27 full canvas, exact ground baseline and empty margins. It must read clearly at only 92 x 108 display pixels. Preserve any small native flags, cloths or color marks in exactly their original placement and colors. Use true alpha transparency around and between forms; magenta in image 1 means transparent and must disappear entirely. Avoid red, green, pink or white outlines/fringes around the transparent boundary. No extra floors, architecture, scenery, props, people, weapons, signs, lettering, border, ground rectangle, detached shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "9c0d52347f25f0c491c7da2936d4c465e7c1eb4d523139fd5d49a751cd104992",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "31910722e99512d07bcf2faca4f6f05bb3403b56cdb3495ea03d2f68e5e4edf6"
+      },
+      "source_write_sha256": "421f728124e050d030cd322b6cc05d2c83e391065fde1bd06ff1516313f01533",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-028.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "40f608ea2942f2b1d28d8656b8dffce085d78cd63e652493570f23c6e4bfbefa",
+      "bytes": 1515082,
+      "size": [
+        1158,
+        1359
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 28,
+      "native_size": [
+        23,
+        27
+      ],
+      "target_size": [
+        92,
+        108
+      ],
+      "native_opaque_pixels": 496,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          33,
+          60
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        38,
+        47,
+        1146,
+        1280
+      ],
+      "native_content_rect": [
+        0,
+        1,
+        23,
+        27
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent fine pixel-art HD building sprite for our authorized display-only HD layer. Image 1 is the exact native 23 x 27 sprite enlarged 8x: it controls all contents, silhouette, perspective, relative placement and empty areas. Image 2 is the user-approved fine pixel-art style: use its crisp small pixel clusters, restrained natural colors, readable materials and amount of detail only. A narrow pale distillery workshop, with the original asymmetric gabled roof, a blue glazed loft window high on the left front, original lower dark door and window openings, and the green foliage behind the left roof edge. Keep all native blue details. Faithfully redraw this native sprite, retaining a 23:27 full canvas, exact ground baseline and empty margins. It must read clearly at only 92 x 108 display pixels. Preserve any small native flags, cloths or color marks in exactly their original placement and colors. Use true alpha transparency around and between forms; magenta in image 1 means transparent and must disappear entirely. Avoid red, green, pink or white outlines/fringes around the transparent boundary. No extra floors, architecture, scenery, props, people, weapons, signs, lettering, border, ground rectangle, detached shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "f94585f34038b8b09612dff86189b4a86c343df7c0ca64f578b842e891a4f245",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "362f7937e2392e442894a92d5e065addd1420732efd8e694991f657fe4540c11"
+      },
+      "source_write_sha256": "0e8a4b312343b81951d18ad84fc6da8afc5cb88439f834b08ecd422a82ff6e97",
+      "source_writer_bits": 4,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-029.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "f8d614256699f655cb03234442a6c9f54f50e748a823a1a5d79dffc6efa70700",
+      "bytes": 1584580,
+      "size": [
+        1158,
+        1359
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 29,
+      "native_size": [
+        23,
+        27
+      ],
+      "target_size": [
+        92,
+        108
+      ],
+      "native_opaque_pixels": 557,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          33,
+          60
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        73,
+        48,
+        1102,
+        1310
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        23,
+        27
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent fine pixel-art HD building sprite for our authorized display-only HD layer. Image 1 is the exact native 23 x 27 sprite enlarged 8x: it controls all contents, silhouette, perspective, relative placement and empty areas. Image 2 is the user-approved fine pixel-art style: use its crisp small pixel clusters, restrained natural colors, readable materials and amount of detail only. A taller narrow pale rum workshop with the original asymmetric steep brown gabled roof, a blue glazed loft window high on the left front, original dark windows and doorway and the narrow right facade. Keep the original perspective and all native blue details. Faithfully redraw this native sprite, retaining a 23:27 full canvas, exact ground baseline and empty margins. It must read clearly at only 92 x 108 display pixels. Preserve any small native flags, cloths or color marks in exactly their original placement and colors. Use true alpha transparency around and between forms; magenta in image 1 means transparent and must disappear entirely. Avoid red, green, pink or white outlines/fringes around the transparent boundary. No extra floors, architecture, scenery, props, people, weapons, signs, lettering, border, ground rectangle, detached shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "d36f4a2746ae95a8c72ecf1e9fe8ccb53966ad123dc07945fc55dab13437ae7d",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "1ab49220e290596299904fa1da364621116eceb2469316c5ddbc59476670d387"
+      },
+      "source_write_sha256": "42667c48236478ccf4532c5202c4044dcca0bada44a24db011c60b0e9d61daeb",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-033.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "727e709cfea47ed0b39e17177b2d1a466179a35deb92899f0cac9a631bbcb704",
+      "bytes": 945396,
+      "size": [
+        1158,
+        1359
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 33,
+      "native_size": [
+        23,
+        27
+      ],
+      "target_size": [
+        92,
+        108
+      ],
+      "native_opaque_pixels": 474,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          33,
+          60
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        134,
+        158,
+        1046,
+        1221
+      ],
+      "native_content_rect": [
+        0,
+        1,
+        22,
+        27
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent fine pixel-art HD building sprite for our authorized display-only HD layer. Image 1 is the exact native 23 x 27 sprite enlarged 8x: it controls all contents, silhouette, perspective, relative placement and empty areas. Image 2 is the user-approved fine pixel-art style: use its crisp small pixel clusters, restrained natural colors, readable materials and amount of detail only. A squat narrow pale fur-trading workshop with the original low warm roof, small pale diamond emblem high on the facade, the original long dark window bands and ground-level dark opening. Preserve the native green foliage above the left roof and the exact emblem shape; do not add lettering. Faithfully redraw this native sprite, retaining a 23:27 full canvas, exact ground baseline and empty margins. It must read clearly at only 92 x 108 display pixels. Preserve any small native flags, cloths or color marks in exactly their original placement and colors. Use true alpha transparency around and between forms; magenta in image 1 means transparent and must disappear entirely. Avoid red, green, pink or white outlines/fringes around the transparent boundary. No extra floors, architecture, scenery, props, people, weapons, signs, lettering, border, ground rectangle, detached shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "ca0aec613a4663b484a9f750a982cd08d238827a65d7edceace26fee7decb55f",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "1d701d4774914a2cd63e98a1c63d433b6b2566d7d94ccca07afcd493e227dcc1"
+      },
+      "source_write_sha256": "6f58aab578e507673ef98555a4e107bfd23c08e409d6bf579f438bad1253809f",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-034.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "cf141a3eee4401f15f3298ecc107aded316d4e16b5836b38f02338788d2b520c",
+      "bytes": 1374572,
+      "size": [
+        1158,
+        1359
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 34,
+      "native_size": [
+        23,
+        27
+      ],
+      "target_size": [
+        92,
+        108
+      ],
+      "native_opaque_pixels": 592,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          33,
+          60
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        92,
+        58,
+        1092,
+        1305
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        23,
+        27
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent fine pixel-art HD building sprite for our authorized display-only HD layer. Image 1 is the exact native 23 x 27 sprite enlarged 8x: it controls all contents, silhouette, perspective, relative placement and empty areas. Image 2 is the user-approved fine pixel-art style: use its crisp small pixel clusters, restrained natural colors, readable materials and amount of detail only. A taller narrow pale coat-making workshop with the original raised warm roof, small pale emblem high on the facade, original long dark window bands on multiple floors and ground-level dark opening. Preserve the native emblem shape without text and the exact building silhouette. Faithfully redraw this native sprite, retaining a 23:27 full canvas, exact ground baseline and empty margins. It must read clearly at only 92 x 108 display pixels. Preserve any small native flags, cloths or color marks in exactly their original placement and colors. Use true alpha transparency around and between forms; magenta in image 1 means transparent and must disappear entirely. Avoid red, green, pink or white outlines/fringes around the transparent boundary. No extra floors, architecture, scenery, props, people, weapons, signs, lettering, border, ground rectangle, detached shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "d7458eda32affe1705d76b43e4392f2abea67f67a674a87ff9218d4dcdeb6289",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "9bdea7d225a7feee5ee675b6e3bdc98de654dc6ac7939e2492114e4d01db519f"
+      },
+      "source_write_sha256": "8f988330fdeb43e273f8c221cd4ee73bc0d0aa6c0c6a6a67e5cbee3f6a98a011",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-036.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "f11c3b4b58a8768f39a28bc9c5d086e20018e0374846adf6fa9594fab6c7246c",
+      "bytes": 1415720,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 36,
+      "native_size": [
+        44,
+        22
+      ],
+      "target_size": [
+        176,
+        88
+      ],
+      "native_opaque_pixels": 670,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          54,
+          55
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        58,
+        59,
+        1751,
+        854
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        44,
+        22
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent HD fine pixel-art sprite for our authorized display-only game layer. Image 1 is the exact native 44 x 22 sprite enlarged 8x; use it as a strict composition, silhouette and contents reference. Image 2 is the user-approved fine pixel-art style; use its restrained natural colors, fine crisp pixel clusters, readable materials and detail only. Faithfully redraw this low broad timber-and-plaster workshop. Keep the exact original thatched gable roof, open dark bay on the left, narrow original vertical support posts, pale right facade and openings, and the small blue detail extending from the lower right. No chimney, emblem, tools, wheels, machinery or new props. Keep the original 44:22 full canvas aspect, original baseline, proportions, object positions and every original empty area. The sprite must read clearly at 176 x 88 display pixels. Use fine material detail within the original shapes; no semantic embellishment. Use true alpha transparency around and between forms; magenta in image 1 is transparent and must vanish entirely, without pink/red/green/white boundary fringes. No text, border, rectangular scenery backdrop, detached cast shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "4e96a4026c5426658e4f60d7de6244acac8e784d7fe61770d83294e6fd85b628",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "773f00066710246b280054fbef4fed6066f1af21bdba86c95a57b31a5832679b"
+      },
+      "source_write_sha256": "4cc602c5cbb6df3b307b161f92007e580349773a3349b01a0a64d0df21c7cc59",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-037.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "f73e86dad84756ebc730c411a1c5a5463ae2c53a2361757b0305542a2973ed94",
+      "bytes": 1552773,
+      "size": [
+        1501,
+        1048
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 37,
+      "native_size": [
+        53,
+        37
+      ],
+      "target_size": [
+        212,
+        148
+      ],
+      "native_opaque_pixels": 1048,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          63,
+          70
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        7,
+        10,
+        1495,
+        1035
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        53,
+        37
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent HD fine pixel-art sprite for our authorized display-only game layer. Image 1 is the exact native 53 x 37 sprite enlarged 8x; use it as a strict composition, silhouette and contents reference. Image 2 is the user-approved fine pixel-art style; use its restrained natural colors, fine crisp pixel clusters, readable materials and detail only. Faithfully redraw this modest pale church with one original narrow central-left bell-tower, the original sloping brown roof, the small native colored panel on the front, the original arched front doorway and the green trees exactly where shown. Keep the original compact silhouette and tower height. No additional towers, crosses, chimneys, statues, text or props. Keep the original 53:37 full canvas aspect, original baseline, proportions, object positions and every original empty area. The sprite must read clearly at 212 x 148 display pixels. Use fine material detail within the original shapes; no semantic embellishment. Use true alpha transparency around and between forms; magenta in image 1 is transparent and must vanish entirely, without pink/red/green/white boundary fringes. No text, border, rectangular scenery backdrop, detached cast shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "37c539b91a49c869753c10abfd86ed5248355f5f3f7545398d1be919d65d6468",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "52b17b56cd042dda27728c93dd7c5bae787408f7b62a0e28196c8bd84f5a62b7"
+      },
+      "source_write_sha256": "2ad6a7ecac24374952cdf3152b5d9bfbc298705cb6d0701a86bfc182fa660859",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-038.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "0efcf5e97bc578a901c0d5a79bdec7ffd57d9b5fe77e36ed946252d6a0e50979",
+      "bytes": 1707097,
+      "size": [
+        1501,
+        1048
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 38,
+      "native_size": [
+        53,
+        37
+      ],
+      "target_size": [
+        212,
+        148
+      ],
+      "native_opaque_pixels": 1413,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          63,
+          70
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        10,
+        8,
+        1494,
+        1034
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        53,
+        37
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent HD fine pixel-art sprite for our authorized display-only game layer. Image 1 is the exact native 53 x 37 sprite enlarged 8x; use it as a strict composition, silhouette and contents reference. Image 2 is the user-approved fine pixel-art style; use its restrained natural colors, fine crisp pixel clusters, readable materials and detail only. Faithfully redraw this larger pale cathedral: the exact native central pointed bell-tower and central arched doorway, the two low symmetrical flanking roof sections with their own dark openings, the small native colored front panels and green trees behind. Match every native roof height and door position. No extra towers, spires, statues, chimneys, crosses, text or props. Keep the original 53:37 full canvas aspect, original baseline, proportions, object positions and every original empty area. The sprite must read clearly at 212 x 148 display pixels. Use fine material detail within the original shapes; no semantic embellishment. Use true alpha transparency around and between forms; magenta in image 1 is transparent and must vanish entirely, without pink/red/green/white boundary fringes. No text, border, rectangular scenery backdrop, detached cast shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "24b9e170fa3ae67976b27d20bf7bdfcc29597bae65c0654727d19e67ffb650a9",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "42bbcb17cffb6637dad5b9c66a83f573893e0bb85de143cad23d11d55d03e9b5"
+      },
+      "source_write_sha256": "d6485e4974fe678f2c897dfec41a9175f4610dee3911255d2895edd7a11ffcf0",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-040.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "462163db5c17fcc5cd561c1eafcfd18330bf0cc1129e298e356a618e27abd0c6",
+      "bytes": 1393154,
+      "size": [
+        1158,
+        1359
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 40,
+      "native_size": [
+        23,
+        27
+      ],
+      "target_size": [
+        92,
+        108
+      ],
+      "native_opaque_pixels": 514,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          33,
+          60
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        19,
+        57,
+        1148,
+        1246
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        23,
+        27
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent HD fine pixel-art sprite for our authorized display-only game layer. Image 1 is the exact native 23 x 27 sprite enlarged 8x; use it as a strict composition, silhouette and contents reference. Image 2 is the user-approved fine pixel-art style; use its restrained natural colors, fine crisp pixel clusters, readable materials and detail only. Redraw the exact building shape in image 1 without adding or interpreting its purpose. Preserve the native asymmetric low gable roof, pale warm walls, dark blue-gray rectangular opening at the lower left, pale diagonally-slatted panel at the lower right and every patch of green foliage in its original position. No chimney, anvil, tools, chain, fire, flame, glowing windows, emblem, sign or other new detail not visible in the reference. Keep the original 23:27 full canvas aspect, original baseline, proportions, object positions and every original empty area. The sprite must read clearly at 92 x 108 display pixels. Use fine material detail within the original shapes; no semantic embellishment. Use true alpha transparency around and between forms; magenta in image 1 is transparent and must vanish entirely, without pink/red/green/white boundary fringes. No text, border, rectangular scenery backdrop, detached cast shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "fef0d3e15c2f2ad9d3808a99d155842fa01197b1ef4679be5500074d1d24f413",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "6588008b35df0af9d24cdf2ff026fad206747c7a2406ca4595c04df3e33a56bd"
+      },
+      "source_write_sha256": "783e3f846166d9974a564cb3e3d432ebe0040f1af6783ac76f9a110449b4a05d",
+      "source_writer_bits": 7,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-041.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "ab4ec26b3db95262bac5e0bdba170bd56e4bf26f3684187789c6401dba7b9cc6",
+      "bytes": 1341466,
+      "size": [
+        1158,
+        1359
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 41,
+      "native_size": [
+        23,
+        27
+      ],
+      "target_size": [
+        92,
+        108
+      ],
+      "native_opaque_pixels": 546,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          33,
+          60
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        59,
+        75,
+        1121,
+        1315
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        23,
+        27
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent HD fine pixel-art sprite for our authorized display-only game layer. Image 1 is the exact native 23 x 27 sprite enlarged 8x; use it as a strict composition, silhouette and contents reference. Image 2 is the user-approved fine pixel-art style; use its restrained natural colors, fine crisp pixel clusters, readable materials and detail only. Redraw the exact building shape in image 1 without adding or interpreting its purpose. Keep the original two-tier asymmetric roof geometry, pale warm walls, dark blue-gray lower-left rectangular opening, diagonally-slatted pale lower-right panel, narrow right facade and every patch of green foliage exactly as shown. No chimney, anvil, chain, tool, fire, flame, glowing windows, emblem, sign or extra architectural feature. Keep the original 23:27 full canvas aspect, original baseline, proportions, object positions and every original empty area. The sprite must read clearly at 92 x 108 display pixels. Use fine material detail within the original shapes; no semantic embellishment. Use true alpha transparency around and between forms; magenta in image 1 is transparent and must vanish entirely, without pink/red/green/white boundary fringes. No text, border, rectangular scenery backdrop, detached cast shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "ab34ad9dc5170856619a16d9548067db4d7c0c016444c9d5df63ae1f923bda2d",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "c5bbef54aea58981b5c62936242c8bb515170bc0488cfba752ec066b6db35f01"
+      },
+      "source_write_sha256": "dc64ee40b4349d45cd6f0de42b4cafc2ccce6318f46f3f606f6612b724ff419b",
+      "source_writer_bits": 6,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "building-046.png": {
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "sha256": "21a027f4373c9432668675a2e2a0deb89c5d67977c8dbe1fd20fa4ed5407b68d",
+      "bytes": 1082100,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "native_ordinal": 46,
+      "native_size": [
+        44,
+        22
+      ],
+      "target_size": [
+        176,
+        88
+      ],
+      "native_opaque_pixels": 401,
+      "observed_native_rects": [
+        [
+          10,
+          33,
+          54,
+          55
+        ]
+      ],
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        13,
+        136,
+        1761,
+        761
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        44,
+        22
+      ],
+      "sample_bounds_measurement": "alpha >= 32 for geometry only; sampled alpha unchanged",
+      "alpha": "retain raw PNG alpha unchanged; sample original RGBA inside recorded geometry; draw only verified native opaque source cells; no alpha threshold during painting",
+      "generation_prompt": "Create ONE standalone transparent HD fine pixel-art sprite for our authorized display-only game layer. Image 1 is the exact native 44 x 22 sprite enlarged 8x; use it as a strict composition, silhouette and contents reference. Image 2 is the user-approved fine pixel-art style; use its restrained natural colors, fine crisp pixel clusters, readable materials and detail only. Faithfully redraw only the low fenced enclosure in image 1: the original horizontal and diagonal wooden rails, the original small pale-brown form in the center and the sparse green conifers and shrubs around the edges. Preserve the transparent gaps between rails and the low sparse silhouette. Do not invent a barn, roof, animals, people, wagon, trough, sign or new props. Keep the original 44:22 full canvas aspect, original baseline, proportions, object positions and every original empty area. The sprite must read clearly at 176 x 88 display pixels. Use fine material detail within the original shapes; no semantic embellishment. Use true alpha transparency around and between forms; magenta in image 1 is transparent and must vanish entirely, without pink/red/green/white boundary fringes. No text, border, rectangular scenery backdrop, detached cast shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "reference_sha256": {
+        "native": "5b6b5889f892ad2e1b6d3f3266211606c0cff80f1475bae0b3d853b08e9d296d",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "BUILDING.SS": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+        "encoded_frame_sha256": "cc064e7c579538dd4618e34b1fc3158757de6dc263e32121266e1d14ce37e559"
+      },
+      "source_write_sha256": "addc9340c4000d482cf30f51a6aebe1f8128289e877e0f9589fb03bcf467e18a",
+      "source_writer_bits": 7,
+      "verification": {
+        "state": "READY",
+        "native_source_audit_sha256": "5284c510afea1096259d29cf332d3a13f0618a7ae46d80b9e5c521f2637085c4",
+        "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
+        "formal_GUI_conformance": "pending"
+      }
     }
   }
 }

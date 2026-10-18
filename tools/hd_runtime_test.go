@@ -13,10 +13,17 @@ import (
 )
 
 func hdResourceOriginalFiles() []string {
-	files := []string{"OPENING.EXE", "OPENING.PIK", "OPENBORD.PIK", "VICEROY.EXE", "BUILDING.SS", "PHYS0.SS", "ICONS.SS", "CURSOR.SS", "OPENTILE.SS", "OPENMENU.PIK", "WOODTILE.SS", "PARCH.SS", "DIFFICUL.PIK", "NATIONS.PIK", "CUSTOMIZ.PIK"}
+	files := []string{"OPENING.EXE", "OPENING.PIK", "OPENBORD.PIK", "VICEROY.EXE", "BUILDING.SS", "PHYS0.SS", "ICONS.SS", "CURSOR.SS", "OPENTILE.SS", "OPENMENU.PIK", "WOODTILE.SS", "PARCH.SS", "DIFFICUL.PIK", "NATIONS.PIK", "CUSTOMIZ.PIK", "KING1.SS"}
 	seen := map[string]bool{}
 	for _, name := range files {
 		seen[name] = true
+	}
+	// 完整測試副本也需要片頭逐幀來源；依目前固定定義去重。
+	for _, frame := range hdOpeningSpriteDefinitions {
+		if !seen[frame.sourceFile] {
+			files = append(files, frame.sourceFile)
+			seen[frame.sourceFile] = true
+		}
 	}
 	for _, frame := range hdSceneDefinitions {
 		if !seen[frame.file] {
@@ -48,7 +55,7 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 	m := golem.New()
 	before := bytes.Clone(m.Mem)
 	h, err := loadHDRuntime(m, game, assets)
-	if err != nil || h == nil || h.terrainBatch == nil || len(h.terrainBatch.frames) != 12 || h.smallTerrain == nil || len(h.smallTerrain.frames) != 8 || h.parch == nil || h.worldTexture == nil || h.texture == nil || h.small == nil || len(h.small.frames) != 80 || h.nine == nil || len(h.nine.frames) != 10 || h.shelter == nil || h.shelter.art.Bounds() != image.Rect(0, 0, 92, 108) || h.sea == nil || h.person == nil || h.person.art.Bounds() != image.Rect(0, 0, 24, 64) || h.sea.art.Bounds() != image.Rect(0, 0, 64, 64) || h.art.Bounds() != image.Rect(0, 0, 92, 108) || !bytes.Equal(before, m.Mem) {
+	if err != nil || h == nil || h.terrainBatch == nil || len(h.terrainBatch.frames) != 12 || h.smallTerrain == nil || len(h.smallTerrain.frames) != 8 || h.parch == nil || h.worldTexture == nil || h.texture == nil || h.small == nil || len(h.small.frames) != 80 || h.nine == nil || len(h.nine.frames) != len(hdNineFrames) || h.shelter == nil || h.shelter.art.Bounds() != image.Rect(0, 0, 92, 108) || h.sea == nil || h.person == nil || h.person.art.Bounds() != image.Rect(0, 0, 24, 64) || h.sea.art.Bounds() != image.Rect(0, 0, 64, 64) || h.art.Bounds() != image.Rect(0, 0, 92, 108) || !bytes.Equal(before, m.Mem) {
 		t.Fatal("正式素材載入失敗或改寫原版", err)
 	}
 	mutations := map[string]func(string, string){

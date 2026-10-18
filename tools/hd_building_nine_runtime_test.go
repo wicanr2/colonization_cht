@@ -240,6 +240,9 @@ func TestHDNineRuntimeNativeLifecycle(t *testing.T) {
 		}
 	}
 	load := func(path string) []byte { t.Helper(); b, e := os.ReadFile(path); need(e); return b }
+	if hash(load(filepath.Join(os.Getenv("TEST_HD_NINE_MODEL"), "check.json"))) != "65e5e83ac8ba6cfe6788b4dec7fc7f9b2349e392c06a8ad6053c2c9a390e3d93" {
+		t.Fatal("R42九來源模型不同")
+	}
 	inputBytes := load(filepath.Join(receipts, "lifecycle-r29-r1/gui/gui.inputs.json"))
 	pointBytes := load(filepath.Join(receipts, "lifecycle-public-r29-r1/observed/gui-points.json"))
 	if hash(inputBytes) != "3947d52a893ae3d6c6f388cefc1e67e4001d41270ca46e65856526a9b97471ca" || hash(pointBytes) != "821f1ba83576013bba52ca53a39273498af64c3269a819e40f2244d036a3e901" {
@@ -284,10 +287,12 @@ func TestHDNineRuntimeNativeLifecycle(t *testing.T) {
 	before := hash(m.Mem)
 	h, err := loadHDRuntime(m, game, assets)
 	need(err)
-	if h.nine == nil || len(h.nine.frames) != 10 || hash(m.Mem) != before {
+	if h.nine == nil || len(h.nine.frames) != len(hdNineFrames) || hash(m.Mem) != before {
 		t.Fatal("九來源載入失敗或改寫DOS")
 	}
 	p := h.nine
+	// R42模型只有九列；R44的第十列及R91新增資料沿各自收據驗證。
+	p.frames = p.frames[:9]
 	p.trace = true
 	negatives := map[int][]string{}
 	entryChecked, writerChecked, finishChecked, ownerChecked := map[int]bool{}, map[int]bool{}, map[int]bool{}, map[int]bool{}
@@ -349,7 +354,11 @@ func TestHDNineRuntimeNativeLifecycle(t *testing.T) {
 				t.Fatal("九來源沒有獨立逐點證據", at, pos, cell)
 			}
 		}
-		output, record := h.base(f)
+		// 本項只比較R44的物件圖層；後續整幅背景另依規格069驗證。
+		objectLayers := *h
+		objectLayers.opening, objectLayers.scenes, objectLayers.newGame = nil, nil, nil
+		objectLayers.texture, objectLayers.worldTexture, objectLayers.parch = nil, nil, nil
+		output, record := objectLayers.base(f)
 		h.restoreCursor(output, f)
 		receipt := p.receipt(f)
 		if record["reason"] == "known-building" {
@@ -447,9 +456,10 @@ func TestHDNineRuntimeNativeLifecycle(t *testing.T) {
 		need(m.Step())
 	}
 	capture()
-	if at != 49 || count != 53 || p.accepted != 130 || p.rejected != 0 {
+	if at != 49 || count != 53 || p.accepted != 120 || p.rejected != 0 {
 		t.Fatal("九來源原版路徑不同", at, count, p.accepted, p.rejected)
 	}
+	// 此模型只驗R42原有九來源；其他來源依各自正常路徑收據驗證。
 	for _, f := range p.frames {
 		if !entryChecked[f.ordinal] || !writerChecked[f.ordinal] || !finishChecked[f.ordinal] || !ownerChecked[f.ordinal] || len(negatives[f.ordinal]) != 20 {
 			t.Fatal("九來源反例缺漏", f.ordinal, negatives[f.ordinal])
