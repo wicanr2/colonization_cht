@@ -6629,3 +6629,26 @@ Python3.11.2／Pillow9.4.0及既有固定Docker映像。
 完整指紋、實際命令、四側原始收據檔名與驗證修正見[規格069](docs/spec/069-hd-menu-background-and-textures.md) R77。
 21個未接線PIK、51個未觀測ICONS候選、其他格式、世界移動、戰鬥與動畫仍待驗；
 完整玩家可見分母仍未知，不以本批當作全量HD完成。
+
+## 2026-10-18 R78：國會室內與計分背景的原版來源
+
+推論等級confirmed，限R77正常操作收據的27點／42筆輸入及三次完整PIK解碼。
+CCBKGD.PIK SHA-256 d2c11061faf65c2c51fee36177eee79f0e2cdc9f67efa17d465dbea5e0e1ceca；
+WOODPANL.PIK 0858856ad5b5dd0b6ab8e7a8f815fa602a9cf0237d8d323cd2b5ca141b32bc69。
+VICEROY.EXE a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3；
+固定解碼catalog e0b14a6ba8a8bec5cae3fd165ea6d88de384dc4f61c1ec67ca8504c29189aa5d。
+工具為dosgolem 82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7、
+Python3.11.2／Pillow9.4.0與既有固定Docker映像。
+位址採dosgolem實模式CS:IP與20-bit線性RAM，不是IDA EA。
+
+11B5:04EE／054A原碼沿規格069。CCBKGD完整解碼至0x3C500；
+WOODPANL先完整解碼至0x3C500，F10另完整解碼至0x2CAE0，每次64000格與固定IDX全等。
+只憑最後PIK讀取歸因同型writer的首版研究被拒絕；三個其他短run未授予身分。
+新公開唯讀來源檢查器重建12個背景來源，室內60993格、計分60800格背景有效，
+完整原版狀態及存檔與無觀測側相同；兩個載入暫態守門回原圖，不計HD。
+來源模型8c992dacf54ed7914b5efc963b1146d7777d3364ed936d08743d2f2095ac8e61。
+
+兩張生成候選及完整提示留本機，英文原型逐格保留49424／52512個原版RGBA。
+這只證明原型幾何與前景保持，正式字底、游標移入／移出、動態人物與五語GUI未由此驗收。
+規格069 R78維持DRAFT；原PNG及原版參考不加入正式清冊，現行132張與1552筆來源索引保持。
+完整輸入指紋、原始步數、IDX／色盤、候選及原型指紋、重生入口見[規格069](docs/spec/069-hd-menu-background-and-textures.md) R78。

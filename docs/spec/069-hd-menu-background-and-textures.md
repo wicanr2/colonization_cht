@@ -944,3 +944,68 @@ workplace/reports/goal186-display-hd/hd-report-backgrounds-r77/r76-scenes-replay
 本批沒有新報告RAM還原正向樣本，不外推世界移動、戰鬥、其他21個PIK、
 51個未觀測ICONS候選、其他格式、特殊游標、事件圖或動畫。
 完整五語文字、全量HD及新版交付仍未完成，v.1.0.3-20261010與既有tag／Release保持。
+
+## R78 國會室內與計分背景（DRAFT，2026-10-18）
+
+狀態：DRAFT。正式HD仍為R77的132張生成原PNG／清冊133檔。
+本批研究正常F3第二頁的CCBKGD.PIK與F10的WOODPANL.PIK，沒有修改正式顯示、
+清冊、語言、資料格式、原版規則或存檔。兩張生成候選及原型只留本機，尚未正式接線。
+
+| 來源 | 原版檔SHA-256 | 解碼IDX SHA-256 |
+|---|---|---|
+| CCBKGD.PIK，研究編號120 | d2c11061faf65c2c51fee36177eee79f0e2cdc9f67efa17d465dbea5e0e1ceca | a0c9cfe6854a9eaa36a78020f87677e8bfe4660e1c12f23b3fd674ec6fd084e3 |
+| WOODPANL.PIK，研究編號1551 | 0858856ad5b5dd0b6ab8e7a8f815fa602a9cf0237d8d323cd2b5ca141b32bc69 | f31602f9a239a4f83fd6e27e644384009d628517185aeb80bb248479e67d0e71 |
+
+VICEROY.EXE與dosgolem、Go及固定Docker工具鏈沿R77。
+以下位址為dosgolem實模式CS:IP及20-bit線性RAM，不是IDA EA。
+
+confirmed：11B5:04EE／054A與前節原碼相同，三次解碼各有完整連續64000格、無缺點、
+無重複，逐byte等於固定IDX。WOODPANL在24245072至24615672步寫0x3C500；
+CCBKGD在86363359至86712740步寫0x3C500；WOODPANL在180721149至181091948步寫0x2CAE0。
+兩種畫布的WOODPANL是相同IDX，但正式授權範圍仍須READY審查，不因研究看到兩側就直接接線。
+
+首版研究把最後一次PIK讀取誤當所有後續同型writer的來源，在91790328步的其他緩衝寫入被拒絕。
+第二版只以完整64000個連續值及固定IDX識別來源，三個其他短run不授予身分。
+失敗腳本及分類收據保留，沒有由錯誤歸因取得來源或HD信用。
+
+唯讀入口為[國會室內與計分背景來源檢查器](../../tools/check_hd_room_score_background_sources.py)。
+它同時重建兩個新來源與繼承十背景；27個正常點、42筆實際輸入至192600000步，
+有／無觀測CPU、完整RAM、索引、DAC與存檔沿R77原版收據核對。
+60993格室內背景與60800格計分背景有有效來源及完整游標表面，離頁後均清除。
+載入選單與存檔欄雖有木紋來源，完整畫面守門不符，painted為0，不計HD。
+合計16608筆標準游標反向配對只屬原版研究，不代表新素材的正式游標驗收。
+
+來源實際色號的精確[index,R,G,B]投影為：
+CCBKGD 4f7b7364fd534feeb06d5ac3e5fe758bc5ead07281dd073fd4825daeef607a53；
+WOODPANL d57afdd6d792e1e29b9710fc122c4e3db7c94082def0c955688438215cee17f2。
+每個色號及正常點投影在本機room-score-decoder-research-r2.json；原色盤與原始索引不提交。
+
+候選沿已定稿精細像素風，完整原PNG及生成提示保存於本機room-score-generation-r1.json。
+室內v1太寬，保留原檔；v2重新構圖為1586×992，不以拉伸、裁切或重新編碼修正。
+採用候選room-candidate-r2.png為777dbf6db416dee4872a7f8dfa86adce85aeca0d03c92ba216d349ce8e2a8c34；
+木紋候選score-wood-candidate-r1.png為20a9e807bb330501e83565704a039134e4344a7550208c8813533ceb422d19d2，
+同為1586×992。兩者RGB原位元組保持；原版參考與未選候選維持本機。
+
+英文可丟棄原型按完整[0,0,320,200]至[0,0,1586,992]、整數像素中心最近鄰取樣。
+室內保留49424個原版RGBA，包含原版前景人物與不透明游標；
+計分頁保留52512個原版RGBA，包含字形、圖示、圖表及游標。
+原型只驗幾何與前景保持，不代表正式程式、五語、動態人物或全量HD完成。
+
+| 本機收據 | SHA-256 |
+|---|---|
+| 解碼研究room-score-decoder-research-r2.json | 8e7f9d0bb05a7d6146d0807ef1c701eb6acce153b74d592da3d3afaee48aa4f3 |
+| 公開檢查器27點room-score-source-model-public-r1/check.json | 8c992dacf54ed7914b5efc963b1146d7777d3364ed936d08743d2f2095ac8e61 |
+| 生成提示及原稿room-score-generation-r1.json | 925eb7f24fb0735b429d0ca680185b079bc1701746cfe2fbc3725fcfef460a53 |
+| 幾何及前景room-score-prototypes-r1.json | e9c7cb0529f32848bc023a7c25fcba4dbba5d062ac93b5c0053fc89a12a6753e |
+
+本機根為workplace/reports/goal186-display-hd/hd-room-score-backgrounds-r78。
+研究重生入口為research-room-score-decodes-r2.py、上述公開來源檢查器及
+make-room-score-prototypes-r1.py。公開檢查器以--probe提供R77 report-source-probe-r2、
+--points提供report-baseline-points-r1.json、--decoded提供固定解碼pixels、
+--game提供合法原版及--output提供新本機輸出目錄；只能在非root Docker內執行。
+缺合法原版已驗SKIP／exit77且不產生通過收據。
+
+READY前仍須審查正式解碼基址、前景與字底、幾何、來源拒絕及取樣契約。
+正式實作後再驗五語正常GUI、游標移入／移出、人物動態遮擋、完整原版狀態、
+實際GUI音訊、存檔、缺件回退與封裝。未通過前維持DRAFT，原稿不加入正式清冊。
+21個未接線PIK的數字保持；完整HD與新版交付尚未完成。
