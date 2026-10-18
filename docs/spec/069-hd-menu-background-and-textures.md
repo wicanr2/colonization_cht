@@ -2227,3 +2227,23 @@ f33fedea4891c4ca4a99066db1b7ceda14d17dc82066b537d3bc1782ad63ad44。
 入口r89-newgame-baseline-gui-r1/capture.json、normal-nation-story-command-r1.json、
 nation-story-source-probe-r2/build.json及nation-story-candidates-r1.json。
 後續只能依完成的來源收據進READY，不能以11張候選或全檔盤點聲稱全量HD完成。
+
+### 2026-10-19 R87正常GUI42完成與R89原版20點
+
+R87正式42項GUI含37HD／5原圖，1182至1202全部21幀均有完整物件正例。
+繁中、簡中、日文、韓文的魚形游標移入／移出正常；原版／HD切換與正常退場完成。
+當次13筆原版輸入，終點以gui.inputs.json為準。抓取審查SHA-256：
+fb2ebb70f732c18cf46d1eca2abbdf6af79f1c254be321a36232a6dfa28070ad。
+四次正常顯示切換的暫停步數、CPU、完整RAM、IDX、DAC及DOS輸入保持；
+記錄97ef49e5666d52a7888c5edcbb431f2a45e51deacc19307f46508ba5346f07c5。
+獨立來源、完整RGBA／X11及三側狀態／WAV／存檔仍在驗證，維持READY，不先增加來源清冊完成數。
+
+R89正常原版至1200M的20點完整CPU／RAM／IDX／DAC及原始檔與控制一致，
+首8點仍嚴格符合當次GUI，後12點是明示的原版自動播放檢查。
+審查normal-nation-story-review-r2.json：
+70d828b1549ce0475423969d6e3ea4285ab05f3646b0ec748287cf4826b593a8。
+國王與十張出航的完整PIK寫入來源已蒐集，但舊主畫布檢查器要求可見游標，
+無游標的出航頁未給來源信用；改沿既有R79已發布VGA模型補驗，
+保留舊失敗輸出，不把它當作產品或原版狀態差異。
+有VGA觀測的同20點再次和已完成的控制收據全等，未重跑控制；
+來源審查與生成幾何仍DRAFT，不進正式接線。
