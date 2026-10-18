@@ -56,6 +56,8 @@ parser.add_argument('--opening-ready-report',type=Path,help='規格069 R82開場
 parser.add_argument('--opening-conformed-report',type=Path,help='規格069 R82開場PIK限定驗收及134張舊原稿繼承審查')
 parser.add_argument('--opening-ship-ready-report',type=Path,help='規格069 R83船隻八幀及發布來源READY審查')
 parser.add_argument('--opening-ship-conformed-report',type=Path,help='規格069 R83八幀限定驗收及147張舊原稿繼承審查')
+parser.add_argument('--opening-sun-ready-report',type=Path,help='規格069 R85太陽七幀、閉眼底圖及右側裁切READY審查')
+parser.add_argument('--opening-sun-conformed-report',type=Path,help='規格069 R85限定驗收及155張舊原稿繼承審查')
 a=parser.parse_args();out=a.output.resolve()
 assert Path('/.dockerenv').is_file() and os.getuid()!=0 and out.parent.stat().st_uid==os.getuid() and not out.exists()
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -87,6 +89,67 @@ for name,asset in manifest['assets'].items():
  f=matches[0];f['formal_assets'].append(name)
  bindings.append({'asset':name,'asset_sha256':asset['sha256'],'source_research_id':f['research_id'],'source_file':file,'source_ordinal':f['ordinal'],'source_encoded_sha256':f.get('encoded_sha256'),'spec':asset.get('spec',manifest['spec']),'claim':'matches verified formal manifest; conformance scope remains in cited spec'})
  if file.endswith('.PIK'):bindings[-1]['source_indexed_sha256']=f['indexed_sha256']
+
+# R85 太陽七幀、閉眼底圖與九格右裁切；保留R83及更早的驗收紀錄。
+if a.opening_sun_ready_report or a.opening_sun_conformed_report:
+ assert a.opening_sun_ready_report and a.opening_sun_conformed_report and a.inherited_index and a.inherited_manifest
+ assert not a.opening_ship_ready_report and not a.opening_ship_conformed_report
+ ready=json.loads(a.opening_sun_ready_report.read_bytes());review=json.loads(a.opening_sun_conformed_report.read_bytes())
+ prior=json.loads(a.inherited_index.read_bytes());old_manifest=json.loads(a.inherited_manifest.read_bytes())
+ assert ready['state']=='READY' and ready['result']=='PASS_R85_SUN7_READY_REVIEW'
+ assert review['result']=='PASS_OPENING_SUN_CONFORMANCE_REVIEW' and review['spec_state']=='CONFORMED'
+ assert review['ready_sha256']==sha(a.opening_sun_ready_report) and review['manifest_sha256']==sha(a.manifest)
+ assert review['inherited_manifest_sha256']==sha(a.inherited_manifest)==prior['formal_manifest_sha256']
+ assert review['inherited_source_index_sha256']==sha(a.inherited_index)
+ assert len(old_manifest['assets'])==155 and len(manifest['assets'])==len(bindings)==163
+ for name,old in old_manifest['assets'].items():
+  current=manifest['assets'][name];assert sha(a.assets/name)==old['sha256']==current['sha256']
+  old_meta=dict(old);current_meta=dict(current)
+  if name=='opening-sun-000.png':
+   for key in ['native_display_rects','generated_display_rects']:old_meta.pop(key);current_meta.pop(key)
+  assert old_meta==current_meta
+ assert review['go_named_passed']>=71 and not review['go_failed'] and not review['go_skipped']
+ assert review['native_points']==41 and review['native_full_rgba_pixels']==8192000
+ assert review['gui_samples']==22 and review['verified_gui_sun_frames']==list(range(7))
+ assert review['current_caption_gui_samples']==22 and review['current_caption_gui_x11_rgba_pixels']==22528000
+ assert review['current_caption_gui_full_rgba_pixels']==20480000
+ assert review['current_caption_three_replays_equal']is True
+ assert review['source_handlers_and_native_hooks_byte_unchanged']is True
+ assert review['current_binary_sha256']==review['binary_sha256']
+ assert review['seven_frame_gui_proof_scope']=='prior normal GUI plus byte-identical source handlers; current normal GUI verifies changed cursor/caption rendering'
+ assert review['edge_visible_opaque']==9 and review['edge_native_source_and_publication_verified']is True
+ assert review['three_replays_gui_audio_state_save_equal']is True and review['complete_hd']is False
+ assert review['cursor_source_restore_verified']is True and review['partial_requires_previously_verified_full_native_frame']is True
+ assert review['inherited_native32_passed']is True and review['package_graphics_files']==164 and review['package_new_faults']==31
+ assert review['original_inputs_unchanged']is True and review['old_raw_pngs_unchanged']==155
+ assert review['new_generated_pngs']==7 and review['reused_png_files']==1
+ assert prior['source_receipt_sha256']==sha(a.catalog) and len(prior['frames'])==1552 and prior['files']==d['files']
+ ids=set(range(1258,1265));changed=ids|{1179}
+ assert bindings[:155]==prior['formal_bindings']
+ assert {b['source_research_id']for b in bindings[155:]}==ids|{1179}
+ assert manifest['assets']['opensun-000.png']['sha256']==old_manifest['assets']['opening-sun-000.png']['sha256']
+ before={f['research_id']:f for f in prior['frames']}
+ for frame in frames:
+  old=before[frame['research_id']]
+  assert {k:frame[k]for k in allowed if k in frame}=={k:old[k]for k in allowed if k in old}
+ merged=json.loads(a.inherited_index.read_bytes());new={f['research_id']:f for f in frames}
+ reference={'state':'CONFORMED','spec':'docs/spec/069-hd-menu-background-and-textures.md','formal_connected':True,'review_sha256':sha(a.opening_sun_conformed_report),'scope':'seven OPENSUN frames and closed PIK eye base; native timing, position and verified full source before visible clipping; original publication and mouse restoration only'}
+ for row in merged['frames']:
+  ident=row['research_id']
+  if ident in ids:
+   assert not row['formal_assets'];row['formal_assets']=new[ident]['formal_assets']
+   row['runtime_source_evidence']='confirmed complete source, verified PIK underlay and exact published VGA cells; right-edge frame5 uses nine visible cells only after prior complete native verification'
+   row['animation_evidence']='confirmed seven original frames on prior normal GUI with byte-identical source handlers; current normal GUI verifies cursor/caption rendering; original timing and position, source alpha and eye regions only'
+   row['source_contract_reference']=reference
+  elif ident==1179:
+   row['formal_assets']=new[ident]['formal_assets'];row['sun_base_contract_reference']=reference
+ merged['formal_manifest_sha256']=sha(a.manifest);merged['formal_bindings']=bindings
+ merged['opening_sun_conformance']={'ready_sha256':sha(a.opening_sun_ready_report),'review_sha256':sha(a.opening_sun_conformed_report),'sources':sorted(ids),'new_generated_pngs':7,'reused_png_files':1,'formal_assets':163,'gui_samples':22,'current_caption_gui_samples':22,'source_handlers_and_native_hooks_byte_unchanged':True,'seven_frame_gui_proof_scope':review['seven_frame_gui_proof_scope'],'claim':'seven OPENSUN frames and closed eye base only; other SS, fades and full HD remain incomplete'}
+ assert all(f==before[f['research_id']]for f in merged['frames']if f['research_id']not in changed)
+ out.write_text(json.dumps(merged,ensure_ascii=False,indent=2)+'\n')
+ print('PASS_INHERITED_OPENING_SUN_INDEX',len(frames),len(bindings),sha(out),flush=True)
+ raise SystemExit(0)
+
 # R83 船隻八幀與開場已發布來源；既有素材與歷史範圍保持。
 if a.opening_ship_ready_report or a.opening_ship_conformed_report:
  assert a.opening_ship_ready_report and a.opening_ship_conformed_report and a.inherited_index and a.inherited_manifest

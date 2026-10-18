@@ -1727,3 +1727,200 @@ cc6a09d20a163add29ef09676e1e1f6fcfb4e71ec4186b1d0e546ff3689322e4。
 
 下一步取得後續太陽幀、其他開場SS與完整寫入來源，再沿既定畫風完成幾何及正常GUI。
 不把開檔、入口命中或本批DRAFT當作全量HD完成。
+
+
+## R85整批開場來源與太陽七幀DRAFT（2026-10-18）
+
+正常單次Enter由800000步延長至400000000步，40個千萬步快照。
+原版CPU、完整RAM、IDX、DAC、PNG及DOS讀取／開檔與無觀測控制相同。
+已確認65種幀、1213次完整繪製；本批不把來源盤點當作新增HD完成。
+來源審查opening-all-source-review-r1.json，SHA-256為0b999d1d48827b4c39f57f8b3f609865d3e587d48e0df671181d27196537b1f1，
+本機根hd-opening-all-animation-r85，dosgolem與Go版本沿R84。
+
+| 來源 | 已確認完整呼叫幀 |
+|---|---|
+| MPSLOGO.SS | 0 |
+| OPENSHIP.SS | 0至7 |
+| OPENCRD1.SS | 0至3 |
+| OPENSUN.SS | 0至6 |
+| OPENWND1.SS | 0至9 |
+| OPENCRD2.SS | 0至2 |
+| OPENMON1.SS | 0至14 |
+| OPENWND2.SS | 0至10 |
+| OPENMON2.SS | 0至5 |
+
+太陽七幀均沿04A2:0000及既有三個寫入端，實際尺寸為10×2、11×2或10×1，
+不透明格依序12、12、10、10、10、10、6。
+已驗來源底圖座標固定在OPENING.PIK的眼睛區：
+第0至4幀anchor[691,97]、第5幀[690,97]、第6幀[691,98]。
+這些座標來自逐格PIK底圖來源，不能直接以封存檔other_header_fields替代；
+第6幀的封存欄位仍為[56,122]，實際繪製Y卻下移一格。
+
+399128622步的第5幀目的為[310,121,321,123]，原版只寫9格。
+r2完整來源tuple包含未寫格的零值，指紋
+18d44acada088e63d5b31ad2f34a07901d40a1f4ee022cfbfcb99045ab293757；
+可見9格tuple為a6fc754d0db7e6e773331a097d1ae234cc10c3d051a1a84be9705c2f7e742cbc。
+九格全等已知來源的畫面交集，超出右側的local21沒有寫入，沒有換行到左邊。
+裁切發布來源另以r3窄窗口重生，未通過前不宣稱此邊界已正式完成。
+
+### 生成素材與幾何原型
+
+沿R82既有太陽原PNG，新增六張眼睛變體及閉眼底圖，首幀原樣沿用。
+原PNG與alpha不轉碼、不正規化。原始眼睛區alpha為252至254，依原值source-over；
+不能以生成圖應全不透明為前提。各幀只使用眼睛區，臉、光芒及其他像素共用同一底圖。
+
+已證實原版PIK先閉眼，再由SS疊眼睛。R82靜態生成圖的眼睛原先已張開，
+且均勻取樣未對齊後續12格覆蓋；此為後續動畫接線發現的幾何缺口。
+本批候選以native X分帶[0,25,28,32,35,60]對應生成X[42,484,590,666,774,1212]，
+native Y[0,24,26,58]對應生成Y[41,548,600,1181]。
+只取閉眼生成圖的眼睛聯集[24,24,28,26]及[31,24,35,26]，
+來源PNG其餘變動不進顯示快取，R82原圖bytes保持。
+
+七幀獨立合成已驗眼睛聯集外RGBA完全相同。
+隔離接線原型已編譯及go vet，七幀7168000個完整RGBA與獨立原PNG／發布來源重建相同，
+含既有HD船隻。這是隔離渲染，不是正常玩家GUI或正式CONFORMED。
+工作檔sun-animation-generation-r1.json、sun-base-generation-r1.json、
+sun-animation-prototype-review-r2.json及sun-renderer-pixels-r1.json均留本機。
+正式155張素材及前端尚未改動；閉眼、七幀、裁切、游標、原版狀態／WAV／存檔及封裝仍須正式驗收。
+
+另外CLOS-BKG與WOODPAN2各已生成一張候選，原樣保存並附完整提示及參考指紋；
+正常玩家來源尚待接續，未加入正式graphics或完成數。
+
+
+### R85太陽七幀與閉眼底圖READY（2026-10-18）
+
+來源、幾何及隔離渲染審查sun-ready-r1.json，SHA-256為
+febe41870e0b3b494044f90c24b33a08f220a44135a811a90e6c3ea125e378db。
+上節DRAFT保留歷史，本節授權以下正式顯示行為；尚未CONFORMED。
+
+- 前置：OPENING.EXE、OPENING.PIK、OPENBORD.PIK及OPENSUN.SS固定原版指紋；
+  mode13、R82開場存活碼、VGA等於可見IDX、canonical DAC及RAM palette均成立。
+- 七幀以一基AX槽位、實際來源指標、尺寸、完整編碼雜湊及R83返回契約辨識。
+  各完整原版寫入的有序local/value指紋逐幀核對；透明格不得寫入，非透明格只能寫一次，
+  未知寫入包含同值寫入均撤銷。底圖只繼承已驗PIK或活著的前幀已驗底圖。
+- 右側裁切已證實只寫可見9格。完整來源先經完整呼叫驗證並保存native shadow；
+  之後裁切呼叫只可接受與該shadow畫面交集完全相符的有序寫入。
+  缺格、重複、錯值、區外寫入或沒有已驗完整shadow都拒絕。
+  不以任意補零、換行或重新解讀原版行為填補。r3已確認9格發布及9格底圖，
+  1214次呼叫均通過來源驗證，40點原版狀態與控制一致。
+- PIK太陽分帶與眼睛聯集沿上節已量測座標。只修改R82太陽原PNG的顯示取樣矩形；
+  其原bytes保持。閉眼候選只取眼睛聯集，其他臉與光芒繼續使用原R82圖。
+  六張新眼睛變體與原樣沿用的首幀也只取各自眼睛區。
+  第5幀anchor左移一格，第6幀下移一格，取實際來源座標，不使用未證實header語意。
+- 新增7張生成原圖與1份原樣沿用檔，共8檔；完整PNG與alpha保持。
+  首幀沿用圖與R82太陽原圖bytes相同，不能把它報成一張新生成圖。
+  透明度照原值source-over到已驗不透明HD底圖；不正規化alpha。
+- VGA發布沿R83精確原版複製契約；主畫布重畫期間保持已發布幀，
+  程式退場、來源不符或palette不符時撤銷或保留原版。
+  游標矩形在語言重建後只恢復已驗來源，其他前景不猜補。
+- 隔離接線已編譯及go vet；八張完整RGBA共8192000點與獨立原PNG／發布模型相同，
+  其中含七幀、既有HD船隻與右邊界9格。七種裁切反例零失敗／零skip。
+  這些不代替正式正常GUI、原版狀態／WAV／存檔、資源與封裝驗收。
+
+正式實作入口沿hd_opening_sprites.go、hd_opening_sources.go及原素材清冊。
+保留R83船隻既有八幀與其他素材；不將MPS、製作名單、風神、海怪的來源盤點
+當作已完成HD。CLOS-BKG與WOODPAN2仍是本機候選。
+
+
+### R85連續發布模型與正式正常路徑進度
+
+本段維持READY，22項正式GUI已完成；獨立當次來源、完整GUI像素及音訊、存檔重播仍進行。
+獨立連續模型位於本機hd-opening-all-animation-r85/opening-all-normal-public-r1。
+400M步、41點、65種來源幀、1214次完整繪製與無觀測原版控制相同。
+先前有界發布模型在未觀測時段不保留邊框來源，不能拿缺項與正式持續來源逐格等同；
+改用連續模型後，正式正常路徑41點、962次船／太陽接受、零拒絕通過。
+七種太陽幀及399.2M九格裁切的8張完整畫面，共8192000個RGBA點與獨立原圖重建相同。
+限定來源審查為opening-all-public-continuous-review-r1.json；
+正式正常路徑為r85-sun-native-r2/check.json，像素檢查為r85-native-pixels-r1/check.json。
+
+公開入口為tools/probe_hd_opening_sources.go。
+--all-opening-sprites只擴充原版診斷，不安裝HD；--write-samples=false停用入口樣本日誌。
+--sample-steps接受最多128個遞增、200000倍數的額外快照步數。
+--publication-windows接受分離半開區間；省略時連續觀測，空陣列停用發布來源。
+區間邊界先清空來源再抓快照，區間外不授予來源信用。
+正常14M／三組共51點、停用與區間邊界及11項錯誤輸入通過，
+收據為public-source-cli-check-r2.json。
+最終公開原始碼SHA-256為2b327c247710d2562b29b7aa9adb98c8e4e4345005da80b56439c3682162614a。
+連續400M模型使用前一建置原始碼304cbb062536bbf7ac5d0520c7583594a4e444ffc942aeab85231a98f902e377；
+兩版的來源模型型別與函式逐位元組相同，差別是快照前處理可選區間邊界。
+此相容性及原版288檔、舊155張原PNG、當前51項建置綁定由
+r85-original-and-build-audit-r1.json核對。
+
+剩餘17個PIK的生成原PNG、完整提示與來源指紋已保存在同一本機根目錄，
+入口為remaining-pik-candidates-r1.json與remaining-pik-generation-r2/r3/r4.json；
+CLOS-BKG與WOODPAN2沿remaining-background-generation-r1.json。
+它們仍是DRAFT候選，未納入正式graphics或完成數。
+OPENWND1的21幀定位清冊中的前10幀為吹氣雲，OPENWND2後11幀為火山煙；
+先前「兩組風神」分類更正。實際定位為OPENWND1世界座標約[798,13]、
+OPENWND2約[598,96]，完整逐幀位置見wind-composite-references-r2.json。
+兩張首幀候選見wind-generation-r1.json，仍待幾何及接線驗證。
+
+
+R85正式GUI已完成22項，含17HD與5原圖、全部七幀、右側九格裁切、
+四語Noto及英文、游標移入移出和正常退出片頭。
+當次實際七筆輸入終點413800000步，獨立原版來源及三側完整重播持續。
+WAV共1776381幀、49715Hz、雙聲道16bit，非靜音，
+SHA-256為e8681ae3fe34a8898ed63162f24af8befa162ce48a61ddf8f0fdcdb0a2eb8458。
+正式收據為r85-sun-formal-gui-r3/capture.json。
+
+長片頭另含既有Noto製作字幕。獨立像素入口
+tools/check_hd_opening_ship_pixels.py以--language-bundle-root指定正式包根目錄，
+由靜態指紋、公開譯稿、各地區字面、字模及原版同列擦字重建全部文字像素；
+不排除文字矩形。七項四語字幕安全矩形共143472個RGBA通過，
+收據r85-static-text-pixels-r3.json。完整GUI來源與RGBA仍待後續檢查。
+
+OPENWND1吹氣雲與OPENWND2火山煙的21幀候選均已生成，
+其中15張唯一生成原PNG、6個來源別名依完整encoded／indexed指紋與尺寸原樣沿用。
+入口wind-candidates-r1.json，提示及raw alpha紀錄見wind-generation-r1/r2.json。
+這批候選仍為DRAFT，雲／煙取樣幾何、靜態底圖銜接、動畫、GUI及封裝未驗，
+不得進正式顯示路徑或增加完成數。
+
+
+### R85游標與字幕共存補充：DRAFT
+
+完整實拍比對在sun0-hd-zh-Hant的滑鼠矩形[160,96,176,112]發現4080個RGBA差異，
+差異完全位於該64×64目的矩形；字幕安全矩形另已逐像素通過。
+獨立原版來源在該處持有有效OPENING.PIK發布來源，
+例如首格kind2、local69880、原版色號136。
+現行hd_runtime.go只在文字items為空時重新繪製已驗開場滑鼠背景；
+有製作字幕時，共用語言重建會保留整塊原版滑鼠框。
+
+本補充擬允許：每個已繪文字項目都含有效原版邏輯座標safe，
+且safe及可選source_safe皆不與滑鼠框相交時，
+在原有來源、調色盤、VGA及完整SS守門全部通過後，
+只重畫滑鼠框內已驗發布來源。
+文字矩形缺失、型別或界限不符、任何重疊時維持原有保護。
+不改原版輸入、狀態、音訊、存檔或圖像來源判定。
+此段尚未READY，先以原版正常GUI的同狀態來源做私有重建及拒絕反例。
+
+
+R85游標／字幕補充已READY。私有11項具名測試零失敗、零skip及go vet通過；
+原正常GUI的20張片頭畫面只在七個滑鼠框改變，原版RAM與框外像素保持。
+以同正式15來源的獨立模型驗22項、20480000個完整RGBA相同；
+七個新增滑鼠框共25600個RGBA及來源遮罩相同。
+審查入口caption-cursor-ready-r1.json。
+正式接線仍須正常四語GUI、文字保護與同初始輸入原版狀態／WAV／存檔驗證。
+
+全65來源研究模型會經由正式程式未追蹤的其他SS保留額外底圖鏈；
+完整GUI驗收改用同正式15來源模型opening-selected-public-gui-r1。
+因此338.8M的船格[218,72]保持原版，沒有HD信用；
+它不是太陽幀差異，也不因研究模型有較多資訊而補畫。
+
+### 2026-10-18 R85 READY實作的分項驗證
+
+狀態仍為READY。長流程最終三側重播與總審查未齊，不先改為CONFORMED。
+
+| 驗證 | 收據與範圍 |
+|---|---|
+| 七幀正常畫面 | 前次正式組建22項中取11張未改像素的英文開場實拍；完整RGBA與X11各11264000點相同，太陽0至6幀都有正例。r85-prior-en-formal-pixels-r1/check.json，89b608b0968197af507820d69cd5857699bae401a008cea88e8bf5a1b6b17e2e。 |
+| 本次正式四語游標 | 新二進位c414ba2ae7b6c078344685cac54ab4aa08118040fb83614ea0146d964180e084；正常22項含17HD／5原圖、四語眼部游標移入移出及切換。完整開場RGBA20480000、X11全區22528000、16個Noto字幕欄位及118658個翻譯改動像素全同。本次只觀測太陽第0幀，不冒稱七幀新實拍。 |
+| 獨立來源 | r85-caption-source-state-r1.json，694ecea976052eb4bf5fc7363d1f585dbc05e6f285ab326035c36929c0787722；採正式15來源範圍，22點原版狀態與實拍相同。 |
+| 完整像素 | r85-caption-formal-pixels-r1/check.json，d8a9fc2fb57e38f834bf149b623147b3f9ea2b3fde65c4dd8a441cf954ecf5d3；以公開檢查器重建原版、原PNG、alpha與實際Noto字模，不排除游標或文字像素。 |
+| 當次三側重播 | 13筆實際輸入至89200000步，含play=true；CPU、完整RAM、IDX、DAC、WAV與存檔和實拍全等。r85-caption-replay-r1-check.json，4e00de2868f42835e1834da5afa7bedf3d95ac8a20f008f99fa17255a8ad7b72。 |
+| 繼承條件 | 新舊68Go只有顯示層游標恢復條件與測試不同，來源處理／原版掛鉤逐byte相同；51項正式綁定、原版288檔與舊155張原PNG通過。r85-final-build-inheritance-r1.json，217edf4383bfd43ce87221c2ade6cffc32edbca1beb63477d8b37c7b41cf24c3。 |
+| 新守門 | 10個具名Go案例零失敗／零skip，建置及go vet通過；既有72個來源／資源／正常路徑案例依上述精確差異繼承，不算本次重新跑82個。 |
+
+本機根為workplace/reports/goal186-display-hd/hd-opening-all-animation-r85。
+本次畫面檢查使用tools/check_hd_opening_ship_pixels.py，--model指向opening-caption-public-gui-r1，
+--formal指向r85-sun-caption-formal-gui-r1，--language-bundle-root指向r85-sun-bundle-r3，
+其餘--assets、--decoded、--output與--gui沿本節既有入口。

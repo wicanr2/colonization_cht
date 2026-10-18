@@ -166,7 +166,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "5c8f2f86c28664c3c1beb92ec61c08e0abd54e3a771ac45a2316a7e37d8537c5"
+const hdManifestSHA = "78d7a27f98c9eab13ba61ec6661acc681d194b334593c7e5fc4b73eac16824db"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"
@@ -699,10 +699,10 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 	if b.hd.cursor != nil {
 		hd["cursor"] = b.hd.cursor.paint(b.hd, out, f)
 	}
-	// 規格069 R82 READY：沒有翻譯項目時，只恢復開場滑鼠框內已驗來源。
+	// 規格069 R85 READY：有效文字矩形皆在滑鼠框外時，恢復框內已驗開場來源。
 	// 共用語言引擎的VICEROY畫布在OPENING階段不能用於判定游標。
-	items, _ := record["items"].([]map[string]any)
-	if b.hd.opening != nil && len(items) == 0 {
+	items, itemsKnown := record["items"].([]map[string]any)
+	if b.hd.opening != nil && itemsKnown && hdOpeningCursorUncovered(f.cursor, items) {
 		if b.hd.opening.sprites != nil {
 			hd["opening_cursor_background"] = b.hd.opening.sprites.paintWithin(out, f, f.cursor)
 		} else {
@@ -754,4 +754,20 @@ func (h *hdRuntime) key() string {
 		return fmt.Sprintf("%s/small/%d", base, h.small.revision)
 	}
 	return base
+}
+
+func hdOpeningCursorUncovered(cursor image.Rectangle, items []map[string]any) bool {
+	for _, item := range items {
+		safe, ok := item["safe"].(image.Rectangle)
+		if !ok || safe.Empty() || !safe.In(image.Rect(0, 0, 320, 200)) || cursor.Overlaps(safe) {
+			return false
+		}
+		if value, present := item["source_safe"]; present {
+			source, ok := value.(image.Rectangle)
+			if !ok || source.Empty() || !source.In(image.Rect(0, 0, 320, 200)) || cursor.Overlaps(source) {
+				return false
+			}
+		}
+	}
+	return true
 }

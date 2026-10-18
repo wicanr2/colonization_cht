@@ -124,3 +124,13 @@ __pycache__/
 !/graphics/openship-005.png
 !/graphics/openship-006.png
 !/graphics/openship-007.png
+
+# 規格069 R85：閉眼底圖與七幀太陽生成原PNG；首幀原樣沿用。
+!/graphics/opening-sun-base-000.png
+!/graphics/opensun-000.png
+!/graphics/opensun-001.png
+!/graphics/opensun-002.png
+!/graphics/opensun-003.png
+!/graphics/opensun-004.png
+!/graphics/opensun-005.png
+!/graphics/opensun-006.png

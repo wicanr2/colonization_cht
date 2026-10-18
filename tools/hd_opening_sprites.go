@@ -1,4 +1,4 @@
-// 規格069 R83 READY：開場SS完整呼叫與已發布來源；不改原版RAM、規則或計時。
+// 規格069 R83／R85 READY：開場SS完整呼叫與已發布來源；不改原版RAM、規則或計時。
 package main
 
 import (
@@ -14,9 +14,10 @@ import (
 )
 
 type hdOpeningSpriteDefinition struct {
-	ordinal                              int
-	encodedSHA, writesSHA, asset, artSHA string
-	artRects, nativeRects                []image.Rectangle
+	ordinal, id, w, h, encodedLen, opaque                       int
+	sourceFile, sourceSHA, encodedSHA, writesSHA, asset, artSHA string
+	artSize                                                     image.Point
+	artRects, nativeRects                                       []image.Rectangle
 }
 type hdOpeningSpriteCell struct {
 	id, local uint16
@@ -25,9 +26,9 @@ type hdOpeningSpriteCell struct {
 }
 type hdOpeningSpriteRuntime struct {
 	p                                                                 *hdOpeningRuntime
-	art                                                               [8]*image.NRGBA
-	native                                                            [8][1175]byte
-	nativeValid                                                       [8]bool
+	art                                                               [15]*image.NRGBA
+	native                                                            [15][1175]byte
+	nativeValid                                                       [15]bool
 	cells, published                                                  [64000]hdOpeningSpriteCell
 	pictures                                                          [64000]hdOpeningCell
 	active, outside                                                   bool
@@ -47,38 +48,42 @@ var hdOpeningSpriteWriterCodes = map[uint16][]byte{
 }
 
 func loadHDOpeningSprites(p *hdOpeningRuntime, game, directory string) (*hdOpeningSpriteRuntime, error) {
-	raw, e := hdReadFile(filepath.Join(game, "OPENSHIP.SS"), 8<<20)
-	if e != nil {
-		return nil, e
-	}
-	if hash(raw) != "eee07bfee9a7abf512d6bd9688409427149df3226edd024342871f41e143af10" {
-		return nil, fmt.Errorf("opening ship original fingerprint")
-	}
 	s := &hdOpeningSpriteRuntime{p: p}
+	seen := map[string]bool{}
 	for i, d := range hdOpeningSpriteDefinitions {
-		raw, e = hdReadFile(filepath.Join(directory, d.asset), 8<<20)
+		if !seen[d.sourceFile] {
+			raw, e := hdReadFile(filepath.Join(game, d.sourceFile), 8<<20)
+			if e != nil {
+				return nil, e
+			}
+			if hash(raw) != d.sourceSHA {
+				return nil, fmt.Errorf("sun original fingerprint")
+			}
+			seen[d.sourceFile] = true
+		}
+		raw, e := hdReadFile(filepath.Join(directory, d.asset), 8<<20)
 		if e != nil {
 			return nil, e
 		}
 		if hash(raw) != d.artSHA {
-			return nil, fmt.Errorf("opening ship asset fingerprint: %s", d.asset)
+			return nil, fmt.Errorf("sun asset fingerprint")
 		}
 		im, e := png.Decode(bytes.NewReader(raw))
 		if e != nil {
 			return nil, e
 		}
-		if im.Bounds() != image.Rect(0, 0, 1442, 1091) || d.ordinal != i || len(d.artRects) != len(d.nativeRects) || len(d.artRects) == 0 {
-			return nil, fmt.Errorf("opening ship geometry")
+		if im.Bounds() != image.Rect(0, 0, d.artSize.X, d.artSize.Y) || len(d.nativeRects) != len(d.artRects) || d.w*d.h > 1175 {
+			return nil, fmt.Errorf("sun geometry")
 		}
-		dst := image.NewNRGBA(image.Rect(0, 0, 188, 100))
-		if i != 0 {
+		dst := image.NewNRGBA(image.Rect(0, 0, d.w*4, d.h*4))
+		if i > 0 && i < 8 {
 			copy(dst.Pix, s.art[0].Pix)
 		}
 		for k, r := range d.nativeRects {
 			a := d.artRects[k]
 			target := image.Rect(r.Min.X*4, r.Min.Y*4, r.Max.X*4, r.Max.Y*4)
 			if a.Empty() || !a.In(im.Bounds()) || target.Empty() || !target.In(dst.Bounds()) {
-				return nil, fmt.Errorf("opening ship rectangle")
+				return nil, fmt.Errorf("sun rectangle")
 			}
 			for y := target.Min.Y; y < target.Max.Y; y++ {
 				for x := target.Min.X; x < target.Max.X; x++ {
@@ -145,21 +150,34 @@ func (s *hdOpeningSpriteRuntime) beforeInstruction() {
 		return
 	}
 	src := int(record[1])*16 + int(record[0])
-	if int(record[0])+639 > 65536 || src+639 > len(m.Mem) || hash(m.Mem[src:src+639]) != hdOpeningSpriteDefinitions[ordinal].encodedSHA {
+	selected := -1
+	for i, d := range hdOpeningSpriteDefinitions {
+		if d.ordinal != ordinal || int(record[4]) != d.w || int(record[5]) != d.h || int(record[0])+d.encodedLen > 65536 || src+d.encodedLen > len(m.Mem) {
+			continue
+		}
+		if hash(m.Mem[src:src+d.encodedLen]) == d.encodedSHA {
+			if selected != -1 {
+				return
+			}
+			selected = i
+		}
+	}
+	if selected < 0 {
 		return
 	}
+	definition := hdOpeningSpriteDefinitions[selected]
 	x, y := int(int16(c.R[golem.DX])), int(int16(stack[2]))
-	if desc[0] != 200 || desc[1] != 320 || desc[2] != 0 || desc[3] != 0x1c43 || record[4] != 47 || record[5] != 25 || x < 0 || y < 0 || x+47 > 320 || y+25 > 200 {
+	if desc[0] != 200 || desc[1] != 320 || desc[2] != 0 || desc[3] != 0x1c43 || x < 0 || x >= 320 || y < 0 || y+definition.h > 200 || (y+definition.h-1)*320+x+definition.w > 64000 {
 		s.rejected++
 		return
 	}
-	s.active, s.outside, s.selected, s.x, s.y = true, false, ordinal, x, y
+	s.active, s.outside, s.selected, s.x, s.y = true, false, selected, x, y
 	s.retIP, s.retCS, s.sp, s.start = stack[0], stack[1], c.R[golem.SP], m.Steps
 	clear(s.counts[:])
 	clear(s.writes[:])
 	clear(s.under[:])
-	for k := 0; k < 1175; k++ {
-		pos := (y+k/47)*320 + x + k%47
+	for k := 0; k < definition.w*definition.h; k++ {
+		pos := (y+k/definition.w)*320 + x + k%definition.w
 		under := s.p.cells[pos]
 		inherited := false
 		if under.kind == 0 {
@@ -192,21 +210,23 @@ func (s *hdOpeningSpriteRuntime) write(a uint32, old, v byte) {
 	if !s.active {
 		return
 	}
+	d := hdOpeningSpriteDefinitions[s.selected]
 	x, y := pos%320-s.x, pos/320-s.y
 	cs, ip := s.p.h.m.CPU.OpAddr()
 	code := hdOpeningSpriteWriterCodes[ip]
 	pc := int(cs)*16 + int(ip)
-	if cs != 0x4a2 || len(code) != 16 || !bytes.Equal(s.p.h.m.Mem[pc:pc+16], code) || x < 0 || y < 0 || x >= 47 || y >= 25 {
+	if cs != 0x4a2 || len(code) != 16 || !bytes.Equal(s.p.h.m.Mem[pc:pc+16], code) || x < 0 || y < 0 || x >= d.w || y >= d.h {
 		s.outside = true
 		return
 	}
-	k := y*47 + x
+	k := y*d.w + x
 	s.counts[k]++
 	s.writes[k] = v
 }
 func (s *hdOpeningSpriteRuntime) finish() {
 	s.active = false
-	blob := make([]byte, 0, 512*3)
+	d := hdOpeningSpriteDefinitions[s.selected]
+	blob := make([]byte, 0, d.opaque*3)
 	for k, n := range s.counts {
 		if n == 0 {
 			continue
@@ -217,20 +237,44 @@ func (s *hdOpeningSpriteRuntime) finish() {
 		blob = binary.LittleEndian.AppendUint16(blob, uint16(k))
 		blob = append(blob, s.writes[k])
 	}
-	if s.outside || len(blob) != 512*3 || hash(blob) != hdOpeningSpriteDefinitions[s.selected].writesSHA {
+	full := s.x >= 0 && s.y >= 0 && s.x+d.w <= 320 && s.y+d.h <= 200
+	expectedSHA := d.writesSHA
+	expectedCount := d.opaque
+	if !full {
+		if !s.nativeValid[s.selected] {
+			s.rejected++
+			return
+		}
+		expected := []byte{}
+		for k, v := range s.native[s.selected][:d.w*d.h] {
+			x, y := s.x+k%d.w, s.y+k/d.w
+			if v == 253 || x < 0 || x >= 320 || y < 0 || y >= 200 {
+				continue
+			}
+			expected = binary.LittleEndian.AppendUint16(expected, uint16(k))
+			expected = append(expected, v)
+		}
+		expectedCount = len(expected) / 3
+		expectedSHA = hash(expected)
+	}
+	if s.outside || len(blob) != expectedCount*3 || hash(blob) != expectedSHA {
 		s.rejected++
 		return
 	}
-	for k := range s.native[s.selected] {
-		s.native[s.selected][k] = 253
+	if full {
+		for k := range s.native[s.selected] {
+			s.native[s.selected][k] = 253
+		}
 	}
 	for k, n := range s.counts {
 		if n != 1 {
 			continue
 		}
-		s.native[s.selected][k] = s.writes[k]
-		pos := (s.y+k/47)*320 + s.x + k%47
-		s.cells[pos] = hdOpeningSpriteCell{uint16(1250 + s.selected), uint16(k), s.writes[k], s.under[k]}
+		if full {
+			s.native[s.selected][k] = s.writes[k]
+		}
+		pos := (s.y+k/d.w)*320 + s.x + k%d.w
+		s.cells[pos] = hdOpeningSpriteCell{uint16(d.id), uint16(k), s.writes[k], s.under[k]}
 	}
 	s.nativeValid[s.selected] = true
 	s.accepted++
@@ -311,7 +355,7 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 			continue
 		}
 		slot := int(c.id) - 1250
-		if slot < 0 || slot >= 8 || int(c.local) >= 1175 || !s.nativeValid[slot] || s.native[slot][c.local] != c.value || c.value == 253 || f.indexed[pos] != c.value {
+		if slot < 0 || slot >= len(hdOpeningSpriteDefinitions) || int(c.local) >= 1175 || !s.nativeValid[slot] || s.native[slot][c.local] != c.value || c.value == 253 || f.indexed[pos] != c.value {
 			r["reason"] = "sprite-source"
 			return r
 		}
@@ -325,6 +369,7 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 	counts := [2]int{}
 	sprites := 0
 	frames := [8]int{}
+	sunFrames := [7]int{}
 	for pos := 0; pos < 64000; pos++ {
 		if !image.Pt(pos%320, pos/320).In(bounds) {
 			continue
@@ -353,7 +398,7 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 			continue
 		}
 		slot := int(actor.id) - 1250
-		sx, sy = int(actor.local)%47*4, int(actor.local)/47*4
+		sx, sy = int(actor.local)%hdOpeningSpriteDefinitions[slot].w*4, int(actor.local)/hdOpeningSpriteDefinitions[slot].w*4
 		for dy := 0; dy < 4; dy++ {
 			for dx := 0; dx < 4; dx++ {
 				a := s.art[slot].NRGBAAt(sx+dx, sy+dy)
@@ -363,7 +408,11 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 			}
 		}
 		sprites++
-		frames[slot]++
+		if slot < 8 {
+			frames[slot]++
+		} else {
+			sunFrames[slot-8]++
+		}
 		spriteMask[pos>>3] |= 1 << uint(pos&7)
 	}
 	r["painted"] = counts[0] + counts[1] + sprites
@@ -371,6 +420,7 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 	r["map_painted"] = counts[1]
 	r["sprite_painted"] = sprites
 	r["frames"] = frames
+	r["sun_frames"] = sunFrames
 	r["picture_mask"] = mask
 	r["sprite_mask"] = spriteMask
 	r["reason"] = "verified-published-opening"

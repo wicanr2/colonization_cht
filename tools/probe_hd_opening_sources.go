@@ -1,4 +1,4 @@
-// 規格069 R82／R83：獨立原版來源模型；輸出只准本機/out，不替正式GUI授予HD信用。
+// 規格069 R82／R83／R85：獨立原版來源模型；輸出只准本機/out，不替正式GUI授予HD信用。
 package main
 
 import (
@@ -17,6 +17,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"sort"
 	"strings"
 )
 
@@ -46,7 +47,39 @@ func main() {
 	sprites := flag.Bool("opening-sprites", false, "R83 DRAFT：另建開場SS與已發布來源，不安裝HD")
 	catalog := flag.String("catalog", "", "R83固定原版全資產清冊")
 	sampleEvery := flag.Uint64("sample-every", 200000, "R84研究快照間隔；200000的倍數，最多10000000")
+	allSprites := flag.Bool("all-opening-sprites", false, "觀測全部指紋吻合的OPEN及MPS片頭SS；不授予HD信用")
+	writeSamples := flag.Bool("write-samples", true, "記錄寫入入口樣本；長流程可停用，來源模型仍持續")
+	publicationFile := flag.String("publication-windows", "", "半開區間JSON [[start,end],...]；省略時持續觀測發布，空陣列停用")
+	stepFile := flag.String("sample-steps", "", "額外快照步數JSON，須為遞增的200000倍數")
 	flag.Parse()
+	var publicationEdges []uint64
+	if *publicationFile != "" {
+		var windows [][2]uint64
+		need(json.Unmarshal(read(*publicationFile), &windows))
+		if len(windows) > 128 {
+			panic("too many publication windows")
+		}
+		for _, w := range windows {
+			if w[0] >= w[1] || w[1] > 800000000 || w[0]%200000 != 0 || w[1]%200000 != 0 || len(publicationEdges) > 0 && w[0] <= publicationEdges[len(publicationEdges)-1] {
+				panic("invalid publication windows")
+			}
+			publicationEdges = append(publicationEdges, w[0], w[1])
+		}
+	}
+	extraSteps := map[uint64]bool{}
+	if *stepFile != "" {
+		var steps []uint64
+		need(json.Unmarshal(read(*stepFile), &steps))
+		if len(steps) > 128 {
+			panic("too many snapshot steps")
+		}
+		for i, step := range steps {
+			if step >= 800000000 || step%200000 != 0 || i > 0 && step <= steps[i-1] {
+				panic("invalid snapshot steps")
+			}
+			extraSteps[step] = true
+		}
+	}
 	if _, e := os.Stat("/.dockerenv"); e != nil || os.Geteuid() == 0 {
 		panic("Docker with non-root user required")
 	}
@@ -121,12 +154,22 @@ func main() {
 	}
 	var actor *openingActorProbe
 	if *sprites {
-		actor = newOpeningActorProbe(m, *decoded, *catalog)
+		actor = newOpeningActorProbe(m, *decoded, *catalog, *game, *allSprites)
 		actor.pic = model
 		if !*control {
-			m.SetBeforeInstruction(actor.before)
+			actor.observePublication = *publicationFile == ""
+			actor.publicationEdges = publicationEdges
+			watcherInstalled := false
+			m.SetBeforeInstruction(func() {
+				actor.publicationWindow()
+				if actor.observePublication && !watcherInstalled {
+					m.WatchWrite(0xa0000, 0xafa00-1, func(_ *golem.Machine, a uint32, o, v byte) { actor.publish(a, o, v) })
+					watcherInstalled = true
+				}
+				actor.before()
+			})
 			m.WatchWrite(115760, 115760+63999, func(_ *golem.Machine, a uint32, o, v byte) { actor.write(a, o, v) })
-			m.WatchWrite(0xa0000, 0xafa00-1, func(_ *golem.Machine, a uint32, o, v byte) { actor.publish(a, o, v) })
+			// 區間外不保留發布來源信用；首次區間開始才掛入VGA監看。
 		}
 	}
 	file, e := os.Create(filepath.Join(out, "vga-writes.jsonl"))
@@ -136,7 +179,7 @@ func main() {
 	sites := map[uint32]uint64{}
 	samples := map[[3]uint32]int{}
 	vgaWrites := uint64(0)
-	if !*control {
+	if *writeSamples && !*control {
 		write := func(_ *golem.Machine, a uint32, o, v byte) {
 			mainWrite := a >= 115760 && a < 115760+64000
 			vgaWrite := a >= 0xa0000 && a < 0xa0000+64000
@@ -203,7 +246,7 @@ func main() {
 		need(json.Unmarshal(read(*inputFile), &replay))
 		inputs, end = replay.Inputs, replay.End
 	}
-	if end == 0 || end > 400000000 || end%200000 != 0 {
+	if end == 0 || end > 800000000 || end%200000 != 0 {
 		panic("bounded step-aligned replay end required")
 	}
 	for i, v := range inputs {
@@ -224,8 +267,16 @@ func main() {
 			panic("unsupported input")
 		}
 	}
+	for step := range extraSteps {
+		if step >= end {
+			panic("snapshot outside replay")
+		}
+	}
 	inputAt := 0
 	for m.Steps < end {
+		if actor != nil && !*control {
+			actor.publicationWindow()
+		}
 		for inputAt < len(inputs) && inputs[inputAt].Step == m.Steps {
 			v := inputs[inputAt]
 			switch v.Kind {
@@ -247,7 +298,7 @@ func main() {
 			inputAt++
 		}
 
-		if m.Steps%*sampleEvery == 0 {
+		if m.Steps%*sampleEvery == 0 || extraSteps[m.Steps] {
 			refs := map[string]int{}
 			for name, raw := range raws {
 				refs[name] = bytes.Index(m.Mem, raw)
@@ -285,12 +336,12 @@ func main() {
 		}
 	}
 	if actor != nil {
-		put(filepath.Join(out, "actors.json"), map[string]any{"state": "DRAFT", "entries": actor.entries, "calls": actor.calls, "points": actor.points, "verified_calls": actor.matched, "published_transfers": actor.publishedTransfers, "unknown_vga_revocations": actor.publishedUnknown, "same_value_vga_revocations": actor.publishedSame, "revoked": actor.revoked, "same_value_revoked": actor.same, "production_connected": false})
+		put(filepath.Join(out, "actors.json"), map[string]any{"state": "DRAFT", "all_opening_sprites": *allSprites, "publication_edges": publicationEdges, "entries": actor.entries, "calls": actor.calls, "points": actor.points, "verified_calls": actor.matched, "published_transfers": actor.publishedTransfers, "unknown_vga_revocations": actor.publishedUnknown, "same_value_vga_revocations": actor.publishedSame, "revoked": actor.revoked, "same_value_revoked": actor.same, "production_connected": false})
 	}
 	put(filepath.Join(out, "model.json"), model.receipt())
 	need(log.Flush())
 	need(file.Close())
-	put(filepath.Join(out, "check.json"), map[string]any{"result": "DRAFT_OPENING_COLD_NATIVE_OBSERVATION", "production_connected": false, "control": *control, "go_version": runtime.Version(), "binary_sha256": hash(read(os.Args[0])), "vga_observation_enabled": *vgaSamples, "original_exe_sha256": hash(exe), "original_pik_sha256": map[string]string{"OPENING.PIK": hash(read(filepath.Join(*game, "OPENING.PIK"))), "OPENBORD.PIK": hash(read(filepath.Join(*game, "OPENBORD.PIK")))}, "end": m.Steps, "events": events, "vga_writes_seen": vgaWrites, "log_scope": "At most 64 write samples per CS:IP, physical source region and destination; main/source memory observed, VGA optional. Physical region labels do not establish source identity before a complete native bitmap match. Remaining observed writes counted, not logged. Discovery only, no full ownership/parity credit.", "write_sites": sites, "opened": d.Opened, "reads": d.Reads, "points": points, "error": fail, "input_count": len(inputs), "inputs": inputs, "sample_every": *sampleEvery, "source_model_enabled": *sourceModel, "opening_sprites_enabled": *sprites, "address_space": "dosgolem real-mode CS:IP and 20-bit linear RAM", "limitations": []string{"Read-only sampled discovery; no complete write trace, source ownership or production credit", "Normal Enter at 800000 along established goal146 opening path; no direct entry or state injection"}})
+	put(filepath.Join(out, "check.json"), map[string]any{"result": "DRAFT_OPENING_COLD_NATIVE_OBSERVATION", "production_connected": false, "control": *control, "go_version": runtime.Version(), "binary_sha256": hash(read(os.Args[0])), "vga_observation_enabled": *vgaSamples, "original_exe_sha256": hash(exe), "original_pik_sha256": map[string]string{"OPENING.PIK": hash(read(filepath.Join(*game, "OPENING.PIK"))), "OPENBORD.PIK": hash(read(filepath.Join(*game, "OPENBORD.PIK")))}, "end": m.Steps, "events": events, "vga_writes_seen": vgaWrites, "log_scope": "At most 64 write samples per CS:IP, physical source region and destination; main/source memory observed, VGA optional. Physical region labels do not establish source identity before a complete native bitmap match. Remaining observed writes counted, not logged. Discovery only, no full ownership/parity credit.", "write_sites": sites, "opened": d.Opened, "reads": d.Reads, "points": points, "error": fail, "input_count": len(inputs), "inputs": inputs, "sample_every": *sampleEvery, "source_model_enabled": *sourceModel, "opening_sprites_enabled": *sprites, "all_opening_sprites_enabled": *allSprites, "write_samples_enabled": *writeSamples, "publication_windows_file": *publicationFile, "publication_edges": publicationEdges, "extra_snapshot_steps": extraSteps, "address_space": "dosgolem real-mode CS:IP and 20-bit linear RAM", "limitations": []string{"Read-only sampled discovery; no complete write trace, source ownership or production credit", "Normal Enter at 800000 along established goal146 opening path; no direct entry or state injection"}})
 }
 
 type openingModelCell struct {
@@ -493,6 +544,11 @@ type openingActorCell struct {
 	Under     openingModelCell
 }
 type openingActorProbe struct {
+	observePublication                                  bool
+	allSprites                                          bool
+	publicationEdges                                    []uint64
+	publicationEdge                                     int
+	firstUnder                                          map[int]bool
 	publishedActor                                      [64000]openingActorCell
 	publishedPIC                                        [64000]openingModelCell
 	publishedTransfers, publishedUnknown, publishedSame uint64
@@ -528,13 +584,30 @@ func actorWords(m *golem.Machine, seg, off uint16, n int) []uint16 {
 	}
 	return out
 }
-func newOpeningActorProbe(m *golem.Machine, decoded, catalog string) *openingActorProbe {
-	var cat struct{ Frames []openingActorFrame }
+func newOpeningActorProbe(m *golem.Machine, decoded, catalog, game string, allSprites bool) *openingActorProbe {
+	var cat struct {
+		Frames []openingActorFrame
+		Files  []struct {
+			File string
+			SHA  string `json:"sha256"`
+		}
+	}
 	need(json.Unmarshal(read(catalog), &cat))
-	p := &openingActorProbe{m: m, byID: map[int]*openingActorFrame{}, writerCodes: map[uint16][]byte{}}
+	files := map[string]string{}
+	for _, f := range cat.Files {
+		files[f.File] = f.SHA
+	}
+	checked := map[string]bool{}
+	p := &openingActorProbe{m: m, allSprites: allSprites, byID: map[int]*openingActorFrame{}, writerCodes: map[uint16][]byte{}}
 	for _, f := range cat.Frames {
-		if !strings.HasPrefix(f.File, "OPEN") || !strings.HasSuffix(f.File, ".SS") || f.EncodedLength <= 0 || f.IndexedSHA == "" || f.Opaque == 0 {
+		if (!strings.HasPrefix(f.File, "OPEN") && (!allSprites || f.File != "MPSLOGO.SS" && f.File != "MPSNAME.SS")) || !strings.HasSuffix(f.File, ".SS") || f.EncodedLength <= 0 || f.IndexedSHA == "" || f.Opaque == 0 {
 			continue
+		}
+		if !checked[f.File] {
+			if files[f.File] == "" || hash(read(filepath.Join(game, f.File))) != files[f.File] {
+				panic("actor original fingerprint: " + f.File)
+			}
+			checked[f.File] = true
 		}
 		f.Pixels = read(filepath.Join(decoded, fmt.Sprintf("%04d.idx", f.ID)))
 		if hash(f.Pixels) != f.IndexedSHA {
@@ -558,7 +631,7 @@ func (p *openingActorProbe) before() {
 	if p.active != nil {
 		if cs == p.retCS && ip == p.retIP && c.R[golem.SP] == p.sp+10 {
 			p.finish()
-		} else if p.m.Steps-p.start > 100000 || (cs == 0x4a2 && ip == 0) {
+		} else if p.m.Steps-p.start > 100000 && !p.allSprites || p.m.Steps-p.start > 1000000 || (cs == 0x4a2 && ip == 0) {
 			p.active["rejected"] = "unfinished"
 			p.calls = append(p.calls, p.active)
 			p.active = nil
@@ -605,16 +678,17 @@ func (p *openingActorProbe) before() {
 		return
 	}
 	f := p.byID[matches[0]]
-	if f.File != "OPENSHIP.SS" && f.File != "OPENSUN.SS" {
+	if !p.allSprites && f.File != "OPENSHIP.SS" && f.File != "OPENSUN.SS" {
 		return
 	}
+	// 原版診斷範圍擴充不改動正式HD定義。
 	x, y := int(int16(c.R[golem.DX])), int(int16(stack[2]))
 	row["source_id"] = f.ID
 	row["source_file"] = f.File
 	row["ordinal"] = f.Ordinal
 	row["rect"] = [4]int{x, y, x + f.Size[0], y + f.Size[1]}
 	row["encoded_sha256"] = f.EncodedSHA
-	if desc[0] != 200 || desc[1] != 320 || uint32(desc[3])*16+uint32(desc[2]) != 115760 || int(record[4]) != f.Size[0] || int(record[5]) != f.Size[1] || x < 0 || y < 0 || x+f.Size[0] > 320 || y+f.Size[1] > 200 {
+	if desc[0] != 200 || desc[1] != 320 || uint32(desc[3])*16+uint32(desc[2]) != 115760 || int(record[4]) != f.Size[0] || int(record[5]) != f.Size[1] || x < 0 || y < 0 || x >= 320 || y+f.Size[1] > 200 || (y+f.Size[1]-1)*320+x+f.Size[0] > 64000 {
 		row["rejected"] = "source geometry"
 		p.calls = append(p.calls, row)
 		return
@@ -673,7 +747,12 @@ func (p *openingActorProbe) write(a uint32, old, v byte) {
 		return
 	}
 	f := p.selected
-	x, y := at%320-p.x, at/320-p.y
+	delta := at - (p.y*320 + p.x)
+	x, y := delta%320, delta/320
+	if delta < 0 {
+		p.outside = true
+		return
+	}
 	cs, ip := p.m.CPU.OpAddr()
 	code := p.writerCodes[ip]
 	pc := int(cs)*16 + int(ip)
@@ -693,6 +772,7 @@ func (p *openingActorProbe) finish() {
 	row["outside"] = p.outside
 	mismatch := p.outside
 	blob := []byte{}
+	visible := 0
 	for local, v := range f.Pixels {
 		if v == f.Transparent {
 			if p.counts[local] != 0 {
@@ -700,6 +780,14 @@ func (p *openingActorProbe) finish() {
 			}
 			continue
 		}
+		x, y := p.x+local%f.Size[0], p.y+local/f.Size[0]
+		if x < 0 || x >= 320 || y < 0 || y >= 200 {
+			if p.counts[local] != 0 {
+				mismatch = true
+			}
+			continue
+		}
+		visible++
 		if p.counts[local] != 1 || p.writes[local] != v {
 			mismatch = true
 		}
@@ -707,8 +795,25 @@ func (p *openingActorProbe) finish() {
 		blob = append(blob, p.writes[local])
 	}
 	row["sorted_local_value_sha256"] = hash(blob)
-	row["verified"] = !mismatch && len(p.writes) == f.Opaque
+	row["expected_visible_opaque"] = visible
+	row["source_opaque_total"] = f.Opaque
+	row["verified"] = !mismatch && len(p.writes) == visible
 	if row["verified"] == true {
+		if p.firstUnder == nil {
+			p.firstUnder = map[int]bool{}
+		}
+		if !p.firstUnder[f.ID] {
+			p.firstUnder[f.ID] = true
+			cells := [][4]uint32{}
+			for local, u := range p.under {
+				if u.kind != 0 {
+					cells = append(cells, [4]uint32{uint32(local), uint32(u.kind), u.local, uint32(u.value)})
+				}
+			}
+			sort.Slice(cells, func(i, j int) bool { return cells[i][0] < cells[j][0] })
+			row["first_verified_underlay"] = cells
+		}
+
 		for k, v := range p.writes {
 			pos := (p.y+k/f.Size[0])*320 + p.x + k%f.Size[0]
 			p.cells[pos] = openingActorCell{uint16(f.ID), uint16(k), v, p.under[k]}
@@ -792,6 +897,9 @@ func (p *openingActorProbe) capture(out string) {
 }
 
 func (p *openingActorProbe) publish(a uint32, old, value byte) {
+	if !p.observePublication {
+		return
+	}
 	pos := int(a) - 0xa0000
 	if pos < 0 || pos >= 64000 {
 		return
@@ -827,4 +935,15 @@ func (p *openingActorProbe) publish(a uint32, old, value byte) {
 			p.publishedSame++
 		}
 	}
+}
+
+// 每次開關區間清空發布來源；區間外不宣稱來源。
+func (p *openingActorProbe) publicationWindow() {
+	if p.publicationEdge >= len(p.publicationEdges) || p.m.Steps != p.publicationEdges[p.publicationEdge] {
+		return
+	}
+	p.observePublication = p.publicationEdge%2 == 0
+	clear(p.publishedActor[:])
+	clear(p.publishedPIC[:])
+	p.publicationEdge++
 }

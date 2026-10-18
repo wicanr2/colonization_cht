@@ -8106,6 +8106,90 @@
         [
           666,
           73,
+          691,
+          97
+        ],
+        [
+          691,
+          73,
+          694,
+          97
+        ],
+        [
+          694,
+          73,
+          698,
+          97
+        ],
+        [
+          698,
+          73,
+          701,
+          97
+        ],
+        [
+          701,
+          73,
+          726,
+          97
+        ],
+        [
+          666,
+          97,
+          691,
+          99
+        ],
+        [
+          691,
+          97,
+          694,
+          99
+        ],
+        [
+          694,
+          97,
+          698,
+          99
+        ],
+        [
+          698,
+          97,
+          701,
+          99
+        ],
+        [
+          701,
+          97,
+          726,
+          99
+        ],
+        [
+          666,
+          99,
+          691,
+          131
+        ],
+        [
+          691,
+          99,
+          694,
+          131
+        ],
+        [
+          694,
+          99,
+          698,
+          131
+        ],
+        [
+          698,
+          99,
+          701,
+          131
+        ],
+        [
+          701,
+          99,
           726,
           131
         ]
@@ -8114,6 +8198,90 @@
         [
           42,
           41,
+          484,
+          548
+        ],
+        [
+          484,
+          41,
+          590,
+          548
+        ],
+        [
+          590,
+          41,
+          666,
+          548
+        ],
+        [
+          666,
+          41,
+          774,
+          548
+        ],
+        [
+          774,
+          41,
+          1212,
+          548
+        ],
+        [
+          42,
+          548,
+          484,
+          600
+        ],
+        [
+          484,
+          548,
+          590,
+          600
+        ],
+        [
+          590,
+          548,
+          666,
+          600
+        ],
+        [
+          666,
+          548,
+          774,
+          600
+        ],
+        [
+          774,
+          548,
+          1212,
+          600
+        ],
+        [
+          42,
+          600,
+          484,
+          1181
+        ],
+        [
+          484,
+          600,
+          590,
+          1181
+        ],
+        [
+          590,
+          600,
+          666,
+          1181
+        ],
+        [
+          666,
+          600,
+          774,
+          1181
+        ],
+        [
+          774,
+          600,
           1212,
           1181
         ]
@@ -9263,6 +9431,557 @@
       "palette_sha256": "b53fcec3d9bbe9af2e1d07566cd74d079dedce14f792788c7471f9e2ef0c6a54",
       "coverage": "READY R83 opening ship8 canonical-palette complete calls and published provenance; GUI conformance pending",
       "rights": "AI-generated display redraw under RRSAL-1.0; original and unselected references remain private"
+    },
+    "opening-sun-base-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "854022582cadedcd346ec41cb963d2119e29c07c39605c6366b9028b5aa40410",
+      "bytes": 757370,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        960,
+        132
+      ],
+      "target_size": [
+        3840,
+        528
+      ],
+      "sampling": "DRAFT measured eye bands; integer pixel-center nearest; raw PNG unchanged",
+      "alpha": "raw alpha source-over onto verified opaque PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENING.PIK",
+        "sha256": "80ea1dd4a00a4029052112882305e573bd7e20066eb095ceabe273a217689185",
+        "ordinal": 0,
+        "indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+      },
+      "native_display_rects": [
+        [
+          690,
+          97,
+          691,
+          99
+        ],
+        [
+          691,
+          97,
+          694,
+          99
+        ],
+        [
+          697,
+          97,
+          698,
+          99
+        ],
+        [
+          698,
+          97,
+          701,
+          99
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          466,
+          548,
+          484,
+          600
+        ],
+        [
+          484,
+          548,
+          590,
+          600
+        ],
+        [
+          647,
+          548,
+          666,
+          600
+        ],
+        [
+          666,
+          548,
+          774,
+          600
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit. Asset: ONE transparent static base sun for Colonization (1994), before its eye animation is drawn.\nImage 1 is the edit target: the already accepted fine pixel-art golden sun. Image 2 is the source-verified original static sun before its animated eyes are overlaid.\nChange ONLY the two existing eye apertures to the fully closed eyelids shown in Image 2. Use simple thin horizontal dark-gold closed-eye lines in the lower half of the existing eye boxes, with gold skin above. No visible pupils or open slit. Keep eye positions and sizes; do not move the brows, nose, mouth, cheeks or rays. Preserve the complete sun, pixel scale, golden palette, outline, alpha, all other texture and canvas framing from Image 1. Ignore Image 2's parchment background. Actual transparent background; no text, border, atlas or additional objects.",
+      "reference_sha256": {
+        "graphics/opening-sun-000.png": "c69a393d6af9ba22b5aea32ce1efe6b26a78ed6b737900ece5f1eb915546623c",
+        "native-sun-base-reference-r1.png": "33ec411396eb93f5fff640556a4253abba38673b447ab510b758d484fa53ef49"
+      },
+      "coverage": "READY R85 source-verified closed base and seven sun frames; formal normal GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "opensun-000.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "c69a393d6af9ba22b5aea32ce1efe6b26a78ed6b737900ece5f1eb915546623c",
+      "bytes": 750786,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        10,
+        2
+      ],
+      "target_size": [
+        40,
+        8
+      ],
+      "sampling": "DRAFT measured eye bands; integer pixel-center nearest; raw PNG unchanged",
+      "alpha": "raw alpha source-over onto verified opaque PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENSUN.SS",
+        "sha256": "639e0ff1eaf4fb4a9b649557c63658b0ba611caeb3ebf46da75affd342ed30bd",
+        "ordinal": 0,
+        "indexed_sha256": "a9818860f9e9f11366a8fea175fd2f6a07b20c8805325a6e7925b4ed28f59d72",
+        "encoded_sha256": "2da552925b52783a830bf5c82ddbe70591f14dc29cfd42ab880e41ac873a6c33"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          3,
+          2
+        ],
+        [
+          7,
+          0,
+          10,
+          2
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          484,
+          548,
+          590,
+          600
+        ],
+        [
+          666,
+          548,
+          774,
+          600
+        ]
+      ],
+      "generation_prompt": "Use case: style-transfer. Asset: ONE isolated antique map sun-face sprite. Image 1 is the exact subject and silhouette reference; image 2 supplies only the fine pixel-art technique and warm gold/red palette. Redraw the complete original round gold sun face with all alternating long and short red-gold rays, its severe engraved human face and matching original proportions. Crisp intentional small pixel clusters, restrained bronze shadows, warm amber highlights. Center the complete single sun on a genuinely transparent background with all rays visible and a little transparent margin. Remove all parchment, water and map lines. No text, ships, other objects, collage or atlas.",
+      "reference_sha256": {
+        "graphics/opening-sun-000.png": "c69a393d6af9ba22b5aea32ce1efe6b26a78ed6b737900ece5f1eb915546623c"
+      },
+      "coverage": "READY R85 source-verified closed base and seven sun frames; formal normal GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private",
+      "generation_reuse": "exact unchanged approved R82 opening-sun-000.png raw PNG, reused for neutral eye frame0"
+    },
+    "opensun-001.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "873ce284ab4069b0408af60e73ab4778f58443f7b864a10c331f89d5c06cc8c9",
+      "bytes": 762491,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        10,
+        2
+      ],
+      "target_size": [
+        40,
+        8
+      ],
+      "sampling": "DRAFT measured eye bands; integer pixel-center nearest; raw PNG unchanged",
+      "alpha": "raw alpha source-over onto verified opaque PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENSUN.SS",
+        "sha256": "639e0ff1eaf4fb4a9b649557c63658b0ba611caeb3ebf46da75affd342ed30bd",
+        "ordinal": 1,
+        "indexed_sha256": "1b02d1465d04fd7205e3e83103c005df7c145a13e4543237bab1c6220dc99ca1",
+        "encoded_sha256": "66da6ef3e52334667a24d40d6139af91fd9f0afe4d13eaeda43526ddc7a3b21d"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          3,
+          2
+        ],
+        [
+          7,
+          0,
+          10,
+          2
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          484,
+          548,
+          590,
+          600
+        ],
+        [
+          666,
+          548,
+          774,
+          600
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit. Asset: ONE transparent sun-face animation image for Colonization (1994). Image 1 is the edit target: the already approved fine pixel-art golden sun. Image 2 is the original game's source-verified expression for this exact animation frame, enlarged only for reference. Change ONLY the pupils and eyelid shading inside the two existing eyes to match Image 2. Keep the complete face, nose, mouth, rays, material, palette, pixel scale, outline, alpha and canvas framing identical to Image 1. Do not move or resize the eyes, change emotion, add eyelashes or edit any other detail. Ignore Image 2's parchment map background. Keep real transparency and the full sun intact, with no words, border, atlas or extra object. Frame 1: retain the near-central gaze, with only the small upper-lid and eye-corner shade shift visible in the source.",
+      "reference_sha256": {
+        "graphics/opening-sun-000.png": "c69a393d6af9ba22b5aea32ce1efe6b26a78ed6b737900ece5f1eb915546623c",
+        "native-sun-composite-001-r2.png": "d88a8434b4c1737ddd505a777704e24bfd6621b45e0cb38dcf31957094bcb28c"
+      },
+      "coverage": "READY R85 source-verified closed base and seven sun frames; formal normal GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "opensun-002.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "49114d551ee4bc0369255363438004104165f30722b165104b007114a25a504d",
+      "bytes": 773593,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        10,
+        2
+      ],
+      "target_size": [
+        40,
+        8
+      ],
+      "sampling": "DRAFT measured eye bands; integer pixel-center nearest; raw PNG unchanged",
+      "alpha": "raw alpha source-over onto verified opaque PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENSUN.SS",
+        "sha256": "639e0ff1eaf4fb4a9b649557c63658b0ba611caeb3ebf46da75affd342ed30bd",
+        "ordinal": 2,
+        "indexed_sha256": "5d04c7c188d46e871c76872ee6328b8601328230fd5b3340af8e2dec3eba93ff",
+        "encoded_sha256": "ed71e3a1096ebe1e8ee8d28240d5628c43b35bff987b819e1f89fc1be491d775"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          3,
+          2
+        ],
+        [
+          7,
+          0,
+          10,
+          2
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          484,
+          548,
+          590,
+          600
+        ],
+        [
+          666,
+          548,
+          774,
+          600
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit. Asset: ONE transparent sun-face animation image for Colonization (1994). Image 1 is the edit target: the already approved fine pixel-art golden sun. Image 2 is the original game's source-verified expression for this exact animation frame, enlarged only for reference. Change ONLY the pupils and eyelid shading inside the two existing eyes to match Image 2. Keep the complete face, nose, mouth, rays, material, palette, pixel scale, outline, alpha and canvas framing identical to Image 1. Do not move or resize the eyes, change emotion, add eyelashes or edit any other detail. Ignore Image 2's parchment map background. Keep real transparency and the full sun intact, with no words, border, atlas or extra object. Frame 2: reproduce the source's slightly narrowed eye aperture and reduced right eye-edge detail, while keeping the pupils near the center.",
+      "reference_sha256": {
+        "graphics/opening-sun-000.png": "c69a393d6af9ba22b5aea32ce1efe6b26a78ed6b737900ece5f1eb915546623c",
+        "native-sun-composite-002-r2.png": "703d986c90b9d7c602e30d52b3097c61526e011c8329beb555d1bd11f8c7d711"
+      },
+      "coverage": "READY R85 source-verified closed base and seven sun frames; formal normal GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "opensun-003.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "9769956c3ddfc0e037d8e869b92fa0edee5ed67378ac72f011d725cbdef35d08",
+      "bytes": 785325,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        10,
+        2
+      ],
+      "target_size": [
+        40,
+        8
+      ],
+      "sampling": "DRAFT measured eye bands; integer pixel-center nearest; raw PNG unchanged",
+      "alpha": "raw alpha source-over onto verified opaque PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENSUN.SS",
+        "sha256": "639e0ff1eaf4fb4a9b649557c63658b0ba611caeb3ebf46da75affd342ed30bd",
+        "ordinal": 3,
+        "indexed_sha256": "228ce4c69fd9cbc91b9c273feba40fd9966787e9ffbddf83ab86a43a07874d2a",
+        "encoded_sha256": "4a0133cfa4ea42a96e80c182f77a62d643ae7f26f1eb82ff8ce65e204fdc8274"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          3,
+          2
+        ],
+        [
+          7,
+          0,
+          10,
+          2
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          484,
+          548,
+          590,
+          600
+        ],
+        [
+          666,
+          548,
+          774,
+          600
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit. Asset: ONE transparent sun-face animation image for Colonization (1994). Image 1 is the edit target: the already approved fine pixel-art golden sun. Image 2 is the original game's source-verified expression for this exact animation frame, enlarged only for reference. Change ONLY the pupils and eyelid shading inside the two existing eyes to match Image 2. Keep the complete face, nose, mouth, rays, material, palette, pixel scale, outline, alpha and canvas framing identical to Image 1. Do not move or resize the eyes, change emotion, add eyelashes or edit any other detail. Ignore Image 2's parchment map background. Keep real transparency and the full sun intact, with no words, border, atlas or extra object. Frame 3: the dark pupils are toward the left side of both eye apertures; reproduce the source's restrained narrowed lids.",
+      "reference_sha256": {
+        "graphics/opening-sun-000.png": "c69a393d6af9ba22b5aea32ce1efe6b26a78ed6b737900ece5f1eb915546623c",
+        "native-sun-composite-003-r2.png": "34278e6c1ef03b49a2db6e24cda88926e63197faae339019f5e90a1d7da8b943"
+      },
+      "coverage": "READY R85 source-verified closed base and seven sun frames; formal normal GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "opensun-004.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "a9b519f01c4a86228b6bd85d2c8b99614d52ed439b2a2fa18a138c2a678007ef",
+      "bytes": 748878,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        10,
+        2
+      ],
+      "target_size": [
+        40,
+        8
+      ],
+      "sampling": "DRAFT measured eye bands; integer pixel-center nearest; raw PNG unchanged",
+      "alpha": "raw alpha source-over onto verified opaque PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENSUN.SS",
+        "sha256": "639e0ff1eaf4fb4a9b649557c63658b0ba611caeb3ebf46da75affd342ed30bd",
+        "ordinal": 4,
+        "indexed_sha256": "3e601e810576e4a9372f04a6449bae8beb515f76eca4e2b3379ac7b3996b49c9",
+        "encoded_sha256": "76c72a581266b30d9162cdd7959d8dbe397c153c9d9f89373311ca1f8867e63e"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          3,
+          2
+        ],
+        [
+          7,
+          0,
+          10,
+          2
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          484,
+          548,
+          590,
+          600
+        ],
+        [
+          666,
+          548,
+          774,
+          600
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit. Asset: ONE transparent sun-face animation image for Colonization (1994). Image 1 is the edit target: the already approved fine pixel-art golden sun. Image 2 is the original game's source-verified expression for this exact animation frame, enlarged only for reference. Change ONLY the pupils and eyelid shading inside the two existing eyes to match Image 2. Keep the complete face, nose, mouth, rays, material, palette, pixel scale, outline, alpha and canvas framing identical to Image 1. Do not move or resize the eyes, change emotion, add eyelashes or edit any other detail. Ignore Image 2's parchment map background. Keep real transparency and the full sun intact, with no words, border, atlas or extra object. Frame 4: keep the same restrained leftward gaze, with the source's slight lower-lid and corner shading change.",
+      "reference_sha256": {
+        "graphics/opening-sun-000.png": "c69a393d6af9ba22b5aea32ce1efe6b26a78ed6b737900ece5f1eb915546623c",
+        "native-sun-composite-004-r2.png": "43f2e44f7d2e7bb6e32d85f906685c58a64bf237384e0b62ab8b86ec95b67d6a"
+      },
+      "coverage": "READY R85 source-verified closed base and seven sun frames; formal normal GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "opensun-005.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "b0377d7fcf53ef8cd68a7f8545fc7ddcf685ce83dd3ce58ee63c074ce18308a7",
+      "bytes": 734910,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        11,
+        2
+      ],
+      "target_size": [
+        44,
+        8
+      ],
+      "sampling": "DRAFT measured eye bands; integer pixel-center nearest; raw PNG unchanged",
+      "alpha": "raw alpha source-over onto verified opaque PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENSUN.SS",
+        "sha256": "639e0ff1eaf4fb4a9b649557c63658b0ba611caeb3ebf46da75affd342ed30bd",
+        "ordinal": 5,
+        "indexed_sha256": "484a8a5ce5ddbbb66f7d88a8c12b9512ae3e24e958c46b0deaf4136b98e5f5fc",
+        "encoded_sha256": "b7426413e85fde68b3c22639fb1aa04100fa89e244cdb454a862629bdc81ab60"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          0,
+          4,
+          2
+        ],
+        [
+          7,
+          0,
+          8,
+          2
+        ],
+        [
+          8,
+          0,
+          11,
+          2
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          466,
+          548,
+          484,
+          600
+        ],
+        [
+          484,
+          548,
+          590,
+          600
+        ],
+        [
+          647,
+          548,
+          666,
+          600
+        ],
+        [
+          666,
+          548,
+          774,
+          600
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit. Asset: ONE transparent sun-face animation image for Colonization (1994). Image 1 is the edit target: the already approved fine pixel-art golden sun. Image 2 is the original game's source-verified expression for this exact animation frame, enlarged only for reference. Change ONLY the pupils and eyelid shading inside the two existing eyes to match Image 2. Keep the complete face, nose, mouth, rays, material, palette, pixel scale, outline, alpha and canvas framing identical to Image 1. Do not move or resize the eyes, change emotion, add eyelashes or edit any other detail. Ignore Image 2's parchment map background. Keep real transparency and the full sun intact, with no words, border, atlas or extra object. Frame 5: preserve the source's leftward pupil placement and tiny lower-lid shift; do not move the whole face or enlarge the eyes.",
+      "reference_sha256": {
+        "graphics/opening-sun-000.png": "c69a393d6af9ba22b5aea32ce1efe6b26a78ed6b737900ece5f1eb915546623c",
+        "native-sun-composite-005-r2.png": "0e09cbbfbb3778f85025cae28a11a34be26399a70e6503adbe9635bb278a68f0"
+      },
+      "coverage": "READY R85 source-verified closed base and seven sun frames; formal normal GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
+    },
+    "opensun-006.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "c137d13d87a7a9091fc84ccc1f8ab618cbefe344fac054b1cadbea2bfafbb93e",
+      "bytes": 755355,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        10,
+        1
+      ],
+      "target_size": [
+        40,
+        4
+      ],
+      "sampling": "DRAFT measured eye bands; integer pixel-center nearest; raw PNG unchanged",
+      "alpha": "raw alpha source-over onto verified opaque PIK underlay",
+      "original_source": {
+        "exe_sha256": "3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39",
+        "file": "OPENSUN.SS",
+        "sha256": "639e0ff1eaf4fb4a9b649557c63658b0ba611caeb3ebf46da75affd342ed30bd",
+        "ordinal": 6,
+        "indexed_sha256": "6b87efc14d562f0f240d9c01fcfb0b03ac64cffa597762d02394e4875d6fa2a5",
+        "encoded_sha256": "6ac7720f76b203a4db62ca2bc95f002078e320f5d678e74117921d3b31d0fd7b"
+      },
+      "native_display_rects": [
+        [
+          0,
+          0,
+          3,
+          1
+        ],
+        [
+          7,
+          0,
+          10,
+          1
+        ]
+      ],
+      "generated_display_rects": [
+        [
+          484,
+          574,
+          590,
+          600
+        ],
+        [
+          666,
+          574,
+          774,
+          600
+        ]
+      ],
+      "generation_prompt": "Use case: precise-object-edit. Asset: ONE transparent sun-face animation image for Colonization (1994). Image 1 is the edit target: the already approved fine pixel-art golden sun. Image 2 is the original game's source-verified expression for this exact animation frame, enlarged only for reference. Change ONLY the pupils and eyelid shading inside the two existing eyes to match Image 2. Keep the complete face, nose, mouth, rays, material, palette, pixel scale, outline, alpha and canvas framing identical to Image 1. Do not move or resize the eyes, change emotion, add eyelashes or edit any other detail. Ignore Image 2's parchment map background. Keep real transparency and the full sun intact, with no words, border, atlas or extra object. Frame 6: match the source's very narrow one-row eye state, a restrained low horizontal eye slit, with the dark pupil mark toward the left.",
+      "reference_sha256": {
+        "graphics/opening-sun-000.png": "c69a393d6af9ba22b5aea32ce1efe6b26a78ed6b737900ece5f1eb915546623c",
+        "native-sun-composite-006-r2.png": "7c29b20bce546bbe2db04bccceafed342a73df1e281bb8dea7484f13d3916174"
+      },
+      "coverage": "READY R85 source-verified closed base and seven sun frames; formal normal GUI conformance pending",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references private"
     }
   }
 }

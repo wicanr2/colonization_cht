@@ -6811,3 +6811,64 @@ OPENSUN及其他SS無本批HD完成信用。
 完整定位、來源雜湊及退出邊界見[規格069 R84](docs/spec/069-hd-menu-background-and-textures.md)。
 本機opening-animation-long-review-r1.json SHA-256為9d4cb599812cd2ce0c2c6980e420c310bdf94ec446a3125e15e5da7a83d9dc2d。
 公開探針新增有界--sample-every；來源模型函式不變，兩個短流程原版狀態與三個參數拒絕通過。
+
+
+## 2026-10-18：R85整批開場動畫與太陽眼睛
+
+已證實：單次正常Enter至400M，40點完整原版狀態及原PNG與控制相同。
+65幀／1213次完整呼叫來源見[規格069 R85](docs/spec/069-hd-menu-background-and-textures.md)，
+審查0b999d1d48827b4c39f57f8b3f609865d3e587d48e0df671181d27196537b1f1。
+原版定位為04A2:0000、0177／01AA／01C8及0557:009F，
+位址空間dosgolem real-mode CS:IP與20-bit linear RAM，非EXE檔案偏移。
+七個太陽底圖anchor由實際PIK來源逐格確認，最後一幀下移；封存欄位不能代替執行參數。
+右邊界第5幀九格與可見來源完全相符，沒有換行。r2指紋含一格未寫零值，
+最初直接比九格指紋不合屬收據格式誤讀，按完整格式比對後成立。
+
+原版靜態PIK閉眼；R82生成太陽張眼且眼睛位置不對齊SS，原版檔及既有原PNG均不改寫。
+候選分帶只修顯示取樣，新增閉眼區及六個眼睛變體，首幀沿用。
+生成alpha252至254保持，使用source-over；原型首次把alpha當255的斷言已撤回，
+R2按實際alpha通過七幀7168000個完整RGBA，尚未授予正式HD信用。
+
+
+## 2026-10-18：R85連續發布、正常太陽七幀及其餘背景候選
+
+已證實：dosgolem獨立連續模型400M／41點保持完整原版狀態與DOS讀取。
+來源為OPENING.EXE 3c08c4af3a709e155cb0ae043c9a2813b5cd34ed4bb0a1a3a0b12e7fa54d0d39，
+固定解碼清冊e0b14a6ba8a8bec5cae3fd165ea6d88de384dc4f61c1ec67ca8504c29189aa5d；
+位址空間為dosgolem真實模式CS:IP與20bit線性RAM，Go1.26.7。
+連續probe二進位fb66d174df46c4d20a6f1adebd6f9fdf1a45a0927f7ce500cacc33e03a3e9a51，
+actors收據083e8f5b123123d5c573d82e177cea7f0453693ca58b6a2427f2222efd10e1c7。
+原版完整來源65幀、1214次繪製；正式15種船／太陽來源962次接受、零拒絕。
+8張完整RGBA共8192000點通過；GUI、WAV及存檔重播仍待收齊。
+
+分類勘誤：OPENWND1是開場吹氣人物的雲團，OPENWND2是火山煙；
+不能因共用WND檔名前綴稱為兩組風神。
+此分類由OPENING.PIK原版長圖位置、完整SS來源與底圖座標共同確認：
+OPENWND1約[798,13]，OPENWND2約[598,96]。
+全部21幀位置及參考雜湊見本機wind-composite-references-r2.json。
+參考為已驗PIK底圖加單一已識別SS幀，不冒充完整同狀態GUI截圖。
+剩餘17張PIK候選與兩張透明動畫首幀皆由內建image_gen生成，
+原始PNG位元組與alpha保持，只留本機，尚不增加正式HD信用。
+
+## 2026-10-18：R85字幕游標方塊與來源模型範圍勘誤
+
+已證實，原版輸入、dosgolem版本及位址空間沿本節R85指紋。
+CJK字幕存在時，前端重建末尾的len(items)==0阻止已驗開場游標背景恢復；
+共用字底的VICEROY畫布不是OPENING畫布，原版游標框因而殘留。
+修正僅在有效文字／來源安全矩形均不相交時恢復游標框內已驗PIK／SS來源，
+不改原版記憶體、掛鉤、輸入或存檔。READY指紋2de0e166f92d0129da8b49ee9e5934ae4b63611e056eee1f77ecff7b65a09093。
+
+全部65來源診斷可經其餘50種SS繼承PIK底圖，正式15來源不具該證據。
+338800000步船隻1254局部194處在診斷有底圖、正式未知，正式保留原圖的4×4區塊正確；
+不能以診斷範圍逼正式補畫。規範像素驗證採公開probe預設15來源，未知像素不計HD。
+七幀既有英文實拍與本次四語修正分開驗收，完整範圍見[規格069 R85](docs/spec/069-hd-menu-background-and-textures.md)。
+
+新舊68Go只有hd_runtime.go的繪製後條件及其測試不同；來源處理與原版掛鉤逐byte相同。
+繼承審查217edf4383bfd43ce87221c2ade6cffc32edbca1beb63477d8b37c7b41cf24c3；
+本次22項完整GUI像素審查d8a9fc2fb57e38f834bf149b623147b3f9ea2b3fde65c4dd8a441cf954ecf5d3。
+
+OPENMON1與OPENMON2均是OPENING.PIK上方綠金魚的頭尾動畫，並非下方海怪或龍。
+21個已觀測來源的底圖定位由完整呼叫逐格取得，世界包圍範圍[588,16,640,49]；
+完整物件參考另含原靜態魚身[584,24,633,55]。MON1第1／4與第2／3幀的尺寸、
+編碼雜湊及索引雜湊相同，可各保留同一候選原PNG；其他幀不因觀感近似合併。
+原版參考、候選與提示均只留本機，不代表新增正常GUI或正式HD完成。
