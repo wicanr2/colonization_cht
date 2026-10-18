@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "5c8f2f86c28664c3c1beb92ec61c08e0abd54e3a771ac45a2316a7e37d8537c5",
+  "formal_manifest_sha256": "78d7a27f98c9eab13ba61ec6661acc681d194b334593c7e5fc4b73eac16824db",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -41329,7 +41329,8 @@
         "opening-galley-000.png",
         "opening-volcano-000.png",
         "opening-wind-000.png",
-        "opening-mermaid-000.png"
+        "opening-mermaid-000.png",
+        "opening-sun-base-000.png"
       ],
       "source_contract_reference": {
         "state": "CONFORMED",
@@ -41344,6 +41345,13 @@
         "formal_connected": true,
         "review_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb",
         "scope": "canonical-palette opening ship8 complete calls, native animation regions, verified PIK underlay, exact published VGA provenance, transient and normal mouse/exit; other SS and fades remain unverified"
+      },
+      "sun_base_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "b3cd83f8d9e588dcec995179856e2070735e460e94ef3c5a5f4296c7457e90a1",
+        "scope": "seven OPENSUN frames and closed PIK eye base; native timing, position and verified full source before visible clipping; original publication and mouse restoration only"
       }
     },
     {
@@ -43330,9 +43338,18 @@
       "indexed_sha256": "a9818860f9e9f11366a8fea175fd2f6a07b20c8805325a6e7925b4ed28f59d72",
       "opaque_pixels": 12,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; right-edge frame5 uses nine visible cells only after prior complete native verification",
+      "animation_evidence": "confirmed seven original frames on prior normal GUI with byte-identical source handlers; current normal GUI verifies cursor/caption rendering; original timing and position, source alpha and eye regions only",
+      "formal_assets": [
+        "opensun-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "b3cd83f8d9e588dcec995179856e2070735e460e94ef3c5a5f4296c7457e90a1",
+        "scope": "seven OPENSUN frames and closed PIK eye base; native timing, position and verified full source before visible clipping; original publication and mouse restoration only"
+      }
     },
     {
       "research_id": 1259,
@@ -43355,9 +43372,18 @@
       "indexed_sha256": "1b02d1465d04fd7205e3e83103c005df7c145a13e4543237bab1c6220dc99ca1",
       "opaque_pixels": 12,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; right-edge frame5 uses nine visible cells only after prior complete native verification",
+      "animation_evidence": "confirmed seven original frames on prior normal GUI with byte-identical source handlers; current normal GUI verifies cursor/caption rendering; original timing and position, source alpha and eye regions only",
+      "formal_assets": [
+        "opensun-001.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "b3cd83f8d9e588dcec995179856e2070735e460e94ef3c5a5f4296c7457e90a1",
+        "scope": "seven OPENSUN frames and closed PIK eye base; native timing, position and verified full source before visible clipping; original publication and mouse restoration only"
+      }
     },
     {
       "research_id": 1260,
@@ -43380,9 +43406,18 @@
       "indexed_sha256": "5d04c7c188d46e871c76872ee6328b8601328230fd5b3340af8e2dec3eba93ff",
       "opaque_pixels": 10,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; right-edge frame5 uses nine visible cells only after prior complete native verification",
+      "animation_evidence": "confirmed seven original frames on prior normal GUI with byte-identical source handlers; current normal GUI verifies cursor/caption rendering; original timing and position, source alpha and eye regions only",
+      "formal_assets": [
+        "opensun-002.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "b3cd83f8d9e588dcec995179856e2070735e460e94ef3c5a5f4296c7457e90a1",
+        "scope": "seven OPENSUN frames and closed PIK eye base; native timing, position and verified full source before visible clipping; original publication and mouse restoration only"
+      }
     },
     {
       "research_id": 1261,
@@ -43405,9 +43440,18 @@
       "indexed_sha256": "228ce4c69fd9cbc91b9c273feba40fd9966787e9ffbddf83ab86a43a07874d2a",
       "opaque_pixels": 10,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; right-edge frame5 uses nine visible cells only after prior complete native verification",
+      "animation_evidence": "confirmed seven original frames on prior normal GUI with byte-identical source handlers; current normal GUI verifies cursor/caption rendering; original timing and position, source alpha and eye regions only",
+      "formal_assets": [
+        "opensun-003.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "b3cd83f8d9e588dcec995179856e2070735e460e94ef3c5a5f4296c7457e90a1",
+        "scope": "seven OPENSUN frames and closed PIK eye base; native timing, position and verified full source before visible clipping; original publication and mouse restoration only"
+      }
     },
     {
       "research_id": 1262,
@@ -43430,9 +43474,18 @@
       "indexed_sha256": "3e601e810576e4a9372f04a6449bae8beb515f76eca4e2b3379ac7b3996b49c9",
       "opaque_pixels": 10,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; right-edge frame5 uses nine visible cells only after prior complete native verification",
+      "animation_evidence": "confirmed seven original frames on prior normal GUI with byte-identical source handlers; current normal GUI verifies cursor/caption rendering; original timing and position, source alpha and eye regions only",
+      "formal_assets": [
+        "opensun-004.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "b3cd83f8d9e588dcec995179856e2070735e460e94ef3c5a5f4296c7457e90a1",
+        "scope": "seven OPENSUN frames and closed PIK eye base; native timing, position and verified full source before visible clipping; original publication and mouse restoration only"
+      }
     },
     {
       "research_id": 1263,
@@ -43455,9 +43508,18 @@
       "indexed_sha256": "484a8a5ce5ddbbb66f7d88a8c12b9512ae3e24e958c46b0deaf4136b98e5f5fc",
       "opaque_pixels": 10,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; right-edge frame5 uses nine visible cells only after prior complete native verification",
+      "animation_evidence": "confirmed seven original frames on prior normal GUI with byte-identical source handlers; current normal GUI verifies cursor/caption rendering; original timing and position, source alpha and eye regions only",
+      "formal_assets": [
+        "opensun-005.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "b3cd83f8d9e588dcec995179856e2070735e460e94ef3c5a5f4296c7457e90a1",
+        "scope": "seven OPENSUN frames and closed PIK eye base; native timing, position and verified full source before visible clipping; original publication and mouse restoration only"
+      }
     },
     {
       "research_id": 1264,
@@ -43480,9 +43542,18 @@
       "indexed_sha256": "6b87efc14d562f0f240d9c01fcfb0b03ac64cffa597762d02394e4875d6fa2a5",
       "opaque_pixels": 6,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
-      "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "runtime_source_evidence": "confirmed complete source, verified PIK underlay and exact published VGA cells; right-edge frame5 uses nine visible cells only after prior complete native verification",
+      "animation_evidence": "confirmed seven original frames on prior normal GUI with byte-identical source handlers; current normal GUI verifies cursor/caption rendering; original timing and position, source alpha and eye regions only",
+      "formal_assets": [
+        "opensun-006.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "b3cd83f8d9e588dcec995179856e2070735e460e94ef3c5a5f4296c7457e90a1",
+        "scope": "seven OPENSUN frames and closed PIK eye base; native timing, position and verified full source before visible clipping; original publication and mouse restoration only"
+      }
     },
     {
       "research_id": 1265,
@@ -59479,6 +59550,87 @@
       "source_encoded_sha256": "0044bee7db210462744ac21d00405906a984dc2fda11973c9774064d6b19b3a5",
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "opening-sun-base-000.png",
+      "asset_sha256": "854022582cadedcd346ec41cb963d2119e29c07c39605c6366b9028b5aa40410",
+      "source_research_id": 1179,
+      "source_file": "OPENING.PIK",
+      "source_ordinal": 0,
+      "source_encoded_sha256": null,
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "source_indexed_sha256": "9aa042dfb838820ea8d7d1c9953478f44dd7d8f85db4d5cc4aa0bb9bb0006b95"
+    },
+    {
+      "asset": "opensun-000.png",
+      "asset_sha256": "c69a393d6af9ba22b5aea32ce1efe6b26a78ed6b737900ece5f1eb915546623c",
+      "source_research_id": 1258,
+      "source_file": "OPENSUN.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "2da552925b52783a830bf5c82ddbe70591f14dc29cfd42ab880e41ac873a6c33",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "opensun-001.png",
+      "asset_sha256": "873ce284ab4069b0408af60e73ab4778f58443f7b864a10c331f89d5c06cc8c9",
+      "source_research_id": 1259,
+      "source_file": "OPENSUN.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "66da6ef3e52334667a24d40d6139af91fd9f0afe4d13eaeda43526ddc7a3b21d",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "opensun-002.png",
+      "asset_sha256": "49114d551ee4bc0369255363438004104165f30722b165104b007114a25a504d",
+      "source_research_id": 1260,
+      "source_file": "OPENSUN.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "ed71e3a1096ebe1e8ee8d28240d5628c43b35bff987b819e1f89fc1be491d775",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "opensun-003.png",
+      "asset_sha256": "9769956c3ddfc0e037d8e869b92fa0edee5ed67378ac72f011d725cbdef35d08",
+      "source_research_id": 1261,
+      "source_file": "OPENSUN.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "4a0133cfa4ea42a96e80c182f77a62d643ae7f26f1eb82ff8ce65e204fdc8274",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "opensun-004.png",
+      "asset_sha256": "a9b519f01c4a86228b6bd85d2c8b99614d52ed439b2a2fa18a138c2a678007ef",
+      "source_research_id": 1262,
+      "source_file": "OPENSUN.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "76c72a581266b30d9162cdd7959d8dbe397c153c9d9f89373311ca1f8867e63e",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "opensun-005.png",
+      "asset_sha256": "b0377d7fcf53ef8cd68a7f8545fc7ddcf685ce83dd3ce58ee63c074ce18308a7",
+      "source_research_id": 1263,
+      "source_file": "OPENSUN.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "b7426413e85fde68b3c22639fb1aa04100fa89e244cdb454a862629bdc81ab60",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+    },
+    {
+      "asset": "opensun-006.png",
+      "asset_sha256": "c137d13d87a7a9091fc84ccc1f8ab618cbefe344fac054b1cadbea2bfafbb93e",
+      "source_research_id": 1264,
+      "source_file": "OPENSUN.SS",
+      "source_ordinal": 6,
+      "source_encoded_sha256": "6ac7720f76b203a4db62ca2bc95f002078e320f5d678e74117921d3b31d0fd7b",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
     }
   ],
   "limitations": [
@@ -59862,5 +60014,26 @@
     "formal_assets": 155,
     "gui_samples": 17,
     "claim": "eight OPENSHIP frames and published PIK sources only; other SS, fades and full HD remain incomplete"
+  },
+  "opening_sun_conformance": {
+    "ready_sha256": "febe41870e0b3b494044f90c24b33a08f220a44135a811a90e6c3ea125e378db",
+    "review_sha256": "b3cd83f8d9e588dcec995179856e2070735e460e94ef3c5a5f4296c7457e90a1",
+    "sources": [
+      1258,
+      1259,
+      1260,
+      1261,
+      1262,
+      1263,
+      1264
+    ],
+    "new_generated_pngs": 7,
+    "reused_png_files": 1,
+    "formal_assets": 163,
+    "gui_samples": 22,
+    "current_caption_gui_samples": 22,
+    "source_handlers_and_native_hooks_byte_unchanged": true,
+    "seven_frame_gui_proof_scope": "prior normal GUI plus byte-identical source handlers; current normal GUI verifies changed cursor/caption rendering",
+    "claim": "seven OPENSUN frames and closed eye base only; other SS, fades and full HD remain incomplete"
   }
 }

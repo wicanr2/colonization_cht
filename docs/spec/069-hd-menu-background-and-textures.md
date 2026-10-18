@@ -1941,3 +1941,31 @@ R85游標／字幕補充已READY。私有11項具名測試零失敗、零skip及
 
 上述檔案位於本節R85本機根。候選仍須確認取樣幾何、舊姿態清除、原版來源發布、
 遮擋與游標，再經READY進正式接線。原PNG不得裁切、縮放或重新編碼；取樣只在顯示層進行。
+
+### 2026-10-19 R85限定CONFORMED
+
+太陽七幀、閉眼底圖、先前完整來源驗證後的右側九格裁切，
+以及文字安全矩形之外的開場游標來源恢復已限定CONFORMED。
+本節取代R85各READY附記的待驗狀態；當時失敗與歷史收據保留。
+
+| 證據 | 完成範圍 |
+|---|---|
+| 最終三側長流程 | 新組建七筆當次GUI輸入至413800000步，含play=true；三側CPU、完整RAM、IDX、DAC、WAV與存檔和前次實拍全等。1776381個立體聲sample frame、49715Hz、16bit，WAV e8681ae3fe34a8898ed63162f24af8befa162ce48a61ddf8f0fdcdb0a2eb8458。 |
+| 新組建字幕／游標 | 22項五語GUI、17HD／5原圖，13筆輸入至89200000步三側全等；完整RGBA與X11、16個Noto欄位依前節已驗範圍保持。本次只觀測SUN0，七幀正常英文11張與來源處理逐byte繼承另列，不混為新七幀實拍。 |
+| 原版來源與資源 | 41點、962次接受零拒絕、8張完整RGBA8192000點；72個既有測試與10個新守門皆通過，計入案例零失敗／零skip。164檔封裝與31項新拒絕、原版288檔及舊155張原PNG保持。 |
+| 來源清冊 | 1552列、163個正式連結。只更新SUN1258至1264與PIK1179，其他1544列及歷史驗收保持。四種錯誤審查皆拒絕且不產生索引。 |
+| 完成限制 | 只涵蓋七幀太陽及上述底圖／裁切／游標。未驗SS、淡入淡出、其餘圖像、完整五語、影片及新版發行不在完成聲明。未知船隻底圖仍有一格4×4回原圖，不計HD。 |
+
+總審查opening-sun-conformance-r2.json SHA-256：
+b3cd83f8d9e588dcec995179856e2070735e460e94ef3c5a5f4296c7457e90a1。
+來源清冊SHA-256：
+aa2bdf59a593420312af1ceea1161f9c6ef7e1eff3aceb6a3b8516ffb96ca796。
+索引審查r85-source-index-check-r1.json SHA-256：
+59b2a3dff0c32e5a400ff0a04ca2073a1c6d096eba96a1037d35e94731f81654。
+
+本機重生入口仍在R85根：verify-r85-final-long-replays-r2.py、
+verify-r85-caption-replays-r1.py、make-r85-conformance-r2.py與verify-r85-conformance-index-r1.py。
+公開來源／像素／索引工具為tools/probe_hd_opening_sources.go、
+tools/check_hd_opening_ship_pixels.py與tools/build_hd_source_index.py；
+索引須附--opening-sun-ready-report、--opening-sun-conformed-report、
+--inherited-index及--inherited-manifest，不從本節文字推定通過。
