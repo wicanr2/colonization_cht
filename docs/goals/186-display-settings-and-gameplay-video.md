@@ -660,3 +660,5 @@ R97另兩事件已[限定CONFORMED](../spec/069-hd-menu-background-and-textures.
 R98四人物已[READY正式接線](../spec/069-hd-menu-background-and-textures.md#r98正式四人物接線與守門)，合計316張原PNG／317檔；507具名項、完整載入取樣及封裝通過。來源索引仍312，正常GUI與當次三側原版狀態／音訊／存檔續驗，未授予全量HD完成。
 
 R98[登陸人物1063限定CONFORMED](../spec/069-hd-menu-background-and-textures.md#r98登陸人物來源conformed)，316張原PNG保持、來源連結313、README28張。新人物全部可見RGBA、完整X11、正常關頁與三側狀態／WAV／存檔通過。其他三人物於正常新局續驗，未授予全量HD完成。
+
+R98[新局兩人物1060／1064限定CONFORMED](../spec/069-hd-menu-background-and-textures.md#r98新局兩人物來源conformed)，來源連結315，316張原PNG保持、README30張。36人物／78 GUI、68原版點、1275454個可見人物RGBA、完整X11及三側狀態／WAV／存檔通過；士兵1061續驗，MSS2／5仍DRAFT。全量HD未完成。

@@ -937,6 +937,90 @@
         "X11_RGBA_pixels": 1024000
       },
       "scope": "僅MSS3 Main人物限定CONFORMED，五語兩模式、四語游標往返、正常關頁及三側完整狀態／WAV／存檔通過。既有世界層保留原驗收；其他人物與全量HD未完成。"
+    },
+    {
+      "file": "hd-tutorial-figure-zh.png",
+      "sha256": "287d9a2730c746a2667312d13531c98cde8092e69a34b6f43f1b9f59f9de91e1",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "new-game-tutorial-figure",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 590600000,
+      "code_commit": "73b5825",
+      "binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
+      "formal_binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
+      "formal_hd_assets": 316,
+      "source_conformed_assets": 315,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-dialog-figures-r98/r98-mss-formal-gui-r2/gui.display-010.png",
+      "source_state_check_sha256": "e8559aef568e8fdf2478b6883bf539c4a5304bb7648f2f840eb5c0776457b146",
+      "independent_pixels_sha256": "b0bf5147efa9ea80aefdbb85b28e7902afede32ca9fb87300df752cc0091bb34",
+      "source_gui_check_sha256": "b0bf5147efa9ea80aefdbb85b28e7902afede32ca9fb87300df752cc0091bb34",
+      "source_replay_check_sha256": "5ecccd79347e6a6f23a75bab28f4149fd086c7a962757d908a18555dcd1dc547",
+      "source_build_sha256": "cc02d66abf153ec8dc77b87404480daceb520a66ec6a67452f0418209ec67fe0",
+      "graphics_manifest_sha256": "b2cff76717ebcd1bbdc9568a9c9a7dc3107edb945fc5511791dd08bea41bd10e",
+      "source_index_sha256": "1c19fbd45af5c13b9282f4cc7ae0199607a129d626740a44d9d87fa7c890335b",
+      "source_kind": "正式視窗原樣實拍；新人物全部可見RGBA及完整X11已核對",
+      "capture_pixels_unchanged": true,
+      "spec_state": "CONFORMED",
+      "conformance_sha256": "743d55b9d9d672fd399877a9b7e6a278ef689228622371118048ea1987778bf0",
+      "verified_counts": {
+        "independent_full_world_RGBA_pixels": 0,
+        "X11_RGBA_pixels": 1024000
+      },
+      "scope": "本次正常新局MSS0／4 Main人物限定CONFORMED，兩來源各五語兩模式及四語游標進出；逐圖X11及全批人物RGBA、68個原版點與153筆三側狀態／WAV／存檔通過。字形完全遮蔽點不計可見人物；既有世界層保留原驗收，全量HD未完成。",
+      "cohort_verified_counts": {
+        "independent_visible_new_component_RGBA_pixels": 682400,
+        "source_GUI_samples": 18,
+        "total_GUI_samples": 78
+      },
+      "source_research_ids": [
+        1060
+      ]
+    },
+    {
+      "file": "hd-emigration-figure-zh.png",
+      "sha256": "0db5f5cea38658f117f711e2ff1c2585adf9f2119646db7ac940da9067c7de4a",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "emigration-dialogue-figure",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 912400000,
+      "code_commit": "73b5825",
+      "binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
+      "formal_binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
+      "formal_hd_assets": 316,
+      "source_conformed_assets": 315,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-dialog-figures-r98/r98-mss-formal-gui-r2/gui.display-218.png",
+      "source_state_check_sha256": "e8559aef568e8fdf2478b6883bf539c4a5304bb7648f2f840eb5c0776457b146",
+      "independent_pixels_sha256": "b0bf5147efa9ea80aefdbb85b28e7902afede32ca9fb87300df752cc0091bb34",
+      "source_gui_check_sha256": "b0bf5147efa9ea80aefdbb85b28e7902afede32ca9fb87300df752cc0091bb34",
+      "source_replay_check_sha256": "5ecccd79347e6a6f23a75bab28f4149fd086c7a962757d908a18555dcd1dc547",
+      "source_build_sha256": "cc02d66abf153ec8dc77b87404480daceb520a66ec6a67452f0418209ec67fe0",
+      "graphics_manifest_sha256": "b2cff76717ebcd1bbdc9568a9c9a7dc3107edb945fc5511791dd08bea41bd10e",
+      "source_index_sha256": "1c19fbd45af5c13b9282f4cc7ae0199607a129d626740a44d9d87fa7c890335b",
+      "source_kind": "正式視窗原樣實拍；新人物全部可見RGBA及完整X11已核對",
+      "capture_pixels_unchanged": true,
+      "spec_state": "CONFORMED",
+      "conformance_sha256": "743d55b9d9d672fd399877a9b7e6a278ef689228622371118048ea1987778bf0",
+      "verified_counts": {
+        "independent_full_world_RGBA_pixels": 0,
+        "X11_RGBA_pixels": 1024000
+      },
+      "scope": "本次正常新局MSS0／4 Main人物限定CONFORMED，兩來源各五語兩模式及四語游標進出；逐圖X11及全批人物RGBA、68個原版點與153筆三側狀態／WAV／存檔通過。字形完全遮蔽點不計可見人物；既有世界層保留原驗收，全量HD未完成。",
+      "cohort_verified_counts": {
+        "independent_visible_new_component_RGBA_pixels": 593054,
+        "source_GUI_samples": 18,
+        "total_GUI_samples": 78
+      },
+      "source_research_ids": [
+        1064
+      ]
     }
   ],
   "limitations": [
@@ -977,7 +1061,7 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "新增正常登陸人物實拍，其餘27張原PNG與逐張來源保持；人物只授予新增可見RGBA與完整X11，沒有新完整世界畫布信用。",
+  "provenance_scope": "新增兩張正常新局人物原樣實拍，前28張原PNG與逐張來源保持；新人物字形交疊、可見RGBA及完整X11均驗，沒有新增完整世界畫布信用。",
   "graphics_manifest_sha256": "b2cff76717ebcd1bbdc9568a9c9a7dc3107edb945fc5511791dd08bea41bd10e",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
@@ -1170,7 +1254,7 @@
     },
     "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb"
   },
-  "conformance_state": "R98 MSS3 Main figure only scoped CONFORMED; other three connected figures READY; previous captures retain individual proof",
+  "conformance_state": "R98 MSS0/3/4 Main figures scoped CONFORMED; MSS1 READY and MSS2/5 DRAFT; previous captures retain individual proof",
   "previous_opening_sun_capture": {
     "capture": {
       "file": "hd-opening-zh.png",

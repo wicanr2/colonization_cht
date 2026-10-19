@@ -2911,3 +2911,39 @@ r98-ready-review-r1.json及r98-landfall-figure-conformed-r1.json；
 畫素版本為formal-pixels-check-r4，其餘native／source-model為r1、replays為r2。
 原版EXE、MSS3與dosgolem指紋及real-mode／20-bit線性RAM基準沿本節前述READY證據。
 README共28張，新增當次登陸人物原樣實拍；其他三人物、其餘素材及全量HD繼續。
+
+### R98新局兩人物來源CONFORMED
+
+MSS0／MSS4 Main來源1060／1064追加限定CONFORMED，先前1063保持。MSS1仍READY，
+MSS2／5仍DRAFT。同一正式程式bdea4aaf…、316張生成原PNG及清冊b2cff767…不變。
+本次新局GUI2有自己的153筆輸入與種子52ae8b7b…，不和GUI1串接成一條路徑。
+
+| 驗收項目 | 本次範圍與結果 |
+|---|---|
+| 正常GUI | 78張、68個原版狀態點；兩來源各18張，包含五語兩模式及四CJK逐一游標進出。 |
+| 獨立來源 | 3446649筆Main寫入、9次完整人物繪製；34539次來源撤銷，其中5910次同值。 |
+| 人物RGBA | 1060為682400點，1064為593054點，合計1275454個可見點；原版253遮罩與四語字形交疊均通過。 |
+| 文字交疊 | UNREST四語以固定Noto字模、譯稿及欄位30px獨立重建；2757點字形交疊、1362點完全遮蔽另列，不計入可見人物。 |
+| 視窗與關頁 | 全78張X11共79872000點逐byte相同；正常關頁、繼續遊玩後Main人物來源與待恢復所有權均歸零。 |
+| 狀態、音訊與存檔 | 當次153筆至967600000步，控制／原圖／HD play=true與實拍的CPU、完整RAM、IDX、DAC、WAV與存檔相同。 |
+| 精確沿用 | 同一程式507具名項零失敗零跳過，正常96筆／十一來源55完整呼叫／12點、583600點取樣、317檔封裝19拒絕不重算為新GUI信用。 |
+
+GUI2 capture.json的scope句沿用GUI1「正常讀檔」舊文字。實際腳本為原版新局前30項X11
+操作，已逐項對照已知輸入意圖；本次仍以實際153筆及各點完整狀態為準，不冒稱舊96筆同時序。
+GUI3控制器漏接down種類後正常關閉，未取得人物信用；GUI4先驗證全部種類，再從已驗原版存檔正常載入續驗士兵。
+原版比對器r1缺Alt+V／F2／F4鍵表，r2依正式既有BIOS映射修正後乾淨通過。
+像素檢查r5未合成手部上方的Noto字形，r6按固定字模及既有圖層順序通過；正式程式未修改。
+
+審查r98-two-dialog-figures-conformed-r1.json為743d55b9d9d672fd399877a9b7e6a278ef689228622371118048ea1987778bf0。
+[來源索引工具](../../tools/extend_hd_story_source_index.py) --dialog-figures只追加1060／1064，
+正例及十二拒絕通過；舊313連結及其他1550列保持。現行315連結索引為1c19fbd45af5c13b9282f4cc7ae0199607a129d626740a44d9d87fa7c890335b。
+重生輸入位於本機R98既有根目錄：r98-source-index-baseline-gui2-r1.json、
+r98-ready-review-r1.json及r98-two-dialog-figures-conformed-r1.json；沿上一節的
+--baseline／--ready／--conformed／--assets／--output入口重生，另以
+check-r98-source-index-gui2-r1.py執行反例。
+
+本機收據入口仍為workplace/reports/goal186-display-hd/hd-dialog-figures-r98：
+r98-current-gui2-native-check-r2.json、r98-current-gui2-source-model-check-r2.json、
+r98-current-gui2-formal-pixels-check-r6.json、r98-current-gui2-replays-check-r2.json。
+原版EXE、MSS0／4及dosgolem指紋沿READY證據；位址為real-mode與20-bit線性RAM。
+完整世界畫布沒有新增獨立RGBA信用，Stage、VGA發布與未觀測來源沒有信用。全量HD繼續。

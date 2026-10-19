@@ -7264,3 +7264,12 @@ confirmed：MSS3.SS來源1063在正常讀檔路徑六次完整D46 Main繪製，1
 1224992個可見人物RGBA及34張X11共34816000點相同。原版不透明游標在人物層後還原，人物來源與該游標可暫時同格；原版透明游標格保留人物，HD游標只合成於原版不透明格。檢查器r1／r2／r3錯誤版本保留，r4回到已驗R97合成順序後通過，正式程式未改。沒有新增完整世界畫布、Stage或VGA發布信用。
 
 本機根目錄workplace/reports/goal186-display-hd/hd-dialog-figures-r98，收據r98-current-gui1-native-check-r1.json、source-model-check-r1.json、formal-pixels-check-r4.json與replays-check-r2.json。限定審查SHA-256 c42e6ff24fd4b1811cdcfb0fbbd23dc348fe6f6505a9711c44bdb8d5e5ca5df7；索引1931011aa41977591fdbcaff865a59375b296a379cbb0f7171ba771df26bc252，僅新增1063，其餘1551列及舊312連結保持。其他三人物READY、MSS2／5及全量HD另驗。
+
+## 2026-10-20 R98新局兩人物限定證據
+
+- confirmed：GUI2實際153筆輸入SHA-256為6a277ea3bc790fa113525ffd35edad2836dc179d974cc9e4c024ceb5c79b150e，原版種子52ae8b7bd4bea1869afb825af165a8edc50882fc176d49985d4fb3c362d5469b。68點控制／有觀測／實GUI的完整狀態、存檔相同。
+- 原版VICEROY.EXE為a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3，dosgolem為82a14b266e1b5bc904e2d0fe507daf6bea41a013，位址基準real-mode／20-bit線性RAM。MSS0／4檔案、encoded／indexed指紋沿規格069 READY，不以圖名猜用途。
+- confirmed：9完整D46 Main呼叫、3446649筆實寫、34539撤銷與5910同值撤銷可獨立重建。五語兩模式與四語游標往返各來源18張；兩人物可見RGBA1275454及全部78 X11通過，關頁Main與待恢復所有權歸零。
+- UNREST文字與人物手部交疊，四語固定字模及譯稿獨立重建。2757點文字交疊、1362點全遮蔽分列，未把全遮蔽文字點算為可見人物；沒有新增完整世界RGBA或完整五語信用。
+- 檢查器鍵表漏項及文字alpha漏合成屬驗證腳本問題，失敗檔均保留；正式bdea4aaf…未改。GUI2 footer舊描述由實際新局30項意圖及153筆收據限定訂正，GUI3種類漏接未授予完成。
+- 彙整審查743d55b9d9d672fd399877a9b7e6a278ef689228622371118048ea1987778bf0，來源索引1c19fbd45af5c13b9282f4cc7ae0199607a129d626740a44d9d87fa7c890335b；重生入口見[規格069](docs/spec/069-hd-menu-background-and-textures.md#r98新局兩人物來源conformed)。MSS1仍READY，MSS2／5未知用途與正常命中，均不外推完成。

@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 313,
+    "formal_asset_bindings": 315,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -38729,9 +38729,18 @@
       "indexed_sha256": "059acfd4c72e29ae4c29833fbb87fbae9230a26df2640cbfa4119ac492d6a85c",
       "opaque_pixels": 3306,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete original D46 Main decode, return and writes; independent Main model and normal GUI in the cited four-source review",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mss0-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "743d55b9d9d672fd399877a9b7e6a278ef689228622371118048ea1987778bf0",
+        "scope": "only listed observed MSS Main sources and all visible new RGBA; no other figures, independent full-world RGBA, Stage, VGA publication or full-HD credit"
+      }
     },
     {
       "research_id": 1061,
@@ -38838,9 +38847,18 @@
       "indexed_sha256": "fb0e343889e92f8e7c0be2b260008de4977c34851264ab288cc610739e529387",
       "opaque_pixels": 2883,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete original D46 Main decode, return and writes; independent Main model and normal GUI in the cited four-source review",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mss4-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "743d55b9d9d672fd399877a9b7e6a278ef689228622371118048ea1987778bf0",
+        "scope": "only listed observed MSS Main sources and all visible new RGBA; no other figures, independent full-world RGBA, Stage, VGA publication or full-HD credit"
+      }
     },
     {
       "research_id": 1065,
@@ -62708,6 +62726,28 @@
       "source_indexed_sha256": "517056bdfc240ec25cb2e9ced2e5a532e39900c5f18913358cb3e7a81d4483cf",
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "claim": "R98 complete D46 Main figure only; independent native writes, glyph/cursor composition and normal GUI"
+    },
+    {
+      "asset": "mss0-000.png",
+      "asset_sha256": "4eb7b99e24ff63edfd696966100cb235b4f3ad6bc5e932c35cd041373c515f0a",
+      "source_research_id": 1060,
+      "source_file": "MSS0.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "0b4de9a757f456cfbd0822aaacec8f88e64d8656f77ab8e540250f1989c1cb49",
+      "source_indexed_sha256": "059acfd4c72e29ae4c29833fbb87fbae9230a26df2640cbfa4119ac492d6a85c",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "R98 complete D46 Main figure only; independent native writes, glyph/cursor composition and normal GUI"
+    },
+    {
+      "asset": "mss4-000.png",
+      "asset_sha256": "bccf173205bb238826ddd1f3320f73833bcef8d29d39c6ff57098567dad7bb24",
+      "source_research_id": 1064,
+      "source_file": "MSS4.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "07e622d6732b1c8084de1f905a37b08a686a2cdc65b77a5d12dc2f95bb4bb0d2",
+      "source_indexed_sha256": "fb0e343889e92f8e7c0be2b260008de4977c34851264ab288cc610739e529387",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "R98 complete D46 Main figure only; independent native writes, glyph/cursor composition and normal GUI"
     }
   ],
   "limitations": [
@@ -63407,6 +63447,17 @@
       ],
       "conformed_bindings": 313,
       "gui_event_samples": 18,
+      "claim": "only listed observed Main figures; other figures and global HD retain separate status"
+    },
+    {
+      "ready_sha256": "8430d1e78767559deb4eb64818fc41bac7601a7bbb360b9421c431da83d976bc",
+      "review_sha256": "743d55b9d9d672fd399877a9b7e6a278ef689228622371118048ea1987778bf0",
+      "sources": [
+        1060,
+        1064
+      ],
+      "conformed_bindings": 315,
+      "gui_event_samples": 36,
       "claim": "only listed observed Main figures; other figures and global HD retain separate status"
     }
   ]
