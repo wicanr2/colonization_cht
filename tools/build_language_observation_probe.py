@@ -169,6 +169,8 @@ def attach_language_runtime(repo, output, reference, *, with_rebuild=True, forma
                          "tools/hd_new_game_runtime.go", "tools/hd_new_game_sources.go",
                          "tools/hd_new_game_runtime_test.go", "tools/hd_custom_world_runtime_test.go",
                          "tools/hd_scene_background_runtime.go", "tools/hd_scene_background_sources.go",
+                         "tools/hd_scene_sprite_runtime.go", "tools/hd_scene_sprite_runtime_test.go",
+                         "tools/hd_scene_sprite_resources_test.go", "tools/hd_scene_sprite_normal_test.go",
                          "tools/hd_scene_background_runtime_test.go", "tools/hd_report_background_runtime_test.go", "tools/hd_room_score_background_runtime_test.go"]
         for name in extra_sources:
             (output / Path(name).name).write_bytes((repo / name).read_bytes())

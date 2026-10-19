@@ -14,6 +14,7 @@ import (
 
 // 規格069 R76／R77 READY：來源、解碼畫布與原圖固定，所有狀態只供顯示。
 type hdSceneDefinition struct {
+	sprite                                                    *hdSceneSpriteDefinition
 	allowPictureCursorProof                                   bool
 	id, offset, height                                        int
 	canvas, alternateCanvas                                   uint32
@@ -39,6 +40,8 @@ type hdSceneCursorPair struct {
 	cell       hdSceneCell
 }
 type hdSceneRuntime struct {
+	spriteCall                                                  *hdSceneSpriteCall
+	spriteAccepted, spriteRejected                              uint64
 	publishedPending                                            map[int]hdSceneCursorPair
 	h                                                           *hdRuntime
 	frames                                                      []*hdSceneFrame
@@ -119,14 +122,19 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 				}
 			}
 		}
-		for _, yes := range covered {
-			if !yes {
+		for k, yes := range covered {
+			expected := true
+			if def.sprite != nil {
+				s := def.sprite
+				expected = k%320 < s.width && k/320 < s.height
+			}
+			if yes != expected {
 				return nil, fmt.Errorf("incomplete scene geometry")
 			}
 		}
 		p.frames = append(p.frames, f)
 	}
-	if len(p.frames) != 23 {
+	if len(p.frames) != 30 {
 		return nil, fmt.Errorf("scene source group")
 	}
 	h.m.WatchWrite(0, 0xaffff, func(_ *golem.Machine, a uint32, o, v byte) { p.memoryWrite(a, o, v) })
@@ -180,6 +188,9 @@ func (p *hdSceneRuntime) decodedAt(base uint32, start int) {
 	raw := p.h.m.Mem[int(base)+start : int(base)+64000]
 	digest := hash(raw)
 	for slot, f := range p.frames {
+		if f.sprite != nil {
+			continue
+		}
 		wantBase := f.canvas
 		if wantBase == 0 {
 			wantBase = 0x3c500
@@ -234,9 +245,12 @@ func (p *hdSceneRuntime) copyCell(a uint32, value byte) (hdSceneCell, bool) {
 		return hdSceneCell{}, false
 	}
 	got := p.cell(uint32(src))
-	return got, got.slot != 0 && int(got.slot) <= len(p.frames) && got.value == value
+	return got, got.slot != 0 && int(got.slot) <= len(p.frames) && p.frames[int(got.slot)-1].sprite == nil && got.value == value
 }
 func (p *hdSceneRuntime) memoryWrite(a uint32, old, value byte) {
+	if p != nil {
+		p.recordSpriteWrite(a, value)
+	}
 	if p == nil || p.blocked {
 		return
 	}
@@ -344,7 +358,7 @@ func (p *hdSceneRuntime) frame(c hdSceneCell) (*hdSceneFrame, bool) {
 }
 func (p *hdSceneRuntime) paint(out *image.RGBA, f draftNativeFrame) map[string]any {
 	records := map[string]any{}
-	receipt := map[string]any{"formal": true, "sources": records, "blocked": p.blocked, "rejected": p.rejected, "unmatched_pictures": p.unmatched, "cursor_paint_points": p.cursorPaints, "cursor_restore_points": p.cursorRestores}
+	receipt := map[string]any{"formal": true, "sources": records, "blocked": p.blocked, "rejected": p.rejected, "unmatched_pictures": p.unmatched, "cursor_paint_points": p.cursorPaints, "cursor_restore_points": p.cursorRestores, "sprite_accepted": p.spriteAccepted, "sprite_rejected": p.spriteRejected}
 	if p.blocked {
 		receipt["reason"] = "backing-limit"
 		return receipt
@@ -361,6 +375,11 @@ func (p *hdSceneRuntime) paint(out *image.RGBA, f draftNativeFrame) map[string]a
 		masks[i] = make([]byte, 8000)
 	}
 	for at, c := range p.visible {
+		if c.slot == 0 {
+			if under, yes := p.spriteCursorCell(at, f); yes {
+				c = under
+			}
+		}
 		frame, known := p.frame(c)
 		if !known {
 			continue
@@ -395,6 +414,11 @@ func (p *hdSceneRuntime) paintBackground(out *image.RGBA, f draftNativeFrame, po
 		return false
 	}
 	c := p.visible[pos]
+	if c.slot == 0 {
+		if under, known := p.spriteCursorCell(pos, f); known {
+			c = under
+		}
+	}
 	frame, yes := p.frame(c)
 	if !yes || f.canvas[pos] != c.value || frame.native[int(c.local)] != value || !frame.paletteSupported(palette) {
 		return false
@@ -458,7 +482,7 @@ func (p *hdSceneRuntime) publish(a uint32, oldValue, value byte) {
 		src := int(c.Seg[golem.DS])*16 + int(c.R[golem.SI]) + delta
 		if delta >= 0 && delta < 2 && int(c.R[golem.SI])+delta < 65536 && int(c.R[golem.DI])+delta < 64000 && src == int(hdBuildingCanvas)+at && src < len(m.Mem) && m.Mem[src] == value {
 			cell := p.visible[at]
-			if _, known := p.frame(cell); known && cell.value == value {
+			if frame, known := p.frame(cell); known && frame.sprite == nil && cell.value == value {
 				p.published[at] = cell
 			}
 		}

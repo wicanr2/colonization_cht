@@ -175,7 +175,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "d2a56422792877654e8b1cf78d8006e2f7c11a065bd2bad5ae19602f490143ee"
+const hdManifestSHA = "86a14e6e340876c71b4d4f29935335b03f5bb108d968f458e79f9d0548319a1b"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"
@@ -275,6 +275,9 @@ func (h *hdRuntime) beforeInstruction() {
 	}
 	if h.opening != nil {
 		h.opening.sprites.beforeInstruction()
+	}
+	if h.scenes != nil {
+		h.scenes.beforeSpriteInstruction()
 	}
 	h.sea.beforeInstruction()
 	h.terrain079.beforeInstruction()

@@ -7150,3 +7150,11 @@ VICEROY.EXE a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3。
 438729幀，SHA-256 def46dc0b7d1abfe5cda22acf42f8ce46ebd0a1524cc4b54627dc08539d3fcbd；三側重播及GUI相同。
 完整來源、原PNG與alpha、局部入口快照、正常GUI及重生入口見規格065 R96；
 局部CPU測試不冒稱硬體時鐘對拍，全量HD與其他圖像仍未完成。
+
+## 2026-10-19 R97事件畫與介面來源
+
+confirmed：原版正常96筆操作、45個完整0D46呼叫與12點完整控制全等。七個來源及原始檔SHA見[規格069 R97 READY](docs/spec/069-hd-menu-background-and-textures.md#r97七個事件來源ready)。位址空間為dosgolem實模式CS:IP與20-bit線性RAM；隔離版本82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7。
+
+0D46:0181／01B4／01D2寫入相同Main，原版會將ES由2CAE正規化為33AE，DS仍等於編碼來源，SI在來源編碼範圍。完整呼叫最大684745步，回傳121D:1554、SP增加10，透明區與矩形外不變。r97-original-Main-segments-r1.json與r97-full-normal-r3/observed保留原始碼、完整指紋及側錄。獨立Main模型3393863筆，撤銷148576、同值150、字模底圖1737、游標覆蓋／還原各432。其他十張事件圖的正常玩家來源仍未知；生成候選不補此項證據。
+
+READY審查49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b，原型244具名通過。局部fixture關閉IRQ，因其沒有PIT／PIC狀態，不授予硬體或正常玩家路徑信用；完整正常原版重播仍核對旗標與週期。正式GUI、音畫與來源索引尚待。

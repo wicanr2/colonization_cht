@@ -20953,6 +20953,615 @@
         "ready_review_sha256": "505ee5099ef5474c6226ce84094dccb3e0ed316a646b36cb770e36f01f879f9e",
         "formal_GUI_conformance": "pending"
       }
+    },
+    "nameplat-000.png": {
+      "sha256": "a83f8d877119865c57bd7cde8e2cca719195a2241dd8cf90324d2b13c26fe559",
+      "bytes": 1302010,
+      "size": [
+        1422,
+        1106
+      ],
+      "mode": "RGB",
+      "target_size": [
+        72,
+        56
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "raw RGB preserved; verified original transparency index253 defines the exact native display mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "native_ordinal": 0,
+      "native_size": [
+        18,
+        14
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        18,
+        14
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1422,
+        1106
+      ],
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: final high-resolution bitmap material/component for a classic game's HD display layer.\nInput images: Image1 is the PRIVATE ORIGINAL GAME reference for composition, proportions, palette, edge placement and structure. Its magenta-looking regions denote unused/transparent native pixels and must not be painted magenta. Image2 is the USER-APPROVED fine pixel-art style reference, used only for small deliberate pixel clusters, surface detail and material finish.\nSubject and constraints: The LEFT END CAP of a horizontal ochre golden-brown wooden caption plaque, matching the native reference. Preserve the same irregular left edge, lit top bevel, dark lower shadow and little gray iron rivet near 43 percent across and46 percent down. The right edge joins the center segment and must be straight and have no vertical border. Preserve the native balance of light amber wood face and darker bevel, with fine restrained wood grain. Fill the ENTIRE rectangular canvas with opaque matching wood material, including the reference's magenta/transparent corners; the original game's separate exact alpha mask defines the displayed cap silhouette. No pink, background margin, text, extra rivets, ornament, shine, extra border or end cap on the right. Aspect ratio18:14, intended display72 by56 pixels.\nGenerate new original refined pixel art, not a filter or enlargement of the source pixels. Preserve the native component proportions and all stated placement. Keep the image fully opaque and complete, no alpha, no blur, no painterly brushwork, no photorealism, no 3D render, no vector smoothness, no oversized native pixel blocks. Return one high-resolution PNG. No watermark or lettering.",
+      "generation_history": [
+        {
+          "tool": "built-in image_gen",
+          "prompt": "Use case: stylized-concept.\nAsset type: final high-resolution bitmap material/component for a classic game's HD display layer.\nInput images: Image1 is the PRIVATE ORIGINAL GAME reference for composition, proportions, palette, edge placement and structure. Its magenta-looking regions denote unused/transparent native pixels and must not be painted magenta. Image2 is the USER-APPROVED fine pixel-art style reference, used only for small deliberate pixel clusters, surface detail and material finish.\nSubject and constraints: The LEFT END CAP of a horizontal ochre golden-brown wooden caption plaque, matching the native reference. Preserve the same irregular left edge, lit top bevel, dark lower shadow and little gray iron rivet near 43 percent across and46 percent down. The right edge joins the center segment and must be straight and have no vertical border. Preserve the native balance of light amber wood face and darker bevel, with fine restrained wood grain. Fill the ENTIRE rectangular canvas with opaque matching wood material, including the reference's magenta/transparent corners; the original game's separate exact alpha mask defines the displayed cap silhouette. No pink, background margin, text, extra rivets, ornament, shine, extra border or end cap on the right. Aspect ratio18:14, intended display72 by56 pixels.\nGenerate new original refined pixel art, not a filter or enlargement of the source pixels. Preserve the native component proportions and all stated placement. Keep the image fully opaque and complete, no alpha, no blur, no painterly brushwork, no photorealism, no 3D render, no vector smoothness, no oversized native pixel blocks. Return one high-resolution PNG. No watermark or lettering.",
+          "raw_sha256": "a83f8d877119865c57bd7cde8e2cca719195a2241dd8cf90324d2b13c26fe559",
+          "selected": true
+        }
+      ],
+      "reference_sha256": {
+        "native": "56f46eef3fc8aa34612083a03a0467fb3aece6624bc554b96fb3f99ec9b96ce8",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "NAMEPLAT.SS": "98d0052eb5eb5500d26c506eb8a1d8dad5aa591758ec37d4dd2e18ffae7a7a42",
+        "encoded_frame_sha256": "cc344ba5214ff2f6332be45edb5f9160918e0774f037ed0bc708cf08c0f94127",
+        "indexed_frame_sha256": "b9cae608a98051e39b8a20aff41a8984d7ebadbceba38fbd0c3aba4583a3ce11"
+      },
+      "source_research_id": 1070,
+      "source_encoded_length": 255,
+      "source_opaque_cells": 202,
+      "source_write_sha256": "5926c5670aa6e5dd13870caeb213fb94fc96a714103dc15fdb2c086ba02a875b",
+      "source_padded_native_sha256": "4045f85b8f969392fb892daf66351a1e22337cacbc9f5da0eace360de61c2e9f",
+      "decoder": {
+        "entry": "0D46:000A",
+        "surface": "Main 200/320/0/2CAE only",
+        "native_pitch": 320,
+        "nominal_record_words_2_3": [
+          22,
+          37
+        ],
+        "coordinate_rule": "left=DX;top=stack[2];fully bounded only",
+        "complete_original_calls_observed": 3,
+        "maximum_observed_steps": 5225,
+        "call_bound": 750000,
+        "return": "121D:1554; SP+10",
+        "effective_Main_ES": [
+          "2CAE",
+          "33AE"
+        ],
+        "RAM_copy_or_VGA_publication_authorized": false
+      },
+      "palette_policy": {
+        "projection_sha256": "9a1836030b03fc9b72239cfe6acdcb3365353dd1100890bb8327fe262ac339a9",
+        "indices": "sorted original used indices excluding transparency253"
+      },
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b",
+        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog"
+      }
+    },
+    "nameplat-001.png": {
+      "sha256": "7ed710283c6417e93d46b6a9b0e517e50a24086a2843043beacfae41d4d76c17",
+      "bytes": 1216842,
+      "size": [
+        1341,
+        1173
+      ],
+      "mode": "RGB",
+      "target_size": [
+        64,
+        56
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "raw RGB preserved; verified original transparency index253 defines the exact native display mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "native_ordinal": 1,
+      "native_size": [
+        16,
+        14
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        14
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1341,
+        1173
+      ],
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: final high-resolution bitmap material/component for a classic game's HD display layer.\nInput images: Image1 is the PRIVATE ORIGINAL GAME reference for composition, proportions, palette, edge placement and structure. Its magenta-looking regions denote unused/transparent native pixels and must not be painted magenta. Image2 is the USER-APPROVED fine pixel-art style reference, used only for small deliberate pixel clusters, surface detail and material finish.\nSubject and constraints: One horizontally repeating CENTER SEGMENT of an ochre golden-brown wooden caption plaque, matching the native reference. It is a fully opaque rectangular tile of16 by14 native units. Preserve the thin lit horizontal top bevel, gently textured amber-brown flat face and dark horizontal lower shadow. Both left and right edges must continue seamlessly into identical neighboring tiles, with no vertical edge, cap, border, rivet or join line. Use restrained fine horizontal wood grain, keeping the center calm and readable beneath text. Fill the whole canvas edge to edge, no padding. No text, glyph, symbol, additional decoration or transparency. Aspect ratio16:14, intended display64 by56 pixels.\nGenerate new original refined pixel art, not a filter or enlargement of the source pixels. Preserve the native component proportions and all stated placement. Keep the image fully opaque and complete, no alpha, no blur, no painterly brushwork, no photorealism, no 3D render, no vector smoothness, no oversized native pixel blocks. Return one high-resolution PNG. No watermark or lettering.",
+      "generation_history": [
+        {
+          "tool": "built-in image_gen",
+          "prompt": "Use case: stylized-concept.\nAsset type: final high-resolution bitmap material/component for a classic game's HD display layer.\nInput images: Image1 is the PRIVATE ORIGINAL GAME reference for composition, proportions, palette, edge placement and structure. Its magenta-looking regions denote unused/transparent native pixels and must not be painted magenta. Image2 is the USER-APPROVED fine pixel-art style reference, used only for small deliberate pixel clusters, surface detail and material finish.\nSubject and constraints: One horizontally repeating CENTER SEGMENT of an ochre golden-brown wooden caption plaque, matching the native reference. It is a fully opaque rectangular tile of16 by14 native units. Preserve the thin lit horizontal top bevel, gently textured amber-brown flat face and dark horizontal lower shadow. Both left and right edges must continue seamlessly into identical neighboring tiles, with no vertical edge, cap, border, rivet or join line. Use restrained fine horizontal wood grain, keeping the center calm and readable beneath text. Fill the whole canvas edge to edge, no padding. No text, glyph, symbol, additional decoration or transparency. Aspect ratio16:14, intended display64 by56 pixels.\nGenerate new original refined pixel art, not a filter or enlargement of the source pixels. Preserve the native component proportions and all stated placement. Keep the image fully opaque and complete, no alpha, no blur, no painterly brushwork, no photorealism, no 3D render, no vector smoothness, no oversized native pixel blocks. Return one high-resolution PNG. No watermark or lettering.",
+          "raw_sha256": "7ed710283c6417e93d46b6a9b0e517e50a24086a2843043beacfae41d4d76c17",
+          "selected": true
+        }
+      ],
+      "reference_sha256": {
+        "native": "7505fa20d200139f592544f2b797c06cca0d4c5672bea5d87777068be65b6f47",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "NAMEPLAT.SS": "98d0052eb5eb5500d26c506eb8a1d8dad5aa591758ec37d4dd2e18ffae7a7a42",
+        "encoded_frame_sha256": "c3e0a444992565a91d29f4be39620546322d230ada2ec967b6ccf567c6424e17",
+        "indexed_frame_sha256": "5a673eec93970055841b0e98e7c82eff1d213b7f15d30d5d50044ddf65e78e8e"
+      },
+      "source_research_id": 1071,
+      "source_encoded_length": 194,
+      "source_opaque_cells": 224,
+      "source_write_sha256": "f375cd3f4b71628f3b017704c5a2068a9cb00bc383dc5d160cd5b11acef53c96",
+      "source_padded_native_sha256": "b00ffb86a2a7f000f8bed6c47857dc0a5e2cb923d41105eb22ab6d9d0afcc09c",
+      "decoder": {
+        "entry": "0D46:000A",
+        "surface": "Main 200/320/0/2CAE only",
+        "native_pitch": 320,
+        "nominal_record_words_2_3": [
+          47,
+          37
+        ],
+        "coordinate_rule": "left=DX;top=stack[2];fully bounded only",
+        "complete_original_calls_observed": 33,
+        "maximum_observed_steps": 5186,
+        "call_bound": 750000,
+        "return": "121D:1554; SP+10",
+        "effective_Main_ES": [
+          "2CAE",
+          "33AE"
+        ],
+        "RAM_copy_or_VGA_publication_authorized": false
+      },
+      "palette_policy": {
+        "projection_sha256": "586606531132bcd39392e8ae77b0f593960d09bf4c0617460b2352e91d6376eb",
+        "indices": "sorted original used indices excluding transparency253"
+      },
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b",
+        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog"
+      }
+    },
+    "nameplat-002.png": {
+      "sha256": "aceea09addd5a3ea6da1a6b7ec94e31023210c5c1f8a1458257b0a814e2bae9f",
+      "bytes": 1145305,
+      "size": [
+        1422,
+        1106
+      ],
+      "mode": "RGB",
+      "target_size": [
+        72,
+        56
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "raw RGB preserved; verified original transparency index253 defines the exact native display mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "native_ordinal": 2,
+      "native_size": [
+        18,
+        14
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        18,
+        14
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1422,
+        1106
+      ],
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: final high-resolution bitmap material/component for a classic game's HD display layer.\nInput images: Image1 is the PRIVATE ORIGINAL GAME reference for composition, proportions, palette, edge placement and structure. Its magenta-looking regions denote unused/transparent native pixels and must not be painted magenta. Image2 is the USER-APPROVED fine pixel-art style reference, used only for small deliberate pixel clusters, surface detail and material finish.\nSubject and constraints: The RIGHT END CAP of a horizontal ochre golden-brown wooden caption plaque, matching the native reference. Preserve the same irregular right edge, lit top bevel, dark lower shadow and little gray iron rivet near57 percent across and46 percent down. The left edge joins the center segment and must be straight and have no vertical border. Preserve the native balance of light amber wood face and darker bevel, with fine restrained wood grain. Fill the ENTIRE rectangular canvas with opaque matching wood material, including the reference's magenta/transparent corners; the original game's separate exact alpha mask defines the displayed cap silhouette. No pink, background margin, text, extra rivets, ornament, shine, extra border or end cap on the left. Aspect ratio18:14, intended display72 by56 pixels.\nGenerate new original refined pixel art, not a filter or enlargement of the source pixels. Preserve the native component proportions and all stated placement. Keep the image fully opaque and complete, no alpha, no blur, no painterly brushwork, no photorealism, no 3D render, no vector smoothness, no oversized native pixel blocks. Return one high-resolution PNG. No watermark or lettering.",
+      "generation_history": [
+        {
+          "tool": "built-in image_gen",
+          "prompt": "Use case: stylized-concept.\nAsset type: final high-resolution bitmap material/component for a classic game's HD display layer.\nInput images: Image1 is the PRIVATE ORIGINAL GAME reference for composition, proportions, palette, edge placement and structure. Its magenta-looking regions denote unused/transparent native pixels and must not be painted magenta. Image2 is the USER-APPROVED fine pixel-art style reference, used only for small deliberate pixel clusters, surface detail and material finish.\nSubject and constraints: The RIGHT END CAP of a horizontal ochre golden-brown wooden caption plaque, matching the native reference. Preserve the same irregular right edge, lit top bevel, dark lower shadow and little gray iron rivet near57 percent across and46 percent down. The left edge joins the center segment and must be straight and have no vertical border. Preserve the native balance of light amber wood face and darker bevel, with fine restrained wood grain. Fill the ENTIRE rectangular canvas with opaque matching wood material, including the reference's magenta/transparent corners; the original game's separate exact alpha mask defines the displayed cap silhouette. No pink, background margin, text, extra rivets, ornament, shine, extra border or end cap on the left. Aspect ratio18:14, intended display72 by56 pixels.\nGenerate new original refined pixel art, not a filter or enlargement of the source pixels. Preserve the native component proportions and all stated placement. Keep the image fully opaque and complete, no alpha, no blur, no painterly brushwork, no photorealism, no 3D render, no vector smoothness, no oversized native pixel blocks. Return one high-resolution PNG. No watermark or lettering.",
+          "raw_sha256": "aceea09addd5a3ea6da1a6b7ec94e31023210c5c1f8a1458257b0a814e2bae9f",
+          "selected": true
+        }
+      ],
+      "reference_sha256": {
+        "native": "93e1e239309f2aff3b1f8b8d9da590b8e3e1fc9f51c0fe0c5c932daf7c21f0e9",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "NAMEPLAT.SS": "98d0052eb5eb5500d26c506eb8a1d8dad5aa591758ec37d4dd2e18ffae7a7a42",
+        "encoded_frame_sha256": "02e2d312c4f5afc90a80c8d5d35ba46bb9fd198840d3c6be5c02437fbf63a4f8",
+        "indexed_frame_sha256": "2f2b139dd5f7e13277ee9f9aa74a74c2a8d04ced2d2b4c31b1e566d13678381b"
+      },
+      "source_research_id": 1072,
+      "source_encoded_length": 218,
+      "source_opaque_cells": 194,
+      "source_write_sha256": "5f2b5fed0817d9e52b0b3898397d478b789c5127a28f9d4e5bbff1d4587b5ccf",
+      "source_padded_native_sha256": "35008a4e2c2e95b6209b2d75e1589835883d686aff8885832ca7c12f490bc360",
+      "decoder": {
+        "entry": "0D46:000A",
+        "surface": "Main 200/320/0/2CAE only",
+        "native_pitch": 320,
+        "nominal_record_words_2_3": [
+          74,
+          37
+        ],
+        "coordinate_rule": "left=DX;top=stack[2];fully bounded only",
+        "complete_original_calls_observed": 3,
+        "maximum_observed_steps": 4525,
+        "call_bound": 750000,
+        "return": "121D:1554; SP+10",
+        "effective_Main_ES": [
+          "2CAE",
+          "33AE"
+        ],
+        "RAM_copy_or_VGA_publication_authorized": false
+      },
+      "palette_policy": {
+        "projection_sha256": "408180c08afabd67642c90b731cbea09922e38e339b191e3bf2be0d039308384",
+        "indices": "sorted original used indices excluding transparency253"
+      },
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b",
+        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog"
+      }
+    },
+    "wdcut01-000.png": {
+      "sha256": "0365f7da88cd03f09e8ea61300fd88a455fea01d18a3495bd0d09206797623b0",
+      "bytes": 2119307,
+      "size": [
+        1635,
+        962
+      ],
+      "mode": "RGB",
+      "target_size": [
+        768,
+        452
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "raw RGB preserved; verified original transparency index253 defines the exact native display mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "native_ordinal": 0,
+      "native_size": [
+        192,
+        113
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        192,
+        113
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1635,
+        962
+      ],
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: final high-resolution raster event illustration for an HD overlay of Sid Meier's Colonization (1994).\nInput images: Image 1 is a PRIVATE ORIGINAL GAME reference, used ONLY for exact subject, scene composition, geometry and palette. Image 2 is the USER-APPROVED fine pixel-art style reference, used ONLY for pixel clusters, restrained materials and crafted detail. Create new original artwork, never a simple upscale or a pasted copy of the old pixels.\nSubject and composition: Ship lookout scene. Keep exactly one bearded sailor in a small circular crow's-nest platform at the lower left, his left arm reaching upward to the rigging and his right arm pointing horizontally toward the right. The thick mast rises at left. Large red-and-white cloth billows at upper left. A second mast, horizontal yards and rope ladders stand center-right. Calm turquoise ocean spans the lower background and pale lavender-blue cloudy sky above. Match the native reference's camera, figure size, arm poses, rigging and horizon; show no land, extra people or extra ships.\nStyle: the approved refined pixel-art finish, with sharp intentional small pixel clusters, readable human features, cloth, wood and foliage, coherent flat game lighting, restrained color and fine texture. Preserve the native illustration's relative palette and emotional tone. No painterly brushwork, blur, photographic or 3D rendering, smooth vector edges, oversized pixel blocks, gradients or glossy effects.\nFraming: a complete full-bleed wide illustration, aspect ratio 192:113. Keep every subject and edge detail shown in Image 1, with no cropping or extra borders. The image will be displayed near 768 by 452 pixels. Keep the native perspective and silhouette placements while adding genuine fine detail.\nText: none. No captions, words, letters, signatures, watermark, UI controls, mat, decorative border or newly invented objects. Opaque scene background, one illustration per image. Return a high-resolution PNG.",
+      "generation_history": [
+        {
+          "tool": "built-in image_gen",
+          "prompt": "Use case: stylized-concept.\nAsset type: final high-resolution raster event illustration for an HD overlay of Sid Meier's Colonization (1994).\nInput images: Image 1 is a PRIVATE ORIGINAL GAME reference, used ONLY for exact subject, scene composition, geometry and palette. Image 2 is the USER-APPROVED fine pixel-art style reference, used ONLY for pixel clusters, restrained materials and crafted detail. Create new original artwork, never a simple upscale or a pasted copy of the old pixels.\nSubject and composition: Ship lookout scene. Keep exactly one bearded sailor in a small circular crow's-nest platform at the lower left, his left arm reaching upward to the rigging and his right arm pointing horizontally toward the right. The thick mast rises at left. Large red-and-white cloth billows at upper left. A second mast, horizontal yards and rope ladders stand center-right. Calm turquoise ocean spans the lower background and pale lavender-blue cloudy sky above. Match the native reference's camera, figure size, arm poses, rigging and horizon; show no land, extra people or extra ships.\nStyle: the approved refined pixel-art finish, with sharp intentional small pixel clusters, readable human features, cloth, wood and foliage, coherent flat game lighting, restrained color and fine texture. Preserve the native illustration's relative palette and emotional tone. No painterly brushwork, blur, photographic or 3D rendering, smooth vector edges, oversized pixel blocks, gradients or glossy effects.\nFraming: a complete full-bleed wide illustration, aspect ratio 192:113. Keep every subject and edge detail shown in Image 1, with no cropping or extra borders. The image will be displayed near 768 by 452 pixels. Keep the native perspective and silhouette placements while adding genuine fine detail.\nText: none. No captions, words, letters, signatures, watermark, UI controls, mat, decorative border or newly invented objects. Opaque scene background, one illustration per image. Return a high-resolution PNG.",
+          "raw_sha256": "0365f7da88cd03f09e8ea61300fd88a455fea01d18a3495bd0d09206797623b0",
+          "selected": true
+        }
+      ],
+      "reference_sha256": {
+        "native": "01bd08032571da83d088679ae0843d1898ebcd93c8eae48dc905b20817d5b14d",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "WDCUT01.SS": "0bd7c9551debf2be43b6e946ab3b93a1406ebded2b6c9b92d790b16ba382a99c",
+        "encoded_frame_sha256": "5acd8251dc3308dd8fca62115a7ef0fcb553e9f4f9e09121e8db6c408be22560",
+        "indexed_frame_sha256": "7926102d7f3a8472da323a40b22c798ee91322ada6d6c891934c1184ad122acc"
+      },
+      "source_research_id": 1489,
+      "source_encoded_length": 19787,
+      "source_opaque_cells": 21696,
+      "source_write_sha256": "3b012df1a2fe5e39d6ccd2acb851bd5f72529d2eb5f0e8c218bc9e5b6777e384",
+      "source_padded_native_sha256": "a49d9a6f488ec896566149723e5a0627e1a470eebceb166fd12df11b0df9d8dc",
+      "decoder": {
+        "entry": "0D46:000A",
+        "surface": "Main 200/320/0/2CAE only",
+        "native_pitch": 320,
+        "nominal_record_words_2_3": [
+          159,
+          152
+        ],
+        "coordinate_rule": "left=DX;top=stack[2];fully bounded only",
+        "complete_original_calls_observed": 1,
+        "maximum_observed_steps": 377906,
+        "call_bound": 750000,
+        "return": "121D:1554; SP+10",
+        "effective_Main_ES": [
+          "2CAE",
+          "33AE"
+        ],
+        "RAM_copy_or_VGA_publication_authorized": false
+      },
+      "palette_policy": {
+        "projection_sha256": "063f0ef2e693b27b6c054d59e73edfc2d85d678c0764bdb414032b0ba2252e07",
+        "indices": "sorted original used indices excluding transparency253"
+      },
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b",
+        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog"
+      }
+    },
+    "wdcut03-000.png": {
+      "sha256": "0b636747daa2268c93a3922804fdae7734416e578fb68524f33df14942494bb4",
+      "bytes": 2354605,
+      "size": [
+        1620,
+        971
+      ],
+      "mode": "RGB",
+      "target_size": [
+        768,
+        460
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "raw RGB preserved; verified original transparency index253 defines the exact native display mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "native_ordinal": 0,
+      "native_size": [
+        192,
+        115
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        192,
+        115
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1620,
+        971
+      ],
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: final high-resolution raster event illustration for an HD overlay of Sid Meier's Colonization (1994).\nInput images: Image 1 is a PRIVATE ORIGINAL GAME reference, used ONLY for exact subject, scene composition, geometry and palette. Image 2 is the USER-APPROVED fine pixel-art style reference, used ONLY for pixel clusters, restrained materials and crafted detail. Create new original artwork, never a simple upscale or a pasted copy of the old pixels.\nSubject and composition: A shore meeting, matching the native reference precisely. A wooden rowboat approaches a wooded bank from the lower right. Retain every person visible in the reference, with their exact relative positions, poses, clothing colors and scale. Keep the brown-clad standing traveler with his back toward the viewer near the middle, the blue-shirted seated traveler at right-center, and the brown-clad traveler at far right. On the shoreline retain the entire group across the left half, including the tall blue-clad figure and the smaller figures around him, and the thin upright spears. Do not simplify the group or assign new poses. Keep the dense trees, sloping sandy bank, lower-left water ripples and boat placement. No flags, extra people, modern clothing or lettering.\nStyle: the approved refined pixel-art finish, with sharp intentional small pixel clusters, readable human features, cloth, wood and foliage, coherent flat game lighting, restrained color and fine texture. Preserve the native illustration's relative palette and emotional tone. No painterly brushwork, blur, photographic or 3D rendering, smooth vector edges, oversized pixel blocks, gradients or glossy effects.\nFraming: a complete full-bleed wide illustration, aspect ratio 192:115. Keep every subject and edge detail shown in Image 1, with no cropping or extra borders. The image will be displayed near 768 by 460 pixels. Keep the native perspective and silhouette placements while adding genuine fine detail.\nText: none. No captions, words, letters, signatures, watermark, UI controls, mat, decorative border or newly invented objects. Opaque scene background, one illustration per image. Return a high-resolution PNG.",
+      "generation_history": [
+        {
+          "tool": "built-in image_gen",
+          "prompt": "Use case: stylized-concept.\nAsset type: final high-resolution raster event illustration for an HD overlay of Sid Meier's Colonization (1994).\nInput images: Image 1 is a PRIVATE ORIGINAL GAME reference, used ONLY for exact subject, scene composition, geometry and palette. Image 2 is the USER-APPROVED fine pixel-art style reference, used ONLY for pixel clusters, restrained materials and crafted detail. Create new original artwork, never a simple upscale or a pasted copy of the old pixels.\nSubject and composition: A shore meeting, matching the native reference precisely. A wooden rowboat approaches a wooded bank from the lower right. Retain every person visible in the reference, with their exact relative positions, poses, clothing colors and scale. Keep the brown-clad standing traveler with his back toward the viewer near the middle, the blue-shirted seated traveler at right-center, and the brown-clad traveler at far right. On the shoreline retain the entire group across the left half, including the tall blue-clad figure and the smaller figures around him, and the thin upright spears. Do not simplify the group or assign new poses. Keep the dense trees, sloping sandy bank, lower-left water ripples and boat placement. No flags, extra people, modern clothing or lettering.\nStyle: the approved refined pixel-art finish, with sharp intentional small pixel clusters, readable human features, cloth, wood and foliage, coherent flat game lighting, restrained color and fine texture. Preserve the native illustration's relative palette and emotional tone. No painterly brushwork, blur, photographic or 3D rendering, smooth vector edges, oversized pixel blocks, gradients or glossy effects.\nFraming: a complete full-bleed wide illustration, aspect ratio 192:115. Keep every subject and edge detail shown in Image 1, with no cropping or extra borders. The image will be displayed near 768 by 460 pixels. Keep the native perspective and silhouette placements while adding genuine fine detail.\nText: none. No captions, words, letters, signatures, watermark, UI controls, mat, decorative border or newly invented objects. Opaque scene background, one illustration per image. Return a high-resolution PNG.",
+          "raw_sha256": "0b636747daa2268c93a3922804fdae7734416e578fb68524f33df14942494bb4",
+          "selected": true
+        }
+      ],
+      "reference_sha256": {
+        "native": "7cd0ba63321b7365ffd6a5e1c7cfad0a1811a7493c73d26be5f95a1063e60765",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "WDCUT03.SS": "09fc57b31fdfa7831264f2da62cd7fb72058982de86fcbe90f5d4b23baf86142",
+        "encoded_frame_sha256": "c290b048a1ad83f55668c1dc3329f8acf23461326e5d1bcd69eea25957fb9afe",
+        "indexed_frame_sha256": "9b5882ddc4956fef2f748b764892223dc42a89df2e46670f9c2aaccc53f6a546"
+      },
+      "source_research_id": 1491,
+      "source_encoded_length": 21038,
+      "source_opaque_cells": 22078,
+      "source_write_sha256": "e9443e44c47eb17fc0b19580d3fbc8e876103590ee66fe252e482130c65a06b1",
+      "source_padded_native_sha256": "92a5e59ac14cad6f712875cc1eb935301f568e59f1becf20df2ed8ae14dadcca",
+      "decoder": {
+        "entry": "0D46:000A",
+        "surface": "Main 200/320/0/2CAE only",
+        "native_pitch": 320,
+        "nominal_record_words_2_3": [
+          159,
+          154
+        ],
+        "coordinate_rule": "left=DX;top=stack[2];fully bounded only",
+        "complete_original_calls_observed": 1,
+        "maximum_observed_steps": 390645,
+        "call_bound": 750000,
+        "return": "121D:1554; SP+10",
+        "effective_Main_ES": [
+          "2CAE",
+          "33AE"
+        ],
+        "RAM_copy_or_VGA_publication_authorized": false
+      },
+      "palette_policy": {
+        "projection_sha256": "ef6638d21d4d8d79ea3436da017f227c2ae20965e0b94372bebda170e4cd9961",
+        "indices": "sorted original used indices excluding transparency253"
+      },
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b",
+        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog"
+      }
+    },
+    "wdcut07-000.png": {
+      "sha256": "995c910786dffb6894b46c9fc1b2536fd6b150e66450da531a3b1a3af659f803",
+      "bytes": 2191511,
+      "size": [
+        1621,
+        970
+      ],
+      "mode": "RGB",
+      "target_size": [
+        768,
+        460
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "raw RGB preserved; verified original transparency index253 defines the exact native display mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "native_ordinal": 0,
+      "native_size": [
+        192,
+        115
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        192,
+        115
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1621,
+        970
+      ],
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: a final HD raster event illustration for Sid Meier's Colonization (1994).\nInput images: Image 1 is a PRIVATE ORIGINAL GAME reference for exact subject, composition, geometry, clothing, objects, expressions and palette only. Image 2 is the USER-APPROVED fine pixel-art reference for the crafted small pixel clusters and material detail only. Create new original artwork, not a filtered upscale or a pasted enlargement.\nSubject: The foreground traveler holding the long firearm before the distant riverside camp, preserving the original clothing, pose, weapon direction, trees, water and camp arrangement.\nComposition: Preserve EVERY visible figure and object from Image 1, at the same relative scale, silhouette, pose and position. Do not change the number of people, their clothing coverage, camera, perspective, horizon, scene meaning or historical setting. Do not introduce new people, flags, buildings, weapons, ornaments or story elements. Full-bleed wide composition in aspect ratio 192:115. The final image is displayed at about 768 pixels wide. Keep the complete original composition without cropping or new borders.\nStyle: match the approved refined pixel-art finish with sharp, small intentional pixel clusters, clear but restrained faces and materials, coherent flat game lighting, and detailed cloth, wood, stone, foliage and water as appropriate. Follow Image 1's relative colors and mood. No photographic or 3D rendering, painterly brush strokes, blur, smooth vector art, glossy effects or oversized pixels.\nText: none. No lettering, captions, subtitles, numbers, signatures, watermark, UI, mat, framing ornament or extra borders. One opaque scene per PNG, high resolution.",
+      "generation_history": [
+        {
+          "tool": "built-in image_gen",
+          "prompt": "Use case: stylized-concept.\nAsset type: a final HD raster event illustration for Sid Meier's Colonization (1994).\nInput images: Image 1 is a PRIVATE ORIGINAL GAME reference for exact subject, composition, geometry, clothing, objects, expressions and palette only. Image 2 is the USER-APPROVED fine pixel-art reference for the crafted small pixel clusters and material detail only. Create new original artwork, not a filtered upscale or a pasted enlargement.\nSubject: The foreground traveler holding the long firearm before the distant riverside camp, preserving the original clothing, pose, weapon direction, trees, water and camp arrangement.\nComposition: Preserve EVERY visible figure and object from Image 1, at the same relative scale, silhouette, pose and position. Do not change the number of people, their clothing coverage, camera, perspective, horizon, scene meaning or historical setting. Do not introduce new people, flags, buildings, weapons, ornaments or story elements. Full-bleed wide composition in aspect ratio 192:115. The final image is displayed at about 768 pixels wide. Keep the complete original composition without cropping or new borders.\nStyle: match the approved refined pixel-art finish with sharp, small intentional pixel clusters, clear but restrained faces and materials, coherent flat game lighting, and detailed cloth, wood, stone, foliage and water as appropriate. Follow Image 1's relative colors and mood. No photographic or 3D rendering, painterly brush strokes, blur, smooth vector art, glossy effects or oversized pixels.\nText: none. No lettering, captions, subtitles, numbers, signatures, watermark, UI, mat, framing ornament or extra borders. One opaque scene per PNG, high resolution.",
+          "raw_sha256": "995c910786dffb6894b46c9fc1b2536fd6b150e66450da531a3b1a3af659f803",
+          "selected": true
+        }
+      ],
+      "reference_sha256": {
+        "native": "7808ffa5aaddd9ff6426c8394a88f8a35c7b161d24a5198f608aa6faed724093",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "WDCUT07.SS": "806979fe009dea953b5a8c4e7887048687c8725ef1a157d6d41faa84da993b55",
+        "encoded_frame_sha256": "d3b1d8d63056578f8c8c1e84e47facf784f8500b6e82b9620c9274da5dbeb0a6",
+        "indexed_frame_sha256": "b2077c734d5c4b448190ba81e0b7f832bc980e878b115ab52d9b92a4490e4168"
+      },
+      "source_research_id": 1495,
+      "source_encoded_length": 20728,
+      "source_opaque_cells": 22080,
+      "source_write_sha256": "06fee431f6ed6bcc24a279156d49837e8b07b7eeca900bea15db4c13539a45eb",
+      "source_padded_native_sha256": "b76348a37239cb7f5d26069aab5b865690fac205fb0008f54c570d524809776f",
+      "decoder": {
+        "entry": "0D46:000A",
+        "surface": "Main 200/320/0/2CAE only",
+        "native_pitch": 320,
+        "nominal_record_words_2_3": [
+          159,
+          154
+        ],
+        "coordinate_rule": "left=DX;top=stack[2];fully bounded only",
+        "complete_original_calls_observed": 1,
+        "maximum_observed_steps": 388085,
+        "call_bound": 750000,
+        "return": "121D:1554; SP+10",
+        "effective_Main_ES": [
+          "2CAE",
+          "33AE"
+        ],
+        "RAM_copy_or_VGA_publication_authorized": false
+      },
+      "palette_policy": {
+        "projection_sha256": "2cdbc65bc519bcacd6f0d14f988e58d1c5f058435e10425e26b5319bbbbfa8b2",
+        "indices": "sorted original used indices excluding transparency253"
+      },
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b",
+        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog"
+      }
+    },
+    "woodfram-000.png": {
+      "sha256": "f4fa697e0572d98c80ff45ee89a3f5c1b52893400f2ed1e2c815e72f3b59b13f",
+      "bytes": 1201659,
+      "size": [
+        1592,
+        988
+      ],
+      "mode": "RGB",
+      "target_size": [
+        1096,
+        680
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "raw RGB preserved; verified original transparency index253 defines the exact native display mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "native_ordinal": 0,
+      "native_size": [
+        274,
+        170
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        274,
+        170
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1592,
+        988
+      ],
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: final high-resolution bitmap material/component for a classic game's HD display layer.\nInput images: Image1 is the PRIVATE ORIGINAL GAME reference for composition, proportions, palette, edge placement and structure. Its magenta-looking regions denote unused/transparent native pixels and must not be painted magenta. Image2 is the USER-APPROVED fine pixel-art style reference, used only for small deliberate pixel clusters, surface detail and material finish.\nSubject and constraints: A single dark walnut wooden event-picture surround, matching the exact native layout. The full rectangular canvas represents a 274 by 170 unit rectangle. Keep the fine horizontal wood grain, restrained beveled inner edge, dark inner shadow and original simple rectangular construction. The inner image opening has logical coordinates [40,25,232,138] in this 274 by 170 layout. Fill that entire inner opening with solid opaque black as a placeholder; do not put a picture there. Keep the same wood thickness on every side and the same top/bottom asymmetry. No nails, carved ornaments, brass corners, symbols or text. Render the whole canvas fully opaque, including the black opening. The game uses its independently verified native transparency mask to leave the opening clear, so do not add transparency or colored matte. Wide aspect ratio274:170.\nGenerate new original refined pixel art, not a filter or enlargement of the source pixels. Preserve the native component proportions and all stated placement. Keep the image fully opaque and complete, no alpha, no blur, no painterly brushwork, no photorealism, no 3D render, no vector smoothness, no oversized native pixel blocks. Return one high-resolution PNG. No watermark or lettering.",
+      "generation_history": [
+        {
+          "tool": "built-in image_gen",
+          "prompt": "Use case: stylized-concept.\nAsset type: final high-resolution bitmap material/component for a classic game's HD display layer.\nInput images: Image1 is the PRIVATE ORIGINAL GAME reference for composition, proportions, palette, edge placement and structure. Its magenta-looking regions denote unused/transparent native pixels and must not be painted magenta. Image2 is the USER-APPROVED fine pixel-art style reference, used only for small deliberate pixel clusters, surface detail and material finish.\nSubject and constraints: A single dark walnut wooden event-picture surround, matching the exact native layout. The full rectangular canvas represents a 274 by 170 unit rectangle. Keep the fine horizontal wood grain, restrained beveled inner edge, dark inner shadow and original simple rectangular construction. The inner image opening has logical coordinates [40,25,232,138] in this 274 by 170 layout. Fill that entire inner opening with solid opaque black as a placeholder; do not put a picture there. Keep the same wood thickness on every side and the same top/bottom asymmetry. No nails, carved ornaments, brass corners, symbols or text. Render the whole canvas fully opaque, including the black opening. The game uses its independently verified native transparency mask to leave the opening clear, so do not add transparency or colored matte. Wide aspect ratio274:170.\nGenerate new original refined pixel art, not a filter or enlargement of the source pixels. Preserve the native component proportions and all stated placement. Keep the image fully opaque and complete, no alpha, no blur, no painterly brushwork, no photorealism, no 3D render, no vector smoothness, no oversized native pixel blocks. Return one high-resolution PNG. No watermark or lettering.",
+          "raw_sha256": "f4fa697e0572d98c80ff45ee89a3f5c1b52893400f2ed1e2c815e72f3b59b13f",
+          "selected": true
+        }
+      ],
+      "reference_sha256": {
+        "native": "f40b3b5e189961219eab8f85298f13b45fb15c94d2f6283f6dedb2ab1ec292d6",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "WOODFRAM.SS": "5f7a2ef556b542f193999f985d955c74c9cb281cc1acea04f88b0a2c852c8a24",
+        "encoded_frame_sha256": "81595a5976348435bff10798055f1f146f5c293dc266f6fc992134dfbd1da628",
+        "indexed_frame_sha256": "2b0276791390568c43a7c8caab2a6fe136c2235ac00e01a980b0a9cd6c669e25"
+      },
+      "source_research_id": 1549,
+      "source_encoded_length": 23824,
+      "source_opaque_cells": 24714,
+      "source_write_sha256": "19f7817992b7bc58abd2b06f4c7da2c03bd73b02a05f5f3642bef6d479c67052",
+      "source_padded_native_sha256": "2399a3e735ddb25f08c24bf01d4aecdf4ac68af5d95f1c4fe154d9e7e9876f5b",
+      "decoder": {
+        "entry": "0D46:000A",
+        "surface": "Main 200/320/0/2CAE only",
+        "native_pitch": 320,
+        "nominal_record_words_2_3": [
+          160,
+          184
+        ],
+        "coordinate_rule": "left=DX;top=stack[2];fully bounded only",
+        "complete_original_calls_observed": 3,
+        "maximum_observed_steps": 684745,
+        "call_bound": 750000,
+        "return": "121D:1554; SP+10",
+        "effective_Main_ES": [
+          "2CAE",
+          "33AE"
+        ],
+        "RAM_copy_or_VGA_publication_authorized": false
+      },
+      "palette_policy": {
+        "projection_sha256": "8d2990f7b9061338923d897c725175df2839b75fa61c44ae60c40b6526234d2e",
+        "indices": "sorted original used indices excluding transparency253"
+      },
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b",
+        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog"
+      }
     }
   }
 }

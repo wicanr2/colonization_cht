@@ -636,3 +636,9 @@ workplace/reports/goal186-display-hd/hd-terrain-foreground-r93。
 
 [規格065 R96](../spec/065-hd-small-images.md#r96三個世界來源conformed)R96三個縮放入口小圖像限定CONFORMED。305張原PNG／306檔及305個已驗來源連結；45張正常GUI／40個原版點，五語兩模式及四語逐圖游標進出通過。獨立新元件alpha為3：130770、11：74240、118：11559，完整X11為46080000點。56筆當次輸入三側至102200000步，含play=true，CPU／完整RAM／IDX／DAC／WAV／存檔與實拍相同。182具名通過項由178個未改守門／交易成功項加當次4個全載入項組成；完整84來源／83小圖像、14新載入錯件、306檔封裝16拒絕與索引12拒絕通過。舊302張原圖、清冊及來源連結保持。README更新世界地圖，仍為24張原樣實拍。其他40個ICONS、六個PIK、建築47、其他圖像／動畫、完整五語、全量HD、影片及新版交付未完成。
 本機入口為workplace/reports/goal186-display-hd/hd-icons-all-surfaces-r96。
+
+### R97事件版畫接續
+
+[規格069 R97](../spec/069-hd-menu-background-and-textures.md#r97事件版畫來源研究draft)研究十三張事件圖像，
+先重播既有三事件的96筆正常GUI輸入確認來源。工作根為workplace/reports/goal186-display-hd/hd-event-woodcuts-r97；
+原版輸入及圖像只留本機。現行305張HD原圖與既有CONFORMED範圍保持，全量HD繼續。
