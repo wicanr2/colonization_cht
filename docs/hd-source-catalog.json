@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "08736432e3c09a48273f3936dafade98ca4d4be8d2df34f617b87ddbdb48243b",
+  "formal_manifest_sha256": "520c1b419dcdb5e72555a861b1a209cca77b39750b0ad29441a855798eaea109",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 261,
+    "formal_asset_bindings": 269,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -45806,9 +45806,18 @@
       "indexed_sha256": "8c54ec68ba6dedfb890a286be12b2c725b89c567c04baf653676be26919ce2be",
       "opaque_pixels": 120,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 Main decode, verified backing copy, cursor handling and unknown same-value revocation; normal Grassland5",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "terrain-022.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "review_sha256": "9697b310de77bfd79197f421ece2000f2a73401ec97673768ad6d7d6902d56bb",
+        "scope": "R93 GUI42/native39; Main only; no new world Stage, published fallback, other images or full HD credit"
+      }
     },
     {
       "research_id": 1311,
@@ -45906,9 +45915,18 @@
       "indexed_sha256": "6ef79b304e6290d4e24f01a84bb1336fc99ea68da9c26e0020d5c223090de07d",
       "opaque_pixels": 106,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 Main decode, verified backing copy, cursor handling and unknown same-value revocation; normal Grassland5",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "terrain-026.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "review_sha256": "9697b310de77bfd79197f421ece2000f2a73401ec97673768ad6d7d6902d56bb",
+        "scope": "R93 GUI42/native39; Main only; no new world Stage, published fallback, other images or full HD credit"
+      }
     },
     {
       "research_id": 1315,
@@ -46886,9 +46904,18 @@
       "indexed_sha256": "7d46eef2ada391636177c8dabd77673e3c8b461bf88b3177c6ab77b26dd1bbd9",
       "opaque_pixels": 121,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 Main decode, verified backing copy, cursor handling and unknown same-value revocation; normal Grassland5",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "terrain-064.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "review_sha256": "9697b310de77bfd79197f421ece2000f2a73401ec97673768ad6d7d6902d56bb",
+        "scope": "R93 GUI42/native39; Main only; no new world Stage, published fallback, other images or full HD credit"
+      }
     },
     {
       "research_id": 1353,
@@ -48015,9 +48042,18 @@
       "indexed_sha256": "283ce6f56c5c8e729bc8dcd7a2c9560df40022b73c95eaf30f7a902b23921cf0",
       "opaque_pixels": 16,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 Main decode, verified backing copy, cursor handling and unknown same-value revocation; normal Grassland5",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "terrain-081.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "review_sha256": "9697b310de77bfd79197f421ece2000f2a73401ec97673768ad6d7d6902d56bb",
+        "scope": "R93 GUI42/native39; Main only; no new world Stage, published fallback, other images or full HD credit"
+      }
     },
     {
       "research_id": 1370,
@@ -48040,9 +48076,18 @@
       "indexed_sha256": "5cbbd16186da71b17cbda967f948524737fd9e88f6d3b11faa5418b7b6c46873",
       "opaque_pixels": 20,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 Main decode, verified backing copy, cursor handling and unknown same-value revocation; normal Grassland5",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "terrain-082.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "review_sha256": "9697b310de77bfd79197f421ece2000f2a73401ec97673768ad6d7d6902d56bb",
+        "scope": "R93 GUI42/native39; Main only; no new world Stage, published fallback, other images or full HD credit"
+      }
     },
     {
       "research_id": 1371,
@@ -48090,9 +48135,18 @@
       "indexed_sha256": "c76f10ae7fb6129e369b4c42ae44bd47f3f5943fa5482cf16d4802a5893b9ff8",
       "opaque_pixels": 22,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 Main decode, verified backing copy, cursor handling and unknown same-value revocation; normal Grassland5",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "terrain-084.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "review_sha256": "9697b310de77bfd79197f421ece2000f2a73401ec97673768ad6d7d6902d56bb",
+        "scope": "R93 GUI42/native39; Main only; no new world Stage, published fallback, other images or full HD credit"
+      }
     },
     {
       "research_id": 1373,
@@ -48115,9 +48169,18 @@
       "indexed_sha256": "c3fab640aa20bb8fa217c020eae65a1a845342c98447e7e4cf6610cc4c19075a",
       "opaque_pixels": 18,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 Main decode, verified backing copy, cursor handling and unknown same-value revocation; normal Grassland5",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "terrain-085.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "review_sha256": "9697b310de77bfd79197f421ece2000f2a73401ec97673768ad6d7d6902d56bb",
+        "scope": "R93 GUI42/native39; Main only; no new world Stage, published fallback, other images or full HD credit"
+      }
     },
     {
       "research_id": 1374,
@@ -55251,9 +55314,18 @@
       "indexed_sha256": "b5e5cb2b7aece3e61fa1cda0bac0cc97cc8df480b1bd4cb1369a8d2b636444a3",
       "opaque_pixels": 112,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 Main decode, verified backing copy, cursor handling and unknown same-value revocation; normal Grassland5",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "terrain-149.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "review_sha256": "9697b310de77bfd79197f421ece2000f2a73401ec97673768ad6d7d6902d56bb",
+        "scope": "R93 GUI42/native39; Main only; no new world Stage, published fallback, other images or full HD credit"
+      }
     },
     {
       "research_id": 1438,
@@ -61548,6 +61620,94 @@
       "source_indexed_sha256": "1843adff54c52c289b2fec270bffa0f8af5c23a1bb352669e6d06279c176eac7",
       "spec": "docs/spec/065-hd-small-images.md",
       "claim": "R92 normal Main-source scope only; complete Pedia pixels and scoped world material pixels"
+    },
+    {
+      "asset": "terrain-022.png",
+      "asset_sha256": "8f63f587cb984ca099d1a30d884753dbb5d043c1339dce1fa3fba922c845b690",
+      "source_research_id": 1310,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 22,
+      "source_encoded_sha256": "f4fbd062e4d40664b9bc8b6bb1fff411dccae0e318d969198c66351a20c65385",
+      "source_indexed_sha256": "8c54ec68ba6dedfb890a286be12b2c725b89c567c04baf653676be26919ce2be",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "claim": "R93 normal Main Pedia scope only; complete current RGBA/X11, palette and alpha retained"
+    },
+    {
+      "asset": "terrain-026.png",
+      "asset_sha256": "02f8b2bfddee72008a69a409d077fa499f9c251ce1948f5d13c7c65354189856",
+      "source_research_id": 1314,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 26,
+      "source_encoded_sha256": "e0fd65d46996904484abc7dbd5ace357e49b0b6cf55bfbccc55976bcd70e9e25",
+      "source_indexed_sha256": "6ef79b304e6290d4e24f01a84bb1336fc99ea68da9c26e0020d5c223090de07d",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "claim": "R93 normal Main Pedia scope only; complete current RGBA/X11, palette and alpha retained"
+    },
+    {
+      "asset": "terrain-064.png",
+      "asset_sha256": "f9d0f991bb6675b90da0ba74caa631c4245024dbf93afc320cf197782b78c0f5",
+      "source_research_id": 1352,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 64,
+      "source_encoded_sha256": "efa3ec3b5f3ee6d6d8c5cda5bb5354c6946d4fd0ef490b5def585aefc05f441f",
+      "source_indexed_sha256": "7d46eef2ada391636177c8dabd77673e3c8b461bf88b3177c6ab77b26dd1bbd9",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "claim": "R93 normal Main Pedia scope only; complete current RGBA/X11, palette and alpha retained"
+    },
+    {
+      "asset": "terrain-081.png",
+      "asset_sha256": "64c10fcc14668cac6c34609ab01728c6535415f9d3bafd31e1e63fb70f0b8cb8",
+      "source_research_id": 1369,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 81,
+      "source_encoded_sha256": "75bfffe30b336860b0c3b3540b7995fac4c55450e9d21c191bb816356c2a1f4b",
+      "source_indexed_sha256": "283ce6f56c5c8e729bc8dcd7a2c9560df40022b73c95eaf30f7a902b23921cf0",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "claim": "R93 normal Main Pedia scope only; complete current RGBA/X11, palette and alpha retained"
+    },
+    {
+      "asset": "terrain-082.png",
+      "asset_sha256": "e9f630a2a5f8a67d8e0f61a7f348648807d4bfd88288815bcd49aa58feeb8751",
+      "source_research_id": 1370,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 82,
+      "source_encoded_sha256": "48c82fe3ec03b225de83c2fdd3fd0067c3f0a46daedd28ad029daf97cbcac390",
+      "source_indexed_sha256": "5cbbd16186da71b17cbda967f948524737fd9e88f6d3b11faa5418b7b6c46873",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "claim": "R93 normal Main Pedia scope only; complete current RGBA/X11, palette and alpha retained"
+    },
+    {
+      "asset": "terrain-084.png",
+      "asset_sha256": "a9dc9f403b5d20ce70d5d76f49ab02892613ff5c472045268080d880fe4be34b",
+      "source_research_id": 1372,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 84,
+      "source_encoded_sha256": "2d16d0f6180f93fadec2888cfcdc379578c88122988c72e0f26377939bad3417",
+      "source_indexed_sha256": "c76f10ae7fb6129e369b4c42ae44bd47f3f5943fa5482cf16d4802a5893b9ff8",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "claim": "R93 normal Main Pedia scope only; complete current RGBA/X11, palette and alpha retained"
+    },
+    {
+      "asset": "terrain-085.png",
+      "asset_sha256": "6bd00650c24cc3a1c6bbe08d5184121ed2bec9e9bc538c6e0df630ec3dec18e5",
+      "source_research_id": 1373,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 85,
+      "source_encoded_sha256": "cf63288ea39bf64e219bd82e2d02e9b18b790d40e1fcec5b7b8a2c344c05c274",
+      "source_indexed_sha256": "c3fab640aa20bb8fa217c020eae65a1a845342c98447e7e4cf6610cc4c19075a",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "claim": "R93 normal Main Pedia scope only; complete current RGBA/X11, palette and alpha retained"
+    },
+    {
+      "asset": "terrain-149.png",
+      "asset_sha256": "6392b90ac606b3a5b30ed384c57bc64a6a6766d1116d85aadf440fd215dcd4a0",
+      "source_research_id": 1437,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 149,
+      "source_encoded_sha256": "657754e1b47b0320c76c040e9afdea4a9147562fc5e30d03c3ea86ac34174390",
+      "source_indexed_sha256": "b5e5cb2b7aece3e61fa1cda0bac0cc97cc8df480b1bd4cb1369a8d2b636444a3",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "claim": "R93 normal Main Pedia scope only; complete current RGBA/X11, palette and alpha retained"
     }
   ],
   "limitations": [
@@ -62111,5 +62271,23 @@
     "gui_samples": 135,
     "unique_native_points": 112,
     "claim": "twelve material sources and one hammer; full Pedia pixels, scoped new world material pixels and complete X11; full HD incomplete"
+  },
+  "terrain_foreground_conformance": {
+    "ready_sha256": "ad902024902baf63cdce08a09e27eb708d4df32c65b08c2300e04ffeac1923e5",
+    "review_sha256": "9697b310de77bfd79197f421ece2000f2a73401ec97673768ad6d7d6902d56bb",
+    "sources": [
+      1310,
+      1314,
+      1352,
+      1369,
+      1370,
+      1372,
+      1373,
+      1437
+    ],
+    "formal_assets": 269,
+    "gui_samples": 42,
+    "unique_native_points": 39,
+    "claim": "eight Main Pedia foregrounds only; complete Pedia pixels and X11; new Stage/published scope and full HD incomplete"
   }
 }

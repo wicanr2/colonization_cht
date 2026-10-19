@@ -613,7 +613,14 @@ README新增當次繁中極地實拍，原有十九張圖與來源保持。
 
 ### R93地形前景接續
 
-[規格067 R93](../spec/067-hd-world-terrain-batch.md#r93河流林木道路與耕地前景ready)追蹤河流、
-林木、道路與耕地八來源，已審READY。私有原版參考與來源入口位於
+[規格067 R93](../spec/067-hd-world-terrain-batch.md#r93河流林木道路與耕地前景conformed)追蹤河流、
+林木、道路與耕地八來源，已限定CONFORMED。私有原版參考與來源入口位於
 workplace/reports/goal186-display-hd/hd-terrain-foreground-r93。
-R92的261個已驗來源保持；八張新原PNG已依READY接線，合計269張，仍待正式GUI驗收。
+八張新原PNG已正式驗收，合計269張／270檔及269個來源連結。42張GUI／39個原版點、330個Noto欄位及三側58筆輸入的狀態／WAV／存檔相同；全量HD未完成。
+
+### R94其餘地形前景接續
+
+[規格067 R94](../spec/067-hd-world-terrain-batch.md#r94其餘三十三個main前景draft)追蹤已在正常百科
+觀測到的三十三個山地、丘陵、林木及資源來源，目前DRAFT。
+本機原版參考入口為workplace/reports/goal186-display-hd/hd-terrain-remaining-r94。
+候選未進正式路徑，不增加269張正式素材或已驗來源。

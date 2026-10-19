@@ -7078,3 +7078,22 @@ R92當次177筆輸入與75點完整原版狀態保持，9180606筆事件重建�
 八張生成原PNG與alpha保持，量測取樣與預乘alpha色差公式由規格067 R93 READY記錄。
 審查ad902024902baf63cdce08a09e27eb708d4df32c65b08c2300e04ffeac1923e5。
 正式GUI、當次來源與WAV／存檔重播仍待驗，不能把元件RGBA算成正式HD完成。
+
+## 2026-10-19 R93：當次正常草原百科正式驗收
+
+沿本節固定PHYS0.SS、VICEROY.EXE、dosgolem82a14b2與工具版本；
+位址空間仍為實模式CS:IP及20-bit線性RAM。
+confirmed限42張GUI／39個當次原版點，輸入a5f136c8643dd075e5dc6f19f89de48f8fe84d9831b6bcf56f9573db5a6782e5，
+58筆至105800000步。觀測程式54d2a76e3096e7c3a233ed2e83326c35005ccc4338dc2c1f91e24f4c251cca5d，
+二進位e7c778d1bd2842794d299fee3cfc32d1c7d71bcc39c54bbb75bc7fa4fae4d0e6。
+控制／觀測與GUI完整CPU、RAM、IDX、DAC及存檔一致，三側當次重播WAV也相同。
+
+八個Main來源的實際完整返回、原始參數、逐格來源、未知同值撤銷與游標處理，
+由當次原版事件獨立推導，未用正式層來源回報作oracle。
+41張完整RGBA、42張X11、330個Noto欄位、329859個新前景alpha與9936個水面RGBA通過。
+新八來源沒有世界Stage或發布VGA信用；末張世界只驗繼承材質與完整X11。
+
+總審查9697b310de77bfd79197f421ece2000f2a73401ec97673768ad6d7d6902d56bb，
+來源索引4442263cfd162145f402b824d21d0cac4fb00f7816bad6954d3e9b72b8ae722a。
+來源、完整程式與重生入口見規格067 R93及本機r93-current-native-plan-r1.json。
+環境空目錄與收據交接競態已勘誤，原版與正式程式未因此改動。

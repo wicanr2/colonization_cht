@@ -1,12 +1,12 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-19",
-  "code_commit": "7bc4b3879d949206770ca162b3cdc906c46f1ef0",
-  "binary_sha256": "91999364f546e40832558c3ac1a2c3b6140e720cfbe916e58321a3b7ec280b7a",
-  "formal_binary_sha256": "91999364f546e40832558c3ac1a2c3b6140e720cfbe916e58321a3b7ec280b7a",
-  "source_build_sha256": "e59d6cd7c4eca684f97acf65f3c1f753bf3dc44581ab38fba3d02971bdc6044e",
+  "code_commit": "8d46f078a4e82e67e64f65e7e16449992a8befef",
+  "binary_sha256": "1267bf447310291ad97bddf77601fa5526d294a765e6904fd467170e9ef482c8",
+  "formal_binary_sha256": "1267bf447310291ad97bddf77601fa5526d294a765e6904fd467170e9ef482c8",
+  "source_build_sha256": "44f00bbaca4ed9781f8f8a2e1d2e4268acf88fec4cd9f29f9b6a1e1037cc156c",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 261,
+  "formal_hd_assets": 269,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -626,6 +626,58 @@
       "terrain_source_cells": 2232,
       "verification_state": "CONFORMED within R92 normal Main-source scope; twenty Terrain Types topics, twelve material sources and construction hammer verified; full HD incomplete",
       "scope": "正常繁中極地百科。地形材質、木紋、Noto與一般游標已驗；前景岩石保留原版。十二種材質與施工槌限定驗收不代表全量HD或新版發行。"
+    },
+    {
+      "file": "hd-grassland-pedia-zh.png",
+      "sha256": "3f1beadd5971b6959d96ebd1fc6ebb5dead6669fc4ab2cb272a60c17560ce9e7",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "terrain-pedia-grassland",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 82600000,
+      "code_commit": "8d46f078a4e82e67e64f65e7e16449992a8befef",
+      "binary_sha256": "1267bf447310291ad97bddf77601fa5526d294a765e6904fd467170e9ef482c8",
+      "formal_binary_sha256": "1267bf447310291ad97bddf77601fa5526d294a765e6904fd467170e9ef482c8",
+      "formal_hd_assets": 269,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-terrain-foreground-r93/r93-foreground-formal-gui-r1/gui.display-038.png",
+      "source_gui_check_sha256": "06b3836c72797ba2305cef9e54c4ccf33e503e812607596be5c4a60080f8ae51",
+      "source_gui_build_sha256": "44f00bbaca4ed9781f8f8a2e1d2e4268acf88fec4cd9f29f9b6a1e1037cc156c",
+      "source_pixel_check_sha256": "ec544ece6b2cf47b9d646b62079f2173b23faa9a949276be17b0a06ba3631374",
+      "source_state_check_sha256": "3fb37734ba03520dc0e92fd8e824f59a7cfa0f494cccbed17fdd923b6d21f69d",
+      "source_model_check_sha256": "acd900616dba504599f68385cf3da89e3c6e4f9c184a33076c7f4fb3fc4c7968",
+      "source_replay_check_sha256": "275dcc607318d489f443a001e49aee7684af8caba389cf97957fc9a2a275352f",
+      "graphics_manifest_sha256": "520c1b419dcdb5e72555a861b1a209cca77b39750b0ad29441a855798eaea109",
+      "conformance_sha256": "9697b310de77bfd79197f421ece2000f2a73401ec97673768ad6d7d6902d56bb",
+      "source_kind": "actual formal game presentation; verified byte-for-byte against the real X11 window game area",
+      "capture_pixels_unchanged": true,
+      "original_source_files": [
+        "PHYS0.SS",
+        "TERRAIN.SS",
+        "ICONS.SS",
+        "WOODPANL.PIK",
+        "CURSOR.SS"
+      ],
+      "source_research_ids": [
+        309,
+        908,
+        910,
+        1310,
+        1314,
+        1352,
+        1369,
+        1370,
+        1372,
+        1373,
+        1437,
+        1481,
+        1551
+      ],
+      "foreground_source_cells": 813,
+      "verification_state": "CONFORMED within R93 normal Main Pedia scope; all eight foregrounds, five languages, cursor hover/return, actual-input state/audio/save and full Pedia RGBA verified; full HD incomplete",
+      "scope": "正常繁中草原百科。河流、林木、道路與耕地前景、地形材質、木紋、人物／資源小圖、Noto及一般游標已驗。新八前景限Main，不外推世界Stage、其他來源或全量HD。"
     }
   ],
   "limitations": [
@@ -649,7 +701,8 @@
     "R83刷新開場實拍，加入已驗船隻八幀；R82當時移動船保留原圖的限制作歷史紀錄。共十八張，其他十七張及逐圖來源保持。其他SS、淡入淡出、其他圖像、完整五語、影片與新版交付仍未完成。",
     "R86刷新正常繁中模式的吹氣雲第0幀實拍，PNG直接複製未重編碼；63項正常GUI的原版來源、完整RGBA／X11及17個Noto欄位已驗。三側完整重播尚待收齊，維持READY；其他十七張與逐圖來源保持，其他圖像、完整五語與全量HD未完成。",
     "R86當次三側完整重播已收齊並限定CONFORMED，取代前項READY限制；PNG及原始捕捉程式指紋不變。R87魚形接線不混入此圖驗收。",
-    "R87開場圖更新為魚形第14幀實拍；二十一魚形限定CONFORMED，其他十七張及各自來源保持。R89十一背景尚未用於README截圖。"
+    "R87開場圖更新為魚形第14幀實拍；二十一魚形限定CONFORMED，其他十七張及各自來源保持。R89十一背景尚未用於README截圖。",
+    "R93新增繁中草原百科實拍，共二十一張。八個Main前景限定CONFORMED；世界Stage、其他來源、動畫與全量HD不因本圖視為完成。"
   ],
   "previous_build": {
     "kind": "README actual development screenshots",
@@ -662,8 +715,8 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "Per-capture provenance is authoritative; header describes the latest added terrain capture only.",
-  "graphics_manifest_sha256": "08736432e3c09a48273f3936dafade98ca4d4be8d2df34f617b87ddbdb48243b",
+  "provenance_scope": "最新草原百科使用8d46f07的正式顯示程式與269張原圖；其餘二十張原PNG與逐圖來源保持。",
+  "graphics_manifest_sha256": "520c1b419dcdb5e72555a861b1a209cca77b39750b0ad29441a855798eaea109",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -855,7 +908,7 @@
     },
     "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb"
   },
-  "conformance_state": "R92 terrain12/hammer54 scoped CONFORMED; all earlier captures retain their individual verified scope",
+  "conformance_state": "R93 eight Main foreground sources scoped CONFORMED; all previous captures retain individual verified scope",
   "previous_opening_sun_capture": {
     "capture": {
       "file": "hd-opening-zh.png",
@@ -979,5 +1032,16 @@
     "graphics_manifest_sha256": "eb7f70da2fb48e5d508a9a5184108ad1996bd5617fca1da38dd9e2119771ce34",
     "conformance_state": "R87 fish21 scoped CONFORMED; other captures retain their individual verified scope",
     "provenance_scope": "Latest opening capture uses the frozen 9ef4 R87 formal build and 206 PNGs; current repo R89 development assets and code are not claimed as its capture build. The other seventeen PNGs and metadata are unchanged."
+  },
+  "previous_terrain_foreground_capture_header": {
+    "date": "2026-10-19",
+    "code_commit": "7bc4b3879d949206770ca162b3cdc906c46f1ef0",
+    "binary_sha256": "91999364f546e40832558c3ac1a2c3b6140e720cfbe916e58321a3b7ec280b7a",
+    "formal_binary_sha256": "91999364f546e40832558c3ac1a2c3b6140e720cfbe916e58321a3b7ec280b7a",
+    "source_build_sha256": "e59d6cd7c4eca684f97acf65f3c1f753bf3dc44581ab38fba3d02971bdc6044e",
+    "formal_hd_assets": 261,
+    "graphics_manifest_sha256": "08736432e3c09a48273f3936dafade98ca4d4be8d2df34f617b87ddbdb48243b",
+    "conformance_state": "R92 terrain12/hammer54 scoped CONFORMED; all earlier captures retain their individual verified scope",
+    "provenance_scope": "Per-capture provenance is authoritative; header describes the latest added terrain capture only."
   }
 }
