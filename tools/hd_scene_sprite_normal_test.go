@@ -12,7 +12,7 @@ import (
 	"testing"
 )
 
-func TestHDEventNormal96(t *testing.T) {
+func TestHDSceneNormal96(t *testing.T) {
 	root, game, assets, output := os.Getenv("TEST_HD_EVENT_ROOT"), os.Getenv("TEST_GAME_ROOT"), os.Getenv("TEST_HD_EVENT_ASSETS"), os.Getenv("TEST_HD_EVENT_NORMAL_OUTPUT")
 	if root == "" || game == "" || assets == "" || output == "" {
 		t.Skip("需要合法原版、來源模型與新輸出目錄")
@@ -92,6 +92,19 @@ func TestHDEventNormal96(t *testing.T) {
 		prefix := fmt.Sprintf("cp-%d", m.Steps)
 		var model map[string][]any
 		need(json.Unmarshal(read(filepath.Join(root, "r97-independent-main-model-r1", prefix+".owners.json")), &model))
+		dialogRoot := os.Getenv("TEST_HD_DIALOG_MODEL")
+		if dialogRoot == "" {
+			t.Fatal("explicit independent MSS model required")
+		}
+		var dialogModel map[string][]any
+		need(json.Unmarshal(read(filepath.Join(dialogRoot, prefix+".owners.json")), &dialogModel))
+		for pos, cell := range dialogModel {
+			if _, exists := model[pos]; exists {
+				t.Fatal("independent model source overlap", pos)
+			}
+			model[pos] = cell
+		}
+
 		seen := 0
 		for pos, cell := range p.visible {
 			frame, known := p.frame(cell)
@@ -168,7 +181,7 @@ func TestHDEventNormal96(t *testing.T) {
 	p.beforeSpriteInstruction()
 	capture()
 	checkState(oracle.End)
-	if point != 12 || count != 96 || p.spriteAccepted != 45 || p.spriteRejected != 0 || p.spriteCall != nil {
+	if point != 12 || count != 96 || p.spriteAccepted != 55 || p.spriteRejected != 0 || p.spriteCall != nil {
 		t.Fatal("normal route coverage", point, count, p.spriteAccepted, p.spriteRejected)
 	}
 	d.Close()
@@ -192,7 +205,7 @@ func TestHDEventNormal96(t *testing.T) {
 		}
 		saves[entry.Name()] = hash(b)
 	}
-	result := map[string]any{"result": "PASS_R97_PRIVATE_SCENE_NORMAL96_ORIGINAL12_AND_INDEPENDENT_MAIN_OWNERS", "points": point, "inputs": count, "complete_calls": p.spriteAccepted, "rejected": p.spriteRejected, "end": m.Steps, "saves": saves, "formal_GUI_credit": false, "production_connected": false}
+	result := map[string]any{"result": "PASS_R98_SCENE_NORMAL96_ORIGINAL12_AND_ELEVEN_INDEPENDENT_MAIN_OWNERS", "points": point, "inputs": count, "complete_calls": p.spriteAccepted, "rejected": p.spriteRejected, "end": m.Steps, "saves": saves, "formal_GUI_credit": false, "production_connected": false}
 	encoded, e := json.MarshalIndent(result, "", "  ")
 	need(e)
 	need(os.WriteFile(filepath.Join(output, "result.json"), encoded, 0644))

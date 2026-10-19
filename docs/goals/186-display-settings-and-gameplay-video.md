@@ -656,3 +656,5 @@ R98接續[大型人物對話圖DRAFT](../spec/069-hd-menu-background-and-texture
 R98已有[四來源草稿契約與原版證據](../spec/069-hd-menu-background-and-textures.md#r98四來源草稿契約與原版證據)：MSS0／1／3／4共10次完整繪製、12點原版狀態對照、332項解碼測試與完整載入及取樣通過。仍為DRAFT，未觀測MSS2／5及四人物正式GUI另驗，正式310連結與312張原PNG保持。
 
 R97另兩事件已[限定CONFORMED](../spec/069-hd-menu-background-and-textures.md#r97另兩事件conformed)，七來源均完成當次範圍。合計312張原PNG與312個來源連結、README27張；兩組各自狀態／音訊／存檔及完整畫素通過。全量HD及R98人物仍繼續。
+
+R98四人物已[READY正式接線](../spec/069-hd-menu-background-and-textures.md#r98正式四人物接線與守門)，合計316張原PNG／317檔；507具名項、完整載入取樣及封裝通過。來源索引仍312，正常GUI與當次三側原版狀態／音訊／存檔續驗，未授予全量HD完成。

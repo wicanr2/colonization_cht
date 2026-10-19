@@ -540,6 +540,90 @@ def extend_scaled_small_images(a):
     print('PASS_SCALED_SMALL3_CONFORMED_SOURCE_INDEX', 305, sha(a.output), flush=True)
 
 
+def extend_dialog_figures(a):
+    """規格069 R98：僅追加四個正常GUI已驗的MSS Main來源。"""
+    baseline, ready, review = read(a.baseline), read(a.ready), read(a.conformed)
+    manifest = read(a.assets / 'manifest.json')
+    ids = [1060, 1061, 1063, 1064]
+    names = {n: 'mss%d-000.png' % (n - 1060) for n in ids}
+    assert sha(a.ready) == '8430d1e78767559deb4eb64818fc41bac7601a7bbb360b9421c431da83d976bc'
+    assert ready['status'] == 'READY' and ready['source_ids'] == ids
+    assert ready['unobserved_private_DRAFT'] == [1062, 1065]
+    assert review['result'] == 'PASS_R98_FOUR_DIALOG_FIGURES_CONFORMANCE'
+    assert review['spec_state'] == 'CONFORMED' and review['new_sources'] == ids
+    assert review['ready_sha256'] == sha(a.ready)
+    assert review['inherited_source_index_sha256'] == sha(a.baseline)
+    assert review['inherited_manifest_sha256'] == baseline['formal_manifest_sha256'] == ready['inherited_manifest_sha256']
+    assert review['manifest_sha256'] == sha(a.assets / 'manifest.json')
+    assert review['formal_assets'] == len(manifest['assets']) == 316
+    assert review['new_raw_pngs'] == [names[n] for n in ids]
+    assert review['conformed_bindings_before'] == len(baseline['formal_bindings']) == 312
+    assert review['conformed_bindings_after'] == 316
+    assert review['old_raw_pngs_preserved'] == review['old_metadata_preserved'] == 312
+    assert review['go_named_passed'] >= 400 and review['go_failed'] == review['go_skipped'] == 0
+    assert review['package_files'] == 317 and review['package_faults'] == 19
+    assert review['gui_event_samples'] == 72
+    assert review['gui_full_rgba'] == 72 * 1280 * 800
+    assert review['gui_total_samples'] >= 72
+    assert review['gui_x11_rgba'] == review['gui_total_samples'] * 1280 * 800
+    assert review['unique_native_points'] > 0 and review['actual_inputs'] > 0
+    assert review['gui_source_samples'] == {str(n): 18 for n in ids}
+    assert all(review['gui_source_RGBA_pixels'][str(n)] > 0 for n in ids)
+    for key in ['full_project_loader_positive', 'raw_png_alpha_preserved',
+                'five_languages_both_modes', 'figure_four_CJK_cursor_hover_return',
+                'normal_dialog_close_and_continued_play',
+                'independent_Main_source_masks_and_complete_RGBA',
+                'closed_Main_has_no_new_sources', 'normal96_all11_sources55_calls',
+                'three_replays_state_audio_save_equal_GUI',
+                'native_inputs_rules_and_save_unchanged']:
+        assert review[key], key
+    assert not review['unobserved_two_GUI_credit']
+    assert not review['Stage_or_VGA_publication_credit']
+    assert not review['complete_hd'] and not review['new_release']
+    out = copy.deepcopy(baseline)
+    frames = {f['research_id']: f for f in out['frames']}
+    assert len(frames) == 1552
+    old_names = {b['asset'] for b in out['formal_bindings']}
+    assert set(manifest['assets']) - old_names == set(names.values())
+    for binding in out['formal_bindings']:
+        name = binding['asset']
+        assert binding['asset_sha256'] == manifest['assets'][name]['sha256'] == sha(a.assets / name)
+    for ident in ids:
+        name, frame = names[ident], frames[ident]
+        meta = manifest['assets'][name]
+        assert not frame['formal_assets'] and meta['source_research_id'] == ident
+        assert meta['native_ordinal'] == frame['ordinal'] == 0 and meta['native_size'] == frame['size']
+        assert meta['original_binding'][frame['file']] == frame['file_sha256']
+        assert meta['original_binding']['encoded_frame_sha256'] == frame['encoded_sha256']
+        assert meta['original_binding']['indexed_frame_sha256'] == frame['indexed_sha256']
+        assert meta['source_encoded_length'] == frame['encoded_length']
+        assert sha(a.assets / name) == meta['sha256']
+        out['formal_bindings'].append({
+            'asset': name, 'asset_sha256': meta['sha256'], 'source_research_id': ident,
+            'source_file': frame['file'], 'source_ordinal': 0,
+            'source_encoded_sha256': frame['encoded_sha256'],
+            'source_indexed_sha256': frame['indexed_sha256'],
+            'spec': 'docs/spec/069-hd-menu-background-and-textures.md',
+            'claim': 'R98 complete D46 Main figure only; independent native writes, glyph/cursor composition and normal GUI'})
+        frame['formal_assets'] = [name]
+        frame['runtime_source_evidence'] = 'confirmed complete original D46 Main decode, return and writes; independent Main model and normal GUI in the cited four-source review'
+        frame['source_contract_reference'] = {
+            'state': 'CONFORMED', 'spec': 'docs/spec/069-hd-menu-background-and-textures.md',
+            'formal_connected': True, 'review_sha256': sha(a.conformed),
+            'scope': 'four observed MSS Main sources only; no other figures, Stage, VGA publication or full-HD credit'}
+    old = {f['research_id']: f for f in baseline['frames']}
+    assert all(f == old[f['research_id']] for f in out['frames'] if f['research_id'] not in ids)
+    out['formal_manifest_sha256'] = sha(a.assets / 'manifest.json')
+    out['coverage_limits']['formal_asset_bindings'] = len(out['formal_bindings'])
+    out['coverage_limits']['complete_hd'] = False
+    out.setdefault('dialog_figure_conformance', []).append({
+        'ready_sha256': sha(a.ready), 'review_sha256': sha(a.conformed),
+        'sources': ids, 'conformed_bindings': 316, 'gui_event_samples': 72,
+        'claim': 'only four observed Main figures; MSS2/MSS5 and global HD remain separate'})
+    a.output.write_text(json.dumps(out, ensure_ascii=False, indent=2) + '\n')
+    print('PASS_DIALOG_FOUR_SCOPED_SOURCE_INDEX', len(out['formal_bindings']), sha(a.output), flush=True)
+
+
 def extend_event_scenes(a):
     """規格069 R97：分別登錄已驗的發現／共用UI及另兩事件。"""
     baseline, ready, review = read(a.baseline), read(a.ready), read(a.conformed)
@@ -653,9 +737,13 @@ def main():
     scope.add_argument('--terrain-main-surfaces', action='store_true', help='規格067 R95：追加六個既有素材的Main表面')
     scope.add_argument('--scaled-small-images', action='store_true', help='規格065 R96：追加三個已驗縮放入口小圖像')
     scope.add_argument('--event-scenes', action='store_true', help='規格069 R97：只追加當次已驗事件或共用UI來源')
+    scope.add_argument("--dialog-figures", action="store_true", help="規格069 R98：四個正常GUI已驗人物Main來源")
     a = parser.parse_args()
     assert Path('/.dockerenv').exists() and os.getuid() != 0
     assert not a.output.exists() and a.output.parent.stat().st_uid == os.getuid()
+    if a.dialog_figures:
+        extend_dialog_figures(a)
+        return
     if a.event_scenes:
         extend_event_scenes(a)
         return

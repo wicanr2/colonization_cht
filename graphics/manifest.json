@@ -21569,6 +21569,274 @@
         "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog",
         "initial_ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b"
       }
+    },
+    "mss0-000.png": {
+      "sha256": "4eb7b99e24ff63edfd696966100cb235b4f3ad6bc5e932c35cd041373c515f0a",
+      "bytes": 1361257,
+      "size": [
+        1138,
+        1382
+      ],
+      "mode": "RGB",
+      "target_size": [
+        300,
+        364
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "raw RGB preserved; verified original transparency index253 defines exact native display mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "source_research_id": 1060,
+      "native_ordinal": 0,
+      "native_size": [
+        75,
+        91
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        75,
+        91
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1138,
+        1382
+      ],
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: an original high-resolution pixel-art character sprite for a classic game's HD display layer.\nInput image1 is a PRIVATE ORIGINAL GAME sprite reference. It is the authority for composition, silhouette, proportions, facial traits, pose, costume, accessories, palette and all cropped edges. Bright magenta marks unused native pixels and is not a real color of the figure. Input image2 is the USER-APPROVED fine pixel-art style reference, only for deliberate small pixel clusters, restrained material shading and crafted detail. Do not reproduce its buildings, terrain, scenery or layout.\nSubject and exact composition: Front-facing dark-haired naval officer with heavy mutton-chop sideburns, navy blue double-breasted high-collar uniform, red shoulder panels with gold fringed epaulettes, round gold buttons and medals including a small purple ribbon. The upper body occupies the upper and middle right of the canvas. Preserve the resting hand near the lower-right edge of the main torso. Crucially preserve the second small disconnected hand/thumb component at the extreme LOWER-LEFT of the canvas, around x0–9 of75 and y79–91 of91; the original sprite mask uses that separate hand. Do not omit, relocate or connect it with a new forearm. Keep the original face proportions, gaze, shoulder widths and cropped waist; no hat or legs.\nCreate fresh original refined pixel art rather than enlarging, filtering or copying the old pixel grid. Preserve the native reference's subject and framing; do not redesign clothing or correct it to another historical period. Use intentional compact pixel clusters and sharp readable facial, cloth, leather, wood and metal detail, with the restrained natural palette of image1 and the crafted finish of image2. No painterly brushwork, blur, photographic or 3D rendering, smooth vector contours, glossy surfaces, heavy gradients, oversized blocks, UI boxes, text, captions or watermark.\nCanvas: keep exactly image1's aspect ratio and all subject placements, with no extra outer margin. Match the native sprite's complete set of visible body/hand/accessory components, including separated parts. The output must be FULLY OPAQUE. Fill unused magenta areas with a flat very dark neutral brown, never magenta; the original game's separate exact native alpha mask will remove that area at runtime. Do not create a new transparent cutout, drop native components, reframe, recenter, mirror, crop, or add any scene. Aim for clear fine pixel work when sampled at four times the native sprite size.",
+      "generation_history": [
+        {
+          "tool": "built-in image_gen",
+          "prompt": "Use case: stylized-concept.\nAsset type: an original high-resolution pixel-art character sprite for a classic game's HD display layer.\nInput image1 is a PRIVATE ORIGINAL GAME sprite reference. It is the authority for composition, silhouette, proportions, facial traits, pose, costume, accessories, palette and all cropped edges. Bright magenta marks unused native pixels and is not a real color of the figure. Input image2 is the USER-APPROVED fine pixel-art style reference, only for deliberate small pixel clusters, restrained material shading and crafted detail. Do not reproduce its buildings, terrain, scenery or layout.\nSubject and exact composition: Front-facing dark-haired naval officer with heavy mutton-chop sideburns, navy blue double-breasted high-collar uniform, red shoulder panels with gold fringed epaulettes, round gold buttons and medals including a small purple ribbon. The upper body occupies the upper and middle right of the canvas. Preserve the resting hand near the lower-right edge of the main torso. Crucially preserve the second small disconnected hand/thumb component at the extreme LOWER-LEFT of the canvas, around x0–9 of75 and y79–91 of91; the original sprite mask uses that separate hand. Do not omit, relocate or connect it with a new forearm. Keep the original face proportions, gaze, shoulder widths and cropped waist; no hat or legs.\nCreate fresh original refined pixel art rather than enlarging, filtering or copying the old pixel grid. Preserve the native reference's subject and framing; do not redesign clothing or correct it to another historical period. Use intentional compact pixel clusters and sharp readable facial, cloth, leather, wood and metal detail, with the restrained natural palette of image1 and the crafted finish of image2. No painterly brushwork, blur, photographic or 3D rendering, smooth vector contours, glossy surfaces, heavy gradients, oversized blocks, UI boxes, text, captions or watermark.\nCanvas: keep exactly image1's aspect ratio and all subject placements, with no extra outer margin. Match the native sprite's complete set of visible body/hand/accessory components, including separated parts. The output must be FULLY OPAQUE. Fill unused magenta areas with a flat very dark neutral brown, never magenta; the original game's separate exact native alpha mask will remove that area at runtime. Do not create a new transparent cutout, drop native components, reframe, recenter, mirror, crop, or add any scene. Aim for clear fine pixel work when sampled at four times the native sprite size.",
+          "raw_sha256": "4eb7b99e24ff63edfd696966100cb235b4f3ad6bc5e932c35cd041373c515f0a",
+          "selected": true
+        }
+      ],
+      "reference_sha256": {
+        "native": "979979c8e76726e1ccf1403902bf7d22c17257950b742897a45b34b5644049f8",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "MSS0.SS": "8966f5680e2281ce2f3311e25199b7984d5fac1c4d9361ac21cfa08011b4b8a4",
+        "encoded_frame_sha256": "0b4de9a757f456cfbd0822aaacec8f88e64d8656f77ab8e540250f1989c1cb49",
+        "indexed_frame_sha256": "059acfd4c72e29ae4c29833fbb87fbae9230a26df2640cbfa4119ac492d6a85c"
+      },
+      "source_encoded_length": 3431,
+      "source_opaque_cells": 3306,
+      "source_write_sha256": "def0e684fe771efa6a50655173d2a783a2704d3c637adcb26c6232c4d94c01d2",
+      "source_palette": {
+        "projection_sha256": "c864b6e522b19d7325b5fcba0fe101684f689b553ff9e308188b7f273aac1adb",
+        "indices": "sorted original used indices excluding transparency253"
+      },
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "8430d1e78767559deb4eb64818fc41bac7601a7bbb360b9421c431da83d976bc",
+        "formal_GUI_conformance": "tracked separately by spec069 R98 and formal source catalog"
+      }
+    },
+    "mss1-000.png": {
+      "sha256": "df8102fb1c85913fd5f9e6d59aad2e6810c28082e8211620832347f77c1385e3",
+      "bytes": 1348463,
+      "size": [
+        903,
+        1742
+      ],
+      "mode": "RGB",
+      "target_size": [
+        288,
+        556
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "raw RGB preserved; verified original transparency index253 defines exact native display mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "source_research_id": 1061,
+      "native_ordinal": 0,
+      "native_size": [
+        72,
+        139
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        72,
+        139
+      ],
+      "sample_rect": [
+        0,
+        0,
+        903,
+        1742
+      ],
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: an original high-resolution pixel-art character sprite for a classic game's HD display layer.\nInput image1 is a PRIVATE ORIGINAL GAME sprite reference. It is the authority for composition, silhouette, proportions, facial traits, pose, costume, accessories, palette and all cropped edges. Bright magenta marks unused native pixels and is not a real color of the figure. Input image2 is the USER-APPROVED fine pixel-art style reference, only for deliberate small pixel clusters, restrained material shading and crafted detail. Do not reproduce its buildings, terrain, scenery or layout.\nSubject and exact composition: Front-facing gray-haired man in a wide black tricorn hat, navy blue coat, brown waistcoat, white shirt and white neckcloth. His screen-left hand rests near the lower left of the torso. His screen-right hand grips one long upright flintlock musket near the right edge. The gun rises past the hat to the top edge and its large wooden stock extends far below the cropped waist all the way to the bottom of the tall canvas. Match the full gun length, angle, hand positions, hat width and every original crop. Do not add legs, a second weapon or a lower body.\nCreate fresh original refined pixel art rather than enlarging, filtering or copying the old pixel grid. Preserve the native reference's subject and framing; do not redesign clothing or correct it to another historical period. Use intentional compact pixel clusters and sharp readable facial, cloth, leather, wood and metal detail, with the restrained natural palette of image1 and the crafted finish of image2. No painterly brushwork, blur, photographic or 3D rendering, smooth vector contours, glossy surfaces, heavy gradients, oversized blocks, UI boxes, text, captions or watermark.\nCanvas: keep exactly image1's aspect ratio and all subject placements, with no extra outer margin. Match the native sprite's complete set of visible body/hand/accessory components, including separated parts. The output must be FULLY OPAQUE. Fill unused magenta areas with a flat very dark neutral brown, never magenta; the original game's separate exact native alpha mask will remove that area at runtime. Do not create a new transparent cutout, drop native components, reframe, recenter, mirror, crop, or add any scene. Aim for clear fine pixel work when sampled at four times the native sprite size.",
+      "generation_history": [
+        {
+          "tool": "built-in image_gen",
+          "prompt": "Use case: stylized-concept.\nAsset type: an original high-resolution pixel-art character sprite for a classic game's HD display layer.\nInput image1 is a PRIVATE ORIGINAL GAME sprite reference. It is the authority for composition, silhouette, proportions, facial traits, pose, costume, accessories, palette and all cropped edges. Bright magenta marks unused native pixels and is not a real color of the figure. Input image2 is the USER-APPROVED fine pixel-art style reference, only for deliberate small pixel clusters, restrained material shading and crafted detail. Do not reproduce its buildings, terrain, scenery or layout.\nSubject and exact composition: Front-facing gray-haired man in a wide black tricorn hat, navy blue coat, brown waistcoat, white shirt and white neckcloth. His screen-left hand rests near the lower left of the torso. His screen-right hand grips one long upright flintlock musket near the right edge. The gun rises past the hat to the top edge and its large wooden stock extends far below the cropped waist all the way to the bottom of the tall canvas. Match the full gun length, angle, hand positions, hat width and every original crop. Do not add legs, a second weapon or a lower body.\nCreate fresh original refined pixel art rather than enlarging, filtering or copying the old pixel grid. Preserve the native reference's subject and framing; do not redesign clothing or correct it to another historical period. Use intentional compact pixel clusters and sharp readable facial, cloth, leather, wood and metal detail, with the restrained natural palette of image1 and the crafted finish of image2. No painterly brushwork, blur, photographic or 3D rendering, smooth vector contours, glossy surfaces, heavy gradients, oversized blocks, UI boxes, text, captions or watermark.\nCanvas: keep exactly image1's aspect ratio and all subject placements, with no extra outer margin. Match the native sprite's complete set of visible body/hand/accessory components, including separated parts. The output must be FULLY OPAQUE. Fill unused magenta areas with a flat very dark neutral brown, never magenta; the original game's separate exact native alpha mask will remove that area at runtime. Do not create a new transparent cutout, drop native components, reframe, recenter, mirror, crop, or add any scene. Aim for clear fine pixel work when sampled at four times the native sprite size.",
+          "raw_sha256": "df8102fb1c85913fd5f9e6d59aad2e6810c28082e8211620832347f77c1385e3",
+          "selected": true
+        }
+      ],
+      "reference_sha256": {
+        "native": "c1f677a43df8cc225a36e46016c847f149b0078ed68044d7832c3fade76ae49a",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "MSS1.SS": "7b580f7ebda2e03d34ca88c19942f6fd3707d044fceed2f8626e66aac62da6ea",
+        "encoded_frame_sha256": "3936c6b05d81d16037e982e419e683d9e0ca8b79929140a98f18d6ca1cd60a03",
+        "indexed_frame_sha256": "a4d1f220e5546fa434047c7bec19b98656a3484d5c9fcc922771c0ee7bdcfa2f"
+      },
+      "source_encoded_length": 4792,
+      "source_opaque_cells": 4429,
+      "source_write_sha256": "632d622a1cbf1d1cc1ae7466670b043dc94852f9f215b41b03cdf4e1a9c12d9d",
+      "source_palette": {
+        "projection_sha256": "e0851c597df120bc01ff1b550f84ada1f165c69902beb2673b4bc8d3a75248b9",
+        "indices": "sorted original used indices excluding transparency253"
+      },
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "8430d1e78767559deb4eb64818fc41bac7601a7bbb360b9421c431da83d976bc",
+        "formal_GUI_conformance": "tracked separately by spec069 R98 and formal source catalog"
+      }
+    },
+    "mss3-000.png": {
+      "sha256": "4baaf1bbbb33d582244cd1d32151fcc0d43990686997d71016c263ac337d25a5",
+      "bytes": 1412219,
+      "size": [
+        1572,
+        1001
+      ],
+      "mode": "RGB",
+      "target_size": [
+        596,
+        380
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "raw RGB preserved; verified original transparency index253 defines exact native display mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "source_research_id": 1063,
+      "native_ordinal": 0,
+      "native_size": [
+        149,
+        95
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        149,
+        95
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1572,
+        1001
+      ],
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: an original high-resolution pixel-art character sprite for a classic game's HD display layer.\nInput image1 is a PRIVATE ORIGINAL GAME sprite reference. It is the authority for composition, silhouette, proportions, facial traits, pose, costume, accessories, palette and all cropped edges. Bright magenta marks unused native pixels and is not a real color of the figure. Input image2 is the USER-APPROVED fine pixel-art style reference, only for deliberate small pixel clusters, restrained material shading and crafted detail. Do not reproduce its buildings, terrain, scenery or layout.\nSubject and exact composition: Bearded frontiersman shown from waist up, facing and looking toward screen-left. Broad brown hat, brown fringed buckskin coat. His raised screen-left hand shades his eyes, elbow extended toward the left. His other hand holds one long flintlock musket diagonally across the lower canvas: the metal barrel leaves the left edge around60 percent down, and the brown wooden stock extends to the lower-right corner. Preserve the wide149:95 silhouette, gun line, curved raised arm, turned face, torso crop and exact stance. Do not mirror the figure, lower the raised arm, add legs, or invent scenery.\nCreate fresh original refined pixel art rather than enlarging, filtering or copying the old pixel grid. Preserve the native reference's subject and framing; do not redesign clothing or correct it to another historical period. Use intentional compact pixel clusters and sharp readable facial, cloth, leather, wood and metal detail, with the restrained natural palette of image1 and the crafted finish of image2. No painterly brushwork, blur, photographic or 3D rendering, smooth vector contours, glossy surfaces, heavy gradients, oversized blocks, UI boxes, text, captions or watermark.\nCanvas: keep exactly image1's aspect ratio and all subject placements, with no extra outer margin. Match the native sprite's complete set of visible body/hand/accessory components, including separated parts. The output must be FULLY OPAQUE. Fill unused magenta areas with a flat very dark neutral brown, never magenta; the original game's separate exact native alpha mask will remove that area at runtime. Do not create a new transparent cutout, drop native components, reframe, recenter, mirror, crop, or add any scene. Aim for clear fine pixel work when sampled at four times the native sprite size.",
+      "generation_history": [
+        {
+          "tool": "built-in image_gen",
+          "prompt": "Use case: stylized-concept.\nAsset type: an original high-resolution pixel-art character sprite for a classic game's HD display layer.\nInput image1 is a PRIVATE ORIGINAL GAME sprite reference. It is the authority for composition, silhouette, proportions, facial traits, pose, costume, accessories, palette and all cropped edges. Bright magenta marks unused native pixels and is not a real color of the figure. Input image2 is the USER-APPROVED fine pixel-art style reference, only for deliberate small pixel clusters, restrained material shading and crafted detail. Do not reproduce its buildings, terrain, scenery or layout.\nSubject and exact composition: Bearded frontiersman shown from waist up, facing and looking toward screen-left. Broad brown hat, brown fringed buckskin coat. His raised screen-left hand shades his eyes, elbow extended toward the left. His other hand holds one long flintlock musket diagonally across the lower canvas: the metal barrel leaves the left edge around60 percent down, and the brown wooden stock extends to the lower-right corner. Preserve the wide149:95 silhouette, gun line, curved raised arm, turned face, torso crop and exact stance. Do not mirror the figure, lower the raised arm, add legs, or invent scenery.\nCreate fresh original refined pixel art rather than enlarging, filtering or copying the old pixel grid. Preserve the native reference's subject and framing; do not redesign clothing or correct it to another historical period. Use intentional compact pixel clusters and sharp readable facial, cloth, leather, wood and metal detail, with the restrained natural palette of image1 and the crafted finish of image2. No painterly brushwork, blur, photographic or 3D rendering, smooth vector contours, glossy surfaces, heavy gradients, oversized blocks, UI boxes, text, captions or watermark.\nCanvas: keep exactly image1's aspect ratio and all subject placements, with no extra outer margin. Match the native sprite's complete set of visible body/hand/accessory components, including separated parts. The output must be FULLY OPAQUE. Fill unused magenta areas with a flat very dark neutral brown, never magenta; the original game's separate exact native alpha mask will remove that area at runtime. Do not create a new transparent cutout, drop native components, reframe, recenter, mirror, crop, or add any scene. Aim for clear fine pixel work when sampled at four times the native sprite size.",
+          "raw_sha256": "4baaf1bbbb33d582244cd1d32151fcc0d43990686997d71016c263ac337d25a5",
+          "selected": true
+        }
+      ],
+      "reference_sha256": {
+        "native": "4b45ededa05085469370cf9e893d8c9dee37ee26132734548e30a3522608bb68",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "MSS3.SS": "10fc6aa8b8f14eb1d1aea35b5bc9addd84cc2b55829d97d2294e7dcff21793ce",
+        "encoded_frame_sha256": "2e2b5e2a5d2609c7fc01dc7159fe865302e026bf89346ac2e54e3086ad43ef28",
+        "indexed_frame_sha256": "517056bdfc240ec25cb2e9ced2e5a532e39900c5f18913358cb3e7a81d4483cf"
+      },
+      "source_encoded_length": 5890,
+      "source_opaque_cells": 5910,
+      "source_write_sha256": "18aa5867d7460aee6df48afb47723ed0d9c6d9a5d8f045046aa4831d8f57bdb0",
+      "source_palette": {
+        "projection_sha256": "2f2673433a2fa61519aa4ffb26f8db4d9270340ebb3eb3193f2c4c7fabdb81bd",
+        "indices": "sorted original used indices excluding transparency253"
+      },
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "8430d1e78767559deb4eb64818fc41bac7601a7bbb360b9421c431da83d976bc",
+        "formal_GUI_conformance": "tracked separately by spec069 R98 and formal source catalog"
+      }
+    },
+    "mss4-000.png": {
+      "sha256": "bccf173205bb238826ddd1f3320f73833bcef8d29d39c6ff57098567dad7bb24",
+      "bytes": 1286625,
+      "size": [
+        1575,
+        998
+      ],
+      "mode": "RGB",
+      "target_size": [
+        372,
+        236
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "raw RGB preserved; verified original transparency index253 defines exact native display mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "source_research_id": 1064,
+      "native_ordinal": 0,
+      "native_size": [
+        93,
+        59
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        93,
+        59
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1575,
+        998
+      ],
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: an original high-resolution pixel-art character sprite for a classic game's HD display layer.\nInput image1 is a PRIVATE ORIGINAL GAME sprite reference. It is the authority for composition, silhouette, proportions, facial traits, pose, costume, accessories, palette and all cropped edges. Bright magenta marks unused native pixels and is not a real color of the figure. Input image2 is the USER-APPROVED fine pixel-art style reference, only for deliberate small pixel clusters, restrained material shading and crafted detail. Do not reproduce its buildings, terrain, scenery or layout.\nSubject and exact composition: Wide bust portrait of a man in an extremely broad dark charcoal hat whose brim spans almost the full width. Preserve his dark hair, thin moustache and small goatee, calm sidelong expression, gray-blue coat with small gold buttons, a blue beaded necklace with a small gold pendant, and the visible resting hand at the lower-left of the body. The figure ends at the cropped chest/waist just below the bottom edge. Keep the hat brim's original span, head placement and hand position. No gun, full body, added symbols, scenery or change of costume.\nCreate fresh original refined pixel art rather than enlarging, filtering or copying the old pixel grid. Preserve the native reference's subject and framing; do not redesign clothing or correct it to another historical period. Use intentional compact pixel clusters and sharp readable facial, cloth, leather, wood and metal detail, with the restrained natural palette of image1 and the crafted finish of image2. No painterly brushwork, blur, photographic or 3D rendering, smooth vector contours, glossy surfaces, heavy gradients, oversized blocks, UI boxes, text, captions or watermark.\nCanvas: keep exactly image1's aspect ratio and all subject placements, with no extra outer margin. Match the native sprite's complete set of visible body/hand/accessory components, including separated parts. The output must be FULLY OPAQUE. Fill unused magenta areas with a flat very dark neutral brown, never magenta; the original game's separate exact native alpha mask will remove that area at runtime. Do not create a new transparent cutout, drop native components, reframe, recenter, mirror, crop, or add any scene. Aim for clear fine pixel work when sampled at four times the native sprite size.",
+      "generation_history": [
+        {
+          "tool": "built-in image_gen",
+          "prompt": "Use case: stylized-concept.\nAsset type: an original high-resolution pixel-art character sprite for a classic game's HD display layer.\nInput image1 is a PRIVATE ORIGINAL GAME sprite reference. It is the authority for composition, silhouette, proportions, facial traits, pose, costume, accessories, palette and all cropped edges. Bright magenta marks unused native pixels and is not a real color of the figure. Input image2 is the USER-APPROVED fine pixel-art style reference, only for deliberate small pixel clusters, restrained material shading and crafted detail. Do not reproduce its buildings, terrain, scenery or layout.\nSubject and exact composition: Wide bust portrait of a man in an extremely broad dark charcoal hat whose brim spans almost the full width. Preserve his dark hair, thin moustache and small goatee, calm sidelong expression, gray-blue coat with small gold buttons, a blue beaded necklace with a small gold pendant, and the visible resting hand at the lower-left of the body. The figure ends at the cropped chest/waist just below the bottom edge. Keep the hat brim's original span, head placement and hand position. No gun, full body, added symbols, scenery or change of costume.\nCreate fresh original refined pixel art rather than enlarging, filtering or copying the old pixel grid. Preserve the native reference's subject and framing; do not redesign clothing or correct it to another historical period. Use intentional compact pixel clusters and sharp readable facial, cloth, leather, wood and metal detail, with the restrained natural palette of image1 and the crafted finish of image2. No painterly brushwork, blur, photographic or 3D rendering, smooth vector contours, glossy surfaces, heavy gradients, oversized blocks, UI boxes, text, captions or watermark.\nCanvas: keep exactly image1's aspect ratio and all subject placements, with no extra outer margin. Match the native sprite's complete set of visible body/hand/accessory components, including separated parts. The output must be FULLY OPAQUE. Fill unused magenta areas with a flat very dark neutral brown, never magenta; the original game's separate exact native alpha mask will remove that area at runtime. Do not create a new transparent cutout, drop native components, reframe, recenter, mirror, crop, or add any scene. Aim for clear fine pixel work when sampled at four times the native sprite size.",
+          "raw_sha256": "bccf173205bb238826ddd1f3320f73833bcef8d29d39c6ff57098567dad7bb24",
+          "selected": true
+        }
+      ],
+      "reference_sha256": {
+        "native": "9816e5edb9afca2d153692b477b8b409234967586bd178506b64fb549a40e957",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "MSS4.SS": "5b98c7885ecdad364ee77b82fb83e7a6d60ba973f7736f1aaa89af73d88ac1de",
+        "encoded_frame_sha256": "07e622d6732b1c8084de1f905a37b08a686a2cdc65b77a5d12dc2f95bb4bb0d2",
+        "indexed_frame_sha256": "fb0e343889e92f8e7c0be2b260008de4977c34851264ab288cc610739e529387"
+      },
+      "source_encoded_length": 2515,
+      "source_opaque_cells": 2883,
+      "source_write_sha256": "7a3921239ad743929f538eb4d0049c1ce03448939e9a385a2fad0008cfb5d657",
+      "source_palette": {
+        "projection_sha256": "c1ff188179257c2f123aef65481c21794e901a79e781acbea6e06cee308cffc7",
+        "indices": "sorted original used indices excluding transparency253"
+      },
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "8430d1e78767559deb4eb64818fc41bac7601a7bbb360b9421c431da83d976bc",
+        "formal_GUI_conformance": "tracked separately by spec069 R98 and formal source catalog"
+      }
     }
   }
 }

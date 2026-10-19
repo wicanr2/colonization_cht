@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	golem "github.com/wicanr2/dosgolem"
 	"image"
@@ -16,11 +17,11 @@ func TestHDEventResources(t *testing.T) {
 	if game == "" || assets == "" {
 		t.Skip("需要合法原版與隔離HD原圖")
 	}
-	t.Run("all30-scenes", func(t *testing.T) {
+	t.Run("all34-scenes", func(t *testing.T) {
 		m := golem.New()
 		before := append([]byte(nil), m.Mem...)
 		p, e := loadHDSceneRuntime(&hdRuntime{m: m}, game, assets)
-		if e != nil || p == nil || len(p.frames) != 30 {
+		if e != nil || p == nil || len(p.frames) != 34 {
 			t.Fatal("full scene load", e)
 		}
 		if !bytes.Equal(before, m.Mem) {
@@ -35,8 +36,8 @@ func TestHDEventResources(t *testing.T) {
 				}
 			}
 		}
-		if sprites != 7 {
-			t.Fatal("seven new scenes", sprites)
+		if sprites != 11 {
+			t.Fatal("eleven verified D46 scenes", sprites)
 		}
 	})
 	original := append([]hdSceneDefinition(nil), hdSceneDefinitions...)
@@ -184,7 +185,7 @@ func TestHDEventPaletteProjection(t *testing.T) {
 	if root == "" {
 		t.Skip("需要當次原版色盤")
 	}
-	for _, rid := range []int{1070, 1071, 1072, 1489, 1491, 1495, 1549} {
+	for _, rid := range []int{1060, 1061, 1063, 1064, 1070, 1071, 1072, 1489, 1491, 1495, 1549} {
 		t.Run(fmt.Sprint(rid), func(t *testing.T) {
 			_, p, _ := hdEventFixtureLoad(t, rid, "")
 			hdEventRun(t, p.h.m, p)
@@ -196,6 +197,38 @@ func TestHDEventPaletteProjection(t *testing.T) {
 				step = 907005001
 			}
 			palette, e := os.ReadFile(filepath.Join(root, "r97-full-normal-r3/observed", fmt.Sprintf("cp-%d.palette", step)))
+			if rid >= 1060 && rid <= 1064 {
+				dialogRoot := os.Getenv("TEST_HD_DIALOG_ROOT")
+				if dialogRoot == "" {
+					t.Fatal("explicit original MSS call receipt required")
+				}
+				raw, readErr := os.ReadFile(filepath.Join(dialogRoot, "r98-full-normal-original-r1/observed/r98-full-complete-calls.json"))
+				if readErr != nil {
+					t.Fatal(readErr)
+				}
+				if hash(raw) != "9cfe62a997185fa69a67c84726addc087cc4beda7527654634739c02e1471228" {
+					t.Fatal("original MSS palette receipt fingerprint")
+				}
+				var calls []struct {
+					ID      int    `json:"research_id"`
+					Palette []byte `json:"entry_palette"`
+				}
+				if err := json.Unmarshal(raw, &calls); err != nil {
+					t.Fatal(err)
+				}
+				palette = nil
+				for _, call := range calls {
+					if call.ID == rid {
+						palette = call.Palette
+						break
+					}
+				}
+				if len(palette) != 768 {
+					t.Fatal("original MSS used palette absent", rid)
+				}
+				e = nil
+			}
+
 			if e != nil {
 				t.Fatal(e)
 			}
@@ -219,5 +252,38 @@ func TestHDEventPaletteProjection(t *testing.T) {
 				t.Fatal("unused transparent palette index affected source")
 			}
 		})
+	}
+}
+
+// 規格069 R98 READY。實際取樣與獨立Pillow逐RGBA比較。
+func TestHDMSSFullProjectLoader(t *testing.T) {
+	game, assets, output := os.Getenv("TEST_GAME_ROOT"), os.Getenv("TEST_HD_EVENT_ASSETS"), os.Getenv("TEST_HD_MSS_PIXELS")
+	if game == "" || assets == "" || output == "" {
+		t.Skip("需要合法原版、正式素材與明確輸出目錄")
+	}
+	h, err := loadHDRuntime(golem.New(), game, assets)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if h.scenes == nil || len(h.scenes.frames) != 34 {
+		t.Fatal("four new sources and thirty inherited sources required")
+	}
+	seen := 0
+	for _, f := range h.scenes.frames {
+		if f.id != 1060 && f.id != 1061 && f.id != 1063 && f.id != 1064 {
+			continue
+		}
+		w, height := f.sprite.width*4, f.sprite.height*4
+		pixels := make([]byte, 0, w*height*4)
+		for y := 0; y < height; y++ {
+			pixels = append(pixels, f.art.Pix[y*f.art.Stride:y*f.art.Stride+w*4]...)
+		}
+		if err := os.WriteFile(filepath.Join(output, fmt.Sprintf("mss-%d.rgba", f.id)), pixels, 0644); err != nil {
+			t.Fatal(err)
+		}
+		seen++
+	}
+	if seen != 4 {
+		t.Fatal("missing verified MSS sources", seen)
 	}
 }

@@ -32,6 +32,9 @@ func hdEventFixtureLoad(t *testing.T, rid int, mode string) (*golem.Machine, *hd
 		t.Skip("需要合法原版完整 D46 繪製收據")
 	}
 	name := fmt.Sprintf("r97-decoder-%d-2cae0.json", rid)
+	if rid >= 1060 && rid <= 1065 {
+		name = fmt.Sprintf("r98-decoder-%d-2cae0.json", rid)
+	}
 	metadata, e := os.ReadFile(filepath.Join(root, name))
 	if e != nil {
 		t.Fatal(e)
@@ -141,7 +144,7 @@ func hdEventRun(t *testing.T, m *golem.Machine, p *hdSceneRuntime) {
 	t.Fatal("decoder bound")
 }
 func TestHDEventOriginalDecoder(t *testing.T) {
-	for _, rid := range []int{1070, 1071, 1072, 1489, 1491, 1495, 1549} {
+	for _, rid := range []int{1060, 1061, 1063, 1064, 1070, 1071, 1072, 1489, 1491, 1495, 1549} {
 		t.Run(fmt.Sprint(rid), func(t *testing.T) {
 			t.Run("actual-original", func(t *testing.T) {
 				m, p, _ := hdEventFixtureLoad(t, rid, "")
@@ -292,6 +295,10 @@ func TestHDEventUnknownWriteRevokes(t *testing.T) {
 }
 
 var hdEventFixtureSHAs = map[string][2]string{
+	"r98-decoder-1060-2cae0.json": {"2bb68400a25c5b79b535f2a8b204d864e7a73790cb0e4c047012c95c2f559f7a", "e046894abcf882f62df2648ba1cd746f219e556d57e037b09250a53028b5fabf"},
+	"r98-decoder-1061-2cae0.json": {"67d7aace50a4970b19da7cc5b7eff735a19a58cc040eb79f27326bbfa55e5224", "c9641faf0d330dda0b2eae4250ac3463dceb06ccc27c2c965be1a740a7d65984"},
+	"r98-decoder-1063-2cae0.json": {"99a19e754350f832dd80f236fec06261295613ff98524ea596bf9a6f2d49d4a1", "6a4093978da549632b0cb131f1d04b1be01ca18d53496dafae7fad274befd8aa"},
+	"r98-decoder-1064-2cae0.json": {"c7b81d58e766b5796a50390fd5c8bf612fddd650372cd913193754a8fdf00a0b", "81ce20ecaa105a2683195b39e1afd573631e2bd2583da99c6b209847eeaeea1b"},
 	"r97-decoder-1070-2cae0.json": {"61026b06aa7a7e35261a2ba4c1b43f7fbe5090fd4a149159418045415bfefa06", "c5445c7bc1bcb9c5a19811f309944a82f400787ba98cd111db1efc9eee0a3110"},
 	"r97-decoder-1071-2cae0.json": {"752fbb7fb823d647106dd715b41b783d17231a9b250631c6ff95552040ea8be4", "be6a917ee2bd7b5de2fed8f360abd1b870bb40c90ad9f864ccbc2626b3b25991"},
 	"r97-decoder-1072-2cae0.json": {"fba1451c73d7e9babfddf8d0ea0e96be96e284c5ee3dc0dd01faad5640bd4dec", "b2adc800d2253d27726d54b3f49e53c8a0cf598ae579e1df2e6b2d0a719a98d8"},
@@ -302,7 +309,7 @@ var hdEventFixtureSHAs = map[string][2]string{
 }
 
 func TestHDEventIRQStackWrites(t *testing.T) {
-	for _, rid := range []int{1070, 1071, 1072, 1489, 1491, 1495, 1549} {
+	for _, rid := range []int{1060, 1061, 1063, 1064, 1070, 1071, 1072, 1489, 1491, 1495, 1549} {
 		t.Run(fmt.Sprint(rid), func(t *testing.T) {
 			m, p, _ := hdEventFixtureLoad(t, rid, "irq-stack")
 			hdEventRun(t, m, p)
