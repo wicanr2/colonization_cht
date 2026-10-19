@@ -333,7 +333,7 @@ func TestHDSmallRuntimeNativeLifecycle(t *testing.T) {
 	h, err := loadHDRuntime(m, game, assets)
 	need(err)
 
-	if h.small == nil || len(h.small.frames) != 84 || hash(m.Mem) != before {
+	if h.small == nil || len(h.small.frames) != 85 || hash(m.Mem) != before {
 		t.Fatal("小圖像載入失敗或改寫DOS")
 	}
 	p := h.small
@@ -660,7 +660,7 @@ func TestHDSmallResourceContract(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(p.frames) != 84 || !bytes.Equal(before, m.Mem) {
+	if len(p.frames) != 85 || !bytes.Equal(before, m.Mem) {
 		t.Fatal("素材載入來源或原版記憶體不同")
 	}
 	available := map[int]bool{}
@@ -669,8 +669,8 @@ func TestHDSmallResourceContract(t *testing.T) {
 			available[f.ordinal] = true
 		}
 	}
-	wantedAvailable := []int{5, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 42, 53, 56, 59, 62, 67, 68, 69, 94, 122, 123, 124, 6, 7, 14, 15, 127, 8, 9, 16, 58, 60, 66, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 95, 96, 97, 98, 106, 107, 65, 73, 74, 75, 76, 77, 101, 102, 103, 104, 105, 109, 110, 111, 112, 125, 126, 128, 129}
-	if len(available) != 79 {
+	wantedAvailable := []int{113, 54, 3, 11, 118, 5, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 42, 53, 56, 59, 62, 67, 68, 69, 94, 122, 123, 124, 6, 7, 14, 15, 127, 8, 9, 16, 58, 60, 66, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 95, 96, 97, 98, 106, 107, 65, 73, 74, 75, 76, 77, 101, 102, 103, 104, 105, 109, 110, 111, 112, 125, 126, 128, 129}
+	if len(available) != 84 {
 		t.Fatal("小圖像素材集合不同", available)
 	}
 	for _, ordinal := range wantedAvailable {
@@ -927,7 +927,7 @@ func hdSmallNativeLifecycle(t *testing.T, fixture hdSmallNativeFixture) {
 	h, err := loadHDRuntime(m, game, assets)
 	need(err)
 
-	if h.small == nil || len(h.small.frames) != 84 || hash(m.Mem) != before {
+	if h.small == nil || len(h.small.frames) != 85 || hash(m.Mem) != before {
 		t.Fatal("小圖像載入失敗或改寫DOS")
 	}
 	p := h.small
@@ -1555,7 +1555,7 @@ func TestHDScaledSmallResources(t *testing.T) {
 			need(os.WriteFile(filepath.Join(a, f.file), read(filepath.Join(assets, f.file)), 0644))
 		}
 	}
-	if len(hdSmallFrames) != 84 || len(names) != 83 {
+	if len(hdSmallFrames) != 85 || len(names) != 84 {
 		t.Fatal("all83 art plus person100")
 	}
 	h := &hdRuntime{m: golem.New()}
@@ -1564,7 +1564,7 @@ func TestHDScaledSmallResources(t *testing.T) {
 		t.Helper()
 		p, e := loadHDSmallRuntime(h, g, a)
 		need(e)
-		if len(p.frames) != 84 {
+		if len(p.frames) != 85 {
 			t.Fatal("positive full loader")
 		}
 	}
@@ -1649,7 +1649,7 @@ func hdSmallHistorical80Fixture(t *testing.T, p *hdSmallRuntime) {
 	t.Helper()
 	frames := []hdSmallFrame{}
 	for _, f := range p.frames {
-		if !f.scaled100 && f.ordinal != 54 {
+		if !f.scaled100 && f.ordinal != 54 && f.ordinal != 113 {
 			frames = append(frames, f)
 		}
 	}
@@ -1657,4 +1657,206 @@ func hdSmallHistorical80Fixture(t *testing.T, p *hdSmallRuntime) {
 		t.Fatal("歷史80來源群組不同", len(frames))
 	}
 	p.frames = frames
+}
+
+// 規格065 R99 READY：實際顧問頁fixture、原圖與色盤守門。
+func r99Load(t *testing.T, path string) []byte {
+	t.Helper()
+	b, e := os.ReadFile(path)
+	if e != nil {
+		t.Fatal(e)
+	}
+	return b
+}
+func r99Frame(t *testing.T) hdSmallFrame {
+	for _, f := range hdSmallFrames {
+		if f.ordinal == 113 {
+			return f
+		}
+	}
+	t.Fatal("missing113")
+	return hdSmallFrame{}
+}
+func r99Small(t *testing.T, m *golem.Machine, dir string) *hdSmallRuntime {
+	t.Helper()
+	old := hdSmallFrames
+	hdSmallFrames = []hdSmallFrame{r99Frame(t)}
+	defer func() { hdSmallFrames = old }()
+	h := &hdRuntime{m: m}
+	p, e := loadHDSmallRuntime(h, os.Getenv("TEST_GAME_ROOT"), dir)
+	if e != nil {
+		t.Fatal(e)
+	}
+	h.small = p
+	return p
+}
+func TestR99HeadCPUFixture(t *testing.T) {
+	if os.Getenv("TEST_R99_ROOT") == "" {
+		t.Skip("缺少本機原版顧問頁收據")
+	}
+	root := os.Getenv("TEST_R99_ROOT")
+	fix := filepath.Join(root, "r99-indian-observed-r3")
+	var meta struct {
+		Entry struct {
+			Registers [8]uint16 `json:"registers"`
+			Segments  [4]uint16 `json:"segments"`
+			Step      uint64    `json:"entry_step"`
+		} `json:"entry"`
+		Flags  uint16 `json:"flags"`
+		Cycles uint64 `json:"cycles"`
+		Memory string `json:"memory_sha256"`
+	}
+	if e := json.Unmarshal(r99Load(t, filepath.Join(fix, "r98-decoder-940-2cae0.json")), &meta); e != nil {
+		t.Fatal(e)
+	}
+	m := golem.New()
+	raw := r99Load(t, filepath.Join(fix, "r98-decoder-940-2cae0.memory"))
+	if hash(raw) != meta.Memory {
+		t.Fatal("fixture hash")
+	}
+	copy(m.Mem, raw)
+	m.CPU.R, m.CPU.Seg, m.CPU.IP, m.CPU.Flags, m.CPU.Cycles = meta.Entry.Registers, meta.Entry.Segments, 0xa, meta.Flags, meta.Cycles
+	m.Steps = meta.Entry.Step
+	before := hash(m.Mem)
+	p := r99Small(t, m, filepath.Join(root, "r99-head-prototype-assets-r1"))
+	if hash(m.Mem) != before {
+		t.Fatal("loader changed RAM")
+	}
+	p.beforeInstruction()
+	if !p.active {
+		t.Fatal("entry refused")
+	}
+	entryCases := hdSmallEntryNegatives(t, p)
+	writerDone := false
+	steps := 0
+	for ; steps < 100000 && p.accepted == 0; steps++ {
+		if steps > 0 {
+			p.beforeInstruction()
+		}
+		if p.accepted > 0 {
+			break
+		}
+		if !writerDone && m.CPU.Seg[golem.CS] == 0xd46 && hdSmallWriterCodes[m.CPU.IP] != nil {
+			hdSmallWriterNegative(t, p)
+			writerDone = true
+		}
+		if e := m.CPU.Step(); e != nil {
+			t.Fatal(e)
+		}
+		m.Steps++
+	}
+	if p.accepted != 1 || p.rejected != 0 || !writerDone {
+		t.Fatal("CPU draw not accepted", p.accepted, p.rejected)
+	}
+	finishCases := hdSmallFinishNegatives(t, p)
+	owned := 0
+	for _, c := range p.visible {
+		if c.owned {
+			owned++
+		}
+	}
+	if owned != 226 {
+		t.Fatal("source count", owned)
+	}
+	mem := r99Load(t, filepath.Join(root, "r99-indian-advisor-observed-r1/final.memory"))
+	idx := r99Load(t, filepath.Join(root, "r99-indian-advisor-observed-r1/final.idx"))
+	pal := r99Load(t, filepath.Join(root, "r99-indian-advisor-observed-r1/final.palette"))
+	frame := draftNativeFrame{canvas: mem[hdBuildingCanvas : hdBuildingCanvas+64000], indexed: idx, palette: pal, mode: 0x13}
+	art := draftRGB(idx, pal)
+	receipt := p.paint(art, frame)
+	out := filepath.Join(root, "r99-head-formal-component-r1.png")
+	f, e := os.Create(out)
+	if e != nil {
+		t.Fatal(e)
+	}
+	e = png.Encode(f, art)
+	f.Close()
+	if e != nil {
+		t.Fatal(e)
+	}
+	for i, c := range p.visible {
+		if c.owned {
+			p.memoryWrite(hdBuildingCanvas+uint32(i), c.native, c.native)
+		}
+	}
+	for _, c := range p.visible {
+		if c.owned {
+			t.Fatal("same-value did not revoke")
+		}
+	}
+	report := map[string]any{"entry_cases": entryCases, "finish_cases": finishCases, "writer_wrong_code": writerDone, "CPU_steps": steps, "accepted": p.accepted, "owned_before": owned, "owned_after_same_value": 0, "receipt": receipt, "partial_fixture_only": true, "no_normal_GUI_credit": true}
+	b, _ := json.MarshalIndent(report, "", "  ")
+	if e := os.WriteFile(filepath.Join(root, "r99-head-formal-fixture-r1.json"), b, 0644); e != nil {
+		t.Fatal(e)
+	}
+}
+func TestR99HeadPalette(t *testing.T) {
+	if os.Getenv("TEST_R99_ROOT") == "" {
+		t.Skip("缺少本機原版顧問頁收據")
+	}
+	root := os.Getenv("TEST_R99_ROOT")
+	pal := r99Load(t, filepath.Join(root, "r99-indian-advisor-observed-r1/final.palette"))
+	f := r99Frame(t)
+	if !f.paletteSupported(pal) {
+		t.Fatal("actual rejected")
+	}
+	for _, i := range f.paletteIndices {
+		t.Run("used-"+string([]byte{'0' + i/100, '0' + i/10%10, '0' + i%10}), func(t *testing.T) {
+			bad := append([]byte(nil), pal...)
+			bad[int(i)*3] ^= 1
+			if f.paletteSupported(bad) {
+				t.Fatal("wrong color accepted")
+			}
+		})
+	}
+	if f.paletteSupported(nil) || f.paletteSupported(pal[:767]) {
+		t.Fatal("short palette")
+	}
+	unused := 0
+	for bytes.Contains(f.paletteIndices, []byte{byte(unused)}) {
+		unused++
+	}
+	changed := append([]byte(nil), pal...)
+	changed[unused*3] ^= 1
+	if !f.paletteSupported(changed) {
+		t.Fatal("unused palette field changed scope")
+	}
+}
+func TestR99HeadResources(t *testing.T) {
+	if os.Getenv("TEST_R99_ROOT") == "" {
+		t.Skip("缺少本機原版顧問頁收據")
+	}
+	root := os.Getenv("TEST_R99_ROOT")
+	f := r99Frame(t)
+	raw := r99Load(t, filepath.Join(root, "r99-head-prototype-assets-r1/icons-113.png"))
+	original := hdSmallFrames
+	hdSmallFrames = []hdSmallFrame{f}
+	defer func() { hdSmallFrames = original }()
+	run := func(t *testing.T, dir string, ok bool) {
+		m := golem.New()
+		before := hash(m.Mem)
+		_, e := loadHDSmallRuntime(&hdRuntime{m: m}, os.Getenv("TEST_GAME_ROOT"), dir)
+		if (e == nil) != ok || hash(m.Mem) != before {
+			t.Fatal("resource guard", e)
+		}
+	}
+	t.Run("valid", func(t *testing.T) { run(t, filepath.Join(root, "r99-head-prototype-assets-r1"), true) })
+	t.Run("missing", func(t *testing.T) { run(t, t.TempDir(), false) })
+	t.Run("changed", func(t *testing.T) {
+		dir := t.TempDir()
+		b := append([]byte(nil), raw...)
+		b[len(b)/2] ^= 1
+		os.WriteFile(filepath.Join(dir, f.file), b, 0644)
+		run(t, dir, false)
+	})
+	t.Run("truncated", func(t *testing.T) {
+		dir := t.TempDir()
+		os.WriteFile(filepath.Join(dir, f.file), raw[:64], 0644)
+		run(t, dir, false)
+	})
+	t.Run("symlink", func(t *testing.T) {
+		dir := t.TempDir()
+		os.Symlink(filepath.Join(root, "r99-head-prototype-assets-r1/icons-113.png"), filepath.Join(dir, f.file))
+		run(t, dir, false)
+	})
 }

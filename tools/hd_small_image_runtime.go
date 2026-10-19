@@ -1,4 +1,4 @@
-// 規格065 R96 READY：84來源共用追蹤；新增003／011／118的100%縮放，既有81來源範圍保持。
+// 規格065 R99 READY：85來源共用追蹤；追加113 Main頭像與專屬色盤，既有84來源保持。
 // 只觀測原版寫入及合成四倍畫布，不寫入DOS。
 package main
 
@@ -14,6 +14,8 @@ import (
 )
 
 type hdSmallFrame struct {
+	paletteSHA                           string
+	paletteIndices                       []byte
 	scaled100                            bool
 	nominal                              [2]uint16
 	bufferSaves, bufferRestores          uint64
@@ -111,6 +113,7 @@ var hdSmallFrames = []hdSmallFrame{
 	{ordinal: 3, w: 21, h: 16, encodedLen: 271, opaque: 176, encodedSHA: "93f047dadde245c823f403712643a6277a4e6850914e60fe597d956e928d5798", writesSHA: "9e1702350e126520268c102c32efae27846e55bbef45e40c7ddedd335da21873", artSHA: "98e35a733d1741b3d14ae7dace783d5eafedf0aff89afae05fe1ede6878a3c5b", file: "icons-003.png", artW: 1437, artH: 1095, sample: [4]int{107, 80, 1362, 1065}, content: [4]int{2, 0, 20, 15}, writers: 7, scaled100: true, nominal: [2]uint16{15, 20}},
 	{ordinal: 11, w: 21, h: 16, encodedLen: 175, opaque: 152, encodedSHA: "2104209ba40bb60e18d20e3b86dd01e8e280b7f7287cde3e2e259553ec326a14", writesSHA: "f5fa908a9476592599d912c7b38134a15902f1ec870323fbb82682fa61957d85", artSHA: "858d4962dba4b24075dca0bc2c3845ef8c0d8af2537bea5137f02554a4060044", file: "icons-011.png", artW: 1437, artH: 1095, sample: [4]int{147, 220, 1302, 935}, content: [4]int{2, 3, 19, 14}, writers: 6, scaled100: true, nominal: [2]uint16{37, 142}},
 	{ordinal: 118, w: 6, h: 5, encodedLen: 30, opaque: 15, encodedSHA: "9e7150813c824ad38e12ddb7924f76fc6fc9d9fed724f63ca1e4162d24664f8f", writesSHA: "0da25d4e0ec7aee32db5e4cae1385985b3b36b690eb6acd2b93b208ca5225fc5", artSHA: "0a447fb0f0381c35b4598aec52daf36bb3f2e4bfea3075500e26c98879d9a22a", file: "icons-118.png", artW: 1374, artH: 1145, sample: [4]int{253, 202, 1120, 934}, content: [4]int{1, 0, 6, 4}, writers: 6, scaled100: true, nominal: [2]uint16{30, 84}},
+	{ordinal: 113, w: 16, h: 16, encodedLen: 247, opaque: 226, encodedSHA: "6986a798dfe12fa00ea605716f038eb282feaab79c3c565efeefa66af107f75f", writesSHA: "6dc354df0cfee9ea5690506d53fceaeefd271840b904f7470a199a3409fcdc4a", artSHA: "7e6c49b20af1e32e3f031775a79e2568ad72e2e7b9086f31e59d365bf1c81a78", file: "icons-113.png", artW: 1254, artH: 1254, sample: [4]int{220, 135, 1100, 1140}, content: [4]int{0, 0, 16, 16}, writers: 7, paletteSHA: "0b1205c4c138976acab792e6bf5458765357acab29a818303ddc0227858c11aa", paletteIndices: []byte{45, 47, 82, 83, 84, 85, 86, 113, 114, 115, 116, 117, 118, 119, 128, 129, 130, 132, 134, 136, 137, 138}},
 }
 var hdSmallWriterCodes = map[uint16][]byte{
 	0x181: {0x26, 0x88, 0x07, 0x03, 0x5e, 0xf0, 0x42, 0xfe, 0xcc, 0x74, 0x02, 0xeb, 0xe7, 0xeb, 0xd0, 0x3b},
@@ -434,7 +437,7 @@ func (p *hdSmallRuntime) paint(out *image.RGBA, f draftNativeFrame) map[string]a
 			continue
 		}
 		a := p.frames[c.slot]
-		if a.art == nil || (a.scaled100 && !hdSmallScaledPaletteSupported(f.palette)) {
+		if a.art == nil || !a.paletteSupported(f.palette) || (a.scaled100 && !hdSmallScaledPaletteSupported(f.palette)) {
 			continue
 		}
 		sx, sy := int(c.local)%a.w*4, int(c.local)/a.w*4
@@ -592,4 +595,19 @@ func hdSmallScaledPaletteSupported(pal []byte) bool {
 		projection = append(projection, pal[int(v)*3:int(v)*3+3]...)
 	}
 	return hash(projection) == "1be3ed349ef54783069d4ee2bf3ba3636e5ec92afadc1699258017fffd568cc6"
+}
+
+func (f hdSmallFrame) paletteSupported(palette []byte) bool {
+	if f.paletteSHA == "" {
+		return true
+	}
+	if len(palette) != 768 || len(f.paletteIndices) == 0 {
+		return false
+	}
+	projection := make([]byte, 0, len(f.paletteIndices)*4)
+	for _, i := range f.paletteIndices {
+		projection = append(projection, i)
+		projection = append(projection, palette[int(i)*3:int(i)*3+3]...)
+	}
+	return hash(projection) == f.paletteSHA
 }

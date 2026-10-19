@@ -21837,6 +21837,77 @@
         "ready_review_sha256": "8430d1e78767559deb4eb64818fc41bac7601a7bbb360b9421c431da83d976bc",
         "formal_GUI_conformance": "tracked separately by spec069 R98 and formal source catalog"
       }
+    },
+    "icons-113.png": {
+      "spec": "docs/spec/065-hd-small-images.md",
+      "sha256": "7e6c49b20af1e32e3f031775a79e2568ad72e2e7b9086f31e59d365bf1c81a78",
+      "bytes": 1223629,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "native_opaque_pixels": 226,
+      "placement": "validated original Main D46 draw and current per-pixel ownership; no static placement",
+      "sampling": "pixel-center-nearest-neighbor; explicit source content rectangle mapped to native opaque bounds",
+      "sample_rect": [
+        220,
+        135,
+        1100,
+        1140
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sample_bounds_measurement": "native silhouette and sampled original alpha; alpha >=128 used only for geometry; all3616 source subpixels retain original nonzero alpha",
+      "alpha_mass_outside_sample_rect": 61362034,
+      "alpha_mass_total": 281863461,
+      "alpha": "retain original PNG alpha unchanged; sample original RGBA; draw only verified native opaque source cells",
+      "generation_prompt": "Use case: precise-object-edit. Edit target Image1 is the newly generated HD portrait. Image2 is the original sprite and controls the silhouette and layout. Modify only the portrait composition: make it a broad compact nearly square frontal head with a flat horizontal red cloth headband forming the top edge of the visible head. Remove all black hair above the headband; the top edge must be flat, not a rounded crown. Keep the face warm brown, calm dignified expression, crisp refined pixel-art clusters, eyes and nose readable at a 64x64 game display. Keep a little black hair on the sides only. Match Image2's headband across the upper fifth, broad cheeks then tapering squared chin, no shoulders, no chest. Do not make the headband diagonal. Preserve a genuine transparent background. Single isolated head, centered nearly filling the square image. No text, no extra ornaments, no feathers, no frame, no background. Keep the overall character and fine pixel-art brushwork from Image1.",
+      "generation_chain": [
+        {
+          "stage": "initial original HD head",
+          "tool": "built-in imagegen",
+          "sha256": "9e4f1dda47f651744381caf6343c1551f0c4d411e36034041c3ceefd7ded9ec0",
+          "prompt": "Use case: stylized-concept. Asset type: one small HD game portrait sprite for the Indian Advisor report in a display-only remaster of Colonization. Generate a new original pixel-art head portrait. Image 1 is the original 16x16 sprite used only as a reference for composition, not copied pixels; Image 2 is the user's approved precise pixel-art style reference. Subject: a dignified adult Indigenous North American man's head, frontal face slightly turned toward viewer's right, warm medium-brown skin, black straight hair, plain wide red cloth headband across the upper forehead, calm neutral expression, readable dark eyes and nose, clean-shaven. Composition: head only, no shoulders, neck tapers to the bottom, centered nearly filling a square canvas, maintain the broad flat band and compact rounded face silhouette from Image1. Crisp deliberate square pixel clusters, controlled warm earthy palette, subtle material shading and facial features readable when sampled to 64x64; use the fine pixel brushwork of Image2. Genuine transparent background, no frame, no text, no logos, no watermark, no feathers, no headdress, no added ornaments. Do not include any buildings, scenery or UI from Image2. Single isolated portrait only.",
+          "reference_sha256": {
+            "original composition reference private only": "a4e61e7fe24dcabf19f66e5da3f210374f8b9c44dd60285d7f99d129c832b986",
+            "approved style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+          }
+        },
+        {
+          "stage": "flatten band and remove crown for native silhouette",
+          "tool": "built-in imagegen",
+          "sha256": "7e6c49b20af1e32e3f031775a79e2568ad72e2e7b9086f31e59d365bf1c81a78",
+          "prompt": "Use case: precise-object-edit. Edit target Image1 is the newly generated HD portrait. Image2 is the original sprite and controls the silhouette and layout. Modify only the portrait composition: make it a broad compact nearly square frontal head with a flat horizontal red cloth headband forming the top edge of the visible head. Remove all black hair above the headband; the top edge must be flat, not a rounded crown. Keep the face warm brown, calm dignified expression, crisp refined pixel-art clusters, eyes and nose readable at a 64x64 game display. Keep a little black hair on the sides only. Match Image2's headband across the upper fifth, broad cheeks then tapering squared chin, no shoulders, no chest. Do not make the headband diagonal. Preserve a genuine transparent background. Single isolated head, centered nearly filling the square image. No text, no extra ornaments, no feathers, no frame, no background. Keep the overall character and fine pixel-art brushwork from Image1.",
+          "reference_sha256": {
+            "edit target, own generated candidate": "9e4f1dda47f651744381caf6343c1551f0c4d411e36034041c3ceefd7ded9ec0",
+            "original silhouette and layout, private only": "a4e61e7fe24dcabf19f66e5da3f210374f8b9c44dd60285d7f99d129c832b986"
+          }
+        }
+      ],
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "ICONS.SS",
+        "sha256": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "ordinal": 113,
+        "encoded_sha256": "6986a798dfe12fa00ea605716f038eb282feaab79c3c565efeefa66af107f75f",
+        "encoded_length": 247
+      },
+      "native_palette_projection_sha256": "0b1205c4c138976acab792e6bf5458765357acab29a818303ddc0227858c11aa",
+      "ready_review_sha256": "3eb9bd94debaae2e5d9500544dfa835cdf0bde6d0130ad4c8b6cb49d19658b91"
     }
   }
 }

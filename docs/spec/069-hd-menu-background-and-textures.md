@@ -2994,3 +2994,41 @@ r98-current-gui5-replays-check-r2.json及r98-gui4-original-seed-provenance-check
 未覆蓋來源的r98-next-HD-source-audit-r1.json沒有已驗來源的相同索引副本，
 僅有69項遮罩幾何相同候選，其中18個ICONS。69個全253空幀與19個零尺寸列分開保存，
 不因幾何相同或未命中而授予HD／可見性完成。其他圖像、表面、動畫及全量HD繼續。
+
+## R100其餘片頭動畫正常入口DRAFT（2026-10-20）
+
+本批沿用R84工作區hd-opening-animation-sources-r84，不建立第二份同義根目錄。
+先以現行公開tools/probe_hd_opening_sources.go及固定原版清冊核對正常片頭：
+單次800000步Enter，既有400M路徑延長至800M，及無輸入的20M冷啟動對照。
+兩種都是原版正常輸入研究，不注入RAM或存檔，不授予新GUI或HD信用。
+
+只讀觀測沿既有04A2:0000完整原始碼、來源編碼、尺寸、三個已驗逐寫端與返回契約，
+以--all-opening-sprites記錄全部已知OPEN及MPS來源；--write-samples=false，
+每10000000步快照。來源、全部CPU／RAM／IDX／DAC／週期、原版PNG與DOS讀取
+須與各自無觀測控制相同。未知／未完成呼叫分開記錄，不以入口代替完整繪製。
+
+入口為prepare-r100-opening-research-r1.py及r100-opening-research-plan-r1.json，
+衍生模組r100-opening-probe-source-r1只複製已公開原始碼，沒有正式顯示變更。
+原版OPENING.EXE、SS、解碼清冊、Go與dosgolem固定指紋沿R84至R87；
+位址為實模式CS:IP與20-bit線性RAM。候選生成、取樣契約與正式接線仍待來源審查，
+正式316張原PNG／316個已驗連結與README31張保持，全量HD未完成。
+
+R99在正常原住民顧問頁觀測到ICONS第113幀入口，背景REPORT9待逐寫證實；沿用R85原候選，完整追蹤入口見[規格065](065-hd-small-images.md#r99原住民顧問頭像與背景draft)，保持DRAFT。
+
+### R100兩條正常片頭來源研究完成，維持DRAFT
+
+r100-opening-research-check-r1.json確認兩條正常原版操作各自與無觀測控制的CPU、完整RAM、
+IDX、DAC、週期、PNG及DOS開檔／讀取相同。20M無輸入為2點、16次完整MPSLOGO繪製，
+第0至15幀全命中；800M單次Enter為80點、1992次完整繪製，507次未驗呼叫全為
+OPENSUN第5幀已移至右側畫面外的source geometry拒絕，不列產品缺陷或新增來源信用。
+
+兩條路徑的未接線完整來源聯集為72種。MPSLOGO16幀；OPENCRD1第0至5、OPENCRD2
+第0至6、OPENCRD3第0至1；OPENMON2第7至12、14至15；OPENMON3第0至19；
+OPENFISH第0至12。清冊幀數與玩家可見總量不同，1×1清除來源與既有HD來源另行確認，
+不為它們盲目生成美術。完整source geometry、alpha、底圖、發布與palette仍須逐群規格審查。
+這些來源尚無新增正式素材／GUI／HD完成信用；現行317張原PNG、316個CONFORMED連結保持。
+
+本批公開探針原樣複製，原始碼4919b5ca322e63033488d85df95534e02feecc57571165f1e0f207f1201ce533，
+二進位5478084ade3a68a9b20a5767ddad3e29cb21bcfabc10d6f3644f2bc4fc2db001；
+原版及解碼指紋由r100-opening-research-plan-r1.json固定。兩側一次性容器均已結束，
+收據與原版像素只留R84工作區；正式顯示未因本批研究改動。

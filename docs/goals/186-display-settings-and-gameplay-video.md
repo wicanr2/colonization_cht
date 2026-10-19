@@ -664,3 +664,7 @@ R98[登陸人物1063限定CONFORMED](../spec/069-hd-menu-background-and-textures
 R98[新局兩人物1060／1064限定CONFORMED](../spec/069-hd-menu-background-and-textures.md#r98新局兩人物來源conformed)，來源連結315，316張原PNG保持、README30張。36人物／78 GUI、68原版點、1275454個可見人物RGBA、完整X11及三側狀態／WAV／存檔通過；士兵1061續驗，MSS2／5仍DRAFT。全量HD未完成。
 
 R98[士兵1061限定CONFORMED](../spec/069-hd-menu-background-and-textures.md#r98士兵人物來源conformed)，四個已觀測MSS均完成Main人物範圍。316張原PNG及316連結，README31張；正文仍回原版英文，不增加翻譯信用。18人物／43 GUI、42原版點、915984可見人物RGBA與當次三側狀態／WAV／存檔通過。MSS2／5有限延伸未命中仍DRAFT，全量HD與完整五語未完成。
+
+R99接續[其餘40個小圖像正常城內入口追查DRAFT](../spec/065-hd-small-images.md#r99正常城內入口追查draft)，沿既有R96工作區與R57已驗187筆／111點查證0D46及0D66來源。尚未授權新素材或變換，316張原PNG與316個已驗連結保持。
+
+R100沿R84既有工作區，以[其餘片頭動畫正常入口DRAFT](../spec/069-hd-menu-background-and-textures.md#r100其餘片頭動畫正常入口draft2026-10-20)接續800M正常片頭與20M無輸入冷啟動研究。只讀控制比對，不增加正式HD信用。
