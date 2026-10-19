@@ -668,3 +668,13 @@ R98[士兵1061限定CONFORMED](../spec/069-hd-menu-background-and-textures.md#r9
 R99接續[其餘40個小圖像正常城內入口追查DRAFT](../spec/065-hd-small-images.md#r99正常城內入口追查draft)，沿既有R96工作區與R57已驗187筆／111點查證0D46及0D66來源。尚未授權新素材或變換，316張原PNG與316個已驗連結保持。
 
 R100沿R84既有工作區，以[其餘片頭動畫正常入口DRAFT](../spec/069-hd-menu-background-and-textures.md#r100其餘片頭動畫正常入口draft2026-10-20)接續800M正常片頭與20M無輸入冷啟動研究。只讀控制比對，不增加正式HD信用。
+
+### R99顧問頭像與HD描邊清底完成
+
+[規格065](../spec/065-hd-small-images.md#r99顧問頭像113限定conformed2026-10-20)及
+[規格038](../spec/038-string-overlay-draft.md#r99顧問頁hd描邊字底限定conformed2026-10-20)限定CONFORMED。
+現行317張生成原PNG／318檔、317個來源連結，README32張原樣實拍。
+22個正常GUI樣本與19個獨立原版點、頭像47008點及HD字底106176點、完整X11通過；
+28筆當次實際輸入三側至60400000步的完整原版狀態、WAV及存檔相同。
+其他39個ICONS與R100片頭72個來源仍待接線；原版圖像模式透明游標清底限制另列，
+不藉本批增加完整五語、全量HD、影片或新版交付信用。審查指紋為9c2228e0c6e07188ab65c111e033a4181ddfbabcce25cdcf8750a324b1f0b9cb。

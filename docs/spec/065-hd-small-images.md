@@ -595,3 +595,33 @@ r99-current-gui1-source-r1核對當次實際輸入與唯一狀態點，控制側
 R99族名描邊殘影另由[規格038四次描邊DRAFT](038-string-overlay-draft.md#r99四次描邊字串清底draft2026-10-20)追查；頭像來源與原PNG不改。
 
 R99頭像頁描邊殘影已完成[字串READY審查](038-string-overlay-draft.md#r99四次描邊字串清底ready2026-10-20)，正式新GUI須同時驗字底與頭像，不能以原型代替。
+
+## R99顧問頭像113限定CONFORMED（2026-10-20）
+
+依本節READY與[字串READY](038-string-overlay-draft.md#r99四次描邊字串清底ready2026-10-20)，
+正常GUI2由主選單讀取未改的52ae…存檔，Reports選單進入顧問頁；
+22樣本、19個獨立原版點，五種語言設定各含原版／HD，四語實際游標進出並正常關閉。
+正式程式為44cca43，二進位2022158ef760351736521080c0576cfa505ce41457413ace47570c4f076dafb2。
+原PNG及alpha保持，317張／318檔；85個小圖像來源及317個CONFORMED連結。
+
+當次原版完整226格繪製與來源遮罩相同，全部可見頭像47008個RGBA點全等，
+22張X11共22528000點全等；226格在正常離頁全部撤銷，沒有頭像緩衝存取或殘留。
+完整背景不計本輪獨立畫素。兩個描邊欄位的四語24組HD實拍核對106176個RGBA點；
+4416個下一列計數欄位像素不計，並確認不與本欄原字或新字alpha相交。
+當次28筆實際輸入三側重播至60400000步，含play=true，
+完整CPU／RAM／IDX／DAC／WAV及存檔與GUI相同；原版存檔指紋52ae…保持。
+
+正式78Go／61來源綁定與go vet通過。字串100具名項零失敗／零skip，
+未改圖像及載入器沿r3的928具名項與318檔封裝19拒絕收據，不將重複範圍加總。
+來源清冊12種越界／缺證拒絕通過；原316張素材、metadata、連結及其餘1551來源列保持。
+限定審查r99-head-conformance-review-r1.json SHA-256為
+\`9c2228e0c6e07188ab65c111e033a4181ddfbabcce25cdcf8750a324b1f0b9cb\`，來源清冊為\`bce5c838e1b2ef9e712b2fcb785a1dae059f3248be18f4318d1d028a07bacad7\`。
+
+本機入口沿hd-icons-all-surfaces-r96，重生依build-r99-formal-r4.py、
+run-r99-formal-gui-r2.py、prepare-r99-current-gui2-native-r1.py、
+run-r99-current-gui2-native-r1.py、check-r99-current-head-pixels-r1.py --gui 2、
+prepare-r99-outline-gui2-fixture-r1.py、check-r99-outline-gui2-fields-r3.py及
+verify-r99-current-gui2-replays-r1.py；需固定原版、dosgolem及Docker工具鏈。
+[README截圖](../screenshots/hd-indian-adviser-zh.png)保留原PNG，不裁切或重編碼。
+只新增Main來源940；無新Stage／VGA來源信用。其餘39個ICONS、
+六個PIK、其他人物／動畫、完整五語、全量HD及新版發行仍未完成。

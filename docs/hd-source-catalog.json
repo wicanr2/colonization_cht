@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "b2cff76717ebcd1bbdc9568a9c9a7dc3107edb945fc5511791dd08bea41bd10e",
+  "formal_manifest_sha256": "d0dc77b87a4bc37f432360d2474b6d1668552e9c29b52b71ed3f8938376288a4",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 316,
+    "formal_asset_bindings": 317,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -35264,9 +35264,18 @@
       "indexed_sha256": "86289ca46d5978086cfe96485440f0cb2d8723483842156fd8261e145b03499d",
       "opaque_pixels": 226,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed original Main D46 full decode/return/writes, palette projection, all226 normal-close revocations and four CJK cursor composition",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-113.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "9c2228e0c6e07188ab65c111e033a4181ddfbabcce25cdcf8750a324b1f0b9cb",
+        "scope": "head113 Main only; no new Stage, VGA source, other heads or full-HD credit"
+      }
     },
     {
       "research_id": 941,
@@ -62768,6 +62777,17 @@
       "source_indexed_sha256": "a4d1f220e5546fa434047c7bec19b98656a3484d5c9fcc922771c0ee7bdcfa2f",
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "claim": "R98 complete D46 Main figure only; independent native writes, glyph/cursor composition and normal GUI"
+    },
+    {
+      "asset": "icons-113.png",
+      "asset_sha256": "7e6c49b20af1e32e3f031775a79e2568ad72e2e7b9086f31e59d365bf1c81a78",
+      "source_research_id": 940,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 113,
+      "source_encoded_sha256": "6986a798dfe12fa00ea605716f038eb282feaab79c3c565efeefa66af107f75f",
+      "source_indexed_sha256": "86289ca46d5978086cfe96485440f0cb2d8723483842156fd8261e145b03499d",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "R99 complete original D46 Main head113, 226 cells; independent source, visible RGBA and normal adviser GUI"
     }
   ],
   "limitations": [
@@ -63490,5 +63510,16 @@
       "gui_event_samples": 18,
       "claim": "only listed observed Main figures; other figures and global HD retain separate status"
     }
-  ]
+  ],
+  "adviser_head_conformance": {
+    "ready_sha256": "3eb9bd94debaae2e5d9500544dfa835cdf0bde6d0130ad4c8b6cb49d19658b91",
+    "review_sha256": "9c2228e0c6e07188ab65c111e033a4181ddfbabcce25cdcf8750a324b1f0b9cb",
+    "sources": [
+      940
+    ],
+    "formal_assets": 317,
+    "gui_samples": 22,
+    "unique_native_points": 19,
+    "claim": "ICONS113 Main only; all previous sources and 1551 other rows preserved"
+  }
 }

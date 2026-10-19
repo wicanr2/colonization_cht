@@ -7282,3 +7282,24 @@ confirmed：MSS3.SS來源1063在正常讀檔路徑六次完整D46 Main繪製，1
 - 原版既有入口快照顯示士兵用途教學，先前建城觸發假設撤回。GUI3／4失敗保留且不授予人物信用；GUI4另以實際73筆控制重播證實種子來源。Xvfb在遊戲連線後關閉自動重複，Alt+V一次且無額外v，正式程式bdea4aaf…保持。
 - 此教學的CJK正文覆蓋未啟用，保留原版英文；只有人物圖像信用，沒有新增翻譯、正文Noto或獨立完整世界RGBA信用。審查c859a1d5cf61804ecc5e98ab786ce913ec810503c33f0008c8edc63916d8af4a，索引467e97fc817b5f1277ba48016e85dd493af4fb7da1164868b2fb3d2e14562605；入口[規格069](docs/spec/069-hd-menu-background-and-textures.md#r98士兵人物來源conformed)。
 - 有限原版延伸至1600000000步仍只有原四MSS十次呼叫，12個原96點與舊完整呼叫保持。r1全目錄20000次上限不提高，r2縮為六人物觀測；MSS2／5仍未知正常觸發，維持DRAFT。其他ICONS幾何相同候選不是相同索引，不直接當成可重用或已驗來源。
+
+## 2026-10-20 R99正常顧問頁與描邊位置補證
+
+confirmed，僅適用VICEROY.EXE SHA-256
+a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3，
+ICONS.SS a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716。
+隔離dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7及固定Docker。
+位址均為dosgolem實模式CS:IP與20-bit線性RAM，非EXE檔案偏移。
+
+正常GUI2於Reports選單進顧問頁，ICONS113／research940由0D46:000A完整解碼，
+Main基址0x2CAE0、矩形[10,25,26,41)，三writer共226格。
+原版indexed86289ca4…與完整來源、palette projection相同；
+正常離頁全部撤銷，同值寫入也不保留來源。完整收據與重生見規格065 R99。
+
+字串0D21:00C6、writer0D21:012C code16
+26882547feca740afecd75dfacb504eb，原版四次位置完整平移。
+當次實際trace重建Iroquois144格與Agrarian142格最早底值，皆等於既有REPORT1原版背景。
+不從新字形推算原版背景。首次read只取得區間，沒有精確起點聲明。
+HD實際24欄字底／字形106176點、頭像47008點與原版狀態／音訊／存檔已驗。
+原版圖像模式透明游標矩形的清底缺口仍在，不外推完整五語或所有原版圖像模式。
+審查9c2228e0c6e07188ab65c111e033a4181ddfbabcce25cdcf8750a324b1f0b9cb；來源與限制入口為規格038／065，不增加REPORT9信用。

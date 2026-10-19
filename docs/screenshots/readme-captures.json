@@ -1,12 +1,12 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-20",
-  "code_commit": "73b5825",
-  "binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
-  "formal_binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
-  "source_build_sha256": "cc02d66abf153ec8dc77b87404480daceb520a66ec6a67452f0418209ec67fe0",
+  "code_commit": "44cca430e606509365b9f4ff5891b27003a99136",
+  "binary_sha256": "2022158ef760351736521080c0576cfa505ce41457413ace47570c4f076dafb2",
+  "formal_binary_sha256": "2022158ef760351736521080c0576cfa505ce41457413ace47570c4f076dafb2",
+  "source_build_sha256": "4b5d9e86ded4d0758c7d3b4ca1c8169b39fef8ae9d281a8c5eb35c1f89ecc7de",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 316,
+  "formal_hd_assets": 317,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -1066,6 +1066,40 @@
       ],
       "actual_body_language": "en",
       "new_multilingual_body_credit": false
+    },
+    {
+      "file": "hd-indian-adviser-zh.png",
+      "sha256": "eefb75e6537e842bef7701f1377bffea13babf2e6573154439a884ce99b84273",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "indian-adviser",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 50000000,
+      "code_commit": "44cca430e606509365b9f4ff5891b27003a99136",
+      "binary_sha256": "2022158ef760351736521080c0576cfa505ce41457413ace47570c4f076dafb2",
+      "formal_binary_sha256": "2022158ef760351736521080c0576cfa505ce41457413ace47570c4f076dafb2",
+      "formal_hd_assets": 317,
+      "source_conformed_assets": 317,
+      "source_research_ids": [
+        940
+      ],
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-icons-all-surfaces-r96/r99-head-formal-gui-r2/gui.display-010.png",
+      "source_gui_check_sha256": "75baccb8d9e45b0eef6af83ff8ff64bcab1ab4482e0e72b79ddb8c72ad7ea568",
+      "source_state_check_sha256": "ef3dec0821809479894ba1b50e30c6eadf654deed0126143ac7d2226f932bff1",
+      "source_replay_check_sha256": "0fa5dcaa915e7fe34156ffb71497d158dcae5cfd70a45b8ecc33acc4e9650ade",
+      "independent_pixels_sha256": "9004ba912dbe8792765aa1104910cadae470817cc2d5a61d82789cf8c5498665",
+      "independent_text_pixels_sha256": "175a8487aae62087cfa370a1b29218bc0c1a13ef2d8417a7fd7749af7bb28e94",
+      "source_build_sha256": "4b5d9e86ded4d0758c7d3b4ca1c8169b39fef8ae9d281a8c5eb35c1f89ecc7de",
+      "source_index_sha256": "bce5c838e1b2ef9e712b2fcb785a1dae059f3248be18f4318d1d028a07bacad7",
+      "graphics_manifest_sha256": "d0dc77b87a4bc37f432360d2474b6d1668552e9c29b52b71ed3f8938376288a4",
+      "source_kind": "正式正常讀檔、Reports選單與顧問頁原樣實拍；頭像與HD字底獨立RGBA及完整X11已驗",
+      "capture_pixels_unchanged": true,
+      "spec_state": "CONFORMED",
+      "conformance_sha256": "9c2228e0c6e07188ab65c111e033a4181ddfbabcce25cdcf8750a324b1f0b9cb",
+      "scope": "只新增ICONS113 Main頭像與四語HD描邊字底信用；REPORT1背景沿既有規格。正常返回世界無殘留，原版狀態／WAV／存檔全等。原版圖像模式透明游標範圍清底仍有限制，完整五語及全量HD未完成。"
     }
   ],
   "limitations": [
@@ -1106,8 +1140,8 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "新增士兵教學原樣實拍，前30張原PNG與逐圖來源保持；新增信用限人物、游標、來源、完整X11及當次原版狀態／音訊／存檔，正文仍回原版英文。",
-  "graphics_manifest_sha256": "b2cff76717ebcd1bbdc9568a9c9a7dc3107edb945fc5511791dd08bea41bd10e",
+  "provenance_scope": "新增顧問頁使用44cca43的正式程式；既有31張原PNG及各自驗收範圍保持。",
+  "graphics_manifest_sha256": "d0dc77b87a4bc37f432360d2474b6d1668552e9c29b52b71ed3f8938376288a4",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -1299,7 +1333,7 @@
     },
     "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb"
   },
-  "conformance_state": "R98 all four observed MSS0/1/3/4 Main figures scoped CONFORMED; MSS2/5 DRAFT; soldier body retains original English fallback; earlier captures retain individual proof",
+  "conformance_state": "R99 head113 Main and HD four-pass text clear scoped CONFORMED",
   "previous_opening_sun_capture": {
     "capture": {
       "file": "hd-opening-zh.png",
@@ -1502,5 +1536,16 @@
     "formal_hd_assets": 312,
     "conformance_state": "R97 seven Main event and shared UI sources scoped CONFORMED; previous captures retain individual verified scope",
     "provenance_scope": "前25張來源保持；新增兩張事件原樣實拍，各自初始存檔、輸入與重播終點分列驗收。"
+  },
+  "previous_adviser_head_header": {
+    "date": "2026-10-20",
+    "code_commit": "73b5825",
+    "binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
+    "formal_binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
+    "source_build_sha256": "cc02d66abf153ec8dc77b87404480daceb520a66ec6a67452f0418209ec67fe0",
+    "formal_hd_assets": 316,
+    "graphics_manifest_sha256": "b2cff76717ebcd1bbdc9568a9c9a7dc3107edb945fc5511791dd08bea41bd10e",
+    "conformance_state": "R98 all four observed MSS0/1/3/4 Main figures scoped CONFORMED; MSS2/5 DRAFT; soldier body retains original English fallback; earlier captures retain individual proof",
+    "provenance_scope": "新增士兵教學原樣實拍，前30張原PNG與逐圖來源保持；新增信用限人物、游標、來源、完整X11及當次原版狀態／音訊／存檔，正文仍回原版英文。"
   }
 }

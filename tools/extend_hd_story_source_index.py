@@ -731,6 +731,82 @@ def extend_event_scenes(a):
     print('PASS_EVENT_SCENE_SCOPED_SOURCE_INDEX', len(out['formal_bindings']), sha(a.output), flush=True)
 
 
+def extend_adviser_head(a):
+    """規格065 R99：僅追加正常顧問頁已驗的ICONS113 Main來源。"""
+    baseline, ready, review = read(a.baseline), read(a.ready), read(a.conformed)
+    manifest = read(a.assets / 'manifest.json')
+    assert sha(a.ready) == '3eb9bd94debaae2e5d9500544dfa835cdf0bde6d0130ad4c8b6cb49d19658b91'
+    assert ready['status'] == 'READY' and ready['source_research_id'] == 940
+    assert ready['source_ordinal'] == 113 and ready['opaque'] == 226
+    assert review['result'] == 'PASS_R99_ADVISER_HEAD_AND_OUTLINE_SCOPED_CONFORMANCE'
+    assert review['spec_state'] == 'CONFORMED' and review['new_sources'] == [940]
+    assert review['ready_sha256'] == sha(a.ready)
+    assert review['inherited_source_index_sha256'] == sha(a.baseline)
+    assert review['inherited_manifest_sha256'] == baseline['formal_manifest_sha256']
+    assert review['manifest_sha256'] == sha(a.assets / 'manifest.json')
+    assert review['formal_assets'] == len(manifest['assets']) == 317
+    assert review['old_raw_pngs_preserved'] == review['old_metadata_preserved'] == 316
+    assert review['conformed_bindings_before'] == len(baseline['formal_bindings']) == 316
+    assert review['conformed_bindings_after'] == 317
+    assert review['gui_samples'] == 22 and review['unique_native_points'] > 0
+    assert review['head_alpha_pixels'] == 47008 and review['gui_x11_rgba'] == 22528000
+    assert review['outline_field_samples'] == 24 and review['outline_field_rgba'] == 106176
+    assert review['outline_named_passed'] == 100 and review['go_failed'] == review['go_skipped'] == 0
+    assert review['package_files'] == 318 and review['package_faults'] == 19
+    assert review['actual_inputs'] == 28 and review['replay_end'] > 0
+    for key in ['full_project_loader_positive', 'raw_png_alpha_preserved',
+                'five_preferences_both_modes', 'four_CJK_cursor_hover_return',
+                'independent_Main_source_mask', 'normal_close_revokes_all226',
+                'outline_actual_original_background_and_eight_Noto_masks',
+                'three_replays_state_audio_save_equal_GUI',
+                'native_inputs_rules_and_save_unchanged']:
+        assert review[key], key
+    assert not review['original_graphics_transparent_cursor_clear_credit']
+    assert not review['Stage_or_VGA_source_credit'] and not review['full_background_RGBA_credit']
+    assert not review['complete_hd'] and not review['new_release']
+    name, ident = 'icons-113.png', 940
+    assert set(manifest['assets']) - {b['asset'] for b in baseline['formal_bindings']} == {name}
+    for binding in baseline['formal_bindings']:
+        n = binding['asset']
+        assert binding['asset_sha256'] == manifest['assets'][n]['sha256'] == sha(a.assets / n)
+    out = copy.deepcopy(baseline)
+    frames = {f['research_id']: f for f in out['frames']}
+    assert len(frames) == 1552
+    frame, meta = frames[ident], manifest['assets'][name]
+    assert frame['file'] == 'ICONS.SS' and frame['ordinal'] == meta['original_source']['ordinal'] == 113
+    assert not frame['formal_assets'] and ready['source_research_id'] == ident
+    assert frame['size'] == meta['native_size'] == [16, 16]
+    assert frame['file_sha256'] == meta['original_source']['sha256']
+    assert frame['encoded_sha256'] == meta['original_source']['encoded_sha256'] == ready['encoded_sha256']
+    assert frame['indexed_sha256'] == ready['indexed_sha256']
+    assert meta['sha256'] == sha(a.assets / name) == ready['asset_sha256']
+    out['formal_bindings'].append({
+        'asset': name, 'asset_sha256': meta['sha256'], 'source_research_id': ident,
+        'source_file': frame['file'], 'source_ordinal': 113,
+        'source_encoded_sha256': frame['encoded_sha256'],
+        'source_indexed_sha256': frame['indexed_sha256'],
+        'spec': 'docs/spec/065-hd-small-images.md',
+        'claim': 'R99 complete original D46 Main head113, 226 cells; independent source, visible RGBA and normal adviser GUI'})
+    frame['formal_assets'] = [name]
+    frame['runtime_source_evidence'] = 'confirmed original Main D46 full decode/return/writes, palette projection, all226 normal-close revocations and four CJK cursor composition'
+    frame['source_contract_reference'] = {
+        'state': 'CONFORMED', 'spec': 'docs/spec/065-hd-small-images.md',
+        'formal_connected': True, 'review_sha256': sha(a.conformed),
+        'scope': 'head113 Main only; no new Stage, VGA source, other heads or full-HD credit'}
+    old = {f['research_id']: f for f in baseline['frames']}
+    assert all(f == old[f['research_id']] for f in out['frames'] if f['research_id'] != ident)
+    out['formal_manifest_sha256'] = sha(a.assets / 'manifest.json')
+    out['coverage_limits']['formal_asset_bindings'] = 317
+    out['coverage_limits']['complete_hd'] = False
+    out['adviser_head_conformance'] = {
+        'ready_sha256': sha(a.ready), 'review_sha256': sha(a.conformed),
+        'sources': [940], 'formal_assets': 317, 'gui_samples': 22,
+        'unique_native_points': review['unique_native_points'],
+        'claim': 'ICONS113 Main only; all previous sources and 1551 other rows preserved'}
+    a.output.write_text(json.dumps(out, ensure_ascii=False, indent=2) + '\n')
+    print('PASS_ADVISER_HEAD113_SCOPED_SOURCE_INDEX', 317, sha(a.output), flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ['baseline', 'assets', 'ready', 'conformed', 'output']:
@@ -745,9 +821,13 @@ def main():
     scope.add_argument('--scaled-small-images', action='store_true', help='規格065 R96：追加三個已驗縮放入口小圖像')
     scope.add_argument('--event-scenes', action='store_true', help='規格069 R97：只追加當次已驗事件或共用UI來源')
     scope.add_argument("--dialog-figures", action="store_true", help="規格069 R98：四個正常GUI已驗人物Main來源")
+    scope.add_argument('--adviser-head', action='store_true', help='規格065 R99：只追加已驗顧問頭像113 Main來源')
     a = parser.parse_args()
     assert Path('/.dockerenv').exists() and os.getuid() != 0
     assert not a.output.exists() and a.output.parent.stat().st_uid == os.getuid()
+    if a.adviser_head:
+        extend_adviser_head(a)
+        return
     if a.dialog_figures:
         extend_dialog_figures(a)
         return

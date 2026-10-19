@@ -196,6 +196,8 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 
 ![士兵用途教學的 HD 人物與火槍](docs/screenshots/hd-soldier-guide.png)
 
+![繁體中文印地安人顧問頁與 HD 頭像、河岸背景](docs/screenshots/hd-indian-adviser-zh.png)
+
 士兵教學：人物、衣帽、雙手與火槍已重繪。這段正文目前保留原版英文；本次驗收只涵蓋圖像、來源與游標，四語正文另待處理。
 
 ## 開發與研究入口
