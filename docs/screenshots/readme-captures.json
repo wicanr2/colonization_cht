@@ -1,12 +1,12 @@
 {
   "kind": "README actual development screenshots",
-  "date": "2026-10-19",
-  "code_commit": "fbcfe7e98733dca717821a11f1d5acecfc6c7615",
-  "binary_sha256": "2bda3e6ba3a6e512edbbc3dce839bbc422eaec8278ec1a63ed684c823a3b235a",
-  "formal_binary_sha256": "2bda3e6ba3a6e512edbbc3dce839bbc422eaec8278ec1a63ed684c823a3b235a",
-  "source_build_sha256": "9684ee887d7a2398d059cb1b176c1664636cb9a207399ad31d6081f970c8a054",
+  "date": "2026-10-20",
+  "code_commit": "174253b",
+  "binary_sha256": "75df46cba2ecfedece060b09bf894a4fd02b9052b31a46462039940be0bd7575",
+  "formal_binary_sha256": "75df46cba2ecfedece060b09bf894a4fd02b9052b31a46462039940be0bd7575",
+  "source_build_sha256": "55e840cce565a77ef7a153f9b51e1895074cba27ff035a3e82e1a3396e3d33ce",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 305,
+  "formal_hd_assets": 312,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -830,6 +830,78 @@
       "conformance_sha256": "45c237fb9bcda5837785a50a99b08eff06ba2b4828df0ec5b2104df865a3725d",
       "source_replay_check_sha256": "5ffd26312fe339c10a3709ae1901371164f5e82ebf0038ac4eeea48803632341",
       "source_index_sha256": "cd903f7132d9b6c472f5f9c1a5bab191b10a579b294a14165a1899d6b358ffe1"
+    },
+    {
+      "file": "hd-native-meeting-zh.png",
+      "sha256": "c4885a25d7382f7abba977db4d32ec25a8ceadb2360535a71a0fa5db2eee0ebf",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "meeting-the-natives",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 115000000,
+      "code_commit": "174253b",
+      "binary_sha256": "75df46cba2ecfedece060b09bf894a4fd02b9052b31a46462039940be0bd7575",
+      "formal_binary_sha256": "75df46cba2ecfedece060b09bf894a4fd02b9052b31a46462039940be0bd7575",
+      "formal_hd_assets": 312,
+      "source_conformed_assets": 312,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-event-woodcuts-r97/r97-event-formal-gui-r6/gui.display-038.png",
+      "source_state_check_sha256": "9edb3ea9808d4e8058aa2f58d05f2a295a23edbeda6bcf42a1264d35885183be",
+      "source_gui_check_sha256": "63856f9a8e37d7118afd9448ba9b1475f1a14110a2eba50f333f79a3422e69ab",
+      "independent_pixels_sha256": "63856f9a8e37d7118afd9448ba9b1475f1a14110a2eba50f333f79a3422e69ab",
+      "source_replay_check_sha256": "0ada72006c2d993de7dc8774cda35d807197880af3d41e1b653fe5bb730101e1",
+      "graphics_manifest_sha256": "10e39006e88ca8037734463a8aec287a574ee49b0f2e563b936dc2ed52b0d486",
+      "source_build_sha256": "55e840cce565a77ef7a153f9b51e1895074cba27ff035a3e82e1a3396e3d33ce",
+      "source_kind": "正式視窗原樣實拍，當次獨立完整RGBA及X11遊戲區已核對",
+      "capture_pixels_unchanged": true,
+      "spec_state": "CONFORMED",
+      "verified_counts": {
+        "independent_full_RGBA_pixels": 1024000,
+        "X11_RGBA_pixels": 1024000,
+        "title_Noto_fields": 1
+      },
+      "scope": "當次事件Main來源限定CONFORMED；五語兩模式、四語游標往返、正常關頁及三側完整狀態／WAV／存檔相同。其他事件及全量HD未完成。",
+      "conformance_sha256": "a90bea4b3f2a06a00a115bde8d1d14e17c967369a052a76bcaaa799921b92e71",
+      "source_index_sha256": "ff89f585def6db40275f1e968896ec6515a0208862e1a2d027fdc734bb920bfb",
+      "seed_sha256": "0d00ddb778f8469773a7c6f72b15d6312ded291f1b306c3c0baef34f7277641f"
+    },
+    {
+      "file": "hd-native-village-zh.png",
+      "sha256": "7db43412b4736f5d6c5592e85dd8628ddcdb4e643e16d713060af3a26cd8b18a",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "entering-native-village",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 145600000,
+      "code_commit": "174253b",
+      "binary_sha256": "75df46cba2ecfedece060b09bf894a4fd02b9052b31a46462039940be0bd7575",
+      "formal_binary_sha256": "75df46cba2ecfedece060b09bf894a4fd02b9052b31a46462039940be0bd7575",
+      "formal_hd_assets": 312,
+      "source_conformed_assets": 312,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-event-woodcuts-r97/r97-event-formal-gui-r8/gui.display-050.png",
+      "source_state_check_sha256": "5b9c4f40b5c5c1fd6e309ab78e57e825bfaf281e778e5727e7d71f11c4ca6f59",
+      "source_gui_check_sha256": "7efee2fde0cf4f02cc2ddabcea11cbcef1eb320fadc7d4782967972bb308da0c",
+      "independent_pixels_sha256": "7efee2fde0cf4f02cc2ddabcea11cbcef1eb320fadc7d4782967972bb308da0c",
+      "source_replay_check_sha256": "09e7cbe34555cf931b4caa9c493d23abafe5d3cacaa0f542c4b2c96429ada9e3",
+      "graphics_manifest_sha256": "10e39006e88ca8037734463a8aec287a574ee49b0f2e563b936dc2ed52b0d486",
+      "source_build_sha256": "55e840cce565a77ef7a153f9b51e1895074cba27ff035a3e82e1a3396e3d33ce",
+      "source_kind": "正式視窗原樣實拍，當次獨立完整RGBA及X11遊戲區已核對",
+      "capture_pixels_unchanged": true,
+      "spec_state": "CONFORMED",
+      "verified_counts": {
+        "independent_full_RGBA_pixels": 1024000,
+        "X11_RGBA_pixels": 1024000,
+        "title_Noto_fields": 1
+      },
+      "scope": "當次事件Main來源限定CONFORMED；五語兩模式、四語游標往返、正常關頁及三側完整狀態／WAV／存檔相同。其他事件及全量HD未完成。",
+      "conformance_sha256": "a90bea4b3f2a06a00a115bde8d1d14e17c967369a052a76bcaaa799921b92e71",
+      "source_index_sha256": "ff89f585def6db40275f1e968896ec6515a0208862e1a2d027fdc734bb920bfb",
+      "seed_sha256": "5ce73c9f1f16c7da72fa2d988e55380a900535e01c0b616ffe274d92c351a58e"
     }
   ],
   "limitations": [
@@ -855,7 +927,8 @@
     "R86當次三側完整重播已收齊並限定CONFORMED，取代前項READY限制；PNG及原始捕捉程式指紋不變。R87魚形接線不混入此圖驗收。",
     "R87開場圖更新為魚形第14幀實拍；二十一魚形限定CONFORMED，其他十七張及各自來源保持。R89十一背景尚未用於README截圖。",
     "R93新增繁中草原百科實拍，共二十一張。八個Main前景限定CONFORMED；世界Stage、其他來源、動畫與全量HD不因本圖視為完成。",
-    "R97新增發現事件與共用UI五來源的限定CONFORMED實拍；另兩事件、完整五語與全量HD仍待，不因本圖授予完成。"
+    "R97新增發現事件與共用UI五來源的限定CONFORMED實拍；另兩事件、完整五語與全量HD仍待，不因本圖授予完成。",
+    "R97另兩張事件已分別在正常讀檔路徑限定CONFORMED；新增兩張繁中HD原樣實拍。前25張保留各自範圍，其他事件、人物、完整五語與全量HD未完成。"
   ],
   "previous_build": {
     "kind": "README actual development screenshots",
@@ -868,8 +941,8 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "前24張來源保持；新增發現事件原樣實拍及其五來源限定CONFORMED收據，逐張程式與範圍以各列為準。",
-  "graphics_manifest_sha256": "d2a56422792877654e8b1cf78d8006e2f7c11a065bd2bad5ae19602f490143ee",
+  "provenance_scope": "前25張來源保持；新增兩張事件原樣實拍，各自初始存檔、輸入與重播終點分列驗收。",
+  "graphics_manifest_sha256": "10e39006e88ca8037734463a8aec287a574ee49b0f2e563b936dc2ed52b0d486",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -1061,7 +1134,7 @@
     },
     "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb"
   },
-  "conformance_state": "R97 discovery and four shared UI sources scoped CONFORMED; other two event illustrations remain READY; previous captures retain their own scope",
+  "conformance_state": "R97 seven Main event and shared UI sources scoped CONFORMED; previous captures retain individual verified scope",
   "previous_opening_sun_capture": {
     "capture": {
       "file": "hd-opening-zh.png",
@@ -1250,5 +1323,12 @@
     "formal_hd_assets": 69,
     "independent_pixels_sha256": "ed871c3a763ed84774aae08837bf952df8170a31c291455b654c2f93cc083f96",
     "wood_source_cells": 13149
+  },
+  "previous_event_capture_header": {
+    "date": "2026-10-19",
+    "code_commit": "fbcfe7e98733dca717821a11f1d5acecfc6c7615",
+    "formal_hd_assets": 305,
+    "conformance_state": "R97 discovery and four shared UI sources scoped CONFORMED; other two event illustrations remain READY; previous captures retain their own scope",
+    "provenance_scope": "前24張來源保持；新增發現事件原樣實拍及其五來源限定CONFORMED收據，逐張程式與範圍以各列為準。"
   }
 }

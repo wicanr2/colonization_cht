@@ -2710,6 +2710,41 @@ README共25張原樣實拍，發現事件新增圖保持原PNG位元組及逐圖
 本節只授予五個Main來源；不授予新Stage、VGA發布、另兩事件或全量HD信用。
 三事件完整批次及其他圖像續依目標186處理。
 
+### R97另兩事件CONFORMED
+
+WDCUT03／07的Main來源1491／1495已限定CONFORMED。審查
+r97-two-native-events-conformed-r1.json為
+a90bea4b3f2a06a00a115bde8d1d14e17c967369a052a76bcaaa799921b92e71。
+本節補齊R97七來源，其他十張事件候選仍為DRAFT。
+
+| 正常讀檔路徑 | 初始存檔SHA-256 | 實拍／原版點／輸入／終點 |
+|---|---|---|
+| R6遇見原住民 | 0d00ddb778f8469773a7c6f72b15d6312ded291f1b306c3c0baef34f7277641f | 57／51／113／454400000 |
+| R8進入村莊 | 5ce73c9f1f16c7da72fa2d988e55380a900535e01c0b616ffe274d92c351a58e | 36／33／58／190000000 |
+
+各組各18張事件實拍，涵蓋五語兩模式及四語游標往返，完整RGBA合計36864000點。
+所有93張X11共95232000點相同，另外八個Noto標題欄位已在GUI命中。
+兩組各自三側重播包含HD play=true，CPU、完整RAM、IDX、DAC、WAV及存檔與其GUI相同。
+初始存檔、輸入及終點維持獨立，合計171筆不代表串接重播。
+正常關閉後七來源及待恢復字底均歸零，繼續原版遊玩。
+
+R8初始存檔由原96筆路線的前63筆正常輸入至846000000步，由原版DOS自行寫出。
+四個已知點完整原版狀態相同，之後正常讀檔並實際命中1495；沒有改RAM或存檔。
+收據r97-normal-save-before-village-check-r1.json。R7探索未命中1495，不授予完成信用。
+
+同一75df46cb…程式、312張原PNG及清冊10e39006…保持，366具名項與313檔封裝28拒絕精確沿用。
+[索引工具](../../tools/extend_hd_story_source_index.py) --event-scenes新增兩項，通過正例與十二錯件，
+保留舊310連結及其他1550列。現行312連結索引為
+ff89f585def6db40275f1e968896ec6515a0208862e1a2d027fdc734bb920bfb。
+重生輸入為同R97根目錄的r97-source-index-baseline-native-two-r1.json、
+r97-ready-fix-review-r2.json及r97-two-native-events-conformed-r1.json；
+命令與容器沿上一節，反例收據r97-source-index-native-two-check-r1.json。
+
+原版輸入指紋、dosgolem版本、real-mode及20-bit線性RAM位址基準沿前節。
+本機各組收據以前綴r97-current-r6／r8分列native、source-model、formal-pixels與replays。
+README新增兩張當次繁中HD原PNG，合計27張，前25張及逐圖指紋保持。
+本節沒有新Stage、VGA發布、其他事件或全量HD信用。
+
 ## R98大型人物對話圖DRAFT
 
 本批接續既定全量HD範圍中的大型人物對話圖，僅先準備MSS0至MSS5六個來源的

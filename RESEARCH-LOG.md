@@ -7246,3 +7246,11 @@ r98-native-source-model-check-r1.json為逐寫模型。
 完整載入及583600個取樣RGBA另通過。原型程式914148e5f28125df8f1fb68ce65575318ea11093ce03b9244e91ca24c9bbc4d1
 只在隔離草稿使用，不是正式程式。六張生成原PNG與alpha未改，原版參考維持本機。
 MSS2／5沒有本路徑完整呼叫信用，正式graphics與來源完成數未改。
+
+## 2026-10-20 R97另兩事件正常讀檔證據
+
+confirmed：WDCUT03／07來源1491／1495各十八張五語／兩模式及四語游標往返正常GUI通過。兩組獨立初始存檔、輸入、終點、完整原版狀態、來源模型、畫素、三側音訊與存檔逐組核對；不合併成同一重播。工具、原版EXE及SS指紋、dosgolem 82a14b2…、real-mode與20-bit線性RAM基準沿規格069 R97。正式程式75df46cb…與312張原圖不變。
+
+R6：初始0d00ddb7…，113輸入a5212f8f…至454400000步，51點；R8：初始5ce73c9f…，58輸入d2e00d62…至190000000步，33點。R8初始由正常原版前綴63輸入至846000000步自行寫出，再正常讀檔並實際觸發1495，收據r97-normal-save-before-village-check-r1.json。R7無1495命中，只留探索紀錄。
+
+重生入口workplace/reports/goal186-display-hd/hd-event-woodcuts-r97。當次r97-current-r6／r8各自native-check、source-model-check、formal-pixels-check及replays-check收據由r97-two-native-events-conformed-r1.json彙整，SHA-256 a90bea4b3f2a06a00a115bde8d1d14e17c967369a052a76bcaaa799921b92e71。source-index-native-two正例及十二拒絕只補兩列，舊310連結和其他1550列保持；公開索引SHA-256 ff89f585def6db40275f1e968896ec6515a0208862e1a2d027fdc734bb920bfb。沒有新Stage、VGA發布或全量HD完成信用。

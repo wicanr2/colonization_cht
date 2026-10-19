@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 310,
+    "formal_asset_bindings": 312,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -57569,9 +57569,18 @@
       "indexed_sha256": "9b5882ddc4956fef2f748b764892223dc42a89df2e46670f9c2aaccc53f6a546",
       "opaque_pixels": 22078,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete original D46 Main decode, return and writes; independent Main model and normal GUI in the cited scoped review",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "wdcut03-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "a90bea4b3f2a06a00a115bde8d1d14e17c967369a052a76bcaaa799921b92e71",
+        "scope": "Main only; native glyphs and cursor composition verified; no Stage, VGA publication or full-HD credit"
+      }
     },
     {
       "research_id": 1492,
@@ -57669,9 +57678,18 @@
       "indexed_sha256": "b2077c734d5c4b448190ba81e0b7f832bc980e878b115ab52d9b92a4490e4168",
       "opaque_pixels": 22080,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete original D46 Main decode, return and writes; independent Main model and normal GUI in the cited scoped review",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "wdcut07-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "a90bea4b3f2a06a00a115bde8d1d14e17c967369a052a76bcaaa799921b92e71",
+        "scope": "Main only; native glyphs and cursor composition verified; no Stage, VGA publication or full-HD credit"
+      }
     },
     {
       "research_id": 1496,
@@ -62648,6 +62666,28 @@
       "source_indexed_sha256": "2b0276791390568c43a7c8caab2a6fe136c2235ac00e01a980b0a9cd6c669e25",
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "claim": "R97 complete D46 Main source only; independent native writes, glyph underlay, cursor pairs and normal GUI"
+    },
+    {
+      "asset": "wdcut03-000.png",
+      "asset_sha256": "0b636747daa2268c93a3922804fdae7734416e578fb68524f33df14942494bb4",
+      "source_research_id": 1491,
+      "source_file": "WDCUT03.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "c290b048a1ad83f55668c1dc3329f8acf23461326e5d1bcd69eea25957fb9afe",
+      "source_indexed_sha256": "9b5882ddc4956fef2f748b764892223dc42a89df2e46670f9c2aaccc53f6a546",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "R97 complete D46 Main source only; independent native writes, glyph underlay, cursor pairs and normal GUI"
+    },
+    {
+      "asset": "wdcut07-000.png",
+      "asset_sha256": "995c910786dffb6894b46c9fc1b2536fd6b150e66450da531a3b1a3af659f803",
+      "source_research_id": 1495,
+      "source_file": "WDCUT07.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "d3b1d8d63056578f8c8c1e84e47facf784f8500b6e82b9620c9274da5dbeb0a6",
+      "source_indexed_sha256": "b2077c734d5c4b448190ba81e0b7f832bc980e878b115ab52d9b92a4490e4168",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "R97 complete D46 Main source only; independent native writes, glyph underlay, cursor pairs and normal GUI"
     }
   ],
   "limitations": [
@@ -63320,6 +63360,21 @@
       ],
       "conformed_bindings": 310,
       "gui_event_samples": 26,
+      "claim": "only the listed Main event/UI sources; other pending events and full HD retain their own status"
+    },
+    {
+      "ready_sha256": "6e81a242583fd414176157aa741994626b49f6a6d09104a75fe5abf853c5c65e",
+      "review_sha256": "a90bea4b3f2a06a00a115bde8d1d14e17c967369a052a76bcaaa799921b92e71",
+      "sources": [
+        1491,
+        1495
+      ],
+      "event_sources": [
+        1491,
+        1495
+      ],
+      "conformed_bindings": 312,
+      "gui_event_samples": 36,
       "claim": "only the listed Main event/UI sources; other pending events and full HD retain their own status"
     }
   ]
