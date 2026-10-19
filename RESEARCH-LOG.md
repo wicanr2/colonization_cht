@@ -7166,3 +7166,29 @@ confirmed：當次38筆輸入ceed5e654ea63ab560a6b89de9691f2365137bf65169c47a543
 原診斷檔r97-outside-Main-writes.json依OpAddr命名，不表示真正由D46圖像指令寫出。十二byte是兩個IRQ的SS:SP堆疊框，含FLAGS7293、CS0D46、下一IP01D5；OpAddr滯留0D46:01D2。實際ES:BX仍指Main。隔離dosgolem82a14b2的Machine.Step／CPU.Interrupt原碼及完整指紋納入修正審查，沒有修改執行器。新守門以有效目的地區分；原始側錄及初版錯誤結論保留，勘誤見[規格069](docs/spec/069-hd-menu-background-and-textures.md#r97修正ready中斷寫入定位與三個noto標題)。
 
 Noto十二欄逐字實際alpha確認原共用CJK頂端不適合這些標題；原版墨跡7高、安全區9高與三色浮雕不變。僅調整這三個已驗來源的字模量測，28px為十一欄、韓文首欄29px；基線均685。366具名原型項及893376個獨立alpha通過，修正READY審查6e81a242583fd414176157aa741994626b49f6a6d09104a75fe5abf853c5c65e。未授予正常GUI或全量HD完成。
+
+### R97第一事件正式GUI抽樣，其他事件續驗
+
+正式程式75df46cba2ecfedece060b09bf894a4fd02b9052b31a46462039940be0bd7575保持。
+第二次新局GUI完成「發現新世界」五語／兩模式及事件圖、木框與三段標題牌游標進出，
+共26張事件實拍。獨立逐寫模型確認17次原版完整來源、673次字模底圖、144次游標配對，
+49,718次撤銷中3次為同值寫入；24個原版點與觀測、無觀測及GUI完整狀態相同。
+
+當次72筆正常輸入至783000000步，輸入SHA-256為
+6c788b024f822c781db7571a548f4fc3ff4ca76b240cb233486b69bc41b8aa05。
+只讀原版觀測程式為841cae8c6ea99e74254ecba87320a4b3fc68f105d6aaefd1ef458856024773d8，
+來源為48a66f9bd1050968fd839f879249c7fd73a5d8d49aa11a1a74b4dc6e774c9889。
+原版檔案與dosgolem版本、實模式／20-bit線性位址基準沿本節既有登錄。
+
+26張完整事件畫面共26624000個RGBA相同，包含原版前景、生成來源、十二欄中的
+第一標題四語、英文原字、游標透明格及不透明格。全部29張X11遊戲區與輸出相同。
+畫素比較器r1先分別取整兩個alpha乘積，造成少數色值相差1；
+依固定Go標準庫image/draw的drawGlyphOver改成加總後整除，r2乾淨通過，正式程式未改。
+
+本機入口為r97-current-partial3-native-check-r1.json、
+r97-current-partial3-source-model-check-r1.json及
+r97-current-partial3-formal-pixels-check-r2.json。
+第二事件預定擷取點實際為航海畫面，1491尚未解碼，並非來源守門拒絕；
+兩次新局的COLONY09指紋及舊路線不同，不能憑舊時間／方向序列判定到站。
+此GUI沒有三事件完成信用。後續改以正常讀檔後的實際畫面逐段操作，
+不改DOS狀態或快照注入。三側WAV、另外兩事件、來源索引與README仍待，保持READY。

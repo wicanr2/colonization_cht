@@ -644,3 +644,7 @@ workplace/reports/goal186-display-hd/hd-terrain-foreground-r93。
 原版輸入及圖像只留本機。現行305張HD原圖與既有CONFORMED範圍保持，全量HD繼續。
 
 R97修正READY：第一次正常GUI的來源拒絕已查明為IRQ堆疊誤判，Noto三個標題另按實際alpha量測；[規格069修正](../spec/069-hd-menu-background-and-textures.md#r97修正ready中斷寫入定位與三個noto標題)授權後接正式。366具名項、36字模alpha及313檔封裝28拒絕通過，第二次正常GUI進行中。312張原PNG保持，來源索引仍305、README仍24，未授予全量HD或發行完成。
+
+R97第二次新局GUI已驗第一事件26張完整RGBA及29張X11，72筆當次輸入的24個原版點相同。第二事件未在預定點出現，整條GUI仍未通過，改依正常讀檔實際畫面接續；詳見[規格069](../spec/069-hd-menu-background-and-textures.md#r97第一事件正式gui抽樣其他事件續驗)。來源索引及README計數保持，未授予全量HD完成。
+
+README已新增當次第一事件HD原樣實拍，合計25張；逐圖來源與READY限制見[截圖清冊](../screenshots/readme-captures.json)，來源索引仍305，整批R97與全量HD持續。

@@ -795,6 +795,38 @@
         "X11_RGBA_pixels": 1024000
       },
       "scope": "R95正常Main百科森林，五個既有森林來源均顯示HD；保留各來源原有Stage契約。其他素材、世界表面、動畫與全量HD仍待完成。"
+    },
+    {
+      "file": "hd-discovery-zh.png",
+      "sha256": "5bfb922846c7dd531da782b45dff15a53eaf3b674771448f0b1300b8169150be",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "discovery-of-new-world",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 636200000,
+      "code_commit": "527b82c078041ac50f5c8936992175b3695c867a",
+      "binary_sha256": "75df46cba2ecfedece060b09bf894a4fd02b9052b31a46462039940be0bd7575",
+      "formal_binary_sha256": "75df46cba2ecfedece060b09bf894a4fd02b9052b31a46462039940be0bd7575",
+      "formal_hd_assets": 312,
+      "source_conformed_assets": 305,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-event-woodcuts-r97/r97-event-formal-gui-r2/gui.display-010.png",
+      "source_state_check_sha256": "0d6d835288f6d34418625e7ddc751e2e9919245124f2e161f7e45b2a64fb1e58",
+      "source_gui_check_sha256": "7315db93a97eb2cc045aa9007229b8728285ce2ab4c9d670e0196ca548e0a060",
+      "independent_pixels_sha256": "7315db93a97eb2cc045aa9007229b8728285ce2ab4c9d670e0196ca548e0a060",
+      "graphics_manifest_sha256": "10e39006e88ca8037734463a8aec287a574ee49b0f2e563b936dc2ed52b0d486",
+      "source_build_sha256": "55e840cce565a77ef7a153f9b51e1895074cba27ff035a3e82e1a3396e3d33ce",
+      "source_kind": "正式視窗原樣實拍，當次獨立完整RGBA及X11遊戲區已核對",
+      "capture_pixels_unchanged": true,
+      "spec_state": "READY",
+      "verified_counts": {
+        "independent_full_RGBA_pixels": 1024000,
+        "X11_RGBA_pixels": 1024000,
+        "title_Noto_fields": 1
+      },
+      "scope": "發現事件、木框及三段標題牌的當次正常新局實拍；第一事件26張完整畫面已驗，另兩事件、三側WAV及整批限定CONFORMED仍待。全量HD未完成。"
     }
   ],
   "limitations": [
@@ -819,7 +851,8 @@
     "R86刷新正常繁中模式的吹氣雲第0幀實拍，PNG直接複製未重編碼；63項正常GUI的原版來源、完整RGBA／X11及17個Noto欄位已驗。三側完整重播尚待收齊，維持READY；其他十七張與逐圖來源保持，其他圖像、完整五語與全量HD未完成。",
     "R86當次三側完整重播已收齊並限定CONFORMED，取代前項READY限制；PNG及原始捕捉程式指紋不變。R87魚形接線不混入此圖驗收。",
     "R87開場圖更新為魚形第14幀實拍；二十一魚形限定CONFORMED，其他十七張及各自來源保持。R89十一背景尚未用於README截圖。",
-    "R93新增繁中草原百科實拍，共二十一張。八個Main前景限定CONFORMED；世界Stage、其他來源、動畫與全量HD不因本圖視為完成。"
+    "R93新增繁中草原百科實拍，共二十一張。八個Main前景限定CONFORMED；世界Stage、其他來源、動畫與全量HD不因本圖視為完成。",
+    "R97發現事件已逐RGBA／X11驗圖；新增截圖不授予另兩事件、整批CONFORMED、完整五語或全量HD完成。"
   ],
   "previous_build": {
     "kind": "README actual development screenshots",
@@ -832,7 +865,7 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "世界地圖更新為305張原圖與當次正式程式的繁中實拍；其他23張原PNG與逐圖來源保持。",
+  "provenance_scope": "前24張來源保持；新增一張第一事件正常新局的HD實拍，新增列記錄自己的正式程式與READY範圍。",
   "graphics_manifest_sha256": "d2a56422792877654e8b1cf78d8006e2f7c11a065bd2bad5ae19602f490143ee",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
