@@ -7053,3 +7053,28 @@ confirmed僅涵蓋下列當次正常輸入的解碼、來源移交、原版狀�
 261來源索引f03d686854ffce177fe471055dc1b188fb0885d081edafce0515002b5fbbce2f；
 生成清冊08736432e3c09a48273f3936dafade98ca4d4be8d2df34f617b87ddbdb48243b。
 新材質發布回退與未接線前景仍無本批完成信用，完整RGBA範圍及重生入口見規格071。
+
+## 2026-10-19 R93：八個Main地形前景來源
+
+推論等級：完整原版解碼、返回、寫入與來源生命週期為confirmed；生成細節與色差合成為本專案顯示規則。
+PHYS0.SS deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16，
+VICEROY.EXE a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3，
+dosgolem 82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7、Python3.11.2／Pillow9.4.0。
+位址空間為dosgolem實模式CS:IP及20-bit線性RAM，不是IDA EA。
+
+PHYS0第22、26、64、81、82、84、85與149幀對應研究列1310、1314、1352、1369、1370、
+1372、1373及1437。0D46:000A與0181／01B4／01D2沿規格067固定碼。
+新來源在已取樣百科只驗Main 0x2CAE0，不把原有Stage核心支持範圍外推。
+逐幀編碼、索引、排序寫入SHA及完整參數見私有r93-reference-inventory-r1.json，
+公開來源指紋隨生成清冊保存，原始像素與記憶體仍只留本機。
+
+R92當次177筆輸入與75點完整原版狀態保持，9180606筆事件重建後八來源皆有可見正例。
+來源審查fdce3331178ce60805572af0664f7b509b33f09f43319bddf0ef1a560245c71b；
+原型狀態ebc9a91b6fe14afa9dde9076be7af4e2078d121adf5f4e4ce3cbf83ffb0c1dce；
+完整RGBA ed04cee296080bea1bc451f42d22e43531b8bb757e88cf8d90600e52698c5d92。
+入口152個拒絕子案例審查1dfc8e18022af798c2ed2264f94d9a13912d45eec369d0b561c4f3e2e7ae199a。
+外層錯算案例數的歷史失敗保留，測試本身零失敗／零skip。
+
+八張生成原PNG與alpha保持，量測取樣與預乘alpha色差公式由規格067 R93 READY記錄。
+審查ad902024902baf63cdce08a09e27eb708d4df32c65b08c2300e04ffeac1923e5。
+正式GUI、當次來源與WAV／存檔重播仍待驗，不能把元件RGBA算成正式HD完成。

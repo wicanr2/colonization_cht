@@ -1,4 +1,4 @@
-// 規格067 READY：十二世界來源；共用原版觀測，只合成顯示。
+// 規格067 READY：十二個Stage來源與R93八個Main前景來源，只合成顯示。
 package main
 
 import (
@@ -36,6 +36,8 @@ type hdTerrainBatchPair struct {
 	cursor     int
 }
 type hdTerrainBatchRuntime struct {
+	destination uint32
+
 	trace                                                                          bool
 	calls, pairs                                                                   []map[string]any
 	entry                                                                          map[string]any
@@ -69,7 +71,11 @@ func loadHDTerrainBatchRuntime(h *hdRuntime, game, directory string) (*hdTerrain
 		return nil, fmt.Errorf("terrain source mismatch")
 	}
 	p := &hdTerrainBatchRuntime{h: h, frames: map[int]*hdTerrainBatchFrame{}, acceptedBy: map[int]uint64{}, cursorRestoresBy: map[int]uint64{}, pending: map[int]hdTerrainBatchPair{}, backing: map[uint32]hdTerrainBatchCell{}}
-	for _, d := range hdTerrainBatchDefinitions {
+	definitions := append([]hdTerrainBatchDefinition(nil), hdTerrainBatchDefinitions...)
+	for _, f := range hdTerrainForegroundDefinitions {
+		definitions = append(definitions, f.hdTerrainBatchDefinition)
+	}
+	for _, d := range definitions {
 		raw, err = hdReadFile(filepath.Join(directory, d.asset), 8<<20)
 		if err != nil {
 			return nil, err
@@ -85,14 +91,26 @@ func loadHDTerrainBatchRuntime(h *hdRuntime, game, directory string) (*hdTerrain
 			return nil, fmt.Errorf("terrain asset shape mismatch")
 		}
 		f := &hdTerrainBatchFrame{hdTerrainBatchDefinition: d, art: image.NewRGBA(image.Rect(0, 0, 64, 64))}
-		for y := 0; y < 64; y++ {
-			for x := 0; x < 64; x++ {
-				f.art.SetRGBA(x, y, color.RGBAModel.Convert(im.At((2*x+1)*d.width/128, (2*y+1)*d.height/128)).(color.RGBA))
+		sample, content := [4]int{0, 0, d.width, d.height}, [4]int{0, 0, 16, 16}
+		for _, definition := range hdTerrainForegroundDefinitions {
+			if definition.ordinal == d.ordinal {
+				sample, content = definition.sample, definition.content
 			}
 		}
+		if sample[0] < 0 || sample[1] < 0 || sample[2] <= sample[0] || sample[3] <= sample[1] || sample[2] > d.width || sample[3] > d.height || content[0] < 0 || content[1] < 0 || content[2] <= content[0] || content[3] <= content[1] || content[2] > 16 || content[3] > 16 {
+			return nil, fmt.Errorf("terrain sample bounds mismatch: %d", d.ordinal)
+		}
+		for y := content[1] * 4; y < content[3]*4; y++ {
+			for x := content[0] * 4; x < content[2]*4; x++ {
+				sx := sample[0] + (2*(x-content[0]*4)+1)*(sample[2]-sample[0])/((content[2]-content[0])*8)
+				sy := sample[1] + (2*(y-content[1]*4)+1)*(sample[3]-sample[1])/((content[3]-content[1])*8)
+				f.art.SetRGBA(x, y, color.RGBAModel.Convert(im.At(sx, sy)).(color.RGBA))
+			}
+		}
+
 		p.frames[d.ordinal] = f
 	}
-	if len(p.frames) != 12 {
+	if len(p.frames) != 20 {
 		return nil, fmt.Errorf("incomplete terrain group")
 	}
 	return p, nil
@@ -179,7 +197,15 @@ func (p *hdTerrainBatchRuntime) beforeInstruction() {
 		return
 	}
 	dest, ok := hdBuildingWords(m.Mem, c.Seg[golem.DS], c.R[golem.BX], 4)
-	if !ok || dest[0] != 200 || dest[1] != 320 || uint32(dest[3])*16+uint32(dest[2]) != hdTerrainBatchStage {
+	destination := uint32(0)
+	if ok {
+		destination = uint32(dest[3])*16 + uint32(dest[2])
+	}
+	expectedDestination := hdTerrainBatchStage
+	if hdTerrainForegroundOrdinal(frame.ordinal) {
+		expectedDestination = hdBuildingCanvas
+	}
+	if !ok || dest[0] != 200 || dest[1] != 320 || destination != expectedDestination {
 		return
 	}
 	x, y := int(int16(c.R[golem.DX])), int(int16(stack[2]))
@@ -196,9 +222,10 @@ func (p *hdTerrainBatchRuntime) beforeInstruction() {
 		p.rejected++
 		return
 	}
+	p.destination = destination
 	p.current = frame
 	for k := 0; k < 256; k++ {
-		p.before[k] = m.Mem[hdTerrainBatchStage+uint32((y+k/16)*320+x+k%16)]
+		p.before[k] = m.Mem[p.destination+uint32((y+k/16)*320+x+k%16)]
 	}
 	p.active = true
 	p.outside = false
@@ -212,11 +239,14 @@ func (p *hdTerrainBatchRuntime) beforeInstruction() {
 	}
 }
 func (p *hdTerrainBatchRuntime) stageWrite(addr uint32, old, value byte) {
-	i := int(addr - hdTerrainBatchStage)
-	p.stage[i].owned = false
-	if !p.active {
+	p.stage[int(addr-hdTerrainBatchStage)].owned = false
+	p.recordForegroundWrite(addr, old, value)
+}
+func (p *hdTerrainBatchRuntime) recordForegroundWrite(addr uint32, old, value byte) {
+	if !p.active || addr < p.destination || addr >= p.destination+64000 {
 		return
 	}
+	i := int(addr - p.destination)
 	x, y := i%320-p.x, i/320-p.y
 	if x < 0 || x >= 16 || y < 0 || y >= 16 {
 		p.outside = true
@@ -242,7 +272,7 @@ func (p *hdTerrainBatchRuntime) finish() {
 	var encoded []byte
 	count := 0
 	for k, v := range p.writes {
-		actual := p.h.m.Mem[hdTerrainBatchStage+uint32((p.y+k/16)*320+p.x+k%16)]
+		actual := p.h.m.Mem[p.destination+uint32((p.y+k/16)*320+p.x+k%16)]
 		if p.counts[k] == 0 {
 			if actual != p.before[k] {
 				p.rejected++
@@ -264,7 +294,13 @@ func (p *hdTerrainBatchRuntime) finish() {
 	}
 	for k, v := range p.writes {
 		if p.counts[k] == 1 {
-			p.stage[(p.y+k/16)*320+p.x+k%16] = hdTerrainBatchCell{true, uint16(p.current.ordinal), byte(k), v}
+			cell := hdTerrainBatchCell{true, uint16(p.current.ordinal), byte(k), v}
+			i := (p.y+k/16)*320 + p.x + k%16
+			if p.destination == hdBuildingCanvas {
+				p.visible[i] = cell
+			} else {
+				p.stage[i] = cell
+			}
 		}
 	}
 	p.accepted++
@@ -280,6 +316,7 @@ func (p *hdTerrainBatchRuntime) finish() {
 	}
 }
 func (p *hdTerrainBatchRuntime) canvasWrite(addr uint32, old, value byte) {
+	p.recordForegroundWrite(addr, old, value)
 	m := p.h.m
 	i := int(addr - hdBuildingCanvas)
 	p.revision++
@@ -347,6 +384,9 @@ func (p *hdTerrainBatchRuntime) paint(out *image.RGBA, f draftNativeFrame) map[s
 		valid++
 		validBy[int(c.ordinal)]++
 		frame := p.frames[int(c.ordinal)]
+		if hdTerrainForegroundOrdinal(int(c.ordinal)) && !hdTerrainForegroundPaletteSupported(f.palette) {
+			continue
+		}
 		sx, sy := int(c.k)%16*4, int(c.k)/16*4
 		active := false
 		for y := 0; y < 4; y++ {
@@ -360,7 +400,12 @@ func (p *hdTerrainBatchRuntime) paint(out *image.RGBA, f draftNativeFrame) map[s
 			continue
 		}
 		x, y := i%320*4, i/320*4
-		draw.Draw(out, image.Rect(x, y, x+4, y+4), frame.art, image.Pt(sx, sy), draw.Over)
+		if hdTerrainForegroundOrdinal(int(c.ordinal)) && c.native >= 120 && c.native < 128 {
+			tile := hdTerrainForegroundWaterTile(frame.art, sx, sy, c.native, f.palette)
+			draw.Draw(out, image.Rect(x, y, x+4, y+4), tile, image.Point{}, draw.Over)
+		} else {
+			draw.Draw(out, image.Rect(x, y, x+4, y+4), frame.art, image.Pt(sx, sy), draw.Over)
+		}
 		painted++
 		by[int(c.ordinal)]++
 		mask[i>>3] |= 1 << uint(i&7)
@@ -370,4 +415,61 @@ func (p *hdTerrainBatchRuntime) paint(out *image.RGBA, f draftNativeFrame) map[s
 
 func (p *hdTerrainBatchRuntime) receipt(f draftNativeFrame) map[string]any {
 	return p.paint(image.NewRGBA(image.Rect(0, 0, 1280, 800)), f)
+}
+
+func hdTerrainForegroundOrdinal(n int) bool {
+	switch n {
+	case 22, 26, 64, 81, 82, 84, 85, 149:
+		return true
+	}
+	return false
+}
+func hdTerrainForegroundPaletteSupported(pal []byte) bool {
+	if len(pal) != 768 {
+		return false
+	}
+	var projection []byte
+	for _, v := range []byte{39, 41, 57, 58, 67, 68, 69, 70, 71, 74, 75, 76, 77, 78, 79, 84, 85, 86, 87, 91, 92, 93, 94, 132} {
+		projection = append(projection, v)
+		projection = append(projection, pal[int(v)*3:int(v)*3+3]...)
+	}
+	if hash(projection) != "006162176fb4ed877d5eaa682fcf39f3bee6f95231998561bcbf4a76a738f41b" {
+		return false
+	}
+	for shift := 0; shift < 8; shift++ {
+		yes := true
+		for i := 0; i < 8; i++ {
+			for z := 0; z < 3; z++ {
+				if pal[(120+i)*3+z] != hdTerrainTextureCycle[(i+shift)%8][z] {
+					yes = false
+				}
+			}
+		}
+		if yes {
+			return true
+		}
+	}
+	return false
+}
+func hdTerrainForegroundWaterTile(art *image.RGBA, sx, sy int, v byte, pal []byte) *image.RGBA {
+	tile := image.NewRGBA(image.Rect(0, 0, 4, 4))
+	canon := hdTerrainTextureCycle[v-120]
+	shift := func(value, alpha byte, z int) byte {
+		delta := int(pal[int(v)*3+z]<<2|pal[int(v)*3+z]>>4) - int(canon[z]<<2|canon[z]>>4)
+		x := int(value) + delta*int(alpha)/255
+		if x < 0 {
+			x = 0
+		}
+		if x > int(alpha) {
+			x = int(alpha)
+		}
+		return byte(x)
+	}
+	for y := 0; y < 4; y++ {
+		for x := 0; x < 4; x++ {
+			a := art.RGBAAt(sx+x, sy+y)
+			tile.SetRGBA(x, y, color.RGBA{shift(a.R, a.A, 0), shift(a.G, a.A, 1), shift(a.B, a.A, 2), a.A})
+		}
+	}
+	return tile
 }

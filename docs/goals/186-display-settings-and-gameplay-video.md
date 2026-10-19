@@ -609,3 +609,11 @@ R92的十二種材質與施工槌已限定CONFORMED，生成原PNG與已驗連�
 原版狀態、音訊與存檔相同。世界只把新材質的獨立畫素計入本輪；已發布VGA回退沒有新正例。
 README新增當次繁中極地實拍，原有十九張圖與來源保持。
 其餘43個ICONS、未接線前景、第47幀建築、六個PIK、其他動畫、完整五語、全量HD、影片與新版交付繼續處理。
+
+
+### R93地形前景接續
+
+[規格067 R93](../spec/067-hd-world-terrain-batch.md#r93河流林木道路與耕地前景ready)追蹤河流、
+林木、道路與耕地八來源，已審READY。私有原版參考與來源入口位於
+workplace/reports/goal186-display-hd/hd-terrain-foreground-r93。
+R92的261個已驗來源保持；八張新原PNG已依READY接線，合計269張，仍待正式GUI驗收。

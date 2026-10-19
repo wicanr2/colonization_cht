@@ -17970,6 +17970,470 @@
         "ready_review_sha256": "be2c3b3c15397348ad530a1af88a39aa8a8fffc2f046f6266d51cd48e6234220",
         "formal_GUI_conformance": "pending"
       }
+    },
+    "terrain-022.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "8f63f587cb984ca099d1a30d884753dbb5d043c1339dce1fa3fba922c845b690",
+      "bytes": 1533370,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        0,
+        83,
+        1030,
+        1254
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        13,
+        16
+      ],
+      "alpha": "original generated PNG and alpha unchanged; source-over only inside verified Main write ownership; palette delta uses premultiplied alpha",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE production game-map overlay asset, use-case ui-mockup/raster game sprite. Reference image 1 is the exact 16 by 16 original tile layout (shown enlarged to 512 square), reference image 2 ONLY supplies the approved fine pixel-art brushwork, earthy historical color palette and material detail. Redraw the pixels of reference 1 in the fine hand-crafted pixel style of reference 2, preserving every object's location, orientation, silhouette and the whole tile's normalized geometry. Use a SQUARE 1024x1024 transparent canvas, the entire original 16x16 grid maps to the ENTIRE output square with no margins, no crop, no centering or enlarged individual object. This will be sampled down to 64x64 and composited only inside the original opaque-cell mask, so exact placement matters more than decorative additions. The checker/black outside the shapes in reference 1 means genuinely TRANSPARENT, never paint it black. Keep all negative space transparent. Crisp deliberate pixel clusters, detailed material highlights and shadows within the existing shapes, no blur, no smooth vector edges, no photographic surface, no text, no labels, no border, no extra objects. Do not copy the landscape composition from reference 2. Tile PHYS0 22: a blue river bend with moss-green banks; it joins the LEFT edge near the upper third, turns right and then exits the BOTTOM near the right-center. Keep the source's asymmetric bend and bank widths. Detailed tiny water ripples inside the existing blue ribbon, foliage and soil along the existing green border only.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "2e16fe8fed6a4c7ef0888572a19a524cbbef931a4f2256ea91a55ec7a0daa2dd"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 22,
+        "research_id": 1310,
+        "encoded_sha256": "f4fbd062e4d40664b9bc8b6bb1fff411dccae0e318d969198c66351a20c65385",
+        "encoded_length": 178,
+        "indexed_sha256": "8c54ec68ba6dedfb890a286be12b2c725b89c567c04baf653676be26919ce2be",
+        "sorted_local_offset_value_sha256": "5f501cb8dbba3b9cac349225a809ba152dff5c3a030834a15ae45166b7960534",
+        "opaque_cells": 120
+      },
+      "ready_review_sha256": "ad902024902baf63cdce08a09e27eb708d4df32c65b08c2300e04ffeac1923e5",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-026.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "02f8b2bfddee72008a69a409d077fa499f9c251ce1948f5d13c7c65354189856",
+      "bytes": 1286441,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        0,
+        0,
+        1031,
+        996
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        13,
+        13
+      ],
+      "alpha": "original generated PNG and alpha unchanged; source-over only inside verified Main write ownership; palette delta uses premultiplied alpha",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE production game-map overlay asset, use-case ui-mockup/raster game sprite. Reference image 1 is the exact 16 by 16 original tile layout (shown enlarged to 512 square), reference image 2 ONLY supplies the approved fine pixel-art brushwork, earthy historical color palette and material detail. Redraw the pixels of reference 1 in the fine hand-crafted pixel style of reference 2, preserving every object's location, orientation, silhouette and the whole tile's normalized geometry. Use a SQUARE 1024x1024 transparent canvas, the entire original 16x16 grid maps to the ENTIRE output square with no margins, no crop, no centering or enlarged individual object. This will be sampled down to 64x64 and composited only inside the original opaque-cell mask, so exact placement matters more than decorative additions. The checker/black outside the shapes in reference 1 means genuinely TRANSPARENT, never paint it black. Keep all negative space transparent. Crisp deliberate pixel clusters, detailed material highlights and shadows within the existing shapes, no blur, no smooth vector edges, no photographic surface, no text, no labels, no border, no extra objects. Do not copy the landscape composition from reference 2. Tile PHYS0 26: a blue river bend entering from the TOP near the right-center and turning toward the LEFT edge near the lower third. Preserve the precise asymmetric J bend of reference 1, with the same green banks and transparent outside. Tiny pixel ripples and mossy bank texture only within this layout.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "57a0b9d0f69f76a0e135dbefa7e1e62ac47885adbddb317eb9c7c3b3217c2df2"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 26,
+        "research_id": 1314,
+        "encoded_sha256": "e0fd65d46996904484abc7dbd5ace357e49b0b6cf55bfbccc55976bcd70e9e25",
+        "encoded_length": 161,
+        "indexed_sha256": "6ef79b304e6290d4e24f01a84bb1336fc99ea68da9c26e0020d5c223090de07d",
+        "sorted_local_offset_value_sha256": "223de62e941450c8212412ad5d53f2e5ca29b3dac3b73fac2fb50f9c065853dd",
+        "opaque_cells": 106
+      },
+      "ready_review_sha256": "ad902024902baf63cdce08a09e27eb708d4df32c65b08c2300e04ffeac1923e5",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-064.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "f9d0f991bb6675b90da0ba74caa631c4245024dbf93afc320cf197782b78c0f5",
+      "bytes": 1316055,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        9,
+        10,
+        1206,
+        1244
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        15,
+        16
+      ],
+      "alpha": "original generated PNG and alpha unchanged; source-over only inside verified Main write ownership; palette delta uses premultiplied alpha",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE production game-map overlay asset, use-case ui-mockup/raster game sprite. Reference image 1 is the exact 16 by 16 original tile layout (shown enlarged to 512 square), reference image 2 ONLY supplies the approved fine pixel-art brushwork, earthy historical color palette and material detail. Redraw the pixels of reference 1 in the fine hand-crafted pixel style of reference 2, preserving every object's location, orientation, silhouette and the whole tile's normalized geometry. Use a SQUARE 1024x1024 transparent canvas, the entire original 16x16 grid maps to the ENTIRE output square with no margins, no crop, no centering or enlarged individual object. This will be sampled down to 64x64 and composited only inside the original opaque-cell mask, so exact placement matters more than decorative additions. The checker/black outside the shapes in reference 1 means genuinely TRANSPARENT, never paint it black. Keep all negative space transparent. Crisp deliberate pixel clusters, detailed material highlights and shadows within the existing shapes, no blur, no smooth vector edges, no photographic surface, no text, no labels, no border, no extra objects. Do not copy the landscape composition from reference 2. Tile PHYS0 64: the small woodland elements of the source, with rich green foliage, brown trunks and the source's grey accents. Match the reference's small broadleaf tree at upper left and the irregular narrower woodland element at lower right. Preserve their separate shapes and exact positions, leave the rest transparent. Fine leaf clusters and bark texture, do not add ground.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "9feae3823acb229d9dbebfb86a77065939b2f09038346f5f12163d024a596c9e"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 64,
+        "research_id": 1352,
+        "encoded_sha256": "efa3ec3b5f3ee6d6d8c5cda5bb5354c6946d4fd0ef490b5def585aefc05f441f",
+        "encoded_length": 205,
+        "indexed_sha256": "7d46eef2ada391636177c8dabd77673e3c8b461bf88b3177c6ab77b26dd1bbd9",
+        "sorted_local_offset_value_sha256": "2a9afe9139c31066a42f4e1c3424128f1e2d20d814e1e3dd6ddda09f96b1826e",
+        "opaque_cells": 121
+      },
+      "ready_review_sha256": "ad902024902baf63cdce08a09e27eb708d4df32c65b08c2300e04ffeac1923e5",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-081.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "64c10fcc14668cac6c34609ab01728c6535415f9d3bafd31e1e63fb70f0b8cb8",
+      "bytes": 243265,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        470,
+        172,
+        785,
+        809
+      ],
+      "native_content_rect": [
+        6,
+        0,
+        10,
+        8
+      ],
+      "alpha": "original generated PNG and alpha unchanged; source-over only inside verified Main write ownership; palette delta uses premultiplied alpha",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE production game-map overlay asset, use-case ui-mockup/raster game sprite. Reference image 1 is the exact 16 by 16 original tile layout (shown enlarged to 512 square), reference image 2 ONLY supplies the approved fine pixel-art brushwork, earthy historical color palette and material detail. Redraw the pixels of reference 1 in the fine hand-crafted pixel style of reference 2, preserving every object's location, orientation, silhouette and the whole tile's normalized geometry. Use a SQUARE 1024x1024 transparent canvas, the entire original 16x16 grid maps to the ENTIRE output square with no margins, no crop, no centering or enlarged individual object. This will be sampled down to 64x64 and composited only inside the original opaque-cell mask, so exact placement matters more than decorative additions. The checker/black outside the shapes in reference 1 means genuinely TRANSPARENT, never paint it black. Keep all negative space transparent. Crisp deliberate pixel clusters, detailed material highlights and shadows within the existing shapes, no blur, no smooth vector edges, no photographic surface, no text, no labels, no border, no extra objects. Do not copy the landscape composition from reference 2. Tile PHYS0 81: the very narrow brown earthen path segment in the upper central-left portion. Follow the exact slightly crooked vertical line in reference 1, with its TOP edge connection and original lower endpoint. Add fine compacted-soil and tiny pebble pixels within that line. Leave all other space transparent; do NOT turn it into a wide road, fence, pole or branch.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "5a026de2724dbbf2d27c619b65132c8f3f34b74345fc9f7e9408215b354259c8"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 81,
+        "research_id": 1369,
+        "encoded_sha256": "75bfffe30b336860b0c3b3540b7995fac4c55450e9d21c191bb816356c2a1f4b",
+        "encoded_length": 65,
+        "indexed_sha256": "283ce6f56c5c8e729bc8dcd7a2c9560df40022b73c95eaf30f7a902b23921cf0",
+        "sorted_local_offset_value_sha256": "f169d63056b7531a8063dcd35131780beb3ddac2b05358a394d6dad9404c4b89",
+        "opaque_cells": 16
+      },
+      "ready_review_sha256": "ad902024902baf63cdce08a09e27eb708d4df32c65b08c2300e04ffeac1923e5",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-082.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "e9f630a2a5f8a67d8e0f61a7f348648807d4bfd88288815bcd49aa58feeb8751",
+      "bytes": 315406,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        545,
+        0,
+        1254,
+        729
+      ],
+      "native_content_rect": [
+        7,
+        0,
+        16,
+        8
+      ],
+      "alpha": "original generated PNG and alpha unchanged; source-over only inside verified Main write ownership; palette delta uses premultiplied alpha",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE production game-map overlay asset, use-case ui-mockup/raster game sprite. Reference image 1 is the exact 16 by 16 original tile layout (shown enlarged to 512 square), reference image 2 ONLY supplies the approved fine pixel-art brushwork, earthy historical color palette and material detail. Redraw the pixels of reference 1 in the fine hand-crafted pixel style of reference 2, preserving every object's location, orientation, silhouette and the whole tile's normalized geometry. Use a SQUARE 1024x1024 transparent canvas, the entire original 16x16 grid maps to the ENTIRE output square with no margins, no crop, no centering or enlarged individual object. This will be sampled down to 64x64 and composited only inside the original opaque-cell mask, so exact placement matters more than decorative additions. The checker/black outside the shapes in reference 1 means genuinely TRANSPARENT, never paint it black. Keep all negative space transparent. Crisp deliberate pixel clusters, detailed material highlights and shadows within the existing shapes, no blur, no smooth vector edges, no photographic surface, no text, no labels, no border, no extra objects. Do not copy the landscape composition from reference 2. Tile PHYS0 82: a very narrow diagonal brown earthen path from the tile CENTER toward the TOP-RIGHT corner. Follow the stair-stepped line in reference 1 exactly, including its original endpoints and thin width. Fine soil/pebble pixels only inside this strip. Rest transparent. No fence, branch, pole or ground plane.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "1c4aa0d3363ce2bfe8ff2fc71b2b3b87134f8827cea599d6517f6cd3dbdda920"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 82,
+        "research_id": 1370,
+        "encoded_sha256": "48c82fe3ec03b225de83c2fdd3fd0067c3f0a46daedd28ad029daf97cbcac390",
+        "encoded_length": 68,
+        "indexed_sha256": "5cbbd16186da71b17cbda967f948524737fd9e88f6d3b11faa5418b7b6c46873",
+        "sorted_local_offset_value_sha256": "99963963f9595336a987d0726f69bb8bfc9bb307f444f4ba200ec4ba3c1e993a",
+        "opaque_cells": 20
+      },
+      "ready_review_sha256": "ad902024902baf63cdce08a09e27eb708d4df32c65b08c2300e04ffeac1923e5",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-084.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "a9dc9f403b5d20ce70d5d76f49ab02892613ff5c472045268080d880fe4be34b",
+      "bytes": 352302,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        469,
+        535,
+        1254,
+        1254
+      ],
+      "native_content_rect": [
+        6,
+        7,
+        16,
+        16
+      ],
+      "alpha": "original generated PNG and alpha unchanged; source-over only inside verified Main write ownership; palette delta uses premultiplied alpha",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE production game-map overlay asset, use-case ui-mockup/raster game sprite. Reference image 1 is the exact 16 by 16 original tile layout (shown enlarged to 512 square), reference image 2 ONLY supplies the approved fine pixel-art brushwork, earthy historical color palette and material detail. Redraw the pixels of reference 1 in the fine hand-crafted pixel style of reference 2, preserving every object's location, orientation, silhouette and the whole tile's normalized geometry. Use a SQUARE 1024x1024 transparent canvas, the entire original 16x16 grid maps to the ENTIRE output square with no margins, no crop, no centering or enlarged individual object. This will be sampled down to 64x64 and composited only inside the original opaque-cell mask, so exact placement matters more than decorative additions. The checker/black outside the shapes in reference 1 means genuinely TRANSPARENT, never paint it black. Keep all negative space transparent. Crisp deliberate pixel clusters, detailed material highlights and shadows within the existing shapes, no blur, no smooth vector edges, no photographic surface, no text, no labels, no border, no extra objects. Do not copy the landscape composition from reference 2. Tile PHYS0 84: a very narrow diagonal brown earthen path from the tile CENTER toward the BOTTOM-RIGHT corner. Follow the stair-stepped line in reference 1 exactly, including its original endpoints and thin width. Fine soil/pebble pixels only inside this strip. Rest transparent. No fence, branch, pole or ground plane.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "656fb44a7902cef2137e2b6c7a1be9fefe551e799c7fd04c81d4e904cb6a70f8"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 84,
+        "research_id": 1372,
+        "encoded_sha256": "2d16d0f6180f93fadec2888cfcdc379578c88122988c72e0f26377939bad3417",
+        "encoded_length": 75,
+        "indexed_sha256": "c76f10ae7fb6129e369b4c42ae44bd47f3f5943fa5482cf16d4802a5893b9ff8",
+        "sorted_local_offset_value_sha256": "5e90e0d85d871c54bc41df341da82609c6b1781c3d32c748de5459b21974916c",
+        "opaque_cells": 22
+      },
+      "ready_review_sha256": "ad902024902baf63cdce08a09e27eb708d4df32c65b08c2300e04ffeac1923e5",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-085.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "6bd00650c24cc3a1c6bbe08d5184121ed2bec9e9bc538c6e0df630ec3dec18e5",
+      "bytes": 506725,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        417,
+        117,
+        839,
+        1254
+      ],
+      "native_content_rect": [
+        6,
+        7,
+        10,
+        16
+      ],
+      "alpha": "original generated PNG and alpha unchanged; source-over only inside verified Main write ownership; palette delta uses premultiplied alpha",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE production game-map overlay asset, use-case ui-mockup/raster game sprite. Reference image 1 is the exact 16 by 16 original tile layout (shown enlarged to 512 square), reference image 2 ONLY supplies the approved fine pixel-art brushwork, earthy historical color palette and material detail. Redraw the pixels of reference 1 in the fine hand-crafted pixel style of reference 2, preserving every object's location, orientation, silhouette and the whole tile's normalized geometry. Use a SQUARE 1024x1024 transparent canvas, the entire original 16x16 grid maps to the ENTIRE output square with no margins, no crop, no centering or enlarged individual object. This will be sampled down to 64x64 and composited only inside the original opaque-cell mask, so exact placement matters more than decorative additions. The checker/black outside the shapes in reference 1 means genuinely TRANSPARENT, never paint it black. Keep all negative space transparent. Crisp deliberate pixel clusters, detailed material highlights and shadows within the existing shapes, no blur, no smooth vector edges, no photographic surface, no text, no labels, no border, no extra objects. Do not copy the landscape composition from reference 2. Tile PHYS0 85: the very narrow brown earthen path segment in the lower central-left portion. Follow the exact slightly crooked vertical line in reference 1, with its BOTTOM edge connection and upper endpoint at the source location. Fine compacted-soil and tiny pebble pixels within that line. Rest transparent. Do not draw a fence, pole, branch or wide road.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "4216a1b60827803b3a04cb405c38416345af2af22a4c8d5ad82878f37fe6c4e8"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 85,
+        "research_id": 1373,
+        "encoded_sha256": "cf63288ea39bf64e219bd82e2d02e9b18b790d40e1fcec5b7b8a2c344c05c274",
+        "encoded_length": 71,
+        "indexed_sha256": "c3fab640aa20bb8fa217c020eae65a1a845342c98447e7e4cf6610cc4c19075a",
+        "sorted_local_offset_value_sha256": "17f24601907b30c980841f1bc266ce98551d36777f47743412f195960e37f2d5",
+        "opaque_cells": 18
+      },
+      "ready_review_sha256": "ad902024902baf63cdce08a09e27eb708d4df32c65b08c2300e04ffeac1923e5",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-149.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "6392b90ac606b3a5b30ed384c57bc64a6a6766d1116d85aadf440fd215dcd4a0",
+      "bytes": 1780411,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        66,
+        65,
+        1254,
+        1189
+      ],
+      "native_content_rect": [
+        1,
+        1,
+        16,
+        15
+      ],
+      "alpha": "original generated PNG and alpha unchanged; source-over only inside verified Main write ownership; palette delta uses premultiplied alpha",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE production game-map overlay asset, use-case ui-mockup/raster game sprite. Reference image 1 is the exact 16 by 16 original tile layout (shown enlarged to 512 square), reference image 2 ONLY supplies the approved fine pixel-art brushwork, earthy historical color palette and material detail. Redraw the pixels of reference 1 in the fine hand-crafted pixel style of reference 2, preserving every object's location, orientation, silhouette and the whole tile's normalized geometry. Use a SQUARE 1024x1024 transparent canvas, the entire original 16x16 grid maps to the ENTIRE output square with no margins, no crop, no centering or enlarged individual object. This will be sampled down to 64x64 and composited only inside the original opaque-cell mask, so exact placement matters more than decorative additions. The checker/black outside the shapes in reference 1 means genuinely TRANSPARENT, never paint it black. Keep all negative space transparent. Crisp deliberate pixel clusters, detailed material highlights and shadows within the existing shapes, no blur, no smooth vector edges, no photographic surface, no text, no labels, no border, no extra objects. Do not copy the landscape composition from reference 2. Tile PHYS0 149: FOUR narrow parallel light-brown tilled furrows, irregular near-vertical strips at the exact reference positions extending from near TOP to near BOTTOM. Match the source's number, width, spacing and shapes; the gaps between them and all remaining areas are transparent. Render detailed cultivated soil ridges and small clods in muted tan/brown pixel clusters. No plants, no field background, no extra rows.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "469925a371848a03758ae2ed9e89b22687bb4e8c2d34f27a1131dd3cc43cda56"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 149,
+        "research_id": 1437,
+        "encoded_sha256": "657754e1b47b0320c76c040e9afdea4a9147562fc5e30d03c3ea86ac34174390",
+        "encoded_length": 248,
+        "indexed_sha256": "b5e5cb2b7aece3e61fa1cda0bac0cc97cc8df480b1bd4cb1369a8d2b636444a3",
+        "sorted_local_offset_value_sha256": "8365031ff996d54310a9b462a13d47d7b8de5f51632f4e710457483c9b27bddc",
+        "opaque_cells": 112
+      },
+      "ready_review_sha256": "ad902024902baf63cdce08a09e27eb708d4df32c65b08c2300e04ffeac1923e5",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
     }
   }
 }
