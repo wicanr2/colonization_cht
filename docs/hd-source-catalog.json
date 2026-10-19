@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "1439ee4c2a8554768e1b0b28ec55a687c2289c18d2aca60529fc87dbb02c2ce7",
+  "formal_manifest_sha256": "08736432e3c09a48273f3936dafade98ca4d4be8d2df34f617b87ddbdb48243b",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 248,
+    "formal_asset_bindings": 261,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -32234,9 +32234,18 @@
       "indexed_sha256": "1843adff54c52c289b2fec270bffa0f8af5c23a1bb352669e6d06279c176eac7",
       "opaque_pixels": 40,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and shared small-image lifecycle; two normal Pedia positions",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-054.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "97a713cc93977fa4f21e187bb7b1d8793177018f6a73fbbd260b0da1ae5af204",
+        "scope": "R92 GUI135/native112; world new-material pixels only; published-VGA fallback, other images and full HD not newly conformed"
+      }
     },
     {
       "research_id": 882,
@@ -56430,9 +56439,11 @@
       "indexed_sha256": "2410d731c633a9f50202c97792df9b9434a222185f3745f9b82afa1065861ba3",
       "opaque_pixels": 256,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete 16x16 auxiliary D46 source, verified forward copies, same-value revocations and eight DAC rotations; normal20 Pedia topics",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-texture-000.png"
+      ],
       "cold_start_entry_sample": {
         "calls": 1,
         "candidate_research_ids": [
@@ -56447,6 +56458,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+        "formal_connected": true,
+        "review_sha256": "97a713cc93977fa4f21e187bb7b1d8793177018f6a73fbbd260b0da1ae5af204",
+        "scope": "R92 GUI135/native112; world new-material pixels only; published-VGA fallback, other images and full HD not newly conformed"
       }
     },
     {
@@ -56470,9 +56488,11 @@
       "indexed_sha256": "987bcf83e76d519d37e8fc045ca01bbc37eaca6dcf0b4e99cfd2a7939b7e3ba2",
       "opaque_pixels": 256,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete 16x16 auxiliary D46 source, verified forward copies, same-value revocations and eight DAC rotations; normal20 Pedia topics",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-texture-001.png"
+      ],
       "cold_start_entry_sample": {
         "calls": 1,
         "candidate_research_ids": [
@@ -56487,6 +56507,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+        "formal_connected": true,
+        "review_sha256": "97a713cc93977fa4f21e187bb7b1d8793177018f6a73fbbd260b0da1ae5af204",
+        "scope": "R92 GUI135/native112; world new-material pixels only; published-VGA fallback, other images and full HD not newly conformed"
       }
     },
     {
@@ -56510,9 +56537,11 @@
       "indexed_sha256": "6b05aeb2a66a907405b1fab277e9a99d0fc1794b38950cfcfe6c4e63ef786992",
       "opaque_pixels": 256,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete 16x16 auxiliary D46 source, verified forward copies, same-value revocations and eight DAC rotations; normal20 Pedia topics",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-texture-002.png"
+      ],
       "cold_start_entry_sample": {
         "calls": 1,
         "candidate_research_ids": [
@@ -56527,6 +56556,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+        "formal_connected": true,
+        "review_sha256": "97a713cc93977fa4f21e187bb7b1d8793177018f6a73fbbd260b0da1ae5af204",
+        "scope": "R92 GUI135/native112; world new-material pixels only; published-VGA fallback, other images and full HD not newly conformed"
       }
     },
     {
@@ -56550,9 +56586,11 @@
       "indexed_sha256": "5fcdb336305e520a2aa227c10ba9d13ed76833b1bf3b00d67ed76ec2e4f080d2",
       "opaque_pixels": 256,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete 16x16 auxiliary D46 source, verified forward copies, same-value revocations and eight DAC rotations; normal20 Pedia topics",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-texture-003.png"
+      ],
       "cold_start_entry_sample": {
         "calls": 1,
         "candidate_research_ids": [
@@ -56567,6 +56605,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+        "formal_connected": true,
+        "review_sha256": "97a713cc93977fa4f21e187bb7b1d8793177018f6a73fbbd260b0da1ae5af204",
+        "scope": "R92 GUI135/native112; world new-material pixels only; published-VGA fallback, other images and full HD not newly conformed"
       }
     },
     {
@@ -56590,9 +56635,11 @@
       "indexed_sha256": "18671c8af6ba0eb0858305c1ef20e03d9c5560bf68f10e74fe8040e368c81525",
       "opaque_pixels": 256,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete 16x16 auxiliary D46 source, verified forward copies, same-value revocations and eight DAC rotations; normal20 Pedia topics",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-texture-004.png"
+      ],
       "cold_start_entry_sample": {
         "calls": 1,
         "candidate_research_ids": [
@@ -56607,6 +56654,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+        "formal_connected": true,
+        "review_sha256": "97a713cc93977fa4f21e187bb7b1d8793177018f6a73fbbd260b0da1ae5af204",
+        "scope": "R92 GUI135/native112; world new-material pixels only; published-VGA fallback, other images and full HD not newly conformed"
       }
     },
     {
@@ -56630,9 +56684,11 @@
       "indexed_sha256": "6207c0ccc4c08cf448095fdeb02a43c85faee78e905c2082aa5cbdcb7cb368cf",
       "opaque_pixels": 256,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete 16x16 auxiliary D46 source, verified forward copies, same-value revocations and eight DAC rotations; normal20 Pedia topics",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-texture-005.png"
+      ],
       "cold_start_entry_sample": {
         "calls": 1,
         "candidate_research_ids": [
@@ -56647,6 +56703,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+        "formal_connected": true,
+        "review_sha256": "97a713cc93977fa4f21e187bb7b1d8793177018f6a73fbbd260b0da1ae5af204",
+        "scope": "R92 GUI135/native112; world new-material pixels only; published-VGA fallback, other images and full HD not newly conformed"
       }
     },
     {
@@ -56670,9 +56733,11 @@
       "indexed_sha256": "7b7f2a708e0ce0cc9fe63fd9635dd522de3f4ae34670e7ef9fceb9d048684c54",
       "opaque_pixels": 256,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete 16x16 auxiliary D46 source, verified forward copies, same-value revocations and eight DAC rotations; normal20 Pedia topics",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-texture-006.png"
+      ],
       "cold_start_entry_sample": {
         "calls": 1,
         "candidate_research_ids": [
@@ -56687,6 +56752,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+        "formal_connected": true,
+        "review_sha256": "97a713cc93977fa4f21e187bb7b1d8793177018f6a73fbbd260b0da1ae5af204",
+        "scope": "R92 GUI135/native112; world new-material pixels only; published-VGA fallback, other images and full HD not newly conformed"
       }
     },
     {
@@ -56710,9 +56782,11 @@
       "indexed_sha256": "a1436ff7e72cfc35e425af2407a7332daa8e2e8c8c1975a215280e995be56ba4",
       "opaque_pixels": 256,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete 16x16 auxiliary D46 source, verified forward copies, same-value revocations and eight DAC rotations; normal20 Pedia topics",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-texture-007.png"
+      ],
       "cold_start_entry_sample": {
         "calls": 1,
         "candidate_research_ids": [
@@ -56727,6 +56801,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+        "formal_connected": true,
+        "review_sha256": "97a713cc93977fa4f21e187bb7b1d8793177018f6a73fbbd260b0da1ae5af204",
+        "scope": "R92 GUI135/native112; world new-material pixels only; published-VGA fallback, other images and full HD not newly conformed"
       }
     },
     {
@@ -56750,9 +56831,11 @@
       "indexed_sha256": "f2dabce5c013e1e3092d205d93b1dedb5b2f1077848518441451ac43f948e59b",
       "opaque_pixels": 256,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete 16x16 auxiliary D46 source, verified forward copies, same-value revocations and eight DAC rotations; normal20 Pedia topics",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-texture-008.png"
+      ],
       "cold_start_entry_sample": {
         "calls": 1,
         "candidate_research_ids": [
@@ -56767,6 +56850,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+        "formal_connected": true,
+        "review_sha256": "97a713cc93977fa4f21e187bb7b1d8793177018f6a73fbbd260b0da1ae5af204",
+        "scope": "R92 GUI135/native112; world new-material pixels only; published-VGA fallback, other images and full HD not newly conformed"
       }
     },
     {
@@ -56790,9 +56880,11 @@
       "indexed_sha256": "c56eb09fbfc5b8fa403af835fb230332c327db7669961ef576cf87a70dfb4681",
       "opaque_pixels": 256,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete 16x16 auxiliary D46 source, verified forward copies, same-value revocations and eight DAC rotations; normal20 Pedia topics",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-texture-009.png"
+      ],
       "cold_start_entry_sample": {
         "calls": 1,
         "candidate_research_ids": [
@@ -56807,6 +56899,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+        "formal_connected": true,
+        "review_sha256": "97a713cc93977fa4f21e187bb7b1d8793177018f6a73fbbd260b0da1ae5af204",
+        "scope": "R92 GUI135/native112; world new-material pixels only; published-VGA fallback, other images and full HD not newly conformed"
       }
     },
     {
@@ -56830,9 +56929,11 @@
       "indexed_sha256": "bf261fabd7d38ae671ce75ba94282fb4415670665d19f4907cfd05cf6cd54ff4",
       "opaque_pixels": 256,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete 16x16 auxiliary D46 source, verified forward copies, same-value revocations and eight DAC rotations; normal20 Pedia topics",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-texture-010.png"
+      ],
       "cold_start_entry_sample": {
         "calls": 1,
         "candidate_research_ids": [
@@ -56847,6 +56948,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+        "formal_connected": true,
+        "review_sha256": "97a713cc93977fa4f21e187bb7b1d8793177018f6a73fbbd260b0da1ae5af204",
+        "scope": "R92 GUI135/native112; world new-material pixels only; published-VGA fallback, other images and full HD not newly conformed"
       }
     },
     {
@@ -56870,9 +56978,11 @@
       "indexed_sha256": "81ad65ac9d5126afa62fe6f64fd4a9dc7a13c228f4c24616ea967b26601b2888",
       "opaque_pixels": 256,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete 16x16 auxiliary D46 source, verified forward copies, same-value revocations and eight DAC rotations; normal20 Pedia topics",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "terrain-texture-011.png"
+      ],
       "cold_start_entry_sample": {
         "calls": 1,
         "candidate_research_ids": [
@@ -56887,6 +56997,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+        "formal_connected": true,
+        "review_sha256": "97a713cc93977fa4f21e187bb7b1d8793177018f6a73fbbd260b0da1ae5af204",
+        "scope": "R92 GUI135/native112; world new-material pixels only; published-VGA fallback, other images and full HD not newly conformed"
       }
     },
     {
@@ -61288,6 +61405,149 @@
       "source_indexed_sha256": "f457d017a56dc684cb8c0157ddb8c273a4f47c2f5493f074fa4aa33e23b10144",
       "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
       "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "terrain-texture-000.png",
+      "asset_sha256": "1cef0ad5f9c5fca566f10f23f6b92e28bc169c515615ebad2868dc93812ef1f2",
+      "source_research_id": 1477,
+      "source_file": "TERRAIN.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "ed5d9cbfa7e43eefebc36f6380805b1c6fa67a4169ce82b1dc68e95c5d822d63",
+      "source_indexed_sha256": "2410d731c633a9f50202c97792df9b9434a222185f3745f9b82afa1065861ba3",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "claim": "R92 normal Main-source scope only; complete Pedia pixels and scoped world material pixels"
+    },
+    {
+      "asset": "terrain-texture-001.png",
+      "asset_sha256": "ec509b042efc8d561bd975460b7f3183fcfffa0aa20979417f7d5b8ec490d2fd",
+      "source_research_id": 1478,
+      "source_file": "TERRAIN.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "f10e6db013b36cee8c4f51734179072caa1c700f42dae9f403d7ac91b084072f",
+      "source_indexed_sha256": "987bcf83e76d519d37e8fc045ca01bbc37eaca6dcf0b4e99cfd2a7939b7e3ba2",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "claim": "R92 normal Main-source scope only; complete Pedia pixels and scoped world material pixels"
+    },
+    {
+      "asset": "terrain-texture-002.png",
+      "asset_sha256": "0ec35827e02d910b63218b2b3d8ac46618d45984ba47a790fcd19813b30069ea",
+      "source_research_id": 1479,
+      "source_file": "TERRAIN.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "4eaa72647cd4cde516a12c68fbe23a469ee58f5465e6acd1dff6e2ee67b6304c",
+      "source_indexed_sha256": "6b05aeb2a66a907405b1fab277e9a99d0fc1794b38950cfcfe6c4e63ef786992",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "claim": "R92 normal Main-source scope only; complete Pedia pixels and scoped world material pixels"
+    },
+    {
+      "asset": "terrain-texture-003.png",
+      "asset_sha256": "19bd3b79998db01e26cb8d36bfc8549a23381281436f544d4cc6147a55401944",
+      "source_research_id": 1480,
+      "source_file": "TERRAIN.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "1a533ec3e6e6aa8024b6b244316628ef6cf9c0cb3b657fa23796aa5cf1201f9c",
+      "source_indexed_sha256": "5fcdb336305e520a2aa227c10ba9d13ed76833b1bf3b00d67ed76ec2e4f080d2",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "claim": "R92 normal Main-source scope only; complete Pedia pixels and scoped world material pixels"
+    },
+    {
+      "asset": "terrain-texture-004.png",
+      "asset_sha256": "7eb28c6927c45c8cf316e894876afc90d578532ad185ec5072699eac898345c7",
+      "source_research_id": 1481,
+      "source_file": "TERRAIN.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "667b4eb15dba94d017a44f794e114539fbae6c9e4a18478ed1d170243e88e1a9",
+      "source_indexed_sha256": "18671c8af6ba0eb0858305c1ef20e03d9c5560bf68f10e74fe8040e368c81525",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "claim": "R92 normal Main-source scope only; complete Pedia pixels and scoped world material pixels"
+    },
+    {
+      "asset": "terrain-texture-005.png",
+      "asset_sha256": "aed5b8739b8aae9bede8e3b24fb99b0984c1683a3c450648ed111f6016198fb4",
+      "source_research_id": 1482,
+      "source_file": "TERRAIN.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "170af1db639c412cdb55610054c1156f68b221fc7765e3d9dc2fed3c7a021a89",
+      "source_indexed_sha256": "6207c0ccc4c08cf448095fdeb02a43c85faee78e905c2082aa5cbdcb7cb368cf",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "claim": "R92 normal Main-source scope only; complete Pedia pixels and scoped world material pixels"
+    },
+    {
+      "asset": "terrain-texture-006.png",
+      "asset_sha256": "a06bd0f8d717c68589ff2be53d11b488ba886b768509c989013b8ceca9010621",
+      "source_research_id": 1483,
+      "source_file": "TERRAIN.SS",
+      "source_ordinal": 6,
+      "source_encoded_sha256": "b6f66241a7d235c9491f3979080d93a5b05f590ae7d9685676906c1e89f85125",
+      "source_indexed_sha256": "7b7f2a708e0ce0cc9fe63fd9635dd522de3f4ae34670e7ef9fceb9d048684c54",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "claim": "R92 normal Main-source scope only; complete Pedia pixels and scoped world material pixels"
+    },
+    {
+      "asset": "terrain-texture-007.png",
+      "asset_sha256": "5139e0ac0f4d9373fc2ac98d66379a5fea9cc01a4e9e6fe5291455f6e3a7dcbf",
+      "source_research_id": 1484,
+      "source_file": "TERRAIN.SS",
+      "source_ordinal": 7,
+      "source_encoded_sha256": "e5157406d74b0a8077f8b5f92b26cace67b3f233d17e0f747f242acb9257d6ce",
+      "source_indexed_sha256": "a1436ff7e72cfc35e425af2407a7332daa8e2e8c8c1975a215280e995be56ba4",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "claim": "R92 normal Main-source scope only; complete Pedia pixels and scoped world material pixels"
+    },
+    {
+      "asset": "terrain-texture-008.png",
+      "asset_sha256": "ace86713539fbc3071393d5bae9719bd9bcc4352e04008b55d33b88f57f38eb2",
+      "source_research_id": 1485,
+      "source_file": "TERRAIN.SS",
+      "source_ordinal": 8,
+      "source_encoded_sha256": "dd5f241fce90f5c411bc58145db18bc5d1a5348f5eddac5a6f4ba5591bcd0c78",
+      "source_indexed_sha256": "f2dabce5c013e1e3092d205d93b1dedb5b2f1077848518441451ac43f948e59b",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "claim": "R92 normal Main-source scope only; complete Pedia pixels and scoped world material pixels"
+    },
+    {
+      "asset": "terrain-texture-009.png",
+      "asset_sha256": "70d84cba2a017956e75114222aab68201c91595aea5519fcc424ea1d3d372f08",
+      "source_research_id": 1486,
+      "source_file": "TERRAIN.SS",
+      "source_ordinal": 9,
+      "source_encoded_sha256": "f693ae1bf22b6f67681581a29448ad07c481c228d4bbb766e4ab760ffabd46c0",
+      "source_indexed_sha256": "c56eb09fbfc5b8fa403af835fb230332c327db7669961ef576cf87a70dfb4681",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "claim": "R92 normal Main-source scope only; complete Pedia pixels and scoped world material pixels"
+    },
+    {
+      "asset": "terrain-texture-010.png",
+      "asset_sha256": "b99151ec34ca369beb34fa41e8fbea3fed582f37b078f3528c955380522c7386",
+      "source_research_id": 1487,
+      "source_file": "TERRAIN.SS",
+      "source_ordinal": 10,
+      "source_encoded_sha256": "0bec812397cf73ec88ef03ebd8d53429efa2dbc4415189420e0e99a3bc819d23",
+      "source_indexed_sha256": "bf261fabd7d38ae671ce75ba94282fb4415670665d19f4907cfd05cf6cd54ff4",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "claim": "R92 normal Main-source scope only; complete Pedia pixels and scoped world material pixels"
+    },
+    {
+      "asset": "terrain-texture-011.png",
+      "asset_sha256": "2fbd9b54cff243599b43d441b154da5d1d85aefd2d7cabe0d6e54150c474c562",
+      "source_research_id": 1488,
+      "source_file": "TERRAIN.SS",
+      "source_ordinal": 11,
+      "source_encoded_sha256": "8570842ee326bec0219f69b162a9b2c29f371abd4531d310a7e10d7274899611",
+      "source_indexed_sha256": "81ad65ac9d5126afa62fe6f64fd4a9dc7a13c228f4c24616ea967b26601b2888",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "claim": "R92 normal Main-source scope only; complete Pedia pixels and scoped world material pixels"
+    },
+    {
+      "asset": "icons-054.png",
+      "asset_sha256": "0abb719aa0518b9ef295d8b9a7aa865105dfb1b1facd9333a6a8c06e0955868a",
+      "source_research_id": 881,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 54,
+      "source_encoded_sha256": "9a9f9912a1569b2444c4403bb61eba45573247a9a4494840cfdafeca7466d121",
+      "source_indexed_sha256": "1843adff54c52c289b2fec270bffa0f8af5c23a1bb352669e6d06279c176eac7",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "R92 normal Main-source scope only; complete Pedia pixels and scoped world material pixels"
     }
   ],
   "limitations": [
@@ -61828,5 +62088,28 @@
     "gui_samples": 159,
     "unique_native_points": 154,
     "claim": "thirty building sources; full independent Pedia pixels exclude the final inherited-world image; full HD incomplete"
+  },
+  "terrain_texture_conformance": {
+    "ready_sha256": "be2c3b3c15397348ad530a1af88a39aa8a8fffc2f046f6266d51cd48e6234220",
+    "review_sha256": "97a713cc93977fa4f21e187bb7b1d8793177018f6a73fbbd260b0da1ae5af204",
+    "sources": [
+      881,
+      1477,
+      1478,
+      1479,
+      1480,
+      1481,
+      1482,
+      1483,
+      1484,
+      1485,
+      1486,
+      1487,
+      1488
+    ],
+    "formal_assets": 261,
+    "gui_samples": 135,
+    "unique_native_points": 112,
+    "claim": "twelve material sources and one hammer; full Pedia pixels, scoped new world material pixels and complete X11; full HD incomplete"
   }
 }

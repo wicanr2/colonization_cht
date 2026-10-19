@@ -89,6 +89,86 @@ def extend_buildings(a):
     print('PASS_BUILDING30_CONFORMED_SOURCE_INDEX', 248, sha(a.output), flush=True)
 
 
+def extend_terrain_textures(a):
+    """規格071／065 R92：只登錄已驗十二材質與施工槌，保持世界畫素邊界。"""
+    baseline, ready, review = read(a.baseline), read(a.ready), read(a.conformed)
+    manifest = read(a.assets / 'manifest.json')
+    ids = [881, *range(1477, 1489)]
+    names = {'icons-054.png', *('terrain-texture-%03d.png' % n for n in range(12))}
+    assert ready['state'] == 'READY' and {v['file'] for v in ready['assets']} == names
+    assert review['result'] == 'PASS_R92_TERRAIN12_HAMMER54_CONFORMANCE'
+    assert review['spec_state'] == 'CONFORMED' and review['sources'] == ids
+    assert review['ready_sha256'] == sha(a.ready)
+    assert review['inherited_source_index_sha256'] == sha(a.baseline)
+    assert review['inherited_manifest_sha256'] == baseline['formal_manifest_sha256']
+    assert review['manifest_sha256'] == sha(a.assets / 'manifest.json')
+    assert review['formal_assets'] == len(manifest['assets']) == 261
+    assert review['old_raw_pngs_preserved'] == review['old_metadata_preserved'] == 248
+    assert review['go_named_passed'] == 11 and review['go_failed'] == review['go_skipped'] == 0
+    assert review['package_files'] == 262 and review['package_faults'] == 46
+    assert review['gui_samples'] == 135 and review['unique_native_points'] == 112
+    assert review['gui_full_rgba'] == 114 * 1280 * 800
+    assert review['gui_x11_rgba'] == 135 * 1280 * 800 and review['gui_noto_fields'] == 160
+    assert review['world_new_terrain_rgba'] == 2421136 and review['actual_inputs'] == 375
+    assert review['hammer_positive_GUI_samples'] == 14
+    assert {k: (v['actual_inputs'], v['end']) for k, v in review['cohorts'].items()} == {
+        'main': (177, 304200000), 'supplement': (76, 131400000), 'remaining': (122, 191200000)}
+    for key in ['full_project_loader_positive', 'all20_terrain_topics',
+                'all12_materials_have_normal_pedia_HD', 'two_hammer_pedia_positions',
+                'five_languages_both_modes_world_arctic_hammer',
+                'four_cjk_cursor_hover_return_three_contexts', 'normal_close_removes_hammer',
+                'native_foreground_and_cursor_preserved', 'eight_water_palette_rotations_preserved',
+                'three_replays_each_cohort_state_audio_save_equal_GUI', 'raw_png_alpha_preserved',
+                'native_inputs_rules_and_save_unchanged']:
+        assert review[key]
+    assert not review['complete_hd'] and not review['new_release']
+    out = copy.deepcopy(baseline)
+    assert len(out['formal_bindings']) == 248 and len(out['frames']) == 1552
+    old = {f['research_id']: f for f in baseline['frames']}
+    frames = {f['research_id']: f for f in out['frames']}
+    for binding in out['formal_bindings']:
+        name = binding['asset']
+        assert manifest['assets'][name]['sha256'] == binding['asset_sha256'] == sha(a.assets / name)
+    assert set(manifest['assets']) - {b['asset'] for b in out['formal_bindings']} == names
+    for asset in ready['assets']:
+        name, ident = asset['file'], asset['research_id']
+        frame, meta = frames[ident], manifest['assets'][name]
+        terrain = ident >= 1477
+        assert ident in ids and not frame['formal_assets'] and frame['decode_status'] == 'decoded'
+        assert frame['file'] == ('TERRAIN.SS' if terrain else 'ICONS.SS')
+        assert frame['size'] == ([16, 16] if terrain else [8, 12])
+        assert frame['opaque_pixels'] == (256 if terrain else 40)
+        assert meta['native_ordinal'] == frame['ordinal'] == asset['native_ordinal']
+        assert meta['native_size'] == frame['size']
+        assert meta['original_binding'][frame['file']] == frame['file_sha256']
+        assert meta['original_binding']['encoded_frame_sha256'] == frame['encoded_sha256']
+        assert sha(a.assets / name) == meta['sha256'] == asset['raw_sha256']
+        spec = 'docs/spec/071-hd-terrain-texture-tiles.md' if terrain else 'docs/spec/065-hd-small-images.md'
+        out['formal_bindings'].append({
+            'asset': name, 'asset_sha256': meta['sha256'], 'source_research_id': ident,
+            'source_file': frame['file'], 'source_ordinal': frame['ordinal'],
+            'source_encoded_sha256': frame['encoded_sha256'], 'source_indexed_sha256': frame['indexed_sha256'],
+            'spec': spec, 'claim': 'R92 normal Main-source scope only; complete Pedia pixels and scoped world material pixels'})
+        frame['formal_assets'] = [name]
+        frame['runtime_source_evidence'] = (
+            'confirmed complete 16x16 auxiliary D46 source, verified forward copies, same-value revocations and eight DAC rotations; normal20 Pedia topics'
+            if terrain else 'confirmed complete D46 source and shared small-image lifecycle; two normal Pedia positions')
+        frame['source_contract_reference'] = {
+            'state': 'CONFORMED', 'spec': spec, 'formal_connected': True, 'review_sha256': sha(a.conformed),
+            'scope': 'R92 GUI135/native112; world new-material pixels only; published-VGA fallback, other images and full HD not newly conformed'}
+    assert len(out['formal_bindings']) == 261
+    assert all(f == old[f['research_id']] for f in out['frames'] if f['research_id'] not in ids)
+    out['formal_manifest_sha256'] = sha(a.assets / 'manifest.json')
+    out['coverage_limits']['formal_asset_bindings'] = 261
+    out['coverage_limits']['complete_hd'] = False
+    out['terrain_texture_conformance'] = {
+        'ready_sha256': sha(a.ready), 'review_sha256': sha(a.conformed), 'sources': ids,
+        'formal_assets': 261, 'gui_samples': 135, 'unique_native_points': 112,
+        'claim': 'twelve material sources and one hammer; full Pedia pixels, scoped new world material pixels and complete X11; full HD incomplete'}
+    a.output.write_text(json.dumps(out, ensure_ascii=False, indent=2) + '\n')
+    print('PASS_TERRAIN12_HAMMER_CONFORMED_SOURCE_INDEX', 261, sha(a.output), flush=True)
+
+
 def extend_royal(a):
     baseline, ready, review = read(a.baseline), read(a.ready), read(a.conformed)
     manifest = read(a.assets / 'manifest.json')
@@ -163,9 +243,13 @@ def main():
     scope = parser.add_mutually_exclusive_group()
     scope.add_argument('--royal', action='store_true', help='規格069 R90：只擴充已完成的國王與獵犬來源')
     scope.add_argument('--buildings', action='store_true', help='規格061 R91：只擴充已驗三十個建築來源')
+    scope.add_argument('--terrain-textures', action='store_true', help='規格071／065 R92：只擴充已驗十二材質與施工槌')
     a = parser.parse_args()
     assert Path('/.dockerenv').exists() and os.getuid() != 0
     assert not a.output.exists() and a.output.parent.stat().st_uid == os.getuid()
+    if a.terrain_textures:
+        extend_terrain_textures(a)
+        return
     if a.buildings:
         extend_buildings(a)
         return

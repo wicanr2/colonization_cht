@@ -7024,3 +7024,32 @@ king-prior-typed-background-r1/check.json。
 - ICONS54研究列881，兩次正常Main繪製123352002至123353676及379982166至379983840，40個不透明點，0D46:01D2原碼268807035ef042ebb5905a5b035efe79。來源模型0f240e1fde40a6055cc42d8f61dab1ad730be880e7584c035060842c6ad8f9f7；七個正常原版狀態的元件RGBA審查4ce7e1f56d07871dcb1b8229d8cb5a0c0a5708786e8a78ec05bd61f9beacfd04。施工槌r1多出上方突起而拒絕，r2沿原圖與alpha保留。
 
 來源、邊界、重生入口與驗收停止線由規格071及065的R92節保存；正式GUI與當次原版重播未完成前不標CONFORMED。
+
+## 2026-10-19 R92：當次地形來源與三組正常操作驗收
+
+沿R92固定VICEROY.EXE、TERRAIN.SS、ICONS.SS及dosgolem指紋，Go1.26.7、
+Python3.11.2／Pillow9.4.0。位址空間維持dosgolem實模式CS:IP及20-bit線性RAM。
+confirmed僅涵蓋下列當次正常輸入的解碼、來源移交、原版狀態與顯示驗證。
+
+| 組別 | 輸入SHA-256 | GUI／原版點／輸入 |
+|---|---|---|
+| 世界與主要百科 | 4b1a66bbd4ddffa56fe5c24a65e3734c747d8decc4d28ebf8a0fe1c8bfb02bb1 | 93／75／177 |
+| 草原、雨林、航道 | 97d71427b46f7239016e118d2c811382b27f14988627071bcd1ab4fccf93fd2b | 18／16／76 |
+| 其餘五個地形主題 | c640bda92ff8623eccd76a968bee26344286b3350260041b923c9eb5a5a73472 | 24／21／122 |
+
+原版控制、觀測及三側重播的CPU、完整RAM、IDX、DAC、WAV與存檔相同。
+材料來源使用已驗0211:00A7／0112的正向MOVSB，未知與同值寫入仍撤銷。
+0D46入口及三個寫入端逐次核對完整來源、實際返回與周邊保護區。
+施工槌僅以完整ICONS54來源授權，兩個正常位置分別[244,39,252,51]與[225,39,233,51]。
+
+勘誤：畫素模型首版從舊九座建築清冊的頂層native_ordinal取值，漏納第35幀。
+原版RID82有完整507次不透明寫入；第二版改查原有formal_bindings後同狀態重跑通過。
+這是驗證模型缺項，沒有改動產品來源或放寬守門。
+擷取器原始source_id／native_ordinal欄位沿用R91，原檔保留，衍生擷取檔改記page_index；
+當次事件核定材質及施工槌的實際來源，不用百科頁碼代替資產序號。
+
+限定CONFORMED審查r92-terrain-hammer-conformance-r1.json：
+97a713cc93977fa4f21e187bb7b1d8793177018f6a73fbbd260b0da1ae5af204。
+261來源索引f03d686854ffce177fe471055dc1b188fb0885d081edafce0515002b5fbbce2f；
+生成清冊08736432e3c09a48273f3936dafade98ca4d4be8d2df34f617b87ddbdb48243b。
+新材質發布回退與未接線前景仍無本批完成信用，完整RGBA範圍及重生入口見規格071。

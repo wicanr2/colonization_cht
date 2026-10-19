@@ -1,12 +1,12 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-19",
-  "code_commit": "9ef4f77146a43700efb2a526d1140dc00ffe88ef",
-  "binary_sha256": "1ca623fbde7e0c15a004e105b5bba70d5d63d18b8c23a55a5772980714a1c3ff",
-  "formal_binary_sha256": "1ca623fbde7e0c15a004e105b5bba70d5d63d18b8c23a55a5772980714a1c3ff",
-  "source_build_sha256": "87742cce3a9c6ee8316f577fb0e4fcb400858d249818cc0802938a2673ec5ad6",
+  "code_commit": "7bc4b3879d949206770ca162b3cdc906c46f1ef0",
+  "binary_sha256": "91999364f546e40832558c3ac1a2c3b6140e720cfbe916e58321a3b7ec280b7a",
+  "formal_binary_sha256": "91999364f546e40832558c3ac1a2c3b6140e720cfbe916e58321a3b7ec280b7a",
+  "source_build_sha256": "e59d6cd7c4eca684f97acf65f3c1f753bf3dc44581ab38fba3d02971bdc6044e",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 206,
+  "formal_hd_assets": 261,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -586,6 +586,46 @@
         1551
       ],
       "scope": "軍械室原始第3幀、既有商品小圖像、HD木紋、繁中Noto與標準游標；只代表本畫面，不代表全量HD。"
+    },
+    {
+      "file": "hd-terrain-pedia-zh.png",
+      "sha256": "ba398c8451ce2690b74ebeecf2827d22abcb5e8ca90ee770738c2d47db213f27",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "terrain-pedia-arctic",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 84000000,
+      "code_commit": "7bc4b3879d949206770ca162b3cdc906c46f1ef0",
+      "binary_sha256": "91999364f546e40832558c3ac1a2c3b6140e720cfbe916e58321a3b7ec280b7a",
+      "formal_binary_sha256": "91999364f546e40832558c3ac1a2c3b6140e720cfbe916e58321a3b7ec280b7a",
+      "formal_hd_assets": 261,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-icons-remainder-r92/r92-terrain-formal-gui-r2/gui.display-118.png",
+      "source_gui_check_sha256": "89e947e86e11397a26f4ba0afd85e485a4068d594db121bdce1e4db97e9182d9",
+      "source_gui_build_sha256": "e59d6cd7c4eca684f97acf65f3c1f753bf3dc44581ab38fba3d02971bdc6044e",
+      "source_pixel_check_sha256": "8d70daf436295fcb6a9cb0060943052e62a228c5c09da2d3d8a972d1153c70d2",
+      "source_state_check_sha256": "5852ef21dece241382e0f377cc1c54ce6d07c6e5c56542821ae5700fd7202d3a",
+      "source_model_check_sha256": "2330017a1095710f4bf5bb61f7b80c704f7dd2aa8292ccf9a359e2cdf6c8c808",
+      "source_replay_check_sha256": "84f86b480643fb813906d303bafbe3c58de9eabb87bf9cb5716d9e1aea6dd50c",
+      "graphics_manifest_sha256": "08736432e3c09a48273f3936dafade98ca4d4be8d2df34f617b87ddbdb48243b",
+      "conformance_sha256": "97a713cc93977fa4f21e187bb7b1d8793177018f6a73fbbd260b0da1ae5af204",
+      "source_kind": "actual formal game presentation; verified byte-for-byte against the real X11 window game area",
+      "capture_pixels_unchanged": true,
+      "original_source_files": [
+        "TERRAIN.SS",
+        "WOODPANL.PIK",
+        "CURSOR.SS"
+      ],
+      "source_research_ids": [
+        1486,
+        1551,
+        309
+      ],
+      "terrain_source_cells": 2232,
+      "verification_state": "CONFORMED within R92 normal Main-source scope; twenty Terrain Types topics, twelve material sources and construction hammer verified; full HD incomplete",
+      "scope": "正常繁中極地百科。地形材質、木紋、Noto與一般游標已驗；前景岩石保留原版。十二種材質與施工槌限定驗收不代表全量HD或新版發行。"
     }
   ],
   "limitations": [
@@ -622,8 +662,8 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "Latest opening capture uses the frozen 9ef4 R87 formal build and 206 PNGs; current repo R89 development assets and code are not claimed as its capture build. The other seventeen PNGs and metadata are unchanged.",
-  "graphics_manifest_sha256": "eb7f70da2fb48e5d508a9a5184108ad1996bd5617fca1da38dd9e2119771ce34",
+  "provenance_scope": "Per-capture provenance is authoritative; header describes the latest added terrain capture only.",
+  "graphics_manifest_sha256": "08736432e3c09a48273f3936dafade98ca4d4be8d2df34f617b87ddbdb48243b",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -815,7 +855,7 @@
     },
     "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb"
   },
-  "conformance_state": "R87 fish21 scoped CONFORMED; other captures retain their individual verified scope",
+  "conformance_state": "R92 terrain12/hammer54 scoped CONFORMED; all earlier captures retain their individual verified scope",
   "previous_opening_sun_capture": {
     "capture": {
       "file": "hd-opening-zh.png",
@@ -928,5 +968,16 @@
     "scope": "正式正常繁中模式開場吹氣雲第0幀；本狀態來源、完整RGBA及X11已驗。完整風煙21幀與當次三側原版狀態／WAV／存檔已限定CONFORMED。其他SS、淡入淡出與全量HD未完成。",
     "conformance_sha256": "314e0729ea58a2001c2526368c9dba3ac491c3b5f074aea4395f44fdde740107",
     "replay_check_sha256": "d8e50e80069ca56917a74541ddfb65ad05f987408cb2b2fb1de44b36877e2eaf"
+  },
+  "previous_terrain_texture_capture_header": {
+    "date": "2026-10-19",
+    "code_commit": "9ef4f77146a43700efb2a526d1140dc00ffe88ef",
+    "binary_sha256": "1ca623fbde7e0c15a004e105b5bba70d5d63d18b8c23a55a5772980714a1c3ff",
+    "formal_binary_sha256": "1ca623fbde7e0c15a004e105b5bba70d5d63d18b8c23a55a5772980714a1c3ff",
+    "source_build_sha256": "87742cce3a9c6ee8316f577fb0e4fcb400858d249818cc0802938a2673ec5ad6",
+    "formal_hd_assets": 206,
+    "graphics_manifest_sha256": "eb7f70da2fb48e5d508a9a5184108ad1996bd5617fca1da38dd9e2119771ce34",
+    "conformance_state": "R87 fish21 scoped CONFORMED; other captures retain their individual verified scope",
+    "provenance_scope": "Latest opening capture uses the frozen 9ef4 R87 formal build and 206 PNGs; current repo R89 development assets and code are not claimed as its capture build. The other seventeen PNGs and metadata are unchanged."
   }
 }
