@@ -7254,3 +7254,13 @@ confirmed：WDCUT03／07來源1491／1495各十八張五語／兩模式及四語
 R6：初始0d00ddb7…，113輸入a5212f8f…至454400000步，51點；R8：初始5ce73c9f…，58輸入d2e00d62…至190000000步，33點。R8初始由正常原版前綴63輸入至846000000步自行寫出，再正常讀檔並實際觸發1495，收據r97-normal-save-before-village-check-r1.json。R7無1495命中，只留探索紀錄。
 
 重生入口workplace/reports/goal186-display-hd/hd-event-woodcuts-r97。當次r97-current-r6／r8各自native-check、source-model-check、formal-pixels-check及replays-check收據由r97-two-native-events-conformed-r1.json彙整，SHA-256 a90bea4b3f2a06a00a115bde8d1d14e17c967369a052a76bcaaa799921b92e71。source-index-native-two正例及十二拒絕只補兩列，舊310連結和其他1550列保持；公開索引SHA-256 ff89f585def6db40275f1e968896ec6515a0208862e1a2d027fdc734bb920bfb。沒有新Stage、VGA發布或全量HD完成信用。
+
+## 2026-10-20 R98登陸人物正常GUI與合成範圍
+
+confirmed：MSS3.SS來源1063在正常讀檔路徑六次完整D46 Main繪製，18張五語兩模式與四語游標往返人物實拍、共34張X11及30個原版點通過。原版EXE a17ed64c…、MSS3 10fc6aa8…、dosgolem 82a14b2…與real-mode／20-bit線性RAM基準沿規格069 R98。正式程式bdea4aaf…及316張原PNG不變。
+
+當次輸入c3f84096f7dfd1d9f79b97ecc6b96ad3626a2a8c36fdf3d95e7d1739da075cee，62筆至188800000步。無觀測控制、唯讀觀測、實拍點完整狀態及各側存檔相同；三側含HD play=true的完整狀態、WAV與實拍相同。獨立Main模型1612665筆寫入、六完整呼叫、32856撤銷含11822同值，最後來源與待恢復字底歸零。
+
+1224992個可見人物RGBA及34張X11共34816000點相同。原版不透明游標在人物層後還原，人物來源與該游標可暫時同格；原版透明游標格保留人物，HD游標只合成於原版不透明格。檢查器r1／r2／r3錯誤版本保留，r4回到已驗R97合成順序後通過，正式程式未改。沒有新增完整世界畫布、Stage或VGA發布信用。
+
+本機根目錄workplace/reports/goal186-display-hd/hd-dialog-figures-r98，收據r98-current-gui1-native-check-r1.json、source-model-check-r1.json、formal-pixels-check-r4.json與replays-check-r2.json。限定審查SHA-256 c42e6ff24fd4b1811cdcfb0fbbd23dc348fe6f6505a9711c44bdb8d5e5ca5df7；索引1931011aa41977591fdbcaff865a59375b296a379cbb0f7171ba771df26bc252，僅新增1063，其餘1551列及舊312連結保持。其他三人物READY、MSS2／5及全量HD另驗。

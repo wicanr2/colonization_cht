@@ -72,7 +72,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 以下是開發中的五語顯示層與 HD 畫面，尚未收進目前發行版。截圖來自實際遊戲視窗，
 來源與指紋見[截圖紀錄](docs/screenshots/readme-captures.json)。全量 HD 包含商品、資源、單位、
 其餘小圖像、特殊游標與動畫幀，目前仍在逐項開發。
-已有 312 張生成 HD 原圖通過限定驗收，收在 [graphics/](graphics/)，均有已驗來源連結。已接線的地形、資源小圖、建築、背景與部分動畫已通過限定驗收。其他圖像與動畫持續處理；已驗範圍見[目前狀態](CONTEXT.md)。
+已有 313 張生成 HD 原圖通過限定驗收，收在 [graphics/](graphics/)，均有已驗來源連結。已接線的地形、資源小圖、建築、背景與部分動畫已通過限定驗收。其他圖像與動畫持續處理；已驗範圍見[目前狀態](CONTEXT.md)。
 
 ![開場地圖、金色邊框與獨立物件的 HD 畫面](docs/screenshots/hd-opening-zh.png)
 
@@ -181,6 +181,10 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 ![繁體中文進入印地安人村莊事件與 HD 圖像、木框及標題牌](docs/screenshots/hd-native-village-zh.png)
 
 進入印地安人村莊：事件圖已重繪，五語切換、游標往返與正常關頁已驗證；其他事件、人物及動畫持續處理。
+
+![繁體中文登陸選項與 HD 人物、衣帽及火槍](docs/screenshots/hd-landfall-figure-zh.png)
+
+登陸對話：人物、衣帽與火槍已按原版輪廓重繪，保留對話框及操作位置。此人物已通過正常遊玩與游標往返驗證；其他人物繼續處理。
 
 ## 開發與研究入口
 

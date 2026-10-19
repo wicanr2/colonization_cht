@@ -1,12 +1,12 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-20",
-  "code_commit": "174253b",
-  "binary_sha256": "75df46cba2ecfedece060b09bf894a4fd02b9052b31a46462039940be0bd7575",
-  "formal_binary_sha256": "75df46cba2ecfedece060b09bf894a4fd02b9052b31a46462039940be0bd7575",
-  "source_build_sha256": "55e840cce565a77ef7a153f9b51e1895074cba27ff035a3e82e1a3396e3d33ce",
+  "code_commit": "73b5825",
+  "binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
+  "formal_binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
+  "source_build_sha256": "cc02d66abf153ec8dc77b87404480daceb520a66ec6a67452f0418209ec67fe0",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 312,
+  "formal_hd_assets": 316,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -902,6 +902,41 @@
       "conformance_sha256": "a90bea4b3f2a06a00a115bde8d1d14e17c967369a052a76bcaaa799921b92e71",
       "source_index_sha256": "ff89f585def6db40275f1e968896ec6515a0208862e1a2d027fdc734bb920bfb",
       "seed_sha256": "5ce73c9f1f16c7da72fa2d988e55380a900535e01c0b616ffe274d92c351a58e"
+    },
+    {
+      "file": "hd-landfall-figure-zh.png",
+      "sha256": "b6b1b390d9475cd360c31379a51254240ae837c129271a258c3d54fdc38571e7",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "landfall-dialogue-figure",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 52000000,
+      "code_commit": "73b5825",
+      "binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
+      "formal_binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
+      "formal_hd_assets": 316,
+      "source_conformed_assets": 313,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-dialog-figures-r98/r98-mss-formal-gui-r1/gui.display-014.png",
+      "source_state_check_sha256": "7965a4e21178de7da10a660719350ecbe7c27179bc21c19ba217510e229431ea",
+      "independent_pixels_sha256": "90dec453fcee73f1176bd69d2113f8342d7fd46bd48f959a5d1922cdf7566b58",
+      "source_gui_check_sha256": "90dec453fcee73f1176bd69d2113f8342d7fd46bd48f959a5d1922cdf7566b58",
+      "source_replay_check_sha256": "9e51e8603bb1d3ab0c4a5f291d9fae63e3e99764b7eca6f96d00c7c64583d000",
+      "source_build_sha256": "cc02d66abf153ec8dc77b87404480daceb520a66ec6a67452f0418209ec67fe0",
+      "graphics_manifest_sha256": "b2cff76717ebcd1bbdc9568a9c9a7dc3107edb945fc5511791dd08bea41bd10e",
+      "source_index_sha256": "1931011aa41977591fdbcaff865a59375b296a379cbb0f7171ba771df26bc252",
+      "source_kind": "正式視窗原樣實拍；新人物全部可見RGBA及完整X11已核對",
+      "capture_pixels_unchanged": true,
+      "spec_state": "CONFORMED",
+      "conformance_sha256": "c42e6ff24fd4b1811cdcfb0fbbd23dc348fe6f6505a9711c44bdb8d5e5ca5df7",
+      "verified_counts": {
+        "independent_new_component_RGBA_pixels": 94560,
+        "independent_full_world_RGBA_pixels": 0,
+        "X11_RGBA_pixels": 1024000
+      },
+      "scope": "僅MSS3 Main人物限定CONFORMED，五語兩模式、四語游標往返、正常關頁及三側完整狀態／WAV／存檔通過。既有世界層保留原驗收；其他人物與全量HD未完成。"
     }
   ],
   "limitations": [
@@ -928,7 +963,8 @@
     "R87開場圖更新為魚形第14幀實拍；二十一魚形限定CONFORMED，其他十七張及各自來源保持。R89十一背景尚未用於README截圖。",
     "R93新增繁中草原百科實拍，共二十一張。八個Main前景限定CONFORMED；世界Stage、其他來源、動畫與全量HD不因本圖視為完成。",
     "R97新增發現事件與共用UI五來源的限定CONFORMED實拍；另兩事件、完整五語與全量HD仍待，不因本圖授予完成。",
-    "R97另兩張事件已分別在正常讀檔路徑限定CONFORMED；新增兩張繁中HD原樣實拍。前25張保留各自範圍，其他事件、人物、完整五語與全量HD未完成。"
+    "R97另兩張事件已分別在正常讀檔路徑限定CONFORMED；新增兩張繁中HD原樣實拍。前25張保留各自範圍，其他事件、人物、完整五語與全量HD未完成。",
+    "R98新增正常登陸人物實拍，共28張；只增加MSS3 Main來源及其可見RGBA驗收，沒有新完整世界RGBA信用。其他三人物READY，MSS2／5與全量HD繼續。"
   ],
   "previous_build": {
     "kind": "README actual development screenshots",
@@ -941,8 +977,8 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "前25張來源保持；新增兩張事件原樣實拍，各自初始存檔、輸入與重播終點分列驗收。",
-  "graphics_manifest_sha256": "10e39006e88ca8037734463a8aec287a574ee49b0f2e563b936dc2ed52b0d486",
+  "provenance_scope": "新增正常登陸人物實拍，其餘27張原PNG與逐張來源保持；人物只授予新增可見RGBA與完整X11，沒有新完整世界畫布信用。",
+  "graphics_manifest_sha256": "b2cff76717ebcd1bbdc9568a9c9a7dc3107edb945fc5511791dd08bea41bd10e",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -1134,7 +1170,7 @@
     },
     "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb"
   },
-  "conformance_state": "R97 seven Main event and shared UI sources scoped CONFORMED; previous captures retain individual verified scope",
+  "conformance_state": "R98 MSS3 Main figure only scoped CONFORMED; other three connected figures READY; previous captures retain individual proof",
   "previous_opening_sun_capture": {
     "capture": {
       "file": "hd-opening-zh.png",
@@ -1330,5 +1366,12 @@
     "formal_hd_assets": 305,
     "conformance_state": "R97 discovery and four shared UI sources scoped CONFORMED; other two event illustrations remain READY; previous captures retain their own scope",
     "provenance_scope": "前24張來源保持；新增發現事件原樣實拍及其五來源限定CONFORMED收據，逐張程式與範圍以各列為準。"
+  },
+  "previous_dialog_figure_header": {
+    "date": "2026-10-20",
+    "code_commit": "174253b",
+    "formal_hd_assets": 312,
+    "conformance_state": "R97 seven Main event and shared UI sources scoped CONFORMED; previous captures retain individual verified scope",
+    "provenance_scope": "前25張來源保持；新增兩張事件原樣實拍，各自初始存檔、輸入與重播終點分列驗收。"
   }
 }

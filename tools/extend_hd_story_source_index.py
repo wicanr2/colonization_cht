@@ -544,27 +544,33 @@ def extend_dialog_figures(a):
     """規格069 R98：僅追加四個正常GUI已驗的MSS Main來源。"""
     baseline, ready, review = read(a.baseline), read(a.ready), read(a.conformed)
     manifest = read(a.assets / 'manifest.json')
-    ids = [1060, 1061, 1063, 1064]
-    names = {n: 'mss%d-000.png' % (n - 1060) for n in ids}
+    all_ids = [1060, 1061, 1063, 1064]
+    ids = review['new_sources']
+    assert ids and ids == sorted(set(ids)) and set(ids) <= set(all_ids)
+    names = {n: 'mss%d-000.png' % (n - 1060) for n in all_ids}
     assert sha(a.ready) == '8430d1e78767559deb4eb64818fc41bac7601a7bbb360b9421c431da83d976bc'
-    assert ready['status'] == 'READY' and ready['source_ids'] == ids
+    assert ready['status'] == 'READY' and ready['source_ids'] == all_ids
     assert ready['unobserved_private_DRAFT'] == [1062, 1065]
-    assert review['result'] == 'PASS_R98_FOUR_DIALOG_FIGURES_CONFORMANCE'
+    assert review['result'] == 'PASS_R98_SCOPED_DIALOG_FIGURES_CONFORMANCE'
     assert review['spec_state'] == 'CONFORMED' and review['new_sources'] == ids
     assert review['ready_sha256'] == sha(a.ready)
     assert review['inherited_source_index_sha256'] == sha(a.baseline)
-    assert review['inherited_manifest_sha256'] == baseline['formal_manifest_sha256'] == ready['inherited_manifest_sha256']
+    assert review['inherited_manifest_sha256'] == baseline['formal_manifest_sha256']
+    before = len(baseline['formal_bindings'])
+    assert 312 <= before < 316
+    assert baseline['formal_manifest_sha256'] == (ready['inherited_manifest_sha256'] if before == 312 else sha(a.assets / 'manifest.json'))
     assert review['manifest_sha256'] == sha(a.assets / 'manifest.json')
     assert review['formal_assets'] == len(manifest['assets']) == 316
     assert review['new_raw_pngs'] == [names[n] for n in ids]
-    assert review['conformed_bindings_before'] == len(baseline['formal_bindings']) == 312
-    assert review['conformed_bindings_after'] == 316
+    assert review['conformed_bindings_before'] == before
+    assert review['conformed_bindings_after'] == before + len(ids) <= 316
     assert review['old_raw_pngs_preserved'] == review['old_metadata_preserved'] == 312
     assert review['go_named_passed'] >= 400 and review['go_failed'] == review['go_skipped'] == 0
     assert review['package_files'] == 317 and review['package_faults'] == 19
-    assert review['gui_event_samples'] == 72
-    assert review['gui_full_rgba'] == 72 * 1280 * 800
-    assert review['gui_total_samples'] >= 72
+    assert review['gui_event_samples'] == 18 * len(ids)
+    assert review['gui_new_component_rgba'] == sum(review['gui_source_RGBA_pixels'].values()) > 0
+    assert review['gui_full_rgba'] == 0 and not review['full_world_independent_RGBA_credit']
+    assert review['gui_total_samples'] >= 18 * len(ids)
     assert review['gui_x11_rgba'] == review['gui_total_samples'] * 1280 * 800
     assert review['unique_native_points'] > 0 and review['actual_inputs'] > 0
     assert review['gui_source_samples'] == {str(n): 18 for n in ids}
@@ -572,7 +578,7 @@ def extend_dialog_figures(a):
     for key in ['full_project_loader_positive', 'raw_png_alpha_preserved',
                 'five_languages_both_modes', 'figure_four_CJK_cursor_hover_return',
                 'normal_dialog_close_and_continued_play',
-                'independent_Main_source_masks_and_complete_RGBA',
+                'independent_Main_source_masks_and_all_new_RGBA',
                 'closed_Main_has_no_new_sources', 'normal96_all11_sources55_calls',
                 'three_replays_state_audio_save_equal_GUI',
                 'native_inputs_rules_and_save_unchanged']:
@@ -584,7 +590,8 @@ def extend_dialog_figures(a):
     frames = {f['research_id']: f for f in out['frames']}
     assert len(frames) == 1552
     old_names = {b['asset'] for b in out['formal_bindings']}
-    assert set(manifest['assets']) - old_names == set(names.values())
+    assert set(manifest['assets']) - old_names == set(names.values()) - old_names
+    assert all(names[n] not in old_names for n in ids)
     for binding in out['formal_bindings']:
         name = binding['asset']
         assert binding['asset_sha256'] == manifest['assets'][name]['sha256'] == sha(a.assets / name)
@@ -610,7 +617,7 @@ def extend_dialog_figures(a):
         frame['source_contract_reference'] = {
             'state': 'CONFORMED', 'spec': 'docs/spec/069-hd-menu-background-and-textures.md',
             'formal_connected': True, 'review_sha256': sha(a.conformed),
-            'scope': 'four observed MSS Main sources only; no other figures, Stage, VGA publication or full-HD credit'}
+            'scope': 'only listed observed MSS Main sources and all visible new RGBA; no other figures, independent full-world RGBA, Stage, VGA publication or full-HD credit'}
     old = {f['research_id']: f for f in baseline['frames']}
     assert all(f == old[f['research_id']] for f in out['frames'] if f['research_id'] not in ids)
     out['formal_manifest_sha256'] = sha(a.assets / 'manifest.json')
@@ -618,10 +625,10 @@ def extend_dialog_figures(a):
     out['coverage_limits']['complete_hd'] = False
     out.setdefault('dialog_figure_conformance', []).append({
         'ready_sha256': sha(a.ready), 'review_sha256': sha(a.conformed),
-        'sources': ids, 'conformed_bindings': 316, 'gui_event_samples': 72,
-        'claim': 'only four observed Main figures; MSS2/MSS5 and global HD remain separate'})
+        'sources': ids, 'conformed_bindings': before + len(ids), 'gui_event_samples': review['gui_event_samples'],
+        'claim': 'only listed observed Main figures; other figures and global HD retain separate status'})
     a.output.write_text(json.dumps(out, ensure_ascii=False, indent=2) + '\n')
-    print('PASS_DIALOG_FOUR_SCOPED_SOURCE_INDEX', len(out['formal_bindings']), sha(a.output), flush=True)
+    print('PASS_DIALOG_SCOPED_SOURCE_INDEX', len(out['formal_bindings']), sha(a.output), flush=True)
 
 
 def extend_event_scenes(a):

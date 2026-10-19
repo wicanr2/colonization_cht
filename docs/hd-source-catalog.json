@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "10e39006e88ca8037734463a8aec287a574ee49b0f2e563b936dc2ed52b0d486",
+  "formal_manifest_sha256": "b2cff76717ebcd1bbdc9568a9c9a7dc3107edb945fc5511791dd08bea41bd10e",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 312,
+    "formal_asset_bindings": 313,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -38804,9 +38804,18 @@
       "indexed_sha256": "517056bdfc240ec25cb2e9ced2e5a532e39900c5f18913358cb3e7a81d4483cf",
       "opaque_pixels": 5910,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete original D46 Main decode, return and writes; independent Main model and normal GUI in the cited four-source review",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mss3-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "c42e6ff24fd4b1811cdcfb0fbbd23dc348fe6f6505a9711c44bdb8d5e5ca5df7",
+        "scope": "only listed observed MSS Main sources and all visible new RGBA; no other figures, independent full-world RGBA, Stage, VGA publication or full-HD credit"
+      }
     },
     {
       "research_id": 1064,
@@ -62688,6 +62697,17 @@
       "source_indexed_sha256": "b2077c734d5c4b448190ba81e0b7f832bc980e878b115ab52d9b92a4490e4168",
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "claim": "R97 complete D46 Main source only; independent native writes, glyph underlay, cursor pairs and normal GUI"
+    },
+    {
+      "asset": "mss3-000.png",
+      "asset_sha256": "4baaf1bbbb33d582244cd1d32151fcc0d43990686997d71016c263ac337d25a5",
+      "source_research_id": 1063,
+      "source_file": "MSS3.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "2e2b5e2a5d2609c7fc01dc7159fe865302e026bf89346ac2e54e3086ad43ef28",
+      "source_indexed_sha256": "517056bdfc240ec25cb2e9ced2e5a532e39900c5f18913358cb3e7a81d4483cf",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "R98 complete D46 Main figure only; independent native writes, glyph/cursor composition and normal GUI"
     }
   ],
   "limitations": [
@@ -63376,6 +63396,18 @@
       "conformed_bindings": 312,
       "gui_event_samples": 36,
       "claim": "only the listed Main event/UI sources; other pending events and full HD retain their own status"
+    }
+  ],
+  "dialog_figure_conformance": [
+    {
+      "ready_sha256": "8430d1e78767559deb4eb64818fc41bac7601a7bbb360b9421c431da83d976bc",
+      "review_sha256": "c42e6ff24fd4b1811cdcfb0fbbd23dc348fe6f6505a9711c44bdb8d5e5ca5df7",
+      "sources": [
+        1063
+      ],
+      "conformed_bindings": 313,
+      "gui_event_samples": 18,
+      "claim": "only listed observed Main figures; other figures and global HD retain separate status"
     }
   ]
 }

@@ -2846,7 +2846,7 @@ MSS2／5仍未在原版正常路徑命中，維持DRAFT且不接入正式程式�
 MSS3的繪製期間整份DAC變化不構成放寬此守門的理由，也不宣稱回傳使用色固定。
 
 正式驗收須有四來源各自正常讀檔／遊玩命中、五語兩模式、四語游標往返、
-獨立來源與完整RGBA／X11、正常關頁及來源清除、三側含play=true的
+獨立人物來源的全部RGBA與完整X11、正常關頁及來源清除、三側含play=true的
 原版狀態／WAV／存檔、載入／封包／來源索引與README截圖。
 [來源層](../../tools/hd_scene_background_sources.go)、
 [資源與游標測試](../../tools/hd_scene_sprite_resources_test.go)及
@@ -2872,3 +2872,42 @@ b2cff76717ebcd1bbdc9568a9c9a7dc3107edb945fc5511791dd08bea41bd10e。
 本機收據r98-formal-build-r2.json、r98-formal-tests-check-r2.json、
 r98-formal-sampling-check-r2.json及r98-package-check-r2.json。
 正常96筆／十一來源模型及正常GUI仍驗收中，尚未CONFORMED。
+
+R98的獨立RGBA範圍為四個新人物所有可見點，包含原版游標遮擋與透明格恢復；
+全部X11遊戲區仍逐byte核對。既有世界地形、底紋及文字沿各自已驗契約，
+不因此新增整個世界畫布的獨立RGBA信用。此範圍沿R96的分層驗收，沒有縮小全量HD素材目標。
+
+
+### R98登陸人物來源CONFORMED
+
+僅MSS3 Main來源1063限定CONFORMED，其他三個已觀測人物仍READY接線，
+MSS2／5仍DRAFT。審查r98-landfall-figure-conformed-r1.json為
+c42e6ff24fd4b1811cdcfb0fbbd23dc348fe6f6505a9711c44bdb8d5e5ca5df7。
+
+| 驗收 | 範圍 |
+|---|---|
+| 正常GUI | 原版正常讀檔，18張人物實拍含五語兩模式及四語游標往返；共34張X11，正常關頁並繼續遊玩。 |
+| 原版與來源 | 30個原版控制／觀測／GUI完整狀態點；1612665筆Main寫入重建六次MSS3完整繪製，32856次撤銷含11822次同值；最後人物與待恢復字底均清除。 |
+| 畫素 | 新人物1224992個可見RGBA相同；被原版不透明游標遮住的點另驗游標合成，不計人物可見RGBA。34張完整X11共34816000點相同，沒有新完整世界畫布獨立RGBA信用。 |
+| 狀態、音訊與存檔 | 62筆當次輸入至188800000步，控制／原圖／HD play=true三側與實拍相同；各側使用同一5ce73c9f…正常原版存檔。 |
+| 既有回歸 | 同bdea4aaf…程式507具名項零失敗零跳過，另正常96筆／55完整呼叫／12點與兩份獨立模型、存檔通過；316張原PNG及清冊b2cff767…保持。 |
+
+人物檢查器r1先漏掉色盤指紋的色號前綴，r2把HD游標套到原版透明格，
+r3又錯認人物來源不能與後續不透明游標還原重疊。
+回查R97已驗合成及hd_cursor_runtime.go後，r4依相同順序驗證：
+人物來源、原版不透明游標還原、限原版不透明格的HD游標。
+失敗版本保留，正式程式、原圖、原版狀態均未修改。
+
+[來源索引工具](../../tools/extend_hd_story_source_index.py) --dialog-figures只追加1063，
+正例及十二拒絕通過，舊312連結與其他1551列保持。現行313連結索引為
+1931011aa41977591fdbcaff865a59375b296a379cbb0f7171ba771df26bc252。
+重生輸入位於本機R98根目錄：r98-source-index-baseline-landfall-r1.json、
+r98-ready-review-r1.json及r98-landfall-figure-conformed-r1.json；
+以--baseline／--ready／--conformed指定三檔、--assets指定graphics、
+--output指定尚不存在的本機檔案，在既有verification容器以非root執行。
+錯件收據r98-source-index-landfall-check-r1.json。
+
+當次原版、獨立模型、畫素與三側重播以前綴r98-current-gui1分列；
+畫素版本為formal-pixels-check-r4，其餘native／source-model為r1、replays為r2。
+原版EXE、MSS3與dosgolem指紋及real-mode／20-bit線性RAM基準沿本節前述READY證據。
+README共28張，新增當次登陸人物原樣實拍；其他三人物、其餘素材及全量HD繼續。
