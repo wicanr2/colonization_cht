@@ -811,7 +811,7 @@
       "binary_sha256": "75df46cba2ecfedece060b09bf894a4fd02b9052b31a46462039940be0bd7575",
       "formal_binary_sha256": "75df46cba2ecfedece060b09bf894a4fd02b9052b31a46462039940be0bd7575",
       "formal_hd_assets": 312,
-      "source_conformed_assets": 305,
+      "source_conformed_assets": 310,
       "source_receipt": "workplace/reports/goal186-display-hd/hd-event-woodcuts-r97/r97-event-formal-gui-r2/gui.display-010.png",
       "source_state_check_sha256": "0d6d835288f6d34418625e7ddc751e2e9919245124f2e161f7e45b2a64fb1e58",
       "source_gui_check_sha256": "7315db93a97eb2cc045aa9007229b8728285ce2ab4c9d670e0196ca548e0a060",
@@ -820,13 +820,16 @@
       "source_build_sha256": "55e840cce565a77ef7a153f9b51e1895074cba27ff035a3e82e1a3396e3d33ce",
       "source_kind": "正式視窗原樣實拍，當次獨立完整RGBA及X11遊戲區已核對",
       "capture_pixels_unchanged": true,
-      "spec_state": "READY",
+      "spec_state": "CONFORMED",
       "verified_counts": {
         "independent_full_RGBA_pixels": 1024000,
         "X11_RGBA_pixels": 1024000,
         "title_Noto_fields": 1
       },
-      "scope": "發現事件、木框及三段標題牌的當次正常新局實拍；第一事件26張完整畫面已驗，另兩事件、三側WAV及整批限定CONFORMED仍待。全量HD未完成。"
+      "scope": "發現事件、木框及三段標題牌五來源限定CONFORMED。26張完整RGBA、29張X11、正常關頁及當次三側狀態／WAV／存檔相同。另兩事件與全量HD未完成。",
+      "conformance_sha256": "45c237fb9bcda5837785a50a99b08eff06ba2b4828df0ec5b2104df865a3725d",
+      "source_replay_check_sha256": "5ffd26312fe339c10a3709ae1901371164f5e82ebf0038ac4eeea48803632341",
+      "source_index_sha256": "cd903f7132d9b6c472f5f9c1a5bab191b10a579b294a14165a1899d6b358ffe1"
     }
   ],
   "limitations": [
@@ -852,7 +855,7 @@
     "R86當次三側完整重播已收齊並限定CONFORMED，取代前項READY限制；PNG及原始捕捉程式指紋不變。R87魚形接線不混入此圖驗收。",
     "R87開場圖更新為魚形第14幀實拍；二十一魚形限定CONFORMED，其他十七張及各自來源保持。R89十一背景尚未用於README截圖。",
     "R93新增繁中草原百科實拍，共二十一張。八個Main前景限定CONFORMED；世界Stage、其他來源、動畫與全量HD不因本圖視為完成。",
-    "R97發現事件已逐RGBA／X11驗圖；新增截圖不授予另兩事件、整批CONFORMED、完整五語或全量HD完成。"
+    "R97新增發現事件與共用UI五來源的限定CONFORMED實拍；另兩事件、完整五語與全量HD仍待，不因本圖授予完成。"
   ],
   "previous_build": {
     "kind": "README actual development screenshots",
@@ -865,7 +868,7 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "前24張來源保持；新增一張第一事件正常新局的HD實拍，新增列記錄自己的正式程式與READY範圍。",
+  "provenance_scope": "前24張來源保持；新增發現事件原樣實拍及其五來源限定CONFORMED收據，逐張程式與範圍以各列為準。",
   "graphics_manifest_sha256": "d2a56422792877654e8b1cf78d8006e2f7c11a065bd2bad5ae19602f490143ee",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
@@ -1058,7 +1061,7 @@
     },
     "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb"
   },
-  "conformance_state": "R96 three scaled small images scoped CONFORMED; all previous captures retain individual scope",
+  "conformance_state": "R97 discovery and four shared UI sources scoped CONFORMED; other two event illustrations remain READY; previous captures retain their own scope",
   "previous_opening_sun_capture": {
     "capture": {
       "file": "hd-opening-zh.png",

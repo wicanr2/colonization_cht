@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "d2a56422792877654e8b1cf78d8006e2f7c11a065bd2bad5ae19602f490143ee",
+  "formal_manifest_sha256": "10e39006e88ca8037734463a8aec287a574ee49b0f2e563b936dc2ed52b0d486",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 305,
+    "formal_asset_bindings": 310,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -38979,9 +38979,18 @@
       "indexed_sha256": "b9cae608a98051e39b8a20aff41a8984d7ebadbceba38fbd0c3aba4583a3ce11",
       "opaque_pixels": 202,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete original D46 Main decode, return and writes; independent Main model and normal GUI in the cited scoped review",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "nameplat-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "45c237fb9bcda5837785a50a99b08eff06ba2b4828df0ec5b2104df865a3725d",
+        "scope": "Main only; native glyphs and cursor composition verified; no Stage, VGA publication or full-HD credit"
+      }
     },
     {
       "research_id": 1071,
@@ -39004,9 +39013,18 @@
       "indexed_sha256": "5a673eec93970055841b0e98e7c82eff1d213b7f15d30d5d50044ddf65e78e8e",
       "opaque_pixels": 224,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete original D46 Main decode, return and writes; independent Main model and normal GUI in the cited scoped review",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "nameplat-001.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "45c237fb9bcda5837785a50a99b08eff06ba2b4828df0ec5b2104df865a3725d",
+        "scope": "Main only; native glyphs and cursor composition verified; no Stage, VGA publication or full-HD credit"
+      }
     },
     {
       "research_id": 1072,
@@ -39029,9 +39047,18 @@
       "indexed_sha256": "2f2b139dd5f7e13277ee9f9aa74a74c2a8d04ced2d2b4c31b1e566d13678381b",
       "opaque_pixels": 194,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete original D46 Main decode, return and writes; independent Main model and normal GUI in the cited scoped review",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "nameplat-002.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "45c237fb9bcda5837785a50a99b08eff06ba2b4828df0ec5b2104df865a3725d",
+        "scope": "Main only; native glyphs and cursor composition verified; no Stage, VGA publication or full-HD credit"
+      }
     },
     {
       "research_id": 1073,
@@ -57483,9 +57510,18 @@
       "indexed_sha256": "7926102d7f3a8472da323a40b22c798ee91322ada6d6c891934c1184ad122acc",
       "opaque_pixels": 21696,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete original D46 Main decode, return and writes; independent Main model and normal GUI in the cited scoped review",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "wdcut01-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "45c237fb9bcda5837785a50a99b08eff06ba2b4828df0ec5b2104df865a3725d",
+        "scope": "Main only; native glyphs and cursor composition verified; no Stage, VGA publication or full-HD credit"
+      }
     },
     {
       "research_id": 1490,
@@ -58983,9 +59019,18 @@
       "indexed_sha256": "2b0276791390568c43a7c8caab2a6fe136c2235ac00e01a980b0a9cd6c669e25",
       "opaque_pixels": 24714,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete original D46 Main decode, return and writes; independent Main model and normal GUI in the cited scoped review",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "woodfram-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "review_sha256": "45c237fb9bcda5837785a50a99b08eff06ba2b4828df0ec5b2104df865a3725d",
+        "scope": "Main only; native glyphs and cursor composition verified; no Stage, VGA publication or full-HD credit"
+      }
     },
     {
       "research_id": 1550,
@@ -62548,6 +62593,61 @@
       "source_indexed_sha256": "40dbe8b7a5845b089ac7c7eeb94f092eff5325e1cc44cb1c07b9d9230bee1da3",
       "spec": "docs/spec/065-hd-small-images.md",
       "claim": "R96 complete D66 source at100%; Main003/118 and Stage003/011/118; verified typed copies only"
+    },
+    {
+      "asset": "nameplat-000.png",
+      "asset_sha256": "a83f8d877119865c57bd7cde8e2cca719195a2241dd8cf90324d2b13c26fe559",
+      "source_research_id": 1070,
+      "source_file": "NAMEPLAT.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "cc344ba5214ff2f6332be45edb5f9160918e0774f037ed0bc708cf08c0f94127",
+      "source_indexed_sha256": "b9cae608a98051e39b8a20aff41a8984d7ebadbceba38fbd0c3aba4583a3ce11",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "R97 complete D46 Main source only; independent native writes, glyph underlay, cursor pairs and normal GUI"
+    },
+    {
+      "asset": "nameplat-001.png",
+      "asset_sha256": "7ed710283c6417e93d46b6a9b0e517e50a24086a2843043beacfae41d4d76c17",
+      "source_research_id": 1071,
+      "source_file": "NAMEPLAT.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "c3e0a444992565a91d29f4be39620546322d230ada2ec967b6ccf567c6424e17",
+      "source_indexed_sha256": "5a673eec93970055841b0e98e7c82eff1d213b7f15d30d5d50044ddf65e78e8e",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "R97 complete D46 Main source only; independent native writes, glyph underlay, cursor pairs and normal GUI"
+    },
+    {
+      "asset": "nameplat-002.png",
+      "asset_sha256": "aceea09addd5a3ea6da1a6b7ec94e31023210c5c1f8a1458257b0a814e2bae9f",
+      "source_research_id": 1072,
+      "source_file": "NAMEPLAT.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "02e2d312c4f5afc90a80c8d5d35ba46bb9fd198840d3c6be5c02437fbf63a4f8",
+      "source_indexed_sha256": "2f2b139dd5f7e13277ee9f9aa74a74c2a8d04ced2d2b4c31b1e566d13678381b",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "R97 complete D46 Main source only; independent native writes, glyph underlay, cursor pairs and normal GUI"
+    },
+    {
+      "asset": "wdcut01-000.png",
+      "asset_sha256": "0365f7da88cd03f09e8ea61300fd88a455fea01d18a3495bd0d09206797623b0",
+      "source_research_id": 1489,
+      "source_file": "WDCUT01.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "5acd8251dc3308dd8fca62115a7ef0fcb553e9f4f9e09121e8db6c408be22560",
+      "source_indexed_sha256": "7926102d7f3a8472da323a40b22c798ee91322ada6d6c891934c1184ad122acc",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "R97 complete D46 Main source only; independent native writes, glyph underlay, cursor pairs and normal GUI"
+    },
+    {
+      "asset": "woodfram-000.png",
+      "asset_sha256": "f4fa697e0572d98c80ff45ee89a3f5c1b52893400f2ed1e2c815e72f3b59b13f",
+      "source_research_id": 1549,
+      "source_file": "WOODFRAM.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "81595a5976348435bff10798055f1f146f5c293dc266f6fc992134dfbd1da628",
+      "source_indexed_sha256": "2b0276791390568c43a7c8caab2a6fe136c2235ac00e01a980b0a9cd6c669e25",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "claim": "R97 complete D46 Main source only; independent native writes, glyph underlay, cursor pairs and normal GUI"
     }
   ],
   "limitations": [
@@ -63203,5 +63303,24 @@
     "gui_samples": 45,
     "unique_native_points": 40,
     "claim": "three D66 small images only; all prior contracts retained; original animation fallback and full HD incomplete"
-  }
+  },
+  "event_scene_conformance": [
+    {
+      "ready_sha256": "6e81a242583fd414176157aa741994626b49f6a6d09104a75fe5abf853c5c65e",
+      "review_sha256": "45c237fb9bcda5837785a50a99b08eff06ba2b4828df0ec5b2104df865a3725d",
+      "sources": [
+        1070,
+        1071,
+        1072,
+        1489,
+        1549
+      ],
+      "event_sources": [
+        1489
+      ],
+      "conformed_bindings": 310,
+      "gui_event_samples": 26,
+      "claim": "only the listed Main event/UI sources; other pending events and full HD retain their own status"
+    }
+  ]
 }

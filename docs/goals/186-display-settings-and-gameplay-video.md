@@ -648,3 +648,5 @@ R97修正READY：第一次正常GUI的來源拒絕已查明為IRQ堆疊誤判，
 R97第二次新局GUI已驗第一事件26張完整RGBA及29張X11，72筆當次輸入的24個原版點相同。第二事件未在預定點出現，整條GUI仍未通過，改依正常讀檔實際畫面接續；詳見[規格069](../spec/069-hd-menu-background-and-textures.md#r97第一事件正式gui抽樣其他事件續驗)。來源索引及README計數保持，未授予全量HD完成。
 
 README已新增當次第一事件HD原樣實拍，合計25張；逐圖來源與READY限制見[截圖清冊](../screenshots/readme-captures.json)，來源索引仍305，整批R97與全量HD持續。
+
+R97發現事件與四件共用UI五來源已[限定CONFORMED](../spec/069-hd-menu-background-and-textures.md#r97發現事件與共用邊框五來源conformed)，合計310已驗連結。312張原PNG及README25張保持，另外兩張事件圖仍READY並接續正常讀檔驗收；全量HD未完成。

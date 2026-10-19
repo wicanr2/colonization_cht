@@ -540,6 +540,106 @@ def extend_scaled_small_images(a):
     print('PASS_SCALED_SMALL3_CONFORMED_SOURCE_INDEX', 305, sha(a.output), flush=True)
 
 
+def extend_event_scenes(a):
+    """規格069 R97：分別登錄已驗的發現／共用UI及另兩事件。"""
+    baseline, ready, review = read(a.baseline), read(a.ready), read(a.conformed)
+    manifest = read(a.assets / 'manifest.json')
+    names = {1070: 'nameplat-000.png', 1071: 'nameplat-001.png',
+             1072: 'nameplat-002.png', 1489: 'wdcut01-000.png',
+             1491: 'wdcut03-000.png', 1495: 'wdcut07-000.png',
+             1549: 'woodfram-000.png'}
+    ids = review['new_sources']
+    first = ids == [1070, 1071, 1072, 1489, 1549]
+    assert first or ids == [1491, 1495]
+    assert review['result'] == ('PASS_R97_DISCOVERY_AND_SHARED_UI_FIVE_CONFORMANCE'
+                                if first else 'PASS_R97_TWO_NATIVE_EVENT_CONFORMANCE')
+    assert review['spec_state'] == 'CONFORMED'
+    assert sha(a.ready) == '6e81a242583fd414176157aa741994626b49f6a6d09104a75fe5abf853c5c65e'
+    assert ready['status'] == 'READY' and set(ready['source_ids']) == set(names)
+    assert review['ready_sha256'] == sha(a.ready)
+    assert review['inherited_source_index_sha256'] == sha(a.baseline)
+    assert review['inherited_manifest_sha256'] == (
+        'd2a56422792877654e8b1cf78d8006e2f7c11a065bd2bad5ae19602f490143ee'
+        if first else baseline['formal_manifest_sha256'])
+    assert review['inherited_manifest_sha256'] == baseline['formal_manifest_sha256']
+    assert review['manifest_sha256'] == sha(a.assets / 'manifest.json')
+    assert review['formal_assets'] == len(manifest['assets']) == 312
+    assert review['new_raw_pngs'] == [names[n] for n in ids]
+    before = 305 if first else 310
+    assert review['conformed_bindings_before'] == len(baseline['formal_bindings']) == before
+    assert review['conformed_bindings_after'] == before + len(ids)
+    assert review['old_raw_pngs_preserved'] == review['old_metadata_preserved'] == 305
+    assert review['go_named_passed'] == 366 and review['go_failed'] == review['go_skipped'] == 0
+    assert review['package_files'] == 313 and review['package_faults'] == 28
+    events = [1489] if first else [1491, 1495]
+    assert review['event_sources'] == events
+    assert review['gui_event_samples'] == (26 if first else 36)
+    assert review['gui_full_rgba'] == review['gui_event_samples'] * 1280 * 800
+    assert review['gui_x11_rgba'] == review['gui_total_samples'] * 1280 * 800
+    assert review['noto_GUI_fields'] == len(events) * 4
+    assert review['unique_native_points'] > 0 and review['actual_inputs'] > 0
+    assert review['replay_end'] > 0
+    for key in ['full_project_loader_positive', 'raw_png_alpha_preserved',
+                'five_languages_both_modes', 'event_four_CJK_cursor_hover_return',
+                'normal_event_close_and_continued_play',
+                'independent_Main_source_masks_and_complete_RGBA',
+                'closed_Main_has_no_new_sources',
+                'three_replays_state_audio_save_equal_GUI',
+                'native_inputs_rules_and_save_unchanged']:
+        assert review[key], key
+    if first:
+        assert review['shared_UI_sources'] == [1070, 1071, 1072, 1549]
+        assert review['shared_UI_cursor_hover_return_TC'] and review['first_title_measured_Noto_GUI']
+        assert not review['other_two_event_GUI_credit']
+    assert not review['Stage_or_VGA_publication_credit']
+    assert not review['complete_hd'] and not review['new_release']
+    out = copy.deepcopy(baseline)
+    frames = {f['research_id']: f for f in out['frames']}
+    assert len(frames) == 1552
+    old_names = {b['asset'] for b in out['formal_bindings']}
+    for binding in out['formal_bindings']:
+        name = binding['asset']
+        assert binding['asset_sha256'] == manifest['assets'][name]['sha256'] == sha(a.assets / name)
+    pending = set(names) if first else {1491, 1495}
+    assert set(manifest['assets']) - old_names == {names[n] for n in pending}
+    for ident in ids:
+        name, frame = names[ident], frames[ident]
+        meta = manifest['assets'][name]
+        assert not frame['formal_assets'] and meta['source_research_id'] == ident
+        assert meta['native_ordinal'] == frame['ordinal'] and meta['native_size'] == frame['size']
+        assert meta['original_binding'][frame['file']] == frame['file_sha256']
+        assert meta['original_binding']['encoded_frame_sha256'] == frame['encoded_sha256']
+        assert meta['original_binding']['indexed_frame_sha256'] == frame['indexed_sha256']
+        assert meta['source_encoded_length'] == frame['encoded_length']
+        assert sha(a.assets / name) == meta['sha256']
+        out['formal_bindings'].append({
+            'asset': name, 'asset_sha256': meta['sha256'], 'source_research_id': ident,
+            'source_file': frame['file'], 'source_ordinal': frame['ordinal'],
+            'source_encoded_sha256': frame['encoded_sha256'],
+            'source_indexed_sha256': frame['indexed_sha256'],
+            'spec': 'docs/spec/069-hd-menu-background-and-textures.md',
+            'claim': 'R97 complete D46 Main source only; independent native writes, glyph underlay, cursor pairs and normal GUI'})
+        frame['formal_assets'] = [name]
+        frame['runtime_source_evidence'] = 'confirmed complete original D46 Main decode, return and writes; independent Main model and normal GUI in the cited scoped review'
+        frame['source_contract_reference'] = {
+            'state': 'CONFORMED', 'spec': 'docs/spec/069-hd-menu-background-and-textures.md',
+            'formal_connected': True, 'review_sha256': sha(a.conformed),
+            'scope': 'Main only; native glyphs and cursor composition verified; no Stage, VGA publication or full-HD credit'}
+    old = {f['research_id']: f for f in baseline['frames']}
+    assert all(f == old[f['research_id']] for f in out['frames'] if f['research_id'] not in ids)
+    out['formal_manifest_sha256'] = sha(a.assets / 'manifest.json')
+    out['coverage_limits']['formal_asset_bindings'] = len(out['formal_bindings'])
+    out['coverage_limits']['complete_hd'] = False
+    reviews = out.setdefault('event_scene_conformance', [])
+    reviews.append({'ready_sha256': sha(a.ready), 'review_sha256': sha(a.conformed),
+                    'sources': ids, 'event_sources': events,
+                    'conformed_bindings': len(out['formal_bindings']),
+                    'gui_event_samples': review['gui_event_samples'],
+                    'claim': 'only the listed Main event/UI sources; other pending events and full HD retain their own status'})
+    a.output.write_text(json.dumps(out, ensure_ascii=False, indent=2) + '\n')
+    print('PASS_EVENT_SCENE_SCOPED_SOURCE_INDEX', len(out['formal_bindings']), sha(a.output), flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ['baseline', 'assets', 'ready', 'conformed', 'output']:
@@ -552,9 +652,13 @@ def main():
     scope.add_argument('--terrain-remainder', action='store_true', help='規格067 R94：只擴充已驗三十三個Main前景')
     scope.add_argument('--terrain-main-surfaces', action='store_true', help='規格067 R95：追加六個既有素材的Main表面')
     scope.add_argument('--scaled-small-images', action='store_true', help='規格065 R96：追加三個已驗縮放入口小圖像')
+    scope.add_argument('--event-scenes', action='store_true', help='規格069 R97：只追加當次已驗事件或共用UI來源')
     a = parser.parse_args()
     assert Path('/.dockerenv').exists() and os.getuid() != 0
     assert not a.output.exists() and a.output.parent.stat().st_uid == os.getuid()
+    if a.event_scenes:
+        extend_event_scenes(a)
+        return
     if a.scaled_small_images:
         extend_scaled_small_images(a)
         return

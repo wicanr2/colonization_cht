@@ -2682,3 +2682,30 @@ r97-current-partial3-formal-pixels-check-r2.json。
 兩次新局的COLONY09指紋及舊路線不同，不能憑舊時間／方向序列判定到站。
 此GUI沒有三事件完成信用。後續改以正常讀檔後的實際畫面逐段操作，
 不改DOS狀態或快照注入。三側WAV、另外兩事件、來源索引與README仍待，保持READY。
+
+### R97發現事件與共用邊框五來源CONFORMED
+
+WDCUT01及WOODFRAM第0幀、NAMEPLAT第0／1／2幀已限定CONFORMED。
+審查r97-discovery-ui-conformed-r1.json為
+45c237fb9bcda5837785a50a99b08eff06ba2b4828df0ec5b2104df865a3725d。
+另兩事件WDCUT03／07及另外十張候選沒有本節的正常GUI完成信用。
+
+| 驗收 | 已完成範圍 |
+|---|---|
+| 正常GUI | 第一事件26張完整畫面；五語兩模式、圖像四語游標進出及四件共用UI繁中游標進出。其後正常關閉並繼續到航海畫面。 |
+| 原版與畫素 | 72筆當次輸入至783000000步，24個完整原版點；17次實際來源、673字模及144游標配對。26624000個完整RGBA、29張X11共29696000點相同。 |
+| 狀態、音訊與存檔 | 控制、原圖與HD play=true三側完整CPU／RAM／IDX／DAC／WAV／存檔和GUI相同；WAV為8b4016a9b6d071d1e37e83bdd3ac8e0ed0e51106b4e75e5bba54ca4973e68203。 |
+| 守門與資源 | 同75df46cb…正式程式的366具名項及313檔封裝28拒絕沿用；此次未改顯示層程式或清冊。305張舊原PNG及metadata、312張現行原PNG保持。 |
+| 來源索引 | [既有擴充工具](../../tools/extend_hd_story_source_index.py)的--event-scenes通過正例及12項拒絕；僅新增1070／1071／1072／1489／1549，原305連結及其他1547列保持。另兩事件來源仍無formal_assets。 |
+
+[來源清冊](../hd-source-catalog.json)合計310個CONFORMED連結，其SHA-256為
+cd903f7132d9b6c472f5f9c1a5bab191b10a579b294a14165a1899d6b358ffe1。
+完整重生輸入在本機R97根目錄：r97-source-index-baseline-r1.json、
+r97-ready-fix-review-r2.json與r97-discovery-ui-conformed-r1.json；
+以--baseline／--ready／--conformed指定上述檔案、--assets指定graphics、
+--output指定尚不存在的本機輸出，於既有verification容器以非root執行工具。
+反例收據為r97-source-index-discovery-check-r1.json。
+
+README共25張原樣實拍，發現事件新增圖保持原PNG位元組及逐圖來源。
+本節只授予五個Main來源；不授予新Stage、VGA發布、另兩事件或全量HD信用。
+三事件完整批次及其他圖像續依目標186處理。

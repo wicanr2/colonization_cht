@@ -7192,3 +7192,9 @@ r97-current-partial3-formal-pixels-check-r2.json。
 兩次新局的COLONY09指紋及舊路線不同，不能憑舊時間／方向序列判定到站。
 此GUI沒有三事件完成信用。後續改以正常讀檔後的實際畫面逐段操作，
 不改DOS狀態或快照注入。三側WAV、另外兩事件、來源索引與README仍待，保持READY。
+
+### R97發現事件五來源驗收補記
+
+- 來源審查45c237fb9bcda5837785a50a99b08eff06ba2b4828df0ec5b2104df865a3725d，限定1070、1071、1072、1489、1549。原版檔案、dosgolem版本及實模式／20-bit線性位址基準沿本節登錄。
+- 三側實際72輸入至783000000步，WAV SHA-256為8b4016a9b6d071d1e37e83bdd3ac8e0ed0e51106b4e75e5bba54ca4973e68203；完整狀態及存檔與當次GUI相同。入口r97-current-partial3-replays-check-r1.json。
+- 310來源索引cd903f7132d9b6c472f5f9c1a5bab191b10a579b294a14165a1899d6b358ffe1；十二項錯審查與來源拒絕收據r97-source-index-discovery-check-r1.json。1491、1495仍未取得本次GUI完成信用。
