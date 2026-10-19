@@ -7198,3 +7198,51 @@ r97-current-partial3-formal-pixels-check-r2.json。
 - 來源審查45c237fb9bcda5837785a50a99b08eff06ba2b4828df0ec5b2104df865a3725d，限定1070、1071、1072、1489、1549。原版檔案、dosgolem版本及實模式／20-bit線性位址基準沿本節登錄。
 - 三側實際72輸入至783000000步，WAV SHA-256為8b4016a9b6d071d1e37e83bdd3ac8e0ed0e51106b4e75e5bba54ca4973e68203；完整狀態及存檔與當次GUI相同。入口r97-current-partial3-replays-check-r1.json。
 - 310來源索引cd903f7132d9b6c472f5f9c1a5bab191b10a579b294a14165a1899d6b358ffe1；十二項錯審查與來源拒絕收據r97-source-index-discovery-check-r1.json。1491、1495仍未取得本次GUI完成信用。
+
+## 2026-10-20
+
+### R97初遇事件正常讀檔收據
+
+正式程式仍為75df46cba2ecfedece060b09bf894a4fd02b9052b31a46462039940be0bd7575，
+原版與dosgolem版本及實模式／20-bit線性位址基準沿R97既有登錄。
+R6初始原版存檔0d00ddb778f8469773a7c6f72b15d6312ded291f1b306c3c0baef34f7277641f，
+實際113輸入a5212f8f2f79cb4dd22bd44710579dd31123485f22a07105011e2ccbeef4429e，
+正常關閉終點454400000步。額外按住原版選單的X11操作也包含於實際輸入。
+
+51點CPU、完整RAM、IDX、DAC、週期與存檔，控制／觀測及當次GUI相同。
+原版觀測器source為366df6da7dd4e2c6fa0a3630f8aa19238d92f319159a173d97b7428d5c755f1d，
+binary為9c4649b030942fb1d21c1e4eb85881e767e04bedd4fb0f5583db13c5392a7c42。
+獨立Main模型2132393筆寫入、13次完整來源、49204次撤銷含77次同值，478次字模底圖。
+WDCUT03事件18張完整RGBA共18432000點相同，57張X11共58368000點相同。
+本段未觸發WDCUT07；音訊三模式與另段村莊收據另驗，尚不授予兩事件CONFORMED。
+
+入口為R97/r97-current-r6-native-check-r1.json、
+r97-current-r6-source-model-check-r1.json及r97-current-r6-formal-pixels-check-r2.json。
+正常關閉原版自動存檔8e5d921f287ce90b2ebc8dc10d58fe4a9576cfc4e8236a306b60b0c288211e3f供R7正常讀檔。
+方向鍵造成畫面捲動時不可當作單位移動；須以原版View選單的Move Pieces及實際圖像核對。
+
+### R98大型人物四來源原版證據
+
+本批仍為DRAFT，完整來源與草稿契約見[規格069](docs/spec/069-hd-menu-background-and-textures.md#r98四來源草稿契約與原版證據)。
+原版VICEROY.EXE為a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3，
+dosgolem為82a14b266e1b5bc904e2d0fe507daf6bea41a013。位址基準為real-mode CS:IP及20-bit linear RAM。
+沿用96筆正常輸入253c62a1f30387d76b736fc17cd22b7040ad53263088fe51e0cd6c5f81fee122，
+初始原版存檔52ae8b7bd4bea1869afb825af165a8edc50882fc176d49985d4fb3c362d5469b，
+終點1100000000步；MSS0／1／3／4分別5／1／3／1次完整0D46:000A至121D:1554繪製，
+每個不透明點恰寫一次、253透明點與矩形外保持。只授予Main 0x2CAE0觀測事實。
+12點CPU、完整RAM、IDX、DAC、週期與存檔對照相同。
+
+source為ba0b492cf725c9ab704e3eef6d258b0a10eb5499d629afef2c8c45adffd985d9，
+binary為58d68b6417872c899e4bd37a70476547def755ba523b3dca4b927284c27834e1，
+原版完整呼叫收據9cfe62a997185fa69a67c84726addc087cc4beda7527654634739c02e1471228。
+Main獨立模型3733012筆寫入、41572次撤銷包含6288次同值。
+一次整份DAC變化只記原版事實，不推定原因，也不稱回傳使用色固定。
+全部入口使用色符合嵌入色盤；實際覆蓋時的使用色與正常GUI仍須驗。
+
+本機入口為workplace/reports/goal186-display-hd/hd-dialog-figures-r98。
+r98-full-native-state-check-r2.json保留原版對照及初版額外DAC穩定斷言的訂正；
+r98-native-source-model-check-r1.json為逐寫模型。
+四新來源與七既有來源的332項真實原版解碼正反向測試，零失敗、零跳過；
+完整載入及583600個取樣RGBA另通過。原型程式914148e5f28125df8f1fb68ce65575318ea11093ce03b9244e91ca24c9bbc4d1
+只在隔離草稿使用，不是正式程式。六張生成原PNG與alpha未改，原版參考維持本機。
+MSS2／5沒有本路徑完整呼叫信用，正式graphics與來源完成數未改。

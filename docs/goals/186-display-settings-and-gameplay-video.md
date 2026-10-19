@@ -650,3 +650,7 @@ R97第二次新局GUI已驗第一事件26張完整RGBA及29張X11，72筆當次�
 README已新增當次第一事件HD原樣實拍，合計25張；逐圖來源與READY限制見[截圖清冊](../screenshots/readme-captures.json)，來源索引仍305，整批R97與全量HD持續。
 
 R97發現事件與四件共用UI五來源已[限定CONFORMED](../spec/069-hd-menu-background-and-textures.md#r97發現事件與共用邊框五來源conformed)，合計310已驗連結。312張原PNG及README25張保持，另外兩張事件圖仍READY並接續正常讀檔驗收；全量HD未完成。
+
+R98接續[大型人物對話圖DRAFT](../spec/069-hd-menu-background-and-textures.md#r98大型人物對話圖draft)，六個MSS來源先準備唯讀參考與候選；本機入口workplace/reports/goal186-display-hd/hd-dialog-figures-r98。尚無正式接線或新增完成信用，R97另兩事件仍在正常讀檔驗收。
+
+R98已有[四來源草稿契約與原版證據](../spec/069-hd-menu-background-and-textures.md#r98四來源草稿契約與原版證據)：MSS0／1／3／4共10次完整繪製、12點原版狀態對照、332項解碼測試與完整載入及取樣通過。仍為DRAFT，未觀測MSS2／5及四人物正式GUI另驗，正式310連結與312張原PNG保持。
