@@ -3,9 +3,11 @@ package main
 import (
 	"bytes"
 	"crypto/sha256"
+	"encoding/json"
 	"fmt"
 	"image"
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 )
@@ -1738,5 +1740,199 @@ func TestClosedDialogFrameGeometry(t *testing.T) {
 	}
 	if _, ok := closedDialogFrame(nil, safe); ok {
 		t.Fatal("缺畫布")
+	}
+}
+
+// R99 spec038: actual original receipts remain private.
+type r99OutlineRun struct {
+	Text        string
+	Base        uint32
+	Start, Last uint64
+	Boxes       []image.Rectangle
+	Cursor      []image.Point `json:"retained_cursor"`
+	Segments    []uint16      `json:"retained_segments"`
+	Colors      map[byte]int
+	First       map[int]byte `json:"first_old"`
+	Values      map[int]byte `json:"last_values"`
+}
+type r99OutlineGroup struct {
+	Source string
+	Runs   []r99OutlineRun
+	First  map[int]byte `json:"expected_first_old"`
+	Values map[int]byte `json:"expected_last_values"`
+}
+
+func r99OutlineRead(t *testing.T, p string) []byte {
+	t.Helper()
+	b, e := os.ReadFile(p)
+	if e != nil {
+		t.Fatal(e)
+	}
+	return b
+}
+func r99OutlineFixture(t *testing.T) []r99OutlineGroup {
+	if os.Getenv("TEST_R99_ROOT") == "" {
+		t.Skip("requires private original R99 source receipts")
+	}
+	raw := r99OutlineRead(t, filepath.Join(os.Getenv("TEST_R99_ROOT"), "r99-outline-source-fixture-r1.json"))
+	if hash(raw) != "a96a79b53791c7b77b33f9b1b73eec27226e1cd1068cd720f94128c545137544" {
+		t.Fatal("actual original source fixture hash")
+	}
+	var d struct{ Groups []r99OutlineGroup }
+	if e := json.Unmarshal(raw, &d); e != nil {
+		t.Fatal(e)
+	}
+	if len(d.Groups) != 2 {
+		t.Fatal("two actual fields")
+	}
+	return d.Groups
+}
+func (r r99OutlineRun) run() *stringRun {
+	return &stringRun{base: r.Base, next: r.Base + uint32(len(r.Text)), start: r.Start, last: r.Last, text: []byte(r.Text), boxes: append([]image.Rectangle(nil), r.Boxes...), retainedCursor: append([]image.Point(nil), r.Cursor...), retainedSegments: append([]uint16(nil), r.Segments...), colors: r.Colors, firstOld: r.First, lastVal: r.Values}
+}
+func r99OutlineMerge(g r99OutlineGroup) *stringRun {
+	s := &stringRuntime{}
+	var out *stringRun
+	for _, r := range g.Runs {
+		out = s.outline(r.run())
+	}
+	return out
+}
+func TestR99ActualFourPassOutline(t *testing.T) {
+	for _, g := range r99OutlineFixture(t) {
+		t.Run(g.Source, func(t *testing.T) {
+			out := r99OutlineMerge(g)
+			if !out.outline || len(out.firstOld) != len(g.First) || len(out.lastVal) != len(g.Values) {
+				t.Fatalf("original glyph background incomplete: got%d want%d outline%v", len(out.firstOld), len(g.First), out.outline)
+			}
+			for k, v := range g.First {
+				if out.firstOld[k] != v {
+					t.Fatal("earliest original background lost", k, out.firstOld[k], v)
+				}
+			}
+			for k, v := range g.Values {
+				if out.lastVal[k] != v {
+					t.Fatal("latest original glyph lost", k)
+				}
+			}
+		})
+	}
+}
+func TestR99OutlinePositionGuards(t *testing.T) {
+	g := r99OutlineFixture(t)[0]
+	cases := []struct {
+		name   string
+		change func(*stringRun)
+	}{
+		{"source-base", func(r *stringRun) { r.base++ }},
+		{"text", func(r *stringRun) { r.text = append([]byte(nil), r.text...); r.text[0] = 'X' }},
+		{"short-cursor", func(r *stringRun) { r.retainedCursor = r.retainedCursor[:1] }},
+		{"missing-ending-position", func(r *stringRun) { r.retainedCursor = r.retainedCursor[:len(r.text)] }},
+		{"short-segments", func(r *stringRun) { r.retainedSegments = nil }},
+		{"other-surface", func(r *stringRun) {
+			for i := range r.retainedSegments {
+				r.retainedSegments[i] = 0xa000
+			}
+		}},
+		{"inconsistent-layout", func(r *stringRun) { r.retainedCursor[len(r.retainedCursor)-1].X += 2 }},
+		{"distant-layout", func(r *stringRun) {
+			for i := range r.retainedCursor {
+				r.retainedCursor[i].X += 3
+			}
+		}},
+		{"stage", func(r *stringRun) { r.buf2 = true }},
+		{"mixed", func(r *stringRun) { r.mixed = true }},
+		{"timeout", func(r *stringRun) { r.start = g.Runs[1].Last + 100000 }},
+		{"reversed-time", func(r *stringRun) { r.start = g.Runs[1].Last - 1 }},
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			s := &stringRuntime{}
+			s.outline(g.Runs[0].run())
+			s.outline(g.Runs[1].run())
+			r := g.Runs[2].run()
+			c.change(r)
+			got := s.outline(r)
+			if got != r {
+				t.Fatal("unproven narrow ink was merged")
+			}
+		})
+	}
+}
+func TestR99FourLocaleFieldMeasurements(t *testing.T) {
+	root := os.Getenv("TEST_R99_ROOT")
+	if root == "" {
+		t.Skip("requires private original R99 source receipts")
+	}
+	var rows []struct{ Locale, Source, Text, FontSHA, AtlasSHA string }
+	if e := json.Unmarshal(r99OutlineRead(t, filepath.Join(root, "r99-outline-layout-inputs-r1.json")), &rows); e != nil {
+		t.Fatal(e)
+	}
+	records := []map[string]any{}
+	for _, row := range rows {
+		t.Run(row.Locale+"/"+row.Source, func(t *testing.T) {
+			var group r99OutlineGroup
+			for _, g := range r99OutlineFixture(t) {
+				if g.Source == row.Source {
+					group = g
+				}
+			}
+			if len(group.Runs) != 4 {
+				t.Fatal("actual four pass source")
+			}
+			path := filepath.Join(root, "r99-formal-bundle-r1/languages", row.Locale, "masks/string-atlas.json")
+			raw := r99OutlineRead(t, path)
+			if hash(raw) != row.AtlasSHA {
+				t.Fatal("fixed Noto atlas hash")
+			}
+			var atlas struct{ Bindings map[string]string }
+			if e := json.Unmarshal(raw, &atlas); e != nil {
+				t.Fatal(e)
+			}
+			fonts, why := loadAtlasFonts(raw, row.FontSHA, atlas.Bindings, 30, 12)
+			if why != "" {
+				t.Fatal(why)
+			}
+			cat := &stringCatalog{fonts: fonts, frags: map[string]string{strings.TrimSpace(row.Source): row.Text}, dlg: &dialogCatalog{}}
+			s := &stringRuntime{cat: cat}
+			var merged *stringRun
+			canvas := r99OutlineRead(t, "/repo/workplace/reports/goal186-display-hd/hd-full-assets-r49/decoded-public-r3/pixels/1442.idx")
+			before := append([]byte(nil), canvas...)
+			for k, v := range group.Values {
+				canvas[k] = v
+			}
+			for _, r := range group.Runs {
+				merged = s.outline(r.run())
+			}
+			item, reason := s.finish(merged, canvas, merged.last, image.Rectangle{})
+			if item == nil {
+				t.Fatal("actual Noto field did not fit", reason)
+			}
+			if item.shadowOff != -4 || item.size < 12 || item.size > 30 {
+				t.Fatal("native outline or field size")
+			}
+			restored := append([]byte(nil), canvas...)
+			k := 0
+			for y := item.safe.Min.Y; y < item.safe.Max.Y; y++ {
+				for x := item.safe.Min.X; x < item.safe.Max.X; x++ {
+					restored[y*320+x] = item.before[k]
+					k++
+				}
+			}
+			if !bytes.Equal(restored, before) {
+				t.Fatal("old original glyph remains after clear")
+			}
+			records = append(records, map[string]any{"locale": row.Locale, "source": row.Source, "text": row.Text, "font_sha256": row.FontSHA, "atlas_sha256": row.AtlasSHA, "font_px": item.size, "safe": item.safe, "ink": item.ink, "normal": item.norm.Pix, "shadow": item.shadow.Pix, "accent": item.accent.Pix, "width": item.norm.Rect.Dx(), "height": item.norm.Rect.Dy(), "native_background_fully_restored": true})
+		})
+	}
+	if len(records) != 8 {
+		t.Fatal("eight measured fields")
+	}
+	b, e := json.MarshalIndent(records, "", "  ")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = os.WriteFile(filepath.Join(root, "r99-outline-formal-field-measurements-r1.json"), b, 0644); e != nil {
+		t.Fatal(e)
 	}
 }

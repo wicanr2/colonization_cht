@@ -665,7 +665,7 @@ func (s *stringRuntime) outline(r *stringRun) *stringRun {
 	for _, b := range r.boxes {
 		ri = ri.Union(b)
 	}
-	if li.Empty() || ri.Empty() || abs(li.Min.X-ri.Min.X) > 1 || abs(li.Min.Y-ri.Min.Y) > 1 {
+	if li.Empty() || ri.Empty() || !stringOutlinePositionNear(l, r, li, ri) {
 		return r
 	}
 	oc := l.outlineC
@@ -2061,4 +2061,25 @@ func closedDialogFrame(canvas []byte, safe image.Rectangle) (image.Rectangle, bo
 		}
 	}
 	return frame, true
+}
+
+// R99 READY (spec038): complete original character positions can prove nearby outline
+// passes even when unchanged writes make the changed-ink bounds narrower.
+func stringOutlinePositionNear(l, r *stringRun, li, ri image.Rectangle) bool {
+	n := len(r.text) + 1
+	if l.base == r.base && !l.buf2 && !r.buf2 && !l.mixed && !r.mixed &&
+		len(l.retainedCursor) == n && len(r.retainedCursor) == n &&
+		len(l.retainedSegments) == n && len(r.retainedSegments) == n {
+		d := r.retainedCursor[0].Sub(l.retainedCursor[0])
+		complete := abs(d.X) <= 1 && abs(d.Y) <= 1
+		for i, p := range l.retainedCursor {
+			complete = complete && r.retainedCursor[i].Sub(p) == d &&
+				l.retainedSegments[i] == 0x2cae && r.retainedSegments[i] == 0x2cae
+		}
+		if complete {
+			return true
+		}
+	}
+	// Keep the existing contract when position evidence cannot add a proof.
+	return abs(li.Min.X-ri.Min.X) <= 1 && abs(li.Min.Y-ri.Min.Y) <= 1
 }
