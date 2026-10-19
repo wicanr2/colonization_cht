@@ -1,4 +1,4 @@
-// 規格067 READY：十二個Stage來源與R93八個Main前景來源，只合成顯示。
+// 規格067 READY：十二個Stage來源與R93／R94四十一個Main前景來源，只合成顯示。
 package main
 
 import (
@@ -110,7 +110,7 @@ func loadHDTerrainBatchRuntime(h *hdRuntime, game, directory string) (*hdTerrain
 
 		p.frames[d.ordinal] = f
 	}
-	if len(p.frames) != 20 {
+	if len(p.frames) != 53 {
 		return nil, fmt.Errorf("incomplete terrain group")
 	}
 	return p, nil
@@ -144,7 +144,7 @@ func (p *hdTerrainBatchRuntime) copySource(addr uint32, value byte) (hdTerrainBa
 	m := p.h.m
 	c := m.CPU
 	cs, ip := c.OpAddr()
-	if cs != 0xcba || ip != 0xca {
+	if cs != 0xcba || ip != 0xca || c.Flags&0x400 != 0 {
 		return hdTerrainBatchCell{}, 0, false
 	}
 	pc := int(cs)*16 + int(ip)
@@ -370,6 +370,8 @@ func (p *hdTerrainBatchRuntime) paint(out *image.RGBA, f draftNativeFrame) map[s
 		return nil
 	}
 	owned, valid, painted := 0, 0, 0
+	foregroundPalette := hdTerrainForegroundPaletteSupported(f.palette)
+	remainingPalette := hdTerrainRemainingPaletteSupported(f.palette)
 	mask := make([]byte, 8000)
 	by := map[int]int{}
 	validBy := map[int]int{}
@@ -384,7 +386,7 @@ func (p *hdTerrainBatchRuntime) paint(out *image.RGBA, f draftNativeFrame) map[s
 		valid++
 		validBy[int(c.ordinal)]++
 		frame := p.frames[int(c.ordinal)]
-		if hdTerrainForegroundOrdinal(int(c.ordinal)) && !hdTerrainForegroundPaletteSupported(f.palette) {
+		if (hdTerrainRemainingOrdinal(int(c.ordinal)) && !remainingPalette) || (hdTerrainForegroundOrdinal(int(c.ordinal)) && !hdTerrainRemainingOrdinal(int(c.ordinal)) && !foregroundPalette) {
 			continue
 		}
 		sx, sy := int(c.k)%16*4, int(c.k)/16*4
@@ -418,6 +420,9 @@ func (p *hdTerrainBatchRuntime) receipt(f draftNativeFrame) map[string]any {
 }
 
 func hdTerrainForegroundOrdinal(n int) bool {
+	if hdTerrainRemainingOrdinal(n) {
+		return true
+	}
 	switch n {
 	case 22, 26, 64, 81, 82, 84, 85, 149:
 		return true
@@ -472,4 +477,40 @@ func hdTerrainForegroundWaterTile(art *image.RGBA, sx, sy int, v byte, pal []byt
 		}
 	}
 	return tile
+}
+
+func hdTerrainRemainingOrdinal(n int) bool {
+	switch n {
+	case 37, 38, 39, 41, 42, 43, 45, 46, 47, 53, 54, 55, 57, 58, 59, 61, 62, 63, 69, 70, 73, 75, 90, 91, 92, 93, 94, 95, 97, 98, 99, 101, 102:
+		return true
+	}
+	return false
+}
+
+func hdTerrainRemainingPaletteSupported(pal []byte) bool {
+	if len(pal) != 768 {
+		return false
+	}
+	var projection []byte
+	for _, v := range []byte{0, 7, 8, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 35, 36, 37, 38, 39, 40, 41, 46, 47, 50, 53, 54, 56, 65, 67, 68, 69, 70, 71, 76, 77, 78, 79, 80, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 104, 105, 106, 107, 108, 109, 110, 111, 128, 130, 131, 132, 133, 134, 136, 137, 138, 144, 148, 149} {
+		projection = append(projection, v)
+		projection = append(projection, pal[int(v)*3:int(v)*3+3]...)
+	}
+	if hash(projection) != "816ca734bee5ffca3be5e5d1d11affdcd87d495e9edacabc6788c68ba7f624b0" {
+		return false
+	}
+	for shift := 0; shift < 8; shift++ {
+		yes := true
+		for i := 0; i < 8; i++ {
+			for z := 0; z < 3; z++ {
+				if pal[(120+i)*3+z] != hdTerrainTextureCycle[(i+shift)%8][z] {
+					yes = false
+				}
+			}
+		}
+		if yes {
+			return true
+		}
+	}
+	return false
 }

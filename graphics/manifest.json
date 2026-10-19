@@ -18434,6 +18434,2007 @@
       },
       "ready_review_sha256": "ad902024902baf63cdce08a09e27eb708d4df32c65b08c2300e04ffeac1923e5",
       "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+    },
+    "terrain-037.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "c2b06c63785427142d5e3ea2f7a718d0bdf7500b46df2ca9194c0269cba3ccd9",
+      "bytes": 1803974,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        125,
+        0,
+        1229,
+        1254
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 37. Connected tan and grey mountain ridges with white snow streaks. Follow the exact source pattern of ridgelines, white snow channels and dark rock faces, including all sections cut by tile edges. Do not replace this tile section with a centered single mountain.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "8285f65ef2ddaba15d4e9f7cab5c81b0dc962b21574f02d41a4e619b01401219"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 37,
+        "research_id": 1325,
+        "encoded_sha256": "2402d32af150d568b6d1683560ff4725a41749ce6fd402f6aaeb58d063269dcf",
+        "encoded_length": 274,
+        "indexed_sha256": "1334686969f380417cf2eca3d28466969b33907979e52b5a2bea5360310e7432",
+        "sorted_local_offset_value_sha256": "dca68550885e195c0a22252470ad926935d67bedd5d5cb8e230ad4fdd4f12ff9",
+        "opaque_cells": 220
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-038.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "d799c54b7a71c0dfde816c9de1f3068ed26e4e92fd6fa9e6970e8d769582fc74",
+      "bytes": 2190882,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        0,
+        38,
+        1254,
+        1216
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 38. Connected tan and grey mountain ridges with white snow streaks. Follow the exact source pattern of ridgelines, white snow channels and dark rock faces, including all sections cut by tile edges. Do not replace this tile section with a centered single mountain.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "276f63c36b6e21cc8916bc4264283bfe8338427b3a023be6b224301d56dbf0ea"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 38,
+        "research_id": 1326,
+        "encoded_sha256": "a66fa1ebba5d9c9e8a389d20a0e16a76d5a17cc77d79178cbeeb4009fcc8d3f7",
+        "encoded_length": 259,
+        "indexed_sha256": "f14907c085e177c0f45825a1ac4c033a7f21178beec6a2ba10c33d9c5e54d48f",
+        "sorted_local_offset_value_sha256": "95d25856cd08fd06ef380e83c4a1d29f37e6fc8bbb43a1feaea73552ce837ade",
+        "opaque_cells": 217
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-039.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "fb2d33135e4a630a9c7e0884fc63debf8603005658a8959c70c34b99cd2fdfa6",
+      "bytes": 2359256,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        125,
+        125,
+        1229,
+        1229
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 39. Connected tan and grey mountain ridges with white snow streaks. Follow the exact source pattern of ridgelines, white snow channels and dark rock faces, including all sections cut by tile edges. Do not replace this tile section with a centered single mountain.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "5619fca544aa5ba177c23165735320c6f1247db0b08bc70a2a272e612d7bbb54"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 39,
+        "research_id": 1327,
+        "encoded_sha256": "0da920ddbbf92434b75e0114de96a36e4e6aeaaed680706e435a64ae84767083",
+        "encoded_length": 285,
+        "indexed_sha256": "3dd4439d82acf81cbd68e4d9ca144d4c4484ac69cd02481017acd2e551e6ff2c",
+        "sorted_local_offset_value_sha256": "4112d86adf97274828436c2e240bdaad2efd49d68ce33570614ed2a5e9087ee5",
+        "opaque_cells": 239
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-041.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "8d8157639c193133d8afff4c5d4afca96ccf28ceb678ccbeb77a46e15dadda8c",
+      "bytes": 1942774,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        244,
+        125,
+        1076,
+        1229
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 41. Connected tan and grey mountain ridges with white snow streaks. Follow the exact source pattern of ridgelines, white snow channels and dark rock faces, including all sections cut by tile edges. Do not replace this tile section with a centered single mountain.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "e9207d0f9acb1ae0220418758ad3f284dfa16c9cd624f052005124b98eabd8f8"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 41,
+        "research_id": 1329,
+        "encoded_sha256": "4491bbad0b84d59bc49abe094fb8695f8ef92dd65fcab51eca5bd31edcf0d0d6",
+        "encoded_length": 262,
+        "indexed_sha256": "d94471b6229c157b5c1bedd6829f1d14faa5038717b5905b2592ee22fc6fe1c6",
+        "sorted_local_offset_value_sha256": "765309e1728c44ab26f27826a06f7a13d31be4a1baa43df77f09022d05acc5cb",
+        "opaque_cells": 213
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-042.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "0ca4df1ccc4d794dc16594e45c1d35208de12ee5aaf19b9b1198a472ccd396a4",
+      "bytes": 1613945,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        38,
+        69,
+        1216,
+        1073
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        15
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 42. Connected tan and grey mountain ridges with white snow streaks. Follow the exact source pattern of ridgelines, white snow channels and dark rock faces, including all sections cut by tile edges. Do not replace this tile section with a centered single mountain.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "de33a0ca4059503fcd73258d85793182b54a83a4e8e39dbb8c7d16645c61b305"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 42,
+        "research_id": 1330,
+        "encoded_sha256": "a586c3a231d81f0d0b70b5af32d5b0b0466d25d969a55658fc0bfd0f41d3e4af",
+        "encoded_length": 242,
+        "indexed_sha256": "a4c1fc63f313b4557d0e7118156b79f68a76bd6355195f4bac7c13928aea6397",
+        "sorted_local_offset_value_sha256": "e4bef86268104920f90d4023061d01f2e9dd448e4b93bb37f5ef2cdf6c8ee9c3",
+        "opaque_cells": 199
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-043.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "ddf6e5018d0a8ad2ebb8e523e4e35e32bf3384f1fbefb98e3c6f3b6607aaf550",
+      "bytes": 1812738,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        25,
+        108,
+        1129,
+        1055
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        14
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 43. Connected tan and grey mountain ridges with white snow streaks. Follow the exact source pattern of ridgelines, white snow channels and dark rock faces, including all sections cut by tile edges. Do not replace this tile section with a centered single mountain.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "828c92c26b1ee959d6c2168385f1a30b0f32029d8eb90490b7e45eb58d120d2f"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 43,
+        "research_id": 1331,
+        "encoded_sha256": "0edf3b665bdabc259c1f0403650b3c36a4dab5fcb9fee39416fdd88114a9f850",
+        "encoded_length": 239,
+        "indexed_sha256": "580f10602c3088294fb92bc99d2ac9f49bee7c241d3bbf83e4f610a94ca43bd0",
+        "sorted_local_offset_value_sha256": "e2ff836d1e5905797ce618c795cfc383a8129388f2412d7ce4499d74cd423b72",
+        "opaque_cells": 202
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-045.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "89bf5e5dfe662cf94deffd63965e667877f3ade8b195803b54edb7d946cefd14",
+      "bytes": 2217541,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        75,
+        113,
+        1179,
+        1141
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 45. Connected tan and grey mountain ridges with white snow streaks. Follow the exact source pattern of ridgelines, white snow channels and dark rock faces, including all sections cut by tile edges. Do not replace this tile section with a centered single mountain.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "4f68c119dd83a4e6c526469432b8f6fce2d6f85c41a7a533382c15fc77730d9d"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 45,
+        "research_id": 1333,
+        "encoded_sha256": "e490511d763f46b2feb0f431fefd321eac7c7e3c8b1cf38dbec99c3c4e6ac624",
+        "encoded_length": 287,
+        "indexed_sha256": "c55a8c9e7625f9545cb5078f2c20a06d9499e7a7a49e732ac62e3904a82a78e0",
+        "sorted_local_offset_value_sha256": "5f9b5f5d8c2621326c6386f0dcbfdaaa15ee8af01728693ae4ed27d2e7822fab",
+        "opaque_cells": 249
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-046.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "f8fa324b09c6aab381b7a6e5b49070b271f2d57620f4dff6557741e25f4da17e",
+      "bytes": 1831213,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        88,
+        42,
+        966,
+        1217
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 46. Connected tan and grey mountain ridges with white snow streaks. Follow the exact source pattern of ridgelines, white snow channels and dark rock faces, including all sections cut by tile edges. Do not replace this tile section with a centered single mountain.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "e229ca211e40d6f6dbba3bd6d0da9729a69b85e9ba13e5660731db7caf391349"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 46,
+        "research_id": 1334,
+        "encoded_sha256": "9ed3a72e2e7d9e0e07696977af2728be8f409704d4583d6a6a36dc7b08696eb2",
+        "encoded_length": 270,
+        "indexed_sha256": "2227fa47b4337800914c720229b7210dcb5ff45605dbac80ba95705b243a84db",
+        "sorted_local_offset_value_sha256": "60cf46b4be502100e26b11948c9e9927b8f04898f15d524763cc4dd0d4258ba1",
+        "opaque_cells": 238
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-047.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "a2676ebeadfd2f11d97e9eb597ec9cae5fef2c3a75e4bb4f2e08b2e8e4b358f2",
+      "bytes": 1817885,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        75,
+        38,
+        1179,
+        1216
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 47. Connected tan and grey mountain ridges with white snow streaks. Follow the exact source pattern of ridgelines, white snow channels and dark rock faces, including all sections cut by tile edges. Do not replace this tile section with a centered single mountain.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "d42dc19dc2f84fb607a9ef804f572ed862f3ce9c59da36f6f2e6b92434f1f34c"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 47,
+        "research_id": 1335,
+        "encoded_sha256": "2992034e58bf868a409d559d0ea22379229882bf07b434e68c9cedcf985d6892",
+        "encoded_length": 285,
+        "indexed_sha256": "2569a629cad524528c871987fb5cc5f376e73df805ef8ca469aa6fe61891489f",
+        "sorted_local_offset_value_sha256": "4c502ad178e849fed09606af173bd4a5e95fb70b2157710bd28cdaf8ef59a8c6",
+        "opaque_cells": 251
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-053.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "757ad7b4e0388aee65ec731e3f656163314d4ba691d116a3ab300cd3823c1f49",
+      "bytes": 1895294,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        157,
+        62,
+        1254,
+        1254
+      ],
+      "native_content_rect": [
+        2,
+        1,
+        16,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 53. Connected dry tan-brown hills and rocky ridges. Follow the exact source pattern of high and low surfaces, dark gullies and tile-edge connections. Fine sandy rock texture, do not add snow or replace this tile section with a centered single hill.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "837b99adbb3763ac935cae7cc3b7e609e30ed58494f0d45196db74204f3c31d4"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 53,
+        "research_id": 1341,
+        "encoded_sha256": "bc27a018c3b946eae967d6c268fda6bb2c9d1696be931ac7ef66f35acd393bce",
+        "encoded_length": 238,
+        "indexed_sha256": "32e0fd182b73191ee6e737ae7286763af4cbcb44624b2802d23bc0ed4f4958ef",
+        "sorted_local_offset_value_sha256": "fb58cf8d7096adf00ddb44effddb9076041ae519c0172f8a76b8d906c964c7af",
+        "opaque_cells": 171
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-054.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "2eb31fd902b492ed31dd8fa14c94ccc7472471888195a9d52c581f0d29112b79",
+      "bytes": 2109164,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 54. Connected dry tan-brown hills and rocky ridges. Follow the exact source pattern of high and low surfaces, dark gullies and tile-edge connections. Fine sandy rock texture, do not add snow or replace this tile section with a centered single hill.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "88ddb6696c0918b724349543234225d171bd03b65f72d4b5e6776ce5052082fd"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 54,
+        "research_id": 1342,
+        "encoded_sha256": "fc112611c1a05118cce44206f8a0acd9b4a6acc66a52542a3c4b73ef21c62d73",
+        "encoded_length": 252,
+        "indexed_sha256": "ba3b4a0f2573f1a20e5094f05fc47e21b027ebacebf9dac03a70bca34f991325",
+        "sorted_local_offset_value_sha256": "8dc720c893872bd7dd3720cd73508936a26df71fccb3ddb9d101056038aec032",
+        "opaque_cells": 205
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-055.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "0a634ad05e1e5c882abd842019eb7e320db56ff2258ce8fe333d87f29342a693",
+      "bytes": 1986971,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        113,
+        63,
+        1141,
+        1091
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 55. Connected dry tan-brown hills and rocky ridges. Follow the exact source pattern of high and low surfaces, dark gullies and tile-edge connections. Fine sandy rock texture, do not add snow or replace this tile section with a centered single hill.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "8307eb38137a764dbfd298471a983d8525aed14e93c3d86d49bdf683fa08485b"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 55,
+        "research_id": 1343,
+        "encoded_sha256": "fc9034d09dc5587d36240925f038510ddeffbe0d1ff941dac6d4daeaa434fc8e",
+        "encoded_length": 265,
+        "indexed_sha256": "33d1494b7a664f2b2cc75897cb37202fe26072d63871e106f01fdd9bf26074f0",
+        "sorted_local_offset_value_sha256": "099c4c51a367b455bb1a82e2f74e3e8941456f788c8a1969043e1d6312a2395c",
+        "opaque_cells": 217
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-057.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "c6af971a11f59289288b018480ba97644f269437b107b32ddb196795fe6c6989",
+      "bytes": 1719054,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        97,
+        38,
+        1254,
+        1216
+      ],
+      "native_content_rect": [
+        1,
+        0,
+        16,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 57. Connected dry tan-brown hills and rocky ridges. Follow the exact source pattern of high and low surfaces, dark gullies and tile-edge connections. Fine sandy rock texture, do not add snow or replace this tile section with a centered single hill.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "9009b2d6ad5781ff537211a1267718b3179d04ecf4eefc50fcd856741d4740d0"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 57,
+        "research_id": 1345,
+        "encoded_sha256": "e04df990a5bbf37a8267530035ca6b4365ef7b9ec25ff1232ec927a1d178941b",
+        "encoded_length": 254,
+        "indexed_sha256": "8c2c7f6e7a8f2b8e49dd1df04cab19697873858a4e7e38a34d34711a79b906c5",
+        "sorted_local_offset_value_sha256": "f0b960b296c539eb0d536fdba09d7449517b655e7e3d1f8111fdf3466e6d9729",
+        "opaque_cells": 190
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-058.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "99e97180d76520e3b4664fb020c1e62af6526db71694db4a18c2f76472a94b24",
+      "bytes": 1543051,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        0,
+        0,
+        1254,
+        947
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        15,
+        12
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 58. Connected dry tan-brown hills and rocky ridges. Follow the exact source pattern of high and low surfaces, dark gullies and tile-edge connections. Fine sandy rock texture, do not add snow or replace this tile section with a centered single hill.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "9e289ef04c8a019a046dc94728e27067fdcffdfc1e31e410a527464afbd262d7"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 58,
+        "research_id": 1346,
+        "encoded_sha256": "b5fc1b904a5b07c5ba82b0ea9a4bfe68d7ab1c0f15cd85e2fe6662833dce54ac",
+        "encoded_length": 164,
+        "indexed_sha256": "4c27867e4e17f6b8499a355fb8e2b6cc954009431e460fb9518d46884bbad670",
+        "sorted_local_offset_value_sha256": "9a6e391eba7b136a63c0ed0b8690f69c0d26174501d138b014fdd5baaf0cfc9d",
+        "opaque_cells": 128
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-059.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "637f83ac10285a1322fb76f06bbb14f92b1b79b27c9271f961bdc5fe6f2181f1",
+      "bytes": 1616517,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        0,
+        34,
+        1254,
+        885
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        11
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 59. Connected dry tan-brown hills and rocky ridges. Follow the exact source pattern of high and low surfaces, dark gullies and tile-edge connections. Fine sandy rock texture, do not add snow or replace this tile section with a centered single hill.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "cadf8d6bc4720dd347f22f50ae996c53f4a0d2e91b2e5508d4a541a4d4e5f622"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 59,
+        "research_id": 1347,
+        "encoded_sha256": "cb434ee0982d2db02a6645837339865de3c4c1ad49b6a1555576d076797c3e02",
+        "encoded_length": 175,
+        "indexed_sha256": "8afa7ca54abcec90cc0d62c6340a0f2c156cd60847ec7557b6bae02b90ac323f",
+        "sorted_local_offset_value_sha256": "6fce92e26f523f6fae31245fa21a22a308f8e7b7e7ecf4af214a115b9b7557d7",
+        "opaque_cells": 146
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-061.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "b07c2a1e00d28a65ff84d467c9116a4343add09fea5be6e821a116c790e9a185",
+      "bytes": 1944943,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        70,
+        0,
+        1254,
+        1254
+      ],
+      "native_content_rect": [
+        1,
+        0,
+        16,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 61. Connected dry tan-brown hills and rocky ridges. Follow the exact source pattern of high and low surfaces, dark gullies and tile-edge connections. Fine sandy rock texture, do not add snow or replace this tile section with a centered single hill.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "f7195900cde55011fa6235151f3874c8e4819f23bc0ee36be03ac5007b9ad002"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 61,
+        "research_id": 1349,
+        "encoded_sha256": "7b64ed5d24a5daa491348016c5d0dfee3f3a5d13c6b130279b2e9e3a99e8db91",
+        "encoded_length": 261,
+        "indexed_sha256": "ce60a11e2e562b67cc68d777181d902fc0b7645065a190ba964710bd141ba07b",
+        "sorted_local_offset_value_sha256": "25a9e2589ce8e0389c1835dbef0be4749af86346fc7012f74475ce44a8bf18e5",
+        "opaque_cells": 194
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-062.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "8b62e33be3e02f7aac09f6d5064e3fb18dbc63597036ec4a94c885b91b89b02f",
+      "bytes": 2050482,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        0,
+        38,
+        1176,
+        1216
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        15,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 62. Connected dry tan-brown hills and rocky ridges. Follow the exact source pattern of high and low surfaces, dark gullies and tile-edge connections. Fine sandy rock texture, do not add snow or replace this tile section with a centered single hill.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "4bd3fed49a35f76f5a3b3df9ea9336733e2c7a151303dbfb3f9f547fb109ec75"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 62,
+        "research_id": 1350,
+        "encoded_sha256": "41d11780531a4f926ddc57b9a81522bcb68b9c33cc4dd53c36e046c1aa03c3ad",
+        "encoded_length": 236,
+        "indexed_sha256": "4aac5282e0298f04837322b3b140dcb7cdeceeb3939e84e2856ae38b3ccb7b2c",
+        "sorted_local_offset_value_sha256": "ad229782001188ef14e65e76a63948cc38f0c3561d15670355c43e396ff49ba7",
+        "opaque_cells": 189
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-063.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "df74d3ed20779069d029f5fa7ef5b915d48037e78fd6a432952da5269b092690",
+      "bytes": 2343348,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        75,
+        0,
+        1179,
+        1254
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 63. Connected dry tan-brown hills and rocky ridges. Follow the exact source pattern of high and low surfaces, dark gullies and tile-edge connections. Fine sandy rock texture, do not add snow or replace this tile section with a centered single hill.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "cfe8d6d948587e5bf60f2f20371c8389bc24e603e3ddf7105f6063a2fa8228d2"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 63,
+        "research_id": 1351,
+        "encoded_sha256": "14943633d38fddabf2b090cab36ea89c9b0e0505171d6521986a4a184ca3f732",
+        "encoded_length": 274,
+        "indexed_sha256": "e2467072b7fea76bb033b68a2d26a7befbbbbc881ee05cd719b3eb5f586c64ae",
+        "sorted_local_offset_value_sha256": "626ed57cb2502712be4b547261596e42b538cfa0bfaa9d491d2f8a0848276f16",
+        "opaque_cells": 222
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-069.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "b9e2c4de052ce8f2a2f44fd8a1ac20513f40e763f608a0d87b3d4a8207b6327d",
+      "bytes": 1477702,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 69. The exact disconnected evergreen/broadleaf woodland pieces in reference 1: fine green foliage, brown trunks and the source's grey accents. Preserve each tree, shrub and detached bit, its relative size and exact location; do not add ground or fill the open gaps. These are woodland tile pieces: the grey source regions should remain shaded needles, bark and woodland elements, not stone pillars, ruins or extra buildings.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "9219883a32f12d53d1f2b9201f26e758052bf59703dee3a6c652ae73d7d3d098"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 69,
+        "research_id": 1357,
+        "encoded_sha256": "af282aca02bdd2c0f63fdd78b10eae476ff9b8c38a9f53fab211218066fb683e",
+        "encoded_length": 222,
+        "indexed_sha256": "38714224f59ec27264fff7b104c74a550489dd3c4bdab9b5edbc6bbf5dd71b7f",
+        "sorted_local_offset_value_sha256": "e30a2ab1c7560b3f98f6b7e3b8cf74a50bfdfdeae89c719cfb5a3802175999a1",
+        "opaque_cells": 128
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-070.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "5463ed8462332505dbde8097a6fc1cc88e39f95f9959742beb0cf5dfcca92f71",
+      "bytes": 1995600,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        0,
+        75,
+        1254,
+        1179
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 70. The exact disconnected evergreen/broadleaf woodland pieces in reference 1: fine green foliage, brown trunks and the source's grey accents. Preserve each tree, shrub and detached bit, its relative size and exact location; do not add ground or fill the open gaps. These are woodland tile pieces: the grey source regions should remain shaded needles, bark and woodland elements, not stone pillars, ruins or extra buildings.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "70f21052f18d7bc7e9b3bb36e98f323bfc99db6ca64ed95663b0e6db97894d5c"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 70,
+        "research_id": 1358,
+        "encoded_sha256": "47f2431631b806ac55e34e3d967f98fa07a4689d7e613ee5bb74f91ec2ef5b40",
+        "encoded_length": 233,
+        "indexed_sha256": "002031fefa62a3d208f40cfc9cb24da4523308d440e9c7f6408b2d0058af53e5",
+        "sorted_local_offset_value_sha256": "6b8ba057f7b8f2f45f178fe53d50267226fe85babc298d11dd817e818396050a",
+        "opaque_cells": 176
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-073.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "7f3d72597956f6d1b1dc6135069d385f6bbe3421f901564385acdefcb2a01201",
+      "bytes": 2052360,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        80,
+        75,
+        1179,
+        1179
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 73. The exact disconnected evergreen/broadleaf woodland pieces in reference 1: fine green foliage, brown trunks and the source's grey accents. Preserve each tree, shrub and detached bit, its relative size and exact location; do not add ground or fill the open gaps. These are woodland tile pieces: the grey source regions should remain shaded needles, bark and woodland elements, not stone pillars, ruins or extra buildings.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "efbacf9f8be2f462eb13f374feea903daf300667c426071ed4693735bbc3e224"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 73,
+        "research_id": 1361,
+        "encoded_sha256": "e12a1a3f702cc3102992a5d3518873d2b260a3b1599037b6a11f40071f8526fd",
+        "encoded_length": 259,
+        "indexed_sha256": "5fc0d73f74dc2df53be1534cc3192b25f905d09a1acd892a999cf003e20c0776",
+        "sorted_local_offset_value_sha256": "580c1df70d268e5d6b898a49591b0b49a3a05540c0ccff2bf573a1bf8e1a418f",
+        "opaque_cells": 184
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-075.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "e0e9e714a10d30b1e37844af45156085a0c5d7fbe9fd03f39eb2798e193e4b27",
+      "bytes": 2797865,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use-case style-transfer. Edit the FIRST image as a production game-sprite MATERIAL BACKPLATE. Preserve the exact existing object positions, pose, colors, pixel-art strokes, highlights and canvas geometry. Keep every visible existing feature and all its material detail. Extend the adjacent object's detailed pixel-art material OUTWARD into ALL previously transparent canvas regions, including every gap, until the ENTIRE square canvas is filled edge-to-edge by detailed material. Make the full PNG completely OPAQUE, alpha255 everywhere. This is intentionally an opaque overscan material backplate; the runtime will apply the independently verified original sprite silhouette, so the added material outside that silhouette will not appear in the game. Do not add a scenic background, ground plane, panel, text, labels, extra props, checkerboard or solid flat color. The extended regions must have the same rich crisp handcrafted pixel texture as the nearest adjacent existing object, specifically green deciduous leaf clusters, dark conifer needles and brown bark matching the adjacent existing tree. Reference2 is the exact original 16x16 layout for object placement, reference3 supplies only the approved fine pixel-art style. Maintain the FIRST image's established composition and square shape. Do not crop, recenter, rotate or rescale.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "c72671d8a52b468c48623ae62ac7e1c464eee5a416d6467a1d6402aa34ae1bd5"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        },
+        {
+          "role": "generated_material_edit_target",
+          "sha256": "ea9174fb757d322d913399214cf83dcc4282753898f1bd7bfec43e6704a61205"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 75,
+        "research_id": 1363,
+        "encoded_sha256": "1a5788b5d2389f4241cab8bded96ec22abe6b5c660a14b2035660fc211d1ca71",
+        "encoded_length": 254,
+        "indexed_sha256": "6cf1305420ed3819ead6bccffa4ff5688a773209eebee28556496bc8f21a4f25",
+        "sorted_local_offset_value_sha256": "151f0128a77c8834ec8038d6e8509a3fbc01f34d597bd91968a4bf3f98871e90",
+        "opaque_cells": 194
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": true,
+      "generation_lineage": [
+        {
+          "raw_png_sha256": "ea9174fb757d322d913399214cf83dcc4282753898f1bd7bfec43e6704a61205",
+          "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 75. The exact disconnected evergreen/broadleaf woodland pieces in reference 1: fine green foliage, brown trunks and the source's grey accents. Preserve each tree, shrub and detached bit, its relative size and exact location; do not add ground or fill the open gaps. These are woodland tile pieces: the grey source regions should remain shaded needles, bark and woodland elements, not stone pillars, ruins or extra buildings."
+        }
+      ]
+    },
+    "terrain-090.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "995e77309f26810e8fa09a2868d07618d5d66f20685c8a2706a8692f4e793481",
+      "bytes": 1792844,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        93,
+        161,
+        1161,
+        1079
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        16,
+        15
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use-case style-transfer. Edit the FIRST image as a production game-sprite MATERIAL BACKPLATE. Preserve the exact existing object positions, pose, colors, pixel-art strokes, highlights and canvas geometry. Keep every visible existing feature and all its material detail. Extend the adjacent object's detailed pixel-art material OUTWARD into ALL previously transparent canvas regions, including every gap, until the ENTIRE square canvas is filled edge-to-edge by detailed material. Make the full PNG completely OPAQUE, alpha255 everywhere. This is intentionally an opaque overscan material backplate; the runtime will apply the independently verified original sprite silhouette, so the added material outside that silhouette will not appear in the game. Do not add a scenic background, ground plane, panel, text, labels, extra props, checkerboard or solid flat color. The extended regions must have the same rich crisp handcrafted pixel texture as the nearest adjacent existing object, specifically green palm leaves in upper half, golden palm trunk and sandy bank at center-right, blue water texture in the lower half. Reference2 is the exact original 16x16 layout for object placement, reference3 supplies only the approved fine pixel-art style. Maintain the FIRST image's established composition and square shape. Do not crop, recenter, rotate or rescale.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "ccad64a520fd4bc4641df4f3ba62037869728f11a1fdaae4b96d42de1a39ba87"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        },
+        {
+          "role": "generated_material_edit_target",
+          "sha256": "1505b17c85769e4e2d3ac37b34c1c02447b648a5ebc0701140f1d1d3cf19c174"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 90,
+        "research_id": 1378,
+        "encoded_sha256": "e41bbd8684882094a7dbc42a6f5d11290e4be4dd3422edfdd75670217320420f",
+        "encoded_length": 175,
+        "indexed_sha256": "5060ca3dc71d1fe08240fd56480b50d2b544d6e51eaf70dca18f3474ed0303e8",
+        "sorted_local_offset_value_sha256": "824c7745da29a93e3e776611be282f92e81a31f416f43636e5104da6c8df8c46",
+        "opaque_cells": 140
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": true,
+      "generation_lineage": [
+        {
+          "raw_png_sha256": "1505b17c85769e4e2d3ac37b34c1c02447b648a5ebc0701140f1d1d3cf19c174",
+          "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 90. A tiny palm-and-water oasis pictogram. Preserve the exact palm silhouette, little tan shore and short horizontal blue pool, at the source locations."
+        }
+      ]
+    },
+    "terrain-091.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "75f0a1395caeef409f6858948d64db9bb2456d96452799230b8a7d6ff77d9437",
+      "bytes": 1726648,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        234,
+        51,
+        974,
+        1202
+      ],
+      "native_content_rect": [
+        2,
+        0,
+        13,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use-case style-transfer. Edit the FIRST image as a production game-sprite MATERIAL BACKPLATE. Preserve the exact existing object positions, pose, colors, pixel-art strokes, highlights and canvas geometry. Keep every visible existing feature and all its material detail. Extend the adjacent object's detailed pixel-art material OUTWARD into ALL previously transparent canvas regions, including every gap, until the ENTIRE square canvas is filled edge-to-edge by detailed material. Make the full PNG completely OPAQUE, alpha255 everywhere. This is intentionally an opaque overscan material backplate; the runtime will apply the independently verified original sprite silhouette, so the added material outside that silhouette will not appear in the game. Do not add a scenic background, ground plane, panel, text, labels, extra props, checkerboard or solid flat color. The extended regions must have the same rich crisp handcrafted pixel texture as the nearest adjacent existing object, specifically green veined corn stalk and leaves around the existing stalk, green-brown plant material at the tips. Reference2 is the exact original 16x16 layout for object placement, reference3 supplies only the approved fine pixel-art style. Maintain the FIRST image's established composition and square shape. Do not crop, recenter, rotate or rescale.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "5d1f6b66f75c8c6ffe7b855892dc66977cf67af010227c2912b845a02f334bab"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        },
+        {
+          "role": "generated_material_edit_target",
+          "sha256": "50e53490a8dda732b76494e4ec8dcb918ad783f722c5d662f725050205820788"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 91,
+        "research_id": 1379,
+        "encoded_sha256": "3c7595c240a4a5e2cb23d1684d76df6f637308cd1e5ce5f3285efcb3e4f9604b",
+        "encoded_length": 167,
+        "indexed_sha256": "9262ad5e400ca7c9f8372015f332dbc99675e90c7471648d8f603a5dc0ba489d",
+        "sorted_local_offset_value_sha256": "f17919cc5cdaf0564b4e692e0f3f8b5b5e78625af554033add136ac4ef8cb02d",
+        "opaque_cells": 82
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": true,
+      "generation_lineage": [
+        {
+          "raw_png_sha256": "50e53490a8dda732b76494e4ec8dcb918ad783f722c5d662f725050205820788",
+          "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 91. A tiny green maize stalk with yellow cobs. Preserve all stalk and leaf directions and the reference's diagonal arrangement."
+        }
+      ]
+    },
+    "terrain-092.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "d9e6182355f41bf658507605c24ffabd7f1f209fc9121ef6b643e24b89cf8669",
+      "bytes": 1638433,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        281,
+        155,
+        1062,
+        1090
+      ],
+      "native_content_rect": [
+        3,
+        2,
+        14,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use-case style-transfer. Edit the FIRST image as a production game-sprite MATERIAL BACKPLATE. Preserve the exact existing object positions, pose, colors, pixel-art strokes, highlights and canvas geometry. Keep every visible existing feature and all its material detail. Extend the adjacent object's detailed pixel-art material OUTWARD into ALL previously transparent canvas regions, including every gap, until the ENTIRE square canvas is filled edge-to-edge by detailed material. Make the full PNG completely OPAQUE, alpha255 everywhere. This is intentionally an opaque overscan material backplate; the runtime will apply the independently verified original sprite silhouette, so the added material outside that silhouette will not appear in the game. Do not add a scenic background, ground plane, panel, text, labels, extra props, checkerboard or solid flat color. The extended regions must have the same rich crisp handcrafted pixel texture as the nearest adjacent existing object, specifically creamy white cotton fibre next to cotton bolls, olive leaves next to leaves and warm brown woody stem next to stem. Reference2 is the exact original 16x16 layout for object placement, reference3 supplies only the approved fine pixel-art style. Maintain the FIRST image's established composition and square shape. Do not crop, recenter, rotate or rescale.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "ef7786aa469e7491c491c67c890f464a803fc1729257fdb9c81d3bf9d8490d4b"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        },
+        {
+          "role": "generated_material_edit_target",
+          "sha256": "4612bfcf3188479f08a7631dfc6c3b1fa7a789b03e15098512d972fde34fa166"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 92,
+        "research_id": 1380,
+        "encoded_sha256": "f186a758a3ce0ae58eeb001f4be433a41c08f6da8d0b57605588f771575423e0",
+        "encoded_length": 158,
+        "indexed_sha256": "2f54d1b2e2539b4fd02ed6fc774437dbf0b9fef797396e1d5aaf8311090c99ea",
+        "sorted_local_offset_value_sha256": "1e7a20ca8c03c9e53293daf65ed515602e8239c4226e10604aa306014305a159",
+        "opaque_cells": 82
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": true,
+      "generation_lineage": [
+        {
+          "raw_png_sha256": "4612bfcf3188479f08a7631dfc6c3b1fa7a789b03e15098512d972fde34fa166",
+          "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 92. A tiny cotton plant with white bolls and a thin dark stem. Retain each separate boll, leaf and branch exactly as laid out."
+        }
+      ]
+    },
+    "terrain-093.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "de064f3aa6e92233aa03754e573e1370f893b34b5ce7c451ad67197e8cb06eff",
+      "bytes": 492022,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        162,
+        227,
+        1144,
+        1098
+      ],
+      "native_content_rect": [
+        2,
+        3,
+        15,
+        15
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 93. A single elongated green leaf resource pictogram in the reference's exact diagonal orientation. Rich fine green pixel shading with subtle veins within the existing outline; preserve the silhouette.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "a8ba1cc38cb15ad3086538256a90343e35fc8f4e45416b121a83679e38977a6a"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 93,
+        "research_id": 1381,
+        "encoded_sha256": "ceed5ab210fb8da52ef650c91109d1bbc174996c6cbc710f396c12137869dd8a",
+        "encoded_length": 135,
+        "indexed_sha256": "1f2bfec51e6ff367d4c9edb62db1449422807170e996e4d0a23ce5c54ced5eab",
+        "sorted_local_offset_value_sha256": "1f43bcc7215539cbb2eafe1d962812c8e3b1ce056dd97507a0a3d7efc946cbfc",
+        "opaque_cells": 73
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-094.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "6cc545c3cd830c6cc0020bc516af9bd02f9f29ddf2cc07e2a5e136788ad331e7",
+      "bytes": 348472,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        276,
+        195,
+        1054,
+        912
+      ],
+      "native_content_rect": [
+        2,
+        2,
+        14,
+        13
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 94. A thin pale tan segmented cane resource stalk crossing diagonally. Preserve its angle, joints, width and endpoints. Crisp tiny sugarcane/wood fiber texture inside the silhouette.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "736482cd304001a40aca5b70abb454d946f1def0055fd4a7bad78270c4d3da16"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 94,
+        "research_id": 1382,
+        "encoded_sha256": "9efbc9856ed97d3c5a4de8096f9281eac97daa0817a3a900eb1491701513184f",
+        "encoded_length": 110,
+        "indexed_sha256": "b251a9c0a7bcae28c46492e90878368ae8619b1649981de7de2c6d55c811e2a7",
+        "sorted_local_offset_value_sha256": "a103e727678c0e30c5105a69fec3ee999d0f51631e6cf4d60a47ecb27ce646f2",
+        "opaque_cells": 52
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-095.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "c64c82ecd84b683607500a42b24d6196a2bc465b6ba52695b4a338bd5c713b3e",
+      "bytes": 1917270,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        220,
+        74,
+        967,
+        1182
+      ],
+      "native_content_rect": [
+        2,
+        0,
+        13,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use-case style-transfer. Edit the FIRST image as a production game-sprite MATERIAL BACKPLATE. Preserve the exact existing object positions, pose, colors, pixel-art strokes, highlights and canvas geometry. Keep every visible existing feature and all its material detail. Extend the adjacent object's detailed pixel-art material OUTWARD into ALL previously transparent canvas regions, including every gap, until the ENTIRE square canvas is filled edge-to-edge by detailed material. Make the full PNG completely OPAQUE, alpha255 everywhere. This is intentionally an opaque overscan material backplate; the runtime will apply the independently verified original sprite silhouette, so the added material outside that silhouette will not appear in the game. Do not add a scenic background, ground plane, panel, text, labels, extra props, checkerboard or solid flat color. The extended regions must have the same rich crisp handcrafted pixel texture as the nearest adjacent existing object, specifically grey and ochre rounded stone facets and mineral material adjoining each existing nodule. Reference2 is the exact original 16x16 layout for object placement, reference3 supplies only the approved fine pixel-art style. Maintain the FIRST image's established composition and square shape. Do not crop, recenter, rotate or rescale.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "b8dc7274ff2cbe7ebd62aaadb27fb9988f33096981c342e866a3cc3617b69eed"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        },
+        {
+          "role": "generated_material_edit_target",
+          "sha256": "e61725b1569d83d29c46af3b99a7db8c2d9ed74ea6e01a27fd6df95751c985a3"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 95,
+        "research_id": 1383,
+        "encoded_sha256": "2383a059cbe17dc91378aa47bc93f3e98072ac8b85cc274b682aa1df1104430d",
+        "encoded_length": 165,
+        "indexed_sha256": "c15bbebeff002bfacf3eb8b8e9458cc8dee026b44b3f843a76e40667348ac078",
+        "sorted_local_offset_value_sha256": "05ad5260c1adca1436f3d7891b3943a45fd0c93fd7e93c3c594a4fce5c4115b3",
+        "opaque_cells": 74
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": true,
+      "generation_lineage": [
+        {
+          "raw_png_sha256": "75aa49e0a4cd00c0539bb9051bfe87f398a9e98dc125be3e53da7d46cb217eb1",
+          "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 95. A small scattered cluster of rounded brown and grey mineral nodules. Reproduce every individual rock's position, size, spacing and color from reference 1; fine stone facets inside those shapes."
+        },
+        {
+          "raw_png_sha256": "e61725b1569d83d29c46af3b99a7db8c2d9ed74ea6e01a27fd6df95751c985a3",
+          "generation_prompt": "Use-case stylized-concept. Redraw the FIRST reference game sprite with the approved fine handcrafted pixel-art materials and colors of reference2. Geometry is strict: reference1 is the full original 16x16 tile enlarged to512; the output is one square transparent 1024x1024 PNG whose FULL canvas maps to the FULL reference canvas, no margins, no recentering, no crop, no rotation. Preserve the exact silhouettes, dark contours, object positions and negative space of reference1. Higher detail goes INSIDE the source shapes. Do not use the landscape layout from reference2. Several brown/grey MINERAL NODULES: use EXACTLY the six disconnected shapes visible in reference1, at EXACTLY their original 16x16 grid positions and sizes. Each individual shape must be a full SOLID chunky stone mass filling the whole footprint, with visible dark outline and light brown/grey facets, not a tiny group of small pebbles floating inside a larger footprint. Keep the big lower-center rock connected as the original, and preserve the upper grey rock and left/right small brown rocks. Do not invent extra detached pebbles. Crisp pixel clusters, period earthy colors, no blur, smooth vector shading, text, labels, panels, background or extra props. Transparent background. This will be sampled at64x64 and masked by the original pixel silhouettes. Prioritize faithful composition and large solid contiguous shapes over decorative tiny flecks."
+        }
+      ]
+    },
+    "terrain-097.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "c2b8a678eb4cd66f1f448dcb49a3b5688889125d228e7f36f04451230dfaa7fc",
+      "bytes": 480649,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        332,
+        288,
+        1097,
+        1101
+      ],
+      "native_content_rect": [
+        2,
+        5,
+        15,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 97. A small brown beaver seen from the exact source angle, with its head, elongated body and grey flat tail at the same coordinates. Natural bark-brown fur clusters; keep limbs and the tail silhouette, add no scene.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "630474adcee9fa04986dd370494b72922646951487f16a13184555965d6114f9"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 97,
+        "research_id": 1385,
+        "encoded_sha256": "372da7712ab30432788f32c569ed3aa7d9b33c8b5df8dc77c78f71edc06a0a19",
+        "encoded_length": 126,
+        "indexed_sha256": "f7f088fbf958566b9bb8775856b4537eafb2790b5b93ad69c578d74b37e633a1",
+        "sorted_local_offset_value_sha256": "880acb738154818592851a873b64728e6057826ee5adfb309b6cede557e7125b",
+        "opaque_cells": 71
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-098.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "5d6a62e17fffaf38ea51afb16fecc2af49939c956b1c4100511dfc2d4fb0340c",
+      "bytes": 1423296,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use-case stylized-concept. One game-sprite MATERIAL BACKPLATE for a right-facing DEER, square canvas, fine crisp handcrafted historical pixel art. First reference is the EXACT original 16x16 tile, second ONLY style. FOLLOW GEOMETRY LITERALLY. In normalized full-canvas coordinates: small upright ears and modest short antlers near x70%-90%,y0%-15%; small deer head centered at x83%,y26%, muzzle points right and reaches right edge at y30%; short thick neck from x74%,y30% to x70%,y55%; broad horizontal brown deer body from x8%-76%,y44%-74%; raised short tail at far left at y35%-48%; four straight thin legs go down from body to y98%, at x13%,35%,61%,81%. Preserve the original pose and placements. No long elegant neck, no huge antlers, no extra eyes, no repeated heads. One single animal, one eye, nose at upper-right, rich natural brown fur, cream neck/belly accents, dark brown hooves. Pixel detail remains readable at64x64. Paint the whole square canvas completely opaque: extend nearby fur/material colors into background gaps as a quiet low-contrast texture, so every output pixel alpha is255. The runtime clips this backplate with the exact original sprite opaque silhouette; the outside material is invisible and should contain no recognizable extra animal features. Keep the deer body and head strongly readable in the original location. No ground, grass, sky, frame, text, icons, ornamental patterns or invented props. SQUARE1024x1024 PNG.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "4c7664a8cf713b327a17a6f76119e22d8b1159aac8a97faa9e18d2967f6e5e4f"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 98,
+        "research_id": 1386,
+        "encoded_sha256": "9e5e6c86293c62185c0a70ea02e47a03018203868d97b12e1e3bb497a9a51e42",
+        "encoded_length": 223,
+        "indexed_sha256": "5c23782138d63fab61c658bdbf2c606a631ddeca4b60e715bdb8f27f2df68008",
+        "sorted_local_offset_value_sha256": "81dbb8886f71e2d718bd8fa33f481740c2cdf9d7aaf95a75cab1d3e46fdb4c46",
+        "opaque_cells": 152
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": true
+    },
+    "terrain-099.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "5653f44b1ed294b72c11f0cf9758d3c36cd182e075e061917ec3e0386e4508b7",
+      "bytes": 401972,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        364,
+        160,
+        874,
+        1076
+      ],
+      "native_content_rect": [
+        3,
+        1,
+        12,
+        15
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 99. The Prime Timber resource symbol shown in the original Conifer Forest encyclopedia: one tiny upright dark-green conifer tree. Preserve the exact source outline, tapered crown, tiers of needle branches and small lower trunk. Fine dark green and moss-green needle clusters. Do not turn it into a fruit, fish, leaf, gemstone or free-standing landscape.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "0277942bc191cbd9427f86bfc6eb26b7645a307674ff6e8dc659e0bb698d7f68"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 99,
+        "research_id": 1387,
+        "encoded_sha256": "439362cb9ae01110cede01b0e842aa524fbe33103d2a5c68e125c1d8ae2a3de3",
+        "encoded_length": 141,
+        "indexed_sha256": "680758a16b9dd2358ecad33b7287690cba3eb01715a9b5ce0d346817cb04100d",
+        "sorted_local_offset_value_sha256": "c74047bccc27ce2a0faf0be26257ab0e6fc757d5671c6749f19f578058f070c1",
+        "opaque_cells": 68
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-101.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "f71be657a47bc57c40d45419969848604a6d6c099f8d41aa000e8f9ddfbde9a0",
+      "bytes": 311314,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        274,
+        314,
+        941,
+        902
+      ],
+      "native_content_rect": [
+        3,
+        4,
+        12,
+        12
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 101. One small grey-silver mineral nugget. Preserve the reference's outline and position, with a few crisp silver-grey facets and subtle dark crevices.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "c44a21d4da60bbd07d5258e94dc6ff1fb40cb0251b1b497222b027799bc13b6d"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 101,
+        "research_id": 1389,
+        "encoded_sha256": "ef5667158a8b7ebbfe77a7090dec05ae6f48be8931127378f57630667770141a",
+        "encoded_length": 91,
+        "indexed_sha256": "159043c8f19c47b918f785818902426ab3d1c84545cc027379e72e8064bfec13",
+        "sorted_local_offset_value_sha256": "dfce76f0c04deb8ec1e281731212dadac4a04382668a06d8ef87bcdf9b18139f",
+        "opaque_cells": 49
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
+    },
+    "terrain-102.png": {
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "sha256": "d802420c4c2b105e94fc418b40e81063ad49c1c017fac66511158ab95508abf7",
+      "bytes": 347559,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "native_size": [
+        16,
+        16
+      ],
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor within measured content rect",
+      "sample_rect": [
+        242,
+        394,
+        1019,
+        925
+      ],
+      "native_content_rect": [
+        3,
+        5,
+        13,
+        13
+      ],
+      "alpha": "raw generated PNG bytes and alpha retained; source-over restricted to verified Main ownership; original native silhouette clips material overscan",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Create ONE transparent game terrain/small-resource overlay sprite for the established historical Colonization HD display project. Reference image 1 is the EXACT source composition: a 16 by 16 original tile enlarged to 512 square. Reference image 2 is ONLY the approved fine pixel-art brushwork, earthy colors and materials. Match the source tile's exact normalized object locations, extent, viewing angle, silhouette, edge connections, disconnected pieces and negative space, with finer crisp pixel clusters and richer material shading. The entire 16x16 source grid maps to the entire SQUARE 1024x1024 output canvas. Do not recenter, crop, enlarge objects, add margins, rotate or change the composition. Source transparency means genuinely transparent output alpha, never a black backdrop. Fill all source opaque shapes including the tiny detached pixels and dark contours; keep the empty regions transparent. Detailed handcrafted pixel art in the visual language of reference 2, no smoothing, blur, glow, vector curves, photographic rendering, text, labels, panel, frame, UI or invented props. This art will be sampled to 64x64 and composited only through the verified original opaque-pixel mask; preserve layout rather than making a freestanding illustration. Source PHYS0.SS frame 102. One small ochre-brown ore-deposit nugget, as labeled Ore Deposit in the original Hills encyclopedia. Preserve the reference's outline and position. Muted tan/brown stone facets and dark crevices; do not reinterpret it as gold bullion, jewelry, a coin or a treasure pile.",
+      "reference_sha256": [
+        {
+          "role": "native_geometry",
+          "sha256": "e1b56cda35422e377e1e0d4e50e1411696ccb6caf9233e3b9f1f9adbc1af6ab5"
+        },
+        {
+          "role": "approved_style",
+          "sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+        }
+      ],
+      "original_source": {
+        "exe_sha256": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "file": "PHYS0.SS",
+        "sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "ordinal": 102,
+        "research_id": 1390,
+        "encoded_sha256": "5fde3c82e7cfb124d5dbb7d9e21d72ac9d48c00a4b2ef48e0baee64cbf42565d",
+        "encoded_length": 97,
+        "indexed_sha256": "e955d47587a23cb56bbd0505a00e7f1ff0135f19685c1f801317da4ebd28b0b5",
+        "sorted_local_offset_value_sha256": "9c8a31e0c469a5b16e576a04981123d3dcd5664fe5017458511aa0bd1d48dc75",
+        "opaque_cells": 50
+      },
+      "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "opaque_material_backplate": false
     }
   }
 }

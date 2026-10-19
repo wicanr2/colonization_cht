@@ -7097,3 +7097,11 @@ confirmed限42張GUI／39個當次原版點，輸入a5f136c8643dd075e5dc6f19f89d
 來源索引4442263cfd162145f402b824d21d0cac4fb00f7816bad6954d3e9b72b8ae722a。
 來源、完整程式與重生入口見規格067 R93及本機r93-current-native-plan-r1.json。
 環境空目錄與收據交接競態已勘誤，原版與正式程式未因此改動。
+
+
+### 2026-10-19 R94 Main前景READY
+
+- confirmed：PHYS0.SS deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16，VICEROY.EXE a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3。地址為實模式CS:IP及20-bit RAM；工具為dosgolem 82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7、Python3.11.2與Pillow9.4.0。
+- 33來源沿0D46:000A與完整寫入／返回契約，Main 0x2CAE0。來源與原版定位見規格067 R94、本機r94-reference-inventory-r1.json及r94-entry-fixtures-r1.json；未宣稱Stage／發布回退。
+- 33個實際CPU解碼返回、627個拒絕子案例與34個父案例通過。112點原型及375筆實際輸入的CPU／RAM／IDX／DAC／週期／存檔相同；獨立114688000個元件RGBA與228496個alpha像素相同。
+- READY審查f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265。新84色號投影816ca734bee5ffca3be5e5d1d11affdcd87d495e9edacabc6788c68ba7f624b0；R93八來源色盤政策保持。正式GUI與當次重播尚待驗，全量HD未完成。

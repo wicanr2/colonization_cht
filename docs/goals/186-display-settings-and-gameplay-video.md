@@ -620,7 +620,7 @@ workplace/reports/goal186-display-hd/hd-terrain-foreground-r93。
 
 ### R94其餘地形前景接續
 
-[規格067 R94](../spec/067-hd-world-terrain-batch.md#r94其餘三十三個main前景draft)追蹤已在正常百科
+[規格067 R94](../spec/067-hd-world-terrain-batch.md#r94其餘三十三個main前景ready)追蹤已在正常百科
 觀測到的三十三個山地、丘陵、林木及資源來源，目前DRAFT。
 本機原版參考入口為workplace/reports/goal186-display-hd/hd-terrain-remaining-r94。
 候選未進正式路徑，不增加269張正式素材或已驗來源。
