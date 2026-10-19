@@ -388,6 +388,79 @@ def extend_royal(a):
     print('PASS_ROYAL_CONFORMED_SOURCE_INDEX', 218, sha(a.output), flush=True)
 
 
+def extend_terrain_main_surfaces(a):
+    """規格067 R95：追加六個已驗Main表面，保留所有既有Stage契約。"""
+    baseline, ready, review = read(a.baseline), read(a.ready), read(a.conformed)
+    manifest = read(a.assets / 'manifest.json')
+    ordinals = [71, 74, 77, 78, 79, 96]
+    ids = [1288 + n for n in ordinals]
+    assert ready['result'] == 'PASS_R95_READY_SIX_MAIN_SURFACE_EXTENSIONS'
+    assert ready['spec_state'] == 'READY' and ready['source_ordinals'] == ordinals
+    assert sha(a.ready) == 'c34a4004a984b92c1a26b7f67cb7b65bd5a3b8c9892d23508877d68c3f44dac3'
+    assert review['result'] == 'PASS_R95_SIX_MAIN_SURFACE_CONFORMANCE'
+    assert review['spec_state'] == 'CONFORMED' and review['sources'] == ids
+    assert review['ready_sha256'] == sha(a.ready)
+    assert review['inherited_source_index_sha256'] == sha(a.baseline)
+    assert review['inherited_manifest_sha256'] == baseline['formal_manifest_sha256']
+    assert review['manifest_sha256'] == sha(a.assets / 'manifest.json')
+    assert review['formal_assets'] == len(manifest['assets']) == 302
+    assert review['new_raw_pngs'] == 0 and review['all_raw_pngs_preserved'] == 302
+    assert review['other_metadata_preserved'] == 296
+    assert review['go_named_passed'] == 850 and review['go_failed'] == review['go_skipped'] == 0
+    assert review['loader_frames'] == 54 and review['current_loader_faults'] == 7
+    assert review['inherited_loader_faults'] == 163 and review['full_project_loader_positive']
+    assert review['package_files'] == 303 and review['package_faults'] == 25
+    assert review['gui_samples'] == 54 and review['unique_native_points'] == 44
+    assert review['gui_full_rgba'] == 54272000 and review['gui_x11_rgba'] == 55296000
+    assert review['gui_noto_fields'] == 560 and review['legacy_Main_alpha_pixels'] == 289751
+    assert review['actual_inputs'] == 68 and review['replay_end'] == 117800000
+    for key in ['all6_five_languages_both_modes', 'all6_TC_cursor_hover_return',
+                'representative_other3_CJK_cursor_hover_return', 'normal_close_removes_Main_origins',
+                'source_Main_Stage_identity_independently_verified', 'existing_Stage_policy_preserved',
+                'dedicated79_Stage_runtime_unchanged', 'raw_png_alpha_preserved',
+                'three_replays_state_audio_save_equal_GUI', 'native_inputs_rules_and_save_unchanged']:
+        assert review[key]
+    assert not review['new_stage_scope'] and not review['new_published_scope']
+    assert not review['complete_hd'] and not review['new_release']
+    out = copy.deepcopy(baseline)
+    assert len(out['frames']) == 1552 and len(out['formal_bindings']) == 302
+    frames = {f['research_id']: f for f in out['frames']}
+    for binding in out['formal_bindings']:
+        name = binding['asset']
+        assert binding['asset_sha256'] == manifest['assets'][name]['sha256'] == sha(a.assets / name)
+        if binding['source_research_id'] not in ids:
+            continue
+        frame = frames[binding['source_research_id']]
+        extension = manifest['assets'][name]['main_surface_extension']
+        assert frame['file'] == extension['source_file'] == 'PHYS0.SS'
+        assert frame['ordinal'] == extension['source_ordinal'] in ordinals
+        assert extension['source_research_id'] == frame['research_id']
+        assert extension['source_file_sha256'] == frame['file_sha256']
+        assert extension['encoded_sha256'] == frame['encoded_sha256']
+        assert extension['indexed_sha256'] == frame['indexed_sha256']
+        assert extension['ready_review_sha256'] == sha(a.ready)
+        assert extension['destination_linear'] == '0x2CAE0'
+        assert frame['formal_assets'] == [name]
+        contract = {
+            'state': 'CONFORMED', 'spec': 'docs/spec/067-hd-world-terrain-batch.md',
+            'formal_connected': True, 'review_sha256': sha(a.conformed),
+            'origin_surface': 'Main',
+            'scope': 'R95 GUI54/native44; existing PNG reused; prior Stage contracts retained; no new Stage, published or full HD credit'}
+        binding['additional_source_contracts'] = [contract]
+        frame['additional_source_contract_references'] = [contract]
+    old = {f['research_id']: f for f in baseline['frames']}
+    assert all(f == old[f['research_id']] for f in out['frames'] if f['research_id'] not in ids)
+    out['formal_manifest_sha256'] = sha(a.assets / 'manifest.json')
+    out['coverage_limits']['formal_asset_bindings'] = 302
+    out['coverage_limits']['complete_hd'] = False
+    out['terrain_main_surface_conformance'] = {
+        'ready_sha256': sha(a.ready), 'review_sha256': sha(a.conformed), 'sources': ids,
+        'formal_assets': 302, 'new_raw_pngs': 0, 'gui_samples': 54, 'unique_native_points': 44,
+        'claim': 'six additional Main Pedia surfaces only; all prior source contracts retained; full HD incomplete'}
+    a.output.write_text(json.dumps(out, ensure_ascii=False, indent=2) + '\n')
+    print('PASS_TERRAIN_MAIN6_CONFORMED_SOURCE_INDEX', 302, sha(a.output), flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ['baseline', 'assets', 'ready', 'conformed', 'output']:
@@ -398,9 +471,13 @@ def main():
     scope.add_argument('--terrain-textures', action='store_true', help='規格071／065 R92：只擴充已驗十二材質與施工槌')
     scope.add_argument('--terrain-foreground', action='store_true', help='規格067 R93：只擴充已驗八個Main前景')
     scope.add_argument('--terrain-remainder', action='store_true', help='規格067 R94：只擴充已驗三十三個Main前景')
+    scope.add_argument('--terrain-main-surfaces', action='store_true', help='規格067 R95：追加六個既有素材的Main表面')
     a = parser.parse_args()
     assert Path('/.dockerenv').exists() and os.getuid() != 0
     assert not a.output.exists() and a.output.parent.stat().st_uid == os.getuid()
+    if a.terrain_main_surfaces:
+        extend_terrain_main_surfaces(a)
+        return
     if a.terrain_remainder:
         extend_terrain_remainder(a)
         return

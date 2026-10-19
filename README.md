@@ -146,6 +146,10 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 
 百科森林：已接線的林木與鹿圖示按原版輪廓顯示，搭配 HD 木紋、材質與 Noto 字型；其他森林來源持續接線。
 
+![繁體中文寒帶森林百科與完整林木 HD 顯示](docs/screenshots/hd-boreal-forest-pedia-zh.png)
+
+百科森林新畫面：五個既有林木來源已補上百科的 HD 顯示，鹿與其他資源小圖依原版位置合成。海洋百科的魚群也已補齊。
+
 ![繁體中文極地百科與 HD 地形材質、木紋](docs/screenshots/hd-terrain-pedia-zh.png)
 
 百科地形：極地材質、木紋、Noto 字型與一般游標已接入 HD，前景岩石保留原圖。二十個地形主題與十二種材質已經過正常操作驗證，水面保留原版色盤動畫。

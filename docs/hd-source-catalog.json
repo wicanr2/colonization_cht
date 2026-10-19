@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "d892af8a06345a4090e8552be7fa019b1d4930aed6cacecb6917b0f284372088",
+  "formal_manifest_sha256": "28946c987c61212eb0ec04e221ad718c81be71c765935ed8f4db33d67d33eabe",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -47454,7 +47454,17 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
-      }
+      },
+      "additional_source_contract_references": [
+        {
+          "state": "CONFORMED",
+          "spec": "docs/spec/067-hd-world-terrain-batch.md",
+          "formal_connected": true,
+          "review_sha256": "6dcbafeca6b0b97a528cf63b4b877d06e52657168d7ec854f6f33ca0c7b3cb50",
+          "origin_surface": "Main",
+          "scope": "R95 GUI54/native44; existing PNG reused; prior Stage contracts retained; no new Stage, published or full HD credit"
+        }
+      ]
     },
     {
       "research_id": 1360,
@@ -47642,7 +47652,17 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
-      }
+      },
+      "additional_source_contract_references": [
+        {
+          "state": "CONFORMED",
+          "spec": "docs/spec/067-hd-world-terrain-batch.md",
+          "formal_connected": true,
+          "review_sha256": "6dcbafeca6b0b97a528cf63b4b877d06e52657168d7ec854f6f33ca0c7b3cb50",
+          "origin_surface": "Main",
+          "scope": "R95 GUI54/native44; existing PNG reused; prior Stage contracts retained; no new Stage, published or full HD credit"
+        }
+      ]
     },
     {
       "research_id": 1363,
@@ -47806,7 +47826,17 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
-      }
+      },
+      "additional_source_contract_references": [
+        {
+          "state": "CONFORMED",
+          "spec": "docs/spec/067-hd-world-terrain-batch.md",
+          "formal_connected": true,
+          "review_sha256": "6dcbafeca6b0b97a528cf63b4b877d06e52657168d7ec854f6f33ca0c7b3cb50",
+          "origin_surface": "Main",
+          "scope": "R95 GUI54/native44; existing PNG reused; prior Stage contracts retained; no new Stage, published or full HD credit"
+        }
+      ]
     },
     {
       "research_id": 1366,
@@ -47923,7 +47953,17 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
-      }
+      },
+      "additional_source_contract_references": [
+        {
+          "state": "CONFORMED",
+          "spec": "docs/spec/067-hd-world-terrain-batch.md",
+          "formal_connected": true,
+          "review_sha256": "6dcbafeca6b0b97a528cf63b4b877d06e52657168d7ec854f6f33ca0c7b3cb50",
+          "origin_surface": "Main",
+          "scope": "R95 GUI54/native44; existing PNG reused; prior Stage contracts retained; no new Stage, published or full HD credit"
+        }
+      ]
     },
     {
       "research_id": 1367,
@@ -48088,7 +48128,17 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
-      }
+      },
+      "additional_source_contract_references": [
+        {
+          "state": "CONFORMED",
+          "spec": "docs/spec/067-hd-world-terrain-batch.md",
+          "formal_connected": true,
+          "review_sha256": "6dcbafeca6b0b97a528cf63b4b877d06e52657168d7ec854f6f33ca0c7b3cb50",
+          "origin_surface": "Main",
+          "scope": "R95 GUI54/native44; existing PNG reused; prior Stage contracts retained; no new Stage, published or full HD credit"
+        }
+      ]
     },
     {
       "research_id": 1368,
@@ -48799,7 +48849,17 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
-      }
+      },
+      "additional_source_contract_references": [
+        {
+          "state": "CONFORMED",
+          "spec": "docs/spec/067-hd-world-terrain-batch.md",
+          "formal_connected": true,
+          "review_sha256": "6dcbafeca6b0b97a528cf63b4b877d06e52657168d7ec854f6f33ca0c7b3cb50",
+          "origin_surface": "Main",
+          "scope": "R95 GUI54/native44; existing PNG reused; prior Stage contracts retained; no new Stage, published or full HD credit"
+        }
+      ]
     },
     {
       "research_id": 1385,
@@ -59670,7 +59730,17 @@
       "source_ordinal": 79,
       "source_encoded_sha256": "a8a861754068c86a9c150442f7b07f1fbd297d82b8e5dcb2e3ee108bde4dc84c",
       "spec": "docs/spec/062-hd-sea-draw-lifecycle.md",
-      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "additional_source_contracts": [
+        {
+          "state": "CONFORMED",
+          "spec": "docs/spec/067-hd-world-terrain-batch.md",
+          "formal_connected": true,
+          "review_sha256": "6dcbafeca6b0b97a528cf63b4b877d06e52657168d7ec854f6f33ca0c7b3cb50",
+          "origin_surface": "Main",
+          "scope": "R95 GUI54/native44; existing PNG reused; prior Stage contracts retained; no new Stage, published or full HD credit"
+        }
+      ]
     },
     {
       "asset": "cursor-000.png",
@@ -59730,7 +59800,17 @@
       "source_ordinal": 71,
       "source_encoded_sha256": "57bffb18c0fbdb61bfc9a6a2ad75f0c1d5060a25dde8de12cc148c920249c3c7",
       "spec": "docs/spec/067-hd-world-terrain-batch.md",
-      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "additional_source_contracts": [
+        {
+          "state": "CONFORMED",
+          "spec": "docs/spec/067-hd-world-terrain-batch.md",
+          "formal_connected": true,
+          "review_sha256": "6dcbafeca6b0b97a528cf63b4b877d06e52657168d7ec854f6f33ca0c7b3cb50",
+          "origin_surface": "Main",
+          "scope": "R95 GUI54/native44; existing PNG reused; prior Stage contracts retained; no new Stage, published or full HD credit"
+        }
+      ]
     },
     {
       "asset": "terrain-074.png",
@@ -59740,7 +59820,17 @@
       "source_ordinal": 74,
       "source_encoded_sha256": "4e3dfc879acdb9a25612b04aba61bffa344436984b99459744ec3a7c274caa7a",
       "spec": "docs/spec/067-hd-world-terrain-batch.md",
-      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "additional_source_contracts": [
+        {
+          "state": "CONFORMED",
+          "spec": "docs/spec/067-hd-world-terrain-batch.md",
+          "formal_connected": true,
+          "review_sha256": "6dcbafeca6b0b97a528cf63b4b877d06e52657168d7ec854f6f33ca0c7b3cb50",
+          "origin_surface": "Main",
+          "scope": "R95 GUI54/native44; existing PNG reused; prior Stage contracts retained; no new Stage, published or full HD credit"
+        }
+      ]
     },
     {
       "asset": "terrain-077.png",
@@ -59750,7 +59840,17 @@
       "source_ordinal": 77,
       "source_encoded_sha256": "86d5a969c1d9678244d816f2c56b13da4712b34a2e1dabd4ae9c09bcea4ec3aa",
       "spec": "docs/spec/067-hd-world-terrain-batch.md",
-      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "additional_source_contracts": [
+        {
+          "state": "CONFORMED",
+          "spec": "docs/spec/067-hd-world-terrain-batch.md",
+          "formal_connected": true,
+          "review_sha256": "6dcbafeca6b0b97a528cf63b4b877d06e52657168d7ec854f6f33ca0c7b3cb50",
+          "origin_surface": "Main",
+          "scope": "R95 GUI54/native44; existing PNG reused; prior Stage contracts retained; no new Stage, published or full HD credit"
+        }
+      ]
     },
     {
       "asset": "terrain-078.png",
@@ -59760,7 +59860,17 @@
       "source_ordinal": 78,
       "source_encoded_sha256": "92966f3b77aee2f8a5e416233dff74b56bcf6621a4faa6cf6cc9a9910a2aeb70",
       "spec": "docs/spec/067-hd-world-terrain-batch.md",
-      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "additional_source_contracts": [
+        {
+          "state": "CONFORMED",
+          "spec": "docs/spec/067-hd-world-terrain-batch.md",
+          "formal_connected": true,
+          "review_sha256": "6dcbafeca6b0b97a528cf63b4b877d06e52657168d7ec854f6f33ca0c7b3cb50",
+          "origin_surface": "Main",
+          "scope": "R95 GUI54/native44; existing PNG reused; prior Stage contracts retained; no new Stage, published or full HD credit"
+        }
+      ]
     },
     {
       "asset": "terrain-080.png",
@@ -59780,7 +59890,17 @@
       "source_ordinal": 96,
       "source_encoded_sha256": "2d414662242d31b319f67f61cfc4932600676693dad7cf2fb0d1d286b4c28965",
       "spec": "docs/spec/067-hd-world-terrain-batch.md",
-      "claim": "matches verified formal manifest; conformance scope remains in cited spec"
+      "claim": "matches verified formal manifest; conformance scope remains in cited spec",
+      "additional_source_contracts": [
+        {
+          "state": "CONFORMED",
+          "spec": "docs/spec/067-hd-world-terrain-batch.md",
+          "formal_connected": true,
+          "review_sha256": "6dcbafeca6b0b97a528cf63b4b877d06e52657168d7ec854f6f33ca0c7b3cb50",
+          "origin_surface": "Main",
+          "scope": "R95 GUI54/native44; existing PNG reused; prior Stage contracts retained; no new Stage, published or full HD credit"
+        }
+      ]
     },
     {
       "asset": "terrain-147.png",
@@ -62992,5 +63112,22 @@
     "gui_samples": 96,
     "unique_native_points": 86,
     "claim": "33 Main Pedia foregrounds only; complete Pedia pixels and X11; new Stage/published scope and full HD incomplete"
+  },
+  "terrain_main_surface_conformance": {
+    "ready_sha256": "c34a4004a984b92c1a26b7f67cb7b65bd5a3b8c9892d23508877d68c3f44dac3",
+    "review_sha256": "6dcbafeca6b0b97a528cf63b4b877d06e52657168d7ec854f6f33ca0c7b3cb50",
+    "sources": [
+      1359,
+      1362,
+      1365,
+      1366,
+      1367,
+      1384
+    ],
+    "formal_assets": 302,
+    "new_raw_pngs": 0,
+    "gui_samples": 54,
+    "unique_native_points": 44,
+    "claim": "six additional Main Pedia surfaces only; all prior source contracts retained; full HD incomplete"
   }
 }

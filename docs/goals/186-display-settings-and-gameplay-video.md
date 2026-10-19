@@ -628,6 +628,6 @@ workplace/reports/goal186-display-hd/hd-terrain-foreground-r93。
 
 ### R95既有地形Main表面接續
 
-[規格067 R95](../spec/067-hd-world-terrain-batch.md#r95既有六個地形main表面ready)沿既有六張地形原圖，
-補齊正常百科的Main來源。目前READY，32次完整返回與原型已驗；不增加現行302張素材或已驗來源。
+[規格067 R95](../spec/067-hd-world-terrain-batch.md#r95既有六個地形main表面conformed)沿既有六張地形原圖，
+補齊正常百科的Main來源，已限定CONFORMED。54張GUI／44個原版點、五語兩模式、獨立畫素、實際輸入三側重播及載入／封裝通過。302張原圖及既有Stage契約保持；README共24張原樣實拍。其餘43個ICONS候選及其他表面繼續追蹤。
 本機入口為workplace/reports/goal186-display-hd/hd-terrain-main-surfaces-r95。

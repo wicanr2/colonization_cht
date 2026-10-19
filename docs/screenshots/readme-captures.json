@@ -1,10 +1,10 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-19",
-  "code_commit": "7e63fcacc9071f1b6ca4848170553a16cfbbd82d",
-  "binary_sha256": "c19cd3e951e8a986d01f1e23726b2ddf7f7f19c082f74efb775c3a0aa6d06d80",
-  "formal_binary_sha256": "c19cd3e951e8a986d01f1e23726b2ddf7f7f19c082f74efb775c3a0aa6d06d80",
-  "source_build_sha256": "4a2ec3cad6b84a3b32adca3d63b9adc74e85a203bece64fa3adec0b5a3746300",
+  "code_commit": "dafeec2ffd7d70bcac823ceabbd00fcc941058f2",
+  "binary_sha256": "a7ec75c2e3810e4040687349236c47715b9a888a94c5341606e667a6ed1f7d58",
+  "formal_binary_sha256": "a7ec75c2e3810e4040687349236c47715b9a888a94c5341606e667a6ed1f7d58",
+  "source_build_sha256": "563843c1fb039214df4632e5c8e93e24c3a50d51133765d256403cd405dd17dd",
   "released_version_unchanged": "v.1.0.3-20261010",
   "formal_hd_assets": 302,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
@@ -750,6 +750,46 @@
         "X11_RGBA_pixels": 1024000
       },
       "scope": "R94已驗Main百科畫面，仍包含未接線的原版人物及其他素材；不代表全量HD或現行發行版。"
+    },
+    {
+      "file": "hd-boreal-forest-pedia-zh.png",
+      "sha256": "d316445ce6bbb4e577905519f16149d2fb2a835f608600fb0ac7f3777b03925e",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "boreal-forest-pedia",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 76600000,
+      "code_commit": "dafeec2ffd7d70bcac823ceabbd00fcc941058f2",
+      "binary_sha256": "a7ec75c2e3810e4040687349236c47715b9a888a94c5341606e667a6ed1f7d58",
+      "formal_binary_sha256": "a7ec75c2e3810e4040687349236c47715b9a888a94c5341606e667a6ed1f7d58",
+      "formal_hd_assets": 302,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-terrain-main-surfaces-r95/r95-Main-formal-gui-r1/gui.display-038.png",
+      "source_gui_check_sha256": "d91a51f63e2cd4202f58a91b185497de2d36549c9465a73c606a8a1bcba3ceb2",
+      "source_state_check_sha256": "202c49373ba7a63d50cd1eea523af92f36c1f6693bdde149e502ae81b6a653d2",
+      "source_replay_check_sha256": "871ea85f4e2fbfdac72cdbc2da2cc4ea8f3fecd63c8b049d3a1dcff9e5b44dac",
+      "independent_pixels_sha256": "6fa78a4887e280345ded8edde95b523e9ac27bebb9a43877405d1be1015ca2db",
+      "conformance_sha256": "6dcbafeca6b0b97a528cf63b4b877d06e52657168d7ec854f6f33ca0c7b3cb50",
+      "graphics_manifest_sha256": "28946c987c61212eb0ec04e221ad718c81be71c765935ed8f4db33d67d33eabe",
+      "source_kind": "正式遊戲視窗原樣實拍，已核對獨立RGBA與X11遊戲區",
+      "capture_pixels_unchanged": true,
+      "verified_counts": {
+        "terrain_source_rgba": 7920,
+        "background_rgba": 931056,
+        "nine_alpha_pixels": 0,
+        "small_alpha_pixels": 4031,
+        "remaining_alpha_pixels": 16030,
+        "legacy_Main_alpha_pixels": 12411,
+        "foreground_alpha_pixels": 33028,
+        "foreground_water_pixels": 368,
+        "noto_fields": 18,
+        "erased_native_glyph_cells": 2512,
+        "independent_full_RGBA_pixels": 1024000,
+        "X11_RGBA_pixels": 1024000
+      },
+      "scope": "R95正常Main百科森林，五個既有森林來源均顯示HD；保留各來源原有Stage契約。其他素材、世界表面、動畫與全量HD仍待完成。"
     }
   ],
   "limitations": [
@@ -787,8 +827,8 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "頁首描述本次新增的兩張實拍；各圖來源與指紋以個別紀錄為準。",
-  "graphics_manifest_sha256": "d892af8a06345a4090e8552be7fa019b1d4930aed6cacecb6917b0f284372088",
+  "provenance_scope": "最新寒帶森林百科使用當次正式程式與302張原圖；其餘23張原PNG及逐圖來源保持。",
+  "graphics_manifest_sha256": "28946c987c61212eb0ec04e221ad718c81be71c765935ed8f4db33d67d33eabe",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -980,7 +1020,7 @@
     },
     "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb"
   },
-  "conformance_state": "R94三十三個Main前景限定CONFORMED，其他圖片保留各自已驗範圍",
+  "conformance_state": "R95 six existing Main surfaces scoped CONFORMED; all prior captures retain individual scope",
   "previous_opening_sun_capture": {
     "capture": {
       "file": "hd-opening-zh.png",
@@ -1126,5 +1166,16 @@
     "graphics_manifest_sha256": "520c1b419dcdb5e72555a861b1a209cca77b39750b0ad29441a855798eaea109",
     "conformance_state": "R93 eight Main foreground sources scoped CONFORMED; all previous captures retain individual verified scope",
     "provenance_scope": "最新草原百科使用8d46f07的正式顯示程式與269張原圖；其餘二十張原PNG與逐圖來源保持。"
+  },
+  "previous_terrain_main_surface_capture_header": {
+    "date": "2026-10-19",
+    "code_commit": "7e63fcacc9071f1b6ca4848170553a16cfbbd82d",
+    "binary_sha256": "c19cd3e951e8a986d01f1e23726b2ddf7f7f19c082f74efb775c3a0aa6d06d80",
+    "formal_binary_sha256": "c19cd3e951e8a986d01f1e23726b2ddf7f7f19c082f74efb775c3a0aa6d06d80",
+    "source_build_sha256": "4a2ec3cad6b84a3b32adca3d63b9adc74e85a203bece64fa3adec0b5a3746300",
+    "formal_hd_assets": 302,
+    "graphics_manifest_sha256": "d892af8a06345a4090e8552be7fa019b1d4930aed6cacecb6917b0f284372088",
+    "conformance_state": "R94三十三個Main前景限定CONFORMED，其他圖片保留各自已驗範圍",
+    "provenance_scope": "頁首描述本次新增的兩張實拍；各圖來源與指紋以個別紀錄為準。"
   }
 }
