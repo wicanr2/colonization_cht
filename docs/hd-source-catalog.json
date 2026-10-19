@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "28946c987c61212eb0ec04e221ad718c81be71c765935ed8f4db33d67d33eabe",
+  "formal_manifest_sha256": "d2a56422792877654e8b1cf78d8006e2f7c11a065bd2bad5ae19602f490143ee",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 302,
+    "formal_asset_bindings": 305,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -29011,9 +29011,18 @@
       "indexed_sha256": "36cbaf0138b7cf6f49694d21ceadb5f2cd48d5e3da3b5b8ba2245b5ad818dc0f",
       "opaque_pixels": 176,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed full original D66 decode, return and raw writes; independent Main/Stage model, original animation revocations and cursor composition; normal GUI45",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-003.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "d6919b3f43c4f71e847d928bfdcc7f17105eb25740e0a9ac9ad1121116991ed6",
+        "scope": "scale100 only; Main003/118 and Stage003/011/118; other scales, clipping, unknown animation writes and full HD not conformed"
+      }
     },
     {
       "research_id": 831,
@@ -29415,9 +29424,18 @@
       "indexed_sha256": "bb62812d87c4c9bedcb79b3b875c8c841e89e4de8d56766db8d69313a35b26e6",
       "opaque_pixels": 152,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed full original D66 decode, return and raw writes; independent Main/Stage model, original animation revocations and cursor composition; normal GUI45",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-011.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "d6919b3f43c4f71e847d928bfdcc7f17105eb25740e0a9ac9ad1121116991ed6",
+        "scope": "scale100 only; Main003/118 and Stage003/011/118; other scales, clipping, unknown animation writes and full HD not conformed"
+      }
     },
     {
       "research_id": 839,
@@ -35371,9 +35389,18 @@
       "indexed_sha256": "40dbe8b7a5845b089ac7c7eeb94f092eff5325e1cc44cb1c07b9d9230bee1da3",
       "opaque_pixels": 15,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed full original D66 decode, return and raw writes; independent Main/Stage model, original animation revocations and cursor composition; normal GUI45",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-118.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "review_sha256": "d6919b3f43c4f71e847d928bfdcc7f17105eb25740e0a9ac9ad1121116991ed6",
+        "scope": "scale100 only; Main003/118 and Stage003/011/118; other scales, clipping, unknown animation writes and full HD not conformed"
+      }
     },
     {
       "research_id": 946,
@@ -62488,6 +62515,39 @@
       "source_indexed_sha256": "e955d47587a23cb56bbd0505a00e7f1ff0135f19685c1f801317da4ebd28b0b5",
       "spec": "docs/spec/067-hd-world-terrain-batch.md",
       "claim": "R94 normal Main Pedia scope only; complete current RGBA/X11, palette and alpha retained"
+    },
+    {
+      "asset": "icons-003.png",
+      "asset_sha256": "98e35a733d1741b3d14ae7dace783d5eafedf0aff89afae05fe1ede6878a3c5b",
+      "source_research_id": 830,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "93f047dadde245c823f403712643a6277a4e6850914e60fe597d956e928d5798",
+      "source_indexed_sha256": "36cbaf0138b7cf6f49694d21ceadb5f2cd48d5e3da3b5b8ba2245b5ad818dc0f",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "R96 complete D66 source at100%; Main003/118 and Stage003/011/118; verified typed copies only"
+    },
+    {
+      "asset": "icons-011.png",
+      "asset_sha256": "858d4962dba4b24075dca0bc2c3845ef8c0d8af2537bea5137f02554a4060044",
+      "source_research_id": 838,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 11,
+      "source_encoded_sha256": "2104209ba40bb60e18d20e3b86dd01e8e280b7f7287cde3e2e259553ec326a14",
+      "source_indexed_sha256": "bb62812d87c4c9bedcb79b3b875c8c841e89e4de8d56766db8d69313a35b26e6",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "R96 complete D66 source at100%; Main003/118 and Stage003/011/118; verified typed copies only"
+    },
+    {
+      "asset": "icons-118.png",
+      "asset_sha256": "0a447fb0f0381c35b4598aec52daf36bb3f2e4bfea3075500e26c98879d9a22a",
+      "source_research_id": 945,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 118,
+      "source_encoded_sha256": "9e7150813c824ad38e12ddb7924f76fc6fc9d9fed724f63ca1e4162d24664f8f",
+      "source_indexed_sha256": "40dbe8b7a5845b089ac7c7eeb94f092eff5325e1cc44cb1c07b9d9230bee1da3",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "claim": "R96 complete D66 source at100%; Main003/118 and Stage003/011/118; verified typed copies only"
     }
   ],
   "limitations": [
@@ -63129,5 +63189,19 @@
     "gui_samples": 54,
     "unique_native_points": 44,
     "claim": "six additional Main Pedia surfaces only; all prior source contracts retained; full HD incomplete"
+  },
+  "scaled_small_image_conformance": {
+    "ready_sha256": "505ee5099ef5474c6226ce84094dccb3e0ed316a646b36cb770e36f01f879f9e",
+    "review_sha256": "d6919b3f43c4f71e847d928bfdcc7f17105eb25740e0a9ac9ad1121116991ed6",
+    "sources": [
+      830,
+      838,
+      945
+    ],
+    "formal_assets": 305,
+    "new_raw_pngs": 3,
+    "gui_samples": 45,
+    "unique_native_points": 40,
+    "claim": "three D66 small images only; all prior contracts retained; original animation fallback and full HD incomplete"
   }
 }

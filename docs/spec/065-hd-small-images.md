@@ -459,3 +459,38 @@ r96-scaled-complete-calls.json。第一版只允許Stage，碰到Main時停下�
 不取代正常44點的完整週期及狀態核對。逾時負例原先停在入口，實際測成合法新呼叫；
 改為先執行原版ENTER後再模擬逾時，160個來源／色盤／複製守門通過，實作未改。
 最終原圖另乾淨重跑完整原型與14個載入錯件，合計178項零失敗零skip。
+
+### R96三個世界來源CONFORMED
+
+審查r96-scaled-small-conformance-r1.json為d6919b3f43c4f71e847d928bfdcc7f17105eb25740e0a9ac9ad1121116991ed6。本節只完成003、011、118三個100%縮放來源；
+Main003／118及Stage003／011／118，其他四十個候選仍DRAFT。正式來源索引為e52daf53508ce60a41b9a6a3090f951d3ee333c38c8fb16ec94c212c487e7164，
+追加入口為[來源清冊工具](../../tools/extend_hd_story_source_index.py)的--scaled-small-images分支。
+305張原PNG的完整提示、參考指紋及權利由graphics/manifest.json保存，沒有原版像素入Git。
+
+| 驗證 | 當次結果 |
+|---|---|
+| 正式程式 | 2bda3e6ba3a6e512edbbc3dce839bbc422eaec8278ec1a63ed684c823a3b235a；73Go／56來源綁定，建置與go vet通過。修正測試計數後整個程式逐byte相同。 |
+| 正常GUI | 第二次45項，冷啟動、讀檔、殖民地、世界、五語兩模式，城鎮及紅旗側欄與聚落地圖的四語游標進出，百科遮擋及正常關閉。 |
+| 原版來源 | 40點與控制／觀測全狀態相同。29次完整D66返回，獨立2215次轉送、3949次撤銷含26次同值，以及870次來源游標還原。 |
+| 獨立畫素 | 新三來源全部Main遮罩與元件畫素相同，alpha為3：130770、11：74240、118：11559；45張完整X11共46080000點。原生游標／HD游標最後覆蓋也逐點計算，沒有整幅世界獨立HD信用。 |
+| 實際輸入重播 | 56筆至102200000步，輸入0a2fca60bae61665af3eaed511e2b3d7d615e4f67d823b805355d590757db9fd。控制、原版、HD且play=true三側CPU／完整RAM／IDX／DAC／WAV／存檔與GUI相同。 |
+| 載入與封裝 | 182個具名成功項，零失敗／零skip。其中178項沿未改守門及交易成功紀錄，4項當次重跑；84來源／83美術、14新載入錯件、306檔封裝16拒絕、索引12拒絕。 |
+| README | 世界繁中實拍更新為第二次GUI的60200000步；原PNG不重編碼，另23張圖及逐圖來源保持。 |
+
+本機根workplace/reports/goal186-display-hd/hd-icons-all-surfaces-r96。
+重生順序為capture-r96-scaled-formal-r2.py及run-r96-formal-gui-r2.py、
+prepare-r96-current-native-r2.py、run-r96-current-native-r2.py、
+check-r96-current-scaled-source-model-r2.py、check-r96-current-formal-pixels-r5.py、
+verify-r96-current-replays-r2.py、check-r96-source-audio-hygiene-r2.py、
+review-r96-scaled-small-conformance-r1.py及check-r96-public-source-index-r1.py。
+在專案既有非root Docker工具鏈內依序執行，原版/game唯讀、專案/repo唯讀、該根/out可寫；
+建置使用Go映像並掛隔離dosgolem。具體程式、輸入、輸出SHA由r96-current-native-plan-r2.json及總審查保存。
+
+第一次GUI45的畫素及原版狀態也通過，但圖名hover不等於實際來源遮擋。
+城鎮與紅旗地圖位置會被原版選取動畫改寫；第二次改用來源模型證實的穩定側欄位置。
+所有十二組游標實際交集及返回均由第二次模型與畫素驗證，沒有因標籤跳過缺項。
+原版動畫的0DE8／0CAE／0D46未知寫入仍撤銷；不把原版消失或重畫誤當游標來源恢復。
+
+第一輪像素腳本誤用VGA頁代替Main，且漏掉最終游標覆蓋；修正驗證模型後重跑，產品未改。
+全載入父項曾因舊81計數失敗，實際err=nil且84來源已載入；封裝曾漏三圖輸出，已補齊並拒絕輸入／輸出名稱不一致。
+歷史成功與失敗各自保留。其他比例、裁切、舊來源Stage、VGA發布、其他動畫、全量HD及發行均不外推。

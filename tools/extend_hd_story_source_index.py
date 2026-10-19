@@ -461,6 +461,85 @@ def extend_terrain_main_surfaces(a):
     print('PASS_TERRAIN_MAIN6_CONFORMED_SOURCE_INDEX', 302, sha(a.output), flush=True)
 
 
+
+def extend_scaled_small_images(a):
+    """規格065 R96：三個100%縮放入口的小圖像，保留舊302連結。"""
+    baseline, ready, review = read(a.baseline), read(a.ready), read(a.conformed)
+    manifest = read(a.assets / 'manifest.json')
+    ids = [830, 838, 945]
+    assert sha(a.ready) == '505ee5099ef5474c6226ce84094dccb3e0ed316a646b36cb770e36f01f879f9e'
+    assert ready['state'] == 'READY' and ready['sources'] == ids
+    assert review['result'] == 'PASS_R96_THREE_SCALED_SMALL_IMAGE_CONFORMANCE'
+    assert review['spec_state'] == 'CONFORMED' and review['sources'] == ids
+    assert review['ready_sha256'] == sha(a.ready)
+    assert review['inherited_source_index_sha256'] == sha(a.baseline)
+    assert review['inherited_manifest_sha256'] == baseline['formal_manifest_sha256']
+    assert review['manifest_sha256'] == sha(a.assets / 'manifest.json')
+    assert review['formal_assets'] == len(manifest['assets']) == 305
+    assert review['new_raw_pngs'] == 3 and review['old_raw_pngs_preserved'] == 302
+    assert review['old_metadata_preserved'] == 302
+    assert review['go_named_passed'] == 182 and review['go_failed'] == review['go_skipped'] == 0
+    assert review['full_project_loader_positive']
+    assert review['small_sources'] == 84 and review['small_art_files'] == 83
+    assert review['new_small_resource_faults'] == 14
+    assert review['package_files'] == 306 and review['package_faults'] == 16
+    assert review['gui_samples'] == 45 and review['unique_native_points'] > 0
+    assert review['gui_x11_rgba'] == 46080000
+    assert all(review['gui_new_alpha_pixels'][str(n)] > 0 for n in [3, 11, 118])
+    assert review['actual_inputs'] > 0 and review['replay_end'] > 0
+    for key in ['five_languages_both_modes', 'all3_four_CJK_cursor_hover_return',
+                'normal_cover_and_close_verified', 'source_Main_Stage_independently_verified',
+                'raw_png_alpha_preserved', 'three_replays_state_audio_save_equal_GUI',
+                'native_inputs_rules_and_save_unchanged']:
+        assert review[key]
+    assert review['scale_percent'] == 100
+    assert review['Main_ordinals'] == [3, 118] and review['Stage_ordinals'] == [3, 11, 118]
+    assert not review['other_scale_or_clipping_credit']
+    assert not review['new_old_source_Stage_credit'] and not review['new_published_VGA_credit']
+    assert not review['complete_hd'] and not review['new_release']
+    out = copy.deepcopy(baseline)
+    assert len(out['frames']) == 1552 and len(out['formal_bindings']) == 302
+    frames = {f['research_id']: f for f in out['frames']}
+    for binding in out['formal_bindings']:
+        name = binding['asset']
+        assert binding['asset_sha256'] == manifest['assets'][name]['sha256'] == sha(a.assets / name)
+    additions = [(830, 'icons-003.png'), (838, 'icons-011.png'), (945, 'icons-118.png')]
+    assert set(manifest['assets']) - {b['asset'] for b in out['formal_bindings']} == {n for _, n in additions}
+    for ident, name in additions:
+        frame, meta = frames[ident], manifest['assets'][name]
+        assert frame['file'] == 'ICONS.SS' and frame['ordinal'] == meta['native_ordinal']
+        assert not frame['formal_assets'] and meta['source_research_id'] == ident
+        assert meta['native_size'] == frame['size']
+        assert meta['original_binding'][frame['file']] == frame['file_sha256']
+        assert meta['original_binding']['encoded_frame_sha256'] == frame['encoded_sha256']
+        assert meta['original_binding']['indexed_frame_sha256'] == frame['indexed_sha256']
+        assert sha(a.assets / name) == meta['sha256']
+        out['formal_bindings'].append({
+            'asset': name, 'asset_sha256': meta['sha256'], 'source_research_id': ident,
+            'source_file': frame['file'], 'source_ordinal': frame['ordinal'],
+            'source_encoded_sha256': frame['encoded_sha256'], 'source_indexed_sha256': frame['indexed_sha256'],
+            'spec': 'docs/spec/065-hd-small-images.md',
+            'claim': 'R96 complete D66 source at100%; Main003/118 and Stage003/011/118; verified typed copies only'})
+        frame['formal_assets'] = [name]
+        frame['runtime_source_evidence'] = 'confirmed full original D66 decode, return and raw writes; independent Main/Stage model, original animation revocations and cursor composition; normal GUI45'
+        frame['source_contract_reference'] = {
+            'state': 'CONFORMED', 'spec': 'docs/spec/065-hd-small-images.md',
+            'formal_connected': True, 'review_sha256': sha(a.conformed),
+            'scope': 'scale100 only; Main003/118 and Stage003/011/118; other scales, clipping, unknown animation writes and full HD not conformed'}
+    old = {f['research_id']: f for f in baseline['frames']}
+    assert all(f == old[f['research_id']] for f in out['frames'] if f['research_id'] not in ids)
+    out['formal_manifest_sha256'] = sha(a.assets / 'manifest.json')
+    out['coverage_limits']['formal_asset_bindings'] = 305
+    out['coverage_limits']['complete_hd'] = False
+    out['scaled_small_image_conformance'] = {
+        'ready_sha256': sha(a.ready), 'review_sha256': sha(a.conformed), 'sources': ids,
+        'formal_assets': 305, 'new_raw_pngs': 3, 'gui_samples': 45,
+        'unique_native_points': review['unique_native_points'],
+        'claim': 'three D66 small images only; all prior contracts retained; original animation fallback and full HD incomplete'}
+    a.output.write_text(json.dumps(out, ensure_ascii=False, indent=2) + '\n')
+    print('PASS_SCALED_SMALL3_CONFORMED_SOURCE_INDEX', 305, sha(a.output), flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ['baseline', 'assets', 'ready', 'conformed', 'output']:
@@ -472,9 +551,13 @@ def main():
     scope.add_argument('--terrain-foreground', action='store_true', help='規格067 R93：只擴充已驗八個Main前景')
     scope.add_argument('--terrain-remainder', action='store_true', help='規格067 R94：只擴充已驗三十三個Main前景')
     scope.add_argument('--terrain-main-surfaces', action='store_true', help='規格067 R95：追加六個既有素材的Main表面')
+    scope.add_argument('--scaled-small-images', action='store_true', help='規格065 R96：追加三個已驗縮放入口小圖像')
     a = parser.parse_args()
     assert Path('/.dockerenv').exists() and os.getuid() != 0
     assert not a.output.exists() and a.output.parent.stat().st_uid == os.getuid()
+    if a.scaled_small_images:
+        extend_scaled_small_images(a)
+        return
     if a.terrain_main_surfaces:
         extend_terrain_main_surfaces(a)
         return

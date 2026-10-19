@@ -1,12 +1,12 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-19",
-  "code_commit": "dafeec2ffd7d70bcac823ceabbd00fcc941058f2",
-  "binary_sha256": "a7ec75c2e3810e4040687349236c47715b9a888a94c5341606e667a6ed1f7d58",
-  "formal_binary_sha256": "a7ec75c2e3810e4040687349236c47715b9a888a94c5341606e667a6ed1f7d58",
-  "source_build_sha256": "563843c1fb039214df4632e5c8e93e24c3a50d51133765d256403cd405dd17dd",
+  "code_commit": "fbcfe7e98733dca717821a11f1d5acecfc6c7615",
+  "binary_sha256": "2bda3e6ba3a6e512edbbc3dce839bbc422eaec8278ec1a63ed684c823a3b235a",
+  "formal_binary_sha256": "2bda3e6ba3a6e512edbbc3dce839bbc422eaec8278ec1a63ed684c823a3b235a",
+  "source_build_sha256": "9684ee887d7a2398d059cb1b176c1664636cb9a207399ad31d6081f970c8a054",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 302,
+  "formal_hd_assets": 305,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -36,25 +36,30 @@
     },
     {
       "file": "hd-world-zh.png",
-      "sha256": "20281ac92112717d90c70b99aa5d22001c3c78b092c51363f9cbe62d594763ef",
+      "sha256": "cafcb4c737b2bcac15cea108345735fe035cfa7a925c94ca2b08853cc7a92e75",
       "size": [
         1280,
         800
       ],
-      "scene": "world",
+      "scene": "world-zh-Hant-hd",
       "language": "zh-Hant",
       "graphics": "hd",
-      "step": 67400000,
-      "binary_sha256": "62a89fa74a9687998aa5fb78fe30811d91786d9da3e7f52c1f0393c0f4d8d03a",
-      "formal_binary_sha256": "f37156b63b0d1a90118eae97707269f227391f26519234d17bde2126e135f911",
-      "source_receipt": "workplace/reports/goal186-display-hd/hd-cold-start-sources-r65/world-wood-formal-gui-r1/gui/gui.display-078.png",
-      "source_gui_check_sha256": "11bf3da69309969a947d6b7e53f9718f491a424127ed774ae8d082d1d152b29c",
-      "source_kind": "actual formal game presentation with read-only capture helper; verified byte-for-byte against the real X11 window game area",
+      "step": 60200000,
+      "binary_sha256": "2bda3e6ba3a6e512edbbc3dce839bbc422eaec8278ec1a63ed684c823a3b235a",
+      "formal_binary_sha256": "2bda3e6ba3a6e512edbbc3dce839bbc422eaec8278ec1a63ed684c823a3b235a",
+      "code_commit": "fbcfe7e98733dca717821a11f1d5acecfc6c7615",
+      "formal_hd_assets": 305,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-icons-all-surfaces-r96/r96-scaled-formal-gui-r2/gui.display-034.png",
+      "source_gui_check_sha256": "4d20bc2edbdc15626171dd04b9a8c72f046e64d7cbdbbafc125f698671bebb85",
+      "independent_pixels_sha256": "158d854ad580c38bc71623ff7f5e329832247445bf21306d3435e16c217b34dc",
+      "source_kind": "actual formal game presentation, verified byte-for-byte against real X11 game area; new3 source/component pixels independently verified, no whole-world independent HD credit",
       "capture_pixels_unchanged": true,
-      "code_commit": "d48eb9d47b1fa2ef0ca8fcc4385ef8274d7f9377",
-      "formal_hd_assets": 69,
-      "independent_pixels_sha256": "ed871c3a763ed84774aae08837bf952df8170a31c291455b654c2f93cc083f96",
-      "wood_source_cells": 13149
+      "conformance_sha256": "d6919b3f43c4f71e847d928bfdcc7f17105eb25740e0a9ac9ad1121116991ed6",
+      "graphics_manifest_sha256": "d2a56422792877654e8b1cf78d8006e2f7c11a065bd2bad5ae19602f490143ee",
+      "source_index_sha256": "e52daf53508ce60a41b9a6a3090f951d3ee333c38c8fb16ec94c212c487e7164",
+      "ready_sha256": "505ee5099ef5474c6226ce84094dccb3e0ed316a646b36cb770e36f01f879f9e",
+      "actual_inputs_sha256": "0a2fca60bae61665af3eaed511e2b3d7d615e4f67d823b805355d590757db9fd",
+      "pixel_scope": "D66 sources003/011/118 only plus final original/HD cursor composition; all inherited world layers retain prior evidence"
     },
     {
       "file": "noto-menu-zh.png",
@@ -827,8 +832,8 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "最新寒帶森林百科使用當次正式程式與302張原圖；其餘23張原PNG及逐圖來源保持。",
-  "graphics_manifest_sha256": "28946c987c61212eb0ec04e221ad718c81be71c765935ed8f4db33d67d33eabe",
+  "provenance_scope": "世界地圖更新為305張原圖與當次正式程式的繁中實拍；其他23張原PNG與逐圖來源保持。",
+  "graphics_manifest_sha256": "d2a56422792877654e8b1cf78d8006e2f7c11a065bd2bad5ae19602f490143ee",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -1020,7 +1025,7 @@
     },
     "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb"
   },
-  "conformance_state": "R95 six existing Main surfaces scoped CONFORMED; all prior captures retain individual scope",
+  "conformance_state": "R96 three scaled small images scoped CONFORMED; all previous captures retain individual scope",
   "previous_opening_sun_capture": {
     "capture": {
       "file": "hd-opening-zh.png",
@@ -1177,5 +1182,37 @@
     "graphics_manifest_sha256": "d892af8a06345a4090e8552be7fa019b1d4930aed6cacecb6917b0f284372088",
     "conformance_state": "R94三十三個Main前景限定CONFORMED，其他圖片保留各自已驗範圍",
     "provenance_scope": "頁首描述本次新增的兩張實拍；各圖來源與指紋以個別紀錄為準。"
+  },
+  "previous_scaled_small_capture_header": {
+    "code_commit": "dafeec2ffd7d70bcac823ceabbd00fcc941058f2",
+    "binary_sha256": "a7ec75c2e3810e4040687349236c47715b9a888a94c5341606e667a6ed1f7d58",
+    "formal_binary_sha256": "a7ec75c2e3810e4040687349236c47715b9a888a94c5341606e667a6ed1f7d58",
+    "source_build_sha256": "563843c1fb039214df4632e5c8e93e24c3a50d51133765d256403cd405dd17dd",
+    "formal_hd_assets": 302,
+    "graphics_manifest_sha256": "28946c987c61212eb0ec04e221ad718c81be71c765935ed8f4db33d67d33eabe",
+    "conformance_state": "R95 six existing Main surfaces scoped CONFORMED; all prior captures retain individual scope",
+    "provenance_scope": "最新寒帶森林百科使用當次正式程式與302張原圖；其餘23張原PNG及逐圖來源保持。"
+  },
+  "previous_world_small_capture": {
+    "file": "hd-world-zh.png",
+    "sha256": "20281ac92112717d90c70b99aa5d22001c3c78b092c51363f9cbe62d594763ef",
+    "size": [
+      1280,
+      800
+    ],
+    "scene": "world",
+    "language": "zh-Hant",
+    "graphics": "hd",
+    "step": 67400000,
+    "binary_sha256": "62a89fa74a9687998aa5fb78fe30811d91786d9da3e7f52c1f0393c0f4d8d03a",
+    "formal_binary_sha256": "f37156b63b0d1a90118eae97707269f227391f26519234d17bde2126e135f911",
+    "source_receipt": "workplace/reports/goal186-display-hd/hd-cold-start-sources-r65/world-wood-formal-gui-r1/gui/gui.display-078.png",
+    "source_gui_check_sha256": "11bf3da69309969a947d6b7e53f9718f491a424127ed774ae8d082d1d152b29c",
+    "source_kind": "actual formal game presentation with read-only capture helper; verified byte-for-byte against the real X11 window game area",
+    "capture_pixels_unchanged": true,
+    "code_commit": "d48eb9d47b1fa2ef0ca8fcc4385ef8274d7f9377",
+    "formal_hd_assets": 69,
+    "independent_pixels_sha256": "ed871c3a763ed84774aae08837bf952df8170a31c291455b654c2f93cc083f96",
+    "wood_source_cells": 13149
   }
 }
