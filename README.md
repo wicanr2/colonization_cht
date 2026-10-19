@@ -72,7 +72,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 以下是開發中的五語顯示層與 HD 畫面，尚未收進目前發行版。截圖來自實際遊戲視窗，
 來源與指紋見[截圖紀錄](docs/screenshots/readme-captures.json)。全量 HD 包含商品、資源、單位、
 其餘小圖像、特殊游標與動畫幀，目前仍在逐項開發。
-目前 269 張已接線的生成 HD 原圖收在 [graphics/](graphics/)，均有已驗來源連結。河流、林木、道路與耕地的八個前景已完成限定驗收。十二種地形材質與施工槌、三十張新增建築、雲煙與魚形動畫、國王室內與出航背景、國王與獵犬已完成限定驗收。其他圖像與全量 HD 持續處理；已驗範圍見[目前狀態](CONTEXT.md)。
+目前 302 張已接線的生成 HD 原圖收在 [graphics/](graphics/)，均有已驗來源連結。已接線的地形、資源小圖、建築、背景與部分動畫已通過限定驗收。其他圖像與動畫持續處理；已驗範圍見[目前狀態](CONTEXT.md)。
 
 ![開場地圖、金色邊框與獨立物件的 HD 畫面](docs/screenshots/hd-opening-zh.png)
 
@@ -138,6 +138,14 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 
 百科地形：河流、林木、道路與耕地按原版位置顯示，搭配 HD 材質、木紋、人物與資源小圖、Noto 字型及游標。八個新前景已完成五語、游標進出與正常離頁驗證。
 
+![繁體中文高山百科與 HD 山脈、銀礦小圖像](docs/screenshots/hd-mountain-pedia-zh.png)
+
+百科高山：山脈、積雪、岩石與銀礦小圖像已重繪，位置及遮擋沿原版，人物與未接線素材仍保留原圖。
+
+![繁體中文寒帶森林百科與 HD 林木、獵物小圖像](docs/screenshots/hd-forest-pedia-zh.png)
+
+百科森林：已接線的林木與鹿圖示按原版輪廓顯示，搭配 HD 木紋、材質與 Noto 字型；其他森林來源持續接線。
+
 ![繁體中文極地百科與 HD 地形材質、木紋](docs/screenshots/hd-terrain-pedia-zh.png)
 
 百科地形：極地材質、木紋、Noto 字型與一般游標已接入 HD，前景岩石保留原圖。二十個地形主題與十二種材質已經過正常操作驗證，水面保留原版色盤動畫。
@@ -163,7 +171,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 所有建置、遊戲執行、分析與抓圖都在 Docker 容器內進行，需要自備合法原版。
 
 - [目前脈絡](CONTEXT.md)、[工作計畫](WORKLIST.md)（由 `docs/worklist.json` 產生）
-- [多語系、HD 切換與實際遊玩影片](docs/goals/186-display-settings-and-gameplay-video.md)：五語整包後端與設定保存已接線；十二種城內建築與景物、海洋與二十一種世界地形圖塊及碎片、一個人物、七十九種小圖像含百科船艦、貨車、砲台、寶藏、殖民者、步行與騎乘人物及受損砲台、一般游標、主選單背景與木紋、世界與城內木紋，城內紙質背景，以及新遊戲的難度人物卡、國家旗卡、自訂地圖十二張小圖背景、殖民地下方草地與碼頭、歐洲港口、八種報告背景、國會室內、計分頁及開場長圖與邊框已接正式HD顯示。開場船隻八幀與太陽七幀已驗收；雲與煙二十一幀已驗收；魚形二十一幀已驗收；國王室內與十張出航背景已完成限定驗收。其他未接線動畫保留原版。全量圖像包含小圖像與動畫幀，仍在逐項開發，尚未收進目前發行版。
+- [多語系、HD 切換與實際遊玩影片](docs/goals/186-display-settings-and-gameplay-video.md)：顯示設定、已接線 HD 素材與驗收入口。未接線圖像及動畫保留原版，五語與全量 HD 尚未收進現行發行版。
 - [規格](docs/spec/)與[各輪目標](docs/goals/)
 - [驗證矩陣](docs/verification-matrix.md)（`tools/verification_matrix.py` 產生）
 - [研究證據](RESEARCH-LOG.md)與[工作歷程](WORKLOG.md)

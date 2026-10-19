@@ -1,12 +1,12 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-19",
-  "code_commit": "8d46f078a4e82e67e64f65e7e16449992a8befef",
-  "binary_sha256": "1267bf447310291ad97bddf77601fa5526d294a765e6904fd467170e9ef482c8",
-  "formal_binary_sha256": "1267bf447310291ad97bddf77601fa5526d294a765e6904fd467170e9ef482c8",
-  "source_build_sha256": "44f00bbaca4ed9781f8f8a2e1d2e4268acf88fec4cd9f29f9b6a1e1037cc156c",
+  "code_commit": "7e63fcacc9071f1b6ca4848170553a16cfbbd82d",
+  "binary_sha256": "c19cd3e951e8a986d01f1e23726b2ddf7f7f19c082f74efb775c3a0aa6d06d80",
+  "formal_binary_sha256": "c19cd3e951e8a986d01f1e23726b2ddf7f7f19c082f74efb775c3a0aa6d06d80",
+  "source_build_sha256": "4a2ec3cad6b84a3b32adca3d63b9adc74e85a203bece64fa3adec0b5a3746300",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 269,
+  "formal_hd_assets": 302,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -678,6 +678,78 @@
       "foreground_source_cells": 813,
       "verification_state": "CONFORMED within R93 normal Main Pedia scope; all eight foregrounds, five languages, cursor hover/return, actual-input state/audio/save and full Pedia RGBA verified; full HD incomplete",
       "scope": "正常繁中草原百科。河流、林木、道路與耕地前景、地形材質、木紋、人物／資源小圖、Noto及一般游標已驗。新八前景限Main，不外推世界Stage、其他來源或全量HD。"
+    },
+    {
+      "file": "hd-forest-pedia-zh.png",
+      "sha256": "bba9b635e5e2ce08d54048a27f519ce541719732f288940bd257e2f8a360190f",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "boreal-forest-pedia",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 80800000,
+      "binary_sha256": "c19cd3e951e8a986d01f1e23726b2ddf7f7f19c082f74efb775c3a0aa6d06d80",
+      "formal_binary_sha256": "c19cd3e951e8a986d01f1e23726b2ddf7f7f19c082f74efb775c3a0aa6d06d80",
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-terrain-remaining-r94/r94-remaining-formal-gui-r1/gui.display-046.png",
+      "source_gui_check_sha256": "80f2fc58f1d844a229fe16de559daab24bf5d0cecdcc3958df9d968d498a032a",
+      "source_kind": "正式遊戲視窗原樣實拍，已逐像素核對獨立合成與X11遊戲區",
+      "capture_pixels_unchanged": true,
+      "code_commit": "7e63fcacc9071f1b6ca4848170553a16cfbbd82d",
+      "formal_hd_assets": 302,
+      "independent_pixels_sha256": "490f5b37edd9de4a09fd06519259a2104d03e4b551d2373ea3d7e8a2e9207327",
+      "conformance_sha256": "4475d4ad9685764bc0bb6a10029be909d6c7485f4b4782a520db51e87f9076d8",
+      "verified_counts": {
+        "terrain_source_rgba": 7920,
+        "background_rgba": 931056,
+        "nine_alpha_pixels": 0,
+        "small_alpha_pixels": 4031,
+        "remaining_alpha_pixels": 16030,
+        "foreground_alpha_pixels": 20617,
+        "foreground_water_pixels": 368,
+        "noto_fields": 18,
+        "erased_native_glyph_cells": 2512,
+        "independent_full_RGBA_pixels": 1024000,
+        "X11_RGBA_pixels": 1024000
+      },
+      "scope": "R94已驗Main百科畫面，仍包含未接線的原版人物及其他素材；不代表全量HD或現行發行版。"
+    },
+    {
+      "file": "hd-mountain-pedia-zh.png",
+      "sha256": "d1519c2e1cf17d62fdb0792f3bdc6f8e8b18d5d94ed2e518bb5f5970706c4238",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "mountain-pedia",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 188200000,
+      "binary_sha256": "c19cd3e951e8a986d01f1e23726b2ddf7f7f19c082f74efb775c3a0aa6d06d80",
+      "formal_binary_sha256": "c19cd3e951e8a986d01f1e23726b2ddf7f7f19c082f74efb775c3a0aa6d06d80",
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-terrain-remaining-r94/r94-remaining-formal-gui-r1/gui.display-166.png",
+      "source_gui_check_sha256": "80f2fc58f1d844a229fe16de559daab24bf5d0cecdcc3958df9d968d498a032a",
+      "source_kind": "正式遊戲視窗原樣實拍，已逐像素核對獨立合成與X11遊戲區",
+      "capture_pixels_unchanged": true,
+      "code_commit": "7e63fcacc9071f1b6ca4848170553a16cfbbd82d",
+      "formal_hd_assets": 302,
+      "independent_pixels_sha256": "490f5b37edd9de4a09fd06519259a2104d03e4b551d2373ea3d7e8a2e9207327",
+      "conformance_sha256": "4475d4ad9685764bc0bb6a10029be909d6c7485f4b4782a520db51e87f9076d8",
+      "verified_counts": {
+        "terrain_source_rgba": 4320,
+        "background_rgba": 937712,
+        "nine_alpha_pixels": 0,
+        "small_alpha_pixels": 1907,
+        "remaining_alpha_pixels": 31001,
+        "foreground_alpha_pixels": 32086,
+        "foreground_water_pixels": 0,
+        "noto_fields": 11,
+        "erased_native_glyph_cells": 2507,
+        "independent_full_RGBA_pixels": 1024000,
+        "X11_RGBA_pixels": 1024000
+      },
+      "scope": "R94已驗Main百科畫面，仍包含未接線的原版人物及其他素材；不代表全量HD或現行發行版。"
     }
   ],
   "limitations": [
@@ -715,8 +787,8 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "最新草原百科使用8d46f07的正式顯示程式與269張原圖；其餘二十張原PNG與逐圖來源保持。",
-  "graphics_manifest_sha256": "520c1b419dcdb5e72555a861b1a209cca77b39750b0ad29441a855798eaea109",
+  "provenance_scope": "頁首描述本次新增的兩張實拍；各圖來源與指紋以個別紀錄為準。",
+  "graphics_manifest_sha256": "d892af8a06345a4090e8552be7fa019b1d4930aed6cacecb6917b0f284372088",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -908,7 +980,7 @@
     },
     "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb"
   },
-  "conformance_state": "R93 eight Main foreground sources scoped CONFORMED; all previous captures retain individual verified scope",
+  "conformance_state": "R94三十三個Main前景限定CONFORMED，其他圖片保留各自已驗範圍",
   "previous_opening_sun_capture": {
     "capture": {
       "file": "hd-opening-zh.png",
@@ -1043,5 +1115,16 @@
     "graphics_manifest_sha256": "08736432e3c09a48273f3936dafade98ca4d4be8d2df34f617b87ddbdb48243b",
     "conformance_state": "R92 terrain12/hammer54 scoped CONFORMED; all earlier captures retain their individual verified scope",
     "provenance_scope": "Per-capture provenance is authoritative; header describes the latest added terrain capture only."
+  },
+  "previous_terrain_remaining_capture_header": {
+    "date": "2026-10-19",
+    "code_commit": "8d46f078a4e82e67e64f65e7e16449992a8befef",
+    "binary_sha256": "1267bf447310291ad97bddf77601fa5526d294a765e6904fd467170e9ef482c8",
+    "formal_binary_sha256": "1267bf447310291ad97bddf77601fa5526d294a765e6904fd467170e9ef482c8",
+    "source_build_sha256": "44f00bbaca4ed9781f8f8a2e1d2e4268acf88fec4cd9f29f9b6a1e1037cc156c",
+    "formal_hd_assets": 269,
+    "graphics_manifest_sha256": "520c1b419dcdb5e72555a861b1a209cca77b39750b0ad29441a855798eaea109",
+    "conformance_state": "R93 eight Main foreground sources scoped CONFORMED; all previous captures retain individual verified scope",
+    "provenance_scope": "最新草原百科使用8d46f07的正式顯示程式與269張原圖；其餘二十張原PNG與逐圖來源保持。"
   }
 }

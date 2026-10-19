@@ -164,6 +164,83 @@ def extend_terrain_foreground(a):
     print('PASS_TERRAIN_FOREGROUND8_CONFORMED_SOURCE_INDEX', 269, sha(a.output), flush=True)
 
 
+def extend_terrain_remainder(a):
+    """規格067 R94：只登錄已驗三十三個Main前景，保留原Stage與發布邊界。"""
+    baseline, ready, review = read(a.baseline), read(a.ready), read(a.conformed)
+    manifest = read(a.assets / 'manifest.json')
+    ordinals = [37,38,39,41,42,43,45,46,47,53,54,55,57,58,59,61,62,63,69,70,73,75,90,91,92,93,94,95,97,98,99,101,102]
+    ids = [1288 + n for n in ordinals]
+    names = {'terrain-%03d.png' % n for n in ordinals}
+    assert ready['result'] == 'PASS_R94_READY_33_MAIN_FOREGROUNDS' and ready['state'] == 'READY'
+    assert ready['source_ordinals'] == ordinals and ready['source_cells'] == 5265
+    assert sha(a.ready) == 'f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265'
+    assert review['result'] == 'PASS_R94_THIRTYTHREE_FOREGROUND_CONFORMANCE' and review['spec_state'] == 'CONFORMED'
+    assert review['sources'] == ids and review['ready_sha256'] == sha(a.ready)
+    assert review['inherited_source_index_sha256'] == sha(a.baseline)
+    assert review['inherited_manifest_sha256'] == baseline['formal_manifest_sha256']
+    assert review['manifest_sha256'] == sha(a.assets / 'manifest.json')
+    assert review['formal_assets'] == len(manifest['assets']) == 302
+    assert review['old_raw_pngs_preserved'] == review['old_metadata_preserved'] == 269
+    assert review['go_named_passed'] == 682 and review['go_failed'] == review['go_skipped'] == 0
+    assert review['package_files'] == 303 and review['package_faults'] == 106
+    assert review['gui_samples'] == 96 and review['unique_native_points'] == 86
+    assert review['gui_full_rgba'] == 95 * 1280 * 800
+    assert review['gui_x11_rgba'] == 96 * 1280 * 800 and review['gui_noto_fields'] == 816
+    assert review['remaining_alpha_pixels'] == 720534 and review['foreground_alpha_pixels'] == 1165193 and review['foreground_water_pixels'] == 16560
+    assert review['actual_inputs'] == 163 and review['replay_end'] == 278600000
+    for key in ['full_project_loader_positive', 'all33_normal_pedia_HD',
+                'five_languages_both_modes', 'representative_CJK_cursor_hover_return',
+                'all33_have_independent_generated_RGBA', 'normal_close_removes_foreground',
+                'native_unknown_foreground_and_cursor_preserved', 'water_palette_and_raw_alpha_preserved',
+                'three_replays_state_audio_save_equal_GUI', 'native_inputs_rules_and_save_unchanged']:
+        assert review[key]
+    assert not review['new_stage_scope'] and not review['new_published_scope']
+    assert not review['complete_hd'] and not review['new_release']
+    out = copy.deepcopy(baseline)
+    assert len(out['formal_bindings']) == 269 and len(out['frames']) == 1552
+    old = {f['research_id']: f for f in baseline['frames']}
+    frames = {f['research_id']: f for f in out['frames']}
+    for b in out['formal_bindings']:
+        assert manifest['assets'][b['asset']]['sha256'] == b['asset_sha256'] == sha(a.assets / b['asset'])
+    assert set(manifest['assets']) - {b['asset'] for b in out['formal_bindings']} == names
+    for n, ident in zip(ordinals, ids):
+        name = 'terrain-%03d.png' % n
+        frame, meta = frames[ident], manifest['assets'][name]
+        assert frame['file'] == 'PHYS0.SS' and frame['ordinal'] == n and frame['size'] == [16, 16]
+        assert not frame['formal_assets'] and frame['decode_status'] == 'decoded'
+        original = meta['original_source']
+        assert original['file'] == frame['file'] and original['ordinal'] == n
+        assert original['sha256'] == frame['file_sha256']
+        assert original['encoded_sha256'] == frame['encoded_sha256'] and original['indexed_sha256'] == frame['indexed_sha256']
+        assert original['encoded_length'] == frame['encoded_length'] and original['opaque_cells'] == frame['opaque_pixels']
+        assert sha(a.assets / name) == meta['sha256']
+        assert meta['ready_review_sha256'] == sha(a.ready)
+        assert len(meta['sample_rect']) == len(meta['native_content_rect']) == 4 and meta['size'] == [1254,1254]
+        out['formal_bindings'].append({
+            'asset': name, 'asset_sha256': meta['sha256'], 'source_research_id': ident,
+            'source_file': frame['file'], 'source_ordinal': n,
+            'source_encoded_sha256': frame['encoded_sha256'], 'source_indexed_sha256': frame['indexed_sha256'],
+            'spec': 'docs/spec/067-hd-world-terrain-batch.md',
+            'claim': 'R94 normal Main Pedia scope only; complete current RGBA/X11, palette and alpha retained'})
+        frame['formal_assets'] = [name]
+        frame['runtime_source_evidence'] = 'confirmed complete D46 Main decode, verified backing copy, cursor handling and unknown same-value revocation; normal eleven terrain pages'
+        frame['source_contract_reference'] = {
+            'state': 'CONFORMED', 'spec': 'docs/spec/067-hd-world-terrain-batch.md',
+            'formal_connected': True, 'review_sha256': sha(a.conformed),
+            'scope': 'R94 GUI96/native86; Main only; no new world Stage, published fallback, other images or full HD credit'}
+    assert len(out['formal_bindings']) == 302
+    assert all(f == old[f['research_id']] for f in out['frames'] if f['research_id'] not in ids)
+    out['formal_manifest_sha256'] = sha(a.assets / 'manifest.json')
+    out['coverage_limits']['formal_asset_bindings'] = 302
+    out['coverage_limits']['complete_hd'] = False
+    out['terrain_remaining_conformance'] = {
+        'ready_sha256': sha(a.ready), 'review_sha256': sha(a.conformed), 'sources': ids,
+        'formal_assets': 302, 'gui_samples': 96, 'unique_native_points': 86,
+        'claim': '33 Main Pedia foregrounds only; complete Pedia pixels and X11; new Stage/published scope and full HD incomplete'}
+    a.output.write_text(json.dumps(out, ensure_ascii=False, indent=2) + '\n')
+    print('PASS_TERRAIN_REMAINDER33_CONFORMED_SOURCE_INDEX', 302, sha(a.output), flush=True)
+
+
 def extend_terrain_textures(a):
     """規格071／065 R92：只登錄已驗十二材質與施工槌，保持世界畫素邊界。"""
     baseline, ready, review = read(a.baseline), read(a.ready), read(a.conformed)
@@ -320,9 +397,13 @@ def main():
     scope.add_argument('--buildings', action='store_true', help='規格061 R91：只擴充已驗三十個建築來源')
     scope.add_argument('--terrain-textures', action='store_true', help='規格071／065 R92：只擴充已驗十二材質與施工槌')
     scope.add_argument('--terrain-foreground', action='store_true', help='規格067 R93：只擴充已驗八個Main前景')
+    scope.add_argument('--terrain-remainder', action='store_true', help='規格067 R94：只擴充已驗三十三個Main前景')
     a = parser.parse_args()
     assert Path('/.dockerenv').exists() and os.getuid() != 0
     assert not a.output.exists() and a.output.parent.stat().st_uid == os.getuid()
+    if a.terrain_remainder:
+        extend_terrain_remainder(a)
+        return
     if a.terrain_foreground:
         extend_terrain_foreground(a)
         return

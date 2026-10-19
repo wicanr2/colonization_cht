@@ -7105,3 +7105,11 @@ confirmed限42張GUI／39個當次原版點，輸入a5f136c8643dd075e5dc6f19f89d
 - 33來源沿0D46:000A與完整寫入／返回契約，Main 0x2CAE0。來源與原版定位見規格067 R94、本機r94-reference-inventory-r1.json及r94-entry-fixtures-r1.json；未宣稱Stage／發布回退。
 - 33個實際CPU解碼返回、627個拒絕子案例與34個父案例通過。112點原型及375筆實際輸入的CPU／RAM／IDX／DAC／週期／存檔相同；獨立114688000個元件RGBA與228496個alpha像素相同。
 - READY審查f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265。新84色號投影816ca734bee5ffca3be5e5d1d11affdcd87d495e9edacabc6788c68ba7f624b0；R93八來源色盤政策保持。正式GUI與當次重播尚待驗，全量HD未完成。
+
+
+### 2026-10-19 R94當次來源與限定CONFORMED
+
+- confirmed範圍：Main 0x2CAE0的33個前景，實模式0D46:000A入口及既有寫入／返回端。原始PHYS0／VICEROY指紋與dosgolem 82a14b2、Go1.26.7、Python3.11.2及Pillow9.4沿本頁READY記錄。
+- 當次96張GUI、86個獨立原版狀態；觀測器原碼bf017a31c76c323a29c50f501344b0b6dfc29610c041742177293c8ed8c032a3，二進位3157c6202947c5e342d1b0d33e7740904c2855c35b34cce777de6ad5572e936e。實際輸入6862ecc23af24bc2710d342493b32a578746103026d9bccfa1b7bd22937f5710，163筆至278600000步；控制、觀測、正式GUI及三模式重播狀態相同。
+- 獨立95張完整RGBA、96張X11及816個Noto欄位通過；720534個新前景alpha，含繼承來源共1165193個前景alpha與16560個水面RGBA。最後世界HD範圍仍限繼承材質與X11。
+- 審查4475d4ad9685764bc0bb6a10029be909d6c7485f4b4782a520db51e87f9076d8，完整本機入口hd-terrain-remaining-r94。來源摘要鍵型別錯誤已修正，資料與正式程式未變。其餘表面及全量HD保持未知或未完成。
