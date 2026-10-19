@@ -1021,6 +1021,51 @@
       "source_research_ids": [
         1064
       ]
+    },
+    {
+      "file": "hd-soldier-guide.png",
+      "sha256": "c39bf99e45093c3315cb23913bd3304b6c4eb27b79680ef1a2b7d545e8fe1e33",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "soldier-guide-figure",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 258000000,
+      "code_commit": "73b5825",
+      "binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
+      "formal_binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
+      "formal_hd_assets": 316,
+      "source_conformed_assets": 316,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-dialog-figures-r98/r98-mss-formal-gui-r5/gui.display-094.png",
+      "source_state_check_sha256": "37ed21bdefef61c61875d6013b683e1edd50812bcf00af8f247b23741162f60c",
+      "independent_pixels_sha256": "cc57b1644007f5e36c2aa3a129d5ac4f7b944f30932e6c6fd796d8d170896981",
+      "source_gui_check_sha256": "cc57b1644007f5e36c2aa3a129d5ac4f7b944f30932e6c6fd796d8d170896981",
+      "source_replay_check_sha256": "18742d07c6bfe02a6ca41fe48a4fd09fac1d8b647f73b267281a30739f61b9ca",
+      "source_build_sha256": "cc02d66abf153ec8dc77b87404480daceb520a66ec6a67452f0418209ec67fe0",
+      "graphics_manifest_sha256": "b2cff76717ebcd1bbdc9568a9c9a7dc3107edb945fc5511791dd08bea41bd10e",
+      "source_index_sha256": "467e97fc817b5f1277ba48016e85dd493af4fb7da1164868b2fb3d2e14562605",
+      "source_kind": "正式視窗原樣實拍；新人物全部可見RGBA及完整X11已核對",
+      "capture_pixels_unchanged": true,
+      "spec_state": "CONFORMED",
+      "conformance_sha256": "c859a1d5cf61804ecc5e98ab786ce913ec810503c33f0008c8edc63916d8af4a",
+      "verified_counts": {
+        "independent_new_component_RGBA_pixels": 70864,
+        "independent_full_world_RGBA_pixels": 0,
+        "X11_RGBA_pixels": 1024000
+      },
+      "scope": "士兵Main人物全部可見RGBA、43張X11、五語設定雙模式及四語游標往返、42原版點及78筆三側狀態／WAV／存檔限定通過。正文依守門回退原版英文，不授予新翻譯或完整世界RGBA、全量HD信用。",
+      "cohort_verified_counts": {
+        "independent_visible_new_component_RGBA_pixels": 915984,
+        "source_GUI_samples": 18,
+        "total_GUI_samples": 43
+      },
+      "source_research_ids": [
+        1061
+      ],
+      "actual_body_language": "en",
+      "new_multilingual_body_credit": false
     }
   ],
   "limitations": [
@@ -1061,7 +1106,7 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "新增兩張正常新局人物原樣實拍，前28張原PNG與逐張來源保持；新人物字形交疊、可見RGBA及完整X11均驗，沒有新增完整世界畫布信用。",
+  "provenance_scope": "新增士兵教學原樣實拍，前30張原PNG與逐圖來源保持；新增信用限人物、游標、來源、完整X11及當次原版狀態／音訊／存檔，正文仍回原版英文。",
   "graphics_manifest_sha256": "b2cff76717ebcd1bbdc9568a9c9a7dc3107edb945fc5511791dd08bea41bd10e",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
@@ -1254,7 +1299,7 @@
     },
     "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb"
   },
-  "conformance_state": "R98 MSS0/3/4 Main figures scoped CONFORMED; MSS1 READY and MSS2/5 DRAFT; previous captures retain individual proof",
+  "conformance_state": "R98 all four observed MSS0/1/3/4 Main figures scoped CONFORMED; MSS2/5 DRAFT; soldier body retains original English fallback; earlier captures retain individual proof",
   "previous_opening_sun_capture": {
     "capture": {
       "file": "hd-opening-zh.png",

@@ -2947,3 +2947,50 @@ r98-current-gui2-native-check-r2.json、r98-current-gui2-source-model-check-r2.j
 r98-current-gui2-formal-pixels-check-r6.json、r98-current-gui2-replays-check-r2.json。
 原版EXE、MSS0／4及dosgolem指紋沿READY證據；位址為real-mode與20-bit線性RAM。
 完整世界畫布沒有新增獨立RGBA信用，Stage、VGA發布與未觀測來源沒有信用。全量HD繼續。
+
+### R98士兵人物來源CONFORMED
+
+MSS1 Main來源1061追加限定CONFORMED，四個已觀測MSS0／1／3／4均已完成各自範圍。
+316張生成原PNG／317檔、正式bdea4aaf…與61個顯示來源綁定保持。MSS2／5仍DRAFT。
+
+| 驗收項目 | 當次結果 |
+|---|---|
+| 正常GUI5 | 原版正常讀檔接續，共43張／42個原版點；士兵18張，含五語設定兩模式及四CJK游標往返。 |
+| 獨立來源 | 1869744筆Main寫入、11次完整MSS繪製，44878次撤銷含6257次同值；士兵4429個不透明格逐格一致。 |
+| 人物與視窗 | 915984個可見人物RGBA、全部X11 44032000點通過；原版不透明游標最後合成，正常關頁與報表返回後來源歸零。 |
+| 原版狀態 | 當次78筆至283200000步，控制／原圖／HD play=true的完整CPU、RAM、IDX、DAC、WAV、存檔與實拍一致。 |
+| 既有回歸 | 同一程式507具名項零失敗零跳過、正常96筆／十一來源55完整呼叫／12點、583600取樣RGBA及317檔封裝19拒絕精確沿用。 |
+| 正文限制 | 四個非英文設定在此教學沒有啟用對話覆蓋，正文保留原版英文。此批只授予人物圖像，不增加翻譯、Noto正文排版或完整五語信用。 |
+
+原版既有入口快照確認目標為士兵用途教學。先前依建城推進的假設撤回，
+沒有修改原版規則或存檔；GUI5沿正常下船與首次單位教學輪轉觸發。
+GUI3漏down種類、GUI4的Alt+V額外八個v均保留，兩批不授予新人物信用。
+GUI4原版控制重播另證實完整狀態／WAV／存檔相同，產生GUI5種子
+b5e9391cc6d7407bbd0899686141f483d7764f947afd027182c3699d52bad472。
+
+Xvfb首個設定連線關閉後會重設自動重複；本次在遊戲X11連線後，以
+disable-r98-gui5-x11-repeat-r2.py確認從1改為0。實際Alt+V只送一次，沒有額外v。
+此為隔離測試環境設定，正式鍵盤映射、DOS與顯示程式不變。
+重生時於run-r98-formal-gui-r5.py啟動遊戲連線後，在同一容器執行該設定腳本，
+再依r98-route-command-01-r5.json至24逐畫面接續；實際輸入收據為最終時序來源。
+
+審查r98-soldier-figure-conformed-r1.json為c859a1d5cf61804ecc5e98ab786ce913ec810503c33f0008c8edc63916d8af4a。
+[來源索引工具](../../tools/extend_hd_story_source_index.py) --dialog-figures只追加1061，
+正例及十二拒絕通過；舊315連結與其他1551列保持。現行316連結索引為467e97fc817b5f1277ba48016e85dd493af4fb7da1164868b2fb3d2e14562605。
+重生輸入仍位於本機R98根目錄：r98-source-index-baseline-soldier-r1.json、
+r98-ready-review-r1.json及r98-soldier-figure-conformed-r1.json，沿既有五參數入口；
+check-r98-source-index-soldier-r1.py執行反例。
+
+本機證據為r98-current-gui5-native-check-r1.json、
+r98-current-gui5-source-model-check-r1.json、r98-current-gui5-formal-pixels-check-r4.json、
+r98-current-gui5-replays-check-r2.json及r98-gui4-original-seed-provenance-check-r1.json。
+原版EXE／MSS1、dosgolem與real-mode／20-bit線性RAM基準沿READY指紋。
+
+另有限正常輸入延伸至1600000000步，保留原96筆的12點及10次完整MSS繪製，
+未命中MSS2／5。全目錄探針r1碰20000次呼叫上限停止；r2取消無關全目錄及縮放觀測，
+只保留六MSS入口、完整返回與Main寫入，沒有提高上限。這只證明該段序列未命中，
+不推定兩來源不可達。收據r98-post96-six-MSS-research-check-r1.json，後續改查其他正常入口。
+
+未覆蓋來源的r98-next-HD-source-audit-r1.json沒有已驗來源的相同索引副本，
+僅有69項遮罩幾何相同候選，其中18個ICONS。69個全253空幀與19個零尺寸列分開保存，
+不因幾何相同或未命中而授予HD／可見性完成。其他圖像、表面、動畫及全量HD繼續。
