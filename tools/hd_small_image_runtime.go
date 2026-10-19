@@ -1,4 +1,4 @@
-// 規格065 R57及規格070 R72／R73／R74／R75 READY：80來源共用追蹤，除100沿人物層外皆有正式生成素材。
+// 規格065 R96 READY：84來源共用追蹤；新增003／011／118的100%縮放，既有81來源範圍保持。
 // 只觀測原版寫入及合成四倍畫布，不寫入DOS。
 package main
 
@@ -14,6 +14,8 @@ import (
 )
 
 type hdSmallFrame struct {
+	scaled100                            bool
+	nominal                              [2]uint16
 	bufferSaves, bufferRestores          uint64
 	ordinal, w, h, encodedLen, opaque    int
 	encodedSHA, writesSHA, artSHA, file  string
@@ -106,6 +108,9 @@ var hdSmallFrames = []hdSmallFrame{
 	{ordinal: 126, w: 14, h: 16, encodedLen: 201, opaque: 113, encodedSHA: "d71ac1014ffe4052f61e386210bc5a1d86c27200a9151511f5ab79b1e23f1709", writesSHA: "20c99158b4f9c47a8ba1ab3657618851146037fd3fe6cad3739efc511583bbce", artSHA: "b49397ae191453cefb55113049b342779cfb079c4e7028fb37b5cc82174b405c", file: "icons-126.png", artW: 1254, artH: 1254, sample: [4]int{231, 159, 1046, 1099}, content: [4]int{0, 0, 14, 16}, writers: 4},
 	{ordinal: 128, w: 8, h: 16, encodedLen: 128, opaque: 72, encodedSHA: "b21111002b447e2ca662416f4c3227c18a3f64ac4adf4950d574d48959dfb9d0", writesSHA: "6ca2778652456d84f1901c27c17bb8eab1dae124fc94a38480f1c798e4831b0c", artSHA: "7056fdc8859c79758cbd41041f4b9f6075e3495a78d09d3db97af8651376680f", file: "icons-128.png", artW: 1254, artH: 1254, sample: [4]int{408, 131, 920, 1124}, content: [4]int{0, 1, 8, 16}, writers: 4},
 	{ordinal: 129, w: 14, h: 16, encodedLen: 204, opaque: 115, encodedSHA: "3e4a724489ce7b301b4a95a371dda12688a3ee3739f796511cf8808fc934fb10", writesSHA: "3e73552ec59bb69ecb7fa63f1e439ece8dd5030441439797feee4de800d48c90", artSHA: "fb55e840e9a47eebda26348b2ce1c08f935227c32a32a17b86d49def1e8968af", file: "icons-129.png", artW: 1254, artH: 1254, sample: [4]int{239, 201, 1035, 1076}, content: [4]int{0, 0, 14, 16}, writers: 4},
+	{ordinal: 3, w: 21, h: 16, encodedLen: 271, opaque: 176, encodedSHA: "93f047dadde245c823f403712643a6277a4e6850914e60fe597d956e928d5798", writesSHA: "9e1702350e126520268c102c32efae27846e55bbef45e40c7ddedd335da21873", artSHA: "98e35a733d1741b3d14ae7dace783d5eafedf0aff89afae05fe1ede6878a3c5b", file: "icons-003.png", artW: 1437, artH: 1095, sample: [4]int{107, 80, 1362, 1065}, content: [4]int{2, 0, 20, 15}, writers: 7, scaled100: true, nominal: [2]uint16{15, 20}},
+	{ordinal: 11, w: 21, h: 16, encodedLen: 175, opaque: 152, encodedSHA: "2104209ba40bb60e18d20e3b86dd01e8e280b7f7287cde3e2e259553ec326a14", writesSHA: "f5fa908a9476592599d912c7b38134a15902f1ec870323fbb82682fa61957d85", artSHA: "858d4962dba4b24075dca0bc2c3845ef8c0d8af2537bea5137f02554a4060044", file: "icons-011.png", artW: 1437, artH: 1095, sample: [4]int{147, 220, 1302, 935}, content: [4]int{2, 3, 19, 14}, writers: 6, scaled100: true, nominal: [2]uint16{37, 142}},
+	{ordinal: 118, w: 6, h: 5, encodedLen: 30, opaque: 15, encodedSHA: "9e7150813c824ad38e12ddb7924f76fc6fc9d9fed724f63ca1e4162d24664f8f", writesSHA: "0da25d4e0ec7aee32db5e4cae1385985b3b36b690eb6acd2b93b208ca5225fc5", artSHA: "0a447fb0f0381c35b4598aec52daf36bb3f2e4bfea3075500e26c98879d9a22a", file: "icons-118.png", artW: 1374, artH: 1145, sample: [4]int{253, 202, 1120, 934}, content: [4]int{1, 0, 6, 4}, writers: 6, scaled100: true, nominal: [2]uint16{30, 84}},
 }
 var hdSmallWriterCodes = map[uint16][]byte{
 	0x181: {0x26, 0x88, 0x07, 0x03, 0x5e, 0xf0, 0x42, 0xfe, 0xcc, 0x74, 0x02, 0xeb, 0xe7, 0xeb, 0xd0, 0x3b},
@@ -125,6 +130,11 @@ type hdSmallPending struct {
 	cursor     int
 }
 type hdSmallRuntime struct {
+	stage                                     [64000]hdSmallCell
+	destination                               uint32
+	scaledActive                              bool
+	sourceDS                                  uint16
+	sourceOffset                              int
 	backing                                   map[uint32]hdSmallCell
 	bufferSaves, bufferRestores, peakBuffered uint64
 	h                                         *hdRuntime
@@ -136,8 +146,8 @@ type hdSmallRuntime struct {
 	x, y                                      int
 	sp, retCS, retIP                          uint16
 	start, revision, accepted, rejected       uint64
-	writes                                    [256]byte
-	counts                                    [256]uint16
+	writes                                    [336]byte
+	counts                                    [336]uint16
 	trace                                     bool
 	calls, pairs                              []map[string]any
 	entry                                     map[string]any
@@ -198,27 +208,36 @@ func (p *hdSmallRuntime) beforeInstruction() {
 	if p == nil {
 		return
 	}
-	m := p.h.m
-	c := m.CPU
+	m, c := p.h.m, p.h.m.CPU
 	if p.active {
-		if c.Seg[golem.CS] == p.retCS && c.IP == p.retIP && c.R[golem.SP] == p.sp+10 {
+		adjust := uint16(10)
+		if p.scaledActive {
+			adjust = 12
+		}
+		if c.Seg[golem.CS] == p.retCS && c.IP == p.retIP && c.R[golem.SP] == p.sp+adjust {
 			p.finish()
-		} else if m.Steps-p.start > 100000 || (c.Seg[golem.CS] == 0xd46 && c.IP == 0xa) {
+		} else if m.Steps-p.start > 100000 || (c.Seg[golem.CS] == 0xd46 && c.IP == 0xa) || (c.Seg[golem.CS] == 0xd66 && c.IP == 4) {
 			p.active = false
 			p.rejected++
 			p.frames[p.selected].rejected++
 		}
 	}
-	if c.Seg[golem.CS] != 0xd46 || c.IP != 0xa || p.active {
+	plain := c.Seg[golem.CS] == 0xd46 && c.IP == 0xa
+	scaled := c.Seg[golem.CS] == 0xd66 && c.IP == 4
+	if p.active || (!plain && !scaled) {
 		return
 	}
 	pc := int(c.Seg[golem.CS])*16 + int(c.IP)
-	if !bytes.Equal(m.Mem[pc:pc+12], []byte{0xc8, 0x28, 0, 0, 0x52, 0x53, 0x50, 0x57, 0x56, 0x8b, 0x47, 2}) {
+	code := []byte{0xc8, 0x28, 0, 0, 0x52, 0x53, 0x50, 0x57, 0x56, 0x8b, 0x47, 2}
+	if scaled {
+		code = []byte{0xc8, 0x6e, 1, 0, 0x52, 0x53, 0x50, 0x57, 0x56, 0x8b, 0x47, 2}
+	}
+	if !bytes.Equal(m.Mem[pc:pc+12], code) {
 		return
 	}
 	slot := -1
 	for i, f := range p.frames {
-		if c.R[golem.AX] == uint16(f.ordinal+1) {
+		if f.scaled100 == scaled && c.R[golem.AX] == uint16(f.ordinal+1) {
 			slot = i
 			break
 		}
@@ -227,46 +246,55 @@ func (p *hdSmallRuntime) beforeInstruction() {
 		return
 	}
 	f := &p.frames[slot]
-	stack := int(c.Seg[golem.SS])*16 + int(c.R[golem.SP])
-	if stack+10 > len(m.Mem) {
+	count := 5
+	if scaled {
+		count = 6
+	}
+	words, ok := hdBuildingWords(m.Mem, c.Seg[golem.SS], c.R[golem.SP], count)
+	if !ok {
 		return
 	}
-	words := [5]uint16{}
-	for i := range words {
-		words[i] = binary.LittleEndian.Uint16(m.Mem[stack+i*2:])
-	}
-	off := uint16((c.R[golem.AX]&0x7fff)*12 + words[3] + 0x36)
-	at := int(words[4])*16 + int(off)
-	if at+12 > len(m.Mem) {
+	off := int(words[count-2]) + 0x36 + int(c.R[golem.AX]&0x7fff)*12
+	if off+12 > 65536 {
 		return
 	}
-	record := [6]uint16{}
-	for i := range record {
-		record[i] = binary.LittleEndian.Uint16(m.Mem[at+i*2:])
+	record, ok := hdBuildingWords(m.Mem, words[count-1], uint16(off), 6)
+	if !ok {
+		return
 	}
 	source := int(record[1])*16 + int(record[0])
-	if source+f.encodedLen > len(m.Mem) || hash(m.Mem[source:source+f.encodedLen]) != f.encodedSHA {
+	if int(record[0])+f.encodedLen > 65536 || source+f.encodedLen > len(m.Mem) || hash(m.Mem[source:source+f.encodedLen]) != f.encodedSHA {
 		return
 	}
-	descriptor := int(c.Seg[golem.DS])*16 + int(c.R[golem.BX])
-	if descriptor+8 > len(m.Mem) {
+	d, ok := hdBuildingWords(m.Mem, c.Seg[golem.DS], c.R[golem.BX], 4)
+	if !ok {
 		return
 	}
-	d := [4]uint16{}
-	for i := range d {
-		d[i] = binary.LittleEndian.Uint16(m.Mem[descriptor+i*2:])
-	}
+	destination := uint32(d[3])*16 + uint32(d[2])
 	x, y := int(int16(c.R[golem.DX])), int(int16(words[2]))
-	if d != [4]uint16{200, 320, 0, 0x2cae} || int(record[4]) != f.w || int(record[5]) != f.h || x < 0 || x+f.w > 320 || y < 0 || y+f.h > 200 {
+	validSurface := d[0] == 200 && d[1] == 320 && d[2] == 0 && d[3] == 0x2cae
+	if scaled {
+		x -= f.w / 2
+		y = int(int16(words[3])) - f.h + 1
+		validSurface = d[0] == 200 && d[1] == 320 && d[2] == 0 && (d[3] == 0x3c50 || (d[3] == 0x2cae && f.ordinal != 11)) && words[2] == 100 && record[2] == f.nominal[0] && record[3] == f.nominal[1]
+	}
+	if !validSurface || int(record[4]) != f.w || int(record[5]) != f.h || x < 0 || x+f.w > 320 || y < 0 || y+f.h > 200 {
 		p.rejected++
 		f.rejected++
 		return
 	}
 	p.selected, p.active, p.outside, p.x, p.y = slot, true, false, x, y
+	p.destination = destination
+	p.scaledActive = scaled
+	p.sourceDS, p.sourceOffset = record[1], int(record[0])
 	p.start, p.sp, p.retCS, p.retIP = m.Steps, c.R[golem.SP], words[1], words[0]
-	p.writes, p.counts = [256]byte{}, [256]uint16{}
+	p.writes, p.counts = [336]byte{}, [336]uint16{}
 	if p.trace {
-		p.entry = map[string]any{"ordinal": f.ordinal, "entry_step": m.Steps, "registers": c.R, "segments": c.Seg, "stack": words, "record_far": fmt.Sprintf("%04X:%04X", words[4], off), "record": record, "source_far": fmt.Sprintf("%04X:%04X", record[1], record[0]), "source_sha256": hash(m.Mem[source : source+f.encodedLen]), "rect": [4]int{x, y, x + f.w, y + f.h}}
+		decoder := "D46"
+		if scaled {
+			decoder = "D66"
+		}
+		p.entry = map[string]any{"ordinal": f.ordinal, "decoder": decoder, "destination": destination, "entry_step": m.Steps, "registers": c.R, "segments": c.Seg, "stack": words, "record_far": fmt.Sprintf("%04X:%04X", words[count-1], off), "record": record, "source_far": fmt.Sprintf("%04X:%04X", record[1], record[0]), "source_sha256": hash(m.Mem[source : source+f.encodedLen]), "rect": [4]int{x, y, x + f.w, y + f.h}}
 	}
 }
 func (p *hdSmallRuntime) finish() {
@@ -291,7 +319,12 @@ func (p *hdSmallRuntime) finish() {
 	for k, n := range p.counts[:f.w*f.h] {
 		if n == 1 {
 			i := (p.y+k/f.w)*320 + p.x + k%f.w
-			p.visible[i] = hdSmallCell{true, uint32(k), p.writes[k], uint16(p.selected)}
+			cell := hdSmallCell{true, uint32(k), p.writes[k], uint16(p.selected)}
+			if p.destination == hdSeaStage {
+				p.stage[i] = cell
+			} else {
+				p.visible[i] = cell
+			}
 		}
 	}
 	p.accepted++
@@ -314,27 +347,8 @@ func (p *hdSmallRuntime) write(addr uint32, old, value byte) {
 	i := int(addr - hdBuildingCanvas)
 	p.revision++
 	cs, ip := m.CPU.OpAddr()
-	if p.active {
-		f := &p.frames[p.selected]
-		x, y := i%320-p.x, i/320-p.y
-		bit := uint8(0)
-		switch ip {
-		case 0x181:
-			bit = 1
-		case 0x1b4:
-			bit = 2
-		case 0x1d2:
-			bit = 4
-		}
-		pc := int(cs)*16 + int(ip)
-		if cs == 0xd46 && bit&f.writers != 0 && bytes.Equal(m.Mem[pc:pc+16], hdSmallWriterCodes[ip]) && x >= 0 && x < f.w && y >= 0 && y < f.h {
-			k := y*f.w + x
-			p.counts[k]++
-			p.writes[k] = value
-		} else {
-			p.outside = true
-		}
-	}
+	p.recordActiveWrite(addr, value)
+
 	if cs == 0xb68 && ip == 0x51c && m.CPU.Seg[golem.DS] == 0xa000 && m.CPU.Seg[golem.ES] == 0x2cae {
 		pc := int(cs)*16 + int(ip)
 		if bytes.Equal(m.Mem[pc:pc+16], []byte{0xf3, 0xa4, 0x8a, 0xc8, 0x2b, 0xf9, 0x2b, 0xf1, 3, 0xf3, 3, 0xfa, 0xfe, 0xcc, 0x75, 0xf0}) {
@@ -420,7 +434,7 @@ func (p *hdSmallRuntime) paint(out *image.RGBA, f draftNativeFrame) map[string]a
 			continue
 		}
 		a := p.frames[c.slot]
-		if a.art == nil {
+		if a.art == nil || (a.scaled100 && !hdSmallScaledPaletteSupported(f.palette)) {
 			continue
 		}
 		sx, sy := int(c.local)%a.w*4, int(c.local)/a.w*4
@@ -450,6 +464,18 @@ func (p *hdSmallRuntime) paint(out *image.RGBA, f draftNativeFrame) map[string]a
 
 // R51已驗的主畫布保存／還原。單一群組觀測器，不接受RAM至RAM或暫存畫布。
 func (p *hdSmallRuntime) memoryWrite(addr uint32, old, value byte) {
+	if addr >= hdSeaStage && addr < hdSeaStage+64000 {
+		p.recordActiveWrite(addr, value)
+		p.stage[addr-hdSeaStage] = hdSmallCell{}
+		return
+	}
+	if p.active && p.scaledActive && (addr < hdBuildingCanvas || addr >= hdBuildingCanvas+64000) {
+		cs, ip := p.h.m.CPU.OpAddr()
+		if cs == 0xd66 && (ip == 0x22e || ip == 0x272 || ip == 0x29e) {
+			p.outside = true
+		}
+	}
+
 	if addr >= hdBuildingCanvas && addr < hdBuildingCanvas+64000 {
 		p.write(addr, old, value)
 		return
@@ -486,7 +512,9 @@ func (p *hdSmallRuntime) copySource(addr uint32, value byte) (hdSmallCell, int, 
 		return hdSmallCell{}, 0, false
 	}
 	if src >= int(hdSeaStage) && src < int(hdSeaStage)+64000 {
-		return hdSmallCell{}, src, false
+		cell := p.stage[src-int(hdSeaStage)]
+		ok := cell.owned && int(cell.slot) < len(p.frames) && cell.native == value && p.frames[cell.slot].scaled100 && c.Flags&0x400 == 0
+		return cell, src, ok
 	}
 	var cell hdSmallCell
 	if src >= int(hdBuildingCanvas) && src < int(hdBuildingCanvas)+64000 {
@@ -494,5 +522,74 @@ func (p *hdSmallRuntime) copySource(addr uint32, value byte) (hdSmallCell, int, 
 	} else {
 		cell = p.backing[uint32(src)]
 	}
-	return cell, src, cell.owned && int(cell.slot) < len(p.frames) && cell.native == value
+	return cell, src, cell.owned && int(cell.slot) < len(p.frames) && cell.native == value && (!p.frames[cell.slot].scaled100 || c.Flags&0x400 == 0)
+}
+
+func (p *hdSmallRuntime) recordActiveWrite(addr uint32, value byte) {
+	if !p.active {
+		return
+	}
+	f := &p.frames[p.selected]
+	m := p.h.m
+	cs, ip := m.CPU.OpAddr()
+	base := uint32(hdBuildingCanvas)
+	if p.destination != 0 {
+		base = p.destination
+	}
+	pos := int(addr) - int(base)
+	x, y := pos%320-p.x, pos/320-p.y
+	bit := uint8(0)
+	codes := hdSmallWriterCodes
+	expectedCS := uint16(0xd46)
+	if f.scaled100 {
+		expectedCS = 0xd66
+		codes = hdSmallScaledWriterCodes
+		switch ip {
+		case 0x22e:
+			bit = 1
+		case 0x272:
+			bit = 2
+		case 0x29e:
+			bit = 4
+		}
+	} else {
+		switch ip {
+		case 0x181:
+			bit = 1
+		case 0x1b4:
+			bit = 2
+		case 0x1d2:
+			bit = 4
+		}
+	}
+	pc := int(cs)*16 + int(ip)
+	valid := cs == expectedCS && bit&f.writers != 0 && bytes.Equal(m.Mem[pc:pc+16], codes[ip]) && x >= 0 && x < f.w && y >= 0 && y < f.h
+	if f.scaled100 {
+		valid = valid && addr >= base && addr < base+64000 && addr == uint32(m.CPU.Seg[golem.ES])*16+uint32(m.CPU.R[golem.BX]) && m.CPU.Seg[golem.DS] == p.sourceDS && int(m.CPU.R[golem.SI]) >= p.sourceOffset && int(m.CPU.R[golem.SI]) <= p.sourceOffset+f.encodedLen
+	}
+	if valid {
+		k := y*f.w + x
+		p.counts[k]++
+		p.writes[k] = value
+	} else {
+		p.outside = true
+	}
+}
+
+var hdSmallScaledWriterCodes = map[uint16][]byte{
+	0x22e: {0x26, 0x88, 0x07, 0x03, 0x5e, 0xf0, 0x42, 0x47, 0xfe, 0xcc, 0x74, 0x02, 0xeb, 0xd7, 0xeb, 0xba},
+	0x272: {0x26, 0x88, 0x07, 0x03, 0x5e, 0xf0, 0x42, 0x47, 0xfe, 0xcc, 0x74, 0x02, 0xeb, 0xd8, 0xeb, 0xbc},
+	0x29e: {0x26, 0x88, 0x07, 0x03, 0x5e, 0xf0, 0x42, 0x47, 0xeb, 0x96, 0x5a, 0x5b, 0x5f, 0x03, 0x5e, 0xfe},
+}
+
+func hdSmallScaledPaletteSupported(pal []byte) bool {
+	if len(pal) != 768 {
+		return false
+	}
+	var projection []byte
+	for _, v := range []byte{47, 57, 58, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 100, 108, 109, 110, 111, 113, 116, 132, 133, 137, 138} {
+		projection = append(projection, v)
+		projection = append(projection, pal[int(v)*3:int(v)*3+3]...)
+	}
+	return hash(projection) == "1be3ed349ef54783069d4ee2bf3ba3636e5ec92afadc1699258017fffd568cc6"
 }

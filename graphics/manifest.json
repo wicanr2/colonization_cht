@@ -20609,6 +20609,350 @@
       "ready_review_sha256": "f6d3c9b209cf7e29c4d95795dbe7b01f2e7c55d840889dcc95655f0cf86b9265",
       "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
       "opaque_material_backplate": false
+    },
+    "icons-003.png": {
+      "sha256": "98e35a733d1741b3d14ae7dace783d5eafedf0aff89afae05fe1ede6878a3c5b",
+      "bytes": 1058097,
+      "size": [
+        1437,
+        1095
+      ],
+      "mode": "RGBA",
+      "target_size": [
+        84,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "preserve original PNG alpha; clip only to verified native opaque source cells",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "native_ordinal": 3,
+      "native_size": [
+        21,
+        16
+      ],
+      "native_content_rect": [
+        2,
+        0,
+        20,
+        15
+      ],
+      "sample_rect": [
+        107,
+        80,
+        1362,
+        1065
+      ],
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Asset type: final transparent bitmap sprite for an HD display overlay of Sid Meier's Colonization (1994).\nImage 1 is the original low-resolution sprite enlarged without interpolation, ONLY a geometry, silhouette and subject reference. Image 2 is the USER-APPROVED fine pixel-art style reference. Generate a new, original hand-crafted refined pixel-art sprite in the style of Image 2; DO NOT merely upscale Image 1. Sharp intentional pixel clusters, restrained earthy palette, readable small-game-icon detailing, crisp edges, coherent flat game lighting, no painterly blur.\nSubject: a small early colonial stone settlement/fortress icon: irregular ascending sand-colored stone buildings with very dark doorways, low building at left, a tall stone building rising at right; a short wooden flagpole with a plain BLUE flag at upper left. Preserve the exact asymmetrical architecture, relative heights, dark openings and orientation shown in the native reference. No new buildings.\nThe blue flag belongs to this native settlement sprite; do not replace it with a national emblem.\nComposition: exactly one isolated sprite, same view and relative composition as Image 1. Retain the original occupied shape and internal divisions. Fit the complete subject inside the canvas without clipping. A modest transparent margin is fine. Fine detail should survive nearest-neighbor display around 84 by 64 pixels (red flag around 24 by 20).\nBackground: genuinely transparent alpha, no backdrop, checkerboard, drop shadow or glow. No ground plane. Text: none. Avoid scene illustration, giant pixel blocks copied from reference, smooth vector art, 3D render, outlines thicker than the reference.\nDeliver a single high-resolution PNG; alpha must be preserved.",
+      "generation_history": [
+        {
+          "tool": "built-in image_gen",
+          "prompt": "Use case: stylized-concept. Asset type: final transparent bitmap sprite for an HD display overlay of Sid Meier's Colonization (1994).\nImage 1 is the original low-resolution sprite enlarged without interpolation, ONLY a geometry, silhouette and subject reference. Image 2 is the USER-APPROVED fine pixel-art style reference. Generate a new, original hand-crafted refined pixel-art sprite in the style of Image 2; DO NOT merely upscale Image 1. Sharp intentional pixel clusters, restrained earthy palette, readable small-game-icon detailing, crisp edges, coherent flat game lighting, no painterly blur.\nSubject: a small early colonial stone settlement/fortress icon: irregular ascending sand-colored stone buildings with very dark doorways, low building at left, a tall stone building rising at right; a short wooden flagpole with a plain BLUE flag at upper left. Preserve the exact asymmetrical architecture, relative heights, dark openings and orientation shown in the native reference. No new buildings.\nThe blue flag belongs to this native settlement sprite; do not replace it with a national emblem.\nComposition: exactly one isolated sprite, same view and relative composition as Image 1. Retain the original occupied shape and internal divisions. Fit the complete subject inside the canvas without clipping. A modest transparent margin is fine. Fine detail should survive nearest-neighbor display around 84 by 64 pixels (red flag around 24 by 20).\nBackground: genuinely transparent alpha, no backdrop, checkerboard, drop shadow or glow. No ground plane. Text: none. Avoid scene illustration, giant pixel blocks copied from reference, smooth vector art, 3D render, outlines thicker than the reference.\nDeliver a single high-resolution PNG; alpha must be preserved.",
+          "raw_sha256": "8469385c8a36f64e0e2288a603c908b2c5cb941b4f0a11bc489e57ab56e4f825",
+          "selected": false
+        },
+        {
+          "tool": "built-in image_gen",
+          "prompt": "Use case: precise-object-edit / stylized-concept. Final production transparent bitmap sprite for the existing Colonization HD overlay.\nImage 1 is the current generated original sprite, the EDIT TARGET. Image 2 is the native sprite, a STRICT geometry reference. Image 3 is the approved fine pixel-art style reference.\nKeep the current stone settlement, windows, doors, colors, shadows, view, asymmetrical buildings and fine pixel clusters from Image 1. Make one local correction to its BLUE FLAG AND POLE ONLY:\nRaise the upper edge of the blue cloth to the very top occupied row of the sprite, at the SAME HEIGHT as the top of the wooden pole. Remove the round gold/brown finial above the cloth. The flag needs a broad, solid blue upper-left area starting directly at the pole and a short sloping/folded tail to the right, following the native flag in Image 2. At tiny display scale the first top two logical rows of the flag must contain solid blue fabric, without a transparent gap above it. The top-left flag in Image 2 has a continuous blue first row immediately to the right of the pole; match it. Preserve the tall building at right and all architecture without lowering it or cropping it.\nKeep all other pixels and object placement as close as possible to Image 1. Do not add any objects, emblems, letters, shadows, scenery or border. Genuinely transparent alpha background; preserve transparency. One complete isolated sprite, entire subject visible, crisp pixel art. Do not upscale the native blocks.",
+          "raw_sha256": "98e35a733d1741b3d14ae7dace783d5eafedf0aff89afae05fe1ede6878a3c5b",
+          "selected": true
+        }
+      ],
+      "reference_sha256": {
+        "native": "e15c2097bd3f3a99f4c22c18c631a262a6afabff3343250b13c2babc07b57c5e",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "ICONS.SS": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "encoded_frame_sha256": "93f047dadde245c823f403712643a6277a4e6850914e60fe597d956e928d5798",
+        "indexed_frame_sha256": "36cbaf0138b7cf6f49694d21ceadb5f2cd48d5e3da3b5b8ba2245b5ad818dc0f"
+      },
+      "source_research_id": 830,
+      "source_encoded_length": 271,
+      "source_opaque_cells": 176,
+      "source_write_sha256": "9e1702350e126520268c102c32efae27846e55bbef45e40c7ddedd335da21873",
+      "decoder": {
+        "entry": "0D66:0004",
+        "scale_percent": 100,
+        "source_descriptors": [
+          "Stage 200/320/0/3C50",
+          "Main 200/320/0/2CAE"
+        ],
+        "nominal_record_words_2_3": [
+          15,
+          20
+        ],
+        "coordinate_rule": "left=DX-width//2;top=stack[3]-height+1;fully bounded only",
+        "old_sources_Stage_scope_unchanged": true,
+        "other_scaling_or_clipping_authorized": false
+      },
+      "palette_policy": {
+        "used_indices": [
+          47,
+          57,
+          58,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          100,
+          108,
+          109,
+          110,
+          111,
+          113,
+          116,
+          132,
+          133,
+          137,
+          138
+        ],
+        "projection_sha256": "1be3ed349ef54783069d4ee2bf3ba3636e5ec92afadc1699258017fffd568cc6"
+      },
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "505ee5099ef5474c6226ce84094dccb3e0ed316a646b36cb770e36f01f879f9e",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "icons-011.png": {
+      "sha256": "858d4962dba4b24075dca0bc2c3845ef8c0d8af2537bea5137f02554a4060044",
+      "bytes": 908127,
+      "size": [
+        1437,
+        1095
+      ],
+      "mode": "RGBA",
+      "target_size": [
+        84,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "preserve original PNG alpha; clip only to verified native opaque source cells",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "native_ordinal": 11,
+      "native_size": [
+        21,
+        16
+      ],
+      "native_content_rect": [
+        2,
+        3,
+        19,
+        14
+      ],
+      "sample_rect": [
+        147,
+        220,
+        1302,
+        935
+      ],
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Asset type: final transparent bitmap sprite for an HD display overlay of Sid Meier's Colonization (1994).\nImage 1 is the original low-resolution sprite enlarged without interpolation, ONLY a geometry, silhouette and subject reference. Image 2 is the USER-APPROVED fine pixel-art style reference. Generate a new, original hand-crafted refined pixel-art sprite in the style of Image 2; DO NOT merely upscale Image 1. Sharp intentional pixel clusters, restrained earthy palette, readable small-game-icon detailing, crisp edges, coherent flat game lighting, no painterly blur.\nSubject: a small indigenous earthen pueblo settlement icon: warm ochre/tan adobe block houses arranged as the native reference, low stepped roofs, a higher block at rear left, two dark doorways near the bottom. Preserve the exact silhouette, structure, orientation and the large empty transparent upper area. No extra props.\nNo people, flags, smoke, landscape, fences, tipis or invented cultural decorations.\nComposition: exactly one isolated sprite, same view and relative composition as Image 1. Retain the original occupied shape and internal divisions. Fit the complete subject inside the canvas without clipping. A modest transparent margin is fine. Fine detail should survive nearest-neighbor display around 84 by 64 pixels (red flag around 24 by 20).\nBackground: genuinely transparent alpha, no backdrop, checkerboard, drop shadow or glow. No ground plane. Text: none. Avoid scene illustration, giant pixel blocks copied from reference, smooth vector art, 3D render, outlines thicker than the reference.\nDeliver a single high-resolution PNG; alpha must be preserved.",
+      "generation_history": [
+        {
+          "tool": "built-in image_gen",
+          "prompt": "Use case: stylized-concept. Asset type: final transparent bitmap sprite for an HD display overlay of Sid Meier's Colonization (1994).\nImage 1 is the original low-resolution sprite enlarged without interpolation, ONLY a geometry, silhouette and subject reference. Image 2 is the USER-APPROVED fine pixel-art style reference. Generate a new, original hand-crafted refined pixel-art sprite in the style of Image 2; DO NOT merely upscale Image 1. Sharp intentional pixel clusters, restrained earthy palette, readable small-game-icon detailing, crisp edges, coherent flat game lighting, no painterly blur.\nSubject: a small indigenous earthen pueblo settlement icon: warm ochre/tan adobe block houses arranged as the native reference, low stepped roofs, a higher block at rear left, two dark doorways near the bottom. Preserve the exact silhouette, structure, orientation and the large empty transparent upper area. No extra props.\nNo people, flags, smoke, landscape, fences, tipis or invented cultural decorations.\nComposition: exactly one isolated sprite, same view and relative composition as Image 1. Retain the original occupied shape and internal divisions. Fit the complete subject inside the canvas without clipping. A modest transparent margin is fine. Fine detail should survive nearest-neighbor display around 84 by 64 pixels (red flag around 24 by 20).\nBackground: genuinely transparent alpha, no backdrop, checkerboard, drop shadow or glow. No ground plane. Text: none. Avoid scene illustration, giant pixel blocks copied from reference, smooth vector art, 3D render, outlines thicker than the reference.\nDeliver a single high-resolution PNG; alpha must be preserved.",
+          "raw_sha256": "858d4962dba4b24075dca0bc2c3845ef8c0d8af2537bea5137f02554a4060044",
+          "selected": true
+        }
+      ],
+      "reference_sha256": {
+        "native": "579480acda97e9060ac44b503e010eab385d29720b2fe55fba16a1046301f70e",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "ICONS.SS": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "encoded_frame_sha256": "2104209ba40bb60e18d20e3b86dd01e8e280b7f7287cde3e2e259553ec326a14",
+        "indexed_frame_sha256": "bb62812d87c4c9bedcb79b3b875c8c841e89e4de8d56766db8d69313a35b26e6"
+      },
+      "source_research_id": 838,
+      "source_encoded_length": 175,
+      "source_opaque_cells": 152,
+      "source_write_sha256": "f5fa908a9476592599d912c7b38134a15902f1ec870323fbb82682fa61957d85",
+      "decoder": {
+        "entry": "0D66:0004",
+        "scale_percent": 100,
+        "source_descriptors": [
+          "Stage 200/320/0/3C50"
+        ],
+        "nominal_record_words_2_3": [
+          37,
+          142
+        ],
+        "coordinate_rule": "left=DX-width//2;top=stack[3]-height+1;fully bounded only",
+        "old_sources_Stage_scope_unchanged": true,
+        "other_scaling_or_clipping_authorized": false
+      },
+      "palette_policy": {
+        "used_indices": [
+          47,
+          57,
+          58,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          100,
+          108,
+          109,
+          110,
+          111,
+          113,
+          116,
+          132,
+          133,
+          137,
+          138
+        ],
+        "projection_sha256": "1be3ed349ef54783069d4ee2bf3ba3636e5ec92afadc1699258017fffd568cc6"
+      },
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "505ee5099ef5474c6226ce84094dccb3e0ed316a646b36cb770e36f01f879f9e",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "icons-118.png": {
+      "sha256": "0a447fb0f0381c35b4598aec52daf36bb3f2e4bfea3075500e26c98879d9a22a",
+      "bytes": 495179,
+      "size": [
+        1374,
+        1145
+      ],
+      "mode": "RGBA",
+      "target_size": [
+        24,
+        20
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "preserve original PNG alpha; clip only to verified native opaque source cells",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "native_ordinal": 118,
+      "native_size": [
+        6,
+        5
+      ],
+      "native_content_rect": [
+        1,
+        0,
+        6,
+        4
+      ],
+      "sample_rect": [
+        253,
+        202,
+        1120,
+        934
+      ],
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept. Asset type: final transparent bitmap sprite for an HD display overlay of Sid Meier's Colonization (1994).\nImage 1 is the original low-resolution sprite enlarged without interpolation, ONLY a geometry, silhouette and subject reference. Image 2 is the USER-APPROVED fine pixel-art style reference. Generate a new, original hand-crafted refined pixel-art sprite in the style of Image 2; DO NOT merely upscale Image 1. Sharp intentional pixel clusters, restrained earthy palette, readable small-game-icon detailing, crisp edges, coherent flat game lighting, no painterly blur.\nSubject: one tiny plain bright RED pennant/flag icon matching the native reference: a short dark red vertical strip at the left, a solid red rectangular cloth flowing to the right and dropping one small step at its right edge, with a short red vertical stem below at the left-middle. Preserve this extremely compact 6 by 5 logical-pixel shape and orientation.\nUse a subtle red cloth texture with blocky pixel highlights inside the red area. No long pole, gold finial, ground, lettering, national symbol, white stripe or emblem.\nComposition: exactly one isolated sprite, same view and relative composition as Image 1. Retain the original occupied shape and internal divisions. Fit the complete subject inside the canvas without clipping. A modest transparent margin is fine. Fine detail should survive nearest-neighbor display around 84 by 64 pixels (red flag around 24 by 20).\nBackground: genuinely transparent alpha, no backdrop, checkerboard, drop shadow or glow. No ground plane. Text: none. Avoid scene illustration, giant pixel blocks copied from reference, smooth vector art, 3D render, outlines thicker than the reference.\nDeliver a single high-resolution PNG; alpha must be preserved.",
+      "generation_history": [
+        {
+          "tool": "built-in image_gen",
+          "prompt": "Use case: stylized-concept. Asset type: final transparent bitmap sprite for an HD display overlay of Sid Meier's Colonization (1994).\nImage 1 is the original low-resolution sprite enlarged without interpolation, ONLY a geometry, silhouette and subject reference. Image 2 is the USER-APPROVED fine pixel-art style reference. Generate a new, original hand-crafted refined pixel-art sprite in the style of Image 2; DO NOT merely upscale Image 1. Sharp intentional pixel clusters, restrained earthy palette, readable small-game-icon detailing, crisp edges, coherent flat game lighting, no painterly blur.\nSubject: one tiny plain bright RED pennant/flag icon matching the native reference: a short dark red vertical strip at the left, a solid red rectangular cloth flowing to the right and dropping one small step at its right edge, with a short red vertical stem below at the left-middle. Preserve this extremely compact 6 by 5 logical-pixel shape and orientation.\nUse a subtle red cloth texture with blocky pixel highlights inside the red area. No long pole, gold finial, ground, lettering, national symbol, white stripe or emblem.\nComposition: exactly one isolated sprite, same view and relative composition as Image 1. Retain the original occupied shape and internal divisions. Fit the complete subject inside the canvas without clipping. A modest transparent margin is fine. Fine detail should survive nearest-neighbor display around 84 by 64 pixels (red flag around 24 by 20).\nBackground: genuinely transparent alpha, no backdrop, checkerboard, drop shadow or glow. No ground plane. Text: none. Avoid scene illustration, giant pixel blocks copied from reference, smooth vector art, 3D render, outlines thicker than the reference.\nDeliver a single high-resolution PNG; alpha must be preserved.",
+          "raw_sha256": "0a447fb0f0381c35b4598aec52daf36bb3f2e4bfea3075500e26c98879d9a22a",
+          "selected": true
+        }
+      ],
+      "reference_sha256": {
+        "native": "61992c747984201b8d50f9bf62c0dbfb09fbf5fbc2056634a30ae2fb68153e42",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "ICONS.SS": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "encoded_frame_sha256": "9e7150813c824ad38e12ddb7924f76fc6fc9d9fed724f63ca1e4162d24664f8f",
+        "indexed_frame_sha256": "40dbe8b7a5845b089ac7c7eeb94f092eff5325e1cc44cb1c07b9d9230bee1da3"
+      },
+      "source_research_id": 945,
+      "source_encoded_length": 30,
+      "source_opaque_cells": 15,
+      "source_write_sha256": "0da25d4e0ec7aee32db5e4cae1385985b3b36b690eb6acd2b93b208ca5225fc5",
+      "decoder": {
+        "entry": "0D66:0004",
+        "scale_percent": 100,
+        "source_descriptors": [
+          "Stage 200/320/0/3C50",
+          "Main 200/320/0/2CAE"
+        ],
+        "nominal_record_words_2_3": [
+          30,
+          84
+        ],
+        "coordinate_rule": "left=DX-width//2;top=stack[3]-height+1;fully bounded only",
+        "old_sources_Stage_scope_unchanged": true,
+        "other_scaling_or_clipping_authorized": false
+      },
+      "palette_policy": {
+        "used_indices": [
+          47,
+          57,
+          58,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          100,
+          108,
+          109,
+          110,
+          111,
+          113,
+          116,
+          132,
+          133,
+          137,
+          138
+        ],
+        "projection_sha256": "1be3ed349ef54783069d4ee2bf3ba3636e5ec92afadc1699258017fffd568cc6"
+      },
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "505ee5099ef5474c6226ce84094dccb3e0ed316a646b36cb770e36f01f879f9e",
+        "formal_GUI_conformance": "pending"
+      }
     }
   }
 }

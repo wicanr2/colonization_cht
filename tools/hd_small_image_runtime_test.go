@@ -333,10 +333,11 @@ func TestHDSmallRuntimeNativeLifecycle(t *testing.T) {
 	h, err := loadHDRuntime(m, game, assets)
 	need(err)
 
-	if h.small == nil || len(h.small.frames) != 80 || hash(m.Mem) != before {
+	if h.small == nil || len(h.small.frames) != 84 || hash(m.Mem) != before {
 		t.Fatal("小圖像載入失敗或改寫DOS")
 	}
 	p := h.small
+	hdSmallHistorical80Fixture(t, p)
 	p.trace = true
 	negatives := map[int][]string{}
 	entryChecked, writerChecked, finishChecked, ownerChecked := map[int]bool{}, map[int]bool{}, map[int]bool{}, map[int]bool{}
@@ -659,7 +660,7 @@ func TestHDSmallResourceContract(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(p.frames) != 80 || !bytes.Equal(before, m.Mem) {
+	if len(p.frames) != 84 || !bytes.Equal(before, m.Mem) {
 		t.Fatal("素材載入來源或原版記憶體不同")
 	}
 	available := map[int]bool{}
@@ -926,10 +927,11 @@ func hdSmallNativeLifecycle(t *testing.T, fixture hdSmallNativeFixture) {
 	h, err := loadHDRuntime(m, game, assets)
 	need(err)
 
-	if h.small == nil || len(h.small.frames) != 80 || hash(m.Mem) != before {
+	if h.small == nil || len(h.small.frames) != 84 || hash(m.Mem) != before {
 		t.Fatal("小圖像載入失敗或改寫DOS")
 	}
 	p := h.small
+	hdSmallHistorical80Fixture(t, p)
 	p.trace = true
 
 	targets := fixture.sources
@@ -1125,4 +1127,534 @@ func hdSmallNativeLifecycle(t *testing.T, fixture hdSmallNativeFixture) {
 		t.Fatal("單位小圖像覆蓋改變存檔")
 	}
 	dumpJSON(filepath.Join(target, "check.json"), map[string]any{"result": fixture.result, "production_connected": true, "points": records, fixture.pointsKey: shipPoints, "dos_inputs": count, "end": m.Steps, "negative_cases": negatives, "guarded_non_source_points": guarded})
+}
+
+// 規格065 R96：正常原版入口快照、錯件及來源複製守門。
+type hdScaledSmallDecoderFixture struct {
+	Entry struct {
+		ResearchID                int `json:"research_id"`
+		SourceOrdinal             int `json:"source_ordinal"`
+		Registers                 [8]uint16
+		Segments                  [4]uint16
+		Stack, Record, Descriptor []uint16
+		Canvas                    uint32
+		SourceFar                 string `json:"source_far"`
+	}
+	Flags         uint16
+	Cycles, Steps uint64
+	MemorySHA     string `json:"memory_sha256"`
+	MemoryFile    string `json:"memory_file"`
+}
+
+func hdScaledSmallFixture(t *testing.T, name, mode string) (*golem.Machine, *hdSmallRuntime, hdScaledSmallDecoderFixture) {
+	t.Helper()
+	root := hdScaledSmallFixtureRoot(t)
+	raw, e := os.ReadFile(filepath.Join(root, name))
+	if e != nil {
+		t.Fatal(e)
+	}
+	want, known := hdScaledSmallFixtureSHAs[name]
+	if !known || hash(raw) != want[0] {
+		t.Fatal("original fixture metadata fingerprint")
+	}
+	var f hdScaledSmallDecoderFixture
+	if e = json.Unmarshal(raw, &f); e != nil {
+		t.Fatal(e)
+	}
+	mem, e := os.ReadFile(filepath.Join(root, f.MemoryFile))
+	if e != nil || (hash(mem) != f.MemorySHA || hash(mem) != want[1]) {
+		t.Fatal("original fixture", e)
+	}
+	m := golem.New()
+	if len(mem) != len(m.Mem) {
+		t.Fatal("original memory length")
+	}
+	copy(m.Mem, mem)
+	m.CPU.R = f.Entry.Registers
+	m.CPU.Seg = f.Entry.Segments
+	m.CPU.IP = 4
+	m.CPU.Flags = f.Flags
+	// 局部解碼測試不還原硬體時鐘；正常44點另外核對完整原版週期。
+	m.CPU.Cycles = 0
+	h := &hdRuntime{m: m}
+	p := &hdSmallRuntime{h: h, frames: append([]hdSmallFrame(nil), hdSmallFrames...), pending: map[int]hdSmallPending{}, backing: map[uint32]hdSmallCell{}}
+	first := true
+	m.WatchWrite(0, 0x9ffff, func(_ *golem.Machine, a uint32, o, v byte) {
+		target := p.active && a >= p.destination && a < p.destination+64000
+		if target && first {
+			first = false
+			if mode == "missing" {
+				return
+			}
+			if mode == "wrong-writer" {
+				cs, ip := m.CPU.OpAddr()
+				at := int(cs)*16 + int(ip) + 15
+				old := m.Mem[at]
+				m.Mem[at] ^= 1
+				p.memoryWrite(a, o, v)
+				m.Mem[at] = old
+				return
+			}
+			if mode == "duplicate" {
+				p.memoryWrite(a, o, v)
+			}
+		}
+		p.memoryWrite(a, o, v)
+	})
+	return m, p, f
+}
+func hdScaledSmallRunDecoder(t *testing.T, m *golem.Machine, p *hdSmallRuntime) {
+	t.Helper()
+	for i := 0; i < 100000; i++ {
+		p.beforeInstruction()
+		if !p.active {
+			if p.accepted+p.rejected != 1 {
+				t.Fatal("decoder never armed", p.accepted, p.rejected)
+			}
+			return
+		}
+		if e := m.Step(); e != nil {
+			t.Fatal("actual original decoder", e)
+		}
+	}
+	t.Fatal("decoder bound")
+}
+func hdScaledSmallWord(m *golem.Machine, seg, off uint16, word int, v uint16) {
+	binary.LittleEndian.PutUint16(m.Mem[int(seg)*16+int(off)+word*2:], v)
+}
+func hdScaledSmallFixtureNames(t *testing.T) []string {
+	t.Helper()
+	paths, e := filepath.Glob(filepath.Join(hdScaledSmallFixtureRoot(t), "r96-decoder-*.json"))
+	if e != nil || len(paths) != 5 {
+		t.Fatal("five normal Main/Stage fixtures required", paths, e)
+	}
+	names := []string{}
+	for _, p := range paths {
+		names = append(names, filepath.Base(p))
+	}
+	return names
+}
+func TestHDScaledSourceGuards(t *testing.T) {
+	for _, name := range hdScaledSmallFixtureNames(t) {
+		t.Run(name, func(t *testing.T) {
+			t.Run("actual-original-decoder", func(t *testing.T) {
+				m, p, f := hdScaledSmallFixture(t, name, "")
+				hdScaledSmallRunDecoder(t, m, p)
+				if p.accepted != 1 || p.rejected != 0 {
+					t.Fatal("positive")
+				}
+				owned := 0
+				cells := &p.visible
+				if f.Entry.Canvas == hdSeaStage {
+					cells = &p.stage
+				}
+				for _, c := range cells {
+					if c.owned {
+						owned++
+					}
+				}
+				if owned != p.frames[p.selected].opaque {
+					t.Fatal("all original opaque cells", owned)
+				}
+			})
+			entryCases := []string{"entry-code", "high-AX", "wrong-frame", "encoded-byte", "source-bank-wrap", "record-width", "record-height", "nominal-word2", "nominal-word3", "scale99", "wrong-surface", "surface-alias", "left-bound", "right-bound", "top-bound", "bottom-bound"}
+			for _, kind := range entryCases {
+				t.Run(kind, func(t *testing.T) {
+					m, p, f := hdScaledSmallFixture(t, name, "")
+					c := m.CPU
+					stSeg, stOff := c.Seg[golem.SS], c.R[golem.SP]
+					recSeg, recOff := f.Entry.Stack[5], f.Entry.Stack[4]+0x36+c.R[golem.AX]*12
+					descSeg, descOff := c.Seg[golem.DS], c.R[golem.BX]
+					switch kind {
+					case "entry-code":
+						m.Mem[int(c.Seg[golem.CS])*16+4] ^= 1
+					case "high-AX":
+						c.R[golem.AX] |= 0x8000
+					case "wrong-frame":
+						c.R[golem.AX]++
+					case "encoded-byte":
+						m.Mem[int(f.Entry.Record[1])*16+int(f.Entry.Record[0])] ^= 1
+					case "source-bank-wrap":
+						hdScaledSmallWord(m, recSeg, recOff, 0, 0xfffe)
+					case "record-width":
+						hdScaledSmallWord(m, recSeg, recOff, 4, f.Entry.Record[4]+1)
+					case "record-height":
+						hdScaledSmallWord(m, recSeg, recOff, 5, f.Entry.Record[5]+1)
+					case "nominal-word2":
+						hdScaledSmallWord(m, recSeg, recOff, 2, f.Entry.Record[2]+1)
+					case "nominal-word3":
+						hdScaledSmallWord(m, recSeg, recOff, 3, f.Entry.Record[3]+1)
+					case "scale99":
+						hdScaledSmallWord(m, stSeg, stOff, 2, 99)
+					case "wrong-surface":
+						hdScaledSmallWord(m, descSeg, descOff, 3, 0x4000)
+					case "surface-alias":
+						hdScaledSmallWord(m, descSeg, descOff, 2, 16)
+						hdScaledSmallWord(m, descSeg, descOff, 3, f.Entry.Descriptor[3]-1)
+					case "left-bound":
+						c.R[golem.DX] = 0
+					case "right-bound":
+						c.R[golem.DX] = 319
+					case "top-bound":
+						hdScaledSmallWord(m, stSeg, stOff, 3, 0)
+					case "bottom-bound":
+						hdScaledSmallWord(m, stSeg, stOff, 3, 200)
+					}
+					p.beforeInstruction()
+					if p.active || p.accepted != 0 {
+						t.Fatal("near match armed", kind)
+					}
+				})
+			}
+			for _, kind := range []string{"missing", "duplicate", "wrong-writer"} {
+				t.Run(kind, func(t *testing.T) {
+					m, p, _ := hdScaledSmallFixture(t, name, kind)
+					hdScaledSmallRunDecoder(t, m, p)
+					if p.accepted != 0 || p.rejected != 1 {
+						t.Fatal("incomplete source accepted", kind)
+					}
+				})
+			}
+			t.Run("wrong-return-SP", func(t *testing.T) {
+				m, p, f := hdScaledSmallFixture(t, name, "")
+				p.beforeInstruction()
+				if !p.active {
+					t.Fatal("entry")
+				}
+				m.CPU.Seg[golem.CS] = f.Entry.Stack[1]
+				m.CPU.IP = f.Entry.Stack[0]
+				m.CPU.R[golem.SP] = f.Entry.Registers[golem.SP] + 10
+				p.beforeInstruction()
+				if !p.active || p.accepted != 0 {
+					t.Fatal("SP10 accepted as SP12")
+				}
+			})
+			t.Run("bounded-return", func(t *testing.T) {
+				m, p, _ := hdScaledSmallFixture(t, name, "")
+				p.beforeInstruction()
+				if e := m.Step(); e != nil {
+					t.Fatal(e)
+				}
+				m.Steps = p.start + 100001
+				p.beforeInstruction()
+				if p.active || p.accepted != 0 || p.rejected != 1 {
+					t.Fatal("unbounded return")
+				}
+			})
+			t.Run("unknown-same-value-revokes", func(t *testing.T) {
+				m, p, f := hdScaledSmallFixture(t, name, "")
+				hdScaledSmallRunDecoder(t, m, p)
+				cells := &p.visible
+				if f.Entry.Canvas == hdSeaStage {
+					cells = &p.stage
+				}
+				for i, c := range cells {
+					if c.owned {
+						m.Write8(f.Entry.Canvas+uint32(i), c.native)
+						if cells[i].owned {
+							t.Fatal("same value restored source")
+						}
+						return
+					}
+				}
+				t.Fatal("positive cell missing")
+			})
+		})
+	}
+}
+func TestHDScaledPaletteScope(t *testing.T) {
+	hdScaledSmallFixtureRoot(t)
+	path := os.Getenv("TEST_HD_SCALED_PALETTE")
+	if path == "" {
+		t.Skip("缺少固定原版DAC收據")
+	}
+	pal, e := os.ReadFile(path)
+	if e != nil || hash(pal) != "94c4b1630d99483212fc8bd85dec3751ffd0d9423eedb395dc0004e9f823976b" {
+		t.Fatal("原版DAC指紋", e)
+	}
+	used := map[byte]bool{}
+	for _, name := range []string{"r96-decoder-830-3c500.json", "r96-decoder-838-3c500.json", "r96-decoder-945-3c500.json"} {
+		m, p, _ := hdScaledSmallFixture(t, name, "")
+		hdScaledSmallRunDecoder(t, m, p)
+		if p.accepted != 1 {
+			t.Fatal("實際解碼色號來源")
+		}
+		for k, n := range p.counts {
+			if n == 1 {
+				used[p.writes[k]] = true
+			}
+		}
+	}
+	if len(used) != 30 {
+		t.Fatal("原版已用色號數", len(used))
+	}
+	t.Run("actual-palette", func(t *testing.T) {
+		if !hdSmallScaledPaletteSupported(pal) {
+			t.Fatal("palette")
+		}
+	})
+	for i := 0; i < 256; i++ {
+		v := byte(i)
+		if !used[v] {
+			continue
+		}
+		t.Run(fmt.Sprintf("index-%03d", v), func(t *testing.T) {
+			wrong := bytes.Clone(pal)
+			wrong[int(v)*3] ^= 1
+			if hdSmallScaledPaletteSupported(wrong) {
+				t.Fatal("wrong source color accepted", v)
+			}
+		})
+	}
+	t.Run("unrelated-color-keeps-scope", func(t *testing.T) {
+		for i := 0; i < 256; i++ {
+			if !used[byte(i)] {
+				wrong := bytes.Clone(pal)
+				wrong[i*3] ^= 1
+				if !hdSmallScaledPaletteSupported(wrong) {
+					t.Fatal("unrelated color")
+				}
+				return
+			}
+		}
+		t.Fatal("no unused color")
+	})
+	t.Run("wrong-length", func(t *testing.T) {
+		if hdSmallScaledPaletteSupported(pal[:767]) {
+			t.Fatal("short palette")
+		}
+	})
+}
+func hdScaledSmallAdjacent(t *testing.T, cells *[64000]hdSmallCell) int {
+	t.Helper()
+	for i := 0; i < 63999; i++ {
+		a, b := cells[i], cells[i+1]
+		if a.owned && b.owned && a.slot == b.slot {
+			return i
+		}
+	}
+	t.Fatal("adjacent actual source cells")
+	return 0
+}
+func hdScaledSmallCopyWord(t *testing.T, m *golem.Machine, src, dest uint32, reverse bool) {
+	t.Helper()
+	pc := 0xcba0 + 0xca
+	want := []byte{0xf3, 0xa5, 3, 0xf3, 0x79, 0xc, 0x81, 0xee, 0, 0x80, 0x8c, 0xd9, 0x81, 0xc1, 0, 8}
+	if !bytes.Equal(m.Mem[pc:pc+16], want) {
+		t.Fatal("actual copy opcode")
+	}
+	m.CPU.Seg[golem.CS] = 0xcba
+	m.CPU.IP = 0xca
+	m.CPU.Seg[golem.DS] = uint16(src >> 4)
+	m.CPU.R[golem.SI] = uint16(src & 15)
+	m.CPU.Seg[golem.ES] = uint16(dest >> 4)
+	m.CPU.R[golem.DI] = uint16(dest & 15)
+	m.CPU.R[golem.CX] = 1
+	m.CPU.Flags &^= 0x400
+	if reverse {
+		m.CPU.Flags |= 0x400
+	}
+	if e := m.Step(); e != nil {
+		t.Fatal(e)
+	}
+}
+func TestHDScaledTypedCopies(t *testing.T) {
+	stageFixture := "r96-decoder-830-3c500.json"
+	mainFixture := "r96-decoder-830-2cae0.json"
+	t.Run("actual-Stage-to-Main", func(t *testing.T) {
+		m, p, _ := hdScaledSmallFixture(t, stageFixture, "")
+		hdScaledSmallRunDecoder(t, m, p)
+		i := hdScaledSmallAdjacent(t, &p.stage)
+		hdScaledSmallCopyWord(t, m, hdSeaStage+uint32(i), hdBuildingCanvas, false)
+		if !p.visible[0].owned || !p.visible[1].owned {
+			t.Fatal("valid Stage copy lost")
+		}
+	})
+	t.Run("reverse-copy-rejected", func(t *testing.T) {
+		m, p, _ := hdScaledSmallFixture(t, stageFixture, "")
+		hdScaledSmallRunDecoder(t, m, p)
+		i := hdScaledSmallAdjacent(t, &p.stage)
+		hdScaledSmallCopyWord(t, m, hdSeaStage+uint32(i), hdBuildingCanvas, true)
+		if p.visible[0].owned || p.visible[1].owned {
+			t.Fatal("reverse Stage granted")
+		}
+	})
+	t.Run("Main-save-restore", func(t *testing.T) {
+		m, p, _ := hdScaledSmallFixture(t, mainFixture, "")
+		hdScaledSmallRunDecoder(t, m, p)
+		i := hdScaledSmallAdjacent(t, &p.visible)
+		hdScaledSmallCopyWord(t, m, hdBuildingCanvas+uint32(i), 0x80000, false)
+		m.Write8(hdBuildingCanvas+uint32(i), m.Mem[hdBuildingCanvas+uint32(i)])
+		m.Write8(hdBuildingCanvas+uint32(i+1), m.Mem[hdBuildingCanvas+uint32(i+1)])
+		hdScaledSmallCopyWord(t, m, 0x80000, hdBuildingCanvas+uint32(i), false)
+		if !p.visible[i].owned || !p.visible[i+1].owned {
+			t.Fatal("valid Main backing restore lost")
+		}
+	})
+	t.Run("Main-to-Main-revokes", func(t *testing.T) {
+		m, p, _ := hdScaledSmallFixture(t, mainFixture, "")
+		hdScaledSmallRunDecoder(t, m, p)
+		i := hdScaledSmallAdjacent(t, &p.visible)
+		hdScaledSmallCopyWord(t, m, hdBuildingCanvas+uint32(i), hdBuildingCanvas, false)
+		if p.visible[0].owned || p.visible[1].owned {
+			t.Fatal("Main-to-Main granted")
+		}
+	})
+}
+
+func hdScaledSmallFixtureRoot(t *testing.T) string {
+	t.Helper()
+	game := os.Getenv("TEST_GAME_ROOT")
+	raw, e := os.ReadFile(filepath.Join(game, "ICONS.SS"))
+	if os.IsNotExist(e) {
+		t.Skip("缺少合法原版ICONS.SS")
+	}
+	if e != nil || hash(raw) != "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716" {
+		t.Fatal("原版ICONS指紋", e)
+	}
+	root := os.Getenv("TEST_HD_SCALED_FIXTURES")
+	if root == "" {
+		t.Skip("缺少正常原版D66入口快照")
+	}
+	return root
+}
+
+var hdScaledSmallFixtureSHAs = map[string][2]string{"r96-decoder-830-2cae0.json": {"94190de6b1c0efd6e18285cb281fef53b8748e907b2d545355e6ce37ee73c8a3", "9ef06ac7d676add91809fd1fe35bc2a3ad986ed430fab806071b798183156847"},
+	"r96-decoder-830-3c500.json": {"a8d1825025bad4c2cb6fbe5e8d12137a7e3b25456fef30c96c3da8fac60a7701", "f294ff16aeb27bb33b513bcc73c77ae9a2e0ac8c2fdc98e21cf55252e459151d"},
+	"r96-decoder-838-3c500.json": {"7f65681d30806472a4b716d73cba778a736122892dde9aacf63444ddd4278a2f", "9a5b55e474ed2e6f0594cf50f0bb6fa3829aad88dbfb9825a8ba935fc605b390"},
+	"r96-decoder-945-2cae0.json": {"bfbb00ebdecf5b4c47700f4559c95e1f5bc901c05aa09388b919aeb3aa915ed7", "78a66877595600dfb4fb9bbf4280515113aa6e7355ff809bfb8201a75dea4b3b"},
+	"r96-decoder-945-3c500.json": {"66ccc5bd539f09387cc595cb06cf5276cacd21903b0bbd55abcdef7627614af8", "e862c536a2f5529de29feb416349331f86a1cc1d23cebf4141c4b99163f8c14f"}}
+
+func TestHDScaledSmallResources(t *testing.T) {
+	game := os.Getenv("TEST_GAME_ROOT")
+	assets := os.Getenv("TEST_HD_ASSETS")
+	if assets == "" {
+		t.Skip("缺少HD原圖")
+	}
+	source := filepath.Join(game, "ICONS.SS")
+	if _, e := os.Stat(source); os.IsNotExist(e) {
+		t.Skip("missing legal original ICONS.SS")
+	}
+	need := func(e error) {
+		t.Helper()
+		if e != nil {
+			t.Fatal(e)
+		}
+	}
+	read := func(p string) []byte { t.Helper(); b, e := os.ReadFile(p); need(e); return b }
+	original := read(source)
+	tmp := t.TempDir()
+	g, a := filepath.Join(tmp, "game"), filepath.Join(tmp, "assets")
+	need(os.Mkdir(g, 0755))
+	need(os.Mkdir(a, 0755))
+	need(os.WriteFile(filepath.Join(g, "ICONS.SS"), original, 0644))
+	names := []string{}
+	for _, f := range hdSmallFrames {
+		if f.file != "" {
+			names = append(names, f.file)
+			need(os.WriteFile(filepath.Join(a, f.file), read(filepath.Join(assets, f.file)), 0644))
+		}
+	}
+	if len(hdSmallFrames) != 84 || len(names) != 83 {
+		t.Fatal("all83 art plus person100")
+	}
+	h := &hdRuntime{m: golem.New()}
+	before := bytes.Clone(h.m.Mem)
+	positive := func(t *testing.T) {
+		t.Helper()
+		p, e := loadHDSmallRuntime(h, g, a)
+		need(e)
+		if len(p.frames) != 84 {
+			t.Fatal("positive full loader")
+		}
+	}
+	t.Run("all83-positive-before", positive)
+	cases := []string{}
+	for _, name := range []string{"icons-003.png", "icons-011.png", "icons-118.png"} {
+		for _, kind := range []string{"missing", "wrong", "linked"} {
+			key := name + "-" + kind
+			cases = append(cases, key)
+			t.Run(key, func(t *testing.T) {
+				target := filepath.Join(a, name)
+				raw := read(target)
+				need(os.Remove(target))
+				if kind == "wrong" {
+					need(os.WriteFile(target, []byte("wrong"), 0644))
+				}
+				if kind == "linked" {
+					need(os.Symlink(filepath.Join(assets, name), target))
+				}
+				if _, e := loadHDSmallRuntime(h, g, a); e == nil {
+					t.Fatal("wrong asset accepted")
+				}
+				if kind != "missing" {
+					need(os.Remove(target))
+				}
+				need(os.WriteFile(target, raw, 0644))
+			})
+		}
+	}
+	for _, kind := range []string{"missing", "wrong", "linked"} {
+		key := "original-" + kind
+		cases = append(cases, key)
+		t.Run(key, func(t *testing.T) {
+			target := filepath.Join(g, "ICONS.SS")
+			need(os.Remove(target))
+			if kind == "wrong" {
+				need(os.WriteFile(target, []byte("wrong"), 0644))
+			}
+			if kind == "linked" {
+				need(os.Symlink(source, target))
+			}
+			if _, e := loadHDSmallRuntime(h, g, a); e == nil {
+				t.Fatal("wrong original accepted")
+			}
+			if kind != "missing" {
+				need(os.Remove(target))
+			}
+			need(os.WriteFile(target, original, 0644))
+		})
+	}
+	cases = append(cases, "nil-runtime", "missing-directory")
+	t.Run("nil-runtime", func(t *testing.T) {
+		if _, e := loadHDSmallRuntime(nil, g, a); e == nil {
+			t.Fatal("nil accepted")
+		}
+	})
+	t.Run("missing-directory", func(t *testing.T) {
+		if _, e := loadHDSmallRuntime(h, g, filepath.Join(tmp, "absent")); e == nil {
+			t.Fatal("absent assets accepted")
+		}
+	})
+	t.Run("all83-positive-after", positive)
+	if !bytes.Equal(before, h.m.Mem) || !bytes.Equal(original, read(source)) {
+		t.Fatal("original or RAM modified")
+	}
+	for _, name := range names {
+		if !bytes.Equal(read(filepath.Join(a, name)), read(filepath.Join(assets, name))) {
+			t.Fatal("raw asset changed", name)
+		}
+	}
+	record := map[string]any{"result": "PASS_R96_SMALL84_FULL83_ASSETS_AND_FAULT14", "frames": 84, "art_files": 83, "positive_before_and_after": true, "cases": cases, "original_and_RAM_unchanged": true, "all_raw_art_unchanged": true}
+	raw, e := json.MarshalIndent(record, "", "  ")
+	need(e)
+	if out := os.Getenv("TEST_HD_SCALED_RESOURCE_OUTPUT"); out != "" {
+		need(os.WriteFile(out, append(raw, '\n'), 0644))
+	}
+}
+
+// R57／R72至R75的歷史模型限當時80來源。施工槌54及R96縮放來源各有獨立驗收。
+// 只縮小這兩組歷史測試的追蹤，不改正式組裝或正常玩家路徑。
+func hdSmallHistorical80Fixture(t *testing.T, p *hdSmallRuntime) {
+	t.Helper()
+	frames := []hdSmallFrame{}
+	for _, f := range p.frames {
+		if !f.scaled100 && f.ordinal != 54 {
+			frames = append(frames, f)
+		}
+	}
+	if len(frames) != 80 {
+		t.Fatal("歷史80來源群組不同", len(frames))
+	}
+	p.frames = frames
 }
