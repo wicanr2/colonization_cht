@@ -194,7 +194,7 @@ def hd_asset_files(repo):
         raise ValueError("HD素材目錄不同")
     files = {}
     for name, digest, limit in [
-            ("manifest.json", "d892af8a06345a4090e8552be7fa019b1d4930aed6cacecb6917b0f284372088", 16 << 20),
+            ("manifest.json", "28946c987c61212eb0ec04e221ad718c81be71c765935ed8f4db33d67d33eabe", 16 << 20),
             ("terrain-037.png", "c2b06c63785427142d5e3ea2f7a718d0bdf7500b46df2ca9194c0269cba3ccd9", 8 << 20),
             ("terrain-038.png", "d799c54b7a71c0dfde816c9de1f3068ed26e4e92fd6fa9e6970e8d769582fc74", 8 << 20),
             ("terrain-039.png", "fb2d33135e4a630a9c7e0884fc63debf8603005658a8959c70c34b99cd2fdfa6", 8 << 20),

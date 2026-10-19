@@ -7,6 +7,7 @@ import (
 	"fmt"
 	golem "github.com/wicanr2/dosgolem"
 	"image"
+	"image/color"
 	"image/png"
 	"os"
 	"path/filepath"
@@ -430,10 +431,10 @@ func TestHDWorldTerrainAssetNegatives(t *testing.T) {
 	cases = append(cases, "missing-runtime")
 	positive, err := loadHDTerrainBatchRuntime(h, copyGame, copyAssets)
 	need(err)
-	if len(cases) != 163 || len(positive.frames) != 53 || hash(read(filepath.Join(game, "PHYS0.SS"))) != hash(originalSource) {
+	if len(cases) != 166 || len(positive.frames) != 54 || hash(read(filepath.Join(game, "PHYS0.SS"))) != hash(originalSource) {
 		t.Fatal("反例後正向或原版不同")
 	}
-	result := map[string]any{"result": "PASS_TERRAIN_BATCH_163_LOADER_NEGATIVES_AND_POSITIVE_RECHECK", "cases": cases, "positive_after_negatives": true, "original_source_unchanged": true, "production_connected": true}
+	result := map[string]any{"result": "PASS_TERRAIN_BATCH_166_LOADER_NEGATIVES_AND_POSITIVE_RECHECK", "cases": cases, "positive_after_negatives": true, "original_source_unchanged": true, "production_connected": true}
 	raw, err := json.MarshalIndent(result, "", "  ")
 	need(err)
 	need(os.WriteFile(filepath.Join(out, "check.json"), append(raw, '\n'), 0644))
@@ -648,8 +649,8 @@ func TestHDTerrainBatchCopyDirection(t *testing.T) {
 			m.Mem[hdTerrainBatchStage] = 41
 			m.Mem[hdTerrainBatchStage+1] = 42
 			p := &hdTerrainBatchRuntime{h: &hdRuntime{m: m}, pending: map[int]hdTerrainBatchPair{}, backing: map[uint32]hdTerrainBatchCell{}}
-			p.stage[0] = hdTerrainBatchCell{true, 71, 0, 41}
-			p.stage[1] = hdTerrainBatchCell{true, 71, 1, 42}
+			p.stage[0] = hdTerrainBatchCell{fromMain: false, owned: true, ordinal: 71, k: 0, native: 41}
+			p.stage[1] = hdTerrainBatchCell{fromMain: false, owned: true, ordinal: 71, k: 1, native: 42}
 			m.WatchWrite(hdBuildingCanvas, hdBuildingCanvas+63999, func(_ *golem.Machine, a uint32, old, value byte) { p.memoryWrite(a, old, value) })
 			if err := m.CPU.Step(); err != nil {
 				t.Fatal(err)
@@ -663,5 +664,349 @@ func TestHDTerrainBatchCopyDirection(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+func TestHDLegacyMainSourceGuards(t *testing.T) {
+	type call struct {
+		Registers                 [8]uint16
+		Segments                  [4]uint16
+		Stack, Descriptor, Record []uint16
+		Entry                     uint64 `json:"entry_step"`
+		WritesSHA                 string `json:"sorted_local_offset_value_sha256"`
+	}
+	var fixtures []struct {
+		Ordinal, Length, Opaque int
+		Path                    string
+		MemorySHA               string `json:"checkpoint_memory_sha256"`
+		EncodedSHA              string `json:"encoded_sha256"`
+		Call                    call
+	}
+	path := os.Getenv("TEST_TERRAIN_LEGACY_FIXTURES")
+	if path == "" {
+		t.Skip("需要本機原版來源fixture")
+	}
+	raw, e := os.ReadFile(path)
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = json.Unmarshal(raw, &fixtures); e != nil {
+		t.Fatal(e)
+	}
+	for _, f := range fixtures {
+		t.Run(fmt.Sprint(f.Ordinal), func(t *testing.T) {
+			original, e := os.ReadFile(f.Path)
+			if e != nil {
+				t.Fatal(e)
+			}
+			if hash(original) != f.MemorySHA {
+				t.Fatal("fixture")
+			}
+			makeFixture := func() (*golem.Machine, *hdTerrainBatchRuntime) {
+				m := golem.New()
+				copy(m.Mem, original)
+				m.CPU.R = f.Call.Registers
+				m.CPU.Seg = f.Call.Segments
+				m.CPU.IP = 0xa
+				m.CPU.Flags = 2
+				m.Steps = f.Call.Entry
+				stack := uint32(m.CPU.Seg[golem.SS])*16 + uint32(m.CPU.R[golem.SP])
+				desc := uint32(m.CPU.Seg[golem.DS])*16 + uint32(m.CPU.R[golem.BX])
+				off := uint16(uint32(m.CPU.R[golem.AX])*12 + uint32(f.Call.Stack[3]) + 0x36)
+				record := uint32(f.Call.Stack[4])*16 + uint32(off)
+				for i, v := range f.Call.Stack {
+					binary.LittleEndian.PutUint16(m.Mem[int(stack)+i*2:], v)
+				}
+				for i, v := range f.Call.Descriptor {
+					binary.LittleEndian.PutUint16(m.Mem[int(desc)+i*2:], v)
+				}
+				for i, v := range f.Call.Record {
+					binary.LittleEndian.PutUint16(m.Mem[int(record)+i*2:], v)
+				}
+				frame := &hdTerrainBatchFrame{hdTerrainBatchDefinition: hdTerrainBatchDefinition{ordinal: f.Ordinal, length: f.Length, opaque: f.Opaque, encoded: f.EncodedSHA, writes: f.Call.WritesSHA}}
+				p := &hdTerrainBatchRuntime{h: &hdRuntime{m: m}, frames: map[int]*hdTerrainBatchFrame{f.Ordinal: frame}, acceptedBy: map[int]uint64{}, cursorRestoresBy: map[int]uint64{}, pending: map[int]hdTerrainBatchPair{}, backing: map[uint32]hdTerrainBatchCell{}}
+				m.WatchWrite(0, 0x9ffff, func(_ *golem.Machine, a uint32, o, v byte) { p.memoryWrite(a, o, v) })
+				return m, p
+			}
+			cases := []struct {
+				name   string
+				mutate func(*golem.Machine)
+			}{
+				{"entry-code", func(m *golem.Machine) { m.Mem[0xd46*16+0xa] ^= 1 }},
+				{"wrong-AX", func(m *golem.Machine) { m.CPU.R[golem.AX] += 2000 }},
+				{"descriptor-height", func(m *golem.Machine) { at := int(m.CPU.Seg[golem.DS])*16 + int(m.CPU.R[golem.BX]); m.Mem[at] ^= 1 }},
+				{"descriptor-stride", func(m *golem.Machine) { at := int(m.CPU.Seg[golem.DS])*16 + int(m.CPU.R[golem.BX]); m.Mem[at+2] ^= 1 }},
+				{"wrong-buffer", func(m *golem.Machine) {
+					at := int(m.CPU.Seg[golem.DS])*16 + int(m.CPU.R[golem.BX])
+					binary.LittleEndian.PutUint16(m.Mem[at+4:], 0)
+					binary.LittleEndian.PutUint16(m.Mem[at+6:], 0x2cbf)
+				}},
+				{"negative-X", func(m *golem.Machine) { m.CPU.R[golem.DX] = 0xffff }},
+				{"right-edge", func(m *golem.Machine) { m.CPU.R[golem.DX] = 305 }},
+				{"negative-Y", func(m *golem.Machine) {
+					at := int(m.CPU.Seg[golem.SS])*16 + int(m.CPU.R[golem.SP])
+					binary.LittleEndian.PutUint16(m.Mem[at+4:], 0xffff)
+				}},
+				{"bottom-edge", func(m *golem.Machine) {
+					at := int(m.CPU.Seg[golem.SS])*16 + int(m.CPU.R[golem.SP])
+					binary.LittleEndian.PutUint16(m.Mem[at+4:], 185)
+				}},
+				{"record-size", func(m *golem.Machine) {
+					off := uint16(uint32(m.CPU.R[golem.AX])*12 + uint32(f.Call.Stack[3]) + 0x36)
+					at := int(f.Call.Stack[4])*16 + int(off)
+					m.Mem[at+8] ^= 1
+				}},
+				{"encoded-source", func(m *golem.Machine) { at := int(f.Call.Record[1])*16 + int(f.Call.Record[0]); m.Mem[at] ^= 1 }},
+			}
+			for _, v := range cases {
+				t.Run(v.name, func(t *testing.T) {
+					m, p := makeFixture()
+					v.mutate(m)
+					p.beforeInstruction()
+					if p.active || p.accepted != 0 {
+						t.Fatal("invalid entry accepted")
+					}
+				})
+			}
+			m, p := makeFixture()
+			p.beforeInstruction()
+			if !p.active || p.destination != hdBuildingCanvas {
+				t.Fatal("positive Main entry rejected")
+			}
+			for i := 0; i < 100000 && p.accepted == 0; i++ {
+				if e := m.CPU.Step(); e != nil {
+					t.Fatal(e)
+				}
+				m.Steps++
+				p.beforeInstruction()
+			}
+			if p.accepted != 1 || p.rejected != 0 {
+				t.Fatal("positive complete return", p.accepted, p.rejected)
+			}
+
+			t.Run("Stage-scope", func(t *testing.T) {
+				machine, stage := makeFixture()
+				at := int(machine.CPU.Seg[golem.DS])*16 + int(machine.CPU.R[golem.BX])
+				binary.LittleEndian.PutUint16(machine.Mem[at+4:], 0)
+				binary.LittleEndian.PutUint16(machine.Mem[at+6:], 0x3c50)
+				stage.beforeInstruction()
+				if f.Ordinal == 79 {
+					if stage.active || stage.accepted != 0 {
+						t.Fatal("79 Stage不屬於此Main核心")
+					}
+					return
+				}
+				if !stage.active || stage.destination != hdTerrainBatchStage {
+					t.Fatal("既有Stage入口失效")
+				}
+				for k := 0; k < 100000 && stage.accepted == 0; k++ {
+					if err := machine.CPU.Step(); err != nil {
+						t.Fatal(err)
+					}
+					machine.Steps++
+					stage.beforeInstruction()
+				}
+				if stage.accepted != 1 || stage.rejected != 0 {
+					t.Fatal("既有Stage實際返回失效")
+				}
+				count := 0
+				for _, cell := range stage.stage {
+					if cell.owned {
+						count++
+						if cell.fromMain {
+							t.Fatal("Stage起點被誤標Main")
+						}
+					}
+				}
+				if count != f.Opaque {
+					t.Fatal("Stage遮罩不同", count, f.Opaque)
+				}
+			})
+			first := -1
+			for k, n := range p.counts {
+				if n == 1 {
+					first = k
+					break
+				}
+			}
+			if first < 0 {
+				t.Fatal("empty")
+			}
+			clone := func() *hdTerrainBatchRuntime {
+				v := *p
+				machine := golem.New()
+				copy(machine.Mem, m.Mem)
+				v.h = &hdRuntime{m: machine}
+				frame := *p.current
+				v.current = &frame
+				v.acceptedBy = map[int]uint64{}
+				v.pending = map[int]hdTerrainBatchPair{}
+				v.backing = map[uint32]hdTerrainBatchCell{}
+				return &v
+			}
+			finishes := []struct {
+				name   string
+				mutate func(*hdTerrainBatchRuntime)
+			}{
+				{"outside-write", func(v *hdTerrainBatchRuntime) { v.outside = true }},
+				{"missing-write", func(v *hdTerrainBatchRuntime) { v.counts[first] = 0 }},
+				{"duplicate-write", func(v *hdTerrainBatchRuntime) { v.counts[first] = 2 }},
+				{"RAM-mismatch", func(v *hdTerrainBatchRuntime) { v.h.m.Mem[v.destination+uint32((v.y+first/16)*320+v.x+first%16)] ^= 1 }},
+				{"opaque-count", func(v *hdTerrainBatchRuntime) { v.current.opaque++ }},
+				{"write-digest", func(v *hdTerrainBatchRuntime) { v.current.writes = "wrong" }},
+			}
+			for _, v := range finishes {
+				t.Run(v.name, func(t *testing.T) {
+					n := clone()
+					before := n.accepted
+					v.mutate(n)
+					n.finish()
+					if n.accepted != before || n.rejected != 1 {
+						t.Fatal("invalid completion accepted")
+					}
+				})
+			}
+			t.Run("unknown-same-value-revokes", func(t *testing.T) {
+				pos := (p.y+first/16)*320 + p.x + first%16
+				n := clone()
+				if !n.visible[pos].owned {
+					t.Fatal("positive cell missing")
+				}
+				value := n.visible[pos].native
+				n.memoryWrite(hdBuildingCanvas+uint32(pos), value, value)
+				if n.visible[pos].owned {
+					t.Fatal("same-value source survived")
+				}
+			})
+			t.Run("timeout-rejects", func(t *testing.T) {
+				m, n := makeFixture()
+				n.beforeInstruction()
+				m.Steps += 100001
+				m.CPU.IP = 0xb
+				n.beforeInstruction()
+				if n.active || n.rejected != 1 {
+					t.Fatal("timeout not rejected")
+				}
+			})
+		})
+	}
+}
+
+func TestHDLegacyMainOriginCopies(t *testing.T) {
+	makeRuntime := func() (*golem.Machine, *hdTerrainBatchRuntime, func(uint16, uint16, uint16, uint16)) {
+		m := golem.New()
+		p := &hdTerrainBatchRuntime{h: &hdRuntime{m: m}, pending: map[int]hdTerrainBatchPair{}, backing: map[uint32]hdTerrainBatchCell{}, accepted: 1}
+		copy(m.Mem[0xcba*16+0xca:], []byte{0xf3, 0xa5, 3, 0xf3, 0x79, 0x0c, 0x81, 0xee, 0, 0x80, 0x8c, 0xd9, 0x81, 0xc1, 0, 8})
+		m.WatchWrite(0, 0x9ffff, func(_ *golem.Machine, a uint32, old, value byte) { p.memoryWrite(a, old, value) })
+		move := func(ds, si, es, di uint16) {
+			m.CPU.Seg[golem.CS] = 0xcba
+			m.CPU.IP = 0xca
+			m.CPU.Seg[golem.DS] = ds
+			m.CPU.Seg[golem.ES] = es
+			m.CPU.R[golem.SI] = si
+			m.CPU.R[golem.DI] = di
+			m.CPU.R[golem.CX] = 1
+			m.CPU.Flags = 2
+			if err := m.CPU.Step(); err != nil {
+				t.Fatal(err)
+			}
+		}
+		return m, p, move
+	}
+	t.Run("Main-buffer-roundtrip", func(t *testing.T) {
+		m, p, move := makeRuntime()
+		for k := 0; k < 2; k++ {
+			m.Mem[hdBuildingCanvas+uint32(k)] = byte(41 + k)
+			p.visible[k] = hdTerrainBatchCell{owned: true, fromMain: true, ordinal: 71, k: byte(k), native: byte(41 + k)}
+		}
+		move(0x2cae, 0, 0x5000, 0)
+		for k := 0; k < 2; k++ {
+			c := p.backing[0x50000+uint32(k)]
+			if !c.owned || !c.fromMain {
+				t.Fatal("Main起點未存入背景", k)
+			}
+		}
+		move(0x5000, 0, 0x2cae, 16)
+		for k := 0; k < 2; k++ {
+			c := p.visible[16+k]
+			if !c.owned || !c.fromMain || c.k != byte(k) {
+				t.Fatal("Main起點未隨還原保留", k, c)
+			}
+		}
+	})
+	t.Run("Main-to-Main-revokes", func(t *testing.T) {
+		m, p, move := makeRuntime()
+		for k := 0; k < 2; k++ {
+			m.Mem[hdBuildingCanvas+uint32(k)] = byte(41 + k)
+			p.visible[k] = hdTerrainBatchCell{owned: true, fromMain: true, ordinal: 71, k: byte(k), native: byte(41 + k)}
+			p.visible[16+k] = p.visible[k]
+		}
+		move(0x2cae, 0, 0x2cae, 16)
+		for k := 0; k < 2; k++ {
+			if p.visible[16+k].owned {
+				t.Fatal("Main到Main錯授來源", k)
+			}
+		}
+	})
+	t.Run("Stage-origin-copy", func(t *testing.T) {
+		m, p, move := makeRuntime()
+		for k := 0; k < 2; k++ {
+			m.Mem[hdTerrainBatchStage+uint32(k)] = byte(41 + k)
+			p.stage[k] = hdTerrainBatchCell{owned: true, fromMain: false, ordinal: 71, k: byte(k), native: byte(41 + k)}
+		}
+		move(0x3c50, 0, 0x2cae, 16)
+		for k := 0; k < 2; k++ {
+			c := p.visible[16+k]
+			if !c.owned || c.fromMain {
+				t.Fatal("Stage起點被誤標Main", k, c)
+			}
+		}
+	})
+}
+func TestHDLegacyMainPalettePreservesStage(t *testing.T) {
+	path := os.Getenv("TEST_TERRAIN_LEGACY_PALETTE")
+	if path == "" {
+		t.Skip("需要本機原版色盤")
+	}
+	reference, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !hdTerrainLegacyMainPaletteSupported(reference) {
+		t.Fatal("原版色盤不符")
+	}
+	indices := []int{-1, 39, 41, 54, 56, 64, 65, 66, 67, 68, 69, 70, 71, 84, 86, 100, 101, 102}
+	for _, index := range indices {
+		for _, main := range []bool{false, true} {
+			name := "normal"
+			if index >= 0 {
+				name = fmt.Sprintf("changed-%03d", index)
+			}
+			name += fmt.Sprint("/Main=", main)
+			t.Run(name, func(t *testing.T) {
+				pal := append([]byte(nil), reference...)
+				if index >= 0 {
+					pal[index*3] ^= 1
+				}
+				m := golem.New()
+				p := &hdTerrainBatchRuntime{h: &hdRuntime{m: m}, frames: map[int]*hdTerrainBatchFrame{71: {art: image.NewRGBA(image.Rect(0, 0, 64, 64))}}}
+				for y := 0; y < 64; y++ {
+					for x := 0; x < 64; x++ {
+						p.frames[71].art.SetRGBA(x, y, color.RGBA{50, 100, 20, 255})
+					}
+				}
+				p.visible[0] = hdTerrainBatchCell{owned: true, fromMain: main, ordinal: 71, k: 0, native: 41}
+				canvas := make([]byte, 64000)
+				canvas[0] = 41
+				receipt := p.paint(image.NewRGBA(image.Rect(0, 0, 1280, 800)), draftNativeFrame{canvas: canvas, palette: pal})
+				want := 1
+				if main && index >= 0 {
+					want = 0
+				}
+				if receipt["painted"].(int) != want {
+					t.Fatal("Main與既有Stage色盤邊界不同", main, index, receipt)
+				}
+			})
+		}
 	}
 }

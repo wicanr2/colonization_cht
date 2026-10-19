@@ -2302,7 +2302,36 @@
         "encoded_sha256": "a8a861754068c86a9c150442f7b07f1fbd297d82b8e5dcb2e3ee108bde4dc84c",
         "encoded_length": 285
       },
-      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "main_surface_extension": {
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "ready_review_sha256": "c34a4004a984b92c1a26b7f67cb7b65bd5a3b8c9892d23508877d68c3f44dac3",
+        "source_file": "PHYS0.SS",
+        "source_file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "source_ordinal": 79,
+        "source_research_id": 1367,
+        "encoded_sha256": "a8a861754068c86a9c150442f7b07f1fbd297d82b8e5dcb2e3ee108bde4dc84c",
+        "encoded_length": 285,
+        "indexed_sha256": "41da53cb53136e8615c0c81b268f96ecad4dcfc039d7b3e97d0a9e7e616c3191",
+        "writes_sha256": "43e7c310e74049db1a05f0bb8349d79e74ebde3e0a7e95c085624e2808a8d54c",
+        "destination_linear": "0x2CAE0",
+        "sample_rect": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "native_content_rect": [
+          0,
+          0,
+          16,
+          16
+        ],
+        "Main_palette_projection_sha256": "cc44c2b5bfdb808866cd7b5d13901b04f9236c9df45dcb61686e7c2a8b9bf015",
+        "original_png_and_alpha_unchanged": true,
+        "origin_surface_preserved_by_backing_copies": true,
+        "inherited_Stage_policy_unchanged": true
+      }
     },
     "cursor-000.png": {
       "spec": "docs/spec/066-hd-standard-cursor.md",
@@ -2568,7 +2597,36 @@
         "sorted_local_offset_value_sha256": "a4d9d152f8f87b714f112e519d955031dc9c4828b467c662b696265c1d7d9cf5",
         "opaque_cells": 182
       },
-      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "main_surface_extension": {
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "ready_review_sha256": "c34a4004a984b92c1a26b7f67cb7b65bd5a3b8c9892d23508877d68c3f44dac3",
+        "source_file": "PHYS0.SS",
+        "source_file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "source_ordinal": 71,
+        "source_research_id": 1359,
+        "encoded_sha256": "57bffb18c0fbdb61bfc9a6a2ad75f0c1d5060a25dde8de12cc148c920249c3c7",
+        "encoded_length": 250,
+        "indexed_sha256": "db365180f64a2f0cb3e12ed12d993a8bde433d4b061fcb6cca705bae8b172fd6",
+        "writes_sha256": "a4d9d152f8f87b714f112e519d955031dc9c4828b467c662b696265c1d7d9cf5",
+        "destination_linear": "0x2CAE0",
+        "sample_rect": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "native_content_rect": [
+          0,
+          0,
+          16,
+          16
+        ],
+        "Main_palette_projection_sha256": "cc44c2b5bfdb808866cd7b5d13901b04f9236c9df45dcb61686e7c2a8b9bf015",
+        "original_png_and_alpha_unchanged": true,
+        "origin_surface_preserved_by_backing_copies": true,
+        "inherited_Stage_policy_unchanged": true
+      }
     },
     "terrain-074.png": {
       "spec": "docs/spec/067-hd-world-terrain-batch.md",
@@ -2614,7 +2672,36 @@
         "sorted_local_offset_value_sha256": "79bc77c90df9ab14e7a869084bc2f592f61fd7a9e7fe637f72a229e331a76cd7",
         "opaque_cells": 193
       },
-      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "main_surface_extension": {
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "ready_review_sha256": "c34a4004a984b92c1a26b7f67cb7b65bd5a3b8c9892d23508877d68c3f44dac3",
+        "source_file": "PHYS0.SS",
+        "source_file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "source_ordinal": 74,
+        "source_research_id": 1362,
+        "encoded_sha256": "4e3dfc879acdb9a25612b04aba61bffa344436984b99459744ec3a7c274caa7a",
+        "encoded_length": 239,
+        "indexed_sha256": "6d760dbbc51e49db751b419d8bc0b0d654eb68dbec2446b6129012fc9656bb29",
+        "writes_sha256": "79bc77c90df9ab14e7a869084bc2f592f61fd7a9e7fe637f72a229e331a76cd7",
+        "destination_linear": "0x2CAE0",
+        "sample_rect": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "native_content_rect": [
+          0,
+          0,
+          16,
+          16
+        ],
+        "Main_palette_projection_sha256": "cc44c2b5bfdb808866cd7b5d13901b04f9236c9df45dcb61686e7c2a8b9bf015",
+        "original_png_and_alpha_unchanged": true,
+        "origin_surface_preserved_by_backing_copies": true,
+        "inherited_Stage_policy_unchanged": true
+      }
     },
     "terrain-077.png": {
       "spec": "docs/spec/067-hd-world-terrain-batch.md",
@@ -2660,7 +2747,36 @@
         "sorted_local_offset_value_sha256": "24f63b6bc14be91cf98cce2a20ef97cb4a1fd4be5d2ba286c342228b3de07523",
         "opaque_cells": 193
       },
-      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "main_surface_extension": {
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "ready_review_sha256": "c34a4004a984b92c1a26b7f67cb7b65bd5a3b8c9892d23508877d68c3f44dac3",
+        "source_file": "PHYS0.SS",
+        "source_file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "source_ordinal": 77,
+        "source_research_id": 1365,
+        "encoded_sha256": "86d5a969c1d9678244d816f2c56b13da4712b34a2e1dabd4ae9c09bcea4ec3aa",
+        "encoded_length": 266,
+        "indexed_sha256": "9e966d21ac82fa80066a80dd0bfaa776dc43d94b7f39783c85f020d8b79aeb78",
+        "writes_sha256": "24f63b6bc14be91cf98cce2a20ef97cb4a1fd4be5d2ba286c342228b3de07523",
+        "destination_linear": "0x2CAE0",
+        "sample_rect": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "native_content_rect": [
+          0,
+          0,
+          16,
+          16
+        ],
+        "Main_palette_projection_sha256": "cc44c2b5bfdb808866cd7b5d13901b04f9236c9df45dcb61686e7c2a8b9bf015",
+        "original_png_and_alpha_unchanged": true,
+        "origin_surface_preserved_by_backing_copies": true,
+        "inherited_Stage_policy_unchanged": true
+      }
     },
     "terrain-078.png": {
       "spec": "docs/spec/067-hd-world-terrain-batch.md",
@@ -2706,7 +2822,36 @@
         "sorted_local_offset_value_sha256": "cd0492871fe6d92d8973d42190ea8bae7c074e90d0a111ada0f520abe50cb9d9",
         "opaque_cells": 225
       },
-      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "main_surface_extension": {
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "ready_review_sha256": "c34a4004a984b92c1a26b7f67cb7b65bd5a3b8c9892d23508877d68c3f44dac3",
+        "source_file": "PHYS0.SS",
+        "source_file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "source_ordinal": 78,
+        "source_research_id": 1366,
+        "encoded_sha256": "92966f3b77aee2f8a5e416233dff74b56bcf6621a4faa6cf6cc9a9910a2aeb70",
+        "encoded_length": 261,
+        "indexed_sha256": "eb8c148968ef170a91c7e17765b3102668f2079d12d0cf89d530eef001d66ad8",
+        "writes_sha256": "cd0492871fe6d92d8973d42190ea8bae7c074e90d0a111ada0f520abe50cb9d9",
+        "destination_linear": "0x2CAE0",
+        "sample_rect": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "native_content_rect": [
+          0,
+          0,
+          16,
+          16
+        ],
+        "Main_palette_projection_sha256": "cc44c2b5bfdb808866cd7b5d13901b04f9236c9df45dcb61686e7c2a8b9bf015",
+        "original_png_and_alpha_unchanged": true,
+        "origin_surface_preserved_by_backing_copies": true,
+        "inherited_Stage_policy_unchanged": true
+      }
     },
     "terrain-080.png": {
       "spec": "docs/spec/067-hd-world-terrain-batch.md",
@@ -2782,7 +2927,36 @@
         "sorted_local_offset_value_sha256": "90c153fe439ab6c9a24867877b88655f204396181c72cc5a549d34675db687ca",
         "opaque_cells": 70
       },
-      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private"
+      "rights": "AI-generated display redraw under RRSAL-1.0; original references remain private",
+      "main_surface_extension": {
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "ready_review_sha256": "c34a4004a984b92c1a26b7f67cb7b65bd5a3b8c9892d23508877d68c3f44dac3",
+        "source_file": "PHYS0.SS",
+        "source_file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+        "source_ordinal": 96,
+        "source_research_id": 1384,
+        "encoded_sha256": "2d414662242d31b319f67f61cfc4932600676693dad7cf2fb0d1d286b4c28965",
+        "encoded_length": 154,
+        "indexed_sha256": "aa4166e53ede106e1880022a8cae7632ff135ea24891854e7a029a6a1424ef72",
+        "writes_sha256": "90c153fe439ab6c9a24867877b88655f204396181c72cc5a549d34675db687ca",
+        "destination_linear": "0x2CAE0",
+        "sample_rect": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "native_content_rect": [
+          0,
+          0,
+          16,
+          16
+        ],
+        "Main_palette_projection_sha256": "cc44c2b5bfdb808866cd7b5d13901b04f9236c9df45dcb61686e7c2a8b9bf015",
+        "original_png_and_alpha_unchanged": true,
+        "origin_surface_preserved_by_backing_copies": true,
+        "inherited_Stage_policy_unchanged": true
+      }
     },
     "terrain-147.png": {
       "spec": "docs/spec/067-hd-world-terrain-batch.md",

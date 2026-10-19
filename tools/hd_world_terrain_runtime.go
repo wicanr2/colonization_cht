@@ -1,4 +1,4 @@
-// 規格067 READY：十二個Stage來源與R93／R94四十一個Main前景來源，只合成顯示。
+// 規格067 READY：十二個Stage、R93／R94前景與R95六個Main表面來源，只合成顯示。
 package main
 
 import (
@@ -25,10 +25,11 @@ type hdTerrainBatchFrame struct {
 	art *image.RGBA
 }
 type hdTerrainBatchCell struct {
-	owned   bool
-	ordinal uint16
-	k       byte
-	native  byte
+	fromMain bool
+	owned    bool
+	ordinal  uint16
+	k        byte
+	native   byte
 }
 type hdTerrainBatchPair struct {
 	cell       hdTerrainBatchCell
@@ -110,7 +111,7 @@ func loadHDTerrainBatchRuntime(h *hdRuntime, game, directory string) (*hdTerrain
 
 		p.frames[d.ordinal] = f
 	}
-	if len(p.frames) != 53 {
+	if len(p.frames) != 54 {
 		return nil, fmt.Errorf("incomplete terrain group")
 	}
 	return p, nil
@@ -202,7 +203,7 @@ func (p *hdTerrainBatchRuntime) beforeInstruction() {
 		destination = uint32(dest[3])*16 + uint32(dest[2])
 	}
 	expectedDestination := hdTerrainBatchStage
-	if hdTerrainForegroundOrdinal(frame.ordinal) {
+	if hdTerrainForegroundOrdinal(frame.ordinal) || (hdTerrainLegacyMainOrdinal(frame.ordinal) && destination == hdBuildingCanvas) {
 		expectedDestination = hdBuildingCanvas
 	}
 	if !ok || dest[0] != 200 || dest[1] != 320 || destination != expectedDestination {
@@ -235,7 +236,7 @@ func (p *hdTerrainBatchRuntime) beforeInstruction() {
 	clear(p.writes[:])
 	clear(p.counts[:])
 	if p.trace {
-		p.entry = map[string]any{"ordinal": frame.ordinal, "entry_step": m.Steps, "registers": c.R, "segments": c.Seg, "stack": stack, "record_far": fmt.Sprintf("%04X:%04X", stack[4], off), "record": record, "source_far": fmt.Sprintf("%04X:%04X", record[1], record[0]), "source_sha256": hash(m.Mem[at : at+frame.length]), "rect": [4]int{x, y, x + 16, y + 16}}
+		p.entry = map[string]any{"ordinal": frame.ordinal, "destination": p.destination, "entry_step": m.Steps, "registers": c.R, "segments": c.Seg, "stack": stack, "record_far": fmt.Sprintf("%04X:%04X", stack[4], off), "record": record, "source_far": fmt.Sprintf("%04X:%04X", record[1], record[0]), "source_sha256": hash(m.Mem[at : at+frame.length]), "rect": [4]int{x, y, x + 16, y + 16}}
 	}
 }
 func (p *hdTerrainBatchRuntime) stageWrite(addr uint32, old, value byte) {
@@ -294,7 +295,7 @@ func (p *hdTerrainBatchRuntime) finish() {
 	}
 	for k, v := range p.writes {
 		if p.counts[k] == 1 {
-			cell := hdTerrainBatchCell{true, uint16(p.current.ordinal), byte(k), v}
+			cell := hdTerrainBatchCell{fromMain: p.destination == hdBuildingCanvas, owned: true, ordinal: uint16(p.current.ordinal), k: byte(k), native: v}
 			i := (p.y+k/16)*320 + p.x + k%16
 			if p.destination == hdBuildingCanvas {
 				p.visible[i] = cell
@@ -372,6 +373,8 @@ func (p *hdTerrainBatchRuntime) paint(out *image.RGBA, f draftNativeFrame) map[s
 	owned, valid, painted := 0, 0, 0
 	foregroundPalette := hdTerrainForegroundPaletteSupported(f.palette)
 	remainingPalette := hdTerrainRemainingPaletteSupported(f.palette)
+	legacyMainPalette := hdTerrainLegacyMainPaletteSupported(f.palette)
+	mainBy, validMainBy := map[int]int{}, map[int]int{}
 	mask := make([]byte, 8000)
 	by := map[int]int{}
 	validBy := map[int]int{}
@@ -385,8 +388,12 @@ func (p *hdTerrainBatchRuntime) paint(out *image.RGBA, f draftNativeFrame) map[s
 		}
 		valid++
 		validBy[int(c.ordinal)]++
+		if c.fromMain {
+			validMainBy[int(c.ordinal)]++
+		}
 		frame := p.frames[int(c.ordinal)]
-		if (hdTerrainRemainingOrdinal(int(c.ordinal)) && !remainingPalette) || (hdTerrainForegroundOrdinal(int(c.ordinal)) && !hdTerrainRemainingOrdinal(int(c.ordinal)) && !foregroundPalette) {
+		legacyMain := c.fromMain && hdTerrainLegacyMainOrdinal(int(c.ordinal))
+		if legacyMain && !legacyMainPalette || !legacyMain && ((hdTerrainRemainingOrdinal(int(c.ordinal)) && !remainingPalette) || (hdTerrainForegroundOrdinal(int(c.ordinal)) && !hdTerrainRemainingOrdinal(int(c.ordinal)) && !foregroundPalette)) {
 			continue
 		}
 		sx, sy := int(c.k)%16*4, int(c.k)/16*4
@@ -410,9 +417,12 @@ func (p *hdTerrainBatchRuntime) paint(out *image.RGBA, f draftNativeFrame) map[s
 		}
 		painted++
 		by[int(c.ordinal)]++
+		if c.fromMain {
+			mainBy[int(c.ordinal)]++
+		}
 		mask[i>>3] |= 1 << uint(i&7)
 	}
-	return map[string]any{"formal": true, "prototype": false, "accepted": p.accepted, "accepted_by_ordinal": p.acceptedBy, "rejected": p.rejected, "owned": owned, "valid": valid, "painted": painted, "by_ordinal": by, "valid_by_ordinal": validBy, "transferred": p.transferred, "cursor_restore_points": p.cursorRestores, "owned_cursor_restores_by_ordinal": p.cursorRestoresBy, "buffer_saves": p.bufferSaves, "buffer_restores": p.bufferRestores, "mask": mask, "revision": p.revision}
+	return map[string]any{"formal": true, "prototype": false, "painted_main_by_ordinal": mainBy, "valid_main_by_ordinal": validMainBy, "accepted": p.accepted, "accepted_by_ordinal": p.acceptedBy, "rejected": p.rejected, "owned": owned, "valid": valid, "painted": painted, "by_ordinal": by, "valid_by_ordinal": validBy, "transferred": p.transferred, "cursor_restore_points": p.cursorRestores, "owned_cursor_restores_by_ordinal": p.cursorRestoresBy, "buffer_saves": p.bufferSaves, "buffer_restores": p.bufferRestores, "mask": mask, "revision": p.revision}
 }
 
 func (p *hdTerrainBatchRuntime) receipt(f draftNativeFrame) map[string]any {
@@ -420,6 +430,9 @@ func (p *hdTerrainBatchRuntime) receipt(f draftNativeFrame) map[string]any {
 }
 
 func hdTerrainForegroundOrdinal(n int) bool {
+	if n == 79 {
+		return true
+	}
 	if hdTerrainRemainingOrdinal(n) {
 		return true
 	}
@@ -513,4 +526,23 @@ func hdTerrainRemainingPaletteSupported(pal []byte) bool {
 		}
 	}
 	return false
+}
+
+func hdTerrainLegacyMainOrdinal(n int) bool {
+	switch n {
+	case 71, 74, 77, 78, 79, 96:
+		return true
+	}
+	return false
+}
+func hdTerrainLegacyMainPaletteSupported(pal []byte) bool {
+	if len(pal) != 768 {
+		return false
+	}
+	var projection []byte
+	for _, v := range []byte{39, 41, 54, 56, 64, 65, 66, 67, 68, 69, 70, 71, 84, 86, 100, 101, 102} {
+		projection = append(projection, v)
+		projection = append(projection, pal[int(v)*3:int(v)*3+3]...)
+	}
+	return hash(projection) == "cc44c2b5bfdb808866cd7b5d13901b04f9236c9df45dcb61686e7c2a8b9bf015"
 }
