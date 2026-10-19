@@ -6,7 +6,7 @@ import (
 	golem "github.com/wicanr2/dosgolem"
 )
 
-// 規格069 R97 READY。完整原版回傳後才建立Main來源；不改寫DOS。
+// 規格069 R97 READY修正。完整原版回傳後才建立Main來源；不改寫DOS。
 type hdSceneSpriteDefinition struct {
 	ordinal, width, height, encodedLen, opaque int
 	nominal                                    [2]uint16
@@ -99,7 +99,7 @@ func (p *hdSceneRuntime) recordSpriteWrite(a uint32, value byte) {
 	}
 	if a < hdBuildingCanvas || a >= hdBuildingCanvas+64000 {
 		cs, ip := p.h.m.CPU.OpAddr()
-		if _, known := hdSceneSpriteWriterCodes[ip]; known && cs == 0xd46 {
+		if _, known := hdSceneSpriteWriterCodes[ip]; known && cs == 0xd46 && uint32(p.h.m.CPU.Seg[golem.ES])*16+uint32(p.h.m.CPU.R[golem.BX]) == a {
 			call.bad = true
 		}
 		return

@@ -104,7 +104,18 @@ func hdEventFixtureLoad(t *testing.T, rid int, mode string) (*golem.Machine, *hd
 				m.CPU.R[golem.BX] = old
 				return
 			case "outside-canvas":
-				p.recordSpriteWrite(hdBuildingCanvas+64000, 0)
+				oldES, oldBX := m.CPU.Seg[golem.ES], m.CPU.R[golem.BX]
+				outside := hdBuildingCanvas + 64000
+				m.CPU.Seg[golem.ES] = uint16(outside >> 4)
+				m.CPU.R[golem.BX] = uint16(outside & 15)
+				p.recordSpriteWrite(outside, 0)
+				m.CPU.Seg[golem.ES], m.CPU.R[golem.BX] = oldES, oldBX
+			case "irq-stack":
+				stack := uint32(m.CPU.Seg[golem.SS])*16 + uint32(m.CPU.R[golem.SP])
+				for j := uint32(1); j <= 6; j++ {
+					a := stack - j
+					m.Write8(a, m.Mem[a])
+				}
 			case "outside":
 				p.recordSpriteWrite(hdBuildingCanvas, 0)
 			}
@@ -288,4 +299,16 @@ var hdEventFixtureSHAs = map[string][2]string{
 	"r97-decoder-1491-2cae0.json": {"52a0285b5c75370395fe944bed4fc63110c79f57809dabcad5e62211742d8993", "b25f920b2091aed589fd283c541b7a542a7e4f2aa80d674879d5f13e44b6729b"},
 	"r97-decoder-1495-2cae0.json": {"1ad894b7182b7cb126d567b849d5a1d71856845588cc7fb06db71ce5206a63b9", "78ec5724804cf9882f04920aa47a8d099c386bbe65fb02e159225779bcccbaf6"},
 	"r97-decoder-1549-2cae0.json": {"a36e453296c80dc19653d48192c5de3d7c86db59e5af96f9750b6971487013b0", "5a329922328cee99fea5a96bcd9f62040830fc92c1bec22ac6f8dea5e724cfd3"},
+}
+
+func TestHDEventIRQStackWrites(t *testing.T) {
+	for _, rid := range []int{1070, 1071, 1072, 1489, 1491, 1495, 1549} {
+		t.Run(fmt.Sprint(rid), func(t *testing.T) {
+			m, p, _ := hdEventFixtureLoad(t, rid, "irq-stack")
+			hdEventRun(t, m, p)
+			if p.spriteAccepted != 1 || p.spriteRejected != 0 {
+				t.Fatal("IRQ stack writes mistaken for D46 source overflow")
+			}
+		})
+	}
 }

@@ -13,7 +13,7 @@ PINS = {
     "tools/live_menu.go": "2f5ab4b81a9608a14f05280cfaba5027472e648fda6e34d3db4ba8855d0a0a53",
     "tools/build_window_prototype.py": "5e655dd9e0ea92869376205e92f7c4edbd7c24b26bf6b464b75c9de25776f04c",
     "tools/dialog_overlay.go": "b93dcf45c424b8aac175f71da0e05d54782d9ccc36774fdd1ac7f0bbd69e8a50",
-    "tools/string_overlay.go": "072643055789eee243db8f0d2f4ccf929ee70b32d959058476151d23c9c8ac90",
+    "tools/string_overlay.go": "57753f73401b6f2dd27bcf3cdd037ed75c84e81fee6565dc9525f719db097789",
 }
 
 
@@ -171,6 +171,7 @@ def attach_language_runtime(repo, output, reference, *, with_rebuild=True, forma
                          "tools/hd_scene_background_runtime.go", "tools/hd_scene_background_sources.go",
                          "tools/hd_scene_sprite_runtime.go", "tools/hd_scene_sprite_runtime_test.go",
                          "tools/hd_scene_sprite_resources_test.go", "tools/hd_scene_sprite_normal_test.go",
+                         "tools/noto_event_titles_test.go",
                          "tools/hd_scene_background_runtime_test.go", "tools/hd_report_background_runtime_test.go", "tools/hd_room_score_background_runtime_test.go"]
         for name in extra_sources:
             (output / Path(name).name).write_bytes((repo / name).read_bytes())

@@ -214,6 +214,9 @@ func draftPrepareTargets(root string, files map[string][]byte, owned, helpOwned 
 		sc.labelPlan = func(text string, fill, ink image.Rectangle, capH int) (*image.Alpha, *image.Alpha, image.Rectangle, int) {
 			return draftNotoMapLabelMasks(sc.fonts, text, fill, ink, capH)
 		}
+		sc.woodcutPlan = func(id, text string, ink, safe image.Rectangle, capH int) (*image.Alpha, *image.Alpha, *image.Alpha, int) {
+			return draftNotoWoodcutMasks(sc.fonts, id, text, ink, safe, capH)
+		}
 		t.dlg, t.str = cat, sc
 		targets[locale] = t
 	}
@@ -1538,3 +1541,51 @@ func draftExportRebuilds(targets map[string]*draftLanguageTarget, j *nativeJourn
 }
 
 type draftHDBackground func(*image.RGBA, int, byte, []byte) bool
+
+// 規格069 R97 READY：三個已驗標題各自量測Noto實際alpha，舊Cubic路徑保持。
+func draftNotoWoodcutMasks(fonts map[int]*dialogFont, id, text string, ink, safe image.Rectangle, capH int) (sh, n, ac *image.Alpha, size int) {
+	fields := map[string]image.Rectangle{
+		"WOODCUT.TXT:0x00000017": image.Rect(60, 165, 259, 172),
+		"WOODCUT.TXT:0x00000046": image.Rect(90, 165, 230, 172),
+		"WOODCUT.TXT:0x0000009E": image.Rect(74, 165, 246, 172),
+	}
+	expected, known := fields[id]
+	if !known || text == "" || ink != expected || safe != ink.Inset(-1) || capH != 7 {
+		return nil, nil, nil, 0
+	}
+	measured := map[int]*dialogFont{}
+	for px, font := range fonts {
+		if font == nil {
+			continue
+		}
+		top, bottom := 0, 0
+		hasInk := false
+		valid := true
+		for _, char := range text {
+			glyph := font.glyphs[char]
+			if glyph == nil || font.widths[char] <= 0 {
+				valid = false
+				break
+			}
+			for y := glyph.Rect.Min.Y; y < glyph.Rect.Max.Y; y++ {
+				for x := glyph.Rect.Min.X; x < glyph.Rect.Max.X; x++ {
+					if glyph.AlphaAt(x, y).A != 0 {
+						if !hasInk || y < top {
+							top = y
+						}
+						bottom = max(bottom, y+1)
+						hasInk = true
+					}
+				}
+			}
+		}
+		if !valid || !hasInk || bottom <= top {
+			continue
+		}
+		copyFont := *font
+		copyFont.cjkTop, copyFont.cjkBottom = top, bottom
+		measured[px] = &copyFont
+	}
+	catalog := &stringCatalog{fonts: measured}
+	return catalog.woodcutMasks(text, ink, safe, capH)
+}

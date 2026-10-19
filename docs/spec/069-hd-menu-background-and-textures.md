@@ -2601,3 +2601,58 @@ typed來源、完整寫入與字模底圖接入既有背景來源層，實作入
 關頁後繼續遊玩、當次完整狀態與獨立來源／新圖像畫素、X11、
 含play=true的三側CPU／RAM／IDX／DAC／WAV／存檔、完整載入／封裝／索引及README。
 READY不代表這些驗收已完成，也不授予全量HD完成聲明。
+
+### R97正常GUI缺口，返回DRAFT
+
+七張原PNG與READY接線已提交57c2c9c並push；清冊READY是該次實作授權，沒有CONFORMED信用。第一次正式GUI僅有主選單及繁中原圖模式兩張完整實拍。第一次繁中HD套用在636800000步停於守門，背景來源累計16接受、1拒絕；WDCUT01 decoded=0，木框及三段標題牌則已接受。最終38筆實際輸入至637400000步；不能把此失敗的HD套用計入完成。原PNG與DOS資料未改。
+
+另string_misses記錄does-not-fit\tDISCOVERY OF THE NEW WORLD，Noto標題沿原文回退，沒有Noto字底重繪。缺口回到RE／DRAFT：以當次實際輸入及四個原版狀態點，核對來源呼叫期間的DS／SI／ES:BX、完整回傳、逾時、中斷與非Main寫入；字型另量測此欄位的真實alpha、基線及候選字級。沒有證據前不放寬守門，不套用全域字級。
+
+本機入口r97-event-formal-gui-r1，失敗收據、兩個樣本及實際輸入保留。重播規劃為r97-current-partial-native-plan-r2.json，輸出r97-current-partial-native-r2；部分收據不授予三事件、五語、畫素、WAV或全量HD完成信用。
+
+### R97修正READY：中斷寫入定位與三個Noto標題
+
+修正審查r97-ready-fix-review-r2.json的SHA-256為
+6e81a242583fd414176157aa741994626b49f6a6d09104a75fe5abf853c5c65e。
+此節取代R97初版對非Main寫入來源的判定，其他七個圖像的來源、尺寸、
+取樣、750000步上限、Main表面、完整回傳及不授予RAM／VGA來源的契約保持。
+
+confirmed：當次38筆正常輸入的四個原版狀態點、完整記憶體、CPU、IDX、DAC、
+週期及存檔與控制／實拍全等。原版完成17次繪製，WDCUT01在632854088至
+633231976步完整返回，Main寫入的DS／SI／ES:BX沒有失配。
+兩次IRQ在632943674及633057818步各向堆疊寫六byte；線性位址為
+0x2AB04至0x2AB09，內容為FLAGS 7293、CS 0D46、下一個IP 01D5。
+CPU.OpAddr仍是前一指令0D46:01D2，實際ES:BX卻為Main的0x31E21／0x349A6。
+
+位址空間仍為dosgolem實模式及20-bit線性RAM。隔離dosgolem版本保持82a14b2…；
+其internal/machine/machine.go的Step先tick再進beforeInstruction，
+internal/cpu/cpu.go的Interrupt依序推FLAGS／CS／IP且不重設OpAddr。
+因此OpAddr不能單獨證明這六byte由圖像指令寫出。
+修正僅在實際寫入位址等於ES:BX時，才把非Main寫入判為圖像越界。
+其他Main寫入仍核對原機器碼、來源、有效位置、完整索引及透明／矩形外不變。
+新增七個實際解碼入口的IRQ堆疊回歸；真正的有效目的地越界仍拒絕。
+
+Noto另確認共用CJK範圍與實際標題alpha不同，例如繁中30px實際頂端為9，
+共用資料為11，導致原版安全矩形的檢查拒絕。三個正常標題的原版墨跡高均7，
+四倍後28；安全區高36，浮雕位移保留4。候選仍由此欄位既有30至20px範圍，
+逐一量測實際字形，靠原版可見墨跡頂端對齊並保留完整浮雕。
+每次用欄位的獨立字模資料，不改共用圖集或其他欄位的量測。
+
+| 標題來源 | 原版墨跡 | 安全矩形 | 繁中／簡中／日文 | 韓文 | 四倍畫布基線 |
+|---|---|---|---|---|---|
+| WOODCUT.TXT:0x17 | [60,165,259,172] | [59,164,260,173] | 28／28／28px | 29px | 685 |
+| WOODCUT.TXT:0x46 | [90,165,230,172] | [89,164,231,173] | 28／28／28px | 28px | 685 |
+| WOODCUT.TXT:0x9E | [74,165,246,172] | [73,164,247,173] | 28／28／28px | 28px | 685 |
+
+字型仍依[固定Noto來源](../../font/README.md)，英文保留原版。
+逐欄原文、譯文指紋、全部候選字級、實際alpha與基線在
+r97-noto-title-measurements-r1.json。三個標題以外、來源或幾何不同、
+缺字及放不下時保留原文並記錄；舊Cubic流程保持。
+
+366個原型具名項零失敗、零skip，包括實際原版標題到Noto顯示項目、
+啟用與來源改變後撤除的十二組垂直測試。三十六個完整字模共893376個alpha
+由Pillow獨立重建，相同；這些不是正常GUI完成收據。
+接線及重生入口為[欄位測試](../../tools/noto_event_titles_test.go)、
+[語言顯示層](../../tools/language_rebuild_probe.go)與既有事件來源層。
+312張原PNG保持；正式套用後，仍需重新完成正常GUI、游標、畫素、音訊、
+存檔、來源索引及README，才可限定CONFORMED。

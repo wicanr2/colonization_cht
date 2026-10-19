@@ -27,17 +27,18 @@ type woodcutTitle struct {
 }
 
 type stringCatalog struct {
-	dlg        *dialogCatalog    // 定稿術語、NAMES 對照與逐行模板（規格035／036）
-	frags      map[string]string // 片段字典：英文→中文；衝突者為空字串（視為查無）
-	phrases    displayPhrases
-	templates  []stringTemplate
-	colony     map[string]string // COLONY.TXT 預設名→「中文（原名）」
-	people     map[string]bool   // 目標170：NAMES.TXT @LEADERNAME 的元首名（玩家可改名，顯示原名）
-	owned      map[string]bool   // 專屬欄位已處理的原文，本層不處理
-	fonts      map[int]*dialogFont
-	woodcut    map[string]woodcutTitle // 規格038：經原檔指紋驗證的事件標題。
-	portRoles  map[string]map[string]bool
-	viewTribes map[string]bool // 規格038：指定NAMES版本的原住民主名稱。
+	woodcutPlan func(string, string, image.Rectangle, image.Rectangle, int) (*image.Alpha, *image.Alpha, *image.Alpha, int)
+	dlg         *dialogCatalog    // 定稿術語、NAMES 對照與逐行模板（規格035／036）
+	frags       map[string]string // 片段字典：英文→中文；衝突者為空字串（視為查無）
+	phrases     displayPhrases
+	templates   []stringTemplate
+	colony      map[string]string // COLONY.TXT 預設名→「中文（原名）」
+	people      map[string]bool   // 目標170：NAMES.TXT @LEADERNAME 的元首名（玩家可改名，顯示原名）
+	owned       map[string]bool   // 專屬欄位已處理的原文，本層不處理
+	fonts       map[int]*dialogFont
+	woodcut     map[string]woodcutTitle // 規格038：經原檔指紋驗證的事件標題。
+	portRoles   map[string]map[string]bool
+	viewTribes  map[string]bool // 規格038：指定NAMES版本的原住民主名稱。
 
 	customModerate string // 規格038 READY：只供自訂頁既有Moderate譯文。
 	routeLand      string // 規格038 READY：只供已驗第一路線Land欄。
@@ -1860,7 +1861,13 @@ func (s *stringRuntime) finishWoodcut(r *stringRun, ink image.Rectangle, capH in
 			return nil, "woodcut-source-changed"
 		}
 	}
-	sh, n, ac, size := s.cat.woodcutMasks(title.zh, ink, safe, capH)
+	var sh, n, ac *image.Alpha
+	var size int
+	if s.cat.woodcutPlan != nil {
+		sh, n, ac, size = s.cat.woodcutPlan(title.id, title.zh, ink, safe, capH)
+	} else {
+		sh, n, ac, size = s.cat.woodcutMasks(title.zh, ink, safe, capH)
+	}
 	if n == nil {
 		return nil, "does-not-fit"
 	}

@@ -21037,8 +21037,9 @@
       },
       "verification": {
         "state": "READY",
-        "ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b",
-        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog"
+        "ready_review_sha256": "6e81a242583fd414176157aa741994626b49f6a6d09104a75fe5abf853c5c65e",
+        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog",
+        "initial_ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b"
       }
     },
     "nameplat-001.png": {
@@ -21124,8 +21125,9 @@
       },
       "verification": {
         "state": "READY",
-        "ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b",
-        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog"
+        "ready_review_sha256": "6e81a242583fd414176157aa741994626b49f6a6d09104a75fe5abf853c5c65e",
+        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog",
+        "initial_ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b"
       }
     },
     "nameplat-002.png": {
@@ -21211,8 +21213,9 @@
       },
       "verification": {
         "state": "READY",
-        "ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b",
-        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog"
+        "ready_review_sha256": "6e81a242583fd414176157aa741994626b49f6a6d09104a75fe5abf853c5c65e",
+        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog",
+        "initial_ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b"
       }
     },
     "wdcut01-000.png": {
@@ -21298,8 +21301,9 @@
       },
       "verification": {
         "state": "READY",
-        "ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b",
-        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog"
+        "ready_review_sha256": "6e81a242583fd414176157aa741994626b49f6a6d09104a75fe5abf853c5c65e",
+        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog",
+        "initial_ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b"
       }
     },
     "wdcut03-000.png": {
@@ -21385,8 +21389,9 @@
       },
       "verification": {
         "state": "READY",
-        "ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b",
-        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog"
+        "ready_review_sha256": "6e81a242583fd414176157aa741994626b49f6a6d09104a75fe5abf853c5c65e",
+        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog",
+        "initial_ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b"
       }
     },
     "wdcut07-000.png": {
@@ -21472,8 +21477,9 @@
       },
       "verification": {
         "state": "READY",
-        "ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b",
-        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog"
+        "ready_review_sha256": "6e81a242583fd414176157aa741994626b49f6a6d09104a75fe5abf853c5c65e",
+        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog",
+        "initial_ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b"
       }
     },
     "woodfram-000.png": {
@@ -21559,8 +21565,9 @@
       },
       "verification": {
         "state": "READY",
-        "ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b",
-        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog"
+        "ready_review_sha256": "6e81a242583fd414176157aa741994626b49f6a6d09104a75fe5abf853c5c65e",
+        "formal_GUI_conformance": "tracked separately by spec069 R97 and the formal source catalog",
+        "initial_ready_review_sha256": "49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b"
       }
     }
   }

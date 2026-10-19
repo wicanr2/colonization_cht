@@ -7158,3 +7158,11 @@ confirmed：原版正常96筆操作、45個完整0D46呼叫與12點完整控制�
 0D46:0181／01B4／01D2寫入相同Main，原版會將ES由2CAE正規化為33AE，DS仍等於編碼來源，SI在來源編碼範圍。完整呼叫最大684745步，回傳121D:1554、SP增加10，透明區與矩形外不變。r97-original-Main-segments-r1.json與r97-full-normal-r3/observed保留原始碼、完整指紋及側錄。獨立Main模型3393863筆，撤銷148576、同值150、字模底圖1737、游標覆蓋／還原各432。其他十張事件圖的正常玩家來源仍未知；生成候選不補此項證據。
 
 READY審查49757e6954d0a1f7ab0e340a7bab9633b1de540e693d6c1b71eb338ace1bd99b，原型244具名通過。局部fixture關閉IRQ，因其沒有PIT／PIC狀態，不授予硬體或正常玩家路徑信用；完整正常原版重播仍核對旗標與週期。正式GUI、音畫與來源索引尚待。
+
+### 2026-10-19 R97當次IRQ與Noto欄位勘誤
+
+confirmed：當次38筆輸入ceed5e654ea63ab560a6b89de9691f2365137bf65169c47a543c78760e9965cf，四個完整原版點與控制／GUI及存檔相同。原版17次完整呼叫，WDCUT01 Main本身完整且DS／SI／ES:BX零失配。探針r97-current-partial-source-r2來源3bc26f8980762c677ad3fc7bf74c7df9132588680f338952a48383955bf2d217，程式44c45d5775391cb58925d875619794702d90d0374ce1a2d9a64888c73943afeb。
+
+原診斷檔r97-outside-Main-writes.json依OpAddr命名，不表示真正由D46圖像指令寫出。十二byte是兩個IRQ的SS:SP堆疊框，含FLAGS7293、CS0D46、下一IP01D5；OpAddr滯留0D46:01D2。實際ES:BX仍指Main。隔離dosgolem82a14b2的Machine.Step／CPU.Interrupt原碼及完整指紋納入修正審查，沒有修改執行器。新守門以有效目的地區分；原始側錄及初版錯誤結論保留，勘誤見[規格069](docs/spec/069-hd-menu-background-and-textures.md#r97修正ready中斷寫入定位與三個noto標題)。
+
+Noto十二欄逐字實際alpha確認原共用CJK頂端不適合這些標題；原版墨跡7高、安全區9高與三色浮雕不變。僅調整這三個已驗來源的字模量測，28px為十一欄、韓文首欄29px；基線均685。366具名原型項及893376個獨立alpha通過，修正READY審查6e81a242583fd414176157aa741994626b49f6a6d09104a75fe5abf853c5c65e。未授予正常GUI或全量HD完成。
