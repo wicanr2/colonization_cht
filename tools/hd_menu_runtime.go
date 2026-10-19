@@ -408,6 +408,9 @@ func (h *hdRuntime) base(f draftNativeFrame) (*image.RGBA, map[string]any) {
 		group["prototype"] = false
 		record["parch"] = group
 	}
+	if h.terrainTextures != nil && record["reason"] != "unverified-cursor-or-native-surface" {
+		record["terrain_texture"] = h.terrainTextures.paint(out, f)
+	}
 	if h.newGame != nil && record["reason"] != "unverified-cursor-or-native-surface" {
 		record["new_game_picture"] = h.newGame.paint(out, f)
 	}

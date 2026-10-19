@@ -17320,6 +17320,656 @@
         "private_RGBA_audit_sha256": "2324ebd68af626deeec3d126c721f5356aa577b9f36b5b5175036e116989c7d3",
         "formal_GUI_conformance": "pending"
       }
+    },
+    "terrain-texture-000.png": {
+      "sha256": "1cef0ad5f9c5fca566f10f23f6b92e28bc169c515615ebad2868dc93812ef1f2",
+      "bytes": 1670894,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "opaque material; paint only verified live source cells",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "native_ordinal": 0,
+      "native_size": [
+        16,
+        16
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "generation_prompt": "Use case: stylized-concept. Asset type: one opaque seamless square top-down ground texture for the authorized HD display layer of a 1994 strategy game, native TERRAIN.SS frame 0. Image 1 is the exact original 16 by 16 pixel tile enlarged without smoothing: preserve its palette, broad color placement, texture identity and flat top-down viewpoint. Image 2 is the user-approved fine pixel-art style: borrow only its small square pixel clusters and material detail, not its buildings, people, trees, fences or scenery. Redraw image 1 as pale gray-white stony patches interspersed through muted yellow-green low ground. The target display is a 64 by 64 pixel tile, so use crisp small readable pixel clusters and restrained texture detail. Fill the entire square with this same flat repeating material, with seamless edges and no lighting gradient or artificial border. No perspective, horizon, landscape scene, discrete objects, text, icons, grid, vignette, bevel, shadow, glow, blur, photorealism or 3D rendering. Keep the reference's relative color balance and avoid inventing distinct features absent from it. Return one fully opaque square PNG texture, not a sheet or multiple options.",
+      "reference_sha256": {
+        "native": "b67bc875996e6d3332816677e3e12689d493ff6cab6ba963709757a5f285765b",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "TERRAIN.SS": "a6de9353f2240c214051820369abacf3bb82affbb4736a89c589886fb306f4b6",
+        "encoded_frame_sha256": "ed5d9cbfa7e43eefebc36f6380805b1c6fa67a4169ce82b1dc68e95c5d822d63"
+      },
+      "source_write_sha256": "47d9c6cf0b02303031b114585827bb6d020428ac4ab86fb66a96cb50bf4d437e",
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "be2c3b3c15397348ad530a1af88a39aa8a8fffc2f046f6266d51cd48e6234220",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "terrain-texture-001.png": {
+      "sha256": "ec509b042efc8d561bd975460b7f3183fcfffa0aa20979417f7d5b8ec490d2fd",
+      "bytes": 1379064,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "opaque material; paint only verified live source cells",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "native_ordinal": 1,
+      "native_size": [
+        16,
+        16
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "generation_prompt": "Use case: stylized-concept. Asset type: one opaque seamless square top-down ground texture for the authorized HD display layer of a 1994 strategy game, native TERRAIN.SS frame 1. Image 1 is the exact original 16 by 16 pixel tile enlarged without smoothing: preserve its palette, broad color placement, texture identity and flat top-down viewpoint. Image 2 is the user-approved fine pixel-art style: borrow only its small square pixel clusters and material detail, not its buildings, people, trees, fences or scenery. Redraw image 1 as uniform warm beige sand and fine dusty desert grit, with the same quiet diagonal mottling. The target display is a 64 by 64 pixel tile, so use crisp small readable pixel clusters and restrained texture detail. Fill the entire square with this same flat repeating material, with seamless edges and no lighting gradient or artificial border. No perspective, horizon, landscape scene, discrete objects, text, icons, grid, vignette, bevel, shadow, glow, blur, photorealism or 3D rendering. Keep the reference's relative color balance and avoid inventing distinct features absent from it. Return one fully opaque square PNG texture, not a sheet or multiple options.",
+      "reference_sha256": {
+        "native": "b250398a724003cd3e76811d8f21e47b5e809cf2c821da5254c94647e9ac8924",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "TERRAIN.SS": "a6de9353f2240c214051820369abacf3bb82affbb4736a89c589886fb306f4b6",
+        "encoded_frame_sha256": "f10e6db013b36cee8c4f51734179072caa1c700f42dae9f403d7ac91b084072f"
+      },
+      "source_write_sha256": "9a38b8c07104e1508639369db9d0018a54415d4fcd1cfbffde9179114c48114b",
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "be2c3b3c15397348ad530a1af88a39aa8a8fffc2f046f6266d51cd48e6234220",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "terrain-texture-002.png": {
+      "sha256": "0ec35827e02d910b63218b2b3d8ac46618d45984ba47a790fcd19813b30069ea",
+      "bytes": 1482439,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "opaque material; paint only verified live source cells",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "native_ordinal": 2,
+      "native_size": [
+        16,
+        16
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "generation_prompt": "Use case: stylized-concept. Asset type: one opaque seamless square top-down ground texture for the authorized HD display layer of a 1994 strategy game, native TERRAIN.SS frame 2. Image 1 is the exact original 16 by 16 pixel tile enlarged without smoothing: preserve its palette, broad color placement, texture identity and flat top-down viewpoint. Image 2 is the user-approved fine pixel-art style: borrow only its small square pixel clusters and material detail, not its buildings, people, trees, fences or scenery. Redraw image 1 as muted olive green and brown mottled ground, with irregular earthy patches. The target display is a 64 by 64 pixel tile, so use crisp small readable pixel clusters and restrained texture detail. Fill the entire square with this same flat repeating material, with seamless edges and no lighting gradient or artificial border. No perspective, horizon, landscape scene, discrete objects, text, icons, grid, vignette, bevel, shadow, glow, blur, photorealism or 3D rendering. Keep the reference's relative color balance and avoid inventing distinct features absent from it. Return one fully opaque square PNG texture, not a sheet or multiple options.",
+      "reference_sha256": {
+        "native": "139f85c5d31989952172b1d6153f873c99abc04deaff1a74281a389cddac0fa5",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "TERRAIN.SS": "a6de9353f2240c214051820369abacf3bb82affbb4736a89c589886fb306f4b6",
+        "encoded_frame_sha256": "4eaa72647cd4cde516a12c68fbe23a469ee58f5465e6acd1dff6e2ee67b6304c"
+      },
+      "source_write_sha256": "00d0940673be8f01eab55d097a6a25d058a4d64eb54c7d73f69ddd5d125dc88c",
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "be2c3b3c15397348ad530a1af88a39aa8a8fffc2f046f6266d51cd48e6234220",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "terrain-texture-003.png": {
+      "sha256": "19bd3b79998db01e26cb8d36bfc8549a23381281436f544d4cc6147a55401944",
+      "bytes": 1492802,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "opaque material; paint only verified live source cells",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "native_ordinal": 3,
+      "native_size": [
+        16,
+        16
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "generation_prompt": "Use case: stylized-concept. Asset type: one opaque seamless square top-down ground texture for the authorized HD display layer of a 1994 strategy game, native TERRAIN.SS frame 3. Image 1 is the exact original 16 by 16 pixel tile enlarged without smoothing: preserve its palette, broad color placement, texture identity and flat top-down viewpoint. Image 2 is the user-approved fine pixel-art style: borrow only its small square pixel clusters and material detail, not its buildings, people, trees, fences or scenery. Redraw image 1 as yellow-green dry grass with the same softly irregular lighter and darker clumps. The target display is a 64 by 64 pixel tile, so use crisp small readable pixel clusters and restrained texture detail. Fill the entire square with this same flat repeating material, with seamless edges and no lighting gradient or artificial border. No perspective, horizon, landscape scene, discrete objects, text, icons, grid, vignette, bevel, shadow, glow, blur, photorealism or 3D rendering. Keep the reference's relative color balance and avoid inventing distinct features absent from it. Return one fully opaque square PNG texture, not a sheet or multiple options.",
+      "reference_sha256": {
+        "native": "2ecf50fc2480fa81be751e2a7e3b6e1759daf256f881310b98324bc96777a5a6",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "TERRAIN.SS": "a6de9353f2240c214051820369abacf3bb82affbb4736a89c589886fb306f4b6",
+        "encoded_frame_sha256": "1a533ec3e6e6aa8024b6b244316628ef6cf9c0cb3b657fa23796aa5cf1201f9c"
+      },
+      "source_write_sha256": "10c6c218ed80c61683f0fce7be0a2d5d2547df542daa193c6c57d1503d29bd0a",
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "be2c3b3c15397348ad530a1af88a39aa8a8fffc2f046f6266d51cd48e6234220",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "terrain-texture-004.png": {
+      "sha256": "7eb28c6927c45c8cf316e894876afc90d578532ad185ec5072699eac898345c7",
+      "bytes": 1592950,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "opaque material; paint only verified live source cells",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "native_ordinal": 4,
+      "native_size": [
+        16,
+        16
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "generation_prompt": "Use case: stylized-concept. Asset type: one opaque seamless square top-down ground texture for the authorized HD display layer of a 1994 strategy game, native TERRAIN.SS frame 4. Image 1 is the exact original 16 by 16 pixel tile enlarged without smoothing: preserve its palette, broad color placement, texture identity and flat top-down viewpoint. Image 2 is the user-approved fine pixel-art style: borrow only its small square pixel clusters and material detail, not its buildings, people, trees, fences or scenery. Redraw image 1 as dense rich darker green short grass, with the same scattered medium-green patches. The target display is a 64 by 64 pixel tile, so use crisp small readable pixel clusters and restrained texture detail. Fill the entire square with this same flat repeating material, with seamless edges and no lighting gradient or artificial border. No perspective, horizon, landscape scene, discrete objects, text, icons, grid, vignette, bevel, shadow, glow, blur, photorealism or 3D rendering. Keep the reference's relative color balance and avoid inventing distinct features absent from it. Return one fully opaque square PNG texture, not a sheet or multiple options.",
+      "reference_sha256": {
+        "native": "4064ac061ab217246d5dbdeade824a02e884ece94049eb157f9f9d6d24b2f6c1",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "TERRAIN.SS": "a6de9353f2240c214051820369abacf3bb82affbb4736a89c589886fb306f4b6",
+        "encoded_frame_sha256": "667b4eb15dba94d017a44f794e114539fbae6c9e4a18478ed1d170243e88e1a9"
+      },
+      "source_write_sha256": "7c85011b7433dc24dad41325687ee853da25a9a5df8fd79d0780677408ef63f0",
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "be2c3b3c15397348ad530a1af88a39aa8a8fffc2f046f6266d51cd48e6234220",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "terrain-texture-005.png": {
+      "sha256": "aed5b8739b8aae9bede8e3b24fb99b0984c1683a3c450648ed111f6016198fb4",
+      "bytes": 1459130,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "opaque material; paint only verified live source cells",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "native_ordinal": 5,
+      "native_size": [
+        16,
+        16
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "generation_prompt": "Use case: stylized-concept. Asset type: one opaque seamless square top-down ground texture for the authorized HD display layer of a 1994 strategy game, native TERRAIN.SS frame 5. Image 1 is the exact original 16 by 16 pixel tile enlarged without smoothing: preserve its palette, broad color placement, texture identity and flat top-down viewpoint. Image 2 is the user-approved fine pixel-art style: borrow only its small square pixel clusters and material detail, not its buildings, people, trees, fences or scenery. Redraw image 1 as fresh medium green grass with pale green scattered flecks, matching the reference's overall green tones. The target display is a 64 by 64 pixel tile, so use crisp small readable pixel clusters and restrained texture detail. Fill the entire square with this same flat repeating material, with seamless edges and no lighting gradient or artificial border. No perspective, horizon, landscape scene, discrete objects, text, icons, grid, vignette, bevel, shadow, glow, blur, photorealism or 3D rendering. Keep the reference's relative color balance and avoid inventing distinct features absent from it. Return one fully opaque square PNG texture, not a sheet or multiple options.",
+      "reference_sha256": {
+        "native": "f7623e9016f48adf0e36bbcd38a31d1497d82968faa999403766b389b8b212b9",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "TERRAIN.SS": "a6de9353f2240c214051820369abacf3bb82affbb4736a89c589886fb306f4b6",
+        "encoded_frame_sha256": "170af1db639c412cdb55610054c1156f68b221fc7765e3d9dc2fed3c7a021a89"
+      },
+      "source_write_sha256": "acbab4fb11c433822e41d37a0a96347bc1fea64602f80dadb0b6338e79f5366e",
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "be2c3b3c15397348ad530a1af88a39aa8a8fffc2f046f6266d51cd48e6234220",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "terrain-texture-006.png": {
+      "sha256": "a06bd0f8d717c68589ff2be53d11b488ba886b768509c989013b8ceca9010621",
+      "bytes": 1682468,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "opaque material; paint only verified live source cells",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "native_ordinal": 6,
+      "native_size": [
+        16,
+        16
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "generation_prompt": "Use case: stylized-concept. Asset type: one opaque seamless square top-down ground texture for the authorized HD display layer of a 1994 strategy game, native TERRAIN.SS frame 6. Image 1 is the exact original 16 by 16 pixel tile enlarged without smoothing: preserve its palette, broad color placement, texture identity and flat top-down viewpoint. Image 2 is the user-approved fine pixel-art style: borrow only its small square pixel clusters and material detail, not its buildings, people, trees, fences or scenery. Redraw image 1 as swampy olive ground broken up by small dark blue water patches, preserving the reference's spatial arrangement. The target display is a 64 by 64 pixel tile, so use crisp small readable pixel clusters and restrained texture detail. Fill the entire square with this same flat repeating material, with seamless edges and no lighting gradient or artificial border. No perspective, horizon, landscape scene, discrete objects, text, icons, grid, vignette, bevel, shadow, glow, blur, photorealism or 3D rendering. Keep the reference's relative color balance and avoid inventing distinct features absent from it. Return one fully opaque square PNG texture, not a sheet or multiple options.",
+      "reference_sha256": {
+        "native": "d4da4528e61a8412d800d56c3e0613e1d63dd3c9810736848a6e260203d4691b",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "TERRAIN.SS": "a6de9353f2240c214051820369abacf3bb82affbb4736a89c589886fb306f4b6",
+        "encoded_frame_sha256": "b6f66241a7d235c9491f3979080d93a5b05f590ae7d9685676906c1e89f85125"
+      },
+      "source_write_sha256": "39882639fb4bb170ea128005f09d810f456eabdbed95e959ad113d9f024f97bf",
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "be2c3b3c15397348ad530a1af88a39aa8a8fffc2f046f6266d51cd48e6234220",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "terrain-texture-007.png": {
+      "sha256": "5139e0ac0f4d9373fc2ac98d66379a5fea9cc01a4e9e6fe5291455f6e3a7dcbf",
+      "bytes": 1666334,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "opaque material; paint only verified live source cells",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "native_ordinal": 7,
+      "native_size": [
+        16,
+        16
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "generation_prompt": "Use case: stylized-concept. Asset type: one opaque seamless square top-down ground texture for the authorized HD display layer of a 1994 strategy game, native TERRAIN.SS frame 7. Image 1 is the exact original 16 by 16 pixel tile enlarged without smoothing: preserve its palette, broad color placement, texture identity and flat top-down viewpoint. Image 2 is the user-approved fine pixel-art style: borrow only its small square pixel clusters and material detail, not its buildings, people, trees, fences or scenery. Redraw image 1 as deep green marsh ground crossed by branching wider dark blue channels in the reference's arrangement. The target display is a 64 by 64 pixel tile, so use crisp small readable pixel clusters and restrained texture detail. Fill the entire square with this same flat repeating material, with seamless edges and no lighting gradient or artificial border. No perspective, horizon, landscape scene, discrete objects, text, icons, grid, vignette, bevel, shadow, glow, blur, photorealism or 3D rendering. Keep the reference's relative color balance and avoid inventing distinct features absent from it. Return one fully opaque square PNG texture, not a sheet or multiple options.",
+      "reference_sha256": {
+        "native": "60f5496c324dffb7913cc2676080ee4564397f0b498ef98969473ec04c74374e",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "TERRAIN.SS": "a6de9353f2240c214051820369abacf3bb82affbb4736a89c589886fb306f4b6",
+        "encoded_frame_sha256": "e5157406d74b0a8077f8b5f92b26cace67b3f233d17e0f747f242acb9257d6ce"
+      },
+      "source_write_sha256": "fdd51a7b5fe1ecf266823141ef7ed52b99147a21339aeaf1f750961b5ed71674",
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "be2c3b3c15397348ad530a1af88a39aa8a8fffc2f046f6266d51cd48e6234220",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "terrain-texture-008.png": {
+      "sha256": "ace86713539fbc3071393d5bae9719bd9bcc4352e04008b55d33b88f57f38eb2",
+      "bytes": 1542745,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "opaque material; paint only verified live source cells",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "native_ordinal": 8,
+      "native_size": [
+        16,
+        16
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "generation_prompt": "Use case: stylized-concept. Asset type: one opaque seamless square top-down ground texture for the authorized HD display layer of a 1994 strategy game, native TERRAIN.SS frame 8. Image 1 is the exact original 16 by 16 pixel tile enlarged without smoothing: preserve its palette, broad color placement, texture identity and flat top-down viewpoint. Image 2 is the user-approved fine pixel-art style: borrow only its small square pixel clusters and material detail, not its buildings, people, trees, fences or scenery. Redraw image 1 as warm tan-beige dry ground with sparse olive grass patches, preserving the reference's placement and colors. The target display is a 64 by 64 pixel tile, so use crisp small readable pixel clusters and restrained texture detail. Fill the entire square with this same flat repeating material, with seamless edges and no lighting gradient or artificial border. No perspective, horizon, landscape scene, discrete objects, text, icons, grid, vignette, bevel, shadow, glow, blur, photorealism or 3D rendering. Keep the reference's relative color balance and avoid inventing distinct features absent from it. Return one fully opaque square PNG texture, not a sheet or multiple options.",
+      "reference_sha256": {
+        "native": "e0ad953cecd009d0199bf4a3cbb513735c6c94dc2d0526f9b58a7ec128f8f9f9",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "TERRAIN.SS": "a6de9353f2240c214051820369abacf3bb82affbb4736a89c589886fb306f4b6",
+        "encoded_frame_sha256": "dd5f241fce90f5c411bc58145db18bc5d1a5348f5eddac5a6f4ba5591bcd0c78"
+      },
+      "source_write_sha256": "907a004630ab11d3e3df1654cda16ebf77b0ce7570dfb9b4d087ec7c4c1968dd",
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "be2c3b3c15397348ad530a1af88a39aa8a8fffc2f046f6266d51cd48e6234220",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "terrain-texture-009.png": {
+      "sha256": "70d84cba2a017956e75114222aab68201c91595aea5519fcc424ea1d3d372f08",
+      "bytes": 1389283,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "opaque material; paint only verified live source cells",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "native_ordinal": 9,
+      "native_size": [
+        16,
+        16
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "generation_prompt": "Use case: stylized-concept. Asset type: one opaque seamless square top-down ground texture for the authorized HD display layer of a 1994 strategy game, native TERRAIN.SS frame 9. Image 1 is the exact original 16 by 16 pixel tile enlarged without smoothing: preserve its palette, broad color placement, texture identity and flat top-down viewpoint. Image 2 is the user-approved fine pixel-art style: borrow only its small square pixel clusters and material detail, not its buildings, people, trees, fences or scenery. Redraw image 1 as nearly white snow and ice with small pale blue and gray patches in the original arrangement. The target display is a 64 by 64 pixel tile, so use crisp small readable pixel clusters and restrained texture detail. Fill the entire square with this same flat repeating material, with seamless edges and no lighting gradient or artificial border. No perspective, horizon, landscape scene, discrete objects, text, icons, grid, vignette, bevel, shadow, glow, blur, photorealism or 3D rendering. Keep the reference's relative color balance and avoid inventing distinct features absent from it. Return one fully opaque square PNG texture, not a sheet or multiple options.",
+      "reference_sha256": {
+        "native": "44113e2de10f771ac56f6bdf6c001269650c4c5f0a75b4e5068909a7d589d005",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "TERRAIN.SS": "a6de9353f2240c214051820369abacf3bb82affbb4736a89c589886fb306f4b6",
+        "encoded_frame_sha256": "f693ae1bf22b6f67681581a29448ad07c481c228d4bbb766e4ab760ffabd46c0"
+      },
+      "source_write_sha256": "13711106027d06d76d29347fc868467cad0028efa048e2b8f04db638a2aa95dd",
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "be2c3b3c15397348ad530a1af88a39aa8a8fffc2f046f6266d51cd48e6234220",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "terrain-texture-010.png": {
+      "sha256": "b99151ec34ca369beb34fa41e8fbea3fed582f37b078f3528c955380522c7386",
+      "bytes": 1367840,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "opaque material; paint only verified live source cells",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "native_ordinal": 10,
+      "native_size": [
+        16,
+        16
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "generation_prompt": "Use case: stylized-concept. Asset type: one opaque seamless square top-down ground texture for the authorized HD display layer of a 1994 strategy game, native TERRAIN.SS frame 10. Image 1 is the exact original 16 by 16 pixel tile enlarged without smoothing: preserve its palette, broad color placement, texture identity and flat top-down viewpoint. Image 2 is the user-approved fine pixel-art style: borrow only its small square pixel clusters and material detail, not its buildings, people, trees, fences or scenery. Redraw image 1 as deep blue ocean water with subtle medium blue mottling and tiny restrained wave clusters. The target display is a 64 by 64 pixel tile, so use crisp small readable pixel clusters and restrained texture detail. Fill the entire square with this same flat repeating material, with seamless edges and no lighting gradient or artificial border. No perspective, horizon, landscape scene, discrete objects, text, icons, grid, vignette, bevel, shadow, glow, blur, photorealism or 3D rendering. Keep the reference's relative color balance and avoid inventing distinct features absent from it. Return one fully opaque square PNG texture, not a sheet or multiple options.",
+      "reference_sha256": {
+        "native": "353117975e517c99cebc9de1a6ffd14f1c0304d62e01fb90caee924c1cfac4dc",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "TERRAIN.SS": "a6de9353f2240c214051820369abacf3bb82affbb4736a89c589886fb306f4b6",
+        "encoded_frame_sha256": "0bec812397cf73ec88ef03ebd8d53429efa2dbc4415189420e0e99a3bc819d23"
+      },
+      "source_write_sha256": "00caa20eb7bed62b7bb4d67fdedbdde3b75dadd30ee4dba699874438de970110",
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "be2c3b3c15397348ad530a1af88a39aa8a8fffc2f046f6266d51cd48e6234220",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "terrain-texture-011.png": {
+      "sha256": "2fbd9b54cff243599b43d441b154da5d1d85aefd2d7cabe0d6e54150c474c562",
+      "bytes": 1407419,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "target_size": [
+        64,
+        64
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "opaque material; paint only verified live source cells",
+      "spec": "docs/spec/071-hd-terrain-texture-tiles.md",
+      "native_ordinal": 11,
+      "native_size": [
+        16,
+        16
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "generation_prompt": "Use case: stylized-concept. Asset type: one opaque seamless square top-down ground texture for the authorized HD display layer of a 1994 strategy game, native TERRAIN.SS frame 11. Image 1 is the exact original 16 by 16 pixel tile enlarged without smoothing: preserve its palette, broad color placement, texture identity and flat top-down viewpoint. Image 2 is the user-approved fine pixel-art style: borrow only its small square pixel clusters and material detail, not its buildings, people, trees, fences or scenery. Redraw image 1 as deep blue ocean water with the second reference variant's medium-blue patches and quiet wave texture. The target display is a 64 by 64 pixel tile, so use crisp small readable pixel clusters and restrained texture detail. Fill the entire square with this same flat repeating material, with seamless edges and no lighting gradient or artificial border. No perspective, horizon, landscape scene, discrete objects, text, icons, grid, vignette, bevel, shadow, glow, blur, photorealism or 3D rendering. Keep the reference's relative color balance and avoid inventing distinct features absent from it. Return one fully opaque square PNG texture, not a sheet or multiple options.",
+      "reference_sha256": {
+        "native": "8c429837154657fd37f34235691347b4b077483de8afad912efd95fff81ef532",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "TERRAIN.SS": "a6de9353f2240c214051820369abacf3bb82affbb4736a89c589886fb306f4b6",
+        "encoded_frame_sha256": "8570842ee326bec0219f69b162a9b2c29f371abd4531d310a7e10d7274899611"
+      },
+      "source_write_sha256": "fb28d6d03ff607cb1b776cd46f3cfb8cc44b4d4b2783df7d5ddddff2a286184f",
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "be2c3b3c15397348ad530a1af88a39aa8a8fffc2f046f6266d51cd48e6234220",
+        "formal_GUI_conformance": "pending"
+      }
+    },
+    "icons-054.png": {
+      "sha256": "0abb719aa0518b9ef295d8b9a7aa865105dfb1b1facd9333a6a8c06e0955868a",
+      "bytes": 807353,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "target_size": [
+        32,
+        48
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "preserve original PNG alpha; clip to verified native opaque cells",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "native_ordinal": 54,
+      "native_size": [
+        8,
+        12
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        8,
+        12
+      ],
+      "sample_rect": [
+        155,
+        316,
+        871,
+        1306
+      ],
+      "generation_prompt": "Use case: stylized-concept. Asset type: one isolated fine-pixel-art construction hammer sprite with true transparency, final use 32 by 48 pixels. Image 1 is the exact native hammer reference; it fixes all proportions, silhouette and orientation. Image 2 fixes only the approved fine pixel-art material style. Recreate only this single tool: a long straight vertical brown wooden handle under a short horizontal gray iron head. CRITICAL: the hammer head must have a broad almost flat upper edge like image 1; absolutely no vertical metal stem, spike, shaft, knob or extra protrusion rising above the horizontal head. Preserve the source's slight lower-left projection. The head occupies approximately the upper third of the opaque tool height and spans almost the full opaque width. Use crisp, sharp stepped square pixel clusters, restrained iron highlights, warm dark wood grain and a narrow dark outline. Keep the background completely transparent with zero haze, halo, glow, cast shadow, blur, translucent cloud or edge fog. Add no objects, backdrop, ground, text or watermark. Center the complete hammer in a 2:3 portrait canvas with generous transparent padding. Do not crop the tool.",
+      "reference_sha256": {
+        "native": "dd734f471512ffba5c6ef97fdcf95aaa5d12242f766f9c42d425647f88471513",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated display redraw under RRSAL-1.0; original reference pixels remain private",
+      "original_binding": {
+        "VICEROY.EXE": "a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3",
+        "ICONS.SS": "a8a21f052d2e6c9ede34a6cb254b05f2036322031f7ab0ccb0859adf9b6e0716",
+        "encoded_frame_sha256": "9a9f9912a1569b2444c4403bb61eba45573247a9a4494840cfdafeca7466d121"
+      },
+      "source_write_sha256": "6d1570f488b88b3e63ceef6eaf5c503be8889db1f26cd6c87bdabb7dab2d757a",
+      "verification": {
+        "state": "READY",
+        "ready_review_sha256": "be2c3b3c15397348ad530a1af88a39aa8a8fffc2f046f6266d51cd48e6234220",
+        "formal_GUI_conformance": "pending"
+      }
     }
   }
 }

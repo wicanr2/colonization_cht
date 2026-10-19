@@ -165,6 +165,7 @@ def attach_language_runtime(repo, output, reference, *, with_rebuild=True, forma
                          "tools/hd_small_terrain_runtime.go", "tools/hd_small_terrain_sources.go",
                          "tools/hd_small_terrain_runtime_test.go",
                          "tools/hd_menu_runtime.go", "tools/hd_menu_runtime_test.go",
+                         "tools/hd_terrain_texture_runtime.go", "tools/hd_terrain_texture_runtime_test.go",
                          "tools/hd_new_game_runtime.go", "tools/hd_new_game_sources.go",
                          "tools/hd_new_game_runtime_test.go", "tools/hd_custom_world_runtime_test.go",
                          "tools/hd_scene_background_runtime.go", "tools/hd_scene_background_sources.go",

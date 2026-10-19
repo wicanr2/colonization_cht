@@ -126,6 +126,11 @@ func loadHDRuntime(m *golem.Machine, game, directory string) (*hdRuntime, error)
 	if err != nil {
 		return nil, err
 	}
+	h.terrainTextures, err = loadHDTerrainTextureRuntime(h, game, directory)
+	if err != nil {
+		return nil, err
+	}
+
 	h.smallTerrain, err = loadHDSmallTerrainRuntime(h, game, directory)
 	if err != nil {
 		return nil, err
@@ -170,7 +175,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "1439ee4c2a8554768e1b0b28ec55a687c2289c18d2aca60529fc87dbb02c2ce7"
+const hdManifestSHA = "08736432e3c09a48273f3936dafade98ca4d4be8d2df34f617b87ddbdb48243b"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"
@@ -183,10 +188,11 @@ type hdBuildingPixel struct {
 	cursorIndex int
 }
 type hdRuntime struct {
-	opening *hdOpeningRuntime
-	royal   *hdRoyalRuntime
-	scenes  *hdSceneRuntime
-	newGame *hdNewGameRuntime
+	terrainTextures *hdTerrainTextureRuntime
+	opening         *hdOpeningRuntime
+	royal           *hdRoyalRuntime
+	scenes          *hdSceneRuntime
+	newGame         *hdNewGameRuntime
 
 	parch                                            *hdTextureRuntime
 	worldTexture                                     *hdTextureRuntime
@@ -277,6 +283,7 @@ func (h *hdRuntime) beforeInstruction() {
 	h.texture.beforeInstruction()
 	h.worldTexture.beforeInstruction()
 	h.parch.beforeInstruction()
+	h.terrainTextures.beforeInstruction()
 	h.person.beforeInstruction()
 	h.shelter.beforeInstruction()
 	h.nine.beforeInstruction()
@@ -556,10 +563,17 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 			}
 		}
 	}
+	if hd["reason"] == "unverified-cursor-or-native-surface" && b.hd.terrainTextures != nil {
+		hd["published_terrain_texture"] = b.hd.terrainTextures.paintPublished(base, f)
+	}
 	if b.hd.royal != nil {
 		hd["royal"] = b.hd.royal.paint(base, f)
 	}
 	var hdBG draftHDBackground
+	terrainBGMask := make([]byte, 8000)
+	terrainBGPainted := 0
+	publishedTerrainBGMask := make([]byte, 8000)
+	publishedTerrainBGPainted := 0
 	bgMask := make([]byte, 8000)
 	bgPainted := 0
 	worldBGMask := make([]byte, 8000)
@@ -572,8 +586,13 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 	sceneBGPainted := 0
 	publishedBGMask := make([]byte, 8000)
 	publishedBGPainted := 0
-	if hd["reason"] != "unverified-cursor-or-native-surface" && ((b.hd.scenes != nil) || (b.hd.newGame != nil && b.hd.newGame.frame != nil) || (b.hd.texture != nil && b.hd.texture.paletteSupported(f.palette)) || (b.hd.worldTexture != nil && b.hd.worldTexture.paletteSupported(f.palette)) || (b.hd.parch != nil && b.hd.parch.paletteSupported(f.palette))) {
+	if hd["reason"] != "unverified-cursor-or-native-surface" && ((b.hd.terrainTextures != nil && b.hd.terrainTextures.paletteSupported(f.palette)) || (b.hd.scenes != nil) || (b.hd.newGame != nil && b.hd.newGame.frame != nil) || (b.hd.texture != nil && b.hd.texture.paletteSupported(f.palette)) || (b.hd.worldTexture != nil && b.hd.worldTexture.paletteSupported(f.palette)) || (b.hd.parch != nil && b.hd.parch.paletteSupported(f.palette))) {
 		hdBG = func(out *image.RGBA, i int, v byte, palette []byte) bool {
+			if b.hd.terrainTextures != nil && b.hd.terrainTextures.paintBackground(out, f, i, v, palette) {
+				terrainBGMask[i>>3] |= 1 << uint(i&7)
+				terrainBGPainted++
+				return true
+			}
 			if b.hd.scenes != nil && b.hd.scenes.paintBackground(out, f, i, v, palette) {
 				sceneBGMask[i>>3] |= 1 << uint(i&7)
 				sceneBGPainted++
@@ -643,6 +662,22 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 					}
 					return false
 				}
+			}
+		}
+	}
+	if hd["reason"] == "unverified-cursor-or-native-surface" && b.hd.terrainTextures != nil {
+		if group, ok := hd["published_terrain_texture"].(map[string]any); ok && group["reason"] == "published-texture-background-only" {
+			previous := hdBG
+			hdBG = func(out *image.RGBA, pos int, value byte, palette []byte) bool {
+				if previous != nil && previous(out, pos, value, palette) {
+					return true
+				}
+				if b.hd.terrainTextures.paintPublishedBackground(out, f, pos, value, palette) {
+					publishedTerrainBGMask[pos>>3] |= 1 << uint(pos&7)
+					publishedTerrainBGPainted++
+					return true
+				}
+				return false
 			}
 		}
 	}
@@ -720,6 +755,9 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 	}
 	hd["native_cursor_text_background_repaints"] = nativeCursorBackgroundPainted
 	hd["native_cursor_text_background_mask"] = nativeCursorBackgroundMask
+
+	hd["terrain_texture_background"] = map[string]any{"painted": terrainBGPainted, "mask": terrainBGMask}
+	hd["published_terrain_texture_background"] = map[string]any{"painted": publishedTerrainBGPainted, "mask": publishedTerrainBGMask}
 	record["hd"] = hd
 	return out, record, nil
 }
@@ -740,6 +778,9 @@ func (h *hdRuntime) key() string {
 	}
 	if h != nil && h.newGame != nil {
 		base = fmt.Sprintf("%s/new-game/%d", base, h.newGame.revision)
+	}
+	if h != nil && h.terrainTextures != nil {
+		base = fmt.Sprintf("%s/terrain-textures/%d", base, h.terrainTextures.revision)
 	}
 	if h != nil && h.parch != nil {
 		base = fmt.Sprintf("%s/parch/%d", base, h.parch.revision)
