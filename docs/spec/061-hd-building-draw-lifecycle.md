@@ -500,3 +500,50 @@ VGA游標覆蓋其中61格，整個游標82格。新抓取驗證實際VGA游標�
 | r91-formal-guards-r3-check.json | 04bb88aa9607a8b9cf4d482d71d9de5af23d481107a11c730b9b0d082a72f06e |
 | r91-package-check-r1.json | f5b9885ff2698fe5e0fab1f76ef473aeaf54c1452db9bb9198fadb46864179da |
 | 舊九來源49點回歸 | 655c03b7c74b669483e180cab75d21a3ebccfedca662f83fb19ee6d2b8dff033 |
+
+### 2026-10-19 R91三十個建築來源限定CONFORMED
+
+confirmed限本頁READY的30個來源、固定原版與正式4059a066…組建，原始碼為888c2df。
+建築核心函式與R90逐byte相同，只有已審查的資料列擴充。第47幀仍未知，不接線。
+
+| 驗收 | 已通過範圍 |
+|---|---|
+| 正常GUI | 159項實拍，30個新來源各英文原圖／HD；0、3、6、19、38五個代表各五語／兩模式，四種非英文各有游標移入與返回；正常換頁、返回列表及關閉百科。 |
+| 當次原版來源 | 154個獨立狀態與控制、GUI全等。25341561筆事件獨立重建78次木紋解碼、1562次完整SS呼叫；含38442次背景同值撤銷及223次SS同值撤銷。 |
+| 完整畫面 | 158張完整RGBA共161792000點、159張X11共162816000點相同，含1134819個建築alpha像素、65745個小圖像alpha像素及400個Noto欄位。預期由當次原版來源、原PNG與綁定字模獨立產生，不取正式輸出作預期。 |
+| 離頁限制 | 最後返回世界的畫面驗X11全等、建築來源與繪製均歸零；繼承海面與地形不在本輪百科獨立畫素模型內。該畫面仍納入完整原版狀態及音訊／存檔重播。 |
+| 三側重播 | 848筆當次GUI輸入至1010800000步，原文控制、原圖模式及正式play=true的CPU、完整RAM、IDX、DAC、WAV、存檔與GUI全等。全部288份原始檔案指紋保持。 |
+| 載入與索引 | 前述十個具名範圍、249檔封裝／97拒絕及舊九來源49點／180反例保持。索引新增30個來源至248連結，其他1522列及舊218連結保持；8種未完成／錯誤審查均拒絕。舊國王分支索引逐byte重生不變。 |
+
+WAV為4339213個立體聲frame、49715Hz、16bit且非靜音，SHA-256
+7992ac70274940a973eea1df786497bbe974efd4f16bddda670e79fce02593e5。
+相同限技術輸出，不增加人耳或硬體逐週期信用。正式PNG、alpha、版本與原版行為保持。
+README新增本輪繁中軍械室實拍，原圖不裁切或重編碼，來源見[截圖清冊](../screenshots/readme-captures.json)。
+
+原版記錄器只省略已驗正向搬運中來源與位元組皆相同的107374867次重複寫入；
+所有來源繪製、字形、游標、未知寫入及同值撤銷仍保留，120M事件上限不變。
+針對性反例另驗同值來源／目的失效、改碼、反向搬運及特殊寫入，不改正式程式。
+首兩個追蹤失敗仍無信用。完整畫素檢查器先後補正百科專用譯表、既有側欄兩像素陰影、
+規格036的百分號跳脫，再由乾淨輸入重跑；不把驗證工具缺項算成產品缺陷。
+
+本機根沿本頁R91目錄。重生入口為capture-r91-building-formal-r2.py、
+run-r91-formal-native-source-r3.py、check-r91-formal-sources-r1.py、
+check-r91-formal-pixels-r4.py、verify-r91-gui-replays-r2.py與make-r91-conformance-r1.py。
+來源索引使用[擴充器](../../tools/extend_hd_story_source_index.py)的--buildings分支，
+--baseline指R90的218連結，--ready及--conformed指本批審查，--assets指graphics，
+--output指定尚不存在的輸出。只接受完整的本批CONFORMED審查。
+
+| 本機收據 | SHA-256 |
+|---|---|
+| r91-building-conformance-r1.json | 2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa |
+| r91-building-formal-gui-r2/capture.json | 326033a8986cefeefbf62621b97507e1340ef16147d175795c0b1b5b4274b7b8 |
+| r91-formal-native-source-state-r3.json | 9f158736da110a041168eba8daac547ea3ccde086825cd77685627b4f923220d |
+| r91-formal-source-model-r1/check.json | 86f26d3d4da9daf4d82565149cb7c797d8b90a8949aab8d143cc0ee94f658a5e |
+| r91-formal-pixels-r4-check.json | 1f996eef51eb2c9e9f213b932f390032bbd88012443a59175c41efe0535e43a0 |
+| r91-building-replay-r2-check.json | 8be527042cc4d0c101fb2aeef35da746b9b4023d2f6cdbee46580314007dbe8e |
+| r91-building-source-index-r1.json | c09f53237609e443c64651d9cde9c6d3ddcbb665365b1e4c53003544d56dab5b |
+| r91-building-source-index-check-r1.json | dbc352bf596461ba4f5be2d1c468dbe6029e1ad116bf4dd5d214035facce0b49 |
+
+工具為Go1.26.7、Python3.11.2／Pillow9.4.0及隔離dosgolem
+82a14b266e1b5bc904e2d0fe507daf6bea41a013，位址沿實模式CS:IP與20-bit線性RAM。
+其他來源、動畫、完整五語、全量HD、影片與新版交付未完成，既有發行版本不變。

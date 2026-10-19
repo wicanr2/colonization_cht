@@ -72,7 +72,7 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 以下是開發中的五語顯示層與 HD 畫面，尚未收進目前發行版。截圖來自實際遊戲視窗，
 來源與指紋見[截圖紀錄](docs/screenshots/readme-captures.json)。全量 HD 包含商品、資源、單位、
 其餘小圖像、特殊游標與動畫幀，目前仍在逐項開發。
-目前 248 張已接線的生成 HD 原圖收在 [graphics/](graphics/)。新增三十張建築圖已通過來源與畫素審查，正式視窗驗收仍在進行。雲、煙與魚形動畫已完成限定驗收；國王室內與十張出航背景已完成限定驗收。國王與獵犬已完成限定驗收。已驗來源範圍見[目前狀態](CONTEXT.md)。
+目前 248 張已接線的生成 HD 原圖收在 [graphics/](graphics/)，均有已驗來源連結。三十張新增建築、雲煙與魚形動畫、國王室內與出航背景、國王與獵犬已完成限定驗收。其他圖像與全量 HD 持續處理；已驗範圍見[目前狀態](CONTEXT.md)。
 
 ![開場地圖、金色邊框與獨立物件的 HD 畫面](docs/screenshots/hd-opening-zh.png)
 
@@ -129,6 +129,10 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 ![繁體中文自訂地圖與十二張 HD 地圖、溫度及氣候小圖](docs/screenshots/hd-custom-world-zh.png)
 
 自訂地圖：十二張地圖、溫度與氣候小圖及木質背景已 HD 化，原版選項與選取框保持。
+
+![繁體中文建築百科與 HD 軍械室、木紋及商品小圖像](docs/screenshots/hd-building-pedia-zh.png)
+
+百科建築：軍械室依原版比例重繪，木紋、人物與火槍小圖像、繁中 Noto 字型及游標一併顯示。三十個新增建築來源已完成限定驗收，全量 HD 仍待完成。
 
 ![繁體中文帆船百科與 HD 船艦小圖像](docs/screenshots/hd-ship-pedia-zh.png)
 

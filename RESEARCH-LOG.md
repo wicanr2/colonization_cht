@@ -7002,3 +7002,12 @@ king-prior-typed-background-r1/check.json。
 限定審查c37bf458b1abbce109a9c0fc0e187a3d8c11b6953631315400a3dd8e50163e7f，
 入口[規格069 R90](docs/spec/069-hd-menu-background-and-textures.md)；
 其他姿態與參數語意維持未知，不外推全量HD。
+
+## 2026-10-19 R91正式百科當次來源驗證
+
+- 輸入沿固定BUILDING.SS e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4、VICEROY.EXE a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3；原始288檔皆再核對原清冊SHA-256。dosgolem固定82a14b266e1b5bc904e2d0fe507daf6bea41a013，Go1.26.7、Python3.11.2／Pillow9.4.0。
+- confirmed限848筆當次正常GUI輸入與154個原版狀態。實際輸入8896e079c7745a42543d700bdc2f2ffc87cdde4b0ed1f86fc3c96b358ec22c6a；觀測程式e86ca36a20de4218c30eb6cd39369706c309ea9695307c3c2d1c2974dbefb5bd。位址空間為dosgolem實模式CS:IP及20-bit線性RAM，不與IDA EA混用。
+- 0D46:000A及本頁既有0181／01B4／01D2寫入碼逐次核對完整來源與返回；1562個完整SS呼叫另存原始參數、描述、來源雜湊、前後矩形及排序寫入雜湊。78次WOODPANL解碼沿11B5:04EE／054A，原PNG背景僅覆蓋來源仍有效的格。未知與同值寫入仍撤銷，沒有從顏色重新猜來源。
+- 記錄器的原始寫入身分只用於省略同源同值的重複正向搬運，不授予HD來源；同值來源／目的撤銷、改碼、反向搬運及字形／游標／SS／PIK寫入反例通過。實際保留25341561筆事件，包含38442次背景同值撤銷及223次SS同值撤銷。
+- 原版控制／觀測、GUI的CPU、完整RAM、IDX、DAC及存檔保持。三側重播的WAV亦相同。158張完整百科及前置畫面、400個Noto欄位逐RGBA通過；最後世界畫面只給X11及建築撤除信用，不外推繼承地形模型。
+- 限定CONFORMED審查2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa，完整收據與重生入口見[規格061 R91](docs/spec/061-hd-building-draw-lifecycle.md)。原版畫面、記憶體、聲音及原始事件仍只留workplace。

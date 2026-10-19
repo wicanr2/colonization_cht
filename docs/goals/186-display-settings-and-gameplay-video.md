@@ -590,3 +590,11 @@ R89十一背景已限定CONFORMED，來源清冊217連結；66項正式GUI、完
 R90國王與獵犬已限定CONFORMED，218張原PNG及218個來源連結；
 30項正式GUI、完整RGBA／X11各30720000點、16次Noto與三側36輸入均通過。
 其他國王姿態、圖像與動畫繼續依[規格069](../spec/069-hd-menu-background-and-textures.md)及來源清冊處理，全量HD未完成。
+
+### 三十個新增建築來源
+
+[規格061 R91](../spec/061-hd-building-draw-lifecycle.md)已限定CONFORMED，248張原PNG及248個來源連結。
+159項正常GUI／154個獨立原版狀態，158張完整RGBA、159張X11及400個Noto欄位通過。
+848筆當次輸入的三側重播包含play=true，原版狀態、音訊及存檔和實拍相同。
+README新增當次繁中軍械室實拍，原始截圖與指紋由[截圖清冊](../screenshots/readme-captures.json)保存。
+第47幀未觀測；其餘六個PIK、其他圖像與動畫、完整五語、全量HD、影片及新版交付繼續處理。

@@ -1,4 +1,4 @@
-"""規格069 R89：只在十一背景限定驗收通過後擴充來源清冊，不含原版像素。"""
+"""依規格069 R89／R90或規格061 R91的限定驗收擴充來源清冊，不含原版像素。"""
 import argparse
 import copy
 import hashlib
@@ -14,6 +14,79 @@ def sha(path):
 def read(path):
     assert path.is_file() and not path.is_symlink()
     return json.loads(path.read_bytes())
+
+
+def extend_buildings(a):
+    """規格061 R91：只登錄已有正式驗收的三十個建築來源。"""
+    baseline, ready, review = read(a.baseline), read(a.ready), read(a.conformed)
+    manifest = read(a.assets / 'manifest.json')
+    ordinals = [0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 15, 18, 19,
+                20, 22, 23, 25, 26, 28, 29, 33, 34, 36, 37, 38, 40, 41, 46]
+    names = {'building-%03d.png' % n for n in ordinals}
+    assert ready['status'] == 'READY' and set(ready['new_raw_pngs']) == names
+    assert review['result'] == 'PASS_R91_BUILDING30_CONFORMANCE'
+    assert review['spec_state'] == 'CONFORMED' and review['new_ordinals'] == ordinals
+    assert review['ready_sha256'] == sha(a.ready)
+    assert review['inherited_source_index_sha256'] == sha(a.baseline)
+    assert review['inherited_manifest_sha256'] == baseline['formal_manifest_sha256']
+    assert review['manifest_sha256'] == ready['manifest_sha256'] == sha(a.assets / 'manifest.json')
+    assert review['formal_assets'] == len(manifest['assets']) == 248
+    assert review['old_raw_pngs_preserved'] == review['old_metadata_preserved'] == 218
+    assert review['go_named_passed'] == 10 and review['go_failed'] == review['go_skipped'] == 0
+    assert review['package_files'] == 249 and review['package_faults'] == 97
+    assert review['gui_samples'] == 159 and review['unique_native_points'] == 154
+    assert review['gui_full_rgba'] == 158 * 1280 * 800
+    assert review['gui_x11_rgba'] == 159 * 1280 * 800 and review['gui_noto_fields'] == 400
+    assert review['actual_inputs'] == 848 and review['replay_end'] == 1010800000
+    for key in ['full_project_loader_positive', 'all30_original_hd',
+                'representative_five_languages_both_modes', 'four_cjk_cursor_hover_return',
+                'normal_page_and_menu_close', 'closed_world_has_no_building_owners',
+                'three_replays_state_audio_save_equal_GUI', 'raw_png_alpha_preserved',
+                'native_inputs_rules_and_save_unchanged']:
+        assert review[key]
+    assert not review['complete_hd']
+    out = copy.deepcopy(baseline)
+    assert len(out['formal_bindings']) == 218 and len(out['frames']) == 1552
+    for binding in out['formal_bindings']:
+        name = binding['asset']
+        assert manifest['assets'][name]['sha256'] == binding['asset_sha256'] == sha(a.assets / name)
+    assert set(manifest['assets']) - {b['asset'] for b in out['formal_bindings']} == names
+    changed = set()
+    for ordinal in ordinals:
+        name = 'building-%03d.png' % ordinal
+        frame = next(f for f in out['frames'] if f['file'] == 'BUILDING.SS' and f['ordinal'] == ordinal)
+        meta = manifest['assets'][name]
+        assert not frame['formal_assets'] and frame['decode_status'] == 'decoded'
+        assert meta['native_ordinal'] == ordinal and meta['native_size'] == frame['size']
+        assert meta['native_opaque_pixels'] == frame['opaque_pixels']
+        assert meta['original_binding']['BUILDING.SS'] == frame['file_sha256']
+        assert meta['original_binding']['encoded_frame_sha256'] == frame['encoded_sha256']
+        assert sha(a.assets / name) == meta['sha256'] == ready['new_raw_pngs'][name]
+        out['formal_bindings'].append({
+            'asset': name, 'asset_sha256': meta['sha256'], 'source_research_id': frame['research_id'],
+            'source_file': frame['file'], 'source_ordinal': ordinal,
+            'source_encoded_sha256': frame['encoded_sha256'], 'source_indexed_sha256': frame['indexed_sha256'],
+            'spec': 'docs/spec/061-hd-building-draw-lifecycle.md',
+            'claim': 'one complete verified Main-canvas building draw; cited R91 normal GUI scope only'})
+        frame['formal_assets'] = [name]
+        frame['runtime_source_evidence'] = 'confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154'
+        frame['source_contract_reference'] = {
+            'state': 'CONFORMED', 'spec': 'docs/spec/061-hd-building-draw-lifecycle.md',
+            'formal_connected': True, 'review_sha256': sha(a.conformed),
+            'scope': 'observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified'}
+        changed.add(frame['research_id'])
+    old = {f['research_id']: f for f in baseline['frames']}
+    assert len(changed) == 30 and len(out['formal_bindings']) == 248
+    assert all(f == old[f['research_id']] for f in out['frames'] if f['research_id'] not in changed)
+    out['formal_manifest_sha256'] = sha(a.assets / 'manifest.json')
+    out['coverage_limits']['formal_asset_bindings'] = 248
+    out['coverage_limits']['complete_hd'] = False
+    out['building_remainder_conformance'] = {
+        'ready_sha256': sha(a.ready), 'review_sha256': sha(a.conformed), 'new_ordinals': ordinals,
+        'formal_assets': 248, 'gui_samples': 159, 'unique_native_points': 154,
+        'claim': 'thirty building sources; full independent Pedia pixels exclude the final inherited-world image; full HD incomplete'}
+    a.output.write_text(json.dumps(out, ensure_ascii=False, indent=2) + '\n')
+    print('PASS_BUILDING30_CONFORMED_SOURCE_INDEX', 248, sha(a.output), flush=True)
 
 
 def extend_royal(a):
@@ -87,10 +160,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ['baseline', 'assets', 'ready', 'conformed', 'output']:
         parser.add_argument('--' + name, type=Path, required=True)
-    parser.add_argument('--royal', action='store_true', help='規格069 R90：只擴充已完成的國王與獵犬來源')
+    scope = parser.add_mutually_exclusive_group()
+    scope.add_argument('--royal', action='store_true', help='規格069 R90：只擴充已完成的國王與獵犬來源')
+    scope.add_argument('--buildings', action='store_true', help='規格061 R91：只擴充已驗三十個建築來源')
     a = parser.parse_args()
     assert Path('/.dockerenv').exists() and os.getuid() != 0
     assert not a.output.exists() and a.output.parent.stat().st_uid == os.getuid()
+    if a.buildings:
+        extend_buildings(a)
+        return
     if a.royal:
         extend_royal(a)
         return

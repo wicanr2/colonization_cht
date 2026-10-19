@@ -552,6 +552,40 @@
       "scope": "正式繁中模式開場魚形第14幀；目前完整RGBA及X11已驗。二十一魚形與當次三側原版狀態、WAV及存檔已限定CONFORMED。其餘圖像、完整五語、影片與全量HD尚未完成。",
       "conformance_sha256": "f870db211179fce985d4e96eff623339a0d97c608f705d29e1dca87b688efd15",
       "replay_check_sha256": "6dfd962fcd802972254554a28474695fae8f32722bb0f9694d091ede51dbde2b"
+    },
+    {
+      "file": "hd-building-pedia-zh.png",
+      "sha256": "2d92a3a722ce6436e3252cfadf7c56ab9937070588b8fdf3faf58360bd6d1469",
+      "size": [
+        1280,
+        800
+      ],
+      "scene": "building-pedia",
+      "language": "zh-Hant",
+      "graphics": "hd",
+      "step": 83000000,
+      "code_commit": "888c2df",
+      "binary_sha256": "4059a066c3f8ef4370687dbbcd6e715325518f906b7e1f5793407222de6e5248",
+      "formal_binary_sha256": "4059a066c3f8ef4370687dbbcd6e715325518f906b7e1f5793407222de6e5248",
+      "source_build_sha256": "ddfac8297d7a7d7b2a838ad22e45acd2319d534f4453c24d0b0ce6a9840a09dd",
+      "formal_hd_assets": 248,
+      "graphics_manifest_sha256": "1439ee4c2a8554768e1b0b28ec55a687c2289c18d2aca60529fc87dbb02c2ce7",
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-building-pedia-remainder-r91/r91-building-formal-gui-r2/gui.display-046.png",
+      "source_gui_check_sha256": "326033a8986cefeefbf62621b97507e1340ef16147d175795c0b1b5b4274b7b8",
+      "source_pixel_check_sha256": "1f996eef51eb2c9e9f213b932f390032bbd88012443a59175c41efe0535e43a0",
+      "source_model_check_sha256": "86f26d3d4da9daf4d82565149cb7c797d8b90a8949aab8d143cc0ee94f658a5e",
+      "replay_check_sha256": "8be527042cc4d0c101fb2aeef35da746b9b4023d2f6cdbee46580314007dbe8e",
+      "conformance_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+      "verification_state": "CONFORMED within R91 thirty-building scope; representative five-language both-mode and cursor checks; original game behavior unchanged",
+      "source_kind": "actual formal game presentation; all pixels independently reconstructed and byte-identical to real X11 window game area",
+      "capture_pixels_unchanged": true,
+      "source_research_ids": [
+        50,
+        864,
+        923,
+        1551
+      ],
+      "scope": "軍械室原始第3幀、既有商品小圖像、HD木紋、繁中Noto與標準游標；只代表本畫面，不代表全量HD。"
     }
   ],
   "limitations": [

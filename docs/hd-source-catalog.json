@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "56b42309a722288627823654b0feb2c1cc463f48f10a4e998b768127ab8bf8f2",
+  "formal_manifest_sha256": "1439ee4c2a8554768e1b0b28ec55a687c2289c18d2aca60529fc87dbb02c2ce7",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,7 +26,7 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 218,
+    "formal_asset_bindings": 248,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
@@ -8523,9 +8523,18 @@
       "indexed_sha256": "59eea624f996fa4ef6d4119e70f0b24cd9bd99e6cc4b6d670b942f4fe2548af0",
       "opaque_pixels": 808,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-000.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 48,
@@ -8548,9 +8557,18 @@
       "indexed_sha256": "06676bc330ef85f7824de6132a93c61f0c6e640838c71227b7fd4df1493958a8",
       "opaque_pixels": 1024,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-001.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 49,
@@ -8573,9 +8591,18 @@
       "indexed_sha256": "6ae1f441fbeb22fe9568d5ad5670956ca51d667403b22fc19a7fd8b10b9e8aa3",
       "opaque_pixels": 1038,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-002.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 50,
@@ -8598,9 +8625,18 @@
       "indexed_sha256": "ce59acbc2166d275a55fa9273e343a8d61c2b5d0cee51f163b01a05a934f3c93",
       "opaque_pixels": 663,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-003.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 51,
@@ -8623,9 +8659,18 @@
       "indexed_sha256": "2e484e5f92a77132999ff6241d8e178740462e2b5023e82f7b4af6a48d57c44c",
       "opaque_pixels": 711,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-004.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 52,
@@ -8648,9 +8693,18 @@
       "indexed_sha256": "ea760fbddd220b5aeba68e8e8b0f7d8350ba6ea00552cb72dfebb2ffd6d812b7",
       "opaque_pixels": 882,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-005.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 53,
@@ -8673,9 +8727,18 @@
       "indexed_sha256": "663607186df83d16ef6d433e1a4f26d21cb229715a2350a315798a75c8626c0e",
       "opaque_pixels": 1127,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-006.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 54,
@@ -8698,9 +8761,18 @@
       "indexed_sha256": "4f06e0bab5bbd4331b28103a7abd40487b195ef696fc6a111df6409fd30e046b",
       "opaque_pixels": 1130,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-007.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 55,
@@ -8723,9 +8795,18 @@
       "indexed_sha256": "1e4c016ab2646c70537914564608fe7b43b6c601705dd570ada4c27d50d26dd6",
       "opaque_pixels": 1175,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-008.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 56,
@@ -8864,9 +8945,18 @@
       "indexed_sha256": "586ddd8ac442062c2e2e00369e793251672741e74a62bf44728221c9c6e0fd3b",
       "opaque_pixels": 639,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-012.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 60,
@@ -8889,9 +8979,18 @@
       "indexed_sha256": "09ed0659715f5b9a6390f5160231f974281a7c8cc12703d7b48e0622f9f7d019",
       "opaque_pixels": 699,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-013.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 61,
@@ -8914,9 +9013,18 @@
       "indexed_sha256": "7d12aee51cb26c1bd115b77af8d7539ebbe90bab46d09f784abc5cc74098b4a9",
       "opaque_pixels": 828,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-014.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 62,
@@ -8939,9 +9047,18 @@
       "indexed_sha256": "7213199b5353db2c39ede3a0d7ad40e6415c24c02992e8e8e3080badc006236e",
       "opaque_pixels": 684,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-015.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 63,
@@ -9055,9 +9172,18 @@
       "indexed_sha256": "daafc50e513463f2da5315e0c79d46f86dd926c87e6d2f5ce87c37f313f055b8",
       "opaque_pixels": 410,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-018.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 66,
@@ -9080,9 +9206,18 @@
       "indexed_sha256": "6fc7eba3c912e8256482ce0e6bf30263127cda42216b5b627ed9cd13dd430d1d",
       "opaque_pixels": 490,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-019.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 67,
@@ -9105,9 +9240,18 @@
       "indexed_sha256": "0ae615ecf2bba9e3ef25d72244ff711a14e1a4c178777789c1dfc9c51d9b81cf",
       "opaque_pixels": 591,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-020.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 68,
@@ -9196,9 +9340,18 @@
       "indexed_sha256": "7776c8fbaa4d019e4c68eaaf72ae902a1036639b281089983565c7c234389ebf",
       "opaque_pixels": 524,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-022.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 70,
@@ -9221,9 +9374,18 @@
       "indexed_sha256": "280197fdc9271ad488ec6c613879559425e1158c5189fcab75a74030807046a2",
       "opaque_pixels": 559,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-023.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 71,
@@ -9312,9 +9474,18 @@
       "indexed_sha256": "d31e2e907974741cbb8140d6d5449aae578c8a2571929d373964c38c44da23d1",
       "opaque_pixels": 431,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-025.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 73,
@@ -9337,9 +9508,18 @@
       "indexed_sha256": "0f45f224a4864a620a62d3274a1a97338c0d684c22798e04462335c540ec4859",
       "opaque_pixels": 540,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-026.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 74,
@@ -9428,9 +9608,18 @@
       "indexed_sha256": "05094fffc37ddd0c5776f8ed1e8b11388b9474038c138f072ec3c69224885d63",
       "opaque_pixels": 496,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-028.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 76,
@@ -9453,9 +9642,18 @@
       "indexed_sha256": "fd7450fb9608f08f52a2ff2e442de1a2462344df0f3234ba556bcd92f51dcf41",
       "opaque_pixels": 557,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-029.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 77,
@@ -9594,9 +9792,18 @@
       "indexed_sha256": "a68cdd8c7462d681e51f46e554364ad73b41a9cf31296b9e4fe36b8361a84a03",
       "opaque_pixels": 474,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-033.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 81,
@@ -9619,9 +9826,18 @@
       "indexed_sha256": "04af2f098a66c6f88af984fb5409f15788fe393dae98040bea7c265310392656",
       "opaque_pixels": 592,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-034.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 82,
@@ -9710,9 +9926,18 @@
       "indexed_sha256": "dce99fc09495e29e21709b8e3fc3ec1e8f89846803e7c6e2142df4d8ee7d5a8c",
       "opaque_pixels": 670,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-036.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 84,
@@ -9735,9 +9960,18 @@
       "indexed_sha256": "627a7f91de88b0837ddd0967c1ef706a22a0a7f39e93eb00fbfeef18dc970104",
       "opaque_pixels": 1048,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-037.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 85,
@@ -9760,9 +9994,18 @@
       "indexed_sha256": "c1108467367480d33c8643153fe0b5d63584e9a6652e7f3cf957b0177d1abdd9",
       "opaque_pixels": 1413,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-038.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 86,
@@ -9851,9 +10094,18 @@
       "indexed_sha256": "3d4ff97edf2e934987363fcf7cf5fb662f9cee785e6305a2f148fe4830f58588",
       "opaque_pixels": 514,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-040.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 88,
@@ -9876,9 +10128,18 @@
       "indexed_sha256": "2b5c0d18a8844c8e87dea591362d67e0a58633e9af9b78f96ad25f7d5c6ea49d",
       "opaque_pixels": 546,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-041.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 89,
@@ -10201,9 +10462,18 @@
       "indexed_sha256": "f457d017a56dc684cb8c0157ddb8c273a4f47c2f5493f074fa4aa33e23b10144",
       "opaque_pixels": 401,
       "transparency_index": 253,
-      "runtime_source_evidence": "not_assessed_by_this_inventory",
+      "runtime_source_evidence": "confirmed complete D46 source and writes, same-value revocations and native Main ownership; normal GUI159/native154",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-046.png"
+      ],
+      "source_contract_reference": {
+        "state": "CONFORMED",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+        "scope": "observed building draw and original placement; forty-frame kernel unchanged; ordinal47 and full HD remain unverified"
+      }
     },
     {
       "research_id": 94,
@@ -60688,6 +60958,336 @@
       "source_indexed_sha256": "946f5f2d30ae8d5402e763a9d0393bfcfd4448e2d9edf2321e9b7f904ef18a60",
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "claim": "one complete current KING1 pose with typed or original underlay; cited conformance scope only"
+    },
+    {
+      "asset": "building-000.png",
+      "asset_sha256": "be73e486cc1a2251df5b77b001268404e3aa9149f1a0d613215953b974951f07",
+      "source_research_id": 47,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "1876dfdb3f3142fe7a52b8e5cb5fbb41611b6e7863fde78af44cd5c786aaf49e",
+      "source_indexed_sha256": "59eea624f996fa4ef6d4119e70f0b24cd9bd99e6cc4b6d670b942f4fe2548af0",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-001.png",
+      "asset_sha256": "fbb98fe74f66c1e71223868888d7e2f03d025af7813899a68490160c8901f8de",
+      "source_research_id": 48,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "24f1681a125518d254ed38554e0635b0220fadfff8610dbe0100cfe3f8b9a93b",
+      "source_indexed_sha256": "06676bc330ef85f7824de6132a93c61f0c6e640838c71227b7fd4df1493958a8",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-002.png",
+      "asset_sha256": "28d992b808439e4ec0a9117f14ca645eec903e6ebde631b324894f8caf5d952f",
+      "source_research_id": 49,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "6064567b9d48b5c3b72768dc0a7d76a2a1184c891f083e15604454c2dbb49b4c",
+      "source_indexed_sha256": "6ae1f441fbeb22fe9568d5ad5670956ca51d667403b22fc19a7fd8b10b9e8aa3",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-003.png",
+      "asset_sha256": "7d7ba364a4c80631d8d17a21c999d64b17fbe9c94958498b9f1926e43b04858b",
+      "source_research_id": 50,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "cd1eeef2db89db69dd21bd9c9442e8f7799b36c43a108f4bc0e3fe582929fcc0",
+      "source_indexed_sha256": "ce59acbc2166d275a55fa9273e343a8d61c2b5d0cee51f163b01a05a934f3c93",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-004.png",
+      "asset_sha256": "c7150437bc61edddc4491c85cfd28a283d832eb8eb1e3735495c0fbb0c9bd01b",
+      "source_research_id": 51,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "21a85ba23b0270de975cf08b1a7edca71ac5638c883ae88538e1c7629e500761",
+      "source_indexed_sha256": "2e484e5f92a77132999ff6241d8e178740462e2b5023e82f7b4af6a48d57c44c",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-005.png",
+      "asset_sha256": "600455bdefddde32395477711a0b0b6bd619dad98dd940d65b729bb526f51b88",
+      "source_research_id": 52,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "0417dc81babdb1d631469e230388255505840f541e14003e70a9d8d5fecab263",
+      "source_indexed_sha256": "ea760fbddd220b5aeba68e8e8b0f7d8350ba6ea00552cb72dfebb2ffd6d812b7",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-006.png",
+      "asset_sha256": "5ece7efa3f4f0d5b644a19fd7dd2e8cf85a16fc16328fd6472886674d9b9e587",
+      "source_research_id": 53,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 6,
+      "source_encoded_sha256": "7e8ffc27b1740a6e4ef5c472dedaa63c787b7dc4e356284b3b909f63784ce752",
+      "source_indexed_sha256": "663607186df83d16ef6d433e1a4f26d21cb229715a2350a315798a75c8626c0e",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-007.png",
+      "asset_sha256": "37722b6edb876c96b6fc2f186fc98ac211292973e3fcd909f0f67a4a7165feef",
+      "source_research_id": 54,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 7,
+      "source_encoded_sha256": "5830c1bae22b62b881f9ca599b87e6773a003b2323a84e6d4cba91337e085a1b",
+      "source_indexed_sha256": "4f06e0bab5bbd4331b28103a7abd40487b195ef696fc6a111df6409fd30e046b",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-008.png",
+      "asset_sha256": "2dcbd2f491626e43ef19f19b4f504138aa28f7b3c61865eea55feb9e243ca2be",
+      "source_research_id": 55,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 8,
+      "source_encoded_sha256": "1baef8e1ec22e365e37c1eed7881ee778abaab80a1b57442dc376c060bb5251d",
+      "source_indexed_sha256": "1e4c016ab2646c70537914564608fe7b43b6c601705dd570ada4c27d50d26dd6",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-012.png",
+      "asset_sha256": "0a209fc01aba2700476081cef9c21a45350a57cb459269845aeb98ec220ba63e",
+      "source_research_id": 59,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 12,
+      "source_encoded_sha256": "4beacffbb2182895e9a64136061856b8c63189dd825d279425ad28081a8eb62f",
+      "source_indexed_sha256": "586ddd8ac442062c2e2e00369e793251672741e74a62bf44728221c9c6e0fd3b",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-013.png",
+      "asset_sha256": "111a5a75f2ba31f6cc788a53f3b70d847349f6abd17a661d7aa2bee88282e57a",
+      "source_research_id": 60,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 13,
+      "source_encoded_sha256": "2e50c1e9da59c2951d9289c68d9c82a50530120d60486cf2b881dfba5d4ee486",
+      "source_indexed_sha256": "09ed0659715f5b9a6390f5160231f974281a7c8cc12703d7b48e0622f9f7d019",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-014.png",
+      "asset_sha256": "e61345a39b9f68d3623cb50ce089f99d1619ff0aec038172c0b8859ea9974d85",
+      "source_research_id": 61,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 14,
+      "source_encoded_sha256": "2c9ae2ab4721dd8b369c0d6e8e6a530943ae428335f8d6da7e10550272c079cd",
+      "source_indexed_sha256": "7d12aee51cb26c1bd115b77af8d7539ebbe90bab46d09f784abc5cc74098b4a9",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-015.png",
+      "asset_sha256": "de7baee7faf1ec9ef725b74dbb22e244cefc101209bb5c3912107965044f4202",
+      "source_research_id": 62,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 15,
+      "source_encoded_sha256": "f97813c95fc494a09a79fb93a15e5045237671e3b961f2783e4c48e02047d399",
+      "source_indexed_sha256": "7213199b5353db2c39ede3a0d7ad40e6415c24c02992e8e8e3080badc006236e",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-018.png",
+      "asset_sha256": "b00bd9cde6e143b3307f670f70899cefa20c02dc87e3073b9adc9d755f130968",
+      "source_research_id": 65,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 18,
+      "source_encoded_sha256": "2c02b5c6f29937b22e4a05b1ab3b729c54ef7a95ff45451168118106907ebc7e",
+      "source_indexed_sha256": "daafc50e513463f2da5315e0c79d46f86dd926c87e6d2f5ce87c37f313f055b8",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-019.png",
+      "asset_sha256": "fdabcccc60857158ef61b5fcfa63d7371dc4f60d3d0e01fd1766064f2dc37fd5",
+      "source_research_id": 66,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 19,
+      "source_encoded_sha256": "5395ba55c8e365637c2ba339a780fb0697c45994b7b9bda1df260230d8c7c4f6",
+      "source_indexed_sha256": "6fc7eba3c912e8256482ce0e6bf30263127cda42216b5b627ed9cd13dd430d1d",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-020.png",
+      "asset_sha256": "f14a40b5750c9c0ed1cc6f72594cf7e50415a43b9449a8083d85ad04c222fa4a",
+      "source_research_id": 67,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 20,
+      "source_encoded_sha256": "2a2c95aa34237fc3581f49de344c76da9b355e800acce20d3841e915e343ab25",
+      "source_indexed_sha256": "0ae615ecf2bba9e3ef25d72244ff711a14e1a4c178777789c1dfc9c51d9b81cf",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-022.png",
+      "asset_sha256": "e3c9e76f560b741e6bfcdc545959c0b883d945614c21c0396f3dfd0508aa0b3b",
+      "source_research_id": 69,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 22,
+      "source_encoded_sha256": "0a5004b578d0520cc3d3a6672424ec672797235946048328aaeb53b5ff7246fc",
+      "source_indexed_sha256": "7776c8fbaa4d019e4c68eaaf72ae902a1036639b281089983565c7c234389ebf",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-023.png",
+      "asset_sha256": "c50fc75b33e60e5a6092688f0c03cff5d5eea024b85fde18cb4039726eceaafb",
+      "source_research_id": 70,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 23,
+      "source_encoded_sha256": "ab8790c65a319ad80dcc388b91ea0ad20e427f5f4cbb8bba51d3f8b3a21b6d90",
+      "source_indexed_sha256": "280197fdc9271ad488ec6c613879559425e1158c5189fcab75a74030807046a2",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-025.png",
+      "asset_sha256": "1ec3dc44f3a942e3bec47b824c9fbc96ad37f162f2c34078b46f25bccb46e086",
+      "source_research_id": 72,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 25,
+      "source_encoded_sha256": "1f9bbd236f1b3087241c59b75ce3af4a1508869e7f60c23f6354f60bf548dd32",
+      "source_indexed_sha256": "d31e2e907974741cbb8140d6d5449aae578c8a2571929d373964c38c44da23d1",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-026.png",
+      "asset_sha256": "7346b1ce2df7b0a586e25b2b51501dc5472abb0801b54b22ceeb679cebc8879e",
+      "source_research_id": 73,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 26,
+      "source_encoded_sha256": "31910722e99512d07bcf2faca4f6f05bb3403b56cdb3495ea03d2f68e5e4edf6",
+      "source_indexed_sha256": "0f45f224a4864a620a62d3274a1a97338c0d684c22798e04462335c540ec4859",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-028.png",
+      "asset_sha256": "40f608ea2942f2b1d28d8656b8dffce085d78cd63e652493570f23c6e4bfbefa",
+      "source_research_id": 75,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 28,
+      "source_encoded_sha256": "362f7937e2392e442894a92d5e065addd1420732efd8e694991f657fe4540c11",
+      "source_indexed_sha256": "05094fffc37ddd0c5776f8ed1e8b11388b9474038c138f072ec3c69224885d63",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-029.png",
+      "asset_sha256": "f8d614256699f655cb03234442a6c9f54f50e748a823a1a5d79dffc6efa70700",
+      "source_research_id": 76,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 29,
+      "source_encoded_sha256": "1ab49220e290596299904fa1da364621116eceb2469316c5ddbc59476670d387",
+      "source_indexed_sha256": "fd7450fb9608f08f52a2ff2e442de1a2462344df0f3234ba556bcd92f51dcf41",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-033.png",
+      "asset_sha256": "727e709cfea47ed0b39e17177b2d1a466179a35deb92899f0cac9a631bbcb704",
+      "source_research_id": 80,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 33,
+      "source_encoded_sha256": "1d701d4774914a2cd63e98a1c63d433b6b2566d7d94ccca07afcd493e227dcc1",
+      "source_indexed_sha256": "a68cdd8c7462d681e51f46e554364ad73b41a9cf31296b9e4fe36b8361a84a03",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-034.png",
+      "asset_sha256": "cf141a3eee4401f15f3298ecc107aded316d4e16b5836b38f02338788d2b520c",
+      "source_research_id": 81,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 34,
+      "source_encoded_sha256": "9bdea7d225a7feee5ee675b6e3bdc98de654dc6ac7939e2492114e4d01db519f",
+      "source_indexed_sha256": "04af2f098a66c6f88af984fb5409f15788fe393dae98040bea7c265310392656",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-036.png",
+      "asset_sha256": "f11c3b4b58a8768f39a28bc9c5d086e20018e0374846adf6fa9594fab6c7246c",
+      "source_research_id": 83,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 36,
+      "source_encoded_sha256": "773f00066710246b280054fbef4fed6066f1af21bdba86c95a57b31a5832679b",
+      "source_indexed_sha256": "dce99fc09495e29e21709b8e3fc3ec1e8f89846803e7c6e2142df4d8ee7d5a8c",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-037.png",
+      "asset_sha256": "f73e86dad84756ebc730c411a1c5a5463ae2c53a2361757b0305542a2973ed94",
+      "source_research_id": 84,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 37,
+      "source_encoded_sha256": "52b17b56cd042dda27728c93dd7c5bae787408f7b62a0e28196c8bd84f5a62b7",
+      "source_indexed_sha256": "627a7f91de88b0837ddd0967c1ef706a22a0a7f39e93eb00fbfeef18dc970104",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-038.png",
+      "asset_sha256": "0efcf5e97bc578a901c0d5a79bdec7ffd57d9b5fe77e36ed946252d6a0e50979",
+      "source_research_id": 85,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 38,
+      "source_encoded_sha256": "42bbcb17cffb6637dad5b9c66a83f573893e0bb85de143cad23d11d55d03e9b5",
+      "source_indexed_sha256": "c1108467367480d33c8643153fe0b5d63584e9a6652e7f3cf957b0177d1abdd9",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-040.png",
+      "asset_sha256": "462163db5c17fcc5cd561c1eafcfd18330bf0cc1129e298e356a618e27abd0c6",
+      "source_research_id": 87,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 40,
+      "source_encoded_sha256": "6588008b35df0af9d24cdf2ff026fad206747c7a2406ca4595c04df3e33a56bd",
+      "source_indexed_sha256": "3d4ff97edf2e934987363fcf7cf5fb662f9cee785e6305a2f148fe4830f58588",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-041.png",
+      "asset_sha256": "ab4ec26b3db95262bac5e0bdba170bd56e4bf26f3684187789c6401dba7b9cc6",
+      "source_research_id": 88,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 41,
+      "source_encoded_sha256": "c5bbef54aea58981b5c62936242c8bb515170bc0488cfba752ec066b6db35f01",
+      "source_indexed_sha256": "2b5c0d18a8844c8e87dea591362d67e0a58633e9af9b78f96ad25f7d5c6ea49d",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
+    },
+    {
+      "asset": "building-046.png",
+      "asset_sha256": "21a027f4373c9432668675a2e2a0deb89c5d67977c8dbe1fd20fa4ed5407b68d",
+      "source_research_id": 93,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 46,
+      "source_encoded_sha256": "cc064e7c579538dd4618e34b1fc3158757de6dc263e32121266e1d14ce37e559",
+      "source_indexed_sha256": "f457d017a56dc684cb8c0157ddb8c273a4f47c2f5493f074fa4aa33e23b10144",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "claim": "one complete verified Main-canvas building draw; cited R91 normal GUI scope only"
     }
   ],
   "limitations": [
@@ -61188,5 +61788,45 @@
     "gui_samples": 30,
     "unique_native_points": 28,
     "claim": "one king and hound pose only; other images, animation and full HD incomplete"
+  },
+  "building_remainder_conformance": {
+    "ready_sha256": "794cf0a7b32fbb1c9b5520c275e0e7c8cea291d76ddd55a0686d5a6dfcc33128",
+    "review_sha256": "2a061644c4eccb08cd2d28974a8bc90127d895cb64620fd753229ab7245bfcfa",
+    "new_ordinals": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      12,
+      13,
+      14,
+      15,
+      18,
+      19,
+      20,
+      22,
+      23,
+      25,
+      26,
+      28,
+      29,
+      33,
+      34,
+      36,
+      37,
+      38,
+      40,
+      41,
+      46
+    ],
+    "formal_assets": 248,
+    "gui_samples": 159,
+    "unique_native_points": 154,
+    "claim": "thirty building sources; full independent Pedia pixels exclude the final inherited-world image; full HD incomplete"
   }
 }
