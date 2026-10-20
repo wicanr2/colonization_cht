@@ -38126,6 +38126,835 @@
           "writes_sha256": "bf17c03a8f68f392e48cfc2561a01af00103fc201c32b2bcd79b479d83d06a58"
         }
       ]
+    },
+    "mps-rotation.png": {
+      "sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+      "bytes": 1364502,
+      "size": [
+        1431,
+        1099
+      ],
+      "mode": "RGB",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: style-transfer. Repaint Image1 as ONE precise production sprite atlas for the Colonization HD opening. Exact FOUR columns and FOUR rows, sixteen frames in the same reading order. Each cell is a complete 155:119 landscape frame, so overall atlas aspect ratio155:119. Fully opaque PURE BLACK background all across the atlas, no gutters, dividers, labels or added margins. Keep every rotating blue MPS LABS mark at the EXACT normalized location, scale, rotation and perspective shown in its corresponding source cell. The 16 subtle rotation steps must remain different and sequential, including faint edge-on second face and the inverted reflection under the yellow baseline. Preserve the recognizable cyan-to-deep-blue hand-drawn MPS monogram, the white spaced word LABS between two thin yellow horizontal rules, and its reflection. Text must be exactly LABS where readable; reflections stay mirrored/inverted as in Image1. Refine the rough original pixels into freshly drawn crisp fine pixel clusters, restrained clean blue gradients and polished thin gold edges, consistent with the refined small pixel treatment of Image2, STYLE ONLY; do not copy Image2 scenery or add decorative texture. Preserve the original very simple corporate mark design, do not turn it into a solid 3D cube or alter the monogram. Pure black empty areas, edge-to-edge frame content with the SAME per-cell crop as Image1. No new words, extra lettering, grid, borders, badges, scenery, neon glow, blur, photography or smooth vector-like anti-aliasing. Sixteen separate rotation frames, accurate source geometry.",
+      "generation_file": "exec-99fdac3e-e11d-422f-94f1-cb1468dd5f00.png",
+      "reference_sha256": "8fe3cad8e12d09f45495f6e77c12cee13a6c720605bf4e9b610422a9d0e0ae3f",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG retained; original source253 mask retained",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1015,
+          "file": "MPSLOGO.SS",
+          "file_sha256": "b4c805281404638cbfa6ad44e4a04528925ef18d343920412de14def30e91457",
+          "ordinal": 0,
+          "size": [
+            155,
+            119
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 3798,
+          "other_header_fields": [
+            163,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "11fcd9965c3c0e4f6f5ea42067492e0e3a395bfa1ed6ce7a27e252a38816a171",
+          "indexed_sha256": "1226c1290ac0f84048a18fcceaf952dcf75f21da9128c05c2a74767ae94fc5ec",
+          "opaque_pixels": 18445,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1015,
+          "asset": "mps-rotation.png",
+          "sample": [
+            0,
+            0,
+            357,
+            274
+          ],
+          "content": [
+            0,
+            0,
+            155,
+            119
+          ],
+          "art_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+          "art_size": [
+            1431,
+            1099
+          ],
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be",
+          "writes_sha256": "bc9d6ea527445c07d362a410897ed5fd800fb5be5bd0c4917643346f2fa00cf8"
+        },
+        {
+          "research_id": 1016,
+          "file": "MPSLOGO.SS",
+          "file_sha256": "b4c805281404638cbfa6ad44e4a04528925ef18d343920412de14def30e91457",
+          "ordinal": 1,
+          "size": [
+            155,
+            119
+          ],
+          "header_part1_offset": 16,
+          "data_part3_offset": 3798,
+          "encoded_length": 4262,
+          "other_header_fields": [
+            163,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ea55107737d055878a75b5fb97c509716f97b6a65ec973984f4369fb51bf6953",
+          "indexed_sha256": "6c45663d1dfbd7acaf7d5b9d177fd44d5da99443aa7d49cb9b5d2ef34bc53754",
+          "opaque_pixels": 18445,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1016,
+          "asset": "mps-rotation.png",
+          "sample": [
+            357,
+            0,
+            715,
+            274
+          ],
+          "content": [
+            0,
+            0,
+            155,
+            119
+          ],
+          "art_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+          "art_size": [
+            1431,
+            1099
+          ],
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be",
+          "writes_sha256": "ef884da21f9aecebc49250e34ebb792d27d103edfaeca1387de31f916675f3b5"
+        },
+        {
+          "research_id": 1017,
+          "file": "MPSLOGO.SS",
+          "file_sha256": "b4c805281404638cbfa6ad44e4a04528925ef18d343920412de14def30e91457",
+          "ordinal": 2,
+          "size": [
+            155,
+            119
+          ],
+          "header_part1_offset": 32,
+          "data_part3_offset": 8060,
+          "encoded_length": 5101,
+          "other_header_fields": [
+            163,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "37e840b4237536ddee596ac0a053aaf5869d5f11281d6e2177285376eca097f5",
+          "indexed_sha256": "d0236631d00d635310c35fdc8f25b5d8f87427a577deff9f86696736a62a4efa",
+          "opaque_pixels": 18445,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1017,
+          "asset": "mps-rotation.png",
+          "sample": [
+            715,
+            0,
+            1073,
+            274
+          ],
+          "content": [
+            0,
+            0,
+            155,
+            119
+          ],
+          "art_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+          "art_size": [
+            1431,
+            1099
+          ],
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be",
+          "writes_sha256": "aa403f991a01287aaadc71596f48a1f4f62f30b0b74627c1c4bff7d38c63bef6"
+        },
+        {
+          "research_id": 1018,
+          "file": "MPSLOGO.SS",
+          "file_sha256": "b4c805281404638cbfa6ad44e4a04528925ef18d343920412de14def30e91457",
+          "ordinal": 3,
+          "size": [
+            155,
+            119
+          ],
+          "header_part1_offset": 48,
+          "data_part3_offset": 13161,
+          "encoded_length": 5707,
+          "other_header_fields": [
+            163,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "7a5026f79a966651a786bc608d3f7c4fbdfae9e6ca1139cd10203b949fc5daba",
+          "indexed_sha256": "672c2ea850c27c56623d81dfa1c7b3fcf6cf7834102b4cff10f62127fcf50c85",
+          "opaque_pixels": 18445,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1018,
+          "asset": "mps-rotation.png",
+          "sample": [
+            1073,
+            0,
+            1431,
+            274
+          ],
+          "content": [
+            0,
+            0,
+            155,
+            119
+          ],
+          "art_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+          "art_size": [
+            1431,
+            1099
+          ],
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be",
+          "writes_sha256": "3d00e8260a175273ff19f2be1a9befc8a36407bb8d01ad109b4690de4d3b927d"
+        },
+        {
+          "research_id": 1019,
+          "file": "MPSLOGO.SS",
+          "file_sha256": "b4c805281404638cbfa6ad44e4a04528925ef18d343920412de14def30e91457",
+          "ordinal": 4,
+          "size": [
+            155,
+            119
+          ],
+          "header_part1_offset": 64,
+          "data_part3_offset": 18868,
+          "encoded_length": 6149,
+          "other_header_fields": [
+            163,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "52d837b9d866d3e283b715d84abea0579ce1c6f8e77df450d6586e83a39cc35e",
+          "indexed_sha256": "76a579e8a70115413dddc51823d9daeb19f85c31340aac3cf6c0ad70357941e3",
+          "opaque_pixels": 18445,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1019,
+          "asset": "mps-rotation.png",
+          "sample": [
+            0,
+            274,
+            357,
+            549
+          ],
+          "content": [
+            0,
+            0,
+            155,
+            119
+          ],
+          "art_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+          "art_size": [
+            1431,
+            1099
+          ],
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be",
+          "writes_sha256": "f8d9aa8637a49c329c81640103acd9c525851178ba80d78336dccedd1049782d"
+        },
+        {
+          "research_id": 1020,
+          "file": "MPSLOGO.SS",
+          "file_sha256": "b4c805281404638cbfa6ad44e4a04528925ef18d343920412de14def30e91457",
+          "ordinal": 5,
+          "size": [
+            155,
+            119
+          ],
+          "header_part1_offset": 80,
+          "data_part3_offset": 25017,
+          "encoded_length": 6497,
+          "other_header_fields": [
+            163,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "98cc61024dc25a61e51bdca8c75ceeb916846de155c10ba5b61f60444b040ab1",
+          "indexed_sha256": "fcb559b701af566019dc2e85d5cde6cf4474391e14653de3479e138458a899fb",
+          "opaque_pixels": 18445,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1020,
+          "asset": "mps-rotation.png",
+          "sample": [
+            357,
+            274,
+            715,
+            549
+          ],
+          "content": [
+            0,
+            0,
+            155,
+            119
+          ],
+          "art_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+          "art_size": [
+            1431,
+            1099
+          ],
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be",
+          "writes_sha256": "1462ededfd9d1273db144fa55ff86d6429f938cbc002ba91106d122804248412"
+        },
+        {
+          "research_id": 1021,
+          "file": "MPSLOGO.SS",
+          "file_sha256": "b4c805281404638cbfa6ad44e4a04528925ef18d343920412de14def30e91457",
+          "ordinal": 6,
+          "size": [
+            155,
+            119
+          ],
+          "header_part1_offset": 96,
+          "data_part3_offset": 31514,
+          "encoded_length": 6741,
+          "other_header_fields": [
+            163,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "2a02e551f69c8ca7acc2613431868519a21ba03efcf59d32f83c9b3c4ffc9fca",
+          "indexed_sha256": "3c21417caf381fcfeb3832d977bed74a2c19172c0763ff6b78be44381d4fa47b",
+          "opaque_pixels": 18445,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1021,
+          "asset": "mps-rotation.png",
+          "sample": [
+            715,
+            274,
+            1073,
+            549
+          ],
+          "content": [
+            0,
+            0,
+            155,
+            119
+          ],
+          "art_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+          "art_size": [
+            1431,
+            1099
+          ],
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be",
+          "writes_sha256": "5bda28eaecf2d8f863e0b97d9b023d0ff0f959418dadab127bf9b55736f6a763"
+        },
+        {
+          "research_id": 1022,
+          "file": "MPSLOGO.SS",
+          "file_sha256": "b4c805281404638cbfa6ad44e4a04528925ef18d343920412de14def30e91457",
+          "ordinal": 7,
+          "size": [
+            155,
+            119
+          ],
+          "header_part1_offset": 112,
+          "data_part3_offset": 38255,
+          "encoded_length": 6767,
+          "other_header_fields": [
+            163,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "69adf70c752db97c03970044e326c2e032557c8070a85b6cd09c31dca0ee1063",
+          "indexed_sha256": "122ec782bba7fb601c1e993083d207df3562f0495f9307cd048ca33bdd8f04c7",
+          "opaque_pixels": 18445,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1022,
+          "asset": "mps-rotation.png",
+          "sample": [
+            1073,
+            274,
+            1431,
+            549
+          ],
+          "content": [
+            0,
+            0,
+            155,
+            119
+          ],
+          "art_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+          "art_size": [
+            1431,
+            1099
+          ],
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be",
+          "writes_sha256": "9d714ac2ae190a02b84f1a458c09fd1813675c6ac0238af0f7c29c2ba9d2a35c"
+        },
+        {
+          "research_id": 1023,
+          "file": "MPSLOGO.SS",
+          "file_sha256": "b4c805281404638cbfa6ad44e4a04528925ef18d343920412de14def30e91457",
+          "ordinal": 8,
+          "size": [
+            155,
+            119
+          ],
+          "header_part1_offset": 128,
+          "data_part3_offset": 45022,
+          "encoded_length": 6702,
+          "other_header_fields": [
+            163,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "65d1c11172b2709d7f4f6a801f5a389c8f2a43f07d60eb9767059032e23b6dfc",
+          "indexed_sha256": "d9c499402008c9c905e75d5676bc861368207c86780f5af065995d92d9bbbd01",
+          "opaque_pixels": 18445,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1023,
+          "asset": "mps-rotation.png",
+          "sample": [
+            0,
+            549,
+            357,
+            824
+          ],
+          "content": [
+            0,
+            0,
+            155,
+            119
+          ],
+          "art_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+          "art_size": [
+            1431,
+            1099
+          ],
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be",
+          "writes_sha256": "889528537bfb184ebef7269d92f7e36bbded64d75cd1c74e50700e61d44ef6f8"
+        },
+        {
+          "research_id": 1024,
+          "file": "MPSLOGO.SS",
+          "file_sha256": "b4c805281404638cbfa6ad44e4a04528925ef18d343920412de14def30e91457",
+          "ordinal": 9,
+          "size": [
+            155,
+            119
+          ],
+          "header_part1_offset": 144,
+          "data_part3_offset": 51724,
+          "encoded_length": 6509,
+          "other_header_fields": [
+            163,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "e53c64151e22ff9dce1ceeb84fd67271b095a6e2b1eb99e7376a0886f937ecc4",
+          "indexed_sha256": "f7b4f8b34624bd6ee1b9e301e12b2e8cb5c8cf659b9820f838704e75a76da400",
+          "opaque_pixels": 18445,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1024,
+          "asset": "mps-rotation.png",
+          "sample": [
+            357,
+            549,
+            715,
+            824
+          ],
+          "content": [
+            0,
+            0,
+            155,
+            119
+          ],
+          "art_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+          "art_size": [
+            1431,
+            1099
+          ],
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be",
+          "writes_sha256": "f604700b17ed9332b9cc44719db947daf6ed77aeb89252ae5d327e73cc01d943"
+        },
+        {
+          "research_id": 1025,
+          "file": "MPSLOGO.SS",
+          "file_sha256": "b4c805281404638cbfa6ad44e4a04528925ef18d343920412de14def30e91457",
+          "ordinal": 10,
+          "size": [
+            155,
+            119
+          ],
+          "header_part1_offset": 160,
+          "data_part3_offset": 58233,
+          "encoded_length": 6183,
+          "other_header_fields": [
+            163,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "3ccf297c5fd885c4e2d997d6cebdc05cc53336725df5e87246858bbbcadf0700",
+          "indexed_sha256": "16017e7ee30fdfc5a4dccc99f1994c59ba4ffa114be150530f4acfbe784bbc16",
+          "opaque_pixels": 18445,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1025,
+          "asset": "mps-rotation.png",
+          "sample": [
+            715,
+            549,
+            1073,
+            824
+          ],
+          "content": [
+            0,
+            0,
+            155,
+            119
+          ],
+          "art_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+          "art_size": [
+            1431,
+            1099
+          ],
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be",
+          "writes_sha256": "a18e6c68b34bf365f10cb86e6ca74097bd4402ac5a8611a74d92752b6a92fd46"
+        },
+        {
+          "research_id": 1026,
+          "file": "MPSLOGO.SS",
+          "file_sha256": "b4c805281404638cbfa6ad44e4a04528925ef18d343920412de14def30e91457",
+          "ordinal": 11,
+          "size": [
+            155,
+            119
+          ],
+          "header_part1_offset": 176,
+          "data_part3_offset": 64416,
+          "encoded_length": 5664,
+          "other_header_fields": [
+            163,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "194495c4f2ec2014d4058dcb7d3bb4d223318711d270bc88626584e09fe174fd",
+          "indexed_sha256": "44c07f04a94704772cc78b3a68a6ca968f2bfa93979cb5a464bc09dd68364752",
+          "opaque_pixels": 18445,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1026,
+          "asset": "mps-rotation.png",
+          "sample": [
+            1073,
+            549,
+            1431,
+            824
+          ],
+          "content": [
+            0,
+            0,
+            155,
+            119
+          ],
+          "art_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+          "art_size": [
+            1431,
+            1099
+          ],
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be",
+          "writes_sha256": "a422eec898f81b665197e81a4d58251778c1e25bc935770153fa448ecc97e857"
+        },
+        {
+          "research_id": 1027,
+          "file": "MPSLOGO.SS",
+          "file_sha256": "b4c805281404638cbfa6ad44e4a04528925ef18d343920412de14def30e91457",
+          "ordinal": 12,
+          "size": [
+            155,
+            119
+          ],
+          "header_part1_offset": 192,
+          "data_part3_offset": 70080,
+          "encoded_length": 5150,
+          "other_header_fields": [
+            163,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "bc7ccec78e62a4bf3e9fd14a7f38aa1aa71e832c85712d199fcfddc7c844b251",
+          "indexed_sha256": "eea307905b8c2cec321d9192ae77e14b0d419ad31127f2bc6c3549ea9c483d13",
+          "opaque_pixels": 18445,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1027,
+          "asset": "mps-rotation.png",
+          "sample": [
+            0,
+            824,
+            357,
+            1099
+          ],
+          "content": [
+            0,
+            0,
+            155,
+            119
+          ],
+          "art_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+          "art_size": [
+            1431,
+            1099
+          ],
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be",
+          "writes_sha256": "7757806bc22114721534d7ad47f621e2f4df634b551e1d87dd76d4a46697484e"
+        },
+        {
+          "research_id": 1028,
+          "file": "MPSLOGO.SS",
+          "file_sha256": "b4c805281404638cbfa6ad44e4a04528925ef18d343920412de14def30e91457",
+          "ordinal": 13,
+          "size": [
+            155,
+            119
+          ],
+          "header_part1_offset": 208,
+          "data_part3_offset": 75230,
+          "encoded_length": 4399,
+          "other_header_fields": [
+            163,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "bfae178ea09b091cda02eedb44b6ffcf3a7f02ea1a90e47014e8a4156eeaf6a8",
+          "indexed_sha256": "c0214a392669fd27a3f21441197b6e4e35c7ffc91e7e4e41cd3413e4656c85bc",
+          "opaque_pixels": 18445,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1028,
+          "asset": "mps-rotation.png",
+          "sample": [
+            357,
+            824,
+            715,
+            1099
+          ],
+          "content": [
+            0,
+            0,
+            155,
+            119
+          ],
+          "art_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+          "art_size": [
+            1431,
+            1099
+          ],
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be",
+          "writes_sha256": "ae88343d2d874782935e13745f918d72015d53347c6d6d918557dbf538ae9a72"
+        },
+        {
+          "research_id": 1029,
+          "file": "MPSLOGO.SS",
+          "file_sha256": "b4c805281404638cbfa6ad44e4a04528925ef18d343920412de14def30e91457",
+          "ordinal": 14,
+          "size": [
+            155,
+            119
+          ],
+          "header_part1_offset": 224,
+          "data_part3_offset": 79629,
+          "encoded_length": 3847,
+          "other_header_fields": [
+            163,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ba3b96613e4a64585086a312743474cd14db9843f2b8ecc9cce1ac947694b632",
+          "indexed_sha256": "e761c511dfb5610870a1111d3866036d7e4c04e8a37c175b1851daa9bcca4c24",
+          "opaque_pixels": 18445,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1029,
+          "asset": "mps-rotation.png",
+          "sample": [
+            715,
+            824,
+            1073,
+            1099
+          ],
+          "content": [
+            0,
+            0,
+            155,
+            119
+          ],
+          "art_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+          "art_size": [
+            1431,
+            1099
+          ],
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be",
+          "writes_sha256": "d98aeb0a7867dac6e6e1c0673b2c394d0bffc7ca214ab64cbfcb8802d5ff6e02"
+        },
+        {
+          "research_id": 1030,
+          "file": "MPSLOGO.SS",
+          "file_sha256": "b4c805281404638cbfa6ad44e4a04528925ef18d343920412de14def30e91457",
+          "ordinal": 15,
+          "size": [
+            155,
+            119
+          ],
+          "header_part1_offset": 240,
+          "data_part3_offset": 83476,
+          "encoded_length": 3501,
+          "other_header_fields": [
+            163,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "6bcdcc747d43cf7995d93b0ad32a9afee0e2a009175486a7323baf304fe0c3d6",
+          "indexed_sha256": "db4fe04d6ee2b953f719d9b68e955a8393f4ebde81d8ecff548cabe297de6672",
+          "opaque_pixels": 18445,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1030,
+          "asset": "mps-rotation.png",
+          "sample": [
+            1073,
+            824,
+            1431,
+            1099
+          ],
+          "content": [
+            0,
+            0,
+            155,
+            119
+          ],
+          "art_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+          "art_size": [
+            1431,
+            1099
+          ],
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be",
+          "writes_sha256": "887e5979f11557ece23b0adb577cd66c183b012ec74ccc243f784b4a1ceb9030"
+        }
+      ]
+    },
+    "opening-title.png": {
+      "sha256": "0f8ebeff0eb4272e23b3de845e4148dda9c80a8ca7d54bf8b6b9f869c123d871",
+      "bytes": 1476583,
+      "size": [
+        2206,
+        713
+      ],
+      "mode": "RGB",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: style-transfer. Produce ONE original HD raster wordmark for the Colonization opening screen, based on the exact source Image1. This is a very wide and low LANDSCAPE banner, target aspect ratio approximately5.52:1. Preserve the exact layout: small centered gold serif line \"Sid Meier's\" at the top, very large all-caps gold-outlined serif word \"COLONIZATION\" across the lower width, thin gold horizontal rule extending left and right beneath the small author line. Text verbatim, spelling C O L O N I Z A T I O N. The original royal-blue background must fill the full rectangle and the large letter interiors, no transparency, no black bands. Refine outlines into clean crisp fine pixel-art gold edges with very restrained metallic highlights, style detail compatible with Image2 but no scenery or motifs from it. Keep letter proportions, spacing, outline weight, positions, blue fill and hierarchy faithful to Image1, no new font concept. Edge-to-edge banner artwork, very small original-style margin only, do not place the wordmark in a big blank canvas. No subtitle, extra words, badges, decorative objects, watermark, blur, 3D, photography, grain, stone texture or smooth painted effects. Fully opaque wide blue rectangle with exact gold source lettering.",
+      "generation_file": "exec-f86fd4bd-ae3f-4f2a-a6b2-82c169567f47.png",
+      "reference_sha256": "9117182eb921e438db16fed7eae368b9dd44675e45e1016774d0b19eeb6cd369",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG retained; original source253 mask retained",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1180,
+          "file": "OPENLOGO.SS",
+          "file_sha256": "8168d9d749b8a399b8ab545cf341ad79036a09b81bae68a1758285c6bc540e1f",
+          "ordinal": 0,
+          "size": [
+            276,
+            50
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 7389,
+          "other_header_fields": [
+            160,
+            83
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "e7ca77bf82437657ef13f16872e7d04a648d45a474c3b77658ee32be2a75cc03",
+          "indexed_sha256": "1f568d308314e7fd398c980a6b88d9d25bbbf68a78db782ae37e27d85949929a",
+          "opaque_pixels": 6754,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1180,
+          "asset": "opening-title.png",
+          "sample": [
+            0,
+            161,
+            2206,
+            573
+          ],
+          "content": [
+            0,
+            0,
+            276,
+            50
+          ],
+          "art_sha256": "0f8ebeff0eb4272e23b3de845e4148dda9c80a8ca7d54bf8b6b9f869c123d871",
+          "art_size": [
+            2206,
+            713
+          ],
+          "palette_sha256": "68fc29eb240de4eb883dae47cf8a935905cf52dfd9a42723a43ffb0af68c3c67",
+          "writes_sha256": "d6a79f5ce9168a7780dcef8fedcb2b345611d5f9cf15f4c07f6ce48cd1438041"
+        }
+      ],
+      "native_text_rows_preserved": [
+        0,
+        14
+      ],
+      "display_sampling": "Native author line, shadows and transparent outline retained; generated gold material composited only within native gold cells."
     }
   }
 }

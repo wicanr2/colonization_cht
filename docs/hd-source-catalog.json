@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "9a87ae7b3cbc501e3686d3dc9f844f646711629f485e1dfeba3919019408497b",
+  "formal_manifest_sha256": "a2d300dfd6c4fb3a6abfb675f83cb48374ffcdc648e365fc2b99b2d8cd22fd1f",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,12 +26,12 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 638,
+    "formal_asset_bindings": 655,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
     "other_formats_and_program_drawn_graphics": "not_assessed",
-    "display_pass_source_bindings": 321
+    "display_pass_source_bindings": 338
   },
   "files": [
     {
@@ -38687,7 +38687,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mps-rotation.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "85e10f9b5ac93f900b00370d8c4c8c059a7886220f24ecbbb50fdc3d44017f12",
+        "scope": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1016,
@@ -38712,7 +38721,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mps-rotation.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "85e10f9b5ac93f900b00370d8c4c8c059a7886220f24ecbbb50fdc3d44017f12",
+        "scope": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1017,
@@ -38737,7 +38755,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mps-rotation.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "85e10f9b5ac93f900b00370d8c4c8c059a7886220f24ecbbb50fdc3d44017f12",
+        "scope": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1018,
@@ -38762,7 +38789,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mps-rotation.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "85e10f9b5ac93f900b00370d8c4c8c059a7886220f24ecbbb50fdc3d44017f12",
+        "scope": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1019,
@@ -38787,7 +38823,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mps-rotation.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "85e10f9b5ac93f900b00370d8c4c8c059a7886220f24ecbbb50fdc3d44017f12",
+        "scope": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1020,
@@ -38812,7 +38857,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mps-rotation.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "85e10f9b5ac93f900b00370d8c4c8c059a7886220f24ecbbb50fdc3d44017f12",
+        "scope": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1021,
@@ -38837,7 +38891,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mps-rotation.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "85e10f9b5ac93f900b00370d8c4c8c059a7886220f24ecbbb50fdc3d44017f12",
+        "scope": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1022,
@@ -38862,7 +38925,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mps-rotation.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "85e10f9b5ac93f900b00370d8c4c8c059a7886220f24ecbbb50fdc3d44017f12",
+        "scope": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1023,
@@ -38887,7 +38959,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mps-rotation.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "85e10f9b5ac93f900b00370d8c4c8c059a7886220f24ecbbb50fdc3d44017f12",
+        "scope": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1024,
@@ -38912,7 +38993,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mps-rotation.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "85e10f9b5ac93f900b00370d8c4c8c059a7886220f24ecbbb50fdc3d44017f12",
+        "scope": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1025,
@@ -38937,7 +39027,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mps-rotation.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "85e10f9b5ac93f900b00370d8c4c8c059a7886220f24ecbbb50fdc3d44017f12",
+        "scope": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1026,
@@ -38962,7 +39061,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mps-rotation.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "85e10f9b5ac93f900b00370d8c4c8c059a7886220f24ecbbb50fdc3d44017f12",
+        "scope": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1027,
@@ -38987,7 +39095,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mps-rotation.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "85e10f9b5ac93f900b00370d8c4c8c059a7886220f24ecbbb50fdc3d44017f12",
+        "scope": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1028,
@@ -39012,7 +39129,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mps-rotation.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "85e10f9b5ac93f900b00370d8c4c8c059a7886220f24ecbbb50fdc3d44017f12",
+        "scope": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1029,
@@ -39037,7 +39163,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mps-rotation.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "85e10f9b5ac93f900b00370d8c4c8c059a7886220f24ecbbb50fdc3d44017f12",
+        "scope": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1030,
@@ -39062,7 +39197,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mps-rotation.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "85e10f9b5ac93f900b00370d8c4c8c059a7886220f24ecbbb50fdc3d44017f12",
+        "scope": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1031,
@@ -43933,7 +44077,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-title.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "85e10f9b5ac93f900b00370d8c4c8c059a7886220f24ecbbb50fdc3d44017f12",
+        "scope": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1181,
@@ -73771,6 +73924,414 @@
       "spec": "docs/spec/067-hd-world-terrain-batch.md",
       "state": "DISPLAY-PASS",
       "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "mps-rotation.png",
+      "asset_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+      "source_research_id": 1015,
+      "source_file": "MPSLOGO.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "11fcd9965c3c0e4f6f5ea42067492e0e3a395bfa1ed6ce7a27e252a38816a171",
+      "source_indexed_sha256": "1226c1290ac0f84048a18fcceaf952dcf75f21da9128c05c2a74767ae94fc5ec",
+      "raw_art_rect": [
+        0,
+        0,
+        357,
+        274
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        155,
+        119
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "mps-rotation.png",
+      "asset_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+      "source_research_id": 1016,
+      "source_file": "MPSLOGO.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "ea55107737d055878a75b5fb97c509716f97b6a65ec973984f4369fb51bf6953",
+      "source_indexed_sha256": "6c45663d1dfbd7acaf7d5b9d177fd44d5da99443aa7d49cb9b5d2ef34bc53754",
+      "raw_art_rect": [
+        357,
+        0,
+        715,
+        274
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        155,
+        119
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "mps-rotation.png",
+      "asset_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+      "source_research_id": 1017,
+      "source_file": "MPSLOGO.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "37e840b4237536ddee596ac0a053aaf5869d5f11281d6e2177285376eca097f5",
+      "source_indexed_sha256": "d0236631d00d635310c35fdc8f25b5d8f87427a577deff9f86696736a62a4efa",
+      "raw_art_rect": [
+        715,
+        0,
+        1073,
+        274
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        155,
+        119
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "mps-rotation.png",
+      "asset_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+      "source_research_id": 1018,
+      "source_file": "MPSLOGO.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "7a5026f79a966651a786bc608d3f7c4fbdfae9e6ca1139cd10203b949fc5daba",
+      "source_indexed_sha256": "672c2ea850c27c56623d81dfa1c7b3fcf6cf7834102b4cff10f62127fcf50c85",
+      "raw_art_rect": [
+        1073,
+        0,
+        1431,
+        274
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        155,
+        119
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "mps-rotation.png",
+      "asset_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+      "source_research_id": 1019,
+      "source_file": "MPSLOGO.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "52d837b9d866d3e283b715d84abea0579ce1c6f8e77df450d6586e83a39cc35e",
+      "source_indexed_sha256": "76a579e8a70115413dddc51823d9daeb19f85c31340aac3cf6c0ad70357941e3",
+      "raw_art_rect": [
+        0,
+        274,
+        357,
+        549
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        155,
+        119
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "mps-rotation.png",
+      "asset_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+      "source_research_id": 1020,
+      "source_file": "MPSLOGO.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "98cc61024dc25a61e51bdca8c75ceeb916846de155c10ba5b61f60444b040ab1",
+      "source_indexed_sha256": "fcb559b701af566019dc2e85d5cde6cf4474391e14653de3479e138458a899fb",
+      "raw_art_rect": [
+        357,
+        274,
+        715,
+        549
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        155,
+        119
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "mps-rotation.png",
+      "asset_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+      "source_research_id": 1021,
+      "source_file": "MPSLOGO.SS",
+      "source_ordinal": 6,
+      "source_encoded_sha256": "2a02e551f69c8ca7acc2613431868519a21ba03efcf59d32f83c9b3c4ffc9fca",
+      "source_indexed_sha256": "3c21417caf381fcfeb3832d977bed74a2c19172c0763ff6b78be44381d4fa47b",
+      "raw_art_rect": [
+        715,
+        274,
+        1073,
+        549
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        155,
+        119
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "mps-rotation.png",
+      "asset_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+      "source_research_id": 1022,
+      "source_file": "MPSLOGO.SS",
+      "source_ordinal": 7,
+      "source_encoded_sha256": "69adf70c752db97c03970044e326c2e032557c8070a85b6cd09c31dca0ee1063",
+      "source_indexed_sha256": "122ec782bba7fb601c1e993083d207df3562f0495f9307cd048ca33bdd8f04c7",
+      "raw_art_rect": [
+        1073,
+        274,
+        1431,
+        549
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        155,
+        119
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "mps-rotation.png",
+      "asset_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+      "source_research_id": 1023,
+      "source_file": "MPSLOGO.SS",
+      "source_ordinal": 8,
+      "source_encoded_sha256": "65d1c11172b2709d7f4f6a801f5a389c8f2a43f07d60eb9767059032e23b6dfc",
+      "source_indexed_sha256": "d9c499402008c9c905e75d5676bc861368207c86780f5af065995d92d9bbbd01",
+      "raw_art_rect": [
+        0,
+        549,
+        357,
+        824
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        155,
+        119
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "mps-rotation.png",
+      "asset_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+      "source_research_id": 1024,
+      "source_file": "MPSLOGO.SS",
+      "source_ordinal": 9,
+      "source_encoded_sha256": "e53c64151e22ff9dce1ceeb84fd67271b095a6e2b1eb99e7376a0886f937ecc4",
+      "source_indexed_sha256": "f7b4f8b34624bd6ee1b9e301e12b2e8cb5c8cf659b9820f838704e75a76da400",
+      "raw_art_rect": [
+        357,
+        549,
+        715,
+        824
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        155,
+        119
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "mps-rotation.png",
+      "asset_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+      "source_research_id": 1025,
+      "source_file": "MPSLOGO.SS",
+      "source_ordinal": 10,
+      "source_encoded_sha256": "3ccf297c5fd885c4e2d997d6cebdc05cc53336725df5e87246858bbbcadf0700",
+      "source_indexed_sha256": "16017e7ee30fdfc5a4dccc99f1994c59ba4ffa114be150530f4acfbe784bbc16",
+      "raw_art_rect": [
+        715,
+        549,
+        1073,
+        824
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        155,
+        119
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "mps-rotation.png",
+      "asset_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+      "source_research_id": 1026,
+      "source_file": "MPSLOGO.SS",
+      "source_ordinal": 11,
+      "source_encoded_sha256": "194495c4f2ec2014d4058dcb7d3bb4d223318711d270bc88626584e09fe174fd",
+      "source_indexed_sha256": "44c07f04a94704772cc78b3a68a6ca968f2bfa93979cb5a464bc09dd68364752",
+      "raw_art_rect": [
+        1073,
+        549,
+        1431,
+        824
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        155,
+        119
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "mps-rotation.png",
+      "asset_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+      "source_research_id": 1027,
+      "source_file": "MPSLOGO.SS",
+      "source_ordinal": 12,
+      "source_encoded_sha256": "bc7ccec78e62a4bf3e9fd14a7f38aa1aa71e832c85712d199fcfddc7c844b251",
+      "source_indexed_sha256": "eea307905b8c2cec321d9192ae77e14b0d419ad31127f2bc6c3549ea9c483d13",
+      "raw_art_rect": [
+        0,
+        824,
+        357,
+        1099
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        155,
+        119
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "mps-rotation.png",
+      "asset_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+      "source_research_id": 1028,
+      "source_file": "MPSLOGO.SS",
+      "source_ordinal": 13,
+      "source_encoded_sha256": "bfae178ea09b091cda02eedb44b6ffcf3a7f02ea1a90e47014e8a4156eeaf6a8",
+      "source_indexed_sha256": "c0214a392669fd27a3f21441197b6e4e35c7ffc91e7e4e41cd3413e4656c85bc",
+      "raw_art_rect": [
+        357,
+        824,
+        715,
+        1099
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        155,
+        119
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "mps-rotation.png",
+      "asset_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+      "source_research_id": 1029,
+      "source_file": "MPSLOGO.SS",
+      "source_ordinal": 14,
+      "source_encoded_sha256": "ba3b96613e4a64585086a312743474cd14db9843f2b8ecc9cce1ac947694b632",
+      "source_indexed_sha256": "e761c511dfb5610870a1111d3866036d7e4c04e8a37c175b1851daa9bcca4c24",
+      "raw_art_rect": [
+        715,
+        824,
+        1073,
+        1099
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        155,
+        119
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "mps-rotation.png",
+      "asset_sha256": "4247e20675e61e307699be796c6364d697c1f7ca018f4c0ad633608e32ece1fd",
+      "source_research_id": 1030,
+      "source_file": "MPSLOGO.SS",
+      "source_ordinal": 15,
+      "source_encoded_sha256": "6bcdcc747d43cf7995d93b0ad32a9afee0e2a009175486a7323baf304fe0c3d6",
+      "source_indexed_sha256": "db4fe04d6ee2b953f719d9b68e955a8393f4ebde81d8ecff548cabe297de6672",
+      "raw_art_rect": [
+        1073,
+        824,
+        1431,
+        1099
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        155,
+        119
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "opening-title.png",
+      "asset_sha256": "0f8ebeff0eb4272e23b3de845e4148dda9c80a8ca7d54bf8b6b9f869c123d871",
+      "source_research_id": 1180,
+      "source_file": "OPENLOGO.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "e7ca77bf82437657ef13f16872e7d04a648d45a474c3b77658ee32be2a75cc03",
+      "source_indexed_sha256": "1f568d308314e7fd398c980a6b88d9d25bbbf68a78db782ae37e27d85949929a",
+      "raw_art_rect": [
+        0,
+        161,
+        2206,
+        573
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        276,
+        50
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
     }
   ],
   "limitations": [
@@ -74699,5 +75260,12 @@
     "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
     "formal_binary_sha256": "f14eebb037a9324702930c7b3d275abe7dcfe4f4befe3ee8478db6208c02e063",
     "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+  },
+  "last_opening_logos_display": {
+    "state": "DISPLAY-PASS",
+    "sources": 17,
+    "receipt_sha256": "85e10f9b5ac93f900b00370d8c4c8c059a7886220f24ecbbb50fdc3d44017f12",
+    "formal_binary_sha256": "93ab1dc7beffd3d19a04186c4310443f61ca109e84e93e749026b66d25e06eed",
+    "scope": "actual encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated production HD base renderer; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
   }
 }

@@ -13,10 +13,11 @@ import (
 	"path/filepath"
 )
 
-const hdOpeningSpriteCount = 189
+const hdOpeningSpriteCount = 206
 const hdOpeningSpriteMaxPixels = 18445
 
 type hdOpeningSpriteDefinition struct {
+	independentPaletteSHA                                       string
 	preserveInk                                                 []byte
 	reuseFish                                                   int
 	ordinal, id, w, h, encodedLen, opaque                       int
@@ -363,7 +364,7 @@ func (s *hdOpeningSpriteRuntime) retire() {
 	clear(s.nativeValid[:])
 	s.active = false
 }
-func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame, bounds image.Rectangle) map[string]any {
+func (s *hdOpeningSpriteRuntime) paintMapWithin(out *image.RGBA, f draftNativeFrame, bounds image.Rectangle) map[string]any {
 	r := map[string]any{"formal": true, "painted": 0, "sprite_painted": 0, "border_painted": 0, "map_painted": 0, "accepted": s.accepted, "rejected": s.rejected, "same_value_revocations": s.same, "published_transfers": s.transfers, "unknown_vga_revocations": s.unknownVGA, "same_value_vga_revocations": s.sameVGA}
 	m := s.p.h.m
 	reason := ""
@@ -427,6 +428,9 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 		x, y := pos%320*4, pos/320*4
 		pic := s.pictures[pos]
 		actor := s.published[pos]
+		if slot, known := hdOpeningSpriteSlot(actor.id); known && hdOpeningSpriteDefinitions[slot].independentPaletteSHA != "" {
+			continue
+		}
 		if actor.id != 0 && s.validUnder(actor.under) {
 			pic = actor.under
 		}
@@ -582,5 +586,99 @@ func hdOpeningSpriteSlot(id uint16) (int, bool) {
 	if id >= 1125 && id <= 1178 {
 		return int(id-1125) + 135, true
 	}
+	if id >= 1015 && id <= 1030 {
+		return int(id-1015) + 189, true
+	}
+	if id == 1180 {
+		return 205, true
+	}
 	return 0, false
+}
+
+// 規格069 R113 READY：獨立色盤的標誌在既有地圖合成後繪製。
+func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame, bounds image.Rectangle) map[string]any {
+	r := s.paintMapWithin(out, f, bounds)
+	independent := s.paintIndependentWithin(out, f, bounds)
+	r["independent_logos"] = independent
+	n := independent["painted"].(int)
+	if n > 0 {
+		r["map_reason"] = r["reason"]
+		r["reason"] = "verified-published-independent-opening"
+		r["painted"] = r["painted"].(int) + n
+		r["sprite_painted"] = r["sprite_painted"].(int) + n
+		combined, ok := r["sprite_mask"].([]byte)
+		if !ok || len(combined) != 8000 {
+			combined = make([]byte, 8000)
+		}
+		for i, v := range independent["mask"].([]byte) {
+			combined[i] |= v
+		}
+		r["sprite_mask"] = combined
+
+	}
+	return r
+}
+func (s *hdOpeningSpriteRuntime) paintIndependentWithin(out *image.RGBA, f draftNativeFrame, bounds image.Rectangle) map[string]any {
+	by := map[int]int{}
+	mask := make([]byte, 8000)
+	r := map[string]any{"formal": true, "painted": 0, "by_source": by, "mask": mask}
+	m := s.p.h.m
+	if !s.p.live() || f.mode != 0x13 || len(f.indexed) != 64000 || len(f.palette) != 768 || !bytes.Equal(m.Mem[0xa0000:0xafa00], f.indexed) || !bytes.Equal(m.Mem[0xafc00:0xaff00], f.palette) {
+		r["reason"] = "native-surface-or-code"
+		return r
+	}
+	paletteSHA := hash(f.palette)
+	for pos, c := range s.published {
+		slot, known := hdOpeningSpriteSlot(c.id)
+		if !known {
+			continue
+		}
+		d := hdOpeningSpriteDefinitions[slot]
+		if d.independentPaletteSHA == "" || d.independentPaletteSHA != paletteSHA {
+			continue
+		}
+		if !s.nativeValid[slot] || int(c.local) >= d.w*d.h || s.native[slot][c.local] != c.value || c.value == 253 || f.indexed[pos] != c.value {
+			r["reason"] = "source"
+			return r
+		}
+	}
+	for pos, c := range s.published {
+		slot, known := hdOpeningSpriteSlot(c.id)
+		if !known || !image.Pt(pos%320, pos/320).In(bounds) {
+			continue
+		}
+		d := hdOpeningSpriteDefinitions[slot]
+		if d.independentPaletteSHA == "" || d.independentPaletteSHA != paletteSHA {
+			continue
+		}
+		x, y := pos%320*4, pos/320*4
+		sx, sy := int(c.local)%d.w*4, int(c.local)/d.w*4
+		if d.id == 1180 {
+			// 標題的原生字形與透明外緣保持；生成藍底不抹掉原字形。
+			hdOpeningOriginalCell(out, f, pos)
+			native := int(c.value) * 3
+			if int(c.local)/d.w >= 14 && f.palette[native] > f.palette[native+2] && f.palette[native+1] > f.palette[native+2] {
+				for dy := 0; dy < 4; dy++ {
+					for dx := 0; dx < 4; dx++ {
+						a := s.art[slot].NRGBAAt(sx+dx, sy+dy)
+						if a.R > a.B && a.G > a.B {
+							out.SetRGBA(x+dx, y+dy, color.RGBA{a.R, a.G, a.B, 255})
+						}
+					}
+				}
+			}
+		} else {
+			draw.Draw(out, image.Rect(x, y, x+4, y+4), s.art[slot], image.Pt(sx, sy), draw.Src)
+		}
+
+		by[d.id]++
+		mask[pos>>3] |= 1 << uint(pos&7)
+	}
+	total := 0
+	for _, n := range by {
+		total += n
+	}
+	r["painted"] = total
+	r["reason"] = "verified-independent-source-and-palette"
+	return r
 }
