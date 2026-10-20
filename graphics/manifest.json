@@ -36888,6 +36888,1244 @@
           "writes_sha256": "3d6a2bf00885f6b945af45a58f9ffd0db11fe9223b65c26efbffc44f48a9fd57"
         }
       ]
+    },
+    "river-variants.png": {
+      "sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "bytes": 1758464,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: style-transfer. Create ONE original terrain sprite atlas for the Colonization HD display layer. Image1 is an exact 5-by-5 arrangement of TWENTY FIVE different river tiles. Image2 is the project's fine pixel-art STYLE reference only. Produce a square transparent image with exactly FIVE equal columns and FIVE equal rows, one river tile centered in every cell, keep the same reading order and orientation. Repaint all 25 river shapes individually and literally: exact bends, junctions, broad channels, bank outlines, channel count and direction as in Image1, no duplicated substitutes. Blue gently rippled water inside each channel, narrow dark green grassy banks on its sides. Preserve the footprint, proportions and endpoints of each source shape; do not make the shapes round islands, lakes, looped roads, dioramas, floating terrain blocks or perspective objects. Top-down 2D map tile artwork; water and banks lie flat. Refined crisp small pixel clusters, restrained blue water with subtle glints and moss/grass edge texture consistent with Image2. Give every shape generous transparent margins, never touch adjacent cells. Every channel and bank opaque within its own silhouette; truly transparent elsewhere. Remove ALL vivid magenta reference pixels and ALL black numeric labels. No text, numbers, lettering, people, trees, boats, buildings, grid, borders, checkerboard backdrop, smooth painting, blur, 3D or photography. Exactly5x5 equal cells with25 separate river shapes, all layout and directional differences faithful to Image1.",
+      "generation_file": "exec-f22a9f64-dc23-4d28-8090-04810a5c4ab7.png",
+      "reference_sha256": "9c28fd81327698e31081cd7bd466092e08fa1974cc142ce0b45fae6a5c2179d5",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "column_row_boundaries": {
+        "0": [
+          0,
+          250,
+          501,
+          752,
+          1003,
+          1254
+        ],
+        "1": [
+          0,
+          250,
+          501,
+          752,
+          1003,
+          1254
+        ],
+        "2": [
+          0,
+          250,
+          501,
+          752,
+          1003,
+          1254
+        ],
+        "3": [
+          0,
+          250,
+          501,
+          752,
+          1003,
+          1254
+        ],
+        "4": [
+          0,
+          250,
+          501,
+          752,
+          1003,
+          1254
+        ]
+      },
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1289,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 1,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 16,
+          "data_part3_offset": 2,
+          "encoded_length": 122,
+          "other_header_fields": [
+            26,
+            84
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "d1d5cfffeeaabfa0330cc804868c9bdfa796955b83371627a206fbe421c2ec93",
+          "indexed_sha256": "1da4fac15e450c01a405eda3813b81b5fd1d303ab0b100b0d4e36d45fcc98592",
+          "opaque_pixels": 75,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1289,
+          "asset": "river-variants.png",
+          "sample": [
+            31,
+            78,
+            237,
+            190
+          ],
+          "content": [
+            1,
+            4,
+            16,
+            12
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "19680f940d477b4959d0e24a731cdc9ebc145fd3b6fdb8017738f8ed75025839",
+          "palette_sha256": "405a04026eeb13acd87242a8585ce0423b85af66870ed0fdc831e5df052d312c",
+          "writes_sha256": "2e997de5800cf571b4c923103e72e23c2bb7ec6a7b400f68ba741c3e24d3305d"
+        },
+        {
+          "research_id": 1290,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 2,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 32,
+          "data_part3_offset": 124,
+          "encoded_length": 113,
+          "other_header_fields": [
+            43,
+            84
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "499031321140bf76084d10329c63dc2c0865c4be2f35dc6a33d6c91f46a255ca",
+          "indexed_sha256": "8a2b1385ae38dea74f0e0a109f97657973b253d64bef560c6606ea040b7b26eb",
+          "opaque_pixels": 73,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1290,
+          "asset": "river-variants.png",
+          "sample": [
+            268,
+            54,
+            438,
+            192
+          ],
+          "content": [
+            0,
+            2,
+            12,
+            12
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "fb975d920bd582894c8c9352a32502ef9d148e5faeaa18228f7d00de3220e3f7",
+          "palette_sha256": "c2716aa2d81d46c3dd31bad109432483d0da56fa8c2308b74318ea678595fa7a",
+          "writes_sha256": "d8361949fe7efb9e23c3762bd4e3c4aa193216218079abe1abfacf74b4e0a80a"
+        },
+        {
+          "research_id": 1291,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 3,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 48,
+          "data_part3_offset": 237,
+          "encoded_length": 169,
+          "other_header_fields": [
+            60,
+            84
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "d804ccb92149d2cdcc15c633ce45f3ab66c6825cec2583d5fe81f4900fc4da02",
+          "indexed_sha256": "f8002fd72652d546059ed063866afe88358ddb1c7569e308b5587ff92874cb74",
+          "opaque_pixels": 128,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1291,
+          "asset": "river-variants.png",
+          "sample": [
+            518,
+            51,
+            731,
+            202
+          ],
+          "content": [
+            0,
+            2,
+            16,
+            13
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "46a51ed00cb106918c05050eb425fcb4eefdd575d6d0aeb6ee1cf0b405205aae",
+          "palette_sha256": "405a04026eeb13acd87242a8585ce0423b85af66870ed0fdc831e5df052d312c",
+          "writes_sha256": "dc9f154836bb8bf3eab993c2c444a3d49f0246dcf66f5615fe08cba07b799928"
+        },
+        {
+          "research_id": 1292,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 4,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 64,
+          "data_part3_offset": 406,
+          "encoded_length": 144,
+          "other_header_fields": [
+            77,
+            84
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "c280137960d616f7c87f8442640569463070d238b944f9745411c54c65c9ffcb",
+          "indexed_sha256": "e06f00e23c5981f2deb943b5c0d69483062f8ec7962050b28bdae26a382b2348",
+          "opaque_pixels": 85,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1292,
+          "asset": "river-variants.png",
+          "sample": [
+            768,
+            64,
+            938,
+            241
+          ],
+          "content": [
+            0,
+            3,
+            12,
+            16
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "ff003bdb7be2dbd93e5693ca9468aaa2cbe9b899e6e59f531920b07871079c4d",
+          "palette_sha256": "c7c74b5f00630d6c9516e59ff2aef84ec59fbd4113078ac4822ec18c3b092c57",
+          "writes_sha256": "a2c4d57108cbed2757702dc8a88853acb7f1c8578dfd5bb4dcc0ba24cd00d015"
+        },
+        {
+          "research_id": 1293,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 5,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 80,
+          "data_part3_offset": 550,
+          "encoded_length": 203,
+          "other_header_fields": [
+            94,
+            84
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "089d3c05b781de506492c44079244a226374528b6a7f1ffe2e52ebc06d9a42bb",
+          "indexed_sha256": "3cb2522fbf5a600c98fafc5e28924c83c9cfbf07db3436361ce021a8ca45b833",
+          "opaque_pixels": 135,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1293,
+          "asset": "river-variants.png",
+          "sample": [
+            1043,
+            62,
+            1233,
+            241
+          ],
+          "content": [
+            2,
+            3,
+            16,
+            16
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "6b0342e9bd020e8c9a440ef5634e505324a2b2d56fe28cc4b84bbacffe1aaf40",
+          "palette_sha256": "04d08828e6f7662fd3006b8ef63dd3a27291ec9d56305ad682b421452488e2f0",
+          "writes_sha256": "1333382602fa34e2ff0c92bb834571eb05d06440c5a6ac14353ce92de350c6ad"
+        },
+        {
+          "research_id": 1295,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 7,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 112,
+          "data_part3_offset": 955,
+          "encoded_length": 216,
+          "other_header_fields": [
+            128,
+            84
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "fe11de8dd3b16ab1568aa961047becd8e342e7ccc8ba272e26cc79f2abb35751",
+          "indexed_sha256": "6befdf9f1585a606a762530933febb4d9c984b67d902ab5a2ab0029555b40d5f",
+          "opaque_pixels": 164,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1295,
+          "asset": "river-variants.png",
+          "sample": [
+            20,
+            300,
+            234,
+            493
+          ],
+          "content": [
+            0,
+            2,
+            16,
+            16
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "7059d7e049ee5fa1e17639e600387dceef8114cd2de204f0e8d7d9625a548551",
+          "palette_sha256": "405a04026eeb13acd87242a8585ce0423b85af66870ed0fdc831e5df052d312c",
+          "writes_sha256": "fc62dc3f5d15a1564038ef39edf2db720a8b4b42c12d623cfe4311d486569eeb"
+        },
+        {
+          "research_id": 1296,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 8,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 128,
+          "data_part3_offset": 1171,
+          "encoded_length": 167,
+          "other_header_fields": [
+            145,
+            84
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f219f06d66420de179f5e6cec7dd7b470b77a202134f94519313873e9f8191c3",
+          "indexed_sha256": "69f1cf48e5d5261a6915d2ac196902c56faa992a60e9dfb5ed1add62f645da37",
+          "opaque_pixels": 86,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1296,
+          "asset": "river-variants.png",
+          "sample": [
+            330,
+            274,
+            461,
+            493
+          ],
+          "content": [
+            5,
+            0,
+            14,
+            16
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "26b3789b37fa895092a43dc14e854e7bbaefd77d88e9c52d797a3b2f549d8771",
+          "palette_sha256": "d774bf5601eacd2c6c5899ef096e4d8a4d4c05fe313ca7501386b8b62433572d",
+          "writes_sha256": "a21284ffebe79a18854d46b6781785e67d34980e86e338a83dbfe0601ba47802"
+        },
+        {
+          "research_id": 1298,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 10,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 160,
+          "data_part3_offset": 1575,
+          "encoded_length": 192,
+          "other_header_fields": [
+            179,
+            84
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "c0b6cf51aa11e124de3912af35afdff1774780384f461f4f77e752e85d1b7567",
+          "indexed_sha256": "bbf9c88d3bb8b79ce6bdc8376d312d680d6bfd439b9d7e107214bbc303bf8d37",
+          "opaque_pixels": 141,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1298,
+          "asset": "river-variants.png",
+          "sample": [
+            518,
+            274,
+            710,
+            466
+          ],
+          "content": [
+            0,
+            0,
+            14,
+            14
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "6d2027b2db8396a5954f016738c14e2d05df2d4807cd4110e33adb147ead53f5",
+          "palette_sha256": "04d08828e6f7662fd3006b8ef63dd3a27291ec9d56305ad682b421452488e2f0",
+          "writes_sha256": "0d9a5920b2292861ab20f152314ef4f6dea732fe08020c2bdffa652f02025ce4"
+        },
+        {
+          "research_id": 1299,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 11,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 176,
+          "data_part3_offset": 1767,
+          "encoded_length": 203,
+          "other_header_fields": [
+            196,
+            84
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "941760eb3257f1ae7a3089ecade500ab16a244033d55d6d5a2ac3d5171fe44ba",
+          "indexed_sha256": "a439bf35f83b0a8776e635d5a19ad4096f2371fa03c8ce2ce41ed39faa38a4fb",
+          "opaque_pixels": 160,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1299,
+          "asset": "river-variants.png",
+          "sample": [
+            767,
+            274,
+            990,
+            454
+          ],
+          "content": [
+            0,
+            0,
+            16,
+            13
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "12221d1235aa7d52f32b3a72fe075062567b9ca274762b9238fa2c2e53191866",
+          "palette_sha256": "e3d9c58011045d2feefb6e44d1e655295a03077f42fc63703dbc48adbb6dca39",
+          "writes_sha256": "e32d341e62360931180dc13db3e79cdeda9ff9defdde55aab8c2e12a0089659c"
+        },
+        {
+          "research_id": 1300,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 12,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 192,
+          "data_part3_offset": 1970,
+          "encoded_length": 238,
+          "other_header_fields": [
+            213,
+            84
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "27be6b6de2f0c94c33ae7772cecd8b2fbc3d82179a00c1ad93617e97873714fe",
+          "indexed_sha256": "8991670035fb32cc9941ea79981fc55ec69d31b7edf546ddcc97a14387d52cc0",
+          "opaque_pixels": 170,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1300,
+          "asset": "river-variants.png",
+          "sample": [
+            1033,
+            274,
+            1223,
+            493
+          ],
+          "content": [
+            1,
+            0,
+            15,
+            16
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "b7a38195bfabdd8c3a0c158635251dbfee0375bfea5381ffef572e5be7ed1acf",
+          "palette_sha256": "a72745fb0cda1a4bfb57e8f94c8e29587683cba37e8b29f90dfc54e860597c22",
+          "writes_sha256": "8d9cb79008b3990028fe4cc155802aebe48ef1dc072381b55aa221bb9982f5e7"
+        },
+        {
+          "research_id": 1301,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 13,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 208,
+          "data_part3_offset": 2208,
+          "encoded_length": 250,
+          "other_header_fields": [
+            230,
+            84
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "6b492787d3797f5c2e4e61ef487eaa8616b3786f2cabe18bf777e4bd5a53a4f9",
+          "indexed_sha256": "f6fd607e10dde62ec05361d027b55c9d6190ca7278ce6a7798b732a459a2b969",
+          "opaque_pixels": 190,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1301,
+          "asset": "river-variants.png",
+          "sample": [
+            21,
+            526,
+            233,
+            743
+          ],
+          "content": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "ae1c277f3cf5b23b68e5d04c2ed91feef062585c350be88d85493731e5b0c095",
+          "palette_sha256": "125c5b2c2cb5c91d032141ea2e05a6a3ff7911f4b7e2edca0fe847ce5ad2f225",
+          "writes_sha256": "aa92c4e6d3018be9cbfe1585b191fcdc8c3b2ac4f78c3497b75cdb9e47a43b1b"
+        },
+        {
+          "research_id": 1302,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 14,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 224,
+          "data_part3_offset": 2458,
+          "encoded_length": 245,
+          "other_header_fields": [
+            247,
+            84
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "979721f25138b438ad3dc5e80c5ccccde13e5d719a1eb0e67e630c1cf359b7ce",
+          "indexed_sha256": "89a4176655093a8d0ab6a8e115efe9158f12c7a7dff9f0866a77d4a4f9486c1e",
+          "opaque_pixels": 191,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1302,
+          "asset": "river-variants.png",
+          "sample": [
+            268,
+            526,
+            470,
+            743
+          ],
+          "content": [
+            0,
+            0,
+            15,
+            16
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "2396bd38812bd9bde96046454f7dfa5940afb260f879008e666787bb0e14a804",
+          "palette_sha256": "a72745fb0cda1a4bfb57e8f94c8e29587683cba37e8b29f90dfc54e860597c22",
+          "writes_sha256": "fa55e1f71899a8a3416c7cc4b83e4ba308c195b970b239684e2335a862ee2565"
+        },
+        {
+          "research_id": 1303,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 15,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 240,
+          "data_part3_offset": 2703,
+          "encoded_length": 219,
+          "other_header_fields": [
+            264,
+            84
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "0fa85e87fa4fff6b1bfad46afcc7a5f81ecd76310bfae9b889eb3c4cd63b5163",
+          "indexed_sha256": "462c199102cf6c540f2b0c411cef045ba502c64637ad1ac08fac9390ef8452e4",
+          "opaque_pixels": 156,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1303,
+          "asset": "river-variants.png",
+          "sample": [
+            518,
+            526,
+            734,
+            743
+          ],
+          "content": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "58d886b6a59bdad6625fde41adc6e5853d87e4b3db666e72ff1074abd88d20a7",
+          "palette_sha256": "125c5b2c2cb5c91d032141ea2e05a6a3ff7911f4b7e2edca0fe847ce5ad2f225",
+          "writes_sha256": "e6e53286660398fcfff24cd204347ea29c56b7d578a8210814bfcfe94b138b1d"
+        },
+        {
+          "research_id": 1306,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 18,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 288,
+          "data_part3_offset": 3046,
+          "encoded_length": 115,
+          "other_header_fields": [
+            43,
+            101
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "80b9a6d68aa4f5d16b51fccbd37b0ca3047cf14d0abbd6094a4e24ac46e7aa91",
+          "indexed_sha256": "7526fc24bb0610441d59e1704b70a1a7c0a6d6515ce0d43febcf61b9953777e7",
+          "opaque_pixels": 73,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1306,
+          "asset": "river-variants.png",
+          "sample": [
+            767,
+            552,
+            936,
+            690
+          ],
+          "content": [
+            0,
+            2,
+            12,
+            12
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "e5bb35b594361e40aa9952e35ee915dc68c1d4dd5862243e3ea9b68da2c8e004",
+          "palette_sha256": "c2716aa2d81d46c3dd31bad109432483d0da56fa8c2308b74318ea678595fa7a",
+          "writes_sha256": "56254dfe9bd7f416e2ef559108669ea9adf0492522227310c56d6dba626fd7eb"
+        },
+        {
+          "research_id": 1307,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 19,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 304,
+          "data_part3_offset": 3161,
+          "encoded_length": 138,
+          "other_header_fields": [
+            60,
+            101
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f2ce2047746622413012d168940aef36b8a29829b2f388d7a5fb4479f3f155d5",
+          "indexed_sha256": "932232c6f41336daa48e0d26d8814a85f7ea5dbe1697af41e099b2a16115bb3d",
+          "opaque_pixels": 96,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1307,
+          "asset": "river-variants.png",
+          "sample": [
+            1020,
+            568,
+            1233,
+            689
+          ],
+          "content": [
+            0,
+            3,
+            16,
+            12
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "a926f341d7ef8025e25c272a4fb6c81aceeb6bf6caa5312d76736f83959532eb",
+          "palette_sha256": "405a04026eeb13acd87242a8585ce0423b85af66870ed0fdc831e5df052d312c",
+          "writes_sha256": "85b65a8ccb1a1668643a54c76c51d4aebf67930d5047ce7103812379723f1ad6"
+        },
+        {
+          "research_id": 1308,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 20,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 320,
+          "data_part3_offset": 3299,
+          "encoded_length": 145,
+          "other_header_fields": [
+            77,
+            101
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "2b2753e01da21dcc0e634b4c7cfa9aec1709fd1294522c5a6cc52a67a21eb443",
+          "indexed_sha256": "2db06fb39f0a9070980ef35c264cb1d4e997b0a8eac89cd522c05f70c1d25e20",
+          "opaque_pixels": 85,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1308,
+          "asset": "river-variants.png",
+          "sample": [
+            19,
+            816,
+            185,
+            996
+          ],
+          "content": [
+            0,
+            3,
+            12,
+            16
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "80b326ec52380cec79892827e0c333e88edbe534bda0b5621654f4f8765fb4c0",
+          "palette_sha256": "c7c74b5f00630d6c9516e59ff2aef84ec59fbd4113078ac4822ec18c3b092c57",
+          "writes_sha256": "01a01347ccce43a458d1d0e7b2faf170c6807c71ab3a1e85c85b0e094612f840"
+        },
+        {
+          "research_id": 1309,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 21,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 336,
+          "data_part3_offset": 3444,
+          "encoded_length": 173,
+          "other_header_fields": [
+            94,
+            101
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "11263cba52784365e217a98d530b0993977dc322b8f71b38961d1b7e404917d1",
+          "indexed_sha256": "5089f7ded2dc0be0f13fd6cb10678748d1e1ff583e33f0a174fecb209e33182b",
+          "opaque_pixels": 104,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1309,
+          "asset": "river-variants.png",
+          "sample": [
+            304,
+            831,
+            484,
+            996
+          ],
+          "content": [
+            3,
+            4,
+            16,
+            16
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "fb25d4c2c07744a4ab4d00dc1fba3ac982ede3620215f0fff7765c723418b10d",
+          "palette_sha256": "04d08828e6f7662fd3006b8ef63dd3a27291ec9d56305ad682b421452488e2f0",
+          "writes_sha256": "7b7fb18143b45c42405f006f764454e37fd5c934ff2e71b663bfe448e0e6f6e4"
+        },
+        {
+          "research_id": 1311,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 23,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 368,
+          "data_part3_offset": 3795,
+          "encoded_length": 161,
+          "other_header_fields": [
+            128,
+            101
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "66f954944bb5c036921a1e3ef152b38c29ba0175e196f4a6cea4657fe27e1fb0",
+          "indexed_sha256": "dbc9ed7cca769f9a9bf5b47fdeb682e46a111e74e1d26d36160a4963e943919d",
+          "opaque_pixels": 110,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1311,
+          "asset": "river-variants.png",
+          "sample": [
+            518,
+            846,
+            737,
+            996
+          ],
+          "content": [
+            0,
+            5,
+            16,
+            16
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "a414e22969fe6e3bf4349120df38506bbbdc39cff02b5c61742e3b81aaaba38e",
+          "palette_sha256": "9e78cdb07ff06de79d8a6a810664aecdf69ad40a2ef205cb2e844c9fafdb66d5",
+          "writes_sha256": "15acb9ef3bf87111a7d11b237ec498f821e8970283a081c01a4c5e6367ebb19c"
+        },
+        {
+          "research_id": 1312,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 24,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 384,
+          "data_part3_offset": 3956,
+          "encoded_length": 167,
+          "other_header_fields": [
+            145,
+            101
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f1936ba8d507627cf086b127d04c39fe690e8f04ccc2cad70ad6345e3ce56dea",
+          "indexed_sha256": "a23849a29d2e47a66d5caf002309d41fae6c688ed63598beb068992059c9796d",
+          "opaque_pixels": 86,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1312,
+          "asset": "river-variants.png",
+          "sample": [
+            836,
+            777,
+            962,
+            996
+          ],
+          "content": [
+            5,
+            0,
+            14,
+            16
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "10978ce78a0f71d3786c75fe24f2435c9d68a0c516db7ce049e348ff550384b6",
+          "palette_sha256": "d774bf5601eacd2c6c5899ef096e4d8a4d4c05fe313ca7501386b8b62433572d",
+          "writes_sha256": "f2dc3ceeb6631079f0e7a3af7a30cea01a24fdd1791831990667340e70cd7b90"
+        },
+        {
+          "research_id": 1313,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 25,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 400,
+          "data_part3_offset": 4123,
+          "encoded_length": 216,
+          "other_header_fields": [
+            162,
+            101
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "e41a14ee90aaadd948dfe331894f3a8d1e2b6fe6fa7be4c2049bb00c6521c013",
+          "indexed_sha256": "bc281ee6ed802bc67a6cf1f0e0282d1302638ba85c4acc90908fa364b2e05f49",
+          "opaque_pixels": 132,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1313,
+          "asset": "river-variants.png",
+          "sample": [
+            1060,
+            777,
+            1233,
+            980
+          ],
+          "content": [
+            3,
+            0,
+            16,
+            15
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "15ea09a0328fc5614b47016bde6e94d7ef95c57062b99526530a869cf669954a",
+          "palette_sha256": "b4b774a10608dc6e7d17a9fe75c9014c50603ee71b12dfb1dd05deb87100f693",
+          "writes_sha256": "691a371f3242eb6c536adb1af1259afa0855b355e08d499327b440d81365b920"
+        },
+        {
+          "research_id": 1315,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 27,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 432,
+          "data_part3_offset": 4500,
+          "encoded_length": 175,
+          "other_header_fields": [
+            196,
+            101
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "b6c6d86747e97972b7a738ad525f08fbfe550a54667d310f75de4485d35fa924",
+          "indexed_sha256": "c9a7a7436a1382314080e9339bf767acf969ee1f3b9f08edf3dc794031076c3b",
+          "opaque_pixels": 128,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1315,
+          "asset": "river-variants.png",
+          "sample": [
+            19,
+            1025,
+            238,
+            1193
+          ],
+          "content": [
+            0,
+            0,
+            16,
+            12
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "b0a72760bc548d47301b64bf9db6f8eca4613ee136bc6faa5c4ab0c0ca429588",
+          "palette_sha256": "e3d9c58011045d2feefb6e44d1e655295a03077f42fc63703dbc48adbb6dca39",
+          "writes_sha256": "3ea2c161d16f87e3061a9e26535f5ae8024c803a1cf309cc1b6577f6dc5651f5"
+        },
+        {
+          "research_id": 1316,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 28,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 448,
+          "data_part3_offset": 4675,
+          "encoded_length": 217,
+          "other_header_fields": [
+            213,
+            101
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "c1b73f6201adaa70ba678740fce6852611de5accfac28bf2b2d8bffdf8f0b27b",
+          "indexed_sha256": "f17e17b9b3e5cee3610ea389564af5ee8637689424eb183297bb2e045b32c7e1",
+          "opaque_pixels": 140,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1316,
+          "asset": "river-variants.png",
+          "sample": [
+            295,
+            1025,
+            475,
+            1243
+          ],
+          "content": [
+            2,
+            0,
+            15,
+            16
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "0fbabbad6adbb3f0dab21263c6ac7ac59929223402a827bf87c235e1bc576a29",
+          "palette_sha256": "125c5b2c2cb5c91d032141ea2e05a6a3ff7911f4b7e2edca0fe847ce5ad2f225",
+          "writes_sha256": "300c7d8208672a4c634aea781fe9a9de91082f9ff1b4c0852a73426d51ee1b09"
+        },
+        {
+          "research_id": 1317,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 29,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 464,
+          "data_part3_offset": 4892,
+          "encoded_length": 209,
+          "other_header_fields": [
+            230,
+            101
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "c5d4e5ce8ced05878f5a6d9e3578c30001170d65bc514d125e1746f11a044c44",
+          "indexed_sha256": "5e77a511384c6352fe3a52880a94e726d45265b2130e243d3cf84ccfff1f0ce5",
+          "opaque_pixels": 128,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1317,
+          "asset": "river-variants.png",
+          "sample": [
+            571,
+            1025,
+            737,
+            1243
+          ],
+          "content": [
+            4,
+            0,
+            16,
+            16
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "6b37a7f60d83d22962881e9e6489c4d9ee0f9d56a99d5098517e34f8e5519a61",
+          "palette_sha256": "e3d9c58011045d2feefb6e44d1e655295a03077f42fc63703dbc48adbb6dca39",
+          "writes_sha256": "c20fe8d4b82cc67f4d8294d0fb620087c1482794c175460690186b8ddecebf9b"
+        },
+        {
+          "research_id": 1318,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 30,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 480,
+          "data_part3_offset": 5101,
+          "encoded_length": 184,
+          "other_header_fields": [
+            247,
+            101
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "736a8998c927ac472d1effb12140d9849ad32d0c20867cf755552c5eee8ccb19",
+          "indexed_sha256": "c38b615de73c8fcfedea4552d830ff3e5e095fb283e40d96191d0c6a46898540",
+          "opaque_pixels": 121,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1318,
+          "asset": "river-variants.png",
+          "sample": [
+            767,
+            1023,
+            948,
+            1243
+          ],
+          "content": [
+            0,
+            0,
+            13,
+            16
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "f3e50eeec96592b07b2ff54bd31d681449df6271836519cbdbf6c5a18747e43e",
+          "palette_sha256": "d18d919674dc99443e863e64358bb30937245f329dd1a335bc1d73ae65963c22",
+          "writes_sha256": "871a4127232c972b3a8b9df3ed6dbceebda80ea685f2f72493a2332b6bdb9a30"
+        },
+        {
+          "research_id": 1319,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 31,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 496,
+          "data_part3_offset": 5285,
+          "encoded_length": 220,
+          "other_header_fields": [
+            264,
+            101
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "c5c99bc428a766d266d00408a0576987b46d34fd9e8036ffae5b53de3dc912ed",
+          "indexed_sha256": "08c50ebba7d2f063285b7f157b59dda56f9dba11df7bb8efd1a36a8387baf1f5",
+          "opaque_pixels": 155,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1319,
+          "asset": "river-variants.png",
+          "sample": [
+            1020,
+            1025,
+            1233,
+            1243
+          ],
+          "content": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "art_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "0da0937523ffa9cad21a9a0a5b39080028482e6184cb3ac94c870d2b68026d7e",
+          "palette_sha256": "125c5b2c2cb5c91d032141ea2e05a6a3ff7911f4b7e2edca0fe847ce5ad2f225",
+          "writes_sha256": "bf17c03a8f68f392e48cfc2561a01af00103fc201c32b2bcd79b479d83d06a58"
+        }
+      ]
     }
   }
 }

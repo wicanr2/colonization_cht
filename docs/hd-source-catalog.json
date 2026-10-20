@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "7cfd8f0cfa3d94d0c5299cbf98fa1047eb7dc36036aee3ae5340663157057198",
+  "formal_manifest_sha256": "9a87ae7b3cbc501e3686d3dc9f844f646711629f485e1dfeba3919019408497b",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,12 +26,12 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 613,
+    "formal_asset_bindings": 638,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
     "other_formats_and_program_drawn_graphics": "not_assessed",
-    "display_pass_source_bindings": 296
+    "display_pass_source_bindings": 321
   },
   "files": [
     {
@@ -47444,7 +47444,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1290,
@@ -47469,7 +47478,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1291,
@@ -47494,7 +47512,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1292,
@@ -47519,7 +47546,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1293,
@@ -47544,7 +47580,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1294,
@@ -47674,7 +47719,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1296,
@@ -47699,7 +47753,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1297,
@@ -47841,7 +47904,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1299,
@@ -47866,7 +47938,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1300,
@@ -47891,7 +47972,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1301,
@@ -47916,7 +48006,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1302,
@@ -47941,7 +48040,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1303,
@@ -47966,7 +48074,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1304,
@@ -48121,7 +48238,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1307,
@@ -48146,7 +48272,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1308,
@@ -48171,7 +48306,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1309,
@@ -48196,7 +48340,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1310,
@@ -48255,7 +48408,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1312,
@@ -48280,7 +48442,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1313,
@@ -48305,7 +48476,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1314,
@@ -48364,7 +48544,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1316,
@@ -48389,7 +48578,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1317,
@@ -48414,7 +48612,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1318,
@@ -48439,7 +48646,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1319,
@@ -48464,7 +48680,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "river-variants.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/067-hd-world-terrain-batch.md",
+        "formal_connected": true,
+        "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+        "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1320,
@@ -72946,6 +73171,606 @@
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "state": "DISPLAY-PASS",
       "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1289,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "d1d5cfffeeaabfa0330cc804868c9bdfa796955b83371627a206fbe421c2ec93",
+      "source_indexed_sha256": "1da4fac15e450c01a405eda3813b81b5fd1d303ab0b100b0d4e36d45fcc98592",
+      "raw_art_rect": [
+        31,
+        78,
+        237,
+        190
+      ],
+      "native_content_rect": [
+        1,
+        4,
+        16,
+        12
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1290,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "499031321140bf76084d10329c63dc2c0865c4be2f35dc6a33d6c91f46a255ca",
+      "source_indexed_sha256": "8a2b1385ae38dea74f0e0a109f97657973b253d64bef560c6606ea040b7b26eb",
+      "raw_art_rect": [
+        268,
+        54,
+        438,
+        192
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        12,
+        12
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1291,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "d804ccb92149d2cdcc15c633ce45f3ab66c6825cec2583d5fe81f4900fc4da02",
+      "source_indexed_sha256": "f8002fd72652d546059ed063866afe88358ddb1c7569e308b5587ff92874cb74",
+      "raw_art_rect": [
+        518,
+        51,
+        731,
+        202
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        16,
+        13
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1292,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "c280137960d616f7c87f8442640569463070d238b944f9745411c54c65c9ffcb",
+      "source_indexed_sha256": "e06f00e23c5981f2deb943b5c0d69483062f8ec7962050b28bdae26a382b2348",
+      "raw_art_rect": [
+        768,
+        64,
+        938,
+        241
+      ],
+      "native_content_rect": [
+        0,
+        3,
+        12,
+        16
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1293,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "089d3c05b781de506492c44079244a226374528b6a7f1ffe2e52ebc06d9a42bb",
+      "source_indexed_sha256": "3cb2522fbf5a600c98fafc5e28924c83c9cfbf07db3436361ce021a8ca45b833",
+      "raw_art_rect": [
+        1043,
+        62,
+        1233,
+        241
+      ],
+      "native_content_rect": [
+        2,
+        3,
+        16,
+        16
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1295,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 7,
+      "source_encoded_sha256": "fe11de8dd3b16ab1568aa961047becd8e342e7ccc8ba272e26cc79f2abb35751",
+      "source_indexed_sha256": "6befdf9f1585a606a762530933febb4d9c984b67d902ab5a2ab0029555b40d5f",
+      "raw_art_rect": [
+        20,
+        300,
+        234,
+        493
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        16,
+        16
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1296,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 8,
+      "source_encoded_sha256": "f219f06d66420de179f5e6cec7dd7b470b77a202134f94519313873e9f8191c3",
+      "source_indexed_sha256": "69f1cf48e5d5261a6915d2ac196902c56faa992a60e9dfb5ed1add62f645da37",
+      "raw_art_rect": [
+        330,
+        274,
+        461,
+        493
+      ],
+      "native_content_rect": [
+        5,
+        0,
+        14,
+        16
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1298,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 10,
+      "source_encoded_sha256": "c0b6cf51aa11e124de3912af35afdff1774780384f461f4f77e752e85d1b7567",
+      "source_indexed_sha256": "bbf9c88d3bb8b79ce6bdc8376d312d680d6bfd439b9d7e107214bbc303bf8d37",
+      "raw_art_rect": [
+        518,
+        274,
+        710,
+        466
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        14,
+        14
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1299,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 11,
+      "source_encoded_sha256": "941760eb3257f1ae7a3089ecade500ab16a244033d55d6d5a2ac3d5171fe44ba",
+      "source_indexed_sha256": "a439bf35f83b0a8776e635d5a19ad4096f2371fa03c8ce2ce41ed39faa38a4fb",
+      "raw_art_rect": [
+        767,
+        274,
+        990,
+        454
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        13
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1300,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 12,
+      "source_encoded_sha256": "27be6b6de2f0c94c33ae7772cecd8b2fbc3d82179a00c1ad93617e97873714fe",
+      "source_indexed_sha256": "8991670035fb32cc9941ea79981fc55ec69d31b7edf546ddcc97a14387d52cc0",
+      "raw_art_rect": [
+        1033,
+        274,
+        1223,
+        493
+      ],
+      "native_content_rect": [
+        1,
+        0,
+        15,
+        16
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1301,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 13,
+      "source_encoded_sha256": "6b492787d3797f5c2e4e61ef487eaa8616b3786f2cabe18bf777e4bd5a53a4f9",
+      "source_indexed_sha256": "f6fd607e10dde62ec05361d027b55c9d6190ca7278ce6a7798b732a459a2b969",
+      "raw_art_rect": [
+        21,
+        526,
+        233,
+        743
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1302,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 14,
+      "source_encoded_sha256": "979721f25138b438ad3dc5e80c5ccccde13e5d719a1eb0e67e630c1cf359b7ce",
+      "source_indexed_sha256": "89a4176655093a8d0ab6a8e115efe9158f12c7a7dff9f0866a77d4a4f9486c1e",
+      "raw_art_rect": [
+        268,
+        526,
+        470,
+        743
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        15,
+        16
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1303,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 15,
+      "source_encoded_sha256": "0fa85e87fa4fff6b1bfad46afcc7a5f81ecd76310bfae9b889eb3c4cd63b5163",
+      "source_indexed_sha256": "462c199102cf6c540f2b0c411cef045ba502c64637ad1ac08fac9390ef8452e4",
+      "raw_art_rect": [
+        518,
+        526,
+        734,
+        743
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1306,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 18,
+      "source_encoded_sha256": "80b9a6d68aa4f5d16b51fccbd37b0ca3047cf14d0abbd6094a4e24ac46e7aa91",
+      "source_indexed_sha256": "7526fc24bb0610441d59e1704b70a1a7c0a6d6515ce0d43febcf61b9953777e7",
+      "raw_art_rect": [
+        767,
+        552,
+        936,
+        690
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        12,
+        12
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1307,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 19,
+      "source_encoded_sha256": "f2ce2047746622413012d168940aef36b8a29829b2f388d7a5fb4479f3f155d5",
+      "source_indexed_sha256": "932232c6f41336daa48e0d26d8814a85f7ea5dbe1697af41e099b2a16115bb3d",
+      "raw_art_rect": [
+        1020,
+        568,
+        1233,
+        689
+      ],
+      "native_content_rect": [
+        0,
+        3,
+        16,
+        12
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1308,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 20,
+      "source_encoded_sha256": "2b2753e01da21dcc0e634b4c7cfa9aec1709fd1294522c5a6cc52a67a21eb443",
+      "source_indexed_sha256": "2db06fb39f0a9070980ef35c264cb1d4e997b0a8eac89cd522c05f70c1d25e20",
+      "raw_art_rect": [
+        19,
+        816,
+        185,
+        996
+      ],
+      "native_content_rect": [
+        0,
+        3,
+        12,
+        16
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1309,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 21,
+      "source_encoded_sha256": "11263cba52784365e217a98d530b0993977dc322b8f71b38961d1b7e404917d1",
+      "source_indexed_sha256": "5089f7ded2dc0be0f13fd6cb10678748d1e1ff583e33f0a174fecb209e33182b",
+      "raw_art_rect": [
+        304,
+        831,
+        484,
+        996
+      ],
+      "native_content_rect": [
+        3,
+        4,
+        16,
+        16
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1311,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 23,
+      "source_encoded_sha256": "66f954944bb5c036921a1e3ef152b38c29ba0175e196f4a6cea4657fe27e1fb0",
+      "source_indexed_sha256": "dbc9ed7cca769f9a9bf5b47fdeb682e46a111e74e1d26d36160a4963e943919d",
+      "raw_art_rect": [
+        518,
+        846,
+        737,
+        996
+      ],
+      "native_content_rect": [
+        0,
+        5,
+        16,
+        16
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1312,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 24,
+      "source_encoded_sha256": "f1936ba8d507627cf086b127d04c39fe690e8f04ccc2cad70ad6345e3ce56dea",
+      "source_indexed_sha256": "a23849a29d2e47a66d5caf002309d41fae6c688ed63598beb068992059c9796d",
+      "raw_art_rect": [
+        836,
+        777,
+        962,
+        996
+      ],
+      "native_content_rect": [
+        5,
+        0,
+        14,
+        16
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1313,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 25,
+      "source_encoded_sha256": "e41a14ee90aaadd948dfe331894f3a8d1e2b6fe6fa7be4c2049bb00c6521c013",
+      "source_indexed_sha256": "bc281ee6ed802bc67a6cf1f0e0282d1302638ba85c4acc90908fa364b2e05f49",
+      "raw_art_rect": [
+        1060,
+        777,
+        1233,
+        980
+      ],
+      "native_content_rect": [
+        3,
+        0,
+        16,
+        15
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1315,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 27,
+      "source_encoded_sha256": "b6c6d86747e97972b7a738ad525f08fbfe550a54667d310f75de4485d35fa924",
+      "source_indexed_sha256": "c9a7a7436a1382314080e9339bf767acf969ee1f3b9f08edf3dc794031076c3b",
+      "raw_art_rect": [
+        19,
+        1025,
+        238,
+        1193
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        12
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1316,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 28,
+      "source_encoded_sha256": "c1b73f6201adaa70ba678740fce6852611de5accfac28bf2b2d8bffdf8f0b27b",
+      "source_indexed_sha256": "f17e17b9b3e5cee3610ea389564af5ee8637689424eb183297bb2e045b32c7e1",
+      "raw_art_rect": [
+        295,
+        1025,
+        475,
+        1243
+      ],
+      "native_content_rect": [
+        2,
+        0,
+        15,
+        16
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1317,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 29,
+      "source_encoded_sha256": "c5d4e5ce8ced05878f5a6d9e3578c30001170d65bc514d125e1746f11a044c44",
+      "source_indexed_sha256": "5e77a511384c6352fe3a52880a94e726d45265b2130e243d3cf84ccfff1f0ce5",
+      "raw_art_rect": [
+        571,
+        1025,
+        737,
+        1243
+      ],
+      "native_content_rect": [
+        4,
+        0,
+        16,
+        16
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1318,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 30,
+      "source_encoded_sha256": "736a8998c927ac472d1effb12140d9849ad32d0c20867cf755552c5eee8ccb19",
+      "source_indexed_sha256": "c38b615de73c8fcfedea4552d830ff3e5e095fb283e40d96191d0c6a46898540",
+      "raw_art_rect": [
+        767,
+        1023,
+        948,
+        1243
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        13,
+        16
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "river-variants.png",
+      "asset_sha256": "9a57555f565b7f3c4564567758ed858a51a89676f3308522871e08f871bda320",
+      "source_research_id": 1319,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 31,
+      "source_encoded_sha256": "c5c99bc428a766d266d00408a0576987b46d34fd9e8036ffae5b53de3dc912ed",
+      "source_indexed_sha256": "08c50ebba7d2f063285b7f157b59dda56f9dba11df7bb8efd1a36a8387baf1f5",
+      "raw_art_rect": [
+        1020,
+        1025,
+        1233,
+        1243
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "spec": "docs/spec/067-hd-world-terrain-batch.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
     }
   ],
   "limitations": [
@@ -73867,5 +74692,12 @@
     "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
     "formal_binary_sha256": "f3c39247b0e6813e060e278e314ec8bd8c371eb2d1954286e32b55fde1da2586",
     "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+  },
+  "last_river_variants_display": {
+    "state": "DISPLAY-PASS",
+    "sources": 25,
+    "receipt_sha256": "cdce20cb66ebb22deea7e2556cbc9071b305f42f4169dc4055ed2dbbff604612",
+    "formal_binary_sha256": "f14eebb037a9324702930c7b3d275abe7dcfe4f4befe3ee8478db6208c02e063",
+    "scope": "actual encoded and native fixtures through production terrain loader, source selector, captured call return, complete-source finish, original copy opcode stage transfer and renderer; source writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
   }
 }

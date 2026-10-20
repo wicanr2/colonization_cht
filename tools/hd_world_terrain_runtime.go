@@ -76,18 +76,35 @@ func loadHDTerrainBatchRuntime(h *hdRuntime, game, directory string) (*hdTerrain
 	for _, f := range hdTerrainForegroundDefinitions {
 		definitions = append(definitions, f.hdTerrainBatchDefinition)
 	}
+	artCache := map[string]struct {
+		im     image.Image
+		digest string
+	}{}
 	for _, d := range definitions {
-		raw, err = hdReadFile(filepath.Join(directory, d.asset), 8<<20)
-		if err != nil {
-			return nil, err
+		cached, found := artCache[d.asset]
+		if !found {
+			raw, err = hdReadFile(filepath.Join(directory, d.asset), 8<<20)
+			if err != nil {
+				return nil, err
+			}
+			digest := hash(raw)
+			if digest != d.assetSHA {
+				return nil, fmt.Errorf("terrain asset mismatch: %d", d.ordinal)
+			}
+			im, err := png.Decode(bytes.NewReader(raw))
+			if err != nil {
+				return nil, err
+			}
+			cached = struct {
+				im     image.Image
+				digest string
+			}{im, digest}
+			artCache[d.asset] = cached
 		}
-		if hash(raw) != d.assetSHA {
-			return nil, fmt.Errorf("terrain asset mismatch: %d", d.ordinal)
+		if cached.digest != d.assetSHA {
+			return nil, fmt.Errorf("terrain cached asset mismatch: %d", d.ordinal)
 		}
-		im, err := png.Decode(bytes.NewReader(raw))
-		if err != nil {
-			return nil, err
-		}
+		im := cached.im
 		if im.Bounds() != image.Rect(0, 0, d.width, d.height) || d.width != d.height {
 			return nil, fmt.Errorf("terrain asset shape mismatch")
 		}
@@ -111,7 +128,7 @@ func loadHDTerrainBatchRuntime(h *hdRuntime, game, directory string) (*hdTerrain
 
 		p.frames[d.ordinal] = f
 	}
-	if len(p.frames) != 54 {
+	if len(p.frames) != 79 {
 		return nil, fmt.Errorf("incomplete terrain group")
 	}
 	return p, nil
@@ -205,6 +222,9 @@ func (p *hdTerrainBatchRuntime) beforeInstruction() {
 	expectedDestination := hdTerrainBatchStage
 	if hdTerrainForegroundOrdinal(frame.ordinal) || (hdTerrainLegacyMainOrdinal(frame.ordinal) && destination == hdBuildingCanvas) {
 		expectedDestination = hdBuildingCanvas
+	}
+	if hdTerrainRiverVariantOrdinal(frame.ordinal) && destination == hdTerrainBatchStage {
+		expectedDestination = hdTerrainBatchStage
 	}
 	if !ok || dest[0] != 200 || dest[1] != 320 || destination != expectedDestination {
 		return
@@ -430,7 +450,7 @@ func (p *hdTerrainBatchRuntime) receipt(f draftNativeFrame) map[string]any {
 }
 
 func hdTerrainForegroundOrdinal(n int) bool {
-	if n == 79 {
+	if n == 79 || hdTerrainRiverVariantOrdinal(n) {
 		return true
 	}
 	if hdTerrainRemainingOrdinal(n) {
@@ -545,4 +565,13 @@ func hdTerrainLegacyMainPaletteSupported(pal []byte) bool {
 		projection = append(projection, pal[int(v)*3:int(v)*3+3]...)
 	}
 	return hash(projection) == "cc44c2b5bfdb808866cd7b5d13901b04f9236c9df45dcb61686e7c2a8b9bf015"
+}
+
+// 規格067 R112 READY：二十五種新增河流共用既有Main與Stage來源契約。
+func hdTerrainRiverVariantOrdinal(n int) bool {
+	switch n {
+	case 1, 2, 3, 4, 5, 7, 8, 10, 11, 12, 13, 14, 15, 18, 19, 20, 21, 23, 24, 25, 27, 28, 29, 30, 31:
+		return true
+	}
+	return false
 }

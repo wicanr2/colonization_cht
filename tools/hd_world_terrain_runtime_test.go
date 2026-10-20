@@ -431,7 +431,7 @@ func TestHDWorldTerrainAssetNegatives(t *testing.T) {
 	cases = append(cases, "missing-runtime")
 	positive, err := loadHDTerrainBatchRuntime(h, copyGame, copyAssets)
 	need(err)
-	if len(cases) != 166 || len(positive.frames) != 54 || hash(read(filepath.Join(game, "PHYS0.SS"))) != hash(originalSource) {
+	if len(cases) != 166 || len(positive.frames) != 79 || hash(read(filepath.Join(game, "PHYS0.SS"))) != hash(originalSource) {
 		t.Fatal("反例後正向或原版不同")
 	}
 	result := map[string]any{"result": "PASS_TERRAIN_BATCH_166_LOADER_NEGATIVES_AND_POSITIVE_RECHECK", "cases": cases, "positive_after_negatives": true, "original_source_unchanged": true, "production_connected": true}
