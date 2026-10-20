@@ -1225,8 +1225,15 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 				k++
 			}
 		}
-		draftPaintLayers(out, it.safe, []*image.Alpha{it.shadow, it.norm, it.accent}, []byte{it.shadowColor, it.color, it.accentColor}, palette)
+		if base != nil && strings.HasPrefix(it.id, "STRING:woodcut:") {
+			draftPaintWoodcutGold(out, it.safe, []*image.Alpha{it.shadow, it.norm, it.accent})
+		} else {
+			draftPaintLayers(out, it.safe, []*image.Alpha{it.shadow, it.norm, it.accent}, []byte{it.shadowColor, it.color, it.accentColor}, palette)
+		}
 		record := map[string]any{"kind": "string", "id": it.id, "source": it.text, "text": it.zh, "safe": it.safe, "font_px": it.size}
+		if base != nil && strings.HasPrefix(it.id, "STRING:woodcut:") {
+			record["title_style"] = "gold"
+		}
 		if mapSource != nil {
 			record["native_surface"], record["native_ink"] = "map", it.ink
 			record["native_background_changes"], record["native_shadow_clipped_pixels"] = mapChanges, mapClipped
@@ -1588,4 +1595,63 @@ func draftNotoWoodcutMasks(fonts map[int]*dialogFont, id, text string, ink, safe
 	}
 	catalog := &stringCatalog{fonts: measured}
 	return catalog.woodcutMasks(text, ink, safe, capH)
+}
+
+// 規格069 R118：使用者指定的HD事件標題金色，只改放大畫布的RGB。
+func draftPaintWoodcutGold(out *image.RGBA, safe image.Rectangle, masks []*image.Alpha) {
+	colors := []color.RGBA{{53, 28, 8, 255}, {243, 205, 99, 255}, {255, 240, 175, 255}}
+	origin := safe.Min.Mul(4)
+	for i, mask := range masks {
+		if mask != nil {
+			draw.DrawMask(out, image.Rectangle{Min: origin, Max: safe.Max.Mul(4)}, image.NewUniform(colors[i]), image.Point{}, mask, image.Point{}, draw.Over)
+		}
+	}
+}
+
+// 英文沿已驗原版來源遮罩上色，保留原版字形與每個4倍像素的位置。
+func draftPaintNativeWoodcutGold(out *image.RGBA, cat *stringCatalog, j *nativeJournal, canvas, indexed []byte, cursor image.Rectangle, covered map[string]bool) []map[string]any {
+	records := []map[string]any{}
+	if cat == nil || j == nil || len(canvas) != 64000 || len(indexed) != 64000 {
+		return records
+	}
+	for _, o := range j.items {
+		if o == nil || o.stringRun == nil {
+			continue
+		}
+		run := o.stringRun
+		if covered["STRING:woodcut:"+cat.woodcut[string(run.text)].id] {
+			continue
+		}
+		copyCat := *cat
+		copyCat.woodcutPlan = func(_, _ string, ink, safe image.Rectangle, _ int) (*image.Alpha, *image.Alpha, *image.Alpha, int) {
+			masks := []*image.Alpha{image.NewAlpha(image.Rect(0, 0, safe.Dx()*4, safe.Dy()*4)), image.NewAlpha(image.Rect(0, 0, safe.Dx()*4, safe.Dy()*4)), image.NewAlpha(image.Rect(0, 0, safe.Dx()*4, safe.Dy()*4))}
+			for pos, value := range run.lastVal {
+				if indexed[pos] != canvas[pos] {
+					continue
+				}
+				layer := -1
+				switch value {
+				case 93:
+					layer = 0
+				case 94:
+					layer = 1
+				case 92:
+					layer = 2
+				}
+				if layer < 0 {
+					continue
+				}
+				x, y := (pos%320-safe.Min.X)*4, (pos/320-safe.Min.Y)*4
+				draw.Draw(masks[layer], image.Rect(x, y, x+4, y+4), image.Opaque, image.Point{}, draw.Src)
+			}
+			return masks[0], masks[1], masks[2], 0
+		}
+		item, why := (&stringRuntime{cat: &copyCat}).finishWoodcut(run, o.ink, 7, o.canvas, o.step)
+		if why != "" || item == nil || !stringSame(canvas, item, image.Rectangle{}) || !draftSameExceptCursor(indexed, canvas, item.safe, cursor) {
+			continue
+		}
+		draftPaintWoodcutGold(out, item.safe, []*image.Alpha{item.shadow, item.norm, item.accent})
+		records = append(records, map[string]any{"kind": "native-event-title", "id": item.id, "source": item.text, "safe": item.safe, "title_style": "gold", "font": "original"})
+	}
+	return records
 }

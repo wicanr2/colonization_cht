@@ -175,7 +175,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "9a0c36162ff2ffac3e57c23b457f0b757a900bda47be13a2120ff2fb6b19bcb7"
+const hdManifestSHA = "b3fb4721b99d7157ac7bacced416b226c1232342350d6c56ad983b5f445232db"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"
@@ -742,6 +742,20 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 	}
 	if err != nil {
 		return nil, nil, err
+	}
+	if f.mode == 0x13 {
+		if native := b.targets["zh-Hant"]; native != nil && native.str != nil {
+			items, _ := record["items"].([]map[string]any)
+			covered := map[string]bool{}
+			for _, item := range items {
+				if item["title_style"] == "gold" {
+					if id, ok := item["id"].(string); ok {
+						covered[id] = true
+					}
+				}
+			}
+			record["items"] = append(items, draftPaintNativeWoodcutGold(out, native.str, f.journal, f.canvas, f.indexed, f.cursor, covered)...)
+		}
 	}
 	b.hd.restoreCursor(out, f)
 	if b.hd.cursor != nil {
