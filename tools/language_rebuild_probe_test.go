@@ -2,7 +2,10 @@ package main
 
 import (
 	"bytes"
+	"encoding/base64"
 	"encoding/json"
+	"fmt"
+	golem "github.com/wicanr2/dosgolem"
 	"image"
 	"image/color"
 	"image/png"
@@ -1541,5 +1544,391 @@ func TestDraftSoldierMenuForeground(t *testing.T) {
 		if e := os.WriteFile(filepath.Join(out, "check.json"), append(j, '\n'), 0644); e != nil {
 			t.Fatal(e)
 		}
+	}
+}
+
+func TestDraftDialogSeaForeground(t *testing.T) {
+	root := os.Getenv("TEST_PANEL_ROOT")
+	if root == "" {
+		t.Skip("需要合法原版狀態欄來源與人物快照")
+	}
+	read := func(name string) []byte {
+		t.Helper()
+		v, e := os.ReadFile(filepath.Join(root, name))
+		if e != nil {
+			t.Fatal(e)
+		}
+		return v
+	}
+	raw := read("r122-panel-replay-r1/gui.sea-sources.json")
+	if hash(raw) != "a9baffb1841b256f55074da6614647f8a8bdd2c2152d848ebc51c8f7fd4594c8" {
+		t.Fatal("panel source fingerprint")
+	}
+	var sources []struct {
+		Kind           string
+		Step           uint64
+		Ink, Cursor    image.Rectangle
+		Canvas, Buffer []byte
+		After          map[int]byte
+		Runs           []struct {
+			Raw    []byte
+			First  map[int]byte    `json:"first_old"`
+			Last   map[int]byte    `json:"last_val"`
+			Box    image.Rectangle `json:"bbox"`
+			Colors map[byte]int
+			Tick   uint64 `json:"last"`
+			Next   uint32
+			Writes int
+		}
+	}
+	if e := json.Unmarshal(raw, &sources); e != nil {
+		t.Fatal(e)
+	}
+	var observations []*nativeObservation
+	for _, src := range sources {
+		if src.Kind != "sea-panel" {
+			continue
+		}
+		o := &nativeObservation{kind: src.Kind, step: src.Step, ink: src.Ink, cursor: src.Cursor, canvas: src.Canvas, buffer: src.Buffer, after: src.After}
+		for _, r := range src.Runs {
+			o.seaRuns = append(o.seaRuns, &seaEvent{raw: r.Raw, firstOld: r.First, lastVal: r.Last, bbox: r.Box, colors: r.Colors, last: r.Tick, next: r.Next, writes: r.Writes})
+		}
+		observations = append(observations, o)
+	}
+	if len(observations) != 4 {
+		t.Fatal("four actual panel observations", len(observations))
+	}
+	mem := read("r120-soldier-baseline-r1/gui.memory")
+	if hash(mem) != "8a046c4c7c07c18a45b9fafde1f2833c3fdea6de854a4f4bddcabb3b82c3f12a" {
+		t.Fatal("original state fingerprint")
+	}
+	canvas := bytes.Clone(mem[0x2cae0 : 0x2cae0+64000])
+	indexed := read("r120-soldier-baseline-r1/gui.final.idx")
+	palette := read("r120-soldier-baseline-r1/gui.final.pal")
+	m, p, _ := hdEventFixtureLoad(t, 1061, "")
+	hdEventRun(t, m, p)
+	copy(m.Mem, mem)
+	cursor := image.Rect(16, 16, 32, 32)
+	mask, id := p.seaDialogForeground(canvas, indexed, palette, cursor)
+	if id != 1061 || !bytes.Equal(mask, p.soldierDialogForeground(canvas, indexed, palette, cursor)) {
+		t.Fatal("complete original foreground differs")
+	}
+	targets := draftActualTargetsForTest(t)
+	records := []map[string]any{}
+	for _, locale := range []string{"zh-Hant", "zh-Hans", "ja", "ko"} {
+		t.Run(locale, func(t *testing.T) {
+			target := targets[locale]
+			target.portraits = p
+			out := draftRGB(indexed, palette)
+			for n, o := range observations {
+				t.Run(fmt.Sprint(n), func(t *testing.T) {
+					candidate, why := draftSeaObserve(target.sea, o)
+					if candidate == nil || why != "" {
+						t.Fatal("actual panel not translated", why)
+					}
+					old := draftRGB(indexed, palette)
+					if got, _ := draftPaintSea(old, target.sea, candidate, canvas, indexed, palette, cursor); got != nil {
+						t.Fatal("expected original occluded source")
+					}
+					guest, source, step, cpu := hash(m.Mem), hash(o.canvas), m.Steps, *m.CPU
+					protected := draftPreserveDialogSea(target, candidate, canvas, indexed, palette, cursor)
+					if protected.foregroundSource != 1061 || len(protected.foreground) != 8000 {
+						t.Fatal("foreground not established", candidate.row.text)
+					}
+					got, why := draftPaintSea(out, target.sea, protected, canvas, indexed, palette, cursor)
+					if got == nil || why != "" || got["foreground_source"] != 1061 {
+						t.Fatal("panel not painted", got, why)
+					}
+					if hash(m.Mem) != guest || hash(o.canvas) != source || m.Steps != step || m.CPU.R != cpu.R || m.CPU.Seg != cpu.Seg || m.CPU.IP != cpu.IP || m.CPU.Flags != cpu.Flags {
+						t.Fatal("display changed original state/source")
+					}
+					native := draftRGB(indexed, palette)
+					for pos := range canvas {
+						if mask[pos>>3]&(1<<uint(pos&7)) == 0 {
+							continue
+						}
+						for yy := 0; yy < 4; yy++ {
+							for xx := 0; xx < 4; xx++ {
+								x, y := pos%320*4+xx, pos/320*4+yy
+								if out.RGBAAt(x, y) != native.RGBAAt(x, y) {
+									t.Fatal("figure changed", x, y)
+								}
+							}
+						}
+					}
+					alpha := image.NewAlpha(image.Rect(0, 0, seaPanelRect.Dx()*4, seaPanelRect.Dy()*4))
+					for _, part := range protected.row.parts {
+						x, y := part.x-seaPanelRect.Min.X*4, candidate.row.bbox.Min.Y*4-target.sea.fonts[part.size].cjkTop-seaPanelRect.Min.Y*4+protected.textOffsetY
+						if target.sea.seaDraw(alpha, part.text, x, y, part.size) {
+							t.Fatal("measured panel clipped")
+						}
+					}
+					uncovered, totalGlyphPixels := 0, 0
+					for y := 0; y < alpha.Rect.Dy(); y++ {
+						for x := 0; x < alpha.Rect.Dx(); x++ {
+							pos := (y/4+seaPanelRect.Min.Y)*320 + x/4 + seaPanelRect.Min.X
+							if alpha.AlphaAt(x, y).A != 0 {
+								totalGlyphPixels++
+								if mask[pos>>3]&(1<<uint(pos&7)) == 0 {
+									uncovered++
+								}
+							}
+						}
+					}
+					if totalGlyphPixels == 0 {
+						t.Fatal("translated row mask is empty")
+					}
+					safe := got["safe"].(image.Rectangle)
+					if safe.Min.Y != o.ink.Min.Y || safe.Max.Y != o.ink.Max.Y {
+						t.Fatal("text exceeds original row height", safe, o.ink)
+					}
+					records = append(records, map[string]any{"locale": locale, "source": got["source"], "text": got["text"], "font_px": got["font_px"], "baseline_shift_px": got["baseline_shift_px"], "safe": safe, "native_ink": got["native_ink"], "uncovered_glyph_pixels": uncovered, "glyph_pixels": totalGlyphPixels, "fully_occluded": uncovered == 0, "foreground_source": 1061})
+					for _, kind := range []string{"unknown-background", "unknown-glyph", "unknown-VGA", "wrong-palette", "unknown-same-value-write", "inconsistent-source", "missing-tracker"} {
+						t.Run(kind, func(t *testing.T) {
+							c, v, pal := bytes.Clone(canvas), bytes.Clone(indexed), bytes.Clone(palette)
+							local := *candidate
+							obs := *o
+							obs.canvas = bytes.Clone(o.canvas)
+							local.observation = &obs
+							cells, oldCPU, tracker := p.visible, *m.CPU, target.portraits
+							defer func() { p.visible = cells; *m.CPU = oldCPU; target.portraits = tracker }()
+							find := func(glyph bool) int {
+								for y := safe.Min.Y; y < safe.Max.Y; y++ {
+									for x := safe.Min.X; x < safe.Max.X; x++ {
+										pos := y*320 + x
+										_, isGlyph := o.after[pos]
+										if mask[pos>>3]&(1<<uint(pos&7)) == 0 && isGlyph == glyph {
+											return pos
+										}
+									}
+								}
+								t.Fatal("required uncovered test point", kind)
+								return 0
+							}
+							switch kind {
+							case "unknown-background":
+								at := find(false)
+								c[at] ^= 1
+								v[at] = c[at]
+							case "unknown-glyph":
+								at := find(true)
+								c[at] ^= 1
+								v[at] = c[at]
+							case "unknown-VGA":
+								v[find(false)] ^= 1
+							case "wrong-palette":
+								for i := range pal {
+									pal[i] ^= 1
+								}
+							case "unknown-same-value-write":
+								for at, cell := range p.visible {
+									if cell.slot != 0 {
+										m.CPU.Seg[1] = 0x1234
+										m.CPU.IP = 0x500
+										p.memoryWrite(hdBuildingCanvas+uint32(at), c[at], c[at])
+										break
+									}
+								}
+							case "inconsistent-source":
+								for at := range obs.after {
+									obs.canvas[at] ^= 1
+									break
+								}
+							case "missing-tracker":
+								target.portraits = nil
+							}
+							checked := draftPreserveDialogSea(target, &local, c, v, pal, cursor)
+							im := draftRGB(v, pal)
+							before := bytes.Clone(im.Pix)
+							if got, _ := draftPaintSea(im, target.sea, checked, c, v, pal, cursor); got != nil || !bytes.Equal(before, im.Pix) {
+								t.Fatal("unknown source accepted", kind)
+							}
+						})
+					}
+					c, v := bytes.Clone(canvas), bytes.Clone(indexed)
+					at := 199*320 + 319
+					c[at] ^= 1
+					v[at] = c[at]
+					checked := draftPreserveDialogSea(target, candidate, c, v, palette, cursor)
+					if got, why := draftPaintSea(draftRGB(v, palette), target.sea, checked, c, v, palette, cursor); got == nil || why != "" {
+						t.Fatal("unrelated outside-row update blocked", why)
+					}
+				})
+			}
+			if dir := os.Getenv("TEST_PANEL_OUTPUT"); dir != "" {
+				fd, e := os.Create(filepath.Join(dir, "panel-"+locale+".png"))
+				if e != nil {
+					t.Fatal(e)
+				}
+				e = png.Encode(fd, out)
+				fd.Close()
+				if e != nil {
+					t.Fatal(e)
+				}
+			}
+		})
+	}
+	if len(records) != 16 {
+		t.Fatal("missing field/locale", len(records))
+	}
+	if dir := os.Getenv("TEST_PANEL_OUTPUT"); dir != "" {
+		raw, e := json.MarshalIndent(map[string]any{"result": "PASS_R122_FOUR_PANEL_FIELDS_FOUR_LOCALES", "fields": records, "negative_cases": 112, "native_state_unchanged": true}, "", "  ")
+		if e != nil {
+			t.Fatal(e)
+		}
+		if e = os.WriteFile(filepath.Join(dir, "check.json"), append(raw, '\n'), 0644); e != nil {
+			t.Fatal(e)
+		}
+	}
+}
+
+func TestDraftSeaDialogSixForegroundSources(t *testing.T) {
+	root := os.Getenv("TEST_PANEL_ROOT")
+	if root == "" {
+		t.Skip("需要合法原版人物來源")
+	}
+	paletteRaw, e := os.ReadFile("/repo/workplace/reports/goal186-display-hd/hd-dialog-figures-r98/r98-embedded-palette-expectations-r1.json")
+	if e != nil || hash(paletteRaw) != "fa1ae2c74ab6bbffe6ce9e9fe8ce2d9f8dfce6e0a1c813767a82e1c28edec18c" {
+		t.Fatal("six source palette fingerprint", e)
+	}
+	var palettes struct {
+		Rows []struct {
+			ID  int    `json:"research_id"`
+			DAC string `json:"DAC_base64"`
+		}
+	}
+	if e = json.Unmarshal(paletteRaw, &palettes); e != nil {
+		t.Fatal(e)
+	}
+
+	var ready struct {
+		Rows []struct {
+			ID      int
+			Palette string `json:"palette_base64"`
+		}
+	}
+	raw, e := os.ReadFile(filepath.Join(root, "r101-scene-wiring-ready-r1.json"))
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = json.Unmarshal(raw, &ready); e != nil {
+		t.Fatal(e)
+	}
+	for _, rid := range []int{1060, 1061, 1062, 1063, 1064, 1065} {
+		t.Run(fmt.Sprint(rid), func(t *testing.T) {
+			var p *hdSceneRuntime
+			var canvas, palette []byte
+			if rid == 1062 || rid == 1065 {
+				m := golem.New()
+				p = &hdSceneRuntime{h: &hdRuntime{m: m}, pending: map[int]hdSceneCursorPair{}}
+				for _, d := range hdSceneDefinitions {
+					p.frames = append(p.frames, &hdSceneFrame{hdSceneDefinition: d})
+				}
+				var frame *hdSceneFrame
+				slot := 0
+				for n, f := range p.frames {
+					if f.id == rid {
+						frame = f
+						slot = n + 1
+						break
+					}
+				}
+				if frame == nil {
+					t.Fatal("typed figure missing")
+				}
+				s := frame.sprite
+				pixels, e := os.ReadFile(fmt.Sprintf("/repo/workplace/reports/goal186-display-hd/hd-full-assets-r49/decoded-public-r3/pixels/%04d.idx", rid))
+				if e != nil {
+					t.Fatal(e)
+				}
+				if len(pixels) != s.width*s.height || hash(pixels) != s.indexedSHA {
+					t.Fatal("decoded original fingerprint")
+				}
+				frame.native = bytes.Repeat([]byte{253}, 64000)
+				used := [256]bool{}
+				canvas = make([]byte, 64000)
+				for y := 0; y < s.height; y++ {
+					for x := 0; x < s.width; x++ {
+						local := y*320 + x
+						value := pixels[y*s.width+x]
+						frame.native[local] = value
+						if value == 253 {
+							continue
+						}
+						used[value] = true
+						pos := (y+40)*320 + x + 100
+						canvas[pos] = value
+						p.visible[pos] = hdSceneCell{slot: uint16(slot), local: uint16(local), value: value}
+					}
+				}
+				if hash(frame.native) != frame.nativeSHA {
+					t.Fatal("padded original fingerprint")
+				}
+				for n, yes := range used {
+					if yes {
+						frame.indices = append(frame.indices, byte(n))
+					}
+				}
+				frame.decoded = 1
+				for _, r := range ready.Rows {
+					if r.ID == rid {
+						palette, e = base64.StdEncoding.DecodeString(r.Palette)
+						if e != nil {
+							t.Fatal(e)
+						}
+					}
+				}
+			} else {
+				m, original, _ := hdEventFixtureLoad(t, rid, "")
+				hdEventRun(t, m, original)
+				p = original
+				canvas = bytes.Clone(m.Mem[hdBuildingCanvas : hdBuildingCanvas+64000])
+				for _, row := range palettes.Rows {
+					if row.ID == rid {
+						palette, e = base64.StdEncoding.DecodeString(row.DAC)
+						if e != nil {
+							t.Fatal(e)
+						}
+					}
+				}
+			}
+			mask, id := p.seaDialogForeground(canvas, canvas, palette, image.Rectangle{})
+			if len(mask) != 8000 || id != rid {
+				t.Fatal("complete foreground rejected", rid, id)
+			}
+			count := 0
+			for _, b := range mask {
+				for bit := uint(0); bit < 8; bit++ {
+					if b&(1<<bit) != 0 {
+						count++
+					}
+				}
+			}
+			var expected int
+			for _, f := range p.frames {
+				if f.id == rid {
+					expected = f.sprite.opaque
+				}
+			}
+			if count != expected {
+				t.Fatal("opaque source count", count, expected)
+			}
+			for at, cell := range p.visible {
+				if cell.slot != 0 {
+					original := p.visible[at]
+					p.visible[at] = hdSceneCell{}
+					if got, _ := p.seaDialogForeground(canvas, canvas, palette, image.Rectangle{}); got != nil {
+						t.Fatal("incomplete foreground accepted")
+					}
+					p.visible[at] = original
+					p.visible[at].local = 64000
+					if got, _ := p.seaDialogForeground(canvas, canvas, palette, image.Rectangle{}); got != nil {
+						t.Fatal("invalid source coordinate accepted")
+					}
+					p.visible[at] = original
+					break
+				}
+			}
+		})
 	}
 }

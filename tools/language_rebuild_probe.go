@@ -506,6 +506,8 @@ type draftSeaRow struct {
 	layer             image.Rectangle
 	foreground        []byte
 	foregroundChanges int
+	foregroundSource  int
+	textOffsetY       int
 }
 
 // 六欄分別以原版下一欄起點量寬；快捷鍵與譯文用同地區字型。
@@ -624,7 +626,7 @@ func draftPaintSea(out *image.RGBA, st *seaState, candidate *draftSeaRow, canvas
 	var text strings.Builder
 	var sizes []int
 	for _, part := range row.parts {
-		x, y := part.x-layer.Min.X*4, row.bbox.Min.Y*4-st.fonts[part.size].cjkTop-layer.Min.Y*4
+		x, y := part.x-layer.Min.X*4, row.bbox.Min.Y*4-st.fonts[part.size].cjkTop-layer.Min.Y*4+candidate.textOffsetY
 		if st.seaDraw(shadow, part.text, x+2, y+2, part.size) || st.seaDraw(fg[part.color], part.text, x, y, part.size) {
 			return nil, "sea-clipped"
 		}
@@ -638,7 +640,7 @@ func draftPaintSea(out *image.RGBA, st *seaState, candidate *draftSeaRow, canvas
 	}
 	var foreground *image.RGBA
 	if len(candidate.foreground) != 0 {
-		if len(candidate.foreground) != 8000 || o.kind != "sea-bar" || layer != seaBarRect {
+		if len(candidate.foreground) != 8000 || !((o.kind == "sea-bar" && layer == seaBarRect) || (o.kind == "sea-panel" && layer == seaPanelRect && candidate.foregroundSource >= 1060 && candidate.foregroundSource <= 1065)) {
 			return nil, "sea-foreground-shape"
 		}
 		foreground = image.NewRGBA(image.Rect(0, 0, layer.Dx()*4, layer.Dy()*4))
@@ -664,7 +666,12 @@ func draftPaintSea(out *image.RGBA, st *seaState, candidate *draftSeaRow, canvas
 	}
 	record := map[string]any{"kind": o.kind, "id": "SEA:" + o.kind, "source": row.text, "text": text.String(), "safe": safe, "font_px": sizes[0], "part_font_px": sizes, "native_ink": row.bbox}
 	if protected > 0 {
-		record["foreground_source"], record["foreground_pixels"], record["source_background_changes"] = 1061, protected, candidate.foregroundChanges
+		sourceID := candidate.foregroundSource
+		if sourceID == 0 {
+			sourceID = 1061
+		}
+		record["foreground_source"], record["foreground_pixels"], record["source_background_changes"] = sourceID, protected, candidate.foregroundChanges
+		record["baseline_shift_px"] = candidate.textOffsetY
 	}
 	return record, ""
 }
@@ -1147,6 +1154,7 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 	var seaClaims []image.Rectangle
 	for _, row := range seaRows {
 		row = draftPreserveSoldierMenu(t, row, canvas, indexed, palette, cursor)
+		row = draftPreserveDialogSea(t, row, canvas, indexed, palette, cursor)
 		record, why := draftPaintSea(out, t.sea, row, canvas, indexed, palette, cursor, hdBackgroundOverride...)
 		if record != nil {
 			records = append(records, record)
@@ -1836,4 +1844,150 @@ func draftPreserveSoldierMenu(t *draftLanguageTarget, c *draftSeaRow, canvas, in
 	copy.foreground = mask
 	copy.foregroundChanges = changes
 	return &copy
+}
+
+// 六個已驗MSS來源共用完整前景證明；來源位置由已持有的原版像素反推並逐點核對。
+func (p *hdSceneRuntime) seaDialogForeground(canvas, indexed, palette []byte, cursor image.Rectangle) ([]byte, int) {
+	if p == nil || p.blocked || len(canvas) != 64000 || len(indexed) != 64000 || len(palette) != 768 {
+		return nil, 0
+	}
+	var selected []byte
+	sourceID := 0
+	for i, frame := range p.frames {
+		if frame.id < 1060 || frame.id > 1065 || frame.sprite == nil || frame.decoded == 0 || len(frame.native) != 64000 || !frame.paletteSupported(palette) {
+			continue
+		}
+		slot, sprite := i+1, frame.sprite
+		origins := map[image.Point]bool{}
+		for pos, cell := range p.visible {
+			if int(cell.slot) == slot {
+				local := int(cell.local)
+				if local >= 64000 || local%320 >= sprite.width || local/320 >= sprite.height {
+					return nil, 0
+				}
+				origins[image.Pt(pos%320-local%320, pos/320-local/320)] = true
+			}
+		}
+		if len(origins) != 1 {
+			continue
+		}
+		var origin image.Point
+		for at := range origins {
+			origin = at
+		}
+		if !(image.Rectangle{Min: origin, Max: origin.Add(image.Pt(sprite.width, sprite.height))}).In(image.Rect(0, 0, 320, 200)) {
+			continue
+		}
+		mask := make([]byte, 8000)
+		count, valid := 0, true
+		for y := 0; y < sprite.height && valid; y++ {
+			for x := 0; x < sprite.width; x++ {
+				local := y*320 + x
+				value := frame.native[local]
+				if value == 253 {
+					continue
+				}
+				pos := (origin.Y+y)*320 + origin.X + x
+				cell := p.visible[pos]
+				if cell.slot == 0 {
+					if under, ok := p.spriteCursorCell(pos, draftNativeFrame{canvas: canvas, indexed: indexed, palette: palette, cursor: cursor, mode: 19}); ok {
+						cell = under
+					}
+				}
+				if int(cell.slot) != slot || int(cell.local) != local || cell.glyph || cell.value != value || canvas[pos] != value || (!image.Pt(pos%320, pos/320).In(cursor) && indexed[pos] != value) {
+					valid = false
+					break
+				}
+				mask[pos>>3] |= 1 << uint(pos&7)
+				count++
+			}
+		}
+		if !valid || count != sprite.opaque {
+			continue
+		}
+		if selected != nil {
+			return nil, 0
+		}
+		selected, sourceID = mask, frame.id
+	}
+	return selected, sourceID
+}
+
+func draftPreserveDialogSea(t *draftLanguageTarget, c *draftSeaRow, canvas, indexed, palette []byte, cursor image.Rectangle) *draftSeaRow {
+	if t == nil || c == nil || c.observation == nil || c.row == nil || len(c.foreground) != 0 || len(c.observation.canvas) != 64000 || len(c.observation.after) == 0 {
+		return c
+	}
+	o := c.observation
+	if (o.kind != "sea-bar" || c.row.text != seaMenuText || c.layer != seaBarRect) &&
+		(o.kind != "sea-panel" || len(o.seaRuns) != 1 || c.layer != seaPanelRect) {
+		return c
+	}
+	mask, sourceID := t.portraits.seaDialogForeground(canvas, indexed, palette, cursor)
+	if len(mask) != 8000 {
+		return c
+	}
+	for pos, value := range o.after {
+		if pos < 0 || pos >= 64000 || !image.Pt(pos%320, pos/320).In(c.layer) || o.canvas[pos] != value ||
+			(canvas[pos] != value && mask[pos>>3]&(1<<uint(pos&7)) == 0) {
+			return c
+		}
+	}
+	source := *o
+	source.canvas = bytes.Clone(o.canvas)
+	source.after = make(map[int]byte, len(o.after))
+	for pos, value := range o.after {
+		source.after[pos] = value
+		if mask[pos>>3]&(1<<uint(pos&7)) != 0 {
+			source.after[pos] = canvas[pos]
+		}
+	}
+	changes, points := 0, 0
+	for y := c.layer.Min.Y; y < c.layer.Max.Y; y++ {
+		for x := c.layer.Min.X; x < c.layer.Max.X; x++ {
+			pos := y*320 + x
+			if mask[pos>>3]&(1<<uint(pos&7)) != 0 {
+				if source.canvas[pos] != canvas[pos] {
+					changes++
+				}
+				source.canvas[pos] = canvas[pos]
+				points++
+			}
+		}
+	}
+	if points == 0 || !source.visible(canvas, nil) {
+		return c
+	}
+	copy := *c
+	copy.observation, copy.foreground, copy.foregroundSource, copy.foregroundChanges = &source, mask, sourceID, changes
+	if o.kind == "sea-panel" {
+		copy.row, copy.textOffsetY = draftSeaNativeHeight(t.sea, c.row)
+		if copy.row == nil {
+			return c
+		}
+	}
+
+	return &copy
+}
+
+func draftSeaNativeHeight(st *seaState, row *seaRow) (*seaRow, int) {
+	if st == nil || row == nil || len(row.parts) != 1 || row.bbox.Empty() {
+		return nil, 0
+	}
+	part := row.parts[0]
+	for size := part.size; size >= 15; size-- {
+		mask := image.NewAlpha(image.Rect(0, 0, seaPanelRect.Dx()*4, 256))
+		x, y := part.x-seaPanelRect.Min.X*4, 128-st.fonts[size].cjkTop
+		if st.seaDraw(mask, part.text, x+2, y+2, size) || st.seaDraw(mask, part.text, x, y, size) {
+			continue
+		}
+		ink := draftAlphaInk(mask)
+		if ink.Empty() || ink.Dy() > row.bbox.Dy()*4 {
+			continue
+		}
+		copy := *row
+		copy.parts = append([]seaPart(nil), row.parts...)
+		copy.parts[0].size = size
+		return &copy, 128 - ink.Min.Y
+	}
+	return nil, 0
 }
