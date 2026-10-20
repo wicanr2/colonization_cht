@@ -1138,3 +1138,11 @@ DRAFT來源及排版審查通過，狀態為READY。來源仍為R120／R121同�
 - 隔離候選4項／218個含子項通過且零skip，含四語16個欄位、112個新拒絕案例、六來源完整與錯件、R120正文及R121頂列守門。四個R98來源通過原版解碼呼叫；MSS2／5只授予來源fixture檢查。正式建置、四語兩模式／游標／關頁及當次輸入原版控制組接續驗證，完成後再記限定CONFORMED。
 
 既有hd-opening-animation-sources-r84工作根的r122-ready-review-r1.json是READY收據入口；來源gui.sea-sources.json的SHA-256為a9baffb1841b256f55074da6614647f8a8bdd2c2152d848ebc51c8f7fd4594c8。實作入口為tools/language_rebuild_probe.go的seaDialogForeground、draftPreserveDialogSea及draftSeaNativeHeight。測試色盤入口為R98的r98-embedded-palette-expectations-r1.json，指紋fa1ae2c74ab6bbffe6ce9e9fe8ce2d9f8dfce6e0a1c813767a82e1c28edec18c。來源fixture與原像素只留本機；翻譯只改顯示，TSV、328個語言資源、382張HD原PNG與941個來源連結保持。
+
+### R122人物前景與狀態欄限定CONFORMED
+
+正式970366ee3d396991e97d76edeb771cbe4f973ecc398e54b220ff484be5532d3d通過建置與go vet，程式提交e9d59bffcbe9744a3105815b544c06e683301b7d。4項／218個含子項通過且零skip，包含四語16個原版欄位、112個新來源反例與既有正文／頂列守門。六人物來源檢查的四個原版解碼fixture及兩個來源fixture分列，後者未新增正常路徑信用。
+
+當次正常GUI共44張，全部1280乘800遊戲區與X11相同。18張事件圖含四語兩種圖像模式、四語游標往返與英文；16張非英文事件有64筆側欄合成，頂列及正文保持。短譯文完全被人物遮住時，只計字模生成與原文清除，不記為可見字形正例。每行實際文字及陰影留在原墨跡垂直範圍，正常關頁後人物來源歸零、正文撤除，四行及頂列恢復正常顯示。
+
+原版控制組重播當次78筆真實GUI輸入至273600000步，完整CPU、RAM、VGA與DAC相同。收據入口位於既有hd-opening-animation-sources-r84工作根的r122-display-close-final.json、r122-panel-gui-final-check-r1.json、r122-formal-unit-display-r1及r122-panel-control-r1/check.json。來源、字模與各地區字級／基線量測保存於上述欄位收據；原版fixture只留本機。328個語言資源、382張生成原圖、941HD來源及已發布版本保持；完整五語、全量HD、音訊、存檔及新版交付沒有新增完成聲明。

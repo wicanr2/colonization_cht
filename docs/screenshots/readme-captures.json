@@ -1,10 +1,10 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-20",
-  "code_commit": "b40a645f81027b4cba5751d7cf9317b9af580574",
-  "binary_sha256": "cb5e807dc920d486e24241f4a2d48b0fae92f12d22de383c3992ed66be7f38d2",
-  "formal_binary_sha256": "cb5e807dc920d486e24241f4a2d48b0fae92f12d22de383c3992ed66be7f38d2",
-  "source_build_sha256": "988432ff38dd7d86ab12eb7ec603a54ee36db1463b27e7663aa22af1629fa916",
+  "code_commit": "e9d59bffcbe9744a3105815b544c06e683301b7d",
+  "binary_sha256": "970366ee3d396991e97d76edeb771cbe4f973ecc398e54b220ff484be5532d3d",
+  "formal_binary_sha256": "970366ee3d396991e97d76edeb771cbe4f973ecc398e54b220ff484be5532d3d",
+  "source_build_sha256": "b65c01dacae98239bf4f681fd0181204d40845bd80b2f2c17e4197cae0dae721",
   "released_version_unchanged": "v.1.0.3-20261010",
   "formal_hd_assets": 382,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
@@ -1043,7 +1043,7 @@
     },
     {
       "file": "hd-soldier-guide.png",
-      "sha256": "9a4f99cc63072906a386de527cbec3e7531548d9096e690abee2d7cad105ce29",
+      "sha256": "ea5aec03f966cb83950547369a0aa58fa7d4cb07a164d274e785e35fa10835d1",
       "size": [
         1280,
         800
@@ -1051,27 +1051,27 @@
       "scene": "soldier-guide-figure",
       "language": "zh-Hant",
       "graphics": "hd",
-      "step": 261200000,
-      "code_commit": "b40a645f81027b4cba5751d7cf9317b9af580574",
-      "binary_sha256": "cb5e807dc920d486e24241f4a2d48b0fae92f12d22de383c3992ed66be7f38d2",
-      "formal_binary_sha256": "cb5e807dc920d486e24241f4a2d48b0fae92f12d22de383c3992ed66be7f38d2",
+      "step": 251000000,
+      "code_commit": "e9d59bffcbe9744a3105815b544c06e683301b7d",
+      "binary_sha256": "970366ee3d396991e97d76edeb771cbe4f973ecc398e54b220ff484be5532d3d",
+      "formal_binary_sha256": "970366ee3d396991e97d76edeb771cbe4f973ecc398e54b220ff484be5532d3d",
       "formal_hd_assets": 382,
       "formal_source_bindings": 941,
-      "source_receipt": "workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r121-shadow-menu-gui-r1/gui.display-094.png",
-      "source_x11_receipt": "workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r121-shadow-menu-gui-r1/event-1061-zh-Hant-hd.x11.png",
-      "source_x11_sha256": "d03f8612790f5f2fcd36ac15cb21ca865985394a85b99291b0d2cac6ba73f0f9",
-      "source_build_sha256": "988432ff38dd7d86ab12eb7ec603a54ee36db1463b27e7663aa22af1629fa916",
-      "source_gui_check_sha256": "2aa3c3179ab198022dcb7daa6e68f24776ec9ee913aa055e7067aa05ae5675a2",
-      "source_replay_check_sha256": "1169fb25153b7e54321a0f3ddbc628d414d30a7becf6d3b5aa0d4d431747c16e",
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r122-panel-gui-r2/gui.display-094.png",
+      "source_x11_receipt": "workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r122-panel-gui-r2/event-1061-zh-Hant-hd.x11.png",
+      "source_x11_sha256": "0f78c27e0d2340ecb57c76c0e35f5b2c0c20e4e27fea41f6d58114ffd684e5da",
+      "source_build_sha256": "b65c01dacae98239bf4f681fd0181204d40845bd80b2f2c17e4197cae0dae721",
+      "source_gui_check_sha256": "609e1b496af0012dc07be908f8b618727f84e9429e837d772077ba81bb3cbaac",
+      "source_replay_check_sha256": "6e1003af3c773f7fbf8967ab0bede0d144b836ced8a224f9a2b726cb0d348cbf",
       "graphics_manifest_sha256": "b3fb4721b99d7157ac7bacced416b226c1232342350d6c56ad983b5f445232db",
       "source_kind": "當前正式程式的正常讀檔及X11操作實拍；原PNG與同次X11遊戲區逐點相同",
       "capture_pixels_unchanged": true,
-      "spec_state": "CONFORMED scoped tutorial body and retained menu",
+      "spec_state": "CONFORMED scoped tutorial menu/body and status foreground composition",
       "source_research_ids": [
         1061
       ],
       "actual_body_language": "zh-Hant",
-      "new_multilingual_body_credit": true,
+      "new_multilingual_body_credit": false,
       "body_font_px": 30,
       "layout_safe": {
         "Min": {
@@ -1085,14 +1085,77 @@
       },
       "verified_counts": {
         "X11_game_area_pixels": 1024000,
-        "CJK_menu_and_body_locales": 4,
+        "CJK_status_field_locales": 16,
+        "CJK_status_row_captures": 64,
         "event_captures": 18,
-        "body_guard_rejections": 36,
-        "menu_guard_rejections": 32
+        "new_source_guard_rejections": 112
       },
-      "scope": "本次新增士兵教學期間頂列選單的四語Noto限定驗收，正文與人物保留。其他31張圖片沿各自來源；未新增音訊、存檔、全量HD或完整五語聲明。",
+      "scope": "本次只補人物前景後方四行狀態欄的四語合成；短譯文保持原版遮擋，全部字模與實際可見點分開記錄。頂列、正文與人物保留，其他31張圖片沿各自來源；無全量HD或完整五語新聲明。",
       "menu_font_px": 22,
-      "menu_foreground_pixels": 10
+      "menu_foreground_pixels": 10,
+      "new_multilingual_status_composition_credit": true,
+      "status_rows": [
+        {
+          "source": "Spring 1496",
+          "font_px": 22,
+          "baseline_shift_px": 1,
+          "safe": {
+            "Min": {
+              "X": 242,
+              "Y": 51
+            },
+            "Max": {
+              "X": 281,
+              "Y": 57
+            }
+          }
+        },
+        {
+          "source": "Gold:1000$  Tax: 0%",
+          "font_px": 18,
+          "baseline_shift_px": 1,
+          "safe": {
+            "Min": {
+              "X": 242,
+              "Y": 58
+            },
+            "Max": {
+              "X": 309,
+              "Y": 63
+            }
+          }
+        },
+        {
+          "source": "Moves: 1",
+          "font_px": 18,
+          "baseline_shift_px": 1,
+          "safe": {
+            "Min": {
+              "X": 260,
+              "Y": 70
+            },
+            "Max": {
+              "X": 290,
+              "Y": 75
+            }
+          }
+        },
+        {
+          "source": "Locat: (42, 30)",
+          "font_px": 21,
+          "baseline_shift_px": 1,
+          "safe": {
+            "Min": {
+              "X": 260,
+              "Y": 77
+            },
+            "Max": {
+              "X": 313,
+              "Y": 83
+            }
+          }
+        }
+      ]
     },
     {
       "file": "hd-indian-adviser-zh.png",
@@ -1167,7 +1230,7 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "只更新士兵教學當次原PNG，頂列與正文均為繁中。其他31張與三張金色事件來源保持；R120正文實拍保存在previous_soldier_r120_capture，更早英文正文與其他歷史指紋保持。",
+  "provenance_scope": "只更新士兵教學當次繁中HD原PNG，四行狀態欄沿原版位置與人物遮擋。其他31張與三張金色事件來源保持；R121實拍保存在previous_soldier_r121_capture，其他歷史指紋保持。",
   "graphics_manifest_sha256": "b3fb4721b99d7157ac7bacced416b226c1232342350d6c56ad983b5f445232db",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
@@ -1218,7 +1281,7 @@
     "graphics_manifest_sha256": "c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7",
     "conformance_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5"
   },
-  "verification_build_sha256": "7a071d651700c776807978abd39ee21e2fd93171bae0bf6baabdd978f60ee0e9",
+  "verification_build_sha256": "cd6874ef37da1d69e84b3788d0ecbef24940cfc79e2be478b3ce8c073936fd44",
   "production_go_sources_equal_to_verified_build": true,
   "previous_scene_background_capture": {
     "code_commit": "dbfc95fc2b98654f9f4cf3d0abac946730bfbfce",
@@ -1360,7 +1423,7 @@
     },
     "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb"
   },
-  "conformance_state": "R121士兵教學期間四語選單與正文限定CONFORMED；其他31張圖片沿各自來源範圍",
+  "conformance_state": "R122四語狀態欄與人物前景合成限定CONFORMED；其他31張圖片沿各自來源範圍",
   "previous_opening_sun_capture": {
     "capture": {
       "file": "hd-opening-zh.png",
@@ -1808,5 +1871,67 @@
     "verification_build_sha256": "723ef638e5f241b984616eb0ca374df1eb23160d1664dda5e2e272057f7dc7e0",
     "conformance_state": "R120士兵教學四語正文限定CONFORMED；其他31張圖片沿各自來源範圍",
     "provenance_scope": "本次只更新士兵教學實拍，直接複製當次原PNG。其他31張及三張金色事件實拍的來源保持，舊士兵英文正文證據保存在previous_soldier_english_capture。"
+  },
+  "previous_soldier_r121_capture": {
+    "file": "hd-soldier-guide.png",
+    "sha256": "9a4f99cc63072906a386de527cbec3e7531548d9096e690abee2d7cad105ce29",
+    "size": [
+      1280,
+      800
+    ],
+    "scene": "soldier-guide-figure",
+    "language": "zh-Hant",
+    "graphics": "hd",
+    "step": 261200000,
+    "code_commit": "b40a645f81027b4cba5751d7cf9317b9af580574",
+    "binary_sha256": "cb5e807dc920d486e24241f4a2d48b0fae92f12d22de383c3992ed66be7f38d2",
+    "formal_binary_sha256": "cb5e807dc920d486e24241f4a2d48b0fae92f12d22de383c3992ed66be7f38d2",
+    "formal_hd_assets": 382,
+    "formal_source_bindings": 941,
+    "source_receipt": "workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r121-shadow-menu-gui-r1/gui.display-094.png",
+    "source_x11_receipt": "workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r121-shadow-menu-gui-r1/event-1061-zh-Hant-hd.x11.png",
+    "source_x11_sha256": "d03f8612790f5f2fcd36ac15cb21ca865985394a85b99291b0d2cac6ba73f0f9",
+    "source_build_sha256": "988432ff38dd7d86ab12eb7ec603a54ee36db1463b27e7663aa22af1629fa916",
+    "source_gui_check_sha256": "2aa3c3179ab198022dcb7daa6e68f24776ec9ee913aa055e7067aa05ae5675a2",
+    "source_replay_check_sha256": "1169fb25153b7e54321a0f3ddbc628d414d30a7becf6d3b5aa0d4d431747c16e",
+    "graphics_manifest_sha256": "b3fb4721b99d7157ac7bacced416b226c1232342350d6c56ad983b5f445232db",
+    "source_kind": "當前正式程式的正常讀檔及X11操作實拍；原PNG與同次X11遊戲區逐點相同",
+    "capture_pixels_unchanged": true,
+    "spec_state": "CONFORMED scoped tutorial body and retained menu",
+    "source_research_ids": [
+      1061
+    ],
+    "actual_body_language": "zh-Hant",
+    "new_multilingual_body_credit": true,
+    "body_font_px": 30,
+    "layout_safe": {
+      "Min": {
+        "X": 42,
+        "Y": 86
+      },
+      "Max": {
+        "X": 208,
+        "Y": 190
+      }
+    },
+    "verified_counts": {
+      "X11_game_area_pixels": 1024000,
+      "CJK_menu_and_body_locales": 4,
+      "event_captures": 18,
+      "body_guard_rejections": 36,
+      "menu_guard_rejections": 32
+    },
+    "scope": "本次新增士兵教學期間頂列選單的四語Noto限定驗收，正文與人物保留。其他31張圖片沿各自來源；未新增音訊、存檔、全量HD或完整五語聲明。",
+    "menu_font_px": 22,
+    "menu_foreground_pixels": 10
+  },
+  "previous_soldier_r121_header": {
+    "code_commit": "b40a645f81027b4cba5751d7cf9317b9af580574",
+    "binary_sha256": "cb5e807dc920d486e24241f4a2d48b0fae92f12d22de383c3992ed66be7f38d2",
+    "formal_binary_sha256": "cb5e807dc920d486e24241f4a2d48b0fae92f12d22de383c3992ed66be7f38d2",
+    "source_build_sha256": "988432ff38dd7d86ab12eb7ec603a54ee36db1463b27e7663aa22af1629fa916",
+    "verification_build_sha256": "7a071d651700c776807978abd39ee21e2fd93171bae0bf6baabdd978f60ee0e9",
+    "conformance_state": "R121士兵教學期間四語選單與正文限定CONFORMED；其他31張圖片沿各自來源範圍",
+    "provenance_scope": "只更新士兵教學當次原PNG，頂列與正文均為繁中。其他31張與三張金色事件來源保持；R120正文實拍保存在previous_soldier_r120_capture，更早英文正文與其他歷史指紋保持。"
   }
 }

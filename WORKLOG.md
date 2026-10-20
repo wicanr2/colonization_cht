@@ -7402,3 +7402,37 @@ R97參考圖勘誤：初版把第一事件色盤套用全部十三張，其他�
 - README士兵圖直接複製當次繁中HD原PNG，沒有裁切、縮放或重編碼。32張總數及其他31張圖與來源保持，R120實拍保存在previous_soldier_r120_capture。三張金色事件實拍保持。
 - 收據入口r121-display-close-final.json，SHA-256為7a071d651700c776807978abd39ee21e2fd93171bae0bf6baabdd978f60ee0e9，位於既有hd-opening-animation-sources-r84工作根。382張生成原PNG／383檔、941個HD來源連結與328個語言資源保持；完整五語、全量HD、影片及新版交付仍未完成，未改Issue或已發布版本。
 - 一次性GUI、控制組與Xvfb已正常結束，容器自動移除；輸出UID1000。原版輸入與來源fixture維持本機，Git與Docker清理於收尾核對。
+
+## 2026-10-20 R123 工作目錄空間清理
+
+- 清理沒有專用路由，依既有文件職責與tools/evidence_storage.py進行。全程使用既有Docker驗證映像、UID/GID 1000、網路停用及CPU／記憶體／PID與時間上限；可寫範圍限於本專案歷史報告與本次輸出。
+- 無損封存221個已結束的ELF驗證程式、大型JSON／JSONL與來源遮罩。每檔壓縮後解壓串流，原始大小及SHA-256往返核對；保留模式、擁有權與時間紀錄，回收2644983808 bytes。5083個封閉觀測輸出依實際SHA-256分為1982組，以硬連結保留每條路徑，內容、模式與擁有權相同，再回收3762880512 bytes；原始各路徑時間保存在本機清冊。
+- 清理操作共回收6407864320 bytes，約5.97GiB。盤點期間R122正常GUI仍持續產生收據，因此同範圍的一般檔獨立inode實占由50450698240降至44272934912 bytes，淨減6177763328 bytes，約5.75GiB；清理後約41.23GiB。檔案邏輯大小含硬連結重複計算，不作實占數字。
+- 1691個保護檔案逐檔核對雜湊，包含正式HD原圖及清冊、dist-all交付、95個既有直接依賴與R122正式執行／測試程式。原版輸入、存檔、目前字型與R122有效輸出保留。原版與研究輸入未加入Git，沒有新增HD或完整五語完成聲明。
+- 清理計畫、逐檔封存、硬連結原路徑與SHA-256、來源腳本及最終收據保存在既有workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/的r123-cleanup-*。最終入口為r123-cleanup-final-r1.json。
+- 重用封存檔前，還原指定的原始路徑或歷史目錄。從專案根目錄執行下列Docker命令，將最後一個路徑換成需要的項目。工具不覆寫現有原路徑，並核對原始及壓縮內容的SHA-256。
+
+```sh
+test -d "$PWD/workplace/reports" &&
+timeout 180 docker run --rm --network none --user 1000:1000 \
+  --cpus 1 --memory 1g --pids-limit 64 \
+  --mount "type=bind,src=$PWD,dst=/repo,readonly" \
+  --mount "type=bind,src=$PWD/workplace/reports,dst=/repo/workplace/reports" \
+  -w /repo colonization-verification:20261007-runtime-r2 \
+  python3 tools/evidence_storage.py restore \
+  workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r121-formal-tests-r1
+```
+
+- 清理容器均已退出並自動移除，無壓縮／還原／硬連結暫存檔，整個工作根沒有root-owned檔案或誤建的.md目錄。R122正常GUI已結束，其原版控制組驗證接續，未停止其他專案容器。
+
+## 2026-10-20 R122 人物後方的四語狀態欄
+
+- 接回士兵教學中日期、金錢／稅率、行動與座標四行。原型沿同一67筆既有正常輸入至258000000步，完整原版狀態等於8a046c4c…；只讀既有來源，沒有新原版內部調查或美術生成。六個MSS來源共用完整持有權、原生值、色盤與Main／VGA證明，未知後畫及同值寫入仍拒絕。
+- 原型首版三行成功，座標因Noto陰影碰到y83教學框上緣回退。逐行字高候選先排下，獨立字模量測又找出共用CJK基準差1px，改成對齊實際墨跡上緣並選原行高度內最大字級。繁中為22／18／18／21px，其他地區各自量測，沒有全域固定字級或放寬背景守門。
+- 初次文件前置斷言因Python連鎖比較未寫入，修正後才記DRAFT。首輪來源測試錯把被人物完全遮住的短譯文要求成可見，且誤用士兵色盤驗其他人物；歸類測試預期與fixture初始化。改用各人物既有固定色盤，區分字模生成與可見字形後，原有守門保持；後續字級／基線修正再乾淨重跑。
+- 正式e9d59bf／970366ee…建置與go vet通過。4項／218個含子項零skip，包含16個欄位、112個新拒絕、六來源完整／錯件及R120正文、R121頂列守門。MSS0／1／3／4用原版解碼fixture，MSS2／5沿既有來源fixture，不混稱正常路徑。
+- 正式GUI首輪因欄位檢查的prefix變數遮蔽輸出路徑，在首張截圖前停止；屬驗證腳本錯誤。修正作用域並以AST確認後，用同一正式程式在r122-panel-gui-r2乾淨重跑，失敗的r1不計驗收。
+- 收尾檢查初版把關頁後全部側欄誤限為四行；實拍另外恢復四行既有單位狀態。改為逐一核對本次日期、金錢、行動與座標，並確認沒有人物前景來源；同一組實拍及程式重新核對通過。
+- 當次44張正常X11共45056000點相同；18張事件圖中64筆四語狀態欄合成，原版／HD、游標往返及正常關頁通過。原版控制組重播當次78筆輸入至273600000步，完整CPU、RAM、VGA與DAC相同。原型字模收據中全遮擋的欄位案例為8，不計為可見文字正例。
+- README直接複製當次士兵繁中HD原PNG，不裁切、縮放或重新編碼。總數32張，其他31張與三張金色事件來源保持，R121實拍另存previous_soldier_r121_capture。入口r122-display-close-final.json，SHA-256為cd6874ef37da1d69e84b3788d0ecbef24940cfc79e2be478b3ce8c073936fd44，位於既有hd-opening-animation-sources-r84工作根。
+- 382張生成原PNG／383檔、941個HD連結、328個語言資源與已發布版本保持。全量HD、完整五語、影片及新版交付仍未完成，沒有Issue或Release寫入。一次性原型、測試、GUI、控制組及Xvfb退出並自動移除；輸出UID1000，Git與Docker於收尾核對。
