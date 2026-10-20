@@ -65,6 +65,10 @@ var hdSceneCopyCodes = map[uint16][]byte{
 
 func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, error) {
 	p := &hdSceneRuntime{h: h, publishedPending: map[int]hdSceneCursorPair{}, backing: map[uint32]hdSceneCell{}, pending: map[int]hdSceneCursorPair{}, start: -1}
+	artCache := map[string]struct {
+		im  image.Image
+		sha string
+	}{}
 	for _, def := range hdSceneDefinitions {
 		original, err := hdReadFile(filepath.Join(game, def.file), 8<<20)
 		if err != nil {
@@ -73,17 +77,30 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 		if hash(original) != def.originalSHA {
 			return nil, fmt.Errorf("scene original fingerprint: %s", def.file)
 		}
-		raw, err := hdReadFile(filepath.Join(directory, def.asset), 8<<20)
-		if err != nil {
-			return nil, err
+		cached, exists := artCache[def.asset]
+		if !exists {
+			raw, err := hdReadFile(filepath.Join(directory, def.asset), 8<<20)
+			if err != nil {
+				return nil, err
+			}
+			digest := hash(raw)
+			if digest != def.assetSHA {
+				return nil, fmt.Errorf("scene asset fingerprint: %s", def.asset)
+			}
+			im, err := png.Decode(bytes.NewReader(raw))
+			if err != nil {
+				return nil, err
+			}
+			cached = struct {
+				im  image.Image
+				sha string
+			}{im, digest}
+			artCache[def.asset] = cached
 		}
-		if hash(raw) != def.assetSHA {
-			return nil, fmt.Errorf("scene asset fingerprint: %s", def.asset)
+		if cached.sha != def.assetSHA {
+			return nil, fmt.Errorf("scene cached asset fingerprint: %s", def.asset)
 		}
-		im, err := png.Decode(bytes.NewReader(raw))
-		if err != nil {
-			return nil, err
-		}
+		im := cached.im
 		if def.alternateCanvas != 0 && (def.alternateCanvas != hdBuildingCanvas || def.canvas != 0) {
 			return nil, fmt.Errorf("scene alternate canvas")
 		}
@@ -130,19 +147,25 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 				}
 			}
 		}
-		for k, yes := range covered {
-			expected := true
-			if def.sprite != nil {
-				s := def.sprite
-				expected = k%320 < s.width && k/320 < s.height
+		expectedBounds := image.Rect(0, 0, 320, def.height)
+		if s := def.sprite; s != nil {
+			expectedBounds = image.Rect(0, 0, s.width, s.height)
+			if s.content != (image.Rectangle{}) {
+				if !def.alphaSprites || s.content.Empty() || !s.content.In(expectedBounds) {
+					return nil, fmt.Errorf("scene sprite content")
+				}
+				expectedBounds = s.content
 			}
+		}
+		for k, yes := range covered {
+			expected := image.Pt(k%320, k/320).In(expectedBounds)
 			if yes != expected {
 				return nil, fmt.Errorf("incomplete scene geometry")
 			}
 		}
 		p.frames = append(p.frames, f)
 	}
-	if len(p.frames) != 46 {
+	if len(p.frames) != 71 {
 		return nil, fmt.Errorf("scene source group")
 	}
 	h.m.WatchWrite(0, 0xaffff, func(_ *golem.Machine, a uint32, o, v byte) { p.memoryWrite(a, o, v) })

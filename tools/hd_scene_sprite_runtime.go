@@ -4,10 +4,12 @@ import (
 	"bytes"
 	"encoding/binary"
 	golem "github.com/wicanr2/dosgolem"
+	"image"
 )
 
 // 規格069 R97 READY修正。完整原版回傳後才建立Main來源；不改寫DOS。
 type hdSceneSpriteDefinition struct {
+	content                                    image.Rectangle
 	capturedReturn                             bool
 	ordinal, width, height, encodedLen, opaque int
 	nominal                                    [2]uint16

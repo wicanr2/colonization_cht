@@ -7288,3 +7288,10 @@ R97參考圖勘誤：初版把第一事件色盤套用全部十三張，其他�
 - 早期私有測試修正了底圖發布標記、舊輸出目錄與日誌路徑；目視修正名單多層字形色，原生英文及紙面相關過渡色保留。最終98965f84766fd9dddd1f7dce72a847d048b4873398b42f8d29ba96029525356f通過建置、go vet、完整HD載入、95個來源fixture顯示、槽位及342檔封裝指紋。未新增原版CPU、正常玩家路徑或原版精確對拍聲明。
 - 341張生成原PNG／342檔，501來源連結；既有317筆限定CONFORMED保持，新184筆DISPLAY-PASS。README素材摘要更新，32張既有實拍保留。
 - 收據：r106-formal-build-r1.json、r104-formal-display-r4/check.json、r105-formal-display-r3/check.json、r106-formal-display-r1/check.json。一次性容器均退出並自動刪除，輸出UID1000；原版未入Git。其他人物／標誌接續，全量HD仍未完成。
+
+## 2026-10-20 R107二十五位議會人物
+
+- 三張原始生成圖集接入CC-00.SS至CC-24.SS二十五來源，原PNG／alpha保持。逐來源內容矩形、圖集取樣、來源／權利／提示／指紋入Git。
+- scene圖集依檔名與已驗SHA快取；新來源content明定原生不透明外接矩形，舊幀空content維持既有幾何。完整來源及色盤守門保持。
+- 正式4a8bdaf6ff25a73ff676e0e4cda4fde48bd8b9af24af37e6d8435512ca7a6bae通過建置、go vet、完整HD載入、二十五位人物來源fixture顯示及345檔封裝指紋；目視確認。未新增原版CPU、正常玩家路徑或原版精確對拍聲明。
+- 344張生成原PNG／345檔，526來源連結，317筆既有限定CONFORMED與209筆DISPLAY-PASS。README摘要更新，32張實拍保留。收據為r107-formal-build-r2.json及r107-formal-display-r2/check.json。一次性容器退出並自動刪除，輸出UID1000，原版未入Git。其餘人物與圖像接續，全量HD仍未完成。

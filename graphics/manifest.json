@@ -30392,6 +30392,1244 @@
           "writes_sha256": "64866475cba06caa24d18398d185e541cf3fc96e8602a5c40486358ab3e5f334"
         }
       ]
+    },
+    "portraits-cc-1.png": {
+      "sha256": "f0cc47e0877a5d80a5807d7bf87884fb555c0bf416fddc156bf72f53152059aa",
+      "bytes": 1119267,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE original refined fine pixel-art character atlas for the Colonization (1994) HD display layer. Image1 contains NINE exact full-body historical character sprite references in a 3x3 equal grid. Repaint EACH of these nine figures faithfully, matching every person's distinct face, expression, age, build, posture, facing direction, costume, hat/hair, colors, held objects and props at their feet. Preserve all silhouettes and proportions, including the side-facing white-haired man holding a green book in cell1; the black/gold merchant with an open blue treasure chest and silver vessels in cell2; the dark-blue-clad red-haired broad-hatted man with a rope coil and map in cell3; the black/gold man with a green waist sash, red cloth and cane in cell4; the feather-hatted blue-breeched man holding rolled papers in cell5; the bearded red-clad man sitting on a globe, shading his eyes and holding a map in cell6; the silver-armored helmeted figure in cell7; the hand-to-chest silver-armored figure in cell8; and the dark-blue man with a gold map and key in cell9. Retain the original slightly caricatured historical game design. Fresh detailed art with crisp fine pixel clusters, facial features, fine period fabrics and restrained highlights; no enlarged coarse source pixels. Image2 is ONLY the approved fine pixel-art style reference: do not copy its landscape or buildings. Square transparent-background canvas, exactly THREE rows and THREE columns, one full character per cell fully contained with transparent margins and no overlap. Remove magenta reference scaffolding and black labels. Transparent outside figures and in internal gaps. No scenery, ground plane, border, grid, labels, text, numbers, captions, watermark, smooth painting, blur, 3D or photography. Preserve all nine distinct identities without beautifying or changing costume or pose.",
+      "generation_file": "exec-9e8c7b48-eb1c-4a63-81ed-924847421bec.png",
+      "reference_sha256": "1f593378be9dd71cf73e1cdd742f4f97f2f9685f28228591bd8e5cff7c6d71d7",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained, native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 95,
+          "file": "CC-00.SS",
+          "file_sha256": "a38f7c59ad10e452147e9f15a49640cf5f90138cd6a20246c8fa842aab3edde3",
+          "ordinal": 0,
+          "size": [
+            54,
+            125
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 3021,
+          "other_header_fields": [
+            280,
+            170
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "4f2c5d0aa6ed4e730ed88b195ce8e5f5981d15b254c0054307fa40f064dcb812",
+          "indexed_sha256": "c8f5b3544178184532f4908fed57b7a8d6fccd0be33acd833664c44ca0653043",
+          "opaque_pixels": 3007,
+          "transparency_index": 253,
+          "id": 95,
+          "asset": "portraits-cc-1.png",
+          "sample": [
+            126,
+            23,
+            298,
+            413
+          ],
+          "content": [
+            0,
+            0,
+            54,
+            125
+          ],
+          "art_sha256": "f0cc47e0877a5d80a5807d7bf87884fb555c0bf416fddc156bf72f53152059aa",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "badb37e8715a726bf0e115e3e4d5e7db9a5f867917a8dbcdac926f7ee209a448",
+          "palette_sha256": "5869e72ffbbd56a6ff367bc9da974b718f1b4e19ecb12db8efdbd026ac5f7696",
+          "writes_sha256": "1e97fa52b9e59927e015d9026779828187727f22f4952d6fe9c6aa4ddea5337f"
+        },
+        {
+          "research_id": 96,
+          "file": "CC-01.SS",
+          "file_sha256": "3298ceb5d8b0555ccb8748b1bd4a8d2a6613a85e5b201f3df3c247a814ed75ed",
+          "ordinal": 0,
+          "size": [
+            72,
+            97
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 3317,
+          "other_header_fields": [
+            146,
+            137
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "d997a58f13e5ef2282b7b9d6351a246ff3c1e436f41eb98751ab9696089eaabe",
+          "indexed_sha256": "1e736e3e44e3a8dac8c8e7dc219a632b411c38293ee34e527a8bc27571934a39",
+          "opaque_pixels": 3476,
+          "transparency_index": 253,
+          "id": 96,
+          "asset": "portraits-cc-1.png",
+          "sample": [
+            488,
+            29,
+            781,
+            411
+          ],
+          "content": [
+            0,
+            0,
+            72,
+            97
+          ],
+          "art_sha256": "f0cc47e0877a5d80a5807d7bf87884fb555c0bf416fddc156bf72f53152059aa",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "7ce16d649bf4638f5ec203b02dd4a804238aa202782abad0a650d4bd4d61001e",
+          "palette_sha256": "19cbbdb4dc0f054114e4103a604f19391e1b4234a92327d9d56861d689db0dca",
+          "writes_sha256": "b9702137e638a335defbc5bb0b143d71bd20ab03bc431149eb2272c988403386"
+        },
+        {
+          "research_id": 97,
+          "file": "CC-02.SS",
+          "file_sha256": "4555f81aaddf5607ad73c2cde170c4e5eef83980813420687cecaffec3e07aaa",
+          "ordinal": 0,
+          "size": [
+            52,
+            126
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 3615,
+          "other_header_fields": [
+            294,
+            186
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "e4be162e910eb694f44a07ce262b66b2e5e83ce3733ff9d0e6f1926a87146021",
+          "indexed_sha256": "ab43896b8a15094ef4524c60aafbb80026f1cf3024896601350f8b414894ba78",
+          "opaque_pixels": 4063,
+          "transparency_index": 253,
+          "id": 97,
+          "asset": "portraits-cc-1.png",
+          "sample": [
+            941,
+            23,
+            1118,
+            413
+          ],
+          "content": [
+            0,
+            0,
+            52,
+            126
+          ],
+          "art_sha256": "f0cc47e0877a5d80a5807d7bf87884fb555c0bf416fddc156bf72f53152059aa",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "091fa877bee40235c406fe1a4bf1521f80e710130c5b4f1c854873ff6086d32a",
+          "palette_sha256": "62b4cb5e0bc61447997ce15556a1395516f35a73f913fab556c6cdce106b2843",
+          "writes_sha256": "8a1aa3f47498467a313d5f1f582ab788d10e01c6efe506620166b49da5d073d3"
+        },
+        {
+          "research_id": 98,
+          "file": "CC-03.SS",
+          "file_sha256": "2bfcdece7d3b4568c01b72b655b05ea260cb28c3b0ce0934830e9fbc1ca98986",
+          "ordinal": 0,
+          "size": [
+            57,
+            101
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 2775,
+          "other_header_fields": [
+            67,
+            140
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "e36fcc52b0e6bd5152450707356eeb16e6ac49e82ab51b1b23e3944fe2508c92",
+          "indexed_sha256": "1b15d6f6ff81e98581bb74c807ff536c6a9e37befe05018dafbcc4cc88fd3981",
+          "opaque_pixels": 2874,
+          "transparency_index": 253,
+          "id": 98,
+          "asset": "portraits-cc-1.png",
+          "sample": [
+            102,
+            446,
+            332,
+            825
+          ],
+          "content": [
+            0,
+            0,
+            57,
+            101
+          ],
+          "art_sha256": "f0cc47e0877a5d80a5807d7bf87884fb555c0bf416fddc156bf72f53152059aa",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "7af65e99aaa593536dcc78b4a54a85350a4d1485010b6652f8ecb73efbaaf2fd",
+          "palette_sha256": "a6ee9b993428ceb5f84d2dc94c1c826de0b06f7dcd3aa6afbfec4d1ce35c10cb",
+          "writes_sha256": "3eb2aee1d906ccf24fa386ad35733aa9bcae4c7d7906c872bd7c38fb17f70aed"
+        },
+        {
+          "research_id": 99,
+          "file": "CC-04.SS",
+          "file_sha256": "b2d8aa4f7fc597964e52254fe1a38ef46f02760f0c65d866697e229ba0462126",
+          "ordinal": 0,
+          "size": [
+            50,
+            107
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 3286,
+          "other_header_fields": [
+            267,
+            140
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "798acea745a696c154a10eb2bdbf149be6959e3060ce83a242c302f70de7f320",
+          "indexed_sha256": "67961cfd7d20eed1a79c5b5d187b0211bfb11b7b5f0c712c6f8fb33fd7dfe753",
+          "opaque_pixels": 3210,
+          "transparency_index": 253,
+          "id": 99,
+          "asset": "portraits-cc-1.png",
+          "sample": [
+            531,
+            440,
+            721,
+            825
+          ],
+          "content": [
+            0,
+            0,
+            50,
+            107
+          ],
+          "art_sha256": "f0cc47e0877a5d80a5807d7bf87884fb555c0bf416fddc156bf72f53152059aa",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "89784bcc6936c606dcf237087c7127e6ab1c5b6ee6e98adb79f6d9d30d93c96d",
+          "palette_sha256": "6c6ec063b5067f0aca1a5d36c83766d8845a8586423b0e1ba9d1610171f10122",
+          "writes_sha256": "32ea5705d0c94cada9e146c5b835a70d59083306e5c0113162f9c09cf556488c"
+        },
+        {
+          "research_id": 100,
+          "file": "CC-05.SS",
+          "file_sha256": "d25d96ea95b8012a08c9a58ea05354f18e9825c3721b6b93002208190796ea0f",
+          "ordinal": 0,
+          "size": [
+            68,
+            109
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 4625,
+          "other_header_fields": [
+            84,
+            162
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "2053041ba13f8b348b3ebfb242235b73197993edb2e35f0e6bb5b306b36ceb70",
+          "indexed_sha256": "ba098bffbea8873a35f4f10297ec31afad56000fb0e956ad47a62f984e442880",
+          "opaque_pixels": 5018,
+          "transparency_index": 253,
+          "id": 100,
+          "asset": "portraits-cc-1.png",
+          "sample": [
+            906,
+            446,
+            1162,
+            828
+          ],
+          "content": [
+            0,
+            0,
+            68,
+            109
+          ],
+          "art_sha256": "f0cc47e0877a5d80a5807d7bf87884fb555c0bf416fddc156bf72f53152059aa",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "21585368d8d513ec3907e09d3b503c04ccc1e459d855fe70b203dbecb60bd28e",
+          "palette_sha256": "b0f9cd01212ea9f8d6c527a8803c94e4cc55b0ce4d33f531f2fed0eb3f7335cc",
+          "writes_sha256": "18b97cd119f39cb68cba731f2d3576f36b166c0a50e7bfcf37762af2eb7cd4d4"
+        },
+        {
+          "research_id": 101,
+          "file": "CC-06.SS",
+          "file_sha256": "a9989a07eed903777786e553b9d083c74feca4896a6598d7be98435a6663d848",
+          "ordinal": 0,
+          "size": [
+            39,
+            86
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 1966,
+          "other_header_fields": [
+            24,
+            118
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "03590716f85faaba1db0e187b8eb1e1ee276bdeb694174fa897e26d74fc7ee1c",
+          "indexed_sha256": "d27b91b050569298360858929f4d44e3abc1bed91b33957deb14f12ba559c8f5",
+          "opaque_pixels": 1515,
+          "transparency_index": 253,
+          "id": 101,
+          "asset": "portraits-cc-1.png",
+          "sample": [
+            125,
+            852,
+            314,
+            1232
+          ],
+          "content": [
+            0,
+            0,
+            39,
+            86
+          ],
+          "art_sha256": "f0cc47e0877a5d80a5807d7bf87884fb555c0bf416fddc156bf72f53152059aa",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "e2730d918ce58b382b01de3c2bb4e4a62a3c42ff38657ccd9a82873ed4e774fd",
+          "palette_sha256": "c939d774106a5b3f4087495da8fe67276db2a0f711093b4911180f8d1121c0b3",
+          "writes_sha256": "d59604008d2a7cc0fa4c1353f5db0238be05a199317758ce89e855ff16399f74"
+        },
+        {
+          "research_id": 102,
+          "file": "CC-07.SS",
+          "file_sha256": "3429a1c240a2cc204345688f6fdc47c37314ffcb9b7060446ece5c486ca13170",
+          "ordinal": 0,
+          "size": [
+            38,
+            87
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 2195,
+          "other_header_fields": [
+            301,
+            118
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "5487dfd0de480ec6e4f2040a2324c3e141e15740f10afa50820e1004444b9dfc",
+          "indexed_sha256": "c75ad5cb85292da06e7f0b61ac8c2ff52354dd3040dd14f3b9743bc6bd0374fe",
+          "opaque_pixels": 1653,
+          "transparency_index": 253,
+          "id": 102,
+          "asset": "portraits-cc-1.png",
+          "sample": [
+            538,
+            853,
+            724,
+            1233
+          ],
+          "content": [
+            0,
+            0,
+            38,
+            87
+          ],
+          "art_sha256": "f0cc47e0877a5d80a5807d7bf87884fb555c0bf416fddc156bf72f53152059aa",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "2ad511747edcde6670a195676852dce7d257576be49f20e2806dd3e182305b95",
+          "palette_sha256": "5f94d912850e6879e5b7111057b3105485ee114eea6f5f32b918b42dbce963d5",
+          "writes_sha256": "dc6d84718b7d3e0284707dfd86afd0ffc9759f9f2a812339798b63779b9c733b"
+        },
+        {
+          "research_id": 103,
+          "file": "CC-08.SS",
+          "file_sha256": "a9fa4446be1da498b444c0380cf09b41d5200134e7a05d2d83ceb5d3b2647c12",
+          "ordinal": 0,
+          "size": [
+            41,
+            96
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 2575,
+          "other_header_fields": [
+            117,
+            141
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "3c77b11afc4bf086526c58803e22c758ef63a21dbad1deb015475e99618988c9",
+          "indexed_sha256": "648f1030e14a965011fc93866cc8bcbcfea5ffa8ab8acbf15004ba634699f50b",
+          "opaque_pixels": 2181,
+          "transparency_index": 253,
+          "id": 103,
+          "asset": "portraits-cc-1.png",
+          "sample": [
+            948,
+            853,
+            1124,
+            1233
+          ],
+          "content": [
+            0,
+            0,
+            41,
+            96
+          ],
+          "art_sha256": "f0cc47e0877a5d80a5807d7bf87884fb555c0bf416fddc156bf72f53152059aa",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "9285508fb15f0c4d13888b54a893f4c49ac6f2b66ad36a365e70c4effc9be344",
+          "palette_sha256": "44d1340b4becda1cdc4fcd04504f866f1e77abe970b4ffc9b652d6f591020563",
+          "writes_sha256": "74763b987fd23f6b17f46d2cb2d97bca34fb48fffd96d5349d76d21becfa7d25"
+        }
+      ]
+    },
+    "portraits-cc-2.png": {
+      "sha256": "a7343fe4bbb7c275e9115911d909a683bc368a0e6ec6bec50e00bcd85cf657fc",
+      "bytes": 1129337,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE original refined fine pixel-art character atlas for the Colonization (1994) HD display layer. Image1 is the exact visual reference: a 3 by3 grid with EIGHT full-body historical character sprites in the first8 cells, last cell completely transparent. Repaint each figure faithfully, preserving distinct face, expression, age, build, posture, facing, costume, hats/hair, original colors and props. Reading order: a long-haired frontiersman in pale tan clothes and green scarf holding a tall musket with fur/pelt at his feet; a bearded armored conquistador with red-plumed helmet, sword, and carved gray stone idol at his feet; a white-haired blue-coated military officer in a dark cape, white breeches and tall gray boots; a broad older man in brown tricorn and green jacket with orange breeches holding a staff and black/gold book; a dark-haired black/gold-clad pirate sitting on a treasure chest with coins and skull-and-crossbones hat at his feet; a blue/gold naval officer with tricorn, white breeches, sword and cannonballs at his feet; a red-haired man in a black suit and white stockings holding a quill and papers; and an Indigenous woman with long dark hair, feather, bead necklace, beige knee-length dress, blue waist sash, folded arms and bare feet. Preserve the original slightly caricatured game design, all silhouettes and component layout. Image2 is STYLE ONLY: crisp fine deliberate pixel clusters, readable faces, detailed cloth/metal, restrained highlights and natural period colors; do not copy its scenery. Square transparent canvas with exactly3 equal rows and3 equal columns, each figure centered fully inside its cell with clear margins, first8 occupied, last cell transparent. Remove magenta background and all reference labels. No extra figures, backgrounds, ground planes, grid, frames, captions, words, numbers, watermark, blur, smooth painting, 3D or photography. Clean alpha outside figures and in gaps.",
+      "generation_file": "exec-b798eacf-56ca-4860-a1c9-956fba71937a.png",
+      "reference_sha256": "b3d16536b34dab7ca9d588036ebd25d437314bbe676924b67ec4aeba6eb79354",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained, native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 104,
+          "file": "CC-09.SS",
+          "file_sha256": "4f7d327e83e11dd3b8fd9dde22b9dec08b67c0ffa8be0e3573826a55cb8e82ac",
+          "ordinal": 0,
+          "size": [
+            62,
+            132
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 5532,
+          "other_header_fields": [
+            70,
+            196
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "7041f6bdc5f290603975602144d88baa9999bf9ecdd5c53dfda89424b8ef6b30",
+          "indexed_sha256": "a8797826a081053dbf5d34615c1e800fd2a620182fb4d298a77f1db5483ccf15",
+          "opaque_pixels": 4842,
+          "transparency_index": 253,
+          "id": 104,
+          "asset": "portraits-cc-2.png",
+          "sample": [
+            160,
+            27,
+            363,
+            419
+          ],
+          "content": [
+            0,
+            0,
+            62,
+            132
+          ],
+          "art_sha256": "a7343fe4bbb7c275e9115911d909a683bc368a0e6ec6bec50e00bcd85cf657fc",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "9de5fd9acce0cef93bd1b722126d7d6572e2d8df4b047e3739e1abc36c0cf554",
+          "palette_sha256": "0bff81c230c0644e294dfbc32ab8fc5b7295e97c0e8b1b0b79da1247b54e37a5",
+          "writes_sha256": "9f7c4ed8164611c635cc64735955abab94aa0d497ee33424cc737d552a0fc7dd"
+        },
+        {
+          "research_id": 105,
+          "file": "CC-10.SS",
+          "file_sha256": "88fa743b94357a62185d3fa74a14cf8f3a11a48b81556fb9f89af35491236757",
+          "ordinal": 0,
+          "size": [
+            71,
+            115
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 4886,
+          "other_header_fields": [
+            166,
+            153
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "3d60ce618b0af2c064a43e0b3312bc0f9a3ec0df61a83dcbe9359446ed49ddf0",
+          "indexed_sha256": "1a4d3e3d8b637ac8a324ed2ee54a5e80beb7f542ee56995122a0b3ed5d19e086",
+          "opaque_pixels": 4168,
+          "transparency_index": 253,
+          "id": 105,
+          "asset": "portraits-cc-2.png",
+          "sample": [
+            528,
+            18,
+            772,
+            417
+          ],
+          "content": [
+            0,
+            0,
+            71,
+            115
+          ],
+          "art_sha256": "a7343fe4bbb7c275e9115911d909a683bc368a0e6ec6bec50e00bcd85cf657fc",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "2639c2953c2f77c4170cf064b3bef267852c52352839457a1c7da0fbdfaf00ca",
+          "palette_sha256": "a3000c01b276dce3a7f2abadc3ece715601059a2b0928f892cc411ff245a1b8c",
+          "writes_sha256": "ebc0149ea8631c9fcd45e2de11366b3c5e5a49cd36285e70f253811e1dfd3c9c"
+        },
+        {
+          "research_id": 106,
+          "file": "CC-11.SS",
+          "file_sha256": "157a48d20254f53c46417a3858c892439069222b171c6b3820798930384012d5",
+          "ordinal": 0,
+          "size": [
+            73,
+            133
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 5578,
+          "other_header_fields": [
+            190,
+            192
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "fc1c20a8b62a46ad1abb05eda253d3f2a3e8bcec55b2fbcfd16ce66c6df156d4",
+          "indexed_sha256": "d2b01ff916c7247822ff08ea707726dd86084e497a68bbf0f775e7a6a5e53e07",
+          "opaque_pixels": 6295,
+          "transparency_index": 253,
+          "id": 106,
+          "asset": "portraits-cc-2.png",
+          "sample": [
+            890,
+            32,
+            1114,
+            419
+          ],
+          "content": [
+            0,
+            0,
+            73,
+            133
+          ],
+          "art_sha256": "a7343fe4bbb7c275e9115911d909a683bc368a0e6ec6bec50e00bcd85cf657fc",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "e3602e943759b7d3f2f88d31f060ef39d37eaba4d98ce15383d678d0a6c2a30a",
+          "palette_sha256": "538efd16ddbc8c4349fc607e5c2aba479420497201ad5835068597c09f0915cb",
+          "writes_sha256": "9d61a72f57a8c50011d09dbf5cac2296f0daa5e7e22efb2c5178c098d0ed632f"
+        },
+        {
+          "research_id": 107,
+          "file": "CC-12.SS",
+          "file_sha256": "5d355f24fd65aeb43e8df4573a3f67aec92fab39646ce75401e5fe75622e9d36",
+          "ordinal": 0,
+          "size": [
+            68,
+            124
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 5378,
+          "other_header_fields": [
+            34,
+            187
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "0a2d2e4f02cb18712008917467a6e27f9f96848459d54f7421edf8b718165bb5",
+          "indexed_sha256": "82cce47c95b2fca10d35e0768387d696bd01a6f18be8fe8b08ce5f20a6805d24",
+          "opaque_pixels": 5479,
+          "transparency_index": 253,
+          "id": 107,
+          "asset": "portraits-cc-2.png",
+          "sample": [
+            141,
+            446,
+            375,
+            825
+          ],
+          "content": [
+            0,
+            0,
+            68,
+            124
+          ],
+          "art_sha256": "a7343fe4bbb7c275e9115911d909a683bc368a0e6ec6bec50e00bcd85cf657fc",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "7c734fcedc5ab6f0aa5bf314e4aea8c40af4d82aab00fbed7b0fb080825d1134",
+          "palette_sha256": "67acf3ef208ab7120f3546d017cbf95195cf2d8b426f84a53d93b5aeceefe9b4",
+          "writes_sha256": "a54090cba9ac2eb01a8422dadee4cbab100b1e0dca631e3d88bbfc9c7a7ea709"
+        },
+        {
+          "research_id": 108,
+          "file": "CC-13.SS",
+          "file_sha256": "6007690f9c6c0b0850ed63c59046d2fa99b5f6a78254cae40f9343f21831fb16",
+          "ordinal": 0,
+          "size": [
+            80,
+            111
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 4156,
+          "other_header_fields": [
+            230,
+            163
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "f6064156cadca5b888077e1c8b872193abb7469c83403ae3c9e5a22a1a34f226",
+          "indexed_sha256": "3e3399855352fcd3a35f7024aeffd4ea0ebfa62da618a4369d4d0017bf5ab2f3",
+          "opaque_pixels": 4448,
+          "transparency_index": 253,
+          "id": 108,
+          "asset": "portraits-cc-2.png",
+          "sample": [
+            490,
+            445,
+            792,
+            831
+          ],
+          "content": [
+            0,
+            0,
+            80,
+            111
+          ],
+          "art_sha256": "a7343fe4bbb7c275e9115911d909a683bc368a0e6ec6bec50e00bcd85cf657fc",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "0069a8ee56c1ad85e91c06f8312d1eaa1a255bb3e798eb1f755361fa189709cb",
+          "palette_sha256": "038255c62915c209ae5488776718b05fdf345e41177d5bffbbfe8ccb054ad082",
+          "writes_sha256": "2e926876e8eb5a2c3a8ccc931d5a9ab1e95f7f2954ea14b04bcbf5770de5ea63"
+        },
+        {
+          "research_id": 109,
+          "file": "CC-14.SS",
+          "file_sha256": "f1d2adb0dea45d3693db5bb94310dd9ed13434f95afd8f7b711bc9a368f42685",
+          "ordinal": 0,
+          "size": [
+            69,
+            133
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 4792,
+          "other_header_fields": [
+            259,
+            196
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "ce8dc77c012d8ee43e0e73b90640b5cef699442394e0153d25b1c3dcce067d90",
+          "indexed_sha256": "609c44a7a1ffbe82bf0c6da1afa8a9235e7d9b99fa420446e1822ff5e314181b",
+          "opaque_pixels": 4598,
+          "transparency_index": 253,
+          "id": 109,
+          "asset": "portraits-cc-2.png",
+          "sample": [
+            935,
+            447,
+            1139,
+            833
+          ],
+          "content": [
+            0,
+            0,
+            69,
+            133
+          ],
+          "art_sha256": "a7343fe4bbb7c275e9115911d909a683bc368a0e6ec6bec50e00bcd85cf657fc",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "976c65ed7f21b36d4d0ae5e127b55b849cf96a76fe00ef18832ebfad26f29685",
+          "palette_sha256": "12fe5509beba56a9d6751912ca31872295304e9a113f2c25a31032b097f55a4a",
+          "writes_sha256": "8a4ca8ec293d066ced166885cb6c2c4bd007e9928abac82ee8207eae22979dad"
+        },
+        {
+          "research_id": 110,
+          "file": "CC-15.SS",
+          "file_sha256": "e7d98ff3a5d4ef3f492c79da6e00b55af17b0d4a6638619b7856648033ffc465",
+          "ordinal": 0,
+          "size": [
+            55,
+            135
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 3014,
+          "other_header_fields": [
+            123,
+            190
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "199c553f26347e8b93c4f4d4c4ad74bf46ef122a6e853628427743b6814be605",
+          "indexed_sha256": "3ea2240ac91b4561d90ce7aca5c42a0e0fc74c1184d34f9a3d2fcfa792886585",
+          "opaque_pixels": 3343,
+          "transparency_index": 253,
+          "id": 110,
+          "asset": "portraits-cc-2.png",
+          "sample": [
+            176,
+            852,
+            354,
+            1238
+          ],
+          "content": [
+            0,
+            0,
+            55,
+            135
+          ],
+          "art_sha256": "a7343fe4bbb7c275e9115911d909a683bc368a0e6ec6bec50e00bcd85cf657fc",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "24ddb2dd7c36dcdd11d51de513b3cefab7971d66a83cacfd590fc986477ce919",
+          "palette_sha256": "d65915f8b026e2ee077981f99efdfbb0539f412be796c54f32bdff1781ca9c49",
+          "writes_sha256": "4c3bfc3593206275de1eaff200f11b8df349afe0fac13bd5a3665eaed7e0ece9"
+        },
+        {
+          "research_id": 111,
+          "file": "CC-16.SS",
+          "file_sha256": "acff05e0d23171d4b45cab71285127d362b1e15bbb22d34703116f8bd245db77",
+          "ordinal": 0,
+          "size": [
+            55,
+            132
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 3708,
+          "other_header_fields": [
+            270,
+            198
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "86f401e15a3b045d77f22bfe9dbeeb15a5a3da1741601bc8c27186e23007abbb",
+          "indexed_sha256": "ec12467ac214564d03e2546b6db9f00f70372348ac4a1bb1135bffbbed8db108",
+          "opaque_pixels": 3031,
+          "transparency_index": 253,
+          "id": 111,
+          "asset": "portraits-cc-2.png",
+          "sample": [
+            531,
+            856,
+            716,
+            1236
+          ],
+          "content": [
+            0,
+            0,
+            55,
+            132
+          ],
+          "art_sha256": "a7343fe4bbb7c275e9115911d909a683bc368a0e6ec6bec50e00bcd85cf657fc",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "09b421c9c3e0b84b2c24bc0469ed70a1de665cb4e55a530eeb2799421a2e746d",
+          "palette_sha256": "3d658d4af322f88e87ccb11d65ba3a14422aec2124a7b5d4fc47fab12ad4ea86",
+          "writes_sha256": "fe410b4ca506aa866031ce9b10953658ff96a8f4c2fedd3af7b5a6e3c65dc126"
+        }
+      ]
+    },
+    "portraits-cc-3.png": {
+      "sha256": "bfe5b3c56c5af1b67886936f07005906a5827f8d98076b3f65a011c1669001d9",
+      "bytes": 1124224,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE original refined fine pixel-art character atlas for the Colonization (1994) HD display layer. Image1 is an exact3x3 composition reference containing EIGHT historical character sprites, first8 cells occupied and final cell fully transparent. Preserve each distinct face, age, build, expression, original caricature proportions, costume, colors, hand gestures and props. In reading order: gray-wigged scholar in dark green coat, white neckcloth, book under one arm and other index finger raised, stack of silver pieces at his feet; young dark-haired blue/gold military officer in white breeches, tall dark-blue boots and red sash; older bald long-haired bespectacled man in green suit and brown waistcoat seated in a wooden chair with papers and cord at his feet; broad-hatted black-clad pilgrim with white collar, black breeches, white stockings, gold book and a large brown sack; smiling black-tricorned man in teal waistcoat and dark coat holding a gold-detailed book and shovel; solemn front-facing dark-haired Jesuit in long navy robes with red waist sash, hands clasped over a long gold cross; side-looking long-nosed man in a red feathered cap, elaborate purple/gold coat, red stockings, holding thin measuring instrument/cord; and tonsured side-looking friar in a long brown robe with belt, holding the exact small gray object and white bundle in the reference. Keep poses and item layouts exact. Repaint fresh in crisp fine pixel clusters with readable faces, detailed fabric and restrained period colors. Image2 is only approved pixel-art STYLE, do not copy its landscape. Square transparent canvas, exactly3 equal rows and3 equal columns, one figure centered and fully within each occupied cell with transparent margins, final cell transparent. Remove reference magenta and black labels. No scenery, ground plane, grid, frames, text, numbers, captions, watermark, blur, smooth painting, photography or 3D. Clean alpha outside silhouettes and inside gaps.",
+      "generation_file": "exec-b270a90f-c8c5-4fc8-a9cb-ede6d7b3a585.png",
+      "reference_sha256": "77f5f7daf9aa268a600d36d75ca1b579f29c377cac224d7b5ecfd64b532e7994",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained, native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 112,
+          "file": "CC-17.SS",
+          "file_sha256": "67325cffd75735a2f4302eff9a7a82c37a6f5121d90420e91749ecbca107daec",
+          "ordinal": 0,
+          "size": [
+            38,
+            119
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 3344,
+          "other_header_fields": [
+            19,
+            171
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "9f1c6c0f7f08b26a3e71a467819dc875a2006e2c8cc20bc54f528ca43b5789e8",
+          "indexed_sha256": "d38e65a1acf3d61276074ad1d27983b5a4db201fc465ca2623435d812d1915d4",
+          "opaque_pixels": 2912,
+          "transparency_index": 253,
+          "id": 112,
+          "asset": "portraits-cc-3.png",
+          "sample": [
+            138,
+            22,
+            308,
+            442
+          ],
+          "content": [
+            0,
+            0,
+            38,
+            119
+          ],
+          "art_sha256": "bfe5b3c56c5af1b67886936f07005906a5827f8d98076b3f65a011c1669001d9",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "f02a76e189ecbce2e671f322c14548586f955ebe7fb87b624094ca14c04593f2",
+          "palette_sha256": "11d3c30e500551c23b142322244d840f990555904f75f53d62fb85ee27c49a5d",
+          "writes_sha256": "556f1906eae2b2e4494c0e73c3cd70aef35739ee2b5dfcaec6142c235fe5fc48"
+        },
+        {
+          "research_id": 113,
+          "file": "CC-18.SS",
+          "file_sha256": "e7772e05c672ac11d0964be7eb1bde578a79d1226f7cb17854da96f320479f07",
+          "ordinal": 0,
+          "size": [
+            36,
+            109
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 2636,
+          "other_header_fields": [
+            202,
+            145
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "bd9694f9e2ada7a9f79bd749257fa4537b712c6ddc0e64752c28d70836123471",
+          "indexed_sha256": "456b6a9093c51c053d8e7b4f2d6e6286d329df808c873c6cc87e009da3e443d9",
+          "opaque_pixels": 2309,
+          "transparency_index": 253,
+          "id": 113,
+          "asset": "portraits-cc-3.png",
+          "sample": [
+            543,
+            16,
+            697,
+            444
+          ],
+          "content": [
+            0,
+            0,
+            36,
+            109
+          ],
+          "art_sha256": "bfe5b3c56c5af1b67886936f07005906a5827f8d98076b3f65a011c1669001d9",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "28a9a07872a11e2c8c4c37f7e6c85fe7a4bf88e12a7608042dd5b1b6e5777beb",
+          "palette_sha256": "f8e3f5061901944a3cdd486fb8eb17c5c829cd4c222233b3b5939c816366a073",
+          "writes_sha256": "b852b01dae81725e1505d6eeea54ba11faddfc8746c5b81e52f9d08aa6f111d7"
+        },
+        {
+          "research_id": 114,
+          "file": "CC-19.SS",
+          "file_sha256": "f49be8fde21e5c1c0ddfa0ade735c19ac6e35cbef73d6fe8e82912b741f3eeaa",
+          "ordinal": 0,
+          "size": [
+            115,
+            114
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 6513,
+          "other_header_fields": [
+            175,
+            199
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "3d8ef7403588994d304f5b17bcfb52623d18d1341a5c1c6a3a829ff191785e35",
+          "indexed_sha256": "d77c9c2724d19f596980a662d6fca1ff0bcc76da4f3dc6f8b171f264f4f1110e",
+          "opaque_pixels": 6105,
+          "transparency_index": 253,
+          "id": 114,
+          "asset": "portraits-cc-3.png",
+          "sample": [
+            864,
+            50,
+            1238,
+            443
+          ],
+          "content": [
+            0,
+            0,
+            115,
+            114
+          ],
+          "art_sha256": "bfe5b3c56c5af1b67886936f07005906a5827f8d98076b3f65a011c1669001d9",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "b2e08b881f2f903037d30fdc70d654684249c73223da82409387017d41dbfade",
+          "palette_sha256": "72332249138c6a27ab537bba422f447573a96ad8df4cfe75d0a713e515fdc7ab",
+          "writes_sha256": "650be6c0c673d22edd673165cbc78365ee4e156e8a26c378cc71c8cef05e54a5"
+        },
+        {
+          "research_id": 115,
+          "file": "CC-20.SS",
+          "file_sha256": "0a698dcbdc0deb11a0331e964b1af25ed82e30169213360c05cbd02db3ba509d",
+          "ordinal": 0,
+          "size": [
+            52,
+            87
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 2670,
+          "other_header_fields": [
+            99,
+            125
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "c596cd7d303b0a4f8903901ea72237a57e0bc6ea0733c9dcbcae4dfb4449f53b",
+          "indexed_sha256": "5a5052b0c6a988164adfb92539451cc967af858a8e65f695697bf839667975fc",
+          "opaque_pixels": 2370,
+          "transparency_index": 253,
+          "id": 115,
+          "asset": "portraits-cc-3.png",
+          "sample": [
+            85,
+            457,
+            352,
+            860
+          ],
+          "content": [
+            0,
+            0,
+            52,
+            87
+          ],
+          "art_sha256": "bfe5b3c56c5af1b67886936f07005906a5827f8d98076b3f65a011c1669001d9",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "a864824823c264c9959a0ce0f5bd566a1c444529159fc8b5482bd729110fda7e",
+          "palette_sha256": "f6b2da7b7a01f8ee5a1ce2a8797eb23eef87a9de7adbdd617954ef9d042f009e",
+          "writes_sha256": "76fe6ef72b68e5672ca966f646fe1c60ea48af955b7ae5327a3639c65ad1bf65"
+        },
+        {
+          "research_id": 116,
+          "file": "CC-21.SS",
+          "file_sha256": "16c5d1237970592a32a685dcbdcc720752b835ca6a2aa3863c8dba7ce41cc189",
+          "ordinal": 0,
+          "size": [
+            56,
+            111
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 3523,
+          "other_header_fields": [
+            43,
+            157
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "e3b232456fda74311ddcbb803c6e4d323182c65eb76413347d55e3b52134e4b6",
+          "indexed_sha256": "254c7a34bfd4ffc6f11dc44e1be612f7b7b0fa0587f687433949b37baad8dccf",
+          "opaque_pixels": 3733,
+          "transparency_index": 253,
+          "id": 116,
+          "asset": "portraits-cc-3.png",
+          "sample": [
+            519,
+            460,
+            749,
+            853
+          ],
+          "content": [
+            0,
+            0,
+            56,
+            111
+          ],
+          "art_sha256": "bfe5b3c56c5af1b67886936f07005906a5827f8d98076b3f65a011c1669001d9",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "25865d8294cd627976544fd00dc3999251b495589401bae799139a8cd01723ee",
+          "palette_sha256": "b1c9d22eb37273f03aab4b649f7dcf07e032b6dcdab05d139d49bcc74e1d2f9a",
+          "writes_sha256": "5cdad746456f3279f1ccd3550de3df9f1bbaa896f98d9c4f150521665614e999"
+        },
+        {
+          "research_id": 117,
+          "file": "CC-22.SS",
+          "file_sha256": "159c0c05c51cd9ef2e0df28ac07868e477569c237c5e99679dcc46e62cc7a7f1",
+          "ordinal": 0,
+          "size": [
+            31,
+            86
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 1940,
+          "other_header_fields": [
+            243,
+            127
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "3780df2f8907727a75d5a52805bc4754f566ede774b2aac0c7e9893d176a2cb2",
+          "indexed_sha256": "b80c9ec499b3246cb73ab8200fa03b816bf05674aaa216d38331e6876f7c6cd7",
+          "opaque_pixels": 2042,
+          "transparency_index": 253,
+          "id": 117,
+          "asset": "portraits-cc-3.png",
+          "sample": [
+            948,
+            463,
+            1114,
+            854
+          ],
+          "content": [
+            0,
+            0,
+            31,
+            86
+          ],
+          "art_sha256": "bfe5b3c56c5af1b67886936f07005906a5827f8d98076b3f65a011c1669001d9",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "b601a803c2b4d1aca496f6c02f09b4584adff11c661fc777aeab16ba18265c91",
+          "palette_sha256": "ca222dfe7616053f2c16c95e8b073a891fd89bce8d36aadf2d81878f2b33bb03",
+          "writes_sha256": "932c981ad824b5f30e1871c0ecca2da4eddb47678cc1142eb91c4faf8d200931"
+        },
+        {
+          "research_id": 118,
+          "file": "CC-23.SS",
+          "file_sha256": "199015c84025125c9697eec2b968e34701a447a29426c1db66242c869ffd7136",
+          "ordinal": 0,
+          "size": [
+            42,
+            84
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 2260,
+          "other_header_fields": [
+            189,
+            127
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "32f989944f3e42c15e5bcf86d209647531479d78a063b0c7d2f59b5c88055e4f",
+          "indexed_sha256": "dc4292b90701670eccce30d9e2bf6911b58d6158d6c9cb048f62c55f43d4cdb5",
+          "opaque_pixels": 1744,
+          "transparency_index": 253,
+          "id": 118,
+          "asset": "portraits-cc-3.png",
+          "sample": [
+            111,
+            860,
+            341,
+            1242
+          ],
+          "content": [
+            0,
+            0,
+            42,
+            84
+          ],
+          "art_sha256": "bfe5b3c56c5af1b67886936f07005906a5827f8d98076b3f65a011c1669001d9",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "aa6e893bf5ab6c3842f91821c4d328a97f1930403c8132b33e76e486532867b5",
+          "palette_sha256": "d5994abdb5fb96a24815267cee6fc040b9e2a7869f6367ebb859a7cd8ac0d099",
+          "writes_sha256": "50e85403f99e847d0a88a0a0bc72709abb1a8b4fc77750938e4150efc6ec8086"
+        },
+        {
+          "research_id": 119,
+          "file": "CC-24.SS",
+          "file_sha256": "905e39f00eedb7379496066bf761003766b9fff721736b78d059e928afbe3be3",
+          "ordinal": 0,
+          "size": [
+            36,
+            84
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 2098,
+          "other_header_fields": [
+            215,
+            122
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "91a1fe54e121203dc28316af1d80d15e09f4bc04fa6513e7fe8c0f0f010fa235",
+          "indexed_sha256": "2990fa098926563b5b8421273ae5e3dd865de0b5bf929176b71f7bbd3c2e75cc",
+          "opaque_pixels": 1857,
+          "transparency_index": 253,
+          "id": 119,
+          "asset": "portraits-cc-3.png",
+          "sample": [
+            534,
+            869,
+            732,
+            1242
+          ],
+          "content": [
+            0,
+            0,
+            36,
+            84
+          ],
+          "art_sha256": "bfe5b3c56c5af1b67886936f07005906a5827f8d98076b3f65a011c1669001d9",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "6e388e458d3848e08c06ad640c119ce36e1e5a100b16b4032927cc6e2c0548d3",
+          "palette_sha256": "23e6f6e6c815b495fe7cd041cd719d7508135bc1fb78880e06c1de8b09a37590",
+          "writes_sha256": "38ea4e7e81befc2291a77096bd57e3c18c6f322a5634ddd7a58c28f7d05cf530"
+        }
+      ]
     }
   }
 }

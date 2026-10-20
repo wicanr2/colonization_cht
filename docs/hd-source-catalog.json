@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "1b4be2e46e76efaabdd62db20346fde8044a212d9b7a43ec1c1f4616618426e7",
+  "formal_manifest_sha256": "1279c6003953bf538d5712a16a39c5658b76dd0f71af6df51e6658ea5412eda9",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,12 +26,12 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 501,
+    "formal_asset_bindings": 526,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
     "other_formats_and_program_drawn_graphics": "not_assessed",
-    "display_pass_source_bindings": 184
+    "display_pass_source_bindings": 209
   },
   "files": [
     {
@@ -10533,7 +10533,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 96,
@@ -10558,7 +10567,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 97,
@@ -10583,7 +10601,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 98,
@@ -10608,7 +10635,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 99,
@@ -10633,7 +10669,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 100,
@@ -10658,7 +10703,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 101,
@@ -10683,7 +10737,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 102,
@@ -10708,7 +10771,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 103,
@@ -10733,7 +10805,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 104,
@@ -10758,7 +10839,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 105,
@@ -10783,7 +10873,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 106,
@@ -10808,7 +10907,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 107,
@@ -10833,7 +10941,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 108,
@@ -10858,7 +10975,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 109,
@@ -10883,7 +11009,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 110,
@@ -10908,7 +11043,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 111,
@@ -10933,7 +11077,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 112,
@@ -10958,7 +11111,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 113,
@@ -10983,7 +11145,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 114,
@@ -11008,7 +11179,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 115,
@@ -11033,7 +11213,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 116,
@@ -11058,7 +11247,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 117,
@@ -11083,7 +11281,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 118,
@@ -11108,7 +11315,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 119,
@@ -11133,7 +11349,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-cc-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 120,
@@ -69250,6 +69475,606 @@
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "state": "DISPLAY-PASS",
       "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-1.png",
+      "asset_sha256": "f0cc47e0877a5d80a5807d7bf87884fb555c0bf416fddc156bf72f53152059aa",
+      "source_research_id": 95,
+      "source_file": "CC-00.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "4f2c5d0aa6ed4e730ed88b195ce8e5f5981d15b254c0054307fa40f064dcb812",
+      "source_indexed_sha256": "c8f5b3544178184532f4908fed57b7a8d6fccd0be33acd833664c44ca0653043",
+      "raw_art_rect": [
+        126,
+        23,
+        298,
+        413
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        54,
+        125
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-1.png",
+      "asset_sha256": "f0cc47e0877a5d80a5807d7bf87884fb555c0bf416fddc156bf72f53152059aa",
+      "source_research_id": 96,
+      "source_file": "CC-01.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "d997a58f13e5ef2282b7b9d6351a246ff3c1e436f41eb98751ab9696089eaabe",
+      "source_indexed_sha256": "1e736e3e44e3a8dac8c8e7dc219a632b411c38293ee34e527a8bc27571934a39",
+      "raw_art_rect": [
+        488,
+        29,
+        781,
+        411
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        72,
+        97
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-1.png",
+      "asset_sha256": "f0cc47e0877a5d80a5807d7bf87884fb555c0bf416fddc156bf72f53152059aa",
+      "source_research_id": 97,
+      "source_file": "CC-02.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "e4be162e910eb694f44a07ce262b66b2e5e83ce3733ff9d0e6f1926a87146021",
+      "source_indexed_sha256": "ab43896b8a15094ef4524c60aafbb80026f1cf3024896601350f8b414894ba78",
+      "raw_art_rect": [
+        941,
+        23,
+        1118,
+        413
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        52,
+        126
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-1.png",
+      "asset_sha256": "f0cc47e0877a5d80a5807d7bf87884fb555c0bf416fddc156bf72f53152059aa",
+      "source_research_id": 98,
+      "source_file": "CC-03.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "e36fcc52b0e6bd5152450707356eeb16e6ac49e82ab51b1b23e3944fe2508c92",
+      "source_indexed_sha256": "1b15d6f6ff81e98581bb74c807ff536c6a9e37befe05018dafbcc4cc88fd3981",
+      "raw_art_rect": [
+        102,
+        446,
+        332,
+        825
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        57,
+        101
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-1.png",
+      "asset_sha256": "f0cc47e0877a5d80a5807d7bf87884fb555c0bf416fddc156bf72f53152059aa",
+      "source_research_id": 99,
+      "source_file": "CC-04.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "798acea745a696c154a10eb2bdbf149be6959e3060ce83a242c302f70de7f320",
+      "source_indexed_sha256": "67961cfd7d20eed1a79c5b5d187b0211bfb11b7b5f0c712c6f8fb33fd7dfe753",
+      "raw_art_rect": [
+        531,
+        440,
+        721,
+        825
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        50,
+        107
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-1.png",
+      "asset_sha256": "f0cc47e0877a5d80a5807d7bf87884fb555c0bf416fddc156bf72f53152059aa",
+      "source_research_id": 100,
+      "source_file": "CC-05.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "2053041ba13f8b348b3ebfb242235b73197993edb2e35f0e6bb5b306b36ceb70",
+      "source_indexed_sha256": "ba098bffbea8873a35f4f10297ec31afad56000fb0e956ad47a62f984e442880",
+      "raw_art_rect": [
+        906,
+        446,
+        1162,
+        828
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        68,
+        109
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-1.png",
+      "asset_sha256": "f0cc47e0877a5d80a5807d7bf87884fb555c0bf416fddc156bf72f53152059aa",
+      "source_research_id": 101,
+      "source_file": "CC-06.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "03590716f85faaba1db0e187b8eb1e1ee276bdeb694174fa897e26d74fc7ee1c",
+      "source_indexed_sha256": "d27b91b050569298360858929f4d44e3abc1bed91b33957deb14f12ba559c8f5",
+      "raw_art_rect": [
+        125,
+        852,
+        314,
+        1232
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        39,
+        86
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-1.png",
+      "asset_sha256": "f0cc47e0877a5d80a5807d7bf87884fb555c0bf416fddc156bf72f53152059aa",
+      "source_research_id": 102,
+      "source_file": "CC-07.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "5487dfd0de480ec6e4f2040a2324c3e141e15740f10afa50820e1004444b9dfc",
+      "source_indexed_sha256": "c75ad5cb85292da06e7f0b61ac8c2ff52354dd3040dd14f3b9743bc6bd0374fe",
+      "raw_art_rect": [
+        538,
+        853,
+        724,
+        1233
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        38,
+        87
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-1.png",
+      "asset_sha256": "f0cc47e0877a5d80a5807d7bf87884fb555c0bf416fddc156bf72f53152059aa",
+      "source_research_id": 103,
+      "source_file": "CC-08.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "3c77b11afc4bf086526c58803e22c758ef63a21dbad1deb015475e99618988c9",
+      "source_indexed_sha256": "648f1030e14a965011fc93866cc8bcbcfea5ffa8ab8acbf15004ba634699f50b",
+      "raw_art_rect": [
+        948,
+        853,
+        1124,
+        1233
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        41,
+        96
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-2.png",
+      "asset_sha256": "a7343fe4bbb7c275e9115911d909a683bc368a0e6ec6bec50e00bcd85cf657fc",
+      "source_research_id": 104,
+      "source_file": "CC-09.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "7041f6bdc5f290603975602144d88baa9999bf9ecdd5c53dfda89424b8ef6b30",
+      "source_indexed_sha256": "a8797826a081053dbf5d34615c1e800fd2a620182fb4d298a77f1db5483ccf15",
+      "raw_art_rect": [
+        160,
+        27,
+        363,
+        419
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        62,
+        132
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-2.png",
+      "asset_sha256": "a7343fe4bbb7c275e9115911d909a683bc368a0e6ec6bec50e00bcd85cf657fc",
+      "source_research_id": 105,
+      "source_file": "CC-10.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "3d60ce618b0af2c064a43e0b3312bc0f9a3ec0df61a83dcbe9359446ed49ddf0",
+      "source_indexed_sha256": "1a4d3e3d8b637ac8a324ed2ee54a5e80beb7f542ee56995122a0b3ed5d19e086",
+      "raw_art_rect": [
+        528,
+        18,
+        772,
+        417
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        71,
+        115
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-2.png",
+      "asset_sha256": "a7343fe4bbb7c275e9115911d909a683bc368a0e6ec6bec50e00bcd85cf657fc",
+      "source_research_id": 106,
+      "source_file": "CC-11.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "fc1c20a8b62a46ad1abb05eda253d3f2a3e8bcec55b2fbcfd16ce66c6df156d4",
+      "source_indexed_sha256": "d2b01ff916c7247822ff08ea707726dd86084e497a68bbf0f775e7a6a5e53e07",
+      "raw_art_rect": [
+        890,
+        32,
+        1114,
+        419
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        73,
+        133
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-2.png",
+      "asset_sha256": "a7343fe4bbb7c275e9115911d909a683bc368a0e6ec6bec50e00bcd85cf657fc",
+      "source_research_id": 107,
+      "source_file": "CC-12.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "0a2d2e4f02cb18712008917467a6e27f9f96848459d54f7421edf8b718165bb5",
+      "source_indexed_sha256": "82cce47c95b2fca10d35e0768387d696bd01a6f18be8fe8b08ce5f20a6805d24",
+      "raw_art_rect": [
+        141,
+        446,
+        375,
+        825
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        68,
+        124
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-2.png",
+      "asset_sha256": "a7343fe4bbb7c275e9115911d909a683bc368a0e6ec6bec50e00bcd85cf657fc",
+      "source_research_id": 108,
+      "source_file": "CC-13.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "f6064156cadca5b888077e1c8b872193abb7469c83403ae3c9e5a22a1a34f226",
+      "source_indexed_sha256": "3e3399855352fcd3a35f7024aeffd4ea0ebfa62da618a4369d4d0017bf5ab2f3",
+      "raw_art_rect": [
+        490,
+        445,
+        792,
+        831
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        80,
+        111
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-2.png",
+      "asset_sha256": "a7343fe4bbb7c275e9115911d909a683bc368a0e6ec6bec50e00bcd85cf657fc",
+      "source_research_id": 109,
+      "source_file": "CC-14.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "ce8dc77c012d8ee43e0e73b90640b5cef699442394e0153d25b1c3dcce067d90",
+      "source_indexed_sha256": "609c44a7a1ffbe82bf0c6da1afa8a9235e7d9b99fa420446e1822ff5e314181b",
+      "raw_art_rect": [
+        935,
+        447,
+        1139,
+        833
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        69,
+        133
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-2.png",
+      "asset_sha256": "a7343fe4bbb7c275e9115911d909a683bc368a0e6ec6bec50e00bcd85cf657fc",
+      "source_research_id": 110,
+      "source_file": "CC-15.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "199c553f26347e8b93c4f4d4c4ad74bf46ef122a6e853628427743b6814be605",
+      "source_indexed_sha256": "3ea2240ac91b4561d90ce7aca5c42a0e0fc74c1184d34f9a3d2fcfa792886585",
+      "raw_art_rect": [
+        176,
+        852,
+        354,
+        1238
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        55,
+        135
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-2.png",
+      "asset_sha256": "a7343fe4bbb7c275e9115911d909a683bc368a0e6ec6bec50e00bcd85cf657fc",
+      "source_research_id": 111,
+      "source_file": "CC-16.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "86f401e15a3b045d77f22bfe9dbeeb15a5a3da1741601bc8c27186e23007abbb",
+      "source_indexed_sha256": "ec12467ac214564d03e2546b6db9f00f70372348ac4a1bb1135bffbbed8db108",
+      "raw_art_rect": [
+        531,
+        856,
+        716,
+        1236
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        55,
+        132
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-3.png",
+      "asset_sha256": "bfe5b3c56c5af1b67886936f07005906a5827f8d98076b3f65a011c1669001d9",
+      "source_research_id": 112,
+      "source_file": "CC-17.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "9f1c6c0f7f08b26a3e71a467819dc875a2006e2c8cc20bc54f528ca43b5789e8",
+      "source_indexed_sha256": "d38e65a1acf3d61276074ad1d27983b5a4db201fc465ca2623435d812d1915d4",
+      "raw_art_rect": [
+        138,
+        22,
+        308,
+        442
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        38,
+        119
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-3.png",
+      "asset_sha256": "bfe5b3c56c5af1b67886936f07005906a5827f8d98076b3f65a011c1669001d9",
+      "source_research_id": 113,
+      "source_file": "CC-18.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "bd9694f9e2ada7a9f79bd749257fa4537b712c6ddc0e64752c28d70836123471",
+      "source_indexed_sha256": "456b6a9093c51c053d8e7b4f2d6e6286d329df808c873c6cc87e009da3e443d9",
+      "raw_art_rect": [
+        543,
+        16,
+        697,
+        444
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        36,
+        109
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-3.png",
+      "asset_sha256": "bfe5b3c56c5af1b67886936f07005906a5827f8d98076b3f65a011c1669001d9",
+      "source_research_id": 114,
+      "source_file": "CC-19.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "3d8ef7403588994d304f5b17bcfb52623d18d1341a5c1c6a3a829ff191785e35",
+      "source_indexed_sha256": "d77c9c2724d19f596980a662d6fca1ff0bcc76da4f3dc6f8b171f264f4f1110e",
+      "raw_art_rect": [
+        864,
+        50,
+        1238,
+        443
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        115,
+        114
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-3.png",
+      "asset_sha256": "bfe5b3c56c5af1b67886936f07005906a5827f8d98076b3f65a011c1669001d9",
+      "source_research_id": 115,
+      "source_file": "CC-20.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "c596cd7d303b0a4f8903901ea72237a57e0bc6ea0733c9dcbcae4dfb4449f53b",
+      "source_indexed_sha256": "5a5052b0c6a988164adfb92539451cc967af858a8e65f695697bf839667975fc",
+      "raw_art_rect": [
+        85,
+        457,
+        352,
+        860
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        52,
+        87
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-3.png",
+      "asset_sha256": "bfe5b3c56c5af1b67886936f07005906a5827f8d98076b3f65a011c1669001d9",
+      "source_research_id": 116,
+      "source_file": "CC-21.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "e3b232456fda74311ddcbb803c6e4d323182c65eb76413347d55e3b52134e4b6",
+      "source_indexed_sha256": "254c7a34bfd4ffc6f11dc44e1be612f7b7b0fa0587f687433949b37baad8dccf",
+      "raw_art_rect": [
+        519,
+        460,
+        749,
+        853
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        56,
+        111
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-3.png",
+      "asset_sha256": "bfe5b3c56c5af1b67886936f07005906a5827f8d98076b3f65a011c1669001d9",
+      "source_research_id": 117,
+      "source_file": "CC-22.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "3780df2f8907727a75d5a52805bc4754f566ede774b2aac0c7e9893d176a2cb2",
+      "source_indexed_sha256": "b80c9ec499b3246cb73ab8200fa03b816bf05674aaa216d38331e6876f7c6cd7",
+      "raw_art_rect": [
+        948,
+        463,
+        1114,
+        854
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        31,
+        86
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-3.png",
+      "asset_sha256": "bfe5b3c56c5af1b67886936f07005906a5827f8d98076b3f65a011c1669001d9",
+      "source_research_id": 118,
+      "source_file": "CC-23.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "32f989944f3e42c15e5bcf86d209647531479d78a063b0c7d2f59b5c88055e4f",
+      "source_indexed_sha256": "dc4292b90701670eccce30d9e2bf6911b58d6158d6c9cb048f62c55f43d4cdb5",
+      "raw_art_rect": [
+        111,
+        860,
+        341,
+        1242
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        42,
+        84
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-cc-3.png",
+      "asset_sha256": "bfe5b3c56c5af1b67886936f07005906a5827f8d98076b3f65a011c1669001d9",
+      "source_research_id": 119,
+      "source_file": "CC-24.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "91a1fe54e121203dc28316af1d80d15e09f4bc04fa6513e7fe8c0f0f010fa235",
+      "source_indexed_sha256": "2990fa098926563b5b8421273ae5e3dd865de0b5bf929176b71f7bbd3c2e75cc",
+      "raw_art_rect": [
+        534,
+        869,
+        732,
+        1242
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        36,
+        84
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
     }
   ],
   "limitations": [
@@ -70136,5 +70961,12 @@
       }
     ],
     "scope": "production-connected source-fixture display acceptance; not normal game or original-exact parity"
+  },
+  "last_council_display": {
+    "state": "DISPLAY-PASS",
+    "sources": 25,
+    "receipt_sha256": "d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35",
+    "formal_binary_sha256": "4a8bdaf6ff25a73ff676e0e4cda4fde48bd8b9af24af37e6d8435512ca7a6bae",
+    "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
   }
 }
