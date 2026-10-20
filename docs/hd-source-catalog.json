@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "ad85863c2c9084f0ae844ff7978bfc6bb7ea1e9a59b949e80237953d8aab76fd",
+  "formal_manifest_sha256": "8d8068e23a496fccbef2e7961bdf99da9e177373d33fe8ad4895be85bece3b09",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,12 +26,12 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 358,
+    "formal_asset_bindings": 366,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
     "other_formats_and_program_drawn_graphics": "not_assessed",
-    "display_pass_source_bindings": 41
+    "display_pass_source_bindings": 49
   },
   "files": [
     {
@@ -11708,7 +11708,16 @@
       "embedded_palette": true,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "clos-bkg-000.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "display_receipt_sha256": "f15b82548fe0b4558f3c281bb4d61a064fc4036540346af21212b4d79d75452a",
+        "scope": "R101 production loader and renderer display smoke with original decoded source fixtures; no normal-player-path or original-exact parity claim."
+      }
     },
     {
       "research_id": 143,
@@ -28671,7 +28680,16 @@
       "embedded_palette": true,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "declarat-000.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "display_receipt_sha256": "f15b82548fe0b4558f3c281bb4d61a064fc4036540346af21212b4d79d75452a",
+        "scope": "R101 production loader and renderer display smoke with original decoded source fixtures; no normal-player-path or original-exact parity claim."
+      }
     },
     {
       "research_id": 818,
@@ -28696,7 +28714,16 @@
       "embedded_palette": true,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "decoind-000.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "display_receipt_sha256": "f15b82548fe0b4558f3c281bb4d61a064fc4036540346af21212b4d79d75452a",
+        "scope": "R101 production loader and renderer display smoke with original decoded source fixtures; no normal-player-path or original-exact parity claim."
+      }
     },
     {
       "research_id": 819,
@@ -37226,7 +37253,16 @@
       "embedded_palette": true,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "kinglss2-000.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "display_receipt_sha256": "f15b82548fe0b4558f3c281bb4d61a064fc4036540346af21212b4d79d75452a",
+        "scope": "R101 production loader and renderer display smoke with original decoded source fixtures; no normal-player-path or original-exact parity claim."
+      }
     },
     {
       "research_id": 1004,
@@ -38809,7 +38845,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mss2-000.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "display_receipt_sha256": "f15b82548fe0b4558f3c281bb4d61a064fc4036540346af21212b4d79d75452a",
+        "scope": "R101 production loader and renderer display smoke with original decoded source fixtures; no normal-player-path or original-exact parity claim."
+      }
     },
     {
       "research_id": 1063,
@@ -38902,7 +38947,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mss5-000.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "display_receipt_sha256": "f15b82548fe0b4558f3c281bb4d61a064fc4036540346af21212b4d79d75452a",
+        "scope": "R101 production loader and renderer display smoke with original decoded source fixtures; no normal-player-path or original-exact parity claim."
+      }
     },
     {
       "research_id": 1066,
@@ -56664,7 +56718,16 @@
       "embedded_palette": true,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "report9-000.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "display_receipt_sha256": "f15b82548fe0b4558f3c281bb4d61a064fc4036540346af21212b4d79d75452a",
+        "scope": "R101 production loader and renderer display smoke with original decoded source fixtures; no normal-player-path or original-exact parity claim."
+      }
     },
     {
       "research_id": 1451,
@@ -59488,7 +59551,16 @@
       "embedded_palette": true,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "woodpan2-000.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "display_receipt_sha256": "f15b82548fe0b4558f3c281bb4d61a064fc4036540346af21212b4d79d75452a",
+        "scope": "R101 production loader and renderer display smoke with original decoded source fixtures; no normal-player-path or original-exact parity claim."
+      }
     },
     {
       "research_id": 1551,
@@ -64635,6 +64707,94 @@
         ]
       ],
       "material_fragment": true
+    },
+    {
+      "asset": "clos-bkg-000.png",
+      "asset_sha256": "255cd12373413df49522af80e6ac1e47341c386262bf6ba56ec8d4a1da9b1176",
+      "source_research_id": 142,
+      "source_file": "CLOS-BKG.PIK",
+      "source_ordinal": 0,
+      "source_indexed_sha256": "3ea2aca3bcac271f4b6be218f8ba384dc45ac092f00bdcf51c342bc8d10af716",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R101 production loader and renderer display smoke with original decoded source fixtures; no normal-player-path or original-exact parity claim."
+    },
+    {
+      "asset": "declarat-000.png",
+      "asset_sha256": "f664b8d249a5cbb3d41ea407320a22a12d38cdf6113475cec33d01ebe6d2b619",
+      "source_research_id": 817,
+      "source_file": "DECLARAT.PIK",
+      "source_ordinal": 0,
+      "source_indexed_sha256": "669ad58dda7bd1da4bb5ff9df1d846e12af197e50e7a0154776183420c3083a2",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R101 production loader and renderer display smoke with original decoded source fixtures; no normal-player-path or original-exact parity claim."
+    },
+    {
+      "asset": "decoind-000.png",
+      "asset_sha256": "95084427c84814bc916de08365a257798d79be4481d0b44b340d561cb7dc4dc0",
+      "source_research_id": 818,
+      "source_file": "DECOIND.PIK",
+      "source_ordinal": 0,
+      "source_indexed_sha256": "6568eaa05a0aed52105809c850f42efede588bf6723808b262606823b464411a",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R101 production loader and renderer display smoke with original decoded source fixtures; no normal-player-path or original-exact parity claim."
+    },
+    {
+      "asset": "kinglss2-000.png",
+      "asset_sha256": "12128d43a2d92be70a1c7d71c204d94de7aa5668816cae23578fc6f66db7fdb1",
+      "source_research_id": 1003,
+      "source_file": "KINGLSS2.PIK",
+      "source_ordinal": 0,
+      "source_indexed_sha256": "c53ae170cc97e18901b5a710b760bfe4f3239347d21b097b9901af64ea0653b0",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R101 production loader and renderer display smoke with original decoded source fixtures; no normal-player-path or original-exact parity claim."
+    },
+    {
+      "asset": "report9-000.png",
+      "asset_sha256": "c877a2dd3047d3f5c39e14d45a37dae9c49962996ed09aaafd2982706a2be3cc",
+      "source_research_id": 1450,
+      "source_file": "REPORT9.PIK",
+      "source_ordinal": 0,
+      "source_indexed_sha256": "d0a07595fa5ea6b06a764060599850c77c2eb9eb67a31b661456a3580ee47c1e",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R101 production loader and renderer display smoke with original decoded source fixtures; no normal-player-path or original-exact parity claim."
+    },
+    {
+      "asset": "woodpan2-000.png",
+      "asset_sha256": "a82b4a52c01d2fad381bd2d1b28ca682f69a98f4818349ddadcae49fbf5c8420",
+      "source_research_id": 1550,
+      "source_file": "WOODPAN2.PIK",
+      "source_ordinal": 0,
+      "source_indexed_sha256": "878a4e30f9f815ac6b5db29c283d826a80c37dff69390867a0df3474b950daea",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R101 production loader and renderer display smoke with original decoded source fixtures; no normal-player-path or original-exact parity claim."
+    },
+    {
+      "asset": "mss2-000.png",
+      "asset_sha256": "1fc1d5a58b8184028b4ea40069128309b8af3ff967d69527547c33b6c91912dc",
+      "source_research_id": 1062,
+      "source_file": "MSS2.SS",
+      "source_ordinal": 0,
+      "source_indexed_sha256": "46d7796dff875016f8022766a006671bf11f1447b4a26c0d4b89e8878b0612f5",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R101 production loader and renderer display smoke with original decoded source fixtures; no normal-player-path or original-exact parity claim."
+    },
+    {
+      "asset": "mss5-000.png",
+      "asset_sha256": "9a5108a7aa542407cc2b6033f585fe0704acdd323ab8efc65a1994530075d344",
+      "source_research_id": 1065,
+      "source_file": "MSS5.SS",
+      "source_ordinal": 0,
+      "source_indexed_sha256": "bba12d3ff91a85591063a8ec9aa159fb773f051db8c5ffd688c05a8972109ff5",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R101 production loader and renderer display smoke with original decoded source fixtures; no normal-player-path or original-exact parity claim."
     }
   ],
   "limitations": [
@@ -65422,5 +65582,22 @@
     "display_receipt_sha256": "7edcfd718a0877b9273665ecbfefa4260345bd80a9f5705861ef07eb2c619b18",
     "formal_binary_sha256": "b32b1e434b9e60829b59d9f47c309614b072c209c5df7102d8ef5c078a20a234",
     "claim": "Production wiring plus visible images; five restored normal-game snapshots using formal renderer and existing six partial-fish normal-CPU screenshots. No additional original parity audit."
+  },
+  "remaining_scene_display": {
+    "state": "DISPLAY-PASS",
+    "sources": [
+      142,
+      817,
+      818,
+      1003,
+      1450,
+      1550,
+      1062,
+      1065
+    ],
+    "images": 8,
+    "formal_binary_sha256": "e6be4f8789c87176ddf2c3953d099243f2d4dcc57c811c6f1247b98a51627996",
+    "receipt_sha256": "f15b82548fe0b4558f3c281bb4d61a064fc4036540346af21212b4d79d75452a",
+    "scope": "R101 production loader and renderer display smoke with original decoded source fixtures; no normal-player-path or original-exact parity claim."
   }
 }

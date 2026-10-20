@@ -23562,6 +23562,288 @@
           "nonzero_sampled_alpha": 64
         }
       ]
+    },
+    "clos-bkg-000.png": {
+      "sha256": "255cd12373413df49522af80e6ac1e47341c386262bf6ba56ec8d4a1da9b1176",
+      "bytes": 2615686,
+      "size": [
+        1586,
+        992
+      ],
+      "mode": "RGB",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "source_research_id": 142,
+      "source_file": "CLOS-BKG.PIK",
+      "source_file_sha256": "7f0bd6cf88fb47466f2866ba652f2506a5ad3c5423756399fe7383033e7c4b79",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: style-transfer.\nAsset: ONE opaque HD background for Colonization (1994), original CLOS-BKG.PIK, landscape aspect 8:5.\nImage 1 is the exact composition, architecture, colors and crop reference. Image 2 is only the user's approved fine pixel-art style reference.\nRedraw the complete original city view in the approved refined pixel technique. Preserve the central red-brick clock tower with cream upper stories and small cupola, its exact size and position, the multi-window brick houses on both sides, the trees, the deep blue evening sky, and the small foreground figures and objects already present at the cropped lower edge. Keep the original perspective, silhouettes, window arrangement, clock placement and framing. Add readable wood, masonry and foliage texture with intentional crisp small pixel clusters, restrained highlights and the reference palette. Do not redesign the buildings or add scenery, flags, vehicles or characters. Do not copy Image 2's map or interface.\nOne single full background image, fully opaque edge to edge, no transparent padding, no title, labels, UI, collage, atlas or watermark. Preserve existing subjects and crop; no smooth painterly blur or glossy 3D.",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "status": "READY production connection; display smoke pending",
+      "sample_rect": [
+        0,
+        0,
+        1586,
+        992
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "native_indexed_sha256": "3ea2aca3bcac271f4b6be218f8ba384dc45ac092f00bdcf51c342bc8d10af716",
+      "native_size": [
+        320,
+        200
+      ],
+      "target_size": [
+        1280,
+        800
+      ],
+      "alpha": "raw opaque RGB retained"
+    },
+    "declarat-000.png": {
+      "sha256": "f664b8d249a5cbb3d41ea407320a22a12d38cdf6113475cec33d01ebe6d2b619",
+      "bytes": 2689500,
+      "size": [
+        1586,
+        992
+      ],
+      "mode": "RGB",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "source_research_id": 817,
+      "source_file": "DECLARAT.PIK",
+      "source_file_sha256": "428ad4c1c9254ef096937dcea38c0374314f3616eda98a39c89bea8ba344dde3",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: style-transfer. Asset type: one opaque 8:5 landscape HD background for the display-only graphics layer of a 1994 colonial strategy game. Redraw the FIRST reference faithfully in the established fine pixel-art style shown in the SECOND reference: deliberate crisp pixel clusters, restrained warm historical palette, detailed timber, cloth and parchment, no soft oil-paint effect, no photorealism, no UI screenshot frame. Keep exactly the first reference's composition, object positions, perspective, proportions, light direction and negative spaces. Cover the full image edge to edge with no added border, no watermark and no additional people or objects. Return ONE standalone PNG, not a sprite sheet or atlas. The target is the obliquely placed Declaration parchment on green felt, books and brass ink equipment behind it, signatures below, a white quill entering from the right, round metal inkwell at the lower right. Preserve the document's tilted rectangular geometry and its fine dark historic writing texture. Keep the main heading as in the target, do not invent a new slogan or modern type. Text remains part of the reference composition and will receive a separately verified localization overlay if applicable.",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "status": "READY production connection; display smoke pending",
+      "sample_rect": [
+        0,
+        0,
+        1586,
+        992
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "native_indexed_sha256": "669ad58dda7bd1da4bb5ff9df1d846e12af197e50e7a0154776183420c3083a2",
+      "native_size": [
+        320,
+        200
+      ],
+      "target_size": [
+        1280,
+        800
+      ],
+      "alpha": "raw opaque RGB retained"
+    },
+    "decoind-000.png": {
+      "sha256": "95084427c84814bc916de08365a257798d79be4481d0b44b340d561cb7dc4dc0",
+      "bytes": 3015637,
+      "size": [
+        1586,
+        992
+      ],
+      "mode": "RGB",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "source_research_id": 818,
+      "source_file": "DECOIND.PIK",
+      "source_file_sha256": "5a0c815a921d7219a611a5dcbc669f309102fe3eac07d5adaaa652f9678f43e2",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: style-transfer. Asset type: one opaque 8:5 landscape HD background for the display-only graphics layer of a 1994 colonial strategy game. Redraw the FIRST reference faithfully in the established fine pixel-art style shown in the SECOND reference: deliberate crisp pixel clusters, restrained warm historical palette, detailed timber, cloth and parchment, no soft oil-paint effect, no photorealism, no UI screenshot frame. Keep exactly the first reference's composition, object positions, perspective, proportions, light direction and negative spaces. Cover the full image edge to edge with no added border, no watermark and no additional people or objects. Return ONE standalone PNG, not a sprite sheet or atlas. The target is the closer, more upright Declaration of Independence parchment on green felt, books and ink equipment behind it, signatures below, a white quill from the right, round metal inkwell at the lower right. The original heading reads 'In CONGRESS, July 4, 1776' and 'The unanimous Declaration of the thirteen united States of America'. Preserve the document angle, heading region, dense dark period writing texture and signature area. Do not invent other readable captions.",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "status": "READY production connection; display smoke pending",
+      "sample_rect": [
+        0,
+        0,
+        1586,
+        992
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "native_indexed_sha256": "6568eaa05a0aed52105809c850f42efede588bf6723808b262606823b464411a",
+      "native_size": [
+        320,
+        200
+      ],
+      "target_size": [
+        1280,
+        800
+      ],
+      "alpha": "raw opaque RGB retained"
+    },
+    "kinglss2-000.png": {
+      "sha256": "12128d43a2d92be70a1c7d71c204d94de7aa5668816cae23578fc6f66db7fdb1",
+      "bytes": 2895464,
+      "size": [
+        1586,
+        992
+      ],
+      "mode": "RGB",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "source_research_id": 1003,
+      "source_file": "KINGLSS2.PIK",
+      "source_file_sha256": "ab241806d11757ba4bf0804cb9ad8eb4e4e257c9c3a3eda99060c991b39f5ba8",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: style-transfer. Asset type: one opaque 8:5 landscape HD background for the display-only graphics layer of a 1994 colonial strategy game. Redraw the FIRST reference faithfully in the established fine pixel-art style shown in the SECOND reference: deliberate crisp pixel clusters, restrained warm historical palette, detailed timber, cloth and parchment, no soft oil-paint effect, no photorealism, no UI screenshot frame. Keep exactly the first reference's composition, object positions, perspective, proportions, light direction and negative spaces. Cover the full image edge to edge with no added border, no watermark and no additional people or objects. Return ONE standalone PNG, not a sprite sheet or atlas. The target is the SAME empty tall carved wooden royal chair, golden yellow and red striped upholstery, carved armrests and legs, historic tapestry, round table and closed gray book, ornate red/gold carpet. A wide short blank cream parchment scroll lies in the lower center-right foreground, curled on the left edge. Preserve this shorter horizontal scroll geometry precisely. No king or other person. All parchment remains completely blank, with no letters or pictograms.",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "status": "READY production connection; display smoke pending",
+      "sample_rect": [
+        0,
+        0,
+        1586,
+        992
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "native_indexed_sha256": "c53ae170cc97e18901b5a710b760bfe4f3239347d21b097b9901af64ea0653b0",
+      "native_size": [
+        320,
+        200
+      ],
+      "target_size": [
+        1280,
+        800
+      ],
+      "alpha": "raw opaque RGB retained"
+    },
+    "report9-000.png": {
+      "sha256": "c877a2dd3047d3f5c39e14d45a37dae9c49962996ed09aaafd2982706a2be3cc",
+      "bytes": 2127739,
+      "size": [
+        1586,
+        992
+      ],
+      "mode": "RGB",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "source_research_id": 1450,
+      "source_file": "REPORT9.PIK",
+      "source_file_sha256": "4ea087725e9ce8971d11978c7c01e07da18014cf062cd18a7630d0a47ded4042",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: style-transfer. Asset type: a single opaque 8:5 HD background PNG for a display-only 1994 strategy game localization. Image 1 supplies the exact composition, content and palette. Image 2 supplies only the approved fine pixel-art technique: crisp carefully placed pixel clusters, restrained historical colors, detailed wood/cloth/water, no blur, no photorealism and no soft painting. Faithfully redraw image 1 with more detail while retaining every object's size, position, silhouette and perspective. Fill the full canvas to its edges, no additional objects, no added frame, no captions, no watermark. One standalone PNG only, never an atlas or contact sheet. Warm orange/sepia dusk on the seashore, a solitary Indigenous fisherman viewed from behind at the far right, standing in shallow water with a long fishing pole angled up toward the center-left. Preserve the fisherman's clothing, headband, pose, body scale, shoreline, distant low islands and vertical warm light reflection on the sea. The large empty sky and sea at left and center are deliberate text-safe spaces: no new structures, ships or people there.",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "status": "READY production connection; display smoke pending",
+      "sample_rect": [
+        0,
+        0,
+        1586,
+        992
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "native_indexed_sha256": "d0a07595fa5ea6b06a764060599850c77c2eb9eb67a31b661456a3580ee47c1e",
+      "native_size": [
+        320,
+        200
+      ],
+      "target_size": [
+        1280,
+        800
+      ],
+      "alpha": "raw opaque RGB retained"
+    },
+    "woodpan2-000.png": {
+      "sha256": "a82b4a52c01d2fad381bd2d1b28ca682f69a98f4818349ddadcae49fbf5c8420",
+      "bytes": 1810764,
+      "size": [
+        1586,
+        992
+      ],
+      "mode": "RGB",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "source_research_id": 1550,
+      "source_file": "WOODPAN2.PIK",
+      "source_file_sha256": "b7a03b10fd334af8666ab426e9486369884b6dc4fc870b0f554279afb34c142d",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: style-transfer.\nAsset: ONE opaque HD wood-panel background for Colonization (1994), original WOODPAN2.PIK, landscape aspect 8:5.\nImage 1 gives the exact full-panel composition, border and warm dark-brown color. Image 2 gives the already accepted fine-pixel wood texture style for this game.\nRedraw the original horizontal wood grain in the same refined pixel technique. Preserve the thin inset rim, edge shading, panel proportions, uneven horizontal grain direction and dark warm brown palette of Image 1. Keep the central area clear as a usable game background. Use crisp intentional small pixel clusters and restrained grain contrast, with no smooth blur. Do not invent boards, screws, carvings, ornaments or objects.\nONE full panel only, fully opaque edge to edge, no transparent padding, text, symbols, UI controls, collage, atlas or watermark.",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "status": "READY production connection; display smoke pending",
+      "sample_rect": [
+        0,
+        0,
+        1586,
+        992
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "native_indexed_sha256": "878a4e30f9f815ac6b5db29c283d826a80c37dff69390867a0df3474b950daea",
+      "native_size": [
+        320,
+        200
+      ],
+      "target_size": [
+        1280,
+        800
+      ],
+      "alpha": "raw opaque RGB retained"
+    },
+    "mss2-000.png": {
+      "sha256": "1fc1d5a58b8184028b4ea40069128309b8af3ff967d69527547c33b6c91912dc",
+      "bytes": 1419487,
+      "size": [
+        1511,
+        1041
+      ],
+      "mode": "RGB",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "source_research_id": 1062,
+      "source_file": "MSS2.SS",
+      "source_file_sha256": "8a2b9053814557a16aeebee1b47ad763890548ff527444aca62ff8666e3f676d",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: an original high-resolution pixel-art character sprite for a classic game's HD display layer.\nInput image1 is a PRIVATE ORIGINAL GAME sprite reference. It is the authority for composition, silhouette, proportions, facial traits, pose, costume, accessories, palette and all cropped edges. Bright magenta marks unused native pixels and is not a real color of the figure. Input image2 is the USER-APPROVED fine pixel-art style reference, only for deliberate small pixel clusters, restrained material shading and crafted detail. Do not reproduce its buildings, terrain, scenery or layout.\nSubject and exact composition: Front-facing man with a small moustache and pointed beard, a dark purple Renaissance cap, and one large dark teal feather arcing up toward the upper-right and curling down at its tip. He wears a golden ochre doublet over a dark red center, a white neckcloth and pale gray striped/puffed sleeves. Both forearms extend toward the lower left and lower right, with open hands partly cropped at the two lower corners. Keep the hands, long feather and head exactly where the native reference places them. No weapons, extra jewelry, background or historical correction of the costume.\nCreate fresh original refined pixel art rather than enlarging, filtering or copying the old pixel grid. Preserve the native reference's subject and framing; do not redesign clothing or correct it to another historical period. Use intentional compact pixel clusters and sharp readable facial, cloth, leather, wood and metal detail, with the restrained natural palette of image1 and the crafted finish of image2. No painterly brushwork, blur, photographic or 3D rendering, smooth vector contours, glossy surfaces, heavy gradients, oversized blocks, UI boxes, text, captions or watermark.\nCanvas: keep exactly image1's aspect ratio and all subject placements, with no extra outer margin. Match the native sprite's complete set of visible body/hand/accessory components, including separated parts. The output must be FULLY OPAQUE. Fill unused magenta areas with a flat very dark neutral brown, never magenta; the original game's separate exact native alpha mask will remove that area at runtime. Do not create a new transparent cutout, drop native components, reframe, recenter, mirror, crop, or add any scene. Aim for clear fine pixel work when sampled at four times the native sprite size.",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "status": "READY production connection; display smoke pending",
+      "sample_rect": [
+        0,
+        0,
+        1511,
+        1041
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "native_indexed_sha256": "46d7796dff875016f8022766a006671bf11f1447b4a26c0d4b89e8878b0612f5",
+      "native_size": [
+        122,
+        84
+      ],
+      "target_size": [
+        488,
+        336
+      ],
+      "alpha": "raw RGB retained; original index253 controls shape",
+      "native_ordinal": 0
+    },
+    "mss5-000.png": {
+      "sha256": "9a5108a7aa542407cc2b6033f585fe0704acdd323ab8efc65a1994530075d344",
+      "bytes": 1374911,
+      "size": [
+        1178,
+        1335
+      ],
+      "mode": "RGB",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "source_research_id": 1065,
+      "source_file": "MSS5.SS",
+      "source_file_sha256": "99a94f3f2ac09d5dd7e6704b1815ec380ba2e44fae8827d4bb4d6faab60bdba5",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: stylized-concept.\nAsset type: an original high-resolution pixel-art character sprite for a classic game's HD display layer.\nInput image1 is a PRIVATE ORIGINAL GAME sprite reference. It is the authority for composition, silhouette, proportions, facial traits, pose, costume, accessories, palette and all cropped edges. Bright magenta marks unused native pixels and is not a real color of the figure. Input image2 is the USER-APPROVED fine pixel-art style reference, only for deliberate small pixel clusters, restrained material shading and crafted detail. Do not reproduce its buildings, terrain, scenery or layout.\nSubject and exact composition: Front-facing woman with light brown hair under a soft gray-white bonnet. Preserve her face shape and quiet expression, white/cream shoulder cape, gray dress and dark ribbon/tie and small metallic clasp at the center of her chest. Her hands rest together on the dark horizontal ledge near the bottom edge. Preserve the original bonnet silhouette, shoulders, visible wrists, hands and torso crop. No added chair, flowers, religious symbols, text, legs or background scene.\nCreate fresh original refined pixel art rather than enlarging, filtering or copying the old pixel grid. Preserve the native reference's subject and framing; do not redesign clothing or correct it to another historical period. Use intentional compact pixel clusters and sharp readable facial, cloth, leather, wood and metal detail, with the restrained natural palette of image1 and the crafted finish of image2. No painterly brushwork, blur, photographic or 3D rendering, smooth vector contours, glossy surfaces, heavy gradients, oversized blocks, UI boxes, text, captions or watermark.\nCanvas: keep exactly image1's aspect ratio and all subject placements, with no extra outer margin. Match the native sprite's complete set of visible body/hand/accessory components, including separated parts. The output must be FULLY OPAQUE. Fill unused magenta areas with a flat very dark neutral brown, never magenta; the original game's separate exact native alpha mask will remove that area at runtime. Do not create a new transparent cutout, drop native components, reframe, recenter, mirror, crop, or add any scene. Aim for clear fine pixel work when sampled at four times the native sprite size.",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "status": "READY production connection; display smoke pending",
+      "sample_rect": [
+        0,
+        0,
+        1178,
+        1335
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "native_indexed_sha256": "bba12d3ff91a85591063a8ec9aa159fb773f051db8c5ffd688c05a8972109ff5",
+      "native_size": [
+        60,
+        68
+      ],
+      "target_size": [
+        240,
+        272
+      ],
+      "alpha": "raw RGB retained; original index253 controls shape",
+      "native_ordinal": 0
     }
   }
 }

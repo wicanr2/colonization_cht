@@ -3083,3 +3083,28 @@ r100-animation-wiring-ready-r1.json。原PNG與alpha保持，圖集每格明確�
 - 六個局部魚形已有正常原版CPU執行的六張顯示收據。新圖集使用既有正常原版遊戲快照，經現行正式HD繪圖介面輸出五張畫面，已確認圖像出現。本輪未重新執行原版來源調查或逐像素對拍。
 - 本批記為DISPLAY-PASS，限正式接線及畫面顯示，不改寫既有317個來源的限定CONFORMED證據。小材質片維持美術近似說明，沒有新增原版精確對拍聲明。
 - 本機收據：`workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r100-formal-display-r1/check.json`，SHA-256：7edcfd718a0877b9273665ecbfefa4260345bd80a9f5705861ef07eb2c619b18。建置收據為同工作根`r100-formal-build-r1.json`。
+
+### R101六背景與兩人物接線READY
+
+既有候選圖已繪製完成，本批沿用現有PIK完整解碼及MSS完整印圖來源流程。來源雜湊、原生尺寸、索引圖指紋、色盤投影與生成原圖均使用既有清冊，不再新增來源調查。
+
+| 來源 | 正式原圖 |
+|---|---|
+| CLOS-BKG.PIK | clos-bkg-000.png |
+| DECLARAT.PIK | declarat-000.png |
+| DECOIND.PIK | decoind-000.png |
+| KINGLSS2.PIK | kinglss2-000.png |
+| REPORT9.PIK | report9-000.png |
+| WOODPAN2.PIK | woodpan2-000.png |
+| MSS2.SS | mss2-000.png |
+| MSS5.SS | mss5-000.png |
+
+背景接受既有Stage／Main解碼入口，以完整來源及色盤投影核對。人物沿用原版透明索引與Main印圖流程。只修改放大畫布，不修改原版規則、存檔或輸入。原PNG保持原始位元組。接線後以正式繪圖介面測試畫面有出現，通過範圍限顯示，不新增正常玩家路徑或原版精確對拍聲明。
+
+### R101六背景與兩人物顯示通過
+
+- 八個既有原圖已接線；正式載入全部HD素材成功，場景共42來源，素材共327張／328檔。
+- 正式二進位SHA-256：e6be4f8789c87176ddf2c3953d099243f2d4dcc57c811c6f1247b98a51627996。建置與go vet通過，328檔封裝指紋通過。
+- 八組原版解碼來源經現行正式繪圖介面輸出測試畫面，各有新素材可見，抽樣已目視確認。六個背景以既有Main解碼入口建立來源，兩個人物以來源原生透明形狀顯示。
+- 本批記為DISPLAY-PASS，只授予正式載入、接線與測試畫面顯示；測試使用解碼來源fixture，不新增正常玩家路徑或原版精確對拍聲明。
+- 本機收據位於既有hd-opening-animation-sources-r84工作根的r101-formal-display-r1/check.json，SHA-256：f15b82548fe0b4558f3c281bb4d61a064fc4036540346af21212b4d79d75452a。
