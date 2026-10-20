@@ -42575,6 +42575,87 @@
           "writes_sha256": "6bfb9f850212b1b691cd29701d9b15264d00f6c3da78b96441d1291998ad69e1"
         }
       ]
+    },
+    "cursor-001.png": {
+      "sha256": "f033afef7d3d49e2916fc0cfd623079be125105402c7647fe473f524a7f3173b",
+      "bytes": 433681,
+      "size": [
+        1374,
+        1145
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: style-transfer. Create one isolated refined pixel-art cursor POINTER fragment for the Colonization HD display layer. Image1 is the EXACT very small 6-by-5 source footprint enlarged for visibility. Image2 is the established project cursor STYLE reference only. Preserve Image1's exact squat up-left pointing arrow silhouette, thick charcoal-black outer border, cool light-gray triangular fill, the small diagonal gray stem fragment at lower right, and both deliberate transparent cutouts. Do not lengthen the stem or turn it into Image2's tall standard arrow. Repaint only the gray pointer as fresh fine pixel clusters, a very restrained gray/ivory material highlight inside the original arrow fill, crisp original stepped contour, black/charcoal boundary. No text at all; the neighboring original cursor text is preserved separately at runtime and must NOT be generated. Transparent background and transparent cutouts; remove every pink/magenta reference background pixel. One centered complete squat pointer group, with clear transparent margins, bounding-box aspect ratio approximately6:5. Keep all original component positions and direction; do not add a second arrow, hand, badge, label, circles, blue glow, new colors, drop shadow, grid, words or numbers. Crisp fine pixel-art style compatible with Image2, no blur, smooth vector logo, 3D or photography. Output a transparent PNG cutout.",
+      "generation_file": "exec-e4c925c2-fd4c-4c90-8407-6034c55627e3.png",
+      "reference_sha256": "995258aee899e46b09629de673660704967ae56160d3ac5365efebab563d3f63",
+      "style_reference_sha256": "2839ce6c635c16af668ce251807e2723ed343052ab12cfa29a9be04cd9dbd8d4",
+      "alpha_bbox_ge_128": [
+        251,
+        215,
+        1122,
+        1028
+      ],
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw alpha retained; only verified native opaque pointer cells composited",
+      "spec": "docs/spec/066-hd-standard-cursor.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 310,
+          "file": "CURSOR.SS",
+          "file_sha256": "3ff5a4b70f08780f845b1e973d7dce3ff34868bb73279174210fce76332fffcb",
+          "ordinal": 1,
+          "size": [
+            17,
+            17
+          ],
+          "header_part1_offset": 16,
+          "data_part3_offset": 124,
+          "encoded_length": 132,
+          "other_header_fields": [
+            5,
+            23
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "20891c193e4fab889782cbbcad94d062769b00a4e718235bf9899c5d529d3e59",
+          "indexed_sha256": "35ba9dc7eb08de1e76ccc46334c849cb24899ff53c3c626f5c85e4488fd43852",
+          "opaque_pixels": 76,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 310,
+          "asset": "cursor-001.png",
+          "sample": [
+            251,
+            215,
+            1122,
+            1028
+          ],
+          "content": [
+            0,
+            0,
+            6,
+            5
+          ],
+          "art_sha256": "f033afef7d3d49e2916fc0cfd623079be125105402c7647fe473f524a7f3173b",
+          "art_size": [
+            1374,
+            1145
+          ],
+          "cursor_ram_sha256": "45891fbc2c08b18d9b099e121b6021513d7bdfe168e6e063919de07a5da2f008",
+          "cursor_crop": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "native_text_preserved_from_row": 5,
+          "writes_sha256": "d24b480187f7f87ba341d5310a42e5583254c9e112bf97632c2a07edaf48ee51"
+        }
+      ],
+      "native_text_preserved_from_row": 5
     }
   }
 }

@@ -175,7 +175,7 @@ func hdStartupOptions(h *hdRuntime, options displayOptions) displayOptions {
 	return options
 }
 
-const hdManifestSHA = "be826ac1a84b43bde07005f95a4ff9799bbe81b62a721a4e3956fa5dbd84f6ee"
+const hdManifestSHA = "6516f73a5158b57204759e7b8a9d2e0ebc13ce0cdd283e1330a9934cae4a2d7c"
 
 const hdBuildingSourceSHA = "7c34170632e995ebfb281e451f340d14faec5fa25970ca0479493d99758afb2a"
 const hdBuildingOpaqueSHA = "1c5978b8b131150ba8abecca42a240282344553352195d683ad827e51b4fbef1"
@@ -378,7 +378,8 @@ func (h *hdRuntime) cursorSource() ([]byte, bool) {
 		return nil, false
 	}
 	source := h.m.Mem[0x1cd74:0x1ce74]
-	return source, hash(source) == hdBuildingCursorSHA
+	digest := hash(source)
+	return source, digest == hdBuildingCursorSHA || digest == hdSecondCursorSourceSHA
 }
 func (h *hdRuntime) write(addr uint32, old, value byte) {
 	i, inside := hdBuildingIndex(addr)

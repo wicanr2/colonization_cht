@@ -15,7 +15,10 @@ import (
 
 const hdCursorAssetSHA = "2839ce6c635c16af668ce251807e2723ed343052ab12cfa29a9be04cd9dbd8d4"
 
-type hdCursorRuntime struct{ art *image.RGBA }
+const hdSecondCursorSourceSHA = "45891fbc2c08b18d9b099e121b6021513d7bdfe168e6e063919de07a5da2f008"
+const hdSecondCursorAssetSHA = "f033afef7d3d49e2916fc0cfd623079be125105402c7647fe473f524a7f3173b"
+
+type hdCursorRuntime struct{ art, secondary *image.RGBA }
 
 func loadHDCursorRuntime(game, directory string) (*hdCursorRuntime, error) {
 	source, err := hdReadFile(filepath.Join(game, "CURSOR.SS"), 8<<20)
@@ -63,6 +66,9 @@ func loadHDCursorRuntime(game, directory string) (*hdCursorRuntime, error) {
 			p.art.SetRGBA(x, y, color.RGBAModel.Convert(im.At(sx, sy)).(color.RGBA))
 		}
 	}
+	if err := p.loadSecondCursor(directory); err != nil {
+		return nil, err
+	}
 	return p, nil
 }
 
@@ -79,6 +85,16 @@ func (p *hdCursorRuntime) paint(h *hdRuntime, out *image.RGBA, f draftNativeFram
 
 	if reason != "" {
 		r["reason"] = reason
+		return r
+	}
+	art := p.art
+	if hash(source) == hdSecondCursorSourceSHA {
+		art = p.secondary
+		r["asset_sha256"] = hdSecondCursorAssetSHA
+		r["native_text_preserved"] = true
+	}
+	if art == nil {
+		r["reason"] = "missing-cursor-art"
 		return r
 	}
 	mask := make([]byte, 8000)
@@ -99,7 +115,7 @@ func (p *hdCursorRuntime) paint(h *hdRuntime, out *image.RGBA, f draftNativeFram
 		active := false
 		for dy := 0; dy < 4; dy++ {
 			for dx := 0; dx < 4; dx++ {
-				if p.art.RGBAAt(sx+dx, sy+dy).A > 0 {
+				if art.RGBAAt(sx+dx, sy+dy).A > 0 {
 					active = true
 				}
 			}
@@ -109,8 +125,52 @@ func (p *hdCursorRuntime) paint(h *hdRuntime, out *image.RGBA, f draftNativeFram
 			pos := y*320 + x
 			mask[pos>>3] |= 1 << uint(pos&7)
 		}
-		draw.Draw(out, image.Rect(x*4, y*4, x*4+4, y*4+4), p.art, image.Pt(sx, sy), draw.Over)
+		draw.Draw(out, image.Rect(x*4, y*4, x*4+4, y*4+4), art, image.Pt(sx, sy), draw.Over)
 	}
 	r["source_cells"], r["painted"], r["mask"], r["source_sha256"] = cells, painted, base64.StdEncoding.EncodeToString(mask), hash(source)
 	return r
+}
+
+// 規格066 R115 READY：第二來源只重繪箭頭，原生文字保持。
+func (p *hdCursorRuntime) loadSecondCursor(directory string) error {
+	raw, err := hdReadFile(filepath.Join(directory, "cursor-001.png"), 8<<20)
+	if err != nil {
+		return err
+	}
+	if hash(raw) != hdSecondCursorAssetSHA {
+		return fmt.Errorf("HD second cursor fingerprint mismatch")
+	}
+	im, err := png.Decode(bytes.NewReader(raw))
+	if err != nil {
+		return err
+	}
+	if im.Bounds() != image.Rect(0, 0, 1374, 1145) {
+		return fmt.Errorf("HD second cursor dimensions mismatch")
+	}
+	bbox := image.Rectangle{}
+	for y := 0; y < 1145; y++ {
+		for x := 0; x < 1374; x++ {
+			_, _, _, a := im.At(x, y).RGBA()
+			if a >= 128*257 {
+				cell := image.Rect(x, y, x+1, y+1)
+				if bbox.Empty() {
+					bbox = cell
+				} else {
+					bbox = bbox.Union(cell)
+				}
+			}
+		}
+	}
+	if bbox != image.Rect(251, 215, 1122, 1028) {
+		return fmt.Errorf("HD second cursor alpha geometry mismatch")
+	}
+	p.secondary = image.NewRGBA(image.Rect(0, 0, 64, 64))
+	for y := 0; y < 20; y++ {
+		for x := 0; x < 24; x++ {
+			sx := bbox.Min.X + (2*x+1)*bbox.Dx()/48
+			sy := bbox.Min.Y + (2*y+1)*bbox.Dy()/40
+			p.secondary.SetRGBA(x, y, color.RGBAModel.Convert(im.At(sx, sy)).(color.RGBA))
+		}
+	}
+	return nil
 }

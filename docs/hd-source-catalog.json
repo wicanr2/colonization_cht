@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "be826ac1a84b43bde07005f95a4ff9799bbe81b62a721a4e3956fa5dbd84f6ee",
+  "formal_manifest_sha256": "6516f73a5158b57204759e7b8a9d2e0ebc13ce0cdd283e1330a9934cae4a2d7c",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,12 +26,12 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 710,
+    "formal_asset_bindings": 711,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
     "other_formats_and_program_drawn_graphics": "not_assessed",
-    "display_pass_source_bindings": 393
+    "display_pass_source_bindings": 394
   },
   "files": [
     {
@@ -16230,7 +16230,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "cursor-001.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/066-hd-standard-cursor.md",
+        "formal_connected": true,
+        "receipt_sha256": "73cedec703be3204dc044460cf3d93c0c2bf8e2713239e5ec23edbb8f03cccd1",
+        "scope": "actual known source crop fixture through production cursor source selection, full composition proof and HD renderer on main/published surfaces and representative edges; complete cursor state supplied, native text retained; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 311,
@@ -76147,6 +76156,30 @@
       "spec": "docs/spec/068-hd-small-world-terrain.md",
       "state": "DISPLAY-PASS",
       "claim": "actual source fixtures through production large/small terrain loaders, source selector, captured return, complete-source finish, original stage transfer opcode and renderers; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "cursor-001.png",
+      "asset_sha256": "f033afef7d3d49e2916fc0cfd623079be125105402c7647fe473f524a7f3173b",
+      "source_research_id": 310,
+      "source_file": "CURSOR.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "20891c193e4fab889782cbbcad94d062769b00a4e718235bf9899c5d529d3e59",
+      "source_indexed_sha256": "35ba9dc7eb08de1e76ccc46334c849cb24899ff53c3c626f5c85e4488fd43852",
+      "raw_art_rect": [
+        251,
+        215,
+        1122,
+        1028
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        6,
+        5
+      ],
+      "spec": "docs/spec/066-hd-standard-cursor.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual known source crop fixture through production cursor source selection, full composition proof and HD renderer on main/published surfaces and representative edges; complete cursor state supplied, native text retained; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
     }
   ],
   "limitations": [
@@ -77089,5 +77122,12 @@
     "receipt_sha256": "6cb18d1ce650bee0c62369e2d6db24713a6dd2e5aaab1a6dcabf855bc0d27445",
     "formal_binary_sha256": "1627504ed9686e9e471729df6942ce3e34085a2c5fb2be97e2b19beb1e0b3c3b",
     "scope": "actual source fixtures through production large/small terrain loaders, source selector, captured return, complete-source finish, original stage transfer opcode and renderers; SS writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+  },
+  "last_second_cursor_display": {
+    "state": "DISPLAY-PASS",
+    "sources": 1,
+    "receipt_sha256": "73cedec703be3204dc044460cf3d93c0c2bf8e2713239e5ec23edbb8f03cccd1",
+    "formal_binary_sha256": "3e8eb897aac6363a49bb46972bee6e8466cc4764a7e60770759a498a030aa915",
+    "scope": "actual known source crop fixture through production cursor source selection, full composition proof and HD renderer on main/published surfaces and representative edges; complete cursor state supplied, native text retained; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
   }
 }
