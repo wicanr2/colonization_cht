@@ -7473,3 +7473,19 @@ timeout 180 docker run --rm --network none --user 1000:1000 \
 - 最終入口r127-landfall-display-close-r1.json，SHA-256為a0cbd64632b60c48bd46aff6e89894f306ae1f6ac1ab8071b34969e64a320d32，位於既有hd-opening-animation-sources-r84工作根。385張正式HD原PNG、386檔、986個來源連結及328語言資源保持，沒有新增HD來源信用；完整五語、全量HD、戰鬥、獨立、結局、影片及新版交付仍未完成。
 - 主程式、原型、控制組與Xvfb都已正常退出，專案一次性容器自動移除；來源及輸出以UID／GID1000處理，Git與Docker狀態在收尾核對。本輪不改Issue、Release或已發布版本。
 - 收尾另將9個已結束的原型／診斷ELF與2個原型capture紀錄無損封存，逐檔SHA-256往返相同，回收201396224 bytes；目前正式程式、測試、GUI與R125接續路徑保留原路徑。入口r127-closed-prototypes-archive-r1.json，還原沿既有tools/evidence_storage.py。最終交接核對為同工作根的r127-final-handoff-r1.json。
+
+## 2026-10-20 R128 正常原住民與戰鬥路徑
+
+- 使用既有原版存檔與正常GUI操作，接續登陸、原住民接觸及部隊啟用。R1觀測第一次戰鬥為士兵敗退並降級，英文／繁中定點圖片保持；互動驗證超過1800秒時限，未匯出最後的正規輸入與狀態，歸類為驗證腳本失敗，不增加戰鬥驗收信用。
+- 私用GUI控制器增加指令即時紀錄與等待期限前正常關窗。R2按相同操作重跑時，原住民移往另一格，預定方向只走入空地，沒有戰鬥。當次78筆原生輸入由修正前R124原文模式重播至251600000步，完整CPU、RAM、VGA、DAC、存檔與輸入指紋相同；收據為同工作根的r128-original-control-check-r2.json。
+- R3改向位置固定的村莊，尚未建立完整戰鬥收據時，使用者要求先清理空間。由既有控制器正常關窗，76筆輸入與234400000步最終狀態已保存；完整RAM指紋為b41228a9f88efc61db420c71c024c37e2b062dfb656e89d1498c49bc9bf72db2。本輪沒有改原版規則、遊戲程式或存檔。
+- 觀測到不能從船上攻擊、原住民開戰詢問、部隊選單第二項及人物後方側欄仍有英文，僅列待處理。所有新增實拍及原版觀測維持本機；沒有增加戰鬥、獨立、結局或完整五語信用。
+
+## 2026-10-20 R129 再次清理工作空間
+
+- 依使用者要求優先清理。重查知識路由並載入文件職責入口，沿用既有工作根及tools/evidence_storage.py，沒有新增平行目錄或公開原版觀測。R128測試先正常關窗，Xvfb與一次性容器已退出。
+- 專用Go image以非root執行`go clean -cache`，回收421777408 bytes。清理清單將掛載別名換成正式路徑再比對保護清單，排除現用R124、R125、R127程式／測試／觀測，以及R128輸入、實拍與最終狀態。
+- 無損封存17個已結束的舊ELF與29個歷史紀錄，共46檔，回收1543122944 bytes。每個檔案壓縮後完整解壓並核對SHA-256，原副本最後才移除；保留`.gz`與`.gz.meta.json`。需要舊紀錄時，在Docker內以非root執行`python3 tools/evidence_storage.py restore <原始路徑或目錄>`，可按原路徑與模式還原；完整選取與逐筆結果位於同工作根的r129-cleanup-plan-r1.json及r129-cleanup-archive-rows-r1.jsonl。
+- 兩項操作回收1964900352 bytes，約1.83GiB。核對時工作樹依唯一inode配置容量計算，實占38085750784 bytes，約35.47GiB；檔案系統可用145453748224 bytes，約135.46GiB。最初盤點時R3仍在收尾輸出，因此操作回收量不當成初次盤點與最後容量的精確差額。
+- 9929個保護檔案的大小及完整SHA-256相同，含原始輸入、385張正式HD原PNG、交付包、存檔及現用輸出；46個封存的內容往返與壓縮檔指紋全部相符。沒有root-owned檔案、`.md`目錄或封存暫存檔，輸出UID／GID為1000。
+- 最終收據：[r129-cleanup-final-r1.json](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r129-cleanup-final-r1.json)，SHA-256為5ed316a47c33a41f90751dc85d4cb7cfd33b0654e7e0f96f707c1d0b2590ab6f。本輪只更新清理與交接紀錄，README、正式素材、HD完成度、Issue及Release保持；專案沒有執行中或停止容器，其他專案容器與映像未動。
