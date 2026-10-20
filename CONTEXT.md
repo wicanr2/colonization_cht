@@ -1,13 +1,13 @@
 # 目前脈絡
 
-## 目前狀態表（2026-10-20）
+## 目前狀態表（2026-10-21）
 
 本表是目前狀態的唯一入口。工作項目以[機器可讀清單](docs/worklist.json)為準，較舊交接及工作日誌只保留歷史證據。各批次列的素材與驗證數量限於該批；現行合計見「目前進行」。
 
 | 項目 | 目前狀態與證據 |
 |---|---|
-| 本機歷史紀錄 | 舊JSON／JSONL／來源遮罩與Linux驗證程式以原路徑加`.gz`及`.gz.meta.json`無損封存；重用前在Docker內以非root執行[還原工具](tools/evidence_storage.py)的`restore <原始路徑或目錄>`。2026-10-20 R129清除Go建置快取並封存46個已結束的紀錄／舊程式，操作回收1964900352 bytes，約1.83GiB；核對時工作樹實占38085750784 bytes，約35.47GiB。9929個保護檔案的完整SHA-256相同，含原版、正式HD原圖、交付包、存檔及現用程式與觀測。最新本機收據為既有hd-opening-animation-sources-r84工作根的[r129-cleanup-final-r1.json](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r129-cleanup-final-r1.json)；R126等先前清理數字留在[工作紀錄](WORKLOG.md)。 |
-| 暫存驗證路徑 | R128正常登陸至原住民事件路徑在既有hd-opening-animation-sources-r84/r128-war-gui-r2及r128-war-gui-r3。R2的78筆實際輸入重播至251600000步，原文控制組完整狀態、RAM、VGA、DAC與存檔相同，但沒有發生戰鬥。R3依清理要求正常關窗，76筆輸入、234400000步終點及實拍保持原路徑；兩輪的大型capture紀錄已無損封存，需要時先由還原工具恢復，再重播原生輸入。R1曾觀測士兵敗退，但時限使最終輸入匯出失敗，不算完整戰鬥驗收。戰鬥與已觀測的英文欄位仍待處理。 |
+| 本機歷史紀錄 | 舊JSON／JSONL／來源遮罩與Linux驗證程式以原路徑加`.gz`及`.gz.meta.json`無損封存；重用前在Docker內以非root執行[還原工具](tools/evidence_storage.py)的`restore <原始路徑或目錄>`。2026-10-21 R132清除Go建置快取並封存20個已結束紀錄／原型程式，回收2836348928 bytes，約2.64GiB；工作樹實占由41331097600降至38497697792 bytes，約38.49降至35.85GiB。13198個當次保護檔案的大小與完整SHA-256相同，含原版、正式HD原圖、交付包、存檔、現用程式及未提交修改；64張GUI的壓縮紀錄重驗通過。R127舊測試stdout在本輪清理前已因R131腳本路徑碰撞遺失，不列為已恢復或已驗證。最新本機收據為[r132-cleanup-final-r1.json](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r132-cleanup-final-r1.json)；先前清理數字與碰撞說明留在[工作紀錄](WORKLOG.md)。 |
+| 暫存驗證路徑 | R130正常GUI已進入原住民攻擊與戰鬥分析，79筆實際輸入的原文控制組完整狀態、RAM、VGA、DAC及存檔相同；沒有戰鬥結果對話，不增加結果訊息信用。收據為既有hd-opening-animation-sources-r84工作根的r130-original-control-check-r1.json。R131攻擊確認覆蓋保留在未提交的程式與規格修改，正式r2測試、64張GUI及104筆原文控制重播通過；矩陣、普查與CONFORMED登錄尚未完成，不增加五語或HD完成度。接續入口為同根r131-attack-checker-candidate.py、r131-attack-original-control-r2.json及r131-formal-test-check-r2.json；大型capture紀錄已封存，檢查器可直接讀取.gz。 |
 | 目前進行 | R127登陸正文與來源限定選項依[規格060](docs/spec/060-language-bundle-swap.md#r127-登陸正文限定conformed)限定CONFORMED。正式d75e5695…、建置與go vet、4項／109個含子項零skip通過；23張正常GUI完成四語兩模式、英文、懸停與正常關框，43筆實際輸入的原文控制組完整CPU／RAM／VGA／DAC／存檔相同。README只更新登陸原PNG，總數32張。HD保持385張生成原PNG／386檔、986個連結，含317個既有限定CONFORMED及669個DISPLAY-PASS，R124的BDARK45來源保持；328個語言資源未變。其餘原生非空來源為481字形／文字與10單色幾何，另69透明與19零尺寸；其他47檔與程式繪圖不是此分母已驗範圍。完整五語、全量HD、影片與新版交付未完成。 |
 | HD驗收授權 | 2026-10-20使用者明確授權將「正式接線＋測試畫面出現」寫入專案規則。HD單項記為DISPLAY-PASS，沿既有來源與繪圖契約，不追加原版內部調查或逐像素對拍；測試畫面方式如實記錄，全量未覆蓋項及其他功能契約保持。入口[AGENTS.md](AGENTS.md#hd-顯示驗收)及[目標186](docs/goals/186-display-settings-and-gameplay-video.md#全量覆蓋與完成判準)。 |
 | HD事件標題配色 | 2026-10-20使用者指定金色。HD模式字面RGB243／205／99、高光255／240／175、陰影53／28／8；四語Noto及英文原字形與欄位位置保持。三種既有事件的五語15張與原文回退3張來源測試畫面通過，不增加譯文或正常玩家路徑信用。入口[規格069](docs/spec/069-hd-menu-background-and-textures.md)。 |

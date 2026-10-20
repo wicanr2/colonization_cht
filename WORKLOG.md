@@ -7489,3 +7489,13 @@ timeout 180 docker run --rm --network none --user 1000:1000 \
 - 兩項操作回收1964900352 bytes，約1.83GiB。核對時工作樹依唯一inode配置容量計算，實占38085750784 bytes，約35.47GiB；檔案系統可用145453748224 bytes，約135.46GiB。最初盤點時R3仍在收尾輸出，因此操作回收量不當成初次盤點與最後容量的精確差額。
 - 9929個保護檔案的大小及完整SHA-256相同，含原始輸入、385張正式HD原PNG、交付包、存檔及現用輸出；46個封存的內容往返與壓縮檔指紋全部相符。沒有root-owned檔案、`.md`目錄或封存暫存檔，輸出UID／GID為1000。
 - 最終收據：[r129-cleanup-final-r1.json](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r129-cleanup-final-r1.json)，SHA-256為5ed316a47c33a41f90751dc85d4cb7cfd33b0654e7e0f96f707c1d0b2590ab6f。本輪只更新清理與交接紀錄，README、正式素材、HD完成度、Issue及Release保持；專案沒有執行中或停止容器，其他專案容器與映像未動。
+
+## 2026-10-21 R132 優先清理工作空間
+
+- 依使用者要求先清理workspace。查核知識路由後，清理沒有專用列，載入文件職責入口，沿用既有工作根與tools/evidence_storage.py。所有盤點、壓縮及驗證均在既有Docker image內執行，使用UID／GID 1000、停用網路及CPU／記憶體／PID／時間上限。
+- 無損封存12個已結束的大型capture紀錄與8個舊原型ELF，共20檔，回收2432757760 bytes。每檔壓縮後完整解壓並核對原始大小與SHA-256，保留原路徑加.gz及.gz.meta.json。還原方式沿用`python3 tools/evidence_storage.py restore <原始路徑或目錄>`，須在Docker內以非root執行。當前正式程式、測試、實拍、輸入及最終原版狀態保持原檔。
+- 專用Go image以`go clean -cache`清除建置快取，回收403591168 bytes，來源、下載依賴及目前程式保持。兩項操作合計回收2836348928 bytes，約2.64GiB；扣除新增清冊等輸出後，工作樹依唯一inode配置容量由41331097600降至38497697792 bytes，淨減2833399808 bytes，約2.64GiB，核對時約35.85GiB。檔案系統可用136918212608 bytes，約127.52GiB，與其他專案共用。
+- 13198個當次保護檔案的大小及完整SHA-256相同，含原版輸入、正式HD原PNG、交付包、存檔、現用程式及3個未提交程式／規格檔。20個封存的壓縮與解壓指紋均通過。當前R131嚴格檢查器直接讀取壓縮capture，64張GUI、33張正文、12張懸停及原文控制組的完整狀態與存檔仍通過；沒有重跑完整GUI或驗收矩陣。
+- 前輪R131測試腳本複製時只替換第一個程式路徑，後續stdout路徑仍指向r127-formal-tests-r1.log，已覆寫該歷史原始stdout。錯置輸出及更正收據保存在r131-log-path-correction-r1.json；R127原測試程式重驗109項通過的新版stdout為r131-r127-test-recheck-r1.log。歷史原始stdout未恢復，本輪將其列為清理前既存缺檔，不宣稱舊9929檔全數相同，也不以重驗日誌冒充原件。其餘當次保護檔案重新建立指紋後核對。
+- R130戰鬥分析及R131攻擊確認的接續證據、當前程式與未提交修改均保留。R131正式r2已通過183個含子項測試、64張GUI及104筆原文控制重播，矩陣、普查與CONFORMED尚待登錄。本次只完成空間清理，不增加普查、全量HD、完整五語、戰鬥結果、影片或新版交付信用。
+- 最終收據：[r132-cleanup-final-r1.json](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r132-cleanup-final-r1.json)，SHA-256為4b11e4606351e6874c11a61c7ded97b1a2f74535f451bd71d05792309b9ecd1d。同根保存清理計畫、逐檔封存、Go快取與壓縮後GUI重驗收據；沒有root-owned檔案、誤建.md目錄或壓縮暫存檔。一次性容器自動移除；Git提交僅收清理與接續紀錄，程式及規格修改保留待後續登錄，其他專案資源保持。
