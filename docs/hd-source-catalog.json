@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "3e5cad0baba6526824703006988e2035858fe37bd78df1bac82ce4cd5c6a5943",
+  "formal_manifest_sha256": "f4b6e46e90a042729d2562c971165cb4ee959e127666e7d5cffc15858533b676",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,12 +26,12 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 405,
+    "formal_asset_bindings": 406,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
     "other_formats_and_program_drawn_graphics": "not_assessed",
-    "display_pass_source_bindings": 88
+    "display_pass_source_bindings": 89
   },
   "files": [
     {
@@ -10499,7 +10499,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "building-047.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+        "formal_connected": true,
+        "receipt_sha256": "e9abfdd76ef23374e2696a77618d62e58c439b36c22b52913cfb21026428b7db",
+        "scope": "R103 actual encoded and native source fixture through current production call selection, complete-source finish and renderer; fixture writes supplied; display acceptance only."
+      }
     },
     {
       "research_id": 95,
@@ -66082,6 +66091,30 @@
       "spec": "docs/spec/065-hd-small-images.md",
       "state": "DISPLAY-PASS",
       "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "building-047.png",
+      "asset_sha256": "31225a16cea5cba6b723958871834e6e998d46242a070ac9b8703a0efa13c69e",
+      "source_research_id": 94,
+      "source_file": "BUILDING.SS",
+      "source_ordinal": 47,
+      "source_encoded_sha256": "4c49e03bbad2f6294365bf83f3b07e6826cde9e19d780c4c6bf106d9a8f88fb7",
+      "source_indexed_sha256": "a41b36ad43f725f2ae15f9dc8992cd7830165559841d54d63a48fd4cf128a0e8",
+      "raw_art_rect": [
+        0,
+        0,
+        1774,
+        887
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        44,
+        22
+      ],
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R103 actual encoded and native source fixture through current production call selection, complete-source finish and renderer; fixture writes supplied; display acceptance only."
     }
   ],
   "limitations": [
@@ -66936,5 +66969,13 @@
     "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
     "formal_binary_sha256": "c95b36046143b24fe285e88390d8c55469aa9c8210729fb125b11ed6e6593c42",
     "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+  },
+  "last_building_display": {
+    "state": "DISPLAY-PASS",
+    "source": 94,
+    "native_ordinal": 47,
+    "receipt_sha256": "e9abfdd76ef23374e2696a77618d62e58c439b36c22b52913cfb21026428b7db",
+    "formal_binary_sha256": "3dddd1dca192b02da8af86437f6dd2d2a994e88ac21bd1c17f38d03141074ea9",
+    "scope": "R103 actual encoded and native source fixture through current production call selection, complete-source finish and renderer; fixture writes supplied; display acceptance only."
   }
 }

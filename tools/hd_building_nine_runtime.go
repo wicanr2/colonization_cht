@@ -1,3 +1,4 @@
+// 規格061 R103 READY：追加既有第47幀原圖與來源。
 // 規格061 R91／064 READY：已驗建築來源正式HD顯示，範圍依各規格。
 // 只觀測原版寫入及合成四倍畫布，不寫入DOS。
 package main
@@ -64,6 +65,7 @@ var hdNineFrames = []hdNineFrame{
 	{ordinal: 40, w: 23, h: 27, encodedLen: 600, opaque: 514, encodedSHA: "6588008b35df0af9d24cdf2ff026fad206747c7a2406ca4595c04df3e33a56bd", writesSHA: "783e3f846166d9974a564cb3e3d432ebe0040f1af6783ac76f9a110449b4a05d", artSHA: "462163db5c17fcc5cd561c1eafcfd18330bf0cc1129e298e356a618e27abd0c6", file: "building-040.png", artW: 1158, artH: 1359, sample: [4]int{19, 57, 1148, 1246}, content: [4]int{0, 0, 23, 27}, writers: 7},
 	{ordinal: 41, w: 23, h: 27, encodedLen: 618, opaque: 546, encodedSHA: "c5bbef54aea58981b5c62936242c8bb515170bc0488cfba752ec066b6db35f01", writesSHA: "dc64ee40b4349d45cd6f0de42b4cafc2ccce6318f46f3f606f6612b724ff419b", artSHA: "ab4ec26b3db95262bac5e0bdba170bd56e4bf26f3684187789c6401dba7b9cc6", file: "building-041.png", artW: 1158, artH: 1359, sample: [4]int{59, 75, 1121, 1315}, content: [4]int{0, 0, 23, 27}, writers: 6},
 	{ordinal: 46, w: 44, h: 22, encodedLen: 591, opaque: 401, encodedSHA: "cc064e7c579538dd4618e34b1fc3158757de6dc263e32121266e1d14ce37e559", writesSHA: "addc9340c4000d482cf30f51a6aebe1f8128289e877e0f9589fb03bcf467e18a", artSHA: "21a027f4373c9432668675a2e2a0deb89c5d67977c8dbe1fd20fa4ed5407b68d", file: "building-046.png", artW: 1774, artH: 887, sample: [4]int{13, 136, 1761, 761}, content: [4]int{0, 0, 44, 22}, writers: 7},
+	{ordinal: 47, w: 44, h: 22, encodedLen: 844, opaque: 710, encodedSHA: "4c49e03bbad2f6294365bf83f3b07e6826cde9e19d780c4c6bf106d9a8f88fb7", writesSHA: "fe5931bf2dce4489660dd622d1899d61c14cda37d69912ef4b2542851bb10a7e", artSHA: "31225a16cea5cba6b723958871834e6e998d46242a070ac9b8703a0efa13c69e", file: "building-047.png", artW: 1774, artH: 887, sample: [4]int{0, 0, 1774, 887}, content: [4]int{0, 0, 44, 22}, writers: 7},
 }
 var hdNineWriterCodes = map[uint16][]byte{
 	0x181: {0x26, 0x88, 0x07, 0x03, 0x5e, 0xf0, 0x42, 0xfe, 0xcc, 0x74, 0x02, 0xeb, 0xe7, 0xeb, 0xd0, 0x3b},

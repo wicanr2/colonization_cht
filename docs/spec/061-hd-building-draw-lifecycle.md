@@ -547,3 +547,13 @@ check-r91-formal-pixels-r4.py、verify-r91-gui-replays-r2.py與make-r91-conforma
 工具為Go1.26.7、Python3.11.2／Pillow9.4.0及隔離dosgolem
 82a14b266e1b5bc904e2d0fe507daf6bea41a013，位址沿實模式CS:IP與20-bit線性RAM。
 其他來源、動畫、完整五語、全量HD、影片與新版交付未完成，既有發行版本不變。
+
+### R103第47幀接線READY
+
+使用既有building-047-candidate-r1.png原圖與BUILDING.SS清冊來源94，原生44×22、710個不透明格，接入現有完整D46印圖及建築HD繪圖介面。原圖保持1774×887 RGBA與原始alpha，以完整原圖對應原生44×22範圍；原版來源形狀、位置與透明索引保持。來源雜湊、完整寫入指紋及原圖指紋均固定，無新增來源調查。接線後以正式介面測試畫面有出現驗收，限顯示，不新增原版精確對拍或正常玩家路徑聲明。
+
+### R103第47幀顯示通過
+
+正式素材載入、D46編碼來源選擇、完整來源finish及HD繪圖介面的來源fixture通過，第47幀圖像已在測試畫面出現並目視確認。測試提供原生寫入樣本，記為DISPLAY-PASS，不新增原版CPU、正常玩家路徑或原版精確對拍聲明。BUILDING.SS的非空來源已全部有正式素材連結。
+
+正式程式SHA-256：3dddd1dca192b02da8af86437f6dd2d2a994e88ac21bd1c17f38d03141074ea9。建置與go vet、完整HD載入及332檔封裝指紋通過。本機收據在既有hd-opening-animation-sources-r84工作根的r103-formal-display-r1/check.json，SHA-256：e9abfdd76ef23374e2696a77618d62e58c439b36c22b52913cfb21026428b7db。

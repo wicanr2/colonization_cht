@@ -25350,6 +25350,47 @@
           "scaled100": true
         }
       ]
+    },
+    "building-047.png": {
+      "sha256": "31225a16cea5cba6b723958871834e6e998d46242a070ac9b8703a0efa13c69e",
+      "bytes": 1450107,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "target_size": [
+        176,
+        88
+      ],
+      "sampling": "pixel-center-nearest-neighbor",
+      "alpha": "raw PNG alpha retained with original native index253 source mask",
+      "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
+      "source_research_id": 94,
+      "source_file_sha256": "e91784542982216a1921b219967f0856a2a246721c5097a3e0e1e771ea9d6fe4",
+      "native_indexed_sha256": "a41b36ad43f725f2ae15f9dc8992cd7830165559841d54d63a48fd4cf128a0e8",
+      "native_ordinal": 47,
+      "native_size": [
+        44,
+        22
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        44,
+        22
+      ],
+      "sample_rect": [
+        0,
+        0,
+        1774,
+        887
+      ],
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE standalone transparent HD fine pixel-art sprite for our authorized display-only game layer. Image 1 is the exact native 44 x 22 sprite enlarged 8x; use it as a strict composition, silhouette and contents reference. Image 2 is the user-approved fine pixel-art style; use its restrained natural colors, fine crisp pixel clusters, readable materials and detail only. Faithfully redraw the low pale timber-and-plaster barn in image 1. Preserve the exact native golden straw gable roof, dark front double-door and small loft opening, the additional horizontal dark timber rails across the foreground, and the small green shrub on the right. Keep the original asymmetrical perspective. No new floors, buildings, people, goods, signs, text or props. Keep the original 44:22 full canvas aspect, original baseline, proportions, object positions and every original empty area. The sprite must read clearly at 176 x 88 display pixels. Use fine material detail within the original shapes; no semantic embellishment. Use true alpha transparency around and between forms; magenta in image 1 is transparent and must vanish entirely, without pink/red/green/white boundary fringes. No text, border, rectangular scenery backdrop, detached cast shadow, glow, blur, smooth airbrush, watermark or atlas. Return one full-canvas PNG with alpha.",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "status": "READY production connection; display acceptance tracked in source catalog"
     }
   }
 }
