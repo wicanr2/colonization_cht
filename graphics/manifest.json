@@ -59797,6 +59797,2184 @@
           "closing_context": false
         }
       ]
+    },
+    "bdark-atlas-1.png": {
+      "sha256": "bfbe90c8908dc170f4a036dfe896705d8995b3cb159fa1027938413655c7f03e",
+      "bytes": 1273483,
+      "size": [
+        1229,
+        1280
+      ],
+      "mode": "RGBA",
+      "generation_prompt": "Use case: style-transfer. Asset type: production sprite atlas for the Colonization HD display layer. Repaint Image 1 into a precise THREE-column by FIVE-row atlas, exactly FIFTEEN separate sprites in identical reading order. Keep every source building, fence, tree, boat, water fragment, prop, silhouette, viewpoint, relative size, and its normalized position INSIDE THE SAME CELL. Image 2 is STYLE ONLY: use its fine crisp pixel-art clusters, warm ochre stone, carved brown timber, layered slate/thatch roofs, and natural green foliage. Preserve Image 1's individual building architecture and all upgrade variants; do not replace them with buildings from Image 2. Keep the source's quiet darker muted colors. Uniform transparent RGBA background everywhere outside the sprites, with actual alpha, no ground plane, scenery, drop-shadow blobs, labels, cell dividers, frames, text, numbers, badges, or new elements. Exact 3x5 equal-cell grid across the entire near-square canvas; do not add or remove rows or columns. Source sprites have varied widths and heights; preserve their relative sizes and spacing, do not enlarge the small houses to fill their cells. Keep enough transparent space so neighboring cells never touch. Sharpen material detail within the original silhouettes without changing scene geometry. Render the atlas at high raster resolution, fine pixel artwork, no blur, vector look, photographic texture, painterly strokes, halos, neon, or extra decorations.",
+      "generation_file": "exec-605c9260-9de0-41cd-b436-79393b62fcad.png",
+      "reference_sha256": "6b6517c6ac5b716727fa5782ba5f46f87bb48f239745d7d7d669eb584febe742",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "source_frames": [
+        {
+          "research_id": 1,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 0,
+          "size": [
+            73,
+            18
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 828,
+          "other_header_fields": [
+            219,
+            56
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "25a9ac8391220d7305195b87ad1e2302a4b456655d75a2c903df6db6671bd1e1",
+          "indexed_sha256": "065ac701a1f0429500f3fae9bec3b99399478294d20ecaee37e3c45c7ebbcf7a",
+          "opaque_pixels": 808,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1,
+          "asset": "bdark-atlas-1.png",
+          "sample": [
+            31,
+            92,
+            385,
+            192
+          ],
+          "content": [
+            0,
+            3,
+            73,
+            18
+          ],
+          "art_sha256": "bfbe90c8908dc170f4a036dfe896705d8995b3cb159fa1027938413655c7f03e",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "ab6fde225bb05594422bc54097bc06a5bc35e95292c3f8dd8233eb4fe5b5826f",
+          "padded_sha256": "3ebe2c9c9a15bfd52779a80987aab843eb5fbf8eb4931b8f79d3582c745983bf",
+          "writes_sha256": "e084301cd10b453e5bd607f2fec3c6d717375e94375877bd6fac656060b6f800"
+        },
+        {
+          "research_id": 2,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 1,
+          "size": [
+            73,
+            18
+          ],
+          "header_part1_offset": 16,
+          "data_part3_offset": 828,
+          "encoded_length": 1042,
+          "other_header_fields": [
+            145,
+            75
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "4c6654ddfea88090c6c6b4e2946d10d76a51277f763054adc40b1c4203b0a96d",
+          "indexed_sha256": "b065453c9919c3f59b6328d78fa654843d03f12efb3868466beb8bbfccb55d8d",
+          "opaque_pixels": 1024,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 2,
+          "asset": "bdark-atlas-1.png",
+          "sample": [
+            431,
+            92,
+            792,
+            192
+          ],
+          "content": [
+            0,
+            0,
+            73,
+            18
+          ],
+          "art_sha256": "bfbe90c8908dc170f4a036dfe896705d8995b3cb159fa1027938413655c7f03e",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "8796639161cfcc014512e886a408501af45ee801a0fbc5c4fa26eb97e3a783e4",
+          "padded_sha256": "044b14aee8730424876cde9a3984d72b3eebc65586c994354487285507590c47",
+          "writes_sha256": "fa37a899835ec7f2dff00da7c27e589752fe65e9db9aefb59d8a19df50771f41"
+        },
+        {
+          "research_id": 3,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 2,
+          "size": [
+            73,
+            18
+          ],
+          "header_part1_offset": 32,
+          "data_part3_offset": 1870,
+          "encoded_length": 874,
+          "other_header_fields": [
+            219,
+            75
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "2c99bb63225e8ea80f34c90f730c10f203b3131dc70834498e432d83a34eecdb",
+          "indexed_sha256": "d72726dbac2eb983d99fdbf5713012d4c329116c1413fcdb0c2ace465119c16b",
+          "opaque_pixels": 1038,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 3,
+          "asset": "bdark-atlas-1.png",
+          "sample": [
+            837,
+            92,
+            1191,
+            192
+          ],
+          "content": [
+            0,
+            0,
+            73,
+            18
+          ],
+          "art_sha256": "bfbe90c8908dc170f4a036dfe896705d8995b3cb159fa1027938413655c7f03e",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "93a04100b26be02476a6e3bef7d8c459ff3d82b1288a1e4ba0a1eccd11f7a38f",
+          "padded_sha256": "a41bfc173dc9da1796351ce992cbf7a370afd174b046232eaa291855d76bd648",
+          "writes_sha256": "1b4282bd4a2eb7e7450d385125769ee1eacfb86638de87710b8c38d9d1576e1b"
+        },
+        {
+          "research_id": 4,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 3,
+          "size": [
+            44,
+            22
+          ],
+          "header_part1_offset": 48,
+          "data_part3_offset": 2744,
+          "encoded_length": 680,
+          "other_header_fields": [
+            68,
+            98
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "20462e9fe8b10de52f89f10628e782f1c7e20292e7cc970f31f6bfe4c41d096d",
+          "indexed_sha256": "8cbe2c6cfccafe594c4c063341f02edd97eac37e6f4eb870c1d40fd85d69609c",
+          "opaque_pixels": 663,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 4,
+          "asset": "bdark-atlas-1.png",
+          "sample": [
+            89,
+            330,
+            321,
+            448
+          ],
+          "content": [
+            0,
+            0,
+            44,
+            22
+          ],
+          "art_sha256": "bfbe90c8908dc170f4a036dfe896705d8995b3cb159fa1027938413655c7f03e",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "e44e3804f0e2951511e5783d22a31930a0b288993c6e656d82eeec37d9b5ed99",
+          "padded_sha256": "b00bc59561a7753c44596a37a2b8633f62968107b72821bc6f8a1ab3931366d9",
+          "writes_sha256": "edc010f8b77fa46a46e1456e5eea4e2c949a68114913327e7b0477328a5c44a1"
+        },
+        {
+          "research_id": 5,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 4,
+          "size": [
+            44,
+            22
+          ],
+          "header_part1_offset": 64,
+          "data_part3_offset": 3424,
+          "encoded_length": 679,
+          "other_header_fields": [
+            113,
+            98
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "6434fb3487fdb2c10f62fc0e1bd8248f5e06bdff0dd60a6a3cc0361cbc5a0f2a",
+          "indexed_sha256": "1644a858ff9455c854383aac9693121db63b0314cd70b10e7bfef7bb7ab5164d",
+          "opaque_pixels": 711,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 5,
+          "asset": "bdark-atlas-1.png",
+          "sample": [
+            501,
+            331,
+            735,
+            448
+          ],
+          "content": [
+            0,
+            1,
+            44,
+            22
+          ],
+          "art_sha256": "bfbe90c8908dc170f4a036dfe896705d8995b3cb159fa1027938413655c7f03e",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "acd730810a7db632ac501a7d0a36f49cfe07c968acb92b80ee520759e8800d95",
+          "padded_sha256": "b281b4211cfe8714d5f44d412fe09f1411affefc58f7eb81694b76d6e074fb55",
+          "writes_sha256": "af235b3700a2a9cbc478601dfea6569c77042942d705bb8b22101c52bf637ff4"
+        },
+        {
+          "research_id": 6,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 5,
+          "size": [
+            44,
+            22
+          ],
+          "header_part1_offset": 80,
+          "data_part3_offset": 4103,
+          "encoded_length": 779,
+          "other_header_fields": [
+            158,
+            98
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "e000d112b34a25e8cd10cc1d47984bb96c4a0ad6ed77a62394637bbcbc33ec10",
+          "indexed_sha256": "f866ae479a26ea997687d027fbde20820b11b04c500e860fe0c38e3c262949e2",
+          "opaque_pixels": 882,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 6,
+          "asset": "bdark-atlas-1.png",
+          "sample": [
+            902,
+            322,
+            1145,
+            448
+          ],
+          "content": [
+            0,
+            0,
+            44,
+            22
+          ],
+          "art_sha256": "bfbe90c8908dc170f4a036dfe896705d8995b3cb159fa1027938413655c7f03e",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "edfd92c8e3689ac9f8e78fe16aef0ff29a583dae4b8dc429887ac3e6f9a3c28a",
+          "padded_sha256": "03c0519d1d19f30bfa45dc46f58315395806aeab46c99bc2f04dc8dcccab6bce",
+          "writes_sha256": "61215e099b571a5ef1697d4f39471fbac67c2707060e0cdccaf047051cd6f467"
+        },
+        {
+          "research_id": 7,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 6,
+          "size": [
+            75,
+            48
+          ],
+          "header_part1_offset": 96,
+          "data_part3_offset": 4882,
+          "encoded_length": 1400,
+          "other_header_fields": [
+            38,
+            198
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f2a081efdc62f247a614a054ef57085d82198a3f7f9cc02f93103ffa969545a8",
+          "indexed_sha256": "5f587b1df9650038e300c53c7566856a49817c98b73348c77624e99ce370e2c8",
+          "opaque_pixels": 1142,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 7,
+          "asset": "bdark-atlas-1.png",
+          "sample": [
+            35,
+            518,
+            386,
+            749
+          ],
+          "content": [
+            1,
+            0,
+            75,
+            48
+          ],
+          "art_sha256": "bfbe90c8908dc170f4a036dfe896705d8995b3cb159fa1027938413655c7f03e",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "ee1aa620963c814b21ae2d3fb0ee7460b214db8af8bb9ef8c4c9ee8c1f369663",
+          "padded_sha256": "c23fb8273acf6ca8c63d2158d17bed3ddae533385ce4290da114d08a708c1ac9",
+          "writes_sha256": "211d5fcd9a03d5ee8daf0f31bd50e4cee2a81185fc05647008c3295eee65a5d1"
+        },
+        {
+          "research_id": 8,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 7,
+          "size": [
+            75,
+            48
+          ],
+          "header_part1_offset": 112,
+          "data_part3_offset": 6282,
+          "encoded_length": 1447,
+          "other_header_fields": [
+            114,
+            198
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "34b5de4828802848bf7fd1d25e8f7f676b221fb798ebeb6106ad44a201e0b8f3",
+          "indexed_sha256": "7a0bbaf0f6647c1a1945592cfbbe17e5b08852fc2faeebcc13c187a8108cecea",
+          "opaque_pixels": 1148,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 8,
+          "asset": "bdark-atlas-1.png",
+          "sample": [
+            437,
+            518,
+            786,
+            749
+          ],
+          "content": [
+            1,
+            0,
+            75,
+            48
+          ],
+          "art_sha256": "bfbe90c8908dc170f4a036dfe896705d8995b3cb159fa1027938413655c7f03e",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "ee1aa620963c814b21ae2d3fb0ee7460b214db8af8bb9ef8c4c9ee8c1f369663",
+          "padded_sha256": "3a07b5cc4fa21daa7607d144fb60b15403ea65427c0a630ec2236bfe4a3fbbd2",
+          "writes_sha256": "938bd0f0b761b4a053a8442753608a7f601ab2eb843c2d709ff35f8f0d08fda7"
+        },
+        {
+          "research_id": 9,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 8,
+          "size": [
+            75,
+            48
+          ],
+          "header_part1_offset": 128,
+          "data_part3_offset": 7729,
+          "encoded_length": 1568,
+          "other_header_fields": [
+            190,
+            198
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "63200ddc4038dd12c096677778aea778a1ffe37f2e10adffa0ae0d1834bed0c0",
+          "indexed_sha256": "d15b9686bf69dbb3046347ce20391b10b85e51d8ff70bac7f5da47c0644ddbd3",
+          "opaque_pixels": 1189,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 9,
+          "asset": "bdark-atlas-1.png",
+          "sample": [
+            831,
+            517,
+            1202,
+            750
+          ],
+          "content": [
+            1,
+            0,
+            75,
+            48
+          ],
+          "art_sha256": "bfbe90c8908dc170f4a036dfe896705d8995b3cb159fa1027938413655c7f03e",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "479717ab7e27cec0933d05e4b82c3fdd5124a5e63bd802ad70aaeaef8268b827",
+          "padded_sha256": "4cd4bae54dc0049d85bef9eb4f83461f7021ea642983db94e98bdbb1d3903df9",
+          "writes_sha256": "1bdc3e4c92dfcc6f8379f4a0559fe3cc123eac15e7db6e83fff53018e1cf0fa5"
+        },
+        {
+          "research_id": 10,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 9,
+          "size": [
+            53,
+            37
+          ],
+          "header_part1_offset": 144,
+          "data_part3_offset": 9297,
+          "encoded_length": 808,
+          "other_header_fields": [
+            81,
+            37
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "869a2895576700c622be09dfc8b618abaa2e0c24a5195b7f2b0114343478d01e",
+          "indexed_sha256": "267f7de9aaafacad00b95ebe4ece04e25c18cbeb2608a789c08f1cd8cc0274db",
+          "opaque_pixels": 968,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 10,
+          "asset": "bdark-atlas-1.png",
+          "sample": [
+            57,
+            864,
+            365,
+            996
+          ],
+          "content": [
+            0,
+            13,
+            53,
+            37
+          ],
+          "art_sha256": "bfbe90c8908dc170f4a036dfe896705d8995b3cb159fa1027938413655c7f03e",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "6edab28e471a71ed9c75323e7d40317535e285278ba43f2af084ec867232e546",
+          "padded_sha256": "f1d95c11f6671d03363f3092aa8f1ef72a43616b33d1b3d5ff8c2ae96b7d7c3d",
+          "writes_sha256": "9a224d25562fde9914218f9a8e6edcf905bb8b083f898fcdff2381daa89ffe84"
+        },
+        {
+          "research_id": 11,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 10,
+          "size": [
+            53,
+            37
+          ],
+          "header_part1_offset": 160,
+          "data_part3_offset": 10105,
+          "encoded_length": 1068,
+          "other_header_fields": [
+            135,
+            37
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "7241eceeb9581d8b7dd15e50abf98c7c1fee25574b8d629acba614c6458350b9",
+          "indexed_sha256": "5ecc9872c3d855775a5de519df47efe028fd974238c2c1234e61fded771c1811",
+          "opaque_pixels": 1094,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 11,
+          "asset": "bdark-atlas-1.png",
+          "sample": [
+            464,
+            801,
+            760,
+            993
+          ],
+          "content": [
+            0,
+            0,
+            53,
+            36
+          ],
+          "art_sha256": "bfbe90c8908dc170f4a036dfe896705d8995b3cb159fa1027938413655c7f03e",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "19d3c92e8dfd1b717f43ac60841c837ab2933301fad9434ca24a8a2381b2f662",
+          "padded_sha256": "3b4c7925ef8d4f8db5c303b07fcbee8e6981393d597e56a3a0223beda0284f89",
+          "writes_sha256": "96a9dbd6d85249eaaf2a546bed5c8f0b08b9af2b4826a62feebdea7f29dfaaa8"
+        },
+        {
+          "research_id": 12,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 11,
+          "size": [
+            53,
+            37
+          ],
+          "header_part1_offset": 176,
+          "data_part3_offset": 11173,
+          "encoded_length": 1003,
+          "other_header_fields": [
+            189,
+            37
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "cb4865b5465800166c0ed86438c718fe80d8248a0df74ad36422f9f97eaa737a",
+          "indexed_sha256": "544152d6639082965e98aa949586a5a709b9c94184c1fa467c79a0868fc73194",
+          "opaque_pixels": 1313,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 12,
+          "asset": "bdark-atlas-1.png",
+          "sample": [
+            857,
+            801,
+            1171,
+            991
+          ],
+          "content": [
+            0,
+            0,
+            53,
+            37
+          ],
+          "art_sha256": "bfbe90c8908dc170f4a036dfe896705d8995b3cb159fa1027938413655c7f03e",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "a50d6dbd3b82a612df4b2a57679914ae934d2af62ebb58f65c1761efffabaaa1",
+          "padded_sha256": "5973bd0d92fb72538ce83452a2e4a8985724b59bc705720252759ed6ecebc734",
+          "writes_sha256": "9a82e2d2c635fabb27665c0a64c3db30f924d2727574a996a3837f1a504a776d"
+        },
+        {
+          "research_id": 13,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 12,
+          "size": [
+            44,
+            22
+          ],
+          "header_part1_offset": 192,
+          "data_part3_offset": 12176,
+          "encoded_length": 633,
+          "other_header_fields": [
+            23,
+            121
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "556a7c6e6c2b877dc7a9411f0212b99a56cfa3e2997323939992af24b6230f5c",
+          "indexed_sha256": "4d845325758804d4ae11fee4f0ec67568620b0a25a8589618358b46d3f187bb4",
+          "opaque_pixels": 639,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 13,
+          "asset": "bdark-atlas-1.png",
+          "sample": [
+            67,
+            1076,
+            337,
+            1211
+          ],
+          "content": [
+            0,
+            1,
+            43,
+            22
+          ],
+          "art_sha256": "bfbe90c8908dc170f4a036dfe896705d8995b3cb159fa1027938413655c7f03e",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "a892f58ea64fff0381e0f433a564ed939d2538e691cac92c163ef30eb253bfad",
+          "padded_sha256": "74253b22d7e2500afb93bf37d228162ae5d93364d17d9ab1329626b20013f10b",
+          "writes_sha256": "fee9d85bb000b05967e63ac8021c7e85f58df1d5a57aa3d8930f1a9ce8aa6d61"
+        },
+        {
+          "research_id": 14,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 13,
+          "size": [
+            44,
+            22
+          ],
+          "header_part1_offset": 208,
+          "data_part3_offset": 12809,
+          "encoded_length": 520,
+          "other_header_fields": [
+            68,
+            121
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "c52e9cc747515e6633e1d1b563ac3026d27384d7de351f152203d20c1b2b43a0",
+          "indexed_sha256": "a4b56a5bad0cf264034fc395c6f20d733795c038e65fcd3d74665e6189e157f6",
+          "opaque_pixels": 699,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 14,
+          "asset": "bdark-atlas-1.png",
+          "sample": [
+            466,
+            1102,
+            757,
+            1209
+          ],
+          "content": [
+            0,
+            4,
+            44,
+            21
+          ],
+          "art_sha256": "bfbe90c8908dc170f4a036dfe896705d8995b3cb159fa1027938413655c7f03e",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "1d9112b56f1ec293f5039cda2bb2fbb974faf86b1205a2eb4e986c7eb6093a99",
+          "padded_sha256": "e26314820c6d4232fdf14f1a60f40e849e602b0a7b30eb823b49bfefefb31882",
+          "writes_sha256": "43ce0b7e786e6e21dc0fe277a0965f789d9c6f29ba8e05b008b6f6bac6f55092"
+        },
+        {
+          "research_id": 15,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 14,
+          "size": [
+            44,
+            22
+          ],
+          "header_part1_offset": 224,
+          "data_part3_offset": 13329,
+          "encoded_length": 670,
+          "other_header_fields": [
+            113,
+            121
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "adbc6588273200dd49bb48bea88cb4838cc1d1abd5b6124c13901f1c94616799",
+          "indexed_sha256": "e59d57d76ecec255dc1c427ca99a76e2e609eef76628c1e5bcfef6c1dfdc85ad",
+          "opaque_pixels": 828,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 15,
+          "asset": "bdark-atlas-1.png",
+          "sample": [
+            898,
+            1075,
+            1157,
+            1209
+          ],
+          "content": [
+            0,
+            0,
+            44,
+            22
+          ],
+          "art_sha256": "bfbe90c8908dc170f4a036dfe896705d8995b3cb159fa1027938413655c7f03e",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "c1c463c9802d3e9e4f6867d3aa902a0cdc691656d9bc5476cffc3e020ca4edde",
+          "padded_sha256": "560f9f54d583fad686bde01f7eeece84c0aa699ae43ba5669f5dfe0091190525",
+          "writes_sha256": "92a55bfdd01c93553cada3bc5234c35239c46299e228500dfb547a6cbb1b87d3"
+        }
+      ],
+      "generation_tool": "built-in image_gen",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "Original generated PNG and alpha retained; bbox selects raw sample only, original source253 geometry remains.",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog"
+    },
+    "bdark-atlas-2.png": {
+      "sha256": "701039ff08dd7a93ae7314ffe37d280559f6d674c46aa22dc5346314ea4a0405",
+      "bytes": 976247,
+      "size": [
+        1229,
+        1280
+      ],
+      "mode": "RGBA",
+      "generation_prompt": "Use case: style-transfer. Asset type: production sprite atlas for the Colonization HD display layer. Repaint Image 1 into a precise THREE-column by FIVE-row atlas, exactly FIFTEEN separate sprites in identical reading order. Keep every source building, fence, tree, boat, water fragment, prop, silhouette, viewpoint, relative size, and its normalized position INSIDE THE SAME CELL. Image 2 is STYLE ONLY: use its fine crisp pixel-art clusters, warm ochre stone, carved brown timber, layered slate/thatch roofs, and natural green foliage. Preserve Image 1's individual building architecture and all upgrade variants; do not replace them with buildings from Image 2. Keep the source's quiet darker muted colors. Uniform transparent RGBA background everywhere outside the sprites, with actual alpha, no ground plane, scenery, drop-shadow blobs, labels, cell dividers, frames, text, numbers, badges, or new elements. Exact 3x5 equal-cell grid across the entire near-square canvas; do not add or remove rows or columns. Source sprites have varied widths and heights; preserve their relative sizes and spacing, do not enlarge the small houses to fill their cells. Keep enough transparent space so neighboring cells never touch. Sharpen material detail within the original silhouettes without changing scene geometry. Render the atlas at high raster resolution, fine pixel artwork, no blur, vector look, photographic texture, painterly strokes, halos, neon, or extra decorations.",
+      "generation_file": "exec-bd057397-54d6-4638-bb06-e714270b3aad.png",
+      "reference_sha256": "c88d411eb6a73caa8c9eb2dad1f6591bc8e4c7a8ded698487fa44fd94db15376",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "source_frames": [
+        {
+          "research_id": 16,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 15,
+          "size": [
+            44,
+            22
+          ],
+          "header_part1_offset": 240,
+          "data_part3_offset": 13999,
+          "encoded_length": 591,
+          "other_header_fields": [
+            203,
+            98
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "02174bc0444e5f14caaadc3878d4176bc3c3975feacbbd257149a748000707fd",
+          "indexed_sha256": "982af6ca142bfe0c1369b0773a4adbc94ddc06fd07a08cc32f3b48b9093529b6",
+          "opaque_pixels": 770,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 16,
+          "asset": "bdark-atlas-2.png",
+          "sample": [
+            81,
+            86,
+            338,
+            204
+          ],
+          "content": [
+            0,
+            2,
+            44,
+            22
+          ],
+          "art_sha256": "701039ff08dd7a93ae7314ffe37d280559f6d674c46aa22dc5346314ea4a0405",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "d29c8d1b4998a58689aba4f7fd6c0995d42d422d0739ccaf263ad8b6b0521df4",
+          "padded_sha256": "982c6cb70b7798acce7a9d098dc709501445758f982d061a639354cb078c7f8f",
+          "writes_sha256": "8d095466bb31d1645752c8ce47af63ca77ad3c0238ea1b8e757c549f0489c851"
+        },
+        {
+          "research_id": 17,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 16,
+          "size": [
+            73,
+            18
+          ],
+          "header_part1_offset": 256,
+          "data_part3_offset": 14590,
+          "encoded_length": 587,
+          "other_header_fields": [
+            145,
+            56
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f6f1b5b8e05522f19e561f9c0547b7f0545076601bb43ef32bf73c4d31521c14",
+          "indexed_sha256": "f9160bba11fe9c48f096b2ee467639fb93fb88e75b59a56b8df19844b6653005",
+          "opaque_pixels": 504,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 17,
+          "asset": "bdark-atlas-2.png",
+          "sample": [
+            437,
+            69,
+            819,
+            197
+          ],
+          "content": [
+            0,
+            0,
+            73,
+            18
+          ],
+          "art_sha256": "701039ff08dd7a93ae7314ffe37d280559f6d674c46aa22dc5346314ea4a0405",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "2fb539119f7fa376add9337bc0516d44eff2e9c2fd2ae8911a3d3e7e40d063ac",
+          "padded_sha256": "de1549afcbcbdbb4eb2b875ac1f32cdabe7b932797665998de9365f7d9432aea",
+          "writes_sha256": "b412798ef1afceec6e0f982ff09755bc96485ee9511244b6a125da10479cea02"
+        },
+        {
+          "research_id": 18,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 17,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 272,
+          "data_part3_offset": 15177,
+          "encoded_length": 410,
+          "other_header_fields": [
+            282,
+            27
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "d2e4d69e589e54b499fbecc72a8e829f793d34c582e462385ded8711e85c4aad",
+          "indexed_sha256": "8bb62157288077f059aac24654a5b9257700dd90fe2ca0eb8bf6d1136496d731",
+          "opaque_pixels": 410,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 18,
+          "asset": "bdark-atlas-2.png",
+          "sample": [
+            819,
+            68,
+            1137,
+            221
+          ],
+          "content": [
+            0,
+            2,
+            23,
+            27
+          ],
+          "art_sha256": "701039ff08dd7a93ae7314ffe37d280559f6d674c46aa22dc5346314ea4a0405",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "d7afbde8d9ef594aad6c1cd66a33d00ab4ff32fe4d917d4577ea7361f6cde65c",
+          "padded_sha256": "d7d435a1cbb0dd6fee8e697757178a94454262357b85f17610ca03dbf8e8c57c",
+          "writes_sha256": "82bc84fd25fe68331613af907f20e0d506e8d3cc1ee704f83fbce0c7ba080962"
+        },
+        {
+          "research_id": 19,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 18,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 288,
+          "data_part3_offset": 15587,
+          "encoded_length": 410,
+          "other_header_fields": [
+            282,
+            27
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "d2e4d69e589e54b499fbecc72a8e829f793d34c582e462385ded8711e85c4aad",
+          "indexed_sha256": "8bb62157288077f059aac24654a5b9257700dd90fe2ca0eb8bf6d1136496d731",
+          "opaque_pixels": 410,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 19,
+          "asset": "bdark-atlas-2.png",
+          "sample": [
+            819,
+            68,
+            1137,
+            221
+          ],
+          "content": [
+            0,
+            2,
+            23,
+            27
+          ],
+          "art_sha256": "701039ff08dd7a93ae7314ffe37d280559f6d674c46aa22dc5346314ea4a0405",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "d7afbde8d9ef594aad6c1cd66a33d00ab4ff32fe4d917d4577ea7361f6cde65c",
+          "padded_sha256": "d7d435a1cbb0dd6fee8e697757178a94454262357b85f17610ca03dbf8e8c57c",
+          "writes_sha256": "82bc84fd25fe68331613af907f20e0d506e8d3cc1ee704f83fbce0c7ba080962"
+        },
+        {
+          "research_id": 20,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 19,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 304,
+          "data_part3_offset": 15997,
+          "encoded_length": 438,
+          "other_header_fields": [
+            282,
+            55
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "747e69f37828f10b2111e48766b661e30e381cab8082c77328ff022cd8d82b30",
+          "indexed_sha256": "24531bba53a661d3d6ffb982eb5895b0723b206e7518a60e46741107fcda7949",
+          "opaque_pixels": 490,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 20,
+          "asset": "bdark-atlas-2.png",
+          "sample": [
+            548,
+            313,
+            706,
+            480
+          ],
+          "content": [
+            0,
+            1,
+            23,
+            27
+          ],
+          "art_sha256": "701039ff08dd7a93ae7314ffe37d280559f6d674c46aa22dc5346314ea4a0405",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "bb2c7efa5395791801b1551ef47529dfcd990c526ab180a3976ab39980abdd02",
+          "padded_sha256": "31c349479703bcfeee59184ca75cb817057a5b32d63fd60cc4e6bedafa06f528",
+          "writes_sha256": "b22a7278bb5a43e82e8f7b04aedc17666b6b9ecb7c91f88cef70145b1873385a"
+        },
+        {
+          "research_id": 21,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 20,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 320,
+          "data_part3_offset": 16435,
+          "encoded_length": 484,
+          "other_header_fields": [
+            306,
+            55
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "281b9e431b98403d493f3257e70a7b12142307e0d5acc747c87279702d193063",
+          "indexed_sha256": "8f20302ce5d2dfdfbc62171583e6cae1ae13eb08826456356d1610d27e6e5d1f",
+          "opaque_pixels": 591,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 21,
+          "asset": "bdark-atlas-2.png",
+          "sample": [
+            971,
+            305,
+            1130,
+            480
+          ],
+          "content": [
+            0,
+            0,
+            23,
+            27
+          ],
+          "art_sha256": "701039ff08dd7a93ae7314ffe37d280559f6d674c46aa22dc5346314ea4a0405",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "6972222c24f98165241499159ae8d42ebfe901d6591d3eeada59957059d6b563",
+          "padded_sha256": "ebad80eb864d03ec5bdc4b3560e74f075cc45301a4fc8bc9645380539853a0b5",
+          "writes_sha256": "e3a1318a2f952463c55d54d3950545059ad0a0cb1a96c66d880f0ef3e7425688"
+        },
+        {
+          "research_id": 22,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 21,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 336,
+          "data_part3_offset": 16919,
+          "encoded_length": 476,
+          "other_header_fields": [
+            12,
+            149
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "4f03d9905049b9be6ae4c84948d669edf7cb74ce57d20a30088b5b5de56b6390",
+          "indexed_sha256": "431d25e0fbf2310b114b8dce14b286f8f1b980b0a50082ea1ff2ca1fb6a055e8",
+          "opaque_pixels": 447,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 22,
+          "asset": "bdark-atlas-2.png",
+          "sample": [
+            117,
+            566,
+            291,
+            734
+          ],
+          "content": [
+            0,
+            2,
+            23,
+            27
+          ],
+          "art_sha256": "701039ff08dd7a93ae7314ffe37d280559f6d674c46aa22dc5346314ea4a0405",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "58cd3a0ffab00a5f6b93304d4ce4ec3f6676109781e7bb0ed5d9b68a3845eb0d",
+          "padded_sha256": "04801291abdfc45812d3ed2e662325606306cd176d13b53b67c4245647f5c44d",
+          "writes_sha256": "c42ae0233e29811b1b80eeb086c2d8b5bb001eebb401dbc0dd137d8474413979"
+        },
+        {
+          "research_id": 23,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 22,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 352,
+          "data_part3_offset": 17395,
+          "encoded_length": 490,
+          "other_header_fields": [
+            36,
+            149
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "d1406d6433ee56bfca6423438bcdaa10aaf7ac8dba184acf91c62ca02e461911",
+          "indexed_sha256": "cb4e0f59b4fcf844c6deecd407b92c968aa99fa0c13a81902347f6b61dcd65fc",
+          "opaque_pixels": 524,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 23,
+          "asset": "bdark-atlas-2.png",
+          "sample": [
+            541,
+            563,
+            700,
+            732
+          ],
+          "content": [
+            0,
+            1,
+            23,
+            27
+          ],
+          "art_sha256": "701039ff08dd7a93ae7314ffe37d280559f6d674c46aa22dc5346314ea4a0405",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "f0be07693995c23aa598f97568db6133ccd90309984be2a967c92d907099c727",
+          "padded_sha256": "ff0cd8be02a472afece2305d1d42db79be078706ae81111b6e869a1f1c79cd5f",
+          "writes_sha256": "d35fc6939e1e4df056a384aee2c61434323900d2f4ba5c8df79124f0266da084"
+        },
+        {
+          "research_id": 24,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 23,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 368,
+          "data_part3_offset": 17885,
+          "encoded_length": 482,
+          "other_header_fields": [
+            60,
+            149
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "8aeda119adbbfb8153e74e394863d2f60cc22428dfa3875aa4d9f35d6d9615c7",
+          "indexed_sha256": "20fa48f3a242123e7709b3b7dec3e92a5aaae3c632b4329a77702bdbdcf1d8be",
+          "opaque_pixels": 559,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 24,
+          "asset": "bdark-atlas-2.png",
+          "sample": [
+            971,
+            569,
+            1129,
+            729
+          ],
+          "content": [
+            0,
+            0,
+            23,
+            27
+          ],
+          "art_sha256": "701039ff08dd7a93ae7314ffe37d280559f6d674c46aa22dc5346314ea4a0405",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "493a036ddbc9ff0da9ec5c93b8c7436e6b85aa696684343524de74577b91a191",
+          "padded_sha256": "0c2e971c44c43893b412adab1f5d607440b59cefc2e706ffe755fcab3af4ff60",
+          "writes_sha256": "8a3040d31eb3c10ce978604fde4b46270cf45bdd3ed21223171d4e64666c02fd"
+        },
+        {
+          "research_id": 25,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 24,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 384,
+          "data_part3_offset": 18367,
+          "encoded_length": 357,
+          "other_header_fields": [
+            84,
+            149
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "1ed7c6dffce6b806b10476efb664715961f8798c98130d6d0ca843759a796aed",
+          "indexed_sha256": "1eb4642c3adf282f5ce7738e6fbb06abf51740516bb4808e90ffaeeea648ba67",
+          "opaque_pixels": 263,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 25,
+          "asset": "bdark-atlas-2.png",
+          "sample": [
+            113,
+            852,
+            287,
+            966
+          ],
+          "content": [
+            0,
+            11,
+            23,
+            27
+          ],
+          "art_sha256": "701039ff08dd7a93ae7314ffe37d280559f6d674c46aa22dc5346314ea4a0405",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "58f1ff723d7b6bf62ff27fa3f3322caf332336e865693f9abbe5e84fc6ce8e30",
+          "padded_sha256": "74a88e5b0ff0e5f08fb7801ccfefa263d5f8fde5943676a46cd07c269df368af",
+          "writes_sha256": "8b10fe07b91eadc5210fe9c8246ba7818bb530faf6916ae6b761d780dc225d93"
+        },
+        {
+          "research_id": 26,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 25,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 400,
+          "data_part3_offset": 18724,
+          "encoded_length": 424,
+          "other_header_fields": [
+            108,
+            149
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "8b83318f86947da7c56a4c0d72cae99474da46b5bddc4645b0ea130d79816d1d",
+          "indexed_sha256": "a57d9bc2158dc6d9d6ab67ff8eb7e10021a1403f1107d1ba4e983af2eaad9878",
+          "opaque_pixels": 431,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 26,
+          "asset": "bdark-atlas-2.png",
+          "sample": [
+            542,
+            817,
+            713,
+            966
+          ],
+          "content": [
+            0,
+            1,
+            23,
+            27
+          ],
+          "art_sha256": "701039ff08dd7a93ae7314ffe37d280559f6d674c46aa22dc5346314ea4a0405",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "6882f72d6c6a4607576e9ef6bb9015b4721d658324ee32d1f65df22afbb28cbb",
+          "padded_sha256": "68f66bf70e6c2e5e3441519e1aea64827e532cf854b87d22eaf6a667c44b6f43",
+          "writes_sha256": "d7edae03fe4f6989f712fa49b0693b6b92a1d06ba813bcf313ef95da5fc0fe9e"
+        },
+        {
+          "research_id": 27,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 26,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 416,
+          "data_part3_offset": 19148,
+          "encoded_length": 499,
+          "other_header_fields": [
+            132,
+            149
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "94ac7e6ca250282605324f0f6bd41d791258b48e76f7a45908e8c196ecfb6711",
+          "indexed_sha256": "b578fa9b800480c0cf288d702cc6399841c4a693d77f37ca66f40b2ee43c47d7",
+          "opaque_pixels": 540,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 27,
+          "asset": "bdark-atlas-2.png",
+          "sample": [
+            973,
+            808,
+            1131,
+            972
+          ],
+          "content": [
+            0,
+            0,
+            23,
+            27
+          ],
+          "art_sha256": "701039ff08dd7a93ae7314ffe37d280559f6d674c46aa22dc5346314ea4a0405",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "d26165897b6dd723097db6552034f8151a7722e025d09f9ecedf609b20cd64d1",
+          "padded_sha256": "ada09fa8e713622d7325f8a1bc2d8960644910e6ebe12a994de8a150b0bbb2e3",
+          "writes_sha256": "19a65e2a5d01f394161321bf59466c7f26fe5ac3aa41631e5c6e5b490101ae3a"
+        },
+        {
+          "research_id": 28,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 27,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 432,
+          "data_part3_offset": 19647,
+          "encoded_length": 518,
+          "other_header_fields": [
+            156,
+            149
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "64a8a056d4703ce1caac602538cb0dc3f3525b8056e3e979eb51f253864bc7a3",
+          "indexed_sha256": "be012e6eab3dacea2cee26c1f32942c519dded406456a1b95f5bd517457194e0",
+          "opaque_pixels": 465,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 28,
+          "asset": "bdark-atlas-2.png",
+          "sample": [
+            114,
+            1053,
+            276,
+            1218
+          ],
+          "content": [
+            0,
+            0,
+            23,
+            27
+          ],
+          "art_sha256": "701039ff08dd7a93ae7314ffe37d280559f6d674c46aa22dc5346314ea4a0405",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "84b791b6edf53aed51567afa062aa768f8657a0ea0d28a1e93e8dcae28e5436d",
+          "padded_sha256": "ac808a36f5f08f3298dd3570cd7aa98259adb138b5d40ade65b89d6d77bfa64f",
+          "writes_sha256": "f9c2e971274fa03a6e1b2c1ef27e261532f9f66f01f3e743a07bb55fd1ff5e18"
+        },
+        {
+          "research_id": 29,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 28,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 448,
+          "data_part3_offset": 20165,
+          "encoded_length": 543,
+          "other_header_fields": [
+            180,
+            149
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "aac7a422f103e9cd1997d76d0844f329b8cf3f17a5513ad148eadb3ddf25882d",
+          "indexed_sha256": "36864cf955033c2d3f50bbda9deb1fdb1ca1cbbecd144f87238a34faee96adcf",
+          "opaque_pixels": 496,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 29,
+          "asset": "bdark-atlas-2.png",
+          "sample": [
+            547,
+            1036,
+            705,
+            1211
+          ],
+          "content": [
+            0,
+            1,
+            23,
+            27
+          ],
+          "art_sha256": "701039ff08dd7a93ae7314ffe37d280559f6d674c46aa22dc5346314ea4a0405",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "c1bd18606f30f185d0a8ae6cac32c5319f2a65d071c8c56c29043493a01cbbc8",
+          "padded_sha256": "651a04121eed8b7edc26461837ebe6cfcc09b8991f2baa97ab0d1f502486f00d",
+          "writes_sha256": "2522eb27383271aef199e686aee9a2aefb2dae34f5b8046c5dc8476688899250"
+        },
+        {
+          "research_id": 30,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 29,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 464,
+          "data_part3_offset": 20708,
+          "encoded_length": 584,
+          "other_header_fields": [
+            204,
+            149
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "0b0ba7e153e805c6b243bc737794025327b0815ab2be759a4d6ad212e45f1b0f",
+          "indexed_sha256": "02af8069837234c896c2cf39ce6bfadb5b053c63b5d0c66e73917a3a5749767c",
+          "opaque_pixels": 556,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 30,
+          "asset": "bdark-atlas-2.png",
+          "sample": [
+            974,
+            1039,
+            1132,
+            1211
+          ],
+          "content": [
+            0,
+            0,
+            23,
+            27
+          ],
+          "art_sha256": "701039ff08dd7a93ae7314ffe37d280559f6d674c46aa22dc5346314ea4a0405",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "76aadbbb98d688909c8fe32a9d02ca08f4965ac74f678ef5e5456fdb4cbeaf95",
+          "padded_sha256": "27c951e7260f3816b6abccbe080cf537e80b3a86f80fb7e889c8040b61664b98",
+          "writes_sha256": "18a96cad33b952693a9f33a87ed64c9bcc4c9c69a678c7524f2e247aa6691e88"
+        }
+      ],
+      "generation_tool": "built-in image_gen",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "Original generated PNG and alpha retained; bbox selects raw sample only, original source253 geometry remains.",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog"
+    },
+    "bdark-atlas-3.png": {
+      "sha256": "3e5d965aa61cad96e8071bd112486afec1da776e385e135ce5acb647674a83c7",
+      "bytes": 1302664,
+      "size": [
+        1229,
+        1280
+      ],
+      "mode": "RGBA",
+      "generation_prompt": "Use case: style-transfer. Asset type: production sprite atlas for the Colonization HD display layer. Repaint Image 1 into a precise THREE-column by FIVE-row atlas, exactly FIFTEEN separate sprites in identical reading order. Keep every source building, fence, tree, boat, water fragment, prop, silhouette, viewpoint, relative size, and its normalized position INSIDE THE SAME CELL. Image 2 is STYLE ONLY: use its fine crisp pixel-art clusters, warm ochre stone, carved brown timber, layered slate/thatch roofs, and natural green foliage. Preserve Image 1's individual building architecture and all upgrade variants; do not replace them with buildings from Image 2. Keep the source's quiet darker muted colors. Uniform transparent RGBA background everywhere outside the sprites, with actual alpha, no ground plane, scenery, drop-shadow blobs, labels, cell dividers, frames, text, numbers, badges, or new elements. Exact 3x5 equal-cell grid across the entire near-square canvas; do not add or remove rows or columns. Source sprites have varied widths and heights; preserve their relative sizes and spacing, do not enlarge the small houses to fill their cells. Keep enough transparent space so neighboring cells never touch. Sharpen material detail within the original silhouettes without changing scene geometry. Render the atlas at high raster resolution, fine pixel artwork, no blur, vector look, photographic texture, painterly strokes, halos, neon, or extra decorations.",
+      "generation_file": "exec-d6548972-4f81-462c-a784-a0c2722c37b4.png",
+      "reference_sha256": "df008bd0fb8924a8a6df45785d3a494ff93d7297306b7e1193f9fd9b45a61109",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "source_frames": [
+        {
+          "research_id": 31,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 30,
+          "size": [
+            53,
+            37
+          ],
+          "header_part1_offset": 480,
+          "data_part3_offset": 21292,
+          "encoded_length": 1299,
+          "other_header_fields": [
+            243,
+            37
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "fb8f41b8a181f6b485afc431becc4c8c7ebd17455e89736253e010dfd7c70234",
+          "indexed_sha256": "bce9db88b036c72d414f7cc1b4ead1d07fb863ece7854aab5c0b0fab5145132a",
+          "opaque_pixels": 1678,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 31,
+          "asset": "bdark-atlas-3.png",
+          "sample": [
+            70,
+            55,
+            362,
+            252
+          ],
+          "content": [
+            0,
+            0,
+            53,
+            37
+          ],
+          "art_sha256": "3e5d965aa61cad96e8071bd112486afec1da776e385e135ce5acb647674a83c7",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "f6420351fd5fa8bd4167333f6dae59df95084a688372093a2d9ea097715dd51f",
+          "padded_sha256": "65995e3d528b26ff02c0391695af4e4bfe56eafc3e39f7a656891b9d4b21cc28",
+          "writes_sha256": "de6adf5808df9b0d2e9e020472418bb508ea63b00864f7c5d445e0034de1a2b1"
+        },
+        {
+          "research_id": 33,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 32,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 512,
+          "data_part3_offset": 22594,
+          "encoded_length": 414,
+          "other_header_fields": [
+            228,
+            149
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ebbd3457986103ba6d9b3ca0b21601c0d3df837ca37386dea0e95faf596c04ee",
+          "indexed_sha256": "b0886d4e8fd0aca7448e3a000a5f4db6e04daf8c0d4b2dc7d2eb6e419a993ba9",
+          "opaque_pixels": 440,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 33,
+          "asset": "bdark-atlas-3.png",
+          "sample": [
+            546,
+            82,
+            699,
+            242
+          ],
+          "content": [
+            0,
+            0,
+            23,
+            27
+          ],
+          "art_sha256": "3e5d965aa61cad96e8071bd112486afec1da776e385e135ce5acb647674a83c7",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "dad5425a50145d8d8a84f3e213e2145f5f5558b5ea2ec4b0cb8a36aa5bbb2704",
+          "padded_sha256": "718281cbe425b9911072e5ed462f076d4f3bbe948c4e0f3f87f9c67c355daf61",
+          "writes_sha256": "34e683f41f2ba227b1ccb3093a17ae3127b251311d3839080806a7090e0e3cbf"
+        },
+        {
+          "research_id": 34,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 33,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 528,
+          "data_part3_offset": 23008,
+          "encoded_length": 420,
+          "other_header_fields": [
+            252,
+            149
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f44d35f2a9aeadd702bdf254c9bae2edc50fbfcf7957f1cf4995ed57aa737f40",
+          "indexed_sha256": "803fb5dbe85e617dbb4a5e2cfe14b66a80d112b38b9292e9a7a773778d187221",
+          "opaque_pixels": 470,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 34,
+          "asset": "bdark-atlas-3.png",
+          "sample": [
+            935,
+            80,
+            1092,
+            245
+          ],
+          "content": [
+            0,
+            1,
+            22,
+            27
+          ],
+          "art_sha256": "3e5d965aa61cad96e8071bd112486afec1da776e385e135ce5acb647674a83c7",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "64a80747fef82f798c02145da424d20461161ce7d1d39ea306bde6ccf77e9955",
+          "padded_sha256": "1deedcd8e96bb87533a4b145162bae524aeab2f39a855e493ab83bfc5e7c9cc5",
+          "writes_sha256": "4af91867cfa5a86afe47fdd39d2c1d888d91c91d31b19fd85ea18f53ac927718"
+        },
+        {
+          "research_id": 35,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 34,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 544,
+          "data_part3_offset": 23428,
+          "encoded_length": 466,
+          "other_header_fields": [
+            276,
+            149
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "61db2230010c2a4783aad8405f2af449b0644440d1a888174ff3715ca9543b46",
+          "indexed_sha256": "c268e0580bbb451ef43881e202e74b7be82352d1f318fec1c1a12c6583cf8877",
+          "opaque_pixels": 593,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 35,
+          "asset": "bdark-atlas-3.png",
+          "sample": [
+            133,
+            309,
+            287,
+            483
+          ],
+          "content": [
+            0,
+            0,
+            23,
+            27
+          ],
+          "art_sha256": "3e5d965aa61cad96e8071bd112486afec1da776e385e135ce5acb647674a83c7",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "82efe0450ff8e65f7186154d72f470bafd1729e54ab6197a4572476cbd69076c",
+          "padded_sha256": "c763d5130132d872673e506429d188d70540c6910a823e5379c55e434bc45d39",
+          "writes_sha256": "61f7f84ac08ab40b8955c752f9a3f5c153c0e271498ad351036e0b6122f97b64"
+        },
+        {
+          "research_id": 36,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 35,
+          "size": [
+            44,
+            22
+          ],
+          "header_part1_offset": 560,
+          "data_part3_offset": 23894,
+          "encoded_length": 630,
+          "other_header_fields": [
+            158,
+            121
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "4596fba48cd8d4e9ad772342aa8c7490bd31cc73af52bf9f4bcd305ed6ff8086",
+          "indexed_sha256": "6ed807fc824f4fe1e3c82f53fcdd608edc589380fc27baaca7be30ff1841acff",
+          "opaque_pixels": 507,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 36,
+          "asset": "bdark-atlas-3.png",
+          "sample": [
+            487,
+            329,
+            762,
+            486
+          ],
+          "content": [
+            0,
+            0,
+            44,
+            21
+          ],
+          "art_sha256": "3e5d965aa61cad96e8071bd112486afec1da776e385e135ce5acb647674a83c7",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "84681894080d1b7c0f6dd69d45f0f9321d0901fd03f21dbfdedc85b773055bb2",
+          "padded_sha256": "f3cfc9aae4911eedb7028209de5c9aac4dd264edeebfbd13096db2b2c6c77aff",
+          "writes_sha256": "6df3e27a7af70156694a39629d1f89f006a52c1784a7eb13a8cd78d30c64da21"
+        },
+        {
+          "research_id": 37,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 36,
+          "size": [
+            44,
+            22
+          ],
+          "header_part1_offset": 576,
+          "data_part3_offset": 24524,
+          "encoded_length": 508,
+          "other_header_fields": [
+            203,
+            121
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "831a15f6fb3348dcfeb140fb58fa5526287740488e8e60e7ca6b725014a51d73",
+          "indexed_sha256": "5f4a206a15cbc1e75023f2838fddff4b649c573dbb9a2d67abc45e24dbb931dc",
+          "opaque_pixels": 672,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 37,
+          "asset": "bdark-atlas-3.png",
+          "sample": [
+            897,
+            342,
+            1175,
+            480
+          ],
+          "content": [
+            0,
+            0,
+            44,
+            22
+          ],
+          "art_sha256": "3e5d965aa61cad96e8071bd112486afec1da776e385e135ce5acb647674a83c7",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "47227e47fa381ec775fd32b4060199be2e9ebe8a4d24f81c86dbd0b3aed83503",
+          "padded_sha256": "1785377b5dbe20cf31114f502d66ca000e2858f1c17896254d617acf5844f43c",
+          "writes_sha256": "87cada3b13d86e2d9767ca9977c0fd5d9a10fc95e7698e516550e896d5b5a483"
+        },
+        {
+          "research_id": 38,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 37,
+          "size": [
+            53,
+            37
+          ],
+          "header_part1_offset": 592,
+          "data_part3_offset": 25032,
+          "encoded_length": 1187,
+          "other_header_fields": [
+            27,
+            75
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ed33de223455805796e5f19bbb22da1681434322b0a4f3392ed90c648f7acc06",
+          "indexed_sha256": "ffafe9118d3cfe00ca759795527fb0e8248b1ee00d1713e97b656aaa466e16dc",
+          "opaque_pixels": 1048,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 38,
+          "asset": "bdark-atlas-3.png",
+          "sample": [
+            66,
+            533,
+            367,
+            752
+          ],
+          "content": [
+            0,
+            0,
+            53,
+            37
+          ],
+          "art_sha256": "3e5d965aa61cad96e8071bd112486afec1da776e385e135ce5acb647674a83c7",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "a5a616be7008657c410427cf3447051e5697e20c9549444a796ceb087f7327ca",
+          "padded_sha256": "082eb2b937ab7813ad9db636ace71df6ecf725a2858b4850ac6940aa139e1550",
+          "writes_sha256": "9187deaef10beb0a621a110027c4ba6f1aa32eb67518325b5a641d6b8b49228d"
+        },
+        {
+          "research_id": 39,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 38,
+          "size": [
+            53,
+            37
+          ],
+          "header_part1_offset": 608,
+          "data_part3_offset": 26219,
+          "encoded_length": 1500,
+          "other_header_fields": [
+            81,
+            75
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "e2be5fabade425ad7b77439432efbf029fd438f16c51e8801a2b8e43d4c5eb38",
+          "indexed_sha256": "4bc9ccafd805320109db76d982f13eee7c8e4d941820df3be5b7ee1cc93557da",
+          "opaque_pixels": 1412,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 39,
+          "asset": "bdark-atlas-3.png",
+          "sample": [
+            469,
+            533,
+            785,
+            749
+          ],
+          "content": [
+            0,
+            0,
+            53,
+            37
+          ],
+          "art_sha256": "3e5d965aa61cad96e8071bd112486afec1da776e385e135ce5acb647674a83c7",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "2ee20aab2c69ffceadf10bfbd10911e489d2e3d9c5dbcf947f8a9f18bfbfb7fc",
+          "padded_sha256": "2546bbf174b454b7507ed6a08fdb9db0fb7aac5defa76326c133b002758b5adf",
+          "writes_sha256": "c898a6e65fbed1f52d68b051088d7ff94c0d3bf9ae0f2c74010dc8f3104a875e"
+        },
+        {
+          "research_id": 40,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 39,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 624,
+          "data_part3_offset": 27719,
+          "encoded_length": 462,
+          "other_header_fields": [
+            282,
+            83
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "389c308be29ec32ab3bcbed3af2c905aa1653dce9b43515bf0cb1104c0e54e4f",
+          "indexed_sha256": "6c6c44fe010d1a588d1ce20ab1554d9aaef10bd76b8a313fb42b9f163b95d6f9",
+          "opaque_pixels": 459,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 40,
+          "asset": "bdark-atlas-3.png",
+          "sample": [
+            928,
+            569,
+            1119,
+            746
+          ],
+          "content": [
+            0,
+            0,
+            23,
+            25
+          ],
+          "art_sha256": "3e5d965aa61cad96e8071bd112486afec1da776e385e135ce5acb647674a83c7",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "d8bfed607685ce57d8fbc0e4d3001eea02a4352df223caa6d079f50acb0f4bd8",
+          "padded_sha256": "0cdca7623a24f617d06e4e23e8af75c94cad9e9e947ea4689b6af5f493ec2f6b",
+          "writes_sha256": "2404a66b8de298ae7d6b5f559741a569007cd43ef260ddd24dc13147783819c8"
+        },
+        {
+          "research_id": 41,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 40,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 640,
+          "data_part3_offset": 28181,
+          "encoded_length": 514,
+          "other_header_fields": [
+            282,
+            111
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "a7ca76ab1a826dfbf970cef6366afbfd99bff0921bfa3788b8f7fbed1d7bbda0",
+          "indexed_sha256": "d0a0c40f81b513b71c5dba6def2f7c79abfe4b186b538c77366253095465f3d7",
+          "opaque_pixels": 507,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 41,
+          "asset": "bdark-atlas-3.png",
+          "sample": [
+            125,
+            833,
+            295,
+            988
+          ],
+          "content": [
+            0,
+            1,
+            23,
+            27
+          ],
+          "art_sha256": "3e5d965aa61cad96e8071bd112486afec1da776e385e135ce5acb647674a83c7",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "872caed26f76847446fa7d18004702251691f60ce226f68c7fda84319c0cb25e",
+          "padded_sha256": "1a5fb7fd73f3870c87ba56e24ccf8472bf7b87fccd45dd2c72e382d44a54d83c",
+          "writes_sha256": "b0adf3e6e8fba4dcfa06bcacadab8078b4b931d093c04ab6421987f2d726543b"
+        },
+        {
+          "research_id": 42,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 41,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 656,
+          "data_part3_offset": 28695,
+          "encoded_length": 579,
+          "other_header_fields": [
+            306,
+            111
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "5516c88c66aa2e1b8ff6872241085a9c35c1d2432aa210514333cd942a665dfb",
+          "indexed_sha256": "4ee9c2b6e0b1105ecb9805a26445a781d03266a2027246d8553eb1eabe3a59c1",
+          "opaque_pixels": 546,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 42,
+          "asset": "bdark-atlas-3.png",
+          "sample": [
+            543,
+            831,
+            712,
+            992
+          ],
+          "content": [
+            0,
+            0,
+            23,
+            27
+          ],
+          "art_sha256": "3e5d965aa61cad96e8071bd112486afec1da776e385e135ce5acb647674a83c7",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "dc5975341310afb49ca50a1d53b4f9921da2ab5e2f3291dad2564d095e9575f7",
+          "padded_sha256": "4b17c6d788aa207b9d3988a6803d4aabfb0f1629db872e0f156dff273488f8cf",
+          "writes_sha256": "ba82d6eb33bd0fa5407284337635fd84a2ba1c9e798b18520b4d575a1edb4976"
+        },
+        {
+          "research_id": 43,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 42,
+          "size": [
+            53,
+            37
+          ],
+          "header_part1_offset": 672,
+          "data_part3_offset": 29274,
+          "encoded_length": 1039,
+          "other_header_fields": [
+            27,
+            37
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f46c8d57a8c89b6910a2b8d0b3ef8db56e3e972b23a1908abc25978c0951ce3c",
+          "indexed_sha256": "1ead1f08a5d1163424cb23e5dbe8fae27e1b049bca25eea2e00e82b3d82d3fb0",
+          "opaque_pixels": 848,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 43,
+          "asset": "bdark-atlas-3.png",
+          "sample": [
+            881,
+            815,
+            1168,
+            1024
+          ],
+          "content": [
+            1,
+            0,
+            53,
+            36
+          ],
+          "art_sha256": "3e5d965aa61cad96e8071bd112486afec1da776e385e135ce5acb647674a83c7",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "dd19db2a0a862893e1028031b20ce39aa6f6b0747f085eb6156f778cf580019c",
+          "padded_sha256": "5d05b0f2f5d85b4d9381f95df32638730f7c7d6c25d3639b796a3306260f16af",
+          "writes_sha256": "35543042eaef786dbd865c1e0cfa3cb4047c7f7a5296e5c4456cf734267db08d"
+        },
+        {
+          "research_id": 44,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 43,
+          "size": [
+            44,
+            22
+          ],
+          "header_part1_offset": 688,
+          "data_part3_offset": 30313,
+          "encoded_length": 488,
+          "other_header_fields": [
+            23,
+            98
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "41d22bdf91852e2cf2cdb0ed6e1c017de994fb6b076adcc04e586ea40cdf1731",
+          "indexed_sha256": "a238e69f80bedeb91cb82b02a48ed2eddc8acad9cee9c114efd4636fb5c0a236",
+          "opaque_pixels": 369,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 44,
+          "asset": "bdark-atlas-3.png",
+          "sample": [
+            71,
+            1079,
+            354,
+            1211
+          ],
+          "content": [
+            0,
+            1,
+            44,
+            22
+          ],
+          "art_sha256": "3e5d965aa61cad96e8071bd112486afec1da776e385e135ce5acb647674a83c7",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "0632ce14b838a597bc74b730b5a11e215a969356ebd4f936117c3c49bb175db4",
+          "padded_sha256": "eeb689d038500fc95dd40536b2a93b5a884688dd973f5f8c6909208a54691687",
+          "writes_sha256": "676044925b6b149af46b92f246cf8783f8cdbce547a8cee87696a8021ea0a41d"
+        },
+        {
+          "research_id": 45,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 44,
+          "size": [
+            23,
+            27
+          ],
+          "header_part1_offset": 704,
+          "data_part3_offset": 30801,
+          "encoded_length": 393,
+          "other_header_fields": [
+            306,
+            83
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "88ed730caf18a00c37f2eb9e2d77d773c97ba02b10c94e5e9a9d2990417817b4",
+          "indexed_sha256": "2b90c998ba91395ebcf7902bbed533a69186e96fff2939e0bd98a051644e09e5",
+          "opaque_pixels": 262,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 45,
+          "asset": "bdark-atlas-3.png",
+          "sample": [
+            502,
+            1056,
+            712,
+            1226
+          ],
+          "content": [
+            0,
+            0,
+            23,
+            27
+          ],
+          "art_sha256": "3e5d965aa61cad96e8071bd112486afec1da776e385e135ce5acb647674a83c7",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "1a9996aed5110f9be04ea90706328e48d9f7fa8ec2f45c215459db2f10674145",
+          "padded_sha256": "bd67fdc5f84bf7ec561bc8d7007559216c30806c125a163b5e2f5c43799c0a6b",
+          "writes_sha256": "a5bafaac53b0c9a2b1472b18cdc94747b86e7548c6d3bfa5131d6f9b1004d38e"
+        },
+        {
+          "research_id": 46,
+          "file": "BDARK.SS",
+          "file_sha256": "3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402",
+          "ordinal": 45,
+          "size": [
+            75,
+            48
+          ],
+          "header_part1_offset": 720,
+          "data_part3_offset": 31194,
+          "encoded_length": 1253,
+          "other_header_fields": [
+            266,
+            198
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "c1c1753bbe299c701cdcdb95a1558e3a0d3943d372d66e7c55478bb6b8f07c3c",
+          "indexed_sha256": "01e1f5286ba09e7d532b2cc654d2812226d71cfd38eb009714947d23c3876ede",
+          "opaque_pixels": 1100,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 46,
+          "asset": "bdark-atlas-3.png",
+          "sample": [
+            835,
+            1024,
+            1210,
+            1248
+          ],
+          "content": [
+            1,
+            0,
+            75,
+            48
+          ],
+          "art_sha256": "3e5d965aa61cad96e8071bd112486afec1da776e385e135ce5acb647674a83c7",
+          "art_size": [
+            1229,
+            1280
+          ],
+          "palette_sha256": "c51ec3ac64497b37e34802d8ac03411204242bdf85036bbbedaaf9fb92f07b14",
+          "padded_sha256": "aafda359dec9496268e34c46507e00bd0de9a3f5eca6eda7a426050a13588a8e",
+          "writes_sha256": "955a157cf97febf6d521496619c17bf5a255955d5d277ded5b035565d2332469"
+        }
+      ],
+      "generation_tool": "built-in image_gen",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "Original generated PNG and alpha retained; bbox selects raw sample only, original source253 geometry remains.",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog"
     }
   }
 }

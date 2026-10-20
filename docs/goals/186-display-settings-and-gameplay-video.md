@@ -677,3 +677,7 @@ R100沿R84既有工作區，以[其餘片頭動畫正常入口DRAFT](../spec/069
 ### 2026-10-20片頭與人物接線
 
 依使用者最新授權，四位MYR頭像、十九個製作名單紙帶與七十二個OPENBONK／OPENGUY動畫來源以正式來源fixture顯示通過。十張原PNG及清冊入Git；501來源連結、341張生成原PNG，既有317筆限定CONFORMED保持，新184筆DISPLAY-PASS。未新增正常玩家路徑或原版精確對拍聲明，全量HD仍在進行。入口為規格069、graphics/manifest.json及docs/hd-source-catalog.json。
+
+### BDARK建築與景物補齊
+
+[規格069 R124](../spec/069-hd-menu-background-and-textures.md#r124-bdark四十五來源顯示通過)補上45個多色建築與景物來源，三張生成原PNG及alpha已列入graphics，正式載入與來源fixture顯示通過。現行385原PNG、986來源連結；R118將這批列成單色遮罩的分組已更正。原生清冊其餘491個非空來源分為481字形／文字與10單色幾何，其他格式及程式繪圖仍待核對；不據此宣稱全量HD或完整五語完成。

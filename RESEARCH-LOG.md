@@ -7329,3 +7329,10 @@ R120來源核對補充：印字完成後，正文安全區有427個人物後畫�
 已證實：R121同一正常士兵頁的四份完整側欄原文快照仍在快取，回退由已驗MSS1覆蓋原字造成。只允許完整人物來源的已知差異後，日期、金錢／稅率與行動恢復；座標列另碰到y83的教學框上緣，不能用MSS來源放寬。原始快照指紋a9baffb1841b256f55074da6614647f8a8bdd2c2152d848ebc51c8f7fd4594c8，原版CPU、完整RAM、VGA、DAC與既有8a046c4c…基準相同。
 
 已證實：Noto實際字模常比共用CJK基準上緣高1px；逐行以文字加陰影的總墨跡量高度並對齊原版上緣，可在原6／5／5／6邏輯像素高度內保留較大字級。繁中為22／18／18／21px，其他語言由獨立量測收據保存。原版檔名、雜湊、dosgolem82a14b2、20-bit線性Main與VGA地址、四個原版解碼fixture及兩個來源fixture的界線見規格060 R122 READY。這是前端來源與字模核對，未新增遊戲內部逆向。
+
+## 2026-10-20 R124 BDARK素材分組勘誤與既有來源接線
+
+- confirmed檔案事實：BDARK.SS共14203bytes，SHA-256為3af438d23db8331eb6fe2268207fbece082775f3f7b68fb998cebc439d0b9402；固定mpskit 8c30544b51d1b4ab68f3a465784239c24b660e24，來源清冊340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18，Python3.11.2／Pillow9.4.0；既有原版輸入唯讀。位址空間為MADSPACK解壓part1標頭與part3 encoded位移，不是EXE或RAM。46幀中第31幀全透明，其餘45有5至22種非透明索引。
+- R118把45個BDARK非空來源併為單色遮罩的分組錯誤，保留舊記錄並於此勘誤。現行decoded-public-r3/pixels以四位數research ID核對全部1533張SHA-256；舊r49目錄的ID在COLONY.PIK加入後不同，不混用。BDARK參考圖有建築、碼頭、籬笆與林木，不以檔名推論停用狀態或正式遊戲用途。
+- 新三張內建image_gen原PNG及原alpha完整保存。完整提示、參考指紋、來源與取樣在graphics/manifest.json；原版參考只留本機。私有來源fixture SHA-256為fa884813b24ef8c1366f07947aaccc612b6decdc65c44ab8493067bf67ac7ede，提供來源記錄、鏡像可見索引與畫面外游標；原版0D46:000A及三個既有writer的實際執行沿既有契約，使用dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013與Go1.26.7。未新增逆向切片或原版規則。
+- 正式fb9c752cbe7f5fef5455499159e133b97626f3b0cc07d99951da7706cafbc0b9已完成建置、go vet、素材載入與45張來源fixture可見顯示，記DISPLAY-PASS。這是supplied source fixture而非正常BDARK玩家路徑、原版VGA發布指令或原版精確對拍。當次驗證與分組入口r124-bdark-display-close-final.json及r124-final-native-partition-r1.json位於既有R84工作根，原版bytes只留本機。
