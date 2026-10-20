@@ -35188,6 +35188,1706 @@
           "writes_sha256": "1979da39904a675b9bb764cdc7a9a4d142717dafff69f899f2629db91da729b2"
         }
       ]
+    },
+    "national-banners.png": {
+      "sha256": "5cb29f0fd8d7c965a5b53e32d2bdfe6d2f84cbadab3a50a8a02f5f8bd4c4dc2d",
+      "bytes": 1074354,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: style-transfer. Create one production raster atlas for the Colonization HD display layer in refined fine pixel art. Image1 gives EXACT composition and subjects; Image2 is STYLE ONLY, use its crisp small pixel clusters, restrained highlights and readable cloth material, do not copy scenery. Exactly THREE equal columns and THREE equal rows on a square TRANSPARENT canvas, first EIGHT cells occupied, final cell empty. Each occupied cell contains the COMPLETE source group from Image1, including BOTH separate hanging banner strips, centered together and keeping their relative spacing and proportions. Do not join them into one flag or omit a strip. Rows read left to right: 1 Dutch pair state1, 2 Dutch pair state2, 3 English royal quartered pair state1, 4 English pair state2, 5 French dark blue fleur-de-lis pair state1, 6 French pair state2, 7 Spanish red/white quartered heraldic pair state1, 8 Spanish pair state2. Repaint the exact colors, folds, crests, cloth edges and pose from Image1 as detailed coherent fresh fine pixel art. Keep ragged lower tips only where present. Generous transparent margin inside each cell and between all groups. The vivid magenta background and small black reference labels are NOT art and must be completely removed. No text, captions, labels, grid, added poles, people, scenes, extra emblems, blur, vector-flat style, photography or 3D. Both cloth strips in each group should be opaque within their silhouettes; transparent exterior only. Preserve the source layout literally.",
+      "generation_file": "exec-76547ea4-387f-41e1-b3b9-13103d4a8155.png",
+      "reference_sha256": "5537fa60d2778f815ba9c36ab5f88812b965d28f9b73d7e910cb1ecb1b09d9d6",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "column_row_boundaries": {
+        "0": [
+          0,
+          418,
+          836,
+          1254
+        ],
+        "1": [
+          0,
+          418,
+          836,
+          1254
+        ],
+        "2": [
+          0,
+          418,
+          836,
+          1254
+        ]
+      },
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 820,
+          "file": "DUTCH1.SS",
+          "file_sha256": "fa73ca32b912033e9effd1a381eb7e26f913be4d1e0de1e838ddf48b8cb9cc8e",
+          "ordinal": 0,
+          "size": [
+            175,
+            120
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 3313,
+          "other_header_fields": [
+            121,
+            119
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "c29f7082dcdf3142b6a719469ad1a71c1af0c6e1e19761ccd3bed7d775385709",
+          "indexed_sha256": "69e36a210648905a7be3d640ed3647a6126b851b0d4ea8615b22c093f973e143",
+          "opaque_pixels": 7857,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 820,
+          "asset": "national-banners.png",
+          "sample": [
+            62,
+            67,
+            369,
+            379
+          ],
+          "content": [
+            0,
+            0,
+            175,
+            120
+          ],
+          "art_sha256": "5cb29f0fd8d7c965a5b53e32d2bdfe6d2f84cbadab3a50a8a02f5f8bd4c4dc2d",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "01f31777f5daf3108e1f2135498c376cad63627c5114c78880c50aecf7e39c04",
+          "palette_sha256": "0fca10c4feac055052d41f5b8c509e5b9b9bee55a2e0625d09ce64352723c300",
+          "writes_sha256": "ad5dc845dd34db5fe26e0ea47ce3090b66facd727767eea41a475d2835eb6fd2",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                52,
+                91
+              ],
+              "art": [
+                62,
+                69,
+                199,
+                304
+              ]
+            },
+            {
+              "native": [
+                52,
+                0,
+                124,
+                91
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                124,
+                0,
+                175,
+                91
+              ],
+              "art": [
+                243,
+                67,
+                369,
+                310
+              ]
+            },
+            {
+              "native": [
+                0,
+                91,
+                52,
+                120
+              ],
+              "art": [
+                62,
+                304,
+                199,
+                379
+              ]
+            },
+            {
+              "native": [
+                52,
+                91,
+                124,
+                120
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                124,
+                91,
+                175,
+                120
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 821,
+          "file": "DUTCH2.SS",
+          "file_sha256": "00a82b40b240f9d0fdd8624d20896d712f482e3d6ddbe548998d0ce3c16b3f4d",
+          "ordinal": 0,
+          "size": [
+            170,
+            131
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 3313,
+          "other_header_fields": [
+            140,
+            130
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f8cafb6ae0a97640dd269e1c174342831b02196fad75cc792c926ed183228134",
+          "indexed_sha256": "bab61c355049c1e2aed1f0f159102c28edaa960434136acf4944d876a7c4c5b5",
+          "opaque_pixels": 8203,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 821,
+          "asset": "national-banners.png",
+          "sample": [
+            482,
+            64,
+            770,
+            384
+          ],
+          "content": [
+            0,
+            0,
+            170,
+            131
+          ],
+          "art_sha256": "5cb29f0fd8d7c965a5b53e32d2bdfe6d2f84cbadab3a50a8a02f5f8bd4c4dc2d",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "2430fe2be3fb82e3716bba18acced2c296fcf1f7e950ae17dc8a2ee264a0bd15",
+          "palette_sha256": "da1826c2141e791ecee2fd044d60055b14337ab91683b062db3dff40d30b4329",
+          "writes_sha256": "6af091074dbae2e81cbf8a6345a8844ffb20efd3e7adbbd3bd93b5715390f3ab",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                50,
+                95
+              ],
+              "art": [
+                482,
+                64,
+                610,
+                296
+              ]
+            },
+            {
+              "native": [
+                50,
+                0,
+                119,
+                95
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                119,
+                0,
+                170,
+                95
+              ],
+              "art": [
+                649,
+                69,
+                770,
+                314
+              ]
+            },
+            {
+              "native": [
+                0,
+                95,
+                50,
+                131
+              ],
+              "art": [
+                482,
+                296,
+                610,
+                384
+              ]
+            },
+            {
+              "native": [
+                50,
+                95,
+                119,
+                131
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                119,
+                95,
+                170,
+                131
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 822,
+          "file": "ENGLND1.SS",
+          "file_sha256": "94863567226b73cc9673b1ebf71745069a50320f8adc7b10d54eb09c5393034a",
+          "ordinal": 0,
+          "size": [
+            172,
+            122
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 7258,
+          "other_header_fields": [
+            118,
+            121
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "085f0e3549b687cc9335172201a01c0ca7f13d89a57671fa1bd4a4a969a77d59",
+          "indexed_sha256": "100483ee2f8a51f215a622b2cf0d2bb9b1e5c6647ea143b0c6b5929614e6ffe8",
+          "opaque_pixels": 7884,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 822,
+          "asset": "national-banners.png",
+          "sample": [
+            895,
+            66,
+            1193,
+            384
+          ],
+          "content": [
+            0,
+            0,
+            172,
+            122
+          ],
+          "art_sha256": "5cb29f0fd8d7c965a5b53e32d2bdfe6d2f84cbadab3a50a8a02f5f8bd4c4dc2d",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "4014bc3673f194735bfb2d72c38649b222bdb1c58ff242a581e0a79b59e116cc",
+          "palette_sha256": "d97c0ab928f872b9088f82b2fbb85e2b47d4a4dcb93860dcfc18ad940b800d1c",
+          "writes_sha256": "1cb2aa58e71bf94f41b2966c20aac08fab366ec9f2f2842a6b6bb181cc76d876",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                52,
+                87
+              ],
+              "art": [
+                895,
+                66,
+                1027,
+                293
+              ]
+            },
+            {
+              "native": [
+                52,
+                0,
+                123,
+                87
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                123,
+                0,
+                172,
+                87
+              ],
+              "art": [
+                1067,
+                69,
+                1193,
+                318
+              ]
+            },
+            {
+              "native": [
+                0,
+                87,
+                52,
+                122
+              ],
+              "art": [
+                895,
+                293,
+                1027,
+                384
+              ]
+            },
+            {
+              "native": [
+                52,
+                87,
+                123,
+                122
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                123,
+                87,
+                172,
+                122
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 823,
+          "file": "ENGLND2.SS",
+          "file_sha256": "e7749d4f026f46e400ffd05b6857eeabdcdfdbbda09adb314006295f28fe2fcf",
+          "ordinal": 0,
+          "size": [
+            174,
+            133
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 7658,
+          "other_header_fields": [
+            139,
+            132
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "b54d96353b9f3c5639b3f55ea5ad72c7293d4a1f2b319bcb8d6985c0ed82814a",
+          "indexed_sha256": "0df7a63b0c8a93657a35513131d4757d23d44d724421e7d0e7acce6403821aca",
+          "opaque_pixels": 8452,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 823,
+          "asset": "national-banners.png",
+          "sample": [
+            64,
+            458,
+            367,
+            786
+          ],
+          "content": [
+            0,
+            0,
+            174,
+            133
+          ],
+          "art_sha256": "5cb29f0fd8d7c965a5b53e32d2bdfe6d2f84cbadab3a50a8a02f5f8bd4c4dc2d",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "95dd12e34598460a9585adcbea92f61a49888867fc5a414a14526fcef2562325",
+          "palette_sha256": "a2b8f35ae37852ac205ef0c0f0da1c26e19e17242222a60e7e07b587eb1d442f",
+          "writes_sha256": "0959373589152df566881232fe1af4228a4cb8d8b510c32995c88c24b2e3026f",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                54,
+                96
+              ],
+              "art": [
+                64,
+                458,
+                194,
+                695
+              ]
+            },
+            {
+              "native": [
+                54,
+                0,
+                120,
+                96
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                120,
+                0,
+                174,
+                96
+              ],
+              "art": [
+                242,
+                459,
+                367,
+                717
+              ]
+            },
+            {
+              "native": [
+                0,
+                96,
+                54,
+                133
+              ],
+              "art": [
+                64,
+                695,
+                194,
+                786
+              ]
+            },
+            {
+              "native": [
+                54,
+                96,
+                120,
+                133
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                120,
+                96,
+                174,
+                133
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 825,
+          "file": "FRANCE1.SS",
+          "file_sha256": "2777bbaf66536e5cf0e260b6b3faded4eb84776e74f003821b87e599a4a52601",
+          "ordinal": 0,
+          "size": [
+            178,
+            120
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 5602,
+          "other_header_fields": [
+            119,
+            119
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "024e538656530238fc645a103ef16ed0404bd3af8707117333bb49da94072ece",
+          "indexed_sha256": "7f7ef2c7b67ee8bedd27614bb85897fb7907ca07e340dc431910d832b699eb2e",
+          "opaque_pixels": 8075,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 825,
+          "asset": "national-banners.png",
+          "sample": [
+            475,
+            460,
+            776,
+            777
+          ],
+          "content": [
+            0,
+            0,
+            178,
+            120
+          ],
+          "art_sha256": "5cb29f0fd8d7c965a5b53e32d2bdfe6d2f84cbadab3a50a8a02f5f8bd4c4dc2d",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "ecb9312ac00881f620dcab84f7297fe2642de2cc4d8d649d421e63521a888a30",
+          "palette_sha256": "922ad9e7baa39849173b6efd8e7227dcd800f79f3474b23bc5a56347516ebd4a",
+          "writes_sha256": "92b09f439b11bda14fae2db3f4eaf39d91c6ec572f76a322d39f48ea8409aeee",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                54,
+                89
+              ],
+              "art": [
+                475,
+                463,
+                609,
+                696
+              ]
+            },
+            {
+              "native": [
+                54,
+                0,
+                126,
+                89
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                126,
+                0,
+                178,
+                89
+              ],
+              "art": [
+                653,
+                460,
+                776,
+                690
+              ]
+            },
+            {
+              "native": [
+                0,
+                89,
+                54,
+                120
+              ],
+              "art": [
+                475,
+                696,
+                609,
+                777
+              ]
+            },
+            {
+              "native": [
+                54,
+                89,
+                126,
+                120
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                126,
+                89,
+                178,
+                120
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 826,
+          "file": "FRANCE2.SS",
+          "file_sha256": "2d672412eb074a011ea611139a5399f94982e1369d236acc6810f0ad5fccbb51",
+          "ordinal": 0,
+          "size": [
+            176,
+            131
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 5894,
+          "other_header_fields": [
+            137,
+            130
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "61883056aaff0c49395d858eda041bc62028529f5f3a0c9e0655e52ccf4f4703",
+          "indexed_sha256": "9da3ac12a6bdc465e17a1e1247964dae55a8ed56585ea16619e057302e871aad",
+          "opaque_pixels": 8553,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 826,
+          "asset": "national-banners.png",
+          "sample": [
+            893,
+            459,
+            1195,
+            777
+          ],
+          "content": [
+            0,
+            0,
+            176,
+            131
+          ],
+          "art_sha256": "5cb29f0fd8d7c965a5b53e32d2bdfe6d2f84cbadab3a50a8a02f5f8bd4c4dc2d",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "87bc5e41d3de65a4d190a6f44b2828711fed54a45ce510d73dc4b90d1b317106",
+          "palette_sha256": "5d9cb07e71aef0a856ba04dd339e2d9223e8f66197b31cd2bff72b1f33de91a6",
+          "writes_sha256": "3918b43a96f4e243009fddad93491e58976b6911e6a64cb54995c05c7ae9ffaf",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                55,
+                94
+              ],
+              "art": [
+                893,
+                460,
+                1022,
+                687
+              ]
+            },
+            {
+              "native": [
+                55,
+                0,
+                122,
+                94
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                122,
+                0,
+                176,
+                94
+              ],
+              "art": [
+                1073,
+                459,
+                1195,
+                698
+              ]
+            },
+            {
+              "native": [
+                0,
+                94,
+                55,
+                131
+              ],
+              "art": [
+                893,
+                687,
+                1022,
+                777
+              ]
+            },
+            {
+              "native": [
+                55,
+                94,
+                122,
+                131
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                122,
+                94,
+                176,
+                131
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 1475,
+          "file": "SPAIN1.SS",
+          "file_sha256": "dd710ffea445713ec61b6f83219a906345ee86f9241693b4476341f5de30da86",
+          "ordinal": 0,
+          "size": [
+            177,
+            121
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 4999,
+          "other_header_fields": [
+            123,
+            120
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "34a1b2d7a80a44cd1b78047f7a8a22e451d05311b51f121c194b4262aea34a70",
+          "indexed_sha256": "59fe40000574a155ea7a2662a886221c3ac9c450990550396edf23564bbbc517",
+          "opaque_pixels": 7519,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1475,
+          "asset": "national-banners.png",
+          "sample": [
+            62,
+            852,
+            369,
+            1176
+          ],
+          "content": [
+            0,
+            0,
+            177,
+            121
+          ],
+          "art_sha256": "5cb29f0fd8d7c965a5b53e32d2bdfe6d2f84cbadab3a50a8a02f5f8bd4c4dc2d",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "763ae78407decad10426d41fdd5f0d3ed2d61de835ec8916d56e6afbaca72d91",
+          "palette_sha256": "78d704120b152c8e8d2617a294bb9bb386a63763e5a4d61116a973e632aae6da",
+          "writes_sha256": "1cbf4575187662a313b9f2c454a177f70dcc2bf365bbe754eae609beee5f4535",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                57,
+                89
+              ],
+              "art": [
+                62,
+                852,
+                189,
+                1090
+              ]
+            },
+            {
+              "native": [
+                57,
+                0,
+                124,
+                89
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                124,
+                0,
+                177,
+                89
+              ],
+              "art": [
+                234,
+                852,
+                369,
+                1096
+              ]
+            },
+            {
+              "native": [
+                0,
+                89,
+                57,
+                121
+              ],
+              "art": [
+                62,
+                1090,
+                189,
+                1176
+              ]
+            },
+            {
+              "native": [
+                57,
+                89,
+                124,
+                121
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                124,
+                89,
+                177,
+                121
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 1476,
+          "file": "SPAIN2.SS",
+          "file_sha256": "a5dae565f5fa6e2f46c35029564fbab761af64bcfcee4b2909e22dae28f55d2c",
+          "ordinal": 0,
+          "size": [
+            170,
+            128
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 4838,
+          "other_header_fields": [
+            144,
+            127
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "1cd318c726fcedbaca01689c8af40244ef801caab7ee59dab4a6c9e3c47fe54b",
+          "indexed_sha256": "a38eae279eb638e8fa4059c71f7021f74e9b0d84c80a943eec76ba67b29ac311",
+          "opaque_pixels": 7844,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1476,
+          "asset": "national-banners.png",
+          "sample": [
+            467,
+            850,
+            785,
+            1176
+          ],
+          "content": [
+            0,
+            0,
+            170,
+            128
+          ],
+          "art_sha256": "5cb29f0fd8d7c965a5b53e32d2bdfe6d2f84cbadab3a50a8a02f5f8bd4c4dc2d",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "f0e185360d6543f11a91a89d70758ccb3ce2772c0c1bdad498b20ac53d60534f",
+          "palette_sha256": "65f749954cd15ea1a1005c0ef12cd91cb12fe4d291abcf26a0aa0cfd1beff550",
+          "writes_sha256": "710393465565428c18334d00a1f8d71abc9f1026db94f36bc9cf990e14832e0f",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                52,
+                94
+              ],
+              "art": [
+                467,
+                850,
+                594,
+                1089
+              ]
+            },
+            {
+              "native": [
+                52,
+                0,
+                118,
+                94
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                118,
+                0,
+                170,
+                94
+              ],
+              "art": [
+                651,
+                853,
+                785,
+                1110
+              ]
+            },
+            {
+              "native": [
+                0,
+                94,
+                52,
+                128
+              ],
+              "art": [
+                467,
+                1089,
+                594,
+                1176
+              ]
+            },
+            {
+              "native": [
+                52,
+                94,
+                118,
+                128
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                118,
+                94,
+                170,
+                128
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "woodcut-scenes.png": {
+      "sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+      "bytes": 2160815,
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: style-transfer. Make ONE production atlas of TEN framed narrative illustrations for Colonization HD. Image1 is the EXACT subject and composition reference. Image2 is STYLE ONLY: refined crisp fine pixel clusters, natural restrained palette, fresh detailed pixel art, no coarse dithering, no smooth painted blur. Square TRANSPARENT canvas with exactly FOUR equal columns and THREE equal rows; first TEN cells occupied, final TWO empty. Each occupied cell contains one complete LANDSCAPE rectangular dark brown framed illustration, centered with generous transparent margins. Keep illustration and frame fully opaque; transparent outside frame only. Follow Image1 literally, preserve people count, action, silhouettes, camera, scene orientation and frame. Ten cells reading order:1 a brown-haired tan-clad man with long gun under a broad tree, dark woodland and distant hut;2 feather-crowned Indigenous leader foreground right with crossed arms, blue-clad companion left, stepped pyramid behind;3 two Indigenous people at left overlooking ochre fields and distant red mountains, two deer at right;4 colonial flag bearer on coastal bluff at sunset with two companions lower right and ocean cliffs;5 two shadowed explorers seen from behind in dense jungle looking toward a distant pale stepped temple beyond a stream;6 busy wooden sailing-ship deck with rigging, mast, barrels, sailors loading cargo, seated/stooping striped-shirt man at front right;7 frontier soldiers carrying long muskets marching right-to-left past plowed land and distant earthworks;8 smoking timber settlement under attack, preserve figures and damaged buildings without new gore;9 nighttime village with two thatched buildings on fire and villagers in foreground, source exact layout;10 three bare-chested Indigenous men with white/red body paint and raised weapons as in source, warm grass behind, no new gore. Remove the reference magenta and labels completely. No text, labels, captions, grid, added people, added symbolic objects, letterforms, watermark, photography, 3D, vector-flat style, blur or speckled holes. Precisely4x3 uniform atlas, 10 separate framed pictures, final2 cells fully transparent.",
+      "generation_file": "exec-d5f66487-e9de-46ca-b22e-12b4e32d3daf.png",
+      "reference_sha256": "0a472843b7190840d940b632dae2a5f1e9bfe989f5f422faa8ca1f4a9c67fe05",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "column_row_boundaries": {
+        "0": [
+          0,
+          362,
+          724,
+          1086
+        ],
+        "1": [
+          0,
+          362,
+          724,
+          1086
+        ],
+        "2": [
+          0,
+          362,
+          724,
+          1086
+        ],
+        "3": [
+          0,
+          362,
+          724,
+          1086
+        ]
+      },
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1490,
+          "file": "WDCUT02.SS",
+          "file_sha256": "88eb1fc5dce56945bbeafdcabc8c36fc4f2ef6498cbcfe2e9ea26568be120eee",
+          "ordinal": 0,
+          "size": [
+            192,
+            113
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 20848,
+          "other_header_fields": [
+            159,
+            152
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ea33b25daab9a3ff68920309262201c44c33a551e399e43a604b353acfbc3adf",
+          "indexed_sha256": "73127793c4f390dcfe45fcf6a2113f0e2a63b847e88a4505138b5bed240eec54",
+          "opaque_pixels": 21696,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1490,
+          "asset": "woodcut-scenes.png",
+          "sample": [
+            12,
+            106,
+            352,
+            352
+          ],
+          "content": [
+            0,
+            0,
+            192,
+            113
+          ],
+          "art_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "padded_sha256": "dae4df10da762d625677845d1b9b52a5460f183fc72e48bc70c7bb68e359e3c4",
+          "palette_sha256": "5949eb7f5fc5bcabdc1e0034001c5eb5bd816f77065c8097659a3297dc9cf98a",
+          "writes_sha256": "e0703b82bce8e578a9672c716a91ed1ec95af26d39e1a7abc90b0e42e58839bc"
+        },
+        {
+          "research_id": 1492,
+          "file": "WDCUT04.SS",
+          "file_sha256": "c35fc3dce54ef90cb88dbfd365c03a96cdcb0c4a143372bb3d718ebfc7eadcc7",
+          "ordinal": 0,
+          "size": [
+            192,
+            113
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 18541,
+          "other_header_fields": [
+            159,
+            152
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "09e7014b602eb85bc6779c851551f3107b2ddb5e8ca874b40122516d4213ed62",
+          "indexed_sha256": "d7d14cecfa4f4b2cc26e8af86fbf1346cc0b25f3f514821d1e23f8978cd0ea22",
+          "opaque_pixels": 21696,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1492,
+          "asset": "woodcut-scenes.png",
+          "sample": [
+            374,
+            106,
+            713,
+            352
+          ],
+          "content": [
+            0,
+            0,
+            192,
+            113
+          ],
+          "art_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "padded_sha256": "af34aff14e90b9a29a862e158e97f6f272338bea0498da0cac08295525fcf0a0",
+          "palette_sha256": "c3b6227d1637b26ce5c6bf6e9d5659bf0a0ca2f4546f45c9ecbf771d5585ebc1",
+          "writes_sha256": "1c1bb122742dee6b6ca13e025ce93bf4d7f0c268da4d632f7900981fe1d3fe4c"
+        },
+        {
+          "research_id": 1493,
+          "file": "WDCUT05.SS",
+          "file_sha256": "a8c9dee07a3151ec5f314ee59d6fcc313877531cd2b9e1383df87cab2e2a9969",
+          "ordinal": 0,
+          "size": [
+            192,
+            115
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 20107,
+          "other_header_fields": [
+            159,
+            154
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "5642093405d6691c148bfcb3162906808bf6a2c10c6dfd7a076c579e031e2132",
+          "indexed_sha256": "2f6d6cb444f9784451bbe5583b055b23afa5f3551c0737086d12d8efbbcc1179",
+          "opaque_pixels": 22080,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1493,
+          "asset": "woodcut-scenes.png",
+          "sample": [
+            735,
+            106,
+            1074,
+            352
+          ],
+          "content": [
+            0,
+            0,
+            192,
+            115
+          ],
+          "art_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "padded_sha256": "5b6441bf634406ca6963602a5708610dfad93fc7c95327293dfc9daf03c8d69a",
+          "palette_sha256": "5e0c880902db2f6da7fc335dd73a7581bdf19adf127284b38c04807387a17163",
+          "writes_sha256": "58660920863414279f64850b910cb71d6c59545a49a368fd5290973d2503f6b5"
+        },
+        {
+          "research_id": 1494,
+          "file": "WDCUT06.SS",
+          "file_sha256": "73d93b97af7ee2d6e578cb37dec2f2349344c67c2d1aa7a4c80c37e6a4274eb4",
+          "ordinal": 0,
+          "size": [
+            192,
+            115
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 19286,
+          "other_header_fields": [
+            159,
+            154
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "3196077127e03492006b254115c36a077a9815458c7b0ec5fb67a1884fccd744",
+          "indexed_sha256": "1bc7ed7e6fac964fb8bb98235cbbea5e08d44febaefc61e0b3c3ef2ac4321cb9",
+          "opaque_pixels": 22080,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1494,
+          "asset": "woodcut-scenes.png",
+          "sample": [
+            1096,
+            106,
+            1436,
+            352
+          ],
+          "content": [
+            0,
+            0,
+            192,
+            115
+          ],
+          "art_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "padded_sha256": "5873598046795900692c57e94727ecbe08096ec7aaab3e252780ce59bdb4d63f",
+          "palette_sha256": "a17dc2fb3c775336c3b37c2a90e630def09cc13dd6445fc132fc62f02a1fc1a6",
+          "writes_sha256": "04db24853afc38d240a74c2ea9ca4df6d76b6167c320a35105f7bbc79f87341e"
+        },
+        {
+          "research_id": 1496,
+          "file": "WDCUT08.SS",
+          "file_sha256": "8cea164b3e93721084f007afdee14dbefb991eaf1fb06ad27dd3851065095a49",
+          "ordinal": 0,
+          "size": [
+            192,
+            115
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 19763,
+          "other_header_fields": [
+            159,
+            154
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "c801893382297f05ed61d9b0fb8735b1e058aeac1b9b7e2840da2cb14199da42",
+          "indexed_sha256": "e831b622ba4096d298384483584fd3e51f634230cfecb4ed5366e6e44745e81a",
+          "opaque_pixels": 22080,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1496,
+          "asset": "woodcut-scenes.png",
+          "sample": [
+            13,
+            420,
+            352,
+            667
+          ],
+          "content": [
+            0,
+            0,
+            192,
+            115
+          ],
+          "art_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "padded_sha256": "4966b90cadc3b0f5417586989bec0335312a1365082e872baa16f4082def6c70",
+          "palette_sha256": "19000de8b705c6f50f86f12c684cb32b249126edc892db59c6233f37aa14504d",
+          "writes_sha256": "94e6a4360d8db0cce439b12929646b82f3b92c2b0444b75dff4fcd1960e1a164"
+        },
+        {
+          "research_id": 1497,
+          "file": "WDCUT09.SS",
+          "file_sha256": "42c552996d8109df0a11cc8bc7c50808d90fd0d293e2334af0b65376e8ece21f",
+          "ordinal": 0,
+          "size": [
+            192,
+            115
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 20933,
+          "other_header_fields": [
+            159,
+            154
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "1ebd6578f0db36168f42f123a3cad609331eeddc484be4e5869e79710963545b",
+          "indexed_sha256": "c147429b02b31bfc6c3b99c294b6ebaf7f064563585f654d30af033ca9125baa",
+          "opaque_pixels": 22080,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1497,
+          "asset": "woodcut-scenes.png",
+          "sample": [
+            374,
+            420,
+            713,
+            668
+          ],
+          "content": [
+            0,
+            0,
+            192,
+            115
+          ],
+          "art_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "padded_sha256": "39c0b74492b8b443999fe39d7fba1514578e0c5d41b3c783aecd9f593dadfec5",
+          "palette_sha256": "713cf199d64fb922105889bda4c3035c56a906e29b45c2d56973d19b8d2b4795",
+          "writes_sha256": "1cacf43047286ea98d94e0ac4291ddec06df99b983a3b89af2bd20034c8d5b18"
+        },
+        {
+          "research_id": 1498,
+          "file": "WDCUT10.SS",
+          "file_sha256": "cc0069717ae741274a624501bc43b4ad739d702e0b386c20b72c5d2fa4219721",
+          "ordinal": 0,
+          "size": [
+            192,
+            113
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 20128,
+          "other_header_fields": [
+            159,
+            152
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "baaae13a644a0d45bec16292282508c14103aa72d688cfcc8cf8dca746e6dca6",
+          "indexed_sha256": "1594fde6ded78d06d81fe7a562a2ca79a003a0791d7e9bc4b94c04deb84459a9",
+          "opaque_pixels": 21696,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1498,
+          "asset": "woodcut-scenes.png",
+          "sample": [
+            735,
+            420,
+            1074,
+            668
+          ],
+          "content": [
+            0,
+            0,
+            192,
+            113
+          ],
+          "art_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "padded_sha256": "22d5dcf7ca9e3c250a4f917268f70a6cc7aaf64eb0b10d90c091881619ac8422",
+          "palette_sha256": "aadad4223d0006ddffb1dac2fe6a4f665390c0b8451ba773f6a86256713a0953",
+          "writes_sha256": "b0a6e91ec7a1c4f8b6c6b43fb52ecf81b831c0fb5148ee8a027aff9f2a781102"
+        },
+        {
+          "research_id": 1499,
+          "file": "WDCUT11.SS",
+          "file_sha256": "2d78be568a530a06c386bb1d9a0dbf03841c3fef74d11072ebdf6f5248d027be",
+          "ordinal": 0,
+          "size": [
+            192,
+            115
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 21463,
+          "other_header_fields": [
+            159,
+            154
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "44bf910878b219be09fff6f6b2dd71fa493a12d4de74173914511a72c4ae0c1d",
+          "indexed_sha256": "b0f8542ab00a8a645f7ca17ea54b45ad2c26e424eb0a8af954a6274ea23b11dc",
+          "opaque_pixels": 22077,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1499,
+          "asset": "woodcut-scenes.png",
+          "sample": [
+            1096,
+            420,
+            1436,
+            668
+          ],
+          "content": [
+            0,
+            0,
+            192,
+            115
+          ],
+          "art_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "padded_sha256": "34e1b9e5ff3201ab9102f3d08d8a11c6e5f8cc804da968524ff28b453b43dc25",
+          "palette_sha256": "e257d1040cdeb2b78cc4d06627cc7bfac24f3c16afe4d1cf3121950d922b8aed",
+          "writes_sha256": "6abef9d6567e19d70c6621d0608f0f76c4a11bdfcc37565cd4a9b1f9eea2c991"
+        },
+        {
+          "research_id": 1500,
+          "file": "WDCUT12.SS",
+          "file_sha256": "9b85b12a6962ed945b50a6cca79976e8c2d00ed066d3a087195635d6f64d7cd2",
+          "ordinal": 0,
+          "size": [
+            192,
+            113
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 20216,
+          "other_header_fields": [
+            159,
+            152
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "7a892a3aabfe5b5bdc835d404daf313e6eb3e4ef6cb91b74471032e2a9428aa2",
+          "indexed_sha256": "28dee4ca7bda1b2b8d3fa39c3520c2d9e90dcda836c93fd186482ec0cf312966",
+          "opaque_pixels": 21696,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1500,
+          "asset": "woodcut-scenes.png",
+          "sample": [
+            12,
+            736,
+            352,
+            982
+          ],
+          "content": [
+            0,
+            0,
+            192,
+            113
+          ],
+          "art_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "padded_sha256": "47d5ffb79867623655872940771d6b3ada76059fed0164990c0d57d6307a6e4e",
+          "palette_sha256": "cf834b8e6f87173a9132b4eb4dd18add28cae357d6cf7f60e32c526c1d592283",
+          "writes_sha256": "35069ce70da8f293a9c3fb1f98fae76800fda5e94555a1948049537b53edcd1d"
+        },
+        {
+          "research_id": 1501,
+          "file": "WDCUT13.SS",
+          "file_sha256": "7a042347c2eaf70c84edf322785db1678eef8ab6eb05cecc0e787f04ed6e6e44",
+          "ordinal": 0,
+          "size": [
+            192,
+            115
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 20997,
+          "other_header_fields": [
+            159,
+            154
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "2850789d2b8d5b2e308e04820722158bf61a701a67ddb65ada35ec410719ec2e",
+          "indexed_sha256": "3d1ab1a2b741901a929b8ceb01d063206b9cb2983974de667c26f51e2578a037",
+          "opaque_pixels": 22080,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1501,
+          "asset": "woodcut-scenes.png",
+          "sample": [
+            374,
+            736,
+            713,
+            982
+          ],
+          "content": [
+            0,
+            0,
+            192,
+            115
+          ],
+          "art_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "padded_sha256": "8e6417379c29c8a6e8326c005bdd6d83666867dcc23072dc28219e74e27ecafe",
+          "palette_sha256": "be67a3f73e9dd5824a7ce4156abbd4a45c2c4913b21599a00bcd49afc2964384",
+          "writes_sha256": "46ec387847f4f1f136595936edf005b786664f40126e96d6c8cf0e5119eb0030"
+        }
+      ]
+    },
+    "victory-tower.png": {
+      "sha256": "6d2ea310e5a782b975bdfc7df0622c28b2b82fb7373aa603c623da32cb1cc46a",
+      "bytes": 2673046,
+      "size": [
+        1586,
+        992
+      ],
+      "mode": "RGB",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: style-transfer. Repaint this exact Colonization victory background as an original high-detail fine pixel-art game asset. Image1 is the full-frame exact composition guide; Image2 is STYLE ONLY, crisp fine pixel clusters, natural material shading and restrained colors, do not copy its scenery. Output one fully OPAQUE LANDSCAPE image, aspect ratio 8:5. Keep every landmark in exactly the same normalized position: central red-brick colonial clock tower, pale cream belfry and spire at horizontal center, lower dark clock face and cream trim, left brick building angled inward with dark grid windows and one yellow-lit window, right brick facade angled inward, tall green tree right of tower, foreground gas lamps, small crowd/figures at bottom, original dark blue evening sky with thin gold fireworks in the upper left and above tower. Preserve the close upward-looking camera, source crop, perspective, architecture, tree shape and relative object sizes. Replace coarse source dithering with fresh coherent detailed pixel clusters, readable brick and window detail, distinct small silhouettes, restrained warm lights. All original objects stay inside the same frame; do not move the tower, change its design, add another clock, add text, letterforms, border, new buildings or fireworks filling the foreground. No blur, smooth oil painting, photography, 3D or vector-flat style. Edge-to-edge art with no transparency or margins.",
+      "generation_file": "exec-fbc77499-c2da-4e5c-b51e-370cfd8650ec.png",
+      "reference_sha256": "f9bae48ec7feb3856fe3f349de25bf3cd7fa052aa1e570d9236bb6054d9e6059",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "column_row_boundaries": {
+        "0": [
+          0,
+          992
+        ],
+        "1": [
+          0,
+          992
+        ]
+      },
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1548,
+          "file": "WIN.SS",
+          "file_sha256": "6235a4bfb93831666cef0bd3d00489604348cdf5e0bb4b3456963ac691b97594",
+          "ordinal": 0,
+          "size": [
+            320,
+            200
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 45177,
+          "other_header_fields": [
+            0,
+            0
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "3057095e92575ceafca6f276b8e3e33a07b31a3445a6176d9fafbbac71d67cc8",
+          "indexed_sha256": "2468f0524732cb54c0b26d8a55b9bd1d2c3c9b768237b109b59585dad91fc15d",
+          "opaque_pixels": 64000,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1548,
+          "asset": "victory-tower.png",
+          "sample": [
+            0,
+            0,
+            1586,
+            992
+          ],
+          "content": [
+            0,
+            0,
+            320,
+            200
+          ],
+          "art_sha256": "6d2ea310e5a782b975bdfc7df0622c28b2b82fb7373aa603c623da32cb1cc46a",
+          "art_size": [
+            1586,
+            992
+          ],
+          "padded_sha256": "2468f0524732cb54c0b26d8a55b9bd1d2c3c9b768237b109b59585dad91fc15d",
+          "palette_sha256": "2ea78284e3ece12157479b02776796317f7b5468e36884716c1299d41b6a38ba",
+          "writes_sha256": "3d6a2bf00885f6b945af45a58f9ffd0db11fe9223b65c26efbffc44f48a9fd57"
+        }
+      ]
     }
   }
 }

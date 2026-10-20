@@ -165,7 +165,7 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 		}
 		p.frames = append(p.frames, f)
 	}
-	if len(p.frames) != 139 {
+	if len(p.frames) != 158 {
 		return nil, fmt.Errorf("scene source group")
 	}
 	h.m.WatchWrite(0, 0xaffff, func(_ *golem.Machine, a uint32, o, v byte) { p.memoryWrite(a, o, v) })

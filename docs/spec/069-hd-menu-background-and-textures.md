@@ -3203,3 +3203,17 @@ SCORE01.SS至SCORE24.SS的二十四個既有來源1451至1474，沿用R105／R10
 SCORE01.SS至SCORE24.SS的二十四張圖卡已接線，人物、動植物、建築、風景、徽章與地圖均在測試畫面顯示。本批以正式來源選擇、當次回傳點、完整來源finish及HD繪圖介面顯示，目視確認。記為DISPLAY-PASS，fixture提供原生寫入，不新增正常玩家路徑或原版精確對拍聲明。
 
 正式程式SHA-256：11986594bb83909780114bc41fd4e6dcc660e29f5cd30d1c9204bbf453d73f28。建置與go vet、完整HD載入及355檔封裝指紋通過。本機收據為既有hd-opening-animation-sources-r84工作根的r110-formal-display-r1/check.json，SHA-256：0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f。
+
+### R111國旗、事件插圖與勝利背景READY
+
+八個DUTCH／ENGLND／FRANCE／SPAIN來源、十個WDCUT來源及WIN.SS，沿用R107完整SS來源、Main畫布、原生遮罩、內容矩形、色盤、唯一來源選擇與當次回傳點契約。十九來源使用三張生成原PNG，圖集各格取樣及原始指紋記於graphics/manifest.json；不改原版旗幟狀態、事件或勝利規則。來源解碼沿既有固定版本工具及來源清冊，不新增原版內部研究。
+
+正式scene來源總數158，驗收為正式接線與來源fixture畫面顯示，fixture提供原生寫入，不新增正常玩家路徑或精確對拍聲明。CURSOR.SS保留另行處理，其英文字母及數字沿既有字型契約。
+
+R111取樣修正：八個國旗來源各有兩片旗布，分別以既有原生非透明包圍矩形及生成alpha包圍矩形對齊；矩形間隙取樣原PNG透明角落。完整內容矩形仍分割覆蓋，原生來源遮罩及生成原圖不變。
+
+### R111國旗、事件插圖與勝利背景顯示通過
+
+八個國旗、十張事件插圖與勝利背景共十九來源已接線，並在測試畫面顯示。本批以正式來源選擇、當次回傳點、完整來源finish及HD繪圖介面顯示，目視確認。記為DISPLAY-PASS，fixture提供原生寫入，不新增正常玩家路徑或原版精確對拍聲明。
+
+正式程式SHA-256：f3c39247b0e6813e060e278e314ec8bd8c371eb2d1954286e32b55fde1da2586。建置與go vet、完整HD載入及358檔封裝指紋通過。本機收據為既有hd-opening-animation-sources-r84工作根的r111-formal-display-r2/check.json，SHA-256：aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c。

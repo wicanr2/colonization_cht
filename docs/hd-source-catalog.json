@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "a88acc9ed2d5ef38dffdcca21b9c210c8ac65e0d9c7dfe197f3dd89381520660",
+  "formal_manifest_sha256": "7cfd8f0cfa3d94d0c5299cbf98fa1047eb7dc36036aee3ae5340663157057198",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,12 +26,12 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 594,
+    "formal_asset_bindings": 613,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
     "other_formats_and_program_drawn_graphics": "not_assessed",
-    "display_pass_source_bindings": 277
+    "display_pass_source_bindings": 296
   },
   "files": [
     {
@@ -29016,7 +29016,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "national-banners.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 821,
@@ -29041,7 +29050,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "national-banners.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 822,
@@ -29066,7 +29084,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "national-banners.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 823,
@@ -29091,7 +29118,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "national-banners.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 824,
@@ -29150,7 +29186,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "national-banners.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 826,
@@ -29175,7 +29220,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "national-banners.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 827,
@@ -59404,7 +59458,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "national-banners.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1476,
@@ -59429,7 +59492,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "national-banners.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1477,
@@ -60076,7 +60148,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "woodcut-scenes.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1491,
@@ -60135,7 +60216,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "woodcut-scenes.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1493,
@@ -60160,7 +60250,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "woodcut-scenes.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1494,
@@ -60185,7 +60284,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "woodcut-scenes.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1495,
@@ -60244,7 +60352,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "woodcut-scenes.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1497,
@@ -60269,7 +60386,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "woodcut-scenes.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1498,
@@ -60294,7 +60420,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "woodcut-scenes.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1499,
@@ -60319,7 +60454,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "woodcut-scenes.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1500,
@@ -60344,7 +60488,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "woodcut-scenes.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1501,
@@ -60369,7 +60522,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "woodcut-scenes.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1502,
@@ -61544,7 +61706,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "victory-tower.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1549,
@@ -72319,6 +72490,462 @@
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "state": "DISPLAY-PASS",
       "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "national-banners.png",
+      "asset_sha256": "5cb29f0fd8d7c965a5b53e32d2bdfe6d2f84cbadab3a50a8a02f5f8bd4c4dc2d",
+      "source_research_id": 820,
+      "source_file": "DUTCH1.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "c29f7082dcdf3142b6a719469ad1a71c1af0c6e1e19761ccd3bed7d775385709",
+      "source_indexed_sha256": "69e36a210648905a7be3d640ed3647a6126b851b0d4ea8615b22c093f973e143",
+      "raw_art_rect": [
+        62,
+        67,
+        369,
+        379
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        175,
+        120
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "national-banners.png",
+      "asset_sha256": "5cb29f0fd8d7c965a5b53e32d2bdfe6d2f84cbadab3a50a8a02f5f8bd4c4dc2d",
+      "source_research_id": 821,
+      "source_file": "DUTCH2.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "f8cafb6ae0a97640dd269e1c174342831b02196fad75cc792c926ed183228134",
+      "source_indexed_sha256": "bab61c355049c1e2aed1f0f159102c28edaa960434136acf4944d876a7c4c5b5",
+      "raw_art_rect": [
+        482,
+        64,
+        770,
+        384
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        170,
+        131
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "national-banners.png",
+      "asset_sha256": "5cb29f0fd8d7c965a5b53e32d2bdfe6d2f84cbadab3a50a8a02f5f8bd4c4dc2d",
+      "source_research_id": 822,
+      "source_file": "ENGLND1.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "085f0e3549b687cc9335172201a01c0ca7f13d89a57671fa1bd4a4a969a77d59",
+      "source_indexed_sha256": "100483ee2f8a51f215a622b2cf0d2bb9b1e5c6647ea143b0c6b5929614e6ffe8",
+      "raw_art_rect": [
+        895,
+        66,
+        1193,
+        384
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        172,
+        122
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "national-banners.png",
+      "asset_sha256": "5cb29f0fd8d7c965a5b53e32d2bdfe6d2f84cbadab3a50a8a02f5f8bd4c4dc2d",
+      "source_research_id": 823,
+      "source_file": "ENGLND2.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "b54d96353b9f3c5639b3f55ea5ad72c7293d4a1f2b319bcb8d6985c0ed82814a",
+      "source_indexed_sha256": "0df7a63b0c8a93657a35513131d4757d23d44d724421e7d0e7acce6403821aca",
+      "raw_art_rect": [
+        64,
+        458,
+        367,
+        786
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        174,
+        133
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "national-banners.png",
+      "asset_sha256": "5cb29f0fd8d7c965a5b53e32d2bdfe6d2f84cbadab3a50a8a02f5f8bd4c4dc2d",
+      "source_research_id": 825,
+      "source_file": "FRANCE1.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "024e538656530238fc645a103ef16ed0404bd3af8707117333bb49da94072ece",
+      "source_indexed_sha256": "7f7ef2c7b67ee8bedd27614bb85897fb7907ca07e340dc431910d832b699eb2e",
+      "raw_art_rect": [
+        475,
+        460,
+        776,
+        777
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        178,
+        120
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "national-banners.png",
+      "asset_sha256": "5cb29f0fd8d7c965a5b53e32d2bdfe6d2f84cbadab3a50a8a02f5f8bd4c4dc2d",
+      "source_research_id": 826,
+      "source_file": "FRANCE2.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "61883056aaff0c49395d858eda041bc62028529f5f3a0c9e0655e52ccf4f4703",
+      "source_indexed_sha256": "9da3ac12a6bdc465e17a1e1247964dae55a8ed56585ea16619e057302e871aad",
+      "raw_art_rect": [
+        893,
+        459,
+        1195,
+        777
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        176,
+        131
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "national-banners.png",
+      "asset_sha256": "5cb29f0fd8d7c965a5b53e32d2bdfe6d2f84cbadab3a50a8a02f5f8bd4c4dc2d",
+      "source_research_id": 1475,
+      "source_file": "SPAIN1.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "34a1b2d7a80a44cd1b78047f7a8a22e451d05311b51f121c194b4262aea34a70",
+      "source_indexed_sha256": "59fe40000574a155ea7a2662a886221c3ac9c450990550396edf23564bbbc517",
+      "raw_art_rect": [
+        62,
+        852,
+        369,
+        1176
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        177,
+        121
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "national-banners.png",
+      "asset_sha256": "5cb29f0fd8d7c965a5b53e32d2bdfe6d2f84cbadab3a50a8a02f5f8bd4c4dc2d",
+      "source_research_id": 1476,
+      "source_file": "SPAIN2.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "1cd318c726fcedbaca01689c8af40244ef801caab7ee59dab4a6c9e3c47fe54b",
+      "source_indexed_sha256": "a38eae279eb638e8fa4059c71f7021f74e9b0d84c80a943eec76ba67b29ac311",
+      "raw_art_rect": [
+        467,
+        850,
+        785,
+        1176
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        170,
+        128
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "woodcut-scenes.png",
+      "asset_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+      "source_research_id": 1490,
+      "source_file": "WDCUT02.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "ea33b25daab9a3ff68920309262201c44c33a551e399e43a604b353acfbc3adf",
+      "source_indexed_sha256": "73127793c4f390dcfe45fcf6a2113f0e2a63b847e88a4505138b5bed240eec54",
+      "raw_art_rect": [
+        12,
+        106,
+        352,
+        352
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        192,
+        113
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "woodcut-scenes.png",
+      "asset_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+      "source_research_id": 1492,
+      "source_file": "WDCUT04.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "09e7014b602eb85bc6779c851551f3107b2ddb5e8ca874b40122516d4213ed62",
+      "source_indexed_sha256": "d7d14cecfa4f4b2cc26e8af86fbf1346cc0b25f3f514821d1e23f8978cd0ea22",
+      "raw_art_rect": [
+        374,
+        106,
+        713,
+        352
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        192,
+        113
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "woodcut-scenes.png",
+      "asset_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+      "source_research_id": 1493,
+      "source_file": "WDCUT05.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "5642093405d6691c148bfcb3162906808bf6a2c10c6dfd7a076c579e031e2132",
+      "source_indexed_sha256": "2f6d6cb444f9784451bbe5583b055b23afa5f3551c0737086d12d8efbbcc1179",
+      "raw_art_rect": [
+        735,
+        106,
+        1074,
+        352
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        192,
+        115
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "woodcut-scenes.png",
+      "asset_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+      "source_research_id": 1494,
+      "source_file": "WDCUT06.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "3196077127e03492006b254115c36a077a9815458c7b0ec5fb67a1884fccd744",
+      "source_indexed_sha256": "1bc7ed7e6fac964fb8bb98235cbbea5e08d44febaefc61e0b3c3ef2ac4321cb9",
+      "raw_art_rect": [
+        1096,
+        106,
+        1436,
+        352
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        192,
+        115
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "woodcut-scenes.png",
+      "asset_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+      "source_research_id": 1496,
+      "source_file": "WDCUT08.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "c801893382297f05ed61d9b0fb8735b1e058aeac1b9b7e2840da2cb14199da42",
+      "source_indexed_sha256": "e831b622ba4096d298384483584fd3e51f634230cfecb4ed5366e6e44745e81a",
+      "raw_art_rect": [
+        13,
+        420,
+        352,
+        667
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        192,
+        115
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "woodcut-scenes.png",
+      "asset_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+      "source_research_id": 1497,
+      "source_file": "WDCUT09.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "1ebd6578f0db36168f42f123a3cad609331eeddc484be4e5869e79710963545b",
+      "source_indexed_sha256": "c147429b02b31bfc6c3b99c294b6ebaf7f064563585f654d30af033ca9125baa",
+      "raw_art_rect": [
+        374,
+        420,
+        713,
+        668
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        192,
+        115
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "woodcut-scenes.png",
+      "asset_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+      "source_research_id": 1498,
+      "source_file": "WDCUT10.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "baaae13a644a0d45bec16292282508c14103aa72d688cfcc8cf8dca746e6dca6",
+      "source_indexed_sha256": "1594fde6ded78d06d81fe7a562a2ca79a003a0791d7e9bc4b94c04deb84459a9",
+      "raw_art_rect": [
+        735,
+        420,
+        1074,
+        668
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        192,
+        113
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "woodcut-scenes.png",
+      "asset_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+      "source_research_id": 1499,
+      "source_file": "WDCUT11.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "44bf910878b219be09fff6f6b2dd71fa493a12d4de74173914511a72c4ae0c1d",
+      "source_indexed_sha256": "b0f8542ab00a8a645f7ca17ea54b45ad2c26e424eb0a8af954a6274ea23b11dc",
+      "raw_art_rect": [
+        1096,
+        420,
+        1436,
+        668
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        192,
+        115
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "woodcut-scenes.png",
+      "asset_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+      "source_research_id": 1500,
+      "source_file": "WDCUT12.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "7a892a3aabfe5b5bdc835d404daf313e6eb3e4ef6cb91b74471032e2a9428aa2",
+      "source_indexed_sha256": "28dee4ca7bda1b2b8d3fa39c3520c2d9e90dcda836c93fd186482ec0cf312966",
+      "raw_art_rect": [
+        12,
+        736,
+        352,
+        982
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        192,
+        113
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "woodcut-scenes.png",
+      "asset_sha256": "27724497feb785a65f8b94b2e7a9e4e02c1f26ecff58eb5367e43780cbcec907",
+      "source_research_id": 1501,
+      "source_file": "WDCUT13.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "2850789d2b8d5b2e308e04820722158bf61a701a67ddb65ada35ec410719ec2e",
+      "source_indexed_sha256": "3d1ab1a2b741901a929b8ceb01d063206b9cb2983974de667c26f51e2578a037",
+      "raw_art_rect": [
+        374,
+        736,
+        713,
+        982
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        192,
+        115
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "victory-tower.png",
+      "asset_sha256": "6d2ea310e5a782b975bdfc7df0622c28b2b82fb7373aa603c623da32cb1cc46a",
+      "source_research_id": 1548,
+      "source_file": "WIN.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "3057095e92575ceafca6f276b8e3e33a07b31a3445a6176d9fafbbac71d67cc8",
+      "source_indexed_sha256": "2468f0524732cb54c0b26d8a55b9bd1d2c3c9b768237b109b59585dad91fc15d",
+      "raw_art_rect": [
+        0,
+        0,
+        1586,
+        992
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        320,
+        200
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
     }
   ],
   "limitations": [
@@ -73232,6 +73859,13 @@
     "sources": 24,
     "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
     "formal_binary_sha256": "11986594bb83909780114bc41fd4e6dcc660e29f5cd30d1c9204bbf453d73f28",
+    "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+  },
+  "last_banners_woodcuts_victory_display": {
+    "state": "DISPLAY-PASS",
+    "sources": 19,
+    "receipt_sha256": "aa00127ca200be404356614ec82cc19ef9e0ee3b28daa5d4197b0177c7e83e0c",
+    "formal_binary_sha256": "f3c39247b0e6813e060e278e314ec8bd8c371eb2d1954286e32b55fde1da2586",
     "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
   }
 }
