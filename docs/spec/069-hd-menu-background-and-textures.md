@@ -3391,3 +3391,31 @@ MPSNAME.SS全部29幀已正式接線為DISPLAY-PASS，共768582個可見HD材質
 現行1467個來源連結，含317個既有限定CONFORMED及1150個DISPLAY-PASS，1454個唯一來源已接。1533張既有indexed內容完整SHA核對；非空未接來源剩10個單色幾何，另69全透明與19零尺寸。其他47檔、程式繪圖、完整五語、全量HD、影片及新版交付仍未完成；本批HD材質不增加Noto、翻譯或字型覆蓋信用，328個語言資源與README32張實拍保持。
 
 本機入口為既有hd-opening-animation-sources-r84工作根的r135-dec-display-close-final.json、r135-formal-build-r1.json、r135-formal-display-review-r1.json、r135-formal-display-r1/check.json、r135-packaging-r1.json及r135-final-native-partition-r1.json。正式測試在既有非root Docker／有界Xvfb環境設定TEST_GAME_ROOT、TEST_HD_EVENT_ASSETS、TEST_HD_EVENT_FIXTURES、TEST_HD_DEC_FIXTURE及TEST_HD_DEC_OUTPUT後執行TestHDDeclarationGlyphDisplay；fixture與原版像素只留本機。
+
+### R137 十個幾何來源 DRAFT
+
+沿既有來源清冊補齊PHYS0.SS第104至111幀八個黑色遮罩，以及CLOS-ROC.SS第17與21幀兩個1乘1圖像。原始檔案、ordinal、尺寸、nominal、encoded／indexed、逐點寫入與使用索引色盤指紋由既有解碼內容核對，入口為本機r137-geometry-preparation-r1.json。片尾兩來源及四個8乘8來源分別保留相同原生內容的共用取樣，不創造不同圖像或遊戲語意。
+
+重用既有中性材質原PNG，只對完整持有的原生不透明點增加4倍畫布內的細材質。八個索引0黑色遮罩採RGB各8加材質亮度整除21，範圍8至20的深炭色；alpha始終255，維持完整遮蔽、輪廓與幾何。兩個非黑單點沿R135原生RGB乘材質亮度增益，保留原色調。原版規則、資料、輸入、存檔及文字字型不變，原版圖像模式保持原像素。
+
+先在隔離模組加入10個來源及幾何材質分支，場景885增至895、SS來源856增至866。八個Main來源沿原版D46解碼fixture；兩個片尾來源沿已驗CLOSING原始映像、來源選擇、完整finish、實際原版store與兩個發布指令，各產生來源測試畫面。fixture提供來源參數、來源值與返回狀態，不宣稱正常未探索地圖或片尾路徑。可見及目視通過後才審READY，正式建置、必要載入及顯示後記DISPLAY-PASS；不增加原版內部、音訊／存檔或完整五語矩陣。
+
+### R137 十個幾何來源 READY
+
+隔離原型已顯示8個Main遮罩與2個片尾單點來源，共12張圖、兩項／10個含子項零skip，已目視。黑色遮罩完整保持alpha255、原生輪廓與透明區，RGB各8至20的細炭色材質只畫在原有不透明點；不會透出下層內容。Main共5056個HD變動點，片尾兩個來源各16點；片尾兩條發布路徑及相同原生內容的來源產生相同圖像。
+
+原版PHYS0.SS SHA-256為deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16，CLOS-ROC.SS為633299639d7ac032bd491340a0a8564752cfad03c0c16a4142f8c8f1f4da65ce；完整來源與使用索引色盤指紋列於本批準備清冊。PHYS0原色盤索引0為黑色，片尾索引51為RGB DAC 18／10／7；後者沿R135亮度增益保留色調。資料、原版操作、存檔與未知來源／色盤／後畫守門保持。
+
+授權把已通過的幾何材質分支與10個來源接入正式場景，895場景／866個SS來源；386張生成原PNG保持，只延伸素材來源清冊與固定指紋。正式驗收為建置、go vet、完整895場景載入、兩類來源及共用素材的必要錯件，以及12張來源fixture畫面。Main執行既有D46解碼，片尾沿既有原始映像、來源選擇、完整finish、原版store與兩個發布指令；fixture範圍如實保留，不授予新正常玩家路徑或原版精確對拍信用。
+
+本機READY入口為既有hd-opening-animation-sources-r84工作根的r137-ready-review-r1.json；來源、測試及目視入口為r137-geometry-preparation-r1.json、r137-prototype-review-r1.json與r137-prototype-visual-review-r1.png。本批不增加Noto、翻譯、音訊／存檔或完整五語矩陣，原版像素與fixture只留本機。
+
+### R137 十個幾何來源顯示通過
+
+PHYS0八個黑色遮罩與CLOS-ROC兩個單點來源已正式接線為DISPLAY-PASS。三項／20個含子項零skip，12張正式畫面與原型逐byte相同；Main共5056個HD變動點，兩個片尾來源各16點。黑色遮罩保持alpha255、原生輪廓及透明區，相同原生內容共用取樣；兩條片尾發布路徑圖像相同。fixture範圍與READY一致，不增加正常未探索地圖或片尾路徑、原版精確對拍、Noto及翻譯信用。
+
+正式程式SHA-256為0f96b219cce1856eb301cdfbcbab1ceb60c9184c21b9a0358117a3eea054f605，建置與go vet通過。895場景完整載入、兩類來源各四個必要錯件通過，包含共用材質缺檔、錯指紋、符號連結與原版檔錯指紋；錯誤原因命中目標來源。正式hd_asset_files實際收集387檔並核對指紋，清冊SHA-256為1e28e2bcd8e9bfdbf0d6905d4153952cdf883c76973f47eec43268becb8857c0，386張生成原PNG保持，沒有新平台包、版號或Release。
+
+既有SS／PIK清冊的1464個非空來源現在全有正式連結，共1477個連結，含317個既有限定CONFORMED及1160個DISPLAY-PASS。1533張既有indexed內容完整SHA相符；69個全透明與19個零尺寸來源保持原處理。這只是既有解碼清冊的完成範圍，完整玩家圖像分母仍未知，其他47檔與程式繪圖、完整五語、全量HD、影片與新版交付繼續。328個語言資源、README32張實拍及文字普查保持。
+
+本機入口為既有hd-opening-animation-sources-r84工作根的r137-geometry-display-close-final.json、r137-formal-build-r1.json、r137-formal-display-review-r1.json、r137-formal-main-r1/check.json、r137-formal-closing-r1/check.json、r137-packaging-r1.json及r137-final-native-partition-r1.json。正式測試在既有非root Docker／有界Xvfb環境，設定TEST_GAME_ROOT、TEST_HD_EVENT_ASSETS、TEST_HD_EVENT_FIXTURES、TEST_HD_GEOMETRY_MAIN_FIXTURE／OUTPUT與TEST_HD_GEOMETRY_CLOSING_FIXTURE／OUTPUT，執行TestHDGeometryMainDisplay與TestHDGeometryClosingDisplay；fixture與原版像素維持本機。

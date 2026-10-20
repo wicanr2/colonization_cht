@@ -198,7 +198,7 @@ def hd_asset_files(repo):
             ('bdark-atlas-1.png', 'bfbe90c8908dc170f4a036dfe896705d8995b3cb159fa1027938413655c7f03e', 8 << 20),
             ('bdark-atlas-2.png', '701039ff08dd7a93ae7314ffe37d280559f6d674c46aa22dc5346314ea4a0405', 8 << 20),
             ('bdark-atlas-3.png', '3e5d965aa61cad96e8071bd112486afec1da776e385e135ce5acb647674a83c7', 8 << 20),
-            ("manifest.json", "f258be00a12f60f6c4dd028e57c8cc580e05aa6ff46444da1d06ab0a9e616f31", 16 << 20),
+            ("manifest.json", "1e28e2bcd8e9bfdbf0d6905d4153952cdf883c76973f47eec43268becb8857c0", 16 << 20),
             ("kinglose-000.png", "bbee76741ab0738c568a652b4f878d677f7c7f56b48e6b9b83ac8befa0debdb1", 8 << 20),
             ("kingwin-000.png", "cf932a5e425ab773fe6d5cd89531ec51a32738c7b9f4a8e57a2f566e706c72f1", 8 << 20),
             ("score-cards-1.png", "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44", 8 << 20),

@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "f258be00a12f60f6c4dd028e57c8cc580e05aa6ff46444da1d06ab0a9e616f31",
+  "formal_manifest_sha256": "1e28e2bcd8e9bfdbf0d6905d4153952cdf883c76973f47eec43268becb8857c0",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,14 +26,14 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 1467,
+    "formal_asset_bindings": 1477,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
     "other_formats_and_program_drawn_graphics": "not_assessed",
-    "display_pass_source_bindings": 1150,
-    "unique_formal_source_ids": 1454,
-    "remaining_nonempty_reference_sources": 10
+    "display_pass_source_bindings": 1160,
+    "unique_formal_source_ids": 1464,
+    "remaining_nonempty_reference_sources": 0
   },
   "files": [
     {
@@ -17607,7 +17607,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "1936a360adb1f1ee4a5f8a44e6c28190edd693ba478a31c07da1a366aa3d8d89",
+        "scope": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
+      }
     },
     {
       "research_id": 304,
@@ -17734,7 +17743,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "1936a360adb1f1ee4a5f8a44e6c28190edd693ba478a31c07da1a366aa3d8d89",
+        "scope": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
+      }
     },
     {
       "research_id": 308,
@@ -58116,7 +58134,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
       "normal_entry_sample": {
         "calls": 132,
         "candidate_research_ids": [
@@ -58560,6 +58580,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "1936a360adb1f1ee4a5f8a44e6c28190edd693ba478a31c07da1a366aa3d8d89",
+        "scope": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
       }
     },
     {
@@ -58585,7 +58612,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
       "normal_entry_sample": {
         "calls": 159,
         "candidate_research_ids": [
@@ -59101,6 +59130,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "1936a360adb1f1ee4a5f8a44e6c28190edd693ba478a31c07da1a366aa3d8d89",
+        "scope": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
       }
     },
     {
@@ -59126,7 +59162,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
       "normal_entry_sample": {
         "calls": 142,
         "candidate_research_ids": [
@@ -59606,6 +59644,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "1936a360adb1f1ee4a5f8a44e6c28190edd693ba478a31c07da1a366aa3d8d89",
+        "scope": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
       }
     },
     {
@@ -59631,7 +59676,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
       "normal_entry_sample": {
         "calls": 144,
         "candidate_research_ids": [
@@ -60111,6 +60158,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "1936a360adb1f1ee4a5f8a44e6c28190edd693ba478a31c07da1a366aa3d8d89",
+        "scope": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
       }
     },
     {
@@ -60136,7 +60190,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "entry_alias_candidates_only",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
       "normal_entry_sample": {
         "calls": 74,
         "candidate_research_ids": [
@@ -60403,6 +60459,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "1936a360adb1f1ee4a5f8a44e6c28190edd693ba478a31c07da1a366aa3d8d89",
+        "scope": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
       }
     },
     {
@@ -60428,7 +60491,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
       "normal_entry_sample": {
         "calls": 74,
         "candidate_research_ids": [
@@ -60716,6 +60781,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "1936a360adb1f1ee4a5f8a44e6c28190edd693ba478a31c07da1a366aa3d8d89",
+        "scope": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
       }
     },
     {
@@ -60741,7 +60813,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
       "normal_entry_sample": {
         "calls": 74,
         "candidate_research_ids": [
@@ -61029,6 +61103,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "1936a360adb1f1ee4a5f8a44e6c28190edd693ba478a31c07da1a366aa3d8d89",
+        "scope": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
       }
     },
     {
@@ -61054,7 +61135,9 @@
       "transparency_index": 253,
       "runtime_source_evidence": "confirmed runtime AX slot, exact source record, complete writes and native model within fixed normal paths",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": [],
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
       "normal_entry_sample": {
         "calls": 74,
         "candidate_research_ids": [
@@ -61342,6 +61425,13 @@
           ]
         ],
         "claim": "entry only from step 0; no visibility, animation or HD credit"
+      },
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "1936a360adb1f1ee4a5f8a44e6c28190edd693ba478a31c07da1a366aa3d8d89",
+        "scope": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
       }
     },
     {
@@ -101177,6 +101267,266 @@
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "state": "DISPLAY-PASS",
       "claim": "Existing original D46 decoder and complete-source finish with integrated Main HD renderer; typed source parameters, light backdrop and offscreen cursor supplied by fixtures. Neutral generated material luminance modulates native glyph RGB while preserving outline, transparency and frame geometry. No normal declaration path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 303,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 17,
+      "source_encoded_sha256": "edb10b5a3a4004747e8fa5b3f1f5cd61154db849db4daab2baae8df6955db775",
+      "source_indexed_sha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "paint_mode": "native-geometry-material",
+      "display_surface": "closing-published",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 307,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 21,
+      "source_encoded_sha256": "edb10b5a3a4004747e8fa5b3f1f5cd61154db849db4daab2baae8df6955db775",
+      "source_indexed_sha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "paint_mode": "native-geometry-material",
+      "display_surface": "closing-published",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1392,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 104,
+      "source_encoded_sha256": "8cca6e84c2c9dcfab85702d73811b40363b974fc8dac97807c8bee1d8c6b3c5b",
+      "source_indexed_sha256": "3e1938aa91f0e93511d63fdb23993d2dc352b344f0bd1d3d31856e776d1f3e56",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "paint_mode": "native-geometry-material",
+      "display_surface": "main",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1393,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 105,
+      "source_encoded_sha256": "9d1b8585d1711a844fdc915bd3480070b3f52adeecb6cec089d968ffc2d4b7d1",
+      "source_indexed_sha256": "9637107d53a251ad16c04cc5726f74bbf0427c0aa52e96b988777e819d46b509",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "paint_mode": "native-geometry-material",
+      "display_surface": "main",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1394,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 106,
+      "source_encoded_sha256": "7422b4afaa091a974dc4b4839f861f363b43aaca4f55bbc9277501fab4f69b5c",
+      "source_indexed_sha256": "ee2714a306034738b7f6c622abc2f7c6c841d591e5044cb94d3408ccfe09e95a",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "paint_mode": "native-geometry-material",
+      "display_surface": "main",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1395,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 107,
+      "source_encoded_sha256": "ce8f46382264bb5b16445063fdfadfbff2afa444e9f30d7a2752398269c8860c",
+      "source_indexed_sha256": "e11e764a81fdba61e3c2c4414002caaae12d721ed31bbc85221c0f9e2eb7a735",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "paint_mode": "native-geometry-material",
+      "display_surface": "main",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1396,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 108,
+      "source_encoded_sha256": "38ce3a97148a76a97363dbff2cc3eb86fe87219ed987974e334e5c780bca9290",
+      "source_indexed_sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        8,
+        8
+      ],
+      "paint_mode": "native-geometry-material",
+      "display_surface": "main",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1397,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 109,
+      "source_encoded_sha256": "38ce3a97148a76a97363dbff2cc3eb86fe87219ed987974e334e5c780bca9290",
+      "source_indexed_sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        8,
+        8
+      ],
+      "paint_mode": "native-geometry-material",
+      "display_surface": "main",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1398,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 110,
+      "source_encoded_sha256": "38ce3a97148a76a97363dbff2cc3eb86fe87219ed987974e334e5c780bca9290",
+      "source_indexed_sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        8,
+        8
+      ],
+      "paint_mode": "native-geometry-material",
+      "display_surface": "main",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1399,
+      "source_file": "PHYS0.SS",
+      "source_ordinal": 111,
+      "source_encoded_sha256": "38ce3a97148a76a97363dbff2cc3eb86fe87219ed987974e334e5c780bca9290",
+      "source_indexed_sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        8,
+        8
+      ],
+      "paint_mode": "native-geometry-material",
+      "display_surface": "main",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
     }
   ],
   "limitations": [
@@ -101187,7 +101537,8 @@
     "原版像素、色盤與預覽只留本機，本索引不含原始素材位元組。",
     "R124更正R118分組：BDARK.SS的45個非空來源為多色建築／景物，已新增DISPLAY-PASS；其餘491個非空參考來源分為481字形／文字與10單色幾何。這不是完整玩家可見圖像分母，也不授予字型或翻譯完成。",
     "R134只為MPSNAME.SS全部29幀補銀色材質，原字形與黑影保持，不增加翻譯或Noto驗收；其餘非空解碼來源為452個DEC字形與10個單色幾何，其他格式及程式繪圖仍未完成。",
-    "R135只為DEC小寫、大寫與筆跡452幀補HD材質，保留原字形及動畫幾何，不增加翻譯、Noto或正常獨立宣言路徑驗收；其餘非空解碼來源為10個單色幾何，其他格式與程式繪圖仍未完成。"
+    "R135只為DEC小寫、大寫與筆跡452幀補HD材質，保留原字形及動畫幾何，不增加翻譯、Noto或正常獨立宣言路徑驗收；其餘非空解碼來源為10個單色幾何，其他格式與程式繪圖仍未完成。",
+    "R137只補10個幾何來源，黑色遮罩保持完全不透明、輪廓與透明區，既有SS／PIK清冊1464個非空來源全有正式連結。這不是全量玩家圖像分母，其他47檔、程式繪圖、Noto及完整五語仍未完成；不增加正常地圖或片尾路徑信用。"
   ],
   "normal_entry_evidence": {
     "report_sha256": "d54a8ce59dce9c361e731e2cd4420ce7aabac137a4c264ff9cf054a793673beb",
@@ -102164,23 +102515,12 @@
     "scope": "Typed BDARK source records, actual original D46 decoding and integrated production HD base renderer; Main visible-index mirror and offscreen cursor conditions supplied by fixture; production-connected visible display acceptance only; no normal BDARK path or original-exact claim."
   },
   "reference_partition": {
-    "receipt_sha256": "433c3bbc810627e5c77c02fa24698ddc2eaa56e6d50738e8b74affaccd89a054",
+    "receipt_sha256": "abd5da09e91d4535b9890080fca55b12e3981bf8559d83fb195d2067459f7dbb",
     "verified_indexed_payloads": 1533,
-    "formal_binding_entries": 1467,
-    "unique_bound_source_ids": 1454,
+    "formal_binding_entries": 1477,
+    "unique_bound_source_ids": 1464,
     "remaining_text_family_sources": [],
-    "remaining_single_color_geometry_sources": [
-      303,
-      307,
-      1392,
-      1393,
-      1394,
-      1395,
-      1396,
-      1397,
-      1398,
-      1399
-    ],
+    "remaining_single_color_geometry_sources": [],
     "transparent_sources": [
       32,
       57,
@@ -102273,7 +102613,7 @@
       1228,
       1249
     ],
-    "scope": "Decoded SS/PIK reference classification only; DEC material does not establish font/localization conformance. Other formats and program-drawn graphics retain their separate incomplete status."
+    "scope": "All nonempty sources in existing SS/PIK inventory have formal bindings. This finite reference inventory is not the complete player-visible denominator; other formats, procedural drawing and language/font work remain separate."
   },
   "last_mpsname_material_display": {
     "state": "DISPLAY-PASS",
@@ -102773,5 +103113,24 @@
     "receipt_sha256": "d6ce84a1f8fee857e22070527e29ca0c9d82ff8a1ad486bcce4cb783b4a56eb8",
     "formal_binary_sha256": "bdd9ed4dc497a4b8def918ac3bfbb09a53ad82fab60327ba1342ba33eb8f8cc3",
     "scope": "Existing original D46 decoder and complete-source finish with integrated Main HD renderer; typed source parameters, light backdrop and offscreen cursor supplied by fixtures. Neutral generated material luminance modulates native glyph RGB while preserving outline, transparency and frame geometry. No normal declaration path, Noto, translation or original timing claim."
+  },
+  "last_geometry_material_display": {
+    "state": "DISPLAY-PASS",
+    "sources": [
+      303,
+      307,
+      1392,
+      1393,
+      1394,
+      1395,
+      1396,
+      1397,
+      1398,
+      1399
+    ],
+    "asset": "mpsname-silver-material.png",
+    "receipt_sha256": "08deb9f2dc96801b45ca80bd2003ddab61f8c28375694ff3047510054f8b0395",
+    "formal_binary_sha256": "0f96b219cce1856eb301cdfbcbab1ceb60c9184c21b9a0358117a3eea054f605",
+    "scope": "Source fixtures using original D46 decoding and integrated Main drawing for eight opaque masks, and pinned closing source/finish, actual store, two publication opcodes and published drawing for two single-pixel frames. No new normal world/closing path, Noto, translation or original-exact claim. Original masks remain fully opaque and keep native outlines; black pixels receive 8..20 charcoal grain. Existing generated material and all raw PNGs unchanged."
   }
 }

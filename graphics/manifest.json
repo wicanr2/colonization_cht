@@ -84368,6 +84368,456 @@
           "writes_sha256": "ba2bcf3b496c9224d356ae53dd90d10ca3f097d7dd5296b8b363b677a0fc8417",
           "paint_mode": "native-glyph-luminance-material",
           "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad"
+        },
+        {
+          "research_id": 303,
+          "file": "CLOS-ROC.SS",
+          "file_sha256": "633299639d7ac032bd491340a0a8564752cfad03c0c16a4142f8c8f1f4da65ce",
+          "ordinal": 17,
+          "size": [
+            1,
+            1
+          ],
+          "header_part1_offset": 272,
+          "data_part3_offset": 4031,
+          "encoded_length": 4,
+          "other_header_fields": [
+            95,
+            149
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "edb10b5a3a4004747e8fa5b3f1f5cd61154db849db4daab2baae8df6955db775",
+          "indexed_sha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+          "opaque_pixels": 1,
+          "transparency_index": 253,
+          "asset": "mpsname-silver-material.png",
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "content": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "palette_sha256": "4298b4f72f096bffbd4f3574c5fa87480a5d1b6d864a048461a82a4bde9bc733",
+          "padded_sha256": "39d9a5279d35dba3da45575232f0d6fa51884ed73028b7bd8b42a52a25d22ff0",
+          "writes_sha256": "15316efe28008128589bea652dfc9bd14c76966206255cd3c0c9f098e86edf33",
+          "paint_mode": "native-geometry-material",
+          "closing_context": true
+        },
+        {
+          "research_id": 307,
+          "file": "CLOS-ROC.SS",
+          "file_sha256": "633299639d7ac032bd491340a0a8564752cfad03c0c16a4142f8c8f1f4da65ce",
+          "ordinal": 21,
+          "size": [
+            1,
+            1
+          ],
+          "header_part1_offset": 336,
+          "data_part3_offset": 5086,
+          "encoded_length": 4,
+          "other_header_fields": [
+            95,
+            149
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "edb10b5a3a4004747e8fa5b3f1f5cd61154db849db4daab2baae8df6955db775",
+          "indexed_sha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+          "opaque_pixels": 1,
+          "transparency_index": 253,
+          "asset": "mpsname-silver-material.png",
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "content": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "palette_sha256": "4298b4f72f096bffbd4f3574c5fa87480a5d1b6d864a048461a82a4bde9bc733",
+          "padded_sha256": "39d9a5279d35dba3da45575232f0d6fa51884ed73028b7bd8b42a52a25d22ff0",
+          "writes_sha256": "15316efe28008128589bea652dfc9bd14c76966206255cd3c0c9f098e86edf33",
+          "paint_mode": "native-geometry-material",
+          "closing_context": true
+        },
+        {
+          "research_id": 1392,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 104,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 1664,
+          "data_part3_offset": 19035,
+          "encoded_length": 62,
+          "other_header_fields": [
+            297,
+            16
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "8cca6e84c2c9dcfab85702d73811b40363b974fc8dac97807c8bee1d8c6b3c5b",
+          "indexed_sha256": "3e1938aa91f0e93511d63fdb23993d2dc352b344f0bd1d3d31856e776d1f3e56",
+          "opaque_pixels": 15,
+          "transparency_index": 253,
+          "asset": "mpsname-silver-material.png",
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "content": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "palette_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "padded_sha256": "3a257e0970357c0acfa025e56a139449c6e2d5f20434c7f9e06cee8f2d43441a",
+          "writes_sha256": "a1909c6b92a245aa5034886f89cfb5afdccccaf259a75a2955a87ea95ed8c695",
+          "paint_mode": "native-geometry-material",
+          "closing_context": false
+        },
+        {
+          "research_id": 1393,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 105,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 1680,
+          "data_part3_offset": 19097,
+          "encoded_length": 86,
+          "other_header_fields": [
+            297,
+            33
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "9d1b8585d1711a844fdc915bd3480070b3f52adeecb6cec089d968ffc2d4b7d1",
+          "indexed_sha256": "9637107d53a251ad16c04cc5726f74bbf0427c0aa52e96b988777e819d46b509",
+          "opaque_pixels": 15,
+          "transparency_index": 253,
+          "asset": "mpsname-silver-material.png",
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "content": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "palette_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "padded_sha256": "c5b683d5da546b703762cdfef9c3f6c317b74db2a92c790f5f01b7d3029f27bd",
+          "writes_sha256": "fec990cddb399f500683580ede50ae889c67ee6b07131d4956186b9122c606d6",
+          "paint_mode": "native-geometry-material",
+          "closing_context": false
+        },
+        {
+          "research_id": 1394,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 106,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 1696,
+          "data_part3_offset": 19183,
+          "encoded_length": 62,
+          "other_header_fields": [
+            297,
+            50
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "7422b4afaa091a974dc4b4839f861f363b43aaca4f55bbc9277501fab4f69b5c",
+          "indexed_sha256": "ee2714a306034738b7f6c622abc2f7c6c841d591e5044cb94d3408ccfe09e95a",
+          "opaque_pixels": 15,
+          "transparency_index": 253,
+          "asset": "mpsname-silver-material.png",
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "content": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "palette_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "padded_sha256": "3e6bd4d651c22b6b1f2dc11dee0729542b9ba74c94f4aa7fa7fb4c7c6ac36bb6",
+          "writes_sha256": "8004ac26470269a105c3d34daca06dab3bc1f628a047f797a6944f230721d104",
+          "paint_mode": "native-geometry-material",
+          "closing_context": false
+        },
+        {
+          "research_id": 1395,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 107,
+          "size": [
+            16,
+            16
+          ],
+          "header_part1_offset": 1712,
+          "data_part3_offset": 19245,
+          "encoded_length": 55,
+          "other_header_fields": [
+            297,
+            67
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ce8f46382264bb5b16445063fdfadfbff2afa444e9f30d7a2752398269c8860c",
+          "indexed_sha256": "e11e764a81fdba61e3c2c4414002caaae12d721ed31bbc85221c0f9e2eb7a735",
+          "opaque_pixels": 15,
+          "transparency_index": 253,
+          "asset": "mpsname-silver-material.png",
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "content": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "palette_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "padded_sha256": "8350336e64afc4968a23d0d7a4acf208d166bd45e353064822c4d16189f2ae87",
+          "writes_sha256": "1d95426543b176dce095e4a80974c5f685e6ef05473a6d8e13227af63a64ac2f",
+          "paint_mode": "native-geometry-material",
+          "closing_context": false
+        },
+        {
+          "research_id": 1396,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 108,
+          "size": [
+            8,
+            8
+          ],
+          "header_part1_offset": 1728,
+          "data_part3_offset": 19300,
+          "encoded_length": 33,
+          "other_header_fields": [
+            5,
+            180
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "38ce3a97148a76a97363dbff2cc3eb86fe87219ed987974e334e5c780bca9290",
+          "indexed_sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+          "opaque_pixels": 64,
+          "transparency_index": 253,
+          "asset": "mpsname-silver-material.png",
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "content": [
+            0,
+            0,
+            8,
+            8
+          ],
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "palette_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "padded_sha256": "fe6de140fa694a7c75d41d4eb9255e92a1d019e99f73a617c409d00029ff8050",
+          "writes_sha256": "d62c6dc27f2e1aefc91555ee496be62253e794f23698f3ae41e5b66bd5871f9c",
+          "paint_mode": "native-geometry-material",
+          "closing_context": false
+        },
+        {
+          "research_id": 1397,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 109,
+          "size": [
+            8,
+            8
+          ],
+          "header_part1_offset": 1744,
+          "data_part3_offset": 19333,
+          "encoded_length": 33,
+          "other_header_fields": [
+            14,
+            180
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "38ce3a97148a76a97363dbff2cc3eb86fe87219ed987974e334e5c780bca9290",
+          "indexed_sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+          "opaque_pixels": 64,
+          "transparency_index": 253,
+          "asset": "mpsname-silver-material.png",
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "content": [
+            0,
+            0,
+            8,
+            8
+          ],
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "palette_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "padded_sha256": "fe6de140fa694a7c75d41d4eb9255e92a1d019e99f73a617c409d00029ff8050",
+          "writes_sha256": "d62c6dc27f2e1aefc91555ee496be62253e794f23698f3ae41e5b66bd5871f9c",
+          "paint_mode": "native-geometry-material",
+          "closing_context": false
+        },
+        {
+          "research_id": 1398,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 110,
+          "size": [
+            8,
+            8
+          ],
+          "header_part1_offset": 1760,
+          "data_part3_offset": 19366,
+          "encoded_length": 33,
+          "other_header_fields": [
+            14,
+            189
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "38ce3a97148a76a97363dbff2cc3eb86fe87219ed987974e334e5c780bca9290",
+          "indexed_sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+          "opaque_pixels": 64,
+          "transparency_index": 253,
+          "asset": "mpsname-silver-material.png",
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "content": [
+            0,
+            0,
+            8,
+            8
+          ],
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "palette_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "padded_sha256": "fe6de140fa694a7c75d41d4eb9255e92a1d019e99f73a617c409d00029ff8050",
+          "writes_sha256": "d62c6dc27f2e1aefc91555ee496be62253e794f23698f3ae41e5b66bd5871f9c",
+          "paint_mode": "native-geometry-material",
+          "closing_context": false
+        },
+        {
+          "research_id": 1399,
+          "file": "PHYS0.SS",
+          "file_sha256": "deac746ad65292ebadd83b8ace7d2cea298741111dcdda13e184049516f1ef16",
+          "ordinal": 111,
+          "size": [
+            8,
+            8
+          ],
+          "header_part1_offset": 1776,
+          "data_part3_offset": 19399,
+          "encoded_length": 33,
+          "other_header_fields": [
+            5,
+            189
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "38ce3a97148a76a97363dbff2cc3eb86fe87219ed987974e334e5c780bca9290",
+          "indexed_sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+          "opaque_pixels": 64,
+          "transparency_index": 253,
+          "asset": "mpsname-silver-material.png",
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "content": [
+            0,
+            0,
+            8,
+            8
+          ],
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "palette_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+          "padded_sha256": "fe6de140fa694a7c75d41d4eb9255e92a1d019e99f73a617c409d00029ff8050",
+          "writes_sha256": "d62c6dc27f2e1aefc91555ee496be62253e794f23698f3ae41e5b66bd5871f9c",
+          "paint_mode": "native-geometry-material",
+          "closing_context": false
         }
       ]
     }

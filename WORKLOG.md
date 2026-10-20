@@ -7552,3 +7552,16 @@ timeout 180 docker run --rm --network none --user 1000:1000 \
 - 本機入口為既有hd-opening-animation-sources-r84工作根的r135-dec-display-close-final.json；其餘收據為r135-ready-review-r1.json、r135-formal-build-r1.json、r135-formal-display-review-r1.json、r135-packaging-r1.json及r135-final-native-partition-r1.json。準備、提升、建置、測試及收尾腳本位於同根r135-*-source-r*.py。容器、暫存產物與擁有權於收尾核對，正式接線及來源清冊一併commit、push。
 - 收尾清除本輪Go建置快取並無損封存已結束的原型測試ELF，共回收290148352 bytes；目前正式程式、測試及原型／正式圖片保持，沒有建立素材副本。入口r135-cleanup-r1.json，舊程式可由tools/evidence_storage.py restore還原。
 - 最終交接r135-final-handoff-r1.json的SHA-256為8d4b933b99a9b1938b27f6a6551f8fb2b96ef7359e664d01610fb6c9a5494868。47343個保持原樣的保護檔案完整SHA相同，10個本批公開更新另依正式建置及增量審查核對；386張原PNG、全部存檔與現用原版輸入保持。工作樹實占37646630912 bytes，約35.06GiB，無root-owned產物、錯誤.md目錄或封存暫存檔。正式顯示收尾入口SHA-256為d6ce84a1f8fee857e22070527e29ca0c9d82ff8a1ad486bcce4cb783b4a56eb8。
+
+## 2026-10-21 R137 幾何來源與SS／PIK接線
+
+- 前輪R135已推送f0cfb36，接續剩餘10個幾何來源。載入規格流程路由與現行清冊，更新README前核對README標準，沿用既有D46與片尾來源測試，不新增原版內部調查、音訊／存檔或完整多語矩陣。
+- 既有PHYS0.SS第104至111幀為八個黑色遮罩，CLOS-ROC.SS第17及21幀為兩個1乘1棕色圖像。重用中性材質原PNG，黑色點採RGB各8至20的細炭色、alpha始終255；非黑點沿既有原生RGB亮度增益。原輪廓、透明區、座標與幾何保持，相同內容共用取樣，不露出被遮住的下層內容。
+- 隔離原型八個Main來源及兩個片尾來源通過，共12張圖及兩項／10個含子項零skip。目視後審READY才提升正式接線；Main實際執行既有D46，片尾沿原始MZ、來源選擇、完整finish、原版store及兩條發布指令。fixture提供參數、來源值及返回狀態，不冒稱正常地圖或片尾路徑。
+- 正式0f96b219…建置與go vet通過，三項／20個含子項零skip。12張正式PNG與原型逐byte相同，Main共5056個HD變動點，片尾兩個來源各16點；兩條發布路徑及共用原生內容的圖像相同。895場景完整載入與兩類來源各四種必要錯件通過，錯誤原因必須命中目標來源。
+- 正式hd_asset_files實際收集387檔並核對指紋，386張原PNG、完整生成提示與權利保持；只延伸10筆來源取樣及清冊固定指紋，未建立素材副本。原版像素及fixture維持workplace本機，沒有新增平台包、版號或Release。
+- 保留原1467筆歷史連結並新增10筆DISPLAY-PASS。現為1477連結、1464個唯一來源，含317個既有限定CONFORMED及1160個DISPLAY-PASS。1533張indexed內容完整SHA相同，既有SS／PIK清冊的非空來源全有正式連結；69透明及19零尺寸保持。這不等於全量玩家圖像完成，其他47檔、程式繪圖、完整五語、影片與新版交付繼續。
+- 更新唯一CONTEXT與JSON清單並產生WORKLIST，README只更新穩定素材摘要；32張既有實拍、328個語言資源與1975項／933shown／950pending／92unreachable文字普查保持。不新增Noto、翻譯或正常玩家路徑信用，R135字形動畫驗收保留，沒有重跑舊多語或全矩陣。
+- 本機入口為既有hd-opening-animation-sources-r84工作根的r137-geometry-display-close-final.json，SHA-256為08deb9f2dc96801b45ca80bd2003ddab61f8c28375694ff3047510054f8b0395。同根保存READY、正式建置、顯示、封裝與原生來源分組收據及r137-*-source-r*.py腳本。正式來源與清冊一併commit、push，擁有權、空間及Docker清理於收尾核對。
+- 收尾清除本輪Go建置快取，無損封存R134、R135舊正式程式／測試及R137原型測試，共5個ELF，回收345931776 bytes，約330MiB；現用R137正式程式與測試保持原路徑。原始與壓縮內容SHA逐檔核對，R135舊程式及測試另與原建置指紋相同；還原沿tools/evidence_storage.py，入口r137-cleanup-r1.json。
+- 最終核對腳本r1的收據清單仍引用上一批DEC名稱，在全部內容核對後寫交接時停止；只修正該檔名後由r2以同一程式及輸入乾淨重跑，不計產品失敗。最終r137-final-handoff-r1.json的SHA-256為c7dc47bea6ab3b297c951627108335122028990665cff44fc68748214b031cc5。47343個保持原樣的保護檔案完整SHA相同，386張原PNG、全部存檔與原版輸入保持；其餘10個公開更新依正式建置與增量審查核對。工作樹實占37691510784 bytes，約35.10GiB，無root-owned產物、錯誤.md目錄或封存暫存檔。

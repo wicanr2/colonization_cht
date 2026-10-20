@@ -14,6 +14,7 @@ import (
 
 // 規格069 R76／R77 READY：來源、解碼畫布與原圖固定，所有狀態只供顯示。
 type hdSceneDefinition struct {
+	nativeGeometryMaterial                                    bool
 	nativeGlyphMaterial                                       bool
 	closingBackground                                         bool
 	artSize                                                   image.Point
@@ -178,7 +179,7 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 		}
 		p.frames = append(p.frames, f)
 	}
-	if len(p.frames) != 885 {
+	if len(p.frames) != 895 {
 		return nil, fmt.Errorf("scene source group")
 	}
 	h.m.WatchWrite(0, 0xaffff, func(_ *golem.Machine, a uint32, o, v byte) { p.memoryWrite(a, o, v) })
@@ -654,7 +655,7 @@ func (p *hdSceneRuntime) pictureOnlyCursor(f draftNativeFrame) bool {
 }
 
 func (f *hdSceneFrame) drawCell(out *image.RGBA, x, y, sx, sy int, palette []byte) {
-	if f.nativeGlyphMaterial {
+	if f.nativeGlyphMaterial || f.nativeGeometryMaterial {
 		k := sy/4*320 + sx/4
 		if len(palette) != 768 || k < 0 || k >= len(f.native) || f.native[k] == 253 {
 			return
@@ -664,6 +665,11 @@ func (f *hdSceneFrame) drawCell(out *image.RGBA, x, y, sx, sy int, palette []byt
 			for dx := 0; dx < 4; dx++ {
 				a := f.art.RGBAAt(sx+dx, sy+dy)
 				luma := (77*uint32(a.R) + 150*uint32(a.G) + 29*uint32(a.B) + 128) >> 8
+				if f.nativeGeometryMaterial && palette[at] == 0 && palette[at+1] == 0 && palette[at+2] == 0 {
+					v := byte(8 + luma/21)
+					out.SetRGBA(x+dx, y+dy, color.RGBA{v, v, v, 255})
+					continue
+				}
 				gain := uint32(128) + luma/2
 				shade := func(v byte) byte {
 					v = (v << 2) | (v >> 4)
