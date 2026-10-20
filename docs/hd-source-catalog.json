@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "ac151246e3642051b6b768889be1e62311d08c6019be9a58d7146f69822709ae",
+  "formal_manifest_sha256": "9a0c36162ff2ffac3e57c23b457f0b757a900bda47be13a2120ff2fb6b19bcb7",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,12 +26,12 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 766,
+    "formal_asset_bindings": 829,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
     "other_formats_and_program_drawn_graphics": "not_assessed",
-    "display_pass_source_bindings": 449
+    "display_pass_source_bindings": 512
   },
   "files": [
     {
@@ -11417,7 +11417,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 122,
@@ -11442,7 +11451,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 123,
@@ -11467,7 +11485,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 124,
@@ -11492,7 +11519,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 125,
@@ -11517,7 +11553,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 126,
@@ -11542,7 +11587,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 127,
@@ -11567,7 +11621,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 128,
@@ -11592,7 +11655,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 129,
@@ -11617,7 +11689,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 130,
@@ -11642,7 +11723,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 131,
@@ -11667,7 +11757,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 132,
@@ -11692,7 +11791,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 133,
@@ -11717,7 +11825,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 134,
@@ -11742,7 +11859,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 135,
@@ -11767,7 +11893,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 136,
@@ -11792,7 +11927,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 137,
@@ -11817,7 +11961,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 138,
@@ -11842,7 +11995,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 139,
@@ -11867,7 +12029,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 140,
@@ -11892,7 +12063,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 141,
@@ -11917,7 +12097,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-bell-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 142,
@@ -13626,7 +13815,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 210,
@@ -13651,7 +13849,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 211,
@@ -13676,7 +13883,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 212,
@@ -13701,7 +13917,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 213,
@@ -13726,7 +13951,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 214,
@@ -13751,7 +13985,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 215,
@@ -13776,7 +14019,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 216,
@@ -13801,7 +14053,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 217,
@@ -13826,7 +14087,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 218,
@@ -13851,7 +14121,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 219,
@@ -13876,7 +14155,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 220,
@@ -13901,7 +14189,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 221,
@@ -13926,7 +14223,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 222,
@@ -13951,7 +14257,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 223,
@@ -13976,7 +14291,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 224,
@@ -14001,7 +14325,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 225,
@@ -14026,7 +14359,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-b.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 226,
@@ -14051,7 +14393,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-b.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 227,
@@ -14076,7 +14427,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-b.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 228,
@@ -14101,7 +14461,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-b.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 229,
@@ -14126,7 +14495,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-b.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 230,
@@ -14151,7 +14529,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-hat-b.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 231,
@@ -16046,7 +16433,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 287,
@@ -16071,7 +16467,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 288,
@@ -16096,7 +16501,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 289,
@@ -16121,7 +16535,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 290,
@@ -16146,7 +16569,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 291,
@@ -16171,7 +16603,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 292,
@@ -16196,7 +16637,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 293,
@@ -16221,7 +16671,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 294,
@@ -16246,7 +16705,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 295,
@@ -16271,7 +16739,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 296,
@@ -16296,7 +16773,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 297,
@@ -16321,7 +16807,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 298,
@@ -16346,7 +16841,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 299,
@@ -16371,7 +16875,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 300,
@@ -16396,7 +16909,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 301,
@@ -16421,7 +16943,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-a.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 302,
@@ -16446,7 +16977,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-b.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 303,
@@ -16496,7 +17036,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-b.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 305,
@@ -16521,7 +17070,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-b.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 306,
@@ -16546,7 +17104,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "closing-rocket-b.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+        "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 307,
@@ -77995,6 +78562,1518 @@
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "state": "DISPLAY-PASS",
       "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 121,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "25f97a7706fee72b0676be877f6212820718d4fab9166e2f989480189b556631",
+      "source_indexed_sha256": "4f2ad31052910eec58284354f22c5617e3dd0c90b33f31d6809fac3f5a356c19",
+      "raw_art_rect": [
+        23,
+        51,
+        295,
+        279
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        10
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 122,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "5d1f6188c23eb94854b2d203d8a0bf6a3b43b0ed4b59038efccc2b3d59e96e14",
+      "source_indexed_sha256": "3e63088bf8f02dd166858c2941ed494d184b92c1d77dc216cea36b407a0d3a76",
+      "raw_art_rect": [
+        344,
+        31,
+        596,
+        300
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        10,
+        11
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 123,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "eec670820bc5df792c426e7a544beca31ca5183d66511d0c9e99314fe34ed06d",
+      "source_indexed_sha256": "d29dff81151e1d82ad839d95af56253c5686b9c507a1dfebd5a78529bf8def4a",
+      "raw_art_rect": [
+        645,
+        39,
+        922,
+        291
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        11
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 124,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "b571faad8ff12e7bc3558f5468e58b13a94262bfaeb694a90f7d625128584465",
+      "source_indexed_sha256": "11abbd4b4cf95264ee5526babeba02f6e5897cea40cab79285256870a546bd99",
+      "raw_art_rect": [
+        957,
+        39,
+        1224,
+        291
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        11
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 125,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "b571faad8ff12e7bc3558f5468e58b13a94262bfaeb694a90f7d625128584465",
+      "source_indexed_sha256": "11abbd4b4cf95264ee5526babeba02f6e5897cea40cab79285256870a546bd99",
+      "raw_art_rect": [
+        957,
+        39,
+        1224,
+        291
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        11
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 126,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "b571faad8ff12e7bc3558f5468e58b13a94262bfaeb694a90f7d625128584465",
+      "source_indexed_sha256": "11abbd4b4cf95264ee5526babeba02f6e5897cea40cab79285256870a546bd99",
+      "raw_art_rect": [
+        957,
+        39,
+        1224,
+        291
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        11
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 127,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 6,
+      "source_encoded_sha256": "b571faad8ff12e7bc3558f5468e58b13a94262bfaeb694a90f7d625128584465",
+      "source_indexed_sha256": "11abbd4b4cf95264ee5526babeba02f6e5897cea40cab79285256870a546bd99",
+      "raw_art_rect": [
+        957,
+        39,
+        1224,
+        291
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        11
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 128,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 7,
+      "source_encoded_sha256": "b571faad8ff12e7bc3558f5468e58b13a94262bfaeb694a90f7d625128584465",
+      "source_indexed_sha256": "11abbd4b4cf95264ee5526babeba02f6e5897cea40cab79285256870a546bd99",
+      "raw_art_rect": [
+        957,
+        39,
+        1224,
+        291
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        11
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 129,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 8,
+      "source_encoded_sha256": "eec670820bc5df792c426e7a544beca31ca5183d66511d0c9e99314fe34ed06d",
+      "source_indexed_sha256": "d29dff81151e1d82ad839d95af56253c5686b9c507a1dfebd5a78529bf8def4a",
+      "raw_art_rect": [
+        645,
+        39,
+        922,
+        291
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        11
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 130,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 9,
+      "source_encoded_sha256": "56fcd88672f3add2bf9dfe0b03aada673e2454be2f8af2d2af5077733b00aa24",
+      "source_indexed_sha256": "d5086cdabecb3cf93c69b18f914cee33a70b377c87631b79b7a8cfc3172a426f",
+      "raw_art_rect": [
+        332,
+        665,
+        608,
+        919
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        11
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 131,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 10,
+      "source_encoded_sha256": "25e3ddc7e3ba3763eff5aa172a9919d0d9883347231fb38ef1f8048a3bb6b40c",
+      "source_indexed_sha256": "7a77b8745dfec43321939a508fb631df2abbecca20e982bec755ef7573107612",
+      "raw_art_rect": [
+        644,
+        664,
+        921,
+        919
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        11
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 132,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 11,
+      "source_encoded_sha256": "7923d61c7c9ac815a04056022c9c448c9985a54a74b5d7efca90ecfda109f4d6",
+      "source_indexed_sha256": "aa6ff30d170eeaa683329a9973720d8ae502d530e8f87638779388df62add3e0",
+      "raw_art_rect": [
+        955,
+        677,
+        1230,
+        907
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        10
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 133,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 12,
+      "source_encoded_sha256": "33521bca15bb04ae7d8545a20289f706eaf7ed2c069be373110a579a33526acd",
+      "source_indexed_sha256": "bd407642db1c8d512a0cf924b80dff5f9e66149e68144a03d19f8d5a3461dcac",
+      "raw_art_rect": [
+        23,
+        991,
+        297,
+        1216
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        10
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 134,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 13,
+      "source_encoded_sha256": "ef4737f59b1a4cb13a58fdaff4aa8ef33669ed13718d4163bdbc1aff1068578e",
+      "source_indexed_sha256": "ca45203bd735bc11a748287bfd34e11ab5341d60f0ad307b3db87f2ff9a45e21",
+      "raw_art_rect": [
+        334,
+        991,
+        610,
+        1214
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        10
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 135,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 14,
+      "source_encoded_sha256": "d2702058bf8bc3d30adc5d3fb5ef917ef614888bd70c579e66dbc9137613be3e",
+      "source_indexed_sha256": "19b65fd97bd6ea68813d17e6a1153ea14be44962f948aee263b2bc9bafae4899",
+      "raw_art_rect": [
+        645,
+        991,
+        922,
+        1214
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        10
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 136,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 15,
+      "source_encoded_sha256": "5dcf8c2e11742b1508412f744c58b82d09cedf0a0dee687342cdd1ced51c75e1",
+      "source_indexed_sha256": "4a7facc78d14a8cf58956660188349ab2e7cb24ed2267d8fcb92f6af5e9c847b",
+      "raw_art_rect": [
+        955,
+        991,
+        1229,
+        1215
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        10
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 137,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 16,
+      "source_encoded_sha256": "482cc3be69e29b4ad709267e0a791540c66b8ebc3f0d5bd10ac322511e40aa28",
+      "source_indexed_sha256": "5e5b121f17cd8cc4c1bb0eab9fd1bd76268155203dc0be0d9866bbd4053c3206",
+      "raw_art_rect": [
+        645,
+        991,
+        922,
+        1214
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        10
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 138,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 17,
+      "source_encoded_sha256": "482cc3be69e29b4ad709267e0a791540c66b8ebc3f0d5bd10ac322511e40aa28",
+      "source_indexed_sha256": "5e5b121f17cd8cc4c1bb0eab9fd1bd76268155203dc0be0d9866bbd4053c3206",
+      "raw_art_rect": [
+        645,
+        991,
+        922,
+        1214
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        10
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 139,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 18,
+      "source_encoded_sha256": "268309dee526bfc6d7233e1d1a9b6ebb5f54fac30169372e42ae03139a67878f",
+      "source_indexed_sha256": "d3be1eab276b296cba16045fb10f9dc24b3829b99b4481f38ccd9bcfc51b29c7",
+      "raw_art_rect": [
+        334,
+        991,
+        610,
+        1214
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        10
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 140,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 19,
+      "source_encoded_sha256": "8cacdddb97ed418fadfdd45a2ee6137be38f311763f91a2a6aef861b64c48847",
+      "source_indexed_sha256": "0d271d253e3b0c8508b4c92ee14d11b716c2471bcc4d7c2ef84f6f9127895aa3",
+      "raw_art_rect": [
+        644,
+        664,
+        921,
+        919
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        10
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-bell-a.png",
+      "asset_sha256": "58b441cbeb0580424c6fb3702686b7699b024b5c86b2ffa0f32c025bb9827ad7",
+      "source_research_id": 141,
+      "source_file": "CLOS-BEL.SS",
+      "source_ordinal": 20,
+      "source_encoded_sha256": "09ce1b7b97de7cc5286918a2cd3ab9546339208777e0a558481712c56a2e50cb",
+      "source_indexed_sha256": "6eece189dc3b698f2d0a4d8b19ecbdb0b76d7f6be5c43210527f33c92c5bd977",
+      "raw_art_rect": [
+        23,
+        51,
+        295,
+        279
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        12,
+        10
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-a.png",
+      "asset_sha256": "5b5a0c8e6f7694888f5738d99bfb6bfeb40cd7f3f8781aa50bfe2e13a5a08379",
+      "source_research_id": 209,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "86d12844446dc155b4eb80b9cdade4cceb12c5559da708e09044bdb46f2fc5a7",
+      "source_indexed_sha256": "ca11f1e473099a3d7a3de6b4c0e6a68ca73bc278b43d3079d00ccb3cb6a8cf1c",
+      "raw_art_rect": [
+        31,
+        69,
+        300,
+        272
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        28,
+        22
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-a.png",
+      "asset_sha256": "5b5a0c8e6f7694888f5738d99bfb6bfeb40cd7f3f8781aa50bfe2e13a5a08379",
+      "source_research_id": 210,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "e9d34ea511d1ff033cde573bf8633418f242c10476a24b2c182cba0a8bc3b38f",
+      "source_indexed_sha256": "142444c5a87c059bb8d58a5ae56fc5a6a23ed44da027aab0799a00d1232b3dc4",
+      "raw_art_rect": [
+        339,
+        78,
+        610,
+        261
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        27,
+        19
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-a.png",
+      "asset_sha256": "5b5a0c8e6f7694888f5738d99bfb6bfeb40cd7f3f8781aa50bfe2e13a5a08379",
+      "source_research_id": 211,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "3fc78d61b1e780ef86ce861c0696cc2505d8b4107e82ae0716a91af9741cade5",
+      "source_indexed_sha256": "92469cb1f78eea023f9b78f9fd724dd6a578e464a830ca627e0c0a7efd02d0c4",
+      "raw_art_rect": [
+        654,
+        78,
+        923,
+        257
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        26,
+        17
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-a.png",
+      "asset_sha256": "5b5a0c8e6f7694888f5738d99bfb6bfeb40cd7f3f8781aa50bfe2e13a5a08379",
+      "source_research_id": 212,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "0a3210198969dd006f7524f9af264bc0e956ae6b85dca3bf2ab0cc4401f179dd",
+      "source_indexed_sha256": "94860fb65847c3a2521e752dbaa08243087bef1b8f77b4627f2b5077a2bf2a2b",
+      "raw_art_rect": [
+        965,
+        70,
+        1221,
+        272
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        26,
+        20
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-a.png",
+      "asset_sha256": "5b5a0c8e6f7694888f5738d99bfb6bfeb40cd7f3f8781aa50bfe2e13a5a08379",
+      "source_research_id": 213,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "a11c23cb41c1fb1acd6896a73e9e8ce4c74c9a86d37936c7cdd73fdc620a83ce",
+      "source_indexed_sha256": "55c6dcc9fbd8291e399a93c2600f7b3d1182a794750dda5683525f8d0a58da09",
+      "raw_art_rect": [
+        30,
+        378,
+        294,
+        579
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        23,
+        17
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-a.png",
+      "asset_sha256": "5b5a0c8e6f7694888f5738d99bfb6bfeb40cd7f3f8781aa50bfe2e13a5a08379",
+      "source_research_id": 214,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "ff1da45bad6d0e11f18d109bad930563b2f60787c51f14af1b11293233667743",
+      "source_indexed_sha256": "2d1b08bf463a75f7f0eb700fc94c404b17a537ef92173e64a10c1881819c1875",
+      "raw_art_rect": [
+        339,
+        358,
+        610,
+        589
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        22,
+        20
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-a.png",
+      "asset_sha256": "5b5a0c8e6f7694888f5738d99bfb6bfeb40cd7f3f8781aa50bfe2e13a5a08379",
+      "source_research_id": 215,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 6,
+      "source_encoded_sha256": "29af0da489f9bf66da5f71894ed25d6d1f04126c32d3577ba2a143214ec1aa50",
+      "source_indexed_sha256": "ecb1bade4a67060dae7437e66d5ffd9d6b00992c9ef41c8b0205d7e97965d828",
+      "raw_art_rect": [
+        653,
+        351,
+        918,
+        603
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        21,
+        21
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-a.png",
+      "asset_sha256": "5b5a0c8e6f7694888f5738d99bfb6bfeb40cd7f3f8781aa50bfe2e13a5a08379",
+      "source_research_id": 216,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 7,
+      "source_encoded_sha256": "348080da7c5f8db5b804bf62d07ca16c1b8e4301ca0479bc47404bae8fbf5e26",
+      "source_indexed_sha256": "0aba405125ece3daac5661a3416e3f88d460e112fca8ad88ca02150b39c60354",
+      "raw_art_rect": [
+        965,
+        356,
+        1226,
+        594
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        21,
+        19
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-a.png",
+      "asset_sha256": "5b5a0c8e6f7694888f5738d99bfb6bfeb40cd7f3f8781aa50bfe2e13a5a08379",
+      "source_research_id": 217,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 8,
+      "source_encoded_sha256": "f2e5cb75d6ae4b439bc19ede714ff229b9725a2c003bf2eac808f37194b25b08",
+      "source_indexed_sha256": "6e6bad0cd307a63dd49e75b3d1a6937b66d6302dd2117f273526f354160d2917",
+      "raw_art_rect": [
+        44,
+        698,
+        301,
+        879
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        25,
+        17
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-a.png",
+      "asset_sha256": "5b5a0c8e6f7694888f5738d99bfb6bfeb40cd7f3f8781aa50bfe2e13a5a08379",
+      "source_research_id": 218,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 9,
+      "source_encoded_sha256": "ce00e8d9faea94ae07ce9ef319d07f40e522ca2ad80e3903f200d1527954676d",
+      "source_indexed_sha256": "a730c84d8325fa72d3a837e71c3f92ac71955ee7c95ab79e1badb243f34bd712",
+      "raw_art_rect": [
+        338,
+        671,
+        605,
+        906
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        20,
+        17
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-a.png",
+      "asset_sha256": "5b5a0c8e6f7694888f5738d99bfb6bfeb40cd7f3f8781aa50bfe2e13a5a08379",
+      "source_research_id": 219,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 10,
+      "source_encoded_sha256": "901fc60662f62f070725513736115ff3257941dbc2ca2c6470ffbd627e4d83f3",
+      "source_indexed_sha256": "c179af3435529747d1ca543f9349529dd1f47a753cc7a9f6922ce936980d6fff",
+      "raw_art_rect": [
+        652,
+        671,
+        924,
+        905
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        20,
+        18
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-a.png",
+      "asset_sha256": "5b5a0c8e6f7694888f5738d99bfb6bfeb40cd7f3f8781aa50bfe2e13a5a08379",
+      "source_research_id": 220,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 11,
+      "source_encoded_sha256": "785678c353b25456c2c5b5a68cdf6451f5b15939aa51226e558efb7622f99aa7",
+      "source_indexed_sha256": "07613505f7ad61153c77f12497f0d3f2b0db269c3c51ceb010ed83f1c025e5e4",
+      "raw_art_rect": [
+        970,
+        714,
+        1231,
+        863
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        24,
+        13
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-a.png",
+      "asset_sha256": "5b5a0c8e6f7694888f5738d99bfb6bfeb40cd7f3f8781aa50bfe2e13a5a08379",
+      "source_research_id": 221,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 12,
+      "source_encoded_sha256": "5c494fba89ecbf591a1e18c14f0384b3e1d6f1df14bc9d2afd6b6fdb799009aa",
+      "source_indexed_sha256": "47f2249548a948499eec27a5cc4c4107d93a1b3fc7320b39e17f64cdf45f8e72",
+      "raw_art_rect": [
+        30,
+        1053,
+        295,
+        1143
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        28,
+        9
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-a.png",
+      "asset_sha256": "5b5a0c8e6f7694888f5738d99bfb6bfeb40cd7f3f8781aa50bfe2e13a5a08379",
+      "source_research_id": 222,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 13,
+      "source_encoded_sha256": "2ca0b33fb9946e29fb8cf3425848f747dfc6f18d86aa09730a6a7f2800f10f8c",
+      "source_indexed_sha256": "8695a61d24d33db1719091cdd11d24ffcc4ea41ef36821d6260202a62ff8359c",
+      "raw_art_rect": [
+        332,
+        1044,
+        600,
+        1164
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        26,
+        13
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-a.png",
+      "asset_sha256": "5b5a0c8e6f7694888f5738d99bfb6bfeb40cd7f3f8781aa50bfe2e13a5a08379",
+      "source_research_id": 223,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 14,
+      "source_encoded_sha256": "fa65d4c746cf7ce7cc21a2415670d83701a09eab552112f4598c7057e76e99fe",
+      "source_indexed_sha256": "d7611ed89afc8b050b4ce44cc467f34f757def759abc4f20dcf4efabf6602787",
+      "raw_art_rect": [
+        658,
+        988,
+        918,
+        1203
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        21,
+        17
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-a.png",
+      "asset_sha256": "5b5a0c8e6f7694888f5738d99bfb6bfeb40cd7f3f8781aa50bfe2e13a5a08379",
+      "source_research_id": 224,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 15,
+      "source_encoded_sha256": "307ade5f5a1c43a65ae9d8d2e11151f0d4f141a6869420e56ebfce9512c6ec99",
+      "source_indexed_sha256": "e1ed598e68182d247bd3f92aeaf05435ca9cb02741ef288c213cc22188673d7d",
+      "raw_art_rect": [
+        1004,
+        971,
+        1187,
+        1212
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        15,
+        22
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-b.png",
+      "asset_sha256": "b080251bef2e3e4cd9a0d41ff0813d49831982995bf3bed3c6521b84252432e2",
+      "source_research_id": 225,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 16,
+      "source_encoded_sha256": "748481d9dece77f6b0ccbb5efff5bd5eb17027729526cdb1ee9d93a8877f0332",
+      "source_indexed_sha256": "06346d884c655f68e59023f480d34089f2b9c2c83fab6a3725b082787c5785fc",
+      "raw_art_rect": [
+        47,
+        96,
+        293,
+        336
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        22,
+        20
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-b.png",
+      "asset_sha256": "b080251bef2e3e4cd9a0d41ff0813d49831982995bf3bed3c6521b84252432e2",
+      "source_research_id": 226,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 17,
+      "source_encoded_sha256": "2d2443c263ccbb4cd04c8993a9c14e50bbc3d083ed9dd6a9410f892b2a2330e9",
+      "source_indexed_sha256": "d3bf2575eab3b9fa5914f560be1aa89e129c995786d615826c4dacfe1d4380f0",
+      "raw_art_rect": [
+        353,
+        152,
+        615,
+        313
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        26,
+        15
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-b.png",
+      "asset_sha256": "b080251bef2e3e4cd9a0d41ff0813d49831982995bf3bed3c6521b84252432e2",
+      "source_research_id": 227,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 18,
+      "source_encoded_sha256": "89a624dca44de578e517326da530bd016e6473058515c77b232aecbb33d4d8bb",
+      "source_indexed_sha256": "82bcaf2da650169a5a5c3a42c4ba2c007eacc539a1285ec3e00b07f415b09fcd",
+      "raw_art_rect": [
+        654,
+        179,
+        927,
+        286
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        31,
+        11
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-b.png",
+      "asset_sha256": "b080251bef2e3e4cd9a0d41ff0813d49831982995bf3bed3c6521b84252432e2",
+      "source_research_id": 228,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 19,
+      "source_encoded_sha256": "fc792636d438df65d29a9f2ae49fd82658e85c6f1710a8c4b8aeb06af3c7fba3",
+      "source_indexed_sha256": "6323a3932323fc3bedbeef86b768b2943584aff0fe97bd30f040f4be50080459",
+      "raw_art_rect": [
+        962,
+        170,
+        1221,
+        296
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        30,
+        13
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-b.png",
+      "asset_sha256": "b080251bef2e3e4cd9a0d41ff0813d49831982995bf3bed3c6521b84252432e2",
+      "source_research_id": 229,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 20,
+      "source_encoded_sha256": "7f198a53649dc1ba0f45b4dd934c538524432f3bb3d78a8d988cb82ca0c1108f",
+      "source_indexed_sha256": "8f7d0cb69f4c358a5ebefc4d1a2d453219faabd0e330436541eea19948348f13",
+      "raw_art_rect": [
+        40,
+        450,
+        302,
+        660
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        28,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-hat-b.png",
+      "asset_sha256": "b080251bef2e3e4cd9a0d41ff0813d49831982995bf3bed3c6521b84252432e2",
+      "source_research_id": 230,
+      "source_file": "CLOS-HAT.SS",
+      "source_ordinal": 21,
+      "source_encoded_sha256": "fdde3663a960c8656f7db3803c16f6c4b2b4670691b388b18fbf9eeeb25842e4",
+      "source_indexed_sha256": "dfd6713d9ccc69a8e5906f7d5d19569951b885113663a567552573caac74fcb3",
+      "raw_art_rect": [
+        345,
+        443,
+        605,
+        662
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        31,
+        28
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-a.png",
+      "asset_sha256": "3b6df7335f3f810e319a04efcedd9d69ee25fa4ec674ad336a18582ed9fc200e",
+      "source_research_id": 286,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "ab567b6bfd715bc37912daef9a6a33295061c22d75c1147133a55d38db35a75d",
+      "source_indexed_sha256": "e96dc7c23e8f765ee48c42fe19b2bb90b44223adac720b7dde8e031a2923ca90",
+      "raw_art_rect": [
+        56,
+        67,
+        259,
+        296
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        9,
+        10
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-a.png",
+      "asset_sha256": "3b6df7335f3f810e319a04efcedd9d69ee25fa4ec674ad336a18582ed9fc200e",
+      "source_research_id": 287,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "d9ed6ecdddf5b008e55a18e8a4af9b842700f9eb1d9aa113b257de9b3325ae6a",
+      "source_indexed_sha256": "fa45f704bbe9a969a8ff15569c208602df2fa733da3c64f0a1b1d90d84605eff",
+      "raw_art_rect": [
+        333,
+        164,
+        608,
+        231
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        83,
+        17
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-a.png",
+      "asset_sha256": "3b6df7335f3f810e319a04efcedd9d69ee25fa4ec674ad336a18582ed9fc200e",
+      "source_research_id": 288,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "e9cac3814044733835fbc2d6f1aaeb57677a2dbb12b81a78c02dcf2763114387",
+      "source_indexed_sha256": "02eb819aa03c24c9848a5b518559df72b402e528a41b7084b54618861c8870e1",
+      "raw_art_rect": [
+        652,
+        180,
+        936,
+        218
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        58,
+        7
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-a.png",
+      "asset_sha256": "3b6df7335f3f810e319a04efcedd9d69ee25fa4ec674ad336a18582ed9fc200e",
+      "source_research_id": 289,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "0748f116d9fb87c87fae0e83534b9c449fe5ec0aac01031ca454c64d7c714a0f",
+      "source_indexed_sha256": "fbf088415f12899270873c0282d14ede1fbcab96c7d0741a922489d638c9e91e",
+      "raw_art_rect": [
+        967,
+        150,
+        1202,
+        250
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        36,
+        12
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-a.png",
+      "asset_sha256": "3b6df7335f3f810e319a04efcedd9d69ee25fa4ec674ad336a18582ed9fc200e",
+      "source_research_id": 290,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "17bf383ad91f6aebdac47e3a8e0abd65fe841bac7747a634f469dde8cda512e8",
+      "source_indexed_sha256": "929c74b2ab02a12c979199d509ff68c235b6561cd455b1ef0260e36dd3086be5",
+      "raw_art_rect": [
+        205,
+        421,
+        305,
+        515
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        20,
+        15
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-a.png",
+      "asset_sha256": "3b6df7335f3f810e319a04efcedd9d69ee25fa4ec674ad336a18582ed9fc200e",
+      "source_research_id": 291,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "d3d7ad8c2acfb0ccc94046ceda05967e393db8eb857691f42642324a9be31300",
+      "source_indexed_sha256": "9c1eb8bb64958eed53f6ecc04bde3206b52dfab53fdeb0d30b1c06fc51205cdd",
+      "raw_art_rect": [
+        459,
+        395,
+        534,
+        468
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        9,
+        18
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-a.png",
+      "asset_sha256": "3b6df7335f3f810e319a04efcedd9d69ee25fa4ec674ad336a18582ed9fc200e",
+      "source_research_id": 292,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 6,
+      "source_encoded_sha256": "7f4df05e4ca745269cbc9b89717eef2372e692fdc5eb1d165e150c6ad0e452b0",
+      "source_indexed_sha256": "947c2dcba41a9d7ae0cc37bf09c3d991e1873a057926193c73d801a6ea4900c5",
+      "raw_art_rect": [
+        709,
+        386,
+        812,
+        493
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        5,
+        12
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-a.png",
+      "asset_sha256": "3b6df7335f3f810e319a04efcedd9d69ee25fa4ec674ad336a18582ed9fc200e",
+      "source_research_id": 293,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 7,
+      "source_encoded_sha256": "e53dec3b3880c085170d41d572b9c68eb31433175b17e9b97316b97c0fe7c387",
+      "source_indexed_sha256": "39a1a94328f406ff99e497c47bcb536117cf4b2241778adff2d61ca8a7f5d209",
+      "raw_art_rect": [
+        962,
+        403,
+        1206,
+        578
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        7,
+        5
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-a.png",
+      "asset_sha256": "3b6df7335f3f810e319a04efcedd9d69ee25fa4ec674ad336a18582ed9fc200e",
+      "source_research_id": 294,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 8,
+      "source_encoded_sha256": "de7a159abb665e44456a78f7cc4406048f142948439a6bac38c8301096df8cde",
+      "source_indexed_sha256": "711396e3a9095102d4ec367c0b9e847da9b176514f2ee0cc4a4b168955b8915c",
+      "raw_art_rect": [
+        73,
+        644,
+        288,
+        875
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        23,
+        32
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-a.png",
+      "asset_sha256": "3b6df7335f3f810e319a04efcedd9d69ee25fa4ec674ad336a18582ed9fc200e",
+      "source_research_id": 295,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 9,
+      "source_encoded_sha256": "bcc71141e0c210eea052a90394df5ed018f2ce24c6f3d49fdff2889db37c3878",
+      "source_indexed_sha256": "63f8ddb1f919cc33cddd0f8651a26d77482d45501781c7a78917d90dfd4bd6b0",
+      "raw_art_rect": [
+        411,
+        673,
+        576,
+        850
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        30,
+        49
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-a.png",
+      "asset_sha256": "3b6df7335f3f810e319a04efcedd9d69ee25fa4ec674ad336a18582ed9fc200e",
+      "source_research_id": 296,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 10,
+      "source_encoded_sha256": "5c05fab8cfd43ecb28ffb309b5338690676324b69b762c66fe1f4335d2d9638d",
+      "source_indexed_sha256": "4904519182b1174edd47ae9028a38242ad4e44fddea3967deecb1a5cf5d9cff8",
+      "raw_art_rect": [
+        664,
+        678,
+        891,
+        904
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        25,
+        31
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-a.png",
+      "asset_sha256": "3b6df7335f3f810e319a04efcedd9d69ee25fa4ec674ad336a18582ed9fc200e",
+      "source_research_id": 297,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 11,
+      "source_encoded_sha256": "3a7dae6470c9ffb0916a34e484fa7081c06530216616c948162af40783905092",
+      "source_indexed_sha256": "75c72398012bf9beb03a4be148d2c673a61cae98c2ffbbfec3428359a6779732",
+      "raw_art_rect": [
+        985,
+        674,
+        1217,
+        906
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        25,
+        31
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-a.png",
+      "asset_sha256": "3b6df7335f3f810e319a04efcedd9d69ee25fa4ec674ad336a18582ed9fc200e",
+      "source_research_id": 298,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 12,
+      "source_encoded_sha256": "38650223fa34bfbb00981a83428d790938908c166b252eb7a878412d357570ab",
+      "source_indexed_sha256": "574d90333e3f30d539a76a7d00c8eb7134ede3a3ec7c7e5e95bc976a6712084d",
+      "raw_art_rect": [
+        44,
+        935,
+        308,
+        1213
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        21,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-a.png",
+      "asset_sha256": "3b6df7335f3f810e319a04efcedd9d69ee25fa4ec674ad336a18582ed9fc200e",
+      "source_research_id": 299,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 13,
+      "source_encoded_sha256": "aece39e51e036abfe8d4967e862509b5b8a2e8956f87379072896438de2c3637",
+      "source_indexed_sha256": "a759fa81d6c8616f3cbdca2b3ffeee5f051380e2660ba28d89ecf04bc39cc25a",
+      "raw_art_rect": [
+        369,
+        936,
+        598,
+        1213
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        18,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-a.png",
+      "asset_sha256": "3b6df7335f3f810e319a04efcedd9d69ee25fa4ec674ad336a18582ed9fc200e",
+      "source_research_id": 300,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 14,
+      "source_encoded_sha256": "7b842160091ab6442b998c855b52ab00aeb585a300212b4b80054cc28263f1ad",
+      "source_indexed_sha256": "428498927401b0734d6a63e6d5bda3cf0a8be445c750f964e6937f111e7009aa",
+      "raw_art_rect": [
+        670,
+        936,
+        898,
+        1212
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        18,
+        22
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-a.png",
+      "asset_sha256": "3b6df7335f3f810e319a04efcedd9d69ee25fa4ec674ad336a18582ed9fc200e",
+      "source_research_id": 301,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 15,
+      "source_encoded_sha256": "c2d7ff07a9312a2fac59f26f5343efa2df92819317c648b3ef40d5891409a996",
+      "source_indexed_sha256": "322a3d6f8af76a654561aa63b72b547b87fdd504631bf74cd2d5c8a233d800ee",
+      "raw_art_rect": [
+        962,
+        937,
+        1217,
+        1212
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        19,
+        22
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-b.png",
+      "asset_sha256": "15a0a3734b372b234f24d97849e8d1bdb716a2292b8210fc01a6dca1484c25fc",
+      "source_research_id": 302,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 16,
+      "source_encoded_sha256": "3cfc42c10ac4eebf04a8eaa6c2f4a459b9cb3798c3d0efdd3500292c52b805f1",
+      "source_indexed_sha256": "c31580c33e0c00c98051921d9e1e9a189d734276e8e25b6244de7afef8dfafd6",
+      "raw_art_rect": [
+        39,
+        43,
+        288,
+        332
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        18,
+        21
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-b.png",
+      "asset_sha256": "15a0a3734b372b234f24d97849e8d1bdb716a2292b8210fc01a6dca1484c25fc",
+      "source_research_id": 304,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 18,
+      "source_encoded_sha256": "d75059a4fac41d7a30fa01d7847808ffe1fdf4f6e103e6c85150b16fef155ae2",
+      "source_indexed_sha256": "8412949ba5cc284c0a4291550d9912301a51c80396ca1e6745446cf706896dee",
+      "raw_art_rect": [
+        360,
+        43,
+        603,
+        345
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        18,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-b.png",
+      "asset_sha256": "15a0a3734b372b234f24d97849e8d1bdb716a2292b8210fc01a6dca1484c25fc",
+      "source_research_id": 305,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 19,
+      "source_encoded_sha256": "3c7e32011b5bfda6cae6210912cc7c071f27c18cdc1af744da713c0915a65d5e",
+      "source_indexed_sha256": "e7639bcf421d9aa2b6cb4279ea014610e08b42c7fa8de13c9e733cd4b4afbdf0",
+      "raw_art_rect": [
+        664,
+        46,
+        918,
+        348
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        20,
+        24
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "closing-rocket-b.png",
+      "asset_sha256": "15a0a3734b372b234f24d97849e8d1bdb716a2292b8210fc01a6dca1484c25fc",
+      "source_research_id": 306,
+      "source_file": "CLOS-ROC.SS",
+      "source_ordinal": 20,
+      "source_encoded_sha256": "33c7d3e9457ae1ec90228fe32edbf1e8712c18f1eb34abf6e1403a910c5c802e",
+      "source_indexed_sha256": "0ec75fd014d94ac10902beda589d3c5ebaa3e375319cebf7785a9dd6db1b394f",
+      "raw_art_rect": [
+        983,
+        43,
+        1234,
+        348
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        19,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
     }
   ],
   "limitations": [
@@ -78950,6 +81029,13 @@
     "sources": 55,
     "receipt_sha256": "9ce4dfd70103ab9b5e658b62c08279c47dd98a834eacbf77cd3a43acf8f37724",
     "formal_binary_sha256": "f324ef16f218b28b8b52f31e9db8516fd1885f47d568064b43e40780d1f3b9c3",
+    "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+  },
+  "last_closing_props_display": {
+    "state": "DISPLAY-PASS",
+    "sources": 63,
+    "receipt_sha256": "0591d45f5303f89a900ef6dfab34e25d194668c24472c1612a0d393f2eec0a1c",
+    "formal_binary_sha256": "8db167a0abd400b3d34abc369929ae9d131ee346ca6d905fdb69031459e1f6b7",
     "scope": "pinned CLOSING MZ image loaded in dosgolem; production source selector and full-source finish, actual original store and two publication opcodes, existing background capture and published renderer; SS arguments, source values and return state supplied by fixtures; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
   }
 }
