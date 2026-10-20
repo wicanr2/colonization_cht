@@ -3333,3 +3333,31 @@ R118把45張BDARK併入55筆單色遮罩／矩形的分組不成立。逐來源�
 現行385張生成原PNG／386檔及986來源連結，含317個既有限定CONFORMED與669個DISPLAY-PASS。現行1552筆原生來源有1533張解碼內容指紋核對、973個唯一來源已有正式連結，另外481字形／文字、10單色幾何、69全透明與19零尺寸。此分組不代表字型／翻譯完成或完整玩家圖像分母，其他47檔與程式繪圖保留未整體驗收。
 
 本機入口為既有hd-opening-animation-sources-r84工作根的r124-bdark-display-close-final.json，SHA-256為8bc31054440b3b9e60c255df941e95d7844da00b87bce36b1b1abc05eb4f4f3c。其他入口為r124-formal-build-r3.json、r124-bdark-formal-check-r3.json、r124-bdark-formal-display-r2/check.json、r124-bdark-packaging-r1.json及r124-final-native-partition-r1.json。README原有32張實拍與其指紋、328語言資源保持；全量HD、完整五語、影片及新版交付仍未完成。
+
+### R134 MPSNAME製作字樣29幀 DRAFT
+
+沿既有OPENING.EXE 04A2:0000完整SS、Main持有權、發布指令與獨立色盤契約，補MPSNAME.SS全部29個非空來源。檔案SHA-256為32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257，原色盤SHA-256為23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be，與已接MPSLOGO色盤相同。來源ID1031至1059，寬24至302、高25或26；完整encoded／indexed與逐點寫入指紋沿既有解碼來源核對。
+
+參考圖確認其內容為The MicroProse Design Group製作字樣的伸展動畫。只在原字形完整持有的像素內合成生成銀色材質，保留每個原字形、黑色陰影、透明區、位置、原版動畫及色盤。材質使用灰階亮度調整原生RGB，沒有以生成字體替換原字形，也不增加譯文、Noto字型或其他語言驗收。
+
+單張生成材質原PNG為2172乘724 RGB，SHA-256為d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad。既有圖片不重編碼；原圖、完整提示與來源記錄在本機r134-material-r1.json，READY後才放入graphics並加入清冊。候選在隔離模組測全部29幀的正式來源選擇、完整返回、VGA發布及HD繪圖畫面，通過後審READY。原版pixels與fixture只留本機；不追加原版內部、時序、音訊／存檔或完整多語矩陣。
+
+### R134 MPSNAME銀色材質29幀 READY
+
+隔離原型29幀全部顯示，30個含子項通過且零skip，共768582個HD材質改變點。每幀都通過原有來源選擇、完整返回、原版全畫布發布指令及整合HD繪圖；來源參數與SS寫入由fixture供應，不宣稱正常片頭路徑。所有變動限定在原字形持有點，黑色背景、黑影及原生透明區完整不變；已目視首幀、中間與最寬末幀對照。
+
+銀色材質的灰階亮度以128加亮度整除2得到128至255的增益，再乘原生RGB並以255正規化；因此原黑色維持黑色，原生字形與陰影層次保持，只增加4倍畫布內的細銀色紋理。完整來源、Main／VGA、獨立色盤與未知寫入撤銷保持原契約。僅新增MPSNAME.SS的29個來源槽，原206個槽與最大18445點上限保持，總數235；沒有更改動畫幀序或計時。
+
+READY收據為既有hd-opening-animation-sources-r84工作根的r134-ready-review-r1.json，原型畫面與反例記錄在r134-prototype-display-r2/check.json。首次未提供DISPLAY時Go測試於GLFW初始化退出，歸類驗證環境失敗；以同一程式與有界Xvfb乾淨重跑後通過，產品沒有因此改動。據此授權正式接線，生成PNG原樣加入graphics與來源清冊；正式建置、必要載入檢查及29張測試畫面通過後記DISPLAY-PASS。
+
+### R134 製作字樣29幀顯示通過
+
+MPSNAME.SS全部29幀已正式接線為DISPLAY-PASS，共768582個可見HD材質改變點。正式r3三十個含子項零skip，29張畫面與原型及正式r2逐byte相同，原字形輪廓、黑影及透明區保持。沿既有來源選擇、完整返回、原版全畫布發布指令與整合HD繪圖；參數與SS寫入由fixture供應，沒有正常片頭、原版時序或Noto／翻譯驗收信用。
+
+正式r2完成六項新增錯件：生成材質及MPSNAME原版檔各驗缺件、錯誤指紋與符號連結，每例先載入完整副本的正對照。副本改由實際來源表收集全部片頭原版檔，並去除重複素材；沒有為其他舊負例新增重驗聲明。首次正式r1因未更新清冊指紋被載入守門拒絕，補齊後r2通過。r3只將清冊狀態由READY記為DISPLAY-PASS並更新相應指紋，其他Go來源、字形材質與載入函式相同；六個r2錯件依未變函式與原始輸入保留，r3另外乾淨重跑29幀畫面。
+
+最終正式程式SHA-256為c0f241d932d53fa553cdca3adb89a11cf901df580aef180c3c240cf744cdeafa，建置與go vet通過。三平台共用的正式hd_asset_files函式核對387檔，含386張生成原PNG與清冊；沒有新增平台包或Release。完整生成提示、方法、權利及29來源指紋在graphics/manifest.json，原PNG沒有裁切、縮放或重編碼。
+
+現行1015個來源連結，含317個既有限定CONFORMED與698個DISPLAY-PASS；1002個唯一來源已接。1533張既有indexed內容完整SHA核對，未接非空來源為452個DEC字形與10個單色幾何，另69全透明及19零尺寸。其他47檔與程式繪圖仍保留未完成，全量HD及完整五語沒有因此完成。README32張實拍與328個語言資源保持。
+
+本機入口為既有hd-opening-animation-sources-r84工作根的r134-mpsname-display-close-final.json、r134-formal-display-r3/check.json、r134-formal-display-review-r3.json、r134-formal-build-r3.json、r134-packaging-r1.json及r134-final-native-partition-r1.json。正式測試可在既有有界非root Docker／Xvfb環境，設定TEST_GAME_ROOT、TEST_HD_ASSETS、TEST_HD_MPSNAME_ROOT為本批fixture根、TEST_HD_MPSNAME_OUTPUT為新的輸出目錄，執行TestHDMPSNameMaterialDisplay。原版、字形參考與fixture只留本機。

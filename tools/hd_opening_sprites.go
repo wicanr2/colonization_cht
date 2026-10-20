@@ -13,10 +13,11 @@ import (
 	"path/filepath"
 )
 
-const hdOpeningSpriteCount = 206
+const hdOpeningSpriteCount = 235
 const hdOpeningSpriteMaxPixels = 18445
 
 type hdOpeningSpriteDefinition struct {
+	silverGlyphMaterial                                         bool
 	independentPaletteSHA                                       string
 	preserveInk                                                 []byte
 	reuseFish                                                   int
@@ -589,6 +590,9 @@ func hdOpeningSpriteSlot(id uint16) (int, bool) {
 	if id >= 1015 && id <= 1030 {
 		return int(id-1015) + 189, true
 	}
+	if id >= 1031 && id <= 1059 {
+		return int(id-1031) + 206, true
+	}
 	if id == 1180 {
 		return 205, true
 	}
@@ -653,7 +657,22 @@ func (s *hdOpeningSpriteRuntime) paintIndependentWithin(out *image.RGBA, f draft
 		}
 		x, y := pos%320*4, pos/320*4
 		sx, sy := int(c.local)%d.w*4, int(c.local)/d.w*4
-		if d.id == 1180 {
+		if d.silverGlyphMaterial {
+			// 規格069 R134：只調整原字形內的材質亮度，原輪廓與黑影保持。
+			at := int(c.value) * 3
+			for dy := 0; dy < 4; dy++ {
+				for dx := 0; dx < 4; dx++ {
+					a := s.art[slot].NRGBAAt(sx+dx, sy+dy)
+					luma := (77*uint32(a.R) + 150*uint32(a.G) + 29*uint32(a.B) + 128) >> 8
+					gain := uint32(128) + luma/2
+					shade := func(v byte) byte {
+						v = (v << 2) | (v >> 4)
+						return byte((uint32(v)*gain + 127) / 255)
+					}
+					out.SetRGBA(x+dx, y+dy, color.RGBA{shade(f.palette[at]), shade(f.palette[at+1]), shade(f.palette[at+2]), 255})
+				}
+			}
+		} else if d.id == 1180 {
 			// 標題的原生字形與透明外緣保持；生成藍底不抹掉原字形。
 			hdOpeningOriginalCell(out, f, pos)
 			native := int(c.value) * 3

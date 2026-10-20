@@ -7512,3 +7512,19 @@ timeout 180 docker run --rm --network none --user 1000:1000 \
 - 更新唯一CONTEXT、JSON工作清單並由tools/worklist.py產生WORKLIST。#59由planned進入in_progress，僅記R130實際戰鬥分析與控制組，未記戰鬥結果、獨立或結局完成。385張HD原PNG／386檔、986連結與328語言資源保持，README32張保持；完整五語、全量HD、影片與新版交付繼續。
 - 本機批次入口為既有hd-opening-animation-sources-r84/r133-attack-census-delta/summary.json及operation.json；增量來源r133-merge-census-source-r1.py、獨立普查依賴審查r133-start-census-delta-audit-r1.json、暫還原及重封存收據同根。正式來源與驗證文件一併commit／push，收尾核對原版未追蹤、工作樹差異與Docker清理。
 - 最終核對13194個保持原樣的保護檔案完整SHA相同，385張原PNG、986來源與328語言資源保持；公開檢查器64張實拍再驗通過，缺原版明確77。收據為r133-final-handoff-r1.json，SHA-256為872a0ea7686f5c76ca1d2b01670873c7cf227482483cf35314dad57bcf8c7a4b。報表收尾由同根r133-finalize-reports-source-r1.py重產，矩陣逐列明列本輪／沿用PASS。生成TSV的空末欄以限定該檔的.gitattributes保留，1975列均維持10欄且無空格尾綴；git diff --check通過。工作樹核對約35.86GiB，沒有root-owned產物、錯誤.md目錄或暫存封存檔。
+
+## 2026-10-21 R134 製作字樣29幀HD材質
+
+- 前輪012ab6a已推送攻擊確認接線，屬實質進展。本輪載入規格流程路由、規格069與當前來源清冊，沿使用者「接線＋測試畫面可見」契約，沒有新增原版內部、時序、音訊／存檔或全矩陣調查。
+- 既有解碼參考確認MPSNAME.SS為The MicroProse Design Group字樣的29幀伸展動畫，來源1031至1059、寬24至302、高25或26，與已接MPSLOGO共用23ae68c4…色盤。只新增HD材質，不增加Noto或翻譯驗收；字型契約保持。
+- 使用imagegen技能的內建工具生成單張2172乘724 RGB銀色材質。完整提示、方法與權利記於graphics/manifest.json的mpsname-silver-material.png；原PNG SHA-256為d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad，完整保存，沒有裁切、縮放或重編碼。材質圖沒有字、標誌或原版像素，原字形仍由本機合法資料供應。
+- 只在完整來源持有的字形點內以材質亮度調整原生RGB，原輪廓、黑色陰影、透明區與動畫保持。既有206個來源定義逐byte保持，新增29槽後為235，最大18445點上限不變，原版資料、輸入與規則不改。
+- DRAFT隔離候選30個含子項零skip，29張顯示與目視首／中／末幀對照通過，共768582個HD改變點。首次缺DISPLAY而在GLFW初始化退出，補有界Xvfb後以同一程式重跑；屬驗證環境失敗。READY後才將素材與接線放入正式來源。
+- 正式r1被未更新的清冊指紋拒絕。補齊hdManifestSHA後r2完成29張顯示及材質／MPSNAME原版檔各三種拒絕，37個含子項零skip。錯件副本改由實際來源表收齊原版檔，每例先載入完整副本，再移除／替換單一目標；並去除重複素材案例。沒有為其他舊負例新增重驗信用。
+- 清冊記DISPLAY-PASS並更新相應指紋後，最終r3 c0f241d9…建置與go vet通過，乾淨重跑29幀、30個含子項零skip。圖片與r2及原型逐byte相同；r3只變清冊狀態及hdManifestSHA，其他Go來源與載入函式相同，六個r2錯件依未變函式與原始輸入保留，明列來源，沒有冒稱r3另跑六項。
+- 三平台共用的正式hd_asset_files函式實際收集387檔並核對全指紋，包含386張生成原PNG及清冊。只更新素材白名單與指紋，沒有新平台包、版號或Release。
+- 索引保留原986連結並增加29個DISPLAY-PASS，現為1015連結／1002唯一來源，含317個既有限定CONFORMED及698個DISPLAY-PASS。1533張既有indexed內容完整SHA全數核對，未接非空來源為452個DEC字形與10個單色幾何，69透明及19零尺寸保持，其他47檔與程式繪圖仍未完成。沒有宣稱完整HD或完整五語。
+- 更新唯一CONTEXT與JSON清單並產生WORKLIST，README只更新穩定素材摘要；32張原實拍、328個語言資源及原385張HD原圖保持。原版字形預覽與fixture只留workplace，沒有新增公開原版參考圖。生成原PNG與來源／權利／指紋清冊一併commit、push。
+- 清理先核對387份臨時素材副本與保留原圖相同後移除，另無損封存五個舊程式，回收484904960 bytes，約0.45GiB。現行r3、原PNG、畫面與測試紀錄保持；還原沿tools/evidence_storage.py，收據r134-cleanup-r1.json。
+- 本機入口為既有hd-opening-animation-sources-r84/r134-mpsname-display-close-final.json，SHA-256為6e665c0465a112ee27501d6bb159685d4ec9dc7143cfe17d187dd97500b74481。其他入口為r134-ready-review-r1.json、r134-formal-display-review-r3.json、r134-packaging-r1.json及r134-final-native-partition-r1.json；準備、建置、測試與收尾腳本在同根r134-*-source-r*.py。Docker、原版未追蹤與擁有權於最終交接核對。
+- 最終交接r134-final-handoff-r1.json的SHA-256為65ebe6561ea1f431cdbbfe49d50a3e344c981260e6f184a8316713b450d67a33。13188個保持原樣的保護檔案完整SHA相同，原385張生成PNG、328語言資源及32張README實拍保持；核對時實占38969245696 bytes，約36.29GiB。沒有root-owned產物、錯誤.md目錄或封存暫存檔；專案容器全已移除，原版／存檔／研究輸入未追蹤，git diff --check通過。

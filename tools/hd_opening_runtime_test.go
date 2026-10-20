@@ -437,11 +437,26 @@ func TestHDOpeningAssetRejection(t *testing.T) {
 	for _, d := range hdOpeningSpriteDefinitions {
 		files = append(files, d.asset)
 	}
+	gameFiles := map[string]bool{"OPENING.EXE": true, "OPENING.PIK": true, "OPENBORD.PIK": true}
+	for _, d := range hdOpeningSpriteDefinitions {
+		gameFiles[d.sourceFile] = true
+	}
+	for name := range gameFiles {
+		files = append(files, name)
+	}
+	unique, seen := files[:0], map[string]bool{}
+	for _, name := range files {
+		if !seen[name] {
+			seen[name] = true
+			unique = append(unique, name)
+		}
+	}
+	files = unique
 	for _, name := range files {
 		for _, kind := range []string{"missing", "wrong", "symlink"} {
 			t.Run(kind+"/"+name, func(t *testing.T) {
 				g, a := t.TempDir(), t.TempDir()
-				for _, f := range []string{"OPENING.EXE", "OPENING.PIK", "OPENBORD.PIK", "OPENSHIP.SS", "OPENSUN.SS", "OPENWND1.SS", "OPENWND2.SS", "OPENMON1.SS", "OPENMON2.SS"} {
+				for f := range gameFiles {
 					if e := os.WriteFile(filepath.Join(g, f), hdOpeningRead(t, filepath.Join(game, f)), 0644); e != nil {
 						t.Fatal(e)
 					}
@@ -458,6 +473,10 @@ func TestHDOpeningAssetRejection(t *testing.T) {
 				}
 				if e := os.WriteFile(filepath.Join(a, "opening-fish-clear-000.png"), hdOpeningRead(t, filepath.Join(assets, "opening-fish-clear-000.png")), 0644); e != nil {
 					t.Fatal(e)
+				}
+				// 每個負例先證明完整私用副本可載入，避免其他缺件造成假通過。
+				if _, e := loadHDOpeningRuntime(&hdRuntime{m: golem.New()}, g, a); e != nil {
+					t.Fatal("valid complete per-case opening fixture", e)
 				}
 				target, original := filepath.Join(a, name), filepath.Join(assets, name)
 				if filepath.Ext(name) != ".png" {
@@ -2144,5 +2163,198 @@ func TestR100FishReuseGuards(t *testing.T) {
 				t.Fatal("unverified sample reuse accepted")
 			}
 		})
+	}
+}
+
+func TestHDMPSNameMaterialDisplay(t *testing.T) {
+	root := os.Getenv("TEST_HD_MPSNAME_ROOT")
+	output := os.Getenv("TEST_HD_MPSNAME_OUTPUT")
+	if root == "" || output == "" {
+		t.Skip("private original fixtures and new output required")
+	}
+	var fixture struct {
+		Palette []byte
+		Frames  []struct {
+			ID              int
+			Encoded, Pixels []byte
+		}
+	}
+	if e := json.Unmarshal(hdOpeningRead(t, filepath.Join(root, "r134-mpsname-fixtures-r1.json")), &fixture); e != nil {
+		t.Fatal(e)
+	}
+	frames := map[int]struct{ Encoded, Pixels []byte }{}
+	for _, f := range fixture.Frames {
+		frames[f.ID] = struct{ Encoded, Pixels []byte }{f.Encoded, f.Pixels}
+	}
+	m := golem.New()
+	h, e := loadHDRuntime(m, os.Getenv("TEST_GAME_ROOT"), os.Getenv("TEST_HD_ASSETS"))
+	if e != nil {
+		t.Fatal(e)
+	}
+	s := h.opening.sprites
+	if e = os.Mkdir(output, 0755); e != nil {
+		t.Fatal(e)
+	}
+	records := []map[string]any{}
+	put := func(at int, words []uint16) {
+		for i, v := range words {
+			binary.LittleEndian.PutUint16(m.Mem[at+i*2:at+i*2+2], v)
+		}
+	}
+	for slot, d := range hdOpeningSpriteDefinitions {
+		if !d.silverGlyphMaterial {
+			continue
+		}
+		t.Run(fmt.Sprintf("%04d", d.id), func(t *testing.T) {
+			clear(s.cells[:])
+			clear(s.published[:])
+			clear(s.pictures[:])
+			clear(s.p.cells[:])
+			clear(m.Mem[hdOpeningMain : hdOpeningMain+64000])
+			f, ok := frames[d.id]
+			if !ok {
+				t.Fatal("missing original fixture", d.id)
+			}
+			native := f.Pixels
+			if hash(native) != hash(hdOpeningRead(t, fmt.Sprintf("/repo/workplace/reports/goal186-display-hd/hd-full-assets-r49/decoded-public-r3/pixels/%04d.idx", d.id))) {
+				t.Fatal("native fingerprint")
+			}
+			pal := fixture.Palette
+			copy(m.Mem[0xafc00:0xaff00], pal)
+			copy(m.Mem[0x50000:], f.Encoded)
+			copy(m.Mem[0x4a20:], []byte{0xc8, 0x28, 0, 0, 0x52, 0x53, 0x50, 0x57, 0x56, 0x8b, 0x47, 2})
+			copy(m.Mem[0x5570+0x9f:], hdOpeningSignature)
+			x, y := (320-d.w)/2, (200-d.h)/2
+			c := m.CPU
+			c.Seg[golem.CS] = 0x4a2
+			c.IP = 0
+			c.Seg[golem.DS] = 0x7000
+			c.Seg[golem.SS] = 0x6800
+			c.R[golem.SP] = 0x100
+			c.R[golem.BX] = 0
+			c.R[golem.AX] = uint16(d.ordinal + 1)
+			c.R[golem.DX] = uint16(x)
+			put(0x70000, []uint16{200, 320, 0, 0x1c43})
+			put(0x68100, []uint16{0x2345, 0x3456, uint16(y), 0, 0x6000})
+			put(0x60000+0x36+(d.ordinal+1)*12, []uint16{0, 0x5000, 0, 0, uint16(d.w), uint16(d.h)})
+			m.Mem[0x50000] ^= 1
+			s.beforeInstruction()
+			if s.active {
+				t.Fatal("encoded guard")
+			}
+			m.Mem[0x50000] ^= 1
+			s.beforeInstruction()
+			if !s.active || s.selected != slot {
+				t.Fatal("source selector")
+			}
+			for k, v := range native {
+				if v == 253 {
+					continue
+				}
+				s.counts[k] = 1
+				s.writes[k] = v
+				m.Mem[hdOpeningMain+uint32((y+k/d.w)*320+x+k%d.w)] = v
+			}
+			accepted := s.accepted
+			c.Seg[golem.CS] = 0x3456
+			c.IP = 0x2345
+			c.R[golem.SP] = 0x10a
+			s.beforeInstruction()
+			if s.accepted != accepted+1 || s.active || !s.nativeValid[slot] {
+				t.Fatal("full source return")
+			}
+			c.Seg[golem.CS] = 0x557
+			c.IP = 0x9f
+			c.Seg[golem.DS] = 0x1c43
+			c.Seg[golem.ES] = 0xa000
+			c.R[golem.SI] = 0
+			c.R[golem.DI] = 0
+			c.R[golem.CX] = 32000
+			c.Flags = 2
+			for n := 0; c.IP != 0xa1; n++ {
+				if n > 32001 {
+					t.Fatal("publication bound")
+				}
+				if e = m.Step(); e != nil {
+					t.Fatal(e)
+				}
+			}
+			published := 0
+			for _, cell := range s.published {
+				if int(cell.id) == d.id {
+					published++
+				}
+			}
+			if published != d.opaque {
+				t.Fatal("published", published, d.opaque)
+			}
+			canvas := append([]byte(nil), m.Mem[hdOpeningMain:hdOpeningMain+64000]...)
+			indexed := append([]byte(nil), m.Mem[0xa0000:0xafa00]...)
+			frame := draftNativeFrame{canvas: canvas, indexed: indexed, palette: pal, mode: 19}
+			base := draftRGB(indexed, pal)
+			im, receipt := h.base(frame)
+			ind := receipt["opening_picture"].(map[string]any)["independent_logos"].(map[string]any)
+			if ind["painted"].(int) != d.opaque {
+				t.Fatal("material not painted", ind)
+			}
+			changed := 0
+			black := 0
+			for yy := 0; yy < 800; yy++ {
+				for xx := 0; xx < 1280; xx++ {
+					a, b := im.RGBAAt(xx, yy), base.RGBAAt(xx, yy)
+					px, py := xx/4, yy/4
+					owned := px >= x && px < x+d.w && py >= y && py < y+d.h && native[(py-y)*d.w+px-x] != 253
+					if !owned && a != b {
+						t.Fatal("outside original glyph outline", xx, yy)
+					}
+					if b.R == 0 && b.G == 0 && b.B == 0 {
+						black++
+						if a != b {
+							t.Fatal("black background or shadow changed")
+						}
+					}
+					if a.R > b.R || a.G > b.G || a.B > b.B {
+						t.Fatal("native shading ordering")
+					}
+					if a != b {
+						changed++
+					}
+				}
+			}
+			if changed < 100 {
+				t.Fatal("HD material not visible", changed)
+			}
+			name := fmt.Sprintf("mpsname-%04d.png", d.id)
+			fd, e := os.Create(filepath.Join(output, name))
+			if e != nil {
+				t.Fatal(e)
+			}
+			e = png.Encode(fd, im)
+			fd.Close()
+			if e != nil {
+				t.Fatal(e)
+			}
+			badpal := append([]byte(nil), pal...)
+			badpal[1] ^= 1
+			copy(m.Mem[0xafc00:0xaff00], badpal)
+			bad := s.paintWithin(draftRGB(indexed, badpal), draftNativeFrame{canvas: canvas, indexed: indexed, palette: badpal, mode: 19}, image.Rect(0, 0, 320, 200))
+			if bad["painted"].(int) != 0 {
+				t.Fatal("palette guard")
+			}
+			copy(m.Mem[0xafc00:0xaff00], pal)
+			records = append(records, map[string]any{"source": d.id, "file": d.sourceFile, "ordinal": d.ordinal, "image": name, "published_cells": published, "painted_cells": ind["painted"], "changed_HD_pixels": changed, "black_pixels_preserved": black})
+		})
+	}
+	if len(records) != 29 {
+		t.Fatal("29 required source records", len(records))
+	}
+	raw, e := json.MarshalIndent(map[string]any{"result": "PASS_MPSNAME29_MATERIAL_DISPLAY", "sources": records,
+		"scope":                    "encoded and native source fixtures through production opening selector, captured return, complete-source finish, original full-canvas publication opcode and integrated HD renderer; SS writes supplied; native font outlines and black shadows preserved",
+		"normal_player_path_claim": false, "Noto_or_translation_claim": false, "original_exact_parity_claim": false}, "", " ")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = os.WriteFile(filepath.Join(output, "check.json"), append(raw, '\n'), 0644); e != nil {
+		t.Fatal(e)
 	}
 }

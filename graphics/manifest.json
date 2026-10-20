@@ -61975,6 +61975,1157 @@
       "alpha": "Original generated PNG and alpha retained; bbox selects raw sample only, original source253 geometry remains.",
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "status": "READY production source bindings; display acceptance tracked in source catalog"
+    },
+    "mpsname-silver-material.png": {
+      "sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "bytes": 2416985,
+      "size": [
+        2172,
+        724
+      ],
+      "mode": "RGB",
+      "generation_prompt": "Use case: stylized-concept. Asset type: production game texture for the Colonization HD display layer, used ONLY as a fine metallic surface inside existing silver lettering, not as a new font or logo. Create a flat, front-facing, edge-to-edge opaque SILVER / PEWTER MATERIAL SWATCH, landscape about 3:1. Dense, restrained fine pixel-art clusters in the crisp classic strategy-game pixel-art style, subtle hand-worked brushed steel grain, small silvery highlights and soft charcoal-grey flecks, cool-neutral grey only, natural moderate local contrast. Very fine horizontal brushing with no strong large-scale bands; visually uniform illumination across the whole swatch so any small crop is usable. All detail is expressed as deliberate tiny hard-edged pixel clusters, no photographic texture or blur. No letters, typography, numbers, symbols, logos, borders, objects, shapes, bevel frame, screws, ornaments, ground plane, perspective, glare flare, colored tint, vignette, gradient fade to black, or background gaps. The entire rectangular image is the material, full opacity. This material will modulate native white and grey glyph highlights while preserving their exact original font outlines and animation. Do not draw lettering.",
+      "generation_file": "exec-f46ceaae-0dc7-481f-91bc-d956e1836783.png",
+      "generation_tool": "built-in image_gen",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "AI-generated neutral silver texture; no original game pixels, letters or logos in this PNG. Original glyph masks remain in the user-supplied runtime data.",
+      "raw_original_unchanged": true,
+      "alpha": "opaque RGB material; native source transparency is applied by runtime, original font outlines preserved",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "DISPLAY-PASS",
+      "source_frames": [
+        {
+          "research_id": 1031,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 0,
+          "size": [
+            24,
+            25
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 515,
+          "other_header_fields": [
+            161,
+            93
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "e14a943a22e06e5a5d2b7749620387a3213ddff35d95a40ca7f18a32db7717bb",
+          "indexed_sha256": "31f190ed7ba0a7c8f5ef07aa662bde1abf0503364ab9f1b77709a66dcb98bb96",
+          "opaque_pixels": 358,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "fdaf21f8d89964420a69a4a8188772a3ece7d42539b0581b549adc76e83c8430",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1032,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 1,
+          "size": [
+            24,
+            25
+          ],
+          "header_part1_offset": 16,
+          "data_part3_offset": 515,
+          "encoded_length": 515,
+          "other_header_fields": [
+            161,
+            94
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "c14edb1cf4b924f8e86e8dc6cf28d78ea8e3cc84af9d302e10746755cfabc052",
+          "indexed_sha256": "84715d698dcce289745f0909fb5f8c47944f6a383c4f5d78a0a7eea05be093da",
+          "opaque_pixels": 370,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "e9fbfabafc294c652a9d90a705bb7fda147692d31545d7b7029272a13bdf658e",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1033,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 2,
+          "size": [
+            28,
+            25
+          ],
+          "header_part1_offset": 32,
+          "data_part3_offset": 1030,
+          "encoded_length": 574,
+          "other_header_fields": [
+            161,
+            95
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "48a6200e4fa7c0d7204711f5cd2c77a4349fe156bb7176ce1ea359bfb381167a",
+          "indexed_sha256": "a97bdf4e1096e94814a60943a05bcc823c277f462b34b356473f378660c777d1",
+          "opaque_pixels": 416,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "da4beb8daf7e37e08d54ee6b09b7a4efec7e22304cd0de6874691979ec5a811f",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1034,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 3,
+          "size": [
+            32,
+            25
+          ],
+          "header_part1_offset": 48,
+          "data_part3_offset": 1604,
+          "encoded_length": 645,
+          "other_header_fields": [
+            161,
+            97
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "fc411e7022270bcdebf61c01974a1a7c4d69c102fe094231f88c4ba5b9edf434",
+          "indexed_sha256": "2f86b3f1077ac60d7691368f92f77bb68c2f33af9fce4a541257fbde5bbb1ac3",
+          "opaque_pixels": 482,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "e54aa0702554f0f4de4cdbb99e86415541c01c3b0c448aa303051dbb43ed1e5d",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1035,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 4,
+          "size": [
+            39,
+            25
+          ],
+          "header_part1_offset": 64,
+          "data_part3_offset": 2249,
+          "encoded_length": 743,
+          "other_header_fields": [
+            160,
+            100
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "9eeac8733b8812bcb78dfa8697b2c8d7778eb5732fa40f6bbac351e423c309af",
+          "indexed_sha256": "dc7e12af7d8905a9745748c70b88901253faea5c0feb773d3d75a4b314b2bc7a",
+          "opaque_pixels": 539,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "e4c6aae6fe8181e9ab731a5e4bdb9543ba2cd98020fbc39954d7a99cec5cfce8",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1036,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 5,
+          "size": [
+            47,
+            25
+          ],
+          "header_part1_offset": 80,
+          "data_part3_offset": 2992,
+          "encoded_length": 918,
+          "other_header_fields": [
+            160,
+            104
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "55a9c7364b638fcbc2ee644d15063fdd2f858aaa82822d67c2e57b03a7a8c71f",
+          "indexed_sha256": "940d20559b563d4bfe37b79c87bc0b59c4bb4e034f22a6879b8388661fea6a9f",
+          "opaque_pixels": 667,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "af551daa54b8821d8720c1b8adaee03d20d7f89c2ae2a7c574318a0507530548",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1037,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 6,
+          "size": [
+            56,
+            26
+          ],
+          "header_part1_offset": 96,
+          "data_part3_offset": 3910,
+          "encoded_length": 1039,
+          "other_header_fields": [
+            161,
+            108
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "924cace3425b946e2e37323bbe63799072826348fab74771dc5f446709b3de46",
+          "indexed_sha256": "9132de8b0931a5dad5cb3e23146122f6bfb1ba1fa8e9285edca4ce42adcd6c50",
+          "opaque_pixels": 751,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "192e75776135bf224e20bfed10513554ba325a16660243dc41351cfd3ae083ee",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1038,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 7,
+          "size": [
+            67,
+            25
+          ],
+          "header_part1_offset": 112,
+          "data_part3_offset": 4949,
+          "encoded_length": 1212,
+          "other_header_fields": [
+            160,
+            112
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "dcd778529f426b8c7c3a45c6bf1073764828302c140d770290090066fcee6490",
+          "indexed_sha256": "f42c7f344584c0f3afc1317ade400f972d63d503b7c059363e7df0f93c5e7c7b",
+          "opaque_pixels": 859,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "8a8dd506db43aefb3615c1fe1297543158da625ad02c86065c46214bc95c4de3",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1039,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 8,
+          "size": [
+            78,
+            25
+          ],
+          "header_part1_offset": 128,
+          "data_part3_offset": 6161,
+          "encoded_length": 1333,
+          "other_header_fields": [
+            161,
+            116
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "c6a99f58a9504489d8fbb4af42b8d4c8d5803766cd9c5fa88a0d18c3956c1039",
+          "indexed_sha256": "2becb2bdcb05ccbebe1a3a4cedf8451e415f2176104482e55b6dcbc20b1a8b5c",
+          "opaque_pixels": 940,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "d512827e37648598404e0a9290520718d6d1e2c6936377ec6972946fc2c25eb3",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1040,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 9,
+          "size": [
+            92,
+            25
+          ],
+          "header_part1_offset": 144,
+          "data_part3_offset": 7494,
+          "encoded_length": 1564,
+          "other_header_fields": [
+            161,
+            121
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "a05eac46037d1d81a3626a5e37f06231c3c74b844d77084e17e0a990765f90cc",
+          "indexed_sha256": "4f7ee841c60a3c697fa87b51a188639912516705a8f93bf4c4eec32d13cfa734",
+          "opaque_pixels": 1089,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "f67509d2ae7086b3947e5d5c5876196fed3371003c4bf228bb3413bf6ac83518",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1041,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 10,
+          "size": [
+            104,
+            25
+          ],
+          "header_part1_offset": 160,
+          "data_part3_offset": 9058,
+          "encoded_length": 1699,
+          "other_header_fields": [
+            161,
+            125
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "1dc3233bf0dc748922a8a7bf4cc7c59e3d27ad5ffeeb1d474d0588c99af20b71",
+          "indexed_sha256": "ceaf2039b24f9df299205da3d092e6ce8a1129e5dfa7f81c176c4b05247ee64d",
+          "opaque_pixels": 1195,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "1e8559b8c1bc687a94852eae97208fc893be25f3a53031e5aefd44f51f456825",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1042,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 11,
+          "size": [
+            118,
+            26
+          ],
+          "header_part1_offset": 176,
+          "data_part3_offset": 10757,
+          "encoded_length": 1929,
+          "other_header_fields": [
+            161,
+            130
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "3102a412ec1a09dff17126c56374dd735a0db8aa01b55aba0acb66fdf92e9651",
+          "indexed_sha256": "623503baff59aee6a3c4ea6363c945f822b42ce900e97caaa94efeb274791aa1",
+          "opaque_pixels": 1303,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "a2ac3d64a790ba812f2761fdfdfede5e51baf26fe7b59cc936e5941bd2653673",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1043,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 12,
+          "size": [
+            133,
+            25
+          ],
+          "header_part1_offset": 192,
+          "data_part3_offset": 12686,
+          "encoded_length": 2136,
+          "other_header_fields": [
+            160,
+            134
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "9d67ab0b7e469b07ea59cdf0ff45060ad54edcbcc1660cb3e88af3699af7ccf5",
+          "indexed_sha256": "c83ccd7536ba9d09bd7ee5416c6ae4c9b77ca170bab519cbbb7163a033fab99a",
+          "opaque_pixels": 1436,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "2f16b1ffff0690f546fb8fbdd14adcc8b8d37d9993b0a1f22e8a2f3924269011",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1044,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 13,
+          "size": [
+            148,
+            26
+          ],
+          "header_part1_offset": 208,
+          "data_part3_offset": 14822,
+          "encoded_length": 2325,
+          "other_header_fields": [
+            161,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f65fcc52175431015ae9f5f8c68a1bdcd81ab07a9c7885bd63072afc5b42bf05",
+          "indexed_sha256": "3f3e6098a449d01fdf561fae846df3904a706b99cf880cf828e7f9d07b96b7e0",
+          "opaque_pixels": 1567,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "b3d6cd51b5019b562449264273f9a49fae9fedd6f397c2e8f20de599b14ba66c",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1045,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 14,
+          "size": [
+            162,
+            25
+          ],
+          "header_part1_offset": 224,
+          "data_part3_offset": 17147,
+          "encoded_length": 2537,
+          "other_header_fields": [
+            161,
+            141
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "13843e0014e62e8209ea6359e0f0f7273ab7e43f95ffcbe10f11b8811493bfef",
+          "indexed_sha256": "47aae7afa60662ecfd57036e15a3cc7b4d1e29985a7984a968c5715d357f090d",
+          "opaque_pixels": 1715,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "826f3f149439002ed9f0842832045cb52ce1612e4103d7a9eecf3b951f84d0ae",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1046,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 15,
+          "size": [
+            178,
+            25
+          ],
+          "header_part1_offset": 240,
+          "data_part3_offset": 19684,
+          "encoded_length": 2756,
+          "other_header_fields": [
+            161,
+            144
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "0335f5b43acd0150aa63284e824c5e841fd47e40ee6ed1056d85c91f854dda40",
+          "indexed_sha256": "f26512b8ddae006092a4291fd0724897bde80cb0369842996a46214b5f6a659f",
+          "opaque_pixels": 1838,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "60663d7aab9c3bf5b3e6ca1bd630f57e65e9fd2994a3130346c6d55cdd3b6542",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1047,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 16,
+          "size": [
+            192,
+            25
+          ],
+          "header_part1_offset": 256,
+          "data_part3_offset": 22440,
+          "encoded_length": 2899,
+          "other_header_fields": [
+            161,
+            146
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "6dc9d6afc66a7d0adbd57a744a17c98d1c92caa538c1bc9aae3261ff0e7ee75b",
+          "indexed_sha256": "f6221e7512db2e0a1c3fa1d5ae92a23e9744b8d1cb5079335f53dddb4db5a943",
+          "opaque_pixels": 1971,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "80a260f27bc9f32a0f717dcd2f96688caace91c1ea060181449d0de39760007f",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1048,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 17,
+          "size": [
+            206,
+            25
+          ],
+          "header_part1_offset": 272,
+          "data_part3_offset": 25339,
+          "encoded_length": 2946,
+          "other_header_fields": [
+            161,
+            147
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "34c4487dbad32224eb89d0ee6e8a0861746b08ff50e016484eb73bb65c92f0d3",
+          "indexed_sha256": "fda095c4b96583128d8a1a4336b2c772e3384f3a33957f8017619d36127ca2ff",
+          "opaque_pixels": 2023,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "28756676951b13240d4e6ee6e3cb21802b0bdd959529bb8e77408412c45b13d6",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1049,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 18,
+          "size": [
+            220,
+            25
+          ],
+          "header_part1_offset": 288,
+          "data_part3_offset": 28285,
+          "encoded_length": 3268,
+          "other_header_fields": [
+            161,
+            148
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "d136cafe2310eb8989e8b9b29f942568d45b8db05d26aaf0ebc94ad68483f07c",
+          "indexed_sha256": "22cad4d4ed6dd9e6ac84ed0ee0e4d733143b51e9056defa556832086618d8d82",
+          "opaque_pixels": 2184,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "724d4b93394298fdea27931a686915bbf2c5f48a4c89c7f83b99c1589d5aa8a4",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1050,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 19,
+          "size": [
+            234,
+            25
+          ],
+          "header_part1_offset": 304,
+          "data_part3_offset": 31553,
+          "encoded_length": 3447,
+          "other_header_fields": [
+            161,
+            148
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f807760dce427b2c1647a566c7a3750690c15c6652047562c26c99f05fc9d9f4",
+          "indexed_sha256": "0d73a4a08a9a636ec5aebe884197e7570c5a8db502e59ac07824a4f5e6b00119",
+          "opaque_pixels": 2332,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "6d89b9bf055f5bc85247101bf61660a5221a1022888efca5d512ac9a117838c9",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1051,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 20,
+          "size": [
+            246,
+            25
+          ],
+          "header_part1_offset": 320,
+          "data_part3_offset": 35000,
+          "encoded_length": 3566,
+          "other_header_fields": [
+            161,
+            148
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "0d164bd81d30bf11ecc71a53c4ca8616233e29fd7fa68b453ff61d2a9d8f9a6c",
+          "indexed_sha256": "f400ebb956227c49047ff117ca4111f8bee7794942cd92f50f4375fedbe858bd",
+          "opaque_pixels": 2404,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "0d449078f354d5114dd600e7a4132924e33b0aed2c4ecdd67b099ab5c929f8f8",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1052,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 21,
+          "size": [
+            258,
+            25
+          ],
+          "header_part1_offset": 336,
+          "data_part3_offset": 38566,
+          "encoded_length": 3704,
+          "other_header_fields": [
+            161,
+            148
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "15fa3965f41207fb6f34b25cee199bd0c3087cc38e030b0e5381300f7c93d18e",
+          "indexed_sha256": "d76c8b9dcf363bd3e0c030d6318bdda4a5369340295f951fcdb9e0348aad676a",
+          "opaque_pixels": 2513,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "e737bc5eddbc67caec8c3d18331ab47d7a8500a9ffe1330db413c3534e328ac3",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1053,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 22,
+          "size": [
+            269,
+            25
+          ],
+          "header_part1_offset": 352,
+          "data_part3_offset": 42270,
+          "encoded_length": 3798,
+          "other_header_fields": [
+            160,
+            148
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f14cd31def48bc830b12b86844d5272eb52687e1a76c3604a7b037e10ad7ee01",
+          "indexed_sha256": "dd9b85a186338bae71c19ef66929861f47faee4fa87d77a44d5e0461db251c06",
+          "opaque_pixels": 2593,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "2cda1d20eaff3155672321ece724f676b6eceeb3fd9b70ac4fdcf239f3a04be6",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1054,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 23,
+          "size": [
+            278,
+            25
+          ],
+          "header_part1_offset": 368,
+          "data_part3_offset": 46068,
+          "encoded_length": 3881,
+          "other_header_fields": [
+            161,
+            148
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "e87d5772b1eb0666f23c5961c64eceecf1172a2554780f146e971607fa635eb8",
+          "indexed_sha256": "b6f086bf4a32895c15fc326ef2eba75fbd1f9679e60ba3782923d89f5f1ce2c1",
+          "opaque_pixels": 2650,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "182ad957f7db52955229f2dd3c1a7f0a1f1cc1e96bf8eddbb25c37f7d1e4244f",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1055,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 24,
+          "size": [
+            286,
+            25
+          ],
+          "header_part1_offset": 384,
+          "data_part3_offset": 49949,
+          "encoded_length": 3970,
+          "other_header_fields": [
+            161,
+            148
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "8a46cba3492ce80691610966f5165aa6e26bb81ce3805ba78e27436873d386fa",
+          "indexed_sha256": "816d969dac825c863050260f8b550246fbee29a788a42553c1f6328035c83167",
+          "opaque_pixels": 2722,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "3a1425645178f6ab19e37167d5c90cb7b362d4d31e671389b57e17ba54fcac91",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1056,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 25,
+          "size": [
+            293,
+            25
+          ],
+          "header_part1_offset": 400,
+          "data_part3_offset": 53919,
+          "encoded_length": 4034,
+          "other_header_fields": [
+            160,
+            148
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "4ffc515546b0401e450dc1e0e9a90bf5b225421ceff074c23653ee2828d7de13",
+          "indexed_sha256": "486be2282e64f8c28c3e7f71819c8ff5dec51148f68e1398aae80b1738800142",
+          "opaque_pixels": 2765,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "0455b2fb8d74134a940981b4b831d5d3c17cd9da48f6c311612d993bb24b1090",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1057,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 26,
+          "size": [
+            298,
+            25
+          ],
+          "header_part1_offset": 416,
+          "data_part3_offset": 57953,
+          "encoded_length": 4084,
+          "other_header_fields": [
+            161,
+            148
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "46ac79447d60f426a6bbf2e38d1f91d10fa817222be6c7ba618b8b83f2bb96d8",
+          "indexed_sha256": "4ec63df6fe0207313daec31d202cabcd0d7decf23c9f495775e8c1f05fca39c3",
+          "opaque_pixels": 2807,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "3a829cbf709f40082baf18c65235c479374a4b19736c3344aab0b1af6d28e05c",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1058,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 27,
+          "size": [
+            300,
+            25
+          ],
+          "header_part1_offset": 432,
+          "data_part3_offset": 62037,
+          "encoded_length": 4107,
+          "other_header_fields": [
+            161,
+            148
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "9e67464302e47c5043b3ed13061acfd128da54ae4af1d629c1840089599c650d",
+          "indexed_sha256": "ee7ee5d225a52d10eb803d0bab0f93cc33798a93467dd8657fdf576ef95c5160",
+          "opaque_pixels": 2853,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "6a4fbaec65e30773c65bd6e3e0deb388294c2fc19b122b72e996a5f18e5d20d4",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        },
+        {
+          "research_id": 1059,
+          "file": "MPSNAME.SS",
+          "file_sha256": "32a28079209ec3e86346cc155922d72ac46cc5efab7d31dd2d8da2122172a257",
+          "ordinal": 28,
+          "size": [
+            302,
+            25
+          ],
+          "header_part1_offset": 448,
+          "data_part3_offset": 66144,
+          "encoded_length": 4134,
+          "other_header_fields": [
+            161,
+            148
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "8c3f39bfc4c6818ade459c89bfa2404c710d76578d3d506cdd22e554150c00f2",
+          "indexed_sha256": "83d4f065a0eef611edea661ffb5826bd52d8eb7313664c2b21b5a8cdc5eb6be9",
+          "opaque_pixels": 2849,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "asset": "mpsname-silver-material.png",
+          "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+          "art_size": [
+            2172,
+            724
+          ],
+          "sample": [
+            0,
+            0,
+            2172,
+            724
+          ],
+          "writes_sha256": "d4495b06a8b474d5e71530eacf4308643a28acc53665c341f1fc9b13664a9b1c",
+          "palette_sha256": "23ae68c403c9438327980db755ff2579f643b0ecb1d264c66037496368ea93be"
+        }
+      ]
     }
   }
 }

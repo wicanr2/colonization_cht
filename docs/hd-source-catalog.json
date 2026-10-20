@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "08dee0acbd6966e56248f4622b7acbe27376a4253432a26e1a4b6d1763543fbe",
+  "formal_manifest_sha256": "d46d4d7d98a3b8917d065144a9599cabeac280743ed99660971ad6ff2ee3d165",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,14 +26,14 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 986,
+    "formal_asset_bindings": 1015,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
     "other_formats_and_program_drawn_graphics": "not_assessed",
-    "display_pass_source_bindings": 669,
-    "unique_formal_source_ids": 973,
-    "remaining_nonempty_reference_sources": 491
+    "display_pass_source_bindings": 698,
+    "unique_formal_source_ids": 1002,
+    "remaining_nonempty_reference_sources": 462
   },
   "files": [
     {
@@ -40898,7 +40898,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1032,
@@ -40923,7 +40932,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1033,
@@ -40948,7 +40966,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1034,
@@ -40973,7 +41000,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1035,
@@ -40998,7 +41034,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1036,
@@ -41023,7 +41068,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1037,
@@ -41048,7 +41102,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1038,
@@ -41073,7 +41136,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1039,
@@ -41098,7 +41170,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1040,
@@ -41123,7 +41204,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1041,
@@ -41148,7 +41238,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1042,
@@ -41173,7 +41272,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1043,
@@ -41198,7 +41306,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1044,
@@ -41223,7 +41340,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1045,
@@ -41248,7 +41374,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1046,
@@ -41273,7 +41408,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1047,
@@ -41298,7 +41442,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1048,
@@ -41323,7 +41476,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1049,
@@ -41348,7 +41510,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1050,
@@ -41373,7 +41544,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1051,
@@ -41398,7 +41578,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1052,
@@ -41423,7 +41612,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1053,
@@ -41448,7 +41646,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1054,
@@ -41473,7 +41680,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1055,
@@ -41498,7 +41714,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1056,
@@ -41523,7 +41748,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1057,
@@ -41548,7 +41782,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1058,
@@ -41573,7 +41816,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1059,
@@ -41598,7 +41850,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "mpsname-silver-material.png"
+      ],
+      "source_contract_reference": {
+        "state": "DISPLAY-PASS",
+        "formal_connected": true,
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "review_sha256": "0b992bcef7db1e86d946aca591da59c86a18884ec250cb21b5badd93eb69eaa9",
+        "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+      }
     },
     {
       "research_id": 1060,
@@ -84852,6 +85113,702 @@
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "state": "DISPLAY-PASS",
       "claim": "Typed BDARK source records, actual original D46 decoding and integrated production HD base renderer; Main visible-index mirror and offscreen cursor conditions supplied by fixture; production-connected visible display acceptance only; no normal BDARK path or original-exact claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1031,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "e14a943a22e06e5a5d2b7749620387a3213ddff35d95a40ca7f18a32db7717bb",
+      "source_indexed_sha256": "31f190ed7ba0a7c8f5ef07aa662bde1abf0503364ab9f1b77709a66dcb98bb96",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        24,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1032,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "c14edb1cf4b924f8e86e8dc6cf28d78ea8e3cc84af9d302e10746755cfabc052",
+      "source_indexed_sha256": "84715d698dcce289745f0909fb5f8c47944f6a383c4f5d78a0a7eea05be093da",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        24,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1033,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "48a6200e4fa7c0d7204711f5cd2c77a4349fe156bb7176ce1ea359bfb381167a",
+      "source_indexed_sha256": "a97bdf4e1096e94814a60943a05bcc823c277f462b34b356473f378660c777d1",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        28,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1034,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "fc411e7022270bcdebf61c01974a1a7c4d69c102fe094231f88c4ba5b9edf434",
+      "source_indexed_sha256": "2f86b3f1077ac60d7691368f92f77bb68c2f33af9fce4a541257fbde5bbb1ac3",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        32,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1035,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "9eeac8733b8812bcb78dfa8697b2c8d7778eb5732fa40f6bbac351e423c309af",
+      "source_indexed_sha256": "dc7e12af7d8905a9745748c70b88901253faea5c0feb773d3d75a4b314b2bc7a",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        39,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1036,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "55a9c7364b638fcbc2ee644d15063fdd2f858aaa82822d67c2e57b03a7a8c71f",
+      "source_indexed_sha256": "940d20559b563d4bfe37b79c87bc0b59c4bb4e034f22a6879b8388661fea6a9f",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        47,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1037,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 6,
+      "source_encoded_sha256": "924cace3425b946e2e37323bbe63799072826348fab74771dc5f446709b3de46",
+      "source_indexed_sha256": "9132de8b0931a5dad5cb3e23146122f6bfb1ba1fa8e9285edca4ce42adcd6c50",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        56,
+        26
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1038,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 7,
+      "source_encoded_sha256": "dcd778529f426b8c7c3a45c6bf1073764828302c140d770290090066fcee6490",
+      "source_indexed_sha256": "f42c7f344584c0f3afc1317ade400f972d63d503b7c059363e7df0f93c5e7c7b",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        67,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1039,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 8,
+      "source_encoded_sha256": "c6a99f58a9504489d8fbb4af42b8d4c8d5803766cd9c5fa88a0d18c3956c1039",
+      "source_indexed_sha256": "2becb2bdcb05ccbebe1a3a4cedf8451e415f2176104482e55b6dcbc20b1a8b5c",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        78,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1040,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 9,
+      "source_encoded_sha256": "a05eac46037d1d81a3626a5e37f06231c3c74b844d77084e17e0a990765f90cc",
+      "source_indexed_sha256": "4f7ee841c60a3c697fa87b51a188639912516705a8f93bf4c4eec32d13cfa734",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        92,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1041,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 10,
+      "source_encoded_sha256": "1dc3233bf0dc748922a8a7bf4cc7c59e3d27ad5ffeeb1d474d0588c99af20b71",
+      "source_indexed_sha256": "ceaf2039b24f9df299205da3d092e6ce8a1129e5dfa7f81c176c4b05247ee64d",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        104,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1042,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 11,
+      "source_encoded_sha256": "3102a412ec1a09dff17126c56374dd735a0db8aa01b55aba0acb66fdf92e9651",
+      "source_indexed_sha256": "623503baff59aee6a3c4ea6363c945f822b42ce900e97caaa94efeb274791aa1",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        118,
+        26
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1043,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 12,
+      "source_encoded_sha256": "9d67ab0b7e469b07ea59cdf0ff45060ad54edcbcc1660cb3e88af3699af7ccf5",
+      "source_indexed_sha256": "c83ccd7536ba9d09bd7ee5416c6ae4c9b77ca170bab519cbbb7163a033fab99a",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        133,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1044,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 13,
+      "source_encoded_sha256": "f65fcc52175431015ae9f5f8c68a1bdcd81ab07a9c7885bd63072afc5b42bf05",
+      "source_indexed_sha256": "3f3e6098a449d01fdf561fae846df3904a706b99cf880cf828e7f9d07b96b7e0",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        148,
+        26
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1045,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 14,
+      "source_encoded_sha256": "13843e0014e62e8209ea6359e0f0f7273ab7e43f95ffcbe10f11b8811493bfef",
+      "source_indexed_sha256": "47aae7afa60662ecfd57036e15a3cc7b4d1e29985a7984a968c5715d357f090d",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        162,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1046,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 15,
+      "source_encoded_sha256": "0335f5b43acd0150aa63284e824c5e841fd47e40ee6ed1056d85c91f854dda40",
+      "source_indexed_sha256": "f26512b8ddae006092a4291fd0724897bde80cb0369842996a46214b5f6a659f",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        178,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1047,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 16,
+      "source_encoded_sha256": "6dc9d6afc66a7d0adbd57a744a17c98d1c92caa538c1bc9aae3261ff0e7ee75b",
+      "source_indexed_sha256": "f6221e7512db2e0a1c3fa1d5ae92a23e9744b8d1cb5079335f53dddb4db5a943",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        192,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1048,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 17,
+      "source_encoded_sha256": "34c4487dbad32224eb89d0ee6e8a0861746b08ff50e016484eb73bb65c92f0d3",
+      "source_indexed_sha256": "fda095c4b96583128d8a1a4336b2c772e3384f3a33957f8017619d36127ca2ff",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        206,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1049,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 18,
+      "source_encoded_sha256": "d136cafe2310eb8989e8b9b29f942568d45b8db05d26aaf0ebc94ad68483f07c",
+      "source_indexed_sha256": "22cad4d4ed6dd9e6ac84ed0ee0e4d733143b51e9056defa556832086618d8d82",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        220,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1050,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 19,
+      "source_encoded_sha256": "f807760dce427b2c1647a566c7a3750690c15c6652047562c26c99f05fc9d9f4",
+      "source_indexed_sha256": "0d73a4a08a9a636ec5aebe884197e7570c5a8db502e59ac07824a4f5e6b00119",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        234,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1051,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 20,
+      "source_encoded_sha256": "0d164bd81d30bf11ecc71a53c4ca8616233e29fd7fa68b453ff61d2a9d8f9a6c",
+      "source_indexed_sha256": "f400ebb956227c49047ff117ca4111f8bee7794942cd92f50f4375fedbe858bd",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        246,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1052,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 21,
+      "source_encoded_sha256": "15fa3965f41207fb6f34b25cee199bd0c3087cc38e030b0e5381300f7c93d18e",
+      "source_indexed_sha256": "d76c8b9dcf363bd3e0c030d6318bdda4a5369340295f951fcdb9e0348aad676a",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        258,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1053,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 22,
+      "source_encoded_sha256": "f14cd31def48bc830b12b86844d5272eb52687e1a76c3604a7b037e10ad7ee01",
+      "source_indexed_sha256": "dd9b85a186338bae71c19ef66929861f47faee4fa87d77a44d5e0461db251c06",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        269,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1054,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 23,
+      "source_encoded_sha256": "e87d5772b1eb0666f23c5961c64eceecf1172a2554780f146e971607fa635eb8",
+      "source_indexed_sha256": "b6f086bf4a32895c15fc326ef2eba75fbd1f9679e60ba3782923d89f5f1ce2c1",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        278,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1055,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 24,
+      "source_encoded_sha256": "8a46cba3492ce80691610966f5165aa6e26bb81ce3805ba78e27436873d386fa",
+      "source_indexed_sha256": "816d969dac825c863050260f8b550246fbee29a788a42553c1f6328035c83167",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        286,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1056,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 25,
+      "source_encoded_sha256": "4ffc515546b0401e450dc1e0e9a90bf5b225421ceff074c23653ee2828d7de13",
+      "source_indexed_sha256": "486be2282e64f8c28c3e7f71819c8ff5dec51148f68e1398aae80b1738800142",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        293,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1057,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 26,
+      "source_encoded_sha256": "46ac79447d60f426a6bbf2e38d1f91d10fa817222be6c7ba618b8b83f2bb96d8",
+      "source_indexed_sha256": "4ec63df6fe0207313daec31d202cabcd0d7decf23c9f495775e8c1f05fca39c3",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        298,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1058,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 27,
+      "source_encoded_sha256": "9e67464302e47c5043b3ed13061acfd128da54ae4af1d629c1840089599c650d",
+      "source_indexed_sha256": "ee7ee5d225a52d10eb803d0bab0f93cc33798a93467dd8657fdf576ef95c5160",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        300,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
+    },
+    {
+      "asset": "mpsname-silver-material.png",
+      "asset_sha256": "d7bf0ac7048ab765381a582d5fe380267c7186b130ae6237944c7242df0f82ad",
+      "source_research_id": 1059,
+      "source_file": "MPSNAME.SS",
+      "source_ordinal": 28,
+      "source_encoded_sha256": "8c3f39bfc4c6818ade459c89bfa2404c710d76578d3d506cdd22e554150c00f2",
+      "source_indexed_sha256": "83d4f065a0eef611edea661ffb5826bd52d8eb7313664c2b21b5a8cdc5eb6be9",
+      "raw_art_rect": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        302,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
     }
   ],
   "limitations": [
@@ -84860,7 +85817,8 @@
     "正式素材只按現行清冊連結，完整驗收範圍以所連規格為準。",
     "其他格式及程式直接繪圖尚未分類，玩家可見圖像的完整分母仍未知。",
     "原版像素、色盤與預覽只留本機，本索引不含原始素材位元組。",
-    "R124更正R118分組：BDARK.SS的45個非空來源為多色建築／景物，已新增DISPLAY-PASS；其餘491個非空參考來源分為481字形／文字與10單色幾何。這不是完整玩家可見圖像分母，也不授予字型或翻譯完成。"
+    "R124更正R118分組：BDARK.SS的45個非空來源為多色建築／景物，已新增DISPLAY-PASS；其餘491個非空參考來源分為481字形／文字與10單色幾何。這不是完整玩家可見圖像分母，也不授予字型或翻譯完成。",
+    "R134只為MPSNAME.SS全部29幀補銀色材質，原字形與黑影保持，不增加翻譯或Noto驗收；其餘非空解碼來源為452個DEC字形與10個單色幾何，其他格式及程式繪圖仍未完成。"
   ],
   "normal_entry_evidence": {
     "report_sha256": "d54a8ce59dce9c361e731e2cd4420ce7aabac137a4c264ff9cf054a793673beb",
@@ -85837,10 +86795,10 @@
     "scope": "Typed BDARK source records, actual original D46 decoding and integrated production HD base renderer; Main visible-index mirror and offscreen cursor conditions supplied by fixture; production-connected visible display acceptance only; no normal BDARK path or original-exact claim."
   },
   "reference_partition": {
-    "receipt_sha256": "a0b82d88f282a66ff968bc0c2c72a5b9db3568b313875394dc53d7e57b612e72",
+    "receipt_sha256": "e9db4209ef272a1a85f2c6a1aa2328b7bf96129dbb0bc52b308d0c17d4a69d38",
     "verified_indexed_payloads": 1533,
-    "formal_binding_entries": 986,
-    "unique_bound_source_ids": 973,
+    "formal_binding_entries": 1015,
+    "unique_bound_source_ids": 1002,
     "remaining_text_family_sources": [
       313,
       314,
@@ -86293,36 +87251,7 @@
       813,
       814,
       815,
-      816,
-      1031,
-      1032,
-      1033,
-      1034,
-      1035,
-      1036,
-      1037,
-      1038,
-      1039,
-      1040,
-      1041,
-      1042,
-      1043,
-      1044,
-      1045,
-      1046,
-      1047,
-      1048,
-      1049,
-      1050,
-      1051,
-      1052,
-      1053,
-      1054,
-      1055,
-      1056,
-      1057,
-      1058,
-      1059
+      816
     ],
     "remaining_single_color_geometry_sources": [
       303,
@@ -86428,6 +87357,44 @@
       1228,
       1249
     ],
-    "scope": "existing decoded SS/PIK reference classification only; text grouping is not font/translation completion; other formats and program-drawn graphics are not covered by this denominator"
+    "scope": "decoded SS/PIK reference classification only; MPSNAME material does not establish font/localization conformance; other formats and program-drawn graphics retain their separate incomplete status"
+  },
+  "last_mpsname_material_display": {
+    "state": "DISPLAY-PASS",
+    "sources": [
+      1031,
+      1032,
+      1033,
+      1034,
+      1035,
+      1036,
+      1037,
+      1038,
+      1039,
+      1040,
+      1041,
+      1042,
+      1043,
+      1044,
+      1045,
+      1046,
+      1047,
+      1048,
+      1049,
+      1050,
+      1051,
+      1052,
+      1053,
+      1054,
+      1055,
+      1056,
+      1057,
+      1058,
+      1059
+    ],
+    "asset": "mpsname-silver-material.png",
+    "receipt_sha256": "6e665c0465a112ee27501d6bb159685d4ec9dc7143cfe17d187dd97500b74481",
+    "formal_binary_sha256": "c0f241d932d53fa553cdca3adb89a11cf901df580aef180c3c240cf744cdeafa",
+    "scope": "Source-fixture display through existing opening SS selector, captured return, complete-source finish, original whole-canvas publication opcode and integrated HD renderer; SS writes supplied. Silver material only inside native glyph cells, original outlines and black shadows preserved. No new normal player path, Noto, translation or original timing claim."
   }
 }
