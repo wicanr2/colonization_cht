@@ -3175,3 +3175,17 @@ IND0A0.SS至IND7A3.SS的三十三個非空來源958至990，包含IND2A0.SS的�
 IND0A0.SS至IND7A3.SS的三十三個領袖來源均以正式來源選擇、當次回傳點、完整來源finish及HD繪圖介面在測試畫面顯示，目視確認。記為DISPLAY-PASS，fixture提供原生寫入，不新增正常玩家路徑或原版精確對拍聲明。
 
 正式程式SHA-256：bb7ee7de819e66e589abfa114e08c6e9ec56a60f1ee8a238ea36e2ac5b6cd69d。建置與go vet、完整HD載入及349檔封裝指紋通過。本機收據為既有hd-opening-animation-sources-r84工作根的r108-formal-display-r1/check.json，SHA-256：eac324afb47c342bc8117d0500402784f453f8eea51c62cfb4624942fa213e47。
+
+### R109國王人物及勝負圖十一來源READY
+
+KING.SS的一幀、KING2.SS的八個手臂片段及KINGLOSE.SS／KINGWIN.SS各一幀，共十一個既有來源，沿用R105／R107完整SS來源、Main畫布、alpha、content、唯一來源選擇與當次回傳點契約。三張原PNG與alpha、來源指紋、內容矩形、圖集取樣及色盤投影記於graphics/manifest.json。
+
+- 八個手臂片段只映射至各自原生非透明外接矩形，不以79×161的完整來源畫布拉伸手臂。原版身體、姿勢、動畫、透明遮罩及互動由原版資料控制。
+- 圖集第一張行界0／565／900／1254，勝負事件各自重繪為單獨原PNG，完整生成畫布對應原生完整來源，避免多人圖集取樣導致臉部重影。原圖保持。正式scene來源總數115。
+- 驗收採正式接線及來源fixture畫面有出現，明示提供寫入，不新增正常玩家路徑或原版精確對拍聲明。
+
+### R109國王人物及事件圖顯示通過
+
+新增國王基本人物、八個手臂片段與勝負事件圖，共十一個來源，均已接線及測試畫面顯示。本輪四位MYR、二十五位CC議會人物、三十三個IND領袖及十一個KING剩餘來源均顯示通過。本批以正式來源選擇、當次回傳點、完整來源finish及HD繪圖介面顯示，目視確認。記為DISPLAY-PASS，fixture提供原生寫入，不新增正常玩家路徑或原版精確對拍聲明。
+
+正式程式SHA-256：d880d2a4fd6608b90a022a79ff3be849d094485ac5dbbe3c12c043a647faa4de。建置與go vet、完整HD載入及352檔封裝指紋通過。本機收據為既有hd-opening-animation-sources-r84工作根的r109-formal-display-r2/check.json，SHA-256：7971e305d5acf7bfad0aabaeaa50aa46c5fabb5fba7e9d599637d16af72920c5。

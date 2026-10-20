@@ -33345,6 +33345,598 @@
           "writes_sha256": "a82ef9e53a4e4787c885270b1f318b376c4f6fcaecb5e57fe0189475d073b36b"
         }
       ]
+    },
+    "portraits-king-1.png": {
+      "sha256": "2f95cfc8d5fd8dbb691fe4fd36f4bb6ff8f8dc2429e02972d0ed14e7459d968b",
+      "bytes": 506751,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE original refined fine pixel-art sprite atlas for the Colonization (1994) HD display layer. Image1 is the exact composition reference for NINE sprites in a3x3 grid. Cell1 contains ONE complete standing adult white/gray-haired gentleman in a red period military court uniform with a broad blue-green diagonal sash, white neckcloth, red breeches and tall gray/black boots, arms held exactly as reference, original slightly caricatured face and physique. Cells2 through9 contain ONLY the EIGHT isolated red-coated bent sleeve/forearm and tan hand fragments shown in the reference, with pale cuff and subtle finger/hand gesture differences. They are animation REPLACEMENT PARTS, not complete people. Preserve every distinct sleeve bend, cuff, hand/finger angle and direction from Image1. Do not add heads, bodies, legs, weapons, props or duplicate full figures to cells2-9. Red coat, fine cloth shading and skin palette must match the full character in cell1. Repaint fresh in fine intentional pixel clusters, readable face/cloth/hands, restrained natural highlights. Image2 is approved pixel-art STYLE ONLY; do not copy scenery or buildings. Square transparent canvas with exactly3 equal rows and3 equal columns, one isolated sprite centered in each cell with generous transparent margin. Keep all pieces fully inside their own cell with clear transparent gaps between rows. Remove the magenta background and black reference labels. No scenery, ground plane, grids, borders, words, captions, numbers, watermark, blur, smooth painting, 3D or photography. Clean straight alpha outside the exact silhouettes. Retain all9 source poses in reading order.",
+      "generation_file": "exec-43bdd993-1912-4dfd-bead-17fc73bf14c5.png",
+      "reference_sha256": "3c657db82f7e6efc0f14e870c72838ab4c4f5b0229e0edfbd69639c2f0cf5ca0",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "row_boundaries": [
+        0,
+        565,
+        900,
+        1254
+      ],
+      "column_boundaries": [
+        0,
+        418,
+        836,
+        1254
+      ],
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 991,
+          "file": "KING.SS",
+          "file_sha256": "b87dc5ac3746a104b79bbbdb669ff34cbe3af106554ebe11f313128f1636ba2c",
+          "ordinal": 0,
+          "size": [
+            79,
+            161
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 5156,
+          "other_header_fields": [
+            40,
+            161
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "026318f01c602bc7fc337ddd3cea9758d129618b85085c52b7fc4875d611fd31",
+          "indexed_sha256": "3719564f54f4871deed65c1f3b8e51baad6e55503f29fb2ec38efa0c29fd76e1",
+          "opaque_pixels": 5389,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 991,
+          "asset": "portraits-king-1.png",
+          "sample": [
+            157,
+            41,
+            342,
+            534
+          ],
+          "content": [
+            15,
+            0,
+            79,
+            161
+          ],
+          "art_sha256": "2f95cfc8d5fd8dbb691fe4fd36f4bb6ff8f8dc2429e02972d0ed14e7459d968b",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "4f5786606ae262adba14a02b251fcaa86e532302a2d055d37fd9decd0138cb22",
+          "palette_sha256": "d7ecd50b34bda63794705803f6e97a9c351839706047ad800bb38e9179186791",
+          "writes_sha256": "5c3f1539bc1f90e8fbb0c2f2e2616df24ec7c9a8c237459947cd73148eb2cba0"
+        },
+        {
+          "research_id": 993,
+          "file": "KING2.SS",
+          "file_sha256": "80f3f250796807f5b9b1ccda1cd1863c3a1a923a1790bb996786ed249821deeb",
+          "ordinal": 0,
+          "size": [
+            79,
+            161
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 969,
+          "other_header_fields": [
+            40,
+            161
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "bf8bcae2aadd833d29dd5d35028928c7097fd56032cb68f37b2a6febdfb4d809",
+          "indexed_sha256": "f747d5028e00783114d1a2c8d3f32bfdc8b987a03b720c0a345d4df6f71d9692",
+          "opaque_pixels": 642,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 993,
+          "asset": "portraits-king-1.png",
+          "sample": [
+            553,
+            168,
+            699,
+            388
+          ],
+          "content": [
+            1,
+            29,
+            36,
+            79
+          ],
+          "art_sha256": "2f95cfc8d5fd8dbb691fe4fd36f4bb6ff8f8dc2429e02972d0ed14e7459d968b",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "8ab1607c80c69527ca4fffa95cede14af8b8286aecd631548868527eb7dc0a79",
+          "palette_sha256": "0b2d4afdeacaf3bbf5b49224dd29630ea54306398abd6dc5a269de5148faee05",
+          "writes_sha256": "60fdf51ad446073e01cacd2070ac71bfcc46d68609674326f0c4ad384e0f76b5"
+        },
+        {
+          "research_id": 994,
+          "file": "KING2.SS",
+          "file_sha256": "80f3f250796807f5b9b1ccda1cd1863c3a1a923a1790bb996786ed249821deeb",
+          "ordinal": 1,
+          "size": [
+            79,
+            161
+          ],
+          "header_part1_offset": 16,
+          "data_part3_offset": 969,
+          "encoded_length": 1043,
+          "other_header_fields": [
+            40,
+            161
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "6976967c2a2caae1d89114308e716b74448f5242f43018293e0f6f5d961688b2",
+          "indexed_sha256": "9b98b6679818012b19470e381d9843f45222d76fd941869561ec9e126e5949ea",
+          "opaque_pixels": 678,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 994,
+          "asset": "portraits-king-1.png",
+          "sample": [
+            971,
+            163,
+            1108,
+            388
+          ],
+          "content": [
+            0,
+            27,
+            53,
+            81
+          ],
+          "art_sha256": "2f95cfc8d5fd8dbb691fe4fd36f4bb6ff8f8dc2429e02972d0ed14e7459d968b",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "127c6e50236c7ecdfa486baaca1998c71b87819f5961e89b594dfdd5d9da69d1",
+          "palette_sha256": "7779b779a5783438ab271461c5164713cf2a5b01ee75dd46983bcedbcd943541",
+          "writes_sha256": "8b801503c65b43f06416a8ef6870661b84ffb50ed8f9471defc500e78f68d966"
+        },
+        {
+          "research_id": 995,
+          "file": "KING2.SS",
+          "file_sha256": "80f3f250796807f5b9b1ccda1cd1863c3a1a923a1790bb996786ed249821deeb",
+          "ordinal": 2,
+          "size": [
+            79,
+            161
+          ],
+          "header_part1_offset": 32,
+          "data_part3_offset": 2012,
+          "encoded_length": 1098,
+          "other_header_fields": [
+            40,
+            161
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "105cd557f71029bb12c94aa1497f0b52c2325b45b17b6834e944b81c9fedde25",
+          "indexed_sha256": "856f62d4752a4e9c7079edb996cd92497df4edc2a0257ed836abf04636d65726",
+          "opaque_pixels": 702,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 995,
+          "asset": "portraits-king-1.png",
+          "sample": [
+            138,
+            619,
+            259,
+            850
+          ],
+          "content": [
+            0,
+            27,
+            53,
+            83
+          ],
+          "art_sha256": "2f95cfc8d5fd8dbb691fe4fd36f4bb6ff8f8dc2429e02972d0ed14e7459d968b",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "e72359eb08205ebd3c08bf6ffa5dc5601b84d09e2a0de6ebe8575da9305dc91a",
+          "palette_sha256": "7290443924d455a1755be3f876eb9309cf7da16fde40a4c23399cc2ebee3254e",
+          "writes_sha256": "d13d4c167b35bd9ed450e31a14179062154e8d4d2553c56b3c1f260c70187060"
+        },
+        {
+          "research_id": 996,
+          "file": "KING2.SS",
+          "file_sha256": "80f3f250796807f5b9b1ccda1cd1863c3a1a923a1790bb996786ed249821deeb",
+          "ordinal": 3,
+          "size": [
+            79,
+            161
+          ],
+          "header_part1_offset": 48,
+          "data_part3_offset": 3110,
+          "encoded_length": 1005,
+          "other_header_fields": [
+            40,
+            161
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "4537eea0f63570f522132cbfbf882820304cde326fc4a751e6eb7d4574eff7d8",
+          "indexed_sha256": "0a63aafba04b3a166f2846b5ff3ad31c14155c1660cfa41f08a1a185bf5287fa",
+          "opaque_pixels": 674,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 996,
+          "asset": "portraits-king-1.png",
+          "sample": [
+            566,
+            615,
+            682,
+            839
+          ],
+          "content": [
+            1,
+            27,
+            53,
+            81
+          ],
+          "art_sha256": "2f95cfc8d5fd8dbb691fe4fd36f4bb6ff8f8dc2429e02972d0ed14e7459d968b",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "fd696eaf9f0f637c009af626b2bf0f097bb2b76173af3138d013ed55e5a88ccf",
+          "palette_sha256": "0510db1d8ff65245a18c902dd78866c61983fdd4c09bb593385134a0bb8739a7",
+          "writes_sha256": "4a10602af59574ff78f0b6ab302de8550880695ef1f3576ef9b2efb130b316d5"
+        },
+        {
+          "research_id": 997,
+          "file": "KING2.SS",
+          "file_sha256": "80f3f250796807f5b9b1ccda1cd1863c3a1a923a1790bb996786ed249821deeb",
+          "ordinal": 4,
+          "size": [
+            79,
+            161
+          ],
+          "header_part1_offset": 64,
+          "data_part3_offset": 4115,
+          "encoded_length": 891,
+          "other_header_fields": [
+            40,
+            161
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "6384f6fa795670dc6d88c5fdf7da32d03bea7790cca49c8ea927526de896aab8",
+          "indexed_sha256": "3c225f3948596453768c63a7d9563393c2cae5a03240a6330bc7bb13c189ea05",
+          "opaque_pixels": 523,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 997,
+          "asset": "portraits-king-1.png",
+          "sample": [
+            999,
+            627,
+            1149,
+            819
+          ],
+          "content": [
+            5,
+            27,
+            53,
+            81
+          ],
+          "art_sha256": "2f95cfc8d5fd8dbb691fe4fd36f4bb6ff8f8dc2429e02972d0ed14e7459d968b",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "3eeb47cc87adb265573ef8c082aee56e03bac6ebdd02fe413ca1739fd39bd966",
+          "palette_sha256": "a26f96d6d862611b99627605a3cb08004b631a9355fb6e5453280154907c9547",
+          "writes_sha256": "85035ac4ed850c2c536af58d536b2b6da2f2c45b84621f6b05013ea1ab616e7e"
+        },
+        {
+          "research_id": 998,
+          "file": "KING2.SS",
+          "file_sha256": "80f3f250796807f5b9b1ccda1cd1863c3a1a923a1790bb996786ed249821deeb",
+          "ordinal": 5,
+          "size": [
+            79,
+            161
+          ],
+          "header_part1_offset": 80,
+          "data_part3_offset": 5006,
+          "encoded_length": 939,
+          "other_header_fields": [
+            40,
+            161
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "2f3f4980fcbf36ea6216fcf064cc944cd7ff6267f72a291478ed61c0f5efe22f",
+          "indexed_sha256": "e03030304b86a6bf8d3e01b086873264689cc701898c2781239e464284ffae57",
+          "opaque_pixels": 552,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 998,
+          "asset": "portraits-king-1.png",
+          "sample": [
+            132,
+            965,
+            310,
+            1168
+          ],
+          "content": [
+            7,
+            9,
+            53,
+            81
+          ],
+          "art_sha256": "2f95cfc8d5fd8dbb691fe4fd36f4bb6ff8f8dc2429e02972d0ed14e7459d968b",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "843780d0732298fb4c3fb01b80b88eb91c910fa2f21549e6734b723df19b2c7f",
+          "palette_sha256": "cbe72707c9f50536a69c958bd1bef0cba3154010bfde843a941d82fdd0d2bfa5",
+          "writes_sha256": "7284bfcd7335d0344dcf4b8bbff005985d01291711e152715e32b5a73f54e1b5"
+        },
+        {
+          "research_id": 999,
+          "file": "KING2.SS",
+          "file_sha256": "80f3f250796807f5b9b1ccda1cd1863c3a1a923a1790bb996786ed249821deeb",
+          "ordinal": 6,
+          "size": [
+            79,
+            161
+          ],
+          "header_part1_offset": 96,
+          "data_part3_offset": 5945,
+          "encoded_length": 934,
+          "other_header_fields": [
+            40,
+            161
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "72c2a4ff30cd8f42957caa4221bc74408bcecac63aec1c469a0f3ca205ed0f9f",
+          "indexed_sha256": "4c2beca97ea01cafcf862899fe4f31d817526b2756f21ad7c4034ca9b55e768a",
+          "opaque_pixels": 550,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 999,
+          "asset": "portraits-king-1.png",
+          "sample": [
+            557,
+            956,
+            722,
+            1165
+          ],
+          "content": [
+            7,
+            27,
+            53,
+            81
+          ],
+          "art_sha256": "2f95cfc8d5fd8dbb691fe4fd36f4bb6ff8f8dc2429e02972d0ed14e7459d968b",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "fcc5f796f4b2ee25c263094bfa1137c0810c2316264c0ebfddd651b829d7e3b5",
+          "palette_sha256": "b579a4b5cf2d2cd819f40819be368995e533396fa4dde3421d725d6208b93d9c",
+          "writes_sha256": "3d8d426497296e411415bba57043102e199f7defb635e62c83367f2068661b8f"
+        },
+        {
+          "research_id": 1000,
+          "file": "KING2.SS",
+          "file_sha256": "80f3f250796807f5b9b1ccda1cd1863c3a1a923a1790bb996786ed249821deeb",
+          "ordinal": 7,
+          "size": [
+            79,
+            161
+          ],
+          "header_part1_offset": 112,
+          "data_part3_offset": 6879,
+          "encoded_length": 934,
+          "other_header_fields": [
+            40,
+            161
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "5b7b8a58b1ec285f9c9aeaa04e15abc1897b4ea2fbbd28309cba6c7a3165eeb1",
+          "indexed_sha256": "2a20c26448ffe7c9620d335693f8f3f2183e2f6f8fde12c091daa0861d2ba5dc",
+          "opaque_pixels": 550,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1000,
+          "asset": "portraits-king-1.png",
+          "sample": [
+            995,
+            956,
+            1145,
+            1168
+          ],
+          "content": [
+            7,
+            27,
+            53,
+            81
+          ],
+          "art_sha256": "2f95cfc8d5fd8dbb691fe4fd36f4bb6ff8f8dc2429e02972d0ed14e7459d968b",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "619c2d26d951275015d72fed10c7dc131086f3e58372c8082d8a08b2de1bed69",
+          "palette_sha256": "c48ace5c48232f38c4abf2ea40675960ea3535db2c55327a9047e131e83edf5a",
+          "writes_sha256": "8685a13898b27fa8eb87a6d9cf1e3f0a7935d40ea3252057ffc8f7f78de559d9"
+        }
+      ]
+    },
+    "kinglose-000.png": {
+      "sha256": "bbee76741ab0738c568a652b4f878d677f7c7f56b48e6b9b83ac8befa0debdb1",
+      "bytes": 1045450,
+      "size": [
+        1144,
+        1375
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Edit Image1 into refined high-definition fine pixel art for the Colonization (1994) display overlay. Image1 is the EXACT full-frame geometry template: preserve its aspect ratio, framing, all landmark positions, posture, silhouette, internal spacing and alpha holes. Do not center, rearrange, resize, rotate or recrop the character or props. Image2 is only the approved fine pixel-art STYLE. Repaint the coarse old pixels with fresh crisp fine intentional pixel clusters, coherent red coat fabric, white wig and cravat, pale stockings, dark shoes, small straw chair/back and large gray tricorn hat. This is ONE adult white-wigged red-coated gentleman bowing forward, head lowered, one hand pressed to forehead, other hand across stomach, with gray tricorn on the ground at lower left. Preserve the same slightly caricatured historical face and defeated expression. Exactly one head, one body and one hat. Relative to the ENTIRE canvas, head/wig remains near x35%-70%, y0%-23%; torso remains near x32%-100%, y18%-58%; legs/shoes near x48%-93%, y52%-100%; separate gray hat near x0%-39%, y59%-100%. Keep wig and top of head touching/near the top edge, shoes at bottom edge, chair detail near right edge, matching Image1. Replace loose stippled fragments with coherent pixel detail while retaining exact overall object placement. Background and holes fully transparent. No added margin, new props, scenery, grid, text, labels, captions, numbers, watermark, blur, smooth painting,3D or photography. The ENTIRE output image maps to the original game frame, so internal geometry must match the reference rather than a centered portrait.",
+      "generation_file": "exec-2955f692-a596-44ae-8cea-38e187ed7725.png",
+      "reference_sha256": "fe0a079b307706247c4467b7d369c39e6cd8215480785313bfbb976eb14045a9",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1001,
+          "file": "KINGLOSE.SS",
+          "file_sha256": "cf598c35b506dfbe731e8b3d5d06717e2d73f6da541158896bc6c37db66a0239",
+          "ordinal": 0,
+          "size": [
+            149,
+            179
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 13590,
+          "other_header_fields": [
+            74,
+            198
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "1d39ac0ef209e677eedc808aeb9c32c47b783666b18e0e4de8191582c5fc177b",
+          "indexed_sha256": "b7263c13363bdceb82b6566c55c3ca711c415946486012e4cdb2851e4e0852c1",
+          "opaque_pixels": 12461,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1001,
+          "asset": "kinglose-000.png",
+          "sample": [
+            0,
+            0,
+            1144,
+            1375
+          ],
+          "content": [
+            0,
+            0,
+            149,
+            179
+          ],
+          "art_sha256": "bbee76741ab0738c568a652b4f878d677f7c7f56b48e6b9b83ac8befa0debdb1",
+          "art_size": [
+            1144,
+            1375
+          ],
+          "padded_sha256": "5b3d7bbe7c12a084c7d61f545c57679fcf841002db394c3bb85b4d9c3bb14f64",
+          "palette_sha256": "f7c15325abda41b50ee1702cd7163705eaf5297fefd61c2217aa662859da5a42",
+          "writes_sha256": "7976805738e5d4018bafb61ceab02fa797efd46716375e53930392eeecc9aa5d"
+        }
+      ]
+    },
+    "kingwin-000.png": {
+      "sha256": "cf932a5e425ab773fe6d5cd89531ec51a32738c7b9f4a8e57a2f566e706c72f1",
+      "bytes": 691694,
+      "size": [
+        1303,
+        1207
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Edit Image1 into refined high-definition fine pixel art for the Colonization (1994) display overlay. Image1 is the EXACT full-frame geometry template. Preserve its framing, aspect ratio, all object locations, proportions, pose, silhouette and alpha cutouts. Do NOT center, rearrange, resize, straighten or recrop the figure or props. Image2 provides ONLY approved fine pixel-art rendering style. Repaint the coarse pixels with crisp fine intentional pixel clusters, coherent red coat cloth, white wig, pale stockings, dark shoes, straw chair and gray tricorn hat. Keep the same slightly caricatured historical face and anxious wide-eyed expression looking upward/left. This is ONE reclining adult white-wigged red-coated gentleman, leaning back nearly horizontally, one raised hand holding an ornate rectangular object, legs extending toward the right edge, gray tricorn hat below left. Exactly one head, one body and one hat. Match the template's normalized landmarks: head remains within x16%-30%, y14%-30%; held rectangular object remains near x47%-64%, y0%-27%; extended legs remain across x61%-100%, y39%-53%; separate gray hat remains within x0%-31%, y59%-100%. These positions refer to the ENTIRE canvas, including transparency. Keep feet reaching the right edge and the rectangular object's top reaching the top edge as in Image1. Preserve internal geometry and skin color; no extra facial profiles or duplicate parts. Replace stray stippled fragments with coherent pixel detail, preserving the overall shape. Transparent background and holes. Do not add any margin or background, grid, captions, text, labels, watermark, new props, scenery, blur, smooth painting,3D or photography. The whole source canvas will map to the game's original frame, so landmark alignment is essential.",
+      "generation_file": "exec-76c669db-f33f-4425-92db-6192781cbdac.png",
+      "reference_sha256": "d287255918d644093838a1494f3cf22f54c6ced49b33cbd52e8248ee266a3251",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1004,
+          "file": "KINGWIN.SS",
+          "file_sha256": "b90ad9fcf0ad3f4fbe5a16f2862ec8570c1a403c645895ab3dc67dc7e6fb46c6",
+          "ordinal": 0,
+          "size": [
+            214,
+            198
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 9548,
+          "other_header_fields": [
+            134,
+            198
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "af3cb48b55182beb4c8247c715c82961959ae9fab501da492ffdcc582cb20e89",
+          "indexed_sha256": "8fb35532c5cac3cc31e4a53570aa1709df0e93adcd0f4b2b88f4854d92644357",
+          "opaque_pixels": 9970,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1004,
+          "asset": "kingwin-000.png",
+          "sample": [
+            0,
+            0,
+            1303,
+            1207
+          ],
+          "content": [
+            0,
+            0,
+            214,
+            198
+          ],
+          "art_sha256": "cf932a5e425ab773fe6d5cd89531ec51a32738c7b9f4a8e57a2f566e706c72f1",
+          "art_size": [
+            1303,
+            1207
+          ],
+          "padded_sha256": "9263fa8ae0875304b17e1a01b3c6c4677a16b12ca26142163691282ba75c7e1b",
+          "palette_sha256": "b2150120e6af612486c6ab67968e3a2899f1af2afd300de8333447c0dbd3a146",
+          "writes_sha256": "e4572059f1c578f31c84d30bd645c8f337e8d5c31b666d07b192ca223311b32a"
+        }
+      ]
     }
   }
 }

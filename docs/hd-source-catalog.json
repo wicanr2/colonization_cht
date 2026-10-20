@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "b82cd6c547aa178410318fe5ddf651f56692f085d22333f20f040814eaeb8a85",
+  "formal_manifest_sha256": "3ada0eaac7d0a684377ed7934d4ff360afdcffd675f0894901738f5032a1ea52",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,12 +26,12 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 559,
+    "formal_asset_bindings": 570,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
     "other_formats_and_program_drawn_graphics": "not_assessed",
-    "display_pass_source_bindings": 242
+    "display_pass_source_bindings": 253
   },
   "files": [
     {
@@ -37817,7 +37817,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-king-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "7971e305d5acf7bfad0aabaeaa50aa46c5fabb5fba7e9d599637d16af72920c5",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 992,
@@ -37876,7 +37885,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-king-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "7971e305d5acf7bfad0aabaeaa50aa46c5fabb5fba7e9d599637d16af72920c5",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 994,
@@ -37901,7 +37919,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-king-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "7971e305d5acf7bfad0aabaeaa50aa46c5fabb5fba7e9d599637d16af72920c5",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 995,
@@ -37926,7 +37953,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-king-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "7971e305d5acf7bfad0aabaeaa50aa46c5fabb5fba7e9d599637d16af72920c5",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 996,
@@ -37951,7 +37987,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-king-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "7971e305d5acf7bfad0aabaeaa50aa46c5fabb5fba7e9d599637d16af72920c5",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 997,
@@ -37976,7 +38021,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-king-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "7971e305d5acf7bfad0aabaeaa50aa46c5fabb5fba7e9d599637d16af72920c5",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 998,
@@ -38001,7 +38055,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-king-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "7971e305d5acf7bfad0aabaeaa50aa46c5fabb5fba7e9d599637d16af72920c5",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 999,
@@ -38026,7 +38089,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-king-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "7971e305d5acf7bfad0aabaeaa50aa46c5fabb5fba7e9d599637d16af72920c5",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1000,
@@ -38051,7 +38123,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-king-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "7971e305d5acf7bfad0aabaeaa50aa46c5fabb5fba7e9d599637d16af72920c5",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1001,
@@ -38076,7 +38157,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "kinglose-000.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "7971e305d5acf7bfad0aabaeaa50aa46c5fabb5fba7e9d599637d16af72920c5",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1002,
@@ -38169,7 +38259,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "kingwin-000.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "7971e305d5acf7bfad0aabaeaa50aa46c5fabb5fba7e9d599637d16af72920c5",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1005,
@@ -71164,6 +71263,270 @@
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "state": "DISPLAY-PASS",
       "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-king-1.png",
+      "asset_sha256": "2f95cfc8d5fd8dbb691fe4fd36f4bb6ff8f8dc2429e02972d0ed14e7459d968b",
+      "source_research_id": 991,
+      "source_file": "KING.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "026318f01c602bc7fc337ddd3cea9758d129618b85085c52b7fc4875d611fd31",
+      "source_indexed_sha256": "3719564f54f4871deed65c1f3b8e51baad6e55503f29fb2ec38efa0c29fd76e1",
+      "raw_art_rect": [
+        157,
+        41,
+        342,
+        534
+      ],
+      "native_content_rect": [
+        15,
+        0,
+        79,
+        161
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-king-1.png",
+      "asset_sha256": "2f95cfc8d5fd8dbb691fe4fd36f4bb6ff8f8dc2429e02972d0ed14e7459d968b",
+      "source_research_id": 993,
+      "source_file": "KING2.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "bf8bcae2aadd833d29dd5d35028928c7097fd56032cb68f37b2a6febdfb4d809",
+      "source_indexed_sha256": "f747d5028e00783114d1a2c8d3f32bfdc8b987a03b720c0a345d4df6f71d9692",
+      "raw_art_rect": [
+        553,
+        168,
+        699,
+        388
+      ],
+      "native_content_rect": [
+        1,
+        29,
+        36,
+        79
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-king-1.png",
+      "asset_sha256": "2f95cfc8d5fd8dbb691fe4fd36f4bb6ff8f8dc2429e02972d0ed14e7459d968b",
+      "source_research_id": 994,
+      "source_file": "KING2.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "6976967c2a2caae1d89114308e716b74448f5242f43018293e0f6f5d961688b2",
+      "source_indexed_sha256": "9b98b6679818012b19470e381d9843f45222d76fd941869561ec9e126e5949ea",
+      "raw_art_rect": [
+        971,
+        163,
+        1108,
+        388
+      ],
+      "native_content_rect": [
+        0,
+        27,
+        53,
+        81
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-king-1.png",
+      "asset_sha256": "2f95cfc8d5fd8dbb691fe4fd36f4bb6ff8f8dc2429e02972d0ed14e7459d968b",
+      "source_research_id": 995,
+      "source_file": "KING2.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "105cd557f71029bb12c94aa1497f0b52c2325b45b17b6834e944b81c9fedde25",
+      "source_indexed_sha256": "856f62d4752a4e9c7079edb996cd92497df4edc2a0257ed836abf04636d65726",
+      "raw_art_rect": [
+        138,
+        619,
+        259,
+        850
+      ],
+      "native_content_rect": [
+        0,
+        27,
+        53,
+        83
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-king-1.png",
+      "asset_sha256": "2f95cfc8d5fd8dbb691fe4fd36f4bb6ff8f8dc2429e02972d0ed14e7459d968b",
+      "source_research_id": 996,
+      "source_file": "KING2.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "4537eea0f63570f522132cbfbf882820304cde326fc4a751e6eb7d4574eff7d8",
+      "source_indexed_sha256": "0a63aafba04b3a166f2846b5ff3ad31c14155c1660cfa41f08a1a185bf5287fa",
+      "raw_art_rect": [
+        566,
+        615,
+        682,
+        839
+      ],
+      "native_content_rect": [
+        1,
+        27,
+        53,
+        81
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-king-1.png",
+      "asset_sha256": "2f95cfc8d5fd8dbb691fe4fd36f4bb6ff8f8dc2429e02972d0ed14e7459d968b",
+      "source_research_id": 997,
+      "source_file": "KING2.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "6384f6fa795670dc6d88c5fdf7da32d03bea7790cca49c8ea927526de896aab8",
+      "source_indexed_sha256": "3c225f3948596453768c63a7d9563393c2cae5a03240a6330bc7bb13c189ea05",
+      "raw_art_rect": [
+        999,
+        627,
+        1149,
+        819
+      ],
+      "native_content_rect": [
+        5,
+        27,
+        53,
+        81
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-king-1.png",
+      "asset_sha256": "2f95cfc8d5fd8dbb691fe4fd36f4bb6ff8f8dc2429e02972d0ed14e7459d968b",
+      "source_research_id": 998,
+      "source_file": "KING2.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "2f3f4980fcbf36ea6216fcf064cc944cd7ff6267f72a291478ed61c0f5efe22f",
+      "source_indexed_sha256": "e03030304b86a6bf8d3e01b086873264689cc701898c2781239e464284ffae57",
+      "raw_art_rect": [
+        132,
+        965,
+        310,
+        1168
+      ],
+      "native_content_rect": [
+        7,
+        9,
+        53,
+        81
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-king-1.png",
+      "asset_sha256": "2f95cfc8d5fd8dbb691fe4fd36f4bb6ff8f8dc2429e02972d0ed14e7459d968b",
+      "source_research_id": 999,
+      "source_file": "KING2.SS",
+      "source_ordinal": 6,
+      "source_encoded_sha256": "72c2a4ff30cd8f42957caa4221bc74408bcecac63aec1c469a0f3ca205ed0f9f",
+      "source_indexed_sha256": "4c2beca97ea01cafcf862899fe4f31d817526b2756f21ad7c4034ca9b55e768a",
+      "raw_art_rect": [
+        557,
+        956,
+        722,
+        1165
+      ],
+      "native_content_rect": [
+        7,
+        27,
+        53,
+        81
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-king-1.png",
+      "asset_sha256": "2f95cfc8d5fd8dbb691fe4fd36f4bb6ff8f8dc2429e02972d0ed14e7459d968b",
+      "source_research_id": 1000,
+      "source_file": "KING2.SS",
+      "source_ordinal": 7,
+      "source_encoded_sha256": "5b7b8a58b1ec285f9c9aeaa04e15abc1897b4ea2fbbd28309cba6c7a3165eeb1",
+      "source_indexed_sha256": "2a20c26448ffe7c9620d335693f8f3f2183e2f6f8fde12c091daa0861d2ba5dc",
+      "raw_art_rect": [
+        995,
+        956,
+        1145,
+        1168
+      ],
+      "native_content_rect": [
+        7,
+        27,
+        53,
+        81
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "kinglose-000.png",
+      "asset_sha256": "bbee76741ab0738c568a652b4f878d677f7c7f56b48e6b9b83ac8befa0debdb1",
+      "source_research_id": 1001,
+      "source_file": "KINGLOSE.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "1d39ac0ef209e677eedc808aeb9c32c47b783666b18e0e4de8191582c5fc177b",
+      "source_indexed_sha256": "b7263c13363bdceb82b6566c55c3ca711c415946486012e4cdb2851e4e0852c1",
+      "raw_art_rect": [
+        0,
+        0,
+        1144,
+        1375
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        149,
+        179
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "kingwin-000.png",
+      "asset_sha256": "cf932a5e425ab773fe6d5cd89531ec51a32738c7b9f4a8e57a2f566e706c72f1",
+      "source_research_id": 1004,
+      "source_file": "KINGWIN.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "af3cb48b55182beb4c8247c715c82961959ae9fab501da492ffdcc582cb20e89",
+      "source_indexed_sha256": "8fb35532c5cac3cc31e4a53570aa1709df0e93adcd0f4b2b88f4854d92644357",
+      "raw_art_rect": [
+        0,
+        0,
+        1303,
+        1207
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        214,
+        198
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
     }
   ],
   "limitations": [
@@ -72064,5 +72427,12 @@
     "receipt_sha256": "eac324afb47c342bc8117d0500402784f453f8eea51c62cfb4624942fa213e47",
     "formal_binary_sha256": "bb7ee7de819e66e589abfa114e08c6e9ec56a60f1ee8a238ea36e2ac5b6cd69d",
     "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected display acceptance only, no new normal-player-path or original-exact claim."
+  },
+  "last_king_display": {
+    "state": "DISPLAY-PASS",
+    "sources": 11,
+    "receipt_sha256": "7971e305d5acf7bfad0aabaeaa50aa46c5fabb5fba7e9d599637d16af72920c5",
+    "formal_binary_sha256": "d880d2a4fd6608b90a022a79ff3be849d094485ac5dbbe3c12c043a647faa4de",
+    "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
   }
 }
