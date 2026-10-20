@@ -333,7 +333,7 @@ func TestHDSmallRuntimeNativeLifecycle(t *testing.T) {
 	h, err := loadHDRuntime(m, game, assets)
 	need(err)
 
-	if h.small == nil || len(h.small.frames) != 85 || hash(m.Mem) != before {
+	if h.small == nil || len(h.small.frames) != 124 || hash(m.Mem) != before {
 		t.Fatal("小圖像載入失敗或改寫DOS")
 	}
 	p := h.small
@@ -660,7 +660,7 @@ func TestHDSmallResourceContract(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(p.frames) != 85 || !bytes.Equal(before, m.Mem) {
+	if len(p.frames) != 124 || !bytes.Equal(before, m.Mem) {
 		t.Fatal("素材載入來源或原版記憶體不同")
 	}
 	available := map[int]bool{}
@@ -669,8 +669,8 @@ func TestHDSmallResourceContract(t *testing.T) {
 			available[f.ordinal] = true
 		}
 	}
-	wantedAvailable := []int{113, 54, 3, 11, 118, 5, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 42, 53, 56, 59, 62, 67, 68, 69, 94, 122, 123, 124, 6, 7, 14, 15, 127, 8, 9, 16, 58, 60, 66, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 95, 96, 97, 98, 106, 107, 65, 73, 74, 75, 76, 77, 101, 102, 103, 104, 105, 109, 110, 111, 112, 125, 126, 128, 129}
-	if len(available) != 84 {
+	wantedAvailable := []int{113, 54, 3, 11, 118, 5, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 42, 53, 56, 59, 62, 67, 68, 69, 94, 122, 123, 124, 6, 7, 14, 15, 127, 8, 9, 16, 58, 60, 66, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 95, 96, 97, 98, 106, 107, 65, 73, 74, 75, 76, 77, 101, 102, 103, 104, 105, 109, 110, 111, 112, 125, 126, 128, 129, 0, 1, 2, 10, 12, 13, 17, 18, 19, 20, 21, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 55, 57, 61, 63, 64, 99, 108, 114, 115, 116, 117, 119, 120, 121, 130}
+	if len(available) != 123 {
 		t.Fatal("小圖像素材集合不同", available)
 	}
 	for _, ordinal := range wantedAvailable {
@@ -927,7 +927,7 @@ func hdSmallNativeLifecycle(t *testing.T, fixture hdSmallNativeFixture) {
 	h, err := loadHDRuntime(m, game, assets)
 	need(err)
 
-	if h.small == nil || len(h.small.frames) != 85 || hash(m.Mem) != before {
+	if h.small == nil || len(h.small.frames) != 124 || hash(m.Mem) != before {
 		t.Fatal("小圖像載入失敗或改寫DOS")
 	}
 	p := h.small
@@ -1555,8 +1555,8 @@ func TestHDScaledSmallResources(t *testing.T) {
 			need(os.WriteFile(filepath.Join(a, f.file), read(filepath.Join(assets, f.file)), 0644))
 		}
 	}
-	if len(hdSmallFrames) != 85 || len(names) != 84 {
-		t.Fatal("all83 art plus person100")
+	if len(hdSmallFrames) != 124 || len(names) != 123 {
+		t.Fatal("124 sources and 123 artwork references")
 	}
 	h := &hdRuntime{m: golem.New()}
 	before := bytes.Clone(h.m.Mem)
@@ -1564,7 +1564,7 @@ func TestHDScaledSmallResources(t *testing.T) {
 		t.Helper()
 		p, e := loadHDSmallRuntime(h, g, a)
 		need(e)
-		if len(p.frames) != 85 {
+		if len(p.frames) != 124 {
 			t.Fatal("positive full loader")
 		}
 	}

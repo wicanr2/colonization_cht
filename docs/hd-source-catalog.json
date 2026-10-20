@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "8d8068e23a496fccbef2e7961bdf99da9e177373d33fe8ad4895be85bece3b09",
+  "formal_manifest_sha256": "3e5cad0baba6526824703006988e2035858fe37bd78df1bac82ce4cd5c6a5943",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,12 +26,12 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 366,
+    "formal_asset_bindings": 405,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
     "other_formats_and_program_drawn_graphics": "not_assessed",
-    "display_pass_source_bindings": 49
+    "display_pass_source_bindings": 88
   },
   "files": [
     {
@@ -28966,7 +28966,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 828,
@@ -28991,7 +29000,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 829,
@@ -29016,7 +29034,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 830,
@@ -29429,7 +29456,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 838,
@@ -29488,7 +29524,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 840,
@@ -29513,7 +29558,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 841,
@@ -29685,7 +29739,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 845,
@@ -29710,7 +29773,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 846,
@@ -29735,7 +29807,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 847,
@@ -29760,7 +29841,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 848,
@@ -29785,7 +29875,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 849,
@@ -31719,7 +31818,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 867,
@@ -31744,7 +31852,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 868,
@@ -31769,7 +31886,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 869,
@@ -31931,7 +32057,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 871,
@@ -31956,7 +32091,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 872,
@@ -31981,7 +32125,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 873,
@@ -32006,7 +32159,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 874,
@@ -32031,7 +32193,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 875,
@@ -32056,7 +32227,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 876,
@@ -32081,7 +32261,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 877,
@@ -32106,7 +32295,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 878,
@@ -32131,7 +32329,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 879,
@@ -32156,7 +32363,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 880,
@@ -32316,7 +32532,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 883,
@@ -32430,7 +32655,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 885,
@@ -32654,7 +32888,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 889,
@@ -32860,7 +33103,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 891,
@@ -32885,7 +33137,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 892,
@@ -34604,7 +34865,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 927,
@@ -35073,7 +35343,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 936,
@@ -35328,7 +35607,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 942,
@@ -35353,7 +35641,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 943,
@@ -35378,7 +35675,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 944,
@@ -35403,7 +35709,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 945,
@@ -35462,7 +35777,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 947,
@@ -35487,7 +35811,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 948,
@@ -35512,7 +35845,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 949,
@@ -36085,7 +36427,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "icons-remaining-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/065-hd-small-images.md",
+        "formal_connected": true,
+        "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+        "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 958,
@@ -64795,6 +65146,942 @@
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "state": "DISPLAY-PASS",
       "claim": "R101 production loader and renderer display smoke with original decoded source fixtures; no normal-player-path or original-exact parity claim."
+    },
+    {
+      "asset": "icons-remaining-1.png",
+      "asset_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+      "source_research_id": 827,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "17dfcc99e48d952ef8e30b239c470521423a0e244210f30118ad8078369d4c2f",
+      "source_indexed_sha256": "e794e0b17c37edf085762ff2d0feea76c702be553da3ee9e24b5dec013d1e6dd",
+      "raw_art_rect": [
+        29,
+        58,
+        294,
+        274
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        21,
+        16
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-1.png",
+      "asset_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+      "source_research_id": 828,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "38fae9ec6627c827910c0ec6b51057e6bf3b09b0d31a1d08ae430326e072a0c0",
+      "source_indexed_sha256": "6445eb0303f0af3995378488a61831425d6c6f7d92687ce27a1d4faa9c47d3f8",
+      "raw_art_rect": [
+        338,
+        59,
+        606,
+        274
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        21,
+        16
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-1.png",
+      "asset_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+      "source_research_id": 829,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "d423674756278d69b84336503db56233c07528447c78270fd02c4cf5a9dcfc6f",
+      "source_indexed_sha256": "535a4bdc84730e504a288c6b1054c0d6ae563413a13eedb5dc0a1ea51953a2b0",
+      "raw_art_rect": [
+        651,
+        59,
+        926,
+        274
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        21,
+        16
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-1.png",
+      "asset_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+      "source_research_id": 837,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 10,
+      "source_encoded_sha256": "900912c8ff3cca6e03fe851d44ed5a2c60bd2a2b92b02e5b3127429eac896e97",
+      "source_indexed_sha256": "4c9121e32981fb13ce62fa84ff58bc975a2a77f98af1bc277d23ef71270ffb44",
+      "raw_art_rect": [
+        982,
+        85,
+        1214,
+        255
+      ],
+      "native_content_rect": [
+        2,
+        1,
+        19,
+        13
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-1.png",
+      "asset_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+      "source_research_id": 839,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 12,
+      "source_encoded_sha256": "31faaf69a0876e176f4c51783d20da949d826544b60128f044b79929ebb365ef",
+      "source_indexed_sha256": "875f9cfd18d996f73e647eb7280472dac29420beea591d495470bfafc71f3d02",
+      "raw_art_rect": [
+        37,
+        401,
+        287,
+        575
+      ],
+      "native_content_rect": [
+        2,
+        3,
+        20,
+        14
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-1.png",
+      "asset_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+      "source_research_id": 840,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 13,
+      "source_encoded_sha256": "9efb8995a16e7caefbc92a0e15776d62ac102197cb1fb1bb28de3d57945c3053",
+      "source_indexed_sha256": "6c0e12a05b0d4a58e03a9db7850ce97351c7d0d15a713fac521eb16447d7f56c",
+      "raw_art_rect": [
+        338,
+        391,
+        615,
+        578
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        21,
+        15
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-1.png",
+      "asset_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+      "source_research_id": 844,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 17,
+      "source_encoded_sha256": "c02f5dd257ea8b0977b49f255d85341b72ce462a2b3e07a0aa1acc828488a0ad",
+      "source_indexed_sha256": "cff86b5c2507f41ba191f705cf2136fd0b5f51092fbeefe5d17ac9bf5bc67e3d",
+      "raw_art_rect": [
+        708,
+        413,
+        859,
+        569
+      ],
+      "native_content_rect": [
+        4,
+        4,
+        13,
+        13
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-1.png",
+      "asset_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+      "source_research_id": 845,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 18,
+      "source_encoded_sha256": "a24cf8d30c1a0be4c07789abd22c9394cf3e3b37261ca58c7ab1f48dca05518b",
+      "source_indexed_sha256": "cd461c973d950e8d084311c2da6ac3d077abadb3e1f43d8dccb41b565684cf0d",
+      "raw_art_rect": [
+        974,
+        351,
+        1220,
+        598
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-1.png",
+      "asset_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+      "source_research_id": 846,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 19,
+      "source_encoded_sha256": "84851884d43f546d7877758a528688e58e44e72a5288e809cb5ebad9babfa3e8",
+      "source_indexed_sha256": "e8ab15e9ec5d10a4e173944cf89d1074751d19713ee24a53034fb3536b58ac57",
+      "raw_art_rect": [
+        80,
+        721,
+        238,
+        868
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        8,
+        8
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-1.png",
+      "asset_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+      "source_research_id": 847,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 20,
+      "source_encoded_sha256": "b2f0a233ea14d88f9cd0e15924f6bfb99868f2039c7ad7dc1e79b70a0f56f79a",
+      "source_indexed_sha256": "4a507f9a6e282e599b1b505d934b8973816717f4af54aa863f0a6b3220f62de8",
+      "raw_art_rect": [
+        430,
+        749,
+        512,
+        832
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        4,
+        4
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-1.png",
+      "asset_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+      "source_research_id": 848,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 21,
+      "source_encoded_sha256": "e79d8d1c47a36a6ffef2f22a371fa710f3895ee43f7c9cfd83a92d553c4544d8",
+      "source_indexed_sha256": "ba458c12003d7a23207f1b27c4ddbbe57298f7ad243f0ddb45d6bdf068761858",
+      "raw_art_rect": [
+        765,
+        772,
+        806,
+        811
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-1.png",
+      "asset_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+      "source_research_id": 866,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 39,
+      "source_encoded_sha256": "cdef5dc5d6bc9cf663da5e8c472728c4ffd8f76f8e1a8584107460baf0fc2c62",
+      "source_indexed_sha256": "eae171862f3ed78022e71b5025f4c62be2259b0054503574624dd51c36805bbe",
+      "raw_art_rect": [
+        1013,
+        660,
+        1181,
+        911
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        8,
+        12
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-1.png",
+      "asset_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+      "source_research_id": 867,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 40,
+      "source_encoded_sha256": "b89d52b909c3d3b6fdf86c1589799f1761fab0f27bcdf20e74a903edf0b6c42a",
+      "source_indexed_sha256": "970cda3ecd79415454ee20038730484269cb4dc5f6b39cdddb36f193b2b37010",
+      "raw_art_rect": [
+        75,
+        978,
+        248,
+        1234
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        8,
+        12
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-2.png",
+      "asset_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+      "source_research_id": 868,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 41,
+      "source_encoded_sha256": "60bcb3023b6a5b6d074a883e95a9403961302bf9628be0a7cd2c614a2e424f62",
+      "source_indexed_sha256": "d73cfb1de954d92227bfda47b8b2dd8e6d10d8e8422e0452e6975281dd7e06d7",
+      "raw_art_rect": [
+        49,
+        71,
+        283,
+        291
+      ],
+      "native_content_rect": [
+        0,
+        1,
+        10,
+        11
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-2.png",
+      "asset_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+      "source_research_id": 870,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 43,
+      "source_encoded_sha256": "5d10c51e34663ab682895829cf5aa1528a95d8ff3bbd374acd11fc8c7dce6e54",
+      "source_indexed_sha256": "5ca6d907fd7a6fe02c190bced73585f390f641ed0ab861637273ef8563d8ea8f",
+      "raw_art_rect": [
+        350,
+        119,
+        593,
+        236
+      ],
+      "native_content_rect": [
+        0,
+        3,
+        10,
+        8
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-2.png",
+      "asset_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+      "source_research_id": 871,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 44,
+      "source_encoded_sha256": "ee8fb7d099ef7c9e0b506f97f27337b45d3a40879b954927365a7573559783d2",
+      "source_indexed_sha256": "4e8d4629ab336e05e8235d5bd950643a8c5dc1db60ef14da5b9b6dc1e832de3c",
+      "raw_art_rect": [
+        666,
+        90,
+        898,
+        283
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        10,
+        11
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-2.png",
+      "asset_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+      "source_research_id": 872,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 45,
+      "source_encoded_sha256": "e3d4d2b190e4b9be6cf86aa2bbf479153b1d37074eea523cbb69f8e3c6a51576",
+      "source_indexed_sha256": "fdade167938a402b3ab7330b5bc4585caaf88415671ea1d50f8d9e88017b36ce",
+      "raw_art_rect": [
+        979,
+        119,
+        1212,
+        252
+      ],
+      "native_content_rect": [
+        0,
+        3,
+        10,
+        9
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-2.png",
+      "asset_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+      "source_research_id": 873,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 46,
+      "source_encoded_sha256": "d154cca85e5cd024121753e95ecddc9a28652729633501f6bd2dcb2be703455a",
+      "source_indexed_sha256": "7b0fe92f93c9e5b8ae24fea4411ead59c2c0493b13046dc11e1f2e8551508a5e",
+      "raw_art_rect": [
+        27,
+        353,
+        310,
+        606
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        13,
+        12
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-2.png",
+      "asset_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+      "source_research_id": 874,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 47,
+      "source_encoded_sha256": "4947baaa5f9952ba826c3c695cdd9db089b5aafeed62f4eed1248524f53bcfeb",
+      "source_indexed_sha256": "117b3e83f4fa97621fd58648bfaa30341c93c5daccc53ac419ec3d157c9d4bf5",
+      "raw_art_rect": [
+        390,
+        364,
+        556,
+        606
+      ],
+      "native_content_rect": [
+        0,
+        1,
+        7,
+        12
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-2.png",
+      "asset_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+      "source_research_id": 875,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 48,
+      "source_encoded_sha256": "8e1bba1c79ae7519aff52d58ff31dc426cadb020a3709390719092cf519daa54",
+      "source_indexed_sha256": "e434c224299abefd1123b32771758142d7bb671bf5d7291d867ac005e0c0466d",
+      "raw_art_rect": [
+        744,
+        349,
+        830,
+        610
+      ],
+      "native_content_rect": [
+        3,
+        0,
+        7,
+        12
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-2.png",
+      "asset_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+      "source_research_id": 876,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 49,
+      "source_encoded_sha256": "ed8c46d41dad94dec9b889a3e3ac8f0612ebe9985c256a6bb8e23be301ec2951",
+      "source_indexed_sha256": "733e66af883903cb5ae2ca9d589f0578543753db319bda1d8bac0ca0f084c93e",
+      "raw_art_rect": [
+        1006,
+        364,
+        1186,
+        606
+      ],
+      "native_content_rect": [
+        0,
+        1,
+        8,
+        12
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-2.png",
+      "asset_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+      "source_research_id": 877,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 50,
+      "source_encoded_sha256": "e35f6cf1189341eccf90be33170e1d670f599be55097f2e9a57dde95d5b60096",
+      "source_indexed_sha256": "af00dffe44a8430ecaac7cfdce2ac0f99df3765a195b7d1e0cd4c55de6970594",
+      "raw_art_rect": [
+        59,
+        651,
+        257,
+        916
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        8,
+        12
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-2.png",
+      "asset_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+      "source_research_id": 878,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 51,
+      "source_encoded_sha256": "94b3c760ac2f4783348119cad6bf84dc12668967cbd71a5e739f01617ad50ec7",
+      "source_indexed_sha256": "a7cbc0d694aae23f2dd3221a4949c5f93fd43209f5ac5d078af31536a4b1b631",
+      "raw_art_rect": [
+        365,
+        701,
+        577,
+        883
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        9,
+        10
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-2.png",
+      "asset_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+      "source_research_id": 879,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 52,
+      "source_encoded_sha256": "8431cbf11db2980ef56331f8b2b928d8fb65e57838dfbb090773ab9d86d7534f",
+      "source_indexed_sha256": "46523c7383f9b0985f7602a0d8d8011235e8ebe5c613a30426ee03050c2fd451",
+      "raw_art_rect": [
+        667,
+        688,
+        889,
+        899
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        9,
+        11
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-2.png",
+      "asset_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+      "source_research_id": 882,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 55,
+      "source_encoded_sha256": "befe960a146abe4ace659fbbe52cba6aa414b4c4dbb06d23f1b4b81ba8994e07",
+      "source_indexed_sha256": "f5c7c6f5d61d0edd38ceeb641626c1dc1a195f2da19ee9010d3979c13da1dd3c",
+      "raw_art_rect": [
+        996,
+        694,
+        1192,
+        884
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        8,
+        10
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-2.png",
+      "asset_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+      "source_research_id": 884,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 57,
+      "source_encoded_sha256": "1c1f2f6ab1086839a2bc260b1a3d1051b177c96b4ca5e9e342c3c8e65a6a2d78",
+      "source_indexed_sha256": "da5a075da4169a5fb0e6d443938b658d7ba52c04dc72e0c34a54b8f11041628b",
+      "raw_art_rect": [
+        85,
+        977,
+        228,
+        1214
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        7,
+        12
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-3.png",
+      "asset_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+      "source_research_id": 888,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 61,
+      "source_encoded_sha256": "0eb0d4577e61914cec86c89dcd62a841beeac508bd1062f278e7990cba5d9bc1",
+      "source_indexed_sha256": "bb9b73c0902bc1448089e5ae3e44d3babbb04a3ba3599d34162c8a95ede1ee68",
+      "raw_art_rect": [
+        104,
+        59,
+        227,
+        313
+      ],
+      "native_content_rect": [
+        0,
+        2,
+        6,
+        16
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-3.png",
+      "asset_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+      "source_research_id": 890,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 63,
+      "source_encoded_sha256": "e879c6f279ad1a9fff064160c527a4dafb521cd837e68c82d428ee6120ecbcf0",
+      "source_indexed_sha256": "866234e4b0904108f93303b6120f89d88ed8e439009d87a148acfbcfee6df06b",
+      "raw_art_rect": [
+        377,
+        68,
+        594,
+        306
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-3.png",
+      "asset_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+      "source_research_id": 891,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 64,
+      "source_encoded_sha256": "599dcd92bc3a7c0590e3872907429db5dc7fe21065142b1681153fd0efbb1c2f",
+      "source_indexed_sha256": "31f6ab429882e61ff9e580c5727aa17709bc254afc76674224312bfffe5a46ca",
+      "raw_art_rect": [
+        681,
+        86,
+        880,
+        291
+      ],
+      "native_content_rect": [
+        2,
+        2,
+        13,
+        13
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-3.png",
+      "asset_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+      "source_research_id": 926,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 99,
+      "source_encoded_sha256": "a8bb86f121b99605e81776d3dfcbe36da011ed44885595a3e070f5f0024bb230",
+      "source_indexed_sha256": "c4fe6736a0bb714fb7c25815f60a888258bbc7b013c5265320218be1b3ffdf5f",
+      "raw_art_rect": [
+        1024,
+        86,
+        1158,
+        313
+      ],
+      "native_content_rect": [
+        0,
+        3,
+        7,
+        16
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-3.png",
+      "asset_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+      "source_research_id": 935,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 108,
+      "source_encoded_sha256": "58fc14eacbe70dfa826ffbcc098c132d908e59c55148ea069f01e8c2be636f01",
+      "source_indexed_sha256": "0f3d6f866928e05784535a8600594e46761724d1c2725cf8c3d841b7e74d3cca",
+      "raw_art_rect": [
+        100,
+        313,
+        237,
+        627
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        8,
+        16
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-3.png",
+      "asset_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+      "source_research_id": 941,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 114,
+      "source_encoded_sha256": "ad2c47fa6834acda2c0862a70948c58f78ed2c410dc87de9746fc7808f69ea0b",
+      "source_indexed_sha256": "4289f647d6b18d57f61b52d709b465ced9ef674215a2c627678e09dd98c96559",
+      "raw_art_rect": [
+        366,
+        390,
+        588,
+        625
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-3.png",
+      "asset_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+      "source_research_id": 942,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 115,
+      "source_encoded_sha256": "bc2468e9cf3f2c049c47b8f2bbf042e2d6628a5dcfba726436331aecdc1bfcdd",
+      "source_indexed_sha256": "5ae27328cdfa55e93060c6a75797fb71b36d26c5fde5101015b5010279852b3d",
+      "raw_art_rect": [
+        676,
+        390,
+        899,
+        625
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-3.png",
+      "asset_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+      "source_research_id": 943,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 116,
+      "source_encoded_sha256": "33ac150455e773dd44f0fe68d87ffa25ff592f7c0688b506748f69daeac56221",
+      "source_indexed_sha256": "12b9e3d40f9c4b01457100554513fe85f7a50c2ab65cecd1916db24b124e08c9",
+      "raw_art_rect": [
+        989,
+        313,
+        1212,
+        625
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-3.png",
+      "asset_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+      "source_research_id": 944,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 117,
+      "source_encoded_sha256": "f8bab9e5d3fe0956865f62402b463434c3dc1ff3b232dfa06280fd3bd427f299",
+      "source_indexed_sha256": "170fd7b7d380c83ac73dcc5044f9bc42a4ecd2a6d2381f0034529b29efdc39dd",
+      "raw_art_rect": [
+        57,
+        627,
+        280,
+        914
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        16
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-3.png",
+      "asset_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+      "source_research_id": 946,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 119,
+      "source_encoded_sha256": "37e26754fbc8a6634ac9e3a2377b6a68aafa29cba182893a10f28256b41f2414",
+      "source_indexed_sha256": "a1b7d9a2a558fdda6c98f1e1b7c86c0042ba3e94b4f391a1fc51f07c7b275f6a",
+      "raw_art_rect": [
+        419,
+        718,
+        563,
+        860
+      ],
+      "native_content_rect": [
+        1,
+        0,
+        6,
+        4
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-3.png",
+      "asset_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+      "source_research_id": 947,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 120,
+      "source_encoded_sha256": "86f00b994e7ab29721ca5a4ff6d1c177c3dceb9c52057018d1450202a6fb2aa1",
+      "source_indexed_sha256": "24c9d6ea85321c225256dd452b6f967b9c711432f7e72fafb8ca4820629e8823",
+      "raw_art_rect": [
+        729,
+        717,
+        870,
+        860
+      ],
+      "native_content_rect": [
+        1,
+        0,
+        6,
+        4
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-3.png",
+      "asset_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+      "source_research_id": 948,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 121,
+      "source_encoded_sha256": "357fb641980e3bbe4a6dec11e0e46719ec26d2a12146648607e30efadc5f358b",
+      "source_indexed_sha256": "f44599633ced75e46dfcf62054fb5f6299d857aaf8d4517e157966219c97d58d",
+      "raw_art_rect": [
+        1041,
+        717,
+        1189,
+        860
+      ],
+      "native_content_rect": [
+        1,
+        0,
+        6,
+        4
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "icons-remaining-3.png",
+      "asset_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+      "source_research_id": 957,
+      "source_file": "ICONS.SS",
+      "source_ordinal": 130,
+      "source_encoded_sha256": "6e379a7113c4f357081fc4f2f5147a09ed99ed0fec53034cbe17c9038e23ba64",
+      "source_indexed_sha256": "f725ee625dc5b55b96b9fb81acb09336f9ec07f3261e9d9c0a3aa20a7150c03b",
+      "raw_art_rect": [
+        98,
+        1008,
+        244,
+        1139
+      ],
+      "native_content_rect": [
+        1,
+        0,
+        6,
+        4
+      ],
+      "spec": "docs/spec/065-hd-small-images.md",
+      "state": "DISPLAY-PASS",
+      "claim": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
     }
   ],
   "limitations": [
@@ -65599,5 +66886,55 @@
     "formal_binary_sha256": "e6be4f8789c87176ddf2c3953d099243f2d4dcc57c811c6f1247b98a51627996",
     "receipt_sha256": "f15b82548fe0b4558f3c281bb4d61a064fc4036540346af21212b4d79d75452a",
     "scope": "R101 production loader and renderer display smoke with original decoded source fixtures; no normal-player-path or original-exact parity claim."
+  },
+  "remaining_icons_display": {
+    "state": "DISPLAY-PASS",
+    "sources": [
+      827,
+      828,
+      829,
+      837,
+      839,
+      840,
+      844,
+      845,
+      846,
+      847,
+      848,
+      866,
+      867,
+      868,
+      870,
+      871,
+      872,
+      873,
+      874,
+      875,
+      876,
+      877,
+      878,
+      879,
+      882,
+      884,
+      888,
+      890,
+      891,
+      926,
+      935,
+      941,
+      942,
+      943,
+      944,
+      946,
+      947,
+      948,
+      957
+    ],
+    "small_sources": 124,
+    "nonempty_ICONS_sources_unbound": 0,
+    "source_decoder_fixtures": 57,
+    "receipt_sha256": "7b97256a2618577939c06e96f3c5453077a8fff7203841a97cc67f264cef58c2",
+    "formal_binary_sha256": "c95b36046143b24fe285e88390d8c55469aa9c8210729fb125b11ed6e6593c42",
+    "scope": "R102 source fixture through production encoded-source call selection, complete-source finish and HD renderer; all39 displayed. Fixture writes supplied; no new normal-player-path or original-exact claim."
   }
 }

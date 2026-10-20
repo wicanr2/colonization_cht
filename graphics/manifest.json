@@ -23579,7 +23579,7 @@
       "generation_prompt": "Use case: style-transfer.\nAsset: ONE opaque HD background for Colonization (1994), original CLOS-BKG.PIK, landscape aspect 8:5.\nImage 1 is the exact composition, architecture, colors and crop reference. Image 2 is only the user's approved fine pixel-art style reference.\nRedraw the complete original city view in the approved refined pixel technique. Preserve the central red-brick clock tower with cream upper stories and small cupola, its exact size and position, the multi-window brick houses on both sides, the trees, the deep blue evening sky, and the small foreground figures and objects already present at the cropped lower edge. Keep the original perspective, silhouettes, window arrangement, clock placement and framing. Add readable wood, masonry and foliage texture with intentional crisp small pixel clusters, restrained highlights and the reference palette. Do not redesign the buildings or add scenery, flags, vehicles or characters. Do not copy Image 2's map or interface.\nOne single full background image, fully opaque edge to edge, no transparent padding, no title, labels, UI, collage, atlas or watermark. Preserve existing subjects and crop; no smooth painterly blur or glossy 3D.",
       "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
       "raw_original_unchanged": true,
-      "status": "READY production connection; display smoke pending",
+      "status": "DISPLAY-PASS production loader and renderer source-fixture display; no normal-player-path or original-exact claim",
       "sample_rect": [
         0,
         0,
@@ -23614,7 +23614,7 @@
       "generation_prompt": "Use case: style-transfer. Asset type: one opaque 8:5 landscape HD background for the display-only graphics layer of a 1994 colonial strategy game. Redraw the FIRST reference faithfully in the established fine pixel-art style shown in the SECOND reference: deliberate crisp pixel clusters, restrained warm historical palette, detailed timber, cloth and parchment, no soft oil-paint effect, no photorealism, no UI screenshot frame. Keep exactly the first reference's composition, object positions, perspective, proportions, light direction and negative spaces. Cover the full image edge to edge with no added border, no watermark and no additional people or objects. Return ONE standalone PNG, not a sprite sheet or atlas. The target is the obliquely placed Declaration parchment on green felt, books and brass ink equipment behind it, signatures below, a white quill entering from the right, round metal inkwell at the lower right. Preserve the document's tilted rectangular geometry and its fine dark historic writing texture. Keep the main heading as in the target, do not invent a new slogan or modern type. Text remains part of the reference composition and will receive a separately verified localization overlay if applicable.",
       "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
       "raw_original_unchanged": true,
-      "status": "READY production connection; display smoke pending",
+      "status": "DISPLAY-PASS production loader and renderer source-fixture display; no normal-player-path or original-exact claim",
       "sample_rect": [
         0,
         0,
@@ -23649,7 +23649,7 @@
       "generation_prompt": "Use case: style-transfer. Asset type: one opaque 8:5 landscape HD background for the display-only graphics layer of a 1994 colonial strategy game. Redraw the FIRST reference faithfully in the established fine pixel-art style shown in the SECOND reference: deliberate crisp pixel clusters, restrained warm historical palette, detailed timber, cloth and parchment, no soft oil-paint effect, no photorealism, no UI screenshot frame. Keep exactly the first reference's composition, object positions, perspective, proportions, light direction and negative spaces. Cover the full image edge to edge with no added border, no watermark and no additional people or objects. Return ONE standalone PNG, not a sprite sheet or atlas. The target is the closer, more upright Declaration of Independence parchment on green felt, books and ink equipment behind it, signatures below, a white quill from the right, round metal inkwell at the lower right. The original heading reads 'In CONGRESS, July 4, 1776' and 'The unanimous Declaration of the thirteen united States of America'. Preserve the document angle, heading region, dense dark period writing texture and signature area. Do not invent other readable captions.",
       "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
       "raw_original_unchanged": true,
-      "status": "READY production connection; display smoke pending",
+      "status": "DISPLAY-PASS production loader and renderer source-fixture display; no normal-player-path or original-exact claim",
       "sample_rect": [
         0,
         0,
@@ -23684,7 +23684,7 @@
       "generation_prompt": "Use case: style-transfer. Asset type: one opaque 8:5 landscape HD background for the display-only graphics layer of a 1994 colonial strategy game. Redraw the FIRST reference faithfully in the established fine pixel-art style shown in the SECOND reference: deliberate crisp pixel clusters, restrained warm historical palette, detailed timber, cloth and parchment, no soft oil-paint effect, no photorealism, no UI screenshot frame. Keep exactly the first reference's composition, object positions, perspective, proportions, light direction and negative spaces. Cover the full image edge to edge with no added border, no watermark and no additional people or objects. Return ONE standalone PNG, not a sprite sheet or atlas. The target is the SAME empty tall carved wooden royal chair, golden yellow and red striped upholstery, carved armrests and legs, historic tapestry, round table and closed gray book, ornate red/gold carpet. A wide short blank cream parchment scroll lies in the lower center-right foreground, curled on the left edge. Preserve this shorter horizontal scroll geometry precisely. No king or other person. All parchment remains completely blank, with no letters or pictograms.",
       "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
       "raw_original_unchanged": true,
-      "status": "READY production connection; display smoke pending",
+      "status": "DISPLAY-PASS production loader and renderer source-fixture display; no normal-player-path or original-exact claim",
       "sample_rect": [
         0,
         0,
@@ -23719,7 +23719,7 @@
       "generation_prompt": "Use case: style-transfer. Asset type: a single opaque 8:5 HD background PNG for a display-only 1994 strategy game localization. Image 1 supplies the exact composition, content and palette. Image 2 supplies only the approved fine pixel-art technique: crisp carefully placed pixel clusters, restrained historical colors, detailed wood/cloth/water, no blur, no photorealism and no soft painting. Faithfully redraw image 1 with more detail while retaining every object's size, position, silhouette and perspective. Fill the full canvas to its edges, no additional objects, no added frame, no captions, no watermark. One standalone PNG only, never an atlas or contact sheet. Warm orange/sepia dusk on the seashore, a solitary Indigenous fisherman viewed from behind at the far right, standing in shallow water with a long fishing pole angled up toward the center-left. Preserve the fisherman's clothing, headband, pose, body scale, shoreline, distant low islands and vertical warm light reflection on the sea. The large empty sky and sea at left and center are deliberate text-safe spaces: no new structures, ships or people there.",
       "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
       "raw_original_unchanged": true,
-      "status": "READY production connection; display smoke pending",
+      "status": "DISPLAY-PASS production loader and renderer source-fixture display; no normal-player-path or original-exact claim",
       "sample_rect": [
         0,
         0,
@@ -23754,7 +23754,7 @@
       "generation_prompt": "Use case: style-transfer.\nAsset: ONE opaque HD wood-panel background for Colonization (1994), original WOODPAN2.PIK, landscape aspect 8:5.\nImage 1 gives the exact full-panel composition, border and warm dark-brown color. Image 2 gives the already accepted fine-pixel wood texture style for this game.\nRedraw the original horizontal wood grain in the same refined pixel technique. Preserve the thin inset rim, edge shading, panel proportions, uneven horizontal grain direction and dark warm brown palette of Image 1. Keep the central area clear as a usable game background. Use crisp intentional small pixel clusters and restrained grain contrast, with no smooth blur. Do not invent boards, screws, carvings, ornaments or objects.\nONE full panel only, fully opaque edge to edge, no transparent padding, text, symbols, UI controls, collage, atlas or watermark.",
       "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
       "raw_original_unchanged": true,
-      "status": "READY production connection; display smoke pending",
+      "status": "DISPLAY-PASS production loader and renderer source-fixture display; no normal-player-path or original-exact claim",
       "sample_rect": [
         0,
         0,
@@ -23789,7 +23789,7 @@
       "generation_prompt": "Use case: stylized-concept.\nAsset type: an original high-resolution pixel-art character sprite for a classic game's HD display layer.\nInput image1 is a PRIVATE ORIGINAL GAME sprite reference. It is the authority for composition, silhouette, proportions, facial traits, pose, costume, accessories, palette and all cropped edges. Bright magenta marks unused native pixels and is not a real color of the figure. Input image2 is the USER-APPROVED fine pixel-art style reference, only for deliberate small pixel clusters, restrained material shading and crafted detail. Do not reproduce its buildings, terrain, scenery or layout.\nSubject and exact composition: Front-facing man with a small moustache and pointed beard, a dark purple Renaissance cap, and one large dark teal feather arcing up toward the upper-right and curling down at its tip. He wears a golden ochre doublet over a dark red center, a white neckcloth and pale gray striped/puffed sleeves. Both forearms extend toward the lower left and lower right, with open hands partly cropped at the two lower corners. Keep the hands, long feather and head exactly where the native reference places them. No weapons, extra jewelry, background or historical correction of the costume.\nCreate fresh original refined pixel art rather than enlarging, filtering or copying the old pixel grid. Preserve the native reference's subject and framing; do not redesign clothing or correct it to another historical period. Use intentional compact pixel clusters and sharp readable facial, cloth, leather, wood and metal detail, with the restrained natural palette of image1 and the crafted finish of image2. No painterly brushwork, blur, photographic or 3D rendering, smooth vector contours, glossy surfaces, heavy gradients, oversized blocks, UI boxes, text, captions or watermark.\nCanvas: keep exactly image1's aspect ratio and all subject placements, with no extra outer margin. Match the native sprite's complete set of visible body/hand/accessory components, including separated parts. The output must be FULLY OPAQUE. Fill unused magenta areas with a flat very dark neutral brown, never magenta; the original game's separate exact native alpha mask will remove that area at runtime. Do not create a new transparent cutout, drop native components, reframe, recenter, mirror, crop, or add any scene. Aim for clear fine pixel work when sampled at four times the native sprite size.",
       "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
       "raw_original_unchanged": true,
-      "status": "READY production connection; display smoke pending",
+      "status": "DISPLAY-PASS production loader and renderer source-fixture display; no normal-player-path or original-exact claim",
       "sample_rect": [
         0,
         0,
@@ -23825,7 +23825,7 @@
       "generation_prompt": "Use case: stylized-concept.\nAsset type: an original high-resolution pixel-art character sprite for a classic game's HD display layer.\nInput image1 is a PRIVATE ORIGINAL GAME sprite reference. It is the authority for composition, silhouette, proportions, facial traits, pose, costume, accessories, palette and all cropped edges. Bright magenta marks unused native pixels and is not a real color of the figure. Input image2 is the USER-APPROVED fine pixel-art style reference, only for deliberate small pixel clusters, restrained material shading and crafted detail. Do not reproduce its buildings, terrain, scenery or layout.\nSubject and exact composition: Front-facing woman with light brown hair under a soft gray-white bonnet. Preserve her face shape and quiet expression, white/cream shoulder cape, gray dress and dark ribbon/tie and small metallic clasp at the center of her chest. Her hands rest together on the dark horizontal ledge near the bottom edge. Preserve the original bonnet silhouette, shoulders, visible wrists, hands and torso crop. No added chair, flowers, religious symbols, text, legs or background scene.\nCreate fresh original refined pixel art rather than enlarging, filtering or copying the old pixel grid. Preserve the native reference's subject and framing; do not redesign clothing or correct it to another historical period. Use intentional compact pixel clusters and sharp readable facial, cloth, leather, wood and metal detail, with the restrained natural palette of image1 and the crafted finish of image2. No painterly brushwork, blur, photographic or 3D rendering, smooth vector contours, glossy surfaces, heavy gradients, oversized blocks, UI boxes, text, captions or watermark.\nCanvas: keep exactly image1's aspect ratio and all subject placements, with no extra outer margin. Match the native sprite's complete set of visible body/hand/accessory components, including separated parts. The output must be FULLY OPAQUE. Fill unused magenta areas with a flat very dark neutral brown, never magenta; the original game's separate exact native alpha mask will remove that area at runtime. Do not create a new transparent cutout, drop native components, reframe, recenter, mirror, crop, or add any scene. Aim for clear fine pixel work when sampled at four times the native sprite size.",
       "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
       "raw_original_unchanged": true,
-      "status": "READY production connection; display smoke pending",
+      "status": "DISPLAY-PASS production loader and renderer source-fixture display; no normal-player-path or original-exact claim",
       "sample_rect": [
         0,
         0,
@@ -23844,6 +23844,1512 @@
       ],
       "alpha": "raw RGB retained; original index253 controls shape",
       "native_ordinal": 0
+    },
+    "icons-remaining-1.png": {
+      "sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+      "bytes": 801798,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE original refined pixel-art sprite atlas for the HD display layer of Colonization (1994). Use the same approved fine pixel-art finish already used in this project.\nImage 1 is the exact source-composition reference for this batch: a 4 by 4 equally spaced grid. ONLY the FIRST THIRTEEN cells contain assets, in left-to-right, top-to-bottom order. Preserve each cell's subject, component count, orientation, silhouette, proportions, colors and relative component positions. Cells 14, 15 and 16 must remain fully transparent. The bright magenta/fuchsia and all black cell numbers/labels in image 1 are reference scaffolding, NEVER part of an asset. Remove all of them. No labels anywhere in the output.\nImage 2 is the approved style reference only. Do not copy its landscape, UI, text, buildings or composition.\nSubjects in order: three small fortified colonial settlements in brown/pale timber, brown timber palisade, and gray stone; a tan small clustered native settlement; a stepped light brown temple with green shoulders; a gray stepped stone temple with green accents; the original small gold/brown star-like marker; four very simple ivory white selection shapes (a large hollow rectangular outline, a smaller hollow rectangular outline, a tiny hollow square outline, and a tiny solid square); two desaturated gray commodity silhouettes. Keep the selection outlines geometrically simple and empty, exactly as the reference.\nUse crisp intentional fine pixel clusters, restrained highlights, readable cloth/wood/stone/metal detail and natural colors. Fresh art, no nearest-neighbor enlargement of the old pixels. No painterly brushwork, blur, photographic rendering, 3D, oversized pixel blocks, glossy plastic, decorative additions or invented text.\nUse a SQUARE transparent-background canvas with exactly FOUR rows and FOUR columns. Each cell is exactly one quarter of the canvas in both directions. One isolated asset per occupied cell, centered and fully contained inside its own cell with a clear transparent margin. Preserve the source asset's aspect ratio within its cell, including long thin and tiny geometrical symbols. For hollow outlines and prohibition symbols, the enclosed interior remains transparent. Do not draw grid lines, backgrounds, shadows extending beyond a cell, captions or watermark.\nThe output is the raw formal atlas; keep a clean straight alpha channel.",
+      "generation_file": "exec-f0dbe00b-dbc8-481a-af72-3048aa5ff530.png",
+      "reference_sha256": "2529cc97a2625c00feccd63e76b54fe0dc4dc80a5ff4433e36711bf3d2b79aab",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained, with original native index253 source mask",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "id": 827,
+          "ordinal": 0,
+          "native_size": [
+            21,
+            16
+          ],
+          "native_sha256": "e794e0b17c37edf085762ff2d0feea76c702be553da3ee9e24b5dec013d1e6dd",
+          "encoded_sha256": "17dfcc99e48d952ef8e30b239c470521423a0e244210f30118ad8078369d4c2f",
+          "encoded_length": 340,
+          "opaque": 266,
+          "writes_sha256": "aa31f395e158d7be9155976d788390b2faae7f555896c1ce0c0e932975870882",
+          "asset": "icons-remaining-1.png",
+          "art_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            29,
+            58,
+            294,
+            274
+          ],
+          "content": [
+            0,
+            0,
+            21,
+            16
+          ],
+          "nominal": [
+            15,
+            95
+          ],
+          "head_palette": false,
+          "scaled100": true
+        },
+        {
+          "id": 828,
+          "ordinal": 1,
+          "native_size": [
+            21,
+            16
+          ],
+          "native_sha256": "6445eb0303f0af3995378488a61831425d6c6f7d92687ce27a1d4faa9c47d3f8",
+          "encoded_sha256": "38fae9ec6627c827910c0ec6b51057e6bf3b09b0d31a1d08ae430326e072a0c0",
+          "encoded_length": 333,
+          "opaque": 288,
+          "writes_sha256": "3ba8b8e2bc9642cc6bded70f8f610261d70f731f653e650daa5a5bb22452f912",
+          "asset": "icons-remaining-1.png",
+          "art_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            338,
+            59,
+            606,
+            274
+          ],
+          "content": [
+            0,
+            0,
+            21,
+            16
+          ],
+          "nominal": [
+            37,
+            78
+          ],
+          "head_palette": false,
+          "scaled100": true
+        },
+        {
+          "id": 829,
+          "ordinal": 2,
+          "native_size": [
+            21,
+            16
+          ],
+          "native_sha256": "535a4bdc84730e504a288c6b1054c0d6ae563413a13eedb5dc0a1ea51953a2b0",
+          "encoded_sha256": "d423674756278d69b84336503db56233c07528447c78270fd02c4cf5a9dcfc6f",
+          "encoded_length": 330,
+          "opaque": 291,
+          "writes_sha256": "4f51cdb9c99e58ca36fade60123365171ccb981a81d5fbbf0147ac56618095ad",
+          "asset": "icons-remaining-1.png",
+          "art_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            651,
+            59,
+            926,
+            274
+          ],
+          "content": [
+            0,
+            0,
+            21,
+            16
+          ],
+          "nominal": [
+            15,
+            78
+          ],
+          "head_palette": false,
+          "scaled100": true
+        },
+        {
+          "id": 837,
+          "ordinal": 10,
+          "native_size": [
+            21,
+            16
+          ],
+          "native_sha256": "4c9121e32981fb13ce62fa84ff58bc975a2a77f98af1bc277d23ef71270ffb44",
+          "encoded_sha256": "900912c8ff3cca6e03fe851d44ed5a2c60bd2a2b92b02e5b3127429eac896e97",
+          "encoded_length": 211,
+          "opaque": 129,
+          "writes_sha256": "e0a3e9c309778fc71309cf4772ae0bce663d7a6848b99b83739a744a21aa89ab",
+          "asset": "icons-remaining-1.png",
+          "art_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            982,
+            85,
+            1214,
+            255
+          ],
+          "content": [
+            2,
+            1,
+            19,
+            13
+          ],
+          "nominal": [
+            15,
+            142
+          ],
+          "head_palette": false,
+          "scaled100": true
+        },
+        {
+          "id": 839,
+          "ordinal": 12,
+          "native_size": [
+            21,
+            16
+          ],
+          "native_sha256": "875f9cfd18d996f73e647eb7280472dac29420beea591d495470bfafc71f3d02",
+          "encoded_sha256": "31faaf69a0876e176f4c51783d20da949d826544b60128f044b79929ebb365ef",
+          "encoded_length": 205,
+          "opaque": 158,
+          "writes_sha256": "f9dfe6eb888d1ec15a7922432132095e0d14dfc22b5183984822c411df1ad4b8",
+          "asset": "icons-remaining-1.png",
+          "art_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            37,
+            401,
+            287,
+            575
+          ],
+          "content": [
+            2,
+            3,
+            20,
+            14
+          ],
+          "nominal": [
+            59,
+            142
+          ],
+          "head_palette": false,
+          "scaled100": true
+        },
+        {
+          "id": 840,
+          "ordinal": 13,
+          "native_size": [
+            21,
+            16
+          ],
+          "native_sha256": "6c0e12a05b0d4a58e03a9db7850ce97351c7d0d15a713fac521eb16447d7f56c",
+          "encoded_sha256": "9efb8995a16e7caefbc92a0e15776d62ac102197cb1fb1bb28de3d57945c3053",
+          "encoded_length": 257,
+          "opaque": 222,
+          "writes_sha256": "2ad8f2ee1423d1ea35ae810e2872f7568fd97c051287ac0eb458986192fc0e64",
+          "asset": "icons-remaining-1.png",
+          "art_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            338,
+            391,
+            615,
+            578
+          ],
+          "content": [
+            0,
+            2,
+            21,
+            15
+          ],
+          "nominal": [
+            81,
+            142
+          ],
+          "head_palette": false,
+          "scaled100": true
+        },
+        {
+          "id": 844,
+          "ordinal": 17,
+          "native_size": [
+            16,
+            16
+          ],
+          "native_sha256": "cff86b5c2507f41ba191f705cf2136fd0b5f51092fbeefe5d17ac9bf5bc67e3d",
+          "encoded_sha256": "c02f5dd257ea8b0977b49f255d85341b72ce462a2b3e07a0aa1acc828488a0ad",
+          "encoded_length": 102,
+          "opaque": 49,
+          "writes_sha256": "027e2bc6aa938410f05e86784df49d742ecad454e280670dad1332bb39f0a9b8",
+          "asset": "icons-remaining-1.png",
+          "art_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            708,
+            413,
+            859,
+            569
+          ],
+          "content": [
+            4,
+            4,
+            13,
+            13
+          ],
+          "nominal": [
+            130,
+            181
+          ],
+          "head_palette": false,
+          "scaled100": true
+        },
+        {
+          "id": 845,
+          "ordinal": 18,
+          "native_size": [
+            16,
+            16
+          ],
+          "native_sha256": "cd461c973d950e8d084311c2da6ac3d077abadb3e1f43d8dccb41b565684cf0d",
+          "encoded_sha256": "a24cf8d30c1a0be4c07789abd22c9394cf3e3b37261ca58c7ab1f48dca05518b",
+          "encoded_length": 107,
+          "opaque": 60,
+          "writes_sha256": "6eca11804a01eeaf1c1168376a5a62540da22bd270deb444bd051093656ca8d8",
+          "asset": "icons-remaining-1.png",
+          "art_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            974,
+            351,
+            1220,
+            598
+          ],
+          "content": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "nominal": [
+            13,
+            181
+          ],
+          "head_palette": false,
+          "scaled100": true
+        },
+        {
+          "id": 846,
+          "ordinal": 19,
+          "native_size": [
+            8,
+            8
+          ],
+          "native_sha256": "e8ab15e9ec5d10a4e173944cf89d1074751d19713ee24a53034fb3536b58ac57",
+          "encoded_sha256": "84851884d43f546d7877758a528688e58e44e72a5288e809cb5ebad9babfa3e8",
+          "encoded_length": 51,
+          "opaque": 28,
+          "writes_sha256": "85652fbb36c52dd82542f13f8c90970b58294cc6480b7cd972176df267d5519a",
+          "asset": "icons-remaining-1.png",
+          "art_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            80,
+            721,
+            238,
+            868
+          ],
+          "content": [
+            0,
+            0,
+            8,
+            8
+          ],
+          "nominal": [
+            28,
+            173
+          ],
+          "head_palette": false,
+          "scaled100": true
+        },
+        {
+          "id": 847,
+          "ordinal": 20,
+          "native_size": [
+            4,
+            4
+          ],
+          "native_sha256": "4a507f9a6e282e599b1b505d934b8973816717f4af54aa863f0a6b3220f62de8",
+          "encoded_sha256": "b2f0a233ea14d88f9cd0e15924f6bfb99868f2039c7ad7dc1e79b70a0f56f79a",
+          "encoded_length": 21,
+          "opaque": 12,
+          "writes_sha256": "835873520c12fb76874d946f8fe9cace7e241e56a43ddb5431642c9e4519d719",
+          "asset": "icons-remaining-1.png",
+          "art_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            430,
+            749,
+            512,
+            832
+          ],
+          "content": [
+            0,
+            0,
+            4,
+            4
+          ],
+          "nominal": [
+            37,
+            169
+          ],
+          "head_palette": false,
+          "scaled100": true
+        },
+        {
+          "id": 848,
+          "ordinal": 21,
+          "native_size": [
+            2,
+            2
+          ],
+          "native_sha256": "ba458c12003d7a23207f1b27c4ddbbe57298f7ad243f0ddb45d6bdf068761858",
+          "encoded_sha256": "e79d8d1c47a36a6ffef2f22a371fa710f3895ee43f7c9cfd83a92d553c4544d8",
+          "encoded_length": 9,
+          "opaque": 4,
+          "writes_sha256": "14e23838345fdadc32058c5753bf4bb751dd0472ae42d87fa751812dab738601",
+          "asset": "icons-remaining-1.png",
+          "art_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            765,
+            772,
+            806,
+            811
+          ],
+          "content": [
+            0,
+            0,
+            2,
+            2
+          ],
+          "nominal": [
+            43,
+            167
+          ],
+          "head_palette": false,
+          "scaled100": true
+        },
+        {
+          "id": 866,
+          "ordinal": 39,
+          "native_size": [
+            8,
+            12
+          ],
+          "native_sha256": "eae171862f3ed78022e71b5025f4c62be2259b0054503574624dd51c36805bbe",
+          "encoded_sha256": "cdef5dc5d6bc9cf663da5e8c472728c4ffd8f76f8e1a8584107460baf0fc2c62",
+          "encoded_length": 98,
+          "opaque": 54,
+          "writes_sha256": "a2515f6cc13ceeed38d1f736f1149e1478069f7d255b1ab56a3d36199833d7e5",
+          "asset": "icons-remaining-1.png",
+          "art_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            1013,
+            660,
+            1181,
+            911
+          ],
+          "content": [
+            0,
+            0,
+            8,
+            12
+          ],
+          "nominal": [
+            174,
+            41
+          ],
+          "head_palette": false,
+          "scaled100": false
+        },
+        {
+          "id": 867,
+          "ordinal": 40,
+          "native_size": [
+            8,
+            12
+          ],
+          "native_sha256": "970cda3ecd79415454ee20038730484269cb4dc5f6b39cdddb36f193b2b37010",
+          "encoded_sha256": "b89d52b909c3d3b6fdf86c1589799f1761fab0f27bcdf20e74a903edf0b6c42a",
+          "encoded_length": 103,
+          "opaque": 65,
+          "writes_sha256": "0d18963fc2f524ba9a3d0de496ebc02f14966907e79abca3fe7d413acd080f5e",
+          "asset": "icons-remaining-1.png",
+          "art_sha256": "d552f0fddb682daa079541e77f90457e30e0d40b97153f60aad7ee1712e80013",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            75,
+            978,
+            248,
+            1234
+          ],
+          "content": [
+            0,
+            0,
+            8,
+            12
+          ],
+          "nominal": [
+            183,
+            41
+          ],
+          "head_palette": false,
+          "scaled100": false
+        }
+      ]
+    },
+    "icons-remaining-2.png": {
+      "sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+      "bytes": 760204,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE original refined pixel-art sprite atlas for the HD display layer of Colonization (1994). Use the same approved fine pixel-art finish already used in this project.\nImage 1 is the exact source-composition reference for this batch: a 4 by 4 equally spaced grid. ONLY the FIRST THIRTEEN cells contain assets, in left-to-right, top-to-bottom order. Preserve each cell's subject, component count, orientation, silhouette, proportions, colors and relative component positions. Cells 14, 15 and 16 must remain fully transparent. The bright magenta/fuchsia and all black cell numbers/labels in image 1 are reference scaffolding, NEVER part of an asset. Remove all of them. No labels anywhere in the output.\nImage 2 is the approved style reference only. Do not copy its landscape, UI, text, buildings or composition.\nThis batch contains eleven desaturated gray disabled commodity/tool symbols followed by a small red X and a narrow olive/gold marker. Recreate each exact tiny silhouette and component layout from image 1. The gray items MUST remain monochrome dark gray/silver, never become colored merchandise. Do not add new components or reinterpret the symbols.\nUse crisp intentional fine pixel clusters, restrained highlights, readable cloth/wood/stone/metal detail and natural colors. Fresh art, no nearest-neighbor enlargement of the old pixels. No painterly brushwork, blur, photographic rendering, 3D, oversized pixel blocks, glossy plastic, decorative additions or invented text.\nUse a SQUARE transparent-background canvas with exactly FOUR rows and FOUR columns. Each cell is exactly one quarter of the canvas in both directions. One isolated asset per occupied cell, centered and fully contained inside its own cell with a clear transparent margin. Preserve the source asset's aspect ratio within its cell, including long thin and tiny geometrical symbols. For hollow outlines and prohibition symbols, the enclosed interior remains transparent. Do not draw grid lines, backgrounds, shadows extending beyond a cell, captions or watermark.\nThe output is the raw formal atlas; keep a clean straight alpha channel.",
+      "generation_file": "exec-21baa22f-1980-463f-84fd-98f3e18e0181.png",
+      "reference_sha256": "44b469f5c6316d5b81c678f6a4c6136cde69f58d6087edbab773de5220d45074",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained, with original native index253 source mask",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "id": 868,
+          "ordinal": 41,
+          "native_size": [
+            10,
+            12
+          ],
+          "native_sha256": "d73cfb1de954d92227bfda47b8b2dd8e6d10d8e8422e0452e6975281dd7e06d7",
+          "encoded_sha256": "60bcb3023b6a5b6d074a883e95a9403961302bf9628be0a7cd2c614a2e424f62",
+          "encoded_length": 102,
+          "opaque": 63,
+          "writes_sha256": "8d22f7d76d4cff4028c9ef8702bd109715c1e0e24eea5c0e48d8341308595269",
+          "asset": "icons-remaining-2.png",
+          "art_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            49,
+            71,
+            283,
+            291
+          ],
+          "content": [
+            0,
+            1,
+            10,
+            11
+          ],
+          "nominal": [
+            193,
+            41
+          ],
+          "head_palette": false,
+          "scaled100": false
+        },
+        {
+          "id": 870,
+          "ordinal": 43,
+          "native_size": [
+            10,
+            12
+          ],
+          "native_sha256": "5ca6d907fd7a6fe02c190bced73585f390f641ed0ab861637273ef8563d8ea8f",
+          "encoded_sha256": "5d10c51e34663ab682895829cf5aa1528a95d8ff3bbd374acd11fc8c7dce6e54",
+          "encoded_length": 52,
+          "opaque": 44,
+          "writes_sha256": "bc56df81b4085b3a4f14232c81b6b7778e66f345ff353544aab52d80009864d8",
+          "asset": "icons-remaining-2.png",
+          "art_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            350,
+            119,
+            593,
+            236
+          ],
+          "content": [
+            0,
+            3,
+            10,
+            8
+          ],
+          "nominal": [
+            214,
+            41
+          ],
+          "head_palette": false,
+          "scaled100": false
+        },
+        {
+          "id": 871,
+          "ordinal": 44,
+          "native_size": [
+            10,
+            12
+          ],
+          "native_sha256": "4e8d4629ab336e05e8235d5bd950643a8c5dc1db60ef14da5b9b6dc1e832de3c",
+          "encoded_sha256": "ee8fb7d099ef7c9e0b506f97f27337b45d3a40879b954927365a7573559783d2",
+          "encoded_length": 97,
+          "opaque": 75,
+          "writes_sha256": "3aa4c303b4f4c3d4908ae7b49a0d9e1c9d6323a6c221ab9c2e5e19380c6ec42b",
+          "asset": "icons-remaining-2.png",
+          "art_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            666,
+            90,
+            898,
+            283
+          ],
+          "content": [
+            0,
+            2,
+            10,
+            11
+          ],
+          "nominal": [
+            225,
+            41
+          ],
+          "head_palette": false,
+          "scaled100": false
+        },
+        {
+          "id": 872,
+          "ordinal": 45,
+          "native_size": [
+            10,
+            12
+          ],
+          "native_sha256": "fdade167938a402b3ab7330b5bc4585caaf88415671ea1d50f8d9e88017b36ce",
+          "encoded_sha256": "e3d4d2b190e4b9be6cf86aa2bbf479153b1d37074eea523cbb69f8e3c6a51576",
+          "encoded_length": 63,
+          "opaque": 40,
+          "writes_sha256": "908286f29dec706b949dd437690f1f154cb202110970e26d0c6c44aad8c7bad8",
+          "asset": "icons-remaining-2.png",
+          "art_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            979,
+            119,
+            1212,
+            252
+          ],
+          "content": [
+            0,
+            3,
+            10,
+            9
+          ],
+          "nominal": [
+            236,
+            41
+          ],
+          "head_palette": false,
+          "scaled100": false
+        },
+        {
+          "id": 873,
+          "ordinal": 46,
+          "native_size": [
+            13,
+            12
+          ],
+          "native_sha256": "7b0fe92f93c9e5b8ae24fea4411ead59c2c0493b13046dc11e1f2e8551508a5e",
+          "encoded_sha256": "d154cca85e5cd024121753e95ecddc9a28652729633501f6bd2dcb2be703455a",
+          "encoded_length": 147,
+          "opaque": 104,
+          "writes_sha256": "7a7b293da7eec5040a03b8b39f550a3e0fb7200554d553837569da4b77503c43",
+          "asset": "icons-remaining-2.png",
+          "art_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            27,
+            353,
+            310,
+            606
+          ],
+          "content": [
+            0,
+            0,
+            13,
+            12
+          ],
+          "nominal": [
+            168,
+            54
+          ],
+          "head_palette": false,
+          "scaled100": false
+        },
+        {
+          "id": 874,
+          "ordinal": 47,
+          "native_size": [
+            7,
+            12
+          ],
+          "native_sha256": "117b3e83f4fa97621fd58648bfaa30341c93c5daccc53ac419ec3d157c9d4bf5",
+          "encoded_sha256": "4947baaa5f9952ba826c3c695cdd9db089b5aafeed62f4eed1248524f53bcfeb",
+          "encoded_length": 94,
+          "opaque": 64,
+          "writes_sha256": "d41c413f90b2de77b46a99f822c152687c136fafe38bde5fa86cade299435331",
+          "asset": "icons-remaining-2.png",
+          "art_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            390,
+            364,
+            556,
+            606
+          ],
+          "content": [
+            0,
+            1,
+            7,
+            12
+          ],
+          "nominal": [
+            179,
+            54
+          ],
+          "head_palette": false,
+          "scaled100": false
+        },
+        {
+          "id": 875,
+          "ordinal": 48,
+          "native_size": [
+            9,
+            12
+          ],
+          "native_sha256": "e434c224299abefd1123b32771758142d7bb671bf5d7291d867ac005e0c0466d",
+          "encoded_sha256": "8e1bba1c79ae7519aff52d58ff31dc426cadb020a3709390719092cf519daa54",
+          "encoded_length": 103,
+          "opaque": 44,
+          "writes_sha256": "98acd974405611c17a24e2ed23775953bd7b283a4c1fab2edcea12af5abf5871",
+          "asset": "icons-remaining-2.png",
+          "art_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            744,
+            349,
+            830,
+            610
+          ],
+          "content": [
+            3,
+            0,
+            7,
+            12
+          ],
+          "nominal": [
+            188,
+            54
+          ],
+          "head_palette": false,
+          "scaled100": false
+        },
+        {
+          "id": 876,
+          "ordinal": 49,
+          "native_size": [
+            8,
+            12
+          ],
+          "native_sha256": "733e66af883903cb5ae2ca9d589f0578543753db319bda1d8bac0ca0f084c93e",
+          "encoded_sha256": "ed8c46d41dad94dec9b889a3e3ac8f0612ebe9985c256a6bb8e23be301ec2951",
+          "encoded_length": 97,
+          "opaque": 68,
+          "writes_sha256": "36c8bf836ad69bd7b68dce038754dff0b44ddd73c01cfa657023a89ddf6fd3ff",
+          "asset": "icons-remaining-2.png",
+          "art_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            1006,
+            364,
+            1186,
+            606
+          ],
+          "content": [
+            0,
+            1,
+            8,
+            12
+          ],
+          "nominal": [
+            198,
+            54
+          ],
+          "head_palette": false,
+          "scaled100": false
+        },
+        {
+          "id": 877,
+          "ordinal": 50,
+          "native_size": [
+            8,
+            12
+          ],
+          "native_sha256": "af00dffe44a8430ecaac7cfdce2ac0f99df3765a195b7d1e0cd4c55de6970594",
+          "encoded_sha256": "e35f6cf1189341eccf90be33170e1d670f599be55097f2e9a57dde95d5b60096",
+          "encoded_length": 108,
+          "opaque": 80,
+          "writes_sha256": "112868802c9923091b71ffb4bce315e29303743e8eab11ca4f19817dafae8ba4",
+          "asset": "icons-remaining-2.png",
+          "art_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            59,
+            651,
+            257,
+            916
+          ],
+          "content": [
+            0,
+            0,
+            8,
+            12
+          ],
+          "nominal": [
+            207,
+            54
+          ],
+          "head_palette": false,
+          "scaled100": false
+        },
+        {
+          "id": 878,
+          "ordinal": 51,
+          "native_size": [
+            9,
+            12
+          ],
+          "native_sha256": "a7cbc0d694aae23f2dd3221a4949c5f93fd43209f5ac5d078af31536a4b1b631",
+          "encoded_sha256": "94b3c760ac2f4783348119cad6bf84dc12668967cbd71a5e739f01617ad50ec7",
+          "encoded_length": 82,
+          "opaque": 55,
+          "writes_sha256": "ed782221dc331b6dff130d46ce86af06a8cefbe093dff609be52cd4afe7bc2b6",
+          "asset": "icons-remaining-2.png",
+          "art_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            365,
+            701,
+            577,
+            883
+          ],
+          "content": [
+            0,
+            2,
+            9,
+            10
+          ],
+          "nominal": [
+            216,
+            54
+          ],
+          "head_palette": false,
+          "scaled100": false
+        },
+        {
+          "id": 879,
+          "ordinal": 52,
+          "native_size": [
+            9,
+            12
+          ],
+          "native_sha256": "46523c7383f9b0985f7602a0d8d8011235e8ebe5c613a30426ee03050c2fd451",
+          "encoded_sha256": "8431cbf11db2980ef56331f8b2b928d8fb65e57838dfbb090773ab9d86d7534f",
+          "encoded_length": 76,
+          "opaque": 38,
+          "writes_sha256": "6461104314a6642718f37926bac37f8fe1e5ef35bf2569f25b8956ee59c8c7b0",
+          "asset": "icons-remaining-2.png",
+          "art_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            667,
+            688,
+            889,
+            899
+          ],
+          "content": [
+            0,
+            2,
+            9,
+            11
+          ],
+          "nominal": [
+            226,
+            54
+          ],
+          "head_palette": false,
+          "scaled100": false
+        },
+        {
+          "id": 882,
+          "ordinal": 55,
+          "native_size": [
+            8,
+            12
+          ],
+          "native_sha256": "f5c7c6f5d61d0edd38ceeb641626c1dc1a195f2da19ee9010d3979c13da1dd3c",
+          "encoded_sha256": "befe960a146abe4ace659fbbe52cba6aa414b4c4dbb06d23f1b4b81ba8994e07",
+          "encoded_length": 74,
+          "opaque": 39,
+          "writes_sha256": "3fb67f713bf0651f8a139aa25b5db9616603d98fadc23af914d52b8f49cd0a26",
+          "asset": "icons-remaining-2.png",
+          "art_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            996,
+            694,
+            1192,
+            884
+          ],
+          "content": [
+            0,
+            2,
+            8,
+            10
+          ],
+          "nominal": [
+            100,
+            73
+          ],
+          "head_palette": false,
+          "scaled100": false
+        },
+        {
+          "id": 884,
+          "ordinal": 57,
+          "native_size": [
+            7,
+            12
+          ],
+          "native_sha256": "da5a075da4169a5fb0e6d443938b658d7ba52c04dc72e0c34a54b8f11041628b",
+          "encoded_sha256": "1c1f2f6ab1086839a2bc260b1a3d1051b177c96b4ca5e9e342c3c8e65a6a2d78",
+          "encoded_length": 95,
+          "opaque": 52,
+          "writes_sha256": "12f04c038edfc0283f5ef150823eafd478d05b6bce314e21a3ddcfb7ec962a39",
+          "asset": "icons-remaining-2.png",
+          "art_sha256": "53c3ff8224229d44bba6206aa5b79ace4c5e26bc2c0ba6efa565359ad75c1577",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            85,
+            977,
+            228,
+            1214
+          ],
+          "content": [
+            0,
+            0,
+            7,
+            12
+          ],
+          "nominal": [
+            121,
+            73
+          ],
+          "head_palette": false,
+          "scaled100": false
+        }
+      ]
+    },
+    "icons-remaining-3.png": {
+      "sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+      "bytes": 619627,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE original refined pixel-art sprite atlas for the HD display layer of Colonization (1994). Use the same approved fine pixel-art finish already used in this project.\nImage 1 is the exact source-composition reference for this batch: a 4 by 4 equally spaced grid. ONLY the FIRST THIRTEEN cells contain assets, in left-to-right, top-to-bottom order. Preserve each cell's subject, component count, orientation, silhouette, proportions, colors and relative component positions. Cells 14, 15 and 16 must remain fully transparent. The bright magenta/fuchsia and all black cell numbers/labels in image 1 are reference scaffolding, NEVER part of an asset. Remove all of them. No labels anywhere in the output.\nImage 2 is the approved style reference only. Do not copy its landscape, UI, text, buildings or composition.\nSubjects in order: a small front-facing black-clad cleric with black hat, white collar and clasped/lowered hands; a simple hollow red rectangular selection outline; a red prohibited ring with diagonal slash; a small front-facing worker in brown brimmed hat, pale shirt, blue vest and gray trousers; a narrow red totem pole with turquoise/blue and yellow details and two crosspieces; FOUR distinct left-looking profile portrait poses of the same brown-skinned native adviser wearing a flat red headband, matching image 1's slight mouth/chin expression differences; a small blue waving flag, a small yellow waving flag, a small orange waving flag; a tiny stylized red/white/blue flag. Preserve all poses, profiles, costume and crop. Never turn the profile heads into front-facing portraits.\nUse crisp intentional fine pixel clusters, restrained highlights, readable cloth/wood/stone/metal detail and natural colors. Fresh art, no nearest-neighbor enlargement of the old pixels. No painterly brushwork, blur, photographic rendering, 3D, oversized pixel blocks, glossy plastic, decorative additions or invented text.\nUse a SQUARE transparent-background canvas with exactly FOUR rows and FOUR columns. Each cell is exactly one quarter of the canvas in both directions. One isolated asset per occupied cell, centered and fully contained inside its own cell with a clear transparent margin. Preserve the source asset's aspect ratio within its cell, including long thin and tiny geometrical symbols. For hollow outlines and prohibition symbols, the enclosed interior remains transparent. Do not draw grid lines, backgrounds, shadows extending beyond a cell, captions or watermark.\nThe output is the raw formal atlas; keep a clean straight alpha channel.",
+      "generation_file": "exec-f463eb45-ddb0-4b0b-bbf1-fd18a8468b9d.png",
+      "reference_sha256": "20b1fa7a9aa147771a17632b0d12bdd771f87d8de4e75fe78eefa77e4baa147c",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained, with original native index253 source mask",
+      "spec": "docs/spec/065-hd-small-images.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "id": 888,
+          "ordinal": 61,
+          "native_size": [
+            6,
+            16
+          ],
+          "native_sha256": "bb9b73c0902bc1448089e5ae3e44d3babbb04a3ba3599d34162c8a95ede1ee68",
+          "encoded_sha256": "0eb0d4577e61914cec86c89dcd62a841beeac508bd1062f278e7990cba5d9bc1",
+          "encoded_length": 103,
+          "opaque": 60,
+          "writes_sha256": "3ae5c90acba5127051174762d48328ca6fcb20e7a45893f8757aacaca08da6c0",
+          "asset": "icons-remaining-3.png",
+          "art_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            104,
+            59,
+            227,
+            313
+          ],
+          "content": [
+            0,
+            2,
+            6,
+            16
+          ],
+          "nominal": [
+            303,
+            45
+          ],
+          "head_palette": false,
+          "scaled100": false
+        },
+        {
+          "id": 890,
+          "ordinal": 63,
+          "native_size": [
+            16,
+            16
+          ],
+          "native_sha256": "866234e4b0904108f93303b6120f89d88ed8e439009d87a148acfbcfee6df06b",
+          "encoded_sha256": "e879c6f279ad1a9fff064160c527a4dafb521cd837e68c82d428ee6120ecbcf0",
+          "encoded_length": 107,
+          "opaque": 60,
+          "writes_sha256": "8853871614318fd825e7fee01ecdd786e581911be798dd5f368c3c4a717b824c",
+          "asset": "icons-remaining-3.png",
+          "art_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            377,
+            68,
+            594,
+            306
+          ],
+          "content": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "nominal": [
+            56,
+            181
+          ],
+          "head_palette": false,
+          "scaled100": true
+        },
+        {
+          "id": 891,
+          "ordinal": 64,
+          "native_size": [
+            16,
+            16
+          ],
+          "native_sha256": "31f6ab429882e61ff9e580c5727aa17709bc254afc76674224312bfffe5a46ca",
+          "encoded_sha256": "599dcd92bc3a7c0590e3872907429db5dc7fe21065142b1681153fd0efbb1c2f",
+          "encoded_length": 121,
+          "opaque": 35,
+          "writes_sha256": "9a86c21ff468ad0a2a12fff4023ba87b1dfbbc07f4ca6f1d45a5c15261d4aaba",
+          "asset": "icons-remaining-3.png",
+          "art_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            681,
+            86,
+            880,
+            291
+          ],
+          "content": [
+            2,
+            2,
+            13,
+            13
+          ],
+          "nominal": [
+            73,
+            181
+          ],
+          "head_palette": false,
+          "scaled100": true
+        },
+        {
+          "id": 926,
+          "ordinal": 99,
+          "native_size": [
+            7,
+            16
+          ],
+          "native_sha256": "c4fe6736a0bb714fb7c25815f60a888258bbc7b013c5265320218be1b3ffdf5f",
+          "encoded_sha256": "a8bb86f121b99605e81776d3dfcbe36da011ed44885595a3e070f5f0024bb230",
+          "encoded_length": 95,
+          "opaque": 55,
+          "writes_sha256": "13fe50097ef86c2e9d4c0ced47bcd4ec76e568fa1a0bff587088ca6fc7fd096e",
+          "asset": "icons-remaining-3.png",
+          "art_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            1024,
+            86,
+            1158,
+            313
+          ],
+          "content": [
+            0,
+            3,
+            7,
+            16
+          ],
+          "nominal": [
+            247,
+            45
+          ],
+          "head_palette": false,
+          "scaled100": false
+        },
+        {
+          "id": 935,
+          "ordinal": 108,
+          "native_size": [
+            8,
+            16
+          ],
+          "native_sha256": "0f3d6f866928e05784535a8600594e46761724d1c2725cf8c3d841b7e74d3cca",
+          "encoded_sha256": "58fc14eacbe70dfa826ffbcc098c132d908e59c55148ea069f01e8c2be636f01",
+          "encoded_length": 124,
+          "opaque": 56,
+          "writes_sha256": "286ac78f5b6d52fb985587ed94cabf2dc0c8aafe73fc03cc4120aa4ed3e82904",
+          "asset": "icons-remaining-3.png",
+          "art_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            100,
+            313,
+            237,
+            627
+          ],
+          "content": [
+            0,
+            0,
+            8,
+            16
+          ],
+          "nominal": [
+            98,
+            95
+          ],
+          "head_palette": false,
+          "scaled100": true
+        },
+        {
+          "id": 941,
+          "ordinal": 114,
+          "native_size": [
+            16,
+            16
+          ],
+          "native_sha256": "4289f647d6b18d57f61b52d709b465ced9ef674215a2c627678e09dd98c96559",
+          "encoded_sha256": "ad2c47fa6834acda2c0862a70948c58f78ed2c410dc87de9746fc7808f69ea0b",
+          "encoded_length": 246,
+          "opaque": 226,
+          "writes_sha256": "6a0ad0ae58c199d57ded546b7fbda5d823f66c6a2fed3c1a43ae4c5a62ce4d30",
+          "asset": "icons-remaining-3.png",
+          "art_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            366,
+            390,
+            588,
+            625
+          ],
+          "content": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "nominal": [
+            30,
+            162
+          ],
+          "head_palette": true,
+          "scaled100": false
+        },
+        {
+          "id": 942,
+          "ordinal": 115,
+          "native_size": [
+            16,
+            16
+          ],
+          "native_sha256": "5ae27328cdfa55e93060c6a75797fb71b36d26c5fde5101015b5010279852b3d",
+          "encoded_sha256": "bc2468e9cf3f2c049c47b8f2bbf042e2d6628a5dcfba726436331aecdc1bfcdd",
+          "encoded_length": 244,
+          "opaque": 226,
+          "writes_sha256": "4058f1c297f73c012d847824c060f2646a72cb40e9a9f3679406f23f7ef9c883",
+          "asset": "icons-remaining-3.png",
+          "art_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            676,
+            390,
+            899,
+            625
+          ],
+          "content": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "nominal": [
+            47,
+            162
+          ],
+          "head_palette": true,
+          "scaled100": false
+        },
+        {
+          "id": 943,
+          "ordinal": 116,
+          "native_size": [
+            16,
+            16
+          ],
+          "native_sha256": "12b9e3d40f9c4b01457100554513fe85f7a50c2ab65cecd1916db24b124e08c9",
+          "encoded_sha256": "33ac150455e773dd44f0fe68d87ffa25ff592f7c0688b506748f69daeac56221",
+          "encoded_length": 246,
+          "opaque": 226,
+          "writes_sha256": "429124e3ed1bda60269cbe18a5e86da0608c813448f0581fd2f277fa5d04d63c",
+          "asset": "icons-remaining-3.png",
+          "art_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            989,
+            313,
+            1212,
+            625
+          ],
+          "content": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "nominal": [
+            64,
+            162
+          ],
+          "head_palette": true,
+          "scaled100": false
+        },
+        {
+          "id": 944,
+          "ordinal": 117,
+          "native_size": [
+            16,
+            16
+          ],
+          "native_sha256": "170fd7b7d380c83ac73dcc5044f9bc42a4ecd2a6d2381f0034529b29efdc39dd",
+          "encoded_sha256": "f8bab9e5d3fe0956865f62402b463434c3dc1ff3b232dfa06280fd3bd427f299",
+          "encoded_length": 243,
+          "opaque": 226,
+          "writes_sha256": "6db5838c37de67f7027c86dd43203246d2a3cc75d935135d411ddaec2a84b4bb",
+          "asset": "icons-remaining-3.png",
+          "art_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            57,
+            627,
+            280,
+            914
+          ],
+          "content": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "nominal": [
+            81,
+            162
+          ],
+          "head_palette": true,
+          "scaled100": false
+        },
+        {
+          "id": 946,
+          "ordinal": 119,
+          "native_size": [
+            6,
+            5
+          ],
+          "native_sha256": "a1b7d9a2a558fdda6c98f1e1b7c86c0042ba3e94b4f391a1fc51f07c7b275f6a",
+          "encoded_sha256": "37e26754fbc8a6634ac9e3a2377b6a68aafa29cba182893a10f28256b41f2414",
+          "encoded_length": 30,
+          "opaque": 15,
+          "writes_sha256": "d951386c9f1b2f904aeef4dd96c36d378324d3f036984d9c734d2e5aed23b468",
+          "asset": "icons-remaining-3.png",
+          "art_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            419,
+            718,
+            563,
+            860
+          ],
+          "content": [
+            1,
+            0,
+            6,
+            4
+          ],
+          "nominal": [
+            30,
+            90
+          ],
+          "head_palette": false,
+          "scaled100": true
+        },
+        {
+          "id": 947,
+          "ordinal": 120,
+          "native_size": [
+            6,
+            5
+          ],
+          "native_sha256": "24c9d6ea85321c225256dd452b6f967b9c711432f7e72fafb8ca4820629e8823",
+          "encoded_sha256": "86f00b994e7ab29721ca5a4ff6d1c177c3dceb9c52057018d1450202a6fb2aa1",
+          "encoded_length": 30,
+          "opaque": 15,
+          "writes_sha256": "54b6c3995d42fee92ea9504a666098dad1557cc54ea926b2d6c3ce69fd6195e0",
+          "asset": "icons-remaining-3.png",
+          "art_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            729,
+            717,
+            870,
+            860
+          ],
+          "content": [
+            1,
+            0,
+            6,
+            4
+          ],
+          "nominal": [
+            37,
+            90
+          ],
+          "head_palette": false,
+          "scaled100": true
+        },
+        {
+          "id": 948,
+          "ordinal": 121,
+          "native_size": [
+            6,
+            5
+          ],
+          "native_sha256": "f44599633ced75e46dfcf62054fb5f6299d857aaf8d4517e157966219c97d58d",
+          "encoded_sha256": "357fb641980e3bbe4a6dec11e0e46719ec26d2a12146648607e30efadc5f358b",
+          "encoded_length": 30,
+          "opaque": 15,
+          "writes_sha256": "88b4f7db9857a1668c46d8bff34167221a47cdc1f15c501e31f7fcf33648010d",
+          "asset": "icons-remaining-3.png",
+          "art_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            1041,
+            717,
+            1189,
+            860
+          ],
+          "content": [
+            1,
+            0,
+            6,
+            4
+          ],
+          "nominal": [
+            37,
+            84
+          ],
+          "head_palette": false,
+          "scaled100": true
+        },
+        {
+          "id": 957,
+          "ordinal": 130,
+          "native_size": [
+            6,
+            5
+          ],
+          "native_sha256": "f725ee625dc5b55b96b9fb81acb09336f9ec07f3261e9d9c0a3aa20a7150c03b",
+          "encoded_sha256": "6e379a7113c4f357081fc4f2f5147a09ed99ed0fec53034cbe17c9038e23ba64",
+          "encoded_length": 31,
+          "opaque": 15,
+          "writes_sha256": "538a3d9ce3ad0de09a98eae55193689e53087f5e346e823360ee84902116e813",
+          "asset": "icons-remaining-3.png",
+          "art_sha256": "1c5ac8f02545fcd75a55a61c86afac05ef285714dbe28b06f39f1f20f1e7a140",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "sample": [
+            98,
+            1008,
+            244,
+            1139
+          ],
+          "content": [
+            1,
+            0,
+            6,
+            4
+          ],
+          "nominal": [
+            44,
+            84
+          ],
+          "head_palette": false,
+          "scaled100": true
+        }
+      ]
     }
   }
 }
