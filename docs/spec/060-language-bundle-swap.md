@@ -1101,3 +1101,11 @@ DRAFT證據審查通過，狀態為READY。來源仍是R120同一合法原版、
 - 接續正式建置、正常GUI的四語原版／HD與游標抽樣、關頁後繁中選單及同輸入原版控制組，完成後才授予限定CONFORMED。不新增完整五語或全量HD聲明。
 
 Ready收據為既有hd-opening-animation-sources-r84工作根的r121-ready-review-r1.json。選單原始來源快照gui.sea-bar-sources.json的SHA-256為13f2b60a2414e96cd965d72bbf281de14aff5915cd650b0e95e9b740ef77f4da，只留本機。顯示／語意隔離依Codex對應入口；所有翻譯仍由既有TSV與語言包載入。
+
+### R121長正文選單限定CONFORMED
+
+四語頂列選單與完整教學正文在正常士兵頁同時顯示，原版／HD與四語游標共16張非英文事件實拍，另2張英文。當次44張1280乘800遊戲區與X11相同，正常關頁後選單保持、教學正文撤除且人物來源1061歸零。四語選單沿原22px及12個片段，10個人物點與7個背景差異只在完整來源證明下處理，正文沿R120的30px欄位。
+
+正式23項測試、138個含子項通過且零skip，包含原生觀測既有測試、容量／優先順序及配對反例，並含正文36個、選單32個拒絕案例。正式程式SHA-256為cb5e807dc920d486e24241f4a2d48b0fae92f12d22de383c3992ed66be7f38d2，通過建置與go vet，程式提交b40a645f81027b4cba5751d7cf9317b9af580574。當次78筆正常GUI輸入重播至285600000步，完整CPU、RAM、VGA與DAC等於原版控制組。
+
+收據位於既有hd-opening-animation-sources-r84工作根的r121-display-close-final.json、r121-shadow-menu-gui-final-check-r1.json、r121-formal-unit-display-r1及r121-shadow-menu-control-r1/check.json。原型來源與原始SS fixture只留本機。只增加此靜態頂列在長篇教學中的來源保留；人物後方四個動態狀態欄仍回原文，未擴及部分遮擋的數值欄位。328個語言資源、圖像清冊與HD來源信用保持；完整五語、全量HD、音訊、存檔及新版交付不增加聲明。
