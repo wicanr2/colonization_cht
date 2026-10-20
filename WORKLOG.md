@@ -7539,3 +7539,16 @@ timeout 180 docker run --rm --network none --user 1000:1000 \
 - R135隔離原型已通過452張來源顯示及453個含子項零skip；目前仍為DRAFT，正式接線與來源數保持R134。本次清理未更動該未提交規格、原型、圖像或fixture，未增加HD、完整五語、影片或發行驗收。README32張實拍及已發布版本保持。
 - 最終入口為[r136-cleanup-final-r1.json](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r136-cleanup-final-r1.json)，SHA-256為6a88afcc75793e54238c564482745b5ba1b059dd479da3255466f9aa5ec08a12。同根保存r136-cleanup-plan-r1.json、計畫／封存／核對腳本、逐檔封存清單、快取清理與實際還原收據。重用舊證據時，在非root Docker內執行python3 tools/evidence_storage.py restore <原始路徑或目錄>；完整掛載命令沿用本檔R123紀錄。
 - 核對時無root-owned產物、誤建.md目錄或封存暫存檔。一次性清理容器均自動移除；其他專案容器與映像保持。Git僅提交清理工具及本次交接紀錄，R135規格修改保留待接續；原版輸入、存檔與研究輸出未追蹤，Issue與Release保持。
+
+## 2026-10-21 R135 DEC字形動畫正式接線
+
+- R136清理完成並推送4414ae0後，接續既有452幀原型。重查規格流程路由及規格069，更新README前載入README標準；沒有重開原版內部、音訊、存檔或完整多語矩陣調查。
+- 目視小寫a、大寫A及筆跡首、中、末幀，重用既有中性材質的亮度細節，原字形、原生RGB比例、位置、透明區與幾何保持。386張原PNG、完整生成提示及權利保持；只增加452筆來源取樣，不產生重複素材目錄。
+- 隔離原型453個含子項零skip後審READY，才提升兩個正式場景來源檔及顯示測試。首次原型建置有未使用bytes匯入，移除私用測試的該匯入後乾淨重建；正式提升沿已通過的檔案，不把該失敗計為驗收。
+- 正式bdd9ed4d…建置與go vet通過。兩項／467個含子項零skip，包含452張正式來源測試圖、885場景完整載入，以及小寫、大寫、筆跡三類各四個必要錯件。所有新圖與原型逐byte相同，共205898個HD變動點，單幀至少32點；原版D46解碼及完整來源finish實際執行，來源參數、明亮背景與畫面外游標由fixture供應。
+- 正式清冊與執行器、封裝器指紋同步後才建置，正式hd_asset_files實際收集387檔並逐檔核對。沒有新增平台包、版號或Release；原版像素與fixture保持workplace本機，不加入Git。
+- 來源清冊保留原1015個連結並新增452個DISPLAY-PASS，現為1467連結、1454個唯一來源，含317個既有限定CONFORMED及1150個DISPLAY-PASS。1533張indexed內容完整SHA相符；非空未接解碼來源剩10個單色幾何，另69透明及19零尺寸。其他47檔與程式繪圖、完整五語、全量HD、影片與新版交付仍未完成。
+- 更新唯一CONTEXT與JSON清單並產生WORKLIST，README只更新穩定素材數量及範圍；32張既有實拍、328個語言資源與文字普查933shown／950pending保持。不把材質顯示當成Noto或翻譯驗收，也不宣稱正常獨立宣言路徑或原版時序對拍。
+- 本機入口為既有hd-opening-animation-sources-r84工作根的r135-dec-display-close-final.json；其餘收據為r135-ready-review-r1.json、r135-formal-build-r1.json、r135-formal-display-review-r1.json、r135-packaging-r1.json及r135-final-native-partition-r1.json。準備、提升、建置、測試及收尾腳本位於同根r135-*-source-r*.py。容器、暫存產物與擁有權於收尾核對，正式接線及來源清冊一併commit、push。
+- 收尾清除本輪Go建置快取並無損封存已結束的原型測試ELF，共回收290148352 bytes；目前正式程式、測試及原型／正式圖片保持，沒有建立素材副本。入口r135-cleanup-r1.json，舊程式可由tools/evidence_storage.py restore還原。
+- 最終交接r135-final-handoff-r1.json的SHA-256為8d4b933b99a9b1938b27f6a6551f8fb2b96ef7359e664d01610fb6c9a5494868。47343個保持原樣的保護檔案完整SHA相同，10個本批公開更新另依正式建置及增量審查核對；386張原PNG、全部存檔與現用原版輸入保持。工作樹實占37646630912 bytes，約35.06GiB，無root-owned產物、錯誤.md目錄或封存暫存檔。正式顯示收尾入口SHA-256為d6ce84a1f8fee857e22070527e29ca0c9d82ff8a1ad486bcce4cb783b4a56eb8。

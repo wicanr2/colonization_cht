@@ -3361,3 +3361,33 @@ MPSNAME.SS全部29幀已正式接線為DISPLAY-PASS，共768582個可見HD材質
 現行1015個來源連結，含317個既有限定CONFORMED與698個DISPLAY-PASS；1002個唯一來源已接。1533張既有indexed內容完整SHA核對，未接非空來源為452個DEC字形與10個單色幾何，另69全透明及19零尺寸。其他47檔與程式繪圖仍保留未完成，全量HD及完整五語沒有因此完成。README32張實拍與328個語言資源保持。
 
 本機入口為既有hd-opening-animation-sources-r84工作根的r134-mpsname-display-close-final.json、r134-formal-display-r3/check.json、r134-formal-display-review-r3.json、r134-formal-build-r3.json、r134-packaging-r1.json及r134-final-native-partition-r1.json。正式測試可在既有有界非root Docker／Xvfb環境，設定TEST_GAME_ROOT、TEST_HD_ASSETS、TEST_HD_MPSNAME_ROOT為本批fixture根、TEST_HD_MPSNAME_OUTPUT為新的輸出目錄，執行TestHDMPSNameMaterialDisplay。原版、字形參考與fixture只留本機。
+
+### R135 DEC字形動畫452幀 DRAFT
+
+沿既有VICEROY.EXE 0D46:000A完整SS來源、Main持有權與場景合成契約，接續53個DEC-LOW／DEC-UPP／DEC-SQIG檔案的452個非空幀。各檔完整SHA-256、ordinal、尺寸、原始nominal、encoded／indexed／逐點寫入指紋由既有清冊核對，沒有重複來源身份，也不與既有正式來源衝突。來源色盤共同SHA-256為ba55cd144d77798485d0091804de3dd0fb99131cb63935b7502c66c5576b751b。這是字形圖像材質接線，不是逐字中文替換。
+
+重用已入庫mpsname-silver-material.png的中性亮度細節，原PNG不變。只對完整持有的原字形像素以原生RGB乘材質增益，保留原生色調比例、輪廓、位置、透明區及各幀幾何；不改原版規則、輸入或存檔，不授予Noto、翻譯、正常書寫流程或原版時序信用。
+
+先在隔離模組新增452個來源，既有433個場景來源保持，總數885。原型以既有D46解碼fixture及完整原始來源資料產生452張Main測試畫面，逐幀可見後才審READY；正式建置、必要載入及顯示通過記DISPLAY-PASS。原版像素、encoded與fixture只留本機，來源及取樣清冊不含可重建原版圖像的資料。入口為既有hd-opening-animation-sources-r84工作根的r135-dec-preparation-r1.json。
+
+### R135 DEC字形動畫452幀 READY
+
+隔離原型的452幀皆由既有原版0D46:000A解碼、完整來源finish與Main整合繪圖產生可見HD變動，453個含子項零skip，共205898點，單幀至少32點。已目視小寫a、大寫A及筆跡的首、中、末幀；輪廓、原生色調比例、位置、透明區與逐幀幾何保持。測試提供明亮背景、來源參數及畫面外游標，不宣稱正常獨立宣言路徑或原版精確對拍。
+
+原始檔名及完整SHA、ordinal、尺寸、nominal、encoded／indexed／逐點寫入與來源使用索引的色盤指紋列於本批清冊；全色盤共同SHA為ba55cd144d77798485d0091804de3dd0fb99131cb63935b7502c66c5576b751b。素材灰階亮度沿R134公式，增益為128加亮度整除2，再乘原生RGB並以255正規化。未知來源、缺色盤、持有權、後畫及游標守門沿原契約；錯件拒絕並回原圖，不改DOS資料、輸入、規則或存檔。
+
+授權把已測試的452個來源與材質分支接入正式場景，總數433增至885，SS來源404增至856。重用既有mpsname-silver-material.png，386張原PNG均保持；只擴充來源清冊與相應固定指紋。正式驗收為建置、go vet、完整885來源載入、本批來源與共用材質的必要錯件，以及452張正式來源fixture畫面，通過記DISPLAY-PASS；不追加原版內部、音訊／存檔或整套多語矩陣，也不增加Noto及翻譯信用。
+
+本機READY入口為既有hd-opening-animation-sources-r84工作根的r135-ready-review-r1.json；來源為r135-dec-preparation-r1.json及r135-dec-fixtures-r1.json，原型顯示與目視總覽為r135-prototype-display-r1/check.json及r135-prototype-visual-review-r1.png。原版像素與fixture保持本機。
+
+### R135 DEC字形動畫452幀顯示通過
+
+53個DEC小寫、大寫及筆跡檔案的452個非空幀已正式接線，記DISPLAY-PASS。共205898個可見HD材質變動點，單幀至少32點；452張正式畫面與隔離原型逐byte相同，已目視首、中、末幀。實際原版D46解碼及完整來源finish後由Main整合繪圖輸出，fixture提供來源參數、明亮背景與畫面外游標，不宣稱正常獨立宣言路徑或原版時序對拍。
+
+正式bdd9ed4dc497a4b8def918ac3bfbb09a53ad82fab60327ba1342ba33eb8f8cc3建置與go vet通過，兩項／467個含子項零skip，包含452張顯示、885個場景完整載入、小寫／大寫／筆跡三類各四種必要錯件。共用材質驗缺檔、錯指紋、符號連結；原版檔驗錯指紋，錯誤原因必須命中目標來源，不能由其他缺件冒充通過。
+
+沿用mpsname-silver-material.png的原PNG與來源、提示及權利記錄，只延伸452筆來源取樣；386張原PNG均完整相同。正式hd_asset_files實際收集387檔並核對完整指紋，沒有新增平台包、版號或Release。正式清冊SHA-256為f258be00a12f60f6c4dd028e57c8cc580e05aa6ff46444da1d06ab0a9e616f31。
+
+現行1467個來源連結，含317個既有限定CONFORMED及1150個DISPLAY-PASS，1454個唯一來源已接。1533張既有indexed內容完整SHA核對；非空未接來源剩10個單色幾何，另69全透明與19零尺寸。其他47檔、程式繪圖、完整五語、全量HD、影片及新版交付仍未完成；本批HD材質不增加Noto、翻譯或字型覆蓋信用，328個語言資源與README32張實拍保持。
+
+本機入口為既有hd-opening-animation-sources-r84工作根的r135-dec-display-close-final.json、r135-formal-build-r1.json、r135-formal-display-review-r1.json、r135-formal-display-r1/check.json、r135-packaging-r1.json及r135-final-native-partition-r1.json。正式測試在既有非root Docker／有界Xvfb環境設定TEST_GAME_ROOT、TEST_HD_EVENT_ASSETS、TEST_HD_EVENT_FIXTURES、TEST_HD_DEC_FIXTURE及TEST_HD_DEC_OUTPUT後執行TestHDDeclarationGlyphDisplay；fixture與原版像素只留本機。

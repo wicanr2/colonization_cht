@@ -19,11 +19,11 @@ func TestHDEventResources(t *testing.T) {
 	if game == "" || assets == "" {
 		t.Skip("需要合法原版與隔離HD原圖")
 	}
-	t.Run("all433-scenes", func(t *testing.T) {
+	t.Run("all885-scenes", func(t *testing.T) {
 		m := golem.New()
 		before := append([]byte(nil), m.Mem...)
 		p, e := loadHDSceneRuntime(&hdRuntime{m: m}, game, assets)
-		if e != nil || p == nil || len(p.frames) != 433 {
+		if e != nil || p == nil || len(p.frames) != 885 {
 			t.Fatal("full scene load", e)
 		}
 		if !bytes.Equal(before, m.Mem) {
@@ -38,7 +38,7 @@ func TestHDEventResources(t *testing.T) {
 				}
 			}
 		}
-		if sprites != 404 {
+		if sprites != 856 {
 			t.Fatal("all fixed SS scene sources", sprites)
 		}
 	})
@@ -274,7 +274,7 @@ func TestHDMSSFullProjectLoader(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if h.scenes == nil || len(h.scenes.frames) != 433 {
+	if h.scenes == nil || len(h.scenes.frames) != 885 {
 		t.Fatal("four new sources and thirty inherited sources required")
 	}
 	seen := 0
@@ -353,7 +353,7 @@ func TestHDBDarkDisplay(t *testing.T) {
 	if e != nil {
 		t.Fatal(e)
 	}
-	if hash(m.Mem) != empty || h.scenes == nil || len(h.scenes.frames) != 433 {
+	if hash(m.Mem) != empty || h.scenes == nil || len(h.scenes.frames) != 885 {
 		t.Fatal("full loader mutation or scope")
 	}
 	p := h.scenes
@@ -447,7 +447,187 @@ func TestHDBDarkDisplay(t *testing.T) {
 	if len(records) != 45 || images[18] != images[19] {
 		t.Fatal("all sources or original alias coverage", len(records))
 	}
-	result := map[string]any{"result": "PASS_BDARK45_PRODUCTION_SOURCE_FIXTURE_DISPLAY", "frames": records, "full_loader_scenes": 433, "fixture_sha256": hash(raw), "scope": "typed BDARK source records and offscreen cursor conditions with actual original D46 execution and integrated production renderer; no normal BDARK path or original-exact claim"}
+	result := map[string]any{"result": "PASS_BDARK45_PRODUCTION_SOURCE_FIXTURE_DISPLAY", "frames": records, "full_loader_scenes": 885, "fixture_sha256": hash(raw), "scope": "typed BDARK source records and offscreen cursor conditions with actual original D46 execution and integrated production renderer; no normal BDARK path or original-exact claim"}
+	b, e := json.MarshalIndent(result, "", "  ")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = os.WriteFile(filepath.Join(output, "check.json"), append(b, '\n'), 0644); e != nil {
+		t.Fatal(e)
+	}
+}
+
+func TestHDDeclarationGlyphDisplay(t *testing.T) {
+	game, assets := os.Getenv("TEST_GAME_ROOT"), os.Getenv("TEST_HD_EVENT_ASSETS")
+	root, path, output := os.Getenv("TEST_HD_EVENT_FIXTURES"), os.Getenv("TEST_HD_DEC_FIXTURE"), os.Getenv("TEST_HD_DEC_OUTPUT")
+	if game == "" || assets == "" || root == "" || path == "" || output == "" {
+		t.Skip("需要合法原版、既有解碼器收據、DEC來源fixture與新輸出")
+	}
+	read := func(path string) []byte {
+		t.Helper()
+		b, e := os.ReadFile(path)
+		if e != nil {
+			t.Fatal(e)
+		}
+		return b
+	}
+	raw := read(path)
+	if hash(raw) != "20de6fcdb1b32eb94828a9f035ededce03fbc121abf8a5af00595afb1f2706d3" {
+		t.Fatal("DEC fixture fingerprint")
+	}
+	var fixtures struct {
+		Palette []byte
+		Frames  []struct {
+			ID              int
+			Encoded, Pixels []byte
+		}
+	}
+	if e := json.Unmarshal(raw, &fixtures); e != nil {
+		t.Fatal(e)
+	}
+	if len(fixtures.Frames) != 452 || len(fixtures.Palette) != 768 {
+		t.Fatal("DEC fixture scope")
+	}
+	name := "r98-decoder-1061-2cae0.json"
+	metadata := read(filepath.Join(root, name))
+	expected, known := hdEventFixtureSHAs[name]
+	if !known || hash(metadata) != expected[0] {
+		t.Fatal("original decoder metadata")
+	}
+	var base hdEventFixture
+	if e := json.Unmarshal(metadata, &base); e != nil {
+		t.Fatal(e)
+	}
+	memory := read(filepath.Join(root, base.MemoryFile))
+	if hash(memory) != expected[1] || hash(memory) != base.MemorySHA {
+		t.Fatal("original decoder memory")
+	}
+	if e := os.Mkdir(output, 0755); e != nil {
+		t.Fatal(e)
+	}
+	m := golem.New()
+	empty := hash(m.Mem)
+	h, e := loadHDRuntime(m, game, assets)
+	if e != nil {
+		t.Fatal(e)
+	}
+	if hash(m.Mem) != empty || h.scenes == nil || len(h.scenes.frames) != 885 {
+		t.Fatal("full loader mutation or scope")
+	}
+	p := h.scenes
+	records := []map[string]any{}
+	images := map[int]string{}
+	for _, fixture := range fixtures.Frames {
+		t.Run(fmt.Sprint(fixture.ID), func(t *testing.T) {
+			var selected *hdSceneFrame
+			for _, frame := range p.frames {
+				if frame.id == fixture.ID {
+					selected = frame
+					break
+				}
+			}
+			if selected == nil || !strings.HasPrefix(selected.file, "DEC-") || selected.sprite == nil {
+				t.Fatal("missing formal DEC source")
+			}
+			s := selected.sprite
+			if hash(fixture.Encoded) != s.encodedSHA || hash(fixture.Pixels) != s.indexedSHA {
+				t.Fatal("source data fingerprint")
+			}
+			copy(m.Mem, memory)
+			m.CPU.R, m.CPU.Seg = base.Entry.Registers, base.Entry.Segments
+			m.CPU.IP, m.CPU.Flags, m.CPU.Cycles, m.Steps = 0xa, base.Flags&^0x0200, 0, base.Steps
+			m.CPU.R[golem.AX], m.CPU.R[golem.DX] = uint16(s.ordinal+1), 40
+			header := int(base.Entry.Stack[4])*16 + int(base.Entry.Stack[3])
+			copy(m.Mem[0x70000:0x70036], memory[header:header+0x36])
+			stack := int(m.CPU.Seg[golem.SS])*16 + int(m.CPU.R[golem.SP])
+			word := func(at, n int, v uint16) { binary.LittleEndian.PutUint16(m.Mem[at+n*2:], v) }
+			word(stack, 2, 40)
+			word(stack, 3, 0)
+			word(stack, 4, 0x7000)
+			record := 0x70000 + 0x36 + int(m.CPU.R[golem.AX])*12
+			for i, v := range []uint16{0x2000, 0x7000, s.nominal[0], s.nominal[1], uint16(s.width), uint16(s.height)} {
+				word(record, i, v)
+			}
+			copy(m.Mem[0x72000:], fixture.Encoded)
+			background := byte(0)
+			brightness := -1
+			for index := 0; index < 253; index++ {
+				v := int(fixtures.Palette[index*3]) + int(fixtures.Palette[index*3+1]) + int(fixtures.Palette[index*3+2])
+				if v > brightness {
+					background, brightness = byte(index), v
+				}
+			}
+			for pos := 0; pos < 64000; pos++ {
+				m.Mem[hdBuildingCanvas+uint32(pos)] = background
+			}
+			p.visible, p.stage, p.published = [64000]hdSceneCell{}, [64000]hdSceneCell{}, [64000]hdSceneCell{}
+			p.backing, p.pending, p.publishedPending = map[uint32]hdSceneCell{}, map[int]hdSceneCursorPair{}, map[int]hdSceneCursorPair{}
+			p.spriteCall, p.spriteAccepted, p.spriteRejected = nil, 0, 0
+			hdEventRun(t, m, p)
+			if p.spriteAccepted != 1 || p.spriteRejected != 0 || hash(selected.native) != selected.nativeSHA {
+				t.Fatal("actual D46 source transaction", p.spriteAccepted, p.spriteRejected)
+			}
+			canvas := append([]byte(nil), m.Mem[hdBuildingCanvas:hdBuildingCanvas+64000]...)
+			source, valid := h.cursorSource()
+			if !valid {
+				t.Fatal("original cursor fixture source")
+			}
+			for k, v := range source {
+				m.Mem[0xafa00+k] = 0
+				if v == 255 {
+					v = 0
+				}
+				m.Mem[0xafb00+k] = v
+			}
+			native := draftNativeFrame{mode: 0x13, canvas: canvas, indexed: append([]byte(nil), canvas...), palette: fixtures.Palette, cursor: image.Rect(-32, -32, -16, -16)}
+			before := draftRGB(native.indexed, native.palette)
+			out, info := h.baseExisting(native)
+			scene, yes := info["scene_picture"].(map[string]any)
+			if !yes {
+				t.Fatal("integrated formal renderer", info)
+			}
+			state := scene["sources"].(map[string]any)[fmt.Sprint(fixture.ID)].(map[string]any)
+			if state["painted"] != s.opaque || state["palette_supported"] != true {
+				t.Fatal("formal source did not paint", state)
+			}
+			changed := 0
+			for yy := 0; yy < 800; yy++ {
+				for xx := 0; xx < 1280; xx++ {
+					a, b := out.RGBAAt(xx, yy), before.RGBAAt(xx, yy)
+					sx, sy := xx/4-40, yy/4-40
+					owned := sx >= 0 && sx < s.width && sy >= 0 && sy < s.height && fixture.Pixels[sy*s.width+sx] != 253
+					if !owned && a != b {
+						t.Fatal("outside original glyph outline", xx, yy)
+					}
+					if a.R > b.R || a.G > b.G || a.B > b.B {
+						t.Fatal("native color modulation")
+					}
+					if a != b {
+						changed++
+					}
+				}
+			}
+			if changed == 0 {
+				t.Fatal("HD source produced no visible pixels")
+			}
+			filename := filepath.Join(output, fmt.Sprintf("declaration-%04d.png", fixture.ID))
+			f, e := os.Create(filename)
+			if e != nil {
+				t.Fatal(e)
+			}
+			e = png.Encode(f, out)
+			closeErr := f.Close()
+			if e != nil || closeErr != nil {
+				t.Fatal(e, closeErr)
+			}
+			images[fixture.ID] = hash(out.Pix)
+			records = append(records, map[string]any{"id": fixture.ID, "ordinal": s.ordinal, "file": filename, "asset": selected.asset, "opaque": s.opaque, "painted": state["painted"], "changed_HD_pixels": changed, "rgba_sha256": images[fixture.ID]})
+		})
+	}
+	if len(records) != 452 {
+		t.Fatal("all452 source coverage", len(records))
+	}
+	result := map[string]any{"result": "PASS_DEC452_PRODUCTION_SOURCE_FIXTURE_DISPLAY", "frames": records, "full_loader_scenes": 885, "fixture_sha256": hash(raw), "scope": "typed DEC records, supplied light background and offscreen cursor conditions with actual original D46 execution and integrated Main HD renderer; native outlines/color ratios preserved; no normal declaration, Noto, translation or original-exact claim"}
 	b, e := json.MarshalIndent(result, "", "  ")
 	if e != nil {
 		t.Fatal(e)

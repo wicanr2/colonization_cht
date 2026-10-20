@@ -14,6 +14,7 @@ import (
 
 // 規格069 R76／R77 READY：來源、解碼畫布與原圖固定，所有狀態只供顯示。
 type hdSceneDefinition struct {
+	nativeGlyphMaterial                                       bool
 	closingBackground                                         bool
 	artSize                                                   image.Point
 	alphaSprites                                              bool
@@ -177,7 +178,7 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 		}
 		p.frames = append(p.frames, f)
 	}
-	if len(p.frames) != 433 {
+	if len(p.frames) != 885 {
 		return nil, fmt.Errorf("scene source group")
 	}
 	h.m.WatchWrite(0, 0xaffff, func(_ *golem.Machine, a uint32, o, v byte) { p.memoryWrite(a, o, v) })
@@ -447,7 +448,7 @@ func (p *hdSceneRuntime) paint(out *image.RGBA, f draftNativeFrame) map[string]a
 		}
 		x, y := at%320*4, at/320*4
 		sx, sy := int(c.local)%320*4, int(c.local)/320*4
-		frame.drawCell(out, x, y, sx, sy)
+		frame.drawCell(out, x, y, sx, sy, f.palette)
 		masks[n][at>>3] |= 1 << uint(at&7)
 		counts[n][3]++
 	}
@@ -473,7 +474,7 @@ func (p *hdSceneRuntime) paintBackground(out *image.RGBA, f draftNativeFrame, po
 	}
 	x, y := pos%320*4, pos/320*4
 	sx, sy := int(c.local)%320*4, int(c.local)/320*4
-	frame.drawCell(out, x, y, sx, sy)
+	frame.drawCell(out, x, y, sx, sy, palette)
 	return true
 }
 
@@ -600,7 +601,7 @@ func (p *hdSceneRuntime) paintPublished(out *image.RGBA, f draftNativeFrame) map
 		}
 		x, y := at%320*4, at/320*4
 		sx, sy := int(c.local)%320*4, int(c.local)/320*4
-		frame.drawCell(out, x, y, sx, sy)
+		frame.drawCell(out, x, y, sx, sy, f.palette)
 		i := int(c.slot) - 1
 		masks[i][at>>3] |= 1 << uint(at&7)
 		counts[i]++
@@ -625,7 +626,7 @@ func (p *hdSceneRuntime) paintPublishedBackground(out *image.RGBA, f draftNative
 	}
 	x, y := pos%320*4, pos/320*4
 	sx, sy := int(c.local)%320*4, int(c.local)/320*4
-	frame.drawCell(out, x, y, sx, sy)
+	frame.drawCell(out, x, y, sx, sy, palette)
 	return true
 }
 
@@ -652,7 +653,28 @@ func (p *hdSceneRuntime) pictureOnlyCursor(f draftNativeFrame) bool {
 	return true
 }
 
-func (f *hdSceneFrame) drawCell(out *image.RGBA, x, y, sx, sy int) {
+func (f *hdSceneFrame) drawCell(out *image.RGBA, x, y, sx, sy int, palette []byte) {
+	if f.nativeGlyphMaterial {
+		k := sy/4*320 + sx/4
+		if len(palette) != 768 || k < 0 || k >= len(f.native) || f.native[k] == 253 {
+			return
+		}
+		at := int(f.native[k]) * 3
+		for dy := 0; dy < 4; dy++ {
+			for dx := 0; dx < 4; dx++ {
+				a := f.art.RGBAAt(sx+dx, sy+dy)
+				luma := (77*uint32(a.R) + 150*uint32(a.G) + 29*uint32(a.B) + 128) >> 8
+				gain := uint32(128) + luma/2
+				shade := func(v byte) byte {
+					v = (v << 2) | (v >> 4)
+					return byte((uint32(v)*gain + 127) / 255)
+				}
+				out.SetRGBA(x+dx, y+dy, color.RGBA{shade(palette[at]), shade(palette[at+1]), shade(palette[at+2]), 255})
+			}
+		}
+		return
+	}
+
 	op := draw.Src
 	if f.alphaSprites {
 		op = draw.Over
