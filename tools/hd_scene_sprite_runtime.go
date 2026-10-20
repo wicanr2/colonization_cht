@@ -9,6 +9,7 @@ import (
 
 // 規格069 R97 READY修正。完整原版回傳後才建立Main來源；不改寫DOS。
 type hdSceneSpriteDefinition struct {
+	closingContext                             bool
 	content                                    image.Rectangle
 	capturedReturn                             bool
 	ordinal, width, height, encodedLen, opaque int
@@ -16,6 +17,9 @@ type hdSceneSpriteDefinition struct {
 	encodedSHA, indexedSHA, writesSHA          string
 }
 type hdSceneSpriteCall struct {
+	canvas             uint32
+	codeBase           int
+	closingContext     bool
 	sourceOffset       int
 	slot, x, y, source int
 	sourceSegment      uint16
@@ -37,18 +41,19 @@ func (p *hdSceneRuntime) beforeSpriteInstruction() {
 		return
 	}
 	m, c := p.h.m, p.h.m.CPU
+	pc := int(c.Seg[golem.CS])*16 + int(c.IP)
 	if call := p.spriteCall; call != nil {
 		if c.Seg[golem.CS] == call.retCS && c.IP == call.retIP && c.R[golem.SP] == call.sp+10 {
 			p.finishSprite()
-		} else if m.Steps-call.start > 750000 || (c.Seg[golem.CS] == 0xd46 && c.IP == 0xa && c.R[golem.SP] != call.sp) {
+		} else if m.Steps-call.start > 750000 || (pc == call.codeBase && c.R[golem.SP] != call.sp) {
 			p.spriteCall = nil
 			p.spriteRejected++
 		}
 	}
-	if p.spriteCall != nil || c.Seg[golem.CS] != 0xd46 || c.IP != 0xa {
+	closing := pc == hdClosingSceneDrawPC
+	if p.spriteCall != nil || (!closing && (c.Seg[golem.CS] != 0xd46 || c.IP != 0xa)) {
 		return
 	}
-	pc := int(c.Seg[golem.CS])*16 + int(c.IP)
 	prolog := []byte{0xc8, 0x28, 0, 0, 0x52, 0x53, 0x50, 0x57, 0x56, 0x8b, 0x47, 2}
 	if pc+len(prolog) > len(m.Mem) || !bytes.Equal(m.Mem[pc:pc+len(prolog)], prolog) {
 		return
@@ -68,7 +73,7 @@ func (p *hdSceneRuntime) beforeSpriteInstruction() {
 	slot := -1
 	for i, f := range p.frames {
 		s := f.sprite
-		if s == nil || c.R[golem.AX] != uint16(s.ordinal+1) || int(record[4]) != s.width || int(record[5]) != s.height || record[2] != s.nominal[0] || record[3] != s.nominal[1] {
+		if s == nil || (closing && !s.closingContext) || c.R[golem.AX] != uint16(s.ordinal+1) || int(record[4]) != s.width || int(record[5]) != s.height || record[2] != s.nominal[0] || record[3] != s.nominal[1] {
 			continue
 		}
 		source := int(record[1])*16 + int(record[0])
@@ -88,11 +93,24 @@ func (p *hdSceneRuntime) beforeSpriteInstruction() {
 	s := f.sprite
 	desc, ok := hdBuildingWords(m.Mem, c.Seg[golem.DS], c.R[golem.BX], 4)
 	x, y := int(int16(c.R[golem.DX])), int(int16(stack[2]))
-	if !ok || desc[0] != 200 || desc[1] != 320 || desc[2] != 0 || desc[3] != 0x2cae || x < 0 || y < 0 || x+s.width > 320 || y+s.height > 200 || (!s.capturedReturn && (stack[0] != 0x1554 || stack[1] != 0x121d)) || int(c.R[golem.SP])+10 > 65535 {
+	canvas := uint32(0)
+	if ok {
+		canvas = uint32(desc[3])*16 + uint32(desc[2])
+	}
+	validCanvas := ok && desc[0] == 200 && desc[1] == 320
+	if closing {
+		validCanvas = validCanvas && canvas >= 0x10000 && canvas+64000 <= 0xa0000
+	} else {
+		validCanvas = validCanvas && desc[2] == 0 && desc[3] == 0x2cae
+	}
+	if !validCanvas || x < 0 || y < 0 || x+s.width > 320 || y+s.height > 200 || (!s.capturedReturn && (stack[0] != 0x1554 || stack[1] != 0x121d)) || int(c.R[golem.SP])+10 > 65535 {
 		p.spriteRejected++
 		return
 	}
-	p.spriteCall = &hdSceneSpriteCall{slot: slot, x: x, y: y, source: int(record[1])*16 + int(record[0]), sourceSegment: record[1], sourceOffset: int(record[0]), sp: c.R[golem.SP], retCS: stack[1], retIP: stack[0], start: m.Steps, before: append([]byte(nil), m.Mem[hdBuildingCanvas:hdBuildingCanvas+64000]...), values: make([]byte, s.width*s.height), counts: make([]byte, s.width*s.height)}
+	if closing {
+		p.captureClosingBackground(canvas)
+	}
+	p.spriteCall = &hdSceneSpriteCall{canvas: canvas, codeBase: pc, closingContext: closing, slot: slot, x: x, y: y, source: int(record[1])*16 + int(record[0]), sourceSegment: record[1], sourceOffset: int(record[0]), sp: c.R[golem.SP], retCS: stack[1], retIP: stack[0], start: m.Steps, before: append([]byte(nil), m.Mem[canvas:canvas+64000]...), values: make([]byte, s.width*s.height), counts: make([]byte, s.width*s.height)}
 }
 
 func (p *hdSceneRuntime) recordSpriteWrite(a uint32, value byte) {
@@ -100,21 +118,30 @@ func (p *hdSceneRuntime) recordSpriteWrite(a uint32, value byte) {
 	if call == nil {
 		return
 	}
-	if a < hdBuildingCanvas || a >= hdBuildingCanvas+64000 {
-		cs, ip := p.h.m.CPU.OpAddr()
-		if _, known := hdSceneSpriteWriterCodes[ip]; known && cs == 0xd46 && uint32(p.h.m.CPU.Seg[golem.ES])*16+uint32(p.h.m.CPU.R[golem.BX]) == a {
+	canvas := call.canvas
+	if canvas == 0 {
+		canvas = hdBuildingCanvas
+	}
+	codeBase := call.codeBase
+	if codeBase == 0 {
+		codeBase = 0xd46*16 + 0xa
+	}
+	m, c := p.h.m, p.h.m.CPU
+	cs, ip := c.OpAddr()
+	pc := int(cs)*16 + int(ip)
+	relative := pc - codeBase + 0xa
+	code, known := hdSceneSpriteWriterCodes[uint16(relative)]
+	known = known && relative >= 0 && relative <= 65535
+	if a < canvas || a >= canvas+64000 {
+		if known && uint32(c.Seg[golem.ES])*16+uint32(c.R[golem.BX]) == a {
 			call.bad = true
 		}
 		return
 	}
-	m, c := p.h.m, p.h.m.CPU
 	s := p.frames[call.slot].sprite
-	pos := int(a - hdBuildingCanvas)
+	pos := int(a - canvas)
 	x, y := pos%320-call.x, pos/320-call.y
-	cs, ip := c.OpAddr()
-	code, known := hdSceneSpriteWriterCodes[ip]
-	pc := int(cs)*16 + int(ip)
-	if x < 0 || x >= s.width || y < 0 || y >= s.height || !known || cs != 0xd46 || pc+len(code) > len(m.Mem) || !bytes.Equal(m.Mem[pc:pc+len(code)], code) || (c.Seg[golem.ES] != 0x2cae && c.Seg[golem.ES] != 0x33ae) || c.Seg[golem.DS] != call.sourceSegment || int(c.R[golem.SI]) < call.sourceOffset || int(c.R[golem.SI]) > call.sourceOffset+s.encodedLen || uint32(c.Seg[golem.ES])*16+uint32(c.R[golem.BX]) != a {
+	if x < 0 || x >= s.width || y < 0 || y >= s.height || !known || (!call.closingContext && cs != 0xd46) || pc+len(code) > len(m.Mem) || !bytes.Equal(m.Mem[pc:pc+len(code)], code) || (!call.closingContext && c.Seg[golem.ES] != 0x2cae && c.Seg[golem.ES] != 0x33ae) || c.Seg[golem.DS] != call.sourceSegment || int(c.R[golem.SI]) < call.sourceOffset || int(c.R[golem.SI]) > call.sourceOffset+s.encodedLen || uint32(c.Seg[golem.ES])*16+uint32(c.R[golem.BX]) != a {
 		call.bad = true
 		return
 	}
@@ -131,6 +158,10 @@ func (p *hdSceneRuntime) finishSprite() {
 	f := p.frames[call.slot]
 	s := f.sprite
 	m := p.h.m
+	canvas := call.canvas
+	if canvas == 0 {
+		canvas = hdBuildingCanvas
+	}
 	raw := bytes.Repeat([]byte{253}, s.width*s.height)
 	padded := bytes.Repeat([]byte{253}, 64000)
 	expected := append([]byte(nil), call.before...)
@@ -148,7 +179,7 @@ func (p *hdSceneRuntime) finishSprite() {
 		canonical = binary.LittleEndian.AppendUint16(canonical, uint16(k))
 		canonical = append(canonical, call.values[k])
 	}
-	if call.bad || len(canonical) != s.opaque*3 || hash(canonical) != s.writesSHA || hash(raw) != s.indexedSHA || hash(padded) != f.nativeSHA || hash(m.Mem[call.source:call.source+s.encodedLen]) != s.encodedSHA || !bytes.Equal(expected, m.Mem[hdBuildingCanvas:hdBuildingCanvas+64000]) {
+	if call.bad || len(canonical) != s.opaque*3 || hash(canonical) != s.writesSHA || hash(raw) != s.indexedSHA || hash(padded) != f.nativeSHA || hash(m.Mem[call.source:call.source+s.encodedLen]) != s.encodedSHA || !bytes.Equal(expected, m.Mem[canvas:canvas+64000]) {
 		p.spriteRejected++
 		return
 	}
@@ -168,7 +199,7 @@ func (p *hdSceneRuntime) finishSprite() {
 	for k, n := range call.counts {
 		if n == 1 {
 			at := (call.y+k/s.width)*320 + call.x + k%s.width
-			p.set(hdBuildingCanvas+uint32(at), hdSceneCell{slot: uint8(call.slot + 1), local: uint16(k/s.width*320 + k%s.width), value: call.values[k]})
+			p.set(canvas+uint32(at), hdSceneCell{slot: uint16(call.slot + 1), local: uint16(k/s.width*320 + k%s.width), value: call.values[k]})
 		}
 	}
 	f.decoded++
@@ -197,3 +228,9 @@ func (p *hdSceneRuntime) spriteCursorCell(pos int, f draftNativeFrame) (hdSceneC
 	}
 	return pair.cell, true
 }
+
+// 規格069 R116 READY：固定MZ與既有SS／REP MOVSW指紋的線性位址。
+const hdClosingSceneEXESHA = "2d0f0fa9cb8256fda6c967f2821379d37ca5552b6d621f74115b532aa147fedc"
+const hdClosingSceneDrawPC = 0x3cc4
+
+func hdClosingSceneCopyPC(pc int) bool { return pc == 0x2fb2 || pc == 0x48b3 }

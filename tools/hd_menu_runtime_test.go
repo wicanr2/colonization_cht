@@ -1609,7 +1609,7 @@ func TestHDTexturePublishedCursorVGAOperations(t *testing.T) {
 			clear(p.underlays)
 			clear(p.publishedPending)
 			p.publicationBlocked = false
-			cell := hdSceneCell{slot: slot, local: 0, value: raw[0]}
+			cell := hdSceneCell{slot: uint16(slot), local: 0, value: raw[0]}
 			p.published[pos] = cell
 			p.owners[hdBuildingCanvas+uint32(pos)] = hdTextureCell{local: 0, native: raw[0]}
 			m.Mem[hdBuildingCanvas+uint32(pos)] = raw[0]

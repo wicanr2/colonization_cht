@@ -17,11 +17,11 @@ func TestHDEventResources(t *testing.T) {
 	if game == "" || assets == "" {
 		t.Skip("需要合法原版與隔離HD原圖")
 	}
-	t.Run("all34-scenes", func(t *testing.T) {
+	t.Run("all213-scenes", func(t *testing.T) {
 		m := golem.New()
 		before := append([]byte(nil), m.Mem...)
 		p, e := loadHDSceneRuntime(&hdRuntime{m: m}, game, assets)
-		if e != nil || p == nil || len(p.frames) != 158 {
+		if e != nil || p == nil || len(p.frames) != 213 {
 			t.Fatal("full scene load", e)
 		}
 		if !bytes.Equal(before, m.Mem) {
@@ -31,13 +31,13 @@ func TestHDEventResources(t *testing.T) {
 		for _, f := range p.frames {
 			if f.sprite != nil {
 				sprites++
-				if f.art.Bounds() != image.Rect(0, 0, 1280, 800) || len(f.native) != 0 {
+				if f.art.Bounds() != image.Rect(0, 0, f.sprite.width*4, f.sprite.height*4) || len(f.native) != 0 {
 					t.Fatal("source armed before original draw")
 				}
 			}
 		}
-		if sprites != 11 {
-			t.Fatal("eleven verified D46 scenes", sprites)
+		if sprites != 184 {
+			t.Fatal("all fixed SS scene sources", sprites)
 		}
 	})
 	original := append([]hdSceneDefinition(nil), hdSceneDefinitions...)
@@ -265,7 +265,7 @@ func TestHDMSSFullProjectLoader(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if h.scenes == nil || len(h.scenes.frames) != 158 {
+	if h.scenes == nil || len(h.scenes.frames) != 213 {
 		t.Fatal("four new sources and thirty inherited sources required")
 	}
 	seen := 0

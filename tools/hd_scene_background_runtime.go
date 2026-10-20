@@ -14,6 +14,7 @@ import (
 
 // 規格069 R76／R77 READY：來源、解碼畫布與原圖固定，所有狀態只供顯示。
 type hdSceneDefinition struct {
+	closingBackground                                         bool
 	artSize                                                   image.Point
 	alphaSprites                                              bool
 	sprite                                                    *hdSceneSpriteDefinition
@@ -31,7 +32,7 @@ type hdSceneFrame struct {
 	decoded uint64
 }
 type hdSceneCell struct {
-	slot  uint8
+	slot  uint16
 	local uint16
 	value byte
 	glyph bool
@@ -64,6 +65,13 @@ var hdSceneCopyCodes = map[uint16][]byte{
 }
 
 func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, error) {
+	closing, err := hdReadFile(filepath.Join(game, "CLOSING.EXE"), 8<<20)
+	if err != nil {
+		return nil, err
+	}
+	if hash(closing) != hdClosingSceneEXESHA {
+		return nil, fmt.Errorf("closing scene executable fingerprint")
+	}
 	p := &hdSceneRuntime{h: h, publishedPending: map[int]hdSceneCursorPair{}, backing: map[uint32]hdSceneCell{}, pending: map[int]hdSceneCursorPair{}, start: -1}
 	artCache := map[string]struct {
 		im  image.Image
@@ -118,7 +126,11 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 		if im.Bounds() != wantBounds || def.offset < 0 || def.height <= 0 || def.offset+320*def.height != 64000 || len(def.nativeRects) == 0 || len(def.nativeRects) != len(def.artRects) {
 			return nil, fmt.Errorf("scene geometry")
 		}
-		f := &hdSceneFrame{hdSceneDefinition: def, art: image.NewRGBA(image.Rect(0, 0, 1280, def.height*4))}
+		artBounds := image.Rect(0, 0, 1280, def.height*4)
+		if s := def.sprite; s != nil {
+			artBounds = image.Rect(0, 0, s.width*4, s.height*4)
+		}
+		f := &hdSceneFrame{hdSceneDefinition: def, art: image.NewRGBA(artBounds)}
 		covered := make([]bool, 320*def.height)
 		for i, r := range def.nativeRects {
 			a := def.artRects[i]
@@ -165,7 +177,7 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 		}
 		p.frames = append(p.frames, f)
 	}
-	if len(p.frames) != 158 {
+	if len(p.frames) != 213 {
 		return nil, fmt.Errorf("scene source group")
 	}
 	h.m.WatchWrite(0, 0xaffff, func(_ *golem.Machine, a uint32, o, v byte) { p.memoryWrite(a, o, v) })
@@ -242,7 +254,7 @@ func (p *hdSceneRuntime) decodedAt(base uint32, start int) {
 		}
 		f.decoded++
 		for local, v := range raw {
-			cell := hdSceneCell{slot: uint8(slot + 1), local: uint16(local), value: v}
+			cell := hdSceneCell{slot: uint16(slot + 1), local: uint16(local), value: v}
 			if base == 0x3c500 {
 				p.stage[start+local] = cell
 			} else {
@@ -258,11 +270,16 @@ func (p *hdSceneRuntime) copyCell(a uint32, value byte) (hdSceneCell, bool) {
 	m := p.h.m
 	c := m.CPU
 	cs, ip := c.OpAddr()
+	pc := int(cs)*16 + int(ip)
 	code, yes := hdSceneCopyCodes[ip]
-	if !yes || (cs != 0xc9f && cs != 0xcba) {
+	if hdClosingSceneCopyPC(pc) {
+		code, yes = hdSceneVGACopyCode, c.Flags&0x400 == 0
+	} else {
+		yes = yes && (cs == 0xc9f || cs == 0xcba)
+	}
+	if !yes {
 		return hdSceneCell{}, false
 	}
-	pc := int(cs)*16 + int(ip)
 	if pc < 0 || pc+16 > len(m.Mem) || !bytes.Equal(m.Mem[pc:pc+16], code) {
 		return hdSceneCell{}, false
 	}
@@ -276,7 +293,7 @@ func (p *hdSceneRuntime) copyCell(a uint32, value byte) (hdSceneCell, bool) {
 		return hdSceneCell{}, false
 	}
 	got := p.cell(uint32(src))
-	return got, got.slot != 0 && int(got.slot) <= len(p.frames) && p.frames[int(got.slot)-1].sprite == nil && got.value == value
+	return got, got.slot != 0 && int(got.slot) <= len(p.frames) && (p.frames[int(got.slot)-1].sprite == nil || p.frames[int(got.slot)-1].closingSource()) && got.value == value
 }
 func (p *hdSceneRuntime) memoryWrite(a uint32, old, value byte) {
 	if p != nil {
@@ -513,7 +530,16 @@ func (p *hdSceneRuntime) publish(a uint32, oldValue, value byte) {
 		src := int(c.Seg[golem.DS])*16 + int(c.R[golem.SI]) + delta
 		if delta >= 0 && delta < 2 && int(c.R[golem.SI])+delta < 65536 && int(c.R[golem.DI])+delta < 64000 && src == int(hdBuildingCanvas)+at && src < len(m.Mem) && m.Mem[src] == value {
 			cell := p.visible[at]
-			if frame, known := p.frame(cell); known && frame.sprite == nil && cell.value == value {
+			if frame, known := p.frame(cell); known && (frame.sprite == nil || frame.sprite.closingContext) && cell.value == value {
+				p.published[at] = cell
+			}
+		}
+	}
+	if hdClosingSceneCopyPC(pc) && c.Flags&0x400 == 0 && c.Seg[golem.ES] == 0xa000 && delta >= 0 && delta < 2 && int(c.R[golem.SI])+delta < 65536 && int(c.R[golem.DI])+delta < 64000 && pc+16 <= len(m.Mem) && bytes.Equal(m.Mem[pc:pc+16], hdSceneVGACopyCode) {
+		src := int(c.Seg[golem.DS])*16 + int(c.R[golem.SI]) + delta
+		if src >= 0 && src < 0xa0000 && m.Mem[src] == value {
+			cell := p.cell(uint32(src))
+			if frame, known := p.frame(cell); known && frame.closingSource() && cell.value == value {
 				p.published[at] = cell
 			}
 		}
@@ -529,7 +555,7 @@ func (p *hdSceneRuntime) paintPublished(out *image.RGBA, f draftNativeFrame) map
 	records := map[string]any{}
 	r := map[string]any{"formal": true, "surface": "published-vga", "sources": records, "painted": 0}
 	if p == nil || p.blocked || f.mode != 0x13 || len(f.canvas) != 64000 || len(f.indexed) != 64000 ||
-		len(f.palette) != 768 || f.cursor.Dx() != 16 || f.cursor.Dy() != 16 ||
+		len(f.palette) != 768 ||
 		len(p.h.m.Mem) < 0xa0000+64000 ||
 		!bytes.Equal(p.h.m.Mem[0xa0000:0xa0000+64000], f.indexed) {
 		r["reason"] = "unverified-vga-surface"
@@ -538,10 +564,23 @@ func (p *hdSceneRuntime) paintPublished(out *image.RGBA, f draftNativeFrame) map
 	pictureOnlyCursor := p.pictureOnlyCursor(f)
 	r["picture_only_cursor"] = pictureOnlyCursor
 	_, reason := p.h.cursorProof(f)
-	if !pictureOnlyCursor && reason != "" && !strings.HasPrefix(reason, "outside-cursor:") {
+	cursorVerified := pictureOnlyCursor || reason == "" || strings.HasPrefix(reason, "outside-cursor:")
+	independent := false
+	for _, cell := range p.published {
+		if frame, known := p.frame(cell); known && frame.closingSource() {
+			independent = true
+			break
+		}
+	}
+	if !independent && (f.cursor.Dx() != 16 || f.cursor.Dy() != 16) {
+		r["reason"] = "unverified-vga-surface"
+		return r
+	}
+	if !cursorVerified && !independent {
 		r["reason"] = "unverified-cursor"
 		return r
 	}
+
 	palettes := make([]bool, len(p.frames))
 	masks := make([][]byte, len(p.frames))
 	counts := make([]int, len(p.frames))
@@ -551,8 +590,12 @@ func (p *hdSceneRuntime) paintPublished(out *image.RGBA, f draftNativeFrame) map
 	cursorSource, _ := p.h.cursorSource()
 	for at, c := range p.published {
 		frame, known := p.frame(c)
+		closing := known && frame.closingSource()
+		if !closing && !cursorVerified {
+			continue
+		}
 		if !known || c.glyph || !palettes[int(c.slot)-1] || c.value != f.indexed[at] ||
-			frame.native[int(c.local)] != c.value || (!pictureOnlyCursor && image.Pt(at%320, at/320).In(f.cursor) && cursorSource[(at/320-f.cursor.Min.Y)*16+at%320-f.cursor.Min.X] != 255) {
+			frame.native[int(c.local)] != c.value || (!closing && !pictureOnlyCursor && image.Pt(at%320, at/320).In(f.cursor) && cursorSource[(at/320-f.cursor.Min.Y)*16+at%320-f.cursor.Min.X] != 255) {
 			continue
 		}
 		x, y := at%320*4, at/320*4
@@ -615,4 +658,36 @@ func (f *hdSceneFrame) drawCell(out *image.RGBA, x, y, sx, sy int) {
 		op = draw.Over
 	}
 	draw.Draw(out, image.Rect(x, y, x+4, y+4), f.art, image.Pt(sx, sy), op)
+}
+
+func (f *hdSceneFrame) closingSource() bool {
+	return f.closingBackground || f.sprite != nil && f.sprite.closingContext
+}
+func (p *hdSceneRuntime) captureClosingBackground(canvas uint32) {
+	if canvas < 0x10000 || canvas+64000 > 0xa0000 {
+		return
+	}
+	raw := p.h.m.Mem[canvas : canvas+64000]
+	digest := hash(raw)
+	for slot, f := range p.frames {
+		if !f.closingBackground || f.sprite != nil || f.offset != 0 || f.height != 200 || f.nativeSHA != digest {
+			continue
+		}
+		f.native = append([]byte(nil), raw...)
+		f.indices = nil
+		used := [256]bool{}
+		for _, v := range raw {
+			used[v] = true
+		}
+		for i, yes := range used {
+			if yes {
+				f.indices = append(f.indices, byte(i))
+			}
+		}
+		f.decoded++
+		for local, v := range raw {
+			p.set(canvas+uint32(local), hdSceneCell{slot: uint16(slot + 1), local: uint16(local), value: v})
+		}
+		return
+	}
 }

@@ -260,7 +260,7 @@ func TestHDScenePaletteAndUnderlayGuards(t *testing.T) {
 			}
 			pos, err := strconv.Atoi(key)
 			hdNewGameNeed(t, err)
-			c := hdSceneCell{slot: uint8(index + 1), local: uint16(expected[1].(float64)), value: byte(expected[2].(float64)), glyph: true}
+			c := hdSceneCell{slot: uint16(index + 1), local: uint16(expected[1].(float64)), value: byte(expected[2].(float64)), glyph: true}
 			p.visible[pos] = c
 			f := draftNativeFrame{canvas: canvas, palette: palette, mode: 0x13}
 			out := image.NewRGBA(image.Rect(0, 0, 1280, 800))

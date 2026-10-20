@@ -408,11 +408,11 @@ func (p *hdTerrainTextureRuntime) paint(out *image.RGBA, f draftNativeFrame) map
 				continue
 			}
 			at := int(a - hdBuildingCanvas)
-			v, ok := p.nativeCell(c.slot, c.local)
+			v, ok := p.nativeCell(uint8(c.slot), c.local)
 			if !ok || v != c.native || f.canvas[at] != c.native {
 				continue
 			}
-			p.paintCell(out, at, c.slot, c.local, f.palette)
+			p.paintCell(out, at, uint8(c.slot), c.local, f.palette)
 			mask[at>>3] |= 1 << uint(at&7)
 			painted++
 			by[int(c.slot)-1]++
@@ -434,25 +434,28 @@ func (p *hdTerrainTextureRuntime) paintBackground(out *image.RGBA, f draftNative
 	if !ok || c.native != value {
 		return false
 	}
-	v, valid := p.nativeCell(c.slot, c.local)
+	v, valid := p.nativeCell(uint8(c.slot), c.local)
 	if !valid || v != value {
 		return false
 	}
-	p.paintCell(out, pos, c.slot, c.local, palette)
+	p.paintCell(out, pos, uint8(c.slot), c.local, palette)
 	return true
 }
 func (p *hdTerrainTextureRuntime) mainCell(at int) hdSceneCell {
 	addr := hdBuildingCanvas + uint32(at)
 	if cell, ok := p.owners[addr]; ok {
-		return hdSceneCell{slot: cell.slot, local: cell.local, value: cell.native}
+		return hdSceneCell{slot: uint16(cell.slot), local: cell.local, value: cell.native}
 	}
 	if under, ok := p.underlays[addr]; ok {
-		return hdSceneCell{slot: under.cell.slot, local: under.cell.local, value: under.glyph, glyph: true}
+		return hdSceneCell{slot: uint16(under.cell.slot), local: under.cell.local, value: under.glyph, glyph: true}
 	}
 	return hdSceneCell{}
 }
 func (p *hdTerrainTextureRuntime) validPublishedCell(c hdSceneCell) bool {
-	v, ok := p.nativeCell(c.slot, c.local)
+	if c.slot > 255 {
+		return false
+	}
+	v, ok := p.nativeCell(uint8(c.slot), c.local)
 	return ok && (c.glyph || v == c.value)
 }
 func (p *hdTerrainTextureRuntime) publish(a uint32, oldValue, value byte) {
@@ -533,7 +536,7 @@ func (p *hdTerrainTextureRuntime) paintPublished(out *image.RGBA, f draftNativeF
 			if !p.validPublishedCell(c) || c.glyph || c.value != f.indexed[at] || (image.Pt(at%320, at/320).In(f.cursor) && source[(at/320-f.cursor.Min.Y)*16+at%320-f.cursor.Min.X] != 255) {
 				continue
 			}
-			p.paintCell(out, at, c.slot, c.local, f.palette)
+			p.paintCell(out, at, uint8(c.slot), c.local, f.palette)
 			mask[at>>3] |= 1 << uint(at&7)
 			count++
 		}
@@ -546,9 +549,9 @@ func (p *hdTerrainTextureRuntime) paintPublishedBackground(out *image.RGBA, f dr
 		return false
 	}
 	c := p.published[pos]
-	if !p.validPublishedCell(c) || c.value != f.indexed[pos] || p.h.m.Mem[0xa0000+pos] != c.value || func() bool { v, ok := p.nativeCell(c.slot, c.local); return !ok || v != value }() || !p.paletteSupported(palette) {
+	if !p.validPublishedCell(c) || c.value != f.indexed[pos] || p.h.m.Mem[0xa0000+pos] != c.value || func() bool { v, ok := p.nativeCell(uint8(c.slot), c.local); return !ok || v != value }() || !p.paletteSupported(palette) {
 		return false
 	}
-	p.paintCell(out, pos, c.slot, c.local, palette)
+	p.paintCell(out, pos, uint8(c.slot), c.local, palette)
 	return true
 }

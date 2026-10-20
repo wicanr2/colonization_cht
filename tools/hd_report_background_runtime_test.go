@@ -357,7 +357,7 @@ func TestHDReportPaletteDecodeAndUnderlayGuards(t *testing.T) {
 			}
 			pos, e := strconv.Atoi(key)
 			hdNewGameNeed(t, e)
-			cell := hdSceneCell{slot: uint8(index + 1), local: uint16(expected[1].(float64)), value: byte(expected[2].(float64)), glyph: true}
+			cell := hdSceneCell{slot: uint16(index + 1), local: uint16(expected[1].(float64)), value: byte(expected[2].(float64)), glyph: true}
 			p.visible[pos] = cell
 			f := draftNativeFrame{canvas: canvas, palette: palette, mode: 0x13}
 			out := image.NewRGBA(image.Rect(0, 0, 1280, 800))
@@ -705,7 +705,7 @@ func hdStorySnapshot(t *testing.T, at int) (*hdRuntime, *hdSceneRuntime, draftNa
 			if slot == 0 {
 				t.Fatal("source", c)
 			}
-			pair.target[pos] = hdSceneCell{slot: uint8(slot), local: uint16(c[1].(float64)), value: byte(c[2].(float64)), glyph: c[3].(string) == "glyph"}
+			pair.target[pos] = hdSceneCell{slot: uint16(slot), local: uint16(c[1].(float64)), value: byte(c[2].(float64)), glyph: c[3].(string) == "glyph"}
 		}
 	}
 	var points []struct {

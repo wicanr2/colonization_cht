@@ -7303,3 +7303,9 @@ Main基址0x2CAE0、矩形[10,25,26,41)，三writer共226格。
 HD實際24欄字底／字形106176點、頭像47008點與原版狀態／音訊／存檔已驗。
 原版圖像模式透明游標矩形的清底缺口仍在，不外推完整五語或所有原版圖像模式。
 審查9c2228e0c6e07188ab65c111e033a4181ddfbabcce25cdcf8750a324b1f0b9cb；來源與限制入口為規格038／065，不增加REPORT9信用。
+
+## 2026-10-20 R116 片尾顯示接線的既有程式碼指紋
+
+- confirmed，限靜態bytes及MZ位址換算。輸入CLOSING.EXE，SHA-256：2d0f0fa9cb8256fda6c967f2821379d37ca5552b6d621f74115b532aa147fedc。Python3.11.2比對既有SS prologue及三個相對writer的16bytes，與OPENING／VICEROY既有繪圖指紋一致。沒有新增遊戲規則或動畫時序研究。
+- 原始檔位移0x35c4對應dosgolem線性0x3cc4；複製指紋原始檔位移0x28b2／0x41b3對應dosgolem線性0x2fb2／0x48b3。MZ header與載入基底0x1100分開記於本機r116-closing-code-profile-r1.json，SHA-256：07d685a5d4a7f5f707ca3fdd3f6f5e0f2d19cf6d0b7176b57d93491aac661871。另以既有OPENING 4A20與VICEROY D46A定位作正向核對。
+- 工具為既有dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013、Go1.26.7與Python3.11.2，位址空間為原始檔byte offset及dosgolem20-bit線性RAM。SS書寫及複製介面沿規格069 R116，不把靜態匹配或來源fixture稱為片尾正常玩家路徑或原版精確對拍。

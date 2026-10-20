@@ -106,7 +106,7 @@ func TestHDRoomScoreDecodePaletteAndUnderlay(t *testing.T) {
 				}
 				pos, e := strconv.Atoi(key)
 				hdNewGameNeed(t, e)
-				cell := hdSceneCell{slot: uint8(index + 1), local: uint16(c[1].(float64)), value: byte(c[2].(float64)), glyph: c[3].(string) == "glyph"}
+				cell := hdSceneCell{slot: uint16(index + 1), local: uint16(c[1].(float64)), value: byte(c[2].(float64)), glyph: c[3].(string) == "glyph"}
 				p.visible[pos] = cell
 				frame := draftNativeFrame{canvas: canvas, palette: pal, mode: 0x13}
 				out := image.NewRGBA(image.Rect(0, 0, 1280, 800))
@@ -236,7 +236,7 @@ func TestHDScenePublishedSurfaceGuards(t *testing.T) {
 		}
 		for i, f := range p.frames {
 			if f.id == 1551 {
-				p.published[at] = hdSceneCell{slot: uint8(i + 1), local: uint16(c[1].(float64)), value: byte(c[2].(float64))}
+				p.published[at] = hdSceneCell{slot: uint16(i + 1), local: uint16(c[1].(float64)), value: byte(c[2].(float64))}
 				pos = at
 			}
 		}
@@ -325,7 +325,7 @@ func TestHDPublishedCursorVGAOperations(t *testing.T) {
 			clear(p.visible[:])
 			clear(p.publishedPending)
 			p.blocked = false
-			cell := hdSceneCell{slot: slot, local: uint16(pos), value: raw[pos]}
+			cell := hdSceneCell{slot: uint16(slot), local: uint16(pos), value: raw[pos]}
 			p.published[pos] = cell
 			p.visible[pos] = cell
 			m.Mem[hdBuildingCanvas+uint32(pos)] = raw[pos]
@@ -485,7 +485,7 @@ func TestHDPublishedTextBackgroundGuards(t *testing.T) {
 	var cell hdSceneCell
 	for i, f := range p.frames {
 		if f.id == 1551 {
-			cell = hdSceneCell{slot: uint8(i + 1), local: uint16(pos), value: h.m.Mem[0xa0000+pos], glyph: true}
+			cell = hdSceneCell{slot: uint16(i + 1), local: uint16(pos), value: h.m.Mem[0xa0000+pos], glyph: true}
 		}
 	}
 	p.published[pos] = cell

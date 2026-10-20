@@ -68,7 +68,7 @@ func hdRoyalSnapshot(t *testing.T, at int) (*hdRuntime, *hdSceneRuntime, draftNa
 			if slot == 0 {
 				t.Fatal("source", c)
 			}
-			pair.target[pos] = hdSceneCell{slot: uint8(slot), local: uint16(c[1].(float64)), value: byte(c[2].(float64)), glyph: c[3].(string) == "glyph"}
+			pair.target[pos] = hdSceneCell{slot: uint16(slot), local: uint16(c[1].(float64)), value: byte(c[2].(float64)), glyph: c[3].(string) == "glyph"}
 		}
 	}
 	var points []struct {
@@ -97,7 +97,7 @@ func royalFixture(t *testing.T) (*hdRuntime, *hdRoyalRuntime, draftNativeFrame) 
 		hdNewGameNeed(t, e)
 		for n, frame := range h.scenes.frames {
 			if frame.id == int(c[0].(float64)) {
-				q.prior[pos] = hdSceneCell{slot: uint8(n + 1), local: uint16(c[1].(float64)), value: byte(c[2].(float64)), glyph: c[3].(string) == "glyph"}
+				q.prior[pos] = hdSceneCell{slot: uint16(n + 1), local: uint16(c[1].(float64)), value: byte(c[2].(float64)), glyph: c[3].(string) == "glyph"}
 				break
 			}
 		}

@@ -42656,6 +42656,5276 @@
         }
       ],
       "native_text_preserved_from_row": 5
+    },
+    "closing-lady-a.png": {
+      "sha256": "9bf99c961edbc2c6db6cf050f72d6befc629efd414e248f01ebda573bd29916a",
+      "bytes": 1160948,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: style-transfer. Create ONE fine pixel-art animation sprite atlas for the Colonization HD ending. Image1 is the EXACT frame-by-frame pose and composition reference; Image2 is STYLE ONLY, crisp fine pixel clusters and restrained natural material shading. Exactly FOUR equal columns and FOUR equal rows on a square TRANSPARENT canvas, all SIXTEEN cells occupied. Repaint each of the16 different poses in the same reading order, preserving subtle sequential differences rather than repeating one pose. The subject in each cell is ONLY the back of a woman's large off-white/gray colonial bonnet at lower center/left with brown clapping hands, small white sleeve cuffs and dark sleeve fragments around it, exactly as in Image1. The bonnet is seen FROM BEHIND; do not add a face, torso or full person. Keep every detached hand separate at its exact relative position beside or above the cap. Preserve which hand is raised, touching, lowered or partly hidden in each frame; exact component count, crop, orientation, shape, colors and relative spacing from Image1. Refine coarse dithering into coherent fresh pixel clusters, soft ivory fabric folds, gray fabric shadows and readable fingers, keeping source outlines and proportions. All opaque inside each visible part, transparent between detached components and outside them. Generous transparent margins inside each equal cell so no adjacent poses touch. Remove ALL magenta background and black reference labels. No extra anatomy, faces, shoulders, body, new hands, props, scenery, text, numbers, grid, frames, 3D, photography, blur or smooth painting. Exactly4x4 with16 distinct bonnet-and-hands poses from Image1.",
+      "generation_file": "exec-a475af78-cd7e-4ee8-bca2-8ac14ac8c0da.png",
+      "reference_sha256": "af5ef85e5e9b2bce09d0176c0530efcffb944edbbb4340f466c66cc8972dd401",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "column_row_boundaries": {
+        "0": [
+          0,
+          313,
+          627,
+          940,
+          1254
+        ],
+        "1": [
+          0,
+          313,
+          627,
+          940,
+          1254
+        ],
+        "2": [
+          0,
+          313,
+          627,
+          940,
+          1254
+        ],
+        "3": [
+          0,
+          313,
+          627,
+          940,
+          1254
+        ]
+      },
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw alpha and native source253 transparency retained",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "runtime_code_profile": {
+        "file": "CLOSING.EXE",
+        "sha256": "2d0f0fa9cb8256fda6c967f2821379d37ca5552b6d621f74115b532aa147fedc",
+        "draw_file_offset": 13764,
+        "draw_dosgolem_linear": 15556,
+        "copy_file_offsets": [
+          10418,
+          16819
+        ],
+        "copy_dosgolem_linear": [
+          12210,
+          18611
+        ]
+      },
+      "source_frames": [
+        {
+          "research_id": 231,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 0,
+          "size": [
+            39,
+            20
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 530,
+          "other_header_fields": [
+            103,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f280c9f552f2daabd94e3b7e67c4de340dab591c8db6dddc3bd7b244bab1cd35",
+          "indexed_sha256": "ac06d4097eceaa34619d81d484722c20945fc5a9a2d1904ced5073d7ac4e57ec",
+          "opaque_pixels": 410,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 231,
+          "asset": "closing-lady-a.png",
+          "sample": [
+            28,
+            113,
+            305,
+            286
+          ],
+          "content": [
+            0,
+            0,
+            39,
+            20
+          ],
+          "art_sha256": "9bf99c961edbc2c6db6cf050f72d6befc629efd414e248f01ebda573bd29916a",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "4c891d82d6c543b01361fb4c67e89f617ef60f61c370e64fb4b0eef8cf9648f2",
+          "palette_sha256": "89ea433ae224a7150c64fb01803374de24fb2c7178da87c60c5920715d8a0c52",
+          "writes_sha256": "9f25f67339576097ae0aedeb0c7ceb885a2c8d26768dae415d9053cb694c1446",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                26,
+                3
+              ],
+              "art": [
+                28,
+                113,
+                234,
+                139
+              ]
+            },
+            {
+              "native": [
+                26,
+                0,
+                32,
+                3
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                32,
+                0,
+                39,
+                3
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                0,
+                3,
+                26,
+                19
+              ],
+              "art": [
+                28,
+                139,
+                234,
+                277
+              ]
+            },
+            {
+              "native": [
+                26,
+                3,
+                32,
+                19
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                32,
+                3,
+                39,
+                19
+              ],
+              "art": [
+                253,
+                147,
+                305,
+                276
+              ]
+            },
+            {
+              "native": [
+                0,
+                19,
+                26,
+                20
+              ],
+              "art": [
+                28,
+                277,
+                234,
+                286
+              ]
+            },
+            {
+              "native": [
+                26,
+                19,
+                32,
+                20
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                32,
+                19,
+                39,
+                20
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 232,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 1,
+          "size": [
+            38,
+            21
+          ],
+          "header_part1_offset": 16,
+          "data_part3_offset": 530,
+          "encoded_length": 498,
+          "other_header_fields": [
+            105,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "cc68d71802372a969cecf1032f4c34e795689228b84b7f8e0423e4b12f72dc11",
+          "indexed_sha256": "e9901ea0d2099f4aa42e6d54d3b3aa7f529697cbbc41fcb18394b1203900c3fc",
+          "opaque_pixels": 413,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 232,
+          "asset": "closing-lady-a.png",
+          "sample": [
+            338,
+            111,
+            608,
+            286
+          ],
+          "content": [
+            0,
+            0,
+            38,
+            21
+          ],
+          "art_sha256": "9bf99c961edbc2c6db6cf050f72d6befc629efd414e248f01ebda573bd29916a",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "12ca77c3fda8b6dacdec1b72637f8c752fe57d1b52468ad78033a34b0b2c3f50",
+          "palette_sha256": "07ecfcc9c5b193dc5be5b2cc3d336714ed4b0342c2e826634b7e74d2f9f204de",
+          "writes_sha256": "a2256743431576eb1c5502641c0951bfd8cce737abb47c79927ea586fa6d0914",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                24,
+                3
+              ],
+              "art": [
+                338,
+                111,
+                534,
+                136
+              ]
+            },
+            {
+              "native": [
+                24,
+                0,
+                29,
+                3
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                29,
+                0,
+                38,
+                3
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                0,
+                3,
+                24,
+                20
+              ],
+              "art": [
+                338,
+                136,
+                534,
+                278
+              ]
+            },
+            {
+              "native": [
+                24,
+                3,
+                29,
+                20
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                29,
+                3,
+                38,
+                20
+              ],
+              "art": [
+                548,
+                146,
+                608,
+                275
+              ]
+            },
+            {
+              "native": [
+                0,
+                20,
+                24,
+                21
+              ],
+              "art": [
+                338,
+                278,
+                534,
+                286
+              ]
+            },
+            {
+              "native": [
+                24,
+                20,
+                29,
+                21
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                29,
+                20,
+                38,
+                21
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 233,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 2,
+          "size": [
+            35,
+            20
+          ],
+          "header_part1_offset": 32,
+          "data_part3_offset": 1028,
+          "encoded_length": 514,
+          "other_header_fields": [
+            103,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "7852af138941e5666af39ed447ebda7c0ca0193cba3611da026629bcc25cdbc0",
+          "indexed_sha256": "b0000c5c66d09573c71ac7f2b79624451d61dbaf1fcd342d3b68cb5ec217a699",
+          "opaque_pixels": 389,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 233,
+          "asset": "closing-lady-a.png",
+          "sample": [
+            651,
+            113,
+            919,
+            286
+          ],
+          "content": [
+            0,
+            0,
+            35,
+            20
+          ],
+          "art_sha256": "9bf99c961edbc2c6db6cf050f72d6befc629efd414e248f01ebda573bd29916a",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "16cdd3ede312a7b79300f40ce132a09dc206057585609450a54e0c9bf7c72b96",
+          "palette_sha256": "6e036ea3c3eed1f93c0688d568f22fb985969b47602812883fe43d432c9f80bd",
+          "writes_sha256": "ef66afe212d3909fe43a44cea1c6e9eb7b255a634d8ce08b548bb6a065150f4d",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                25,
+                2
+              ],
+              "art": [
+                651,
+                113,
+                857,
+                130
+              ]
+            },
+            {
+              "native": [
+                25,
+                0,
+                27,
+                2
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                27,
+                0,
+                35,
+                2
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                0,
+                2,
+                25,
+                20
+              ],
+              "art": [
+                651,
+                130,
+                857,
+                286
+              ]
+            },
+            {
+              "native": [
+                25,
+                2,
+                27,
+                20
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                27,
+                2,
+                35,
+                20
+              ],
+              "art": [
+                858,
+                133,
+                919,
+                278
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 234,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 3,
+          "size": [
+            29,
+            18
+          ],
+          "header_part1_offset": 48,
+          "data_part3_offset": 1542,
+          "encoded_length": 457,
+          "other_header_fields": [
+            102,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ad81142ab89b3ffc17760c2463e07ae7f561548d120d1f2558cac5483e5dac18",
+          "indexed_sha256": "7a87230a88391dec0e545ce5bd217271294f7118bbde1555fddc42f56312ea4e",
+          "opaque_pixels": 367,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 234,
+          "asset": "closing-lady-a.png",
+          "sample": [
+            949,
+            110,
+            1216,
+            286
+          ],
+          "content": [
+            0,
+            0,
+            29,
+            18
+          ],
+          "art_sha256": "9bf99c961edbc2c6db6cf050f72d6befc629efd414e248f01ebda573bd29916a",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "471d7c4421cd26cfb3310ac569ea7b6427b556b9a04c3d36766c0e60d41fc0f9",
+          "palette_sha256": "979cbbf556c1b884ef0ab8ef5c1eb3e4f4bb8342ccc689c42c58e7bca7fcb4ce",
+          "writes_sha256": "f45a78c4bc2753a9cb5d3432da48b4094703d8e0866e0f47f0f23fc9ca1b44f7"
+        },
+        {
+          "research_id": 235,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 4,
+          "size": [
+            26,
+            18
+          ],
+          "header_part1_offset": 64,
+          "data_part3_offset": 1999,
+          "encoded_length": 411,
+          "other_header_fields": [
+            101,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "c424a5c40abf3f0819c3922f2b7d3ea8d539d007eb92cce11943788431dc202a",
+          "indexed_sha256": "7610ea667b00d8728dac8a7434bb664dde2d35c58db57eb189827c007bc97ace",
+          "opaque_pixels": 347,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 235,
+          "asset": "closing-lady-a.png",
+          "sample": [
+            28,
+            417,
+            303,
+            595
+          ],
+          "content": [
+            0,
+            0,
+            26,
+            18
+          ],
+          "art_sha256": "9bf99c961edbc2c6db6cf050f72d6befc629efd414e248f01ebda573bd29916a",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "e5d271861a882f453b4dec15f63f7830bf3b5edbfad3a81b3a6e6fad3014b62e",
+          "palette_sha256": "2fc3066f702847ef924f36ffb41d4c70a04667dcf906f76798bdf45a78cba3ee",
+          "writes_sha256": "472d61936c7ba73623b68d043fe98bbd3a912ec6b49fa2263ad777d15832e8d9"
+        },
+        {
+          "research_id": 236,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 5,
+          "size": [
+            26,
+            16
+          ],
+          "header_part1_offset": 80,
+          "data_part3_offset": 2410,
+          "encoded_length": 350,
+          "other_header_fields": [
+            101,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f5e4f4b78c71d173705adc1ea8413dfc3084b4576b2d9420d31abe458507730a",
+          "indexed_sha256": "6e149e0057fe06d164478ca4088fbd14df1766bbe608638274f795492031b64d",
+          "opaque_pixels": 306,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 236,
+          "asset": "closing-lady-a.png",
+          "sample": [
+            333,
+            427,
+            608,
+            595
+          ],
+          "content": [
+            0,
+            0,
+            26,
+            16
+          ],
+          "art_sha256": "9bf99c961edbc2c6db6cf050f72d6befc629efd414e248f01ebda573bd29916a",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "1d6722f22947540e6d361afb56628f83f4a0cfac910acec1d7c90c42dc79e803",
+          "palette_sha256": "6c5e28a12aca0e06a357c70b1fe168edf174bec94c303c7c4a26a0428c8446db",
+          "writes_sha256": "63f43e360d6f1422f855e1418a12ca10a1ba65a77d9b4f5b8e24c1c43e3a0b90"
+        },
+        {
+          "research_id": 237,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 6,
+          "size": [
+            26,
+            17
+          ],
+          "header_part1_offset": 96,
+          "data_part3_offset": 2760,
+          "encoded_length": 371,
+          "other_header_fields": [
+            101,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "0fbf885c6b6eb76a492488acf743070ee45ebf028d6c17ff3318b7b9367bd9fb",
+          "indexed_sha256": "3a73fa8c85dbb7e15c5a200179f616094bfa6bb28c304bea5662c39c0fea3480",
+          "opaque_pixels": 322,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 237,
+          "asset": "closing-lady-a.png",
+          "sample": [
+            641,
+            429,
+            916,
+            594
+          ],
+          "content": [
+            0,
+            0,
+            26,
+            17
+          ],
+          "art_sha256": "9bf99c961edbc2c6db6cf050f72d6befc629efd414e248f01ebda573bd29916a",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "42284f880eadf37ac452f7080ea7f3b932705cb11d7355e965ec8c7e31ef53b8",
+          "palette_sha256": "3b8bb26524986ac270512012e86e2c2df5e44a13331c728dfd44406b6c29ddd6",
+          "writes_sha256": "2713fde1b502b8920e1f5af2d8adab341e5945b3abfaafcc07bb8d523fc48f1f"
+        },
+        {
+          "research_id": 238,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 7,
+          "size": [
+            28,
+            17
+          ],
+          "header_part1_offset": 112,
+          "data_part3_offset": 3131,
+          "encoded_length": 405,
+          "other_header_fields": [
+            102,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "dce1729ec0768c78d246918cc6f1449233db7d9630b1ebe4716c2c8d90146f45",
+          "indexed_sha256": "80e2ed1659844021a163b738d8a23224d06497e25ff79a6c6fe002987229afa0",
+          "opaque_pixels": 355,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 238,
+          "asset": "closing-lady-a.png",
+          "sample": [
+            947,
+            432,
+            1228,
+            594
+          ],
+          "content": [
+            0,
+            0,
+            28,
+            17
+          ],
+          "art_sha256": "9bf99c961edbc2c6db6cf050f72d6befc629efd414e248f01ebda573bd29916a",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "7ec2d05ed22683955f114fda32b9c495cc31cc93696722cb4dc1c42b8dc3376d",
+          "palette_sha256": "b410df8444d1ec875cb2f8ada19785c2028f06d263fc640c0bf58b4c39e2f427",
+          "writes_sha256": "b26d6213903bee84e184940c2b25efb12310dd7b24df8caab8bb6c2bec40049d"
+        },
+        {
+          "research_id": 239,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 8,
+          "size": [
+            33,
+            18
+          ],
+          "header_part1_offset": 128,
+          "data_part3_offset": 3536,
+          "encoded_length": 493,
+          "other_header_fields": [
+            102,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "911edca67a8f19083aca78e26c43913dd81a5448cf4f9b8852da03dc4a58e2d4",
+          "indexed_sha256": "9afd7afcb700828c69cb2e0bfaad66c54258534df2ba9a761209bf74e3447bba",
+          "opaque_pixels": 386,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 239,
+          "asset": "closing-lady-a.png",
+          "sample": [
+            37,
+            711,
+            309,
+            875
+          ],
+          "content": [
+            0,
+            0,
+            33,
+            18
+          ],
+          "art_sha256": "9bf99c961edbc2c6db6cf050f72d6befc629efd414e248f01ebda573bd29916a",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "2258eb16521a7b5ea11882c6930ae96505b80b26653b60c3370e064a942b351f",
+          "palette_sha256": "7a4e4176030622cc081c3da49eb03366572672e0b971d94c9c30626d715fde41",
+          "writes_sha256": "607c889fb317d78d368f50d8d46606c864c969faaa035a66b7eb9c8e8f377010"
+        },
+        {
+          "research_id": 240,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 9,
+          "size": [
+            36,
+            20
+          ],
+          "header_part1_offset": 144,
+          "data_part3_offset": 4029,
+          "encoded_length": 513,
+          "other_header_fields": [
+            104,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "3adcfadd3ecda6ae635ffc0872e54583a742cb2df669358046e3e89ccf3ef00f",
+          "indexed_sha256": "e16a1869545d57874aa1fcbeb2e01094b216a57bdc31ba69df26cea8f46fde60",
+          "opaque_pixels": 408,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 240,
+          "asset": "closing-lady-a.png",
+          "sample": [
+            334,
+            710,
+            612,
+            876
+          ],
+          "content": [
+            0,
+            0,
+            36,
+            20
+          ],
+          "art_sha256": "9bf99c961edbc2c6db6cf050f72d6befc629efd414e248f01ebda573bd29916a",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "f8c28075d552d023f52f452def5ecae675be3db17f62fce8d80f355d7c5afb2d",
+          "palette_sha256": "774cc03c57028777dfaf32d0d15f86df78321826fe46b84c5a16fe92d4415036",
+          "writes_sha256": "039123e35679523ec5991c9956676ca55dd307e874bc10e70089bcb80f588973",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                25,
+                3
+              ],
+              "art": [
+                334,
+                710,
+                539,
+                735
+              ]
+            },
+            {
+              "native": [
+                25,
+                0,
+                28,
+                3
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                28,
+                0,
+                36,
+                3
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                0,
+                3,
+                25,
+                19
+              ],
+              "art": [
+                334,
+                735,
+                539,
+                868
+              ]
+            },
+            {
+              "native": [
+                25,
+                3,
+                28,
+                19
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                28,
+                3,
+                36,
+                19
+              ],
+              "art": [
+                546,
+                728,
+                612,
+                867
+              ]
+            },
+            {
+              "native": [
+                0,
+                19,
+                25,
+                20
+              ],
+              "art": [
+                334,
+                868,
+                539,
+                876
+              ]
+            },
+            {
+              "native": [
+                25,
+                19,
+                28,
+                20
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                28,
+                19,
+                36,
+                20
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 241,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 10,
+          "size": [
+            39,
+            20
+          ],
+          "header_part1_offset": 160,
+          "data_part3_offset": 4542,
+          "encoded_length": 539,
+          "other_header_fields": [
+            103,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "3b11faa26dbdfeb0094201c98764d70881ddd799243fc0fdec96b4d2576961ac",
+          "indexed_sha256": "d98b792821cc63681f68b2a01763184c7b4f59de58d586d2d6d92a544eb94a8f",
+          "opaque_pixels": 412,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 241,
+          "asset": "closing-lady-a.png",
+          "sample": [
+            640,
+            713,
+            920,
+            876
+          ],
+          "content": [
+            0,
+            0,
+            39,
+            20
+          ],
+          "art_sha256": "9bf99c961edbc2c6db6cf050f72d6befc629efd414e248f01ebda573bd29916a",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "1e643253be45adfa8a2c82e06b8ebb243d26a1cdfa56e1ce435ef691634165de",
+          "palette_sha256": "0388ce4bcb773e5227afaff68659f83e889d97625d073ca5b0ffbfae9a9d36f3",
+          "writes_sha256": "14dbb10517ae64e0f4b8ca0c20d9561155daeed69189706ae93818a7b3830df4",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                27,
+                3
+              ],
+              "art": [
+                640,
+                713,
+                851,
+                737
+              ]
+            },
+            {
+              "native": [
+                27,
+                0,
+                32,
+                3
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                32,
+                0,
+                39,
+                3
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                0,
+                3,
+                27,
+                19
+              ],
+              "art": [
+                640,
+                737,
+                851,
+                868
+              ]
+            },
+            {
+              "native": [
+                27,
+                3,
+                32,
+                19
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                32,
+                3,
+                39,
+                19
+              ],
+              "art": [
+                866,
+                738,
+                920,
+                868
+              ]
+            },
+            {
+              "native": [
+                0,
+                19,
+                27,
+                20
+              ],
+              "art": [
+                640,
+                868,
+                851,
+                876
+              ]
+            },
+            {
+              "native": [
+                27,
+                19,
+                32,
+                20
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                32,
+                19,
+                39,
+                20
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 242,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 11,
+          "size": [
+            38,
+            21
+          ],
+          "header_part1_offset": 176,
+          "data_part3_offset": 5081,
+          "encoded_length": 508,
+          "other_header_fields": [
+            105,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "458368ebf17e6e0030b219776d5161cf3560416c72a642b5dd096c63244134e2",
+          "indexed_sha256": "f3cf20946b26ab41fb01c18c2b9d6f089da3a6fa5c67f8700295fba6623b4abb",
+          "opaque_pixels": 413,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 242,
+          "asset": "closing-lady-a.png",
+          "sample": [
+            947,
+            705,
+            1220,
+            876
+          ],
+          "content": [
+            0,
+            0,
+            38,
+            21
+          ],
+          "art_sha256": "9bf99c961edbc2c6db6cf050f72d6befc629efd414e248f01ebda573bd29916a",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "d3724825f2c8423d6894aebb80d3dc4b3e9371d7a344adcef9e853aba39ab1c8",
+          "palette_sha256": "e59bb26ac46bd509b77f1ea7f837c0fe7a601711763907dcaa646fa5b16aaea6",
+          "writes_sha256": "ef0d57094bef6613a5e060cb5ba8bc767eca0fbb6f60c2dcf1e69ef69b44c57e",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                25,
+                3
+              ],
+              "art": [
+                947,
+                705,
+                1145,
+                729
+              ]
+            },
+            {
+              "native": [
+                25,
+                0,
+                29,
+                3
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                29,
+                0,
+                38,
+                3
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                0,
+                3,
+                25,
+                20
+              ],
+              "art": [
+                947,
+                729,
+                1145,
+                868
+              ]
+            },
+            {
+              "native": [
+                25,
+                3,
+                29,
+                20
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                29,
+                3,
+                38,
+                20
+              ],
+              "art": [
+                1150,
+                727,
+                1220,
+                869
+              ]
+            },
+            {
+              "native": [
+                0,
+                20,
+                25,
+                21
+              ],
+              "art": [
+                947,
+                868,
+                1145,
+                876
+              ]
+            },
+            {
+              "native": [
+                25,
+                20,
+                29,
+                21
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                29,
+                20,
+                38,
+                21
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 243,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 12,
+          "size": [
+            35,
+            20
+          ],
+          "header_part1_offset": 192,
+          "data_part3_offset": 5589,
+          "encoded_length": 516,
+          "other_header_fields": [
+            103,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "4794e2642132556e5165afe0cffc3957f20165a473f14c6a5de185e872030ea5",
+          "indexed_sha256": "b2e360e091b3ad37a6abe6a0303596de4b67baac042ce7c56d530d4453cc5841",
+          "opaque_pixels": 389,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 243,
+          "asset": "closing-lady-a.png",
+          "sample": [
+            31,
+            986,
+            305,
+            1159
+          ],
+          "content": [
+            0,
+            0,
+            35,
+            20
+          ],
+          "art_sha256": "9bf99c961edbc2c6db6cf050f72d6befc629efd414e248f01ebda573bd29916a",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "8853552073ad013bf81efa9bd1b44929584cd4d1870b4e4e837dceb8e3a775f3",
+          "palette_sha256": "6e036ea3c3eed1f93c0688d568f22fb985969b47602812883fe43d432c9f80bd",
+          "writes_sha256": "a53649c7092e592c0a7ae60a8e31ecc22a7b9b4f3f978f0395de8836d1298195",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                25,
+                2
+              ],
+              "art": [
+                31,
+                986,
+                238,
+                1003
+              ]
+            },
+            {
+              "native": [
+                25,
+                0,
+                27,
+                2
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                27,
+                0,
+                35,
+                2
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                0,
+                2,
+                25,
+                20
+              ],
+              "art": [
+                31,
+                1003,
+                238,
+                1159
+              ]
+            },
+            {
+              "native": [
+                25,
+                2,
+                27,
+                20
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                27,
+                2,
+                35,
+                20
+              ],
+              "art": [
+                241,
+                1004,
+                305,
+                1156
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 244,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 13,
+          "size": [
+            29,
+            18
+          ],
+          "header_part1_offset": 208,
+          "data_part3_offset": 6105,
+          "encoded_length": 457,
+          "other_header_fields": [
+            102,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ffc077944105b91a81826ce69d3eba33bf51326bf30773b23c1be5dec51eae4e",
+          "indexed_sha256": "231576521b610dc29effc8e0b47dd717f7884109ac8d2096b9f2f32192829ae8",
+          "opaque_pixels": 364,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 244,
+          "asset": "closing-lady-a.png",
+          "sample": [
+            329,
+            974,
+            612,
+            1159
+          ],
+          "content": [
+            0,
+            0,
+            29,
+            18
+          ],
+          "art_sha256": "9bf99c961edbc2c6db6cf050f72d6befc629efd414e248f01ebda573bd29916a",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "2f6aa11a2092825ad7e848e7fffafbdc58947457cf5c7fb8fd87db48eba9cf6d",
+          "palette_sha256": "7b5353cb2696f1b5a5cac19f45bed8220fd5a99c912c45c9082bd2474ad8e22d",
+          "writes_sha256": "f7d3b2dd448e01dfcc1284574f854500ac1318fc15cd0b3ef348c8771de59647"
+        },
+        {
+          "research_id": 245,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 14,
+          "size": [
+            27,
+            18
+          ],
+          "header_part1_offset": 224,
+          "data_part3_offset": 6562,
+          "encoded_length": 422,
+          "other_header_fields": [
+            100,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "1cc27863376e842b66cfaf9a1176013c6ceb233141191f197166d87ff0d011be",
+          "indexed_sha256": "48eb7af9367cb43b2ef8a4a221da88c0a50774dca0044148ca27c1f015ea4bb6",
+          "opaque_pixels": 347,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 245,
+          "asset": "closing-lady-a.png",
+          "sample": [
+            643,
+            977,
+            914,
+            1159
+          ],
+          "content": [
+            0,
+            0,
+            27,
+            18
+          ],
+          "art_sha256": "9bf99c961edbc2c6db6cf050f72d6befc629efd414e248f01ebda573bd29916a",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "480760fae08804654e0f1adef792f025498928791decc1ddb3ce798ce3695c6f",
+          "palette_sha256": "27ba0218a7eee0afc3b5b9ed98e809fc1caad436a7ea05d3af186f774be2bba0",
+          "writes_sha256": "cd513eed2cd187572321523b641f1ea09b19af0a91fb672b621186737981b273"
+        },
+        {
+          "research_id": 246,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 15,
+          "size": [
+            27,
+            16
+          ],
+          "header_part1_offset": 240,
+          "data_part3_offset": 6984,
+          "encoded_length": 359,
+          "other_header_fields": [
+            100,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "a43f5e0fe1828c0811135ef815605fe444af4954483dbbc4c9a2aa3816cb126f",
+          "indexed_sha256": "5939c4ef7cde992053215f4b9bab73fb740f1000849ba12c80f378b66db0e5cc",
+          "opaque_pixels": 303,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 246,
+          "asset": "closing-lady-a.png",
+          "sample": [
+            947,
+            994,
+            1224,
+            1160
+          ],
+          "content": [
+            0,
+            0,
+            27,
+            16
+          ],
+          "art_sha256": "9bf99c961edbc2c6db6cf050f72d6befc629efd414e248f01ebda573bd29916a",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "ae5b3757db5889d7951d22c2be685049724c609b73824adc22396eb21e231a3f",
+          "palette_sha256": "54a8e8bf3de8710bb15226c362214abbb4e18c7def838ef1cf0a8fea63dd0092",
+          "writes_sha256": "8fd502be4f0e9e47ee9d3eb14632c46b5b1d21b6b8ca555673264e996484e2ee"
+        }
+      ]
+    },
+    "closing-lady-b.png": {
+      "sha256": "712fcfad996b5b0a835d61f9d24f76b9e4acaf538928edf2e66365b5a3357e95",
+      "bytes": 401855,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: style-transfer. Create ONE fine pixel-art animation sprite atlas for Colonization HD ending. Image1 is the EXACT five source poses and component-placement guide; Image2 gives the already-approved fine pixel-art STYLE only. Square transparent canvas, exactly FOUR equal columns and FOUR equal rows; FIRST FIVE cells occupied in reading order, all remaining eleven cells completely transparent. Each occupied cell contains ONLY a large off-white/gray colonial bonnet seen FROM BEHIND with brown clapping hands, white cuffs and dark sleeve fragments, exactly as in Image1, no face or full person. Preserve the exact pose, which hands touch/hover/separate, relative spacing and proportion, silhouette and crop of all five source frames. Cell1 right hand mostly behind right side of bonnet, left-hand fragment partly behind upper-left; cell2 one hand bent across top-right of bonnet; cell3 two hands raised left/right with bonnet below; cell4 left hand lifted above bonnet and right hand separate at right; cell5 similar raised hands but its own exact source angles. Refine coarse source dithering into fresh coherent tiny pixel clusters, ivory cloth folds, muted gray shadows, brown skin fingers and crisp dark sleeves. Keep component separations genuinely transparent, no connecting lines between detached pieces. Generous transparent gaps and margins, identical style and cloth treatment across all5. Remove magenta background and black labels. No added face, torso, body, hands, props, scenery, text, numbers, borders, grid, frames, blur, photography, 3D or smooth painting. Exactly4x4, first5 occupied only, 11 empty.",
+      "generation_file": "exec-4e652234-4725-49f9-85a1-462e3d55bef0.png",
+      "reference_sha256": "08d18218f906f714a61f69e1efc9bfa03d02f698d636a6b73843d45d7bc975d6",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "column_row_boundaries": {
+        "0": [
+          0,
+          313,
+          627,
+          940,
+          1254
+        ],
+        "1": [
+          0,
+          313,
+          627,
+          940,
+          1254
+        ],
+        "2": [
+          0,
+          313,
+          627,
+          940,
+          1254
+        ],
+        "3": [
+          0,
+          313,
+          627,
+          940,
+          1254
+        ]
+      },
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw alpha and native source253 transparency retained",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "runtime_code_profile": {
+        "file": "CLOSING.EXE",
+        "sha256": "2d0f0fa9cb8256fda6c967f2821379d37ca5552b6d621f74115b532aa147fedc",
+        "draw_file_offset": 13764,
+        "draw_dosgolem_linear": 15556,
+        "copy_file_offsets": [
+          10418,
+          16819
+        ],
+        "copy_dosgolem_linear": [
+          12210,
+          18611
+        ]
+      },
+      "source_frames": [
+        {
+          "research_id": 247,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 16,
+          "size": [
+            27,
+            17
+          ],
+          "header_part1_offset": 256,
+          "data_part3_offset": 7343,
+          "encoded_length": 375,
+          "other_header_fields": [
+            100,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "15081c2c29f4d5ffed704e0f29ea852e1db680c010f347f1d7285315df180859",
+          "indexed_sha256": "cbb9fad070e8ebf154463ed7aed64f62fc8cfc90641ab2a120dcf094903902bb",
+          "opaque_pixels": 319,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 247,
+          "asset": "closing-lady-b.png",
+          "sample": [
+            33,
+            119,
+            304,
+            303
+          ],
+          "content": [
+            0,
+            0,
+            27,
+            17
+          ],
+          "art_sha256": "712fcfad996b5b0a835d61f9d24f76b9e4acaf538928edf2e66365b5a3357e95",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "296d260c8dcae9455f1af0ab7e17829dde2546aa2a34817b353fd45655ed55b9",
+          "palette_sha256": "8a2dd961b0774a8d0787cc5f9bb6caa8dee99e2c18627b316455f2c0511a42ce",
+          "writes_sha256": "874023de844ea7bbff8558426222d1df5ba0d4b8e22edfa50db52b67ff072e9f"
+        },
+        {
+          "research_id": 248,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 17,
+          "size": [
+            29,
+            17
+          ],
+          "header_part1_offset": 272,
+          "data_part3_offset": 7718,
+          "encoded_length": 417,
+          "other_header_fields": [
+            101,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "1c40449298fceaf40a903c4160704de3ddac63af341d95f2c60fde2680ed44c2",
+          "indexed_sha256": "3a9542bbddb5ef2182c876959ac5ab309872bb6982ff54eb9df97c448a194cbf",
+          "opaque_pixels": 350,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 248,
+          "asset": "closing-lady-b.png",
+          "sample": [
+            340,
+            137,
+            612,
+            303
+          ],
+          "content": [
+            0,
+            0,
+            29,
+            17
+          ],
+          "art_sha256": "712fcfad996b5b0a835d61f9d24f76b9e4acaf538928edf2e66365b5a3357e95",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "4e8e4f00eff2a502ed336a1d57bc516fb22c6dccb81f7826325932a4063d0df8",
+          "palette_sha256": "0d34f41d77a13a426e28d3fa4e0a01adab60e6362307a92dd79e2ffb1a72f756",
+          "writes_sha256": "8e228e097371b981742b813efe481c998f6c4fc2d2e528e85a42941574ab3243"
+        },
+        {
+          "research_id": 249,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 18,
+          "size": [
+            33,
+            18
+          ],
+          "header_part1_offset": 288,
+          "data_part3_offset": 8135,
+          "encoded_length": 495,
+          "other_header_fields": [
+            102,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "d40f6298dadb0d62104bbe6b90684df5aa1de187f1da877a94f7f3a0016a0b71",
+          "indexed_sha256": "9adf26e25a0d3e6538e57fe14e1b2e78b1dd8cd08cebf951bfc829d555a3a02c",
+          "opaque_pixels": 386,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 249,
+          "asset": "closing-lady-b.png",
+          "sample": [
+            642,
+            128,
+            925,
+            303
+          ],
+          "content": [
+            0,
+            0,
+            33,
+            18
+          ],
+          "art_sha256": "712fcfad996b5b0a835d61f9d24f76b9e4acaf538928edf2e66365b5a3357e95",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "de75af0e9ec401f4bb246cad6efc2d4979902e94193c9d42a10ed1242f7ffb76",
+          "palette_sha256": "8875a1f3682d576895881d7ff4a3121aa694dfb1da26f8d1d0f7b8126abee749",
+          "writes_sha256": "494c979fc4b787c1e246f60f1a34961944ee20bf937f621882221f28534d6576"
+        },
+        {
+          "research_id": 250,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 19,
+          "size": [
+            36,
+            20
+          ],
+          "header_part1_offset": 304,
+          "data_part3_offset": 8630,
+          "encoded_length": 515,
+          "other_header_fields": [
+            104,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "de255cec44a745cfdbf7503754668b66ef23b2e3cb697b63c875ca5becd80f9c",
+          "indexed_sha256": "2088c815af95dc3ae7f9fe7cc7802ca838cf5bd70587098e9164bc06552d6f7d",
+          "opaque_pixels": 409,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 250,
+          "asset": "closing-lady-b.png",
+          "sample": [
+            958,
+            114,
+            1240,
+            303
+          ],
+          "content": [
+            0,
+            0,
+            36,
+            20
+          ],
+          "art_sha256": "712fcfad996b5b0a835d61f9d24f76b9e4acaf538928edf2e66365b5a3357e95",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "c1ba25d01dfd17c4582e59619896e8bb23fded4472e374065d994fea3a574862",
+          "palette_sha256": "3ace596da1f8c88e7a58136b9f244cb71870fa72b65a60ba90453888adbfdfbe",
+          "writes_sha256": "45d31699d7cf0d28bf748d8ade6386eb6b789f3cc26772ba117905f1dc1f8583",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                24,
+                3
+              ],
+              "art": [
+                958,
+                114,
+                1161,
+                142
+              ]
+            },
+            {
+              "native": [
+                24,
+                0,
+                28,
+                3
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                28,
+                0,
+                36,
+                3
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                0,
+                3,
+                24,
+                19
+              ],
+              "art": [
+                958,
+                142,
+                1161,
+                294
+              ]
+            },
+            {
+              "native": [
+                24,
+                3,
+                28,
+                19
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                28,
+                3,
+                36,
+                19
+              ],
+              "art": [
+                1173,
+                157,
+                1240,
+                303
+              ]
+            },
+            {
+              "native": [
+                0,
+                19,
+                24,
+                20
+              ],
+              "art": [
+                958,
+                294,
+                1161,
+                303
+              ]
+            },
+            {
+              "native": [
+                24,
+                19,
+                28,
+                20
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                28,
+                19,
+                36,
+                20
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 251,
+          "file": "CLOS-LDY.SS",
+          "file_sha256": "6210710541602a8d48c12b064d3caf46c7b07dcd9bf2a8251a2a691f4a642564",
+          "ordinal": 20,
+          "size": [
+            39,
+            20
+          ],
+          "header_part1_offset": 320,
+          "data_part3_offset": 9145,
+          "encoded_length": 537,
+          "other_header_fields": [
+            103,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "781b26881d8c44a71b5a7bd3d05c48fbcf47f1a25afe0598c9d7c8971a6231ec",
+          "indexed_sha256": "24fdeb607fc96e8224ee1adcdfb5e742a20ff09a1bfae9ceeddf26ccad4f1bfa",
+          "opaque_pixels": 411,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 251,
+          "asset": "closing-lady-b.png",
+          "sample": [
+            21,
+            419,
+            313,
+            597
+          ],
+          "content": [
+            0,
+            0,
+            39,
+            20
+          ],
+          "art_sha256": "712fcfad996b5b0a835d61f9d24f76b9e4acaf538928edf2e66365b5a3357e95",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "111dedc97860ff9ac744adce42093eb9df33843d6c053fd3cdf503068d847aaa",
+          "palette_sha256": "89ea433ae224a7150c64fb01803374de24fb2c7178da87c60c5920715d8a0c52",
+          "writes_sha256": "f892535feb517bed877ebb4f619e4009646cc4f83c78824ed50785f6c7cdfd34",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                26,
+                3
+              ],
+              "art": [
+                21,
+                419,
+                242,
+                446
+              ]
+            },
+            {
+              "native": [
+                26,
+                0,
+                32,
+                3
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                32,
+                0,
+                39,
+                3
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                0,
+                3,
+                26,
+                19
+              ],
+              "art": [
+                21,
+                446,
+                242,
+                588
+              ]
+            },
+            {
+              "native": [
+                26,
+                3,
+                32,
+                19
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                32,
+                3,
+                39,
+                19
+              ],
+              "art": [
+                256,
+                449,
+                313,
+                597
+              ]
+            },
+            {
+              "native": [
+                0,
+                19,
+                26,
+                20
+              ],
+              "art": [
+                21,
+                588,
+                242,
+                597
+              ]
+            },
+            {
+              "native": [
+                26,
+                19,
+                32,
+                20
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                32,
+                19,
+                39,
+                20
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "closing-man.png": {
+      "sha256": "f26fcbab6a85fa3e9db2315adc6835afa975a0c3818215fbd0cd31e99df11626",
+      "bytes": 657924,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: style-transfer. Create ONE fine pixel-art animation sprite atlas for Colonization HD ending. Image1 is the EXACT frame-by-frame pose, crop and disconnected-component reference. Image2 is STYLE ONLY, crisp fine pixel clusters and restrained natural material detail. Square transparent canvas, exactly FOUR equal columns and FOUR equal rows; first FOURTEEN cells occupied in reading order, final2 empty. Each source group contains a brown raised/clenched hand and forearm in a burgundy/maroon sleeve with narrow pale cuff on the LEFT, plus a SEPARATE dark gray rounded back-of-head/hat shape low on the RIGHT. Repaint only those visible fragments; do not invent a face, full body, shoulders or other anatomy. Preserve every frame's exact hand angle, how far the sleeve rises from the bottom crop, component sizes and spacing, dark rounded right-hand shape and its slight tilt. The firstframes show only a short hand/cuff emerging low; middleframes raise the burgundy sleeve taller and more upright, then lower it again toward the lastframes, exactly as Image1. All fourteen sequential poses must be distinct where the source differs. Fresh coherent tiny pixel clusters, subtle brown skin and knuckle detail, deep burgundy fabric folds and muted gray rounded shape, original dark outlines. Truly transparent gaps between the TWO components and between all cells, no connecting line. Generous transparent cell margins. Remove magenta and numeric labels completely. No added face, person, body, hand, props, scenery, text, number, border, grid, frame, blur, photography, 3D or smooth painting. Exactly4x4, first14 occupied, last2 blank.",
+      "generation_file": "exec-7fd41aa3-3985-4360-b265-a929cd52989d.png",
+      "reference_sha256": "5c4d356682ebb88aa04d744af3b81b38a88b879f584780e96d9068357d703115",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "column_row_boundaries": {
+        "0": [
+          0,
+          313,
+          627,
+          940,
+          1254
+        ],
+        "1": [
+          0,
+          313,
+          627,
+          940,
+          1254
+        ],
+        "2": [
+          0,
+          313,
+          627,
+          940,
+          1254
+        ],
+        "3": [
+          0,
+          313,
+          627,
+          940,
+          1254
+        ]
+      },
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw alpha and native source253 transparency retained",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "runtime_code_profile": {
+        "file": "CLOSING.EXE",
+        "sha256": "2d0f0fa9cb8256fda6c967f2821379d37ca5552b6d621f74115b532aa147fedc",
+        "draw_file_offset": 13764,
+        "draw_dosgolem_linear": 15556,
+        "copy_file_offsets": [
+          10418,
+          16819
+        ],
+        "copy_dosgolem_linear": [
+          12210,
+          18611
+        ]
+      },
+      "source_frames": [
+        {
+          "research_id": 252,
+          "file": "CLOS-MAN.SS",
+          "file_sha256": "414b156c3e3d5e83acec340d8ee20cd22db0d0910263f23297d69f0f1386381a",
+          "ordinal": 0,
+          "size": [
+            41,
+            12
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 377,
+          "other_header_fields": [
+            237,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "225cf5e00b38354036fbefacb85b7b7cbec808c0f172841dbef40d16c1f2517f",
+          "indexed_sha256": "1c5b55a3b2e852345e8f9767288866646d2da9f20c352975fd480357e13c6db5",
+          "opaque_pixels": 339,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 252,
+          "asset": "closing-man.png",
+          "sample": [
+            22,
+            186,
+            295,
+            277
+          ],
+          "content": [
+            0,
+            0,
+            41,
+            12
+          ],
+          "art_sha256": "f26fcbab6a85fa3e9db2315adc6835afa975a0c3818215fbd0cd31e99df11626",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "b4ce4f953164553833d4199289af53146963c7dd320fb8b440d8f66d2ad3e389",
+          "palette_sha256": "cd4fae89a9b4d531122c5b97f4fcdec08a2e95cc00e43318aa607b5c132241ca",
+          "writes_sha256": "3dac359383567444cd418029330504b7eed3d1c4fb59e8a66f7c8e047fe7e7a1"
+        },
+        {
+          "research_id": 253,
+          "file": "CLOS-MAN.SS",
+          "file_sha256": "414b156c3e3d5e83acec340d8ee20cd22db0d0910263f23297d69f0f1386381a",
+          "ordinal": 1,
+          "size": [
+            44,
+            13
+          ],
+          "header_part1_offset": 16,
+          "data_part3_offset": 377,
+          "encoded_length": 403,
+          "other_header_fields": [
+            237,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "fe2638aacc7545351e2aadd4d7489884499ce00a79861fbb84cfee5d60023c2e",
+          "indexed_sha256": "ca604be1b33739a55cac3f2ce4dbc03f280cdd0659cd2dc281084f2b42601abf",
+          "opaque_pixels": 361,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 253,
+          "asset": "closing-man.png",
+          "sample": [
+            332,
+            181,
+            602,
+            276
+          ],
+          "content": [
+            0,
+            0,
+            44,
+            13
+          ],
+          "art_sha256": "f26fcbab6a85fa3e9db2315adc6835afa975a0c3818215fbd0cd31e99df11626",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "5ef8f311cfbb4832b2be4af6b2be83abcac939c9745551587c41ce3a8a852943",
+          "palette_sha256": "91dce00dc2c1f065707636b7c3970780eb1ae08dcde4e26c8f468438bf273640",
+          "writes_sha256": "023bdc39fe721fb8d21805f2a4661c382cc7231c192bbaab97d310cc4162a3cb"
+        },
+        {
+          "research_id": 254,
+          "file": "CLOS-MAN.SS",
+          "file_sha256": "414b156c3e3d5e83acec340d8ee20cd22db0d0910263f23297d69f0f1386381a",
+          "ordinal": 2,
+          "size": [
+            47,
+            17
+          ],
+          "header_part1_offset": 32,
+          "data_part3_offset": 780,
+          "encoded_length": 440,
+          "other_header_fields": [
+            236,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "a4b28b2e801ce9990396af1c01045c35d7aacd79471fd79e05de98e16ec8f943",
+          "indexed_sha256": "7a6354fc07e8055f903d174ea077aba20c3375bb47172fea45d1e71c6264063e",
+          "opaque_pixels": 409,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 254,
+          "asset": "closing-man.png",
+          "sample": [
+            638,
+            161,
+            917,
+            276
+          ],
+          "content": [
+            0,
+            0,
+            47,
+            17
+          ],
+          "art_sha256": "f26fcbab6a85fa3e9db2315adc6835afa975a0c3818215fbd0cd31e99df11626",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "1c9c477a8fdc55caab7bcb2104fb90e8f44f71b09513832a8982dedf884720b6",
+          "palette_sha256": "e847ba3a7d68879e054ab1da7dc0f5a1696e0983b6e39e3ea395296cd00ec7f4",
+          "writes_sha256": "fea0fae82dc8609ad76d6799d4beec941698b266038cbc14c84a17a67d50c8ca",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                20,
+                6
+              ],
+              "art": [
+                638,
+                161,
+                757,
+                202
+              ]
+            },
+            {
+              "native": [
+                20,
+                0,
+                23,
+                6
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                23,
+                0,
+                47,
+                6
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                0,
+                6,
+                20,
+                17
+              ],
+              "art": [
+                638,
+                202,
+                757,
+                276
+              ]
+            },
+            {
+              "native": [
+                20,
+                6,
+                23,
+                17
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                23,
+                6,
+                47,
+                17
+              ],
+              "art": [
+                773,
+                209,
+                917,
+                276
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 255,
+          "file": "CLOS-MAN.SS",
+          "file_sha256": "414b156c3e3d5e83acec340d8ee20cd22db0d0910263f23297d69f0f1386381a",
+          "ordinal": 3,
+          "size": [
+            49,
+            22
+          ],
+          "header_part1_offset": 48,
+          "data_part3_offset": 1220,
+          "encoded_length": 501,
+          "other_header_fields": [
+            237,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "21616a60d44d156a6b72d74315c0da909c72e3a77d8778b17e836181b68c96a6",
+          "indexed_sha256": "8f17e21a520588c3e0102cd4320062c783f5356cc4a3ce393b21f287d3e20790",
+          "opaque_pixels": 479,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 255,
+          "asset": "closing-man.png",
+          "sample": [
+            956,
+            138,
+            1228,
+            285
+          ],
+          "content": [
+            0,
+            0,
+            49,
+            22
+          ],
+          "art_sha256": "f26fcbab6a85fa3e9db2315adc6835afa975a0c3818215fbd0cd31e99df11626",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "3f8bd0bfe040471dc5de641f2aa86cce6cf4fa6e8cf92bc3fc979b0dbdf52f0b",
+          "palette_sha256": "0a194d797f104834f3ccb360c4d65803fc2eda0533d16fc78b963d6b4e73d039",
+          "writes_sha256": "813c281d6e99345508c2abfee6bdb90c589dd2916e25a44f3afc137d53cb0165",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                20,
+                11
+              ],
+              "art": [
+                956,
+                138,
+                1074,
+                212
+              ]
+            },
+            {
+              "native": [
+                20,
+                0,
+                26,
+                11
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                26,
+                0,
+                49,
+                11
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                0,
+                11,
+                20,
+                22
+              ],
+              "art": [
+                956,
+                212,
+                1074,
+                285
+              ]
+            },
+            {
+              "native": [
+                20,
+                11,
+                26,
+                22
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                26,
+                11,
+                49,
+                22
+              ],
+              "art": [
+                1089,
+                209,
+                1228,
+                280
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 256,
+          "file": "CLOS-MAN.SS",
+          "file_sha256": "414b156c3e3d5e83acec340d8ee20cd22db0d0910263f23297d69f0f1386381a",
+          "ordinal": 4,
+          "size": [
+            52,
+            28
+          ],
+          "header_part1_offset": 64,
+          "data_part3_offset": 1721,
+          "encoded_length": 592,
+          "other_header_fields": [
+            239,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ce32d7b64162868afb0a2d90712b604fa04befddc4a1e10d34c3feaa168945ff",
+          "indexed_sha256": "5725249209f055c5f98232cac6f0c75ae4a1d1d915a6507232aeaae6a2b9605d",
+          "opaque_pixels": 527,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 256,
+          "asset": "closing-man.png",
+          "sample": [
+            23,
+            391,
+            299,
+            574
+          ],
+          "content": [
+            0,
+            0,
+            52,
+            28
+          ],
+          "art_sha256": "f26fcbab6a85fa3e9db2315adc6835afa975a0c3818215fbd0cd31e99df11626",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "19406abccb47a84fd4d45be83fd5aa1511e3171b58f8c27fd73328a8daedcbbb",
+          "palette_sha256": "b4796c699951574170763aa84e0c530ac893cca62805318008ce6c6182fe0079",
+          "writes_sha256": "edbf9cba6f35efd800bb364ddc638c1c04330efabc3e9682eda88f587ffff9d8",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                20,
+                17
+              ],
+              "art": [
+                23,
+                391,
+                148,
+                502
+              ]
+            },
+            {
+              "native": [
+                20,
+                0,
+                27,
+                17
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                27,
+                0,
+                52,
+                17
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                0,
+                17,
+                20,
+                28
+              ],
+              "art": [
+                23,
+                502,
+                148,
+                574
+              ]
+            },
+            {
+              "native": [
+                20,
+                17,
+                27,
+                28
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                27,
+                17,
+                52,
+                28
+              ],
+              "art": [
+                157,
+                508,
+                299,
+                574
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 257,
+          "file": "CLOS-MAN.SS",
+          "file_sha256": "414b156c3e3d5e83acec340d8ee20cd22db0d0910263f23297d69f0f1386381a",
+          "ordinal": 5,
+          "size": [
+            49,
+            33
+          ],
+          "header_part1_offset": 80,
+          "data_part3_offset": 2313,
+          "encoded_length": 575,
+          "other_header_fields": [
+            241,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "1d8462d4abcc1179e3c76ae748e4acf294f200541b7d05cc4b82320286fc3c6e",
+          "indexed_sha256": "b6105fa94b931d39b1232783b50b0430c2827ea873af6119c79758dcb9a74108",
+          "opaque_pixels": 533,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 257,
+          "asset": "closing-man.png",
+          "sample": [
+            347,
+            370,
+            618,
+            581
+          ],
+          "content": [
+            0,
+            0,
+            49,
+            33
+          ],
+          "art_sha256": "f26fcbab6a85fa3e9db2315adc6835afa975a0c3818215fbd0cd31e99df11626",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "d5685ef64e39055aa673d254712a4be61a7af6b0807699ed0dc9f00660da86cb",
+          "palette_sha256": "750b1cc37b6ff0f5181545d4ebb6d9b5ebfa07de5f022b010525ec64aaede1bf",
+          "writes_sha256": "2987b279676f608d407c3c101e0365f0e5152946f7a7c4d2aeccd5007f89157d",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                16,
+                23
+              ],
+              "art": [
+                347,
+                370,
+                462,
+                517
+              ]
+            },
+            {
+              "native": [
+                16,
+                0,
+                26,
+                23
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                26,
+                0,
+                49,
+                23
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                0,
+                23,
+                16,
+                33
+              ],
+              "art": [
+                347,
+                517,
+                462,
+                581
+              ]
+            },
+            {
+              "native": [
+                16,
+                23,
+                26,
+                33
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                26,
+                23,
+                49,
+                33
+              ],
+              "art": [
+                480,
+                512,
+                618,
+                579
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 258,
+          "file": "CLOS-MAN.SS",
+          "file_sha256": "414b156c3e3d5e83acec340d8ee20cd22db0d0910263f23297d69f0f1386381a",
+          "ordinal": 6,
+          "size": [
+            51,
+            36
+          ],
+          "header_part1_offset": 96,
+          "data_part3_offset": 2888,
+          "encoded_length": 694,
+          "other_header_fields": [
+            241,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "657397c425ef1c50e786cfaf3e80e96fe4acb03f448a091c5c16e59d07b79477",
+          "indexed_sha256": "5fe4896d5ae8ad7c7517e7234681bf89b017971d4e0d1747f6aa6f6bfbd15083",
+          "opaque_pixels": 578,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 258,
+          "asset": "closing-man.png",
+          "sample": [
+            655,
+            360,
+            923,
+            581
+          ],
+          "content": [
+            0,
+            0,
+            51,
+            36
+          ],
+          "art_sha256": "f26fcbab6a85fa3e9db2315adc6835afa975a0c3818215fbd0cd31e99df11626",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "1fc69af1e07ada3ebbb6849174559a4cc4ccf706623d96d817267815aa0d9408",
+          "palette_sha256": "fe4a901618a8c215d18c3c10de7f6864a4682c6b3a628d2772b7072d29a42249",
+          "writes_sha256": "404727343b1c89196b3d07ab7edb06be33b8edd316c6fa23742aff4eb9d7d12f",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                18,
+                26
+              ],
+              "art": [
+                655,
+                360,
+                764,
+                520
+              ]
+            },
+            {
+              "native": [
+                18,
+                0,
+                28,
+                26
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                28,
+                0,
+                51,
+                26
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                0,
+                26,
+                18,
+                36
+              ],
+              "art": [
+                655,
+                520,
+                764,
+                581
+              ]
+            },
+            {
+              "native": [
+                18,
+                26,
+                28,
+                36
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                28,
+                26,
+                51,
+                36
+              ],
+              "art": [
+                784,
+                511,
+                923,
+                579
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 259,
+          "file": "CLOS-MAN.SS",
+          "file_sha256": "414b156c3e3d5e83acec340d8ee20cd22db0d0910263f23297d69f0f1386381a",
+          "ordinal": 7,
+          "size": [
+            48,
+            37
+          ],
+          "header_part1_offset": 112,
+          "data_part3_offset": 3582,
+          "encoded_length": 651,
+          "other_header_fields": [
+            243,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "9f2d366105678a270cf44e7cc8ca002f35074b553b2d53f17e3b859327fa53e1",
+          "indexed_sha256": "6aa13ce65346ba12bdf002b9e174d9c273ef9c5e8c224f1aaec8d0754d4c5d99",
+          "opaque_pixels": 577,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 259,
+          "asset": "closing-man.png",
+          "sample": [
+            966,
+            350,
+            1232,
+            584
+          ],
+          "content": [
+            0,
+            0,
+            48,
+            37
+          ],
+          "art_sha256": "f26fcbab6a85fa3e9db2315adc6835afa975a0c3818215fbd0cd31e99df11626",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "212a1c4532a97662427985a082d9846adfc93c45a126fcb260e4cb0135fe3fcd",
+          "palette_sha256": "ade9967f03346ef228889b250c6729182a5f021402d1af9fcd2a5c20c80e49dd",
+          "writes_sha256": "49bfaa4a6f7a309851459ab6af5569ec3316b6242578f1d22cdb8a4986a413de",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                15,
+                27
+              ],
+              "art": [
+                966,
+                350,
+                1079,
+                521
+              ]
+            },
+            {
+              "native": [
+                15,
+                0,
+                25,
+                27
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                25,
+                0,
+                48,
+                27
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                0,
+                27,
+                15,
+                37
+              ],
+              "art": [
+                966,
+                521,
+                1079,
+                584
+              ]
+            },
+            {
+              "native": [
+                15,
+                27,
+                25,
+                37
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                25,
+                27,
+                48,
+                37
+              ],
+              "art": [
+                1095,
+                516,
+                1232,
+                584
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 260,
+          "file": "CLOS-MAN.SS",
+          "file_sha256": "414b156c3e3d5e83acec340d8ee20cd22db0d0910263f23297d69f0f1386381a",
+          "ordinal": 8,
+          "size": [
+            51,
+            35
+          ],
+          "header_part1_offset": 128,
+          "data_part3_offset": 4233,
+          "encoded_length": 675,
+          "other_header_fields": [
+            241,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "711f21fda86c25395f34bde71cc1e740de05f422118189571573aef7785e352e",
+          "indexed_sha256": "b6f70e2914b40c721c563ad1ea64d7cf12a3a683f364d1e9dfa5965e40658330",
+          "opaque_pixels": 563,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 260,
+          "asset": "closing-man.png",
+          "sample": [
+            33,
+            670,
+            302,
+            888
+          ],
+          "content": [
+            0,
+            0,
+            51,
+            35
+          ],
+          "art_sha256": "f26fcbab6a85fa3e9db2315adc6835afa975a0c3818215fbd0cd31e99df11626",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "723f9ba4ea57a5feff508db636f4f1817d9a2bb769d1d77a0423146c7e9ac739",
+          "palette_sha256": "63a9c95dbaa74777599ebf1a4a6d0520e060ed2c26b8f4e640a88a7e987b2ad0",
+          "writes_sha256": "6cfe8ea9247a422c7fdcc66ae29d244615983e46e503673175721ec4d28141b7",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                17,
+                25
+              ],
+              "art": [
+                33,
+                670,
+                140,
+                826
+              ]
+            },
+            {
+              "native": [
+                17,
+                0,
+                28,
+                25
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                28,
+                0,
+                51,
+                25
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                0,
+                25,
+                17,
+                35
+              ],
+              "art": [
+                33,
+                826,
+                140,
+                888
+              ]
+            },
+            {
+              "native": [
+                17,
+                25,
+                28,
+                35
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                28,
+                25,
+                51,
+                35
+              ],
+              "art": [
+                162,
+                822,
+                302,
+                887
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 261,
+          "file": "CLOS-MAN.SS",
+          "file_sha256": "414b156c3e3d5e83acec340d8ee20cd22db0d0910263f23297d69f0f1386381a",
+          "ordinal": 9,
+          "size": [
+            50,
+            31
+          ],
+          "header_part1_offset": 144,
+          "data_part3_offset": 4908,
+          "encoded_length": 582,
+          "other_header_fields": [
+            241,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ed540c37548d4ecc62daed02ab72789ad0869199ad9102ef66267d3f7f769cab",
+          "indexed_sha256": "4c62eff5df1241da9cfd8f61f3ae85c5ef7696a0618bbc77e3e0d9731fae6147",
+          "opaque_pixels": 526,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 261,
+          "asset": "closing-man.png",
+          "sample": [
+            347,
+            677,
+            622,
+            888
+          ],
+          "content": [
+            0,
+            0,
+            50,
+            31
+          ],
+          "art_sha256": "f26fcbab6a85fa3e9db2315adc6835afa975a0c3818215fbd0cd31e99df11626",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "fcff321c86ca937d7ad5745b2420aad897b8a709f20e176c12a7ddfe8fa26716",
+          "palette_sha256": "2a83e5ac1252e7365329eae433254a3dfa77f0f09856c82a4c036e03d3b53d69",
+          "writes_sha256": "935d478d69d9474b9c30fc00fa4740b2b7cbdcec610589b269d840e592611456",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                17,
+                21
+              ],
+              "art": [
+                347,
+                677,
+                462,
+                819
+              ]
+            },
+            {
+              "native": [
+                17,
+                0,
+                26,
+                21
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                26,
+                0,
+                50,
+                21
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                0,
+                21,
+                17,
+                31
+              ],
+              "art": [
+                347,
+                819,
+                462,
+                887
+              ]
+            },
+            {
+              "native": [
+                17,
+                21,
+                26,
+                31
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                26,
+                21,
+                50,
+                31
+              ],
+              "art": [
+                479,
+                817,
+                622,
+                888
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 262,
+          "file": "CLOS-MAN.SS",
+          "file_sha256": "414b156c3e3d5e83acec340d8ee20cd22db0d0910263f23297d69f0f1386381a",
+          "ordinal": 10,
+          "size": [
+            50,
+            25
+          ],
+          "header_part1_offset": 160,
+          "data_part3_offset": 5490,
+          "encoded_length": 545,
+          "other_header_fields": [
+            238,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "96e7bc5a4afe4f923b9a23fdbfa0a95013afc2b3ecb51be3967f9ded219c7665",
+          "indexed_sha256": "620a5ce721049d798c81ec5c36ce1bd5a4d823383be4f45d500cd43f9f4536e3",
+          "opaque_pixels": 501,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 262,
+          "asset": "closing-man.png",
+          "sample": [
+            654,
+            699,
+            923,
+            886
+          ],
+          "content": [
+            0,
+            0,
+            50,
+            25
+          ],
+          "art_sha256": "f26fcbab6a85fa3e9db2315adc6835afa975a0c3818215fbd0cd31e99df11626",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "f1f3573672ae0276329040cbd0ab6b92369fe47d372aceaf7b5ad79ddd9ff4e8",
+          "palette_sha256": "eb9b82c029badf165844576e02e30a3a16058f1f26e804703b6f725f20cda349",
+          "writes_sha256": "6eabd9833f003454b0a92a29466fe1685b6ccfb93e6303f51fe499a4908e6b9f",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                20,
+                14
+              ],
+              "art": [
+                654,
+                699,
+                777,
+                798
+              ]
+            },
+            {
+              "native": [
+                20,
+                0,
+                27,
+                14
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                27,
+                0,
+                50,
+                14
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                0,
+                14,
+                20,
+                25
+              ],
+              "art": [
+                654,
+                798,
+                777,
+                876
+              ]
+            },
+            {
+              "native": [
+                20,
+                14,
+                27,
+                25
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                27,
+                14,
+                50,
+                25
+              ],
+              "art": [
+                780,
+                817,
+                923,
+                886
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 263,
+          "file": "CLOS-MAN.SS",
+          "file_sha256": "414b156c3e3d5e83acec340d8ee20cd22db0d0910263f23297d69f0f1386381a",
+          "ordinal": 11,
+          "size": [
+            49,
+            19
+          ],
+          "header_part1_offset": 176,
+          "data_part3_offset": 6035,
+          "encoded_length": 483,
+          "other_header_fields": [
+            236,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "d83e46e61c58d09f42bf0cea839b74fd30010236b5b10a2c7414cbde84d93b5d",
+          "indexed_sha256": "07004a8437e51ce1530136d65d8092cf94c03a66db9c16d3b2221084b462d23d",
+          "opaque_pixels": 438,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 263,
+          "asset": "closing-man.png",
+          "sample": [
+            949,
+            724,
+            1233,
+            885
+          ],
+          "content": [
+            0,
+            0,
+            49,
+            19
+          ],
+          "art_sha256": "f26fcbab6a85fa3e9db2315adc6835afa975a0c3818215fbd0cd31e99df11626",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "82d415bf15ae1f5366716ed90d0c468417d7d8ed39c145156e611c3a799770c1",
+          "palette_sha256": "9b2225f8acc23810ebff8506faaf006a49871be5dfdc03f54e2c209b57eb1327",
+          "writes_sha256": "c0314a1fec24e7c3ac680afd79d1258779d55e8caf6b73eb9afbf3d907d46802",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                21,
+                8
+              ],
+              "art": [
+                949,
+                724,
+                1081,
+                786
+              ]
+            },
+            {
+              "native": [
+                21,
+                0,
+                25,
+                8
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                25,
+                0,
+                49,
+                8
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                0,
+                8,
+                21,
+                19
+              ],
+              "art": [
+                949,
+                786,
+                1081,
+                871
+              ]
+            },
+            {
+              "native": [
+                21,
+                8,
+                25,
+                19
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                25,
+                8,
+                49,
+                19
+              ],
+              "art": [
+                1089,
+                816,
+                1233,
+                885
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 264,
+          "file": "CLOS-MAN.SS",
+          "file_sha256": "414b156c3e3d5e83acec340d8ee20cd22db0d0910263f23297d69f0f1386381a",
+          "ordinal": 12,
+          "size": [
+            44,
+            14
+          ],
+          "header_part1_offset": 192,
+          "data_part3_offset": 6518,
+          "encoded_length": 420,
+          "other_header_fields": [
+            237,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "23c73f9483619ba332981f335352616048bffbd8cd7b085370fea5e01ff7cc78",
+          "indexed_sha256": "400013d35c60caa3d6143b4a0a625ac3e3f0f14981194ae1b3da10369e595835",
+          "opaque_pixels": 364,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 264,
+          "asset": "closing-man.png",
+          "sample": [
+            32,
+            991,
+            300,
+            1175
+          ],
+          "content": [
+            0,
+            0,
+            44,
+            14
+          ],
+          "art_sha256": "f26fcbab6a85fa3e9db2315adc6835afa975a0c3818215fbd0cd31e99df11626",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "2623746b5a28a44348b20731acca17aa9a6f141fcbea88b5efd533ceb9353d57",
+          "palette_sha256": "90f6aa3c0c72a0e443750ddab5cdeac0665c2ea770e029006614621736ec064c",
+          "writes_sha256": "1a0649730f3756d7cede2fb68c662b3c662eb7f07dd9e5d62bc84c069fe8c7b4"
+        },
+        {
+          "research_id": 265,
+          "file": "CLOS-MAN.SS",
+          "file_sha256": "414b156c3e3d5e83acec340d8ee20cd22db0d0910263f23297d69f0f1386381a",
+          "ordinal": 13,
+          "size": [
+            41,
+            12
+          ],
+          "header_part1_offset": 208,
+          "data_part3_offset": 6938,
+          "encoded_length": 377,
+          "other_header_fields": [
+            237,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "225cf5e00b38354036fbefacb85b7b7cbec808c0f172841dbef40d16c1f2517f",
+          "indexed_sha256": "1c5b55a3b2e852345e8f9767288866646d2da9f20c352975fd480357e13c6db5",
+          "opaque_pixels": 339,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 265,
+          "asset": "closing-man.png",
+          "sample": [
+            22,
+            186,
+            295,
+            277
+          ],
+          "content": [
+            0,
+            0,
+            41,
+            12
+          ],
+          "art_sha256": "f26fcbab6a85fa3e9db2315adc6835afa975a0c3818215fbd0cd31e99df11626",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "b4ce4f953164553833d4199289af53146963c7dd320fb8b440d8f66d2ad3e389",
+          "palette_sha256": "cd4fae89a9b4d531122c5b97f4fcdec08a2e95cc00e43318aa607b5c132241ca",
+          "writes_sha256": "3dac359383567444cd418029330504b7eed3d1c4fb59e8a66f7c8e047fe7e7a1",
+          "identical_native_art_reuse": 252
+        }
+      ]
+    },
+    "closing-military-a.png": {
+      "sha256": "5bbc1d64d168560dd91aecf0f2d38a4277644a7cc20b1b684944c1a09fbcec94",
+      "bytes": 1019499,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: style-transfer. Create ONE fine pixel-art animation sprite atlas for Colonization HD ending. Image1 is the EXACT frame-by-frame pose and disconnected-component guide; Image2 is STYLE ONLY: fine crisp pixel clusters, restrained fabric and skin detail. Square transparent canvas, exactly FOUR equal columns and FOUR equal rows, all SIXTEEN cells occupied in source reading order. Every source group contains ONLY a small off-white/gray wig/back-of-head low on the LEFT and a brown hand in a dark navy-blue sleeve with pale cuff raising/lowering a large BLACK TRICORNE HAT with thin muted-gold trim. Repaint only these visible fragments, no face or full person. Preserve the original hat orientation, opening shape and trim, hand grip, sleeve angle, separate pale head shape, exact relative component sizes and spacing, and source crop in each of16 poses. The hat rotates from steep upright at upper right through broad horizontal overhead, then lowered diagonally across the pale head, then rises again. Keep every subtle source pose difference rather than substituting repeated generic hats. Fine pixel-art dark felt with subtle highlights, muted gold edge, navy wool folds, brown fingers and pale wig texture, consistent across frames. Keep detached head and arm/hat components separated by genuinely transparent space wherever the source separates them, no connecting lines or invented shoulders. Generous transparent margins inside each cell, no touching neighbors. Remove magenta background and black numeric labels entirely. No added body, face, hands, hats, people, text, numbers, grid, frame, scenery, blur, photography, 3D or smooth painting. Exactly4x4 with16 faithful waving-hat poses.",
+      "generation_file": "exec-230efc45-6ffe-481f-bd86-7d4202dbcc63.png",
+      "reference_sha256": "c2251d10f58821ca4babd6d5991762862c9b47044d7ad7ca798844e5720db566",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "column_row_boundaries": {
+        "0": [
+          0,
+          313,
+          627,
+          940,
+          1254
+        ],
+        "1": [
+          0,
+          313,
+          627,
+          940,
+          1254
+        ],
+        "2": [
+          0,
+          313,
+          627,
+          940,
+          1254
+        ],
+        "3": [
+          0,
+          313,
+          627,
+          940,
+          1254
+        ]
+      },
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw alpha and native source253 transparency retained",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "runtime_code_profile": {
+        "file": "CLOSING.EXE",
+        "sha256": "2d0f0fa9cb8256fda6c967f2821379d37ca5552b6d621f74115b532aa147fedc",
+        "draw_file_offset": 13764,
+        "draw_dosgolem_linear": 15556,
+        "copy_file_offsets": [
+          10418,
+          16819
+        ],
+        "copy_dosgolem_linear": [
+          12210,
+          18611
+        ]
+      },
+      "source_frames": [
+        {
+          "research_id": 266,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 0,
+          "size": [
+            92,
+            51
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 1234,
+          "other_header_fields": [
+            186,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "3ec919bd7181c59dcde24b38ecb8b25943ca90056289d5a41c4ac8fb2fa85908",
+          "indexed_sha256": "ef36297193e36f61443729a64dbfe85e3cbc2912b905548eeff7de4ee29972c1",
+          "opaque_pixels": 1356,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 266,
+          "asset": "closing-military-a.png",
+          "sample": [
+            26,
+            114,
+            297,
+            304
+          ],
+          "content": [
+            0,
+            0,
+            92,
+            51
+          ],
+          "art_sha256": "5bbc1d64d168560dd91aecf0f2d38a4277644a7cc20b1b684944c1a09fbcec94",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "515ca248e76ce6636034a207907ecf44e6609d09ea138a9f7f9c6f3714cc8809",
+          "palette_sha256": "71ac27b4b224733f19b2465dc92eb8f844b6fcbab9921633a344a56c54e770d9",
+          "writes_sha256": "27ad62cc20fbcaa84de86adc153dc9ca61d1b6386f30573b6468d77628992922",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                26,
+                31
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                26,
+                0,
+                52,
+                31
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                52,
+                0,
+                92,
+                31
+              ],
+              "art": [
+                174,
+                114,
+                297,
+                229
+              ]
+            },
+            {
+              "native": [
+                0,
+                31,
+                26,
+                51
+              ],
+              "art": [
+                26,
+                225,
+                134,
+                304
+              ]
+            },
+            {
+              "native": [
+                26,
+                31,
+                52,
+                51
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                52,
+                31,
+                92,
+                51
+              ],
+              "art": [
+                174,
+                229,
+                297,
+                303
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 267,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 1,
+          "size": [
+            85,
+            52
+          ],
+          "header_part1_offset": 16,
+          "data_part3_offset": 1234,
+          "encoded_length": 1232,
+          "other_header_fields": [
+            182,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "af84a0379918d2f89f0982ae49ca22bacc3a1ee872e62265c713d2fe7df80167",
+          "indexed_sha256": "b21da5e702f17b12537b6b310fd7a49d55119bf3864c912ffc2ba0dd5b56bc0e",
+          "opaque_pixels": 1335,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 267,
+          "asset": "closing-military-a.png",
+          "sample": [
+            340,
+            107,
+            614,
+            304
+          ],
+          "content": [
+            0,
+            0,
+            85,
+            52
+          ],
+          "art_sha256": "5bbc1d64d168560dd91aecf0f2d38a4277644a7cc20b1b684944c1a09fbcec94",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "efa3fba5e32186ba2038fe2dafe8bcacdf0787ccb53dff5e1cfc537eca4690a9",
+          "palette_sha256": "06e8f7a20a3405e58b262e8f71e35e7ddacfda78ae08a0caca893c6e1b0110b0",
+          "writes_sha256": "89e3c868d735273289252056c881745862836bdd72d4ff4e1b65e92696c31b02",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                26,
+                32
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                26,
+                0,
+                48,
+                32
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                48,
+                0,
+                85,
+                32
+              ],
+              "art": [
+                484,
+                107,
+                614,
+                228
+              ]
+            },
+            {
+              "native": [
+                0,
+                32,
+                26,
+                52
+              ],
+              "art": [
+                340,
+                225,
+                447,
+                304
+              ]
+            },
+            {
+              "native": [
+                26,
+                32,
+                48,
+                52
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                48,
+                32,
+                85,
+                52
+              ],
+              "art": [
+                484,
+                228,
+                614,
+                303
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 268,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 2,
+          "size": [
+            75,
+            53
+          ],
+          "header_part1_offset": 32,
+          "data_part3_offset": 2466,
+          "encoded_length": 1247,
+          "other_header_fields": [
+            177,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f221066fb1811720a98646fe53a517b4841f012122763452601b92b80f7e81a7",
+          "indexed_sha256": "368344550b8e1ca59f8c9fa276b7762a6806019b4323676d9418e01aed6d1137",
+          "opaque_pixels": 1357,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 268,
+          "asset": "closing-military-a.png",
+          "sample": [
+            654,
+            93,
+            923,
+            306
+          ],
+          "content": [
+            0,
+            0,
+            75,
+            53
+          ],
+          "art_sha256": "5bbc1d64d168560dd91aecf0f2d38a4277644a7cc20b1b684944c1a09fbcec94",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "076d7d66b7070e6c8234c4480a6d52b07c13b1495c8bdb5244b660a06f3295c3",
+          "palette_sha256": "a84ca3cea61a34d96ab3ce714b433276519a24880afea88fb1c69648dda8f502",
+          "writes_sha256": "b79f9a3e7915fe66e398e2a136cc1e17715f1eaae90096f033fa601b6fee728b",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                27,
+                33
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                27,
+                0,
+                33,
+                33
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                33,
+                0,
+                75,
+                33
+              ],
+              "art": [
+                763,
+                93,
+                923,
+                226
+              ]
+            },
+            {
+              "native": [
+                0,
+                33,
+                27,
+                53
+              ],
+              "art": [
+                654,
+                104,
+                763,
+                306
+              ]
+            },
+            {
+              "native": [
+                27,
+                33,
+                33,
+                53
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                33,
+                33,
+                75,
+                53
+              ],
+              "art": [
+                763,
+                226,
+                923,
+                306
+              ]
+            }
+          ]
+        },
+        {
+          "research_id": 269,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 3,
+          "size": [
+            62,
+            52
+          ],
+          "header_part1_offset": 48,
+          "data_part3_offset": 3713,
+          "encoded_length": 1194,
+          "other_header_fields": [
+            171,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "2fdf5127ae6657f79ded1cb1926693243d373b4213b4a80b7b791457385171a4",
+          "indexed_sha256": "a676730064924035a24aa27a1e5a2096c07d9e4e2dadea965bdf68552ec8fee3",
+          "opaque_pixels": 1400,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 269,
+          "asset": "closing-military-a.png",
+          "sample": [
+            972,
+            76,
+            1243,
+            309
+          ],
+          "content": [
+            0,
+            0,
+            62,
+            52
+          ],
+          "art_sha256": "5bbc1d64d168560dd91aecf0f2d38a4277644a7cc20b1b684944c1a09fbcec94",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "326eaa609ed124f9beae183b41231e2ac99314562473471d7c73836246b87dc0",
+          "palette_sha256": "3920a0684ee6a6ed950df57ce404cb719b647f4cc8686218806ec13dda2e13d4",
+          "writes_sha256": "823ad2e4b75db9e682307b1a4bd4b15be4f24e4b871666cbcc5e1d1bac5b7f68"
+        },
+        {
+          "research_id": 270,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 4,
+          "size": [
+            58,
+            49
+          ],
+          "header_part1_offset": 64,
+          "data_part3_offset": 4907,
+          "encoded_length": 1129,
+          "other_header_fields": [
+            168,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "7dcf7ecc6af71fd702f5ea0699cca0b740d47895153ed8af4731a0dccc3eef7d",
+          "indexed_sha256": "52f5223f08404f45aeeab20ad50f6c77a092d1c9214f56b9de27200d9b95b1f0",
+          "opaque_pixels": 1427,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 270,
+          "asset": "closing-military-a.png",
+          "sample": [
+            27,
+            397,
+            313,
+            624
+          ],
+          "content": [
+            0,
+            0,
+            58,
+            49
+          ],
+          "art_sha256": "5bbc1d64d168560dd91aecf0f2d38a4277644a7cc20b1b684944c1a09fbcec94",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "648b86b7b2e917888514e53ad202ed5e9da76a7ed64ccf5f04b45c513bc1100d",
+          "palette_sha256": "4c96456a5ac1e6f83c7684d5a85e092390ce4883c1bb0fe03320d624086eb304",
+          "writes_sha256": "42b7dbf43dd9d13b66013196dd0ee3a4f39186d109786ffe8a2f81e9ce1562d8"
+        },
+        {
+          "research_id": 271,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 5,
+          "size": [
+            61,
+            44
+          ],
+          "header_part1_offset": 80,
+          "data_part3_offset": 6036,
+          "encoded_length": 1211,
+          "other_header_fields": [
+            162,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "1f9dfcee9acb4b19083ddec672a3bb7e5e8f8c111d86999f14d6122b83a61c53",
+          "indexed_sha256": "92bb1df1740dc8f6cb18f88fd57debba27109096e85a0760b90017cecc424cf4",
+          "opaque_pixels": 1465,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 271,
+          "asset": "closing-military-a.png",
+          "sample": [
+            313,
+            408,
+            626,
+            624
+          ],
+          "content": [
+            0,
+            0,
+            61,
+            44
+          ],
+          "art_sha256": "5bbc1d64d168560dd91aecf0f2d38a4277644a7cc20b1b684944c1a09fbcec94",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "11889bf748fb68631b0ac8e4f9ef49a5a1fbdfae51b389935e1f81c420b473e3",
+          "palette_sha256": "657b0f79cc2b0d07d224b1a56f1aa30f9aa9f67034a4d415e839a12703c45afa",
+          "writes_sha256": "fe61607fc36bd5f6b5dd6575ee6d4de7ad898109debc82c1b5e75437d5c9addb"
+        },
+        {
+          "research_id": 272,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 6,
+          "size": [
+            63,
+            40
+          ],
+          "header_part1_offset": 96,
+          "data_part3_offset": 7247,
+          "encoded_length": 1358,
+          "other_header_fields": [
+            159,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "6e4eeec30e4194d6aa4072f7a6e4db57cd579d3ad02db513b9fc4c1dc8e763a0",
+          "indexed_sha256": "c35967f724a57390318aa06565d7d4312f2c094d859bf0d8bc0becb48efe5a41",
+          "opaque_pixels": 1528,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 272,
+          "asset": "closing-military-a.png",
+          "sample": [
+            658,
+            419,
+            938,
+            622
+          ],
+          "content": [
+            0,
+            0,
+            63,
+            40
+          ],
+          "art_sha256": "5bbc1d64d168560dd91aecf0f2d38a4277644a7cc20b1b684944c1a09fbcec94",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "a6d9bfa9051b252bce8ba3c72f4a94f0c52c83f20e91d70167c613b2773f3e3c",
+          "palette_sha256": "32bb2c96f7da3e9932ecc43e62cf59d0ce0c29deb50f310a9480bb676cfc9487",
+          "writes_sha256": "750db518cda604230f24a85727e11493934d134b552b0d7bdfeb8444c571c98d"
+        },
+        {
+          "research_id": 273,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 7,
+          "size": [
+            65,
+            38
+          ],
+          "header_part1_offset": 112,
+          "data_part3_offset": 8605,
+          "encoded_length": 1377,
+          "other_header_fields": [
+            154,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "c6c2ba28b6e1708cb2969d6d1b948e86e6a18bfa72ae941ea15148a29693a60d",
+          "indexed_sha256": "1c7c87f121d0466c990c53364e2f42e9fb1067542782891ec27e797366dc142d",
+          "opaque_pixels": 1548,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 273,
+          "asset": "closing-military-a.png",
+          "sample": [
+            961,
+            429,
+            1239,
+            617
+          ],
+          "content": [
+            0,
+            0,
+            65,
+            38
+          ],
+          "art_sha256": "5bbc1d64d168560dd91aecf0f2d38a4277644a7cc20b1b684944c1a09fbcec94",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "712e0fbfce9b8fa9cb3373bd750f778b8642ea0a0093d05dc20201410f4a6338",
+          "palette_sha256": "132695c3185215c47128919817f3a90496ef048a0fab45814bdcb91775b07c3c",
+          "writes_sha256": "dadc36407c607fb41a6bdf77730484b898269f51c7b1985e651546fda44599ef"
+        },
+        {
+          "research_id": 274,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 8,
+          "size": [
+            65,
+            35
+          ],
+          "header_part1_offset": 128,
+          "data_part3_offset": 9982,
+          "encoded_length": 1217,
+          "other_header_fields": [
+            151,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f9080d69cb0bb767f1e161a373abacf7191d66f0ee3e9e85f318b85ef906267f",
+          "indexed_sha256": "9998b26f8fd6163d97a9898ddf5897b2b02a6110cc1182134b1803f02fe9c34b",
+          "opaque_pixels": 1456,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 274,
+          "asset": "closing-military-a.png",
+          "sample": [
+            18,
+            744,
+            312,
+            906
+          ],
+          "content": [
+            0,
+            0,
+            65,
+            35
+          ],
+          "art_sha256": "5bbc1d64d168560dd91aecf0f2d38a4277644a7cc20b1b684944c1a09fbcec94",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "e48279c4c0eee2f02666c422044742f19eddf1fb6e77a1d0911d7cfa6e3e2df7",
+          "palette_sha256": "fd3b170fe60f13f003cc27c01c981ed70eee857b743bbb8895a3377171fd262c",
+          "writes_sha256": "202aa1db0f0326e0201aea22ed6f69ca78cbb1c7f2b7cfce906641a3818f5d12"
+        },
+        {
+          "research_id": 275,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 9,
+          "size": [
+            66,
+            33
+          ],
+          "header_part1_offset": 144,
+          "data_part3_offset": 11199,
+          "encoded_length": 1141,
+          "other_header_fields": [
+            150,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "e38f148669ccfc4d14f9e0fea2252a2364bae17f6d35fa4dd9adcb91d3e7eb72",
+          "indexed_sha256": "4c318ac5a4e774dbde23054f739c1c46a889bf0ec5685883cbf0676f861f5666",
+          "opaque_pixels": 1374,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 275,
+          "asset": "closing-military-a.png",
+          "sample": [
+            334,
+            744,
+            621,
+            902
+          ],
+          "content": [
+            0,
+            0,
+            66,
+            33
+          ],
+          "art_sha256": "5bbc1d64d168560dd91aecf0f2d38a4277644a7cc20b1b684944c1a09fbcec94",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "6081149db37bebe8480abdab4c935c5022817879395073e5f975ded65894ad62",
+          "palette_sha256": "4c3dce22d94c411c6f51ba8770f71e6f5332c341d56b9323548c2a2ec05c7d38",
+          "writes_sha256": "1fcd5a5494d54d82d6f5f28fea43e6527914acee6b078bb954d56d15f38a3745"
+        },
+        {
+          "research_id": 276,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 10,
+          "size": [
+            66,
+            32
+          ],
+          "header_part1_offset": 160,
+          "data_part3_offset": 12340,
+          "encoded_length": 1100,
+          "other_header_fields": [
+            149,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "619129923d1ff5ec0de619c3cc21dcc668c12420c751b7be6487c7ef37dbe9f7",
+          "indexed_sha256": "94111d6faed53e97e10f487f5f8e3b0e4f4b56af991e6445a197e657672fbd0f",
+          "opaque_pixels": 1341,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 276,
+          "asset": "closing-military-a.png",
+          "sample": [
+            641,
+            746,
+            930,
+            900
+          ],
+          "content": [
+            0,
+            0,
+            66,
+            32
+          ],
+          "art_sha256": "5bbc1d64d168560dd91aecf0f2d38a4277644a7cc20b1b684944c1a09fbcec94",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "ffbacd1e7540f1b1e3e1e098d2ae6dd8411f5a7293a9c2ebcb64a770b08dd183",
+          "palette_sha256": "8b80847d73c1888a9f7e8f260dfaffedba0b1e1828f16b297a57d305596caa04",
+          "writes_sha256": "07fb85af114670c0524bfd8412c11becee4e90e759457d55a32a1702627474c5"
+        },
+        {
+          "research_id": 277,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 11,
+          "size": [
+            66,
+            33
+          ],
+          "header_part1_offset": 176,
+          "data_part3_offset": 13440,
+          "encoded_length": 1146,
+          "other_header_fields": [
+            150,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "519098a088e0904aa496d0451d3826f0590db48afb431f7aef4acd8d4d3565c1",
+          "indexed_sha256": "297721dfd3d4345afe0a547fd660509be562d7fb56a3395856b3e13cf03e1c84",
+          "opaque_pixels": 1393,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 277,
+          "asset": "closing-military-a.png",
+          "sample": [
+            951,
+            740,
+            1240,
+            901
+          ],
+          "content": [
+            0,
+            0,
+            66,
+            33
+          ],
+          "art_sha256": "5bbc1d64d168560dd91aecf0f2d38a4277644a7cc20b1b684944c1a09fbcec94",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "d3e7b95aa7a02b0fb3a8920c1fa887227225aa95105e02b026d014b8504d384a",
+          "palette_sha256": "6616dabd5b06207ef6245ace4215b3d8f05b2c7e362298a06fd55dd4332c6707",
+          "writes_sha256": "31a9a27d477c6ff9b592ed58ba78f161dddbc61aa09b123f2c3f26b755ec47e9"
+        },
+        {
+          "research_id": 278,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 12,
+          "size": [
+            66,
+            36
+          ],
+          "header_part1_offset": 192,
+          "data_part3_offset": 14586,
+          "encoded_length": 1255,
+          "other_header_fields": [
+            152,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ef724bac6489bbbecddd84ad6a497a912919364107d1c2b45a996d5be8424014",
+          "indexed_sha256": "d20f99a56638dc661ea90217382179144eeebac6051359bc0eaa5c4e4f345038",
+          "opaque_pixels": 1492,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 278,
+          "asset": "closing-military-a.png",
+          "sample": [
+            26,
+            1032,
+            309,
+            1199
+          ],
+          "content": [
+            0,
+            0,
+            66,
+            36
+          ],
+          "art_sha256": "5bbc1d64d168560dd91aecf0f2d38a4277644a7cc20b1b684944c1a09fbcec94",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "a99921bac6ca4b966f109c681a8a50334f19a8a401536e995893a60131e42b48",
+          "palette_sha256": "e2085797d3149c28fa04b9c126b7c98c011d09ae11cdc90d8850be062e175fe5",
+          "writes_sha256": "0fe789c8ae6f1358ed148349095925e1e8ed6152bf5bbe0d43f14913ed5c48da"
+        },
+        {
+          "research_id": 279,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 13,
+          "size": [
+            65,
+            39
+          ],
+          "header_part1_offset": 208,
+          "data_part3_offset": 15841,
+          "encoded_length": 1387,
+          "other_header_fields": [
+            155,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "e563994f71491b1a88127474866d1d6d246cdbd5e6fe50723bb87599eb2d8775",
+          "indexed_sha256": "69475dd9077896d5ef804c980d9717f66993cc5cda2c97219a7774ed9aae121f",
+          "opaque_pixels": 1531,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 279,
+          "asset": "closing-military-a.png",
+          "sample": [
+            340,
+            1024,
+            627,
+            1201
+          ],
+          "content": [
+            0,
+            0,
+            65,
+            39
+          ],
+          "art_sha256": "5bbc1d64d168560dd91aecf0f2d38a4277644a7cc20b1b684944c1a09fbcec94",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "21d6afbae63d5eac824b746c6ffd58dfe9d9581ec17b5a2d41b0ed32032ea84c",
+          "palette_sha256": "63eee50a189db08754c87e57c70b24e20386b704f3bb0bbfe8041ea72e3ffc1a",
+          "writes_sha256": "6dc0ee776c5ee9f7fe0f26322e63afcf3ffdb72001c425bc6b2d48d38a03e56e"
+        },
+        {
+          "research_id": 280,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 14,
+          "size": [
+            61,
+            42
+          ],
+          "header_part1_offset": 224,
+          "data_part3_offset": 17228,
+          "encoded_length": 1320,
+          "other_header_fields": [
+            160,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "749385c3054796c2944780992cf61cc0521461bc6dc00fd7132cc436bf016069",
+          "indexed_sha256": "2ae98af83a1a7cf434732c314ce0d8bd84b79a06ed0a2caab3c1ab19d4ad920f",
+          "opaque_pixels": 1490,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 280,
+          "asset": "closing-military-a.png",
+          "sample": [
+            627,
+            1012,
+            939,
+            1205
+          ],
+          "content": [
+            0,
+            0,
+            61,
+            42
+          ],
+          "art_sha256": "5bbc1d64d168560dd91aecf0f2d38a4277644a7cc20b1b684944c1a09fbcec94",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "c2d687584eff56c18717b22a9a670b9bac11f7a6771a3061b10b706861f04629",
+          "palette_sha256": "31b9e93b3ba05745b86da1d8f2da87e29111cf478aa2fb0fdb36fe16f9d3df1e",
+          "writes_sha256": "4ae03f6ea0e54eeb38a0a94d5a125dc580911582a32c4f3d7e40cb81968531b2"
+        },
+        {
+          "research_id": 281,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 15,
+          "size": [
+            62,
+            46
+          ],
+          "header_part1_offset": 240,
+          "data_part3_offset": 18548,
+          "encoded_length": 1148,
+          "other_header_fields": [
+            166,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "6a6c0c1f91f97762002d916e11ad5917eb13cb47731066b5f696314da6513f90",
+          "indexed_sha256": "76c22cf3e5777139db6bab7c5a9d27304142838bb52b8cd8303b3cda6e229734",
+          "opaque_pixels": 1429,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 281,
+          "asset": "closing-military-a.png",
+          "sample": [
+            959,
+            999,
+            1239,
+            1205
+          ],
+          "content": [
+            0,
+            0,
+            62,
+            46
+          ],
+          "art_sha256": "5bbc1d64d168560dd91aecf0f2d38a4277644a7cc20b1b684944c1a09fbcec94",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "8fecb479f4271a775fbb55b98cf3e8b5900d45d23050f4b54399a48bf2c4d510",
+          "palette_sha256": "d4bd19f690324754e29c363449712320d884a64328e8fb6c7fee0c2dee75fabb",
+          "writes_sha256": "438e2b2eb008be73e39d91cb3d359758fd852b025e2e338ecc872f76ebaa95e8"
+        },
+        {
+          "research_id": 285,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 19,
+          "size": [
+            92,
+            51
+          ],
+          "header_part1_offset": 304,
+          "data_part3_offset": 23302,
+          "encoded_length": 1234,
+          "other_header_fields": [
+            186,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "3ec919bd7181c59dcde24b38ecb8b25943ca90056289d5a41c4ac8fb2fa85908",
+          "indexed_sha256": "ef36297193e36f61443729a64dbfe85e3cbc2912b905548eeff7de4ee29972c1",
+          "opaque_pixels": 1356,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 285,
+          "asset": "closing-military-a.png",
+          "sample": [
+            26,
+            114,
+            297,
+            304
+          ],
+          "content": [
+            0,
+            0,
+            92,
+            51
+          ],
+          "art_sha256": "5bbc1d64d168560dd91aecf0f2d38a4277644a7cc20b1b684944c1a09fbcec94",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "515ca248e76ce6636034a207907ecf44e6609d09ea138a9f7f9c6f3714cc8809",
+          "palette_sha256": "71ac27b4b224733f19b2465dc92eb8f844b6fcbab9921633a344a56c54e770d9",
+          "writes_sha256": "27ad62cc20fbcaa84de86adc153dc9ca61d1b6386f30573b6468d77628992922",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                26,
+                31
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                26,
+                0,
+                52,
+                31
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                52,
+                0,
+                92,
+                31
+              ],
+              "art": [
+                174,
+                114,
+                297,
+                229
+              ]
+            },
+            {
+              "native": [
+                0,
+                31,
+                26,
+                51
+              ],
+              "art": [
+                26,
+                225,
+                134,
+                304
+              ]
+            },
+            {
+              "native": [
+                26,
+                31,
+                52,
+                51
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                52,
+                31,
+                92,
+                51
+              ],
+              "art": [
+                174,
+                229,
+                297,
+                303
+              ]
+            }
+          ],
+          "identical_native_art_reuse": 266
+        }
+      ]
+    },
+    "closing-military-b.png": {
+      "sha256": "396f7c8d70205b4481ab423e6626fb4de3fb13954a20ddf5fd466fc6a4e8a27f",
+      "bytes": 290731,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Use case: style-transfer. Create ONE fine pixel-art animation atlas for Colonization HD ending. Image1 is the EXACT four pose and component-placement reference; Image2 is STYLE ONLY, refined crisp pixel clusters and restrained cloth material shading. Square transparent canvas, exactly FOUR equal columns and FOUR equal rows; FIRST FOUR cells in the top row occupied only, remaining12 cells fully transparent. Each source group contains ONLY a small off-white/gray wig/back-of-head at lower LEFT and a brown hand in a dark navy sleeve with pale cuff raising a black TRICORNE HAT with thin muted-gold edge at RIGHT. No face or full person. Preserve Image1's exact four sequential hat rotations and arm angles, separate pale head shape, proportions, crop, relative spacing and disconnected pieces. Cell1 hat nearly horizontal sloping upward left over the raised right sleeve; cell2 hat angled more steeply downward right; cell3 hat steeply upright and arm more lowered; cell4 hat almost vertical held by the lowered right forearm, exactly as source. No connecting lines between detached head and arm. Fine dark felt, muted gold trim, navy wool folds, brown finger detail and pale wig texture, fresh coherent fine pixel clusters, no coarse dithering. Generous transparent margins and gaps, all visible parts opaque inside silhouettes. Remove magenta and black reference labels completely. No new head, face, body, shoulder, hand, hat, people, scene, text, number, border, grid, frame, blur, photography, 3D or smooth painting. Exactly4x4 first4 cells occupied only,12 empty.",
+      "generation_file": "exec-cbdbe7e9-ea2e-456d-b35c-6a2a6fec8a64.png",
+      "reference_sha256": "08eb71bbf5c635dc52cd87f3dc0c955a6dd6401b6cebff6c28387157fc21cb33",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "column_row_boundaries": {
+        "0": [
+          0,
+          281,
+          627,
+          940,
+          1254
+        ],
+        "1": [
+          0,
+          278,
+          627,
+          940,
+          1254
+        ],
+        "2": [
+          0,
+          278,
+          627,
+          940,
+          1254
+        ],
+        "3": [
+          0,
+          278,
+          627,
+          940,
+          1254
+        ]
+      },
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw alpha and native source253 transparency retained",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "runtime_code_profile": {
+        "file": "CLOSING.EXE",
+        "sha256": "2d0f0fa9cb8256fda6c967f2821379d37ca5552b6d621f74115b532aa147fedc",
+        "draw_file_offset": 13764,
+        "draw_dosgolem_linear": 15556,
+        "copy_file_offsets": [
+          10418,
+          16819
+        ],
+        "copy_dosgolem_linear": [
+          12210,
+          18611
+        ]
+      },
+      "source_frames": [
+        {
+          "research_id": 282,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 16,
+          "size": [
+            60,
+            51
+          ],
+          "header_part1_offset": 256,
+          "data_part3_offset": 19696,
+          "encoded_length": 1137,
+          "other_header_fields": [
+            170,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "9d913ee4d99c3b56304dc5e19925786d8387974522ae5942690bf06e46e58ce2",
+          "indexed_sha256": "dc7a38a0ac085be4aa1a403c9d7e315c943904bbd0649b3f3558446b52854e5d",
+          "opaque_pixels": 1366,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 282,
+          "asset": "closing-military-b.png",
+          "sample": [
+            52,
+            96,
+            310,
+            281
+          ],
+          "content": [
+            0,
+            0,
+            60,
+            51
+          ],
+          "art_sha256": "396f7c8d70205b4481ab423e6626fb4de3fb13954a20ddf5fd466fc6a4e8a27f",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "19d60ca49083ad4893020c99208c157b4888109eecda2769ad0816ed9e9a6ae4",
+          "palette_sha256": "62bdc3bdae354fd9559beb57a147d396313cbffe1489c809634f8fd65b9852f7",
+          "writes_sha256": "1e084ae032e288ca6162454c18d1b79810db1a4bfc715e22316dac74b78c8af0"
+        },
+        {
+          "research_id": 283,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 17,
+          "size": [
+            70,
+            53
+          ],
+          "header_part1_offset": 272,
+          "data_part3_offset": 20833,
+          "encoded_length": 1241,
+          "other_header_fields": [
+            175,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ffdef6d47411c39b23f7a49db50e6f43c572231a61780b3eac986082d1f6d46a",
+          "indexed_sha256": "ca4b9a17160f9eb5026fa8843b9b0a502fbb7be91c50e50493255110adc798d1",
+          "opaque_pixels": 1361,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 283,
+          "asset": "closing-military-b.png",
+          "sample": [
+            392,
+            95,
+            621,
+            278
+          ],
+          "content": [
+            0,
+            0,
+            70,
+            53
+          ],
+          "art_sha256": "396f7c8d70205b4481ab423e6626fb4de3fb13954a20ddf5fd466fc6a4e8a27f",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "89267c9ade6330df44785a734e432431cc7652c6d0aa382fbf26864f4d3989ff",
+          "palette_sha256": "8d547396df99e5000e4dcf361c896b8525cb80a64a2d63cd7882ae53a5729b4b",
+          "writes_sha256": "9c398311e06517ced4157e1f272e966d0bf221f30f477ffdd50c6d39d7421d64"
+        },
+        {
+          "research_id": 284,
+          "file": "CLOS-MIL.SS",
+          "file_sha256": "163fb8c81c71cb524e61b3a9b5a589ddf1033fe2eaa7ca005ab861c4cfc10f57",
+          "ordinal": 18,
+          "size": [
+            85,
+            52
+          ],
+          "header_part1_offset": 288,
+          "data_part3_offset": 22074,
+          "encoded_length": 1228,
+          "other_header_fields": [
+            182,
+            199
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "b80eba110a1077d9a7112f797db191f3cb1fbbbc2938b59274ab9cedfa500554",
+          "indexed_sha256": "c9478cba9700ce8a1f227064cbd35fa577866697705cb9ecf41238d605712763",
+          "opaque_pixels": 1338,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 284,
+          "asset": "closing-military-b.png",
+          "sample": [
+            685,
+            122,
+            940,
+            278
+          ],
+          "content": [
+            0,
+            0,
+            85,
+            52
+          ],
+          "art_sha256": "396f7c8d70205b4481ab423e6626fb4de3fb13954a20ddf5fd466fc6a4e8a27f",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "bfb487c99e56ec85fd0b6dc2c514a326d77abeae7a585c3de6840d7c31277b7c",
+          "palette_sha256": "155797f465bd3293a3365714904fc039c28c894fd1fd2f5bdbdc6249516ec961",
+          "writes_sha256": "ebcf38183d11e3bf73775acefe17e3918fc26f0c02d7598a8a569f21e3efca57",
+          "regions": [
+            {
+              "native": [
+                0,
+                0,
+                27,
+                32
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                27,
+                0,
+                47,
+                32
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                47,
+                0,
+                85,
+                32
+              ],
+              "art": [
+                809,
+                122,
+                940,
+                218
+              ]
+            },
+            {
+              "native": [
+                0,
+                32,
+                27,
+                52
+              ],
+              "art": [
+                685,
+                268,
+                745,
+                278
+              ]
+            },
+            {
+              "native": [
+                27,
+                32,
+                47,
+                52
+              ],
+              "art": [
+                0,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "native": [
+                47,
+                32,
+                85,
+                52
+              ],
+              "art": [
+                809,
+                218,
+                940,
+                278
+              ]
+            }
+          ]
+        }
+      ]
     }
   }
 }
