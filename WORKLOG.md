@@ -7528,3 +7528,14 @@ timeout 180 docker run --rm --network none --user 1000:1000 \
 - 清理先核對387份臨時素材副本與保留原圖相同後移除，另無損封存五個舊程式，回收484904960 bytes，約0.45GiB。現行r3、原PNG、畫面與測試紀錄保持；還原沿tools/evidence_storage.py，收據r134-cleanup-r1.json。
 - 本機入口為既有hd-opening-animation-sources-r84/r134-mpsname-display-close-final.json，SHA-256為6e665c0465a112ee27501d6bb159685d4ec9dc7143cfe17d187dd97500b74481。其他入口為r134-ready-review-r1.json、r134-formal-display-review-r3.json、r134-packaging-r1.json及r134-final-native-partition-r1.json；準備、建置、測試與收尾腳本在同根r134-*-source-r*.py。Docker、原版未追蹤與擁有權於最終交接核對。
 - 最終交接r134-final-handoff-r1.json的SHA-256為65ebe6561ea1f431cdbbfe49d50a3e344c981260e6f184a8316713b450d67a33。13188個保持原樣的保護檔案完整SHA相同，原385張生成PNG、328語言資源及32張README實拍保持；核對時實占38969245696 bytes，約36.29GiB。沒有root-owned產物、錯誤.md目錄或封存暫存檔；專案容器全已移除，原版／存檔／研究輸入未追蹤，git diff --check通過。
+
+## 2026-10-21 R136 優先清理工作空間
+
+- 依使用者要求先清理workspace。查核路由後，清理沒有專用列，載入文件職責入口，沿用既有工作根與tools/evidence_storage.py。盤點、封存、還原與驗證均在既有Docker image內以UID／GID 1000執行，停用網路並設定CPU、記憶體、PID與時間上限。
+- 封存工具新增.memory、.stage、.canvas與.wav副檔名，沿用原有大小及完整SHA-256往返核對、原子發布與最後移除原件的流程。本批只選取目前工作根之外、單一硬連結且未鎖定的歷史觀測，共1082檔，包含802個記憶體快照、115個WAV、152個JSON與13個JSONL，回收1055969280 bytes。所有內容仍可由原路徑加.gz及.gz.meta.json還原。
+- 實際選一個記憶體快照還原到原路徑，核對內容、模式及時間後重新封存，壓縮指紋相同。第一次清冊輸出因正式路徑為唯讀而停止，未執行清理；改用既有reports可寫掛載後重跑。第一版封存腳本未納入還原會更換inode，在完成一個WAV後停止；第二版先核對該WAV與已還原快照的內容、模式及時間，再接續清單，其餘來源檢查保持。
+- 專用Go image執行go clean -cache，回收376635392 bytes，來源與已下載依賴保持。兩項操作合計回收1432604672 bytes，約1.33GiB；扣除新增清冊等輸出後，工作樹依唯一inode配置容量由39023149056降至37602762752 bytes，淨減1420386304 bytes，約1.32GiB，核對時約35.02GiB。檔案系統可用128941031424 bytes，約120.09GiB，與其他專案共用。
+- 47353個當次保護檔案的大小及完整SHA-256相同，含原版輸入、全部存檔、386張正式HD原PNG、328個語言資源、交付包、現用正式程式及R135完整工作根。1082個壓縮檔再次完整解壓核對原始SHA，壓縮指紋與清冊均相符。R127原始stdout既存遺失仍依歷史限制記錄，本輪未聲稱恢復。
+- R135隔離原型已通過452張來源顯示及453個含子項零skip；目前仍為DRAFT，正式接線與來源數保持R134。本次清理未更動該未提交規格、原型、圖像或fixture，未增加HD、完整五語、影片或發行驗收。README32張實拍及已發布版本保持。
+- 最終入口為[r136-cleanup-final-r1.json](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r136-cleanup-final-r1.json)，SHA-256為6a88afcc75793e54238c564482745b5ba1b059dd479da3255466f9aa5ec08a12。同根保存r136-cleanup-plan-r1.json、計畫／封存／核對腳本、逐檔封存清單、快取清理與實際還原收據。重用舊證據時，在非root Docker內執行python3 tools/evidence_storage.py restore <原始路徑或目錄>；完整掛載命令沿用本檔R123紀錄。
+- 核對時無root-owned產物、誤建.md目錄或封存暫存檔。一次性清理容器均自動移除；其他專案容器與映像保持。Git僅提交清理工具及本次交接紀錄，R135規格修改保留待接續；原版輸入、存檔與研究輸出未追蹤，Issue與Release保持。

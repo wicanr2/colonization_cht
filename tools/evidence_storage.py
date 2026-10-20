@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""在Docker內壓縮／還原workplace/reports歷史紀錄及舊ELF，核對原始內容SHA-256。
+"""在Docker內壓縮／還原workplace/reports歷史紀錄、快照、WAV及舊ELF，核對原始內容SHA-256。
 
 還原單檔：python3 tools/evidence_storage.py restore workplace/reports/.../gui.json
 列出封存：python3 tools/evidence_storage.py list workplace/reports
@@ -16,7 +16,7 @@ import stat
 
 
 ROOT = Path(__file__).resolve().parents[1] / "workplace/reports"
-EXTENSIONS = {".json", ".jsonl", ".owners"}
+EXTENSIONS = {".json", ".jsonl", ".owners", ".memory", ".stage", ".canvas", ".wav"}
 PROGRAM_EXTENSIONS = {"", ".test"}
 BLOCK = 1024 * 1024
 
