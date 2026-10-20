@@ -1,12 +1,12 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-20",
-  "code_commit": "e9d59bffcbe9744a3105815b544c06e683301b7d",
-  "binary_sha256": "970366ee3d396991e97d76edeb771cbe4f973ecc398e54b220ff484be5532d3d",
-  "formal_binary_sha256": "970366ee3d396991e97d76edeb771cbe4f973ecc398e54b220ff484be5532d3d",
-  "source_build_sha256": "b65c01dacae98239bf4f681fd0181204d40845bd80b2f2c17e4197cae0dae721",
+  "code_commit": "1006526cde72204f7f4e2881c89f266ad5a63285",
+  "binary_sha256": "d75e56956c2d28c7c23b689cb06b393cbe760fccbb4b8e1319a1a72d99ed01e2",
+  "formal_binary_sha256": "d75e56956c2d28c7c23b689cb06b393cbe760fccbb4b8e1319a1a72d99ed01e2",
+  "source_build_sha256": "99a0ba952642d34b2139226e35e38fd4be73f699ae7087f3c9ade0576f83b3fe",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 382,
+  "formal_hd_assets": 385,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -924,7 +924,7 @@
     },
     {
       "file": "hd-landfall-figure-zh.png",
-      "sha256": "b6b1b390d9475cd360c31379a51254240ae837c129271a258c3d54fdc38571e7",
+      "sha256": "1bb3986fbe78c190160abbcf3ce606b1f57e9715e254773679f211f3c1b90c83",
       "size": [
         1280,
         800
@@ -932,30 +932,29 @@
       "scene": "landfall-dialogue-figure",
       "language": "zh-Hant",
       "graphics": "hd",
-      "step": 52000000,
-      "code_commit": "73b5825",
-      "binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
-      "formal_binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
-      "formal_hd_assets": 316,
-      "source_conformed_assets": 313,
-      "source_receipt": "workplace/reports/goal186-display-hd/hd-dialog-figures-r98/r98-mss-formal-gui-r1/gui.display-014.png",
-      "source_state_check_sha256": "7965a4e21178de7da10a660719350ecbe7c27179bc21c19ba217510e229431ea",
-      "independent_pixels_sha256": "90dec453fcee73f1176bd69d2113f8342d7fd46bd48f959a5d1922cdf7566b58",
-      "source_gui_check_sha256": "90dec453fcee73f1176bd69d2113f8342d7fd46bd48f959a5d1922cdf7566b58",
-      "source_replay_check_sha256": "9e51e8603bb1d3ab0c4a5f291d9fae63e3e99764b7eca6f96d00c7c64583d000",
-      "source_build_sha256": "cc02d66abf153ec8dc77b87404480daceb520a66ec6a67452f0418209ec67fe0",
-      "graphics_manifest_sha256": "b2cff76717ebcd1bbdc9568a9c9a7dc3107edb945fc5511791dd08bea41bd10e",
-      "source_index_sha256": "1931011aa41977591fdbcaff865a59375b296a379cbb0f7171ba771df26bc252",
-      "source_kind": "正式視窗原樣實拍；新人物全部可見RGBA及完整X11已核對",
+      "step": 80000000,
+      "code_commit": "1006526cde72204f7f4e2881c89f266ad5a63285",
+      "binary_sha256": "d75e56956c2d28c7c23b689cb06b393cbe760fccbb4b8e1319a1a72d99ed01e2",
+      "formal_binary_sha256": "d75e56956c2d28c7c23b689cb06b393cbe760fccbb4b8e1319a1a72d99ed01e2",
+      "formal_hd_assets": 385,
+      "hd_source_bindings": 986,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r127-landfall-war-gui-r1/gui.display-022.png",
+      "source_state_check_sha256": "b65199a33cb015c8e2beccf9689957fc4536fed6e19758bae6d47a6a713c4718",
+      "source_gui_check_sha256": "86136be6955ae0bb337e31c4aa999ef58bd02b4bea5361e4657d2f6d113d825a",
+      "source_replay_check_sha256": "b65199a33cb015c8e2beccf9689957fc4536fed6e19758bae6d47a6a713c4718",
+      "source_build_sha256": "99a0ba952642d34b2139226e35e38fd4be73f699ae7087f3c9ade0576f83b3fe",
+      "graphics_manifest_sha256": "08dee0acbd6966e56248f4622b7acbe27376a4253432a26e1a4b6d1763543fbe",
+      "source_kind": "正式正常視窗畫布原PNG；與完整X11遊戲區RGBA核對相同",
       "capture_pixels_unchanged": true,
       "spec_state": "CONFORMED",
-      "conformance_sha256": "c42e6ff24fd4b1811cdcfb0fbbd23dc348fe6f6505a9711c44bdb8d5e5ca5df7",
+      "text_conformance_sha256": "a0cbd64632b60c48bd46aff6e89894f306ae1f6ac1ab8071b34969e64a320d32",
+      "inherited_figure_conformance_sha256": "c42e6ff24fd4b1811cdcfb0fbbd23dc348fe6f6505a9711c44bdb8d5e5ca5df7",
       "verified_counts": {
-        "independent_new_component_RGBA_pixels": 94560,
-        "independent_full_world_RGBA_pixels": 0,
-        "X11_RGBA_pixels": 1024000
+        "X11_RGBA_pixels": 1024000,
+        "opaque_noto_body_pixels": 2546,
+        "new_HD_source_credit": 0
       },
-      "scope": "僅MSS3 Main人物限定CONFORMED，五語兩模式、四語游標往返、正常關頁及三側完整狀態／WAV／存檔通過。既有世界層保留原驗收；其他人物與全量HD未完成。"
+      "scope": "本圖為繁中HD正式正常登陸確認；人物沿MSS3既有限定CONFORMED，R127只修正正文與完整選項的來源限定。四語兩模式、懸停、正常關框及當次原生狀態另見本輪收據，不增加HD來源或全量完成信用。"
     },
     {
       "file": "hd-tutorial-figure-zh.png",
@@ -1230,8 +1229,8 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "只更新士兵教學當次繁中HD原PNG，四行狀態欄沿原版位置與人物遮擋。其他31張與三張金色事件來源保持；R121實拍保存在previous_soldier_r121_capture，其他歷史指紋保持。",
-  "graphics_manifest_sha256": "b3fb4721b99d7157ac7bacced416b226c1232342350d6c56ad983b5f445232db",
+  "provenance_scope": "每張圖以captures各自的code_commit、binary_sha256及source_receipt為準；本次只更換登陸圖，其餘31張沿原收據。",
+  "graphics_manifest_sha256": "08dee0acbd6966e56248f4622b7acbe27376a4253432a26e1a4b6d1763543fbe",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -1281,7 +1280,7 @@
     "graphics_manifest_sha256": "c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7",
     "conformance_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5"
   },
-  "verification_build_sha256": "cd6874ef37da1d69e84b3788d0ecbef24940cfc79e2be478b3ce8c073936fd44",
+  "verification_build_sha256": "d75e56956c2d28c7c23b689cb06b393cbe760fccbb4b8e1319a1a72d99ed01e2",
   "production_go_sources_equal_to_verified_build": true,
   "previous_scene_background_capture": {
     "code_commit": "dbfc95fc2b98654f9f4cf3d0abac946730bfbfce",
@@ -1423,7 +1422,7 @@
     },
     "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb"
   },
-  "conformance_state": "R122四語狀態欄與人物前景合成限定CONFORMED；其他31張圖片沿各自來源範圍",
+  "conformance_state": "R127登陸正文限定CONFORMED；各圖仍以自身來源與範圍為準。",
   "previous_opening_sun_capture": {
     "capture": {
       "file": "hd-opening-zh.png",
@@ -1933,5 +1932,52 @@
     "verification_build_sha256": "7a071d651700c776807978abd39ee21e2fd93171bae0bf6baabdd978f60ee0e9",
     "conformance_state": "R121士兵教學期間四語選單與正文限定CONFORMED；其他31張圖片沿各自來源範圍",
     "provenance_scope": "只更新士兵教學當次原PNG，頂列與正文均為繁中。其他31張與三張金色事件來源保持；R120正文實拍保存在previous_soldier_r120_capture，更早英文正文與其他歷史指紋保持。"
+  },
+  "previous_landfall_r98_capture": {
+    "file": "hd-landfall-figure-zh.png",
+    "sha256": "b6b1b390d9475cd360c31379a51254240ae837c129271a258c3d54fdc38571e7",
+    "size": [
+      1280,
+      800
+    ],
+    "scene": "landfall-dialogue-figure",
+    "language": "zh-Hant",
+    "graphics": "hd",
+    "step": 52000000,
+    "code_commit": "73b5825",
+    "binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
+    "formal_binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
+    "formal_hd_assets": 316,
+    "source_conformed_assets": 313,
+    "source_receipt": "workplace/reports/goal186-display-hd/hd-dialog-figures-r98/r98-mss-formal-gui-r1/gui.display-014.png",
+    "source_state_check_sha256": "7965a4e21178de7da10a660719350ecbe7c27179bc21c19ba217510e229431ea",
+    "independent_pixels_sha256": "90dec453fcee73f1176bd69d2113f8342d7fd46bd48f959a5d1922cdf7566b58",
+    "source_gui_check_sha256": "90dec453fcee73f1176bd69d2113f8342d7fd46bd48f959a5d1922cdf7566b58",
+    "source_replay_check_sha256": "9e51e8603bb1d3ab0c4a5f291d9fae63e3e99764b7eca6f96d00c7c64583d000",
+    "source_build_sha256": "cc02d66abf153ec8dc77b87404480daceb520a66ec6a67452f0418209ec67fe0",
+    "graphics_manifest_sha256": "b2cff76717ebcd1bbdc9568a9c9a7dc3107edb945fc5511791dd08bea41bd10e",
+    "source_index_sha256": "1931011aa41977591fdbcaff865a59375b296a379cbb0f7171ba771df26bc252",
+    "source_kind": "正式視窗原樣實拍；新人物全部可見RGBA及完整X11已核對",
+    "capture_pixels_unchanged": true,
+    "spec_state": "CONFORMED",
+    "conformance_sha256": "c42e6ff24fd4b1811cdcfb0fbbd23dc348fe6f6505a9711c44bdb8d5e5ca5df7",
+    "verified_counts": {
+      "independent_new_component_RGBA_pixels": 94560,
+      "independent_full_world_RGBA_pixels": 0,
+      "X11_RGBA_pixels": 1024000
+    },
+    "scope": "僅MSS3 Main人物限定CONFORMED，五語兩模式、四語游標往返、正常關頁及三側完整狀態／WAV／存檔通過。既有世界層保留原驗收；其他人物與全量HD未完成。"
+  },
+  "previous_landfall_r98_header": {
+    "date": "2026-10-20",
+    "code_commit": "e9d59bffcbe9744a3105815b544c06e683301b7d",
+    "binary_sha256": "970366ee3d396991e97d76edeb771cbe4f973ecc398e54b220ff484be5532d3d",
+    "formal_binary_sha256": "970366ee3d396991e97d76edeb771cbe4f973ecc398e54b220ff484be5532d3d",
+    "source_build_sha256": "b65c01dacae98239bf4f681fd0181204d40845bd80b2f2c17e4197cae0dae721",
+    "formal_hd_assets": 382,
+    "graphics_manifest_sha256": "b3fb4721b99d7157ac7bacced416b226c1232342350d6c56ad983b5f445232db",
+    "verification_build_sha256": "cd6874ef37da1d69e84b3788d0ecbef24940cfc79e2be478b3ce8c073936fd44",
+    "conformance_state": "R122四語狀態欄與人物前景合成限定CONFORMED；其他31張圖片沿各自來源範圍",
+    "provenance_scope": "只更新士兵教學當次繁中HD原PNG，四行狀態欄沿原版位置與人物遮擋。其他31張與三張金色事件來源保持；R121實拍保存在previous_soldier_r121_capture，其他歷史指紋保持。"
   }
 }

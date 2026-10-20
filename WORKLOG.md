@@ -7459,3 +7459,17 @@ timeout 180 docker run --rm --network none --user 1000:1000 \
 - 為清理先透過既有GUI控制器正常關窗，R125的9張觀測、原生輸入與最終輸出保存在`workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r125-war-gui-r1/`。登陸詢問正文仍有英文待核對；沒有到實際戰鬥，不增加戰鬥、獨立、結局或完整五語信用。
 - 最終收據：[r126-cleanup-final-r1.json](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r126-cleanup-final-r1.json)，SHA-256為cedbc3da75c14b6d852827c6d88621d8f38355828ef0fc55714d7c7d516cc9c8。同根保存Go快取、合併計畫、逐筆操作及重現腳本；既有README與HD狀態保持。
 - 一次性Docker與Xvfb均已退出，專案沒有執行中或停止容器；輸出UID／GID為1000，沒有root-owned檔案、`.md`目錄或殘留合併暫存檔。其他專案容器及image保持。本輪只提交清理與接續紀錄，不變更Issue或Release。
+
+## 2026-10-20 R127 登陸正文與選項來源
+
+- 前輪R126已實際清出約6.34GiB並推送cc2fd21，屬實質進展；本輪接回全目標，從R125既有正常原生輸入處理可見的英文登陸正文。路由載入顯示與語意隔離、既有規格流程；更新README前另載入README標準，沿用現況表與文件職責。
+- 原型額外匯出只放隔離副本；36筆R125輸入重播的完整RAM、VGA索引、DAC與原實拍觀測相同。登陸正文早已被攔截，MSS3後畫改動安全區43點，其中5點為原文字點，舊正文先expired再被後續選項丟棄。首個fixture誤選1060，依實際場景來源改為1063；dialog觀測依原captureDialog的canvas／nil契約修正測試前置輸入。gofmt初次誤在驗證image呼叫，之後改由既有Go image執行；這些失敗未計產品驗收。
+- 私用最初只修最後繪圖仍缺正文；整合測試另揭露韓文同英文選項的兩組譯法不相同，不能靠全域逐行查譯辨識。改為保存最新完整正文候選，首次仍守小於2M步的完整原文選項配對；只為該次finish借用來源限定catalog副本，不改譯文或正式catalog。最後完整原生來源與VGA都符合，才在人物下方已量測安全區畫Noto正文。
+- DRAFT的四語、英文、拒絕及生命週期57個含子項零skip，兩版原型輸出相同；9張正常原型GUI中繁中與韓文正文、選項可見並目視確認，達READY才接正式。字模原點y489與ascent35分開記錄，實際字型基線y524，原先診斷欄名已更正；原圖與繪製未因此改變。
+- 正式程式d75e56956c2d28c7c23b689cb06b393cbe760fccbb4b8e1319a1a72d99ed01e2的文字來源逐byte同原型，額外觀測匯出保持私用。建置、go vet及4項／109個含子項零skip通過，含既有士兵正文與選項保留守門；四語來源圖片與原型相同。來源commit為1006526cde72204f7f4e2881c89f266ad5a63285。
+- 正式23張正常X11中，四語原版／HD、英文原版、第一／第二／第一選項懸停、正常選留在船上及關框通過。完整X11遊戲區23552000個RGBA點與輸出相同，15張正文畫面另核對34830個Noto實色點；舊缺陷圖只有511／2546點符合，會被檢查拒絕。關框後正文、選項及MSS3繪製歸零。
+- 當次43筆原生輸入用修正前R124原文模式重播至100600000步，完整CPU、RAM、VGA、DAC、原版輸入指紋與存檔相同；原版規則及存檔不變。收據r127-original-control-check-r1.json，本輪沒有新增音訊或戰鬥信用。
+- README命中既有登陸截圖位置，直接複製當次gui.display-022.png，SHA-256為1bb3986fbe78c190160abbcf3ce606b1f57e9715e254773679f211f3c1b90c83，沒有裁切、縮放或重新編碼。仍為32張，其他31張指紋保持；原R98登陸來源保存在previous_landfall_r98_capture，原圖也留在Git歷史及本機證據。原版參考及新增觀測仍留本機。
+- 最終入口r127-landfall-display-close-r1.json，SHA-256為a0cbd64632b60c48bd46aff6e89894f306ae1f6ac1ab8071b34969e64a320d32，位於既有hd-opening-animation-sources-r84工作根。385張正式HD原PNG、386檔、986個來源連結及328語言資源保持，沒有新增HD來源信用；完整五語、全量HD、戰鬥、獨立、結局、影片及新版交付仍未完成。
+- 主程式、原型、控制組與Xvfb都已正常退出，專案一次性容器自動移除；來源及輸出以UID／GID1000處理，Git與Docker狀態在收尾核對。本輪不改Issue、Release或已發布版本。
+- 收尾另將9個已結束的原型／診斷ELF與2個原型capture紀錄無損封存，逐檔SHA-256往返相同，回收201396224 bytes；目前正式程式、測試、GUI與R125接續路徑保留原路徑。入口r127-closed-prototypes-archive-r1.json，還原沿既有tools/evidence_storage.py。最終交接核對為同工作根的r127-final-handoff-r1.json。

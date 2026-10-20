@@ -184,9 +184,9 @@ HD事件標題使用金色字面、亮金高光與深色陰影，保留各語言
 
 進入印地安人村莊：事件圖使用 HD，金色 Noto 標題保留原有位置。
 
-![繁體中文登陸選項與 HD 人物、衣帽及火槍](docs/screenshots/hd-landfall-figure-zh.png)
+![繁體中文登陸正文與選項、HD 人物及火槍](docs/screenshots/hd-landfall-figure-zh.png)
 
-登陸對話：人物、衣帽與火槍已按原版輪廓重繪，保留對話框及操作位置。此人物已通過正常遊玩與游標往返驗證；其他人物繼續處理。
+登陸對話：正文與兩個選項完整顯示繁中，保留 HD 人物、衣帽及火槍。
 
 ![繁體中文教學對話與 HD 人物](docs/screenshots/hd-tutorial-figure-zh.png)
 
