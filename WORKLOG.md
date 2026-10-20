@@ -7565,3 +7565,14 @@ timeout 180 docker run --rm --network none --user 1000:1000 \
 - 本機入口為既有hd-opening-animation-sources-r84工作根的r137-geometry-display-close-final.json，SHA-256為08deb9f2dc96801b45ca80bd2003ddab61f8c28375694ff3047510054f8b0395。同根保存READY、正式建置、顯示、封裝與原生來源分組收據及r137-*-source-r*.py腳本。正式來源與清冊一併commit、push，擁有權、空間及Docker清理於收尾核對。
 - 收尾清除本輪Go建置快取，無損封存R134、R135舊正式程式／測試及R137原型測試，共5個ELF，回收345931776 bytes，約330MiB；現用R137正式程式與測試保持原路徑。原始與壓縮內容SHA逐檔核對，R135舊程式及測試另與原建置指紋相同；還原沿tools/evidence_storage.py，入口r137-cleanup-r1.json。
 - 最終核對腳本r1的收據清單仍引用上一批DEC名稱，在全部內容核對後寫交接時停止；只修正該檔名後由r2以同一程式及輸入乾淨重跑，不計產品失敗。最終r137-final-handoff-r1.json的SHA-256為c7dc47bea6ab3b297c951627108335122028990665cff44fc68748214b031cc5。47343個保持原樣的保護檔案完整SHA相同，386張原PNG、全部存檔與原版輸入保持；其餘10個公開更新依正式建置與增量審查核對。工作樹實占37691510784 bytes，約35.10GiB，無root-owned產物、錯誤.md目錄或封存暫存檔。
+
+## 2026-10-21 R139 工作區空間清理
+
+- 使用者要求先清理工作區。核對知識路由並載入文件職責，沿既有本機證據工作根與還原工具處理；沒有新增同義目錄或公開原版素材。
+- 清除可重建Go快取330747904 bytes。4092份已結束的記憶體快照、WAV、觀測JSON／JSONL及遮罩，共16843個原路徑無損封存；每組原硬連結的壓縮內容繼續共用，各路徑保留獨立還原清冊，回收1796968448 bytes。
+- 合計回收2127716352 bytes，約1.98GiB。工作樹核對時實占36072550400 bytes，約33.60GiB。以唯一inode計算空間，沒有把硬連結重複相加。
+- 185176個保護檔案完整SHA-256相同，包含全部147671個PNG路徑、4120個一般存檔路徑及24個存檔符號連結。正式HD原PNG、字型與語言資源、原版輸入、交付包、現用正式程式及R138候選保持；4092份封存內容均重新解壓核對SHA，各原路徑清冊與共用關係相符。
+- 實際以原路徑還原一個具有多個封存別名的記憶體快照，核對內容、權限與修改時間，再封存並恢復壓縮內容共用；其他別名保持可用。還原入口為[tools/evidence_storage.py](tools/evidence_storage.py)，在非root Docker中執行restore，完整掛載命令沿R123紀錄。
+- 本機入口為[清理收據](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r139-cleanup-final-r1.json)，SHA-256為ff762d92271d76702a034f5d80131bdf031943d7478a18de9909aecab9d92d80。同根r139-cleanup-plan-r1.json、r139-cleanup-archive-rows-r1.jsonl、r139-restore-roundtrip-r1.json與r139-*-source-r1.py保存名單、來源與驗證步驟；清理名單、封存紀錄及四個清理／核對腳本的指紋由入口收據登錄。
+- R138四語通知候選尚未提升。其視窗重播在找不到視窗時停止，屬環境／驗證問題，失敗輸出與候選程式完整保留；清理期間沒有重啟該測試，也沒有增加HD、翻譯或正常玩家路徑信用。
+- 全程使用有界、非root、無網路Docker。收尾檢查未見root-owned產物、錯誤.md目錄或封存暫存檔；本輪容器使用--rm清除，未執行全域prune，未碰其他專案資源。規格060的既有R138 DRAFT保持工作樹，不納入清理文件提交。
