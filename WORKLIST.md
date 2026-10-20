@@ -65,7 +65,7 @@
 | #56 | completed | [殖民地、歐洲港口、報告與國會的其餘欄位](https://github.com/wicanr2/colonization_cht/issues/56) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
 | #57 | completed | [百科其餘條目](https://github.com/wicanr2/colonization_cht/issues/57) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
 | #58 | in_progress | [原住民村落與外交訊息](https://github.com/wicanr2/colonization_cht/issues/58) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
-| #59 | planned | [戰爭、獨立戰爭與結局訊息](https://github.com/wicanr2/colonization_cht/issues/59) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
+| #59 | in_progress | [戰爭、獨立戰爭與結局訊息](https://github.com/wicanr2/colonization_cht/issues/59) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
 | #60 | in_progress | [一般事件訊息](https://github.com/wicanr2/colonization_cht/issues/60) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
 | #61 | in_progress | [開局、存讀檔、教學提示其餘與事件版畫](https://github.com/wicanr2/colonization_cht/issues/61) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
 | #62 | in_progress | [五語切換與英數字型統一](https://github.com/wicanr2/colonization_cht/issues/62) | `l10n-decision` | 繁中、簡中、日文、韓文及英文可切換；英文使用原版字體，其餘語言的英數用該語言字型。資料包、逐欄排版、輸入隔離、正常GUI、同狀態與存讀檔驗收通過，原版操作不變。 |

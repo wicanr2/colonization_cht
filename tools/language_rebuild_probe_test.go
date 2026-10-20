@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/base64"
+	"encoding/binary"
 	"encoding/json"
 	"fmt"
 	golem "github.com/wicanr2/dosgolem"
@@ -2184,5 +2185,288 @@ func TestDraftLandfallDialogForeground(t *testing.T) {
 		if e := os.WriteFile(filepath.Join(out, "check.json"), append(b, '\n'), 0644); e != nil {
 			t.Fatal(e)
 		}
+	}
+}
+
+func TestDraftAttackConfirmationForeground(t *testing.T) {
+	root := os.Getenv("TEST_ATTACK_ROOT")
+	if root == "" {
+		t.Skip("需要合法原版正常攻擊確認的觀測與快照")
+	}
+	read := func(name string) []byte {
+		t.Helper()
+		b, e := os.ReadFile(filepath.Join(root, name))
+		if e != nil {
+			t.Fatal(e)
+		}
+		return b
+	}
+	raw := read("attack-observations.json")
+	if hash(raw) != "72cc4231391979945ace0dbaa2323d04185db5ffbda4d7ca50b8c3934900dad0" {
+		t.Fatal("normal source fingerprint")
+	}
+	var rows []struct {
+		Kind       string
+		Step       uint64
+		Ink        image.Rectangle
+		SourceBase uint32          `json:"source_base"`
+		ReadPos    int             `json:"read_pos"`
+		Canvas     []byte          `json:"source_canvas"`
+		Buffer     []byte          `json:"source_buffer"`
+		FirstOld   map[int]byte    `json:"first_old"`
+		LastText   map[int]bool    `json:"last_text"`
+		After      map[int]byte    `json:"after_pixels"`
+		Shadow     bool            `json:"shadow_written"`
+		Others     image.Rectangle `json:"other_writes"`
+		Chars      []struct {
+			Byte       byte
+			Box        image.Rectangle
+			Colors     map[byte]int
+			Contiguous bool
+			Prefix     bool `json:"prefix_continuation"`
+		} `json:"characters"`
+	}
+	if e := json.Unmarshal(raw, &rows); e != nil {
+		t.Fatal(e)
+	}
+	if len(rows) != 2 {
+		t.Fatal("body and complete choices")
+	}
+	j := &nativeJournal{enabled: true}
+	for _, row := range rows {
+		if len(row.Canvas) != 64000 || len(row.Buffer) != 0 {
+			t.Fatal("native snapshot")
+		}
+		r := &dialogRun{base: row.SourceBase, readPos: row.ReadPos, firstOld: row.FirstOld, lastText: row.LastText, shadowWritten: row.Shadow, others: row.Others}
+		for _, c := range row.Chars {
+			r.chars = append(r.chars, dialogChar{c: c.Byte, box: c.Box, colors: c.Colors, contig: c.Contiguous, prefixContinuation: c.Prefix})
+		}
+		j.items = append(j.items, &nativeObservation{kind: "dialog", step: row.Step, ink: row.Ink, canvas: row.Canvas, buffer: row.Buffer, after: row.After, dialogRun: r})
+	}
+	mem, indexed, palette := read("gui.memory"), read("gui.final.idx"), read("gui.final.pal")
+	if hash(mem) != "82ea1776111e7a3eceda78193df15bb4030f67623a4f18ab60a3bbed034cd6d7" || hash(indexed) != "20c74321bc57d8c00837310481bf8e885072689998788c11de36934e7eb30e11" || hash(palette) != "675559f7a1c3b272181164709310dbfe3642fc7b8aa7cad97a3dc811b3c04dcd" {
+		t.Fatal("normal endpoint fingerprint")
+	}
+	canvas := bytes.Clone(mem[0x2cae0 : 0x2cae0+64000])
+	cursor := image.Rect(16, 16, 32, 32)
+	m, p, _ := hdEventFixtureLoad(t, 1061, "")
+	// 位移只用於已驗D46局部來源fixture，目的位置來自當次正常GUI完整持有權遮罩。
+	p.spriteCall = nil
+	m.CPU.R[2] -= 15
+	stack := int(m.CPU.Seg[2])*16 + int(m.CPU.R[4])
+	y := binary.LittleEndian.Uint16(m.Mem[stack+4:])
+	binary.LittleEndian.PutUint16(m.Mem[stack+4:], y+28)
+	hdEventRun(t, m, p)
+	copy(m.Mem, mem)
+	targets := draftActualTargetsForTest(t)
+	records := []map[string]any{}
+	for _, locale := range []string{"zh-Hant", "zh-Hans", "ja", "ko"} {
+		t.Run(locale, func(t *testing.T) {
+			target := targets[locale]
+			target.portraits = p
+			d := &dialogRuntime{cat: target.dlg, misses: map[string]int{}}
+			obs, options := j.items[0], j.items[1]
+			body, _, why := d.finish(cloneNativeDialog(obs.dialogRun), obs.canvas, obs.step)
+			if body == nil || why != "" || body.id != "GAME.TXT:@WHACKINDIANS:0x000038BD" {
+				t.Fatal("body identity", why)
+			}
+			draftKeepDialog(d, body, obs.canvas)
+			scoped := draftAttackDialogContext(target, d, body, obs, options, canvas, indexed, palette, cursor, false)
+			if scoped == d {
+				t.Fatal("source-scoped choice context rejected")
+			}
+			choice, _, why := scoped.finish(cloneNativeDialog(options.dialogRun), options.canvas, options.step)
+			if choice == nil || why != "" || !draftAttackChoice(target, choice) {
+				t.Fatal("complete choice identity", why)
+			}
+			draftKeepDialog(d, choice, options.canvas)
+			fixed, changed := draftFitAttackDialog(target, body, obs, choice, canvas, indexed, palette, cursor)
+			if fixed == nil || changed != 13 || fixed.size != 30 || fixed.safe != image.Rect(57, 114, 246, 138) {
+				t.Fatal("measured field", fixed, changed)
+			}
+			bounds := draftAlphaBounds([]*image.Alpha{fixed.shadow, fixed.normal, fixed.accent})
+			if !bounds.In(image.Rect(0, 12, 544, 96)) {
+				t.Fatal("text leaves portrait-free field", bounds)
+			}
+			before := hash(m.Mem)
+			im, report, e := draftRebuildTarget(target, j, canvas, mem[0x3bb00:0x3bb00+64000], indexed, palette, cursor, 237800000, 19)
+			if e != nil || hash(m.Mem) != before {
+				t.Fatal("display changed native memory", e)
+			}
+			foundBody, foundChoice := false, false
+			for _, it := range report["items"].([]map[string]any) {
+				if it["id"] == body.id {
+					foundBody = true
+					if it["foreground_source"] != 1061 || it["foreground_pixels"] != 4429 || it["native_occluded_pixels"] != 13 || it["layout_safe"] != image.Rect(57, 117, 193, 138) {
+						t.Fatal("foreground diagnostic", it)
+					}
+				}
+				if it["id"] == choice.id {
+					foundChoice = true
+				}
+			}
+			if !foundBody || !foundChoice {
+				t.Fatal("integrated body or choices absent", foundBody, foundChoice, report["dialog_misses"])
+			}
+			mask, id := p.seaDialogForeground(canvas, indexed, palette, cursor)
+			if id != 1061 {
+				t.Fatal("source identity")
+			}
+			original := draftRGB(indexed, palette)
+			foregroundPixels := 0
+			for pos := 0; pos < 64000; pos++ {
+				if mask[pos>>3]&(1<<uint(pos&7)) != 0 {
+					for y := 0; y < 4; y++ {
+						for x := 0; x < 4; x++ {
+							if im.RGBAAt(pos%320*4+x, pos/320*4+y) != original.RGBAAt(pos%320*4+x, pos/320*4+y) {
+								t.Fatal("portrait changed", pos)
+							}
+							foregroundPixels++
+						}
+					}
+				}
+			}
+			if foregroundPixels != 4429*16 {
+				t.Fatal("incomplete foreground")
+			}
+
+			t.Run("partial-portrait-in-choice-snapshot", func(t *testing.T) {
+				partial := *options
+				partial.canvas = bytes.Clone(options.canvas)
+				partial.dialogRun = cloneNativeDialog(options.dialogRun)
+				partial.dialogRun.others = image.Rect(195, 34, 266, 129)
+				removed := 0
+				for pos := 0; pos < 64000; pos++ {
+					if pos/320 >= 129 && mask[pos>>3]&(1<<uint(pos&7)) != 0 {
+						partial.canvas[pos] = obs.canvas[pos]
+						removed++
+					}
+				}
+				if removed == 0 || bytes.Equal(partial.canvas, options.canvas) ||
+					!bytes.Equal(rectBytes(partial.canvas, choice.safe), choice.afterSafe) {
+					t.Fatal("partial source fixture must keep all original choice pixels")
+				}
+				scoped := draftAttackDialogContext(target, d, body, obs, &partial, canvas, indexed, palette, cursor, false)
+				if scoped == d {
+					t.Fatal("complete current source rejected because the older choice snapshot was partial")
+				}
+				candidate, _, reason := scoped.finish(cloneNativeDialog(partial.dialogRun), partial.canvas, partial.step)
+				if candidate == nil || reason != "" || !draftAttackChoice(target, candidate) {
+					t.Fatal("partial snapshot choices", reason)
+				}
+				draftKeepDialog(d, candidate, partial.canvas)
+				if fit, changed := draftFitAttackDialog(target, body, obs, candidate, canvas, indexed, palette, cursor); fit == nil || changed != 13 {
+					t.Fatal("complete current field missing", changed)
+				}
+				clone := &nativeJournal{enabled: true, items: []*nativeObservation{obs, &partial}}
+				im, report, err := draftRebuildTarget(target, clone, canvas, mem[0x3bb00:0x3bb00+64000], indexed, palette, cursor, 237800000, 19)
+				if err != nil || im == nil {
+					t.Fatal(err)
+				}
+				found := false
+				for _, field := range report["items"].([]map[string]any) {
+					found = found || field["id"] == body.id
+				}
+				if !found {
+					t.Fatal("partial snapshot integration lost body")
+				}
+			})
+
+			for _, name := range []string{"body-id", "body-safe", "source-ink", "source-step", "short-source", "unknown-background", "vga", "palette", "missing-source", "choice-id", "choice-safe", "choice-expired", "choice-items", "choice-before-body"} {
+				t.Run(name, func(t *testing.T) {
+					local := *target
+					item := *body
+					source := *obs
+					pick := *choice
+					c, v, pal := bytes.Clone(canvas), bytes.Clone(indexed), bytes.Clone(palette)
+					switch name {
+					case "body-id":
+						item.id += "?"
+					case "body-safe":
+						item.safe.Max.X--
+					case "source-ink":
+						source.ink.Max.X--
+					case "source-step":
+						source.step++
+					case "short-source":
+						item.afterSafe = item.afterSafe[:len(item.afterSafe)-1]
+					case "unknown-background":
+						at := 114*320 + 57
+						c[at] ^= 1
+						v[at] = c[at]
+					case "vga":
+						v[114*320+57] ^= 1
+					case "palette":
+						for i := range pal {
+							pal[i] ^= 1
+						}
+					case "missing-source":
+						local.portraits = nil
+					case "choice-id":
+						pick.id += "?"
+					case "choice-safe":
+						pick.safe.Max.X++
+					case "choice-expired":
+						pick.phase = "expired"
+					case "choice-items":
+						pick.items = []string{choice.items[1], choice.items[0]}
+					case "choice-before-body":
+						pick.complete = body.complete - 1
+					}
+					if got, _ := draftFitAttackDialog(&local, &item, &source, &pick, c, v, pal, cursor); got != nil {
+						t.Fatal("unsafe field accepted")
+					}
+				})
+			}
+			t.Run("first-choice-2M-boundary", func(t *testing.T) {
+				late := *options
+				late.step = body.complete + 2000000
+				if got := draftAttackDialogContext(target, d, body, obs, &late, canvas, indexed, palette, cursor, false); got != d {
+					t.Fatal("late first pair accepted")
+				}
+			})
+			t.Run("paired-redraw", func(t *testing.T) {
+				late := *options
+				late.step = body.complete + 4000000
+				if got := draftAttackDialogContext(target, d, body, obs, &late, canvas, indexed, palette, cursor, true); got == d {
+					t.Fatal("valid redraw rejected")
+				}
+			})
+			if output := os.Getenv("TEST_ATTACK_OUTPUT"); output != "" {
+				writeAttackPreviewPNG(t, filepath.Join(output, "attack-"+locale+".png"), im)
+			}
+			records = append(records, map[string]any{"locale": locale, "safe": fixed.safe, "layout": image.Rect(57, 117, 193, 138), "font_px": fixed.size, "bounds": bounds, "foreground_pixels": foregroundPixels, "native_occluded_pixels": changed})
+		})
+	}
+	t.Run("english-original", func(t *testing.T) {
+		im, _, e := draftRebuildTarget(targets["en"], j, canvas, mem[0x3bb00:0x3bb00+64000], indexed, palette, cursor, 237800000, 19)
+		if e != nil || !bytes.Equal(im.Pix, draftRGB(indexed, palette).Pix) {
+			t.Fatal("English changed", e)
+		}
+	})
+	if output := os.Getenv("TEST_ATTACK_OUTPUT"); output != "" {
+		b, e := json.MarshalIndent(records, "", "  ")
+		if e != nil {
+			t.Fatal(e)
+		}
+		if e = os.WriteFile(filepath.Join(output, "attack-profile-results.json"), append(b, '\n'), 0644); e != nil {
+			t.Fatal(e)
+		}
+	}
+}
+
+func writeAttackPreviewPNG(t *testing.T, name string, im image.Image) {
+	t.Helper()
+	f, e := os.Create(name)
+	if e != nil {
+		t.Fatal(e)
+	}
+	err := png.Encode(f, im)
+	closeErr := f.Close()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if closeErr != nil {
+		t.Fatal(closeErr)
 	}
 }

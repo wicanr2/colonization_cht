@@ -1048,6 +1048,8 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 	mapSources := map[*stringItem]*nativeObservation{}
 	var inputASCII *dialogShown
 	var landfallBody *dialogShown
+	var attackBody *dialogShown
+	attackPaired := false
 	landfallPaired := false
 	s := &stringRuntime{cat: t.str, misses: map[string]int{}}
 	var context []byte
@@ -1103,6 +1105,7 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 			}
 			scoped := draftDialogContext(d, r, context)
 			scoped = draftLandfallDialogContext(t, scoped, landfallBody, dialogSources[landfallBody], o, palette, cursor, landfallPaired)
+			scoped = draftAttackDialogContext(t, scoped, attackBody, dialogSources[attackBody], o, canvas, indexed, palette, cursor, attackPaired)
 			st, shown, why := scoped.finish(cloneNativeDialog(r), context, o.step)
 			if st != nil {
 				if st.id == "GAME.TXT:@LANDFALL:0x00000FAD" {
@@ -1110,6 +1113,12 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 				} else if landfallBody != nil && draftLandfallChoice(t, st) &&
 					st.complete >= landfallBody.complete && st.complete-landfallBody.complete < 2000000 {
 					landfallPaired = true
+				}
+				if st.id == "GAME.TXT:@WHACKINDIANS:0x000038BD" {
+					attackBody, attackPaired = st, false
+				} else if attackBody != nil && draftAttackChoice(t, st) &&
+					st.complete >= attackBody.complete && st.complete-attackBody.complete < 2000000 {
+					attackPaired = true
 				}
 				draftKeepDialog(d, st, context)
 				dialogSources[st] = o
@@ -1186,6 +1195,9 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 	if landfallPaired && landfallBody != nil && landfallBody != d.prev && landfallBody != d.cur {
 		dialogStates = append(dialogStates, landfallBody)
 	}
+	if attackPaired && attackBody != nil && attackBody != d.prev && attackBody != d.cur {
+		dialogStates = append(dialogStates, attackBody)
+	}
 	for _, st := range dialogStates {
 		soldierChanged := -1
 		if st != nil && st.id == "GAME.TXT:@TUTORIAL14" {
@@ -1200,6 +1212,18 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 			st, landfallChanged = draftFitLandfallDialog(t, st, dialogSources[st], d.cur, canvas, indexed, palette, cursor)
 			if st == nil {
 				d.misses["landfall-source-or-layout\t"+original.id]++
+				continue
+			}
+		}
+		attackChanged := -1
+		if st != nil && st.id == "GAME.TXT:@WHACKINDIANS:0x000038BD" {
+			if !attackPaired {
+				continue
+			}
+			original := st
+			st, attackChanged = draftFitAttackDialog(t, st, dialogSources[st], d.cur, canvas, indexed, palette, cursor)
+			if st == nil {
+				d.misses["attack-source-or-layout\t"+original.id]++
 				continue
 			}
 		}
@@ -1239,6 +1263,12 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 			layout := st.safe
 			layout.Min.Y = 124
 			record["layout_safe"], record["foreground_source"], record["foreground_pixels"], record["native_occluded_pixels"] = layout, 1063, 5910, landfallChanged
+		}
+		if attackChanged >= 0 {
+			layout := st.safe
+			layout.Max.X = 193
+			layout.Min.Y = 117
+			record["layout_safe"], record["foreground_source"], record["foreground_pixels"], record["native_occluded_pixels"] = layout, 1061, 4429, attackChanged
 		}
 		if st.safe != sourceSafe {
 			record["source_safe"], record["native_clipped_pixels"] = sourceSafe, clipped
@@ -2130,6 +2160,136 @@ func draftFitLandfallDialog(t *draftLanguageTarget, st *dialogShown, o *nativeOb
 	}
 	layout := st.safe
 	layout.Min.Y = 124
+	shadow, normal, accent, size := t.dlg.dialogMasks(st.zh, layout.Dx()*4, layout.Dy()*4, capH)
+	if shadow == nil || normal == nil || accent == nil || size == 0 {
+		return nil, 0
+	}
+	copy := *st
+	copy.before = bytes.Clone(st.before)
+	for pos := range canvas {
+		if mask[pos>>3]&(1<<uint(pos&7)) != 0 {
+			copy.before[pos] = canvas[pos]
+		}
+	}
+	pad := func(mask *image.Alpha) *image.Alpha {
+		full := image.NewAlpha(image.Rect(0, 0, st.safe.Dx()*4, st.safe.Dy()*4))
+		offset := image.Pt(0, (layout.Min.Y-st.safe.Min.Y)*4)
+		draw.Draw(full, mask.Rect.Add(offset), mask, image.Point{}, draw.Src)
+		return full
+	}
+	copy.shadow, copy.normal, copy.accent, copy.dim = pad(shadow), pad(normal), pad(accent), nil
+	copy.size, copy.phase, copy.afterSafe = size, "active", rectBytes(canvas, st.safe)
+	return &copy, changed
+}
+
+// 規格060 R131：限定原生正文與完整選項；譯文不參與來源身份。
+func draftAttackChoice(t *draftLanguageTarget, choice *dialogShown) bool {
+	if t == nil || t.dlg == nil || choice == nil || choice.id != "GAME.TXT:@WHACKINDIANS:0x000038BD#2+list" ||
+		choice.safe != image.Rect(62, 140, 80, 163) {
+		return false
+	}
+	group := t.dlg.messageOptions["GAME.TXT:@WHACKINDIANS:0x000038BD"]
+	if len(group) != 2 || len(choice.items) != len(group) {
+		return false
+	}
+	for i, item := range choice.items {
+		if _, _, why := t.dlg.matchIn(group[i:i+1], item); why != "" {
+			return false
+		}
+	}
+	return true
+}
+
+func draftAttackForeground(t *draftLanguageTarget, st *dialogShown, o *nativeObservation, canvas, indexed, palette []byte, cursor image.Rectangle) ([]byte, int) {
+	if t == nil || t.dlg == nil || st == nil || st.id != "GAME.TXT:@WHACKINDIANS:0x000038BD" ||
+		o == nil || o.kind != "dialog" || o.dialogRun == nil || o.step != st.complete ||
+		o.ink != image.Rect(59, 117, 217, 136) || st.safe != image.Rect(57, 114, 246, 138) ||
+		len(st.before) != 64000 || len(st.afterSafe) != st.safe.Dx()*st.safe.Dy() ||
+		len(canvas) != 64000 || len(indexed) != 64000 {
+		return nil, 0
+	}
+	mask, id := t.portraits.seaDialogForeground(canvas, indexed, palette, cursor)
+	if id != 1061 || len(mask) != 8000 || !draftSameExceptCursor(indexed, canvas, st.safe, cursor) {
+		return nil, 0
+	}
+	var foreground image.Rectangle
+	count := 0
+	for pos := range canvas {
+		if mask[pos>>3]&(1<<uint(pos&7)) != 0 {
+			foreground = foreground.Union(image.Rect(pos%320, pos/320, pos%320+1, pos/320+1))
+			count++
+		}
+	}
+	if count != 4429 || foreground != image.Rect(195, 34, 266, 173) {
+		return nil, 0
+	}
+	changed := 0
+	for y := st.safe.Min.Y; y < st.safe.Max.Y; y++ {
+		for x := st.safe.Min.X; x < st.safe.Max.X; x++ {
+			pos := y*320 + x
+			k := (y-st.safe.Min.Y)*st.safe.Dx() + x - st.safe.Min.X
+			if canvas[pos] != st.afterSafe[k] {
+				if mask[pos>>3]&(1<<uint(pos&7)) == 0 {
+					return nil, 0
+				}
+				if _, text := o.after[pos]; text {
+					changed++
+				}
+			}
+		}
+	}
+	return mask, changed
+}
+
+// 只限定這次原生選項事件的查譯來源，不改正式catalog、來源時刻或原生資料。
+func draftAttackDialogContext(t *draftLanguageTarget, d *dialogRuntime, body *dialogShown, source, next *nativeObservation, canvas, indexed, palette []byte, cursor image.Rectangle, paired bool) *dialogRuntime {
+	if t == nil || t.dlg == nil || d == nil || d.cat == nil || body == nil || next == nil || next.dialogRun == nil ||
+		next.step < body.complete || (!paired && next.step-body.complete >= 2000000) ||
+		(paired && !draftAttackChoice(t, d.cur)) || next.ink != image.Rect(63, 141, 78, 161) {
+		return d
+	}
+	group := t.dlg.messageOptions["GAME.TXT:@WHACKINDIANS:0x000038BD"]
+	lines := runLines(next.dialogRun.chars)
+	if len(group) != 2 || len(lines) != len(group) {
+		return d
+	}
+	for i, line := range lines {
+		if _, _, why := t.dlg.matchIn(group[i:i+1], line.text); why != "" {
+			return d
+		}
+	}
+	// 這裡只借原生canvas確認身份；最後繪製另核對當下VGA。
+	if mask, _ := draftAttackForeground(t, body, source, canvas, indexed, palette, cursor); mask == nil {
+		return d
+	}
+	scoped := *d
+	catalog := *d.cat
+	catalog.lines = group
+	scoped.cat = &catalog
+	return &scoped
+}
+
+func draftFitAttackDialog(t *draftLanguageTarget, st *dialogShown, o *nativeObservation, choice *dialogShown, canvas, indexed, palette []byte, cursor image.Rectangle) (*dialogShown, int) {
+	if !draftAttackChoice(t, choice) || choice == st || choice.phase != "active" ||
+		st == nil || choice.complete < st.complete || len(canvas) != 64000 ||
+		!bytes.Equal(choice.afterSafe, rectBytes(canvas, choice.safe)) ||
+		!draftSameExceptCursor(indexed, canvas, choice.safe, cursor) {
+		return nil, 0
+	}
+	mask, changed := draftAttackForeground(t, st, o, canvas, indexed, palette, cursor)
+	if mask == nil {
+		return nil, 0
+	}
+	capH := 0
+	for _, line := range runLines(o.dialogRun.chars) {
+		capH = max(capH, line.capH)
+	}
+	if capH != 8 {
+		return nil, 0
+	}
+	layout := st.safe
+	layout.Max.X = 193
+	layout.Min.Y = 117
 	shadow, normal, accent, size := t.dlg.dialogMasks(st.zh, layout.Dx()*4, layout.Dy()*4, capH)
 	if shadow == nil || normal == nil || accent == nil || size == 0 {
 		return nil, 0

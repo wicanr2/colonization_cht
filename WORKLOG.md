@@ -7499,3 +7499,16 @@ timeout 180 docker run --rm --network none --user 1000:1000 \
 - 前輪R131測試腳本複製時只替換第一個程式路徑，後續stdout路徑仍指向r127-formal-tests-r1.log，已覆寫該歷史原始stdout。錯置輸出及更正收據保存在r131-log-path-correction-r1.json；R127原測試程式重驗109項通過的新版stdout為r131-r127-test-recheck-r1.log。歷史原始stdout未恢復，本輪將其列為清理前既存缺檔，不宣稱舊9929檔全數相同，也不以重驗日誌冒充原件。其餘當次保護檔案重新建立指紋後核對。
 - R130戰鬥分析及R131攻擊確認的接續證據、當前程式與未提交修改均保留。R131正式r2已通過183個含子項測試、64張GUI及104筆原文控制重播，矩陣、普查與CONFORMED尚待登錄。本次只完成空間清理，不增加普查、全量HD、完整五語、戰鬥結果、影片或新版交付信用。
 - 最終收據：[r132-cleanup-final-r1.json](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r132-cleanup-final-r1.json)，SHA-256為4b11e4606351e6874c11a61c7ded97b1a2f74535f451bd71d05792309b9ecd1d。同根保存清理計畫、逐檔封存、Go快取與壓縮後GUI重驗收據；沒有root-owned檔案、誤建.md目錄或壓縮暫存檔。一次性容器自動移除；Git提交僅收清理與接續紀錄，程式及規格修改保留待後續登錄，其他專案資源保持。
+
+## 2026-10-21 R133 登錄R131攻擊確認
+
+- 前輪R132已實際清出2.64GiB並推送dcd47f3，屬實質進展。本輪接續完整目標，重查規格流程與文件職責路由，以目前原始碼、正式收據及102列普查作基準，沒有重開已接受的其他玩家驗收。
+- R131正文、來源限定選項及目前Main／VGA完整人物證明正式接線，DRAFT、兩次READY與限定CONFORMED入口均在規格060。正式r1四語仍英文的失敗保留；根因是選項快照早於人物完成。正式r2以當前完整人物4429點證明配對，首次2M步、原文／位置、非人物背景、VGA及色盤守門保持，183個含子項零skip。
+- 正式r2 ed5b6a4e…通過建置與go vet；64張正常GUI含33張正文、四語原版／HD、英文及12張懸停，正常取消後完整撤除。64420個Noto字點與65536000個X11點通過。104筆原生輸入由修正前原文前端重播，完整CPU、RAM、VGA、DAC及存檔相同。兩側正常自動存檔皆為6e4ea3a0…；未執行的手動存檔計畫保持未驗，不冒充存檔操作。
+- 公開check_goal186_attack_confirmation.py由已通過的私用檢查器逐byte提升，正式來源、程式、測試、原版指紋、來源fixture與當次GUI均有守門。矩陣只新增attack-confirmation-mss1，新增列與欄位範圍審查通過；原版像素、存檔、fixture及原文控制組只留本機，沒有新增公開參考圖。
+- 依規格049核對原102列設定、66列檢查器與側JSON／輸入指紋、15份原版及固定歷史基準。舊歐洲收據符號連結指向已封存原檔，沿實際目標讀取.gz並核對原始完整SHA-256，沒有改收據。增量普查只含原百科邊界proof與新攻擊欄位，生成1975項／933shown／950pending／92unreachable，唯一狀態變更為GAME.TXT:@WHACKINDIANS，全部舊shown及三個confirmed入口限制保留。320項有現存收據、613項僅歷史；本輪新增1PASS、66沿用、36僅歷史，沒有聲稱103列重新通過。
+- 採用後嘗試重驗引用普查指紋的舊開局完成列。先遇舊/out別名與封存程式，按原工具暫還原必要六檔；其後舊城市變數檢查器要求COLONYUNIT以譯文辨識，與已提交fc040ba及規格058的來源身份隔離不同。單一比對修正後仍有較早完整來源限制，未完成的檢查器改動已撤回並核對原SHA。既有驗收保留，舊列沒有列為本輪新PASS；另獨立核對該列依賴的14個普查鍵仍全部shown。限制與失敗收據如實保留，不把驗證來源快照問題當成此次產品退步。
+- 暫還原的六檔已重新封存，原始及壓縮SHA皆與原封存相同，未留下額外大型舊程式。R132後目前新原型capture沿.gz讀取；沒有重跑整份GUI或全矩陣。
+- 更新唯一CONTEXT、JSON工作清單並由tools/worklist.py產生WORKLIST。#59由planned進入in_progress，僅記R130實際戰鬥分析與控制組，未記戰鬥結果、獨立或結局完成。385張HD原PNG／386檔、986連結與328語言資源保持，README32張保持；完整五語、全量HD、影片與新版交付繼續。
+- 本機批次入口為既有hd-opening-animation-sources-r84/r133-attack-census-delta/summary.json及operation.json；增量來源r133-merge-census-source-r1.py、獨立普查依賴審查r133-start-census-delta-audit-r1.json、暫還原及重封存收據同根。正式來源與驗證文件一併commit／push，收尾核對原版未追蹤、工作樹差異與Docker清理。
+- 最終核對13194個保持原樣的保護檔案完整SHA相同，385張原PNG、986來源與328語言資源保持；公開檢查器64張實拍再驗通過，缺原版明確77。收據為r133-final-handoff-r1.json，SHA-256為872a0ea7686f5c76ca1d2b01670873c7cf227482483cf35314dad57bcf8c7a4b。報表收尾由同根r133-finalize-reports-source-r1.py重產，矩陣逐列明列本輪／沿用PASS。生成TSV的空末欄以限定該檔的.gitattributes保留，1975列均維持10欄且無空格尾綴；git diff --check通過。工作樹核對約35.86GiB，沒有root-owned產物、錯誤.md目錄或暫存封存檔。

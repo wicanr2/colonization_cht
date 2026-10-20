@@ -292,7 +292,7 @@ EXE:3d6afa0c3880	exe	（執行期字串）	string	normal	shown	歷史驗收：co
 EXE:3db67c85ce1a	exe	（執行期字串）	string	normal	shown	歷史驗收：confirmed	1	colonizopedia,pedia-father-all	
 EXE:3df037be06b0	exe	（執行期字串）	string	normal	shown	歷史驗收：confirmed	1	pedia-terrain-all	
 EXE:3e7db988ee08	exe	（執行期字串）	string	normal	shown	歷史驗收：confirmed	1	colony-interactions	
-EXE:3f02988e15cd	exe	海上地圖	menu	normal	shown	人工歸類	1	人工歸類	build-list-source-transaction,colony-source-completion,end-turn-background-and-dialog-frames,go-to-port-family-long,go-to-port-family-short,orders-compact-six,pedia-six-category-original-boundary,sea-city-name-data-contracts,trade-route-two-four-fields,tutorial-cargo-city,tutorial-city-arrival-growth,unit-selection-caption,wagon-build-save-sample
+EXE:3f02988e15cd	exe	海上地圖	menu	normal	shown	人工歸類	1	人工歸類	attack-confirmation-mss1,build-list-source-transaction,colony-source-completion,end-turn-background-and-dialog-frames,go-to-port-family-long,go-to-port-family-short,orders-compact-six,pedia-six-category-original-boundary,sea-city-name-data-contracts,trade-route-two-four-fields,tutorial-cargo-city,tutorial-city-arrival-growth,unit-selection-caption,wagon-build-save-sample
 EXE:414cb9e4c237	exe	百科	string	normal	shown	歷史驗收：confirmed	1	pedia-terrain-all	
 EXE:4346050e612f	exe	（執行期字串）	string	normal	shown	confirmed	1	trade-grid-land,trade-grid-sea	trade-route-land,trade-route-sea
 EXE:434971245338	exe	（執行期字串）	string	normal	shown	confirmed	1	voyage-fields-and-two-port-options	
@@ -325,7 +325,7 @@ EXE:506f26888ff2	exe	（執行期字串）	string	normal	shown	confirmed	1	trade
 EXE:5109edb23dda	exe	（執行期字串）	string	normal	shown	歷史驗收：confirmed	1	pedia-terrain-all	
 EXE:51a63f4bf6e1	exe	（執行期字串）	string	normal	shown	歷史驗收：confirmed	1	pedia-unit-all	
 EXE:52015898c694	exe	（執行期字串）	string	normal	shown	confirmed	1	colony-abandon-cancel,colony-profession-equipment	
-EXE:52ae9fbfd404	exe	下拉選單	menu	normal	shown	人工歸類	1	人工歸類	go-to-port-family-long,go-to-port-family-short,unit-selection-caption
+EXE:52ae9fbfd404	exe	下拉選單	menu	normal	shown	人工歸類	1	人工歸類	attack-confirmation-mss1,go-to-port-family-long,go-to-port-family-short,unit-selection-caption
 EXE:5352f4f2a370	exe	（執行期字串）	string	normal	shown	歷史驗收：confirmed	1	pedia-unit-all	
 EXE:53e774cd2025	exe	（執行期字串）	string	normal	shown	歷史驗收：confirmed	1	pedia-job-all	
 EXE:5519270bc475	exe	（執行期字串）	string	normal	shown	confirmed	1	unit-selection-caption	
@@ -477,7 +477,7 @@ EXE:a97ed4defaf6	exe	（執行期字串）	string	normal	shown	歷史驗收：co
 EXE:aae9026c95cf	exe	（執行期字串）	string	normal	shown	歷史驗收：confirmed	1	pedia-cargo-all	
 EXE:ab593700a41d	exe	（執行期字串）	string	normal	shown	歷史驗收：confirmed	1	pedia-cargo-all	
 EXE:ab87bbaada7d	exe	（執行期字串）	string	normal	shown	歷史驗收：confirmed	1	pedia-building-all	
-EXE:ad437828b303	exe	下拉選單	menu	normal	shown	人工歸類	1	人工歸類	view-menu-close-survival
+EXE:ad437828b303	exe	下拉選單	menu	normal	shown	人工歸類	1	人工歸類	attack-confirmation-mss1,view-menu-close-survival
 EXE:ad986107dc9b	exe	（執行期字串）	string	normal	shown	confirmed	1	europe-cancel-and-report-fields	
 EXE:afb115d350a6	exe	（執行期字串）	string	normal	shown	confirmed	1	colony-buy-payable	colony-build-heading-lifecycle,colony-fisherman-no-docks,colony-fortified-unit-options,colony-profession-title-family,colony-rename-cancel,colony-soldier-unit-options,colony-two-line-profession-title
 EXE:afef2e17fc45	exe	（執行期字串）	string	normal	shown	歷史驗收：confirmed	1	pedia-unit-all	
@@ -1109,7 +1109,7 @@ GAME.TXT:@WARN1	txt	獨立戰爭	dialog	conditional	pending		3
 GAME.TXT:@WARN2	txt	獨立戰爭	dialog	conditional	pending		3		
 GAME.TXT:@WARN3	txt	獨立戰爭	dialog	conditional	pending		3		
 GAME.TXT:@WELLSEASONED	txt	對話框	dialog	conditional	pending		1		
-GAME.TXT:@WHACKINDIANS	txt	原住民村落	dialog	conditional	pending		3		
+GAME.TXT:@WHACKINDIANS	txt	原住民村落	dialog	conditional	shown	confirmed	3	attack-confirmation-mss1	
 GAME.TXT:@WHICHFREEDOM	txt	國會與建國之父	dialog	normal	shown	confirmed	2	colony-buy-payable,colony-jobs-and-fathers	
 GAME.TXT:@WINNING	txt	獨立戰爭	dialog	conditional	pending		6		
 GAME.TXT:@WITHDRAW	txt	外交	dialog	conditional	pending		1		
