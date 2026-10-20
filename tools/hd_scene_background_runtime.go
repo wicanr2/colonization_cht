@@ -14,6 +14,8 @@ import (
 
 // 規格069 R76／R77 READY：來源、解碼畫布與原圖固定，所有狀態只供顯示。
 type hdSceneDefinition struct {
+	artSize                                                   image.Point
+	alphaSprites                                              bool
 	sprite                                                    *hdSceneSpriteDefinition
 	allowPictureCursorProof                                   bool
 	id, offset, height                                        int
@@ -90,6 +92,12 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 			wantBounds.Max.X = max(wantBounds.Max.X, rect.Max.X)
 			wantBounds.Max.Y = max(wantBounds.Max.Y, rect.Max.Y)
 		}
+		if def.artSize != (image.Point{}) {
+			wantBounds = image.Rect(0, 0, def.artSize.X, def.artSize.Y)
+		}
+		if def.alphaSprites && def.sprite == nil {
+			return nil, fmt.Errorf("scene alpha requires sprite")
+		}
 		if im.Bounds() != wantBounds || def.offset < 0 || def.height <= 0 || def.offset+320*def.height != 64000 || len(def.nativeRects) == 0 || len(def.nativeRects) != len(def.artRects) {
 			return nil, fmt.Errorf("scene geometry")
 		}
@@ -115,7 +123,7 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 					sx := a.Min.X + (2*(x-target.Min.X)+1)*a.Dx()/(2*target.Dx())
 					sy := a.Min.Y + (2*(y-target.Min.Y)+1)*a.Dy()/(2*target.Dy())
 					c := color.RGBAModel.Convert(im.At(sx, sy)).(color.RGBA)
-					if c.A != 255 {
+					if c.A != 255 && !def.alphaSprites {
 						return nil, fmt.Errorf("scene art alpha")
 					}
 					f.art.SetRGBA(x, y, c)
@@ -134,7 +142,7 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 		}
 		p.frames = append(p.frames, f)
 	}
-	if len(p.frames) != 42 {
+	if len(p.frames) != 46 {
 		return nil, fmt.Errorf("scene source group")
 	}
 	h.m.WatchWrite(0, 0xaffff, func(_ *golem.Machine, a uint32, o, v byte) { p.memoryWrite(a, o, v) })
@@ -399,7 +407,7 @@ func (p *hdSceneRuntime) paint(out *image.RGBA, f draftNativeFrame) map[string]a
 		}
 		x, y := at%320*4, at/320*4
 		sx, sy := int(c.local)%320*4, int(c.local)/320*4
-		draw.Draw(out, image.Rect(x, y, x+4, y+4), frame.art, image.Pt(sx, sy), draw.Src)
+		frame.drawCell(out, x, y, sx, sy)
 		masks[n][at>>3] |= 1 << uint(at&7)
 		counts[n][3]++
 	}
@@ -425,7 +433,7 @@ func (p *hdSceneRuntime) paintBackground(out *image.RGBA, f draftNativeFrame, po
 	}
 	x, y := pos%320*4, pos/320*4
 	sx, sy := int(c.local)%320*4, int(c.local)/320*4
-	draw.Draw(out, image.Rect(x, y, x+4, y+4), frame.art, image.Pt(sx, sy), draw.Src)
+	frame.drawCell(out, x, y, sx, sy)
 	return true
 }
 
@@ -526,7 +534,7 @@ func (p *hdSceneRuntime) paintPublished(out *image.RGBA, f draftNativeFrame) map
 		}
 		x, y := at%320*4, at/320*4
 		sx, sy := int(c.local)%320*4, int(c.local)/320*4
-		draw.Draw(out, image.Rect(x, y, x+4, y+4), frame.art, image.Pt(sx, sy), draw.Src)
+		frame.drawCell(out, x, y, sx, sy)
 		i := int(c.slot) - 1
 		masks[i][at>>3] |= 1 << uint(at&7)
 		counts[i]++
@@ -551,7 +559,7 @@ func (p *hdSceneRuntime) paintPublishedBackground(out *image.RGBA, f draftNative
 	}
 	x, y := pos%320*4, pos/320*4
 	sx, sy := int(c.local)%320*4, int(c.local)/320*4
-	draw.Draw(out, image.Rect(x, y, x+4, y+4), frame.art, image.Pt(sx, sy), draw.Src)
+	frame.drawCell(out, x, y, sx, sy)
 	return true
 }
 
@@ -576,4 +584,12 @@ func (p *hdSceneRuntime) pictureOnlyCursor(f draftNativeFrame) bool {
 		}
 	}
 	return true
+}
+
+func (f *hdSceneFrame) drawCell(out *image.RGBA, x, y, sx, sy int) {
+	op := draw.Src
+	if f.alphaSprites {
+		op = draw.Over
+	}
+	draw.Draw(out, image.Rect(x, y, x+4, y+4), f.art, image.Pt(sx, sy), op)
 }

@@ -21,7 +21,7 @@ func TestHDEventResources(t *testing.T) {
 		m := golem.New()
 		before := append([]byte(nil), m.Mem...)
 		p, e := loadHDSceneRuntime(&hdRuntime{m: m}, game, assets)
-		if e != nil || p == nil || len(p.frames) != 42 {
+		if e != nil || p == nil || len(p.frames) != 46 {
 			t.Fatal("full scene load", e)
 		}
 		if !bytes.Equal(before, m.Mem) {
@@ -265,7 +265,7 @@ func TestHDMSSFullProjectLoader(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if h.scenes == nil || len(h.scenes.frames) != 42 {
+	if h.scenes == nil || len(h.scenes.frames) != 46 {
 		t.Fatal("four new sources and thirty inherited sources required")
 	}
 	seen := 0

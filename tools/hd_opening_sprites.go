@@ -13,7 +13,11 @@ import (
 	"path/filepath"
 )
 
+const hdOpeningSpriteCount = 189
+const hdOpeningSpriteMaxPixels = 18445
+
 type hdOpeningSpriteDefinition struct {
+	preserveInk                                                 []byte
 	reuseFish                                                   int
 	ordinal, id, w, h, encodedLen, opaque                       int
 	sourceFile, sourceSHA, encodedSHA, writesSHA, asset, artSHA string
@@ -28,18 +32,18 @@ type hdOpeningSpriteCell struct {
 type hdOpeningSpriteRuntime struct {
 	fish                                                              *hdOpeningFishRuntime
 	p                                                                 *hdOpeningRuntime
-	art                                                               [98]*image.NRGBA
-	native                                                            [98][1716]byte
-	nativeValid                                                       [98]bool
+	art                                                               [hdOpeningSpriteCount]*image.NRGBA
+	native                                                            [hdOpeningSpriteCount][hdOpeningSpriteMaxPixels]byte
+	nativeValid                                                       [hdOpeningSpriteCount]bool
 	cells, published                                                  [64000]hdOpeningSpriteCell
 	pictures                                                          [64000]hdOpeningCell
 	active, outside                                                   bool
 	selected, x, y                                                    int
 	retCS, retIP, sp                                                  uint16
 	start                                                             uint64
-	counts                                                            [1716]uint16
-	writes                                                            [1716]byte
-	under                                                             [1716]hdOpeningCell
+	counts                                                            [hdOpeningSpriteMaxPixels]uint16
+	writes                                                            [hdOpeningSpriteMaxPixels]byte
+	under                                                             [hdOpeningSpriteMaxPixels]hdOpeningCell
 	accepted, rejected, revoked, same, transfers, unknownVGA, sameVGA uint64
 }
 
@@ -51,10 +55,14 @@ var hdOpeningSpriteWriterCodes = map[uint16][]byte{
 
 func loadHDOpeningSprites(p *hdOpeningRuntime, game, directory string) (*hdOpeningSpriteRuntime, error) {
 	s := &hdOpeningSpriteRuntime{p: p}
-	if len(hdOpeningSpriteDefinitions) != 98 {
+	if len(hdOpeningSpriteDefinitions) != hdOpeningSpriteCount {
 		return nil, fmt.Errorf("opening sprite definition count")
 	}
 	seen := map[string]bool{}
+	artCache := map[string]struct {
+		im  image.Image
+		sha string
+	}{}
 	for i, d := range hdOpeningSpriteDefinitions {
 		if !seen[d.sourceFile] {
 			raw, e := hdReadFile(filepath.Join(game, d.sourceFile), 8<<20)
@@ -66,18 +74,31 @@ func loadHDOpeningSprites(p *hdOpeningRuntime, game, directory string) (*hdOpeni
 			}
 			seen[d.sourceFile] = true
 		}
-		raw, e := hdReadFile(filepath.Join(directory, d.asset), 8<<20)
-		if e != nil {
-			return nil, e
+		cached, exists := artCache[d.asset]
+		if !exists {
+			raw, e := hdReadFile(filepath.Join(directory, d.asset), 8<<20)
+			if e != nil {
+				return nil, e
+			}
+			digest := hash(raw)
+			if digest != d.artSHA {
+				return nil, fmt.Errorf("opening sprite asset fingerprint")
+			}
+			im, e := png.Decode(bytes.NewReader(raw))
+			if e != nil {
+				return nil, e
+			}
+			cached = struct {
+				im  image.Image
+				sha string
+			}{im, digest}
+			artCache[d.asset] = cached
 		}
-		if hash(raw) != d.artSHA {
-			return nil, fmt.Errorf("opening sprite asset fingerprint")
+		if cached.sha != d.artSHA {
+			return nil, fmt.Errorf("opening sprite cached asset fingerprint")
 		}
-		im, e := png.Decode(bytes.NewReader(raw))
-		if e != nil {
-			return nil, e
-		}
-		if im.Bounds() != image.Rect(0, 0, d.artSize.X, d.artSize.Y) || len(d.nativeRects) != len(d.artRects) || d.w*d.h > 1716 {
+		im := cached.im
+		if im.Bounds() != image.Rect(0, 0, d.artSize.X, d.artSize.Y) || len(d.nativeRects) != len(d.artRects) || d.w*d.h > hdOpeningSpriteMaxPixels {
 			return nil, fmt.Errorf("opening sprite geometry")
 		}
 		dst := image.NewNRGBA(image.Rect(0, 0, d.w*4, d.h*4))
@@ -99,10 +120,11 @@ func loadHDOpeningSprites(p *hdOpeningRuntime, game, directory string) (*hdOpeni
 			}
 		}
 		if d.reuseFish != 0 {
-			dst, e = sampleHDOpeningFishFragment(d, im)
+			fragment, e := sampleHDOpeningFishFragment(d, im)
 			if e != nil {
 				return nil, e
 			}
+			dst = fragment
 		}
 		s.art[i] = dst
 	}
@@ -146,7 +168,7 @@ func (s *hdOpeningSpriteRuntime) beforeInstruction() {
 		return
 	}
 	ordinal := int(c.R[golem.AX]&0x7fff) - 1
-	if ordinal < 0 || ordinal >= 20 {
+	if ordinal < 0 || ordinal >= 54 {
 		return
 	}
 	stack, ok := hdOpeningSpriteWords(m, c.Seg[golem.SS], c.R[golem.SP], 5)
@@ -371,7 +393,7 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 			continue
 		}
 		slot, known := hdOpeningSpriteSlot(c.id)
-		if !known || slot >= len(hdOpeningSpriteDefinitions) || int(c.local) >= 1716 || !s.nativeValid[slot] || s.native[slot][c.local] != c.value || c.value == 253 || f.indexed[pos] != c.value {
+		if !known || slot >= len(hdOpeningSpriteDefinitions) || int(c.local) >= hdOpeningSpriteMaxPixels || !s.nativeValid[slot] || s.native[slot][c.local] != c.value || c.value == 253 || f.indexed[pos] != c.value {
 			r["reason"] = "sprite-source"
 			return r
 		}
@@ -394,6 +416,10 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 	markerFrames := [2]int{}
 	extraFishFrames := [20]int{}
 	smallFishFrames := [13]int{}
+	shipFrames := [18]int{}
+	guyFrames := [54]int{}
+	creditFrames := [19]int{}
+	preservedInk := 0
 	for pos := 0; pos < 64000; pos++ {
 		if !image.Pt(pos%320, pos/320).In(bounds) {
 			continue
@@ -450,12 +476,24 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 		}
 		slot, _ := hdOpeningSpriteSlot(actor.id)
 		sx, sy = int(actor.local)%hdOpeningSpriteDefinitions[slot].w*4, int(actor.local)/hdOpeningSpriteDefinitions[slot].w*4
-		for dy := 0; dy < 4; dy++ {
-			for dx := 0; dx < 4; dx++ {
-				a := s.art[slot].NRGBAAt(sx+dx, sy+dy)
-				b := out.RGBAAt(x+dx, y+dy)
-				over := func(v, d byte) byte { return byte((uint32(v)*uint32(a.A) + uint32(d)*uint32(255-a.A) + 127) / 255) }
-				out.SetRGBA(x+dx, y+dy, color.RGBA{over(a.R, b.R), over(a.G, b.G), over(a.B, b.B), 255})
+		keepInk := false
+		for _, ink := range hdOpeningSpriteDefinitions[slot].preserveInk {
+			if actor.value == ink {
+				keepInk = true
+				break
+			}
+		}
+		if keepInk {
+			hdOpeningOriginalCell(out, f, pos)
+			preservedInk++
+		} else {
+			for dy := 0; dy < 4; dy++ {
+				for dx := 0; dx < 4; dx++ {
+					a := s.art[slot].NRGBAAt(sx+dx, sy+dy)
+					b := out.RGBAAt(x+dx, y+dy)
+					over := func(v, d byte) byte { return byte((uint32(v)*uint32(a.A) + uint32(d)*uint32(255-a.A) + 127) / 255) }
+					out.SetRGBA(x+dx, y+dy, color.RGBA{over(a.R, b.R), over(a.G, b.G), over(a.B, b.B), 255})
+				}
 			}
 		}
 		sprites++
@@ -475,6 +513,12 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 			extraFishFrames[slot-65]++
 		} else if slot >= 85 && slot < 98 {
 			smallFishFrames[slot-85]++
+		} else if slot >= 98 && slot < 117 {
+			creditFrames[slot-98]++
+		} else if slot >= 117 && slot < 135 {
+			shipFrames[slot-117]++
+		} else if slot >= 135 && slot < 189 {
+			guyFrames[slot-135]++
 		}
 		spriteMask[pos>>3] |= 1 << uint(pos&7)
 	}
@@ -491,6 +535,10 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 	r["fish_marker_frames"] = markerFrames
 	r["extra_fish_frames"] = extraFishFrames
 	r["small_fish_frames"] = smallFishFrames
+	r["credit_frames"] = creditFrames
+	r["ship_frames"] = shipFrames
+	r["guy_frames"] = guyFrames
+	r["preserved_credit_ink"] = preservedInk
 	poseID := 0
 	if fishPose.valid {
 		poseID = 1182 + fishPose.slot
@@ -524,6 +572,15 @@ func hdOpeningSpriteSlot(id uint16) (int, bool) {
 	}
 	if id >= 1112 && id <= 1124 {
 		return int(id-1112) + 85, true
+	}
+	if id >= 1093 && id <= 1111 {
+		return int(id-1093) + 98, true
+	}
+	if id >= 1074 && id <= 1091 {
+		return int(id-1074) + 117, true
+	}
+	if id >= 1125 && id <= 1178 {
+		return int(id-1125) + 135, true
 	}
 	return 0, false
 }

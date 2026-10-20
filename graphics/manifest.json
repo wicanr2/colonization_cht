@@ -25391,6 +25391,5007 @@
       "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
       "raw_original_unchanged": true,
       "status": "READY production connection; display acceptance tracked in source catalog"
+    },
+    "opening-credits-1.png": {
+      "sha256": "13d729a4cf5065e803020b443093c4f8f6c76f4b2ab95bdafdeb2ef8328c6136",
+      "bytes": 1109008,
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create one original refined fine pixel-art atlas for an HD overlay for Colonization (1994). Image 1 is the exact composition reference: ONE column, SEVEN equal-height rows. Each row contains a single long gold parchment scroll with curled ends. Preserve all seven distinct silhouettes and relative proportions, including the longer first scroll. Repaint the paper and curled ends in high-definition crisp deliberate pixel clusters, warm ivory parchment, restrained ochre shadows, fine fibers and subtle age marks. ALL lettering must be REMOVED: every scroll must be entirely blank, with clean usable writing space. The game's original lettering will be drawn separately by the application. No text, no numbers, no labels or glyph-like marks anywhere. The magenta background and black labels are reference scaffolding; remove them entirely. Image 2 is only the approved fine pixel-art style reference; do not copy its landscape, buildings, people, text or composition. Use a landscape 4:3 canvas with exactly one column and seven equal rows, scroll centered in each row, each fully contained inside its row with clear transparent margins and no overlap. Preserve horizontal aspect ratio of each source scroll. The ends are curled PAPER, never hands or limbs. Transparent background, transparent between scrolls and around each scroll. No grid, frame, cast shadow outside paper, scenery, painterly blur, photographic texture or 3D. Keep raw straight alpha.",
+      "generation_file": "exec-3cb5f204-de64-4aa1-b140-ee216906ecda.png",
+      "reference_sha256": "fc54925e669d031941329ee187def3059e3706b011bdd88a352fd85073b9c76a",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained, native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1093,
+          "file": "OPENCRD1.SS",
+          "file_sha256": "6807ae8a1fd12588fd2f90699f771bdb5bd88ca9317ea49f376253e9a447a062",
+          "ordinal": 0,
+          "size": [
+            250,
+            23
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 3263,
+          "other_header_fields": [
+            138,
+            27
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "1343075ed08e131ed0e461f178bb4537fbc4d183e201092c63fdb4da313a0892",
+          "indexed_sha256": "a184fc0943b6f4a849abfb06adb0c3402045d5a32dec16248be7b559d13f2297",
+          "opaque_pixels": 3263,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1093,
+          "asset": "opening-credits-1.png",
+          "art_sha256": "13d729a4cf5065e803020b443093c4f8f6c76f4b2ab95bdafdeb2ef8328c6136",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            95,
+            26,
+            1354,
+            146
+          ],
+          "content": [
+            0,
+            0,
+            250,
+            23
+          ],
+          "writes_sha256": "abb9e777272661617ef2d1231fcd59093ed5f76e49df639bf3602305e745f482",
+          "preserve_ink_indices": [
+            35,
+            38,
+            41,
+            106,
+            107,
+            108,
+            110,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            125,
+            126,
+            140,
+            144,
+            148,
+            188,
+            225,
+            228,
+            229,
+            232,
+            233,
+            238,
+            239
+          ]
+        },
+        {
+          "research_id": 1094,
+          "file": "OPENCRD1.SS",
+          "file_sha256": "6807ae8a1fd12588fd2f90699f771bdb5bd88ca9317ea49f376253e9a447a062",
+          "ordinal": 1,
+          "size": [
+            222,
+            23
+          ],
+          "header_part1_offset": 16,
+          "data_part3_offset": 3263,
+          "encoded_length": 2937,
+          "other_header_fields": [
+            124,
+            52
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "7a103cb3fdf51cfcc42ecb3e8d8dd60d7a04b1e7f521cb42433a8149c14a46da",
+          "indexed_sha256": "8aa75cc15a5dc943e63efea32525902bb82b1aa2e39e786c43e4cb8a4efa0900",
+          "opaque_pixels": 2927,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1094,
+          "asset": "opening-credits-1.png",
+          "art_sha256": "13d729a4cf5065e803020b443093c4f8f6c76f4b2ab95bdafdeb2ef8328c6136",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            167,
+            183,
+            1281,
+            304
+          ],
+          "content": [
+            0,
+            0,
+            222,
+            23
+          ],
+          "writes_sha256": "ea14df7f68380939fc659c1387aa88869bb23b837c9a78ae66068dcc4a47e844",
+          "preserve_ink_indices": [
+            35,
+            38,
+            41,
+            106,
+            107,
+            108,
+            110,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            125,
+            126,
+            140,
+            144,
+            148,
+            188,
+            225,
+            228,
+            229,
+            232,
+            233,
+            238,
+            239
+          ]
+        },
+        {
+          "research_id": 1095,
+          "file": "OPENCRD1.SS",
+          "file_sha256": "6807ae8a1fd12588fd2f90699f771bdb5bd88ca9317ea49f376253e9a447a062",
+          "ordinal": 2,
+          "size": [
+            222,
+            23
+          ],
+          "header_part1_offset": 32,
+          "data_part3_offset": 6200,
+          "encoded_length": 2942,
+          "other_header_fields": [
+            124,
+            77
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "e6b828c168b2b0df72d08c35133d381d55b7ebb712a5080249f4e52d12a76730",
+          "indexed_sha256": "30bf24694a0e5c7fc36caa21d798e3f124a831f844c7e5c320de091b92e40892",
+          "opaque_pixels": 2927,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1095,
+          "asset": "opening-credits-1.png",
+          "art_sha256": "13d729a4cf5065e803020b443093c4f8f6c76f4b2ab95bdafdeb2ef8328c6136",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            167,
+            341,
+            1281,
+            464
+          ],
+          "content": [
+            0,
+            0,
+            222,
+            23
+          ],
+          "writes_sha256": "7b86b3276466ab03705c863c1f80c635e15fc383d8f5156b3b3aaf2b372c3bb5",
+          "preserve_ink_indices": [
+            35,
+            38,
+            41,
+            106,
+            107,
+            108,
+            110,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            125,
+            126,
+            140,
+            144,
+            148,
+            188,
+            225,
+            228,
+            229,
+            232,
+            233,
+            238,
+            239
+          ]
+        },
+        {
+          "research_id": 1096,
+          "file": "OPENCRD1.SS",
+          "file_sha256": "6807ae8a1fd12588fd2f90699f771bdb5bd88ca9317ea49f376253e9a447a062",
+          "ordinal": 3,
+          "size": [
+            222,
+            23
+          ],
+          "header_part1_offset": 48,
+          "data_part3_offset": 9142,
+          "encoded_length": 2952,
+          "other_header_fields": [
+            124,
+            102
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "0ee768bc390b60cb4ec697ce9e573f07345cc7989c712af2c3d73c7bbc1b70f2",
+          "indexed_sha256": "2185b287121083e5ba1ef19d029efa644ed05aea3d55bf3dcc93b296b26a7fbd",
+          "opaque_pixels": 2927,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1096,
+          "asset": "opening-credits-1.png",
+          "art_sha256": "13d729a4cf5065e803020b443093c4f8f6c76f4b2ab95bdafdeb2ef8328c6136",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            167,
+            500,
+            1281,
+            623
+          ],
+          "content": [
+            0,
+            0,
+            222,
+            23
+          ],
+          "writes_sha256": "b672b57ee2d367059fb7f2a4bc1ac4074491402d0e84322b357d657d71d878fc",
+          "preserve_ink_indices": [
+            35,
+            38,
+            41,
+            106,
+            107,
+            108,
+            110,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            125,
+            126,
+            140,
+            144,
+            148,
+            188,
+            225,
+            228,
+            229,
+            232,
+            233,
+            238,
+            239
+          ]
+        },
+        {
+          "research_id": 1097,
+          "file": "OPENCRD1.SS",
+          "file_sha256": "6807ae8a1fd12588fd2f90699f771bdb5bd88ca9317ea49f376253e9a447a062",
+          "ordinal": 4,
+          "size": [
+            222,
+            23
+          ],
+          "header_part1_offset": 64,
+          "data_part3_offset": 12094,
+          "encoded_length": 2941,
+          "other_header_fields": [
+            124,
+            127
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f9270b158e64e53378cd23f413cb100f3b03cc9b9c3e794d5bb5f4b5f494210d",
+          "indexed_sha256": "bbd9877bcbf31862c5deb48481de73bcf2df6718c7e05f8fc70d757cfd0a3ccb",
+          "opaque_pixels": 2927,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1097,
+          "asset": "opening-credits-1.png",
+          "art_sha256": "13d729a4cf5065e803020b443093c4f8f6c76f4b2ab95bdafdeb2ef8328c6136",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            167,
+            660,
+            1281,
+            783
+          ],
+          "content": [
+            0,
+            0,
+            222,
+            23
+          ],
+          "writes_sha256": "8ff09ef71237de0c320166ec0b1ffd8e36c003ebf6af472e29abfd7e9911af41",
+          "preserve_ink_indices": [
+            35,
+            38,
+            41,
+            106,
+            107,
+            108,
+            110,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            125,
+            126,
+            140,
+            144,
+            148,
+            188,
+            225,
+            228,
+            229,
+            232,
+            233,
+            238,
+            239
+          ]
+        },
+        {
+          "research_id": 1098,
+          "file": "OPENCRD1.SS",
+          "file_sha256": "6807ae8a1fd12588fd2f90699f771bdb5bd88ca9317ea49f376253e9a447a062",
+          "ordinal": 5,
+          "size": [
+            222,
+            23
+          ],
+          "header_part1_offset": 80,
+          "data_part3_offset": 15035,
+          "encoded_length": 2956,
+          "other_header_fields": [
+            124,
+            152
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "fa7764ddb2fbf5f6b37a7325c83aeb4464f15c380839eee7af466ed58ef4d858",
+          "indexed_sha256": "483e1baac094c570f753d66bae819b75670459242a8b91830873e9efc8ccca9c",
+          "opaque_pixels": 2927,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1098,
+          "asset": "opening-credits-1.png",
+          "art_sha256": "13d729a4cf5065e803020b443093c4f8f6c76f4b2ab95bdafdeb2ef8328c6136",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            167,
+            818,
+            1281,
+            940
+          ],
+          "content": [
+            0,
+            0,
+            222,
+            23
+          ],
+          "writes_sha256": "a04447f7b7d27148c012c126316d320e8c334134e0e7ae31c32a663760097d12",
+          "preserve_ink_indices": [
+            35,
+            38,
+            41,
+            106,
+            107,
+            108,
+            110,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            125,
+            126,
+            140,
+            144,
+            148,
+            188,
+            225,
+            228,
+            229,
+            232,
+            233,
+            238,
+            239
+          ]
+        },
+        {
+          "research_id": 1099,
+          "file": "OPENCRD1.SS",
+          "file_sha256": "6807ae8a1fd12588fd2f90699f771bdb5bd88ca9317ea49f376253e9a447a062",
+          "ordinal": 6,
+          "size": [
+            222,
+            23
+          ],
+          "header_part1_offset": 96,
+          "data_part3_offset": 17991,
+          "encoded_length": 2955,
+          "other_header_fields": [
+            124,
+            177
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "cd159d2945cbf5fdf316eba5ead7e5651a5c9423fa5c6a3d381cf05e57984172",
+          "indexed_sha256": "f5070a40aee0412cc1b91a57781d7a29d2572adc5433a6f295aa2c239d00f193",
+          "opaque_pixels": 2927,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1099,
+          "asset": "opening-credits-1.png",
+          "art_sha256": "13d729a4cf5065e803020b443093c4f8f6c76f4b2ab95bdafdeb2ef8328c6136",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            167,
+            962,
+            1281,
+            1082
+          ],
+          "content": [
+            0,
+            0,
+            222,
+            23
+          ],
+          "writes_sha256": "0e10b8a37ae7329b797b6c75971027655358d13b15a4d65dd60474736f76251a",
+          "preserve_ink_indices": [
+            35,
+            38,
+            41,
+            106,
+            107,
+            108,
+            110,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            125,
+            126,
+            140,
+            144,
+            148,
+            188,
+            225,
+            228,
+            229,
+            232,
+            233,
+            238,
+            239
+          ]
+        }
+      ]
+    },
+    "opening-credits-2.png": {
+      "sha256": "f08bfa35abda18cba402b83a202a3428c22fd6f52518becf1377e6bcb1dbc3ee",
+      "bytes": 1349733,
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create one original fine pixel-art transparent sprite atlas for the HD display layer of Colonization (1994). Image 1 is an exact composition guide: ONE COLUMN, SEVEN equal-height rows. Preserve the number and layout of separate golden parchment name ribbons in each row: row1 TWO equal long ribbons side by side; row2 TWO equal long ribbons side by side; row3 ONE SHORT ribbon centered; row4 THREE ribbons side by side (short, longer, short); row5 TWO equal long ribbons side by side; row6 THREE ribbons side by side (short, longer, short); row7 THREE ribbons side by side (short, longer, short). Keep the original gaps, relative lengths, horizontal alignment, silhouette and curled paper ends. Every ribbon must be BLANK, absolutely no text, lettering, numbers, labels or decorative glyphs. The application retains the original text separately. Repaint paper in refined fine pixel clusters: warm ivory, restrained gold and ochre shading, crisp folded paper edges, subtle fibers. Ends are curled PAPER, no hands. Image 2 is approved pixel-art STYLE only; do not copy its scenery. Use a landscape 4:3 canvas with seven equal rows, each ribbon centered in its allotted source position, isolated with transparent margins. Transparent everywhere outside the paper, including all gaps between independent ribbons; clean straight alpha, no colored fringe, particles, floating flecks or glow. Remove magenta guide background and black labels. No grid, border, extra objects, invented text, smooth painting, blur, photography or 3D.",
+      "generation_file": "exec-0d37e0b3-6200-4676-adfe-e54415362314.png",
+      "reference_sha256": "0065b64d273b1055ab5154c415d9a7a3421aee9a0d610f9088183d6e751fd7ac",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained, native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1100,
+          "file": "OPENCRD2.SS",
+          "file_sha256": "0ba68fa51daf8a801161ebaebd26015da8a4f069199c2f1bf01ba1b5d1065f96",
+          "ordinal": 0,
+          "size": [
+            312,
+            23
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 4078,
+          "other_header_fields": [
+            160,
+            23
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "285a4b223ece71f8ad5a097e4f0b75120ab804d5fb4db646fe6b114300b4612b",
+          "indexed_sha256": "770e6b7e650b44d13e930877ce13b92441bfd3189f79f9e4eb3a4e62bec14fcf",
+          "opaque_pixels": 3970,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1100,
+          "asset": "opening-credits-2.png",
+          "art_sha256": "f08bfa35abda18cba402b83a202a3428c22fd6f52518becf1377e6bcb1dbc3ee",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            43,
+            31,
+            1404,
+            141
+          ],
+          "content": [
+            0,
+            0,
+            312,
+            23
+          ],
+          "writes_sha256": "b4892a2138b6d65b78d000148762d316cf83461f2448ef3bec15c09abc5f02c6",
+          "preserve_ink_indices": [
+            35,
+            38,
+            41,
+            106,
+            107,
+            108,
+            110,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            125,
+            126,
+            140,
+            144,
+            148,
+            188,
+            225,
+            228,
+            229,
+            232,
+            233,
+            238,
+            239
+          ]
+        },
+        {
+          "research_id": 1101,
+          "file": "OPENCRD2.SS",
+          "file_sha256": "0ba68fa51daf8a801161ebaebd26015da8a4f069199c2f1bf01ba1b5d1065f96",
+          "ordinal": 1,
+          "size": [
+            312,
+            23
+          ],
+          "header_part1_offset": 16,
+          "data_part3_offset": 4078,
+          "encoded_length": 4080,
+          "other_header_fields": [
+            160,
+            49
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "17a1bc49c0a62071adad757653fd51bd7cf9fe054fcae4ef57289f7819ff8686",
+          "indexed_sha256": "3e2efbc27abdbf55132bb440e6564e72af78e3fc38397770b4c54d04ada450af",
+          "opaque_pixels": 3969,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1101,
+          "asset": "opening-credits-2.png",
+          "art_sha256": "f08bfa35abda18cba402b83a202a3428c22fd6f52518becf1377e6bcb1dbc3ee",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            44,
+            190,
+            1404,
+            298
+          ],
+          "content": [
+            0,
+            0,
+            312,
+            23
+          ],
+          "writes_sha256": "52a9214f8a3053b620af15d1ae314453a56ba0715606a68c22f21e7c4157cb55",
+          "preserve_ink_indices": [
+            35,
+            38,
+            41,
+            106,
+            107,
+            108,
+            110,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            125,
+            126,
+            140,
+            144,
+            148,
+            188,
+            225,
+            228,
+            229,
+            232,
+            233,
+            238,
+            239
+          ]
+        },
+        {
+          "research_id": 1102,
+          "file": "OPENCRD2.SS",
+          "file_sha256": "0ba68fa51daf8a801161ebaebd26015da8a4f069199c2f1bf01ba1b5d1065f96",
+          "ordinal": 2,
+          "size": [
+            127,
+            25
+          ],
+          "header_part1_offset": 32,
+          "data_part3_offset": 8158,
+          "encoded_length": 1805,
+          "other_header_fields": [
+            159,
+            77
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "69b092069de32be2919aa65d3ddb1e4b44859e818d9350b236ffb03951d3f21a",
+          "indexed_sha256": "30c913aeef906e3b83d9c06a73fba8d7d874c49f63607d6c4a9152e6407efbfd",
+          "opaque_pixels": 1703,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1102,
+          "asset": "opening-credits-2.png",
+          "art_sha256": "f08bfa35abda18cba402b83a202a3428c22fd6f52518becf1377e6bcb1dbc3ee",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            467,
+            342,
+            982,
+            463
+          ],
+          "content": [
+            0,
+            0,
+            127,
+            25
+          ],
+          "writes_sha256": "14e4bc05370929af4bc35f30903a4c448a8363ff871688326632a4ff1ad23337",
+          "preserve_ink_indices": [
+            35,
+            38,
+            41,
+            106,
+            107,
+            108,
+            110,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            125,
+            126,
+            140,
+            144,
+            148,
+            188,
+            225,
+            228,
+            229,
+            232,
+            233,
+            238,
+            239
+          ]
+        },
+        {
+          "research_id": 1103,
+          "file": "OPENCRD2.SS",
+          "file_sha256": "0ba68fa51daf8a801161ebaebd26015da8a4f069199c2f1bf01ba1b5d1065f96",
+          "ordinal": 3,
+          "size": [
+            316,
+            27
+          ],
+          "header_part1_offset": 48,
+          "data_part3_offset": 9963,
+          "encoded_length": 4502,
+          "other_header_fields": [
+            160,
+            107
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "57ba730112f4ae401495a7606348d208d74622aa77689c65039790b67bfc0a01",
+          "indexed_sha256": "3e8491c109b1983c977e3ba6388f960a89e02c0bea5dd9ec21d27e3ec6f8df36",
+          "opaque_pixels": 4253,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1103,
+          "asset": "opening-credits-2.png",
+          "art_sha256": "f08bfa35abda18cba402b83a202a3428c22fd6f52518becf1377e6bcb1dbc3ee",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            34,
+            497,
+            1415,
+            620
+          ],
+          "content": [
+            0,
+            0,
+            316,
+            27
+          ],
+          "writes_sha256": "83bd6d392e1c4d1ee7b0798ec796058f1b75e55984279cc5e3b864018ef706af",
+          "preserve_ink_indices": [
+            35,
+            38,
+            41,
+            106,
+            107,
+            108,
+            110,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            125,
+            126,
+            140,
+            144,
+            148,
+            188,
+            225,
+            228,
+            229,
+            232,
+            233,
+            238,
+            239
+          ]
+        },
+        {
+          "research_id": 1104,
+          "file": "OPENCRD2.SS",
+          "file_sha256": "0ba68fa51daf8a801161ebaebd26015da8a4f069199c2f1bf01ba1b5d1065f96",
+          "ordinal": 4,
+          "size": [
+            280,
+            25
+          ],
+          "header_part1_offset": 64,
+          "data_part3_offset": 14465,
+          "encoded_length": 3601,
+          "other_header_fields": [
+            160,
+            135
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "90c616b8ded3497e65170f97fcd968fa7b9d753e1e89de9a3699daeb67085be9",
+          "indexed_sha256": "624a40228018501efca94130fa7dd6ef97d70772078e62879167d2b07c476b23",
+          "opaque_pixels": 3408,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1104,
+          "asset": "opening-credits-2.png",
+          "art_sha256": "f08bfa35abda18cba402b83a202a3428c22fd6f52518becf1377e6bcb1dbc3ee",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            44,
+            651,
+            1403,
+            762
+          ],
+          "content": [
+            0,
+            0,
+            280,
+            25
+          ],
+          "writes_sha256": "83e2e4d3fe9aeb0df2f4f5f13c59feb2736f75b7860916b34ad2a8aaeff6b970",
+          "preserve_ink_indices": [
+            35,
+            38,
+            41,
+            106,
+            107,
+            108,
+            110,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            125,
+            126,
+            140,
+            144,
+            148,
+            188,
+            225,
+            228,
+            229,
+            232,
+            233,
+            238,
+            239
+          ]
+        },
+        {
+          "research_id": 1105,
+          "file": "OPENCRD2.SS",
+          "file_sha256": "0ba68fa51daf8a801161ebaebd26015da8a4f069199c2f1bf01ba1b5d1065f96",
+          "ordinal": 5,
+          "size": [
+            316,
+            27
+          ],
+          "header_part1_offset": 80,
+          "data_part3_offset": 18066,
+          "encoded_length": 4513,
+          "other_header_fields": [
+            160,
+            165
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "5d060c510bc45e0ab74e7b17730367574d4ec00008353a6956db3ed467cd3708",
+          "indexed_sha256": "39e37e8783f9946ce2d0672519eae7d3fdfc276cba8b07ffb5850af6f2c0b091",
+          "opaque_pixels": 4253,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1105,
+          "asset": "opening-credits-2.png",
+          "art_sha256": "f08bfa35abda18cba402b83a202a3428c22fd6f52518becf1377e6bcb1dbc3ee",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            48,
+            812,
+            1400,
+            930
+          ],
+          "content": [
+            0,
+            0,
+            316,
+            27
+          ],
+          "writes_sha256": "bce89aae56dcccf6ca437bf459a5f611d6c86d38cf90bb964580d4267deef505",
+          "preserve_ink_indices": [
+            35,
+            38,
+            41,
+            106,
+            107,
+            108,
+            110,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            125,
+            126,
+            140,
+            144,
+            148,
+            188,
+            225,
+            228,
+            229,
+            232,
+            233,
+            238,
+            239
+          ]
+        },
+        {
+          "research_id": 1106,
+          "file": "OPENCRD2.SS",
+          "file_sha256": "0ba68fa51daf8a801161ebaebd26015da8a4f069199c2f1bf01ba1b5d1065f96",
+          "ordinal": 6,
+          "size": [
+            316,
+            27
+          ],
+          "header_part1_offset": 96,
+          "data_part3_offset": 22579,
+          "encoded_length": 4519,
+          "other_header_fields": [
+            160,
+            195
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "718fb9b817f22049b3a0d1dcf477c18d708705288450269dec01b503e2bed815",
+          "indexed_sha256": "db1e46d9f1679ff34627571aa80a9c697b34aac41c78924882188c71f7ba8d03",
+          "opaque_pixels": 4253,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1106,
+          "asset": "opening-credits-2.png",
+          "art_sha256": "f08bfa35abda18cba402b83a202a3428c22fd6f52518becf1377e6bcb1dbc3ee",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            49,
+            948,
+            1401,
+            1072
+          ],
+          "content": [
+            0,
+            0,
+            316,
+            27
+          ],
+          "writes_sha256": "6c482c503c5ac907e3cacf8fa0ede6782309e6e93b6c173db22301ac8fe6278a",
+          "preserve_ink_indices": [
+            35,
+            38,
+            41,
+            106,
+            107,
+            108,
+            110,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            125,
+            126,
+            140,
+            144,
+            148,
+            188,
+            225,
+            228,
+            229,
+            232,
+            233,
+            238,
+            239
+          ]
+        }
+      ]
+    },
+    "opening-credits-3.png": {
+      "sha256": "21f41f2ecf9310f8176d0c08ce30867c03ca9779fedad2f6ea20ac3eb7059476",
+      "bytes": 812176,
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create one original fine pixel-art transparent atlas for the Colonization (1994) HD display layer. Follow Image 1's exact composition in ONE COLUMN and SEVEN EQUAL ROWS: ONLY ROWS 1 THROUGH 5 have assets. Rows 6 and 7 must be completely transparent. Row1 THREE separate blank parchment ribbons side by side (short,longer,short). Row2 TWO equal longer blank parchment ribbons side by side. Row3 THREE separate blank parchment ribbons side by side (short,longer,short). Row4 TWO equal longer blank parchment ribbons side by side. Row5 TWO equal longer blank parchment ribbons side by side. Preserve each ribbon's original position, relative length, proportions, gap, horizontal alignment and curled ends. Remove ALL words and letters from the paper: clean blank central writing areas, no text, numbers, labels, tiny marks resembling glyphs, or watermarks. The application retains source lettering separately. Repaint the paper with warm ivory and restrained ochre/gold fine pixel shading, crisp folded edges and subtle fibers. Image 2 provides only the approved fine pixel-art rendering style; never copy its landscape. Landscape 4:3 canvas, exactly seven equal-height rows; clear transparent margins around every occupied row. Transparent background including all gaps, no magenta background or reference labels, no visible grid, no hands, no figures, no scenery, floating specks, glows, shadows outside paper, blur, painterly strokes, 3D or photography. Clean straight alpha.",
+      "generation_file": "exec-001fcb8c-b9f6-43ad-88e8-82cf2c932a94.png",
+      "reference_sha256": "fdd398edfd013d9afabe16c18f18e3552219efa195e0f6f60b4a65e034493ac2",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained, native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1107,
+          "file": "OPENCRD3.SS",
+          "file_sha256": "179257b925ddaa4141dd89dd3ae10bbf6763219d57545643310efd9e712ada18",
+          "ordinal": 0,
+          "size": [
+            316,
+            27
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 4505,
+          "other_header_fields": [
+            160,
+            27
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "6ad91dba855e0b8cb6ee26073919652a29e920cac0826376f40c802a6559c56e",
+          "indexed_sha256": "705ba26d59192978a36196381bf691058f84c2345b28a8fb34a9b6df195c4e2c",
+          "opaque_pixels": 4253,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1107,
+          "asset": "opening-credits-3.png",
+          "art_sha256": "21f41f2ecf9310f8176d0c08ce30867c03ca9779fedad2f6ea20ac3eb7059476",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            51,
+            30,
+            1397,
+            140
+          ],
+          "content": [
+            0,
+            0,
+            316,
+            27
+          ],
+          "writes_sha256": "18714599af698356a59adbbcc68e87e1b47ad91197534b41dd894959d487d846",
+          "preserve_ink_indices": [
+            35,
+            38,
+            41,
+            106,
+            107,
+            108,
+            110,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            125,
+            126,
+            140,
+            144,
+            148,
+            188,
+            225,
+            228,
+            229,
+            232,
+            233,
+            238,
+            239
+          ]
+        },
+        {
+          "research_id": 1108,
+          "file": "OPENCRD3.SS",
+          "file_sha256": "179257b925ddaa4141dd89dd3ae10bbf6763219d57545643310efd9e712ada18",
+          "ordinal": 1,
+          "size": [
+            295,
+            23
+          ],
+          "header_part1_offset": 16,
+          "data_part3_offset": 4505,
+          "encoded_length": 3754,
+          "other_header_fields": [
+            158,
+            53
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "70a1235c11d593d24170ae0355b3c0c891ac0292a71d946a5c03228094b08f2f",
+          "indexed_sha256": "c2ecc117ae0ba7bd68ecf36aa80133b54bb5688ba14bc256e7dd99412052c59b",
+          "opaque_pixels": 3646,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1108,
+          "asset": "opening-credits-3.png",
+          "art_sha256": "21f41f2ecf9310f8176d0c08ce30867c03ca9779fedad2f6ea20ac3eb7059476",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            46,
+            190,
+            1403,
+            291
+          ],
+          "content": [
+            0,
+            0,
+            295,
+            23
+          ],
+          "writes_sha256": "f308641261ef0ac3ce119ea4d11ad28e991346e0de4a048c0f2b2d2a6bc8110b",
+          "preserve_ink_indices": [
+            35,
+            38,
+            41,
+            106,
+            107,
+            108,
+            110,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            125,
+            126,
+            140,
+            144,
+            148,
+            188,
+            225,
+            228,
+            229,
+            232,
+            233,
+            238,
+            239
+          ]
+        },
+        {
+          "research_id": 1109,
+          "file": "OPENCRD3.SS",
+          "file_sha256": "179257b925ddaa4141dd89dd3ae10bbf6763219d57545643310efd9e712ada18",
+          "ordinal": 2,
+          "size": [
+            316,
+            27
+          ],
+          "header_part1_offset": 32,
+          "data_part3_offset": 8259,
+          "encoded_length": 4490,
+          "other_header_fields": [
+            160,
+            133
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "0e228f94a6f5be6fdae802481df4c40cc5190f5b9d9672459719227472b24d02",
+          "indexed_sha256": "18de955633c18cddafc309c39698099bfc1391400dcf69b8a88e3b4d456d4372",
+          "opaque_pixels": 4229,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1109,
+          "asset": "opening-credits-3.png",
+          "art_sha256": "21f41f2ecf9310f8176d0c08ce30867c03ca9779fedad2f6ea20ac3eb7059476",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            49,
+            335,
+            1394,
+            447
+          ],
+          "content": [
+            0,
+            0,
+            316,
+            27
+          ],
+          "writes_sha256": "9c1f4230268e360220d8de9ef36d4eb3cdc55d898fa769a4a98bd3a33ad56e4a",
+          "preserve_ink_indices": [
+            35,
+            38,
+            41,
+            106,
+            107,
+            108,
+            110,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            125,
+            126,
+            140,
+            144,
+            148,
+            188,
+            225,
+            228,
+            229,
+            232,
+            233,
+            238,
+            239
+          ]
+        },
+        {
+          "research_id": 1110,
+          "file": "OPENCRD3.SS",
+          "file_sha256": "179257b925ddaa4141dd89dd3ae10bbf6763219d57545643310efd9e712ada18",
+          "ordinal": 3,
+          "size": [
+            280,
+            25
+          ],
+          "header_part1_offset": 48,
+          "data_part3_offset": 12749,
+          "encoded_length": 3594,
+          "other_header_fields": [
+            158,
+            161
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "1b3fda33940f37bbadec1e7544df9219ea9d261402f746da991ab6d6c8fc06f1",
+          "indexed_sha256": "83811231916029f7e37ecfc5340682b0795147ad7c0ff2afd35d72480748111e",
+          "opaque_pixels": 3408,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1110,
+          "asset": "opening-credits-3.png",
+          "art_sha256": "21f41f2ecf9310f8176d0c08ce30867c03ca9779fedad2f6ea20ac3eb7059476",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            77,
+            492,
+            1371,
+            601
+          ],
+          "content": [
+            0,
+            0,
+            280,
+            25
+          ],
+          "writes_sha256": "453d3d5fa197b10e327014be5694671afb45ed0d520d8956dc508237f092830c",
+          "preserve_ink_indices": [
+            35,
+            38,
+            41,
+            106,
+            107,
+            108,
+            110,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            125,
+            126,
+            140,
+            144,
+            148,
+            188,
+            225,
+            228,
+            229,
+            232,
+            233,
+            238,
+            239
+          ]
+        },
+        {
+          "research_id": 1111,
+          "file": "OPENCRD3.SS",
+          "file_sha256": "179257b925ddaa4141dd89dd3ae10bbf6763219d57545643310efd9e712ada18",
+          "ordinal": 4,
+          "size": [
+            280,
+            25
+          ],
+          "header_part1_offset": 64,
+          "data_part3_offset": 16343,
+          "encoded_length": 3590,
+          "other_header_fields": [
+            158,
+            189
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "631646f675e8e13c9908c8cbbfe1bd5b6ffd68b8f3c0e803c8c2b0293469b40a",
+          "indexed_sha256": "9880d96d5d44cf15682657e1e1c3e3775fe939de9d0653c55717f726681aa239",
+          "opaque_pixels": 3408,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1111,
+          "asset": "opening-credits-3.png",
+          "art_sha256": "21f41f2ecf9310f8176d0c08ce30867c03ca9779fedad2f6ea20ac3eb7059476",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            78,
+            644,
+            1368,
+            755
+          ],
+          "content": [
+            0,
+            0,
+            280,
+            25
+          ],
+          "writes_sha256": "fc880fc1e466ce1e517dcf1df299c9c7802fc001b64ae74d7f915a96515d75e6",
+          "preserve_ink_indices": [
+            35,
+            38,
+            41,
+            106,
+            107,
+            108,
+            110,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            125,
+            126,
+            140,
+            144,
+            148,
+            188,
+            225,
+            228,
+            229,
+            232,
+            233,
+            238,
+            239
+          ]
+        }
+      ]
+    },
+    "portraits-mayors.png": {
+      "sha256": "e01ab16bd8b07fbee2429b806b37d4b4fe998e79776c6a1b2eee2f53a78e76d7",
+      "bytes": 1432685,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE original fine pixel-art atlas of FOUR character busts for the Colonization (1994) HD display layer. Image 1 is the exact source composition and character reference. Preserve each character's face, expression, costume, wig or hair, body crop, hands, pose, orientation and silhouette. A TWO by TWO equal grid, in reading order: top-left a solemn older gentleman with gray curled wig, deep red fur-trimmed coat and white lace cravat, both arms positioned exactly as reference with one arm hanging down at right; top-right a stern gray-wigged gentleman in a blue coat with gold edging and white lace cravat, one hand resting forward; bottom-left a dark-haired man with narrow dark moustache and pointed beard, large pleated gray ruff and diagonal mustard-gold sash over charcoal clothing, hand forward; bottom-right a gray-haired man with a thick dark moustache in an ochre-gold period doublet and white collar, hand forward. Keep the four distinct likenesses and expressions without beautifying or changing identity. Repaint in the project's approved refined pixel-art finish: crisp fine deliberate pixel clusters, detailed cloth and facial features, restrained highlights, period natural colors, no oversized square pixels. Image 2 is STYLE ONLY; never copy its scenery. Square transparent-background canvas with exactly two equal rows and two equal columns, one bust per cell fully inside its cell with clear transparent margin. Preserve the original unusual cutout shapes under and between arms and body, including the large transparent area under the top-left bust. No frames, scenery, furniture additions, captions, text, numbers, grid, reference labels, magenta background, glows, extra limbs or invented props. Transparent outside the figures, clean straight alpha, no blurry painting, smooth 3D or photography.",
+      "generation_file": "exec-b80ba7bb-71cf-4fba-a36a-0f1299384c45.png",
+      "reference_sha256": "53d0582c6519b84e8e909fd87352a72ba01b376b373de6203ad5a22db64dda58",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained, native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1066,
+          "file": "MYR0.SS",
+          "file_sha256": "7a8d99a56b566a0330c551e8313391fe4f3e8b745d79c6b5371413b5e6845504",
+          "ordinal": 0,
+          "size": [
+            96,
+            93
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 3863,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "2c4d15c67c8b8c0e70f89733267c49788730453ced66ae1ae4a9cf268f28f168",
+          "indexed_sha256": "76fa3120b94c238d68c9e256ac703b3c1b1f981ac14ec18080a0c2ccb3160371",
+          "opaque_pixels": 3516,
+          "transparency_index": 253,
+          "id": 1066,
+          "asset": "portraits-mayors.png",
+          "sample": [
+            33,
+            53,
+            615,
+            617
+          ],
+          "art_sha256": "e01ab16bd8b07fbee2429b806b37d4b4fe998e79776c6a1b2eee2f53a78e76d7",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "e99dd2189b6d41dbfdb953651072c8fdaf1598fe5f36ba529b61e5f3215aa299",
+          "palette_sha256": "982110508d1f519250b24bb1f2d17619e85c0284202bfe2e5c56f840a43b338f",
+          "writes_sha256": "2d4af2b5c6c2e6cb21cc24e598510b942c86c764c51155afc11fa42a2e5b9430"
+        },
+        {
+          "research_id": 1067,
+          "file": "MYR1.SS",
+          "file_sha256": "8557429a09dd84ef90f95a5e8af9ddad3692d2cfd6f490b72a439305eeaa762c",
+          "ordinal": 0,
+          "size": [
+            67,
+            85
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 3928,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "734acdfac5c22ee090ddadb4babe043b3f739134d561d83d3d0fb00879718248",
+          "indexed_sha256": "238324f30787e68ce76abe0766f692e18a05f89bc22f866b3e13e877ef9efd16",
+          "opaque_pixels": 3597,
+          "transparency_index": 253,
+          "id": 1067,
+          "asset": "portraits-mayors.png",
+          "sample": [
+            722,
+            49,
+            1174,
+            617
+          ],
+          "art_sha256": "e01ab16bd8b07fbee2429b806b37d4b4fe998e79776c6a1b2eee2f53a78e76d7",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "834925b28643a2b0697f9b8532dac7aae815229bbad2d6a1d0dfc106389c792a",
+          "palette_sha256": "cb52f91ccbed446e091c35e7708eef53e1389fc0ecd55ad32954a758aa521645",
+          "writes_sha256": "01bbda5a1420fd157d3e3282c341a4f9ed6c6e831aabf40db818f93d5038738c"
+        },
+        {
+          "research_id": 1068,
+          "file": "MYR2.SS",
+          "file_sha256": "ea56206b9812d18f8346f320dfdcd058d07d8becbc3afc71e108e33d532dea62",
+          "ordinal": 0,
+          "size": [
+            74,
+            73
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 3636,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "1d203655357e316be9b4d12b2c4a318194b6cb341ca45cea8b70faf97e364133",
+          "indexed_sha256": "9606631e2c4ed4ea54f452dbfa4e52b62de9f4d63a5978aa5dc5f4ed8d291d8b",
+          "opaque_pixels": 3537,
+          "transparency_index": 253,
+          "id": 1068,
+          "asset": "portraits-mayors.png",
+          "sample": [
+            33,
+            660,
+            597,
+            1212
+          ],
+          "art_sha256": "e01ab16bd8b07fbee2429b806b37d4b4fe998e79776c6a1b2eee2f53a78e76d7",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "7c0a338598cacd9d5c4fa6f95d4973e574c6e5e2dfd053339de0081ab5b8317b",
+          "palette_sha256": "b40aa1e69fe2029333fb65903818794114dcb64b065c3c2ab494bd72e4d48d61",
+          "writes_sha256": "b3e5809faa3afb1b793ae75ac6233b2215aad17bb0af2ea3a0b0c6df21a37742"
+        },
+        {
+          "research_id": 1069,
+          "file": "MYR3.SS",
+          "file_sha256": "d9d6826d17c96003cfdea012c0e64541065815f1430504b369d096969db324c9",
+          "ordinal": 0,
+          "size": [
+            74,
+            68
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 2897,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "runtime_identity": "not_assessed_by_inventory",
+          "animation": "not_assessed_by_inventory",
+          "production_hd": "not_assessed_by_inventory",
+          "decode_status": "decoded",
+          "encoded_sha256": "66e4345d10233cb8a81a69c022347a546f310e2bab95ab8802ffea5ccb4a70b6",
+          "indexed_sha256": "92539bac4b098c64f123f44dbd96ede9b111a68faf28a68fcd27a078dce3cc74",
+          "opaque_pixels": 2698,
+          "transparency_index": 253,
+          "id": 1069,
+          "asset": "portraits-mayors.png",
+          "sample": [
+            664,
+            683,
+            1208,
+            1205
+          ],
+          "art_sha256": "e01ab16bd8b07fbee2429b806b37d4b4fe998e79776c6a1b2eee2f53a78e76d7",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "d310bee5148a02e9c56603b93ec7f7ee3783516cab750e222c7b06fb0a30ee80",
+          "palette_sha256": "7c0c370e7eaa984d55720940dbcef7d1a542535fa68f831864ecfc1842561d41",
+          "writes_sha256": "502fae13ad9c3b31be74ec8f49480bb983dfb3bbbfead2b43bbe5cb9edab8b85"
+        }
+      ]
+    },
+    "openbonk-poses-1.png": {
+      "sha256": "d3f17c0fd9f9c859df6168d60c111a433a452eb04d1dd7ed129d99486968687e",
+      "bytes": 1737549,
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE refined fine pixel-art animation sprite atlas for the Colonization (1994) HD display layer. Image 1 is the exact nine-frame composition reference. Three columns and three rows, nine poses in reading order. Depict the SAME small three-masted colonial wooden sailing ship facing LEFT, cream/off-white full sails, red pennants, warm dark brown rounded hull, tiny muted seafoam wake. Match each source frame's slightly different bobbing, sail shapes, red pennant positions and wake, preserving orientation, silhouette, aspect ratio and relative geometry. These are nine consecutive animation frames, so keep one consistent ship design and palette across all cells. Repaint fresh with crisp fine pixel clusters, readable timber, cloth folds, restrained natural highlights and no oversized block pixels. Image 2 is approved pixel-art STYLE ONLY; do not copy its scenery. Landscape 4:3 transparent-background canvas with exactly 3x3 equal cells, each ship centered and fully contained inside its cell with transparent margins and no overlap. Remove reference magenta and black labels. No ocean background, horizon, borders, grid, text, numbers, captions, shadows outside the sprite, invented flags with symbols, extra ships, blur, photography or 3D. Clean alpha outside ship and small wake. Preserve all nine distinct poses instead of repeating a single pose.",
+      "generation_file": "exec-d81c0480-027b-4cec-b44b-728454e49842.png",
+      "reference_sha256": "e2387f4d3ca8b2fde8af52d335f81b60d94086a2029c95ec0353d5d10546009e",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1074,
+          "file": "OPENBONK.SS",
+          "file_sha256": "65facf06dad88e9d5d17989a6488c74e76ffbab1b15d7c5ca0abe9c81ab74910",
+          "ordinal": 0,
+          "size": [
+            33,
+            25
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 640,
+          "other_header_fields": [
+            166,
+            125
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ddd9c23780a257bfedc88a5452387161116f9102320c58cb3d94af0607468648",
+          "indexed_sha256": "b54f1def5e1ce789cd955e8b80cb6ef77065f0c460c7af763753a63e9d599cab",
+          "opaque_pixels": 510,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1074,
+          "asset": "openbonk-poses-1.png",
+          "art_sha256": "d3f17c0fd9f9c859df6168d60c111a433a452eb04d1dd7ed129d99486968687e",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            32,
+            39,
+            455,
+            339
+          ],
+          "content": [
+            0,
+            0,
+            33,
+            25
+          ],
+          "writes_sha256": "01c05370c1124633f79f78dca82f3a4e1ee78571c176c5a7dc1922982744817e"
+        },
+        {
+          "research_id": 1075,
+          "file": "OPENBONK.SS",
+          "file_sha256": "65facf06dad88e9d5d17989a6488c74e76ffbab1b15d7c5ca0abe9c81ab74910",
+          "ordinal": 1,
+          "size": [
+            33,
+            23
+          ],
+          "header_part1_offset": 16,
+          "data_part3_offset": 640,
+          "encoded_length": 610,
+          "other_header_fields": [
+            165,
+            123
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "74969d2db85715a257d2e9ca187734f3d706e8f32bdfabd169b686d5f9d769ee",
+          "indexed_sha256": "cfab5358f56d7da017034561045ccc2f44842371055144788cef5dd2280f5333",
+          "opaque_pixels": 491,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1075,
+          "asset": "openbonk-poses-1.png",
+          "art_sha256": "d3f17c0fd9f9c859df6168d60c111a433a452eb04d1dd7ed129d99486968687e",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            509,
+            36,
+            945,
+            335
+          ],
+          "content": [
+            0,
+            0,
+            33,
+            23
+          ],
+          "writes_sha256": "b809af81206e8e304a93cb4a288f5f22296361c56bd9cef172cffd623cc3fae5"
+        },
+        {
+          "research_id": 1076,
+          "file": "OPENBONK.SS",
+          "file_sha256": "65facf06dad88e9d5d17989a6488c74e76ffbab1b15d7c5ca0abe9c81ab74910",
+          "ordinal": 2,
+          "size": [
+            33,
+            23
+          ],
+          "header_part1_offset": 32,
+          "data_part3_offset": 1250,
+          "encoded_length": 609,
+          "other_header_fields": [
+            164,
+            123
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f7c42d1e6204cee1ee6c3a09e0e6332b8ea4253d415a284b11b12e96c1cc8cdd",
+          "indexed_sha256": "d97c6747e14940ffdd6ee9424068d955994d17f985b1c5ac34e98c5bbeb7c94a",
+          "opaque_pixels": 492,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1076,
+          "asset": "openbonk-poses-1.png",
+          "art_sha256": "d3f17c0fd9f9c859df6168d60c111a433a452eb04d1dd7ed129d99486968687e",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            995,
+            39,
+            1425,
+            334
+          ],
+          "content": [
+            0,
+            0,
+            33,
+            23
+          ],
+          "writes_sha256": "1031d8b6de9aee7b40d730a889939bbb5a4d37466179278547bb70bdee34ceb9"
+        },
+        {
+          "research_id": 1077,
+          "file": "OPENBONK.SS",
+          "file_sha256": "65facf06dad88e9d5d17989a6488c74e76ffbab1b15d7c5ca0abe9c81ab74910",
+          "ordinal": 3,
+          "size": [
+            33,
+            24
+          ],
+          "header_part1_offset": 48,
+          "data_part3_offset": 1859,
+          "encoded_length": 616,
+          "other_header_fields": [
+            163,
+            124
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "d6dbd37e322f542fa12cb3261d79b9d93a44da3b43773b96031792c34f74b6fb",
+          "indexed_sha256": "67221b5ba7c094833be83c4376b1318be492e42956e53f27f851b67af55e2260",
+          "opaque_pixels": 492,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1077,
+          "asset": "openbonk-poses-1.png",
+          "art_sha256": "d3f17c0fd9f9c859df6168d60c111a433a452eb04d1dd7ed129d99486968687e",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            30,
+            385,
+            452,
+            724
+          ],
+          "content": [
+            0,
+            0,
+            33,
+            24
+          ],
+          "writes_sha256": "e9c0f497a562a197095f70046f9ed55024053defe4b5a29bcc06d7910e49c069"
+        },
+        {
+          "research_id": 1078,
+          "file": "OPENBONK.SS",
+          "file_sha256": "65facf06dad88e9d5d17989a6488c74e76ffbab1b15d7c5ca0abe9c81ab74910",
+          "ordinal": 4,
+          "size": [
+            33,
+            23
+          ],
+          "header_part1_offset": 64,
+          "data_part3_offset": 2475,
+          "encoded_length": 610,
+          "other_header_fields": [
+            162,
+            123
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "928993a6ce8ff455f5ac8edb0800b019f71357d8703aa3f96ff913787669f952",
+          "indexed_sha256": "1b08c8715629eb29ff033d629f62e61a4ed105c6108786b710f4c588cea7b1bb",
+          "opaque_pixels": 489,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1078,
+          "asset": "openbonk-poses-1.png",
+          "art_sha256": "d3f17c0fd9f9c859df6168d60c111a433a452eb04d1dd7ed129d99486968687e",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            507,
+            385,
+            946,
+            724
+          ],
+          "content": [
+            0,
+            0,
+            33,
+            23
+          ],
+          "writes_sha256": "96c733e2bfc98c9d9b45fa2cfcc53a600c44744a6caf4c40b3ff07983f357b55"
+        },
+        {
+          "research_id": 1079,
+          "file": "OPENBONK.SS",
+          "file_sha256": "65facf06dad88e9d5d17989a6488c74e76ffbab1b15d7c5ca0abe9c81ab74910",
+          "ordinal": 5,
+          "size": [
+            33,
+            24
+          ],
+          "header_part1_offset": 80,
+          "data_part3_offset": 3085,
+          "encoded_length": 614,
+          "other_header_fields": [
+            161,
+            124
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ec6bcc5579697c811b7b892ab20ea1945ea0764aff3fa2934c4878b20df44593",
+          "indexed_sha256": "244749dda38c000584de441629c3d95a04aa5f61e725da5b8c01c16878558158",
+          "opaque_pixels": 488,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1079,
+          "asset": "openbonk-poses-1.png",
+          "art_sha256": "d3f17c0fd9f9c859df6168d60c111a433a452eb04d1dd7ed129d99486968687e",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            996,
+            385,
+            1425,
+            724
+          ],
+          "content": [
+            0,
+            0,
+            33,
+            24
+          ],
+          "writes_sha256": "425dbbd7279b5e982887f6e2a9873179602083d709a9a2f70b35c1ba59978561"
+        },
+        {
+          "research_id": 1080,
+          "file": "OPENBONK.SS",
+          "file_sha256": "65facf06dad88e9d5d17989a6488c74e76ffbab1b15d7c5ca0abe9c81ab74910",
+          "ordinal": 6,
+          "size": [
+            33,
+            25
+          ],
+          "header_part1_offset": 96,
+          "data_part3_offset": 3699,
+          "encoded_length": 617,
+          "other_header_fields": [
+            160,
+            125
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "a0394de109e513679ccd33028bbf63a2c257ee525ee7c0517b4cce846e6486e7",
+          "indexed_sha256": "d7ce86c4153ac59e50cd89bbe89b0c7a0b6580e3243d3ae1a3d322d30f88ed1e",
+          "opaque_pixels": 488,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1080,
+          "asset": "openbonk-poses-1.png",
+          "art_sha256": "d3f17c0fd9f9c859df6168d60c111a433a452eb04d1dd7ed129d99486968687e",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            33,
+            724,
+            455,
+            1021
+          ],
+          "content": [
+            0,
+            0,
+            33,
+            25
+          ],
+          "writes_sha256": "69a53db788acd70de19bc19751ad3c452331c1114ad57a6305cd48c1595ce219"
+        },
+        {
+          "research_id": 1081,
+          "file": "OPENBONK.SS",
+          "file_sha256": "65facf06dad88e9d5d17989a6488c74e76ffbab1b15d7c5ca0abe9c81ab74910",
+          "ordinal": 7,
+          "size": [
+            33,
+            23
+          ],
+          "header_part1_offset": 112,
+          "data_part3_offset": 4316,
+          "encoded_length": 595,
+          "other_header_fields": [
+            159,
+            123
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "9cd2115b8add1178100abe3704e7227694a07d279e14d54aeda4104a99dbfe06",
+          "indexed_sha256": "e4c85bfd6ae3a078368b33e978d035ea3ab4aa52676ddba3071651a0f3571b5f",
+          "opaque_pixels": 477,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1081,
+          "asset": "openbonk-poses-1.png",
+          "art_sha256": "d3f17c0fd9f9c859df6168d60c111a433a452eb04d1dd7ed129d99486968687e",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            514,
+            724,
+            946,
+            1016
+          ],
+          "content": [
+            0,
+            0,
+            33,
+            23
+          ],
+          "writes_sha256": "9e145c2b457e5b6f59c6312ff15450377b92b786c01849635cae57f25e3aad20"
+        },
+        {
+          "research_id": 1082,
+          "file": "OPENBONK.SS",
+          "file_sha256": "65facf06dad88e9d5d17989a6488c74e76ffbab1b15d7c5ca0abe9c81ab74910",
+          "ordinal": 8,
+          "size": [
+            33,
+            22
+          ],
+          "header_part1_offset": 128,
+          "data_part3_offset": 4911,
+          "encoded_length": 563,
+          "other_header_fields": [
+            157,
+            123
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "8739055ce639d53bcf7d159b6519b77f9d6f198452aa162da2d108907944490c",
+          "indexed_sha256": "2a0c926e373ac188cf417aa8049fafc34f9299c3e1c6bfcef108f86cfe0e8e96",
+          "opaque_pixels": 445,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1082,
+          "asset": "openbonk-poses-1.png",
+          "art_sha256": "d3f17c0fd9f9c859df6168d60c111a433a452eb04d1dd7ed129d99486968687e",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            996,
+            724,
+            1426,
+            1004
+          ],
+          "content": [
+            0,
+            0,
+            33,
+            22
+          ],
+          "writes_sha256": "eb655eadb9a4e5ef2ac8a4123e921bef9a0bdf1395faf2887c28e0e15983ced8"
+        }
+      ]
+    },
+    "openbonk-poses-2.png": {
+      "sha256": "227e6ecb0a653ef073afcd0e0ae13a9ca38519af16a8bfa6528e625db2e131c8",
+      "bytes": 1594205,
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE refined fine pixel-art animation sprite atlas for the Colonization (1994) HD display layer. Image 1 is the exact nine-frame composition reference. Three columns and three rows, nine poses in reading order. Depict the SAME small three-masted colonial wooden sailing ship facing LEFT, cream/off-white full sails, red pennants, warm dark brown rounded hull, tiny muted seafoam wake. Match each source frame's slightly different bobbing, sail shapes, red pennant positions and wake, preserving orientation, silhouette, aspect ratio and relative geometry. These are nine consecutive animation frames, so keep one consistent ship design and palette across all cells. Repaint fresh with crisp fine pixel clusters, readable timber, cloth folds, restrained natural highlights and no oversized block pixels. Image 2 is approved pixel-art STYLE ONLY; do not copy its scenery. Landscape 4:3 transparent-background canvas with exactly 3x3 equal cells, each ship centered and fully contained inside its cell with transparent margins and no overlap. Remove reference magenta and black labels. No ocean background, horizon, borders, grid, text, numbers, captions, shadows outside the sprite, invented flags with symbols, extra ships, blur, photography or 3D. Clean alpha outside ship and small wake. Preserve all nine distinct poses instead of repeating a single pose.\nThis is the SECOND batch of nine consecutive poses (source ordinals9 through17). Image 3 is the newly generated first batch for ship-design consistency only. Use its fine wood, cream cloth, red pennants and muted foam finish while following Image 1's nine precise new poses and wake changes. Do not reuse the same pose nine times. Keep the 3x3 grid and transparent margins.",
+      "generation_file": "exec-aebab833-3b08-4eb7-be59-996aa40ffaeb.png",
+      "reference_sha256": "bbc981dd8857d0d853ca945971e07e342e1750682339849fc9af87e98ae2de43",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1083,
+          "file": "OPENBONK.SS",
+          "file_sha256": "65facf06dad88e9d5d17989a6488c74e76ffbab1b15d7c5ca0abe9c81ab74910",
+          "ordinal": 9,
+          "size": [
+            33,
+            23
+          ],
+          "header_part1_offset": 144,
+          "data_part3_offset": 5474,
+          "encoded_length": 566,
+          "other_header_fields": [
+            157,
+            123
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "3697bd203ff18935ab5a854070777f39e015178e3b8ab05dc980b9f4be84b45f",
+          "indexed_sha256": "47b48461e19db608064e68f28e40446efc16963d92710e9e14a9539fde43a388",
+          "opaque_pixels": 468,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1083,
+          "asset": "openbonk-poses-2.png",
+          "art_sha256": "227e6ecb0a653ef073afcd0e0ae13a9ca38519af16a8bfa6528e625db2e131c8",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            35,
+            47,
+            460,
+            330
+          ],
+          "content": [
+            0,
+            0,
+            33,
+            23
+          ],
+          "writes_sha256": "7caffcba9230020f4b29090b0c0c4aea43a978022f3b28085f7ae73110862b49"
+        },
+        {
+          "research_id": 1084,
+          "file": "OPENBONK.SS",
+          "file_sha256": "65facf06dad88e9d5d17989a6488c74e76ffbab1b15d7c5ca0abe9c81ab74910",
+          "ordinal": 10,
+          "size": [
+            33,
+            24
+          ],
+          "header_part1_offset": 160,
+          "data_part3_offset": 6040,
+          "encoded_length": 590,
+          "other_header_fields": [
+            157,
+            123
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "a73dc64fc26b0df92296f3e3f42736e8fdf9138ed5780fbff3b5462bbcafd671",
+          "indexed_sha256": "37a040f77933a381d1b1e9e7186afc614820ebdd601ac4123958a5fbaf8695f3",
+          "opaque_pixels": 491,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1084,
+          "asset": "openbonk-poses-2.png",
+          "art_sha256": "227e6ecb0a653ef073afcd0e0ae13a9ca38519af16a8bfa6528e625db2e131c8",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            504,
+            45,
+            934,
+            332
+          ],
+          "content": [
+            0,
+            0,
+            33,
+            24
+          ],
+          "writes_sha256": "e613a3b5e19e2d2f52cd15ce0db85f576503ef4de9a0ebad147d93080d010da0"
+        },
+        {
+          "research_id": 1085,
+          "file": "OPENBONK.SS",
+          "file_sha256": "65facf06dad88e9d5d17989a6488c74e76ffbab1b15d7c5ca0abe9c81ab74910",
+          "ordinal": 11,
+          "size": [
+            33,
+            23
+          ],
+          "header_part1_offset": 176,
+          "data_part3_offset": 6630,
+          "encoded_length": 561,
+          "other_header_fields": [
+            157,
+            123
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "4bf2fb5aa5b4463ad389ccef6593791b2ed5beff030fc250cb9d6a95857bb68a",
+          "indexed_sha256": "bb374cac71ad8b8599fdabe5a87afbee7f1d2c537fb37b9e2174408dca65d3e9",
+          "opaque_pixels": 466,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1085,
+          "asset": "openbonk-poses-2.png",
+          "art_sha256": "227e6ecb0a653ef073afcd0e0ae13a9ca38519af16a8bfa6528e625db2e131c8",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            985,
+            45,
+            1414,
+            330
+          ],
+          "content": [
+            0,
+            0,
+            33,
+            23
+          ],
+          "writes_sha256": "2b237a403fbc9b3f55df64a25b905a3acdb17bd36d196a74af7e185d3bb53b3d"
+        },
+        {
+          "research_id": 1086,
+          "file": "OPENBONK.SS",
+          "file_sha256": "65facf06dad88e9d5d17989a6488c74e76ffbab1b15d7c5ca0abe9c81ab74910",
+          "ordinal": 12,
+          "size": [
+            33,
+            22
+          ],
+          "header_part1_offset": 192,
+          "data_part3_offset": 7191,
+          "encoded_length": 577,
+          "other_header_fields": [
+            157,
+            123
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "82e3416ee98ee9b44455c305b0e634962266122d62d62002b33c1573745931f0",
+          "indexed_sha256": "20bf8fd487327cb20bb9ba154d7aaa1a5e66b78537ca0fa06620e3ebb7c3534d",
+          "opaque_pixels": 458,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1086,
+          "asset": "openbonk-poses-2.png",
+          "art_sha256": "227e6ecb0a653ef073afcd0e0ae13a9ca38519af16a8bfa6528e625db2e131c8",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            36,
+            391,
+            462,
+            724
+          ],
+          "content": [
+            0,
+            0,
+            33,
+            22
+          ],
+          "writes_sha256": "2a6f2bd013e1d9173aedb818c2886534a8aa495b85a0f4574df29d16ceae6666"
+        },
+        {
+          "research_id": 1087,
+          "file": "OPENBONK.SS",
+          "file_sha256": "65facf06dad88e9d5d17989a6488c74e76ffbab1b15d7c5ca0abe9c81ab74910",
+          "ordinal": 13,
+          "size": [
+            34,
+            22
+          ],
+          "header_part1_offset": 208,
+          "data_part3_offset": 7768,
+          "encoded_length": 572,
+          "other_header_fields": [
+            158,
+            123
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "07ac2dfe95cf9894dfd5ce029ca8ca2519f62031f5ca4e45552465d6183994b7",
+          "indexed_sha256": "4a24a641a9f9bff53f0369db7799cd962b44a7e72dc3ea2b7ad59de7dcada7b6",
+          "opaque_pixels": 450,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1087,
+          "asset": "openbonk-poses-2.png",
+          "art_sha256": "227e6ecb0a653ef073afcd0e0ae13a9ca38519af16a8bfa6528e625db2e131c8",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            505,
+            387,
+            939,
+            724
+          ],
+          "content": [
+            0,
+            0,
+            34,
+            22
+          ],
+          "writes_sha256": "72aca5675562f67f0305f3f3e22dce665add397bcf79c3a8ac06cbc9d172702a"
+        },
+        {
+          "research_id": 1088,
+          "file": "OPENBONK.SS",
+          "file_sha256": "65facf06dad88e9d5d17989a6488c74e76ffbab1b15d7c5ca0abe9c81ab74910",
+          "ordinal": 14,
+          "size": [
+            35,
+            22
+          ],
+          "header_part1_offset": 224,
+          "data_part3_offset": 8340,
+          "encoded_length": 579,
+          "other_header_fields": [
+            158,
+            123
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "2e601ac8b8050d34269078240185ccd279acbba29a0a23ce701be0a68c34e7b0",
+          "indexed_sha256": "79600a01305d52c74d4a896c839a1f9b9fa1c5f646befa3c7458c9e6d6e05df0",
+          "opaque_pixels": 455,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1088,
+          "asset": "openbonk-poses-2.png",
+          "art_sha256": "227e6ecb0a653ef073afcd0e0ae13a9ca38519af16a8bfa6528e625db2e131c8",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            993,
+            397,
+            1425,
+            724
+          ],
+          "content": [
+            0,
+            0,
+            35,
+            22
+          ],
+          "writes_sha256": "af71c0ab7758fd3d95ccc00ff9165b2c0165b05ef670a4a7c559035d1dd9d2cf"
+        },
+        {
+          "research_id": 1089,
+          "file": "OPENBONK.SS",
+          "file_sha256": "65facf06dad88e9d5d17989a6488c74e76ffbab1b15d7c5ca0abe9c81ab74910",
+          "ordinal": 15,
+          "size": [
+            35,
+            22
+          ],
+          "header_part1_offset": 240,
+          "data_part3_offset": 8919,
+          "encoded_length": 578,
+          "other_header_fields": [
+            158,
+            123
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "d4a37dcac4dc39c033060e6ffd521cc2397e1eae8a50098be152e201b5a91269",
+          "indexed_sha256": "5cdfe0ed3131acd0d1692ec877e8bbf187080fb74217370198c2305b3f319535",
+          "opaque_pixels": 455,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1089,
+          "asset": "openbonk-poses-2.png",
+          "art_sha256": "227e6ecb0a653ef073afcd0e0ae13a9ca38519af16a8bfa6528e625db2e131c8",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            36,
+            724,
+            475,
+            992
+          ],
+          "content": [
+            0,
+            0,
+            35,
+            22
+          ],
+          "writes_sha256": "edb8a01f0a275f87f6eb2d06e84a68a9ed08510cee6e055b03e9436132c9fd6d"
+        },
+        {
+          "research_id": 1090,
+          "file": "OPENBONK.SS",
+          "file_sha256": "65facf06dad88e9d5d17989a6488c74e76ffbab1b15d7c5ca0abe9c81ab74910",
+          "ordinal": 16,
+          "size": [
+            35,
+            23
+          ],
+          "header_part1_offset": 256,
+          "data_part3_offset": 9497,
+          "encoded_length": 579,
+          "other_header_fields": [
+            158,
+            124
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "9cd4998a278678c205ee7b5ca930a282235b3186db75b5388500f4a85f58101b",
+          "indexed_sha256": "36e7c7a99eb7e8a83c5bf4ffe2b9c377a22246763e894e33b2d47c5b92f5c2e0",
+          "opaque_pixels": 451,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1090,
+          "asset": "openbonk-poses-2.png",
+          "art_sha256": "227e6ecb0a653ef073afcd0e0ae13a9ca38519af16a8bfa6528e625db2e131c8",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            512,
+            724,
+            939,
+            990
+          ],
+          "content": [
+            0,
+            0,
+            35,
+            23
+          ],
+          "writes_sha256": "ba56298c486eb417e2b185cb1aa8711450ead9ac812e89386cda88703df3d026"
+        },
+        {
+          "research_id": 1091,
+          "file": "OPENBONK.SS",
+          "file_sha256": "65facf06dad88e9d5d17989a6488c74e76ffbab1b15d7c5ca0abe9c81ab74910",
+          "ordinal": 17,
+          "size": [
+            33,
+            22
+          ],
+          "header_part1_offset": 272,
+          "data_part3_offset": 10076,
+          "encoded_length": 561,
+          "other_header_fields": [
+            157,
+            123
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "9ca6e309036b4fd34bf12b4c23e0661ae92c9d73d35e31219a9a0e404630ca15",
+          "indexed_sha256": "8cb7c11d1bceca30e87230b87d636c3d408e9ece68255b87199d52e9a3c4a3ec",
+          "opaque_pixels": 443,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1091,
+          "asset": "openbonk-poses-2.png",
+          "art_sha256": "227e6ecb0a653ef073afcd0e0ae13a9ca38519af16a8bfa6528e625db2e131c8",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            986,
+            724,
+            1413,
+            996
+          ],
+          "content": [
+            0,
+            0,
+            33,
+            22
+          ],
+          "writes_sha256": "d1325d64dce88d5a227461253d2723f141eef62e2adb9201b0cdaded4006e70a"
+        }
+      ]
+    },
+    "openguy-poses-1.png": {
+      "sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+      "bytes": 943951,
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE refined fine pixel-art animation sprite atlas for the Colonization (1994) HD display layer. Image 1 is the exact visual composition guide for this batch of FOURTEEN tiny animated motifs: a FOUR by FOUR equal grid, only the first14 cells occupied, read left to right and top to bottom. Last two cells fully transparent. Match every source pose closely: preserve the pale gray/blue central shape, brown lower/right parts, small tan projections, and especially the long thin dark reddish pole with the waving red/orange pennant at its top. Preserve the small motif's exact silhouette, proportions, component count, gaps, orientation, rotations and each source frame's changing pose. Follow the reference literally, without inventing a new subject, additional body parts, ship, sails, scenery or props. This is one consistent animated motif seen in14 consecutive poses. Repaint with crisp fine intentional pixel clusters, restrained natural color and small material details rather than enlarging coarse source squares. Image 2 is the approved fine pixel-art STYLE reference ONLY; do not copy its landscape, objects or composition. Use a landscape 4:3 transparent-background canvas with exactly four equal rows and four equal columns. One isolated motif centered in each occupied cell and fully contained within that cell with generous transparent margins. Remove all magenta background and black reference labels. No text, numbers, grid, frame, ground plane, backdrop, cast shadows outside the sprite, floating decoration, blur, photorealism or 3D. Keep a clean straight alpha outside each motif and in all internal gaps.",
+      "generation_file": "exec-92c7d5ba-6027-4ca0-86e7-845d9197c95a.png",
+      "reference_sha256": "c1e10d779cb5be941f7e0479b221077fa9504af222f49f7b6f294359392cb1aa",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1125,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 0,
+          "size": [
+            19,
+            20
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 218,
+          "other_header_fields": [
+            153,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "4362a0d49ae11954a6b1f36ea9435f0ff953ac44e44352098dbc11fe187740af",
+          "indexed_sha256": "c929148474ce2010ed187a63e2db1eb9e8017b745ca1906391a2dab3583592de",
+          "opaque_pixels": 105,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1125,
+          "asset": "openguy-poses-1.png",
+          "art_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            84,
+            31,
+            297,
+            264
+          ],
+          "content": [
+            0,
+            0,
+            19,
+            20
+          ],
+          "writes_sha256": "4925e9098dba196db36ea82e9a45e176af959ad5e884dc6daf9f37c0d825f885"
+        },
+        {
+          "research_id": 1126,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 1,
+          "size": [
+            17,
+            21
+          ],
+          "header_part1_offset": 16,
+          "data_part3_offset": 218,
+          "encoded_length": 235,
+          "other_header_fields": [
+            153,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "6cf452ecaa79d3e5b7b3330593cf3eab1751862db6f8a15cf47714f2ba45bed8",
+          "indexed_sha256": "c163f443c0d13f8580e84dccf890e611b83fe809687b2c86829b4c58fc8b1e63",
+          "opaque_pixels": 115,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1126,
+          "asset": "openguy-poses-1.png",
+          "art_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            447,
+            31,
+            651,
+            268
+          ],
+          "content": [
+            0,
+            0,
+            17,
+            21
+          ],
+          "writes_sha256": "66ded2c95827a055d72de3f309e01eb9381975a6ee238cb9b1cc826f03a585fb"
+        },
+        {
+          "research_id": 1127,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 2,
+          "size": [
+            18,
+            20
+          ],
+          "header_part1_offset": 32,
+          "data_part3_offset": 453,
+          "encoded_length": 226,
+          "other_header_fields": [
+            154,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "938ca64a865e532f9f7d548f0e5b0cb4d0d40f9660b6f173c0f46aae8ed63349",
+          "indexed_sha256": "dd72b8304f08781b1950873b6cdabe14bab265d13ada4afdf5e76fc64666bc48",
+          "opaque_pixels": 122,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1127,
+          "asset": "openguy-poses-1.png",
+          "art_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            802,
+            31,
+            1012,
+            266
+          ],
+          "content": [
+            0,
+            0,
+            18,
+            20
+          ],
+          "writes_sha256": "c92de6cd9d7c7bb5855570941d9330c01e3e9fd4458e6bdfcd93a3afaee5b9c9"
+        },
+        {
+          "research_id": 1128,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 3,
+          "size": [
+            20,
+            23
+          ],
+          "header_part1_offset": 48,
+          "data_part3_offset": 679,
+          "encoded_length": 234,
+          "other_header_fields": [
+            154,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "a9ac40c0c39f4825525841d83a29b03964a103f1137a5dd39cd3323f4f08837e",
+          "indexed_sha256": "34a2c519c4c46072b6bb40bdeb8367ff32e89c61f3d27f3a45116c0702a779cb",
+          "opaque_pixels": 116,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1128,
+          "asset": "openguy-poses-1.png",
+          "art_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            1171,
+            36,
+            1380,
+            266
+          ],
+          "content": [
+            0,
+            0,
+            20,
+            23
+          ],
+          "writes_sha256": "18dd6be9747bd67fe6e08e7cc06e4830f5d20d8ed83dab56618bceca98c7edc8"
+        },
+        {
+          "research_id": 1129,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 4,
+          "size": [
+            26,
+            21
+          ],
+          "header_part1_offset": 64,
+          "data_part3_offset": 913,
+          "encoded_length": 254,
+          "other_header_fields": [
+            150,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "11d837ffaf8c656a6a0033455d0491c661e26b4fc7a2111ae579e592237353d6",
+          "indexed_sha256": "1eaceb58f9888312b42b4205b96e30f5c89ad427fe99f38d641bbaa6d3c159fc",
+          "opaque_pixels": 131,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1129,
+          "asset": "openguy-poses-1.png",
+          "art_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            42,
+            315,
+            321,
+            542
+          ],
+          "content": [
+            0,
+            0,
+            26,
+            21
+          ],
+          "writes_sha256": "e026715f3e245c73c900ce0e8480328e6fefd68908deab8b007fa8fb0d65781a"
+        },
+        {
+          "research_id": 1130,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 5,
+          "size": [
+            30,
+            18
+          ],
+          "header_part1_offset": 80,
+          "data_part3_offset": 1167,
+          "encoded_length": 224,
+          "other_header_fields": [
+            146,
+            115
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "fe93493a46d9c18ee13da725c0c7fedcb5c0d53e6434a5f523feaa3fa0540291",
+          "indexed_sha256": "a49e1458817c4fc4c84bcf820dff776257c96ddb924252299a44025a2048465a",
+          "opaque_pixels": 118,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1130,
+          "asset": "openguy-poses-1.png",
+          "art_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            383,
+            309,
+            703,
+            531
+          ],
+          "content": [
+            0,
+            0,
+            30,
+            18
+          ],
+          "writes_sha256": "42b54f67075fe70e0a6905f876c5d60f67c0525dac963b05192ebee6c97e797b"
+        },
+        {
+          "research_id": 1131,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 6,
+          "size": [
+            32,
+            18
+          ],
+          "header_part1_offset": 96,
+          "data_part3_offset": 1391,
+          "encoded_length": 247,
+          "other_header_fields": [
+            146,
+            116
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f6fe6061ba0616cfb889bed3fb28de3dbaead1a9949714bfd2290f1ba9393a6d",
+          "indexed_sha256": "1cb66dbf5a3cad7fe7255b0144c7b809dc2f177d8a17073e606f050ffe9c10aa",
+          "opaque_pixels": 143,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1131,
+          "asset": "openguy-poses-1.png",
+          "art_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            755,
+            326,
+            1068,
+            528
+          ],
+          "content": [
+            0,
+            0,
+            32,
+            18
+          ],
+          "writes_sha256": "2eb8874588dd78f6828789bc891e304f605e8db9ad4ef723af1a5cb9632d811c"
+        },
+        {
+          "research_id": 1132,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 7,
+          "size": [
+            31,
+            18
+          ],
+          "header_part1_offset": 112,
+          "data_part3_offset": 1638,
+          "encoded_length": 242,
+          "other_header_fields": [
+            144,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "265d2df277254eebde4fe6faa7d7ba7ef239e74cc8b667bb41a606a7de98a8a8",
+          "indexed_sha256": "6be3b32e1167f4d696495b8afd2ff0341c683165c502c5167b3c720e3c7322b4",
+          "opaque_pixels": 138,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1132,
+          "asset": "openguy-poses-1.png",
+          "art_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            1102,
+            325,
+            1430,
+            521
+          ],
+          "content": [
+            0,
+            0,
+            31,
+            18
+          ],
+          "writes_sha256": "c5adb7fddb20ed3ad934052f6ed0af9632ee525d669ff9ccb529d8b5a037dfdf"
+        },
+        {
+          "research_id": 1133,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 8,
+          "size": [
+            30,
+            16
+          ],
+          "header_part1_offset": 128,
+          "data_part3_offset": 1880,
+          "encoded_length": 233,
+          "other_header_fields": [
+            143,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "3539e2272f02c2db641dba50b5973cccce28c042622c247d3f92986974216ba8",
+          "indexed_sha256": "8393633817426bf115870132f32a8f7edf10f02672c6268216eb0a0780438c20",
+          "opaque_pixels": 142,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1133,
+          "asset": "openguy-poses-1.png",
+          "art_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            35,
+            608,
+            342,
+            786
+          ],
+          "content": [
+            0,
+            0,
+            30,
+            16
+          ],
+          "writes_sha256": "38c00c294974c79868d9bc837cf6fd475f811c78b09af931046aef122389966a"
+        },
+        {
+          "research_id": 1134,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 9,
+          "size": [
+            28,
+            16
+          ],
+          "header_part1_offset": 144,
+          "data_part3_offset": 2113,
+          "encoded_length": 220,
+          "other_header_fields": [
+            141,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "3453fb8e8e27bf0ee6a9bd01151495c1471957a021a0f93d22452ed92a83f5d7",
+          "indexed_sha256": "cb2cafaeddc2997de5274d672cc77f0b5f9c8d7cb56a93dfba0462d64a3a89fb",
+          "opaque_pixels": 130,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1134,
+          "asset": "openguy-poses-1.png",
+          "art_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            378,
+            604,
+            701,
+            788
+          ],
+          "content": [
+            0,
+            0,
+            28,
+            16
+          ],
+          "writes_sha256": "fbe7b0d28652af0e89e61931184b214602b71d1cc488f3afc474be09b8339d66"
+        },
+        {
+          "research_id": 1135,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 10,
+          "size": [
+            30,
+            16
+          ],
+          "header_part1_offset": 160,
+          "data_part3_offset": 2333,
+          "encoded_length": 225,
+          "other_header_fields": [
+            140,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "39a4c5c247069373395e30c68b3e3ec99a0d8ae3f3e59e45814898c8e305c3ec",
+          "indexed_sha256": "9855d6f932db8a8c2f7dcb142c855a5e89feafe6d9bc3da8777b76213e216f1f",
+          "opaque_pixels": 130,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1135,
+          "asset": "openguy-poses-1.png",
+          "art_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            733,
+            608,
+            1067,
+            784
+          ],
+          "content": [
+            0,
+            0,
+            30,
+            16
+          ],
+          "writes_sha256": "30b263b6b08a4d21fc65b33629f0114499cce20c81a7556373c18cbe8fc67a9e"
+        },
+        {
+          "research_id": 1136,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 11,
+          "size": [
+            29,
+            16
+          ],
+          "header_part1_offset": 176,
+          "data_part3_offset": 2558,
+          "encoded_length": 214,
+          "other_header_fields": [
+            139,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "35b8be822120a355012ce7d77d3d834a6ccff2ab4f8339c249efd9ccabe4f699",
+          "indexed_sha256": "473021cc0f58487ba8c7474f2b5892e99e22e8c2c2812b5ede4d4b6918a76b8a",
+          "opaque_pixels": 120,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1136,
+          "asset": "openguy-poses-1.png",
+          "art_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            1102,
+            600,
+            1420,
+            787
+          ],
+          "content": [
+            0,
+            0,
+            29,
+            16
+          ],
+          "writes_sha256": "1d83c87ab2bb1ee01d96b13aef4634e5fb3d43775ce6a64444f291ab25483084"
+        },
+        {
+          "research_id": 1137,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 12,
+          "size": [
+            28,
+            18
+          ],
+          "header_part1_offset": 192,
+          "data_part3_offset": 2772,
+          "encoded_length": 218,
+          "other_header_fields": [
+            135,
+            118
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "6010bad527371cabc2721774f04894efa71efb409de576153f416df560397955",
+          "indexed_sha256": "6e61159d6a647ca10c5c79bc005e8a438742188d1cfebb3927177a4aa00e7278",
+          "opaque_pixels": 123,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1137,
+          "asset": "openguy-poses-1.png",
+          "art_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            27,
+            841,
+            352,
+            1055
+          ],
+          "content": [
+            0,
+            0,
+            28,
+            18
+          ],
+          "writes_sha256": "2d0ad78707352dd27dd7d1cae3e82ef608de30801d8291de3afd214f7df76e96"
+        },
+        {
+          "research_id": 1138,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 13,
+          "size": [
+            28,
+            19
+          ],
+          "header_part1_offset": 208,
+          "data_part3_offset": 2990,
+          "encoded_length": 205,
+          "other_header_fields": [
+            133,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "6c1b6e465d2490fa7a4288ed5f6071212d22e0ee91f39f8c8d42f347774f5fb2",
+          "indexed_sha256": "88633916e57e44c26831a152f54f8b41fa63883936e052b3bc264b75bc94fb76",
+          "opaque_pixels": 103,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1138,
+          "asset": "openguy-poses-1.png",
+          "art_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            403,
+            841,
+            680,
+            1063
+          ],
+          "content": [
+            0,
+            0,
+            28,
+            19
+          ],
+          "writes_sha256": "6d28e993691e1f227d467e8c373ea3b85a15437496e94f827c0facdc9978a0f0"
+        }
+      ]
+    },
+    "openguy-poses-2.png": {
+      "sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+      "bytes": 763327,
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE refined fine pixel-art animation sprite atlas for the Colonization (1994) HD display layer. Image 1 is the exact visual composition guide for this batch of FOURTEEN tiny animated motifs: a FOUR by FOUR equal grid, only the first14 cells occupied, read left to right and top to bottom. Last two cells fully transparent. Match every source pose closely: preserve the pale gray/blue central shape, brown lower/right parts, small tan projections, and especially the long thin dark reddish pole with the waving red/orange pennant at its top. Preserve the small motif's exact silhouette, proportions, component count, gaps, orientation, rotations and each source frame's changing pose. Follow the reference literally, without inventing a new subject, additional body parts, ship, sails, scenery or props. This is one consistent animated motif seen in14 consecutive poses. Repaint with crisp fine intentional pixel clusters, restrained natural color and small material details rather than enlarging coarse source squares. Image 2 is the approved fine pixel-art STYLE reference ONLY; do not copy its landscape, objects or composition. Use a landscape 4:3 transparent-background canvas with exactly four equal rows and four equal columns. One isolated motif centered in each occupied cell and fully contained within that cell with generous transparent margins. Remove all magenta background and black reference labels. No text, numbers, grid, frame, ground plane, backdrop, cast shadows outside the sprite, floating decoration, blur, photorealism or 3D. Keep a clean straight alpha outside each motif and in all internal gaps.\nThis is batch TWO, fourteen successive original poses14 through27. Image 3 is the first generated batch for design, fine pixel finish and palette consistency only. Follow Image 1's new poses exactly; some lower shapes rotate and the red pole changes angle. Use exactly4x4 cells, only first14 occupied, final2 fully transparent.",
+      "generation_file": "exec-04f2730d-46d0-48e4-a8a2-e963a572b31b.png",
+      "reference_sha256": "534a77d0202f72a4b1ab0d9a186222985c495d57ceea2cbccc6c92811ef6145f",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1139,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 14,
+          "size": [
+            23,
+            19
+          ],
+          "header_part1_offset": 224,
+          "data_part3_offset": 3195,
+          "encoded_length": 196,
+          "other_header_fields": [
+            131,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "aa8e8e05ad2acb8c6f2d656855d547d8688b19dd566b6ca88cb56842dd5f06df",
+          "indexed_sha256": "e3f2d7726df36511150f3f3ed0ed275cf13aa5ff687e5a99ec015be361e50042",
+          "opaque_pixels": 99,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1139,
+          "asset": "openguy-poses-2.png",
+          "art_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            66,
+            37,
+            317,
+            266
+          ],
+          "content": [
+            0,
+            0,
+            23,
+            19
+          ],
+          "writes_sha256": "245f257a0fd8f4eff1ee2c6dbe111eaa5edfa844c533ae376d1d79bd8574a922"
+        },
+        {
+          "research_id": 1140,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 15,
+          "size": [
+            23,
+            20
+          ],
+          "header_part1_offset": 240,
+          "data_part3_offset": 3391,
+          "encoded_length": 205,
+          "other_header_fields": [
+            132,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "e80f142ba2f5d3715473635992c48ef4477a6103f751a10962d21eb52cd874f2",
+          "indexed_sha256": "b2a7809ef0c4a55d55a934b7c5f7bb5035352ea8b88d7a13e9daba382c1b7516",
+          "opaque_pixels": 102,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1140,
+          "asset": "openguy-poses-2.png",
+          "art_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            416,
+            40,
+            695,
+            266
+          ],
+          "content": [
+            0,
+            0,
+            23,
+            20
+          ],
+          "writes_sha256": "c95eb7154ada73dacc9848ac5c0bcbf0081c4bb29fa8bd0f693b80b7dfb31990"
+        },
+        {
+          "research_id": 1141,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 16,
+          "size": [
+            24,
+            21
+          ],
+          "header_part1_offset": 256,
+          "data_part3_offset": 3596,
+          "encoded_length": 199,
+          "other_header_fields": [
+            135,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "147cf8f1e15895462e9162f12f5269b527263ee86895435ca539d752e7207725",
+          "indexed_sha256": "6eefd8d7eb20a911d8dcb43dcdbd9f4aa1265352b35512689d1b327d6bc8377b",
+          "opaque_pixels": 90,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1141,
+          "asset": "openguy-poses-2.png",
+          "art_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            795,
+            43,
+            1060,
+            266
+          ],
+          "content": [
+            0,
+            0,
+            24,
+            21
+          ],
+          "writes_sha256": "bcf75fb58cd253cb52caa886d65a1348ae325956f2f20230f48e6497b4f13c15"
+        },
+        {
+          "research_id": 1142,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 17,
+          "size": [
+            24,
+            21
+          ],
+          "header_part1_offset": 272,
+          "data_part3_offset": 3795,
+          "encoded_length": 196,
+          "other_header_fields": [
+            135,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "68cd1926a6f68259b64ed4077637d32ae25ca3f9dd41414eb19a0ee73cc7241a",
+          "indexed_sha256": "ed75b387aff5a73eff6c9f3e531672f0e49d896ca208083fbd7c9dec45116055",
+          "opaque_pixels": 90,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1142,
+          "asset": "openguy-poses-2.png",
+          "art_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            1150,
+            33,
+            1418,
+            267
+          ],
+          "content": [
+            0,
+            0,
+            24,
+            21
+          ],
+          "writes_sha256": "999b0d435f8195453d6f5323222ec8b093150e7e32fe548eddf2ad16779f56f9"
+        },
+        {
+          "research_id": 1143,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 18,
+          "size": [
+            25,
+            20
+          ],
+          "header_part1_offset": 288,
+          "data_part3_offset": 3991,
+          "encoded_length": 192,
+          "other_header_fields": [
+            134,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "385ad3f19c608b8d413f72b7e6f801fd4216f2b8844219747a72b97f325cc60a",
+          "indexed_sha256": "fd78621ee6a82424f88609b2ea3340393f67e6a78a75b81b74dc85f6e6b4db43",
+          "opaque_pixels": 92,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1143,
+          "asset": "openguy-poses-2.png",
+          "art_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            50,
+            298,
+            338,
+            534
+          ],
+          "content": [
+            0,
+            0,
+            25,
+            20
+          ],
+          "writes_sha256": "9bbecbecae4ff1167a3e622c7d1d7783069ab029e863c38dfae26c9fc57db1ff"
+        },
+        {
+          "research_id": 1144,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 19,
+          "size": [
+            26,
+            18
+          ],
+          "header_part1_offset": 304,
+          "data_part3_offset": 4183,
+          "encoded_length": 179,
+          "other_header_fields": [
+            134,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ba839f3bb4a9a1ceb81b74e2bf62adfa131dc71c77f06b65ecdc0301730fc06b",
+          "indexed_sha256": "4e6ad51509a9288dc9f5cbb4491354854eac1f9e77dbe4d58c53e9b2ac7cd805",
+          "opaque_pixels": 92,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1144,
+          "asset": "openguy-poses-2.png",
+          "art_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            400,
+            300,
+            713,
+            531
+          ],
+          "content": [
+            0,
+            0,
+            26,
+            18
+          ],
+          "writes_sha256": "98ea81004747a1bdc7315fd95aaf4f5923858bfe622c2b342096a9fbce71cffc"
+        },
+        {
+          "research_id": 1145,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 20,
+          "size": [
+            27,
+            17
+          ],
+          "header_part1_offset": 320,
+          "data_part3_offset": 4362,
+          "encoded_length": 170,
+          "other_header_fields": [
+            133,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "33998fbd8a8329b6282738663ee6a825cfd60e126e86bce7f5d3dfd54af8fb4a",
+          "indexed_sha256": "e5c2432c06ba2fa32493ff04603f903e6a92b42b77cee789976bb0a2147cc1f4",
+          "opaque_pixels": 92,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1145,
+          "asset": "openguy-poses-2.png",
+          "art_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            755,
+            306,
+            1064,
+            531
+          ],
+          "content": [
+            0,
+            0,
+            27,
+            17
+          ],
+          "writes_sha256": "f090ae84a812eec9730f02d84960ff447e8cd91bd6314a55feccc3422ab336b9"
+        },
+        {
+          "research_id": 1146,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 21,
+          "size": [
+            27,
+            17
+          ],
+          "header_part1_offset": 336,
+          "data_part3_offset": 4532,
+          "encoded_length": 177,
+          "other_header_fields": [
+            133,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "3027751ee1c317e96bd18149d48f8164452a04526ecaadf6c3ae473f27377e5b",
+          "indexed_sha256": "46c1cf32c797332498ff45dac05c960ae2733d65adcbfd170de9b2703a18cc6d",
+          "opaque_pixels": 93,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1146,
+          "asset": "openguy-poses-2.png",
+          "art_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            1116,
+            315,
+            1432,
+            527
+          ],
+          "content": [
+            0,
+            0,
+            27,
+            17
+          ],
+          "writes_sha256": "851bbd62bc62262647eb83c29e9e8225b1f666a2982174dfe339ee6ec2040250"
+        },
+        {
+          "research_id": 1147,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 22,
+          "size": [
+            26,
+            17
+          ],
+          "header_part1_offset": 352,
+          "data_part3_offset": 4709,
+          "encoded_length": 169,
+          "other_header_fields": [
+            134,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "90748c71da6c4b9efa1f1390183cd8eb89e6616bf78ac4ba9e6bf9c907c3ad7a",
+          "indexed_sha256": "bfe10ed29a1ebc9bfacb2db4a19d9f3b0ab8c5341ac540c032ed30b83cdaa01e",
+          "opaque_pixels": 90,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1147,
+          "asset": "openguy-poses-2.png",
+          "art_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            33,
+            572,
+            349,
+            796
+          ],
+          "content": [
+            0,
+            0,
+            26,
+            17
+          ],
+          "writes_sha256": "f34d0aa8bf493046260e39067d55c9eba66e78a3cf1179c2aee14ff86f0b4d5c"
+        },
+        {
+          "research_id": 1148,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 23,
+          "size": [
+            25,
+            17
+          ],
+          "header_part1_offset": 368,
+          "data_part3_offset": 4878,
+          "encoded_length": 173,
+          "other_header_fields": [
+            134,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "159819956ea0f576c3cf24103cefc9c41e3648c94b8133b53f115cb0aeafc503",
+          "indexed_sha256": "287d7ecc49261578e4c03db945887b896b1768f68e9040a7dc271a465474f91f",
+          "opaque_pixels": 86,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1148,
+          "asset": "openguy-poses-2.png",
+          "art_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            386,
+            576,
+            717,
+            796
+          ],
+          "content": [
+            0,
+            0,
+            25,
+            17
+          ],
+          "writes_sha256": "614f054eba2346c57df450aa4537eda231d3174a3ed0a092191b5fea93613816"
+        },
+        {
+          "research_id": 1149,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 24,
+          "size": [
+            22,
+            18
+          ],
+          "header_part1_offset": 384,
+          "data_part3_offset": 5051,
+          "encoded_length": 185,
+          "other_header_fields": [
+            135,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f093944dd6b7c1be2978e902b910a284161423cb1eefeabe6bb7730534119655",
+          "indexed_sha256": "fca6eb5119bbad3a397390a7cb19c0824da4059eeba96e8621d990d8db5e83b8",
+          "opaque_pixels": 92,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1149,
+          "asset": "openguy-poses-2.png",
+          "art_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            750,
+            578,
+            1052,
+            796
+          ],
+          "content": [
+            0,
+            0,
+            22,
+            18
+          ],
+          "writes_sha256": "859b8adb560276f0e62e094ea93c5ba818a6b1c7ae78b2602cfd1a7147ce0d05"
+        },
+        {
+          "research_id": 1150,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 25,
+          "size": [
+            16,
+            17
+          ],
+          "header_part1_offset": 400,
+          "data_part3_offset": 5236,
+          "encoded_length": 181,
+          "other_header_fields": [
+            137,
+            116
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "4e73d94df1de98e3c81d64af135a6c98fab68b7eb1c0f50c2538ec57d966c54e",
+          "indexed_sha256": "991bce425f622356d6a8e9799f365c8625eadbd1bee9f5b4ddaa88e5ccdc3191",
+          "opaque_pixels": 93,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1150,
+          "asset": "openguy-poses-2.png",
+          "art_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            1140,
+            593,
+            1387,
+            796
+          ],
+          "content": [
+            0,
+            0,
+            16,
+            17
+          ],
+          "writes_sha256": "73694a0109f60e78663f26b324ccf1f1ca968fc1ca1d204155ff6fecbd19d803"
+        },
+        {
+          "research_id": 1151,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 26,
+          "size": [
+            18,
+            16
+          ],
+          "header_part1_offset": 416,
+          "data_part3_offset": 5417,
+          "encoded_length": 189,
+          "other_header_fields": [
+            136,
+            116
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "9c2afb0e4871278a18f0ea73bf95de12afa8e01db58c86b5e090e17b1242f5ec",
+          "indexed_sha256": "b7290d29c8429e982e207d33f6179687597d03f651bd022c27d182947aac29d4",
+          "opaque_pixels": 104,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1151,
+          "asset": "openguy-poses-2.png",
+          "art_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            57,
+            824,
+            301,
+            1052
+          ],
+          "content": [
+            0,
+            0,
+            18,
+            16
+          ],
+          "writes_sha256": "b82c21e4c8d1f1549e75dd9ac8107a1074fcf97542143b06af1f04bde9f27c10"
+        },
+        {
+          "research_id": 1152,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 27,
+          "size": [
+            18,
+            15
+          ],
+          "header_part1_offset": 432,
+          "data_part3_offset": 5606,
+          "encoded_length": 182,
+          "other_header_fields": [
+            136,
+            115
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "4faaadad09aafe0314f01a4abd4fa6f2960585c03acf982affb335b5f758b260",
+          "indexed_sha256": "e4ede31c20268da58bd314a3365d4846f1d6722ce84bef5e90728dbb819df313",
+          "opaque_pixels": 101,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1152,
+          "asset": "openguy-poses-2.png",
+          "art_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            418,
+            821,
+            663,
+            1046
+          ],
+          "content": [
+            0,
+            0,
+            18,
+            15
+          ],
+          "writes_sha256": "3d5fc5468563d1501d327532918288c7bdbebdc88fbfcb7a6296928de03023a1"
+        }
+      ]
+    },
+    "openguy-poses-3.png": {
+      "sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+      "bytes": 735100,
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE refined fine pixel-art animation sprite atlas for the Colonization (1994) HD display layer. Image 1 is the exact visual composition guide for this batch of FOURTEEN tiny animated motifs: a FOUR by FOUR equal grid, only the first14 cells occupied, read left to right and top to bottom. Last two cells fully transparent. Match every source pose closely: preserve the pale gray/blue central shape, brown lower/right parts, small tan projections, and especially the long thin dark reddish pole with the waving red/orange pennant at its top. Preserve the small motif's exact silhouette, proportions, component count, gaps, orientation, rotations and each source frame's changing pose. Follow the reference literally, without inventing a new subject, additional body parts, ship, sails, scenery or props. This is one consistent animated motif seen in14 consecutive poses. Repaint with crisp fine intentional pixel clusters, restrained natural color and small material details rather than enlarging coarse source squares. Image 2 is the approved fine pixel-art STYLE reference ONLY; do not copy its landscape, objects or composition. Use a landscape 4:3 transparent-background canvas with exactly four equal rows and four equal columns. One isolated motif centered in each occupied cell and fully contained within that cell with generous transparent margins. Remove all magenta background and black reference labels. No text, numbers, grid, frame, ground plane, backdrop, cast shadows outside the sprite, floating decoration, blur, photorealism or 3D. Keep a clean straight alpha outside each motif and in all internal gaps.\nThis is batch THREE: original poses28 through41. Image3 is the first generated batch for design and palette consistency only. Follow Image1's distinct new poses and horizontal red pennant geometry. Four rows and four columns, first14 occupied, last2 transparent.",
+      "generation_file": "exec-6bb2fc0e-a1a5-4de1-b858-0f3193545436.png",
+      "reference_sha256": "7b89516d6cfd82e18a7292a8440691f491f137fabdbba4aba22319a533e4133a",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1153,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 28,
+          "size": [
+            18,
+            16
+          ],
+          "header_part1_offset": 448,
+          "data_part3_offset": 5788,
+          "encoded_length": 188,
+          "other_header_fields": [
+            136,
+            116
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "c0943cb0edd51bbef1e976cf44b90fb8ed83bbb8f9843ab44ed2b1f4c3de0b51",
+          "indexed_sha256": "020220e9b64b19328627d1e5e8bca3499d836c635cab8d2cfa2db389798eb302",
+          "opaque_pixels": 99,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1153,
+          "asset": "openguy-poses-3.png",
+          "art_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            89,
+            30,
+            299,
+            270
+          ],
+          "content": [
+            0,
+            0,
+            18,
+            16
+          ],
+          "writes_sha256": "33b41d6e64bdd8c0f45de5e557c57351fc96047531e65da5ddc6d7d2d79f56a9"
+        },
+        {
+          "research_id": 1154,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 29,
+          "size": [
+            18,
+            17
+          ],
+          "header_part1_offset": 464,
+          "data_part3_offset": 5976,
+          "encoded_length": 195,
+          "other_header_fields": [
+            136,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "0a6706940354be5c0f3e10455711a3fb6843d01c7d16f93cbbd8b208f8712317",
+          "indexed_sha256": "27d423a9d31e6eead1b423738818bd4a8f8f20b391edb07db553230f3c44f1a0",
+          "opaque_pixels": 110,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1154,
+          "asset": "openguy-poses-3.png",
+          "art_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            447,
+            30,
+            669,
+            270
+          ],
+          "content": [
+            0,
+            0,
+            18,
+            17
+          ],
+          "writes_sha256": "0342d0bc4aba635d0d232c4932813efb0d6715d52bd3541f67293af0cfebc09c"
+        },
+        {
+          "research_id": 1155,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 30,
+          "size": [
+            27,
+            15
+          ],
+          "header_part1_offset": 480,
+          "data_part3_offset": 6171,
+          "encoded_length": 208,
+          "other_header_fields": [
+            131,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "2f4a0bc77ece4d1979641faf5363a5d384e517808283e175b25bef2b0f5b4801",
+          "indexed_sha256": "8c20583413f977fbec1b9c25b5219d22acc786177e9286b6893cd94f00ae230d",
+          "opaque_pixels": 124,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1155,
+          "asset": "openguy-poses-3.png",
+          "art_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            764,
+            61,
+            1082,
+            258
+          ],
+          "content": [
+            0,
+            0,
+            27,
+            15
+          ],
+          "writes_sha256": "6c9dabd8101fba76ef58197ddfd09e61abb4905b59d332de719bc9d6b6a2f509"
+        },
+        {
+          "research_id": 1156,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 31,
+          "size": [
+            27,
+            15
+          ],
+          "header_part1_offset": 496,
+          "data_part3_offset": 6379,
+          "encoded_length": 206,
+          "other_header_fields": [
+            131,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ae6f010173ee45d29b9b1cc026ea183a8be51200b99e5d4d799bb890dbbfef76",
+          "indexed_sha256": "3c28cf1b72111fcd613e747d301f65ef13b0d375f2fb1553185de1f65400e892",
+          "opaque_pixels": 121,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1156,
+          "asset": "openguy-poses-3.png",
+          "art_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            1143,
+            55,
+            1432,
+            256
+          ],
+          "content": [
+            0,
+            0,
+            27,
+            15
+          ],
+          "writes_sha256": "b7540bb6598b46bbc87fa492ed7214c6a01df8e4be0b69932b6fc441a1210840"
+        },
+        {
+          "research_id": 1157,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 32,
+          "size": [
+            28,
+            15
+          ],
+          "header_part1_offset": 512,
+          "data_part3_offset": 6585,
+          "encoded_length": 206,
+          "other_header_fields": [
+            131,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "b9dab715f2b914ee240da4585cb17296bb0edcfdfa40a26af876d36a840d9b8e",
+          "indexed_sha256": "c7bb2e76179a56880713ed8e8da50836bd16eb63d6f2a5792027b522db252f24",
+          "opaque_pixels": 121,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1157,
+          "asset": "openguy-poses-3.png",
+          "art_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            40,
+            321,
+            344,
+            522
+          ],
+          "content": [
+            0,
+            0,
+            28,
+            15
+          ],
+          "writes_sha256": "dd6e3f9de61b319e0a68ffa84f14fe00b299d66f876556b7d43e6524d94d5770"
+        },
+        {
+          "research_id": 1158,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 33,
+          "size": [
+            28,
+            15
+          ],
+          "header_part1_offset": 528,
+          "data_part3_offset": 6791,
+          "encoded_length": 206,
+          "other_header_fields": [
+            131,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "19d938f999d4dee20ef79c5cff40b4cd792ea44d21cb494a01e3d0540ccaa3a4",
+          "indexed_sha256": "b058b3ee484bd8774369885c5425cefea55fba1b75694c3736383ccdc51ccf1c",
+          "opaque_pixels": 121,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1158,
+          "asset": "openguy-poses-3.png",
+          "art_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            388,
+            326,
+            715,
+            520
+          ],
+          "content": [
+            0,
+            0,
+            28,
+            15
+          ],
+          "writes_sha256": "7b5726979e7b9aea55faf757ae9662a2566cf9f2ac35bc0060a42eebd9fc42fe"
+        },
+        {
+          "research_id": 1159,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 34,
+          "size": [
+            29,
+            15
+          ],
+          "header_part1_offset": 544,
+          "data_part3_offset": 6997,
+          "encoded_length": 206,
+          "other_header_fields": [
+            130,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "b838c78101498bec43b7219aebc2053b4bb57f84a83e64e713e4d4cc13653f10",
+          "indexed_sha256": "93e673284513e631de8c5f702c0f665d08df2d592909b3e44c4aacf6948f3100",
+          "opaque_pixels": 122,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1159,
+          "asset": "openguy-poses-3.png",
+          "art_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            764,
+            327,
+            1086,
+            520
+          ],
+          "content": [
+            0,
+            0,
+            29,
+            15
+          ],
+          "writes_sha256": "a8b2d6a229b78e987d058adaa474125d2e436e6462135a224a8a969d9833c6a3"
+        },
+        {
+          "research_id": 1160,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 35,
+          "size": [
+            27,
+            15
+          ],
+          "header_part1_offset": 560,
+          "data_part3_offset": 7203,
+          "encoded_length": 203,
+          "other_header_fields": [
+            130,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "0c854fbd0d386b637c1caef5d572f35f31220387acb0336a26b19eab3ea76931",
+          "indexed_sha256": "0ccd16599ef060fd2dc41a2a59b4414e81d62140ce842343eb93a074171d3a20",
+          "opaque_pixels": 120,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1160,
+          "asset": "openguy-poses-3.png",
+          "art_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            1086,
+            323,
+            1441,
+            521
+          ],
+          "content": [
+            0,
+            0,
+            27,
+            15
+          ],
+          "writes_sha256": "776a26881b08796351477f7e1e0c7f687f4b81fdb870de71109046a06a1033e2"
+        },
+        {
+          "research_id": 1161,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 36,
+          "size": [
+            27,
+            15
+          ],
+          "header_part1_offset": 576,
+          "data_part3_offset": 7406,
+          "encoded_length": 214,
+          "other_header_fields": [
+            130,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "d8004c84e2d65a91c3df76795bebfee4c56b289608dd903f0c468b22c0760249",
+          "indexed_sha256": "e3f4178c3c476796cbd9f1cfd48d8a0e14c094138f460fa49b2655025b99b19c",
+          "opaque_pixels": 119,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1161,
+          "asset": "openguy-poses-3.png",
+          "art_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            37,
+            598,
+            346,
+            790
+          ],
+          "content": [
+            0,
+            0,
+            27,
+            15
+          ],
+          "writes_sha256": "1beee0df1ada1c096c56e1dad6b5c628c9c07039c11eafc86b8713db1739cfa9"
+        },
+        {
+          "research_id": 1162,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 37,
+          "size": [
+            27,
+            16
+          ],
+          "header_part1_offset": 592,
+          "data_part3_offset": 7620,
+          "encoded_length": 217,
+          "other_header_fields": [
+            130,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "68ea50f582dd069aa02e5a053b0f30eb91d83d221cb512e871267ac171879f46",
+          "indexed_sha256": "f88d982db8e97c0c4a76bc592050041b8fb9b26fa9d5ab6fcc23a19e9e29d4c6",
+          "opaque_pixels": 121,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1162,
+          "asset": "openguy-poses-3.png",
+          "art_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            390,
+            586,
+            710,
+            792
+          ],
+          "content": [
+            0,
+            0,
+            27,
+            16
+          ],
+          "writes_sha256": "7fdc72ea6910f3a0199a33264f1bab6b63dc630bdb8c0a152c9c82abe9b6ebfe"
+        },
+        {
+          "research_id": 1163,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 38,
+          "size": [
+            26,
+            15
+          ],
+          "header_part1_offset": 608,
+          "data_part3_offset": 7837,
+          "encoded_length": 211,
+          "other_header_fields": [
+            131,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "2f4726fcd0224730a2e1ee68508a22b98d2c8abd528853683a164660fe9191ea",
+          "indexed_sha256": "3e79629ac0a60ec64b8a266d65692c97afd179f64fe2425a0509a65e7baef380",
+          "opaque_pixels": 114,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1163,
+          "asset": "openguy-poses-3.png",
+          "art_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            756,
+            589,
+            1070,
+            785
+          ],
+          "content": [
+            0,
+            0,
+            26,
+            15
+          ],
+          "writes_sha256": "6e3573c1b8cb96145f2c69861de1c0129017be92989e3925142f540a83101add"
+        },
+        {
+          "research_id": 1164,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 39,
+          "size": [
+            26,
+            16
+          ],
+          "header_part1_offset": 624,
+          "data_part3_offset": 8048,
+          "encoded_length": 216,
+          "other_header_fields": [
+            131,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ffacfd6c5db83e126fedc4c443d961afb578d262683675389732bc13068d3b31",
+          "indexed_sha256": "9cdefcaf0e03c64b4da593695f736bf8275e17c16bea246c442519e99b87c14e",
+          "opaque_pixels": 114,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1164,
+          "asset": "openguy-poses-3.png",
+          "art_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            1111,
+            586,
+            1428,
+            785
+          ],
+          "content": [
+            0,
+            0,
+            26,
+            16
+          ],
+          "writes_sha256": "fbf984ef1cf2ad19aa61e44e01d201314f74158c9141260c1591160df46e6254"
+        },
+        {
+          "research_id": 1165,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 40,
+          "size": [
+            27,
+            14
+          ],
+          "header_part1_offset": 640,
+          "data_part3_offset": 8264,
+          "encoded_length": 202,
+          "other_header_fields": [
+            130,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "b69e73afc98383ae2664230bce83db65ae8429ce3b72689dc6917f168e64a794",
+          "indexed_sha256": "53874dbbe4f82018e9a499b60dfd4732ecdf8414f79340a105bff5881448651a",
+          "opaque_pixels": 117,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1165,
+          "asset": "openguy-poses-3.png",
+          "art_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            38,
+            848,
+            354,
+            1043
+          ],
+          "content": [
+            0,
+            0,
+            27,
+            14
+          ],
+          "writes_sha256": "fbabee4c517ef66d73493949bb260a999a70409a6ae8d0d67fc434049653174e"
+        },
+        {
+          "research_id": 1166,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 41,
+          "size": [
+            27,
+            14
+          ],
+          "header_part1_offset": 656,
+          "data_part3_offset": 8466,
+          "encoded_length": 201,
+          "other_header_fields": [
+            130,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "4c7dba48dc88a50401a2392cac4949212e1630e784a61f5d99a2b7cfd3ac33c8",
+          "indexed_sha256": "b95e8d9375f38fc4bc917a5f7903bdc5339eb5e2f56ba6503830a109f2ef6c1f",
+          "opaque_pixels": 120,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1166,
+          "asset": "openguy-poses-3.png",
+          "art_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            395,
+            837,
+            705,
+            1043
+          ],
+          "content": [
+            0,
+            0,
+            27,
+            14
+          ],
+          "writes_sha256": "85e3308b0f8189f714ab0a3a2183ea5ad39f46dccc9ee8430d10e1def469f4d7"
+        }
+      ]
+    },
+    "openguy-poses-4.png": {
+      "sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+      "bytes": 754268,
+      "size": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE refined fine pixel-art animation sprite atlas for the Colonization (1994) HD display layer. Image 1 is the exact visual composition guide for this batch of TWELVE tiny animated motifs: a FOUR by FOUR equal grid, only the first12 cells occupied, read left to right and top to bottom. Last four cells fully transparent. Match every source pose closely: preserve the pale gray/blue central shape, brown lower/right parts, small tan projections, and especially the long thin dark reddish pole with the waving red/orange pennant at its top. Preserve the small motif's exact silhouette, proportions, component count, gaps, orientation, rotations and each source frame's changing pose. Follow the reference literally, without inventing a new subject, additional body parts, ship, sails, scenery or props. This is one consistent animated motif seen in12 consecutive poses. Repaint with crisp fine intentional pixel clusters, restrained natural color and small material details rather than enlarging coarse source squares. Image 2 is the approved fine pixel-art STYLE reference ONLY; do not copy its landscape, objects or composition. Use a landscape 4:3 transparent-background canvas with exactly four equal rows and four equal columns. One isolated motif centered in each occupied cell and fully contained within that cell with generous transparent margins. Remove all magenta background and black reference labels. No text, numbers, grid, frame, ground plane, backdrop, cast shadows outside the sprite, floating decoration, blur, photorealism or 3D. Keep a clean straight alpha outside each motif and in all internal gaps.\nThis is the FINAL batch, source poses42 through53, TWELVE sprites only. Image3 is design/palette consistency only. Four columns by four rows, first THREE ROWS occupied (12 cells), ENTIRE FOURTH ROW fully transparent. Follow Image1's exact twelve poses.",
+      "generation_file": "exec-64cd5dfa-d77a-4533-8a49-8c7a2b297fcc.png",
+      "reference_sha256": "02f306b1bc365fa66cd6ba20b262718166170728072cc81ea67e39cbe5ff9c88",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1167,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 42,
+          "size": [
+            27,
+            13
+          ],
+          "header_part1_offset": 672,
+          "data_part3_offset": 8667,
+          "encoded_length": 196,
+          "other_header_fields": [
+            130,
+            116
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "0b595b09cbf1da7310ed40cb1cfa35f28234798d2cbdd83c377d1cd3e4c6a1a0",
+          "indexed_sha256": "98095421726c04fb2161385716af30f093c8e87ba43e43df6863b7ab789a65d1",
+          "opaque_pixels": 118,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1167,
+          "asset": "openguy-poses-4.png",
+          "art_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            83,
+            18,
+            307,
+            260
+          ],
+          "content": [
+            0,
+            0,
+            27,
+            13
+          ],
+          "writes_sha256": "99dc4e5daa2811ee27bac4ed19596cb59e73d2ce44506694c9fb0b9c20e92899"
+        },
+        {
+          "research_id": 1168,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 43,
+          "size": [
+            26,
+            14
+          ],
+          "header_part1_offset": 688,
+          "data_part3_offset": 8863,
+          "encoded_length": 200,
+          "other_header_fields": [
+            131,
+            116
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "d2076764b29fec972375ac86a964991d62b764c88f3217159e6917aa3ce341bd",
+          "indexed_sha256": "9843d37bbf366bdab9e63f74b57533c139a20eb043894a45d60ecdd00f150018",
+          "opaque_pixels": 117,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1168,
+          "asset": "openguy-poses-4.png",
+          "art_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            420,
+            19,
+            674,
+            263
+          ],
+          "content": [
+            0,
+            0,
+            26,
+            14
+          ],
+          "writes_sha256": "d28b4f09912b50f8586aa00978853461d10bae9318ff46406f7a746b51764192"
+        },
+        {
+          "research_id": 1169,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 44,
+          "size": [
+            26,
+            13
+          ],
+          "header_part1_offset": 704,
+          "data_part3_offset": 9063,
+          "encoded_length": 205,
+          "other_header_fields": [
+            132,
+            116
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "28ac1d6b59f3953cc61c4c81d7c6b6617c228bad2c138579e0c95b55141f4902",
+          "indexed_sha256": "444e9beb1a06aa4ad303d07299ad88aeb41da9c048658d552629023dc9dab9f9",
+          "opaque_pixels": 118,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1169,
+          "asset": "openguy-poses-4.png",
+          "art_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            810,
+            19,
+            1047,
+            264
+          ],
+          "content": [
+            0,
+            0,
+            26,
+            13
+          ],
+          "writes_sha256": "41ec8c0026481e3e44fb0e9338de95811467c454bfbae6b85ed15684e4d7e22e"
+        },
+        {
+          "research_id": 1170,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 45,
+          "size": [
+            25,
+            13
+          ],
+          "header_part1_offset": 720,
+          "data_part3_offset": 9268,
+          "encoded_length": 206,
+          "other_header_fields": [
+            132,
+            116
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ea83b723ebaa66c82005e7aa696315f315d28f26385564c92d2a50df7fbdaa74",
+          "indexed_sha256": "7c5f992aadcdd15baf9e8c95944b514509a7f51e3ee877bb50bc9d094250a62c",
+          "opaque_pixels": 116,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1170,
+          "asset": "openguy-poses-4.png",
+          "art_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            1145,
+            19,
+            1405,
+            264
+          ],
+          "content": [
+            0,
+            0,
+            25,
+            13
+          ],
+          "writes_sha256": "76b3d97e6c30ace829b471cf3d617a0753970657f0126972c1c4c41905473dd9"
+        },
+        {
+          "research_id": 1171,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 46,
+          "size": [
+            25,
+            13
+          ],
+          "header_part1_offset": 736,
+          "data_part3_offset": 9474,
+          "encoded_length": 196,
+          "other_header_fields": [
+            132,
+            116
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "08fd009651ec7ea0ca74663c6e6952ebccca68366afa449e83f74ea0637240c2",
+          "indexed_sha256": "d87b2be4d911243330edf4084853540151f03a1f4f5704ce4569dc0525c77e4b",
+          "opaque_pixels": 114,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1171,
+          "asset": "openguy-poses-4.png",
+          "art_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            46,
+            295,
+            317,
+            529
+          ],
+          "content": [
+            0,
+            0,
+            25,
+            13
+          ],
+          "writes_sha256": "5c0b01bc1d325167bffc1192601cea579a29b0e56a224794c07f9d91ffad345d"
+        },
+        {
+          "research_id": 1172,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 47,
+          "size": [
+            25,
+            14
+          ],
+          "header_part1_offset": 752,
+          "data_part3_offset": 9670,
+          "encoded_length": 205,
+          "other_header_fields": [
+            132,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "2b3d3478e1fab080d3b383f76b822d041b78a8b4113778fa5cfd227206c8cf18",
+          "indexed_sha256": "f45351cb120905161418fc0a04c8ba68254da66cbdc866d5d1ef32e5ec63e0ea",
+          "opaque_pixels": 116,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1172,
+          "asset": "openguy-poses-4.png",
+          "art_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            395,
+            291,
+            700,
+            520
+          ],
+          "content": [
+            0,
+            0,
+            25,
+            14
+          ],
+          "writes_sha256": "91d54a3db1298ca9913a978b6f6356fba6089f8e0ad3cb75bb71c23c77b45ed3"
+        },
+        {
+          "research_id": 1173,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 48,
+          "size": [
+            25,
+            14
+          ],
+          "header_part1_offset": 768,
+          "data_part3_offset": 9875,
+          "encoded_length": 206,
+          "other_header_fields": [
+            132,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f1598aa2d5974884371c15ba04380aead6e0ccddbada62665e3a46a03e856f33",
+          "indexed_sha256": "d57bb2f934deed34a93cb33e42a12ad69bffd2589d65cb76ef6d3de514ff0018",
+          "opaque_pixels": 118,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1173,
+          "asset": "openguy-poses-4.png",
+          "art_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            742,
+            296,
+            1056,
+            518
+          ],
+          "content": [
+            0,
+            0,
+            25,
+            14
+          ],
+          "writes_sha256": "380760a21bcce3780aac2a6b3801aab8eeb33c875ac2716d9698e25e661f3ac8"
+        },
+        {
+          "research_id": 1174,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 49,
+          "size": [
+            25,
+            13
+          ],
+          "header_part1_offset": 784,
+          "data_part3_offset": 10081,
+          "encoded_length": 200,
+          "other_header_fields": [
+            132,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "7d3c3517d8f4457244997fcd1c86a0277294d9a8fd1ac4f6096c42ac4309d4bd",
+          "indexed_sha256": "966ffae104d121275dbe33528df0e4359f12b828df6fe390b37e0bf5a73d6f1e",
+          "opaque_pixels": 117,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1174,
+          "asset": "openguy-poses-4.png",
+          "art_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            1098,
+            301,
+            1409,
+            519
+          ],
+          "content": [
+            0,
+            0,
+            25,
+            13
+          ],
+          "writes_sha256": "c1b99b0e7d3c64b8a6207102b9c3da794628fd92e589bb5958e399da1dfe399e"
+        },
+        {
+          "research_id": 1175,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 50,
+          "size": [
+            26,
+            13
+          ],
+          "header_part1_offset": 800,
+          "data_part3_offset": 10281,
+          "encoded_length": 200,
+          "other_header_fields": [
+            132,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f4c60d899365e9cd51149e824d2b9b81b4367e3b074a2a3a7dddb203d8f29f46",
+          "indexed_sha256": "bfd87003ab2881ac812e78600f61a2f0f0fa12ddbc132b8712e28021d1b53f8c",
+          "opaque_pixels": 119,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1175,
+          "asset": "openguy-poses-4.png",
+          "art_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            34,
+            570,
+            336,
+            767
+          ],
+          "content": [
+            0,
+            0,
+            26,
+            13
+          ],
+          "writes_sha256": "f831c1240dcdcf7ddf47398a6a0f82df2f182f7b683a57146fdcdfc01d347af4"
+        },
+        {
+          "research_id": 1176,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 51,
+          "size": [
+            26,
+            14
+          ],
+          "header_part1_offset": 816,
+          "data_part3_offset": 10481,
+          "encoded_length": 210,
+          "other_header_fields": [
+            132,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ce65ed7f0d15eaf398032f644c782275e099a9c4a74d7e7fac34bfebcb464fa5",
+          "indexed_sha256": "cb815db9bfbf37f11f1dd971a00ec2d0220240d580e3de18515d66e13df64f6f",
+          "opaque_pixels": 122,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1176,
+          "asset": "openguy-poses-4.png",
+          "art_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            379,
+            566,
+            691,
+            774
+          ],
+          "content": [
+            0,
+            0,
+            26,
+            14
+          ],
+          "writes_sha256": "891681e30fc8a92e69b0dabc3433277652dab63a030f3435fb45bb067502927e"
+        },
+        {
+          "research_id": 1177,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 52,
+          "size": [
+            25,
+            14
+          ],
+          "header_part1_offset": 832,
+          "data_part3_offset": 10691,
+          "encoded_length": 209,
+          "other_header_fields": [
+            132,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "b947d8b7160b0c3eacb88af54cacf2485c2de32c15d335705cf6b0ee46a6c139",
+          "indexed_sha256": "c5790b4f113857e69b4f6b58fe86a74afb5de6ca0f067592121124cb4554c8ba",
+          "opaque_pixels": 120,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1177,
+          "asset": "openguy-poses-4.png",
+          "art_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            736,
+            570,
+            1054,
+            777
+          ],
+          "content": [
+            0,
+            0,
+            25,
+            14
+          ],
+          "writes_sha256": "eea914674664fbc2b73b601785288f33cab32033ea36cd8ddf025b04fef21634"
+        },
+        {
+          "research_id": 1178,
+          "file": "OPENGUY.SS",
+          "file_sha256": "5252b30f8dfa4258956a843a4e3c480969a25144564fa0944a7ac435e0889666",
+          "ordinal": 53,
+          "size": [
+            25,
+            14
+          ],
+          "header_part1_offset": 848,
+          "data_part3_offset": 10900,
+          "encoded_length": 204,
+          "other_header_fields": [
+            132,
+            117
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "5bea4242e3ad01581fcd587659da4618769999d980b5a334fba60f051bc763df",
+          "indexed_sha256": "31a9539e5ec3bab0c59661302b049049f883f4efd0bf59cf4949794265aa9dd0",
+          "opaque_pixels": 118,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1178,
+          "asset": "openguy-poses-4.png",
+          "art_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+          "art_size": [
+            1448,
+            1086
+          ],
+          "sample": [
+            1103,
+            566,
+            1411,
+            777
+          ],
+          "content": [
+            0,
+            0,
+            25,
+            14
+          ],
+          "writes_sha256": "64866475cba06caa24d18398d185e541cf3fc96e8602a5c40486358ab3e5f334"
+        }
+      ]
     }
   }
 }

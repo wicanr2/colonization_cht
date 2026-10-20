@@ -1034,7 +1034,7 @@ func TestHDOpeningCaptionCursorGuards(t *testing.T) {
 }
 
 func TestHDOpeningSpriteSlotSources(t *testing.T) {
-	if len(hdOpeningSpriteDefinitions) != 98 {
+	if len(hdOpeningSpriteDefinitions) != hdOpeningSpriteCount {
 		t.Fatal("source count")
 	}
 	for slot, d := range hdOpeningSpriteDefinitions {

@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "f4b6e46e90a042729d2562c971165cb4ee959e127666e7d5cffc15858533b676",
+  "formal_manifest_sha256": "1b4be2e46e76efaabdd62db20346fde8044a212d9b7a43ec1c1f4616618426e7",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,12 +26,12 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 406,
+    "formal_asset_bindings": 501,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
     "other_formats_and_program_drawn_graphics": "not_assessed",
-    "display_pass_source_bindings": 89
+    "display_pass_source_bindings": 184
   },
   "files": [
     {
@@ -39341,7 +39341,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-mayors.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "3a7cba4c8fd54dd7c39aeb0209ff7c8a52feb27e5b1efdb7194d0c4d96a4b312",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1067,
@@ -39366,7 +39375,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-mayors.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "3a7cba4c8fd54dd7c39aeb0209ff7c8a52feb27e5b1efdb7194d0c4d96a4b312",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1068,
@@ -39391,7 +39409,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-mayors.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "3a7cba4c8fd54dd7c39aeb0209ff7c8a52feb27e5b1efdb7194d0c4d96a4b312",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1069,
@@ -39416,7 +39443,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "portraits-mayors.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "3a7cba4c8fd54dd7c39aeb0209ff7c8a52feb27e5b1efdb7194d0c4d96a4b312",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1070,
@@ -39577,7 +39613,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openbonk-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1075,
@@ -39602,7 +39647,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openbonk-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1076,
@@ -39627,7 +39681,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openbonk-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1077,
@@ -39652,7 +39715,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openbonk-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1078,
@@ -39677,7 +39749,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openbonk-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1079,
@@ -39702,7 +39783,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openbonk-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1080,
@@ -39727,7 +39817,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openbonk-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1081,
@@ -39752,7 +39851,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openbonk-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1082,
@@ -39777,7 +39885,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openbonk-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1083,
@@ -39802,7 +39919,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openbonk-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1084,
@@ -39827,7 +39953,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openbonk-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1085,
@@ -39852,7 +39987,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openbonk-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1086,
@@ -39877,7 +40021,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openbonk-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1087,
@@ -39902,7 +40055,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openbonk-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1088,
@@ -39927,7 +40089,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openbonk-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1089,
@@ -39952,7 +40123,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openbonk-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1090,
@@ -39977,7 +40157,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openbonk-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1091,
@@ -40002,7 +40191,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openbonk-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1092,
@@ -40068,7 +40266,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-credits-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1094,
@@ -40093,7 +40300,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-credits-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1095,
@@ -40118,7 +40334,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-credits-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1096,
@@ -40143,7 +40368,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-credits-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1097,
@@ -40168,7 +40402,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-credits-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1098,
@@ -40193,7 +40436,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-credits-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1099,
@@ -40218,7 +40470,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-credits-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1100,
@@ -40243,7 +40504,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-credits-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1101,
@@ -40268,7 +40538,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-credits-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1102,
@@ -40293,7 +40572,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-credits-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1103,
@@ -40318,7 +40606,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-credits-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1104,
@@ -40343,7 +40640,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-credits-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1105,
@@ -40368,7 +40674,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-credits-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1106,
@@ -40393,7 +40708,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-credits-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1107,
@@ -40418,7 +40742,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-credits-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1108,
@@ -40443,7 +40776,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-credits-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1109,
@@ -40468,7 +40810,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-credits-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1110,
@@ -40493,7 +40844,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-credits-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1111,
@@ -40518,7 +40878,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "opening-credits-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1112,
@@ -40985,7 +41354,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1126,
@@ -41010,7 +41388,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1127,
@@ -41035,7 +41422,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1128,
@@ -41060,7 +41456,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1129,
@@ -41085,7 +41490,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1130,
@@ -41110,7 +41524,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1131,
@@ -41135,7 +41558,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1132,
@@ -41160,7 +41592,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1133,
@@ -41185,7 +41626,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1134,
@@ -41210,7 +41660,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1135,
@@ -41235,7 +41694,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1136,
@@ -41260,7 +41728,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1137,
@@ -41285,7 +41762,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1138,
@@ -41310,7 +41796,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1139,
@@ -41335,7 +41830,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1140,
@@ -41360,7 +41864,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1141,
@@ -41385,7 +41898,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1142,
@@ -41410,7 +41932,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1143,
@@ -41435,7 +41966,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1144,
@@ -41460,7 +42000,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1145,
@@ -41485,7 +42034,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1146,
@@ -41510,7 +42068,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1147,
@@ -41535,7 +42102,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1148,
@@ -41560,7 +42136,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1149,
@@ -41585,7 +42170,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1150,
@@ -41610,7 +42204,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1151,
@@ -41635,7 +42238,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1152,
@@ -41660,7 +42272,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1153,
@@ -41685,7 +42306,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1154,
@@ -41710,7 +42340,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1155,
@@ -41735,7 +42374,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1156,
@@ -41760,7 +42408,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1157,
@@ -41785,7 +42442,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1158,
@@ -41810,7 +42476,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1159,
@@ -41835,7 +42510,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1160,
@@ -41860,7 +42544,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1161,
@@ -41885,7 +42578,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1162,
@@ -41910,7 +42612,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1163,
@@ -41935,7 +42646,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1164,
@@ -41960,7 +42680,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1165,
@@ -41985,7 +42714,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1166,
@@ -42010,7 +42748,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1167,
@@ -42035,7 +42782,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-4.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1168,
@@ -42060,7 +42816,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-4.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1169,
@@ -42085,7 +42850,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-4.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1170,
@@ -42110,7 +42884,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-4.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1171,
@@ -42135,7 +42918,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-4.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1172,
@@ -42160,7 +42952,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-4.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1173,
@@ -42185,7 +42986,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-4.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1174,
@@ -42210,7 +43020,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-4.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1175,
@@ -42235,7 +43054,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-4.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1176,
@@ -42260,7 +43088,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-4.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1177,
@@ -42285,7 +43122,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-4.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1178,
@@ -42310,7 +43156,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "openguy-poses-4.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526",
+        "scope": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1179,
@@ -66115,6 +66970,2286 @@
       "spec": "docs/spec/061-hd-building-draw-lifecycle.md",
       "state": "DISPLAY-PASS",
       "claim": "R103 actual encoded and native source fixture through current production call selection, complete-source finish and renderer; fixture writes supplied; display acceptance only."
+    },
+    {
+      "asset": "opening-credits-1.png",
+      "asset_sha256": "13d729a4cf5065e803020b443093c4f8f6c76f4b2ab95bdafdeb2ef8328c6136",
+      "source_research_id": 1093,
+      "source_file": "OPENCRD1.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "1343075ed08e131ed0e461f178bb4537fbc4d183e201092c63fdb4da313a0892",
+      "source_indexed_sha256": "a184fc0943b6f4a849abfb06adb0c3402045d5a32dec16248be7b559d13f2297",
+      "raw_art_rect": [
+        95,
+        26,
+        1354,
+        146
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        250,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "opening-credits-1.png",
+      "asset_sha256": "13d729a4cf5065e803020b443093c4f8f6c76f4b2ab95bdafdeb2ef8328c6136",
+      "source_research_id": 1094,
+      "source_file": "OPENCRD1.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "7a103cb3fdf51cfcc42ecb3e8d8dd60d7a04b1e7f521cb42433a8149c14a46da",
+      "source_indexed_sha256": "8aa75cc15a5dc943e63efea32525902bb82b1aa2e39e786c43e4cb8a4efa0900",
+      "raw_art_rect": [
+        167,
+        183,
+        1281,
+        304
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        222,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "opening-credits-1.png",
+      "asset_sha256": "13d729a4cf5065e803020b443093c4f8f6c76f4b2ab95bdafdeb2ef8328c6136",
+      "source_research_id": 1095,
+      "source_file": "OPENCRD1.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "e6b828c168b2b0df72d08c35133d381d55b7ebb712a5080249f4e52d12a76730",
+      "source_indexed_sha256": "30bf24694a0e5c7fc36caa21d798e3f124a831f844c7e5c320de091b92e40892",
+      "raw_art_rect": [
+        167,
+        341,
+        1281,
+        464
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        222,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "opening-credits-1.png",
+      "asset_sha256": "13d729a4cf5065e803020b443093c4f8f6c76f4b2ab95bdafdeb2ef8328c6136",
+      "source_research_id": 1096,
+      "source_file": "OPENCRD1.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "0ee768bc390b60cb4ec697ce9e573f07345cc7989c712af2c3d73c7bbc1b70f2",
+      "source_indexed_sha256": "2185b287121083e5ba1ef19d029efa644ed05aea3d55bf3dcc93b296b26a7fbd",
+      "raw_art_rect": [
+        167,
+        500,
+        1281,
+        623
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        222,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "opening-credits-1.png",
+      "asset_sha256": "13d729a4cf5065e803020b443093c4f8f6c76f4b2ab95bdafdeb2ef8328c6136",
+      "source_research_id": 1097,
+      "source_file": "OPENCRD1.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "f9270b158e64e53378cd23f413cb100f3b03cc9b9c3e794d5bb5f4b5f494210d",
+      "source_indexed_sha256": "bbd9877bcbf31862c5deb48481de73bcf2df6718c7e05f8fc70d757cfd0a3ccb",
+      "raw_art_rect": [
+        167,
+        660,
+        1281,
+        783
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        222,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "opening-credits-1.png",
+      "asset_sha256": "13d729a4cf5065e803020b443093c4f8f6c76f4b2ab95bdafdeb2ef8328c6136",
+      "source_research_id": 1098,
+      "source_file": "OPENCRD1.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "fa7764ddb2fbf5f6b37a7325c83aeb4464f15c380839eee7af466ed58ef4d858",
+      "source_indexed_sha256": "483e1baac094c570f753d66bae819b75670459242a8b91830873e9efc8ccca9c",
+      "raw_art_rect": [
+        167,
+        818,
+        1281,
+        940
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        222,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "opening-credits-1.png",
+      "asset_sha256": "13d729a4cf5065e803020b443093c4f8f6c76f4b2ab95bdafdeb2ef8328c6136",
+      "source_research_id": 1099,
+      "source_file": "OPENCRD1.SS",
+      "source_ordinal": 6,
+      "source_encoded_sha256": "cd159d2945cbf5fdf316eba5ead7e5651a5c9423fa5c6a3d381cf05e57984172",
+      "source_indexed_sha256": "f5070a40aee0412cc1b91a57781d7a29d2572adc5433a6f295aa2c239d00f193",
+      "raw_art_rect": [
+        167,
+        962,
+        1281,
+        1082
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        222,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "opening-credits-2.png",
+      "asset_sha256": "f08bfa35abda18cba402b83a202a3428c22fd6f52518becf1377e6bcb1dbc3ee",
+      "source_research_id": 1100,
+      "source_file": "OPENCRD2.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "285a4b223ece71f8ad5a097e4f0b75120ab804d5fb4db646fe6b114300b4612b",
+      "source_indexed_sha256": "770e6b7e650b44d13e930877ce13b92441bfd3189f79f9e4eb3a4e62bec14fcf",
+      "raw_art_rect": [
+        43,
+        31,
+        1404,
+        141
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        312,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "opening-credits-2.png",
+      "asset_sha256": "f08bfa35abda18cba402b83a202a3428c22fd6f52518becf1377e6bcb1dbc3ee",
+      "source_research_id": 1101,
+      "source_file": "OPENCRD2.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "17a1bc49c0a62071adad757653fd51bd7cf9fe054fcae4ef57289f7819ff8686",
+      "source_indexed_sha256": "3e2efbc27abdbf55132bb440e6564e72af78e3fc38397770b4c54d04ada450af",
+      "raw_art_rect": [
+        44,
+        190,
+        1404,
+        298
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        312,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "opening-credits-2.png",
+      "asset_sha256": "f08bfa35abda18cba402b83a202a3428c22fd6f52518becf1377e6bcb1dbc3ee",
+      "source_research_id": 1102,
+      "source_file": "OPENCRD2.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "69b092069de32be2919aa65d3ddb1e4b44859e818d9350b236ffb03951d3f21a",
+      "source_indexed_sha256": "30c913aeef906e3b83d9c06a73fba8d7d874c49f63607d6c4a9152e6407efbfd",
+      "raw_art_rect": [
+        467,
+        342,
+        982,
+        463
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        127,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "opening-credits-2.png",
+      "asset_sha256": "f08bfa35abda18cba402b83a202a3428c22fd6f52518becf1377e6bcb1dbc3ee",
+      "source_research_id": 1103,
+      "source_file": "OPENCRD2.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "57ba730112f4ae401495a7606348d208d74622aa77689c65039790b67bfc0a01",
+      "source_indexed_sha256": "3e8491c109b1983c977e3ba6388f960a89e02c0bea5dd9ec21d27e3ec6f8df36",
+      "raw_art_rect": [
+        34,
+        497,
+        1415,
+        620
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        316,
+        27
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "opening-credits-2.png",
+      "asset_sha256": "f08bfa35abda18cba402b83a202a3428c22fd6f52518becf1377e6bcb1dbc3ee",
+      "source_research_id": 1104,
+      "source_file": "OPENCRD2.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "90c616b8ded3497e65170f97fcd968fa7b9d753e1e89de9a3699daeb67085be9",
+      "source_indexed_sha256": "624a40228018501efca94130fa7dd6ef97d70772078e62879167d2b07c476b23",
+      "raw_art_rect": [
+        44,
+        651,
+        1403,
+        762
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        280,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "opening-credits-2.png",
+      "asset_sha256": "f08bfa35abda18cba402b83a202a3428c22fd6f52518becf1377e6bcb1dbc3ee",
+      "source_research_id": 1105,
+      "source_file": "OPENCRD2.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "5d060c510bc45e0ab74e7b17730367574d4ec00008353a6956db3ed467cd3708",
+      "source_indexed_sha256": "39e37e8783f9946ce2d0672519eae7d3fdfc276cba8b07ffb5850af6f2c0b091",
+      "raw_art_rect": [
+        48,
+        812,
+        1400,
+        930
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        316,
+        27
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "opening-credits-2.png",
+      "asset_sha256": "f08bfa35abda18cba402b83a202a3428c22fd6f52518becf1377e6bcb1dbc3ee",
+      "source_research_id": 1106,
+      "source_file": "OPENCRD2.SS",
+      "source_ordinal": 6,
+      "source_encoded_sha256": "718fb9b817f22049b3a0d1dcf477c18d708705288450269dec01b503e2bed815",
+      "source_indexed_sha256": "db1e46d9f1679ff34627571aa80a9c697b34aac41c78924882188c71f7ba8d03",
+      "raw_art_rect": [
+        49,
+        948,
+        1401,
+        1072
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        316,
+        27
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "opening-credits-3.png",
+      "asset_sha256": "21f41f2ecf9310f8176d0c08ce30867c03ca9779fedad2f6ea20ac3eb7059476",
+      "source_research_id": 1107,
+      "source_file": "OPENCRD3.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "6ad91dba855e0b8cb6ee26073919652a29e920cac0826376f40c802a6559c56e",
+      "source_indexed_sha256": "705ba26d59192978a36196381bf691058f84c2345b28a8fb34a9b6df195c4e2c",
+      "raw_art_rect": [
+        51,
+        30,
+        1397,
+        140
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        316,
+        27
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "opening-credits-3.png",
+      "asset_sha256": "21f41f2ecf9310f8176d0c08ce30867c03ca9779fedad2f6ea20ac3eb7059476",
+      "source_research_id": 1108,
+      "source_file": "OPENCRD3.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "70a1235c11d593d24170ae0355b3c0c891ac0292a71d946a5c03228094b08f2f",
+      "source_indexed_sha256": "c2ecc117ae0ba7bd68ecf36aa80133b54bb5688ba14bc256e7dd99412052c59b",
+      "raw_art_rect": [
+        46,
+        190,
+        1403,
+        291
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        295,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "opening-credits-3.png",
+      "asset_sha256": "21f41f2ecf9310f8176d0c08ce30867c03ca9779fedad2f6ea20ac3eb7059476",
+      "source_research_id": 1109,
+      "source_file": "OPENCRD3.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "0e228f94a6f5be6fdae802481df4c40cc5190f5b9d9672459719227472b24d02",
+      "source_indexed_sha256": "18de955633c18cddafc309c39698099bfc1391400dcf69b8a88e3b4d456d4372",
+      "raw_art_rect": [
+        49,
+        335,
+        1394,
+        447
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        316,
+        27
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "opening-credits-3.png",
+      "asset_sha256": "21f41f2ecf9310f8176d0c08ce30867c03ca9779fedad2f6ea20ac3eb7059476",
+      "source_research_id": 1110,
+      "source_file": "OPENCRD3.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "1b3fda33940f37bbadec1e7544df9219ea9d261402f746da991ab6d6c8fc06f1",
+      "source_indexed_sha256": "83811231916029f7e37ecfc5340682b0795147ad7c0ff2afd35d72480748111e",
+      "raw_art_rect": [
+        77,
+        492,
+        1371,
+        601
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        280,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "opening-credits-3.png",
+      "asset_sha256": "21f41f2ecf9310f8176d0c08ce30867c03ca9779fedad2f6ea20ac3eb7059476",
+      "source_research_id": 1111,
+      "source_file": "OPENCRD3.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "631646f675e8e13c9908c8cbbfe1bd5b6ffd68b8f3c0e803c8c2b0293469b40a",
+      "source_indexed_sha256": "9880d96d5d44cf15682657e1e1c3e3775fe939de9d0653c55717f726681aa239",
+      "raw_art_rect": [
+        78,
+        644,
+        1368,
+        755
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        280,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-mayors.png",
+      "asset_sha256": "e01ab16bd8b07fbee2429b806b37d4b4fe998e79776c6a1b2eee2f53a78e76d7",
+      "source_research_id": 1066,
+      "source_file": "MYR0.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "2c4d15c67c8b8c0e70f89733267c49788730453ced66ae1ae4a9cf268f28f168",
+      "source_indexed_sha256": "76fa3120b94c238d68c9e256ac703b3c1b1f981ac14ec18080a0c2ccb3160371",
+      "raw_art_rect": [
+        33,
+        53,
+        615,
+        617
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        96,
+        93
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-mayors.png",
+      "asset_sha256": "e01ab16bd8b07fbee2429b806b37d4b4fe998e79776c6a1b2eee2f53a78e76d7",
+      "source_research_id": 1067,
+      "source_file": "MYR1.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "734acdfac5c22ee090ddadb4babe043b3f739134d561d83d3d0fb00879718248",
+      "source_indexed_sha256": "238324f30787e68ce76abe0766f692e18a05f89bc22f866b3e13e877ef9efd16",
+      "raw_art_rect": [
+        722,
+        49,
+        1174,
+        617
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        67,
+        85
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-mayors.png",
+      "asset_sha256": "e01ab16bd8b07fbee2429b806b37d4b4fe998e79776c6a1b2eee2f53a78e76d7",
+      "source_research_id": 1068,
+      "source_file": "MYR2.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "1d203655357e316be9b4d12b2c4a318194b6cb341ca45cea8b70faf97e364133",
+      "source_indexed_sha256": "9606631e2c4ed4ea54f452dbfa4e52b62de9f4d63a5978aa5dc5f4ed8d291d8b",
+      "raw_art_rect": [
+        33,
+        660,
+        597,
+        1212
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        74,
+        73
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "portraits-mayors.png",
+      "asset_sha256": "e01ab16bd8b07fbee2429b806b37d4b4fe998e79776c6a1b2eee2f53a78e76d7",
+      "source_research_id": 1069,
+      "source_file": "MYR3.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "66e4345d10233cb8a81a69c022347a546f310e2bab95ab8802ffea5ccb4a70b6",
+      "source_indexed_sha256": "92539bac4b098c64f123f44dbd96ede9b111a68faf28a68fcd27a078dce3cc74",
+      "raw_art_rect": [
+        664,
+        683,
+        1208,
+        1205
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        74,
+        68
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openbonk-poses-1.png",
+      "asset_sha256": "d3f17c0fd9f9c859df6168d60c111a433a452eb04d1dd7ed129d99486968687e",
+      "source_research_id": 1074,
+      "source_file": "OPENBONK.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "ddd9c23780a257bfedc88a5452387161116f9102320c58cb3d94af0607468648",
+      "source_indexed_sha256": "b54f1def5e1ce789cd955e8b80cb6ef77065f0c460c7af763753a63e9d599cab",
+      "raw_art_rect": [
+        32,
+        39,
+        455,
+        339
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        33,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openbonk-poses-1.png",
+      "asset_sha256": "d3f17c0fd9f9c859df6168d60c111a433a452eb04d1dd7ed129d99486968687e",
+      "source_research_id": 1075,
+      "source_file": "OPENBONK.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "74969d2db85715a257d2e9ca187734f3d706e8f32bdfabd169b686d5f9d769ee",
+      "source_indexed_sha256": "cfab5358f56d7da017034561045ccc2f44842371055144788cef5dd2280f5333",
+      "raw_art_rect": [
+        509,
+        36,
+        945,
+        335
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        33,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openbonk-poses-1.png",
+      "asset_sha256": "d3f17c0fd9f9c859df6168d60c111a433a452eb04d1dd7ed129d99486968687e",
+      "source_research_id": 1076,
+      "source_file": "OPENBONK.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "f7c42d1e6204cee1ee6c3a09e0e6332b8ea4253d415a284b11b12e96c1cc8cdd",
+      "source_indexed_sha256": "d97c6747e14940ffdd6ee9424068d955994d17f985b1c5ac34e98c5bbeb7c94a",
+      "raw_art_rect": [
+        995,
+        39,
+        1425,
+        334
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        33,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openbonk-poses-1.png",
+      "asset_sha256": "d3f17c0fd9f9c859df6168d60c111a433a452eb04d1dd7ed129d99486968687e",
+      "source_research_id": 1077,
+      "source_file": "OPENBONK.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "d6dbd37e322f542fa12cb3261d79b9d93a44da3b43773b96031792c34f74b6fb",
+      "source_indexed_sha256": "67221b5ba7c094833be83c4376b1318be492e42956e53f27f851b67af55e2260",
+      "raw_art_rect": [
+        30,
+        385,
+        452,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        33,
+        24
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openbonk-poses-1.png",
+      "asset_sha256": "d3f17c0fd9f9c859df6168d60c111a433a452eb04d1dd7ed129d99486968687e",
+      "source_research_id": 1078,
+      "source_file": "OPENBONK.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "928993a6ce8ff455f5ac8edb0800b019f71357d8703aa3f96ff913787669f952",
+      "source_indexed_sha256": "1b08c8715629eb29ff033d629f62e61a4ed105c6108786b710f4c588cea7b1bb",
+      "raw_art_rect": [
+        507,
+        385,
+        946,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        33,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openbonk-poses-1.png",
+      "asset_sha256": "d3f17c0fd9f9c859df6168d60c111a433a452eb04d1dd7ed129d99486968687e",
+      "source_research_id": 1079,
+      "source_file": "OPENBONK.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "ec6bcc5579697c811b7b892ab20ea1945ea0764aff3fa2934c4878b20df44593",
+      "source_indexed_sha256": "244749dda38c000584de441629c3d95a04aa5f61e725da5b8c01c16878558158",
+      "raw_art_rect": [
+        996,
+        385,
+        1425,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        33,
+        24
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openbonk-poses-1.png",
+      "asset_sha256": "d3f17c0fd9f9c859df6168d60c111a433a452eb04d1dd7ed129d99486968687e",
+      "source_research_id": 1080,
+      "source_file": "OPENBONK.SS",
+      "source_ordinal": 6,
+      "source_encoded_sha256": "a0394de109e513679ccd33028bbf63a2c257ee525ee7c0517b4cce846e6486e7",
+      "source_indexed_sha256": "d7ce86c4153ac59e50cd89bbe89b0c7a0b6580e3243d3ae1a3d322d30f88ed1e",
+      "raw_art_rect": [
+        33,
+        724,
+        455,
+        1021
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        33,
+        25
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openbonk-poses-1.png",
+      "asset_sha256": "d3f17c0fd9f9c859df6168d60c111a433a452eb04d1dd7ed129d99486968687e",
+      "source_research_id": 1081,
+      "source_file": "OPENBONK.SS",
+      "source_ordinal": 7,
+      "source_encoded_sha256": "9cd2115b8add1178100abe3704e7227694a07d279e14d54aeda4104a99dbfe06",
+      "source_indexed_sha256": "e4c85bfd6ae3a078368b33e978d035ea3ab4aa52676ddba3071651a0f3571b5f",
+      "raw_art_rect": [
+        514,
+        724,
+        946,
+        1016
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        33,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openbonk-poses-1.png",
+      "asset_sha256": "d3f17c0fd9f9c859df6168d60c111a433a452eb04d1dd7ed129d99486968687e",
+      "source_research_id": 1082,
+      "source_file": "OPENBONK.SS",
+      "source_ordinal": 8,
+      "source_encoded_sha256": "8739055ce639d53bcf7d159b6519b77f9d6f198452aa162da2d108907944490c",
+      "source_indexed_sha256": "2a0c926e373ac188cf417aa8049fafc34f9299c3e1c6bfcef108f86cfe0e8e96",
+      "raw_art_rect": [
+        996,
+        724,
+        1426,
+        1004
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        33,
+        22
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openbonk-poses-2.png",
+      "asset_sha256": "227e6ecb0a653ef073afcd0e0ae13a9ca38519af16a8bfa6528e625db2e131c8",
+      "source_research_id": 1083,
+      "source_file": "OPENBONK.SS",
+      "source_ordinal": 9,
+      "source_encoded_sha256": "3697bd203ff18935ab5a854070777f39e015178e3b8ab05dc980b9f4be84b45f",
+      "source_indexed_sha256": "47b48461e19db608064e68f28e40446efc16963d92710e9e14a9539fde43a388",
+      "raw_art_rect": [
+        35,
+        47,
+        460,
+        330
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        33,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openbonk-poses-2.png",
+      "asset_sha256": "227e6ecb0a653ef073afcd0e0ae13a9ca38519af16a8bfa6528e625db2e131c8",
+      "source_research_id": 1084,
+      "source_file": "OPENBONK.SS",
+      "source_ordinal": 10,
+      "source_encoded_sha256": "a73dc64fc26b0df92296f3e3f42736e8fdf9138ed5780fbff3b5462bbcafd671",
+      "source_indexed_sha256": "37a040f77933a381d1b1e9e7186afc614820ebdd601ac4123958a5fbaf8695f3",
+      "raw_art_rect": [
+        504,
+        45,
+        934,
+        332
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        33,
+        24
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openbonk-poses-2.png",
+      "asset_sha256": "227e6ecb0a653ef073afcd0e0ae13a9ca38519af16a8bfa6528e625db2e131c8",
+      "source_research_id": 1085,
+      "source_file": "OPENBONK.SS",
+      "source_ordinal": 11,
+      "source_encoded_sha256": "4bf2fb5aa5b4463ad389ccef6593791b2ed5beff030fc250cb9d6a95857bb68a",
+      "source_indexed_sha256": "bb374cac71ad8b8599fdabe5a87afbee7f1d2c537fb37b9e2174408dca65d3e9",
+      "raw_art_rect": [
+        985,
+        45,
+        1414,
+        330
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        33,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openbonk-poses-2.png",
+      "asset_sha256": "227e6ecb0a653ef073afcd0e0ae13a9ca38519af16a8bfa6528e625db2e131c8",
+      "source_research_id": 1086,
+      "source_file": "OPENBONK.SS",
+      "source_ordinal": 12,
+      "source_encoded_sha256": "82e3416ee98ee9b44455c305b0e634962266122d62d62002b33c1573745931f0",
+      "source_indexed_sha256": "20bf8fd487327cb20bb9ba154d7aaa1a5e66b78537ca0fa06620e3ebb7c3534d",
+      "raw_art_rect": [
+        36,
+        391,
+        462,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        33,
+        22
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openbonk-poses-2.png",
+      "asset_sha256": "227e6ecb0a653ef073afcd0e0ae13a9ca38519af16a8bfa6528e625db2e131c8",
+      "source_research_id": 1087,
+      "source_file": "OPENBONK.SS",
+      "source_ordinal": 13,
+      "source_encoded_sha256": "07ac2dfe95cf9894dfd5ce029ca8ca2519f62031f5ca4e45552465d6183994b7",
+      "source_indexed_sha256": "4a24a641a9f9bff53f0369db7799cd962b44a7e72dc3ea2b7ad59de7dcada7b6",
+      "raw_art_rect": [
+        505,
+        387,
+        939,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        34,
+        22
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openbonk-poses-2.png",
+      "asset_sha256": "227e6ecb0a653ef073afcd0e0ae13a9ca38519af16a8bfa6528e625db2e131c8",
+      "source_research_id": 1088,
+      "source_file": "OPENBONK.SS",
+      "source_ordinal": 14,
+      "source_encoded_sha256": "2e601ac8b8050d34269078240185ccd279acbba29a0a23ce701be0a68c34e7b0",
+      "source_indexed_sha256": "79600a01305d52c74d4a896c839a1f9b9fa1c5f646befa3c7458c9e6d6e05df0",
+      "raw_art_rect": [
+        993,
+        397,
+        1425,
+        724
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        35,
+        22
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openbonk-poses-2.png",
+      "asset_sha256": "227e6ecb0a653ef073afcd0e0ae13a9ca38519af16a8bfa6528e625db2e131c8",
+      "source_research_id": 1089,
+      "source_file": "OPENBONK.SS",
+      "source_ordinal": 15,
+      "source_encoded_sha256": "d4a37dcac4dc39c033060e6ffd521cc2397e1eae8a50098be152e201b5a91269",
+      "source_indexed_sha256": "5cdfe0ed3131acd0d1692ec877e8bbf187080fb74217370198c2305b3f319535",
+      "raw_art_rect": [
+        36,
+        724,
+        475,
+        992
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        35,
+        22
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openbonk-poses-2.png",
+      "asset_sha256": "227e6ecb0a653ef073afcd0e0ae13a9ca38519af16a8bfa6528e625db2e131c8",
+      "source_research_id": 1090,
+      "source_file": "OPENBONK.SS",
+      "source_ordinal": 16,
+      "source_encoded_sha256": "9cd4998a278678c205ee7b5ca930a282235b3186db75b5388500f4a85f58101b",
+      "source_indexed_sha256": "36e7c7a99eb7e8a83c5bf4ffe2b9c377a22246763e894e33b2d47c5b92f5c2e0",
+      "raw_art_rect": [
+        512,
+        724,
+        939,
+        990
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        35,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openbonk-poses-2.png",
+      "asset_sha256": "227e6ecb0a653ef073afcd0e0ae13a9ca38519af16a8bfa6528e625db2e131c8",
+      "source_research_id": 1091,
+      "source_file": "OPENBONK.SS",
+      "source_ordinal": 17,
+      "source_encoded_sha256": "9ca6e309036b4fd34bf12b4c23e0661ae92c9d73d35e31219a9a0e404630ca15",
+      "source_indexed_sha256": "8cb7c11d1bceca30e87230b87d636c3d408e9ece68255b87199d52e9a3c4a3ec",
+      "raw_art_rect": [
+        986,
+        724,
+        1413,
+        996
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        33,
+        22
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-1.png",
+      "asset_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+      "source_research_id": 1125,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "4362a0d49ae11954a6b1f36ea9435f0ff953ac44e44352098dbc11fe187740af",
+      "source_indexed_sha256": "c929148474ce2010ed187a63e2db1eb9e8017b745ca1906391a2dab3583592de",
+      "raw_art_rect": [
+        84,
+        31,
+        297,
+        264
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        19,
+        20
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-1.png",
+      "asset_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+      "source_research_id": 1126,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 1,
+      "source_encoded_sha256": "6cf452ecaa79d3e5b7b3330593cf3eab1751862db6f8a15cf47714f2ba45bed8",
+      "source_indexed_sha256": "c163f443c0d13f8580e84dccf890e611b83fe809687b2c86829b4c58fc8b1e63",
+      "raw_art_rect": [
+        447,
+        31,
+        651,
+        268
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        17,
+        21
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-1.png",
+      "asset_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+      "source_research_id": 1127,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 2,
+      "source_encoded_sha256": "938ca64a865e532f9f7d548f0e5b0cb4d0d40f9660b6f173c0f46aae8ed63349",
+      "source_indexed_sha256": "dd72b8304f08781b1950873b6cdabe14bab265d13ada4afdf5e76fc64666bc48",
+      "raw_art_rect": [
+        802,
+        31,
+        1012,
+        266
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        18,
+        20
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-1.png",
+      "asset_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+      "source_research_id": 1128,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 3,
+      "source_encoded_sha256": "a9ac40c0c39f4825525841d83a29b03964a103f1137a5dd39cd3323f4f08837e",
+      "source_indexed_sha256": "34a2c519c4c46072b6bb40bdeb8367ff32e89c61f3d27f3a45116c0702a779cb",
+      "raw_art_rect": [
+        1171,
+        36,
+        1380,
+        266
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        20,
+        23
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-1.png",
+      "asset_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+      "source_research_id": 1129,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 4,
+      "source_encoded_sha256": "11d837ffaf8c656a6a0033455d0491c661e26b4fc7a2111ae579e592237353d6",
+      "source_indexed_sha256": "1eaceb58f9888312b42b4205b96e30f5c89ad427fe99f38d641bbaa6d3c159fc",
+      "raw_art_rect": [
+        42,
+        315,
+        321,
+        542
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        26,
+        21
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-1.png",
+      "asset_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+      "source_research_id": 1130,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 5,
+      "source_encoded_sha256": "fe93493a46d9c18ee13da725c0c7fedcb5c0d53e6434a5f523feaa3fa0540291",
+      "source_indexed_sha256": "a49e1458817c4fc4c84bcf820dff776257c96ddb924252299a44025a2048465a",
+      "raw_art_rect": [
+        383,
+        309,
+        703,
+        531
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        30,
+        18
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-1.png",
+      "asset_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+      "source_research_id": 1131,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 6,
+      "source_encoded_sha256": "f6fe6061ba0616cfb889bed3fb28de3dbaead1a9949714bfd2290f1ba9393a6d",
+      "source_indexed_sha256": "1cb66dbf5a3cad7fe7255b0144c7b809dc2f177d8a17073e606f050ffe9c10aa",
+      "raw_art_rect": [
+        755,
+        326,
+        1068,
+        528
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        32,
+        18
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-1.png",
+      "asset_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+      "source_research_id": 1132,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 7,
+      "source_encoded_sha256": "265d2df277254eebde4fe6faa7d7ba7ef239e74cc8b667bb41a606a7de98a8a8",
+      "source_indexed_sha256": "6be3b32e1167f4d696495b8afd2ff0341c683165c502c5167b3c720e3c7322b4",
+      "raw_art_rect": [
+        1102,
+        325,
+        1430,
+        521
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        31,
+        18
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-1.png",
+      "asset_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+      "source_research_id": 1133,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 8,
+      "source_encoded_sha256": "3539e2272f02c2db641dba50b5973cccce28c042622c247d3f92986974216ba8",
+      "source_indexed_sha256": "8393633817426bf115870132f32a8f7edf10f02672c6268216eb0a0780438c20",
+      "raw_art_rect": [
+        35,
+        608,
+        342,
+        786
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        30,
+        16
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-1.png",
+      "asset_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+      "source_research_id": 1134,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 9,
+      "source_encoded_sha256": "3453fb8e8e27bf0ee6a9bd01151495c1471957a021a0f93d22452ed92a83f5d7",
+      "source_indexed_sha256": "cb2cafaeddc2997de5274d672cc77f0b5f9c8d7cb56a93dfba0462d64a3a89fb",
+      "raw_art_rect": [
+        378,
+        604,
+        701,
+        788
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        28,
+        16
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-1.png",
+      "asset_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+      "source_research_id": 1135,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 10,
+      "source_encoded_sha256": "39a4c5c247069373395e30c68b3e3ec99a0d8ae3f3e59e45814898c8e305c3ec",
+      "source_indexed_sha256": "9855d6f932db8a8c2f7dcb142c855a5e89feafe6d9bc3da8777b76213e216f1f",
+      "raw_art_rect": [
+        733,
+        608,
+        1067,
+        784
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        30,
+        16
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-1.png",
+      "asset_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+      "source_research_id": 1136,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 11,
+      "source_encoded_sha256": "35b8be822120a355012ce7d77d3d834a6ccff2ab4f8339c249efd9ccabe4f699",
+      "source_indexed_sha256": "473021cc0f58487ba8c7474f2b5892e99e22e8c2c2812b5ede4d4b6918a76b8a",
+      "raw_art_rect": [
+        1102,
+        600,
+        1420,
+        787
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        29,
+        16
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-1.png",
+      "asset_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+      "source_research_id": 1137,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 12,
+      "source_encoded_sha256": "6010bad527371cabc2721774f04894efa71efb409de576153f416df560397955",
+      "source_indexed_sha256": "6e61159d6a647ca10c5c79bc005e8a438742188d1cfebb3927177a4aa00e7278",
+      "raw_art_rect": [
+        27,
+        841,
+        352,
+        1055
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        28,
+        18
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-1.png",
+      "asset_sha256": "39aeb0fb329e0845a9ec71f5ac7b906ccea3b6e5ab211e6bd4700912f70d7f9c",
+      "source_research_id": 1138,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 13,
+      "source_encoded_sha256": "6c1b6e465d2490fa7a4288ed5f6071212d22e0ee91f39f8c8d42f347774f5fb2",
+      "source_indexed_sha256": "88633916e57e44c26831a152f54f8b41fa63883936e052b3bc264b75bc94fb76",
+      "raw_art_rect": [
+        403,
+        841,
+        680,
+        1063
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        28,
+        19
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-2.png",
+      "asset_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+      "source_research_id": 1139,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 14,
+      "source_encoded_sha256": "aa8e8e05ad2acb8c6f2d656855d547d8688b19dd566b6ca88cb56842dd5f06df",
+      "source_indexed_sha256": "e3f2d7726df36511150f3f3ed0ed275cf13aa5ff687e5a99ec015be361e50042",
+      "raw_art_rect": [
+        66,
+        37,
+        317,
+        266
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        23,
+        19
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-2.png",
+      "asset_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+      "source_research_id": 1140,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 15,
+      "source_encoded_sha256": "e80f142ba2f5d3715473635992c48ef4477a6103f751a10962d21eb52cd874f2",
+      "source_indexed_sha256": "b2a7809ef0c4a55d55a934b7c5f7bb5035352ea8b88d7a13e9daba382c1b7516",
+      "raw_art_rect": [
+        416,
+        40,
+        695,
+        266
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        23,
+        20
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-2.png",
+      "asset_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+      "source_research_id": 1141,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 16,
+      "source_encoded_sha256": "147cf8f1e15895462e9162f12f5269b527263ee86895435ca539d752e7207725",
+      "source_indexed_sha256": "6eefd8d7eb20a911d8dcb43dcdbd9f4aa1265352b35512689d1b327d6bc8377b",
+      "raw_art_rect": [
+        795,
+        43,
+        1060,
+        266
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        24,
+        21
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-2.png",
+      "asset_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+      "source_research_id": 1142,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 17,
+      "source_encoded_sha256": "68cd1926a6f68259b64ed4077637d32ae25ca3f9dd41414eb19a0ee73cc7241a",
+      "source_indexed_sha256": "ed75b387aff5a73eff6c9f3e531672f0e49d896ca208083fbd7c9dec45116055",
+      "raw_art_rect": [
+        1150,
+        33,
+        1418,
+        267
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        24,
+        21
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-2.png",
+      "asset_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+      "source_research_id": 1143,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 18,
+      "source_encoded_sha256": "385ad3f19c608b8d413f72b7e6f801fd4216f2b8844219747a72b97f325cc60a",
+      "source_indexed_sha256": "fd78621ee6a82424f88609b2ea3340393f67e6a78a75b81b74dc85f6e6b4db43",
+      "raw_art_rect": [
+        50,
+        298,
+        338,
+        534
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        25,
+        20
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-2.png",
+      "asset_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+      "source_research_id": 1144,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 19,
+      "source_encoded_sha256": "ba839f3bb4a9a1ceb81b74e2bf62adfa131dc71c77f06b65ecdc0301730fc06b",
+      "source_indexed_sha256": "4e6ad51509a9288dc9f5cbb4491354854eac1f9e77dbe4d58c53e9b2ac7cd805",
+      "raw_art_rect": [
+        400,
+        300,
+        713,
+        531
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        26,
+        18
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-2.png",
+      "asset_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+      "source_research_id": 1145,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 20,
+      "source_encoded_sha256": "33998fbd8a8329b6282738663ee6a825cfd60e126e86bce7f5d3dfd54af8fb4a",
+      "source_indexed_sha256": "e5c2432c06ba2fa32493ff04603f903e6a92b42b77cee789976bb0a2147cc1f4",
+      "raw_art_rect": [
+        755,
+        306,
+        1064,
+        531
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        27,
+        17
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-2.png",
+      "asset_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+      "source_research_id": 1146,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 21,
+      "source_encoded_sha256": "3027751ee1c317e96bd18149d48f8164452a04526ecaadf6c3ae473f27377e5b",
+      "source_indexed_sha256": "46c1cf32c797332498ff45dac05c960ae2733d65adcbfd170de9b2703a18cc6d",
+      "raw_art_rect": [
+        1116,
+        315,
+        1432,
+        527
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        27,
+        17
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-2.png",
+      "asset_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+      "source_research_id": 1147,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 22,
+      "source_encoded_sha256": "90748c71da6c4b9efa1f1390183cd8eb89e6616bf78ac4ba9e6bf9c907c3ad7a",
+      "source_indexed_sha256": "bfe10ed29a1ebc9bfacb2db4a19d9f3b0ab8c5341ac540c032ed30b83cdaa01e",
+      "raw_art_rect": [
+        33,
+        572,
+        349,
+        796
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        26,
+        17
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-2.png",
+      "asset_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+      "source_research_id": 1148,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 23,
+      "source_encoded_sha256": "159819956ea0f576c3cf24103cefc9c41e3648c94b8133b53f115cb0aeafc503",
+      "source_indexed_sha256": "287d7ecc49261578e4c03db945887b896b1768f68e9040a7dc271a465474f91f",
+      "raw_art_rect": [
+        386,
+        576,
+        717,
+        796
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        25,
+        17
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-2.png",
+      "asset_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+      "source_research_id": 1149,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 24,
+      "source_encoded_sha256": "f093944dd6b7c1be2978e902b910a284161423cb1eefeabe6bb7730534119655",
+      "source_indexed_sha256": "fca6eb5119bbad3a397390a7cb19c0824da4059eeba96e8621d990d8db5e83b8",
+      "raw_art_rect": [
+        750,
+        578,
+        1052,
+        796
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        22,
+        18
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-2.png",
+      "asset_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+      "source_research_id": 1150,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 25,
+      "source_encoded_sha256": "4e73d94df1de98e3c81d64af135a6c98fab68b7eb1c0f50c2538ec57d966c54e",
+      "source_indexed_sha256": "991bce425f622356d6a8e9799f365c8625eadbd1bee9f5b4ddaa88e5ccdc3191",
+      "raw_art_rect": [
+        1140,
+        593,
+        1387,
+        796
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        16,
+        17
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-2.png",
+      "asset_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+      "source_research_id": 1151,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 26,
+      "source_encoded_sha256": "9c2afb0e4871278a18f0ea73bf95de12afa8e01db58c86b5e090e17b1242f5ec",
+      "source_indexed_sha256": "b7290d29c8429e982e207d33f6179687597d03f651bd022c27d182947aac29d4",
+      "raw_art_rect": [
+        57,
+        824,
+        301,
+        1052
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        18,
+        16
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-2.png",
+      "asset_sha256": "63d7f1e73003c14420283589114cf3ffeee9a872f7fa87d4187950292e860b45",
+      "source_research_id": 1152,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 27,
+      "source_encoded_sha256": "4faaadad09aafe0314f01a4abd4fa6f2960585c03acf982affb335b5f758b260",
+      "source_indexed_sha256": "e4ede31c20268da58bd314a3365d4846f1d6722ce84bef5e90728dbb819df313",
+      "raw_art_rect": [
+        418,
+        821,
+        663,
+        1046
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        18,
+        15
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-3.png",
+      "asset_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+      "source_research_id": 1153,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 28,
+      "source_encoded_sha256": "c0943cb0edd51bbef1e976cf44b90fb8ed83bbb8f9843ab44ed2b1f4c3de0b51",
+      "source_indexed_sha256": "020220e9b64b19328627d1e5e8bca3499d836c635cab8d2cfa2db389798eb302",
+      "raw_art_rect": [
+        89,
+        30,
+        299,
+        270
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        18,
+        16
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-3.png",
+      "asset_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+      "source_research_id": 1154,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 29,
+      "source_encoded_sha256": "0a6706940354be5c0f3e10455711a3fb6843d01c7d16f93cbbd8b208f8712317",
+      "source_indexed_sha256": "27d423a9d31e6eead1b423738818bd4a8f8f20b391edb07db553230f3c44f1a0",
+      "raw_art_rect": [
+        447,
+        30,
+        669,
+        270
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        18,
+        17
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-3.png",
+      "asset_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+      "source_research_id": 1155,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 30,
+      "source_encoded_sha256": "2f4a0bc77ece4d1979641faf5363a5d384e517808283e175b25bef2b0f5b4801",
+      "source_indexed_sha256": "8c20583413f977fbec1b9c25b5219d22acc786177e9286b6893cd94f00ae230d",
+      "raw_art_rect": [
+        764,
+        61,
+        1082,
+        258
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        27,
+        15
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-3.png",
+      "asset_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+      "source_research_id": 1156,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 31,
+      "source_encoded_sha256": "ae6f010173ee45d29b9b1cc026ea183a8be51200b99e5d4d799bb890dbbfef76",
+      "source_indexed_sha256": "3c28cf1b72111fcd613e747d301f65ef13b0d375f2fb1553185de1f65400e892",
+      "raw_art_rect": [
+        1143,
+        55,
+        1432,
+        256
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        27,
+        15
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-3.png",
+      "asset_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+      "source_research_id": 1157,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 32,
+      "source_encoded_sha256": "b9dab715f2b914ee240da4585cb17296bb0edcfdfa40a26af876d36a840d9b8e",
+      "source_indexed_sha256": "c7bb2e76179a56880713ed8e8da50836bd16eb63d6f2a5792027b522db252f24",
+      "raw_art_rect": [
+        40,
+        321,
+        344,
+        522
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        28,
+        15
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-3.png",
+      "asset_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+      "source_research_id": 1158,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 33,
+      "source_encoded_sha256": "19d938f999d4dee20ef79c5cff40b4cd792ea44d21cb494a01e3d0540ccaa3a4",
+      "source_indexed_sha256": "b058b3ee484bd8774369885c5425cefea55fba1b75694c3736383ccdc51ccf1c",
+      "raw_art_rect": [
+        388,
+        326,
+        715,
+        520
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        28,
+        15
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-3.png",
+      "asset_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+      "source_research_id": 1159,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 34,
+      "source_encoded_sha256": "b838c78101498bec43b7219aebc2053b4bb57f84a83e64e713e4d4cc13653f10",
+      "source_indexed_sha256": "93e673284513e631de8c5f702c0f665d08df2d592909b3e44c4aacf6948f3100",
+      "raw_art_rect": [
+        764,
+        327,
+        1086,
+        520
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        29,
+        15
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-3.png",
+      "asset_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+      "source_research_id": 1160,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 35,
+      "source_encoded_sha256": "0c854fbd0d386b637c1caef5d572f35f31220387acb0336a26b19eab3ea76931",
+      "source_indexed_sha256": "0ccd16599ef060fd2dc41a2a59b4414e81d62140ce842343eb93a074171d3a20",
+      "raw_art_rect": [
+        1086,
+        323,
+        1441,
+        521
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        27,
+        15
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-3.png",
+      "asset_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+      "source_research_id": 1161,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 36,
+      "source_encoded_sha256": "d8004c84e2d65a91c3df76795bebfee4c56b289608dd903f0c468b22c0760249",
+      "source_indexed_sha256": "e3f4178c3c476796cbd9f1cfd48d8a0e14c094138f460fa49b2655025b99b19c",
+      "raw_art_rect": [
+        37,
+        598,
+        346,
+        790
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        27,
+        15
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-3.png",
+      "asset_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+      "source_research_id": 1162,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 37,
+      "source_encoded_sha256": "68ea50f582dd069aa02e5a053b0f30eb91d83d221cb512e871267ac171879f46",
+      "source_indexed_sha256": "f88d982db8e97c0c4a76bc592050041b8fb9b26fa9d5ab6fcc23a19e9e29d4c6",
+      "raw_art_rect": [
+        390,
+        586,
+        710,
+        792
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        27,
+        16
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-3.png",
+      "asset_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+      "source_research_id": 1163,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 38,
+      "source_encoded_sha256": "2f4726fcd0224730a2e1ee68508a22b98d2c8abd528853683a164660fe9191ea",
+      "source_indexed_sha256": "3e79629ac0a60ec64b8a266d65692c97afd179f64fe2425a0509a65e7baef380",
+      "raw_art_rect": [
+        756,
+        589,
+        1070,
+        785
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        26,
+        15
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-3.png",
+      "asset_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+      "source_research_id": 1164,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 39,
+      "source_encoded_sha256": "ffacfd6c5db83e126fedc4c443d961afb578d262683675389732bc13068d3b31",
+      "source_indexed_sha256": "9cdefcaf0e03c64b4da593695f736bf8275e17c16bea246c442519e99b87c14e",
+      "raw_art_rect": [
+        1111,
+        586,
+        1428,
+        785
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        26,
+        16
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-3.png",
+      "asset_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+      "source_research_id": 1165,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 40,
+      "source_encoded_sha256": "b69e73afc98383ae2664230bce83db65ae8429ce3b72689dc6917f168e64a794",
+      "source_indexed_sha256": "53874dbbe4f82018e9a499b60dfd4732ecdf8414f79340a105bff5881448651a",
+      "raw_art_rect": [
+        38,
+        848,
+        354,
+        1043
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        27,
+        14
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-3.png",
+      "asset_sha256": "1a4b1beada849f2dd75cc896cf1611f03a6dc487a6010add2c91be2eed0bc7bc",
+      "source_research_id": 1166,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 41,
+      "source_encoded_sha256": "4c7dba48dc88a50401a2392cac4949212e1630e784a61f5d99a2b7cfd3ac33c8",
+      "source_indexed_sha256": "b95e8d9375f38fc4bc917a5f7903bdc5339eb5e2f56ba6503830a109f2ef6c1f",
+      "raw_art_rect": [
+        395,
+        837,
+        705,
+        1043
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        27,
+        14
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-4.png",
+      "asset_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+      "source_research_id": 1167,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 42,
+      "source_encoded_sha256": "0b595b09cbf1da7310ed40cb1cfa35f28234798d2cbdd83c377d1cd3e4c6a1a0",
+      "source_indexed_sha256": "98095421726c04fb2161385716af30f093c8e87ba43e43df6863b7ab789a65d1",
+      "raw_art_rect": [
+        83,
+        18,
+        307,
+        260
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        27,
+        13
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-4.png",
+      "asset_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+      "source_research_id": 1168,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 43,
+      "source_encoded_sha256": "d2076764b29fec972375ac86a964991d62b764c88f3217159e6917aa3ce341bd",
+      "source_indexed_sha256": "9843d37bbf366bdab9e63f74b57533c139a20eb043894a45d60ecdd00f150018",
+      "raw_art_rect": [
+        420,
+        19,
+        674,
+        263
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        26,
+        14
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-4.png",
+      "asset_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+      "source_research_id": 1169,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 44,
+      "source_encoded_sha256": "28ac1d6b59f3953cc61c4c81d7c6b6617c228bad2c138579e0c95b55141f4902",
+      "source_indexed_sha256": "444e9beb1a06aa4ad303d07299ad88aeb41da9c048658d552629023dc9dab9f9",
+      "raw_art_rect": [
+        810,
+        19,
+        1047,
+        264
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        26,
+        13
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-4.png",
+      "asset_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+      "source_research_id": 1170,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 45,
+      "source_encoded_sha256": "ea83b723ebaa66c82005e7aa696315f315d28f26385564c92d2a50df7fbdaa74",
+      "source_indexed_sha256": "7c5f992aadcdd15baf9e8c95944b514509a7f51e3ee877bb50bc9d094250a62c",
+      "raw_art_rect": [
+        1145,
+        19,
+        1405,
+        264
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        25,
+        13
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-4.png",
+      "asset_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+      "source_research_id": 1171,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 46,
+      "source_encoded_sha256": "08fd009651ec7ea0ca74663c6e6952ebccca68366afa449e83f74ea0637240c2",
+      "source_indexed_sha256": "d87b2be4d911243330edf4084853540151f03a1f4f5704ce4569dc0525c77e4b",
+      "raw_art_rect": [
+        46,
+        295,
+        317,
+        529
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        25,
+        13
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-4.png",
+      "asset_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+      "source_research_id": 1172,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 47,
+      "source_encoded_sha256": "2b3d3478e1fab080d3b383f76b822d041b78a8b4113778fa5cfd227206c8cf18",
+      "source_indexed_sha256": "f45351cb120905161418fc0a04c8ba68254da66cbdc866d5d1ef32e5ec63e0ea",
+      "raw_art_rect": [
+        395,
+        291,
+        700,
+        520
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        25,
+        14
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-4.png",
+      "asset_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+      "source_research_id": 1173,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 48,
+      "source_encoded_sha256": "f1598aa2d5974884371c15ba04380aead6e0ccddbada62665e3a46a03e856f33",
+      "source_indexed_sha256": "d57bb2f934deed34a93cb33e42a12ad69bffd2589d65cb76ef6d3de514ff0018",
+      "raw_art_rect": [
+        742,
+        296,
+        1056,
+        518
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        25,
+        14
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-4.png",
+      "asset_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+      "source_research_id": 1174,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 49,
+      "source_encoded_sha256": "7d3c3517d8f4457244997fcd1c86a0277294d9a8fd1ac4f6096c42ac4309d4bd",
+      "source_indexed_sha256": "966ffae104d121275dbe33528df0e4359f12b828df6fe390b37e0bf5a73d6f1e",
+      "raw_art_rect": [
+        1098,
+        301,
+        1409,
+        519
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        25,
+        13
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-4.png",
+      "asset_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+      "source_research_id": 1175,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 50,
+      "source_encoded_sha256": "f4c60d899365e9cd51149e824d2b9b81b4367e3b074a2a3a7dddb203d8f29f46",
+      "source_indexed_sha256": "bfd87003ab2881ac812e78600f61a2f0f0fa12ddbc132b8712e28021d1b53f8c",
+      "raw_art_rect": [
+        34,
+        570,
+        336,
+        767
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        26,
+        13
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-4.png",
+      "asset_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+      "source_research_id": 1176,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 51,
+      "source_encoded_sha256": "ce65ed7f0d15eaf398032f644c782275e099a9c4a74d7e7fac34bfebcb464fa5",
+      "source_indexed_sha256": "cb815db9bfbf37f11f1dd971a00ec2d0220240d580e3de18515d66e13df64f6f",
+      "raw_art_rect": [
+        379,
+        566,
+        691,
+        774
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        26,
+        14
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-4.png",
+      "asset_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+      "source_research_id": 1177,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 52,
+      "source_encoded_sha256": "b947d8b7160b0c3eacb88af54cacf2485c2de32c15d335705cf6b0ee46a6c139",
+      "source_indexed_sha256": "c5790b4f113857e69b4f6b58fe86a74afb5de6ca0f067592121124cb4554c8ba",
+      "raw_art_rect": [
+        736,
+        570,
+        1054,
+        777
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        25,
+        14
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "openguy-poses-4.png",
+      "asset_sha256": "5b85488fa9771ea63518cbd4dc9a5eb3396f0934cb322ec08d46aed99a5d9cc2",
+      "source_research_id": 1178,
+      "source_file": "OPENGUY.SS",
+      "source_ordinal": 53,
+      "source_encoded_sha256": "5bea4242e3ad01581fcd587659da4618769999d980b5a334fba60f051bc763df",
+      "source_indexed_sha256": "31a9539e5ec3bab0c59661302b049049f883f4efd0bf59cf4949794265aa9dd0",
+      "raw_art_rect": [
+        1103,
+        566,
+        1411,
+        777
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        25,
+        14
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production selector, complete-source finish and renderer; writes and publication supplied; display acceptance only; no new normal-player-path or original-exact claim."
     }
   ],
   "limitations": [
@@ -66977,5 +70112,29 @@
     "receipt_sha256": "e9abfdd76ef23374e2696a77618d62e58c439b36c22b52913cfb21026428b7db",
     "formal_binary_sha256": "3dddd1dca192b02da8af86437f6dd2d2a994e88ac21bd1c17f38d03141074ea9",
     "scope": "R103 actual encoded and native source fixture through current production call selection, complete-source finish and renderer; fixture writes supplied; display acceptance only."
+  },
+  "last_intro_and_portrait_display": {
+    "state": "DISPLAY-PASS",
+    "credit_sources": 19,
+    "portrait_sources": 4,
+    "animation_sources": 72,
+    "raw_pngs": 341,
+    "graphics_files": 342,
+    "formal_binary_sha256": "98965f84766fd9dddd1f7dce72a847d048b4873398b42f8d29ba96029525356f",
+    "proofs": [
+      {
+        "receipt": "r104-formal-display-r4/check.json",
+        "sha256": "98def1f75d6080084ff263d39b44f12424c167fa95b307af10056a71b2a12713"
+      },
+      {
+        "receipt": "r105-formal-display-r3/check.json",
+        "sha256": "3a7cba4c8fd54dd7c39aeb0209ff7c8a52feb27e5b1efdb7194d0c4d96a4b312"
+      },
+      {
+        "receipt": "r106-formal-display-r1/check.json",
+        "sha256": "46d9073d0d633f5383a83eb099958505f50b15f146df77015107373f65350526"
+      }
+    ],
+    "scope": "production-connected source-fixture display acceptance; not normal game or original-exact parity"
   }
 }

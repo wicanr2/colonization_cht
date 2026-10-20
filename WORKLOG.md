@@ -7273,3 +7273,18 @@ R97參考圖勘誤：初版把第一事件色盤套用全部十三張，其他�
 - 正式3dddd1dca192b02da8af86437f6dd2d2a994e88ac21bd1c17f38d03141074ea9、建置與go vet、完整HD載入、來源fixture測試畫面及332檔封裝指紋通過。測試提供原生寫入，限接線與顯示，不新增正常CPU或原版精確對拍聲明。
 - 331張生成原PNG／332檔、406來源連結；既有317筆限定CONFORMED保持，新89筆DISPLAY-PASS。BUILDING.SS及ICONS.SS的非空來源均已接線。README素材摘要更新，32張原樣實拍保留。
 - 收據位於hd-opening-animation-sources-r84的r103-formal-build-r1.json及r103-formal-display-r1/check.json。一次性容器已退出並自動刪除，輸出UID1000，原版未入Git。製作名單／標誌及其他圖像接續，全量HD仍未完成。
+
+## 2026-10-20 HD顯示驗收規則授權
+
+- 使用者在前輪自動核准審查拒絕改寫AGENTS.md後明確表示「我提供授權」。本次只將已確認的HD單項接線及測試畫面通過標準寫入AGENTS.md、目標186及hd-graphics驗收欄；其他規則保持。
+- 命中規格閘門路由，已讀local/retro-remake-spec-gated-workflow.md。既有來源接線沿已知契約建立READY批次，顯示通過記為DISPLAY-PASS，不冒稱原版精確對拍；未覆蓋項仍未完成。
+- 不新增原版內部調查、逐像素、音訊、存檔或全語矩陣作為HD接線門檻。畫面如實標明正常遊戲、既有快照或解碼來源測試資料。
+
+## 2026-10-20 R104至R106片頭與人物頭像
+
+- 依使用者授權，以正式接線與測試畫面出現作為HD批次驗收。規則、目標186與worklist的驗收文字同步；原版資料、規則及其他顯示契約保持。
+- 十張新生成原PNG：三張製作名單紙帶、一張四位MYR頭像圖集、兩張十八幀OPENBONK圖集、四張五十四幀OPENGUY圖集。95個來源全部顯示，原PNG與alpha保持，來源／權利／提示／指紋一起入Git。
+- 頭像沿用完整SS來源及Main畫布守門，新增明定尺寸及alpha圖集；新來源由當次stack記錄回傳點，舊來源固定回傳點保持。開場圖集依已驗檔名與指紋快取，來源暫存與ordinal上限依既有清冊擴充。
+- 早期私有測試修正了底圖發布標記、舊輸出目錄與日誌路徑；目視修正名單多層字形色，原生英文及紙面相關過渡色保留。最終98965f84766fd9dddd1f7dce72a847d048b4873398b42f8d29ba96029525356f通過建置、go vet、完整HD載入、95個來源fixture顯示、槽位及342檔封裝指紋。未新增原版CPU、正常玩家路徑或原版精確對拍聲明。
+- 341張生成原PNG／342檔，501來源連結；既有317筆限定CONFORMED保持，新184筆DISPLAY-PASS。README素材摘要更新，32張既有實拍保留。
+- 收據：r106-formal-build-r1.json、r104-formal-display-r4/check.json、r105-formal-display-r3/check.json、r106-formal-display-r1/check.json。一次性容器均退出並自動刪除，輸出UID1000；原版未入Git。其他人物／標誌接續，全量HD仍未完成。

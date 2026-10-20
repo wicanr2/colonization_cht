@@ -8,6 +8,7 @@ import (
 
 // 規格069 R97 READY修正。完整原版回傳後才建立Main來源；不改寫DOS。
 type hdSceneSpriteDefinition struct {
+	capturedReturn                             bool
 	ordinal, width, height, encodedLen, opaque int
 	nominal                                    [2]uint16
 	encodedSHA, indexedSHA, writesSHA          string
@@ -85,7 +86,7 @@ func (p *hdSceneRuntime) beforeSpriteInstruction() {
 	s := f.sprite
 	desc, ok := hdBuildingWords(m.Mem, c.Seg[golem.DS], c.R[golem.BX], 4)
 	x, y := int(int16(c.R[golem.DX])), int(int16(stack[2]))
-	if !ok || desc[0] != 200 || desc[1] != 320 || desc[2] != 0 || desc[3] != 0x2cae || x < 0 || y < 0 || x+s.width > 320 || y+s.height > 200 || stack[0] != 0x1554 || stack[1] != 0x121d || int(c.R[golem.SP])+10 > 65535 {
+	if !ok || desc[0] != 200 || desc[1] != 320 || desc[2] != 0 || desc[3] != 0x2cae || x < 0 || y < 0 || x+s.width > 320 || y+s.height > 200 || (!s.capturedReturn && (stack[0] != 0x1554 || stack[1] != 0x121d)) || int(c.R[golem.SP])+10 > 65535 {
 		p.spriteRejected++
 		return
 	}
