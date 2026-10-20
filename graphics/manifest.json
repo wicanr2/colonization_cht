@@ -33937,6 +33937,1257 @@
           "writes_sha256": "e4572059f1c578f31c84d30bd645c8f337e8d5c31b666d07b192ca223311b32a"
         }
       ]
+    },
+    "score-cards-1.png": {
+      "sha256": "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44",
+      "bytes": 1826338,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE original refined fine pixel-art atlas of small framed illustrated cards for the Colonization (1994) HD display layer. Image1 is the exact composition and subject guide. Preserve every card's separate subject, original crop, orientation, objects, colors and dark brown wooden rectangular frame. Repaint the coarse, dithered old pixels as coherent fresh detailed fine pixel clusters, restrained natural highlights, readable material and illustration detail. Match the project's established refined pixel-art style in Image2, STYLE ONLY; do not copy its scenery or composition. Square transparent-background canvas with exactly THREE equal rows and THREE equal columns, one LANDSCAPE rectangular illustrated card per occupied cell, centered and fully contained with wide clear transparent margins. All pixels INSIDE each wooden frame must be opaque, including the illustration and wood; transparent outside the full rectangular card only. Remove magenta source/reference pixels, speckled holes and black labels. No labels, captions, words, numbers, grid, extra frames, new symbols, watermark, smooth painting, blur,3D or photography.\nNine occupied cards in reading order:1 a brown-haired pale-shirted man with mouth open and one hand at his chin/throat against warm orange wood;2 a large dark mosquito on tan ground against a cool lilac background;3 a reaching open hand shown from above/behind against a muted blue-green background and a tiny sprig at left;4 a small gray rat/mouse against dark brown timber;5 a pale tan adobe/stone colonial fort with central dark gateway and red tile rooftops;6 a red/yellow timber trading shop with small porch, green grass and pale blue sky, preserve existing sign block as plain colored trim without invented lettering;7 a quiet colonial street with red timber buildings, white fences and a dark road crossing diagonally;8 a close cluster of golden flowering plant heads with green stems against gray-green;9 a low tan/red timber frontier trading post with dark porch, preserve the source composition. Keep all9 card subjects and frames distinct and faithful. Exactly3x3 cells with generous gaps and transparent exterior.",
+      "generation_file": "exec-acd9b28b-ae31-49bc-a1be-e185f599b88b.png",
+      "reference_sha256": "6f3db37a5d5849f545dc0eb081ab8d40e4a0bd9252d85b70d4d2b29a701ceb5a",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "column_row_boundaries": {
+        "0": [
+          0,
+          418,
+          836,
+          1254
+        ],
+        "1": [
+          0,
+          418,
+          836,
+          1254
+        ],
+        "2": [
+          0,
+          418,
+          836,
+          1254
+        ]
+      },
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1451,
+          "file": "SCORE01.SS",
+          "file_sha256": "201bcba42251b02bfa3504dd2f7020c8390054a1b922b39a0a3200d328113466",
+          "ordinal": 0,
+          "size": [
+            140,
+            97
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 11849,
+          "other_header_fields": [
+            104,
+            136
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "e400c4419c24650c14c59bb9608e733d115755ca3061d06040c506d49b6ae106",
+          "indexed_sha256": "560aa2b775766559c6442e51c9ed1caa510e8604ed6e2ed48b37dc067b0785c1",
+          "opaque_pixels": 13467,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1451,
+          "asset": "score-cards-1.png",
+          "sample": [
+            23,
+            110,
+            398,
+            379
+          ],
+          "content": [
+            0,
+            0,
+            140,
+            97
+          ],
+          "art_sha256": "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "9fa0e6041c19a77f7de9901c2f5427b722127bc048f7c42d8ef9ae67147980e3",
+          "palette_sha256": "79d3c5caf4389e10fa9331ad2b244590a0f5f0efe37026daf744144f38a35049",
+          "writes_sha256": "ec24916e9c39529ceb337d36481f8da452451e3f2923ffcff5046173bbe185a0"
+        },
+        {
+          "research_id": 1452,
+          "file": "SCORE02.SS",
+          "file_sha256": "16442f3935457b2d3dbce627b44eba49b3d0467a0eeaa83f36c5c2eb3cd7b248",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 13234,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "e626d1ccbd5a32d41bdffa3045fe23fa0f180885b0960930a97dd4dd1aacb466",
+          "indexed_sha256": "855f2ec3ee4ed6e04c80aa418aeab04b5c688d20d88b1d6fc5985f6f3294f631",
+          "opaque_pixels": 13861,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1452,
+          "asset": "score-cards-1.png",
+          "sample": [
+            439,
+            110,
+            814,
+            379
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "e390f83fc66a6d02798629a6d7e77338bf2a9966b818e6bcd64ebdda1ce28bb4",
+          "palette_sha256": "8b3edb9907a925e7dd34e08ec9b35986b28340010c37380bb6f57f279ecd27e5",
+          "writes_sha256": "9549c0e60d04cc94a0e39db87b9b65f0a098607e4875fe912588cbfd4233e37e"
+        },
+        {
+          "research_id": 1453,
+          "file": "SCORE03.SS",
+          "file_sha256": "39d304a741314629c0846be55a4ae74fa1aab4a07e46cd2a7f873e6e06fb6786",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 13216,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "5f092bbddccbf299f5543d8de8871720c59e4b09ebd447bacee0288125519d6d",
+          "indexed_sha256": "3d3cc999a992b547878176028f8447ea344676e4c41588d6ed948f511d00026a",
+          "opaque_pixels": 13897,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1453,
+          "asset": "score-cards-1.png",
+          "sample": [
+            856,
+            110,
+            1232,
+            380
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "0f8927f49fe3e9b022368666fb95d8d2d49b69435c2c7efe36b4ad6867326224",
+          "palette_sha256": "86f33faad013a72bc2183e3cd74d7436f68bc3b1d8c12b998d3b14019f25ee97",
+          "writes_sha256": "0c0a69626d049cc763f1aca303b318100ec166e6f28ca6b7335934adab4407c4"
+        },
+        {
+          "research_id": 1454,
+          "file": "SCORE04.SS",
+          "file_sha256": "a216c383643cce835e7ef7c147e71433d21ee9ff579c8008f7286e4a6cb6dc2b",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 13816,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "89b9e4fcf7f9df61dbca8c95a217a2be1d0082c31fc3be58e574b6f21a6ab0cc",
+          "indexed_sha256": "ff4c1bcbffecae6ce4ac53f1e9031a86be54c1ff7f80156e1c08742f6cbf7281",
+          "opaque_pixels": 13763,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1454,
+          "asset": "score-cards-1.png",
+          "sample": [
+            23,
+            481,
+            398,
+            761
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "948d704ef12e4927e2b1b6a03018d700dabc181028111b241e6ff72b5d5626d9",
+          "palette_sha256": "7be1cd4c99b8e570a10d37a7d2feeb2541681539f6ab3e99032ee0032fd77dc3",
+          "writes_sha256": "e3658ef84e85d35b417ea803d23f691b89ce23460fea879295f276bfaa2ef8fc"
+        },
+        {
+          "research_id": 1455,
+          "file": "SCORE05.SS",
+          "file_sha256": "311ae31e508c4774cb8dcc79834bbd68e76bbb596b3588415dcdd55b3b338cae",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 13456,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "28f2d6b256613289f47e4b942ce9c4344f01c39b31fd536e08f4551b794d42c2",
+          "indexed_sha256": "f6ef223b50b382adaff04036fefce13200cda4150991554de85c197a321a3080",
+          "opaque_pixels": 13885,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1455,
+          "asset": "score-cards-1.png",
+          "sample": [
+            439,
+            481,
+            814,
+            761
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "33c5588455fb1296b60404979603d4a9620fa0777b3ff589d8c3a57d4fd48b38",
+          "palette_sha256": "a0ccb8f60d5f22e8c95c352d0dfdcdf809799fd7ffd2b3a205ee8d9123ae1720",
+          "writes_sha256": "f5634f718f5eeecae97820098637f658d77612f3a913e83c5cd6715c9a8e7121"
+        },
+        {
+          "research_id": 1456,
+          "file": "SCORE06.SS",
+          "file_sha256": "3014668c60275794cc93a9599bc1e2a15abb0b9670242ebf9b3d68bbbd9ca69f",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 13094,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "de5fa11e9c29093f9fb746791f85d7a57d31b44ab4f7cea36dffa2df60f7d819",
+          "indexed_sha256": "cfb097e6db3a962b90311b9f540d1b54e016aacde3299394fc600985c438c128",
+          "opaque_pixels": 13876,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1456,
+          "asset": "score-cards-1.png",
+          "sample": [
+            856,
+            481,
+            1232,
+            761
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "e9dd9dca202d762fe53d93d0aea82ef4de6ed727db04f9eb31b3cef1b46d62a4",
+          "palette_sha256": "3b855f4c050bf7887640bb5e106881c6b2073c26edf20c69f54c1785673e7938",
+          "writes_sha256": "8fee158dc4fb1d988c380f5dcad447ec237781c0e42b39b329d813f080059952"
+        },
+        {
+          "research_id": 1457,
+          "file": "SCORE07.SS",
+          "file_sha256": "47d4d4b7487a7b943842e4a0b4a09fb1753a4c96875696d336a4651a18cbec0b",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 13300,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "391f57d2794fd75b500cdf4e18843f1b192b56b8ea2e34d8363b45ddfbedc7d7",
+          "indexed_sha256": "f7ab8f746bff53c9dd396d1d38b31b12e8e068fdbeed5282796c9771161e7445",
+          "opaque_pixels": 13845,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1457,
+          "asset": "score-cards-1.png",
+          "sample": [
+            23,
+            864,
+            398,
+            1147
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "4569feb8f3667c42bf21bc4cdf6528b21f1000c5b87cb6030c5793cd25f5a67a",
+          "palette_sha256": "e648f123252d2df077cf1b0a791050538822ca0cc9dad0c69350d67a553aaf09",
+          "writes_sha256": "a630fabb3b04f9b04ca76c89e20d11df0b1604a357703a60fc75c9137005a288"
+        },
+        {
+          "research_id": 1458,
+          "file": "SCORE08.SS",
+          "file_sha256": "a5deaad30f74f6886c141a54b63e5bb7f48edf1b5acf4288ae8f5c76b8dbe367",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 13302,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "72f95af4cc1cd341963777cc44c73bc7bc6e401b73ae86b43cc275602c72cd69",
+          "indexed_sha256": "f1af72b19f0e9de85022308217ca85594179f50f8985c1ba98a4b62745d1c598",
+          "opaque_pixels": 13887,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1458,
+          "asset": "score-cards-1.png",
+          "sample": [
+            439,
+            863,
+            814,
+            1147
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "5dbf8bd3b141d3c2453994dbb96e940ceb87e7280a01dbbec0065c0f0fd067ec",
+          "palette_sha256": "76dda5792f2ab2109877a349173c83665a61529b87cf77edd9bc4a652dcae4df",
+          "writes_sha256": "b3d26b68a66a1a9d004ae58b87c89f09f6219ebac7d1c49b3929606fd3e9e330"
+        },
+        {
+          "research_id": 1459,
+          "file": "SCORE09.SS",
+          "file_sha256": "e02dd8feac8d9174a4ff64b7ff7066167861ee8e3cc38c40f15154e777fa92b8",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 12834,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "5a24c2a8a0955476fd51170587f10609bbd2af2aa611a9210c5571860a47f673",
+          "indexed_sha256": "65973889d1f3d7364b58e0b8f6ab7d7be6352ad26009e650197e4e5537e40290",
+          "opaque_pixels": 13867,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1459,
+          "asset": "score-cards-1.png",
+          "sample": [
+            856,
+            864,
+            1232,
+            1147
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "e62b435a8cdc7ab5f9c02a16333f801469f8f5af54cd2a1ef84713b30fbb7053",
+          "palette_sha256": "a380bc594d2b2fa724fbf5fc0b4fca3736170277f110d194b97af60aa0d2dbff",
+          "writes_sha256": "8f918d55d2e598f1f64a6fac0f15859833ed351acf09ada193258137f58eac02"
+        }
+      ]
+    },
+    "score-cards-2.png": {
+      "sha256": "2adaba486972c1defa948eb969e7c673c225051e472c47dd787c247805675181",
+      "bytes": 2019242,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE original refined fine pixel-art atlas of small framed illustrated cards for the Colonization (1994) HD display layer. Image1 is the exact composition and subject guide. Preserve every card's separate subject, original crop, orientation, objects, colors and dark brown wooden rectangular frame. Repaint the coarse, dithered old pixels as coherent fresh detailed fine pixel clusters, restrained natural highlights, readable material and illustration detail. Match the project's established refined pixel-art style in Image2, STYLE ONLY; do not copy its scenery or composition. Square transparent-background canvas with exactly THREE equal rows and THREE equal columns, one LANDSCAPE rectangular illustrated card per occupied cell, centered and fully contained with wide clear transparent margins. All pixels INSIDE each wooden frame must be opaque, including the illustration and wood; transparent outside the full rectangular card only. Remove magenta source/reference pixels, speckled holes and black labels. No labels, captions, words, numbers, grid, extra frames, new symbols, watermark, smooth painting, blur,3D or photography.\nThis batch has EIGHT illustrated cards in the first8 cells; ninth cell fully transparent. Subjects in reading order:1 a close group of red strawberries with green leaves on a muted gray background;2 a simple wooden footbridge crossing a shallow stream through green/brown countryside;3 a brown patterned falcon/perched bird of prey against warm ochre;4 the exact red brick large institutional building with pale window trim, steep gray roof and green lawn from reference;5 a tawny fox standing in side profile against tan/green countryside;6 an open rolled parchment scroll on a gold supporting tray/box against a deep purple background, preserve the scroll and decorative shapes without invented text;7 a broad river winding through wooded hills and fields;8 the low circular/curved-roof round building with brick/red outer wall and bridge/water/trees from the exact source reference. Preserve the source scenes and rectangular dark wood frames. Exactly3x3 equal cells, first8 occupied, last cell fully transparent, with clear transparent margins between cards and rows. Do not add people, cars, labels or new buildings; follow Image1 literally.",
+      "generation_file": "exec-787b545e-5f91-418d-975c-270f1bb8e0f5.png",
+      "reference_sha256": "e9c55b9d72fba4a9b6ea461cf372ee0bb67317819da8d0551f8cfa1d2619ebbc",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "column_row_boundaries": {
+        "0": [
+          0,
+          418,
+          836,
+          1254
+        ],
+        "1": [
+          0,
+          418,
+          836,
+          1254
+        ],
+        "2": [
+          0,
+          418,
+          836,
+          1254
+        ]
+      },
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1460,
+          "file": "SCORE10.SS",
+          "file_sha256": "2301637b884253ef3a6e2d1f6465dea996b4d1111413ef13231a267f8e04c9db",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 12995,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "21e1fa96e524fdd40380144a6481de47a8a2e291f34f6d193a60a8ffa67c4fe9",
+          "indexed_sha256": "75829b0fc289f38397929bc1f68e94c27507c29147c26a7525e7c07803d29239",
+          "opaque_pixels": 13901,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1460,
+          "asset": "score-cards-2.png",
+          "sample": [
+            21,
+            117,
+            410,
+            396
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "2adaba486972c1defa948eb969e7c673c225051e472c47dd787c247805675181",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "250febd1cf65068ccacb6410de231906f0cd8823a481ef5b8de960ba5b47dc3f",
+          "palette_sha256": "2699ccbdbc8b4346afa45710ec75c02cd759ec38e8325e37e9ddbe4c8f3bb3d1",
+          "writes_sha256": "5aacda0b1f3613fb28ac047c6cc951e025f58343ee754e90d6dc583aa47adff4"
+        },
+        {
+          "research_id": 1461,
+          "file": "SCORE11.SS",
+          "file_sha256": "9cfa319e571a4452d2fab5376928dbb282c911c454de28190112df263c7a31e9",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 13409,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "62ea970140d2739acd7b32ce7c11f79ea68b8701f4e7890ec9f6578ca54c43cc",
+          "indexed_sha256": "1d90ff02a402678c9b13fd9326740aadc4df3ebf6cdba441a7c4fc3e5cfae8c8",
+          "opaque_pixels": 13885,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1461,
+          "asset": "score-cards-2.png",
+          "sample": [
+            435,
+            117,
+            819,
+            396
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "2adaba486972c1defa948eb969e7c673c225051e472c47dd787c247805675181",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "b2b7526f68f9741783420281d05be130f487830071d1a35d86cc39b39a53b8c4",
+          "palette_sha256": "ebae427a51759be51e62dc6c6f2df40d09182584783a89d773368a1ca8870086",
+          "writes_sha256": "9f56253c9056660b842eb9b74bf5ad0f885a3031656c5094e3af9592b20acd54"
+        },
+        {
+          "research_id": 1462,
+          "file": "SCORE12.SS",
+          "file_sha256": "16d6282e62a5af79e0ad92ee20f6470ab70f8ffdf458d1030b37d41292ed3bed",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 12979,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "8c578d022be4ddd16a272849ed4c40e213e933f35834f94758f89c7c97031f49",
+          "indexed_sha256": "b303f9d9688580fe4e8cab0239fa512880df2d4fc2f266c9fee8f3c5103b881a",
+          "opaque_pixels": 13898,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1462,
+          "asset": "score-cards-2.png",
+          "sample": [
+            846,
+            117,
+            1233,
+            396
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "2adaba486972c1defa948eb969e7c673c225051e472c47dd787c247805675181",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "bbbc774f26ae8c67b5b9f6cb8213e5699b997e895640d2ec8775cf92903692a6",
+          "palette_sha256": "dbf936594da55345c86f4dc19a1646f4fc2c51b18baa986f972309f8efb27b47",
+          "writes_sha256": "501e95223121c47381998147e07322b2d1cbf0410041422477f6593b7f67c687"
+        },
+        {
+          "research_id": 1463,
+          "file": "SCORE13.SS",
+          "file_sha256": "1ac6c460cfff87e778d07653be3a1948d8690f63b845342eeccc94eab10fd67a",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 13710,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "cb2a63a51112ebe220057e5ca663db7a24d88317e5c5c010775717c0345def32",
+          "indexed_sha256": "37e2ee5319994d497c759e018d047527c6215922fa423fc2674acfee4e85476c",
+          "opaque_pixels": 13894,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1463,
+          "asset": "score-cards-2.png",
+          "sample": [
+            21,
+            481,
+            410,
+            769
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "2adaba486972c1defa948eb969e7c673c225051e472c47dd787c247805675181",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "85c636031b92c7acc77712213a71cb3077fb3c6bd83a4e5b6c2760e53be9a42d",
+          "palette_sha256": "6091b911dfebfd18a289d648a2e9bb2ece4b91d0ed5ce8a580dfbfff9f15ba0d",
+          "writes_sha256": "91f84018942513f20fffb547e6f86dedadbec5b34053652e2533d0b626bf87e9"
+        },
+        {
+          "research_id": 1464,
+          "file": "SCORE14.SS",
+          "file_sha256": "67d104d9ec309a68abbabde8e862928591879cbec716f62d40cdbf369bfa82a2",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 13290,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "9d02f95c116117d98a97e12ed63d9d761d09235d7c38406e7bcee991744f8432",
+          "indexed_sha256": "9ab81b4c4841a9615d646ef8f0e4a8ffdbbb9a03196392f154374fea2b321db8",
+          "opaque_pixels": 13856,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1464,
+          "asset": "score-cards-2.png",
+          "sample": [
+            435,
+            481,
+            819,
+            769
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "2adaba486972c1defa948eb969e7c673c225051e472c47dd787c247805675181",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "2fd6517e9b388619934d999d8d3bc78362eba59b02474b1566bee9808a02a318",
+          "palette_sha256": "b03f604c4825179e99b75764bd53d4ec0f9acb468d8fae7859b9b02d2a478ab4",
+          "writes_sha256": "9e0db4d20fa2d38a79aa167b178414dbe1095bf1aefc3cc6453b5a17ff1359c5"
+        },
+        {
+          "research_id": 1465,
+          "file": "SCORE15.SS",
+          "file_sha256": "edd8a11b16575dac68d3d122593989352106781a6ed8f9a10568600c6671513b",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 13249,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "48d75590397b21c0d368876c92a117c10921176fb8b0de54ed7054f83051be51",
+          "indexed_sha256": "2342179bbbce8978727dc465289e9348d3b6ec5a06950b8a54193eb5a511224d",
+          "opaque_pixels": 13871,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1465,
+          "asset": "score-cards-2.png",
+          "sample": [
+            846,
+            481,
+            1233,
+            769
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "2adaba486972c1defa948eb969e7c673c225051e472c47dd787c247805675181",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "e948992515f2b0a25005a3c561c669aa97118cf5db0cdfce3d859d3be6bf9cd2",
+          "palette_sha256": "38e7301d7796567a48cffc99f53dc2a246b0fa8200f18b331ce0246ea539c6ef",
+          "writes_sha256": "4fb7672d60e4bc0b62fc93d11f321bea74258aec1f0bec9ebea44b16785bc696"
+        },
+        {
+          "research_id": 1466,
+          "file": "SCORE16.SS",
+          "file_sha256": "4445afed5cc2d2c9173fb9947b13730f241fccb8ead39c64d6c1c0d217307453",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 13627,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "3b4f30ad0b9ad4c263cd9714acf558726cb52d2920ecdf8d6e695af4e26eefda",
+          "indexed_sha256": "5bc4c85c84e9394e367608c5b701cd933f50fa29b454f31091263e80b964209b",
+          "opaque_pixels": 13888,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1466,
+          "asset": "score-cards-2.png",
+          "sample": [
+            21,
+            857,
+            410,
+            1153
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "2adaba486972c1defa948eb969e7c673c225051e472c47dd787c247805675181",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "6b4c6d271f732151271ec059ad98e80ab037d8ebcdf658947fcad25bbcd96e1d",
+          "palette_sha256": "9110a5ae83d91dfed07392ea10129a606f3cbae0650f44b7a163e699948de124",
+          "writes_sha256": "b206f8f7a40323d752ac814aee44ae2b5fc0b9d38200b2e4a27d8e2a88d4cc0e"
+        },
+        {
+          "research_id": 1467,
+          "file": "SCORE17.SS",
+          "file_sha256": "76c848f2d38e073c4e07ce0fd4089c4a7d922ea0c044a4e2690f4ce713b86963",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 13495,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "4a743aa8add097aeb5a99acfaec1ddaf91a91f4e7cbfadb583c930e9b6cf9cfa",
+          "indexed_sha256": "fd6ea866db25b171e403f354e4661475d23ee0489bfaed09eccafa463fdd28ba",
+          "opaque_pixels": 13888,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1467,
+          "asset": "score-cards-2.png",
+          "sample": [
+            435,
+            857,
+            819,
+            1153
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "2adaba486972c1defa948eb969e7c673c225051e472c47dd787c247805675181",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "820d0b0479cd964cfc53aa1c761624c79a1e83883a53eea0bd81c9b91e081298",
+          "palette_sha256": "9c6a4b69e68626acd995b0d2d791c40aa0f9537a8c319b54ae1ef7a689db6a9d",
+          "writes_sha256": "a4f683525492e77fbd31b22b4cf590b6f27437517625f44af082a05f0b9e65cc"
+        }
+      ]
+    },
+    "score-cards-3.png": {
+      "sha256": "4bfae363dc4ae0b3b441db1b4ee1640c5f01c839c06067f10cdc5a8fee99da34",
+      "bytes": 1500735,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE original refined fine pixel-art atlas of small framed illustrated cards for the Colonization (1994) HD display layer. Image1 is the exact composition and subject guide. Preserve every card's separate subject, original crop, orientation, objects, colors and dark brown wooden rectangular frame. Repaint the coarse, dithered old pixels as coherent fresh detailed fine pixel clusters, restrained natural highlights, readable material and illustration detail. Match the project's established refined pixel-art style in Image2, STYLE ONLY; do not copy its scenery or composition. Square transparent-background canvas with exactly THREE equal rows and THREE equal columns, one LANDSCAPE rectangular illustrated card per occupied cell, centered and fully contained with wide clear transparent margins. All pixels INSIDE each wooden frame must be opaque, including the illustration and wood; transparent outside the full rectangular card only. Remove magenta source/reference pixels, speckled holes and black labels. No labels, captions, words, numbers, grid, extra frames, new symbols, watermark, smooth painting, blur,3D or photography.\nThis batch has SEVEN cards in reading order in the first7 cells; cells8 and9 completely transparent. Subjects:1 a bright green rolling countryside and broad valley with dark tree line under pale clouded sky;2 the exact large old tree with pale trunk and twisting branches in a green woodland clearing;3 a bearded man in a red cap/hood and red coat, holding the rolled pale object exactly as reference, against muted natural background;4 the original flat pale-green geographic silhouette with broad blue river/water areas on a cool violet ground, preserve its exact irregular shape and waterways;5 the original large gold star-shaped medal with concentric central rosette, on a pale square decorative background with red/blue corner rays, follow exact emblem geometry without new lettering;6 the source's irregular RED land-map silhouette with one separate blue/violet area at lower right on a near-black ground, reproduce its exact silhouette from reference without labels;7 the source's flat green/brown land masses and blue water map, preserve exact source arrangement and palette without inventing new land shapes. All cards retain the dark brown rectangular wooden frame. Exactly3x3 equal cells, first7 occupied, final2 fully transparent. Keep card shape, source crop, visual hierarchy and orientation exact. Wide transparent gaps around every card. No map labels, country names, lettering, added symbols, people, roads or decorative additions absent from Image1.",
+      "generation_file": "exec-41b6040f-0a32-4edc-9c34-5f51023a29b6.png",
+      "reference_sha256": "4e2bcdc0dbfb22e754bf9d586681fe85b2708fffbcf5718619ecf6a9fbf8798c",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "column_row_boundaries": {
+        "0": [
+          0,
+          418,
+          836,
+          1254
+        ],
+        "1": [
+          0,
+          418,
+          836,
+          1254
+        ],
+        "2": [
+          0,
+          418,
+          836,
+          1254
+        ]
+      },
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 1468,
+          "file": "SCORE18.SS",
+          "file_sha256": "fdd1998aec4af6c45ab2b9e071749852f5e926ab8d2407724a89fc959d7bc7f9",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 13473,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ca9e68249dcb84a92ca8f388e10ad447b2365091b9a26ce5aed4c997412775fd",
+          "indexed_sha256": "087c0303f020daa2553bfdb782b0f72a3885cc3ace35f97f0704e986c33b4a41",
+          "opaque_pixels": 13874,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1468,
+          "asset": "score-cards-3.png",
+          "sample": [
+            24,
+            122,
+            407,
+            400
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "4bfae363dc4ae0b3b441db1b4ee1640c5f01c839c06067f10cdc5a8fee99da34",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "1638e997bf1c1da53b4a5e946ad3c5c27138b1cd32b8bbd24e75e7c9bc4bc52d",
+          "palette_sha256": "e0eaeafbf7c631e15fdbce1eba8e2c4494b586dd5917b6c337996a906385ace9",
+          "writes_sha256": "2789e37032748dd4041351c54d5e139170bee0875053c3c61ded17ce46589007"
+        },
+        {
+          "research_id": 1469,
+          "file": "SCORE19.SS",
+          "file_sha256": "0b63c534cbc57830e1e84ed7b135d5842eb4131be2d2aea85d9af211289ad7a5",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 13365,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "53c04087e023526ecd4943ac34a85668d4d130aa7b6460ab10364c095c61b1ca",
+          "indexed_sha256": "9e5d5b6ecfc6ac8490dab4bab45f12a06ff899386a89115ba7c9f6a5d4956c94",
+          "opaque_pixels": 13856,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1469,
+          "asset": "score-cards-3.png",
+          "sample": [
+            436,
+            122,
+            817,
+            400
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "4bfae363dc4ae0b3b441db1b4ee1640c5f01c839c06067f10cdc5a8fee99da34",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "1984352fcc1111c4f28e871be3c0de1f548a82ba1b349f1f2c4c7aa734637cdc",
+          "palette_sha256": "1c6b8e2b1aa5e3bb0caab4f20c5ab2fb54696930dfe0b8dcd77290019db18b99",
+          "writes_sha256": "1f97aefaee66a40deec38229ded3ea0eccddf566a93371153ac39a5efe5856ac"
+        },
+        {
+          "research_id": 1470,
+          "file": "SCORE20.SS",
+          "file_sha256": "99647e27a3dbfab8749b4c8b9b15d7fb244762678413f9d905dca057a46e48cd",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 13425,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "e79bd915ce0168d723da05bce0bce9d36ead3c84883fb47b15f4d25b2d6ca937",
+          "indexed_sha256": "9a880cae385329f38462eef22001bdc037915e6a9e142352c27411908ac8daed",
+          "opaque_pixels": 13878,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1470,
+          "asset": "score-cards-3.png",
+          "sample": [
+            847,
+            122,
+            1230,
+            400
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "4bfae363dc4ae0b3b441db1b4ee1640c5f01c839c06067f10cdc5a8fee99da34",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "c2b19d688671842b2e7b4756b1b60e71cb261c517b13b21416c75c5c58dd1dd7",
+          "palette_sha256": "93441c1ca112dfe925450a4f508594d89bad927d2627c70c2536a14a20c73313",
+          "writes_sha256": "e574374161d8c202c3f1efca4d42191722644327fcc60f160cf029f6100e6a69"
+        },
+        {
+          "research_id": 1471,
+          "file": "SCORE21.SS",
+          "file_sha256": "7d167e30527c35bb97376ffe82ba0c6359eccf0ad0ba5f67e97de1597c62e23e",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 12652,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ce8a2c49402c342a7bff4a3442235dfac7cc3a3b5bd1cbfa678496b672e95296",
+          "indexed_sha256": "91a0bcba529039334874379f3e0793e22fa2bd6cf911b25d0276a0321648d2b7",
+          "opaque_pixels": 14042,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1471,
+          "asset": "score-cards-3.png",
+          "sample": [
+            24,
+            480,
+            407,
+            763
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "4bfae363dc4ae0b3b441db1b4ee1640c5f01c839c06067f10cdc5a8fee99da34",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "7dd49badbaa5ae3d7e7e8a277dce273d7a02e1f2bccc9ea40736f8e3dfb52a2c",
+          "palette_sha256": "3cb4dc787d7d9598d998508c79ded516829c7d598b428a1540dc73a2193b035c",
+          "writes_sha256": "18650cffaee17677c800bf558625dd2f0778bfe38fa18744a7429f4ae3d879ba"
+        },
+        {
+          "research_id": 1472,
+          "file": "SCORE22.SS",
+          "file_sha256": "154b4b4bed4b7ca081a8feeef91323466ad61e599879ab36ae9fb3708cb7a0e7",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 13136,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "c850ccceacb8ae3eaa0d86c4d35fc19ed9d046804c596492813cbdad3d487703",
+          "indexed_sha256": "d9b2db136443948950bb5d964189763ffc764da245506832449641b6f84a0225",
+          "opaque_pixels": 14058,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1472,
+          "asset": "score-cards-3.png",
+          "sample": [
+            436,
+            480,
+            818,
+            763
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "4bfae363dc4ae0b3b441db1b4ee1640c5f01c839c06067f10cdc5a8fee99da34",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "30f839b5b6ccbcbd5cd5ee3cfe3160d286d44734686c6b28f7b3fdef6a16ca96",
+          "palette_sha256": "fd06e786de2c30361b80407bdeaf45cafc68b6de3640284a21cd9fe4a64b92e4",
+          "writes_sha256": "59d1f34d0d991436be25733a39dcdeed55cc5804470c64db36c76129871def50"
+        },
+        {
+          "research_id": 1473,
+          "file": "SCORE23.SS",
+          "file_sha256": "646158803508c218e3e095bc927c747182d5da7218cfffd8ffde44702b4f05ad",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 12923,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "4e33cd14c80ee896d1eae51a3187ba78f7173ce9b9331bc13e8e31e836000653",
+          "indexed_sha256": "240abca7f4e506d369188684ea26633298132ada705e30377eaf9d38190f7e61",
+          "opaque_pixels": 14058,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1473,
+          "asset": "score-cards-3.png",
+          "sample": [
+            847,
+            480,
+            1230,
+            763
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "4bfae363dc4ae0b3b441db1b4ee1640c5f01c839c06067f10cdc5a8fee99da34",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "f76ea83b3a5b864b9f95b2087e917081026384f54d4e05e9311ef010ec21e641",
+          "palette_sha256": "78700d1e3a36672bd4af73b61f1014eaa3f92e6c0dd89e2dedad61e06b6b2982",
+          "writes_sha256": "e745db0025a44fa58c7fd658343b67d9cab108fe2e8f1ed5218e041a7fa11013"
+        },
+        {
+          "research_id": 1474,
+          "file": "SCORE24.SS",
+          "file_sha256": "74b944e17c0291b8f7f996645c24dfd6a183c215ea332c814ffd5b749bc875aa",
+          "ordinal": 0,
+          "size": [
+            142,
+            99
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 13054,
+          "other_header_fields": [
+            104,
+            138
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "108545cbec8a3ca701956b8f57fef1f075098c80d3c2ea82d7a85596ad993fe9",
+          "indexed_sha256": "494dd79ad0718d17eca46352f95fed57e26158c1a4fdb645ac9440c646f70cc3",
+          "opaque_pixels": 14049,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 1474,
+          "asset": "score-cards-3.png",
+          "sample": [
+            24,
+            855,
+            407,
+            1139
+          ],
+          "content": [
+            0,
+            0,
+            142,
+            99
+          ],
+          "art_sha256": "4bfae363dc4ae0b3b441db1b4ee1640c5f01c839c06067f10cdc5a8fee99da34",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "e029954de2878bea5dfaa967ec4b8a64c61b25df07edab3dac75184c65c9c52e",
+          "palette_sha256": "cc75219b1cf069788df9ade1e24956612db88cbdbe985f32069a12a52683f88b",
+          "writes_sha256": "1979da39904a675b9bb764cdc7a9a4d142717dafff69f899f2629db91da729b2"
+        }
+      ]
     }
   }
 }

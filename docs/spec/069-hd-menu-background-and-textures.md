@@ -3189,3 +3189,17 @@ KING.SS的一幀、KING2.SS的八個手臂片段及KINGLOSE.SS／KINGWIN.SS各�
 新增國王基本人物、八個手臂片段與勝負事件圖，共十一個來源，均已接線及測試畫面顯示。本輪四位MYR、二十五位CC議會人物、三十三個IND領袖及十一個KING剩餘來源均顯示通過。本批以正式來源選擇、當次回傳點、完整來源finish及HD繪圖介面顯示，目視確認。記為DISPLAY-PASS，fixture提供原生寫入，不新增正常玩家路徑或原版精確對拍聲明。
 
 正式程式SHA-256：d880d2a4fd6608b90a022a79ff3be849d094485ac5dbbe3c12c043a647faa4de。建置與go vet、完整HD載入及352檔封裝指紋通過。本機收據為既有hd-opening-animation-sources-r84工作根的r109-formal-display-r2/check.json，SHA-256：7971e305d5acf7bfad0aabaeaa50aa46c5fabb5fba7e9d599637d16af72920c5。
+
+### R110二十四張評分小圖卡READY
+
+SCORE01.SS至SCORE24.SS的二十四個既有來源1451至1474，沿用R105／R107完整SS來源、Main畫布、alpha、content、唯一來源選擇及當次回傳點契約。三張生成原圖包含人物、動植物、建築、風景、徽章及地圖圖卡，原PNG與alpha保持；逐來源指紋、原生內容矩形、圖集取樣及色盤投影記於graphics/manifest.json。
+
+- 原版圖卡位置、尺寸、非透明來源遮罩及評分規則保持。只在四倍畫布替換圖像，不調查或重寫原版評分。
+- 圖集以三欄三列保存，各九張、八張、七張；未使用格不取樣。正式scene來源總數139。
+- 驗收採正式接線及來源fixture測試畫面有出現，明示提供寫入，不新增正常玩家路徑或原版精確對拍聲明。
+
+### R110二十四張評分小圖卡顯示通過
+
+SCORE01.SS至SCORE24.SS的二十四張圖卡已接線，人物、動植物、建築、風景、徽章與地圖均在測試畫面顯示。本批以正式來源選擇、當次回傳點、完整來源finish及HD繪圖介面顯示，目視確認。記為DISPLAY-PASS，fixture提供原生寫入，不新增正常玩家路徑或原版精確對拍聲明。
+
+正式程式SHA-256：11986594bb83909780114bc41fd4e6dcc660e29f5cd30d1c9204bbf453d73f28。建置與go vet、完整HD載入及355檔封裝指紋通過。本機收據為既有hd-opening-animation-sources-r84工作根的r110-formal-display-r1/check.json，SHA-256：0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f。

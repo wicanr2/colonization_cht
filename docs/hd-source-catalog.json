@@ -10,7 +10,7 @@
     "decoder_manifest_sha256": "340f980355615cbe88659b72748296657982b4802ade1d41eebcc21d84af6e18",
     "baseline_ss_inventory_sha256": "620b2780f04b558513b4ee283fd8094fe830728d1c567c2fda7ab8477c9e2dec"
   },
-  "formal_manifest_sha256": "3ada0eaac7d0a684377ed7934d4ff360afdcffd675f0894901738f5032a1ea52",
+  "formal_manifest_sha256": "a88acc9ed2d5ef38dffdcca21b9c210c8ac65e0d9c7dfe197f3dd89381520660",
   "summary": {
     "file_count": 288,
     "ss_files": 206,
@@ -26,12 +26,12 @@
   },
   "coverage_limits": {
     "player_visible_graphics_denominator": "unknown",
-    "formal_asset_bindings": 570,
+    "formal_asset_bindings": 594,
     "additional_ready_source_contracts": 0,
     "complete_hd": false,
     "contains_original_pixels": false,
     "other_formats_and_program_drawn_graphics": "not_assessed",
-    "display_pass_source_bindings": 253
+    "display_pass_source_bindings": 277
   },
   "files": [
     {
@@ -58588,7 +58588,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1452,
@@ -58613,7 +58622,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1453,
@@ -58638,7 +58656,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1454,
@@ -58663,7 +58690,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1455,
@@ -58688,7 +58724,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1456,
@@ -58713,7 +58758,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1457,
@@ -58738,7 +58792,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1458,
@@ -58763,7 +58826,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1459,
@@ -58788,7 +58860,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-1.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1460,
@@ -58813,7 +58894,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1461,
@@ -58838,7 +58928,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1462,
@@ -58863,7 +58962,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1463,
@@ -58888,7 +58996,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1464,
@@ -58913,7 +59030,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1465,
@@ -58938,7 +59064,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1466,
@@ -58963,7 +59098,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1467,
@@ -58988,7 +59132,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-2.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1468,
@@ -59013,7 +59166,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1469,
@@ -59038,7 +59200,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1470,
@@ -59063,7 +59234,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1471,
@@ -59088,7 +59268,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1472,
@@ -59113,7 +59302,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1473,
@@ -59138,7 +59336,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1474,
@@ -59163,7 +59370,16 @@
       "transparency_index": 253,
       "runtime_source_evidence": "not_assessed_by_this_inventory",
       "animation_evidence": "not_assessed_by_this_inventory",
-      "formal_assets": []
+      "formal_assets": [
+        "score-cards-3.png"
+      ],
+      "display_wiring_reference": {
+        "state": "DISPLAY-PASS",
+        "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+        "formal_connected": true,
+        "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+        "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+      }
     },
     {
       "research_id": 1475,
@@ -71527,6 +71743,582 @@
       "spec": "docs/spec/069-hd-menu-background-and-textures.md",
       "state": "DISPLAY-PASS",
       "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-1.png",
+      "asset_sha256": "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44",
+      "source_research_id": 1451,
+      "source_file": "SCORE01.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "e400c4419c24650c14c59bb9608e733d115755ca3061d06040c506d49b6ae106",
+      "source_indexed_sha256": "560aa2b775766559c6442e51c9ed1caa510e8604ed6e2ed48b37dc067b0785c1",
+      "raw_art_rect": [
+        23,
+        110,
+        398,
+        379
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        140,
+        97
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-1.png",
+      "asset_sha256": "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44",
+      "source_research_id": 1452,
+      "source_file": "SCORE02.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "e626d1ccbd5a32d41bdffa3045fe23fa0f180885b0960930a97dd4dd1aacb466",
+      "source_indexed_sha256": "855f2ec3ee4ed6e04c80aa418aeab04b5c688d20d88b1d6fc5985f6f3294f631",
+      "raw_art_rect": [
+        439,
+        110,
+        814,
+        379
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-1.png",
+      "asset_sha256": "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44",
+      "source_research_id": 1453,
+      "source_file": "SCORE03.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "5f092bbddccbf299f5543d8de8871720c59e4b09ebd447bacee0288125519d6d",
+      "source_indexed_sha256": "3d3cc999a992b547878176028f8447ea344676e4c41588d6ed948f511d00026a",
+      "raw_art_rect": [
+        856,
+        110,
+        1232,
+        380
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-1.png",
+      "asset_sha256": "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44",
+      "source_research_id": 1454,
+      "source_file": "SCORE04.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "89b9e4fcf7f9df61dbca8c95a217a2be1d0082c31fc3be58e574b6f21a6ab0cc",
+      "source_indexed_sha256": "ff4c1bcbffecae6ce4ac53f1e9031a86be54c1ff7f80156e1c08742f6cbf7281",
+      "raw_art_rect": [
+        23,
+        481,
+        398,
+        761
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-1.png",
+      "asset_sha256": "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44",
+      "source_research_id": 1455,
+      "source_file": "SCORE05.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "28f2d6b256613289f47e4b942ce9c4344f01c39b31fd536e08f4551b794d42c2",
+      "source_indexed_sha256": "f6ef223b50b382adaff04036fefce13200cda4150991554de85c197a321a3080",
+      "raw_art_rect": [
+        439,
+        481,
+        814,
+        761
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-1.png",
+      "asset_sha256": "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44",
+      "source_research_id": 1456,
+      "source_file": "SCORE06.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "de5fa11e9c29093f9fb746791f85d7a57d31b44ab4f7cea36dffa2df60f7d819",
+      "source_indexed_sha256": "cfb097e6db3a962b90311b9f540d1b54e016aacde3299394fc600985c438c128",
+      "raw_art_rect": [
+        856,
+        481,
+        1232,
+        761
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-1.png",
+      "asset_sha256": "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44",
+      "source_research_id": 1457,
+      "source_file": "SCORE07.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "391f57d2794fd75b500cdf4e18843f1b192b56b8ea2e34d8363b45ddfbedc7d7",
+      "source_indexed_sha256": "f7ab8f746bff53c9dd396d1d38b31b12e8e068fdbeed5282796c9771161e7445",
+      "raw_art_rect": [
+        23,
+        864,
+        398,
+        1147
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-1.png",
+      "asset_sha256": "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44",
+      "source_research_id": 1458,
+      "source_file": "SCORE08.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "72f95af4cc1cd341963777cc44c73bc7bc6e401b73ae86b43cc275602c72cd69",
+      "source_indexed_sha256": "f1af72b19f0e9de85022308217ca85594179f50f8985c1ba98a4b62745d1c598",
+      "raw_art_rect": [
+        439,
+        863,
+        814,
+        1147
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-1.png",
+      "asset_sha256": "3d39f7b756dda2a71d808756e796816957eec214d7533ded22a9251cbd522e44",
+      "source_research_id": 1459,
+      "source_file": "SCORE09.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "5a24c2a8a0955476fd51170587f10609bbd2af2aa611a9210c5571860a47f673",
+      "source_indexed_sha256": "65973889d1f3d7364b58e0b8f6ab7d7be6352ad26009e650197e4e5537e40290",
+      "raw_art_rect": [
+        856,
+        864,
+        1232,
+        1147
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-2.png",
+      "asset_sha256": "2adaba486972c1defa948eb969e7c673c225051e472c47dd787c247805675181",
+      "source_research_id": 1460,
+      "source_file": "SCORE10.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "21e1fa96e524fdd40380144a6481de47a8a2e291f34f6d193a60a8ffa67c4fe9",
+      "source_indexed_sha256": "75829b0fc289f38397929bc1f68e94c27507c29147c26a7525e7c07803d29239",
+      "raw_art_rect": [
+        21,
+        117,
+        410,
+        396
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-2.png",
+      "asset_sha256": "2adaba486972c1defa948eb969e7c673c225051e472c47dd787c247805675181",
+      "source_research_id": 1461,
+      "source_file": "SCORE11.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "62ea970140d2739acd7b32ce7c11f79ea68b8701f4e7890ec9f6578ca54c43cc",
+      "source_indexed_sha256": "1d90ff02a402678c9b13fd9326740aadc4df3ebf6cdba441a7c4fc3e5cfae8c8",
+      "raw_art_rect": [
+        435,
+        117,
+        819,
+        396
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-2.png",
+      "asset_sha256": "2adaba486972c1defa948eb969e7c673c225051e472c47dd787c247805675181",
+      "source_research_id": 1462,
+      "source_file": "SCORE12.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "8c578d022be4ddd16a272849ed4c40e213e933f35834f94758f89c7c97031f49",
+      "source_indexed_sha256": "b303f9d9688580fe4e8cab0239fa512880df2d4fc2f266c9fee8f3c5103b881a",
+      "raw_art_rect": [
+        846,
+        117,
+        1233,
+        396
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-2.png",
+      "asset_sha256": "2adaba486972c1defa948eb969e7c673c225051e472c47dd787c247805675181",
+      "source_research_id": 1463,
+      "source_file": "SCORE13.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "cb2a63a51112ebe220057e5ca663db7a24d88317e5c5c010775717c0345def32",
+      "source_indexed_sha256": "37e2ee5319994d497c759e018d047527c6215922fa423fc2674acfee4e85476c",
+      "raw_art_rect": [
+        21,
+        481,
+        410,
+        769
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-2.png",
+      "asset_sha256": "2adaba486972c1defa948eb969e7c673c225051e472c47dd787c247805675181",
+      "source_research_id": 1464,
+      "source_file": "SCORE14.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "9d02f95c116117d98a97e12ed63d9d761d09235d7c38406e7bcee991744f8432",
+      "source_indexed_sha256": "9ab81b4c4841a9615d646ef8f0e4a8ffdbbb9a03196392f154374fea2b321db8",
+      "raw_art_rect": [
+        435,
+        481,
+        819,
+        769
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-2.png",
+      "asset_sha256": "2adaba486972c1defa948eb969e7c673c225051e472c47dd787c247805675181",
+      "source_research_id": 1465,
+      "source_file": "SCORE15.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "48d75590397b21c0d368876c92a117c10921176fb8b0de54ed7054f83051be51",
+      "source_indexed_sha256": "2342179bbbce8978727dc465289e9348d3b6ec5a06950b8a54193eb5a511224d",
+      "raw_art_rect": [
+        846,
+        481,
+        1233,
+        769
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-2.png",
+      "asset_sha256": "2adaba486972c1defa948eb969e7c673c225051e472c47dd787c247805675181",
+      "source_research_id": 1466,
+      "source_file": "SCORE16.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "3b4f30ad0b9ad4c263cd9714acf558726cb52d2920ecdf8d6e695af4e26eefda",
+      "source_indexed_sha256": "5bc4c85c84e9394e367608c5b701cd933f50fa29b454f31091263e80b964209b",
+      "raw_art_rect": [
+        21,
+        857,
+        410,
+        1153
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-2.png",
+      "asset_sha256": "2adaba486972c1defa948eb969e7c673c225051e472c47dd787c247805675181",
+      "source_research_id": 1467,
+      "source_file": "SCORE17.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "4a743aa8add097aeb5a99acfaec1ddaf91a91f4e7cbfadb583c930e9b6cf9cfa",
+      "source_indexed_sha256": "fd6ea866db25b171e403f354e4661475d23ee0489bfaed09eccafa463fdd28ba",
+      "raw_art_rect": [
+        435,
+        857,
+        819,
+        1153
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-3.png",
+      "asset_sha256": "4bfae363dc4ae0b3b441db1b4ee1640c5f01c839c06067f10cdc5a8fee99da34",
+      "source_research_id": 1468,
+      "source_file": "SCORE18.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "ca9e68249dcb84a92ca8f388e10ad447b2365091b9a26ce5aed4c997412775fd",
+      "source_indexed_sha256": "087c0303f020daa2553bfdb782b0f72a3885cc3ace35f97f0704e986c33b4a41",
+      "raw_art_rect": [
+        24,
+        122,
+        407,
+        400
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-3.png",
+      "asset_sha256": "4bfae363dc4ae0b3b441db1b4ee1640c5f01c839c06067f10cdc5a8fee99da34",
+      "source_research_id": 1469,
+      "source_file": "SCORE19.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "53c04087e023526ecd4943ac34a85668d4d130aa7b6460ab10364c095c61b1ca",
+      "source_indexed_sha256": "9e5d5b6ecfc6ac8490dab4bab45f12a06ff899386a89115ba7c9f6a5d4956c94",
+      "raw_art_rect": [
+        436,
+        122,
+        817,
+        400
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-3.png",
+      "asset_sha256": "4bfae363dc4ae0b3b441db1b4ee1640c5f01c839c06067f10cdc5a8fee99da34",
+      "source_research_id": 1470,
+      "source_file": "SCORE20.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "e79bd915ce0168d723da05bce0bce9d36ead3c84883fb47b15f4d25b2d6ca937",
+      "source_indexed_sha256": "9a880cae385329f38462eef22001bdc037915e6a9e142352c27411908ac8daed",
+      "raw_art_rect": [
+        847,
+        122,
+        1230,
+        400
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-3.png",
+      "asset_sha256": "4bfae363dc4ae0b3b441db1b4ee1640c5f01c839c06067f10cdc5a8fee99da34",
+      "source_research_id": 1471,
+      "source_file": "SCORE21.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "ce8a2c49402c342a7bff4a3442235dfac7cc3a3b5bd1cbfa678496b672e95296",
+      "source_indexed_sha256": "91a0bcba529039334874379f3e0793e22fa2bd6cf911b25d0276a0321648d2b7",
+      "raw_art_rect": [
+        24,
+        480,
+        407,
+        763
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-3.png",
+      "asset_sha256": "4bfae363dc4ae0b3b441db1b4ee1640c5f01c839c06067f10cdc5a8fee99da34",
+      "source_research_id": 1472,
+      "source_file": "SCORE22.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "c850ccceacb8ae3eaa0d86c4d35fc19ed9d046804c596492813cbdad3d487703",
+      "source_indexed_sha256": "d9b2db136443948950bb5d964189763ffc764da245506832449641b6f84a0225",
+      "raw_art_rect": [
+        436,
+        480,
+        818,
+        763
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-3.png",
+      "asset_sha256": "4bfae363dc4ae0b3b441db1b4ee1640c5f01c839c06067f10cdc5a8fee99da34",
+      "source_research_id": 1473,
+      "source_file": "SCORE23.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "4e33cd14c80ee896d1eae51a3187ba78f7173ce9b9331bc13e8e31e836000653",
+      "source_indexed_sha256": "240abca7f4e506d369188684ea26633298132ada705e30377eaf9d38190f7e61",
+      "raw_art_rect": [
+        847,
+        480,
+        1230,
+        763
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+    },
+    {
+      "asset": "score-cards-3.png",
+      "asset_sha256": "4bfae363dc4ae0b3b441db1b4ee1640c5f01c839c06067f10cdc5a8fee99da34",
+      "source_research_id": 1474,
+      "source_file": "SCORE24.SS",
+      "source_ordinal": 0,
+      "source_encoded_sha256": "108545cbec8a3ca701956b8f57fef1f075098c80d3c2ea82d7a85596ad993fe9",
+      "source_indexed_sha256": "494dd79ad0718d17eca46352f95fed57e26158c1a4fdb645ac9440c646f70cc3",
+      "raw_art_rect": [
+        24,
+        855,
+        407,
+        1139
+      ],
+      "native_content_rect": [
+        0,
+        0,
+        142,
+        99
+      ],
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "state": "DISPLAY-PASS",
+      "claim": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
     }
   ],
   "limitations": [
@@ -72433,6 +73225,13 @@
     "sources": 11,
     "receipt_sha256": "7971e305d5acf7bfad0aabaeaa50aa46c5fabb5fba7e9d599637d16af72920c5",
     "formal_binary_sha256": "d880d2a4fd6608b90a022a79ff3be849d094485ac5dbbe3c12c043a647faa4de",
+    "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
+  },
+  "last_score_cards_display": {
+    "state": "DISPLAY-PASS",
+    "sources": 24,
+    "receipt_sha256": "0bdbfb1424c62699017e7be618ddc5650080bc298ffe2219d32504e07a0c714f",
+    "formal_binary_sha256": "11986594bb83909780114bc41fd4e6dcc660e29f5cd30d1c9204bbf453d73f28",
     "scope": "actual encoded and native source fixtures through production source selector, captured call return, complete-source finish and renderer; writes supplied; production-connected source-fixture display acceptance only, no new normal-player-path or original-exact claim."
   }
 }
