@@ -2470,3 +2470,276 @@ func writeAttackPreviewPNG(t *testing.T, name string, im image.Image) {
 		t.Fatal(closeErr)
 	}
 }
+
+func TestDraftImmigrationTutorial(t *testing.T) {
+	root := os.Getenv("TEST_TUTORIAL5_ROOT")
+	if root == "" {
+		t.Skip("缺少合法原版教學5觀測，設定 TEST_TUTORIAL5_ROOT 後重跑")
+	}
+	read := func(name string) []byte {
+		b, e := os.ReadFile(filepath.Join(root, name))
+		if e != nil {
+			t.Fatal(e)
+		}
+		return b
+	}
+	raw := read("tutorial5-source.json")
+	if hash(raw) != "7636066eb66fbe36d59cb59b6f5d2eec374ae6e6ed02351aa727d9821d0ed567" {
+		t.Fatal("source fingerprint")
+	}
+	var rows []struct {
+		Kind       string
+		Step       uint64
+		Ink        image.Rectangle
+		SourceBase uint32          `json:"source_base"`
+		ReadPos    int             `json:"read_pos"`
+		Canvas     []byte          `json:"source_canvas"`
+		Buffer     []byte          `json:"source_buffer"`
+		FirstOld   map[int]byte    `json:"first_old"`
+		LastText   map[int]bool    `json:"last_text"`
+		After      map[int]byte    `json:"after_pixels"`
+		Shadow     bool            `json:"shadow_written"`
+		Others     image.Rectangle `json:"other_writes"`
+		Chars      []struct {
+			Byte       byte
+			Box        image.Rectangle
+			Colors     map[byte]int
+			Contiguous bool
+			Prefix     bool `json:"prefix_continuation"`
+		} `json:"characters"`
+	}
+	if e := json.Unmarshal(raw, &rows); e != nil || len(rows) != 1 {
+		t.Fatal(e)
+	}
+	row := rows[0]
+	r := &dialogRun{base: row.SourceBase, readPos: row.ReadPos, firstOld: row.FirstOld, lastText: row.LastText, shadowWritten: row.Shadow, others: row.Others}
+	for _, c := range row.Chars {
+		r.chars = append(r.chars, dialogChar{c: c.Byte, box: c.Box, colors: c.Colors, contig: c.Contiguous, prefixContinuation: c.Prefix})
+	}
+	o := &nativeObservation{kind: "dialog", step: row.Step, ink: row.Ink, canvas: row.Canvas, buffer: row.Buffer, after: row.After, dialogRun: r}
+	j := &nativeJournal{enabled: true, items: []*nativeObservation{o}}
+	mem, indexed, palette := read("gui.memory"), read("gui.final.idx"), read("gui.final.pal")
+	if hash(mem) != "eee88746c2f6336016f0ef3b2d1c822081003fdace2c007252b0e9dfa4a5319d" || hash(indexed) != "072412096ff4ba52484a238f20df72a4dafd9b65b13f7fd05b270f4f3b5f639a" || hash(palette) != "3e76130e01ad1f4f91d88be37c426a40df200961f9b92dd84ad0c3cb5f5367ba" {
+		t.Fatal("normal endpoint")
+	}
+	canvas := bytes.Clone(mem[0x2cae0 : 0x2cae0+64000])
+	cursor := image.Rect(16, 16, 32, 32)
+	m, p, _ := hdEventFixtureLoad(t, 1060, "")
+	p.spriteCall = nil
+	m.CPU.R[2] = 45
+	stack := int(m.CPU.Seg[2])*16 + int(m.CPU.R[4])
+	binary.LittleEndian.PutUint16(m.Mem[stack+4:], 34)
+	hdEventRun(t, m, p)
+	copy(m.Mem, mem)
+	mask, id := p.seaDialogForeground(canvas, indexed, palette, cursor)
+	if id != 1060 || !bytes.Equal(mask, read("source-1060.owners")) {
+		t.Fatal("complete original portrait proof", id, len(mask))
+	}
+
+	targets := draftActualTargetsForTest(t)
+	records := []map[string]any{}
+	for _, locale := range []string{"zh-Hant", "zh-Hans", "ja", "ko"} {
+		t.Run(locale, func(t *testing.T) {
+			target := targets[locale]
+			target.portraits = p
+			d := &dialogRuntime{cat: target.dlg, misses: map[string]int{}}
+			body, _, why := d.finish(cloneNativeDialog(r), o.canvas, o.step)
+			if body == nil || why != "" || body.id != "GAME.TXT:@TUTORIAL5" {
+				t.Fatal("original template identity", why)
+			}
+			draftKeepDialog(d, body, o.canvas)
+			fixed, changed := draftFitImmigrationTutorial(target, body, o, canvas, indexed, palette, cursor)
+			if fixed == nil || changed != 1 || fixed.size != 30 || fixed.safe != image.Rect(52, 108, 271, 162) {
+				t.Fatal("measured tutorial5 field", changed)
+			}
+			bounds := draftAlphaBounds([]*image.Alpha{fixed.shadow, fixed.normal, fixed.accent})
+			if !bounds.In(image.Rect(0, 68, 876, 216)) {
+				t.Fatal("text overlaps portrait or leaves field", bounds)
+			}
+			nativeBefore := hash(m.Mem)
+			im, report, e := draftRebuildTarget(target, j, canvas, mem[0x3bb00:0x3bb00+64000], indexed, palette, cursor, 208200000, 19)
+			if e != nil || im == nil || hash(m.Mem) != nativeBefore {
+				t.Fatal("integrated drawing altered DOS", e)
+			}
+			fields := report["items"].([]map[string]any)
+			found := false
+			for _, it := range fields {
+				if it["id"] == body.id {
+					found = true
+					if it["foreground_source"] != 1060 || it["foreground_pixels"] != 3306 || it["native_occluded_pixels"] != 1 || it["layout_safe"] != image.Rect(52, 125, 271, 162) {
+						t.Fatal("source or layout diagnostics", it)
+					}
+				}
+			}
+			if !found {
+				t.Fatal("tutorial5 not visible", report["dialog_misses"])
+			}
+			original := draftRGB(indexed, palette)
+			foregroundPixels := 0
+			for pos := 0; pos < 64000; pos++ {
+				owned := mask[pos>>3]&(1<<uint(pos&7)) != 0
+				outside := !image.Pt(pos%320, pos/320).In(body.safe)
+				if !owned && !outside {
+					continue
+				}
+				for dy := 0; dy < 4; dy++ {
+					for dx := 0; dx < 4; dx++ {
+						x, y := pos%320*4+dx, pos/320*4+dy
+						if im.RGBAAt(x, y) != original.RGBAAt(x, y) {
+							t.Fatal("foreground or unrelated region changed", pos)
+						}
+						if owned {
+							foregroundPixels++
+						}
+					}
+				}
+			}
+			if foregroundPixels != 3306*16 {
+				t.Fatal("complete portrait")
+			}
+			solid := []map[string]any{}
+			layers := []*image.Alpha{fixed.shadow, fixed.normal, fixed.accent}
+			colors := []byte{fixed.shadowC, fixed.normalC, fixed.accentC}
+			for y := 0; y < fixed.safe.Dy()*4; y++ {
+				for x := 0; x < fixed.safe.Dx()*4; x++ {
+					for layer := len(layers) - 1; layer >= 0; layer-- {
+						a := layers[layer].AlphaAt(x, y).A
+						if a == 0 {
+							continue
+						}
+						if a == 255 {
+							xx, yy := fixed.safe.Min.X*4+x, fixed.safe.Min.Y*4+y
+							want := original.RGBAAt(xx, yy)
+							at := int(colors[layer]) * 3
+							want.R = (palette[at] << 2) | (palette[at] >> 4)
+							want.G = (palette[at+1] << 2) | (palette[at+1] >> 4)
+							want.B = (palette[at+2] << 2) | (palette[at+2] >> 4)
+							want.A = 255
+							if im.RGBAAt(xx, yy) != want {
+								t.Fatal("Noto solid text point", xx, yy)
+							}
+							if layer > 0 {
+								solid = append(solid, map[string]any{"x": xx, "y": yy, "rgb": []byte{want.R, want.G, want.B}})
+							}
+						}
+						break
+					}
+				}
+			}
+			if len(solid) < 500 {
+				t.Fatal("no complete readable Noto text", len(solid))
+			}
+			writeImmigrationPreviewPNG(t, locale+"-tutorial5.png", im)
+			records = append(records, map[string]any{"locale": locale, "id": body.id, "safe": body.safe, "layout": image.Rect(52, 125, 271, 162), "font_px": fixed.size, "bounds": bounds, "solid_text_points": solid, "foreground_RGBA_points": foregroundPixels})
+			t.Run("complete-portrait-in-source-snapshot", func(t *testing.T) {
+				snapshot := *body
+				snapshot.afterSafe = rectBytes(canvas, body.safe)
+				fit, changed := draftFitImmigrationTutorial(target, &snapshot, o, canvas, indexed, palette, cursor)
+				if fit == nil || changed != 0 || fit.size != 30 || !bytes.Equal(fit.normal.Pix, fixed.normal.Pix) || !bytes.Equal(fit.accent.Pix, fixed.accent.Pix) {
+					t.Fatal("complete source portrait lost text or changed layout", changed)
+				}
+			})
+			for _, name := range []string{"body-id", "body-safe", "source-ink", "source-step", "short-source", "short-canvas", "unknown-background", "vga", "palette", "missing-source", "missing-ownership", "missing-glyph", "overflow", "font-height", "closed-field"} {
+				t.Run(name, func(t *testing.T) {
+					local := *target
+					item := *body
+					source := *o
+					source.dialogRun = cloneNativeDialog(o.dialogRun)
+					c, v, pal := bytes.Clone(canvas), bytes.Clone(indexed), bytes.Clone(palette)
+					restore := func() {}
+					switch name {
+					case "body-id":
+						item.id += "?"
+					case "body-safe":
+						item.safe.Max.X--
+					case "source-ink":
+						source.ink.Max.X--
+					case "source-step":
+						source.step++
+					case "short-source":
+						item.afterSafe = item.afterSafe[:len(item.afterSafe)-1]
+					case "short-canvas":
+						c = c[:63999]
+					case "unknown-background":
+						at := 161*320 + 270
+						c[at] ^= 1
+						v[at] = c[at]
+					case "vga":
+						v[161*320+270] ^= 1
+					case "palette":
+						for k := range pal {
+							pal[k] ^= 1
+						}
+					case "missing-source":
+						local.portraits = nil
+					case "missing-ownership":
+						at := -1
+						for pos := 0; pos < 64000; pos++ {
+							if mask[pos>>3]&(1<<uint(pos&7)) != 0 {
+								at = pos
+								break
+							}
+						}
+						old := p.visible[at]
+						p.visible[at] = hdSceneCell{}
+						restore = func() { p.visible[at] = old }
+					case "missing-glyph":
+						item.zh = "\U0010FFFF"
+					case "overflow":
+						item.zh = strings.Repeat(item.zh, 30)
+					case "font-height":
+						for k := range source.dialogRun.chars {
+							source.dialogRun.chars[k].box.Max.Y = source.dialogRun.chars[k].box.Min.Y + 5
+						}
+					case "closed-field":
+						for y := 108; y < 162; y++ {
+							for x := 52; x < 271; x++ {
+								c[y*320+x] = 1
+								v[y*320+x] = 1
+							}
+						}
+					}
+					defer restore()
+					if fit, _ := draftFitImmigrationTutorial(&local, &item, &source, c, v, pal, cursor); fit != nil {
+						t.Fatal("unsafe source accepted", name)
+					}
+				})
+			}
+		})
+	}
+	t.Run("english-original", func(t *testing.T) {
+		im, report, e := draftRebuildTarget(targets["en"], j, canvas, mem[0x3bb00:0x3bb00+64000], indexed, palette, cursor, 208200000, 19)
+		if e != nil || !bytes.Equal(im.Pix, draftRGB(indexed, palette).Pix) || len(report["items"].([]map[string]any)) != 0 {
+			t.Fatal("English changed", e)
+		}
+	})
+	if folder := os.Getenv("TEST_TUTORIAL5_OUTPUT"); folder != "" {
+		raw, e := json.MarshalIndent(map[string]any{"result": "PASS_R138_TUTORIAL5_SOURCE_FIELD", "records": records}, "", "  ")
+		if e != nil {
+			t.Fatal(e)
+		}
+		if e = os.WriteFile(filepath.Join(folder, "check.json"), append(raw, '\n'), 0644); e != nil {
+			t.Fatal(e)
+		}
+	}
+	fmt.Println("R138_TUTORIAL5_FOUR_LANGUAGE_FIELDS", len(records))
+}
+func writeImmigrationPreviewPNG(t *testing.T, name string, im image.Image) {
+	t.Helper()
+	folder := os.Getenv("TEST_TUTORIAL5_OUTPUT")
+	if folder == "" {
+		return
+	}
+	if e := os.MkdirAll(folder, 0755); e != nil {
+		t.Fatal(e)
+	}
+	f, e := os.OpenFile(filepath.Join(folder, name), os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0644)
+	if e != nil {
+		t.Fatal(e)
+	}
+	e = png.Encode(f, im)
+	f.Close()
+	if e != nil {
+		t.Fatal(e)
+	}
+}

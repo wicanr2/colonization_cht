@@ -1199,6 +1199,15 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 		dialogStates = append(dialogStates, attackBody)
 	}
 	for _, st := range dialogStates {
+		immigrationChanged := -1
+		if st != nil && st.id == "GAME.TXT:@TUTORIAL5" {
+			original := st
+			st, immigrationChanged = draftFitImmigrationTutorial(t, st, dialogSources[st], canvas, indexed, palette, cursor)
+			if st == nil {
+				d.misses["immigration-source-or-layout\t"+original.id]++
+				continue
+			}
+		}
 		soldierChanged := -1
 		if st != nil && st.id == "GAME.TXT:@TUTORIAL14" {
 			st, soldierChanged = draftFitSoldierDialog(t, st, dialogSources[st], canvas, indexed, palette, cursor)
@@ -1254,6 +1263,11 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 		draftPaintLayers(out, st.safe, []*image.Alpha{st.shadow, st.normal, st.accent, st.dim}, []byte{st.shadowC, st.normalC, st.accentC, st.dimC}, palette)
 		dialogSafes = append(dialogSafes, st.safe)
 		record := map[string]any{"kind": "dialog", "id": st.id, "text": st.zh, "safe": st.safe, "font_px": st.size}
+		if immigrationChanged >= 0 {
+			layout := st.safe
+			layout.Min.Y = 125
+			record["layout_safe"], record["foreground_source"], record["foreground_pixels"], record["native_occluded_pixels"] = layout, 1060, 3306, immigrationChanged
+		}
 		if soldierChanged >= 0 {
 			layout := st.safe
 			layout.Max.X = 208
@@ -2290,6 +2304,74 @@ func draftFitAttackDialog(t *draftLanguageTarget, st *dialogShown, o *nativeObse
 	layout := st.safe
 	layout.Max.X = 193
 	layout.Min.Y = 117
+	shadow, normal, accent, size := t.dlg.dialogMasks(st.zh, layout.Dx()*4, layout.Dy()*4, capH)
+	if shadow == nil || normal == nil || accent == nil || size == 0 {
+		return nil, 0
+	}
+	copy := *st
+	copy.before = bytes.Clone(st.before)
+	for pos := range canvas {
+		if mask[pos>>3]&(1<<uint(pos&7)) != 0 {
+			copy.before[pos] = canvas[pos]
+		}
+	}
+	pad := func(mask *image.Alpha) *image.Alpha {
+		full := image.NewAlpha(image.Rect(0, 0, st.safe.Dx()*4, st.safe.Dy()*4))
+		offset := image.Pt(0, (layout.Min.Y-st.safe.Min.Y)*4)
+		draw.Draw(full, mask.Rect.Add(offset), mask, image.Point{}, draw.Src)
+		return full
+	}
+	copy.shadow, copy.normal, copy.accent, copy.dim = pad(shadow), pad(normal), pad(accent), nil
+	copy.size, copy.phase, copy.afterSafe = size, "active", rectBytes(canvas, st.safe)
+	return &copy, changed
+}
+
+// 規格060 R138候選：只容許已驗MSS0前景改動畫面，不放寬其他後畫。
+func draftFitImmigrationTutorial(t *draftLanguageTarget, st *dialogShown, o *nativeObservation, canvas, indexed, palette []byte, cursor image.Rectangle) (*dialogShown, int) {
+	if t == nil || t.dlg == nil || st == nil || st.id != "GAME.TXT:@TUTORIAL5" || o == nil || o.kind != "dialog" || o.dialogRun == nil || o.step != st.complete ||
+		o.ink != image.Rect(54, 111, 264, 160) || st.safe != image.Rect(52, 108, 271, 162) ||
+		len(st.before) != 64000 || len(st.afterSafe) != st.safe.Dx()*st.safe.Dy() || len(canvas) != 64000 || len(indexed) != 64000 {
+		return nil, 0
+	}
+	mask, id := t.portraits.seaDialogForeground(canvas, indexed, palette, cursor)
+	if id != 1060 || len(mask) != 8000 || !draftSameExceptCursor(indexed, canvas, st.safe, cursor) {
+		return nil, 0
+	}
+	count := 0
+	var foreground image.Rectangle
+	for pos := range canvas {
+		if mask[pos>>3]&(1<<uint(pos&7)) != 0 {
+			count++
+			foreground = foreground.Union(image.Rect(pos%320, pos/320, pos%320+1, pos/320+1))
+		}
+	}
+	if count != 3306 || foreground != image.Rect(45, 34, 120, 125) {
+		return nil, 0
+	}
+	changed := 0
+	for y := st.safe.Min.Y; y < st.safe.Max.Y; y++ {
+		for x := st.safe.Min.X; x < st.safe.Max.X; x++ {
+			pos := y*320 + x
+			k := (y-st.safe.Min.Y)*st.safe.Dx() + x - st.safe.Min.X
+			if canvas[pos] != st.afterSafe[k] {
+				if mask[pos>>3]&(1<<uint(pos&7)) == 0 {
+					return nil, 0
+				}
+				if _, text := o.after[pos]; text {
+					changed++
+				}
+			}
+		}
+	}
+	capH := 0
+	for _, line := range runLines(o.dialogRun.chars) {
+		capH = max(capH, line.capH)
+	}
+	if capH != 9 {
+		return nil, 0
+	}
+	layout := st.safe
+	layout.Min.Y = 125
 	shadow, normal, accent, size := t.dlg.dialogMasks(st.zh, layout.Dx()*4, layout.Dy()*4, capH)
 	if shadow == nil || normal == nil || accent == nil || size == 0 {
 		return nil, 0

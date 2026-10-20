@@ -4466,6 +4466,49 @@
         "workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r131-attack-original-control-source-r2.py"
       ],
       "known_diffs": "正常攻擊確認64張GUI含33張正文，四語兩圖像模式與英文、12張懸停及取消；逐欄Noto 30px與完整MSS1人物核對，104筆原生輸入的完整CPU／RAM／VGA／DAC及存檔相同。僅已觀測Cherokee正文與選項，不外推其他幾何、戰鬥結果、其他人物或全量HD；沒有新增音訊信用。"
+    },
+    {
+      "id": "tutorial5-mss0-noto",
+      "path": "dynamic",
+      "title": "歐洲移民教學正文與MSS0前景",
+      "specs": [
+        "060",
+        "069"
+      ],
+      "flags": [
+        "--tutorial-help-a",
+        "--dialog-a",
+        "--display-settings",
+        "--language-bundles",
+        "--hd-assets"
+      ],
+      "checker": "check_goal186_immigration_tutorial.py",
+      "args": [
+        "--game",
+        "{game}",
+        "--reports",
+        "{reports}/goal186-display-hd/hd-opening-animation-sources-r84",
+        "--repo",
+        "{repo}"
+      ],
+      "dir": "goal186-display-hd/hd-opening-animation-sources-r84",
+      "zh": [
+        "r138-formal-gui-r1/gui"
+      ],
+      "control": [
+        "r138-original-control-r1/gui"
+      ],
+      "negative": [],
+      "gui_inputs": [
+        "r138-formal-gui-r1/gui.inputs.json"
+      ],
+      "census_scope": "checker",
+      "regenerate": [
+        "tools/build_window_prototype.py",
+        "workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r138-capture-gui-source-r4.py",
+        "workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r138-original-control-source-r1.py"
+      ],
+      "known_diffs": "正常主選單載入原始存檔，66筆實際X11輸入；四語各原版／HD、英文兩模式與正常關框共12張，Noto30px及完整MSS0保持，253個含子項零skip。修正前程式重播同一批原生輸入，完整CPU／RAM／VGA／DAC及存檔相同。只驗Master Carpenters／London通知的既有幾何，不外推其他名稱、完整五語、全量HD或音訊。"
     }
   ],
   "not_covered": [

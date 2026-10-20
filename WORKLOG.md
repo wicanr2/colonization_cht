@@ -7576,3 +7576,22 @@ timeout 180 docker run --rm --network none --user 1000:1000 \
 - 本機入口為[清理收據](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r139-cleanup-final-r1.json)，SHA-256為ff762d92271d76702a034f5d80131bdf031943d7478a18de9909aecab9d92d80。同根r139-cleanup-plan-r1.json、r139-cleanup-archive-rows-r1.jsonl、r139-restore-roundtrip-r1.json與r139-*-source-r1.py保存名單、來源與驗證步驟；清理名單、封存紀錄及四個清理／核對腳本的指紋由入口收據登錄。
 - R138四語通知候選尚未提升。其視窗重播在找不到視窗時停止，屬環境／驗證問題，失敗輸出與候選程式完整保留；清理期間沒有重啟該測試，也沒有增加HD、翻譯或正常玩家路徑信用。
 - 全程使用有界、非root、無網路Docker。收尾檢查未見root-owned產物、錯誤.md目錄或封存暫存檔；本輪容器使用--rm清除，未執行全域prune，未碰其他專案資源。規格060的既有R138 DRAFT保持工作樹，不納入清理文件提交。
+
+## 2026-10-21 R138 歐洲移民教學正文接線
+
+- 接續R139清理後的候選。載入正常試玩、規格閘門及顯示與語意隔離入口，只使用既有R130正常來源與D46人物fixture，沒有新增原版內部調查、生成圖或譯稿。
+- 修正教學5在後畫人物後退回英文的顯示路徑。來源必須符合完整原文、時刻、原墨跡／安全區、MSS0的3306個點及Main／VGA／色盤；未知背景與缺件回原文。四語正文移至人物下方，逐欄30px、基線y528，不改原版記憶體、輸入或存檔。
+- 私用診斷只匯出既有觀測，固定R130的65筆輸入重播與原GUI的完整原版狀態相同。隔離候選完成70個含子項來源測試與12張實際GUI，再審READY、提升正式來源；額外觀測匯出未提升。
+- 視窗腳本初版誤用無頭--replay-inputs，因此沒有視窗。以有界診斷定位既有runWindow的驗證分支後，改用既有21組實際X11操作；未改正式前端或擴張重播語意。兩個診斷腳本曾因缺xwininfo及殘留tree變數停止，修正私用腳本後才取得狀態，不列為產品失敗或GUI驗收。
+- 首次實際視窗已有繁中，測試卻只接受1點人物後畫；此時人物已完整，實際為0點。補上四語完整人物快照正例，必要反例保持。GUI獨立檢查器另補回既有resume事件，核對同一份12張原型實拍；沒有修改執行期迎合測試。
+- 正式2bbd0e9d…與READY候選程式及來源相同。建置、go vet、6項／253個含子項零skip，包含本欄70個與既有183個來源／選項守門。正式來源圖片與原型逐byte相同，來源字點清冊dc8b6547…保持。
+- 正式12張GUI涵蓋四語各原版／HD、英文兩模式及正常Return關框；58772個Noto實色字點與12288000個完整X11遊戲區RGBA點相符。原版人物264480點保持，HD人物跨語言211584點相同；12組顯示設定全程保持原生狀態。已目視正式繁中及最寬韓文HD畫面，原版參考與實拍只留本機。
+- 當次66筆實際X11輸入由修正前R137程式以原文模式重播至213000000步，完整CPU／RAM／VGA／DAC、原始輸入檔指紋及存檔相同。最終RAM為6925ad21…，輸入為85212f88…；初始b5e9391c…存檔保持。沒有新增音訊或手動存檔信用。
+- [公開檢查器](tools/check_goal186_immigration_tutorial.py)正例及缺合法原版77通過。初版欄位收據把譯文填入shown，修正為原文source事件，譯文另記displayed_text；正式採r138-public-checker-r2.json及未改的普查工具，不改譯稿或重拍。
+- 規格049增量矩陣104列，本輪新增1PASS、67列核對設定／檢查器／收據指紋沿用、36僅歷史。212份側錄JSON相同；普查仍1975／933shown／950pending／92unreachable。教學5由歷史shown更新為現存實拍，現存收據321、僅歷史612，不重複增加shown，沒有重跑完整矩陣。
+- 原PEDIA分類守門必須的13份已封存紀錄共135237160 bytes，只暫時還原。原壓縮檔與清冊以硬連結保留，守門後重新發布相同內容及原共享關係，沒有留下解壓副本。第一次增量停止於漏解析已封存目標的符號連結；補回原有symlink解析後r2乾淨重跑，舊開局相容性限制保持，未進入舊調查循環。
+- 本機入口為r138-tutorial5-display-close-r1.json，SHA-256為cc102da3bcba8038a3ba6224302fb22723147444c008c577003c6a69f85aa6ae，位於既有hd-opening-animation-sources-r84工作根；同根r138-ready-review-r1.json、r138-formal-build-r1.json、r138-formal-source-review-r1.json、r138-formal-gui-r1、r138-original-control-r1及r138-immigration-census-delta-r2保存正式證據。r138-*-source-r*.py與r138-capture-gui-source-r4.py保存可追溯步驟。
+- 386張HD原PNG／387檔、1477個HD連結、328語言資源及README32張保持。本次僅既有Master Carpenters／London通知的顯示與撤除；其他名稱、完整五語、其他格式與程式繪圖HD、影片及新版三平台交付繼續。收尾另外記錄快取／舊程式封存、擁有權、工作樹與Docker清理，不關閉Goal。
+- 文件腳本的防重複assert誤寫成比較鏈，在其餘文件完成後停止；修正guard後只補寫尚未寫入的WORKLOG，沒有重複追加其他文件或重跑遊戲驗證。
+- 收尾清除本輪Go快取並無損封存11個已結束的診斷／原型、R137舊程式及大型紀錄，回收521756672 bytes，約498MiB。現用R138正式程式、測試、來源fixture及所有PNG保持；封存後公開檢查器的完整結果與封存前相同。入口r138-cleanup-r1.json與r138-checker-storage-review-r1.json，重用舊程式先由tools/evidence_storage.py restore。
+- 最終交接r138-final-handoff-r1.json的SHA-256為6d31f15f654a5898a91a150cef6b49b70504a7b69c018236b35997c6a7b8a3a6。185163個未列為更新的保護內容完整SHA相同，含8份改以無損封存保存的原程式；其餘更新依正式建置、來源測試及增量報表核對。全部147671個PNG路徑、4120個一般存檔及24個存檔符號連結保持。工作樹核對時約33.78GiB，無root-owned產物、錯誤.md目錄、封存暫存檔或殘留借用檔。公開來源與現況單獨commit、push，原版、fixture及新實拍不入Git。

@@ -2,14 +2,13 @@
 
 由規格049增量合併契約及已驗欄位收據產生；不要手改。
 
-- 矩陣設定103列：本輪新增1列PASS；66列沿用已接受收據，36列僅歷史基準。舊列的設定、檢查器及收據指紋已核對，未重跑全部103列。
+- 矩陣設定104列：本輪新增1列PASS，67列核對設定、檢查器及收據指紋沿用，另36列僅歷史；未重跑全部104列。
 - 分母1975項；已顯示933、待驗950、不可達92。
-- 已顯示中，現存收據涵蓋320項；僅歷史證據613項。
+- 已顯示中，現存收據涵蓋321項；僅歷史證據612項。
 - 待驗表示尚無對應畫面證據，不能當成缺譯數。已完成接線的其他文字沿代表抽樣政策。
-- 舊開局完成列的來源快照重驗限制保留在批次收據，該列沿用既有驗收。
-- 本輪只採正常Cherokee攻擊確認的正文與來源限定選項，不外推其他幾何、戰鬥結果或全量HD。
-- 教學21則為來源逐變數審查；只有實際GUI命中欄位提高shown。#56的四則城市條件與換頁未抽樣，不提高shown。
-- 單位184組只驗容量，WOODCUT沿三種正常代表標題；同文模板不增加原始來源信用。
+- 本輪只更新歐洲移民教學5既有Master Carpenters／London通知的四語Noto、兩種圖像模式及關框，不外推其他名稱或全量HD。原本已是shown，總數不重複增加。
+- 正常PEDIA六類入口限制沿既有守門補驗，舊開局完成來源快照限制保持，沒有重新開啟舊完整矩陣。
+- 教學21則沿來源逐變數審查，未抽樣的城市條件、換頁與其他通知不提高shown；單位184組容量及三種WOODCUT代表標題保持原有範圍。
 
 | 畫面 | 已顯示中文 | 待驗 | 無法正常觸發 |
 |---|---:|---:|---:|
@@ -42,6 +41,6 @@
 ## 證據入口
 
 - [歷史基準](text-census-baseline.tsv)與[來源指紋](text-census-baseline.json)。
-- [規格049](spec/049-census-history.md)、[規格060](spec/060-language-bundle-swap.md)與[目標185](goals/185-player-experience.md)。
-- [攻擊確認檢查器](../tools/check_goal186_attack_confirmation.py)。
+- [規格049](spec/049-census-history.md)、[規格060](spec/060-language-bundle-swap.md)與[目標186](goals/186-display-settings-and-gameplay-video.md)。
+- [歐洲移民通知檢查器](../tools/check_goal186_immigration_tutorial.py)與[攻擊確認檢查器](../tools/check_goal186_attack_confirmation.py)。
 - 原版像素、音訊、存檔與完整批次只留workplace。
