@@ -550,6 +550,11 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 	if len(f.canvas) != 64000 || len(f.buffer) != 64000 || len(f.indexed) != 64000 || len(f.palette) != 768 {
 		return nil, nil, fmt.Errorf("invalid native frame")
 	}
+	if t != nil && b.hd != nil {
+		local := *t
+		local.portraits = b.hd.scenes
+		t = &local
+	}
 	if o.Graphics != "hd" {
 		return draftRebuildTarget(t, f.journal, f.canvas, f.buffer, f.indexed, f.palette, f.cursor, f.step, f.mode)
 	}

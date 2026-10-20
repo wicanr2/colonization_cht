@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"image"
 	"image/color"
+	"image/png"
 	"os"
 	"path/filepath"
 	"strings"
@@ -1186,5 +1187,197 @@ func TestDraftNotoMapCompleteLabels(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+func TestDraftSoldierDialogForeground(t *testing.T) {
+	root := os.Getenv("TEST_SOLDIER_ROOT")
+	if root == "" {
+		t.Skip("需要合法原版士兵正文與正常輸入收據")
+	}
+	read := func(name string) []byte {
+		t.Helper()
+		v, e := os.ReadFile(filepath.Join(root, name))
+		if e != nil {
+			t.Fatal(e)
+		}
+		return v
+	}
+	var src struct {
+		Base           uint32
+		ReadPos        int          `json:"read_pos"`
+		FirstOld       map[int]byte `json:"first_old"`
+		LastText       map[int]bool `json:"last_text"`
+		Canvas, Buffer []byte
+		Step           uint64
+		Native         struct {
+			Items []struct {
+				Kind   string
+				Step   uint64
+				Ink    image.Rectangle
+				Text   string
+				Shadow bool            `json:"shadow_written"`
+				Others image.Rectangle `json:"other_writes"`
+				After  map[int]byte    `json:"after_pixels"`
+				Chars  []struct {
+					Byte       byte
+					Box        image.Rectangle
+					Colors     map[byte]int
+					Contiguous bool
+					Prefix     bool `json:"prefix_continuation"`
+				} `json:"characters"`
+			}
+		} `json:"native_export"`
+	}
+	raw := read("r120-soldier-evidence-r1/gui.soldier-source.json")
+	if hash(raw) != "f918305b821fac28a5679fc739490cfeba674c1313e4c3ba9c1634638c9e33cf" {
+		t.Fatal("source evidence fingerprint")
+	}
+	if e := json.Unmarshal(raw, &src); e != nil {
+		t.Fatal(e)
+	}
+	row := src.Native.Items[len(src.Native.Items)-1]
+	run := &dialogRun{base: src.Base, readPos: src.ReadPos, firstOld: src.FirstOld, lastText: src.LastText, shadowWritten: row.Shadow, others: row.Others}
+	for _, c := range row.Chars {
+		run.chars = append(run.chars, dialogChar{c: c.Byte, box: c.Box, colors: c.Colors, contig: c.Contiguous, prefixContinuation: c.Prefix})
+	}
+	obs := &nativeObservation{kind: "dialog", step: row.Step, ink: row.Ink, canvas: src.Canvas, buffer: src.Buffer, after: row.After, dialogRun: run}
+	mem := read("r120-soldier-baseline-r1/gui.memory")
+	canvas := bytes.Clone(mem[0x2cae0 : 0x2cae0+64000])
+	indexed := read("r120-soldier-baseline-r1/gui.final.idx")
+	palette := read("r120-soldier-baseline-r1/gui.final.pal")
+	if hash(mem) != "8a046c4c7c07c18a45b9fafde1f2833c3fdea6de854a4f4bddcabb3b82c3f12a" || hash(src.Canvas) != "c7189a02fd83b3d8f5264749a7c82b4699ef7e5147a13b810e8db26e13c8007d" {
+		t.Fatal("native state fingerprint")
+	}
+	m, p, _ := hdEventFixtureLoad(t, 1061, "")
+	hdEventRun(t, m, p)
+	copy(m.Mem, mem)
+	targets := draftActualTargetsForTest(t)
+	cursor := image.Rect(16, 16, 32, 32)
+	journal := &nativeJournal{enabled: true, items: []*nativeObservation{obs}}
+	records := []map[string]any{}
+	for _, locale := range []string{"zh-Hant", "zh-Hans", "ja", "ko"} {
+		t.Run(locale, func(t *testing.T) {
+			target := targets[locale]
+			target.portraits = p
+			d := &dialogRuntime{cat: target.dlg}
+			st, _, why := d.finish(cloneNativeDialog(run), src.Canvas, src.Step)
+			if st == nil || why != "" || st.id != "GAME.TXT:@TUTORIAL14" {
+				t.Fatal("complete original paragraph", why)
+			}
+			draftKeepDialog(d, st, src.Canvas)
+			if bytes.Equal(rectBytes(canvas, st.safe), st.afterSafe) {
+				t.Fatal("original overlap regression no longer reproduced")
+			}
+			fixed, changed := draftFitSoldierDialog(target, st, obs, canvas, indexed, palette, cursor)
+			if fixed == nil || changed != 54 || fixed.size != 30 || fixed.safe != image.Rect(42, 86, 261, 190) {
+				t.Fatal("field layout", changed, "safe", st.safe, "ink", obs.ink, "step", st.complete, obs.step, "portrait", p.soldierDialogForeground(canvas, indexed, palette, cursor) != nil)
+			}
+			bounds := draftAlphaBounds([]*image.Alpha{fixed.shadow, fixed.normal, fixed.accent})
+			if !bounds.In(image.Rect(0, 0, 664, 416)) {
+				t.Fatal("text leaves measured column", bounds)
+			}
+			before := hash(m.Mem)
+			im, report, err := draftRebuildTarget(target, journal, canvas, mem[0x3bb00:0x3bb00+64000], indexed, palette, cursor, 258000000, 19)
+			if err != nil || hash(m.Mem) != before {
+				t.Fatal("rebuild state", err)
+			}
+			items, _ := report["items"].([]map[string]any)
+			if len(items) != 1 || items[0]["foreground_pixels"] != 4429 || items[0]["native_occluded_pixels"] != 54 {
+				t.Fatal("production text path", report["dialog_misses"], items)
+			}
+			mask := p.soldierDialogForeground(canvas, indexed, palette, cursor)
+			native := draftRGB(indexed, palette)
+			protected := 0
+			for pos := range canvas {
+				if mask[pos>>3]&(1<<uint(pos&7)) != 0 {
+					for yy := 0; yy < 4; yy++ {
+						for xx := 0; xx < 4; xx++ {
+							x, y := pos%320*4+xx, pos/320*4+yy
+							if im.RGBAAt(x, y) != native.RGBAAt(x, y) {
+								t.Fatal("portrait overwritten", x, y)
+							}
+							protected++
+						}
+					}
+				}
+			}
+			if output := os.Getenv("TEST_SOLDIER_OUTPUT"); output != "" {
+				f, e := os.Create(filepath.Join(output, locale+".png"))
+				if e != nil {
+					t.Fatal(e)
+				}
+				e = png.Encode(f, im)
+				f.Close()
+				if e != nil {
+					t.Fatal(e)
+				}
+			}
+			records = append(records, map[string]any{"locale": locale, "font_px": fixed.size, "native_occluded_pixels": changed, "protected_rgba_pixels": protected, "text_ink": bounds})
+			for _, kind := range []string{"missing-tracker", "wrong-id", "wrong-geometry", "unknown-background", "changed-VGA", "wrong-palette", "missing-source", "unknown-source-owner", "unknown-same-value-write"} {
+				t.Run(kind, func(t *testing.T) {
+					local := *target
+					item := *st
+					c, v, pal := bytes.Clone(canvas), bytes.Clone(indexed), bytes.Clone(palette)
+					saved := p.visible
+					defer func() { p.visible = saved }()
+					switch kind {
+					case "missing-tracker":
+						local.portraits = nil
+					case "wrong-id":
+						item.id = "GAME.TXT:@TUTORIAL13"
+					case "wrong-geometry":
+						item.safe = item.safe.Add(image.Pt(1, 0))
+					case "unknown-background":
+						c[180*320+50] ^= 1
+						v[180*320+50] = c[180*320+50]
+					case "changed-VGA":
+						v[180*320+50] ^= 1
+					case "wrong-palette":
+						for i := range pal {
+							pal[i] ^= 1
+						}
+					case "missing-source":
+						p.visible[6*320+210] = hdSceneCell{}
+						for i, cell := range p.visible {
+							if cell.slot != 0 {
+								p.visible[i] = hdSceneCell{}
+								break
+							}
+						}
+					case "unknown-source-owner":
+						for i, cell := range p.visible {
+							if cell.slot != 0 {
+								cell.slot = 0
+								p.visible[i] = cell
+								break
+							}
+						}
+					case "unknown-same-value-write":
+						for i, cell := range p.visible {
+							if cell.slot != 0 {
+								m.CPU.Seg[1] = 0x1234
+								m.CPU.IP = 0x500
+								p.memoryWrite(hdBuildingCanvas+uint32(i), c[i], c[i])
+								break
+							}
+						}
+					}
+					if got, _ := draftFitSoldierDialog(&local, &item, obs, c, v, pal, cursor); got != nil {
+						t.Fatal("unverified change accepted", kind)
+					}
+				})
+			}
+		})
+	}
+	english, report, err := draftRebuildTarget(targets["en"], journal, canvas, mem[0x3bb00:0x3bb00+64000], indexed, palette, cursor, 258000000, 19)
+	if err != nil || !bytes.Equal(english.Pix, draftRGB(indexed, palette).Pix) || report["original_rendering"] != true {
+		t.Fatal("English changed", err)
+	}
+	if output := os.Getenv("TEST_SOLDIER_OUTPUT"); output != "" {
+		raw, _ := json.MarshalIndent(map[string]any{"result": "PASS_R120_SOLDIER_NOTO_AND_FOREGROUND", "records": records, "english_unchanged": true}, "", "  ")
+		if e := os.WriteFile(filepath.Join(output, "check.json"), append(raw, '\n'), 0644); e != nil {
+			t.Fatal(e)
+		}
 	}
 }
