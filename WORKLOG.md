@@ -7447,3 +7447,15 @@ timeout 180 docker run --rm --network none --user 1000:1000 \
 - 現行385原PNG／386檔、986來源連結，317筆既有限定CONFORMED與669筆DISPLAY-PASS。README更新穩定數量，32張既有實拍與R118金色標題、R122四語文字保持；328語言資源保持。原生剩餘分組為481字形／文字與10單色幾何，另69全透明與19零尺寸；其他格式、程式繪圖、完整五語、全量HD、影片及新版交付仍未完成。
 - 最終本機入口r124-bdark-display-close-final.json，SHA-256為8bc31054440b3b9e60c255df941e95d7844da00b87bce36b1b1abc05eb4f4f3c，位於既有hd-opening-animation-sources-r84工作根。一次性測試、Xvfb與建置均已結束，專案容器自動移除；輸出UID1000，原版與fixture維持本機，Git與Docker於收尾核對。
 - 收尾另無損封存5個已結束的原型與舊版驗證程式，原始雜湊往返核對通過，回收43335680 bytes；現行R3正式程式與測試保留。入口r124-closed-programs-archive-r1.json，還原沿用tools/evidence_storage.py。舊382張素材紀錄逐項相同，32張README實拍指紋保持；最終核對為r124-final-handoff-r1.json。
+
+## 2026-10-20 R126 清理工作空間
+
+- 依使用者要求先清理空間。核對知識路由後，載入文件職責入口；沿用既有工作根、封存工具與目前狀態表，沒有新增平行工作目錄或公開文件。
+- Go建置快取以專用Go image、非root及`go clean -cache`清理，回收2599043072 bytes；保留原目錄與README，來源、已下載依賴及正式程式保持。
+- 以當次檔案重新建立保護清冊。R123的清冊只用於辨識路徑，R124已合法更新的素材清冊採當次指紋；測試用失效存檔符號連結保留原樣，不當成一般存檔檔案。
+- SHA-256逐檔確認後，合併8395個完全相同的封閉歷史輸出，回收4214718464 bytes。內容、原路徑、模式與擁有權保持，舊時間戳保存在操作收據。首批遇到0555鎖定的歷史快照目錄後停止；核對已完成6918筆的內容與連結，再略過217個鎖定或凍結路徑接續完成，沒有改權限。
+- 本輪兩項操作回收6813761536 bytes；扣除新增清理清冊等輸出，工作目錄實占由44651298816降至37847990272 bytes，淨減6803308544 bytes，約6.34GiB，清理後約35.25GiB。以唯一inode的配置容量統計，避免重複計算硬連結。
+- 最終7782個保護檔案的大小及完整SHA-256相同，包含原版輸入、385張正式HD原PNG、交付包、存檔、R124正式程式及R125現行輸出。既有無損封存繼續由`tools/evidence_storage.py restore`還原；本輪沒有新增封存，原版與正式素材沒有刪除。
+- 為清理先透過既有GUI控制器正常關窗，R125的9張觀測、原生輸入與最終輸出保存在`workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r125-war-gui-r1/`。登陸詢問正文仍有英文待核對；沒有到實際戰鬥，不增加戰鬥、獨立、結局或完整五語信用。
+- 最終收據：[r126-cleanup-final-r1.json](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r126-cleanup-final-r1.json)，SHA-256為cedbc3da75c14b6d852827c6d88621d8f38355828ef0fc55714d7c7d516cc9c8。同根保存Go快取、合併計畫、逐筆操作及重現腳本；既有README與HD狀態保持。
+- 一次性Docker與Xvfb均已退出，專案沒有執行中或停止容器；輸出UID／GID為1000，沒有root-owned檔案、`.md`目錄或殘留合併暫存檔。其他專案容器及image保持。本輪只提交清理與接續紀錄，不變更Issue或Release。
