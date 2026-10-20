@@ -501,9 +501,11 @@ func draftPrepareSea(pack *draftPreparedBundle, files map[string][]byte) (*seaSt
 }
 
 type draftSeaRow struct {
-	observation *nativeObservation
-	row         *seaRow
-	layer       image.Rectangle
+	observation       *nativeObservation
+	row               *seaRow
+	layer             image.Rectangle
+	foreground        []byte
+	foregroundChanges int
 }
 
 // 六欄分別以原版下一欄起點量寬；快捷鍵與譯文用同地區字型。
@@ -558,7 +560,7 @@ func draftSeaObserve(st *seaState, o *nativeObservation) (*draftSeaRow, string) 
 		if why != "" {
 			return nil, why
 		}
-		return &draftSeaRow{o, row, seaBarRect}, ""
+		return &draftSeaRow{observation: o, row: row, layer: seaBarRect}, ""
 	}
 	if len(o.seaRuns) != 1 {
 		return nil, "incomplete-sea-row"
@@ -592,7 +594,7 @@ func draftSeaObserve(st *seaState, o *nativeObservation) (*draftSeaRow, string) 
 		x = 640 - width/2
 	}
 	row.parts = []seaPart{{zh, ink, x, size}}
-	return &draftSeaRow{o, row, layer}, ""
+	return &draftSeaRow{observation: o, row: row, layer: layer}, ""
 }
 
 func draftAlphaInk(mask *image.Alpha) image.Rectangle {
@@ -634,13 +636,37 @@ func draftPaintSea(out *image.RGBA, st *seaState, candidate *draftSeaRow, canvas
 	if !safe.In(layer) || !draftSameExceptCursor(canvas, o.canvas, safe, image.Rectangle{}) || !draftSameExceptCursor(indexed, canvas, safe, cursor) {
 		return nil, "sea-safe-changed"
 	}
+	var foreground *image.RGBA
+	if len(candidate.foreground) != 0 {
+		if len(candidate.foreground) != 8000 || o.kind != "sea-bar" || layer != seaBarRect {
+			return nil, "sea-foreground-shape"
+		}
+		foreground = image.NewRGBA(image.Rect(0, 0, layer.Dx()*4, layer.Dy()*4))
+		draw.Draw(foreground, foreground.Bounds(), out, layer.Min.Mul(4), draw.Src)
+	}
 	for i, v := range row.firstOld {
 		if after, ok := row.lastVal[i]; ok && canvas[i] == after && v != after {
 			draftPaintPixel(out, i, v, palette, hdBackgroundOverride...)
 		}
 	}
 	draftPaintLayers(out, layer, []*image.Alpha{shadow, fg[68], fg[149]}, []byte{0, 68, 149}, palette)
-	return map[string]any{"kind": o.kind, "id": "SEA:" + o.kind, "source": row.text, "text": text.String(), "safe": safe, "font_px": sizes[0], "part_font_px": sizes, "native_ink": row.bbox}, ""
+	protected := 0
+	if foreground != nil {
+		for y := layer.Min.Y; y < layer.Max.Y; y++ {
+			for x := layer.Min.X; x < layer.Max.X; x++ {
+				pos := y*320 + x
+				if candidate.foreground[pos>>3]&(1<<uint(pos&7)) != 0 {
+					draw.Draw(out, image.Rect(x*4, y*4, x*4+4, y*4+4), foreground, image.Pt((x-layer.Min.X)*4, (y-layer.Min.Y)*4), draw.Src)
+					protected++
+				}
+			}
+		}
+	}
+	record := map[string]any{"kind": o.kind, "id": "SEA:" + o.kind, "source": row.text, "text": text.String(), "safe": safe, "font_px": sizes[0], "part_font_px": sizes, "native_ink": row.bbox}
+	if protected > 0 {
+		record["foreground_source"], record["foreground_pixels"], record["source_background_changes"] = 1061, protected, candidate.foregroundChanges
+	}
+	return record, ""
 }
 
 // 重建候選必須保留整個安全區，不能只以少數來源像素相同判定可用。
@@ -1120,6 +1146,7 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 	}
 	var seaClaims []image.Rectangle
 	for _, row := range seaRows {
+		row = draftPreserveSoldierMenu(t, row, canvas, indexed, palette, cursor)
 		record, why := draftPaintSea(out, t.sea, row, canvas, indexed, palette, cursor, hdBackgroundOverride...)
 		if record != nil {
 			records = append(records, record)
@@ -1765,4 +1792,48 @@ func draftFitSoldierDialog(t *draftLanguageTarget, st *dialogShown, o *nativeObs
 	copy.shadow, copy.normal, copy.accent, copy.dim = pad(shadow), pad(normal), pad(accent), nil
 	copy.size, copy.phase, copy.afterSafe = size, "active", rectBytes(canvas, st.safe)
 	return &copy, changed
+}
+
+func draftPreserveSoldierMenu(t *draftLanguageTarget, c *draftSeaRow, canvas, indexed, palette []byte, cursor image.Rectangle) *draftSeaRow {
+	if t == nil || c == nil || c.observation == nil || c.row == nil || c.observation.kind != "sea-bar" || c.row.text != seaMenuText || c.layer != seaBarRect || len(c.observation.canvas) != 64000 || !c.observation.visible(canvas, nil) {
+		return c
+	}
+	mask := t.portraits.soldierDialogForeground(canvas, indexed, palette, cursor)
+	if len(mask) != 8000 {
+		return c
+	}
+	changes, points := 0, 0
+	for y := c.layer.Min.Y; y < c.layer.Max.Y; y++ {
+		for x := c.layer.Min.X; x < c.layer.Max.X; x++ {
+			pos := y*320 + x
+			protected := mask[pos>>3]&(1<<uint(pos&7)) != 0
+			if canvas[pos] != c.observation.canvas[pos] {
+				if !protected {
+					return c
+				}
+				changes++
+			}
+			if protected {
+				points++
+			}
+		}
+	}
+	if points == 0 {
+		return c
+	}
+	source := *c.observation
+	source.canvas = bytes.Clone(source.canvas)
+	for y := c.layer.Min.Y; y < c.layer.Max.Y; y++ {
+		for x := c.layer.Min.X; x < c.layer.Max.X; x++ {
+			pos := y*320 + x
+			if mask[pos>>3]&(1<<uint(pos&7)) != 0 {
+				source.canvas[pos] = canvas[pos]
+			}
+		}
+	}
+	copy := *c
+	copy.observation = &source
+	copy.foreground = mask
+	copy.foregroundChanges = changes
+	return &copy
 }

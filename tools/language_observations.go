@@ -57,6 +57,7 @@ type nativeJournal struct {
 	coalesced                int
 	evictedNonvisible        int
 	evictedVisible           int
+	evictedPairedStrings     int
 	evictedUnclassified      int
 	pendingDialog            *dialogRun
 	pendingCells             []nativeDialogCell
@@ -460,7 +461,16 @@ func (j *nativeJournal) add(o *nativeObservation, canvas, buffer []byte) bool {
 				}
 			}
 			if victim < 0 {
-				victim = 0
+				for i, old := range j.items {
+					if j.coveredShadowCharacter(old, o) {
+						victim = i
+						j.evictedPairedStrings++
+						break
+					}
+				}
+				if victim < 0 {
+					victim = 0
+				}
 				j.evictedVisible++
 			} else {
 				j.evictedNonvisible++
@@ -663,5 +673,41 @@ func (j *nativeJournal) export(canvas, buffer []byte, mode byte, indexed ...[]by
 		"cost": j.cost, "accepted": j.accepted, "rejected": j.rejected, "evicted_by_limit": j.lost,
 		"coalesced_reprints": j.coalesced, "evicted_nonvisible": j.evictedNonvisible,
 		"evicted_visible": j.evictedVisible, "evicted_unclassified": j.evictedUnclassified,
-		"max_items": draftNativeMaxItems, "max_cost": draftNativeMaxCost, "video_mode": mode}
+		"evicted_paired_strings": j.evictedPairedStrings,
+		"max_items":              draftNativeMaxItems, "max_cost": draftNativeMaxCost, "video_mode": mode}
+}
+
+func nativeDialogCoversShadowCharacter(o *nativeObservation, parent *dialogRun) bool {
+	if o == nil || o.kind != "string" || o.stringRun == nil || parent == nil || len(parent.chars) < 10 || len(parent.chars) > 4096 || !parent.shadowWritten || parent.readPos < len(parent.chars)*2-1 || parent.readPos > len(parent.chars)*2 {
+		return false
+	}
+	r := o.stringRun
+	if len(r.text) != 1 || r.next != r.base+1 || len(r.boxes) != 1 || len(r.colors) < 2 || r.buf2 || r.mixed || r.outline || r.keyColor != 0 || r.cargo.role != "" ||
+		r.base != parent.base || r.start < parent.start || r.last > parent.last || r.last < r.start || o.ink.Empty() || o.ink != r.boxes[0] {
+		return false
+	}
+	for _, ch := range parent.chars {
+		if ch.contig || ch.prefixContinuation {
+			return false
+		}
+	}
+	for at := range r.firstOld {
+		if _, ok := parent.firstOld[at]; !ok {
+			return false
+		}
+	}
+	for at := range r.lastVal {
+		if _, ok := parent.lastText[at]; !ok {
+			return false
+		}
+	}
+	for _, ch := range parent.chars {
+		if ch.c == r.text[0] && ch.box == o.ink && maps.Equal(ch.colors, r.colors) {
+			return true
+		}
+	}
+	return false
+}
+func (j *nativeJournal) coveredShadowCharacter(o, incoming *nativeObservation) bool {
+	return nativeDialogCoversShadowCharacter(o, j.pendingDialog) || nativeDialogCoversShadowCharacter(o, incoming.dialogRun)
 }

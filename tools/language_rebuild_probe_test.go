@@ -692,7 +692,7 @@ func TestDraftSeaPaintRequiresSourceAndWholeSafeArea(t *testing.T) {
 	ink := image.Rect(242, 51, 251, 57)
 	o := &nativeObservation{kind: "sea-panel", ink: ink, canvas: bytes.Clone(canvas), after: map[int]byte{i: 68}}
 	row := &seaRow{bbox: ink, text: "source", parts: []seaPart{{"Z", 68, 968, 22}}, firstOld: map[int]byte{i: 1}, lastVal: map[int]byte{i: 68}}
-	candidate := &draftSeaRow{o, row, seaPanelRect}
+	candidate := &draftSeaRow{observation: o, row: row, layer: seaPanelRect}
 	palette := make([]byte, 768)
 	palette[68*3] = 63
 	before := bytes.Clone(canvas)
@@ -1377,6 +1377,168 @@ func TestDraftSoldierDialogForeground(t *testing.T) {
 	if output := os.Getenv("TEST_SOLDIER_OUTPUT"); output != "" {
 		raw, _ := json.MarshalIndent(map[string]any{"result": "PASS_R120_SOLDIER_NOTO_AND_FOREGROUND", "records": records, "english_unchanged": true}, "", "  ")
 		if e := os.WriteFile(filepath.Join(output, "check.json"), append(raw, '\n'), 0644); e != nil {
+			t.Fatal(e)
+		}
+	}
+}
+
+func TestDraftSoldierMenuForeground(t *testing.T) {
+	root := os.Getenv("TEST_MENU_ROOT")
+	if root == "" {
+		t.Skip("需要合法原版選單來源與士兵快照")
+	}
+	read := func(name string) []byte {
+		t.Helper()
+		v, e := os.ReadFile(filepath.Join(root, name))
+		if e != nil {
+			t.Fatal(e)
+		}
+		return v
+	}
+	raw := read("r121-priority-replay-r3/gui.sea-bar-sources.json")
+	if hash(raw) != "13f2b60a2414e96cd965d72bbf281de14aff5915cd650b0e95e9b740ef77f4da" {
+		t.Fatal("menu source fingerprint")
+	}
+	var sources []struct {
+		Kind           string
+		Step           uint64
+		Ink, Cursor    image.Rectangle
+		Canvas, Buffer []byte
+		After          map[int]byte
+		Runs           []struct {
+			Raw    []byte
+			First  map[int]byte    `json:"first_old"`
+			Last   map[int]byte    `json:"last_val"`
+			Box    image.Rectangle `json:"bbox"`
+			Colors map[byte]int
+			Tick   uint64 `json:"last"`
+			Next   uint32
+			Writes int
+		}
+	}
+	if e := json.Unmarshal(raw, &sources); e != nil {
+		t.Fatal(e)
+	}
+	if len(sources) != 3 {
+		t.Fatal("complete captured menu sources")
+	}
+	src := sources[len(sources)-1]
+	obs := &nativeObservation{kind: src.Kind, step: src.Step, ink: src.Ink, cursor: src.Cursor, canvas: src.Canvas, buffer: src.Buffer, after: src.After}
+	for _, r := range src.Runs {
+		obs.seaRuns = append(obs.seaRuns, &seaEvent{raw: r.Raw, firstOld: r.First, lastVal: r.Last, bbox: r.Box, colors: r.Colors, last: r.Tick, next: r.Next, writes: r.Writes})
+	}
+	mem := read("r120-soldier-baseline-r1/gui.memory")
+	canvas := bytes.Clone(mem[0x2cae0 : 0x2cae0+64000])
+	indexed := read("r120-soldier-baseline-r1/gui.final.idx")
+	palette := read("r120-soldier-baseline-r1/gui.final.pal")
+	if hash(mem) != "8a046c4c7c07c18a45b9fafde1f2833c3fdea6de854a4f4bddcabb3b82c3f12a" {
+		t.Fatal("current original frame")
+	}
+	m, p, _ := hdEventFixtureLoad(t, 1061, "")
+	hdEventRun(t, m, p)
+	copy(m.Mem, mem)
+	targets := draftActualTargetsForTest(t)
+	cursor := image.Rect(16, 16, 32, 32)
+	records := []map[string]any{}
+	for _, locale := range []string{"zh-Hant", "zh-Hans", "ja", "ko"} {
+		t.Run(locale, func(t *testing.T) {
+			target := targets[locale]
+			target.portraits = p
+			candidate, why := draftSeaObserve(target.sea, obs)
+			if candidate == nil || why != "" {
+				t.Fatal("actual complete menu", why)
+			}
+			baseline := draftRGB(indexed, palette)
+			if got, why := draftPaintSea(baseline, target.sea, candidate, canvas, indexed, palette, cursor); got != nil || why != "sea-safe-changed" {
+				t.Fatal("menu overlap regression", why)
+			}
+			beforeSource, guest, cpu, step := hash(obs.canvas), hash(m.Mem), *m.CPU, m.Steps
+			protected := draftPreserveSoldierMenu(target, candidate, canvas, indexed, palette, cursor)
+			out := draftRGB(indexed, palette)
+			before := bytes.Clone(out.Pix)
+			got, why := draftPaintSea(out, target.sea, protected, canvas, indexed, palette, cursor)
+			if got == nil || why != "" || got["foreground_pixels"] != 10 || got["source_background_changes"] != 7 || got["font_px"] != 22 {
+				t.Fatal("verified menu not drawn", got, why)
+			}
+			if hash(obs.canvas) != beforeSource || hash(m.Mem) != guest || m.Steps != step || m.CPU.R != cpu.R || m.CPU.Seg != cpu.Seg || m.CPU.IP != cpu.IP || m.CPU.Flags != cpu.Flags {
+				t.Fatal("display modified original source or DOS")
+			}
+			if bytes.Equal(before, out.Pix) {
+				t.Fatal("menu did not visibly change")
+			}
+			mask := p.soldierDialogForeground(canvas, indexed, palette, cursor)
+			native := draftRGB(indexed, palette)
+			kept := 0
+			for pos := range canvas {
+				if mask[pos>>3]&(1<<uint(pos&7)) != 0 {
+					for yy := 0; yy < 4; yy++ {
+						for xx := 0; xx < 4; xx++ {
+							x, y := pos%320*4+xx, pos/320*4+yy
+							if out.RGBAAt(x, y) != native.RGBAAt(x, y) {
+								t.Fatal("foreground damaged", x, y)
+							}
+							kept++
+						}
+					}
+				}
+			}
+			records = append(records, map[string]any{"locale": locale, "menu": got["text"], "font_px": got["font_px"], "foreground_pixels": 10, "source_changes": 7, "protected_full_figure_rgba": kept})
+			for _, kind := range []string{"unknown-background", "unknown-VGA", "wrong-palette", "unknown-same-value-write", "source-glyph-changed", "other-layer", "malformed-mask", "other-kind"} {
+				t.Run(kind, func(t *testing.T) {
+					c, v, pal := bytes.Clone(canvas), bytes.Clone(indexed), bytes.Clone(palette)
+					local := *candidate
+					source := *obs
+					local.observation = &source
+					cells := p.visible
+					oldCPU := *m.CPU
+					defer func() { p.visible = cells; *m.CPU = oldCPU }()
+					switch kind {
+					case "unknown-background":
+						c[7*320+40] ^= 1
+						v[7*320+40] = c[7*320+40]
+					case "unknown-VGA":
+						v[7*320+40] ^= 1
+					case "wrong-palette":
+						for i := range pal {
+							pal[i] ^= 1
+						}
+					case "unknown-same-value-write":
+						for at, cell := range p.visible {
+							if cell.slot != 0 {
+								m.CPU.Seg[1] = 0x1234
+								m.CPU.IP = 0x500
+								p.memoryWrite(hdBuildingCanvas+uint32(at), c[at], c[at])
+								break
+							}
+						}
+					case "source-glyph-changed":
+						at := 64000
+						for pos := range obs.after {
+							at = min(at, pos)
+						}
+						c[at] ^= 1
+						v[at] = c[at]
+					case "other-layer":
+						local.layer = seaPanelRect
+					case "other-kind":
+						source.kind = "sea-panel"
+					}
+					checked := draftPreserveSoldierMenu(target, &local, c, v, pal, cursor)
+					if kind == "malformed-mask" {
+						checked.foreground = []byte{1}
+					}
+					im := draftRGB(v, pal)
+					oldPixels := bytes.Clone(im.Pix)
+					if got, _ := draftPaintSea(im, target.sea, checked, c, v, pal, cursor); got != nil || !bytes.Equal(im.Pix, oldPixels) {
+						t.Fatal("unknown source changed display", kind)
+					}
+				})
+			}
+		})
+	}
+	if out := os.Getenv("TEST_MENU_OUTPUT"); out != "" {
+		j, _ := json.MarshalIndent(map[string]any{"result": "PASS_R121_FOUR_MENU_FOREGROUND_FIELDS", "records": records, "negative_cases": 32}, "", "  ")
+		if e := os.WriteFile(filepath.Join(out, "check.json"), append(j, '\n'), 0644); e != nil {
 			t.Fatal(e)
 		}
 	}

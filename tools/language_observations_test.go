@@ -610,3 +610,141 @@ func TestNativeReprintIdentityNormalizesOnlyTime(t *testing.T) {
 		})
 	}
 }
+
+func nativeShadowCharacterFixture() (*dialogRun, *nativeObservation) {
+	parent := &dialogRun{base: 0x20000, start: 100, last: 1000, readPos: 20, shadowWritten: true, firstOld: map[int]byte{}, lastText: map[int]bool{}}
+	for i := 0; i < 10; i++ {
+		at := 2000 + i*2
+		box := image.Rect(at%320, at/320, at%320+2, at/320+1)
+		parent.chars = append(parent.chars, dialogChar{c: byte('A' + i), box: box, colors: map[byte]int{68: 1, 47: 1}})
+		parent.firstOld[at], parent.firstOld[at+1] = 0, 0
+		parent.lastText[at], parent.lastText[at+1] = true, true
+	}
+	c := parent.chars[0]
+	run := &stringRun{base: parent.base, next: parent.base + 1, start: 100, last: 102, text: []byte{c.c}, boxes: []image.Rectangle{c.box}, colors: map[byte]int{68: 1, 47: 1}, firstOld: map[int]byte{2000: 0, 2001: 0}, lastVal: map[int]byte{2000: 68, 2001: 47}}
+	return parent, &nativeObservation{kind: "string", step: 103, ink: c.box, stringRun: run, after: run.lastVal}
+}
+func TestNativeCapacityPrioritizesCoveredShadowCharacters(t *testing.T) {
+	f := nativeCapacitySurfaces()
+	j := &nativeJournal{enabled: true, sample: func() nativeSurfaces { return f }}
+	for i := 0; i < 6; i++ {
+		nativeCapacityAdd(t, j, f, 100+i, uint64(i))
+	}
+	protected := append([]*nativeObservation(nil), j.items...)
+	parent := &dialogRun{base: 0x20000, start: 1000, shadowWritten: true, firstOld: map[int]byte{}, lastText: map[int]bool{}}
+	j.pendingDialog = parent
+	for i := 0; i < 400; i++ {
+		at := 2000 + i*2
+		x, y := at%320, at/320
+		box := image.Rect(x, y, x+2, y+1)
+		start := uint64(1000 + i*10)
+		end := start + 3
+		parent.last, parent.readPos = end, 2*(i+1)
+		parent.chars = append(parent.chars, dialogChar{c: byte('A' + i%26), box: box, colors: map[byte]int{68: 1, 47: 1}})
+		parent.firstOld[at], parent.firstOld[at+1] = 0, 0
+		parent.lastText[at], parent.lastText[at+1] = true, true
+		f.canvas[at], f.canvas[at+1] = 68, 47
+		f.indexed[at], f.indexed[at+1] = 68, 47
+		run := &stringRun{base: parent.base, next: parent.base + 1, start: start, last: start + 2, text: []byte{byte('A' + i%26)}, boxes: []image.Rectangle{box}, colors: map[byte]int{68: 1, 47: 1}, firstOld: map[int]byte{at: 0, at + 1: 0}, lastVal: map[int]byte{at: 68, at + 1: 47}}
+		if !j.captureString(run, f.canvas, nil, end) {
+			t.Fatal("observed character rejected")
+		}
+		nativeCapacityAccounting(t, j)
+	}
+	for i, source := range protected {
+		if j.items[i] != source {
+			t.Fatal("independent visible source evicted", i)
+		}
+	}
+	if !j.captureDialog(parent, f.canvas, 5000) {
+		t.Fatal("complete paragraph rejected")
+	}
+	for i, source := range protected {
+		if j.items[i] != source {
+			t.Fatal("full paragraph evicted independent source", i)
+		}
+	}
+	if j.evictedPairedStrings != 151 || j.evictedVisible != 151 || j.evictedNonvisible != 0 || len(j.items) != 256 || len(j.items[len(j.items)-1].dialogRun.chars) != 400 {
+		t.Fatal("bounded priority or completed source", j.evictedPairedStrings, j.evictedVisible, j.evictedNonvisible)
+	}
+	nativeCapacityAccounting(t, j)
+}
+func TestNativeCoveredShadowCharacterRequiresMatchingEvidence(t *testing.T) {
+	for _, kind := range []string{"complete", "pending-parent-zero-read", "single-color", "another-source", "another-time", "map", "hotkey", "cargo", "invalid-parent-read-state", "parent-overbound", "missing-string-source-step", "mixed-sequence", "changed-style", "another-position", "foreign-write", "short-label"} {
+		t.Run(kind, func(t *testing.T) {
+			parent, old := nativeShadowCharacterFixture()
+			r := old.stringRun
+			switch kind {
+			case "single-color":
+				delete(r.colors, 47)
+			case "another-source":
+				r.base++
+			case "another-time":
+				r.start = 99
+			case "map":
+				r.buf2 = true
+			case "hotkey":
+				r.keyColor = 149
+			case "cargo":
+				r.cargo.role = "typed-field"
+			case "pending-parent-zero-read":
+				parent.readPos--
+				ch := parent.chars[9]
+				r.text = []byte{ch.c}
+				r.boxes = []image.Rectangle{ch.box}
+				old.ink = ch.box
+				r.firstOld = map[int]byte{2018: 0, 2019: 0}
+				r.lastVal = map[int]byte{2018: 68, 2019: 47}
+				old.after = r.lastVal
+				r.start, r.last = 1000, 1000
+				old.step = 1003
+			case "invalid-parent-read-state":
+				parent.readPos -= 2
+			case "parent-overbound":
+				parent.chars = append(parent.chars, make([]dialogChar, 4097-len(parent.chars))...)
+				parent.readPos = 8194
+			case "missing-string-source-step":
+				r.next = 0
+			case "mixed-sequence":
+				parent.chars[3].contig = true
+			case "changed-style":
+				parent.chars[0].colors[47]++
+			case "another-position":
+				old.ink = old.ink.Add(image.Pt(1, 0))
+				r.boxes[0] = old.ink
+			case "foreign-write":
+				r.lastVal[50000] = 68
+			case "short-label":
+				parent.chars = parent.chars[:9]
+				parent.readPos = 18
+			}
+			if nativeDialogCoversShadowCharacter(old, parent) != (kind == "complete" || kind == "pending-parent-zero-read") {
+				t.Fatal("source relationship misclassified", kind)
+			}
+		})
+	}
+}
+func TestNativeCapacityNonvisiblePrecedesCoveredCharacter(t *testing.T) {
+	f := nativeCapacitySurfaces()
+	j := &nativeJournal{enabled: true, sample: func() nativeSurfaces { return f }}
+	nativeCapacityAdd(t, j, f, 100, 0)
+	parent, old := nativeShadowCharacterFixture()
+	j.pendingDialog = parent
+	f.canvas[2000], f.canvas[2001] = 68, 47
+	if !j.captureString(old.stringRun, f.canvas, nil, 103) {
+		t.Fatal("character fixture")
+	}
+	protected := j.items[1]
+	for n := 2; n < 256; n++ {
+		nativeCapacityAdd(t, j, f, 10000+n, uint64(n))
+	}
+	dead := j.items[200]
+	for at := range dead.after {
+		f.canvas[at] ^= 1
+	}
+	nativeCapacityAdd(t, j, f, 15000, 500)
+	if j.items[1] != protected || j.evictedNonvisible != 1 || j.evictedPairedStrings != 0 || j.evictedVisible != 0 {
+		t.Fatal("nonvisible precedence")
+	}
+	nativeCapacityAccounting(t, j)
+}
