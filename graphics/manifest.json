@@ -21908,6 +21908,1660 @@
       },
       "native_palette_projection_sha256": "0b1205c4c138976acab792e6bf5458765357acab29a818303ddc0227858c11aa",
       "ready_review_sha256": "3eb9bd94debaae2e5d9500544dfa835cdf0bde6d0130ad4c8b6cb49d19658b91"
+    },
+    "openmon3-poses.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+      "bytes": 1242910,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "kind": "coherent generated animation sprite sheet",
+      "sampling": "pixel-center nearest neighbor; per-source rectangles; retain original alpha; clip to original native opaque ownership",
+      "generation_prompt": "Use case: stylized-concept. Asset type: ONE transparent animation sprite sheet with sixteen related poses, for a display-only HD overlay of Colonization (1994).\nReference Image 1 is the exact 4 by 4 pose/composition reference. The small white numbers identify cells only; DO NOT reproduce any numbers. Reference Image 2 is a previously generated game creature for color/material continuity only. Reference Image 3 is the USER-APPROVED fine pixel-art style, not a composition reference.\nCreate a new original refined pixel-art redraw of all sixteen creature poses from Image 1, one pose in each corresponding cell in exactly four columns and four rows, read left-to-right then top-to-bottom. Retain the same creature, changing posture, silhouette, appendage positions and relative body proportions of EACH original pose. Do not replace them with a standard fish, rabbit, bird or another animal. This is a small decorative fantasy sea creature on an old illustrated map. It has a compact olive-green and gold body, small dark facial marks, two tall upward-swept blue-gray forked lobes in most poses, and the small lower-right trailing parts exactly where shown. Preserve the upright, front-biased viewpoint and the partially hidden/retracted appendages in cells1,2,15,16. No new fins, horns, limbs, eyes, water splashes or detached ornaments.\nUse deliberately placed crisp square pixel clusters, shaded scales and material detail matching Image3. Restrained olive greens, warm ochres/gold and pale blue-gray; keep color identity from Image1, avoid neon highlights, glow, soft blur, smooth painting, antialiased contours, photorealism and 3D rendering. Legible at a final per-pose game size around100 by100 pixels. Keep the same design and level of detail across all cells, with the original variations clearly distinguishable; do not duplicate one neutral pose sixteen times.\nLayout: a square image, exact regular 4x4 grid, sixteen separate cutouts, one per cell. Each cell has a transparent gutter on all four sides. Place each pose near its corresponding reference position, fitting fully within its own cell. No overlap between cells and no clipping. Real transparent background throughout, with only creature pixels opaque or partially transparent. Do not draw the grid, background, floor, frame, captions, text, numbers, watermark, buildings or scenery. The result is one usable coherent animation sheet.",
+      "generation_tool": "built-in imagegen",
+      "reference_sha256": {
+        "private_native_pose_sheet": "97665f2be348496fec845dc6426976839d7d7e339b56fd437424c8dbaef3b6a4",
+        "generated_material_reference": "e2b4bb5a7dca58f00fefedba777f73d764ceff68e76e07ccf65b2d9600fb2f97",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated pixels under RRSAL-1.0; original references private",
+      "raw_PNG_and_alpha_preserved": true,
+      "source_frames": [
+        {
+          "source_research_id": 1211,
+          "file": "OPENMON2.SS",
+          "file_sha256": "4a56a5a3646e98a51de1f0b4c3376ab9db12c00d42972b58857ff485b634a490",
+          "ordinal": 14,
+          "native_size": [
+            1,
+            1
+          ],
+          "encoded_length": 4,
+          "encoded_sha256": "b1833e22545463e083a07d15c2b5f77c41dc0e5232218a08bbb1e0cdb4229ba5",
+          "indexed_sha256": "591b7cc95037822dec5a4d593a2e2e8b19c07ddd2570e5699003d17f14c440a6",
+          "opaque": 1,
+          "native_rects": [
+            [
+              0,
+              0,
+              1,
+              1
+            ]
+          ],
+          "sample_rects": [
+            [
+              133,
+              110,
+              137,
+              114
+            ]
+          ],
+          "writes_sha256": "d871ad2612f92f251c8911a55ceae1ccefbe26581fe3f081fa30cb9b732eb665",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": true,
+          "nonzero_sampled_alpha": 16
+        },
+        {
+          "source_research_id": 1212,
+          "file": "OPENMON2.SS",
+          "file_sha256": "4a56a5a3646e98a51de1f0b4c3376ab9db12c00d42972b58857ff485b634a490",
+          "ordinal": 15,
+          "native_size": [
+            1,
+            1
+          ],
+          "encoded_length": 4,
+          "encoded_sha256": "b1833e22545463e083a07d15c2b5f77c41dc0e5232218a08bbb1e0cdb4229ba5",
+          "indexed_sha256": "591b7cc95037822dec5a4d593a2e2e8b19c07ddd2570e5699003d17f14c440a6",
+          "opaque": 1,
+          "native_rects": [
+            [
+              0,
+              0,
+              1,
+              1
+            ]
+          ],
+          "sample_rects": [
+            [
+              133,
+              110,
+              137,
+              114
+            ]
+          ],
+          "writes_sha256": "d871ad2612f92f251c8911a55ceae1ccefbe26581fe3f081fa30cb9b732eb665",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": true,
+          "nonzero_sampled_alpha": 16
+        },
+        {
+          "source_research_id": 1229,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 0,
+          "native_size": [
+            11,
+            2
+          ],
+          "encoded_length": 22,
+          "encoded_sha256": "cf20c37787c059226dfebcad11c974ef64d64ea3478bb61046dfbcaea1c33e3d",
+          "indexed_sha256": "2c26476c44bd943d00f20ab5a810163fe8503e882321bb5ccbb58c012c75c5ad",
+          "opaque": 9,
+          "native_rects": [
+            [
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              2,
+              1
+            ],
+            [
+              3,
+              0,
+              4,
+              1
+            ],
+            [
+              10,
+              0,
+              11,
+              1
+            ],
+            [
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              2,
+              1,
+              3,
+              2
+            ],
+            [
+              7,
+              1,
+              8,
+              2
+            ],
+            [
+              8,
+              1,
+              9,
+              2
+            ],
+            [
+              9,
+              1,
+              10,
+              2
+            ]
+          ],
+          "sample_rects": [
+            [
+              119,
+              116,
+              123,
+              120
+            ],
+            [
+              131,
+              112,
+              135,
+              116
+            ],
+            [
+              135,
+              150,
+              139,
+              154
+            ],
+            [
+              129,
+              156,
+              133,
+              160
+            ],
+            [
+              105,
+              70,
+              109,
+              74
+            ],
+            [
+              133,
+              112,
+              137,
+              116
+            ],
+            [
+              135,
+              98,
+              139,
+              102
+            ],
+            [
+              105,
+              70,
+              109,
+              74
+            ],
+            [
+              137,
+              110,
+              141,
+              114
+            ]
+          ],
+          "writes_sha256": "2aea53d0a186bc09e836116b0e10f55a59da91ac3b22606fe0296a705e679908",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": true,
+          "nonzero_sampled_alpha": 144
+        },
+        {
+          "source_research_id": 1230,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 1,
+          "native_size": [
+            25,
+            18
+          ],
+          "encoded_length": 250,
+          "encoded_sha256": "34e4f26a957600d62555b3086069a789041c869c701aac3aad4eb1a9a1cd0260",
+          "indexed_sha256": "a81fa51ece37d08412574a787a4e1dec556dab055d4a9d10032a6900a128b3e4",
+          "opaque": 167,
+          "native_rects": [
+            [
+              0,
+              0,
+              25,
+              18
+            ]
+          ],
+          "sample_rects": [
+            [
+              37,
+              62,
+              179,
+              182
+            ]
+          ],
+          "writes_sha256": "9b34fad5fad23349efdb86991ab97e4155b367f9b86353c9cc05419f0ea3245e",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 2623
+        },
+        {
+          "source_research_id": 1231,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 2,
+          "native_size": [
+            17,
+            20
+          ],
+          "encoded_length": 312,
+          "encoded_sha256": "b85ac045fdf00348b77e7d6ff84e15110d58cbd2b171aacb86d1372057da5f9b",
+          "indexed_sha256": "3918b8fba88d5b9544b714a5a48b7fe402d96bfba4c88ec28e6f63c0b0c5db0d",
+          "opaque": 194,
+          "native_rects": [
+            [
+              0,
+              0,
+              17,
+              20
+            ]
+          ],
+          "sample_rects": [
+            [
+              384,
+              51,
+              537,
+              221
+            ]
+          ],
+          "writes_sha256": "0efa61962537341b4562f10453c0ad0ba393b179d60eb6d4c0cdc90cff2d1a03",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 3061
+        },
+        {
+          "source_research_id": 1232,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 3,
+          "native_size": [
+            23,
+            24
+          ],
+          "encoded_length": 398,
+          "encoded_sha256": "aa992c68c09009a808615efaa1cce378966e0f5702fa99434671e6e75f6b2e2a",
+          "indexed_sha256": "c113a13e7dbbb7c9d239aae2ee1d44ce842a0fb202171c4b66f6ce54de3d67c0",
+          "opaque": 231,
+          "native_rects": [
+            [
+              0,
+              0,
+              23,
+              24
+            ]
+          ],
+          "sample_rects": [
+            [
+              687,
+              62,
+              856,
+              246
+            ]
+          ],
+          "writes_sha256": "cfb7148836d39319747504fc4f247b897c34e908266c26a9ed0918d02b936c46",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 3675
+        },
+        {
+          "source_research_id": 1233,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 4,
+          "native_size": [
+            26,
+            29
+          ],
+          "encoded_length": 544,
+          "encoded_sha256": "be1dc9cb32d0c477741ac04c88db36058ebfffe0fb7955ee47237cd45323345e",
+          "indexed_sha256": "b0026bec34bd6bd3f8865b72ef5fba7f0d29dc672c6f54c06fd82f03f97e008b",
+          "opaque": 363,
+          "native_rects": [
+            [
+              0,
+              0,
+              26,
+              29
+            ]
+          ],
+          "sample_rects": [
+            [
+              992,
+              47,
+              1222,
+              276
+            ]
+          ],
+          "writes_sha256": "07d281d219052725658ce254161b9e192578969ef7a7cc45565e60e8dd14f5bf",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 5549
+        },
+        {
+          "source_research_id": 1234,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 5,
+          "native_size": [
+            29,
+            29
+          ],
+          "encoded_length": 604,
+          "encoded_sha256": "73fb0ff861a7ed0f3cf0ecc57b0c498244673eab367cd2f68050cf65820c7acd",
+          "indexed_sha256": "68597fd1e2b7f5881774b7d0d9893f9c518bc5eccf47b62d9f9c8dda645bff4b",
+          "opaque": 430,
+          "native_rects": [
+            [
+              0,
+              0,
+              29,
+              29
+            ]
+          ],
+          "sample_rects": [
+            [
+              37,
+              343,
+              271,
+              568
+            ]
+          ],
+          "writes_sha256": "fc3626111c4a159447f3899cd972d810746a46871b989bc433b9c8b9c9dd1ccd",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 6810
+        },
+        {
+          "source_research_id": 1235,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 6,
+          "native_size": [
+            31,
+            32
+          ],
+          "encoded_length": 658,
+          "encoded_sha256": "8504c9362190f94bac5956ea78cbe741f91a86185d2b732ffcf591140d118fd6",
+          "indexed_sha256": "e735b9c9b5b901f7cf474b447c0cadd0bfc3c41c7a5d8e4889100cc07f0823f6",
+          "opaque": 466,
+          "native_rects": [
+            [
+              0,
+              0,
+              31,
+              32
+            ]
+          ],
+          "sample_rects": [
+            [
+              355,
+              349,
+              603,
+              584
+            ]
+          ],
+          "writes_sha256": "f2e6644cfe1355a06cc2e8a39cf4152ee9eb62d81446642eb23c9175dcc69456",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 7394
+        },
+        {
+          "source_research_id": 1236,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 7,
+          "native_size": [
+            32,
+            33
+          ],
+          "encoded_length": 681,
+          "encoded_sha256": "fb534c8593171f096dab5fcad541d57933ad3b44a6141e831e1d1be91f08c935",
+          "indexed_sha256": "f370a022364901071a5362333c3a0026f1f652946155c337bcc68bf738b45689",
+          "opaque": 471,
+          "native_rects": [
+            [
+              0,
+              0,
+              32,
+              33
+            ]
+          ],
+          "sample_rects": [
+            [
+              677,
+              351,
+              919,
+              591
+            ]
+          ],
+          "writes_sha256": "308e354470926bf0894e8fbe0ed8594bc938a9c2f8fd05a2b9dcf31b2175d37a",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 7507
+        },
+        {
+          "source_research_id": 1237,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 8,
+          "native_size": [
+            30,
+            33
+          ],
+          "encoded_length": 669,
+          "encoded_sha256": "1d17b880e158b27a95a8d875acaf28822878b6b8a98af8f954b996d09bb1caa9",
+          "indexed_sha256": "3c455893f57e3470912879fb86aca0be80e46adf276403fe575b4577c6cc27c3",
+          "opaque": 458,
+          "native_rects": [
+            [
+              0,
+              0,
+              30,
+              33
+            ]
+          ],
+          "sample_rects": [
+            [
+              997,
+              347,
+              1233,
+              591
+            ]
+          ],
+          "writes_sha256": "310045aa86d847a51db8fd93263bc6a0343b9dce62ef4974193692b60a86d791",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 7200
+        },
+        {
+          "source_research_id": 1238,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 9,
+          "native_size": [
+            28,
+            23
+          ],
+          "encoded_length": 494,
+          "encoded_sha256": "51b9e1afcf978fd309f485215817b33307bae4f4831c362b80bceba65b03c8c3",
+          "indexed_sha256": "177d2b797f13de89a269112e0c7d0c9ee39a5d06f14fc876cf502be3e0be89c9",
+          "opaque": 325,
+          "native_rects": [
+            [
+              0,
+              0,
+              28,
+              23
+            ]
+          ],
+          "sample_rects": [
+            [
+              37,
+              662,
+              258,
+              848
+            ]
+          ],
+          "writes_sha256": "d8e6ff4983ecb58a946350abc998c69d06cd3eefc145d845f91795b88ba0b8c2",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 5133
+        },
+        {
+          "source_research_id": 1239,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 10,
+          "native_size": [
+            28,
+            28
+          ],
+          "encoded_length": 584,
+          "encoded_sha256": "c7e6927142b604d1e3d2ea0bea391c12bd233d25f948c426b0434cdcdd8510b1",
+          "indexed_sha256": "b39fb49eeb3d73f63efca81b9fc138a0000d3ab46d603b694c4c6a04bf18feac",
+          "opaque": 387,
+          "native_rects": [
+            [
+              0,
+              0,
+              28,
+              28
+            ]
+          ],
+          "sample_rects": [
+            [
+              361,
+              662,
+              583,
+              876
+            ]
+          ],
+          "writes_sha256": "76e07852e8271b9ddbd1b95aff1b597e254793c8a66aabdf5fa00efa826d8a88",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 6091
+        },
+        {
+          "source_research_id": 1240,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 11,
+          "native_size": [
+            27,
+            28
+          ],
+          "encoded_length": 591,
+          "encoded_sha256": "f787828573adbb228763cdc28d8c4aa5e1ba70c9efa22358271501750717f978",
+          "indexed_sha256": "c10874701f649216fa1c72573e971c239c182e4309efa89057693f304d8a0cc5",
+          "opaque": 412,
+          "native_rects": [
+            [
+              0,
+              0,
+              27,
+              28
+            ]
+          ],
+          "sample_rects": [
+            [
+              677,
+              662,
+              898,
+              876
+            ]
+          ],
+          "writes_sha256": "5827a25e11d3cdff406806d6e430a29913e62325302db4e753a9e14b1afb162f",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 6545
+        },
+        {
+          "source_research_id": 1241,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 12,
+          "native_size": [
+            30,
+            29
+          ],
+          "encoded_length": 623,
+          "encoded_sha256": "4bb6f2c517e72b4916634d15fe6612c832fbdd453030cdc6dd2fd5950811a05d",
+          "indexed_sha256": "d07c58059129a50cad8e237d80d4613654b569d94ab25122b6f9f93ea6230aa6",
+          "opaque": 435,
+          "native_rects": [
+            [
+              0,
+              0,
+              30,
+              29
+            ]
+          ],
+          "sample_rects": [
+            [
+              992,
+              659,
+              1225,
+              887
+            ]
+          ],
+          "writes_sha256": "d8df094ec967342c4f90561ccc02138a6f23247f66ec57633cbf0c902e3c6098",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 6916
+        },
+        {
+          "source_research_id": 1242,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 13,
+          "native_size": [
+            32,
+            31
+          ],
+          "encoded_length": 653,
+          "encoded_sha256": "d02c0b46fb8c48ad378f6686c33a405351ac6f6e2d8dc5dae4f67805a6f66a0c",
+          "indexed_sha256": "69f1df2b0afe45f295bc5bccafebd5c35baabbec70cdab32684fada2fb521bd8",
+          "opaque": 456,
+          "native_rects": [
+            [
+              0,
+              0,
+              32,
+              31
+            ]
+          ],
+          "sample_rects": [
+            [
+              39,
+              960,
+              284,
+              1192
+            ]
+          ],
+          "writes_sha256": "eb58d42641898feb93e34cdbec567504fa164f2502957541d2f36b33ca9a1193",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 7251
+        },
+        {
+          "source_research_id": 1243,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 14,
+          "native_size": [
+            31,
+            33
+          ],
+          "encoded_length": 621,
+          "encoded_sha256": "69caa02b3383abcabc73f0abb7ebe88278cacbd54adfbc61ad8e93f05b0b6210",
+          "indexed_sha256": "559cf3506eee9695a0fa9883d81af81434bdd74715fbc0e305610818b67ba02a",
+          "opaque": 420,
+          "native_rects": [
+            [
+              0,
+              0,
+              31,
+              33
+            ]
+          ],
+          "sample_rects": [
+            [
+              360,
+              957,
+              616,
+              1203
+            ]
+          ],
+          "writes_sha256": "1ef46f73d47a3b74178bd79e00be9c9db5908c440b5e0d31ac7c7e0e1d514bc5",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 6669
+        },
+        {
+          "source_research_id": 1244,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 15,
+          "native_size": [
+            28,
+            33
+          ],
+          "encoded_length": 551,
+          "encoded_sha256": "bb5e9fd23017ce1530523fa8804f2926f96615bee2c868fb725e8118b4fc97c7",
+          "indexed_sha256": "7abbe3b1199207bdaab4583cb70ce564e7c3c70392116c5ddd03739f643d0f96",
+          "opaque": 353,
+          "native_rects": [
+            [
+              0,
+              0,
+              28,
+              33
+            ]
+          ],
+          "sample_rects": [
+            [
+              694,
+              962,
+              911,
+              1203
+            ]
+          ],
+          "writes_sha256": "c5f909acea4bbc3bbd7c2009d1128f002b34137af6099f2278d2141f6ce44d81",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 5582
+        },
+        {
+          "source_research_id": 1245,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 16,
+          "native_size": [
+            20,
+            20
+          ],
+          "encoded_length": 316,
+          "encoded_sha256": "e4ea8c2d45e13d364bccdcc0c629ca8c72b92c1d93553229d93a3cadb4194b33",
+          "indexed_sha256": "0bb1c9a6145addc31243893ca66e5e6864ba588bf77f86004880c548474fc15c",
+          "opaque": 195,
+          "native_rects": [
+            [
+              0,
+              0,
+              20,
+              20
+            ]
+          ],
+          "sample_rects": [
+            [
+              997,
+              983,
+              1145,
+              1145
+            ]
+          ],
+          "writes_sha256": "eeb51836ab6bef1ea5cad684b03d9bdc005433540f9f27a817d6deea3177adf3",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 3081
+        },
+        {
+          "source_research_id": 1246,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 17,
+          "native_size": [
+            11,
+            2
+          ],
+          "encoded_length": 22,
+          "encoded_sha256": "cf20c37787c059226dfebcad11c974ef64d64ea3478bb61046dfbcaea1c33e3d",
+          "indexed_sha256": "2c26476c44bd943d00f20ab5a810163fe8503e882321bb5ccbb58c012c75c5ad",
+          "opaque": 9,
+          "native_rects": [
+            [
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              2,
+              1
+            ],
+            [
+              3,
+              0,
+              4,
+              1
+            ],
+            [
+              10,
+              0,
+              11,
+              1
+            ],
+            [
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              2,
+              1,
+              3,
+              2
+            ],
+            [
+              7,
+              1,
+              8,
+              2
+            ],
+            [
+              8,
+              1,
+              9,
+              2
+            ],
+            [
+              9,
+              1,
+              10,
+              2
+            ]
+          ],
+          "sample_rects": [
+            [
+              119,
+              116,
+              123,
+              120
+            ],
+            [
+              131,
+              112,
+              135,
+              116
+            ],
+            [
+              135,
+              150,
+              139,
+              154
+            ],
+            [
+              129,
+              156,
+              133,
+              160
+            ],
+            [
+              105,
+              70,
+              109,
+              74
+            ],
+            [
+              133,
+              112,
+              137,
+              116
+            ],
+            [
+              135,
+              98,
+              139,
+              102
+            ],
+            [
+              105,
+              70,
+              109,
+              74
+            ],
+            [
+              137,
+              110,
+              141,
+              114
+            ]
+          ],
+          "writes_sha256": "2aea53d0a186bc09e836116b0e10f55a59da91ac3b22606fe0296a705e679908",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": true,
+          "nonzero_sampled_alpha": 144
+        },
+        {
+          "source_research_id": 1247,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 18,
+          "native_size": [
+            11,
+            2
+          ],
+          "encoded_length": 22,
+          "encoded_sha256": "cf20c37787c059226dfebcad11c974ef64d64ea3478bb61046dfbcaea1c33e3d",
+          "indexed_sha256": "2c26476c44bd943d00f20ab5a810163fe8503e882321bb5ccbb58c012c75c5ad",
+          "opaque": 9,
+          "native_rects": [
+            [
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              2,
+              1
+            ],
+            [
+              3,
+              0,
+              4,
+              1
+            ],
+            [
+              10,
+              0,
+              11,
+              1
+            ],
+            [
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              2,
+              1,
+              3,
+              2
+            ],
+            [
+              7,
+              1,
+              8,
+              2
+            ],
+            [
+              8,
+              1,
+              9,
+              2
+            ],
+            [
+              9,
+              1,
+              10,
+              2
+            ]
+          ],
+          "sample_rects": [
+            [
+              119,
+              116,
+              123,
+              120
+            ],
+            [
+              131,
+              112,
+              135,
+              116
+            ],
+            [
+              135,
+              150,
+              139,
+              154
+            ],
+            [
+              129,
+              156,
+              133,
+              160
+            ],
+            [
+              105,
+              70,
+              109,
+              74
+            ],
+            [
+              133,
+              112,
+              137,
+              116
+            ],
+            [
+              135,
+              98,
+              139,
+              102
+            ],
+            [
+              105,
+              70,
+              109,
+              74
+            ],
+            [
+              137,
+              110,
+              141,
+              114
+            ]
+          ],
+          "writes_sha256": "2aea53d0a186bc09e836116b0e10f55a59da91ac3b22606fe0296a705e679908",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": true,
+          "nonzero_sampled_alpha": 144
+        },
+        {
+          "source_research_id": 1248,
+          "file": "OPENMON3.SS",
+          "file_sha256": "4eca6df7b101b0d0ed02d9867c3c63c013ab2e4809e47ae4750ba4e33402e76a",
+          "ordinal": 19,
+          "native_size": [
+            11,
+            2
+          ],
+          "encoded_length": 22,
+          "encoded_sha256": "cf20c37787c059226dfebcad11c974ef64d64ea3478bb61046dfbcaea1c33e3d",
+          "indexed_sha256": "2c26476c44bd943d00f20ab5a810163fe8503e882321bb5ccbb58c012c75c5ad",
+          "opaque": 9,
+          "native_rects": [
+            [
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              2,
+              1
+            ],
+            [
+              3,
+              0,
+              4,
+              1
+            ],
+            [
+              10,
+              0,
+              11,
+              1
+            ],
+            [
+              1,
+              1,
+              2,
+              2
+            ],
+            [
+              2,
+              1,
+              3,
+              2
+            ],
+            [
+              7,
+              1,
+              8,
+              2
+            ],
+            [
+              8,
+              1,
+              9,
+              2
+            ],
+            [
+              9,
+              1,
+              10,
+              2
+            ]
+          ],
+          "sample_rects": [
+            [
+              119,
+              116,
+              123,
+              120
+            ],
+            [
+              131,
+              112,
+              135,
+              116
+            ],
+            [
+              135,
+              150,
+              139,
+              154
+            ],
+            [
+              129,
+              156,
+              133,
+              160
+            ],
+            [
+              105,
+              70,
+              109,
+              74
+            ],
+            [
+              133,
+              112,
+              137,
+              116
+            ],
+            [
+              135,
+              98,
+              139,
+              102
+            ],
+            [
+              105,
+              70,
+              109,
+              74
+            ],
+            [
+              137,
+              110,
+              141,
+              114
+            ]
+          ],
+          "writes_sha256": "2aea53d0a186bc09e836116b0e10f55a59da91ac3b22606fe0296a705e679908",
+          "asset": "openmon3-poses.png",
+          "asset_sha256": "d3332db373c91fd060aa51eda6a07b7f3c79ae85a8e9f0143b18188289843a42",
+          "material_fragment": true,
+          "nonzero_sampled_alpha": 144
+        }
+      ]
+    },
+    "openfish-poses.png": {
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "sha256": "044e246edab2fd9ae4d68a89a5d62a3f6e1a7e8c706da4c6597134d9ecb35fd1",
+      "bytes": 477270,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "kind": "coherent generated animation sprite sheet",
+      "sampling": "pixel-center nearest neighbor; per-source rectangles; retain original alpha; clip to original native opaque ownership",
+      "generation_prompt": "Use case: stylized-concept. Asset type: ONE transparent animation sprite sheet for a tiny 1994 map animation, thirteen related frames in a regular4 by4 grid.\nImage1 is the exact pose and component-layout reference. White cell numbers are reference labels only and MUST NOT appear in the output. Image2 is the approved fine pixel-art brushwork and color restraint reference only; do not copy its scenery.\nRedraw the small blue-gray and muted golden flying/splashing shapes in Image1 as detailed crisp pixel-art sprites. Preserve all13 frame silhouettes, pose directions, relative component scale and the number and separation of shapes WITHIN EACH CELL. Some frames contain two separated tiny shapes; keep both in the corresponding relative positions and retain the empty span between them. The forms have short blue-gray fin-like extensions and little ochre/gold centers, as shown. Do not replace them with a large standard fish, bird, mammal or water splash. Do not invent additional body parts or objects. Keep each frame's distinct compact shape, including the very small fragment in frame13.\nUse hand-placed fine square pixel clusters, cool blue-gray tips, subdued teal shadows and restrained ochre/gold highlights, coherent across all frames. No glow, blurred upscale, soft antialiasing, smooth painting, photograph or3D. These are intended for a final game display from12 to200 pixels wide depending on frame, so the small forms must stay legible.\nLayout: exactly four columns and four rows. Frames1-13 occupy cells1-13, read row-major; the last three cells must be entirely transparent and empty. One frame per cell. All artwork fully inside its cell with transparent margins; preserve the relative arrangement from Image1. Genuine transparent background. No grid lines, outlines around cells, numbers, captions, lettering, watermark, frame, sea, land, buildings or scenery. One coherent usable sprite sheet.",
+      "generation_tool": "built-in imagegen",
+      "reference_sha256": {
+        "private_native_pose_sheet": "62b83288c614e562af29026857d3855aaaa81a8d18ea27ec60ade748a6fde1ce",
+        "approved_style": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf"
+      },
+      "rights": "AI-generated pixels under RRSAL-1.0; original references private",
+      "raw_PNG_and_alpha_preserved": true,
+      "source_frames": [
+        {
+          "source_research_id": 1112,
+          "file": "OPENFISH.SS",
+          "file_sha256": "ee656204f4800cdd14c79a40894bd5285b6e20e0b41c574fea26c1535ce35f20",
+          "ordinal": 0,
+          "native_size": [
+            12,
+            4
+          ],
+          "encoded_length": 38,
+          "encoded_sha256": "1ed6bd50507cce7a68e9e1a04a8df855c51f3421f9b9c274bc07da322a1a570c",
+          "indexed_sha256": "cb9091fd632bb4f8155e0346df423b361393ffb14fcb4ae41fbbfeb18443f462",
+          "opaque": 24,
+          "native_rects": [
+            [
+              0,
+              0,
+              12,
+              4
+            ]
+          ],
+          "sample_rects": [
+            [
+              71,
+              117,
+              219,
+              176
+            ]
+          ],
+          "writes_sha256": "ddd8e79f55d87d717182b43bb9a344431dba35e313aab3cbc2497bede904a235",
+          "asset": "openfish-poses.png",
+          "asset_sha256": "044e246edab2fd9ae4d68a89a5d62a3f6e1a7e8c706da4c6597134d9ecb35fd1",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 373
+        },
+        {
+          "source_research_id": 1113,
+          "file": "OPENFISH.SS",
+          "file_sha256": "ee656204f4800cdd14c79a40894bd5285b6e20e0b41c574fea26c1535ce35f20",
+          "ordinal": 1,
+          "native_size": [
+            12,
+            8
+          ],
+          "encoded_length": 84,
+          "encoded_sha256": "91a63dc4e1663e65c6b52071d60211bc5913464da5f54285a8193ca41deaf220",
+          "indexed_sha256": "6a257320d7c6dbbde2815cf6aeda784ee56eda81797373dc247375ca97e2866a",
+          "opaque": 46,
+          "native_rects": [
+            [
+              0,
+              0,
+              12,
+              8
+            ]
+          ],
+          "sample_rects": [
+            [
+              394,
+              103,
+              537,
+              203
+            ]
+          ],
+          "writes_sha256": "510f3c3feadd3020f8a9b85d3adca6837f96b1918d6331aae113c0b15032befc",
+          "asset": "openfish-poses.png",
+          "asset_sha256": "044e246edab2fd9ae4d68a89a5d62a3f6e1a7e8c706da4c6597134d9ecb35fd1",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 712
+        },
+        {
+          "source_research_id": 1114,
+          "file": "OPENFISH.SS",
+          "file_sha256": "ee656204f4800cdd14c79a40894bd5285b6e20e0b41c574fea26c1535ce35f20",
+          "ordinal": 2,
+          "native_size": [
+            12,
+            9
+          ],
+          "encoded_length": 97,
+          "encoded_sha256": "d304c05bfb277200f41db756665f024741d80709662a9306fa2ebc4537bae2f0",
+          "indexed_sha256": "a6c13515eb306eb722cc634516b577a6052ae71264d894c10b372dcb17fe2029",
+          "opaque": 50,
+          "native_rects": [
+            [
+              0,
+              0,
+              12,
+              9
+            ]
+          ],
+          "sample_rects": [
+            [
+              686,
+              102,
+              817,
+              208
+            ]
+          ],
+          "writes_sha256": "3433d9e88f7df0750b7bd63ad8774885ac5a6905a5294b830f816b1acdc474cf",
+          "asset": "openfish-poses.png",
+          "asset_sha256": "044e246edab2fd9ae4d68a89a5d62a3f6e1a7e8c706da4c6597134d9ecb35fd1",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 795
+        },
+        {
+          "source_research_id": 1115,
+          "file": "OPENFISH.SS",
+          "file_sha256": "ee656204f4800cdd14c79a40894bd5285b6e20e0b41c574fea26c1535ce35f20",
+          "ordinal": 3,
+          "native_size": [
+            44,
+            10
+          ],
+          "encoded_length": 132,
+          "encoded_sha256": "c2e9ef706ee583d1510dedfd98a121286eae6b7e532551967216046ef9f531ee",
+          "indexed_sha256": "ca08fd7146862eb4ac58afa616fce1feea5cb22a4de5056a6f95bab04dca47bc",
+          "opaque": 71,
+          "native_rects": [
+            [
+              0,
+              0,
+              44,
+              10
+            ]
+          ],
+          "sample_rects": [
+            [
+              952,
+              107,
+              1210,
+              214
+            ]
+          ],
+          "writes_sha256": "df0032e9cc638906f00a7b22a4051185126ff387541cadb431a273b179afbd70",
+          "asset": "openfish-poses.png",
+          "asset_sha256": "044e246edab2fd9ae4d68a89a5d62a3f6e1a7e8c706da4c6597134d9ecb35fd1",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 1030
+        },
+        {
+          "source_research_id": 1116,
+          "file": "OPENFISH.SS",
+          "file_sha256": "ee656204f4800cdd14c79a40894bd5285b6e20e0b41c574fea26c1535ce35f20",
+          "ordinal": 4,
+          "native_size": [
+            46,
+            9
+          ],
+          "encoded_length": 156,
+          "encoded_sha256": "a95216b40f29d6d7131289c72e02a7772677a2a31dbffe4761bcbc3ffc6881b2",
+          "indexed_sha256": "7a949efe1c3ae18d37b8530938814c36ec543be364211bcf67fdda1953a0fb94",
+          "opaque": 87,
+          "native_rects": [
+            [
+              0,
+              0,
+              46,
+              9
+            ]
+          ],
+          "sample_rects": [
+            [
+              81,
+              412,
+              208,
+              494
+            ]
+          ],
+          "writes_sha256": "90399d5baf816bb7348cb7f5fdb8fb71c02e5b6b996ba13487006363d2e22f36",
+          "asset": "openfish-poses.png",
+          "asset_sha256": "044e246edab2fd9ae4d68a89a5d62a3f6e1a7e8c706da4c6597134d9ecb35fd1",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 1235
+        },
+        {
+          "source_research_id": 1117,
+          "file": "OPENFISH.SS",
+          "file_sha256": "ee656204f4800cdd14c79a40894bd5285b6e20e0b41c574fea26c1535ce35f20",
+          "ordinal": 5,
+          "native_size": [
+            50,
+            15
+          ],
+          "encoded_length": 156,
+          "encoded_sha256": "77c5ebf7f3f5093bd2a6d2fb33a703dd08c2f72ac5976f7905408fcc2f9e0b7c",
+          "indexed_sha256": "80b8f9cadc0f65626254635f88e389318eaaa9d08ea970757a9d8b100d8b902a",
+          "opaque": 71,
+          "native_rects": [
+            [
+              0,
+              0,
+              50,
+              15
+            ]
+          ],
+          "sample_rects": [
+            [
+              331,
+              416,
+              585,
+              520
+            ]
+          ],
+          "writes_sha256": "7c1180bf00ac4433f5bfee0cd411fc2416cfb60583c4b2f28a6eeb22b0074cc0",
+          "asset": "openfish-poses.png",
+          "asset_sha256": "044e246edab2fd9ae4d68a89a5d62a3f6e1a7e8c706da4c6597134d9ecb35fd1",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 481
+        },
+        {
+          "source_research_id": 1118,
+          "file": "OPENFISH.SS",
+          "file_sha256": "ee656204f4800cdd14c79a40894bd5285b6e20e0b41c574fea26c1535ce35f20",
+          "ordinal": 6,
+          "native_size": [
+            16,
+            23
+          ],
+          "encoded_length": 150,
+          "encoded_sha256": "7c33f307a5b91bcc134305af5f322d555d8a80f7d56d2b1a421da45847a41ea8",
+          "indexed_sha256": "524fe9d455ac7b1409600faf8b8cdfdb4d9f4fb295d4ba7c65ee1c9e4fc7476f",
+          "opaque": 74,
+          "native_rects": [
+            [
+              0,
+              0,
+              16,
+              23
+            ]
+          ],
+          "sample_rects": [
+            [
+              667,
+              400,
+              903,
+              605
+            ]
+          ],
+          "writes_sha256": "270ca23dede3e8f7424388f3969f3c8056d49117b7262fec71e2600541d5a310",
+          "asset": "openfish-poses.png",
+          "asset_sha256": "044e246edab2fd9ae4d68a89a5d62a3f6e1a7e8c706da4c6597134d9ecb35fd1",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 766
+        },
+        {
+          "source_research_id": 1119,
+          "file": "OPENFISH.SS",
+          "file_sha256": "ee656204f4800cdd14c79a40894bd5285b6e20e0b41c574fea26c1535ce35f20",
+          "ordinal": 7,
+          "native_size": [
+            18,
+            23
+          ],
+          "encoded_length": 196,
+          "encoded_sha256": "6ceeccc464c34dfccc1b648dbc567ad76d22a8c626cc61463290dbe239052ca1",
+          "indexed_sha256": "e2d01c2bda6cc7a71a6870efb1a6b9c3782dd811c0f851cb7c265d6b312ecddd",
+          "opaque": 97,
+          "native_rects": [
+            [
+              0,
+              0,
+              18,
+              23
+            ]
+          ],
+          "sample_rects": [
+            [
+              1014,
+              396,
+              1173,
+              585
+            ]
+          ],
+          "writes_sha256": "a3691d5e7f01084d1a9a373f6f2c93167f1ff03dd3ec342f4ba44b7a34bcceb0",
+          "asset": "openfish-poses.png",
+          "asset_sha256": "044e246edab2fd9ae4d68a89a5d62a3f6e1a7e8c706da4c6597134d9ecb35fd1",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 1516
+        },
+        {
+          "source_research_id": 1120,
+          "file": "OPENFISH.SS",
+          "file_sha256": "ee656204f4800cdd14c79a40894bd5285b6e20e0b41c574fea26c1535ce35f20",
+          "ordinal": 8,
+          "native_size": [
+            22,
+            17
+          ],
+          "encoded_length": 177,
+          "encoded_sha256": "a3cdd834f2613d39515cb098b4363b913f31290cc0247dc4458493e6bd72d714",
+          "indexed_sha256": "b10b02eda733ab322df2e7133af79a63df7fbb313b1ae4ba8984f2e421ace8cf",
+          "opaque": 88,
+          "native_rects": [
+            [
+              0,
+              0,
+              22,
+              17
+            ]
+          ],
+          "sample_rects": [
+            [
+              50,
+              725,
+              252,
+              874
+            ]
+          ],
+          "writes_sha256": "67f8df1065d88dbab11ac9246141c0322aa3ac2a3a0c9c2031c5c26aa00f1221",
+          "asset": "openfish-poses.png",
+          "asset_sha256": "044e246edab2fd9ae4d68a89a5d62a3f6e1a7e8c706da4c6597134d9ecb35fd1",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 1385
+        },
+        {
+          "source_research_id": 1121,
+          "file": "OPENFISH.SS",
+          "file_sha256": "ee656204f4800cdd14c79a40894bd5285b6e20e0b41c574fea26c1535ce35f20",
+          "ordinal": 9,
+          "native_size": [
+            15,
+            12
+          ],
+          "encoded_length": 115,
+          "encoded_sha256": "bcc9272bfd01fea34c8e46973aaff9ad85a8728ba7db80929250cf558a92804b",
+          "indexed_sha256": "550c12e9a45ebb43e32da0b6066473d43325a02416eca810d6b91ea21d894984",
+          "opaque": 57,
+          "native_rects": [
+            [
+              0,
+              0,
+              15,
+              12
+            ]
+          ],
+          "sample_rects": [
+            [
+              401,
+              724,
+              556,
+              840
+            ]
+          ],
+          "writes_sha256": "2218f7bcb6fa407ba245e64cc31971adc267ebe49edaea0ccacdbfdbbad48f6b",
+          "asset": "openfish-poses.png",
+          "asset_sha256": "044e246edab2fd9ae4d68a89a5d62a3f6e1a7e8c706da4c6597134d9ecb35fd1",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 902
+        },
+        {
+          "source_research_id": 1122,
+          "file": "OPENFISH.SS",
+          "file_sha256": "ee656204f4800cdd14c79a40894bd5285b6e20e0b41c574fea26c1535ce35f20",
+          "ordinal": 10,
+          "native_size": [
+            13,
+            11
+          ],
+          "encoded_length": 102,
+          "encoded_sha256": "0b23d173511c1b5c290befffa740b0b1f61f29055d6689209dd439c3b4fac5d8",
+          "indexed_sha256": "18da2bd4f33e0142c57f5714d45340776ccd5b7830ec07fd0868e878293a086e",
+          "opaque": 51,
+          "native_rects": [
+            [
+              0,
+              0,
+              13,
+              11
+            ]
+          ],
+          "sample_rects": [
+            [
+              723,
+              735,
+              860,
+              847
+            ]
+          ],
+          "writes_sha256": "118cdaed39d25cd14de6b441225a02a6ac52573cf8e48ec6c048756c7be2835a",
+          "asset": "openfish-poses.png",
+          "asset_sha256": "044e246edab2fd9ae4d68a89a5d62a3f6e1a7e8c706da4c6597134d9ecb35fd1",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 810
+        },
+        {
+          "source_research_id": 1123,
+          "file": "OPENFISH.SS",
+          "file_sha256": "ee656204f4800cdd14c79a40894bd5285b6e20e0b41c574fea26c1535ce35f20",
+          "ordinal": 11,
+          "native_size": [
+            8,
+            9
+          ],
+          "encoded_length": 60,
+          "encoded_sha256": "3ed6c72198b45c205c5d05be511dd2c1077b95ce3baf74437a7293b3c735b6e2",
+          "indexed_sha256": "32005147240ef476a126d29deb191f1d5dc07ab789d9e62372222ec38ccf102c",
+          "opaque": 25,
+          "native_rects": [
+            [
+              0,
+              0,
+              8,
+              9
+            ]
+          ],
+          "sample_rects": [
+            [
+              1059,
+              735,
+              1141,
+              820
+            ]
+          ],
+          "writes_sha256": "956503d13d447ac4f9d89cddcfd1277d68fd6050039c73dfcec75fa13b8cc9bf",
+          "asset": "openfish-poses.png",
+          "asset_sha256": "044e246edab2fd9ae4d68a89a5d62a3f6e1a7e8c706da4c6597134d9ecb35fd1",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 398
+        },
+        {
+          "source_research_id": 1124,
+          "file": "OPENFISH.SS",
+          "file_sha256": "ee656204f4800cdd14c79a40894bd5285b6e20e0b41c574fea26c1535ce35f20",
+          "ordinal": 12,
+          "native_size": [
+            3,
+            3
+          ],
+          "encoded_length": 13,
+          "encoded_sha256": "7a72016f653c43429f8414c7647b696a67026be8d2a42b3b7f5381c5c033e801",
+          "indexed_sha256": "1c494e6a5e7110890b3f44f1842ab8a0fb628c1eeeb2b824dfdcc879fed5f587",
+          "opaque": 4,
+          "native_rects": [
+            [
+              0,
+              0,
+              3,
+              3
+            ]
+          ],
+          "sample_rects": [
+            [
+              104,
+              1074,
+              144,
+              1113
+            ]
+          ],
+          "writes_sha256": "c2b55e8fb43395d055633d1721f321b5baef266adc6a842a84baa17ddb5a25fd",
+          "asset": "openfish-poses.png",
+          "asset_sha256": "044e246edab2fd9ae4d68a89a5d62a3f6e1a7e8c706da4c6597134d9ecb35fd1",
+          "material_fragment": false,
+          "nonzero_sampled_alpha": 64
+        }
+      ]
     }
   }
 }

@@ -1034,7 +1034,7 @@ func TestHDOpeningCaptionCursorGuards(t *testing.T) {
 }
 
 func TestHDOpeningSpriteSlotSources(t *testing.T) {
-	if len(hdOpeningSpriteDefinitions) != 57 {
+	if len(hdOpeningSpriteDefinitions) != 98 {
 		t.Fatal("source count")
 	}
 	for slot, d := range hdOpeningSpriteDefinitions {
@@ -1977,5 +1977,172 @@ func TestHDFishOpeningResourceGuards(t *testing.T) {
 	}
 	if _, e := full(); e != nil {
 		t.Fatal("全部錯件恢復後必須完整成功", e)
+	}
+}
+
+func r100Root(t *testing.T) string {
+	t.Helper()
+	p := os.Getenv("TEST_R100_ROOT")
+	if p == "" {
+		t.Skip("requires private original R100 source receipts")
+	}
+	return p
+}
+func TestR100SixPartialFishReuse(t *testing.T) {
+	root := r100Root(t)
+	m := golem.New()
+	p, e := loadHDOpeningRuntime(&hdRuntime{m: m}, os.Getenv("TEST_GAME_ROOT"), "/repo/graphics")
+	if e != nil {
+		t.Fatal(e)
+	}
+	type row struct {
+		ID, SourceID, W, H, Alpha, Opaque int
+		RGBA                              []byte
+		Asset                             string
+	}
+	rows := []row{}
+	for i := 57; i < 63; i++ {
+		d := hdOpeningSpriteDefinitions[i]
+		base := hdOpeningSpriteDefinitions[51+i-57]
+		if d.id != 1204+i-57 || d.reuseFish != base.id {
+			t.Fatal("wrong explicit source pair", i)
+		}
+		target := hdOpeningRead(t, fmt.Sprintf("/repo/workplace/reports/goal186-display-hd/hd-full-assets-r49/decoded-public-r3/pixels/%04d.idx", d.id))
+		native := hdOpeningRead(t, fmt.Sprintf("/repo/workplace/reports/goal186-display-hd/hd-full-assets-r49/decoded-public-r3/pixels/%04d.idx", base.id))
+		if len(target) != d.w*d.h || len(native) != base.w*base.h {
+			t.Fatal("native shape")
+		}
+		opaque, alpha := 0, 0
+		for k, v := range target {
+			if v == 253 {
+				continue
+			}
+			opaque++
+			if native[k/d.w*base.w+k%d.w] != v {
+				t.Fatal("inherited native value mismatch", d.id, k)
+			}
+			for y := 0; y < 4; y++ {
+				for x := 0; x < 4; x++ {
+					if p.sprites.art[i].NRGBAAt(k%d.w*4+x, k/d.w*4+y).A > 0 {
+						alpha++
+					}
+				}
+			}
+		}
+		if opaque != d.opaque || alpha == 0 {
+			t.Fatal("missing verified native or art pixels", d.id, opaque, alpha)
+		}
+		rows = append(rows, row{d.id, base.id, d.w, d.h, alpha, opaque, p.sprites.art[i].Pix, d.asset})
+		t.Run(fmt.Sprint(d.id), func(t *testing.T) {
+			if p.sprites.art[i].Bounds() != image.Rect(0, 0, d.w*4, d.h*4) {
+				t.Fatal("sample bounds")
+			}
+		})
+	}
+	raw, e := json.MarshalIndent(rows, "", "  ")
+	if e != nil {
+		t.Fatal(e)
+	}
+	if e = os.WriteFile(filepath.Join(root, "r100-tail-formal-samples-r1.json"), raw, 0644); e != nil {
+		t.Fatal(e)
+	}
+}
+func TestR100SixPartialFishSourceGuards(t *testing.T) {
+	r100Root(t)
+	for slot := 57; slot < 63; slot++ {
+		d := hdOpeningSpriteDefinitions[slot]
+		raw := hdOpeningRead(t, fmt.Sprintf("/repo/workplace/reports/goal186-display-hd/hd-full-assets-r49/decoded-public-r3/pixels/%04d.idx", d.id))
+		for _, name := range []string{"valid", "missing", "duplicate", "wrong-value", "unknown-write", "same-value-revoke"} {
+			t.Run(fmt.Sprintf("%d/%s", d.id, name), func(t *testing.T) {
+				m := golem.New()
+				s := &hdOpeningSpriteRuntime{p: &hdOpeningRuntime{h: &hdRuntime{m: m}}, selected: slot, x: 100, y: 50, active: true}
+				first := -1
+				for k, v := range raw {
+					if v == 253 {
+						continue
+					}
+					if first < 0 {
+						first = k
+					}
+					s.counts[k] = 1
+					s.writes[k] = v
+				}
+				switch name {
+				case "missing":
+					s.counts[first] = 0
+				case "duplicate":
+					s.counts[first] = 2
+				case "wrong-value":
+					s.writes[first] ^= 1
+				case "unknown-write":
+					s.outside = true
+				}
+				before := bytes.Clone(m.Mem)
+				s.finish()
+				if !bytes.Equal(before, m.Mem) {
+					t.Fatal("source guard changed native RAM")
+				}
+				if name == "valid" || name == "same-value-revoke" {
+					if s.accepted != 1 || s.rejected != 0 || !s.nativeValid[slot] {
+						t.Fatal("complete source rejected")
+					}
+					count := 0
+					for k, v := range raw {
+						pos := (50+k/d.w)*320 + 100 + k%d.w
+						if v == 253 {
+							if s.cells[pos].id != 0 {
+								t.Fatal("transparent native cell gained ownership")
+							}
+						} else {
+							if s.cells[pos].id != uint16(d.id) || s.cells[pos].value != v {
+								t.Fatal("wrong source cell")
+							}
+							count++
+						}
+					}
+					if count != d.opaque {
+						t.Fatal("opaque count")
+					}
+					if name == "same-value-revoke" {
+						pos := (50+first/d.w)*320 + 100 + first%d.w
+						v := raw[first]
+						s.write(hdOpeningMain+uint32(pos), v, v)
+						if s.cells[pos].id != 0 || s.same != 1 {
+							t.Fatal("same-value write retained source")
+						}
+					}
+				} else if s.accepted != 0 || s.rejected != 1 || s.nativeValid[slot] {
+					t.Fatal("invalid source accepted")
+				}
+			})
+		}
+	}
+}
+func TestR100FishReuseGuards(t *testing.T) {
+	r100Root(t)
+	d := hdOpeningSpriteDefinitions[57]
+	f := image.NewNRGBA(image.Rect(0, 0, d.artSize.X, d.artSize.Y))
+	cases := []struct {
+		name   string
+		change func(*hdOpeningSpriteDefinition)
+	}{
+		{"unknown-pair", func(x *hdOpeningSpriteDefinition) { x.reuseFish++ }},
+		{"wrong-ordinal", func(x *hdOpeningSpriteDefinition) { x.ordinal++ }},
+		{"larger-than-source", func(x *hdOpeningSpriteDefinition) { x.w = 320 }},
+		{"asset", func(x *hdOpeningSpriteDefinition) { x.asset = "other.png" }},
+		{"art-hash", func(x *hdOpeningSpriteDefinition) { x.artSHA = "bad" }},
+		{"source-file", func(x *hdOpeningSpriteDefinition) { x.sourceFile = "OTHER.SS" }},
+		{"source-hash", func(x *hdOpeningSpriteDefinition) { x.sourceSHA = "bad" }},
+		{"rectangles", func(x *hdOpeningSpriteDefinition) { x.nativeRects = []image.Rectangle{image.Rect(0, 0, 1, 1)} }},
+		{"dimensions", func(x *hdOpeningSpriteDefinition) { x.artSize.X++ }},
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			bad := d
+			c.change(&bad)
+			if _, e := sampleHDOpeningFishFragment(bad, f); e == nil {
+				t.Fatal("unverified sample reuse accepted")
+			}
+		})
 	}
 }

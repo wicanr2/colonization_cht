@@ -246,3 +246,44 @@ func hdOpeningOriginalCell(out *image.RGBA, f draftNativeFrame, pos int) {
 		}
 	}
 }
+
+// R100 READY: reuse the original generated fish pixels at the same source-local
+// positions. Never copy the old world's already-composited background.
+func sampleHDOpeningFishFragment(d hdOpeningSpriteDefinition, im image.Image) (*image.NRGBA, error) {
+	if d.id < 1204 || d.id > 1209 || d.reuseFish != d.id-7 || d.ordinal != d.id-1197 ||
+		len(d.nativeRects) != 0 || len(d.artRects) != 0 {
+		return nil, fmt.Errorf("fish fragment source pair")
+	}
+	var f hdOpeningFishDefinition
+	var base hdOpeningSpriteDefinition
+	for _, p := range hdOpeningFishDefinitions {
+		if p.id == d.reuseFish {
+			f = p
+		}
+	}
+	for _, p := range hdOpeningSpriteDefinitions {
+		if p.id == d.reuseFish {
+			base = p
+		}
+	}
+	if f.id == 0 || base.id == 0 || d.w <= 0 || d.h <= 0 || d.w > base.w || d.h > base.h ||
+		d.asset != base.asset || d.artSHA != base.artSHA || d.artSize != base.artSize ||
+		d.sourceFile != base.sourceFile || d.sourceSHA != base.sourceSHA ||
+		im.Bounds() != image.Rect(0, 0, d.artSize.X, d.artSize.Y) ||
+		f.world.Empty() || f.raw.Empty() || !f.raw.In(im.Bounds()) {
+		return nil, fmt.Errorf("fish fragment inherited art")
+	}
+	dst := image.NewNRGBA(image.Rect(0, 0, d.w*4, d.h*4))
+	origin := f.anchor.Sub(f.world.Min).Mul(4)
+	if !image.Rect(origin.X, origin.Y, origin.X+d.w*4, origin.Y+d.h*4).In(image.Rect(0, 0, f.world.Dx()*4, f.world.Dy()*4)) {
+		return nil, fmt.Errorf("fish fragment bounds")
+	}
+	for y := 0; y < d.h*4; y++ {
+		for x := 0; x < d.w*4; x++ {
+			sx := f.raw.Min.X + (2*(origin.X+x)+1)*f.raw.Dx()/(f.world.Dx()*8)
+			sy := f.raw.Min.Y + (2*(origin.Y+y)+1)*f.raw.Dy()/(f.world.Dy()*8)
+			dst.SetNRGBA(x, y, color.NRGBAModel.Convert(im.At(sx, sy)).(color.NRGBA))
+		}
+	}
+	return dst, nil
+}

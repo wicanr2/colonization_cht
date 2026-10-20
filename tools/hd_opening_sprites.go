@@ -14,6 +14,7 @@ import (
 )
 
 type hdOpeningSpriteDefinition struct {
+	reuseFish                                                   int
 	ordinal, id, w, h, encodedLen, opaque                       int
 	sourceFile, sourceSHA, encodedSHA, writesSHA, asset, artSHA string
 	artSize                                                     image.Point
@@ -27,9 +28,9 @@ type hdOpeningSpriteCell struct {
 type hdOpeningSpriteRuntime struct {
 	fish                                                              *hdOpeningFishRuntime
 	p                                                                 *hdOpeningRuntime
-	art                                                               [57]*image.NRGBA
-	native                                                            [57][1716]byte
-	nativeValid                                                       [57]bool
+	art                                                               [98]*image.NRGBA
+	native                                                            [98][1716]byte
+	nativeValid                                                       [98]bool
 	cells, published                                                  [64000]hdOpeningSpriteCell
 	pictures                                                          [64000]hdOpeningCell
 	active, outside                                                   bool
@@ -50,7 +51,7 @@ var hdOpeningSpriteWriterCodes = map[uint16][]byte{
 
 func loadHDOpeningSprites(p *hdOpeningRuntime, game, directory string) (*hdOpeningSpriteRuntime, error) {
 	s := &hdOpeningSpriteRuntime{p: p}
-	if len(hdOpeningSpriteDefinitions) != 57 {
+	if len(hdOpeningSpriteDefinitions) != 98 {
 		return nil, fmt.Errorf("opening sprite definition count")
 	}
 	seen := map[string]bool{}
@@ -97,6 +98,12 @@ func loadHDOpeningSprites(p *hdOpeningRuntime, game, directory string) (*hdOpeni
 				}
 			}
 		}
+		if d.reuseFish != 0 {
+			dst, e = sampleHDOpeningFishFragment(d, im)
+			if e != nil {
+				return nil, e
+			}
+		}
 		s.art[i] = dst
 	}
 	var fishErr error
@@ -139,7 +146,7 @@ func (s *hdOpeningSpriteRuntime) beforeInstruction() {
 		return
 	}
 	ordinal := int(c.R[golem.AX]&0x7fff) - 1
-	if ordinal < 0 || ordinal >= 15 {
+	if ordinal < 0 || ordinal >= 20 {
 		return
 	}
 	stack, ok := hdOpeningSpriteWords(m, c.Seg[golem.SS], c.R[golem.SP], 5)
@@ -383,6 +390,10 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 	windFrames := [10]int{}
 	smokeFrames := [11]int{}
 	fishFrames := [21]int{}
+	fragmentFrames := [6]int{}
+	markerFrames := [2]int{}
+	extraFishFrames := [20]int{}
+	smallFishFrames := [13]int{}
 	for pos := 0; pos < 64000; pos++ {
 		if !image.Pt(pos%320, pos/320).In(bounds) {
 			continue
@@ -454,8 +465,16 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 			sunFrames[slot-8]++
 		} else if slot < 25 {
 			windFrames[slot-15]++
-		} else {
+		} else if slot < 36 {
 			smokeFrames[slot-25]++
+		} else if slot >= 57 && slot < 63 {
+			fragmentFrames[slot-57]++
+		} else if slot >= 63 && slot < 65 {
+			markerFrames[slot-63]++
+		} else if slot >= 65 && slot < 85 {
+			extraFishFrames[slot-65]++
+		} else if slot >= 85 && slot < 98 {
+			smallFishFrames[slot-85]++
 		}
 		spriteMask[pos>>3] |= 1 << uint(pos&7)
 	}
@@ -468,6 +487,10 @@ func (s *hdOpeningSpriteRuntime) paintWithin(out *image.RGBA, f draftNativeFrame
 	r["wind_frames"] = windFrames
 	r["smoke_frames"] = smokeFrames
 	r["fish_frames"] = fishFrames
+	r["fragment_frames"] = fragmentFrames
+	r["fish_marker_frames"] = markerFrames
+	r["extra_fish_frames"] = extraFishFrames
+	r["small_fish_frames"] = smallFishFrames
 	poseID := 0
 	if fishPose.valid {
 		poseID = 1182 + fishPose.slot
@@ -489,6 +512,18 @@ func hdOpeningSpriteSlot(id uint16) (int, bool) {
 	}
 	if id >= 1182 && id <= 1202 {
 		return int(id-1182) + 36, true
+	}
+	if id >= 1204 && id <= 1209 {
+		return int(id-1204) + 57, true
+	}
+	if id >= 1211 && id <= 1212 {
+		return int(id-1211) + 63, true
+	}
+	if id >= 1229 && id <= 1248 {
+		return int(id-1229) + 65, true
+	}
+	if id >= 1112 && id <= 1124 {
+		return int(id-1112) + 85, true
 	}
 	return 0, false
 }
