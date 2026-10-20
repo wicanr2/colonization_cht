@@ -1068,3 +1068,11 @@ COLONY00.SAV由原版正常寫入，指紋仍為
 本機來源與量測入口位於既有hd-opening-animation-sources-r84工作根的r120-soldier-evidence-r1/gui.soldier-source.json，SHA-256為f918305b821fac28a5679fc739490cfeba674c1313e4c3ba9c1634638c9e33cf。正常輸入與基準狀態見r120-soldier-baseline-r1及規格069 R98的GUI5收據；原版資料維持本機。
 
 R120來源核對補充：印字完成後，正文安全區有427個人物後畫點，其中54個原屬文字墨跡。427點均有完整MSS1來源及原生值證明；native_occluded_pixels只計54個文字點。來源檢查收據為r120-source-overlap-check-r1.json，仍不接受來源以外的改動。
+
+### R120士兵教學正文限定CONFORMED
+
+四語完整正文均以各地區Noto 30px顯示於左側欄，原版與HD兩模式及四語人物游標往返共16張實拍，另2張英文，合計18張事件實拍通過。當次43張實拍的1280乘800遊戲區與X11相同，正常關頁後士兵來源歸零。36個來源、幾何、色盤、VGA及同值未知寫入反例回退；英文單元畫面保持。當次正常輸入的原版控制組與正式GUI之CPU、完整RAM、VGA、DAC及終點相同。
+
+正式aaffdd177b9da1ff1c52f3e34b2f0a34763d58cdcf49ded805a660974c04749e通過建置與go vet，程式提交4fefd3acd8446c0cf18eb771c3765f41b3102cfb。沿用328個語言資源與既有譯稿，沒有新字模或資料格式。HD圖像來源與既有原圖不變。
+
+收據入口為既有hd-opening-animation-sources-r84工作根的r120-display-close-final.json、r120-soldier-gui-final-check-r1.json、r120-soldier-unit-display-r4/check.json及r120-soldier-control-r1/check.json。此限定驗收只補士兵教學欄位；缺少可驗的完整人物來源時仍回原文，未將其他情境、完整五語或全量HD標為完成。

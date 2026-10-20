@@ -1,10 +1,10 @@
 {
   "kind": "README actual development screenshots",
   "date": "2026-10-20",
-  "code_commit": "a7b92a9e2c337eb0b872e0a8eebb4b3a0dce3888",
-  "binary_sha256": "6317097cf26c0b3716f1ee9271dab69795f29a1b15a023ae703c3f49fa206667",
-  "formal_binary_sha256": "6317097cf26c0b3716f1ee9271dab69795f29a1b15a023ae703c3f49fa206667",
-  "source_build_sha256": "1d29c98ab9ac99adf38c81d5884462cbc95590f301a359e6f980f00cb88f06d1",
+  "code_commit": "4fefd3acd8446c0cf18eb771c3765f41b3102cfb",
+  "binary_sha256": "aaffdd177b9da1ff1c52f3e34b2f0a34763d58cdcf49ded805a660974c04749e",
+  "formal_binary_sha256": "aaffdd177b9da1ff1c52f3e34b2f0a34763d58cdcf49ded805a660974c04749e",
+  "source_build_sha256": "4e1061984900111afde82e1fa22d75f0deebb7a5c967018b7b4dc819d02de1cc",
   "released_version_unchanged": "v.1.0.3-20261010",
   "formal_hd_assets": 382,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
@@ -1043,7 +1043,7 @@
     },
     {
       "file": "hd-soldier-guide.png",
-      "sha256": "c39bf99e45093c3315cb23913bd3304b6c4eb27b79680ef1a2b7d545e8fe1e33",
+      "sha256": "1c482ccf238013194340ce5e9f04a6ca7166343657382c6d46074a0e4ca38ae7",
       "size": [
         1280,
         800
@@ -1051,40 +1051,45 @@
       "scene": "soldier-guide-figure",
       "language": "zh-Hant",
       "graphics": "hd",
-      "step": 258000000,
-      "code_commit": "73b5825",
-      "binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
-      "formal_binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
-      "formal_hd_assets": 316,
-      "source_conformed_assets": 316,
-      "source_receipt": "workplace/reports/goal186-display-hd/hd-dialog-figures-r98/r98-mss-formal-gui-r5/gui.display-094.png",
-      "source_state_check_sha256": "37ed21bdefef61c61875d6013b683e1edd50812bcf00af8f247b23741162f60c",
-      "independent_pixels_sha256": "cc57b1644007f5e36c2aa3a129d5ac4f7b944f30932e6c6fd796d8d170896981",
-      "source_gui_check_sha256": "cc57b1644007f5e36c2aa3a129d5ac4f7b944f30932e6c6fd796d8d170896981",
-      "source_replay_check_sha256": "18742d07c6bfe02a6ca41fe48a4fd09fac1d8b647f73b267281a30739f61b9ca",
-      "source_build_sha256": "cc02d66abf153ec8dc77b87404480daceb520a66ec6a67452f0418209ec67fe0",
-      "graphics_manifest_sha256": "b2cff76717ebcd1bbdc9568a9c9a7dc3107edb945fc5511791dd08bea41bd10e",
-      "source_index_sha256": "467e97fc817b5f1277ba48016e85dd493af4fb7da1164868b2fb3d2e14562605",
-      "source_kind": "正式視窗原樣實拍；新人物全部可見RGBA及完整X11已核對",
+      "step": 253800000,
+      "code_commit": "4fefd3acd8446c0cf18eb771c3765f41b3102cfb",
+      "binary_sha256": "aaffdd177b9da1ff1c52f3e34b2f0a34763d58cdcf49ded805a660974c04749e",
+      "formal_binary_sha256": "aaffdd177b9da1ff1c52f3e34b2f0a34763d58cdcf49ded805a660974c04749e",
+      "formal_hd_assets": 382,
+      "formal_source_bindings": 941,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r120-soldier-gui-r1/gui.display-094.png",
+      "source_x11_receipt": "workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r120-soldier-gui-r1/event-1061-zh-Hant-hd.x11.png",
+      "source_x11_sha256": "b3a79c454b0b91b11c99a36a25c599fc866b90cff845a7bbfa50c9a2e34022dc",
+      "source_build_sha256": "4e1061984900111afde82e1fa22d75f0deebb7a5c967018b7b4dc819d02de1cc",
+      "source_gui_check_sha256": "fef44f716fc416be70ca11bec2807dad4bdf935a014d94dae465c32c01d6a169",
+      "source_replay_check_sha256": "d9b4e52eaeb8c872b6216c0c9e6c26714415fc1c150bd7ac8ca213802e990fe2",
+      "graphics_manifest_sha256": "b3fb4721b99d7157ac7bacced416b226c1232342350d6c56ad983b5f445232db",
+      "source_kind": "當前正式程式的正常讀檔及X11操作實拍；原PNG與同次X11遊戲區逐點相同",
       "capture_pixels_unchanged": true,
-      "spec_state": "CONFORMED",
-      "conformance_sha256": "c859a1d5cf61804ecc5e98ab786ce913ec810503c33f0008c8edc63916d8af4a",
-      "verified_counts": {
-        "independent_new_component_RGBA_pixels": 70864,
-        "independent_full_world_RGBA_pixels": 0,
-        "X11_RGBA_pixels": 1024000
-      },
-      "scope": "士兵Main人物全部可見RGBA、43張X11、五語設定雙模式及四語游標往返、42原版點及78筆三側狀態／WAV／存檔限定通過。正文依守門回退原版英文，不授予新翻譯或完整世界RGBA、全量HD信用。",
-      "cohort_verified_counts": {
-        "independent_visible_new_component_RGBA_pixels": 915984,
-        "source_GUI_samples": 18,
-        "total_GUI_samples": 43
-      },
+      "spec_state": "CONFORMED scoped tutorial body",
       "source_research_ids": [
         1061
       ],
-      "actual_body_language": "en",
-      "new_multilingual_body_credit": false
+      "actual_body_language": "zh-Hant",
+      "new_multilingual_body_credit": true,
+      "body_font_px": 30,
+      "layout_safe": {
+        "Min": {
+          "X": 42,
+          "Y": 86
+        },
+        "Max": {
+          "X": 208,
+          "Y": 190
+        }
+      },
+      "verified_counts": {
+        "X11_game_area_pixels": 1024000,
+        "CJK_body_fields": 4,
+        "event_captures": 18,
+        "source_guard_rejections": 36
+      },
+      "scope": "只新增士兵教學正文的四語Noto限定驗收。人物HD來源保持原驗收範圍；其他31張圖片與各自歷史證據保持，沒有新增音訊、存檔、全量HD或完整五語聲明。"
     },
     {
       "file": "hd-indian-adviser-zh.png",
@@ -1159,7 +1164,7 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "只更新三張繁中HD事件實拍。每張與當次X11遊戲區相同，原PNG直接複製；既有來源的歷史CONFORMED證據保存在previous_gold_event_captures，其餘29張與各自來源保持。",
+  "provenance_scope": "本次只更新士兵教學實拍，直接複製當次原PNG。其他31張及三張金色事件實拍的來源保持，舊士兵英文正文證據保存在previous_soldier_english_capture。",
   "graphics_manifest_sha256": "b3fb4721b99d7157ac7bacced416b226c1232342350d6c56ad983b5f445232db",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
@@ -1210,7 +1215,7 @@
     "graphics_manifest_sha256": "c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7",
     "conformance_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5"
   },
-  "verification_build_sha256": "84689dcbfc0bf408f715a22364c9a49133125856e550c07a0eb9ac47a98217ba",
+  "verification_build_sha256": "723ef638e5f241b984616eb0ca374df1eb23160d1664dda5e2e272057f7dc7e0",
   "production_go_sources_equal_to_verified_build": true,
   "previous_scene_background_capture": {
     "code_commit": "dbfc95fc2b98654f9f4cf3d0abac946730bfbfce",
@@ -1352,7 +1357,7 @@
     },
     "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb"
   },
-  "conformance_state": "R119三張金色事件標題實際視窗DISPLAY-PASS；既有圖像來源與其餘29張圖片保留原驗收範圍",
+  "conformance_state": "R120士兵教學四語正文限定CONFORMED；其他31張圖片沿各自來源範圍",
   "previous_opening_sun_capture": {
     "capture": {
       "file": "hd-opening-zh.png",
@@ -1687,5 +1692,59 @@
       "source_index_sha256": "ff89f585def6db40275f1e968896ec6515a0208862e1a2d027fdc734bb920bfb",
       "seed_sha256": "5ce73c9f1f16c7da72fa2d988e55380a900535e01c0b616ffe274d92c351a58e"
     }
-  ]
+  ],
+  "previous_soldier_english_capture": {
+    "file": "hd-soldier-guide.png",
+    "sha256": "c39bf99e45093c3315cb23913bd3304b6c4eb27b79680ef1a2b7d545e8fe1e33",
+    "size": [
+      1280,
+      800
+    ],
+    "scene": "soldier-guide-figure",
+    "language": "zh-Hant",
+    "graphics": "hd",
+    "step": 258000000,
+    "code_commit": "73b5825",
+    "binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
+    "formal_binary_sha256": "bdea4aafa6c0537fd031cb24e20d86892ba41fdafde6f7c21c5626d3b52e6e70",
+    "formal_hd_assets": 316,
+    "source_conformed_assets": 316,
+    "source_receipt": "workplace/reports/goal186-display-hd/hd-dialog-figures-r98/r98-mss-formal-gui-r5/gui.display-094.png",
+    "source_state_check_sha256": "37ed21bdefef61c61875d6013b683e1edd50812bcf00af8f247b23741162f60c",
+    "independent_pixels_sha256": "cc57b1644007f5e36c2aa3a129d5ac4f7b944f30932e6c6fd796d8d170896981",
+    "source_gui_check_sha256": "cc57b1644007f5e36c2aa3a129d5ac4f7b944f30932e6c6fd796d8d170896981",
+    "source_replay_check_sha256": "18742d07c6bfe02a6ca41fe48a4fd09fac1d8b647f73b267281a30739f61b9ca",
+    "source_build_sha256": "cc02d66abf153ec8dc77b87404480daceb520a66ec6a67452f0418209ec67fe0",
+    "graphics_manifest_sha256": "b2cff76717ebcd1bbdc9568a9c9a7dc3107edb945fc5511791dd08bea41bd10e",
+    "source_index_sha256": "467e97fc817b5f1277ba48016e85dd493af4fb7da1164868b2fb3d2e14562605",
+    "source_kind": "正式視窗原樣實拍；新人物全部可見RGBA及完整X11已核對",
+    "capture_pixels_unchanged": true,
+    "spec_state": "CONFORMED",
+    "conformance_sha256": "c859a1d5cf61804ecc5e98ab786ce913ec810503c33f0008c8edc63916d8af4a",
+    "verified_counts": {
+      "independent_new_component_RGBA_pixels": 70864,
+      "independent_full_world_RGBA_pixels": 0,
+      "X11_RGBA_pixels": 1024000
+    },
+    "scope": "士兵Main人物全部可見RGBA、43張X11、五語設定雙模式及四語游標往返、42原版點及78筆三側狀態／WAV／存檔限定通過。正文依守門回退原版英文，不授予新翻譯或完整世界RGBA、全量HD信用。",
+    "cohort_verified_counts": {
+      "independent_visible_new_component_RGBA_pixels": 915984,
+      "source_GUI_samples": 18,
+      "total_GUI_samples": 43
+    },
+    "source_research_ids": [
+      1061
+    ],
+    "actual_body_language": "en",
+    "new_multilingual_body_credit": false
+  },
+  "previous_soldier_capture_header": {
+    "code_commit": "a7b92a9e2c337eb0b872e0a8eebb4b3a0dce3888",
+    "binary_sha256": "6317097cf26c0b3716f1ee9271dab69795f29a1b15a023ae703c3f49fa206667",
+    "formal_binary_sha256": "6317097cf26c0b3716f1ee9271dab69795f29a1b15a023ae703c3f49fa206667",
+    "source_build_sha256": "1d29c98ab9ac99adf38c81d5884462cbc95590f301a359e6f980f00cb88f06d1",
+    "verification_build_sha256": "84689dcbfc0bf408f715a22364c9a49133125856e550c07a0eb9ac47a98217ba",
+    "conformance_state": "R119三張金色事件標題實際視窗DISPLAY-PASS；既有圖像來源與其餘29張圖片保留原驗收範圍",
+    "provenance_scope": "只更新三張繁中HD事件實拍。每張與當次X11遊戲區相同，原PNG直接複製；既有來源的歷史CONFORMED證據保存在previous_gold_event_captures，其餘29張與各自來源保持。"
+  }
 }
