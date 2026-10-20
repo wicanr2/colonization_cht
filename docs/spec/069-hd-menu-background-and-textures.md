@@ -3162,3 +3162,16 @@ CC-00.SS至CC-24.SS的二十五位人物均以正式來源選擇、當次回傳�
 正式程式SHA-256：4a8bdaf6ff25a73ff676e0e4cda4fde48bd8b9af24af37e6d8435512ca7a6bae。建置與go vet、完整HD載入及345檔封裝指紋通過。本機收據為既有hd-opening-animation-sources-r84工作根的r107-formal-display-r2/check.json，SHA-256：d4901b267e8ddabe5b563806f0bf76e5be301c0b26c12682888562549f5a1a35。
 
 R107目視修正：生成原圖的實際列高略有不同。取樣行界改依原圖明定，前兩張為0／430／840／1254，第三張為0／450／860／1254，避免納入上一列的腳部或下一列的頭部。原PNG保持原樣。
+
+### R108原住民領袖三十三來源READY
+
+IND0A0.SS至IND7A3.SS的三十三個非空來源958至990，包含IND2A0.SS的兩幀，沿用R105／R107完整SS來源、Main畫布、alpha、content及當次回傳點契約。四張原PNG／alpha、逐來源指紋、原生內容外接矩形、逐格圖集取樣及色盤投影記於graphics/manifest.json。三十三個既有呼叫鍵互不相同；沿用唯一來源選擇，不猜測檔名或人物身份。
+
+- 同一人物的姿勢、表情、服裝與持物依既有來源重繪，原版位置、透明遮罩、動畫及規則保持。圖集取樣行界依原圖透明間隙量測，避免相鄰格片段。
+- 正式scene來源總數104。驗收採完整來源fixture接線及測試畫面顯示，明示提供寫入，不新增正常玩家路徑或原版精確對拍聲明。
+
+### R108領袖顯示通過
+
+IND0A0.SS至IND7A3.SS的三十三個領袖來源均以正式來源選擇、當次回傳點、完整來源finish及HD繪圖介面在測試畫面顯示，目視確認。記為DISPLAY-PASS，fixture提供原生寫入，不新增正常玩家路徑或原版精確對拍聲明。
+
+正式程式SHA-256：bb7ee7de819e66e589abfa114e08c6e9ec56a60f1ee8a238ea36e2ac5b6cd69d。建置與go vet、完整HD載入及349檔封裝指紋通過。本機收據為既有hd-opening-animation-sources-r84工作根的r108-formal-display-r1/check.json，SHA-256：eac324afb47c342bc8117d0500402784f453f8eea51c62cfb4624942fa213e47。

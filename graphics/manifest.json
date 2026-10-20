@@ -31630,6 +31630,1721 @@
           "writes_sha256": "38ea4e7e81befc2291a77096bd57e3c18c6f322a5634ddd7a58c28f7d05cf530"
         }
       ]
+    },
+    "portraits-leaders-1.png": {
+      "sha256": "b5d7472d8a503408f0b4d269f46710fdedcbf7c99f7e9056415dea20397265dd",
+      "bytes": 1056053,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE original refined fine pixel-art character sprite atlas for the Colonization (1994) HD display layer. Image1 is the exact character, costume and pose reference. Repaint every adult Indigenous character faithfully, preserving distinct faces, age, build, expressions, skin tones, clothing, headdresses, jewelry, weapons, props, gestures and all silhouettes. Do not invent new cultural details or change the reference design. Match all poses individually while keeping the same character consistent across their consecutive gestures. Render fresh crisp fine intentional pixel clusters with readable facial features, cloth, leather, feathers, metal and restrained natural highlights. Image2 is approved pixel-art STYLE ONLY; do not copy its scenery, buildings or composition. Square transparent-background canvas with exactly THREE equal rows and THREE equal columns. One full figure centered and fully contained within each occupied cell, with clear transparent margins and no overlap. Remove all magenta reference background and black labels. Clean straight alpha outside figures and inside all gaps. No scenery, ground plane, grid, borders, captions, text, numbers, watermark, added props, blur, smooth painting, photography or3D.\nThis batch has NINE occupied cells in reading order. Cells1-4 show the SAME brown-tunic character with broad brown headdress, layered white necklaces, gold-trimmed hem and white skirt underlayer: relaxed arms, hand on hip, raised index finger, and shield plus raised club. Cells5-8 show the SAME blue-caped male leader with gold headgear and tall dark teal feathers, a staff/spear, gold leg ornaments and sandals: preserve each expression and final raised horizontal weapon pose. Cell9 shows a different adult male with tall gold/yellow feather headdress, bead necklace, white loincloth and bare feet, arms lowered. Keep the costumes and poses exactly as reference, all9 cells occupied.",
+      "generation_file": "exec-11e5f074-d1dc-4781-a6e0-b801e6fe8ff4.png",
+      "reference_sha256": "47e29f54d601a8702383998182e9f4e6474255e4ed8e877b6798c963c3d8cee6",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "column_row_boundaries": {
+        "0": [
+          0,
+          421,
+          836,
+          1254
+        ],
+        "1": [
+          0,
+          421,
+          836,
+          1254
+        ],
+        "2": [
+          0,
+          421,
+          836,
+          1254
+        ]
+      },
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 958,
+          "file": "IND0A0.SS",
+          "file_sha256": "41d1520a5b387811877003bb912b19b0ce058e070c2a3163e8348d45046e3b08",
+          "ordinal": 0,
+          "size": [
+            66,
+            160
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 7059,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "e36d7b639b1d20dfca0139966bca0ac35f1d7e315c3f1eb71d728b0176e14bfe",
+          "indexed_sha256": "abe6bfdcc29a60ab4671a7754ffd479d61bbd478a05b8e182c3fbd470ec388a1",
+          "opaque_pixels": 6431,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 958,
+          "asset": "portraits-leaders-1.png",
+          "sample": [
+            138,
+            37,
+            285,
+            421
+          ],
+          "content": [
+            0,
+            0,
+            65,
+            160
+          ],
+          "art_sha256": "b5d7472d8a503408f0b4d269f46710fdedcbf7c99f7e9056415dea20397265dd",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "027d726e53cf3dc335a3a24824d6a7315aba145c87bb9bbd1a61c9f443e77670",
+          "palette_sha256": "6ae243969c299560226b1062b0563413f5bd2ec01ffee3ac31dfad589304707e",
+          "writes_sha256": "9fae1b54480897c4750422de95ba4f694d148e2f14baafe353ecb2cbf8ede106"
+        },
+        {
+          "research_id": 959,
+          "file": "IND0A1.SS",
+          "file_sha256": "dc35523c99a0e87ad27290f3a1aa45cf1b9702fc882216c475235ce70a42e31d",
+          "ordinal": 0,
+          "size": [
+            80,
+            159
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 7085,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "5ae92cd93424e7311dea7d7fe1b05c7a4b428cf6dd2c45a4fac0a5a30cd76798",
+          "indexed_sha256": "17dcafc0380ed4c9b6207f2988a7cd7d5acb2e80817f273c340c07fe0c1acdc7",
+          "opaque_pixels": 6412,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 959,
+          "asset": "portraits-leaders-1.png",
+          "sample": [
+            526,
+            37,
+            706,
+            421
+          ],
+          "content": [
+            1,
+            0,
+            79,
+            159
+          ],
+          "art_sha256": "b5d7472d8a503408f0b4d269f46710fdedcbf7c99f7e9056415dea20397265dd",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "951868f911c9779ab2a3c29496d0c5cda42b8c0381aab168d4887a0a5155aad9",
+          "palette_sha256": "34c6dffe86b1179e3a80180300c1a814b97c23fb433549a3af1dc22fedf73e10",
+          "writes_sha256": "409da6eacf676c1729411648de8087a4c54fa5016b3ed97746f3838258ac338e"
+        },
+        {
+          "research_id": 960,
+          "file": "IND0A2.SS",
+          "file_sha256": "cabb1af7d256d97ee6496564be7cc209f64802db262514d771c129aa7234cc88",
+          "ordinal": 0,
+          "size": [
+            85,
+            159
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 7033,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "24f9bab09b167179e0a4ee17b09557f2c159b6df45ebc592779e0a49230901d1",
+          "indexed_sha256": "7849822b4fc1222510f330692f123020c6d7a7a83a623fa0fb6daa8b23ec8c28",
+          "opaque_pixels": 6230,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 960,
+          "asset": "portraits-leaders-1.png",
+          "sample": [
+            929,
+            37,
+            1125,
+            421
+          ],
+          "content": [
+            0,
+            0,
+            80,
+            159
+          ],
+          "art_sha256": "b5d7472d8a503408f0b4d269f46710fdedcbf7c99f7e9056415dea20397265dd",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "56ec5ba0f09fc15306baad9f3931781fafc7eee2c6b2c1e84f992d06e6ab188d",
+          "palette_sha256": "34c6dffe86b1179e3a80180300c1a814b97c23fb433549a3af1dc22fedf73e10",
+          "writes_sha256": "8ffacfc2561cce51afd176abf9c35c47069c42cbffb43d29e65ab1adb08be0e2"
+        },
+        {
+          "research_id": 961,
+          "file": "IND0A3.SS",
+          "file_sha256": "4c664ab74e0e22469cb445acbd6d950f65cda40ad44e7a72d06c87a7318e3aca",
+          "ordinal": 0,
+          "size": [
+            102,
+            174
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 8167,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "aa7e88062a2a11e71d5d19453737c46783ac206fb0896e1c5eed7f856f4765d1",
+          "indexed_sha256": "2bd6d5875f69487258d4399edbfa742e250fd24a89996d9c5e9cd6f1d1cd2f74",
+          "opaque_pixels": 7697,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 961,
+          "asset": "portraits-leaders-1.png",
+          "sample": [
+            96,
+            438,
+            329,
+            832
+          ],
+          "content": [
+            0,
+            0,
+            96,
+            174
+          ],
+          "art_sha256": "b5d7472d8a503408f0b4d269f46710fdedcbf7c99f7e9056415dea20397265dd",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "294ad1413acda8df42e5f0fa21f893f34879134d2c0a077a6ff97d802a3f981a",
+          "palette_sha256": "e01849b3cd647f26d1fd53d6238404ff170401cc0fabff9c611f4cd90b472c02",
+          "writes_sha256": "de63f7bb923f1e9f62ad22abff1165a8526c3ae0abcaa2531dbc73fdd0931c4b"
+        },
+        {
+          "research_id": 962,
+          "file": "IND1A0.SS",
+          "file_sha256": "bd15bcbb01f95623a7fdc034e1ebbd8d5438d7543bc34123ec5f9065292e9be4",
+          "ordinal": 0,
+          "size": [
+            68,
+            177
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 8602,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "21f9ab84142f3a18776baffc34948d751d2723a9d1ec80d5852327b36cc10491",
+          "indexed_sha256": "ebefaccacf7fc10182c95a821dea6ea1279fb8b1e525f82bc8e31fa87cdb9c78",
+          "opaque_pixels": 7828,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 962,
+          "asset": "portraits-leaders-1.png",
+          "sample": [
+            549,
+            432,
+            714,
+            832
+          ],
+          "content": [
+            0,
+            0,
+            68,
+            177
+          ],
+          "art_sha256": "b5d7472d8a503408f0b4d269f46710fdedcbf7c99f7e9056415dea20397265dd",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "7f18ad3f46ca09c51e5350c7ba02bdd9a394da22114f3ba8fa7c050454f1023d",
+          "palette_sha256": "f0e595a5f192fdb8211a8df8661d18296227d6741a94e622abf3d7b5af9cb3e5",
+          "writes_sha256": "d4539af2327ae07f4fbd2c58dca2bb674af68eac53147fdbd7de6c8758d94029"
+        },
+        {
+          "research_id": 963,
+          "file": "IND1A1.SS",
+          "file_sha256": "49f02580fdf81402b7f774d32f4667b684833b415f0353267a2d6d1e2b691107",
+          "ordinal": 0,
+          "size": [
+            68,
+            177
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 8605,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "d7e606dc8364c761887638d953a62a8e69a5c167b87e1ffb2f1dd25cb097a27d",
+          "indexed_sha256": "d7ae26e7604059191e69651c3b546a5c588764d1c91121b36556148707a71b3e",
+          "opaque_pixels": 7828,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 963,
+          "asset": "portraits-leaders-1.png",
+          "sample": [
+            961,
+            432,
+            1123,
+            832
+          ],
+          "content": [
+            0,
+            0,
+            68,
+            177
+          ],
+          "art_sha256": "b5d7472d8a503408f0b4d269f46710fdedcbf7c99f7e9056415dea20397265dd",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "e31ab5c30f05ae199aaf2f71f9c8de5749e4ed6099ddcc2c317cd24a09a8608b",
+          "palette_sha256": "f0e595a5f192fdb8211a8df8661d18296227d6741a94e622abf3d7b5af9cb3e5",
+          "writes_sha256": "f1ccd06f4fa86051e555d5e89055d4cf39e5947cbd0683b54c85ac3a17cf2705"
+        },
+        {
+          "research_id": 964,
+          "file": "IND1A2.SS",
+          "file_sha256": "997578d145f27f9a4b8bd4ad666500b8a8b6446e394f4f329218c135ef575641",
+          "ordinal": 0,
+          "size": [
+            94,
+            177
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 8657,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "b7ff6143baf696299888f4b9703a31422f73cf9cb371a88e4864b2451dcd2676",
+          "indexed_sha256": "7356b85dafd50251e8118bed80a6d8b0965ec9b65bdc930434b14929e44beb73",
+          "opaque_pixels": 7826,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 964,
+          "asset": "portraits-leaders-1.png",
+          "sample": [
+            153,
+            838,
+            322,
+            1238
+          ],
+          "content": [
+            26,
+            0,
+            94,
+            177
+          ],
+          "art_sha256": "b5d7472d8a503408f0b4d269f46710fdedcbf7c99f7e9056415dea20397265dd",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "f8ac99bdb7e58e5b0fefe65d4d6d9deab167b57d944a517dfc212c108221e262",
+          "palette_sha256": "f0e595a5f192fdb8211a8df8661d18296227d6741a94e622abf3d7b5af9cb3e5",
+          "writes_sha256": "b2b394c900150a386773882c44a58b939b9c4e0b4cb1011193cdd12b858df949"
+        },
+        {
+          "research_id": 965,
+          "file": "IND1A3.SS",
+          "file_sha256": "c3dd8d910d9b9b062829c0a5924c1308ea5dc7069fbe0e64a3291ed6e4ece762",
+          "ordinal": 0,
+          "size": [
+            108,
+            177
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 8303,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "68c523efa1b18138c78b7bc13901dc0310c15f2669d09d10294cad93a8df7fbe",
+          "indexed_sha256": "2da46c8e47feadc795ce8c410faf8cc0f4c3fd1154b1d0376597a2b700cd460b",
+          "opaque_pixels": 7762,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 965,
+          "asset": "portraits-leaders-1.png",
+          "sample": [
+            513,
+            837,
+            750,
+            1238
+          ],
+          "content": [
+            20,
+            0,
+            108,
+            177
+          ],
+          "art_sha256": "b5d7472d8a503408f0b4d269f46710fdedcbf7c99f7e9056415dea20397265dd",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "e35761a3f67a11db4d0a0584a7de3767eb90e05220e9ba49d48369eef003cb19",
+          "palette_sha256": "5ef6f4ca21566f36e38e78411f1d9784615d49bf801c6d2f6214990684a0bd8f",
+          "writes_sha256": "3c913804d22f3a7a08b2f12dc8660f4b94a6e9b0da63e0a1152c5ebae3fb8660"
+        },
+        {
+          "research_id": 966,
+          "file": "IND2A0.SS",
+          "file_sha256": "e8eedcab70175334f4866cd5851a0232736bfc4c24be4d9d08a241d436300933",
+          "ordinal": 0,
+          "size": [
+            65,
+            181
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 7368,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "4cf52c14a4c96794177cbf4bec265bf12d70e98d7ab59a72c1503c70865e690e",
+          "indexed_sha256": "990e433454ea3f11beec73e2c9220801fc89b2ff9803a2b5beb0724dee00b7c1",
+          "opaque_pixels": 6336,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 966,
+          "asset": "portraits-leaders-1.png",
+          "sample": [
+            965,
+            844,
+            1116,
+            1238
+          ],
+          "content": [
+            0,
+            0,
+            65,
+            181
+          ],
+          "art_sha256": "b5d7472d8a503408f0b4d269f46710fdedcbf7c99f7e9056415dea20397265dd",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "1c1fac14b7c380c0143def0b926d4ffcda00066f3979223c01a77a465e72cd3d",
+          "palette_sha256": "76010870ea2a922580feb8e9c4ce8dbb487761e2b815055c46cb3c9ed2c0c518",
+          "writes_sha256": "9e567138e016d6cd4169454ffe4106db2c70b38d0d59c867c979c5ad215aca09"
+        }
+      ]
+    },
+    "portraits-leaders-2.png": {
+      "sha256": "f7f7126825de4916e746fee692c9f7a7225bd4a3c4d7513975d6acf09cecab17",
+      "bytes": 962894,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE original refined fine pixel-art character sprite atlas for the Colonization (1994) HD display layer. Image1 is the exact character, costume and pose reference. Repaint every adult Indigenous character faithfully, preserving distinct faces, age, build, expressions, skin tones, clothing, headdresses, jewelry, weapons, props, gestures and all silhouettes. Do not invent new cultural details or change the reference design. Match all poses individually while keeping the same character consistent across their consecutive gestures. Render fresh crisp fine intentional pixel clusters with readable facial features, cloth, leather, feathers, metal and restrained natural highlights. Image2 is approved pixel-art STYLE ONLY; do not copy its scenery, buildings or composition. Square transparent-background canvas with exactly THREE equal rows and THREE equal columns. One full figure centered and fully contained within each occupied cell, with clear transparent margins and no overlap. Remove all magenta reference background and black labels. Clean straight alpha outside figures and inside all gaps. No scenery, ground plane, grid, borders, captions, text, numbers, watermark, added props, blur, smooth painting, photography or3D.\nThis batch has EIGHT sprites, first8 cells occupied and last cell fully transparent. Cells1-4 depict the SAME adult male with tall gold/yellow feather headdress, necklace, white loincloth, and bare feet: lowered arms; holding tall bow; holding bow and raised arrows; bow and arrows across front. Cells5-8 depict the SAME adult muscular male with short dark mohawk, beaded diagonal shoulder strap, tan loincloth over fringed tan leather trousers, and small dark stone axe: lowered axe; changed expression with lowered axe; folded arms; raised axe. Match every face, gesture and weapon orientation from Image1. Keep the full figures within the CENTRAL80% of each cell, with at least10% TRANSPARENT margin on ALL four sides; especially leave a clear gap between rows. Never let feet or feather tips cross a cell boundary. Exactly3x3 equal cells; final cell fully transparent.",
+      "generation_file": "exec-8889bce8-a4f2-4347-a08f-2e1ea2e7741c.png",
+      "reference_sha256": "f86a0fcca0527e70f3352c7da32daa59105a3f30450d86d897be5a9058eeb994",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "column_row_boundaries": {
+        "0": [
+          0,
+          430,
+          836,
+          1254
+        ],
+        "1": [
+          0,
+          431,
+          836,
+          1254
+        ],
+        "2": [
+          0,
+          430,
+          836,
+          1254
+        ]
+      },
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 967,
+          "file": "IND2A0.SS",
+          "file_sha256": "e8eedcab70175334f4866cd5851a0232736bfc4c24be4d9d08a241d436300933",
+          "ordinal": 1,
+          "size": [
+            65,
+            181
+          ],
+          "header_part1_offset": 16,
+          "data_part3_offset": 7368,
+          "encoded_length": 7368,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "4cf52c14a4c96794177cbf4bec265bf12d70e98d7ab59a72c1503c70865e690e",
+          "indexed_sha256": "990e433454ea3f11beec73e2c9220801fc89b2ff9803a2b5beb0724dee00b7c1",
+          "opaque_pixels": 6336,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 967,
+          "asset": "portraits-leaders-2.png",
+          "sample": [
+            148,
+            35,
+            305,
+            430
+          ],
+          "content": [
+            0,
+            0,
+            65,
+            181
+          ],
+          "art_sha256": "f7f7126825de4916e746fee692c9f7a7225bd4a3c4d7513975d6acf09cecab17",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "1c1fac14b7c380c0143def0b926d4ffcda00066f3979223c01a77a465e72cd3d",
+          "palette_sha256": "76010870ea2a922580feb8e9c4ce8dbb487761e2b815055c46cb3c9ed2c0c518",
+          "writes_sha256": "9e567138e016d6cd4169454ffe4106db2c70b38d0d59c867c979c5ad215aca09"
+        },
+        {
+          "research_id": 968,
+          "file": "IND2A1.SS",
+          "file_sha256": "d878341dd55cac67388be8d7bb37611de1289b03160cfa4a6ca4a1016c1fc3a4",
+          "ordinal": 0,
+          "size": [
+            86,
+            181
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 9045,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "32085a6d7d3655a8f1f8dbf10c6045053535e16e9f0b60298325e8b970379a43",
+          "indexed_sha256": "437c6a293e62974a8128238cb7e567c7b62d28ede3074d2e1fd7da807ddfdca4",
+          "opaque_pixels": 7314,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 968,
+          "asset": "portraits-leaders-2.png",
+          "sample": [
+            523,
+            35,
+            717,
+            431
+          ],
+          "content": [
+            0,
+            0,
+            86,
+            181
+          ],
+          "art_sha256": "f7f7126825de4916e746fee692c9f7a7225bd4a3c4d7513975d6acf09cecab17",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "5118d1da2a058d903fa6c27ec386c14f151301a0c20eeb0d79f0ef48120318c3",
+          "palette_sha256": "3a84480be5e892d6137c5047dd246478e3329c02bd6304b99e856db54b8d622d",
+          "writes_sha256": "8fd438cef0ef1b87af9d49c329f835371a119ca28a2a9ef7c975cf6f020bd30d"
+        },
+        {
+          "research_id": 969,
+          "file": "IND2A2.SS",
+          "file_sha256": "d7b906c33efa2fc30c7b05ab92ad69abd53314bc8f20a7e4d436cf6a01a76e35",
+          "ordinal": 0,
+          "size": [
+            115,
+            182
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 9335,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "083bf7cd30c2d798665bf5d2b91203cef78aa897f7afff8c1fc68dd4de6f55ec",
+          "indexed_sha256": "015951baa9fa041fab274c83c184648274126d00400987ae3a73f2ea823dc571",
+          "opaque_pixels": 7558,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 969,
+          "asset": "portraits-leaders-2.png",
+          "sample": [
+            926,
+            35,
+            1187,
+            430
+          ],
+          "content": [
+            0,
+            0,
+            114,
+            182
+          ],
+          "art_sha256": "f7f7126825de4916e746fee692c9f7a7225bd4a3c4d7513975d6acf09cecab17",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "e542be2f24d9a918339d790b47a88cbe8e88e05c1171dd033fdabd86c9add95c",
+          "palette_sha256": "7c05a1fd464a2458cc2109760664a7c1a79e9e23b641fd96e8448293ec7496af",
+          "writes_sha256": "b1cfc581b66293bee496118c3db270a50948ddb1a7a530e51bb47ea4ddbe85eb"
+        },
+        {
+          "research_id": 970,
+          "file": "IND2A3.SS",
+          "file_sha256": "bf458c74dda0d45069d3ec8d3dffe5a43554e0ff8aa0f220585bacaa8979856d",
+          "ordinal": 0,
+          "size": [
+            88,
+            181
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 8175,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "5620d4ddf46544c2c74911a79366a5a5f3793480bc7e2889c30d807ddd9ba61a",
+          "indexed_sha256": "ed863b4f247a1845d4003e55ec06fcf5a1b769ea9426b0325279b1971c672b4b",
+          "opaque_pixels": 6723,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 970,
+          "asset": "portraits-leaders-2.png",
+          "sample": [
+            108,
+            453,
+            324,
+            834
+          ],
+          "content": [
+            0,
+            0,
+            88,
+            181
+          ],
+          "art_sha256": "f7f7126825de4916e746fee692c9f7a7225bd4a3c4d7513975d6acf09cecab17",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "dd9bf7e04a9191376cf359e8abf5b1d6cb96469ef9919c50c38ba225e26c84b6",
+          "palette_sha256": "387246e68fee926946b7b200b0fadf07183d3a3a61b2e42dd68c359458ba2c26",
+          "writes_sha256": "605fe1475bbdb46f18ad804a60a3913793b8a2627fa8f7f195cc2259d74c9c2b"
+        },
+        {
+          "research_id": 971,
+          "file": "IND3A0.SS",
+          "file_sha256": "e1affc9fda4f6d49f152bbe2dc3da17201076a6d260bb1fa7e929444a38d9aaa",
+          "ordinal": 0,
+          "size": [
+            87,
+            175
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 7755,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ee40193b529e14828c1b2c9339dc7ddadbe2b5c9a80d2a4a136d04263f84f122",
+          "indexed_sha256": "7b405387ae9f9f57cb3ebeced7936bb5f710b1dc70788d40b4910e270552c39c",
+          "opaque_pixels": 7462,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 971,
+          "asset": "portraits-leaders-2.png",
+          "sample": [
+            518,
+            460,
+            745,
+            834
+          ],
+          "content": [
+            0,
+            0,
+            87,
+            175
+          ],
+          "art_sha256": "f7f7126825de4916e746fee692c9f7a7225bd4a3c4d7513975d6acf09cecab17",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "95ac3b492d564ce2a16ca7e0b0235487b4cbbd2e3273f2bb8d5d100768f0c1b5",
+          "palette_sha256": "fcb98faab21a9addfac5361ffc8f308c08c997b0de54bd6ccb259f4648881072",
+          "writes_sha256": "3624cda9d3761bb48fbf587763e822cefe1c328ab02b8e46b5a13fc7da4a952d"
+        },
+        {
+          "research_id": 972,
+          "file": "IND3A1.SS",
+          "file_sha256": "93e875dafa368e55754b04ae3946909e03634bef1aa657dccc557970015b146a",
+          "ordinal": 0,
+          "size": [
+            87,
+            175
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 7706,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "c65cbcece80e3f276c348f2d3b5a013e77138e0928c14f3702d56c8040f82d41",
+          "indexed_sha256": "2b86fe8c61a56f9ffbb02dafc7d7d80951185ec4096f548c98236e10d5c626be",
+          "opaque_pixels": 7425,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 972,
+          "asset": "portraits-leaders-2.png",
+          "sample": [
+            933,
+            461,
+            1160,
+            834
+          ],
+          "content": [
+            0,
+            0,
+            87,
+            175
+          ],
+          "art_sha256": "f7f7126825de4916e746fee692c9f7a7225bd4a3c4d7513975d6acf09cecab17",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "f08ad54694cb54fbc7d9cba16d63bc4e88aa70eed5a07b70fab1a25f24f1d9d3",
+          "palette_sha256": "44c1479e2feb598bbdb15be4f66a7f24633b6ccf8aa02da3bc2d5080afc2ac51",
+          "writes_sha256": "68b95aae917af5e4db041cc9f13b18ed445343f9b99fcded28e8482994810501"
+        },
+        {
+          "research_id": 973,
+          "file": "IND3A2.SS",
+          "file_sha256": "cc6acd81e3481611687c53d7378839b1369bbc0f7f55cb304842e311134592b1",
+          "ordinal": 0,
+          "size": [
+            78,
+            176
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 6793,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "d2c4004362ad8a33e76f9a6a7e28365d339c2cc260584332bbb510c8085f1633",
+          "indexed_sha256": "453ccf18238f059115a544505f67aac24df630cb1f45453717b995c46188d2e1",
+          "opaque_pixels": 6722,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 973,
+          "asset": "portraits-leaders-2.png",
+          "sample": [
+            137,
+            862,
+            310,
+            1229
+          ],
+          "content": [
+            0,
+            0,
+            78,
+            176
+          ],
+          "art_sha256": "f7f7126825de4916e746fee692c9f7a7225bd4a3c4d7513975d6acf09cecab17",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "d9de59627ac3009fb15c1c480a60a4364e7a8340029a6233c7f0e769b968a764",
+          "palette_sha256": "9b24418b504b5e69c08f198ce60054cb1c76ef20b75060dba42f92f00edc15be",
+          "writes_sha256": "d9283544e29a5777cc1029a0322c3125496fdfe865f5fcd685693e8b3f3c3773"
+        },
+        {
+          "research_id": 974,
+          "file": "IND3A3.SS",
+          "file_sha256": "a5caeb28fb2ec4435540a98e00dacab0e0eb6cb966eae815564fde4e3893b965",
+          "ordinal": 0,
+          "size": [
+            95,
+            175
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 7538,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "7cdb39bba3a429b62c4463fb4400edb9a802d8e4ab4dafa56f58cb69b134adaf",
+          "indexed_sha256": "8dd4e0c87bc67431d47ebc5d2ea477d3210125b00242b288296d09dfeef47671",
+          "opaque_pixels": 7276,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 974,
+          "asset": "portraits-leaders-2.png",
+          "sample": [
+            517,
+            861,
+            754,
+            1229
+          ],
+          "content": [
+            0,
+            0,
+            95,
+            175
+          ],
+          "art_sha256": "f7f7126825de4916e746fee692c9f7a7225bd4a3c4d7513975d6acf09cecab17",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "14cc3e4caa86130a4b6c74fa1aa23701ace477234f20264ff5441f8aff87c4a6",
+          "palette_sha256": "0b50d17f0d53c80b53b40c5c3578aaf73d62012f03052a4e58957af28eb0024e",
+          "writes_sha256": "102a05dbb14537b2bbdb7c98315e4917bd548e9423e6d85ee1303843bb7d42c9"
+        }
+      ]
+    },
+    "portraits-leaders-3.png": {
+      "sha256": "99447d399cd13ffff064d7362043069de2c756ca1815a35a65c843fca0436d3c",
+      "bytes": 1178149,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE original refined fine pixel-art character sprite atlas for the Colonization (1994) HD display layer. Image1 is the exact character, costume and pose reference. Repaint every adult Indigenous character faithfully, preserving distinct faces, age, build, expressions, skin tones, clothing, headdresses, jewelry, weapons, props, gestures and all silhouettes. Do not invent new cultural details or change the reference design. Match all poses individually while keeping the same character consistent across their consecutive gestures. Render fresh crisp fine intentional pixel clusters with readable facial features, cloth, leather, feathers, metal and restrained natural highlights. Image2 is approved pixel-art STYLE ONLY; do not copy its scenery, buildings or composition. Square transparent-background canvas with exactly THREE equal rows and THREE equal columns. One full figure centered and fully contained within each occupied cell, with clear transparent margins and no overlap. Remove all magenta reference background and black labels. Clean straight alpha outside figures and inside all gaps. No scenery, ground plane, grid, borders, captions, text, numbers, watermark, added props, blur, smooth painting, photography or3D.\nThis batch has EIGHT figures in the first8 cells; final cell fully transparent. Cells1-4 show the SAME adult Indigenous woman with long dark braids, pale tan fringed dress with white/gray bands at shoulder, waist and lower skirt, and moccasins: one hand at chest, hands behind her waist, hands on hips, then one fist raised. Preserve each expression. Cells5-8 show the SAME adult male leader in an enormous dark brown shaggy fur/buffalo robe, tan hide leggings and moccasins, wide green feather headgear with one pale long feather extending diagonally left: long pipe or staff held across body; hand at chest; the robe opened at waist showing red tassels; then a round hide shield with the EXACT red/yellow circular markings from reference. Match all silhouettes, props and hand positions, no changes to attire. Exactly3x3 equal cells, first8 occupied, last transparent. Leave at least10% transparent margin within each cell, with a CLEAR horizontal transparent gap between rows; no feather, head, hands or feet may cross a cell boundary.",
+      "generation_file": "exec-df217adf-1ae5-4f19-9a6d-059b722bdde8.png",
+      "reference_sha256": "f4f43429dc8bd3633821d32c298e4fad704ddafc6543136446ff0485cbe8be11",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "column_row_boundaries": {
+        "0": [
+          0,
+          422,
+          836,
+          1254
+        ],
+        "1": [
+          0,
+          422,
+          836,
+          1254
+        ],
+        "2": [
+          0,
+          422,
+          836,
+          1254
+        ]
+      },
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 975,
+          "file": "IND4A0.SS",
+          "file_sha256": "c1bbbdff68b54700d5f3de08ac0f08d0c69c3ff7c851627da5ba44de0771573b",
+          "ordinal": 0,
+          "size": [
+            50,
+            146
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 5826,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "96c1db5bfc83c7267dc7039727af3b3234df52c64c6804ebb3e808efec381904",
+          "indexed_sha256": "ec5f229d9a37c267868f8375076669f9ff047002516a2d7bd6baf33cc11e60bf",
+          "opaque_pixels": 5503,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 975,
+          "asset": "portraits-leaders-3.png",
+          "sample": [
+            169,
+            38,
+            305,
+            422
+          ],
+          "content": [
+            0,
+            0,
+            50,
+            146
+          ],
+          "art_sha256": "99447d399cd13ffff064d7362043069de2c756ca1815a35a65c843fca0436d3c",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "23c4faf056de5e8cae55dcf965331e66f7778fe816f96e749a2ce214f9b7c1e7",
+          "palette_sha256": "fa37cdf120877c13aed8ab864fc2866b7854087c540eb519272b4638801d5809",
+          "writes_sha256": "12825589b22859d5b786fdd06fdf0075c520e5cf5d61e221fde800bb740fd432"
+        },
+        {
+          "research_id": 976,
+          "file": "IND4A1.SS",
+          "file_sha256": "0accc1b42418d69c84dfbc80e415bf8b2b71c97e0e3cd88c52f6c55119a0fdef",
+          "ordinal": 0,
+          "size": [
+            74,
+            146
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 6373,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "5aa59fde9b9c4ad2d92e44880d5b79bb1620678479564942d03a5335abaa1c64",
+          "indexed_sha256": "1cd008f9ffa16f088ec40ac46aa2b6d5baaa76c82be2e6dd44ed17f26f2bc46f",
+          "opaque_pixels": 6049,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 976,
+          "asset": "portraits-leaders-3.png",
+          "sample": [
+            524,
+            38,
+            727,
+            422
+          ],
+          "content": [
+            0,
+            0,
+            74,
+            146
+          ],
+          "art_sha256": "99447d399cd13ffff064d7362043069de2c756ca1815a35a65c843fca0436d3c",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "cbcd7be03890e8c665e81f9fec61d14adec9faaf09b76c7abeea7072771e4517",
+          "palette_sha256": "2e9a3c6ce56b4f11f6ee8e3f60575a6d9e22a93178fa2405e6cbbd272bf0dc8d",
+          "writes_sha256": "8e5ab7899cdaf300e2031e2eafe7e60009dab85a7a14c19a8c00cdb679862bdf"
+        },
+        {
+          "research_id": 977,
+          "file": "IND4A2.SS",
+          "file_sha256": "0e324abcee98bfbded32eab863631e7e61dcb2254ec53e8ffe86dcadfd14b032",
+          "ordinal": 0,
+          "size": [
+            85,
+            146
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 6752,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "7e6ba420b802a3e84747cbfdeea54d350516e7d8a0b54ba56b7215210a685cd7",
+          "indexed_sha256": "06b55c69d58b71f1f57142dc572c38e5fcfe86a62bcd6975e406f0df08a56882",
+          "opaque_pixels": 6248,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 977,
+          "asset": "portraits-leaders-3.png",
+          "sample": [
+            907,
+            37,
+            1134,
+            422
+          ],
+          "content": [
+            0,
+            0,
+            85,
+            146
+          ],
+          "art_sha256": "99447d399cd13ffff064d7362043069de2c756ca1815a35a65c843fca0436d3c",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "3cfa43f3834f30f157845f0ecb08aa17d2916a9db1a302a6b4307d6ffbe3bd33",
+          "palette_sha256": "ac5c55c5d8026ba1975e80a53b7cdd16166f08c7ca72b6a54a52a822f9ea5d1e",
+          "writes_sha256": "32d701a70f0e86c91a23719f035222191f80c4c00b604025f7a3e651fe36b68d"
+        },
+        {
+          "research_id": 978,
+          "file": "IND4A3.SS",
+          "file_sha256": "bbed4e73f2f0cfaaf5eb093b4d904eaa20c4b6bed8d0977c233b04ed2019f584",
+          "ordinal": 0,
+          "size": [
+            92,
+            146
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 6783,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "d2ca02d93eb3d31542746a2a1bbec2d7d3cec710b7b3aeae8aaed303e3fa2e36",
+          "indexed_sha256": "fe9a4af57b969d0b516d66869c42277dd4e825d83b339bba598d855c3e51dab5",
+          "opaque_pixels": 6246,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 978,
+          "asset": "portraits-leaders-3.png",
+          "sample": [
+            113,
+            456,
+            352,
+            833
+          ],
+          "content": [
+            0,
+            0,
+            92,
+            146
+          ],
+          "art_sha256": "99447d399cd13ffff064d7362043069de2c756ca1815a35a65c843fca0436d3c",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "7d2bef51c259884967208af34bcc02f436345e3252ef833beee046cbb217b4bc",
+          "palette_sha256": "7ae7252e1d6de97bffe8476b308df359d6ee615703f5d21540ab55c89a377ace",
+          "writes_sha256": "bba023ae6e1ac957ae92803f2c5f61d5ae138c9b01d45cc1f7497882c7f2a90c"
+        },
+        {
+          "research_id": 979,
+          "file": "IND5A0.SS",
+          "file_sha256": "31f34f8937c1d3191631b2d9e3e7c8a8a95327245679e3a39898473eb1f50c8c",
+          "ordinal": 0,
+          "size": [
+            114,
+            142
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 10209,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "ade1ef42391a1b7d834fe2e203fd44fb1f5997c728425cdfabf7e59ef1b4bd4c",
+          "indexed_sha256": "fa9be56a306db3cc34a78672f33fff46b88a3e3cf824e3bff04c481f1067855b",
+          "opaque_pixels": 10109,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 979,
+          "asset": "portraits-leaders-3.png",
+          "sample": [
+            477,
+            444,
+            782,
+            825
+          ],
+          "content": [
+            1,
+            0,
+            113,
+            142
+          ],
+          "art_sha256": "99447d399cd13ffff064d7362043069de2c756ca1815a35a65c843fca0436d3c",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "12aa2d631d2221b804c7d08d2ec67877e4f95c179f6cdaf83bb24d2bfb0fd3f9",
+          "palette_sha256": "ec2cf785b9da37a31046a83fda2d61c00bc077a5e31af436746572ed019ba2c8",
+          "writes_sha256": "57dfdda586ca000fd1e372237259655753477bb6e380a10415b6c9e1cb97024d"
+        },
+        {
+          "research_id": 980,
+          "file": "IND5A1.SS",
+          "file_sha256": "0b4daabd9dfab77a7be9ad6508c1ce38f8fa17a44a3fdd50fce925ffd9adf80f",
+          "ordinal": 0,
+          "size": [
+            114,
+            142
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 9925,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "db26424c9af93d45b5fe71a7099ad36368fa0728ffbd047ef9b6a6d4ae2ca84b",
+          "indexed_sha256": "94df65fb79f431231edaa1967372e57a623b6a894d2e838f0653d1d06de02e8a",
+          "opaque_pixels": 9875,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 980,
+          "asset": "portraits-leaders-3.png",
+          "sample": [
+            868,
+            446,
+            1173,
+            825
+          ],
+          "content": [
+            1,
+            0,
+            113,
+            142
+          ],
+          "art_sha256": "99447d399cd13ffff064d7362043069de2c756ca1815a35a65c843fca0436d3c",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "d0cc33780244ed4709a9ea625021c4d45066cdae9429168d708eabb2daa0cadc",
+          "palette_sha256": "98f840dfc47bdeb224b753646f27e9945ced06e53d0f571f51291dafe6d3ed27",
+          "writes_sha256": "7c8522854d88086226eece31dccd74a9db805a9fba73dafb6ccbda5259b40cc1"
+        },
+        {
+          "research_id": 981,
+          "file": "IND5A2.SS",
+          "file_sha256": "9610ad33772c3835f6111de351835125f49365d15fd995e163deae49a5199dde",
+          "ordinal": 0,
+          "size": [
+            114,
+            142
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 10072,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "dccec3f598ea829508ef1cc0cd27558588e27969c3d66b386cad2d2a1294aae2",
+          "indexed_sha256": "d9dad7f1aadf3a5a9f57f45b8cdfc3e251ecca0ae446f516b2225c8a038f7464",
+          "opaque_pixels": 10089,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 981,
+          "asset": "portraits-leaders-3.png",
+          "sample": [
+            86,
+            853,
+            389,
+            1227
+          ],
+          "content": [
+            1,
+            0,
+            113,
+            142
+          ],
+          "art_sha256": "99447d399cd13ffff064d7362043069de2c756ca1815a35a65c843fca0436d3c",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "ca61a036e3b21a382735117fb76c789c3c79a1f4a5414d8b40f3cce6a7ee2993",
+          "palette_sha256": "982a16b8f88eac5d56a53ea593fd12c7476dbb0cdba33d43c720755c69f33b89",
+          "writes_sha256": "680df6a4d373a727cb4a0c01dd403ab59dd113d223064a3f896b7cccbddff309"
+        },
+        {
+          "research_id": 982,
+          "file": "IND5A3.SS",
+          "file_sha256": "849bfc9db5e18ac326f5130f09862dd613999c0e0edc2a30262bcc300fc9fd72",
+          "ordinal": 0,
+          "size": [
+            113,
+            141
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 9808,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "f9d5ce7792886b19aa68104cb956562d98e987fa23b8a973b6c108500a3a566b",
+          "indexed_sha256": "29751ab013079ed025f314f4eedef572c11d3b1f42c2852b540bdf09e0a565af",
+          "opaque_pixels": 10254,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 982,
+          "asset": "portraits-leaders-3.png",
+          "sample": [
+            476,
+            854,
+            784,
+            1227
+          ],
+          "content": [
+            0,
+            0,
+            112,
+            141
+          ],
+          "art_sha256": "99447d399cd13ffff064d7362043069de2c756ca1815a35a65c843fca0436d3c",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "c9ea917b7eb8565969351a58e5b1e7f26e39e15497c91ca54b2ba02adae15dd7",
+          "palette_sha256": "71de2cf556279c2577d0d48b71cbbd6671b10538d498a06dd72ac877e8fc9a63",
+          "writes_sha256": "4d7c55330771dfc9ca3a83caf9677025d074ffcd72b0960435d1deb57acb9389"
+        }
+      ]
+    },
+    "portraits-leaders-4.png": {
+      "sha256": "489943b661fdd8d18752e5345d4817cbfd6d57de88b904fb00adf260f28818de",
+      "bytes": 1009091,
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "generation_tool": "built-in image_gen",
+      "generation_prompt": "Create ONE original refined fine pixel-art character sprite atlas for the Colonization (1994) HD display layer. Image1 is the exact character, costume and pose reference. Repaint every adult Indigenous character faithfully, preserving distinct faces, age, build, expressions, skin tones, clothing, headdresses, jewelry, weapons, props, gestures and all silhouettes. Do not invent new cultural details or change the reference design. Match all poses individually while keeping the same character consistent across their consecutive gestures. Render fresh crisp fine intentional pixel clusters with readable facial features, cloth, leather, feathers, metal and restrained natural highlights. Image2 is approved pixel-art STYLE ONLY; do not copy its scenery, buildings or composition. Square transparent-background canvas with exactly THREE equal rows and THREE equal columns. One full figure centered and fully contained within each occupied cell, with clear transparent margins and no overlap. Remove all magenta reference background and black labels. Clean straight alpha outside figures and inside all gaps. No scenery, ground plane, grid, borders, captions, text, numbers, watermark, added props, blur, smooth painting, photography or3D.\nThis batch has EIGHT figures in the first8 cells; ninth cell fully transparent. Cells1-4 show the SAME adult male leader wearing a tall fan-shaped gray/white feather bonnet with red and white browband, tan buckskin shirt and long fringed coat with blue beaded shoulder/arm bands, belt and leggings: one hand raised in greeting, arms folded, hands at waist, then a knife extended in one hand. Cells5-8 show the SAME adult male with dark shoulder-length hair, upright green feather crown, matching green neck fringe and short green skirt, wrist and ankle leaf/bead ornaments, necklace and bare feet: relaxed arms; bow down by side; bow held across waist; drawn bow pointing forward as in the exact reference. Preserve faces, physique, expressions, all clothing and weapon directions. Exactly3x3 equal cells, first8 occupied and last transparent. Keep every figure entirely within the CENTRAL80% of its cell, at least10% transparent margin on all four sides, with clear transparent space between rows. No feather, head, weapon, hands or feet may cross into a neighboring cell.",
+      "generation_file": "exec-33ec6ab0-e47b-4d6c-b8bf-5cec531eb800.png",
+      "reference_sha256": "f9c33435909a95185c5d49d8b59d736c48544fbbea27313341862504f9850b86",
+      "style_reference_sha256": "d9d89edec99584f4032f16a48000aef46d0248b06f85b31418c0f3a81a3ea2bf",
+      "column_row_boundaries": {
+        "0": [
+          0,
+          418,
+          836,
+          1254
+        ],
+        "1": [
+          0,
+          418,
+          836,
+          1254
+        ],
+        "2": [
+          0,
+          418,
+          836,
+          1254
+        ]
+      },
+      "rights": "Generated project artwork under RRSAL-1.0; original references remain private.",
+      "raw_original_unchanged": true,
+      "alpha": "raw PNG alpha retained with native index253 source mask",
+      "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+      "status": "READY production source bindings; display acceptance tracked in source catalog",
+      "source_frames": [
+        {
+          "research_id": 983,
+          "file": "IND6A0.SS",
+          "file_sha256": "16020ef6a97d8d30c0882bd2fe2e234f00ab8a6acd73728f56221d07e4fdb25f",
+          "ordinal": 0,
+          "size": [
+            107,
+            177
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 11934,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "5184877ca3f0e04ec64ae82ed6f24c40ceefb5025dfaf5f0c3c861b608a434b9",
+          "indexed_sha256": "377592de1daefbefa42e26771c87d8cd44f2d13e06e3a7c6242194c82a2018f3",
+          "opaque_pixels": 11683,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 983,
+          "asset": "portraits-leaders-4.png",
+          "sample": [
+            122,
+            33,
+            344,
+            406
+          ],
+          "content": [
+            0,
+            0,
+            107,
+            177
+          ],
+          "art_sha256": "489943b661fdd8d18752e5345d4817cbfd6d57de88b904fb00adf260f28818de",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "0535599c5dafa07091781330a9b3c88ab6496c59d7ae46eb25f3c0b5eee9b191",
+          "palette_sha256": "3fc8964574c2b0f277f37a810ef6037dba146d324c48a5921d5d77a7db5066d5",
+          "writes_sha256": "e6c45fa7b8711e750464065b412790b7a4aaf0d0c1e382c349a1fffb191d549c"
+        },
+        {
+          "research_id": 984,
+          "file": "IND6A1.SS",
+          "file_sha256": "4a2c2dd984cd5ac15d81de991eb463d6514d4f4cd793b2cf0a2f1b3f25bb5931",
+          "ordinal": 0,
+          "size": [
+            88,
+            179
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 10203,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "d5db246213555664d90fcb76703443af5bdbf0e09b10437a1a9b2a24ade2a474",
+          "indexed_sha256": "8fec5bdae3c1bd68cc84fadbeca75baf518a700f3a578956ed022ffd49474301",
+          "opaque_pixels": 9952,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 984,
+          "asset": "portraits-leaders-4.png",
+          "sample": [
+            536,
+            33,
+            717,
+            405
+          ],
+          "content": [
+            0,
+            0,
+            88,
+            179
+          ],
+          "art_sha256": "489943b661fdd8d18752e5345d4817cbfd6d57de88b904fb00adf260f28818de",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "7903af20151c1f3e8d3799b48563f91fb3c608b53bbf8cdb4ffa38fee1d69919",
+          "palette_sha256": "714e141847afa9bcdadedca5fa96e0c01f865284b6794fb418bc74fe8a28432e",
+          "writes_sha256": "445b38c5e8b92ae5f3b37ae3eff11fbe32da188de05c1cc2a0a690bded7a801d"
+        },
+        {
+          "research_id": 985,
+          "file": "IND6A2.SS",
+          "file_sha256": "9f2203900345402b3c837978914c5099dfedd3699d71d8498bbceea6d2fba997",
+          "ordinal": 0,
+          "size": [
+            103,
+            177
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 11078,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "792fd1ad655b961b357572d7be2656cb2ed4e6856f7951bb980a05b97e011300",
+          "indexed_sha256": "8b3802a515e5a5aff60300a998b63d2bbc7513a17323f6cfa5fedafffe319de2",
+          "opaque_pixels": 10895,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 985,
+          "asset": "portraits-leaders-4.png",
+          "sample": [
+            924,
+            33,
+            1130,
+            405
+          ],
+          "content": [
+            0,
+            0,
+            103,
+            177
+          ],
+          "art_sha256": "489943b661fdd8d18752e5345d4817cbfd6d57de88b904fb00adf260f28818de",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "d6426e56515a47690f92ef6d5c0de254817ec84594a8a300e482195d812a34b4",
+          "palette_sha256": "6bf3ddb103279d0f5195237d5cf32ada5146ec5bff647b01fde47d8974d5330e",
+          "writes_sha256": "d1cf6d9821b0fd8e85a1a0742b39a4826e7d102897342de19b1c59bb0e31c8be"
+        },
+        {
+          "research_id": 986,
+          "file": "IND6A3.SS",
+          "file_sha256": "50e87973358cb2280951a3c92f624f4beb9db2c59b6f4918e0f3608bfc973356",
+          "ordinal": 0,
+          "size": [
+            153,
+            177
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 11602,
+          "other_header_fields": [
+            2,
+            2
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "60def0666e66eac579ed1de8a59124eb195b425e4b6474c39bcc1a42641e3afc",
+          "indexed_sha256": "e9dbb31933427de8d62037b2773af18c4bd98701287d7889874506968ae78cdd",
+          "opaque_pixels": 11448,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 986,
+          "asset": "portraits-leaders-4.png",
+          "sample": [
+            50,
+            449,
+            380,
+            823
+          ],
+          "content": [
+            0,
+            0,
+            153,
+            177
+          ],
+          "art_sha256": "489943b661fdd8d18752e5345d4817cbfd6d57de88b904fb00adf260f28818de",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "7bd23c8a55547675ca77214a8a3863e7f37902151d35b6aba2460cb4f18a1142",
+          "palette_sha256": "5f252f0abf05d6afed4b6ef20c3dbf4bf633c9f727e629f93588f6f0624a08bc",
+          "writes_sha256": "3e797a8cf68445f884863941a2ee093767e470cc91de4ee3e35e9cedf8d73852"
+        },
+        {
+          "research_id": 987,
+          "file": "IND7A0.SS",
+          "file_sha256": "15b0813bb2bf052bb55cfeb99be961d702cb017937b0e91eba86d845806a28c7",
+          "ordinal": 0,
+          "size": [
+            56,
+            180
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 7607,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "971ec53a1be485501099857f8d1204f6d0343f38211e64b3970b97ee4e8535bb",
+          "indexed_sha256": "d4bd721f654da5436f59d5c1f80788a57d0405a4befbadaddf9f5cc91217c93f",
+          "opaque_pixels": 6620,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 987,
+          "asset": "portraits-leaders-4.png",
+          "sample": [
+            566,
+            448,
+            694,
+            824
+          ],
+          "content": [
+            0,
+            0,
+            56,
+            180
+          ],
+          "art_sha256": "489943b661fdd8d18752e5345d4817cbfd6d57de88b904fb00adf260f28818de",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "05ab4298e77fdf450cab3934226934821b4f9d77fd84e43725df9278456f2ad8",
+          "palette_sha256": "c135ba265624f8eab267d82f869c37a4871079cceff62024f92ad54b64ec8b27",
+          "writes_sha256": "97f812d304c536a101758c7465958ca255de01f85106471b55060f1aa1c135c4"
+        },
+        {
+          "research_id": 988,
+          "file": "IND7A1.SS",
+          "file_sha256": "97a751123ebdce95964f877857d87f4768f81959398d980c4599866b43264678",
+          "ordinal": 0,
+          "size": [
+            82,
+            180
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 7993,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "c3e436a3e702e5f9397960c37978c9f1e5944c97312b0cdfa0cd7df2d03f7ff1",
+          "indexed_sha256": "c7cff7a39a149136bd8b8b9a78d023d77b26a6f3a30418905da30530c886a56a",
+          "opaque_pixels": 6915,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 988,
+          "asset": "portraits-leaders-4.png",
+          "sample": [
+            956,
+            448,
+            1148,
+            824
+          ],
+          "content": [
+            0,
+            0,
+            82,
+            180
+          ],
+          "art_sha256": "489943b661fdd8d18752e5345d4817cbfd6d57de88b904fb00adf260f28818de",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "f0a66724f39bcdac54cee6635bd37c3c37036a99c4bb90ff55cb4c231a43a910",
+          "palette_sha256": "eabe1ff1376753e0724ae4454d122d2f0c0de95b25c34cae88fc4f5f09dd1715",
+          "writes_sha256": "8c683637d73495abd53e4578132a24a7c53c9a6b4cfdf6b74b579f6361b4fa83"
+        },
+        {
+          "research_id": 989,
+          "file": "IND7A2.SS",
+          "file_sha256": "4b3c96d9d1d8af8b63eaa2c83462511944d70b122f1503fd7f616cf23509f590",
+          "ordinal": 0,
+          "size": [
+            87,
+            178
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 7756,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "2d45d7319c6e12d181b2f7760d1125b2e3fd80ed8e9567c687f5652cba765c6c",
+          "indexed_sha256": "24e4c9973fec7f33ab20801579aadfd05d10b1913332b0de046a7340d9c8abda",
+          "opaque_pixels": 6647,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 989,
+          "asset": "portraits-leaders-4.png",
+          "sample": [
+            139,
+            861,
+            345,
+            1232
+          ],
+          "content": [
+            0,
+            0,
+            87,
+            178
+          ],
+          "art_sha256": "489943b661fdd8d18752e5345d4817cbfd6d57de88b904fb00adf260f28818de",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "8a8921d239a3d6791eaa87cc19feb234626dcd93daf45915e5f578c8208f2790",
+          "palette_sha256": "8e7ef0755dc1887b83a790520b560bd25b8d02a69580cd0a6f292fd520955648",
+          "writes_sha256": "d08228088aa162b424b42a8808aff2489953ec4e5390e871e1e733f3aab0bfa2"
+        },
+        {
+          "research_id": 990,
+          "file": "IND7A3.SS",
+          "file_sha256": "19a636c5075b26922ec71eeac815293337c01dbd66908a7ae688b5f8d5b62256",
+          "ordinal": 0,
+          "size": [
+            52,
+            176
+          ],
+          "header_part1_offset": 0,
+          "data_part3_offset": 0,
+          "encoded_length": 6781,
+          "other_header_fields": [
+            1,
+            1
+          ],
+          "decode_status": "decoded",
+          "encoded_sha256": "23ede5f3d8df8e54a7b443eb8744fcb352744cbef25c3fe9258736f6c7755e85",
+          "indexed_sha256": "aec66c1d75b7e8e626298d2842097e3bda99c04e3518f0e8c340f7019b61863c",
+          "opaque_pixels": 5747,
+          "transparency_index": 253,
+          "runtime_source_evidence": "not_assessed_by_this_inventory",
+          "animation_evidence": "not_assessed_by_this_inventory",
+          "formal_assets": [],
+          "id": 990,
+          "asset": "portraits-leaders-4.png",
+          "sample": [
+            570,
+            861,
+            705,
+            1232
+          ],
+          "content": [
+            0,
+            0,
+            52,
+            176
+          ],
+          "art_sha256": "489943b661fdd8d18752e5345d4817cbfd6d57de88b904fb00adf260f28818de",
+          "art_size": [
+            1254,
+            1254
+          ],
+          "padded_sha256": "7ecfd51690bd02acf30e4d62f4cf466b0c8b72a8ee3260d3a506eba0e78d8968",
+          "palette_sha256": "058ac80935a4e9453a7d547ac8a7b566ba88bfe687b0de6d16171b8926f2f729",
+          "writes_sha256": "a82ef9e53a4e4787c885270b1f318b376c4f6fcaecb5e57fe0189475d073b36b"
+        }
+      ]
     }
   }
 }

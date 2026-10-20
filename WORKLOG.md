@@ -7295,3 +7295,10 @@ R97參考圖勘誤：初版把第一事件色盤套用全部十三張，其他�
 - scene圖集依檔名與已驗SHA快取；新來源content明定原生不透明外接矩形，舊幀空content維持既有幾何。完整來源及色盤守門保持。
 - 正式4a8bdaf6ff25a73ff676e0e4cda4fde48bd8b9af24af37e6d8435512ca7a6bae通過建置、go vet、完整HD載入、二十五位人物來源fixture顯示及345檔封裝指紋；目視確認。未新增原版CPU、正常玩家路徑或原版精確對拍聲明。
 - 344張生成原PNG／345檔，526來源連結，317筆既有限定CONFORMED與209筆DISPLAY-PASS。README摘要更新，32張實拍保留。收據為r107-formal-build-r2.json及r107-formal-display-r2/check.json。一次性容器退出並自動刪除，輸出UID1000，原版未入Git。其餘人物與圖像接續，全量HD仍未完成。
+
+## 2026-10-20 R108三十三個領袖來源
+
+- 四張原始生成圖集接入IND0A0.SS至IND7A3.SS三十三來源，原PNG／alpha保持。逐來源內容矩形、圖集取樣、來源／權利／提示／指紋入Git。
+- scene圖集依檔名與已驗SHA快取；新來源content明定原生不透明外接矩形，舊幀空content維持既有幾何。完整來源及色盤守門保持。
+- 正式bb7ee7de819e66e589abfa114e08c6e9ec56a60f1ee8a238ea36e2ac5b6cd69d通過建置、go vet、完整HD載入、三十三個領袖來源fixture顯示及349檔封裝指紋；目視確認。未新增原版CPU、正常玩家路徑或原版精確對拍聲明。
+- 348張生成原PNG／349檔，559來源連結，317筆既有限定CONFORMED與242筆DISPLAY-PASS。README摘要更新，32張實拍保留。收據為r108-formal-build-r1.json及r108-formal-display-r1/check.json。一次性容器退出並自動刪除，輸出UID1000，原版未入Git。其餘人物與圖像接續，全量HD仍未完成。
