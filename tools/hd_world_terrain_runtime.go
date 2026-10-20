@@ -21,6 +21,7 @@ type hdTerrainBatchDefinition struct {
 	encoded, writes, asset, assetSHA       string
 }
 type hdTerrainBatchFrame struct {
+	supplement *hdTerrainSupplementDefinition
 	hdTerrainBatchDefinition
 	art *image.RGBA
 }
@@ -76,11 +77,18 @@ func loadHDTerrainBatchRuntime(h *hdRuntime, game, directory string) (*hdTerrain
 	for _, f := range hdTerrainForegroundDefinitions {
 		definitions = append(definitions, f.hdTerrainBatchDefinition)
 	}
+	supplements := map[int]*hdTerrainSupplementDefinition{}
+	for i := range hdTerrainSupplementDefinitions {
+		extra := &hdTerrainSupplementDefinitions[i]
+		supplements[extra.ordinal] = extra
+		definitions = append(definitions, extra.hdTerrainBatchDefinition)
+	}
 	artCache := map[string]struct {
 		im     image.Image
 		digest string
 	}{}
 	for _, d := range definitions {
+		supplement := supplements[d.ordinal]
 		cached, found := artCache[d.asset]
 		if !found {
 			raw, err = hdReadFile(filepath.Join(directory, d.asset), 8<<20)
@@ -105,15 +113,18 @@ func loadHDTerrainBatchRuntime(h *hdRuntime, game, directory string) (*hdTerrain
 			return nil, fmt.Errorf("terrain cached asset mismatch: %d", d.ordinal)
 		}
 		im := cached.im
-		if im.Bounds() != image.Rect(0, 0, d.width, d.height) || d.width != d.height {
+		if im.Bounds() != image.Rect(0, 0, d.width, d.height) || (supplement == nil && d.width != d.height) {
 			return nil, fmt.Errorf("terrain asset shape mismatch")
 		}
-		f := &hdTerrainBatchFrame{hdTerrainBatchDefinition: d, art: image.NewRGBA(image.Rect(0, 0, 64, 64))}
+		f := &hdTerrainBatchFrame{hdTerrainBatchDefinition: d, supplement: supplement, art: image.NewRGBA(image.Rect(0, 0, 64, 64))}
 		sample, content := [4]int{0, 0, d.width, d.height}, [4]int{0, 0, 16, 16}
 		for _, definition := range hdTerrainForegroundDefinitions {
 			if definition.ordinal == d.ordinal {
 				sample, content = definition.sample, definition.content
 			}
+		}
+		if supplement != nil {
+			sample, content = supplement.sample, supplement.content
 		}
 		if sample[0] < 0 || sample[1] < 0 || sample[2] <= sample[0] || sample[3] <= sample[1] || sample[2] > d.width || sample[3] > d.height || content[0] < 0 || content[1] < 0 || content[2] <= content[0] || content[3] <= content[1] || content[2] > 16 || content[3] > 16 {
 			return nil, fmt.Errorf("terrain sample bounds mismatch: %d", d.ordinal)
@@ -128,7 +139,7 @@ func loadHDTerrainBatchRuntime(h *hdRuntime, game, directory string) (*hdTerrain
 
 		p.frames[d.ordinal] = f
 	}
-	if len(p.frames) != 79 {
+	if len(p.frames) != 114 {
 		return nil, fmt.Errorf("incomplete terrain group")
 	}
 	return p, nil
@@ -225,6 +236,9 @@ func (p *hdTerrainBatchRuntime) beforeInstruction() {
 	}
 	if hdTerrainRiverVariantOrdinal(frame.ordinal) && destination == hdTerrainBatchStage {
 		expectedDestination = hdTerrainBatchStage
+	}
+	if frame.supplement != nil && destination == hdBuildingCanvas {
+		expectedDestination = hdBuildingCanvas
 	}
 	if !ok || dest[0] != 200 || dest[1] != 320 || destination != expectedDestination {
 		return
@@ -398,6 +412,12 @@ func (p *hdTerrainBatchRuntime) paint(out *image.RGBA, f draftNativeFrame) map[s
 	mask := make([]byte, 8000)
 	by := map[int]int{}
 	validBy := map[int]int{}
+	supplementalPalettes := map[int]bool{}
+	for ordinal, frame := range p.frames {
+		if a := frame.supplement; a != nil {
+			supplementalPalettes[ordinal] = hdSupplementPaletteSupported(f.palette, a.paletteIndices, a.paletteSHA, a.water)
+		}
+	}
 	for i, c := range p.visible {
 		if !c.owned {
 			continue
@@ -412,12 +432,15 @@ func (p *hdTerrainBatchRuntime) paint(out *image.RGBA, f draftNativeFrame) map[s
 			validMainBy[int(c.ordinal)]++
 		}
 		frame := p.frames[int(c.ordinal)]
+		if frame.supplement != nil && !supplementalPalettes[int(c.ordinal)] {
+			continue
+		}
 		legacyMain := c.fromMain && hdTerrainLegacyMainOrdinal(int(c.ordinal))
-		if legacyMain && !legacyMainPalette || !legacyMain && ((hdTerrainRemainingOrdinal(int(c.ordinal)) && !remainingPalette) || (hdTerrainForegroundOrdinal(int(c.ordinal)) && !hdTerrainRemainingOrdinal(int(c.ordinal)) && !foregroundPalette)) {
+		if frame.supplement == nil && (legacyMain && !legacyMainPalette || !legacyMain && ((hdTerrainRemainingOrdinal(int(c.ordinal)) && !remainingPalette) || (hdTerrainForegroundOrdinal(int(c.ordinal)) && !hdTerrainRemainingOrdinal(int(c.ordinal)) && !foregroundPalette))) {
 			continue
 		}
 		sx, sy := int(c.k)%16*4, int(c.k)/16*4
-		active := false
+		active := frame.supplement != nil && c.native == 0
 		for y := 0; y < 4; y++ {
 			for x := 0; x < 4; x++ {
 				if frame.art.RGBAAt(sx+x, sy+y).A > 0 {
@@ -429,7 +452,10 @@ func (p *hdTerrainBatchRuntime) paint(out *image.RGBA, f draftNativeFrame) map[s
 			continue
 		}
 		x, y := i%320*4, i/320*4
-		if hdTerrainForegroundOrdinal(int(c.ordinal)) && c.native >= 120 && c.native < 128 {
+		if frame.supplement != nil && c.native == 0 {
+			zero := color.RGBA{f.palette[0]<<2 | f.palette[0]>>4, f.palette[1]<<2 | f.palette[1]>>4, f.palette[2]<<2 | f.palette[2]>>4, 255}
+			draw.Draw(out, image.Rect(x, y, x+4, y+4), image.NewUniform(zero), image.Point{}, draw.Src)
+		} else if (hdTerrainForegroundOrdinal(int(c.ordinal)) || frame.supplement != nil) && c.native >= 120 && c.native < 128 {
 			tile := hdTerrainForegroundWaterTile(frame.art, sx, sy, c.native, f.palette)
 			draw.Draw(out, image.Rect(x, y, x+4, y+4), tile, image.Point{}, draw.Over)
 		} else {
@@ -572,6 +598,38 @@ func hdTerrainRiverVariantOrdinal(n int) bool {
 	switch n {
 	case 1, 2, 3, 4, 5, 7, 8, 10, 11, 12, 13, 14, 15, 18, 19, 20, 21, 23, 24, 25, 27, 28, 29, 30, 31:
 		return true
+	}
+	return false
+}
+
+// R114 READY：只接受來源用色，原生0由目前色盤保留，水色可沿既有八色循環。
+func hdSupplementPaletteSupported(palette []byte, indices []byte, expected string, water bool) bool {
+	if len(palette) != 768 {
+		return false
+	}
+	projection := make([]byte, 0, len(indices)*4)
+	for _, v := range indices {
+		projection = append(projection, v)
+		projection = append(projection, palette[int(v)*3:int(v)*3+3]...)
+	}
+	if hash(projection) != expected {
+		return false
+	}
+	if !water {
+		return true
+	}
+	for shift := 0; shift < 8; shift++ {
+		valid := true
+		for i := 0; i < 8; i++ {
+			for z := 0; z < 3; z++ {
+				if palette[(120+i)*3+z] != hdTerrainTextureCycle[(i+shift)%8][z] {
+					valid = false
+				}
+			}
+		}
+		if valid {
+			return true
+		}
 	}
 	return false
 }

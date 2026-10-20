@@ -429,7 +429,7 @@ func TestHDSmallTerrainAssetNegatives(t *testing.T) {
 	cases = append(cases, "missing-runtime")
 	positive, err := loadHDSmallTerrainRuntime(h, copyGame, copyAssets)
 	need(err)
-	if len(cases) != 28 || len(positive.frames) != 8 || hash(read(filepath.Join(game, "PHYS0.SS"))) != hash(originalSource) {
+	if len(cases) != 28 || len(positive.frames) != 28 || hash(read(filepath.Join(game, "PHYS0.SS"))) != hash(originalSource) {
 		t.Fatal("反例後正向或原版不同")
 	}
 	result := map[string]any{"result": "PASS_SMALL_TERRAIN_28_LOADER_NEGATIVES_AND_POSITIVE_RECHECK", "cases": cases, "positive_after_negatives": true, "original_source_unchanged": true, "production_connected": true}

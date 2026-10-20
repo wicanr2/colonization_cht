@@ -21,6 +21,7 @@ type hdSmallTerrainDefinition struct {
 	encoded, writes, asset, assetSHA       string
 }
 type hdSmallTerrainFrame struct {
+	supplement *hdSmallTerrainSupplementDefinition
 	hdSmallTerrainDefinition
 	art *image.RGBA
 }
@@ -36,6 +37,7 @@ type hdSmallTerrainPair struct {
 	cursor     int
 }
 type hdSmallTerrainRuntime struct {
+	destination                                                                    uint32
 	trace                                                                          bool
 	calls, pairs                                                                   []map[string]any
 	entry                                                                          map[string]any
@@ -69,30 +71,64 @@ func loadHDSmallTerrainRuntime(h *hdRuntime, game, directory string) (*hdSmallTe
 		return nil, fmt.Errorf("terrain source mismatch")
 	}
 	p := &hdSmallTerrainRuntime{h: h, frames: map[int]*hdSmallTerrainFrame{}, acceptedBy: map[int]uint64{}, cursorRestoresBy: map[int]uint64{}, pending: map[int]hdSmallTerrainPair{}, backing: map[uint32]hdSmallTerrainCell{}}
-	for _, d := range hdSmallTerrainDefinitions {
-		raw, err = hdReadFile(filepath.Join(directory, d.asset), 8<<20)
-		if err != nil {
-			return nil, err
+	definitions := append([]hdSmallTerrainDefinition(nil), hdSmallTerrainDefinitions...)
+	supplements := map[int]*hdSmallTerrainSupplementDefinition{}
+	for i := range hdSmallTerrainSupplementDefinitions {
+		a := &hdSmallTerrainSupplementDefinitions[i]
+		supplements[a.ordinal] = a
+		definitions = append(definitions, a.hdSmallTerrainDefinition)
+	}
+	artCache := map[string]struct {
+		im     image.Image
+		digest string
+	}{}
+	for _, d := range definitions {
+		supplement := supplements[d.ordinal]
+		cached, found := artCache[d.asset]
+		if !found {
+			raw, err = hdReadFile(filepath.Join(directory, d.asset), 8<<20)
+			if err != nil {
+				return nil, err
+			}
+			digest := hash(raw)
+			if digest != d.assetSHA {
+				return nil, fmt.Errorf("terrain asset mismatch: %d", d.ordinal)
+			}
+			im, err := png.Decode(bytes.NewReader(raw))
+			if err != nil {
+				return nil, err
+			}
+			cached = struct {
+				im     image.Image
+				digest string
+			}{im, digest}
+			artCache[d.asset] = cached
 		}
-		if hash(raw) != d.assetSHA {
-			return nil, fmt.Errorf("terrain asset mismatch: %d", d.ordinal)
+		if cached.digest != d.assetSHA {
+			return nil, fmt.Errorf("terrain cached asset mismatch: %d", d.ordinal)
 		}
-		im, err := png.Decode(bytes.NewReader(raw))
-		if err != nil {
-			return nil, err
-		}
-		if im.Bounds() != image.Rect(0, 0, d.width, d.height) || d.width != d.height {
+		im := cached.im
+		if im.Bounds() != image.Rect(0, 0, d.width, d.height) || (supplement == nil && d.width != d.height) {
 			return nil, fmt.Errorf("terrain asset shape mismatch")
 		}
-		f := &hdSmallTerrainFrame{hdSmallTerrainDefinition: d, art: image.NewRGBA(image.Rect(0, 0, 32, 32))}
-		for y := 0; y < 32; y++ {
-			for x := 0; x < 32; x++ {
-				f.art.SetRGBA(x, y, color.RGBAModel.Convert(im.At((2*x+1)*d.width/64, (2*y+1)*d.height/64)).(color.RGBA))
+		f := &hdSmallTerrainFrame{hdSmallTerrainDefinition: d, supplement: supplement, art: image.NewRGBA(image.Rect(0, 0, 32, 32))}
+		sample, content := [4]int{0, 0, d.width, d.height}, [4]int{0, 0, 8, 8}
+		if supplement != nil {
+			sample, content = supplement.sample, supplement.content
+		}
+		if sample[0] < 0 || sample[1] < 0 || sample[2] <= sample[0] || sample[3] <= sample[1] || sample[2] > d.width || sample[3] > d.height || content[0] < 0 || content[1] < 0 || content[2] <= content[0] || content[3] <= content[1] || content[2] > 8 || content[3] > 8 {
+			return nil, fmt.Errorf("terrain sample bounds mismatch: %d", d.ordinal)
+		}
+		for y := content[1] * 4; y < content[3]*4; y++ {
+			for x := content[0] * 4; x < content[2]*4; x++ {
+				sx := sample[0] + (2*(x-content[0]*4)+1)*(sample[2]-sample[0])/((content[2]-content[0])*8)
+				sy := sample[1] + (2*(y-content[1]*4)+1)*(sample[3]-sample[1])/((content[3]-content[1])*8)
+				f.art.SetRGBA(x, y, color.RGBAModel.Convert(im.At(sx, sy)).(color.RGBA))
 			}
 		}
 		p.frames[d.ordinal] = f
 	}
-	if len(p.frames) != 8 {
+	if len(p.frames) != 28 {
 		return nil, fmt.Errorf("incomplete terrain group")
 	}
 	return p, nil
@@ -179,7 +215,11 @@ func (p *hdSmallTerrainRuntime) beforeInstruction() {
 		return
 	}
 	dest, ok := hdBuildingWords(m.Mem, c.Seg[golem.DS], c.R[golem.BX], 4)
-	if !ok || dest[0] != 200 || dest[1] != 320 || uint32(dest[3])*16+uint32(dest[2]) != hdSmallTerrainStage {
+	destination := hdSmallTerrainStage
+	if ok {
+		destination = uint32(dest[3])*16 + uint32(dest[2])
+	}
+	if !ok || dest[0] != 200 || dest[1] != 320 || (destination != hdSmallTerrainStage && (frame.supplement == nil || destination != hdBuildingCanvas)) {
 		return
 	}
 	x, y := int(int16(c.R[golem.DX])), int(int16(stack[2]))
@@ -196,9 +236,10 @@ func (p *hdSmallTerrainRuntime) beforeInstruction() {
 		p.rejected++
 		return
 	}
+	p.destination = destination
 	p.current = frame
 	for k := 0; k < 64; k++ {
-		p.before[k] = m.Mem[hdSmallTerrainStage+uint32((y+k/8)*320+x+k%8)]
+		p.before[k] = m.Mem[destination+uint32((y+k/8)*320+x+k%8)]
 	}
 	p.active = true
 	p.outside = false
@@ -208,12 +249,22 @@ func (p *hdSmallTerrainRuntime) beforeInstruction() {
 	clear(p.writes[:])
 	clear(p.counts[:])
 	if p.trace {
-		p.entry = map[string]any{"ordinal": frame.ordinal, "entry_step": m.Steps, "registers": c.R, "segments": c.Seg, "stack": stack, "record_far": fmt.Sprintf("%04X:%04X", stack[4], off), "record": record, "source_far": fmt.Sprintf("%04X:%04X", record[1], record[0]), "source_sha256": hash(m.Mem[at : at+frame.length]), "rect": [4]int{x, y, x + 16, y + 16}}
+		p.entry = map[string]any{"ordinal": frame.ordinal, "entry_step": m.Steps, "registers": c.R, "segments": c.Seg, "stack": stack, "record_far": fmt.Sprintf("%04X:%04X", stack[4], off), "record": record, "source_far": fmt.Sprintf("%04X:%04X", record[1], record[0]), "source_sha256": hash(m.Mem[at : at+frame.length]), "rect": [4]int{x, y, x + 8, y + 8}}
 	}
 }
 func (p *hdSmallTerrainRuntime) stageWrite(addr uint32, old, value byte) {
-	i := int(addr - hdSmallTerrainStage)
-	p.stage[i].owned = false
+	p.stage[int(addr-hdSmallTerrainStage)].owned = false
+	p.recordSupplementWrite(addr, old, value)
+}
+func (p *hdSmallTerrainRuntime) recordSupplementWrite(addr uint32, old, value byte) {
+	destination := p.destination
+	if destination == 0 {
+		destination = hdSmallTerrainStage
+	}
+	if addr < destination || addr >= destination+64000 {
+		return
+	}
+	i := int(addr - destination)
 	if !p.active {
 		return
 	}
@@ -239,10 +290,14 @@ func (p *hdSmallTerrainRuntime) stageWrite(addr uint32, old, value byte) {
 }
 func (p *hdSmallTerrainRuntime) finish() {
 	p.active = false
+	destination := p.destination
+	if destination == 0 {
+		destination = hdSmallTerrainStage
+	}
 	var encoded []byte
 	count := 0
 	for k, v := range p.writes {
-		actual := p.h.m.Mem[hdSmallTerrainStage+uint32((p.y+k/8)*320+p.x+k%8)]
+		actual := p.h.m.Mem[destination+uint32((p.y+k/8)*320+p.x+k%8)]
 		if p.counts[k] == 0 {
 			if actual != p.before[k] {
 				p.rejected++
@@ -264,7 +319,13 @@ func (p *hdSmallTerrainRuntime) finish() {
 	}
 	for k, v := range p.writes {
 		if p.counts[k] == 1 {
-			p.stage[(p.y+k/8)*320+p.x+k%8] = hdSmallTerrainCell{true, uint16(p.current.ordinal), byte(k), v}
+			cell := hdSmallTerrainCell{true, uint16(p.current.ordinal), byte(k), v}
+			at := (p.y+k/8)*320 + p.x + k%8
+			if destination == hdBuildingCanvas {
+				p.visible[at] = cell
+			} else {
+				p.stage[at] = cell
+			}
 		}
 	}
 	p.accepted++
@@ -280,6 +341,7 @@ func (p *hdSmallTerrainRuntime) finish() {
 	}
 }
 func (p *hdSmallTerrainRuntime) canvasWrite(addr uint32, old, value byte) {
+	p.recordSupplementWrite(addr, old, value)
 	m := p.h.m
 	i := int(addr - hdBuildingCanvas)
 	p.revision++
@@ -337,6 +399,12 @@ func (p *hdSmallTerrainRuntime) paint(out *image.RGBA, f draftNativeFrame) map[s
 	mask := make([]byte, 8000)
 	by := map[int]int{}
 	validBy := map[int]int{}
+	supplementalPalettes := map[int]bool{}
+	for ordinal, frame := range p.frames {
+		if a := frame.supplement; a != nil {
+			supplementalPalettes[ordinal] = hdSupplementPaletteSupported(f.palette, a.paletteIndices, a.paletteSHA, a.water)
+		}
+	}
 	for i, c := range p.visible {
 		if !c.owned {
 			continue
@@ -347,6 +415,10 @@ func (p *hdSmallTerrainRuntime) paint(out *image.RGBA, f draftNativeFrame) map[s
 		}
 		valid++
 		validBy[int(c.ordinal)]++
+		frame := p.frames[int(c.ordinal)]
+		if frame == nil || (frame.supplement != nil && !supplementalPalettes[int(c.ordinal)]) {
+			continue
+		}
 		if c.native == 0 {
 			x, y := i%320*4, i/320*4
 			color0 := color.RGBA{(f.palette[0] << 2) | (f.palette[0] >> 4), (f.palette[1] << 2) | (f.palette[1] >> 4), (f.palette[2] << 2) | (f.palette[2] >> 4), 255}
@@ -357,7 +429,7 @@ func (p *hdSmallTerrainRuntime) paint(out *image.RGBA, f draftNativeFrame) map[s
 			mask[i>>3] |= 1 << uint(i&7)
 			continue
 		}
-		frame := p.frames[int(c.ordinal)]
+
 		sx, sy := int(c.k)%8*4, int(c.k)/8*4
 		active := false
 		for y := 0; y < 4; y++ {
@@ -371,7 +443,12 @@ func (p *hdSmallTerrainRuntime) paint(out *image.RGBA, f draftNativeFrame) map[s
 			continue
 		}
 		x, y := i%320*4, i/320*4
-		draw.Draw(out, image.Rect(x, y, x+4, y+4), frame.art, image.Pt(sx, sy), draw.Over)
+		if frame.supplement != nil && c.native >= 120 && c.native < 128 {
+			tile := hdTerrainForegroundWaterTile(frame.art, sx, sy, c.native, f.palette)
+			draw.Draw(out, image.Rect(x, y, x+4, y+4), tile, image.Point{}, draw.Over)
+		} else {
+			draw.Draw(out, image.Rect(x, y, x+4, y+4), frame.art, image.Pt(sx, sy), draw.Over)
+		}
 		painted++
 		by[int(c.ordinal)]++
 		mask[i>>3] |= 1 << uint(i&7)
