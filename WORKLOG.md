@@ -7595,3 +7595,15 @@ timeout 180 docker run --rm --network none --user 1000:1000 \
 - 文件腳本的防重複assert誤寫成比較鏈，在其餘文件完成後停止；修正guard後只補寫尚未寫入的WORKLOG，沒有重複追加其他文件或重跑遊戲驗證。
 - 收尾清除本輪Go快取並無損封存11個已結束的診斷／原型、R137舊程式及大型紀錄，回收521756672 bytes，約498MiB。現用R138正式程式、測試、來源fixture及所有PNG保持；封存後公開檢查器的完整結果與封存前相同。入口r138-cleanup-r1.json與r138-checker-storage-review-r1.json，重用舊程式先由tools/evidence_storage.py restore。
 - 最終交接r138-final-handoff-r1.json的SHA-256為6d31f15f654a5898a91a150cef6b49b70504a7b69c018236b35997c6a7b8a3a6。185163個未列為更新的保護內容完整SHA相同，含8份改以無損封存保存的原程式；其餘更新依正式建置、來源測試及增量報表核對。全部147671個PNG路徑、4120個一般存檔及24個存檔符號連結保持。工作樹核對時約33.78GiB，無root-owned產物、錯誤.md目錄、封存暫存檔或殘留借用檔。公開來源與現況單獨commit、push，原版、fixture及新實拍不入Git。
+
+## 2026-10-21 R141 工作區空間清理
+
+- 使用者要求先清理工作區。知識路由命中文件職責並實際載入入口，沿既有workplace、清理工具與工作日誌處理。R140小地圖原型及規格069既有DRAFT保持，沒有提升正式接線或增加HD、翻譯及原版對拍信用。
+- Go建置快取回收132702208 bytes。263組已結束記憶體、遮罩、JSON狀態及觀測紀錄共624個原路徑無損封存，回收442777600 bytes；每組內容重新解壓核對SHA-256，實際還原一份記憶體快照，內容、權限、修改時間及重新壓縮內容相同。還原沿[tools/evidence_storage.py](tools/evidence_storage.py)的restore，非root Docker掛載命令見R123紀錄。
+- 1588組相同內容的歷史PNG／GZIP，以硬連結共用11542個既有輸出路徑，回收742567936 bytes。原路徑、內容與權限保留，原修改時間記於清理名單；現行工作與正式素材路徑不替換。218組唯讀或凍結來源保持原樣。
+- 清除7份已結束Windows測試的Wine暫存環境，共5908個檔案路徑，回收918437888 bytes。以完整inode連結組計算，沒有將多份共用DLL重複相加；原版Windows資料保持。測試截圖、收據與存檔留在原處。後續由[tools/smoke_release.sh](tools/smoke_release.sh)在新測試批次初始化WINEPREFIX，不把舊快取視為交付物。
+- 清理操作合計回收2236485632 bytes，約2.08GiB。計入本輪名單及收據後，工作樹實占由36424777728降至34268991488 bytes，約33.92降至31.92GiB，淨減2155786240 bytes，約2.01GiB。
+- 186106個保護內容完整SHA相同，包含全部147821個PNG路徑、4124個一般存檔及24個存檔符號連結。386張正式HD原PNG、原始輸入、現用R138正式程式／測試、R140候選與必要fixture保持。公開教學5檢查器清理前後完整結果相同，原版完整狀態與存檔核對仍通過；既有253項來源測試收據保持，沒有重跑遊戲或宣稱新的測試信用。
+- 首次合併遇到唯讀來源目錄，當場停止；補上父目錄可寫與凍結來源排除，r2辨識已完成硬連結後接續，不改檔案權限。核對腳本初版沿用R139歷史子集總數，在內容SHA通過後於數量守門停止；本輪清理前名單包含後續新增150個PNG及4個存檔，已與全工作樹路徑核對，再以r2完整乾淨重跑。這兩項屬清理／核對腳本問題，不列為遊戲缺陷。
+- 本機入口為[清理收據](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r141-cleanup-final-r2.json)，SHA-256為0316161aac273900bc7222a4e9b7dd47e98df299ebcd348b856c6a46763164f6。同根r141-cleanup-plan-r1.json、r141-dedup-rows-r2.jsonl、r141-archive-rows-r2.jsonl、r141-wine-extra-plan-r1.json及r141-*-source-r*.py保存名單、來源與步驟；r141-after-cleanup-checker-r1.json登錄清理前後結果。新增本機證據由本節及CONTEXT掛入入口，不公開原版像素、存檔或研究輸入。
+- 全程使用有界、非root、無網路Docker，未重建映像檔、全域prune或清理其他專案。核對未見root-owned產物、錯誤.md目錄或封存暫存檔；本輪容器以--rm清除。清理文件單獨提交、推送，規格069的既有DRAFT不納入本次提交。
