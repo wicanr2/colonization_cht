@@ -1932,3 +1932,257 @@ func TestDraftSeaDialogSixForegroundSources(t *testing.T) {
 		})
 	}
 }
+
+func TestDraftLandfallDialogForeground(t *testing.T) {
+	root := os.Getenv("TEST_LANDFALL_ROOT")
+	if root == "" {
+		t.Skip("需要合法原版正常登陸觀測及快照")
+	}
+	read := func(name string) []byte {
+		t.Helper()
+		b, e := os.ReadFile(filepath.Join(root, name))
+		if e != nil {
+			t.Fatal(e)
+		}
+		return b
+	}
+	raw := read("landfall-observations.json")
+	if hash(raw) != "6181a2ef6bc0bc4ea0713c03204ca5de4ffce54f022798820fee1b67166c16d7" {
+		t.Fatal("normal observation fingerprint")
+	}
+	var rows []struct {
+		Kind       string
+		Step       uint64
+		Ink        image.Rectangle
+		SourceBase uint32          `json:"source_base"`
+		ReadPos    int             `json:"read_pos"`
+		Canvas     []byte          `json:"source_canvas"`
+		Buffer     []byte          `json:"source_buffer"`
+		FirstOld   map[int]byte    `json:"first_old"`
+		LastText   map[int]bool    `json:"last_text"`
+		After      map[int]byte    `json:"after_pixels"`
+		Shadow     bool            `json:"shadow_written"`
+		Others     image.Rectangle `json:"other_writes"`
+		Chars      []struct {
+			Byte       byte
+			Box        image.Rectangle
+			Colors     map[byte]int
+			Contiguous bool
+			Prefix     bool `json:"prefix_continuation"`
+		} `json:"characters"`
+	}
+	if e := json.Unmarshal(raw, &rows); e != nil {
+		t.Fatal(e)
+	}
+	if len(rows) != 2 {
+		t.Fatal("complete body and choices", len(rows))
+	}
+	journal := &nativeJournal{enabled: true}
+	for _, row := range rows {
+		if len(row.Canvas) != 64000 || len(row.Buffer) != 0 {
+			t.Fatal("complete native observation")
+		}
+		run := &dialogRun{base: row.SourceBase, readPos: row.ReadPos, firstOld: row.FirstOld, lastText: row.LastText, shadowWritten: row.Shadow, others: row.Others}
+		for _, c := range row.Chars {
+			run.chars = append(run.chars, dialogChar{c: c.Byte, box: c.Box, colors: c.Colors, contig: c.Contiguous, prefixContinuation: c.Prefix})
+		}
+		journal.items = append(journal.items, &nativeObservation{kind: "dialog", step: row.Step, ink: row.Ink, canvas: row.Canvas, buffer: row.Buffer, after: row.After, dialogRun: run})
+	}
+	obs, options := journal.items[0], journal.items[1]
+	mem := read("gui.memory")
+	indexed := read("gui.final.idx")
+	palette := read("gui.final.pal")
+	if hash(mem) != "c8bd66614154a760819b03b454fc85cd3bbe24eebca757b20901fd2c522e3283" || hash(indexed) != "5e1c5d3f40c00f5a5436fbd292aa81fea9f19e0a55b54401eb62e02462634dae" || hash(palette) != "7fc2f577301f1a337ed658470b425d9ec907c0278b1f7732fc018bb3ab28aa7a" {
+		t.Fatal("native state fingerprint")
+	}
+	canvas := bytes.Clone(mem[0x2cae0 : 0x2cae0+64000])
+	cursor := image.Rect(16, 16, 32, 32)
+	m, p, _ := hdEventFixtureLoad(t, 1063, "")
+	hdEventRun(t, m, p)
+	copy(m.Mem, mem)
+	targets := draftActualTargetsForTest(t)
+	records := []map[string]any{}
+	for _, locale := range []string{"zh-Hant", "zh-Hans", "ja", "ko"} {
+		t.Run(locale, func(t *testing.T) {
+			target := targets[locale]
+			target.portraits = p
+			d := &dialogRuntime{cat: target.dlg}
+			body, _, why := d.finish(cloneNativeDialog(obs.dialogRun), obs.canvas, obs.step)
+			if body == nil || why != "" || body.id != "GAME.TXT:@LANDFALL:0x00000FAD" {
+				t.Fatal("body identity", why)
+			}
+			draftKeepDialog(d, body, obs.canvas)
+			scoped := draftLandfallDialogContext(target, d, body, obs, options, palette, cursor, false)
+			choice, _, why := scoped.finish(cloneNativeDialog(options.dialogRun), options.canvas, options.step)
+			if choice == nil || why != "" {
+				t.Fatal("choice identity", why)
+			}
+			draftKeepDialog(d, choice, options.canvas)
+			if len(choice.items) != 2 {
+				t.Fatal("complete choices", choice.items)
+			}
+			fixed, changed := draftFitLandfallDialog(target, body, obs, choice, canvas, indexed, palette, cursor)
+			if fixed == nil || changed != 5 || fixed.size != 30 || fixed.safe != image.Rect(65, 119, 254, 143) {
+				t.Fatal("measured field", fixed, changed)
+			}
+			bounds := draftAlphaBounds([]*image.Alpha{fixed.shadow, fixed.normal, fixed.accent})
+			layout := image.Rect(65, 124, 254, 143)
+			relative := image.Rect(0, 20, 756, 96)
+			if !bounds.In(relative) {
+				t.Fatal("text leaves portrait-free layout", bounds)
+			}
+			before := hash(m.Mem)
+			im, report, e := draftRebuildTarget(target, journal, canvas, mem[0x3bb00:0x3bb00+64000], indexed, palette, cursor, 80800000, 19)
+			if e != nil || hash(m.Mem) != before {
+				t.Fatal("display changed original memory", e)
+			}
+			items, _ := report["items"].([]map[string]any)
+			found := false
+			for _, it := range items {
+				if it["id"] == body.id {
+					found = true
+					if it["foreground_source"] != 1063 || it["foreground_pixels"] != 5910 || it["native_occluded_pixels"] != 5 || it["layout_safe"] != layout {
+						t.Fatal("foreground record", it)
+					}
+				}
+			}
+			if !found {
+				t.Fatal("body absent from integrated renderer", report["dialog_misses"], items)
+			}
+			mask, id := p.seaDialogForeground(canvas, indexed, palette, cursor)
+			if id != 1063 {
+				t.Fatal("portrait identity")
+			}
+			native := draftRGB(indexed, palette)
+			for pos := range canvas {
+				if mask[pos>>3]&(1<<uint(pos&7)) != 0 {
+					for yy := 0; yy < 4; yy++ {
+						for xx := 0; xx < 4; xx++ {
+							x, y := pos%320*4+xx, pos/320*4+yy
+							if im.RGBAAt(x, y) != native.RGBAAt(x, y) {
+								t.Fatal("portrait overwritten", x, y)
+							}
+						}
+					}
+				}
+			}
+			if out := os.Getenv("TEST_LANDFALL_OUTPUT"); out != "" {
+				f, e := os.Create(filepath.Join(out, locale+".png"))
+				if e != nil {
+					t.Fatal(e)
+				}
+				e = png.Encode(f, im)
+				f.Close()
+				if e != nil {
+					t.Fatal(e)
+				}
+			}
+
+			t.Run("initial-window-and-paired-redraw", func(t *testing.T) {
+				late := *options
+				late.step = body.complete + 2000000
+				if got := draftLandfallDialogContext(target, d, body, obs, &late, palette, cursor, false); got != d {
+					t.Fatal("initial pairing deadline was widened")
+				}
+				source := *options
+				source.step += 4000000
+				redrawn := &nativeJournal{enabled: true, items: []*nativeObservation{obs, options, &source}}
+				_, receipt, err := draftRebuildTarget(target, redrawn, canvas, mem[0x3bb00:0x3bb00+64000], indexed, palette, cursor, 84800000, 19)
+				if err != nil {
+					t.Fatal(err)
+				}
+				present := false
+				for _, item := range receipt["items"].([]map[string]any) {
+					present = present || item["id"] == body.id
+				}
+				if !present {
+					t.Fatal("paired redraw lost body", receipt["dialog_misses"])
+				}
+				unpaired := &nativeJournal{enabled: true, items: []*nativeObservation{obs, &source}}
+				_, receipt, err = draftRebuildTarget(target, unpaired, canvas, mem[0x3bb00:0x3bb00+64000], indexed, palette, cursor, 84800000, 19)
+				if err != nil {
+					t.Fatal(err)
+				}
+				for _, item := range receipt["items"].([]map[string]any) {
+					if item["id"] == body.id {
+						t.Fatal("unpaired late choice revived body")
+					}
+				}
+			})
+			t.Run("unknown-option-source", func(t *testing.T) {
+				source := *options
+				source.dialogRun = cloneNativeDialog(source.dialogRun)
+				source.dialogRun.chars[0].c = '?'
+				if got := draftLandfallDialogContext(target, d, body, obs, &source, palette, cursor, true); got != d {
+					t.Fatal("unknown original option narrowed catalog")
+				}
+			})
+			font := target.dlg.fonts[fixed.size]
+			records = append(records, map[string]any{"locale": locale, "font_px": fixed.size, "source_safe": fixed.safe, "layout_safe": layout, "ink_local_to_source_safe": bounds, "glyph_origin_y": layout.Min.Y*4 + 4 - font.cjkTop, "native_occluded_pixels": changed, "foreground_source": 1063, "foreground_pixels": 5910})
+			for _, kind := range []string{"missing-tracker", "wrong-key", "wrong-geometry", "unknown-background", "changed-vga", "wrong-palette", "lost-owner", "wrong-choice", "erased-choice", "missing-font", "closed-dialog"} {
+				t.Run(kind, func(t *testing.T) {
+					local := *target
+					item := *body
+					pick := *choice
+					c, v, pal := bytes.Clone(canvas), bytes.Clone(indexed), bytes.Clone(palette)
+					saved := p.visible
+					defer func() { p.visible = saved }()
+					switch kind {
+					case "missing-tracker":
+						local.portraits = nil
+					case "wrong-key":
+						item.id = "GAME.TXT:@LANDFALL2:0x0000103C"
+					case "wrong-geometry":
+						item.safe = item.safe.Add(image.Pt(1, 0))
+					case "unknown-background":
+						c[140*320+66] ^= 1
+						v[140*320+66] = c[140*320+66]
+					case "changed-vga":
+						v[140*320+66] ^= 1
+					case "wrong-palette":
+						for i := range pal {
+							pal[i] ^= 1
+						}
+					case "lost-owner":
+						for pos := range c {
+							if mask[pos>>3]&(1<<uint(pos&7)) != 0 {
+								p.visible[pos] = hdSceneCell{}
+								break
+							}
+						}
+					case "wrong-choice":
+						pick.items = append([]string(nil), pick.items...)
+						pick.items[0], pick.items[1] = pick.items[1], pick.items[0]
+					case "erased-choice":
+						pick.afterSafe = bytes.Clone(pick.afterSafe)
+						pick.afterSafe[0] ^= 1
+					case "missing-font":
+						cat := *target.dlg
+						cat.fonts = nil
+						local.dlg = &cat
+					case "closed-dialog":
+						for y := 119; y < 168; y++ {
+							for x := 65; x < 254; x++ {
+								c[y*320+x] = 0
+								v[y*320+x] = 0
+							}
+						}
+					}
+					if got, _ := draftFitLandfallDialog(&local, &item, obs, &pick, c, v, pal, cursor); got != nil {
+						t.Fatal("unverified source accepted", kind)
+					}
+				})
+			}
+		})
+	}
+	english, report, e := draftRebuildTarget(targets["en"], journal, canvas, mem[0x3bb00:0x3bb00+64000], indexed, palette, cursor, 80800000, 19)
+	if e != nil || !bytes.Equal(english.Pix, draftRGB(indexed, palette).Pix) || report["original_rendering"] != true {
+		t.Fatal("English changed", e)
+	}
+	if out := os.Getenv("TEST_LANDFALL_OUTPUT"); out != "" {
+		b, _ := json.MarshalIndent(map[string]any{"result": "PASS_R127_LANDFALL_NOTO_AND_FOREGROUND", "records": records, "english_original_unchanged": true}, "", "  ")
+		if e := os.WriteFile(filepath.Join(out, "check.json"), append(b, '\n'), 0644); e != nil {
+			t.Fatal(e)
+		}
+	}
+}
