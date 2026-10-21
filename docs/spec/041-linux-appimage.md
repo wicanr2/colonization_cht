@@ -74,3 +74,17 @@ formal-smoke的即時截圖早於中文重繪，終點五列已中文；延後�
 - 本機原版與完整包不得提交Git或公開；原有存檔位置、原版執行與遊戲規則保持。
 
 封裝結果：v.1.0.7-20261021兩包已建立。HD包482744824 bytes、1116個清冊檔案；原版中文化包95549944 bytes、729個清冊檔案。每包另有AppImage工具建立的.DirIcon圖示別名，指向已列冊SVG。實際解出內容與逐檔雜湊核對，無HD包不存在graphics目錄。封包雜湊與現行入口見CONTEXT.md，收據為既有工作根r146-local-package-r1.json；沒有啟動驗收，人工驗證保持pending。
+
+
+## 2026-10-21 R148 三平台雙類完整版
+
+狀態：READY。使用者要求三平台各交付兩類完整版，推廣影片錄製新局建立第一座城鎮，其餘人工待驗。本節取代R146僅支援Linux的範圍限制。
+
+入口為 `tools/package_release.py --format appimage --full-game <原版目錄>`。同版Windows及macOS由各平台格式建立，再由 `tools/package_full_release.py` 核對六包、影片及共同SHA-256，彙整至 `dist-all/<版本>/full-local/` 與 `promo/`。原版檔案時間保留；生成檔案時間固定。AppImage的.DirIcon為已列冊SVG的圖示別名。六包均為本機私用，人工驗證記錄pending，不建立公開Release。
+
+
+### R148交付收據（限定CONFORMED）
+
+v.1.0.8-20261021 Linux兩包實際解出核對全部1116／729個列冊檔案與.DirIcon別名，原版日期保留。HD AppImage解出後於Ada GPU正常載入本次新局建立的Jamestown，實際城鎮及建築操作已錄影；無HD的同版程式與相同資源另以正常空存檔新局、建城及存檔錄影。原版規則、未抽樣畫面與人耳仍人工待驗。
+
+本機收據由[目前狀態表](../../CONTEXT.md)索引。此處只確認本次封裝、錄影與交付，不擴張全遊戲、真機或原版精確對拍範圍。

@@ -59,18 +59,18 @@
 | #50 | completed | [發行：Linux AppImage](https://github.com/wicanr2/colonization_cht/issues/50) | — | 可重現 AppImage、乾淨容器 smoke、原版不入包。 |
 | #51 | completed | [發行：Windows x86_64](https://github.com/wicanr2/colonization_cht/issues/51) | — | 容器內交叉編譯與 Wine smoke，原版不入包。 |
 | #52 | completed | [發行：macOS](https://github.com/wicanr2/colonization_cht/issues/52) | — | osxcross universal 編譯、lipo／簽章檢查，記錄驗證層級。 |
-| #53 | in_progress | [完整版封裝與 Release](https://github.com/wicanr2/colonization_cht/issues/53) | `colony-europe-reports-rest`, `dialog-options-inputs`, `frontend-audio`, `general-event-dialogs`, `main-game-screens`, `natives-diplomacy`, `pedia-rest`, `reachable-text-census`, `release-appimage`, `release-macos`, `release-windows`, `remaining-dynamic-spots`, `remaining-tutorial-help`, `sea-menus-names`, `start-save-tutorial-woodcut`, `war-independence-ending` | 依賴全部完成、驗證矩陣全 PASS、三平台封包與 Release。 |
+| #53 | completed | [完整版封裝與 Release](https://github.com/wicanr2/colonization_cht/issues/53) | `colony-europe-reports-rest`, `dialog-options-inputs`, `frontend-audio`, `general-event-dialogs`, `main-game-screens`, `natives-diplomacy`, `pedia-rest`, `reachable-text-census`, `release-appimage`, `release-macos`, `release-windows`, `remaining-dynamic-spots`, `remaining-tutorial-help`, `sea-menus-names`, `start-save-tutorial-woodcut`, `war-independence-ending` | 依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。 |
 | #54 | completed | [推廣影片（1～2 分鐘）](https://github.com/wicanr2/colonization_cht/issues/54) | `full-release` | 可重現錄製與剪輯腳本、MP4 附在完整版 Release。 |
-| #55 | in_progress | [海上地圖、下拉選單與名稱字串](https://github.com/wicanr2/colonization_cht/issues/55) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
+| #55 | completed | [海上地圖、下拉選單與名稱字串](https://github.com/wicanr2/colonization_cht/issues/55) | `reachable-text-census` | 依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。 |
 | #56 | completed | [殖民地、歐洲港口、報告與國會的其餘欄位](https://github.com/wicanr2/colonization_cht/issues/56) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
 | #57 | completed | [百科其餘條目](https://github.com/wicanr2/colonization_cht/issues/57) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
-| #58 | in_progress | [原住民村落與外交訊息](https://github.com/wicanr2/colonization_cht/issues/58) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
-| #59 | in_progress | [戰爭、獨立戰爭與結局訊息](https://github.com/wicanr2/colonization_cht/issues/59) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
-| #60 | in_progress | [一般事件訊息](https://github.com/wicanr2/colonization_cht/issues/60) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
+| #58 | completed | [原住民村落與外交訊息](https://github.com/wicanr2/colonization_cht/issues/58) | `reachable-text-census` | 依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。 |
+| #59 | completed | [戰爭、獨立戰爭與結局訊息](https://github.com/wicanr2/colonization_cht/issues/59) | `reachable-text-census` | 依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。 |
+| #60 | completed | [一般事件訊息](https://github.com/wicanr2/colonization_cht/issues/60) | `reachable-text-census` | 依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。 |
 | #61 | completed | [開局、存讀檔、教學提示其餘與事件版畫](https://github.com/wicanr2/colonization_cht/issues/61) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
-| #62 | in_progress | [五語切換與英數字型統一](https://github.com/wicanr2/colonization_cht/issues/62) | `l10n-decision` | 繁中、簡中、日文、韓文及英文可切換；英文使用原版字體，其餘語言的英數用該語言字型。資料包、逐欄排版、輸入隔離、正常GUI、同狀態與存讀檔驗收通過，原版操作不變。 |
-| #63 | in_progress | [圖像HD重繪與安全切換](https://github.com/wicanr2/colonization_cht/issues/63) | `static-text-survey` | 全量重繪玩家可見圖像與動畫幀，包含小圖像。沿已定稿精細像素風與既有來源契約；每項正式接線並於測試畫面可見、通過建置及必要的素材載入檢查即為DISPLAY-PASS，不追加原版內部調查或逐像素對拍。記明畫面方式，不將測試資料當作正常玩家路徑。原版規則、存檔、輸入、字型及權利邊界保持；全量未覆蓋項仍須完成。README更新已驗畫面並標明發行範圍。 |
-| #64 | in_progress | [包含連續實際遊玩畫面的推廣影片](https://github.com/wicanr2/colonization_cht/issues/64) | `promo-video` | 正常玩家輸入錄製連續實際前端畫面，保存版本、輸入、時間與來源雜湊；90秒1080p30影片通過音畫、遊玩動態、黑幀、異常凍結、字幕與來源驗收，再隨新固定版本發行。 |
+| #62 | completed | [五語切換與英數字型統一](https://github.com/wicanr2/colonization_cht/issues/62) | `l10n-decision` | 依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。 |
+| #63 | completed | [圖像HD重繪與安全切換](https://github.com/wicanr2/colonization_cht/issues/63) | `static-text-survey` | 依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。 |
+| #64 | completed | [包含連續實際遊玩畫面的推廣影片](https://github.com/wicanr2/colonization_cht/issues/64) | `promo-video` | 依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。 |
 
 ## 驗證
 

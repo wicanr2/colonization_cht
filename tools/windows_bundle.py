@@ -7,6 +7,7 @@ import json
 import shlex
 import stat
 import zipfile
+from datetime import datetime, timezone
 from pathlib import PurePosixPath
 
 
@@ -100,6 +101,8 @@ def build_windows_zip(files, manifest, top, linux_launcher):
     payload.pop('MANIFEST.json', None)
     payload.pop('colonization-cht.sh', None)
     payload['colonization-cht.bat'] = (windows_launcher(linux_launcher), 0o755)
+    if manifest.get('private_only') and manifest.get('bundled_original'):
+        payload['start.bat'] = (b'@echo off\r\nsetlocal DisableDelayedExpansion\r\ncall "%~dp0colonization-cht.bat" --game "%~dp0game" %*\r\n', 0o755)
     readme = payload['README.txt'][0].decode('utf-8-sig').replace('\r\n', '\n')
     payload['README.txt'] = (readme.replace('\n', '\r\n').encode('utf-8-sig'), 0o644)
     bundled = copy.deepcopy(manifest)
@@ -115,9 +118,20 @@ def build_windows_zip(files, manifest, top, linux_launcher):
             relative = PurePosixPath(name)
             if relative.is_absolute() or '..' in relative.parts:
                 raise ValueError('非法包內路徑：' + name)
-            entry = zipfile.ZipInfo(top + '/' + name, date_time=(1980, 1, 1, 0, 0, 0))
+            entry = zipfile.ZipInfo(top + '/' + name, date_time=zip_timestamp(name, payload, manifest))
             entry.create_system = 3
             entry.external_attr = (stat.S_IFREG | mode) << 16
             entry.compress_type = zipfile.ZIP_DEFLATED
             archive.writestr(entry, data, compresslevel=9)
     return output.getvalue(), bundled
+
+
+def zip_timestamp(name, payload, manifest):
+    """原版輸入日期保留至ZIP可表現精度，其餘元件固定時間。"""
+    if manifest.get('private_only') and manifest.get('bundled_original') and name.startswith('game/'):
+        record = json.loads(payload['FULL-LOCAL-MANIFEST.json'][0])['files'][name]
+        stamp = datetime.fromtimestamp(record['source_mtime_ns'] / 1_000_000_000, timezone.utc)
+        if not 1980 <= stamp.year <= 2107:
+            raise ValueError('原版日期超出ZIP範圍：' + name)
+        return (stamp.year, stamp.month, stamp.day, stamp.hour, stamp.minute, stamp.second)
+    return (1980, 1, 1, 0, 0, 0)

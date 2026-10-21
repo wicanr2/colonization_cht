@@ -82,6 +82,12 @@ def build_appimage(files, manifest, repo, top, tools=Path('/opt/appimage-tools')
             path.chmod(mode)
         for path in [*appdir.rglob('*'), appdir]:
             os.utime(path, (0, 0))
+        private = manifest.get('private_only') and manifest.get('bundled_original')
+        if private:
+            original = json.loads(payload['FULL-LOCAL-MANIFEST.json'][0])['files']
+            for name, record in original.items():
+                stamp = record['source_mtime_ns']
+                os.utime(appdir / name, ns=(stamp, stamp))
         package = Path(temp) / (top + '.AppImage')
         env = dict(os.environ, ARCH='x86_64', SOURCE_DATE_EPOCH='0')
         cmd = [str(tools / 'appimagetool.AppImage'), '--appimage-extract-and-run', '--no-appstream',
@@ -91,8 +97,9 @@ def build_appimage(files, manifest, repo, top, tools=Path('/opt/appimage-tools')
         if actual_tools['appimagetool.AppImage'] == APPIMAGETOOL_1_9_0:
             # 1.9.0 另傳時間參數，避免 mksquashfs 同時讀取環境變數而拒絕。
             env.pop('SOURCE_DATE_EPOCH', None)
-            cmd[-2:-2] = ['--mksquashfs-opt=-mkfs-time', '--mksquashfs-opt=0',
-                          '--mksquashfs-opt=-all-time', '--mksquashfs-opt=0']
+            cmd[-2:-2] = ['--mksquashfs-opt=-mkfs-time', '--mksquashfs-opt=0']
+            if not private:
+                cmd[-2:-2] = ['--mksquashfs-opt=-all-time', '--mksquashfs-opt=0']
         result = subprocess.run(cmd, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                 text=True, timeout=180)
         if result.returncode:

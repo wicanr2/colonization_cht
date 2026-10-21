@@ -67,10 +67,8 @@ def full_game_files(root):
     return files, records
 
 
-def build_full_local_appimages(args, files, manifest, hd_files, platform):
+def build_full_local_packages(args, files, manifest, hd_files, platform):
     """同一版號的完整版固定成對產出；無HD包完全排除生成圖像。"""
-    from appimage_bundle import build_appimage
-
     originals, original_records = full_game_files(args.full_game)
     base = {name: content for name, content in files.items() if name not in hd_files}
     base.update(originals)
@@ -90,13 +88,21 @@ def build_full_local_appimages(args, files, manifest, hd_files, platform):
             "HD事件標題使用金色。\n" if with_hd else
             "不含HD素材，圖像使用原版；顯示設定保留語言切換，HD不可用。\n"
             "既存HD偏好只在當次啟動回退原版，不覆寫偏好檔。宣言字母保留原版動畫。\n")
+        if args.format == 'appimage':
+            launch_note = "直接執行本AppImage；FUSE不可用時，加 --appimage-extract-and-run。\n需要Linux x86_64、X11、OpenGL、ALSA、glibc及bash。\n"
+            save_location = '~/.local/share/colonization-cht/save'
+        elif args.format == 'windows-zip':
+            launch_note = "完整解壓縮ZIP後，執行start.bat。\n平台為Windows x86_64。\n"
+            save_location = '%LOCALAPPDATA%\\colonization-cht\\save'
+        else:
+            launch_note = "完整解壓縮ZIP後，執行start.command。\n通用程式包含Intel及Apple Silicon；真機與Gatekeeper留待人工驗證。\n"
+            save_location = '~/Library/Application Support/colonization-cht/save'
         readme = (
             "殖民帝國「" + label + "」本機完整版 " + args.version + "\n\n"
             "本包內含本機合法原版資料、五語顯示層與Noto字型。\n" + graphics_note +
             "僅供本機使用，不得提交Git、上傳或公開散布。沒有附帶使用者存檔。\n"
-            "\n直接執行本AppImage即可。FUSE不可用時，加 --appimage-extract-and-run。\n"
-            "需要Linux x86_64、X11、OpenGL、ALSA、glibc及bash。\n"
-            "\n語言初始為繁中，沿用既存偏好。存檔沿用 ~/.local/share/colonization-cht/save。\n"
+            "\n" + launch_note +
+            "\n語言初始為繁中，沿用既存偏好。存檔沿用 " + save_location + "。\n"
             "\n依使用者要求，本版停止自動測試。啟動、畫面及聲音待人工驗證。\n"
             "未抽樣情境可能保留原文或原圖，不宣稱完整五語與全遊戲HD驗收完成。\n"
             "\n授權見LICENSE及LICENSES/；本機原版資料不在本作品授權範圍內。\n")
@@ -107,8 +113,20 @@ def build_full_local_appimages(args, files, manifest, hd_files, platform):
                        graphics_modes=["original", "hd"] if with_hd else ["original"])
         bundled["files"] = {k: {"sha256": sha(v[0]), "bytes": len(v[0])} for k, v in sorted(payload.items())}
         top = f"colonization-cht-{args.version}-full-local-{edition}-{platform}"
-        data, completed = build_appimage(payload, bundled, args.repo, top)
-        packages.append((top + ".AppImage", data, completed))
+        launcher = (args.repo / 'tools/release/colonization-cht.sh').read_text()
+        if args.format == 'appimage':
+            from appimage_bundle import build_appimage
+            data, completed = build_appimage(payload, bundled, args.repo, top)
+            suffix = '.AppImage'
+        elif args.format == 'windows-zip':
+            from windows_bundle import build_windows_zip
+            data, completed = build_windows_zip(payload, bundled, top, launcher)
+            suffix = '.zip'
+        else:
+            from macos_bundle import build_macos_zip
+            data, completed = build_macos_zip(payload, bundled, top, launcher)
+            suffix = '.zip'
+        packages.append((top + suffix, data, completed))
 
     # 兩包都組裝成功才建立交付版本；排他建立，不覆寫已存在的版本。
     args.output.mkdir(parents=True, exist_ok=True)
@@ -695,12 +713,12 @@ def main():
     p.add_argument("--format", choices=["tar.gz", "appimage", "windows-zip", "macos-zip"], default="tar.gz")
     p.add_argument('--mask-bundle', type=Path)
     p.add_argument('--mask-manifest-sha256')
-    p.add_argument('--full-game', type=Path, help='同時產出有HD／無HD兩個本機完整AppImage，內含合法原版資料，不得公開')
+    p.add_argument('--full-game', type=Path, help='同時產出有HD／無HD兩個本機完整版，內含合法原版資料，不得公開')
     a = p.parse_args()
     if not VERSION.fullmatch(a.version):
         raise SystemExit("版號不符 v.X.Y.Z-YYYYMMDD")
-    if a.full_game and a.format != "appimage":
-        raise SystemExit("--full-game只支援本機AppImage")
+    if a.full_game and a.format not in {"appimage", "windows-zip", "macos-zip"}:
+        raise SystemExit("--full-game只支援AppImage、Windows ZIP及macOS ZIP")
     if (a.output / a.version).exists():
         raise SystemExit("交付版本目錄已存在；請用新的版號，禁止覆寫既有封包")
     embedded_version = None
@@ -777,7 +795,7 @@ def main():
     if embedded_version is not None:
         manifest["frontend_version"] = embedded_version
     if a.full_game:
-        return build_full_local_appimages(a, files, manifest, hd_files, platform)
+        return build_full_local_packages(a, files, manifest, hd_files, platform)
     files["MANIFEST.json"] = ((json.dumps(manifest, ensure_ascii=False, indent=1, sort_keys=True) + "\n").encode(), 0o644)
     if a.format in {"appimage", "windows-zip", "macos-zip"}:
         if macos:

@@ -17,7 +17,7 @@ p.add_argument('--full-game', type=Path, help='舊參數已停用；完整版請
 p.add_argument('--full-only', action='store_true', help='舊參數已停用，避免產出未分兩類的完整版')
 a = p.parse_args()
 if a.full_game or a.full_only:
-    p.error('此入口只彙整公開交付。Linux兩類完整版請用tools/package_release.py --format appimage --full-game <原版目錄>；契約見docs/spec/041-linux-appimage.md。')
+    p.error('此入口只彙整公開交付。三平台兩類完整版請用tools/package_release.py --full-game及對應format，再以tools/package_full_release.py彙整；契約見docs/spec/044-release-and-promo.md。')
 sha = lambda data: hashlib.sha256(data).hexdigest()
 assert a.output.is_dir() and a.output.stat().st_uid == os.getuid()
 assert not (a.output / a.version).exists()

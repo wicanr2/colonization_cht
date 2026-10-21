@@ -162,9 +162,12 @@ def macos_launcher(source):
 
 
 def build_macos_zip(files, manifest, top, linux_launcher):
+    from windows_bundle import zip_timestamp
     payload = dict(files)
     payload.pop('MANIFEST.json', None)
     payload['colonization-cht.sh'] = (macos_launcher(linux_launcher).encode(), 0o755)
+    if manifest.get('private_only') and manifest.get('bundled_original'):
+        payload['start.command'] = (b'#!/bin/bash\nset -e\ncd -- "$(dirname -- "$0")"\nexec ./colonization-cht.sh --game "$PWD/game" "$@"\n', 0o755)
     bundled = copy.deepcopy(manifest)
     bundled['format'] = 'macOS-ZIP'
     bundled['launcher_source_sha256'] = hashlib.sha256(linux_launcher.encode()).hexdigest()
@@ -177,7 +180,7 @@ def build_macos_zip(files, manifest, top, linux_launcher):
         for name, (data, mode) in sorted(payload.items()):
             path = PurePosixPath(name)
             need(not path.is_absolute() and '..' not in path.parts, '非法包內路徑：'+name)
-            entry = zipfile.ZipInfo(top+'/'+name, date_time=(1980,1,1,0,0,0))
+            entry = zipfile.ZipInfo(top+'/'+name, date_time=zip_timestamp(name, payload, manifest))
             entry.create_system = 3
             entry.external_attr = (stat.S_IFREG | mode) << 16
             entry.compress_type = zipfile.ZIP_DEFLATED

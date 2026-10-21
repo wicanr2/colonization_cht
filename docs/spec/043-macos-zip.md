@@ -37,3 +37,17 @@ candidate-c／d ZIP 各14177251bytes，SHA-256 `b6a1b5fc9d40098a02808f23b185dec9
 兩側壞簽署頁、Windows 錯平台、舊 Intel 未簽章、舊失效簽章、macOS 誤用 Windows／Linux 格式、非法版號與覆寫既有版本均拒絕。refusals.json 為 PASS_MACOS_PACKAGING_REFUSALS，SHA-256 `cf60dff6a27f878d48240b1fa763c6a10feee1bcb715fb3edb742d35ead09182`。共用封裝器的 Windows ZIP 回歸仍13973331bytes，指紋 `2fa9630f26f195257170bcc86c78b6f60a5e4a743740e448f4719939e9cfe100`，與前批逐位元組相同。
 
 驗收不包含 macOS 執行、真機、Gatekeeper、音訊、鍵鼠或存讀檔。未建立正式版號、dist-all 交付或 Release；#52 維持進行中。重跑入口與所有本機收據由目標182索引。
+
+
+## 2026-10-21 R148 雙類完整版
+
+狀態：READY。使用者授權三平台完整版及推廣影片，其餘人工待驗。入口為 `tools/package_release.py --format macos-zip --full-game <原版目錄>`，成對產出HD＋原版＋中文化與原版＋中文化。start.command傳入包內game目錄；通用程式保留amd64與arm64兩個切片及各自ad-hoc簽章。原版檔案時間以ZIP的兩秒精度保留，存檔不隨包。無HD包不包含graphics目錄。
+
+共同交付與清冊核對入口為 `tools/package_full_release.py`，契約見規格044的R148。封包限定本機私用，macOS真機啟動、Gatekeeper、音訊、存讀檔及遊玩交由人工驗證；簽章頁自洽不等於系統接受執行。
+
+
+### R148交付收據（限定CONFORMED）
+
+v.1.0.8-20261021 macOS兩包實際解出核對1101／714個列冊檔案，amd64／arm64內嵌版號、簽章頁、288個原版、共用文字資源、啟動器及日期通過。未執行新版macOS程式；真機、Gatekeeper、音訊與存讀檔留人工。
+
+本機收據由[目前狀態表](../../CONTEXT.md)索引。此處只確認本次封裝、錄影與交付，不擴張全遊戲、真機或原版精確對拍範圍。

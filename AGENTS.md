@@ -163,10 +163,14 @@ RE 證據 → DRAFT 規格 → 證據審查 → READY 規格
 ## Git 與對外操作
 
 - 使用者於2026-10-21決定後續完整版固定分為「HD＋原版＋中文化」及「原版＋中文化」。
-  目前Linux入口為 `tools/package_release.py --format appimage --full-game <原版目錄>`，
+  各平台入口為 `tools/package_release.py --format <格式> --full-game <原版目錄>`，
   同一版號一次產出兩包至 `dist-all/<版本>/full-local/`，規格見
-  [規格041](docs/spec/041-linux-appimage.md#2026-10-21-r146-完整版分為兩類)。
+  [規格041](docs/spec/041-linux-appimage.md#2026-10-21-r148-三平台雙類完整版)。
   無HD包不含 `graphics/`，保留中文化與字型；兩包均只留本機，不公開原版資料。
+- 使用者於2026-10-21 R148定案三平台兩類完整版與正常新局至第一城鎮的實錄影片，
+  交付後相關Issue結案，剩餘人工驗證。彙整入口為 `tools/package_full_release.py`，
+  格式、影音與結案邊界見[規格044 R148](docs/spec/044-release-and-promo.md#2026-10-21-r148-三平台完整版與建城實錄交付-ready)。
+  交付結案不代表全情境、真機或原版精確對拍驗收。
 
 - 進入本儲存庫先確認 Git 身分為 `wicanr2@gmail.com`，並檢查既有 commit 作者。
 - GitHub Issue 一律以主機的 `/home/anr2/.local/bin/gh` 操作；第一次使用先以未受限權限執行

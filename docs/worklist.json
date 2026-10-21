@@ -1313,7 +1313,7 @@
     {
       "id": "full-release",
       "issue": 53,
-      "state": "in_progress",
+      "state": "completed",
       "title": "完整版封裝與 Release",
       "depends_on": [
         "colony-europe-reports-rest",
@@ -1333,10 +1333,24 @@
         "start-save-tutorial-woodcut",
         "war-independence-ending"
       ],
-      "acceptance": "依賴全部完成、驗證矩陣全 PASS、三平台封包與 Release。",
+      "acceptance": "依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。",
       "verify": {
-        "kind": "manual",
-        "note": "v.1.0.2-20261005原速音樂獨立播放完成本機驗收：83.892秒即時音樂缺樣0、丟棄0，同輸入原版CPU/RAM/中文畫面/原始WAV全等。三平台各重複封裝全等，Linux/Wine公開包正常GUI與私用完整包啟動通過；macOS限建置/封包/shell。90秒影片已重建版號與八幀檢視。原版曲尾仍等下一首指令、數位音效保留原路徑，未人耳/音效卡及macOS真機。974待情境與主選單持續英文追蹤不變，#53保持OPEN，提交e5b606e與新tag已推送，Release五附件遠端SHA-256全等，Issue更新5988602216，保持OPEN。 2026-10-07遊玩與Issue關閉審查：核心15張新正常GUI、三側同狀態與回退、存檔重啟讀回及24.143秒音樂供給通過；英國發現者新局在635086794步停止，已發行v.1.0.2同狀態重現。根因未知，#53保持OPEN，優先修復新局。 入口docs/goals/185-player-experience.md；沒有遠端Issue寫入。 2026-10-07接手後補充：EMS同頁映射缺口已依規格047修復，隔離dosgolem82a14b2、本機正式前端f4042b3d。新局25GUI／三側同狀態與回退、既有15GUI／完整狀態與存檔回歸PASS；正式GUI已進世界並移動。新會話手動存檔未成功，僅採既有存檔回歸。舊版尚未包含修復，其他範圍與Issue狀態不變。原Go驗證映像已不存在，執行期r2已恢復GUI，Go建置鏈仍待恢復。入口docs/spec/047-ems-alias-coherence.md；沒有遠端寫入。 2026-10-08補足新局手動存檔與重啟讀回：20新正常GUI／三側完整原版、音訊、COLONY00／09與回退通過，新行程讀回與控制組全等。固定Go環境恢復且重建f4042b3d全等。入口check_goal185_newgame_save.py；高海正文保留仍DRAFT048，其他範圍及Issue狀態不變。 2026-10-08規格048高海正文保留已限定CONFORMED：10新正常GUI、三次懸停及No取消，四側原版／WAV／存檔全等，原始失敗輸入正式重播通過；前端fe58445e。其他正文組未抽樣，不增加882普查或關閉Issue。入口docs/spec/048-dialog-choice-body-retention.md。 2026-10-21依使用者指示停止自動測試，先產生v.1.0.4-20261021 Linux本機完整版AppImage，482699768 bytes、SHA-256 d7e95940c9ac91003ed3af28532eb00560c17e601966ab2a7f6c1a0fb5d76dd1，位於dist-all同版本full-local；含合法本機原版、386張正式HD原PNG及全部現用五語資源，不提交或上傳。新版啟動、畫面與聲音由人工驗證，未建tag／Release；新版三平台交付仍未完成。入口CONTEXT.md及規格041 R144。 R145現行本機完整AppImage為v.1.0.6-20261021，482744824 bytes、SHA-256 aee9678454c2a30b0bea1cd5cf50f15b1ba80ad0fd651e4069f07f6278e35a37，含全部正式HD、原文與宣言Noto接線及合法本機原版。先前已交付v.1.0.4保持；未交付v.1.0.5候選清理並保留收據。沒有執行GUI、遊戲或測試，新版畫面、動畫及聲音由人工驗證，未建tag／Release；Windows／macOS新版未打包。入口CONTEXT.md。"
+        "kind": "all_present",
+        "checks": [
+          {
+            "path": "docs/goals/186-display-settings-and-gameplay-video.md",
+            "pattern": "R148已交付三平台雙類完整版與建城遊玩影片"
+          },
+          {
+            "path": "tools/package_full_release.py",
+            "pattern": "DELIVERED_MANUAL_VALIDATION_PENDING"
+          },
+          {
+            "path": "tools/build_gameplay_promo.py",
+            "pattern": "FIRST_COLONY_CREATED_VIA_NORMAL_INPUTS"
+          }
+        ],
+        "note": "v.1.0.2-20261005原速音樂獨立播放完成本機驗收：83.892秒即時音樂缺樣0、丟棄0，同輸入原版CPU/RAM/中文畫面/原始WAV全等。三平台各重複封裝全等，Linux/Wine公開包正常GUI與私用完整包啟動通過；macOS限建置/封包/shell。90秒影片已重建版號與八幀檢視。原版曲尾仍等下一首指令、數位音效保留原路徑，未人耳/音效卡及macOS真機。974待情境與主選單持續英文追蹤不變，#53保持OPEN，提交e5b606e與新tag已推送，Release五附件遠端SHA-256全等，Issue更新5988602216，保持OPEN。 2026-10-07遊玩與Issue關閉審查：核心15張新正常GUI、三側同狀態與回退、存檔重啟讀回及24.143秒音樂供給通過；英國發現者新局在635086794步停止，已發行v.1.0.2同狀態重現。根因未知，#53保持OPEN，優先修復新局。 入口docs/goals/185-player-experience.md；沒有遠端Issue寫入。 2026-10-07接手後補充：EMS同頁映射缺口已依規格047修復，隔離dosgolem82a14b2、本機正式前端f4042b3d。新局25GUI／三側同狀態與回退、既有15GUI／完整狀態與存檔回歸PASS；正式GUI已進世界並移動。新會話手動存檔未成功，僅採既有存檔回歸。舊版尚未包含修復，其他範圍與Issue狀態不變。原Go驗證映像已不存在，執行期r2已恢復GUI，Go建置鏈仍待恢復。入口docs/spec/047-ems-alias-coherence.md；沒有遠端寫入。 2026-10-08補足新局手動存檔與重啟讀回：20新正常GUI／三側完整原版、音訊、COLONY00／09與回退通過，新行程讀回與控制組全等。固定Go環境恢復且重建f4042b3d全等。入口check_goal185_newgame_save.py；高海正文保留仍DRAFT048，其他範圍及Issue狀態不變。 2026-10-08規格048高海正文保留已限定CONFORMED：10新正常GUI、三次懸停及No取消，四側原版／WAV／存檔全等，原始失敗輸入正式重播通過；前端fe58445e。其他正文組未抽樣，不增加882普查或關閉Issue。入口docs/spec/048-dialog-choice-body-retention.md。 2026-10-21依使用者指示停止自動測試，先產生v.1.0.4-20261021 Linux本機完整版AppImage，482699768 bytes、SHA-256 d7e95940c9ac91003ed3af28532eb00560c17e601966ab2a7f6c1a0fb5d76dd1，位於dist-all同版本full-local；含合法本機原版、386張正式HD原PNG及全部現用五語資源，不提交或上傳。新版啟動、畫面與聲音由人工驗證，未建tag／Release；新版三平台交付仍未完成。入口CONTEXT.md及規格041 R144。 R145現行本機完整AppImage為v.1.0.6-20261021，482744824 bytes、SHA-256 aee9678454c2a30b0bea1cd5cf50f15b1ba80ad0fd651e4069f07f6278e35a37，含全部正式HD、原文與宣言Noto接線及合法本機原版。先前已交付v.1.0.4保持；未交付v.1.0.5候選清理並保留收據。沒有執行GUI、遊戲或測試，新版畫面、動畫及聲音由人工驗證，未建tag／Release；Windows／macOS新版未打包。入口CONTEXT.md。 2026-10-21 R148使用者明確改以接線與交付結案，剩餘人工待驗。三平台六包與90秒建城實錄已交付v.1.0.8-20261021，遠端Issue回讀CLOSED。此verify只檢查目前交付工具與結案入口，不能取代真機、畫面、聲音或全矩陣驗證。入口CONTEXT.md與規格044 R148。"
       }
     },
     {
@@ -1366,15 +1380,29 @@
     {
       "id": "sea-menus-names",
       "issue": 55,
-      "state": "in_progress",
+      "state": "completed",
       "title": "海上地圖、下拉選單與名稱字串",
       "depends_on": [
         "reachable-text-census"
       ],
-      "acceptance": "本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。",
+      "acceptance": "依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。",
       "verify": {
-        "kind": "manual",
-        "note": "2026-10-10正式0484e99b…保留BUILT／FULL／INDIANFOREST2／TOONEAR四處城市槽位的規格035名稱資料回呼READY；16真實來源名稱契約及缺回呼／控制碼／其他槽位隔離PASS，正常教學13／建造31／精簡選單15回歸全等。新四則尚無各自正常GUI，不增shown、不稱畫面CONFORMED。入口tools/check_goal185_sea_city_variables.py。558項TXT來源初查、173預設城名與62NAMES接線保留，Land組句與Moderate同文來源仍有oracle未知；完整來源及消費端審查未完成。"
+        "kind": "all_present",
+        "checks": [
+          {
+            "path": "docs/goals/186-display-settings-and-gameplay-video.md",
+            "pattern": "R148已交付三平台雙類完整版與建城遊玩影片"
+          },
+          {
+            "path": "tools/package_full_release.py",
+            "pattern": "DELIVERED_MANUAL_VALIDATION_PENDING"
+          },
+          {
+            "path": "tools/build_gameplay_promo.py",
+            "pattern": "FIRST_COLONY_CREATED_VIA_NORMAL_INPUTS"
+          }
+        ],
+        "note": "2026-10-10正式0484e99b…保留BUILT／FULL／INDIANFOREST2／TOONEAR四處城市槽位的規格035名稱資料回呼READY；16真實來源名稱契約及缺回呼／控制碼／其他槽位隔離PASS，正常教學13／建造31／精簡選單15回歸全等。新四則尚無各自正常GUI，不增shown、不稱畫面CONFORMED。入口tools/check_goal185_sea_city_variables.py。558項TXT來源初查、173預設城名與62NAMES接線保留，Land組句與Moderate同文來源仍有oracle未知；完整來源及消費端審查未完成。 2026-10-21 R148使用者明確改以接線與交付結案，剩餘人工待驗。三平台六包與90秒建城實錄已交付v.1.0.8-20261021，遠端Issue回讀CLOSED。此verify只檢查目前交付工具與結案入口，不能取代真機、畫面、聲音或全矩陣驗證。入口CONTEXT.md與規格044 R148。"
       }
     },
     {
@@ -1432,43 +1460,85 @@
     {
       "id": "natives-diplomacy",
       "issue": 58,
-      "state": "in_progress",
+      "state": "completed",
       "title": "原住民村落與外交訊息",
       "depends_on": [
         "reachable-text-census"
       ],
-      "acceptance": "本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。",
+      "acceptance": "依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。",
       "verify": {
-        "kind": "manual",
-        "note": "依 Issue 順序處理；完成時重跑 tools/text_census.py。 2026-10-04使用者決定先完成文字翻譯與接線，最後代表性抽樣對拍。譯文已整批核對完成；974待驗項不是974缺譯，先處理實際接線缺口，不再逐詞條重跑完整多側GUI／全矩陣。未抽樣仍保留證據限制，既有驗收不重開。 2026-10-04現行來源建立79組同正文完整選項，140項Go及公開入口115項Go通過。 2026-10-04原住民十點抽樣已通過，完整原版、輸入／開檔及COLONY09全等；學習兩列30px限定CONFORMED。原人物5503個不透明像素全部不變，137個區外差異逐點證實為暫藏時清除的舊英文，先前132點是x≥243的子集。寫入世代原型無圖像效果且本例不需要，未採用；保留原失敗收據。入口docs/goals/160-corpus-closure.md的20261004-dialog-links，摘要2b8b8924456314e3b1e05092d782e2b5ebaec8e701c0fe448c5e506f272a8e1a。79組已接線、28職業容量投影不外推為全部正常情境，未提高普查及未關閉Issue。 2026-10-07遊玩與Issue關閉審查：既有和平與學習抽樣保留；其他外交與局勢分支仍缺代表性正常玩家收據，不能關閉。 入口docs/goals/185-player-experience.md；沒有遠端Issue寫入。 2026-10-21 R131正常Cherokee攻擊確認四語正文與完整選項限定CONFORMED：64張GUI、四語兩模式與英文、12懸停及取消，104筆原文控制組完整狀態與存檔相同；普查只新增WHACKINDIANS一項。其他外交及幾何分支仍待接線／代表抽樣。入口規格060 R131與公開check_goal186_attack_confirmation.py。"
+        "kind": "all_present",
+        "checks": [
+          {
+            "path": "docs/goals/186-display-settings-and-gameplay-video.md",
+            "pattern": "R148已交付三平台雙類完整版與建城遊玩影片"
+          },
+          {
+            "path": "tools/package_full_release.py",
+            "pattern": "DELIVERED_MANUAL_VALIDATION_PENDING"
+          },
+          {
+            "path": "tools/build_gameplay_promo.py",
+            "pattern": "FIRST_COLONY_CREATED_VIA_NORMAL_INPUTS"
+          }
+        ],
+        "note": "依 Issue 順序處理；完成時重跑 tools/text_census.py。 2026-10-04使用者決定先完成文字翻譯與接線，最後代表性抽樣對拍。譯文已整批核對完成；974待驗項不是974缺譯，先處理實際接線缺口，不再逐詞條重跑完整多側GUI／全矩陣。未抽樣仍保留證據限制，既有驗收不重開。 2026-10-04現行來源建立79組同正文完整選項，140項Go及公開入口115項Go通過。 2026-10-04原住民十點抽樣已通過，完整原版、輸入／開檔及COLONY09全等；學習兩列30px限定CONFORMED。原人物5503個不透明像素全部不變，137個區外差異逐點證實為暫藏時清除的舊英文，先前132點是x≥243的子集。寫入世代原型無圖像效果且本例不需要，未採用；保留原失敗收據。入口docs/goals/160-corpus-closure.md的20261004-dialog-links，摘要2b8b8924456314e3b1e05092d782e2b5ebaec8e701c0fe448c5e506f272a8e1a。79組已接線、28職業容量投影不外推為全部正常情境，未提高普查及未關閉Issue。 2026-10-07遊玩與Issue關閉審查：既有和平與學習抽樣保留；其他外交與局勢分支仍缺代表性正常玩家收據，不能關閉。 入口docs/goals/185-player-experience.md；沒有遠端Issue寫入。 2026-10-21 R131正常Cherokee攻擊確認四語正文與完整選項限定CONFORMED：64張GUI、四語兩模式與英文、12懸停及取消，104筆原文控制組完整狀態與存檔相同；普查只新增WHACKINDIANS一項。其他外交及幾何分支仍待接線／代表抽樣。入口規格060 R131與公開check_goal186_attack_confirmation.py。 2026-10-21 R148使用者明確改以接線與交付結案，剩餘人工待驗。三平台六包與90秒建城實錄已交付v.1.0.8-20261021，遠端Issue回讀CLOSED。此verify只檢查目前交付工具與結案入口，不能取代真機、畫面、聲音或全矩陣驗證。入口CONTEXT.md與規格044 R148。"
       }
     },
     {
       "id": "war-independence-ending",
       "issue": 59,
-      "state": "in_progress",
+      "state": "completed",
       "title": "戰爭、獨立戰爭與結局訊息",
       "depends_on": [
         "reachable-text-census"
       ],
-      "acceptance": "本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。",
+      "acceptance": "依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。",
       "verify": {
-        "kind": "manual",
-        "note": "依 Issue 順序處理；完成時重跑 tools/text_census.py。 2026-10-04使用者決定先完成文字翻譯與接線，最後代表性抽樣對拍。譯文已整批核對完成；974待驗項不是974缺譯，先處理實際接線缺口，不再逐詞條重跑完整多側GUI／全矩陣。未抽樣仍保留證據限制，既有驗收不重開。 2026-10-07遊玩與Issue關閉審查：譯稿已完成；戰鬥、獨立與結局仍未完成代表性正常玩家驗收，不能關閉。 入口docs/goals/185-player-experience.md；沒有遠端Issue寫入。 2026-10-21 R130正常原住民攻擊與戰鬥分析35張GUI、79筆原文控制組完整狀態及存檔相同，士兵／勇士小圖像HD可見；未觀測戰鬥結果對話，不增加結果、獨立或結局信用。R131另完成攻擊確認的四語正文與取消，未執行確認後戰鬥。"
+        "kind": "all_present",
+        "checks": [
+          {
+            "path": "docs/goals/186-display-settings-and-gameplay-video.md",
+            "pattern": "R148已交付三平台雙類完整版與建城遊玩影片"
+          },
+          {
+            "path": "tools/package_full_release.py",
+            "pattern": "DELIVERED_MANUAL_VALIDATION_PENDING"
+          },
+          {
+            "path": "tools/build_gameplay_promo.py",
+            "pattern": "FIRST_COLONY_CREATED_VIA_NORMAL_INPUTS"
+          }
+        ],
+        "note": "依 Issue 順序處理；完成時重跑 tools/text_census.py。 2026-10-04使用者決定先完成文字翻譯與接線，最後代表性抽樣對拍。譯文已整批核對完成；974待驗項不是974缺譯，先處理實際接線缺口，不再逐詞條重跑完整多側GUI／全矩陣。未抽樣仍保留證據限制，既有驗收不重開。 2026-10-07遊玩與Issue關閉審查：譯稿已完成；戰鬥、獨立與結局仍未完成代表性正常玩家驗收，不能關閉。 入口docs/goals/185-player-experience.md；沒有遠端Issue寫入。 2026-10-21 R130正常原住民攻擊與戰鬥分析35張GUI、79筆原文控制組完整狀態及存檔相同，士兵／勇士小圖像HD可見；未觀測戰鬥結果對話，不增加結果、獨立或結局信用。R131另完成攻擊確認的四語正文與取消，未執行確認後戰鬥。 2026-10-21 R148使用者明確改以接線與交付結案，剩餘人工待驗。三平台六包與90秒建城實錄已交付v.1.0.8-20261021，遠端Issue回讀CLOSED。此verify只檢查目前交付工具與結案入口，不能取代真機、畫面、聲音或全矩陣驗證。入口CONTEXT.md與規格044 R148。"
       }
     },
     {
       "id": "general-event-dialogs",
       "issue": 60,
-      "state": "in_progress",
+      "state": "completed",
       "title": "一般事件訊息",
       "depends_on": [
         "reachable-text-census"
       ],
-      "acceptance": "本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。",
+      "acceptance": "依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。",
       "verify": {
-        "kind": "manual",
-        "note": "依 Issue 順序處理；完成時重跑 tools/text_census.py。 2026-10-04使用者決定先完成文字翻譯與接線，最後代表性抽樣對拍。譯文已整批核對完成；974待驗項不是974缺譯，先處理實際接線缺口，不再逐詞條重跑完整多側GUI／全矩陣。未抽樣仍保留證據限制，既有驗收不重開。 2026-10-04現行來源建立79組同正文完整選項，140項Go及公開入口115項Go通過。 2026-10-04原住民十點抽樣已通過，完整原版、輸入／開檔及COLONY09全等；學習兩列30px限定CONFORMED。原人物5503個不透明像素全部不變，137個區外差異逐點證實為暫藏時清除的舊英文，先前132點是x≥243的子集。寫入世代原型無圖像效果且本例不需要，未採用；保留原失敗收據。入口docs/goals/160-corpus-closure.md的20261004-dialog-links，摘要2b8b8924456314e3b1e05092d782e2b5ebaec8e701c0fe448c5e506f272a8e1a。79組已接線、28職業容量投影不外推為全部正常情境，未提高普查及未關閉Issue。 2026-10-07遊玩與Issue關閉審查：既有通用接線與原住民抽樣保留；其他事件類型排版與局勢抽樣未完成，不能關閉。 入口docs/goals/185-player-experience.md；沒有遠端Issue寫入。 2026-10-08規格048高海正文保留已限定CONFORMED：10新正常GUI、三次懸停及No取消，四側原版／WAV／存檔全等，原始失敗輸入正式重播通過；前端fe58445e。其他正文組未抽樣，不增加882普查或關閉Issue。入口docs/spec/048-dialog-choice-body-retention.md。"
+        "kind": "all_present",
+        "checks": [
+          {
+            "path": "docs/goals/186-display-settings-and-gameplay-video.md",
+            "pattern": "R148已交付三平台雙類完整版與建城遊玩影片"
+          },
+          {
+            "path": "tools/package_full_release.py",
+            "pattern": "DELIVERED_MANUAL_VALIDATION_PENDING"
+          },
+          {
+            "path": "tools/build_gameplay_promo.py",
+            "pattern": "FIRST_COLONY_CREATED_VIA_NORMAL_INPUTS"
+          }
+        ],
+        "note": "依 Issue 順序處理；完成時重跑 tools/text_census.py。 2026-10-04使用者決定先完成文字翻譯與接線，最後代表性抽樣對拍。譯文已整批核對完成；974待驗項不是974缺譯，先處理實際接線缺口，不再逐詞條重跑完整多側GUI／全矩陣。未抽樣仍保留證據限制，既有驗收不重開。 2026-10-04現行來源建立79組同正文完整選項，140項Go及公開入口115項Go通過。 2026-10-04原住民十點抽樣已通過，完整原版、輸入／開檔及COLONY09全等；學習兩列30px限定CONFORMED。原人物5503個不透明像素全部不變，137個區外差異逐點證實為暫藏時清除的舊英文，先前132點是x≥243的子集。寫入世代原型無圖像效果且本例不需要，未採用；保留原失敗收據。入口docs/goals/160-corpus-closure.md的20261004-dialog-links，摘要2b8b8924456314e3b1e05092d782e2b5ebaec8e701c0fe448c5e506f272a8e1a。79組已接線、28職業容量投影不外推為全部正常情境，未提高普查及未關閉Issue。 2026-10-07遊玩與Issue關閉審查：既有通用接線與原住民抽樣保留；其他事件類型排版與局勢抽樣未完成，不能關閉。 入口docs/goals/185-player-experience.md；沒有遠端Issue寫入。 2026-10-08規格048高海正文保留已限定CONFORMED：10新正常GUI、三次懸停及No取消，四側原版／WAV／存檔全等，原始失敗輸入正式重播通過；前端fe58445e。其他正文組未抽樣，不增加882普查或關閉Issue。入口docs/spec/048-dialog-choice-body-retention.md。 2026-10-21 R148使用者明確改以接線與交付結案，剩餘人工待驗。三平台六包與90秒建城實錄已交付v.1.0.8-20261021，遠端Issue回讀CLOSED。此verify只檢查目前交付工具與結案入口，不能取代真機、畫面、聲音或全矩陣驗證。入口CONTEXT.md與規格044 R148。"
       }
     },
     {
@@ -1494,43 +1564,85 @@
     {
       "id": "multilingual-display",
       "issue": 62,
-      "state": "in_progress",
+      "state": "completed",
       "title": "五語切換與英數字型統一",
       "depends_on": [
         "l10n-decision"
       ],
-      "acceptance": "繁中、簡中、日文、韓文及英文可切換；英文使用原版字體，其餘語言的英數用該語言字型。資料包、逐欄排版、輸入隔離、正常GUI、同狀態與存讀檔驗收通過，原版操作不變。",
+      "acceptance": "依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。",
       "verify": {
-        "kind": "manual",
-        "note": "13表2022筆，四地區Noto的64固定欄與3動態圖集已接正式組裝、啟動器與封裝，英文保留原版。[規格057](docs/spec/057-noto-runtime-atlas.md)及[規格060](docs/spec/060-language-bundle-swap.md)的整包驗收保留。既有676Go零skip、go vet、50組五語GUI及42筆實際輸入四側重播至113400000步，完整CPU、RAM、VGA、DAC、WAV與存檔全同。世界及正常存檔返回世界的完整雙語Jamestown四語已依[規格038](docs/spec/038-string-overlay-draft.md)限定CONFORMED，逐欄字級23／23／17／22px；保留後畫內容，進城撤除，返回世界重建。城內三個19／27／27px數值的十二組欄位保留通過，328個語言資源未重烘。完整五語覆蓋、HD、影片與三平台新版交付未完成；規格058歷史冷啟動一byte差異仍未知。 R120至R122已限定驗收士兵正文、頂列及人物後方日期、金錢／稅率、行動、座標四行。R122四語逐欄測字並對齊原版上緣，44張正常X11、18張事件圖、64筆四語側欄合成、112個新反例、4項／218個含子項及當次輸入原版控制組通過。六人物來源檢查分四個原版解碼與兩個來源fixture，不外推其他人物正常路徑。入口規格060 R122；全遮擋譯文不計可見字形，完整五語仍未完成。 R127登陸正文與完整兩選項來源限定已依規格060限定CONFORMED：四語兩模式、英文原版、第一／第二／第一懸停、選留在船上及關框，23張正常GUI與43筆原生輸入控制組通過；4項／109個含子項零skip，328語言資源保持。LANDFALL2、完整五語及戰鬥等其他路徑不外推。 2026-10-21 R131攻擊確認限定CONFORMED：逐欄30px，64張正常GUI含33張正文、四語兩模式及英文、12懸停與取消，183個含子項零skip及104筆原文控制組完整CPU／RAM／VGA／DAC／存檔相同。普查1975／933shown／950pending／92unreachable；103列中本輪新增1PASS，66沿用及36僅歷史。舊開局檢查器來源快照相容性另列限制，沒有冒稱新PASS；其他名稱、幾何、完整五語仍未完成。 2026-10-21 R134僅增加MPSNAME英文製作字樣的HD銀色材質，保留原字形與動畫，沒有新增Noto或譯文欄位驗收；328個語言資源保持，字形動畫的其他語言顯示仍依既有字型契約接續。 2026-10-21 R135僅為452個DEC字形動畫幀補HD材質，原字形保持，不新增Noto或譯文欄位驗收；328語言資源及既有文字普查保持，其他語言字形動畫仍依既有字型契約接續。 2026-10-21 R138教學5歐洲移民通知限定CONFORMED：四語Noto 30px與兩模式、英文及正常關框12張GUI，253個含子項零skip，66筆實際X11輸入的完整CPU／RAM／VGA／DAC／存檔原文控制相同。普查仍1975／933shown／950pending／92unreachable；104列新增1PASS、67沿用、36僅歷史，現存收據321、僅歷史612。該來源原本已shown，不重複計數；其他名稱與完整五語不外推。入口規格060 R138及tools/check_goal186_immigration_tutorial.py。 R143原住民IND4A0人物後方側欄限定CONFORMED，33種IND共用完整前景來源守門；暫停前完成203個含子項零skip、25張正常X11及27筆輸入的原版完整狀態／存檔控制。其他32種IND只接線，不外推正常畫面；R144起依使用者要求停止自動測試，封包人工驗證待辦。入口規格060 R143及CONTEXT.md。 2026-10-21 R145原文Noto回退及DEC大小寫52字母族已接正式前端，非英文依欄位原生寬高選字，字形動畫沿原幀墨量比顯示；完整來源、色盤、持有權、寫入世代及游標守門保持。四語20筆既有欄位與52完整字形墨跡已量測，81份Go組裝來源建置成功，328語言資源保持。使用者明示剩餘人工驗證，沒有執行新GUI、遊戲或測試，不增加shown／翻譯或DISPLAY-PASS信用。入口規格060 R145、tools/noto_original_text.go及CONTEXT.md。"
+        "kind": "all_present",
+        "checks": [
+          {
+            "path": "docs/goals/186-display-settings-and-gameplay-video.md",
+            "pattern": "R148已交付三平台雙類完整版與建城遊玩影片"
+          },
+          {
+            "path": "tools/package_full_release.py",
+            "pattern": "DELIVERED_MANUAL_VALIDATION_PENDING"
+          },
+          {
+            "path": "tools/build_gameplay_promo.py",
+            "pattern": "FIRST_COLONY_CREATED_VIA_NORMAL_INPUTS"
+          }
+        ],
+        "note": "13表2022筆，四地區Noto的64固定欄與3動態圖集已接正式組裝、啟動器與封裝，英文保留原版。[規格057](docs/spec/057-noto-runtime-atlas.md)及[規格060](docs/spec/060-language-bundle-swap.md)的整包驗收保留。既有676Go零skip、go vet、50組五語GUI及42筆實際輸入四側重播至113400000步，完整CPU、RAM、VGA、DAC、WAV與存檔全同。世界及正常存檔返回世界的完整雙語Jamestown四語已依[規格038](docs/spec/038-string-overlay-draft.md)限定CONFORMED，逐欄字級23／23／17／22px；保留後畫內容，進城撤除，返回世界重建。城內三個19／27／27px數值的十二組欄位保留通過，328個語言資源未重烘。完整五語覆蓋、HD、影片與三平台新版交付未完成；規格058歷史冷啟動一byte差異仍未知。 R120至R122已限定驗收士兵正文、頂列及人物後方日期、金錢／稅率、行動、座標四行。R122四語逐欄測字並對齊原版上緣，44張正常X11、18張事件圖、64筆四語側欄合成、112個新反例、4項／218個含子項及當次輸入原版控制組通過。六人物來源檢查分四個原版解碼與兩個來源fixture，不外推其他人物正常路徑。入口規格060 R122；全遮擋譯文不計可見字形，完整五語仍未完成。 R127登陸正文與完整兩選項來源限定已依規格060限定CONFORMED：四語兩模式、英文原版、第一／第二／第一懸停、選留在船上及關框，23張正常GUI與43筆原生輸入控制組通過；4項／109個含子項零skip，328語言資源保持。LANDFALL2、完整五語及戰鬥等其他路徑不外推。 2026-10-21 R131攻擊確認限定CONFORMED：逐欄30px，64張正常GUI含33張正文、四語兩模式及英文、12懸停與取消，183個含子項零skip及104筆原文控制組完整CPU／RAM／VGA／DAC／存檔相同。普查1975／933shown／950pending／92unreachable；103列中本輪新增1PASS，66沿用及36僅歷史。舊開局檢查器來源快照相容性另列限制，沒有冒稱新PASS；其他名稱、幾何、完整五語仍未完成。 2026-10-21 R134僅增加MPSNAME英文製作字樣的HD銀色材質，保留原字形與動畫，沒有新增Noto或譯文欄位驗收；328個語言資源保持，字形動畫的其他語言顯示仍依既有字型契約接續。 2026-10-21 R135僅為452個DEC字形動畫幀補HD材質，原字形保持，不新增Noto或譯文欄位驗收；328語言資源及既有文字普查保持，其他語言字形動畫仍依既有字型契約接續。 2026-10-21 R138教學5歐洲移民通知限定CONFORMED：四語Noto 30px與兩模式、英文及正常關框12張GUI，253個含子項零skip，66筆實際X11輸入的完整CPU／RAM／VGA／DAC／存檔原文控制相同。普查仍1975／933shown／950pending／92unreachable；104列新增1PASS、67沿用、36僅歷史，現存收據321、僅歷史612。該來源原本已shown，不重複計數；其他名稱與完整五語不外推。入口規格060 R138及tools/check_goal186_immigration_tutorial.py。 R143原住民IND4A0人物後方側欄限定CONFORMED，33種IND共用完整前景來源守門；暫停前完成203個含子項零skip、25張正常X11及27筆輸入的原版完整狀態／存檔控制。其他32種IND只接線，不外推正常畫面；R144起依使用者要求停止自動測試，封包人工驗證待辦。入口規格060 R143及CONTEXT.md。 2026-10-21 R145原文Noto回退及DEC大小寫52字母族已接正式前端，非英文依欄位原生寬高選字，字形動畫沿原幀墨量比顯示；完整來源、色盤、持有權、寫入世代及游標守門保持。四語20筆既有欄位與52完整字形墨跡已量測，81份Go組裝來源建置成功，328語言資源保持。使用者明示剩餘人工驗證，沒有執行新GUI、遊戲或測試，不增加shown／翻譯或DISPLAY-PASS信用。入口規格060 R145、tools/noto_original_text.go及CONTEXT.md。 2026-10-21 R148使用者明確改以接線與交付結案，剩餘人工待驗。三平台六包與90秒建城實錄已交付v.1.0.8-20261021，遠端Issue回讀CLOSED。此verify只檢查目前交付工具與結案入口，不能取代真機、畫面、聲音或全矩陣驗證。入口CONTEXT.md與規格044 R148。"
       }
     },
     {
       "id": "hd-graphics",
       "issue": 63,
-      "state": "in_progress",
+      "state": "completed",
       "title": "圖像HD重繪與安全切換",
       "depends_on": [
         "static-text-survey"
       ],
-      "acceptance": "全量重繪玩家可見圖像與動畫幀，包含小圖像。沿已定稿精細像素風與既有來源契約；每項正式接線並於測試畫面可見、通過建置及必要的素材載入檢查即為DISPLAY-PASS，不追加原版內部調查或逐像素對拍。記明畫面方式，不將測試資料當作正常玩家路徑。原版規則、存檔、輸入、字型及權利邊界保持；全量未覆蓋項仍須完成。README更新已驗畫面並標明發行範圍。",
+      "acceptance": "依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。",
       "verify": {
-        "kind": "manual",
-        "note": "現行386張生成原PNG／387檔。既有SS／PIK清冊1477個連結、1464個唯一非空來源已全部接線，含317個既有限定CONFORMED及1160個DISPLAY-PASS；69透明與19零尺寸保持。R140世界小地圖另列1個程序繪圖DISPLAY-PASS，正式cddf437d…建置與go vet、2項／25個含子項零skip、895場景載入及387檔正式素材收集通過。正常啟動與讀取合法原版存檔後，15筆實際X11輸入、五語兩模式10張、完整10240000個遊戲區RGBA點通過，白色框與標記保持。README世界圖改為當次正式繁中原樣實拍，總數32張。47個其他檔案只完成10個MZ、23文字、5字型、1 GIF、1色盤與7未解二進位的最小形狀分型，不視為47張缺圖，也不證明EXE無圖像。完整玩家圖像分母及其他程序圖像仍未知；全量HD、完整五語、90秒影片與新版三平台交付保持未完成。入口規格069 R140、docs/hd-source-catalog.json與tools/check_hd_minimap_display.py；本機r140-minimap-display-close-r1.json保存正式驗證，原版與fixture只留本機。 R144已把全部386張正式PNG／387檔接入Linux本機完整AppImage，原版資料與五語資源隨包；包體與版本見CONTEXT.md。使用者要求停止自動測試，剩餘畫面由人工驗證；不把封裝成功當作全遊戲HD驗收。 R145已收斂其他格式的最小用途分流，沒有找到新未接圖像幀；1464非空來源、1477連結、386原PNG保持。DEC字母新增Noto文字覆蓋，SQIG及商標沿既有HD；未觀測內嵌／程序畫面留人工驗證，不宣稱EXE無圖像。全部正式素材已隨v.1.0.6本機完整AppImage封裝。入口規格069 R145及CONTEXT.md。 2026-10-21 R146依使用者決定，後續完整版同版號固定分HD＋原版＋中文化、原版＋中文化兩類。Linux v.1.0.7兩包已封裝，實際封包清冊與雜湊核對；HD包387素材檔，無HD包沒有graphics目錄，兩包保留五語與Noto一般文字。未啟動遊戲或新測試，人工驗證待辦。入口規格041 R146、tools/package_release.py及CONTEXT.md。"
+        "kind": "all_present",
+        "checks": [
+          {
+            "path": "docs/goals/186-display-settings-and-gameplay-video.md",
+            "pattern": "R148已交付三平台雙類完整版與建城遊玩影片"
+          },
+          {
+            "path": "tools/package_full_release.py",
+            "pattern": "DELIVERED_MANUAL_VALIDATION_PENDING"
+          },
+          {
+            "path": "tools/build_gameplay_promo.py",
+            "pattern": "FIRST_COLONY_CREATED_VIA_NORMAL_INPUTS"
+          }
+        ],
+        "note": "現行386張生成原PNG／387檔。既有SS／PIK清冊1477個連結、1464個唯一非空來源已全部接線，含317個既有限定CONFORMED及1160個DISPLAY-PASS；69透明與19零尺寸保持。R140世界小地圖另列1個程序繪圖DISPLAY-PASS，正式cddf437d…建置與go vet、2項／25個含子項零skip、895場景載入及387檔正式素材收集通過。正常啟動與讀取合法原版存檔後，15筆實際X11輸入、五語兩模式10張、完整10240000個遊戲區RGBA點通過，白色框與標記保持。README世界圖改為當次正式繁中原樣實拍，總數32張。47個其他檔案只完成10個MZ、23文字、5字型、1 GIF、1色盤與7未解二進位的最小形狀分型，不視為47張缺圖，也不證明EXE無圖像。完整玩家圖像分母及其他程序圖像仍未知；全量HD、完整五語、90秒影片與新版三平台交付保持未完成。入口規格069 R140、docs/hd-source-catalog.json與tools/check_hd_minimap_display.py；本機r140-minimap-display-close-r1.json保存正式驗證，原版與fixture只留本機。 R144已把全部386張正式PNG／387檔接入Linux本機完整AppImage，原版資料與五語資源隨包；包體與版本見CONTEXT.md。使用者要求停止自動測試，剩餘畫面由人工驗證；不把封裝成功當作全遊戲HD驗收。 R145已收斂其他格式的最小用途分流，沒有找到新未接圖像幀；1464非空來源、1477連結、386原PNG保持。DEC字母新增Noto文字覆蓋，SQIG及商標沿既有HD；未觀測內嵌／程序畫面留人工驗證，不宣稱EXE無圖像。全部正式素材已隨v.1.0.6本機完整AppImage封裝。入口規格069 R145及CONTEXT.md。 2026-10-21 R146依使用者決定，後續完整版同版號固定分HD＋原版＋中文化、原版＋中文化兩類。Linux v.1.0.7兩包已封裝，實際封包清冊與雜湊核對；HD包387素材檔，無HD包沒有graphics目錄，兩包保留五語與Noto一般文字。未啟動遊戲或新測試，人工驗證待辦。入口規格041 R146、tools/package_release.py及CONTEXT.md。 2026-10-21 R148使用者明確改以接線與交付結案，剩餘人工待驗。三平台六包與90秒建城實錄已交付v.1.0.8-20261021，遠端Issue回讀CLOSED。此verify只檢查目前交付工具與結案入口，不能取代真機、畫面、聲音或全矩陣驗證。入口CONTEXT.md與規格044 R148。"
       }
     },
     {
       "id": "gameplay-promo-video",
       "issue": 64,
-      "state": "in_progress",
+      "state": "completed",
       "title": "包含連續實際遊玩畫面的推廣影片",
       "depends_on": [
         "promo-video"
       ],
-      "acceptance": "正常玩家輸入錄製連續實際前端畫面，保存版本、輸入、時間與來源雜湊；90秒1080p30影片通過音畫、遊玩動態、黑幀、異常凍結、字幕與來源驗收，再隨新固定版本發行。",
+      "acceptance": "依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。",
       "verify": {
-        "kind": "manual",
-        "note": "入口docs/goals/186-display-settings-and-gameplay-video.md及規格044。已錄現行正式版51.933秒真實X11操作，40筆正常輸入、104抽樣／93變化通過；原版WAV另存，與畫面牆鐘不同步。仍未完成90秒音軌、字幕、剪輯與成片驗收，v.1.0.3舊靜態影片保留，不覆寫發行。"
+        "kind": "all_present",
+        "checks": [
+          {
+            "path": "docs/goals/186-display-settings-and-gameplay-video.md",
+            "pattern": "R148已交付三平台雙類完整版與建城遊玩影片"
+          },
+          {
+            "path": "tools/package_full_release.py",
+            "pattern": "DELIVERED_MANUAL_VALIDATION_PENDING"
+          },
+          {
+            "path": "tools/build_gameplay_promo.py",
+            "pattern": "FIRST_COLONY_CREATED_VIA_NORMAL_INPUTS"
+          }
+        ],
+        "note": "入口docs/goals/186-display-settings-and-gameplay-video.md及規格044。已錄現行正式版51.933秒真實X11操作，40筆正常輸入、104抽樣／93變化通過；原版WAV另存，與畫面牆鐘不同步。仍未完成90秒音軌、字幕、剪輯與成片驗收，v.1.0.3舊靜態影片保留，不覆寫發行。 2026-10-21 R148使用者明確改以接線與交付結案，剩餘人工待驗。三平台六包與90秒建城實錄已交付v.1.0.8-20261021，遠端Issue回讀CLOSED。此verify只檢查目前交付工具與結案入口，不能取代真機、畫面、聲音或全矩陣驗證。入口CONTEXT.md與規格044 R148。"
       }
     }
   ]
