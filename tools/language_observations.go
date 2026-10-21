@@ -54,6 +54,7 @@ type nativeJournal struct {
 	buttons                  bool
 	accepted, rejected, lost int
 	sample                   func() nativeSurfaces
+	foreground               func(nativeSurfaces) []byte
 	coalesced                int
 	evictedNonvisible        int
 	evictedVisible           int
@@ -435,11 +436,15 @@ func (j *nativeJournal) add(o *nativeObservation, canvas, buffer []byte) bool {
 	}
 	// 滿載時保留當次可見來源；回收或合併都維持其餘完成事件的相對順序。
 	var current nativeSurfaces
+	var foreground []byte
 	if j.sample != nil && (len(j.items) >= draftNativeMaxItems || j.cost+o.cost > draftNativeMaxCost) {
 		current = j.sample()
 		if !current.valid() {
 			j.rejected++
 			return false
+		}
+		if j.foreground != nil {
+			foreground = j.foreground(current)
 		}
 		for i := len(j.items) - 1; i >= 0; i-- {
 			if nativeSameSource(j.items[i], o) {
@@ -455,7 +460,7 @@ func (j *nativeJournal) add(o *nativeObservation, canvas, buffer []byte) bool {
 		} else {
 			victim = -1
 			for i, old := range j.items {
-				if !current.visible(old) {
+				if !current.visible(old) && (j.foreground == nil || !nativeRetainForegroundSea(old, current, foreground, j.cursor)) {
 					victim = i
 					break
 				}
@@ -710,4 +715,38 @@ func nativeDialogCoversShadowCharacter(o *nativeObservation, parent *dialogRun) 
 }
 func (j *nativeJournal) coveredShadowCharacter(o, incoming *nativeObservation) bool {
 	return nativeDialogCoversShadowCharacter(o, j.pendingDialog) || nativeDialogCoversShadowCharacter(o, incoming.dialogRun)
+}
+
+// R143候選：原始單行側欄可由目前VGA或已驗人物證明保留；不授權繪製。
+func nativeRetainForegroundSea(o *nativeObservation, f nativeSurfaces, mask []byte, cursor image.Rectangle) bool {
+	if o == nil || o.kind != "sea-panel" || len(o.seaRuns) != 1 || len(o.canvas) != 64000 ||
+		len(o.after) == 0 || !f.valid() || f.mode != 0x13 || !o.ink.In(seaPanelRect) {
+		return false
+	}
+	visibleVGA := true
+	for pos, value := range o.after {
+		if pos < 0 || pos >= 64000 || !image.Pt(pos%320, pos/320).In(seaPanelRect) || o.canvas[pos] != value {
+			return false
+		}
+		if f.indexed[pos] != value {
+			visibleVGA = false
+		}
+	}
+	if visibleVGA {
+		return true
+	}
+	if len(mask) != 8000 {
+		return false
+	}
+	protected := false
+	for pos, value := range o.after {
+		if mask[pos>>3]&(1<<uint(pos&7)) != 0 {
+			protected = true
+			continue
+		}
+		if f.canvas[pos] != value || (!image.Pt(pos%320, pos/320).In(cursor) && f.indexed[pos] != value) {
+			return false
+		}
+	}
+	return protected
 }

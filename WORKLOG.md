@@ -7632,3 +7632,22 @@ timeout 180 docker run --rm --network none --user 1000:1000 \
 - 218988個保護路徑完整SHA相同，含全部147993個PNG、4127個一般存檔及現用資源；24個存檔符號連結保持。386張正式HD原PNG／387檔、原版輸入、交付包、現用語言包及R140／R138正式程式與測試保持。小地圖與移民教學兩個公開檢查器以相同命令抽驗，清理前後完整結果相同；沒有重跑遊戲或完整驗收矩陣。
 - 本機入口為[清理收據](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r142-cleanup-final-r1.json)，SHA-256為234a36b85c024839eba963d1ec743902e4e0edfbd71460ecefd6bd5a552bb508。同根r142-cleanup-plan-r1.json、r142-protected-snapshot-r1.json.gz、r142-dedup-rows-r1.jsonl、r142-archive-rows-r1.jsonl、清理前後checkers收據及r142-*-source-r1.py保存名單、來源與步驟。盤點、清理與核對檔案的指紋由入口收據登錄；原版素材與存檔只留本機。
 - 首次盤點寫出時遇到唯讀掛載，改用既有reports可寫掛載，以相同腳本乾淨重跑；此前尚未合併或封存資料。無root-owned產物、錯誤.md目錄、封存暫存檔或專案容器；未做全域prune，也未清理其他專案。Git僅提交清理與現況紀錄，程式、HD完成度、文字普查、Issue及Release保持；其餘HD與五語工作接續原清單。
+
+
+## 2026-10-21 R143 原住民人物前景與側欄正式接線
+
+- 33種IND與既有6種MSS人物共用完整來源守門。單行側欄來源在VGA仍完整或完整人物前景可證明時優先保留，維持256項／32MiB上限；保留觀測不授權繪圖，正式繪圖仍重新驗證原始來源、Main／VGA與游標。
+- 使用者要求暫停測試前已完成203個含子項、零skip、go vet、25張正常X11、144筆四語側欄及1408768個人物RGBA保留點。當次27筆輸入原版控制組的完整CPU／RAM／索引／色盤／存檔相同。正常路徑信用僅IND4A0；其他32種IND只接線，不外推正常畫面。其他未支援單位名稱仍保留原文，普查不變。
+- 正式d779eaef2595a92096bcc6bc626c879510a692e862f852eac65eef9ef60be1d4與已驗候選逐位元組相同。公開入口tools/check_goal186_native_portrait_panel.py；既有工作根內r143-formal-build-r1.json、r143-ready-review-r1.json、r143-prototype-panel-review-r5.json及r143-public-checker-r1.json保存來源與結果。公開檢查器在暫停前已完成現用輸入PASS及缺原版77；本次沒有重跑。
+
+## 2026-10-21 R144 Linux本機完整AppImage與過期資料清理
+
+- 依使用者最新要求，停止自動測試，先完成正式接線、Linux AppImage完整版及清理，剩餘啟動、畫面與聲音由人工確認。知識路由命中交付目錄與版號，載入retro-remake-dist-all-output.md、retro-remake-release-versioning.md及文件職責入口。沒有啟動新GUI、遊戲、Go測試或全矩陣。
+- 沿tools/package_release.py新增--full-game，僅接受AppImage並寫入full-local。包內AppRun指定唯讀原版game目錄，存檔沿既有使用者目錄；不隨包放存檔或符號連結。五個原版入口指紋、全部386張正式HD原PNG／387檔及328語言資源由既有收取契約核對。原版資料只留本機，不提交、上傳或公開散布。
+- 從R143已固定80份Go來源建置，連結器寫入v.1.0.4-20261021；程式SHA-256為39ffffd268336a2e615d822b1d5ad536e1b8d0068f4c7a5551ce82695cc06246，內嵌版本以ELF資料讀取核對。封裝不宣稱新二進位與R143既有GUI測試逐位元組相同。
+- 交付為dist-all/v.1.0.4-20261021/full-local/colonization-cht-v.1.0.4-20261021-full-local-linux-x86_64.AppImage，482699768 bytes、1116個payload檔、SHA-256 d7e95940c9ac91003ed3af28532eb00560c17e601966ab2a7f6c1a0fb5d76dd1。UID／GID1000、權限0755，MANIFEST與SHA256SUMS均標private_only及manual_validation=pending。未建立tag／Release，舊交付保持。
+- 使用既有eob-remake-release:1.26.7-ebiten2.9.9-20261008-r2、Go1.26.7及固定AppImage1.9.0工具，runtime仍為75849dc；工具逐項指紋及授權來源由既有封裝器核對。所有工作均非root、無網路Docker，CPU／記憶體／PID與外層期限有界。現用字模與13份譯稿從r97-event-formal-bundle-r2收取，清冊a7db72701f2a4c7b8d9b18d2385e126fb8f066cc08527b0ff396487268540a0a。舊v.1.0.3字模來源的過期譯稿被拒絕；Go工具映像缺桌面封裝工具後，改沿先前成功的既有封裝映像，沒有改前端避過失敗或另建重複映像。
+- 封裝及可重現命令入口為[本機封裝收據](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r144-local-package-r1.json)，同根r144-package-source-r1.py、r144-runtime-resources-r1及r144-linux-build-info-r1.txt保存來源、資源、依賴與命令。README只增加穩定本機封裝入口，現況、工作清單與規格同步；完整五語與全遊戲HD、影片及新Windows／macOS交付不宣稱完成。
+- 清除Go可重建快取401588224 bytes，44個過期候選程式及大型紀錄沿tools/evidence_storage.py無損封存；3份相同payload共用內容。工作樹依唯一inode容量由34658766848降至34007396352 bytes，淨回收651370496 bytes，約621MiB。7231個保護路徑完整內容相同，含原版輸入、全部存檔、正式素材、現用R143及新舊交付。
+- 入口[清理收據](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r144-cleanup-r1.json)及同根r144-cleanup-operations-r1.json、r144-cleanup-protected-r1.json、r144-cleanup-source-r1.py。還原沿tools/evidence_storage.py的restore，使用R123所載非root可寫reports掛載，例如容器內python3 /repo/tools/evidence_storage.py restore /repo/workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r143-prototype-window-r1。
+- 最終AppImage雜湊及擁有權核對，無root-owned檔、錯誤.md目錄或封存暫存檔，專案與本次封裝容器均以--rm清除；未全域prune或動其他專案。Git差異空白檢查通過，原版、存檔及dist-all未被追蹤。原始碼與文件依既有commit、push授權提交；完整交付留本機。總交接收據為同根r144-final-handoff-r1.json。

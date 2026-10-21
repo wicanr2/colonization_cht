@@ -50,7 +50,9 @@ def build_appimage(files, manifest, repo, top, tools=Path('/opt/appimage-tools')
     payload['LICENSES/AppImage-sources.json'] = ((assets / 'manifest.json').read_bytes(), 0o644)
     payload['AppRun'] = (b'#!/bin/sh\nset -eu\n'
                          b'app_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)\n'
-                         b'exec "$app_dir/colonization-cht.sh" "$@"\n', 0o755)
+                         + (b'exec "$app_dir/colonization-cht.sh" --game "$app_dir/game" "$@"\n'
+                            if manifest.get('bundled_original') and manifest.get('private_only')
+                            else b'exec "$app_dir/colonization-cht.sh" "$@"\n'), 0o755)
     for name in ['colonization-cht.desktop', 'colonization-cht.svg']:
         payload[name] = ((repo / 'tools/release' / name).read_bytes(), 0o644)
     bundled = copy.deepcopy(manifest)

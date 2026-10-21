@@ -640,7 +640,7 @@ func draftPaintSea(out *image.RGBA, st *seaState, candidate *draftSeaRow, canvas
 	}
 	var foreground *image.RGBA
 	if len(candidate.foreground) != 0 {
-		if len(candidate.foreground) != 8000 || !((o.kind == "sea-bar" && layer == seaBarRect) || (o.kind == "sea-panel" && layer == seaPanelRect && candidate.foregroundSource >= 1060 && candidate.foregroundSource <= 1065)) {
+		if len(candidate.foreground) != 8000 || !((o.kind == "sea-bar" && layer == seaBarRect) || (o.kind == "sea-panel" && layer == seaPanelRect && draftDialogPortraitSource(candidate.foregroundSource))) {
 			return nil, "sea-foreground-shape"
 		}
 		foreground = image.NewRGBA(image.Rect(0, 0, layer.Dx()*4, layer.Dy()*4))
@@ -1921,7 +1921,7 @@ func draftPreserveSoldierMenu(t *draftLanguageTarget, c *draftSeaRow, canvas, in
 	return &copy
 }
 
-// 六個已驗MSS來源共用完整前景證明；來源位置由已持有的原版像素反推並逐點核對。
+// R143候選：已登錄MSS與IND人物共用完整前景證明，來源位置仍逐點核對。
 func (p *hdSceneRuntime) seaDialogForeground(canvas, indexed, palette []byte, cursor image.Rectangle) ([]byte, int) {
 	if p == nil || p.blocked || len(canvas) != 64000 || len(indexed) != 64000 || len(palette) != 768 {
 		return nil, 0
@@ -1929,7 +1929,7 @@ func (p *hdSceneRuntime) seaDialogForeground(canvas, indexed, palette []byte, cu
 	var selected []byte
 	sourceID := 0
 	for i, frame := range p.frames {
-		if frame.id < 1060 || frame.id > 1065 || frame.sprite == nil || frame.decoded == 0 || len(frame.native) != 64000 || !frame.paletteSupported(palette) {
+		if !draftDialogPortraitSource(frame.id) || frame.sprite == nil || frame.decoded == 0 || len(frame.native) != 64000 || !frame.paletteSupported(palette) {
 			continue
 		}
 		slot, sprite := i+1, frame.sprite
@@ -2392,4 +2392,9 @@ func draftFitImmigrationTutorial(t *draftLanguageTarget, st *dialogShown, o *nat
 	copy.shadow, copy.normal, copy.accent, copy.dim = pad(shadow), pad(normal), pad(accent), nil
 	copy.size, copy.phase, copy.afterSafe = size, "active", rectBytes(canvas, st.safe)
 	return &copy, changed
+}
+
+// R143候選：兩個守門共用已登錄MSS／IND來源集合。
+func draftDialogPortraitSource(id int) bool {
+	return (id >= 1060 && id <= 1065) || (id >= 958 && id <= 990)
 }

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""組裝 Linux tar.gz／AppImage、Windows 或 macOS ZIP 到 dist-all/<版本>/patch/，只在容器內執行。
+"""組裝 Linux tar.gz／AppImage、Windows 或 macOS ZIP，只在容器內執行。
 
-包內只放本作品與第三方允許散布的元件：前端執行檔、啟動器、五語譯稿 TSV、Noto及既有Cubic 11字模、設定列字型、
+公開包寫入dist-all/<版本>/patch/。明確指定--full-game時只寫full-local/，包含本機原版且不得公開。
+公開包只放本作品與第三方允許散布的元件：前端執行檔、啟動器、五語譯稿 TSV、Noto及既有Cubic 11字模、設定列字型、
 授權檔與清單；不放任何原版檔案、截圖、存檔或解包資料。字模複本的 scope 聲明改寫成隨包散布的授權說明，
 其餘內容不動。封裝可重現：固定時間戳、擁有者與檔案順序，gzip 不寫時間。
 """
@@ -11,6 +12,7 @@ import gzip
 import hashlib
 import io
 import json
+import os
 import re
 import subprocess
 import tarfile
@@ -43,6 +45,28 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
+def full_game_files(root):
+    """只收本機合法原版資料；存檔及符號連結不隨包。"""
+    if root.is_symlink() or not root.is_dir():
+        raise ValueError("原版來源必須是一般目錄")
+    for name, expected in ORIGINAL.items():
+        path = root / name
+        if path.is_symlink() or sha(path.read_bytes()) != expected:
+            raise ValueError("本機原版指紋不同：" + name)
+    files, records = {}, {}
+    for directory, dirs, names in os.walk(root, followlinks=False):
+        dirs[:] = sorted(name for name in dirs if not (Path(directory) / name).is_symlink())
+        for name in sorted(names):
+            path = Path(directory) / name
+            if path.is_symlink() or not path.is_file() or path.suffix.lower() == ".sav":
+                continue
+            relative = "game/" + path.relative_to(root).as_posix()
+            data = path.read_bytes()
+            files[relative] = (data, 0o644)
+            records[relative] = {"sha256": sha(data), "bytes": len(data), "source_mtime_ns": path.stat().st_mtime_ns}
+    return files, records
+
+
 def mask_bytes(path):
     d = json.loads(path.read_text(encoding="utf-8"))
     if "scope" in d:
@@ -62,7 +86,7 @@ def verify_atlas_bindings(path, repo, names):
 
 
 def reusable_masks(root, repo, manifest_sha):
-    """只接受指紋固定且與現行譯文相同的已驗正式包字模。"""
+    """只接受指紋固定且與現行譯文相同的完整字模清冊。"""
     source = root / 'MANIFEST.json'
     if not manifest_sha or sha(source.read_bytes()) != manifest_sha:
         raise ValueError('字模來源 manifest 指紋不同')
@@ -609,9 +633,12 @@ def main():
     p.add_argument("--format", choices=["tar.gz", "appimage", "windows-zip", "macos-zip"], default="tar.gz")
     p.add_argument('--mask-bundle', type=Path)
     p.add_argument('--mask-manifest-sha256')
+    p.add_argument('--full-game', type=Path, help='僅限本機的完整AppImage，內含合法原版資料，不得公開')
     a = p.parse_args()
     if not VERSION.fullmatch(a.version):
         raise SystemExit("版號不符 v.X.Y.Z-YYYYMMDD")
+    if a.full_game and a.format != "appimage":
+        raise SystemExit("--full-game只支援本機AppImage")
     if (a.output / a.version).exists():
         raise SystemExit("交付版本目錄已存在；請用新的版號，禁止覆寫既有封包")
     embedded_version = None
@@ -640,6 +667,8 @@ def main():
     platform = "macos-universal" if macos else "windows-x86_64" if windows else "linux-x86_64"
     native_name = "colonization-window.exe" if windows else "colonization-window"
     top = f"colonization-cht-{a.version}-{platform}"
+    if a.full_game:
+        top = f"colonization-cht-{a.version}-full-local-{platform}"
     files = {}  # 包內路徑 → (bytes, mode)
     files["bin/" + native_name] = (a.binary.read_bytes(), 0o755)
     files["colonization-cht.sh"] = ((a.repo / "tools/release/colonization-cht.sh").read_bytes(), 0o755)
@@ -681,6 +710,27 @@ def main():
                                       "files": ORIGINAL},
                 "dependencies": dependencies,
                 "files": {k: {"sha256": sha(v[0]), "bytes": len(v[0])} for k, v in sorted(files.items())}}
+    if a.full_game:
+        original_files, original_records = full_game_files(a.full_game)
+        files.update(original_files)
+        notice = {"version": a.version, "private_only": True,
+                  "notice": "使用者本機合法原版資料；不得提交Git、上傳或公開散布。存檔不隨包。",
+                  "manual_validation": "pending", "files": original_records}
+        files["FULL-LOCAL-MANIFEST.json"] = ((json.dumps(notice, ensure_ascii=False, indent=2) + "\n").encode(), 0o644)
+        full_readme = (
+            "殖民帝國「本機完整版」 " + a.version + "\n\n"
+            "本包內含本機合法原版資料、五語顯示層、Noto字型及全部正式HD素材。\n"
+            "僅供本機使用，不得提交Git、上傳或公開散布。沒有附帶使用者存檔。\n"
+            "\n直接執行本AppImage即可。FUSE不可用時，加 --appimage-extract-and-run。\n"
+            "需要Linux x86_64、X11、OpenGL、ALSA、glibc及bash。\n"
+            "\n畫面外「顯示設定」可切換五語與原版／HD；初始為繁中、原版，沿用既存偏好。\n"
+            "HD事件標題使用金色。存檔沿用 ~/.local/share/colonization-cht/save。\n"
+            "\n依使用者要求，本版停止自動測試。啟動、畫面及聲音待人工驗證。\n"
+            "未抽樣情境可能保留原文或原圖，不宣稱完整五語與全遊戲HD驗收完成。\n"
+            "\n授權見LICENSE及LICENSES/；本機原版資料不在本作品授權範圍內。\n")
+        files["README.txt"] = (full_readme.encode(), 0o644)
+        manifest.update(private_only=True, bundled_original=True, manual_validation="pending")
+        manifest["files"] = {k: {"sha256": sha(v[0]), "bytes": len(v[0])} for k, v in sorted(files.items())}
     if macos:
         manifest["binary_validation"] = binary_validation
     if mask_source:
@@ -706,15 +756,18 @@ def main():
         a.output.mkdir(parents=True, exist_ok=True)
         version_dir = a.output / a.version
         version_dir.mkdir()
-        out = version_dir / "patch"
+        category = "full-local" if a.full_game else "patch"
+        out = version_dir / category
         out.mkdir()
         pkg = out / f"{top}.{suffix}"
         pkg.write_bytes(package_data)
         pkg.chmod(0o755)
-        sums = {"version": a.version, "packages": {f"patch/{pkg.name}":
+        sums = {"version": a.version, "packages": {f"{category}/{pkg.name}":
                 {"sha256": sha(package_data), "bytes": len(package_data)}}}
+        if a.full_game:
+            sums.update(private_only=True, manual_validation="pending")
         (version_dir / "SHA256SUMS.json").write_text(json.dumps(sums, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-        print(json.dumps({"package": str(pkg), **sums["packages"][f"patch/{pkg.name}"],
+        print(json.dumps({"package": str(pkg), **sums["packages"][f"{category}/{pkg.name}"],
                           "files": len(bundled_manifest["files"]) + 1}, ensure_ascii=False))
         return 0
     buf = io.BytesIO()

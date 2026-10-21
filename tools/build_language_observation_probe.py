@@ -190,6 +190,17 @@ def attach_language_runtime(repo, output, reference, *, with_rebuild=True, forma
 \t\tmust(err)
 \t}
 \tvar hd *hdRuntime
+\tif languageLive {
+\t\tjournal.foreground = func(f nativeSurfaces) []byte {
+\t\t\tif hd == nil || hd.scenes == nil || f.mode != 0x13 {
+\t\t\t\treturn nil
+\t\t\t}
+\t\t\tmask, _ := hd.scenes.seaDialogForeground(f.canvas, f.indexed, f.palette, journal.cursor)
+\t\t\treturn mask
+\t\t}
+
+\t}
+
 \thdReason := "HD assets not requested"
 \tif languageLive && !*control {
 \t\tvar err error

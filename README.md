@@ -38,6 +38,8 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 
 ## 目前狀態
 
+本機完整版沿用 `tools/package_release.py --format appimage --full-game <原版目錄>`，輸出於 `dist-all/<版本>/full-local/`。內含五語資源、Noto字型與正式HD素材，僅供本機使用；啟動與畫面留待人工確認。現行交付路徑見[目前脈絡](CONTEXT.md)。遊玩時可在畫面外的「顯示設定」切換語言及原版／HD。
+
 英國發現者新局停止已修復，正常世界入口、三側同狀態與既有存檔回歸通過。殖民地、歐洲港口、報告與國會的剩餘接線已完成，經代表性正常路徑及回退抽樣驗收，並收進本版三平台封包。[遊玩驗證](docs/goals/185-player-experience.md)保存修復與抽驗範圍；未抽樣的條件訊息與建造換頁仍保留待驗，見[完成範圍](docs/goals/181-colony-remaining.md)。
 
 **畫面上已經是中文的部分**（每一欄都有原版事件或畫面指紋證據，並以中英同輸入重播驗證原版狀態不變）：

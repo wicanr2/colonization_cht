@@ -1614,6 +1614,119 @@ func TestDraftDialogSeaForeground(t *testing.T) {
 	if id != 1061 || !bytes.Equal(mask, p.soldierDialogForeground(canvas, indexed, palette, cursor)) {
 		t.Fatal("complete original foreground differs")
 	}
+
+	t.Run("journal-foreground-lifecycle", func(t *testing.T) {
+		f := nativeSurfaces{canvas, bytes.Clone(mem[0x3bb00 : 0x3bb00+64000]), indexed, palette, 19}
+		oldMem := hash(m.Mem)
+		if len(mask) != 8000 {
+			t.Fatal("actual foreground unavailable")
+		}
+		makeJournal := func(keep bool) (*nativeJournal, []*nativeObservation) {
+			j := &nativeJournal{enabled: true, cursor: cursor, sample: func() nativeSurfaces { return f }}
+			if keep {
+				j.foreground = func(nativeSurfaces) []byte { return mask }
+			}
+			sources := []*nativeObservation{}
+			for _, o := range observations {
+				copy := *o
+				if !j.add(&copy, o.canvas, o.buffer) {
+					t.Fatal("real panel source rejected")
+				}
+				sources = append(sources, &copy)
+			}
+			return j, sources
+		}
+		pressure := func(j *nativeJournal) {
+			for i := 0; i < draftNativeMaxItems*2; i++ {
+				// Unit-only capacity pressure; this is not an original game output event.
+				o := &nativeObservation{kind: "unit-capacity-pressure", ink: image.Rect(0, 0, 1, 1), after: map[int]byte{0: canvas[0] ^ 1}}
+				if !j.add(o, canvas, nil) {
+					t.Fatal("capacity pressure rejected")
+				}
+			}
+		}
+		count := func(j *nativeJournal, sources []*nativeObservation) int {
+			n := 0
+			for _, o := range sources {
+				for _, active := range j.items {
+					if active == o {
+						n++
+					}
+				}
+			}
+			return n
+		}
+		plain, sources := makeJournal(false)
+		pressure(plain)
+		if count(plain, sources) != 0 {
+			t.Fatal("control did not reproduce occluded-source eviction")
+		}
+		kept, sources := makeJournal(true)
+		pressure(kept)
+		if count(kept, sources) != 4 || len(kept.items) > draftNativeMaxItems || kept.cost > draftNativeMaxCost || kept.evictedVisible != 0 {
+			t.Fatal("foreground sources not retained within original bounds", count(kept, sources), len(kept.items), kept.cost)
+		}
+		kept.foreground = nil
+		pressure(kept)
+		if count(kept, sources) != 0 {
+			t.Fatal("revoked foreground left immortal sources")
+		}
+		var actual *nativeObservation
+		outside := -1
+		for _, o := range observations {
+			for pos := range o.after {
+				if mask[pos>>3]&(1<<uint(pos&7)) == 0 {
+					actual, outside = o, pos
+					break
+				}
+			}
+			if outside >= 0 {
+				break
+			}
+		}
+		if actual == nil {
+			t.Fatal("actual uncovered source point required")
+		}
+		for _, kind := range []string{"valid", "VGA-valid-during-Main-transition", "missing-mask", "wrong-mode", "unknown-main", "unknown-VGA", "source-snapshot-changed", "not-sea", "empty-after"} {
+			t.Run(kind, func(t *testing.T) {
+				obs := *actual
+				frame := f
+				candidate := mask
+				switch kind {
+				case "VGA-valid-during-Main-transition":
+					frame.indexed = bytes.Clone(actual.canvas)
+					candidate = nil
+					if frame.visible(actual) {
+						t.Fatal("transition must not be treated as dual-surface visible")
+					}
+				case "missing-mask":
+					candidate = nil
+				case "wrong-mode":
+					frame.mode = 3
+				case "unknown-main":
+					frame.canvas = bytes.Clone(canvas)
+					frame.canvas[outside] ^= 1
+				case "unknown-VGA":
+					frame.indexed = bytes.Clone(indexed)
+					frame.indexed[outside] ^= 1
+				case "source-snapshot-changed":
+					obs.canvas = bytes.Clone(obs.canvas)
+					obs.canvas[outside] ^= 1
+				case "not-sea":
+					obs.kind = "dialog"
+				case "empty-after":
+					obs.after = nil
+				}
+				if got := nativeRetainForegroundSea(&obs, frame, candidate, cursor); got != (kind == "valid" || kind == "VGA-valid-during-Main-transition") {
+					t.Fatal("unexpected retention", kind, got)
+				}
+			})
+		}
+		if hash(m.Mem) != oldMem {
+			t.Fatal("retention changed original memory")
+		}
+	})
+
 	targets := draftActualTargetsForTest(t)
 	records := []map[string]any{}
 	for _, locale := range []string{"zh-Hant", "zh-Hans", "ja", "ko"} {

@@ -46,3 +46,13 @@ v.1.0.3-20261010 兩次乾淨重建全等，18606584 bytes、SHA-256 `e41a46b5db
 收據formal-check.json為PASS_FORMAL_APPIMAGE_REBUILD_AND_EXTRACTION，SHA-256 `7381007c703caaf5fb3743a4868825896f4984e300dcd2a553404c860e09d315`；formal-smoke-v3/check.json為PASS_FORMAL_APPIMAGE_GUI_MENU，SHA-256 `ee363464327051fcb8416b2cd9257d5c1f545980fb1c93219c2939417316d4b5`。授權破壞、工具指紋不符、非法版號與覆寫既有版本皆拒絕，refusals.json為PASS_PACKAGING_REFUSALS。
 
 formal-smoke的即時截圖早於中文重繪，終點五列已中文；延後擷取後精確核對通過，未修改產品。formal-smoke-v2因掛載來源拼寫錯誤被啟動器拒絕；只清除該次產生的三層空目錄，改用先核對來源的bind mount重跑。所有舊失敗與原收據保留。#50仍進行中，正式版號及最終完整版封包待驗。
+
+
+## 2026-10-21 R144 本機完整版接線
+
+狀態：READY，限本機封裝；使用者明確要求暫停自動測試，先完成接線、Linux AppImage完整版及過期資料清理，剩餘畫面交由人工驗證。這項要求取代本次雙次重建及GUI抽測閘門，不追認新的啟動驗收。
+
+- 封裝入口沿用 `tools/package_release.py`，新增 `--full-game`，只接受AppImage。原版五個固定輸入指紋沿既有契約；存檔與符號連結不隨包。
+- 完整版只寫 `dist-all/v.1.0.4-20261021/full-local/`，內附私用清冊；不提交Git、不建立公開Release、不覆寫舊版本。AppRun指定包內唯讀game目錄，存檔仍寫使用者既有位置。
+- 正式生成386張PNG、清冊、全部五語資源與Noto字型隨包；使用正式R143來源建置，僅以連結器寫入完整版號。顯示設定與既存偏好契約保持。
+- 只做建置、封裝所需的來源指紋、版本、檔案清冊及擁有權核對。不得把封裝成功寫成新GUI、聲音或全遊戲HD驗收。人工驗證狀態明記pending。
