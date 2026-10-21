@@ -3419,3 +3419,37 @@ PHYS0八個黑色遮罩與CLOS-ROC兩個單點來源已正式接線為DISPLAY-PA
 既有SS／PIK清冊的1464個非空來源現在全有正式連結，共1477個連結，含317個既有限定CONFORMED及1160個DISPLAY-PASS。1533張既有indexed內容完整SHA相符；69個全透明與19個零尺寸來源保持原處理。這只是既有解碼清冊的完成範圍，完整玩家圖像分母仍未知，其他47檔與程式繪圖、完整五語、全量HD、影片與新版交付繼續。328個語言資源、README32張實拍及文字普查保持。
 
 本機入口為既有hd-opening-animation-sources-r84工作根的r137-geometry-display-close-final.json、r137-formal-build-r1.json、r137-formal-display-review-r1.json、r137-formal-main-r1/check.json、r137-formal-closing-r1/check.json、r137-packaging-r1.json及r137-final-native-partition-r1.json。正式測試在既有非root Docker／有界Xvfb環境，設定TEST_GAME_ROOT、TEST_HD_EVENT_ASSETS、TEST_HD_EVENT_FIXTURES、TEST_HD_GEOMETRY_MAIN_FIXTURE／OUTPUT與TEST_HD_GEOMETRY_CLOSING_FIXTURE／OUTPUT，執行TestHDGeometryMainDisplay與TestHDGeometryClosingDisplay；fixture與原版像素維持本機。
+
+## R140 世界小地圖程序繪圖
+
+狀態：DISPLAY-PASS。以下保留來源與READY決定，正式完成範圍見本節末尾。
+
+- 範圍為既有世界介面右上小地圖，原版邏輯、地圖資料、視野、輸入與存檔不改。R138正常GUI的HD小地圖38048個RGBA點與原版整數放大全同，是實際顯示缺口；既有SS／PIK連結數保持，不將所有非SS檔名當成漏畫圖像。
+- confirmed：VICEROY.EXE為a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3。原輸出小地圖框[251,8,309,49]、內部[252,9,308,48]，框194點均為原生色號6；正常點有白色視野框[287,22,302,34]共50點。這是320乘200原版輸出座標，不是EXE位址或遊戲地圖座標。
+- 以既有原文sea-bar及日期觀測、目前Main／VGA、小地圖實用16色色盤、完整棕色邊框及已觀測的小地圖色號集合證明目前介面。語言不參與辨識。文字或未知圖像遮擋、色盤／幾何／來源不符、未知游標覆蓋時保持原畫面，不藉猜測畫出小地圖。
+- 候選重用已生成並驗指紋的mpsname-silver-material.png中性細像素材質，沿R135／R137的原生色彩比例與不透明炭色規則。只取其既有載入的中性材質取樣，不重繪字樣或引入原版像素；黑色區完全不透明，不能露出未探索地圖。白色視野框保持原色、位置與寬度，其他圖像來源與文字保持原合成。
+- 候選先放隔離模組，用既有正常點與必要錯件驗圖，再審READY。正式接線後以實際視窗測小地圖可見、原版／HD切換及語言獨立性，按使用者已授權的DISPLAY-PASS收尾，不為畫質追加原版內部調查或完整對拍。
+- 47個非SS／PIK檔只作最小檔案形狀核對：10個MZ、23個文字檔、5個MADSPACK字型、1張640乘480單幀GIF、1份256色色盤與7個未解碼二進位。此分型不證明EXE內沒有圖像，不把原文字型當新HD資產，也不擴張到安裝或地圖編輯器。原始檔及字型像素只留本機。
+- 原始來源入口為既有hd-opening-animation-sources-r84工作根的r140-minimap-source-preparation-r1.json與r140-other-file-shapes-r1.json；輸入仍由原版SHA守門。圖像分母及其他程序圖像保留未完成，本批不宣稱全量HD或完整五語。
+
+R140候選補充：既有sea-bar為逐字NUL結尾來源，日期sea-panel為一段完整NUL結尾原文。兩者均按原始ASCII byte驗證，不使用譯文辨識。R138教學頁與正常關框後的完整DAC指紋不同，但小地圖用到的0／6／12／15及56至67共16色完全相同，取此順序的48 bytes之SHA-256為bb1631956095f032b1a3b042235ac819d0984e91698ca55f973ec8f51a7bc4bb。未使用的色號改變不阻擋小地圖，任一實用色改變仍保持原圖。來源整理見同根r140-palette-context-review-r1.json。
+
+R140正常視窗補充：15筆正常鍵鼠操作後，原輸出在48M至49.4M為50個白色點，50M為51個，額外一點位於框內。所有原生色號15均保持RGB與位置，不將全體白色點反推成單一視野框，也不以白色點數或矩形完整度阻擋材質顯示。這是顯示層的逐點保留契約，不推論標記的遊戲語意或時序；框、原文介面、色盤、表面及來源守門保持。實拍及指紋見同根r140-white-preservation-review-r1.json與r140-prototype-gui-r1。
+
+### R140 READY：原生世界小地圖材質
+
+既有正常GUI來源、24個含子項零skip及895場景載入已通過。原型在正常啟動與讀取合法原版存檔後，以實際X11鍵鼠完成五語兩模式10張畫面；小地圖新增37232至37248個RGBA變動點，800至816個原生白色點保持，設定切換期間原版狀態不變。已目視繁中與韓文畫面。
+
+授權將這一個程序繪圖分支加入正式合成，重用MPSNAME 1031已載入的96乘100中性材質。原版／HD選項、輸入與資料格式保持；正式測試的來源fixture固定指紋，不把fixture當新正常路徑。正式驗收仍為DISPLAY-PASS，不追加原版內部調查或全矩陣對拍。來源指紋與READY入口為同根r140-ready-review-r1.json；已存在的1477個SS／PIK連結、386張原PNG及清冊保持。
+
+R140正式畫面驗證入口為[小地圖檢查器](../../tools/check_hd_minimap_display.py)。在非root Docker中掛載儲存庫、合法原版目錄與既有R84收據根，執行python3 tools/check_hd_minimap_display.py --game /game --reports /out；檢查正式來源、25個含子項收據與五語兩模式的完整X11遊戲區，原版缺失回傳77。畫面以正常讀檔路徑為範圍，不新增原版精確對拍或完整五語翻譯信用。
+
+### R140 小地圖正式顯示通過
+
+正式程式cddf437dea2f3d9e71da7e906fb47322a7ebbd85cbe188aa7f60030883097cf2、建置與go vet通過。兩項／25個含子項零skip，包含24個小地圖來源與一個既有缺件／偏好交易守門；895場景載入、原版記憶體保持及四張fixture PNG與原型相同。缺少合法原版時，Go測試明確skip，公開檢查器回傳77。
+
+正常啟動與讀檔後，15筆實際X11輸入、五語兩模式10張畫面及10240000個X11遊戲區RGBA點通過。五張HD各有37232至37248個新材質變動點；全10張共8112個原生白色RGBA點保持。設定切換期間CPU／記憶體／VGA／DAC與原版輸入不變；不外推跨流程精確時序或原版對拍。
+
+正式素材收集函式核對387檔，386張原PNG及完整清冊保持，沒有新增素材副本或平台包。來源清冊保留全部1552列與1477個SS／PIK連結，另列1個程序小地圖DISPLAY-PASS；四種錯誤收據均拒絕。47個其他檔案只記最小形狀分型，完整玩家圖像分母仍未知。README世界圖已更換為當次正式繁中原樣實拍，仍為32張。
+
+本機完成入口為既有R84工作根的r140-minimap-display-close-r1.json，SHA-256為162de872b5da725db099d8db38663a985678687268b4ab428e55d3dc10c7d8cd；同根r140-public-checker-r1.json、r140-source-index-review-r1.json、r140-formal-source-tests-r1.json、r140-formal-gui-r1及r140-packaging-assets-r1.json保存正式驗證。生成原圖、其他HD與R138文字信用保持；本項不等於完整五語、全量HD、90秒影片或新版三平台交付完成。

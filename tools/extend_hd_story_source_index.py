@@ -807,11 +807,62 @@ def extend_adviser_head(a):
     print('PASS_ADVISER_HEAD113_SCOPED_SOURCE_INDEX', 317, sha(a.output), flush=True)
 
 
+def extend_native_minimap(a):
+    """規格069 R140：登錄程序小地圖顯示，不改SS／PIK來源分母。"""
+    baseline, ready, review = read(a.baseline), read(a.ready), read(a.conformed)
+    manifest = read(a.assets / 'manifest.json')
+    assert ready['result'] == 'READY_R140_NATIVE_MINIMAP_DISPLAY' and ready['spec_state'] == 'READY'
+    assert review['result'] == 'PASS_R140_NATIVE_MINIMAP_DISPLAY' and review['spec_state'] == 'DISPLAY-PASS'
+    assert review['ready_sha256'] == sha(a.ready)
+    assert review['inherited_source_index_sha256'] == sha(a.baseline)
+    assert review['manifest_sha256'] == baseline['formal_manifest_sha256'] == sha(a.assets / 'manifest.json')
+    assert len(manifest['assets']) == review['raw_PNGs'] == 386 and review['graphics_files'] == 387
+    assert review['source_test_passes'] == 24 and review['source_test_skips'] == 0
+    assert review['GUI_samples'] == 10 and review['five_languages_both_modes']
+    assert review['actual_X11_gameplay_inputs'] and review['display_settings_native_state_invariant']
+    assert review['X11_game_RGBA_points'] == 10 * 1280 * 800
+    assert review['source_RAM_unchanged'] and not review['complete_hd']
+    assert review['original_program_sha256'] == 'a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3'
+    material = 'mpsname-silver-material.png'
+    assert review['material_asset'] == material
+    assert review['material_sha256'] == manifest['assets'][material]['sha256'] == sha(a.assets / material)
+    assert review['runtime_source_sha256'] == sha(Path(__file__).parent / 'hd_native_minimap.go')
+    for name, meta in manifest['assets'].items():
+        assert sha(a.assets / name) == meta['sha256']
+    assert len(baseline['frames']) == 1552 and len(baseline['formal_bindings']) == 1477
+    assert baseline['coverage_limits']['remaining_nonempty_reference_sources'] == 0
+    out = copy.deepcopy(baseline)
+    bindings = out.setdefault('program_drawn_bindings', [])
+    assert not any(x['id'] == 'world-minimap' for x in bindings)
+    bindings.append({
+        'id': 'world-minimap', 'source_file': 'VICEROY.EXE',
+        'source_file_sha256': review['original_program_sha256'],
+        'native_bounds': [251, 8, 309, 49], 'state': 'DISPLAY-PASS',
+        'asset': material, 'asset_sha256': review['material_sha256'],
+        'formal_binary_sha256': review['binary_sha256'], 'review_sha256': sha(a.conformed),
+        'spec': 'docs/spec/069-hd-menu-background-and-textures.md',
+        'scope': 'Normal X11 boot and load of the original seed; five languages and both graphics modes. Native white points remain exact. Original data/rules/save formats unchanged; no original-exact timing or complete-HD claim.'
+    })
+    out['other_file_shape_audit'] = {
+        'receipt_sha256': review['other_file_shape_audit_sha256'],
+        'files': 47, 'DOS_MZ': 10, 'legacy_text': 23, 'MADSPACK_font': 5,
+        'single_frame_GIF': 1, 'palette_256': 1, 'undecoded_binary': 7,
+        'scope': 'Header/file-shape classification only. Does not prove that executable code contains no graphics or that all player-visible graphics have been inventoried.'
+    }
+    out['coverage_limits']['program_drawn_display_pass_families'] = len(bindings)
+    out['coverage_limits']['other_formats_and_program_drawn_graphics'] = 'partial: native world-minimap displayed; remaining program-drawn graphics and undecoded formats unverified'
+    assert out['frames'] == baseline['frames'] and out['formal_bindings'] == baseline['formal_bindings']
+    assert not out['coverage_limits']['complete_hd']
+    a.output.write_text(json.dumps(out, ensure_ascii=False, indent=2) + '\n')
+    print('PASS_NATIVE_MINIMAP_DISPLAY_SOURCE_INDEX', len(bindings), sha(a.output), flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ['baseline', 'assets', 'ready', 'conformed', 'output']:
         parser.add_argument('--' + name, type=Path, required=True)
     scope = parser.add_mutually_exclusive_group()
+    scope.add_argument('--native-minimap', action='store_true', help='規格069 R140：追加程序小地圖DISPLAY-PASS，保留SS／PIK清冊')
     scope.add_argument('--royal', action='store_true', help='規格069 R90：只擴充已完成的國王與獵犬來源')
     scope.add_argument('--buildings', action='store_true', help='規格061 R91：只擴充已驗三十個建築來源')
     scope.add_argument('--terrain-textures', action='store_true', help='規格071／065 R92：只擴充已驗十二材質與施工槌')
@@ -825,6 +876,9 @@ def main():
     a = parser.parse_args()
     assert Path('/.dockerenv').exists() and os.getuid() != 0
     assert not a.output.exists() and a.output.parent.stat().st_uid == os.getuid()
+    if a.native_minimap:
+        extend_native_minimap(a)
+        return
     if a.adviser_head:
         extend_adviser_head(a)
         return

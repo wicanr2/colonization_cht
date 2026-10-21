@@ -1,12 +1,11 @@
 {
   "kind": "README actual development screenshots",
-  "date": "2026-10-20",
-  "code_commit": "1006526cde72204f7f4e2881c89f266ad5a63285",
-  "binary_sha256": "d75e56956c2d28c7c23b689cb06b393cbe760fccbb4b8e1319a1a72d99ed01e2",
-  "formal_binary_sha256": "d75e56956c2d28c7c23b689cb06b393cbe760fccbb4b8e1319a1a72d99ed01e2",
-  "source_build_sha256": "99a0ba952642d34b2139226e35e38fd4be73f699ae7087f3c9ade0576f83b3fe",
+  "date": "2026-10-21",
+  "binary_sha256": "cddf437dea2f3d9e71da7e906fb47322a7ebbd85cbe188aa7f60030883097cf2",
+  "formal_binary_sha256": "cddf437dea2f3d9e71da7e906fb47322a7ebbd85cbe188aa7f60030883097cf2",
+  "source_build_sha256": "1f2ee3568dfe5e947966fafbca9abf3aad65a058c3a7e9ad9b48ef674acb51af",
   "released_version_unchanged": "v.1.0.3-20261010",
-  "formal_hd_assets": 385,
+  "formal_hd_assets": 386,
   "authorization": "User explicitly requested updating README screenshots on 2026-10-14",
   "rights": "Mixed original game pixels, translated text and project-generated HD graphics; original portions excluded by LICENSE section 2(c)",
   "captures": [
@@ -36,30 +35,34 @@
     },
     {
       "file": "hd-world-zh.png",
-      "sha256": "cafcb4c737b2bcac15cea108345735fe035cfa7a925c94ca2b08853cc7a92e75",
+      "sha256": "78af3409f2560c626a1087760907f4b0b186dd97001c6dba299b163112305e46",
       "size": [
         1280,
         800
       ],
-      "scene": "world-zh-Hant-hd",
+      "scene": "world-native-minimap-zh-Hant-hd",
       "language": "zh-Hant",
       "graphics": "hd",
-      "step": 60200000,
-      "binary_sha256": "2bda3e6ba3a6e512edbbc3dce839bbc422eaec8278ec1a63ed684c823a3b235a",
-      "formal_binary_sha256": "2bda3e6ba3a6e512edbbc3dce839bbc422eaec8278ec1a63ed684c823a3b235a",
-      "code_commit": "fbcfe7e98733dca717821a11f1d5acecfc6c7615",
-      "formal_hd_assets": 305,
-      "source_receipt": "workplace/reports/goal186-display-hd/hd-icons-all-surfaces-r96/r96-scaled-formal-gui-r2/gui.display-034.png",
-      "source_gui_check_sha256": "4d20bc2edbdc15626171dd04b9a8c72f046e64d7cbdbbafc125f698671bebb85",
-      "independent_pixels_sha256": "158d854ad580c38bc71623ff7f5e329832247445bf21306d3435e16c217b34dc",
-      "source_kind": "actual formal game presentation, verified byte-for-byte against real X11 game area; new3 source/component pixels independently verified, no whole-world independent HD credit",
+      "step": 48800000,
+      "binary_sha256": "cddf437dea2f3d9e71da7e906fb47322a7ebbd85cbe188aa7f60030883097cf2",
+      "formal_binary_sha256": "cddf437dea2f3d9e71da7e906fb47322a7ebbd85cbe188aa7f60030883097cf2",
+      "formal_hd_assets": 386,
+      "program_drawn_display_families": 1,
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r140-formal-gui-r1/gui.display-014.png",
+      "source_gui_check_sha256": "c67f5451e9f1b6f374d9534aa99d85d7fecc685b3b700d5eb3713ca1ef6f59a7",
+      "source_build_sha256": "1f2ee3568dfe5e947966fafbca9abf3aad65a058c3a7e9ad9b48ef674acb51af",
+      "build_receipt_sha256": "92c81a0f0ab1e6bd007202a75e27046f5aa3b2246cde62cd50085220a7b0c5d4",
+      "source_kind": "Actual formal normal-game presentation verified byte-for-byte against the real X11 game area. New native minimap material only; inherited world layers retain their earlier acceptance scopes.",
       "capture_pixels_unchanged": true,
-      "conformance_sha256": "d6919b3f43c4f71e847d928bfdcc7f17105eb25740e0a9ac9ad1121116991ed6",
-      "graphics_manifest_sha256": "d2a56422792877654e8b1cf78d8006e2f7c11a065bd2bad5ae19602f490143ee",
-      "source_index_sha256": "e52daf53508ce60a41b9a6a3090f951d3ee333c38c8fb16ec94c212c487e7164",
-      "ready_sha256": "505ee5099ef5474c6226ce84094dccb3e0ed316a646b36cb770e36f01f879f9e",
-      "actual_inputs_sha256": "0a2fca60bae61665af3eaed511e2b3d7d615e4f67d823b805355d590757db9fd",
-      "pixel_scope": "D66 sources003/011/118 only plus final original/HD cursor composition; all inherited world layers retain prior evidence"
+      "conformance_state": "DISPLAY-PASS",
+      "display_review_sha256": "162de872b5da725db099d8db38663a985678687268b4ab428e55d3dc10c7d8cd",
+      "graphics_manifest_sha256": "1e28e2bcd8e9bfdbf0d6905d4153952cdf883c76973f47eec43268becb8857c0",
+      "source_index_sha256": "e16840d692f370d3abfc1b8491042fd22e4f5aba68c32bbb96d131fe4494701b",
+      "ready_sha256": "385d7dda183c50e04eaf7df7be62342353c2c3b760d93bafc99aec2a2b74da09",
+      "actual_inputs_sha256": "4385b6e5bf0f7cc060215421ee1b36ef33266ed8fa16179bc953b5bd8136d836",
+      "pixel_scope": "Native minimap and preserved original white points; full X11 display equality. No new independent acceptance for inherited world layers or original-exact timing.",
+      "changed_minimap_RGBA_points": 37232,
+      "native_white_minimap_RGBA_points": 816
     },
     {
       "file": "noto-menu-zh.png",
@@ -1229,8 +1232,8 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "每張圖以captures各自的code_commit、binary_sha256及source_receipt為準；本次只更換登陸圖，其餘31張沿原收據。",
-  "graphics_manifest_sha256": "08dee0acbd6966e56248f4622b7acbe27376a4253432a26e1a4b6d1763543fbe",
+  "provenance_scope": "每張圖以captures各自的binary_sha256、source_build_sha256或code_commit及source_receipt為準；本次只更新世界小地圖實拍，其餘31張沿原收據。",
+  "graphics_manifest_sha256": "1e28e2bcd8e9bfdbf0d6905d4153952cdf883c76973f47eec43268becb8857c0",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
     "sha256": "455e346d3f07747e91f289fbb140c6bb13ff1bb86e749558306a5d0e34a2edd1",
@@ -1280,7 +1283,7 @@
     "graphics_manifest_sha256": "c2947ac671891c191addb9a0f5ae6a5f0055f9ac0cab94071103420d3e67abd7",
     "conformance_sha256": "a74c8dece4c569c9ebb1d0947a5b3a892eca8ad676225d3b086689575ae4fdf5"
   },
-  "verification_build_sha256": "d75e56956c2d28c7c23b689cb06b393cbe760fccbb4b8e1319a1a72d99ed01e2",
+  "verification_build_sha256": "92c81a0f0ab1e6bd007202a75e27046f5aa3b2246cde62cd50085220a7b0c5d4",
   "production_go_sources_equal_to_verified_build": true,
   "previous_scene_background_capture": {
     "code_commit": "dbfc95fc2b98654f9f4cf3d0abac946730bfbfce",
@@ -1422,7 +1425,7 @@
     },
     "conformance_sha256": "86addada266145485d2aa2148a8e43a4b5cd2009ad5f1266bfef2ba6d9e9afdb"
   },
-  "conformance_state": "R127登陸正文限定CONFORMED；各圖仍以自身來源與範圍為準。",
+  "conformance_state": "R140世界小地圖DISPLAY-PASS；各圖仍以自身來源與驗收範圍為準。",
   "previous_opening_sun_capture": {
     "capture": {
       "file": "hd-opening-zh.png",
@@ -1979,5 +1982,42 @@
     "verification_build_sha256": "cd6874ef37da1d69e84b3788d0ecbef24940cfc79e2be478b3ce8c073936fd44",
     "conformance_state": "R122四語狀態欄與人物前景合成限定CONFORMED；其他31張圖片沿各自來源範圍",
     "provenance_scope": "只更新士兵教學當次繁中HD原PNG，四行狀態欄沿原版位置與人物遮擋。其他31張與三張金色事件來源保持；R121實拍保存在previous_soldier_r121_capture，其他歷史指紋保持。"
+  },
+  "previous_native_minimap_world_capture": {
+    "file": "hd-world-zh.png",
+    "sha256": "cafcb4c737b2bcac15cea108345735fe035cfa7a925c94ca2b08853cc7a92e75",
+    "size": [
+      1280,
+      800
+    ],
+    "scene": "world-zh-Hant-hd",
+    "language": "zh-Hant",
+    "graphics": "hd",
+    "step": 60200000,
+    "binary_sha256": "2bda3e6ba3a6e512edbbc3dce839bbc422eaec8278ec1a63ed684c823a3b235a",
+    "formal_binary_sha256": "2bda3e6ba3a6e512edbbc3dce839bbc422eaec8278ec1a63ed684c823a3b235a",
+    "code_commit": "fbcfe7e98733dca717821a11f1d5acecfc6c7615",
+    "formal_hd_assets": 305,
+    "source_receipt": "workplace/reports/goal186-display-hd/hd-icons-all-surfaces-r96/r96-scaled-formal-gui-r2/gui.display-034.png",
+    "source_gui_check_sha256": "4d20bc2edbdc15626171dd04b9a8c72f046e64d7cbdbbafc125f698671bebb85",
+    "independent_pixels_sha256": "158d854ad580c38bc71623ff7f5e329832247445bf21306d3435e16c217b34dc",
+    "source_kind": "actual formal game presentation, verified byte-for-byte against real X11 game area; new3 source/component pixels independently verified, no whole-world independent HD credit",
+    "capture_pixels_unchanged": true,
+    "conformance_sha256": "d6919b3f43c4f71e847d928bfdcc7f17105eb25740e0a9ac9ad1121116991ed6",
+    "graphics_manifest_sha256": "d2a56422792877654e8b1cf78d8006e2f7c11a065bd2bad5ae19602f490143ee",
+    "source_index_sha256": "e52daf53508ce60a41b9a6a3090f951d3ee333c38c8fb16ec94c212c487e7164",
+    "ready_sha256": "505ee5099ef5474c6226ce84094dccb3e0ed316a646b36cb770e36f01f879f9e",
+    "actual_inputs_sha256": "0a2fca60bae61665af3eaed511e2b3d7d615e4f67d823b805355d590757db9fd",
+    "pixel_scope": "D66 sources003/011/118 only plus final original/HD cursor composition; all inherited world layers retain prior evidence"
+  },
+  "previous_native_minimap_header": {
+    "date": "2026-10-20",
+    "code_commit": "1006526cde72204f7f4e2881c89f266ad5a63285",
+    "binary_sha256": "d75e56956c2d28c7c23b689cb06b393cbe760fccbb4b8e1319a1a72d99ed01e2",
+    "formal_binary_sha256": "d75e56956c2d28c7c23b689cb06b393cbe760fccbb4b8e1319a1a72d99ed01e2",
+    "source_build_sha256": "99a0ba952642d34b2139226e35e38fd4be73f699ae7087f3c9ade0576f83b3fe",
+    "formal_hd_assets": 385,
+    "provenance_scope": "每張圖以captures各自的code_commit、binary_sha256及source_receipt為準；本次只更換登陸圖，其餘31張沿原收據。",
+    "conformance_state": "R127登陸正文限定CONFORMED；各圖仍以自身來源與範圍為準。"
   }
 }

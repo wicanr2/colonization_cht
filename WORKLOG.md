@@ -7607,3 +7607,17 @@ timeout 180 docker run --rm --network none --user 1000:1000 \
 - 首次合併遇到唯讀來源目錄，當場停止；補上父目錄可寫與凍結來源排除，r2辨識已完成硬連結後接續，不改檔案權限。核對腳本初版沿用R139歷史子集總數，在內容SHA通過後於數量守門停止；本輪清理前名單包含後續新增150個PNG及4個存檔，已與全工作樹路徑核對，再以r2完整乾淨重跑。這兩項屬清理／核對腳本問題，不列為遊戲缺陷。
 - 本機入口為[清理收據](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r141-cleanup-final-r2.json)，SHA-256為0316161aac273900bc7222a4e9b7dd47e98df299ebcd348b856c6a46763164f6。同根r141-cleanup-plan-r1.json、r141-dedup-rows-r2.jsonl、r141-archive-rows-r2.jsonl、r141-wine-extra-plan-r1.json及r141-*-source-r*.py保存名單、來源與步驟；r141-after-cleanup-checker-r1.json登錄清理前後結果。新增本機證據由本節及CONTEXT掛入入口，不公開原版像素、存檔或研究輸入。
 - 全程使用有界、非root、無網路Docker，未重建映像檔、全域prune或清理其他專案。核對未見root-owned產物、錯誤.md目錄或封存暫存檔；本輪容器以--rm清除。清理文件單獨提交、推送，規格069的既有DRAFT不納入本次提交。
+
+## 2026-10-21 R140 世界小地圖HD接線
+
+- 清理後接續既有小地圖DRAFT。載入規格閘門、正常試玩與文件職責，README另讀首頁標準；沿既有正常輸出與生成材質，沒有新增原版內部調查、PNG素材或資料格式。
+- 原小地圖38048個RGBA點只是原版放大。新增唯讀程序材質分支，原文頂列與日期、目前Main／VGA、已觀測16色色盤、完整棕框及來源／游標守門符合才繪製；所有原生白色點保持。原版模式、輸入與存檔格式保持，未知遮擋或色號回原畫面。
+- MPSNAME 1031材質實際由片頭層載入，初版誤向場景層取用，已修正為既有96乘100中性材質。來源測試的bitmap保留正例另補既有D46合法收據，在第二台隔離機器解碼取得實際原生資料；未猜補bitmap值，也沒有改正式原版行為。
+- 第一輪正常GUI完成7張後，在日文HD遇到原生白色點由50變51，原型的矩形完整度守門誤拒絕。改為逐點保留所有原生白色，不推論標記語意或時序；完整原文、框、色盤、表面及來源守門保持。r5原型24個含子項零skip及五語兩模式10張實際GUI通過，目視後審READY才提升正式來源。
+- 正式cddf437d…由公開組裝器重建，建置與go vet通過。2項／25個含子項零skip，含24個小地圖來源與1個既有缺件／偏好交易守門；895場景載入，4張來源fixture PNG與原型逐byte相同，原版RAM保持。缺原版時Go測試明確skip，公開檢查器回傳77。私用腳本曾因未載入暫存字串及JavaScript替換模板誤解regex的結尾而停止，已改用替換回呼並先做語法檢查；沒有修改執行期迎合腳本。
+- 正式正常啟動及讀取合法原版存檔，以15筆實際X11輸入完成五語兩模式10張實拍。完整10240000個X11遊戲區RGBA點通過，五張HD各新增37232至37248點，10張共8112個原生白色RGBA點保持；設定切換期間CPU、記憶體、VGA、DAC及原版輸入不變。沒有新增跨流程原版精確對拍、音訊或翻譯信用。
+- [公開檢查器](tools/check_hd_minimap_display.py)核對正式來源、收據、完整X11、原版模式與白色點。正式素材收集函式實際核對387檔，386張原PNG與清冊保持。來源清冊保留1552列與1477個SS／PIK連結，程序小地圖另列1項DISPLAY-PASS；四種錯誤驗收收據均拒絕。47個非SS／PIK檔只作10 MZ、23文字、5字型、1 GIF、1色盤與7未解二進位的最小形狀分型，不當成47張缺圖，也不證明EXE沒有圖像。
+- README世界圖改為正式繁中當次原樣實拍，SHA-256為78af3409f2560c626a1087760907f4b0b186dd97001c6dba299b163112305e46；32張總數保持，其餘31張SHA與R141核對時相同。截圖清冊保留舊世界圖來源與舊表頭，新圖以正式來源與建置清冊綁定。CONTEXT與唯一JSON工作項同步更新，生成WORKLIST內容核對相同，HD工作項仍in_progress。
+- 本機完成入口為r140-minimap-display-close-r1.json，SHA-256為162de872b5da725db099d8db38663a985678687268b4ab428e55d3dc10c7d8cd，位於既有hd-opening-animation-sources-r84工作根；同根r140-ready-review-r1.json、r140-formal-build-r1.json、r140-formal-source-tests-r1.json、r140-formal-gui-r1、r140-public-checker-r1.json、r140-source-index-review-r1.json及r140-*-source-r*.py保存證據與步驟。現行來源清冊SHA-256為e16840d692f370d3abfc1b8491042fd22e4f5aba68c32bbb96d131fe4494701b。新增本機收據與來源由本節、規格069及CONTEXT掛入入口；原版輸入與fixture不入Git。
+- 收尾清除Go快取397537280 bytes，並無損封存9個已結束原型程式，回收88080384 bytes；相同內容的兩份原型共用壓縮payload，原路徑各保留還原清冊。合計回收485617664 bytes，約463MiB。正式程式／測試及必要來源fixture維持原路徑，還原沿tools/evidence_storage.py。
+- 最終r140-final-handoff-r1.json的SHA-256為eb800b1b510a60b8e4e57eaabec930a901923098144be547b0f2c825ad6f3cb2。1352個原版輸入、4124個舊存檔、24個存檔符號連結、328語言資源及28個文字／字型／普查檔保持；63個正式組裝來源指紋吻合。小地圖與R138移民通知兩個公開檢查器在封存後結果相同。工作樹核對時實占34526601216 bytes，約32.16GiB，無root-owned產物、錯誤.md目錄或封存暫存檔，容器以--rm清除，未動其他專案。公開來源、清冊與README一併提交推送；完整五語、其餘程序圖像／格式、90秒影片及新版三平台交付仍未完成，Goal維持active。
