@@ -76,7 +76,7 @@ def check(game, reports, repo):
     ids = {r['id'] for r in matrix['rows']}
     assert set(ACCEPTED + CURRENT) <= ids
     assert set(ACCEPTED) <= set(meta['historical_row_ids'])
-    assert '歷史矩陣報表原文封存' in (repo / 'WORKLOG.md').read_text()
+    assert '歷史矩陣報表原文封存' in (repo / 'docs/archive/WORKLOG-through-20261021.md').read_text()
     checks = ['check_goal185_newgame_save.py', 'check_goal185_save_failure.py',
               'check_goal185_load_failures.py', 'check_goal185_custom_settings.py',
               'check_goal185_start_settings.py', 'check_goal185_map_title.py']

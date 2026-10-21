@@ -44,7 +44,7 @@ def check(game,reports,repo):
     assert set(ACCEPTED)<=set(meta['historical_row_ids'])
     assert set(ACCEPTED)<={r['id'] for r in config['rows']}
     # 保留使用者已接受的六類正常逐篇驗收；不冒稱舊目錄又重新走過。
-    assert '歷史矩陣報表原文封存' in (repo/'WORKLOG.md').read_text()
+    assert '歷史矩陣報表原文封存' in (repo/'docs/archive/WORKLOG-through-20261021.md').read_text()
     census={r['id']:r for r in csv.DictReader((repo/'docs/text-census.tsv').open(),delimiter='\t')}
     for key in boundary['unavailable_source_ids']:
         assert census[key]['status']=='unreachable' and census[key]['reach']=='unreachable'

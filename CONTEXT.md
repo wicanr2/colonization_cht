@@ -6,6 +6,9 @@
 
 | 項目 | 目前狀態與證據 |
 |---|---|
+| 首頁與工程封存 | README保留32張原有截圖、玩家可見的Remastered完成內容與必要交付差別。舊首頁見[首頁封存](docs/archive/README-engineering-20261021.md)，R146以前歷程見[WORKLOG封存](docs/archive/WORKLOG-through-20261021.md)；後續唯一歷程入口仍為根目錄WORKLOG.md。 |
+| Issue收尾 | 2026-10-21依使用者明確授權，已確認功能完成的[#61](https://github.com/wicanr2/colonization_cht/issues/61)已關閉，遠端回讀CLOSED。#53、#55、#58至#60、#62至#64仍有未完成或未確認範圍，保持OPEN。未將已知來源接線與人工待驗外推為全中文／全HD完成。 |
+| 片頭旋轉動畫HD | MPS旋轉標誌16幀與遊戲標題已按規格069 R113接線並通過來源測試畫面；既有船、太陽、雲、煙與魚形正常路徑驗收保持。採原版時序與位置的HD影格覆蓋，不宣稱整段片頭或獨立3D模型全量驗收。 |
 | 完整版打包定案 | 2026-10-21使用者決定後續固定分為「HD＋原版＋中文化」及「原版＋中文化」。入口 `tools/package_release.py --format appimage --full-game <原版目錄>` 同一版號一次產出兩包，清冊與校驗碼記錄包別；舊彙整器拒絕再建單一完整版。目前支援Linux AppImage，入口[規格041](docs/spec/041-linux-appimage.md#2026-10-21-r146-完整版分為兩類)。 |
 | 本機HD完整版 | [HD＋原版＋中文化 AppImage](dist-all/v.1.0.7-20261021/full-local/colonization-cht-v.1.0.7-20261021-full-local-hd-linux-x86_64.AppImage)，版本v.1.0.7-20261021，482744824 bytes，約460MiB，1116檔及AppImage圖示別名。SHA-256 943be8bfdf4e3ba93a996d2c02fddeea8dda86b2086c2e34722be1ffdab2bb43。含386張正式HD原PNG／387檔，可切換原版／HD。 |
 | 本機原版中文化完整版 | [原版＋中文化 AppImage](dist-all/v.1.0.7-20261021/full-local/colonization-cht-v.1.0.7-20261021-full-local-original-linux-x86_64.AppImage)，95549944 bytes，約91MiB，729檔及AppImage圖示別名。SHA-256 f51cf93422a17956f80fc0edaa2ad159d5f9d7e3c1360e0b49b7747a84f2b551。沒有graphics目錄或HD素材，保留原版圖像、五語資源與Noto文字；宣言字母保留原版動畫。 |
@@ -68,7 +71,7 @@
 | 四語主選單五列 | [規格055](docs/spec/055-noto-main-menu.md)限定CONFORMED；各語逐列24／24／20／20／24px，新增三個noto-menu參數，只改五列。325Go、零skip、go vet、80個錯誤輸入及守門反例、45檔重生全等通過。四語40張正常GUI及16組四側重播通過，游標保留、載入頁返回重畫、切場撤銷；CPU、完整RAM、VGA、DAC、WAV及原有存檔全同，錯地區整組回原文並記錄。總收據noto-menu-formal-check-20261011.json，SHA-256為551ef86711d04879cb915c6bbed909317d1f6730dff93135f0ab6de4cae47a1f。六列命令欄的既有測試保留；完整五語、HD及交付未完成，不增加shown。 |
 | HD正式首座 | BUILDING032已接正式建置、啟動器與封裝白名單；生成v4原圖及來源／權利清冊在graphics，原版參考仍留本機。[規格061](docs/spec/061-hd-building-draw-lifecycle.md)限定CONFORMED。685Go零skip與go vet、152組正式五語原版／HD視窗、608筆原子設定事件及3280點不透明游標通過。進城／重進／關百科621點、浮標460點、百科／存檔頁／離城0點，本批無畫布／游標回退。65筆實際DOS輸入四側重播至205400000步，完整CPU、RAM、VGA、DAC、WAV及存檔全同。五個新行程驗缺目錄、缺圖、錯圖、錯清冊及恢復：保留語言與原HD偏好，缺件時當次回原版，恢復後HD生效。五個封裝錯件／額外原版反例拒絕。本機收據hd-formal-r31；其他建築、地形、人物、動畫、跨平台效能及完整HD未完成。歷史RAM差異及返回附近碼成因仍未知，已發布版未變。 |
 | HD正式海洋 | [規格062](docs/spec/062-hd-sea-draw-lifecycle.md)。海洋第148幀已接正式組裝、既有啟動器與封裝白名單，規格062限定CONFORMED。生成v3原圖及完整提示／權利清冊在graphics，原版參考留本機。692Go零skip與go vet、31來源反例、49點正常路徑完整原版狀態及存檔通過；七個來源方法及49點遮罩／還原統計與R34相同。182組正式五語原版／HD、728筆暫停設定事件及6560點不透明游標通過，正常世界／存檔返回33123點、城內0點、游標往返遮罩相同。本次來源守門回退1組，回原圖且不計為持續覆蓋。121筆實際輸入四側重播至286400000步，完整CPU、RAM、VGA、DAC、WAV及存檔全同。八個新行程驗缺件／錯件／連結圖及恢復，39筆設定事件不改原版，原日文HD偏好位元組不變；八項封裝拒絕通過。候選色差已縮小，其他海岸／地形仍是原版；裁切、動畫、跨平台效能、完整HD與新發行未完成。證據根hd-sea-formal-r35。 |
-| 已發布基準 | 新15圖抽驗e66770d及發行來源71db6fe已推送，發布交接b7c4ef8已推送。[v.1.0.3-20261010 Release](https://github.com/wicanr2/colonization_cht/releases/tag/v.1.0.3-20261010)於2026-10-10 23:17:41 Asia/Taipei公開，三平台功能包／本機完整版及90秒截圖混剪驗收完成。新版實際遊玩錄影要求另由#64追蹤，不覆寫舊發行。#56／#57維持CLOSED，#55仍進行中，#61遠端OPEN，不重試關閉。 |
+| 已發布基準 | 新15圖抽驗e66770d及發行來源71db6fe已推送，發布交接b7c4ef8已推送。[v.1.0.3-20261010 Release](https://github.com/wicanr2/colonization_cht/releases/tag/v.1.0.3-20261010)於2026-10-10 23:17:41 Asia/Taipei公開，三平台功能包／本機完整版及90秒截圖混剪驗收完成。新版實際遊玩錄影要求另由#64追蹤，不覆寫舊發行。#56／#57維持CLOSED，#55仍進行中，#61於2026-10-21本輪明確授權後關閉，遠端回讀CLOSED。 |
 | 完成判準 | 依2026-10-04決定，完整翻譯與接線後，以代表性正常GUI、中英同輸入及回退抽樣收尾。未抽樣與缺接線分開；資料契約不增加shown，不把未抽樣改列不可達。 |
 | 譯文 | 全語料3561行已建檔，3558已翻譯、3冠詞有理由省略。來源、占位符、控制碼、熱鍵與字型入口見[目標160](docs/goals/160-corpus-closure.md)。 |
 | 目前程式 | v.1.0.3-20261010 Linux正式版8e6cba679d85f1e2219c816e7272df0b640d6f12cc148fa0d759f36e718aec3b，由已驗73d863ba…來源加內嵌版號重建；Go來源及乾淨組裝13檔全等。180Go及go vet沿用，新15圖與先前34圖完整原版／WAV／存檔一致，93圖回歸保留。適配器7d136aef…與隔離dosgolem82a14b2不變。 |
@@ -177,7 +180,7 @@
 
 歷史訂正：[目標129](docs/goals/129-build1-runtime-frame-lifecycle.md)證實 `@BUILD1` 61字元與1,040點底層畫布寫入，但其第538幀只證底圖完成；目標130補看真 VGA，首個安全幀是該獨立路徑第544幀。原本「字幕仍英文、正式十七段」是目標129當時狀態，已由本檔首段的新限定 CONFORMED 收據更新，不可反向覆蓋現況。兩條輸入路徑印字步數不同，須各自引用。
 
-更新：2026-09-25；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](WORKLOG.md)。
+更新：2026-09-25；本檔只記目前真相，逐輪證據見 [RESEARCH-LOG.md](RESEARCH-LOG.md)，歷程見 [WORKLOG.md](docs/archive/WORKLOG-through-20261021.md)。
 
 最近完成：[目標128](docs/goals/128-a-layout-decisions-and-build1-runtime-gate.md)已獨立鎖定 `@BUILD1` 開場字幕 A（38px、實際墨跡高35px、共同置中，淡黃字與暗影），排除42px B；`Game Options` 九欄 A（標題34px，八列25／28／28／25／28／28／27／28px），排除較大的 B。現行 TSV 重烘與原版／Ebitengine 本機對照通過；`@BUILD1` 固定雙重播／無監看控制在85M拒絕、90M至195M已驗取樣候選、200M換頁拒絕。此為 DRAFT 守門候選，尚無真視窗逐幀中文、當次事件權杖或缺譯回退；規格026／027均未升 READY，字幕與九欄仍英文，正式中文十七段、help 零則。下一步由字幕事件生命週期與逐幀可逆補片接續，不把本輪 A 套到其他字幕或選項以外畫面。
 

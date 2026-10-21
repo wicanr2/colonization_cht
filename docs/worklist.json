@@ -341,7 +341,7 @@
             "pattern": "狀態：完成"
           },
           {
-            "path": "WORKLOG.md",
+            "path": "docs/archive/WORKLOG-through-20261021.md",
             "pattern": "PASS 63、SKIP 0、FAIL 0；收據待重驗 0 列"
           },
           {
@@ -412,7 +412,7 @@
             "pattern": "讓繁體中文玩家能直接讀懂"
           },
           {
-            "path": "README.md",
+            "path": "docs/archive/README-engineering-20261021.md",
             "pattern": "## 授權、致謝與聲明"
           },
           {
@@ -966,7 +966,7 @@
             "pattern": "狀態：完成"
           },
           {
-            "path": "WORKLOG.md",
+            "path": "docs/archive/WORKLOG-through-20261021.md",
             "pattern": "PASS 63、SKIP 0、FAIL 0；收據待重驗 0 列"
           },
           {
@@ -1474,15 +1474,21 @@
     {
       "id": "start-save-tutorial-woodcut",
       "issue": 61,
-      "state": "in_progress",
+      "state": "completed",
       "title": "開局、存讀檔、教學提示其餘與事件版畫",
       "depends_on": [
         "reachable-text-census"
       ],
       "acceptance": "本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。",
       "verify": {
-        "kind": "manual",
-        "note": "目前正式8e22e074…已完成教學6／7／15城市變數，規格035限定CONFORMED。新13正常GUI四側、全部21教學逐變數與來源隔離、30px量測及回退PASS；完整開局27行、教學21、版畫17、正常存讀及五種失敗與既有代表抽樣審查PASS。99列矩陣／普查已同步，教學6／7／15實際shown。入口tools/check_goal185_start_completion.py與tools/check_goal185_tutorial_cargo.py。功能驗收完成；遠端#61仍OPEN。自動核准審查拒絕遠端關閉，要求使用者明確授權關閉操作。"
+        "kind": "all_present",
+        "checks": [
+          {
+            "path": "docs/goals/185-player-experience.md",
+            "pattern": "2026-10-21完成#61"
+          }
+        ],
+        "note": "既有功能完成審查與代表抽樣保持；使用者本輪明確授權關閉，2026-10-21T04:52:29Z遠端回讀CLOSED。本輪未重跑GUI，靜態文件訊號只供接手定位。歷史授權受阻紀錄見封存WORKLOG；目前入口CONTEXT.md。"
       }
     },
     {

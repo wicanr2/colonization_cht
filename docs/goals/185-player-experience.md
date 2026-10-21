@@ -230,7 +230,7 @@ SAVEERROR修正的新正式收據由[check_goal185_save_failure.py](../../tools/
 
 接手後的 EMS 同頁映射修復見[規格047](../spec/047-ems-alias-coherence.md)，已限定 CONFORMED。下方首次 FAIL 與 Issue 審查保留當時證據，最新結果見本頁收尾附記。
 
-本輪入口為`workplace/reports/goal185-player-experience/`；摘要回填[CONTEXT](../../CONTEXT.md)及[WORKLOG](../../WORKLOG.md)。
+本輪入口為`workplace/reports/goal185-player-experience/`；摘要回填[CONTEXT](../../CONTEXT.md)及[WORKLOG](../archive/WORKLOG-through-20261021.md)。
 
 其餘新收據透過[欄位登錄檢查器](../../tools/check_goal185_registration.py)接入矩陣；它先重跑各項既有驗收，再只回報原驗收已核對的訊息鍵、原文與安全區，不採同文TERRAIN23或伴隨事件提高完成數。
 
@@ -368,3 +368,9 @@ python3 /repo/tools/check_goal185_ems_repair.py \
 彙整由[check_goal185_choice_retention.py](../../tools/check_goal185_choice_retention.py)重生。圖片初讀誤以為懸停時正文空白，逐像素與正文矩形指紋全部相同；以直接像素證據勘誤，沒有新增合成器修補。首場GUI因建置整合缺bytes匯入未產生二進位，第二場因不可見X11視窗焦點BadMatch；補匯入並等onlyvisible後沿固定映像乾淨重跑成功，均屬驗證環境／整合問題。
 
 來源與譯文／字模沒有新增，普查882／1945不增加，八項Issue仍未完成，沒有遠端寫入或發行。
+
+## 2026-10-21完成#61與工程文件封存
+
+#61的開局、存讀檔、教學與事件版畫既有功能審查完成。依使用者本輪明確關閉授權，遠端於2026-10-21T04:52:29Z關閉並回讀CLOSED。既有check_goal185_start_completion.py與check_goal185_tutorial_cargo.py的驗收範圍保持，本輪沒有重跑遊戲或GUI，不外推全遊戲中文或HD完成。後續問題由使用者另開Issue。
+
+既有工程歷程已移至[歷程封存](../archive/WORKLOG-through-20261021.md)，首頁舊內容見[首頁封存](../archive/README-engineering-20261021.md)。根目錄WORKLOG保留後續歷程入口。
