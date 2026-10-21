@@ -46,8 +46,9 @@ def main():
             assert sha(path) == expected
             probe = json.loads(subprocess.check_output(['ffprobe', '-v', 'error', '-show_streams', '-show_format', '-of', 'json', str(path)]))
             source = next(stream for stream in probe['streams'] if stream['codec_type'] == 'video')
-            assert (source['width'], source['height']) == (1280, 848)
-            sources[str(path)] = {'sha256': expected, 'seconds': float(probe['format']['duration'])}
+            assert source['width'] == 1280 and source['height'] in {800, 848}
+            sources[str(path)] = {'sha256': expected, 'seconds': float(probe['format']['duration']),
+                                  'width': source['width'], 'height': source['height']}
         assert clip['end'] <= sources[str(path)]['seconds']
     additional = [json.loads(Path(path).read_text()) for path in config.get('additional_capture_receipts', [])]
     for receipt in additional:
@@ -83,7 +84,9 @@ def main():
     prefix = ['ffmpeg', '-y', '-hide_banner', '-nostdin', '-loglevel', 'warning', '-threads', '2', '-filter_threads', '2', '-filter_complex_threads', '2']
     encoder = config.get('video_encoder', 'libx264')
     assert encoder in {'libx264', 'h264_nvenc'}
-    settings = ['-preset', 'p4', '-rc', 'vbr', '-b:v', '0', '-cq', '18'] if encoder == 'h264_nvenc' else ['-preset', 'veryfast', '-crf', '18']
+    preset = config.get('cpu_preset', 'veryfast')
+    assert preset in {'ultrafast', 'veryfast'}
+    settings = ['-preset', 'p4', '-rc', 'vbr', '-b:v', '0', '-cq', '18'] if encoder == 'h264_nvenc' else ['-preset', preset, '-crf', '18']
     encoding = ['-an', '-c:v', encoder] + settings + ['-threads', '2', '-pix_fmt', 'yuv420p']
     with tempfile.TemporaryDirectory(prefix='colonization-gameplay-promo-') as temp:
         temp = Path(temp)
@@ -116,8 +119,9 @@ def main():
                 still = temp / (name + '.png')
                 canvas.save(still)
                 speed = (clip['end'] - clip['start']) / clip['seconds']
-                filters = f'[0:v]setpts=(PTS-STARTPTS)/{speed:.12f},fps=30[game];[1:v][game]overlay=320:104:shortest=1,format=yuv420p[out]'
                 clip_video = Path(clip.get('video', str(video)))
+                top = 104 + (848 - sources[str(clip_video)]['height']) // 2
+                filters = f'[0:v]setpts=(PTS-STARTPTS)/{speed:.12f},fps=30[game];[1:v][game]overlay=320:{top}:shortest=1,format=yuv420p[out]'
                 run(prefix + ['-ss', str(clip['start']), '-t', str(clip['end'] - clip['start']), '-i', str(clip_video),
                               '-loop', '1', '-framerate', '30', '-i', str(still), '-filter_complex', filters, '-map', '[out]',
                               '-t', str(clip['seconds'])] + encoding + [str(target)])
@@ -169,7 +173,8 @@ def main():
     (output / 'capture.json').write_text(json.dumps({'version': config['version'], 'capture': capture,
         'additional_captures': additional, 'sources': sources, 'first_colony': proof, 'clips': clips}, ensure_ascii=False, indent=2) + '\n')
     (output / 'rights.json').write_text(json.dumps({'version': config['version'], 'private_only': True,
-        'video_method': '本版前端正常新局至第一城鎮的X11實錄，剪接及部分加速，保留完整遊戲區',
+        'video_method': capture['method'],
+        'editing': '剪接及部分加速，保留完整遊戲區；各段來源與擷取方式見capture.json',
         'audio_method': '既有原版OPL連續錄音取3至93秒，響度正規化及淡入淡出；後製配樂，非同步實錄音效',
         'music_source': config['music_source'], 'font_sha256': sha(font), 'raw_video_sha256': sha(video),
         'game': "Sid Meier's Colonization (MicroProse, 1994)，原版部分不屬於專案授權", 'publication': '本次僅本機交付，未上傳'}, ensure_ascii=False, indent=2) + '\n')

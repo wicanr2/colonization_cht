@@ -191,13 +191,13 @@ def attach_language_runtime(repo, output, reference, *, with_rebuild=True, forma
 \t\tmust(err)
 \t}
 \tvar hd *hdRuntime
+\tvar textScenes *hdSceneRuntime
 \tif languageLive {
 \t\tjournal.foreground = func(f nativeSurfaces) []byte {
-\t\t\tif hd == nil || hd.scenes == nil || f.mode != 0x13 {
+\t\t\tif textScenes == nil || f.mode != 0x13 {
 \t\t\t\treturn nil
 \t\t\t}
-\t\t\tmask, _ := hd.scenes.seaDialogForeground(f.canvas, f.indexed, f.palette, journal.cursor)
-\t\t\treturn mask
+\t\t\treturn textScenes.textForegroundWithInputBox(f, journal.cursor)
 \t\t}
 
 \t}
@@ -207,11 +207,17 @@ def attach_language_runtime(repo, output, reference, *, with_rebuild=True, forma
 \t\tvar err error
 \t\thd, err = loadHDRuntime(m, *root, *hdAssets)
 \t\tif err != nil { hdReason = err.Error(); fmt.Fprintln(os.Stderr, "HD停用：", hdReason) } else { hdReason = "" }
+\t\tif hd != nil {
+\t\t\ttextScenes = hd.scenes
+\t\t} else {
+\t\t\ttextScenes, err = loadTextSceneRuntime(m, *root)
+\t\t\tif err != nil { fmt.Fprintln(os.Stderr, "文字來源觀測停用：", err) }
+\t\t}
 \t}
 \tfrontendDisplayStartupOptions = func(options displayOptions) displayOptions { return hdStartupOptions(hd, options) }
 \tvar draftLive *draftLanguageBackend
 \tif languageLive {
-\t\tdraftLive = &draftLanguageBackend{hd: hd, hdReason: hdReason, targets: draftTargets, sample: func() draftNativeFrame {
+\t\tdraftLive = &draftLanguageBackend{hd: hd, sourceScenes: textScenes, hdReason: hdReason, targets: draftTargets, sample: func() draftNativeFrame {
 \t\t\treturn draftNativeFrame{journal, canvas(), m.Mem[0x3bb00:0x3bb00+64000], m.Mem[0xa0000:0xafa00], m.DAC[:], cursorBox(int(d.Mouse.X),int(d.Mouse.Y)), m.Steps, m.VideoMode()}
 \t\t}}
 \t\tfrontendDisplayPrepare = func(options displayOptions) (func(), error) {
@@ -242,6 +248,8 @@ def attach_language_runtime(repo, output, reference, *, with_rebuild=True, forma
 \t\t\tapplied, reason = len(lineRecords) > 0, "language-bundle"
 \t\t} else if *control || (*displayUIEnabled && displayLanguage == "en") {
 '''
+        if formal:
+            new = '\t\tif label == "" && *replayPath != "" && *replayCheckpointsOnly { return }\n' + new
         if s.count(old) != 1:
             raise ValueError("隔離視窗影像分支不唯一")
         s = s.replace(old, new, 1)
@@ -271,7 +279,7 @@ def attach_language_runtime(repo, output, reference, *, with_rebuild=True, forma
         hook = "m.SetBeforeInstruction(func() {"
         if s.count(hook) != 2:
             raise ValueError("HD原版觀測接點不同")
-        s = s.replace(hook, hook + "\n hd.beforeInstruction()")
+        s = s.replace(hook, hook + "\n hd.beforeInstruction()\n if hd == nil && textScenes != nil { textScenes.beforeSpriteInstruction() }")
         (output / "adapter.go").write_text(s)
     subprocess.run(["gofmt", "-w", str(output / "adapter.go"), str(output / "language_observations.go"),
                     str(output / "language_observations_test.go")], check=True, timeout=30)

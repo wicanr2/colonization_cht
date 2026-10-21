@@ -68,9 +68,9 @@
 | #59 | completed | [戰爭、獨立戰爭與結局訊息](https://github.com/wicanr2/colonization_cht/issues/59) | `reachable-text-census` | 依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。 |
 | #60 | completed | [一般事件訊息](https://github.com/wicanr2/colonization_cht/issues/60) | `reachable-text-census` | 依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。 |
 | #61 | completed | [開局、存讀檔、教學提示其餘與事件版畫](https://github.com/wicanr2/colonization_cht/issues/61) | `reachable-text-census` | 本 Issue 範圍的譯文與顯示接線完成，最後以代表性正常 GUI、中英同輸入及回退抽樣對拍；未抽樣情境與真正接線缺口分開記錄，不將譯稿完成算成畫面已顯示。 |
-| #62 | completed | [五語切換與英數字型統一](https://github.com/wicanr2/colonization_cht/issues/62) | `l10n-decision` | 依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。 |
+| #62 | completed | [五語切換與英數字型統一](https://github.com/wicanr2/colonization_cht/issues/62) | `l10n-decision` | R150修正使用者回報的推廣片英文欄位：原版中文化與HD中文化均使用已存在譯文與既定字型，正常新局至第一城鎮錄影確認後，另建新版影片及三平台雙類完整版。保留既定姓名／專名與原版行為，不重跑全矩陣。 |
 | #63 | completed | [圖像HD重繪與安全切換](https://github.com/wicanr2/colonization_cht/issues/63) | `static-text-survey` | 依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。 |
-| #64 | completed | [包含連續實際遊玩畫面的推廣影片](https://github.com/wicanr2/colonization_cht/issues/64) | `promo-video` | 依2026-10-21 R148使用者決定，現行接線與三平台雙類完整版、正常新局建立第一城鎮影片交付後結案；其餘人工待驗，不宣稱全情境中文／HD驗收。 |
+| #64 | in_progress | [新版影片已交付，僅餘Ada暫存清理](https://github.com/wicanr2/colonization_cht/issues/64) | `promo-video` | R150新版影片與六包已交付，剩餘人工待驗。Ada恢復連線後只刪除本輪r150私用暫存並回讀，持續授權已取得；遠端#64保持CLOSED。 |
 
 ## 驗證
 

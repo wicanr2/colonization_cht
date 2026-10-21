@@ -1880,7 +1880,7 @@ func (s *stringRuntime) finishWoodcut(r *stringRun, ink image.Rectangle, capH in
 		before: stringRect(before, safe), after: stringRect(canvas, safe), phase: "waiting-screen", complete: step}, ""
 }
 
-// woodcutVisible 僅識別三種正常路徑已驗、當前原版標題仍完整的事件頁。
+// woodcutVisible 僅識別四種正常路徑已驗、當前原版標題仍完整的事件頁。
 func (s *stringRuntime) woodcutVisible(indexed []byte, cursor image.Rectangle) bool {
 	if s == nil || s.cat == nil || len(indexed) != 64000 {
 		return false
@@ -1888,7 +1888,7 @@ func (s *stringRuntime) woodcutVisible(indexed []byte, cursor image.Rectangle) b
 	for _, it := range s.items {
 		title := s.cat.woodcut[it.text]
 		switch title.id {
-		case "WOODCUT.TXT:0x00000017", "WOODCUT.TXT:0x00000046", "WOODCUT.TXT:0x0000009E":
+		case "WOODCUT.TXT:0x00000017", "WOODCUT.TXT:0x00000033", "WOODCUT.TXT:0x00000046", "WOODCUT.TXT:0x0000009E":
 		default:
 			continue
 		}

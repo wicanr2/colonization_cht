@@ -156,14 +156,22 @@ func notoOriginalProtected(mask []byte, pos int) bool {
 	return len(mask) == 8000 && pos >= 0 && pos < 64000 && mask[pos>>3]&(1<<uint(pos&7)) != 0
 }
 
-func notoOriginalSource(field notoOriginalField, canvas, indexed, mask []byte, cursor image.Rectangle) bool {
+func notoOriginalSource(field notoOriginalField, canvas, indexed, mask []byte, cursor image.Rectangle, diagnostic ...*string) bool {
+	fail := func(reason string) bool {
+		for _, target := range diagnostic {
+			if target != nil {
+				*target = reason
+			}
+		}
+		return false
+	}
 	o, safe := field.source, field.ink
 	source := o.canvas
 	if o.kind == "string-map" {
 		source = o.buffer
 	}
 	if safe.Empty() || !safe.In(image.Rect(0, 0, 320, 200)) || len(source) != 64000 || len(o.after) == 0 {
-		return false
+		return fail("layout")
 	}
 	before, own := notoOriginalBefore(o), 0
 	inkColors := map[byte]bool{}
@@ -174,32 +182,44 @@ func notoOriginalSource(field notoOriginalField, canvas, indexed, mask []byte, c
 	}
 	for pos, value := range o.after {
 		if pos < 0 || pos >= 64000 || source[pos] != value {
-			return false
+			return fail("source-snapshot")
 		}
 		if _, ok := before[pos]; !ok {
-			return false
+			return fail("before-missing")
 		}
 		if canvas[pos] != value && !notoOriginalProtected(mask, pos) {
-			return false
+			if !image.Pt(pos%320, pos/320).In(safe) {
+				return fail("canvas-outside-field")
+			}
+			return fail("canvas-inside-field")
 		}
 		if image.Pt(pos%320, pos/320).In(safe) {
 			if inkColors[before[pos]] {
-				return false // 原字色底圖可能含舊字；不猜背景。
+				return fail("before-has-ink") // 原字色底圖可能含舊字；不猜背景。
 			}
 			own++
 		}
 	}
 	if own == 0 {
-		return false
+		return fail("no-owned-pixels")
 	}
+	var backgroundChanges, indexedChanges image.Rectangle
 	for y := safe.Min.Y; y < safe.Max.Y; y++ {
 		for x := safe.Min.X; x < safe.Max.X; x++ {
 			pos := y*320 + x
-			if canvas[pos] != source[pos] && !notoOriginalProtected(mask, pos) ||
-				indexed[pos] != canvas[pos] && !image.Pt(x, y).In(cursor) {
-				return false
+			if canvas[pos] != source[pos] && !notoOriginalProtected(mask, pos) {
+				backgroundChanges = backgroundChanges.Union(image.Rect(x, y, x+1, y+1))
+			}
+			if indexed[pos] != canvas[pos] && !image.Pt(x, y).In(cursor) {
+				indexedChanges = indexedChanges.Union(image.Rect(x, y, x+1, y+1))
 			}
 		}
+	}
+	if !backgroundChanges.Empty() {
+		return fail("background:" + backgroundChanges.String())
+	}
+	if !indexedChanges.Empty() {
+		return fail("indexed-canvas:" + indexedChanges.String())
 	}
 	return true
 }
@@ -227,6 +247,7 @@ func draftPaintOriginalNoto(out *image.RGBA, t *draftLanguageTarget, j *nativeJo
 		return x.Dx()*x.Dy() > y.Dx()*y.Dy()
 	})
 	portrait, portraitID := t.portraits.seaDialogForeground(canvas, indexed, palette, cursor)
+	input := draftVerifiedInputDialog(t, j, canvas, indexed, palette, cursor)
 	for _, field := range candidates {
 		blocked := false
 		for _, safe := range safes {
@@ -235,8 +256,27 @@ func draftPaintOriginalNoto(out *image.RGBA, t *draftLanguageTarget, j *nativeJo
 		if blocked {
 			continue
 		}
-		if !notoOriginalSource(field, canvas, indexed, portrait, cursor) {
+		fieldMask := portrait
+		if input.id != "" && field.ink.In(seaPanelRect) {
+			fieldMask = make([]byte, 8000)
+			for i := range fieldMask {
+				fieldMask[i] = portrait[i] | input.mask[i]
+			}
+		}
+		var sourceReason string
+		if !notoOriginalSource(field, canvas, indexed, fieldMask, cursor, &sourceReason) {
 			misses["source-changed\t"+field.text]++
+			if *draftNativeCapture && field.ink.In(seaPanelRect) {
+				misses["source-detail|"+field.source.kind+"|"+sourceReason+"|"+input.id+"\t"+field.text]++
+			}
+			continue
+		}
+		if record := draftPaintTranslatedNativeField(out, t, field, canvas, palette, fieldMask, portraitID, hdBackgroundOverride...); record != nil {
+			if input.id != "" && field.ink.In(seaPanelRect) {
+				record["dialog_occlusion_id"] = input.id
+			}
+			records = append(records, record)
+			safes = append(safes, field.ink)
 			continue
 		}
 		fit := field.ink
@@ -253,7 +293,7 @@ func draftPaintOriginalNoto(out *image.RGBA, t *draftLanguageTarget, j *nativeJo
 		original := image.NewRGBA(image.Rect(0, 0, safe.Dx()*4, safe.Dy()*4))
 		draw.Draw(original, original.Bounds(), out, safe.Min.Mul(4), draw.Src)
 		for pos, value := range field.source.after {
-			if image.Pt(pos%320, pos/320).In(safe) && !notoOriginalProtected(portrait, pos) && before[pos] != value {
+			if image.Pt(pos%320, pos/320).In(safe) && !notoOriginalProtected(fieldMask, pos) && before[pos] != value {
 				draftPaintPixel(out, pos, before[pos], palette, hdBackgroundOverride...)
 			}
 		}
@@ -288,14 +328,14 @@ func draftPaintOriginalNoto(out *image.RGBA, t *draftLanguageTarget, j *nativeJo
 		}
 		for yy := safe.Min.Y; yy < safe.Max.Y; yy++ {
 			for xx := safe.Min.X; xx < safe.Max.X; xx++ {
-				if notoOriginalProtected(portrait, yy*320+xx) {
+				if notoOriginalProtected(fieldMask, yy*320+xx) {
 					draw.Draw(out, image.Rect(xx*4, yy*4, xx*4+4, yy*4+4), original, image.Pt((xx-safe.Min.X)*4, (yy-safe.Min.Y)*4), draw.Src)
 				}
 			}
 		}
 		record := map[string]any{"kind": "original-noto", "id": "FONT:original", "source": field.text, "text": field.text,
 			"safe": safe, "native_ink": safe, "font_px": plan.size, "font_only": true, "translated": false,
-			"source_kind": field.source.kind, "baseline_shift_px": -plan.bounds.Min.Y}
+			"source_kind": field.source.kind, "cap_height_native": notoNativeCapHeight(field), "baseline_shift_px": -plan.bounds.Min.Y}
 		if len(portrait) != 0 {
 			record["foreground_source"] = portraitID
 		}
@@ -570,4 +610,431 @@ var notoDeclarationInk = map[string]image.Rectangle{
 	"DEC-UPPX.SS": image.Rect(0, 3, 14, 18),
 	"DEC-UPPY.SS": image.Rect(0, 3, 14, 19),
 	"DEC-UPPZ.SS": image.Rect(0, 4, 13, 19),
+}
+
+// 規格060 R150：來源仍由已驗原版片段綁定，顯示文字只取現用語言字典。
+func draftBindNativeLabels(t *draftLanguageTarget, files map[string][]byte) {
+	t.nativeLabels = map[string][2]string{}
+	for _, def := range []struct {
+		id, file       string
+		offset, length int
+		sha            string
+	}{
+		{"LABELS.TXT:@MISC:0x00000159", "LABELS.TXT", 0x159, 16, "9257b2c3a4655ae2c496325d84d4e67b7b7071d461658e118ffdbcf2a301c947"},
+		{"NAMES.TXT:0x00002855", "NAMES.TXT", 0x2855, 9, "e30049639cf74d69c8ed68679305053b30a83ac02f5860a226f5259b1f1066b1"},
+		{"LABELS.TXT:0x00000411", "LABELS.TXT", 0x411, 7, "abcf0f136c1ed0ddcaf5ef1a97717e36b81f63b7f639d50c2c154f087060e191"},
+		{"LABELS.TXT:0x000008A9", "LABELS.TXT", 0x8a9, 7, "040ff883e530a54bbfae42af1c34fb5bbf66d3d38c781d1e1adf1779ab3a0dbe"},
+		{"LABELS.TXT:0x0000086E", "LABELS.TXT", 0x86e, 24, "b8aebf24f5bcc5139bea5a79fac8687020c10b10fc805f29916748e008cfd35e"},
+		{"GAME.TXT:0x00015522", "GAME.TXT", 0x15522, 27, "c46adc07e89dc853f75888b5799426773196b67a07978b4b256ea97ebdbac65b"},
+		{"NAMES.TXT:0x0000286A", "NAMES.TXT", 0x286a, 6, "5ece526b2e72c2e5004c95dcada14bb8fc8ecbc099e22d17c5afcdb853be46a2"},
+	} {
+		raw := files[def.file]
+		if def.offset < 0 || def.offset+def.length > len(raw) {
+			continue
+		}
+		raw = raw[def.offset : def.offset+def.length]
+		if hash(raw) != def.sha {
+			continue
+		}
+		source := string(raw)
+		text := t.str.lookup(source)
+		if def.id == "GAME.TXT:0x00015522" {
+			for _, row := range splitTSV(t.pack.files["text/draft.zh-Hant.tsv"]) {
+				if row["candidate_id"] == def.id {
+					source = strings.TrimPrefix(source, "^^")
+					text = strings.TrimPrefix(row["zh_hant"], "^^")
+					break
+				}
+			}
+		}
+		if text != "" && text != source {
+			t.nativeLabels[def.id] = [2]string{source, text}
+		}
+	}
+}
+
+func notoNativeCapHeight(field notoOriginalField) int {
+	if field.source == nil {
+		return 0
+	}
+	capH := 0
+	if r := field.source.dialogRun; r != nil {
+		for _, ch := range r.chars {
+			if (ch.c >= 'A' && ch.c <= 'Z' || ch.c >= '0' && ch.c <= '9') && ch.box.In(field.ink) {
+				capH = max(capH, ch.box.Dy())
+			}
+		}
+	} else if r := field.source.stringRun; r != nil {
+		for i, c := range r.text {
+			if (c >= 'A' && c <= 'Z' || c >= '0' && c <= '9') && i < len(r.boxes) && r.boxes[i].In(field.ink) {
+				capH = max(capH, r.boxes[i].Dy())
+			}
+		}
+	} else if len(field.source.seaRuns) == 1 {
+		capH = field.ink.Dy()
+	}
+	return capH
+}
+
+// 基線對齊原墨跡底緣；候選字級由此欄的大寫高度、寬度及陰影共同限制。
+func notoTranslatedMasks(fonts map[int]*dialogFont, text string, safe, ink image.Rectangle, capH int, shadow bool, extraFonts ...map[int]*dialogFont) (*image.Alpha, *image.Alpha, int) {
+	if text == "" || safe.Empty() || !ink.In(safe) || capH <= 0 || capH > 13 {
+		return nil, nil, 0
+	}
+	rect := image.Rect(0, 0, safe.Dx()*4, safe.Dy()*4)
+	for size := capH * 4; size >= (capH*8+2)/3; size-- {
+		faces := []*dialogFont{fonts[size]}
+		for _, extra := range extraFonts {
+			faces = append(faces, extra[size])
+		}
+		for _, face := range faces {
+			if face == nil {
+				continue
+			}
+			bounds, ok := retainedTextBounds(face, text)
+			if !ok {
+				continue
+			}
+			bottom := (ink.Max.Y - safe.Min.Y) * 4
+			if shadow {
+				bottom -= 4
+			}
+			origin := image.Pt((ink.Min.X-safe.Min.X)*4-bounds.Min.X, bottom-bounds.Max.Y)
+			placed := bounds.Add(origin)
+			if !placed.In(rect) || shadow && !placed.Add(image.Pt(4, 4)).In(rect) {
+				continue
+			}
+			normal := image.NewAlpha(rect)
+			x := origin.X
+			for _, c := range text {
+				dialogBlit(normal, face.glyphs[c], x, origin.Y)
+				x += face.widths[c]
+			}
+			shade := image.NewAlpha(rect)
+			if shadow {
+				dialogBlit(shade, normal, 4, 4)
+			}
+			return normal, shade, size
+		}
+	}
+	return nil, nil, 0
+}
+
+// 圖集沒有這一行的字時，仍用已驗同地區Noto字型與此欄原字高量測。
+func (t *draftLanguageTarget) notoTranslatedFontMasks(text string, ink image.Rectangle, capH int, shadow bool) (*image.Alpha, *image.Alpha, int) {
+	if t.originalFonts == nil || text == "" || ink.Empty() || capH <= 0 || capH > 13 {
+		return nil, nil, 0
+	}
+	rect := image.Rect(0, 0, ink.Dx()*4, ink.Dy()*4)
+	for size := capH*4; size >= (capH*8+2)/3; size-- {
+		face := t.originalFonts.face(t.pack.manifest.Locale, size)
+		bounds, _ := font.BoundString(face, text)
+		b := image.Rect(bounds.Min.X.Floor(), bounds.Min.Y.Floor(), bounds.Max.X.Ceil(), bounds.Max.Y.Ceil())
+		if b.Empty() {
+			continue
+		}
+		bottom := rect.Max.Y
+		if shadow {
+			bottom -= 4
+		}
+		origin := image.Pt(-b.Min.X, bottom-b.Max.Y)
+		placed := b.Add(origin)
+		if !placed.In(rect) || shadow && !placed.Add(image.Pt(4, 4)).In(rect) {
+			continue
+		}
+		normal, shade := image.NewAlpha(rect), image.NewAlpha(rect)
+		drawer := font.Drawer{Dst: normal, Src: image.NewUniform(color.Alpha{255}), Face: face, Dot: fixed.P(origin.X, origin.Y)}
+		drawer.DrawString(text)
+		if shadow {
+			dialogBlit(shade, normal, 4, 4)
+		}
+		return normal, shade, size
+	}
+	return nil, nil, 0
+}
+
+// 僅補接已量測且綁定原始片段的具名欄位。
+func draftPaintTranslatedNativeField(out *image.RGBA, t *draftLanguageTarget, field notoOriginalField, canvas, palette, portrait []byte, portraitID int, hdBackgroundOverride ...draftHDBackground) map[string]any {
+	if t == nil || t.str == nil || field.source == nil {
+		return nil
+	}
+	capH := notoNativeCapHeight(field)
+	text, id := "", ""
+	if field.ink.In(seaBarRect) && field.ink.Min.Y == 1 {
+		if value, key, why := t.str.translate(field.text); why == "" && key == "template:colony-title" {
+			text, id = value, "STRING:colony-title"
+		}
+	} else if field.ink == image.Rect(62, 118, 207, 127) {
+		if value, key, why := t.str.translate(field.text); why == "" && key == "GAME.TXT:0x00000F21" {
+			text, id = value, key
+		}
+	} else if field.ink.In(seaPanelRect) {
+		for _, key := range []string{"NAMES.TXT:0x00002855", "LABELS.TXT:0x00000411", "NAMES.TXT:0x0000286A"} {
+			value := t.nativeLabels[key]
+			if value[0] != "" && strings.TrimSpace(field.text) == value[0] {
+				text, id = value[1], key
+				break
+			}
+		}
+	}
+	if text == "" {
+		for _, def := range []struct {
+			key string
+			ink image.Rectangle
+			wrapped bool
+		}{
+			{"LABELS.TXT:0x000008A9", image.Rect(150, 53, 174, 59), false},
+			{"LABELS.TXT:0x0000086E", image.Rect(12, 182, 101, 187), true},
+			{"GAME.TXT:0x00015522", image.Rect(101, 30, 219, 39), false},
+		} {
+			value := t.nativeLabels[def.key]
+			if value[0] == "" || field.ink != def.ink {
+				continue
+			}
+			if field.text == value[0] {
+				text, id = value[1], def.key
+			} else if def.wrapped && len(field.text) >= 2 && field.text[1:len(field.text)-1] == value[0] && field.text[0] == '(' && field.text[len(field.text)-1] == ')' {
+				text, id = field.text[:1]+value[1]+field.text[len(field.text)-1:], def.key
+			}
+		}
+	}
+	if text == "" || text == field.text {
+		return nil
+	}
+	var dialogueFonts map[int]*dialogFont
+	if t.dlg != nil {
+		dialogueFonts = t.dlg.fonts
+	}
+	normal, shade, size := notoTranslatedMasks(t.str.fonts, text, field.ink, field.ink, capH, field.shadow != 0, dialogueFonts)
+	if normal == nil {
+		normal, shade, size = t.notoTranslatedFontMasks(text, field.ink, capH, field.shadow != 0)
+	}
+	if normal == nil {
+		return nil
+	}
+	if id == "GAME.TXT:0x00015522" {
+		bounds := draftAlphaInk(normal).Union(draftAlphaInk(shade))
+		dx := (normal.Bounds().Dx()-bounds.Dx())/2-bounds.Min.X
+		for _, layer := range []*image.Alpha{normal, shade} {
+			copy := image.NewAlpha(layer.Bounds())
+			draw.Draw(copy, copy.Bounds(), layer, image.Pt(-dx, 0), draw.Src)
+			copy.Pix, layer.Pix = layer.Pix, copy.Pix
+		}
+	}
+	var foreground byte
+	found := false
+	for i, c := range field.text {
+		if c == ' ' {
+			continue
+		}
+		if i >= len(field.colors) {
+			return nil
+		}
+		if found && field.colors[i] != foreground {
+			return nil
+		}
+		foreground, found = field.colors[i], true
+	}
+	if !found {
+		return nil
+	}
+	before := notoOriginalBefore(field.source)
+	safe := field.ink
+	original := image.NewRGBA(image.Rect(0, 0, safe.Dx()*4, safe.Dy()*4))
+	draw.Draw(original, original.Bounds(), out, safe.Min.Mul(4), draw.Src)
+	for pos, value := range field.source.after {
+		if image.Pt(pos%320, pos/320).In(safe) && !notoOriginalProtected(portrait, pos) && before[pos] != value {
+			draftPaintPixel(out, pos, before[pos], palette, hdBackgroundOverride...)
+		}
+	}
+	draftPaintLayers(out, safe, []*image.Alpha{shade, normal}, []byte{field.shadow, foreground}, palette)
+	for y := safe.Min.Y; y < safe.Max.Y; y++ {
+		for x := safe.Min.X; x < safe.Max.X; x++ {
+			if notoOriginalProtected(portrait, y*320+x) {
+				draw.Draw(out, image.Rect(x*4, y*4, x*4+4, y*4+4), original, image.Pt((x-safe.Min.X)*4, (y-safe.Min.Y)*4), draw.Src)
+			}
+		}
+	}
+	baseline := field.ink.Max.Y
+	if field.shadow != 0 {
+		baseline--
+	}
+	record := map[string]any{"kind": "native-field-translation", "id": id, "source": field.text, "text": text, "safe": safe, "native_ink": field.ink, "font_px": size, "text_ink_px": draftAlphaInk(normal), "cap_height_native": capH, "baseline_native": baseline, "source_kind": field.source.kind, "translated": true}
+	if len(portrait) != 0 {
+		record["foreground_source"] = portraitID
+	}
+	return record
+}
+
+func nativeRGBFingerprint(indexed, palette []byte, rect image.Rectangle) string {
+	if len(indexed) != 64000 || len(palette) != 768 || rect.Empty() || !rect.In(image.Rect(0, 0, 320, 200)) {
+		return ""
+	}
+	rgb := make([]byte, 0, rect.Dx()*rect.Dy()*3)
+	for y := rect.Min.Y; y < rect.Max.Y; y++ {
+		for x := rect.Min.X; x < rect.Max.X; x++ {
+			c := draftColor(indexed[y*320+x], palette)
+			rgb = append(rgb, c.R, c.G, c.B)
+		}
+	}
+	return hash(rgb)
+}
+
+// 指紋來自R148正常建城截圖；字樣與城鎮退出箭頭必須同時命中。
+func draftPaintColonyNoShips(out *image.RGBA, t *draftLanguageTarget, canvas, indexed, palette []byte, cursor image.Rectangle, claimed []map[string]any, hdBackgroundOverride ...draftHDBackground) (map[string]any, string) {
+	if t == nil || t.str == nil {
+		return nil, ""
+	}
+	safe, ink, context := image.Rect(135, 131, 191, 139), image.Rect(136, 132, 190, 138), image.Rect(309, 188, 318, 198)
+	for _, record := range claimed {
+		if rect, ok := record["safe"].(image.Rectangle); ok && rect.Overlaps(safe) {
+			return nil, ""
+		}
+	}
+	if nativeRGBFingerprint(canvas, palette, safe) != "d2e7f0d1d4fe4e09b293396371963987a5f125e97d2da0edbd8443f5f43ca3f7" ||
+		nativeRGBFingerprint(canvas, palette, context) != "0ad2894e26380fd5ad86d5940a518c94e8ee3c440f4454d2a01bde4289d8d3be" ||
+		!draftSameExceptCursor(indexed, canvas, safe, cursor) || !draftSameExceptCursor(indexed, canvas, context, cursor) {
+		return nil, ""
+	}
+	label := t.nativeLabels["LABELS.TXT:@MISC:0x00000159"]
+	if label[0] == "" || label[1] == "" {
+		return nil, "colony-no-ships-translation-unavailable"
+	}
+	bg := canvas[safe.Min.Y*320+safe.Min.X]
+	foreground := canvas[ink.Min.Y*320+ink.Min.X]
+	if foreground == bg {
+		return nil, "colony-no-ships-palette"
+	}
+	count := 0
+	var originalInk image.Rectangle
+	for y := safe.Min.Y; y < safe.Max.Y; y++ {
+		for x := safe.Min.X; x < safe.Max.X; x++ {
+			value := canvas[y*320+x]
+			if value == bg {
+				continue
+			}
+			if value != foreground {
+				return nil, "colony-no-ships-palette"
+			}
+			count++
+			originalInk = originalInk.Union(image.Rect(x, y, x+1, y+1))
+		}
+	}
+	if count != 96 || originalInk != ink {
+		return nil, "colony-no-ships-ink"
+	}
+	var dialogueFonts map[int]*dialogFont
+	if t.dlg != nil {
+		dialogueFonts = t.dlg.fonts
+	}
+	normal, _, size := notoTranslatedMasks(t.str.fonts, label[1], safe, ink, 6, false, dialogueFonts)
+	if normal == nil {
+		return nil, "colony-no-ships-does-not-fit"
+	}
+	for y := safe.Min.Y; y < safe.Max.Y; y++ {
+		for x := safe.Min.X; x < safe.Max.X; x++ {
+			if canvas[y*320+x] != bg {
+				draftPaintPixel(out, y*320+x, bg, palette, hdBackgroundOverride...)
+			}
+		}
+	}
+	draftPaintLayers(out, safe, []*image.Alpha{normal}, []byte{foreground}, palette)
+	return map[string]any{"kind": "static-recognition", "id": "LABELS.TXT:@MISC:0x00000159", "source": label[0], "text": label[1], "safe": safe, "native_ink": ink, "font_px": size, "cap_height_native": 6, "source_ink_pixels": count, "foreground_index": foreground, "background_index": bg, "text_ink_px": draftAlphaInk(normal), "baseline_native": ink.Max.Y, "source_rgb_sha256": "d2e7f0d1d4fe4e09b293396371963987a5f125e97d2da0edbd8443f5f43ca3f7", "context_rgb_sha256": "0ad2894e26380fd5ad86d5940a518c94e8ee3c440f4454d2a01bde4289d8d3be", "translated": true}, ""
+}
+
+type draftInputDialogProtection struct {
+	id       string
+	portrait int
+	mask     []byte
+}
+type draftInputDialogDefinition struct {
+	id               string
+	portrait         int
+	box, fingerprint image.Rectangle
+	sha              string
+}
+
+var draftInputDialogDefinitions = []draftInputDialogDefinition{
+	{"GAME.TXT:@LANDHO:0x00000ECE", 1060, image.Rect(59, 112, 266, 160), image.Rect(264, 114, 266, 158), "f71a593dd0554f257a15bf148b75e12877756ce00bd8da8371fd86f61bf64171"},
+	{"GAME.TXT:0x00000F21", 1065, image.Rect(58, 113, 264, 151), image.Rect(261, 115, 264, 149), "8bdf95857f65c0b42b8fe28d9c403716df940a1ec692c056de0e595fd889e2c4"},
+}
+
+func draftInputDialogMask(def draftInputDialogDefinition) []byte {
+	mask := make([]byte, 8000)
+	for y := def.box.Min.Y; y < def.box.Max.Y; y++ {
+		for x := def.box.Min.X; x < def.box.Max.X; x++ {
+			pos := y*320 + x
+			mask[pos>>3] |= 1 << uint(pos&7)
+		}
+	}
+	return mask
+}
+func draftInputDialogBorder(def draftInputDialogDefinition, portrait int, canvas, indexed, palette []byte, cursor image.Rectangle) bool {
+	return portrait == def.portrait && nativeRGBFingerprint(canvas, palette, def.fingerprint) == def.sha &&
+		draftSameExceptCursor(indexed, canvas, def.fingerprint, cursor)
+}
+
+// 保留來源不代表准許繪製；繪製端另要求完整原文正文仍可辨認。
+func (p *hdSceneRuntime) textForegroundWithInputBox(f nativeSurfaces, cursor image.Rectangle) []byte {
+	mask, portrait := p.seaDialogForeground(f.canvas, f.indexed, f.palette, cursor)
+	if len(mask) != 8000 {
+		return mask
+	}
+	for _, def := range draftInputDialogDefinitions {
+		if !draftInputDialogBorder(def, portrait, f.canvas, f.indexed, f.palette, cursor) {
+			continue
+		}
+		box := draftInputDialogMask(def)
+		for i, value := range box {
+			mask[i] |= value
+		}
+		break
+	}
+	return mask
+}
+func draftVerifiedInputDialog(t *draftLanguageTarget, j *nativeJournal, canvas, indexed, palette []byte, cursor image.Rectangle) draftInputDialogProtection {
+	if t == nil || t.dlg == nil || j == nil {
+		return draftInputDialogProtection{}
+	}
+	portraitMask, portrait := t.portraits.seaDialogForeground(canvas, indexed, palette, cursor)
+	if len(portraitMask) != 8000 {
+		return draftInputDialogProtection{}
+	}
+	for _, def := range draftInputDialogDefinitions {
+		if !draftInputDialogBorder(def, portrait, canvas, indexed, palette, cursor) {
+			continue
+		}
+		for _, o := range j.items {
+			if o.dialogRun == nil || o.dialogRun.readPos%2 != 0 {
+				continue
+			}
+			shown := dialogShownText(o.dialogRun.chars)
+			key, _, why := t.dlg.match(shown)
+			if why != "" && t.str != nil {
+				_, key, why = t.str.translate(shown)
+			}
+			fields := notoOriginalFields(o)
+			// 命名正文可與輸入標籤併在同一原生觀測；以完整單行認身。
+			if (why != "" || key != def.id) && def.id == "GAME.TXT:0x00000F21" && t.str != nil {
+				for _, field := range fields {
+					_, fieldKey, fieldWhy := t.str.translate(field.text)
+					if field.ink == image.Rect(62, 118, 207, 127) && fieldWhy == "" && fieldKey == def.id &&
+						notoOriginalSource(field, canvas, indexed, portraitMask, cursor) {
+						return draftInputDialogProtection{def.id, portrait, draftInputDialogMask(def)}
+					}
+				}
+			}
+			if why != "" || key != def.id {
+				continue
+			}
+			alive := len(fields) > 0
+			for _, field := range fields {
+				alive = alive && notoOriginalSource(field, canvas, indexed, portraitMask, cursor)
+			}
+			if alive {
+				return draftInputDialogProtection{def.id, portrait, draftInputDialogMask(def)}
+			}
+		}
+	}
+	return draftInputDialogProtection{}
 }

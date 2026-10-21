@@ -48,6 +48,7 @@ type draftLanguageTarget struct {
 	str              *stringCatalog
 	sea              *seaState
 	fixed            map[string]*draftFixedMask
+	nativeLabels     map[string][2]string
 }
 
 type draftNativeFrame struct {
@@ -70,12 +71,23 @@ type draftLanguageDisplay struct {
 // 準備與生效資料分開；由既有設定保存成功後才呼叫提交。
 type draftLanguageBackend struct {
 	hd                *hdRuntime
+	sourceScenes      *hdSceneRuntime
 	hdReason          string
 	targets           map[string]*draftLanguageTarget
 	sample            func() draftNativeFrame
 	active            *draftLanguageDisplay
 	renders, rebuilds uint64
 	maxBuildTime      time.Duration
+}
+
+func (b *draftLanguageBackend) sourceKey() string {
+	if b.hd != nil {
+		return b.hd.key()
+	}
+	if b.sourceScenes != nil {
+		return fmt.Sprintf("/text-scene/%d", b.sourceScenes.revision)
+	}
+	return ""
 }
 
 func (f draftNativeFrame) key() string {
@@ -110,7 +122,7 @@ func (b *draftLanguageBackend) prepare(options displayOptions) (func(), error) {
 	if err != nil {
 		return nil, err
 	}
-	next := &draftLanguageDisplay{options: options, target: target, frame: frame, receipt: receipt, nativeKey: f.key() + b.hd.key(), buildTime: time.Since(started)}
+	next := &draftLanguageDisplay{options: options, target: target, frame: frame, receipt: receipt, nativeKey: f.key() + b.sourceKey(), buildTime: time.Since(started)}
 	return func() { b.active = next }, nil
 }
 
@@ -122,7 +134,7 @@ func (b *draftLanguageBackend) renderCurrent() (*image.RGBA, map[string]any, err
 	if f.journal == nil || len(f.canvas) != 64000 || len(f.buffer) != 64000 || len(f.indexed) != 64000 || len(f.palette) != 768 {
 		return nil, nil, fmt.Errorf("invalid native live frame")
 	}
-	key := f.key() + b.hd.key()
+	key := f.key() + b.sourceKey()
 	reused := key == b.active.nativeKey
 	if !reused {
 		started := time.Now()
@@ -138,6 +150,7 @@ func (b *draftLanguageBackend) renderCurrent() (*image.RGBA, map[string]any, err
 	b.maxBuildTime = max(b.maxBuildTime, b.active.buildTime)
 	record := maps.Clone(b.active.receipt)
 	record["hd_available"], record["hd_asset_reason"] = b.hd != nil, b.hdReason
+	record["text_scene_sources_available"] = b.sourceScenes != nil || b.hd != nil && b.hd.scenes != nil
 	record["step"], record["live_reused"] = f.step, reused
 	record["live_renders"], record["live_rebuilds"] = b.renders, b.rebuilds
 	record["build_nanoseconds"], record["max_build_nanoseconds"] = int64(b.active.buildTime), int64(b.maxBuildTime)
@@ -232,6 +245,7 @@ func draftPrepareTargets(root string, files map[string][]byte, owned, helpOwned 
 			return draftNotoWoodcutMasks(sc.fonts, id, text, ink, safe, capH)
 		}
 		t.dlg, t.str = cat, sc
+		draftBindNativeLabels(t, files)
 		targets[locale] = t
 	}
 	return targets, nil
@@ -521,6 +535,7 @@ type draftSeaRow struct {
 	foregroundChanges int
 	foregroundSource  int
 	textOffsetY       int
+	inputDialog       string
 }
 
 // 六欄分別以原版下一欄起點量寬；快捷鍵與譯文用同地區字型。
@@ -685,6 +700,9 @@ func draftPaintSea(out *image.RGBA, st *seaState, candidate *draftSeaRow, canvas
 		}
 		record["foreground_source"], record["foreground_pixels"], record["source_background_changes"] = sourceID, protected, candidate.foregroundChanges
 		record["baseline_shift_px"] = candidate.textOffsetY
+	}
+	if candidate.inputDialog != "" {
+		record["dialog_occlusion_id"] = candidate.inputDialog
 	}
 	return record, ""
 }
@@ -1057,6 +1075,7 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 	}
 	d := &dialogRuntime{cat: t.dlg, misses: map[string]int{}}
 	dialogSources := map[*dialogShown]*nativeObservation{}
+	var diagnosticDialogs []*dialogShown
 	retainedSources := map[*stringItem]*nativeObservation{}
 	mapSources := map[*stringItem]*nativeObservation{}
 	var inputASCII *dialogShown
@@ -1121,6 +1140,9 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 			scoped = draftAttackDialogContext(t, scoped, attackBody, dialogSources[attackBody], o, canvas, indexed, palette, cursor, attackPaired)
 			st, shown, why := scoped.finish(cloneNativeDialog(r), context, o.step)
 			if st != nil {
+				if *draftNativeCapture {
+					diagnosticDialogs = append(diagnosticDialogs, st)
+				}
 				if st.id == "GAME.TXT:@LANDFALL:0x00000FAD" {
 					landfallBody, landfallPaired = st, false
 				} else if landfallBody != nil && draftLandfallChoice(t, st) &&
@@ -1184,9 +1206,10 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 		}
 	}
 	var seaClaims []image.Rectangle
+	inputProtection := draftVerifiedInputDialog(t, j, canvas, indexed, palette, cursor)
 	for _, row := range seaRows {
 		row = draftPreserveSoldierMenu(t, row, canvas, indexed, palette, cursor)
-		row = draftPreserveDialogSea(t, row, canvas, indexed, palette, cursor)
+		row = draftPreserveDialogSea(t, row, canvas, indexed, palette, cursor, inputProtection)
 		record, why := draftPaintSea(out, t.sea, row, canvas, indexed, palette, cursor, hdBackgroundOverride...)
 		if record != nil {
 			records = append(records, record)
@@ -1212,6 +1235,14 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 		dialogStates = append(dialogStates, attackBody)
 	}
 	for _, st := range dialogStates {
+		var namingLayout map[string]any
+		if st != nil && st.id == "GAME.TXT:@LANDHO:0x00000ECE" {
+			st, namingLayout = draftFitLandHoDialog(t, st, dialogSources[st], canvas, indexed, palette, cursor)
+			if st == nil {
+				d.misses["land-ho-source-or-layout"]++
+				continue
+			}
+		}
 		immigrationChanged := -1
 		if st != nil && st.id == "GAME.TXT:@TUTORIAL5" {
 			original := st
@@ -1276,6 +1307,9 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 		draftPaintLayers(out, st.safe, []*image.Alpha{st.shadow, st.normal, st.accent, st.dim}, []byte{st.shadowC, st.normalC, st.accentC, st.dimC}, palette)
 		dialogSafes = append(dialogSafes, st.safe)
 		record := map[string]any{"kind": "dialog", "id": st.id, "text": st.zh, "safe": st.safe, "font_px": st.size}
+		for key, value := range namingLayout {
+			record[key] = value
+		}
 		if immigrationChanged >= 0 {
 			layout := st.safe
 			layout.Min.Y = 125
@@ -1376,7 +1410,14 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 		}
 		records = append(records, record)
 	}
+	portLabel, portLabelMiss := draftPaintColonyNoShips(out, t, canvas, indexed, palette, cursor, records, hdBackgroundOverride...)
+	if portLabel != nil {
+		records = append(records, portLabel)
+	}
 	fontOnly, fontMisses := draftPaintOriginalNoto(out, t, j, canvas, indexed, palette, cursor, records, hdBackgroundOverride...)
+	if portLabelMiss != "" {
+		fontMisses[portLabelMiss]++
+	}
 	records = append(records, fontOnly...)
 	declaration := draftPaintDeclarationNoto(out, t, canvas, indexed, palette, cursor, records)
 	records = append(records, declaration...)
@@ -1393,6 +1434,15 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 	result["items"], result["dialog_misses"], result["string_misses"] = records, d.misses, s.misses
 	result["sea_misses"] = seaMisses
 	result["fixed_misses"] = fixedMisses
+	if *draftNativeCapture {
+		var states []map[string]any
+		for _, st := range diagnosticDialogs {
+			states = append(states, map[string]any{"id": st.id, "safe": st.safe, "phase": st.phase,
+				"step": st.complete, "source_ink": dialogSources[st].ink,
+				"source_unchanged": bytes.Equal(rectBytes(canvas, st.safe), st.afterSafe)})
+		}
+		result["dialog_states"] = states
+	}
 	result["limitations"] = []string{"隔離重建目前只驗證抽樣正常路徑；完整來源生命週期仍待驗。", "未驗欄位、部分遮擋與畫面世代仍依原文回退。"}
 	return out, result, nil
 }
@@ -1691,6 +1741,7 @@ type draftHDBackground func(*image.RGBA, int, byte, []byte) bool
 func draftNotoWoodcutMasks(fonts map[int]*dialogFont, id, text string, ink, safe image.Rectangle, capH int) (sh, n, ac *image.Alpha, size int) {
 	fields := map[string]image.Rectangle{
 		"WOODCUT.TXT:0x00000017": image.Rect(60, 165, 259, 172),
+		"WOODCUT.TXT:0x00000033": image.Rect(96, 165, 223, 172),
 		"WOODCUT.TXT:0x00000046": image.Rect(90, 165, 230, 172),
 		"WOODCUT.TXT:0x0000009E": image.Rect(74, 165, 246, 172),
 	}
@@ -2006,7 +2057,7 @@ func (p *hdSceneRuntime) seaDialogForeground(canvas, indexed, palette []byte, cu
 	return selected, sourceID
 }
 
-func draftPreserveDialogSea(t *draftLanguageTarget, c *draftSeaRow, canvas, indexed, palette []byte, cursor image.Rectangle) *draftSeaRow {
+func draftPreserveDialogSea(t *draftLanguageTarget, c *draftSeaRow, canvas, indexed, palette []byte, cursor image.Rectangle, protection ...draftInputDialogProtection) *draftSeaRow {
 	if t == nil || c == nil || c.observation == nil || c.row == nil || len(c.foreground) != 0 || len(c.observation.canvas) != 64000 || len(c.observation.after) == 0 {
 		return c
 	}
@@ -2018,6 +2069,13 @@ func draftPreserveDialogSea(t *draftLanguageTarget, c *draftSeaRow, canvas, inde
 	mask, sourceID := t.portraits.seaDialogForeground(canvas, indexed, palette, cursor)
 	if len(mask) != 8000 {
 		return c
+	}
+	inputDialog := ""
+	if len(protection) == 1 && protection[0].portrait == sourceID && len(protection[0].mask) == 8000 {
+		for i, value := range protection[0].mask {
+			mask[i] |= value
+		}
+		inputDialog = protection[0].id
 	}
 	for pos, value := range o.after {
 		if pos < 0 || pos >= 64000 || !image.Pt(pos%320, pos/320).In(c.layer) || o.canvas[pos] != value ||
@@ -2052,6 +2110,7 @@ func draftPreserveDialogSea(t *draftLanguageTarget, c *draftSeaRow, canvas, inde
 	}
 	copy := *c
 	copy.observation, copy.foreground, copy.foregroundSource, copy.foregroundChanges = &source, mask, sourceID, changes
+	copy.inputDialog = inputDialog
 	if o.kind == "sea-panel" {
 		copy.row, copy.textOffsetY = draftSeaNativeHeight(t.sea, c.row)
 		if copy.row == nil {
@@ -2083,6 +2142,86 @@ func draftSeaNativeHeight(st *seaState, row *seaRow) (*seaRow, int) {
 		return &copy, 128 - ink.Min.Y
 	}
 	return nil, 0
+}
+
+// 規格060 R150：發現陸地正文的晚到人物只可改寫已核對的前景像素。
+func draftFitLandHoDialog(t *draftLanguageTarget, st *dialogShown, o *nativeObservation, canvas, indexed, palette []byte, cursor image.Rectangle) (*dialogShown, map[string]any) {
+	if t == nil || t.dlg == nil || st == nil || st.id != "GAME.TXT:@LANDHO:0x00000ECE" ||
+		o == nil || o.dialogRun == nil || o.kind != "dialog" || o.step != st.complete ||
+		o.ink != image.Rect(64, 117, 253, 136) || st.safe != image.Rect(62, 114, 262, 138) ||
+		len(st.before) != 64000 || len(st.afterSafe) != st.safe.Dx()*st.safe.Dy() ||
+		len(canvas) != 64000 || len(indexed) != 64000 || !draftSameExceptCursor(indexed, canvas, st.safe, cursor) {
+		return nil, nil
+	}
+	mask, source := t.portraits.seaDialogForeground(canvas, indexed, palette, cursor)
+	if len(mask) != 8000 || !draftDialogPortraitSource(source) {
+		return nil, nil
+	}
+	var covered image.Rectangle
+	changes := 0
+	for y := st.safe.Min.Y; y < st.safe.Max.Y; y++ {
+		for x := st.safe.Min.X; x < st.safe.Max.X; x++ {
+			pos := y*320 + x
+			owned := mask[pos>>3]&(1<<uint(pos&7)) != 0
+			if owned {
+				covered = covered.Union(image.Rect(x, y, x+1, y+1))
+			}
+			k := (y-st.safe.Min.Y)*st.safe.Dx() + x - st.safe.Min.X
+			if canvas[pos] != st.afterSafe[k] {
+				if !owned {
+					return nil, nil
+				}
+				changes++
+			}
+		}
+	}
+	capH := 0
+	for _, line := range runLines(o.dialogRun.chars) {
+		capH = max(capH, line.capH)
+	}
+	if capH != 8 || covered.Empty() {
+		return nil, nil
+	}
+	candidates := []image.Rectangle{
+		image.Rect(st.safe.Min.X, covered.Max.Y, st.safe.Max.X, st.safe.Max.Y),
+		image.Rect(covered.Max.X, st.safe.Min.Y, st.safe.Max.X, st.safe.Max.Y),
+		image.Rect(st.safe.Min.X, st.safe.Min.Y, covered.Min.X, st.safe.Max.Y),
+		image.Rect(st.safe.Min.X, st.safe.Min.Y, st.safe.Max.X, covered.Min.Y),
+	}
+	var layout image.Rectangle
+	var shadow, normal, accent *image.Alpha
+	size := 0
+	for _, candidate := range candidates {
+		if candidate.Empty() || !candidate.In(st.safe) {
+			continue
+		}
+		sh, n, a, px := t.dlg.dialogMasks(st.zh, candidate.Dx()*4, candidate.Dy()*4, capH)
+		if sh == nil || n == nil || a == nil || px == 0 {
+			continue
+		}
+		if px > size || px == size && candidate.Dx()*candidate.Dy() > layout.Dx()*layout.Dy() {
+			layout, shadow, normal, accent, size = candidate, sh, n, a, px
+		}
+	}
+	if size == 0 {
+		return nil, nil
+	}
+	copy := *st
+	copy.before = bytes.Clone(st.before)
+	for pos := range canvas {
+		if mask[pos>>3]&(1<<uint(pos&7)) != 0 {
+			copy.before[pos] = canvas[pos]
+		}
+	}
+	pad := func(mask *image.Alpha) *image.Alpha {
+		full := image.NewAlpha(image.Rect(0, 0, st.safe.Dx()*4, st.safe.Dy()*4))
+		offset := layout.Min.Sub(st.safe.Min).Mul(4)
+		draw.Draw(full, mask.Rect.Add(offset), mask, image.Point{}, draw.Src)
+		return full
+	}
+	copy.shadow, copy.normal, copy.accent, copy.dim = pad(shadow), pad(normal), pad(accent), nil
+	copy.size, copy.phase, copy.afterSafe = size, "active", rectBytes(canvas, st.safe)
+	return &copy, map[string]any{"layout_safe": layout, "foreground_source": source, "native_occluded_pixels": changes}
 }
 
 // 規格060 R127：限定原生正文與完整選項；譯文不參與來源身份。

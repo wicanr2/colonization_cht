@@ -72,6 +72,22 @@ var hdSceneCopyCodes = map[uint16][]byte{
 }
 
 func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, error) {
+	return loadSceneRuntime(h, game, directory, true)
+}
+
+// 規格060 R150：文字前景只觀測原版來源，不需要生成圖像或HD畫布。
+func loadTextSceneRuntime(m *golem.Machine, game string) (*hdSceneRuntime, error) {
+	original, err := hdReadFile(filepath.Join(game, "VICEROY.EXE"), 8<<20)
+	if err != nil {
+		return nil, err
+	}
+	if hash(original) != versions["VICEROY.EXE"] {
+		return nil, fmt.Errorf("text scene executable fingerprint")
+	}
+	return loadSceneRuntime(&hdRuntime{m: m}, game, "", false)
+}
+
+func loadSceneRuntime(h *hdRuntime, game, directory string, withArt bool) (*hdSceneRuntime, error) {
 	closing, err := hdReadFile(filepath.Join(game, "CLOSING.EXE"), 8<<20)
 	if err != nil {
 		return nil, err
@@ -93,7 +109,7 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 			return nil, fmt.Errorf("scene original fingerprint: %s", def.file)
 		}
 		cached, exists := artCache[def.asset]
-		if !exists {
+		if withArt && !exists {
 			raw, err := hdReadFile(filepath.Join(directory, def.asset), 8<<20)
 			if err != nil {
 				return nil, err
@@ -112,7 +128,7 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 			}{im, digest}
 			artCache[def.asset] = cached
 		}
-		if cached.sha != def.assetSHA {
+		if withArt && cached.sha != def.assetSHA {
 			return nil, fmt.Errorf("scene cached asset fingerprint: %s", def.asset)
 		}
 		im := cached.im
@@ -130,18 +146,21 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 		if def.alphaSprites && def.sprite == nil {
 			return nil, fmt.Errorf("scene alpha requires sprite")
 		}
-		if im.Bounds() != wantBounds || def.offset < 0 || def.height <= 0 || def.offset+320*def.height != 64000 || len(def.nativeRects) == 0 || len(def.nativeRects) != len(def.artRects) {
+		if (withArt && im.Bounds() != wantBounds) || def.offset < 0 || def.height <= 0 || def.offset+320*def.height != 64000 || len(def.nativeRects) == 0 || len(def.nativeRects) != len(def.artRects) {
 			return nil, fmt.Errorf("scene geometry")
 		}
 		artBounds := image.Rect(0, 0, 1280, def.height*4)
 		if s := def.sprite; s != nil {
 			artBounds = image.Rect(0, 0, s.width*4, s.height*4)
 		}
-		f := &hdSceneFrame{hdSceneDefinition: def, art: image.NewRGBA(artBounds)}
+		f := &hdSceneFrame{hdSceneDefinition: def}
+		if withArt {
+			f.art = image.NewRGBA(artBounds)
+		}
 		covered := make([]bool, 320*def.height)
 		for i, r := range def.nativeRects {
 			a := def.artRects[i]
-			if r.Empty() || !r.In(image.Rect(0, 0, 320, def.height)) || a.Empty() || !a.In(im.Bounds()) {
+			if r.Empty() || !r.In(image.Rect(0, 0, 320, def.height)) || a.Empty() || !a.In(wantBounds) {
 				return nil, fmt.Errorf("scene rectangle")
 			}
 			for y := r.Min.Y; y < r.Max.Y; y++ {
@@ -152,6 +171,9 @@ func loadHDSceneRuntime(h *hdRuntime, game, directory string) (*hdSceneRuntime, 
 					}
 					covered[k] = true
 				}
+			}
+			if !withArt {
+				continue
 			}
 			target := image.Rect(r.Min.X*4, r.Min.Y*4, r.Max.X*4, r.Max.Y*4)
 			for y := target.Min.Y; y < target.Max.Y; y++ {

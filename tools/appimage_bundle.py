@@ -100,8 +100,9 @@ def build_appimage(files, manifest, repo, top, tools=Path('/opt/appimage-tools')
             cmd[-2:-2] = ['--mksquashfs-opt=-mkfs-time', '--mksquashfs-opt=0']
             if not private:
                 cmd[-2:-2] = ['--mksquashfs-opt=-all-time', '--mksquashfs-opt=0']
+        # 完整HD包在半核心以下壓縮需要較長時間，仍保留有界逾時。
         result = subprocess.run(cmd, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                                text=True, timeout=180)
+                                text=True, timeout=1200)
         if result.returncode:
             raise RuntimeError('AppImage建置失敗：\n' + result.stdout)
         data = package.read_bytes()

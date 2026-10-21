@@ -21,6 +21,7 @@ import (
 
 var windowSteps = flag.Uint64("window-steps", ^uint64(0), "驗收執行上限；正常遊玩預設不設上限，不修改DOS時鐘")
 var replayPath = flag.String("replay-inputs", "", "僅驗收：重播先前真實視窗輸入")
+var replayCheckpointsOnly = flag.Bool("replay-checkpoints-only", false, "僅驗收重播：保留每幀來源觀測，只合成指定檢查點及終點")
 var audioWAVPath = flag.String("audio-wav", "", "目標176：結束時把前端取得的 dosgolem 原始音訊（交錯 int16 立體聲）寫成 WAV；需 --audio")
 var audioMute = flag.Bool("audio-mute", false, "目標176：只合成與錄音，不開播放裝置（無音效裝置的容器用）")
 var independentMusic = flag.Bool("independent-music", true, "規格046：原版音樂獨立原速播放；停用時使用舊音訊串流")
