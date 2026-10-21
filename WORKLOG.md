@@ -7621,3 +7621,14 @@ timeout 180 docker run --rm --network none --user 1000:1000 \
 - 本機完成入口為r140-minimap-display-close-r1.json，SHA-256為162de872b5da725db099d8db38663a985678687268b4ab428e55d3dc10c7d8cd，位於既有hd-opening-animation-sources-r84工作根；同根r140-ready-review-r1.json、r140-formal-build-r1.json、r140-formal-source-tests-r1.json、r140-formal-gui-r1、r140-public-checker-r1.json、r140-source-index-review-r1.json及r140-*-source-r*.py保存證據與步驟。現行來源清冊SHA-256為e16840d692f370d3abfc1b8491042fd22e4f5aba68c32bbb96d131fe4494701b。新增本機收據與來源由本節、規格069及CONTEXT掛入入口；原版輸入與fixture不入Git。
 - 收尾清除Go快取397537280 bytes，並無損封存9個已結束原型程式，回收88080384 bytes；相同內容的兩份原型共用壓縮payload，原路徑各保留還原清冊。合計回收485617664 bytes，約463MiB。正式程式／測試及必要來源fixture維持原路徑，還原沿tools/evidence_storage.py。
 - 最終r140-final-handoff-r1.json的SHA-256為eb800b1b510a60b8e4e57eaabec930a901923098144be547b0f2c825ad6f3cb2。1352個原版輸入、4124個舊存檔、24個存檔符號連結、328語言資源及28個文字／字型／普查檔保持；63個正式組裝來源指紋吻合。小地圖與R138移民通知兩個公開檢查器在封存後結果相同。工作樹核對時實占34526601216 bytes，約32.16GiB，無root-owned產物、錯誤.md目錄或封存暫存檔，容器以--rm清除，未動其他專案。公開來源、清冊與README一併提交推送；完整五語、其餘程序圖像／格式、90秒影片及新版三平台交付仍未完成，Goal維持active。
+
+
+## 2026-10-21 R142 工作區空間清理
+
+- 依使用者要求優先清理workspace。清理沒有專用知識路由，紀錄更新命中文件職責並載入入口；沿既有工作根及還原工具，沒有新建同義目錄。所有盤點、封存及核對均在有界、非root、無網路Docker執行，UID／GID為1000。
+- 1017組相同內容的歷史JSON、索引畫面、畫布、stage、文字表、字型及Main快照，共用19618個既有輸出路徑，回收1118355456 bytes。原路徑、內容、權限及UID／GID保留，原修改時間記於r142-duplicate-inventory-r1.json。現用、凍結及唯讀目的路徑排除，沒有變更權限。
+- 476組已結束大型JSON／JSONL共477個原路徑無損封存，回收448303104 bytes。逐份解壓內容SHA-256通過，實際由原路徑還原一份歷史check.json，內容、權限、修改時間及重新壓縮內容均相同。還原沿[tools/evidence_storage.py](tools/evidence_storage.py)的restore，在非root Docker執行，完整掛載命令見R123紀錄。
+- 清理操作合計回收1566658560 bytes，約1.46GiB。計入新增清冊與保護快照後，工作樹依唯一inode配置容量由34528542720降至32979664896 bytes，約32.16降至30.71GiB，淨減1548877824 bytes，約1.44GiB。可重建快取已很小，本輪未另清快取。
+- 218988個保護路徑完整SHA相同，含全部147993個PNG、4127個一般存檔及現用資源；24個存檔符號連結保持。386張正式HD原PNG／387檔、原版輸入、交付包、現用語言包及R140／R138正式程式與測試保持。小地圖與移民教學兩個公開檢查器以相同命令抽驗，清理前後完整結果相同；沒有重跑遊戲或完整驗收矩陣。
+- 本機入口為[清理收據](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r142-cleanup-final-r1.json)，SHA-256為234a36b85c024839eba963d1ec743902e4e0edfbd71460ecefd6bd5a552bb508。同根r142-cleanup-plan-r1.json、r142-protected-snapshot-r1.json.gz、r142-dedup-rows-r1.jsonl、r142-archive-rows-r1.jsonl、清理前後checkers收據及r142-*-source-r1.py保存名單、來源與步驟。盤點、清理與核對檔案的指紋由入口收據登錄；原版素材與存檔只留本機。
+- 首次盤點寫出時遇到唯讀掛載，改用既有reports可寫掛載，以相同腳本乾淨重跑；此前尚未合併或封存資料。無root-owned產物、錯誤.md目錄、封存暫存檔或專案容器；未做全域prune，也未清理其他專案。Git僅提交清理與現況紀錄，程式、HD完成度、文字普查、Issue及Release保持；其餘HD與五語工作接續原清單。
