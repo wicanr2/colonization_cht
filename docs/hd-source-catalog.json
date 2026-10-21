@@ -103164,5 +103164,74 @@
     "palette_256": 1,
     "undecoded_binary": 7,
     "scope": "Header/file-shape classification only. Does not prove that executable code contains no graphics or that all player-visible graphics have been inventoried."
+  },
+  "other_file_role_audit": {
+    "receipt_sha256": "e9f4cc4f1d011e5322ce67bc747a84167036e7357ec3a87df1605e4a61d87867",
+    "spec": "docs/spec/069-hd-menu-background-and-textures.md",
+    "roles": [
+      {
+        "file": "AMER2.MP",
+        "sha256": "ea928f06e70564be997aa56575096c86cd7a985d41e584ba818c5c853b399dcc",
+        "role": "terrain-map-data",
+        "grade": "confirmed shape; terrain plane semantics not inferred"
+      },
+      {
+        "file": "AMERICA.MOV",
+        "sha256": "a5c5777d6435b931cddbc4a623ff065fee4ecfc4320316594a11dd868fd43023",
+        "role": "fixed-length-game-data-sidecar",
+        "grade": "confirmed serialization; non-image role is strong inference"
+      },
+      {
+        "file": "COLDIG.BIN",
+        "sha256": "19a10611d8c0e250610c37df7a92b9c28723274b6f3c9ec0d6a225c8bf54b915",
+        "role": "unsigned-8-bit-PCM",
+        "grade": "confirmed"
+      },
+      {
+        "file": "CONFIG.COL",
+        "sha256": "65855145fba299180f2dd6384d7ab9ceac4ae5dd7594d68772d4c8bad609cf43",
+        "role": "startup-configuration",
+        "grade": "strong inference; fields not decoded"
+      },
+      {
+        "file": "CYCLE.DAT",
+        "sha256": "97d2506bcbab011ebaedc397fb06ed8bde8030160a1a129ddae897db05f72a2e",
+        "role": "fixed-runtime-data-block",
+        "grade": "confirmed 34-byte read; field meanings unknown"
+      },
+      {
+        "file": "INSTALL.DAT",
+        "sha256": "cd331866afb4a6218eb949f163e0a7bfde20a41e59a11b18a711add4a162063f",
+        "role": "installer-data",
+        "grade": "strong inference"
+      },
+      {
+        "file": "PKUNZJR.COM",
+        "sha256": "44acfeeb1c68df328c2a4a39b0af453b06b0a1a8b7e8b2b1e19f81e9d253a11e",
+        "role": "DOS-unarchive-tool",
+        "grade": "strong inference"
+      },
+      {
+        "file": "INSTALL.GIF",
+        "sha256": "35d56d4aa78a684c9db1a98a4bf51dcd64088fd5d3bb64de05939b12de9ef2b2",
+        "role": "installer-screen",
+        "grade": "confirmed image shape; excluded by existing scope"
+      }
+    ],
+    "known_nonempty_frame_sources_unwired": 0,
+    "manual_validation": "pending",
+    "scope": "No new unconnected frame assets found. Embedded/procedural screens not observed remain manual; this is not a proof of all executable graphics."
+  },
+  "noto_declaration_overlay": {
+    "source_families": 52,
+    "source_prefixes": [
+      "DEC-LOW",
+      "DEC-UPP"
+    ],
+    "receipt_sha256": "475df480d99c7930715ebc485ea09cbbba17380ea1306ed517f3cf949302ac32",
+    "spec": "docs/spec/060-language-bundle-swap.md",
+    "implementation": "tools/noto_original_text.go",
+    "state": "WIRED_MANUAL_PENDING",
+    "scope": "Four non-English locales; original per-frame timing and character placement; opacity follows native frame ink ratio, no original stroke parity. SQIG and brand logo retain approved HD art."
   }
 }

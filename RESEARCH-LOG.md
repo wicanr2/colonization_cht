@@ -7336,3 +7336,16 @@ R120來源核對補充：印字完成後，正文安全區有427個人物後畫�
 - R118把45個BDARK非空來源併為單色遮罩的分組錯誤，保留舊記錄並於此勘誤。現行decoded-public-r3/pixels以四位數research ID核對全部1533張SHA-256；舊r49目錄的ID在COLONY.PIK加入後不同，不混用。BDARK參考圖有建築、碼頭、籬笆與林木，不以檔名推論停用狀態或正式遊戲用途。
 - 新三張內建image_gen原PNG及原alpha完整保存。完整提示、參考指紋、來源與取樣在graphics/manifest.json；原版參考只留本機。私有來源fixture SHA-256為fa884813b24ef8c1366f07947aaccc612b6decdc65c44ab8493067bf67ac7ede，提供來源記錄、鏡像可見索引與畫面外游標；原版0D46:000A及三個既有writer的實際執行沿既有契約，使用dosgolem82a14b266e1b5bc904e2d0fe507daf6bea41a013與Go1.26.7。未新增逆向切片或原版規則。
 - 正式fb9c752cbe7f5fef5455499159e133b97626f3b0cc07d99951da7706cafbc0b9已完成建置、go vet、素材載入與45張來源fixture可見顯示，記DISPLAY-PASS。這是supplied source fixture而非正常BDARK玩家路徑、原版VGA發布指令或原版精確對拍。當次驗證與分組入口r124-bdark-display-close-final.json及r124-final-native-partition-r1.json位於既有R84工作根，原版bytes只留本機。
+
+
+## 2026-10-21 R145 其他格式最小用途分流
+
+輸入沿VICEROY.EXE SHA-256 a17ed64c27671e5e95236e54a7ddc85803a96ba822fbed05e1dad34d3917e2e3，其他檔案指紋列於既有R84工作根r145-other-file-routing-r1.json。工具為IDA Pro9.4、非root既有py312-v1映像；本輪沒有執行遊戲、GUI或測試。
+
+- confirmed：AMER2.MP的58、72、4三個little-endian原始word與12534bytes滿足6+58×72×3；原先正常地圖載入證據見規格035，圖塊仍由既有SS／PIK及小地圖HD呈現，沒有更改地圖資料或猜第三個word語意。
+- confirmed：AMERICA.MOV為572bytes。IDA窄切片以原檔[0x63e50,0x63fa0)映射至IDA線性0x220000，16位元；原檔0x63e68與0x63ed2兩常式分別用DS:1E5Fh／1E71h的同名檔，與DS:1E5Ch的wb／1E6Eh的rb，對DS:85E8h、86F6h、945Eh作270、270、32bytes對稱讀寫。原始操作數、bytes與call目標0D1D:060Ch／0528h保留。固定資料側檔為強推論，三塊內容的遊戲語意未知，不把它冒稱新增影片或已驗渲染來源。
+- confirmed：COLDIG.BIN為既有規格039已證實的unsigned8bitPCM。CYCLE.DAT在原檔0x783EF附近以0x22bytes讀入DS:929Eh；欄位語意未知，不由名稱猜成色盤動畫。CONFIG.COL為啟動已觀測的20bytes設定輸入，其欄位只作強推論。
+- 強推論：INSTALL.DAT的檔名清單、Over Write／Change Path字串與PKUNZJR.COM的CRC／Extracting／Inflating字串分別屬安裝資料及解包工具。INSTALL.GIF的640×480單幀形狀confirmed，沿既有規格069排除安裝／地圖編輯工具的範圍。沒有新增原版像素到Git。
+- 初次既有IDA資料庫沒有這些檔名字串的直接xref；不據此宣稱沒有消費端。第二階段核對同一原始檔的資料段，第三階段只補0x63e50附近的原始疊加區切片，得到上述對稱I/O後停止。收據為r145-ida-other-sources-r1.json、r145-ida-file-literals-r2.json及r145-ida-mov-io-r3.json；查詢腳本與log同根。IDA線性位址與原檔offset分開標明，未改名原函式或覆寫正式資料庫。
+
+這項分流沒有找到新的未接圖像幀。原有1464個非空SS／PIK來源與1477個連結保持；其餘未見的內嵌／程序畫面留人工驗證，不因此宣稱所有EXE都不含圖像。

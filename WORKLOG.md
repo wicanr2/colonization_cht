@@ -7651,3 +7651,17 @@ timeout 180 docker run --rm --network none --user 1000:1000 \
 - 清除Go可重建快取401588224 bytes，44個過期候選程式及大型紀錄沿tools/evidence_storage.py無損封存；3份相同payload共用內容。工作樹依唯一inode容量由34658766848降至34007396352 bytes，淨回收651370496 bytes，約621MiB。7231個保護路徑完整內容相同，含原版輸入、全部存檔、正式素材、現用R143及新舊交付。
 - 入口[清理收據](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r144-cleanup-r1.json)及同根r144-cleanup-operations-r1.json、r144-cleanup-protected-r1.json、r144-cleanup-source-r1.py。還原沿tools/evidence_storage.py的restore，使用R123所載非root可寫reports掛載，例如容器內python3 /repo/tools/evidence_storage.py restore /repo/workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r143-prototype-window-r1。
 - 最終AppImage雜湊及擁有權核對，無root-owned檔、錯誤.md目錄或封存暫存檔，專案與本次封裝容器均以--rm清除；未全域prune或動其他專案。Git差異空白檢查通過，原版、存檔及dist-all未被追蹤。原始碼與文件依既有commit、push授權提交；完整交付留本機。總交接收據為同根r144-final-handoff-r1.json。
+
+
+## 2026-10-21 R145 文字高清統一與其餘圖像接線
+
+- 依使用者要求完成文字與已知圖像接線，剩餘人工驗證。路由命中正式接線、未完成項與README現況規則，沿已載入口及現有規格／清冊收斂，沒有新全遊戲RE或GUI測試。IDA檔案定位使用[use-ida-pro-9-4技能](/home/anr2/.codex/skills/use-ida-pro-9-4/SKILL.md)，讀既有資料庫及原版唯讀副本，未修改正式DB。
+- tools/noto_original_text.go新增原文Noto回退。既有翻譯與固定欄位優先，未譯英數、側欄及已攔截原文按自身墨跡寬高選字，保留內容、字色與位置；原文完整來源、Main／VGA、人物與游標守門保持。英語模式保留原字體。回退紀錄標font_only=true及translated=false，不增加翻譯或文字普查。
+- 宣言DEC-LOW／UPP共52字母族接上四地區Noto。每字從最後一幀完整墨跡選字，在原字格顯示；位置、更新時點與原幀來源保持，以原幀墨量比例決定不透明度。此為顯示近似，不聲稱原手寫筆畫次序一致。SQIG裝飾與商標保留既有HD素材。最多512字格，另以Main寫入世代撤銷未知同值覆寫；已驗游標配對沿既有路徑，完整背景持有權可證明時回貼HD底圖。觀測以選配回呼綁定五語前端，純圖像工具不依賴Noto模組。
+- 四語20筆原文欄位量測與52個完整字形原墨跡矩形已記錄。R49歷史IDX檔名與現行研究編號不同，按完整indexed SHA定位，沒有按編號猜取來源。r145-font-measurements-r1.json字級候選正確、位移誤記底緣公式，另以r145-font-measurements-r2.json追加勘誤；程式始終採上緣對齊，修紀錄未改封包。宣言清冊為r145-declaration-measurements-r1.json，含52個原檔與indexed指紋、矩形及候選範圍，實際Noto字級逐欄於繪製前量測。
+- 七個非圖集二進位及安裝GIF完成最小用途分流，沒有發現新未接圖像幀。AMER2.MP為既有正常載入地圖；AMERICA.MOV的270＋270＋32bytes對稱I/O已由窄IDA切片定位；COLDIG.BIN沿既有PCM證據，設定與執行期區塊語意保留推論等級。安裝資料、解包工具與安裝GIF沿既有範圍排除。原始位址、bytes、工具與推論等級在RESEARCH-LOG及r145-other-file-routing-r1.json；不把未見的EXE內嵌／程序畫面當成已驗HD，留人工確認。
+- 正式版本v.1.0.6-20261021，81份Go組裝來源建置成功；程式SHA-256 a8dfb767aae5027f63cb790de1b0a46dacef5ee722dd0ba05982cb11c8ac3af1。既有eob-remake-release:1.26.7-ebiten2.9.9-20261008-r2、Go1.26.7、固定AppImage1.9.0與runtime75849dc沿用。沒有執行遊戲、GUI、Go測試、go vet、smoke或全矩陣，沒有新增DISPLAY-PASS／CONFORMED／普查信用。新增接線為READY、人工驗證待辦。
+- 本機完整AppImage位於dist-all/v.1.0.6-20261021/full-local/colonization-cht-v.1.0.6-20261021-full-local-linux-x86_64.AppImage，482744824 bytes、1116檔、SHA-256 aee9678454c2a30b0bea1cd5cf50f15b1ba80ad0fd651e4069f07f6278e35a37。含全部386張正式原PNG／387檔、328語言資源、Noto與合法本機原版。內嵌版號、資源指紋、授權及完整原版來源依封裝器核對，狀態manual_validation=pending。存檔與偏好沿既有位置；原版及完整包不提交或上傳。v.1.0.4已交付包保留，沒有新tag／Release或新版Windows／macOS。
+- 清除Go快取195899392 bytes與本輪未交付v.1.0.5候選482754560 bytes，合計回收678653952 bytes，約647MiB。候選未發布、未交付及未作驗收證據，移除前核對清冊並保存收據；現行v.1.0.6及已交付v.1.0.4保持。新AppImage0755、UID／GID1000，無root-owned檔、錯誤.md目錄或專案容器，未清其他專案。原版、存檔與正式素材保留。
+- 過程中的型別接線編譯錯誤修正後沿同容器重建。一次命令將&&誤置Docker之外，主機Python啟動後因/out沒有該腳本而退出，專案腳本未執行；已改成明確於容器內獨立封裝。此為工作命令錯誤，沒有列為遊戲缺陷或測試失敗。
+- 本機入口：[最終交接](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r145-final-handoff-r1.json)、[建置](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r145-formal-build-r1.json)、[封裝](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r145-local-package-r1.json)及[清理](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r145-cleanup-r1.json)。同根r145-build-source-r1.py、r145-package-source-r1.py、r145-cleanup-source-r1.py、字級清冊與IDA查詢腳本保存重現入口。README、CONTEXT、來源清冊、規格與機器工作清單同步；原始碼及文件依既有授權commit、push，實際畫面、動畫與聲音交人工確認。

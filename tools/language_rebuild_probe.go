@@ -40,12 +40,14 @@ func languageRuntimeSelection(formal, probe string, probeLive, capture, settings
 }
 
 type draftLanguageTarget struct {
-	portraits *hdSceneRuntime
-	pack      *draftPreparedBundle
-	dlg       *dialogCatalog
-	str       *stringCatalog
-	sea       *seaState
-	fixed     map[string]*draftFixedMask
+	originalFonts    *displayUIFonts
+	declarationPlans map[string]*notoDeclarationPlan
+	portraits        *hdSceneRuntime
+	pack             *draftPreparedBundle
+	dlg              *dialogCatalog
+	str              *stringCatalog
+	sea              *seaState
+	fixed            map[string]*draftFixedMask
 }
 
 type draftNativeFrame struct {
@@ -153,12 +155,23 @@ func draftPrepareTargets(root string, files map[string][]byte, owned, helpOwned 
 		return nil, err
 	}
 	targets := map[string]*draftLanguageTarget{}
+	var originalFonts *displayUIFonts
+	if *displayUIFont != "" {
+		data, err := os.ReadFile(*displayUIFont)
+		if err != nil {
+			return nil, err
+		}
+		originalFonts, err = readUIFonts(data, nil)
+		if err != nil {
+			return nil, err
+		}
+	}
 	for _, locale := range []string{"zh-Hant", "zh-Hans", "ja", "ko", "en"} {
 		pack, err := draftPrepareBundle(os.DirFS(root), locale, needs)
 		if err != nil {
 			return nil, fmt.Errorf("%s: %w", locale, err)
 		}
-		t := &draftLanguageTarget{pack: pack}
+		t := &draftLanguageTarget{pack: pack, originalFonts: originalFonts, declarationPlans: map[string]*notoDeclarationPlan{}}
 		if locale == "en" {
 			targets[locale] = t
 			continue
@@ -1363,6 +1376,11 @@ func draftRebuildTargetOn(t *draftLanguageTarget, j *nativeJournal, canvas, buff
 		}
 		records = append(records, record)
 	}
+	fontOnly, fontMisses := draftPaintOriginalNoto(out, t, j, canvas, indexed, palette, cursor, records, hdBackgroundOverride...)
+	records = append(records, fontOnly...)
+	declaration := draftPaintDeclarationNoto(out, t, canvas, indexed, palette, cursor, records)
+	records = append(records, declaration...)
+	result["font_only_misses"] = fontMisses
 	// 只回貼原版游標改動的像素，保留游標框內未被遮擋的文字。
 	for y := max(0, cursor.Min.Y); y < min(200, cursor.Max.Y); y++ {
 		for x := max(0, cursor.Min.X); x < min(320, cursor.Max.X); x++ {

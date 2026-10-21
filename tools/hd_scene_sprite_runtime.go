@@ -17,6 +17,8 @@ type hdSceneSpriteDefinition struct {
 	encodedSHA, indexedSHA, writesSHA          string
 }
 type hdSceneSpriteCall struct {
+	fontPriorWriteMax  uint64
+	notoBeforeCells    []hdSceneCell
 	canvas             uint32
 	codeBase           int
 	closingContext     bool
@@ -111,6 +113,15 @@ func (p *hdSceneRuntime) beforeSpriteInstruction() {
 		p.captureClosingBackground(canvas)
 	}
 	p.spriteCall = &hdSceneSpriteCall{canvas: canvas, codeBase: pc, closingContext: closing, slot: slot, x: x, y: y, source: int(record[1])*16 + int(record[0]), sourceSegment: record[1], sourceOffset: int(record[0]), sp: c.R[golem.SP], retCS: stack[1], retIP: stack[0], start: m.Steps, before: append([]byte(nil), m.Mem[canvas:canvas+64000]...), values: make([]byte, s.width*s.height), counts: make([]byte, s.width*s.height)}
+	if canvas == hdBuildingCanvas && p.spriteFontSource != nil && p.spriteFontSource(f.file) {
+		if p.spriteFontRectStamp != nil {
+			p.spriteCall.fontPriorWriteMax = p.spriteFontRectStamp(image.Rect(x, y, x+s.width, y+s.height))
+		}
+		p.spriteCall.notoBeforeCells = make([]hdSceneCell, s.width*s.height)
+		for k := range p.spriteCall.notoBeforeCells {
+			p.spriteCall.notoBeforeCells[k] = p.cell(canvas + uint32((y+k/s.width)*320+x+k%s.width))
+		}
+	}
 }
 
 func (p *hdSceneRuntime) recordSpriteWrite(a uint32, value byte) {
@@ -205,6 +216,9 @@ func (p *hdSceneRuntime) finishSprite() {
 	f.decoded++
 	p.spriteAccepted++
 	p.revision++
+	if p.spriteFontObserver != nil {
+		p.spriteFontObserver(call, f, expected)
+	}
 }
 
 // Main游標配對不改變來源持有權，只恢復原游標透明格下方已驗的SS底圖。

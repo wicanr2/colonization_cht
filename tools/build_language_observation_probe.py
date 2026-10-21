@@ -149,6 +149,7 @@ def attach_language_runtime(repo, output, reference, *, with_rebuild=True, forma
     if with_rebuild:
         extra_sources = ["tools/language_bundle_probe.go", "tools/language_bundle_probe_test.go",
                          "tools/language_rebuild_probe.go", "tools/language_rebuild_probe_test.go",
+                         "tools/noto_original_text.go",
                          "tools/language_resource_index.go", "tools/language-catalogs.json",
                          "tools/hd_runtime.go", "tools/hd_runtime_test.go",
                          "tools/hd_native_minimap.go", "tools/hd_native_minimap_test.go",

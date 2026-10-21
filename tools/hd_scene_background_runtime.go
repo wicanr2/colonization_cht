@@ -45,6 +45,11 @@ type hdSceneCursorPair struct {
 	cell       hdSceneCell
 }
 type hdSceneRuntime struct {
+	spriteFontSource                                            func(string) bool
+	spriteFontObserver                                          func(*hdSceneSpriteCall, *hdSceneFrame, []byte)
+	spriteFontState                                             any
+	spriteFontWriteObserver                                     func(uint32)
+	spriteFontRectStamp                                         func(image.Rectangle) uint64
 	spriteCall                                                  *hdSceneSpriteCall
 	spriteAccepted, spriteRejected                              uint64
 	publishedPending                                            map[int]hdSceneCursorPair
@@ -326,6 +331,9 @@ func (p *hdSceneRuntime) memoryWrite(a uint32, old, value byte) {
 		code, known := hdPictureWriterCodes[ip]
 		known = known && cs == 0x11b5 && knownCode(code)
 		if known {
+			if bufferBase == hdBuildingCanvas && p.spriteFontWriteObserver != nil {
+				p.spriteFontWriteObserver(a)
+			}
 			if bufferBase == hdBuildingCanvas {
 				clear(p.pending)
 			}
@@ -378,6 +386,9 @@ func (p *hdSceneRuntime) memoryWrite(a uint32, old, value byte) {
 		}
 	}
 	if main {
+		if p.spriteFontWriteObserver != nil {
+			p.spriteFontWriteObserver(a)
+		}
 		clear(p.pending)
 	}
 	next, _ := p.copyCell(a, value)

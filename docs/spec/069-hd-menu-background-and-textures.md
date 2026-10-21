@@ -3453,3 +3453,13 @@ R140正式畫面驗證入口為[小地圖檢查器](../../tools/check_hd_minimap
 正式素材收集函式核對387檔，386張原PNG及完整清冊保持，沒有新增素材副本或平台包。來源清冊保留全部1552列與1477個SS／PIK連結，另列1個程序小地圖DISPLAY-PASS；四種錯誤收據均拒絕。47個其他檔案只記最小形狀分型，完整玩家圖像分母仍未知。README世界圖已更換為當次正式繁中原樣實拍，仍為32張。
 
 本機完成入口為既有R84工作根的r140-minimap-display-close-r1.json，SHA-256為162de872b5da725db099d8db38663a985678687268b4ab428e55d3dc10c7d8cd；同根r140-public-checker-r1.json、r140-source-index-review-r1.json、r140-formal-source-tests-r1.json、r140-formal-gui-r1及r140-packaging-assets-r1.json保存正式驗證。生成原圖、其他HD與R138文字信用保持；本項不等於完整五語、全量HD、90秒影片或新版三平台交付完成。
+
+
+## R145 其餘檔案分流與HD接線收尾
+
+2026-10-21狀態：已知圖集接線完成，新增文字字型接線READY、人工驗證待辦。使用者要求完成文字高清統一、核對尚未確認圖像，已有HD就接入正式程式，剩餘人工確認。
+
+- 既有1464個非空SS／PIK來源、1477個連結、386張正式原PNG及世界小地圖保持。本輪未找到新的未接遊戲圖像幀，沒有新增原版圖像到Git，也沒有啟動新的全遊戲來源追查。
+- 七個原未分類二進位已作最小用途分流：AMER2.MP為地圖輸入，AMERICA.MOV以270＋270＋32bytes對稱讀寫三塊原版資料，COLDIG.BIN沿規格039為PCM；CONFIG.COL與CYCLE.DAT是啟動設定／34bytes執行期資料，具體欄位語意仍依推論等級保留。INSTALL.DAT及PKUNZJR.COM屬安裝資料／解包工具的強推論；唯一額外GIF為安裝畫面，沿既有範圍不納入遊戲前端。精確證據與限制見[RESEARCH-LOG R145](../../RESEARCH-LOG.md#2026-10-21-r145-其他格式最小用途分流)及[來源清冊](../hd-source-catalog.json)的other_file_role_audit。
+- 文字回退與DEC大小寫52個字母族依[規格060 R145](060-language-bundle-swap.md#r145-原文高清回退-ready)接入對應地區Noto；SQIG裝飾筆畫及MPSNAME商標保持已完成HD圖像。字形動畫以原幀墨量比例顯示Noto字面，屬顯示近似，不宣稱原手寫筆畫一致。
+- 未觀測的內嵌／程序畫面留人工驗證，不把資料用途分流當成EXE內沒有圖像的證明。沒有新的GUI、遊戲執行、單元測試、逐像素對拍或DISPLAY-PASS信用；當前退出點為正式接線與本機AppImage交付。

@@ -553,6 +553,7 @@ func (b *draftLanguageBackend) rebuildWithHD(t *draftLanguageTarget, o displayOp
 	if t != nil && b.hd != nil {
 		local := *t
 		local.portraits = b.hd.scenes
+		bindNotoDeclaration(local.portraits)
 		t = &local
 	}
 	if o.Graphics != "hd" {
