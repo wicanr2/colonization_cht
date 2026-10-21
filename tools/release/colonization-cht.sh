@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # 殖民帝國繁體中文化（Colonization CHT）啟動器。
 # 用法：./colonization-cht.sh --game /path/to/COLONIZE [其他前端參數]
-# 需要自備合法取得、指紋相符的 DOS 版原版目錄；本包不含任何原版檔案。
+# 需要合法取得、指紋相符的 DOS 版原版目錄；公開功能包需自備，本機完整版內含。
 # 原版目錄只讀；存檔寫到 $COLONIZATION_CHT_SAVE（預設 ~/.local/share/colonization-cht/save）。
 set -euo pipefail
 

@@ -7665,3 +7665,17 @@ timeout 180 docker run --rm --network none --user 1000:1000 \
 - 清除Go快取195899392 bytes與本輪未交付v.1.0.5候選482754560 bytes，合計回收678653952 bytes，約647MiB。候選未發布、未交付及未作驗收證據，移除前核對清冊並保存收據；現行v.1.0.6及已交付v.1.0.4保持。新AppImage0755、UID／GID1000，無root-owned檔、錯誤.md目錄或專案容器，未清其他專案。原版、存檔與正式素材保留。
 - 過程中的型別接線編譯錯誤修正後沿同容器重建。一次命令將&&誤置Docker之外，主機Python啟動後因/out沒有該腳本而退出，專案腳本未執行；已改成明確於容器內獨立封裝。此為工作命令錯誤，沒有列為遊戲缺陷或測試失敗。
 - 本機入口：[最終交接](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r145-final-handoff-r1.json)、[建置](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r145-formal-build-r1.json)、[封裝](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r145-local-package-r1.json)及[清理](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r145-cleanup-r1.json)。同根r145-build-source-r1.py、r145-package-source-r1.py、r145-cleanup-source-r1.py、字級清冊與IDA查詢腳本保存重現入口。README、CONTEXT、來源清冊、規格與機器工作清單同步；原始碼及文件依既有授權commit、push，實際畫面、動畫與聲音交人工確認。
+
+## 2026-10-21 R146 完整版固定分為有HD與無HD兩類
+
+- 使用者要求另外打包無HD版本，並決定後續完整版固定分為「HD＋原版＋中文化」及「原版＋中文化」。路由命中交付目錄與版號，載入retro-remake-dist-all-output.md、retro-remake-release-versioning.md及文件職責契約。沿既有Linux入口與full-local目錄，不新增公開發行。
+- tools/package_release.py的--full-game現在一次產出兩包，只有兩包均組裝成功才建立新版本目錄；同一版號、程式、原版資料、譯稿與字型，共同登錄SHA256SUMS.json。HD包含387個graphics檔案，無HD包完全排除該目錄，清冊記錄edition、graphics_modes與hd_assets_included。Noto一般文字兩包保留，依賴HD來源觀測器的宣言字母覆蓋僅在有HD包提供；無HD包保留原版動畫。
+- 舊tools/assemble_release.py只保留公開交付彙整，--full-game／--full-only在寫入前明確拒絕並指向新入口，避免後續產出未分兩類的完整包。目前成對完整版只支援Linux，沒有新增Windows或macOS完整版。AGENTS、README與規格041同步此決定。
+- 使用既有eob-remake-release:1.26.7-ebiten2.9.9-20261008-r2、Go1.26.7與固定AppImage1.9.0／runtime75849dc。R145的81份Go組裝來源及6份公開前端來源逐檔相同，只以連結器寫入v.1.0.7-20261021；程式SHA-256 10c55b0a7e2a54ab2de35d886ee8574031816430bfd097460577265ffc135f54。
+- HD包為dist-all/v.1.0.7-20261021/full-local/colonization-cht-v.1.0.7-20261021-full-local-hd-linux-x86_64.AppImage，482744824 bytes、1116個清冊檔案，SHA-256 943be8bfdf4e3ba93a996d2c02fddeea8dda86b2086c2e34722be1ffdab2bb43。
+- 無HD包為同目錄colonization-cht-v.1.0.7-20261021-full-local-original-linux-x86_64.AppImage，95549944 bytes、729個清冊檔案，SHA-256 f51cf93422a17956f80fc0edaa2ad159d5f9d7e3c1360e0b49b7747a84f2b551。
+- 封包內容核對只執行AppImage解出功能，不啟動遊戲。兩包全部清冊檔案的大小與SHA-256相符，內含相同程式、325個languages路徑檔案及共用UI字型等328個語言資源，原版各288檔且不含存檔。HD包387個graphics檔案，無HD包0個且無graphics目錄；私用標記、版號、AppRun包內game路由、字型、UID／GID1000及0755均核對。
+- 初次驗包器把AppImage工具自動建立的.DirIcon誤列為額外檔案。實際為指向已列冊colonization-cht.svg的唯一圖示別名，無缺檔。修正驗包器後以同一固定工具鏈乾淨解出重驗通過，封包內容與雜湊保持。此為驗證腳本分類問題，沒有修改前端或重新打包；初版腳本及差異紀錄留存。
+- 使用者暫停測試的要求保持，沒有執行新GUI、遊戲、Go測試、go vet或全矩陣。只做必要建置與封包內容核對，不增加shown、DISPLAY-PASS或全遊戲HD信用；啟動、畫面、動畫與聲音仍為manual_validation=pending。
+- 清除本輪Go可重建快取132857856 bytes，約127MiB，保留快取目錄及既有v.1.0.4、v.1.0.6交付。原版、存檔與正式素材保持；工作根無root-owned檔或錯誤.md目錄。本次容器均--rm且資源有界，沒有清理其他專案。
+- 可重現入口為既有hd-opening-animation-sources-r84工作根內r146-build-package-r1.py、r146-package-inventory-r2.py及r146-cleanup-r1.py；[封裝收據](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r146-local-package-r1.json)、同根r146-formal-build-r1.json與r146-cleanup-r1.json保存輸入、命令、來源及結果。CONTEXT與機器工作清單同步。原始碼與文件依既有授權commit、push，兩個完整包及原版只留本機；沒有新tag或Release。

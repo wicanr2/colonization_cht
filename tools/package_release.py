@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """組裝 Linux tar.gz／AppImage、Windows 或 macOS ZIP，只在容器內執行。
 
-公開包寫入dist-all/<版本>/patch/。明確指定--full-game時只寫full-local/，包含本機原版且不得公開。
+公開包寫入dist-all/<版本>/patch/。明確指定--full-game時，在full-local/同時產出有HD與無HD兩包，包含本機原版且不得公開。
 公開包只放本作品與第三方允許散布的元件：前端執行檔、啟動器、五語譯稿 TSV、Noto及既有Cubic 11字模、設定列字型、
 授權檔與清單；不放任何原版檔案、截圖、存檔或解包資料。字模複本的 scope 聲明改寫成隨包散布的授權說明，
 其餘內容不動。封裝可重現：固定時間戳、擁有者與檔案順序，gzip 不寫時間。
@@ -65,6 +65,68 @@ def full_game_files(root):
             files[relative] = (data, 0o644)
             records[relative] = {"sha256": sha(data), "bytes": len(data), "source_mtime_ns": path.stat().st_mtime_ns}
     return files, records
+
+
+def build_full_local_appimages(args, files, manifest, hd_files, platform):
+    """同一版號的完整版固定成對產出；無HD包完全排除生成圖像。"""
+    from appimage_bundle import build_appimage
+
+    originals, original_records = full_game_files(args.full_game)
+    base = {name: content for name, content in files.items() if name not in hd_files}
+    base.update(originals)
+    packages = []
+    for edition, label, with_hd in [
+            ("hd", "HD＋原版＋中文化", True),
+            ("original", "原版＋中文化", False)]:
+        payload = dict(base)
+        if with_hd:
+            payload.update(hd_files)
+        notice = {"version": args.version, "edition": edition, "private_only": True,
+                  "notice": "使用者本機合法原版資料；不得提交Git、上傳或公開散布。存檔不隨包。",
+                  "manual_validation": "pending", "files": original_records}
+        payload["FULL-LOCAL-MANIFEST.json"] = ((json.dumps(notice, ensure_ascii=False, indent=2) + "\n").encode(), 0o644)
+        graphics_note = (
+            "含全部正式HD素材。顯示設定可切換原版／HD，初始為原版，沿用既存偏好。\n"
+            "HD事件標題使用金色。\n" if with_hd else
+            "不含HD素材，圖像使用原版；顯示設定保留語言切換，HD不可用。\n"
+            "既存HD偏好只在當次啟動回退原版，不覆寫偏好檔。宣言字母保留原版動畫。\n")
+        readme = (
+            "殖民帝國「" + label + "」本機完整版 " + args.version + "\n\n"
+            "本包內含本機合法原版資料、五語顯示層與Noto字型。\n" + graphics_note +
+            "僅供本機使用，不得提交Git、上傳或公開散布。沒有附帶使用者存檔。\n"
+            "\n直接執行本AppImage即可。FUSE不可用時，加 --appimage-extract-and-run。\n"
+            "需要Linux x86_64、X11、OpenGL、ALSA、glibc及bash。\n"
+            "\n語言初始為繁中，沿用既存偏好。存檔沿用 ~/.local/share/colonization-cht/save。\n"
+            "\n依使用者要求，本版停止自動測試。啟動、畫面及聲音待人工驗證。\n"
+            "未抽樣情境可能保留原文或原圖，不宣稱完整五語與全遊戲HD驗收完成。\n"
+            "\n授權見LICENSE及LICENSES/；本機原版資料不在本作品授權範圍內。\n")
+        payload["README.txt"] = (readme.encode(), 0o644)
+        bundled = dict(manifest)
+        bundled.update(private_only=True, bundled_original=True, manual_validation="pending",
+                       edition=edition, edition_label=label, hd_assets_included=with_hd,
+                       graphics_modes=["original", "hd"] if with_hd else ["original"])
+        bundled["files"] = {k: {"sha256": sha(v[0]), "bytes": len(v[0])} for k, v in sorted(payload.items())}
+        top = f"colonization-cht-{args.version}-full-local-{edition}-{platform}"
+        data, completed = build_appimage(payload, bundled, args.repo, top)
+        packages.append((top + ".AppImage", data, completed))
+
+    # 兩包都組裝成功才建立交付版本；排他建立，不覆寫已存在的版本。
+    args.output.mkdir(parents=True, exist_ok=True)
+    version_dir = args.output / args.version
+    version_dir.mkdir()
+    target = version_dir / "full-local"
+    target.mkdir()
+    sums = {"version": args.version, "private_only": True, "manual_validation": "pending", "packages": {}}
+    for name, data, bundled in packages:
+        package = target / name
+        package.write_bytes(data)
+        package.chmod(0o755)
+        sums["packages"]["full-local/" + name] = {
+            "sha256": sha(data), "bytes": len(data), "edition": bundled["edition"],
+            "hd_assets_included": bundled["hd_assets_included"], "files": len(bundled["files"]) + 1}
+    (version_dir / "SHA256SUMS.json").write_text(json.dumps(sums, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    print(json.dumps({"directory": str(version_dir), **sums}, ensure_ascii=False))
+    return 0
 
 
 def mask_bytes(path):
@@ -633,7 +695,7 @@ def main():
     p.add_argument("--format", choices=["tar.gz", "appimage", "windows-zip", "macos-zip"], default="tar.gz")
     p.add_argument('--mask-bundle', type=Path)
     p.add_argument('--mask-manifest-sha256')
-    p.add_argument('--full-game', type=Path, help='僅限本機的完整AppImage，內含合法原版資料，不得公開')
+    p.add_argument('--full-game', type=Path, help='同時產出有HD／無HD兩個本機完整AppImage，內含合法原版資料，不得公開')
     a = p.parse_args()
     if not VERSION.fullmatch(a.version):
         raise SystemExit("版號不符 v.X.Y.Z-YYYYMMDD")
@@ -667,8 +729,6 @@ def main():
     platform = "macos-universal" if macos else "windows-x86_64" if windows else "linux-x86_64"
     native_name = "colonization-window.exe" if windows else "colonization-window"
     top = f"colonization-cht-{a.version}-{platform}"
-    if a.full_game:
-        top = f"colonization-cht-{a.version}-full-local-{platform}"
     files = {}  # 包內路徑 → (bytes, mode)
     files["bin/" + native_name] = (a.binary.read_bytes(), 0o755)
     files["colonization-cht.sh"] = ((a.repo / "tools/release/colonization-cht.sh").read_bytes(), 0o755)
@@ -710,33 +770,14 @@ def main():
                                       "files": ORIGINAL},
                 "dependencies": dependencies,
                 "files": {k: {"sha256": sha(v[0]), "bytes": len(v[0])} for k, v in sorted(files.items())}}
-    if a.full_game:
-        original_files, original_records = full_game_files(a.full_game)
-        files.update(original_files)
-        notice = {"version": a.version, "private_only": True,
-                  "notice": "使用者本機合法原版資料；不得提交Git、上傳或公開散布。存檔不隨包。",
-                  "manual_validation": "pending", "files": original_records}
-        files["FULL-LOCAL-MANIFEST.json"] = ((json.dumps(notice, ensure_ascii=False, indent=2) + "\n").encode(), 0o644)
-        full_readme = (
-            "殖民帝國「本機完整版」 " + a.version + "\n\n"
-            "本包內含本機合法原版資料、五語顯示層、Noto字型及全部正式HD素材。\n"
-            "僅供本機使用，不得提交Git、上傳或公開散布。沒有附帶使用者存檔。\n"
-            "\n直接執行本AppImage即可。FUSE不可用時，加 --appimage-extract-and-run。\n"
-            "需要Linux x86_64、X11、OpenGL、ALSA、glibc及bash。\n"
-            "\n畫面外「顯示設定」可切換五語與原版／HD；初始為繁中、原版，沿用既存偏好。\n"
-            "HD事件標題使用金色。存檔沿用 ~/.local/share/colonization-cht/save。\n"
-            "\n依使用者要求，本版停止自動測試。啟動、畫面及聲音待人工驗證。\n"
-            "未抽樣情境可能保留原文或原圖，不宣稱完整五語與全遊戲HD驗收完成。\n"
-            "\n授權見LICENSE及LICENSES/；本機原版資料不在本作品授權範圍內。\n")
-        files["README.txt"] = (full_readme.encode(), 0o644)
-        manifest.update(private_only=True, bundled_original=True, manual_validation="pending")
-        manifest["files"] = {k: {"sha256": sha(v[0]), "bytes": len(v[0])} for k, v in sorted(files.items())}
     if macos:
         manifest["binary_validation"] = binary_validation
     if mask_source:
         manifest['mask_source'] = mask_source
     if embedded_version is not None:
         manifest["frontend_version"] = embedded_version
+    if a.full_game:
+        return build_full_local_appimages(a, files, manifest, hd_files, platform)
     files["MANIFEST.json"] = ((json.dumps(manifest, ensure_ascii=False, indent=1, sort_keys=True) + "\n").encode(), 0o644)
     if a.format in {"appimage", "windows-zip", "macos-zip"}:
         if macos:

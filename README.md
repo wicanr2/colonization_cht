@@ -38,7 +38,14 @@ Linux需要X11、OpenGL與ALSA；FUSE不可用時，在AppImage檔名後先加 `
 
 ## 目前狀態
 
-本機完整版沿用 `tools/package_release.py --format appimage --full-game <原版目錄>`，輸出於 `dist-all/<版本>/full-local/`。內含五語資源、Noto字型與正式HD素材，僅供本機使用；啟動與畫面留待人工確認。現行交付路徑見[目前脈絡](CONTEXT.md)。遊玩時可在畫面外的「顯示設定」切換語言及原版／HD。 非英文模式的原文回退欄位及宣言字母已接入對應地區Noto，畫面與動畫效果待人工確認。
+本機完整版使用 `tools/package_release.py --format appimage --full-game <原版目錄>`，每個版號固定產出兩類，存於 `dist-all/<版本>/full-local/`：
+
+| 包別 | 內容 |
+|---|---|
+| HD＋原版＋中文化 | 內含正式HD素材，可在顯示設定切換原版／HD。 |
+| 原版＋中文化 | 使用原版圖像，不含HD素材。 |
+
+兩包均保留五語資源、Noto字型及本機原版資料，僅供本機使用。現行交付路徑見[目前脈絡](CONTEXT.md)，打包契約見[規格041](docs/spec/041-linux-appimage.md#2026-10-21-r146-完整版分為兩類)。非英文的原文回退欄位已接入對應地區Noto；HD包另有宣言字母Noto覆蓋，無HD包保留原版字母動畫。啟動、畫面及動畫效果留待人工確認。
 
 英國發現者新局停止已修復，正常世界入口、三側同狀態與既有存檔回歸通過。殖民地、歐洲港口、報告與國會的剩餘接線已完成，經代表性正常路徑及回退抽樣驗收，並收進本版三平台封包。[遊玩驗證](docs/goals/185-player-experience.md)保存修復與抽驗範圍；未抽樣的條件訊息與建造換頁仍保留待驗，見[完成範圍](docs/goals/181-colony-remaining.md)。
 
