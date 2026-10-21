@@ -28,3 +28,15 @@
 本機收據沿既有R84工作根：r148-six-package-inventory-r1.json、r148-first-colony-capture-r5/first-colony.json、r148-first-colony-hd-r6/gpu-runtime.json、r148-promo-r1/validation.json、r148-issue-close-readback-r1.json、r148-ada-cleanup-r1.json及r148-local-cleanup-r1.json。
 
 收尾靜態檢查：64項工作清單訊號、32張原有圖片連結、變更文件本機連結、生成素材清冊指紋與UID／GID已核對。無原版檔案或dist-all／workplace被追蹤，無root-owned檔或錯誤.md目錄。本機專案容器與Ada本輪容器均無殘留，遠端當次目錄確認不存在。入口r148-final-checks-r1.json；這些檢查不增加遊戲畫面驗收。
+
+## 2026-10-21 R149 README故事背景與工作區清理
+
+- 使用者要求補寫README遊戲故事背景並收尾，接著清理workspace只留必要資料。同輪再回報影片部分畫面未全中文，指定本輪完成後繼續修正。路由命中README標準、文件職責及dist-all契約，沒有新增知識庫或同義工作目錄。
+- README新增1492年航向美洲、四個歐洲勢力、聚落與貿易、原住民及歐洲競爭、稅收與獨立戰爭三段背景，依既有原版國家介紹及遊戲文本整理並附連結。原有32張截圖、交付差別及人工待驗聲明保持，沒有改遊戲或執行測試。
+- 開工盤點專案約36.37GB、workplace約31.81GB，600259個一般檔案。先核對並排除原始輸入、所有存檔、Git素材、目前程式來源、現用語言包、R148有效錄影與正式dist-all；沒有刪除舊交付或原版素材。
+- 在已結束且可寫的報告內，700個重複路徑以SHA-256、檔案長度、權限、UID／GID與mtime完全一致為條件合併，釋出122253312 bytes，路徑及位元組不變。5009個歷史側錄／舊ELF路徑沿tools/evidence_storage.py無損封存，釋出859549696 bytes；逐項核對壓縮指紋與來源清冊，並實際還原、核對雜湊與時間，再重壓確認相同。
+- 本輪完整盤點JSON另可還原封存，釋出其暫存143192064 bytes。操作合計1124995072 bytes，扣除本輪盤點與清冊後，專案淨減約0.97GB至35.40GB，workplace降為30.84GB。其餘主要為已壓縮歷史證據、正式素材、原始輸入與交付，不為縮小數字刪除驗收來源。
+- 封存末步最初以/out別名傳入工具，遭其僅允許/repo/workplace/reports路徑的守門拒絕。已完成的合併與封存沒有重跑；改用正式路徑完成盤點封存與收尾，原始檔案未丟失。清理後v.1.0.8的六包、影片與全部manifest檔案指紋均相同，HD清冊指紋保持。
+- 執行沿既有驗證映像，無網路、UID／GID1000、CPU上限0.5核心，沒有新建image或啟動遊戲。收據為既有R84根的r149-cleanup-result-r1.json、r149-dedup-rows-r1.jsonl與r149-archive-rows-r1.jsonl；完整盤點見r149-workspace-inventory-r1.json.gz及其meta.json。還原入口為tools/evidence_storage.py restore，先在Docker內還原所需原路徑或目錄，再重跑舊檢查器。
+
+收尾確認32張截圖、文件連結與UID／GID保持，無root-owned檔案、錯誤.md目錄或專案殘留容器。只提交README、目前脈絡與本工作紀錄，原版及清理輸出維持Git忽略。

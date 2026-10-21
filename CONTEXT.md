@@ -7,6 +7,8 @@
 | 項目 | 目前狀態與證據 |
 |---|---|
 | 首頁與工程封存 | README保留32張原有截圖、玩家可見的Remastered完成內容與必要交付差別。舊首頁見[首頁封存](docs/archive/README-engineering-20261021.md)，R146以前歷程見[WORKLOG封存](docs/archive/WORKLOG-through-20261021.md)；後續唯一歷程入口仍為根目錄WORKLOG.md。 |
+| R149首頁與空間收尾 | README新增遊戲故事背景，依既有國家介紹及遊戲文本，保留32張截圖。專案約36.37GB降為35.40GB，workplace約31.81GB降為30.84GB，淨釋出約0.97GB。700個路徑合併為內容、權限及時間完全相同的檔案；5009個歷史側錄／舊ELF路徑可還原封存，正式交付、原始輸入、存檔、現行來源與R148實錄保持。清理來源合計釋出1124995072 bytes，其中143192064 bytes為本輪盤點暫存的壓縮。入口[r149-cleanup-result-r1.json](workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r149-cleanup-result-r1.json)。舊驗證需原始檔時，以[封存工具](tools/evidence_storage.py)在Docker內執行 `python3 tools/evidence_storage.py restore workplace/reports/<原路徑或目錄>`。 |
+| 後續人工回報 | 使用者檢視v.1.0.8推廣片後，指出部分畫面仍有英文，要求R149收尾後繼續修正。接續以保留的R148實錄與正常輸入定位欄位，區分缺譯、來源未命中與無HD路徑接線，補齊後另建新版影片及封包；不覆寫已交付v.1.0.8。保留既定英文姓名與專名政策，不重新調查全遊戲。 |
 | Issue收尾 | 2026-10-21依使用者本輪明確決定，以現行接線、三平台雙類完整版與建城影片交付結案。#53、#55、#58至#60、#62至#64已關閉，遠端回讀CLOSED；#61既已關閉。剩餘逐欄、事件、語言、圖像、音訊與平台情境由人工確認，後續另登問題。不將結案當成全情境中文／HD驗收。 |
 | 片頭旋轉動畫HD | MPS旋轉標誌16幀與遊戲標題已按規格069 R113接線並通過來源測試畫面；既有船、太陽、雲、煙與魚形正常路徑驗收保持。採原版時序與位置的HD影格覆蓋，不宣稱整段片頭或獨立3D模型全量驗收。 |
 | 完整版打包定案 | 三平台各固定分為「HD＋原版＋中文化」及「原版＋中文化」，同版號共六包。入口 `tools/package_release.py --format <appimage/windows-zip/macos-zip> --full-game <原版目錄>`；[共同彙整器](tools/package_full_release.py)核對六包與影片後寫入同一dist-all版本。契約見[規格044 R148](docs/spec/044-release-and-promo.md#2026-10-21-r148-三平台完整版與建城實錄交付-ready)。 |
