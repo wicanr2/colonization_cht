@@ -4,6 +4,7 @@
 還原單檔：python3 tools/evidence_storage.py restore workplace/reports/.../gui.json
 列出封存：python3 tools/evidence_storage.py list workplace/reports
 還原整個舊驗證目錄：python3 tools/evidence_storage.py restore workplace/reports/<目錄>
+R153收尾封存只保留索引列出的小型紀錄，可逐檔還原；已刪除錄影、音訊與畫面不保留。
 """
 
 import argparse
@@ -13,6 +14,7 @@ import json
 import os
 from pathlib import Path
 import stat
+import tarfile
 
 
 ROOT = Path(__file__).resolve().parents[1] / "workplace/reports"
@@ -119,6 +121,13 @@ def restore(path, root=ROOT):
     path, packed, metadata = paths(path, root)
     if path.exists():
         raise FileExistsError("原路徑已存在，不覆寫")
+    if not packed.exists() or not metadata.exists():
+        row = restore_retained(path, root)
+        if row is not None:
+            return row
+        for candidate in (packed, metadata):
+            if not candidate.exists():
+                restore_retained(candidate, root)
     for item in (packed, metadata):
         info = item.lstat()
         if not stat.S_ISREG(info.st_mode) or info.st_uid != os.getuid():
@@ -157,6 +166,60 @@ def restore(path, root=ROOT):
         return row
     finally:
         if created_temp:
+            temporary.unlink(missing_ok=True)
+
+
+def restore_retained(path, root=ROOT):
+    """還原收尾保留的小型紀錄；已依使用者要求刪除的錄影不在封存中。"""
+    root = Path(root).resolve()
+    pointer = root / 'retained-metadata.json'
+    if not pointer.is_file():
+        return None
+    catalog = json.loads(pointer.read_text())
+    if catalog.get('schema') != 1:
+        raise ValueError('不支援的歷史紀錄清冊')
+    archive, index = [root / catalog[name] for name in ('archive', 'index')]
+    for name, item in [('archive', archive), ('index', index)]:
+        if not item.resolve().is_relative_to(root) or item.is_symlink() or item.stat().st_uid != os.getuid():
+            raise ValueError('封存路徑或擁有權不符')
+        if digest(item) != catalog[name + '_sha256']:
+            raise ValueError('封存指紋不符')
+    with gzip.open(index, 'rt') as stream:
+        entries = json.load(stream)['files']
+    key = path.relative_to(root.parent.parent).as_posix()
+    row = entries.get(key)
+    if row is None:
+        return None
+    if path.exists() or path.is_symlink() or not path.parent.resolve().is_relative_to(root):
+        raise ValueError('還原位置不符或已存在')
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(path.name + '.restoring')
+    created = False
+    try:
+        with tarfile.open(archive, 'r:gz') as source:
+            member = source.getmember(key)
+            if not (member.isfile() or member.islnk() and member.linkname in entries):
+                raise ValueError('封存成員型態不符')
+            stream = source.extractfile(member)
+            if stream is None:
+                raise ValueError('封存內容缺失')
+            value, total = hashlib.sha256(), 0
+            with temporary.open('xb') as output:
+                created = True
+                while block := stream.read(BLOCK):
+                    value.update(block)
+                    total += len(block)
+                    if total > row['bytes']:
+                        raise ValueError('封存內容超出清冊大小')
+                    output.write(block)
+            if total != row['bytes'] or value.hexdigest() != row['sha256']:
+                raise ValueError('還原內容指紋不同')
+        temporary.chmod(row['mode'])
+        os.utime(temporary, ns=(row['mtime_ns'], row['mtime_ns']))
+        os.link(temporary, path)
+        return {'kind': 'retained-metadata', 'original': key, 'sha256': row['sha256'], 'bytes': total}
+    finally:
+        if created:
             temporary.unlink(missing_ok=True)
 
 

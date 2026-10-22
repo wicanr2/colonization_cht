@@ -28,9 +28,10 @@ def main():
     assert sha(font) == 'b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a'
     capture = json.loads(Path(config['capture_receipt']).read_text())
     proof = json.loads(Path(config['first_colony_receipt']).read_text())
-    assert capture['initial_saves'] == [] and capture['version'] == config['version']
+    capture_version = config.get('capture_version', config['version'])
+    assert capture['initial_saves'] == [] and capture['version'] == capture_version
     assert proof['result'] == 'FIRST_COLONY_CREATED_VIA_NORMAL_INPUTS'
-    assert proof['version'] == config['version']
+    assert proof['version'] == capture_version
     assert capture['video_sha256'] == config['video_sha256']
     assert proof['video_sha256'] == config['video_sha256']
     assert sha(Path(proof['screenshot'])) == proof['screenshot_sha256']
@@ -56,12 +57,17 @@ def main():
         assert clip['end'] <= sources[str(path)]['seconds']
     additional = [json.loads(Path(path).read_text()) for path in config.get('additional_capture_receipts', [])]
     for receipt in additional:
-        assert receipt['version'] == config['version'] and receipt['binary_sha256'] == capture['binary_sha256']
+        assert receipt['version'] == capture_version and receipt['binary_sha256'] == capture['binary_sha256']
         assert receipt['initial_save_sha256']['COLONY00.SAV'] == proof['save_sha256']
     assert {source['sha256'] for source in sources.values()} == {
         capture['video_sha256'], *[receipt['video_sha256'] for receipt in additional]}
     music_seconds = float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(music)]))
     assert music_seconds >= 93
+    campaign = config.get('campaign')
+    if campaign:
+        assert campaign['quote'] == 'Make the right political, military and economic moves'
+        assert campaign['adaptation'] == '你的殖民地，你來決定'
+        assert campaign['source_sha256'] == 'da84944cd3f40ddab36c535eac8f5b515f7416d73187de1525aee5cbc9c6fe2c'
     from PIL import Image, ImageDraw, ImageFont
     bounds, commands = [], []
 
@@ -109,16 +115,26 @@ def main():
         temp = Path(temp)
         title = background()
         text(title, '殖民帝國 Remastered', 270, 96)
-        text(title, '航向新世界，建立第一座城鎮', 480, 52, '#e8d6b5')
-        text(title, '繁體中文 · 精細像素 HD · 原版玩法', 640, 38, '#e8d6b5')
-        text(title, config['version'], 875, 28)
+        if campaign:
+            text(title, campaign['adaptation'], 460, 76)
+            text(title, campaign['quote'], 620, 36, '#e8d6b5')
+            text(title, 'MicroProse 原版廣告節錄；中文為本片改寫', 705, 28, '#e8d6b5')
+            text(title, '繁體中文 · 精細像素 HD · 原版玩法', 805, 36, '#e8d6b5')
+        else:
+            text(title, '航向新世界，建立第一座城鎮', 480, 52, '#e8d6b5')
+            text(title, '繁體中文 · 精細像素 HD · 原版玩法', 640, 38, '#e8d6b5')
+        text(title, config['version'], 885, 28)
+        if capture_version != config['version']:
+            text(title, f'遊玩實錄：{capture_version}；本版僅更新版號與推廣文案', 965, 22, '#e8d6b5')
         title.save(temp / 'opening.png')
         closing = background()
         text(closing, '殖民帝國 Remastered', 170, 76)
         text(closing, 'Linux · Windows · macOS', 340, 48, '#e8d6b5')
         text(closing, 'HD＋原版＋中文化', 500, 46)
         text(closing, '原版＋中文化', 590, 46)
-        text(closing, '航海、登陸，開拓你的新世界', 740, 34, '#e8d6b5')
+        text(closing, campaign['adaptation'] if campaign else '航海、登陸，開拓你的新世界', 740, 44, '#e8d6b5')
+        if campaign:
+            text(closing, '中文主標改寫自 MicroProse 原版平面廣告', 835, 26, '#e8d6b5')
         text(closing, config['version'], 910, 28)
         closing.save(temp / 'closing.png')
         parts = []
@@ -193,6 +209,7 @@ def main():
     (output / 'capture.json').write_text(json.dumps({'version': config['version'], 'capture': capture,
         'additional_captures': additional, 'sources': sources, 'first_colony': proof, 'clips': clips}, ensure_ascii=False, indent=2) + '\n')
     (output / 'rights.json').write_text(json.dumps({'version': config['version'], 'private_only': True,
+        'capture_version': capture_version, 'campaign': campaign,
         'video_method': capture['method'],
         'editing': '剪接及部分加速，保留完整遊戲區；各段來源與擷取方式見capture.json',
         'audio_method': '既有原版OPL連續錄音取3至93秒，響度正規化及淡入淡出；後製配樂，非同步實錄音效',

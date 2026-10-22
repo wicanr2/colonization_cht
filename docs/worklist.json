@@ -1620,25 +1620,29 @@
     {
       "id": "gameplay-promo-video",
       "issue": 64,
-      "state": "in_progress",
-      "title": "新版影片已交付，僅餘Ada暫存清理",
+      "state": "completed",
+      "title": "三平台雙類完整版與正常建城推廣影片交付結案",
       "depends_on": [
         "promo-video"
       ],
-      "acceptance": "R150新版影片與六包已交付，剩餘人工待驗。Ada恢復連線後只刪除本輪r150私用暫存並回讀，持續授權已取得；遠端#64保持CLOSED。",
+      "acceptance": "三平台各HD／原版共六個完整包與90秒正常建城影片交付，來源與指紋可查，剩餘人工驗證。",
       "verify": {
         "kind": "all_present",
         "checks": [
           {
             "path": "CONTEXT.md",
-            "pattern": "本輪遠端r150資料已刪除並回讀確認"
+            "pattern": "R153已結案，剩餘人工驗證"
+          },
+          {
+            "path": "docs/spec/044-release-and-promo.md",
+            "pattern": "R153：原版廣告節錄與正式收尾（限定CONFORMED）"
           },
           {
             "path": "tools/package_full_release.py",
             "pattern": "DELIVERED_MANUAL_VALIDATION_PENDING"
           }
         ],
-        "note": "入口docs/goals/186-display-settings-and-gameplay-video.md及規格044。已錄現行正式版51.933秒真實X11操作，40筆正常輸入、104抽樣／93變化通過；原版WAV另存，與畫面牆鐘不同步。仍未完成90秒音軌、字幕、剪輯與成片驗收，v.1.0.3舊靜態影片保留，不覆寫發行。 2026-10-21 R148使用者明確改以接線與交付結案，剩餘人工待驗。三平台六包與90秒建城實錄已交付v.1.0.8-20261021，遠端Issue回讀CLOSED。此verify只檢查目前交付工具與結案入口，不能取代真機、畫面、聲音或全矩陣驗證。入口CONTEXT.md與規格044 R148。 2026-10-22 R150交付v.1.0.9-20261022，13張成片抽樣及技術檢查通過。正常GUI輸入重播現行正式畫布，非新GPU錄影；未抽樣情境與真機人工待驗。本地in_progress僅追蹤Ada離線r150暫存刪除，不重開遠端Issue。"
+        "note": "入口docs/goals/186-display-settings-and-gameplay-video.md及規格044。已錄現行正式版51.933秒真實X11操作，40筆正常輸入、104抽樣／93變化通過；原版WAV另存，與畫面牆鐘不同步。仍未完成90秒音軌、字幕、剪輯與成片驗收，v.1.0.3舊靜態影片保留，不覆寫發行。 2026-10-21 R148使用者明確改以接線與交付結案，剩餘人工待驗。三平台六包與90秒建城實錄已交付v.1.0.8-20261021，遠端Issue回讀CLOSED。此verify只檢查目前交付工具與結案入口，不能取代真機、畫面、聲音或全矩陣驗證。入口CONTEXT.md與規格044 R148。 2026-10-22 R150交付v.1.0.9-20261022，13張成片抽樣及技術檢查通過。正常GUI輸入重播現行正式畫布，非新GPU錄影；未抽樣情境與真機人工待驗。本地in_progress僅追蹤Ada離線r150暫存刪除，不重開遠端Issue。 2026-10-22 R153依使用者要求加入原版廣告詞，v.1.0.11-20261022六包與影片交付並清理本機workspace。Issue開啟數回讀為0，本地交付項完成。使用者不再使用Ada，本輪未連線；r150遠端暫存仍未確認刪除，保留為外部限制，不冒稱成功。原始錄影依授權清除，小型收據可封存還原。"
       }
     }
   ]

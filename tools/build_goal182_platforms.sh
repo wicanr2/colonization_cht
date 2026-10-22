@@ -1,11 +1,18 @@
 #!/usr/bin/env bash
 # Docker內：跨平台建置中間物，不產生正式發行包。
 set -euo pipefail
-source_dir=${COLONIZATION_GOAL182_SOURCE:-/repo/workplace/reports/goal181-colony-rest/20261004-woodcut-titles/formal-modal2/stable-build}
+source_dir=${COLONIZATION_GOAL182_SOURCE:-/repo/workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r151-formal-runtime-r5}
 out=${COLONIZATION_GOAL182_OUT:-/repo/workplace/reports/goal182-platform-preflight}
-platform=${1:?請指定windows-amd64或macos-universal}
+platform=${1:?請指定linux-amd64、windows-amd64或macos-universal}
 [[ -d "$source_dir" && -d "$out" && $(stat -c %u "$out") == $(id -u) && $(stat -c %g "$out") == $(id -g) ]]
 case "$platform" in
+  linux-amd64)
+    [[ ! -e "$out/colonization-window" ]]
+    export GOOS=linux GOARCH=amd64 CGO_ENABLED=1
+    binary=$out/colonization-window
+    info=$out/linux-build-info.txt
+    sums=$out/linux-build.sha256
+    ;;
   windows-amd64)
     [[ ! -e "$out/colonization-window.exe" ]]
     export GOOS=windows GOARCH=amd64 CGO_ENABLED=0
@@ -39,14 +46,14 @@ if [[ "$platform" == macos-universal ]]; then
     fi
     binary=$out/colonization-window-macos-$arch
     # Intel 合併 DWARF 後不重簽，規格043只封裝不附除錯資料的臨時簽章產物。
-    go build -mod=readonly -trimpath -ldflags="-w -extldflags=-Wl,-adhoc_codesign $version_flags" -o "$binary" .
+    go build -p 2 -mod=readonly -trimpath -ldflags="-w -extldflags=-Wl,-adhoc_codesign $version_flags" -o "$binary" .
     go version -m "$binary" > "$out/macos-$arch-build-info.txt"
   done
   /osxcross/bin/lipo -create "$out/colonization-window-macos-amd64" "$out/colonization-window-macos-arm64" -output "$out/colonization-window-macos-universal"
   /osxcross/bin/lipo -info "$out/colonization-window-macos-universal" > "$out/macos-universal-architectures.txt"
   sha256sum "$out/colonization-window-macos-"{amd64,arm64,universal} > "$out/macos-build.sha256"
 else
-  go build -mod=readonly -trimpath -ldflags="$version_flags" -o "$binary" .
+  go build -p 2 -mod=readonly -trimpath -ldflags="$version_flags" -o "$binary" .
   go version -m "$binary" > "$info"
   sha256sum "$binary" > "$sums"
 fi
