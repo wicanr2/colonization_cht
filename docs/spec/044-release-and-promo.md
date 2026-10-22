@@ -84,3 +84,25 @@ v.1.0.9-20261022六包及90秒成片已寫入同一[dist-all版本](../../dist-a
 [完整版彙整器](../../tools/package_full_release.py)新增明確的--packages-only，與--promo互斥且必選其一。此模式仍逐包核對檔案、原版來源與時間、版號、平台、架構、HD／原版差別、存檔排除及SHA-256；交付清冊明示promo_included=false。這次不重製影片，已交付v.1.0.9影片保持自己的版本與雜湊，不複製到新版本冒充新錄影。GUI與GPU幀率收據另外寫入同版smoke，不冒稱Windows／macOS真機已驗。
 
 R151六包已逐包解出、逐檔核對並交付[同版目錄](../../dist-all/v.1.0.10-20261022/SHA256SUMS.json)。兩類Linux正式AppImage使用內含資源正常啟動、開啟六段速度設定及正常關窗，未指定外部HD或UI資源；收據見[smoke](../../dist-all/v.1.0.10-20261022/smoke/verification.json)。Windows及macOS限建置、版號與封包內容，真機仍待人工。沒有新影片、tag或Release，原版資料及全部完整版不進Git。
+
+## R152：本機新版遊玩實錄（限定CONFORMED）
+
+2026-10-22使用者要求不再設定Ada，重新錄製新版推廣影片。沿v.1.0.10-20261022正式AppImage及內含資料，在本機Intel GPU、最多2核心Docker配額與2個Go執行緒實際錄製X11視窗；半核心及單核心環境的試錄與取樣保留，不列交付。主段沿原版＋中文化包從空存檔正常選擇新局，航海、登陸、按B建城及正常存檔；其後沿R148已定錄法，以HD包正常載入該次同一城鎮，展示HD與五語／圖像／六段CPU倍速設定。所有鍵鼠均經X11送入正式視窗，不能注入RAM、載入預建城鎮或以舊重播當作新錄影。
+
+錄影入口為[GUI錄影控制器](../../tools/capture_gameplay_gui.py)，固定GPU映像內使用--delivery <dist-all/v.1.0.10-20261022> --edition original --output <新的workplace目錄>；HD後段另用--edition hd --graphics hd --initial-capture <主段capture.json>，只複製主段新存檔並逐檔核對指紋。控制器核對正式AppImage雜湊、實際執行中程式指紋與render裝置，建立隔離偏好，以commands.jsonl接收正常鍵鼠、等待、截圖與close，保存實際輸入、原始錄影及事件時間。所有子程序有界並於結束回收。
+
+本機已以12幀確認h264_vaapi可用，另以60幀確認BGRA上傳後由Intel VPP轉為NV12，避免軟體色彩轉換爭用CPU。錄影與合成透過明確掛入的renderD128硬體編碼，FFmpeg以單執行緒運作；只證明前端繪圖與視訊編碼，不宣稱DOS模擬改到GPU。錄影可選--capture-fps 10、15或30，必須保存原始幀率；原始啟動黑幀允許保存，不能在處理開場按鍵前等待可見內容，成片須排除黑幀。合成維持90秒、1920×1080、30fps、78秒遊玩及兩張各6秒字卡，保留完整1280×848視窗。字幕明示實錄、剪接、加速與實際倍速受硬體限制；配樂沿既有原版OPL錄音，明列為後製配樂。逐段抽查繁中與建城畫面，另驗字幕、音視訊、非靜音、黑幀、凍結及來源指紋。
+
+互動錄影沿[VirtualGL官方說明](https://www.virtualgl.org/vgldoc/2_2/)啟用frame spoiling，保留最新畫面，移除額外傳輸限頻，由前端原有60Hz節流限制重畫。這是相機擷取實際X11內容的錄影設定，Draw計數不等於傳送／錄下的不同影格數；不沿用規格056量測時的逐幀傳送設定冒稱新的幀率驗收。主段及HD後段各保留原始30fps影片、實際指令與輸入及正常關窗結果。
+
+通過後以[完整版彙整器](../../tools/package_full_release.py)的--version <同版號> --append-promo --promo <已驗影片目錄> --output <dist-all>只新增同版promo，六包及既有smoke位元組保持；逐檔核對現有雜湊後才新增，禁止覆寫已存在的promo，原子更新總清冊以納入新影片。原v.1.0.9影片保持自己的版本。本輪不新建tag或Release，不上傳原版、私用包或原始錄影。
+
+R152交付：主段r152-live-capture-r5與HD後段r152-hd-capture-r1皆正常關窗，exit_code為0，181與41筆控制器操作均無錯誤。兩者實際程式SHA-256均為4e2c4a05acacb42ceccdf40908a7582bacc1c45e951a04e41317ba4fa1a80c69。主段1493年建城，1494年正常保存的COLONY00.SAV為fa719c29b3dd6db5c14130b63d1cd407a70a94608be3b3f1174141d84584f4ce；HD只正常載入該同一存檔。建城畫面與本次輸入、原始錄影、存檔指紋見first-colony.json及各段capture.json。外部X11操作只追加manual-physical-actions.jsonl，原佇列與收據保持。
+
+本機沿用superfighter-local-capture:noble-egl-20261021-r2，以UID／GID1000、render群組992、明確的/dev/dri/renderD128、2核心、8GiB、160 PID及無網路容器執行。儲存庫唯讀掛到/repo，既有R84輸出根可寫掛到/out。commands.jsonl每行格式為{"seq":1,"action":"game-key","values":["Return"]}；game-key與game-click等待原版步數以跨過輸入取樣，click用於前端工具列，shot存圖，close正常結束。HD後段及本次主段來源快照分別保存在各自controller-source.py。控制器只用X11實體鍵鼠，沒有引擎輸入注入。
+
+合成入口[遊玩影片合成器](../../tools/build_gameplay_promo.py)使用--config <r152-promo-config-r2.json> --output <新的中間目錄>，h264_vaapi、單執行緒；來源與版號、正常輸入及同一存檔皆核對。最終r152-promo-r2為90秒、2700影格、1080p30與48kHz立體聲AAC，8819723 bytes，SHA-256 2874b20d49c780617360a3f7267ed445bbf93686c1878665df4a4db62aecf2e2。13張成片、分鏡補充抽樣與字幕安全框通過。黑幀區間為空，音量峰值-2.3dB；偵測靜止段對應回合制對話、城鎮、暫停設定及字卡，已對照分鏡審查。成片r1的建城木刻尚在逐點顯示，r2改為完整城內與建城後世界地圖，r1不列交付。
+
+彙整器--append-promo完成同版新增，原23個交付檔及六包完全相同，重複追加拒絕且總清冊未改。交付[影片驗收](../../dist-all/v.1.0.10-20261022/promo/validation.json)與[總清冊](../../dist-all/v.1.0.10-20261022/SHA256SUMS.json)均可回查。R151歷史來源指紋以d0976ef核對，現行81份Go及dosgolem副本保持，不以本輪更動的封包工具否定歷史來源。
+
+本次原始操作仍見新大陸命名、海上建城錯誤、部分側欄過渡與國會人選的原文回退，未收入成片；不新增全遊戲中文或HD完成聲明。原版OPL為後製配樂，非同步音效，人耳與其他平台真機仍待人工。未新增tag、Release、Issue變更或Ada連線。

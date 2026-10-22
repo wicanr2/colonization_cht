@@ -30,9 +30,13 @@ def main():
     proof = json.loads(Path(config['first_colony_receipt']).read_text())
     assert capture['initial_saves'] == [] and capture['version'] == config['version']
     assert proof['result'] == 'FIRST_COLONY_CREATED_VIA_NORMAL_INPUTS'
+    assert proof['version'] == config['version']
+    assert capture['video_sha256'] == config['video_sha256']
     assert proof['video_sha256'] == config['video_sha256']
     assert sha(Path(proof['screenshot'])) == proof['screenshot_sha256']
     assert sha(Path(config['normal_inputs'])) == capture['normal_inputs_sha256']
+    assert proof['normal_inputs_sha256'] == capture['normal_inputs_sha256']
+    assert capture['save_files']['COLONY00.SAV'] == proof['save_sha256']
     clips = config['clips']
     assert len(clips) >= 3 and abs(sum(clip['seconds'] for clip in clips) - 78) < .001
     assert any(clip.get('first_colony') and Path(clip.get('video', str(video))) == video
@@ -54,6 +58,8 @@ def main():
     for receipt in additional:
         assert receipt['version'] == config['version'] and receipt['binary_sha256'] == capture['binary_sha256']
         assert receipt['initial_save_sha256']['COLONY00.SAV'] == proof['save_sha256']
+    assert {source['sha256'] for source in sources.values()} == {
+        capture['video_sha256'], *[receipt['video_sha256'] for receipt in additional]}
     music_seconds = float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(music)]))
     assert music_seconds >= 93
     from PIL import Image, ImageDraw, ImageFont
@@ -81,13 +87,24 @@ def main():
         with (output / 'encode.log').open('a') as log:
             subprocess.run(command, stdout=log, stderr=subprocess.STDOUT, timeout=600, check=True)
 
-    prefix = ['ffmpeg', '-y', '-hide_banner', '-nostdin', '-loglevel', 'warning', '-threads', '2', '-filter_threads', '2', '-filter_complex_threads', '2']
+    threads = config.get('threads', 2)
+    assert type(threads) is int and threads in {1, 2}
+    prefix = ['ffmpeg', '-y', '-hide_banner', '-nostdin', '-loglevel', 'warning',
+              '-threads', str(threads), '-filter_threads', str(threads), '-filter_complex_threads', str(threads)]
     encoder = config.get('video_encoder', 'libx264')
-    assert encoder in {'libx264', 'h264_nvenc'}
+    assert encoder in {'libx264', 'h264_nvenc', 'h264_vaapi'}
     preset = config.get('cpu_preset', 'veryfast')
     assert preset in {'ultrafast', 'veryfast'}
-    settings = ['-preset', 'p4', '-rc', 'vbr', '-b:v', '0', '-cq', '18'] if encoder == 'h264_nvenc' else ['-preset', preset, '-crf', '18']
-    encoding = ['-an', '-c:v', encoder] + settings + ['-threads', '2', '-pix_fmt', 'yuv420p']
+    if encoder == 'h264_vaapi':
+        device = config.get('vaapi_device', '/dev/dri/renderD128')
+        assert Path(device).is_char_device()
+        prefix += ['-init_hw_device', 'vaapi=promo:' + device, '-filter_hw_device', 'promo']
+        settings = ['-qp', '20']
+    else:
+        settings = ['-preset', 'p4', '-rc', 'vbr', '-b:v', '0', '-cq', '18'] if encoder == 'h264_nvenc' else ['-preset', preset, '-crf', '18']
+    encoding = ['-an', '-c:v', encoder] + settings + ['-threads', str(threads)]
+    if encoder != 'h264_vaapi':
+        encoding += ['-pix_fmt', 'yuv420p']
     with tempfile.TemporaryDirectory(prefix='colonization-gameplay-promo-') as temp:
         temp = Path(temp)
         title = background()
@@ -109,6 +126,8 @@ def main():
             target = temp / (name + '.mp4')
             if image is not None:
                 fade = 'fade=t=in:d=0.5' if name == 'opening' else 'fade=t=out:st=5.5:d=0.5'
+                if encoder == 'h264_vaapi':
+                    fade += ',format=nv12,hwupload'
                 run(prefix + ['-loop', '1', '-framerate', '30', '-i', str(image), '-t', '6', '-vf', fade] + encoding + [str(target)])
             else:
                 clip = clips[int(name)]
@@ -121,7 +140,8 @@ def main():
                 speed = (clip['end'] - clip['start']) / clip['seconds']
                 clip_video = Path(clip.get('video', str(video)))
                 top = 104 + (848 - sources[str(clip_video)]['height']) // 2
-                filters = f'[0:v]setpts=(PTS-STARTPTS)/{speed:.12f},fps=30[game];[1:v][game]overlay=320:{top}:shortest=1,format=yuv420p[out]'
+                pixel_format = 'format=nv12,hwupload' if encoder == 'h264_vaapi' else 'format=yuv420p'
+                filters = f'[0:v]setpts=(PTS-STARTPTS)/{speed:.12f},fps=30[game];[1:v][game]overlay=320:{top}:shortest=1,{pixel_format}[out]'
                 run(prefix + ['-ss', str(clip['start']), '-t', str(clip['end'] - clip['start']), '-i', str(clip_video),
                               '-loop', '1', '-framerate', '30', '-i', str(still), '-filter_complex', filters, '-map', '[out]',
                               '-t', str(clip['seconds'])] + encoding + [str(target)])
@@ -150,7 +170,7 @@ def main():
     assert (streams['video']['width'], streams['video']['height']) == (1920, 1080)
     assert streams['audio']['codec_name'] == 'aac' and streams['audio']['sample_rate'] == '48000' and streams['audio']['channels'] == 2
     assert abs(float(probe['format']['duration']) - 90) < .1
-    quality = subprocess.run(['ffmpeg', '-hide_banner', '-nostdin', '-threads', '2', '-filter_threads', '2', '-i', str(film),
+    quality = subprocess.run(['ffmpeg', '-hide_banner', '-nostdin', '-threads', str(threads), '-filter_threads', str(threads), '-i', str(film),
                               '-vf', 'blackdetect=d=0.4:pix_th=0.05,freezedetect=n=-60dB:d=2', '-af', 'volumedetect', '-f', 'null', '-'],
                              capture_output=True, text=True, check=True, timeout=300).stderr
     (output / 'quality.log').write_text(quality)
@@ -161,7 +181,7 @@ def main():
     assert all(start < 1 or start >= 89 for start, end in black)
     samples = [3, 9, 16, 23, 30, 37, 44, 51, 58, 65, 72, 81, 87]
     for index, second in enumerate(samples):
-        subprocess.run(['ffmpeg', '-v', 'error', '-threads', '2', '-ss', str(second), '-i', str(film), '-frames:v', '1', str(output / f'frame-{index:02}.png')], check=True)
+        subprocess.run(['ffmpeg', '-v', 'error', '-threads', str(threads), '-ss', str(second), '-i', str(film), '-frames:v', '1', str(output / f'frame-{index:02}.png')], check=True)
     sheet = Image.new('RGB', (1920, 4 * 290), '#251b12')
     for index in range(len(samples)):
         frame = Image.open(output / f'frame-{index:02}.png').convert('RGB')

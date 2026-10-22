@@ -725,3 +725,9 @@ R100沿R84既有工作區，以[其餘片頭動畫正常入口DRAFT](../spec/069
 [規格056 R151](../spec/056-display-settings-runtime.md#r151上方選項與六段速度限定conformed)限定CONFORMED。41項相關測試與14組GUI操作通過；本機Intel MTL GPU、半核心、播放裝置靜音的可見HD畫面，1x為48.451fps，32x為50.567fps，各秒樣本皆超過30fps。這是實際視窗Draw輸出，不保證原版動畫每秒改變30次或任意硬體實現32倍吞吐。Windows／macOS真機、音訊裝置及其他場景留人工。
 
 重跑入口為[工具列與幀率探針](../../tools/probe_toolbar_performance.py)，Docker內使用--renderer vgl-egl及已明確掛入的render裝置。原始收據在既有R84工作根的r151-toolbar-r6，README沿32張原圖只更新設定畫面。三平台雙類新版依[規格044 R151](../spec/044-release-and-promo.md#r151工具列更新版六包限定conformed)封裝，不重製v.1.0.9影片；現行交付以[目前狀態表](../../CONTEXT.md)為準。未抽樣中文／HD與舊版完整HD診斷限制保持。
+
+### R152本機新版推廣影片
+
+依使用者要求不再設定Ada，改以本機Intel GPU錄製正式v.1.0.10-20261022 AppImage。原版＋中文化從空存檔正常新局、航海、登陸，1493年建立Jamestown，1494年正常存檔；HD＋原版＋中文化正常載入同一存檔，展示城鎮與上方五語、原版／HD及六段CPU速度。兩段正常關窗，沒有直接進入功能、RAM修改或套用舊存檔。
+
+[規格044 R152](../spec/044-release-and-promo.md#r152本機新版遊玩實錄限定conformed)限定CONFORMED。90秒、1080p30、78秒遊玩與原版OPL後製配樂，13張成片及補充分鏡、字幕安全框、非靜音、黑幀與靜止段審查通過。影片新增至同版promo，原有23個交付檔、六包及舊影片保持。錄影器入口為[GUI控制器](../../tools/capture_gameplay_gui.py)；既有R84根保存r152-live-capture-r5、r152-hd-capture-r1、r152-promo-config-r2.json及r152-final-audit-r1.json。README保留32張原圖，不新增全中文、全HD或全情境幀率信用，剩餘人工驗證。

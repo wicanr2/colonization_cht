@@ -111,10 +111,54 @@ def inspect_package(path, platform, edition, version):
                              platform, edition, version)
 
 
+def append_promo(target, promo, version):
+    """只新增已驗同版影片，既有封包及驗收檔不得改寫。"""
+    assert target.is_dir() and not (target / 'promo').exists(), '禁止覆寫既有影片'
+    sums_path = target / 'SHA256SUMS.json'
+    assert (target.stat().st_uid, target.stat().st_gid) == (os.getuid(), os.getgid())
+    assert (sums_path.stat().st_uid, sums_path.stat().st_gid) == (os.getuid(), os.getgid())
+    sums = json.loads(sums_path.read_text())
+    assert sums['version'] == version and sums['private_only'] and not sums['promo_included']
+    packages = sums['packages']
+    assert len([name for name in packages if name.endswith(('.zip', '.AppImage'))]) == 6
+    for name, expected in packages.items():
+        relative = PurePosixPath(name)
+        assert not relative.is_absolute() and '..' not in relative.parts
+        path = target / name
+        assert path.is_file() and not path.is_symlink()
+        assert path.stat().st_size == expected['bytes'] and digest(path) == expected['sha256'], name
+    validation = json.loads((promo / 'validation.json').read_text())
+    assert validation['version'] == version and validation['includes_first_colony']
+    assert validation['result'] == 'PASS_GAMEPLAY_PROMO_DELIVERY'
+    film = promo / f'colonization-cht-{version}-promo.mp4'
+    assert digest(film) == validation['sha256']
+    files = sorted(promo.rglob('*'))
+    assert files and all(not path.is_symlink() for path in files)
+    assert all(path.suffix.lower() in {'.mp4', '.png', '.json', '.log', '.srt', '.txt'}
+               for path in files if path.is_file())
+    shutil.copytree(promo, target / 'promo')
+    for source in files:
+        if not source.is_file():
+            continue
+        path = target / 'promo' / source.relative_to(promo)
+        path.chmod(0o644)
+        assert digest(path) == digest(source)
+        packages[path.relative_to(target).as_posix()] = {'sha256': digest(path), 'bytes': path.stat().st_size}
+    sums['promo_included'] = True
+    sums['delivery'] = 'three-platform-two-editions-and-first-colony-gameplay-promo'
+    temp = sums_path.with_suffix('.json.tmp')
+    assert not temp.exists()
+    temp.write_text(json.dumps(sums, ensure_ascii=False, indent=2) + '\n')
+    temp.replace(sums_path)
+    print(json.dumps({'result': 'APPENDED_PROMO_EXISTING_PACKAGES_PRESERVED', 'version': version,
+                      'directory': str(target), 'promo': str(target / 'promo' / film.name)}, ensure_ascii=False))
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--version', required=True)
-    parser.add_argument('--staging', type=Path, required=True)
+    parser.add_argument('--staging', type=Path)
+    parser.add_argument('--append-promo', action='store_true', help='只新增同版已驗影片，逐檔核對並保留既有六包及smoke')
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument('--promo', type=Path, help='同版已驗建城影片')
     mode.add_argument('--packages-only', action='store_true', help='本輪只更新六包，不重製或冒用舊版影片')
@@ -123,6 +167,11 @@ def main():
     assert VERSION.fullmatch(args.version)
     assert args.output.is_dir() and args.output.stat().st_uid == os.getuid()
     target = args.output / args.version
+    if args.append_promo:
+        assert args.promo and not args.packages_only and args.staging is None
+        append_promo(target, args.promo, args.version)
+        return
+    assert args.staging is not None, '建立新版六包必須指定--staging'
     assert not target.exists(), '禁止覆寫既有版本'
     packages, checks = [], {}
     for directory, platform in [('linux', 'linux-x86_64'), ('windows', 'windows-x86_64'), ('macos', 'macos-universal')]:

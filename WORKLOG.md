@@ -112,3 +112,23 @@ r151-toolbar-r1實際14組速度／語言／主題與取消、正常關窗及原
 彙整器新增與--promo互斥的--packages-only，明示promo_included=false；本輪不重製v.1.0.9影片，不以舊影片冒充新版。README的32張截圖只更新設定畫面，PNG直接取當次GUI原檔，SHA-256 7ddaa932aed28fc208ffc0eca32625cdf11e14e63eba5b54d0c3d9ab1f06fb0c；來源與前一張記錄同步保存。現況表、目標186、規格044與056同步，不變更Issue或普查數量，也不新增全中文、全HD、全矩陣或原版精確對拍聲明。原版與私用包不提交，不新增tag或Release。
 
 本機只清除r151-staging-r1與r151-go-cache-r1兩個精確目錄；先核對六包與正式交付相同、Go快取README、UID／GID及無SAV，再刪除可重建副本，共釋出2527846400 bytes。正式版本、原始輸入、全部存檔、HD原PNG、來源與必要收據保持。Ada仍離線，舊r150遠端暫存待恢復連線後清理，沒有新增傳輸。收據沿既有R84根：r151-toolbar-r6、r151-packaged-linux-window-r1、r151-package-{linux,windows,macos}-r1.json及r151-local-cleanup-r1.json；交付smoke與SHA256SUMS另保存最小驗收集合。
+
+## 2026-10-22 R152：本機重錄推廣影片
+
+使用者要求不再設定Ada，改錄新版影片。本輪未連線或傳輸至Ada，沿用既有Intel GPU工具映像。路由載入game-promo-video-ffmpeg及規格044，錄影、剪輯與檢查皆在Docker內。原版資料、遊戲程式及六個正式包沿v.1.0.10-20261022，未重新建置引擎。
+
+前四次環境試錄保持未通過。r1半核心、Go單工作者與軟體色彩轉換等待逾時；r2在送出片頭按鍵前等待可見畫面，屬控制器順序問題。r3曾由一核心提高至兩核心，調整VirtualGL傳送節奏並暫停錄影器，沒有建城，不採用其影片。r4由代理提早關窗取得Go效能取樣，非產品自行崩潰。r4取樣只有41.44秒CPU樣本，不能用146.8秒牆鐘推定單一瓶頸。各次來源與trial-status保留於既有R84根。
+
+正式主段r152-live-capture-r5使用兩核心上限、Go兩工作者、Intel VPP及VAAPI。主機有14個邏輯核心；先前半核心為代理選擇，使用者沒有指定該數值。VirtualGL採互動式frame spoiling與不加額外幀率上限，前端原有節流保持。相機30fps只表示錄影設定，不取代R151實際Draw量測或全場景幀率驗收。
+
+主段從空存檔目錄啟動正式原版＋中文化AppImage，正常新局、航海、登陸、輪替單位、B建城及Return命名。1493年建立Jamestown，正常城內畫面已抽樣；1494年由遊戲選單保存COLONY00.SAV，SHA-256為fa719c29b3dd6db5c14130b63d1cd407a70a94608be3b3f1174141d84584f4ce。短點擊可能未跨原版輸入取樣，改以正常X11移動、按住、放開並等待步數，外部實體操作另記manual-physical-actions.jsonl。沒有RAM修改、直接進入功能或套用舊存檔。主段正常關窗，exit_code為0，原始影片及輸入雜湊見capture.json與first-colony.json。
+
+HD後段r152-hd-capture-r1沿正式HD AppImage正常讀入主段新存檔，進入同一Jamestown，錄到HD城內與五語／原版／HD／1x至32x選項，並以16x及32x點選確認。正常關窗，exit_code為0；兩段181及41筆控制器操作均無錯誤。正式Linux程式仍4e2c4a05…，HD存檔與主段保存的fa719c29…相同。沒有修改原版、前端Go、語言資源、HD原PNG、存檔格式或dosgolem副本。
+
+工具新增capture_gameplay_gui.py供本機正常視窗錄影，build_gameplay_promo.py新增VAAPI與執行緒上限，並核對兩段版號、程式、錄影與同一存檔指紋。package_full_release.py增加--append-promo，只在核對舊交付與新影片後追加同版promo，拒絕覆寫。原始命令及收據完整保存；審查曾拒絕重寫既有操作佇列及側錄的嘗試，之後保留全部原檔，只追加正常X11操作，未繞過拒絕。
+
+成片r1技術檢查通過，但建城木刻仍逐點顯示，未列交付。r2改採完整城內及建城後世界地圖，保留新局、航海、登陸與HD工具列。最終90秒、2700影格、1920×1080／30fps、48kHz立體聲AAC，78秒遊玩，前後字卡各6秒。大小8819723 bytes，SHA-256 2874b20d49c780617360a3f7267ed445bbf93686c1878665df4a4db62aecf2e2。13張成片與額外分鏡抽樣、字幕安全框與完整1280×848遊戲區通過；黑幀區間空，非靜音且峰值-2.3dB。靜止偵測段對照為回合制畫面、設定暫停與字卡，未當作效能驗收。OPL錄音沿既有來源，僅作後製配樂，人耳及未抽樣情境保持人工待驗。
+
+影片與24個promo檔已加入dist-all/v.1.0.10-20261022/promo，原23個交付檔及六包指紋全部保持。總清冊原子更新，重複追加的負向檢查拒絕且總清冊雜湊不變。README只更新穩定影片介紹，32張原PNG不改；現況、規格與目標同步。新大陸命名、海上建城錯誤、側欄過渡與國會人選的原文回退未收進成片，沒有增加全中文或全HD完成信用。
+
+收尾核對現行81份Go、d0976ef時15份公開來源、當次兩段實際程式與輸入／錄影、32張README圖、全部交付雜湊與UID／GID。來源仍dosgolem 82a14b266e1b5bc904e2d0fe507daf6bea41a013乾淨，upstream推送DISABLED。沒有新Go測試、全矩陣、原版精確對拍、tag、Release或Issue寫入。本輪有界容器均以--rm回收，沿用既有映像，沒有新建映像；必要原始錄影、存檔及來源收據留本機，不加入Git。入口r152-final-audit-r1.json。
