@@ -1,13 +1,120 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"image"
 	"testing"
+	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	golem "github.com/wicanr2/dosgolem"
 )
+
+func TestWindowQueuedInputEdgesRemainOrdered(t *testing.T) {
+	g := &windowGame{}
+	press := windowPhysicalInput{x: 500, y: 300, focused: true, click: true, buttons: [3]bool{true}, chars: []rune("b")}
+	release := windowPhysicalInput{x: 500, y: 300, focused: true, allReleased: true}
+	for _, p := range []windowPhysicalInput{press, release, release} {
+		if err := g.queuePhysical(p); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if len(g.physical) != 2 || !g.physical[0].click || string(g.physical[0].chars) != "b" || !g.physical[1].allReleased {
+		t.Fatal(g.physical)
+	}
+	for i := 0; i < 510; i++ {
+		p := press
+		p.x = i
+		if err := g.queuePhysical(p); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if err := g.queuePhysical(press); err == nil || len(g.physical) != 512 {
+		t.Fatal("溢位未明確拒絕")
+	}
+}
+
+func TestCPUQuantumReservesPresentationHeadroom(t *testing.T) {
+	q := 32 * time.Millisecond
+	for i := 0; i < 8; i++ {
+		next := adaptiveCPUQuantum(q, 32, 19)
+		if next >= q && q > time.Millisecond {
+			t.Fatal("低幀率沒有讓出執行時間", q, next)
+		}
+		q = next
+	}
+	if q >= 8*time.Millisecond {
+		t.Fatal("模擬仍持續占用完整高倍速批次", q)
+	}
+	for i := 0; i < 100; i++ {
+		q = adaptiveCPUQuantum(q, 32, 60)
+	}
+	if q != 32*time.Millisecond {
+		t.Fatal("有輸出餘裕仍無法增加CPU時間", q)
+	}
+	if got := adaptiveCPUQuantum(q, 1, 60); got > 8*time.Millisecond {
+		t.Fatal("1x執行上限被高倍速沿用", got)
+	}
+	if got := adaptiveCPUQuantum(time.Millisecond, 32, 1); got != time.Millisecond {
+		t.Fatal("失去最低進度預算", got)
+	}
+}
+
+func TestWindowCPUQuantumPreservesDeterministicState(t *testing.T) {
+	newGame := func() *windowGame {
+		m := golem.New()
+		d := golem.NewDOS(m, t.TempDir())
+		t.Cleanup(func() { d.Close() })
+		// 測試用8086迴圈只驗Step分批，不替代原版或HD畫面驗收。
+		copy(m.Mem, []byte{0x40, 0xeb, 0xfd})
+		m.CPU.Seg[golem.CS] = 0
+		m.CPU.IP = 0
+		return &windowGame{m: m, d: d, nextAudio: windowStepsPerUpdate}
+	}
+	a, b := newGame(), newGame()
+	for a.m.Steps < 100000 {
+		if err := a.advance(100000); err != nil {
+			t.Fatal(err)
+		}
+	}
+	for b.m.Steps < 100000 {
+		if err := b.m.Step(); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if !bytes.Equal(a.m.Mem, b.m.Mem) || a.m.CPU.R != b.m.CPU.R || a.m.CPU.IP != b.m.CPU.IP || a.m.Ticks != b.m.Ticks || a.m.Frames != b.m.Frames {
+		t.Fatal("背景分批改變模擬狀態")
+	}
+	for _, speed := range displaySpeeds {
+		if got := windowStepBudget(speed); got != uint64(speed)*200000 {
+			t.Fatal(speed, got)
+		}
+	}
+}
+
+func TestWindowFrameMailboxPublishesCompleteImage(t *testing.T) {
+	g := &windowGame{}
+	old := activeWindow
+	activeWindow = g
+	defer func() { activeWindow = old }()
+	im := image.NewRGBA(image.Rect(0, 0, 8, 8))
+	im.Pix[0] = 123
+	finished := make(chan struct{})
+	go func() { frontendFrame(im, map[string]any{"events": 0}); close(finished) }()
+	select {
+	case <-finished:
+	case <-time.After(time.Second):
+		t.Fatal("畫布交接沒有完成")
+	}
+	if g.latest != nil {
+		t.Fatal("背景直接覆寫使用中的畫布")
+	}
+	g.pullFrame()
+	if g.latest != im || g.latest.Pix[0] != 123 || !g.dirty || g.perf.canvas != 1 {
+		t.Fatal("畫布未完整提交")
+	}
+}
 
 func TestSeaRowOcclusionRecovery(t *testing.T) {
 	r := &seaRow{parts: []seaPart{{text: "測試"}}, bbox: image.Rect(0, 0, 10, 1), firstOld: map[int]byte{}, lastVal: map[int]byte{}}

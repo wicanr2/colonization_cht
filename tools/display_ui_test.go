@@ -43,7 +43,7 @@ func TestDisplayUICatalogAndRealFontGeometry(t *testing.T) {
 	u := &displayUI{catalog: c, fonts: f}
 	for _, language := range displayUILanguages {
 		for _, phase := range []displayPhase{displayPlaying, displayOpening, displayEditing, displayResuming} {
-			u.settings = displaySettings{phase: phase, current: displayOptions{language, "original"}, draft: displayOptions{language, "hd"}}
+			u.settings = displaySettings{phase: phase, current: displayOptions{language, "original", 0}, draft: displayOptions{language, "hd", 0}}
 			for _, problem := range []string{"", "ui.error.unavailable", "ui.error.save"} {
 				u.settings.problem = problem
 				image, err := u.canvas()
@@ -53,7 +53,7 @@ func TestDisplayUICatalogAndRealFontGeometry(t *testing.T) {
 			}
 		}
 	}
-	u.settings = displaySettings{phase: displayEditing, current: displayOptions{"zh-Hant", "original"}}
+	u.settings = displaySettings{phase: displayEditing, current: displayOptions{"zh-Hant", "original", 0}}
 	c["ui.description"]["zh-Hant"] = strings.Repeat("漢", 5000)
 	if _, err := u.canvas(); err == nil {
 		t.Fatal("超長文案被裁切或超界繪製")

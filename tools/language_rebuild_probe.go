@@ -1684,13 +1684,13 @@ func draftExportRebuilds(targets map[string]*draftLanguageTarget, j *nativeJourn
 		return draftNativeFrame{j, canvas, buffer, indexed, palette, cursor, step, mode}
 	}}
 	preferences := out + ".display-preferences.json"
-	initial := displayOptions{"en", "original"}
+	initial := displayOptions{"en", "original", 0}
 	if err := applyDisplayPreferences(preferences, initial, backend.prepare); err != nil {
 		return err
 	}
 	var transactions []map[string]any
 	for _, locale := range []string{"zh-Hant", "zh-Hans", "ja", "ko", "en"} {
-		options := displayOptions{locale, "original"}
+		options := displayOptions{locale, "original", 0}
 		old := backend.active
 		oldPixels := hash(old.frame.Pix)
 		saved, err := os.ReadFile(preferences)

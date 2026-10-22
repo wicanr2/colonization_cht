@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Docker內核對並彙整三平台兩類完整版與建城實錄影片；完整包只留本機。"""
+"""Docker內核對並彙整三平台兩類完整版；可附同版建城影片，完整包只留本機。"""
 
 import argparse
 import hashlib
@@ -115,7 +115,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--version', required=True)
     parser.add_argument('--staging', type=Path, required=True)
-    parser.add_argument('--promo', type=Path, required=True)
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument('--promo', type=Path, help='同版已驗建城影片')
+    mode.add_argument('--packages-only', action='store_true', help='本輪只更新六包，不重製或冒用舊版影片')
     parser.add_argument('--output', type=Path, default=Path('/repo/dist-all'))
     args = parser.parse_args()
     assert VERSION.fullmatch(args.version)
@@ -140,30 +142,34 @@ def main():
             checks[path.name] = inspect_package(path.resolve(), platform, edition, args.version)
             packages.append((path, relative, expected))
     assert len(packages) == 6
-    validation = json.loads((args.promo / 'validation.json').read_text())
-    assert validation['version'] == args.version and validation['includes_first_colony']
-    assert validation['result'] == 'PASS_GAMEPLAY_PROMO_DELIVERY'
-    film = args.promo / f'colonization-cht-{args.version}-promo.mp4'
-    assert digest(film) == validation['sha256']
-    promo_files = sorted(args.promo.rglob('*'))
-    assert all(not path.is_symlink() for path in promo_files)
-    assert all(path.suffix.lower() in {'.mp4', '.png', '.json', '.log', '.srt', '.txt'}
-               for path in promo_files if path.is_file())
+    validation, film = None, None
+    if args.promo:
+        validation = json.loads((args.promo / 'validation.json').read_text())
+        assert validation['version'] == args.version and validation['includes_first_colony']
+        assert validation['result'] == 'PASS_GAMEPLAY_PROMO_DELIVERY'
+        film = args.promo / f'colonization-cht-{args.version}-promo.mp4'
+        assert digest(film) == validation['sha256']
+        promo_files = sorted(args.promo.rglob('*'))
+        assert all(not path.is_symlink() for path in promo_files)
+        assert all(path.suffix.lower() in {'.mp4', '.png', '.json', '.log', '.srt', '.txt'}
+                   for path in promo_files if path.is_file())
     # 全部核對完成後才建立唯一現行交付根。
     target.mkdir()
     (target / 'full-local').mkdir()
     sums = {'version': args.version, 'private_only': True, 'manual_validation': 'pending',
-            'delivery': 'three-platform-two-editions-and-first-colony-gameplay-promo', 'packages': {}}
+            'delivery': 'three-platform-two-editions' + ('-and-first-colony-gameplay-promo' if args.promo else ''),
+            'promo_included': bool(args.promo), 'packages': {}}
     for path, relative, expected in packages:
         destination = target / relative
         shutil.copyfile(path, destination)
         destination.chmod(0o755 if path.suffix == '.AppImage' else 0o644)
         assert digest(destination) == expected['sha256']
         sums['packages'][relative] = expected
-    shutil.copytree(args.promo, target / 'promo')
-    for path in (target / 'promo').rglob('*'):
-        if path.is_file():
-            sums['packages'][path.relative_to(target).as_posix()] = {'sha256': digest(path), 'bytes': path.stat().st_size}
+    if args.promo:
+        shutil.copytree(args.promo, target / 'promo')
+        for path in (target / 'promo').rglob('*'):
+            if path.is_file():
+                sums['packages'][path.relative_to(target).as_posix()] = {'sha256': digest(path), 'bytes': path.stat().st_size}
     verification = target / 'full-local' / 'verification.json'
     verification.write_text(json.dumps({
         'version': args.version, 'private_only': True, 'manual_validation': 'pending',
@@ -173,7 +179,8 @@ def main():
     sums['packages']['full-local/verification.json'] = {'sha256': digest(verification), 'bytes': verification.stat().st_size}
     (target / 'SHA256SUMS.json').write_text(json.dumps(sums, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps({'result': 'DELIVERED_MANUAL_VALIDATION_PENDING', 'version': args.version,
-                      'directory': str(target), 'full_packages': len(packages), 'promo': str(target / 'promo' / film.name)}, ensure_ascii=False))
+                      'directory': str(target), 'full_packages': len(packages),
+                      'promo': str(target / 'promo' / film.name) if film else None}, ensure_ascii=False))
 
 
 if __name__ == '__main__':

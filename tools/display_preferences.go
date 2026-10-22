@@ -1,6 +1,6 @@
 package main
 
-// 規格056：只保存前端既有的兩個顯示選項，不接觸原版資料或存檔。
+// 規格056：只保存前端顯示與速度選項，不接觸原版資料或存檔。
 import (
 	"bytes"
 	"encoding/json"
@@ -39,10 +39,18 @@ func decodeDisplayPreferences(data []byte) (displayOptions, error) {
 			return options, err
 		}
 		key, ok := token.(string)
-		if !ok || seen[key] || (key != "language" && key != "graphics") {
+		if !ok || seen[key] || (key != "language" && key != "graphics" && key != "speed") {
 			return options, fmt.Errorf("invalid or repeated display setting: %v", token)
 		}
 		seen[key] = true
+		if key == "speed" {
+			var speed int
+			if err := d.Decode(&speed); err != nil || speed <= 0 {
+				return options, fmt.Errorf("invalid CPU speed")
+			}
+			options.Speed = speed
+			continue
+		}
 		token, err = d.Token()
 		value, ok := token.(string)
 		if err != nil || !ok {
@@ -55,7 +63,7 @@ func decodeDisplayPreferences(data []byte) (displayOptions, error) {
 		}
 	}
 	token, err = d.Token()
-	if err != nil || token != json.Delim('}') || len(seen) != 2 {
+	if err != nil || token != json.Delim('}') || !seen["language"] || !seen["graphics"] {
 		return options, fmt.Errorf("incomplete display settings")
 	}
 	if _, err = d.Token(); err != io.EOF {
@@ -64,7 +72,7 @@ func decodeDisplayPreferences(data []byte) (displayOptions, error) {
 	return options, options.validate()
 }
 
-func readDisplayPreferences(path, language, graphics string) (displayOptions, error) {
+func readDisplayPreferences(path, language, graphics string, speed ...int) (displayOptions, error) {
 	options := displayOptions{Language: "zh-Hant", Graphics: "original"}
 	file, err := os.Open(path)
 	if err == nil {
@@ -83,6 +91,12 @@ func readDisplayPreferences(path, language, graphics string) (displayOptions, er
 	}
 	if graphics != "" {
 		options.Graphics = graphics
+	}
+	if len(speed) > 1 || len(speed) == 1 && speed[0] < 0 {
+		return options, fmt.Errorf("invalid CPU speed override")
+	}
+	if len(speed) == 1 && speed[0] != 0 {
+		options.Speed = speed[0]
 	}
 	return options, options.validate()
 }

@@ -84,3 +84,31 @@ ea1413ce…重播已見命名正文、城內雙語名稱／季節／金錢及無
 本輪原late清理腳本因無法核對範圍被自動審核拒絕，未執行。先唯讀核對完整腳本、逐包雜湊與快取README，再縮小至三個精確目錄：未發布舊候選r150-staging-r1、與正式交付位元相同的r150-staging-r2、可重建Go快取r150-go-cache-release-r2。清理計畫e29b00af…核對後通過審核，實際再釋出3909906432 bytes，連同前段合計6798004224 bytes。剩餘截圖、SAV、原始資料、原／新二進位、來源與收據全部保留；沒有執行原late影格刪除。
 
 最終收尾收據r150-final-audit-r1.json核對81份Go及10份公開來源指紋、六包與33個交付檔、九個畫面檢查點及README的32張圖片。檔案UID／GID皆1000，沒有root-owned檔案或錯誤.md目錄。本輪colonization-r150容器清單為空；原版資料、存檔及dist-all交付沒有加入Git。HD完整診斷未通過、真機及人耳待驗、Ada離線暫存待清理等限制保持。
+
+## 2026-10-22 R151：工具列、模擬CPU倍速與HD輸出，進行中
+
+使用者明確要求上方HD Theme、五語與1x至32x六段速度，另確認提高的是dosgolem模擬CPU，主機維持低負載。沿規格056補READY契約，再接工具列與可選speed偏好欄位，舊兩欄設定保持1x；原版資料、時鐘、規則、存檔與固定重播路徑保持。正常遊玩改由單一背景擁有者執行有界DOS批次及畫布合成，視窗接收完成畫布，輸入依實體狀態順序排隊；狀態寫檔限頻，音訊維持固定200000步取樣邊界。
+
+組裝器發現仍釘住R150修正前的string_overlay.go。先核對目前檔與已提交9212241完全相同，再更新該來源指紋，未放寬原版或素材指紋。固定Go1.26.7／Ebitengine2.9.9容器以半核心完成40項針對性測試，零失敗零skip，含偏好反例、保存失敗、按下／放開順序、畫布交接及分批後機器狀態。
+
+r151-toolbar-r1實際14組速度／語言／主題與取消、正常關窗及原版輸入隔離通過，但首次HD選項下Draw只有6.448fps，且原版遊戲區尚黑，明確不列HD畫面或30fps通過。軟體繪圖限制LP_NUM_THREADS=1後仍偏低，r151-toolbar-r2暫停DOS後仍1.82至4.69fps，判定不能只靠CPU倍速解決。讀回GUI驗證路由並加入可關閉的CPU profile，收據r151-profile-r1；不以編碼幀率或黑畫面冒稱遊戲輸出通過。Ada本輪仍SSH逾時，沒有遠端新傳輸或清理完成聲明。
+
+效能勘誤：初看Go profile的15.77秒／1.51秒CPU，曾強推論為垂直同步等待。移除等待並加可休眠60Hz節奏後仍低幀率；同次cgroup實耗49.06%與llvmpipe原生執行緒證明Go取樣漏計C端耗時，原推論撤回。r151-toolbar-r3保留wait-diagnosis.json及代理主動SIGQUIT取得的DrawElements堆疊，訊號不是產品自行崩潰；控制器後續import逾時也列診斷環境結果。量測改要求遊戲區可見及當次HD繪製計數為正，禁止設定遮罩或黑畫面冒充。
+
+本機找到Intel i915 renderD128，沿用既有superfighter-local-capture:noble-egl-20261021-r2。半核心、UID1000、group992與單一render裝置的唯讀資料測試，已讀回Intel硬體OpenGL4.6／Mesa25.2.8。正式前端r151-formal-runtime-r4、Linux fe7ab56e…再通過同組40測試，現以r151-toolbar-r4做硬體HD輸出與工具列驗收，仍未先宣告30fps通過。未建立新工具映像、未修改其他專案或主機裝置權限。
+
+## 2026-10-22 R151：工具列完成與六包交付
+
+收尾收據r151-final-audit-r1.json通過81份Go、15份公開來源、41項測試、14組GUI、兩類Linux封包啟動、32張README圖片與23個交付檔的核對。UID／GID均為1000，沒有root-owned檔案、錯誤.md目錄或原版誤追蹤。本輪及既有colonization容器清單為空；沿用既有映像，沒有建立新映像。
+
+前列軟體繪圖失敗及效能勘誤保持。本輪依使用者確認的模擬CPU倍速，完成上方五語、原版／HD及1x、2x、4x、8x、16x、32x。舊兩欄偏好維持1x，可選speed嚴格拒絕無效值。正常遊玩改由單一背景擁有者推進DOS與完成畫布，輸入有序排隊，設定期間暫停；依實際Draw調整每批執行時間，實際加速以硬體可用效能為限。原版規則、資料、時鐘、存檔及固定驗收重播保持。
+
+正式來源r151-formal-runtime-r5及r151-source-r5.json固定81份Go與15份公開來源；Go1.26.7、Ebitengine2.9.9完成41項針對性測試，零失敗零skip。Linux程式SHA-256 4e2c4a05acacb42ceccdf40908a7582bacc1c45e951a04e41317ba4fa1a80c69，Windows e657c9e6ed098ae506f16116e795e7dbe5bb2614690b84959d3ac9637d30a360，macOS通用檔a81b01d39f769626137ca2fb9926c5b47a6f6ef38d277a6ff2d32afa854b01a9；兩個macOS切片的內嵌版號均為v.1.0.10-20261022。dosgolem獨立副本82a14b266e1b5bc904e2d0fe507daf6bea41a013乾淨，upstream推送仍為DISABLED。
+
+本機Intel MTL／i915／Mesa25.2.8，沿既有VirtualGL映像，在半核心、8GiB、GOMAXPROCS=1與播放裝置靜音條件下，以正常Enter跳過片頭。可見HD且實際繪製計數為正後，1x為48.451fps，每秒46.456至50.820；32x為50.567fps，每秒45.929至56.022。實際前端行程開啟renderD128，無壓縮X11傳輸、停用frame spoiling，沒有以glxinfo或影片編碼值代替實際Draw。14組GUI操作、取消／保存、暫停步數、工具列輸入隔離、無新SAV與正常關窗通過。CPU吞吐與畫布更新另記，不外推不同原版動畫幀數或任意硬體32倍。
+
+三平台各HD＋原版＋中文化及原版＋中文化，共六包，以v.1.0.10-20261022交付dist-all。逐包核對288個原版檔、328個語言資源、Noto、版號、架構、啟動器、原版時間及所有payload雜湊；HD各387素材檔，原版各零HD，均無使用者存檔。Windows說明BOM／CRLF與macOS雙切片簽章結構通過。兩類Linux正式AppImage沿內含資源正常啟動、開啟設定與正常關窗，沒有外部HD／UI覆寫。Windows／macOS真機、音訊裝置與未抽樣情境仍留人工。
+
+彙整器新增與--promo互斥的--packages-only，明示promo_included=false；本輪不重製v.1.0.9影片，不以舊影片冒充新版。README的32張截圖只更新設定畫面，PNG直接取當次GUI原檔，SHA-256 7ddaa932aed28fc208ffc0eca32625cdf11e14e63eba5b54d0c3d9ab1f06fb0c；來源與前一張記錄同步保存。現況表、目標186、規格044與056同步，不變更Issue或普查數量，也不新增全中文、全HD、全矩陣或原版精確對拍聲明。原版與私用包不提交，不新增tag或Release。
+
+本機只清除r151-staging-r1與r151-go-cache-r1兩個精確目錄；先核對六包與正式交付相同、Go快取README、UID／GID及無SAV，再刪除可重建副本，共釋出2527846400 bytes。正式版本、原始輸入、全部存檔、HD原PNG、來源與必要收據保持。Ada仍離線，舊r150遠端暫存待恢復連線後清理，沒有新增傳輸。收據沿既有R84根：r151-toolbar-r6、r151-packaged-linux-window-r1、r151-package-{linux,windows,macos}-r1.json及r151-local-cleanup-r1.json；交付smoke與SHA256SUMS另保存最小驗收集合。

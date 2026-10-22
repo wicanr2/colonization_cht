@@ -1,6 +1,6 @@
 {
   "kind": "README actual development screenshots",
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "binary_sha256": "cddf437dea2f3d9e71da7e906fb47322a7ebbd85cbe188aa7f60030883097cf2",
   "formal_binary_sha256": "cddf437dea2f3d9e71da7e906fb47322a7ebbd85cbe188aa7f60030883097cf2",
   "source_build_sha256": "1f2ee3568dfe5e947966fafbca9abf3aad65a058c3a7e9ad9b48ef674acb51af",
@@ -86,20 +86,24 @@
     },
     {
       "file": "display-settings-zh.png",
-      "sha256": "e429e44989d86f027272896ace0623167a3c7eede34ce5a121ac7d69641b02ff",
+      "sha256": "7ddaa932aed28fc208ffc0eca32625cdf11e14e63eba5b54d0c3d9ab1f06fb0c",
       "size": [
         1280,
         848
       ],
       "language": "zh-Hant",
       "graphics": "hd",
-      "binary_sha256": "070483eaac00568e3d79517d11dd444c84a2ec1684a3d8fedc96c437ff4ba9b6",
-      "source_receipt": "workplace/reports/goal186-display-hd/hd-world-small-terrain-r64/readme-settings-r1/restored/settings.png",
-      "source_check_sha256": "3d76e61e47aba6e52b31d40cfccc449e184033e4776972c24036967b068bb4d0",
-      "source_kind": "real X11 window screenshot from the uninstrumented formal binary, normal display-settings panel",
+      "cpu_speed": 32,
+      "version": "v.1.0.10-20261022",
+      "binary_sha256": "4e2c4a05acacb42ceccdf40908a7582bacc1c45e951a04e41317ba4fa1a80c69",
+      "formal_binary_sha256": "4e2c4a05acacb42ceccdf40908a7582bacc1c45e951a04e41317ba4fa1a80c69",
+      "source_receipt": "workplace/reports/goal186-display-hd/hd-opening-animation-sources-r84/r151-toolbar-r6/settings-speed-32.png",
+      "source_check_sha256": "9558ad84a93a3ed08075eefdc3c9e92ed1109089ec8bbe48fae371f6df995364",
+      "source_build_sha256": "2ae977a4dcd273bfd953275959554b79bd6c9791a38812402e6dd176f58b1d59",
+      "source_kind": "正式程式的Intel GPU／VirtualGL實際視窗截圖，正常設定面板，沒有裁切、重畫或重編碼",
       "capture_pixels_unchanged": true,
-      "code_commit": "468e835ffb5a36f9e012797104bfe19e7dcaec82",
-      "formal_hd_assets": 66
+      "formal_hd_assets": 386,
+      "scope": "R151工具列、五語與六段CPU倍速、原版／HD選項及HD輸出抽驗；不新增原版精確對拍或全情境HD信用"
     },
     {
       "file": "hd-custom-world-zh.png",
@@ -1232,7 +1236,7 @@
     "released_version_unchanged": "v.1.0.3-20261010",
     "formal_hd_assets": 69
   },
-  "provenance_scope": "每張圖以captures各自的binary_sha256、source_build_sha256或code_commit及source_receipt為準；本次只更新世界小地圖實拍，其餘31張沿原收據。",
+  "provenance_scope": "每張圖以captures各自來源為準；R151只更新顯示設定實拍，其他31張及其原有驗收範圍保持。頂層舊版指紋保留歷史，設定畫面的新程式及收據見該筆記錄。",
   "graphics_manifest_sha256": "1e28e2bcd8e9bfdbf0d6905d4153952cdf883c76973f47eec43268becb8857c0",
   "previous_world_capture": {
     "file": "hd-world-zh.png",
@@ -2019,5 +2023,22 @@
     "formal_hd_assets": 385,
     "provenance_scope": "每張圖以captures各自的code_commit、binary_sha256及source_receipt為準；本次只更換登陸圖，其餘31張沿原收據。",
     "conformance_state": "R127登陸正文限定CONFORMED；各圖仍以自身來源與範圍為準。"
+  },
+  "previous_display_settings_capture": {
+    "file": "display-settings-zh.png",
+    "sha256": "e429e44989d86f027272896ace0623167a3c7eede34ce5a121ac7d69641b02ff",
+    "size": [
+      1280,
+      848
+    ],
+    "language": "zh-Hant",
+    "graphics": "hd",
+    "binary_sha256": "070483eaac00568e3d79517d11dd444c84a2ec1684a3d8fedc96c437ff4ba9b6",
+    "source_receipt": "workplace/reports/goal186-display-hd/hd-world-small-terrain-r64/readme-settings-r1/restored/settings.png",
+    "source_check_sha256": "3d76e61e47aba6e52b31d40cfccc449e184033e4776972c24036967b068bb4d0",
+    "source_kind": "real X11 window screenshot from the uninstrumented formal binary, normal display-settings panel",
+    "capture_pixels_unchanged": true,
+    "code_commit": "468e835ffb5a36f9e012797104bfe19e7dcaec82",
+    "formal_hd_assets": 66
   }
 }

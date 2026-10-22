@@ -32,6 +32,7 @@ var displayUIEnabled = flag.Bool("display-settings", false, "規格056：啟用�
 var displayUIConfig = flag.String("display-config", "", "前端顯示設定JSON；預設為使用者設定目錄")
 var displayUIInitialLanguage = flag.String("display-language", "", "明確覆蓋保存的顯示語言")
 var displayUIInitialGraphics = flag.String("display-graphics", "", "明確覆蓋保存的圖像模式")
+var displayUIInitialSpeed = flag.Int("display-speed", 0, "明確覆蓋保存的CPU倍速：1、2、4、8、16、32")
 var displayUIDiagnostics = flag.Bool("display-diagnostics", false, "僅驗收：保存設定事件及當次原版畫面")
 
 // 整包後端接點。準備不改生效資料；提交不再讀檔或執行DOS。
@@ -52,7 +53,7 @@ var displayUILanguages = []string{"zh-Hant", "zh-Hans", "ja", "ko", "en"}
 var displayUIKeys = []string{"ui.settings", "ui.description", "ui.language", "ui.graphics",
 	"ui.language.zh-Hant", "ui.language.zh-Hans", "ui.language.ja", "ui.language.ko", "ui.language.en",
 	"ui.graphics.original", "ui.graphics.hd", "ui.independent", "ui.apply", "ui.cancel",
-	"ui.paused", "ui.release", "ui.error.unavailable", "ui.error.save"}
+	"ui.paused", "ui.release", "ui.error.unavailable", "ui.error.save", "ui.speed", "ui.speed.note"}
 
 type displayUICatalog map[string]map[string]string
 
@@ -241,10 +242,10 @@ func newDisplayUI() *displayUI {
 	must(err)
 	f, err := readUIFonts(read(*displayUIFont), c)
 	must(err)
-	u := &displayUI{catalog: c, fonts: f, settings: displaySettings{current: displayOptions{"zh-Hant", "original"}}}
+	u := &displayUI{catalog: c, fonts: f, settings: displaySettings{current: displayOptions{"zh-Hant", "original", 0}}}
 	u.configPath, err = displayPreferencePath(*displayUIConfig)
 	must(err)
-	options, err := readDisplayPreferences(u.configPath, *displayUIInitialLanguage, *displayUIInitialGraphics)
+	options, err := readDisplayPreferences(u.configPath, *displayUIInitialLanguage, *displayUIInitialGraphics, *displayUIInitialSpeed)
 	must(err)
 	options = frontendDisplayStartupOptions(options)
 	commit, err := frontendDisplayPrepare(options)
@@ -318,17 +319,24 @@ func displayUILanguageButton(i int) image.Rectangle {
 func displayUIGraphicsButton(i int) image.Rectangle {
 	return image.Rect(300+i*344, 452, 628+i*344, 508)
 }
+func displayUISpeedButton(i int) image.Rectangle {
+	return image.Rect(300+i*114, 552, 406+i*114, 602)
+}
 
 var displayUIToolbarButton = image.Rect(14, 6, 216, 42)
-var displayUICancelButton = image.Rect(704, 620, 832, 668)
-var displayUIApplyButton = image.Rect(848, 620, 976, 668)
+var displayUIToolbarLanguage = image.Rect(232, 6, 544, 42)
+var displayUIToolbarGraphics = image.Rect(560, 6, 924, 42)
+var displayUIToolbarSpeed = image.Rect(940, 6, 1266, 42)
+var displayUICancelButton = image.Rect(704, 716, 832, 764)
+var displayUIApplyButton = image.Rect(848, 716, 976, 764)
 
-func (u *displayUI) update(g *windowGame) bool {
+func (u *displayUI) update(g *windowGame, physical windowPhysicalInput) bool {
 	s := &u.settings
-	position := image.Pt(ebiten.CursorPosition())
-	click := ebiten.IsFocused() && inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft)
+	position := image.Pt(physical.x, physical.y)
+	click := physical.focused && physical.click
 	if !s.paused() {
-		if click && position.In(displayUIToolbarButton) && s.open(g.held[0] || g.held[1] || g.held[2]) {
+		toolbar := position.In(displayUIToolbarButton) || position.In(displayUIToolbarLanguage) || position.In(displayUIToolbarGraphics) || position.In(displayUIToolbarSpeed)
+		if click && toolbar && s.open(g.held[0] || g.held[1] || g.held[2]) {
 			g.audio.setPaused(true)
 			ebiten.SetCursorMode(ebiten.CursorModeVisible)
 			u.record(g, "open")
@@ -337,7 +345,7 @@ func (u *displayUI) update(g *windowGame) bool {
 		return false
 	}
 	if s.phase == displayEditing {
-		if ebiten.IsFocused() && inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+		if physical.focused && physical.escape {
 			s.cancel()
 			u.record(g, "cancel-escape")
 		} else if click {
@@ -351,6 +359,11 @@ func (u *displayUI) update(g *windowGame) bool {
 					s.draft.Graphics, s.problem = graphics, ""
 				}
 			}
+			for i, speed := range displaySpeeds {
+				if position.In(displayUISpeedButton(i)) {
+					s.draft.Speed, s.problem = speed, ""
+				}
+			}
 			if position.In(displayUICancelButton) {
 				s.cancel()
 				u.record(g, "cancel")
@@ -359,7 +372,7 @@ func (u *displayUI) update(g *windowGame) bool {
 					if err := applyDisplayPreferences(u.configPath, options, frontendDisplayPrepare); err != nil {
 						return err
 					}
-					g.render("")
+					g.renderCurrent()
 					return nil
 				})
 				action := "apply-error"
@@ -371,7 +384,7 @@ func (u *displayUI) update(g *windowGame) bool {
 		}
 	}
 	previous := s.phase
-	s.released(displayUIAllReleased())
+	s.released(physical.allReleased)
 	if s.phase != previous {
 		if s.phase == displayPlaying {
 			g.audio.setPaused(false)
@@ -411,20 +424,26 @@ func (u *displayUI) canvas() (*image.RGBA, error) {
 	if err := label(displayUIToolbarButton, "ui.settings", 22, 18, 1, white); err != nil {
 		return nil, err
 	}
-	status := u.catalog.text("ui.language."+language, language) + " / " + u.catalog.text("ui.graphics."+u.settings.current.Graphics, language)
-	if u.settings.phase == displayResuming {
-		status += "  " + u.catalog.text("ui.release", language)
+	for _, item := range []struct {
+		rect image.Rectangle
+		text string
+	}{
+		{displayUIToolbarLanguage, u.catalog.text("ui.language", language) + ": " + u.catalog.text("ui.language."+language, language)},
+		{displayUIToolbarGraphics, u.catalog.text("ui.graphics", language) + ": " + u.catalog.text("ui.graphics."+u.settings.current.Graphics, language)},
+		{displayUIToolbarSpeed, fmt.Sprintf("%s: %dx", u.catalog.text("ui.speed", language), u.settings.current.speed())},
+	} {
+		fill(item.rect, color.RGBA{65, 81, 73, 255})
+		p, err := u.fonts.plan(language, item.text, item.rect, 22, 16, 1)
+		if err != nil {
+			return nil, err
+		}
+		p.paint(im, white)
 	}
-	p, err := u.fonts.plan(language, status, image.Rect(240, 6, 1264, 42), 22, 18, 1)
-	if err != nil {
-		return nil, err
-	}
-	p.paint(im, white)
 	if u.settings.phase == displayPlaying || u.settings.phase == displayResuming {
 		return im, nil
 	}
 	fill(image.Rect(0, displayUIToolbarHeight, 1280, 848), color.RGBA{12, 16, 15, 180})
-	fill(image.Rect(276, 164, 1004, 684), color.RGBA{244, 239, 224, 255})
+	fill(image.Rect(276, 164, 1004, 784), color.RGBA{244, 239, 224, 255})
 	for _, item := range []struct {
 		rect            image.Rectangle
 		key             string
@@ -433,7 +452,8 @@ func (u *displayUI) canvas() (*image.RGBA, error) {
 		{image.Rect(300, 236, 980, 304), "ui.description", 22, 18, 2},
 		{image.Rect(300, 310, 980, 344), "ui.language", 22, 18, 1},
 		{image.Rect(300, 414, 980, 448), "ui.graphics", 22, 18, 1},
-		{image.Rect(300, 516, 980, 550), "ui.independent", 20, 18, 1}} {
+		{image.Rect(300, 516, 980, 550), "ui.speed", 22, 18, 1},
+		{image.Rect(300, 610, 980, 644), "ui.speed.note", 20, 16, 1}} {
 		if err := label(item.rect, item.key, item.max, item.min, item.lines, dark); err != nil {
 			return nil, err
 		}
@@ -448,13 +468,26 @@ func (u *displayUI) canvas() (*image.RGBA, error) {
 			return nil, err
 		}
 	}
+	for i, speed := range displaySpeeds {
+		rect := displayUISpeedButton(i)
+		c := color.RGBA{224, 222, 207, 255}
+		if u.settings.draft.speed() == speed {
+			c = color.RGBA{173, 200, 179, 255}
+		}
+		fill(rect, c)
+		p, err := u.fonts.plan(language, fmt.Sprintf("%dx", speed), rect, 24, 18, 1)
+		if err != nil {
+			return nil, err
+		}
+		p.paint(im, dark)
+	}
 	key := "ui.paused"
 	if u.settings.phase == displayOpening {
 		key = "ui.release"
 	} else if u.settings.problem != "" {
 		key = u.settings.problem
 	}
-	if err := label(image.Rect(300, 556, 980, 606), key, 20, 18, 2, dark); err != nil {
+	if err := label(image.Rect(300, 652, 980, 702), key, 20, 18, 2, dark); err != nil {
 		return nil, err
 	}
 	if err := button(displayUICancelButton, "ui.cancel", false); err != nil {
@@ -475,8 +508,8 @@ func (u *displayUI) draw(screen *ebiten.Image) {
 		}
 		ebiten.SetCursorMode(mode)
 	}
-	key := fmt.Sprintf("%d/%s/%s/%s/%s/%s", u.settings.phase, u.settings.current.Language,
-		u.settings.current.Graphics, u.settings.draft.Language, u.settings.draft.Graphics, u.settings.problem)
+	key := fmt.Sprintf("%d/%s/%s/%d/%s/%s/%d/%s", u.settings.phase, u.settings.current.Language,
+		u.settings.current.Graphics, u.settings.current.speed(), u.settings.draft.Language, u.settings.draft.Graphics, u.settings.draft.speed(), u.settings.problem)
 	if u.texture == nil || key != u.cacheKey {
 		im, err := u.canvas()
 		must(err)

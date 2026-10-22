@@ -10,8 +10,10 @@ import (
 	"fmt"
 	"image"
 	"os"
+	"runtime/pprof"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/audio"
@@ -25,6 +27,7 @@ var replayCheckpointsOnly = flag.Bool("replay-checkpoints-only", false, "僅驗�
 var audioWAVPath = flag.String("audio-wav", "", "目標176：結束時把前端取得的 dosgolem 原始音訊（交錯 int16 立體聲）寫成 WAV；需 --audio")
 var audioMute = flag.Bool("audio-mute", false, "目標176：只合成與錄音，不開播放裝置（無音效裝置的容器用）")
 var independentMusic = flag.Bool("independent-music", true, "規格046：原版音樂獨立原速播放；停用時使用舊音訊串流")
+var windowCPUProfilePath = flag.String("window-cpu-profile", "", "僅效能診斷：保存即時視窗CPU profile")
 
 // windowStepsPerUpdate 是每次 Update 推進的指令數；重播在同樣的邊界取音訊（規格040）。
 const windowStepsPerUpdate = 200000
@@ -264,20 +267,203 @@ type windowReceipt struct {
 	Rejected []string      `json:"rejected,omitempty"`
 }
 type windowGame struct {
-	m            *golem.Machine
-	d            *golem.DOS
-	out          string
-	latest       *image.RGBA
-	record       map[string]any
-	texture      *ebiten.Image
-	dirty        bool
-	held         [3]bool
-	lastX, lastY int
-	inputs       []windowInput
-	rejected     []string
-	audio        *frontendAudio
-	display      *displayUI
-	render       func(string)
+	m             *golem.Machine
+	d             *golem.DOS
+	out           string
+	latest        *image.RGBA
+	record        map[string]any
+	texture       *ebiten.Image
+	dirty         bool
+	held          [3]bool
+	lastX, lastY  int
+	inputs        []windowInput
+	rejected      []string
+	audio         *frontendAudio
+	display       *displayUI
+	render        func(string)
+	frameMu       sync.Mutex
+	pendingFrame  *image.RGBA
+	pendingRecord map[string]any
+	work          chan uint64
+	workDone      chan windowAdvanceResult
+	busy          bool
+	closing       bool
+	physical      []windowPhysicalInput
+	lastStatus    time.Time
+	statusPhase   displayPhase
+	lastCompose   time.Time
+	nextDraw      time.Time
+	nextAudio     uint64
+	cpuQuantum    time.Duration
+	lastCPUSpeed  int
+	perf          windowPerformance
+}
+
+// 規格056 R151：Step、音訊取樣與原版觀測只有一個背景擁有者。
+type windowAdvanceResult struct {
+	err error
+}
+
+type windowPhysicalInput struct {
+	x, y                                         int
+	focused, closing, click, escape, allReleased bool
+	buttons                                      [3]bool
+	specials                                     []windowInput
+	chars                                        []rune
+}
+
+func sampleWindowPhysicalInput() windowPhysicalInput {
+	x, y := ebiten.CursorPosition()
+	specials := specialWindowInputs(inpututil.IsKeyJustPressed, ebiten.IsKeyPressed)
+	p := windowPhysicalInput{x: x, y: y, focused: ebiten.IsFocused(), closing: ebiten.IsWindowBeingClosed(),
+		click: inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft), escape: inpututil.IsKeyJustPressed(ebiten.KeyEscape),
+		allReleased: displayUIAllReleased(), specials: specials,
+		chars: filterWindowChars(ebiten.AppendInputChars(nil), specials, ebiten.IsKeyPressed)}
+	for i, button := range []ebiten.MouseButton{ebiten.MouseButtonLeft, ebiten.MouseButtonRight, ebiten.MouseButtonMiddle} {
+		p.buttons[i] = ebiten.IsMouseButtonPressed(button)
+	}
+	return p
+}
+
+func (g *windowGame) queuePhysical(p windowPhysicalInput) error {
+	// 只合併沒有事件的相同實體狀態，按下、文字、移動與放開均保持順序。
+	if len(g.physical) > 0 {
+		last := g.physical[len(g.physical)-1]
+		if len(p.specials) == 0 && len(p.chars) == 0 && !p.click && !p.escape &&
+			len(last.specials) == 0 && len(last.chars) == 0 && !last.click && !last.escape &&
+			p.x == last.x && p.y == last.y && p.focused == last.focused && p.buttons == last.buttons && p.allReleased == last.allReleased {
+			return nil
+		}
+	}
+	if len(g.physical) >= 512 {
+		return fmt.Errorf("前端輸入佇列已滿，停止以保留輸入證據")
+	}
+	g.physical = append(g.physical, p)
+	return nil
+}
+
+func (g *windowGame) pullFrame() {
+	g.frameMu.Lock()
+	im, rec := g.pendingFrame, g.pendingRecord
+	g.pendingFrame, g.pendingRecord = nil, nil
+	g.frameMu.Unlock()
+	if im == nil {
+		return
+	}
+	same := g.latest != nil && im.Rect == g.latest.Rect && im.Stride == g.latest.Stride && bytes.Equal(im.Pix, g.latest.Pix)
+	if !same {
+		g.latest, g.dirty = im, true
+		g.perf.canvas++
+	}
+	g.record = rec
+}
+
+// 來源觀測先完成，再省略尚未到期的無標籤合成；重播不走牆鐘限頻。
+func frontendDeferComposition() bool {
+	g := activeWindow
+	if g == nil || g.work == nil || *replayPath != "" {
+		return false
+	}
+	now := time.Now()
+	if !g.lastCompose.IsZero() && now.Sub(g.lastCompose) < time.Second/60 {
+		return true
+	}
+	g.lastCompose = now
+	return false
+}
+
+func (g *windowGame) renderCurrent() {
+	g.lastCompose = time.Time{}
+	g.render("")
+	g.pullFrame()
+}
+
+func windowStepBudget(speed int) uint64 { return windowStepsPerUpdate * uint64(speed) }
+
+// 規格056 R151：倍速是執行預算目標；硬體不足時保留畫面輸出的時間。
+func adaptiveCPUQuantum(current time.Duration, speed int, fps float64) time.Duration {
+	ceiling := time.Duration(min(speed, 4)) * 8 * time.Millisecond
+	if current <= 0 {
+		current = 8 * time.Millisecond
+	}
+	if fps < 40 {
+		current = current * 3 / 4
+	} else if fps >= 50 {
+		current += time.Millisecond
+	}
+	return max(time.Millisecond, min(current, ceiling))
+}
+
+func (g *windowGame) advance(end uint64) error {
+	started := time.Now()
+	multiplier := (end - g.m.Steps + windowStepsPerUpdate - 1) / windowStepsPerUpdate
+	quantum := time.Duration(min(multiplier, 4)) * 8 * time.Millisecond
+	if g.cpuQuantum > 0 {
+		quantum = min(quantum, g.cpuQuantum)
+	}
+	for g.m.Steps < end && !g.d.Exited && !g.m.CPU.Halted {
+		if err := g.m.Step(); err != nil {
+			return err
+		}
+		if g.m.Steps >= g.nextAudio {
+			g.audio.drain(g.m)
+			g.nextAudio += windowStepsPerUpdate
+		}
+		if g.m.Steps&255 == 0 && time.Since(started) >= quantum {
+			break
+		}
+	}
+	return nil
+}
+
+type windowPerformance struct {
+	start, lastDraw, intervalStart               time.Time
+	draws, canvas, intervalDraws, intervalCanvas uint64
+	maxGap                                       time.Duration
+	intervalStep                                 uint64
+	samples                                      []map[string]any
+}
+
+func (g *windowGame) recordDraw() {
+	if g.latest == nil {
+		return
+	}
+	p := &g.perf
+	now := time.Now()
+	if p.start.IsZero() {
+		p.start, p.intervalStart = now, now
+	}
+	if !p.lastDraw.IsZero() {
+		p.maxGap = max(p.maxGap, now.Sub(p.lastDraw))
+	}
+	p.lastDraw = now
+	p.draws++
+	p.intervalDraws++
+}
+
+func (g *windowGame) recordPerformance() {
+	p := &g.perf
+	now := time.Now()
+	if p.intervalStart.IsZero() || now.Sub(p.intervalStart) < time.Second {
+		return
+	}
+	seconds := now.Sub(p.intervalStart).Seconds()
+	o := displayOptions{Language: "en", Graphics: "original"}
+	if g.display != nil {
+		o = g.display.settings.current
+	}
+	p.samples = append(p.samples, map[string]any{"seconds_since_first_frame": now.Sub(p.start).Seconds(), "sample_seconds": seconds,
+		"output_fps": float64(p.intervalDraws) / seconds, "canvas_updates_per_second": float64(p.canvas-p.intervalCanvas) / seconds,
+		"max_draw_interval_ms": float64(p.maxGap) / float64(time.Millisecond), "instructions_per_second": float64(g.m.Steps-p.intervalStep) / seconds,
+		"requested_cpu_speed": o.speed(), "cpu_quantum_ms": float64(g.cpuQuantum) / float64(time.Millisecond), "graphics": o.Graphics, "language": o.Language, "paused": g.display != nil && g.display.settings.paused()})
+	if g.display == nil || !g.display.settings.paused() {
+		g.cpuQuantum = adaptiveCPUQuantum(g.cpuQuantum, o.speed(), float64(p.intervalDraws)/seconds)
+	}
+	if len(p.samples) > 120 {
+		p.samples = p.samples[len(p.samples)-120:]
+	}
+	dumpJSON(g.out+".performance.json", map[string]any{"method": "actual window Draw calls; canvas changes and CPU throughput counted separately", "samples": p.samples})
+	p.intervalStart, p.intervalDraws, p.intervalCanvas, p.intervalStep, p.maxGap = now, 0, p.canvas, g.m.Steps, 0
 }
 
 func logicalMouse(x, y int) (int, int, bool) {
@@ -289,11 +475,9 @@ func logicalMouse(x, y int) (int, int, bool) {
 func frontendFrame(im *image.RGBA, rec map[string]any) {
 	if activeWindow != nil {
 		g := activeWindow
-		same := im != nil && g.latest != nil && im.Rect == g.latest.Rect && im.Stride == g.latest.Stride && bytes.Equal(im.Pix, g.latest.Pix)
-		if !same {
-			g.latest, g.dirty = im, true
-		}
-		g.record = rec
+		g.frameMu.Lock()
+		g.pendingFrame, g.pendingRecord = im, rec
+		g.frameMu.Unlock()
 	}
 }
 func supportedDOSChar(s string) bool {
@@ -485,26 +669,76 @@ func (g *windowGame) release() {
 	}
 }
 func (g *windowGame) Update() error {
-	if ebiten.IsWindowBeingClosed() || g.m.Steps >= *windowSteps || g.d.Exited || g.m.CPU.Halted {
+	g.pullFrame()
+	p := sampleWindowPhysicalInput()
+	g.closing = g.closing || p.closing
+	if !g.closing {
+		if err := g.queuePhysical(p); err != nil {
+			g.closing = true
+			g.rejected = append(g.rejected, err.Error())
+		}
+	}
+	if g.busy {
+		select {
+		case done := <-g.workDone:
+			g.busy = false
+			if done.err != nil {
+				return done.err
+			}
+		default:
+			return nil
+		}
+	}
+	g.pullFrame()
+	if g.closing || g.m.Steps >= *windowSteps || g.d.Exited || g.m.CPU.Halted {
 		g.release()
+		g.recordPerformance()
+		g.lastStatus = time.Time{}
+		g.publishStatus()
 		return ebiten.Termination
 	}
-	if g.display != nil && g.display.update(g) {
-		return g.publishStatus()
+	for _, physical := range g.physical {
+		g.handlePhysical(physical)
 	}
-	x, y, inside := logicalMouse(ebiten.CursorPosition())
+	g.physical = nil
+	g.recordPerformance()
+	if err := g.publishStatus(); err != nil {
+		return err
+	}
+	if g.display != nil && g.display.settings.paused() {
+		return nil
+	}
+	speed := 1
 	if g.display != nil {
-		x, y, inside = g.display.logicalMouse(ebiten.CursorPosition())
+		speed = g.display.settings.current.speed()
 	}
-	focused := ebiten.IsFocused()
-	specials := specialWindowInputs(inpututil.IsKeyJustPressed, ebiten.IsKeyPressed)
-	chars := filterWindowChars(ebiten.AppendInputChars(nil), specials, ebiten.IsKeyPressed)
+	if speed != g.lastCPUSpeed {
+		g.cpuQuantum = min(max(g.cpuQuantum, time.Millisecond), 8*time.Millisecond)
+		g.lastCPUSpeed = speed
+	}
+	budget := windowStepBudget(speed)
+	end := g.m.Steps + min(budget, *windowSteps-g.m.Steps)
+	g.busy = true
+	g.work <- end
+	return nil
+}
+
+func (g *windowGame) handlePhysical(p windowPhysicalInput) {
+	if g.display != nil && g.display.update(g, p) {
+		g.pullFrame()
+		return
+	}
+	x, y, inside := logicalMouse(p.x, p.y)
+	if g.display != nil {
+		x, y, inside = g.display.logicalMouse(p.x, p.y)
+	}
+	focused, specials, chars := p.focused, p.specials, p.chars
 	if !focused || !inside {
 		// 規格050：拖曳經過畫面外工具列，維持已送入原版的按住狀態。
-		px, py := ebiten.CursorPosition()
+		px, py := p.x, p.y
 		if focused && px >= 0 && px < 1280 && py >= 0 && py < g.toolbarHeight() {
-			for i, button := range []ebiten.MouseButton{ebiten.MouseButtonLeft, ebiten.MouseButtonRight, ebiten.MouseButtonMiddle} {
-				if g.held[i] && !ebiten.IsMouseButtonPressed(button) {
+			for i := range g.held {
+				if g.held[i] && !p.buttons[i] {
 					g.emit(windowInput{Kind: "release", Button: i})
 					g.held[i] = false
 				}
@@ -517,8 +751,7 @@ func (g *windowGame) Update() error {
 			g.emit(windowInput{Kind: "move", X: x, Y: y})
 			g.lastX, g.lastY = x, y
 		}
-		for i, button := range []ebiten.MouseButton{ebiten.MouseButtonLeft, ebiten.MouseButtonRight, ebiten.MouseButtonMiddle} {
-			down := ebiten.IsMouseButtonPressed(button)
+		for i, down := range p.buttons {
 			if down != g.held[i] {
 				kind := "release"
 				if down {
@@ -543,20 +776,18 @@ func (g *windowGame) Update() error {
 			g.emit(event)
 		}
 	}
-	end := g.m.Steps + windowStepsPerUpdate
-	if end > *windowSteps {
-		end = *windowSteps
-	}
-	for g.m.Steps < end && !g.d.Exited && !g.m.CPU.Halted {
-		if err := g.m.Step(); err != nil {
-			return err
-		}
-	}
-	g.audio.drain(g.m)
-	return g.publishStatus()
 }
 
 func (g *windowGame) publishStatus() error {
+	now := time.Now()
+	phase := displayPlaying
+	if g.display != nil {
+		phase = g.display.settings.phase
+	}
+	if !g.lastStatus.IsZero() && now.Sub(g.lastStatus) < 500*time.Millisecond && phase == g.statusPhase {
+		return nil
+	}
+	g.lastStatus, g.statusPhase = now, phase
 	stage := "opening"
 	if g.record != nil && g.record["events"].(int) >= 5 {
 		stage = "menu"
@@ -595,6 +826,12 @@ func (g *windowGame) publishStatus() error {
 	return nil
 }
 func (g *windowGame) Draw(screen *ebiten.Image) {
+	// 規格056 R151：與GPU交換等待分開限頻；休眠讓出CPU，不忙迴圈重畫。
+	if now := time.Now(); !g.nextDraw.IsZero() && now.Before(g.nextDraw) {
+		time.Sleep(g.nextDraw.Sub(now))
+	}
+	g.nextDraw = time.Now().Add(time.Second / 60)
+	g.recordDraw()
 	if g.latest == nil {
 		if g.display != nil {
 			g.display.draw(screen)
@@ -617,7 +854,7 @@ func (g *windowGame) Draw(screen *ebiten.Image) {
 }
 func (g *windowGame) Layout(int, int) (int, int) { return 1280, 800 + g.toolbarHeight() }
 func runWindow(m *golem.Machine, d *golem.DOS, render func(string), out string) {
-	g := &windowGame{m: m, d: d, out: out, lastX: -1, lastY: -1, render: render}
+	g := &windowGame{m: m, d: d, out: out, lastX: -1, lastY: -1, render: render, cpuQuantum: 8 * time.Millisecond}
 	activeWindow = g
 	if *replayPath != "" {
 		var receipt windowReceipt
@@ -668,10 +905,35 @@ func runWindow(m *golem.Machine, d *golem.DOS, render func(string), out string) 
 	ebiten.SetWindowTitle("Colonization CHT " + frontendReleaseVersion)
 	ebiten.SetWindowClosingHandled(true)
 	ebiten.SetRunnableOnUnfocused(true)
+	ebiten.SetTPS(60)
+	ebiten.SetVsyncEnabled(false)
 	ebiten.SetCursorMode(ebiten.CursorModeHidden)
 	g.audio = newFrontendAudio(m, d, !*audioMute)
 	defer g.audio.close()
+	g.work, g.workDone = make(chan uint64), make(chan windowAdvanceResult, 1)
+	g.nextAudio = m.Steps + windowStepsPerUpdate
+	workerStopped := make(chan struct{})
+	go func() {
+		defer close(workerStopped)
+		for end := range g.work {
+			g.workDone <- windowAdvanceResult{err: g.advance(end)}
+		}
+	}()
+	defer func() { close(g.work); <-workerStopped }()
+	if *windowCPUProfilePath != "" {
+		f, err := os.Create(*windowCPUProfilePath)
+		must(err)
+		must(pprof.StartCPUProfile(f))
+		defer f.Close()
+		defer pprof.StopCPUProfile()
+	}
 	err := ebiten.RunGame(g)
+	// RunGame出錯或視窗結束時先等背景批次，才讀取原版狀態或關閉音訊。
+	if g.busy {
+		<-g.workDone
+		g.busy = false
+	}
+	g.audio.drain(m)
 	g.audio.writeWAV()
 	// 目標169：原版執行出錯時也先寫下現場輸入與錯誤位置，才能以重播重現。
 	dumpJSON(out+".inputs.json", windowReceipt{Inputs: g.inputs, End: m.Steps, Rejected: g.rejected})

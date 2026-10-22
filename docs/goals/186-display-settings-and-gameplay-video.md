@@ -717,3 +717,11 @@ R100沿R84既有工作區，以[其餘片頭動畫正常入口DRAFT](../spec/069
 ### 世界小地圖程序材質
 
 [規格069 R140](../spec/069-hd-menu-background-and-textures.md#r140-小地圖正式顯示通過)完成原生世界小地圖的程序HD材質。正式接線、25個含子項零skip與五語兩模式10張正常X11畫面通過，原生白色視野框與標記保持，README世界實拍已更新。386張原PNG及1477個SS／PIK連結保持，程序小地圖另列1項DISPLAY-PASS。47個其他檔案的最小形狀分型不等於圖像缺口數；其餘程序圖像／格式、完整五語、90秒影片及新版三平台交付繼續。[公開檢查器](../../tools/check_hd_minimap_display.py)只驗本項範圍。
+
+### R151工具列、CPU倍速與HD輸出
+
+使用者確認速度選項調整dosgolem模擬CPU。上方工具列提供五語、原版／HD及1x、2x、4x、8x、16x、32x，偏好保存相容舊設定。設定時暫停，恢復前等待實體按鍵與滑鼠放開；加速依可用效能調整執行時間，優先保留畫面輸出，原版規則與存檔格式保持。
+
+[規格056 R151](../spec/056-display-settings-runtime.md#r151上方選項與六段速度限定conformed)限定CONFORMED。41項相關測試與14組GUI操作通過；本機Intel MTL GPU、半核心、播放裝置靜音的可見HD畫面，1x為48.451fps，32x為50.567fps，各秒樣本皆超過30fps。這是實際視窗Draw輸出，不保證原版動畫每秒改變30次或任意硬體實現32倍吞吐。Windows／macOS真機、音訊裝置及其他場景留人工。
+
+重跑入口為[工具列與幀率探針](../../tools/probe_toolbar_performance.py)，Docker內使用--renderer vgl-egl及已明確掛入的render裝置。原始收據在既有R84工作根的r151-toolbar-r6，README沿32張原圖只更新設定畫面。三平台雙類新版依[規格044 R151](../spec/044-release-and-promo.md#r151工具列更新版六包限定conformed)封裝，不重製v.1.0.9影片；現行交付以[目前狀態表](../../CONTEXT.md)為準。未抽樣中文／HD與舊版完整HD診斷限制保持。

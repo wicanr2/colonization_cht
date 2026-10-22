@@ -7,7 +7,7 @@ import (
 )
 
 func TestDisplaySettingsRequiresReleaseAndPreservesDrag(t *testing.T) {
-	s := displaySettings{current: displayOptions{"zh-Hant", "original"}}
+	s := displaySettings{current: displayOptions{"zh-Hant", "original", 0}}
 	if s.open(true) || s.paused() {
 		t.Fatal("拖曳時開啟設定或停止原版")
 	}
@@ -22,9 +22,9 @@ func TestDisplaySettingsRequiresReleaseAndPreservesDrag(t *testing.T) {
 		t.Fatal("開啟按鍵穿透到設定")
 	}
 	s.released(true)
-	s.draft = displayOptions{"ko", "hd"}
+	s.draft = displayOptions{"ko", "hd", 0}
 	s.cancel()
-	if s.current != (displayOptions{"zh-Hant", "original"}) || !s.paused() {
+	if s.current != (displayOptions{"zh-Hant", "original", 0}) || !s.paused() {
 		t.Fatal("取消更動生效設定或提早恢復")
 	}
 	s.released(false)
@@ -111,10 +111,10 @@ func TestDisplayPausePreservesNativeMusicAndCommands(t *testing.T) {
 }
 
 func TestDisplaySettingsFailedActivationKeepsCurrentAndDraft(t *testing.T) {
-	s := displaySettings{current: displayOptions{"zh-Hant", "original"}}
+	s := displaySettings{current: displayOptions{"zh-Hant", "original", 0}}
 	s.open(false)
 	s.released(true)
-	s.draft = displayOptions{"ja", "hd"}
+	s.draft = displayOptions{"ja", "hd", 0}
 	calls := 0
 	activate := func(o displayOptions) error {
 		calls++
@@ -123,8 +123,8 @@ func TestDisplaySettingsFailedActivationKeepsCurrentAndDraft(t *testing.T) {
 		}
 		return errors.New("圖像包校驗失敗")
 	}
-	if s.apply(activate) || calls != 1 || s.current != (displayOptions{"zh-Hant", "original"}) ||
-		s.draft != (displayOptions{"ja", "hd"}) || s.problem != "圖像包校驗失敗" || s.phase != displayEditing {
+	if s.apply(activate) || calls != 1 || s.current != (displayOptions{"zh-Hant", "original", 0}) ||
+		s.draft != (displayOptions{"ja", "hd", 0}) || s.problem != "圖像包校驗失敗" || s.phase != displayEditing {
 		t.Fatal("載入失敗沒有保留設定與面板")
 	}
 	if !s.apply(func(displayOptions) error { return nil }) || s.current != s.draft || !s.paused() || s.problem != "" {
@@ -141,21 +141,21 @@ func TestDisplaySettingsFailedActivationKeepsCurrentAndDraft(t *testing.T) {
 }
 
 func TestDisplaySettingsRejectsInvalidOptionsBeforeBackend(t *testing.T) {
-	for _, bad := range []displayOptions{{"xx", "original"}, {"en", "filter"}, {"", "hd"}} {
-		s := displaySettings{current: displayOptions{"en", "original"}}
+	for _, bad := range []displayOptions{{"xx", "original", 0}, {"en", "filter", 0}, {"", "hd", 0}} {
+		s := displaySettings{current: displayOptions{"en", "original", 0}}
 		s.open(false)
 		s.released(true)
 		s.draft = bad
 		if s.apply(func(displayOptions) error {
 			t.Fatal("無效選項進入顯示後端")
 			return nil
-		}) || s.problem == "" || s.current != (displayOptions{"en", "original"}) {
+		}) || s.problem == "" || s.current != (displayOptions{"en", "original", 0}) {
 			t.Fatal("無效選項改變設定")
 		}
 	}
 	for _, lang := range []string{"zh-Hant", "zh-Hans", "ja", "ko", "en"} {
 		for _, mode := range []string{"original", "hd"} {
-			if err := (displayOptions{lang, mode}).validate(); err != nil {
+			if err := (displayOptions{lang, mode, 0}).validate(); err != nil {
 				t.Fatal("語言與圖像模式不獨立：", err)
 			}
 		}

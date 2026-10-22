@@ -249,7 +249,7 @@ func TestDraftActualLanguageBundleTransaction(t *testing.T) {
 				return draftNativeFrame{j, canvas, buffer, indexed, palette, image.Rectangle{}, 123, 0x13}
 			}}
 			path := filepath.Join(t.TempDir(), "display.json")
-			initial, options := displayOptions{"en", "original"}, displayOptions{locale, "original"}
+			initial, options := displayOptions{"en", "original", 0}, displayOptions{locale, "original", 0}
 			if err := applyDisplayPreferences(path, initial, backend.prepare); err != nil {
 				t.Fatal(err)
 			}
@@ -305,10 +305,10 @@ func TestDraftActualLanguageBundleTransaction(t *testing.T) {
 
 func TestDraftLanguageTransactionRejectsIncompleteCandidate(t *testing.T) {
 	target := &draftLanguageTarget{pack: &draftPreparedBundle{manifest: draftBundleManifest{Locale: "en", Original: true}}}
-	old := &draftLanguageDisplay{options: displayOptions{"en", "original"}, target: target}
+	old := &draftLanguageDisplay{options: displayOptions{"en", "original", 0}, target: target}
 	for _, kind := range []string{"invalid-language", "hd", "missing-target", "wrong-locale", "missing-sample", "missing-journal", "truncated-frame"} {
 		t.Run(kind, func(t *testing.T) {
-			options := displayOptions{"en", "original"}
+			options := displayOptions{"en", "original", 0}
 			b := &draftLanguageBackend{active: old, targets: map[string]*draftLanguageTarget{"en": target}, sample: func() draftNativeFrame {
 				return draftNativeFrame{journal: &nativeJournal{}}
 			}}
@@ -339,7 +339,7 @@ func TestDraftLiveCacheTracksAllNativeInputs(t *testing.T) {
 	f := draftNativeFrame{journal: &nativeJournal{}, canvas: make([]byte, 64000), buffer: make([]byte, 64000),
 		indexed: make([]byte, 64000), palette: make([]byte, 768), step: 1, mode: 0x13}
 	b := &draftLanguageBackend{targets: map[string]*draftLanguageTarget{"en": target}, sample: func() draftNativeFrame { return f }}
-	commit, err := b.prepare(displayOptions{"en", "original"})
+	commit, err := b.prepare(displayOptions{"en", "original", 0})
 	if err != nil {
 		t.Fatal(err)
 	}

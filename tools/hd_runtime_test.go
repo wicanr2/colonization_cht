@@ -304,13 +304,13 @@ func TestHDResourceAndStartupFallback(t *testing.T) {
 	}
 	for _, locale := range displayUILanguages {
 		for _, available := range []bool{false, true} {
-			options := displayOptions{locale, "hd"}
+			options := displayOptions{locale, "hd", 0}
 			var loaded *hdRuntime
 			if available {
 				loaded = h
 			}
 			effective := hdStartupOptions(loaded, options)
-			want := displayOptions{locale, "original"}
+			want := displayOptions{locale, "original", 0}
 			if available {
 				want = options
 			}
@@ -326,7 +326,7 @@ func TestHDMissingResourcePreservesPreferenceAndTransaction(t *testing.T) {
 	f := draftNativeFrame{journal: &nativeJournal{enabled: true}, canvas: make([]byte, 64000), buffer: make([]byte, 64000), indexed: make([]byte, 64000), palette: make([]byte, 768), mode: 0x13}
 	b := &draftLanguageBackend{targets: map[string]*draftLanguageTarget{"en": target}, sample: func() draftNativeFrame { return f }}
 	path := filepath.Join(t.TempDir(), "display.json")
-	saved := displayOptions{"en", "hd"}
+	saved := displayOptions{"en", "hd", 0}
 	if err := writeDisplayPreferences(path, saved); err != nil {
 		t.Fatal(err)
 	}
@@ -345,7 +345,7 @@ func TestHDMissingResourcePreservesPreferenceAndTransaction(t *testing.T) {
 	}
 	commit()
 	old := b.active
-	if old.options != (displayOptions{"en", "original"}) {
+	if old.options != (displayOptions{"en", "original", 0}) {
 		t.Fatal("缺件後未以原版啟動")
 	}
 	if err := applyDisplayPreferences(path, saved, b.prepare); err == nil {

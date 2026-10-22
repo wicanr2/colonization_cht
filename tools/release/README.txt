@@ -2,7 +2,7 @@
 ======================================================
 
 這是 MicroProse 1994 年 DOS 版《Sid Meier's Colonization》的繁體中文顯示層。
-原版程式與資料不做修改，由內建的 dosgolem 模擬執行，本程式只在畫面上疊加中文。
+原版程式與資料不做修改，由內建的 dosgolem 模擬執行，透過顯示層替換文字與圖像。
 
 目前內容
 --------------------
@@ -14,7 +14,7 @@
 - 殖民地、歐洲港口、議會與已抽樣報表，百科六類150篇正文
 - 下拉選單、貿易路線與三種事件版畫標題
 
-全遊戲文字譯稿已完成，仍有部分畫面接線與情境待驗，會保留原文。
+已收錄繁中譯稿，未抽樣畫面與情境仍待人工確認；無法套用時保留原文。
 詳細顯示範圍見原始碼儲存庫 README.md 與 CONTEXT.md。
 
 你需要準備
@@ -41,6 +41,9 @@ tar.gz格式解包後：
 
 操作與限制
 --------------
+- 上方工具列可選五語、原版／HD主題及CPU倍速；設定期間暫停，關閉並放開按鍵後恢復。
+- CPU倍速為1x、2x、4x、8x、16x、32x。實際加速依設備效能調整，音樂維持原速。
+- HD模式請使用系統的GPU圖形加速；本輪幀率驗收範圍見原始碼儲存庫CONTEXT.md。
 - 預設開啟音樂與音效；需要靜音時可加 --audio-mute。
 - 鍵盤轉送可列印字元、Backspace、Enter、Esc、方向鍵、F1～F10（含 Shift／Ctrl／Alt
   組合）、數字鍵盤、Home／End／PgUp／PgDn 與 Alt／Ctrl 加字母；輸入法與非英數字元不轉送。
@@ -57,6 +60,7 @@ wicanr2@gmail.com，歡迎來談。這不是開放原始碼（open source）授�
   不在本授權範圍內。
 - 中文字型俐方體11號（Cubic 11）與以它烘製的字模依其授權散布，見
   LICENSES/Cubic-11-OFL.txt。
+- 介面與多語高清字型使用Noto Sans CJK，授權見LICENSES/NotoSansCJK-OFL.txt。
 - AppImage格式另附runtime及其靜態元件授權；runtime重建腳本、libfuse修補與
   完整來源附在LICENSES/AppImage-sources。X11、ALSA、glibc與OpenGL由系統提供。
 - 本作品與 MicroProse、其權利承繼人及第三波沒有任何隸屬或授權關係。

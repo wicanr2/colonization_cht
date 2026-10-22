@@ -1,8 +1,8 @@
 key	zh-Hant	zh-Hans	ja	ko	en
 ui.settings	顯示設定	显示设置	表示設定	화면 설정	Display settings
-ui.description	設定只影響顯示。關閉並放開按鍵後繼續遊戲。	设置只影响显示。关闭并松开按键后继续游戏。	設定は表示のみに適用されます。閉じてキーを離すとゲームを再開します。	설정은 화면 표시에만 적용됩니다. 닫고 키를 놓으면 게임이 계속됩니다.	These settings affect the display. Close and release all keys to continue playing.
+ui.description	選擇語言、圖像主題與 CPU 速度。關閉並放開按鍵後繼續遊戲。	选择语言、图像主题与 CPU 速度。关闭并松开按键后继续游戏。	言語、画像テーマ、CPU速度を選びます。閉じてキーを離すと再開します。	언어, 그래픽 테마, CPU 속도를 선택하세요. 닫고 키를 놓으면 게임이 계속됩니다.	Choose language, graphics theme and CPU speed. Close and release all keys to continue playing.
 ui.language	語言	语言	言語	언어	Language
-ui.graphics	圖像	图像	画像	그래픽	Graphics
+ui.graphics	圖像主題	图像主题	画像テーマ	그래픽 테마	HD Theme
 ui.language.zh-Hant	繁體中文	繁體中文	繁體中文	繁體中文	繁體中文
 ui.language.zh-Hans	简体中文	简体中文	简体中文	简体中文	简体中文
 ui.language.ja	日本語	日本語	日本語	日本語	日本語
@@ -17,3 +17,5 @@ ui.paused	遊戲已暫停	游戏已暂停	ゲームを一時停止中	게임 일
 ui.release	請放開所有按鍵與滑鼠按鈕。	请松开所有按键与鼠标按钮。	すべてのキーとマウスボタンを離してください。	모든 키와 마우스 버튼을 놓으세요.	Release all keys and mouse buttons.
 ui.error.unavailable	此顯示選項尚未安裝。	此显示选项尚未安装。	この表示オプションはインストールされていません。	이 화면 옵션이 설치되어 있지 않습니다.	This display option is not installed.
 ui.error.save	無法保存顯示設定，尚未套用。	无法保存显示设置，尚未应用。	表示設定を保存できませんでした。設定は変更されていません。	화면 설정을 저장할 수 없습니다. 설정은 변경되지 않았습니다.	Display settings could not be saved. Nothing was applied.
+ui.speed	CPU 速度	CPU 速度	CPU速度	CPU 속도	CPU speed
+ui.speed.note	實際加速受裝置效能影響；音樂維持原速。	实际加速受设备性能影响；音乐保持原速。	実際の速度は機器の性能に依存します。音楽は通常速度です。	실제 속도는 기기 성능에 따라 달라집니다. 음악 속도는 유지됩니다.	Speed depends on your device. Music stays at its original speed.

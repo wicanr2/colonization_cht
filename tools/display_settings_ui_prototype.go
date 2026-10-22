@@ -221,7 +221,7 @@ func newDisplayUIPrototype() *displayUIPrototype {
 	must(err)
 	f, err := readPrototypeFonts(read(*prototypeUIFont), c)
 	must(err)
-	u := &displayUIPrototype{catalog: c, fonts: f, settings: displaySettings{current: displayOptions{"zh-Hant", "original"}}}
+	u := &displayUIPrototype{catalog: c, fonts: f, settings: displaySettings{current: displayOptions{"zh-Hant", "original", 0}}}
 	// 先量測全部五語介面，載入失敗不留半個設定面板。
 	for _, language := range prototypeLanguages {
 		copy := u.settings

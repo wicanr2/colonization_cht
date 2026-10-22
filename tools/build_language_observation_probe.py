@@ -13,7 +13,7 @@ PINS = {
     "tools/live_menu.go": "2f5ab4b81a9608a14f05280cfaba5027472e648fda6e34d3db4ba8855d0a0a53",
     "tools/build_window_prototype.py": "5e655dd9e0ea92869376205e92f7c4edbd7c24b26bf6b464b75c9de25776f04c",
     "tools/dialog_overlay.go": "b93dcf45c424b8aac175f71da0e05d54782d9ccc36774fdd1ac7f0bbd69e8a50",
-    "tools/string_overlay.go": "2779cec62347f3692739e96b965efd14ecae3f5aee2b49f4129d40f0fa147c44",
+    "tools/string_overlay.go": "7bc3ef0a5b367eeb02ad6b6f682903cc12862b8f5f28c71cd4d720dc1c5c8463",
 }
 
 
@@ -227,7 +227,7 @@ def attach_language_runtime(repo, output, reference, *, with_rebuild=True, forma
 \t\t}
 \t\tpreference, err := displayPreferencePath(*displayUIConfig)
 \t\tmust(err)
-\t\toptions, err := readDisplayPreferences(preference, *displayUIInitialLanguage, *displayUIInitialGraphics)
+\t\toptions, err := readDisplayPreferences(preference, *displayUIInitialLanguage, *displayUIInitialGraphics, *displayUIInitialSpeed)
 \t\tmust(err)
 \t\toptions = frontendDisplayStartupOptions(options)
 \t\tcommit, err := frontendDisplayPrepare(options)
@@ -249,7 +249,7 @@ def attach_language_runtime(repo, output, reference, *, with_rebuild=True, forma
 \t\t} else if *control || (*displayUIEnabled && displayLanguage == "en") {
 '''
         if formal:
-            new = '\t\tif label == "" && *replayPath != "" && *replayCheckpointsOnly { return }\n' + new
+            new = '\t\tif label == "" && *replayPath != "" && *replayCheckpointsOnly { return }\n\t\tif label == "" && frontendDeferComposition() { return }\n' + new
         if s.count(old) != 1:
             raise ValueError("隔離視窗影像分支不唯一")
         s = s.replace(old, new, 1)

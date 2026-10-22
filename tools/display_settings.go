@@ -6,6 +6,17 @@ import "fmt"
 type displayOptions struct {
 	Language string `json:"language"`
 	Graphics string `json:"graphics"`
+	Speed    int    `json:"speed,omitempty"`
+}
+
+var displaySpeeds = []int{1, 2, 4, 8, 16, 32}
+
+// 零值只用於相容既有兩欄偏好與舊呼叫者；明確輸入的零值由解碼器拒絕。
+func (o displayOptions) speed() int {
+	if o.Speed == 0 {
+		return 1
+	}
+	return o.Speed
 }
 
 func (o displayOptions) validate() error {
@@ -18,6 +29,11 @@ func (o displayOptions) validate() error {
 	case "original", "hd":
 	default:
 		return fmt.Errorf("不支援的圖像模式：%q", o.Graphics)
+	}
+	switch o.speed() {
+	case 1, 2, 4, 8, 16, 32:
+	default:
+		return fmt.Errorf("不支援的CPU速度：%d", o.Speed)
 	}
 	return nil
 }
